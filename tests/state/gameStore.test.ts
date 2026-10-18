@@ -16,6 +16,7 @@ function setup(overrides: Partial<Pick<SaveRepository, 'active' | 'list' | 'crea
     active: jest.fn(async () => world), list: jest.fn(async () => []),
     create: jest.fn(async (next: typeof world) => ({ id: next.id, name: 'Saved person', revision: 0, updatedAt: 'today' })),
     commit: jest.fn(async (next: typeof world) => next), select: jest.fn(async () => world), import: jest.fn(async () => world), recover: jest.fn(async () => world), ...overrides,
+    snapshots: jest.fn(async () => []), snapshot: jest.fn(async () => []), restoreBranch: jest.fn(async () => world),
   };
   const store = createGameStore({ repository: async () => repository, date: () => date, id: () => 'life_new' });
   return { store, repository };

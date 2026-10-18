@@ -3,11 +3,13 @@ import { Creation, createLife } from '../game/createLife';
 import { fullName, GameDate, World } from '../game/model';
 import { SaveCorrupt, SaveConflict, type LifeSummary, type SaveRepository } from '../persistence/repository';
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
+import { SnapshotSummary } from '../persistence/archive';
 
-type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover'>;
+type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
 type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
+  snapshots: SnapshotSummary[];
   bootstrap: () => Promise<boolean>;
   startLife: (input: Creation, seed: number) => Promise<boolean>;
   acknowledgeBirth: () => Promise<boolean>;
@@ -15,12 +17,16 @@ export type GameState = {
   dispatch: (command: GameCommand) => Promise<boolean>;
   importLife: (text: string, replace: boolean) => Promise<boolean>;
   recoverLife: (id: string) => Promise<boolean>;
+  loadSnapshots: () => Promise<boolean>;
+  saveSnapshot: () => Promise<boolean>;
+  restoreSnapshot: (id: string) => Promise<boolean>;
   clearError: () => void;
 };
 
 export function createGameStore(deps: Dependencies) {
   return createStore<GameState>((set, get) => {
-    const publish = (world: World) => set({ world, lives: [
+    let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
+    const publish = (world: World) => set({ world, snapshots: [], lives: [
       { id: world.id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: '' },
       ...get().lives.filter(life => life.id !== world.id),
     ] });
@@ -32,7 +38,7 @@ export function createGameStore(deps: Dependencies) {
       finally { set({ busy: false }); }
     };
     return {
-      world: null, lives: [], ready: false, busy: false, error: null,
+      world: null, lives: [], snapshots: [], ready: false, busy: false, error: null,
       clearError: () => set({ error: null }),
       bootstrap: async () => {
         if (get().busy) return false;
@@ -41,7 +47,7 @@ export function createGameStore(deps: Dependencies) {
           const lives = await repository.list();
           set({ lives });
           const world = await repository.active();
-          set({ world });
+          set({ world, snapshots: [] });
         }, 'Could not open saved lives. Please try again.');
         set({ ready: true });
         return success;
@@ -50,7 +56,7 @@ export function createGameStore(deps: Dependencies) {
         const world = createLife(deps.id(), seed, input, deps.date());
         const repository = await deps.repository();
         const summary = await repository.create(world);
-        set({ world, lives: [summary, ...get().lives.filter(life => life.id !== world.id)] });
+        set({ world, snapshots: [], lives: [summary, ...get().lives.filter(life => life.id !== world.id)] });
       }, "Your new life couldn't be saved. Please try again."),
       acknowledgeBirth: () => run(async () => {
         const world = get().world;
@@ -72,15 +78,30 @@ export function createGameStore(deps: Dependencies) {
       selectLife: id => run(async () => {
         const repository = await deps.repository();
         const world = await repository.select(id);
-        set({ world });
+        set({ world, snapshots: [] });
       }, 'Could not open that life. Please try again.'),
+      loadSnapshots: () => run(async () => {
+        const world = get().world; if (!world) throw new IneligibleAction('Open a life first');
+        set({ snapshots: await (await deps.repository()).snapshots(world.id) });
+      }, 'Could not read historical checkpoints. Please try again.'),
+      saveSnapshot: () => run(async () => {
+        const world = get().world; if (!world) throw new IneligibleAction('Open a life first');
+        set({ snapshots: await (await deps.repository()).snapshot(world.id, world.revision) });
+      }, 'This moment could not be saved. Your current life was kept.'),
+      restoreSnapshot: snapshotId => run(async () => {
+        const world = get().world; if (!world) throw new IneligibleAction('Open a life first');
+        if (restoreAttempt?.before !== world || restoreAttempt.snapshotId !== snapshotId) restoreAttempt = { before: world, snapshotId, branchId: deps.id() };
+        const repository = await deps.repository(), next = await repository.restoreBranch(world.id, snapshotId, world.revision, restoreAttempt.branchId, 'restore:' + restoreAttempt.branchId);
+        const lives = await repository.list();
+        set({ world: next, lives, snapshots: [] }); restoreAttempt = null;
+      }, 'Could not restore this checkpoint. Your current life was kept.'),
       dispatch: command => run(async () => {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
         const next = resolveCommand(world, command);
         const repository = await deps.repository();
         const commandId = 'revision:' + world.revision + ':' + command.type;
-        const committed = await repository.commit(next, world.revision, commandId);
+        const committed = await repository.commit(next, world.revision, commandId, command.type === 'advance');
         set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life) });
       }, "Your progress couldn't be saved. Please try again."),
     };

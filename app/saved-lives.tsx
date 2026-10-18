@@ -3,7 +3,8 @@ import { router } from 'expo-router';
 import * as DocumentPicker from 'expo-document-picker';
 import * as Sharing from 'expo-sharing';
 import { File, Paths } from 'expo-file-system';
-import { ageOn, decodeWorld, fullName, World } from '../src/game/model';
+import { ageOn, fullName, World } from '../src/game/model';
+import { decodeSave } from '../src/persistence/archive';
 import { useGame } from '../src/state/useGame';
 import { openRepository } from '../src/persistence/native';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../src/ui/components';
@@ -31,16 +32,16 @@ export default function SavedLives() {
     if (picked.canceled) return;
     const asset = picked.assets[0];
     const file = new File(asset.uri);
-    if ((asset.size ?? file.size) > 20_000_000) throw new Error('This save is too large. Choose a Dreams save under 20 MB.');
+    if ((asset.size ?? file.size) > 64_000_000) throw new Error('This archive is too large. Choose a Dreams save under 64 MB.');
     const text = await file.text();
     let world: World;
-    try { world = decodeWorld(text); } catch { throw new Error('This file is not a supported, valid Dreams save. Your lives have not changed.'); }
+    try { world = decodeSave(text).world; } catch { throw new Error('This file is not a supported, valid Dreams save. Your lives have not changed.'); }
     setPreview({ kind: 'import', text, world, replace: lives.some(life => life.id === world.id) });
   }, 'Could not read the selected file.');
   const presentation: EventPresentation | null = preview ? {
     id: preview.kind + ':' + preview.world.id, kind: 'confirmation',
     title: preview.kind === 'recover' ? 'Restore previous checkpoint?' : preview.replace ? 'Replace this saved life?' : 'Import this life?',
-    body: preview.kind === 'recover' ? 'Progress after this checkpoint will be discarded. The checkpoint includes its saved event and exact outcomes.' : preview.replace ? 'A life with this ID already exists. Importing replaces its current progress and clears its Time Machine history. A previous checkpoint is kept for recovery.' : 'This adds a local saved life and makes it active.',
+    body: preview.kind === 'recover' ? 'Progress and checkpoints after this moment will be discarded. This checkpoint includes its saved event and exact outcomes.' : preview.replace ? 'A life with this ID already exists. Importing replaces its current progress and Time Machine history with this file’s contents. A previous checkpoint is kept for recovery.' : 'This adds a local saved life, including any historical checkpoints and branch record in its archive, and makes it active.',
     terms: [{ id: 'name', label: 'Person', value: fullName(preview.world.people[preview.world.activePersonId]), tone: 'neutral' }, { id: 'age', label: 'Age', value: ageOn(preview.world.people[preview.world.activePersonId], preview.world.date).toString(), tone: 'neutral' }, { id: 'revision', label: 'Checkpoint', value: preview.world.revision.toString(), tone: 'neutral' }],
     confirmLabel: preview.kind === 'recover' ? 'Restore Checkpoint' : preview.replace ? 'Replace and Import' : 'Import Life',
   } : null;
@@ -48,7 +49,7 @@ export default function SavedLives() {
     {(message || error) && <Card><Body>{message ?? error}</Body></Card>}
     <Button label="Import a Save" onPress={() => { void importFile(); }} disabled={busy || working} />
     {lives.length === 0 && <Card><Body>No lives saved yet.</Body></Card>}
-    {lives.map(life => <Card key={life.id}><Heading size={18}>{life.name}</Heading>
+    {lives.map(life => <Card key={life.id}><Heading size={18}>{life.name}</Heading>{life.branch && <Body muted>Time Machine branch · {life.branch.name}, age {life.branch.age} in {life.branch.date.year}</Body>}
       <Button label="Continue" disabled={working} busy={busy} onPress={async () => { if (await select(life.id)) router.replace('/life'); }} />
       <ActionRow title="Export save file" disabledReason={busy || working ? 'Finish the current save first' : undefined} onPress={() => { void run(async () => {
         const repository = await openRepository();

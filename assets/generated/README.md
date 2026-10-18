@@ -55,6 +55,17 @@ tools/preview-ownership.cjs. A neighbour-pixel artefact below the guitar was
 identified and excluded by its source rectangle. Native-device fidelity remains
 pending.
 
+health-legal-atlas.png was generated on 18 October 2026 as sixteen original
+time/health/legal objects. The unmodified 1254×1254 RGBA output remains at
+/workspace/generated_images/exec-1f4c10ed-d9b2-4e73-bacc-8098506a2ee9.png.
+Measured rectangles in src/assets/healthLegalLayout.ts preserve its nonuniform
+object spacing. Subjects include rewind, doctor/medicine/care, exercise,
+meditation, sleep, diet, court/police/prison/handcuffs, justice, prison meals,
+visits and release. Browser inspection at 128px found a meal-tray neighbour
+pixel beside the scales; the measured boundary excludes it without editing
+the source. The rewind icon is integrated into Time Machine; other subjects
+are registered for expanded systems. Native-device fidelity remains pending.
+
 family-atlas.png was generated on 18 October 2026 as twelve original family
 objects (rings, rose, hearts, gift, carriage, bottle, adoption teddy, blanket,
 will, breakup, family tree and conversation). The unmodified 1448×1086 RGBA

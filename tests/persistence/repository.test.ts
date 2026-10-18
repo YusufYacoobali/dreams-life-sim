@@ -5,6 +5,7 @@ import { database } from '../support/sqlite';
 import { resolveCommand } from '../../src/game/engine';
 import legacyFixture from '../fixtures/v1-newborn.json';
 import birthdayFixture from '../fixtures/v2-birthday-result.json';
+import { decodeSave } from '../../src/persistence/archive';
 
 const world = () => createLife('life_test', 42, randomCreation(42), { year: 2026, month: 10, day: 18 });
 
@@ -19,7 +20,7 @@ test('a new life has real linked parents and survives exact bigint save restorat
   await repository.create(created);
   expect(await repository.active()).toEqual(created);
   expect(await repository.list()).toHaveLength(1);
-  expect(decodeWorld(await repository.export(created.id))).toEqual(created);
+  expect(decodeSave(await repository.export(created.id)).world).toEqual(created);
   sqlite.close();
 });
 
@@ -65,10 +66,10 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
 
 test('newer database versions are refused without resetting their version marker', async () => {
   const { sqlite, driver } = database();
-  sqlite.exec('PRAGMA user_version=3');
+  sqlite.exec('PRAGMA user_version=4');
   const repository = new SaveRepository(driver);
   await expect(repository.initialise()).rejects.toThrow('newer version');
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(3);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   sqlite.close();
 });
 
@@ -85,7 +86,7 @@ test('a version-one database and actual previous-version save migrate without da
   expect(restored.random).toEqual(legacyFixture.random);
   for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(2);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(3);
   sqlite.close();
 });
 

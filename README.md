@@ -1,6 +1,6 @@
 # Dreams: Life Simulator
 
-An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, relationships/family, divorce/custody, wills/estates and existing-child legacy are connected. NPCs retain identities and their own accounts/work history. Death, saved lives and local import/export/recovery work at the implemented core level. Time Machine, expanded systems, content depth and release validation remain pending; this is not the complete game.
+An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, relationships/family, wills/estates and existing-child legacy are connected. The free Time Machine restores complete historical states into separate saved branches, preserving the original future. Local archives include compressed history and branch origin. Expanded systems, content depth and release validation remain pending; this is not the complete game.
 
 The game is free and uses local saves. No account, subscription or cloud service is planned. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 
@@ -19,5 +19,7 @@ npx expo export --platform all
 ```
 
 Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. See [progress and verification](docs/PROGRESS.md), the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for implemented scope, remaining work and visual acceptance limits.
+
+The optional `node tools/benchmark-history.cjs` diagnostic measures the current engine/checkpoint workload in this cloud runtime. Its [results and limits](docs/PERFORMANCE.md) do not establish native-device performance.
 
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.
