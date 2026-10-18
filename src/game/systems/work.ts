@@ -10,6 +10,7 @@ import { isConfined } from './legalSchemas';
 import { visibleConvictions } from './legal';
 import { careerContractEnded } from './careerSchemas';
 import { recordingCommitment } from './musicSchemas';
+import { campaignCommitment } from './politicsSchemas';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string() }),
@@ -31,6 +32,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
 export function jobReason(world: World, role: JobRole): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
   if (role.specialCareer) return 'Use this special career’s selection process';
+  if (!role.partTime&&campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time work';
   if (!role.partTime && recordingCommitment(world)) return 'Finish or cancel your recording before starting full-time work';
   if (isConfined(world, person)) return 'You cannot start ordinary work in custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest first';

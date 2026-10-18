@@ -5,6 +5,7 @@ import { rules } from '../rules';
 import { roundRatio, formatMoney } from '../money';
 import { IneligibleAction } from '../errors';
 import { musicFormats, musicGenres, recordingCommitment } from './musicSchemas';
+import { campaignCommitment } from './politicsSchemas';
 import { active, accountFor, availableCash, bounded, charge, draw, fact, post, result } from './common';
 import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
@@ -35,6 +36,7 @@ export function recordingReason(world: World): string | undefined {
         return 'Music skill of 45% is required';
     if (person.employment && !jobs.find(item => item.id === person.employment!.roleId)?.partTime || person.education.stage !== 'none')
         return 'Leave work or full-time study before recording';
+    if(campaignCommitment(world))return 'Finish or withdraw from your campaign before recording';
     if (recordingCommitment(world))
         return 'Finish or cancel your current recording first';
     if ((world.actionCounts[person.id + ':record-music:' + world.date.year] ?? 0) >= 4)

@@ -16,6 +16,7 @@ import { employmentBackPay, endEmployment, salaryForPerson } from './work';
 import { connectPerson, relationFor } from './relationships';
 import { isConfined } from './legalSchemas';
 import { recordingCommitment } from './musicSchemas';
+import { campaignCommitment } from './politicsSchemas';
 export const businessCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('start-business'), kind: z.enum(businessKinds), name: z.string().trim().min(1).max(50).refine(value => !/[\u0000-\u001F]/.test(value)), operation: z.enum(['owner', 'manager']), quotedCapital: z.bigint().positive() }),
   z.object({ type: z.literal('business-prices'), businessId: z.string(), priceBps: z.number().int().min(7500).max(15000) }),
@@ -43,6 +44,7 @@ export function ownerOperationReason(world: World, kind: BusinessKind): string |
   if (isConfined(world)) return 'You cannot operate a workplace from custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest before taking an operating role';
   if (person.employment) return 'Leave your current job before taking an operating role';
+  if(campaignCommitment(world))return 'Finish or withdraw from your campaign before operating a business';
   if(recordingCommitment(world)) return 'Finish or cancel your recording before operating a business';
   if (person.education.stage !== 'none') return 'Complete or leave full-time study before operating the business';
   if (person.stats.health < 25 || person.stats.smarts < role.smarts) return 'Your health or skills do not meet this operating role';

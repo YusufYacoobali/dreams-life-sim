@@ -94,6 +94,6 @@ from /workspace/generated_images/exec-b7274d0d-fb80-45fd-b2ee-ab9c392ef28e.png.
 SHA-256: b4e3cb00a4741517b64aa46d4b3bf6641c1347a291287410b2f1226d30028327.
 Measured rectangles in src/assets/careerLayout.ts were inspected at source and
 in the 128px browser composition tools/preview-careers.cjs. Full objects and
-transparent gutters are retained. Acting/model/sport/music/training subjects are
+transparent gutters are retained. Acting/model/sport/music/politics/training subjects are
 integrated; remaining career subjects are registered for subsequent paths.
 Native-device fidelity remains unverified.

@@ -16,6 +16,7 @@ import { offerPending } from '../pendingQueue';
 import { addCondition, medicalQuote } from './health';
 import { gainPublicFame } from './social';
 import { recordingCommitment } from './musicSchemas';
+import { campaignCommitment } from './politicsSchemas';
 export const careerCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('career-training'), skill: z.enum(skillIds), mode: z.enum(['self', 'coached']) }), z.object({ type: z.literal('stop-career-training') }),
     z.object({ type: z.literal('select-career'), kind: z.enum(careerKinds), quotedAnnualPay: z.bigint().nonnegative() }),
@@ -33,16 +34,21 @@ export function trainingReason(world: World, skill: typeof skillIds[number], per
     if (hospitalized(world, person) || person.stats.health < 20)
         return 'Recover before beginning this training';
 }
-export function careerPayQuote(world: World, kind: CareerKind) { const person = active(world), career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
+export function careerPayQuote(world: World, kind: CareerKind, person = active(world)) { const career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
 export function selectionReason(world: World, kind: CareerKind): string | undefined {
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
+    if (kind === 'politician')
+        return 'Run an election campaign to seek public office';
+    if (campaignCommitment(world))
+        return 'Finish or withdraw from your current campaign first';
     if (age < definition.minAge || age > definition.maxAge)
         return 'Available at ages ' + definition.minAge + '–' + definition.maxAge;
     if (isConfined(world) || person.legal.wanted)
         return 'Resolve custody or pursuit first';
     if (hospitalized(world, person))
         return 'Finish hospital care before selection';
-    if(recordingCommitment(world))return 'Finish or cancel your recording before accepting another contract';
+    if (recordingCommitment(world))
+        return 'Finish or cancel your recording before accepting another contract';
     if (person.employment)
         return 'Leave your current job before accepting a full-time contract';
     if (person.education.stage !== 'none')
@@ -56,7 +62,7 @@ export function selectionReason(world: World, kind: CareerKind): string | undefi
     if ((world.actionCounts[person.id + ':career-selection:' + kind + ':' + world.date.year] ?? 0) >= 2)
         return 'Two selection attempts are available per career each year';
 }
-function newProject(world: World, career: Career) { const definition = careerCatalog[career.kind], history = world.workHistory.find(item => item.id === career.employmentId)!; return { id: 'project_' + career.id + '_' + career.projects.length, name: definition.projects[draw(world, 'events', 0, definition.projects.length - 1)] + (career.kind === 'athlete' ? ' ' + (world.date.year + 1) : ''), started: { ...world.date }, ended: null, status: 'active' as const, targetMonths: definition.period, months: 0, employmentId: history.id, grossAtStart: history.grossEarned, grossEarned: 0n, responseRoll: draw(world, 'outcomes', 1, 100), quality: 0, award: null, periods: [] }; }
+function newProject(world: World, career: Career) { const definition = careerCatalog[career.kind], history = world.workHistory.find(item => item.id === career.employmentId)!; return { id: 'project_' + career.id + '_' + career.projects.length, name: definition.projects[draw(world, 'events', 0, definition.projects.length - 1)] + (['athlete', 'politician'].includes(career.kind) ? ' ' + (world.date.year + 1) : ''), started: { ...world.date }, ended: null, status: 'active' as const, targetMonths: definition.period, months: 0, employmentId: history.id, grossAtStart: history.grossEarned, grossEarned: 0n, responseRoll: draw(world, 'outcomes', 1, 100), quality: 0, award: null, periods: [] }; }
 function colleagues(world: World, career: Career) {
     if (career.contacts.some(id => !world.people[id].died))
         return;
@@ -74,12 +80,37 @@ function colleagues(world: World, career: Career) {
         person.employment!.employer = career.employer;
         world.workHistory.find(item => item.id === person.employment!.id)!.employer = career.employer;
         career.contacts.push(person.id);
-        connectPerson(world, person.id);
+        connectPerson(world, person.id, career.personId);
         const relation = relationFor(world, career.personId, person.id)!;
         relation.roles.push('coworker');
         relation.kind = 'coworker';
-        fact(world, 'I met ' + fullName(person) + ' through ' + career.employer + '.', 'career');
+        fact(world, 'I met ' + fullName(person) + ' through ' + career.employer + '.', 'career', '', career.personId);
     }
+}
+export function startCareerContract(world: World, kind: CareerKind, annualPay: bigint, person: Person = active(world), announce = true): Career {
+    const definition = careerCatalog[kind], prior = world.careers.find(item => item.personId === person.id && item.kind === kind);
+    if (person.employment || world.careers.some(item => item.personId === person.id && item.status === 'active'))
+        throw new IneligibleAction('This person already has a current work commitment');
+    const career: Career = prior ?? { id: 'career_' + person.id + '_' + kind, personId: person.id, kind: kind, country: person.country, currency: countries[person.country].currency, started: { ...world.date }, ended: null, status: 'active', rank: 0, reputation: 40, focus: 'balanced', employmentId: null, employer: '', contractMonthsRemaining: 0, lastMonth: absolute(world), contacts: [], projects: [] };
+    if (!prior)
+        world.careers.push(career);
+    career.status = 'active';
+    career.ended = null;
+    career.country = person.country;
+    career.currency = countries[person.country].currency;
+    career.employer = person.city + (kind === 'actor' ? ' Lantern Pictures' : kind === 'model' ? ' Everyday Studio' : kind === 'musician' ? ' Small Room Music' : kind === 'politician' ? ' Council' : ' Comets');
+    career.lastMonth = absolute(world);
+    career.contractMonthsRemaining = definition.contractMonths;
+    const employmentId = 'employment_career_' + world.revision + '_' + world.workHistory.length;
+    person.employment = { id: employmentId, roleId: definition.roleId, employer: career.employer, companyId: null, rank: career.rank, annualPay: annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
+    world.workHistory.push({ id: employmentId, personId: person.id, roleId: definition.roleId, employer: career.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+    career.employmentId = employmentId;
+    career.projects.push(newProject(world, career));
+    colleagues(world, career);
+    fact(world, 'I signed a ' + definition.contractMonths + '-month ' + definition.title.toLowerCase() + ' contract with ' + career.employer + '.', 'career', '', person.id);
+    if (announce && person.id === world.activePersonId)
+        result(world, 'Your contract is signed', 'Pay starts as time passes. Attendance, performance, health and the saved project response determine what follows.', definition.art, [{ id: 'pay', label: 'Annual gross rate', value: formatMoney({ minor: annualPay, currency: career.currency }), tone: 'positive' }, { id: 'term', label: 'Working periods', value: String(definition.contractMonths), tone: 'neutral' }]);
+    return career;
 }
 export function resolveCareer(world: World, command: CareerCommand) {
     const person = active(world);
@@ -112,24 +143,7 @@ export function resolveCareer(world: World, command: CareerCommand) {
             result(world, 'They chose someone else', 'The selection did not lead to a contract. No future salary was paid. You can train and try again within the yearly limit.', definition.art);
             return;
         }
-        const career: Career = prior ?? { id: 'career_' + person.id + '_' + command.kind, personId: person.id, kind: command.kind, country: person.country, currency: countries[person.country].currency, started: { ...world.date }, ended: null, status: 'active', rank: 0, reputation: 40, focus: 'balanced', employmentId: null, employer: '', contractMonthsRemaining: 0, lastMonth: absolute(world), contacts: [], projects: [] };
-        if (!prior)
-            world.careers.push(career);
-        career.status = 'active';
-        career.ended = null;
-        career.country = person.country;
-        career.currency = countries[person.country].currency;
-        career.employer = person.city + (command.kind === 'actor' ? ' Lantern Pictures' : command.kind === 'model' ? ' Everyday Studio' : command.kind === 'musician' ? ' Small Room Music' : ' Comets');
-        career.lastMonth = absolute(world);
-        career.contractMonthsRemaining = definition.contractMonths;
-        const employmentId = 'employment_career_' + world.revision + '_' + world.workHistory.length;
-        person.employment = { id: employmentId, roleId: definition.roleId, employer: career.employer, companyId: null, rank: career.rank, annualPay: command.quotedAnnualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
-        world.workHistory.push({ id: employmentId, personId: person.id, roleId: definition.roleId, employer: career.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
-        career.employmentId = employmentId;
-        career.projects.push(newProject(world, career));
-        colleagues(world, career);
-        fact(world, 'I signed a ' + definition.contractMonths + '-month ' + definition.title.toLowerCase() + ' contract with ' + career.employer + '.', 'career');
-        result(world, 'Your contract is signed', 'Pay starts as time passes. Attendance, performance, health and the saved project response determine what follows.', definition.art, [{ id: 'pay', label: 'Annual gross rate', value: formatMoney({ minor: command.quotedAnnualPay, currency: career.currency }), tone: 'positive' }, { id: 'term', label: 'Working periods', value: String(definition.contractMonths), tone: 'neutral' }]);
+        startCareerContract(world, command.kind, command.quotedAnnualPay);
         return;
     }
     const career = world.careers.find(item => item.id === command.careerId && item.personId === person.id);
@@ -151,26 +165,29 @@ export function resolveCareer(world: World, command: CareerCommand) {
         result(world, 'You left the career', 'Future contract pay stops. Your real earnings, skills, colleagues, projects and awards remain recorded.', careerCatalog[career.kind].art);
     }
 }
-export function careerTrainingMonth(world: World) { const month = absolute(world); for (const person of Object.values(world.people).filter(item => !item.died && item.training)) {
-    const training = person.training!;
-    if (training.lastMonth >= month)
-        continue;
-    training.lastMonth = month;
-    if (trainingReason(world, training.skill, person))
-        continue;
-    const cost = training.mode === 'coached' ? coachingCost(world, person) : 0n, quote = medicalQuote(world, cost, person);
-    if (quote.amount > availableCash(accountFor(world, quote.payer, quote.currency)))
-        continue;
-    if (quote.amount)
-        charge(world, quote.amount, 'skill-training', 'Coached ' + skillContent[training.skill].title.toLowerCase(), undefined, quote.currency, quote.payer);
-    training.months++;
-    training.fees += cost;
-    const fatigue = person.stats.energy < 15 || person.stats.stress > 85;
-    person.skills[training.skill] = bounded(person.skills[training.skill] + (fatigue ? 0 : training.mode === 'coached' ? 2 : 1));
-    person.stats.energy = bounded(person.stats.energy - 1);
-    if (training.skill === 'sport')
-        person.stats.fitness = bounded(person.stats.fitness + 1);
-} }
+export function careerTrainingMonth(world: World) {
+    const month = absolute(world);
+    for (const person of Object.values(world.people).filter(item => !item.died && item.training)) {
+        const training = person.training!;
+        if (training.lastMonth >= month)
+            continue;
+        training.lastMonth = month;
+        if (trainingReason(world, training.skill, person))
+            continue;
+        const cost = training.mode === 'coached' ? coachingCost(world, person) : 0n, quote = medicalQuote(world, cost, person);
+        if (quote.amount > availableCash(accountFor(world, quote.payer, quote.currency)))
+            continue;
+        if (quote.amount)
+            charge(world, quote.amount, 'skill-training', 'Coached ' + skillContent[training.skill].title.toLowerCase(), undefined, quote.currency, quote.payer);
+        training.months++;
+        training.fees += cost;
+        const fatigue = person.stats.energy < 15 || person.stats.stress > 85;
+        person.skills[training.skill] = bounded(person.skills[training.skill] + (fatigue ? 0 : training.mode === 'coached' ? 2 : 1));
+        person.stats.energy = bounded(person.stats.energy - 1);
+        if (training.skill === 'sport')
+            person.stats.fitness = bounded(person.stats.fitness + 1);
+    }
+}
 export function careerMonth(world: World) {
     const month = absolute(world);
     for (const career of world.careers.filter(item => item.status === 'active')) {
@@ -218,7 +235,7 @@ export function careerMonth(world: World) {
         if (success)
             gainPublicFame(world, person, career.kind === 'actor' ? 5 : career.kind === 'model' ? 3 : 4);
         if (success && project.quality >= 80 && (career.kind === 'athlete' ? project.periods.filter(item => item.success).length >= 10 : project.responseRoll <= 10)) {
-            project.award = career.kind === 'athlete' ? 'League season trophy' : career.kind === 'actor' ? 'Lantern Festival performance award' : career.kind === 'musician' ? 'Small Room live performance award' : 'Everyday campaign distinction';
+            project.award = career.kind === 'athlete' ? 'League season trophy' : career.kind === 'actor' ? 'Lantern Festival performance award' : career.kind === 'musician' ? 'Small Room live performance award' : career.kind === 'politician' ? 'Public Service Distinction' : 'Everyday campaign distinction';
             fact(world, 'I received the ' + project.award + ' for ' + project.name + '.', 'career', '', person.id);
         }
         const completed = career.projects.filter(item => item.status === 'completed').length;
@@ -233,13 +250,16 @@ export function careerMonth(world: World) {
             career.projects.push(newProject(world, career));
         }
         if (person.id === world.activePersonId) {
-            offerPending(world, { kind: 'result', id: 'career_result_' + project.id, title: career.kind === 'athlete' ? 'The season is over' : project.status === 'completed' ? 'The project is complete' : 'The project has ended', body: project.name + (project.status === 'cancelled' ? ' ended without enough attendance to complete the work.' : success ? ' found its audience.' : ' received a mixed response.') + (career.status === 'between' ? ' Your contract has ended. You can choose your next step before continuing.' : ' Your existing contract continues into another season.'), illustration: definition.art, effects: [{ id: 'quality', label: 'Recorded quality', value: project.quality + '%', tone: 'neutral' }, { id: 'pay', label: 'Actual contract earnings', value: formatMoney({ minor: project.grossEarned, currency: career.currency }), tone: 'positive' }, ...(project.award ? [{ id: 'award', label: 'Award', value: project.award, tone: 'positive' as const }] : [])] }, 50);
+            offerPending(world, { kind: 'result', id: 'career_result_' + project.id, title: career.kind === 'politician' ? 'A year of public service' : career.kind === 'athlete' ? 'The season is over' : project.status === 'completed' ? 'The project is complete' : 'The project has ended', body: project.name + (project.status === 'cancelled' ? ' ended without enough attendance to complete the work.' : success ? career.kind === 'politician' ? ' met its service goals.' : ' found its audience.' : career.kind === 'politician' ? ' fell short of its service goals.' : ' received a mixed response.') + (career.status === 'between' ? ' Your contract has ended. You can choose your next step before continuing.' : career.kind === 'politician' ? ' Your elected term continues.' : ' Your existing contract continues into another season.'), illustration: definition.art, effects: [{ id: 'quality', label: 'Recorded quality', value: project.quality + '%', tone: 'neutral' }, { id: 'pay', label: 'Actual contract earnings', value: formatMoney({ minor: project.grossEarned, currency: career.currency }), tone: 'positive' }, ...(project.award ? [{ id: 'award', label: 'Award', value: project.award, tone: 'positive' as const }] : [])] }, 50);
             if (world.annual?.stage === 'months')
                 world.annual.pausedForPlanning = true;
         }
     }
 }
-export function careerDeath(world: World, personId: string) { for (const career of world.careers.filter(item => item.personId === personId && ['active', 'between'].includes(item.status))) {
-    career.status = 'deceased';
-    career.ended = { ...world.date };
-} world.people[personId].training = null; }
+export function careerDeath(world: World, personId: string) {
+    for (const career of world.careers.filter(item => item.personId === personId && ['active', 'between'].includes(item.status))) {
+        career.status = 'deceased';
+        career.ended = { ...world.date };
+    }
+    world.people[personId].training = null;
+}

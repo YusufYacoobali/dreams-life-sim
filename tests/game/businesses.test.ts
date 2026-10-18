@@ -156,7 +156,7 @@ test.each([17, 93])('seed %i runs connected company years with deterministic rel
   expect(world.businesses[0].monthsOperated).toBeGreaterThan(0); expect(world.businessLedger.some(item => item.category === 'payroll')).toBe(true); validateWorld(world);
 });
 test('the genuine v10 creator archive migrates without resetting accrued support, offers, posts, history or RNG', () => {
-  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(13); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
+  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(14); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
   expect(world.people[world.activePersonId].finance.supportIncomeDue).toBe(119n); expect(world.socialAccounts[0].totalPosts).toBe(8); expect(world.socialAccounts[0].followers).toBe(5346); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('brand-offer'); expect(archive.snapshots).toHaveLength(1);
-  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(13); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(14); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });

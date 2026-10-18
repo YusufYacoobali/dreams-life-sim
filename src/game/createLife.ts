@@ -68,7 +68,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 13, engineVersion: 12, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 14, engineVersion: 13, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
@@ -82,6 +82,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     businesses: [], businessLedger: [], businessPayables: [],
     careers: [],
     musicReleases: [],
+    elections: [],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };

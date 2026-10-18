@@ -53,9 +53,9 @@ export function relationLabel(world: World, relation: Relationship, personId = w
 function syncKind(relation: Relationship) {
   if (relation.roles.includes('parent')) relation.kind = 'parent'; else if (relation.roles.includes('guardian')) relation.kind = 'guardian'; else if (relation.roles.includes('sibling')) relation.kind = 'sibling'; else if (relation.romance === 'married') relation.kind = 'spouse'; else if (activeRomance(relation)) relation.kind = 'partner'; else relation.kind = relation.roles.includes('friend') ? 'friend' : relation.roles.includes('coworker') ? 'coworker' : relation.roles.includes('classmate') ? 'classmate' : 'acquaintance';
 }
-export function connectPerson(world: World, id: string): RuntimeEffectRow[] {
-  const person = world.people[id]; const player = active(world);
-  if (!person || person.died || person.id === player.id) throw new IneligibleAction('This person is unavailable');
+export function connectPerson(world: World, id: string, fromId = world.activePersonId): RuntimeEffectRow[] {
+  const person = world.people[id]; const player = world.people[fromId];
+  if (!person || !player || player.died || person.died || person.id === player.id) throw new IneligibleAction('This person is unavailable');
   if (!relationFor(world, player.id, id)) {
     const classmate = player.education.school && player.education.school === person.education.school && person.education.stage !== 'none';
     const kind = classmate ? 'classmate' : 'acquaintance';

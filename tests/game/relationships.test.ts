@@ -26,7 +26,7 @@ function meet(world: World) {
 
 test('v4 property-offer migration preserves its exact bound choice and finances through social-model expansion', () => {
   const world = decodeWorld(JSON.stringify(offerFixture));
-  expect(world.schemaVersion).toBe(13); expect(world.random).toEqual(offerFixture.random);
+  expect(world.schemaVersion).toBe(14); expect(world.random).toEqual(offerFixture.random);
   expect(world.pending?.id).toBe(offerFixture.pending.id);
   expect(world.annual?.monthsProcessed).toBe(2);
   const replay = decodeWorld(encodeWorld(world)); expect(replay).toEqual(world);
