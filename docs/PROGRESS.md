@@ -25,7 +25,7 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Phase | Status | Evidence / remaining work |
 | --- | --- | --- |
 | 0 — Planning and reconciliation | Complete | Overall direction approved; all 27 images reviewed; conflicts resolved, including confirmed free/offline scope |
-| 1 — Technical and visual foundation | In progress | Starter app only; no router/theme/game UI/modal system implemented |
+| 1 — Technical and visual foundation | In progress | Shared theme, native UI primitives, five modal structures and four-tab shell implemented/tested; app routing/dashboard composition still pending |
 | 2 — Artwork and character creation | Not started | Image tool available; zero generated game assets or character-creation functionality |
 | 3 — Core playable life | Not started | No engine, Age Up, events, saves, playable death, or new-life flow |
 | 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
@@ -37,16 +37,16 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 
 | Feature family | Implemented | Verified |
 | --- | --- | --- |
-| Four-tab UI, Life dashboard, shared components and modal flows | No | No |
+| Four-tab UI, Life dashboard, shared components and modal flows | Partial: shared components, shell and modal structures; dashboard/router not wired yet | Six native component interaction tests pass; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | No | No |
-| Seeded engine, resumable annual progression, stats and invariants | No | No |
+| Seeded engine, resumable annual progression, stats and invariants | Partial: versioned PRNG streams only; annual engine not implemented | Fixed-vector/resume/stream-isolation checks pass |
 | Context-aware events, decisions, delayed consequences and journal | No | No |
 | SQLite saves, migrations, recovery and import/export | No | No |
 | Education, exams, admissions, tuition, scholarships and loans | No | No |
 | Jobs, pay, performance, promotion, dismissal and retirement | No | No |
 | Dating, marriage, children, divorce, custody and persistent NPCs | No | No |
 | Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | No | No |
-| Stocks, funds, crypto, valuation, FX and net worth | No | No |
+| Stocks, funds, crypto, valuation, FX and net worth | Partial: exact bigint money/rates/FX primitives; gameplay systems not implemented | Money edge cases, JPY scaling, signs, rounding and mixed-currency rejection pass |
 | Health, conditions, treatment, lifestyle and wellbeing | No | No |
 | Crime, investigation, arrest, court, prison, record and release | No | No |
 | Social media, fame, sponsorships and controversies | No | No |
@@ -68,7 +68,8 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
-| Gameplay unit/integration/full-life scenarios | Unrun | Game engine and test suites do not exist |
+| Foundation tests and strict TypeScript | Passed | 13 tests across two suites: six native UI interaction/accessibility tests and seven deterministic/money tests; production and test types check |
+| Full gameplay/integration/life scenarios | Unrun | Annual engine and gameplay systems are not implemented; primitives do not validate full lives |
 | Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
 | Generated artwork / screen fidelity | Unrun | Reference review is complete; no generated game art or running-app visual acceptance yet |
 | iOS/Android device interactions | Unrun | Appropriate native execution still needed later; bundle generation is insufficient |
@@ -80,3 +81,11 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 - Recorded the user's conditional approval and full-game continuation requirement.
 - Added this progress ledger; corrected the stale-checkout diagnosis, merged the newer reference commits, reviewed all 27 files, and recorded the user's free/offline decision.
 - Application source, dependencies, and lockfile remain unchanged. No implementation milestone is claimed complete.
+
+### Foundation submilestone 1A
+
+- Added Expo 57-compatible navigation/persistence/presentation packages and lightweight state/validation dependencies. Explicitly pinned React DOM/renderer and native worklet versions to match the existing React/Expo runtime.
+- Added shared light/dark tokens, headers, rows, buttons, portraits, accessible bounded stat bars, four-tab shell and the five event presentation structures. These components are not yet the routed game UI.
+- Added versioned deterministic random streams and bigint money/FX primitives. No game economy is claimed implemented.
+- Verified strict application/test typing, 13 passing interaction/domain tests, and Expo bundled-version compatibility.
+- Kept the working starter entry while building these reusable modules; the next submilestone connects actual life creation/save state and routing.
