@@ -1,5 +1,7 @@
 import { z } from 'zod';
 import { countryCodes } from './countries';
+import { pendingSchema } from './runtime';
+import { daysInMonth, monthFrom } from './calendar';
 
 export const dateSchema = z.object({
   year: z.number().int().positive().max(999999),
@@ -30,7 +32,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(1), engineVersion: z.literal(1), contentVersion: z.literal(1),
+  schemaVersion: z.literal(2), engineVersion: z.literal(1), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -39,6 +41,10 @@ export const worldSchema = z.object({
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint() })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
+  calendarAnchorDay: z.number().int().min(1).max(31),
+  annual: z.object({ id: z.string(), startDate: dateSchema, targetDate: dateSchema, monthsProcessed: z.number().int().min(0).max(12) }).nullable(),
+  pending: pendingSchema.nullable(),
+  eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
 });
 export type World = z.infer<typeof worldSchema>;
 
@@ -47,7 +53,8 @@ export function compareDates(a: GameDate, b: GameDate): number {
 }
 export function ageOn(person: Pick<Person, 'born' | 'died'>, date: GameDate): number {
   const at = person.died ?? date;
-  return at.year - person.born.year - (at.month < person.born.month || (at.month === person.born.month && at.day < person.born.day) ? 1 : 0);
+  const birthdayDay = Math.min(person.born.day, daysInMonth(at.year, person.born.month));
+  return at.year - person.born.year - (at.month < person.born.month || (at.month === person.born.month && at.day < birthdayDay) ? 1 : 0);
 }
 export const fullName = (person: Pick<Person, 'firstName' | 'lastName'>) => person.firstName + ' ' + person.lastName;
 
@@ -76,6 +83,21 @@ export function validateWorld(value: unknown): World {
     if (!world.people[entry.personId] || compareDates(entry.date, world.date) > 0 || compareDates(entry.date, world.people[entry.personId].born) < 0 || journalIds.has(entry.id)) throw new Error('Invalid journal fact');
     journalIds.add(entry.id);
   }
+  if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
+  if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
+  if (world.pending?.kind === 'decision') {
+    if (world.people[world.activePersonId].died || world.pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
+    if (new Set(world.pending.choices.map(choice => choice.id)).size !== world.pending.choices.length) throw new Error('Duplicate decision choices');
+    for (const choice of world.pending.choices) for (const effect of choice.effects) {
+      if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
+      if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
+      if (effect.kind === 'transfer') {
+        const from = world.accounts.find(account => account.id === effect.fromAccountId);
+        const to = world.accounts.find(account => account.id === effect.toAccountId);
+        if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new Error('Invalid effect transfer');
+      }
+    }
+  }
   return world;
 }
 
@@ -84,12 +106,19 @@ export function encodeWorld(world: World): string {
 }
 export function decodeWorld(text: string): World {
   if (text.length > 20_000_000) throw new Error('Save is too large');
-  return validateWorld(JSON.parse(text, (_key, value: unknown) => {
+  const parsed = JSON.parse(text, (_key, value: unknown) => {
     if (value && typeof value === 'object' && Object.keys(value).length === 1 && '$dreamsBigInt' in value) {
       const amount = (value as { $dreamsBigInt: unknown }).$dreamsBigInt;
       if (typeof amount !== 'string' || !/^-?\d{1,128}$/.test(amount)) throw new Error('Invalid money encoding');
       return BigInt(amount);
     }
     return value;
-  }));
+  });
+  // Version 1 shipped creation only. Preserve every identity, journal fact and RNG stream.
+  if (parsed && parsed.schemaVersion === 1) {
+    parsed.schemaVersion = 2;
+    parsed.calendarAnchorDay = parsed.date?.day;
+    parsed.annual = null; parsed.pending = null; parsed.eventHistory = [];
+  }
+  return validateWorld(parsed);
 }

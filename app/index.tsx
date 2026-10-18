@@ -27,6 +27,7 @@ export default function Welcome() {
     {world && <Button label={'Continue as ' + fullName(world.people[world.activePersonId])} onPress={open} />}
     <Button label="Create a Life" onPress={() => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString() } })} />
     <Button label="Random Life" tone="secondary" onPress={() => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString() } })} />
+    <Button label="Saved Lives · Import / Export" tone="secondary" onPress={() => router.push('/saved-lives')} />
     {lives.length > 1 && <Card>
       <Heading size={18}>Saved lives</Heading>
       {lives.filter(life => life.id !== world?.id).map(life => <Button key={life.id} label={life.name} tone="secondary" disabled={busy} onPress={async () => {

@@ -3,6 +3,7 @@ import { countries, countryCodes } from './countries';
 import { dateSchema, GameDate, Person, personSchema, validateWorld, World } from './model';
 import { currencyDigits } from './money';
 import { forkRandom, randomInteger } from './random';
+import { daysInMonth } from './calendar';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -31,7 +32,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const country = countries[input.country];
   const person = (personId: string, firstName: string, gender: Person['gender'], age: number): Person => ({
     id: personId, firstName, lastName: input.lastName, gender, nationality: input.country, country: input.country, city: input.city,
-    born: { ...date, year: date.year - age }, died: null, causeOfDeath: null,
+    born: { ...date, year: date.year - age, day: Math.min(date.day, daysInMonth(date.year - age, date.month)) }, died: null, causeOfDeath: null,
     stats: { happiness: roll(65, 95), health: roll(80, 100), smarts: roll(25, 90), looks: roll(30, 90), respect: roll(30, 65), energy: 100, fitness: roll(35, 70), stress: age ? roll(10, 40) : 0, discipline: roll(30, 80), fame: 0 },
     appearance: { face: roll(0, 3), skin: roll(0, 5), hair: roll(0, 7), hairColor: roll(0, 4) },
     traits: [(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'] as const)[roll(0, 5)]],
@@ -44,7 +45,8 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const scale = 10n ** BigInt(currencyDigits[country.currency]);
   return validateWorld({
-    schemaVersion: 1, engineVersion: 1, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 2, engineVersion: 1, contentVersion: 1, id, revision: 0, date: { ...date },
+    calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
     people,

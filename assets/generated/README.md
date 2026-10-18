@@ -17,3 +17,11 @@ brief; the reference images were not copied or sliced into production art.
 Status: generated and visually reviewed at source resolution. Integrated into
 the asset registry. Actual-size running-app review remains pending. This is a
 first sample family, not completion of the full artwork manifest.
+
+death-memorial.png was generated on 18 October 2026 for the dedicated death
+screen: a respectful rounded stone memorial with a floating pink heart, on
+transparent background. The unmodified original remains at
+/workspace/generated_images/exec-7f8fb977-0638-4606-b446-060824c47969.png.
+Source-resolution inspection is complete; native-device comparison remains
+pending. This illustration follows the dedicated death reference's subject and
+palette without copying its pixels.

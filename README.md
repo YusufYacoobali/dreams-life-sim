@@ -1,6 +1,6 @@
 # Dreams: Life Simulator
 
-An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. The complete game remains the target; the current app supports creation, birth, saved-life selection and views of real identity, family, cash and stats. Annual simulation and feature gameplay are the next milestones.
+An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. The current core supports creation, birth, deterministic Age Up, persistent decisions/results, journal, death, saved lives and local import/export/recovery. The broader education, work, family, economy and expanded systems remain in development; this is not the complete game.
 
 The game is free and uses local saves. No account, subscription or cloud service is planned.
 

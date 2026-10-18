@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
@@ -17,14 +17,14 @@ export type EventPresentation = {
 );
 
 export function EventModal({
-  event, busy = false, onChoose, onCancel,
-}: { event: EventPresentation | null; busy?: boolean; onChoose: (id: string) => void; onCancel?: () => void }) {
-  return event ? <EventCard key={event.id} event={event} busy={busy} onChoose={onChoose} onCancel={onCancel} /> : null;
+  event, busy = false, error, onChoose, onCancel,
+}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void }) {
+  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} /> : null;
 }
 
 function EventCard({
-  event, busy, onChoose, onCancel,
-}: { event: EventPresentation; busy: boolean; onChoose: (id: string) => void; onCancel?: () => void }) {
+  event, busy, error, onChoose, onCancel,
+}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void }) {
   const c = useColors();
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string | null>(null);
@@ -39,14 +39,16 @@ function EventCard({
           <ScrollView contentContainerStyle={styles.contents} keyboardShouldPersistTaps="handled" bounces={false}>
             <View style={styles.title}><Heading size={24} centered>{event.title}</Heading></View>
             <Body centered>{event.body}</Body>
+            {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, textAlign: 'center', fontSize: 14 }}>{error}</Text>}
             {effects.length > 0 && <View style={[styles.effects, { backgroundColor: c.inset }]}>
               {effects.map(effect => <View key={effect.id} style={styles.effectRow}>
                 <Text style={{ color: c.ink, fontSize: 14, flex: 1 }}>{effect.label}</Text>
                 <Text style={{ color: effect.tone === 'positive' ? c.green : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: 'right', flexShrink: 1 }}>{effect.value}</Text>
               </View>)}
             </View>}
+            {event.kind === 'decision' && busy && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}
             {event.kind === 'decision' && event.choices.map(choice => <Button
-              key={choice.id} label={choice.label} disabled={!!choice.disabledReason} busy={busy}
+              key={choice.id} label={choice.label} disabled={busy || !!choice.disabledReason}
               accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
               onPress={() => onChoose(choice.id)}
             />)}

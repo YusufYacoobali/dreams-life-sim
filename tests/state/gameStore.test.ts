@@ -11,11 +11,11 @@ function deferred<T>() {
   const promise = new Promise<T>((a, b) => { resolve = a; reject = b; });
   return { promise, resolve, reject };
 }
-function setup(overrides: Partial<Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select'>> = {}) {
+function setup(overrides: Partial<Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover'>> = {}) {
   const repository = {
     active: jest.fn(async () => world), list: jest.fn(async () => []),
     create: jest.fn(async (next: typeof world) => ({ id: next.id, name: 'Saved person', revision: 0, updatedAt: 'today' })),
-    commit: jest.fn(async (next: typeof world) => next), select: jest.fn(async () => world), ...overrides,
+    commit: jest.fn(async (next: typeof world) => next), select: jest.fn(async () => world), import: jest.fn(async () => world), recover: jest.fn(async () => world), ...overrides,
   };
   const store = createGameStore({ repository: async () => repository, date: () => date, id: () => 'life_new' });
   return { store, repository };

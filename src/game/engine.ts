@@ -1,0 +1,137 @@
+import { ageOn, fullName, validateWorld, World } from './model';
+import { monthFrom } from './calendar';
+import { bindEvent, eligibleTemplates } from './content/events';
+import { randomInteger } from './random';
+import { Effect, effectRowSchema } from './runtime';
+import { z } from 'zod';
+import { formatMoney } from './money';
+
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string };
+export class IneligibleAction extends Error {}
+const clamp = (value: number) => Math.min(100, Math.max(0, value));
+const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
+
+function journal(world: World, id: string, text: string, category: string) {
+  world.journal.push({ id, date: { ...world.date }, personId: world.activePersonId, text, category });
+}
+function roll(world: World, stream: keyof World['random'], min: number, max: number) {
+  const result = randomInteger(world.random[stream], min, max);
+  world.random[stream] = result.state;
+  return result.value;
+}
+function death(world: World, personId: string, cause: string) {
+  const person = world.people[personId];
+  person.died = { ...world.date }; person.causeOfDeath = cause;
+  if (personId === world.activePersonId) {
+    journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
+    world.annual = null; world.pending = null;
+  } else {
+    const related = world.relationships.some(relation => (relation.from === personId && relation.to === world.activePersonId) || (relation.to === personId && relation.from === world.activePersonId));
+    if (related) journal(world, 'death_' + personId, fullName(person) + ' died at age ' + ageOn(person, world.date) + '.', 'family');
+  }
+}
+
+/** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
+function processMonth(world: World) {
+  for (const person of Object.values(world.people)) {
+    if (person.died) continue;
+    const age = ageOn(person, world.date);
+    if (age >= 45 && roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 12) === 1) person.stats.health = clamp(person.stats.health - (age >= 80 ? 2 : 1));
+    const base = age >= 115 ? 6500 : age >= 105 ? 1400 : age >= 95 ? 400 : age >= 85 ? 140 : age >= 75 ? 50 : age >= 65 ? 15 : age >= 45 ? 2 : 0;
+    const threshold = base + (person.stats.health < 20 ? (20 - person.stats.health) * 30 : 0);
+    if (roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 10000) <= threshold) {
+      death(world, person.id, person.stats.health < 20 ? 'declining health' : 'natural causes');
+      if (world.people[world.activePersonId].died) return;
+    }
+  }
+}
+
+function finishYear(world: World) {
+  const frame = world.annual!;
+  const player = world.people[world.activePersonId];
+  const age = ageOn(player, world.date);
+  player.stats.energy = clamp(player.stats.energy + 20);
+  player.stats.stress = clamp(player.stats.stress - 3);
+  const eligible = eligibleTemplates(world);
+  const birthday = eligible.find(template => template.id === 'first-cake');
+  // Introductory year is guaranteed; later years leave room for quiet years.
+  const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
+  if (shouldOffer && eligible.length) {
+    const template = age === 1 && birthday ? birthday : eligible[roll(world, 'events', 0, eligible.length - 1)];
+    world.pending = bindEvent(world, template);
+    world.eventHistory.push({ templateId: template.id, year: world.date.year });
+  } else {
+    const text = age < 3 ? 'I grew a little more confident in a world full of things to investigate.' : age < 18 ? 'Another birthday arrived. Some days felt much bigger than others.' : 'Another year passed. The ordinary days were part of my life too.';
+    journal(world, frame.id + '_quiet', text, 'year');
+    world.pending = { kind: 'result', id: frame.id + '_summary', title: 'Age ' + age, body: text, illustration: 'journal', effects: [] };
+  }
+}
+
+function continueYear(world: World) {
+  while (world.annual && world.annual.monthsProcessed < 12 && !world.pending) {
+    const frame = world.annual;
+    frame.monthsProcessed++;
+    world.date = monthFrom(frame.startDate, frame.monthsProcessed, world.calendarAnchorDay);
+    processMonth(world);
+  }
+  if (world.annual && !world.pending) finishYear(world);
+}
+
+function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
+  return effects.map((effect, index) => {
+    let label: string, value: string, delta: number;
+    if (effect.kind === 'stat') {
+      const stats = world.people[effect.personId].stats;
+      const before = stats[effect.stat];
+      stats[effect.stat] = clamp(before + effect.delta);
+      delta = stats[effect.stat] - before; label = labels[effect.stat]; value = (delta >= 0 ? '+' : '') + delta + '%';
+      // Reducing stress is beneficial, unlike reducing health.
+      if (effect.stat === 'stress') delta = -delta;
+    } else if (effect.kind === 'relationship') {
+      const relation = world.relationships.find(r => r.id === effect.relationshipId);
+      if (!relation) throw new IneligibleAction('That relationship no longer exists');
+      const before = relation.strength; relation.strength = clamp(before + effect.delta);
+      delta = relation.strength - before; label = 'Relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
+    } else {
+      const from = world.accounts.find(account => account.id === effect.fromAccountId);
+      const to = world.accounts.find(account => account.id === effect.toAccountId);
+      if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new IneligibleAction('That transfer is no longer available');
+      from.cash -= effect.minor; to.cash += effect.minor;
+      delta = to.ownerId === world.activePersonId ? 1 : -1;
+      label = 'Bank balance'; value = (delta > 0 ? '+' : '−') + formatMoney({ minor: effect.minor, currency: from.currency });
+    }
+    return { id: 'effect_' + index, label, value, tone: delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'neutral' };
+  });
+}
+
+/** Pure: consumes only persisted random streams and never mutates its input. */
+export function resolveCommand(previous: World, command: GameCommand): World {
+  // Zod returns a deep copy while validating, including bigint values.
+  const world = validateWorld(previous);
+  const player = world.people[world.activePersonId];
+  if (player.died) throw new IneligibleAction('This life has ended');
+  if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
+  if (command.type === 'advance') {
+    if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
+    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0 };
+    continueYear(world);
+  } else if (command.type === 'resume') {
+    if (!world.annual || world.pending) throw new IneligibleAction('There is no interrupted year to resume');
+    continueYear(world);
+  } else if (command.type === 'choose') {
+    const event = world.pending;
+    if (event?.kind !== 'decision' || event.id !== command.eventId) throw new IneligibleAction('That decision is no longer open');
+    const choice = event.choices.find(item => item.id === command.choiceId);
+    if (!choice) throw new IneligibleAction('Choose an available option');
+    const effects = applyEffects(world, choice.effects);
+    journal(world, event.id + '_choice', choice.journal, 'event');
+    world.pending = { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects };
+  } else {
+    if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
+    world.pending = null;
+    if (world.annual?.monthsProcessed === 12) world.annual = null;
+    else if (world.annual) continueYear(world);
+  }
+  world.revision++;
+  return validateWorld(world);
+}

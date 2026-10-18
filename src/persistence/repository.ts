@@ -14,14 +14,17 @@ export type LifeSummary = { id: string; name: string; revision: number; updatedA
 export class SaveConflict extends Error {
   constructor() { super('This life changed. Reload it before trying that action again.'); }
 }
+export class SaveCorrupt extends Error {
+  constructor(public readonly lifeId: string) { super('This life could not be read. You can restore its previous checkpoint from Saved Lives.'); }
+}
 
 export class SaveRepository {
   constructor(private db: SqlDatabase, private now: () => string = () => new Date().toISOString()) {}
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    if (!version || version.user_version > 1) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 1) return;
+    if (!version || version.user_version > 2) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 2) return;
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -38,7 +41,12 @@ export class SaveRepository {
         snapshot_id TEXT NOT NULL, payload TEXT NOT NULL,
         PRIMARY KEY(life_id, snapshot_id)
       )`,
-      'PRAGMA user_version = 1',
+      `CREATE TABLE IF NOT EXISTS backups (
+        life_id TEXT PRIMARY KEY REFERENCES lives(id) ON DELETE CASCADE,
+        revision INTEGER NOT NULL, payload TEXT NOT NULL
+      )`,
+      'INSERT OR IGNORE INTO backups(life_id,revision,payload) SELECT id,revision,payload FROM lives',
+      'PRAGMA user_version = 2',
     ];
     await this.db.transaction(async tx => { for (const statement of statements) await tx.run(statement); });
   }
@@ -51,9 +59,11 @@ export class SaveRepository {
   async load(id: string): Promise<World> {
     const row = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [id]);
     if (!row) throw new Error('Saved life not found');
-    const world = decodeWorld(row.payload);
-    if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
-    return world;
+    try {
+      const world = decodeWorld(row.payload);
+      if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
+      return world;
+    } catch { throw new SaveCorrupt(id); }
   }
 
   async active(): Promise<World | null> {
@@ -66,6 +76,7 @@ export class SaveRepository {
     const summary = { id: world.id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: this.now() };
     await this.db.transaction(async tx => {
       await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [summary.id, summary.name, summary.revision, summary.updatedAt, payload]);
+      await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [world.id, world.revision, payload]);
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [world.id]);
     });
     return summary;
@@ -85,8 +96,10 @@ export class SaveRepository {
     await this.db.transaction(async tx => {
       const receipt = await tx.get<{ revision: number }>('SELECT revision FROM receipts WHERE life_id=? AND command_id=?', [world.id, commandId]);
       if (receipt) { duplicate = true; return; }
-      const current = await tx.get<{ revision: number }>('SELECT revision FROM lives WHERE id=?', [world.id]);
+      const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
       if (!current || current.revision !== expectedRevision) throw new SaveConflict();
+      decodeWorld(current.payload);
+      await tx.run('UPDATE backups SET revision=?,payload=? WHERE life_id=?', [current.revision, current.payload, world.id]);
       await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
       await tx.run('INSERT INTO receipts(life_id,command_id,revision) VALUES(?,?,?)', [world.id, commandId, world.revision]);
     });
@@ -97,6 +110,25 @@ export class SaveRepository {
     return encodeWorld(await this.load(id));
   }
 
+  async recoveryPreview(id: string): Promise<World> {
+    const backup = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM backups WHERE life_id=?', [id]);
+    if (!backup) throw new Error('No previous checkpoint is available');
+    const world = decodeWorld(backup.payload);
+    if (world.id !== id || world.revision !== backup.revision) throw new Error('Previous checkpoint metadata is inconsistent');
+    return world;
+  }
+
+  /** Explicitly requested recovery, never a silent reset during a normal load. */
+  async recover(id: string): Promise<World> {
+    const world = await this.recoveryPreview(id);
+    await this.db.transaction(async tx => {
+      await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), encodeWorld(world), id]);
+      await tx.run('DELETE FROM receipts WHERE life_id=?', [id]);
+      await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [id]);
+    });
+    return world;
+  }
+
   async import(text: string, replace = false): Promise<World> {
     const world = decodeWorld(text);
     const existing = await this.db.get<{ id: string }>('SELECT id FROM lives WHERE id=?', [world.id]);
@@ -104,6 +136,12 @@ export class SaveRepository {
     if (!existing) { await this.create(world); return world; }
     const payload = encodeWorld(world);
     await this.db.transaction(async tx => {
+      const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
+      if (current) {
+        let valid = false;
+        try { decodeWorld(current.payload); valid = true; } catch { /* Keep the existing recovery copy. */ }
+        if (valid) await tx.run('UPDATE backups SET revision=?,payload=? WHERE life_id=?', [current.revision, current.payload, world.id]);
+      }
       await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
       await tx.run('DELETE FROM receipts WHERE life_id=?', [world.id]);
       await tx.run('DELETE FROM snapshots WHERE life_id=?', [world.id]);

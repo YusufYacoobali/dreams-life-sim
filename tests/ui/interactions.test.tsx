@@ -49,6 +49,14 @@ test('results show committed values without recalculating money from narrative',
   expect(choose).toHaveBeenCalledWith('continue');
 });
 
+test('a failed save is visible inside a required decision and its choices remain retryable', () => {
+  const choose = jest.fn();
+  frame(<EventModal event={{ id: 'retry', kind: 'decision', title: 'Decision', body: 'Choose.', choices: [{ id: 'a', label: 'Try this' }, { id: 'b', label: 'Try that' }] }} error="Could not save. Please try again." onChoose={choose} />);
+  expect(screen.getByRole('alert')).toHaveTextContent(/Could not save/);
+  fireEvent.press(screen.getByRole('button', { name: 'Try this' }));
+  expect(choose).toHaveBeenCalledWith('a');
+});
+
 test('stat accessibility values remain valid even for corrupt presentation input', () => {
   frame(<StatBar label="Health" value={150} color="green" />);
   expect(screen.getByRole('progressbar', { name: 'Health' })).toHaveAccessibilityValue({ min: 0, max: 100, now: 100 });

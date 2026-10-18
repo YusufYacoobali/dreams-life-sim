@@ -5,15 +5,23 @@ import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName } from '../../src/game/model';
 import { countries } from '../../src/game/countries';
 import { formatMoney } from '../../src/game/money';
-import { Body, Card, Heading, Page, Portrait, StatBar } from '../../src/ui/components';
+import { Body, Button, Card, Heading, Page, Portrait, StatBar } from '../../src/ui/components';
 import { useColors } from '../../src/ui/theme';
 
 export default function Life() {
   const world = useGame(s => s.world)!;
   const c = useColors();
+  const dispatch = useGame(s => s.dispatch);
+  const busy = useGame(s => s.busy);
+  const error = useGame(s => s.error);
   const player = world.people[world.activePersonId];
   const account = world.accounts.find(a => a.ownerId === player.id)!;
   const entries = world.journal.filter(entry => entry.personId === player.id);
+  const years = new Map<number, typeof entries>();
+  for (const entry of entries) {
+    const age = ageOn({ ...player, died: null }, entry.date);
+    years.set(age, [...(years.get(age) ?? []), entry]);
+  }
   return <Page>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingVertical: 12 }}>
       <Portrait name={fullName(player)} />
@@ -27,9 +35,8 @@ export default function Life() {
       <StatBar label="Looks" value={player.stats.looks} color={c.purple} />
       <StatBar label="Respect" value={player.stats.respect} color={c.amber} />
     </View>
-    <Card>
-      <Heading size={20}>Age: {ageOn(player, world.date)}</Heading>
-      {entries.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}
-    </Card>
+    {error && <Body>{error}</Body>}
+    <Button label={world.annual ? 'Continue This Year' : 'Age Up'} tone="positive" busy={busy} disabled={!!world.pending} onPress={() => { void dispatch({ type: world.annual ? 'resume' : 'advance' }); }} />
+    <Card>{[...years.entries()].reverse().map(([age, facts]) => <View key={age} style={{ gap: 8 }}><Heading size={20}>Age: {age}</Heading>{facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>)}</Card>
   </Page>;
 }

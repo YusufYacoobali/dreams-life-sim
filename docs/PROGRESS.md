@@ -10,7 +10,7 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
-## Current milestone: Phase 1 technical and visual foundation
+## Current milestone: core life progression and persistent event flow
 
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.
 
@@ -18,7 +18,7 @@ The user explicitly resolved the Premium/cloud reference in favour of a free, of
 
 The reconciled inventory contains 79 canonical screen definitions. Added requirements include a full-screen newborn introduction, wills, family tree, custody/date selection, detailed property sale/mortgage actions, health subviews, criminal record/prison actions, black market, and Royalty/Astronaut/Military career paths. There are now eleven special paths and an initial 256-template event allocation.
 
-Next: implement, test and commit the technical/visual foundation, then continue through every remaining phase. Running-app fidelity and device checks remain unverified until real captures/tests exist.
+The first birth-to-death engine is implemented. Continue through every remaining phase: this core loop is not the complete game. Running-app fidelity and device checks remain unverified until real captures/tests exist.
 
 ## Phase status
 
@@ -27,7 +27,7 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | 0 — Planning and reconciliation | Complete | Overall direction approved; all 27 images reviewed; conflicts resolved, including confirmed free/offline scope |
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
 | 2 — Artwork and character creation | In progress | Twelve original generated illustrations registered; editable identity/country/city creation and persistent family; portrait layers/customisation/age continuity pending |
-| 3 — Core playable life | In progress | New-life/birth/local restoration implemented; annual engine, Age Up, events and death pending |
+| 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
 | 5 — Expanded gameplay | Not started | Health, crime/legal/prison, fame/social, companies, special careers, travel, pets, and hobbies remain planned |
 | 6 — Content, depth, legacy, Time Machine | Not started | Nine prose event examples are planning samples; no shipped templates, coverage run, legacy, or restore system |
@@ -39,9 +39,9 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | --- | --- | --- |
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | Partial: editable identity and deterministic random creation, actual parent links; DNA stored, initials remain temporary | Twelve-country creation tests pass; generated portraits and ageing pending |
-| Seeded engine, resumable annual progression, stats and invariants | Partial: versioned PRNG streams only; annual engine not implemented | Fixed-vector/resume/stream-isolation checks pass |
-| Context-aware events, decisions, delayed consequences and journal | No | No |
-| SQLite saves, migrations, recovery and import/export | Partial: transactional create/load/select/commit, validated codec and repository import/export; import/export UI, recovery and version migration pending | Real SQLite tests cover exact large money, failed-write rollback, idempotency, stale revisions, corrupt imports and newer-version refusal |
+| Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
+| Context-aware events, decisions, delayed consequences and journal | Partial: 22 original age/context templates, living-parent binding, five-year cooldown, committed results and journal; delayed consequences pending | Decision/result round-trip and eligibility tests pass; no system-event coverage claim |
+| SQLite saves, migrations, recovery and import/export | Partial: transactional commands, schema migration, previous-checkpoint recovery, repository and native file import/export surfaces | Real SQLite migration/recovery/failure/reload tests pass; file picker/share require device validation |
 | Education, exams, admissions, tuition, scholarships and loans | No | No |
 | Jobs, pay, performance, promotion, dismissal and retirement | No | No |
 | Dating, marriage, children, divorce, custody and persistent NPCs | No | No |
@@ -54,10 +54,10 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Travel, emigration, work/study abroad, pets, hobbies and entertainment | No | No |
 | Country-specific rules and all proposed launch currencies | No | No |
 | Achievements, challenges, heirlooms and statistics | No | No |
-| Death, factual life summary, estate and existing-child legacy | No | No |
+| Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death and actual journal/cash/stat summary; estate/legacy pending | Terminal-state engine tests pass; no claim for career/property/child summary fields before those systems exist |
 | Historical snapshots and Time Machine branches | No | No |
 | Custom generated artwork and portrait continuity | Partial: twelve original generated illustrations bundled in a typed atlas registry | Original source inspected; actual-size device review and portraits pending |
-| 250+ distinct high-quality approved event templates | 0 shipped; 9 planning samples | No content-library or gameplay verification |
+| 250+ distinct high-quality approved event templates | 22 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
 | Accessibility, performance, native-device UI and release builds | No game implementation | No |
 
 ## Verification record
@@ -68,11 +68,11 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
-| Foundation tests and strict TypeScript | Passed | 35 tests across five suites; includes creation in all twelve countries, real SQLite and failed/deferred save coordinator checks |
+| Foundation/core tests and strict TypeScript | Passed | 47 tests across six suites, including 120 complete seeded core lives, actual v1 fixture migration, durable decision/result reload and visible save-failure retry |
 | Routed native production bundles | Passed | Android and iOS Hermes exports from expo-router entry, including generated artwork; no device execution established |
-| Full gameplay/integration/life scenarios | Unrun | Annual engine and gameplay systems are not implemented; primitives do not validate full lives |
+| Full gameplay/integration/life scenarios | Partial | 120 core birth-to-death runs pass; education/work/family/economy/legal/legacy scenario matrix is still unimplemented and unrun |
 | Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
-| Generated artwork / screen fidelity | Unrun | Reference review is complete; no generated game art or running-app visual acceptance yet |
+| Generated artwork / screen fidelity | Partial | Twelve original icons and dedicated memorial generated/source-reviewed; portrait layer experiment generated but not integrated/accepted; running-app visual acceptance pending |
 | iOS/Android device interactions | Unrun | Appropriate native execution still needed later; bundle generation is insufficient |
 
 ## Change record
@@ -98,3 +98,11 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 - Added a serialized store that publishes only committed state and permits retry after failure; tests cover duplicate submissions and overlapping initial loads.
 - Generated and inspected an original twelve-icon atlas with the image tool; bundled it with a typed clipping registry and provenance. Portraits and device visual review remain pending.
 - Verified strict typing, 35 tests and Android/iOS production Hermes exports. Full gameplay, migration/recovery, import/export surfaces and native-device validation remain pending.
+
+### Core submilestone 3A
+
+- Added a pure deterministic command resolver, calendar-month annual frame, explicit interrupted-year resume, seeded NPC/player ageing and mortality, terminal death, five-year event cooldowns and 22 original age-appropriate situations. Effects report actual bounded changes. The broader life systems and delayed consequences remain pending.
+- Decisions store bound identities, exact choices and authored consequences. Results are persisted separately before display; acknowledging them cannot apply their effects again. Native modals expose save errors and permit retry.
+- Added the dedicated dark full-screen death route, original generated memorial, factual journal summary and new-life flow. The child continuation button explains its unavailable state; actual family formation/estate/legacy are later work.
+- Added save/DB version migration, a real v1 fixture generated from commit 44d8bc3, last-valid checkpoint preservation, explicit recovery preview/confirmation and native file import/export surfaces. File-picker/share execution remains unverified on devices.
+- Verified 120 full core lives plus strict types, deterministic/round-trip/gating/leap-day tests, real SQLite migration/recovery/reload tests and current Android/iOS Hermes exports. A 120-life sweep caught and led to correction of leap-day parent creation. This is not validation of the complete game or all 256 planned templates.
