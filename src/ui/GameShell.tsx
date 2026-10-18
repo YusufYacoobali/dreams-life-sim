@@ -18,11 +18,23 @@ export function GameShell({
   renderIcon?: (tab: TabKey, color: string) => React.ReactNode;
 }>) {
   const c = useColors();
-  const insets = useSafeAreaInsets();
   return (
     <View style={[styles.shell, { backgroundColor: c.background }]}>
       <View style={styles.screen}>{children}</View>
-      <View accessibilityRole="tablist" style={[styles.tabs, { paddingBottom: insets.bottom, backgroundColor: c.surface, borderTopColor: c.line }]}>
+      <BottomNavigation activeTab={activeTab} onSelectTab={onSelectTab} renderIcon={renderIcon} />
+    </View>
+  );
+}
+
+export function BottomNavigation({
+  activeTab, onSelectTab, renderIcon,
+}: {
+  activeTab: TabKey; onSelectTab: (tab: TabKey) => void;
+  renderIcon?: (tab: TabKey, color: string) => React.ReactNode;
+}) {
+  const c = useColors();
+  const insets = useSafeAreaInsets();
+  return <View accessibilityRole="tablist" style={[styles.tabs, { paddingBottom: insets.bottom, backgroundColor: c.surface, borderTopColor: c.line }]}>
         {tabs.map(tab => {
           const color = activeTab === tab.id ? c.blue : c.muted;
           return <Pressable
@@ -35,9 +47,7 @@ export function GameShell({
             <Text style={{ fontSize: 11, color, fontWeight: activeTab === tab.id ? '600' : '400' }}>{tab.label}</Text>
           </Pressable>;
         })}
-      </View>
-    </View>
-  );
+      </View>;
 }
 
 const styles = StyleSheet.create({

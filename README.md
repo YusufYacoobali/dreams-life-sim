@@ -1,34 +1,22 @@
-# Dreams Life Sim
+# Dreams: Life Simulator
 
-Expo React Native project with TypeScript for iOS and Android. Only the official
-blank starter is present; game development has not started.
+An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. The complete game remains the target; the current app supports creation, birth, saved-life selection and views of real identity, family, cash and stats. Annual simulation and feature gameplay are the next milestones.
 
-## Run
-
-Dependencies are installed. From this directory:
+The game is free and uses local saves. No account, subscription or cloud service is planned.
 
 ```sh
+npm ci
 npm start
 ```
 
-Open the project in Expo Go on your phone using the QR code. Keep the phone and
-computer on the same network. This project uses Expo SDK 57.
-
-`npm run android` opens a configured Android emulator. `npm run ios` opens an
-iOS simulator on macOS; on Windows, use Expo Go on a physical iPhone.
-
-## Check and reinstall
+Use an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. This cloud workspace has verified native bundle generation, not device execution.
 
 ```sh
 npm run typecheck
-npm ci
+npm test
+npx expo export --platform all
 ```
 
-TypeScript strict mode is enabled. The npm lockfile pins the dependencies.
-The existing `design/` directory is available for design material.
+Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. See [progress and verification](docs/PROGRESS.md), the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for implemented scope, remaining work and visual acceptance limits.
 
-## Dependency audit
-
-At setup, `npm audit` reports 22 upstream dependency advisories (7 moderate and
-15 high). Its suggested forced fixes include incompatible Expo and React Native
-downgrades. The Expo-compatible dependency versions have been retained.
+Generated illustrations are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). Portraits and the full artwork family are still pending.

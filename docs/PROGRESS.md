@@ -25,9 +25,9 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Phase | Status | Evidence / remaining work |
 | --- | --- | --- |
 | 0 — Planning and reconciliation | Complete | Overall direction approved; all 27 images reviewed; conflicts resolved, including confirmed free/offline scope |
-| 1 — Technical and visual foundation | In progress | Shared theme, native UI primitives, five modal structures and four-tab shell implemented/tested; app routing/dashboard composition still pending |
-| 2 — Artwork and character creation | Not started | Image tool available; zero generated game assets or character-creation functionality |
-| 3 — Core playable life | Not started | No engine, Age Up, events, saves, playable death, or new-life flow |
+| 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
+| 2 — Artwork and character creation | In progress | Twelve original generated illustrations registered; editable identity/country/city creation and persistent family; portrait layers/customisation/age continuity pending |
+| 3 — Core playable life | In progress | New-life/birth/local restoration implemented; annual engine, Age Up, events and death pending |
 | 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
 | 5 — Expanded gameplay | Not started | Health, crime/legal/prison, fame/social, companies, special careers, travel, pets, and hobbies remain planned |
 | 6 — Content, depth, legacy, Time Machine | Not started | Nine prose event examples are planning samples; no shipped templates, coverage run, legacy, or restore system |
@@ -37,11 +37,11 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 
 | Feature family | Implemented | Verified |
 | --- | --- | --- |
-| Four-tab UI, Life dashboard, shared components and modal flows | Partial: shared components, shell and modal structures; dashboard/router not wired yet | Six native component interaction tests pass; no device fidelity claim |
-| Identity, custom/random creation, family, appearance and ageing | No | No |
+| Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
+| Identity, custom/random creation, family, appearance and ageing | Partial: editable identity and deterministic random creation, actual parent links; DNA stored, initials remain temporary | Twelve-country creation tests pass; generated portraits and ageing pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: versioned PRNG streams only; annual engine not implemented | Fixed-vector/resume/stream-isolation checks pass |
 | Context-aware events, decisions, delayed consequences and journal | No | No |
-| SQLite saves, migrations, recovery and import/export | No | No |
+| SQLite saves, migrations, recovery and import/export | Partial: transactional create/load/select/commit, validated codec and repository import/export; import/export UI, recovery and version migration pending | Real SQLite tests cover exact large money, failed-write rollback, idempotency, stale revisions, corrupt imports and newer-version refusal |
 | Education, exams, admissions, tuition, scholarships and loans | No | No |
 | Jobs, pay, performance, promotion, dismissal and retirement | No | No |
 | Dating, marriage, children, divorce, custody and persistent NPCs | No | No |
@@ -56,7 +56,7 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | No | No |
 | Historical snapshots and Time Machine branches | No | No |
-| Custom generated artwork and portrait continuity | No | No |
+| Custom generated artwork and portrait continuity | Partial: twelve original generated illustrations bundled in a typed atlas registry | Original source inspected; actual-size device review and portraits pending |
 | 250+ distinct high-quality approved event templates | 0 shipped; 9 planning samples | No content-library or gameplay verification |
 | Accessibility, performance, native-device UI and release builds | No game implementation | No |
 
@@ -68,7 +68,8 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 | Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
-| Foundation tests and strict TypeScript | Passed | 13 tests across two suites: six native UI interaction/accessibility tests and seven deterministic/money tests; production and test types check |
+| Foundation tests and strict TypeScript | Passed | 35 tests across five suites; includes creation in all twelve countries, real SQLite and failed/deferred save coordinator checks |
+| Routed native production bundles | Passed | Android and iOS Hermes exports from expo-router entry, including generated artwork; no device execution established |
 | Full gameplay/integration/life scenarios | Unrun | Annual engine and gameplay systems are not implemented; primitives do not validate full lives |
 | Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
 | Generated artwork / screen fidelity | Unrun | Reference review is complete; no generated game art or running-app visual acceptance yet |
@@ -80,7 +81,7 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 - Recorded the confirmed adult audience and broader launch direction; expanded the proposal to twelve countries.
 - Recorded the user's conditional approval and full-game continuation requirement.
 - Added this progress ledger; corrected the stale-checkout diagnosis, merged the newer reference commits, reviewed all 27 files, and recorded the user's free/offline decision.
-- Application source, dependencies, and lockfile remain unchanged. No implementation milestone is claimed complete.
+- Implemented the foundation submilestones below; the complete game remains unfinished.
 
 ### Foundation submilestone 1A
 
@@ -89,3 +90,11 @@ Next: implement, test and commit the technical/visual foundation, then continue 
 - Added versioned deterministic random streams and bigint money/FX primitives. No game economy is claimed implemented.
 - Verified strict application/test typing, 13 passing interaction/domain tests, and Expo bundled-version compatibility.
 - Kept the working starter entry while building these reusable modules; the next submilestone connects actual life creation/save state and routing.
+
+### Foundation submilestone 1B
+
+- Replaced the starter entry with Expo Router welcome, editable new-life form, one-time birth introduction, four persistent tabs and nested factual profile/family/health views. No placeholder purchase, treatment or Age Up action is exposed.
+- Added validated normalized identities/parent links, deterministic creation across twelve country identities and nine currencies, exact bigint save codec, SQLite schema initialization, atomic commands/receipts and saved-life selection. These country identities are not complete country rule packs.
+- Added a serialized store that publishes only committed state and permits retry after failure; tests cover duplicate submissions and overlapping initial loads.
+- Generated and inspected an original twelve-icon atlas with the image tool; bundled it with a typed clipping registry and provenance. Portraits and device visual review remain pending.
+- Verified strict typing, 35 tests and Android/iOS production Hermes exports. Full gameplay, migration/recovery, import/export surfaces and native-device validation remain pending.
