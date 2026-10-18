@@ -13,6 +13,7 @@ import { moveHousehold, ownHousehold } from './households';
 import { assetPrice, resolveAssets } from './assets';
 import { exchangeQuote } from './finance';
 import { settleBackground } from './npcBudget';
+import { hospitalized } from './healthSchemas';
 
 export const socialCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-people'), purpose: z.enum(['friend', 'dating']), gender: z.enum(['any', ...genders]) }),
@@ -134,7 +135,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
       body = accepted ? target.firstName + ' seemed pleased that you noticed.' : target.firstName + ' wondered what you wanted. You did not push it.'; journal = accepted ? 'I told ' + target.firstName + ' something I appreciate about them.' : 'My compliment to ' + target.firstName + ' did not land as intended.';
     } else if (command.action === 'spend-time') {
       if (age >= 18) charge(world, dateBudget(world) / 2n, 'social', 'An afternoon with ' + target.firstName);
-      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = age < 12 ? 'You and ' + target.firstName + ' made a small adventure out of an ordinary afternoon.' : 'You and ' + target.firstName + ' spent an unhurried afternoon away from your phones.'; journal = 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
+      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = hospitalized(world, player) || hospitalized(world, target) ? 'You spent time together at the hospital. An ordinary conversation made the day feel less clinical.' : age < 12 ? 'You and ' + target.firstName + ' made a small adventure out of an ordinary afternoon.' : 'You and ' + target.firstName + ' spent an unhurried afternoon away from your phones.'; journal = 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
     } else if (command.action === 'argue') {
       delta = -draw(world, 'outcomes', 8, 14); relation.trust = bounded(relation.trust - 5); relation.memories.push('argument:' + world.date.year);
       body = 'Both of you thought of better things to say after the conversation ended.'; journal = 'I argued with ' + target.firstName + ' and left things unsettled.'; effects.push(...statChanges(player, { happiness: -3, stress: 3 }));
@@ -164,6 +165,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   }
   const reason = romanceReason(world, target); if (reason) throw new IneligibleAction(reason);
   if (command.type === 'ask-date') {
+    if (hospitalized(world, player) || hospitalized(world, target)) throw new IneligibleAction('Arrange a date after the hospital stay');
     settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
     counter(world, target.id, 'date'); const cost = dateBudget(world); if (accountFor(world).cash < cost) throw new IneligibleAction('Your balance cannot cover the date');
     const chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));

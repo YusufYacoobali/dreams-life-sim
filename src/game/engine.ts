@@ -17,9 +17,11 @@ import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
+import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
+import { conditions } from './content/health';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -35,6 +37,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  person.health.hospitalizedUntil = null;
   recordFamilyDeath(world, personId);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
@@ -52,6 +55,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
+  healthMonth(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
   householdMonth(world);
   const actors = financialActors(world);
@@ -61,6 +65,7 @@ function processMonth(world: World) {
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
   familyFinanceMonth(world);
+  healthFinanceMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   for (const person of Object.values(world.people)) {
@@ -68,9 +73,11 @@ function processMonth(world: World) {
     const age = ageOn(person, world.date);
     if (age >= 45 && roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 12) === 1) person.stats.health = clamp(person.stats.health - (age >= 80 ? 2 : 1));
     const base = age >= 115 ? 6500 : age >= 105 ? 1400 : age >= 95 ? 400 : age >= 85 ? 140 : age >= 75 ? 50 : age >= 65 ? 15 : age >= 45 ? 2 : 0;
-    const threshold = base + (person.stats.health < 20 ? (20 - person.stats.health) * 30 : 0);
-    if (roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 10000) <= threshold) {
-      recordDeath(world, person.id, person.stats.health < 20 ? 'declining health' : 'natural causes');
+    const illness = illnessMortality(person), threshold = base + illness.bps + (person.stats.health < 20 ? (20 - person.stats.health) * 30 : 0);
+    if (person.id === world.activePersonId && world.pending?.kind === 'decision' && world.pending.templateId === 'medical-emergency') continue;
+    const mortalityRoll = roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 10000);
+    if (person.stats.health === 0 || mortalityRoll <= threshold) {
+      recordDeath(world, person.id, illness.cause && (mortalityRoll <= illness.bps || person.stats.health < 20) ? conditions[illness.cause].name : person.stats.health < 20 ? 'declining health' : 'natural causes');
       if (world.people[world.activePersonId].died) return;
     }
   }
@@ -114,6 +121,7 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'emergency-care') return emergencyCare(world, effect.personId, effect.conditionId, effect.accepted, effect.quotedCost);
     if (effect.kind === 'connect-person') return connectPerson(world, effect.personId);
     if (effect.kind === 'asset-sale') {
       const asset = ownedAsset(world, effect.assetId);
@@ -177,7 +185,8 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     if (!choice) throw new IneligibleAction('Choose an available option');
     const effects = applyEffects(world, choice.effects);
     journal(world, event.id + '_choice', choice.journal, 'event');
-    world.pending = { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects };
+    if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
+    if (!player.died) world.pending = { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects };
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null;
@@ -193,6 +202,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const social = socialCommandSchema.safeParse(command);
     const family = familyCommandSchema.safeParse(command);
     const estate = estateCommandSchema.safeParse(command);
+    const health = healthCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -201,6 +211,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (social.success) resolveSocial(world, social.data);
     else if (family.success) resolveFamily(world, family.data);
     else if (estate.success) resolveEstate(world, estate.data);
+    else if (health.success) { resolveHealth(world, health.data); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

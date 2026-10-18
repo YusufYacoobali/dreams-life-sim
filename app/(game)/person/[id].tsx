@@ -31,6 +31,7 @@ export default function PersonProfile() {
       <Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
       <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
       <Body>{person.traits.join(', ')}</Body>
+      <StatBar label="Health" value={person.stats.health} color={c.teal} />
       {relation && <><Body>{relationLabel(world, relation)}</Body><StatBar label="Relationship" value={relation.strength} color={c.green} /><StatBar label="Trust" value={relation.trust} color={c.blue} /></>}
       <Body>{person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.finance.pensionAnnual > 0n ? 'Retired' : person.education.school ?? 'No current occupation'}</Body>
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}

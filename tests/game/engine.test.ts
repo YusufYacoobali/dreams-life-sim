@@ -7,8 +7,13 @@ function born(seed = 42): World {
   return { ...createLife('life_engine', seed, randomCreation(seed), { year: 2024, month: 2, day: 29 }), birthAcknowledged: true };
 }
 function finishPending(world: World): World {
-  if (world.pending?.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id });
-  if (world.pending?.kind === 'result') world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
+  let guard = 0;
+  while ((world.pending || world.annual) && guard++ < 100) {
+    if (world.pending?.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id });
+    else if (world.pending) world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
+    else world = resolveCommand(world, { type: 'resume' });
+  }
+  if (guard >= 100) throw new Error('Annual progression did not close');
   return world;
 }
 

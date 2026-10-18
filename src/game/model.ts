@@ -10,6 +10,7 @@ import { assetCatalog } from './content/assets';
 import { biologySchema, custodySchema, genders, householdSchema, marriageSchema, newFamilyPerson, pregnancySchema, relationshipSchema } from './systems/familySchemas';
 import { netWorth } from './valuation';
 import { annualSchema, estateSchema, willSchema } from './systems/estateSchemas';
+import { healthSchema, newHealth } from './systems/healthSchemas';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -29,11 +30,12 @@ export const personSchema = z.object({
   traits: z.array(z.enum(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'])).max(3),
   education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
   biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),
+  health: healthSchema,
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(7), engineVersion: z.literal(6), contentVersion: z.literal(1),
+  schemaVersion: z.literal(8), engineVersion: z.literal(7), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -87,6 +89,16 @@ export function validateWorld(value: unknown): World {
     if (person.died && (compareDates(person.died, person.born) < 0 || compareDates(person.died, world.date) > 0)) throw new Error('Invalid death date');
     if (!!person.died !== !!person.causeOfDeath) throw new Error('Inconsistent death record');
     if ((person.householdId && !householdMembers.has(id)) || (!person.householdId && householdMembers.has(id)) || new Set(person.attractedTo).size !== person.attractedTo.length || person.lastEconomicMonth > world.date.year * 12 + world.date.month - 1) throw new Error('Invalid personal family state');
+    if (person.health.lastMonth > world.date.year * 12 + world.date.month - 1 || (person.health.providerId && (!world.people[person.health.providerId] || person.health.providerId === id)) || new Set(person.health.familyRisks).size !== person.health.familyRisks.length || new Set(person.health.vaccinations.map(item => item.id)).size !== person.health.vaccinations.length) throw new Error('Invalid personal health state');
+    const conditionIds = new Set<string>(), medicalIds = new Set<string>();
+    for (const condition of person.health.conditions) {
+      if (conditionIds.has(condition.id) || compareDates(condition.onset, person.born) < 0 || compareDates(condition.onset, world.date) > 0 || (!!condition.resolved !== (condition.status === 'recovered')) || (condition.status === 'recovered' && (condition.severity !== 0 || condition.treatment)) || condition.status === 'controlled' && !condition.treatment || (condition.resolved && (compareDates(condition.resolved, condition.onset) < 0 || compareDates(condition.resolved, world.date) > 0)) || (condition.diagnosed && (compareDates(condition.diagnosed, condition.onset) < 0 || compareDates(condition.diagnosed, world.date) > 0)) || (condition.treatment && (!condition.diagnosed || compareDates(condition.treatment.started, condition.onset) < 0 || compareDates(condition.treatment.started, world.date) > 0 || condition.treatment.lastPaymentMonth > world.date.year * 12 + world.date.month - 1)) || condition.lastEmergencyYear !== null && condition.lastEmergencyYear > world.date.year) throw new Error('Invalid condition history');
+      conditionIds.add(condition.id);
+    }
+    for (const record of person.health.records) {
+      if (medicalIds.has(record.id) || compareDates(record.date, person.born) < 0 || compareDates(record.date, world.date) > 0 || !world.people[record.payerId] || record.providerId && !world.people[record.providerId] || record.conditionId && !conditionIds.has(record.conditionId)) throw new Error('Invalid medical record'); medicalIds.add(record.id);
+    }
+    for (const vaccine of person.health.vaccinations) if (compareDates(vaccine.date, person.born) < 0 || compareDates(vaccine.date, world.date) > 0 || vaccine.expiresMonth <= vaccine.date.year * 12 + vaccine.date.month - 1) throw new Error('Invalid vaccination record');
     if (person.employment) {
       const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
       const history = world.workHistory.find(record => record.id === person.employment!.id && record.personId === id && !record.ended);
@@ -223,6 +235,7 @@ export function validateWorld(value: unknown): World {
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
       if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
       if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !world.pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
+      if (effect.kind === 'emergency-care' && (effect.personId !== world.activePersonId || !world.pending.personIds.includes(effect.personId) || !world.people[effect.personId].health.conditions.some(item => item.id === effect.conditionId && item.status !== 'recovered'))) throw new Error('Invalid medical emergency target');
       if (effect.kind === 'transfer') {
         const from = world.accounts.find(account => account.id === effect.fromAccountId);
         const to = world.accounts.find(account => account.id === effect.toAccountId);
@@ -294,6 +307,10 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 6) {
     parsed.schemaVersion = 7; parsed.engineVersion = 6; parsed.wills = []; parsed.estates = []; parsed.legacyAnnual = null; parsed.generation = 1; parsed.legacies = [];
     for (const asset of parsed.assets ?? []) { asset.ownershipSource = 'legacy'; asset.titleSince = asset.acquired; }
+  }
+  if (parsed && parsed.schemaVersion === 7) {
+    parsed.schemaVersion = 8; parsed.engineVersion = 7;
+    for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) person.health = newHealth(parsed.date.year * 12 + parsed.date.month - 1);
   }
   return validateWorld(parsed);
 }

@@ -9,6 +9,7 @@ import { accountFor, active, bounded, charge, draw, fact, post, result } from '.
 import { createContact } from './npcs';
 import { moveHousehold, ownHousehold } from './households';
 import { otherPerson, partnerRelation, relationFor } from './relationships';
+import { hospitalized } from './healthSchemas';
 
 export const familyCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('try-child') }),
@@ -28,6 +29,7 @@ function yearLimit(world: World, action: string) {
 }
 export function conceptionReason(world: World, first: Person, second?: Person): string | undefined {
   if (!second || first.died || second.died) return 'A living partner is required';
+  if (hospitalized(world, first) || hospitalized(world, second)) return 'Recover from the hospital stay before trying for a child';
   if (ageOn(first, world.date) < rules[first.country].adultAge || ageOn(second, world.date) < rules[second.country].adultAge) return 'Both parents must be adults';
   if (!first.wantsChildren || !second.wantsChildren) return 'Both partners need to want a child';
   if (first.city !== second.city || first.country !== second.country) return 'Both partners must be in the same city';
@@ -56,6 +58,7 @@ export function addChild(world: World, parents: Person[], type: 'biological' | '
     child.appearance = { face: pick(parents.map(parent => parent.appearance.face)), skin: Math.round((first.appearance.skin + second.appearance.skin) / 2), hair: pick(parents.map(parent => parent.appearance.hair)), hairColor: pick(parents.map(parent => parent.appearance.hairColor)) };
     child.traits = [pick(parents.flatMap(parent => parent.traits))];
     child.stats.smarts = bounded((first.stats.smarts + second.stats.smarts) / 2 + draw(world, 'npcs', -12, 12)); child.stats.looks = bounded((first.stats.looks + second.stats.looks) / 2 + draw(world, 'npcs', -12, 12));
+    child.health.familyRisks = [...new Set(parents.flatMap(parent => [...parent.health.familyRisks, ...parent.health.conditions.filter(item => ['asthma', 'diabetes', 'hypertension', 'heart-disease', 'depression'].includes(item.type)).map(item => item.type)]))];
   }
   for (const parent of parents) {
     for (const sibling of childrenOf(world, parent.id)) if (sibling.id !== child.id && !relationFor(world, sibling.id, child.id)) world.relationships.push({ id: 'relation_sibling_' + sibling.id + '_' + child.id, from: sibling.id, to: child.id, kind: 'sibling', roles: ['sibling'], romance: 'none', parentType: null, since: { ...world.date }, strength: 65, trust: 65, memories: ['new-sibling'], lastInteractionYear: world.date.year });
@@ -125,6 +128,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     result(world, 'A baby on the way', carrier.firstName + ' is pregnant. The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '. Time, care and health will matter in the coming months.', 'carriage'); return;
   }
   if (command.type === 'adopt') {
+    if (hospitalized(world, player) || partner && hospitalized(world, partner)) throw new IneligibleAction('Recover from hospital before applying for adoption');
     if (age < 21 || age > 65 || player.stats.health < 40 || !player.wantsChildren || !player.householdId || (!player.employment && player.finance.pensionAnnual <= 0n)) throw new IneligibleAction('Adoption requires age 21–65, stable health, a household, income and a wish to parent');
     if (partner && (!partner.wantsChildren || partner.stats.health < 40)) throw new IneligibleAction('Your partner is not ready for adoption');
     yearLimit(world, 'adopt'); charge(world, adoptionFee(world), 'adoption', 'Adoption assessment and placement');

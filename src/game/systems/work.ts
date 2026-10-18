@@ -5,6 +5,7 @@ import { jobs, JobRole, jobRanks } from '../content/jobs';
 import { incomeTax, monthlyAmount, rules } from '../rules';
 import { roundRatio, formatMoney } from '../money';
 import { accountFor, active, bounded, draw, fact, post, result } from './common';
+import { hospitalized } from './healthSchemas';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string() }),
@@ -77,8 +78,9 @@ export function workMonth(world: World, person = active(world)) {
   if (employment) {
     const role = jobs.find(candidate => candidate.id === employment.roleId);
     if (!role) throw new Error('Unknown employment role');
-    wages = monthlyAmount(employment.annualPay, employment.paidMonths); gross += wages;
-    withheld += monthlyAmount(incomeTax(employment.annualPay, rule), employment.paidMonths);
+    const factor = hospitalized(world, person) ? 5000n : 10000n;
+    wages = roundRatio(monthlyAmount(employment.annualPay, employment.paidMonths) * factor, 10000n); gross += wages;
+    withheld += monthlyAmount(incomeTax(roundRatio(employment.annualPay * factor, 10000n), rule), employment.paidMonths);
     employment.paidMonths++; person.finance.serviceMonths++;
     const history = world.workHistory.find(record => record.id === employment.id)!;
     history.monthsWorked++; history.grossEarned += wages;

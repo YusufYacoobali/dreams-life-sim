@@ -6,6 +6,7 @@ import { fields } from './schemas';
 import { accountFor, active, borrow, bounded, charge, draw, fact, result } from './common';
 import { formatMoney } from '../money';
 import { jobs } from '../content/jobs';
+import { hospitalized } from './healthSchemas';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']) }),
@@ -75,6 +76,7 @@ export function resolveEducation(world: World, command: EducationCommand) {
   }
 }
 export function educationMonth(world: World, person: Person) {
+  if (hospitalized(world, person)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;
   if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !education.qualifications.some(q => q.level === 'secondary')) {
@@ -101,7 +103,7 @@ export function educationMonth(world: World, person: Person) {
   }
   education.months++;
   if (education.months % 12 === 0) {
-    const change = (education.effort === 'focused' ? 5 : education.effort === 'relaxed' ? -4 : 1) + draw(world, isPlayer ? 'outcomes' : 'npcs', -3, 3) + (person.stats.stress > 70 ? -4 : 0);
+    const change = (education.effort === 'focused' ? 5 : education.effort === 'relaxed' ? -4 : 1) + draw(world, isPlayer ? 'outcomes' : 'npcs', -3, 3) + (person.stats.stress > 70 ? -4 : 0) + (person.stats.health < 40 ? -4 : 0);
     education.grades = bounded(education.grades + change);
     person.stats.stress = bounded(person.stats.stress + (education.effort === 'focused' ? 5 : education.effort === 'relaxed' ? -4 : 0));
   }

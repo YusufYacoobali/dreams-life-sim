@@ -129,8 +129,12 @@ test('one connected life earns school and university qualifications, finds work 
   world.people[world.activePersonId].stats.smarts = 90; world.people[world.activePersonId].stats.discipline = 80;
   const year = () => {
     world = resolveCommand(world, { type: 'advance' });
-    if (world.pending?.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id });
-    if (world.pending?.kind === 'result') world = acknowledge(world);
+    let guard = 0;
+    while ((world.pending || world.annual) && guard++ < 100) {
+      if (world.pending?.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id });
+      else if (world.pending) world = acknowledge(world); else world = resolveCommand(world, { type: 'resume' });
+    }
+    if (guard >= 100) throw new Error('Annual progression did not close');
   };
   while (world.date.year < 2018) year();
   expect(world.people[world.activePersonId].education.qualifications.some(q => q.level === 'secondary')).toBe(true);
@@ -140,7 +144,8 @@ test('one connected life earns school and university qualifications, finds work 
   }
   expect(world.people[world.activePersonId].education.stage).toBe('university');
   world = acknowledge(resolveCommand(world, { type: 'study-effort', effort: 'focused' }));
-  for (let i = 0; i < 4; i++) year();
+  // Hospital periods pause attendance; completion depends on actual course months.
+  for (let i = 0; i < 6 && !world.people[world.activePersonId].education.qualifications.some(q => q.level === 'degree' && q.field === 'computing'); i++) year();
   expect(world.people[world.activePersonId].education.qualifications.some(q => q.level === 'degree' && q.field === 'computing')).toBe(true);
   for (let attempt = 0; attempt < 5 && !world.people[world.activePersonId].employment; attempt++) {
     world = acknowledge(resolveCommand(world, { type: 'apply-job', roleId: 'developer' }));

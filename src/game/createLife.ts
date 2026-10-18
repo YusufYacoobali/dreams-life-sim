@@ -10,6 +10,7 @@ import { initialMarket } from './content/markets';
 import { biologySchema, genders, newFamilyPerson } from './systems/familySchemas';
 import { backgroundOccupation } from './systems/npcs';
 import { netWorth } from './valuation';
+import { newHealth } from './systems/healthSchemas';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -48,6 +49,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     traits: [(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'] as const)[roll(0, 5)]],
     education: newEducation(), employment: null, finance: newFinance(),
     ...newFamilyPerson(gender), householdId: 'household_birth', lastEconomicMonth: date.year * 12 + date.month - 1,
+    health: newHealth(date.year * 12 + date.month - 1),
     };
   };
   const player = person('person_player', input.firstName, input.gender, 0);
@@ -60,7 +62,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 7, engineVersion: 6, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 8, engineVersion: 7, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },

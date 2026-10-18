@@ -51,6 +51,14 @@ export function financialActors(world: World): Person[] {
   for (const custody of world.custody) if (!custody.ended) { ids.add(custody.a); ids.add(custody.b); }
   for (const pregnancy of world.pregnancies) if (pregnancy.status === 'pregnant') { ids.add(pregnancy.carrierId); ids.add(pregnancy.otherParentId); }
   for (const debt of world.liabilities) if (debt.creditorId && debt.principal > 0n) { ids.add(debt.ownerId); ids.add(debt.creditorId); }
+  for (const person of Object.values(world.people)) {
+    const routine = person.health.routine;
+    if (person.health.conditions.some(item => item.status !== 'recovered') || routine.diet === 'nutritious' || routine.exercise === 'gym' || routine.exercise === 'sport' || routine.smoking || routine.drinking !== 'none') {
+      ids.add(person.id);
+      if (ageOn(person, world.date) < rules[person.country].adultAge) for (const relation of world.relationships) if (relation.to === person.id && relation.roles.some(role => role === 'parent' || role === 'guardian')) ids.add(relation.from);
+    }
+  }
   for (const person of Object.values(world.people)) if (person.finance.cycleGross > 0n) ids.add(person.id);
+  for (const household of world.households) if (household.members.some(id => ids.has(id))) for (const id of household.members) ids.add(id);
   return [...ids].map(id => world.people[id]).filter(person => !person.died);
 }
