@@ -1,4 +1,7 @@
-import type { GameDate } from './model';
+import { z } from 'zod';
+
+export const dateSchema = z.object({ year: z.number().int().positive().max(999999), month: z.number().int().min(1).max(12), day: z.number().int().min(1).max(31) }).refine(date => date.day <= daysInMonth(date.year, date.month), 'Invalid calendar date');
+export type GameDate = z.infer<typeof dateSchema>;
 
 export function daysInMonth(year: number, month: number): number {
   const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);

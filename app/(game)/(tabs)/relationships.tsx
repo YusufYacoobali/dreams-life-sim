@@ -1,9 +1,9 @@
 import React from 'react';
 import { router } from 'expo-router';
-import { useGame } from '../../src/state/useGame';
-import { ageOn, fullName } from '../../src/game/model';
-import { ActionRow, Card, Header, Page, Portrait, StatBar } from '../../src/ui/components';
-import { useColors } from '../../src/ui/theme';
+import { useGame } from '../../../src/state/useGame';
+import { ageOn, fullName } from '../../../src/game/model';
+import { ActionRow, Card, Header, Page, Portrait, StatBar } from '../../../src/ui/components';
+import { useColors } from '../../../src/ui/theme';
 
 export default function Relationships() {
   const world = useGame(s => s.world)!;

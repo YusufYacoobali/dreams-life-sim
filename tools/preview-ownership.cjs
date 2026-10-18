@@ -1,0 +1,10 @@
+const fs = require('node:fs'), http = require('node:http'), ts = require('typescript'), path = require('node:path');
+const layout = { exports: {} };
+new Function('module', 'exports', ts.transpileModule(fs.readFileSync(path.join(__dirname, '../src/assets/ownershipLayout.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText)(layout, layout.exports);
+const { ownershipAtlasSize: [atlasWidth, atlasHeight], ownershipRect, ownershipCells: cells } = layout.exports;
+const seen = new Set();
+const subjects = Object.entries(cells).filter(([,cell]) => { const key = cell.join(','); if(seen.has(key)) return false; seen.add(key); return true; });
+const cards = subjects.map(([id]) => { const [x,y,w,h]=ownershipRect(id),size=128,scale=size/Math.max(w,h); return `<div style="background:white;border-radius:16px;padding:16px;display:flex;align-items:center;flex-direction:column"><div style="width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center"><div style="position:relative;overflow:hidden;width:${w*scale}px;height:${h*scale}px"><img src="/atlas.png" style="position:absolute;width:${atlasWidth*scale}px;height:${atlasHeight*scale}px;left:${-x*scale}px;top:${-y*scale}px"></div></div><p>${id}</p></div>`; }).join('');
+const html=`<!doctype html><meta charset="utf-8"><title>Ownership artwork inspection</title><body style="font:14px system-ui;background:#F8F7F5;color:#0B1545;padding:24px"><h1>Generated ownership art — 128px clipping inspection</h1><div style="display:grid;grid-template-columns:repeat(4,190px);gap:16px">${cards}</div>`;
+const port = Number(process.argv[2] ?? 8095);
+http.createServer((request,response)=>{if(request.url==='/atlas.png'){response.setHeader('Content-Type','image/png');response.end(fs.readFileSync(path.join(__dirname,'../assets/generated/ownership-atlas.png')));}else{response.setHeader('Content-Type','text/html');response.end(html);}}).listen(port,'127.0.0.1',()=>process.stdout.write('Ownership inspection listening on 127.0.0.1:' + port + '\n'));

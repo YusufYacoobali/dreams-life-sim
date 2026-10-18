@@ -1,0 +1,23 @@
+export type AssetType = 'property' | 'vehicle' | 'possession';
+export type AssetOffer = { id: string; kind: AssetType; name: string; description: string; priceBps: number; condition: number; upkeepBps: number; bedrooms?: number };
+/** Local base wages scale prices. No USD table is relabelled with another symbol. */
+export const assetCatalog: readonly AssetOffer[] = [
+  { id: 'studio', kind: 'property', name: 'City Studio', description: 'A compact place with an ambitious floor plan.', priceBps: 40000, condition: 80, upkeepBps: 100, bedrooms: 1 },
+  { id: 'apartment', kind: 'property', name: 'Two-Bedroom Apartment', description: 'Room for a desk that does not fold away.', priceBps: 70000, condition: 85, upkeepBps: 110, bedrooms: 2 },
+  { id: 'terrace', kind: 'property', name: 'Terraced Home', description: 'A front door of your own, and neighbours within earshot.', priceBps: 90000, condition: 75, upkeepBps: 130, bedrooms: 3 },
+  { id: 'family-house', kind: 'property', name: 'Family House', description: 'More rooms, more gutters to clean.', priceBps: 120000, condition: 90, upkeepBps: 150, bedrooms: 4 },
+  { id: 'country-home', kind: 'property', name: 'Country Home', description: 'Quiet mornings. Substantial maintenance.', priceBps: 180000, condition: 80, upkeepBps: 200, bedrooms: 4 },
+  { id: 'penthouse', kind: 'property', name: 'Skyline Penthouse', description: 'An excellent view of your ongoing costs.', priceBps: 450000, condition: 100, upkeepBps: 250, bedrooms: 5 },
+  { id: 'used-compact', kind: 'vehicle', name: 'Used Compact', description: 'A modest car with a few stories in the upholstery.', priceBps: 1800, condition: 65, upkeepBps: 1200 },
+  { id: 'city-car', kind: 'vehicle', name: 'City Hatchback', description: 'Small enough to make parking less personal.', priceBps: 4500, condition: 100, upkeepBps: 900 },
+  { id: 'family-car', kind: 'vehicle', name: 'Family Estate', description: 'Space for passengers and their unreasonable luggage.', priceBps: 7500, condition: 100, upkeepBps: 1100 },
+  { id: 'electric-car', kind: 'vehicle', name: 'Electric Sedan', description: 'Quiet departures and a new charging routine.', priceBps: 11000, condition: 100, upkeepBps: 700 },
+  { id: 'sports-car', kind: 'vehicle', name: 'Sports Coupé', description: 'A very expensive way to arrive at traffic.', priceBps: 22000, condition: 100, upkeepBps: 1600 },
+  { id: 'motorbike', kind: 'vehicle', name: 'Touring Motorbike', description: 'Two wheels and fewer places to put your shopping.', priceBps: 5500, condition: 100, upkeepBps: 1100 },
+  { id: 'watch', kind: 'possession', name: 'Mechanical Watch', description: 'It tells the time with considerable confidence.', priceBps: 350, condition: 100, upkeepBps: 100 },
+  { id: 'painting', kind: 'possession', name: 'Original Landscape', description: 'A small painting by an independent artist.', priceBps: 500, condition: 100, upkeepBps: 0 },
+  { id: 'guitar', kind: 'possession', name: 'Acoustic Guitar', description: 'The neighbours await your musical direction.', priceBps: 150, condition: 100, upkeepBps: 150 },
+  { id: 'laptop', kind: 'possession', name: 'Creative Laptop', description: 'For projects that may eventually leave the drafts folder.', priceBps: 300, condition: 100, upkeepBps: 100 },
+  { id: 'camera', kind: 'possession', name: 'Mirrorless Camera', description: 'A good reason to take the longer walk home.', priceBps: 400, condition: 100, upkeepBps: 100 },
+  { id: 'rare-book', kind: 'possession', name: 'First-Edition Novel', description: 'A well-kept book with its own history.', priceBps: 700, condition: 95, upkeepBps: 0 },
+];

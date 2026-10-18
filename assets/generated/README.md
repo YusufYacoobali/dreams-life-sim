@@ -43,3 +43,14 @@ eight ages of the same DNA plus 24 skin/hair/shape combinations. The inspection
 harness is tools/preview-portraits.cjs. It establishes clipping/composition
 feasibility, not Android/iOS blend-mode support, native performance or final
 reference acceptance. Native rendering still needs device validation.
+
+ownership-atlas.png was generated on 18 October 2026 as an original sheet of
+sixteen homes, vehicles, possessions and portfolio illustrations. The unmodified
+1376×1143 RGBA original remains at
+/workspace/generated_images/exec-56dc7fa2-20e1-4493-ac93-7f1302cb5aba.png.
+Measured source regions in src/assets/ownershipLayout.ts preserve aspect ratios;
+generic building/car categories are reused across related catalogue entries.
+All sixteen subjects were inspected in the browser at 128px using
+tools/preview-ownership.cjs. A neighbour-pixel artefact below the guitar was
+identified and excluded by its source rectangle. Native-device fidelity remains
+pending.

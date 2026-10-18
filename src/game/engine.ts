@@ -10,9 +10,11 @@ import { educationCommandSchema, EducationCommand, educationMonth, resolveEducat
 import { workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
 import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, settleTax } from './systems/finance';
 import { post } from './systems/common';
+import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets } from './systems/assets';
+import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from './systems/markets';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -42,6 +44,8 @@ function death(world: World, personId: string, cause: string) {
 function processMonth(world: World) {
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
   workMonth(world);
+  marketMonth(world);
+  assetsMonth(world);
   financeMonth(world);
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
@@ -58,6 +62,7 @@ function processMonth(world: World) {
 
 function finishYear(world: World) {
   const frame = world.annual!;
+  frame.stage = 'complete';
   const player = world.people[world.activePersonId];
   const age = ageOn(player, world.date);
   player.stats.energy = clamp(player.stats.energy + 20);
@@ -85,11 +90,22 @@ function continueYear(world: World) {
     world.date = monthFrom(frame.startDate, frame.monthsProcessed, world.calendarAnchorDay);
     processMonth(world);
   }
-  if (world.annual && !world.pending) finishYear(world);
+  if (world.annual?.stage === 'months' && !world.pending) finishYear(world);
 }
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
-  return effects.map((effect, index) => {
+  return effects.flatMap((effect, index) => {
+    if (effect.kind === 'asset-sale') {
+      const asset = ownedAsset(world, effect.assetId);
+      if (asset.listing?.offer !== effect.minor) throw new IneligibleAction('That property offer is no longer available');
+      return completeAssetSale(world, effect.assetId, effect.minor);
+    }
+    if (effect.kind === 'decline-sale') {
+      const asset = ownedAsset(world, effect.assetId);
+      if (!asset.listing?.offer) throw new IneligibleAction('That property offer is no longer available');
+      asset.listing.offer = null; asset.listing.nextOfferMonth = absoluteMonth(world) + 2;
+      return [{ id: 'listing', label: 'Property', value: 'Still listed', tone: 'neutral' as const }];
+    }
     let label: string, value: string, delta: number;
     if (effect.kind === 'stat') {
       const stats = world.people[effect.personId].stats;
@@ -107,12 +123,12 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       const from = world.accounts.find(account => account.id === effect.fromAccountId);
       const to = world.accounts.find(account => account.id === effect.toAccountId);
       if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new IneligibleAction('That transfer is no longer available');
-      post(world, -effect.minor, 0n, 'transfer', 'Money transferred', null, world.people[from.ownerId]);
-      post(world, effect.minor, 0n, 'transfer', 'Money received', null, world.people[to.ownerId]);
+      post(world, -effect.minor, 0n, 'transfer', 'Money transferred', null, world.people[from.ownerId], from.currency);
+      post(world, effect.minor, 0n, 'transfer', 'Money received', null, world.people[to.ownerId], to.currency);
       delta = to.ownerId === world.activePersonId ? 1 : -1;
       label = 'Bank balance'; value = (delta > 0 ? '+' : '−') + formatMoney({ minor: effect.minor, currency: from.currency });
     }
-    return { id: 'effect_' + index, label, value, tone: delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'neutral' };
+    return [{ id: 'effect_' + index, label, value, tone: delta > 0 ? 'positive' as const : delta < 0 ? 'negative' as const : 'neutral' as const }];
   });
 }
 
@@ -125,7 +141,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
-    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0 };
+    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months' };
     continueYear(world);
   } else if (command.type === 'resume') {
     if (!world.annual || world.pending) throw new IneligibleAction('There is no interrupted year to resume');
@@ -141,16 +157,20 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null;
-    if (world.annual?.monthsProcessed === 12) world.annual = null;
+    if (world.annual?.stage === 'complete') world.annual = null;
     else if (world.annual) continueYear(world);
   } else {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
     const education = educationCommandSchema.safeParse(command);
     const work = workCommandSchema.safeParse(command);
     const finance = financeCommandSchema.safeParse(command);
+    const assets = assetCommandSchema.safeParse(command);
+    const market = marketCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
+    else if (assets.success) resolveAssets(world, assets.data);
+    else if (market.success) resolveMarket(world, market.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

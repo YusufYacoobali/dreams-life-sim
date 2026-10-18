@@ -1,13 +1,14 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { router } from 'expo-router';
-import { useGame } from '../../src/state/useGame';
-import { ageOn, fullName } from '../../src/game/model';
-import { countries } from '../../src/game/countries';
-import { formatMoney } from '../../src/game/money';
-import { Body, Button, Card, Heading, Page, Portrait, StatBar } from '../../src/ui/components';
-import { useColors } from '../../src/ui/theme';
-import { jobs } from '../../src/game/content/jobs';
+import { useGame } from '../../../src/state/useGame';
+import { ageOn, fullName } from '../../../src/game/model';
+import { countries } from '../../../src/game/countries';
+import { formatMoney } from '../../../src/game/money';
+import { Body, Button, Card, Heading, Page, Portrait, StatBar } from '../../../src/ui/components';
+import { useColors } from '../../../src/ui/theme';
+import { jobs } from '../../../src/game/content/jobs';
+import { accountFor } from '../../../src/game/systems/common';
 
 export default function Life() {
   const world = useGame(s => s.world)!;
@@ -16,8 +17,8 @@ export default function Life() {
   const busy = useGame(s => s.busy);
   const error = useGame(s => s.error);
   const player = world.people[world.activePersonId];
-  const account = world.accounts.find(a => a.ownerId === player.id)!;
-  const occupation = player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) < 5 ? 'Newborn' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
+  const account = accountFor(world);
+  const occupation = player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = world.journal.filter(entry => entry.personId === player.id);
   const years = new Map<number, typeof entries>();
   for (const entry of entries) {

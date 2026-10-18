@@ -1,19 +1,13 @@
 import { z } from 'zod';
 import { countryCodes } from './countries';
 import { pendingSchema } from './runtime';
-import { daysInMonth, monthFrom } from './calendar';
-import { educationSchema, employmentSchema, financeSchema, liabilitySchema, newEducation, newFinance, transactionSchema } from './systems/schemas';
+import { dateSchema, daysInMonth, monthFrom, type GameDate } from './calendar';
+export { dateSchema, type GameDate } from './calendar';
+import { educationSchema, employmentSchema, financeSchema, holdingSchema, liabilitySchema, marketSchema, newEducation, newFinance, physicalAssetSchema, transactionSchema } from './systems/schemas';
 import { jobs } from './content/jobs';
+import { initialMarket } from './content/markets';
+import { assetCatalog } from './content/assets';
 
-export const dateSchema = z.object({
-  year: z.number().int().positive().max(999999),
-  month: z.number().int().min(1).max(12),
-  day: z.number().int().min(1).max(31),
-}).refine(date => {
-  const leap = date.year % 4 === 0 && (date.year % 100 !== 0 || date.year % 400 === 0);
-  return date.day <= [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][date.month - 1];
-}, 'Invalid calendar date');
-export type GameDate = z.infer<typeof dateSchema>;
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
 const safeName = z.string().trim().min(1).max(40).refine(name => !/[\u0000-\u001F]/.test(name), 'Invalid name');
@@ -35,7 +29,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(3), engineVersion: z.literal(2), contentVersion: z.literal(1),
+  schemaVersion: z.literal(4), engineVersion: z.literal(3), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -43,11 +37,12 @@ export const worldSchema = z.object({
   relationships: z.array(z.object({ id: z.string(), from: personId, to: personId, kind: z.enum(['parent', 'sibling', 'friend', 'partner', 'spouse', 'coworker', 'classmate']), strength: percentage, trust: percentage, memories: z.array(z.string()) })),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative() })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
+  assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
   workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
-  annual: z.object({ id: z.string(), startDate: dateSchema, targetDate: dateSchema, monthsProcessed: z.number().int().min(0).max(12) }).nullable(),
+  annual: z.object({ id: z.string(), startDate: dateSchema, targetDate: dateSchema, monthsProcessed: z.number().int().min(0).max(12), stage: z.enum(['months', 'complete']) }).nullable(),
   pending: pendingSchema.nullable(),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
@@ -69,6 +64,7 @@ export function validateWorld(value: unknown): World {
   const world = worldSchema.parse(value);
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
+  const accountCurrencies = new Set<string>();
   const relationshipIds = new Set<string>();
   const journalIds = new Set<string>();
   for (const [id, person] of Object.entries(world.people)) {
@@ -95,8 +91,10 @@ export function validateWorld(value: unknown): World {
     relationshipIds.add(relation.id);
   }
   for (const account of world.accounts) {
-    if (!world.people[account.ownerId] || account.cash < 0n || accountIds.has(account.id)) throw new Error('Invalid cash account');
+    const currencyKey = account.ownerId + ':' + account.currency;
+    if (!world.people[account.ownerId] || account.cash < 0n || accountIds.has(account.id) || accountCurrencies.has(currencyKey)) throw new Error('Invalid cash account');
     accountIds.add(account.id);
+    accountCurrencies.add(currencyKey);
   }
   const ledgerIds = new Set<string>();
   const liabilities = new Map(world.liabilities.map(liability => [liability.id, liability]));
@@ -112,7 +110,28 @@ export function validateWorld(value: unknown): World {
     if (entry.liabilityId) debtChanges.set(entry.liabilityId, (debtChanges.get(entry.liabilityId) ?? 0n) + entry.debtDelta);
   }
   for (const account of world.accounts) if (account.cash !== account.openingCash + (cashChanges.get(account.id) ?? 0n)) throw new Error('Cash does not reconcile with ledger');
-  for (const liability of world.liabilities) if (!world.people[liability.ownerId] || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
+  for (const liability of world.liabilities) if (!world.people[liability.ownerId] || !world.accounts.some(account => account.ownerId === liability.ownerId && account.currency === liability.currency) || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
+  const assetIds = new Set<string>(); const homes = new Set<string>();
+  for (const asset of world.assets) {
+    const catalog = assetCatalog.find(item => item.id === asset.catalogId);
+    if (assetIds.has(asset.id) || !catalog || catalog.kind !== asset.kind || (asset.ownerId && !world.people[asset.ownerId]) || compareDates(asset.acquired, world.date) > 0) throw new Error('Invalid physical asset');
+    assetIds.add(asset.id);
+    if (asset.ownerId && !world.accounts.some(account => account.ownerId === asset.ownerId && account.currency === asset.currency)) throw new Error('Missing asset currency account');
+    if (asset.primaryHome && (!asset.ownerId || asset.kind !== 'property' || asset.rental !== 'none' || homes.has(asset.ownerId))) throw new Error('Invalid primary home');
+    if (asset.primaryHome) homes.add(asset.ownerId!);
+    if ((asset.kind !== 'property' && (asset.rental !== 'none' || asset.listing || asset.mortgageId)) || (asset.kind === 'possession' && asset.insured)) throw new Error('Invalid asset contract');
+    if (!asset.ownerId && (asset.primaryHome || asset.rental !== 'none' || asset.listing || asset.mortgageId)) throw new Error('Sold asset retains an active contract');
+    if (asset.mortgageId) {
+      const loan = world.liabilities.find(item => item.id === asset.mortgageId);
+      if (!loan || loan.ownerId !== asset.ownerId || loan.currency !== asset.currency || loan.assetId !== asset.id || loan.kind !== 'mortgage') throw new Error('Invalid mortgage link');
+    }
+  }
+  for (const debt of world.liabilities) if (debt.kind === 'mortgage' && debt.principal > 0n && !world.assets.some(asset => asset.id === debt.assetId && asset.mortgageId === debt.id && asset.ownerId === debt.ownerId)) throw new Error('Mortgage has no collateral');
+  const holdingIds = new Set<string>();
+  for (const holding of world.holdings) {
+    if (holdingIds.has(holding.id) || !world.people[holding.ownerId] || (holding.quantity === 0n && holding.costBasis !== 0n)) throw new Error('Invalid investment holding');
+    holdingIds.add(holding.id);
+  }
   if (!world.accounts.some(account => account.ownerId === world.activePersonId)) throw new Error('Missing player account');
   for (const entry of world.journal) {
     if (!world.people[entry.personId] || compareDates(entry.date, world.date) > 0 || compareDates(entry.date, world.people[entry.personId].born) < 0 || journalIds.has(entry.id)) throw new Error('Invalid journal fact');
@@ -120,6 +139,7 @@ export function validateWorld(value: unknown): World {
   }
   if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
   if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
+  if (world.annual?.stage === 'complete' && world.annual.monthsProcessed !== 12) throw new Error('Incomplete year marked complete');
   if (world.pending?.kind === 'decision') {
     if (world.people[world.activePersonId].died || world.pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(world.pending.choices.map(choice => choice.id)).size !== world.pending.choices.length) throw new Error('Duplicate decision choices');
@@ -130,6 +150,10 @@ export function validateWorld(value: unknown): World {
         const from = world.accounts.find(account => account.id === effect.fromAccountId);
         const to = world.accounts.find(account => account.id === effect.toAccountId);
         if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new Error('Invalid effect transfer');
+      }
+      if (effect.kind === 'asset-sale' || effect.kind === 'decline-sale') {
+        const asset = world.assets.find(item => item.id === effect.assetId && item.ownerId === world.activePersonId);
+        if (!asset?.listing?.offer || (effect.kind === 'asset-sale' && effect.minor !== asset.listing.offer)) throw new Error('Invalid property offer');
       }
     }
   }
@@ -165,6 +189,11 @@ export function decodeWorld(text: string): World {
     parsed.liabilities = []; parsed.ledger = [];
     parsed.workHistory = [];
     parsed.actionCounts = {};
+  }
+  if (parsed && parsed.schemaVersion === 3) {
+    parsed.schemaVersion = 4; parsed.engineVersion = 3;
+    parsed.assets = []; parsed.holdings = []; parsed.market = initialMarket(parsed.date);
+    if (parsed.annual) parsed.annual.stage = parsed.annual.monthsProcessed === 12 && parsed.pending ? 'complete' : 'months';
   }
   return validateWorld(parsed);
 }

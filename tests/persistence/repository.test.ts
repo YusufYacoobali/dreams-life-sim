@@ -1,29 +1,11 @@
-import { DatabaseSync } from 'node:sqlite';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { decodeWorld, encodeWorld, validateWorld } from '../../src/game/model';
-import { SaveConflict, SaveRepository, SqlDatabase, SqlSession } from '../../src/persistence/repository';
+import { SaveConflict, SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
 import { resolveCommand } from '../../src/game/engine';
 import legacyFixture from '../fixtures/v1-newborn.json';
 import birthdayFixture from '../fixtures/v2-birthday-result.json';
 
-function database() {
-  const sqlite = new DatabaseSync(':memory:');
-  sqlite.exec('PRAGMA foreign_keys=ON');
-  const session: SqlSession = {
-    run: async (sql, values = []) => { sqlite.prepare(sql).run(...values); },
-    get: async <T,>(sql: string, values: (string | number | null)[] = []) => sqlite.prepare(sql).get(...values) as T ?? null,
-    all: async <T,>(sql: string, values: (string | number | null)[] = []) => sqlite.prepare(sql).all(...values) as T[],
-  };
-  const driver: SqlDatabase = {
-    ...session, exec: async sql => { sqlite.exec(sql); },
-    transaction: async action => {
-      sqlite.exec('BEGIN IMMEDIATE');
-      try { const result = await action(session); sqlite.exec('COMMIT'); return result; }
-      catch (error) { sqlite.exec('ROLLBACK'); throw error; }
-    },
-  };
-  return { sqlite, driver };
-}
 const world = () => createLife('life_test', 42, randomCreation(42), { year: 2026, month: 10, day: 18 });
 
 test('a new life has real linked parents and survives exact bigint save restoration', async () => {
@@ -74,7 +56,7 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
   const initial = world();
   await repository.create(initial);
   await expect(repository.import(encodeWorld(initial))).rejects.toThrow('already exists');
-  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":3', '"schemaVersion":4'))).toThrow();
+  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":4', '"schemaVersion":5'))).toThrow();
   expect(() => validateWorld({ ...initial, activePersonId: 'person_missing' })).toThrow('Missing active person');
   expect(() => decodeWorld(encodeWorld(initial).replace(/"\$dreamsBigInt":"\d+"/, '"$dreamsBigInt":"NaN"'))).toThrow();
   expect(await repository.import(encodeWorld(initial), true)).toEqual(initial);
@@ -99,7 +81,7 @@ test('a version-one database and actual previous-version save migrate without da
   const repository = new SaveRepository(driver);
   await repository.initialise();
   const restored = (await repository.active())!;
-  expect(restored.schemaVersion).toBe(3);
+  expect(restored.schemaVersion).toBe(4);
   expect(restored.random).toEqual(legacyFixture.random);
   for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
@@ -127,7 +109,7 @@ test('corrupt checkpoints require explicit recovery and never overwrite the prev
 
 test('version-two pending results migrate with their committed effects, identities and random streams intact', () => {
   const world = decodeWorld(JSON.stringify(birthdayFixture));
-  expect(world.schemaVersion).toBe(3);
+  expect(world.schemaVersion).toBe(4);
   expect(world.pending).toEqual(birthdayFixture.pending);
   expect(world.random).toEqual(birthdayFixture.random);
   expect(world.eventHistory).toEqual(birthdayFixture.eventHistory);

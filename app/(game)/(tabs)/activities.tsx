@@ -1,7 +1,7 @@
 import React from 'react';
 import { router } from 'expo-router';
-import { ActionRow, Card, Header, Page } from '../../src/ui/components';
-import { Illustration } from '../../src/assets/Illustration';
+import { ActionRow, Card, Header, Page } from '../../../src/ui/components';
+import { Illustration } from '../../../src/assets/Illustration';
 
 export default function Activities() {
   return <Page><Header title="Activities" />
