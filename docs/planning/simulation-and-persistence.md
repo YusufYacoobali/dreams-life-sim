@@ -47,12 +47,13 @@ Keep the current strict TypeScript configuration. Suggested boundaries: app/ for
 | Annual frame | Year ID, stage cursor, processed stages, effective contracts, pending decisions, accumulated summaries |
 | Randomness | Master seed and separate persistent streams/counters for events, NPCs, economy, and outcomes |
 | Progression | Challenge progress, achievements, per-year action counters, event cooldowns, recent topic/family history |
+| Estate plan | Beneficiary IDs and allocation basis points, executor, specific owned-item bequests, revision and applicable country rules |
 
 Store appearance and biological/reproductive traits separately from gender identity and relationship roles. Neither a portrait nor a display name determines a person's eligibility. Nationality and current residence are separate fields.
 
 Age is derived from birth date and the annual observation date, never independently editable in two places. One Age Up advances that date by one calendar year. Use a defined leap-day convention. The world's annual anchor remains unchanged when switching to a child, avoiding an accidental extra economic year.
 
-Core percentages use 0–100 bounds. Happiness, Health, Smarts, and Looks are the proposed dashboard quartet. Fitness, Energy, Stress, Discipline, Respect, skills, Fame, and per-person relationships appear contextually. Money, school grades, job performance, and portfolio value retain their own units.
+Core percentages use 0–100 bounds. Happiness, Health, Smarts, Looks, and Respect form the five-bar dashboard established by references 02/03 and birth.png. Fitness, Energy, Stress, Discipline, skills, Fame, and per-person relationships appear contextually. Money, school grades, job performance, and portfolio value retain their own units.
 
 Respect is context-specific: a teacher, employer, family, or public audience can evaluate the player differently. Fame measures reach; reputation measures public approval. High fame does not imply good relationships or a positive reputation.
 
@@ -91,6 +92,12 @@ At a decision boundary, persist both the cursor and its bound event. The selecte
 Cross-system urgent events have explicit priority. A fatal outcome finalises death, makes remaining incompatible choices unreachable, settles outstanding obligations once, and replaces navigation with the death screen. Do not finish unrelated queued promotions after the player has died.
 
 Annual economy is intentionally a game abstraction: work and policy changes between age-ups take effect for the upcoming interval. Changes arising after a stage has settled take effect next interval unless an authored transaction explicitly states otherwise. Each income source has an effective period; no retroactive salary or duplicated annual settlement. If a terminal event interrupts an unsettled interval, its elapsed-period rule determines settlement once; persist that rule/result in the frame.
+
+### Dated sub-year consequences
+
+Reference 11 shows month-long prison sentences; asset management.png shows sale delays in months and mortgage payments; other sheets show monthly pay, support, and sponsorships. Preserve the one-year Age Up interaction while allowing the annual frame to process dated monthly/due-event substeps.
+
+Store frame start, target end, effective event dates, paid/served intervals, and the cursor in saves. Release a six-month prisoner at the proper internal boundary; do not remove a whole year's legal freedom or pay a full year's unrestricted salary. Resolve scheduled property offers and sponsorship obligations against actual elapsed periods. Death uses its actual effective date and settles only earned obligations. The yearly stage table is an orchestration summary, not permission to apply all twelve months before a time-sensitive event.
 
 ### Between-year freedom without chores
 
@@ -149,8 +156,13 @@ Part-time work can coexist with study only within a defined workload. Full-time 
 | YouTuber | Topic/production → videos → audience → eligible revenue | Skills, equipment costs, burnout, sponsors, variable reach |
 | Streamer | Content/schedule → broadcasts → community → partnerships | Energy, audience retention, conduct, sponsorships, wellbeing |
 | Business owner | Capital/type → operating firm → growth/sale/failure | Uses the same business entities and financial rules as the business feature |
+| Royalty | Eligible birth/family connection → royal duties/public standing → succession or exit | Country/family prerequisites, public conduct, wealth obligations, relationship and legacy links |
+| Astronaut | Required education/fitness → selection → training → missions → senior role/retirement | Competitive entry, skills, mission risk, health, family absence and reputation |
+| Military | Country/age/fitness eligibility → training → service → rank/specialisation → discharge/retirement | Contracts, deployment, conduct, injury, family and pension links |
 
 None is a guaranteed fame button. Each needs meaningful failure, plateau, success, and career-exit paths. Shared screens remain simple, with path-specific action sets and progress indicators.
+
+The later career/business reference adds these three paths to the original eight, producing eleven special paths including business ownership. Its Doctor and Lawyer entries route to the standard qualified-career systems rather than bypassing degrees/licensing. Royalty is not a generic job anyone can apply for.
 
 ### Relationships, romance, and children
 
@@ -179,6 +191,8 @@ Maintain an auditable transaction ledger. Summaries derive from accounts and own
 - Property may appreciate and require maintenance/insurance; vehicles typically depreciate and deteriorate; possessions have rarity/condition/provenance.
 - Mandatory unaffordable costs create explicit arrears, a permitted debt process, or a required hardship decision. Never silently clamp money to zero.
 - Company money is separate from personal money. Draws/dividends transfer value; business equity and company cash are not counted twice.
+
+Owned-property behavior follows asset management.png: renovation changes condition/value through paid work; rent has occupancy, costs and actual receipts; sale listing retains ownership until settlement and schedules offers/delay based on selected price and market state. Remortgaging requires eligibility, a new loan quote, fees and settlement of the previous principal. Extra payments reduce principal according to contract terms; no mortgage action creates free equity.
 
 The user confirmed a wider country selection for the initial complete release. The proposed twelve-country roster is below; the exact list remains subject to plan review. Every included pack defines cities, schooling, legal ages, job/salary tables, simplified taxes, pensions, healthcare costs, family/estate rules, and immigration conditions.
 
@@ -219,6 +233,8 @@ Crime choices remain high-level game actions. Eligibility, skill, circumstance, 
 
 Counsel, defence choices, evidence, and history influence trial results. Store the evidence and relevant rolls so court outcomes are not a fresh arbitrary coin flip. Conviction changes the record and sentence. Bribery/corruption can worsen a case.
 
+The illustrated black market adds illicit offers and risky underground work. Link custody/ownership, money, evidence, investigation and confiscation to real records. A fake identity may affect display/known aliases but never regenerates the underlying person ID or erases a criminal record. Keep actions at the game's abstract choice level.
+
 Prison changes the action set and prevents incompatible employment, free travel, and normal dating. Education, constrained exercise, visits, conflicts, applications, sentence progression, and release remain available where rules allow. Release restores eligible actions; conviction-related consequences remain.
 
 ### Social media and fame
@@ -232,6 +248,8 @@ Sponsorships, collaborations, controversies, and special-career opportunities us
 Creation requires type, name, startup budget, and funding. A single dashboard offers pricing, staffing, marketing, expansion, owner draw, and sale/closure. Annual revenue and expenses depend on product/service demand, capacity, staffing, quality, marketing, price, economic climate, and decisions.
 
 Underperformance can consume capital and lead to debt, sale, or closure. Growth has costs and limits. The player sees clear annual profit/cash/equity distinctions. Staff and business partners can become persistent contacts. Fame may improve demand and scandals may damage it.
+
+The detailed startup reference includes retail, restaurant, technology, fashion, entertainment, real estate, online business, and Other. Give supported types meaningful demand/capacity/cost differences. Other permits a custom brand using a supported operating model; it cannot create a decorative business with no economics. Product/service, pricing, staffing, marketing, expansion, creator equipment/team, and sale actions must resolve through those models.
 
 ### Travel, pets, hobbies, and entertainment
 
@@ -266,6 +284,16 @@ Restoring a year previews age, year, and affected progress, then creates a new t
 No paywall is attached to restore. Store the content/engine compatibility needed to interpret old snapshots. Measure storage on a 120-year life before choosing compression or delta snapshots; do not delete advertised historical years silently to meet a size target.
 
 ## Death and legacy
+
+### Family tree, wills, and NPC inheritance
+
+The dedicated family-tree screen renders actual parent, adoptive/guardian, partner and child links, with correct generation counts, accessible member selection, and a family-history filter over recorded facts. The graph does not create duplicate people or assume that every family has two living parents.
+
+Write a Will uses a real estate plan: beneficiary allocations sum to 10,000 basis points (100%), executor eligibility is checked, and specific items must still be owned. Separate specific bequests from the remaining distributable pool so an heirloom is not inherited twice. Revalidate deceased beneficiaries, separation, protected family rights, debt, applicable tax and minors' trusts before settlement. Preview any rule-based adjustments clearly.
+
+NPC deaths can trigger inheritance using the deceased person's actual estate/plan, with debts, other heirs, and item transfers accounted for once. Do not fabricate $25,000 or a grandfather's watch solely to reproduce inheritance.png. Its memorial, effect-row and Continue layout is a result template, not a second estate engine.
+
+### Player death and child continuation
 
 Death records cause, date, final state, lifetime facts, and estate settlement identity. The summary selects actual career milestones, relationships/children, major assets, wealth, and notable acts. It never invents a successful career, home, or child.
 

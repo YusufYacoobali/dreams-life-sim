@@ -1,28 +1,28 @@
 # Screens, references, and navigation
 
-Part of the [Phase 0 master plan](MASTER_PLAN.md). This is the logical screen inventory derived from the specification. Actual screenshot-to-screen matching is pending because no design screenshots were supplied.
+Part of the [Phase 0 master plan](MASTER_PLAN.md). This inventory now incorporates all 27 supplied design files. See the [per-file reconciliation catalogue](design-reconciliation.md) for dimensions, screen mappings, provenance, and decisions.
 
 ## Reference register
 
 | Code | Expected reference family from the specification | Available evidence |
 | --- | --- | --- |
-| V01 | Welcome, creation, avatar, newborn | Written brief only |
-| V02 | Life dashboard, journal, profile | Written brief only |
-| V03 | Four tabs and white activity lists | Written brief only |
-| V04 | School, high school, university, applications | Written brief only |
-| V05 | Employment, colleagues, promotions, special careers | Written brief only |
-| V06 | Finances, investments, property, vehicles, possessions | Written brief only |
-| V07 | Relationships, dating, marriage, divorce, children | Written brief only |
-| V08 | Health, lifestyle, treatment | Written brief only |
-| V09 | Crime, arrest, trials, prison | Written brief only |
-| V10 | Fame, social media, businesses, hobbies | Written brief only |
-| V11 | Travel, holidays, pets | Written brief only |
-| V12 | Achievements, challenges, extras, settings | Written brief only |
-| V13 | Later consolidated event/choice/result modals | Written brief only; no versions to compare |
-| V14 | death screen.png | Authoritative filename specified, file absent |
+| V01 | Welcome, creation, avatar, newborn | 01/02/04; birth.png |
+| V02 | Life dashboard, journal, profile | 02/03/13; birth.png |
+| V03 | Four tabs and white activity lists | 03/05 and all feature sheets |
+| V04 | School, high school, university, applications | 05/06/13; birth.png |
+| V05 | Employment, colleagues, promotions, special careers | 06/13; Life Sim Tycoon_ Career And Business Hub.png |
+| V06 | Finances, investments, property, vehicles, possessions | 07; asset management.png; write will.png |
+| V07 | Relationships, dating, marriage, divorce, children | 08/09; breakup.png; family tree.png; heir.png |
+| V08 | Health, lifestyle, treatment | 05/10 |
+| V09 | Crime, arrest, trials, prison | 11/14 |
+| V10 | Fame, social media, businesses, hobbies | 12/13; later career/business hub |
+| V11 | Travel, holidays, pets | 10/13 |
+| V12 | Achievements, challenges, extras, settings | 14; paywall and sync.png (scope question pending) |
+| V13 | Later consolidated event/choice/result modals | 15/16/17; inheritance.png |
+| V14 | death screen.png | File present, inspected, authoritative; overrides death panels in 14/17 |
 | N | Necessary flow with no reference described | Proposed using the established component families |
 
-No row below implies its reference was visually reviewed. Feature screens use the most recent detailed reference once an actual file and its precedence can be established.
+All files named by these families have been visually reviewed. The reconciliation catalogue records which detailed designs take precedence; rows marked N remain designed from the shared language where no dedicated reference exists.
 
 ## A. Canonical screen inventory
 
@@ -33,6 +33,7 @@ List/detail pairs have real distinct purposes. Their loading, empty, owned/unown
 | O01 | Welcome / continue / new life | Launch → saved life or O02 | V01 |
 | O02 | Character creation with randomise, identity, location | O01 → O03 or birth result → L01 | V01 |
 | O03 | Appearance editor with portrait preview | O02 or approved appearance action → return | V01 |
+| O04 | One-time full-screen newborn introduction | Creation → Begin Life → L01 | V01, birth.png |
 | L01 | Life dashboard: identity, core stats, journal, Age Up | Birth/load/tabs → profile, actions, event queue | V02 |
 | L02 | Player profile and full contextual stats | L01 → identity, school/job shortcuts, back | V02 |
 | L03 | Journal/history with age filter | L01 → entries, historical facts, back | V02/V12 |
@@ -54,11 +55,16 @@ List/detail pairs have real distinct purposes. Their loading, empty, owned/unown
 | A11 | Possessions and heirlooms, owned/market segments | A01/Extras heirloom shortcut → A12 | V06/V12 |
 | A12 | Possession detail and ownership actions | A11 → transaction/result → detail | V06 |
 | A13 | Insurance and eligible asset coverage | A01/owned asset → policy quote or cancellation | V06/N |
+| A14 | Write a Will: beneficiaries, executor, allocations, special items | Assets/Extras → validate/finalise → estate summary | write will.png |
+| A15 | Property sale listing: price, estimated delay, terms | Owned property → list/withdraw/offer → actual settlement | asset management.png |
 | R01 | People: family/friends/partners and contextual contacts | Relationships tab → R02 or R03 | V07 |
 | R02 | Person profile and contextual relationship actions | R01/school/work/pet-related owner → action or R04/R05 | V07 |
 | R03 | Dating discovery and eligible introductions | R01/Activities shortcut → date decision → R02 | V07 |
 | R04 | Wedding arrangement: simple venue/budget choices | Engaged partner → quote/confirm/result → R02 | V07 |
 | R05 | Separation/divorce settlement and custody detail | Spouse action → terms/confirmation/result → R01 | V07/N |
+| R06 | Family tree and generation connections | Relationships → real person profile or family history | family tree.png |
+| R07 | Child custody agreement | R05 → custody selection → settlement confirmation | breakup.png |
+| R08 | Date/spend-time activity selection | Eligible person → activity → decision/result → R02 | 08; breakup.png |
 | X01 | Activities index grouped by current eligibility | Activities tab → relevant feature | V03 |
 | X02 | Education dashboard for school/course or no enrolment | X01/profile → classmates, study, X03 | V04 |
 | X03 | Education opportunities and applications | X02 → X04 | V04 |
@@ -93,20 +99,28 @@ List/detail pairs have real distinct purposes. Their loading, empty, owned/unown
 | X32 | Local lives / save management, archive, export/import | X31 → select/confirm/restore | V12/N |
 | X33 | Help, credits, content information | X31/O01 → back | N |
 | X34 | New business: name, type, startup cost in one form | X19 → funding/confirmation/result → X20 | V10/N |
+| X35 | Doctor consultation, symptoms, tests, referral | X10 → consultation/result or X11 | 10 |
+| X36 | Current/past medical conditions | X10 → X11 condition/treatment detail | 10 |
+| X37 | Exercise choices, classes, trainer, sport | X12 → action/terms/result | 10 |
+| X38 | Lifestyle routines: diet, sleep, meditation | X12 → routine selection or immediate action | 10 |
+| X39 | Prison activities | X15 → allowed study/work/exercise/visits/conflict action | 11 |
+| X40 | Criminal record and lasting restrictions | X13/X14 → real case details | 11 |
+| X41 | Social-post composer and content selection | X17 → post intent → actual simulated response | 12 |
+| X42 | Black market, offers and illicit-item ownership | X13/Extras → risk/quote/decision → legal/financial consequences | 14 |
 | S01 | Restore/loading state | Launch/import → validated route or S02 | N |
 | S02 | Save recovery, incompatible-save, storage-error states | Failed restore/write → retry, backup/import, safe exit | N |
 
-**Count: 65 canonical screen definitions.** O01–O03: 3; L01–L08: 8; A01–A13: 13; R01–R05: 5; X01–X34: 34; S01–S02: 2. This is a route/content inventory, not a promise of 65 bespoke layouts. Birth, pregnancy updates, interviews, graduation, promotions, hearings, and dates usually use existing screens and the shared modal flow.
+**Count: 79 canonical screen definitions.** O01–O04: 4; L01–L08: 8; A01–A15: 15; R01–R08: 8; X01–X42: 42; S01–S02: 2. This is a route/content inventory, not a promise of 79 bespoke layouts. Pregnancy updates, interviews, graduation, promotions, hearings, and date outcomes usually use existing screens and the shared modal flow.
 
 Pregnancy and parenting live in the relevant person's profile with dedicated sections/actions. Custody and settlement use R05 because their terms require an inspectable summary. Classmates, coworkers, teachers, doctors, and family members use R02 with role-specific actions.
 
 ## B. Reconciliation and overlap proposals
 
-These are **specification-level overlap resolutions**. No particular screenshot version has been selected or rejected because the files are absent.
+These initial overlap proposals are superseded where the [actual reconciliation](design-reconciliation.md) selects a reference or adds a required screen.
 
 | Overlap/conflict anticipated by the brief | Canonical resolution | Reason / evidence still needed |
 | --- | --- | --- |
-| Newborn/child/adult Life layouts | L01 with life-stage content; birth is an introductory milestone | Same life, journal, stats, and Age Up; reconcile actual header variants later |
+| Newborn/child/adult Life layouts | O04 birth introduction; L01 with life-stage content afterwards | birth.png clarifies the one-time introduction; 02/03 establish the continuing dashboard |
 | Profile versus dashboard | Compact L01; full identity/stats L02 | Avoid two competing home screens |
 | Journal in Life and Extras | One L03, reachable from both | Single chronological source |
 | Finance summaries on several screens | A01 totals; A02 breakdown; shared selectors everywhere | Prevent stale balances |
@@ -120,7 +134,7 @@ These are **specification-level overlap resolutions**. No particular screenshot 
 | Heirlooms under Assets and Extras | A11/A12 item type + filters | Same ownership and provenance |
 | Outcome popup designs | M04 result template with semantic variants | Prefer later consolidated reference when supplied |
 | Death popup versus death screen | L06 full-screen only | Explicit authority: death screen.png |
-| Conflicting typography/spacing/button versions | Extract a shared token set from approved winners | Do not guess a visual winner without actual references |
+| Conflicting typography/spacing/button versions | Use the initial palette/proportions in the reconciliation register, then compare actual captures | Source pixels do not identify an exact font family or establish completed UI fidelity |
 
 ## D. Logical navigation map
 
@@ -164,7 +178,7 @@ flowchart TD
 
 Proposed Expo Router structure: a root stack for onboarding, the four-tab shell, canonical feature/detail routes, restoration, and death. Cross-entry links pass entity IDs and an originating route; they never copy domain state. Back returns to the originating screen with fresh selectors.
 
-The bar is required on all four root tabs. Whether references retain it on nested feature pages is **pending visual reconciliation**; the route plan supports either presentation. Modal presentation preserves the underlying screen/scroll position. Root tabs retain their own scroll state. Android hardware Back follows the same stack; it cannot dismiss an unresolved required decision or accidentally start another year.
+The bar is required on all four root tabs and normal nested feature pages, matching the supplied references. It is not shown before an actual life exists or on terminal full-screen death. Modal presentation preserves the underlying screen/scroll position. Root tabs retain their own scroll state. Android hardware Back follows the same stack; it cannot dismiss an unresolved required decision or accidentally start another year.
 
 ## Shared modal structures
 
@@ -210,7 +224,7 @@ These flows need explicit designs even if later screenshots do not include them.
 | Safe areas / keyboard / small displays / text scaling | Shared layouts and scroll behavior | Choices, Age Up, and navigation remain reachable |
 | Reduced motion / sound/haptics disabled | X31 options applied centrally | Feedback still communicates through text |
 
-## Visual acceptance when references arrive
+## Running-app visual acceptance
 
 Every winning reference gets a screen ID, source filename, viewport, measured token notes, matched implementation screenshot, discrepancy notes, and acceptance status. Comparison covers header/safe areas, typography, tab layout, list density, portrait size, icon framing, buttons, modal proportions, scrolling, and death composition.
 

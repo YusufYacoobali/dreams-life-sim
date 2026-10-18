@@ -207,7 +207,7 @@ Count each situational template once by its primary category, even when it has s
 | Birth and early childhood | 16 |
 | School and teenage life | 34 |
 | University and early independence | 18 |
-| Employment and special careers | 28 |
+| Employment and special careers | 34 |
 | Relationships and family | 36 |
 | Money, assets, and investments | 22 |
 | Health and later life | 22 |
@@ -216,9 +216,9 @@ Count each situational template once by its primary category, even when it has s
 | Businesses | 12 |
 | Travel, pets, hobbies, entertainment | 14 |
 | Rare and cross-life callbacks | 10 |
-| **Total distinct templates** | **250** |
+| **Total distinct templates** | **256** |
 
-Every special-career path requires at least two path-specific situational templates within the employment allocation, plus its routine action/offer outcomes. These minimums do not substitute for coverage of success, failure, exit, and relevant milestones. Add content beyond 250 when coverage or playtesting demonstrates a gap.
+Every special-career path requires at least two path-specific situational templates within the employment allocation, plus its routine action/offer outcomes. Reconciliation adds Royalty, Astronaut and Military, increasing the allocation by six templates and the initial total to 256. These minimums do not substitute for coverage of success, failure, exit, and relevant milestones. Add further content when coverage or playtesting demonstrates a gap.
 
 Review coverage by life stage, system, rarity, financial circumstance, household arrangement, relationship status, country, and follow-up depth. Track coverage of ordinary, struggling, and successful lives; a library that only serves married millionaires is incomplete.
 

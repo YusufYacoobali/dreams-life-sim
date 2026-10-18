@@ -6,7 +6,7 @@ Part of the [Phase 0 master plan](MASTER_PLAN.md). No artwork has been generated
 
 ### Direction and constraints
 
-The written art brief is colourful, clean, rounded, friendly, lightly dimensional cartoon illustration, readable at mobile icon sizes. Match the actual reference art when supplied; this description cannot establish a particular artist's lighting, line weight, or portrait proportions.
+The written art brief is colourful, clean, rounded, friendly, lightly dimensional cartoon illustration, readable at mobile icon sizes. Match the actual art in the [27 reviewed references](design-reconciliation.md); final fidelity still requires running-app comparison.
 
 Use the available image-generation tool for original custom illustrations and illustrated icons. Do not use emoji, Unicode stand-ins, unrelated stock styles, or full screenshots as UI. Simple system arrows, chevrons, close controls, and similar controls may be native/vector shapes. Whether bottom-tab icons are vector or illustrated follows the references.
 
@@ -20,7 +20,7 @@ All entries are **planned / not generated**. Final filenames and quantities are 
 | --- | --- | --- |
 | portrait.player.* | Birth/infancy, child, teen, young adult, adult, older adult; selectable face/hair/appearance | Generated compatible layers; one stored appearance identity throughout ageing |
 | portrait.npc.* | Parents, siblings, friends, partners, children, classmates, teachers, coworkers, doctors, police, legal/business contacts | Same portrait system and registry as the player; roles use badges/clothing where justified |
-| activity.* | School, university, standard job, part-time job, actor, musician, athlete, politician, model, video creator, streamer, business | Reuse across list, career dashboard, and related events |
+| activity.* | School, university, standard job, part-time job, actor, musician, athlete, politician, model, video creator, streamer, business, royalty, astronaut, military | Reuse across list, career dashboard, and related events |
 | activity.* | Bank, investment, property, vehicle, possessions, relationships, family | Shared wealth/family categories rather than one image per transaction |
 | activity.* | Health, fitness, meditation, crime, court, prison, travel, pets, hobbies, entertainment, fame, social media, extras | Consistent icon scale, perspective, lighting, and framing |
 | event.* | Birthday, newborn, graduation, promotion, firing, marriage, breakup, pregnancy, success, setback | Reuse category illustrations or the relevant person's portrait wherever suitable |
@@ -33,11 +33,12 @@ All entries are **planned / not generated**. Final filenames and quantities are 
 | location.* | Supported destination thumbnails, local/international travel, study/work abroad | Reuse destination thumbnails; no need for a new painting per holiday |
 | achievement.* / challenge.* | Education, career, wealth, family, fame, crime, longevity, travel, rare milestones | Reusable trophy/badge families with native labels and locked/unlocked states |
 | special.welcome.* | Approved welcome/creation hero illustration | Generate after the composition is reconciled |
-| special.death.* | Tombstone and required approved death-screen illustration | Must fit death screen.png; do not invent the final composition before viewing it |
+| special.death.* | Tombstone with heart motif and supporting death-screen art | Use the reviewed dedicated death screen.png composition |
+| special.estate.* | Memorial portrait/candle/flowers, will/estate coins, family-tree motif | Dedicated inheritance.png, write will.png and family tree.png establish the families; render real text and data natively |
 | special.rare.* | Only exceptional events whose approved layout needs unique art | Explicitly budgeted exceptions; ordinary text events reuse assets |
 | branding.* | Original application icon, adaptive layers, launch artwork, store artwork if requested | Replace Expo starter branding late enough to use the approved game style |
 
-The activity manifest lists 32 semantic uses, not a commitment to generate 32 separate pictures: several can share an approved illustration. The event manifest similarly lists uses, with reuse decided explicitly in the registry. Asset counts cannot be marked complete from a prompt list.
+The activity manifest lists 35 semantic uses after adding Royalty, Astronaut and Military, not a commitment to generate 35 separate pictures: several can share an approved illustration. The event manifest similarly lists uses, with reuse decided explicitly in the registry. Asset counts cannot be marked complete from a prompt list.
 
 ### Persistent appearance
 
@@ -72,13 +73,13 @@ Follow the user's phases, but include engine and content validation throughout. 
 
 | Phase | Main deliverables | Concrete exit gate |
 | --- | --- | --- |
-| 0 — Plan/reconcile | This review pack; actual screenshot catalogue; winners/conflicts; confirmed adult audience and wider launch direction; country baseline | Overall direction approved; screenshot reconciliation remains required before code/art |
+| 0 — Plan/reconcile | This review pack; all 27 screenshots reviewed; winners/conflicts; confirmed adult audience and wider launch direction; country baseline | Complete: direction approved; references reconciled; user confirmed free/offline scope |
 | 1 — Technical/visual foundation | Router, theme, safe areas, shared rows/buttons/stats/portraits, four-tab shell, Life layout, Activities, modal state machine, engine command contracts | App still builds on both native targets; navigation/back/modal flow works; core reference composition checked when native captures are available |
 | 2 — Artwork and creation | Approved generated asset families, appearance rig, random/custom creation, birth/family generation, profile components | Several distinct seeded people retain identity across ages; creation produces a valid saveable world; required initial art exists and is reviewed |
 | 3 — Core playable life | Pure seeded engine, resumable Age Up, journal, modest reviewed event set, NPC ageing, basic money/health, save/load, death/new life | One complete ordinary life is playable; interruption/reload preserves decisions/results; no duplicated years or income; terminal death and New Life work |
 | 4 — Core life systems | Education/applications/funding; jobs/interviews/raises/retirement; relationships/marriage/children/divorce; assets, loans, property, vehicles, investments; full approved country roster | Scenario A and relevant failure cases work through actual commands under every approved launch pack; screens show derived current state, and saved lives resume correctly |
-| 5 — Expanded gameplay | Health/lifestyle, crime/court/prison/release, travel/emigration/abroad, pets, social/fame, business, all eight special careers, hobbies/entertainment | Scenarios B and C work; every listed special path has its own progression and exit; country-specific eligibility, cross-system restrictions, and finances are enforced |
-| 6 — Content/depth | At least 250 approved templates, callbacks, richer NPCs, achievements/challenges/heirlooms, inheritance/legacy, Time Machine, balance | Coverage report passes; multiple generations and restored timelines retain valid world/economy state; repeated play shows meaningful variety |
+| 5 — Expanded gameplay | Health/lifestyle, crime/court/prison/release/black market, travel/emigration/abroad, pets, social/fame, business, all eleven special paths, hobbies/entertainment | Scenarios B and C work; every illustrated special path has its own progression and exit; country-specific eligibility, cross-system restrictions, and finances are enforced |
+| 6 — Content/depth | 256-template initial target (250 minimum), callbacks, richer NPCs, achievements/challenges/heirlooms, wills/family tree/inheritance/legacy, Time Machine, balance | Coverage report passes; multiple generations and restored timelines retain valid world/economy state; repeated play shows meaningful variety |
 | 7 — Polish/release candidate | Reference comparisons, device flows, accessibility, performance, writing pass, regression fixes, original branding | All release gates below pass; outstanding issues are explicit; no claim of complete visual fidelity without real captures |
 
 Internal development may use labelled, unfinished layouts before Phase 2. Those are never represented as final generated artwork or shipped functional features. Keep incomplete menu entries out of a release build until their behavior and art pass acceptance.
@@ -107,10 +108,11 @@ Re-estimate after the Phase 3 vertical slice and native performance baseline. Re
 
 | Need | When it matters | Current position |
 | --- | --- | --- |
-| Actual design screenshots including death screen.png | Phase 0 visual reconciliation | Missing |
+| Actual design screenshots including death screen.png | Phase 0 visual reconciliation | Present: 27 files fetched from main and individually inspected; reconciliation documented |
 | Audience | Content/editorial direction | Confirmed: adults, non-graphic mature themes |
 | Launch-country scope | Content/rules freeze | Confirmed: wider international selection; twelve-country candidate roster proposed, exact roster pending review |
-| Implementation authorisation | Before Phase 1 code or any generation | Granted subject to reconciling screenshots first; that prerequisite remains blocked |
+| Implementation authorisation | Before Phase 1 code or any generation | Granted: references reconciled and the remaining scope conflict resolved |
+| Premium / optional cloud sync scope | Architecture and feature freeze | Resolved: free/offline local saves/export/import; no subscriptions, accounts or cloud services |
 | Image-generation capability | Phase 2 samples and batches | Available, not used |
 | SDK-compatible packages | Phase 1 onward | To be selected/installed after approval |
 | Android device/emulator with supported native tooling | UI and end-to-end acceptance | No configured Android SDK/emulator established in this cloud instance |
@@ -176,7 +178,7 @@ Use fixed regression seeds for discovered bugs plus an initial 1,000-seed multi-
 - Force-close at each annual stage, while a decision is open, after outcome commit but before Continue, and during an attempted storage failure.
 - Repeat the core economy/education/family path under every approved launch country pack. Exercise country-specific health, legal, retirement, inheritance, and special-career eligibility as those systems arrive.
 - Test representative cross-country moves covering USD, GBP, CAD, AUD, EUR, BRL, INR, JPY, and ZAR for the proposed roster; include shared-EUR moves, JPY rounding, qualification recognition, retained assets/debt, and pending restrictions. Validate every supported currency pair mathematically even where full UI scenarios use representative routes.
-- Exercise every special career's entry, ordinary progression, failure, and exit rather than considering Scenario C sufficient coverage for all eight.
+- Exercise every special career's entry, ordinary progression, failure, and exit rather than considering Scenario C sufficient coverage for all eleven.
 
 ## UI and device acceptance
 
@@ -214,7 +216,7 @@ These are provisional budgets, not measurements. Profile typical worlds and a st
 
 ## Release gate
 
-The initial complete release requires all requested systems, all eight special careers, the approved countries, reviewed artwork, at least 250 approved distinct event templates, full-life scenarios, death/legacy/Time Machine, migration/recovery checks, native builds, and actual UI/device acceptance.
+The initial complete release requires all requested systems, all eleven illustrated special paths, the approved countries, reviewed artwork, at least 250 approved distinct event templates (current initial target 256), full-life scenarios, wills/family tree/death/legacy/Time Machine, migration/recovery checks, native builds, and actual UI/device acceptance.
 
 Keep outcomes separate: passed, failed, skipped, blocked, and unrun. A reported app bug remains a bug even if the TypeScript build passes. An unavailable simulator is an unrun device check. A generated picture is not an integrated asset. A finite roadmap is not an implemented game.
 

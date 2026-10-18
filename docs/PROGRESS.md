@@ -10,28 +10,22 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
-## Current gate: blocked on reference screenshots
+## Current milestone: Phase 1 technical and visual foundation
 
-The accessible workspace was searched again after conditional approval. The only uploaded file is the text specification. The repository contains six Expo branding assets and no UI reference screenshot files, no design-references/ or design/ directory, and no death screen.png. The other accessible workspace download/library directories contain no supplied designs.
+The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.
 
-The six starter images were inspected during planning and are not game-screen references. No screenshot winners, duplicate-image comparisons, measured design tokens, or visual fidelity results can be recorded yet.
+The user explicitly resolved the Premium/cloud reference in favour of a free, offline game with local saves/export/import. No further general plan approval is needed. Implementation can proceed under the existing full-game authorisation.
 
-**Input needed:** attach the design screenshots or place them in /workspace/dreams-life-sim/design-references/, including death screen.png and the consolidated modal references. Preserve filenames and any known version ordering. No further general plan approval is being requested.
+The reconciled inventory contains 79 canonical screen definitions. Added requirements include a full-screen newborn introduction, wills, family tree, custody/date selection, detailed property sale/mortgage actions, health subviews, criminal record/prison actions, black market, and Royalty/Astronaut/Military career paths. There are now eleven special paths and an initial 256-template event allocation.
 
-When the files arrive:
-
-1. Inspect every supplied image and record actual filename, dimensions, screen coverage, and known version.
-2. Map images to the 65 proposed canonical screen IDs; update the inventory where references reveal additional real requirements.
-3. Reconcile duplicate designs using the stated priorities; document winning references, combinations, missing states, and conflicts.
-4. Extract shared colours, typography, spacing, icon/portrait dimensions, modal proportions, and death-screen composition.
-5. Resolve only material unanswered visual/product conflicts with the user. Then proceed into implementation and retain full release scope.
+Next: implement, test and commit the technical/visual foundation, then continue through every remaining phase. Running-app fidelity and device checks remain unverified until real captures/tests exist.
 
 ## Phase status
 
 | Phase | Status | Evidence / remaining work |
 | --- | --- | --- |
-| 0 — Planning and reconciliation | Partially complete; blocked | Review pack written and overall direction approved; actual screenshot reconciliation cannot run without files |
-| 1 — Technical and visual foundation | Not started | Starter app only; no router/theme/game UI/modal system implemented |
+| 0 — Planning and reconciliation | Complete | Overall direction approved; all 27 images reviewed; conflicts resolved, including confirmed free/offline scope |
+| 1 — Technical and visual foundation | In progress | Starter app only; no router/theme/game UI/modal system implemented |
 | 2 — Artwork and character creation | Not started | Image tool available; zero generated game assets or character-creation functionality |
 | 3 — Core playable life | Not started | No engine, Age Up, events, saves, playable death, or new-life flow |
 | 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
@@ -56,7 +50,7 @@ When the files arrive:
 | Health, conditions, treatment, lifestyle and wellbeing | No | No |
 | Crime, investigation, arrest, court, prison, record and release | No | No |
 | Social media, fame, sponsorships and controversies | No | No |
-| Businesses and all eight special-career paths | No | No |
+| Businesses and all eleven special-career paths | No | No |
 | Travel, emigration, work/study abroad, pets, hobbies and entertainment | No | No |
 | Country-specific rules and all proposed launch currencies | No | No |
 | Achievements, challenges, heirlooms and statistics | No | No |
@@ -70,12 +64,13 @@ When the files arrive:
 
 | Check | Outcome | Scope and limits |
 | --- | --- | --- |
-| Repository / available-file inspection | Completed | Confirms starter application and absence of supplied UI screenshot files in accessible project/attachment locations |
-| Planning documentation structure | Passed | Local links, 65 unique screen IDs, nine sample events, 250-template allocation, and twelve-country/nine-currency proposal checked during planning |
+| Repository / available-file inspection | Completed | Confirms starter application; remote refresh found the supplied design files missed by the earlier stale checkout |
+| Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
 | Gameplay unit/integration/full-life scenarios | Unrun | Game engine and test suites do not exist |
-| Generated artwork / screen fidelity | Unrun; blocked | No generated game artwork; design screenshot inputs missing |
+| Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
+| Generated artwork / screen fidelity | Unrun | Reference review is complete; no generated game art or running-app visual acceptance yet |
 | iOS/Android device interactions | Unrun | Appropriate native execution still needed later; bundle generation is insufficient |
 
 ## Change record
@@ -83,5 +78,5 @@ When the files arrive:
 - Prepared the A–H planning pack and preserved the supplied specification.
 - Recorded the confirmed adult audience and broader launch direction; expanded the proposal to twelve countries.
 - Recorded the user's conditional approval and full-game continuation requirement.
-- Added this progress ledger and retained screenshot reconciliation as the blocking prerequisite.
+- Added this progress ledger; corrected the stale-checkout diagnosis, merged the newer reference commits, reviewed all 27 files, and recorded the user's free/offline decision.
 - Application source, dependencies, and lockfile remain unchanged. No implementation milestone is claimed complete.
