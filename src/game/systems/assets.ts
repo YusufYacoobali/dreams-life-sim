@@ -96,7 +96,7 @@ export function completeAssetSale(world: World, assetId: string, price: bigint, 
 }
 function makeMortgage(world: World, asset: OwnedAsset, principal: bigint, interestBps: number, termMonths: number) {
   const id = 'mortgage_' + asset.id + '_' + world.revision;
-  const debt: World['liabilities'][number] = { id, ownerId: world.activePersonId, currency: asset.currency, kind: 'mortgage', principal, interestBps, assetId: asset.id, monthlyPayment: mortgagePayment(principal, interestBps, termMonths), remainingMonths: termMonths, missedPayments: 0 };
+  const debt: World['liabilities'][number] = { id, ownerId: world.activePersonId, currency: asset.currency, kind: 'mortgage', principal, interestBps, creditorId: null, assetId: asset.id, monthlyPayment: mortgagePayment(principal, interestBps, termMonths), remainingMonths: termMonths, missedPayments: 0 };
   world.liabilities.push(debt); asset.mortgageId = id;
   post(world, principal, principal, 'borrowing', 'Mortgage funding: ' + asset.name, id, active(world), asset.currency);
   return debt;
@@ -141,6 +141,7 @@ export function resolveAssets(world: World, command: AssetCommand) {
   } else if (command.type === 'rent-property') {
     if (asset.kind !== 'property' || asset.rental !== 'none' || asset.listing) throw new IneligibleAction('Choose an unlisted property that is not already rented');
     asset.primaryHome = false; asset.rental = 'listed'; asset.rentPerMonth = monthlyRent(asset);
+    for (const household of world.households) if (household.homeAssetId === asset.id) household.homeAssetId = null;
     result(world, 'Looking for a tenant', 'Rent starts after a tenant moves in. You now need other housing and keep paying this property’s costs.', 'property');
   } else if (command.type === 'stop-renting') {
     if (asset.rental === 'none') throw new IneligibleAction('This property is not rented');

@@ -19,7 +19,7 @@ export default function GameLayout() {
   if (!world.birthAcknowledged) return <Redirect href="/birth" />;
   if (world.people[world.activePersonId].died) return <Redirect href="/death" />;
   const tab: TabKey = params.tab === 'life' || params.tab === 'assets' || params.tab === 'relationships' || params.tab === 'activities' ? params.tab
-    : ['/assets', '/asset/', '/shopping/', '/offer/', '/investment', '/bank'].some(prefix => path.startsWith(prefix)) ? 'assets' : ['/relationships', '/person', '/household', '/meet-people'].some(prefix => path.startsWith(prefix)) ? 'relationships'
+    : ['/assets', '/asset/', '/shopping/', '/offer/', '/investment', '/bank'].some(prefix => path.startsWith(prefix)) ? 'assets' : ['/relationships', '/person', '/household', '/meet-people', '/family', '/divorce'].some(prefix => path.startsWith(prefix)) ? 'relationships'
     : path.startsWith('/activities') || path.startsWith('/health') || path.startsWith('/education') || path.startsWith('/work') || path.startsWith('/jobs') ? 'activities' : path.startsWith('/bank') ? 'assets' : 'life';
   return <View style={{ flex: 1, backgroundColor: c.background }}><View style={{ flex: 1 }}><Stack screenOptions={{ headerShown: false }}><Stack.Screen name="(tabs)" /></Stack></View>
     <BottomNavigation activeTab={tab} onSelectTab={id => router.navigate('/' + id)} renderIcon={(id, color) => <Ionicons name={icons[id]} color={color} size={26} />} />

@@ -48,6 +48,9 @@ export function financialActors(world: World): Person[] {
   }
   for (const asset of world.assets) if (asset.ownerId) ids.add(asset.ownerId);
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
+  for (const custody of world.custody) if (!custody.ended) { ids.add(custody.a); ids.add(custody.b); }
+  for (const pregnancy of world.pregnancies) if (pregnancy.status === 'pregnant') { ids.add(pregnancy.carrierId); ids.add(pregnancy.otherParentId); }
+  for (const debt of world.liabilities) if (debt.creditorId && debt.principal > 0n) { ids.add(debt.ownerId); ids.add(debt.creditorId); }
   for (const person of Object.values(world.people)) if (person.finance.cycleGross > 0n) ids.add(person.id);
   return [...ids].map(id => world.people[id]).filter(person => !person.died);
 }

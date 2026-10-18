@@ -7,7 +7,7 @@ import { educationSchema, employmentSchema, financeSchema, holdingSchema, liabil
 import { jobs } from './content/jobs';
 import { initialMarket } from './content/markets';
 import { assetCatalog } from './content/assets';
-import { biologySchema, genders, householdSchema, marriageSchema, newFamilyPerson, relationshipSchema } from './systems/familySchemas';
+import { biologySchema, custodySchema, genders, householdSchema, marriageSchema, newFamilyPerson, pregnancySchema, relationshipSchema } from './systems/familySchemas';
 import { netWorth } from './valuation';
 
 const percentage = z.number().int().min(0).max(100);
@@ -32,12 +32,13 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(5), engineVersion: z.literal(4), contentVersion: z.literal(1),
+  schemaVersion: z.literal(6), engineVersion: z.literal(5), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(relationshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
+  pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative() })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
@@ -126,6 +127,22 @@ export function validateWorld(value: unknown): World {
     if (!marriage.ended && !world.relationships.some(relation => relation.romance === 'married' && (relation.from === marriage.a && relation.to === marriage.b || relation.from === marriage.b && relation.to === marriage.a))) throw new Error('Invalid current marriage');
     marriageIds.add(marriage.id);
   }
+  const pregnancyIds = new Set<string>(), pregnantPeople = new Set<string>();
+  for (const pregnancy of world.pregnancies) {
+    const carrier = world.people[pregnancy.carrierId], other = world.people[pregnancy.otherParentId];
+    if (pregnancyIds.has(pregnancy.id) || !carrier || !other || carrier.id === other.id || compareDates(pregnancy.conceived, world.date) > 0 || compareDates(pregnancy.due, monthFrom(pregnancy.conceived, 9, pregnancy.conceived.day)) !== 0 || ageOn({ ...carrier, died: null }, pregnancy.conceived) < 18 || ageOn({ ...other, died: null }, pregnancy.conceived) < 18 || (!!pregnancy.ended !== (pregnancy.status !== 'pregnant')) || (pregnancy.ended && (compareDates(pregnancy.ended, pregnancy.conceived) < 0 || compareDates(pregnancy.ended, world.date) > 0))) throw new Error('Invalid pregnancy history');
+    pregnancyIds.add(pregnancy.id);
+    if (pregnancy.status === 'pregnant') { if (carrier.died || pregnantPeople.has(carrier.id) || pregnancy.childId) throw new Error('Invalid current pregnancy'); pregnantPeople.add(carrier.id); }
+    if (pregnancy.status === 'born' && (!pregnancy.childId || !world.people[pregnancy.childId] || !world.relationships.some(item => item.roles.includes('parent') && item.from === carrier.id && item.to === pregnancy.childId) || !world.relationships.some(item => item.roles.includes('parent') && item.from === other.id && item.to === pregnancy.childId))) throw new Error('Invalid birth record');
+    if (pregnancy.status !== 'born' && pregnancy.childId) throw new Error('Pregnancy has an unrelated child');
+  }
+  const custodyIds = new Set<string>(), currentCustody = new Set<string>();
+  for (const custody of world.custody) {
+    const child = world.people[custody.childId];
+    if (custodyIds.has(custody.id) || !child || !world.people[custody.a] || !world.people[custody.b] || custody.a === custody.b || ![custody.a, custody.b].includes(custody.primaryId) || !world.relationships.some(item => item.roles.includes('parent') && item.from === custody.a && item.to === child.id) || !world.relationships.some(item => item.roles.includes('parent') && item.from === custody.b && item.to === child.id) || compareDates(custody.started, world.date) > 0 || (custody.ended && (compareDates(custody.ended, custody.started) < 0 || compareDates(custody.ended, world.date) > 0))) throw new Error('Invalid custody record');
+    custodyIds.add(custody.id);
+    if (!custody.ended) { if (currentCustody.has(child.id) || child.died || ageOn(child, world.date) >= 18 || world.people[custody.primaryId].died || child.householdId !== world.people[custody.primaryId].householdId) throw new Error('Invalid current custody'); currentCustody.add(child.id); }
+  }
   for (const account of world.accounts) {
     const currencyKey = account.ownerId + ':' + account.currency;
     if (!world.people[account.ownerId] || account.cash < 0n || accountIds.has(account.id) || accountCurrencies.has(currencyKey)) throw new Error('Invalid cash account');
@@ -147,6 +164,7 @@ export function validateWorld(value: unknown): World {
   }
   for (const account of world.accounts) if (account.cash !== account.openingCash + (cashChanges.get(account.id) ?? 0n)) throw new Error('Cash does not reconcile with ledger');
   for (const liability of world.liabilities) if (!world.people[liability.ownerId] || !world.accounts.some(account => account.ownerId === liability.ownerId && account.currency === liability.currency) || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
+  for (const debt of world.liabilities) if (debt.creditorId && (!world.people[debt.creditorId] || debt.creditorId === debt.ownerId || !world.accounts.some(account => account.ownerId === debt.creditorId && account.currency === debt.currency))) throw new Error('Invalid internal creditor');
   const assetIds = new Set<string>(); const homes = new Set<string>();
   for (const asset of world.assets) {
     const catalog = assetCatalog.find(item => item.id === asset.catalogId);
@@ -247,6 +265,9 @@ export function decodeWorld(text: string): World {
       if (relation.romance === 'married') parsed.marriages.push({ id: 'marriage_' + relation.id, a: relation.from, b: relation.to, started: legacy.date, ended: null, endReason: null, baselineA: netWorth(legacy, relation.from), baselineB: netWorth(legacy, relation.to), ledgerStart: legacy.ledger.length, weddingCost: null });
     }
     parsed.actionCounts = Object.fromEntries(Object.entries(legacy.actionCounts).map(([key, count]) => [key.startsWith('person_') ? key : legacy.activePersonId + ':' + key, count]));
+  }
+  if (parsed && parsed.schemaVersion === 5) {
+    parsed.schemaVersion = 6; parsed.engineVersion = 5; parsed.pregnancies = []; parsed.custody = [];
   }
   return validateWorld(parsed);
 }

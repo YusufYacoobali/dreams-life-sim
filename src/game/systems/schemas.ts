@@ -21,7 +21,7 @@ export const financeSchema = z.object({
 });
 export const liabilitySchema = z.object({
   id: z.string(), ownerId: z.string(), currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']),
-  kind: z.enum(['student', 'personal', 'living', 'tax', 'mortgage']), principal: z.bigint().nonnegative(), interestBps: z.number().int().min(0).max(5000),
+  kind: z.enum(['student', 'personal', 'living', 'tax', 'mortgage', 'settlement', 'child-support']), principal: z.bigint().nonnegative(), interestBps: z.number().int().min(0).max(5000), creditorId: z.string().nullable().default(null),
   assetId: z.string().nullable().default(null), monthlyPayment: z.bigint().nonnegative().default(0n), remainingMonths: z.number().int().nonnegative().default(0), missedPayments: z.number().int().nonnegative().default(0),
 });
 export const physicalAssetSchema = z.object({

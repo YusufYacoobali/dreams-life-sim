@@ -8,7 +8,7 @@ export default function Activities() {
     <Card>
       <ActionRow title="Education" subtitle="Study, qualifications and tuition" icon={<Illustration id="education" />} onPress={() => router.push('/education')} />
       <ActionRow title="Occupation" subtitle="Jobs, performance and retirement" icon={<Illustration id="career" />} onPress={() => router.push('/work')} />
-      <ActionRow title="Family" subtitle="Your parents and the people in your life" icon={<Illustration id="relationship" />} onPress={() => router.navigate('/relationships')} />
+      <ActionRow title="Family" subtitle="Children, family planning and generations" icon={<Illustration id="relationship" />} onPress={() => router.push('/family')} />
       <ActionRow title="Health" subtitle="Your health, energy, fitness and stress" icon={<Illustration id="wellbeing" />} onPress={() => router.push('/health')} />
       <ActionRow title="My Life" subtitle="Your identity and personal profile" icon={<Illustration id="journal" />} onPress={() => router.push({ pathname: '/profile', params: { tab: 'activities' } })} />
       <ActionRow title="Saved Lives" subtitle="Import, export or restore a checkpoint" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />

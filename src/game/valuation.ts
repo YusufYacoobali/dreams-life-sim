@@ -19,6 +19,7 @@ export function netWorth(world: World, personId = world.activePersonId): Money {
   for (const asset of world.assets.filter(item => item.ownerId === personId)) minor += fxMoney(world, { minor: asset.value, currency: asset.currency }, currency).minor;
   for (const holding of world.holdings.filter(item => item.ownerId === personId)) minor += investmentValue(world, holding.instrumentId, holding.quantity, currency);
   for (const debt of world.liabilities.filter(item => item.ownerId === personId)) minor -= fxMoney(world, { minor: debt.principal, currency: debt.currency }, currency).minor;
+  for (const debt of world.liabilities.filter(item => item.creditorId === personId)) minor += fxMoney(world, { minor: debt.principal, currency: debt.currency }, currency).minor;
   return { minor, currency };
 }
 export function portfolioValue(world: World): Money {

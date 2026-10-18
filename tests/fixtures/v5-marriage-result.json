@@ -1,0 +1,4964 @@
+{
+  "schemaVersion": 5,
+  "engineVersion": 4,
+  "contentVersion": 1,
+  "id": "life_v3_fixture",
+  "revision": 70,
+  "date": {
+    "year": 2023,
+    "month": 1,
+    "day": 1
+  },
+  "activePersonId": "person_player",
+  "random": {
+    "events": 3392503493,
+    "npcs": 383050464,
+    "economy": 1110370232,
+    "outcomes": 1831565814
+  },
+  "people": {
+    "person_player": {
+      "id": "person_player",
+      "firstName": "Leonardo",
+      "lastName": "Ricci",
+      "gender": "female",
+      "nationality": "US",
+      "country": "US",
+      "city": "New York",
+      "born": {
+        "year": 2000,
+        "month": 1,
+        "day": 1
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 100,
+        "health": 92,
+        "smarts": 100,
+        "looks": 35,
+        "respect": 74,
+        "energy": 100,
+        "fitness": 72,
+        "stress": 1,
+        "discipline": 93,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 0,
+        "skin": 5,
+        "hair": 4,
+        "hairColor": 0
+      },
+      "traits": [
+        "reserved"
+      ],
+      "education": {
+        "stage": "none",
+        "field": "computing",
+        "school": "New York University",
+        "months": 48,
+        "requiredMonths": 48,
+        "grades": 100,
+        "effort": "focused",
+        "funding": "loan",
+        "tuition": {
+          "$dreamsBigInt": "0"
+        },
+        "tuitionPaidMonths": 48,
+        "paused": false,
+        "qualifications": [
+          {
+            "level": "secondary",
+            "field": "general",
+            "year": 2018
+          },
+          {
+            "level": "degree",
+            "field": "computing",
+            "year": 2022
+          }
+        ],
+        "lastStudyYear": null
+      },
+      "employment": {
+        "id": "employment_63",
+        "roleId": "developer",
+        "employer": "New York Technology",
+        "rank": 0,
+        "annualPay": {
+          "$dreamsBigInt": "7200000"
+        },
+        "paidMonths": 12,
+        "performance": 65,
+        "effort": "balanced"
+      },
+      "finance": {
+        "cycleGross": {
+          "$dreamsBigInt": "0"
+        },
+        "cycleWithheld": {
+          "$dreamsBigInt": "0"
+        },
+        "lifetimeGross": {
+          "$dreamsBigInt": "7200000"
+        },
+        "serviceMonths": 12,
+        "pensionAnnual": {
+          "$dreamsBigInt": "0"
+        },
+        "pensionMonths": 0
+      },
+      "biology": {
+        "role": "carry",
+        "fertility": 80
+      },
+      "attractedTo": [
+        "male",
+        "female",
+        "nonbinary"
+      ],
+      "wantsChildren": true,
+      "householdId": "household_person_player_69",
+      "lastEconomicMonth": 24276
+    },
+    "person_parent1": {
+      "id": "person_parent1",
+      "firstName": "Sam",
+      "lastName": "Ricci",
+      "gender": "female",
+      "nationality": "US",
+      "country": "US",
+      "city": "New York",
+      "born": {
+        "year": 1976,
+        "month": 1,
+        "day": 1
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 83,
+        "health": 96,
+        "smarts": 80,
+        "looks": 81,
+        "respect": 48,
+        "energy": 100,
+        "fitness": 61,
+        "stress": 16,
+        "discipline": 76,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 2,
+        "skin": 4,
+        "hair": 3,
+        "hairColor": 3
+      },
+      "traits": [
+        "ambitious"
+      ],
+      "education": {
+        "stage": "none",
+        "field": "",
+        "school": "",
+        "months": 0,
+        "requiredMonths": 0,
+        "grades": 50,
+        "effort": "balanced",
+        "funding": "public",
+        "tuition": {
+          "$dreamsBigInt": "0"
+        },
+        "tuitionPaidMonths": 0,
+        "paused": false,
+        "qualifications": [],
+        "lastStudyYear": null
+      },
+      "employment": null,
+      "finance": {
+        "cycleGross": {
+          "$dreamsBigInt": "0"
+        },
+        "cycleWithheld": {
+          "$dreamsBigInt": "0"
+        },
+        "lifetimeGross": {
+          "$dreamsBigInt": "0"
+        },
+        "serviceMonths": 0,
+        "pensionAnnual": {
+          "$dreamsBigInt": "0"
+        },
+        "pensionMonths": 0
+      },
+      "biology": {
+        "role": "carry",
+        "fertility": 80
+      },
+      "attractedTo": [
+        "male",
+        "female",
+        "nonbinary"
+      ],
+      "wantsChildren": true,
+      "householdId": "household_person_parent1",
+      "lastEconomicMonth": 24276
+    },
+    "person_parent2": {
+      "id": "person_parent2",
+      "firstName": "Avery",
+      "lastName": "Ricci",
+      "gender": "male",
+      "nationality": "US",
+      "country": "US",
+      "city": "New York",
+      "born": {
+        "year": 1965,
+        "month": 1,
+        "day": 1
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 78,
+        "health": 70,
+        "smarts": 37,
+        "looks": 64,
+        "respect": 50,
+        "energy": 100,
+        "fitness": 41,
+        "stress": 13,
+        "discipline": 79,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 2,
+        "skin": 0,
+        "hair": 0,
+        "hairColor": 0
+      },
+      "traits": [
+        "reserved"
+      ],
+      "education": {
+        "stage": "none",
+        "field": "",
+        "school": "",
+        "months": 0,
+        "requiredMonths": 0,
+        "grades": 50,
+        "effort": "balanced",
+        "funding": "public",
+        "tuition": {
+          "$dreamsBigInt": "0"
+        },
+        "tuitionPaidMonths": 0,
+        "paused": false,
+        "qualifications": [],
+        "lastStudyYear": null
+      },
+      "employment": null,
+      "finance": {
+        "cycleGross": {
+          "$dreamsBigInt": "0"
+        },
+        "cycleWithheld": {
+          "$dreamsBigInt": "0"
+        },
+        "lifetimeGross": {
+          "$dreamsBigInt": "0"
+        },
+        "serviceMonths": 0,
+        "pensionAnnual": {
+          "$dreamsBigInt": "0"
+        },
+        "pensionMonths": 0
+      },
+      "biology": {
+        "role": "contribute",
+        "fertility": 80
+      },
+      "attractedTo": [
+        "male",
+        "female",
+        "nonbinary"
+      ],
+      "wantsChildren": true,
+      "householdId": "household_person_parent2",
+      "lastEconomicMonth": 24276
+    },
+    "person_npc_67_3": {
+      "id": "person_npc_67_3",
+      "firstName": "Morgan",
+      "lastName": "Carter",
+      "gender": "female",
+      "nationality": "US",
+      "country": "US",
+      "city": "New York",
+      "born": {
+        "year": 1998,
+        "month": 4,
+        "day": 15
+      },
+      "died": null,
+      "causeOfDeath": null,
+      "stats": {
+        "happiness": 53,
+        "health": 75,
+        "smarts": 31,
+        "looks": 47,
+        "respect": 29,
+        "energy": 100,
+        "fitness": 50,
+        "stress": 50,
+        "discipline": 48,
+        "fame": 0
+      },
+      "appearance": {
+        "face": 1,
+        "skin": 0,
+        "hair": 4,
+        "hairColor": 4
+      },
+      "traits": [
+        "impulsive"
+      ],
+      "education": {
+        "stage": "none",
+        "field": "",
+        "school": "",
+        "months": 0,
+        "requiredMonths": 0,
+        "grades": 50,
+        "effort": "balanced",
+        "funding": "public",
+        "tuition": {
+          "$dreamsBigInt": "0"
+        },
+        "tuitionPaidMonths": 0,
+        "paused": false,
+        "qualifications": [
+          {
+            "level": "secondary",
+            "field": "general",
+            "year": 2016
+          }
+        ],
+        "lastStudyYear": null
+      },
+      "employment": {
+        "id": "employment_background_person_npc_67_3",
+        "roleId": "cleaner",
+        "employer": "New York Facilities",
+        "rank": 0,
+        "annualPay": {
+          "$dreamsBigInt": "2800000"
+        },
+        "paidMonths": 72,
+        "performance": 44,
+        "effort": "balanced"
+      },
+      "finance": {
+        "cycleGross": {
+          "$dreamsBigInt": "0"
+        },
+        "cycleWithheld": {
+          "$dreamsBigInt": "0"
+        },
+        "lifetimeGross": {
+          "$dreamsBigInt": "16800000"
+        },
+        "serviceMonths": 72,
+        "pensionAnnual": {
+          "$dreamsBigInt": "0"
+        },
+        "pensionMonths": 0
+      },
+      "biology": {
+        "role": "carry",
+        "fertility": 80
+      },
+      "attractedTo": [
+        "female"
+      ],
+      "wantsChildren": true,
+      "householdId": "household_person_player_69",
+      "lastEconomicMonth": 24276
+    }
+  },
+  "relationships": [
+    {
+      "id": "relation_parent_0",
+      "from": "person_parent1",
+      "to": "person_player",
+      "kind": "parent",
+      "roles": [
+        "parent"
+      ],
+      "romance": "none",
+      "since": {
+        "year": 2000,
+        "month": 1,
+        "day": 1
+      },
+      "parentType": "biological",
+      "strength": 100,
+      "trust": 67,
+      "memories": [
+        "birth"
+      ],
+      "lastInteractionYear": 2023
+    },
+    {
+      "id": "relation_parent_1",
+      "from": "person_parent2",
+      "to": "person_player",
+      "kind": "parent",
+      "roles": [
+        "parent"
+      ],
+      "romance": "none",
+      "since": {
+        "year": 2000,
+        "month": 1,
+        "day": 1
+      },
+      "parentType": "biological",
+      "strength": 70,
+      "trust": 67,
+      "memories": [
+        "birth"
+      ],
+      "lastInteractionYear": 2023
+    },
+    {
+      "id": "relation_person_player_person_npc_67_3",
+      "from": "person_player",
+      "to": "person_npc_67_3",
+      "kind": "spouse",
+      "roles": [
+        "acquaintance",
+        "spouse"
+      ],
+      "romance": "married",
+      "since": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "parentType": null,
+      "strength": 100,
+      "trust": 100,
+      "memories": [
+        "met:2023",
+        "engagement:2023",
+        "married:2023"
+      ],
+      "lastInteractionYear": 2023
+    }
+  ],
+  "households": [
+    {
+      "id": "household_person_parent1",
+      "name": "Sam’s household",
+      "members": [
+        "person_parent1"
+      ],
+      "homeAssetId": null
+    },
+    {
+      "id": "household_person_parent2",
+      "name": "Avery’s household",
+      "members": [
+        "person_parent2"
+      ],
+      "homeAssetId": null
+    },
+    {
+      "id": "household_person_player_69",
+      "name": "Leonardo Ricci’s household",
+      "members": [
+        "person_player",
+        "person_npc_67_3"
+      ],
+      "homeAssetId": null
+    }
+  ],
+  "marriages": [
+    {
+      "id": "marriage_69",
+      "a": "person_player",
+      "b": "person_npc_67_3",
+      "started": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "endReason": null,
+      "baselineA": {
+        "minor": {
+          "$dreamsBigInt": "90137195"
+        },
+        "currency": "USD"
+      },
+      "baselineB": {
+        "minor": {
+          "$dreamsBigInt": "9800000"
+        },
+        "currency": "USD"
+      },
+      "ledgerStart": 215,
+      "weddingCost": {
+        "minor": {
+          "$dreamsBigInt": "40000"
+        },
+        "currency": "USD"
+      }
+    }
+  ],
+  "accounts": [
+    {
+      "id": "account_person_player",
+      "ownerId": "person_player",
+      "currency": "USD",
+      "cash": {
+        "$dreamsBigInt": "104326000"
+      },
+      "openingCash": {
+        "$dreamsBigInt": "100000000"
+      }
+    },
+    {
+      "id": "account_person_parent1",
+      "ownerId": "person_parent1",
+      "currency": "USD",
+      "cash": {
+        "$dreamsBigInt": "6400000"
+      },
+      "openingCash": {
+        "$dreamsBigInt": "6400000"
+      }
+    },
+    {
+      "id": "account_person_parent2",
+      "ownerId": "person_parent2",
+      "currency": "USD",
+      "cash": {
+        "$dreamsBigInt": "1600000"
+      },
+      "openingCash": {
+        "$dreamsBigInt": "1600000"
+      }
+    },
+    {
+      "id": "account_person_npc_67_3",
+      "ownerId": "person_npc_67_3",
+      "currency": "USD",
+      "cash": {
+        "$dreamsBigInt": "9600000"
+      },
+      "openingCash": {
+        "$dreamsBigInt": "9600000"
+      }
+    }
+  ],
+  "liabilities": [
+    {
+      "id": "debt_living_person_player_USD",
+      "ownerId": "person_player",
+      "currency": "USD",
+      "kind": "living",
+      "principal": {
+        "$dreamsBigInt": "7509873"
+      },
+      "interestBps": 300,
+      "assetId": null,
+      "monthlyPayment": {
+        "$dreamsBigInt": "0"
+      },
+      "remainingMonths": 0,
+      "missedPayments": 0
+    },
+    {
+      "id": "debt_student_person_player_USD",
+      "ownerId": "person_player",
+      "currency": "USD",
+      "kind": "student",
+      "principal": {
+        "$dreamsBigInt": "6678932"
+      },
+      "interestBps": 500,
+      "assetId": null,
+      "monthlyPayment": {
+        "$dreamsBigInt": "0"
+      },
+      "remainingMonths": 0,
+      "missedPayments": 0
+    }
+  ],
+  "ledger": [
+    {
+      "id": "txn_46_0",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_49_1",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "category": "borrowing",
+      "description": "Student loan drawn"
+    },
+    {
+      "id": "txn_49_2",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2018,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tuition",
+      "description": "Tuition: New York University"
+    },
+    {
+      "id": "txn_53_3",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "350"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_4",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5833"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_5",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_6",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "701"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_7",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5858"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_8",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_9",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1053"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_10",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5882"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_11",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_12",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1405"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_13",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5907"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_14",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_15",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1759"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_16",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5931"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_17",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_18",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "2113"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_19",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5956"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_20",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_21",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "2468"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_22",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5981"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_23",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_24",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "2825"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_25",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6006"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_26",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_27",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "3182"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_28",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6031"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_29",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_30",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "3540"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_31",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6056"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_32",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_33",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "3898"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_34",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2018,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6081"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_35",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2018,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_53_36",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "4258"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_53_37",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6106"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_53_38",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_39",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "category": "borrowing",
+      "description": "Student loan drawn"
+    },
+    {
+      "id": "txn_56_40",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2019,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tuition",
+      "description": "Tuition: New York University"
+    },
+    {
+      "id": "txn_56_41",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "4619"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_42",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "11965"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_43",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_44",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "4980"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_45",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12015"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_46",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_47",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5343"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_48",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12065"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_49",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_50",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "5706"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_51",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12115"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_52",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_53",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6071"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_54",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12166"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_55",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_56",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6436"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_57",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12216"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_58",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_59",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "6802"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_60",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12267"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_61",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_62",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "7169"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_63",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12318"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_64",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_65",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "7537"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_66",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12370"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_67",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_68",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "7906"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_69",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12421"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_70",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_71",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "8275"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_72",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2019,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12473"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_73",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2019,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_56_74",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "8646"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_56_75",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12525"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_56_76",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_77",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "category": "borrowing",
+      "description": "Student loan drawn"
+    },
+    {
+      "id": "txn_59_78",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2020,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tuition",
+      "description": "Tuition: New York University"
+    },
+    {
+      "id": "txn_59_79",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "9018"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_80",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18411"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_81",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_82",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "9390"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_83",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18487"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_84",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_85",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "9764"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_86",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18564"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_87",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_88",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "10138"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_89",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18642"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_90",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_91",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "10513"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_92",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18719"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_93",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_94",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "10890"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_95",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18797"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_96",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_97",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "11267"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_98",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18876"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_99",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_100",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "11645"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_101",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18954"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_102",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_103",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12024"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_104",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "19033"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_105",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_106",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12404"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_107",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "19113"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_108",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_109",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "12785"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_110",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2020,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "19192"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_111",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2020,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_59_112",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "13167"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_59_113",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "19272"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_59_114",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_115",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "1400000"
+      },
+      "category": "borrowing",
+      "description": "Student loan drawn"
+    },
+    {
+      "id": "txn_61_116",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2021,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-1400000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tuition",
+      "description": "Tuition: New York University"
+    },
+    {
+      "id": "txn_61_117",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "13550"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_118",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25186"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_119",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_120",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "13934"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_121",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25291"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_122",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_123",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "14319"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_124",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25396"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_125",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_126",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "14705"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_127",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25502"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_128",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_129",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "15091"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_130",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25608"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_131",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_132",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "15479"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_133",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25715"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_134",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_135",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "15868"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_136",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25822"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_137",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_138",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "16257"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_139",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "25930"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_140",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_141",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "16648"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_142",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26038"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_143",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_144",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "17040"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_145",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26146"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_146",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_147",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "17432"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_148",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2021,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26255"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_149",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2021,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_61_150",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "17826"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_61_151",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26365"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_61_152",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "140000"
+      },
+      "category": "living",
+      "description": "Monthly living costs (unpaid part added to arrears)"
+    },
+    {
+      "id": "txn_65_153",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_154",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_155",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18220"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_156",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26474"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_157",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 2,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_158",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_159",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_160",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18266"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_161",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26585"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_162",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 3,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_163",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_164",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_165",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18312"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_166",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26695"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_167",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 4,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_168",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_169",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_170",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18357"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_171",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26807"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_172",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 5,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_173",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_174",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_175",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18403"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_176",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "26918"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_177",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 6,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_178",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_179",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_180",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18449"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_181",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27031"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_182",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 7,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_183",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_184",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_185",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18496"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_186",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27143"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_187",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 8,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_188",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_189",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_190",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18542"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_191",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27256"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_192",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 9,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_193",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_194",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_195",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18588"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_196",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27370"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_197",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 10,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_198",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_199",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_200",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18635"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_201",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27484"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_202",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 11,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_203",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_204",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_205",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2022,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18681"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_206",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2022,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27598"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_207",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2022,
+      "month": 12,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_65_208",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "600000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "income",
+      "description": "Employment pay"
+    },
+    {
+      "id": "txn_65_209",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-79500"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "tax",
+      "description": "Income tax withheld"
+    },
+    {
+      "id": "txn_65_210",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_living_person_player_USD",
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "18728"
+      },
+      "category": "interest",
+      "description": "Interest added to living debt"
+    },
+    {
+      "id": "txn_65_211",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": "debt_student_person_player_USD",
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "27713"
+      },
+      "category": "interest",
+      "description": "Interest added to student debt"
+    },
+    {
+      "id": "txn_65_212",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-140000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "living",
+      "description": "Monthly living costs"
+    },
+    {
+      "id": "txn_67_213",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-200000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "purchase",
+      "description": "Purchased Engagement Ring"
+    },
+    {
+      "id": "txn_69_214",
+      "personId": "person_player",
+      "accountId": "account_person_player",
+      "liabilityId": null,
+      "year": 2023,
+      "month": 1,
+      "currency": "USD",
+      "cashDelta": {
+        "$dreamsBigInt": "-40000"
+      },
+      "debtDelta": {
+        "$dreamsBigInt": "0"
+      },
+      "category": "wedding",
+      "description": "Wedding with Morgan"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset_67",
+      "ownerId": "person_npc_67_3",
+      "catalogId": "engagement-ring",
+      "kind": "possession",
+      "name": "Engagement Ring",
+      "country": "US",
+      "city": "New York",
+      "currency": "USD",
+      "pricePaid": {
+        "$dreamsBigInt": "200000"
+      },
+      "costBasis": {
+        "$dreamsBigInt": "200000"
+      },
+      "value": {
+        "$dreamsBigInt": "200000"
+      },
+      "condition": 100,
+      "ageMonths": 0,
+      "acquired": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "mortgageId": null,
+      "primaryHome": false,
+      "rental": "none",
+      "rentPerMonth": {
+        "$dreamsBigInt": "0"
+      },
+      "upkeepBps": 0,
+      "insured": false,
+      "listing": null,
+      "provenance": [
+        "Purchased by Leonardo Ricci in 2023",
+        "Given to Morgan Carter by Leonardo Ricci in 2023"
+      ]
+    }
+  ],
+  "holdings": [],
+  "market": {
+    "propertyIndex": 10000,
+    "fx": {
+      "USD": {
+        "numerator": {
+          "$dreamsBigInt": "10000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "10000"
+        }
+      },
+      "CAD": {
+        "numerator": {
+          "$dreamsBigInt": "1350000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "GBP": {
+        "numerator": {
+          "$dreamsBigInt": "780000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "AUD": {
+        "numerator": {
+          "$dreamsBigInt": "1520000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "EUR": {
+        "numerator": {
+          "$dreamsBigInt": "920000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "BRL": {
+        "numerator": {
+          "$dreamsBigInt": "5100000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "INR": {
+        "numerator": {
+          "$dreamsBigInt": "83000000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      },
+      "JPY": {
+        "numerator": {
+          "$dreamsBigInt": "1500000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "10000"
+        }
+      },
+      "ZAR": {
+        "numerator": {
+          "$dreamsBigInt": "18500000"
+        },
+        "denominator": {
+          "$dreamsBigInt": "1000000"
+        }
+      }
+    },
+    "prices": {
+      "GROVE": {
+        "minor": {
+          "$dreamsBigInt": "10000"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "10000"
+            }
+          }
+        ]
+      },
+      "NORTH": {
+        "minor": {
+          "$dreamsBigInt": "4500"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "4500"
+            }
+          }
+        ]
+      },
+      "LUMEN": {
+        "minor": {
+          "$dreamsBigInt": "2500"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "2500"
+            }
+          }
+        ]
+      },
+      "VISTA": {
+        "minor": {
+          "$dreamsBigInt": "7500"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "7500"
+            }
+          }
+        ]
+      },
+      "ORBIT": {
+        "minor": {
+          "$dreamsBigInt": "6500000"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "6500000"
+            }
+          }
+        ]
+      },
+      "MOSAIC": {
+        "minor": {
+          "$dreamsBigInt": "300000"
+        },
+        "history": [
+          {
+            "year": 2023,
+            "month": 1,
+            "minor": {
+              "$dreamsBigInt": "300000"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "workHistory": [
+    {
+      "id": "employment_63",
+      "personId": "person_player",
+      "roleId": "developer",
+      "employer": "New York Technology",
+      "started": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "monthsWorked": 12,
+      "grossEarned": {
+        "$dreamsBigInt": "7200000"
+      }
+    },
+    {
+      "id": "employment_background_person_npc_67_3",
+      "personId": "person_npc_67_3",
+      "roleId": "cleaner",
+      "employer": "New York Facilities",
+      "started": {
+        "year": 2017,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "monthsWorked": 72,
+      "grossEarned": {
+        "$dreamsBigInt": "16800000"
+      }
+    }
+  ],
+  "journal": [
+    {
+      "id": "journal_birth",
+      "date": {
+        "year": 2000,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I was born in New York, United States.",
+      "category": "birth"
+    },
+    {
+      "id": "event_2001_first-cake_choice",
+      "date": {
+        "year": 2001,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I wore my birthday cake. Sam kept the photograph.",
+      "category": "event"
+    },
+    {
+      "id": "year_3_quiet",
+      "date": {
+        "year": 2002,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I grew a little more confident in a world full of things to investigate.",
+      "category": "year"
+    },
+    {
+      "id": "event_2003_blanket-dragon_choice",
+      "date": {
+        "year": 2003,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "My imaginary dragon joined bedtime stories.",
+      "category": "event"
+    },
+    {
+      "id": "event_2004_shoe-principle_choice",
+      "date": {
+        "year": 2004,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I let Sam help with my shoes.",
+      "category": "event"
+    },
+    {
+      "id": "event_2005_library-card_choice",
+      "date": {
+        "year": 2005,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I borrowed the largest book I could carry.",
+      "category": "event"
+    },
+    {
+      "id": "fact_14_6",
+      "date": {
+        "year": 2006,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I started at New York Primary School.",
+      "category": "education"
+    },
+    {
+      "id": "event_2006_rainy-fort_choice",
+      "date": {
+        "year": 2006,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I built a blanket fort that almost met building regulations.",
+      "category": "event"
+    },
+    {
+      "id": "event_2007_broken-mug_choice",
+      "date": {
+        "year": 2007,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I admitted breaking Sam’s mug.",
+      "category": "event"
+    },
+    {
+      "id": "year_20_quiet",
+      "date": {
+        "year": 2008,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "year_22_quiet",
+      "date": {
+        "year": 2009,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "event_2010_library-card_choice",
+      "date": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I borrowed the largest book I could carry.",
+      "category": "event"
+    },
+    {
+      "id": "event_2011_rainy-fort_choice",
+      "date": {
+        "year": 2011,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I built a blanket fort that almost met building regulations.",
+      "category": "event"
+    },
+    {
+      "id": "fact_30_13",
+      "date": {
+        "year": 2012,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I moved on to New York Secondary School.",
+      "category": "education"
+    },
+    {
+      "id": "event_2012_first-presentation_choice",
+      "date": {
+        "year": 2012,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I got through an introduction without pretending to be interesting.",
+      "category": "event"
+    },
+    {
+      "id": "event_2013_parent-old-music_choice",
+      "date": {
+        "year": 2013,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened to Sam’s old music and the story behind it.",
+      "category": "event"
+    },
+    {
+      "id": "year_36_quiet",
+      "date": {
+        "year": 2014,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "event_2015_group-chat-rumour_choice",
+      "date": {
+        "year": 2015,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I challenged a rumour in a group chat.",
+      "category": "event"
+    },
+    {
+      "id": "event_2016_parent-boundary_choice",
+      "date": {
+        "year": 2016,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I agreed on clearer check-ins with Sam.",
+      "category": "event"
+    },
+    {
+      "id": "year_44_quiet",
+      "date": {
+        "year": 2017,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_46_20",
+      "date": {
+        "year": 2018,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I completed secondary education with grades of 92%.",
+      "category": "education"
+    },
+    {
+      "id": "event_2018_community-garden_choice",
+      "date": {
+        "year": 2018,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I volunteered at a community garden in New York.",
+      "category": "event"
+    },
+    {
+      "id": "fact_49_22",
+      "date": {
+        "year": 2018,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I enrolled at New York University to study computing.",
+      "category": "education"
+    },
+    {
+      "id": "event_2019_first-presentation_choice",
+      "date": {
+        "year": 2019,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I got through an introduction without pretending to be interesting.",
+      "category": "event"
+    },
+    {
+      "id": "event_2020_comparison-scroll_choice",
+      "date": {
+        "year": 2020,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing my evening to everyone else’s highlights.",
+      "category": "event"
+    },
+    {
+      "id": "year_59_quiet",
+      "date": {
+        "year": 2021,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_61_26",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I completed my computing degree with grades of 100%.",
+      "category": "education"
+    },
+    {
+      "id": "year_61_quiet",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_63_28",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I started work as a software developer at New York Technology.",
+      "category": "work"
+    },
+    {
+      "id": "fact_65_29",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "My income for the year was $72,000.00; income tax was $9,540.00.",
+      "category": "finance"
+    },
+    {
+      "id": "year_65_quiet",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_67_31",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I bought Engagement Ring in New York.",
+      "category": "assets"
+    },
+    {
+      "id": "fact_67_32",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "Morgan accepted my proposal.",
+      "category": "relationships"
+    },
+    {
+      "id": "fact_69_33",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I married Morgan Carter.",
+      "category": "relationships"
+    }
+  ],
+  "birthAcknowledged": true,
+  "calendarAnchorDay": 1,
+  "annual": null,
+  "pending": {
+    "kind": "result",
+    "id": "action_69",
+    "title": "You’re married",
+    "body": "Your marriage and ceremony payment are recorded. You now share a household while retaining your own accounts and legal ownership.",
+    "illustration": "rings",
+    "effects": [
+      {
+        "id": "happiness",
+        "label": "Happiness",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "respect",
+        "label": "Respect",
+        "value": "+2%",
+        "tone": "positive"
+      }
+    ]
+  },
+  "eventHistory": [
+    {
+      "templateId": "first-cake",
+      "year": 2001
+    },
+    {
+      "templateId": "blanket-dragon",
+      "year": 2003
+    },
+    {
+      "templateId": "shoe-principle",
+      "year": 2004
+    },
+    {
+      "templateId": "library-card",
+      "year": 2005
+    },
+    {
+      "templateId": "rainy-fort",
+      "year": 2006
+    },
+    {
+      "templateId": "broken-mug",
+      "year": 2007
+    },
+    {
+      "templateId": "library-card",
+      "year": 2010
+    },
+    {
+      "templateId": "rainy-fort",
+      "year": 2011
+    },
+    {
+      "templateId": "first-presentation",
+      "year": 2012
+    },
+    {
+      "templateId": "parent-old-music",
+      "year": 2013
+    },
+    {
+      "templateId": "group-chat-rumour",
+      "year": 2015
+    },
+    {
+      "templateId": "parent-boundary",
+      "year": 2016
+    },
+    {
+      "templateId": "community-garden",
+      "year": 2018
+    },
+    {
+      "templateId": "first-presentation",
+      "year": 2019
+    },
+    {
+      "templateId": "comparison-scroll",
+      "year": 2020
+    }
+  ],
+  "actionCounts": {
+    "person_player:education:2018:university:computing": 1,
+    "person_player:job:2022:developer": 1,
+    "person_player:social:2023:person_npc_67_3:propose": 1
+  }
+}

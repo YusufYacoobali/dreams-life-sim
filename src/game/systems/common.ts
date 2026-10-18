@@ -32,7 +32,7 @@ export function borrow(world: World, amount: bigint, kind: World['liabilities'][
   const person = active(world); const account = accountFor(world);
   const id = 'debt_' + kind + '_' + person.id + '_' + account.currency;
   let liability = world.liabilities.find(candidate => candidate.id === id);
-  if (!liability) { liability = { id, ownerId: person.id, currency: account.currency, kind, principal: 0n, interestBps, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
+  if (!liability) { liability = { id, ownerId: person.id, currency: account.currency, kind, principal: 0n, interestBps, creditorId: null, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
   liability.principal += amount;
   post(world, amount, amount, 'borrowing', kind === 'student' ? 'Student loan drawn' : 'Personal loan drawn', id);
 }
@@ -44,7 +44,7 @@ export function charge(world: World, amount: bigint, category: string, descripti
   const unpaid = amount - account.cash;
   const id = 'debt_' + arrears + '_' + person.id + '_' + account.currency;
   let liability = world.liabilities.find(candidate => candidate.id === id);
-  if (!liability) { liability = { id, ownerId: person.id, currency: account.currency, kind: arrears, principal: 0n, interestBps: 300, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
+  if (!liability) { liability = { id, ownerId: person.id, currency: account.currency, kind: arrears, principal: 0n, interestBps: 300, creditorId: null, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
   liability.principal += unpaid;
   post(world, -account.cash, unpaid, category, description + ' (unpaid part added to arrears)', id, person, account.currency);
 }

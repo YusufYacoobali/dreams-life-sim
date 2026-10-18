@@ -15,6 +15,8 @@ export const marriageSchema = z.object({
   baselineA: moneySchema, baselineB: moneySchema, ledgerStart: z.number().int().nonnegative(), weddingCost: moneySchema.nullable(),
 });
 export const biologySchema = z.object({ role: z.enum(['carry', 'contribute', 'neither']), fertility: z.number().int().min(0).max(100) });
+export const pregnancySchema = z.object({ id: z.string(), carrierId: z.string(), otherParentId: z.string(), conceived: dateSchema, due: dateSchema, status: z.enum(['pregnant', 'born', 'lost', 'ended-death']), childId: z.string().nullable(), ended: dateSchema.nullable() });
+export const custodySchema = z.object({ id: z.string(), childId: z.string(), a: z.string(), b: z.string(), primaryId: z.string(), arrangement: z.enum(['shared', 'sole']), started: dateSchema, ended: dateSchema.nullable(), lastReviewYear: z.number().int() });
 export function newFamilyPerson(gender: typeof genders[number]) {
   return { biology: { role: gender === 'female' ? 'carry' as const : gender === 'male' ? 'contribute' as const : 'neither' as const, fertility: 80 }, attractedTo: [...genders], wantsChildren: true, householdId: null as string | null };
 }

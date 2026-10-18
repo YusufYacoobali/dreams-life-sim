@@ -37,6 +37,7 @@ export function resolveFinance(world: World, command: FinanceCommand) {
     if (command.amount > paymentAccount.cash) throw new IneligibleAction('Your balance cannot cover this repayment');
     debt.principal -= command.amount;
     post(world, -command.amount, -command.amount, 'repayment', 'Debt repayment', debt.id, person, debt.currency);
+    if (debt.creditorId) post(world, command.amount, 0n, 'repayment-received', 'Family obligation repayment', null, world.people[debt.creditorId], debt.currency);
     result(world, 'Repayment completed', 'Your cash and outstanding debt both fell by the amount paid.', 'money');
   } else {
     if (ageOn(person, world.date) < rule.adultAge) throw new IneligibleAction('Currency exchange is available to adults');

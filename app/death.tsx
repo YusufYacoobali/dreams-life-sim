@@ -17,6 +17,7 @@ export default function Death() {
   const player = world.people[world.activePersonId];
   if (!player.died) return <Redirect href="/life" />;
   const children = world.relationships.filter(relation => relation.kind === 'parent' && relation.from === player.id);
+  const livingChildren = children.filter(relation => !world.people[relation.to].died);
   const career = world.workHistory.filter(record => record.personId === player.id).sort((a, b) => b.monthsWorked - a.monthsWorked)[0];
   return <SafeAreaView style={{ flex: 1, backgroundColor: '#1B2433' }}><StatusBar style="light" /><ScrollView contentContainerStyle={{ padding: 26, gap: 18, alignItems: 'center' }}>
     <Image source={require('../assets/generated/death-memorial.png')} accessibilityLabel="A stone memorial with a pink heart" style={{ width: 170, height: 170, marginTop: 18 }} resizeMode="contain" />
@@ -34,8 +35,8 @@ export default function Death() {
     </View>
     <DeathButton label="View Life Summary" onPress={() => router.push('/life-summary')} />
     <DeathButton label="Start a New Life" onPress={() => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString() } })} />
-    <Pressable accessibilityRole="button" accessibilityState={{ disabled: true }} accessibilityLabel="Continue as Child. No living child is available." disabled style={{ width: '100%', minHeight: 52, backgroundColor: '#354050', padding: 14, borderRadius: 12, alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: '#C3CEDB', fontSize: 16, fontWeight: '600' }}>Continue as Child</Text></Pressable>
-    <Text style={{ color: '#C3CEDB', textAlign: 'center', fontSize: 14 }}>No living child is available to continue this life.</Text>
+    <Pressable accessibilityRole="button" accessibilityState={{ disabled: true }} accessibilityLabel={'Continue as Child. ' + (livingChildren.length ? 'An estate settlement is required.' : 'No living child is available.')} disabled style={{ width: '100%', minHeight: 52, backgroundColor: '#354050', padding: 14, borderRadius: 12, alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: '#C3CEDB', fontSize: 16, fontWeight: '600' }}>Continue as Child</Text></Pressable>
+    <Text style={{ color: '#C3CEDB', textAlign: 'center', fontSize: 14 }}>{livingChildren.length ? 'Child continuation requires an estate settlement.' : 'No living child is available to continue this life.'}</Text>
   </ScrollView></SafeAreaView>;
 }
 function DeathButton({ label, onPress }: { label: string; onPress: () => void }) {

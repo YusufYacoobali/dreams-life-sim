@@ -15,9 +15,10 @@ import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from '
 import { connectPerson, recordFamilyDeath, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
+import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -36,6 +37,7 @@ function death(world: World, personId: string, cause: string) {
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
   if (person.employment) endEmployment(world, personId);
+  careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
     world.annual = null; world.pending = null;
@@ -54,7 +56,10 @@ function processMonth(world: World) {
   for (const person of actors) { settleBackground(world, person, world.date.year * 12 + world.date.month - 2); openingCash.set(person.id, accountFor(world, person).cash); workMonth(world, person); }
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
-  for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); npcDiscretionaryMonth(world, person, openingCash.get(person.id)!); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
+  for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
+  familyFinanceMonth(world);
+  for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
+  familyMonth(world);
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const age = ageOn(person, world.date);
@@ -78,6 +83,7 @@ function finishYear(world: World) {
   for (const person of financialActors(world)) settleTax(world, person);
   npcYearDecisions(world);
   relationshipsYear(world);
+  familyYear(world);
   const eligible = eligibleTemplates(world);
   const birthday = eligible.find(template => template.id === 'first-cake');
   // Introductory year is guaranteed; later years leave room for quiet years.
@@ -178,12 +184,14 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const assets = assetCommandSchema.safeParse(command);
     const market = marketCommandSchema.safeParse(command);
     const social = socialCommandSchema.safeParse(command);
+    const family = familyCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
     else if (assets.success) resolveAssets(world, assets.data);
     else if (market.success) resolveMarket(world, market.data);
     else if (social.success) resolveSocial(world, social.data);
+    else if (family.success) resolveFamily(world, family.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;
