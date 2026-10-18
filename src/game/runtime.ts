@@ -8,6 +8,7 @@ export const effectSchema = z.discriminatedUnion('kind', [
 ]);
 export type Effect = z.infer<typeof effectSchema>;
 export const effectRowSchema = z.object({ id: z.string(), label: z.string(), value: z.string(), tone: z.enum(['positive', 'negative', 'neutral']) });
+export type RuntimeEffectRow = z.infer<typeof effectRowSchema>;
 export const choiceSchema = z.object({
   id: z.string(), label: z.string(), effects: z.array(effectSchema),
   resultTitle: z.string(), resultBody: z.string(), journal: z.string(),

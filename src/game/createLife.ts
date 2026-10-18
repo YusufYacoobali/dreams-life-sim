@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
 import { dateSchema, GameDate, Person, personSchema, validateWorld, World } from './model';
-import { currencyDigits } from './money';
+import { roundRatio } from './money';
 import { forkRandom, randomInteger } from './random';
 import { daysInMonth } from './calendar';
+import { newEducation, newFinance } from './systems/schemas';
+import { rules } from './rules';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -36,6 +38,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     stats: { happiness: roll(65, 95), health: roll(80, 100), smarts: roll(25, 90), looks: roll(30, 90), respect: roll(30, 65), energy: 100, fitness: roll(35, 70), stress: age ? roll(10, 40) : 0, discipline: roll(30, 80), fame: 0 },
     appearance: { face: roll(0, 3), skin: roll(0, 5), hair: roll(0, 7), hairColor: roll(0, 4) },
     traits: [(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'] as const)[roll(0, 5)]],
+    education: newEducation(), employment: null, finance: newFinance(),
   });
   const player = person('person_player', input.firstName, input.gender, 0);
   player.appearance = { ...input.appearance };
@@ -43,15 +46,18 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const parent2 = person('person_parent2', country.firstNames[roll(0, country.firstNames.length - 1)], 'male', roll(25, 45));
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
-  const scale = 10n ** BigInt(currencyDigits[country.currency]);
   return validateWorld({
-    schemaVersion: 2, engineVersion: 1, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 3, engineVersion: 2, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
     people,
     relationships: guardians.map((p, i) => ({ id: 'relation_parent_' + i, from: p.id, to: player.id, kind: 'parent' as const, strength: roll(65, 95), trust: roll(65, 95), memories: ['birth'] })),
-    accounts: [player, ...guardians].map(p => ({ id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash: p.id === player.id ? 0n : BigInt(roll(5000, 40000)) * scale })),
+    accounts: [player, ...guardians].map(p => {
+      const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
+      return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };
+    }),
+    liabilities: [], ledger: [], workHistory: [], actionCounts: {},
     journal: [{ id: 'journal_birth', date: { ...date }, personId: player.id, category: 'birth', text: 'I was born in ' + input.city + ', ' + country.name + '.' }],
   });
 }

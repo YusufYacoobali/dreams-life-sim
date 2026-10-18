@@ -10,7 +10,7 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
-## Current milestone: core life progression and persistent event flow
+## Current milestone: education, ordinary work and finance integration
 
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.
 
@@ -28,7 +28,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
 | 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
-| 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
+| 4 — Core life systems | In progress | Education, eighteen ordinary roles, monthly pay, taxes, loans/arrears and ledger implemented; relationship actions/family formation, ownership and investing remain pending |
 | 5 — Expanded gameplay | Not started | Health, crime/legal/prison, fame/social, companies, special careers, travel, pets, and hobbies remain planned |
 | 6 — Content, depth, legacy, Time Machine | Not started | Nine prose event examples are planning samples; no shipped templates, coverage run, legacy, or restore system |
 | 7 — Polish and release validation | Not started | No implemented game to compare or validate on devices |
@@ -42,17 +42,17 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
 | Context-aware events, decisions, delayed consequences and journal | Partial: 22 original age/context templates, living-parent binding, five-year cooldown, committed results and journal; delayed consequences pending | Decision/result round-trip and eligibility tests pass; no system-event coverage claim |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands, schema migration, previous-checkpoint recovery, repository and native file import/export surfaces | Real SQLite migration/recovery/failure/reload tests pass; file picker/share require device validation |
-| Education, exams, admissions, tuition, scholarships and loans | No | No |
-| Jobs, pay, performance, promotion, dismissal and retirement | No | No |
+| Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt; scholarships/adult remediation/school contacts pending | Twelve profile boundary tests and connected school→degree→qualified job scenario pass |
+| Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |
 | Dating, marriage, children, divorce, custody and persistent NPCs | No | No |
-| Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | No | No |
+| Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | Partial: reconciled cash/debt ledger, monthly living costs and interest, marginal tax/withholding/reconciliation, loans and repayments; ownership/insurance pending | Exact money/debt conservation, visible arrears and tuition resume tests pass |
 | Stocks, funds, crypto, valuation, FX and net worth | Partial: exact bigint money/rates/FX primitives; gameplay systems not implemented | Money edge cases, JPY scaling, signs, rounding and mixed-currency rejection pass |
 | Health, conditions, treatment, lifestyle and wellbeing | No | No |
 | Crime, investigation, arrest, court, prison, record and release | No | No |
 | Social media, fame, sponsorships and controversies | No | No |
 | Businesses and all eleven special-career paths | No | No |
 | Travel, emigration, work/study abroad, pets, hobbies and entertainment | No | No |
-| Country-specific rules and all proposed launch currencies | No | No |
+| Country-specific rules and all proposed launch currencies | Partial: twelve explicit authored education/work/finance profiles and nine currencies; legal/health/family/immigration detail remains pending | Arithmetic/progression tests pass; external rule-source verification is blocked by active network policy; see COUNTRY_RULES.md |
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death and actual journal/cash/stat summary; estate/legacy pending | Terminal-state engine tests pass; no claim for career/property/child summary fields before those systems exist |
 | Historical snapshots and Time Machine branches | No | No |
@@ -68,9 +68,9 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
-| Foundation/core tests and strict TypeScript | Passed | 47 tests across six suites, including 120 complete seeded core lives, actual v1 fixture migration, durable decision/result reload and visible save-failure retry |
+| Foundation/core tests and strict TypeScript | Passed | 67 tests across seven suites. Default regression runs twelve lives; npm run test:soak expands to 120. Includes actual v1/v2 fixtures and a connected education/work life |
 | Routed native production bundles | Passed | Android and iOS Hermes exports from expo-router entry, including generated artwork; no device execution established |
-| Full gameplay/integration/life scenarios | Partial | 120 core birth-to-death runs pass; education/work/family/economy/legal/legacy scenario matrix is still unimplemented and unrun |
+| Full gameplay/integration/life scenarios | Partial | Current 120-life sweep passes with education, living costs, debt/interest and ledger invariants (163 seconds); connected school/degree/job/pay scenario passes. Family/assets/legal/legacy scenario matrix remains pending |
 | Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
 | Generated artwork / screen fidelity | Partial | Twelve original icons and dedicated memorial generated/source-reviewed; portrait layer experiment generated but not integrated/accepted; running-app visual acceptance pending |
 | iOS/Android device interactions | Unrun | Appropriate native execution still needed later; bundle generation is insufficient |
@@ -112,3 +112,12 @@ The first birth-to-death engine is implemented. Continue through every remaining
 - Generated an original grayscale portrait-layer sheet, measured its imperfect cell alignment and implemented native clipping, tint/multiply shading and shared persistent appearance rendering. Four face proportions, six skin tones, eight hair options and five colours are editable during creation.
 - Added eight visual age stages and gradual hair greying while preserving the same DNA; replaced temporary initials in all existing person views. Identity remains independent of appearance.
 - Inspected the source and a 120px browser composition covering eight ages plus 24 appearance combinations. This is a feasibility check; Android/iOS blend-mode execution, screen fidelity, performance and the wider artwork family remain unverified.
+
+### Core systems submilestone 4A
+
+- Added twelve versioned authored game profiles for local schooling, currency, wages, living costs, tuition, income bands, interest and retirement. Their assumptions and verification limitations are explicit in COUNTRY_RULES.md; these are not verified current legal models. Broader rule-pack systems remain pending.
+- Added public school progression, grades and study effort; gated admissions, six subjects, two-year trades/four-year degrees and professional medicine/law; cash/loan tuition, preserved paused study and completed qualifications. Added eighteen ordinary job roles, real contracts/pay, applications with yearly cooldowns, performance/routines, promotion/dismissal, resignation, work history and earned pensions.
+- Added reconciled cash/debt ledger, visible mandatory-cost arrears, interest, withholding and annual/death tax adjustment, borrowing and repayment. Initial household savings now scale to local wages. No purchase or investment is claimed implemented.
+- Routed actual education, occupation/job-board and bank/loan screens through the persistent four-tab shell. Native device flows remain unverified.
+- Migrated world format to v3/engine v2 without rerolling saved v1/v2 decisions/results; fixtures from old commits verify continued acknowledgement. Tests cover all twelve arithmetic/progression profiles, tuition pause/resume, conservation, partial-year earnings/tax and a connected school→university→qualified work→pay scenario.
+- Current 120-life expanded sweep passes in 163 seconds; default regression uses twelve lives for faster iteration. All 67 tests pass across the default/soak and focused runs. Android/iOS production exports pass; device execution remains unrun.

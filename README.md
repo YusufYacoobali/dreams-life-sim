@@ -2,7 +2,7 @@
 
 An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. The current core supports creation, birth, deterministic Age Up, persistent decisions/results, journal, death, saved lives and local import/export/recovery. The broader education, work, family, economy and expanded systems remain in development; this is not the complete game.
 
-The game is free and uses local saves. No account, subscription or cloud service is planned.
+The game is free and uses local saves. No account, subscription or cloud service is planned. Education, ordinary work, monthly pay/tax and loans are now connected; family formation, ownership, investing and expanded gameplay remain pending. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 
 ```sh
 npm ci
@@ -14,6 +14,7 @@ Use an Expo SDK 57-compatible device or development build. Android emulator comm
 ```sh
 npm run typecheck
 npm test
+npm run test:soak
 npx expo export --platform all
 ```
 

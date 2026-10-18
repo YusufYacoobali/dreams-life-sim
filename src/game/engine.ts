@@ -5,9 +5,14 @@ import { randomInteger } from './random';
 import { Effect, effectRowSchema } from './runtime';
 import { z } from 'zod';
 import { formatMoney } from './money';
+import { IneligibleAction } from './errors';
+import { educationCommandSchema, EducationCommand, educationMonth, resolveEducation } from './systems/education';
+import { workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
+import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, settleTax } from './systems/finance';
+import { post } from './systems/common';
+export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string };
-export class IneligibleAction extends Error {}
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -22,7 +27,9 @@ function roll(world: World, stream: keyof World['random'], min: number, max: num
 function death(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  if (person.employment) endEmployment(world, personId);
   if (personId === world.activePersonId) {
+    settleTax(world);
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
     world.annual = null; world.pending = null;
   } else {
@@ -33,6 +40,9 @@ function death(world: World, personId: string, cause: string) {
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
+  for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
+  workMonth(world);
+  financeMonth(world);
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const age = ageOn(person, world.date);
@@ -52,6 +62,7 @@ function finishYear(world: World) {
   const age = ageOn(player, world.date);
   player.stats.energy = clamp(player.stats.energy + 20);
   player.stats.stress = clamp(player.stats.stress - 3);
+  settleTax(world);
   const eligible = eligibleTemplates(world);
   const birthday = eligible.find(template => template.id === 'first-cake');
   // Introductory year is guaranteed; later years leave room for quiet years.
@@ -96,7 +107,8 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       const from = world.accounts.find(account => account.id === effect.fromAccountId);
       const to = world.accounts.find(account => account.id === effect.toAccountId);
       if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new IneligibleAction('That transfer is no longer available');
-      from.cash -= effect.minor; to.cash += effect.minor;
+      post(world, -effect.minor, 0n, 'transfer', 'Money transferred', null, world.people[from.ownerId]);
+      post(world, effect.minor, 0n, 'transfer', 'Money received', null, world.people[to.ownerId]);
       delta = to.ownerId === world.activePersonId ? 1 : -1;
       label = 'Bank balance'; value = (delta > 0 ? '+' : '−') + formatMoney({ minor: effect.minor, currency: from.currency });
     }
@@ -126,11 +138,20 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const effects = applyEffects(world, choice.effects);
     journal(world, event.id + '_choice', choice.journal, 'event');
     world.pending = { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects };
-  } else {
+  } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null;
     if (world.annual?.monthsProcessed === 12) world.annual = null;
     else if (world.annual) continueYear(world);
+  } else {
+    if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
+    const education = educationCommandSchema.safeParse(command);
+    const work = workCommandSchema.safeParse(command);
+    const finance = financeCommandSchema.safeParse(command);
+    if (education.success) resolveEducation(world, education.data);
+    else if (work.success) resolveWork(world, work.data);
+    else if (finance.success) resolveFinance(world, finance.data);
+    else throw new IneligibleAction('This action is not available');
   }
   world.revision++;
   return validateWorld(world);

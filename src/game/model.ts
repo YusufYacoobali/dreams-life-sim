@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { countryCodes } from './countries';
 import { pendingSchema } from './runtime';
 import { daysInMonth, monthFrom } from './calendar';
+import { educationSchema, employmentSchema, financeSchema, liabilitySchema, newEducation, newFinance, transactionSchema } from './systems/schemas';
+import { jobs } from './content/jobs';
 
 export const dateSchema = z.object({
   year: z.number().int().positive().max(999999),
@@ -28,23 +30,27 @@ export const personSchema = z.object({
   stats: statsSchema,
   appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4) }),
   traits: z.array(z.enum(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'])).max(3),
+  education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(2), engineVersion: z.literal(1), contentVersion: z.literal(1),
+  schemaVersion: z.literal(3), engineVersion: z.literal(2), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(z.object({ id: z.string(), from: personId, to: personId, kind: z.enum(['parent', 'sibling', 'friend', 'partner', 'spouse', 'coworker', 'classmate']), strength: percentage, trust: percentage, memories: z.array(z.string()) })),
-  accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint() })),
+  accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative() })),
+  liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
+  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
   annual: z.object({ id: z.string(), startDate: dateSchema, targetDate: dateSchema, monthsProcessed: z.number().int().min(0).max(12) }).nullable(),
   pending: pendingSchema.nullable(),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
+  actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
 export type World = z.infer<typeof worldSchema>;
 
@@ -69,6 +75,20 @@ export function validateWorld(value: unknown): World {
     if (person.id !== id || ageOn(person, world.date) < 0) throw new Error('Invalid person identity or age');
     if (person.died && (compareDates(person.died, person.born) < 0 || compareDates(person.died, world.date) > 0)) throw new Error('Invalid death date');
     if (!!person.died !== !!person.causeOfDeath) throw new Error('Inconsistent death record');
+    if (person.employment) {
+      const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
+      const history = world.workHistory.find(record => record.id === person.employment!.id && record.personId === id && !record.ended);
+      if (!role || !history || history.roleId !== role.id || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
+    }
+  }
+  const workIds = new Set<string>();
+  for (const record of world.workHistory) {
+    if (workIds.has(record.id) || !world.people[record.personId] || !jobs.some(role => role.id === record.roleId) || compareDates(record.started, world.date) > 0 || (record.ended && (compareDates(record.ended, record.started) < 0 || compareDates(record.ended, world.date) > 0))) throw new Error('Invalid employment history');
+    workIds.add(record.id);
+  }
+  for (const person of Object.values(world.people)) {
+    const records = world.workHistory.filter(record => record.personId === person.id);
+    if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.grossEarned, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
   for (const relation of world.relationships) {
     if (relation.from === relation.to || !world.people[relation.from] || !world.people[relation.to] || relationshipIds.has(relation.id)) throw new Error('Invalid relationship reference');
@@ -78,6 +98,21 @@ export function validateWorld(value: unknown): World {
     if (!world.people[account.ownerId] || account.cash < 0n || accountIds.has(account.id)) throw new Error('Invalid cash account');
     accountIds.add(account.id);
   }
+  const ledgerIds = new Set<string>();
+  const liabilities = new Map(world.liabilities.map(liability => [liability.id, liability]));
+  if (liabilities.size !== world.liabilities.length) throw new Error('Duplicate debt');
+  const cashChanges = new Map<string, bigint>();
+  const debtChanges = new Map<string, bigint>();
+  for (const entry of world.ledger) {
+    const account = world.accounts.find(candidate => candidate.id === entry.accountId);
+    const liability = entry.liabilityId ? liabilities.get(entry.liabilityId) : null;
+    if (ledgerIds.has(entry.id) || !account || account.ownerId !== entry.personId || account.currency !== entry.currency || (entry.liabilityId && (!liability || liability.currency !== entry.currency)) || (!entry.liabilityId && entry.debtDelta !== 0n)) throw new Error('Invalid ledger reference');
+    ledgerIds.add(entry.id);
+    cashChanges.set(account.id, (cashChanges.get(account.id) ?? 0n) + entry.cashDelta);
+    if (entry.liabilityId) debtChanges.set(entry.liabilityId, (debtChanges.get(entry.liabilityId) ?? 0n) + entry.debtDelta);
+  }
+  for (const account of world.accounts) if (account.cash !== account.openingCash + (cashChanges.get(account.id) ?? 0n)) throw new Error('Cash does not reconcile with ledger');
+  for (const liability of world.liabilities) if (!world.people[liability.ownerId] || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
   if (!world.accounts.some(account => account.ownerId === world.activePersonId)) throw new Error('Missing player account');
   for (const entry of world.journal) {
     if (!world.people[entry.personId] || compareDates(entry.date, world.date) > 0 || compareDates(entry.date, world.people[entry.personId].born) < 0 || journalIds.has(entry.id)) throw new Error('Invalid journal fact');
@@ -119,6 +154,17 @@ export function decodeWorld(text: string): World {
     parsed.schemaVersion = 2;
     parsed.calendarAnchorDay = parsed.date?.day;
     parsed.annual = null; parsed.pending = null; parsed.eventHistory = [];
+  }
+  if (parsed && parsed.schemaVersion === 2) {
+    parsed.schemaVersion = 3;
+    parsed.engineVersion = 2;
+    for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) {
+      person.education = newEducation(); person.employment = null; person.finance = newFinance();
+    }
+    for (const account of parsed.accounts ?? []) account.openingCash = account.cash;
+    parsed.liabilities = []; parsed.ledger = [];
+    parsed.workHistory = [];
+    parsed.actionCounts = {};
   }
   return validateWorld(parsed);
 }

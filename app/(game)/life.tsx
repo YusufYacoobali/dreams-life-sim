@@ -7,6 +7,7 @@ import { countries } from '../../src/game/countries';
 import { formatMoney } from '../../src/game/money';
 import { Body, Button, Card, Heading, Page, Portrait, StatBar } from '../../src/ui/components';
 import { useColors } from '../../src/ui/theme';
+import { jobs } from '../../src/game/content/jobs';
 
 export default function Life() {
   const world = useGame(s => s.world)!;
@@ -16,6 +17,7 @@ export default function Life() {
   const error = useGame(s => s.error);
   const player = world.people[world.activePersonId];
   const account = world.accounts.find(a => a.ownerId === player.id)!;
+  const occupation = player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) < 5 ? 'Newborn' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = world.journal.filter(entry => entry.personId === player.id);
   const years = new Map<number, typeof entries>();
   for (const entry of entries) {
@@ -25,7 +27,7 @@ export default function Life() {
   return <Page>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingVertical: 12 }}>
       <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} />
-      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{ageOn(player, world.date) === 0 ? 'Newborn' : 'Age ' + ageOn(player, world.date)} · {player.country}</Body></View>
+      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{occupation} · Age {ageOn(player, world.date)} · {player.country}</Body></View>
       <View style={{ alignItems: 'flex-end' }}><Heading size={17}>{formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Heading><Body muted>Bank Balance</Body></View>
     </Pressable>
     <View>

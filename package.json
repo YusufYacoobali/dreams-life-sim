@@ -41,7 +41,8 @@
     "ios": "expo start --ios",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tests/tsconfig.json",
     "test": "jest --runInBand",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:soak": "node tools/run-soak.cjs"
   },
   "private": true
 }

@@ -4,6 +4,7 @@ import { decodeWorld, encodeWorld, validateWorld } from '../../src/game/model';
 import { SaveConflict, SaveRepository, SqlDatabase, SqlSession } from '../../src/persistence/repository';
 import { resolveCommand } from '../../src/game/engine';
 import legacyFixture from '../fixtures/v1-newborn.json';
+import birthdayFixture from '../fixtures/v2-birthday-result.json';
 
 function database() {
   const sqlite = new DatabaseSync(':memory:');
@@ -32,6 +33,7 @@ test('a new life has real linked parents and survives exact bigint save restorat
   expect(await repository.active()).toBeNull();
   const created = world();
   created.accounts[1].cash = 900719925474099399n;
+  created.accounts[1].openingCash = created.accounts[1].cash;
   await repository.create(created);
   expect(await repository.active()).toEqual(created);
   expect(await repository.list()).toHaveLength(1);
@@ -72,7 +74,7 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
   const initial = world();
   await repository.create(initial);
   await expect(repository.import(encodeWorld(initial))).rejects.toThrow('already exists');
-  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":2', '"schemaVersion":3'))).toThrow();
+  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":3', '"schemaVersion":4'))).toThrow();
   expect(() => validateWorld({ ...initial, activePersonId: 'person_missing' })).toThrow('Missing active person');
   expect(() => decodeWorld(encodeWorld(initial).replace(/"\$dreamsBigInt":"\d+"/, '"$dreamsBigInt":"NaN"'))).toThrow();
   expect(await repository.import(encodeWorld(initial), true)).toEqual(initial);
@@ -97,9 +99,9 @@ test('a version-one database and actual previous-version save migrate without da
   const repository = new SaveRepository(driver);
   await repository.initialise();
   const restored = (await repository.active())!;
-  expect(restored.schemaVersion).toBe(2);
+  expect(restored.schemaVersion).toBe(3);
   expect(restored.random).toEqual(legacyFixture.random);
-  expect(restored.people).toEqual(legacyFixture.people);
+  for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(2);
   sqlite.close();
@@ -121,6 +123,19 @@ test('corrupt checkpoints require explicit recovery and never overwrite the prev
   expect(await repository.active()).toEqual(initial);
   expect(sqlite.prepare('SELECT COUNT(*) AS count FROM receipts').get()?.count).toBe(0);
   sqlite.close();
+});
+
+test('version-two pending results migrate with their committed effects, identities and random streams intact', () => {
+  const world = decodeWorld(JSON.stringify(birthdayFixture));
+  expect(world.schemaVersion).toBe(3);
+  expect(world.pending).toEqual(birthdayFixture.pending);
+  expect(world.random).toEqual(birthdayFixture.random);
+  expect(world.eventHistory).toEqual(birthdayFixture.eventHistory);
+  if (world.pending?.kind !== 'result') throw new Error('Expected a saved result');
+  const acknowledged = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
+  expect(acknowledged.people).toEqual(world.people);
+  expect(acknowledged.random).toEqual(world.random);
+  expect(acknowledged.pending).toBeNull();
 });
 
 test('reloading after every annual decision stage produces the same exact world', async () => {

@@ -94,9 +94,11 @@ test('version-one creation saves migrate without losing people, cash, dates or r
   expect(migrated).toEqual(original);
 });
 
-test('120 complete seeded lives preserve invariants and terminate with factual death records', () => {
+const sweepCount = Number(process.env.DREAMS_LIFE_SWEEP ?? '12');
+if (!Number.isInteger(sweepCount) || sweepCount < 1 || sweepCount > 1000) throw new Error('Invalid DREAMS_LIFE_SWEEP');
+test(`${sweepCount} complete seeded lives preserve invariants and terminate with factual death records`, () => {
   const ages: number[] = [];
-  for (let seed = 0; seed < 120; seed++) {
+  for (let seed = 0; seed < sweepCount; seed++) {
     let world = born(seed);
     let turns = 0;
     while (!world.people[world.activePersonId].died && turns++ < 150) {
@@ -111,4 +113,4 @@ test('120 complete seeded lives preserve invariants and terminate with factual d
     ages.push(ageOn(player, world.date));
   }
   expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));
-}, 120000);
+}, 900000);
