@@ -19,6 +19,10 @@ export function endEmployment(world: World, personId = world.activePersonId) {
   const person = world.people[personId];
   const history = world.workHistory.find(record => record.id === person.employment?.id);
   if (history) history.ended = { ...world.date };
+  if (person.employment?.companyId) {
+    const company = world.businesses.find(item => item.id === person.employment!.companyId);
+    if (company) { for (const member of company.staff.filter(item => item.employmentId === person.employment!.id && !item.ended)) member.ended = { ...world.date }; if (company.ownerId === personId) company.ownerOperated = false; }
+  }
   person.employment = null;
 }
 export function jobReason(world: World, role: JobRole): string | undefined {
@@ -52,8 +56,8 @@ export function resolveWork(world: World, command: WorkCommand) {
     }
     const annualPay = salaryFor(world, role); const employer = person.city + ' ' + role.sector;
     if (person.employment) endEmployment(world);
-    person.employment = { id: 'employment_' + world.revision, roleId: role.id, employer, rank: 0, annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
-    world.workHistory.push({ id: person.employment.id, personId: person.id, roleId: role.id, employer, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+    person.employment = { id: 'employment_' + world.revision, roleId: role.id, employer, companyId: null, rank: 0, annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
+    world.workHistory.push({ id: person.employment.id, personId: person.id, roleId: role.id, employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
     fact(world, 'I started work as a ' + role.title.toLowerCase() + ' at ' + employer + '.', 'work');
     result(world, 'You got the job', 'Your contract is active. Pay starts as time passes; accepting the role does not create a year of salary upfront.', 'career', [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: annualPay, currency: accountFor(world).currency }), tone: 'positive' }]);
   } else if (command.type === 'work-effort') {
@@ -77,40 +81,43 @@ export function resolveWork(world: World, command: WorkCommand) {
     result(world, 'A different pace', 'Your job has ended. Your earned pension will be paid as time passes.', 'career');
   }
 }
+/** Pay for one actual employment period. A company supplies cash through fundWages. */
+export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {
+  const rule = rules[person.country], employment = person.employment;
+  if (!employment || isConfined(world, person)) return 0n;
+  if (employment.companyId && !fundWages) throw new Error('Company wages require actual payroll funding');
+  const role = jobs.find(candidate => candidate.id === employment.roleId);
+  if (!role) throw new Error('Unknown employment role');
+  const factor = hospitalized(world, person) ? 5000n : 10000n;
+  const due = roundRatio(monthlyAmount(employment.annualPay, employment.paidMonths) * factor, 10000n), wages = fundWages ? fundWages(due, employment.id) : due;
+  if (wages < 0n || wages > due) throw new Error('Invalid payroll funding');
+  const withheld = wages === due ? monthlyAmount(incomeTax(roundRatio(employment.annualPay * factor, 10000n), rule), employment.paidMonths) : roundRatio(incomeTax(wages * 12n, rule), 12n);
+  employment.paidMonths++; person.finance.serviceMonths++;
+  const history = world.workHistory.find(record => record.id === employment.id)!;
+  history.monthsWorked++; history.grossEarned += wages; person.finance.lifetimeGross += wages;
+  const effort = employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -2 : 0, stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
+  employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
+  person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
+  if (employment.paidMonths % 12 === 0) {
+    if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) { employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank); fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id); }
+    else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) { fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id); }
+  }
+  if (wages) { post(world, wages, 0n, 'income', 'Employment pay', null, person); if (withheld) post(world, -withheld, 0n, 'tax', 'Income tax withheld', null, person); person.finance.cycleGross += wages; person.finance.cycleWithheld += withheld; }
+  return due;
+}
+/** Back pay belongs to its original contract, with no extra months of service. */
+export function employmentBackPay(world: World, person: Person, employmentId: string, wages: bigint) {
+  const history = world.workHistory.find(record => record.id === employmentId && record.personId === person.id);
+  if (!history || wages < 0n) throw new Error('Invalid back-pay record'); if (!wages) return;
+  const withheld = roundRatio(incomeTax(wages * 12n, rules[person.country]), 12n);
+  history.grossEarned += wages; person.finance.lifetimeGross += wages; person.finance.cycleGross += wages; person.finance.cycleWithheld += withheld;
+  post(world, wages, 0n, 'income', 'Outstanding wages paid', null, person); if (withheld) post(world, -withheld, 0n, 'tax', 'Tax withheld on back pay', null, person);
+}
 export function workMonth(world: World, person = active(world)) {
-  const rule = rules[person.country]; const employment = person.employment;
-  let gross = 0n; let withheld = 0n; let wages = 0n;
-  if (employment && !isConfined(world, person)) {
-    const role = jobs.find(candidate => candidate.id === employment.roleId);
-    if (!role) throw new Error('Unknown employment role');
-    const factor = hospitalized(world, person) ? 5000n : 10000n;
-    wages = roundRatio(monthlyAmount(employment.annualPay, employment.paidMonths) * factor, 10000n); gross += wages;
-    withheld += monthlyAmount(incomeTax(roundRatio(employment.annualPay * factor, 10000n), rule), employment.paidMonths);
-    employment.paidMonths++; person.finance.serviceMonths++;
-    const history = world.workHistory.find(record => record.id === employment.id)!;
-    history.monthsWorked++; history.grossEarned += wages;
-    const effort = employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -2 : 0;
-    const stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
-    employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
-    person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
-    if (employment.paidMonths % 12 === 0) {
-      if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) {
-        employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank);
-        fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id);
-      } else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) {
-        fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id);
-      }
-    }
-  }
+  if (person.employment && !person.employment.companyId) employmentMonth(world, person);
   if (person.finance.pensionAnnual > 0n) {
-    gross += monthlyAmount(person.finance.pensionAnnual, person.finance.pensionMonths);
-    withheld += monthlyAmount(incomeTax(person.finance.pensionAnnual, rule), person.finance.pensionMonths);
+    const gross = monthlyAmount(person.finance.pensionAnnual, person.finance.pensionMonths), withheld = monthlyAmount(incomeTax(person.finance.pensionAnnual, rules[person.country]), person.finance.pensionMonths);
     person.finance.pensionMonths++;
-  }
-  if (gross) {
-    post(world, gross, 0n, 'income', employment ? 'Employment pay' : 'Pension payment', null, person);
-    if (withheld) post(world, -withheld, 0n, 'tax', 'Income tax withheld', null, person);
-    person.finance.cycleGross += gross; person.finance.cycleWithheld += withheld;
-    person.finance.lifetimeGross += wages;
+    if (gross) { post(world, gross, 0n, 'income', 'Pension payment', null, person); if (withheld) post(world, -withheld, 0n, 'tax', 'Pension tax withheld', null, person); person.finance.cycleGross += gross; person.finance.cycleWithheld += withheld; }
   }
 }

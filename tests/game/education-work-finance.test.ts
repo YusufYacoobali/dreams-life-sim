@@ -29,8 +29,8 @@ function funded(world: World, amount: bigint) {
 }
 function employ(world: World, annualPay = rules.US.baseWage) {
   const person = world.people[world.activePersonId];
-  person.employment = { id: 'employment_test', roleId: 'retail', employer: 'Local Retail', rank: 0, annualPay, paidMonths: 0, performance: 60, effort: 'balanced' };
-  world.workHistory.push({ id: 'employment_test', personId: person.id, roleId: 'retail', employer: 'Local Retail', started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+  person.employment = { id: 'employment_test', roleId: 'retail', employer: 'Local Retail', companyId: null, rank: 0, annualPay, paidMonths: 0, performance: 60, effort: 'balanced' };
+  world.workHistory.push({ id: 'employment_test', personId: person.id, roleId: 'retail', employer: 'Local Retail', companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
 }
 
 test.each(countryCodes)('%s has exact local money, marginal tax and non-negative financed living costs', country => {

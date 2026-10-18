@@ -3,7 +3,7 @@ import { ageOn, World } from '../model';
 import { rules, incomeTax } from '../rules';
 import { IneligibleAction } from '../errors';
 import { Currency, formatMoney, roundRatio } from '../money';
-import { accountFor, active, borrow, charge, fact, post, result } from './common';
+import { accountFor, active, borrow, charge, fact, post, result, trustForNecessaryCost } from './common';
 import { fxMoney } from './markets';
 import { householdLivingCost } from './households';
 const currencySchema = z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']);
@@ -64,7 +64,7 @@ export function settleTax(world: World, person = active(world)) {
   const finance = person.finance;
   const due = incomeTax(finance.cycleGross, rules[person.country]);
   const adjustment = due - finance.cycleWithheld;
-  if (adjustment > 0n) charge(world, adjustment, 'tax', 'Annual income tax reconciliation', 'tax', undefined, person);
+  if (adjustment > 0n) { trustForNecessaryCost(world, person, adjustment, accountFor(world, person).currency); charge(world, adjustment, 'tax', 'Annual income tax reconciliation', 'tax', undefined, person); }
   else if (adjustment < 0n) post(world, -adjustment, 0n, 'tax-refund', 'Annual income tax refund', null, person);
   if (finance.cycleGross > 0n) fact(world, 'My income for the year was ' + formatMoney({ minor: finance.cycleGross, currency: accountFor(world, person).currency }) + '; income tax was ' + formatMoney({ minor: due, currency: accountFor(world, person).currency }) + '.', 'finance', '', person.id);
   finance.cycleGross = 0n; finance.cycleWithheld = 0n;

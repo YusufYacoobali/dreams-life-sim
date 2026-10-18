@@ -53,7 +53,7 @@ export function charge(world: World, amount: bigint, category: string, descripti
   liability.principal += unpaid;
   post(world, -available, unpaid, category, description + ' (unpaid part added to arrears)', id, person, account.currency);
 }
-/** Used only by automatic costs that preserve a minor's inherited property. */
+/** Used only by automatic inherited-property costs and tax on actual income. */
 export function trustForNecessaryCost(world: World, person: Person, amount: bigint, currency: Currency) {
   if (person.died) return;
   const account = accountFor(world, person, currency), shortfall = amount - availableCash(account);

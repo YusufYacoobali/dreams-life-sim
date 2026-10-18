@@ -11,4 +11,6 @@
 
 - `v9-court-archive.json`: created with the actual `c30b883` engine/repository/archive against real SQLite. A vandalism arrest, paid bail and private counsel precede a real Age Up with fixture-initialised asthma severity 80. Urgent care has primary priority and the actual court hearing is deferred at month one. Both current and compressed historical state preserve the held escrow, paid counsel, case evidence, medical quote and RNG streams.
 
+- `v10-creator-archive.json`: created with the actual `020858b` engine/repository/archive in real SQLite. Eight delivered posts, 5,346 followers, 119 minor units of creator receipts and unassessed support income, a persisted brand offer and one prior compressed checkpoint must survive the company-schema migration unchanged.
+
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.

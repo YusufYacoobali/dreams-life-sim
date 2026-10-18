@@ -8,6 +8,9 @@ import { accountFor, active, fact, post, result } from './common';
 import { childrenOf } from './family';
 import { saleQuote } from './assets';
 import { willSchema } from './estateSchemas';
+import { businessValue, businessSaleQuote } from '../businessValuation';
+import { businessManager } from './businesses';
+import { assignBusinessClaims, exitBusiness } from './businessLifecycle';
 export const estateCommandSchema = z.discriminatedUnion('type', [
   willSchema.omit({ personId: true, updated: true }).extend({ type: z.literal('save-will') }),
   z.object({ type: z.literal('revoke-will') }),
@@ -15,16 +18,8 @@ export const estateCommandSchema = z.discriminatedUnion('type', [
 ]);
 export type EstateCommand = z.infer<typeof estateCommandSchema>;
 type Share = { personId: string; bps: number };
-/** Largest-remainder apportionment: all minor units are assigned once, stable ties by identity. */
-export function apportion(total: bigint, shares: { personId: string; weight: bigint }[]): Map<string, bigint> {
-  const positive = shares.filter(item => item.weight > 0n), weight = positive.reduce((sum, item) => sum + item.weight, 0n);
-  if (!weight) return new Map();
-  const rows = positive.map(item => ({ ...item, amount: total * item.weight / weight, remainder: total * item.weight % weight }));
-  let left = total - rows.reduce((sum, item) => sum + item.amount, 0n);
-  rows.sort((a, b) => a.remainder === b.remainder ? a.personId < b.personId ? -1 : a.personId > b.personId ? 1 : 0 : a.remainder > b.remainder ? -1 : 1);
-  for (const row of rows) if (left > 0n) { row.amount++; left--; }
-  return new Map(rows.map(item => [item.personId, item.amount]));
-}
+import { apportion } from '../allocation';
+export { apportion } from '../allocation';
 function divide(total: number, ids: string[]) { return apportion(BigInt(total), ids.map(personId => ({ personId, weight: 1n }))); }
 const eligibleHeir = (world: World, heirId: string, deceasedId: string) => !world.incidents.some(item => item.personId === heirId && item.victimId === deceasedId && item.victimKilled);
 function descendants(world: World, personId: string, amount: number, depth = 0, deceasedId = personId): Share[] {
@@ -65,8 +60,11 @@ export function settleEstate(world: World, personId: string) {
   const valueAtDeath = netWorth(world, personId), currency = valueAtDeath.currency, cash = ensureAccount(world, personId, currency);
   const money = (minor: bigint): Money => ({ minor, currency }), convert = (minor: bigint, from: Currency) => fxMoney(world, { minor, currency: from }, currency).minor;
   const assets = world.assets.filter(item => item.ownerId === personId), propertiesAtDeath = assets.filter(item => item.kind === 'property').length;
+  const companies = world.businesses.filter(item => item.ownerId === personId && item.status === 'active');
   const shares = estateShares(world, personId), weights = shares.map(item => ({ personId: item.personId, weight: BigInt(item.bps) }));
   const will = world.wills.find(item => item.personId === personId), notes: string[] = []; let fees = 0n;
+  const companyClaims = world.businessPayables.some(item => item.creditorId === personId && item.principal > 0n); fees += assignBusinessClaims(world, personId, currency);
+  if (companyClaims) notes.push('Company wage claims were assigned at 95% of estimated recoverable value. The company still owes the original principal to the external buyer.');
   for (const item of world.contraband.filter(item => item.personId === personId && item.status === 'owned')) { item.status = 'seized'; fees += convert(item.value.minor, item.value.currency); notes.push('Illicit property was seized rather than passed to heirs.'); }
   for (const account of world.accounts.filter(item => item.ownerId === personId)) account.lockedCash = 0n;
   for (const account of world.accounts.filter(item => item.ownerId === personId && item.currency !== currency && item.cash > 0n)) {
@@ -85,18 +83,24 @@ export function settleEstate(world: World, personId: string) {
   const debtOrder = { tax: 0, mortgage: 1, 'child-support': 2, settlement: 2, restitution: 2, fine: 3, student: 3, personal: 3, living: 3 };
   const debts = world.liabilities.filter(item => item.ownerId === personId && item.principal > 0n).sort((a, b) => debtOrder[a.kind] - debtOrder[b.kind] || a.id.localeCompare(b.id));
   const debtValue = debts.reduce((sum, item) => sum + convert(item.principal, item.currency), 0n);
-  const keep = new Map((will?.bequests ?? []).filter(item => assets.some(asset => asset.id === item.assetId) && shares.some(share => share.personId === item.personId)).map(item => [item.assetId, item.personId]));
-  const assetValue = (id: string) => { const asset = assets.find(item => item.id === id)!; return convert(asset.value, asset.currency); };
+  const keep = new Map((will?.bequests ?? []).filter(item => (assets.some(asset => asset.id === item.assetId) || companies.some(company => company.id === item.assetId)) && shares.some(share => share.personId === item.personId)).map(item => [item.assetId, item.personId]));
+  for (const company of companies.filter(item => keep.has(item.id) && !businessManager(world, item))) { keep.delete(company.id); notes.push('The bequest of ' + company.name + ' required a sale because no available continuing manager was employed.'); }
+  const assetValue = (id: string) => { const asset = assets.find(item => item.id === id); if (asset) return convert(asset.value, asset.currency); const company = companies.find(item => item.id === id)!; return convert(businessValue(world, company), company.currency); };
+  const assetName = (id: string) => assets.find(item => item.id === id)?.name ?? companies.find(item => item.id === id)!.name;
   const saleValue = (asset: World['assets'][number]) => { const quote = saleQuote(world, asset); return convert(quote.price - quote.fee, asset.currency); };
   for (;;) {
-    const liquid = cash.cash + assets.filter(item => !keep.has(item.id)).reduce((sum, item) => sum + saleValue(item), 0n);
+    const liquid = cash.cash + assets.filter(item => !keep.has(item.id)).reduce((sum, item) => sum + saleValue(item), 0n) + companies.filter(item => !keep.has(item.id)).reduce((sum, item) => sum + convert(businessSaleQuote(world, item).proceeds, item.currency), 0n);
     const retained = [...keep.keys()].reduce((sum, id) => sum + assetValue(id), 0n), net = liquid + retained - debtValue, tax = estateTax(net, person);
     const quotas = apportion(net > tax ? net - tax : 0n, weights), given = new Map<string, bigint>();
     for (const [id, heir] of keep) given.set(heir, (given.get(heir) ?? 0n) + assetValue(id));
     const invalidHeir = [...given].find(([id, value]) => value > (quotas.get(id) ?? 0n))?.[0];
     if (!keep.size || !invalidHeir && liquid >= debtValue + tax) break;
     const candidate = [...keep.keys()].filter(id => !invalidHeir || keep.get(id) === invalidHeir).sort((a, b) => assetValue(a) === assetValue(b) ? a.localeCompare(b) : assetValue(a) > assetValue(b) ? -1 : 1)[0];
-    keep.delete(candidate); notes.push('The specific bequest of ' + assets.find(item => item.id === candidate)!.name + ' required liquidation to meet debts, tax or protected shares.');
+    keep.delete(candidate); notes.push('The specific bequest of ' + assetName(candidate) + ' required liquidation to meet debts, tax or protected shares.');
+  }
+  for (const company of companies.filter(item => !keep.has(item.id))) {
+    const before = convert(businessValue(world, company), company.currency), sold = exitBusiness(world, company, 'sale', true), received = convert(sold.proceeds, company.currency); fees += before - received;
+    if (sold.proceeds && company.currency !== currency) { post(world, -sold.proceeds, 0n, 'estate-fx', 'Company sale currency consolidation', null, person, company.currency); if (received) post(world, received, 0n, 'estate-fx', 'Company sale proceeds received', null, person, currency); }
   }
   for (const asset of assets.filter(item => !keep.has(item.id))) {
     const quote = saleQuote(world, asset), received = convert(quote.price - quote.fee, asset.currency); fees += convert(asset.value - quote.price + quote.fee, asset.currency);
@@ -130,7 +134,9 @@ export function settleEstate(world: World, personId: string) {
     const destination = ensureAccount(world, heir.id, currency);
     if (payment) { post(world, -payment, 0n, 'estate-distribution', 'Inheritance to ' + heir.firstName, null, person, currency); post(world, payment, 0n, 'inheritance', 'Inheritance from ' + person.firstName, null, heir, currency); if (ageOn(heir, world.date) < rules[heir.country].adultAge) destination.lockedCash += payment; }
     for (const id of ids) {
-      const asset = assets.find(item => item.id === id)!, familyHome = asset.primaryHome && heir.householdId === person.householdId && !world.assets.some(item => item.ownerId === heir.id && item.primaryHome);
+      const asset = assets.find(item => item.id === id);
+      if (!asset) { const company = companies.find(item => item.id === id)!; company.ownerId = heir.id; company.ownerOperated = false; company.provenance.push('Inherited by ' + fullName(heir) + ' from ' + fullName(person) + ' in ' + world.date.year); ensureAccount(world, heir.id, company.currency); continue; }
+      const familyHome = asset.primaryHome && heir.householdId === person.householdId && !world.assets.some(item => item.ownerId === heir.id && item.primaryHome);
       asset.ownerId = heir.id; asset.primaryHome = familyHome; asset.listing = null; asset.titleSince = { ...world.date }; asset.ownershipSource = 'inheritance'; asset.provenance.push('Inherited by ' + fullName(heir) + ' from ' + fullName(person) + ' in ' + world.date.year); ensureAccount(world, heir.id, asset.currency);
       const household = world.households.find(item => item.id === heir.householdId); if (familyHome && household) household.homeAssetId = asset.id;
     }
@@ -159,7 +165,7 @@ export function resolveEstate(world: World, command: EstateCommand) {
   const executor = world.people[command.executorId];
   if (!executor || executor.died || ageOn(executor, world.date) < 18 || executor.id === person.id) throw new IneligibleAction('Choose another living adult as executor');
   if (command.shares.reduce((sum, item) => sum + item.bps, 0) !== 10000 || new Set(command.shares.map(item => item.personId)).size !== command.shares.length || command.shares.some(item => !world.people[item.personId] || world.people[item.personId].died || item.personId === person.id)) throw new IneligibleAction('Allocate exactly 100% to distinct living beneficiaries');
-  if (new Set(command.bequests.map(item => item.assetId)).size !== command.bequests.length || command.bequests.some(item => !world.assets.some(asset => asset.id === item.assetId && asset.ownerId === person.id) || !command.shares.some(share => share.personId === item.personId))) throw new IneligibleAction('Specific bequests must be owned assets assigned once to a beneficiary');
+  if (new Set(command.bequests.map(item => item.assetId)).size !== command.bequests.length || command.bequests.some(item => !(world.assets.some(asset => asset.id === item.assetId && asset.ownerId === person.id) || world.businesses.some(company => company.id === item.assetId && company.ownerId === person.id && company.status === 'active')) || !command.shares.some(share => share.personId === item.personId))) throw new IneligibleAction('Specific bequests must be owned assets assigned once to a beneficiary');
   const { type: _type, ...data } = command; world.wills = [...world.wills.filter(item => item.personId !== person.id), { ...data, personId: person.id, updated: { ...world.date } }];
   fact(world, 'I recorded a will and named ' + fullName(executor) + ' as executor.', 'family'); result(world, 'Your wishes are recorded', 'Protected family minimum shares, debts and estate tax still apply. A specific bequest is kept only when the estate can meet those obligations within the recipient’s share.', 'will');
 }

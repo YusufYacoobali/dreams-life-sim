@@ -16,6 +16,8 @@ import { priorityOf } from './pendingQueue';
 import { validateLegal } from './systems/legalValidation';
 import { collaborationSchema, controversySchema, followSchema, newPublicLife, publicLifeSchema, socialAccountSchema, sponsorshipSchema } from './systems/socialSchemas';
 import { validateSocial } from './systems/socialValidation';
+import { businessPayableSchema, businessSchema, businessTransactionSchema } from './systems/businessSchemas';
+import { validateBusinesses } from './systems/businessValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -42,7 +44,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(10), engineVersion: z.literal(9), contentVersion: z.literal(1),
+  schemaVersion: z.literal(11), engineVersion: z.literal(10), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -52,7 +54,7 @@ export const worldSchema = z.object({
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
-  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
+  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
@@ -63,6 +65,7 @@ export const worldSchema = z.object({
   deferred: z.array(z.object({ priority: z.number().int().min(0).max(200), event: pendingSchema })),
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
+  businesses: z.array(businessSchema), businessLedger: z.array(businessTransactionSchema), businessPayables: z.array(businessPayableSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -223,14 +226,14 @@ export function validateWorld(value: unknown): World {
   if (world.legacyAnnual && (!world.people[world.activePersonId].died || compareDates(world.date, monthFrom(world.legacyAnnual.startDate, world.legacyAnnual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.legacyAnnual.targetDate, monthFrom(world.legacyAnnual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Invalid archived annual frame');
   const willPeople = new Set<string>();
   for (const will of world.wills) {
-    if (willPeople.has(will.personId) || !world.people[will.personId] || !world.people[will.executorId] || will.personId === will.executorId || compareDates(will.updated, world.date) > 0 || will.shares.reduce((sum, item) => sum + item.bps, 0) !== 10000 || new Set(will.shares.map(item => item.personId)).size !== will.shares.length || will.shares.some(item => !world.people[item.personId] || item.personId === will.personId) || new Set(will.bequests.map(item => item.assetId)).size !== will.bequests.length || will.bequests.some(item => !world.assets.some(asset => asset.id === item.assetId) || !will.shares.some(share => share.personId === item.personId))) throw new Error('Invalid will');
+    if (willPeople.has(will.personId) || !world.people[will.personId] || !world.people[will.executorId] || will.personId === will.executorId || compareDates(will.updated, world.date) > 0 || will.shares.reduce((sum, item) => sum + item.bps, 0) !== 10000 || new Set(will.shares.map(item => item.personId)).size !== will.shares.length || will.shares.some(item => !world.people[item.personId] || item.personId === will.personId) || new Set(will.bequests.map(item => item.assetId)).size !== will.bequests.length || will.bequests.some(item => !(world.assets.some(asset => asset.id === item.assetId) || world.businesses.some(company => company.id === item.assetId)) || !will.shares.some(share => share.personId === item.personId))) throw new Error('Invalid will');
     willPeople.add(will.personId);
   }
   const settledPeople = new Set<string>(), estateIds = new Set<string>();
   for (const estate of world.estates) {
     const person = world.people[estate.personId], currency = estate.netWorthAtDeath.currency;
-    if (settledPeople.has(estate.personId) || estateIds.has(estate.id) || !person?.died || compareDates(estate.settled, person.died) < 0 || compareDates(estate.settled, world.date) > 0 || (estate.executorId && !world.people[estate.executorId]) || [estate.fees, estate.tax, estate.debtPaid, estate.debtWrittenOff, estate.charity].some(money => money.minor < 0n || money.currency !== currency) || new Set(estate.distributions.map(item => item.personId)).size !== estate.distributions.length || estate.distributions.some(item => !world.people[item.personId] || item.personId === person.id || item.cash.minor < 0n || item.assetValue.minor < 0n || item.cash.currency !== currency || item.assetValue.currency !== currency || item.assets.some(id => !world.assets.some(asset => asset.id === id)))) throw new Error('Invalid estate history');
-    if (world.accounts.some(item => item.ownerId === person.id && item.cash !== 0n) || world.assets.some(item => item.ownerId === person.id) || world.holdings.some(item => item.ownerId === person.id && item.quantity > 0n) || world.liabilities.some(item => item.ownerId === person.id && item.principal > 0n || item.creditorId === person.id && item.principal > 0n)) throw new Error('Settled estate retains property or obligations');
+    if (settledPeople.has(estate.personId) || estateIds.has(estate.id) || !person?.died || compareDates(estate.settled, person.died) < 0 || compareDates(estate.settled, world.date) > 0 || (estate.executorId && !world.people[estate.executorId]) || [estate.fees, estate.tax, estate.debtPaid, estate.debtWrittenOff, estate.charity].some(money => money.minor < 0n || money.currency !== currency) || new Set(estate.distributions.map(item => item.personId)).size !== estate.distributions.length || estate.distributions.some(item => !world.people[item.personId] || item.personId === person.id || item.cash.minor < 0n || item.assetValue.minor < 0n || item.cash.currency !== currency || item.assetValue.currency !== currency || item.assets.some(id => !world.assets.some(asset => asset.id === id) && !world.businesses.some(company => company.id === id)))) throw new Error('Invalid estate history');
+    if (world.businesses.some(item => item.ownerId === person.id) || world.businessPayables.some(item => item.creditorId === person.id && item.principal > 0n) || world.accounts.some(item => item.ownerId === person.id && item.cash !== 0n) || world.assets.some(item => item.ownerId === person.id) || world.holdings.some(item => item.ownerId === person.id && item.quantity > 0n) || world.liabilities.some(item => item.ownerId === person.id && item.principal > 0n || item.creditorId === person.id && item.principal > 0n)) throw new Error('Settled estate retains property or obligations');
     settledPeople.add(estate.personId); estateIds.add(estate.id);
   }
   if (world.generation !== world.legacies.length + 1) throw new Error('Invalid generation count');
@@ -241,6 +244,7 @@ export function validateWorld(value: unknown): World {
   if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
   validateLegal(world);
   validateSocial(world);
+  validateBusinesses(world);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -341,5 +345,6 @@ export function decodeWorld(text: string): World {
     parsed.schemaVersion = 10; parsed.engineVersion = 9; parsed.socialAccounts = []; parsed.sponsorships = []; parsed.controversies = []; parsed.collaborations = []; parsed.socialFollows = [];
     for (const person of Object.values(parsed.people) as Record<string, unknown>[]) { person.publicLife = newPublicLife(parsed.date.year * 12 + parsed.date.month - 1, (person.stats as { fame: number }).fame); (person.finance as Record<string, unknown>).supportIncomeDue = 0n; }
   }
+  if (parsed && parsed.schemaVersion === 10) { parsed.schemaVersion = 11; parsed.engineVersion = 10; parsed.businesses = []; parsed.businessLedger = []; parsed.businessPayables = []; }
   return validateWorld(parsed);
 }

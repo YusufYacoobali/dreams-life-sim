@@ -24,9 +24,11 @@ import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, 
 import { isConfined } from './systems/legalSchemas';
 import { choiceUnavailable } from './choiceAvailability';
 import { brandDecision, respondPublicly, resolveSocialMedia, socialDeath, socialMediaCommandSchema, SocialMediaCommand, socialMonth } from './systems/social';
+import { businessCommandSchema, BusinessCommand, resolveBusiness } from './systems/businesses';
+import { businessMonth } from './systems/businessMonth';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -67,7 +69,9 @@ function processMonth(world: World) {
   householdMonth(world);
   const actors = financialActors(world);
   const openingCash = new Map<string, bigint>();
-  for (const person of actors) { settleBackground(world, person, world.date.year * 12 + world.date.month - 2); openingCash.set(person.id, accountFor(world, person).cash); workMonth(world, person); }
+  for (const person of actors) { settleBackground(world, person, world.date.year * 12 + world.date.month - 2); openingCash.set(person.id, accountFor(world, person).cash); }
+  businessMonth(world);
+  for (const person of actors) workMonth(world, person);
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
@@ -230,6 +234,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const health = healthCommandSchema.safeParse(command);
     const legal = legalCommandSchema.safeParse(command);
     const socialMedia = socialMediaCommandSchema.safeParse(command);
+    const business = businessCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -241,6 +246,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (health.success) { resolveHealth(world, health.data); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else if (legal.success) { resolveLegal(world, legal.data, recordDeath); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else if (socialMedia.success) resolveSocialMedia(world, socialMedia.data);
+    else if (business.success) resolveBusiness(world, business.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

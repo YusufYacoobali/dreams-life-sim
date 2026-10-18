@@ -10,6 +10,8 @@ import { netWorth, investmentValue, formatQuantity } from '../../../src/game/sys
 import { CatalogArt } from '../../../src/assets/CatalogArt';
 import { instruments } from '../../../src/game/content/markets';
 import { Illustration } from '../../../src/assets/Illustration';
+import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
+import { businessValue } from '../../../src/game/businessValuation';
 
 export default function Assets() {
   const world = useGame(s => s.world)!;
@@ -32,6 +34,7 @@ export default function Assets() {
       {!owned.some(asset => asset.kind === kind) && <Body muted>{kind === 'property' ? 'No property owned.' : kind === 'vehicle' ? 'No vehicles owned.' : 'No possessions owned.'}</Body>}
       <ActionRow title={kind === 'property' ? 'Find a Home' : kind === 'vehicle' ? 'Buy a Vehicle' : 'Shop Possessions'} onPress={() => router.push({ pathname: '/shopping/[kind]', params: { kind } })} />
     </Card>)}
+    <Card><Heading size={20}>Businesses</Heading>{world.businesses.filter(item => item.ownerId === player.id && item.status === 'active').map(company => <ActionRow key={company.id} title={company.name} subtitle="Estimated company equity" value={formatMoney({ minor: businessValue(world, company), currency: company.currency })} onPress={() => router.push({ pathname: '/business/[id]', params: { id: company.id, tab: 'assets' } })} />)}<ActionRow title="Business Portfolio" icon={<FameBusinessArt id="business" size={44} />} onPress={() => router.push({ pathname: '/business', params: { tab: 'assets' } })} /></Card>
     <Card><Heading size={20}>Investments</Heading>{holdings.map(holding => <ActionRow key={holding.id} title={instruments[holding.instrumentId].name} subtitle={formatQuantity(holding.quantity, holding.instrumentId) + ' units'} value={formatMoney({ minor: investmentValue(world, holding.instrumentId, holding.quantity, accountFor(world).currency), currency: accountFor(world).currency })} onPress={() => router.push({ pathname: '/investment/[id]', params: { id: holding.instrumentId } })} />)}
       <ActionRow title="Stocks, Funds & Crypto" icon={<CatalogArt id="portfolio" size={44} />} onPress={() => router.push('/investments')} />
     </Card>

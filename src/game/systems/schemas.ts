@@ -12,6 +12,7 @@ export const educationSchema = z.object({
 });
 export const employmentSchema = z.object({
   id: z.string(), roleId: z.string(), employer: z.string(), rank: z.number().int().min(0).max(3),
+  companyId: z.string().nullable().default(null),
   annualPay: z.bigint().nonnegative(), paidMonths: z.number().int().nonnegative(), performance: z.number().int().min(0).max(100),
   effort: z.enum(['relaxed', 'balanced', 'hard']),
 });

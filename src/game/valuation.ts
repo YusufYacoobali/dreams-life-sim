@@ -2,6 +2,7 @@ import type { World } from './model';
 import { countries } from './countries';
 import { Currency, Money, convertMoney, currencyDigits, roundRatio } from './money';
 import { InstrumentId, instruments } from './content/markets';
+import { businessValue, companyClaimValue } from './businessValuation';
 
 export function fxMoney(world: World, value: Money, currency: Currency): Money {
   if (value.currency === currency) return { ...value };
@@ -22,6 +23,8 @@ export function netWorth(world: World, personId = world.activePersonId): Money {
   for (const debt of world.liabilities.filter(item => item.creditorId === personId)) minor += fxMoney(world, { minor: debt.principal, currency: debt.currency }, currency).minor;
   for (const item of (world.cases ?? []).filter(item => item.personId === personId && item.bailState === 'held')) minor += fxMoney(world, item.bail, currency).minor;
   for (const item of (world.contraband ?? []).filter(item => item.personId === personId && item.status === 'owned')) minor += fxMoney(world, item.value, currency).minor;
+  for (const company of (world.businesses ?? []).filter(item => item.ownerId === personId)) minor += fxMoney(world, { minor: businessValue(world, company), currency: company.currency }, currency).minor;
+  for (const payable of (world.businessPayables ?? []).filter(item => item.creditorId === personId && item.principal > 0n)) minor += fxMoney(world, { minor: companyClaimValue(world, payable), currency: payable.currency }, currency).minor;
   return { minor, currency };
 }
 export function portfolioValue(world: World): Money {

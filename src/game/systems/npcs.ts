@@ -24,18 +24,29 @@ export function hireNpc(world: World, person: Person, preferredRole?: string) {
   const role = preferredRole ? eligible.find(item => item.id === preferredRole) : eligible[draw(world, 'npcs', 0, eligible.length - 1)];
   if (!role) throw new Error('NPC lacks the required professional qualification');
   const id = 'employment_npc_' + person.id + '_' + world.workHistory.length;
-  person.employment = { id, roleId: role.id, employer: person.city + ' ' + role.sector, rank: 0, annualPay: salaryForPerson(person, role), paidMonths: 0, performance: 55, effort: 'balanced' };
-  world.workHistory.push({ id, personId: person.id, roleId: role.id, employer: person.employment.employer, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+  person.employment = { id, roleId: role.id, employer: person.city + ' ' + role.sector, companyId: null, rank: 0, annualPay: salaryForPerson(person, role), paidMonths: 0, performance: 55, effort: 'balanced' };
+  world.workHistory.push({ id, personId: person.id, roleId: role.id, employer: person.employment.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
   if (!person.householdId) { person.householdId = 'household_' + person.id; world.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [person.id], homeAssetId: null }); }
   person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1;
 }
-export function backgroundOccupation(world: World, person: Person) {
+export function backgroundOccupation(world: World, person: Person, preferredRole?: string) {
   const age = ageOn(person, world.date); const rule = rules[person.country];
   if (age < rule.schoolEnd) return;
   person.education.qualifications.push({ level: 'secondary', field: 'general', year: person.born.year + rule.schoolEnd });
   person.education.grades = Math.max(50, Math.round((person.stats.smarts + person.stats.discipline) / 2));
   let qualifiedAge = rule.schoolEnd;
-  if (age >= rule.schoolEnd + 4 && person.stats.smarts >= 60 && draw(world, 'npcs', 1, 100) <= 35) {
+  const preferred = preferredRole ? jobs.find(item => item.id === preferredRole) : undefined;
+  if (preferredRole && !preferred) throw new Error('Unknown professional background');
+  if (preferred) {
+    person.stats.smarts = Math.max(person.stats.smarts, preferred.smarts);
+    if (preferred.qualification && preferred.qualification !== 'secondary') {
+      const professional = preferred.qualification === 'medicine' || preferred.qualification === 'law';
+      qualifiedAge += preferred.qualification === 'trade' ? 2 : 4;
+      person.education.qualifications.push({ level: professional ? 'degree' : preferred.qualification, field: preferred.field ?? (professional ? preferred.qualification : 'general'), year: person.born.year + qualifiedAge });
+      if (professional) { qualifiedAge += preferred.qualification === 'medicine' ? 4 : 3; person.education.qualifications.push({ level: preferred.qualification, field: preferred.qualification, year: person.born.year + qualifiedAge }); }
+    }
+    if (age < qualifiedAge) throw new Error('The requested background needs an older person');
+  } else if (age >= rule.schoolEnd + 4 && person.stats.smarts >= 60 && draw(world, 'npcs', 1, 100) <= 35) {
     const field = fields[draw(world, 'npcs', 0, fields.length - 1)]; qualifiedAge += 4;
     person.education.qualifications.push({ level: 'degree', field, year: person.born.year + qualifiedAge });
     const years = field === 'medicine' ? 4 : field === 'law' ? 3 : 0;
@@ -47,22 +58,22 @@ export function backgroundOccupation(world: World, person: Person) {
     person.education.qualifications.push({ level: 'trade', field, year: person.born.year + qualifiedAge });
   }
   const eligible = jobs.filter(role => !role.partTime && person.stats.smarts >= role.smarts && (!role.qualification || person.education.qualifications.some(q => q.level === role.qualification && (!role.field || role.field === q.field))));
-  const role = eligible[draw(world, 'npcs', 0, eligible.length - 1)];
+  const role = preferred ?? eligible[draw(world, 'npcs', 0, eligible.length - 1)];
   const yearsWorked = Math.max(0, age - qualifiedAge); const rank = Math.min(3, Math.floor(yearsWorked / 8)); const annualPay = npcSalary(person, role.id, rank);
   const id = 'employment_background_' + person.id;
   let grossEarned = 0n;
   for (let year = 0; year < yearsWorked; year++) grossEarned += npcSalary(person, role.id, Math.min(3, Math.floor(year / 8)));
-  person.employment = { id, roleId: role.id, employer: person.city + ' ' + role.sector, rank, annualPay, paidMonths: yearsWorked * 12, performance: draw(world, 'npcs', 40, 80), effort: 'balanced' };
+  person.employment = { id, roleId: role.id, employer: person.city + ' ' + role.sector, companyId: null, rank, annualPay, paidMonths: yearsWorked * 12, performance: draw(world, 'npcs', 40, 80), effort: 'balanced' };
   person.finance.serviceMonths = yearsWorked * 12; person.finance.lifetimeGross = grossEarned;
   const started = { ...world.date, year: world.date.year - yearsWorked }; started.day = Math.min(started.day, daysInMonth(started.year, started.month));
-  world.workHistory.push({ id, personId: person.id, roleId: role.id, employer: person.employment.employer, started, ended: null, monthsWorked: yearsWorked * 12, grossEarned });
+  world.workHistory.push({ id, personId: person.id, roleId: role.id, employer: person.employment.employer, companyId: null, started, ended: null, monthsWorked: yearsWorked * 12, grossEarned });
 }
 function birthday(date: GameDate, age: number, month: number, day: number): GameDate {
   let year = date.year - age;
   if (month > date.month || (month === date.month && day > date.day)) year--;
   return { year, month, day: Math.min(day, daysInMonth(year, month)) };
 }
-export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string }): Person {
+export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string }): Person {
   const player = world.people[world.activePersonId], code = options.country ?? player.country, country = countries[code], city = options.city ?? (code === player.country ? player.city : country.cities[0]);
   const gender = options.gender ?? genders[draw(world, 'npcs', 0, genders.length - 1)];
   const month = draw(world, 'npcs', 1, 12), day = draw(world, 'npcs', 1, 28);
@@ -86,7 +97,7 @@ export function createContact(world: World, options: { age: number; gender?: Per
   if (options.age >= rules[code].adultAge) {
     person.householdId = 'household_' + id;
     world.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [id], homeAssetId: null });
-    backgroundOccupation(world, person);
+    backgroundOccupation(world, person, options.qualifiedRole);
   } else if (options.age >= rules[code].schoolStart) {
     person.education.stage = options.age < rules[code].secondaryStart ? 'primary' : 'secondary'; person.education.school = person.city + (person.education.stage === 'primary' ? ' Primary School' : ' Secondary School');
   }

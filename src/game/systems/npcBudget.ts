@@ -14,6 +14,7 @@ import { isConfined } from './legalSchemas';
 export function settleBackground(world: World, person: Person, throughMonth: number) {
   const months = throughMonth - person.lastEconomicMonth;
   if (months <= 0 || person.id === world.activePersonId) return;
+  if (person.employment?.companyId) throw new Error('Company employment requires recorded monthly payroll');
   for (const debt of world.liabilities.filter(item => item.ownerId === person.id && item.kind !== 'mortgage' && item.principal > 0n)) {
     const before = debt.principal; for (let month = 0; month < months; month++) debt.principal += roundRatio(debt.principal * BigInt(debt.interestBps), 120000n);
     if (debt.principal > before) post(world, 0n, debt.principal - before, 'interest', 'Interest during the background period', debt.id, person, debt.currency);

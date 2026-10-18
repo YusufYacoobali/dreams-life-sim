@@ -83,5 +83,5 @@ social/fame/business objects. The unmodified 1254×1254 RGBA original remains at
 Source and 128px browser composition were inspected. Measured rectangles in
 src/assets/fameBusinessLayout.ts retain the full van/briefcase and exclude
 their pixels from the neighbouring laptop/growth subjects. The source PNG
-was not edited. Social/fame subjects are integrated; business subjects are
-registered for the next system. Native-device fidelity remains pending.
+was not edited. Social/fame and business subjects are integrated into their
+respective overview, management and confirmation flows. Native-device fidelity remains pending.

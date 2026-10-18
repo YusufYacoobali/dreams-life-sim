@@ -50,6 +50,8 @@ export function financialActors(world: World): Person[] {
   }
   for (const asset of world.assets) if (asset.ownerId) ids.add(asset.ownerId);
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
+  for (const company of world.businesses.filter(item => item.status === 'active')) { if (company.ownerId) ids.add(company.ownerId); for (const member of company.staff.filter(item => !item.ended)) ids.add(member.personId); }
+  for (const payable of world.businessPayables) if (payable.creditorId && payable.principal > 0n) ids.add(payable.creditorId);
   for (const custody of world.custody) if (!custody.ended) { ids.add(custody.a); ids.add(custody.b); }
   for (const pregnancy of world.pregnancies) if (pregnancy.status === 'pregnant') { ids.add(pregnancy.carrierId); ids.add(pregnancy.otherParentId); }
   for (const debt of world.liabilities) if (debt.creditorId && debt.principal > 0n) { ids.add(debt.ownerId); ids.add(debt.creditorId); }
