@@ -19,4 +19,4 @@ npx expo export --platform all
 
 Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. See [progress and verification](docs/PROGRESS.md), the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for implemented scope, remaining work and visual acceptance limits.
 
-Generated illustrations are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). Portraits and the full artwork family are still pending.
+Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.

@@ -9,7 +9,7 @@ export default function Profile() {
   const world = useGame(s => s.world)!;
   const player = world.people[world.activePersonId];
   return <Page><Header title="My Life" onBack={() => router.back()} />
-    <Card><Portrait name={fullName(player)} size={88} /><Heading>{fullName(player)}</Heading>
+    <Card><Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={88} /><Heading>{fullName(player)}</Heading>
       <Body>Age {ageOn(player, world.date)}</Body>
       <Body>{countries[player.nationality].name}</Body>
       <Body>Born {player.born.year}-{String(player.born.month).padStart(2, '0')}-{String(player.born.day).padStart(2, '0')}</Body>

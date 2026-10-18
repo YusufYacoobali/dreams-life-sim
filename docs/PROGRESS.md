@@ -26,7 +26,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | --- | --- | --- |
 | 0 — Planning and reconciliation | Complete | Overall direction approved; all 27 images reviewed; conflicts resolved, including confirmed free/offline scope |
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
-| 2 — Artwork and character creation | In progress | Twelve original generated illustrations registered; editable identity/country/city creation and persistent family; portrait layers/customisation/age continuity pending |
+| 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | Not started | Education, work, relationships, family, finance, assets, and investments remain planned |
 | 5 — Expanded gameplay | Not started | Health, crime/legal/prison, fame/social, companies, special careers, travel, pets, and hobbies remain planned |
@@ -38,7 +38,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Feature family | Implemented | Verified |
 | --- | --- | --- |
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
-| Identity, custom/random creation, family, appearance and ageing | Partial: editable identity and deterministic random creation, actual parent links; DNA stored, initials remain temporary | Twelve-country creation tests pass; generated portraits and ageing pending |
+| Identity, custom/random creation, family, appearance and ageing | Partial: editable identity/appearance, deterministic random creation, actual parent links, generated portraits and eight visual age stages | Twelve-country creation/domain tests pass; 120px browser layer review complete; native rendering/fidelity pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
 | Context-aware events, decisions, delayed consequences and journal | Partial: 22 original age/context templates, living-parent binding, five-year cooldown, committed results and journal; delayed consequences pending | Decision/result round-trip and eligibility tests pass; no system-event coverage claim |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands, schema migration, previous-checkpoint recovery, repository and native file import/export surfaces | Real SQLite migration/recovery/failure/reload tests pass; file picker/share require device validation |
@@ -56,7 +56,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death and actual journal/cash/stat summary; estate/legacy pending | Terminal-state engine tests pass; no claim for career/property/child summary fields before those systems exist |
 | Historical snapshots and Time Machine branches | No | No |
-| Custom generated artwork and portrait continuity | Partial: twelve original generated illustrations bundled in a typed atlas registry | Original source inspected; actual-size device review and portraits pending |
+| Custom generated artwork and portrait continuity | Partial: twelve original illustrations, death memorial and generated portrait layers/editor integrated | Sources inspected and 120px browser portrait review complete; native-device fidelity and remaining families pending |
 | 250+ distinct high-quality approved event templates | 22 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
 | Accessibility, performance, native-device UI and release builds | No game implementation | No |
 
@@ -106,3 +106,9 @@ The first birth-to-death engine is implemented. Continue through every remaining
 - Added the dedicated dark full-screen death route, original generated memorial, factual journal summary and new-life flow. The child continuation button explains its unavailable state; actual family formation/estate/legacy are later work.
 - Added save/DB version migration, a real v1 fixture generated from commit 44d8bc3, last-valid checkpoint preservation, explicit recovery preview/confirmation and native file import/export surfaces. File-picker/share execution remains unverified on devices.
 - Verified 120 full core lives plus strict types, deterministic/round-trip/gating/leap-day tests, real SQLite migration/recovery/reload tests and current Android/iOS Hermes exports. A 120-life sweep caught and led to correction of leap-day parent creation. This is not validation of the complete game or all 256 planned templates.
+
+### Artwork/creation submilestone 2A
+
+- Generated an original grayscale portrait-layer sheet, measured its imperfect cell alignment and implemented native clipping, tint/multiply shading and shared persistent appearance rendering. Four face proportions, six skin tones, eight hair options and five colours are editable during creation.
+- Added eight visual age stages and gradual hair greying while preserving the same DNA; replaced temporary initials in all existing person views. Identity remains independent of appearance.
+- Inspected the source and a 120px browser composition covering eight ages plus 24 appearance combinations. This is a feasibility check; Android/iOS blend-mode execution, screen fidelity, performance and the wider artwork family remain unverified.

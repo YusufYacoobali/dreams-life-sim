@@ -10,9 +10,10 @@ export default function PersonProfile() {
   const person = world.people[id];
   return <Page><Header title="Person Profile" onBack={() => router.back()} />
     {person ? <Card>
-      <Portrait name={fullName(person)} size={88} /><Heading>{fullName(person)}</Heading>
+      <Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
       <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
       <Body>{person.traits.join(', ')}</Body>
+      {person.died && <Body>Died in {person.died.year}: {person.causeOfDeath}</Body>}
     </Card> : <Body>This person could not be found.</Body>}
   </Page>;
 }

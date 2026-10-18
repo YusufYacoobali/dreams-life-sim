@@ -22,7 +22,7 @@ export default function Birth() {
   const parents = world.relationships.filter(edge => edge.kind === 'parent' && edge.to === player.id).map(edge => world.people[edge.from]);
   return <Page>
     <View style={{ alignItems: 'center', paddingTop: 40, gap: 16 }}>
-      <Portrait name={fullName(player)} size={112} />
+      <Portrait name={fullName(player)} appearance={player.appearance} age={0} size={112} />
       <Heading centered size={28}>Welcome to the World!</Heading>
       <Body muted centered>You were born in {player.city}, {countries[player.country].name}.</Body>
     </View>

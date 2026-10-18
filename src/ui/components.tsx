@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  ActivityIndicator, Image, ImageSourcePropType, Pressable, ScrollView,
+  ActivityIndicator, Pressable, ScrollView,
   StyleProp, StyleSheet, Text, View, ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, useColors } from './theme';
+import { CharacterPortrait } from '../assets/CharacterPortrait';
 
 export function Page({ children, scroll = true }: React.PropsWithChildren<{ scroll?: boolean }>) {
   const c = useColors();
@@ -103,14 +104,7 @@ export function StatBar({ label, value, color }: { label: string; value: number;
   );
 }
 
-export function Portrait({ source, name, size = 56 }: { source?: ImageSourcePropType; name: string; size?: number }) {
-  const c = useColors();
-  return source
-    ? <Image source={source} accessibilityLabel={name} style={{ width: size, height: size, borderRadius: size / 2 }} />
-    : <View accessibilityLabel={name} style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: c.selected, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ color: c.ink, fontSize: size / 3, fontWeight: '700' }}>{name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('')}</Text>
-    </View>;
-}
+export const Portrait = CharacterPortrait;
 
 const styles = StyleSheet.create({
   page: { flex: 1 },

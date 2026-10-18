@@ -24,7 +24,7 @@ export default function Life() {
   }
   return <Page>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingVertical: 12 }}>
-      <Portrait name={fullName(player)} />
+      <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} />
       <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{ageOn(player, world.date) === 0 ? 'Newborn' : 'Age ' + ageOn(player, world.date)} · {player.country}</Body></View>
       <View style={{ alignItems: 'flex-end' }}><Heading size={17}>{formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Heading><Body muted>Bank Balance</Body></View>
     </Pressable>
