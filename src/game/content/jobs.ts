@@ -25,5 +25,6 @@ export const jobs: readonly JobRole[] = [
   { id:'screen-actor', title:'Screen Actor', sector:'Screen Production', wageBps:10000, smarts:30, specialCareer:true },
   { id:'fashion-model', title:'Fashion Model', sector:'Fashion', wageBps:12000, smarts:20, specialCareer:true },
   { id:'professional-athlete', title:'Professional Athlete', sector:'Sport', wageBps:18000, smarts:25, specialCareer:true },
+  { id:'performing-musician', title:'Performing Musician', sector:'Live Music', wageBps:10000, smarts:25, specialCareer:true },
 ];
 export const jobRanks = ['Junior', 'Experienced', 'Senior', 'Lead'] as const;

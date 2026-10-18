@@ -8,6 +8,7 @@ import { formatMoney } from '../money';
 import { jobs } from '../content/jobs';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
+import { recordingCommitment } from './musicSchemas';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']) }),
@@ -26,6 +27,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
   if (education.stage !== 'none') return 'You are already enrolled';
+  if (recordingCommitment(world)) return 'Finish or cancel your recording before full-time study';
   if (person.employment && !jobs.find(job => job.id === person.employment!.roleId)?.partTime) return 'Resign from full-time work before starting this course';
   if (!education.qualifications.some(q => q.level === 'secondary')) return 'A secondary qualification is required';
   if (program !== 'trade' && education.grades < 55) return 'Grades of at least 55% are required';

@@ -27,9 +27,10 @@ import { brandDecision, respondPublicly, resolveSocialMedia, socialDeath, social
 import { businessCommandSchema, BusinessCommand, resolveBusiness } from './systems/businesses';
 import { businessMonth } from './systems/businessMonth';
 import { careerCommandSchema, CareerCommand, careerDeath, careerMonth, careerTrainingMonth, resolveCareer } from './systems/careers';
+import { musicCommandSchema, MusicCommand, musicDeath, musicMonth, resolveMusic } from './systems/music';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -53,6 +54,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   settleTax(world, person);
   if (person.employment) endEmployment(world, personId);
   careerDeath(world,personId);
+  musicDeath(world,personId);
   careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
@@ -76,6 +78,7 @@ function processMonth(world: World) {
   for (const person of actors) workMonth(world, person);
   careerTrainingMonth(world);
   careerMonth(world);
+  musicMonth(world);
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
@@ -240,6 +243,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const socialMedia = socialMediaCommandSchema.safeParse(command);
     const business = businessCommandSchema.safeParse(command);
     const career = careerCommandSchema.safeParse(command);
+    const music = musicCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -253,6 +257,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (socialMedia.success) resolveSocialMedia(world, socialMedia.data);
     else if (business.success) resolveBusiness(world, business.data);
     else if (career.success) resolveCareer(world,career.data);
+    else if (music.success) resolveMusic(world,music.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

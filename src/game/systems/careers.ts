@@ -15,6 +15,7 @@ import { connectPerson, relationFor } from './relationships';
 import { offerPending } from '../pendingQueue';
 import { addCondition, medicalQuote } from './health';
 import { gainPublicFame } from './social';
+import { recordingCommitment } from './musicSchemas';
 export const careerCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('career-training'), skill: z.enum(skillIds), mode: z.enum(['self', 'coached']) }), z.object({ type: z.literal('stop-career-training') }),
     z.object({ type: z.literal('select-career'), kind: z.enum(careerKinds), quotedAnnualPay: z.bigint().nonnegative() }),
@@ -41,6 +42,7 @@ export function selectionReason(world: World, kind: CareerKind): string | undefi
         return 'Resolve custody or pursuit first';
     if (hospitalized(world, person))
         return 'Finish hospital care before selection';
+    if(recordingCommitment(world))return 'Finish or cancel your recording before accepting another contract';
     if (person.employment)
         return 'Leave your current job before accepting a full-time contract';
     if (person.education.stage !== 'none')
@@ -117,7 +119,7 @@ export function resolveCareer(world: World, command: CareerCommand) {
         career.ended = null;
         career.country = person.country;
         career.currency = countries[person.country].currency;
-        career.employer = person.city + (command.kind === 'actor' ? ' Lantern Pictures' : command.kind === 'model' ? ' Everyday Studio' : ' Comets');
+        career.employer = person.city + (command.kind === 'actor' ? ' Lantern Pictures' : command.kind === 'model' ? ' Everyday Studio' : command.kind === 'musician' ? ' Small Room Music' : ' Comets');
         career.lastMonth = absolute(world);
         career.contractMonthsRemaining = definition.contractMonths;
         const employmentId = 'employment_career_' + world.revision + '_' + world.workHistory.length;
@@ -216,7 +218,7 @@ export function careerMonth(world: World) {
         if (success)
             gainPublicFame(world, person, career.kind === 'actor' ? 5 : career.kind === 'model' ? 3 : 4);
         if (success && project.quality >= 80 && (career.kind === 'athlete' ? project.periods.filter(item => item.success).length >= 10 : project.responseRoll <= 10)) {
-            project.award = career.kind === 'athlete' ? 'League season trophy' : career.kind === 'actor' ? 'Lantern Festival performance award' : 'Everyday campaign distinction';
+            project.award = career.kind === 'athlete' ? 'League season trophy' : career.kind === 'actor' ? 'Lantern Festival performance award' : career.kind === 'musician' ? 'Small Room live performance award' : 'Everyday campaign distinction';
             fact(world, 'I received the ' + project.award + ' for ' + project.name + '.', 'career', '', person.id);
         }
         const completed = career.projects.filter(item => item.status === 'completed').length;

@@ -16,4 +16,6 @@
 
 - `v11-business-archive.json`: generated with the actual `cee69fc` engine, repository and archive codec in real SQLite. A managed café completes twelve actual operating months with two persistent employees, 88 company transactions, funded wages, dividends and personal annual settlement. A compressed pre-year company checkpoint is retained. The skills/career migration must preserve its exact company cash, contracts, history, ledgers and random streams without inventing prior training.
 
+- `v12-career-archive.json`: generated with the actual `2ee8b9c` engine/repository/archive in real SQLite. A selected actor completes six real paid role periods (2,000,000 minor units), with its result pending and the annual frame paused at month six. A compressed pre-year checkpoint retains the active contract, colleagues and the same saved response. The music-schema migration must preserve both states, exact earnings, RNG and pause without rerolling the role.
+
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.
