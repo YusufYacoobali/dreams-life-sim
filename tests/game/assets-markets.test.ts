@@ -27,7 +27,7 @@ function buy(world: World, id: string, financing: 'cash' | 'mortgage' = 'cash'):
 
 test('an actual v3 employed save migrates with every balance, liability and work record intact', () => {
   const migrated = decodeWorld(JSON.stringify(graduateFixture));
-  expect(migrated.schemaVersion).toBe(6);
+  expect(migrated.schemaVersion).toBe(7);
   expect(migrated.ledger).toEqual(graduateFixture.ledger.map(entry => ({ ...entry, cashDelta: BigInt(entry.cashDelta.$dreamsBigInt), debtDelta: BigInt(entry.debtDelta.$dreamsBigInt) })));
   for (const account of graduateFixture.accounts) expect(migrated.accounts.find(item => item.id === account.id)?.cash).toBe(BigInt(account.cash.$dreamsBigInt));
   expect(migrated.people[migrated.activePersonId].employment?.id).toBe(graduateFixture.people.person_player.employment.id);
@@ -167,7 +167,7 @@ test('all 81 currency pair directions reject same-currency trades or conserve mo
   const currencies = Object.keys(currencyDigits) as Currency[];
   for (const from of currencies) for (const to of currencies) {
     let world = fixture();
-    for (const currency of currencies) if (!world.accounts.some(item => item.ownerId === world.activePersonId && item.currency === currency)) world.accounts.push({ id: 'account_fixture_' + currency, ownerId: world.activePersonId, currency, cash: 1000000000n, openingCash: 1000000000n });
+    for (const currency of currencies) if (!world.accounts.some(item => item.ownerId === world.activePersonId && item.currency === currency)) world.accounts.push({ id: 'account_fixture_' + currency, ownerId: world.activePersonId, currency, cash: 1000000000n, openingCash: 1000000000n, lockedCash: 0n });
     const before = accountFor(world, world.people[world.activePersonId], from).cash; const amount = 1000000n;
     if (from === to) { expect(() => resolveCommand(world, { type: 'exchange', from, to, amount, quotedNet: 1n })).toThrow(/different/); continue; }
     const quote = exchangeQuote(world, amount, from, to);

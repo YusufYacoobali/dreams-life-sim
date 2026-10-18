@@ -72,7 +72,7 @@ export function createContact(world: World, options: { age: number; gender?: Per
   person.attractedTo = options.compatibleWith ? [options.compatibleWith] : [...genders];
   world.people[id] = person;
   const cash = options.age < rules[player.country].adultAge ? 0n : roundRatio(rules[player.country].baseWage * BigInt(draw(world, 'npcs', 2, 25)), 10n);
-  world.accounts.push({ id: 'account_' + id, ownerId: id, currency: country.currency, cash, openingCash: cash });
+  world.accounts.push({ id: 'account_' + id, ownerId: id, currency: country.currency, cash, openingCash: cash, lockedCash: 0n });
   if (options.age >= rules[player.country].adultAge) {
     person.householdId = 'household_' + id;
     world.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [id], homeAssetId: null });

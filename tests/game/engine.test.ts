@@ -44,7 +44,7 @@ test('the original leap-day anchor returns in the next leap year', () => {
 
 test('a saved annual cursor resumes its remaining months without advancing a second year', () => {
   const world = born();
-  world.annual = { id: 'year_interrupted', startDate: world.date, targetDate: { year: 2025, month: 2, day: 28 }, monthsProcessed: 6, stage: 'months' };
+  world.annual = { id: 'year_interrupted', startDate: world.date, targetDate: { year: 2025, month: 2, day: 28 }, monthsProcessed: 6, stage: 'months', pausedForPlanning: false };
   world.date = { year: 2024, month: 8, day: 29 };
   const restored = decodeWorld(encodeWorld(world));
   const resumed = resolveCommand(restored, { type: 'resume' });

@@ -5,7 +5,7 @@ import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';
 import { IneligibleAction } from '../errors';
 import { RuntimeEffectRow } from '../runtime';
-import { accountFor, active, bounded, charge, draw, fact, post, result } from './common';
+import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result, trustForNecessaryCost } from './common';
 import { fxMoney } from './markets';
 
 export type OwnedAsset = World['assets'][number];
@@ -115,7 +115,7 @@ export function resolveAssets(world: World, command: AssetCommand) {
     const quote = purchaseQuote(world, offer, command.financing, command.depositBps, command.termMonths);
     if (quote.price !== command.quotedPrice) throw new IneligibleAction('The price changed. Review the offer again');
     const reason = purchaseReason(world, offer, command.financing, command.depositBps, command.termMonths); if (reason) throw new IneligibleAction(reason);
-    const asset: OwnedAsset = { id: 'asset_' + world.revision, ownerId: person.id, catalogId: offer.id, kind: offer.kind, name: offer.name, country: person.country, city: person.city, currency: accountFor(world).currency, pricePaid: quote.price, costBasis: quote.price + quote.fee, value: quote.price, condition: offer.condition, ageMonths: 0, acquired: { ...world.date }, mortgageId: null, primaryHome: offer.kind === 'property' && !world.assets.some(item => item.ownerId === person.id && item.primaryHome), rental: 'none', rentPerMonth: 0n, upkeepBps: offer.upkeepBps, insured: false, listing: null, provenance: ['Purchased by ' + fullName(person) + ' in ' + world.date.year] };
+    const asset: OwnedAsset = { id: 'asset_' + world.revision, ownerId: person.id, catalogId: offer.id, kind: offer.kind, name: offer.name, country: person.country, city: person.city, currency: accountFor(world).currency, pricePaid: quote.price, costBasis: quote.price + quote.fee, value: quote.price, condition: offer.condition, ageMonths: 0, acquired: { ...world.date }, mortgageId: null, primaryHome: offer.kind === 'property' && !world.assets.some(item => item.ownerId === person.id && item.primaryHome), rental: 'none', rentPerMonth: 0n, upkeepBps: offer.upkeepBps, insured: false, listing: null, provenance: ['Purchased by ' + fullName(person) + ' in ' + world.date.year], ownershipSource: 'purchase', titleSince: { ...world.date } };
     world.assets.push(asset);
     if (asset.primaryHome) { const household = world.households.find(item => item.id === person.householdId); if (household) household.homeAssetId = asset.id; }
     if (quote.principal) makeMortgage(world, asset, quote.principal, quote.interestBps, quote.termMonths);
@@ -195,15 +195,16 @@ export function assetsMonth(world: World, person = active(world), movement = upd
       person.finance.cycleGross += fxMoney(world, { minor: asset.rentPerMonth, currency: asset.currency }, accountFor(world, person).currency).minor;
     }
     const upkeep = monthlyUpkeep(asset);
-    if (upkeep) charge(world, upkeep, 'upkeep', 'Upkeep: ' + asset.name, 'living', asset.currency, person);
-    if (asset.insured) charge(world, monthlyInsurance(asset), 'insurance', 'Insurance: ' + asset.name, 'living', asset.currency, person);
+    if (upkeep) { trustForNecessaryCost(world, person, upkeep, asset.currency); charge(world, upkeep, 'upkeep', 'Upkeep: ' + asset.name, 'living', asset.currency, person); }
+    if (asset.insured) { trustForNecessaryCost(world, person, monthlyInsurance(asset), asset.currency); charge(world, monthlyInsurance(asset), 'insurance', 'Insurance: ' + asset.name, 'living', asset.currency, person); }
     if (asset.mortgageId) {
       const debt = world.liabilities.find(item => item.id === asset.mortgageId)!;
       if (debt.principal > 0n) {
         const interest = roundRatio(debt.principal * BigInt(debt.interestBps), 120000n);
         debt.principal += interest; if (interest) post(world, 0n, interest, 'interest', 'Mortgage interest', debt.id, person, asset.currency);
         const due = debt.remainingMonths <= 1 || debt.principal < debt.monthlyPayment ? debt.principal : debt.monthlyPayment;
-        const paid = account.cash < due ? account.cash : due;
+        trustForNecessaryCost(world, person, due, asset.currency);
+        const available = availableCash(account), paid = available < due ? available : due;
         debt.principal -= paid; if (paid) post(world, -paid, -paid, 'repayment', 'Monthly mortgage payment', debt.id, person, asset.currency);
         debt.remainingMonths = Math.max(0, debt.remainingMonths - 1); debt.missedPayments = paid < due ? debt.missedPayments + 1 : 0;
         if (debt.missedPayments >= 6) {

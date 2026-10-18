@@ -26,3 +26,11 @@ export function portfolioValue(world: World): Money {
   const currency = countries[world.people[world.activePersonId].country].currency;
   return { currency, minor: world.holdings.filter(holding => holding.ownerId === world.activePersonId).reduce((sum, holding) => sum + investmentValue(world, holding.instrumentId, holding.quantity, currency), 0n) };
 }
+/** Gifts from outside the couple and inheritances are excluded from future marital-gain equalisation. */
+export function protectSeparateProperty(world: World, personId: string, value: Money, donorId?: string) {
+  for (const marriage of world.marriages.filter(item => !item.ended && (item.a === personId || item.b === personId))) {
+    if (donorId === marriage.a || donorId === marriage.b) continue;
+    if (marriage.a === personId) marriage.excludedA += fxMoney(world, value, marriage.baselineA.currency).minor;
+    else marriage.excludedB += fxMoney(world, value, marriage.baselineB.currency).minor;
+  }
+}

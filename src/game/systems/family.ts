@@ -72,15 +72,16 @@ export function divorceQuote(world: World, personId: string) {
   const player = active(world), target = world.people[personId]; const marriage = world.marriages.find(item => !item.ended && (item.a === player.id && item.b === personId || item.b === player.id && item.a === personId));
   if (!target || !marriage) throw new IneligibleAction('Choose your current spouse');
   const currency = accountFor(world).currency;
-  const baselinePlayer = fxMoney(world, marriage.a === player.id ? marriage.baselineA : marriage.baselineB, currency).minor;
-  const baselineTarget = fxMoney(world, marriage.a === player.id ? marriage.baselineB : marriage.baselineA, currency).minor;
+  const first = { ...marriage.baselineA, minor: marriage.baselineA.minor + marriage.excludedA }, second = { ...marriage.baselineB, minor: marriage.baselineB.minor + marriage.excludedB };
+  const baselinePlayer = fxMoney(world, marriage.a === player.id ? first : second, currency).minor;
+  const baselineTarget = fxMoney(world, marriage.a === player.id ? second : first, currency).minor;
   const playerGain = netWorth(world, player.id).minor - baselinePlayer;
   const targetGain = fxMoney(world, netWorth(world, target.id), currency).minor - baselineTarget;
   const signed = (playerGain - targetGain) / 2n;
   return { signed, amount: signed < 0n ? -signed : signed, payerId: signed >= 0n ? player.id : target.id, receiverId: signed >= 0n ? target.id : player.id, currency };
 }
 function ensureAccount(world: World, person: Person, currency: World['accounts'][number]['currency']) {
-  if (!world.accounts.some(item => item.ownerId === person.id && item.currency === currency)) world.accounts.push({ id: 'account_' + person.id + '_' + currency, ownerId: person.id, currency, cash: 0n, openingCash: 0n });
+  if (!world.accounts.some(item => item.ownerId === person.id && item.currency === currency)) world.accounts.push({ id: 'account_' + person.id + '_' + currency, ownerId: person.id, currency, cash: 0n, openingCash: 0n, lockedCash: 0n });
 }
 /** A family obligation creates a receivable, never cash. Collections transfer actual balances. */
 export function oweFamily(world: World, payerId: string, receiverId: string, amount: bigint, currency: World['accounts'][number]['currency'], kind: 'settlement' | 'child-support') {

@@ -81,7 +81,7 @@ export function createGameStore(deps: Dependencies) {
         const repository = await deps.repository();
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId);
-        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
+        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life) });
       }, "Your progress couldn't be saved. Please try again."),
     };
   });

@@ -60,7 +60,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 6, engineVersion: 5, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 7, engineVersion: 6, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
@@ -68,6 +68,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     relationships: guardians.map((p, i) => ({ id: 'relation_parent_' + i, from: p.id, to: player.id, kind: 'parent' as const, roles: ['parent'], romance: 'none', since: { ...date }, parentType: 'biological', strength: roll(65, 95), trust: roll(65, 95), memories: ['birth'], lastInteractionYear: date.year })),
     households: [{ id: 'household_birth', name: input.lastName + ' household', members: [player, ...guardians].map(person => person.id), homeAssetId: null }], marriages: [],
     pregnancies: [], custody: [],
+    legacyAnnual: null, wills: [], estates: [], generation: 1, legacies: [],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };
@@ -80,7 +81,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   if (guardians.length === 2) {
     const started = { ...date, year: date.year - 1, day: Math.min(date.day, daysInMonth(date.year - 1, date.month)) };
     world.relationships.push({ id: 'relation_parents_couple', from: parent1.id, to: parent2.id, kind: 'spouse', roles: ['spouse'], romance: 'married', since: started, parentType: null, strength: roll(55, 90), trust: roll(55, 90), memories: ['married-before-birth'], lastInteractionYear: date.year });
-    world.marriages.push({ id: 'marriage_parents', a: parent1.id, b: parent2.id, started, ended: null, endReason: null, baselineA: netWorth(world, parent1.id), baselineB: netWorth(world, parent2.id), ledgerStart: 0, weddingCost: null });
+    world.marriages.push({ id: 'marriage_parents', a: parent1.id, b: parent2.id, started, ended: null, endReason: null, baselineA: netWorth(world, parent1.id), baselineB: netWorth(world, parent2.id), excludedA: 0n, excludedB: 0n, ledgerStart: 0, weddingCost: null });
   }
   return validateWorld(world);
 }

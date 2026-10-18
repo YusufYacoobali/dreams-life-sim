@@ -13,6 +13,7 @@ const moneySchema = z.object({ minor: z.bigint(), currency: z.enum(['USD', 'CAD'
 export const marriageSchema = z.object({
   id: z.string(), a: z.string(), b: z.string(), started: dateSchema, ended: dateSchema.nullable(), endReason: z.enum(['divorce', 'death']).nullable(),
   baselineA: moneySchema, baselineB: moneySchema, ledgerStart: z.number().int().nonnegative(), weddingCost: moneySchema.nullable(),
+  excludedA: z.bigint().nonnegative().default(0n), excludedB: z.bigint().nonnegative().default(0n),
 });
 export const biologySchema = z.object({ role: z.enum(['carry', 'contribute', 'neither']), fertility: z.number().int().min(0).max(100) });
 export const pregnancySchema = z.object({ id: z.string(), carrierId: z.string(), otherParentId: z.string(), conceived: dateSchema, due: dateSchema, status: z.enum(['pregnant', 'born', 'lost', 'ended-death']), childId: z.string().nullable(), ended: dateSchema.nullable() });

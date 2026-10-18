@@ -16,9 +16,10 @@ import { connectPerson, recordFamilyDeath, relationshipsYear, resolveSocial, soc
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
+import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -30,8 +31,9 @@ function roll(world: World, stream: keyof World['random'], min: number, max: num
   world.random[stream] = result.state;
   return result.value;
 }
-function death(world: World, personId: string, cause: string) {
+export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
+  if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
   recordFamilyDeath(world, personId);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
@@ -40,11 +42,12 @@ function death(world: World, personId: string, cause: string) {
   careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
-    world.annual = null; world.pending = null;
+    world.legacyAnnual = world.annual ? { ...world.annual } : null; world.annual = null; world.pending = null;
   } else {
     const related = world.relationships.some(relation => (relation.from === personId && relation.to === world.activePersonId) || (relation.to === personId && relation.from === world.activePersonId));
     if (related) journal(world, 'death_' + personId, fullName(person) + ' died at age ' + ageOn(person, world.date) + '.', 'family');
   }
+  settleEstate(world, personId);
 }
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
@@ -67,7 +70,7 @@ function processMonth(world: World) {
     const base = age >= 115 ? 6500 : age >= 105 ? 1400 : age >= 95 ? 400 : age >= 85 ? 140 : age >= 75 ? 50 : age >= 65 ? 15 : age >= 45 ? 2 : 0;
     const threshold = base + (person.stats.health < 20 ? (20 - person.stats.health) * 30 : 0);
     if (roll(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 10000) <= threshold) {
-      death(world, person.id, person.stats.health < 20 ? 'declining health' : 'natural causes');
+      recordDeath(world, person.id, person.stats.health < 20 ? 'declining health' : 'natural causes');
       if (world.people[world.activePersonId].died) return;
     }
   }
@@ -154,14 +157,18 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   // Zod returns a deep copy while validating, including bigint values.
   const world = validateWorld(previous);
   const player = world.people[world.activePersonId];
+  if (command.type === 'continue-child') {
+    resolveEstate(world, estateCommandSchema.parse(command)); world.revision++; return validateWorld(world);
+  }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
-    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months' };
+    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months', pausedForPlanning: false };
     continueYear(world);
   } else if (command.type === 'resume') {
     if (!world.annual || world.pending) throw new IneligibleAction('There is no interrupted year to resume');
+    world.annual.pausedForPlanning = false;
     continueYear(world);
   } else if (command.type === 'choose') {
     const event = world.pending;
@@ -175,9 +182,9 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null;
     if (world.annual?.stage === 'complete') world.annual = null;
-    else if (world.annual) continueYear(world);
+    else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
-    if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
+    if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
     const education = educationCommandSchema.safeParse(command);
     const work = workCommandSchema.safeParse(command);
     const finance = financeCommandSchema.safeParse(command);
@@ -185,6 +192,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const market = marketCommandSchema.safeParse(command);
     const social = socialCommandSchema.safeParse(command);
     const family = familyCommandSchema.safeParse(command);
+    const estate = estateCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -192,6 +200,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (market.success) resolveMarket(world, market.data);
     else if (social.success) resolveSocial(world, social.data);
     else if (family.success) resolveFamily(world, family.data);
+    else if (estate.success) resolveEstate(world, estate.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

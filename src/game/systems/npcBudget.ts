@@ -69,6 +69,7 @@ export function householdMonth(world: World) {
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const rule = rules[person.country], age = ageOn(person, world.date);
+    if (age >= rule.adultAge) for (const account of world.accounts.filter(item => item.ownerId === person.id && item.lockedCash > 0n)) { account.lockedCash = 0n; fact(world, 'My inheritance trust became available in adulthood.', 'finance', '', person.id); }
     const household = world.households.find(item => item.id === person.householdId);
     const independentAge = Math.max(rule.adultAge, rule.schoolEnd);
     if (age >= independentAge && age < independentAge + 1 && !world.actionCounts[person.id + ':independent-home'] && household && world.relationships.some(relation => relation.to === person.id && relation.roles.includes('parent') && household.members.includes(relation.from))) {

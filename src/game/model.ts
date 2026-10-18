@@ -9,6 +9,7 @@ import { initialMarket } from './content/markets';
 import { assetCatalog } from './content/assets';
 import { biologySchema, custodySchema, genders, householdSchema, marriageSchema, newFamilyPerson, pregnancySchema, relationshipSchema } from './systems/familySchemas';
 import { netWorth } from './valuation';
+import { annualSchema, estateSchema, willSchema } from './systems/estateSchemas';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -32,21 +33,22 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(6), engineVersion: z.literal(5), contentVersion: z.literal(1),
+  schemaVersion: z.literal(7), engineVersion: z.literal(6), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(relationshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
-  accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative() })),
+  accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
   workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
-  annual: z.object({ id: z.string(), startDate: dateSchema, targetDate: dateSchema, monthsProcessed: z.number().int().min(0).max(12), stage: z.enum(['months', 'complete']) }).nullable(),
+  annual: annualSchema.nullable(), legacyAnnual: annualSchema.nullable(), wills: z.array(willSchema), estates: z.array(estateSchema),
+  generation: z.number().int().positive(), legacies: z.array(z.object({ fromId: personId, toId: personId, date: dateSchema })),
   pending: pendingSchema.nullable(),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
@@ -145,7 +147,7 @@ export function validateWorld(value: unknown): World {
   }
   for (const account of world.accounts) {
     const currencyKey = account.ownerId + ':' + account.currency;
-    if (!world.people[account.ownerId] || account.cash < 0n || accountIds.has(account.id) || accountCurrencies.has(currencyKey)) throw new Error('Invalid cash account');
+    if (!world.people[account.ownerId] || account.cash < 0n || account.lockedCash > account.cash || accountIds.has(account.id) || accountCurrencies.has(currencyKey)) throw new Error('Invalid cash account');
     accountIds.add(account.id);
     accountCurrencies.add(currencyKey);
   }
@@ -194,6 +196,26 @@ export function validateWorld(value: unknown): World {
   if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
   if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
   if (world.annual?.stage === 'complete' && world.annual.monthsProcessed !== 12) throw new Error('Incomplete year marked complete');
+  if (world.annual?.pausedForPlanning && world.annual.stage !== 'months') throw new Error('Invalid planning pause');
+  if (world.legacyAnnual && (!world.people[world.activePersonId].died || compareDates(world.date, monthFrom(world.legacyAnnual.startDate, world.legacyAnnual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.legacyAnnual.targetDate, monthFrom(world.legacyAnnual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Invalid archived annual frame');
+  const willPeople = new Set<string>();
+  for (const will of world.wills) {
+    if (willPeople.has(will.personId) || !world.people[will.personId] || !world.people[will.executorId] || will.personId === will.executorId || compareDates(will.updated, world.date) > 0 || will.shares.reduce((sum, item) => sum + item.bps, 0) !== 10000 || new Set(will.shares.map(item => item.personId)).size !== will.shares.length || will.shares.some(item => !world.people[item.personId] || item.personId === will.personId) || new Set(will.bequests.map(item => item.assetId)).size !== will.bequests.length || will.bequests.some(item => !world.assets.some(asset => asset.id === item.assetId) || !will.shares.some(share => share.personId === item.personId))) throw new Error('Invalid will');
+    willPeople.add(will.personId);
+  }
+  const settledPeople = new Set<string>(), estateIds = new Set<string>();
+  for (const estate of world.estates) {
+    const person = world.people[estate.personId], currency = estate.netWorthAtDeath.currency;
+    if (settledPeople.has(estate.personId) || estateIds.has(estate.id) || !person?.died || compareDates(estate.settled, person.died) < 0 || compareDates(estate.settled, world.date) > 0 || (estate.executorId && !world.people[estate.executorId]) || [estate.fees, estate.tax, estate.debtPaid, estate.debtWrittenOff, estate.charity].some(money => money.minor < 0n || money.currency !== currency) || new Set(estate.distributions.map(item => item.personId)).size !== estate.distributions.length || estate.distributions.some(item => !world.people[item.personId] || item.personId === person.id || item.cash.minor < 0n || item.assetValue.minor < 0n || item.cash.currency !== currency || item.assetValue.currency !== currency || item.assets.some(id => !world.assets.some(asset => asset.id === id)))) throw new Error('Invalid estate history');
+    if (world.accounts.some(item => item.ownerId === person.id && item.cash !== 0n) || world.assets.some(item => item.ownerId === person.id) || world.holdings.some(item => item.ownerId === person.id && item.quantity > 0n) || world.liabilities.some(item => item.ownerId === person.id && item.principal > 0n || item.creditorId === person.id && item.principal > 0n)) throw new Error('Settled estate retains property or obligations');
+    settledPeople.add(estate.personId); estateIds.add(estate.id);
+  }
+  if (world.generation !== world.legacies.length + 1) throw new Error('Invalid generation count');
+  for (let index = 0; index < world.legacies.length; index++) {
+    const legacy = world.legacies[index];
+    if (!world.people[legacy.fromId]?.died || !world.people[legacy.toId] || !world.relationships.some(item => item.roles.includes('parent') && item.from === legacy.fromId && item.to === legacy.toId) || compareDates(legacy.date, world.date) > 0 || (index && (world.legacies[index - 1].toId !== legacy.fromId || compareDates(world.legacies[index - 1].date, legacy.date) > 0))) throw new Error('Invalid legacy chain');
+  }
+  if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
   if (world.pending?.kind === 'decision') {
     if (world.people[world.activePersonId].died || world.pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(world.pending.choices.map(choice => choice.id)).size !== world.pending.choices.length) throw new Error('Duplicate decision choices');
@@ -268,6 +290,10 @@ export function decodeWorld(text: string): World {
   }
   if (parsed && parsed.schemaVersion === 5) {
     parsed.schemaVersion = 6; parsed.engineVersion = 5; parsed.pregnancies = []; parsed.custody = [];
+  }
+  if (parsed && parsed.schemaVersion === 6) {
+    parsed.schemaVersion = 7; parsed.engineVersion = 6; parsed.wills = []; parsed.estates = []; parsed.legacyAnnual = null; parsed.generation = 1; parsed.legacies = [];
+    for (const asset of parsed.assets ?? []) { asset.ownershipSource = 'legacy'; asset.titleSince = asset.acquired; }
   }
   return validateWorld(parsed);
 }

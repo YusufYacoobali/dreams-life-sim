@@ -6,7 +6,7 @@ import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';
 import { assetCatalog } from '../content/assets';
 import { RuntimeEffectRow } from '../runtime';
-import { netWorth } from '../valuation';
+import { netWorth, protectSeparateProperty } from '../valuation';
 import { accountFor, active, bounded, charge, draw, fact, post, result } from './common';
 import { createContact } from './npcs';
 import { moveHousehold, ownHousehold } from './households';
@@ -152,6 +152,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     const received = source.currency === destination.currency ? command.amount : exchangeQuote(world, command.amount, source.currency, destination.currency).net;
     if (received <= 0n) throw new IneligibleAction('The gift is too small after currency conversion');
     post(world, -command.amount, 0n, 'gift', 'Gift to ' + target.firstName); post(world, received, 0n, 'gift', 'Gift from ' + player.firstName, null, target);
+    protectSeparateProperty(world, target.id, { minor: received, currency: destination.currency }, player.id);
     target.stats.happiness = bounded(target.stats.happiness + 3); relation.lastInteractionYear = world.date.year;
     const effect = bond(relation, 5); fact(world, 'I gave ' + target.firstName + ' ' + formatMoney({ minor: received, currency: destination.currency }) + '.', 'relationships'); result(world, 'Gift received', target.firstName + ' thanked you. The money came from your actual balance.', 'gift', [effect]); return;
   }
@@ -179,8 +180,8 @@ export function resolveSocial(world: World, command: SocialCommand) {
     if (command.ringId && !ring) throw new IneligibleAction('Choose an engagement ring you own');
     if (!ring) { const offer = assetCatalog.find(asset => asset.id === 'engagement-ring')!; resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 360, quotedPrice: assetPrice(world, offer) }); ring = world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring')!; }
     if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', 'The relationship is still a relationship. The ring stays in your possessions.', 'rings', statChanges(player, { happiness: -4 })); return; }
-    ring.ownerId = target.id; ring.provenance.push('Given to ' + fullName(target) + ' by ' + fullName(player) + ' in ' + world.date.year);
-    if (!world.accounts.some(account => account.ownerId === target.id && account.currency === ring!.currency)) world.accounts.push({ id: 'account_' + target.id + '_' + ring.currency, ownerId: target.id, currency: ring.currency, cash: 0n, openingCash: 0n });
+    ring.ownerId = target.id; ring.ownershipSource = 'gift'; ring.titleSince = { ...world.date }; ring.provenance.push('Given to ' + fullName(target) + ' by ' + fullName(player) + ' in ' + world.date.year);
+    if (!world.accounts.some(account => account.ownerId === target.id && account.currency === ring!.currency)) world.accounts.push({ id: 'account_' + target.id + '_' + ring.currency, ownerId: target.id, currency: ring.currency, cash: 0n, openingCash: 0n, lockedCash: 0n });
     relation.romance = 'engaged'; relation.memories.push('engagement:' + world.date.year); syncKind(relation);
     fact(world, target.firstName + ' accepted my proposal.', 'relationships'); result(world, 'They said yes', 'You are engaged to ' + target.firstName + '. The ring is now theirs.', 'rings', statChanges(player, { happiness: 10 })); return;
   }
@@ -188,7 +189,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   if (command.budget < weddingBudgets(world)[0].amount) throw new IneligibleAction('The budget does not cover the minimum ceremony cost');
   charge(world, command.budget, 'wedding', 'Wedding with ' + target.firstName);
   relation.romance = 'married'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.includes('spouse')) relation.roles.push('spouse'); syncKind(relation); relation.memories.push('married:' + world.date.year);
-  world.marriages.push({ id: 'marriage_' + world.revision, a: player.id, b: target.id, started: { ...world.date }, ended: null, endReason: null, baselineA: netWorth(world, player.id), baselineB: netWorth(world, target.id), ledgerStart: world.ledger.length, weddingCost: { minor: command.budget, currency: accountFor(world).currency } });
+  world.marriages.push({ id: 'marriage_' + world.revision, a: player.id, b: target.id, started: { ...world.date }, ended: null, endReason: null, baselineA: netWorth(world, player.id), baselineB: netWorth(world, target.id), excludedA: 0n, excludedB: 0n, ledgerStart: world.ledger.length, weddingCost: { minor: command.budget, currency: accountFor(world).currency } });
   const householdId = ownHousehold(world, player, [target.id]); const household = world.households.find(item => item.id === householdId)!;
   if (!household.homeAssetId) household.homeAssetId = world.assets.find(asset => asset.ownerId === target.id && asset.primaryHome)?.id ?? null;
   const home = world.assets.find(asset => asset.id === household.homeAssetId); if (home) { player.city = home.city; target.city = home.city; } else target.city = player.city;

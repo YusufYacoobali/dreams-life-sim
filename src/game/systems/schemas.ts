@@ -31,6 +31,7 @@ export const physicalAssetSchema = z.object({
   mortgageId: z.string().nullable(), primaryHome: z.boolean(), rental: z.enum(['none', 'listed', 'occupied']), rentPerMonth: z.bigint().nonnegative(), upkeepBps: z.number().int().nonnegative(), insured: z.boolean(),
   listing: z.object({ askingPrice: z.bigint().positive(), nextOfferMonth: z.number().int(), offer: z.bigint().positive().nullable(), offersMade: z.number().int().nonnegative() }).nullable(),
   provenance: z.array(z.string()),
+  ownershipSource: z.enum(['purchase', 'gift', 'inheritance', 'legacy']), titleSince: dateSchema,
 });
 export const holdingSchema = z.object({ id: z.string(), ownerId: z.string(), instrumentId: z.enum(instrumentIds), quantity: z.bigint().nonnegative(), costBasis: z.bigint().nonnegative(), currency });
 export const marketSchema = z.object({

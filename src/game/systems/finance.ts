@@ -46,7 +46,7 @@ export function resolveFinance(world: World, command: FinanceCommand) {
     if (source.cash < command.amount) throw new IneligibleAction('Your balance cannot cover this exchange');
     const quote = exchangeQuote(world, command.amount, command.from, command.to);
     if (quote.net <= 0n || quote.net !== command.quotedNet) throw new IneligibleAction('The exchange quote changed or the amount is too small after fees');
-    if (!world.accounts.some(item => item.ownerId === person.id && item.currency === command.to)) world.accounts.push({ id: 'account_' + person.id + '_' + command.to, ownerId: person.id, currency: command.to, cash: 0n, openingCash: 0n });
+    if (!world.accounts.some(item => item.ownerId === person.id && item.currency === command.to)) world.accounts.push({ id: 'account_' + person.id + '_' + command.to, ownerId: person.id, currency: command.to, cash: 0n, openingCash: 0n, lockedCash: 0n });
     post(world, -command.amount, 0n, 'exchange', 'Exchanged ' + command.from + ' to ' + command.to, null, person, command.from);
     post(world, quote.net, 0n, 'exchange', 'Received ' + command.to + ' after exchange fee', null, person, command.to);
     result(world, 'Currency exchanged', 'The source balance fell and the quoted amount reached the destination account. The exchange fee was deducted.', 'money', [{ id: 'received', label: 'Received', value: formatMoney({ minor: quote.net, currency: command.to }), tone: 'positive' }]);
