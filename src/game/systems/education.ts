@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, Person, World } from '../model';
 import { IneligibleAction } from '../errors';
@@ -28,6 +29,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
   if (education.stage !== 'none') return 'You are already enrolled';
+  if(fullTimeCreator(world))return 'Switch your studio to part-time before full-time study';
   if(campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time study';
   if (recordingCommitment(world)) return 'Finish or cancel your recording before full-time study';
   if (person.employment && !jobs.find(job => job.id === person.employment!.roleId)?.partTime) return 'Resign from full-time work before starting this course';

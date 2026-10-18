@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, World } from '../model';
 import { countries } from '../countries';
@@ -49,6 +50,7 @@ export function campaignReason(world: World): string | undefined {
         return 'A secondary qualification is required';
     if (person.employment && !jobs.find(item => item.id === person.employment!.roleId)?.partTime || person.education.stage !== 'none' || recordingCommitment(world) || world.careers.some(item => item.personId === person.id && item.status === 'active'))
         return 'Finish or leave other full-time commitments before campaigning';
+    if(fullTimeCreator(world))return 'Switch your studio to part-time before campaigning';
     if (campaignCommitment(world))
         return 'Your current campaign is still running';
     if ((world.actionCounts[person.id + ':campaign:' + world.date.year] ?? 0) >= 2)

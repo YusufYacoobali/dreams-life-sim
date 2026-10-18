@@ -20,4 +20,6 @@
 
 - `v13-music-archive.json`: generated with the actual `7e76656` engine/repository/archive in real SQLite. A musician completes a live contract and three funded recording months, then six actual listening periods yield 121,470 units and 242,940 minor units of royalties, with actual annual tax settlement. A compressed recording-start checkpoint retains the unfinished release and saved response. Election-schema migration must preserve both stages, payments, identity and random streams.
 
+- `v14-election-archive.json`: generated with the actual `44b2e68` engine/repository/archive in real SQLite from the v13 musician. A funded six-period campaign elects the existing player, with the first office period still unpaid, twelve actual listening periods and 472,576 minor units of royalty receipts. Its compressed pre-year checkpoint retains the ongoing campaign, the same opponent and saved response. Studio migration must preserve the election, appointment, payments, cursor and historical state without creating past production.
+
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.

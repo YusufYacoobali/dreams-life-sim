@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { World, ageOn } from '../model';
 import { countries } from '../countries';
@@ -36,6 +37,7 @@ export function recordingReason(world: World): string | undefined {
         return 'Music skill of 45% is required';
     if (person.employment && !jobs.find(item => item.id === person.employment!.roleId)?.partTime || person.education.stage !== 'none')
         return 'Leave work or full-time study before recording';
+    if(fullTimeCreator(world))return 'Switch your studio to part-time before recording';
     if(campaignCommitment(world))return 'Finish or withdraw from your campaign before recording';
     if (recordingCommitment(world))
         return 'Finish or cancel your current recording first';

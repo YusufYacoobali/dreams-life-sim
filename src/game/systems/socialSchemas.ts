@@ -8,13 +8,13 @@ const money = z.object({ minor: z.bigint().nonnegative(), currency });
 export const publicLifeSchema = z.object({ image: percentage, attention: percentage, earnedFame: percentage, peakFame: percentage, lastMonth: z.number().int(), interviews: count, appearances: count });
 export const newPublicLife = (month: number, earnedFame = 0): z.infer<typeof publicLifeSchema> => ({ image: 50, attention: 0, earnedFame, peakFame: earnedFame, lastMonth: month, interviews: 0, appearances: 0 });
 export const socialIntent = z.enum(['authentic', 'polished', 'provocative']);
-export const socialPostSchema = z.object({ id: z.string(), accountId: z.string(), date: dateSchema, periodMonth: z.number().int(), kind: z.enum(postKinds), intent: socialIntent, caption: z.string().max(220), sponsored: z.boolean(), sponsorId: z.string().nullable(), collaborationId: z.string().nullable(), views: count, likes: count, comments: count, followerDelta: z.number().int(), response: z.enum(['quiet', 'steady', 'well-received', 'viral', 'controversial']), income: money });
+export const socialPostSchema = z.object({ id: z.string(), accountId: z.string(), date: dateSchema, periodMonth: z.number().int(), kind: z.enum(postKinds), intent: socialIntent, caption: z.string().max(220), sponsored: z.boolean(), sponsorId: z.string().nullable(), collaborationId: z.string().nullable(), studioId: z.string().nullable().default(null), liveMinutes: z.union([z.literal(0),z.literal(30),z.literal(60),z.literal(120)]).default(0), views: count, likes: count, comments: count, followerDelta: z.number().int(), response: z.enum(['quiet', 'steady', 'well-received', 'viral', 'controversial']), income: money });
 export const socialAccountSchema = z.object({
   id: z.string(), ownerId: z.string(), platform: z.enum(platforms), handle: z.string().regex(/^[a-zA-Z0-9_]{3,24}$/), bio: z.string().max(120), created: dateSchema,
   status: z.enum(['active', 'suspended', 'deleted', 'memorial']), suspendedUntil: z.number().int().nullable(), strikes: z.number().int().nonnegative(),
   followers: count.max(1000000000), baselineFollowers: count.max(1000000000), peakFollowers: count.max(1000000000), followerDrift: z.number().int(), verified: z.boolean(), monetised: z.boolean(), currency,
-  cadence: z.enum(['off', 'monthly', 'twice-monthly', 'weekly']), topic: z.enum(postKinds), intent: socialIntent, lastMonth: z.number().int(),
-  posts: z.array(socialPostSchema).max(60), archived: z.array(z.object({ year: z.number().int(), posts: count, virals: count, views: count, likes: count, comments: count, followerDelta: z.number().int(), income: z.bigint().nonnegative() })),
+  cadence: z.enum(['off', 'monthly', 'twice-monthly', 'weekly', 'twice-weekly']), topic: z.enum(postKinds), intent: socialIntent, lastMonth: z.number().int(),
+  posts: z.array(socialPostSchema).max(60), archived: z.array(z.object({ year: z.number().int(), posts: count, studioPosts: z.record(z.string(),count).default({}), livePosts: count.default(0), liveMinutes: count.default(0), virals: count, views: count, likes: count, comments: count, followerDelta: z.number().int(), income: z.bigint().nonnegative() })),
   totalPosts: count, totalLikes: count, income: z.bigint().nonnegative(), periods: z.array(z.object({ month: z.number().int(), posts: count, sponsored: count })).max(3),
 });
 export const sponsorshipSchema = z.object({

@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, World } from '../model';
 import { businessCatalog, businessKinds, BusinessKind } from '../content/businesses';
@@ -44,6 +45,7 @@ export function ownerOperationReason(world: World, kind: BusinessKind): string |
   if (isConfined(world)) return 'You cannot operate a workplace from custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest before taking an operating role';
   if (person.employment) return 'Leave your current job before taking an operating role';
+  if(fullTimeCreator(world))return 'Switch your studio to part-time before operating a business';
   if(campaignCommitment(world))return 'Finish or withdraw from your campaign before operating a business';
   if(recordingCommitment(world)) return 'Finish or cancel your recording before operating a business';
   if (person.education.stage !== 'none') return 'Complete or leave full-time study before operating the business';

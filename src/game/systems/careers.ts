@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, World } from '../model';
 import { careerCatalog, careerKinds, CareerKind, skillContent, skillIds } from '../content/careers';
@@ -39,6 +40,7 @@ export function selectionReason(world: World, kind: CareerKind): string | undefi
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
     if (kind === 'politician')
         return 'Run an election campaign to seek public office';
+    if(fullTimeCreator(world))return 'Switch your studio to part-time before accepting a full-time contract';
     if (campaignCommitment(world))
         return 'Finish or withdraw from your current campaign first';
     if (age < definition.minAge || age > definition.maxAge)

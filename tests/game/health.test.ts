@@ -19,7 +19,7 @@ function ack(world: World) { if (world.pending?.kind !== 'result') throw new Err
 function rollState(min: number, max = 100) { for (let state = 0; state < 10000; state++) { const value = randomInteger(state, 1, 100).value; if (value >= min && value <= max) return state; } throw new Error('No test state'); }
 test('a genuine v7 branch archive migrates its live checkpoint and compressed history without inventing prior illnesses', () => {
   const archive = decodeSave(JSON.stringify(historyFixture)), world = archive.world;
-  expect(world.schemaVersion).toBe(14); expect(world.annual?.monthsProcessed).toBe(9); expect(world.pending?.kind === 'result' && world.pending.title).toBe('Welcome, little one');
+  expect(world.schemaVersion).toBe(15); expect(world.annual?.monthsProcessed).toBe(9); expect(world.pending?.kind === 'result' && world.pending.title).toBe('Welcome, little one');
   expect(archive.branch?.snapshotId).toBe(archive.snapshots[0].summary.id);
   for (const person of Object.values(world.people)) expect(person.health.conditions).toEqual([]);
   expect(decodeWorld(encodeWorld(world))).toEqual(world);

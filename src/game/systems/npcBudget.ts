@@ -1,3 +1,4 @@
+import { fullTimeCreator } from './creatorSchemas';
 import { ageOn, Person, World } from '../model';
 import { roundRatio } from '../money';
 import { incomeTax, rules } from '../rules';
@@ -52,7 +53,7 @@ export function settleBackground(world: World, person: Person, throughMonth: num
 export function npcYearDecisions(world: World) {
   for (const person of Object.values(world.people)) {
     const rule = rules[person.country];
-    if (person.id === world.activePersonId || person.died || isConfined(world, person) || person.legal.wanted || recordingCommitment(world,person.id) || campaignCommitment(world,person.id) || person.employment || person.finance.pensionAnnual > 0n || person.education.stage !== 'none' || person.stats.health < 25 || ageOn(person, world.date) < Math.max(rule.adultAge, rule.schoolEnd)) continue;
+    if (person.id === world.activePersonId || person.died || isConfined(world, person) || person.legal.wanted || fullTimeCreator(world,person.id) || recordingCommitment(world,person.id) || campaignCommitment(world,person.id) || person.employment || person.finance.pensionAnnual > 0n || person.education.stage !== 'none' || person.stats.health < 25 || ageOn(person, world.date) < Math.max(rule.adultAge, rule.schoolEnd)) continue;
     const key = person.id + ':job-search:' + world.date.year; if (world.actionCounts[key]) continue; world.actionCounts[key] = 1;
     // Search is an NPC decision, separate from the player's outcomes stream.
     if (draw(world, 'npcs', 1, 100) > 60) continue;

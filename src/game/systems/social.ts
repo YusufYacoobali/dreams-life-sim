@@ -15,6 +15,8 @@ import { hospitalized } from './healthSchemas';
 import { connectPerson, relationFor } from './relationships';
 import { createContact } from './npcs';
 import { financialActors } from './households';
+import { studioForAccount } from './creatorSchemas';
+import { creatorBeforePublish, creatorFocusReason, creatorProductionReason, creatorProfileClosed, creatorRoutineWarning, creatorWorkEnergy } from './creators';
 type Account = World['socialAccounts'][number];
 type Sponsor = World['sponsorships'][number];
 type Post = Account['posts'][number];
@@ -23,8 +25,8 @@ const text = (maximum: number) => z.string().trim().max(maximum).refine(value =>
 export const socialMediaCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('create-social'), platform: z.enum(platforms), handle, bio: text(120) }),
   z.object({ type: z.literal('edit-social'), accountId: z.string(), handle, bio: text(120) }),
-  z.object({ type: z.literal('social-routine'), accountId: z.string(), cadence: z.enum(['off', 'monthly', 'twice-monthly', 'weekly']), topic: z.enum(postKinds), intent: socialIntent }),
-  z.object({ type: z.literal('publish-post'), accountId: z.string(), kind: z.enum(postKinds), intent: socialIntent, caption: text(180).optional(), sponsored: z.boolean() }),
+  z.object({ type: z.literal('social-routine'), accountId: z.string(), cadence: z.enum(['off', 'monthly', 'twice-monthly', 'weekly', 'twice-weekly']), topic: z.enum(postKinds), intent: socialIntent }),
+  z.object({ type: z.literal('publish-post'), accountId: z.string(), kind: z.enum(postKinds), intent: socialIntent, caption: text(180).optional(), sponsored: z.boolean(), liveMinutes: z.union([z.literal(0),z.literal(30),z.literal(60),z.literal(120)]).optional() }),
   z.object({ type: z.literal('monetise-social'), accountId: z.string() }),
   z.object({ type: z.literal('delete-social'), accountId: z.string() }), z.object({ type: z.literal('reopen-social'), accountId: z.string() }),
   z.object({ type: z.literal('find-creators'), platform: z.enum(platforms) }),
@@ -69,13 +71,13 @@ export function topicReason(world: World, kind: PostKind, person = active(world)
   if (kind === 'travel' && !world.journal.some(item => item.personId === person.id && item.category === 'travel' && world.date.year - item.date.year <= 1)) return 'Take a trip before sharing travel experiences';
   if (kind === 'fitness' && person.health.routine.exercise === 'none' && !world.actionCounts[person.id + ':health:' + world.date.year + ':exercise']) return 'Try an exercise session or start an exercise routine first';
 }
-export function postReason(world: World, account: Account, kind: PostKind): string | undefined {
+export function postReason(world: World, account: Account, kind: PostKind, intent = account.intent): string | undefined {
   const person = world.people[account.ownerId];
   if (account.status !== 'active') return account.status === 'suspended' ? 'Your profile is temporarily suspended' : 'Reopen this profile first';
   if (world.controversies.some(item => item.personId === person.id && !item.resolved)) return 'Respond to the current public dispute first';
   if (isConfined(world, person)) return 'Outside posting is unavailable in custody';
   if (hospitalized(world, person) || person.stats.health < 20 || person.stats.energy < 10) return 'Recover your health and energy first';
-  return topicReason(world, kind, person);
+  return topicReason(world, kind, person) ?? creatorProductionReason(world,account,postCost(world,intent,person));
 }
 export function monetisationReason(world: World, account: Account): string | undefined {
   if (ageOn(world.people[account.ownerId], world.date) < 18) return 'Creator payments are available from age eighteen';
@@ -87,7 +89,9 @@ export function monetisationReason(world: World, account: Account): string | und
 function archivePosts(account: Account) {
   while (account.posts.length > 60) {
     const item = account.posts.shift()!; let archive = account.archived.find(row => row.year === item.date.year);
-    if (!archive) { archive = { year: item.date.year, posts: 0, virals: 0, views: 0, likes: 0, comments: 0, followerDelta: 0, income: 0n }; account.archived.push(archive); }
+    if (!archive) { archive = { year: item.date.year, posts: 0, studioPosts: {}, livePosts: 0, liveMinutes: 0, virals: 0, views: 0, likes: 0, comments: 0, followerDelta: 0, income: 0n }; account.archived.push(archive); }
+    if(item.studioId)archive.studioPosts[item.studioId]=(archive.studioPosts[item.studioId]??0)+1;
+    if(item.liveMinutes){archive.livePosts++;archive.liveMinutes+=item.liveMinutes;}
     archive.posts++; archive.views += item.views; archive.likes += item.likes; archive.comments += item.comments; archive.followerDelta += item.followerDelta; archive.income += item.income.minor;
     if (item.response === 'viral') archive.virals++;
   }
@@ -109,17 +113,20 @@ export function respondPublicly(world: World, id: string, response: 'apologise' 
   person.publicLife.image = bounded(before + change); person.stats.stress = bounded(person.stats.stress + (response === 'ignore' ? 4 : -2)); updateFame(world, person);
   return [effect('image', 'Public image', (person.publicLife.image - before >= 0 ? '+' : '') + (person.publicLife.image - before) + '%', change >= 0 ? 'positive' : 'negative')];
 }
-function publish(world: World, account: Account, kind: PostKind, intent: 'authentic' | 'polished' | 'provocative', sponsored: boolean, caption?: string, automatic = false, collaborationId: string | null = null, reachBonus = 0): Post {
+function publish(world: World, account: Account, kind: PostKind, intent: 'authentic' | 'polished' | 'provocative', sponsored: boolean, caption?: string, automatic = false, collaborationId: string | null = null, reachBonus = 0, liveMinutes: 0|30|60|120 = 0): Post {
   const person = world.people[account.ownerId], stream = person.id === world.activePersonId ? 'outcomes' : 'npcs', currency = account.currency;
-  const reason = postReason(world, account, kind); if (reason) throw new IneligibleAction(reason);
+  const reason = postReason(world, account, kind, intent); if (reason) throw new IneligibleAction(reason);
+  const studio = studioForAccount(world,account.id);
+  if(liveMinutes && (account.platform!=='streamline'||studio?.kind!=='streamer'))throw new IneligibleAction('Start your Streamer studio before going live');
   const deal = sponsored ? world.sponsorships.find(item => item.accountId === account.id && item.status === 'active') : undefined;
   if (sponsored && !deal) throw new IneligibleAction('There is no active brand deal on this profile');
   if (deal && kind !== deal.topic) throw new IneligibleAction('This deal requires ' + postContent[deal.topic].title.toLowerCase());
   const cost = postCost(world, intent, person); if (cost.minor) charge(world, cost.minor, 'content-production', 'Original content production', undefined, cost.currency, person);
+  const production = creatorBeforePublish(world,account,account.totalPosts);
   const preferred = (platformContent[account.platform].preferred as readonly string[]).includes(kind);
-  const quality = Math.round((person.stats.smarts + person.stats.discipline) / 2) + (person.traits.includes('creative') ? 12 : 0) + (intent === 'polished' ? 15 : 0) + (preferred ? 10 : 0), reach = draw(world, stream, 20, 120), responseRoll = draw(world, stream, 1, 1000);
-  const controversial = responseRoll <= (intent === 'provocative' ? 120 : 8), viral = !controversial && responseRoll > 975;
-  let views = Math.max(1, Math.round((50 + draw(world, stream, 0, 250) + account.followers * reach / 200 + reachBonus) * (0.5 + quality / 100) * (viral ? draw(world, stream, 20, 80) : intent === 'provocative' ? 2 : 1) * (sponsored ? 0.75 : 1)));
+  const quality = production.bonus + Math.round((person.stats.smarts + person.stats.discipline) / 2) + (person.traits.includes('creative') ? 12 : 0) + (intent === 'polished' ? 15 : 0) + (preferred ? 10 : 0), reach = draw(world, stream, 20, 120), responseRoll = draw(world, stream, 1, 1000);
+  const controversial = responseRoll <= Math.floor((intent === 'provocative' ? 120 : 8)/(production.moderated?2:1)), viral = !controversial && responseRoll > 975;
+  let views = Math.max(1, Math.round((50 + draw(world, stream, 0, 250) + account.followers * reach / 200 + reachBonus) * (0.5 + quality / 100) * (viral ? draw(world, stream, 20, 80) : intent === 'provocative' ? 2 : 1) * (sponsored ? 0.75 : 1) * (liveMinutes?0.8+liveMinutes/120:1)));
   views = Math.min(10000000000, views); const likes = Math.floor(views * draw(world, stream, 2, 12) / 100), comments = Math.floor(likes / (controversial ? 3 : 12));
   const wantedDelta = controversial ? -Math.max(1, Math.round(account.followers * 0.03)) : Math.max(0, Math.round(views * (quality >= 70 ? 0.018 : 0.008)));
   const followers = Math.max(0, Math.min(1000000000, account.followers + wantedDelta)), delta = followers - account.followers; account.followers = followers;
@@ -127,10 +134,10 @@ function publish(world: World, account: Account, kind: PostKind, intent: 'authen
   const payoutBps = { photogram: 8000n, videowave: 12000n, streamline: 15000n, lifelink: 5000n }[account.platform];
   const income = { minor: account.monetised && ageOn(person, world.date) >= 18 ? roundRatio(unit(world, person, currency) * BigInt(views) * payoutBps, 1000000000000n) : 0n, currency };
   credit(world, person, income, 'creator-income', 'Creator payment: ' + platformContent[account.platform].name); account.income += income.minor;
-  const item: Post = { id: account.id + '_post_' + account.totalPosts, accountId: account.id, date: { ...world.date }, periodMonth: absolute(world) + (automatic ? 0 : 1), kind, intent, caption: (caption?.trim() || postContent[kind].captions[draw(world, stream, 0, postContent[kind].captions.length - 1)]) + (deal ? ' · Paid partnership with ' + deal.brand : ''), sponsored, sponsorId: deal?.id ?? null, collaborationId, views, likes, comments, followerDelta: delta, response: controversial ? 'controversial' : viral ? 'viral' : reach < 40 ? 'quiet' : reach > 85 ? 'well-received' : 'steady', income };
+  const item: Post = { id: account.id + '_post_' + account.totalPosts, accountId: account.id, date: { ...world.date }, periodMonth: absolute(world) + (automatic ? 0 : 1), kind, intent, caption: (caption?.trim() || postContent[kind].captions[draw(world, stream, 0, postContent[kind].captions.length - 1)]) + (deal ? ' · Paid partnership with ' + deal.brand : ''), sponsored, sponsorId: deal?.id ?? null, collaborationId, studioId:production.studio?.id??null, liveMinutes, views, likes, comments, followerDelta: delta, response: controversial ? 'controversial' : viral ? 'viral' : reach < 40 ? 'quiet' : reach > 85 ? 'well-received' : 'steady', income };
   account.posts.push(item); account.totalPosts++; account.totalLikes += likes;
   let period = account.periods.find(row => row.month === item.periodMonth); if (!period) { period = { month: item.periodMonth, posts: 0, sponsored: 0 }; account.periods.push(period); } period.posts++; if (sponsored) period.sponsored++; account.periods = account.periods.filter(row => row.month >= absolute(world) - 1);
-  person.stats.energy = bounded(person.stats.energy - (automatic ? 1 : 3)); person.stats.stress = bounded(person.stats.stress + (intent === 'provocative' ? 2 : viral ? 1 : 0));
+  person.stats.energy = bounded(person.stats.energy - creatorWorkEnergy(world,production.studio,automatic,liveMinutes)); person.stats.stress = bounded(person.stats.stress + (intent === 'provocative' ? 2 : viral ? 1 : 0));
   archivePosts(account); if (controversial) controversy(world, account, item.id); updateFame(world, person);
   if (automatic && viral && person.id === world.activePersonId) { fact(world, 'A post on ' + platformContent[account.platform].name + ' went viral, reaching ' + views.toLocaleString('en-US') + ' views.', 'fame'); offerPending(world, { kind: 'result', id: 'viral_' + item.id, title: 'Viral post!', body: 'A scheduled post reached far beyond your usual audience. Its response is already part of your profile.', illustration: 'fame', effects: [effect('views', 'Views', views.toLocaleString('en-US')), effect('followers', 'New followers', '+' + delta.toLocaleString('en-US'), 'positive')] }, 55); }
   return item;
@@ -180,14 +187,14 @@ export function resolveSocialMedia(world: World, command: SocialMediaCommand) {
     if (world.socialAccounts.some(item => item.id !== account.id && item.platform === account.platform && item.handle.toLowerCase() === command.handle.toLowerCase())) throw new IneligibleAction('That handle is already in use'); account.handle = command.handle; account.bio = command.bio; result(world, 'Profile updated', 'Your identity, audience and history remain attached to this profile.', 'social'); return;
   }
   if (command.type === 'delete-social' || command.type === 'reopen-social') {
-    if (command.type === 'delete-social') { if (account.status === 'deleted') throw new IneligibleAction('This profile is already closed'); account.status = 'deleted'; for (const deal of world.sponsorships.filter(item => item.accountId === account.id && item.status === 'active')) { deal.status = 'terminated'; deal.endReason = 'Profile closed'; } }
+    if (command.type === 'delete-social') { if (account.status === 'deleted') throw new IneligibleAction('This profile is already closed'); account.status = 'deleted'; creatorProfileClosed(world,account.id); for (const deal of world.sponsorships.filter(item => item.accountId === account.id && item.status === 'active')) { deal.status = 'terminated'; deal.endReason = 'Profile closed'; } }
     else { if (account.status !== 'deleted') throw new IneligibleAction('This profile is not closed'); account.status = account.suspendedUntil && account.suspendedUntil > month ? 'suspended' : 'active'; if (account.status === 'active') account.suspendedUntil = null; }
     updateFame(world, person); result(world, command.type === 'delete-social' ? 'Profile closed' : 'Profile reopened', 'Its actual audience, post totals, income and disciplinary history remain recorded. Reopening cannot reset a suspension.', 'social'); return;
   }
-  if (command.type === 'social-routine') { if (account.status !== 'active') throw new IneligibleAction('An active profile is required'); const reason = topicReason(world, command.topic); if (reason && command.cadence !== 'off') throw new IneligibleAction(reason); account.cadence = command.cadence; account.topic = command.topic; account.intent = command.intent; result(world, 'Posting routine saved', 'Your routine publishes actual posts as months pass. Costs, energy, audience responses and any brand delivery are recorded.', 'social'); return; }
+  if (command.type === 'social-routine') { if(command.cadence==='twice-weekly'){const studio=studioForAccount(world,account.id);if(!studio||studio.focus!=='full-time')throw new IneligibleAction('Eight monthly posts require full-time studio production');const reason=creatorFocusReason(world,studio);if(reason)throw new IneligibleAction(reason);} if (account.status !== 'active') throw new IneligibleAction('An active profile is required'); const reason = topicReason(world, command.topic); if (reason && command.cadence !== 'off') throw new IneligibleAction(reason); account.cadence = command.cadence; account.topic = command.topic; account.intent = command.intent; result(world, 'Posting routine saved', 'Your routine publishes actual posts as months pass. Costs, energy, audience responses and any brand delivery are recorded.', 'social'); return; }
   if (command.type === 'monetise-social') { const reason = monetisationReason(world, account); if (reason) throw new IneligibleAction(reason); account.monetised = true; result(world, 'Creator payments enabled', 'Future delivered views can earn income. Existing views are not paid a second time.', 'contract'); return; }
   if (command.type === 'publish-post') {
-    limit(world, 'post:' + account.id, 6); const item = publish(world, account, command.kind, command.intent, command.sponsored, command.caption);
+    limit(world, 'post:' + account.id, 6); const item = publish(world, account, command.kind, command.intent, command.sponsored, command.caption,false,null,0,command.liveMinutes??0);
     fact(world, 'I published ' + postContent[item.kind].title.toLowerCase() + ' content on ' + platformContent[account.platform].name + (item.response === 'viral' ? '. It went viral.' : '.'), 'social-media');
     result(world, item.response === 'viral' ? 'Viral post!' : item.response === 'quiet' ? 'A quiet response' : item.response === 'controversial' ? 'A difficult reaction' : 'Your post is live', item.response === 'viral' ? 'The audience reached far beyond your regular followers. These responses and gains are saved.' : item.response === 'quiet' ? 'A few people noticed. A quiet post still counts as something you made.' : 'Your post and its actual response are now part of your profile.', item.response === 'viral' ? 'fame' : platformContent[account.platform].art, [effect('views', 'Views', item.views.toLocaleString('en-US')), effect('likes', 'Likes', item.likes.toLocaleString('en-US')), effect('followers', 'Followers', (item.followerDelta >= 0 ? '+' : '') + item.followerDelta.toLocaleString('en-US'), item.followerDelta >= 0 ? 'positive' : 'negative'), ...(item.income.minor ? [effect('income', 'Creator income', formatMoney(item.income), 'positive')] : [])]); return;
   }
@@ -221,11 +228,12 @@ export function socialMonth(world: World) {
     const person = world.people[account.ownerId]; if (person.died || account.lastMonth >= month) continue; account.lastMonth = month;
     if (account.status === 'suspended' && account.suspendedUntil !== null && account.suspendedUntil <= month) { account.status = 'active'; account.suspendedUntil = null; }
     if (account.status !== 'active' || !tracked.has(person.id)) continue;
-    const count = account.cadence === 'weekly' ? 4 : account.cadence === 'twice-monthly' ? 2 : account.cadence === 'monthly' ? 1 : 0, deal = world.sponsorships.find(item => item.accountId === account.id && item.status === 'active');
+    const count = account.cadence === 'twice-weekly' ? 8 : account.cadence === 'weekly' ? 4 : account.cadence === 'twice-monthly' ? 2 : account.cadence === 'monthly' ? 1 : 0, deal = world.sponsorships.find(item => item.accountId === account.id && item.status === 'active');
     for (let index = 0; index < count; index++) {
       const sponsored = !!deal && (account.periods.find(item => item.month === month)?.sponsored ?? 0) < deal.requiredPosts, topic = sponsored && deal ? deal.topic : account.topic;
-      if (postReason(world, account, topic) || availableCash(accountFor(world, person)) < postCost(world, account.intent, person).minor) break;
-      publish(world, account, topic, account.intent, sponsored, undefined, true);
+      const reason=postReason(world,account,topic);if(reason){const studioReason=creatorProductionReason(world,account,postCost(world,account.intent,person));if(studioReason)creatorRoutineWarning(world,account,studioReason);break;}
+      if(availableCash(accountFor(world,person))<postCost(world,account.intent,person).minor)break;
+      publish(world, account, topic, account.intent, sponsored, undefined, true,null,0,studioForAccount(world,account.id)?.kind==='streamer'?60:0);
       if (world.controversies.some(item => item.personId === person.id && !item.resolved)) break;
     }
     account.periods = account.periods.filter(item => item.month >= month - 1);
