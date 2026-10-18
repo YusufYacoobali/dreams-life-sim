@@ -9,12 +9,15 @@ import { IneligibleAction } from './errors';
 import { educationCommandSchema, EducationCommand, educationMonth, resolveEducation } from './systems/education';
 import { workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
 import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, settleTax } from './systems/finance';
-import { post } from './systems/common';
-import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets } from './systems/assets';
+import { accountFor, post } from './systems/common';
+import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets, updatePropertyMarket } from './systems/assets';
 import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from './systems/markets';
+import { connectPerson, recordFamilyDeath, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
+import { financialActors } from './systems/households';
+import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -29,9 +32,11 @@ function roll(world: World, stream: keyof World['random'], min: number, max: num
 function death(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  recordFamilyDeath(world, personId);
+  settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
+  settleTax(world, person);
   if (person.employment) endEmployment(world, personId);
   if (personId === world.activePersonId) {
-    settleTax(world);
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
     world.annual = null; world.pending = null;
   } else {
@@ -43,10 +48,13 @@ function death(world: World, personId: string, cause: string) {
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
-  workMonth(world);
+  householdMonth(world);
+  const actors = financialActors(world);
+  const openingCash = new Map<string, bigint>();
+  for (const person of actors) { settleBackground(world, person, world.date.year * 12 + world.date.month - 2); openingCash.set(person.id, accountFor(world, person).cash); workMonth(world, person); }
   marketMonth(world);
-  assetsMonth(world);
-  financeMonth(world);
+  const propertyMovement = updatePropertyMarket(world);
+  for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); npcDiscretionaryMonth(world, person, openingCash.get(person.id)!); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const age = ageOn(person, world.date);
@@ -67,7 +75,9 @@ function finishYear(world: World) {
   const age = ageOn(player, world.date);
   player.stats.energy = clamp(player.stats.energy + 20);
   player.stats.stress = clamp(player.stats.stress - 3);
-  settleTax(world);
+  for (const person of financialActors(world)) settleTax(world, person);
+  npcYearDecisions(world);
+  relationshipsYear(world);
   const eligible = eligibleTemplates(world);
   const birthday = eligible.find(template => template.id === 'first-cake');
   // Introductory year is guaranteed; later years leave room for quiet years.
@@ -95,6 +105,7 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'connect-person') return connectPerson(world, effect.personId);
     if (effect.kind === 'asset-sale') {
       const asset = ownedAsset(world, effect.assetId);
       if (asset.listing?.offer !== effect.minor) throw new IneligibleAction('That property offer is no longer available');
@@ -166,11 +177,13 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const finance = financeCommandSchema.safeParse(command);
     const assets = assetCommandSchema.safeParse(command);
     const market = marketCommandSchema.safeParse(command);
+    const social = socialCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
     else if (assets.success) resolveAssets(world, assets.data);
     else if (market.success) resolveMarket(world, market.data);
+    else if (social.success) resolveSocial(world, social.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

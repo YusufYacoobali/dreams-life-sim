@@ -20,4 +20,5 @@ export const assetCatalog: readonly AssetOffer[] = [
   { id: 'laptop', kind: 'possession', name: 'Creative Laptop', description: 'For projects that may eventually leave the drafts folder.', priceBps: 300, condition: 100, upkeepBps: 100 },
   { id: 'camera', kind: 'possession', name: 'Mirrorless Camera', description: 'A good reason to take the longer walk home.', priceBps: 400, condition: 100, upkeepBps: 100 },
   { id: 'rare-book', kind: 'possession', name: 'First-Edition Novel', description: 'A well-kept book with its own history.', priceBps: 700, condition: 95, upkeepBps: 0 },
+  { id: 'engagement-ring', kind: 'possession', name: 'Engagement Ring', description: 'A small circle with a large question attached.', priceBps: 500, condition: 100, upkeepBps: 0 },
 ];

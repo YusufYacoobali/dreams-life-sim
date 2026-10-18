@@ -9,11 +9,13 @@ import { accountFor } from '../../src/game/systems/common';
 import { workMonth, salaryFor } from '../../src/game/systems/work';
 import { jobs } from '../../src/game/content/jobs';
 import { financeMonth, cashNetWorth, settleTax } from '../../src/game/systems/finance';
+import { ownHousehold } from '../../src/game/systems/households';
 
 function fixture(country: CountryCode = 'US'): World {
   const input = randomCreation(42);
   const world = createLife('life_systems', 42, { ...input, country, city: countries[country].cities[0] }, { year: 2000, month: 1, day: 1 });
   world.date = { year: 2026, month: 1, day: 1 }; world.birthAcknowledged = true;
+  ownHousehold(world, world.people[world.activePersonId]);
   const person = world.people[world.activePersonId]; person.stats.smarts = 90; person.stats.health = 100; person.stats.discipline = 70;
   person.education.qualifications = [{ level: 'secondary', field: 'general', year: 2018 }]; person.education.grades = 90;
   return world;

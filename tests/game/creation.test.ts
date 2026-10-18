@@ -10,7 +10,8 @@ test.each(countryCodes)('creation in %s binds real people and the selected curre
   expect(world.accounts.every(account => account.currency === countries[code].currency)).toBe(true);
   expect(world.accounts.find(account => account.ownerId === world.activePersonId)?.cash).toBe(0n);
   expect(world.relationships.length).toBeGreaterThanOrEqual(1);
-  expect(world.relationships.every(edge => edge.kind === 'parent' && edge.to === world.activePersonId && world.people[edge.from])).toBe(true);
+  expect(world.relationships.filter(edge => edge.to === world.activePersonId).every(edge => edge.kind === 'parent' && world.people[edge.from])).toBe(true);
+  expect(world.relationships.every(edge => world.people[edge.from] && world.people[edge.to])).toBe(true);
 });
 
 test('invalid city/country combinations and blank identities are rejected', () => {

@@ -5,6 +5,7 @@ import { IneligibleAction } from '../errors';
 import { Currency, formatMoney, roundRatio } from '../money';
 import { accountFor, active, borrow, charge, fact, post, result } from './common';
 import { fxMoney } from './markets';
+import { householdLivingCost } from './households';
 const currencySchema = z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']);
 
 export const financeCommandSchema = z.discriminatedUnion('type', [
@@ -50,22 +51,21 @@ export function resolveFinance(world: World, command: FinanceCommand) {
     result(world, 'Currency exchanged', 'The source balance fell and the quoted amount reached the destination account. The exchange fee was deducted.', 'money', [{ id: 'received', label: 'Received', value: formatMoney({ minor: quote.net, currency: command.to }), tone: 'positive' }]);
   }
 }
-export function financeMonth(world: World) {
-  const person = active(world); const account = accountFor(world); const rule = rules[person.country];
+export function financeMonth(world: World, person = active(world)) {
+  const account = accountFor(world, person); const rule = rules[person.country];
   for (const debt of world.liabilities.filter(candidate => candidate.ownerId === person.id && candidate.kind !== 'mortgage' && candidate.principal > 0n)) {
     const interest = roundRatio(debt.principal * BigInt(debt.interestBps), 120000n);
     if (interest) { debt.principal += interest; post(world, 0n, interest, 'interest', 'Interest added to ' + debt.kind + ' debt', debt.id, person, debt.currency); }
   }
-  const atHome = world.assets.some(asset => asset.ownerId === person.id && asset.primaryHome);
-  if (ageOn(person, world.date) >= rule.adultAge) charge(world, atHome ? roundRatio(rule.livingCost * 4500n, 10000n) : rule.livingCost, 'living', 'Monthly living costs', 'living');
+  if (ageOn(person, world.date) >= rule.adultAge) charge(world, householdLivingCost(world, person), 'living', 'Monthly household living costs', 'living', undefined, person);
 }
-export function settleTax(world: World) {
-  const person = active(world); const finance = person.finance;
+export function settleTax(world: World, person = active(world)) {
+  const finance = person.finance;
   const due = incomeTax(finance.cycleGross, rules[person.country]);
   const adjustment = due - finance.cycleWithheld;
-  if (adjustment > 0n) charge(world, adjustment, 'tax', 'Annual income tax reconciliation', 'tax');
-  else if (adjustment < 0n) post(world, -adjustment, 0n, 'tax-refund', 'Annual income tax refund');
-  if (finance.cycleGross > 0n) fact(world, 'My income for the year was ' + formatMoney({ minor: finance.cycleGross, currency: accountFor(world).currency }) + '; income tax was ' + formatMoney({ minor: due, currency: accountFor(world).currency }) + '.', 'finance');
+  if (adjustment > 0n) charge(world, adjustment, 'tax', 'Annual income tax reconciliation', 'tax', undefined, person);
+  else if (adjustment < 0n) post(world, -adjustment, 0n, 'tax-refund', 'Annual income tax refund', null, person);
+  if (finance.cycleGross > 0n) fact(world, 'My income for the year was ' + formatMoney({ minor: finance.cycleGross, currency: accountFor(world, person).currency }) + '; income tax was ' + formatMoney({ minor: due, currency: accountFor(world, person).currency }) + '.', 'finance', '', person.id);
   finance.cycleGross = 0n; finance.cycleWithheld = 0n;
 }
 export function cashNetWorth(world: World, currency: Currency = accountFor(world).currency): bigint {

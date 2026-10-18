@@ -29,7 +29,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (program === 'graduate' && !education.qualifications.some(q => q.level === 'degree')) return 'A university degree is required';
   if (program === 'graduate' && field !== 'medicine' && field !== 'law') return 'Choose medicine or law for professional study';
   if (education.qualifications.some(q => q.level === (program === 'university' ? 'degree' : program === 'graduate' ? field : 'trade') && q.field === field)) return 'You already hold this qualification';
-  if (world.actionCounts['education:' + world.date.year + ':' + program + ':' + field]) return 'You already applied for this course this year';
+  if (world.actionCounts[person.id + ':education:' + world.date.year + ':' + program + ':' + field]) return 'You already applied for this course this year';
 }
 function payTuition(world: World, funding: 'cash' | 'loan') {
   const person = active(world); const education = person.education;
@@ -43,7 +43,7 @@ export function resolveEducation(world: World, command: EducationCommand) {
     const reason = enrollmentReason(world, command.program, command.field); if (reason) throw new IneligibleAction(reason);
     const tuition = tuitionFor(person, command.program);
     if (command.funding === 'cash' && accountFor(world).cash < tuition) throw new IneligibleAction('Your balance cannot cover the first year’s tuition');
-    world.actionCounts['education:' + world.date.year + ':' + command.program + ':' + command.field] = 1;
+    world.actionCounts[person.id + ':education:' + world.date.year + ':' + command.program + ':' + command.field] = 1;
     if (draw(world, 'outcomes', 1, 100) > Math.min(95, 20 + Math.round((education.grades + person.stats.smarts) / 2))) {
       fact(world, 'My application to study ' + command.field + ' was declined.', 'education');
       result(world, 'Application declined', 'The course did not offer you a place. Your money has not been spent.', 'education'); return;

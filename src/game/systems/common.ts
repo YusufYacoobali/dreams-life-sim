@@ -15,8 +15,8 @@ export function accountFor(world: World, person: Person = active(world), currenc
 export function draw(world: World, stream: keyof World['random'], min: number, max: number) {
   const result = randomInteger(world.random[stream], min, max); world.random[stream] = result.state; return result.value;
 }
-export function fact(world: World, text: string, category: string, suffix = '') {
-  world.journal.push({ id: 'fact_' + world.revision + '_' + world.journal.length + suffix, date: { ...world.date }, personId: world.activePersonId, text, category });
+export function fact(world: World, text: string, category: string, suffix = '', personId = world.activePersonId) {
+  world.journal.push({ id: 'fact_' + world.revision + '_' + world.journal.length + suffix, date: { ...world.date }, personId, text, category });
 }
 export function result(world: World, title: string, body: string, illustration: string, effects: RuntimeEffectRow[] = []) {
   world.pending = { kind: 'result', id: 'action_' + world.revision, title, body, illustration, effects };
@@ -36,15 +36,15 @@ export function borrow(world: World, amount: bigint, kind: World['liabilities'][
   liability.principal += amount;
   post(world, amount, amount, 'borrowing', kind === 'student' ? 'Student loan drawn' : 'Personal loan drawn', id);
 }
-export function charge(world: World, amount: bigint, category: string, description: string, arrears?: 'living' | 'tax', currency?: Currency) {
-  const account = accountFor(world, active(world), currency);
+export function charge(world: World, amount: bigint, category: string, description: string, arrears?: 'living' | 'tax', currency?: Currency, person = active(world)) {
+  const account = accountFor(world, person, currency);
   if (amount < 0n) throw new Error('Negative charge');
-  if (account.cash >= amount) { if (amount) post(world, -amount, 0n, category, description, null, active(world), account.currency); return; }
+  if (account.cash >= amount) { if (amount) post(world, -amount, 0n, category, description, null, person, account.currency); return; }
   if (!arrears) throw new IneligibleAction('Your balance cannot cover this payment');
   const unpaid = amount - account.cash;
-  const id = 'debt_' + arrears + '_' + active(world).id + '_' + account.currency;
+  const id = 'debt_' + arrears + '_' + person.id + '_' + account.currency;
   let liability = world.liabilities.find(candidate => candidate.id === id);
-  if (!liability) { liability = { id, ownerId: active(world).id, currency: account.currency, kind: arrears, principal: 0n, interestBps: 300, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
+  if (!liability) { liability = { id, ownerId: person.id, currency: account.currency, kind: arrears, principal: 0n, interestBps: 300, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(liability); }
   liability.principal += unpaid;
-  post(world, -account.cash, unpaid, category, description + ' (unpaid part added to arrears)', id, active(world), account.currency);
+  post(world, -account.cash, unpaid, category, description + ' (unpaid part added to arrears)', id, person, account.currency);
 }

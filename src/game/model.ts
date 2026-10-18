@@ -7,6 +7,8 @@ import { educationSchema, employmentSchema, financeSchema, holdingSchema, liabil
 import { jobs } from './content/jobs';
 import { initialMarket } from './content/markets';
 import { assetCatalog } from './content/assets';
+import { biologySchema, genders, householdSchema, marriageSchema, newFamilyPerson, relationshipSchema } from './systems/familySchemas';
+import { netWorth } from './valuation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -25,16 +27,17 @@ export const personSchema = z.object({
   appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4) }),
   traits: z.array(z.enum(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'])).max(3),
   education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
+  biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(4), engineVersion: z.literal(3), contentVersion: z.literal(1),
+  schemaVersion: z.literal(5), engineVersion: z.literal(4), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
-  relationships: z.array(z.object({ id: z.string(), from: personId, to: personId, kind: z.enum(['parent', 'sibling', 'friend', 'partner', 'spouse', 'coworker', 'classmate']), strength: percentage, trust: percentage, memories: z.array(z.string()) })),
+  relationships: z.array(relationshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative() })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
@@ -67,10 +70,20 @@ export function validateWorld(value: unknown): World {
   const accountCurrencies = new Set<string>();
   const relationshipIds = new Set<string>();
   const journalIds = new Set<string>();
+  const householdIds = new Set<string>(), householdMembers = new Set<string>();
+  for (const household of world.households) {
+    if (householdIds.has(household.id)) throw new Error('Duplicate household'); householdIds.add(household.id);
+    for (const id of household.members) {
+      if (!world.people[id] || householdMembers.has(id) || world.people[id].householdId !== household.id) throw new Error('Invalid household membership');
+      householdMembers.add(id);
+    }
+    if (household.homeAssetId && !world.assets.some(asset => asset.id === household.homeAssetId && asset.ownerId && household.members.includes(asset.ownerId) && asset.primaryHome && asset.kind === 'property')) throw new Error('Invalid household home');
+  }
   for (const [id, person] of Object.entries(world.people)) {
     if (person.id !== id || ageOn(person, world.date) < 0) throw new Error('Invalid person identity or age');
     if (person.died && (compareDates(person.died, person.born) < 0 || compareDates(person.died, world.date) > 0)) throw new Error('Invalid death date');
     if (!!person.died !== !!person.causeOfDeath) throw new Error('Inconsistent death record');
+    if ((person.householdId && !householdMembers.has(id)) || (!person.householdId && householdMembers.has(id)) || new Set(person.attractedTo).size !== person.attractedTo.length || person.lastEconomicMonth > world.date.year * 12 + world.date.month - 1) throw new Error('Invalid personal family state');
     if (person.employment) {
       const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
       const history = world.workHistory.find(record => record.id === person.employment!.id && record.personId === id && !record.ended);
@@ -86,9 +99,32 @@ export function validateWorld(value: unknown): World {
     const records = world.workHistory.filter(record => record.personId === person.id);
     if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.grossEarned, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
+  const relationPairs = new Set<string>(), romanticPeople = new Set<string>();
+  const parentsByChild = new Map<string, string[]>();
+  for (const relation of world.relationships) if (relation.roles.includes('parent')) parentsByChild.set(relation.to, [...(parentsByChild.get(relation.to) ?? []), relation.from]);
+  const parentVisits = new Map<string, number>();
+  const visit = (id: string): void => { if (parentVisits.get(id) === 1) throw new Error('Cyclic parent graph'); if (parentVisits.get(id) === 2) return; parentVisits.set(id, 1); for (const parent of parentsByChild.get(id) ?? []) visit(parent); parentVisits.set(id, 2); };
+  for (const id of parentsByChild.keys()) visit(id);
+  const ancestors = (id: string) => { const all = new Set([id]); let next = [id]; for (let depth = 0; depth < 4; depth++) { const level: string[] = []; for (const child of next) for (const parent of parentsByChild.get(child) ?? []) if (!all.has(parent)) { all.add(parent); level.push(parent); } next = level; } return all; };
   for (const relation of world.relationships) {
     if (relation.from === relation.to || !world.people[relation.from] || !world.people[relation.to] || relationshipIds.has(relation.id)) throw new Error('Invalid relationship reference');
     relationshipIds.add(relation.id);
+    const pair = [relation.from, relation.to].sort().join(':');
+    if (relationPairs.has(pair) || new Set(relation.roles).size !== relation.roles.length || !relation.roles.includes(relation.kind) || compareDates(relation.since, world.date) > 0 || compareDates(relation.since, world.people[relation.from].born) < 0 || compareDates(relation.since, world.people[relation.to].born) < 0) throw new Error('Invalid relationship history');
+    relationPairs.add(pair);
+    if (relation.roles.includes('parent') && (!relation.parentType || (relation.parentType === 'biological' && ageOn({ ...world.people[relation.from], died: null }, world.people[relation.to].born) < 18))) throw new Error('Invalid parent record');
+    if (relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married') {
+      const from = world.people[relation.from], to = world.people[relation.to]; const first = ancestors(from.id), second = ancestors(to.id);
+      if (from.died || to.died || ageOn(from, world.date) < 18 || ageOn(to, world.date) < 18 || romanticPeople.has(from.id) || romanticPeople.has(to.id) || relation.roles.includes('guardian') || [...first].some(id => second.has(id))) throw new Error('Invalid romantic relationship');
+      romanticPeople.add(from.id); romanticPeople.add(to.id);
+      if (relation.romance === 'married' && !world.marriages.some(marriage => !marriage.ended && (marriage.a === from.id && marriage.b === to.id || marriage.a === to.id && marriage.b === from.id))) throw new Error('Missing marriage record');
+    }
+  }
+  const marriageIds = new Set<string>();
+  for (const marriage of world.marriages) {
+    if (marriageIds.has(marriage.id) || !world.people[marriage.a] || !world.people[marriage.b] || marriage.a === marriage.b || compareDates(marriage.started, world.date) > 0 || !!marriage.ended !== !!marriage.endReason || marriage.ledgerStart > world.ledger.length || (marriage.ended && (compareDates(marriage.ended, marriage.started) < 0 || compareDates(marriage.ended, world.date) > 0))) throw new Error('Invalid marriage history');
+    if (!marriage.ended && !world.relationships.some(relation => relation.romance === 'married' && (relation.from === marriage.a && relation.to === marriage.b || relation.from === marriage.b && relation.to === marriage.a))) throw new Error('Invalid current marriage');
+    marriageIds.add(marriage.id);
   }
   for (const account of world.accounts) {
     const currencyKey = account.ownerId + ':' + account.currency;
@@ -146,6 +182,7 @@ export function validateWorld(value: unknown): World {
     for (const choice of world.pending.choices) for (const effect of choice.effects) {
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
       if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
+      if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !world.pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
       if (effect.kind === 'transfer') {
         const from = world.accounts.find(account => account.id === effect.fromAccountId);
         const to = world.accounts.find(account => account.id === effect.toAccountId);
@@ -194,6 +231,22 @@ export function decodeWorld(text: string): World {
     parsed.schemaVersion = 4; parsed.engineVersion = 3;
     parsed.assets = []; parsed.holdings = []; parsed.market = initialMarket(parsed.date);
     if (parsed.annual) parsed.annual.stage = parsed.annual.monthsProcessed === 12 && parsed.pending ? 'complete' : 'months';
+  }
+  if (parsed && parsed.schemaVersion === 4) {
+    parsed.schemaVersion = 5; parsed.engineVersion = 4;
+    const legacy = parsed as World;
+    parsed.households = []; parsed.marriages = [];
+    for (const person of Object.values(legacy.people)) {
+      Object.assign(person, newFamilyPerson(person.gender));
+      person.lastEconomicMonth = legacy.date.year * 12 + legacy.date.month - 1;
+      person.householdId = 'household_' + person.id;
+      parsed.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [person.id], homeAssetId: legacy.assets.find(asset => asset.ownerId === person.id && asset.primaryHome)?.id ?? null });
+    }
+    for (const relation of legacy.relationships) {
+      Object.assign(relation, { roles: [relation.kind], romance: relation.kind === 'spouse' ? 'married' : relation.kind === 'partner' ? 'dating' : 'none', since: relation.kind === 'parent' ? legacy.people[relation.to]?.born : legacy.date, parentType: relation.kind === 'parent' ? 'biological' : null, lastInteractionYear: legacy.date.year });
+      if (relation.romance === 'married') parsed.marriages.push({ id: 'marriage_' + relation.id, a: relation.from, b: relation.to, started: legacy.date, ended: null, endReason: null, baselineA: netWorth(legacy, relation.from), baselineB: netWorth(legacy, relation.to), ledgerStart: legacy.ledger.length, weddingCost: null });
+    }
+    parsed.actionCounts = Object.fromEntries(Object.entries(legacy.actionCounts).map(([key, count]) => [key.startsWith('person_') ? key : legacy.activePersonId + ':' + key, count]));
   }
   return validateWorld(parsed);
 }

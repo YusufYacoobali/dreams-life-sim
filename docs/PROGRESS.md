@@ -10,7 +10,7 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
-## Current milestone: ownership, markets and the integrated financial world
+## Current milestone: relationships, households and persistent NPC finances
 
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.
 
@@ -28,10 +28,10 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
 | 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
-| 4 — Core life systems | In progress | Education, ordinary work, ledger, ownership/mortgages/rent/sales/insurance and investments/FX implemented; relationship actions, family formation, wills/estate and broader integration remain pending |
+| 4 — Core life systems | In progress | Education, ordinary work, ownership/markets and courtship/marriage/households implemented; children, divorce/custody, wills/estate and broader integration remain pending |
 | 5 — Expanded gameplay | Not started | Health, crime/legal/prison, fame/social, companies, special careers, travel, pets, and hobbies remain planned |
-| 6 — Content, depth, legacy, Time Machine | Not started | Nine prose event examples are planning samples; no shipped templates, coverage run, legacy, or restore system |
-| 7 — Polish and release validation | Not started | No implemented game to compare or validate on devices |
+| 6 — Content, depth, legacy, Time Machine | In progress | 22 shipped age/context templates; 250+ target, broad coverage, legacy and restore remain pending |
+| 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
 ## Feature status
 
@@ -44,8 +44,8 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands, schema migration, previous-checkpoint recovery, repository and native file import/export surfaces | Real SQLite migration/recovery/failure/reload tests pass; file picker/share require device validation |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt; scholarships/adult remediation/school contacts pending | Twelve profile boundary tests and connected school→degree→qualified job scenario pass |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |
-| Dating, marriage, children, divorce, custody and persistent NPCs | No | No |
-| Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | Partial: reconciled ledger; eighteen catalogue offers; actual ownership; mortgages, rent, upkeep, improvement, insurance/loss claims, delayed sale offers, refinancing and forced sale; household/family/estate integration pending | Domain conservation and native-component→engine→real-SQLite purchase failure/retry pass; native-device acceptance pending |
+| Dating, marriage, children, divorce, custody and persistent NPCs | Partial: persistent introductions, friendship/trust/memories, gifts, consent/preferences, dating, proposal/ring ownership, weddings, shared households, independent NPC pay/tax/budget/pensions and grief; children/divorce/custody pending | Domain conservation/gates and connected multi-year friendship→dating→marriage pass; native introduction→real SQLite flow; device acceptance pending |
+| Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | Partial: reconciled ledger; nineteen catalogue offers; mortgages, rent, upkeep, insurance/loss claims, delayed sale offers, refinancing, forced sale and household shares; estate integration pending | Conservation and native-component→engine→real-SQLite purchase failure/retry pass; native-device acceptance pending |
 | Stocks, funds, crypto, valuation, FX and net worth | Partial: six authored instruments, seeded monthly prices/dividends, positions/cost basis, buys/partial sales, FX accounts/exchange and complete implemented-asset net worth | All twelve local currency profiles, fractional JPY rounding, over-selling, 81 currency directions and fee conservation pass; not live market data |
 | Health, conditions, treatment, lifestyle and wellbeing | No | No |
 | Crime, investigation, arrest, court, prison, record and release | No | No |
@@ -56,9 +56,9 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death and actual journal/cash/stat summary; estate/legacy pending | Terminal-state engine tests pass; no claim for career/property/child summary fields before those systems exist |
 | Historical snapshots and Time Machine branches | No | No |
-| Custom generated artwork and portrait continuity | Partial: twelve activity illustrations, sixteen ownership illustrations, death memorial and generated portrait layers/editor integrated | Sources inspected, 120px portrait and 128px ownership browser reviews complete; native-device fidelity and remaining families pending |
+| Custom generated artwork and portrait continuity | Partial: twelve activity, sixteen ownership and twelve family illustrations, death memorial and generated portrait layers/editor integrated | Sources inspected, 120px portrait and 128px ownership/family browser reviews complete; native-device fidelity and remaining families pending |
 | 250+ distinct high-quality approved event templates | 22 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
-| Accessibility, performance, native-device UI and release builds | No game implementation | No |
+| Accessibility, performance, native-device UI and release builds | Partial: accessible shared controls and production bundles; broader audit/performance/device/release gates pending | Component interactions and bundle generation; no native-device claim |
 
 ## Verification record
 
@@ -68,11 +68,11 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Planning documentation structure | Passed | Local links, revised 79 unique screen IDs, nine sample events, 256-template allocation, and twelve-country/nine-currency proposal checked |
 | Source specification preservation | Passed | Planning source copy checked byte-for-byte against the uploaded text |
 | Earlier environment onboarding | Passed for starter | Locked npm install, TypeScript, native Android/iOS Hermes exports, Metro manifest and development-bundle requests; no game behavior established |
-| Foundation/core tests and strict TypeScript | Passed | 90 tests across nine suites; default regression includes twelve full lives, native component purchase with real SQLite, v1/v2/v3 migration fixtures and connected education/work. npm run test:soak expands the seed sweep to 120 |
+| Foundation/core tests and strict TypeScript | Passed through 4B; 4C1 verification recorded below | Default regression includes twelve full lives, native component purchase with real SQLite, genuine migration fixtures and connected education/work. npm run test:soak expands the seed sweep to 120 |
 | Routed native production bundles | Passed | Android and iOS Hermes exports from expo-router entry, including generated artwork; no device execution established |
 | Full gameplay/integration/life scenarios | Partial | The 4A 120-life sweep passed in 163 seconds. Current v4 default twelve-life sweep and connected work/property/mortgage/sale/trading paths pass. Full family/legal/business/fame/legacy scenario matrix remains pending |
 | Reference inspection | Completed | All 27 design images opened at original resolution and mapped to canonical screens |
-| Generated artwork / screen fidelity | Partial | Twelve original icons and dedicated memorial generated/source-reviewed; portrait layer experiment generated but not integrated/accepted; running-app visual acceptance pending |
+| Generated artwork / screen fidelity | Partial | Activity/ownership/family art, dedicated memorial and layered portraits integrated; browser clipping/composition checked; running native-app acceptance pending |
 | iOS/Android device interactions | Unrun | Appropriate native execution still needed later; bundle generation is insufficient |
 
 ## Change record
@@ -131,3 +131,12 @@ The first birth-to-death engine is implemented. Continue through every remaining
 - Added catalogue, purchase, asset-management, investment/trading and currency bank surfaces. Moved the four root tabs under a shared detail stack with the persistent bottom navigation, preserving root tab mounts and giving details an actual push/back stack. Native navigation/scroll/device acceptance remains unverified.
 - Generated, registered and browser-reviewed sixteen ownership illustrations; adjusted measured clipping after noticing a neighbour pixel below the guitar. Source PNGs remain unmodified.
 - World v4/engine v3 migration preserves an actual v3 graduate/worker fixture with debt, pay/tax and 213 ledger entries. Verified strict types, 90 tests, current Android/iOS Hermes exports, property/mortgage/refinance/trading conservation and a native-component purchase→storage-failure→retry path against real SQLite.
+
+### Core systems submilestone 4C1
+
+- Added persistent community/dating introductions, friendship and trust, once-per-year interactions, real money gifts, mutual adult dating preferences/consent, proposal/ring ownership, wedding costs, shared households, moving out and asking to live with a parent. Added creation family options and adult preference editing independent of appearance/gender.
+- NPCs retain identities, qualifications, contracts, pay history, savings and budgets. Connected household members/partners/parents and asset owners receive monthly pay, tax, upkeep, living costs and discretionary spending in their own accounts. Other contacts' recorded contracts settle elapsed background periods once when they return. This is an explicit simulation approximation, not a claim of monthly autonomous life decisions for every acquaintance.
+- Added household budget shares for adults/dependants, primary-home savings, local school-completion independence, NPC job searches, earned pensions and relationship grief. Account/asset ownership remains individual. Children, custody, divorce settlements and estates remain the next work.
+- World v5/engine v4 adds bonds, households, marriage history, biology/preferences and economic cursors. Migration preserves an actual v4 paused property-offer save, exact loans/holdings/FX and bound decisions; it does not invent historical NPC jobs. Annual command counters are actor-scoped for future legacy continuity.
+- Generated twelve family illustrations and reviewed their 128px browser composition. Corrected measured clipping around the carriage, bottle, teddy and tree without changing the source PNG. Native-device fidelity remains unverified.
+- Verification: strict application/test typing and 98 tests across eleven suites pass across the default regression and corrected focused rerun. Twelve complete core lives pass in the expanded financial pipeline (74 seconds); domain tests include a multi-year courtship through actual actions and Age Up, and a native introduction→real SQLite flow. Current Android/iOS Hermes production exports pass. Device execution and full-system balance remain unverified.

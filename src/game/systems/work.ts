@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ageOn, World } from '../model';
+import { ageOn, Person, World } from '../model';
 import { IneligibleAction } from '../errors';
 import { jobs, JobRole, jobRanks } from '../content/jobs';
 import { incomeTax, monthlyAmount, rules } from '../rules';
@@ -26,18 +26,19 @@ export function jobReason(world: World, role: JobRole): string | undefined {
   if (person.stats.smarts < role.smarts) return 'Smarts of at least ' + role.smarts + '% are required';
   if (role.qualification && !person.education.qualifications.some(q => q.level === role.qualification && (!role.field || q.field === role.field))) return 'Requires ' + role.qualification + (role.field ? ' in ' + role.field : ' qualification');
   if (person.employment?.roleId === role.id) return 'You already have this job';
-  if (world.actionCounts['job:' + world.date.year + ':' + role.id]) return 'You already applied for this role this year';
+  if (world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) return 'You already applied for this role this year';
 }
-export function salaryFor(world: World, role: JobRole, rank = 0): bigint {
-  return roundRatio(rules[active(world).country].baseWage * BigInt(role.wageBps) * BigInt(100 + rank * 25), 1000000n);
+export function salaryForPerson(person: Person, role: JobRole, rank = 0): bigint {
+  return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + rank * 25), 1000000n);
 }
+export const salaryFor = (world: World, role: JobRole, rank = 0) => salaryForPerson(active(world), role, rank);
 export function resolveWork(world: World, command: WorkCommand) {
   const person = active(world);
   if (command.type === 'apply-job') {
     const role = jobs.find(candidate => candidate.id === command.roleId);
     if (!role) throw new IneligibleAction('This job is not available');
     const reason = jobReason(world, role); if (reason) throw new IneligibleAction(reason);
-    world.actionCounts['job:' + world.date.year + ':' + role.id] = 1;
+    world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id] = 1;
     const chance = Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6));
     if (draw(world, 'outcomes', 1, 100) > chance) {
       fact(world, 'I applied for a ' + role.title.toLowerCase() + ' role and was turned down.', 'work');
@@ -70,8 +71,8 @@ export function resolveWork(world: World, command: WorkCommand) {
     result(world, 'A different pace', 'Your job has ended. Your earned pension will be paid as time passes.', 'career');
   }
 }
-export function workMonth(world: World) {
-  const person = active(world); const rule = rules[person.country]; const employment = person.employment;
+export function workMonth(world: World, person = active(world)) {
+  const rule = rules[person.country]; const employment = person.employment;
   let gross = 0n; let withheld = 0n; let wages = 0n;
   if (employment) {
     const role = jobs.find(candidate => candidate.id === employment.roleId);
@@ -82,14 +83,15 @@ export function workMonth(world: World) {
     const history = world.workHistory.find(record => record.id === employment.id)!;
     history.monthsWorked++; history.grossEarned += wages;
     const effort = employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -2 : 0;
-    employment.performance = bounded(employment.performance + effort + draw(world, 'outcomes', -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
+    const stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
+    employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
     person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
     if (employment.paidMonths % 12 === 0) {
-      if (employment.performance >= 75 && employment.rank < 3 && draw(world, 'outcomes', 1, 100) <= 35) {
-        employment.rank++; employment.annualPay = salaryFor(world, role, employment.rank);
-        fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work');
-      } else if (employment.performance < 25 && draw(world, 'outcomes', 1, 100) <= 45) {
-        fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work'); endEmployment(world);
+      if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) {
+        employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank);
+        fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id);
+      } else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) {
+        fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id);
       }
     }
   }
@@ -99,8 +101,8 @@ export function workMonth(world: World) {
     person.finance.pensionMonths++;
   }
   if (gross) {
-    post(world, gross, 0n, 'income', employment ? 'Employment pay' : 'Pension payment');
-    if (withheld) post(world, -withheld, 0n, 'tax', 'Income tax withheld');
+    post(world, gross, 0n, 'income', employment ? 'Employment pay' : 'Pension payment', null, person);
+    if (withheld) post(world, -withheld, 0n, 'tax', 'Income tax withheld', null, person);
     person.finance.cycleGross += gross; person.finance.cycleWithheld += withheld;
     person.finance.lifetimeGross += wages;
   }

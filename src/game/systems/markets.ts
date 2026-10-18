@@ -1,44 +1,23 @@
 import { z } from 'zod';
 import { ageOn, World } from '../model';
-import { countries } from '../countries';
-import { Currency, Money, convertMoney, currencyDigits, formatMoney, roundRatio } from '../money';
+import { Currency, formatMoney, roundRatio } from '../money';
 import { InstrumentId, instrumentIds, instruments } from '../content/markets';
 import { rules } from '../rules';
 import { IneligibleAction } from '../errors';
 import { accountFor, active, draw, fact, post, result } from './common';
+import { fxMoney, investmentValue } from '../valuation';
+export { fxMoney, investmentValue, netWorth, portfolioValue } from '../valuation';
 
 export const marketCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('buy-investment'), instrumentId: z.enum(instrumentIds), quantity: z.bigint().positive(), quotedMinor: z.bigint().positive() }),
   z.object({ type: z.literal('sell-investment'), holdingId: z.string(), quantity: z.bigint().positive(), quotedMinor: z.bigint().positive() }),
 ]);
 export type MarketCommand = z.infer<typeof marketCommandSchema>;
-export function fxMoney(world: World, value: Money, currency: Currency): Money {
-  if (value.currency === currency) return { ...value };
-  const source = world.market.fx[value.currency]; const target = world.market.fx[currency];
-  return convertMoney(value, currency, target.numerator * source.denominator, target.denominator * source.numerator);
-}
-export function investmentValue(world: World, id: InstrumentId, quantity: bigint, currency: Currency): bigint {
-  const target = world.market.fx[currency]; const source = world.market.fx.USD;
-  return roundRatio(world.market.prices[id].minor * quantity * target.numerator * source.denominator * 10n ** BigInt(currencyDigits[currency]), 100n * instruments[id].unitScale * target.denominator * source.numerator);
-}
 export function investmentQuote(world: World, id: InstrumentId, quantity: bigint) {
   const currency = accountFor(world).currency;
   const value = investmentValue(world, id, quantity, currency);
   const fee = roundRatio(value * 100n, 10000n);
   return { value, fee, buyCost: value + fee, sellProceeds: value - fee, currency };
-}
-export function netWorth(world: World, personId = world.activePersonId): Money {
-  const currency = countries[world.people[personId].country].currency;
-  let minor = 0n;
-  for (const account of world.accounts.filter(item => item.ownerId === personId)) minor += fxMoney(world, { minor: account.cash, currency: account.currency }, currency).minor;
-  for (const asset of world.assets.filter(item => item.ownerId === personId)) minor += fxMoney(world, { minor: asset.value, currency: asset.currency }, currency).minor;
-  for (const holding of world.holdings.filter(item => item.ownerId === personId)) minor += investmentValue(world, holding.instrumentId, holding.quantity, currency);
-  for (const debt of world.liabilities.filter(item => item.ownerId === personId)) minor -= fxMoney(world, { minor: debt.principal, currency: debt.currency }, currency).minor;
-  return { minor, currency };
-}
-export function portfolioValue(world: World): Money {
-  const currency = accountFor(world).currency;
-  return { currency, minor: world.holdings.filter(holding => holding.ownerId === world.activePersonId).reduce((sum, holding) => sum + investmentValue(world, holding.instrumentId, holding.quantity, currency), 0n) };
 }
 export function parseQuantity(input: string, id: InstrumentId): bigint {
   const text = input.trim(); const places = instruments[id].unitScale === 1n ? 0 : 6;
@@ -95,10 +74,10 @@ export function marketMonth(world: World) {
     const changed = roundRatio(rate.numerator * BigInt(10000 + draw(world, 'economy', -30, 30)), 10000n);
     rate.numerator = changed > 0n ? changed : 1n;
   }
-  const person = active(world); const account = accountFor(world);
-  if (world.date.month % 3 === 0) for (const holding of world.holdings.filter(item => item.ownerId === person.id && item.quantity > 0n)) {
+  if (world.date.month % 3 === 0) for (const holding of world.holdings.filter(item => item.quantity > 0n && !world.people[item.ownerId].died)) {
+    const person = world.people[holding.ownerId], account = accountFor(world, person);
     const instrument = instruments[holding.instrumentId];
     const dividend = roundRatio(investmentValue(world, holding.instrumentId, holding.quantity, account.currency) * BigInt(instrument.dividendBps), 40000n);
-    if (dividend > 0n) { post(world, dividend, 0n, 'dividend', holding.instrumentId + ' dividend'); person.finance.cycleGross += dividend; }
+    if (dividend > 0n) { post(world, dividend, 0n, 'dividend', holding.instrumentId + ' dividend', null, person); person.finance.cycleGross += dividend; }
   }
 }

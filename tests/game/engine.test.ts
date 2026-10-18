@@ -85,14 +85,7 @@ test('result effects report the actual bounded change', () => {
   expect(result.pending?.kind === 'result' && result.pending.effects.find(effect => effect.label === 'Happiness')?.value).toBe('+1%');
 });
 
-test('version-one creation saves migrate without losing people, cash, dates or randomness', () => {
-  const original = born();
-  const fixture = JSON.parse(encodeWorld(original));
-  fixture.schemaVersion = 1;
-  delete fixture.annual; delete fixture.pending; delete fixture.calendarAnchorDay; delete fixture.eventHistory;
-  const migrated = decodeWorld(JSON.stringify(fixture));
-  expect(migrated).toEqual(original);
-});
+// Genuine saves from old commits are exercised in persistence/repository.test.ts.
 
 const sweepCount = Number(process.env.DREAMS_LIFE_SWEEP ?? '12');
 if (!Number.isInteger(sweepCount) || sweepCount < 1 || sweepCount > 1000) throw new Error('Invalid DREAMS_LIFE_SWEEP');

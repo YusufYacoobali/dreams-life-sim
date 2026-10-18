@@ -8,6 +8,8 @@ import { ActionRow, Body, Button, Card, Header, Page, Portrait } from '../src/ui
 import { EventModal, EventPresentation } from '../src/ui/EventModal';
 import { useColors } from '../src/ui/theme';
 import { faceLabels, hairColors, hairLabels, skinTones } from '../src/assets/portraitLayout';
+import { FamilyPreferences } from '../src/ui/FamilyPreferences';
+import { genders } from '../src/game/systems/familySchemas';
 
 export default function NewLife() {
   const params = useLocalSearchParams<{ seed?: string }>();
@@ -62,6 +64,11 @@ export default function NewLife() {
       <Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>WHERE WILL YOU BE BORN?</Text>
       <ActionRow title="Country" value={countries[input.country].name} onPress={() => setField('country')} />
       <ActionRow title="City" value={input.city} onPress={() => setField('city')} />
+    </Card>
+    <Card><Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>FUTURE FAMILY OPTIONS</Text>
+      <Body muted>These choices are independent of gender and appearance. Dating preferences can change in My Life when you are an adult.</Body>
+      <FamilyPreferences attractedTo={input.attractedTo ?? [...genders]} wantsChildren={input.wantsChildren ?? true} onChange={preferences => setInput({ ...input, ...preferences })} />
+      <Body>Reproductive capacity</Body>{(['carry', 'contribute', 'neither'] as const).map(role => <Button key={role} label={role === 'carry' ? 'Can carry a pregnancy' : role === 'contribute' ? 'Can contribute to conception' : 'Neither'} tone={(input.reproductiveRole ?? (input.gender === 'female' ? 'carry' : input.gender === 'male' ? 'contribute' : 'neither')) === role ? 'primary' : 'secondary'} onPress={() => setInput({ ...input, reproductiveRole: role })} />)}
     </Card>
     {(message || error) && <Body>{message ?? error}</Body>}
     <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { if (world) setConfirm(true); else void submit(); }} />

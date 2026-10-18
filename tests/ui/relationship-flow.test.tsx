@@ -1,0 +1,34 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { decodeWorld } from '../../src/game/model';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import { relationFor } from '../../src/game/systems/relationships';
+import fixture from '../fixtures/v3-employed-graduate.json';
+let mockStore: ReturnType<typeof createGameStore>;
+jest.mock('expo-router', () => ({ router: { back: jest.fn() } }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import MeetPeople from '../../app/(game)/meet-people';
+import { PendingEvent } from '../../src/ui/PendingEvent';
+
+test('an introduction selected in the native UI persists the chosen person and relationship in SQLite', async () => {
+  const { sqlite, driver } = database(); const repository = new SaveRepository(driver); await repository.initialise();
+  const initial = decodeWorld(JSON.stringify(fixture)); await repository.create(initial);
+  mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap();
+  const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><MeetPeople /><PendingEvent /></ThemeProvider></SafeAreaProvider>);
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Meet Potential Dates' })); });
+  await waitFor(() => expect(screen.getByText('Someone new')).toBeOnTheScreen());
+  const decision = mockStore.getState().world!.pending; if (decision?.kind !== 'decision') throw new Error('Expected introductions');
+  const chosen = decision.choices[1];
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: chosen.label })); });
+  await waitFor(() => expect(screen.getByText('Introductions made')).toBeOnTheScreen());
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
+  const restored = (await repository.load(initial.id))!;
+  expect(relationFor(restored, restored.activePersonId, chosen.id)).toBeDefined();
+  expect(restored.people[chosen.id]).toEqual(mockStore.getState().world!.people[chosen.id]);
+  expect(screen.getByRole('button', { name: 'Meet Potential Dates' })).toBeDisabled();
+  view.unmount(); sqlite.close();
+});

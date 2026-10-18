@@ -54,3 +54,13 @@ All sixteen subjects were inspected in the browser at 128px using
 tools/preview-ownership.cjs. A neighbour-pixel artefact below the guitar was
 identified and excluded by its source rectangle. Native-device fidelity remains
 pending.
+
+family-atlas.png was generated on 18 October 2026 as twelve original family
+objects (rings, rose, hearts, gift, carriage, bottle, adoption teddy, blanket,
+will, breakup, family tree and conversation). The unmodified 1448×1086 RGBA
+original remains at
+/workspace/generated_images/exec-129eebd9-1e7e-4d11-b484-1d64bb8be799.png.
+Measured source regions in src/assets/familyLayout.ts avoid nominal-cell
+overlaps. All twelve subjects were browser-reviewed at 128px using
+tools/preview-family.cjs; carriage/bottle and teddy/tree neighbour pixels were
+found and excluded through clipping. Native-device fidelity remains pending.

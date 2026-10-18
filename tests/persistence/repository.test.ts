@@ -56,7 +56,7 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
   const initial = world();
   await repository.create(initial);
   await expect(repository.import(encodeWorld(initial))).rejects.toThrow('already exists');
-  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":4', '"schemaVersion":5'))).toThrow();
+  expect(() => decodeWorld(encodeWorld(initial).replace('"schemaVersion":5', '"schemaVersion":6'))).toThrow();
   expect(() => validateWorld({ ...initial, activePersonId: 'person_missing' })).toThrow('Missing active person');
   expect(() => decodeWorld(encodeWorld(initial).replace(/"\$dreamsBigInt":"\d+"/, '"$dreamsBigInt":"NaN"'))).toThrow();
   expect(await repository.import(encodeWorld(initial), true)).toEqual(initial);
@@ -81,7 +81,7 @@ test('a version-one database and actual previous-version save migrate without da
   const repository = new SaveRepository(driver);
   await repository.initialise();
   const restored = (await repository.active())!;
-  expect(restored.schemaVersion).toBe(4);
+  expect(restored.schemaVersion).toBe(5);
   expect(restored.random).toEqual(legacyFixture.random);
   for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
@@ -109,7 +109,7 @@ test('corrupt checkpoints require explicit recovery and never overwrite the prev
 
 test('version-two pending results migrate with their committed effects, identities and random streams intact', () => {
   const world = decodeWorld(JSON.stringify(birthdayFixture));
-  expect(world.schemaVersion).toBe(4);
+  expect(world.schemaVersion).toBe(5);
   expect(world.pending).toEqual(birthdayFixture.pending);
   expect(world.random).toEqual(birthdayFixture.random);
   expect(world.eventHistory).toEqual(birthdayFixture.eventHistory);

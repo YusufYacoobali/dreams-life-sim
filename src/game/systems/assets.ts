@@ -71,9 +71,10 @@ export function saleQuote(world: World, asset: OwnedAsset, gross?: bigint) {
   const debt = world.liabilities.find(item => item.id === asset.mortgageId)?.principal ?? 0n;
   return { price, fee, debt, proceeds: price - fee - debt };
 }
-export function completeAssetSale(world: World, assetId: string, price: bigint, foreclosure = false): RuntimeEffectRow[] {
-  const asset = ownedAsset(world, assetId); const quote = saleQuote(world, asset, price);
-  const person = active(world); const account = accountFor(world, person, asset.currency);
+export function completeAssetSale(world: World, assetId: string, price: bigint, foreclosure = false, person = active(world)): RuntimeEffectRow[] {
+  const asset = world.assets.find(item => item.id === assetId && item.ownerId === person.id);
+  if (!asset) throw new IneligibleAction('You do not own this asset');
+  const quote = saleQuote(world, asset, price); const account = accountFor(world, person, asset.currency);
   if (!foreclosure && account.cash + quote.proceeds < 0n) throw new IneligibleAction('This sale would not cover the mortgage and fees');
   post(world, price, 0n, 'asset-sale', 'Sold ' + asset.name, null, person, asset.currency);
   if (quote.fee) charge(world, quote.fee, 'sale-fee', 'Sale fee: ' + asset.name, undefined, asset.currency);
@@ -86,10 +87,11 @@ export function completeAssetSale(world: World, assetId: string, price: bigint, 
     if (debt.principal > 0n) debt.kind = 'personal';
   }
   const capitalGain = price - quote.fee - asset.costBasis;
-  if (capitalGain > 0n) person.finance.cycleGross += fxMoney(world, { minor: capitalGain, currency: asset.currency }, accountFor(world).currency).minor;
+  if (capitalGain > 0n) person.finance.cycleGross += fxMoney(world, { minor: capitalGain, currency: asset.currency }, accountFor(world, person).currency).minor;
   asset.ownerId = null; asset.primaryHome = false; asset.rental = 'none'; asset.listing = null; asset.mortgageId = null;
   asset.provenance.push('Sold by ' + fullName(person) + ' in ' + world.date.year);
-  fact(world, (foreclosure ? 'My lender repossessed and sold ' : 'I sold ') + asset.name + '.', 'assets');
+  for (const household of world.households) if (household.homeAssetId === asset.id) household.homeAssetId = null;
+  fact(world, (foreclosure ? 'My lender repossessed and sold ' : 'I sold ') + asset.name + '.', 'assets', '', person.id);
   return [{ id: 'price', label: 'Sale price', value: formatMoney({ minor: price, currency: asset.currency }), tone: 'neutral' }, { id: 'net', label: foreclosure ? 'Remaining cash' : 'Net sale proceeds', value: formatMoney({ minor: foreclosure ? account.cash : quote.proceeds, currency: asset.currency }, 'en-US', true), tone: quote.proceeds >= 0n ? 'positive' : 'negative' }];
 }
 function makeMortgage(world: World, asset: OwnedAsset, principal: bigint, interestBps: number, termMonths: number) {
@@ -115,6 +117,7 @@ export function resolveAssets(world: World, command: AssetCommand) {
     const reason = purchaseReason(world, offer, command.financing, command.depositBps, command.termMonths); if (reason) throw new IneligibleAction(reason);
     const asset: OwnedAsset = { id: 'asset_' + world.revision, ownerId: person.id, catalogId: offer.id, kind: offer.kind, name: offer.name, country: person.country, city: person.city, currency: accountFor(world).currency, pricePaid: quote.price, costBasis: quote.price + quote.fee, value: quote.price, condition: offer.condition, ageMonths: 0, acquired: { ...world.date }, mortgageId: null, primaryHome: offer.kind === 'property' && !world.assets.some(item => item.ownerId === person.id && item.primaryHome), rental: 'none', rentPerMonth: 0n, upkeepBps: offer.upkeepBps, insured: false, listing: null, provenance: ['Purchased by ' + fullName(person) + ' in ' + world.date.year] };
     world.assets.push(asset);
+    if (asset.primaryHome) { const household = world.households.find(item => item.id === person.householdId); if (household) household.homeAssetId = asset.id; }
     if (quote.principal) makeMortgage(world, asset, quote.principal, quote.interestBps, quote.termMonths);
     charge(world, quote.price + quote.fee, 'purchase', 'Purchased ' + asset.name);
     fact(world, 'I bought ' + asset.name + ' in ' + asset.city + '.', 'assets');
@@ -146,6 +149,7 @@ export function resolveAssets(world: World, command: AssetCommand) {
     if (asset.kind !== 'property' || asset.rental !== 'none' || asset.listing || asset.country !== person.country) throw new IneligibleAction('Choose an available home in your country of residence');
     world.assets.filter(item => item.ownerId === person.id).forEach(item => { item.primaryHome = item.id === asset.id; });
     person.city = asset.city; result(world, 'You moved in', 'This is now your primary home. The housing part of your monthly living costs is reduced; ownership costs remain.', 'property');
+    const household = world.households.find(item => item.id === person.householdId); if (household) { household.homeAssetId = asset.id; for (const id of household.members) if (!world.people[id].died) world.people[id].city = asset.city; }
   } else if (command.type === 'renovate') {
     if (asset.condition >= 95) throw new IneligibleAction('This asset is already in excellent condition');
     const quote = renovationQuote(asset);
@@ -173,22 +177,25 @@ export function resolveAssets(world: World, command: AssetCommand) {
   }
 }
 
-export function assetsMonth(world: World) {
-  const person = active(world); const movement = draw(world, 'economy', -100, 120);
+export function updatePropertyMarket(world: World): number {
+  const movement = draw(world, 'economy', -100, 120);
   world.market.propertyIndex = Math.min(10000000, Math.max(100, Math.round(world.market.propertyIndex * (10000 + movement) / 10000)));
+  return movement;
+}
+export function assetsMonth(world: World, person = active(world), movement = updatePropertyMarket(world)) {
   for (const asset of world.assets.filter(item => item.ownerId === person.id)) {
     const account = accountFor(world, person, asset.currency); asset.ageMonths++;
     const change = asset.kind === 'property' ? movement : asset.kind === 'vehicle' ? -75 : asset.catalogId === 'rare-book' || asset.catalogId === 'painting' ? draw(world, 'economy', -70, 100) : -30;
     asset.value = roundRatio(asset.value * BigInt(10000 + change), 10000n);
     if (asset.ageMonths % 6 === 0) asset.condition = bounded(asset.condition - 1);
-    if (asset.rental === 'listed' && draw(world, 'economy', 1, 100) <= 55) { asset.rental = 'occupied'; fact(world, 'A tenant moved into ' + asset.name + '.', 'assets'); }
+    if (asset.rental === 'listed' && draw(world, 'economy', 1, 100) <= 55) { asset.rental = 'occupied'; fact(world, 'A tenant moved into ' + asset.name + '.', 'assets', '', person.id); }
     if (asset.rental === 'occupied' && draw(world, 'economy', 1, 100) <= 90) {
       post(world, asset.rentPerMonth, 0n, 'rent', 'Rent from ' + asset.name, null, person, asset.currency);
-      person.finance.cycleGross += fxMoney(world, { minor: asset.rentPerMonth, currency: asset.currency }, accountFor(world).currency).minor;
+      person.finance.cycleGross += fxMoney(world, { minor: asset.rentPerMonth, currency: asset.currency }, accountFor(world, person).currency).minor;
     }
     const upkeep = monthlyUpkeep(asset);
-    if (upkeep) charge(world, upkeep, 'upkeep', 'Upkeep: ' + asset.name, 'living', asset.currency);
-    if (asset.insured) charge(world, monthlyInsurance(asset), 'insurance', 'Insurance: ' + asset.name, 'living', asset.currency);
+    if (upkeep) charge(world, upkeep, 'upkeep', 'Upkeep: ' + asset.name, 'living', asset.currency, person);
+    if (asset.insured) charge(world, monthlyInsurance(asset), 'insurance', 'Insurance: ' + asset.name, 'living', asset.currency, person);
     if (asset.mortgageId) {
       const debt = world.liabilities.find(item => item.id === asset.mortgageId)!;
       if (debt.principal > 0n) {
@@ -199,8 +206,8 @@ export function assetsMonth(world: World) {
         debt.principal -= paid; if (paid) post(world, -paid, -paid, 'repayment', 'Monthly mortgage payment', debt.id, person, asset.currency);
         debt.remainingMonths = Math.max(0, debt.remainingMonths - 1); debt.missedPayments = paid < due ? debt.missedPayments + 1 : 0;
         if (debt.missedPayments >= 6) {
-          const effects = completeAssetSale(world, asset.id, roundRatio(asset.value * 7000n, 10000n), true);
-          if (!world.pending) result(world, 'Your property was repossessed', 'Six missed payments led to a forced sale. Sale proceeds paid fees and as much of the loan as possible. Any shortfall remains visible as personal debt.', 'property', effects);
+          const effects = completeAssetSale(world, asset.id, roundRatio(asset.value * 7000n, 10000n), true, person);
+          if (!world.pending && person.id === world.activePersonId) result(world, 'Your property was repossessed', 'Six missed payments led to a forced sale. Sale proceeds paid fees and as much of the loan as possible. Any shortfall remains visible as personal debt.', 'property', effects);
           continue;
         }
       }
@@ -209,13 +216,14 @@ export function assetsMonth(world: World) {
       const loss = roundRatio(asset.value * 1500n, 10000n); asset.value -= loss; asset.condition = bounded(asset.condition - 20);
       const claim = asset.insured ? roundRatio(loss * 8000n, 10000n) : 0n;
       if (claim) post(world, claim, 0n, 'insurance-claim', 'Covered loss: ' + asset.name, null, person, asset.currency);
-      fact(world, asset.name + ' was damaged. ' + (claim ? 'My insurance paid ' + formatMoney({ minor: claim, currency: asset.currency }) + '.' : 'I had no cover for the loss.'), 'assets');
+      fact(world, asset.name + ' was damaged. ' + (claim ? 'My insurance paid ' + formatMoney({ minor: claim, currency: asset.currency }) + '.' : 'I had no cover for the loss.'), 'assets', '', person.id);
     }
     const listing = asset.listing;
     if (listing && !listing.offer && absoluteMonth(world) >= listing.nextOfferMonth && !world.pending) {
       const offer = roundRatio(asset.value * BigInt(draw(world, 'economy', 8500, 10800)), 10000n);
       listing.offersMade++; listing.nextOfferMonth = absoluteMonth(world) + 2;
       if (offer > 0n && offer >= listing.askingPrice * 85n / 100n && account.cash + saleQuote(world, asset, offer).proceeds >= 0n) {
+        if (person.id !== world.activePersonId) { completeAssetSale(world, asset.id, offer, false, person); continue; }
         listing.offer = offer;
         world.pending = { kind: 'decision', id: 'property_offer_' + asset.id + '_' + listing.offersMade, templateId: 'property-sale-offer', title: 'An offer for ' + asset.name, body: 'A buyer has offered ' + formatMoney({ minor: offer, currency: asset.currency }) + '. You still own the property until you accept and settle.', illustration: 'property', personIds: [person.id], choices: [
           { id: 'accept', label: 'Accept the offer', effects: [{ kind: 'asset-sale', assetId: asset.id, minor: offer }], resultTitle: 'Sale completed', resultBody: 'The property left your ownership. The mortgage, fees and net proceeds are settled from the actual sale price.', journal: 'I accepted an offer for ' + asset.name + '.' },

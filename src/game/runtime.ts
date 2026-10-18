@@ -7,6 +7,7 @@ export const effectSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('transfer'), fromAccountId: z.string(), toAccountId: z.string(), minor: z.bigint().nonnegative() }),
   z.object({ kind: z.literal('asset-sale'), assetId: z.string(), minor: z.bigint().positive() }),
   z.object({ kind: z.literal('decline-sale'), assetId: z.string() }),
+  z.object({ kind: z.literal('connect-person'), personId: z.string() }),
 ]);
 export type Effect = z.infer<typeof effectSchema>;
 export const effectRowSchema = z.object({ id: z.string(), label: z.string(), value: z.string(), tone: z.enum(['positive', 'negative', 'neutral']) });
