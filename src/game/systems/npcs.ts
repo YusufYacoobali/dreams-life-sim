@@ -11,6 +11,7 @@ import { salaryForPerson } from './work';
 import { newHealth } from './healthSchemas';
 import { isConfined, newLegal } from './legalSchemas';
 import { visibleConvictions } from './legal';
+import { newPublicLife } from './socialSchemas';
 
 export function npcSalary(person: Person, roleId: string, rank = 0): bigint {
   const role = jobs.find(job => job.id === roleId)!;
@@ -74,6 +75,7 @@ export function createContact(world: World, options: { age: number; gender?: Per
     education: newEducation(), employment: null, finance: newFinance(), ...newFamilyPerson(gender), lastEconomicMonth: world.date.year * 12 + world.date.month - 1,
     health: newHealth(world.date.year * 12 + world.date.month - 1),
     legal: newLegal(),
+    publicLife: newPublicLife(world.date.year * 12 + world.date.month - 1),
   };
   if (gender === 'nonbinary') person.biology.role = draw(world, 'npcs', 0, 1) ? 'carry' : 'contribute';
   person.wantsChildren = draw(world, 'npcs', 1, 100) <= 80;

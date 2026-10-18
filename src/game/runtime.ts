@@ -12,6 +12,8 @@ export const effectSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('legal-bail'), caseId: z.string() }),
   z.object({ kind: z.literal('legal-remand'), caseId: z.string() }),
   z.object({ kind: z.literal('legal-plea'), caseId: z.string(), plea: z.enum(['guilty', 'not-guilty', 'leniency']) }),
+  z.object({ kind: z.literal('brand-decision'), sponsorId: z.string(), accepted: z.boolean() }),
+  z.object({ kind: z.literal('public-response'), controversyId: z.string(), response: z.enum(['apologise', 'clarify', 'ignore']) }),
 ]);
 export type Effect = z.infer<typeof effectSchema>;
 export const effectRowSchema = z.object({ id: z.string(), label: z.string(), value: z.string(), tone: z.enum(['positive', 'negative', 'neutral']) });

@@ -5,6 +5,7 @@ import type { RuntimeEffectRow } from '../runtime';
 import type { Currency } from '../money';
 import { countries } from '../countries';
 import { offerPending } from '../pendingQueue';
+import { fxMoney } from '../valuation';
 
 export const bounded = (value: number) => Math.max(0, Math.min(100, Math.round(value)));
 export const active = (world: World) => world.people[world.activePersonId];
@@ -27,6 +28,7 @@ export function post(world: World, cashDelta: bigint, debtDelta: bigint, categor
   const account = accountFor(world, person, currency);
   if (account.cash + cashDelta < account.lockedCash) throw new IneligibleAction(account.lockedCash ? 'This payment exceeds your available balance; minor inheritance is held in trust' : 'Your balance cannot cover this payment');
   account.cash += cashDelta;
+  if (cashDelta > 0n && ['income', 'rent', 'dividend', 'creator-income', 'sponsorship', 'media-income', 'clinic-income', 'business-owner-income'].includes(category)) person.finance.supportIncomeDue += fxMoney(world, { minor: cashDelta, currency: account.currency }, countries[person.country].currency).minor;
   world.ledger.push({ id: 'txn_' + world.revision + '_' + world.ledger.length, accountId: account.id, personId: person.id, liabilityId, year: world.date.year, month: world.date.month, currency: account.currency, cashDelta, debtDelta, category, description });
 }
 export function borrow(world: World, amount: bigint, kind: World['liabilities'][number]['kind'], interestBps: number) {

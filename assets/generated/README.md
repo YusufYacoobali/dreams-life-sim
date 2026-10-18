@@ -75,3 +75,13 @@ Measured source regions in src/assets/familyLayout.ts avoid nominal-cell
 overlaps. All twelve subjects were browser-reviewed at 128px using
 tools/preview-family.cjs; carriage/bottle and teddy/tree neighbour pixels were
 found and excluded through clipping. Native-device fidelity remains pending.
+
+
+fame-business-atlas.png was generated on 18 October 2026 as sixteen original
+social/fame/business objects. The unmodified 1254×1254 RGBA original remains at
+/workspace/generated_images/exec-445679b4-df9e-4b03-8758-01665264bfc4.png.
+Source and 128px browser composition were inspected. Measured rectangles in
+src/assets/fameBusinessLayout.ts retain the full van/briefcase and exclude
+their pixels from the neighbouring laptop/growth subjects. The source PNG
+was not edited. Social/fame subjects are integrated; business subjects are
+registered for the next system. Native-device fidelity remains pending.

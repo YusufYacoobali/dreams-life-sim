@@ -35,6 +35,7 @@ export default function PersonProfile() {
       <StatBar label="Health" value={person.stats.health} color={c.teal} />
       {relation && <><Body>{relationLabel(world, relation)}</Body><StatBar label="Relationship" value={relation.strength} color={c.green} /><StatBar label="Trust" value={relation.trust} color={c.blue} /></>}
       <Body>{isConfined(world, person) ? 'In custody' : person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.finance.pensionAnnual > 0n ? 'Retired' : person.education.school ?? 'No current occupation'}</Body>
+      {world.socialAccounts.filter(item => item.ownerId === person.id).map(item => <ActionRow key={item.id} title={'@' + item.handle} subtitle={item.status === 'memorial' ? 'Memorial social profile' : 'Social profile'} onPress={() => router.push({ pathname: '/social-profile/[id]', params: { id: item.id } })} />)}
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
     </Card> : <Body>This person could not be found.</Body>}
     {(error || message) && <Body>{message ?? error}</Body>}

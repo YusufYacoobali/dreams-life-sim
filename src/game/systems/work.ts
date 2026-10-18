@@ -45,7 +45,7 @@ export function resolveWork(world: World, command: WorkCommand) {
     if (!role) throw new IneligibleAction('This job is not available');
     const reason = jobReason(world, role); if (reason) throw new IneligibleAction(reason);
     world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id] = 1;
-    const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) - visibleConvictions(world, person).length * 10));
+    const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) + Math.floor(person.stats.fame / 20) - visibleConvictions(world, person).length * 10));
     if (draw(world, 'outcomes', 1, 100) > chance) {
       fact(world, 'I applied for a ' + role.title.toLowerCase() + ' role and was turned down.', 'work');
       result(world, 'They chose another applicant', 'The application was unsuccessful. Your current work, if any, is unchanged.', 'career'); return;

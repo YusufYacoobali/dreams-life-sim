@@ -23,9 +23,10 @@ import { nextPending, offerPending, priorityOf } from './pendingQueue';
 import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
 import { isConfined } from './systems/legalSchemas';
 import { choiceUnavailable } from './choiceAvailability';
+import { brandDecision, respondPublicly, resolveSocialMedia, socialDeath, socialMediaCommandSchema, SocialMediaCommand, socialMonth } from './systems/social';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -43,6 +44,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   person.died = { ...world.date }; person.causeOfDeath = cause;
   person.health.hospitalizedUntil = null;
   legalDeath(world, person);
+  socialDeath(world, person);
   recordFamilyDeath(world, personId);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
@@ -69,8 +71,9 @@ function processMonth(world: World) {
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
-  familyFinanceMonth(world);
   healthFinanceMonth(world);
+  socialMonth(world);
+  familyFinanceMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   legalMonth(world);
@@ -128,6 +131,8 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'brand-decision') return brandDecision(world, effect.sponsorId, effect.accepted);
+    if (effect.kind === 'public-response') return respondPublicly(world, effect.controversyId, effect.response);
     if (effect.kind === 'legal-bail') return payBail(world, effect.caseId);
     if (effect.kind === 'legal-plea') return hearCase(world, effect.caseId, effect.plea);
     if (effect.kind === 'legal-remand') {
@@ -154,6 +159,7 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       const stats = world.people[effect.personId].stats;
       const before = stats[effect.stat];
       stats[effect.stat] = clamp(before + effect.delta);
+      if (effect.stat === 'fame') world.people[effect.personId].publicLife.earnedFame = clamp(world.people[effect.personId].publicLife.earnedFame + effect.delta);
       delta = stats[effect.stat] - before; label = labels[effect.stat]; value = (delta >= 0 ? '+' : '') + delta + '%';
       // Reducing stress is beneficial, unlike reducing health.
       if (effect.stat === 'stress') delta = -delta;
@@ -223,6 +229,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const estate = estateCommandSchema.safeParse(command);
     const health = healthCommandSchema.safeParse(command);
     const legal = legalCommandSchema.safeParse(command);
+    const socialMedia = socialMediaCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -233,6 +240,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (estate.success) resolveEstate(world, estate.data);
     else if (health.success) { resolveHealth(world, health.data); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else if (legal.success) { resolveLegal(world, legal.data, recordDeath); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
+    else if (socialMedia.success) resolveSocialMedia(world, socialMedia.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

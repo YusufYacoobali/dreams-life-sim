@@ -16,6 +16,7 @@ import { addCondition } from './health';
 import { placeDependentChildren, oweFamily } from './family';
 import { createContact } from './npcs';
 import { connectPerson, relationFor } from './relationships';
+import { publicConviction } from './social';
 export { activeSentence, isConfined } from './legalSchemas';
 
 export const legalCommandSchema = z.discriminatedUnion('type', [
@@ -134,6 +135,7 @@ export function hearCase(world: World, caseId: string, plea: 'guilty' | 'not-gui
     return [row('verdict', 'Verdict', 'Not guilty', 'positive'), row('bail', 'Bail', item.bailState === 'returned' ? 'Returned in full' : 'No escrow held')];
   }
   item.status = 'convicted'; item.fine.minor = roundRatio(item.quotedFine.minor * BigInt(plea === 'leniency' ? 70 : plea === 'guilty' ? 80 : 100), 100n);
+  publicConviction(world, person, offences[item.offence].violent);
   courtFine(world, item);
   if (source.victimId && !world.people[source.victimId].died && source.restitution.minor) oweFamily(world, person.id, source.victimId, source.restitution.minor, source.restitution.currency, 'restitution');
   item.sentenceMonths = Math.max(1, Math.round(item.baseMonths * (plea === 'guilty' ? 0.7 : plea === 'leniency' ? 0.8 : 1)));
@@ -310,6 +312,6 @@ export function legalDeath(world: World, person: Person) {
 /** Shared gate prevents a deep link or direct command from bypassing custody. */
 export function custodyReason(world: World, commandType: string): string | undefined {
   if (!isConfined(world)) return;
-  const permitted = ['advance', 'resume', 'choose', 'acknowledge', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'breakup', 'gift-money', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
+  const permitted = ['advance', 'resume', 'choose', 'acknowledge', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'edit-social', 'social-routine', 'delete-social', 'reopen-social', 'cancel-sponsor', 'breakup', 'gift-money', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
   return permitted.includes(commandType) ? undefined : 'This activity is unavailable while you are in custody';
 }

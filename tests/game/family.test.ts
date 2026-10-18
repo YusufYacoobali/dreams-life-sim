@@ -36,7 +36,7 @@ function finish(world: World) {
   return world;
 }
 test('a genuine v5 marriage result migrates without changing accounts, ring, household, decisions or streams', () => {
-  const migrated = decodeWorld(JSON.stringify(marriageFixture)); expect(migrated.schemaVersion).toBe(9);
+  const migrated = decodeWorld(JSON.stringify(marriageFixture)); expect(migrated.schemaVersion).toBe(10);
   expect(migrated.random).toEqual(marriageFixture.random); expect(migrated.pending?.id).toBe(marriageFixture.pending.id);
   expect(migrated.pregnancies).toEqual([]); expect(migrated.custody).toEqual([]);
   const acknowledged = acknowledge(migrated); expect(acknowledged.assets).toEqual(migrated.assets); expect(acknowledged.accounts).toEqual(migrated.accounts); expect(acknowledged.marriages).toEqual(migrated.marriages);
@@ -78,6 +78,7 @@ test('divorce equalises actual marital gains, preserves starting wealth and reco
   expect(netWorth(world).minor + netWorth(world, spouseId).minor).toBe(before);
   expect(world.marriages.at(-1)!.endReason).toBe('divorce'); expect(world.custody[0].childId).toBe(child.id);
   expect(world.custody[0].arrangement).toBe('shared'); expect(world.people[child.id].householdId).toBe(world.people[world.activePersonId].householdId);
+  post(world, 100000n, 0n, 'income', 'Recorded current pay', null, world.people[spouseId]);
   const payerCash = accountFor(world, world.people[spouseId]).cash, receiverCash = accountFor(world).cash;
   familyFinanceMonth(world); expect(accountFor(world, world.people[spouseId]).cash).toBeLessThan(payerCash); expect(accountFor(world).cash).toBeGreaterThan(receiverCash);
   validateWorld(world);

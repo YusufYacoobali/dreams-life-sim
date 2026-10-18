@@ -214,11 +214,12 @@ export function familyFinanceMonth(world: World) {
     if (living(world, payerId) && world.people[payerId].householdId !== world.people[custody.primaryId].householdId) support.set(payerId, [...(support.get(payerId) ?? []), custody]);
   }
   for (const [payerId, arrangements] of support) {
-    const payer = world.people[payerId], gross = (isConfined(world, payer) ? 0n : payer.employment?.annualPay ?? 0n) + payer.finance.pensionAnnual;
-    const total = roundRatio(gross * BigInt(Math.min(3000, arrangements.length * 1000)), 120000n);
+    const payer = world.people[payerId], gross = payer.finance.supportIncomeDue;
+    const total = roundRatio(gross * BigInt(Math.min(3000, arrangements.length * 1000)), 10000n);
     const count = BigInt(arrangements.length);
     arrangements.forEach((custody, index) => oweFamily(world, payerId, custody.primaryId, total / count + (BigInt(index) < total % count ? 1n : 0n), accountFor(world, payer).currency, 'child-support'));
   }
+  for (const person of Object.values(world.people)) person.finance.supportIncomeDue = 0n;
   for (const debt of world.liabilities.filter(item => item.creditorId && item.principal > 0n && living(world, item.ownerId) && living(world, item.creditorId))) {
     const payer = world.people[debt.ownerId]; const account = accountFor(world, payer, debt.currency);
     const limit = availableCash(account) / 5n, paid = debt.principal < limit ? debt.principal : limit;

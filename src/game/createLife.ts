@@ -12,6 +12,7 @@ import { backgroundOccupation } from './systems/npcs';
 import { netWorth } from './valuation';
 import { newHealth } from './systems/healthSchemas';
 import { newLegal } from './systems/legalSchemas';
+import { newPublicLife } from './systems/socialSchemas';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -52,6 +53,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     ...newFamilyPerson(gender), householdId: 'household_birth', lastEconomicMonth: date.year * 12 + date.month - 1,
     health: newHealth(date.year * 12 + date.month - 1),
     legal: newLegal(),
+    publicLife: newPublicLife(date.year * 12 + date.month - 1),
     };
   };
   const player = person('person_player', input.firstName, input.gender, 0);
@@ -64,7 +66,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 9, engineVersion: 8, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 10, engineVersion: 9, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
@@ -74,6 +76,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     pregnancies: [], custody: [],
     legacyAnnual: null, wills: [], estates: [], generation: 1, legacies: [],
     deferred: [], pendingPriority: 0, incidents: [], cases: [], sentences: [], remand: [], contraband: [], gangs: [],
+    socialAccounts: [], sponsorships: [], controversies: [], collaborations: [], socialFollows: [],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };

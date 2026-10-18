@@ -14,6 +14,8 @@ import { healthSchema, newHealth } from './systems/healthSchemas';
 import { caseSchema, contrabandSchema, gangSchema, incidentSchema, newLegal, personLegalSchema, remandSchema, sentenceSchema } from './systems/legalSchemas';
 import { priorityOf } from './pendingQueue';
 import { validateLegal } from './systems/legalValidation';
+import { collaborationSchema, controversySchema, followSchema, newPublicLife, publicLifeSchema, socialAccountSchema, sponsorshipSchema } from './systems/socialSchemas';
+import { validateSocial } from './systems/socialValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -35,11 +37,12 @@ export const personSchema = z.object({
   biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),
   health: healthSchema,
   legal: personLegalSchema,
+  publicLife: publicLifeSchema,
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(9), engineVersion: z.literal(8), contentVersion: z.literal(1),
+  schemaVersion: z.literal(10), engineVersion: z.literal(9), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -59,6 +62,7 @@ export const worldSchema = z.object({
   pendingPriority: z.number().int().min(0).max(200),
   deferred: z.array(z.object({ priority: z.number().int().min(0).max(200), event: pendingSchema })),
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
+  socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -236,6 +240,7 @@ export function validateWorld(value: unknown): World {
   }
   if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
   validateLegal(world);
+  validateSocial(world);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -250,6 +255,8 @@ export function validateWorld(value: unknown): World {
         const item = world.cases.find(candidate => candidate.id === effect.caseId && candidate.personId === world.activePersonId && candidate.status === 'awaiting-trial');
         if (!item || !pending.personIds.includes(item.personId)) throw new Error('Invalid bound court action');
       }
+      if (effect.kind === 'brand-decision' && !world.sponsorships.some(item => item.id === effect.sponsorId && item.ownerId === world.activePersonId && item.status === 'offered')) throw new Error('Invalid bound brand offer');
+      if (effect.kind === 'public-response' && !world.controversies.some(item => item.id === effect.controversyId && item.personId === world.activePersonId && !item.resolved)) throw new Error('Invalid bound public response');
       if (effect.kind === 'transfer') {
         const from = world.accounts.find(account => account.id === effect.fromAccountId);
         const to = world.accounts.find(account => account.id === effect.toAccountId);
@@ -329,6 +336,10 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 8) {
     parsed.schemaVersion = 9; parsed.engineVersion = 8; parsed.pendingPriority = parsed.pending ? priorityOf(parsed.pending) : 0; parsed.deferred = []; parsed.incidents = []; parsed.cases = []; parsed.sentences = []; parsed.remand = []; parsed.contraband = []; parsed.gangs = [];
     for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) person.legal = newLegal();
+  }
+  if (parsed && parsed.schemaVersion === 9) {
+    parsed.schemaVersion = 10; parsed.engineVersion = 9; parsed.socialAccounts = []; parsed.sponsorships = []; parsed.controversies = []; parsed.collaborations = []; parsed.socialFollows = [];
+    for (const person of Object.values(parsed.people) as Record<string, unknown>[]) { person.publicLife = newPublicLife(parsed.date.year * 12 + parsed.date.month - 1, (person.stats as { fame: number }).fame); (person.finance as Record<string, unknown>).supportIncomeDue = 0n; }
   }
   return validateWorld(parsed);
 }
