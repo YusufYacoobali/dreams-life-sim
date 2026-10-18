@@ -14,6 +14,7 @@ import { assetPrice, resolveAssets } from './assets';
 import { exchangeQuote } from './finance';
 import { settleBackground } from './npcBudget';
 import { hospitalized } from './healthSchemas';
+import { isConfined } from './legalSchemas';
 
 export const socialCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-people'), purpose: z.enum(['friend', 'dating']), gender: z.enum(['any', ...genders]) }),
@@ -63,6 +64,7 @@ export function connectPerson(world: World, id: string): RuntimeEffectRow[] {
   return [{ id: 'contact', label: 'New acquaintance', value: fullName(person), tone: 'positive' }];
 }
 export function romanceReason(world: World, target: Person): string | undefined {
+  if (isConfined(world) || isConfined(world, target)) return 'Romantic outings are unavailable in custody';
   const player = active(world);
   if (target.died) return 'This person has died';
   if (ageOn(player, world.date) < rules[player.country].adultAge || ageOn(target, world.date) < rules[target.country].adultAge) return 'Both people must be adults';
@@ -115,6 +117,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   const relation = target ? relationFor(world, player.id, target.id) : undefined;
   if (!target || target.died || !relation) throw new IneligibleAction('Choose a living person you know');
   if (command.type === 'ask-to-move-in') {
+    if (isConfined(world, target)) throw new IneligibleAction('They are currently in custody');
     if (age < 18 || target.country !== player.country || !relation.roles.some(role => role === 'parent' || role === 'guardian')) throw new IneligibleAction('Choose a living parent or guardian in your country');
     if (!target.householdId || target.householdId === player.householdId) throw new IneligibleAction('You already share this household');
     counter(world, target.id, 'move-in');
@@ -124,6 +127,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     fact(world, 'I moved in with ' + target.firstName + '.', 'family'); result(world, 'You moved in', 'You share this household’s costs. Your own property, if any, remains yours.', 'property'); return;
   }
   if (command.type === 'interact') {
+    if (command.action === 'spend-time' && (isConfined(world, player) || isConfined(world, target)) && (player.country !== target.country || player.city !== target.city || isConfined(world, player) && isConfined(world, target))) throw new IneligibleAction('A visit requires an available person in the same city');
     if (age < 3) throw new IneligibleAction('Personal interactions unlock from age three');
     if (command.action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:'))) throw new IneligibleAction('There is no unresolved argument to apologise for');
     counter(world, target.id, command.action); relation.lastInteractionYear = world.date.year;
@@ -135,7 +139,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
       body = accepted ? target.firstName + ' seemed pleased that you noticed.' : target.firstName + ' wondered what you wanted. You did not push it.'; journal = accepted ? 'I told ' + target.firstName + ' something I appreciate about them.' : 'My compliment to ' + target.firstName + ' did not land as intended.';
     } else if (command.action === 'spend-time') {
       if (age >= 18) charge(world, dateBudget(world) / 2n, 'social', 'An afternoon with ' + target.firstName);
-      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = hospitalized(world, player) || hospitalized(world, target) ? 'You spent time together at the hospital. An ordinary conversation made the day feel less clinical.' : age < 12 ? 'You and ' + target.firstName + ' made a small adventure out of an ordinary afternoon.' : 'You and ' + target.firstName + ' spent an unhurried afternoon away from your phones.'; journal = 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
+      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = isConfined(world, player) || isConfined(world, target) ? 'You spent visiting time together at the correctional centre. The visit helped you feel connected beyond the walls.' : hospitalized(world, player) || hospitalized(world, target) ? 'You spent time together at the hospital. An ordinary conversation made the day feel less clinical.' : age < 12 ? 'You and ' + target.firstName + ' made a small adventure out of an ordinary afternoon.' : 'You and ' + target.firstName + ' spent an unhurried afternoon away from your phones.'; journal = isConfined(world, player) || isConfined(world, target) ? 'I shared a prison visit with ' + target.firstName + '.' : 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
     } else if (command.action === 'argue') {
       delta = -draw(world, 'outcomes', 8, 14); relation.trust = bounded(relation.trust - 5); relation.memories.push('argument:' + world.date.year);
       body = 'Both of you thought of better things to say after the conversation ended.'; journal = 'I argued with ' + target.firstName + ' and left things unsettled.'; effects.push(...statChanges(player, { happiness: -3, stress: 3 }));
@@ -180,7 +184,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     counter(world, target.id, 'propose');
     let ring = command.ringId ? world.assets.find(asset => asset.id === command.ringId && asset.ownerId === player.id && asset.catalogId === 'engagement-ring') : world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring');
     if (command.ringId && !ring) throw new IneligibleAction('Choose an engagement ring you own');
-    if (!ring) { const offer = assetCatalog.find(asset => asset.id === 'engagement-ring')!; resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 360, quotedPrice: assetPrice(world, offer) }); ring = world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring')!; }
+    if (!ring) { const offer = assetCatalog.find(asset => asset.id === 'engagement-ring')!; resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 360, quotedPrice: assetPrice(world, offer) }, false); ring = world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring')!; }
     if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', 'The relationship is still a relationship. The ring stays in your possessions.', 'rings', statChanges(player, { happiness: -4 })); return; }
     ring.ownerId = target.id; ring.ownershipSource = 'gift'; ring.titleSince = { ...world.date }; ring.provenance.push('Given to ' + fullName(target) + ' by ' + fullName(player) + ' in ' + world.date.year);
     if (!world.accounts.some(account => account.ownerId === target.id && account.currency === ring!.currency)) world.accounts.push({ id: 'account_' + target.id + '_' + ring.currency, ownerId: target.id, currency: ring.currency, cash: 0n, openingCash: 0n, lockedCash: 0n });

@@ -1,0 +1,19 @@
+export const offenceIds = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'bribery', 'escape', 'homicide', 'contraband'] as const;
+export type OffenceId = typeof offenceIds[number];
+export const actionableCrimes = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job'] as const;
+export type CrimeDefinition = { title: string; category: 'petty' | 'major' | 'cyber' | 'organized'; minAge: number; smarts: number; skill: number; riskBps: number; gainBps: number; fineBps: number; months: number; violent: boolean; description: string };
+/** High-level fictional actions. All money scales from the local authored pay profile. */
+export const offences: Record<OffenceId, CrimeDefinition> = {
+  shoplift: { title: 'Shoplifting', category: 'petty', minAge: 14, smarts: 0, skill: 0, riskBps: 3500, gainBps: 100, fineBps: 200, months: 6, violent: false, description: 'Attempt a petty theft from a local retailer.' },
+  pickpocket: { title: 'Pickpocketing', category: 'petty', minAge: 14, smarts: 0, skill: 5, riskBps: 4000, gainBps: 150, fineBps: 250, months: 8, violent: false, description: 'A risky attempt to steal from another person.' },
+  vandalism: { title: 'Vandalism', category: 'petty', minAge: 14, smarts: 0, skill: 0, riskBps: 4500, gainBps: 0, fineBps: 300, months: 6, violent: false, description: 'Damage public property, with no financial reward.' },
+  burglary: { title: 'Burglary', category: 'major', minAge: 18, smarts: 20, skill: 10, riskBps: 5000, gainBps: 400, fineBps: 600, months: 24, violent: false, description: 'Attempt a serious property crime with lasting consequences.' },
+  robbery: { title: 'Robbery', category: 'major', minAge: 18, smarts: 0, skill: 20, riskBps: 6500, gainBps: 1500, fineBps: 1800, months: 60, violent: true, description: 'A violent theft that can injure a real person and lead to a long sentence.' },
+  assault: { title: 'Assault', category: 'major', minAge: 18, smarts: 0, skill: 0, riskBps: 7000, gainBps: 0, fineBps: 800, months: 24, violent: true, description: 'Harm another person. Injury, death, restitution and prosecution are possible.' },
+  'cyber-fraud': { title: 'Digital Fraud', category: 'cyber', minAge: 18, smarts: 60, skill: 10, riskBps: 5500, gainBps: 1200, fineBps: 1600, months: 36, violent: false, description: 'An abstract digital fraud attempt, with evidence and financial consequences.' },
+  'organized-job': { title: 'Underground Job', category: 'organized', minAge: 18, smarts: 0, skill: 0, riskBps: 6500, gainBps: 2000, fineBps: 2200, months: 48, violent: false, description: 'Take a risky assignment for an organised group.' },
+  bribery: { title: 'Corruption', category: 'major', minAge: 14, smarts: 0, skill: 0, riskBps: 10000, gainBps: 0, fineBps: 1000, months: 18, violent: false, description: 'Attempting to corrupt an official creates a separate legal risk.' },
+  escape: { title: 'Escape from Custody', category: 'major', minAge: 14, smarts: 0, skill: 0, riskBps: 10000, gainBps: 0, fineBps: 1000, months: 18, violent: false, description: 'Time spent outside custody does not count as time served.' },
+  homicide: { title: 'Homicide', category: 'major', minAge: 14, smarts: 0, skill: 0, riskBps: 10000, gainBps: 0, fineBps: 5000, months: 180, violent: true, description: 'A person died as a result of a violent offence.' },
+  contraband: { title: 'Illicit Trade', category: 'organized', minAge: 18, smarts: 0, skill: 0, riskBps: 7500, gainBps: 0, fineBps: 800, months: 18, violent: false, description: 'Possession or sale of illicit property can lead to seizure and prosecution.' },
+};

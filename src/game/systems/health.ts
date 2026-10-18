@@ -11,6 +11,7 @@ import { routineSchema, hospitalized } from './healthSchemas';
 export { hospitalized } from './healthSchemas';
 import { createContact, hireNpc } from './npcs';
 import { endEmployment } from './work';
+import { isConfined } from './legalSchemas';
 export const healthCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('health-routine'), routine: routineSchema }),
   z.object({ type: z.literal('consult'), service: z.enum(['checkup', 'symptoms', 'tests', 'specialist']) }),
@@ -37,11 +38,11 @@ export function medicalQuote(world: World, cost: bigint, patient = active(world)
   const payer = carePayer(world, patient), currency = countries[payer.country].currency;
   return { payer, currency, amount: fxMoney(world, { minor: cost, currency: countries[patient.country].currency }, currency).minor };
 }
-export const consultationCost = (world: World, service: 'checkup' | 'symptoms' | 'tests' | 'specialist', person = active(world)) => rules[person.country].doctorVisit * BigInt(service === 'specialist' ? 4 : service === 'tests' ? 2 : 1);
+export const consultationCost = (world: World, service: 'checkup' | 'symptoms' | 'tests' | 'specialist', person = active(world)) => isConfined(world, person) ? 0n : rules[person.country].doctorVisit * BigInt(service === 'specialist' ? 4 : service === 'tests' ? 2 : 1);
 export function providerFor(world: World, patient: Person): Person {
   let provider = patient.health.providerId && world.people[patient.health.providerId];
   const payerId = carePayer(world, patient).id;
-  if (!provider || provider.id === patient.id || provider.id === payerId || provider.died || provider.country !== patient.country || provider.city !== patient.city || provider.employment?.roleId !== 'doctor') provider = Object.values(world.people).find(person => person.id !== patient.id && person.id !== payerId && !person.died && person.country === patient.country && person.city === patient.city && person.employment?.roleId === 'doctor') ?? null;
+  if (!provider || provider.id === patient.id || provider.id === payerId || provider.died || isConfined(world, provider) || provider.country !== patient.country || provider.city !== patient.city || provider.employment?.roleId !== 'doctor') provider = Object.values(world.people).find(person => person.id !== patient.id && person.id !== payerId && !person.died && !isConfined(world, person) && person.country === patient.country && person.city === patient.city && person.employment?.roleId === 'doctor') ?? null;
   if (!provider) {
     provider = createContact(world, { age: draw(world, 'npcs', 35, 55), country: patient.country, city: patient.city });
     provider.stats.smarts = Math.max(80, provider.stats.smarts); endEmployment(world, provider.id);
@@ -80,7 +81,7 @@ function diagnose(world: World, patient: Person, provider: Person, service: 'che
   }
   return diagnosed;
 }
-export const treatmentCost = (world: World, condition: Condition, person = active(world)) => rules[person.country].doctorVisit * BigInt(conditions[condition.type].costFactor);
+export const treatmentCost = (world: World, condition: Condition, person = active(world)) => isConfined(world, person) ? 0n : rules[person.country].doctorVisit * BigInt(conditions[condition.type].costFactor);
 function startTreatment(world: World, person: Person, condition: Condition, provider: Person, emergency = false, quotedCost?: bigint) {
   const method = conditions[condition.type].treatment, cost = quotedCost ?? treatmentCost(world, condition, person), stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
   payMedical(world, person, provider, cost, emergency ? 'Emergency care' : 'Treatment', emergency);
@@ -121,7 +122,7 @@ export function resolveHealth(world: World, command: HealthCommand) {
   }
   if (command.type === 'vaccinate') {
     const current = person.health.vaccinations.find(item => item.id === command.vaccine && item.expiresMonth > absolute(world)); if (current) throw new IneligibleAction('This protection is still current');
-    limit(world, 'vaccinate:' + command.vaccine); const provider = providerFor(world, person), cost = rules[person.country].doctorVisit / 2n; payMedical(world, person, provider, cost, 'Vaccination');
+    limit(world, 'vaccinate:' + command.vaccine); const provider = providerFor(world, person), cost = isConfined(world, person) ? 0n : rules[person.country].doctorVisit / 2n; payMedical(world, person, provider, cost, 'Vaccination');
     person.health.vaccinations = [...person.health.vaccinations.filter(item => item.id !== command.vaccine), { id: command.vaccine, date: { ...world.date }, expiresMonth: absolute(world) + (command.vaccine === 'routine' ? 120 : 12) }];
     record(world, person, 'vaccination', command.vaccine + ' vaccination received.', cost, provider.id); result(world, 'Protection recorded', 'This reduces the game’s infection risk for its recorded period. It does not cure an existing condition or grant a permanent health boost.', 'care'); return;
   }
@@ -164,7 +165,7 @@ export function healthMonth(world: World) {
   const month = absolute(world);
   for (const person of Object.values(world.people)) {
     if (person.died || person.health.lastMonth >= month) continue;
-    person.health.lastMonth = month; const age = ageOn(person, world.date), routine = person.health.routine, stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
+    person.health.lastMonth = month; const age = ageOn(person, world.date), routine = isConfined(world, person) ? { ...person.health.routine, diet: 'balanced' as const, exercise: 'none' as const, smoking: false, drinking: 'none' as const } : person.health.routine, stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
     if (person.health.hospitalizedUntil !== null && person.health.hospitalizedUntil < month) person.health.hospitalizedUntil = null;
     if (month % 3 === 0) {
       const fit = hospitalized(world, person) ? -1 : routine.exercise === 'gym' || routine.exercise === 'sport' ? 2 : routine.exercise === 'walking' ? 1 : age >= 18 ? -1 : 0;
@@ -217,7 +218,7 @@ export function healthFinanceMonth(world: World) {
   const month = absolute(world);
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
-    const extra = healthRoutineCost(world, person), payer = carePayer(world, person);
+    const extra = isConfined(world, person) ? 0n : healthRoutineCost(world, person), payer = carePayer(world, person);
     if (extra) charge(world, fxMoney(world, { minor: extra, currency: countries[person.country].currency }, countries[payer.country].currency).minor, 'lifestyle', 'Monthly routine costs for ' + person.firstName, 'living', undefined, payer);
     for (const condition of person.health.conditions.filter(item => item.status !== 'recovered')) {
       if (person.id !== world.activePersonId && condition.severity >= 35 && !condition.treatment && draw(world, 'npcs', 1, 100) <= (person.traits.includes('practical') ? 55 : 25)) {
@@ -225,7 +226,7 @@ export function healthFinanceMonth(world: World) {
         if (availableCash(accountFor(world, quote.payer)) >= quote.amount && (quote.payer.id !== person.id || ageOn(person, world.date) >= 18 || !quote.amount)) { const provider = providerFor(world, person); condition.diagnosed = { ...world.date }; startTreatment(world, person, condition, provider); }
       }
       const treatment = condition.treatment; if (!treatment || treatment.lastPaymentMonth >= month) continue;
-      const cost = rules[person.country].doctorVisit / 6n, quote = medicalQuote(world, cost, person);
+      const cost = isConfined(world, person) ? 0n : rules[person.country].doctorVisit / 6n, quote = medicalQuote(world, cost, person);
       if (availableCash(accountFor(world, quote.payer)) < quote.amount) { condition.treatment = null; condition.status = 'active'; record(world, person, 'funding-pause', 'Ongoing care paused because funding was unavailable.', 0n, person.health.providerId, condition.id); fact(world, 'My ongoing treatment paused because I could not fund it.', 'health', '', person.id); continue; }
       payMedical(world, person, providerFor(world, person), cost, 'Ongoing treatment'); treatment.paid += fxMoney(world, { minor: cost, currency: countries[person.country].currency }, treatment.currency).minor; treatment.lastPaymentMonth = month;
     }

@@ -19,9 +19,13 @@ import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth,
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
 import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
 import { conditions } from './content/health';
+import { nextPending, offerPending, priorityOf } from './pendingQueue';
+import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
+import { isConfined } from './systems/legalSchemas';
+import { choiceUnavailable } from './choiceAvailability';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -38,6 +42,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
   person.health.hospitalizedUntil = null;
+  legalDeath(world, person);
   recordFamilyDeath(world, personId);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
@@ -45,7 +50,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
     journal(world, 'death_' + personId, 'I died at age ' + ageOn(person, world.date) + '. Cause: ' + cause + '.', 'death');
-    world.legacyAnnual = world.annual ? { ...world.annual } : null; world.annual = null; world.pending = null;
+    world.legacyAnnual = world.annual ? { ...world.annual } : null; world.annual = null; world.pending = null; world.pendingPriority = 0; world.deferred = [];
   } else {
     const related = world.relationships.some(relation => (relation.from === personId && relation.to === world.activePersonId) || (relation.to === personId && relation.from === world.activePersonId));
     if (related) journal(world, 'death_' + personId, fullName(person) + ' died at age ' + ageOn(person, world.date) + '.', 'family');
@@ -68,6 +73,7 @@ function processMonth(world: World) {
   healthFinanceMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
+  legalMonth(world);
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const age = ageOn(person, world.date);
@@ -86,6 +92,7 @@ function processMonth(world: World) {
 function finishYear(world: World) {
   const frame = world.annual!;
   frame.stage = 'complete';
+  frame.pausedForPlanning = false;
   const player = world.people[world.activePersonId];
   const age = ageOn(player, world.date);
   player.stats.energy = clamp(player.stats.energy + 20);
@@ -94,33 +101,41 @@ function finishYear(world: World) {
   npcYearDecisions(world);
   relationshipsYear(world);
   familyYear(world);
-  const eligible = eligibleTemplates(world);
+  const eligible = isConfined(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
   const birthday = eligible.find(template => template.id === 'first-cake');
   // Introductory year is guaranteed; later years leave room for quiet years.
   const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
   if (shouldOffer && eligible.length) {
     const template = age === 1 && birthday ? birthday : eligible[roll(world, 'events', 0, eligible.length - 1)];
-    world.pending = bindEvent(world, template);
+    offerPending(world, bindEvent(world, template));
     world.eventHistory.push({ templateId: template.id, year: world.date.year });
   } else {
-    const text = age < 3 ? 'I grew a little more confident in a world full of things to investigate.' : age < 18 ? 'Another birthday arrived. Some days felt much bigger than others.' : 'Another year passed. The ordinary days were part of my life too.';
+    const text = isConfined(world) ? 'Another birthday arrived in custody. My routine and the people I missed shaped the year.' : age < 3 ? 'I grew a little more confident in a world full of things to investigate.' : age < 18 ? 'Another birthday arrived. Some days felt much bigger than others.' : 'Another year passed. The ordinary days were part of my life too.';
     journal(world, frame.id + '_quiet', text, 'year');
-    world.pending = { kind: 'result', id: frame.id + '_summary', title: 'Age ' + age, body: text, illustration: 'journal', effects: [] };
+    offerPending(world, { kind: 'result', id: frame.id + '_summary', title: 'Age ' + age, body: text, illustration: 'journal', effects: [] });
   }
 }
 
 function continueYear(world: World) {
-  while (world.annual && world.annual.monthsProcessed < 12 && !world.pending) {
+  while (world.annual && world.annual.monthsProcessed < 12 && !world.pending && !world.annual.pausedForPlanning) {
     const frame = world.annual;
     frame.monthsProcessed++;
     world.date = monthFrom(frame.startDate, frame.monthsProcessed, world.calendarAnchorDay);
     processMonth(world);
   }
-  if (world.annual?.stage === 'months' && !world.pending) finishYear(world);
+  if (world.annual?.stage === 'months' && world.annual.monthsProcessed === 12 && !world.pending && !world.annual.pausedForPlanning) finishYear(world);
 }
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'legal-bail') return payBail(world, effect.caseId);
+    if (effect.kind === 'legal-plea') return hearCase(world, effect.caseId, effect.plea);
+    if (effect.kind === 'legal-remand') {
+      const item = world.cases.find(candidate => candidate.id === effect.caseId && candidate.status === 'awaiting-trial' && candidate.personId === world.activePersonId);
+      if (!item) throw new IneligibleAction('This custody decision is no longer available');
+      if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
+      return [{ id: 'custody', label: 'Custody', value: 'Held on remand', tone: 'neutral' as const }];
+    }
     if (effect.kind === 'emergency-care') return emergencyCare(world, effect.personId, effect.conditionId, effect.accepted, effect.quotedCost);
     if (effect.kind === 'connect-person') return connectPerson(world, effect.personId);
     if (effect.kind === 'asset-sale') {
@@ -170,6 +185,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
+  const custody = custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
     world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months', pausedForPlanning: false };
@@ -183,14 +199,17 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     if (event?.kind !== 'decision' || event.id !== command.eventId) throw new IneligibleAction('That decision is no longer open');
     const choice = event.choices.find(item => item.id === command.choiceId);
     if (!choice) throw new IneligibleAction('Choose an available option');
+    const unavailable = choiceUnavailable(world, choice); if (unavailable) throw new IneligibleAction(unavailable);
+    const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const effects = applyEffects(world, choice.effects);
     journal(world, event.id + '_choice', choice.journal, 'event');
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
-    if (!player.died) world.pending = { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects };
+    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects }, priority + 1);
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
-    world.pending = null;
-    if (world.annual?.stage === 'complete') world.annual = null;
+    world.pending = null; world.pendingPriority = 0;
+    if (nextPending(world)) { /* Resolve all saved decisions at this date before advancing months. */ }
+    else if (world.annual?.stage === 'complete') world.annual = null;
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
@@ -203,6 +222,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const family = familyCommandSchema.safeParse(command);
     const estate = estateCommandSchema.safeParse(command);
     const health = healthCommandSchema.safeParse(command);
+    const legal = legalCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -212,6 +232,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (family.success) resolveFamily(world, family.data);
     else if (estate.success) resolveEstate(world, estate.data);
     else if (health.success) { resolveHealth(world, health.data); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
+    else if (legal.success) { resolveLegal(world, legal.data, recordDeath); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

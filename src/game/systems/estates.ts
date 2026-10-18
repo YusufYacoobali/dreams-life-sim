@@ -26,25 +26,26 @@ export function apportion(total: bigint, shares: { personId: string; weight: big
   return new Map(rows.map(item => [item.personId, item.amount]));
 }
 function divide(total: number, ids: string[]) { return apportion(BigInt(total), ids.map(personId => ({ personId, weight: 1n }))); }
-function descendants(world: World, personId: string, amount: number, depth = 0): Share[] {
+const eligibleHeir = (world: World, heirId: string, deceasedId: string) => !world.incidents.some(item => item.personId === heirId && item.victimId === deceasedId && item.victimKilled);
+function descendants(world: World, personId: string, amount: number, depth = 0, deceasedId = personId): Share[] {
   if (depth > 16) return [];
-  const branches = childrenOf(world, personId).filter(child => !child.died || descendants(world, child.id, 10000, depth + 1).length > 0);
+  const branches = childrenOf(world, personId).filter(child => !child.died && eligibleHeir(world, child.id, deceasedId) || descendants(world, child.id, 10000, depth + 1, deceasedId).length > 0);
   const allocation = divide(amount, branches.map(child => child.id));
-  return branches.flatMap(child => child.died ? descendants(world, child.id, Number(allocation.get(child.id) ?? 0n), depth + 1) : [{ personId: child.id, bps: Number(allocation.get(child.id) ?? 0n) }]).filter(item => item.bps > 0);
+  return branches.flatMap(child => child.died || !eligibleHeir(world, child.id, deceasedId) ? descendants(world, child.id, Number(allocation.get(child.id) ?? 0n), depth + 1, deceasedId) : [{ personId: child.id, bps: Number(allocation.get(child.id) ?? 0n) }]).filter(item => item.bps > 0);
 }
 export function legalShares(world: World, personId: string): Share[] {
   const person = world.people[personId];
   const marriage = world.marriages.find(item => (item.a === personId || item.b === personId) && (!item.ended || item.endReason === 'death' && person.died && item.ended && compareDates(item.ended, person.died) === 0));
-  const spouseId = marriage && (marriage.a === personId ? marriage.b : marriage.a), spouse = spouseId && !world.people[spouseId].died ? spouseId : undefined;
+  const spouseId = marriage && (marriage.a === personId ? marriage.b : marriage.a), spouse = spouseId && !world.people[spouseId].died && eligibleHeir(world, spouseId, personId) ? spouseId : undefined;
   const children = descendants(world, personId, spouse ? 5000 : 10000);
   if (spouse || children.length) return [...(spouse ? [{ personId: spouse, bps: children.length ? 5000 : 10000 }] : []), ...children];
-  const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId && !world.people[item.from].died).map(item => item.from);
-  const siblings = world.relationships.filter(item => item.roles.includes('sibling') && (item.from === personId || item.to === personId)).map(item => item.from === personId ? item.to : item.from).filter(id => !world.people[id].died);
+  const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId && !world.people[item.from].died && eligibleHeir(world, item.from, personId)).map(item => item.from);
+  const siblings = world.relationships.filter(item => item.roles.includes('sibling') && (item.from === personId || item.to === personId)).map(item => item.from === personId ? item.to : item.from).filter(id => !world.people[id].died && eligibleHeir(world, id, personId));
   return [...divide(10000, parents.length ? parents : siblings)].map(([id, amount]) => ({ personId: id, bps: Number(amount) }));
 }
 export function estateShares(world: World, personId: string): Share[] {
   const legal = legalShares(world, personId), will = world.wills.find(item => item.personId === personId);
-  const chosen = will?.shares.filter(item => !world.people[item.personId].died);
+  const chosen = will?.shares.filter(item => !world.people[item.personId].died && eligibleHeir(world, item.personId, personId));
   if (!chosen?.length) return legal;
   const protectedBps = legal.length ? rules[world.people[personId].country].protectedFamilyBps : 0;
   const protectedShares = apportion(BigInt(protectedBps), legal.map(item => ({ personId: item.personId, weight: BigInt(item.bps) })));
@@ -66,6 +67,7 @@ export function settleEstate(world: World, personId: string) {
   const assets = world.assets.filter(item => item.ownerId === personId), propertiesAtDeath = assets.filter(item => item.kind === 'property').length;
   const shares = estateShares(world, personId), weights = shares.map(item => ({ personId: item.personId, weight: BigInt(item.bps) }));
   const will = world.wills.find(item => item.personId === personId), notes: string[] = []; let fees = 0n;
+  for (const item of world.contraband.filter(item => item.personId === personId && item.status === 'owned')) { item.status = 'seized'; fees += convert(item.value.minor, item.value.currency); notes.push('Illicit property was seized rather than passed to heirs.'); }
   for (const account of world.accounts.filter(item => item.ownerId === personId)) account.lockedCash = 0n;
   for (const account of world.accounts.filter(item => item.ownerId === personId && item.currency !== currency && item.cash > 0n)) {
     const original = account.cash, received = convert(original, account.currency);
@@ -80,7 +82,8 @@ export function settleEstate(world: World, personId: string) {
     post(world, value - fee, 0n, 'estate-receivable', 'Receivable assigned to an external buyer', null, person, currency); claim.creditorId = null; claim.kind = 'personal';
     notes.push('A family receivable was assigned to an external buyer at 95% of its recorded value; the debtor still owes the principal.');
   }
-  const debts = world.liabilities.filter(item => item.ownerId === personId && item.principal > 0n).sort((a, b) => ({ tax: 0, mortgage: 1, 'child-support': 2, settlement: 2, student: 3, personal: 3, living: 3 }[a.kind] - { tax: 0, mortgage: 1, 'child-support': 2, settlement: 2, student: 3, personal: 3, living: 3 }[b.kind]) || a.id.localeCompare(b.id));
+  const debtOrder = { tax: 0, mortgage: 1, 'child-support': 2, settlement: 2, restitution: 2, fine: 3, student: 3, personal: 3, living: 3 };
+  const debts = world.liabilities.filter(item => item.ownerId === personId && item.principal > 0n).sort((a, b) => debtOrder[a.kind] - debtOrder[b.kind] || a.id.localeCompare(b.id));
   const debtValue = debts.reduce((sum, item) => sum + convert(item.principal, item.currency), 0n);
   const keep = new Map((will?.bequests ?? []).filter(item => assets.some(asset => asset.id === item.assetId) && shares.some(share => share.personId === item.personId)).map(item => [item.assetId, item.personId]));
   const assetValue = (id: string) => { const asset = assets.find(item => item.id === id)!; return convert(asset.value, asset.currency); };
@@ -146,7 +149,7 @@ export function resolveEstate(world: World, command: EstateCommand) {
     if (!person.died) throw new IneligibleAction('This life has not ended');
     const child = childrenOf(world, person.id).find(item => item.id === command.personId && !item.died); if (!child) throw new IneligibleAction('Choose an existing living child');
     settleEstate(world, person.id); world.legacies.push({ fromId: person.id, toId: child.id, date: { ...world.date } }); world.generation++;
-    world.activePersonId = child.id; world.birthAcknowledged = true; world.pending = null;
+    world.activePersonId = child.id; world.birthAcknowledged = true; world.pending = null; world.pendingPriority = 0; world.deferred = [];
     world.annual = world.legacyAnnual?.stage === 'months' ? { ...world.legacyAnnual, pausedForPlanning: true } : null; world.legacyAnnual = null;
     fact(world, 'I continued the family story after the death of ' + fullName(person) + '.', 'legacy');
     result(world, 'The family story continues', 'You are now ' + fullName(child) + ', age ' + ageOn(child, world.date) + '. Your existing identity, education, relationships, health, money and history are preserved. You can make choices before continuing the year.', 'family-tree'); return;

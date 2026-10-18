@@ -1,0 +1,19 @@
+import React from 'react';
+import { router } from 'expo-router';
+import { useGame } from '../../src/state/useGame';
+import { ageOn, fullName } from '../../src/game/model';
+import { activeSentence, crimeReason, isConfined, legalFee } from '../../src/game/systems/legal';
+import { ActionRow, Body, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
+import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
+import { useLegalReview } from '../../src/ui/LegalReview';
+import { useColors } from '../../src/ui/theme';
+import { rules } from '../../src/game/rules';
+import { formatMoney } from '../../src/game/money';
+import { countries } from '../../src/game/countries';
+export default function Underground() {
+  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useLegalReview(), c = useColors(), person = world.people[world.activePersonId];
+  const group = world.gangs.find(item => item.id === person.legal.gangId && !item.left), prison = activeSentence(world), currency = countries[person.country].currency;
+  return <Page><Header title="Underground Groups" onBack={() => router.back()} />{error && <Body>{error}</Body>}<Card><HealthLegalArt id="handcuffs" size={80} /><Heading size={20}>{group?.name ?? 'An uneasy invitation'}</Heading>{group ? <><Body>Rank {group.rank} · {group.kind} affiliation</Body><StatBar label="Standing" value={group.standing} color={c.purple} /><Body muted>Membership does not pay an automatic salary. Actual assignments carry their own risks.</Body></> : <Body muted>Groups offer contacts and risky work. Your identity and affiliations remain recorded.</Body>}</Card>
+    <Card>{group ? <><Heading size={18}>Your group</Heading>{group.contactIds.map(id => <ActionRow key={id} title={fullName(world.people[id])} subtitle="Recorded contact" onPress={() => router.push({ pathname: '/person/[id]', params: { id } })} />)}{group.kind === 'street' && <ActionRow title="Underground Job" subtitle="A paid criminal assignment with evidence and arrest risk" disabledReason={busy ? 'Saving' : crimeReason(world, 'organized-job')} onPress={() => review.confirm({ type: 'crime', offence: 'organized-job' }, 'Take this assignment?', 'Proceeds, evidence and any case are recorded. A completed assignment can improve your standing.', [], 'handcuffs', 'Take Assignment')} />}<ActionRow title="Leave Group" subtitle="End your affiliation; history and contacts remain" disabledReason={busy ? 'Saving' : undefined} onPress={() => review.confirm({ type: 'leave-gang' }, 'Leave this group?', 'Your affiliation ends. The change brings stress, and past actions remain part of your life.', [], 'release', 'Leave Group')} /></> : <ActionRow title={prison ? 'Join the Yard Circle' : 'Join the Night Exchange'} subtitle={prison ? 'A prison affiliation affects your conduct' : 'Street contacts and risky assignments'} disabledReason={busy ? 'Saving' : ageOn(person, world.date) < 18 ? 'Available from age eighteen' : isConfined(world) && !prison ? 'Await your hearing' : person.legal.wanted ? 'Resolve your outstanding arrest first' : undefined} onPress={() => review.confirm({ type: 'join-gang', kind: prison ? 'prison' : 'street' }, 'Join this group?', 'The affiliation fee is paid from your actual available balance.', [{ id: 'fee', label: 'Affiliation fee', value: formatMoney(legalFee(world, 'affiliation')), tone: 'negative' }], 'handcuffs', 'Join Group')} />}</Card>
+    {world.gangs.some(item => item.personId === person.id && item.left) && <Card><Heading size={18}>Past affiliations</Heading>{world.gangs.filter(item => item.personId === person.id && item.left).map(item => <Body key={item.id}>{item.name} · {item.joined.year}–{item.left!.year}</Body>)}</Card>}{review.modal}</Page>;
+}

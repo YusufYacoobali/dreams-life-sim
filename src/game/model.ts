@@ -11,6 +11,9 @@ import { biologySchema, custodySchema, genders, householdSchema, marriageSchema,
 import { netWorth } from './valuation';
 import { annualSchema, estateSchema, willSchema } from './systems/estateSchemas';
 import { healthSchema, newHealth } from './systems/healthSchemas';
+import { caseSchema, contrabandSchema, gangSchema, incidentSchema, newLegal, personLegalSchema, remandSchema, sentenceSchema } from './systems/legalSchemas';
+import { priorityOf } from './pendingQueue';
+import { validateLegal } from './systems/legalValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -31,11 +34,12 @@ export const personSchema = z.object({
   education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
   biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),
   health: healthSchema,
+  legal: personLegalSchema,
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(8), engineVersion: z.literal(7), contentVersion: z.literal(1),
+  schemaVersion: z.literal(9), engineVersion: z.literal(8), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -52,6 +56,9 @@ export const worldSchema = z.object({
   annual: annualSchema.nullable(), legacyAnnual: annualSchema.nullable(), wills: z.array(willSchema), estates: z.array(estateSchema),
   generation: z.number().int().positive(), legacies: z.array(z.object({ fromId: personId, toId: personId, date: dateSchema })),
   pending: pendingSchema.nullable(),
+  pendingPriority: z.number().int().min(0).max(200),
+  deferred: z.array(z.object({ priority: z.number().int().min(0).max(200), event: pendingSchema })),
+  incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -228,18 +235,25 @@ export function validateWorld(value: unknown): World {
     if (!world.people[legacy.fromId]?.died || !world.people[legacy.toId] || !world.relationships.some(item => item.roles.includes('parent') && item.from === legacy.fromId && item.to === legacy.toId) || compareDates(legacy.date, world.date) > 0 || (index && (world.legacies[index - 1].toId !== legacy.fromId || compareDates(world.legacies[index - 1].date, legacy.date) > 0))) throw new Error('Invalid legacy chain');
   }
   if (world.legacies.length && world.legacies.at(-1)!.toId !== world.activePersonId) throw new Error('Legacy actor differs from its recorded identity');
-  if (world.pending?.kind === 'decision') {
-    if (world.people[world.activePersonId].died || world.pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
-    if (new Set(world.pending.choices.map(choice => choice.id)).size !== world.pending.choices.length) throw new Error('Duplicate decision choices');
-    for (const choice of world.pending.choices) for (const effect of choice.effects) {
+  validateLegal(world);
+  const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
+  if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
+  for (const pending of pendingEvents) if (pending.kind === 'decision') {
+    if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
+    if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
+    for (const choice of pending.choices) for (const effect of choice.effects) {
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
       if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
-      if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !world.pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
-      if (effect.kind === 'emergency-care' && (effect.personId !== world.activePersonId || !world.pending.personIds.includes(effect.personId) || !world.people[effect.personId].health.conditions.some(item => item.id === effect.conditionId && item.status !== 'recovered'))) throw new Error('Invalid medical emergency target');
+      if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
+      if (effect.kind === 'emergency-care' && (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !world.people[effect.personId].health.conditions.some(item => item.id === effect.conditionId && item.status !== 'recovered'))) throw new Error('Invalid medical emergency target');
+      if (effect.kind === 'legal-bail' || effect.kind === 'legal-remand' || effect.kind === 'legal-plea') {
+        const item = world.cases.find(candidate => candidate.id === effect.caseId && candidate.personId === world.activePersonId && candidate.status === 'awaiting-trial');
+        if (!item || !pending.personIds.includes(item.personId)) throw new Error('Invalid bound court action');
+      }
       if (effect.kind === 'transfer') {
         const from = world.accounts.find(account => account.id === effect.fromAccountId);
         const to = world.accounts.find(account => account.id === effect.toAccountId);
-        if (!from || !to || from.id === to.id || from.currency !== to.currency || from.cash < effect.minor) throw new Error('Invalid effect transfer');
+        if (!from || !to || from.id === to.id || from.currency !== to.currency) throw new Error('Invalid effect transfer');
       }
       if (effect.kind === 'asset-sale' || effect.kind === 'decline-sale') {
         const asset = world.assets.find(item => item.id === effect.assetId && item.ownerId === world.activePersonId);
@@ -311,6 +325,10 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 7) {
     parsed.schemaVersion = 8; parsed.engineVersion = 7;
     for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) person.health = newHealth(parsed.date.year * 12 + parsed.date.month - 1);
+  }
+  if (parsed && parsed.schemaVersion === 8) {
+    parsed.schemaVersion = 9; parsed.engineVersion = 8; parsed.pendingPriority = parsed.pending ? priorityOf(parsed.pending) : 0; parsed.deferred = []; parsed.incidents = []; parsed.cases = []; parsed.sentences = []; parsed.remand = []; parsed.contraband = []; parsed.gangs = [];
+    for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) person.legal = newLegal();
   }
   return validateWorld(parsed);
 }

@@ -3,14 +3,18 @@ import { router } from 'expo-router';
 import { ActionRow, Card, Header, Page } from '../../../src/ui/components';
 import { Illustration } from '../../../src/assets/Illustration';
 import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
+import { useGame } from '../../../src/state/useGame';
+import { isConfined } from '../../../src/game/systems/legalSchemas';
 
 export default function Activities() {
+  const world = useGame(s => s.world)!, confined = isConfined(world);
   return <Page><Header title="Activities" />
     <Card>
-      <ActionRow title="Education" subtitle="Study, qualifications and tuition" icon={<Illustration id="education" />} onPress={() => router.push('/education')} />
-      <ActionRow title="Occupation" subtitle="Jobs, performance and retirement" icon={<Illustration id="career" />} onPress={() => router.push('/work')} />
+      <ActionRow title={confined ? 'Prison Study & Work' : 'Education'} subtitle={confined ? 'Permitted routines while in custody' : 'Study, qualifications and tuition'} icon={<Illustration id="education" />} onPress={() => router.push(confined ? '/prison' : '/education')} />
+      <ActionRow title={confined ? 'Custody' : 'Occupation'} subtitle={confined ? 'Sentence, remand and permitted activities' : 'Jobs, performance and retirement'} icon={<Illustration id="career" />} onPress={() => router.push(confined ? '/prison' : '/work')} />
       <ActionRow title="Family" subtitle="Children, family planning and generations" icon={<Illustration id="relationship" />} onPress={() => router.push('/family')} />
       <ActionRow title="Health" subtitle="Your health, energy, fitness and stress" icon={<Illustration id="wellbeing" />} onPress={() => router.push('/health')} />
+      <ActionRow title="Crime & Legal" subtitle="Risk, cases, prison and your record" icon={<HealthLegalArt id="handcuffs" />} onPress={() => router.push('/crime')} />
       <ActionRow title="My Life" subtitle="Your identity and personal profile" icon={<Illustration id="journal" />} onPress={() => router.push({ pathname: '/profile', params: { tab: 'activities' } })} />
       <ActionRow title="Saved Lives" subtitle="Import, export or restore a checkpoint" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />
       <ActionRow title="Time Machine" subtitle="Restore a historical moment as a new branch" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />

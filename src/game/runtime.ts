@@ -9,12 +9,16 @@ export const effectSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('decline-sale'), assetId: z.string() }),
   z.object({ kind: z.literal('connect-person'), personId: z.string() }),
   z.object({ kind: z.literal('emergency-care'), personId: z.string(), conditionId: z.string(), accepted: z.boolean(), quotedCost: z.bigint().nonnegative() }),
+  z.object({ kind: z.literal('legal-bail'), caseId: z.string() }),
+  z.object({ kind: z.literal('legal-remand'), caseId: z.string() }),
+  z.object({ kind: z.literal('legal-plea'), caseId: z.string(), plea: z.enum(['guilty', 'not-guilty', 'leniency']) }),
 ]);
 export type Effect = z.infer<typeof effectSchema>;
 export const effectRowSchema = z.object({ id: z.string(), label: z.string(), value: z.string(), tone: z.enum(['positive', 'negative', 'neutral']) });
 export type RuntimeEffectRow = z.infer<typeof effectRowSchema>;
 export const choiceSchema = z.object({
   id: z.string(), label: z.string(), effects: z.array(effectSchema),
+  disabledReason: z.string().optional(),
   resultTitle: z.string(), resultBody: z.string(), journal: z.string(),
 });
 export type BoundChoice = z.infer<typeof choiceSchema>;

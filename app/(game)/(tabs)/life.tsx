@@ -9,6 +9,7 @@ import { Body, Button, Card, Heading, Page, Portrait, StatBar } from '../../../s
 import { useColors } from '../../../src/ui/theme';
 import { jobs } from '../../../src/game/content/jobs';
 import { accountFor } from '../../../src/game/systems/common';
+import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
 
 export default function Life() {
   const world = useGame(s => s.world)!;
@@ -18,7 +19,7 @@ export default function Life() {
   const error = useGame(s => s.error);
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
-  const occupation = player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
+  const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = world.journal.filter(entry => entry.personId === player.id);
   const years = new Map<number, typeof entries>();
   for (const entry of entries) {
@@ -39,6 +40,7 @@ export default function Life() {
       <StatBar label="Respect" value={player.stats.respect} color={c.amber} />
     </View>
     {error && <Body>{error}</Body>}
+    {(isConfined(world) || player.legal.wanted) && <Button label={isConfined(world) ? 'View Custody & Court' : 'View Outstanding Pursuit'} tone="secondary" onPress={() => router.push(isConfined(world) ? '/prison' : '/crime')} />}
     <Button label={world.annual ? 'Continue This Year' : 'Age Up'} tone="positive" busy={busy} disabled={!!world.pending} onPress={() => { void dispatch({ type: world.annual ? 'resume' : 'advance' }); }} />
     <Card>{[...years.entries()].reverse().map(([age, facts]) => <View key={age} style={{ gap: 8 }}><Heading size={20}>Age: {age}</Heading>{facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>)}</Card>
   </Page>;

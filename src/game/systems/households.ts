@@ -1,6 +1,7 @@
 import { ageOn, fullName, Person, World } from '../model';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
+import { isConfined } from './legalSchemas';
 
 export function moveHousehold(world: World, personIds: string[], targetId: string) {
   const target = world.households.find(household => household.id === targetId);
@@ -20,11 +21,12 @@ export function ownHousehold(world: World, person: Person, include: string[] = [
   return id;
 }
 export function householdLivingCost(world: World, person: Person): bigint {
+  if (isConfined(world, person)) return 0n;
   const rule = rules[person.country];
   if (ageOn(person, world.date) < rule.adultAge || (ageOn(person, world.date) < rule.schoolEnd && (person.education.stage === 'primary' || person.education.stage === 'secondary'))) return 0n;
   const household = world.households.find(item => item.id === person.householdId);
   if (!household) return rule.livingCost;
-  const members = household.members.map(id => world.people[id]).filter(member => !member.died && member.country === person.country);
+  const members = household.members.map(id => world.people[id]).filter(member => !member.died && !isConfined(world, member) && member.country === person.country);
   const adults = members.filter(member => ageOn(member, world.date) >= rules[member.country].adultAge && !(ageOn(member, world.date) < rules[member.country].schoolEnd && (member.education.stage === 'primary' || member.education.stage === 'secondary'))).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   const children = members.length - adults.length;
   const weight = 10000 + Math.max(0, adults.length - 1) * 5000 + children * 2500;
@@ -52,6 +54,7 @@ export function financialActors(world: World): Person[] {
   for (const pregnancy of world.pregnancies) if (pregnancy.status === 'pregnant') { ids.add(pregnancy.carrierId); ids.add(pregnancy.otherParentId); }
   for (const debt of world.liabilities) if (debt.creditorId && debt.principal > 0n) { ids.add(debt.ownerId); ids.add(debt.creditorId); }
   for (const person of Object.values(world.people)) {
+    if (isConfined(world, person) || person.legal.wanted) ids.add(person.id);
     const routine = person.health.routine;
     if (person.health.conditions.some(item => item.status !== 'recovered') || routine.diet === 'nutritious' || routine.exercise === 'gym' || routine.exercise === 'sport' || routine.smoking || routine.drinking !== 'none') {
       ids.add(person.id);

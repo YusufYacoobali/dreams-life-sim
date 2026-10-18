@@ -1,6 +1,6 @@
 # Dreams: Life Simulator
 
-An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy and persistent health/clinical care are connected. The free Time Machine restores complete historical states into separate saved branches, preserving the original future. Local archives include compressed history and branch origin. Legal, fame/business/career, travel/pet/hobby systems, content depth and release validation remain pending; this is not the complete game.
+An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy, persistent health/clinical care and crime/courts/prison are connected. The free Time Machine restores complete historical states into separate saved branches, preserving the original future. Local archives include compressed history and branch origin. Fame/business/career, travel/pet/hobby systems, content depth and release validation remain pending; this is not the complete game.
 
 The game is free and uses local saves. No account, subscription or cloud service is planned. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 

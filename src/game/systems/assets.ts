@@ -7,6 +7,8 @@ import { IneligibleAction } from '../errors';
 import { RuntimeEffectRow } from '../runtime';
 import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result, trustForNecessaryCost } from './common';
 import { fxMoney } from './markets';
+import { offerPending } from '../pendingQueue';
+import { isConfined } from './legalSchemas';
 
 export type OwnedAsset = World['assets'][number];
 const termSchema = z.union([z.literal(120), z.literal(240), z.literal(360)]);
@@ -53,6 +55,7 @@ function debtCapacityReason(world: World, payment: bigint, omitDebtId?: string):
   if ((payment + existing) * 120n > income * 4n) return 'Total debt payments exceed 40% of your monthly gross income';
 }
 export function purchaseReason(world: World, offer: AssetOffer, financing: 'cash' | 'mortgage', depositBps = 2000, termMonths = 360): string | undefined {
+  if (isConfined(world)) return 'New purchases are unavailable in custody';
   const person = active(world);
   if (ageOn(person, world.date) < rules[person.country].adultAge) return 'Purchases are available to adults';
   if (financing === 'mortgage' && offer.kind !== 'property') return 'Mortgages are only available for property';
@@ -107,7 +110,7 @@ export function renovationQuote(asset: OwnedAsset) {
 export const monthlyUpkeep = (asset: OwnedAsset) => roundRatio(asset.value * BigInt(asset.upkeepBps), 120000n);
 export const monthlyInsurance = (asset: OwnedAsset) => roundRatio(asset.value * BigInt(asset.kind === 'vehicle' ? 18 : 6), 10000n);
 export const monthlyRent = (asset: OwnedAsset) => roundRatio(asset.value * 600n, 120000n);
-export function resolveAssets(world: World, command: AssetCommand) {
+export function resolveAssets(world: World, command: AssetCommand, presentPurchase = true) {
   const person = active(world);
   if (command.type === 'buy-asset') {
     const offer = assetCatalog.find(candidate => candidate.id === command.catalogId);
@@ -121,7 +124,7 @@ export function resolveAssets(world: World, command: AssetCommand) {
     if (quote.principal) makeMortgage(world, asset, quote.principal, quote.interestBps, quote.termMonths);
     charge(world, quote.price + quote.fee, 'purchase', 'Purchased ' + asset.name);
     fact(world, 'I bought ' + asset.name + ' in ' + asset.city + '.', 'assets');
-    result(world, 'It’s yours', 'Ownership and the payment are recorded. Ongoing costs apply as time passes.', asset.kind === 'vehicle' ? 'vehicle' : asset.kind === 'property' ? 'property' : 'money', [{ id: 'paid', label: 'Cash paid upfront', value: formatMoney({ minor: quote.cashRequired, currency: asset.currency }), tone: 'negative' }]);
+    if (presentPurchase) result(world, 'It’s yours', 'Ownership and the payment are recorded. Ongoing costs apply as time passes.', asset.kind === 'vehicle' ? 'vehicle' : asset.kind === 'property' ? 'property' : 'money', [{ id: 'paid', label: 'Cash paid upfront', value: formatMoney({ minor: quote.cashRequired, currency: asset.currency }), tone: 'negative' }]);
     return;
   }
   const asset = ownedAsset(world, command.assetId);
@@ -209,7 +212,7 @@ export function assetsMonth(world: World, person = active(world), movement = upd
         debt.remainingMonths = Math.max(0, debt.remainingMonths - 1); debt.missedPayments = paid < due ? debt.missedPayments + 1 : 0;
         if (debt.missedPayments >= 6) {
           const effects = completeAssetSale(world, asset.id, roundRatio(asset.value * 7000n, 10000n), true, person);
-          if (!world.pending && person.id === world.activePersonId) result(world, 'Your property was repossessed', 'Six missed payments led to a forced sale. Sale proceeds paid fees and as much of the loan as possible. Any shortfall remains visible as personal debt.', 'property', effects);
+          if (person.id === world.activePersonId) offerPending(world, { kind: 'result', id: 'foreclosure_' + asset.id, title: 'Your property was repossessed', body: 'Six missed payments led to a forced sale. Sale proceeds paid fees and as much of the loan as possible. Any shortfall remains visible as personal debt.', illustration: 'property', effects }, 80);
           continue;
         }
       }
@@ -221,16 +224,16 @@ export function assetsMonth(world: World, person = active(world), movement = upd
       fact(world, asset.name + ' was damaged. ' + (claim ? 'My insurance paid ' + formatMoney({ minor: claim, currency: asset.currency }) + '.' : 'I had no cover for the loss.'), 'assets', '', person.id);
     }
     const listing = asset.listing;
-    if (listing && !listing.offer && absoluteMonth(world) >= listing.nextOfferMonth && !world.pending) {
+    if (listing && !listing.offer && absoluteMonth(world) >= listing.nextOfferMonth) {
       const offer = roundRatio(asset.value * BigInt(draw(world, 'economy', 8500, 10800)), 10000n);
       listing.offersMade++; listing.nextOfferMonth = absoluteMonth(world) + 2;
       if (offer > 0n && offer >= listing.askingPrice * 85n / 100n && account.cash + saleQuote(world, asset, offer).proceeds >= 0n) {
         if (person.id !== world.activePersonId) { completeAssetSale(world, asset.id, offer, false, person); continue; }
         listing.offer = offer;
-        world.pending = { kind: 'decision', id: 'property_offer_' + asset.id + '_' + listing.offersMade, templateId: 'property-sale-offer', title: 'An offer for ' + asset.name, body: 'A buyer has offered ' + formatMoney({ minor: offer, currency: asset.currency }) + '. You still own the property until you accept and settle.', illustration: 'property', personIds: [person.id], choices: [
+        offerPending(world, { kind: 'decision', id: 'property_offer_' + asset.id + '_' + listing.offersMade, templateId: 'property-sale-offer', title: 'An offer for ' + asset.name, body: 'A buyer has offered ' + formatMoney({ minor: offer, currency: asset.currency }) + '. You still own the property until you accept and settle.', illustration: 'property', personIds: [person.id], choices: [
           { id: 'accept', label: 'Accept the offer', effects: [{ kind: 'asset-sale', assetId: asset.id, minor: offer }], resultTitle: 'Sale completed', resultBody: 'The property left your ownership. The mortgage, fees and net proceeds are settled from the actual sale price.', journal: 'I accepted an offer for ' + asset.name + '.' },
           { id: 'decline', label: 'Wait for another buyer', effects: [{ kind: 'decline-sale', assetId: asset.id }], resultTitle: 'You kept the listing', resultBody: 'The property remains yours. Its costs continue while you wait for another offer.', journal: 'I declined an offer for ' + asset.name + '.' },
-        ] };
+        ] });
       }
     }
   }

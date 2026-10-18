@@ -5,11 +5,13 @@ import { IneligibleAction } from '../errors';
 import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';
 import { fxMoney, netWorth } from '../valuation';
-import { accountFor, active, bounded, charge, draw, fact, post, result } from './common';
+import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result } from './common';
 import { createContact } from './npcs';
 import { moveHousehold, ownHousehold } from './households';
 import { otherPerson, partnerRelation, relationFor } from './relationships';
 import { hospitalized } from './healthSchemas';
+import { offerPending } from '../pendingQueue';
+import { isConfined } from './legalSchemas';
 
 export const familyCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('try-child') }),
@@ -29,6 +31,7 @@ function yearLimit(world: World, action: string) {
 }
 export function conceptionReason(world: World, first: Person, second?: Person): string | undefined {
   if (!second || first.died || second.died) return 'A living partner is required';
+  if (isConfined(world, first) || isConfined(world, second)) return 'Both partners need to be outside custody';
   if (hospitalized(world, first) || hospitalized(world, second)) return 'Recover from the hospital stay before trying for a child';
   if (ageOn(first, world.date) < rules[first.country].adultAge || ageOn(second, world.date) < rules[second.country].adultAge) return 'Both parents must be adults';
   if (!first.wantsChildren || !second.wantsChildren) return 'Both partners need to want a child';
@@ -50,7 +53,7 @@ function linkParent(world: World, parent: Person, child: Person, type: 'biologic
   world.relationships.push({ id: 'relation_' + parent.id + '_' + child.id, from: parent.id, to: child.id, kind: role, roles: [role], romance: 'none', parentType: type, since: { ...world.date }, strength: 80, trust: 80, memories: [type === 'biological' ? 'birth' : type === 'adoptive' ? 'adoption' : 'guardianship'], lastInteractionYear: world.date.year });
 }
 export function addChild(world: World, parents: Person[], type: 'biological' | 'adoptive', age = 0): Person {
-  const child = createContact(world, { age });
+  const child = createContact(world, { age, country: parents[0].country, city: parents[0].city });
   if (type === 'biological') {
     child.born = { ...world.date }; child.lastName = parents[0].lastName;
     const pick = <T,>(values: T[]) => values[draw(world, 'npcs', 0, values.length - 1)];
@@ -65,9 +68,10 @@ export function addChild(world: World, parents: Person[], type: 'biological' | '
     linkParent(world, parent, child, type);
     if (!parent.died) { parent.stats.happiness = bounded(parent.stats.happiness + 8); parent.stats.stress = bounded(parent.stats.stress + 4); fact(world, type === 'biological' ? 'My child, ' + fullName(child) + ', was born.' : 'I adopted ' + fullName(child) + ' at age ' + age + '.', 'family', '', parent.id); }
   }
-  const guardian = parents.find(parent => !parent.died);
+  const guardian = parents.find(parent => !parent.died && !isConfined(world, parent)) ?? parents.find(parent => !parent.died);
   if (guardian) { if (!guardian.householdId) ownHousehold(world, guardian); moveHousehold(world, [child.id], guardian.householdId!); child.country = guardian.country; child.city = guardian.city; }
-  if (parents.length === 2 && parents.every(parent => !parent.died) && parents[0].householdId !== parents[1].householdId) setCustody(world, child, parents[0], parents[1], 'shared');
+  if (parents.length === 2 && parents.every(parent => !parent.died) && parents[0].householdId !== parents[1].householdId && parents.some(parent => !isConfined(world, parent))) setCustody(world, child, parents[0], parents[1], 'shared');
+  for (const parent of parents) if (isConfined(world, parent)) placeDependentChildren(world, parent.id);
   fact(world, type === 'biological' ? 'I was born into the ' + child.lastName + ' family.' : 'I joined my adoptive family.', type === 'biological' ? 'birth' : 'family', '', child.id);
   return child;
 }
@@ -87,24 +91,26 @@ function ensureAccount(world: World, person: Person, currency: World['accounts']
   if (!world.accounts.some(item => item.ownerId === person.id && item.currency === currency)) world.accounts.push({ id: 'account_' + person.id + '_' + currency, ownerId: person.id, currency, cash: 0n, openingCash: 0n, lockedCash: 0n });
 }
 /** A family obligation creates a receivable, never cash. Collections transfer actual balances. */
-export function oweFamily(world: World, payerId: string, receiverId: string, amount: bigint, currency: World['accounts'][number]['currency'], kind: 'settlement' | 'child-support') {
+export function oweFamily(world: World, payerId: string, receiverId: string, amount: bigint, currency: World['accounts'][number]['currency'], kind: 'settlement' | 'child-support' | 'restitution') {
   if (!amount) return;
   const payer = world.people[payerId], receiver = world.people[receiverId]; ensureAccount(world, payer, currency); ensureAccount(world, receiver, currency);
-  const account = accountFor(world, payer, currency), paid = account.cash < amount ? account.cash : amount;
-  if (paid) { post(world, -paid, 0n, kind, 'Family payment to ' + receiver.firstName, null, payer, currency); post(world, paid, 0n, kind, 'Family payment from ' + payer.firstName, null, receiver, currency); }
+  const account = accountFor(world, payer, currency), available = availableCash(account), paid = available < amount ? available : amount;
+  const label = kind === 'restitution' ? 'Restitution' : 'Family payment';
+  if (paid) { post(world, -paid, 0n, kind, label + ' to ' + receiver.firstName, null, payer, currency); post(world, paid, 0n, kind, label + ' from ' + payer.firstName, null, receiver, currency); }
   const remaining = amount - paid;
   if (remaining) {
     const id = 'debt_' + kind + '_' + payerId + '_' + receiverId + '_' + currency;
     let debt = world.liabilities.find(item => item.id === id);
     if (!debt) { debt = { id, ownerId: payerId, creditorId: receiverId, kind, currency, principal: 0n, interestBps: 0, assetId: null, monthlyPayment: 0n, remainingMonths: 0, missedPayments: 0 }; world.liabilities.push(debt); }
-    debt.principal += remaining; post(world, 0n, remaining, kind, 'Unpaid family obligation', debt.id, payer, currency);
+    debt.principal += remaining; post(world, 0n, remaining, kind, kind === 'restitution' ? 'Unpaid restitution' : 'Unpaid family obligation', debt.id, payer, currency);
   }
 }
 function setCustody(world: World, child: Person, a: Person, b: Person, preference: 'shared' | 'me' | 'them') {
-  const fitness = (person: Person) => person.died ? -1 : person.stats.health + person.stats.discipline + (relationFor(world, person.id, child.id)?.strength ?? 0);
+  const fitness = (person: Person) => person.died || isConfined(world, person) ? -1 : person.stats.health + person.stats.discipline + (relationFor(world, person.id, child.id)?.strength ?? 0);
   const requested = preference === 'them' ? b : a, alternative = requested.id === a.id ? b : a;
-  const primary = requested.stats.health >= 25 && fitness(requested) >= 100 && !requested.died ? requested : fitness(alternative) > fitness(requested) ? alternative : requested;
-  const arrangement = preference === 'shared' && !a.died && !b.died && a.country === b.country && a.city === b.city ? 'shared' as const : 'sole' as const;
+  const primary = requested.stats.health >= 25 && fitness(requested) >= 100 ? requested : fitness(alternative) > fitness(requested) ? alternative : requested;
+  if (fitness(primary) < 0) throw new IneligibleAction('An available caregiver is required');
+  const arrangement = preference === 'shared' && !a.died && !b.died && !isConfined(world, a) && !isConfined(world, b) && a.country === b.country && a.city === b.city ? 'shared' as const : 'sole' as const;
   for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) record.ended = { ...world.date };
   world.custody.push({ id: 'custody_' + child.id + '_' + world.revision, childId: child.id, a: a.id, b: b.id, primaryId: primary.id, arrangement, started: { ...world.date }, ended: null, lastReviewYear: world.date.year });
   if (!primary.householdId) ownHousehold(world, primary); moveHousehold(world, [child.id], primary.householdId!); child.country = primary.country; child.city = primary.city;
@@ -158,17 +164,28 @@ export function resolveFamily(world: World, command: FamilyCommand) {
 export function careAfterDeath(world: World, personId: string) {
   for (const pregnancy of world.pregnancies.filter(item => item.status === 'pregnant' && item.carrierId === personId)) { pregnancy.status = 'ended-death'; pregnancy.ended = { ...world.date }; }
   for (const custody of world.custody.filter(item => !item.ended && (item.a === personId || item.b === personId || item.childId === personId))) custody.ended = { ...world.date };
-  for (const child of childrenOf(world, personId).filter(person => !person.died && ageOn(person, world.date) < rules[person.country].adultAge)) {
-    const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === child.id).map(item => world.people[item.from]).filter(person => !person.died);
+  placeDependentChildren(world, personId);
+}
+/** Unavailable parents keep their identities and pregnancy; only actual dependent care moves. */
+export function placeDependentChildren(world: World, personId: string) {
+  const dependents = world.relationships.filter(item => item.from === personId && item.roles.some(role => role === 'parent' || role === 'guardian')).map(item => world.people[item.to]);
+  for (const child of dependents.filter(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) < rules[person.country].adultAge)) {
+    const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === child.id).map(item => world.people[item.from]).filter(person => !person.died && !isConfined(world, person));
     const current = world.households.find(item => item.id === child.householdId);
-    const adult = current?.members.map(id => world.people[id]).find(person => !person.died && ageOn(person, world.date) >= rules[child.country].adultAge);
-    if (adult && world.relationships.some(item => item.from === adult.id && item.to === child.id && item.roles.some(role => role === 'parent' || role === 'guardian'))) continue;
+    const adult = current?.members.map(id => world.people[id]).find(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) >= rules[child.country].adultAge);
+    if (adult && world.relationships.some(item => item.from === adult.id && item.to === child.id && item.roles.some(role => role === 'parent' || role === 'guardian'))) {
+      for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) { if ([record.a, record.b].includes(adult.id)) { record.primaryId = adult.id; if (isConfined(world, record.a) || isConfined(world, record.b)) record.arrangement = 'sole'; } else record.ended = { ...world.date }; }
+      continue;
+    }
     let guardian = parents[0] ?? adult;
-    if (!guardian) { const relatives = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId).map(item => world.people[item.from]); guardian = relatives.find(person => !person.died && ageOn(person, world.date) >= 18)!; }
-    if (!guardian) guardian = createContact(world, { age: draw(world, 'npcs', 28, 55) });
+    if (!guardian) { const relatives = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId).map(item => world.people[item.from]); guardian = relatives.find(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) >= 18)!; }
+    if (!guardian) guardian = createContact(world, { age: draw(world, 'npcs', 28, 55), country: child.country, city: child.city });
     if (!parents.some(parent => parent.id === guardian!.id)) linkParent(world, guardian, child, 'guardian');
     if (!guardian.householdId) ownHousehold(world, guardian); moveHousehold(world, [child.id], guardian.householdId!); child.country = guardian.country; child.city = guardian.city;
-    for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) record.ended = { ...world.date };
+    for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) {
+      if ([record.a, record.b].includes(guardian.id)) { record.primaryId = guardian.id; record.arrangement = 'sole'; }
+      else record.ended = { ...world.date };
+    }
     fact(world, 'I moved into the care of ' + fullName(guardian) + '.', 'family', '', child.id);
   }
 }
@@ -176,7 +193,7 @@ export function familyMonth(world: World) {
   for (const pregnancy of world.pregnancies.filter(item => item.status === 'pregnant')) {
     const carrier = world.people[pregnancy.carrierId];
     if (carrier.died) { pregnancy.status = 'ended-death'; pregnancy.ended = { ...world.date }; continue; }
-    const cost = rules[carrier.country].doctorVisit / 3n;
+    const cost = isConfined(world, carrier) ? 0n : rules[carrier.country].doctorVisit / 3n;
     if (cost) charge(world, cost, 'prenatal-care', 'Pregnancy care', 'living', undefined, carrier);
     if (carrier.stats.health < 35 && draw(world, carrier.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 100) <= 2) {
       pregnancy.status = 'lost'; pregnancy.ended = { ...world.date }; carrier.stats.happiness = bounded(carrier.stats.happiness - 15); fact(world, 'The pregnancy ended in a loss. I needed time and support.', 'family', '', carrier.id); continue;
@@ -184,7 +201,7 @@ export function familyMonth(world: World) {
     if (compareDates(world.date, pregnancy.due) >= 0) {
       const child = addChild(world, [carrier, world.people[pregnancy.otherParentId]], 'biological'); pregnancy.status = 'born'; pregnancy.childId = child.id; pregnancy.ended = { ...world.date };
       const activeParent = [pregnancy.carrierId, pregnancy.otherParentId].includes(world.activePersonId);
-      if (activeParent && !world.pending) result(world, 'Welcome, little one', fullName(child) + ' was born on ' + world.date.year + '-' + String(world.date.month).padStart(2, '0') + '-' + String(world.date.day).padStart(2, '0') + '. You can choose a name from their profile in Relationships.', 'carriage');
+      if (activeParent) offerPending(world, { kind: 'result', id: 'birth_' + child.id, title: 'Welcome, little one', body: fullName(child) + ' was born on ' + world.date.year + '-' + String(world.date.month).padStart(2, '0') + '-' + String(world.date.day).padStart(2, '0') + '. You can choose a name from their profile in Relationships.', illustration: 'carriage', effects: [] }, 90);
     }
   }
   for (const custody of world.custody.filter(item => !item.ended)) if (!living(world, custody.childId) || ageOn(world.people[custody.childId], world.date) >= rules[world.people[custody.childId].country].adultAge) custody.ended = { ...world.date };
@@ -197,15 +214,16 @@ export function familyFinanceMonth(world: World) {
     if (living(world, payerId) && world.people[payerId].householdId !== world.people[custody.primaryId].householdId) support.set(payerId, [...(support.get(payerId) ?? []), custody]);
   }
   for (const [payerId, arrangements] of support) {
-    const payer = world.people[payerId], gross = (payer.employment?.annualPay ?? 0n) + payer.finance.pensionAnnual;
+    const payer = world.people[payerId], gross = (isConfined(world, payer) ? 0n : payer.employment?.annualPay ?? 0n) + payer.finance.pensionAnnual;
     const total = roundRatio(gross * BigInt(Math.min(3000, arrangements.length * 1000)), 120000n);
     const count = BigInt(arrangements.length);
     arrangements.forEach((custody, index) => oweFamily(world, payerId, custody.primaryId, total / count + (BigInt(index) < total % count ? 1n : 0n), accountFor(world, payer).currency, 'child-support'));
   }
   for (const debt of world.liabilities.filter(item => item.creditorId && item.principal > 0n && living(world, item.ownerId) && living(world, item.creditorId))) {
     const payer = world.people[debt.ownerId]; const account = accountFor(world, payer, debt.currency);
-    const limit = account.cash / 5n, paid = debt.principal < limit ? debt.principal : limit;
-    if (!paid) continue; debt.principal -= paid; post(world, -paid, -paid, 'family-collection', 'Payment of family obligation', debt.id, payer, debt.currency); post(world, paid, 0n, 'family-collection', 'Family obligation received', null, world.people[debt.creditorId!], debt.currency);
+    const limit = availableCash(account) / 5n, paid = debt.principal < limit ? debt.principal : limit;
+    const category = debt.kind === 'restitution' ? 'restitution-collection' : 'family-collection';
+    if (!paid) continue; debt.principal -= paid; post(world, -paid, -paid, category, 'Payment of recorded obligation', debt.id, payer, debt.currency); post(world, paid, 0n, category, 'Recorded obligation received', null, world.people[debt.creditorId!], debt.currency);
   }
 }
 export function familyYear(world: World) {

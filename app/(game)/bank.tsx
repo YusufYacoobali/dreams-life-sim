@@ -12,6 +12,7 @@ import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
 
 type Quote = FinanceCommand;
+import { isConfined } from '../../src/game/systems/legalSchemas';
 export default function Bank() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();
   const person = world.people[world.activePersonId]; const home = accountFor(world); const rule = rules[person.country];
@@ -27,7 +28,7 @@ export default function Bank() {
   return <Page><Header title="Bank & Loans" onBack={() => router.back()} /><Card><ActionRow title="Currency Account" value={account.currency} onPress={() => setChoosing('source')} /><Body muted>Available balance</Body><Heading size={30}>{money(availableCash(account))}</Heading>{account.lockedCash > 0n && <Body>Inheritance held in trust: {money(account.lockedCash)}. It becomes available at age {rule.adultAge}; necessary inherited-property costs may use it.</Body>}<Body>Cash less debt: {money(cashNetWorth(world, account.currency))}</Body></Card>
     {(message || error) && <Body>{message ?? error}</Body>}
     <Card><Heading size={18}>Borrow or repay</Heading><TextInput accessibilityLabel={'Amount in ' + account.currency} value={input} onChangeText={setInput} keyboardType="decimal-pad" placeholder={'Amount in ' + account.currency} placeholderTextColor={c.muted} style={{ color: c.ink, fontSize: 19, padding: 12, borderRadius: 10, backgroundColor: c.inset }} />
-      <Button label="Review Personal Loan" disabled={ageOn(person, world.date) < rule.adultAge || !person.employment || busy || account.currency !== home.currency} onPress={() => { const value = amount(); if (value) setQuote({ type: 'borrow', amount: value }); }} />
+      <Button label="Review Personal Loan" disabled={isConfined(world) || ageOn(person, world.date) < rule.adultAge || !person.employment || busy || account.currency !== home.currency} onPress={() => { const value = amount(); if (value) setQuote({ type: 'borrow', amount: value }); }} />
       <Body muted>{account.currency !== home.currency ? 'Personal loans are paid in your home currency.' : !person.employment ? 'Current employment is required for personal borrowing.' : 'Personal borrowing is limited to half your annual salary.'}</Body>
     </Card>
     <Card><Heading size={18}>Currency Exchange</Heading><ActionRow title="Exchange To" value={target} onPress={() => setChoosing('target')} /><Body muted>Use the amount above. Rates move as months pass; the exchange fee is 1%.</Body><Button label="Review Exchange" disabled={busy || ageOn(person, world.date) < rule.adultAge || target === account.currency} onPress={() => { const value = amount(); if (!value) return; if (value > account.cash) { setMessage('Your balance cannot cover this exchange.'); return; } const quoted = exchangeQuote(world, value, account.currency, target); if (quoted.net <= 0n) { setMessage('This amount is too small after the exchange fee.'); return; } setQuote({ type: 'exchange', from: account.currency, to: target, amount: value, quotedNet: quoted.net }); }} /></Card>

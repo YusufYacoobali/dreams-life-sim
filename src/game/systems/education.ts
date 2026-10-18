@@ -7,6 +7,7 @@ import { accountFor, active, borrow, bounded, charge, draw, fact, result } from 
 import { formatMoney } from '../money';
 import { jobs } from '../content/jobs';
 import { hospitalized } from './healthSchemas';
+import { isConfined } from './legalSchemas';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']) }),
@@ -22,6 +23,7 @@ export function tuitionFor(person: Person, program: 'university' | 'trade' | 'gr
 export const courseMonths = (program: 'university' | 'trade' | 'graduate', field: string) => program === 'trade' ? 24 : program === 'graduate' && field === 'law' ? 36 : 48;
 export function enrollmentReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
   const person = active(world); const education = person.education;
+  if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
   if (education.stage !== 'none') return 'You are already enrolled';
   if (person.employment && !jobs.find(job => job.id === person.employment!.roleId)?.partTime) return 'Resign from full-time work before starting this course';
@@ -77,6 +79,7 @@ export function resolveEducation(world: World, command: EducationCommand) {
 }
 export function educationMonth(world: World, person: Person) {
   if (hospitalized(world, person)) return;
+  if (isConfined(world, person) && !['none', 'primary', 'secondary'].includes(person.education.stage)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;
   if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !education.qualifications.some(q => q.level === 'secondary')) {

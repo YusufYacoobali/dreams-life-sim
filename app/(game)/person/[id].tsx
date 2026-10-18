@@ -12,6 +12,7 @@ import { useColors } from '../../../src/ui/theme';
 import { FamilyArt } from '../../../src/assets/FamilyArt';
 import { rules } from '../../../src/game/rules';
 import { jobs } from '../../../src/game/content/jobs';
+import { isConfined } from '../../../src/game/systems/legalSchemas';
 import { FamilyCommand } from '../../../src/game/systems/family';
 
 export default function PersonProfile() {
@@ -33,7 +34,7 @@ export default function PersonProfile() {
       <Body>{person.traits.join(', ')}</Body>
       <StatBar label="Health" value={person.stats.health} color={c.teal} />
       {relation && <><Body>{relationLabel(world, relation)}</Body><StatBar label="Relationship" value={relation.strength} color={c.green} /><StatBar label="Trust" value={relation.trust} color={c.blue} /></>}
-      <Body>{person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.finance.pensionAnnual > 0n ? 'Retired' : person.education.school ?? 'No current occupation'}</Body>
+      <Body>{isConfined(world, person) ? 'In custody' : person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.finance.pensionAnnual > 0n ? 'Retired' : person.education.school ?? 'No current occupation'}</Body>
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
     </Card> : <Body>This person could not be found.</Body>}
     {(error || message) && <Body>{message ?? error}</Body>}

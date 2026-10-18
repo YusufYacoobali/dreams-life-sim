@@ -4,6 +4,7 @@ import { randomInteger } from '../random';
 import type { RuntimeEffectRow } from '../runtime';
 import type { Currency } from '../money';
 import { countries } from '../countries';
+import { offerPending } from '../pendingQueue';
 
 export const bounded = (value: number) => Math.max(0, Math.min(100, Math.round(value)));
 export const active = (world: World) => world.people[world.activePersonId];
@@ -20,7 +21,7 @@ export function fact(world: World, text: string, category: string, suffix = '', 
   world.journal.push({ id: 'fact_' + world.revision + '_' + world.journal.length + suffix, date: { ...world.date }, personId, text, category });
 }
 export function result(world: World, title: string, body: string, illustration: string, effects: RuntimeEffectRow[] = []) {
-  world.pending = { kind: 'result', id: 'action_' + world.revision, title, body, illustration, effects };
+  offerPending(world, { kind: 'result', id: 'action_' + world.revision, title, body, illustration, effects });
 }
 export function post(world: World, cashDelta: bigint, debtDelta: bigint, category: string, description: string, liabilityId: string | null = null, person = active(world), currency?: Currency) {
   const account = accountFor(world, person, currency);
@@ -37,7 +38,7 @@ export function borrow(world: World, amount: bigint, kind: World['liabilities'][
   liability.principal += amount;
   post(world, amount, amount, 'borrowing', kind === 'student' ? 'Student loan drawn' : 'Personal loan drawn', id);
 }
-export function charge(world: World, amount: bigint, category: string, description: string, arrears?: 'living' | 'tax', currency?: Currency, person = active(world)) {
+export function charge(world: World, amount: bigint, category: string, description: string, arrears?: 'living' | 'tax' | 'fine', currency?: Currency, person = active(world)) {
   const account = accountFor(world, person, currency);
   const available = availableCash(account);
   if (amount < 0n) throw new Error('Negative charge');

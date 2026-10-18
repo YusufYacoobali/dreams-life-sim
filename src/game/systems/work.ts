@@ -6,6 +6,8 @@ import { incomeTax, monthlyAmount, rules } from '../rules';
 import { roundRatio, formatMoney } from '../money';
 import { accountFor, active, bounded, draw, fact, post, result } from './common';
 import { hospitalized } from './healthSchemas';
+import { isConfined } from './legalSchemas';
+import { visibleConvictions } from './legal';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string() }),
@@ -21,6 +23,9 @@ export function endEmployment(world: World, personId = world.activePersonId) {
 }
 export function jobReason(world: World, role: JobRole): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
+  if (isConfined(world, person)) return 'You cannot start ordinary work in custody';
+  if (person.legal.wanted) return 'Resolve your outstanding arrest first';
+  if (['doctor', 'lawyer', 'teacher', 'police'].includes(role.id) && visibleConvictions(world, person).length) return 'This role requires a clear current background check';
   if (age < (role.partTime ? rule.partTimeAge : rule.adultAge)) return 'Available from age ' + (role.partTime ? rule.partTimeAge : rule.adultAge);
   if (!role.partTime && person.education.stage !== 'none') return 'Full-time work is unavailable while you are studying';
   if (person.stats.health < 20) return 'Your health needs attention before starting work';
@@ -40,7 +45,7 @@ export function resolveWork(world: World, command: WorkCommand) {
     if (!role) throw new IneligibleAction('This job is not available');
     const reason = jobReason(world, role); if (reason) throw new IneligibleAction(reason);
     world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id] = 1;
-    const chance = Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6));
+    const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) - visibleConvictions(world, person).length * 10));
     if (draw(world, 'outcomes', 1, 100) > chance) {
       fact(world, 'I applied for a ' + role.title.toLowerCase() + ' role and was turned down.', 'work');
       result(world, 'They chose another applicant', 'The application was unsuccessful. Your current work, if any, is unchanged.', 'career'); return;
@@ -75,7 +80,7 @@ export function resolveWork(world: World, command: WorkCommand) {
 export function workMonth(world: World, person = active(world)) {
   const rule = rules[person.country]; const employment = person.employment;
   let gross = 0n; let withheld = 0n; let wages = 0n;
-  if (employment) {
+  if (employment && !isConfined(world, person)) {
     const role = jobs.find(candidate => candidate.id === employment.roleId);
     if (!role) throw new Error('Unknown employment role');
     const factor = hospitalized(world, person) ? 5000n : 10000n;
