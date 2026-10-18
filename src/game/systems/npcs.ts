@@ -12,6 +12,7 @@ import { newHealth } from './healthSchemas';
 import { isConfined, newLegal } from './legalSchemas';
 import { visibleConvictions } from './legal';
 import { newPublicLife } from './socialSchemas';
+import { newSkills } from './careerSchemas';
 
 export function npcSalary(person: Person, roleId: string, rank = 0): bigint {
   const role = jobs.find(job => job.id === roleId)!;
@@ -19,7 +20,7 @@ export function npcSalary(person: Person, roleId: string, rank = 0): bigint {
 }
 export function hireNpc(world: World, person: Person, preferredRole?: string) {
   if (isConfined(world, person) || person.legal.wanted) return;
-  const eligible = jobs.filter(role => !role.partTime && !(visibleConvictions(world, person).length && ['doctor', 'lawyer', 'teacher', 'police'].includes(role.id)) && person.stats.smarts >= role.smarts && (!role.qualification || person.education.qualifications.some(q => q.level === role.qualification && (!role.field || role.field === q.field))));
+  const eligible = jobs.filter(role => !role.partTime && (!role.specialCareer || role.id===preferredRole) && !(visibleConvictions(world, person).length && ['doctor', 'lawyer', 'teacher', 'police'].includes(role.id)) && person.stats.smarts >= role.smarts && (!role.qualification || person.education.qualifications.some(q => q.level === role.qualification && (!role.field || role.field === q.field))));
   if (!eligible.length) return;
   const role = preferredRole ? eligible.find(item => item.id === preferredRole) : eligible[draw(world, 'npcs', 0, eligible.length - 1)];
   if (!role) throw new Error('NPC lacks the required professional qualification');
@@ -57,7 +58,7 @@ export function backgroundOccupation(world: World, person: Person, preferredRole
     qualifiedAge += 2; const field = fields[draw(world, 'npcs', 0, fields.length - 1)];
     person.education.qualifications.push({ level: 'trade', field, year: person.born.year + qualifiedAge });
   }
-  const eligible = jobs.filter(role => !role.partTime && person.stats.smarts >= role.smarts && (!role.qualification || person.education.qualifications.some(q => q.level === role.qualification && (!role.field || role.field === q.field))));
+  const eligible = jobs.filter(role => !role.partTime && (!role.specialCareer || role.id===preferredRole) && person.stats.smarts >= role.smarts && (!role.qualification || person.education.qualifications.some(q => q.level === role.qualification && (!role.field || role.field === q.field))));
   const role = preferred ?? eligible[draw(world, 'npcs', 0, eligible.length - 1)];
   const yearsWorked = Math.max(0, age - qualifiedAge); const rank = Math.min(3, Math.floor(yearsWorked / 8)); const annualPay = npcSalary(person, role.id, rank);
   const id = 'employment_background_' + person.id;
@@ -87,6 +88,7 @@ export function createContact(world: World, options: { age: number; gender?: Per
     health: newHealth(world.date.year * 12 + world.date.month - 1),
     legal: newLegal(),
     publicLife: newPublicLife(world.date.year * 12 + world.date.month - 1),
+    skills: newSkills(), training: null,
   };
   if (gender === 'nonbinary') person.biology.role = draw(world, 'npcs', 0, 1) ? 'carry' : 'contribute';
   person.wantsChildren = draw(world, 'npcs', 1, 100) <= 80;

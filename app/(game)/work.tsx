@@ -24,6 +24,7 @@ export default function Work() {
     <ActionRow title="Find a Job" subtitle="Browse pay and qualification requirements" onPress={() => router.push('/jobs')} />
     <ActionRow title="Education" subtitle="School, university and professional qualifications" onPress={() => router.push('/education')} />
     <ActionRow title="Business" subtitle="Your companies, actual staff and operating roles" onPress={() => router.push('/business')} />
+    <ActionRow title="Special Careers" subtitle="Build skills and pursue timed professional contracts" onPress={() => router.push('/special-careers')} />
     {job && <><ActionRow title="Work routine" value={job.effort} onPress={() => setDialog('routine')} /><ActionRow title="Resign" onPress={() => setDialog('quit')} /></>}
     <ActionRow title="Retirement" disabledReason={retirementReason} onPress={() => setDialog('retire')} />
   </Card><EventModal event={event} busy={busy} onCancel={() => setDialog(null)} onChoose={id => { setDialog(null); void dispatch(dialog === 'routine' ? { type: 'work-effort', effort: id as 'relaxed' | 'balanced' | 'hard' } : { type: dialog === 'quit' ? 'quit-job' : 'retire' }); }} /></Page>;

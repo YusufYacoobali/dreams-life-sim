@@ -18,6 +18,8 @@ import { collaborationSchema, controversySchema, followSchema, newPublicLife, pu
 import { validateSocial } from './systems/socialValidation';
 import { businessPayableSchema, businessSchema, businessTransactionSchema } from './systems/businessSchemas';
 import { validateBusinesses } from './systems/businessValidation';
+import { careerSchema, newSkills, skillsSchema, trainingSchema } from './systems/careerSchemas';
+import { validateCareers } from './systems/careerValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -40,11 +42,12 @@ export const personSchema = z.object({
   health: healthSchema,
   legal: personLegalSchema,
   publicLife: publicLifeSchema,
+  skills: skillsSchema, training: trainingSchema.nullable(),
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(11), engineVersion: z.literal(10), contentVersion: z.literal(1),
+  schemaVersion: z.literal(12), engineVersion: z.literal(11), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -66,6 +69,7 @@ export const worldSchema = z.object({
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
   businesses: z.array(businessSchema), businessLedger: z.array(businessTransactionSchema), businessPayables: z.array(businessPayableSchema),
+  careers: z.array(careerSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -245,6 +249,7 @@ export function validateWorld(value: unknown): World {
   validateLegal(world);
   validateSocial(world);
   validateBusinesses(world);
+  validateCareers(world);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -346,5 +351,6 @@ export function decodeWorld(text: string): World {
     for (const person of Object.values(parsed.people) as Record<string, unknown>[]) { person.publicLife = newPublicLife(parsed.date.year * 12 + parsed.date.month - 1, (person.stats as { fame: number }).fame); (person.finance as Record<string, unknown>).supportIncomeDue = 0n; }
   }
   if (parsed && parsed.schemaVersion === 10) { parsed.schemaVersion = 11; parsed.engineVersion = 10; parsed.businesses = []; parsed.businessLedger = []; parsed.businessPayables = []; }
+  if (parsed && parsed.schemaVersion === 11) { parsed.schemaVersion = 12; parsed.engineVersion = 11; parsed.careers = []; for (const person of Object.values(parsed.people) as Record<string, unknown>[]) { person.skills = newSkills(); person.training = null; } }
   return validateWorld(parsed);
 }

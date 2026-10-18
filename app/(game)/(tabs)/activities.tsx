@@ -19,6 +19,7 @@ export default function Activities() {
       <ActionRow title="Social Media" subtitle="Profiles, posts and creator connections" icon={<FameBusinessArt id="social" />} onPress={() => router.push('/social-media')} />
       <ActionRow title="Fame" subtitle="Your public image, opportunities and brand work" icon={<FameBusinessArt id="fame" />} onPress={() => router.push('/fame')} />
       <ActionRow title="Business" subtitle="Start a company, employ a team and manage growth" icon={<FameBusinessArt id="business" />} onPress={() => router.push('/business')} />
+      <ActionRow title="Special Careers" subtitle="Selection, contracts and professional projects" icon={<FameBusinessArt id="trophy" />} onPress={() => router.push('/special-careers')} />
       <ActionRow title="My Life" subtitle="Your identity and personal profile" icon={<Illustration id="journal" />} onPress={() => router.push({ pathname: '/profile', params: { tab: 'activities' } })} />
       <ActionRow title="Saved Lives" subtitle="Import, export or restore a checkpoint" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />
       <ActionRow title="Time Machine" subtitle="Restore a historical moment as a new branch" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />

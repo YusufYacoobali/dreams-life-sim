@@ -52,6 +52,8 @@ export function financialActors(world: World): Person[] {
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
   for (const company of world.businesses.filter(item => item.status === 'active')) { if (company.ownerId) ids.add(company.ownerId); for (const member of company.staff.filter(item => !item.ended)) ids.add(member.personId); }
   for (const payable of world.businessPayables) if (payable.creditorId && payable.principal > 0n) ids.add(payable.creditorId);
+  for (const career of world.careers.filter(item=>item.status==='active')) {ids.add(career.personId);for(const id of career.contacts)ids.add(id);}
+  for (const person of Object.values(world.people).filter(item=>item.training)) {ids.add(person.id);if(ageOn(person,world.date)<rules[person.country].adultAge)for(const relation of world.relationships)if(relation.to===person.id&&relation.roles.some(role=>role==='parent'||role==='guardian'))ids.add(relation.from);}
   for (const custody of world.custody) if (!custody.ended) { ids.add(custody.a); ids.add(custody.b); }
   for (const pregnancy of world.pregnancies) if (pregnancy.status === 'pregnant') { ids.add(pregnancy.carrierId); ids.add(pregnancy.otherParentId); }
   for (const debt of world.liabilities) if (debt.creditorId && debt.principal > 0n) { ids.add(debt.ownerId); ids.add(debt.creditorId); }

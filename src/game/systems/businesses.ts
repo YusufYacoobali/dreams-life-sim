@@ -32,7 +32,7 @@ export const businessCommandSchema = z.discriminatedUnion('type', [
 export type BusinessCommand = z.infer<typeof businessCommandSchema>;
 const absolute = (world: World) => world.date.year * 12 + world.date.month - 1;
 export const activeBusinessStaff = (world: World, company: Business) => company.staff.filter(item => !item.ended && !world.people[item.personId].died && world.people[item.personId].employment?.id === item.employmentId);
-export const businessManager = (world: World, company: Business) => activeBusinessStaff(world, company).find(item => item.role === 'manager' && !isConfined(world, item.personId));
+export const businessManager = (world: World, company: Business) => activeBusinessStaff(world, company).find(item => item.role === 'manager' && !isConfined(world, item.personId) && !world.people[item.personId].legal.wanted);
 export function businessStartupQuote(world: World, kind: BusinessKind) {
   const definition = businessCatalog[kind], currency = countries[active(world).country].currency, capital = roundRatio(rules[active(world).country].baseWage * BigInt(definition.capitalBps), 10000n), registration = roundRatio(capital * 200n, 10000n);
   return { capital, registration, total: capital + registration, currency };

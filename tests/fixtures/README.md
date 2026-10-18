@@ -13,4 +13,7 @@
 
 - `v10-creator-archive.json`: created with the actual `020858b` engine/repository/archive in real SQLite. Eight delivered posts, 5,346 followers, 119 minor units of creator receipts and unassessed support income, a persisted brand offer and one prior compressed checkpoint must survive the company-schema migration unchanged.
 
+
+- `v11-business-archive.json`: generated with the actual `cee69fc` engine, repository and archive codec in real SQLite. A managed café completes twelve actual operating months with two persistent employees, 88 company transactions, funded wages, dividends and personal annual settlement. A compressed pre-year company checkpoint is retained. The skills/career migration must preserve its exact company cash, contracts, history, ledgers and random streams without inventing prior training.
+
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.

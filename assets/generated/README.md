@@ -85,3 +85,15 @@ src/assets/fameBusinessLayout.ts retain the full van/briefcase and exclude
 their pixels from the neighbouring laptop/growth subjects. The source PNG
 was not edited. Social/fame and business subjects are integrated into their
 respective overview, management and confirmation flows. Native-device fidelity remains pending.
+
+career-atlas.png contains sixteen original career/training illustrations generated
+on 18 October 2026. Initial output remains at
+/workspace/generated_images/exec-9718fa50-623d-41c0-9d8c-d07ca5580a77.png.
+An image-tool edit removed a shoe side emblem; its output was copied unchanged
+from /workspace/generated_images/exec-b7274d0d-fb80-45fd-b2ee-ab9c392ef28e.png.
+SHA-256: b4e3cb00a4741517b64aa46d4b3bf6641c1347a291287410b2f1226d30028327.
+Measured rectangles in src/assets/careerLayout.ts were inspected at source and
+in the 128px browser composition tools/preview-careers.cjs. Full objects and
+transparent gutters are retained. Acting/model/sport/training subjects are
+integrated; remaining career subjects are registered for subsequent paths.
+Native-device fidelity remains unverified.

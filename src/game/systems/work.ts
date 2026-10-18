@@ -8,6 +8,7 @@ import { accountFor, active, bounded, draw, fact, post, result } from './common'
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { visibleConvictions } from './legal';
+import { careerContractEnded } from './careerSchemas';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string() }),
@@ -19,6 +20,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
   const person = world.people[personId];
   const history = world.workHistory.find(record => record.id === person.employment?.id);
   if (history) history.ended = { ...world.date };
+  if (person.employment) careerContractEnded(world,person.employment.id);
   if (person.employment?.companyId) {
     const company = world.businesses.find(item => item.id === person.employment!.companyId);
     if (company) { for (const member of company.staff.filter(item => item.employmentId === person.employment!.id && !item.ended)) member.ended = { ...world.date }; if (company.ownerId === personId) company.ownerOperated = false; }
@@ -27,6 +29,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
 }
 export function jobReason(world: World, role: JobRole): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
+  if (role.specialCareer) return 'Use this special career’s selection process';
   if (isConfined(world, person)) return 'You cannot start ordinary work in custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest first';
   if (['doctor', 'lawyer', 'teacher', 'police'].includes(role.id) && visibleConvictions(world, person).length) return 'This role requires a clear current background check';
@@ -84,7 +87,7 @@ export function resolveWork(world: World, command: WorkCommand) {
 /** Pay for one actual employment period. A company supplies cash through fundWages. */
 export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {
   const rule = rules[person.country], employment = person.employment;
-  if (!employment || isConfined(world, person)) return 0n;
+  if (!employment || isConfined(world, person) || person.legal.wanted) return 0n;
   if (employment.companyId && !fundWages) throw new Error('Company wages require actual payroll funding');
   const role = jobs.find(candidate => candidate.id === employment.roleId);
   if (!role) throw new Error('Unknown employment role');
@@ -98,7 +101,7 @@ export function employmentMonth(world: World, person = active(world), fundWages?
   const effort = employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -2 : 0, stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
   employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
   person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
-  if (employment.paidMonths % 12 === 0) {
+  if (employment.paidMonths % 12 === 0 && !role.specialCareer) {
     if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) { employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank); fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id); }
     else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) { fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id); }
   }
