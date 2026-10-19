@@ -1,7 +1,7 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
 This handoff was requested on 19 October 2026. All application changes, tests,
-the genuine migration fixture and deferred source/art drafts are being committed
+the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
@@ -88,9 +88,15 @@ decision. Another parent, classmate or teacher is never silently substituted.
 - The native-component flow uses real SQLite: origin failure/retry preserves RNG
   and permission, due-choice failure/retry preserves money, cold results preserve
   the payment and cursor, and completing the year does not charge twice.
-- Final typing, full regression and fresh native exports were started for this
-  handoff. Their completed outcomes will be recorded below before the final push.
-  Do not treat the earlier 779-test result as proof of this changed world-23 code.
+- The complete world-23 regression passes: **808 tests / 55 suites**, 476.624 seconds,
+  including twelve complete seeded lives and the new callback/native-component
+  flows. Strict application/test typing and fresh Android/iOS production Hermes
+  exports pass (5.1/4.8 MB, 45 assets). Both current Metro source bundles return
+  HTTP200 and contain the new callbacks and exact-money code. The deferred archive's
+  seven file hashes and this handoff's local links were also checked.
+
+This is a verified development checkpoint, not completion of callback acceptance
+or of the production game. The further cases below remain explicit work.
 
 Remaining callback acceptance work must be checked explicitly: real travel and
 custody, permanent relocation, teacher departure/replacement, parent household
@@ -98,6 +104,9 @@ change/death, player death and actual existing-child legacy, multiple callbacks
 with medical/legal priorities at month 12, and grade/bond caps. The implementation
 must be reviewed against these cases; earlier tests for unrelated systems do not
 establish these new connections. Keep the 120/1,000-life performance gate open.
+The current default twelve-life engine sweep alone takes several minutes. The
+soak wrapper requests 120 lives while the suite currently has a fixed 900,000 ms
+timeout; scale and measure the harness before claiming larger sweeps completed.
 
 ## Cloud environment and native limitations
 

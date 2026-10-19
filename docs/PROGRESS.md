@@ -16,10 +16,15 @@ The user is moving work to a new cloud chat. Continue from **`origin/work`** and
 read [HANDOFF.md](HANDOFF.md) first. The transfer checkpoint includes partial
 world-23 school callbacks and one new project situation (50 source templates),
 their focused tests and a genuine world-22 migration fixture. The 28 new callback
-checks pass; broader acceptance remains open. It also preserves paused pet source
+checks pass; broader acceptance remains open. The complete world-23 handoff
+regression also passes: **808 tests / 55 suites** in 477 seconds, including twelve
+complete seeded lives. Strict source/test typing, fresh Android/iOS Hermes exports
+(5.1/4.8 MB, 45 assets), and current Metro source requests for both platforms pass.
+It also preserves paused pet source
 and generated artwork as an unintegrated archive outside the application folders.
 The 779-test result below applies to the prior world-22 startup checkpoint; final
-world-23 handoff verification is recorded in the handoff. Overall completion
+world-23 verification above does not close the callback/native acceptance cases
+listed in the handoff. Overall completion
 estimates are unchanged.
 
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.

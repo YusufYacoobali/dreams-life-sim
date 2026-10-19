@@ -100,7 +100,7 @@ test.each(['player-hospital', 'peer-hospital', 'parent-hospital', 'wanted'] as c
   else planned.people[condition === 'player-hospital' ? thread.personId : condition === 'peer-hospital' ? thread.peerId : thread.parentId!].health.hospitalizedUntil = thread.dueMonth + 2;
   planned.date = monthFrom(planned.date, 1); storyMonth(planned); expect(thread.status).toBe('cancelled'); expect(thread.offeredEventId).toBeNull(); expect(planned.pending).toBeNull(); expect(planned.ledger.some(item => item.category === 'story-outing')).toBe(false); validateWorld(planned);
 });
-test('a changed school or teacher cancels a promise with its original identities, and a death removes only its queued callback', () => {
+test('a changed school cancels a promise with its original identities, and a death removes only its queued callback', () => {
   const changed = start('project'), school = currentSchool(changed)!; changed.people[changed.activePersonId].education.school = 'A different school'; refreshSchools(changed); refreshStoryThreads(changed);
   expect(changed.storyThreads[0].status).toBe('cancelled'); expect(changed.storyThreads[0].communityId).toBe(school.id); validateWorld(changed);
   const offered = due(start('arcade')), thread = offered.storyThreads[0];
@@ -108,7 +108,7 @@ test('a changed school or teacher cancels a promise with its original identities
   expect(offered.deferred.some(item => item.event.id === thread.offeredEventId)).toBe(true); recordDeath(offered, thread.peerId, 'test illness');
   expect(thread.status).toBe('cancelled'); expect(offered.pending?.id).toBe('urgent_saved_result'); expect(offered.deferred.some(item => item.event.id === thread.offeredEventId)).toBe(false); expect(thread.paidTransactionId).toBeNull(); validateWorld(offered);
 });
-test('read-only eligibility/loads do not generate threads or RNG, and a parent outside the household cannot approve an arcade plan', () => {
+test('read-only eligibility/loads do not generate threads or RNG, and an unavailable parent cannot approve an arcade plan', () => {
   const world = pupil('US', 8), before = encodeWorld(world); eligibleTemplates(world); bindEvent(world, template('school-project-promise')); decodeWorld(before); expect(encodeWorld(world)).toBe(before); expect(world.storyThreads).toEqual([]);
   for (const edge of world.relationships.filter(item => item.kind === 'parent' && item.to === world.activePersonId)) world.people[edge.from].health.hospitalizedUntil = storyMonthNumber(world.date) + 5;
   expect(eligibleTemplates(world).some(item => item.id === 'school-arcade-invitation')).toBe(false); expect(() => bindEvent(world, template('school-arcade-invitation'))).toThrow(/living parent/);
