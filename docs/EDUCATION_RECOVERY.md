@@ -66,7 +66,9 @@ course/results cold without duplicate qualifications. Strict application/test
 typing passes. The clean full regression passes **938 tests / 62 suites** in
 **697.17 seconds**, including twelve complete seeded lives. Fresh Android/iOS
 Hermes exports (46 assets) and both current Metro source bundles pass. The
-new-world 120-life sweep is running; native visual, timing, country accuracy and
+new-world sweep passes 120/120 lives across twelve countries in 2,040.171 seconds
+with unchanged source hash. A real 236-command SQLite life retains all 79 historical
+moments and cold-reloads the entire world exactly. Native visual, timing, country accuracy and
 complete education acceptance remain open.
 
 Scholarships and restricted tuition support are not implemented by these free

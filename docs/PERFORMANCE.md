@@ -5,10 +5,23 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
 The current world-24 education checkpoint passes the clean 938-test / 62-suite
-regression in 697.17 seconds and has a separate 120-life sweep in progress with
+regression in 697.17 seconds and a separate **120/120-life** pure-engine sweep in
+**2,040.171 seconds**, with unchanged
 game-source hash `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
-The completed expanded sweep and SQLite/history numbers below apply to world 23;
-they are retained as historical evidence, not a current-world performance pass.
+It covers all twelve countries, terminal ages 40–98, at most 24 people and 55,199
+ledger rows. [The current per-seed record](verification/life-sweep-v24-120-20261019.json)
+retains the scope. Seeds overlap prior runs; they are not extra distinct lives.
+
+The current world-24 real repository run completes **236 commands / 79 historical
+moments** with death at 78, 18 people and 47,202 ledger rows. Its fresh database
+measures **29,986,816 bytes closed / 36,397,376 bytes peak**; historical payloads
+total 27,379,799 bytes. The entire world matches after closing and reopening SQLite.
+[The current record](verification/sqlite-history-v24-20261019.json) pins source
+and driver hashes. Cloud command p95 is 1,586.9 ms and cold load 773.9 ms while
+the software emulator boots; these are not controlled or native timings. No
+world-24 plain-row baseline was rerun. The comparisons below apply to world 23
+and remain historical evidence. Native, 120-year/multi-generation storage and
+1,000-seed/person acceptance remain open.
 
 ## Database representation four: actual repository storage
 

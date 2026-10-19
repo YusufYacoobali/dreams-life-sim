@@ -6,6 +6,10 @@ See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
 - `education-recovery-v24-20261019.json` records the clean 938-test/62-suite
   world-24 checkpoint, actual SQLite recovery journey and its exact source hash.
+- `life-sweep-v24-120-20261019.json` records every current-world seed (0–119),
+  unchanged source hash and the completed 2,040.171-second pure-engine sweep.
+- `sqlite-history-v24-20261019.json` records the current-world 236-command real
+  repository life, all 79 historical moments, disk sizes and exact cold resume.
 - [school-art-20261019.png](school-art-20261019.png) records browser compositing
   of the original six-subject PNG at 48/128px on light/dark cards. It is not a
   native app capture.

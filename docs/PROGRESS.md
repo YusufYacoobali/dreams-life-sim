@@ -32,10 +32,16 @@ browser-reviewed at 48/128px on light/dark cards. Native screen acceptance remai
 open. The unused trip image does not add a trip mechanic; no situational template
 is counted for course acknowledgements. The catalogue stays at **70**.
 
-The new world-24 120-life sweep is running with frozen game-source hash
+The world-24 sweep passes **120/120 lives** (seeds 0–119) in **2,040.171 seconds**,
+covering all twelve countries, with unchanged game-source hash
 `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
-No completed current-world expanded result is claimed yet. The 120-life and
-storage measurements in the following paragraphs apply to world 23. Scholarships,
+[Per-seed evidence](verification/life-sweep-v24-120-20261019.json) retains the
+pure-engine scope; overlapping old/default seeds are not extra distinct lives.
+The current real SQLite run retains 79 historical moments through 236 commands,
+measures **29,986,816 bytes closed / 36,397,376 bytes peak**, and cold-reloads the
+entire world exactly. [Recorded storage scope](verification/sqlite-history-v24-20261019.json)
+does not establish native timing or multi-generation budgets. The prior storage
+comparison below applies to world 23. Scholarships,
 full national stage/qualification models, native and release acceptance remain
 open. Overall/opening estimates are unchanged.
 

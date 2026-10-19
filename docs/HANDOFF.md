@@ -44,16 +44,24 @@ is browser evidence, not a native screen comparison. The story catalogue remains
 **70 distinct situations**. The listed callback acceptance cases were completed
 before this milestone; see [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md).
 
-A fresh world-24 120-life direct Node sweep is running. Its frozen game-source
-hash is `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
-Do not count it as passed until exit zero and the final unchanged-hash summary.
+A fresh world-24 direct Node sweep passes **120/120 lives** (seeds 0–119) in
+**2,040.171 seconds**, covering all twelve countries. Its game-source hash
+`7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`
+is unchanged at completion. [Every seed](verification/life-sweep-v24-120-20261019.json)
+is recorded. This is pure-engine cloud evidence, with first available choices;
+overlapping earlier/default seeds are not additional distinct lives.
 The completed world-23 sweep remains historical evidence: 120 distinct seeds,
 all twelve countries, 2,209.809 seconds and 43 matching partial-Jest terminal
 comparisons. It does not replace a current-world result. The 1,000-seed,
 1,000-person, 120-year and multi-generation release gates remain open.
 
 Database four still writes bounded checkpoint-v1 live/recovery/branch/import
-rows and reads old plain rows without an eager rewrite. The world-23 real
+rows and reads old plain rows without an eager rewrite. The current world-24
+real SQLite run commits 236 commands and retains all 79 historical moments:
+**29,986,816 bytes closed / 36,397,376 bytes peak**. Cold reload preserves the
+entire world exactly. [Current measurements](verification/sqlite-history-v24-20261019.json)
+are cloud diagnostics, not native latency or 120-year/multi-generation acceptance.
+The world-23 real
 79-observation workload measured 29.9 MB closed and 36.3 MB peak, compared with
 72.4/103.4 MB for plain live/backup rows, with entire worlds/history/receipts
 unchanged. This is historical scoped evidence, not a new-world native/storage
