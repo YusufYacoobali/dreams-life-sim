@@ -67,7 +67,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(23), engineVersion: z.literal(22), contentVersion: z.literal(2),
+  schemaVersion: z.literal(23), engineVersion: z.literal(22), contentVersion: z.literal(3),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -409,5 +409,7 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 20) { parsed.schemaVersion = 21; parsed.engineVersion = 20; parsed.schoolCommunities = []; }
   if (parsed && parsed.schemaVersion === 21) { parsed.schemaVersion = 22; parsed.engineVersion = 21; }
   if (parsed && parsed.schemaVersion === 22) { parsed.schemaVersion = 23; parsed.engineVersion = 22; parsed.contentVersion = 2; parsed.storyThreads = []; }
+  // Existing bound choices and callbacks retain their exact effects and saved draws.
+  if (parsed && parsed.schemaVersion === 23 && parsed.contentVersion === 2) parsed.contentVersion = 3;
   return validateWorld(parsed);
 }

@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **50 distinct situational templates** against
+The source catalogue contains **70 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -13,23 +13,41 @@ category.
 | Primary grouping | Count |
 | --- | ---: |
 | Introductory infant situations | 4 |
-| Preschool/early family situations | 8 |
+| Preschool/early family situations | 13 |
 | Childhood outside school | 3 |
-| Primary school with actual contacts | 12 |
-| Secondary school with actual contacts | 6 |
+| Primary school with actual contacts | 20 |
+| Secondary school with actual contacts | 13 |
 | Shared primary/secondary project promise | 1 |
 | General teenage/family situations | 4 |
 | General adult/later-life situations | 12 |
-| **Source total** | **50** |
-| **Additional distinct situations needed for the minimum** | **200** |
+| **Source total** | **70** |
+| **Additional distinct situations needed for the minimum** | **180** |
 
-The current batch adds 27 situations: three introductory scenes, six early-childhood
+The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
 in the new batch has been checked through the actual engine, result, journal,
 serialization and acknowledgement path. Twelve-country school fixtures verify
 local contact binding without changing people or random streams while browsing.
 The current full regression and production bundle results are recorded in
 [PROGRESS.md](PROGRESS.md).
+
+Content three adds twenty further situations: five parent-free preschool scenes,
+eight primary-school scenes and seven secondary-school scenes. Their subjects
+include echoes, fasteners, shadows, sorting and quantities; map orientation,
+reading, relays, plant monitoring, secret language, speaking, games and fair
+credit; units, debate, yearbook proofs, study methods, family interviews,
+classroom duties and marking corrections. Each has three authored choices with
+real bounded effects. They are in
+[schoolDayStories.ts](../src/game/content/schoolDayStories.ts). Every branch is
+exercised by the existing full engine/result/journal/save/acknowledgement checks;
+all twelve country fixtures also verify parent-free preschool availability.
+
+The School page now shows saved plans, their actual participants and dates,
+permission and conditional outing quote, and four recent outcomes. Paid outings
+show the actual named payer; cancelled or declined outings show no charge.
+Browsing does not generate contacts, draw permission, charge money or advance
+the clock. A genuine content-two SQLite archive proves that the update preserves
+the paid result, scheduled project and both earlier compressed checkpoints.
 
 School stories use the current saved class, its qualified teacher and actual
 classmates. They exclude unavailable contacts. Parent-dependent scenes require
@@ -60,4 +78,4 @@ The remaining catalogue needs employment and all eleven special paths, adult
 relationships, finances/ownership, health/legal situations, travel, pets/hobbies,
 later-life/legacy callbacks and uncommon memorable outcomes. The existing system
 decisions do not satisfy those distinct-story allocations. The overall game
-estimate remains about 50%; 50/250 is a content count, not an overall score.
+estimate remains about 50%; 70/250 is a content count, not an overall score.

@@ -12,6 +12,25 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The early-game milestone adds a read-only School Plans section and twenty
+distinct childhood situations, bringing the source catalogue to **70**. Five new
+preschool situations work without a living parent. The school scenes use the
+saved local peer/teacher and apply actual bounded effects; no qualification is
+invented. World 23 / engine 22 now uses **content 3**. The genuine prior
+content-two SQLite archive retains its paid outing, scheduled project, one-month
+annual cursor and both historical moments; migration changes only content
+metadata. Targeted school/story/startup/migration/native-component checks and
+strict source/test typing pass. The complete regression passes **878 tests / 58
+suites** in 779.349 seconds, including twelve complete seeded lives. Fresh
+Android/iOS Hermes exports (5.1/4.8 MB, 45 assets) and both current Metro source
+bundles pass. A separate 120-life sweep is running; that result remains
+unverified until completion. Native layout/interaction acceptance remains open.
+
+Import also now rejects contradictory scheduled plans after permanent school,
+teacher, household, identity or death changes. Temporary hospital absence before
+the deadline remains valid. The UI renders the original names and saved quote,
+and cancellation cannot turn another parent into the payer.
+
 The 19 October continuation completes the handoff's listed automated callback
 acceptance cases. [The acceptance matrix](CALLBACK_ACCEPTANCE.md) connects real
 travel, custody, relocation, parent/teacher changes, death/legacy, month-twelve
@@ -24,7 +43,8 @@ offline dependency check also pass. The format-only startup checks remain green.
 Native opening/layout acceptance is still open.
 
 The soak harness now scales its budget and reports expanded per-life progress.
-A one-life diagnostic passes, but 120/1,000-life sweeps remain unrun. The history
+A one-life diagnostic passes; the current 120-life sweep is in progress and the
+1,000-life gate remains open. The history
 benchmark's actual 20.8 MB payload total and conservative 68.5 MB projection are
 recorded in [PERFORMANCE.md](PERFORMANCE.md); storage/performance gates stay open.
 Continue childhood/education depth and the full production backlog. Overall
@@ -63,7 +83,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; remaining education funding and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
-| 6 — Content, depth, legacy, Time Machine | In progress | 50 implemented age/context templates, two saved callback families, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
+| 6 — Content, depth, legacy, Time Machine | In progress | 70 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
 ## Feature status
@@ -73,7 +93,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | Partial: editable identity/appearance, deterministic random creation, actual parent links, generated portraits and eight visual age stages | Twelve-country creation/domain tests pass; 120px browser layer review complete; native rendering/fidelity pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
-| Context-aware events, decisions, delayed consequences and journal | Partial: 50 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
+| Context-aware events, decisions, delayed consequences and journal | Partial: 70 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; file picker/share require device validation |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt; scholarships/adult remediation pending | Twelve profile boundary tests and connected school→degree→qualified job scenario pass |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |
@@ -90,7 +110,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death, actual career/children/property summary, will/protected heirs, debt/tax-first settlement, specific ownership bequests, minor trusts and same-child continuation with preserved annual cursor | Conservation, all twelve local-currency NPC estates, real v6 migration, a three-generation journey and native legacy storage-failure→retry/cold-load pass; broader seeded/device acceptance pending |
 | Historical snapshots and Time Machine branches | Implemented core: complete compressed checkpoints before Age Up, explicit saved moments, reviewed separate-branch restore, original future preserved, only prior history copied, local archive round-trip | Atomic rollback/idempotency, exact RNG/outcomes/market restoration, corruption rejection, recovery history pruning and native confirmation→SQLite failure/retry pass; large/native acceptance pending |
 | Custom generated artwork and portrait continuity | Partial: twelve activity, sixteen ownership, twelve family and sixteen time/health/legal and sixteen social/fame/business illustrations, memorial and layered portraits; health/legal subjects connected to their systems | Sources inspected, 120px portrait and 128px ownership/family/health/legal browser reviews complete; native-device fidelity and remaining families pending |
-| 250+ distinct high-quality approved event templates | 50 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
+| 250+ distinct high-quality approved event templates | 70 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
 | Accessibility, performance, native-device UI and release builds | Partial: accessible shared controls and production bundles; broader audit/performance/device/release gates pending | Component interactions and bundle generation; no native-device claim |
 
 ## Verification record

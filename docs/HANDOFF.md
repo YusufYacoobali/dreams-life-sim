@@ -7,10 +7,22 @@ the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
 Continuation on 19 October completed the listed automated callback acceptance
 cases; see [the connection-by-connection evidence](CALLBACK_ACCEPTANCE.md).
-The complete regression now passes **831 tests / 56 suites** in 596.53 seconds,
+That callback checkpoint passed **831 tests / 56 suites** in 596.53 seconds,
 with strict typing, fresh Android/iOS Hermes exports and current Metro source
 requests. This closes those automated cases, not native or release acceptance.
 Continue the early-game work and full backlog below; estimates remain unchanged.
+
+The subsequent early-game work adds twenty distinct situations (**70 total**)
+and a read-only School Plans section showing original participants, due dates,
+permission, conditional costs and recent outcomes. The current content version
+is **3** with world 23 / engine 22 unchanged. A genuine content-two SQLite archive
+in `tests/fixtures/v23-school-plans-archive.json` preserves the paid outing,
+scheduled project and both prior moments. Imports now reject permanently invalid
+scheduled contexts while preserving temporary absence. Focused checks and strict
+typing pass. The new complete regression passes **878 tests / 58 suites** in
+779.349 seconds, with fresh Android/iOS production Hermes exports and both current
+Metro source bundles. A separate 120-life sweep is in progress; do not count it
+as passed until completion. Native and release gates remain open.
 
 ## User priorities and authorisation
 
@@ -51,7 +63,7 @@ the bundler cache does not require deleting saved lives.
 
 ## Current callback work — continue this before another feature
 
-The current source moves to **world 23 / engine 22 / content 2** and adds
+The callback checkpoint moved to **world 23 / engine 22 / content 2** and added
 `world.storyThreads`. Older saves migrate to an empty history without executing
 a callback, consuming RNG or changing existing outcomes. A genuine world-22
 archive in `tests/fixtures/v22-school-story-archive.json` preserves an actual
@@ -76,7 +88,7 @@ The player and party host receive no invented cash, gifts or achievements.
 One new distinct situation, `school-project-promise`, offers a genuine shared
 project with the current peer and teacher, due two months later. Its callback
 changes actual bounded grades, energy, peer bond and teacher trust. It grants no
-qualification. The source catalogue is now **50 situations**; callback/result
+qualification. That checkpoint's catalogue contained **50 situations**; callback/result
 steps do not count as additional distinct stories.
 
 The scheduler runs after monthly mortality/travel. Saved decisions use the
@@ -113,7 +125,8 @@ atomic cancellation of two callbacks through SQLite failure/retry/cold resume.
 See [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md) for fixture scope and limits.
 Keep the 120/1,000-life performance gate open. The soak wrapper now accepts an
 explicit count and scales its timeout, with per-life progress on expanded runs.
-Its one-life diagnostic passes; larger sweeps remain unrun. The current history
+Its one-life diagnostic passes; a 120-life run is in progress and the 1,000-life
+gate remains open. The current history
 benchmark projects 68.5 MB for 120 repeated late checkpoints, above the planned
 50 MB history budget; see [PERFORMANCE.md](PERFORMANCE.md).
 
@@ -164,8 +177,8 @@ release-complete features. Continue childhood depth and missing education paths,
 then the broader catalogue, pets/hobbies/entertainment, achievements/challenges/
 heirlooms, autonomous NPC depth, remaining art, accessibility, country-rule source
 verification, balance, performance, multi-generation sweeps and native release gates.
-At least **200 more distinct reviewed stories** are still needed after the new
-project situation; system offers/reports are not substitutes.
+At least **180 more distinct reviewed stories** are still needed after the
+content-three expansion; system offers/reports are not substitutes.
 
 Unintegrated pet source and generated art, previously outside the active checkout,
 are preserved in [planning/deferred-work](planning/deferred-work/README.md).

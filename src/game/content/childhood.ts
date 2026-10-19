@@ -1,7 +1,9 @@
 import { EventTemplate, storyOption as o } from './eventTypes';
+import { schoolDayTemplates } from './schoolDayStories';
 
 /** Individually authored childhood situations; names bind to saved people. */
 export const childhoodTemplates: readonly EventTemplate[] = [
+  ...schoolDayTemplates,
   {
     id: 'first-echo', min: 1, max: 2, illustration: 'birthday', title: 'Encore! Encore!',
     body: 'You bang a spoon on a bowl. It makes a brilliant noise. You would like to check that result another twenty times.',

@@ -11,6 +11,7 @@ import { FamilyArt } from '../../src/assets/FamilyArt';
 import { ActionRow, Body, Card, Header, Heading, Page, Portrait, StatBar } from '../../src/ui/components';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
+import { SchoolPlans } from '../../src/ui/SchoolPlans';
 import { ageOn, fullName } from '../../src/game/model';
 
 export default function School() {
@@ -38,6 +39,7 @@ export default function School() {
       </Card>
       <Card><ActionRow title="Study Routine" subtitle="Balance grades and stress" value={education.effort} disabledReason={unavailable} onPress={() => setDialog('effort')} /></Card>
     </> : <Card><Body>Your school history stays with you as you grow.</Body><ActionRow title="Education & Qualifications" subtitle="Review qualifications and further study" onPress={() => router.push('/education')} /></Card>}
+    <SchoolPlans world={world} />
     <Card><Heading size={18}>School Reports</Heading>{reports.length ? reports.map(report => <View key={report.id} style={{ gap: 3, paddingVertical: 7 }}><Body>{report.school}</Body><Body muted>{Math.floor(report.month / 12)} · School year {report.term} · Grades {report.grade}%</Body></View>) : <Body muted>A report is recorded after twelve months attending the same school.</Body>}</Card>
     <EventModal event={event} busy={busy} error={error} onCancel={() => setDialog(null)} onChoose={id => { if (!school || !dialog) return; const choice = dialog; setDialog(null); if (choice === 'club' && schoolClubs.includes(id as typeof schoolClubs[number])) void dispatch({ type: 'school-club', communityId: school.id, club: id as typeof schoolClubs[number] }); else if (choice === 'conduct' && schoolConducts.includes(id as typeof schoolConducts[number])) void dispatch({ type: 'school-conduct', communityId: school.id, conduct: id as typeof schoolConducts[number] }); else if (choice === 'effort') void dispatch({ type: 'study-effort', effort: id as 'relaxed' | 'balanced' | 'focused' }); }} />
   </Page>;

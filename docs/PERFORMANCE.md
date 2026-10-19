@@ -16,7 +16,7 @@ Changing the harness is not a completed sweep. The current 120/1,000-life gates
 remain open until their measured results are recorded here. These core-life
 choices also do not replace the connected career/family/custody/legacy matrices.
 
-## World-23 diagnostic, 19 October 2026
+## World-23/content-two diagnostic, 19 October 2026
 
 The current harness was checked with one complete seeded life (25.350 seconds
 inside Jest, seven engine checks passing) and invalid CLI input. This establishes
@@ -34,6 +34,11 @@ Cloud p95 timings were 125.9 ms for Age Up, 330.9 ms for packing and 496.0 ms fo
 decoding/validating. This run overlapped regression/Metro activity and uses a
 different workload from the older baselines below; it is not a controlled timing
 comparison or evidence of native responsiveness.
+
+The content-three checkpoint starts a separate 120-life sweep, with unchanged
+game-source hashes recorded at startup. It is in progress, not an accepted
+result. Both sweep/history drivers now choose an actually available option,
+so low funds cannot make them select a disabled attendance/payment choice.
 
 `node tools/benchmark-history.cjs` runs one deterministic current-engine life, taking/restoring a compressed full-state checkpoint before every Age Up. The 18 October 2026 run used Node 24 in this cloud workspace:
 

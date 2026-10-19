@@ -25,7 +25,7 @@ export function validateStoryThreads(world: World) {
     } else if (thread.parentId || thread.permission || !thread.teacherId || !school.teacherIds.includes(thread.teacherId) || thread.quote.payerId || thread.quote.amount !== 0n) throw new Error('Invalid school project participants or quote');
     if (thread.ended && (compareDates(thread.ended, thread.created) < 0 || compareDates(thread.ended, world.date) > 0)) throw new Error('Invalid story end date');
     const matches = queued.filter(item => item.id === thread.offeredEventId);
-    if (thread.status === 'scheduled' && (thread.ended || thread.offeredEventId || thread.resolution || thread.cancellationReason || thread.paidTransactionId || storyMonthNumber(world.date) > thread.dueMonth)) throw new Error('Invalid scheduled story');
+    if (thread.status === 'scheduled' && (thread.ended || thread.offeredEventId || thread.resolution || thread.cancellationReason || thread.paidTransactionId || storyMonthNumber(world.date) > thread.dueMonth || storyContextReason(world, thread, true, thread))) throw new Error('Invalid scheduled story');
     if (thread.status === 'offered') {
       const event = matches[0], resolutions = arcade ? ['attend', 'decline'] : ['complete', 'ask-help', 'leave-to-peer'];
       if (thread.ended || thread.resolution || thread.cancellationReason || thread.paidTransactionId || storyMonthNumber(world.date) !== thread.dueMonth || storyContextReason(world, thread, false, thread) ||

@@ -1,0 +1,57 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { encodeWorld, fullName } from '../../src/game/model';
+import { formatMoney } from '../../src/game/money';
+import { countries } from '../../src/game/countries';
+import { recordDeath } from '../../src/game/engine';
+import { decodeSave } from '../../src/persistence/archive';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import archive from '../fixtures/v23-school-plans-archive.json';
+let mockStore: ReturnType<typeof createGameStore>;
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import School from '../../app/(game)/school';
+const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /></ThemeProvider></SafeAreaProvider>;
+
+test('School shows a scheduled project and actual paid outing from a genuine cold SQLite save without changing people, RNG or money', async () => {
+  const world = decodeSave(JSON.stringify(archive)).world, { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  await repository.initialise(); await repository.import(JSON.stringify(archive));
+  mockStore = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
+  const before = encodeWorld(mockStore.getState().world!), view = render(frame()), [project, outing] = world.storyThreads;
+  expect(screen.getByRole('header', { name: 'School Plans' })).toBeOnTheScreen();
+  expect(screen.getByText('Shared class project · ' + fullName(world.people[project.peerId]))).toBeOnTheScreen();
+  expect(screen.getByText('Teacher: ' + fullName(world.people[project.teacherId!]))).toBeOnTheScreen();
+  expect(screen.getByText(project.city + ', United States · March 2008')).toBeOnTheScreen();
+  expect(screen.getByText('Scheduled')).toBeOnTheScreen(); expect(screen.getByText('Attended')).toBeOnTheScreen();
+  const amount = formatMoney({ minor: outing.quote.amount, currency: outing.quote.currency }, countries[outing.country].locale);
+  expect(screen.getByText('Paid by ' + fullName(world.people[outing.parentId!]) + ' · ' + amount)).toBeOnTheScreen();
+  view.rerender(frame()); expect(encodeWorld(mockStore.getState().world!)).toBe(before); expect(await repository.load(world.id)).toEqual(world);
+  view.unmount(); sqlite.close();
+});
+
+test('an offered outing shows its original permission and unpaid quote; a parental death shows cancellation without a replacement payer', async () => {
+  const save = decodeSave(JSON.stringify(archive));
+  const world = save.snapshots.map(record => unpackCheckpoint(record.payload)).find(item => item.pending?.kind === 'decision')!;
+  const outing = world.storyThreads[1], originalParent = fullName(world.people[outing.parentId!]), { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  await repository.initialise(); await repository.create(world);
+  const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+  await cold(); let view = render(frame()); const before = encodeWorld(mockStore.getState().world!);
+  expect(screen.getByText('Waiting for your decision')).toBeOnTheScreen();
+  expect(screen.getByText('Permission agreed by ' + originalParent)).toBeOnTheScreen();
+  expect(screen.getByText(/only if you attend\. Nothing paid yet/)).toBeOnTheScreen();
+  expect(encodeWorld(mockStore.getState().world!)).toBe(before); view.unmount();
+  recordDeath(world, outing.parentId!, 'test illness'); world.revision++;
+  await repository.commit(world, world.revision - 1, 'fixture_parent_death');
+  await cold(); const cancelled = encodeWorld(mockStore.getState().world!); view = render(frame());
+  expect(screen.getByText('Cancelled · The parent who agreed is no longer alive')).toBeOnTheScreen();
+  expect(screen.getByText('Permission agreed by ' + originalParent)).toBeOnTheScreen();
+  expect(screen.getByText('No outing charge.')).toBeOnTheScreen(); expect(screen.queryByText(/Paid by/)).toBeNull();
+  expect(mockStore.getState().world!.storyThreads[1].parentId).toBe(outing.parentId);
+  expect(mockStore.getState().world!.ledger.some(item => item.category === 'story-outing')).toBe(false);
+  expect(encodeWorld(mockStore.getState().world!)).toBe(cancelled); view.unmount(); sqlite.close();
+});

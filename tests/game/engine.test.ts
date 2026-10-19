@@ -2,6 +2,7 @@ import { createLife, randomCreation } from '../../src/game/createLife';
 import { IneligibleAction, resolveCommand } from '../../src/game/engine';
 import { ageOn, decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
 
 function born(seed = 42): World {
   return { ...createLife('life_engine', seed, randomCreation(seed), { year: 2024, month: 2, day: 29 }), birthAcknowledged: true };
@@ -9,7 +10,11 @@ function born(seed = 42): World {
 function finishPending(world: World): World {
   let guard = 0;
   while ((world.pending || world.annual) && guard++ < 100) {
-    if (world.pending?.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id });
+    if (world.pending?.kind === 'decision') {
+      const choice = world.pending.choices.find(item => !choiceUnavailable(world, item));
+      if (!choice) throw new Error('No available choice in ' + world.pending.templateId);
+      world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: choice.id });
+    }
     else if (world.pending) world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
     else world = resolveCommand(world, { type: 'resume' });
   }

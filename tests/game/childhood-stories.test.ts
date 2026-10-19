@@ -19,7 +19,7 @@ import { randomInteger } from '../../src/game/random';
 const scene = (id: string) => childhoodTemplates.find(item => item.id === id)!;
 const ageFor = (template: EventTemplate) => Math.max(template.min, template.school === 'secondary' ? 12 : template.school === 'primary' ? 6 : template.min);
 test('the distinct story catalogue has unique situations, bounded ages and explicit saved-person contexts', () => {
-  expect(childhoodTemplates).toHaveLength(28); expect(eventTemplates).toHaveLength(50);
+  expect(childhoodTemplates).toHaveLength(48); expect(eventTemplates).toHaveLength(70);
   for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(item => item[field])).size).toBe(eventTemplates.length);
   for (const template of childhoodTemplates) {
     expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices.length).toBeGreaterThanOrEqual(2); expect(template.choices.length).toBeLessThanOrEqual(4);
