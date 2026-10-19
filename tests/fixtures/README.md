@@ -34,6 +34,20 @@
 
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.
 
+`v23-low-grade-school-archive.json` was generated with the unmodified source at
+`55fee6b` (world 23 / engine 22 / content 3 / database 4), before school passing
+and recovery changes. Seed 16 starts a US life on 1 January 2000 through the real
+store, SQLite repository and Begin Life acknowledgement. Every Age Up, available
+choice and result commits normally. During actual school years, relaxed study
+and disruptive conduct are selected through commands. The old engine awards a
+secondary qualification in 2018 despite actual grades of **0%**. Revision 59
+retains 4,367 real ledger rows and eleven attended school-year reports. The
+archive selects the two genuine pre-Age-Up checkpoints at ages sixteen and
+seventeen; older snapshots are omitted from this test archive. No world version,
+grades, qualifications, RNG, outcome or participant was manually edited. New
+rules must preserve the already earned qualification in the current state while
+applying only to future actual school completion from the earlier moments.
+
 `v23-school-plans-archive.json` was generated before the content-three expansion
 using the unmodified world-23 / engine-22 / content-two application source from
 `1633359` (the later `a920655` checkpoint contains no application source changes).
