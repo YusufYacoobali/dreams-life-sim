@@ -72,6 +72,19 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 resumed journal
+
+Actual age-nine resume revealed a journal positioning error: the first
+content-size event stopped following before the virtualised rows were measured,
+leaving birth/ages zero to four visible. Coalesced viewport/content/row follow now
+reaches the final age-nine facts, including force-stop/cold Continue. Manual drag
+stops following, and tab freezing no longer resets older-history reading.
+The actual manual age-seven/eight history remains visible after Activities and
+return. All eight native SQLite tables stay exact. [Journal details](LIFE_JOURNAL.md)
+retain 13 affected checks / four suites, strict types, fresh Hermes exports,
+[source hashes](verification/life-journal-20261019.json) and
+[raw captures/comparison](verification/android24-journal-20261019/).
+
 ## Android 24 saved-life continuation
 
 The random Japanese life also completes its actual first year: rebuilding the

@@ -8,7 +8,9 @@ The user permits skipping further import/export/sharing unless already 80%+
 complete. Its implementation, 20 checks and native import already met that
 threshold; the remaining native folder-save check now passes. Further file
 breadth is deferred. Continue onboarding, early gameplay and responsiveness,
-starting with the observed resumed journal opening at birth rather than age nine.
+The observed resumed journal now reaches the actual latest age-nine facts;
+[its layout fix](LIFE_JOURNAL.md) retains virtualisation and manual history reading.
+Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
 The button-latency fix is pushed, with fixed-input cloud actions substantially

@@ -17,9 +17,13 @@ chooser, but this image has no receiving app. No external transfer is claimed.
 See [native records](verification/android24-files-20261019/). This is UI/file
 integration only; game/persistence remains the world-28 checkpoint below.
 
-Next: fix the observed age-nine Life journal opening at birth/age zero rather
-than the latest entries. Preserve manual history reading and list virtualisation.
-Then continue the opening/early-game/full production plan; no more file breadth.
+The observed age-nine Life journal now follows its real row/layout measurements
+to the latest facts, including actual cold resume. Manual dragging cancels follow;
+the chronological list remains virtualised. [Journal scope](LIFE_JOURNAL.md)
+records 13 affected checks / four suites in 6.479 seconds, strict types and fresh
+Hermes exports. Game/persistence and original snapshots remain unchanged.
+Continue native early-game interaction review, then the full production plan;
+no more file breadth.
 
 The Android 24 software device now runs the actual Expo Go opening: custom
 creation/appearance/country, newborn, Begin Life, first Age Up/choice/result and

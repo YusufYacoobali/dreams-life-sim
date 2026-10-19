@@ -1,0 +1,38 @@
+{
+  "scope": "Read-only copies of actual Android 24 SQLite before/after Life journal browsing and cold resume; no gameplay command, manual world edit or file import",
+  "allTablesExact": true,
+  "tables": {
+    "backups": {
+      "rows": 3,
+      "sha256": "12f7a49304529032074ccca4b161b0f4064d0463410826c5202aa979aa730f60"
+    },
+    "branches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lives": {
+      "rows": 3,
+      "sha256": "1e93dcb5002ec0169f9d5da33dc791c3748380c95ec23ae8377b6699f85658af"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "3a9b1ccc91b5e7dcb9b7a572dcb544740f83c96073c07df6c9b543d927c0e802"
+    },
+    "receipts": {
+      "rows": 9,
+      "sha256": "11cddd5bf089aa63ad8720987a695c06836c5fbf280ba66f36531e1edc77449e"
+    },
+    "restore_receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "snapshot_metadata": {
+      "rows": 11,
+      "sha256": "92d441730d5ca714cbdeb0c385241eb6a2a174f49d3fdd72067579efb008a0a9"
+    },
+    "snapshots": {
+      "rows": 11,
+      "sha256": "ce0b754d5a32c0026f48d18d639fd197422e10381c9b08c71f53269c06474d7c"
+    }
+  }
+}

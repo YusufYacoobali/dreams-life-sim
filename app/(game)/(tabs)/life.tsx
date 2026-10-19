@@ -5,7 +5,7 @@ import { serviceCareer,serviceQualified,serviceAway } from '../../../src/game/sy
 import { serviceCatalog } from '../../../src/game/content/services';
 import { fullTimeCreator } from '../../../src/game/systems/creatorSchemas';
 import { creatorCatalog } from '../../../src/game/content/creators';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -40,8 +40,25 @@ export default function Life() {
     for (const entry of entries) { const age = ageOn({ ...player, died: null }, entry.date); const facts = groups.get(age) ?? []; facts.push(entry); groups.set(age, facts); }
     return [...groups.entries()].map(([age, facts]) => ({ age, facts }));
   }, [entries, player.born]);
-  const journal = useRef<FlatList<typeof years[number]>>(null), shouldScroll = useRef(true), [menu, setMenu] = useState(false);
-  useEffect(() => { shouldScroll.current = true; }, [entries.length]);
+  const journal = useRef<FlatList<typeof years[number]>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
+  const cancelJournalScroll = useCallback(() => {
+    if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
+    scrollFrame.current = null;
+  }, []);
+  const followJournal = useCallback(() => {
+    if (!shouldScroll.current || scrollFrame.current !== null) return;
+    scrollFrame.current = requestAnimationFrame(() => {
+      scrollFrame.current = null;
+      if (shouldScroll.current) journal.current?.scrollToEnd({ animated: false });
+    });
+  }, []);
+  // A frozen tab reconnects layout effects when shown again. Keep this passive
+  // so returning to Life preserves the player's place in older entries.
+  useEffect(() => {
+    shouldScroll.current = true;
+    followJournal();
+    return cancelJournalScroll;
+  }, [world.id, player.id, entries.length, followJournal, cancelJournalScroll]);
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
       <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={52} />
@@ -62,8 +79,11 @@ export default function Life() {
     </View>
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
     <FlatList ref={journal} data={years} keyExtractor={item => String(item.age)} style={{ flex: 1, marginHorizontal: 16, borderRadius: 16, backgroundColor: c.surface }} contentContainerStyle={{ paddingBottom: 16 }} initialNumToRender={8}
-      onContentSizeChange={() => { if (shouldScroll.current) { journal.current?.scrollToEnd({ animated: false }); shouldScroll.current = false; } }}
-      renderItem={({ item }) => <View style={{ paddingHorizontal: 16, paddingTop: 18, gap: 7 }}><Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {item.age}</Text>{item.facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>}
+      // Keep following while virtualised rows acquire their real heights. The
+      // first content event can precede layout and cannot settle the position.
+      onLayout={followJournal} onContentSizeChange={followJournal}
+      onScrollBeginDrag={() => { shouldScroll.current = false; cancelJournalScroll(); }}
+      renderItem={({ item }) => <View onLayout={followJournal} style={{ paddingHorizontal: 16, paddingTop: 18, gap: 7 }}><Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {item.age}</Text>{item.facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>}
       ListEmptyComponent={<View style={{ padding: 16 }}><Body muted>Your journal is ready for your first year.</Body></View>}
       ListFooterComponent={ageOn(player, world.date) === 0 ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.'}</Body></View> : null}
     />

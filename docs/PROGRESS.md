@@ -23,7 +23,11 @@ reading world, nine exact moments and both existing native lives. Folder export
 writes the chosen inactive life exactly without changing any SQLite table.
 The native share chooser has no installed receiver; no external transfer is
 established. Game/persistence and complete-regression baselines stay unchanged.
-Next native issue: a resumed age-nine journal opens at the oldest entries.
+The next observed native issue is fixed: the age-nine journal follows actual
+viewport/content/row measurements to the latest facts on cold resume. Manual
+history dragging cancels follow, and the list remains virtualised. All 13 affected
+checks / four suites pass in 6.479 seconds, with strict types and fresh Hermes
+exports. See [journal scope](LIFE_JOURNAL.md); game/persistence is unchanged.
 
 Actual Android 24 Expo Go checks now run custom creation, saved appearance/
 country, newborn, Begin Life, first Age Up/choice/result and cold resume. All
