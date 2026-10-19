@@ -72,6 +72,25 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 larger text and creation keyboard
+
+At actual 130% system text, welcome actions, custom fields, sixteen appearance
+cells and scrollable continuation/start controls remain readable. The complete
+`AlexandriaCassandraMontgomery` input survives selecting Australia/Sydney and
+Avatar 7, then Continue back. Native bounds confirm 48dp targets for gender,
+appearance tabs and face controls.
+
+Opening Country with a focused name field had retained the keyboard's reduced
+modal height after IME dismissal. Explicit keyboard dismissal before location/
+start dialogs now restores the available height; country Choose/Cancel are
+reachable. New-life confirmation is cancelled using Android Back. Every SQLite
+table remains exact (active revision 51, three lives/twelve moments/fifteen
+receipts); no new life is created. The isolated test emulator's default text
+scale is restored. See [onboarding scope](ONBOARDING_ACCESS.md),
+[14-check/source/bundle record](verification/onboarding-keyboard-20261019.json)
+and [raw captures/values](verification/android24-onboarding-access-20261019/).
+This is one 130% software-device case, not complete accessibility/release acceptance.
+
 ## Android 24 year, school study and new journal facts
 
 The real Riley child year advances once despite consecutive Age Up taps, pauses

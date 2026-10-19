@@ -1,0 +1,59 @@
+{
+  "scope": "Actual unmodified Android 24 390x844 160dpi captures at system font_scale 1.3; Expo overlays retained; native interaction/130% case only, not complete accessibility or physical timing",
+  "originalSystemFontScaleSetting": "null (platform default)",
+  "restoredSystemFontScaleSetting": "1.0 (Android default after deleting test override)",
+  "captures": {
+    "appearance-continue.png": {
+      "bytes": 158148,
+      "sha256": "e13b7a25e90456ed599dbcbcab863992851d78ac4f3eed64b651cca3011d57bd"
+    },
+    "appearance-large.png": {
+      "bytes": 165020,
+      "sha256": "3e840341495e2daa24b608deccd518fdc44c8dd0617818c8385fd9ee8acd71c3"
+    },
+    "country-choose.png": {
+      "bytes": 40827,
+      "sha256": "cc1383593b083de678080d3411c67bf9c0ad15a4478a3bf26561f633fcb44cc1"
+    },
+    "country-modal-after.png": {
+      "bytes": 48918,
+      "sha256": "80f9610ba530bb887add1e2e544770edca275fd979a27047926d709bb41fde45"
+    },
+    "country-modal-before.png": {
+      "bytes": 55815,
+      "sha256": "4989604058dbaac66fe8bf6353954e29d10cd5549c715c953f062b5c5b114df8"
+    },
+    "creation-large.png": {
+      "bytes": 69999,
+      "sha256": "c0be576e5a947d519a7a6b26380266596d0204c363daecb987bd7609ab4d6b32"
+    },
+    "draft-return.png": {
+      "bytes": 57877,
+      "sha256": "88ebeac97f212c8598bae55c8833ff016fd20f769c7e9b11a8e0454c66d8ad9f"
+    },
+    "keyboard-name.png": {
+      "bytes": 73576,
+      "sha256": "588ff78f3064924d731e1116a900f424df6f95d903f09dbc6aa54d4f28e94c98"
+    },
+    "location-chosen.png": {
+      "bytes": 57839,
+      "sha256": "748421bd07ee84406f236d9faa5298e6518e577e7c8126ee7aac56c67d1b71a4"
+    },
+    "long-name.png": {
+      "bytes": 74169,
+      "sha256": "1a5d2d21ce86be9712b2cfc2dd77f1b475927906dfe9c155a779c4f0ac56a479"
+    },
+    "newlife-cancel.png": {
+      "bytes": 55491,
+      "sha256": "0ff718a835df6456f7ecd152095d175ca2ec2011dea499b8e8706259d08636b2"
+    },
+    "newlife-confirm.png": {
+      "bytes": 53379,
+      "sha256": "3c21ce8c52cc6eff35a76c396025752c94fdd3f4a76280bb8c3d4adc9955e5a8"
+    },
+    "welcome-large.png": {
+      "bytes": 358418,
+      "sha256": "e11aa5cadce470a740323c843321769b6f921a4513d7996aad6a86ef4e092c57"
+    }
+  }
+}

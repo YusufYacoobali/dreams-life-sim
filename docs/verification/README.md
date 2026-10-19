@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-onboarding-access-20261019/` retains actual 130% text/long-name/
+  keyboard country-picker before/after, appearance Continue and new-life cancel.
+  Native values preserve the complete draft and confirm eleven 48dp targets;
+  every SQLite table stays exact. The default test-emulator text scale is
+  restored. `onboarding-keyboard-20261019.json` records fourteen affected checks,
+  strict types and fresh Hermes hashes. Complete accessibility/release gates stay open.
+
 - `android24-childhood-20261019/` records actual double-Age-Up guarding,
   month-ten pet-loss interruption, remaining-year resume, age-ten summary,
   school study 82→89 and new journal facts. Entire current/backup and intermediate

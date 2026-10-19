@@ -1,0 +1,65 @@
+{
+  "recordedOn": "2026-10-19",
+  "baseCommit": "3c83006",
+  "scope": "Creation keyboard dismissal before location/start modals and 48dp creation/appearance touch targets; UI only, game and SQLite repository unchanged",
+  "source": {
+    "app/new-life.tsx": "76716580eaf0c189e58db7e797f2ed54f991581c53075542db81b718b174179f",
+    "app/appearance.tsx": "7a2ad78c21df17efe1bc6a8cbcbc3743dfc42bd96967d518e70d9df1c8813ebd"
+  },
+  "verification": {
+    "tests": 14,
+    "suites": 4,
+    "seconds": 3.511,
+    "strictApplicationAndTestTypes": true,
+    "nativeTextScale": 1.3,
+    "nativeLongName": "AlexandriaCassandraMontgomery",
+    "nativeAppearanceTouchBoundsAt160Dpi": [
+      {
+        "label": "Avatars",
+        "nativeBounds": "[16,132][102,180]"
+      },
+      {
+        "label": "Skin Tone",
+        "nativeBounds": "[107,132][193,180]"
+      },
+      {
+        "label": "Hair Style",
+        "nativeBounds": "[198,132][283,180]"
+      },
+      {
+        "label": "Hair Color",
+        "nativeBounds": "[288,132][374,180]"
+      },
+      {
+        "label": "Oval",
+        "nativeBounds": "[16,624][101,672]"
+      },
+      {
+        "label": "Round",
+        "nativeBounds": "[107,624][192,672]"
+      },
+      {
+        "label": "Long",
+        "nativeBounds": "[198,624][283,672]"
+      },
+      {
+        "label": "Broad",
+        "nativeBounds": "[289,624][374,672]"
+      }
+    ],
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-781d3bfc5390a348907d9a1efaf290d1.hbc",
+      "bytes": 5312617,
+      "sha256": "cd77d2ff2e61fd7c1862c958d487c52451bfbbdc74f320f16300c6bdb8ff1592"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-7d0c25ff043619090c4a3db3d66b8c21.hbc",
+      "bytes": 5007352,
+      "sha256": "5dccc227709384db130200b8fc7c9b73981ba2c9ee9388cdfcc3b9776b5f4e21"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

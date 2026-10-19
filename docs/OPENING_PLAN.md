@@ -23,6 +23,13 @@ and fresh Hermes exports. Exact native worlds, history and original inactive
 lives survive all six actual commands. [Native journal scope](LIFE_JOURNAL.md)
 retains the evidence; broader production baselines stay fixed.
 
+Actual Android 130% text/keyboard review now fixes the country picker's retained
+keyboard-height layout and gives small creation/appearance controls 48dp targets.
+Long-name/location/appearance drafts survive navigation; cancelling a new-life
+confirmation leaves every SQLite table exact. Fourteen affected checks/types/
+Hermes exports pass. [Scope and raw evidence](ONBOARDING_ACCESS.md) retain this
+specific accessibility case; complete acceptance/baselines remain open.
+
 The button-latency fix is pushed, with fixed-input cloud actions substantially
 faster and focused saving feedback. Actual Android 24 Expo Go now runs the
 custom first-year journey and exact interrupted-result cold resume; Random Life

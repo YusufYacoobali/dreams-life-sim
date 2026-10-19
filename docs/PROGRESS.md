@@ -12,6 +12,17 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Actual 130% Android text/keyboard review found Country retaining a reduced modal
+height after a focused name field. Explicit keyboard dismissal before location/
+start dialogs restores the available picker height. Small creation/appearance
+controls now have 48dp targets; native bounds independently confirm eleven.
+The complete long-name draft survives Australia/Sydney, Avatar 7 and Continue;
+new-life confirmation cancellation preserves every SQLite table. The isolated
+emulator's default text scale is restored. All **14 affected checks / four
+suites** pass in **3.511 seconds**, strict types and fresh Hermes exports pass.
+[Onboarding scope](ONBOARDING_ACCESS.md) retains actual captures/values. This
+130% case is partial native accessibility evidence; broader gates stay open.
+
 A further native year/study check exposed FlatList's estimated-end position
 stopping above new facts. Native ScrollView content-end scrolling now shows the
 actual age-ten birthday and study fact while preserving manual older-history

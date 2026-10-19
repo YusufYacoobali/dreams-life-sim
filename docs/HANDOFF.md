@@ -1,5 +1,21 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The latest native onboarding check fixes a real keyboard/dialog boundary:
+opening Country while a name field was focused retained the keyboard's reduced
+modal height after the keyboard disappeared. Explicit dismissal before location/
+start dialogs restores the available picker height without a timer or save.
+Creation avatar/gender and appearance tabs/face controls now meet 48dp targets.
+At actual Android 130% text, the complete long-name draft survives Australia/
+Sydney selection, Avatar 7 and Continue. Native bounds confirm eleven controls;
+new-life confirmation/Android Back cancellation leaves all eight SQLite tables
+exact (three lives/twelve moments/fifteen receipts, active revision 51). The test
+emulator's default text scale is restored. All **14 affected checks / four
+suites** pass in **3.511 seconds**, strict types and fresh Hermes exports pass.
+Read [ONBOARDING_ACCESS.md](ONBOARDING_ACCESS.md) and
+[raw evidence](verification/android24-onboarding-access-20261019/).
+Game/persistence and conservative complete-production baselines stay fixed.
+Continue opening/early-game/full production work; no further file breadth.
+
 The latest native year/study review corrects one remaining journal edge case:
 FlatList still estimated the tail when new age-ten facts arrived. Life now uses
 the native ScrollView content end, preserving virtualisation, manual older-history
