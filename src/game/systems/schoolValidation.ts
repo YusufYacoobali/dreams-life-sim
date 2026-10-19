@@ -1,0 +1,19 @@
+import type { World } from '../model';
+import { ageOn, compareDates } from '../model';
+import { rules } from '../rules';
+export function validateSchools(world: World) {
+  const ids = new Set<string>(), activePeople = new Set<string>(), month = world.date.year * 12 + world.date.month - 1;
+  for (const community of world.schoolCommunities) {
+    const person = world.people[community.personId], start = community.started.year * 12 + community.started.month - 1;
+    if (ids.has(community.id) || !person || compareDates(community.started, world.date) > 0 || ageOn({ ...person, died: null }, community.started) < rules[community.country].schoolStart || (community.ended === null) !== (community.endReason === null) || community.ended && (compareDates(community.ended, community.started) < 0 || compareDates(community.ended, world.date) > 0)) throw new Error('Invalid school community');
+    ids.add(community.id);
+    if (!community.ended) { if (activePeople.has(person.id) || person.died || person.education.stage !== community.stage || person.education.school !== community.school || person.country !== community.country || person.city !== community.city) throw new Error('Invalid active school community'); activePeople.add(person.id); }
+    if (new Set(community.classmateIds).size !== community.classmateIds.length || new Set(community.teacherIds).size !== community.teacherIds.length || !community.teacherIds.includes(community.currentTeacherId) || community.classmateIds.some(id => id === person.id || !world.people[id] || !world.relationships.some(item => item.roles.includes('classmate') && [item.from, item.to].includes(person.id) && [item.from, item.to].includes(id)))) throw new Error('Invalid school classmates');
+    for (const id of community.teacherIds) if (!world.people[id] || !world.people[id].education.qualifications.some(item => item.level === 'degree') || !world.workHistory.some(item => item.personId === id && item.roleId === 'teacher') || !world.relationships.some(item => item.roles.includes('teacher') && [item.from, item.to].includes(person.id) && [item.from, item.to].includes(id))) throw new Error('Invalid school teacher');
+    for (let index = 0; index < community.periods.length; index++) { const period = community.periods[index]; if (period.month < start || period.month > month || community.ended && period.month > community.ended.year * 12 + community.ended.month - 1 || index && period.month <= community.periods[index - 1].month || !community.teacherIds.includes(period.teacherId) || period.club === 'none' && period.skillGain !== 0) throw new Error('Invalid attended school period'); }
+    if (community.exams.length !== Math.floor(community.periods.length / 12)) throw new Error('School reports do not reconcile with attendance');
+    for (let index = 0; index < community.exams.length; index++) { const exam = community.exams[index], period = community.periods[(index + 1) * 12 - 1]; if (exam.term !== index + 1 || exam.month !== period.month || exam.grade !== period.grades) throw new Error('Invalid school-year report'); }
+    const terms = new Set<number>();
+    for (const help of community.help) { if (terms.has(help.term) || !community.teacherIds.includes(help.teacherId) || help.month < start || help.month > month || help.term !== Math.floor(community.periods.filter(period => period.month <= help.month).length / 12) || help.accepted !== (help.roll <= help.chance) || community.ended && help.month > community.ended.year * 12 + community.ended.month - 1 || help.gradeGain !== (help.accepted ? Math.min(3, 100 - help.gradeBefore) : 0)) throw new Error('Invalid academic help'); terms.add(help.term); }
+  }
+}

@@ -75,7 +75,7 @@ function birthday(date: GameDate, age: number, month: number, day: number): Game
   if (month > date.month || (month === date.month && day > date.day)) year--;
   return { year, month, day: Math.min(day, daysInMonth(year, month)) };
 }
-export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string }): Person {
+export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string; schoolStudent?: boolean }): Person {
   const player = world.people[world.activePersonId], code = options.country ?? player.country, country = countries[code], city = options.city ?? (code === player.country ? player.city : country.cities[0]);
   const gender = options.gender ?? genders[draw(world, 'npcs', 0, genders.length - 1)];
   const month = draw(world, 'npcs', 1, 12), day = draw(world, 'npcs', 1, 28);
@@ -95,9 +95,12 @@ export function createContact(world: World, options: { age: number; gender?: Per
   person.wantsChildren = draw(world, 'npcs', 1, 100) <= 80;
   person.attractedTo = options.compatibleWith ? [options.compatibleWith] : [...genders];
   world.people[id] = person;
-  const cash = options.age < rules[code].adultAge ? 0n : roundRatio(rules[code].baseWage * BigInt(draw(world, 'npcs', 2, 25)), 10n);
+  const cash = options.schoolStudent || options.age < rules[code].adultAge ? 0n : roundRatio(rules[code].baseWage * BigInt(draw(world, 'npcs', 2, 25)), 10n);
   world.accounts.push({ id: 'account_' + id, ownerId: id, currency: country.currency, cash, openingCash: cash, lockedCash: 0n });
-  if (options.age >= rules[code].adultAge) {
+  if (options.schoolStudent) {
+    if (options.age < rules[code].schoolStart || options.age >= rules[code].schoolEnd) throw new Error('School contact age is outside compulsory education');
+    person.education.stage = options.age < rules[code].secondaryStart ? 'primary' : 'secondary'; person.education.school = person.city + (person.education.stage === 'primary' ? ' Primary School' : ' Secondary School');
+  } else if (options.age >= rules[code].adultAge) {
     person.householdId = 'household_' + id;
     world.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [id], homeAssetId: null });
     backgroundOccupation(world, person, options.qualifiedRole);

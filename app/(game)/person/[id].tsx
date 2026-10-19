@@ -14,6 +14,8 @@ import { rules } from '../../../src/game/rules';
 import { jobs } from '../../../src/game/content/jobs';
 import { isConfined } from '../../../src/game/systems/legalSchemas';
 import { FamilyCommand } from '../../../src/game/systems/family';
+import { currentSchool } from '../../../src/game/systems/schoolSchemas';
+import { schoolHelpReason } from '../../../src/game/systems/school';
 
 export default function PersonProfile() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -24,6 +26,7 @@ export default function PersonProfile() {
   const [confirmation, setConfirmation] = useState<{ command: SocialCommand | FamilyCommand; event: EventPresentation } | null>(null), [childName, setChildName] = useState('');
   const player = world.people[world.activePersonId], relation = person && relationFor(world, player.id, person.id), age = ageOn(player, world.date);
   const money = (minor: bigint) => formatMoney({ minor, currency: accountFor(world).currency });
+  const school = currentSchool(world);
   const custody = world.custody.find(item => item.childId === id && !item.ended && (item.a === player.id || item.b === player.id));
   const confirm = (command: SocialCommand | FamilyCommand, title: string, body: string, confirmLabel: string) => setConfirmation({ command, event: { id: command.type + ':' + id, kind: 'confirmation', title, body, terms: [], confirmLabel } });
   const used = (action: string) => busy ? 'Saving' : socialActionUsed(world, id, action) ? 'Already tried this year' : undefined;
@@ -40,6 +43,7 @@ export default function PersonProfile() {
     </Card> : <Body>This person could not be found.</Body>}
     {(error || message) && <Body>{message ?? error}</Body>}
     {person && !person.died && relation && <>
+      {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" disabledReason={busy ? 'Saving' : schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
       {relation.roles.includes('parent') && relation.from === player.id && ageOn(person, world.date) < rules[person.country].adultAge && <Card><Heading size={18}>Care & identity</Heading><Body>Lives in {person.city}{person.householdId === player.householdId ? ' with you' : ' in another household'}.</Body>{person.householdId === player.householdId && <><TextInput accessibilityLabel="Child first name" value={childName} onChangeText={setChildName} maxLength={40} placeholder={person.firstName} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10 }} /><Button label="Save Child’s Name" disabled={busy || !childName.trim()} onPress={() => void dispatch({ type: 'name-child', childId: id, firstName: childName })} /></>}{custody && <><Body>{custody.arrangement === 'shared' ? 'Shared care' : 'Primary care'} · Primary home with {world.people[custody.primaryId].firstName}</Body>{(['shared', 'me', 'them'] as const).map(preference => <ActionRow key={preference} title={preference === 'shared' ? 'Request Shared Care' : preference === 'me' ? 'Request Primary Care' : 'Request Other Parent’s Care'} disabledReason={custody.lastReviewYear === world.date.year ? 'Reviewed this year' : undefined} onPress={() => confirm({ type: 'review-custody', childId: id, preference }, 'Review custody?', 'The arrangement considers the child’s needs, both parents’ ability to care and your preference.', 'Review Custody')} />)}</>}</Card>}
       <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time', 'argue', 'apologise'] as const).map(action => <ActionRow key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together', argue: 'Argue', apologise: 'Apologise' }[action]} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={age < 3 ? 'Available from age three' : action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used(action)} onPress={() => action === 'argue' ? confirm({ type: 'interact', action, personId: id }, 'Start an argument?', 'This can damage trust and leave an unresolved disagreement.', 'Argue') : void dispatch({ type: 'interact', action, personId: id })} />)}
         <ActionRow title="Give Money" icon={<FamilyArt id="gift" size={40} />} disabledReason={age < 8 ? 'Available from age eight' : used('gift')} onPress={() => setPanel(panel === 'gift' ? null : 'gift')} />

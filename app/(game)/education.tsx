@@ -29,6 +29,7 @@ export default function Education() {
       {education.stage !== 'none' && <><Body>{education.field || education.stage} · {education.paused ? 'Paused — tuition required' : education.effort + ' routine'}</Body><StatBar label="Grades" value={education.grades} color={c.blue} />{education.requiredMonths > 0 && <Body muted>{education.months} of {education.requiredMonths} study months completed</Body>}</>}
       {education.qualifications.length === 0 ? <Body muted>No completed qualifications yet.</Body> : education.qualifications.map((q, index) => <Body key={index}>{q.level[0].toUpperCase() + q.level.slice(1)} · {q.field} · {q.year}</Body>)}
     </Card>
+    {['primary', 'secondary'].includes(education.stage) && <Card><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
     {error && <Body>{error}</Body>}
     {education.stage !== 'none' && <Card>
       {education.paused ? <Button label="Fund Next Year" onPress={() => setDialog({ kind: 'resume' })} /> : <><ActionRow title="Study harder" subtitle="Extra study once this year" disabledReason={education.lastStudyYear === world.date.year ? 'You already did extra study this year' : undefined} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} onPress={() => setDialog({ kind: 'effort' })} /></>}

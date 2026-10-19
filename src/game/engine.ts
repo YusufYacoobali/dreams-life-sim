@@ -36,9 +36,10 @@ import { RoyaltyCommand,royaltyCommandSchema,resolveRoyalty,royaltyMonth,royalDe
 import { serviceAway } from './systems/serviceSchemas';
 import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resolveService } from './systems/services';
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
+import { refreshSchools, resolveSchool, SchoolCommand, schoolCommandSchema, schoolMonth } from './systems/school';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -55,6 +56,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
   refreshTrips(world);
+  refreshSchools(world);
   person.health.hospitalizedUntil = null;
   legalDeath(world, person);
   socialDeath(world, person);
@@ -83,6 +85,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 function processMonth(world: World) {
   healthMonth(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
+  schoolMonth(world);
   householdMonth(world);
   const actors = financialActors(world);
   const openingCash = new Map<string, bigint>();
@@ -251,6 +254,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const school = schoolCommandSchema.safeParse(command);
     const education = educationCommandSchema.safeParse(command);
     const work = workCommandSchema.safeParse(command);
     const finance = financeCommandSchema.safeParse(command);
@@ -271,7 +275,8 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const royalty=royaltyCommandSchema.safeParse(command);
     const travel=travelCommandSchema.safeParse(command);
     const relocation=relocationCommandSchema.safeParse(command);
-    if (education.success) resolveEducation(world, education.data);
+    if (school.success) resolveSchool(world, school.data);
+    else if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
     else if (assets.success) resolveAssets(world, assets.data);
@@ -295,6 +300,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   }
   refreshRoyalSuccession(world,'background');
   refreshTrips(world);
+  refreshSchools(world);
   world.revision++;
   return validateWorld(world);
 }

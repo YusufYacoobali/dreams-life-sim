@@ -16,7 +16,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Life screen and early childhood | 55% baseline | Reference layout, first-year guidance, meaningful early content, native interactions |
 | Core simulation and Age Up | 80% | Broad system integration, long-life balance and performance |
 | Saves/recovery/export/import | 80% | Native picker/share, large archives and release acceptance |
-| Education and ordinary work | 70% | School contacts, scholarships, deeper school/remediation paths and native acceptance |
+| Education and ordinary work | 70% | Persistent school contacts implemented; scholarships, deeper school/remediation paths and native acceptance remain |
 | Relationships/family/inheritance | 75% | Broader autonomous-life depth, integrated scenarios and device acceptance |
 | Assets and finances | 80% | Balance, broad integration and native acceptance |
 | Health and crime/legal | 70% | Rule-source verification, balance, integrated scenarios and native acceptance |
@@ -57,7 +57,8 @@ are completed; a hotfix or generated illustration alone does not advance them.
    custom creation, random creation, first Age Up and resume. Official SDK and
    a software Android emulator are being configured; no native pass is claimed
    until the app runs. iOS native acceptance still requires macOS/device access.
-6. **Resume the broader backlog.** Pets/hobbies, education/contact depth,
+6. **Deepen childhood first.** Match the school page in [birth.png](../design/birth.png), connect persistent classmates/teachers, actual attended club practice, behaviour and reports, then expand distinct childhood stories. Continue this independent work while the Android download host remains unavailable.
+7. **Resume the broader backlog.** Pets/hobbies, remaining education depth,
    extras, at least 250 reviewed stories, remaining art and complete release
    gates remain part of the original goal.
 
@@ -77,3 +78,31 @@ unrun checks with a percentage.
 - The SDK build caught an indirect `expo-font` 58 dependency in the Expo 57 project. It is now an explicit SDK-aligned `~57.0.4` dependency. Unused `expo-blur` was removed; the app's existing modal backdrop uses no BlurView and does not claim a blur implementation.
 - Official Android tools, Java toolchains and a software Android 15 emulator were installed. The emulator boots. The real debug app build remains blocked at the required React Native 0.86.3 AAR download: Maven redirects to `repo.reactnative.dev`, and the active network proxy returns HTTP 403. Both debug and release artifact requests are blocked. The exact domain was added to the saved environment configuration draft; the configuration tool reports that Review/Save/Publish is required before the policy applies. No actual-app Android or iOS visual pass is claimed.
 - The complete **697-test / 49-suite** regression, strict application/test typing, offline SDK-version alignment and fresh Android/iOS Hermes bundles (5.0/4.7 MB, 45 assets) pass. Current Android/iOS Metro manifests/source bundles also return HTTP200 with the new opening code. Baseline percentage estimates remain conservative until native review is possible.
+
+## School foundation
+
+The reference school page now has connected Study Harder, Classmates, Teachers,
+Extracurricular Activities and Behave in Class actions. A class and its qualified
+teacher are generated once during actual school attendance, with persistent
+portraits, relationships, real households and paid teacher/parent jobs. Opening
+a screen, searching, importing or loading never generates contacts or progress.
+
+One free school club practices during attended months and builds its actual
+career skill. Classroom behaviour affects teacher trust and the report after
+twelve attended months; the report uses the whole period’s behaviour, so changing
+plans at the last minute cannot erase a disruptive year. Academic help saves its
+chance, draw and actual bounded grade effect, once per attended school year.
+Trips, hospitalisation and custody pause this school routine. Leaving school,
+moving and death preserve the old class/report history. Existing public-school
+completion rules are unchanged; failure/remediation and scholarships remain open.
+
+World 21 / engine 20 adds empty school history to older saves. The genuine world-20
+foreign-employment archive and its approved-move checkpoint retain people,
+relocations, native earnings, saved FX, accounts, ledger and all random streams.
+The full **717-test / 51-suite** regression passes, including twelve complete
+seeded lives, all twelve school profiles, preserved contacts, monthly practice and
+weighted reports, saved help outcomes and real SQLite failure/retry/cold-load
+flows. Strict application/test typing, offline SDK metadata alignment, fresh
+Android/iOS Hermes bundles (5.0/4.7 MB, 45 assets), and current Metro source
+bundles for both platforms pass. No new native visual pass or
+completion-percentage increase is claimed.

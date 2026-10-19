@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { dateSchema } from '../calendar';
 export const genders = ['male', 'female', 'nonbinary'] as const;
-export const relationKinds = ['parent', 'sibling', 'guardian', 'friend', 'acquaintance', 'partner', 'spouse', 'coworker', 'classmate'] as const;
+export const relationKinds = ['parent', 'sibling', 'guardian', 'friend', 'acquaintance', 'partner', 'spouse', 'coworker', 'classmate', 'teacher'] as const;
 export const relationshipSchema = z.object({
   id: z.string(), from: z.string(), to: z.string(), kind: z.enum(relationKinds), roles: z.array(z.enum(relationKinds)).min(1),
   romance: z.enum(['none', 'dating', 'engaged', 'married', 'ex', 'widowed']), since: dateSchema,

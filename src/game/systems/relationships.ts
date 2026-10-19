@@ -54,7 +54,7 @@ export function relationLabel(world: World, relation: Relationship, personId = w
   return relation.kind[0].toUpperCase() + relation.kind.slice(1);
 }
 function syncKind(relation: Relationship) {
-  if (relation.roles.includes('parent')) relation.kind = 'parent'; else if (relation.roles.includes('guardian')) relation.kind = 'guardian'; else if (relation.roles.includes('sibling')) relation.kind = 'sibling'; else if (relation.romance === 'married') relation.kind = 'spouse'; else if (activeRomance(relation)) relation.kind = 'partner'; else relation.kind = relation.roles.includes('friend') ? 'friend' : relation.roles.includes('coworker') ? 'coworker' : relation.roles.includes('classmate') ? 'classmate' : 'acquaintance';
+  if (relation.roles.includes('parent')) relation.kind = 'parent'; else if (relation.roles.includes('guardian')) relation.kind = 'guardian'; else if (relation.roles.includes('sibling')) relation.kind = 'sibling'; else if (relation.romance === 'married') relation.kind = 'spouse'; else if (activeRomance(relation)) relation.kind = 'partner'; else relation.kind = relation.roles.includes('friend') ? 'friend' : relation.roles.includes('coworker') ? 'coworker' : relation.roles.includes('classmate') ? 'classmate' : relation.roles.includes('teacher') ? 'teacher' : 'acquaintance';
 }
 export function connectPerson(world: World, id: string, fromId = world.activePersonId): RuntimeEffectRow[] {
   const person = world.people[id]; const player = world.people[fromId];
