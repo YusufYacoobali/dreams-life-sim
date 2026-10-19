@@ -10,7 +10,9 @@ threshold; the remaining native folder-save check now passes. Further file
 breadth is deferred. Continue onboarding, early gameplay and responsiveness,
 The observed resumed journal now reaches the actual latest age-nine facts;
 [its layout fix](LIFE_JOURNAL.md) retains virtualisation and manual history reading.
-Continue native early-game interaction review.
+Hobby selection also opens its chosen detail route visibly at the top rather
+than appending controls below the catalogue; native/header Back and unchanged
+SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
 The button-latency fix is pushed, with fixed-input cloud actions substantially

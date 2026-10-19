@@ -6,6 +6,33 @@ pursuits to eight, alongside four paid local outings. The distinct situation cat
 This is a partial implementation of the wider reference catalogue, not complete
 hobby/entertainment or production acceptance.
 
+## Selecting a hobby
+
+Actual Android review found that selecting Reading left the catalogue unchanged
+on screen: the chosen controls were appended below all eight rows and Work Out.
+The catalogue now opens a dedicated `/hobby/[kind]` detail route at the top.
+It shows the actual proficiency, attended months, original payer/fee, current
+practice eligibility, routine review and retained history. Native/system Back
+returns to the catalogue; the Activities tab stays selected. An unknown route
+shows an unavailable message without a simulation command. Existing routines
+initially select their actual community/lesson mode.
+
+All **14 affected checks / five suites** pass in **10.365 seconds**, including
+the original real-SQLite child consent/payment/monthly/practice and outing/pet
+journeys with write-failure retry and cold resume. Added browsing assertions
+verify concrete route IDs, visible detail controls, Back and invalid input with
+no world change. Strict application/test types and both Hermes exports pass.
+Game/persistence source, all versions, eight kinds and catalogue count stay
+unchanged. [Source/bundle record](verification/hobby-navigation-20261019.json)
+keeps the exact verification scope; no new full regression total is inferred.
+
+Actual Android Reading and Video Games detail captures show correct separate
+proficiency, current payer/fees and practice/limit reasons. Canceling Stop Routine,
+Android Back and header Back return correctly. Every SQLite table stays exact:
+three lives, eleven original moments and nine receipts. See
+[raw captures/comparison](verification/android24-hobbies-20261019/). These establish
+scoped interaction, not physical-device timing or complete reference acceptance.
+
 ## Personal practice
 
 Guitar, painting, chess, reading, video games and gardening begin at six under

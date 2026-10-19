@@ -10,10 +10,12 @@ import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
 import archive from '../fixtures/v27-responsive-archive.json';
 
-let mockStore: ReturnType<typeof createGameStore>;
-jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() } }));
+let mockStore: ReturnType<typeof createGameStore>, mockHobbyKind = 'reading';
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => ({ kind: mockHobbyKind }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import { router } from 'expo-router';
 import Hobbies from '../../app/(game)/hobbies';
+import Hobby from '../../app/(game)/hobby/[kind]';
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = (children: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
@@ -35,7 +37,19 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   };
   await finish(); const beforeBrowse = encodeWorld(world()), originalGuitarMonths = structuredClone(world().hobbies[0].practices);
   view.rerender(frame(<Hobbies />));
-  for (const name of ['Video Games', 'Cooking', 'Gardening', 'Reading']) await press(new RegExp('^' + name + '\\.'));
+  for (const [kind, name] of [['gaming', 'Video Games'], ['cooking', 'Cooking'], ['gardening', 'Gardening'], ['reading', 'Reading']]) {
+    await press(new RegExp('^' + name + '\\.'));
+    expect(router.push).toHaveBeenLastCalledWith({ pathname: '/hobby/[kind]', params: { kind } });
+    mockHobbyKind = kind; view.rerender(frame(<Hobby />));
+    expect(screen.getByText('Choose a Routine')).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: /^Guitar\./ })).toBeNull();
+    expect(encodeWorld(world())).toBe(beforeBrowse);
+    await press('Back'); expect(router.back).toHaveBeenCalled(); view.rerender(frame(<Hobbies />));
+  }
+  mockHobbyKind = 'unknown'; view.rerender(frame(<Hobby />));
+  expect(screen.getByText('This hobby is unavailable.')).toBeOnTheScreen();
+  expect(screen.queryByRole('button', { name: 'Review Hobby Routine' })).toBeNull();
+  view.rerender(frame(<Hobbies />)); await press(/^Reading\./); mockHobbyKind = 'reading'; view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(beforeBrowse);
   const accounts = structuredClone(world().accounts), assets = structuredClone(world().assets);
   await press('Review Hobby Routine'); expect(screen.getByText('Responsible payer')).toBeOnTheScreen();
@@ -45,7 +59,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   sqlite.exec('DROP TRIGGER fail_reading_plan'); await press('Ask For This Routine');
   expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, roll: 47, chance: 87 } }] });
   expect(world().accounts).toEqual(accounts); expect(world().assets).toEqual(assets);
-  const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobbies />));
+  const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(planned); await press('Continue');
   view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), predicted = resolveCommand(world(), { type: 'advance' }, true);
   sqlite.exec("CREATE TRIGGER fail_reading_months BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -60,7 +74,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   expect(reading().practices.flatMap(row => row.effects).filter(effect => effect.stat === 'smarts').reduce((sum, effect) => sum + effect.after - effect.before, 0)).toBe(2);
   expect(world().hobbies[0].practices.slice(0, originalGuitarMonths.length)).toEqual(originalGuitarMonths);
   expect(world().pets[0].periods).toHaveLength(36);
-  view.rerender(frame(<Hobbies />)); await press(/^Reading\./);
+  view.rerender(frame(<Hobbies />)); await press(/^Reading\./); view.rerender(frame(<Hobby />));
   const beforePractice = encodeWorld(world()), money = structuredClone(world().accounts), ledger = structuredClone(world().ledger), smarts = world().people[world().activePersonId].stats.smarts;
   sqlite.exec("CREATE TRIGGER fail_reading_extra BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Extra Practice'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforePractice);
@@ -68,8 +82,8 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   expect(reading().practices.at(-1)).toMatchObject({ source: 'manual', gain: 1, paid: 0n, paymentId: null });
   expect(world().accounts).toEqual(money); expect(world().ledger).toEqual(ledger); expect(world().people[world().activePersonId].stats.smarts).toBe(smarts);
   expect(world().pending).toMatchObject({ kind: 'result', effects: [{ id: 'proficiency', value: '+1%', tone: 'positive' }, expect.anything(), expect.anything(), expect.anything()] });
-  const practiced = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobbies />));
-  expect(encodeWorld(world())).toBe(practiced); await press('Continue'); await press(/^Reading\./);
+  const practiced = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
+  expect(encodeWorld(world())).toBe(practiced); await press('Continue');
   expect(screen.getByRole('button', { name: 'Extra Practice' })).toBeDisabled();
   expect(reading().practices.filter(row => row.source === 'manual')).toHaveLength(1);
   view.unmount(); sqlite.close();

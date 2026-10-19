@@ -72,6 +72,19 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 hobby selection
+
+Selecting a hobby originally appended its controls below the full catalogue,
+leaving the visible screen unchanged. Dedicated detail routes now show Reading's
+25% proficiency, twelve months, actual Ruby payer/$11.60 fee and used-practice
+reason immediately at the top. Video Games shows its own zero progress and the
+existing two-routine limit. Stop Routine opens the real confirmation; cancellation,
+Android Back and header Back work without changing any SQLite table. Activities
+stays selected. [Leisure details](LEISURE.md) and
+[actual captures/comparison](verification/android24-hobbies-20261019/) retain
+fourteen affected checks, strict types, fresh Hermes hashes and unchanged game
+source. Broader native/release gates remain open.
+
 ## Android 24 resumed journal
 
 Actual age-nine resume revealed a journal positioning error: the first

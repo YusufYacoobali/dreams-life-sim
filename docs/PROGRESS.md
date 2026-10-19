@@ -29,6 +29,14 @@ history dragging cancels follow, and the list remains virtualised. All 13 affect
 checks / four suites pass in 6.479 seconds, with strict types and fresh Hermes
 exports. See [journal scope](LIFE_JOURNAL.md); game/persistence is unchanged.
 
+Native hobby selection no longer appends its controls out of sight below the
+catalogue. A dedicated detail route immediately shows the chosen hobby's actual
+state; native/header Back returns to the catalogue with Activities selected.
+Reading, Video Games and stop-confirmation cancellation preserve every native
+SQLite table. All 14 affected checks / five suites pass in 10.365 seconds with
+strict types and fresh Hermes exports. [Leisure scope](LEISURE.md) retains the
+real-SQLite retry/cold journeys and unchanged game/versions/catalogue.
+
 Actual Android 24 Expo Go checks now run custom creation, saved appearance/
 country, newborn, Begin Life, first Age Up/choice/result and cold resume. All
 eight SQLite tables remain exact across an interrupted-result cold startup.

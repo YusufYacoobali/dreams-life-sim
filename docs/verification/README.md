@@ -4,6 +4,12 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-hobbies-20261019/` retains actual selected-details-hidden before,
+  dedicated Reading/Video Games after, stop-confirmation cancellation and native/
+  header Back captures. All SQLite tables stay exact. `hobby-navigation-20261019.json`
+  identifies fourteen affected checks, strict types and fresh Hermes hashes.
+  Game/persistence/versions remain unchanged; no physical timing claim.
+
 - `android24-journal-20261019/` records the actual age-nine before/latest/cold
   resume and manual older-history/tab-return captures. Every SQLite table stays
   exact. `life-journal-20261019.json` identifies the layout-only source, 13 affected

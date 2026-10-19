@@ -1,0 +1,33 @@
+{
+  "scope": "Unmodified actual Android 24 390x844 captures; native software emulator, not physical timing or complete reference acceptance",
+  "captures": {
+    "android-back.png": {
+      "bytes": 73534,
+      "sha256": "f8ebafd1850a0323144210c2bedf2f7c85a6f258b1de26b9e46f00e4b9b3d4d0"
+    },
+    "detail-below-catalogue-before.png": {
+      "bytes": 77766,
+      "sha256": "52483b9385634b96a841dbede17409870ac35ce26a5b839b2dc27dd727e152cb"
+    },
+    "gaming-after.png": {
+      "bytes": 56638,
+      "sha256": "fb3affafe61ba5429c516e792a37bdb65b5683e1b49566e323647ed620186848"
+    },
+    "header-back.png": {
+      "bytes": 73316,
+      "sha256": "7ccc67d48d5e25d3d64864dcade2b6e7115b9a9b966990a5140be816fdcc32d7"
+    },
+    "reading-after.png": {
+      "bytes": 65209,
+      "sha256": "97c9057e77389649cef71115e714c3e63ee9b078733664337b4868337b1bd2d8"
+    },
+    "selection-before.png": {
+      "bytes": 73693,
+      "sha256": "b706d6d9cc7313738e6e14fbf6c1ca9b04cecf17a0db81ae8d99c013b002e9d7"
+    },
+    "stop-preview.png": {
+      "bytes": 58218,
+      "sha256": "be94b69ab98e53084f4b90b7ecd9ed4735573ed7c66397f0e849fe8e505e2f54"
+    }
+  }
+}

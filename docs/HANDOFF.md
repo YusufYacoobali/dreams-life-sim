@@ -22,6 +22,14 @@ to the latest facts, including actual cold resume. Manual dragging cancels follo
 the chronological list remains virtualised. [Journal scope](LIFE_JOURNAL.md)
 records 13 affected checks / four suites in 6.479 seconds, strict types and fresh
 Hermes exports. Game/persistence and original snapshots remain unchanged.
+Native hobby selection is also corrected: details previously appeared below the
+eight-row catalogue, making the press look ineffective. Dedicated detail routes
+now open at the top with actual proficiency/payer/fee/eligibility; native/header
+Back returns to the catalogue and Activities stays selected. Actual Reading,
+Video Games and stop-confirmation cancellation leave all eight SQLite tables
+exact. All 14 affected checks / five suites pass in 10.365 seconds, strict types
+and fresh Hermes exports pass. [Leisure details](LEISURE.md) and
+[native evidence](verification/android24-hobbies-20261019/) retain the scope.
 Continue native early-game interaction review, then the full production plan;
 no more file breadth.
 
