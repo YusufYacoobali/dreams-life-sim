@@ -1,3 +1,4 @@
+import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, Stats, World } from '../model';
 import { genders } from './familySchemas';
@@ -64,6 +65,7 @@ export function connectPerson(world: World, id: string, fromId = world.activePer
   return [{ id: 'contact', label: 'New acquaintance', value: fullName(person), tone: 'positive' }];
 }
 export function romanceReason(world: World, target: Person): string | undefined {
+  if(serviceAway(world)||serviceAway(world,target.id))return 'Arrange in-person time after both people return from their assignments';
   if (isConfined(world) || isConfined(world, target)) return 'Romantic outings are unavailable in custody';
   const player = active(world);
   if (target.died) return 'This person has died';
@@ -108,6 +110,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     result(world, 'Preferences updated', 'Your choices are saved for future dating and family decisions.', 'hearts'); return;
   }
   if (command.type === 'move-out') {
+    if(serviceAway(world))throw new IneligibleAction('Return from your assignment before moving home');
     if (age < rules[player.country].adultAge) throw new IneligibleAction('Independent housing is available to adults');
     const household = world.households.find(item => item.id === player.householdId);
     if (household?.members.filter(id => !world.people[id].died).length === 1) throw new IneligibleAction('You already live independently');
@@ -117,6 +120,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   const relation = target ? relationFor(world, player.id, target.id) : undefined;
   if (!target || target.died || !relation) throw new IneligibleAction('Choose a living person you know');
   if (command.type === 'ask-to-move-in') {
+    if(serviceAway(world)||serviceAway(world,target.id))throw new IneligibleAction('Return from your assignment before moving home');
     if (isConfined(world, target)) throw new IneligibleAction('They are currently in custody');
     if (age < 18 || target.country !== player.country || !relation.roles.some(role => role === 'parent' || role === 'guardian')) throw new IneligibleAction('Choose a living parent or guardian in your country');
     if (!target.householdId || target.householdId === player.householdId) throw new IneligibleAction('You already share this household');
@@ -127,6 +131,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     fact(world, 'I moved in with ' + target.firstName + '.', 'family'); result(world, 'You moved in', 'You share this household’s costs. Your own property, if any, remains yours.', 'property'); return;
   }
   if (command.type === 'interact') {
+    if(command.action==='spend-time'&&(serviceAway(world)||serviceAway(world,target.id)))throw new IneligibleAction('In-person time is unavailable during an assignment');
     if (command.action === 'spend-time' && (isConfined(world, player) || isConfined(world, target)) && (player.country !== target.country || player.city !== target.city || isConfined(world, player) && isConfined(world, target))) throw new IneligibleAction('A visit requires an available person in the same city');
     if (age < 3) throw new IneligibleAction('Personal interactions unlock from age three');
     if (command.action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:'))) throw new IneligibleAction('There is no unresolved argument to apologise for');

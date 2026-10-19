@@ -29,10 +29,12 @@ import { businessMonth } from './systems/businessMonth';
 import { careerCommandSchema, CareerCommand, careerDeath, careerMonth, careerTrainingMonth, resolveCareer } from './systems/careers';
 import { musicCommandSchema, MusicCommand, musicDeath, musicMonth, resolveMusic } from './systems/music';
 import { politicsCommandSchema, PoliticsCommand, politicsDeath, politicsMonth, resolvePolitics } from './systems/politics';
+import { serviceAway } from './systems/serviceSchemas';
+import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resolveService } from './systems/services';
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -54,6 +56,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   recordFamilyDeath(world, personId);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
+  serviceDeath(world,personId);
   if (person.employment) endEmployment(world, personId);
   careerDeath(world,personId);
   musicDeath(world,personId);
@@ -84,6 +87,7 @@ function processMonth(world: World) {
   careerMonth(world);
   musicMonth(world);
   politicsMonth(world);
+  const serviceFatalities=serviceMonth(world);
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
@@ -93,6 +97,7 @@ function processMonth(world: World) {
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   legalMonth(world);
+  for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const age = ageOn(person, world.date);
@@ -207,6 +212,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
+  if(serviceAway(world)&&['meet-people','move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','vaccinate','exercise','fertility-care','cosmetic-care','public-action'].includes(command.type))throw new IneligibleAction('Return from your assignment before this in-person activity');
   const custody = custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
@@ -251,6 +257,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const music = musicCommandSchema.safeParse(command);
     const politics = politicsCommandSchema.safeParse(command);
     const creator=creatorCommandSchema.safeParse(command);
+    const service=serviceCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -267,6 +274,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (music.success) resolveMusic(world,music.data);
     else if (politics.success) resolvePolitics(world,politics.data);
     else if(creator.success)resolveCreator(world,creator.data);
+    else if(service.success)resolveService(world,service.data);
     else throw new IneligibleAction('This action is not available');
   }
   world.revision++;

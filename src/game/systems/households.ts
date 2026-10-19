@@ -51,6 +51,7 @@ export function financialActors(world: World): Person[] {
   for (const asset of world.assets) if (asset.ownerId) ids.add(asset.ownerId);
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
   for (const company of world.businesses.filter(item => item.status === 'active')) { if (company.ownerId) ids.add(company.ownerId); for (const member of company.staff.filter(item => !item.ended)) ids.add(member.personId); }
+  for(const career of world.serviceCareers.filter(item=>item.status==='active')){ids.add(career.personId);for(const id of career.contacts)ids.add(id);}
   for(const studio of world.creatorStudios.filter(item=>item.status==='active')){ids.add(studio.personId);for(const member of studio.crew.filter(item=>!item.ended))ids.add(member.personId);}
   for (const payable of world.businessPayables) if (payable.creditorId && payable.principal > 0n) ids.add(payable.creditorId);
   for (const career of world.careers.filter(item=>item.status==='active')) {ids.add(career.personId);for(const id of career.contacts)ids.add(id);}

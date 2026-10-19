@@ -1,3 +1,4 @@
+import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, Person, World } from '../model';
 import { ConditionId, conditions } from '../content/health';
@@ -87,7 +88,7 @@ function startTreatment(world: World, person: Person, condition: Condition, prov
   payMedical(world, person, provider, cost, emergency ? 'Emergency care' : 'Treatment', emergency);
   const roll = draw(world, stream, 1, 100), outcome = roll <= (method === 'specialist' ? 70 : 85) ? 'effective' as const : roll <= 95 ? 'limited' as const : 'side-effect' as const;
   condition.treatment = { method, started: { ...world.date }, months: 0, outcome, paid: cost, currency: countries[person.country].currency, lastPaymentMonth: absolute(world) };
-  if (emergency) { person.health.hospitalizedUntil = absolute(world) + 2; person.stats.health = bounded(person.stats.health + (outcome === 'effective' ? 12 : outcome === 'limited' ? 4 : -3)); condition.severity = bounded(condition.severity - (outcome === 'effective' ? 15 : 3)); }
+  if (emergency) { const assignment=serviceAway(world,person.id);if(assignment){assignment.status='returned';assignment.ended={...world.date};fact(world,'I returned from my assignment for hospital care.','career','',person.id);} person.health.hospitalizedUntil = absolute(world) + 2; person.stats.health = bounded(person.stats.health + (outcome === 'effective' ? 12 : outcome === 'limited' ? 4 : -3)); condition.severity = bounded(condition.severity - (outcome === 'effective' ? 15 : 3)); }
   record(world, person, emergency ? 'hospital' : 'treatment', (emergency ? 'Hospital care and ' : '') + method + ' programme started for ' + conditions[condition.type].name + '.', cost, provider.id, condition.id);
   fact(world, 'I began ' + method + ' care for ' + conditions[condition.type].name + '.', 'health', '', person.id);
 }

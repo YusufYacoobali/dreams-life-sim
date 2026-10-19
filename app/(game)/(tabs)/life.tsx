@@ -1,3 +1,5 @@
+import { serviceCareer,serviceQualified,serviceAway } from '../../../src/game/systems/serviceSchemas';
+import { serviceCatalog } from '../../../src/game/content/services';
 import { fullTimeCreator } from '../../../src/game/systems/creatorSchemas';
 import { creatorCatalog } from '../../../src/game/content/creators';
 import React from 'react';
@@ -21,7 +23,7 @@ export default function Life() {
   const error = useGame(s => s.error);
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
-  const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
+  const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = world.journal.filter(entry => entry.personId === player.id);
   const years = new Map<number, typeof entries>();
   for (const entry of entries) {
@@ -31,7 +33,7 @@ export default function Life() {
   return <Page>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingVertical: 12 }}>
       <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} />
-      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{occupation} · Age {ageOn(player, world.date)} · {player.country}</Body></View>
+      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading>{serviceAway(world)&&<Body muted>Away: {serviceAway(world)!.location}</Body>}<Body muted>{occupation} · Age {ageOn(player, world.date)} · {player.country}</Body></View>
       <View style={{ alignItems: 'flex-end' }}><Heading size={17}>{formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Heading><Body muted>Bank Balance</Body></View>
     </Pressable>
     <View>

@@ -1,3 +1,4 @@
+import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName, Person, World } from '../model';
 import { monthFrom } from '../calendar';
@@ -31,6 +32,7 @@ function yearLimit(world: World, action: string) {
 }
 export function conceptionReason(world: World, first: Person, second?: Person): string | undefined {
   if (!second || first.died || second.died) return 'A living partner is required';
+  if(serviceAway(world,first.id)||serviceAway(world,second.id))return 'Wait until both partners return from their assignments';
   if (isConfined(world, first) || isConfined(world, second)) return 'Both partners need to be outside custody';
   if (hospitalized(world, first) || hospitalized(world, second)) return 'Recover from the hospital stay before trying for a child';
   if (ageOn(first, world.date) < rules[first.country].adultAge || ageOn(second, world.date) < rules[second.country].adultAge) return 'Both parents must be adults';
@@ -68,7 +70,7 @@ export function addChild(world: World, parents: Person[], type: 'biological' | '
     linkParent(world, parent, child, type);
     if (!parent.died) { parent.stats.happiness = bounded(parent.stats.happiness + 8); parent.stats.stress = bounded(parent.stats.stress + 4); fact(world, type === 'biological' ? 'My child, ' + fullName(child) + ', was born.' : 'I adopted ' + fullName(child) + ' at age ' + age + '.', 'family', '', parent.id); }
   }
-  const guardian = parents.find(parent => !parent.died && !isConfined(world, parent)) ?? parents.find(parent => !parent.died);
+  const guardian = parents.find(parent => !parent.died && !isConfined(world, parent) && !serviceAway(world,parent.id)) ?? parents.find(parent => !parent.died);
   if (guardian) { if (!guardian.householdId) ownHousehold(world, guardian); moveHousehold(world, [child.id], guardian.householdId!); child.country = guardian.country; child.city = guardian.city; }
   if (parents.length === 2 && parents.every(parent => !parent.died) && parents[0].householdId !== parents[1].householdId && parents.some(parent => !isConfined(world, parent))) setCustody(world, child, parents[0], parents[1], 'shared');
   for (const parent of parents) if (isConfined(world, parent)) placeDependentChildren(world, parent.id);
@@ -106,11 +108,11 @@ export function oweFamily(world: World, payerId: string, receiverId: string, amo
   }
 }
 function setCustody(world: World, child: Person, a: Person, b: Person, preference: 'shared' | 'me' | 'them') {
-  const fitness = (person: Person) => person.died || isConfined(world, person) ? -1 : person.stats.health + person.stats.discipline + (relationFor(world, person.id, child.id)?.strength ?? 0);
+  const fitness = (person: Person) => person.died || isConfined(world, person) || serviceAway(world,person.id) ? -1 : person.stats.health + person.stats.discipline + (relationFor(world, person.id, child.id)?.strength ?? 0);
   const requested = preference === 'them' ? b : a, alternative = requested.id === a.id ? b : a;
   const primary = requested.stats.health >= 25 && fitness(requested) >= 100 ? requested : fitness(alternative) > fitness(requested) ? alternative : requested;
   if (fitness(primary) < 0) throw new IneligibleAction('An available caregiver is required');
-  const arrangement = preference === 'shared' && !a.died && !b.died && !isConfined(world, a) && !isConfined(world, b) && a.country === b.country && a.city === b.city ? 'shared' as const : 'sole' as const;
+  const arrangement = preference === 'shared' && !a.died && !b.died && !isConfined(world, a) && !isConfined(world, b) && !serviceAway(world,a.id) && !serviceAway(world,b.id) && a.country === b.country && a.city === b.city ? 'shared' as const : 'sole' as const;
   for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) record.ended = { ...world.date };
   world.custody.push({ id: 'custody_' + child.id + '_' + world.revision, childId: child.id, a: a.id, b: b.id, primaryId: primary.id, arrangement, started: { ...world.date }, ended: null, lastReviewYear: world.date.year });
   if (!primary.householdId) ownHousehold(world, primary); moveHousehold(world, [child.id], primary.householdId!); child.country = primary.country; child.city = primary.city;
@@ -134,6 +136,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     result(world, 'A baby on the way', carrier.firstName + ' is pregnant. The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '. Time, care and health will matter in the coming months.', 'carriage'); return;
   }
   if (command.type === 'adopt') {
+    if(serviceAway(world)||partner&&serviceAway(world,partner.id))throw new IneligibleAction('Return from your assignment before adoption placement');
     if (hospitalized(world, player) || partner && hospitalized(world, partner)) throw new IneligibleAction('Recover from hospital before applying for adoption');
     if (age < 21 || age > 65 || player.stats.health < 40 || !player.wantsChildren || !player.householdId || (!player.employment && player.finance.pensionAnnual <= 0n)) throw new IneligibleAction('Adoption requires age 21–65, stable health, a household, income and a wish to parent');
     if (partner && (!partner.wantsChildren || partner.stats.health < 40)) throw new IneligibleAction('Your partner is not ready for adoption');
@@ -169,16 +172,16 @@ export function careAfterDeath(world: World, personId: string) {
 /** Unavailable parents keep their identities and pregnancy; only actual dependent care moves. */
 export function placeDependentChildren(world: World, personId: string) {
   const dependents = world.relationships.filter(item => item.from === personId && item.roles.some(role => role === 'parent' || role === 'guardian')).map(item => world.people[item.to]);
-  for (const child of dependents.filter(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) < rules[person.country].adultAge)) {
-    const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === child.id).map(item => world.people[item.from]).filter(person => !person.died && !isConfined(world, person));
+  for (const child of dependents.filter(person => !person.died && !isConfined(world, person) && !serviceAway(world,person.id) && ageOn(person, world.date) < rules[person.country].adultAge)) {
+    const parents = world.relationships.filter(item => item.roles.includes('parent') && item.to === child.id).map(item => world.people[item.from]).filter(person => !person.died && !isConfined(world, person) && !serviceAway(world,person.id));
     const current = world.households.find(item => item.id === child.householdId);
-    const adult = current?.members.map(id => world.people[id]).find(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) >= rules[child.country].adultAge);
+    const adult = current?.members.map(id => world.people[id]).find(person => !person.died && !isConfined(world, person) && !serviceAway(world,person.id) && ageOn(person, world.date) >= rules[child.country].adultAge);
     if (adult && world.relationships.some(item => item.from === adult.id && item.to === child.id && item.roles.some(role => role === 'parent' || role === 'guardian'))) {
       for (const record of world.custody.filter(item => item.childId === child.id && !item.ended)) { if ([record.a, record.b].includes(adult.id)) { record.primaryId = adult.id; if (isConfined(world, record.a) || isConfined(world, record.b)) record.arrangement = 'sole'; } else record.ended = { ...world.date }; }
       continue;
     }
     let guardian = parents[0] ?? adult;
-    if (!guardian) { const relatives = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId).map(item => world.people[item.from]); guardian = relatives.find(person => !person.died && !isConfined(world, person) && ageOn(person, world.date) >= 18)!; }
+    if (!guardian) { const relatives = world.relationships.filter(item => item.roles.includes('parent') && item.to === personId).map(item => world.people[item.from]); guardian = relatives.find(person => !person.died && !isConfined(world, person) && !serviceAway(world,person.id) && ageOn(person, world.date) >= 18)!; }
     if (!guardian) guardian = createContact(world, { age: draw(world, 'npcs', 28, 55), country: child.country, city: child.city });
     if (!parents.some(parent => parent.id === guardian!.id)) linkParent(world, guardian, child, 'guardian');
     if (!guardian.householdId) ownHousehold(world, guardian); moveHousehold(world, [child.id], guardian.householdId!); child.country = guardian.country; child.city = guardian.city;

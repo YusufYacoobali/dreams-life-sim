@@ -111,7 +111,7 @@ test('distributions use actual earned profit and enter taxable/support income; f
 });
 test('hospital leave pays half actual company wages and supplies no customer capacity for that person', () => {
   const input = fixture(); endEmployment(input); let world = start(input, 'cafe', 'owner'); const owner = world.people[world.activePersonId], annualPay = owner.employment!.annualPay; owner.health.hospitalizedUntil = world.date.year * 12 + world.date.month + 1;
-  world = month(world); expect(world.businesses[0].months[0].customers).toBe(0); expect(world.businesses[0].months[0].payroll).toBe(roundRatio(monthlyAmount(annualPay, 0), 2n)); expect(world.people[world.activePersonId].employment!.paidMonths).toBe(1); validateWorld(world);
+  world = month(world); expect(world.businesses[0].months[0].customers).toBe(0); expect(world.businesses[0].months[0].payroll).toBe(monthlyAmount(roundRatio(annualPay, 2n), 0)); expect(world.people[world.activePersonId].employment!.paidMonths).toBe(1); validateWorld(world);
 });
 test('a remanded owner earns no company wages; remote funding remains possible while operating is blocked', () => {
   const input = fixture(); endEmployment(input); const initial = start(input, 'cafe', 'owner'); let arrested: World | undefined;
@@ -156,7 +156,7 @@ test.each([17, 93])('seed %i runs connected company years with deterministic rel
   expect(world.businesses[0].monthsOperated).toBeGreaterThan(0); expect(world.businessLedger.some(item => item.category === 'payroll')).toBe(true); validateWorld(world);
 });
 test('the genuine v10 creator archive migrates without resetting accrued support, offers, posts, history or RNG', () => {
-  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(15); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
+  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(16); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
   expect(world.people[world.activePersonId].finance.supportIncomeDue).toBe(119n); expect(world.socialAccounts[0].totalPosts).toBe(8); expect(world.socialAccounts[0].followers).toBe(5346); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('brand-offer'); expect(archive.snapshots).toHaveLength(1);
-  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(15); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(16); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });

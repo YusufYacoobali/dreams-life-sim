@@ -1,3 +1,4 @@
+import { serviceContractEnded } from './serviceSchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, Person, World } from '../model';
@@ -23,7 +24,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
   const person = world.people[personId];
   const history = world.workHistory.find(record => record.id === person.employment?.id);
   if (history) history.ended = { ...world.date };
-  if (person.employment) careerContractEnded(world,person.employment.id);
+  if (person.employment) {careerContractEnded(world,person.employment.id);serviceContractEnded(world,person.employment.id);}
   if (person.employment?.companyId) {
     const company = world.businesses.find(item => item.id === person.employment!.companyId);
     if (company) { for (const member of company.staff.filter(item => item.employmentId === person.employment!.id && !item.ended)) member.ended = { ...world.date }; if (company.ownerId === personId) company.ownerOperated = false; }
@@ -98,7 +99,7 @@ export function employmentMonth(world: World, person = active(world), fundWages?
   const role = jobs.find(candidate => candidate.id === employment.roleId);
   if (!role) throw new Error('Unknown employment role');
   const factor = hospitalized(world, person) ? 5000n : 10000n;
-  const due = roundRatio(monthlyAmount(employment.annualPay, employment.paidMonths) * factor, 10000n), wages = fundWages ? fundWages(due, employment.id) : due;
+  const due = monthlyAmount(roundRatio(employment.annualPay * factor, 10000n), employment.paidMonths), wages = fundWages ? fundWages(due, employment.id) : due;
   if (wages < 0n || wages > due) throw new Error('Invalid payroll funding');
   const withheld = wages === due ? monthlyAmount(incomeTax(roundRatio(employment.annualPay * factor, 10000n), rule), employment.paidMonths) : roundRatio(incomeTax(wages * 12n, rule), 12n);
   employment.paidMonths++; person.finance.serviceMonths++;

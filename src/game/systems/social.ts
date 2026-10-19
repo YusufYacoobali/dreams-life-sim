@@ -1,3 +1,4 @@
+import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, World } from '../model';
 import { platforms, PlatformId, platformContent, postContent, postKinds, PostKind, sponsorBrands } from '../content/social';
@@ -73,6 +74,7 @@ export function topicReason(world: World, kind: PostKind, person = active(world)
 }
 export function postReason(world: World, account: Account, kind: PostKind, intent = account.intent): string | undefined {
   const person = world.people[account.ownerId];
+  if(serviceAway(world,person.id))return 'Original production pauses while you are away on an assignment';
   if (account.status !== 'active') return account.status === 'suspended' ? 'Your profile is temporarily suspended' : 'Reopen this profile first';
   if (world.controversies.some(item => item.personId === person.id && !item.resolved)) return 'Respond to the current public dispute first';
   if (isConfined(world, person)) return 'Outside posting is unavailable in custody';
