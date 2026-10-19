@@ -1,0 +1,35 @@
+{
+  "scope": "Actual Android 24 current-teacher academic help and acknowledgement; entire native current/backup compared with the production commands; no edited world/outcome",
+  "startingRevision": 51,
+  "resultRevision": 52,
+  "finalRevision": 53,
+  "currentAndBackupExact": true,
+  "teacher": "Harper Walker",
+  "help": {
+    "month": 24441,
+    "term": 5,
+    "teacherId": "person_npc_12_3",
+    "chance": 81,
+    "roll": 22,
+    "accepted": true,
+    "gradeBefore": 89,
+    "gradeGain": 3
+  },
+  "finalGrades": 92,
+  "secondHelpBlocked": true,
+  "moneyLedgerHobbiesPetsAndTripsUnchanged": true,
+  "originalRowsPreserved": {
+    "backups": 2,
+    "branches": 0,
+    "lives": 2,
+    "preferences": 1,
+    "receipts": 15,
+    "restore_receipts": 0,
+    "snapshot_metadata": 12,
+    "snapshots": 12
+  },
+  "totalLives": 3,
+  "totalMoments": 12,
+  "totalReceipts": 17,
+  "worldSha256": "4b6958e4c994755f2c24518bbd9b9531ae6fdb50549e5a6bf9f1e0eafd95c708"
+}

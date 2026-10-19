@@ -1,0 +1,31 @@
+{
+  "recordedOn": "2026-10-19",
+  "baseCommit": "95fcc27",
+  "scope": "School contact route/tab context only: explicit Activities hint and active global query in the shared foreground tab bar; no game/persistence changes",
+  "source": {
+    "app/(game)/school-contacts.tsx": "52ca9594de1c9e101c4c5797a1f0b34f5663fdd609fd9de9bc71487beb0617cb",
+    "app/(game)/_layout.tsx": "5f7c90c58465a0493035c75ac37db7df28625cec5516d55e797a2da76279b5fd",
+    "tests/ui/school-flow.test.tsx": "ff2b2bed0ea6d0c5e998ce710388d7d7786f68847f522d74de9eb1de22cb328f"
+  },
+  "verification": {
+    "tests": 14,
+    "suites": 4,
+    "seconds": 3.484,
+    "strictApplicationAndTestTypes": true,
+    "connectedJourneys": "Existing real-SQLite school clubs, conduct, contact search, academic-help failure/retry/cold load, relationship and onboarding flows",
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-a88cc89e0560eebcc15287ca591961a7.hbc",
+      "bytes": 5312669,
+      "sha256": "12f78e2549e57562d0eb670b9ebcb64549b2569882b9376faf9b8901b77af4fd"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-da645b7860d367d0dc88efb6712126ae.hbc",
+      "bytes": 5007411,
+      "sha256": "a4ef8b902577ec4d6ba4c8c977771dcdda5376e8d3f4cfe44ee3b61173517aa7"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

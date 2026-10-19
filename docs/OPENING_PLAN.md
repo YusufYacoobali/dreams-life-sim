@@ -155,6 +155,18 @@ unrun checks with a percentage.
 - Official Android tools, Java toolchains and a software Android 15 emulator were installed. The emulator boots. The real debug app build remains blocked at the required React Native 0.86.3 AAR download: Maven redirects to `repo.reactnative.dev`, and the active network proxy returns HTTP 403. Both debug and release artifact requests are blocked. The exact domain was added to the saved environment configuration draft; the configuration tool reports that Review/Save/Publish is required before the policy applies. No actual-app Android or iOS visual pass is claimed.
 - The complete **697-test / 49-suite** regression, strict application/test typing, offline SDK-version alignment and fresh Android/iOS Hermes bundles (5.0/4.7 MB, 45 assets) pass. Current Android/iOS Metro manifests/source bundles also return HTTP200 with the new opening code. Baseline percentage estimates remain conservative until native review is possible.
 
+## Native school source context
+
+School contact profiles now stay under Activities, while ordinary relationship
+profiles stay under Relationships. The tab bar reads the active route's context;
+Android Back retains the actual filtered classmate search. Fourteen affected
+checks, strict types and both Hermes exports pass. Actual teacher help records
+one accepted 89→92 grade change and its once-per-year limit, with exact whole
+current/backup and original history preservation. See
+[native scope/evidence](NATIVE_OPENING.md) and
+[source/check record](verification/school-context-20261019.json). These remain
+scoped native interactions, with broader production acceptance still open.
+
 ## School foundation
 
 The reference school page now has connected Study Harder, Classmates, Teachers,

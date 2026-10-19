@@ -12,6 +12,20 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+School classmate/teacher profiles now retain the Activities tab. Explicit source
+context reaches the shared tab bar through the active global route query; normal
+Relationships/parent profiles retain Relationships. Native Back preserves the
+`Ruby` filter and its one matching classmate. All **14 affected checks / four
+suites** pass in **3.484 seconds**, strict types and fresh Hermes exports pass.
+Browsing leaves every native SQLite table exact. The actual teacher's existing
+academic-help action improves grades 89→92 with its saved chance/roll, then
+blocks another attempt that school year. Entire current/backup match production
+commands; money, hobbies, pets, moments and inactive lives stay intact. Latest
+native state is revision 53, three lives/twelve moments/seventeen receipts.
+[Source/checks](verification/school-context-20261019.json) and
+[actual evidence](verification/android24-school-context-20261019/) preserve scope;
+game/persistence/full-regression/production baselines remain unchanged.
+
 Actual 130% Android text/keyboard review found Country retaining a reduced modal
 height after a focused name field. Explicit keyboard dismissal before location/
 start dialogs restores the available picker height. Small creation/appearance

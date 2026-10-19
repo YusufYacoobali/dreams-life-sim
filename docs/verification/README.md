@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-school-context-20261019/` preserves actual classmate/teacher
+  Activities context, ordinary Relationships/parent context and filtered Back
+  search. Browsing leaves all tables exact. Real teacher help records chance 81 /
+  roll 22, grades 89→92 once, exact current/backup and unchanged money/history/
+  inactive lives. `school-context-20261019.json` records fourteen affected checks,
+  strict types and fresh Hermes hashes; game/persistence remains unchanged.
+
 - `android24-onboarding-access-20261019/` retains actual 130% text/long-name/
   keyboard country-picker before/after, appearance Continue and new-life cancel.
   Native values preserve the complete draft and confirm eleven 48dp targets;

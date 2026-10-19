@@ -1,5 +1,24 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The latest school navigation fix keeps classmate/teacher profiles under
+Activities. The shared foreground tab bar now follows the active route's query
+instead of the layout's own local query, and school links explicitly retain their
+Activities origin. Native Ruby Singh and Harper Walker profiles stay in Activities;
+ordinary Relationships/parent Ruby Kelly profiles stay in Relationships. On final
+source, Android Back preserves the `Ruby` search and its one actual matching row.
+All **14 affected checks / four suites** pass in **3.484 seconds**, strict types
+and fresh Hermes exports pass. Game/persistence remains unchanged.
+
+Native browsing leaves all eight tables exact. The actual teacher-help action
+then improves grades 89→92 (recorded chance 81, roll 22), accepts once, and blocks
+a repeat that school year. Current/backup match the production command and
+acknowledgement exactly; money/ledger/hobbies/pets/trips, all twelve moments and
+both inactive lives remain intact. Latest native state: revision **53**, three
+lives/twelve moments/seventeen receipts. Subsequent navigation again leaves all
+eight tables exact. See [record](verification/school-context-20261019.json) and
+[actual captures/comparisons](verification/android24-school-context-20261019/).
+Continue onboarding/early-game/full production work; further file breadth is deferred.
+
 The latest native onboarding check fixes a real keyboard/dialog boundary:
 opening Country while a name field was focused retained the keyboard's reduced
 modal height after the keyboard disappeared. Explicit dismissal before location/

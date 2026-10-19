@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, router, Stack, useLocalSearchParams, usePathname } from 'expo-router';
+import { Redirect, router, Stack, useGlobalSearchParams, usePathname } from 'expo-router';
 import { View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
@@ -13,7 +13,7 @@ export const unstable_settings = { initialRouteName: '(tabs)' };
 export default function GameLayout() {
   const world = useGame(s => s.world);
   const path = usePathname();
-  const params = useLocalSearchParams<{ tab?: string }>();
+  const params = useGlobalSearchParams<{ tab?: string }>();
   const c = useColors();
   if (!world) return <Redirect href="/" />;
   if (!world.birthAcknowledged) return <Redirect href="/birth" />;

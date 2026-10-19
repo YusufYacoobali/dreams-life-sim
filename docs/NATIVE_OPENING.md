@@ -72,6 +72,28 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 school contacts and profile context
+
+School contact links previously opened the correct actual person while
+unexpectedly selecting Relationships. School links now retain Activities, and
+the shared tab bar reads the focused route's query rather than the layout's local
+query. Actual Ruby Singh (classmate) and Harper Walker (current teacher) profiles
+stay in Activities. Normal Relationships and parent Ruby Kelly profiles retain
+Relationships. Final-source hardware Back preserves the `Ruby` search and its
+single Ruby Singh row. All eight SQLite tables remain exact while browsing.
+
+The actual teacher's existing academic-help action improves grades 89→92:
+chance 81, saved roll 22, accepted once in school term five. The repeat action is
+then disabled with its actual reason. The entire native current/backup match the
+production command/acknowledgement; accounts, ledger, hobbies, pets, trips,
+all twelve original moments and both inactive lives stay exact. Final revision
+is 53 with seventeen receipts. Later navigation again leaves all eight tables
+unchanged. All fourteen affected checks / four suites pass in 3.484 seconds,
+strict types and fresh Hermes exports pass. See
+[source/bundle record](verification/school-context-20261019.json) and
+[raw captures/native comparisons](verification/android24-school-context-20261019/).
+Game/persistence/versions and complete-production gates stay unchanged.
+
 ## Android 24 larger text and creation keyboard
 
 At actual 130% system text, welcome actions, custom fields, sixteen appearance
