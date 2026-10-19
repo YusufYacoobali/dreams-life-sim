@@ -1,6 +1,6 @@
-import { EventTemplate, storyOption as o } from '../../../src/game/content/eventTypes';
+import { EventTemplate, storyOption as o } from './eventTypes';
 
-// Authored draft: not imported by the game and not counted in the catalogue.
+/** Original early-life situations. Named adults and classmates are saved people. */
 export const earlyHomeTemplates: readonly EventTemplate[] = [
   {
     id: 'first-bubble-catch', min: 1, max: 2, illustration: 'birthday', title: 'A very brief possession',
@@ -152,7 +152,7 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     choices: [
       o('accept', 'Finish under the original rules', { discipline: 3, respect: 2 }, 'A respectable defeat', '{parent} wins this round. You immediately request another.', 'I finished a board game fairly even though I was losing.', 3),
       o('next', 'Suggest your rule for the next game', { smarts: 2, happiness: 2 }, 'Future legislation', '{parent} agrees to try it after this round. The new version is rather silly.', 'I invented a new board-game rule for the next round.', 4),
-      o('insist', 'Insist it has always been the rule', { respect: -3, stress: 2 }, 'The rulebook has entered the chat', '{parent} opens the instructions. Your amendment is difficult to locate.', 'I tried to change a board-game rule while losing.', -3),
+      o('insist', 'Insist it has always been the rule', { respect: -3, stress: 2 }, 'Two pages of bad news', '{parent} opens the instructions. Your amendment is difficult to locate.', 'I tried to change a board-game rule while losing.', -3),
     ],
   },
   {

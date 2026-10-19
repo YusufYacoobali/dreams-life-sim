@@ -24,7 +24,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% | Paused, unintegrated work; persistent gameplay and native surfaces still pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% baseline | 70 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
+| Distinct situational stories | 20% baseline | 90 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 
@@ -73,11 +73,13 @@ unrun checks with a percentage.
 
 ## Current implementation and verification
 
+- Content four adds twenty early-life situations (90 total) and actual household availability for physical parent scenes, with explicit remote contact. All-country branch checks, actual parent travel/remand, genuine old/current scholarship histories and the real SQLite Begin Life→bubble choice→failed write/retry→cold decision/result flow pass. Strict typing passes; full current regression and fresh Hermes exports are running. Earlier complete expanded results apply to content three. [Scope](EARLY_HOME_STORIES.md). Native and baseline estimates remain unchanged.
+
 - Local display settings now save Light/Dark/device mode independently of lives, and shared pages own their status-bar contrast. All 107 UI/state/persistence checks, final opening checks, strict typing, fresh Hermes exports and current Metro source pass. Android/iOS automatic appearance configuration is introspected with SDK-aligned `expo-system-ui`. This follows the complete 983-test game checkpoint without changing simulation source. [Scope and native limits](DISPLAY_SETTINGS.md). Baseline estimates remain unchanged.
 
 - Optional family background/preferences now sit under More Options, with the selected royal background visible while closed. All fourteen relevant component checks pass, including country eligibility and the actual royal save/retry/cold flow; strict typing, fresh Hermes exports and current Metro source pass. This follows the complete 983-test scholarship regression without changing game source. Native comparison and baseline estimates remain unchanged.
 
-- World 25 adds two restricted tuition scholarships with real saved applications, separate admission, explicit acceptance, billed remainders and grade/resource renewal. Forty-four domain checks, a real SQLite application/enrolment/renewal rollback-retry/cold journey, strict typing, both Hermes exports and current Metro source pass. The complete 983-test / 64-suite regression passes in 743.271 seconds; the separate pure-engine sweep passes 120/120 lives across twelve countries in 1,994.655 seconds with unchanged source hash. This does not replace native or broader release acceptance. The world-24 measurements below remain historical. [Scope and remaining education gates](SCHOLARSHIPS.md). Twenty more early-life situations remain unintegrated drafts and do not increase the 70-story count. Baseline estimates are unchanged.
+- World 25 adds two restricted tuition scholarships with real saved applications, separate admission, explicit acceptance, billed remainders and grade/resource renewal. Forty-four domain checks, a real SQLite application/enrolment/renewal rollback-retry/cold journey, strict typing, both Hermes exports and current Metro source pass. The complete 983-test / 64-suite regression passes in 743.271 seconds; the separate pure-engine sweep passes 120/120 lives across twelve countries in 1,994.655 seconds with unchanged source hash. This does not replace native or broader release acceptance. The world-24 measurements below remain historical. [Scope and remaining education gates](SCHOLARSHIPS.md). The later content-four milestone above integrates those twenty drafts; the scholarship checkpoint had 70 stories. Baseline estimates are unchanged.
 
 - Creation, appearance and newborn pages reserve the bottom safe area. Strict typing, eleven relevant component checks and fresh Android/iOS Hermes exports pass. The lighter Android 29 software attempt reproduced a System UI ANR before the game launched; no native opening pass is claimed. [Actual capture and scoped evidence](NATIVE_OPENING.md). Baseline estimates remain unchanged.
 

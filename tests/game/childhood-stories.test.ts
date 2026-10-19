@@ -20,7 +20,7 @@ import { monthFrom } from '../../src/game/calendar';
 const scene = (id: string) => childhoodTemplates.find(item => item.id === id)!;
 const ageFor = (template: EventTemplate) => Math.max(template.min, template.school === 'secondary' ? 12 : template.school === 'primary' ? 6 : template.min);
 test('the distinct story catalogue has unique situations, bounded ages and explicit saved-person contexts', () => {
-  expect(childhoodTemplates).toHaveLength(48); expect(eventTemplates).toHaveLength(70);
+  expect(childhoodTemplates).toHaveLength(68); expect(eventTemplates).toHaveLength(90);
   for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(item => item[field])).size).toBe(eventTemplates.length);
   for (const template of childhoodTemplates) {
     expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices.length).toBeGreaterThanOrEqual(2); expect(template.choices.length).toBeLessThanOrEqual(4);
@@ -103,10 +103,10 @@ test('the first year guarantees a real choice without inventing a parent after b
   let world = pupil('US', 0); const playerId = world.activePersonId;
   const parents = world.relationships.filter(item => item.to === playerId && item.roles.includes('parent')).map(item => item.from);
   for (const id of parents) recordDeath(world, id, 'test fixture');
-  const familyIds = Object.keys(world.people); expect(eligibleTemplates({ ...world, date: { ...world.date, year: 2001 } }).filter(item => item.min === 1 && !item.parent)).toHaveLength(3);
+  const familyIds = Object.keys(world.people); expect(eligibleTemplates({ ...world, date: { ...world.date, year: 2001 } }).filter(item => item.min === 1 && !item.parent)).toHaveLength(5);
   world = resolveCommand(world, { type: 'advance' });
   expect(world.pending?.kind).toBe('decision');
   if (world.pending?.kind !== 'decision') throw new Error('Missing first-year choice');
-  expect(['first-echo', 'first-sock-escape', 'first-mirror-guest']).toContain(world.pending.templateId); expect(world.pending.personIds).toEqual([playerId]); expect(Object.keys(world.people)).toEqual(familyIds);
-  expect(world.pending.body).not.toMatch(/parent|dad|mum|mom|mother|father/i); expect(decodeWorld(encodeWorld(world)).pending).toEqual(world.pending); validateWorld(world);
+  expect(['first-echo', 'first-sock-escape', 'first-mirror-guest', 'first-bubble-catch', 'first-tower-demolition']).toContain(world.pending.templateId); expect(world.pending.personIds).toEqual([playerId]); expect(Object.keys(world.people)).toEqual(familyIds);
+  expect(world.pending.body).not.toMatch(/\b(?:parent|dad|mum|mom|mother|father)\b/i); expect(decodeWorld(encodeWorld(world)).pending).toEqual(world.pending); validateWorld(world);
 });

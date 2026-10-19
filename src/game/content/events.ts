@@ -9,7 +9,7 @@ import { hospitalized } from '../systems/healthSchemas';
 import { isConfined } from '../systems/legalSchemas';
 import { serviceAway } from '../systems/serviceSchemas';
 import { relationFor } from '../systems/relationships';
-import { storyParent } from '../systems/storyContext';
+import { storyParent, storyPersonPresent } from '../systems/storyContext';
 
 /** Original situations, not random names placed in interchangeable success text. */
 export const eventTemplates: readonly EventTemplate[] = [
@@ -95,7 +95,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'parent-boundary', min: 14, max: 20, parent: true, illustration: 'relationship', title: 'Read at 10:42',
+    id: 'parent-boundary', min: 14, max: 20, parent: true, parentContact: true, illustration: 'relationship', title: 'Read at 10:42',
     body: '{parent} sends “Where are you?” You are somewhere perfectly ordinary, but the fourth message arrives before you finish typing.',
     choices: [
       option('explain', 'Reply, then talk about check-ins', { respect: 3, stress: -2 }, 'A workable arrangement', 'You agree on a check-in time. {parent} admits the silence worried them.', 'I agreed on clearer check-ins with {parent}.', 5),
@@ -140,8 +140,8 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'old-photo', min: 22, max: 70, parent: true, illustration: 'relationship', title: 'Evidence from a previous haircut',
-    body: '{parent} finds an old photograph of you. The haircut is difficult to defend. The memory attached to it is much better.',
+    id: 'old-photo', min: 22, max: 70, parent: true, parentContact: true, illustration: 'relationship', title: 'Evidence from a previous haircut',
+    body: '{parent} sends you an old photograph. The haircut is difficult to defend. The memory attached to it is much better.',
     choices: [
       option('story', 'Ask for the whole story', { happiness: 5, stress: -2 }, 'A detail you had forgotten', '{parent} remembers something small that makes the photograph matter.', 'I heard the story behind an old photograph with {parent}.', 6),
       option('scan', 'Save a copy and label it', { discipline: 3, happiness: 2 }, 'Future evidence secured', 'You add names and a date while someone still remembers them.', 'I saved and labelled an old family photograph.', 4),
@@ -223,17 +223,26 @@ function schoolContext(world: World) {
   const candidate = world.people[school.currentTeacherId], teacher = present(candidate.id) && candidate.employment?.roleId === 'teacher' ? candidate : undefined;
   return { school, peer, teacher };
 }
+/** Physical family scenes require the actual household; remote contact is explicit. */
+function templateParent(world: World, template: EventTemplate) {
+  if (!template.parent) return;
+  const player = world.people[world.activePersonId];
+  if (!template.parentContact) return storyPersonPresent(world, player) ? storyParent(world) : undefined;
+  return world.relationships.find(edge => {
+    const parent = world.people[edge.from];
+    return edge.kind === 'parent' && edge.to === player.id && parent && !parent.died && !hospitalized(world, parent) && !isConfined(world, parent) && !parent.legal.wanted && !serviceAway(world, parent.id);
+  });
+}
 export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
-  const parent = world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
   const context = schoolContext(world);
-  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || parent) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
   const player = world.people[world.activePersonId];
-  const parent = template.choices.some(choice => choice.followUp === 'arcade-invitation') ? storyParent(world) : world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
-  if (template.parent && !parent) throw new Error('This event needs a living parent');
+  const parent = templateParent(world, template);
+  if (template.parent && !parent) throw new Error(template.parentContact ? 'This event needs a living parent who can be contacted' : 'This event needs a living parent at home');
   const person = parent ? world.people[parent.from] : null, context = schoolContext(world);
   if (template.school && (!context.school || template.school !== 'any' && template.school !== context.school.stage) || template.classmate && !context.peer || template.teacher && !context.teacher) throw new Error('This event needs the current school contacts');
   const peerRelation = context.peer && relationFor(world, player.id, context.peer.id), teacherRelation = context.teacher && relationFor(world, player.id, context.teacher.id);

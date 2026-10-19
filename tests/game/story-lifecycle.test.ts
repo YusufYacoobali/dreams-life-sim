@@ -22,6 +22,14 @@ import { activeTrip } from '../../src/game/systems/travelSchemas';
 import { endEmployment } from '../../src/game/systems/work';
 
 type Kind = 'arcade' | 'project';
+test('a dissolved household cancels the actual parent-approved plan without treating missing household IDs as co-residence', () => {
+  const world = planned(), thread = world.storyThreads[0], parentId = thread.parentId!, householdId = world.people[world.activePersonId].householdId;
+  const money = structuredClone(world.accounts), random = { ...world.random };
+  for (const person of Object.values(world.people)) if (person.householdId === householdId) person.householdId = null;
+  world.households = world.households.filter(item => item.id !== householdId);
+  refreshStoryThreads(world); expect(thread.status).toBe('cancelled'); expect(thread.cancellationReason).toMatch(/parent.*home/i); expect(thread.parentId).toBe(parentId);
+  expect(world.accounts).toEqual(money); expect(world.random).toEqual(random); validateWorld(world);
+});
 function choose(world: World, choiceId: string) {
   if (world.pending?.kind !== 'decision') throw new Error('Expected decision');
   return resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId });

@@ -5,6 +5,17 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+The active continuation is now **world 25 / engine 24 / content 4 / database
+4**, with **90 distinct situations**. [Early home/classroom stories](EARLY_HOME_STORIES.md)
+adds twenty scenes, five independent first-year alternatives in total, explicit
+remote-parent contexts and actual physical-household availability. Missing
+household IDs do not count as co-residence. The completed content-three 120-life
+sweep below is historical; no expanded content-four result is claimed. All **1,038 tests / 68 suites** pass in **714.295 seconds**, with strict
+source/test typing, fresh Android/iOS Hermes exports (5.2/4.9 MB, 46 assets)
+and current Metro manifests/source. No expanded content-four sweep is claimed.
+[The pet integration notes](planning/drafts/pets-integration.md) record inspected,
+unintegrated next work; pets are not implemented by these notes.
+
 [Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/Use Device
 Appearance independently of all lives. Writes publish only after SQLite succeeds;
 failed/corrupt/future preferences have retry/explicit reset without rewriting life
@@ -14,7 +25,7 @@ opening/navigation checks, strict typing, fresh Hermes exports (46 assets) and
 current Metro manifests/source. Expo config introspection confirms Android/iOS
 automatic support with SDK-aligned `expo-system-ui` 57.0.4. No native rendering or
 standalone build pass is claimed. The complete 983-test regression below predates
-this display follow-up; simulation source and its completed sweep are unchanged.
+this display follow-up; the 1,038-test content-four result above includes it.
 
 The basic creation form now keeps optional family background/preferences under
 More Options, with a visible summary for a selected royal family. All fourteen
@@ -32,7 +43,7 @@ reproduced a System UI ANR before Expo Go launched; installation/Metro connectio
 did not yield usable gameplay. Its actual OS-failure screenshot/logs are retained.
 The isolated software emulator is stopped. Native opening gates remain open.
 
-The current production milestone is **world 25 / engine 24 / content 3 /
+The prior scholarship milestone uses **world 25 / engine 24 / content 3 /
 database 4**, adding two [restricted tuition scholarships](SCHOLARSHIPS.md).
 They use saved applications, separate admission, explicit acceptance and actual
 tuition waivers rather than cash grants. Renewal records grades/resources and
@@ -47,8 +58,7 @@ first-available-choice scope and overlapping-seed limits. The unchanged
 world-25 game hash is
 `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
 Game source stayed unchanged from startup through the final summary. The
-1,000-seed/person, all-choice, 120-year and multi-generation gates remain open. Twenty more early-life situations
-are unintegrated drafts under `docs/planning/drafts/`; they are not counted.
+1,000-seed/person, all-choice, 120-year and multi-generation gates remain open. The twenty early-life drafts were subsequently integrated by content four above.
 
 The previous milestone adds **actual school outcomes and evening recovery**;
 see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). That milestone used **world
@@ -274,8 +284,8 @@ release-complete features. Continue childhood depth and missing education paths,
 then the broader catalogue, pets/hobbies/entertainment, achievements/challenges/
 heirlooms, autonomous NPC depth, remaining art, accessibility, country-rule source
 verification, balance, performance, multi-generation sweeps and native release gates.
-At least **180 more distinct reviewed stories** are still needed after the
-content-three expansion; system offers/reports are not substitutes.
+At least **160 more distinct reviewed stories** are still needed after the
+content-four expansion; system offers/reports are not substitutes.
 
 Unintegrated pet source and generated art, previously outside the active checkout,
 are preserved in [planning/deferred-work](planning/deferred-work/README.md).

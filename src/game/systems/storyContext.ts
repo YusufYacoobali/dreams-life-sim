@@ -14,6 +14,7 @@ export function storyPersonPresent(world: World, person: Person) {
 /** The named parent must actually be at home; another parent is never substituted later. */
 export function storyParent(world: World) {
   const player = world.people[world.activePersonId];
+  if (!player.householdId) return;
   return world.relationships.find(edge => {
     const parent = world.people[edge.from];
     return edge.kind === 'parent' && edge.to === player.id && parent && parent.householdId === player.householdId && parent.country === player.country && parent.city === player.city && storyPersonPresent(world, parent);
@@ -35,7 +36,7 @@ export function storyContextReason(world: World, binding: Participants, permanen
   if (binding.parentId) {
     const parent = world.people[binding.parentId];
     if (!parent || parent.died) return 'The parent who agreed is no longer alive';
-    if (parent.householdId !== person.householdId || parent.country !== person.country || parent.city !== person.city || !world.relationships.some(edge => edge.from === parent.id && edge.to === person.id && edge.kind === 'parent')) return 'The parent who agreed is no longer at home with you';
+    if (!person.householdId || parent.householdId !== person.householdId || parent.country !== person.country || parent.city !== person.city || !world.relationships.some(edge => edge.from === parent.id && edge.to === person.id && edge.kind === 'parent')) return 'The parent who agreed is no longer at home with you';
     participants.push(parent);
   }
   if (!permanentOnly && participants.some(participant => !storyPersonPresent(world, participant))) return 'Someone needed for this plan is away, in hospital or unable to attend';

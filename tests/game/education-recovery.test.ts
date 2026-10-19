@@ -66,7 +66,7 @@ test('genuine v23 low-grade graduation and both earlier moments migrate without 
   for (let index = 0; index < migrated.length; index++) {
     const encoded = JSON.parse(encodeWorld(migrated[index]));
     expect(originals[index].schemaVersion).toBe(23); expect(encoded.schemaVersion).toBe(25); expect(encoded.engineVersion).toBe(24);
-    for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion'].includes(key))) expect(encoded[key]).toEqual(originals[index][key]);
+    for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(originals[index][key]);
     expect(migrated[index].schoolCompletions).toEqual([]); expect(migrated[index].recoveryCourses).toEqual([]);
   }
   const person = save.world.people[save.world.activePersonId]; expect(person.education.grades).toBe(0);

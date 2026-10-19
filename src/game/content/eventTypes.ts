@@ -8,7 +8,7 @@ export type StoryOption = {
   title: string; result: string; journal: string;
 };
 export type EventTemplate = {
-  id: string; min: number; max: number; parent?: boolean;
+  id: string; min: number; max: number; parent?: boolean; parentContact?: boolean;
   school?: 'primary' | 'secondary' | 'any'; classmate?: boolean; teacher?: boolean;
   illustration: string; title: string; body: string; choices: readonly StoryOption[];
 };

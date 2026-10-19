@@ -71,7 +71,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(25), engineVersion: z.literal(24), contentVersion: z.literal(3),
+  schemaVersion: z.literal(25), engineVersion: z.literal(24), contentVersion: z.literal(4),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -423,5 +423,7 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 23) { parsed.schemaVersion = 24; parsed.engineVersion = 23; parsed.schoolCompletions = []; parsed.recoveryCourses = []; }
   // Preserve old tuition, debt and completed work. Aid is never retroactive.
   if (parsed && parsed.schemaVersion === 24) { parsed.schemaVersion = 25; parsed.engineVersion = 24; parsed.scholarships = []; }
+  // New story selection leaves every already-bound choice/result untouched.
+  if (parsed && parsed.schemaVersion === 25 && parsed.contentVersion === 3) parsed.contentVersion = 4;
   return validateWorld(parsed);
 }

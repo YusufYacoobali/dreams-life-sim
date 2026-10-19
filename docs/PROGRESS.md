@@ -12,6 +12,19 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Content **four** retains world 25 / engine 24 / database four and adds twenty
+[early home/classroom situations](EARLY_HOME_STORIES.md), bringing the source
+catalogue to **90**. Physical family scenes require an actual available household;
+remote messages/photo/interviews are explicit. Five independent first-year
+scenes work after actual parent deaths. The real SQLite Begin Life→first-year
+bubble-choice→failed save/retry→cold decision/result journey passes. Focused
+all-country branches, actual parent travel/remand, absence/household/death,
+capped effects and genuine scholarship-history migration pass, with strict typing.
+The full current regression passes **1,038 tests / 68 suites** in **714.295
+seconds**. Fresh Android/iOS Hermes exports (5.2/4.9 MB, 46 assets) and current
+Metro manifests/source pass. No expanded content-four sweep is claimed.
+Overall/opening baseline estimates and native/release gates remain unchanged.
+
 [Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/device mode
 with real SQLite failure/retry, corrupt-data recovery and unchanged whole-life
 exports. Shared pages set their own themed status-bar props. All 107 UI/state/
@@ -50,8 +63,8 @@ The complete **983-test / 64-suite** current regression passes in **743.271
 seconds**. The separate pure-engine sweep passes **120/120 lives** across all
 twelve countries in **1,994.655 seconds**, with unchanged game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
 [Per-seed evidence](verification/life-sweep-v25-120-20261019.json) preserves the
-first-available-choice scope; the broader release sweeps remain open. Twenty additional childhood
-situations are unintegrated drafts; the active catalogue stays at 70. Native,
+first-available-choice scope; the broader release sweeps remain open. The twenty draft childhood situations were subsequently integrated by content
+four above; the scholarship checkpoint had 70 active templates. Native,
 full national stages and broader production acceptance remain open.
 
 ### Prior world-24 school outcome/recovery milestone
@@ -201,7 +214,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery and restricted tuition scholarships implemented; national stage depth and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
-| 6 — Content, depth, legacy, Time Machine | In progress | 70 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
+| 6 — Content, depth, legacy, Time Machine | In progress | 90 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
 ## Feature status
@@ -211,7 +224,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | Partial: editable identity/appearance, deterministic random creation, actual parent links, generated portraits and eight visual age stages | Twelve-country creation/domain tests pass; 120px browser layer review complete; native rendering/fidelity pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
-| Context-aware events, decisions, delayed consequences and journal | Partial: 70 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
+| Context-aware events, decisions, delayed consequences and journal | Partial: 90 original age/context templates, available-household/explicit remote-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; file picker/share require device validation |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt, attended adult remediation and restricted scholarships; national stage/qualification depth remains pending | Twelve profile boundaries, school→degree→qualified job, 44 scholarship checks and connected SQLite aid rollback/retry/cold journeys pass; national and native acceptance remain open |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |

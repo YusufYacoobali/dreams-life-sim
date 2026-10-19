@@ -156,8 +156,8 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-family-interview', min: 14, max: 17, parent: true, school: 'secondary', teacher: true, illustration: 'relationship', title: 'The long version',
-    body: '{teacher} sets a family-history interview. You ask {parent} one question about school. Twenty minutes later, they are still describing the journey there.',
+    id: 'teen-family-interview', min: 14, max: 17, parent: true, parentContact: true, school: 'secondary', teacher: true, illustration: 'relationship', title: 'The long version',
+    body: '{teacher} sets a family-history interview. You call {parent} with one question about school. Twenty minutes later, they are still describing the journey there.',
     choices: [
       o('listen', 'Listen and write useful follow-ups', { respect: 2, energy: -2 }, 'An unexpected detail', 'A follow-up produces a story you had not heard before. You organise your notes afterwards.', 'I listened to {parent}’s school memories for a class interview.', 4, { grades: 1 }),
       o('focus', 'Explain which questions you need', { discipline: 2, smarts: 1 }, 'Back to the assignment', 'You show {parent} the questions. The answers become shorter and much easier to organise.', 'I explained my interview questions to {parent}.', 2, { grades: 2 }),
