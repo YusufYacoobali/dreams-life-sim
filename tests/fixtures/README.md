@@ -34,6 +34,19 @@
 
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.
 
+`v24-university-loan-archive.json` was generated with unmodified `464925a`
+(world 24 / engine 23 / content 3), before scholarships. Seed 16 starts a real US
+life on 1 January 2000 using the store, SQLite repository and Begin Life. Every
+year, available choice and result commits normally. Focused study and helpful
+classroom conduct are actual commands. The new school rules award secondary
+education in 2018; a real university application then enrolls in computing with
+a student loan and a 1,400,000-USD-minor tuition payment (`txn_60_4368`). At age
+nineteen, revision 65 has twelve completed university months, 100% grades,
+4,642 ledger rows and the original debt. The export selects the two latest
+genuine pre-Age-Up moments. No version, money, grades, qualification, RNG or
+enrolment was manually edited. Preserve the old payment/progress and snapshots;
+new awards must not be retroactively invented. Never regenerate with newer code.
+
 `v23-low-grade-school-archive.json` was generated with the unmodified source at
 `55fee6b` (world 23 / engine 22 / content 3 / database 4), before school passing
 and recovery changes. Seed 16 starts a US life on 1 January 2000 through the real
