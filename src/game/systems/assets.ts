@@ -1,3 +1,4 @@
+import { qualifyingAnnualIncome } from './credit';
 import { z } from 'zod';
 import { ageOn, fullName, World } from '../model';
 import { assetCatalog, AssetOffer } from '../content/assets';
@@ -49,8 +50,9 @@ export function purchaseQuote(world: World, offer: AssetOffer, financing: 'cash'
 }
 function debtCapacityReason(world: World, payment: bigint, omitDebtId?: string): string | undefined {
   const person = active(world); const account = accountFor(world);
-  const income = (person.employment?.annualPay ?? 0n) + person.finance.pensionAnnual;
-  if (!income) return 'A job or recorded pension is required';
+  if(person.legal.wanted)return 'Resolve your outstanding arrest before mortgage borrowing';
+  const income = qualifyingAnnualIncome(world).annual;
+  if (!income) return 'A current external contract, earned pension or established recurring income is required';
   const existing = world.liabilities.filter(debt => debt.ownerId === person.id && debt.id !== omitDebtId && debt.principal > 0n).reduce((sum, debt) => sum + fxMoney(world, { minor: debt.monthlyPayment || debt.principal / 120n, currency: debt.currency }, account.currency).minor, 0n);
   if ((payment + existing) * 120n > income * 4n) return 'Total debt payments exceed 40% of your monthly gross income';
 }

@@ -1,3 +1,4 @@
+import { personalBorrowReason } from './credit';
 import { z } from 'zod';
 import { ageOn, World } from '../model';
 import { rules, incomeTax } from '../rules';
@@ -23,9 +24,7 @@ export function exchangeQuote(world: World, amount: bigint, from: Currency, to: 
 export function resolveFinance(world: World, command: FinanceCommand) {
   const person = active(world); const rule = rules[person.country]; const account = accountFor(world);
   if (command.type === 'borrow') {
-    if (ageOn(person, world.date) < rule.adultAge || !person.employment) throw new IneligibleAction('An adult with current employment is required');
-    const outstanding = world.liabilities.filter(debt => debt.ownerId === person.id && debt.currency === account.currency && debt.kind === 'personal').reduce((sum, debt) => sum + debt.principal, 0n);
-    if (outstanding + command.amount > person.employment.annualPay / 2n) throw new IneligibleAction('Personal borrowing is limited to half your current annual salary');
+    const reason=personalBorrowReason(world,command.amount);if(reason)throw new IneligibleAction(reason);
     borrow(world, command.amount, 'personal', rule.personalInterestBps);
     fact(world, 'I took out a personal loan of ' + formatMoney({ minor: command.amount, currency: account.currency }) + '.', 'finance');
     result(world, 'Loan paid into your account', 'Your cash and debt increased by the same amount. Interest accrues as time passes.', 'money');
