@@ -12,6 +12,11 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Welcome now scrolls when its title/actions exceed the available height. Strict
+typing, all four connected SQLite startup/onboarding checks, fresh Android/iOS
+Hermes exports and both current Metro source bundles pass after this layout
+change. Native viewport and large-text review remain unverified.
+
 Checkpoint decoding now removes per-quartet array allocations while preserving
 the exact archive format and bounds. The complete **902-test / 59-suite**
 regression passes in 687.703 seconds, including all genuine migration fixtures,

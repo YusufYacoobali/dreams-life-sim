@@ -33,6 +33,11 @@ terminal age/people/ledger results match Jest exactly; expanded 120-life runs
 remain in progress. [EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records
 a partial official-source review for the next school paths; no rule values changed.
 
+Welcome now scrolls on overflow instead of constraining its title/actions to a
+fixed-height column. Strict typing, all four connected startup/onboarding checks,
+fresh Android/iOS Hermes exports and both current Metro source bundles pass after
+the layout change. Native small-screen/large-text review remains open.
+
 ## User priorities and authorisation
 
 Build the entire production game through the [master plan](planning/MASTER_PLAN.md)
