@@ -147,7 +147,8 @@ are included in this hotfix.
 
 The format-only runtime check now follows real creation→Begin Life→first Age Up→
 choice/result→SQLite save→cold resume, then opens Assets, Relationships and
-Activities. The 38 focused checks, strict typing, both production Hermes bundles
-and both current Metro bundles pass. The full regression is running separately.
+Activities. The full **779-test / 53-suite** regression passes, including twelve
+complete seeded lives. The 38 focused checks, strict typing, both production
+Hermes bundles and both current Metro bundles also pass. Hotfix `0dde6b6` is pushed.
 Native hardware acceptance remains pending; the user’s exact missing-method
 limitation is reproduced by the tests.
