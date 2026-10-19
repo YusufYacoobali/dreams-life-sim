@@ -67,6 +67,13 @@ All securities, crypto names, initial FX ratios, dividends and price movements a
 
 On 18 October 2026, the government school-start research request to `www.gov.uk` failed at the managed network proxy (curl 56, no HTTP response). Earlier external reference requests also failed. A configuration draft now includes `www.gov.uk`, `www.oecd.org`, `uis.unesco.org` and `api.worldbank.org`; this has not changed the active network policy. These are planned research destinations, not consulted sources.
 
+On 19 October, the available read-only web tool enabled a partial official
+education review. [The education source audit](EDUCATION_SOURCE_AUDIT.md) records
+which pages were actually read, which remain inaccessible, and the differences
+between compulsory participation, school stages and qualifications. No numerical
+rule values changed and no complete profile passed verification. The earlier
+executor network failure does not establish a current blanket research blocker.
+
 Before release, verify consequential rules, choose and document regional baselines, identify deliberate approximations, and expand testing to healthcare, family, legal, immigration and estate behavior in every pack. Passing arithmetic and progression tests establishes implementation consistency, not legal/source accuracy.
 
 Company operations use shared authored small-firm rules, not national corporate law. Five industries scale startup capital, order prices, material costs, premises and equipment to local base wages. Registration costs 2% of initial capital; each agency hire costs 1% of local base annual pay. Managed startups employ an actual qualified manager and worker, with wages beginning in future operating months. Owner operators take an actual paid job; another full-time job or course prevents that operating role. Capacity depends on available qualified people, performance, facilities, equipment condition and leadership. Price changes affect demand and margin; advertising costs recur even if the team cannot fulfil extra demand. These are deliberately simplified business models.
