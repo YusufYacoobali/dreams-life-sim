@@ -4,6 +4,51 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
+## Database representation four: actual repository storage
+
+`node tools/benchmark-sqlite-history.cjs` runs the same seed/date/available choices
+as the content-three history case through the actual repository, committing all
+235 commands and retaining every genuine pre-Age-Up snapshot. It uses on-disk
+Node SQLite with WAL, then closes/reopens and compares the complete saved world.
+Both runs finish 79 observations, death at 78, 18 people and 47,202 ledger rows.
+
+| Actual one-life storage | Plain live/backup rows | Compressed live/backup rows |
+| --- | ---: | ---: |
+| Current payload | 14,980,913 bytes | 801,666 bytes |
+| Previous valid backup payload | 14,905,010 bytes | 797,358 bytes |
+| All 79 genuine historical payloads | 27,334,703 bytes | 27,334,703 bytes |
+| Closed database file | 72,376,320 bytes | 29,933,568 bytes |
+| Peak database + WAL + shared memory | 103,391,328 bytes | 36,327,648 bytes |
+
+Post-run comparison finds the **entire live and backup worlds identical**, with
+exactly the same snapshots/metadata, receipts and preferences. No history was
+trimmed. [The recorded results](verification/sqlite-history-20261019.json) include
+source hashes and complete-world fingerprints.
+
+Database version four writes current lives, imported lives, recovery and new
+branches using the existing bounded checkpoint-v1 format. The existing 20 MB
+inflated-checkpoint / 28-million-character encoded bounds also apply to live
+writes; larger integrated worlds remain a release gate. It still reads old
+plain rows. The transactional upgrade changes the database marker without bulk
+rewriting worlds or consuming RNG. A previous plain current row can remain the
+backup until the next actual commit. Older app versions refuse the new database
+marker explicitly. The final clean **905-test / 60-suite** regression passes
+in 667.495 seconds, including the genuine plain-state upgrade, failed migration
+and save rollback/retry, checksum recovery and all startup/callback/branch flows.
+Strict typing, both fresh Hermes exports and current Metro source checks pass.
+
+These measurements use two **fresh databases**. Existing files may retain freed
+SQLite pages; the upgrade does not run a blocking VACUUM or promise immediate
+file shrinkage. This 79-observation result does not establish the planned
+120-year/multi-generation 50 MB budget, and the late-checkpoint projection below
+still exceeds it.
+
+Observed cloud command p95 was 1,629.4 ms before and 1,969.9 ms after; cold load
+was 683.2 ms and 1,037.5 ms respectively. The runs overlap different other cloud
+work, so they do not establish a controlled timing comparison. Compression adds
+work even as it reduces storage/write volume. Native responsiveness, memory and
+large archive acceptance remain open; no timing speedup is claimed.
+
 ## Reproducible core-life sweeps
 
 `npm run test:soak` requests 120 complete seeded lives. Use
@@ -14,9 +59,11 @@ Expanded runs print the seed, completed/requested counts, age at death, world
 size and per-life/cumulative elapsed milliseconds after every completed life.
 The wrapper rejects invalid counts and propagates failures.
 
-Changing the harness is not a completed sweep. The current 120/1,000-life gates
-remain open until their measured results are recorded here. These core-life
-choices also do not replace the connected career/family/custody/legacy matrices.
+The current content-three **120-life pure-engine Node sweep passes**; see the
+recorded result below. The duplicate expanded Jest run was stopped after 43
+completed lives and is not counted as a completed Jest sweep. The 1,000-life,
+120-year and multi-generation gates remain open. These first-available choices
+also do not replace the connected career/family/custody/legacy matrices.
 
 ## World-23/content-two diagnostic, 19 October 2026
 
@@ -37,9 +84,9 @@ decoding/validating. This run overlapped regression/Metro activity and uses a
 different workload from the older baselines below; it is not a controlled timing
 comparison or evidence of native responsiveness.
 
-The content-three checkpoint starts a separate 120-life sweep, with unchanged
-game-source hashes recorded at startup. It is in progress, not an accepted
-result. Both sweep/history drivers now choose an actually available option,
+The subsequent content-three pure-engine sweep completed 120 lives with
+unchanged game-source hashes; its scoped results are below. Both sweep/history
+drivers now choose an actually available option,
 so low funds cannot make them select a disabled attendance/payment choice.
 
 ## Checkpoint decoder and measured runner
@@ -84,8 +131,22 @@ The twelve-seed diagnostic completed in **148.648 seconds**, with terminal age,
 people and ledger counts matching the first twelve current Jest sweep records
 exactly. The corresponding Jest records reached seed eleven in 631.136 seconds.
 Runs overlap other cloud work; this measures harness runtime, not a simulation or
-native-device speedup. The separate 120-life Node and Jest runs are still in
-progress. No completed 120/1,000-life claim is made here yet.
+native-device speedup.
+
+The expanded direct Node run subsequently completed **120/120 distinct seeds**
+(0–119) in **2,209.809 seconds**, exit zero. It covered all twelve countries, ages
+at death 40–98, at most 24 people and 55,199 ledger rows. Its game-source hash
+`9c3040f28de2157839267ce8a2092eb73d81c13f08fda1f93f6ae9259a0f6c69`
+was unchanged from startup to completion. All terminal age/people/ledger metrics
+match the 43 overlapping completed Jest lives. The slower duplicate Jest run was
+stopped after that overlap was checked; it is a partial run, not another
+completed 120-life pass.
+
+[Every seed and the final summary](verification/life-sweep-120-20261019.json) are
+preserved. The default regression covers twelve of the same seeds; overlapping
+runs are not counted as additional distinct lives. This closes the current
+120-seed core-engine check only. It does not establish all-choice balance,
+1,000-person/1,000-seed, SQLite, 120-year, multi-generation or native acceptance.
 
 ## Current content-three history measurement
 

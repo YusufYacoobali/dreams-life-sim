@@ -12,6 +12,24 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Database representation four now writes compressed current saves, recovery and
+new branch/import rows while reading older plain rows. The upgrade changes only
+the database marker, without rewriting all lives or consuming RNG; older apps
+refuse the new representation. Three connected checks cover genuine plain-state
+upgrade, failed upgrade/save rollback, retry, original callback progression and
+checksum-damage recovery. The final clean regression passes **905 tests / 60
+suites** in **667.495 seconds**. Strict typing, fresh Android/iOS Hermes exports
+(5.1/4.8 MB, 45 assets) and both current Metro manifests/source bundles pass.
+
+A real 235-command SQLite life retains all 79 historical moments and exactly the
+same live/backup worlds, snapshot payloads/metadata, receipts and preferences.
+Its fresh closed database measures **29.9 MB**, versus **72.4 MB** with plain
+live/backup rows; peak including WAL/shared memory is **36.3 MB**, versus
+**103.4 MB**. [Recorded measurements](verification/sqlite-history-20261019.json)
+include hashes and limits. Existing files may retain free allocated pages;
+120-year/multi-generation storage, native latency/memory and release acceptance
+remain open. No overall or opening completion estimate is increased.
+
 Welcome now scrolls when its title/actions exceed the available height. Strict
 typing, all four connected SQLite startup/onboarding checks, fresh Android/iOS
 Hermes exports and both current Metro source bundles pass after this layout
@@ -25,8 +43,11 @@ and fresh Android/iOS Hermes exports and current Metro source bundles also pass.
 An isolated, hash-pinned cloud
 decoder benchmark and 10,000 differential cases are recorded in
 [PERFORMANCE.md](PERFORMANCE.md); they do not establish full restore/native speed.
-A direct Node runner matches all twelve Jest terminal age/people/ledger metrics
-and has begun a separate 120-life sweep. Both expanded runs remain in progress.
+The direct Node runner completes 120 distinct seeds across all twelve countries
+in 2,209.809 seconds, with the game-source hash unchanged. Terminal
+age/people/ledger metrics match all 43 overlapping completed Jest lives; the
+duplicate Jest sweep was stopped and remains partial. [Per-seed evidence](verification/life-sweep-120-20261019.json)
+preserves the scope. The 1,000-seed, 120-year and multi-generation gates remain open.
 
 The early-game milestone adds a read-only School Plans section and twenty
 distinct childhood situations, bringing the source catalogue to **70**. Five new
@@ -39,8 +60,8 @@ metadata. Targeted school/story/startup/migration/native-component checks and
 strict source/test typing pass. The complete regression passes **878 tests / 58
 suites** in 779.349 seconds, including twelve complete seeded lives. Fresh
 Android/iOS Hermes exports (5.1/4.8 MB, 45 assets) and both current Metro source
-bundles pass. A separate 120-life sweep is running; that result remains
-unverified until completion. Native layout/interaction acceptance remains open.
+bundles pass. The subsequent 120-life pure-engine Node sweep passes; native
+layout/interaction acceptance remains open.
 
 Import also now rejects contradictory scheduled plans after permanent school,
 teacher, household, identity or death changes. Temporary hospital absence before
@@ -59,26 +80,28 @@ offline dependency check also pass. The format-only startup checks remain green.
 Native opening/layout acceptance is still open.
 
 The soak harness now scales its budget and reports expanded per-life progress.
-A one-life diagnostic passes; the current 120-life sweep is in progress and the
-1,000-life gate remains open. The history
-benchmark's actual 20.8 MB payload total and conservative 68.5 MB projection are
-recorded in [PERFORMANCE.md](PERFORMANCE.md); storage/performance gates stay open.
+The current 120-life pure-engine Node sweep passes; the 1,000-life gate remains
+open. The current content-three history has 27.3 MB of actual compressed payloads
+and a conservative 95.7 MB projection for 120 repeated late checkpoints. Real
+SQLite storage and its representation change are recorded in
+[PERFORMANCE.md](PERFORMANCE.md); full storage/performance gates stay open.
 Continue childhood/education depth and the full production backlog. Overall
 completion estimates are unchanged.
 
-The user is moving work to a new cloud chat. Continue from **`origin/work`** and
-read [HANDOFF.md](HANDOFF.md) first. The transfer checkpoint includes partial
+At the original transfer checkpoint, continuation used **`origin/work`** and
+[HANDOFF.md](HANDOFF.md). That checkpoint included partial
 world-23 school callbacks and one new project situation (50 source templates),
 their focused tests and a genuine world-22 migration fixture. The 28 new callback
-checks pass; broader acceptance remains open. The complete world-23 handoff
+checks passed; its additional callback acceptance cases were completed above. The complete world-23 handoff
 regression also passes: **808 tests / 55 suites** in 477 seconds, including twelve
 complete seeded lives. Strict source/test typing, fresh Android/iOS Hermes exports
 (5.1/4.8 MB, 45 assets), and current Metro source requests for both platforms pass.
 It also preserves paused pet source
 and generated artwork as an unintegrated archive outside the application folders.
 The 779-test result below applies to the prior world-22 startup checkpoint; final
-world-23 verification above does not close the callback/native acceptance cases
-listed in the handoff. Overall completion
+world-23 transfer verification did not close the further callback/native cases.
+The continuation subsequently closed the automated callback cases above; native
+acceptance remains open. Overall completion
 estimates are unchanged.
 
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.

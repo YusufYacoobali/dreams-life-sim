@@ -66,10 +66,10 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
 
 test('newer database versions are refused without resetting their version marker', async () => {
   const { sqlite, driver } = database();
-  sqlite.exec('PRAGMA user_version=4');
+  sqlite.exec('PRAGMA user_version=5');
   const repository = new SaveRepository(driver);
   await expect(repository.initialise()).rejects.toThrow('newer version');
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(5);
   sqlite.close();
 });
 
@@ -86,7 +86,7 @@ test('a version-one database and actual previous-version save migrate without da
   expect(restored.random).toEqual(legacyFixture.random);
   for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(3);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   sqlite.close();
 });
 

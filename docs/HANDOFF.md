@@ -5,38 +5,52 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
-Continuation on 19 October completed the listed automated callback acceptance
-cases; see [the connection-by-connection evidence](CALLBACK_ACCEPTANCE.md).
-That callback checkpoint passed **831 tests / 56 suites** in 596.53 seconds,
-with strict typing, fresh Android/iOS Hermes exports and current Metro source
-requests. This closes those automated cases, not native or release acceptance.
-Continue the early-game work and full backlog below; estimates remain unchanged.
+The continuation completed the listed automated callback acceptance cases; see
+[CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md). It then added twenty distinct
+early-life situations (**70 total**), including five parent-free preschool scenes,
+and a read-only School Plans section with original participants, due dates,
+permission, conditional costs and paid/cancelled outcomes. Welcome now scrolls
+when its content exceeds the viewport. Native visual/large-text review remains open.
 
-The subsequent early-game work adds twenty distinct situations (**70 total**)
-and a read-only School Plans section showing original participants, due dates,
-permission, conditional costs and recent outcomes. The current content version
-is **3** with world 23 / engine 22 unchanged. A genuine content-two SQLite archive
-in `tests/fixtures/v23-school-plans-archive.json` preserves the paid outing,
-scheduled project and both prior moments. Imports now reject permanently invalid
-scheduled contexts while preserving temporary absence. Focused checks and strict
-typing pass. The new complete regression passes **878 tests / 58 suites** in
-779.349 seconds, with fresh Android/iOS production Hermes exports and both current
-Metro source bundles. A separate 120-life sweep is in progress; do not count it
-as passed until completion. Native and release gates remain open.
+Current versions are **world 23 / engine 22 / content 3 / database 4**. Genuine
+world-22 and content-two archives retain their people, decisions, paid outings,
+projects, history and RNG. Permanently contradictory scheduled contexts are
+rejected on import; temporary absence before the deadline remains valid.
 
-The subsequent persistence check removes checkpoint-decoder allocations without
-changing checkpoint-v1, bounds or gameplay state. The complete regression passes
-**902 tests / 59 suites** in 687.703 seconds, with strict typing and fresh native
-Hermes exports and current Metro source bundles. [PERFORMANCE.md](PERFORMANCE.md) records the scoped benchmark,
-10,000 differential cases and a measured direct Node sweep runner. Its twelve
-terminal age/people/ledger results match Jest exactly; expanded 120-life runs
-remain in progress. [EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records
-a partial official-source review for the next school paths; no rule values changed.
+Database four stores newly written current/recovery/branch/import rows using the
+existing bounded checkpoint-v1 compression. It still reads old plain rows and
+upgrades the database marker transactionally without bulk rewriting lives or
+consuming RNG. An old plain row can remain the backup until the next real commit.
+Older app versions explicitly refuse the new database marker. The checkpoint
+format and world/engine versions did not change.
 
-Welcome now scrolls on overflow instead of constraining its title/actions to a
-fixed-height column. Strict typing, all four connected startup/onboarding checks,
-fresh Android/iOS Hermes exports and both current Metro source bundles pass after
-the layout change. Native small-screen/large-text review remains open.
+The final clean regression passes **905 tests / 60 suites** in **667.495 seconds**,
+including genuine migration fixtures, SQLite rollback/retry/recovery/cold resume,
+format-only Intl startup, callback lifecycle and twelve complete seeded lives.
+Strict application/test typing, fresh Android/iOS Hermes exports (5.1/4.8 MB,
+45 assets) and current Metro manifests/source bundles also pass. These are
+cloud/native-component checks, not device or release acceptance.
+
+The separate direct Node sweep passes **120/120 distinct seeds** across all twelve
+countries in **2,209.809 seconds**, ages at death 40–98, at most 24 people and
+55,199 ledger rows. Its game-source hash is unchanged. The 43 overlapping
+completed Jest lives match terminal age/people/ledger metrics; that slower
+expanded Jest run was stopped and remains partial, not another completed sweep.
+[Per-seed records](verification/life-sweep-120-20261019.json) preserve the scope.
+The 1,000-seed, 1,000-person, 120-year and multi-generation gates remain open.
+
+The real 79-observation SQLite workload now uses **29,933,568 bytes** closed and
+**36,327,648 bytes** peak including WAL/shared memory, compared with 72,376,320
+and 103,391,328 bytes for plain live/backup rows. All 235 commands, entire live
+and backup worlds, 79 historical payloads/metadata, receipts and preferences
+match. These are fresh-database comparisons; existing files may retain allocated
+pages, and native timing/storage acceptance is still open. The conservative
+120-late-checkpoint projection remains 95.7 MB. See [PERFORMANCE.md](PERFORMANCE.md)
+for scoped measurements, decoder differential checks and remaining gates.
+
+[EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records a partial official
+source review for the next school paths. No country-rule values changed and no
+complete country profile is release verified.
 
 ## User priorities and authorisation
 
@@ -75,7 +89,7 @@ Begin Life, first Age Up, choice/result, save, cold resume and all four starting
 tabs. Users should pull `work`, restart `npx expo start -c`, and reload; clearing
 the bundler cache does not require deleting saved lives.
 
-## Current callback work — continue this before another feature
+## Callback implementation and completed automated acceptance
 
 The callback checkpoint moved to **world 23 / engine 22 / content 2** and added
 `world.storyThreads`. Older saves migrate to an empty history without executing
@@ -111,7 +125,7 @@ The annual cursor pauses at the real month and resumes the remaining months.
 Cancelled plans retain their original identities and remove their own queued
 decision. Another parent, classmate or teacher is never silently substituted.
 
-## Verification at this handoff
+## Original callback checkpoint verification (historical)
 
 - The new **28 checks / 2 suites pass**, including all twelve party currencies,
   saved permission/refusal, funds/decline, all project branches, exact due months,
@@ -128,8 +142,9 @@ decision. Another parent, classmate or teacher is never silently substituted.
   HTTP200 and contain the new callbacks and exact-money code. The deferred archive's
   seven file hashes and this handoff's local links were also checked.
 
-This is a verified development checkpoint, not completion of callback acceptance
-or of the production game. The further cases below remain explicit work.
+The 808-test result describes the original transfer checkpoint. The continuation
+completed the additional automated callback cases listed below; native/release
+acceptance and the complete production game remain unfinished.
 
 The originally remaining callback cases now have explicit connected checks:
 real travel/custody, permanent relocation, teacher departure/replacement, parent
@@ -139,16 +154,17 @@ atomic cancellation of two callbacks through SQLite failure/retry/cold resume.
 See [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md) for fixture scope and limits.
 Keep the 120/1,000-life performance gate open. The soak wrapper now accepts an
 explicit count and scales its timeout, with per-life progress on expanded runs.
-Its one-life diagnostic passes; a 120-life run is in progress and the 1,000-life
-gate remains open. The current history
-benchmark projects 68.5 MB for 120 repeated late checkpoints, above the planned
-50 MB history budget; see [PERFORMANCE.md](PERFORMANCE.md).
+The current 120-seed pure-engine run passes; 1,000-seed, 120-year, multi-generation
+and native gates remain open. The current content-three history has 27.3 MB of
+actual payloads and projects 95.7 MB for 120 repeated late checkpoints, above the
+planned 50 MB budget; see [PERFORMANCE.md](PERFORMANCE.md).
 
 ## Cloud environment and native limitations
 
 Use the repository's existing checkout, not an extra worktree. Node **24.19** and
 npm **11.9** are validated. No application secret, account or backend is required.
-Use `npm ci` with the lockfile. Run `npm run typecheck`, targeted tests, then the
+Use `npm ci` with the lockfile; if the default cache is not writable, the verified
+command is `npm ci --cache /workspace/.cache/npm`. Run `npm run typecheck`, targeted tests, then the
 required regression and `EXPO_OFFLINE=1 npx expo export --platform all`. SDK 57's
 offline `expo install --check` works. Dependencies were aligned, including explicit
 `expo-font ~57.0.4`; do not force dependency upgrades or change HOME/proxy/TLS.
