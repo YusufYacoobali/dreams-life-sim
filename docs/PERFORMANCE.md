@@ -40,6 +40,51 @@ game-source hashes recorded at startup. It is in progress, not an accepted
 result. Both sweep/history drivers now choose an actually available option,
 so low funds cannot make them select a disabled attendance/payment choice.
 
+## Checkpoint decoder and measured runner
+
+Checkpoint decoding now uses a byte lookup table and scalar quartet values,
+removing the per-quartet arrays/callback from the old decoder. The checkpoint-v1
+representation, exact bytes, gzip fingerprint and existing size limits are
+preserved. Twenty-four checks cover independent Buffer encodings, all padding
+forms, chunk boundaries, a one-million-byte input, UTF-8, the genuine old archive,
+invalid characters/padding and oversize rejection. Archive, recovery, branch,
+SQLite retry and format-only startup flows pass. The complete regression passes
+**902 tests / 59 suites** in 687.703 seconds, with strict typing and fresh
+Android/iOS Hermes exports. These are development checks, not device acceptance.
+
+The isolated cloud Node 24 comparison uses the exact decoder source from
+`d70c58e`, checked by SHA-256, with 1,000,003 decoded bytes / 1,333,340 encoded
+characters and ten interleaved measured samples per decoder after warmup:
+
+| Isolated base64 decode | Original | Current |
+| --- | ---: | ---: |
+| Median | 40.55 ms | 13.40 ms |
+| p95 | 50.69 ms | 22.48 ms |
+
+Ten thousand deterministic valid/invalid differential inputs also agree with the
+original implementation. These timings cover base64 only; JSON, decompression,
+validation, SQLite, full restore and native devices still need their own measures.
+Reproduce with:
+
+```bash
+git show d70c58e:src/persistence/checkpoints.ts > /tmp/dreams-checkpoint-baseline.ts
+node tools/benchmark-checkpoint-base64.cjs /tmp/dreams-checkpoint-baseline.ts
+```
+
+`node tools/run-life-sweep.cjs 120` runs the same pure-engine birth/date/seeds,
+available-choice policy, per-year invariants, terminal checks and a factual death
+journal check directly under Node. It records country coverage, timings and a
+game-source hash, then verifies the source is unchanged at completion. An optional
+second argument selects the first seed; count plus start must not exceed 1,000.
+It complements Jest's native-component/SQLite/codec checks.
+
+The twelve-seed diagnostic completed in **148.648 seconds**, with terminal age,
+people and ledger counts matching the first twelve current Jest sweep records
+exactly. The corresponding Jest records reached seed eleven in 631.136 seconds.
+Runs overlap other cloud work; this measures harness runtime, not a simulation or
+native-device speedup. The separate 120-life Node and Jest runs are still in
+progress. No completed 120/1,000-life claim is made here yet.
+
 `node tools/benchmark-history.cjs` runs one deterministic current-engine life, taking/restoring a compressed full-state checkpoint before every Age Up. The 18 October 2026 run used Node 24 in this cloud workspace:
 
 | Observation | Result |

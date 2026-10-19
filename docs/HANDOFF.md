@@ -24,6 +24,15 @@ typing pass. The new complete regression passes **878 tests / 58 suites** in
 Metro source bundles. A separate 120-life sweep is in progress; do not count it
 as passed until completion. Native and release gates remain open.
 
+The subsequent persistence check removes checkpoint-decoder allocations without
+changing checkpoint-v1, bounds or gameplay state. The complete regression passes
+**902 tests / 59 suites** in 687.703 seconds, with strict typing and fresh native
+Hermes exports and current Metro source bundles. [PERFORMANCE.md](PERFORMANCE.md) records the scoped benchmark,
+10,000 differential cases and a measured direct Node sweep runner. Its twelve
+terminal age/people/ledger results match Jest exactly; expanded 120-life runs
+remain in progress. [EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records
+a partial official-source review for the next school paths; no rule values changed.
+
 ## User priorities and authorisation
 
 Build the entire production game through the [master plan](planning/MASTER_PLAN.md)

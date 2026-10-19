@@ -12,6 +12,17 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Checkpoint decoding now removes per-quartet array allocations while preserving
+the exact archive format and bounds. The complete **902-test / 59-suite**
+regression passes in 687.703 seconds, including all genuine migration fixtures,
+SQLite/native-component flows and twelve complete seeded lives. Strict typing
+and fresh Android/iOS Hermes exports and current Metro source bundles also pass.
+An isolated, hash-pinned cloud
+decoder benchmark and 10,000 differential cases are recorded in
+[PERFORMANCE.md](PERFORMANCE.md); they do not establish full restore/native speed.
+A direct Node runner matches all twelve Jest terminal age/people/ledger metrics
+and has begun a separate 120-life sweep. Both expanded runs remain in progress.
+
 The early-game milestone adds a read-only School Plans section and twenty
 distinct childhood situations, bringing the source catalogue to **70**. Five new
 preschool situations work without a living parent. The school scenes use the
@@ -105,7 +116,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Social media, fame, sponsorships and controversies | Implemented core: four fictional profiles, eight post topics, varied saved reach/viral/criticism responses, real creator contacts/collaborations, actual posting routines/payments, monthly brand delivery, public image/attention/opportunities, closure/suspension/memorial history | Twelve currency payouts, three connected creator lives, exact profile metrics/archives, six-month delivery/failure, suspension retention, child support, real v9 archive migration and native creation/publish failure→retry→SQLite pass; broader balance/device fidelity remain open |
 | Businesses and all eleven special-career paths | Partial: five company types, actual staff/payroll, management, funding/distributions, distress/sale and company bequests; acting/modelling/sport/music selection, training and timed contracts, funded recording/royalties and actual campaigns/elections/office terms, YouTuber/Streamer equipment, live production and freelance crew; Astronaut/Military training, service and assignments; royal family/duty/succession path connected to actual birth/marriage/children/death | Domain, currency, deterministic journeys, migration and native-component→real-SQLite checks; device acceptance and broader balance remain open |
 | Travel, emigration, work/study abroad, pets, hobbies and entertainment | Partial: twelve destinations, prepaid holidays/gap years, actual monthly experiences, temporary location, employment/study leave, household companions/consent, caregiver checks, interruption and partial early-return refunds; permanent family moves, real work/study offers, source tax settlement, local reserve funding and tuition; pets/hobbies remain pending | Focused domain/component checks, country quotes, real SQLite rollback/retry and current/historical v18/v19 archive migration; complete regression/types/native bundles pass; device/release acceptance pending |
-| Country-specific rules and all proposed launch currencies | Partial: twelve authored education/work/finance/health-fee/estate profiles and nine currencies, with shared documented family/medical assumptions and twelve authored legal baselines; shared authored immigration/offer rules now connected | Arithmetic/progression and local fee/family/estate checks pass; external rule-source verification is blocked by active network policy; see COUNTRY_RULES.md |
+| Country-specific rules and all proposed launch currencies | Partial: twelve authored education/work/finance/health-fee/estate profiles and nine currencies, with shared documented family/medical assumptions and twelve authored legal baselines; shared authored immigration/offer rules now connected | Arithmetic/progression and local fee/family/estate checks pass; partial official education-source audit is recorded in COUNTRY_RULES.md; all complete-profile verification gates remain open |
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death, actual career/children/property summary, will/protected heirs, debt/tax-first settlement, specific ownership bequests, minor trusts and same-child continuation with preserved annual cursor | Conservation, all twelve local-currency NPC estates, real v6 migration, a three-generation journey and native legacy storage-failure→retry/cold-load pass; broader seeded/device acceptance pending |
 | Historical snapshots and Time Machine branches | Implemented core: complete compressed checkpoints before Age Up, explicit saved moments, reviewed separate-branch restore, original future preserved, only prior history copied, local archive round-trip | Atomic rollback/idempotency, exact RNG/outcomes/market restoration, corruption rejection, recovery history pruning and native confirmation→SQLite failure/retry pass; large/native acceptance pending |

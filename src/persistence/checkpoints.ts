@@ -1,28 +1,7 @@
 import { gzipSync, gunzipSync, strFromU8, strToU8 } from 'fflate';
 import { z } from 'zod';
 import { decodeWorld, encodeWorld, World } from '../game/model';
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-function base64(bytes: Uint8Array): string {
-  const chunks: string[] = []; let chunk = '';
-  for (let index = 0; index < bytes.length; index += 3) {
-    const a = bytes[index], b = bytes[index + 1] ?? 0, c = bytes[index + 2] ?? 0;
-    chunk += alphabet[a >> 2] + alphabet[((a & 3) << 4) | (b >> 4)] + (index + 1 < bytes.length ? alphabet[((b & 15) << 2) | (c >> 6)] : '=') + (index + 2 < bytes.length ? alphabet[c & 63] : '=');
-    if (chunk.length >= 8192) { chunks.push(chunk); chunk = ''; }
-  }
-  return chunks.join('') + chunk;
-}
-function unbase64(text: string): Uint8Array {
-  if (!text.length || text.length % 4 || text.length > 28_000_000) throw new Error('Invalid checkpoint encoding');
-  const padding = text.endsWith('==') ? 2 : text.endsWith('=') ? 1 : 0, size = text.length / 4 * 3 - padding;
-  const bytes = new Uint8Array(size); let cursor = 0;
-  for (let index = 0; index < text.length; index += 4) {
-    const values = [0, 1, 2, 3].map(offset => { const char = text[index + offset]; if (char === '=' && index + offset >= text.length - padding) return 0; const value = alphabet.indexOf(char); if (value < 0) throw new Error('Invalid checkpoint encoding'); return value; });
-    if (cursor < size) bytes[cursor++] = values[0] << 2 | values[1] >> 4;
-    if (cursor < size) bytes[cursor++] = (values[1] & 15) << 4 | values[2] >> 2;
-    if (cursor < size) bytes[cursor++] = (values[2] & 3) << 6 | values[3];
-  }
-  return bytes;
-}
+import { encodeBase64 as base64, decodeBase64 as unbase64 } from './base64';
 function fingerprint(bytes: Uint8Array) {
   let hash = 2166136261;
   for (const byte of bytes) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
