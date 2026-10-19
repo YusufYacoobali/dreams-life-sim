@@ -1,13 +1,17 @@
 import { ageOn, World } from '../model';
-import { BoundChoice, Effect, Pending } from '../runtime';
+import { BoundChoice, Pending } from '../runtime';
 
-type Stat = Extract<Effect, { kind: 'stat' }>['stat'];
-type Option = { id: string; label: string; changes: Partial<Record<Stat, number>>; bond?: number; title: string; result: string; journal: string };
-type Template = { id: string; min: number; max: number; parent?: boolean; illustration: string; title: string; body: string; choices: Option[] };
-const option = (id: string, label: string, changes: Option['changes'], title: string, result: string, journal: string, bond?: number): Option => ({ id, label, changes, title, result, journal, bond });
+import { EventTemplate, StoryStat, storyOption as option } from './eventTypes';
+import { childhoodTemplates } from './childhood';
+import { currentSchool } from '../systems/schoolSchemas';
+import { activeTrip } from '../systems/travelSchemas';
+import { hospitalized } from '../systems/healthSchemas';
+import { isConfined } from '../systems/legalSchemas';
+import { serviceAway } from '../systems/serviceSchemas';
+import { relationFor } from '../systems/relationships';
 
 /** Original situations, not random names placed in interchangeable success text. */
-export const eventTemplates: readonly Template[] = [
+export const eventTemplates: readonly EventTemplate[] = [
   {
     id: 'first-cake', min: 1, max: 2, parent: true, illustration: 'birthday', title: 'A very small food critic',
     body: '{parent} puts a birthday cake in front of you. Everyone waits for a photograph. You have a different artistic vision.',
@@ -206,28 +210,44 @@ export const eventTemplates: readonly Template[] = [
       option('worry', 'Look for something to worry about', { stress: 4, happiness: -2 }, 'Something turns up', 'Worry is rarely short of material. The light was nicer.', 'I found a worry to fill a peaceful morning.'),
     ],
   },
+  ...childhoodTemplates,
 ];
 
-export function eligibleTemplates(world: World): readonly Template[] {
-  const player = world.people[world.activePersonId];
-  const age = ageOn(player, world.date);
+/** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */
+function schoolContext(world: World) {
+  const player = world.people[world.activePersonId], school = currentSchool(world);
+  const present = (id: string) => { const person = world.people[id]; return person && !person.died && person.country === player.country && person.city === player.city && !activeTrip(world, id) && !hospitalized(world, person) && !isConfined(world, person) && !person.legal.wanted && !serviceAway(world, id); };
+  if (!school || school.stage !== player.education.stage || school.school !== player.education.school || school.country !== player.country || school.city !== player.city || !present(player.id)) return {};
+  const peer = school.classmateIds.map(id => world.people[id]).find(person => present(person.id) && person.education.stage === school.stage && person.education.school === school.school);
+  const candidate = world.people[school.currentTeacherId], teacher = present(candidate.id) && candidate.employment?.roleId === 'teacher' ? candidate : undefined;
+  return { school, peer, teacher };
+}
+export function eligibleTemplates(world: World): readonly EventTemplate[] {
+  const player = world.people[world.activePersonId], age = ageOn(player, world.date);
   const parent = world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
-  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || parent) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  const context = schoolContext(world);
+  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || parent) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
-export function bindEvent(world: World, template: Template): Extract<Pending, { kind: 'decision' }> {
+export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
   const player = world.people[world.activePersonId];
   const parent = world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
   if (template.parent && !parent) throw new Error('This event needs a living parent');
-  const person = parent ? world.people[parent.from] : null;
-  const text = (value: string) => value.replaceAll('{parent}', person?.firstName ?? '').replaceAll('{city}', player.city);
+  const person = parent ? world.people[parent.from] : null, context = schoolContext(world);
+  if (template.school && (!context.school || template.school !== 'any' && template.school !== context.school.stage) || template.classmate && !context.peer || template.teacher && !context.teacher) throw new Error('This event needs the current school contacts');
+  const peerRelation = context.peer && relationFor(world, player.id, context.peer.id), teacherRelation = context.teacher && relationFor(world, player.id, context.teacher.id);
+  const text = (value: string) => value.replaceAll('{parent}', person?.firstName ?? '').replaceAll('{city}', player.city).replaceAll('{classmate}', context.peer?.firstName ?? '').replaceAll('{teacher}', context.teacher?.firstName ?? '').replaceAll('{school}', context.school?.school ?? '');
   const choices: BoundChoice[] = template.choices.map(choice => ({
     id: choice.id, label: text(choice.label),
     effects: [
-      ...Object.entries(choice.changes).map(([stat, delta]) => ({ kind: 'stat' as const, personId: player.id, stat: stat as Stat, delta: delta! })),
+      ...Object.entries(choice.changes).map(([stat, delta]) => ({ kind: 'stat' as const, personId: player.id, stat: stat as StoryStat, delta: delta! })),
       ...(choice.bond && parent ? [{ kind: 'relationship' as const, relationshipId: parent.id, delta: choice.bond }] : []),
+      ...(choice.peerBond && peerRelation ? [{ kind: 'relationship' as const, relationshipId: peerRelation.id, delta: choice.peerBond }] : []),
+      ...(choice.teacherBond && teacherRelation ? [{ kind: 'relationship' as const, relationshipId: teacherRelation.id, delta: choice.teacherBond }] : []),
+      ...(choice.grades && context.school ? [{ kind: 'school-grade' as const, personId: player.id, communityId: context.school.id, delta: choice.grades }] : []),
+      ...(choice.skill ? [{ kind: 'skill' as const, personId: player.id, skill: choice.skill.id, delta: choice.skill.delta }] : []),
     ],
     resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
   }));
-  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: template.title, body: text(template.body), illustration: template.illustration, personIds: [player.id, ...(template.parent && person ? [person.id] : [])], choices };
+  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : [])])], choices };
 }

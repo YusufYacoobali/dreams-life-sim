@@ -56,6 +56,10 @@ export function relationLabel(world: World, relation: Relationship, personId = w
 function syncKind(relation: Relationship) {
   if (relation.roles.includes('parent')) relation.kind = 'parent'; else if (relation.roles.includes('guardian')) relation.kind = 'guardian'; else if (relation.roles.includes('sibling')) relation.kind = 'sibling'; else if (relation.romance === 'married') relation.kind = 'spouse'; else if (activeRomance(relation)) relation.kind = 'partner'; else relation.kind = relation.roles.includes('friend') ? 'friend' : relation.roles.includes('coworker') ? 'coworker' : relation.roles.includes('classmate') ? 'classmate' : relation.roles.includes('teacher') ? 'teacher' : 'acquaintance';
 }
+/** A friendship can grow from an existing classmate or coworker role. */
+export function refreshFriendship(relation: Relationship) {
+  if (relation.strength >= 60 && !relation.roles.includes('friend') && relation.roles.some(role => role === 'acquaintance' || role === 'classmate' || role === 'coworker')) { relation.roles.push('friend'); syncKind(relation); }
+}
 export function connectPerson(world: World, id: string, fromId = world.activePersonId): RuntimeEffectRow[] {
   const person = world.people[id]; const player = world.people[fromId];
   if (!person || !player || player.died || person.died || person.id === player.id) throw new IneligibleAction('This person is unavailable');
@@ -92,7 +96,7 @@ function statChanges(person: Person, changes: Partial<Stats>): RuntimeEffectRow[
 }
 function bond(relation: Relationship, delta: number): RuntimeEffectRow {
   const before = relation.strength; relation.strength = bounded(before + delta); const actual = relation.strength - before;
-  if (relation.kind === 'acquaintance' && relation.strength >= 60) { relation.roles.push('friend'); syncKind(relation); }
+  refreshFriendship(relation);
   return { id: 'bond', label: 'Relationship', value: (actual >= 0 ? '+' : '') + actual + '%', tone: actual >= 0 ? 'positive' : 'negative' };
 }
 export function resolveSocial(world: World, command: SocialCommand) {

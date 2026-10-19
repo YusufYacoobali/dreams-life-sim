@@ -86,7 +86,9 @@ test('result effects report the actual bounded change', () => {
   world.people[world.activePersonId].stats.happiness = 99;
   const next = resolveCommand(world, { type: 'advance' });
   if (next.pending?.kind !== 'decision') throw new Error('Expected a decision');
-  const result = resolveCommand(next, { type: 'choose', eventId: next.pending.id, choiceId: 'smash' });
+  const choice = next.pending.choices.find(item => item.effects.some(effect => effect.kind === 'stat' && effect.stat === 'happiness' && effect.delta > 1));
+  if (!choice) throw new Error('Expected a positive introductory choice');
+  const result = resolveCommand(next, { type: 'choose', eventId: next.pending.id, choiceId: choice.id });
   expect(result.pending?.kind === 'result' && result.pending.effects.find(effect => effect.label === 'Happiness')?.value).toBe('+1%');
 });
 

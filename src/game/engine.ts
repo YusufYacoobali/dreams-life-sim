@@ -8,6 +8,8 @@ import { randomInteger } from './random';
 import { Effect, effectRowSchema } from './runtime';
 import { z } from 'zod';
 import { formatMoney } from './money';
+import { currentSchool } from './systems/schoolSchemas';
+import { skillContent } from './content/careers';
 import { IneligibleAction } from './errors';
 import { educationCommandSchema, EducationCommand, educationMonth, resolveEducation } from './systems/education';
 import { workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
@@ -15,7 +17,7 @@ import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, set
 import { accountFor, post } from './systems/common';
 import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets, updatePropertyMarket } from './systems/assets';
 import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from './systems/markets';
-import { connectPerson, recordFamilyDeath, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
+import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
@@ -138,11 +140,12 @@ function finishYear(world: World) {
   relationshipsYear(world);
   familyYear(world);
   const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
-  const birthday = eligible.find(template => template.id === 'first-cake');
+  const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
+  const pool = introductory.length ? introductory : eligible;
   // Introductory year is guaranteed; later years leave room for quiet years.
   const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
   if (shouldOffer && eligible.length) {
-    const template = age === 1 && birthday ? birthday : eligible[roll(world, 'events', 0, eligible.length - 1)];
+    const template = pool[roll(world, 'events', 0, pool.length - 1)];
     offerPending(world, bindEvent(world, template));
     world.eventHistory.push({ templateId: template.id, year: world.date.year });
   } else {
@@ -188,7 +191,13 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       return [{ id: 'listing', label: 'Property', value: 'Still listed', tone: 'neutral' as const }];
     }
     let label: string, value: string, delta: number;
-    if (effect.kind === 'stat') {
+    if (effect.kind === 'school-grade') {
+      const person = world.people[effect.personId];
+      if (currentSchool(world, person.id)?.id !== effect.communityId) throw new IneligibleAction('This school situation has changed');
+      const before = person.education.grades; person.education.grades = clamp(before + effect.delta); delta = person.education.grades - before; label = 'Grades'; value = (delta >= 0 ? '+' : '') + delta + '%';
+    } else if (effect.kind === 'skill') {
+      const person = world.people[effect.personId], before = person.skills[effect.skill]; person.skills[effect.skill] = clamp(before + effect.delta); delta = person.skills[effect.skill] - before; label = skillContent[effect.skill].title; value = (delta >= 0 ? '+' : '') + delta + '%';
+    } else if (effect.kind === 'stat') {
       const stats = world.people[effect.personId].stats;
       const before = stats[effect.stat];
       stats[effect.stat] = clamp(before + effect.delta);
@@ -199,7 +208,7 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
     } else if (effect.kind === 'relationship') {
       const relation = world.relationships.find(r => r.id === effect.relationshipId);
       if (!relation) throw new IneligibleAction('That relationship no longer exists');
-      const before = relation.strength; relation.strength = clamp(before + effect.delta);
+      const before = relation.strength; relation.strength = clamp(before + effect.delta); refreshFriendship(relation);
       delta = relation.strength - before; label = 'Relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
     } else {
       const from = world.accounts.find(account => account.id === effect.fromAccountId);

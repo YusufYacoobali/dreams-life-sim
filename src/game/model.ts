@@ -65,7 +65,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(21), engineVersion: z.literal(20), contentVersion: z.literal(1),
+  schemaVersion: z.literal(22), engineVersion: z.literal(21), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -287,6 +287,8 @@ export function validateWorld(value: unknown): World {
     if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
     for (const choice of pending.choices) for (const effect of choice.effects) {
+      if (effect.kind === 'school-grade' && (!pending.personIds.includes(effect.personId) || !world.schoolCommunities.some(item => item.id === effect.communityId && item.personId === effect.personId && !item.ended))) throw new Error('Invalid bound school grade');
+      if (effect.kind === 'skill' && (!world.people[effect.personId] || !pending.personIds.includes(effect.personId))) throw new Error('Invalid bound skill target');
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
       if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
       if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
@@ -402,5 +404,6 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 18) { parsed.schemaVersion = 19; parsed.engineVersion = 18; parsed.trips = []; }
   if (parsed && parsed.schemaVersion === 19) { parsed.schemaVersion = 20; parsed.engineVersion = 19; parsed.relocations = []; }
   if (parsed && parsed.schemaVersion === 20) { parsed.schemaVersion = 21; parsed.engineVersion = 20; parsed.schoolCommunities = []; }
+  if (parsed && parsed.schemaVersion === 21) { parsed.schemaVersion = 22; parsed.engineVersion = 21; }
   return validateWorld(parsed);
 }

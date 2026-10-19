@@ -24,7 +24,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% | Paused, unintegrated work; persistent gameplay and native surfaces still pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 9% | 22 of at least 250 shipped; system acknowledgements do not count |
+| Distinct situational stories | 20% | 49 of at least 250 implemented; full coverage/editorial/release review remains open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 
@@ -106,3 +106,23 @@ flows. Strict application/test typing, offline SDK metadata alignment, fresh
 Android/iOS Hermes bundles (5.0/4.7 MB, 45 assets), and current Metro source
 bundles for both platforms pass. No new native visual pass or
 completion-percentage increase is claimed.
+
+## Childhood story expansion
+
+The working catalogue now contains 49 distinct situations: 22 existing templates
+and 27 newly authored infant/childhood/school situations. First-year choices now
+include three scenes that need no living parent, alongside the original cake
+scene. The first Age Up guarantees an eligible choice without inventing a parent.
+The catalogue count is about 20% of the 250 minimum; overall completion remains
+approximately 50%, and the other baseline estimates are unchanged.
+
+School stories bind saved classmates/teachers from the current local school;
+absent, hospitalised, travelling or departed contacts are excluded. Choices can
+change actual grades, skills and the existing relationships. A strengthened
+classmate bond can become a friendship while retaining the classmate role and
+the same person through later school years. Grade changes feed the existing
+university admission rules and never award qualifications by themselves.
+
+See [content coverage and limits](CONTENT_COVERAGE.md). Delayed callbacks, deeper
+school paths, broad adult/system-specific stories and native visual review are
+still pending. The final regression for this batch is in progress.
