@@ -34,6 +34,22 @@
 
 These fixtures preserve the old encoded formats, exact money, random streams and bound narrative. Tests migrate them through the current codec and verify their continuation without rerolling or reapplying effects. Do not regenerate old fixtures using the current model.
 
+`v25-scholarship-archive.json` was generated with unmodified game/repository
+source at `87131b2` (world 25 / engine 24 / content 3), before the next story
+expansion. The real SQLite repository imports the genuine v24 archive and
+branches its seventeen-year-old checkpoint. Actual commands finish school,
+produce the Academic Scholarship offer (saved draw 51), gain computing admission
+and finance only the billed remainder. Two actual university years retain
+twenty-four study months, two waivers of 1,050,000 USD minor units and two billed
+loans/payments of 350,000 each. Revision 68 is dated 1 January 2020, with 5,020
+ledger rows and the original age-20 annual result awaiting acknowledgement.
+The two selected genuine prior moments are ages eighteen/revision 64 and
+nineteen/revision 67, retaining the same award and its first paid period. The
+export is 243,894 bytes. No version, draw, money, grade, outcome, person or
+attendance was manually changed. Preserve all current/prior financial records,
+identities, RNG and pending result when adding later content/schema defaults.
+Never regenerate this archive with newer code.
+
 `v24-university-loan-archive.json` was generated with unmodified `464925a`
 (world 24 / engine 23 / content 3), before scholarships. Seed 16 starts a real US
 life on 1 January 2000 using the store, SQLite repository and Begin Life. Every
