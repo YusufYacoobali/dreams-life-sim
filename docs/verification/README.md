@@ -4,6 +4,14 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-opening-20261019/` contains actual unmodified 390×844 Android
+  captures, an actual custom-result save, all-table exact cold-start comparison
+  and whole-world preservation when creating a separate rerolled Japanese life.
+  `android24-opening-polish-20261019.json` records the UI-only compatibility/
+  layout fixes, fourteen affected checks, types and fresh Hermes source hashes.
+  See [native scope](../NATIVE_OPENING.md); physical-device performance, complete
+  reference/accessibility, standalone and iOS acceptance remain open.
+
 - `ordinary-hobby-lives-v28-20261019.json` records twelve actual complete lives
   with guitar plus a rotating reading/gaming/cooking/gardening routine, real work,
   care, payments/pauses and cold-world hashes. `ordinary-hobby-action-inputs-v28-20261019.json`

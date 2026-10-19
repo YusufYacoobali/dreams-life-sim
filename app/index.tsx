@@ -14,7 +14,7 @@ export default function Welcome() {
   const ready = useGame(s => s.ready), world = useGame(s => s.world), busy = useGame(s => s.busy), error = useGame(s => s.error), bootstrap = useGame(s => s.bootstrap);
   const open = () => { if (world) router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); };
   const create = (mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } });
-  return <View style={styles.page}><StatusBar style="light" /><Image source={hero} accessible={false} resizeMode="cover" style={StyleSheet.absoluteFill} /><LinearGradient colors={['rgba(3,18,54,0.15)', 'transparent', 'rgba(2,12,31,0.96)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
+  return <View style={styles.page}><StatusBar style="light" /><Image source={hero} accessible={false} resizeMode="cover" style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]} /><LinearGradient colors={['rgba(3,18,54,0.15)', 'transparent', 'rgba(2,12,31,0.96)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
     <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.contents}>
       <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
       <View style={styles.actions}>{!ready ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /> : <>

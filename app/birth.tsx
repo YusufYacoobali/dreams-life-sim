@@ -20,8 +20,8 @@ export default function Birth() {
   const player = world.people[world.activePersonId], parents = world.relationships.filter(edge => edge.roles.includes('parent') && edge.to === player.id).map(edge => world.people[edge.from]);
   const born = months[player.born.month - 1] + ' ' + player.born.day + ', ' + player.born.year, membership = royalMembership(world);
   return <Page bottomSafeArea>
-    <View style={{ alignItems: 'center', paddingTop: 26, gap: 14 }}>
-      <View style={{ width: 230, height: 180, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ alignItems: 'center', paddingTop: 12, gap: 14 }}>
+      <View style={{ width: 230, height: 164, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ backgroundColor: '#D9F2FE', width: 158, height: 158, borderRadius: 79, alignItems: 'center', justifyContent: 'center' }}><Portrait name={fullName(player)} appearance={player.appearance} age={0} size={145} /></View>
         <Ionicons name="heart" color="#FF8E8A" size={24} style={{ position: 'absolute', left: 10, top: 20 }} /><Ionicons name="star" color="#FFD060" size={28} style={{ position: 'absolute', right: 0, top: 65 }} /><View style={{ position: 'absolute', left: 0, top: 110, width: 11, height: 11, borderRadius: 6, backgroundColor: '#8BDCF1' }} />
       </View>

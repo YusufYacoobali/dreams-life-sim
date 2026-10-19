@@ -1,5 +1,19 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The Android 24 software device now runs the actual Expo Go opening: custom
+creation/appearance/country, newborn, Begin Life, first Age Up/choice/result and
+cold resume. Every SQLite table stays exact during the interrupted-result cold
+startup; a second rerolled Japanese life preserves the entire original world.
+Native review fixes the welcome hero's intrinsic-size crop, legacy portrait tint,
+legacy status-bar contrast and two-parent newborn CTA spacing. Fresh captures
+confirm the corrected hero, visible colours/system text and full Begin Life.
+Read [NATIVE_OPENING.md](NATIVE_OPENING.md) for the actual raw captures/save and
+limits. All **14 affected checks / four suites** pass in **3.605 seconds**, with
+strict types and fresh Hermes exports. Game/persistence source remains exactly
+the world-28 checkpoint below. Complete reference/accessibility, physical-device
+performance, standalone and iOS gates stay open; baseline estimates stay fixed.
+Commit AND push this tested UI/evidence checkpoint before changing game content.
+
 Checkpoint **`e5a4aaf` is pushed**. Its genuine
 `v28-ordinary-hobby-archive.json` was generated from that unmodified committed
 source through real SQLite and the production store. Revision 44 retains the

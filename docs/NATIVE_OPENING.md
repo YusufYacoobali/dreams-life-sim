@@ -1,8 +1,76 @@
 # Native opening checks
 
-Native opening, matched-reference visual comparison, accessibility and release
-acceptance remain open. Component tests and Hermes exports establish separate
-development checks.
+The custom first-year opening now runs on Android 24 in the official Expo Go
+client, including an unchanged cold result resume. Complete matched-reference,
+accessibility, physical-device performance, standalone and iOS acceptance remain
+open. Component tests and Hermes exports establish separate development checks.
+
+## Android 24 opening journey, 19 October 2026
+
+The isolated lower-resource AVD uses the official Android 24 default x86_64
+image, revision eight, emulator 37.2.12 and Expo Go 57.0.9 (the same verified
+official APK described below). It requests two cores and 1,536 MB, SwiftShader,
+Vulkan disabled, no hardware acceleration and a **390×844 physical / 160-dpi**
+display. Android boots to a responding launcher; the APK install returns
+**Success**. ADB reverse connects the local project to Metro. These are actual
+native captures, with the Android system bars and Expo development overlays
+retained.
+
+The custom journey selects an avatar, changes gender to female and the country
+to Australia/Sydney, then creates **Rohan Sharma**. The actual newborn identifies
+the saved parent Isla Sharma, mother, age 37. Begin Life commits once. The Life
+screen shows the five factual stat bars, exact AUD balance, birth journal and
+Age Up. The first actual year offers `first-cake`; choosing `smash` commits
+“The photograph survives”, Happiness 74→79 and parent relationship +3.
+
+The app is force-stopped on that result, its SQLite database/WAL copied for
+read-only diagnostics, and the actual project relaunched. Welcome offers Continue
+as Rohan; the original result reappears. All logical rows in **all eight database
+tables** match exactly before/after cold startup, including current, backup,
+one prior moment, three receipts and preferences. Revision stays three, with
+the completed twelve-month cursor and original money/RNG. Acknowledgement then
+returns to age one with the factual birthday journal entry once. The exported
+8,614-byte [actual native result save](verification/android24-opening-20261019/custom-result-save.json)
+and [exact comparison](verification/android24-opening-20261019/cold-resume.json)
+retain this evidence. No world/tag/stat/identity/outcome was manually edited.
+
+Native review found two compatibility bugs: API 24–28 does not implement React
+Native's multiply blending, so the opaque grayscale detail layer hid all portrait
+tints; dark icons also disappeared on the older runtime's dark status bar.
+The fallback retains the selected tint with lighter detail, and those legacy
+bars use light icons. The fresh native Life/random previews show actual colour
+and readable system text. Modern portrait blending/theme behavior is preserved.
+
+Comparison with reference 04 also found that the welcome Image's intrinsic
+1024×1536 dimensions overrode its absolute-fill constraints. The native capture
+cropped out the central character and city. Explicit percentage width/height now
+lets `cover` frame the artwork within the actual viewport. Preserve the original
+PNG; this is a layout correction.
+
+The fresh [welcome capture](verification/android24-opening-20261019/welcome-after.png)
+shows the corrected central figure and city. The two-parent
+[newborn capture](verification/android24-opening-20261019/newborn-after.png)
+shows the complete Begin Life control after reducing top whitespace. Random
+Life and Roll Again produce distinct actual previews (Leonardo Russo in Milan,
+then Ren Watanabe in Kyoto). The confirmation is cancelled once, reopened and
+accepted; the created Japanese, non-binary newborn matches that final preview.
+The [two-life check](verification/android24-opening-20261019/two-lives.json)
+compares the entire preserved custom world with the single expected
+acknowledgement of its original result. Accounts, ledger and RNG stay unchanged;
+the new random life is separate and initially unacknowledged. No save is replaced.
+
+All fourteen affected onboarding/startup/settings/interaction checks pass across
+four suites in 3.605 seconds, with strict application/test typing and fresh
+Android/iOS Hermes exports. This UI-only change preserves game/persistence hash
+`cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30`.
+The complete 1,226-test game checkpoint remains scoped to `e5a4aaf`; these
+overlapping checks are not a fabricated new full-suite total. Exact UI/bundle
+hashes are in the [polish record](verification/android24-opening-polish-20261019.json).
+
+The [raw captures](verification/android24-opening-20261019/) establish these
+scoped interactions. Development warnings/overlays and software rendering are
+visible; this is not a pixel-fidelity or native performance pass. The complete
+opening/release gate and the conservative progress baselines remain open.
 
 ## Android 29 software-emulator attempt, 19 October 2026
 

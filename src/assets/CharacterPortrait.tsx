@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, Platform, View } from 'react-native';
 import type { Person } from '../game/model';
 import { ageingHairColor, faceScales, hairColors, hairRects, headRects, portraitAgeStage, portraitAtlasSize, skinTones, SourceRect } from './portraitLayout';
 
@@ -20,8 +20,11 @@ function TintedLayer({ rect, color, width, left, top }: { rect: SourceRect; colo
   const [x, y, sourceWidth, sourceHeight] = rect;
   const scale = width / sourceWidth;
   const image = { position: 'absolute' as const, width: portraitAtlasSize * scale, height: portraitAtlasSize * scale, left: -x * scale, top: -y * scale };
+  // Android's native multiply blend starts at API 29. An opaque detail image
+  // otherwise hides the tint entirely; retain colour with lighter detail there.
+  const multiply = Platform.OS !== 'android' || Number(Platform.Version) >= 29;
   return <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ position: 'absolute', left, top, width, height: sourceHeight * scale, overflow: 'hidden', isolation: 'isolate' }}>
     <Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { tintColor: color }]} />
-    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, mixBlendMode: 'multiply' }}><Image source={atlas} resizeMode="stretch" accessible={false} style={image} /></View>
+    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, mixBlendMode: multiply ? 'multiply' : 'normal' }}><Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { opacity: multiply ? 1 : 0.35 }]} /></View>
   </View>;
 }

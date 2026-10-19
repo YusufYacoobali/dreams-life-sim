@@ -4,6 +4,21 @@ The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
 
+The button-latency fix is pushed, with fixed-input cloud actions substantially
+faster and focused saving feedback. Actual Android 24 Expo Go now runs the
+custom first-year journey and exact interrupted-result cold resume; Random Life
+reroll/creation preserves that original save. Native review corrects welcome
+art cropping, older-Android portrait/status-bar rendering and newborn CTA fit.
+All fourteen affected UI checks, strict typing and fresh Hermes exports pass.
+See [native evidence and remaining gates](NATIVE_OPENING.md). Complete reference,
+accessibility, physical-device performance, standalone and iOS acceptance remain
+open; the conservative baseline estimates below stay fixed.
+
+World 28 completes all eight core hobby kinds. Its full 1,226-test / 80-suite
+checkpoint and genuine reading archive are pushed; current UI-only native
+polish leaves that game/persistence source unchanged. Broader leisure and the
+complete production plan remain part of the authorised goal.
+
 World 27 now connects [four persistent hobbies and four paid outings](LEISURE.md)
 with actual monthly practice/funding and the existing pet-owning-child save.
 The complete regression passes **1,143 tests / 73 suites** in **788.232
@@ -74,9 +89,10 @@ above remain unchanged until their corresponding acceptance gates close.
    Verify first-year progression, decisions, durable retries and cold resume.
 5. **Android opening acceptance.** Build and run the real app, capture these
    screens at a matched viewport, fix layout/runtime problems and exercise
-   custom creation, random creation, first Age Up and resume. Official SDK and
-   a software Android emulator are being configured; no native pass is claimed
-   until the app runs. iOS native acceptance still requires macOS/device access.
+   custom creation, random creation, first Age Up and resume. The actual Android
+   24 Expo Go journey now runs, with raw captures and exact SQLite cold checks.
+   Standalone, complete reference/accessibility and physical-device performance
+   acceptance remain open. iOS still requires macOS/device access.
 6. **Deepen childhood first.** Match the school page in [birth.png](../design/birth.png), connect persistent classmates/teachers, actual attended club practice, behaviour and reports, then expand distinct childhood stories. Continue this independent work while the Android download host remains unavailable.
 7. **Resume the broader backlog.** Pets/hobbies, remaining education depth,
    extras, at least 250 reviewed stories, remaining art and complete release

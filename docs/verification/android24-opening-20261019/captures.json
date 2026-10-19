@@ -1,0 +1,65 @@
+{
+  "scope": "Unmodified actual native Android 24 390x844 captures; Expo development overlays retained",
+  "captures": {
+    "appearance-before.png": {
+      "bytes": 184915,
+      "sha256": "23614b6be0871d1493e7607b65364238b058716467ccb27982625c01d256f6fa"
+    },
+    "choice-result-before.png": {
+      "bytes": 57356,
+      "sha256": "44ad9f39bc2aaec900c5724e3558df4267d2f253ed874ced83b301c0b3a1485e"
+    },
+    "custom-country.png": {
+      "bytes": 46217,
+      "sha256": "b11550a2223bb57eaf125f4b27a61c99c87cb5072110b6286a57dd7c551213f6"
+    },
+    "custom-identity.png": {
+      "bytes": 68139,
+      "sha256": "480c035324e193ace1a6e1023cce602dc6edb9c0684b3ed5c2b513497d40002a"
+    },
+    "life-after.png": {
+      "bytes": 52382,
+      "sha256": "20065b88e5ee9a5f74834146d78e1ddf0642600e32b899994e9251a42c348b71"
+    },
+    "life-before.png": {
+      "bytes": 46075,
+      "sha256": "e41bb1289b9661f578e897475b671ce7858a30a0d1e21d0c744366984d37246c"
+    },
+    "new-life-confirm.png": {
+      "bytes": 48473,
+      "sha256": "67447ccb184615ddfa7137d6bc4169d9f1d43702b9a14d33d267347d8f642001"
+    },
+    "newborn-after.png": {
+      "bytes": 69655,
+      "sha256": "c16894fa20fb4790ab0f91fa40a9a5e97e0af40f3d4e43cf746c4377aabbdcb7"
+    },
+    "newborn-before.png": {
+      "bytes": 69451,
+      "sha256": "7b663928518b74038130a713a77085242e7e8a8f5bd6d841c6798952987730ba"
+    },
+    "random-newborn-before-spacing.png": {
+      "bytes": 68747,
+      "sha256": "1c2d0196de140c6631aa33bd2c4bfb4c95cf980f325af79a9ecbcdf2dfda03ee"
+    },
+    "random-preview.png": {
+      "bytes": 65678,
+      "sha256": "f1b739f1aa9957afa84e3b1c140aa2866a20a84435f6dca04ad7756afe49103f"
+    },
+    "random-reroll.png": {
+      "bytes": 63495,
+      "sha256": "bd21cbee4c2fe2c33aea905122c21bed25e34bcb071a43a4f4ecef6844b9162f"
+    },
+    "resumed-result.png": {
+      "bytes": 65882,
+      "sha256": "42d5fced2d856e6fe1af818cf22a2272b561460bc5c08b1fe42e4d80959ce76a"
+    },
+    "welcome-after.png": {
+      "bytes": 376737,
+      "sha256": "a339aadb8b312f5fa436fab12cb84073a08a60013a1408496a2834e2277234e5"
+    },
+    "welcome-before.png": {
+      "bytes": 320492,
+      "sha256": "dde9c3e15fe78223a609ccf4207084e3f40cc8c2b36d1d8f150038aef9c89bfe"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "Actual Android 24 Expo Go lives after acknowledged custom result and confirmed rerolled random creation",
+  "originalLife": {
+    "id": "life_mvfsq7go_7jy1o3_0",
+    "revision": 4,
+    "exactFullWorldMatchesSingleAcknowledgement": true,
+    "accountsLedgerRngUnchanged": true
+  },
+  "randomLife": {
+    "id": "life_mvft3wub_kvw82s_0",
+    "revision": 0,
+    "name": "Ren Watanabe",
+    "gender": "nonbinary",
+    "country": "JP",
+    "city": "Kyoto",
+    "birthAcknowledged": false,
+    "appearance": {
+      "face": 3,
+      "skin": 3,
+      "hair": 4,
+      "hairColor": 2
+    }
+  },
+  "snapshots": 1,
+  "receipts": [
+    {
+      "life_id": "life_mvfsq7go_7jy1o3_0",
+      "command_id": "birth:life_mvfsq7go_7jy1o3_0",
+      "revision": 1
+    },
+    {
+      "life_id": "life_mvfsq7go_7jy1o3_0",
+      "command_id": "revision:1:advance",
+      "revision": 2
+    },
+    {
+      "life_id": "life_mvfsq7go_7jy1o3_0",
+      "command_id": "revision:2:choose",
+      "revision": 3
+    },
+    {
+      "life_id": "life_mvfsq7go_7jy1o3_0",
+      "command_id": "revision:3:acknowledge",
+      "revision": 4
+    }
+  ]
+}

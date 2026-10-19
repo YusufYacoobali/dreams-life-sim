@@ -12,6 +12,19 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Actual Android 24 Expo Go checks now run custom creation, saved appearance/
+country, newborn, Begin Life, first Age Up/choice/result and cold resume. All
+eight SQLite tables remain exact across an interrupted-result cold startup.
+The actual rerolled Japanese newborn preserves the original custom life in full.
+Native review fixes intrinsic-size cropping of the welcome hero, grey portraits
+on API 24–28, invisible legacy status-bar icons and two-parent newborn CTA fit.
+Fresh native captures confirm the corrected composition/colour/contrast/fit.
+All **14 affected checks / four suites** pass in **3.605 seconds**, with strict
+types and fresh Android/iOS Hermes exports. Game/persistence remains unchanged
+from `e5a4aaf`. These scoped native interactions advance the evidence, while
+complete reference, accessibility, physical-device performance, standalone and
+iOS gates/percentage baselines remain open. See [NATIVE_OPENING.md](NATIVE_OPENING.md).
+
 Checkpoint **`e5a4aaf` is pushed**. Its genuine world-28 archive was generated
 using the unchanged committed source, actual SQLite and production commands.
 The saved reading result keeps twelve paid months, one manual practice,

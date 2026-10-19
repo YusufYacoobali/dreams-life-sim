@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import { useColorScheme } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 export const lightColors = {
@@ -52,5 +52,9 @@ export function ThemeProvider({
 
 export const useColors = () => useContext(ThemeContext);
 export function ThemedStatusBar() {
-  const colors = useColors(); return <StatusBar style={colors === darkColors ? 'light' : 'dark'} />;
+  const colors = useColors();
+  // These legacy Android windows retain a dark system bar in the current
+  // native runtime, so dark icons disappear even when the page is light.
+  const legacyAndroid = Platform.OS === 'android' && Number(Platform.Version) < 29;
+  return <StatusBar style={legacyAndroid || colors === darkColors ? 'light' : 'dark'} />;
 }
