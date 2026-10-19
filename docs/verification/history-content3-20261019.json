@@ -1,0 +1,27 @@
+{
+  "recordedOn": "2026-10-19",
+  "sourceCommit": "6725964ba5c4dfb06bba0d6d77576d24d70ebc56",
+  "node": "v24.19.0",
+  "scope": "cloud diagnostic; not native acceptance",
+  "command": "node tools/benchmark-history.cjs /tmp/dreams-largest-checkpoint.json",
+  "gameSourceHash": "9c3040f28de2157839267ce8a2092eb73d81c13f08fda1f93f6ae9259a0f6c69",
+  "diagnosticChange": "UTF-8 raw-world byte count and optional largest-checkpoint output; no gameplay changes",
+  "limitations": [
+    "One seeded birth-to-death history, not a 120-year or multi-generation world",
+    "Checkpoint payload totals exclude SQLite live/backup rows, WAL and assets",
+    "Timings overlap other cloud sweeps; no controlled cross-content comparison"
+  ],
+  "result": {
+    "environment": "cloud Node 24, not native",
+    "years": 79,
+    "ageAtDeath": 78,
+    "people": 18,
+    "ledgerRows": 47202,
+    "peakWorldBytes": 14905010,
+    "historyBytes": 27334703,
+    "conservative120LateCheckpointsBytes": 95682960,
+    "advanceP95Ms": 203.72385999999824,
+    "packP95Ms": 622.1466210000071,
+    "restoreP95Ms": 774.7756700000027
+  }
+}

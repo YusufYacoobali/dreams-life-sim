@@ -4,9 +4,12 @@ require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule
 const root = path.join(__dirname, '../src/'), { createLife, randomCreation } = require(root + 'game/createLife.ts'), { resolveCommand } = require(root + 'game/engine.ts'), { ageOn, encodeWorld } = require(root + 'game/model.ts'), { packCheckpoint, unpackCheckpoint } = require(root + 'persistence/checkpoints.ts');
 const { choiceUnavailable } = require(root + 'game/choiceAvailability.ts');
 let world = { ...createLife('life_benchmark', 42, randomCreation(42), { year: 2026, month: 10, day: 18 }), birthAcknowledged: true };
+const checkpointOutput = process.argv[2] ?? null;
 const advances = [], packs = [], restores = []; let bytes = 0, peak = 0, maxCheckpoint = 0, years = 0;
 while (!world.people[world.activePersonId].died && years < 150) {
-  let time = performance.now(); const checkpoint = packCheckpoint(world); packs.push(performance.now() - time); bytes += checkpoint.length; maxCheckpoint = Math.max(maxCheckpoint, checkpoint.length); peak = Math.max(peak, encodeWorld(world).length);
+  let time = performance.now(); const checkpoint = packCheckpoint(world); packs.push(performance.now() - time); bytes += checkpoint.length;
+  if (checkpoint.length > maxCheckpoint) { maxCheckpoint = checkpoint.length; if (checkpointOutput) fs.writeFileSync(checkpointOutput, checkpoint); }
+  peak = Math.max(peak, Buffer.byteLength(encodeWorld(world), 'utf8'));
   time = performance.now(); unpackCheckpoint(checkpoint); restores.push(performance.now() - time);
   time = performance.now(); world = resolveCommand(world, { type: 'advance' }); advances.push(performance.now() - time);
   let guard = 0;

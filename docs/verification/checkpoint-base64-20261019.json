@@ -1,0 +1,21 @@
+{
+  "recordedOn": "2026-10-19",
+  "sourceCommit": "6725964ba5c4dfb06bba0d6d77576d24d70ebc56",
+  "node": "v24.19.0",
+  "scope": "cloud diagnostic; not native acceptance",
+  "command": "node tools/benchmark-checkpoint-base64.cjs /tmp/dreams-checkpoint-baseline.ts",
+  "baselineCapture": "git show d70c58e:src/persistence/checkpoints.ts > /tmp/dreams-checkpoint-baseline.ts",
+  "result": {
+    "scope": "isolated cloud Node base64 decode; not native/full restore",
+    "baselineCommit": "d70c58e",
+    "baselineHash": "fe9447c913d65a11363e68c897cdc3ac413ce49c7f1473ee54d2e0e2df05cf07",
+    "dataBytes": 1000003,
+    "encodedCharacters": 1333340,
+    "differentialCases": 10000,
+    "samplesPerDecoder": 10,
+    "baselineMedianMs": 40.549353999999994,
+    "candidateMedianMs": 13.40488900000014,
+    "baselineP95Ms": 50.693418000000065,
+    "candidateP95Ms": 22.480321999999887
+  }
+}

@@ -2,6 +2,8 @@
 
 These are cloud diagnostics, not native-device acceptance. Re-run after the remaining systems/content are integrated and measure actual iOS/Android hardware before release.
 
+Machine-readable measurements are preserved in [verification/](verification/README.md).
+
 ## Reproducible core-life sweeps
 
 `npm run test:soak` requests 120 complete seeded lives. Use
@@ -84,6 +86,34 @@ exactly. The corresponding Jest records reached seed eleven in 631.136 seconds.
 Runs overlap other cloud work; this measures harness runtime, not a simulation or
 native-device speedup. The separate 120-life Node and Jest runs are still in
 progress. No completed 120/1,000-life claim is made here yet.
+
+## Current content-three history measurement
+
+After the decoder change, the current seed-42 history diagnostic completed 79
+observations with death at 78, 18 people and 47,202 ledger rows. It measured
+**14,905,010 UTF-8 bytes** for the largest world and **27,334,703 bytes** of
+compressed checkpoint payloads in total. Repeating its largest late checkpoint
+120 times projects **95,682,960 bytes**. The 50 MB history gate remains open;
+this projection is not an actual 120-year/multi-generation or SQLite measurement.
+
+Cloud p95 was 203.7 ms for Age Up, 622.1 ms for packing and 774.8 ms for full
+decode/validation. This is a larger world than the content-two run and overlapped
+other sweeps. It does not measure a decoder-only speedup or native timing. The
+isolated same-input comparison above is the evidence for the decoder change.
+
+The history tool now measures UTF-8 byte length explicitly. Older raw-world size
+figures used JavaScript string length and should be treated as approximate raw
+sizes; their compressed checkpoint JSON payload counts are ASCII byte counts.
+An optional output path captures the largest self-contained checkpoint for later
+fixed-input profiling:
+
+```bash
+node tools/benchmark-history.cjs /tmp/dreams-largest-checkpoint.json
+```
+
+Next storage work must measure complete multi-generation worlds, live/backup/WAL
+overhead and native responsiveness, then reduce representation costs while
+preserving the complete reconciled history, random streams and restorable worlds.
 
 `node tools/benchmark-history.cjs` runs one deterministic current-engine life, taking/restoring a compressed full-state checkpoint before every Age Up. The 18 October 2026 run used Node 24 in this cloud workspace:
 
