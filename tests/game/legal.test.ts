@@ -36,7 +36,7 @@ test('v8 migration adds empty legal state and never invents an offence or consum
 });
 test('a genuine v8 SQLite archive preserves its saved medical quote and historical emergency without rerolling', () => {
   const archive = decodeSave(JSON.stringify(medicalArchive)), world = archive.world, history = unpackCheckpoint(archive.snapshots[0].payload);
-  expect(world.schemaVersion).toBe(27); expect(world.annual?.monthsProcessed).toBe(1); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');
+  expect(world.schemaVersion).toBe(28); expect(world.annual?.monthsProcessed).toBe(1); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');
   expect(history).toEqual(world); expect(world.pending?.kind === 'decision' && world.pending.choices[0].effects).toContainEqual(expect.objectContaining({ kind: 'emergency-care', quotedCost: 36000n }));
   const before = accountFor(world).cash, cared = choose(world, 'care'); expect(accountFor(cared).cash).toBe(before - 36000n); expect(cared.incidents).toEqual([]);
 });

@@ -81,7 +81,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(27), engineVersion: z.literal(26), contentVersion: z.literal(4),
+  schemaVersion: z.literal(28), engineVersion: z.literal(27), contentVersion: z.literal(4),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -481,5 +481,7 @@ export function decodeWorld(text: string, immutable = false): World {
   if (parsed && parsed.schemaVersion === 25) { parsed.schemaVersion = 26; parsed.engineVersion = 25; parsed.pets = []; parsed.petAdoptions = []; }
   // Personal leisure starts now; existing pets, qualifications and payments remain exact.
   if (parsed && parsed.schemaVersion === 26) { parsed.schemaVersion = 27; parsed.engineVersion = 26; parsed.hobbies = []; parsed.leisureOutings = []; }
+  // Additional optional hobby kinds do not create plans, practice, costs or draws in old lives.
+  if (parsed && parsed.schemaVersion === 27) { parsed.schemaVersion = 28; parsed.engineVersion = 27; }
   return validateWorld(parsed, immutable);
 }

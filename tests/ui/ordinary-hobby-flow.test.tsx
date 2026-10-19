@@ -1,0 +1,76 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { encodeWorld } from '../../src/game/model';
+import { resolveCommand } from '../../src/game/engine';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
+import { SaveRepository } from '../../src/persistence/repository';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import archive from '../fixtures/v27-responsive-archive.json';
+
+let mockStore: ReturnType<typeof createGameStore>;
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() } }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import Hobbies from '../../app/(game)/hobbies';
+import Life from '../../app/(game)/(tabs)/life';
+import { PendingEvent } from '../../src/ui/PendingEvent';
+const frame = (children: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+
+test('the genuine child keeps original history, browses all new hobbies, and retries/cold-resumes actual reading consent, monthly bills and optional practice', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.import(JSON.stringify(archive));
+  const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+  await cold(); const world = () => mockStore.getState().world!, reading = () => world().hobbies.find(item => item.kind === 'reading')!;
+  const view = render(frame(<Life />));
+  const finish = async () => {
+    let guard = 0;
+    while ((world().pending || world().annual) && guard++ < 150) {
+      const current = world();
+      if (current.pending?.kind === 'decision') await press(current.pending.choices.find(item => !choiceUnavailable(current, item))!.label);
+      else if (current.pending) await press('Continue'); else await press('Continue This Year');
+    }
+    expect(guard).toBeLessThan(150);
+  };
+  await finish(); const beforeBrowse = encodeWorld(world()), originalGuitarMonths = structuredClone(world().hobbies[0].practices);
+  view.rerender(frame(<Hobbies />));
+  for (const name of ['Video Games', 'Cooking', 'Gardening', 'Reading']) await press(new RegExp('^' + name + '\\.'));
+  expect(encodeWorld(world())).toBe(beforeBrowse);
+  const accounts = structuredClone(world().accounts), assets = structuredClone(world().assets);
+  await press('Review Hobby Routine'); expect(screen.getByText('Responsible payer')).toBeOnTheScreen();
+  sqlite.exec("CREATE TRIGGER fail_reading_plan BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await press('Ask For This Routine'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
+  expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
+  sqlite.exec('DROP TRIGGER fail_reading_plan'); await press('Ask For This Routine');
+  expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, roll: 47, chance: 87 } }] });
+  expect(world().accounts).toEqual(accounts); expect(world().assets).toEqual(assets);
+  const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobbies />));
+  expect(encodeWorld(world())).toBe(planned); await press('Continue');
+  view.rerender(frame(<Life />)); const beforeYear = encodeWorld(world()), predicted = resolveCommand(world(), { type: 'advance' }, true);
+  sqlite.exec("CREATE TRIGGER fail_reading_months BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await press('Age Up'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
+  expect(encodeWorld(world())).toBe(beforeYear); expect(encodeWorld(await repository.load(world().id))).toBe(beforeYear);
+  sqlite.exec('DROP TRIGGER fail_reading_months'); await press('Age Up'); expect(world()).toEqual(predicted);
+  const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />));
+  expect(encodeWorld(world())).toBe(interrupted); await finish();
+  expect(reading().practices.filter(row => row.source === 'monthly')).toHaveLength(12);
+  expect(reading().practices.every(row => row.attended)).toBe(true); expect(reading().proficiency).toBe(24);
+  expect(reading().practices.reduce((sum, row) => sum + row.paid, 0n)).toBe(13920n);
+  expect(reading().practices.flatMap(row => row.effects).filter(effect => effect.stat === 'smarts').reduce((sum, effect) => sum + effect.after - effect.before, 0)).toBe(2);
+  expect(world().hobbies[0].practices.slice(0, originalGuitarMonths.length)).toEqual(originalGuitarMonths);
+  expect(world().pets[0].periods).toHaveLength(36);
+  view.rerender(frame(<Hobbies />)); await press(/^Reading\./);
+  const beforePractice = encodeWorld(world()), money = structuredClone(world().accounts), ledger = structuredClone(world().ledger), smarts = world().people[world().activePersonId].stats.smarts;
+  sqlite.exec("CREATE TRIGGER fail_reading_extra BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await press('Extra Practice'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforePractice);
+  sqlite.exec('DROP TRIGGER fail_reading_extra'); await press('Extra Practice');
+  expect(reading().practices.at(-1)).toMatchObject({ source: 'manual', gain: 1, paid: 0n, paymentId: null });
+  expect(world().accounts).toEqual(money); expect(world().ledger).toEqual(ledger); expect(world().people[world().activePersonId].stats.smarts).toBe(smarts);
+  expect(world().pending).toMatchObject({ kind: 'result', effects: [{ id: 'proficiency', value: '+1%', tone: 'positive' }, expect.anything(), expect.anything(), expect.anything()] });
+  const practiced = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobbies />));
+  expect(encodeWorld(world())).toBe(practiced); await press('Continue'); await press(/^Reading\./);
+  expect(screen.getByRole('button', { name: 'Extra Practice' })).toBeDisabled();
+  expect(reading().practices.filter(row => row.source === 'manual')).toHaveLength(1);
+  view.unmount(); sqlite.close();
+}, 60000);

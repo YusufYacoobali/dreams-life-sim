@@ -62,7 +62,7 @@ export function validateLeisure(world: World, ledger = indexLedger(world.ledger)
         if (row.available < row.due || row.paid !== row.due || row.paid > 0n && !row.paymentId || row.paid === 0n && row.paymentId) throw new Error('Hobby fee is not funded');
         if (row.paymentId) payment(row.paymentId, plan.payerId, plan.currency, row.paid, 'hobby', row.date, row.ledgerCursor);
         const deltas: Partial<Record<LeisureEffect['stat'], number>> = { energy: -(row.source === 'manual' || plan.mode === 'community' ? 2 : 4), happiness: 1, stress: -1 };
-        if (row.source === 'monthly') { attendedMonths++; if (hobby.kind === 'guitar' && attendedMonths % 3 === 0) deltas.music = 1; if (hobby.kind === 'chess' && attendedMonths % 6 === 0) deltas.smarts = 1; }
+        if (row.source === 'monthly') { attendedMonths++; if (hobby.kind === 'guitar' && attendedMonths % 3 === 0) deltas.music = 1; if ((hobby.kind === 'chess' || hobby.kind === 'reading') && attendedMonths % 6 === 0) deltas.smarts = 1; }
         if (row.effects.find(effect => effect.stat === 'energy')!.before < -deltas.energy!) throw new Error('Hobby attendance lacks its required energy');
         effects(row.effects, deltas);
       }

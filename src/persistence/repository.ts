@@ -36,10 +36,10 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Version five permits chunked checkpoints. Older apps must refuse the new
-    // representation; existing plain rows stay readable without an eager rewrite.
-    if (!version || version.user_version > 5) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 5) return;
+    // The reader marker also protects expanded saved hobby variants from older
+    // apps. Existing plain/v1/v2 rows remain readable without an eager rewrite.
+    if (!version || version.user_version > 6) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 6) return;
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -79,7 +79,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 5');
+      await tx.run('PRAGMA user_version = 6');
     });
   }
 

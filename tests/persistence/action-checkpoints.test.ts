@@ -7,6 +7,7 @@ import * as checkpoints from '../../src/persistence/checkpoints';
 import { encodeBase64 } from '../../src/persistence/base64';
 import { SaveRepository } from '../../src/persistence/repository';
 import archive from '../fixtures/v27-leisure-archive.json';
+import responsiveArchive from '../fixtures/v27-responsive-archive.json';
 import { database } from '../support/sqlite';
 
 function scenario() {
@@ -126,12 +127,33 @@ test('the version-four upgrade is atomic and keeps the original v1 payload until
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   sqlite.exec('DROP TRIGGER fail_v5'); await updated.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(5);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6);
   expect(await updated.load(world.id)).toEqual(world);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   await updated.commit(next, world.revision, 'upgrade_project');
   expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v2');
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(archive.checkpoint);
   expect(await new SaveRepository(driver).load(world.id)).toEqual(next);
+  sqlite.close();
+});
+
+test('reader six upgrades a version-five database without rewriting its genuine v2 world or mixed-format history', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  const imported = await repository.import(JSON.stringify(responsiveArchive));
+  for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(responsiveArchive.checkpoint);
+  sqlite.exec('PRAGMA user_version=5');
+  const moments = sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all();
+  const upgraded = new SaveRepository(driver); await upgraded.initialise();
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6);
+  expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(responsiveArchive.checkpoint);
+  expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
+  expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);
+  const world = await upgraded.load(imported.id); expect(world).toEqual(imported); expect(world.schemaVersion).toBe(28);
+  if (world.pending?.kind !== 'result') throw new Error('Expected the genuine project result');
+  const next = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id }, true);
+  await upgraded.commit(next, world.revision, 'first_v28_action');
+  expect(await new SaveRepository(driver).load(world.id)).toEqual(next);
+  expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
+  expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);
   sqlite.close();
 });

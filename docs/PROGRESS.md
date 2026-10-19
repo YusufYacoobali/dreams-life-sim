@@ -12,6 +12,22 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The world-28 / engine-27 / content-4 / database-6 candidate adds reading, video
+games, supervised cooking and gardening through actual consent, funding,
+attended/paused months, bounded proficiency and complete lifecycle histories.
+New practice results show actual changes at the 100-point cap. All 112 domain
+checks and the genuine child SQLite consent/monthly/manual failure-retry-cold
+journey pass; reader-six migration keeps original v2/mixed history bytes intact.
+Twelve dual-routine country lives pass in 154.477 seconds, with 20,896 attended/
+124 paused months and exact cold worlds. Current controlled-input cloud action
+diagnostics on real two-routine lives pass. The full **1,226-test / 80-suite**
+regression passes in **668.278 seconds**, with strict typing, fresh Hermes
+exports (5.3/5.0 MB, 48 distinct assets) and both current Metro manifests/source.
+Game source stays fixed through final checks. Catalogue remains 90. Native and
+broader production gates/percentage baselines stay open; this remains partial
+leisure breadth. Commit/push before the next milestone and preserve a genuine
+world-28 archive with the unmodified committed engine first.
+
 Button checkpoint **`8de01d7` is pushed**. A genuine checkpoint-v2 archive now
 preserves the actual completed project result, five original moments and both
 codec representations. The subsequent repository-only follow-up primes state

@@ -63,9 +63,10 @@ for (const [label, fixture] of [['First-year choice', 'v25-content4-bubble-archi
   assert.equal(result.pending?.kind, 'result');
   cases.push({ label: label + ' Continue', world: result, command: { type: 'acknowledge', resultId: result.pending.id } });
 }
-const historyIndex = process.argv.indexOf('--history');
+const historyIndex = process.argv.indexOf('--history'), inputsIndex = process.argv.indexOf('--inputs');
 let historicalRows;
-if (historyIndex >= 0) {
+if (inputsIndex >= 0) historicalRows = JSON.parse(fs.readFileSync(process.argv[inputsIndex + 1], 'utf8')).snapshots;
+else if (historyIndex >= 0) {
   const history = new DatabaseSync(process.argv[historyIndex + 1], { readOnly: true });
   historicalRows = history.prepare('SELECT s.payload,m.metadata FROM snapshots s JOIN snapshot_metadata m ON m.life_id=s.life_id AND m.snapshot_id=s.snapshot_id ORDER BY m.revision').all().map(row => ({ payload: row.payload, summary: JSON.parse(row.metadata) }));
   history.close();

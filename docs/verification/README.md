@@ -4,6 +4,18 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `ordinary-hobby-lives-v28-20261019.json` records twelve actual complete lives
+  with guitar plus a rotating reading/gaming/cooking/gardening routine, real work,
+  care, payments/pauses and cold-world hashes. `ordinary-hobby-action-inputs-v28-20261019.json`
+  keeps two actual age-30/60 candidate sweep moments without world/tag edits;
+  these are diagnostic inputs, not committed-source migration fixtures.
+  `ordinary-hobby-actions-v28-20261019.json` measures the current real SQLite
+  action path on those worlds. It is not the earlier fixed-input speed comparison
+  or a native interaction acceptance result.
+- `ordinary-hobbies-v28-20261019.json` records the complete 1,226-test/80-suite
+  checkpoint, exact source hashes, connected child/SQLite journey, reader-six
+  compatibility, unmodified artwork and fresh Hermes/Metro evidence.
+
 - `button-latency-20261019.json` preserves every controlled before/current/
   first-v1-write sample, identical input hashes, cold world-load scope and bundle
   evidence. `action-latency-inputs-v25-20261019.json` retains the two original

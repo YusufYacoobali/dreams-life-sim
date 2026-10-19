@@ -1,5 +1,24 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The current **verified candidate is world 28 / engine 27 / content 4 /
+database 6**: reading, gaming, supervised cooking and gardening join the four
+existing hobbies. Read [LEISURE.md](LEISURE.md). All 112 domain checks and the
+connected genuine child reading/SQLite failure-retry-cold journey pass. Reader
+six keeps genuine v2 current/mixed prior bytes unchanged on upgrade, and old
+archives retain all original fields. The twelve dual-routine lives pass in
+154.477 seconds with 20,896 attended/124 paused months and unchanged game hash
+`afe7c166d6857985514bc96eee7374d416d8d7e10fc4dc279303e92bf277cabd`.
+Actual two-routine age-30/60 world/action diagnostics also pass (47.87/121.86 ms
+cloud medians, different inputs from the earlier fixed-input speed comparison).
+The complete **1,226-test / 80-suite** regression passes in **668.278 seconds**,
+with strict source/test typing, fresh Hermes exports (5.3/5.0 MB, 48 distinct
+assets) and current Metro manifests/source. Game source stayed fixed through
+the final checks. The original four-subject transparent hobby atlas is copied
+unmodified with its exact reviewed bounds. Catalogue remains 90. Native and
+broader release gates/percentage baselines remain open. Commit AND push this
+tested state before advancing; generate a genuine world-28 reading archive
+from its unmodified committed source before the next game/schema/content change.
+
 The button fix **`8de01d7` is pushed**. Its genuine
 `v27-responsive-archive.json` was generated with that unmodified source through
 real SQLite: the committed project result at revision 33 retains the month-two

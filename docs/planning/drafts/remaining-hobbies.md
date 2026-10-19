@@ -1,5 +1,10 @@
 # Next hobby breadth after world 27
 
+Implemented by the world-28 candidate: eight total core hobby kinds with the
+original consent, quote, attendance and lifecycle histories. The 1,226-test
+regression and final exports pass; see [LEISURE.md](../../LEISURE.md) and its
+scoped evidence. This document remains the original integration contract.
+
 The current four pursuits and four paid outings are implemented, with the
 responsive-save checkpoint `8de01d7` fully verified and pushed. The generated reading/gaming/cooking/gardening atlas is a draft;
 its four subjects have passed source/48px/128px light-dark browser review. No

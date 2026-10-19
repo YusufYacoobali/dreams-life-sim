@@ -53,3 +53,21 @@ returned HTTP403 and the CDE selected-code page redirected to an inaccessible
 bot check; the Ontario parent guide also returned HTTP403. No search snippet is
 treated as operative text. No complete country gate or game-rule change follows
 from this partial historical-source progress.
+
+A further jurisdiction-specific primary-source check read [New York Education
+Law §3205](https://www.nysenate.gov/legislation/laws/EDN/3205). The Senate page
+labels its most recent revision 27 December 2019. Subsection 1 gives the general
+six-to-sixteen instruction rule and a December/September entry cutoff;
+subsection 3 permits district boards to require unemployed sixteen-to-seventeen
+minors to attend. Completion of a four-year high-school course is an exception.
+This supports a New York-specific planning distinction, not a national US rule;
+current district implementation still needs verification.
+
+The Ontario Assembly's [Royal Assent PDF for Bill 52](https://www.ola.org/sites/default/files/node-files/bill/document/pdf/2006/2006-12/bill---text-38-2-en-b052ra.pdf)
+was also read: the cover identifies 20 December 2006 assent and S.O. 2006,
+chapter 28. Its operative section 5 replaces Education Act section 21 with
+six-to-eighteen attendance, distinct September/June cutoffs and an exception for
+secondary graduation/equivalent standing. This is historical enacted text,
+not the current 2026 consolidation or proof of commencement for each provision.
+Later amendments, regulations and provincial implementation remain unverified;
+no Canadian country gate or game-rule change follows from this source alone.

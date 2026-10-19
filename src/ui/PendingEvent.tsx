@@ -1,4 +1,5 @@
 import { PetsLeisureArt, petIllustrations } from '../assets/PetsLeisureArt';
+import { OrdinaryHobbyArt, ordinaryHobbyIllustrations } from '../assets/HobbyArt';
 import React from 'react';
 import { Illustration, illustrationCells, IllustrationId } from '../assets/Illustration';
 import { useGame } from '../state/useGame';
@@ -20,7 +21,7 @@ export function PendingEvent() {
   const busy = useGame(s => s.busy);
   const error = useGame(s => s.error);
   if (!pending) return null;
-  const illustration = pending.illustration in illustrationCells ? <Illustration id={pending.illustration as IllustrationId} size={64} /> : pending.illustration in familyCells ? <FamilyArt id={pending.illustration as FamilyArtId} size={64} /> : pending.illustration in healthLegalRects ? <HealthLegalArt id={pending.illustration as HealthLegalArtId} size={64} /> : pending.illustration in fameBusinessRects ? <FameBusinessArt id={pending.illustration as FameBusinessArtId} size={64} /> : pending.illustration in careerRects ? <CareerArt id={pending.illustration as CareerArtId} size={64} /> : pending.illustration in petIllustrations ? <PetsLeisureArt id={petIllustrations[pending.illustration as keyof typeof petIllustrations]} size={64} /> : undefined;
+  const illustration = pending.illustration in illustrationCells ? <Illustration id={pending.illustration as IllustrationId} size={64} /> : pending.illustration in familyCells ? <FamilyArt id={pending.illustration as FamilyArtId} size={64} /> : pending.illustration in healthLegalRects ? <HealthLegalArt id={pending.illustration as HealthLegalArtId} size={64} /> : pending.illustration in fameBusinessRects ? <FameBusinessArt id={pending.illustration as FameBusinessArtId} size={64} /> : pending.illustration in careerRects ? <CareerArt id={pending.illustration as CareerArtId} size={64} /> : pending.illustration in petIllustrations ? <PetsLeisureArt id={petIllustrations[pending.illustration as keyof typeof petIllustrations]} size={64} /> : pending.illustration in ordinaryHobbyIllustrations ? <OrdinaryHobbyArt id={ordinaryHobbyIllustrations[pending.illustration as keyof typeof ordinaryHobbyIllustrations]} size={64} /> : undefined;
   const event: EventPresentation = pending.kind === 'decision'
     ? { ...pending, illustration, choices: pending.choices.map(choice => ({ id: choice.id, label: choice.label, disabledReason: world ? choiceUnavailable(world, choice) : choice.disabledReason })) }
     : { ...pending, illustration };

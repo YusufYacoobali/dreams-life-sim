@@ -126,7 +126,12 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
   const hobby = personHobbies(world).find(item => item.id === command.hobbyId), plan = hobby && activeHobbyPlan(hobby); if (!hobby || !plan || plan.id !== command.planId) throw new IneligibleAction('Choose your current hobby routine');
   if (command.type === 'stop-hobby') { closePlan(world, hobby, plan, 'stopped', 'I left the local routine.'); result(world, 'Routine stopped', 'Your proficiency and attended history stay yours. No future fees are charged. Earlier access and lessons are not refunded.', 'leisure-' + hobby.kind); return; }
   const reason = hobbyPracticeReason(world, hobby, plan); if (reason) throw new IneligibleAction(reason);
-  practice(world, hobby, plan, true); fact(world, 'I did extra practice in ' + hobbyContent[hobby.kind].name.toLowerCase() + '.', 'hobby'); result(world, 'Time for ' + hobbyContent[hobby.kind].name.toLowerCase(), 'You spent time practising. Extra practice adds to your own proficiency; it does not add a paid lesson, qualification or professional credit.', 'leisure-' + hobby.kind);
+  practice(world, hobby, plan, true); const row = hobby.practices[hobby.practices.length - 1];
+  fact(world, 'I did extra practice in ' + hobbyContent[hobby.kind].name.toLowerCase() + '.', 'hobby');
+  result(world, 'Time for ' + hobbyContent[hobby.kind].name.toLowerCase(), row.gain ? 'You spent time practising and built a little more personal proficiency. Your actual changes are recorded below.' : 'You spent time on familiar practice. Your proficiency is already at its current maximum; the actual energy and mood changes are recorded below.', 'leisure-' + hobby.kind, [
+    { id: 'proficiency', label: 'Proficiency', value: row.gain ? '+' + row.gain + '%' : '100% · unchanged', tone: row.gain ? 'positive' : 'neutral' },
+    ...row.effects.map(item => ({ id: item.stat, label: item.stat[0].toUpperCase() + item.stat.slice(1), value: (item.after - item.before >= 0 ? '+' : '') + (item.after - item.before) + '%', tone: item.after === item.before ? 'neutral' as const : (item.stat === 'stress' ? item.after < item.before : item.after > item.before) ? 'positive' as const : 'negative' as const })),
+  ]);
 }
 function practice(world: World, hobby: Hobby, plan: HobbyPlan, manual = false) {
   const person = world.people[hobby.personId], reason = hobbyPauseReason(world, hobby, plan, manual), before = hobby.proficiency, ledgerCursor = world.ledger.length, attended = !reason, due = manual ? 0n : plan.monthlyFee;
@@ -137,7 +142,7 @@ function practice(world: World, hobby: Hobby, plan: HobbyPlan, manual = false) {
     effects.push(change(world, person, 'energy', -(manual || plan.mode === 'community' ? 2 : 4)), change(world, person, 'happiness', 1), change(world, person, 'stress', -1));
     const attendedMonths = hobby.practices.filter(item => item.source === 'monthly' && item.attended).length + 1;
     if (!manual && hobby.kind === 'guitar' && attendedMonths % 3 === 0) effects.push(change(world, person, 'music', 1));
-    if (!manual && hobby.kind === 'chess' && attendedMonths % 6 === 0) effects.push(change(world, person, 'smarts', 1));
+    if (!manual && (hobby.kind === 'chess' || hobby.kind === 'reading') && attendedMonths % 6 === 0) effects.push(change(world, person, 'smarts', 1));
   }
   hobby.practices.push({ sequence: hobby.practices.length, planId: plan.id, date: { ...world.date }, source: manual ? 'manual' : 'monthly', attended, reason, before, gain: hobby.proficiency - before, after: hobby.proficiency, due, available, paid: attended ? due : 0n, paymentId: attended && due ? world.ledger[ledgerCursor].id : null, ledgerCursor, effects });
 }
