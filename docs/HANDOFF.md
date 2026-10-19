@@ -5,7 +5,25 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
-The active continuation is now **world 25 / engine 24 / content 4 / database
+The active continuation is **world 26 / engine 25 / content 4 / database 4**,
+adding [persistent household pets](PETS.md). Real parents/guardians can take
+responsibility from age six, with reviewed named-payer consent and actual fees.
+Monthly food/boarding, optional care, illness/vet recovery, ownership/death/legacy,
+rehoming and permanent transport retain real financial and lifecycle histories.
+All 49 pet-domain checks and two connected real-SQLite UI journeys pass, with
+strict typing. The corrected-source pet sweep passes **12/12 complete lives**,
+all twelve countries, in **188.236 seconds**, with 1,772 care periods, forty vet
+visits and unchanged hash `982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51f0ed3490f81`.
+Strict types, fresh Android/iOS Hermes exports (47 assets) and final current
+Metro manifests/source pass. The complete current regression passes **1,089
+tests / 70 suites** in **786.211 seconds**, exit zero. Game source stayed fixed
+through the corrected pet sweep and full regression. Preserve a genuine pet
+archive from this committed source before the next schema change.
+The catalogue stays at 90; no routine pet result counts as a distinct situation.
+Native acceptance remains open. The genuine content-four first-year archive was
+preserved at `2d5eacf` before changing schema; never regenerate it with newer code.
+
+The prior early-home milestone uses **world 25 / engine 24 / content 4 / database
 4**, with **90 distinct situations**. [Early home/classroom stories](EARLY_HOME_STORIES.md)
 adds twenty scenes, five independent first-year alternatives in total, explicit
 remote-parent contexts and actual physical-household availability. Missing
@@ -13,8 +31,8 @@ household IDs do not count as co-residence. The completed content-three 120-life
 sweep below is historical; no expanded content-four result is claimed. All **1,038 tests / 68 suites** pass in **714.295 seconds**, with strict
 source/test typing, fresh Android/iOS Hermes exports (5.2/4.9 MB, 46 assets)
 and current Metro manifests/source. No expanded content-four sweep is claimed.
-[The pet integration notes](planning/drafts/pets-integration.md) record inspected,
-unintegrated next work; pets are not implemented by these notes.
+[The original pet integration checklist](planning/drafts/pets-integration.md) is
+retained; the current implementation and evidence are in PETS.md above.
 
 [Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/Use Device
 Appearance independently of all lives. Writes publish only after SQLite succeeds;
@@ -281,14 +299,15 @@ completion and evening recovery are connected. Scholarships and deeper country/
 stage-specific paths remain open.
 The broad systems in [PROGRESS.md](PROGRESS.md) are partial implementations, not
 release-complete features. Continue childhood depth and missing education paths,
-then the broader catalogue, pets/hobbies/entertainment, achievements/challenges/
+then the broader catalogue, hobbies/entertainment, pet balance/depth, achievements/challenges/
 heirlooms, autonomous NPC depth, remaining art, accessibility, country-rule source
 verification, balance, performance, multi-generation sweeps and native release gates.
 At least **160 more distinct reviewed stories** are still needed after the
 content-four expansion; system offers/reports are not substitutes.
 
-Unintegrated pet source and generated art, previously outside the active checkout,
-are preserved in [planning/deferred-work](planning/deferred-work/README.md).
-Do not lose them or copy their older schema directly into the current application.
+The original pet draft source and opaque art are preserved in
+[planning/deferred-work](planning/deferred-work/README.md). World 26 adapts that
+work into the current schema and uses a reviewed transparent atlas. Preserve the
+original archive as provenance; do not reapply its older schema over the adaptation.
 The original detailed callback plan is also preserved there; this handoff takes
 precedence over its stale implementation-status paragraphs.

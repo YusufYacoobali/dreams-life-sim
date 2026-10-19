@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **70 distinct situational templates** against
+The source catalogue contains **90 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -12,16 +12,16 @@ category.
 
 | Primary grouping | Count |
 | --- | ---: |
-| Introductory infant situations | 4 |
-| Preschool/early family situations | 13 |
-| Childhood outside school | 3 |
-| Primary school with actual contacts | 20 |
+| Introductory infant situations | 8 |
+| Preschool/early family situations | 19 |
+| Childhood outside school | 6 |
+| Primary school with actual contacts | 27 |
 | Secondary school with actual contacts | 13 |
 | Shared primary/secondary project promise | 1 |
 | General teenage/family situations | 4 |
 | General adult/later-life situations | 12 |
-| **Source total** | **70** |
-| **Additional distinct situations needed for the minimum** | **180** |
+| **Source total** | **90** |
+| **Additional distinct situations needed for the minimum** | **160** |
 
 The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
@@ -41,6 +41,14 @@ real bounded effects. They are in
 [schoolDayStories.ts](../src/game/content/schoolDayStories.ts). Every branch is
 exercised by the existing full engine/result/journal/save/acknowledgement checks;
 all twelve country fixtures also verify parent-free preschool availability.
+
+Content four adds twenty [early home/classroom situations](EARLY_HOME_STORIES.md):
+four infant, six preschool/early-family, three childhood-outside-school and seven
+primary-school scenes. Five first-year alternatives work independently of parents.
+Each of their three choices resolves in all twelve countries, and a real SQLite
+opening journey preserves decision/result writes through failure/retry/cold load.
+World 26 subsequently adds persistent pets; adoption, care and loss acknowledgements
+are system results and leave the distinct-source count at 90.
 
 The School page now shows saved plans, their actual participants and dates,
 permission and conditional outing quote, and four recent outcomes. Paid outings
@@ -84,4 +92,4 @@ The remaining catalogue needs employment and all eleven special paths, adult
 relationships, finances/ownership, health/legal situations, travel, pets/hobbies,
 later-life/legacy callbacks and uncommon memorable outcomes. The existing system
 decisions do not satisfy those distinct-story allocations. The overall game
-estimate remains about 50%; 70/250 is a content count, not an overall score.
+estimate remains about 50%; 90/250 is a content count, not an overall score.

@@ -128,3 +128,19 @@ Travel artwork (`travel-atlas.png`) was generated for this project and copied un
 ## Welcome hero — opening experience
 
 `welcome-hero.png` is an original image generated for the reference 04 welcome composition. The unchanged source is `/workspace/generated_images/exec-b34b0c5e-300b-46c5-a3ff-64a101522361.png`; SHA-256 `8973d44ad6d8a2c7c4e00e32f5e7b794e6efea1668e836e25b74c6bd304c5459`. It depicts a fictional coastal city at sunset, with a backpacked figure, empty navy sky above and dark foreground below. The illustration contains no embedded title, controls or screenshot frame. The app draws the native wordmark, buttons and gradient overlay over the original with `cover` scaling. The source was visually inspected; matched-viewport native composition remains pending because the Android build's required React Native AAR host is blocked by the current network policy. This is not a claim of native visual acceptance.
+
+## Household pets and reserved leisure art
+
+`pets-leisure-atlas.png` is the unmodified 1448×1086 RGBA image-generation
+transparency edit of the original opaque pet/leisure draft. The generated source
+is `/workspace/generated_images/exec-5acc3ce8-463c-4fc8-9372-5b6f818c4856.png`;
+SHA-256 `a4c124c8bca59e84ad175e8eaa136bc15f54291745043bfce845655bbd44be26`.
+The older RGB source is preserved in the deferred-work archive. Measured regions
+in `src/assets/petsLeisureLayout.ts` exclude neighbouring objects, including a
+stethoscope fragment above the chess pieces. Sixteen subjects were inspected at
+48/128px on white and actual dark-card backgrounds; the browser gallery is
+`docs/verification/pets-art-candidate-20261019.png`. Eight subjects (four species,
+paw, food, play and vet) are integrated into world-26 pet flows. The remaining
+hobby/entertainment art is reserved and does not establish those mechanics.
+Species illustrations do not claim a separate portrait for every adoption
+archetype. Native-device fidelity remains unverified.

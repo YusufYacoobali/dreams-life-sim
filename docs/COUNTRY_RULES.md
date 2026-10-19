@@ -150,3 +150,23 @@ Permanent moves require adult organisers, current health and freedom from custod
 Departure settles each mover’s old residence income-tax cycle using its existing source-country bands before changing residence; each new residence period starts a fresh tax cycle. This simplified residence-period rule does not claim national annual allowances, treaties or anti-avoidance law. Pending support gross is converted once at the saved move quote; any later support transfer uses the real payer currency. Source tax must be affordable before voluntary departure. Transport costs four percent of source base annual wages per adult, with a three-quarter weight for minors. Three-/six-month local living reserves and the full first annual tuition (study only) are funded from existing destination cash or an actual source-account exchange. FX uses the current rational quote and rounds the one-percent destination fee up; same-currency moves have no exchange. Actual account transfers fund companion reserve shares. Reserve cash stays owned and can subsequently be spent; it is not an income grant or prepaid rent.
 
 Old jobs end with recorded history and native currencies retained. A new work offer activates a real local contract whose first wages/service accrue only in later actual months. A study offer pays the first full annual tuition, adds twelve prepaid attendance credits and starts at zero completed months; no foreign degree is awarded on arrival. Existing higher courses must be explicitly finished/left. Local public school attendance resets while existing qualifications remain; the game does not award omitted school years on a move. Skills survive while current training stops. Nationality, earned pension rights, foreign accounts, properties, debts, investments, royalties and quoted crew/licence costs remain intact. Departing owners’ old primary residences become unoccupied owned property with native bills; a new household pays local living costs. Foreign homes cannot supply the local housing discount. This simplified housing model does not claim cross-border occupancy or joint-tenancy law.
+
+Persistent pet care uses shared authored game policies in all twelve profiles,
+not national animal-ownership or shelter law. From age six an available actual
+co-resident parent/guardian can consent and pay; adults take responsibility in
+their own names. A household can maintain four active pets. Adoption is 1% of
+local base annual pay for dogs, 0.6% for cats, 0.3% for rabbits and 0.8% for parrots.
+Monthly food/basic care uses 0.1%, 0.07%, 0.05% and 0.08% respectively. Boarding
+adds 0.2% per actual month without an available local adult carer; a vet visit
+costs 0.1%, and permanent transport 0.5%. Existing rounding and local minor units
+apply. No invented grant/loan, income/refund or minor-trust withdrawal funds care.
+
+A 2% healthy-month illness draw and 90% treatment response are fictional balance
+values. Successful treatment requires two actually funded recovery months.
+Two consecutive unfunded periods cause recorded shelter rehoming. Saved lifespans
+are ten–seventeen years for dogs, twelve–twenty for cats, six–twelve for rabbits
+and twenty–fifty for parrots. Actual age/health can end the same retained animal's
+life. Owner death may transfer responsibility to an existing available local
+adult, never directly to a minor or a newly invented pet carer. See [PETS.md](PETS.md)
+for exact lifecycle, payment/history validation and remaining acceptance. Future
+price/rule changes must preserve already recorded historical fees and outcomes.

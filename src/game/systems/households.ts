@@ -50,6 +50,7 @@ export function financialActors(world: World): Person[] {
     }
   }
   for (const school of world.schoolCommunities.filter(item => !item.ended && item.personId === player.id)) { ids.add(school.currentTeacherId); for (const id of school.classmateIds) { ids.add(id); for (const relation of world.relationships) if (relation.to === id && relation.roles.some(role => role === 'parent' || role === 'guardian')) ids.add(relation.from); } }
+  for (const pet of world.pets) if (pet.status === 'active') ids.add(pet.ownerId);
   for (const asset of world.assets) if (asset.ownerId) ids.add(asset.ownerId);
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
   for (const company of world.businesses.filter(item => item.status === 'active')) { if (company.ownerId) ids.add(company.ownerId); for (const member of company.staff.filter(item => !item.ended)) ids.add(member.personId); }

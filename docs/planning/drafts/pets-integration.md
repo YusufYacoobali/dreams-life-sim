@@ -1,4 +1,6 @@
-# Next pet-care implementation
+# Original pet-care integration checklist
+
+Status: adapted into world 26; see [PETS.md](../../PETS.md) for current implementation, verification and remaining gates. The original pre-integration checklist follows.
 
 The original seven-file archive has been inspected outside application source.
 It remains unintegrated and unverified. Adapt it after the content-four checkpoint;

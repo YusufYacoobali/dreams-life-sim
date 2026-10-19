@@ -4,6 +4,12 @@ The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
 
+World 26 now connects [persistent household pets](PETS.md), including childhood
+parent permission and real monthly care costs. Focused opening/lifecycle/SQLite
+checks pass; the complete regression passes **1,089 tests / 70 suites** in
+**786.211 seconds**. The corrected-source pet sweep passes twelve complete country-specific
+lives; final native exports and current Metro source pass. Native opening acceptance remains open, so baseline estimates stay fixed.
+
 ## Current assessment
 
 The complete production scope is approximately **50% complete**. These are
@@ -22,7 +28,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Health and crime/legal | 70% | Rule-source verification, balance, integrated scenarios and native acceptance |
 | Special careers/businesses | 70% | Breadth of stories, balance, integrated journeys and device acceptance |
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
-| Pets/hobbies/entertainment | 5% | Paused, unintegrated work; persistent gameplay and native surfaces still pending |
+| Pets/hobbies/entertainment | 5% baseline | Persistent household pets implemented with automated save/lifecycle checks; hobbies/entertainment and native acceptance remain pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
 | Distinct situational stories | 20% baseline | 90 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |

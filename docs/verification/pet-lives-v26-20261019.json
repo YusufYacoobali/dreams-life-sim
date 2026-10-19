@@ -1,0 +1,286 @@
+{
+  "scope": "twelve country-specific birth-to-death pure-engine journeys; first available choices, adopt one dog when eligible, treat recorded infection when eligible; no fixture cash/RNG/outcome changes; not native, all-choice, 120-year or multi-generation acceptance",
+  "sourceHash": "982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51f0ed3490f81",
+  "worldVersion": 26,
+  "engineVersion": 25,
+  "contentVersion": 4,
+  "node": "v24.19.0",
+  "elapsedMs": 188236,
+  "records": [
+    {
+      "seed": 700,
+      "country": "US",
+      "ageAtDeath": 48,
+      "commands": 179,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 140,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 5
+        }
+      ],
+      "ledgerRows": 24580,
+      "coldRoundTripExact": true,
+      "elapsedMs": 10297
+    },
+    {
+      "seed": 701,
+      "country": "CA",
+      "ageAtDeath": 77,
+      "commands": 228,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 169,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 22794,
+      "coldRoundTripExact": true,
+      "elapsedMs": 12189
+    },
+    {
+      "seed": 702,
+      "country": "GB",
+      "ageAtDeath": 88,
+      "commands": 265,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 120,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 3
+        }
+      ],
+      "ledgerRows": 26796,
+      "coldRoundTripExact": true,
+      "elapsedMs": 14688
+    },
+    {
+      "seed": 703,
+      "country": "AU",
+      "ageAtDeath": 69,
+      "commands": 272,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_18_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 125,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 2
+        }
+      ],
+      "ledgerRows": 31116,
+      "coldRoundTripExact": true,
+      "elapsedMs": 12747
+    },
+    {
+      "seed": 704,
+      "country": "FR",
+      "ageAtDeath": 61,
+      "commands": 223,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_16_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 178,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 33408,
+      "coldRoundTripExact": true,
+      "elapsedMs": 10954
+    },
+    {
+      "seed": 705,
+      "country": "DE",
+      "ageAtDeath": 80,
+      "commands": 365,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 144,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 7
+        }
+      ],
+      "ledgerRows": 42117,
+      "coldRoundTripExact": true,
+      "elapsedMs": 32553
+    },
+    {
+      "seed": 706,
+      "country": "ES",
+      "ageAtDeath": 78,
+      "commands": 233,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 139,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 28001,
+      "coldRoundTripExact": true,
+      "elapsedMs": 12315
+    },
+    {
+      "seed": 707,
+      "country": "IT",
+      "ageAtDeath": 78,
+      "commands": 299,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_16_0",
+          "status": "rehomed",
+          "ending": "owner-unavailable",
+          "ownerChanges": 0,
+          "periods": 62,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 1
+        }
+      ],
+      "ledgerRows": 20474,
+      "coldRoundTripExact": true,
+      "elapsedMs": 14710
+    },
+    {
+      "seed": 708,
+      "country": "BR",
+      "ageAtDeath": 88,
+      "commands": 265,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_18_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 166,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 18908,
+      "coldRoundTripExact": true,
+      "elapsedMs": 11330
+    },
+    {
+      "seed": 709,
+      "country": "IN",
+      "ageAtDeath": 75,
+      "commands": 247,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_17_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 182,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 5
+        }
+      ],
+      "ledgerRows": 30803,
+      "coldRoundTripExact": true,
+      "elapsedMs": 12827
+    },
+    {
+      "seed": 710,
+      "country": "JP",
+      "ageAtDeath": 78,
+      "commands": 378,
+      "attempts": 2,
+      "pets": [
+        {
+          "id": "pet_21_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 168,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 3
+        }
+      ],
+      "ledgerRows": 33030,
+      "coldRoundTripExact": true,
+      "elapsedMs": 26216
+    },
+    {
+      "seed": 711,
+      "country": "ZA",
+      "ageAtDeath": 71,
+      "commands": 244,
+      "attempts": 1,
+      "pets": [
+        {
+          "id": "pet_18_0",
+          "status": "deceased",
+          "ending": "age",
+          "ownerChanges": 0,
+          "periods": 179,
+          "unfundedPeriods": 0,
+          "boardingPeriods": 0,
+          "visits": 4
+        }
+      ],
+      "ledgerRows": 39986,
+      "coldRoundTripExact": true,
+      "elapsedMs": 17403
+    }
+  ],
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "2d5eacf",
+  "sourceState": "world-26 pet implementation and connected checks, uncommitted at run start; exact game hash retained",
+  "exitCode": 0,
+  "limits": [
+    "First-available event choices; only one dog adoption per life and eligible infection care",
+    "Seeds 700\u2013711, one deliberately selected birth country each; not randomized country selection",
+    "No boarding or funded-failure periods occurred in these twelve journeys; focused checks cover those paths",
+    "No owner transfers occurred in these journeys; one actual last-owner death caused shelter rehoming; focused checks cover transfers and existing-child legacy",
+    "No claim of native, all-choice, 120-year, multi-generation or 1,000-seed acceptance"
+  ]
+}

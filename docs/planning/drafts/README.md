@@ -10,10 +10,11 @@ under More Options, with a selected royal-background summary. Fourteen relevant
 component checks, strict typing, fresh Hermes exports and current Metro source
 pass. Native viewport, keyboard and large-text acceptance remain open.
 
-The inspected [pet integration plan](pets-integration.md) is next work. The
-transparent candidate atlas and JSON clip rectangles are unintegrated. Its
+The original [pet integration checklist](pets-integration.md) has been adapted
+into world 26; current verification is in [PETS.md](../../PETS.md). The transparent
+atlas is now `assets/generated/pets-leisure-atlas.png`; its unmodified SHA-256 and
+clip rectangles remain in the manifest here. Eight subjects serve pet flows;
+unused hobby/entertainment art does not imply implemented gameplay. The
 [64-cell browser gallery](../../verification/pets-art-candidate-20261019.png)
-checks sixteen subjects at 48/128px on light/dark cards; it establishes neither
-a working pet mechanic nor native acceptance. The PNG is an unmodified output
-of the image-generation transparency edit, SHA-256 recorded in the manifest.
-The old opaque source remains preserved in the deferred archive.
+checks sixteen subjects at 48/128px on light/dark cards. Native acceptance remains
+open. The older opaque source is preserved in the original deferred archive.

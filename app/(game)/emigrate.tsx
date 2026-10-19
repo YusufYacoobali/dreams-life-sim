@@ -1,3 +1,4 @@
+import { petMoveCost } from '../../src/game/systems/pets';
 import React, { useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -29,6 +30,7 @@ export default function Emigrate() {
   const selected: RelocationChoice = { destinationId, route, roleId: route === 'work' ? roleId : null, program: route === 'study' ? program : null, field: route === 'study' ? field : null };
   const reason = relocationReason(world, selected), fee = relocationFee(world), money = (minor: bigint, currency: Currency = countries[person.country].currency) => formatMoney({ minor, currency });
   const offer = offers.find(item => item.id === offerId), quote = offer?.status === 'approved' ? moveQuote(world, offer, companionIds, reserveMonths) : null;
+  const movingPets = world.pets.filter(pet => pet.status === 'active' && [person.id, ...companionIds].includes(pet.ownerId));
   const departureReason = offer?.status === 'approved' ? moveReason(world, offer, companionIds, reserveMonths) : undefined;
   const household = world.households.find(item => item.id === person.householdId), companions = (household?.members ?? []).filter(id => id !== person.id && !world.people[id].died).map(id => world.people[id]);
   const reviewApplication = () => setReview({ command: { type: 'apply-relocation', ...selected, quotedFee: fee }, event: {
@@ -44,6 +46,7 @@ export default function Emigrate() {
       body: (names ? 'Current jobs end for ' + names + '. ' : '') + 'Existing income tax is settled before departure. Invited adults and other guardians must agree. Your cash funds transport and the local reserve. Reserve money stays in your accounts; companions receive their own funded share. Former homes remain owned as unoccupied property, with existing bills; the new household pays local living costs. Nationality, qualifications, foreign assets, debts and earned pension rights are retained.',
       illustration: <TravelArt id="flight" width={110} />, terms: [
         { id: 'transport', label: 'Transport', value: money(quote.transport, quote.currency), tone: 'neutral' },
+        ...(movingPets.length ? [{ id: 'pets', label: 'Pets moving with their adult', value: movingPets.map(pet => pet.name).join(', '), tone: 'neutral' as const }, { id: 'pet-transport', label: 'Pet transport included above', value: money(petMoveCost(world, [person.id, ...companionIds]), quote.currency), tone: 'neutral' as const }] : []),
         ...quote.taxes.filter(item => item.adjustment !== 0n).map(item => ({ id: 'tax-' + item.personId, label: world.people[item.personId].firstName + ': tax adjustment', value: money(item.adjustment, item.currency), tone: 'neutral' as const })),
         { id: 'source', label: 'Cash exchanged', value: money(quote.sourceDebit, quote.currency), tone: 'neutral' },
         { id: 'fee', label: 'FX fee', value: money(quote.fee, quote.destinationCurrency), tone: 'neutral' },
@@ -70,7 +73,7 @@ export default function Emigrate() {
           {!companions.length && <Body muted>You have no other household members to invite.</Body>}
         </Card>
         <Card><Heading size={20}>Settle In</Heading>{([3, 6] as const).map(months => <ActionRow key={months} title={months + '-Month Living Reserve'} value={reserveMonths === months ? 'Selected' : undefined} onPress={() => setReserve(months)} />)}
-          <Body muted>The reserve comes from your existing cash. It remains available for real bills after arrival.</Body><Body>Transport: {money(quote.transport, quote.currency)}</Body><Body>Cash exchanged: {money(quote.sourceDebit, quote.currency)}</Body><Body>Cash received: {money(quote.net, quote.destinationCurrency)}</Body>
+          <Body muted>The reserve comes from your existing cash. It remains available for real bills after arrival.</Body><Body>Transport: {money(quote.transport, quote.currency)}</Body>{movingPets.length > 0 && <Body muted>Includes {money(petMoveCost(world, [person.id, ...companionIds]), quote.currency)} to move {movingPets.map(pet => pet.name).join(', ')} with their responsible adult.</Body>}<Body>Cash exchanged: {money(quote.sourceDebit, quote.currency)}</Body><Body>Cash received: {money(quote.net, quote.destinationCurrency)}</Body>
           {quote.tuition > 0n && <Body>First annual tuition: {money(quote.tuition, quote.destinationCurrency)}</Body>}{departureReason && <Body muted>{departureReason}</Body>}<Button label="Review Move" disabled={busy || !!departureReason} onPress={reviewDeparture} />
         </Card>
       </>}

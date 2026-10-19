@@ -1,3 +1,4 @@
+import { petMoveCost, relocatePets } from './pets';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName, Person, World } from '../model';
 import { countries } from '../countries';
@@ -104,7 +105,7 @@ export function moveQuote(world: World, application: Relocation, companionIds: s
     const index = adults.indexOf(id), monthly = index < 0 ? 0n : total / count + (BigInt(index) < total % count ? 1n : 0n), required = monthly * BigInt(reserveMonths) + (id === person.id ? tuition : 0n), available = targetCash(world, world.people[id], destinationCurrency);
     return { personId: id, monthly, required, transfer: id !== person.id && required > available ? required - available : 0n };
   });
-  const transport = roundRatio(rules[person.country].baseWage * BigInt(ids.reduce((sum, id) => sum + (ageOn(world.people[id], world.date) < 18 ? 7500 : 10000), 0)), 250000n);
+  const transport = roundRatio(rules[person.country].baseWage * BigInt(ids.reduce((sum, id) => sum + (ageOn(world.people[id], world.date) < 18 ? 7500 : 10000), 0)), 250000n) + petMoveCost(world, ids);
   const needed = reserves[0].required + reserves.reduce((sum, item) => sum + item.transfer, 0n) + (currency === destinationCurrency ? transport : 0n) - targetCash(world, person, destinationCurrency), sourceDebit = sourceForNet(world, needed, currency, destinationCurrency), exchange = sourceDebit ? exchangeQuote(world, sourceDebit, currency, destinationCurrency) : { gross: 0n, fee: 0n, net: 0n };
   return { currency, destinationCurrency, reserveMonths, transport, tuition, sourceDebit, ...exchange, rate: fxRate(world, currency, destinationCurrency), reserves, taxes: ids.map(id => taxQuote(world, world.people[id])) };
 }
@@ -169,6 +170,7 @@ export function resolveRelocation(world: World, command: RelocationCommand) {
     support.push({ personId: id, before, after, rate }); member.finance.supportIncomeDue = after;
   }
   charge(world, quote.transport, 'relocation-transport', 'Move to ' + destination.city);
+  relocatePets(world, participantIds, destination.country, destination.city, application.id, world.ledger.at(-1)!.id);
   if (quote.sourceDebit) { post(world, -quote.sourceDebit, 0n, 'relocation-exchange', 'Moving funds exchanged from ' + quote.currency, null, person, quote.currency); post(world, quote.net, 0n, 'relocation-exchange', 'Moving funds received after FX fee', null, person, quote.destinationCurrency); }
   for (const reserve of quote.reserves.filter(item => item.transfer > 0n)) { post(world, -reserve.transfer, 0n, 'relocation-household', 'Initial household reserve for ' + fullName(world.people[reserve.personId]), null, person, quote.destinationCurrency); post(world, reserve.transfer, 0n, 'relocation-household', 'Initial household reserve from ' + fullName(person), null, world.people[reserve.personId], quote.destinationCurrency); }
   for (const asset of world.assets) if (asset.ownerId && participantIds.includes(asset.ownerId) && asset.primaryHome) asset.primaryHome = false;

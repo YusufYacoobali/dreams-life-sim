@@ -1,3 +1,4 @@
+import { PetsLeisureArt } from '../../../src/assets/PetsLeisureArt';
 import React from 'react';
 import { router } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
@@ -12,7 +13,7 @@ export default function Relationships() {
   const c = useColors();
   const edges = world.relationships.filter(edge => edge.from === world.activePersonId || edge.to === world.activePersonId);
   return <Page><Header title="Relationships" />
-    <Card><ActionRow title="Meet New People" subtitle="Friendship, introductions and dating" icon={<FamilyArt id="rose" size={40} />} onPress={() => router.push('/meet-people')} /><ActionRow title="Family & Children" icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="My Household" subtitle="Living arrangements and shared costs" icon={<FamilyArt id="family-tree" size={40} />} onPress={() => router.push('/household')} /></Card>
+    <Card><ActionRow title="Household Pets" subtitle="Companions, adoption and care" icon={<PetsLeisureArt id="paw" size={40} />} onPress={() => router.push('/pets')} /><ActionRow title="Meet New People" subtitle="Friendship, introductions and dating" icon={<FamilyArt id="rose" size={40} />} onPress={() => router.push('/meet-people')} /><ActionRow title="Family & Children" icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="My Household" subtitle="Living arrangements and shared costs" icon={<FamilyArt id="family-tree" size={40} />} onPress={() => router.push('/household')} /></Card>
     <Card>{edges.map(edge => {
       const person = world.people[edge.from === world.activePersonId ? edge.to : edge.from];
       return <React.Fragment key={edge.id}>

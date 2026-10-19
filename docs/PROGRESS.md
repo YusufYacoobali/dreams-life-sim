@@ -12,6 +12,23 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+World **26 / engine 25 / content 4** adds [household pets](PETS.md): six
+adoption archetypes/four species, saved parent permission from age six, reviewed
+adult payer/fees, automatic food/boarding, optional bonds/care, illness and paid
+vet recovery, loss/rehoming, real ownership/death/legacy and paid permanent
+transport. My Pets/Adopt and profiles use the reviewed transparent atlas.
+All 49 domain checks and two connected real-SQLite UI journeys pass, including
+adoption/vet/monthly and actual last-owner-loss rollback/retry/cold resume. Strict
+typing passes. The corrected-source pet sweep passes **12/12 complete lives**,
+all twelve countries, in **188.236 seconds**, with 1,772 care periods, forty vet
+visits and unchanged game hash `982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51f0ed3490f81`.
+[Per-life evidence](verification/pet-lives-v26-20261019.json) retains its scoped
+choices and limits. Strict types, fresh Android/iOS Hermes exports (47 assets)
+and final current Metro manifests/source pass. The complete current regression
+passes **1,089 tests / 70 suites** in **786.211 seconds**, exit zero. Game source
+stayed fixed through the corrected sweep and final regression. Story count remains 90, overall about 50%, and native
+and wider release gates remain open.
+
 Content **four** retains world 25 / engine 24 / database four and adds twenty
 [early home/classroom situations](EARLY_HOME_STORIES.md), bringing the source
 catalogue to **90**. Physical family scenes require an actual available household;
@@ -213,7 +230,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery and restricted tuition scholarships implemented; national stage depth and broader acceptance remain pending |
-| 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
+| 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; persistent household pets implemented; hobbies/entertainment and broader acceptance remain planned |
 | 6 — Content, depth, legacy, Time Machine | In progress | 90 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
@@ -235,7 +252,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Crime, investigation, arrest, court, prison, record and release | Implemented core: saved incidents/evidence/victims, later investigation, bail escrow, counsel/hearings, fines/restitution, remand credit, prison routines/people/conflict/visits, appeal/parole/escape/release, visible records, groups and illicit inventory | Twelve local-currency bail checks, eight three-year crime journeys, custody/work/family/health/estate connections, genuine v8 archive migration and native counsel/hearing failure→retry→SQLite pass; national law, broader seeded balance and device acceptance remain unverified |
 | Social media, fame, sponsorships and controversies | Implemented core: four fictional profiles, eight post topics, varied saved reach/viral/criticism responses, real creator contacts/collaborations, actual posting routines/payments, monthly brand delivery, public image/attention/opportunities, closure/suspension/memorial history | Twelve currency payouts, three connected creator lives, exact profile metrics/archives, six-month delivery/failure, suspension retention, child support, real v9 archive migration and native creation/publish failure→retry→SQLite pass; broader balance/device fidelity remain open |
 | Businesses and all eleven special-career paths | Partial: five company types, actual staff/payroll, management, funding/distributions, distress/sale and company bequests; acting/modelling/sport/music selection, training and timed contracts, funded recording/royalties and actual campaigns/elections/office terms, YouTuber/Streamer equipment, live production and freelance crew; Astronaut/Military training, service and assignments; royal family/duty/succession path connected to actual birth/marriage/children/death | Domain, currency, deterministic journeys, migration and native-component→real-SQLite checks; device acceptance and broader balance remain open |
-| Travel, emigration, work/study abroad, pets, hobbies and entertainment | Partial: twelve destinations, prepaid holidays/gap years, actual monthly experiences, temporary location, employment/study leave, household companions/consent, caregiver checks, interruption and partial early-return refunds; permanent family moves, real work/study offers, source tax settlement, local reserve funding and tuition; pets/hobbies remain pending | Focused domain/component checks, country quotes, real SQLite rollback/retry and current/historical v18/v19 archive migration; complete regression/types/native bundles pass; device/release acceptance pending |
+| Travel, emigration, work/study abroad, pets, hobbies and entertainment | Partial: twelve destinations, prepaid holidays/gap years, actual monthly experiences, temporary location, employment/study leave, household companions/consent, caregiver checks, interruption and partial early-return refunds; permanent family moves, real work/study offers, source tax settlement, local reserve funding and tuition; persistent household pets with real monthly costs/ownership and care implemented; hobbies/entertainment remain pending | Focused domain/component checks, country quotes, real SQLite rollback/retry and current/historical v18/v19 archive migration; complete regression/types/native bundles pass; device/release acceptance pending |
 | Country-specific rules and all proposed launch currencies | Partial: twelve authored education/work/finance/health-fee/estate profiles and nine currencies, with shared documented family/medical assumptions and twelve authored legal baselines; shared authored immigration/offer rules now connected | Arithmetic/progression and local fee/family/estate checks pass; partial official education-source audit is recorded in COUNTRY_RULES.md; all complete-profile verification gates remain open |
 | Achievements, challenges, heirlooms and statistics | No | No |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death, actual career/children/property summary, will/protected heirs, debt/tax-first settlement, specific ownership bequests, minor trusts and same-child continuation with preserved annual cursor | Conservation, all twelve local-currency NPC estates, real v6 migration, a three-generation journey and native legacy storage-failure→retry/cold-load pass; broader seeded/device acceptance pending |

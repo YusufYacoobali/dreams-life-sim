@@ -1,3 +1,4 @@
+import { PetsLeisureArt } from '../../../src/assets/PetsLeisureArt';
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useColors } from '../../../src/ui/theme';
@@ -17,6 +18,7 @@ export default function Activities() {
     <Card>
       <ActionRow title={confined ? 'Prison Study & Work' : 'Education'} subtitle={confined ? 'Permitted routines while in custody' : 'Study, qualifications and tuition'} icon={<Illustration id="education" />} onPress={() => router.push(confined ? '/prison' : ['primary', 'secondary'].includes(world.people[world.activePersonId].education.stage) ? '/school' : '/education')} />
       <ActionRow title={confined ? 'Custody' : 'Occupation'} subtitle={confined ? 'Sentence, remand and permitted activities' : 'Jobs, performance and retirement'} icon={<Illustration id="career" />} onPress={() => router.push(confined ? '/prison' : '/work')} />
+      <ActionRow title="Household Pets" subtitle="Companions, adoption and care" icon={<PetsLeisureArt id="paw" size={40} />} onPress={() => router.push({ pathname: '/pets', params: { tab: 'activities' } })} />
       <ActionRow title="Family" subtitle="Children, family planning and generations" icon={<Illustration id="relationship" />} onPress={() => router.push('/family')} />
       <ActionRow title="Health" subtitle="Your health, energy, fitness and stress" icon={<Illustration id="wellbeing" />} onPress={() => router.push('/health')} />
       <ActionRow title="Crime & Legal" subtitle="Risk, cases, prison and your record" icon={<HealthLegalArt id="handcuffs" />} onPress={() => router.push('/crime')} />
