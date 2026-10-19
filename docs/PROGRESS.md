@@ -12,6 +12,13 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Checkpoint `cfcab49` is pushed. A genuine world-26 pet archive now retains
+current adoption/vet/twelve-month care plus three earlier moments; its continuity
+check and strict types pass. A lower-density 390×844 Android attempt again hit a
+pre-game System UI ANR and could not launch through the activity service; actual
+evidence is retained in [the native record](NATIVE_OPENING.md). No native gate
+closed. Hobbies/entertainment and the wider production backlog remain next.
+
 World **26 / engine 25 / content 4** adds [household pets](PETS.md): six
 adoption archetypes/four species, saved parent permission from age six, reviewed
 adult payer/fees, automatic food/boarding, optional bonds/care, illness and paid

@@ -1,0 +1,15 @@
+390x844 physical / 160 dpi; no acceleration, two requested cores, 2048 MB
+10-19 19:18:16.403 I/ActivityManager( 1958): Process WebViewLoader-x86 (pid 2133) has died: psvc PER 
+10-19 19:18:16.829 V/SystemUIService( 2098): Starting SystemUI services for user 0.
+10-19 19:18:18.013 I/ActivityManager( 1958): Process WebViewLoader-x86_64 (pid 2146) has died: psvc PER 
+10-19 19:18:55.585 E/ActivityManager( 1958): ANR in com.android.systemui
+10-19 19:18:55.585 E/ActivityManager( 1958): Reason: executing service com.android.systemui/.keyguard.KeyguardService
+10-19 19:19:02.935 I/SurfaceFlinger( 1757): Boot is finished (115380 ms)
+10-19 19:21:11.561 E/AndroidRuntime( 2370): FATAL EXCEPTION: main
+10-19 19:21:58.010 E/InputClassifier( 2895): InputClassifier HAL has died. Setting mMotionClassifier to null
+10-19 19:22:26.685 V/SystemUIService( 3074): Starting SystemUI services for user 0.
+10-19 19:22:26.713 I/ActivityManager( 2895): Process WebViewLoader-x86 (pid 3137) has died: psvc PER 
+10-19 19:22:27.294 I/ActivityManager( 2895): Process WebViewLoader-x86_64 (pid 3159) has died: psvc PER 
+Observed adb command after Wait: am start ... exp://127.0.0.1:8081 host.exp.exponent
+cmd: Cannot find service: activity (exit 20)
+Android sys.boot_completed remained empty; no gameplay was reached.

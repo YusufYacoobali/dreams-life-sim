@@ -5,6 +5,19 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+World-26 checkpoint **`cfcab49` is pushed**. The genuine
+`v26-household-pet-archive.json` was subsequently generated from that unmodified
+source through real SQLite, preserving adoption/vet/play, twelve care payments,
+the actual year-seven school choice and three original prior moments. Its
+focused continuity check and strict types pass. Never regenerate old fixtures.
+
+The [reduced-density Android attempt](NATIVE_OPENING.md) used the same logical
+390×844 layout at 1× density. It again hit a pre-game System UI ANR, then the
+activity service was unavailable for Expo Go launch. Actual screenshot/selected
+logs are retained; no native gate closed. Continue independent work from the
+[hobbies/entertainment contract](planning/drafts/hobbies-integration.md), then
+remaining education, stories, extras, country/performance/native release work.
+
 The active continuation is **world 26 / engine 25 / content 4 / database 4**,
 adding [persistent household pets](PETS.md). Real parents/guardians can take
 responsibility from age six, with reviewed named-payer consent and actual fees.
@@ -17,8 +30,8 @@ visits and unchanged hash `982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51
 Strict types, fresh Android/iOS Hermes exports (47 assets) and final current
 Metro manifests/source pass. The complete current regression passes **1,089
 tests / 70 suites** in **786.211 seconds**, exit zero. Game source stayed fixed
-through the corrected pet sweep and full regression. Preserve a genuine pet
-archive from this committed source before the next schema change.
+through the corrected pet sweep and full regression. The genuine pet
+archive above now protects this committed state before the next schema change.
 The catalogue stays at 90; no routine pet result counts as a distinct situation.
 Native acceptance remains open. The genuine content-four first-year archive was
 preserved at `2d5eacf` before changing schema; never regenerate it with newer code.

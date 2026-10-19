@@ -105,3 +105,19 @@ actual newborn pre-Age-Up checkpoint at revision one. No versions, people,
 money, stats, RNG, decisions or outcomes were manually changed. Later migrations
 must preserve current and both prior worlds while adding only new defaults.
 Never regenerate this genuine archive using newer source.
+
+`v26-household-pet-archive.json` was generated with unmodified `cfcab49`
+(world 26 / engine 25 / content 4), before hobbies. Real SQLite imports the genuine
+content-four Australian bubble archive and continues Riley Kelly through five
+actual years to age six. The real parent agrees to Buddy's adoption under the
+name Biscuit (saved roll 47 / chance 86); 58,000 AUD minor units pay the fee.
+An actual 5,800-minor veterinary visit and optional play precede a real Age Up.
+Revision 25, 19 October 2033, retains twelve monthly care payments totalling
+69,600 AUD minor units, the same original owner and 93% pet health. The actual
+school-library choice “Your name on the cover” awaits a decision at the completed
+twelve-month cursor. Three selected genuine moments retain the pre-adoption
+six-year-old (revision 18), committed adoption result (19) and pre-Age-Up
+pet/vet/play state (24). The export is 95,075 bytes. No person, money, age, grade,
+RNG, consent, pet outcome or version was manually edited. Preserve the current
+world and all three prior worlds when adding later schema defaults. Never
+regenerate this archive using newer code.

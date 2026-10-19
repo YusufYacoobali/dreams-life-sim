@@ -65,7 +65,7 @@
   },
   "nativeVisualAcceptance": false,
   "remaining": [
-    "actual responsive Android/iOS opening and device journeys; new lower-density emulator attempt in progress with pre-game System UI ANR",
+    "actual responsive Android/iOS opening and device journeys; reduced-density software Android attempt reproduced pre-game System UI ANR and missing activity service",
     "hobbies/entertainment, deeper education and autonomous lives, extras and achievements/challenges/heirlooms",
     "at least 160 more distinct reviewed situations, wider callbacks, art and accessibility",
     "country-source verification, balance, broader/all-choice/1000-seed sweeps",

@@ -44,3 +44,28 @@ The managed outbound policy still omits the React Native artifact host needed
 by the custom build. This attempt used allowed official SDK/Expo downloads;
 it did not alter proxy/TLS settings, use an alternate artifact mirror or retry
 the previously denied custom-build download unchanged.
+
+## Reduced-density Android 29 attempt
+
+After the world-26 pet regression, the same isolated AVD was cold-started at
+**390×844 physical pixels / 160 dpi**, retaining the intended 390×844 logical
+layout while rendering one quarter as many pixels. It requested two cores,
+2,048 MB, SwiftShader, Vulkan disabled and no hardware acceleration. Animations
+were disabled through the Android settings service. This used the existing
+installed Expo Go; the denied custom-build artifact was not retried.
+
+The emulator reports the requested display configuration. SurfaceFlinger reports
+its boot-finished milestone after 115,380 ms; Android's `sys.boot_completed`
+property remained empty. At **19:18:55 UTC**, before the game launched, Android
+again reported an ANR in `com.android.systemui`. The actual
+[390×844 capture](verification/android29-lowres-system-ui-anr-20261019.png)
+shows that system dialog over the Android wallpaper. Choosing Wait succeeded as
+an injected command; subsequent project launch returned **“Can't find service:
+activity”**, exit 20. No usable opening screen or Begin Life was reached. The
+[selected native lines](verification/android29-lowres-opening-20261019.log)
+retain these observations. The isolated emulator was stopped.
+
+The lower raster load shortened the compositor milestone but did not establish
+responsive Android services. No native visual/gameplay, performance or release
+gate is closed by this attempt. Continue independent gameplay implementation;
+a responsive device/accelerated emulator and macOS/iOS execution remain needed.
