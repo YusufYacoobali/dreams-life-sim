@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, Person, World } from '../model';
@@ -43,7 +44,7 @@ export const consultationCost = (world: World, service: 'checkup' | 'symptoms' |
 export function providerFor(world: World, patient: Person): Person {
   let provider = patient.health.providerId && world.people[patient.health.providerId];
   const payerId = carePayer(world, patient).id;
-  if (!provider || provider.id === patient.id || provider.id === payerId || provider.died || isConfined(world, provider) || provider.country !== patient.country || provider.city !== patient.city || provider.employment?.roleId !== 'doctor') provider = Object.values(world.people).find(person => person.id !== patient.id && person.id !== payerId && !person.died && !isConfined(world, person) && person.country === patient.country && person.city === patient.city && person.employment?.roleId === 'doctor') ?? null;
+  if (!provider || provider.id === patient.id || provider.id === payerId || provider.died || activeTrip(world, provider.id) || isConfined(world, provider) || provider.country !== patient.country || provider.city !== patient.city || provider.employment?.roleId !== 'doctor') provider = Object.values(world.people).find(person => person.id !== patient.id && person.id !== payerId && !person.died && !activeTrip(world, person.id) && !isConfined(world, person) && person.country === patient.country && person.city === patient.city && person.employment?.roleId === 'doctor') ?? null;
   if (!provider) {
     provider = createContact(world, { age: draw(world, 'npcs', 35, 55), country: patient.country, city: patient.city });
     provider.stats.smarts = Math.max(80, provider.stats.smarts); endEmployment(world, provider.id);

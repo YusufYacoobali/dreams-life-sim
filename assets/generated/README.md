@@ -97,3 +97,6 @@ in the 128px browser composition tools/preview-careers.cjs. Full objects and
 transparent gutters are retained. Acting/model/sport/music/politics/training subjects are
 integrated; remaining career subjects are registered for subsequent paths.
 Native-device fidelity remains unverified.
+
+
+Travel artwork (`travel-atlas.png`) was generated for this project and copied unchanged from `/workspace/generated_images/exec-efa1c534-0024-4e61-a981-d2d7f5d647b1.png`. SHA-256: `420a9f8cdaa7a399b924fc2bf626898441c95999e8a2897745c7aad940ab6574`. The twelve destination illustrations and four travel subjects have measured source rectangles in `src/assets/travelLayout.ts`. All sixteen were inspected at original resolution and in a 128px browser composition; no adjacent artwork is clipped into the regions. The postcards are illustrative compositions rather than geographical photographs. Source generation and browser crops do not establish native-device fidelity.

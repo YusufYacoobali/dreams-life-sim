@@ -1,3 +1,4 @@
+import { activeTrip, physicalLocation, samePhysicalPlace } from './travelSchemas';
 import { royalMarriage } from './royalty';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
@@ -76,7 +77,7 @@ export function romanceReason(world: World, target: Person): string | undefined 
   const existing = partnerRelation(world), theirs = partnerRelation(world, target.id);
   if (existing && otherPerson(world, existing).id !== target.id) return 'End your current relationship first';
   if (theirs && otherPerson(world, theirs, target.id).id !== player.id) return 'They are already in a relationship';
-  if (player.country !== target.country || player.city !== target.city) return 'Meet in the same city before arranging a date';
+  if (!samePhysicalPlace(world, player.id, target.id)) return 'Meet in the same city before arranging a date';
 }
 export const dateBudget = (world: World) => roundRatio(rules[active(world).country].baseWage, 1000n);
 export const weddingBudgets = (world: World) => [100n, 20n, 4n].map((denominator, index) => ({ id: ['simple', 'small', 'lavish'][index], label: ['Simple ceremony', 'Small celebration', 'Lavish wedding'][index], amount: roundRatio(rules[active(world).country].baseWage, denominator) }));
@@ -101,7 +102,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     counter(world, command.purpose, 'meet');
     if (command.purpose === 'dating' && command.gender !== 'any' && !player.attractedTo.includes(command.gender)) throw new IneligibleAction('Choose a gender within your dating preferences, or update them in My Life');
     player.stats.energy = bounded(player.stats.energy - 5);
-    const people = Array.from({ length: 3 }, () => createContact(world, { age: age < 18 ? age : draw(world, 'npcs', Math.min(125, Math.max(18, age - 8)), Math.min(125, age + 8)), gender: command.gender === 'any' ? command.purpose === 'dating' ? player.attractedTo[draw(world, 'npcs', 0, player.attractedTo.length - 1)] : undefined : command.gender, compatibleWith: command.purpose === 'dating' ? player.gender : undefined }));
+    const people = Array.from({ length: 3 }, () => createContact(world, { age: age < 18 ? age : draw(world, 'npcs', Math.min(125, Math.max(18, age - 8)), Math.min(125, age + 8)), gender: command.gender === 'any' ? command.purpose === 'dating' ? player.attractedTo[draw(world, 'npcs', 0, player.attractedTo.length - 1)] : undefined : command.gender, compatibleWith: command.purpose === 'dating' ? player.gender : undefined, ...physicalLocation(world) }));
     world.pending = { kind: 'decision', id: 'meeting_' + world.revision, templateId: 'meet-' + command.purpose, title: command.purpose === 'dating' ? 'Someone new' : 'A few new faces', body: command.purpose === 'dating' ? 'These people are open to meeting someone with your preferences. An introduction is a beginning, not a promise.' : age < 18 ? 'At a local games afternoon, a few people your age introduce themselves.' : 'A local community evening gives you a reason to talk to someone new.', illustration: command.purpose === 'dating' ? 'rose' : 'conversation', personIds: [player.id, ...people.map(person => person.id)], choices: [...people.map(person => ({ id: person.id, label: fullName(person) + ' · Age ' + ageOn(person, world.date), effects: [{ kind: 'connect-person' as const, personId: person.id }], resultTitle: 'Introductions made', resultBody: 'You exchanged introductions with ' + person.firstName + '. You can get to know them from Relationships.', journal: 'I met ' + fullName(person) + '.' })), { id: 'later', label: 'Maybe another time', effects: [], resultTitle: 'No introduction today', resultBody: 'You decided to leave it for another time.', journal: 'I went along to an event without making a new connection.' }] };
     return;
   }
@@ -111,7 +112,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     result(world, 'Preferences updated', 'Your choices are saved for future dating and family decisions.', 'hearts'); return;
   }
   if (command.type === 'move-out') {
-    if(serviceAway(world))throw new IneligibleAction('Return from your assignment before moving home');
+    if(serviceAway(world)||activeTrip(world))throw new IneligibleAction('Return from your trip or assignment before moving home');
     if (age < rules[player.country].adultAge) throw new IneligibleAction('Independent housing is available to adults');
     const household = world.households.find(item => item.id === player.householdId);
     if (household?.members.filter(id => !world.people[id].died).length === 1) throw new IneligibleAction('You already live independently');
@@ -121,7 +122,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   const relation = target ? relationFor(world, player.id, target.id) : undefined;
   if (!target || target.died || !relation) throw new IneligibleAction('Choose a living person you know');
   if (command.type === 'ask-to-move-in') {
-    if(serviceAway(world)||serviceAway(world,target.id))throw new IneligibleAction('Return from your assignment before moving home');
+    if(serviceAway(world)||serviceAway(world,target.id)||activeTrip(world)||activeTrip(world,target.id))throw new IneligibleAction('Return from your trip or assignment before moving home');
     if (isConfined(world, target)) throw new IneligibleAction('They are currently in custody');
     if (age < 18 || target.country !== player.country || !relation.roles.some(role => role === 'parent' || role === 'guardian')) throw new IneligibleAction('Choose a living parent or guardian in your country');
     if (!target.householdId || target.householdId === player.householdId) throw new IneligibleAction('You already share this household');
@@ -132,7 +133,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     fact(world, 'I moved in with ' + target.firstName + '.', 'family'); result(world, 'You moved in', 'You share this household’s costs. Your own property, if any, remains yours.', 'property'); return;
   }
   if (command.type === 'interact') {
-    if(command.action==='spend-time'&&(serviceAway(world)||serviceAway(world,target.id)))throw new IneligibleAction('In-person time is unavailable during an assignment');
+    if(command.action==='spend-time'&&!samePhysicalPlace(world,player.id,target.id))throw new IneligibleAction('Meet in the same place for in-person time');
     if (command.action === 'spend-time' && (isConfined(world, player) || isConfined(world, target)) && (player.country !== target.country || player.city !== target.city || isConfined(world, player) && isConfined(world, target))) throw new IneligibleAction('A visit requires an available person in the same city');
     if (age < 3) throw new IneligibleAction('Personal interactions unlock from age three');
     if (command.action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:'))) throw new IneligibleAction('There is no unresolved argument to apologise for');

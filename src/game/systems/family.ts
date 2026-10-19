@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { royalChild,royalDivorce } from './royalty';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
@@ -32,6 +33,7 @@ function yearLimit(world: World, action: string) {
   if (world.actionCounts[key]) throw new IneligibleAction('You already tried this this year'); world.actionCounts[key] = 1;
 }
 export function conceptionReason(world: World, first: Person, second?: Person): string | undefined {
+  if (activeTrip(world, first.id) || second && activeTrip(world, second.id)) return 'Wait until both partners return from their trip';
   if (!second || first.died || second.died) return 'A living partner is required';
   if(serviceAway(world,first.id)||serviceAway(world,second.id))return 'Wait until both partners return from their assignments';
   if (isConfined(world, first) || isConfined(world, second)) return 'Both partners need to be outside custody';

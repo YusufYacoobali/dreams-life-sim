@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -26,6 +27,7 @@ export function tuitionFor(person: Person, program: 'university' | 'trade' | 'gr
 }
 export const courseMonths = (program: 'university' | 'trade' | 'graduate', field: string) => program === 'trade' ? 24 : program === 'graduate' && field === 'law' ? 36 : 48;
 export function enrollmentReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
+  if (activeTrip(world)) return 'Return from your trip before enrolling';
   const person = active(world); const education = person.education;
   if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
@@ -86,7 +88,7 @@ export function resolveEducation(world: World, command: EducationCommand) {
   }
 }
 export function educationMonth(world: World, person: Person) {
-  if (hospitalized(world, person)) return;
+  if (hospitalized(world, person) || activeTrip(world, person.id)) return;
   if (isConfined(world, person) && !['none', 'primary', 'secondary'].includes(person.education.stage)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;

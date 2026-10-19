@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { serviceContractEnded } from './serviceSchemas';
 import { fullTimeCreator } from './creatorSchemas';
@@ -38,6 +39,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
 }
 export function jobReason(world: World, role: JobRole): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
+  if (activeTrip(world)) return 'Return from your trip before starting a job';
   if (role.specialCareer) return 'Use this special career’s selection process';
   if(!role.partTime&&publicRoyalDuty(world))return 'Choose a private royal life before other full-time work';
   if(!role.partTime&&fullTimeCreator(world))return 'Switch your studio to part-time before full-time work';
@@ -101,6 +103,12 @@ export function resolveWork(world: World, command: WorkCommand) {
 export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {
   const rule = rules[person.country], employment = person.employment;
   if (!employment || isConfined(world, person) || person.legal.wanted) return 0n;
+  const holiday = activeTrip(world, person.id);
+  if (holiday) {
+    const leave = holiday.leave.find(item => item.personId === person.id && item.employmentId === employment.id && item.paid);
+    if (!leave) return 0n;
+    leave.used = true; world.actionCounts[person.id + ':paid-travel-leave:' + leave.year] = 1;
+  }
   if (employment.companyId && !fundWages) throw new Error('Company wages require actual payroll funding');
   const role = jobs.find(candidate => candidate.id === employment.roleId);
   if (!role) throw new Error('Unknown employment role');
@@ -114,12 +122,14 @@ export function employmentMonth(world: World, person = active(world), fundWages?
   employment.paidMonths++; person.finance.serviceMonths++;
   const history = world.workHistory.find(record => record.id === employment.id)!;
   history.monthsWorked++; recordWageEarnings(world, person, history, wages);
+  if (!holiday) {
   const effort = employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -2 : 0, stream = person.id === world.activePersonId ? 'outcomes' : 'npcs';
   employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
   person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
   if (employment.paidMonths % 12 === 0 && !role.specialCareer) {
     if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) { employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank); fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id); }
     else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) { fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id); }
+  }
   }
   if (wages) { post(world, wages, 0n, 'income', 'Employment pay', null, person, employment.currency); if (withheld) post(world, -withheld, 0n, 'tax', 'Income tax withheld', null, person, employment.currency); person.finance.cycleGross += fxMoney(world, { minor: wages, currency: employment.currency }, home).minor; person.finance.cycleWithheld += fxMoney(world, { minor: withheld, currency: employment.currency }, home).minor; }
   return due;

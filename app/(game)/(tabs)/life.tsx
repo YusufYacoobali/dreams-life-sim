@@ -1,3 +1,4 @@
+import { activeTrip, physicalLocation } from '../../../src/game/systems/travelSchemas';
 import { publicRoyalDuty,royalMembership } from '../../../src/game/systems/royaltySchemas';
 import { royalTitle } from '../../../src/game/systems/royaltyMath';
 import { serviceCareer,serviceQualified,serviceAway } from '../../../src/game/systems/serviceSchemas';
@@ -35,7 +36,7 @@ export default function Life() {
   return <Page>
     <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingVertical: 12 }}>
       <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} />
-      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading>{royalMembership(world)&&<Body muted>{royalTitle(world,royalMembership(world)!.house,player.id)} · {royalMembership(world)!.house.name}</Body>}{serviceAway(world)&&<Body muted>Away: {serviceAway(world)!.location}</Body>}<Body muted>{occupation} · Age {ageOn(player, world.date)} · {player.country}</Body></View>
+      <View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading>{royalMembership(world)&&<Body muted>{royalTitle(world,royalMembership(world)!.house,player.id)} · {royalMembership(world)!.house.name}</Body>}{serviceAway(world)&&<Body muted>Away: {serviceAway(world)!.location}</Body>}{activeTrip(world) && <Body muted>Away: {physicalLocation(world).city}, {countries[physicalLocation(world).country].name}</Body>}<Body muted>{occupation} · Age {ageOn(player, world.date)} · {player.country}</Body></View>
       <View style={{ alignItems: 'flex-end' }}><Heading size={17}>{formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Heading><Body muted>Bank Balance</Body></View>
     </Pressable>
     <View>
@@ -47,6 +48,7 @@ export default function Life() {
     </View>
     {error && <Body>{error}</Body>}
     {(isConfined(world) || player.legal.wanted) && <Button label={isConfined(world) ? 'View Custody & Court' : 'View Outstanding Pursuit'} tone="secondary" onPress={() => router.push(isConfined(world) ? '/prison' : '/crime')} />}
+    {activeTrip(world) && <Button label="Your Trip" tone="secondary" onPress={() => router.push('/travel')} />}
     <Button label={world.annual ? 'Continue This Year' : 'Age Up'} tone="positive" busy={busy} disabled={!!world.pending} onPress={() => { void dispatch({ type: world.annual ? 'resume' : 'advance' }); }} />
     <Card>{[...years.entries()].reverse().map(([age, facts]) => <View key={age} style={{ gap: 8 }}><Heading size={20}>Age: {age}</Heading>{facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>)}</Card>
   </Page>;

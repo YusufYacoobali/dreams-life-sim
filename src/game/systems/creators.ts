@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { z } from 'zod';
 import { World, ageOn } from '../model';
@@ -32,6 +33,7 @@ export const creatorCommandSchema=z.discriminatedUnion('type',[
 export type CreatorCommand=z.infer<typeof creatorCommandSchema>;
 const ownedGear=(world:World,studio:Studio,id:string|null,catalogId:'laptop'|'camera')=>id?world.assets.find(item=>item.id===id&&item.ownerId===studio.personId&&item.catalogId===catalogId&&item.condition>0):undefined;
 export function creatorFocusReason(world:World,studio:Studio):string|undefined {
+  if(activeTrip(world,studio.personId))return 'Return from your trip before full-time production';
   const person=world.people[studio.personId],account=world.socialAccounts.find(item=>item.id===studio.accountId);
   if(ageOn(person,world.date)<18)return 'Full-time production is available from age eighteen';
   if(studio.status!=='active'||account?.status!=='active')return 'An active studio and profile are required';

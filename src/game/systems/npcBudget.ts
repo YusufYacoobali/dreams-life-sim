@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { ageOn, Person, World } from '../model';
@@ -56,7 +57,7 @@ export function settleBackground(world: World, person: Person, throughMonth: num
 export function npcYearDecisions(world: World) {
   for (const person of Object.values(world.people)) {
     const rule = rules[person.country];
-    if (person.id === world.activePersonId || person.died || isConfined(world, person) || person.legal.wanted || publicRoyalDuty(world,person.id) || fullTimeCreator(world,person.id) || recordingCommitment(world,person.id) || campaignCommitment(world,person.id) || person.employment || person.finance.pensionAnnual > 0n || person.education.stage !== 'none' || person.stats.health < 25 || ageOn(person, world.date) < Math.max(rule.adultAge, rule.schoolEnd)) continue;
+    if (person.id === world.activePersonId || activeTrip(world, person.id) || person.died || isConfined(world, person) || person.legal.wanted || publicRoyalDuty(world,person.id) || fullTimeCreator(world,person.id) || recordingCommitment(world,person.id) || campaignCommitment(world,person.id) || person.employment || person.finance.pensionAnnual > 0n || person.education.stage !== 'none' || person.stats.health < 25 || ageOn(person, world.date) < Math.max(rule.adultAge, rule.schoolEnd)) continue;
     const key = person.id + ':job-search:' + world.date.year; if (world.actionCounts[key]) continue; world.actionCounts[key] = 1;
     // Search is an NPC decision, separate from the player's outcomes stream.
     if (draw(world, 'npcs', 1, 100) > 60) continue;
@@ -80,7 +81,7 @@ export function householdMonth(world: World) {
     if (age >= rule.adultAge) for (const account of world.accounts.filter(item => item.ownerId === person.id && item.lockedCash > 0n)) { account.lockedCash = 0n; fact(world, 'My inheritance trust became available in adulthood.', 'finance', '', person.id); }
     const household = world.households.find(item => item.id === person.householdId);
     const independentAge = Math.max(rule.adultAge, rule.schoolEnd);
-    if (!isConfined(world, person) && age >= independentAge && age < independentAge + 1 && !world.actionCounts[person.id + ':independent-home'] && household && world.relationships.some(relation => relation.to === person.id && relation.roles.includes('parent') && household.members.includes(relation.from))) {
+    if (!activeTrip(world,person.id) && !isConfined(world, person) && age >= independentAge && age < independentAge + 1 && !world.actionCounts[person.id + ':independent-home'] && household && world.relationships.some(relation => relation.to === person.id && relation.roles.includes('parent') && household.members.includes(relation.from))) {
       ownHousehold(world, person); world.actionCounts[person.id + ':independent-home'] = 1; fact(world, 'I began covering the costs of an independent household.', 'family', '', person.id);
     }
     if (person.id !== world.activePersonId && age >= rule.retirementAge && !person.finance.pensionAnnual && person.finance.serviceMonths >= 120) {

@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { ageOn, World } from '../model';
 import { Business } from '../businessValuation';
 import { businessCatalog } from '../content/businesses';
@@ -35,7 +36,7 @@ export function businessMonth(world: World) {
     const job = jobs.find(item => item.id === definition.workerRole)!;
     for (const member of staff) {
       const person = world.people[member.personId], employment = person.employment!;
-      if (isConfined(world, person) || person.legal.wanted || hospitalized(world, person) || person.country !== company.country || person.city !== company.city) continue;
+      if (activeTrip(world, person.id) || isConfined(world, person) || person.legal.wanted || hospitalized(world, person) || person.country !== company.country || person.city !== company.city) continue;
       if (member.role === 'manager' || person.id === owner.id && company.ownerOperated) leadership = true;
       const qualified = !job.qualification || person.education.qualifications.some(item => item.level === job.qualification && (!job.field || item.field === job.field));
       if (!qualified) continue;

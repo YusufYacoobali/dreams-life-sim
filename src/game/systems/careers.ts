@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { newWorkEarnings } from './earningsSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
@@ -30,6 +31,7 @@ export type Career = World['careers'][number];
 const absolute = (world: World) => world.date.year * 12 + world.date.month - 1;
 export const coachingCost = (world: World, person = active(world)) => rules[person.country].baseWage / 1000n;
 export function trainingReason(world: World, skill: typeof skillIds[number], person = active(world)): string | undefined {
+    if (activeTrip(world, person.id)) return 'Training pauses while you are away on a trip';
     if (ageOn(person, world.date) < skillContent[skill].minAge)
         return 'Available from age ' + skillContent[skill].minAge;
     if (isConfined(world, person) || person.legal.wanted)
@@ -40,6 +42,7 @@ export function trainingReason(world: World, skill: typeof skillIds[number], per
 export function careerPayQuote(world: World, kind: CareerKind, person = active(world)) { const career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
 export function selectionReason(world: World, kind: CareerKind): string | undefined {
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
+    if (activeTrip(world)) return 'Return from your trip before a new career contract';
     if (kind === 'politician')
         return 'Run an election campaign to seek public office';
     if(publicRoyalDuty(world))return 'Choose a private royal life before a full-time career';

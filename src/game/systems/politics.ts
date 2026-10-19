@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -38,6 +39,7 @@ export function constituentMeetingReason(world:World):string|undefined {
 }
 export function campaignQuote(world: World, person = active(world)) { const base = rules[person.country].baseWage, registration = roundRatio(base * 200n, 10000n), monthly = roundRatio(base * 100n, 10000n); return { registration, monthly, total: registration + monthly * 6n, annualPay: careerPayQuote(world, 'politician', person), currency: countries[person.country].currency }; }
 export function campaignReason(world: World): string | undefined {
+    if (activeTrip(world)) return 'Return from your trip before campaigning';
     const person = active(world), age = ageOn(person, world.date);
     if (age < 21 || age > 80)
         return 'Local office is available at ages 21–80';

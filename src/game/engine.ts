@@ -1,3 +1,5 @@
+import { activeTrip } from './systems/travelSchemas';
+import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
 import { ageOn, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { bindEvent, eligibleTemplates } from './content/events';
@@ -35,7 +37,7 @@ import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resol
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -51,6 +53,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  refreshTrips(world);
   person.health.hospitalizedUntil = null;
   legalDeath(world, person);
   socialDeath(world, person);
@@ -115,6 +118,7 @@ function processMonth(world: World) {
       if (world.people[world.activePersonId].died) return;
     }
   }
+  travelMonth(world);
 }
 
 function finishYear(world: World) {
@@ -129,7 +133,7 @@ function finishYear(world: World) {
   npcYearDecisions(world);
   relationshipsYear(world);
   familyYear(world);
-  const eligible = isConfined(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
+  const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
   const birthday = eligible.find(template => template.id === 'first-cake');
   // Introductory year is guaranteed; later years leave room for quiet years.
   const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
@@ -217,6 +221,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
   if(serviceAway(world)&&['meet-people','move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','vaccinate','exercise','fertility-care','cosmetic-care','public-action'].includes(command.type))throw new IneligibleAction('Return from your assignment before this in-person activity');
+  if (activeTrip(world) && ['move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','treat','vaccinate','exercise','fertility-care','cosmetic-care','public-action','adopt','try-child','review-custody','divorce'].includes(command.type)) throw new IneligibleAction('Return from your trip before this activity at home');
   const custody = custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
@@ -263,6 +268,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const creator=creatorCommandSchema.safeParse(command);
     const service=serviceCommandSchema.safeParse(command);
     const royalty=royaltyCommandSchema.safeParse(command);
+    const travel=travelCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -281,9 +287,11 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if(creator.success)resolveCreator(world,creator.data);
     else if(service.success)resolveService(world,service.data);
     else if(royalty.success)resolveRoyalty(world,royalty.data);
+    else if(travel.success)resolveTravel(world,travel.data);
     else throw new IneligibleAction('This action is not available');
   }
   refreshRoyalSuccession(world,'background');
+  refreshTrips(world);
   world.revision++;
   return validateWorld(world);
 }

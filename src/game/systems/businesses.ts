@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -42,6 +43,7 @@ export function businessStartupQuote(world: World, kind: BusinessKind) {
   return { capital, registration, total: capital + registration, currency };
 }
 export function ownerOperationReason(world: World, kind: BusinessKind): string | undefined {
+  if (activeTrip(world)) return 'Return from your trip before operating a company';
   const person = active(world), role = jobs.find(item => item.id === businessCatalog[kind].workerRole)!;
   if (isConfined(world)) return 'You cannot operate a workplace from custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest before taking an operating role';

@@ -1,3 +1,4 @@
+import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -25,6 +26,7 @@ type Release = World['musicReleases'][number];
 const absolute = (world: World) => world.date.year * 12 + world.date.month - 1;
 export function recordingQuote(world: World, format: typeof musicFormats[number]) { const person = active(world), cost = roundRatio(rules[person.country].baseWage * BigInt(format === 'album' ? 1500 : 400), 10000n), months = format === 'album' ? 6 : 3; return { cost, months, currency: countries[person.country].currency, firstPayment: roundRatio(cost, BigInt(months)) }; }
 export function recordingReason(world: World): string | undefined {
+    if (activeTrip(world)) return 'Return from your trip before starting a recording';
     const person = active(world), career = world.careers.find(item => item.personId === person.id && item.kind === 'musician');
     if (ageOn(person, world.date) < rules[person.country].adultAge)
         return 'Recording contracts are available to adults';

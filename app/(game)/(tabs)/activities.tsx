@@ -5,6 +5,7 @@ import { Illustration } from '../../../src/assets/Illustration';
 import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
 import { useGame } from '../../../src/state/useGame';
 import { isConfined } from '../../../src/game/systems/legalSchemas';
+import { TravelArt } from '../../../src/assets/TravelArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 
 export default function Activities() {
@@ -20,6 +21,7 @@ export default function Activities() {
       <ActionRow title="Fame" subtitle="Your public image, opportunities and brand work" icon={<FameBusinessArt id="fame" />} onPress={() => router.push('/fame')} />
       <ActionRow title="Business" subtitle="Start a company, employ a team and manage growth" icon={<FameBusinessArt id="business" />} onPress={() => router.push('/business')} />
       <ActionRow title="Special Careers" subtitle="Selection, contracts and professional projects" icon={<FameBusinessArt id="trophy" />} onPress={() => router.push('/special-careers')} />
+      <ActionRow title="Travel" subtitle="Holidays, destinations and a gap year" icon={<TravelArt id="passport" />} onPress={() => router.push('/travel')} />
       <ActionRow title="My Life" subtitle="Your identity and personal profile" icon={<Illustration id="journal" />} onPress={() => router.push({ pathname: '/profile', params: { tab: 'activities' } })} />
       <ActionRow title="Saved Lives" subtitle="Import, export or restore a checkpoint" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />
       <ActionRow title="Time Machine" subtitle="Restore a historical moment as a new branch" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />

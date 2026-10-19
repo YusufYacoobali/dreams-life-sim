@@ -69,7 +69,7 @@ export const postCost = (world: World, intent: 'authentic' | 'polished' | 'provo
 export const collaborationCost = (world: World) => ({ minor: unit(world, active(world)) / 1000n, currency: countries[active(world).country].currency });
 export const publicActionQuote = (world: World, action: 'interview' | 'event' | 'reputation') => ({ minor: action === 'interview' ? roundRatio(unit(world, active(world)) * BigInt(active(world).stats.fame), 1000n) : unit(world, active(world)) / BigInt(action === 'event' ? 100 : 200), currency: countries[active(world).country].currency });
 export function topicReason(world: World, kind: PostKind, person = active(world)): string | undefined {
-  if (kind === 'travel' && !world.journal.some(item => item.personId === person.id && item.category === 'travel' && world.date.year - item.date.year <= 1)) return 'Take a trip before sharing travel experiences';
+  if (kind === 'travel' && !world.trips.some(trip => trip.participantIds.includes(person.id) && trip.periods.some(period => world.date.year * 12 + world.date.month - 1 - period.month <= 12))) return 'Take a trip before sharing travel experiences';
   if (kind === 'fitness' && person.health.routine.exercise === 'none' && !world.actionCounts[person.id + ':health:' + world.date.year + ':exercise']) return 'Try an exercise session or start an exercise routine first';
 }
 export function postReason(world: World, account: Account, kind: PostKind, intent = account.intent): string | undefined {
