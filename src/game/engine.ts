@@ -3,7 +3,7 @@ import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } fro
 import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
 import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
-import { ageOn, fullName, validateWorld, World } from './model';
+import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { bindEvent, eligibleTemplates } from './content/events';
 import { randomInteger } from './random';
@@ -47,6 +47,18 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 export { IneligibleAction } from './errors';
 
 export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand;
+const commandOwners = new Map<string, z.ZodType>();
+for (const schema of [schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+  for (const option of schema.options) {
+    const type = option.shape.type.value;
+    if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
+    commandOwners.set(type, schema);
+  }
+}
+function parseActivity<S extends z.ZodType>(schema: S, command: GameCommand) {
+  // A press validates its own command, without constructing two dozen unrelated errors.
+  return commandOwners.get(command.type) === schema ? schema.safeParse(command) : { success: false as const };
+}
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -241,12 +253,12 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
 }
 
 /** Pure: consumes only persisted random streams and never mutates its input. */
-export function resolveCommand(previous: World, command: GameCommand): World {
-  // Zod returns a deep copy while validating, including bigint values.
-  const world = validateWorld(previous);
+export function resolveCommand(previous: World, command: GameCommand, immutable = false): World {
+  // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
+  const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); world.revision++; return validateWorld(world);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); world.revision++; return validateWorld(world, immutable);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -280,31 +292,31 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
-    const school = schoolCommandSchema.safeParse(command);
-    const education = educationCommandSchema.safeParse(command);
-    const recovery = recoveryCommandSchema.safeParse(command);
-    const scholarship = scholarshipCommandSchema.safeParse(command);
-    const work = workCommandSchema.safeParse(command);
-    const finance = financeCommandSchema.safeParse(command);
-    const assets = assetCommandSchema.safeParse(command);
-    const market = marketCommandSchema.safeParse(command);
-    const social = socialCommandSchema.safeParse(command);
-    const family = familyCommandSchema.safeParse(command);
-    const estate = estateCommandSchema.safeParse(command);
-    const health = healthCommandSchema.safeParse(command);
-    const legal = legalCommandSchema.safeParse(command);
-    const socialMedia = socialMediaCommandSchema.safeParse(command);
-    const business = businessCommandSchema.safeParse(command);
-    const career = careerCommandSchema.safeParse(command);
-    const music = musicCommandSchema.safeParse(command);
-    const politics = politicsCommandSchema.safeParse(command);
-    const creator=creatorCommandSchema.safeParse(command);
-    const service=serviceCommandSchema.safeParse(command);
-    const royalty=royaltyCommandSchema.safeParse(command);
-    const travel=travelCommandSchema.safeParse(command);
-    const leisure = leisureCommandSchema.safeParse(command);
-    const pet = petCommandSchema.safeParse(command);
-    const relocation=relocationCommandSchema.safeParse(command);
+    const school = parseActivity(schoolCommandSchema, command);
+    const education = parseActivity(educationCommandSchema, command);
+    const recovery = parseActivity(recoveryCommandSchema, command);
+    const scholarship = parseActivity(scholarshipCommandSchema, command);
+    const work = parseActivity(workCommandSchema, command);
+    const finance = parseActivity(financeCommandSchema, command);
+    const assets = parseActivity(assetCommandSchema, command);
+    const market = parseActivity(marketCommandSchema, command);
+    const social = parseActivity(socialCommandSchema, command);
+    const family = parseActivity(familyCommandSchema, command);
+    const estate = parseActivity(estateCommandSchema, command);
+    const health = parseActivity(healthCommandSchema, command);
+    const legal = parseActivity(legalCommandSchema, command);
+    const socialMedia = parseActivity(socialMediaCommandSchema, command);
+    const business = parseActivity(businessCommandSchema, command);
+    const career = parseActivity(careerCommandSchema, command);
+    const music = parseActivity(musicCommandSchema, command);
+    const politics = parseActivity(politicsCommandSchema, command);
+    const creator=parseActivity(creatorCommandSchema, command);
+    const service=parseActivity(serviceCommandSchema, command);
+    const royalty=parseActivity(royaltyCommandSchema, command);
+    const travel=parseActivity(travelCommandSchema, command);
+    const leisure = parseActivity(leisureCommandSchema, command);
+    const pet = parseActivity(petCommandSchema, command);
+    const relocation=parseActivity(relocationCommandSchema, command);
     if (leisure.success) resolveLeisure(world, leisure.data);
     else if (pet.success) resolvePets(world, pet.data);
     else if (school.success) resolveSchool(world, school.data);
@@ -340,5 +352,5 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   refreshStoryThreads(world);
   refreshLeisure(world);
   world.revision++;
-  return validateWorld(world);
+  return validateWorld(world, immutable);
 }

@@ -1,3 +1,4 @@
+import { indexLedger } from '../ledgerIndex';
 import { ageOn, compareDates, World } from '../model';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
@@ -8,13 +9,13 @@ import { rules } from '../rules';
 import { petBoardingCost, petFoodCost, petVetCost } from './pets';
 
 /** History reconciles to the actual people, monthly cursor and financial ledger. */
-export function validatePets(world: World) {
+export function validatePets(world: World, ledger = indexLedger(world.ledger)) {
   if (!world.pets.length && !world.petAdoptions.length) {
-    if (world.ledger.some(row => ['pet-adoption', 'pet-care', 'pet-vet'].includes(row.category))) throw new Error('Pet ledger entry lacks its actual care history');
+    if (ledger.categories('pet-adoption', 'pet-care', 'pet-vet').length > 0) throw new Error('Pet ledger entry lacks its actual care history');
     return;
   }
   const month = (date: World['date']) => date.year * 12 + date.month - 1;
-  const transactions = new Map(world.ledger.map((row, index) => [row.id, { row, index }]));
+  const transactions = ledger.positioned;
   const adoptedIds = new Set<string>();
   const now = month(world.date), ids = new Set<string>(), attempts = new Set<string>(), requests = new Set<string>(), payments = new Set<string>();
   const aliveAt = (id: string, date: World['date']) => {
@@ -97,7 +98,7 @@ export function validatePets(world: World) {
     }
     if (pet.country !== country || pet.city !== city) throw new Error('Pet location lacks its transport history');
   }
-  for (const row of world.ledger) if (['pet-adoption', 'pet-care', 'pet-vet'].includes(row.category) && !payments.has(row.id)) throw new Error('Pet ledger entry lacks its actual care history');
+  for (const row of ledger.categories('pet-adoption', 'pet-care', 'pet-vet')) if (!payments.has(row.id)) throw new Error('Pet ledger entry lacks its actual care history');
   for (const relocation of world.relocations.filter(item => item.move)) {
     const fees = world.pets.flatMap(pet => pet.moves.filter(move => move.relocationId === relocation.id)).reduce((sum, item) => sum + item.fee, 0n);
     if (fees > relocation.move!.quote.transport) throw new Error('Pet transport fees exceed the paid move');

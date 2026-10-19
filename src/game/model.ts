@@ -1,3 +1,4 @@
+import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
@@ -74,6 +75,11 @@ export const personSchema = z.object({
 });
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
+// Only rows certified by a full world validation may take this path. Ledger
+// records are append-only; sharing frozen originals avoids cloning every old
+// transaction for an unrelated button press.
+const immutableTransactions = new WeakSet<object>();
+const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
   schemaVersion: z.literal(27), engineVersion: z.literal(26), contentVersion: z.literal(4),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
@@ -119,9 +125,20 @@ export function ageOn(person: Pick<Person, 'born' | 'died'>, date: GameDate): nu
 }
 export const fullName = (person: Pick<Person, 'firstName' | 'lastName'>) => person.firstName + ' ' + person.lastName;
 
+function parseWorldShape(value: unknown): World {
+  if (value && typeof value === 'object' && 'ledger' in value && Array.isArray(value.ledger)) {
+    const rows = value.ledger;
+    if (!rows.some(row => immutableTransactions.has(row))) return worldSchema.parse(value);
+    const world = worldSchema.parse({ ...value, ledger: [] });
+    world.ledger = rows.map(row => immutableTransactions.has(row) ? row : transactionSchema.parse(row));
+    return world;
+  }
+  return worldSchema.parse(value);
+}
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
-export function validateWorld(value: unknown): World {
-  const world = worldSchema.parse(value);
+export function validateWorld(value: unknown, immutable = false): World {
+  const world = parseWorldShape(value);
+  const ledger = indexLedger(world.ledger, world.ledger.every(row => immutableTransactions.has(row)));
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
   const accountCurrencies = new Set<string>();
@@ -215,19 +232,15 @@ export function validateWorld(value: unknown): World {
     accountIds.add(account.id);
     accountCurrencies.add(currencyKey);
   }
-  const ledgerIds = new Set<string>();
   const liabilities = new Map(world.liabilities.map(liability => [liability.id, liability]));
   if (liabilities.size !== world.liabilities.length) throw new Error('Duplicate debt');
-  const cashChanges = new Map<string, bigint>();
-  const debtChanges = new Map<string, bigint>();
-  for (const entry of world.ledger) {
-    const account = world.accounts.find(candidate => candidate.id === entry.accountId);
-    const liability = entry.liabilityId ? liabilities.get(entry.liabilityId) : null;
-    if (ledgerIds.has(entry.id) || !account || account.ownerId !== entry.personId || account.currency !== entry.currency || (entry.liabilityId && (!liability || liability.currency !== entry.currency)) || (!entry.liabilityId && entry.debtDelta !== 0n)) throw new Error('Invalid ledger reference');
-    ledgerIds.add(entry.id);
-    cashChanges.set(account.id, (cashChanges.get(account.id) ?? 0n) + entry.cashDelta);
-    if (entry.liabilityId) debtChanges.set(entry.liabilityId, (debtChanges.get(entry.liabilityId) ?? 0n) + entry.debtDelta);
+  const { cashChanges, debtChanges } = ledger, accounts = new Map(world.accounts.map(account => [account.id, account]));
+  if (!ledger.consistent) throw new Error('Invalid ledger reference');
+  for (const [id, reference] of ledger.accountReferences) {
+    const account = accounts.get(id);
+    if (!account || account.ownerId !== reference.ownerId || account.currency !== reference.currency) throw new Error('Invalid ledger reference');
   }
+  for (const [id, currency] of ledger.debtCurrencies) if (liabilities.get(id)?.currency !== currency) throw new Error('Invalid ledger reference');
   for (const account of world.accounts) if (account.cash !== account.openingCash + (cashChanges.get(account.id) ?? 0n)) throw new Error('Cash does not reconcile with ledger');
   for (const liability of world.liabilities) if (!world.people[liability.ownerId] || !world.accounts.some(account => account.ownerId === liability.ownerId && account.currency === liability.currency) || liability.principal !== (debtChanges.get(liability.id) ?? 0n)) throw new Error('Debt does not reconcile with ledger');
   for (const debt of world.liabilities) if (debt.creditorId && (!world.people[debt.creditorId] || debt.creditorId === debt.ownerId || !world.accounts.some(account => account.ownerId === debt.creditorId && account.currency === debt.currency))) throw new Error('Invalid internal creditor');
@@ -283,21 +296,21 @@ export function validateWorld(value: unknown): World {
   validateLegal(world);
   validateSocial(world);
   validateBusinesses(world);
-  validateEarnings(world);
-  validateTravel(world);
+  validateEarnings(world, ledger);
+  validateTravel(world, ledger);
   validateSchools(world);
   validateEducationRecovery(world);
   validateScholarships(world);
-  validatePets(world);
-  validateLeisure(world);
-  validateStoryThreads(world);
-  validateRelocations(world);
+  validatePets(world, ledger);
+  validateLeisure(world, ledger);
+  validateStoryThreads(world, ledger);
+  validateRelocations(world, ledger);
   validateCareers(world);
-  validateMusic(world);
-  validatePolitics(world);
-  validateCreators(world);
+  validateMusic(world, ledger);
+  validatePolitics(world, ledger);
+  validateCreators(world, ledger);
   validateServices(world);
-  validateRoyalty(world);
+  validateRoyalty(world, ledger);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -327,22 +340,55 @@ export function validateWorld(value: unknown): World {
       }
     }
   }
+  if (immutable) {
+    for (const row of world.ledger) immutableTransactions.add(Object.freeze(row));
+    freezeTree(world);
+    rememberLedgerIndex(world.ledger, ledger);
+    immutableWorlds.add(world);
+  }
   return world;
 }
 
-export function encodeWorld(world: World): string {
-  return JSON.stringify(validateWorld(world), (_key, value: unknown) => typeof value === 'bigint' ? { $dreamsBigInt: value.toString() } : value);
+function freezeTree(value: unknown): void {
+  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return;
+  for (const child of Object.values(value)) freezeTree(child);
+  Object.freeze(value);
 }
-export function decodeWorld(text: string): World {
-  if (text.length > 20_000_000) throw new Error('Save is too large');
-  const parsed = JSON.parse(text, (_key, value: unknown) => {
-    if (value && typeof value === 'object' && Object.keys(value).length === 1 && '$dreamsBigInt' in value) {
-      const amount = (value as { $dreamsBigInt: unknown }).$dreamsBigInt;
-      if (typeof amount !== 'string' || !/^-?\d{1,128}$/.test(amount)) throw new Error('Invalid money encoding');
-      return BigInt(amount);
-    }
+/** Mutable working copy; certified immutable inputs need no repeated integrity audit. */
+export function copyWorld(world: World): World {
+  return immutableWorlds.has(world) ? parseWorldShape(world) : validateWorld(world);
+}
+/** Storage and the UI share only fully validated, recursively frozen worlds. */
+export function immutableWorld(world: World): World {
+  return immutableWorlds.has(world) ? world : validateWorld(world, true);
+}
+export function worldForEncoding(world: World): World {
+  return immutableWorlds.has(world) ? world : validateWorld(world);
+}
+export const moneyJSON = (_key: string, value: unknown) => typeof value === 'bigint' ? { $dreamsBigInt: value.toString() } : value;
+export function encodeWorld(world: World): string {
+  return JSON.stringify(worldForEncoding(world), moneyJSON);
+}
+// JSON.parse's reviver calls back for every primitive field. Visit containers
+// directly instead, retaining exactly the original bounded bigint marker rules.
+function restoreMoney(value: any): any {
+  if (!value || typeof value !== 'object') return value;
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index++) if (value[index] && typeof value[index] === 'object') value[index] = restoreMoney(value[index]);
     return value;
-  });
+  }
+  const keys = Object.keys(value);
+  if (keys.length === 1 && keys[0] === '$dreamsBigInt') {
+    const amount: unknown = value.$dreamsBigInt;
+    if (typeof amount !== 'string' || !/^-?\d{1,128}$/.test(amount)) throw new Error('Invalid money encoding');
+    return BigInt(amount);
+  }
+  for (const key of keys) if (value[key] && typeof value[key] === 'object') value[key] = restoreMoney(value[key]);
+  return value;
+}
+export function decodeWorld(text: string, immutable = false): World {
+  if (text.length > 20_000_000) throw new Error('Save is too large');
+  const parsed = restoreMoney(JSON.parse(text));
   // Version 1 shipped creation only. Preserve every identity, journal fact and RNG stream.
   if (parsed && parsed.schemaVersion === 1) {
     parsed.schemaVersion = 2;
@@ -435,5 +481,5 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 25) { parsed.schemaVersion = 26; parsed.engineVersion = 25; parsed.pets = []; parsed.petAdoptions = []; }
   // Personal leisure starts now; existing pets, qualifications and payments remain exact.
   if (parsed && parsed.schemaVersion === 26) { parsed.schemaVersion = 27; parsed.engineVersion = 26; parsed.hobbies = []; parsed.leisureOutings = []; }
-  return validateWorld(parsed);
+  return validateWorld(parsed, immutable);
 }

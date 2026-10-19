@@ -1,10 +1,11 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 import { countries } from '../countries';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
 import { musicGenreRules } from '../content/music';
 const compare = (a: World['date'], b: World['date']) => a.year - b.year || a.month - b.month || a.day - b.day;
-export function validateMusic(world: World) {
+export function validateMusic(world: World, ledger = indexLedger(world.ledger)) {
     const month = world.date.year * 12 + world.date.month - 1, ids = new Set<string>(), recording = new Set<string>(), royalties = new Map<string, bigint>(), costs = new Map<string, bigint>();
     for (const release of world.musicReleases) {
         const person = world.people[release.personId], career = world.careers.find(item => item.id === release.careerId), unfinished = ['recording', 'paused'].includes(release.status), released = !!release.released, key = release.personId + ':' + release.currency, expectedQuality = release.scores.length ? Math.round(release.scores.reduce((sum, value) => sum + value, 0) / release.scores.length) : 0;
@@ -27,7 +28,7 @@ export function validateMusic(world: World) {
         costs.set(key, (costs.get(key) ?? 0n) + release.paidProduction);
     }
     const income = new Map<string, bigint>(), spend = new Map<string, bigint>();
-    for (const entry of world.ledger) {
+    for (const entry of ledger.categories('career-royalties', 'music-production')) {
         const key = entry.personId + ':' + entry.currency;
         if (entry.category === 'career-royalties') {
             if (entry.cashDelta < 0n || entry.debtDelta)

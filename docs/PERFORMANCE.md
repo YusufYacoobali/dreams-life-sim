@@ -4,6 +4,64 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
+## Current button-response milestone: world 27 / database 5
+
+[The implementation and trust boundaries](BUTTON_RESPONSIVENESS.md) retain
+save-before-publish, exact money, deterministic retries and all history. Frozen
+validated transaction rows/indexes/compression blocks are reused; unchanged
+current saves are byte-checked rather than decoded on every press. Busy feedback
+belongs to the submitted control, quick actions do not flash a spinner, and
+hidden screens/history reads stay idle.
+
+The [controlled comparison](verification/button-latency-20261019.json) runs the
+same genuine inputs through unmodified `8886f16` and candidate game/persistence
+hash `57dcf75ae5e75310792c86a5130dea0f6b75f1c35bf1d3338d02d67647e2a631`.
+Each case has one warm-up and five real SQLite/WAL samples; separate processes
+run serially without regression/export/sweep work. Every post-commit current and
+backup world is checked after closing/reopening SQLite.
+
+| Selected action, cloud Node | Before median | Current median |
+| --- | ---: | ---: |
+| Begin Life | 1.75 ms | 1.36 ms |
+| First-year choice | 4.84 ms | 3.20 ms |
+| First-year Continue | 4.21 ms | 1.82 ms |
+| Age-seven project choice | 32.97 ms | 6.54 ms |
+| Age-seven Continue, including resumed months | 43.05 ms | 14.02 ms |
+| Age-30 routine | 259.71 ms | 16.98 ms |
+| Age-60 routine | 1,086.20 ms | 81.29 ms |
+
+The first write from an old monolithic checkpoint is separately recorded:
+89.53 ms at age 30 / 367.30 ms at age 60, then the new blocks can be reused.
+Full world loading over an already-open warm SQLite connection measures
+139.80 → 85.39 ms at age 30 and 510.28 → 341.29 ms at age 60. These exclude native
+bridge/render/frame-yield and app/connection startup time. They are selected cloud
+diagnostics, not a native interaction/startup acceptance result.
+
+The [complete real SQLite comparison](verification/sqlite-history-v27-responsive-20261019.json)
+retains 236 commands and all 79 moments, death at 78, 18 people and 47,202 ledger
+rows. Entire live, backup and **all 79 prior worlds** match the old implementation;
+metadata matches except verified encoded sizes. Receipts/preferences/branches/
+restore receipts match exactly. Independent compression increases the closed
+database from **29,995,008 to 33,091,584 bytes**, and peak disk from **36,405,568
+to 39,427,984 bytes**. Nothing was trimmed. These full-life timing samples overlap
+other checks and do not establish a separate controlled timing comparison.
+
+The [optimized-state leisure run](verification/leisure-immutable-v27-20261019.json)
+passes all twelve country-specific complete lives in 135.884 seconds, with exact
+cold worlds and all recorded semantic fields matching the earlier `117c4d1`
+record. Its unchanged game-only hash is
+`23a5383a331aa549eb5227da5ba8b8f7bd334f0786618d1b1eceb64883653180`.
+The earlier record has no terminal whole-world hashes; the current run records
+them. This is not an all-choice, native, 120-year or multi-generation pass.
+
+Strict typing, focused decoder/save/focus/UI checks and fresh Android/iOS Hermes
+exports/current Metro source pass. The complete current regression passes
+**1,157 tests / 76 suites in 717.063 seconds**, with game/persistence source fixed
+through the final measurements and regression. Native/large-company/1,000-person/storage-budget/release gates remain
+open; the extra compression overhead above must be included in future budgets.
+
+## Historical milestones
+
 The current world-25 scholarship candidate has 44 passing domain checks and
 an actual connected SQLite application/enrolment/renewal failure/retry/cold flow.
 Its complete **983-test / 64-suite** regression passes in **743.271 seconds**.

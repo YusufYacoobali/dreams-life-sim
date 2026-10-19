@@ -1,3 +1,4 @@
+import { indexLedger } from '../ledgerIndex';
 import { ageOn, compareDates, World } from '../model';
 import { countries } from '../countries';
 import { hobbyContent, outingContent } from '../content/leisure';
@@ -6,11 +7,11 @@ import { rules } from '../rules';
 import { activeHobbyPlan, HobbyPlan, LeisureEffect } from './leisureSchemas';
 import { hobbyFee } from './leisure';
 
-export function validateLeisure(world: World) {
+export function validateLeisure(world: World, ledger = indexLedger(world.ledger)) {
   if (!world.hobbies.length && !world.leisureOutings.length) {
-    if (world.ledger.some(row => ['hobby', 'entertainment'].includes(row.category))) throw new Error('Leisure payment lacks its actual history'); return;
+    if (ledger.categories('hobby', 'entertainment').length > 0) throw new Error('Leisure payment lacks its actual history'); return;
   }
-  const month = (date: World['date']) => date.year * 12 + date.month - 1, now = month(world.date), ids = new Set<string>(), profiles = new Set<string>(), used = new Set<string>(), activeCounts = new Map<string, number>(), transactions = new Map(world.ledger.map((row, index) => [row.id, { row, index }]));
+  const month = (date: World['date']) => date.year * 12 + date.month - 1, now = month(world.date), ids = new Set<string>(), profiles = new Set<string>(), used = new Set<string>(), activeCounts = new Map<string, number>(), transactions = ledger.positioned;
   const aliveAt = (id: string, date: World['date']) => { const person = world.people[id]; return person && compareDates(person.born, date) <= 0 && (!person.died || compareDates(person.died, date) >= 0); };
   const permission = (personId: string, payerId: string, date: World['date'], consent: HobbyPlan['consent']) => {
     const person = world.people[personId], payer = world.people[payerId];
@@ -81,5 +82,5 @@ export function validateLeisure(world: World) {
       const deltas: Partial<Record<LeisureEffect['stat'], number>> = { happiness: outing.outcome * 2, stress: -outing.outcome, energy: -content.energy }; if (outing.kind === 'museum') deltas.smarts = 1; if (outing.effects.find(effect => effect.stat === 'energy')?.before! < content.energy) throw new Error('Outing lacks the required energy'); effects(outing.effects, deltas);
     }
   }
-  for (const row of world.ledger) if (['hobby', 'entertainment'].includes(row.category) && !used.has(row.id)) throw new Error('Leisure ledger entry lacks its actual attendance');
+  for (const row of ledger.categories('hobby', 'entertainment')) if (!used.has(row.id)) throw new Error('Leisure ledger entry lacks its actual attendance');
 }

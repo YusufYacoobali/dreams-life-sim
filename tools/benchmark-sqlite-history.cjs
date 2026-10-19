@@ -43,7 +43,7 @@ const percentile = values => [...values].sort((a, b) => a - b)[Math.floor((value
   await repo.create(world);
   const started = Date.now(), commands = [], commits = []; let years = 0, peakDiskBytes = sizes().totalBytes;
   async function execute(command) {
-    const start = performance.now(), next = resolveCommand(world, command), resolved = performance.now();
+    const start = performance.now(), next = resolveCommand(world, command, true), resolved = performance.now();
     world = await repo.commit(next, world.revision, 'diagnostic:' + next.revision, command.type === 'advance');
     commands.push(performance.now() - start); commits.push(performance.now() - resolved);
     peakDiskBytes = Math.max(peakDiskBytes, sizes().totalBytes);

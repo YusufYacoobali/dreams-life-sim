@@ -1,8 +1,8 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
-import { Button, StatBar } from '../../src/ui/components';
+import { ActionRow, Button, StatBar } from '../../src/ui/components';
 import { ThemeProvider } from '../../src/ui/theme';
 import { GameShell } from '../../src/ui/GameShell';
 
@@ -16,6 +16,32 @@ test('a busy action cannot be submitted again', () => {
   fireEvent.press(screen.getByRole('button', { name: 'Buy property' }));
   expect(submit).not.toHaveBeenCalled();
   expect(screen.getByRole('button', { name: 'Buy property' })).toBeDisabled();
+});
+
+test('only the submitted button shows progress while other controls keep their useful text', () => {
+  jest.useFakeTimers();
+  let finish!: () => void;
+  function Controls() {
+    const [busy, setBusy] = React.useState(false); finish = () => setBusy(false);
+    return <><Button label="Practise" busy={busy} onPress={() => setBusy(true)} />
+      <Button label="Something Else" busy={busy} onPress={() => {}} />
+      <ActionRow title="Routine" subtitle="Community access" disabled={busy} onPress={() => {}} /></>;
+  }
+  frame(<Controls />);
+  fireEvent.press(screen.getByRole('button', { name: 'Practise' }));
+  expect(screen.queryByLabelText('Saving')).toBeNull();
+  act(() => jest.advanceTimersByTime(150));
+  expect(screen.getAllByLabelText('Saving')).toHaveLength(1);
+  expect(screen.getByRole('button', { name: 'Practise' }).props.accessibilityState).toEqual({ busy: true, disabled: true });
+  expect(screen.getByRole('button', { name: 'Something Else' }).props.accessibilityState).toEqual({ busy: false, disabled: true });
+  expect(screen.getByRole('button', { name: 'Routine. Community access' })).toBeDisabled();
+  expect(screen.getByText('Community access')).toBeTruthy();
+  // Finish through an actual React update, then submit the other control.
+  act(finish);
+  expect(screen.queryByLabelText('Saving')).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Something Else' }));
+  expect(screen.queryByLabelText('Saving')).toBeNull();
+  jest.useRealTimers();
 });
 
 test('selection requires an eligible option and submits its actual stable ID', () => {

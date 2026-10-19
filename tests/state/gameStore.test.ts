@@ -63,3 +63,17 @@ test('a failed checkpoint keeps the visible birth state and permits retry', asyn
   await store.getState().acknowledgeBirth();
   expect(commit).toHaveBeenCalledTimes(2);
 });
+
+test('the pending state reaches the UI before action work starts and still guards duplicate presses', async () => {
+  const frame = deferred<void>(), commit = jest.fn(async (next: typeof world) => next);
+  const { repository } = setup({ commit });
+  const store = createGameStore({ repository: async () => repository, date: () => date, id: () => 'life_frame', yieldToUI: () => frame.promise });
+  store.setState({ world, ready: true });
+  const pending = store.getState().acknowledgeBirth();
+  expect(store.getState()).toMatchObject({ world, busy: true });
+  expect(commit).not.toHaveBeenCalled();
+  expect(await store.getState().acknowledgeBirth()).toBe(false);
+  frame.resolve(); expect(await pending).toBe(true);
+  expect(commit).toHaveBeenCalledTimes(1);
+  expect(store.getState()).toMatchObject({ busy: false, world: { birthAcknowledged: true, revision: 1 } });
+});

@@ -1,4 +1,4 @@
-import { fullName, World } from '../game/model';
+import { fullName, immutableWorld, World } from '../game/model';
 import { packCheckpoint, unpackCheckpoint } from './checkpoints';
 import { BranchInfo, branchInfoSchema, decodeSave, encodeSave, SnapshotRecord, snapshotRecord, SnapshotSummary, snapshotSummarySchema, validateSnapshot } from './archive';
 
@@ -21,6 +21,7 @@ export class SaveCorrupt extends Error {
 }
 
 export class SaveRepository {
+  private current: { world: World; payload: string } | null = null;
   constructor(private db: SqlDatabase, private now: () => string = () => new Date().toISOString()) {}
 
   async loadAppSettings(): Promise<string | null> {
@@ -35,10 +36,10 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Version four writes compressed live rows. Older apps must refuse the new
+    // Version five permits chunked checkpoints. Older apps must refuse the new
     // representation; existing plain rows stay readable without an eager rewrite.
-    if (!version || version.user_version > 4) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 4) return;
+    if (!version || version.user_version > 5) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 5) return;
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -78,7 +79,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 4');
+      await tx.run('PRAGMA user_version = 5');
     });
   }
 
@@ -91,8 +92,9 @@ export class SaveRepository {
     const row = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [id]);
     if (!row) throw new Error('Saved life not found');
     try {
-      const world = unpackCheckpoint(row.payload);
+      const world = unpackCheckpoint(row.payload, true);
       if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
+      this.current = { world, payload: row.payload };
       return world;
     } catch { throw new SaveCorrupt(id); }
   }
@@ -103,6 +105,7 @@ export class SaveRepository {
   }
 
   async create(world: World): Promise<LifeSummary> {
+    world = immutableWorld(world);
     const payload = packCheckpoint(world);
     const summary = { id: world.id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: this.now() };
     await this.db.transaction(async tx => {
@@ -110,6 +113,7 @@ export class SaveRepository {
       await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [world.id, world.revision, payload]);
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [world.id]);
     });
+    this.current = { world, payload };
     return summary;
   }
 
@@ -122,6 +126,7 @@ export class SaveRepository {
   /** Checkpoint and idempotency receipt always commit or roll back together. */
   async commit(world: World, expectedRevision: number, commandId: string, captureBefore = false): Promise<World> {
     if (world.revision !== expectedRevision + 1) throw new SaveConflict();
+    world = immutableWorld(world);
     const payload = packCheckpoint(world);
     let duplicate = false;
     await this.db.transaction(async tx => {
@@ -129,13 +134,24 @@ export class SaveRepository {
       if (receipt) { duplicate = true; return; }
       const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
       if (!current || current.revision !== expectedRevision) throw new SaveConflict();
-      const previous = unpackCheckpoint(current.payload);
-      if (captureBefore) await this.writeSnapshot(tx, world.id, snapshotRecord(previous, this.now(), 'Before Age Up'));
-      await tx.run('UPDATE backups SET revision=?,payload=? WHERE life_id=?', [current.revision, current.payload, world.id]);
+      // Compare the actual bytes as well as identity/revision: an external write
+      // or damaged current row must never be hidden by the in-memory cache.
+      const cached = this.current;
+      const previous = cached && cached.world.id === world.id && cached.world.revision === current.revision && cached.payload === current.payload
+        ? cached.world : unpackCheckpoint(current.payload, true);
+      if (previous.id !== world.id || previous.revision !== current.revision) throw new SaveCorrupt(world.id);
+      if (captureBefore) {
+        const packed = current.payload.startsWith('{"format":"dreams-checkpoint-v') ? current.payload : undefined;
+        await this.writeSnapshot(tx, world.id, snapshotRecord(previous, this.now(), 'Before Age Up', packed));
+      }
+      // Copy within SQLite instead of sending the unchanged payload back over the native bridge.
+      await tx.run('UPDATE backups SET revision=?,payload=(SELECT payload FROM lives WHERE id=?) WHERE life_id=?', [current.revision, world.id, world.id]);
       await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
       await tx.run('INSERT INTO receipts(life_id,command_id,revision) VALUES(?,?,?)', [world.id, commandId, world.revision]);
     });
-    return duplicate ? this.load(world.id) : world;
+    if (duplicate) return this.load(world.id);
+    this.current = { world, payload };
+    return world;
   }
 
   async export(id: string): Promise<string> {

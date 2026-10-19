@@ -12,6 +12,22 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The latest user priority is **ordinary button latency and intrusive saving
+feedback**. [The world-27 / database-5 fix](BUTTON_RESPONSIVENESS.md) removes repeated validation/decoding/compression of unchanged financial
+history, limits progress to the submitted control, preserves row subtitles and
+keeps hidden history/screens idle. The exact-money decoder matches the original
+marker rules. The full **1,157-test / 76-suite** regression passes in **717.063
+seconds**, with strict typing, fresh Hermes bundles (5.3/5.0 MB, 47 distinct assets)
+and current Android/iOS Metro source. Source stayed fixed through final checks.
+Controlled cloud action medians improve 259.71 → 16.98 ms at age 30 and
+1,086.20 → 81.29 ms at age 60. The first v1 write is measured separately.
+Both entire live/backup worlds and all 79 original SQLite moments match the old
+implementation; receipts/metadata match except encoded sizes. Storage grows by
+3,096,576 closed bytes without removing history. Twelve complete optimized-state
+country/leisure journeys pass with exact cold worlds and matching prior recorded
+semantic fields. These are scoped cloud checks; native and complete-production
+gates/percentage baselines remain open. See [PERFORMANCE.md](PERFORMANCE.md).
+
 Checkpoint `117c4d1` is pushed. A genuine world-27 leisure archive now preserves
 the interrupted month-two school project, guitar/ticket/pet payments and four
 original earlier moments. Its focused continuity check and strict types pass;

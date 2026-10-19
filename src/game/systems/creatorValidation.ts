@@ -1,10 +1,11 @@
+import { indexLedger } from '../ledgerIndex';
 import { World, ageOn } from '../model';
 import { countries } from '../countries';
 import { creatorCatalog } from '../content/creators';
 import { creatorCrewQuote } from './creators';
 const compare=(a:World['date'],b:World['date'])=>a.year-b.year||a.month-b.month||a.day-b.day;
 const absolute=(date:World['date'])=>date.year*12+date.month-1;
-export function validateCreators(world:World){
+export function validateCreators(world:World, ledger = indexLedger(world.ledger)){
   const month=absolute(world.date),studios=new Map(world.creatorStudios.map(item=>[item.id,item])),crew=new Map<string,{member:World['creatorStudios'][number]['crew'][number];studio:World['creatorStudios'][number]}>(),keys=new Set<string>(),fullTime=new Set<string>();
   const agency=new Map<string,bigint>(),fees=new Map<string,bigint>(),income=new Map<string,bigint>(),totalPosts=new Map<string,number>();
   const add=(map:Map<string,bigint>,key:string,value:bigint)=>map.set(key,(map.get(key)??0n)+value);
@@ -46,7 +47,7 @@ export function validateCreators(world:World){
     }
   }
   const actualAgency=new Map<string,bigint>(),actualFees=new Map<string,bigint>(),actualIncome=new Map<string,bigint>();
-  for(const entry of world.ledger){
+  for(const entry of ledger.categories('creator-agency', 'creator-contract-fee', 'creator-contract-income')){
     const key=entry.personId+':'+entry.currency;
     if(entry.category==='creator-agency'||entry.category==='creator-contract-fee'){if(entry.cashDelta>=0n||entry.debtDelta)throw new Error('Invalid freelance payment');add(entry.category==='creator-agency'?actualAgency:actualFees,key,-entry.cashDelta);}
     if(entry.category==='creator-contract-income'){if(entry.cashDelta<=0n||entry.debtDelta)throw new Error('Invalid freelance receipt');add(actualIncome,key,entry.cashDelta);}

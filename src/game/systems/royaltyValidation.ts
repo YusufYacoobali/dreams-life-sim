@@ -1,3 +1,4 @@
+import { indexLedger } from '../ledgerIndex';
 import { World,ageOn } from '../model';
 import { countries } from '../countries';
 import { daysInMonth } from '../calendar';
@@ -8,7 +9,7 @@ import { royalEligible,royalLine } from './royaltyMath';
 const compare=(a:World['date'],b:World['date'])=>a.year-b.year||a.month-b.month||a.day-b.day;
 const absolute=(date:World['date'])=>date.year*12+date.month-1;
 const countBits=(value:number)=>value.toString(2).replaceAll('0','').length;
-export function validateRoyalty(world:World){
+export function validateRoyalty(world:World, ledger = indexLedger(world.ledger)){
  const ids=new Set<string>(),activeMemberships=new Set<string>(),income=new Map<string,bigint>(),month=absolute(world.date);
  for(const house of world.royalHouses){
   const members=new Map(house.members.map(item=>[item.personId,item])),founder=members.get(house.founderId),line=royalLine(world,house),heads=new Set(house.successions.map(item=>item.toId).filter((id):id is string=>!!id));
@@ -33,5 +34,5 @@ export function validateRoyalty(world:World){
    if(invalidMonth||archives.has(key)||!person||!membership||record.role==='head'&&!heads.has(record.personId)||record.year<membership.joined.year||record.year>world.date.year||membership.ended&&record.year>membership.ended.year||record.months!==countBits(record.monthsMask)||record.attended!==countBits(record.attendedMask)||record.attendedMask&~record.monthsMask||record.annualPay!==annual||record.allowance!==expected||record.scoreTotal>record.attended*100||record.engagements<record.attended*2||record.engagements>record.attended*3||record.role==='child'&&(record.attended||record.allowance))throw new Error('Invalid archived royal duty record');archives.add(key);add(person.id,record.year,record.monthsMask,record.allowance);
   }
  }
- const paid=new Map<string,bigint>();for(const entry of world.ledger.filter(item=>item.category==='royal-allowance')){if(entry.cashDelta<=0n||entry.debtDelta)throw new Error('Invalid royal allowance receipt');const key=entry.personId+':'+entry.currency;paid.set(key,(paid.get(key)??0n)+entry.cashDelta);}for(const key of new Set([...income.keys(),...paid.keys()]))if((income.get(key)??0n)!==(paid.get(key)??0n))throw new Error('Royal duty allowances do not match actual personal accounts');
+ const paid=new Map<string,bigint>();for(const entry of ledger.categories('royal-allowance')){if(entry.cashDelta<=0n||entry.debtDelta)throw new Error('Invalid royal allowance receipt');const key=entry.personId+':'+entry.currency;paid.set(key,(paid.get(key)??0n)+entry.cashDelta);}for(const key of new Set([...income.keys(),...paid.keys()]))if((income.get(key)??0n)!==(paid.get(key)??0n))throw new Error('Royal duty allowances do not match actual personal accounts');
 }

@@ -30,7 +30,7 @@ export default function Health() {
       <ActionRow title="Doctor" subtitle="Check-ups, symptoms, tests and referral" icon={<HealthLegalArt id="doctor" size={40} />} onPress={() => router.push('/doctor')} />
       <ActionRow title="Medical Conditions" subtitle="Current conditions and recovery history" icon={<HealthLegalArt id="care" size={40} />} onPress={() => router.push('/conditions')} />
       <ActionRow title="Treatments" subtitle="Diagnosed conditions and ongoing care" icon={<HealthLegalArt id="medicine" size={40} />} onPress={() => router.push('/conditions')} />
-      <ActionRow title="Vaccinations" subtitle="Dated routine and seasonal protection" icon={<HealthLegalArt id="medicine" size={40} />} disabledReason={busy ? 'Saving' : undefined} onPress={() => setVaccine('choose')} />
+      <ActionRow title="Vaccinations" subtitle="Dated routine and seasonal protection" icon={<HealthLegalArt id="medicine" size={40} />} disabled={busy} disabledReason={undefined} onPress={() => setVaccine('choose')} />
       <ActionRow title="Mind & Body" subtitle="Diet, sleep, exercise and wellbeing" icon={<HealthLegalArt id="meditation" size={40} />} onPress={() => router.push('/lifestyle')} />
     </Card>
     {person.health.vaccinations.length > 0 && <Card>{person.health.vaccinations.map(item => <Body key={item.id}>{item.id === 'routine' ? 'Routine protection' : 'Seasonal flu protection'} · {item.expiresMonth > world.date.year * 12 + world.date.month - 1 ? 'Current until ' + Math.floor(item.expiresMonth / 12) + '-' + String(item.expiresMonth % 12 + 1).padStart(2, '0') : 'Expired'}</Body>)}</Card>}

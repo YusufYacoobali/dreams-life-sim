@@ -1,12 +1,12 @@
 import { createStore } from 'zustand/vanilla';
 import { Creation, createLife } from '../game/createLife';
-import { fullName, GameDate, World } from '../game/model';
+import { fullName, GameDate, immutableWorld, World } from '../game/model';
 import { SaveCorrupt, SaveConflict, type LifeSummary, type SaveRepository } from '../persistence/repository';
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
 
 type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
-type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string };
+type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void> };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
   snapshots: SnapshotSummary[];
@@ -33,7 +33,7 @@ export function createGameStore(deps: Dependencies) {
     const run = async (action: () => Promise<void>, failure: string) => {
       if (get().busy) return false;
       set({ busy: true, error: null });
-      try { await action(); return true; }
+      try { if (deps.yieldToUI) await deps.yieldToUI(); await action(); return true; }
       catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure }); return false; }
       finally { set({ busy: false }); }
     };
@@ -53,7 +53,7 @@ export function createGameStore(deps: Dependencies) {
         return success;
       },
       startLife: (input, seed) => run(async () => {
-        const world = createLife(deps.id(), seed, input, deps.date());
+        const world = immutableWorld(createLife(deps.id(), seed, input, deps.date()));
         const repository = await deps.repository();
         const summary = await repository.create(world);
         set({ world, snapshots: [], lives: [summary, ...get().lives.filter(life => life.id !== world.id)] });
@@ -98,7 +98,7 @@ export function createGameStore(deps: Dependencies) {
       dispatch: command => run(async () => {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');
-        const next = resolveCommand(world, command);
+        const next = resolveCommand(world, command, true);
         const repository = await deps.repository();
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId, command.type === 'advance');

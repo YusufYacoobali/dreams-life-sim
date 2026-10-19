@@ -1,10 +1,11 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 import { ageOn } from '../model';
 import { countries } from '../countries';
 import { jobs } from '../content/jobs';
 import { electionOutcome } from './politicsMath';
 const compare = (a: World['date'], b: World['date']) => a.year - b.year || a.month - b.month || a.day - b.day;
-export function validatePolitics(world: World) {
+export function validatePolitics(world: World, ledger = indexLedger(world.ledger)) {
     const month = world.date.year * 12 + world.date.month - 1, ids = new Set<string>(), activeCandidates = new Set<string>(), appointments = new Set<string>(), spent = new Map<string, bigint>(), histories = new Map(world.workHistory.map(item => [item.id, item]));
     for (const election of world.elections) {
         const start = election.started.year * 12 + election.started.month - 1, ongoing = election.status === 'campaign', outcome = electionOutcome(election);
@@ -29,7 +30,7 @@ export function validatePolitics(world: World) {
             throw new Error('Vacant seat has an appointment');
     }
     const paid = new Map<string, bigint>();
-    for (const entry of world.ledger.filter(item => item.category === 'campaign-spend')) {
+    for (const entry of ledger.categories('campaign-spend')) {
         if (entry.cashDelta > 0n || entry.debtDelta)
             throw new Error('Invalid campaign payment');
         const key = entry.personId + ':' + entry.currency;

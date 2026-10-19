@@ -12,8 +12,8 @@ const recordSchema = z.object({ summary: snapshotSummarySchema, payload: z.strin
 export type SnapshotRecord = z.infer<typeof recordSchema>;
 const archiveSchema = z.object({ format: z.literal('dreams-save-archive'), version: z.literal(1), checkpoint: z.string().max(28_000_000), snapshots: z.array(recordSchema).max(5000), branch: branchInfoSchema.nullable() });
 export type SaveContents = { world: World; snapshots: SnapshotRecord[]; branch: BranchInfo | null };
-export function snapshotRecord(world: World, createdAt: string, label: string): SnapshotRecord {
-  const payload = packCheckpoint(world), person = world.people[world.activePersonId];
+export function snapshotRecord(world: World, createdAt: string, label: string, payload = packCheckpoint(world)): SnapshotRecord {
+  const person = world.people[world.activePersonId];
   return { payload, summary: { id: 'snapshot_r_' + world.revision, revision: world.revision, personId: person.id, name: fullName(person), date: { ...world.date }, age: ageOn(person, world.date), label, createdAt, size: payload.length } };
 }
 export function validateSnapshot(record: SnapshotRecord): World {

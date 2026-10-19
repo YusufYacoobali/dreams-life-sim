@@ -55,7 +55,7 @@ export default function SavedLives() {
     {lives.length === 0 && <Card><Body>No lives saved yet.</Body></Card>}
     {lives.map(life => <Card key={life.id}><Heading size={18}>{life.name}</Heading>{life.branch && <Body muted>Time Machine branch · {life.branch.name}, age {life.branch.age} in {life.branch.date.year}</Body>}
       <Button label="Continue" disabled={working} busy={busy} onPress={async () => { if (await select(life.id)) router.replace('/life'); }} />
-      <ActionRow title="Export save file" disabledReason={busy || working ? 'Finish the current save first' : undefined} onPress={() => { void run(async () => {
+      <ActionRow title="Export save file" disabled={busy || working} disabledReason={undefined} onPress={() => { void run(async () => {
         const repository = await openRepository();
         const text = await repository.export(life.id);
         if (!await Sharing.isAvailableAsync()) throw new Error('File sharing is unavailable on this device.');
@@ -63,7 +63,7 @@ export default function SavedLives() {
         file.write(text);
         await Sharing.shareAsync(file.uri, { mimeType: 'application/json', UTI: 'public.json', dialogTitle: 'Export Dreams life' });
       }, 'Could not export this life.'); }} />
-      <ActionRow title="Previous checkpoint" subtitle="Preview before restoring" disabledReason={busy || working ? 'Finish the current save first' : undefined} onPress={() => { void run(async () => {
+      <ActionRow title="Previous checkpoint" subtitle="Preview before restoring" disabled={busy || working} disabledReason={undefined} onPress={() => { void run(async () => {
         const world = await (await openRepository()).recoveryPreview(life.id);
         setPreview({ kind: 'recover', world });
       }, 'No previous checkpoint is available.'); }} />

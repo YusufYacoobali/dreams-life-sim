@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator, Pressable, ScrollView,
   StyleProp, StyleSheet, Text, View, ViewStyle,
@@ -6,6 +6,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, ThemedStatusBar, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
+import { useDelayedBusy } from './useDelayedBusy';
 
 export function Page({ children, scroll = true, bottomSafeArea = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean }>) {
   const c = useColors();
@@ -42,14 +43,18 @@ export function Button({
   const c = useColors();
   const background = tone === 'secondary' ? c.inset : tone === 'positive' ? c.green : tone === 'danger' ? c.red : c.blue;
   const color = tone === 'secondary' ? c.ink : '#FFFFFF';
+  const [submitted, setSubmitted] = useState(false);
+  useEffect(() => { if (!busy) setSubmitted(false); }, [busy, submitted]);
+  const saving = busy && submitted;
+  const showProgress = useDelayedBusy(saving);
   return (
     <Pressable
       accessibilityRole="button" accessibilityLabel={accessibilityLabel ?? label}
-      accessibilityState={{ disabled: disabled || busy, busy }}
-      disabled={disabled || busy} onPress={onPress}
+      accessibilityState={{ disabled: disabled || busy, busy: saving }}
+      disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); }}
       style={({ pressed }) => [styles.button, { backgroundColor: background, opacity: disabled || busy ? 0.5 : pressed ? 0.8 : 1 }]}
     >
-      {busy && <ActivityIndicator color={color} accessibilityLabel="Saving" />}
+      {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" />}
       <Text style={[styles.buttonLabel, { color }]}>{label}</Text>
     </Pressable>
   );
@@ -71,14 +76,14 @@ export function Header({ title, onBack, trailing }: { title: string; onBack?: ()
 }
 
 export function ActionRow({
-  title, subtitle, icon, value, onPress, disabledReason,
-}: { title: string; subtitle?: string; icon?: React.ReactNode; value?: string; onPress: () => void; disabledReason?: string }) {
+  title, subtitle, icon, value, onPress, disabledReason, disabled = false,
+}: { title: string; subtitle?: string; icon?: React.ReactNode; value?: string; onPress: () => void; disabledReason?: string; disabled?: boolean }) {
   const c = useColors();
   return (
     <Pressable
       accessibilityRole="button" accessibilityLabel={[title, subtitle, value, disabledReason].filter(Boolean).join('. ')}
-      accessibilityState={{ disabled: !!disabledReason }} disabled={!!disabledReason} onPress={onPress}
-      style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent', opacity: disabledReason ? 0.55 : 1 }]}
+      accessibilityState={{ disabled: disabled || !!disabledReason }} disabled={disabled || !!disabledReason} onPress={onPress}
+      style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
     >
       {icon && <View style={styles.rowIcon}>{icon}</View>}
       <View style={styles.rowText}>

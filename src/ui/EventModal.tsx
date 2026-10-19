@@ -3,6 +3,7 @@ import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
+import { useDelayedBusy } from './useDelayedBusy';
 
 export type EffectRow = { id: string; label: string; value: string; tone: 'positive' | 'negative' | 'neutral' };
 type Choice = { id: string; label: string; disabledReason?: string };
@@ -28,6 +29,7 @@ function EventCard({
   const c = useColors();
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string | null>(null);
+  const showProgress = useDelayedBusy(busy);
   const selectedEligible = event.kind === 'selection' && event.choices.some(choice => choice.id === selected && !choice.disabledReason);
   const effects = event.kind === 'result' ? event.effects
     : event.kind === 'confirmation' ? event.terms : event.kind === 'milestone' ? event.facts : [];
@@ -46,7 +48,7 @@ function EventCard({
                 <Text style={{ color: effect.tone === 'positive' ? c.green : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: 'right', flexShrink: 1 }}>{effect.value}</Text>
               </View>)}
             </View>}
-            {event.kind === 'decision' && busy && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}
+            {event.kind === 'decision' && showProgress && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}
             {event.kind === 'decision' && event.choices.map(choice => <Button
               key={choice.id} label={choice.label} disabled={busy || !!choice.disabledReason}
               accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}

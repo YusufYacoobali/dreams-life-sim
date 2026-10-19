@@ -4,6 +4,18 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `button-latency-20261019.json` preserves every controlled before/current/
+  first-v1-write sample, identical input hashes, cold world-load scope and bundle
+  evidence. `action-latency-inputs-v25-20261019.json` retains the two original
+  mature snapshot payloads byte-for-byte rather than generating fake mature lives.
+- `sqlite-history-v27-responsive-20261019.json` compares the whole current,
+  backup and all 79 prior worlds, matching metadata/receipts and actual storage
+  costs before/after the responsive-save change. Its full-life timing runs overlap
+  other checks; use the separate controlled action comparison for timing claims.
+- `leisure-immutable-v27-20261019.json` records all twelve complete country-specific
+  journeys through the validated immutable production path, current terminal
+  world hashes, exact cold worlds and matching previously recorded semantic fields.
+
 - `android29-system-ui-anr-20261019.png` is an actual pre-game OS failure
   capture. `android29-opening-20261019.log` preserves selected native log lines;
   [the attempt](../NATIVE_OPENING.md) did not establish playable opening UI.

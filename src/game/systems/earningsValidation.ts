@@ -1,8 +1,9 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 import { convertMoney, roundRatio } from '../money';
 
-export function validateEarnings(world: World) {
-  const month = world.date.year * 12 + world.date.month - 1, transactions = new Map(world.ledger.map(item => [item.id, item])), used = new Set<string>();
+export function validateEarnings(world: World, ledger = indexLedger(world.ledger)) {
+  const month = world.date.year * 12 + world.date.month - 1, transactions = ledger.transactions, used = new Set<string>();
   for (const record of world.workHistory) {
     const person = world.people[record.personId], start = record.started.year * 12 + record.started.month - 1;
     if (record.currency === person.finance.earningsCurrency) {

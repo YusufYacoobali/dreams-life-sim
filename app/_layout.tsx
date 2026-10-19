@@ -10,7 +10,7 @@ export default function RootLayout() {
   useEffect(() => { void gameStore.getState().bootstrap(); void preferencesStore.getState().bootstrap(); }, []);
   return <SafeAreaProvider><ThemeProvider appearance={appearance}>
     <ThemedStatusBar />
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack screenOptions={{ headerShown: false, freezeOnBlur: true }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="new-life" />
       <Stack.Screen name="appearance" />

@@ -1,10 +1,11 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 const compareDates = (a: World['date'], b: World['date']) => (a.year - b.year) || (a.month - b.month) || (a.day - b.day);
 import { countries } from '../countries';
 import { storyContextReason, storyMonthNumber } from './storyContext';
 
 /** Save/load validates records without creating plans, rolling consent or advancing dates. */
-export function validateStoryThreads(world: World) {
+export function validateStoryThreads(world: World, ledger = indexLedger(world.ledger)) {
   const ids = new Set<string>(), origins = new Set<string>(), payments = new Set<string>();
   const queued = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   for (const thread of world.storyThreads) {
@@ -38,12 +39,12 @@ export function validateStoryThreads(world: World) {
     }
     if (thread.status === 'cancelled' && (!thread.ended || !thread.cancellationReason || thread.resolution || thread.paidTransactionId || matches.length)) throw new Error('Invalid cancelled story');
     if (thread.paidTransactionId) {
-      const payment = world.ledger.find(item => item.id === thread.paidTransactionId);
+      const payment = ledger.transactions.get(thread.paidTransactionId);
       if (payments.has(thread.paidTransactionId) || !payment || payment.personId !== thread.parentId || payment.currency !== thread.quote.currency || payment.cashDelta !== -thread.quote.amount || payment.debtDelta !== 0n || payment.category !== 'story-outing' || !thread.ended || payment.year !== thread.ended.year || payment.month !== thread.ended.month) throw new Error('Invalid story outing payment');
       payments.add(thread.paidTransactionId);
     }
   }
-  if (world.ledger.some(item => item.category === 'story-outing' && !payments.has(item.id))) throw new Error('Unrecorded story outing payment');
+  if (ledger.categories('story-outing').some(item => !payments.has(item.id))) throw new Error('Unrecorded story outing payment');
   for (const event of queued) if (event.kind === 'decision') for (const choice of event.choices) for (const effect of choice.effects) {
     if (effect.kind === 'resolve-story' && !world.storyThreads.some(item => item.id === effect.threadId && item.status === 'offered' && item.offeredEventId === event.id)) throw new Error('Invalid bound story resolution');
     if (effect.kind === 'schedule-story' && (effect.personId !== world.activePersonId || effect.originEventId !== event.id || effect.originTemplateId !== event.templateId || effect.originChoiceId !== choice.id ||

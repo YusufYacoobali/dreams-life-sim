@@ -1,3 +1,4 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 import { ageOn, compareDates } from '../model';
 import { countries } from '../countries';
@@ -8,8 +9,8 @@ import { convertMoney, roundRatio } from '../money';
 import { courseMonths } from './education';
 import { incomeTax, rules } from '../rules';
 
-export function validateRelocations(world: World) {
-  const ids = new Set<string>(), used = new Set<string>(), transactions = new Map(world.ledger.map(item => [item.id, item]));
+export function validateRelocations(world: World, ledger = indexLedger(world.ledger)) {
+  const ids = new Set<string>(), used = new Set<string>(), transactions = ledger.transactions;
   for (const application of world.relocations) {
     const person = world.people[application.personId], destination = destinations[application.destinationId], sourceCurrency = countries[application.originCountry].currency, targetCurrency = countries[destination.country].currency;
     if (ids.has(application.id) || !person || ageOn({ ...person, died: null }, application.applied) < 18 || application.originCountry === destination.country || compareDates(application.applied, world.date) > 0 || compareDates(application.expires, monthFrom(application.applied, 12, application.anchorDay)) !== 0 || (application.status === 'declined') !== (application.roll > application.chance) || (application.status === 'moved') !== !!application.move || !world.actionCounts[person.id + ':relocation:' + application.applied.year + ':' + destination.country + ':' + application.route]) throw new Error('Invalid relocation application');
@@ -56,5 +57,5 @@ export function validateRelocations(world: World) {
     const newJob = world.workHistory.find(item => item.id === move.newEmploymentId);
     if (application.job ? !newJob || newJob.personId !== person.id || newJob.currency !== targetCurrency || newJob.roleId !== application.job.roleId || compareDates(newJob.started, move.date) !== 0 : move.newEmploymentId !== null) throw new Error('Invalid relocation employment');
   }
-  for (const entry of world.ledger.filter(item => ['relocation-application', 'relocation-transport', 'relocation-exchange', 'relocation-household'].includes(item.category))) if (!used.has(entry.id)) throw new Error('Unrecorded relocation payment');
+  for (const entry of ledger.categories('relocation-application', 'relocation-transport', 'relocation-exchange', 'relocation-household')) if (!used.has(entry.id)) throw new Error('Unrecorded relocation payment');
 }

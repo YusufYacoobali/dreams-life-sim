@@ -1,3 +1,4 @@
+import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
 import { ageOn, compareDates } from '../model';
 import { monthFrom } from '../calendar';
@@ -5,8 +6,8 @@ import { countries } from '../countries';
 import { destinations } from '../content/travel';
 import { convertMoney } from '../money';
 
-export function validateTravel(world: World) {
-  const month = world.date.year * 12 + world.date.month - 1, ids = new Set<string>(), activePeople = new Set<string>(), transactions = new Map(world.ledger.map(item => [item.id, item])), used = new Set<string>(), paidLeave = new Set<string>();
+export function validateTravel(world: World, ledger = indexLedger(world.ledger)) {
+  const month = world.date.year * 12 + world.date.month - 1, ids = new Set<string>(), activePeople = new Set<string>(), transactions = ledger.transactions, used = new Set<string>(), paidLeave = new Set<string>();
   for (const trip of world.trips) {
     const organizer = world.people[trip.organizerId], destination = destinations[trip.destinationId], start = trip.started.year * 12 + trip.started.month - 1, quote = trip.quote;
     if (ids.has(trip.id) || !organizer || ageOn({ ...organizer, died: null }, trip.started) < 18 || !trip.participantIds.includes(trip.organizerId) || new Set(trip.participantIds).size !== trip.participantIds.length || trip.participantIds.some(id => !world.people[id] || compareDates(world.people[id].born, trip.started) > 0 || world.people[id].died && compareDates(world.people[id].died!, trip.started) < 0) || compareDates(trip.started, world.date) > 0 || compareDates(trip.expectedReturn, monthFrom(trip.started, trip.duration, trip.anchorDay)) !== 0 || trip.lastMonth !== start + trip.periods.length || trip.lastMonth > month || (trip.status === 'active') !== (trip.ended === null) || trip.ended && (compareDates(trip.ended, trip.started) < 0 || compareDates(trip.ended, world.date) > 0) || (trip.status === 'declined') !== trip.consents.some(item => !item.accepted) || trip.status === 'completed' && trip.periods.length !== trip.duration || trip.status !== 'completed' && trip.periods.length >= trip.duration || trip.status === 'declined' && trip.periods.length) throw new Error('Invalid trip identity, dates or completion');

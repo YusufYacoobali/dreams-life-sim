@@ -46,6 +46,13 @@ are completed; a hotfix or generated illustration alone does not advance them.
 
 ## Order of work
 
+The latest reported regression takes precedence: ordinary buttons must respond
+smoothly without “Saving” replacing unrelated subtitles or loading every button.
+The [measured save/validation/hidden-screen fix](BUTTON_RESPONSIVENESS.md) now passes
+1,157 tests / 76 suites, strict typing and both Hermes exports; commit/push it
+before continuing the sequence below. Native acceptance remains open. The percentage baselines
+above remain unchanged until their corresponding acceptance gates close.
+
 1. **Startup reliability.** Fix the `Intl`/BigInt crash with exact money display.
    Reproduce Number-only Intl in regression checks, including real SQLite
    creation and newborn acknowledgement failure/retry. Hotfix `0a44fc0` is

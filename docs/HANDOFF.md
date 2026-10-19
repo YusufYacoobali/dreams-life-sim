@@ -1,5 +1,31 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+## Latest user priority: button responsiveness
+
+The user reported seconds of delay on ordinary presses and “Saving” appearing
+under other controls. [The verified fix](BUTTON_RESPONSIVENESS.md) keeps
+world 27 / engine 26 / content 4 and uses
+database 5, with validated immutable states, reusable ledger indexes/compressed
+blocks, byte-checked transactional save caching, focused/delayed progress and
+inactive-screen freezing. Time Machine must not reload history while hidden.
+The complete **1,157-test / 76-suite** regression passes in **717.063 seconds**,
+with strict source/test typing, fresh Android/iOS Hermes exports (5.3/5.0 MB,
+47 distinct assets) and current Metro manifests/source. Game/persistence hash
+`57dcf75ae5e75310792c86a5130dea0f6b75f1c35bf1d3338d02d67647e2a631`
+stayed fixed through final measurements/regression. Controlled cloud action
+medians improve 259.71 → 16.98 ms at age 30 and 1,086.20 → 81.29 ms at age 60;
+world-data loading improves too. The separately measured first v1 write still
+converts its history (367.30 ms at age 60). These are not native/app-startup times.
+
+Both complete seed-42 SQLite runs retain 236 commands / 79 moments. Entire live,
+backup and **all 79 prior worlds**, receipts and non-size metadata match exactly.
+Independent blocks add 3,096,576 closed bytes (29,995,008 → 33,091,584), without
+trimming history. All twelve optimized-state country/leisure lives also pass,
+matching every previously recorded semantic field and cold worlds. Native and
+large-world/storage release gates remain open. Commit/push this tested state
+before further features; then resume the full plan. Preserve the original v27
+leisure archive below before extending its saved hobby variants.
+
 This handoff was requested on 19 October 2026. All application changes, tests,
 the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
@@ -43,7 +69,7 @@ logs are retained; no native gate closed. Continue independent work from the
 [hobbies/entertainment contract](planning/drafts/hobbies-integration.md), then
 remaining education, stories, extras, country/performance/native release work.
 
-The active continuation is **world 26 / engine 25 / content 4 / database 4**,
+The prior pet continuation was **world 26 / engine 25 / content 4 / database 4**,
 adding [persistent household pets](PETS.md). Real parents/guardians can take
 responsibility from age six, with reviewed named-payer consent and actual fees.
 Monthly food/boarding, optional care, illness/vet recovery, ownership/death/legacy,

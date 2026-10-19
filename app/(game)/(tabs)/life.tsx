@@ -21,6 +21,7 @@ import { useColors } from '../../../src/ui/theme';
 import { jobs } from '../../../src/game/content/jobs';
 import { accountFor } from '../../../src/game/systems/common';
 import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
+import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
 
 export default function Life() {
   const world = useGame(s => s.world)!;
@@ -28,6 +29,8 @@ export default function Life() {
   const dispatch = useGame(s => s.dispatch);
   const busy = useGame(s => s.busy);
   const error = useGame(s => s.error);
+  const [advancing, setAdvancing] = useState(false);
+  const showYearProgress = useDelayedBusy(busy && advancing);
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
   const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
@@ -65,8 +68,8 @@ export default function Life() {
       ListFooterComponent={ageOn(player, world.date) === 0 ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.'}</Body></View> : null}
     />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy }} disabled={busy || !!world.pending} onPress={() => { void dispatch({ type: world.annual ? 'resume' : 'advance' }); }} style={({ pressed }) => ({ flex: 1, minHeight: 62, borderRadius: 15, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: c.green, opacity: busy || world.pending ? 0.5 : pressed ? 0.8 : 1 })}>
-        {busy ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
+      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={async () => { setAdvancing(true); try { await dispatch({ type: world.annual ? 'resume' : 'advance' }); } finally { setAdvancing(false); } }} style={({ pressed }) => ({ flex: 1, minHeight: 62, borderRadius: 15, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: c.green, opacity: busy || world.pending ? 0.5 : pressed ? 0.8 : 1 })}>
+        {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
       </Pressable>
       <Pressable accessibilityRole="button" accessibilityLabel="More Life Options" onPress={() => setMenu(true)} style={{ minWidth: 54, minHeight: 62, borderRadius: 15, backgroundColor: '#8795A4', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="ellipsis-horizontal" size={27} color="#FFFFFF" /></Pressable>
     </View>
