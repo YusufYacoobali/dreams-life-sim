@@ -72,6 +72,31 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 year, school study and new journal facts
+
+The real Riley child year advances once despite consecutive Age Up taps, pauses
+on Biscuit's actual death after ten months, then resumes the same remaining two
+months. Age ten retains twenty-four monthly reading practices, the original
+manual practice, 49 proficiency, 27,840 AUD minor paid, thirty-six guitar months
+and all forty-six pet-care periods. A real school Study Harder action changes
+82% grades to 89%, then shows the once-per-year restriction.
+
+This exposed FlatList's estimated-tail scroll stopping above newly added facts.
+Using the native ScrollView's actual content end now shows the birthday and study
+fact; manual older-history scrolling and tab return still work. Primary school
+also removes secondary-only graduation/recovery guidance, keeping the actual
+primary grades and activities visible.
+
+Every field of the native current/backup and intermediate worlds matches six
+production commands, revisions 45→51. A final force-stop/cold Continue opens the
+latest study fact, with every row in all eight SQLite tables unchanged. All eleven original moments/metadata and
+nine original receipts remain exact, as do both inactive worlds/backups. The one
+new moment is byte-identical to the original revision-45 current payload. See
+[actual captures/comparisons](verification/android24-childhood-20261019/),
+[journal behavior](LIFE_JOURNAL.md) and the
+[18-check/source/bundle record](verification/childhood-native-polish-20261019.json).
+Game/persistence/versions and broader release baselines stay unchanged.
+
 ## Android 24 hobby selection
 
 Selecting a hobby originally appended its controls below the full catalogue,

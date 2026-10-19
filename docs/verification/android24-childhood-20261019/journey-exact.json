@@ -1,0 +1,85 @@
+{
+  "scope": "Actual native Android 24 age-nine to age-ten year with interrupting pet loss, resume, and real school study; read-only SQLite comparisons against production commands; no manually edited world/tag/stat/outcome",
+  "sourceCommit": "3fa4663 with only Life/primary-school UI corrections",
+  "originalRevision": 45,
+  "finalRevision": 51,
+  "age": 10,
+  "commands": [
+    {
+      "type": "advance",
+      "revision": 46,
+      "pending": "Goodbye, Biscuit",
+      "months": 10
+    },
+    {
+      "type": "acknowledge",
+      "revision": 47,
+      "pending": null,
+      "months": 10
+    },
+    {
+      "type": "resume",
+      "revision": 48,
+      "pending": "Age 10",
+      "months": 12
+    },
+    {
+      "type": "acknowledge",
+      "revision": 49,
+      "pending": null,
+      "months": null
+    },
+    {
+      "type": "study",
+      "revision": 50,
+      "pending": "The work starts to show",
+      "months": null
+    },
+    {
+      "type": "acknowledge",
+      "revision": 51,
+      "pending": null,
+      "months": null
+    }
+  ],
+  "entireNativeCurrentAndBackupExact": true,
+  "checkedNativeIntermediateRevisions": [
+    46,
+    49,
+    50
+  ],
+  "rapidDoubleAgeUpCommittedOnce": true,
+  "originalRowsPreserved": {
+    "backups": 2,
+    "branches": 0,
+    "lives": 2,
+    "preferences": 1,
+    "receipts": 9,
+    "restore_receipts": 0,
+    "snapshot_metadata": 11,
+    "snapshots": 11
+  },
+  "newMomentPayloadExactlyOriginalRevision45": true,
+  "totalLives": 3,
+  "totalMoments": 12,
+  "totalReceipts": 15,
+  "reading": {
+    "proficiency": 49,
+    "attendedMonths": 24,
+    "manualPractices": 1,
+    "paidMinor": "27840",
+    "currency": "AUD"
+  },
+  "guitarMonths": 36,
+  "pet": {
+    "name": "Biscuit",
+    "carePeriods": 46,
+    "status": "deceased"
+  },
+  "school": {
+    "reportGrades": 82,
+    "afterExtraStudy": 89,
+    "extraStudyAttempts": 1
+  },
+  "currentWorldSha256": "ccf8bcbca7cc982c8026d4479c5c4bb4d9978f65545b2e71aa6135bc0ee9e315"
+}

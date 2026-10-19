@@ -1,0 +1,29 @@
+{
+  "recordedOn": "2026-10-19",
+  "baseCommit": "3fa4663",
+  "scope": "Native ScrollView content-end journal follow and primary-school guidance only; no game or persistence changes",
+  "source": {
+    "app/(game)/(tabs)/life.tsx": "b800f86bd6c2124d5b43e23e8c64b0e397a9efe0532a2ba7e56c2b895cf5ede2",
+    "app/(game)/school.tsx": "aba7bfcbccc6dfb8348df2bc3829f68a03eb77d7ec713b97e37b13008675f352"
+  },
+  "verification": {
+    "tests": 18,
+    "suites": 7,
+    "seconds": 11.328,
+    "strictApplicationAndTestTypes": true,
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-373ee3585ffeb5c229f81a47be1b2e24.hbc",
+      "bytes": 5312355,
+      "sha256": "b485db394cb6ba363102af37f2913e207524467a2085e05988d5770e2fc5966f"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-292ac8e319bb403e46fa9571bb9def9c.hbc",
+      "bytes": 5007053,
+      "sha256": "50a511625754cfcfb2762bbe9b88e9df245b0d26bdb7b42eedd56efab61fd1b8"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

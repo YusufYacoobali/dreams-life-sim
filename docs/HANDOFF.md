@@ -1,5 +1,26 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The latest native year/study review corrects one remaining journal edge case:
+FlatList still estimated the tail when new age-ten facts arrived. Life now uses
+the native ScrollView content end, preserving virtualisation, manual older-history
+reading and focused feedback. Primary school also stops showing secondary-only
+graduation/recovery guidance. All **18 affected checks / seven suites** pass in
+**11.328 seconds**, strict types and fresh Hermes exports pass.
+
+The actual native reading child advances once despite consecutive Age Up taps,
+acknowledges Biscuit's recorded loss at month ten, resumes the same year and
+reaches age ten. Real Study Harder changes grades 82→89 once. The full final
+world/backup and intermediate revisions match the six production commands
+exactly; all eleven original moments, nine old receipts and both inactive lives
+remain intact. One new moment retains the original revision-45 payload exactly.
+Final native state is revision 51, three lives/twelve moments/fifteen receipts.
+Final force-stop/cold Continue shows the latest study fact with every row in all
+eight SQLite tables unchanged.
+Read [journal/native scope](LIFE_JOURNAL.md) and
+[actual comparisons/captures](verification/android24-childhood-20261019/).
+Game/persistence remains unchanged; keep the world-28 fixture and conservative
+production baselines. Continue opening/early-game/full production work.
+
 The user's latest scope keeps **onboarding, startup, early gameplay and smooth
 buttons first**. Import/export/sharing may be skipped unless already over 80%
 complete. At that point this small file milestone already had working code,
@@ -17,11 +38,11 @@ chooser, but this image has no receiving app. No external transfer is claimed.
 See [native records](verification/android24-files-20261019/). This is UI/file
 integration only; game/persistence remains the world-28 checkpoint below.
 
-The observed age-nine Life journal now follows its real row/layout measurements
-to the latest facts, including actual cold resume. Manual dragging cancels follow;
-the chronological list remains virtualised. [Journal scope](LIFE_JOURNAL.md)
-records 13 affected checks / four suites in 6.479 seconds, strict types and fresh
-Hermes exports. Game/persistence and original snapshots remain unchanged.
+Initial journal checkpoint `2c02781` is pushed with its thirteen affected
+checks / four suites and actual age-nine cold resume. The subsequent native
+age-ten new-fact case required the native content-end follow-up above; the
+[eighteen-check current scope](LIFE_JOURNAL.md) retains both historical records.
+Game/persistence and original snapshots remain unchanged.
 Native hobby selection is also corrected: details previously appeared below the
 eight-row catalogue, making the press look ineffective. Dedicated detail routes
 now open at the top with actual proficiency/payer/fee/eligibility; native/header

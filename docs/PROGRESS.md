@@ -12,6 +12,25 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+A further native year/study check exposed FlatList's estimated-end position
+stopping above new facts. Native ScrollView content-end scrolling now shows the
+actual age-ten birthday and study fact while preserving manual older-history
+reading and virtualisation. Primary school no longer displays secondary-only
+completion/recovery guidance. All **18 affected checks / seven suites** pass in
+**11.328 seconds**, strict types and fresh Hermes exports pass.
+
+The actual child year advances once despite consecutive taps, pauses on the
+genuine pet loss at month ten, resumes to age ten and records real extra study
+82→89 grades once. The entire native current/backup and intermediate states
+match six production commands; all original moments/receipts and both inactive
+lives survive exactly. The new moment is the original revision-45 payload.
+Final native state: revision 51, three lives/twelve moments/fifteen receipts.
+Final force-stop/cold Continue shows the latest study fact and leaves every row
+in all eight SQLite tables exact.
+See [journal scope](LIFE_JOURNAL.md) and
+[actual evidence](verification/android24-childhood-20261019/).
+Game/persistence/full-regression baselines stay unchanged.
+
 The latest user direction defers further import/export/sharing unless already
 at least 80% complete. This milestone met that threshold before the instruction:
 implementation, 20 checks and native import were done. The last native folder

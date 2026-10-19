@@ -49,7 +49,10 @@ export default function Life() {
     if (!shouldScroll.current || scrollFrame.current !== null) return;
     scrollFrame.current = requestAnimationFrame(() => {
       scrollFrame.current = null;
-      if (shouldScroll.current) journal.current?.scrollToEnd({ animated: false });
+      // FlatList.scrollToEnd estimates the last row from cell metrics, which
+      // can lag new journal facts. Use the native ScrollView's actual end.
+      const scroll = shouldScroll.current ? journal.current?.getScrollResponder() : null;
+      if (scroll && 'scrollToEnd' in scroll && typeof scroll.scrollToEnd === 'function') scroll.scrollToEnd({ animated: false });
     });
   }, []);
   // A frozen tab reconnects layout effects when shown again. Keep this passive

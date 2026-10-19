@@ -4,6 +4,14 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-childhood-20261019/` records actual double-Age-Up guarding,
+  month-ten pet-loss interruption, remaining-year resume, age-ten summary,
+  school study 82→89 and new journal facts. Entire current/backup and intermediate
+  worlds match six production commands; old moments/receipts/inactive lives stay
+  exact. `childhood-native-polish-20261019.json` retains 18 affected checks / seven
+  suites, strict types and fresh Hermes hashes for native-end scrolling and
+  primary-school guidance. No physical timing or full-release claim.
+
 - `android24-hobbies-20261019/` retains actual selected-details-hidden before,
   dedicated Reading/Video Games after, stop-confirmation cancellation and native/
   header Back captures. All SQLite tables stay exact. `hobby-navigation-20261019.json`
