@@ -14,7 +14,7 @@ opening/navigation checks, strict typing, fresh Hermes exports (46 assets) and
 current Metro manifests/source. Expo config introspection confirms Android/iOS
 automatic support with SDK-aligned `expo-system-ui` 57.0.4. No native rendering or
 standalone build pass is claimed. The complete 983-test regression below predates
-this display follow-up; simulation source and its running sweep are unchanged.
+this display follow-up; simulation source and its completed sweep are unchanged.
 
 The basic creation form now keeps optional family background/preferences under
 More Options, with a visible summary for a selected royal family. All fourteen
@@ -40,12 +40,14 @@ reconciles the remaining bill and loan to the ledger. All 44 new domain checks
 and the real SQLite application/enrolment/renewal rollback-retry/cold journey
 pass. The complete **983-test / 64-suite** regression passes in **743.271
 seconds**, with strict typing, fresh Android/iOS Hermes exports (46 assets) and
-current Metro manifests/source bundles. The new 120-life sweep remains running;
-no completed world-25 expanded result is claimed yet. The frozen
+current Metro manifests/source bundles. The separate pure-engine sweep passes
+**120/120 lives**, all twelve countries, in **1,994.655 seconds**, exit zero. Its
+[per-seed record](verification/life-sweep-v25-120-20261019.json) retains the
+first-available-choice scope and overlapping-seed limits. The unchanged
 world-25 game hash is
 `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
-Do not change game source while the sweep runs or claim completion before exit
-zero and its final unchanged-hash summary. Twenty more early-life situations
+Game source stayed unchanged from startup through the final summary. The
+1,000-seed/person, all-choice, 120-year and multi-generation gates remain open. Twenty more early-life situations
 are unintegrated drafts under `docs/planning/drafts/`; they are not counted.
 
 The previous milestone adds **actual school outcomes and evening recovery**;

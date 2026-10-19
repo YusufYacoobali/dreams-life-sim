@@ -7,8 +7,13 @@ Machine-readable measurements are preserved in [verification/](verification/READ
 The current world-25 scholarship candidate has 44 passing domain checks and
 an actual connected SQLite application/enrolment/renewal failure/retry/cold flow.
 Its complete **983-test / 64-suite** regression passes in **743.271 seconds**.
-The new 120-life pure-engine sweep remains in progress with frozen game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
-No completed current-world expanded result is claimed yet.
+The new pure-engine sweep passes **120/120 lives**, all twelve countries, in
+**1,994.655 seconds** with unchanged game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
+[The current per-seed record](verification/life-sweep-v25-120-20261019.json)
+retains terminal ages 40–98, maximum 24 people/55,199 ledger rows and the
+first-available-choice scope. It does not apply for scholarships; their real
+billing is covered by separate domain/SQLite journeys. No native, 1,000-seed/
+person, 120-year, multi-generation or all-choice balance gate is closed.
 
 The current real SQLite default-choice life completes 236 commands and retains
 all 79 historical moments, measuring 29,986,816 bytes closed / 36,397,376 peak.

@@ -39,7 +39,7 @@
     "oldFutureFullTuitionPreserved": true
   },
   "storageRecord": "sqlite-history-v25-20261019.json",
-  "expandedSweepAtCheckpoint": "world25 120-life sweep in progress; no completed current-world expanded result claimed",
+  "expandedSweepAtCheckpoint": "world25/content3 120/120 complete, 1994.655 seconds, unchanged game hash; see life-sweep-v25-120-20261019.json",
   "drafts": {
     "activeCatalogue": 70,
     "unintegratedTemplates": 20,

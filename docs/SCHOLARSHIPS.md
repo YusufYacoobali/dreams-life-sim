@@ -76,9 +76,11 @@ reload preserves the exact draw, award, payment and debt; the abandoned future
 retains its original full tuition and no scholarship. Strict typing and fresh
 Android/iOS Hermes exports (46 assets) and current Metro source bundles pass.
 The complete **983-test / 64-suite** regression passes in **743.271 seconds**,
-including twelve complete core lives. The current 120-life sweep remains in
-progress; no completed expanded result is claimed yet. Native and release
-gates remain open.
+including twelve complete core lives. The separate pure-engine sweep passes
+120/120 seeds across all twelve countries in 1,994.655 seconds with unchanged
+source hash. It does not exercise scholarship applications; the connected
+SQLite journey provides that evidence. Native and broader release gates remain
+open.
 
 National/regional stages and qualifications, fuller admissions/waitlists,
 household tuition contributions and realistic country-specific fees/aid remain

@@ -20,7 +20,7 @@ typing, fresh Hermes exports and current Metro source pass. Automatic native
 appearance configuration is introspected with SDK-aligned `expo-system-ui`.
 The complete 983-test regression below precedes this UI follow-up; no overlapping
 tests are added into a new full-suite total. Native and baseline estimates remain
-unchanged, and simulation source is frozen for its continuing sweep.
+unchanged, and simulation source is unchanged from its completed core-life sweep.
 
 The basic creation form now places optional family controls under More Options
 and shows a selected royal family in the closed row. All fourteen relevant
@@ -47,8 +47,10 @@ write-failure/retry/cold journey pass. Genuine world-24 current/prior saves reta
 their original tuition, debt and progress with empty new award histories. Strict
 typing, fresh Android/iOS Hermes exports and current Metro manifests/source pass.
 The complete **983-test / 64-suite** current regression passes in **743.271
-seconds**. The fresh 120-life sweep remains in progress against frozen game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
-No completed current-world expanded pass is claimed yet. Twenty additional childhood
+seconds**. The separate pure-engine sweep passes **120/120 lives** across all
+twelve countries in **1,994.655 seconds**, with unchanged game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
+[Per-seed evidence](verification/life-sweep-v25-120-20261019.json) preserves the
+first-available-choice scope; the broader release sweeps remain open. Twenty additional childhood
 situations are unintegrated drafts; the active catalogue stays at 70. Native,
 full national stages and broader production acceptance remain open.
 
