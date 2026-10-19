@@ -12,8 +12,8 @@ mechanics tests does not establish visual fidelity or device readiness.
 
 | Area | Estimate | Remaining work |
 | --- | ---: | --- |
-| Onboarding and creation | 45% baseline | Welcome hero, distinct custom/random routes, appearance grid, fuller birth introduction, device review |
-| Life screen and early childhood | 55% baseline | Reference layout, first-year guidance, meaningful early content, native interactions |
+| Onboarding and creation | 45% baseline | Native visual review, creation/newborn polish and device acceptance |
+| Life screen and early childhood | 55% baseline | More early-story callbacks and native layout/interaction review |
 | Core simulation and Age Up | 80% | Broad system integration, long-life balance and performance |
 | Saves/recovery/export/import | 80% | Native picker/share, large archives and release acceptance |
 | Education and ordinary work | 70% | Persistent school contacts implemented; scholarships, deeper school/remediation paths and native acceptance remain |
@@ -125,4 +125,6 @@ university admission rules and never award qualifications by themselves.
 
 See [content coverage and limits](CONTENT_COVERAGE.md). Delayed callbacks, deeper
 school paths, broad adult/system-specific stories and native visual review are
-still pending. The final regression for this batch is in progress.
+still pending. The complete **763-test / 53-suite** regression, strict typing,
+fresh Android/iOS production bundles and current Metro source checks pass.
+The tested story code is pushed in `2f25f5e`.
