@@ -1,17 +1,15 @@
 # Next hobby breadth after world 27
 
-The current four pursuits and four paid outings are implemented and under final
-regression. The generated reading/gaming/cooking/gardening atlas is a draft;
+The current four pursuits and four paid outings are implemented, with the
+responsive-save checkpoint `8de01d7` fully verified and pushed. The generated reading/gaming/cooking/gardening atlas is a draft;
 its four subjects have passed source/48px/128px light-dark browser review. No
 additional hobby is implemented by this plan or the image.
 
-Before extending saved kind/effect variants, commit/push the world-27 milestone
-and generate the genuine leisure archive with the unmodified committed engine
-and real SQLite. `/tmp/dreams-generate-v27-leisure-fixture.cjs` is a one-time local
-helper prepared for that checkpoint; verify clean game/persistence source first.
-It must preserve actual guitar consent/plan, cinema tickets, earned practice,
-pet care, the pending annual cursor and four original moments. Never retag a newer
-engine as an old fixture.
+The genuine `v27-leisure-archive.json` and mixed-format
+`v27-responsive-archive.json` now protect unmodified `117c4d1` / `8de01d7` through
+real SQLite. They retain actual guitar consent/plan, cinema tickets, earned
+practice, pet care, the pending annual cursor and four/five original moments.
+Preserve both; never regenerate them or retag a newer engine as an old fixture.
 
 Extend the actual hobby catalogue with reading, video games, cooking and gardening.
 Use the existing funding/permission, two-routine limit, attended/paused practice,

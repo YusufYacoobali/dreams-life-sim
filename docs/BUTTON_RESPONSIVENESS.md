@@ -12,7 +12,9 @@ commits. Failed writes retain the previous visible world and RNG; the global
 submission guard still rejects rapid duplicate actions. No delayed/background
 autosave window was introduced.
 
-The normal create/load/command path uses fully validated, recursively frozen worlds.
+The create/load/command path uses fully validated, recursively frozen worlds.
+Import, explicit recovery and restored branches prepare the same state/cache
+before returning, so their next action also avoids an unnecessary decode.
 Only these in-process objects receive an identity certificate. Their append-only
 ledger rows can be shared when making a mutable working copy. New/mutable rows
 still pass the transaction schema, and the resulting world still passes all
@@ -73,6 +75,13 @@ The full **1,157-test / 76-suite** regression passes in **717.063 seconds**,
 with strict application/test typing, fresh Android/iOS Hermes bundles and current
 Metro manifests/source. Game/persistence source stays fixed through the final
 controlled measurements, complete regression and real SQLite comparisons.
+That complete result applies to pushed `8de01d7`. Its subsequent entrypoint-only
+follow-up passes all **130 affected UI/state/persistence checks / 44 suites** in
+74.861 seconds, plus strict types and fresh Hermes/Metro checks. Game, codec and
+UI code are unchanged; the follow-up also protects valid backups from inconsistent
+replaced-current metadata and rejects contradictory idempotent-branch metadata.
+The [follow-up record](verification/restored-save-responsiveness-20261019.json)
+retains source hashes and the genuine v1/v2 archive provenance.
 
 Final controlled results and their complete trial/input/source hashes are in
 [button-latency-20261019.json](verification/button-latency-20261019.json).

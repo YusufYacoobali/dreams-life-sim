@@ -1,5 +1,24 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The button fix **`8de01d7` is pushed**. Its genuine
+`v27-responsive-archive.json` was generated with that unmodified source through
+real SQLite: the committed project result at revision 33 retains the month-two
+cursor, two guitar/fourteen pet months and all original money/RNG. Four original
+v1 moments remain byte-exact; the new revision-32 deadline/current result use v2.
+Preserve all five prior worlds and both formats before extending hobby kinds.
+
+The entrypoint follow-up now primes imported/recovered/branched worlds before
+their next action, preserves valid backups when replaced current metadata is
+inconsistent, and rejects contradictory idempotent-branch metadata. All **130
+affected checks / 44 suites** pass in **74.861 seconds**, with strict types,
+fresh Hermes exports and current Metro source. Game/codec/UI source is unchanged
+from `8de01d7`; its full 1,157-test result below remains the complete regression
+checkpoint. Final follow-up game/persistence hash is
+`10e5bb40d834971628c363ff7d472fd0a5da543cd3dca561ee9b884579fd390a`.
+Resume the full production plan from the remaining four hobbies after pushing
+this small follow-up. The original and responsive genuine world-27 archives are
+both protected; do not regenerate either with later source.
+
 ## Latest user priority: button responsiveness
 
 The user reported seconds of delay on ordinary presses and “Saving” appearing
@@ -22,8 +41,8 @@ backup and **all 79 prior worlds**, receipts and non-size metadata match exactly
 Independent blocks add 3,096,576 closed bytes (29,995,008 → 33,091,584), without
 trimming history. All twelve optimized-state country/leisure lives also pass,
 matching every previously recorded semantic field and cold worlds. Native and
-large-world/storage release gates remain open. Commit/push this tested state
-before further features; then resume the full plan. Preserve the original v27
+large-world/storage release gates remain open. The checkpoint is pushed; resume
+the full plan after the entrypoint follow-up. Preserve the original v27
 leisure archive below before extending its saved hobby variants.
 
 This handoff was requested on 19 October 2026. All application changes, tests,

@@ -195,19 +195,21 @@ export class SaveRepository {
   /** Preserve the source future; copy only checkpoints at or before the selected revision. */
   async restoreBranch(sourceId: string, snapshotId: string, expectedRevision: number, newId: string, requestId: string): Promise<World> {
     let restored!: World;
+    let restoredPayload!: string;
     await this.db.transaction(async tx => {
       const receipt = await tx.get<{ branch_life_id: string }>('SELECT branch_life_id FROM restore_receipts WHERE source_life_id=? AND request_id=?', [sourceId, requestId]);
       if (receipt) {
-        const row = await tx.get<{ payload: string }>('SELECT payload FROM lives WHERE id=?', [receipt.branch_life_id]);
+        const row = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [receipt.branch_life_id]);
         if (!row) throw new Error('Restored branch is unavailable');
-        restored = unpackCheckpoint(row.payload);
+        restored = unpackCheckpoint(row.payload, true); restoredPayload = row.payload;
+        if (restored.id !== receipt.branch_life_id || restored.revision !== row.revision) throw new SaveCorrupt(receipt.branch_life_id);
       } else {
         const current = await tx.get<{ revision: number }>('SELECT revision FROM lives WHERE id=?', [sourceId]);
         if (!current || current.revision !== expectedRevision) throw new SaveConflict();
         const row = await tx.get<{ payload: string; metadata: string }>('SELECT s.payload,m.metadata FROM snapshots s JOIN snapshot_metadata m ON m.life_id=s.life_id AND m.snapshot_id=s.snapshot_id WHERE s.life_id=? AND s.snapshot_id=?', [sourceId, snapshotId]);
         if (!row) throw new Error('Historical checkpoint not found');
         const summary = snapshotSummarySchema.parse(JSON.parse(row.metadata)), before = validateSnapshot({ summary, payload: row.payload });
-        restored = { ...before, id: newId }; const payload = packCheckpoint(restored), now = this.now();
+        restored = immutableWorld({ ...before, id: newId }); const payload = packCheckpoint(restored), now = this.now(); restoredPayload = payload;
         await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [newId, fullName(restored.people[restored.activePersonId]), restored.revision, now, payload]);
         await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [newId, restored.revision, payload]);
         const branch: BranchInfo = { sourceLifeId: sourceId, snapshotId, personId: summary.personId, name: summary.name, date: summary.date, age: summary.age };
@@ -218,31 +220,33 @@ export class SaveRepository {
       }
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [restored.id]);
     });
+    this.current = { world: restored, payload: restoredPayload };
     return restored;
   }
 
   async recoveryPreview(id: string): Promise<World> {
     const backup = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM backups WHERE life_id=?', [id]);
     if (!backup) throw new Error('No previous checkpoint is available');
-    const world = unpackCheckpoint(backup.payload);
+    const world = unpackCheckpoint(backup.payload, true);
     if (world.id !== id || world.revision !== backup.revision) throw new Error('Previous checkpoint metadata is inconsistent');
     return world;
   }
 
   /** Explicitly requested recovery, never a silent reset during a normal load. */
   async recover(id: string): Promise<World> {
-    const world = await this.recoveryPreview(id);
+    const world = await this.recoveryPreview(id), payload = packCheckpoint(world);
     await this.db.transaction(async tx => {
-      await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), packCheckpoint(world), id]);
+      await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, id]);
       await tx.run('DELETE FROM receipts WHERE life_id=?', [id]);
       await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id IN (SELECT snapshot_id FROM snapshot_metadata WHERE life_id=? AND revision>?)', [id, id, world.revision]);
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [id]);
     });
+    this.current = { world, payload };
     return world;
   }
 
   async import(text: string, replace = false): Promise<World> {
-    const { world, snapshots, branch } = decodeSave(text);
+    const { world: imported, snapshots, branch } = decodeSave(text), world = immutableWorld(imported);
     const existing = await this.db.get<{ id: string }>('SELECT id FROM lives WHERE id=?', [world.id]);
     if (existing && !replace) throw new Error('This life already exists. Confirm replacement first.');
     const payload = packCheckpoint(world);
@@ -250,7 +254,7 @@ export class SaveRepository {
       const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
       if (current) {
         let valid = false;
-        try { unpackCheckpoint(current.payload); valid = true; } catch { /* Keep the existing recovery copy. */ }
+        try { const previous = unpackCheckpoint(current.payload); valid = previous.id === world.id && previous.revision === current.revision; } catch { /* Keep the existing recovery copy. */ }
         if (valid) await tx.run('UPDATE backups SET revision=?,payload=? WHERE life_id=?', [current.revision, current.payload, world.id]);
       }
       if (existing) await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
@@ -266,6 +270,7 @@ export class SaveRepository {
       if (branch) await tx.run('INSERT INTO branches(life_id,metadata) VALUES(?,?)', [world.id, JSON.stringify(branch)]);
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [world.id]);
     });
+    this.current = { world, payload };
     return world;
   }
 }

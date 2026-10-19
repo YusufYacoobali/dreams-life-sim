@@ -15,6 +15,10 @@ See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 - `leisure-immutable-v27-20261019.json` records all twelve complete country-specific
   journeys through the validated immutable production path, current terminal
   world hashes, exact cold worlds and matching previously recorded semantic fields.
+- `restored-save-responsiveness-20261019.json` records 130 affected checks for
+  prepared import/recovery/branch states, metadata-corruption safeguards and the
+  genuine `8de01d7` mixed-v1/v2 archive. The complete 1,157-test result remains
+  scoped to `8de01d7`; these overlapping checks are not a new full regression.
 
 - `android29-system-ui-anr-20261019.png` is an actual pre-game OS failure
   capture. `android29-opening-20261019.log` preserves selected native log lines;

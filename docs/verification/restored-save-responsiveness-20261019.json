@@ -1,0 +1,63 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "8de01d7",
+  "scope": "Repository-entrypoint follow-up: prepare imported, recovered and branched states/caches before their next ordinary action; no game/codec/UI source changes. Full 1157-test regression belongs to 8de01d7; the complete affected persistence/state/UI matrix covers this follow-up.",
+  "gameAndPersistenceSourceHash": "10e5bb40d834971628c363ff7d472fd0a5da543cd3dca561ee9b884579fd390a",
+  "versions": {
+    "world": 27,
+    "engine": 26,
+    "content": 4,
+    "database": 5
+  },
+  "verification": {
+    "tests": 130,
+    "suites": 44,
+    "reportedSeconds": 74.861,
+    "exitCode": 0,
+    "strictTypes": true,
+    "hermes": [
+      {
+        "platform": "android",
+        "bytes": 5305143,
+        "assets": 40
+      },
+      {
+        "platform": "ios",
+        "bytes": 5000787,
+        "assets": 36
+      }
+    ],
+    "metro": [
+      {
+        "platform": "android",
+        "manifestStatus": 200,
+        "bundleStatus": 200,
+        "preparedRestoredState": true,
+        "bytes": 9715819
+      },
+      {
+        "platform": "ios",
+        "manifestStatus": 200,
+        "bundleStatus": 200,
+        "preparedRestoredState": true,
+        "bytes": 9082425
+      }
+    ]
+  },
+  "genuineFixture": {
+    "file": "tests/fixtures/v27-responsive-archive.json",
+    "sourceCommit": "8de01d771e61cb657ff4baea390af4243bd11038",
+    "exportBytes": 170819,
+    "sha256": "af176b4ca55e9849091c90e39078f71417b75dc23e5239dbd838bbe8c302e6c0",
+    "revision": 33,
+    "priorMoments": 5,
+    "originalV1MomentsByteExact": 4,
+    "currentAndProjectDeadlineFormat": "dreams-checkpoint-v2",
+    "pending": "Your name belongs on it",
+    "annualMonthsProcessed": 2,
+    "ledgerRows": 1143,
+    "actualHobbyMonths": 2,
+    "actualPetMonths": 14
+  },
+  "nativeAcceptance": false
+}

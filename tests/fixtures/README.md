@@ -136,3 +136,17 @@ revision 27, committed plan result 28, committed outing result 30 and pre-Age-Up
 callback participant or version was manually edited. Preserve current and all
 four earlier worlds, their project/annual cursor and every original hobby,
 outing and pet record. Never regenerate this archive with newer source.
+
+`v27-responsive-archive.json` was generated with unmodified **`8de01d7`**
+(world 27 / engine 26 / content 4 / database 5), before the later saved-entry
+cache follow-up or additional hobby variants. Real SQLite imports the genuine
+leisure archive, saves its actual revision-32 project deadline, and executes the
+existing `complete` choice once through the production store. Revision 33,
+19 December 2033, retains the result “Your name belongs on it”, the month-two
+annual cursor, two paid guitar months, the original cinema tickets, fourteen
+pet-care periods, 1,143 ledger rows and unchanged RNG. The original four v1
+moments remain byte-for-byte identical; the new revision-32 moment and current
+result use checkpoint-v2. The export is 170,819 bytes. No date, person, price,
+permission, money, progression, outcome or version was edited. Preserve both
+codec representations and all five earlier worlds when migrating later schemas;
+never regenerate this fixture with newer code.

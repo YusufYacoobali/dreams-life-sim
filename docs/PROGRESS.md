@@ -12,6 +12,15 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Button checkpoint **`8de01d7` is pushed**. A genuine checkpoint-v2 archive now
+preserves the actual completed project result, five original moments and both
+codec representations. The subsequent repository-only follow-up primes state
+and save caches after import/recovery/branching, and protects valid backups from
+contradictory current metadata. All **130 affected checks / 44 suites** pass in
+**74.861 seconds**, with strict typing, fresh Hermes exports and current Metro
+source. Game/codec/UI code stays unchanged; the 1,157-test result below is the
+complete `8de01d7` regression. No new whole-suite total is inferred from overlap.
+
 The latest user priority is **ordinary button latency and intrusive saving
 feedback**. [The world-27 / database-5 fix](BUTTON_RESPONSIVENESS.md) removes repeated validation/decoding/compression of unchanged financial
 history, limits progress to the submitted control, preserves row subtitles and

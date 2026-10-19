@@ -4,7 +4,7 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current button-response milestone: world 27 / database 5
+## Button-response milestone: world 27 / database 5
 
 [The implementation and trust boundaries](BUTTON_RESPONSIVENESS.md) retain
 save-before-publish, exact money, deterministic retries and all history. Frozen
@@ -20,7 +20,7 @@ Each case has one warm-up and five real SQLite/WAL samples; separate processes
 run serially without regression/export/sweep work. Every post-commit current and
 backup world is checked after closing/reopening SQLite.
 
-| Selected action, cloud Node | Before median | Current median |
+| Selected action, cloud Node | Before median | `8de01d7` median |
 | --- | ---: | ---: |
 | Begin Life | 1.75 ms | 1.36 ms |
 | First-year choice | 4.84 ms | 3.20 ms |
@@ -59,6 +59,13 @@ exports/current Metro source pass. The complete current regression passes
 **1,157 tests / 76 suites in 717.063 seconds**, with game/persistence source fixed
 through the final measurements and regression. Native/large-company/1,000-person/storage-budget/release gates remain
 open; the extra compression overhead above must be included in future budgets.
+
+The subsequent [repository-entrypoint follow-up](verification/restored-save-responsiveness-20261019.json)
+warms imported/recovered/branched states before the next action, with backup and
+idempotent-branch metadata checks. All **130 affected tests / 44 suites** pass in
+74.861 seconds, strict types and fresh Hermes/Metro checks pass, and game/codec/UI
+source is unchanged. The complete 1,157-test result belongs to `8de01d7`; affected
+overlapping checks do not form a new whole-suite total.
 
 ## Historical milestones
 
