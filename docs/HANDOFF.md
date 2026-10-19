@@ -1,5 +1,26 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The user's latest scope keeps **onboarding, startup, early gameplay and smooth
+buttons first**. Import/export/sharing may be skipped unless already over 80%
+complete. At that point this small file milestone already had working code,
+20 passing checks and actual native import, so its single remaining folder-save
+check was finished. Do not expand file features; return to early gameplay.
+
+[Local save files](SAVE_FILES.md) now pass **20 affected checks / five suites**
+in **22.355 seconds**, strict application/test types and fresh Hermes exports.
+The actual Android File picker fixes the SDK's mismatched scoped-cache read:
+native preview/import preserves the complete genuine reading world and all nine
+original moments, with both existing native lives intact. Directory export saves
+the selected inactive Ren life exactly while Riley remains active; all eight
+SQLite tables stay unchanged. Native share writes the valid file and opens the
+chooser, but this image has no receiving app. No external transfer is claimed.
+See [native records](verification/android24-files-20261019/). This is UI/file
+integration only; game/persistence remains the world-28 checkpoint below.
+
+Next: fix the observed age-nine Life journal opening at birth/age zero rather
+than the latest entries. Preserve manual history reading and list virtualisation.
+Then continue the opening/early-game/full production plan; no more file breadth.
+
 The Android 24 software device now runs the actual Expo Go opening: custom
 creation/appearance/country, newborn, Begin Life, first Age Up/choice/result and
 cold resume. Every SQLite table stays exact during the interrupted-result cold
@@ -12,7 +33,7 @@ limits. All **14 affected checks / four suites** pass in **3.605 seconds**, with
 strict types and fresh Hermes exports. Game/persistence source remains exactly
 the world-28 checkpoint below. Complete reference/accessibility, physical-device
 performance, standalone and iOS gates stay open; baseline estimates stay fixed.
-Commit AND push this tested UI/evidence checkpoint before changing game content.
+This native UI/evidence checkpoint is committed and pushed as `05fe17a`.
 
 Checkpoint **`e5a4aaf` is pushed**. Its genuine
 `v28-ordinary-hobby-archive.json` was generated from that unmodified committed

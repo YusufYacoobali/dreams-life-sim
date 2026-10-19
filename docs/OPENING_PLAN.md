@@ -4,6 +4,13 @@ The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
 
+The user permits skipping further import/export/sharing unless already 80%+
+complete. Its implementation, 20 checks and native import already met that
+threshold; the remaining native folder-save check now passes. Further file
+breadth is deferred. Continue onboarding, early gameplay and responsiveness,
+starting with the observed resumed journal opening at birth rather than age nine.
+See [completed local file scope](SAVE_FILES.md).
+
 The button-latency fix is pushed, with fixed-input cloud actions substantially
 faster and focused saving feedback. Actual Android 24 Expo Go now runs the
 custom first-year journey and exact interrupted-result cold resume; Random Life
@@ -64,8 +71,7 @@ are completed; a hotfix or generated illustration alone does not advance them.
 The latest reported regression takes precedence: ordinary buttons must respond
 smoothly without “Saving” replacing unrelated subtitles or loading every button.
 The [measured save/validation/hidden-screen fix](BUTTON_RESPONSIVENESS.md) now passes
-1,157 tests / 76 suites, strict typing and both Hermes exports; commit/push it
-before continuing the sequence below. Native acceptance remains open. The percentage baselines
+1,157 tests / 76 suites, strict typing and both Hermes exports and is pushed. Native acceptance remains open. The percentage baselines
 above remain unchanged until their corresponding acceptance gates close.
 
 1. **Startup reliability.** Fix the `Intl`/BigInt crash with exact money display.

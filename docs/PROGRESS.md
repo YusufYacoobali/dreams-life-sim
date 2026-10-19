@@ -12,6 +12,19 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The latest user direction defers further import/export/sharing unless already
+at least 80% complete. This milestone met that threshold before the instruction:
+implementation, 20 checks and native import were done. The last native folder
+check is now complete; return to onboarding, early gameplay and responsiveness.
+[Save files](SAVE_FILES.md) pass **20 checks / five suites in 22.355 seconds**,
+strict types and fresh Hermes exports. Modern File picker integration fixes an
+actual SDK scoped-cache read failure. Native import preserves the complete
+reading world, nine exact moments and both existing native lives. Folder export
+writes the chosen inactive life exactly without changing any SQLite table.
+The native share chooser has no installed receiver; no external transfer is
+established. Game/persistence and complete-regression baselines stay unchanged.
+Next native issue: a resumed age-nine journal opens at the oldest entries.
+
 Actual Android 24 Expo Go checks now run custom creation, saved appearance/
 country, newborn, Begin Life, first Age Up/choice/result and cold resume. All
 eight SQLite tables remain exact across an interrupted-result cold startup.

@@ -72,6 +72,28 @@ scoped interactions. Development warnings/overlays and software rendering are
 visible; this is not a pixel-fidelity or native performance pass. The complete
 opening/release gate and the conservative progress baselines remain open.
 
+## Android 24 saved-life continuation
+
+The random Japanese life also completes its actual first year: rebuilding the
+fallen tower produces “A better foundation”, Smarts 90→93, then age-one journal.
+Switching lives restores the entire original custom world. The native system
+share action writes a valid 10,279-byte Ren archive and opens the chooser; the
+image has no receiver, so no external transfer is established.
+
+Native import found the SDK Document Picker/modern File System scoped-cache
+mismatch. Using the modern File picker and its actual returned document fixes
+the permission failure. The native preview shows the genuine age-nine Riley
+reading save at revision 44, without database changes before confirmation.
+Import restores every field and all nine original compressed moments/metadata,
+keeping both earlier lives intact. Acknowledgement produces exactly revision 45.
+The separate Directory picker exports inactive Ren while Riley stays active:
+the file is byte-identical to the earlier Ren archive and all eight database
+tables remain unchanged. [Save files](SAVE_FILES.md) records the 20 automated
+checks/types/exports and [raw native evidence](verification/android24-files-20261019/).
+
+These finish an already over-80%-complete milestone under the user's latest
+scope. Further file breadth is deferred; onboarding and early gameplay resume.
+
 ## Android 29 software-emulator attempt, 19 October 2026
 
 This bounded attempt uses official Google command-line tools, emulator 37.2.12,

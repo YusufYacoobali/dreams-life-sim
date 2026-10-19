@@ -1,0 +1,30 @@
+{
+  "recordedOn": "2026-10-19",
+  "baseCommit": "05fe17a",
+  "scope": "Saved Lives file IO only; game and SQLite persistence unchanged; no inferred complete-game or physical-device performance acceptance",
+  "source": {
+    "app/saved-lives.tsx": "8225b469b8434f9ed8d1bf43d3885f78a6e912b42f5fc757333dce1ccd636d05",
+    "tests/ui/saved-files-flow.test.tsx": "c61cfd3fb4b75061a3869ff62f9bbfa1cab4d09fd1a836d176f11edc02438d8c"
+  },
+  "verification": {
+    "tests": 20,
+    "suites": 5,
+    "seconds": 22.355,
+    "strictSourceAndTestTypes": true,
+    "newFileFlowTests": 6,
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; not a new whole-suite run"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-6a78aecf51913288da494971b71a072f.hbc",
+      "bytes": 5310088,
+      "sha256": "689c488d3b1b49523d1d1f52bd2368faebcb874df8a90f5da2fa0ce1b0e4b89f"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-3f2f7e6a21167fc63eec3175f53ae316.hbc",
+      "bytes": 5004804,
+      "sha256": "5cf940e1dce62adedb1fef4eeef1e51b721b9f350c6c92c3590fdc914070e7f1"
+    }
+  ],
+  "unchangedGameAndPersistenceSourceHash": "cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30"
+}

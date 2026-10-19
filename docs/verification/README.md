@@ -4,6 +4,14 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-files-20261019/` retains actual random first-year/switching,
+  native picker import and folder export captures/comparisons. The genuine
+  imported current world and nine moments stay exact, existing lives survive,
+  and exporting inactive Ren preserves every SQLite table. The share chooser
+  lacks a receiver; no external transfer is claimed. `saved-files-20261019.json`
+  records the 20 affected checks, strict types and fresh Hermes hashes.
+  Further file breadth is deferred under the user's latest scope.
+
 - `android24-opening-20261019/` contains actual unmodified 390×844 Android
   captures, an actual custom-result save, all-table exact cold-start comparison
   and whole-world preservation when creating a separate rerolled Japanese life.

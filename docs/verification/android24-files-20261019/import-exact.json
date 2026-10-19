@@ -1,0 +1,26 @@
+{
+  "scope": "Actual Android 24 File System picker import with real SQLite; no manual world/tag/price/RNG edits",
+  "worldExact": true,
+  "revision": 44,
+  "pending": "Time for reading",
+  "originalRowsPreserved": {
+    "backups": 2,
+    "branches": 0,
+    "lives": 2,
+    "receipts": 8,
+    "restore_receipts": 0,
+    "snapshot_metadata": 2,
+    "snapshots": 2
+  },
+  "allNineSnapshotPayloadsAndMetadataExact": true,
+  "totalLives": 3,
+  "totalSnapshots": 11,
+  "reading": {
+    "proficiency": 25,
+    "attendedMonths": 12,
+    "manualPractices": 1,
+    "paidMinor": "13920",
+    "currency": "AUD"
+  },
+  "payloadSha256": "f1ee318a41e9564efefa2ae1fd2fb86b687417d44212ccdecbde0f75f6b2c6ed"
+}
