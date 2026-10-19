@@ -43,6 +43,8 @@ import { validateSchools } from './systems/schoolValidation';
 import { recoveryCourseSchema, secondaryCompletionSchema } from './systems/educationRecoverySchemas';
 import { validateEducationRecovery } from './systems/educationRecoveryValidation';
 import { scholarshipSchema } from './systems/scholarshipSchemas';
+import { hobbySchema, outingSchema } from './systems/leisureSchemas';
+import { validateLeisure } from './systems/leisureValidation';
 import { petAdoptionSchema, petSchema } from './systems/petSchemas';
 import { validatePets } from './systems/petValidation';
 import { validateScholarships } from './systems/scholarshipValidation';
@@ -73,7 +75,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(26), engineVersion: z.literal(25), contentVersion: z.literal(4),
+  schemaVersion: z.literal(27), engineVersion: z.literal(26), contentVersion: z.literal(4),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -101,7 +103,7 @@ export const worldSchema = z.object({
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
-  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema),
+  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), leisureOutings: z.array(outingSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -287,6 +289,7 @@ export function validateWorld(value: unknown): World {
   validateEducationRecovery(world);
   validateScholarships(world);
   validatePets(world);
+  validateLeisure(world);
   validateStoryThreads(world);
   validateRelocations(world);
   validateCareers(world);
@@ -430,5 +433,7 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 25 && parsed.contentVersion === 3) parsed.contentVersion = 4;
   // Pet history begins now; old lives gain no animals, care charges or draws.
   if (parsed && parsed.schemaVersion === 25) { parsed.schemaVersion = 26; parsed.engineVersion = 25; parsed.pets = []; parsed.petAdoptions = []; }
+  // Personal leisure starts now; existing pets, qualifications and payments remain exact.
+  if (parsed && parsed.schemaVersion === 26) { parsed.schemaVersion = 27; parsed.engineVersion = 26; parsed.hobbies = []; parsed.leisureOutings = []; }
   return validateWorld(parsed);
 }

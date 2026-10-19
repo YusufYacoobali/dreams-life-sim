@@ -1,0 +1,36 @@
+{
+  "title": "Ordinary hobby candidate artwork",
+  "image": "ordinary-hobby-atlas.png",
+  "atlasSize": [
+    1254,
+    1254
+  ],
+  "rects": {
+    "reading": [
+      20,
+      100,
+      620,
+      465
+    ],
+    "gaming": [
+      650,
+      100,
+      600,
+      480
+    ],
+    "cooking": [
+      20,
+      630,
+      620,
+      540
+    ],
+    "gardening": [
+      665,
+      585,
+      585,
+      610
+    ]
+  },
+  "sourceSha256": "a1f23261204633eb61dc2b991f5c26d8db2b9c3182d7f6cdf1bd97b9091dcf1a",
+  "scope": "unmodified generated PNG, not integrated; browser alpha/clipping review only; no hobby mechanics or native acceptance claimed"
+}

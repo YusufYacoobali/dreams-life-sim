@@ -3,7 +3,7 @@ import { Image, View } from 'react-native';
 import { petsLeisureAtlasSize, petsLeisureRects } from './petsLeisureLayout';
 
 const atlas = require('../../assets/generated/pets-leisure-atlas.png');
-export const petIllustrations = { 'pet-dog': 'dog', 'pet-cat': 'cat', 'pet-rabbit': 'rabbit', 'pet-parrot': 'parrot', 'pet-paw': 'paw', 'pet-vet': 'vet' } as const;
+export const petIllustrations = { 'pet-dog': 'dog', 'pet-cat': 'cat', 'pet-rabbit': 'rabbit', 'pet-parrot': 'parrot', 'pet-paw': 'paw', 'pet-vet': 'vet', 'leisure-guitar': 'guitar', 'leisure-painting': 'painting', 'leisure-photography': 'photography', 'leisure-chess': 'chess', 'leisure-cinema': 'cinema', 'leisure-concert': 'concert', 'leisure-museum': 'museum', 'leisure-nightclub': 'nightclub' } as const;
 export type PetsLeisureArtId = keyof typeof petsLeisureRects;
 /** Native clipping preserves the generated pixels and each object's proportions. */
 export function PetsLeisureArt({ id, size = 40, label }: { id: PetsLeisureArtId; size?: number; label?: string }) {

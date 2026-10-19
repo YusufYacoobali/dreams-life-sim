@@ -144,3 +144,8 @@ paw, food, play and vet) are integrated into world-26 pet flows. The remaining
 hobby/entertainment art is reserved and does not establish those mechanics.
 Species illustrations do not claim a separate portrait for every adoption
 archetype. Native-device fidelity remains unverified.
+
+World 27 registers the remaining eight leisure subjects for actual hobby and
+paid-outing flows. All sixteen pet/leisure subjects now have connected uses;
+this does not establish the remaining hobby/media reference catalogue or native
+visual acceptance. The PNG/rectangles are unchanged from the reviewed source.

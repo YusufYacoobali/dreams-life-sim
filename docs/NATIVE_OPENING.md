@@ -69,3 +69,10 @@ The lower raster load shortened the compositor milestone but did not establish
 responsive Android services. No native visual/gameplay, performance or release
 gate is closed by this attempt. Continue independent gameplay implementation;
 a responsive device/accelerated emulator and macOS/iOS execution remain needed.
+
+At 19:49:35 UTC, the read-only managed-runtime tool reports current observed and
+enforced **spec revision 12**, restricted `package_managers` networking, no custom
+allowed hosts, and no `repo.reactnative.dev` in the effective policy. The
+[safe status record](verification/native-network-state-20261019.json) contains no
+credentials or environment identity. No unchanged denied artifact request was
+retried. A newer spec number alone does not establish access to the missing host.

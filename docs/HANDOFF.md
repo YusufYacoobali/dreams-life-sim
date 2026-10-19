@@ -5,6 +5,22 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+The current verified milestone is **world 27 / engine 26 / content 4** for
+[hobbies and paid outings](LEISURE.md). The core, surfaces and 52 domain checks
+plus a genuine pet-owning-child SQLite plan/outing/monthly rollback-retry/cold
+journey pass, with strict typing. The 54-check combined run passes in 10.996
+seconds. Fresh Hermes exports (47 assets) and current Metro manifests/source pass.
+The twelve scoped ordinary-work/pet/hobby/outing lives pass in **366.162 seconds**,
+with 10,683 attended/60 paused hobby months, 891 accepted/five refused outings
+and unchanged game hash `3add8417fde5c5b43c5414e29cd51698fe13d20a94cde4196f0d9147c2dc8f96`.
+The complete current regression passes **1,143 tests / 73 suites** in
+**788.232 seconds**, exit zero. Game source stayed fixed through the final sweep
+and regression. Preserve a genuine leisure archive from this committed source
+before the next saved-kind/schema expansion. The next four hobby/art subjects
+and scope are in [remaining-hobbies.md](planning/drafts/remaining-hobbies.md).
+This is partial hobby/entertainment breadth; the wider reference catalogue and
+native/production gates remain open. The prior pushed pet checkpoint remains historical evidence.
+
 World-26 checkpoint **`cfcab49` is pushed**. The genuine
 `v26-household-pet-archive.json` was subsequently generated from that unmodified
 source through real SQLite, preserving adoption/vet/play, twelve care payments,

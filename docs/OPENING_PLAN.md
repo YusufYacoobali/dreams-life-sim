@@ -4,6 +4,13 @@ The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
 
+World 27 now connects [four persistent hobbies and four paid outings](LEISURE.md)
+with actual monthly practice/funding and the existing pet-owning-child save.
+The complete regression passes **1,143 tests / 73 suites** in **788.232
+seconds**, with strict types, both Hermes exports/current Metro source and twelve
+scoped complete ordinary lives. Native opening and the complete reference catalogue remain
+open, so baseline estimates stay fixed.
+
 World 26 now connects [persistent household pets](PETS.md), including childhood
 parent permission and real monthly care costs. Focused opening/lifecycle/SQLite
 checks pass; the complete regression passes **1,089 tests / 70 suites** in
@@ -28,7 +35,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Health and crime/legal | 70% | Rule-source verification, balance, integrated scenarios and native acceptance |
 | Special careers/businesses | 70% | Breadth of stories, balance, integrated journeys and device acceptance |
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
-| Pets/hobbies/entertainment | 5% baseline | Persistent household pets implemented with automated save/lifecycle checks; hobbies/entertainment and native acceptance remain pending |
+| Pets/hobbies/entertainment | 5% baseline | Persistent pets plus four hobby/four outing paths implemented with automated checks; broader leisure breadth and native acceptance remain pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
 | Distinct situational stories | 20% baseline | 90 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |

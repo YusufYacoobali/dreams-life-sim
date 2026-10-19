@@ -1,4 +1,9 @@
-# Next: hobbies and entertainment
+# Original hobby/entertainment integration contract
+
+The first four pursuits/four outings are now adapted into world 27; current
+verification and remaining reference breadth are in [LEISURE.md](../../LEISURE.md).
+The pre-integration contract below is retained as background, not a claim that
+all its release/native gates have passed.
 
 This is an unintegrated implementation contract. No hobby/entertainment action
 is counted as shipped by this document or the atlas's reserved illustrations.

@@ -11,9 +11,10 @@ const sourceHash = () => {
 const hash = sourceHash();
 require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText, file);
 const { createLife, randomCreation } = require('../src/game/createLife.ts'), { countries, countryCodes } = require('../src/game/countries.ts'), { resolveCommand } = require('../src/game/engine.ts'), { ageOn, encodeWorld, decodeWorld } = require('../src/game/model.ts'), { choiceUnavailable } = require('../src/game/choiceAvailability.ts'), { petAdoptionOwner, petAdoptionFee, petAdoptionReason, petCareReason, petVetCost } = require('../src/game/systems/pets.ts');
-const started = Date.now(), records = [];
+const started = Date.now(), records = []; let testedVersions;
 for (const [index, country] of countryCodes.entries()) {
   const seed = 700 + index, began = Date.now(); let world = { ...createLife('life_pet_sweep_' + seed, seed, { ...randomCreation(seed), country, city: countries[country].cities[0], background: 'ordinary' }, { year: 2000, month: 1, day: 1 }), birthAcknowledged: true }, commands = 0;
+  testedVersions ??= { world: world.schemaVersion, engine: world.engineVersion, content: world.contentVersion };
   const run = command => { world = resolveCommand(world, command); commands++; };
   const vet = () => {
     const pet = world.pets.find(item => item.status === 'active' && item.illness === 'infection' && !petCareReason(world, item, 'vet'));
@@ -41,4 +42,4 @@ for (const [index, country] of countryCodes.entries()) {
   process.stderr.write(JSON.stringify(records.at(-1)) + '\n');
 }
 assert.equal(sourceHash(), hash, 'Game source changed during the sweep');
-process.stdout.write(JSON.stringify({ scope: 'twelve country-specific birth-to-death pure-engine journeys; first available choices, adopt one dog when eligible, treat recorded infection when eligible; no fixture cash/RNG/outcome changes; not native, all-choice, 120-year or multi-generation acceptance', sourceHash: hash, worldVersion: 26, engineVersion: 25, contentVersion: 4, node: process.version, elapsedMs: Date.now() - started, records }, null, 2) + '\n');
+process.stdout.write(JSON.stringify({ scope: 'twelve country-specific birth-to-death pure-engine journeys; first available choices, adopt one dog when eligible, treat recorded infection when eligible; no fixture cash/RNG/outcome changes; not native, all-choice, 120-year or multi-generation acceptance', sourceHash: hash, worldVersion: testedVersions.world, engineVersion: testedVersions.engine, contentVersion: testedVersions.content, node: process.version, elapsedMs: Date.now() - started, records }, null, 2) + '\n');

@@ -19,6 +19,8 @@ export default function Activities() {
       <ActionRow title={confined ? 'Prison Study & Work' : 'Education'} subtitle={confined ? 'Permitted routines while in custody' : 'Study, qualifications and tuition'} icon={<Illustration id="education" />} onPress={() => router.push(confined ? '/prison' : ['primary', 'secondary'].includes(world.people[world.activePersonId].education.stage) ? '/school' : '/education')} />
       <ActionRow title={confined ? 'Custody' : 'Occupation'} subtitle={confined ? 'Sentence, remand and permitted activities' : 'Jobs, performance and retirement'} icon={<Illustration id="career" />} onPress={() => router.push(confined ? '/prison' : '/work')} />
       <ActionRow title="Household Pets" subtitle="Companions, adoption and care" icon={<PetsLeisureArt id="paw" size={40} />} onPress={() => router.push({ pathname: '/pets', params: { tab: 'activities' } })} />
+      <ActionRow title="Hobbies" subtitle="Practice, lessons and personal interests" icon={<PetsLeisureArt id="guitar" size={40} />} onPress={() => router.push('/hobbies')} />
+      <ActionRow title="Entertainment" subtitle="Movies, concerts, exhibitions and dancing" icon={<PetsLeisureArt id="cinema" size={40} />} onPress={() => router.push('/entertainment')} />
       <ActionRow title="Family" subtitle="Children, family planning and generations" icon={<Illustration id="relationship" />} onPress={() => router.push('/family')} />
       <ActionRow title="Health" subtitle="Your health, energy, fitness and stress" icon={<Illustration id="wellbeing" />} onPress={() => router.push('/health')} />
       <ActionRow title="Crime & Legal" subtitle="Risk, cases, prison and your record" icon={<HealthLegalArt id="handcuffs" />} onPress={() => router.push('/crime')} />

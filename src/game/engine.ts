@@ -1,3 +1,4 @@
+import { LeisureCommand, leisureCommandSchema, resolveLeisure, refreshLeisure, leisureMonth } from './systems/leisure';
 import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } from './systems/pets';
 import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
 import { activeTrip } from './systems/travelSchemas';
@@ -45,7 +46,7 @@ import { RecoveryCommand, recoveryCommandSchema, recoveryMonth, refreshRecoverie
 import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshipCommandSchema } from './systems/scholarships';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -62,6 +63,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
   refreshScholarships(world);
+  refreshLeisure(world);
   refreshRecoveries(world);
   refreshTrips(world);
   refreshSchools(world);
@@ -117,6 +119,7 @@ function processMonth(world: World) {
   socialMonth(world);
   familyFinanceMonth(world);
   petMonth(world);
+  leisureMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   legalMonth(world);
@@ -299,9 +302,11 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const service=serviceCommandSchema.safeParse(command);
     const royalty=royaltyCommandSchema.safeParse(command);
     const travel=travelCommandSchema.safeParse(command);
+    const leisure = leisureCommandSchema.safeParse(command);
     const pet = petCommandSchema.safeParse(command);
     const relocation=relocationCommandSchema.safeParse(command);
-    if (pet.success) resolvePets(world, pet.data);
+    if (leisure.success) resolveLeisure(world, leisure.data);
+    else if (pet.success) resolvePets(world, pet.data);
     else if (school.success) resolveSchool(world, school.data);
     else if (education.success) resolveEducation(world, education.data);
     else if (recovery.success) resolveRecovery(world, recovery.data);
@@ -333,6 +338,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   refreshRecoveries(world);
   refreshScholarships(world);
   refreshStoryThreads(world);
+  refreshLeisure(world);
   world.revision++;
   return validateWorld(world);
 }
