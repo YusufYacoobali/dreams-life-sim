@@ -4,6 +4,10 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android29-system-ui-anr-20261019.png` is an actual pre-game OS failure
+  capture. `android29-opening-20261019.log` preserves selected native log lines;
+  [the attempt](../NATIVE_OPENING.md) did not establish playable opening UI.
+
 - `education-recovery-v24-20261019.json` records the clean 938-test/62-suite
   world-24 checkpoint, actual SQLite recovery journey and its exact source hash.
 - `life-sweep-v24-120-20261019.json` records every current-world seed (0–119),

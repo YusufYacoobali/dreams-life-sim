@@ -12,6 +12,14 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Creation, appearance and newborn pages now reserve the bottom safe area for
+their final controls. Strict source/test typing, all eleven relevant component
+checks and fresh Android/iOS Hermes exports pass. A second, lighter Android 29
+software emulator booted at the intended viewport but reproduced a pre-game
+System UI ANR. Expo Go installation/local Metro connection did not establish
+usable opening gameplay. [Captured evidence and limits](NATIVE_OPENING.md)
+are retained; native acceptance and baseline percentages remain unchanged.
+
 World **24 / engine 23 / content 3** now records school completion and attended
 evening study. A secondary qualification needs 50% grades and twelve recorded
 study months at the configured age. Failed students can take a no-fee 24-month

@@ -22,13 +22,13 @@ export default function NewLife() {
   const [field, setField] = useState<'country' | 'city' | null>(null), [message, setMessage] = useState<string | null>(null), [confirm, setConfirm] = useState(false), [advanced, setAdvanced] = useState(false);
   const world = useGame(s => s.world), start = useGame(s => s.startLife), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
   useEffect(() => { begin(seed, params.mode === 'random' ? 'random' : 'custom'); }, [seed, params.mode, begin]);
-  if (!draft) return <Page><ActivityIndicator accessibilityLabel="Preparing your new life" /></Page>;
+  if (!draft) return <Page bottomSafeArea><ActivityIndicator accessibilityLabel="Preparing your new life" /></Page>;
   const { input, mode } = draft, edit = (change: Partial<Creation>) => { if (busy) return; update({ ...input, ...change }); setMessage(null); };
   const reroll = () => { const candidate = freshSeed(), next = candidate === draft.seed ? (candidate + 0x9e3779b9) >>> 0 : candidate; randomise(next); router.setParams?.({ seed: String(next), mode: 'random' }); };
   const cycleAvatar = (direction: number) => { const current = avatarPresets.findIndex(item => JSON.stringify(item) === JSON.stringify(input.appearance)), index = (Math.max(0, current) + direction + avatarPresets.length) % avatarPresets.length; edit({ appearance: { ...avatarPresets[index] } }); };
   const submit = async () => { const parsed = creationSchema.safeParse(input); if (!parsed.success) { setMessage(parsed.error.issues[0].message); return; } if (await start(parsed.data, draft.seed)) router.replace('/birth'); };
   const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
-  return <Page><StatusBar style="dark" /><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
+  return <Page bottomSafeArea><StatusBar style="dark" /><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
     <View style={{ alignItems: 'center', gap: 8 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 28 }}>
         <Pressable accessibilityRole="button" accessibilityLabel="Previous avatar" disabled={busy} onPress={() => cycleAvatar(-1)} style={{ padding: 10, borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>

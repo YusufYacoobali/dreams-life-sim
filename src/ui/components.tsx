@@ -7,10 +7,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
 
-export function Page({ children, scroll = true }: React.PropsWithChildren<{ scroll?: boolean }>) {
+export function Page({ children, scroll = true, bottomSafeArea = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean }>) {
   const c = useColors();
   return (
-    <SafeAreaView edges={['top']} style={[styles.page, { backgroundColor: c.background }]}>
+    <SafeAreaView edges={bottomSafeArea ? ['top', 'bottom'] : ['top']} style={[styles.page, { backgroundColor: c.background }]}>
       {scroll ? <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{children}</ScrollView>
         : <View style={styles.content}>{children}</View>}
     </SafeAreaView>

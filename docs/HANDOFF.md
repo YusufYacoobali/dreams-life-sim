@@ -5,6 +5,15 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+Creation, appearance and newborn pages now reserve the bottom safe area, keeping
+their final controls above the home indicator/navigation region. Strict source/
+test typing, eleven relevant component checks and fresh Android/iOS Hermes
+exports pass. This is a layout correction, not native visual acceptance.
+[The Android 29 attempt](NATIVE_OPENING.md) booted at 390×844 logical pixels but
+reproduced a System UI ANR before Expo Go launched; installation/Metro connection
+did not yield usable gameplay. Its actual OS-failure screenshot/logs are retained.
+The isolated software emulator is stopped. Native opening gates remain open.
+
 The latest continuation adds **actual school outcomes and evening recovery**;
 see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). Current versions are **world
 24 / engine 23 / content 3 / database 4**. At the configured school-completion

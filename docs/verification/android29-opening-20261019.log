@@ -1,0 +1,8 @@
+10-19 17:25:19.659  1952  1979 E ActivityManager: ANR in com.android.systemui
+10-19 17:25:19.659  1952  1979 E ActivityManager: Reason: executing service com.android.systemui/.SystemUIService
+10-19 17:29:54.054  1952  1980 I ActivityManager: Start proc 3717:host.exp.exponent/u0a116 for activity {host.exp.exponent/host.exp.exponent.LauncherActivity}
+10-19 17:30:55.375  3717  3823 W unknown:BridgelessReact: ReactHost{1}.isMetroRunning(): Async result = true
+10-19 17:31:42.340  3717  3825 E Expo    : Cannot initialize app loader. host.exp.exponent.taskManager.ExpoHeadlessAppLoader.<init> []
+10-19 17:31:42.410  3717  3825 W System.err: java.lang.NoSuchMethodException: host.exp.exponent.taskManager.ExpoHeadlessAppLoader.<init> []
+10-19 17:31:42.477  3717  3717 E Expo    : Cannot initialize app loader. host.exp.exponent.taskManager.ExpoHeadlessAppLoader.<init> []
+10-19 17:31:42.478  3717  3717 W System.err: java.lang.NoSuchMethodException: host.exp.exponent.taskManager.ExpoHeadlessAppLoader.<init> []
