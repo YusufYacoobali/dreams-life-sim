@@ -27,7 +27,7 @@ function buy(world: World, id: string, financing: 'cash' | 'mortgage' = 'cash'):
 
 test('an actual v3 employed save migrates with every balance, liability and work record intact', () => {
   const migrated = decodeWorld(JSON.stringify(graduateFixture));
-  expect(migrated.schemaVersion).toBe(19);
+  expect(migrated.schemaVersion).toBe(20);
   expect(migrated.ledger).toEqual(graduateFixture.ledger.map(entry => ({ ...entry, cashDelta: BigInt(entry.cashDelta.$dreamsBigInt), debtDelta: BigInt(entry.debtDelta.$dreamsBigInt) })));
   for (const account of graduateFixture.accounts) expect(migrated.accounts.find(item => item.id === account.id)?.cash).toBe(BigInt(account.cash.$dreamsBigInt));
   expect(migrated.people[migrated.activePersonId].employment?.id).toBe(graduateFixture.people.person_player.employment.id);

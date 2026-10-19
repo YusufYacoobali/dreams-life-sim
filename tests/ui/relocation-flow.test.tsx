@@ -1,0 +1,51 @@
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createGameStore } from '../../src/state/gameStore';
+import { decodeWorld, encodeWorld, fullName, World } from '../../src/game/model';
+import { resolveCommand } from '../../src/game/engine';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
+import { randomInteger } from '../../src/game/random';
+import { accountFor } from '../../src/game/systems/common';
+import { moveQuote } from '../../src/game/systems/relocation';
+import { SaveRepository } from '../../src/persistence/repository';
+import { decodeSave } from '../../src/persistence/archive';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { database } from '../support/sqlite';
+import { ThemeProvider } from '../../src/ui/theme';
+import graduate from '../fixtures/v3-employed-graduate.json';
+import birth from '../fixtures/v6-birth-result.json';
+let mockStore: ReturnType<typeof createGameStore>;
+let mockRoute = 'work';
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => ({ route: mockRoute }) }));
+jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
+import Emigrate from '../../app/(game)/emigrate';
+import { PendingEvent } from '../../src/ui/PendingEvent';
+const frame = (content: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+test.each(['work', 'study'])('native %s application and departure survive SQLite failures without spending the fee, FX, old job, tuition or RNG twice', async route => {
+  mockRoute = route;
+  const initial = decodeWorld(JSON.stringify(graduate)), person = initial.people[initial.activePersonId]; person.stats.health = 100; person.stats.smarts = 90; initial.random.outcomes = 1;
+  accountFor(initial).cash += 100000000n; accountFor(initial).openingCash += 100000000n;
+  const original = encodeWorld(initial), { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+  mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); const view = render(frame(<Emigrate />));
+  expect(screen.getByRole('button', { name: 'Review Application' })).toBeEnabled(); expect(encodeWorld(mockStore.getState().world!)).toBe(original);
+  sqlite.exec("CREATE TRIGGER fail_application BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Review Application'); await press('Submit Application');
+  await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen()); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(await repository.load(initial.id)).toEqual(initial);
+  sqlite.exec('DROP TRIGGER fail_application'); await press('Review Application'); await press('Submit Application'); await waitFor(() => expect(screen.getByText('Your move is approved')).toBeOnTheScreen()); await press('Continue');
+  const approved = mockStore.getState().world!, application = approved.relocations[0], quote = moveQuote(approved, application), approvedState = encodeWorld(approved); expect(application.move).toBeNull(); expect(approved.people[person.id].employment).toEqual(person.employment); await repository.snapshot(initial.id, approved.revision);
+  sqlite.exec("CREATE TRIGGER fail_move BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Review Move'); await press('Move Household');
+  await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen()); expect(encodeWorld(mockStore.getState().world!)).toBe(approvedState); expect(await repository.load(initial.id)).toEqual(approved);
+  sqlite.exec('DROP TRIGGER fail_move'); await press('Review Move'); await press('Move Household'); await waitFor(() => expect(screen.getByText('Welcome home to Paris')).toBeOnTheScreen());
+  const moved = mockStore.getState().world!, current = moved.people[person.id]; expect(current.country).toBe('FR'); expect(current.nationality).toBe(person.nationality); expect(current.finance.serviceMonths).toBe(person.finance.serviceMonths); expect(moved.relocations).toHaveLength(1); expect(moved.ledger.filter(item => item.category === 'relocation-application')).toHaveLength(1); expect(moved.ledger.filter(item => item.category === 'relocation-transport')).toHaveLength(1); expect(accountFor(moved).cash).toBe(quote.net - quote.tuition); expect(moved.random.outcomes).toBe(approved.random.outcomes);
+  if (route === 'study') { expect(current.employment).toBeNull(); expect(current.education.months).toBe(0); expect(current.education.tuitionPaidMonths).toBe(12); expect(current.education.school).toBe('Paris University'); } else { expect(current.employment!.roleId).toBe('administrator'); expect(current.employment!.currency).toBe('EUR'); expect(current.employment!.paidMonths).toBe(0); }
+  await press('Continue'); expect(screen.queryByRole('button', { name: 'Review Move' })).toBeNull(); const cold = await repository.load(initial.id); expect(cold).toEqual(mockStore.getState().world); const restored = decodeSave(await repository.export(initial.id)); expect(restored.world).toEqual(cold); const prior = unpackCheckpoint(restored.snapshots[0].payload); expect(prior.people[person.id].country).toBe('US'); expect(prior.relocations[0].status).toBe('approved'); expect(prior.relocations[0].move).toBeNull(); view.unmount(); sqlite.close();
+});
+function drain(input: World) { let world = input; while (world.pending) { if (world.pending.kind === 'result') world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id }); else { const choice = world.pending.choices.find(item => !choiceUnavailable(world, item)); if (!choice) throw new Error('No available decision'); world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: choice.id }); } } return world; }
+test('native household selection keeps the actual spouse and child, approval draw and funded reserves across a failed departure and cold load', async () => {
+  mockRoute = 'settlement'; const initial = drain(decodeWorld(JSON.stringify(birth))), companions = initial.households.find(item => item.id === initial.people[initial.activePersonId].householdId)!.members.filter(id => id !== initial.activePersonId); for (const member of Object.values(initial.people)) member.stats.health = 100; initial.random.outcomes = 1; initial.random.npcs = 1;
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial); mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); const view = render(frame(<Emigrate />));
+  await press('Review Application'); await press('Submit Application'); await waitFor(() => expect(screen.getByText('Your move is approved')).toBeOnTheScreen()); await press('Continue'); for (const id of companions) fireEvent.press(screen.getByRole('checkbox', { name: fullName(initial.people[id]) })); const approved = mockStore.getState().world!, original = encodeWorld(approved), quote = moveQuote(approved, approved.relocations[0], companions);
+  sqlite.exec("CREATE TRIGGER fail_family_move BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Review Move'); await press('Move Household'); await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen()); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(await repository.load(initial.id)).toEqual(approved);
+  sqlite.exec('DROP TRIGGER fail_family_move'); await press('Review Move'); await press('Move Household'); await waitFor(() => expect(screen.getByText('Welcome home to Paris')).toBeOnTheScreen()); const moved = mockStore.getState().world!, record = moved.relocations[0]; expect(record.move!.participantIds).toEqual([initial.activePersonId, ...companions]); expect(record.attempts[0].consents).toHaveLength(2); expect(record.attempts[0].consents[1].roll).toBe(randomInteger(approved.random.npcs, 1, 100).value); for (const id of record.move!.participantIds) expect(moved.people[id].country).toBe('FR'); for (const reserve of quote.reserves.filter(item => item.transfer > 0n)) expect(accountFor(moved, moved.people[reserve.personId]).cash).toBe(reserve.transfer); expect(await repository.load(initial.id)).toEqual(moved); view.unmount(); sqlite.close();
+});

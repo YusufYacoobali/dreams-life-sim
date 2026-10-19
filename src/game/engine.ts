@@ -1,3 +1,4 @@
+import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
 import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
 import { ageOn, fullName, validateWorld, World } from './model';
@@ -37,7 +38,7 @@ import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resol
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -269,6 +270,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const service=serviceCommandSchema.safeParse(command);
     const royalty=royaltyCommandSchema.safeParse(command);
     const travel=travelCommandSchema.safeParse(command);
+    const relocation=relocationCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -288,6 +290,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if(service.success)resolveService(world,service.data);
     else if(royalty.success)resolveRoyalty(world,royalty.data);
     else if(travel.success)resolveTravel(world,travel.data);
+    else if(relocation.success)resolveRelocation(world,relocation.data);
     else throw new IneligibleAction('This action is not available');
   }
   refreshRoyalSuccession(world,'background');

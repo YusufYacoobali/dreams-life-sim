@@ -50,6 +50,13 @@ function payTuition(world: World, funding: 'cash' | 'loan') {
   charge(world, education.tuition, 'tuition', 'Tuition: ' + education.school);
   education.funding = funding; education.paused = false; education.tuitionPaidMonths += 12;
 }
+/** A confirmed admission starts with no completed study and a real annual tuition payment. */
+export function startCourse(world: World, program: 'university' | 'trade' | 'graduate', field: typeof fields[number], funding: 'cash' | 'loan', school?: string) {
+  const person = active(world), education = person.education;
+  education.stage = program; education.field = field; education.school = school ?? person.city + (program === 'trade' ? ' Technical College' : ' University');
+  education.months = 0; education.requiredMonths = courseMonths(program, field);
+  education.tuition = tuitionFor(person, program); education.tuitionPaidMonths = 0; payTuition(world, funding);
+}
 export function resolveEducation(world: World, command: EducationCommand) {
   const person = active(world); const education = person.education;
   if (command.type === 'enroll') {
@@ -61,9 +68,7 @@ export function resolveEducation(world: World, command: EducationCommand) {
       fact(world, 'My application to study ' + command.field + ' was declined.', 'education');
       result(world, 'Application declined', 'The course did not offer you a place. Your money has not been spent.', 'education'); return;
     }
-    education.stage = command.program; education.field = command.field; education.school = person.city + (command.program === 'trade' ? ' Technical College' : ' University');
-    education.months = 0; education.requiredMonths = courseMonths(command.program, command.field);
-    education.tuition = tuition; education.tuitionPaidMonths = 0; payTuition(world, command.funding);
+    startCourse(world, command.program, command.field, command.funding);
     fact(world, 'I enrolled at ' + education.school + ' to study ' + command.field + '.', 'education');
     result(world, 'You’re enrolled', 'Your place is confirmed. Tuition is charged each year; your funding choice stays in place until you change it.', 'education', [{ id: 'tuition', label: 'First-year tuition', value: formatMoney({ minor: tuition, currency: accountFor(world).currency }), tone: 'negative' }]);
   } else if (command.type === 'study') {

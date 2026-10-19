@@ -59,17 +59,17 @@ function personalTravelReason(world: World, person: Person, duration: TripDurati
     if (company?.ownerId === person.id && company.ownerOperated && !businessManager(world, company)) return 'Appoint a working manager before leaving your company';
   }
 }
-function parentOf(world: World, adultId: string, childId: string) {
+export function parentOf(world: World, adultId: string, childId: string) {
   return world.relationships.some(item => item.from === adultId && item.to === childId && item.roles.some(role => role === 'parent' || role === 'guardian')) || world.custody.some(item => !item.ended && item.childId === childId && item.primaryId === adultId);
 }
-function homeCareReason(world: World, person: Person, participantIds: string[]): string | undefined {
+export function homeCareReason(world: World, person: Person, participantIds: string[]): string | undefined {
   const household = world.households.find(item => item.id === person.householdId);
   for (const child of (household?.members ?? []).map(id => world.people[id]).filter(item => !item.died && !isConfined(world, item) && ageOn(item, world.date) < 18 && !participantIds.includes(item.id))) {
     const carer = household!.members.some(id => !participantIds.includes(id) && !world.people[id].died && ageOn(world.people[id], world.date) >= 18 && parentOf(world, id, child.id) && !isConfined(world, world.people[id]) && !serviceAway(world, id) && !activeTrip(world, id) && !hospitalized(world, world.people[id]));
     if (!carer) return 'Bring ' + child.firstName + ' or arrange an existing available parent or guardian at home';
   }
 }
-function approvals(world: World, participantIds: string[]) {
+export function approvals(world: World, participantIds: string[]) {
   const organizerId = world.activePersonId, approvals: { personId: string; forPersonId: string }[] = [];
   for (const id of participantIds) {
     const person = world.people[id];

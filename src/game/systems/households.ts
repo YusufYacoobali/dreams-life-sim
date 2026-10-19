@@ -26,12 +26,13 @@ export function householdLivingCost(world: World, person: Person): bigint {
   if (ageOn(person, world.date) < rule.adultAge || (ageOn(person, world.date) < rule.schoolEnd && (person.education.stage === 'primary' || person.education.stage === 'secondary'))) return 0n;
   const household = world.households.find(item => item.id === person.householdId);
   if (!household) return rule.livingCost;
-  const members = household.members.map(id => world.people[id]).filter(member => !member.died && !isConfined(world, member) && member.country === person.country);
+  const members = household.members.map(id => world.people[id]).filter(member => !member.died && !isConfined(world, member) && member.country === person.country && member.city === person.city);
   const adults = members.filter(member => ageOn(member, world.date) >= rules[member.country].adultAge && !(ageOn(member, world.date) < rules[member.country].schoolEnd && (member.education.stage === 'primary' || member.education.stage === 'secondary'))).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   const children = members.length - adults.length;
   const weight = 10000 + Math.max(0, adults.length - 1) * 5000 + children * 2500;
   let total = roundRatio(rule.livingCost * BigInt(weight), 10000n);
-  const home = world.assets.find(asset => asset.id === household.homeAssetId && asset.ownerId && household.members.includes(asset.ownerId)) ?? world.assets.find(asset => asset.primaryHome && asset.ownerId && household.members.includes(asset.ownerId));
+  const localHome = (asset: World['assets'][number]) => asset.country === person.country && asset.city === person.city && !!asset.ownerId && members.some(member => member.id === asset.ownerId);
+  const home = world.assets.find(asset => asset.id === household.homeAssetId && localHome(asset)) ?? world.assets.find(asset => asset.primaryHome && localHome(asset));
   if (home) total = roundRatio(total * 4500n, 10000n);
   const count = BigInt(adults.length || 1); const index = adults.findIndex(member => member.id === person.id);
   return total / count + (BigInt(Math.max(index, 0)) < total % count ? 1n : 0n);

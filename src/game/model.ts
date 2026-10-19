@@ -32,6 +32,8 @@ import { serviceCareerSchema } from './systems/serviceSchemas';
 import { creatorInvoiceSchema, creatorStudioSchema } from './systems/creatorSchemas';
 import { workEarningsSchema } from './systems/earningsSchemas';
 import { validateEarnings } from './systems/earningsValidation';
+import { relocationSchema } from './systems/relocationSchemas';
+import { validateRelocations } from './systems/relocationValidation';
 import { tripSchema } from './systems/travelSchemas';
 import { validateTravel } from './systems/travelValidation';
 
@@ -61,7 +63,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(19), engineVersion: z.literal(18), contentVersion: z.literal(1),
+  schemaVersion: z.literal(20), engineVersion: z.literal(19), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -87,7 +89,7 @@ export const worldSchema = z.object({
   musicReleases: z.array(musicReleaseSchema),
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
-  trips: z.array(tripSchema),
+  trips: z.array(tripSchema), relocations: z.array(relocationSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -269,6 +271,7 @@ export function validateWorld(value: unknown): World {
   validateBusinesses(world);
   validateEarnings(world);
   validateTravel(world);
+  validateRelocations(world);
   validateCareers(world);
   validateMusic(world);
   validatePolitics(world);
@@ -394,5 +397,6 @@ export function decodeWorld(text: string): World {
     for (const career of parsed.serviceCareers) for (const contract of career.contracts) contract.currency = career.currency;
   }
   if (parsed && parsed.schemaVersion === 18) { parsed.schemaVersion = 19; parsed.engineVersion = 18; parsed.trips = []; }
+  if (parsed && parsed.schemaVersion === 19) { parsed.schemaVersion = 20; parsed.engineVersion = 19; parsed.relocations = []; }
   return validateWorld(parsed);
 }
