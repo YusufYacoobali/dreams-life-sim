@@ -1,3 +1,4 @@
+import { royalMarriage } from './royalty';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, fullName, Person, Stats, World } from '../model';
@@ -204,6 +205,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   const householdId = ownHousehold(world, player, [target.id]); const household = world.households.find(item => item.id === householdId)!;
   if (!household.homeAssetId) household.homeAssetId = world.assets.find(asset => asset.ownerId === target.id && asset.primaryHome)?.id ?? null;
   const home = world.assets.find(asset => asset.id === household.homeAssetId); if (home) { player.city = home.city; target.city = home.city; } else target.city = player.city;
+  royalMarriage(world,player.id,target.id);
   fact(world, 'I married ' + fullName(target) + '.', 'relationships'); result(world, 'You’re married', 'Your marriage and ceremony payment are recorded. You now share a household while retaining your own accounts and legal ownership.', 'rings', statChanges(player, { happiness: 10, respect: 2 }));
 }
 export function recordFamilyDeath(world: World, personId: string) {

@@ -1,3 +1,4 @@
+import { publicRoyalDuty } from './royaltySchemas';
 import { serviceContractEnded } from './serviceSchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -34,6 +35,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
 export function jobReason(world: World, role: JobRole): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
   if (role.specialCareer) return 'Use this special career’s selection process';
+  if(!role.partTime&&publicRoyalDuty(world))return 'Choose a private royal life before other full-time work';
   if(!role.partTime&&fullTimeCreator(world))return 'Switch your studio to part-time before full-time work';
   if (!role.partTime&&campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time work';
   if (!role.partTime && recordingCommitment(world)) return 'Finish or cancel your recording before starting full-time work';

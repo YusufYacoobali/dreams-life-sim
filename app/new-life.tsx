@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
+import { royalCountries } from '../src/game/content/royalty';
+import { CareerArt } from '../src/assets/CareerArt';
 import { countries, countryCodes, CountryCode } from '../src/game/countries';
 import { creationSchema, randomCreation } from '../src/game/createLife';
 import { useGame } from '../src/state/useGame';
@@ -65,6 +67,7 @@ export default function NewLife() {
       <ActionRow title="Country" value={countries[input.country].name} onPress={() => setField('country')} />
       <ActionRow title="City" value={input.city} onPress={() => setField('city')} />
     </Card>
+    <Card><Text style={{color:c.muted,fontSize:12,fontWeight:'600'}}>FAMILY BACKGROUND</Text><ActionRow title="Ordinary Family" subtitle="Your family makes its own way through life" value={input.background!=='royal'?'Selected':undefined} onPress={()=>setInput({...input,background:'ordinary'})}/><ActionRow title="Royal Family" subtitle="A title, public duties and an actual family succession" value={input.background==='royal'?'Selected':undefined} icon={<CareerArt id="royalty"/>} disabledReason={(royalCountries as readonly string[]).includes(input.country)?undefined:'Choose Great Britain, Japan or Spain'} onPress={()=>setInput({...input,background:'royal'})}/></Card>
     <Card><Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>FUTURE FAMILY OPTIONS</Text>
       <Body muted>These choices are independent of gender and appearance. Dating preferences can change in My Life when you are an adult.</Body>
       <FamilyPreferences attractedTo={input.attractedTo ?? [...genders]} wantsChildren={input.wantsChildren ?? true} onChange={preferences => setInput({ ...input, ...preferences })} />
@@ -73,7 +76,7 @@ export default function NewLife() {
     {(message || error) && <Body>{message ?? error}</Body>}
     <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { if (world) setConfirm(true); else void submit(); }} />
     <EventModal event={selection} onCancel={() => setField(null)} onChoose={id => {
-      if (field === 'country') { const country = id as CountryCode; setInput({ ...input, country, city: countries[country].cities[0] }); }
+      if (field === 'country') { const country = id as CountryCode; setInput({ ...input, country, city: countries[country].cities[0], background:(royalCountries as readonly string[]).includes(country)?input.background:'ordinary' }); }
       else if (field === 'city') setInput({ ...input, city: id });
       else if (field === 'hair' || field === 'face') setInput({ ...input, appearance: { ...input.appearance, [field]: Number(id) } });
       setField(null);

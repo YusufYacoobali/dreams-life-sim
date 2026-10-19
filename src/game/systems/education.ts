@@ -1,3 +1,4 @@
+import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, Person, World } from '../model';
@@ -29,6 +30,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
   if (education.stage !== 'none') return 'You are already enrolled';
+  if(publicRoyalDuty(world))return 'Choose a private royal life before full-time study';
   if(fullTimeCreator(world))return 'Switch your studio to part-time before full-time study';
   if(campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time study';
   if (recordingCommitment(world)) return 'Finish or cancel your recording before full-time study';

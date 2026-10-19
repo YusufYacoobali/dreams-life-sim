@@ -1,3 +1,5 @@
+import { royalCountries } from './content/royalty';
+import { createRoyalBackground } from './systems/royalty';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
 import { ageOn, dateSchema, GameDate, Person, personSchema, validateWorld, World } from './model';
@@ -19,8 +21,9 @@ export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
   gender: personSchema.shape.gender, country: z.enum(countryCodes), city: z.string(),
   appearance: personSchema.shape.appearance,
+  background:z.enum(['ordinary','royal']).optional(),
   reproductiveRole: biologySchema.shape.role.optional(), attractedTo: z.array(z.enum(genders)).min(1).max(3).optional(), wantsChildren: z.boolean().optional(),
-}).refine(input => countries[input.country].cities.includes(input.city), 'Choose a city in the selected country');
+}).refine(input => countries[input.country].cities.includes(input.city), 'Choose a city in the selected country').refine(input=>input.background!=='royal'||(royalCountries as readonly string[]).includes(input.country),'Royal backgrounds are available in Great Britain, Japan and Spain');
 export type Creation = z.infer<typeof creationSchema>;
 
 export function randomCreation(seed: number): Creation {
@@ -30,7 +33,7 @@ export function randomCreation(seed: number): Creation {
   };
   const country = pick(countryCodes);
   const data = countries[country];
-  return { firstName: pick(data.firstNames), lastName: pick(data.lastNames), gender: pick(['male', 'female', 'nonbinary'] as const), country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]) } };
+  return { firstName: pick(data.firstNames), lastName: pick(data.lastNames), gender: pick(['male', 'female', 'nonbinary'] as const), country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]) }, background:(royalCountries as readonly string[]).includes(country)&&randomInteger(state,1,500).value===1?'royal':'ordinary' };
 }
 
 export function createLife(id: string, seed: number, raw: Creation, date: GameDate): World {
@@ -68,7 +71,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 16, engineVersion: 15, contentVersion: 1, id, revision: 0, date: { ...date },
+    schemaVersion: 17, engineVersion: 16, contentVersion: 1, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
@@ -83,7 +86,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     careers: [],
     musicReleases: [],
     elections: [],
-    creatorStudios:[],creatorInvoices:[],serviceCareers:[],
+    creatorStudios:[],creatorInvoices:[],serviceCareers:[],royalHouses:[],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };
@@ -98,5 +101,6 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     world.relationships.push({ id: 'relation_parents_couple', from: parent1.id, to: parent2.id, kind: 'spouse', roles: ['spouse'], romance: 'married', since: started, parentType: null, strength: roll(55, 90), trust: roll(55, 90), memories: ['married-before-birth'], lastInteractionYear: date.year });
     world.marriages.push({ id: 'marriage_parents', a: parent1.id, b: parent2.id, started, ended: null, endReason: null, baselineA: netWorth(world, parent1.id), baselineB: netWorth(world, parent2.id), excludedA: 0n, excludedB: 0n, ledgerStart: 0, weddingCost: null });
   }
+  if(input.background==='royal')createRoyalBackground(world);
   return validateWorld(world);
 }

@@ -26,6 +26,8 @@ import { electionSchema } from './systems/politicsSchemas';
 import { validateCreators } from './systems/creatorValidation';
 import { validatePolitics } from './systems/politicsValidation';
 import { validateServices } from './systems/serviceValidation';
+import { validateRoyalty } from './systems/royaltyValidation';
+import { royalHouseSchema } from './systems/royaltySchemas';
 import { serviceCareerSchema } from './systems/serviceSchemas';
 import { creatorInvoiceSchema, creatorStudioSchema } from './systems/creatorSchemas';
 
@@ -55,7 +57,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(16), engineVersion: z.literal(15), contentVersion: z.literal(1),
+  schemaVersion: z.literal(17), engineVersion: z.literal(16), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -80,7 +82,7 @@ export const worldSchema = z.object({
   careers: z.array(careerSchema),
   musicReleases: z.array(musicReleaseSchema),
   elections: z.array(electionSchema),
-  creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),
+  creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -265,6 +267,7 @@ export function validateWorld(value: unknown): World {
   validatePolitics(world);
   validateCreators(world);
   validateServices(world);
+  validateRoyalty(world);
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
@@ -371,5 +374,6 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 13) { parsed.schemaVersion = 14; parsed.engineVersion = 13; parsed.elections = []; }
   if (parsed && parsed.schemaVersion === 14) { parsed.schemaVersion=15;parsed.engineVersion=14;parsed.creatorStudios=[];parsed.creatorInvoices=[]; }
   if(parsed&&parsed.schemaVersion===15){parsed.schemaVersion=16;parsed.engineVersion=15;parsed.serviceCareers=[];}
+  if(parsed&&parsed.schemaVersion===16){parsed.schemaVersion=17;parsed.engineVersion=16;parsed.royalHouses=[];}
   return validateWorld(parsed);
 }

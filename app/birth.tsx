@@ -1,3 +1,5 @@
+import { royalMembership } from '../src/game/systems/royaltySchemas';
+import { royalTitle } from '../src/game/systems/royaltyMath';
 import React, { useCallback } from 'react';
 import { BackHandler, View } from 'react-native';
 import { Redirect, router, useFocusEffect } from 'expo-router';
@@ -28,7 +30,7 @@ export default function Birth() {
     </View>
     <Card>
       <Heading size={20}>{fullName(player)}</Heading>
-      <Body>{countries[player.nationality].name}</Body>
+      <Body>{countries[player.nationality].name}</Body>{royalMembership(world)&&<Body>{royalTitle(world,royalMembership(world)!.house,player.id)} · {royalMembership(world)!.house.name}</Body>}
       <Heading size={17}>Parents</Heading>
       {parents.map(parent => <Body key={parent.id}>{fullName(parent)}</Body>)}
       <Heading size={17}>Hometown</Heading>

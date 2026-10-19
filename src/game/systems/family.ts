@@ -1,3 +1,4 @@
+import { royalChild,royalDivorce } from './royalty';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName, Person, World } from '../model';
@@ -74,6 +75,7 @@ export function addChild(world: World, parents: Person[], type: 'biological' | '
   if (guardian) { if (!guardian.householdId) ownHousehold(world, guardian); moveHousehold(world, [child.id], guardian.householdId!); child.country = guardian.country; child.city = guardian.city; }
   if (parents.length === 2 && parents.every(parent => !parent.died) && parents[0].householdId !== parents[1].householdId && parents.some(parent => !isConfined(world, parent))) setCustody(world, child, parents[0], parents[1], 'shared');
   for (const parent of parents) if (isConfined(world, parent)) placeDependentChildren(world, parent.id);
+  royalChild(world,child.id,parents.map(parent=>parent.id));
   fact(world, type === 'biological' ? 'I was born into the ' + child.lastName + ' family.' : 'I joined my adoptive family.', type === 'biological' ? 'birth' : 'family', '', child.id);
   return child;
 }
@@ -156,6 +158,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
   const spouse = world.people[command.personId], marriage = world.marriages.find(item => !item.ended && (item.a === player.id && item.b === spouse.id || item.b === player.id && item.a === spouse.id))!;
   oweFamily(world, quote.payerId, quote.receiverId, quote.amount, quote.currency, 'settlement');
   marriage.ended = { ...world.date }; marriage.endReason = 'divorce';
+  royalDivorce(world,player.id,spouse.id);
   const bond = relationFor(world, player.id, spouse.id)!; bond.romance = 'ex'; bond.roles = bond.roles.filter(role => role !== 'spouse' && role !== 'partner'); if (!bond.roles.length) bond.roles.push('acquaintance'); bond.kind = bond.roles[0]; bond.memories.push('divorce:' + world.date.year); bond.strength = bounded(bond.strength - 20); bond.trust = bounded(bond.trust - 10);
   ownHousehold(world, spouse); ownHousehold(world, player);
   const shared = childrenOf(world).filter(child => !child.died && ageOn(child, world.date) < rules[child.country].adultAge && childrenOf(world, spouse.id).some(person => person.id === child.id));

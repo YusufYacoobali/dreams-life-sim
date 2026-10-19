@@ -84,7 +84,7 @@ test('a fabricated or deceased child cannot be used to continue a life', () => {
   recordDeath(world, world.activePersonId, 'test fixture'); expect(() => resolveCommand(world, { type: 'continue-child', personId: 'person_fake' })).toThrow(/existing living child/);
 });
 test('the genuine v6 interrupted birth save migrates and resumes without regenerating its child or pregnancy', () => {
-  let world = decodeWorld(JSON.stringify(birthFixture)); expect(world.schemaVersion).toBe(16); expect(world.random).toEqual(birthFixture.random);
+  let world = decodeWorld(JSON.stringify(birthFixture)); expect(world.schemaVersion).toBe(17); expect(world.random).toEqual(birthFixture.random);
   const child = childrenOf(world)[0]; expect(world.annual?.monthsProcessed).toBe(9); expect(world.pending?.id).toBe(birthFixture.pending.id);
   world = ack(world); while (world.pending) { if (world.pending.kind === 'decision') world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices[0].id }); else world = ack(world); }
   expect(childrenOf(world).map(item => item.id)).toEqual([child.id]); expect(world.pregnancies[0].childId).toBe(child.id); expect(world.annual).toBeNull();

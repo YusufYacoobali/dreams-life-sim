@@ -29,12 +29,13 @@ import { businessMonth } from './systems/businessMonth';
 import { careerCommandSchema, CareerCommand, careerDeath, careerMonth, careerTrainingMonth, resolveCareer } from './systems/careers';
 import { musicCommandSchema, MusicCommand, musicDeath, musicMonth, resolveMusic } from './systems/music';
 import { politicsCommandSchema, PoliticsCommand, politicsDeath, politicsMonth, resolvePolitics } from './systems/politics';
+import { RoyaltyCommand,royaltyCommandSchema,resolveRoyalty,royaltyMonth,royalDeath,refreshRoyalSuccession } from './systems/royalty';
 import { serviceAway } from './systems/serviceSchemas';
 import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resolveService } from './systems/services';
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -61,6 +62,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   careerDeath(world,personId);
   musicDeath(world,personId);
   politicsDeath(world,personId);
+  royalDeath(world,personId);
   creatorDeath(world,personId);
   careAfterDeath(world, personId);
   if (personId === world.activePersonId) {
@@ -88,6 +90,7 @@ function processMonth(world: World) {
   musicMonth(world);
   politicsMonth(world);
   const serviceFatalities=serviceMonth(world);
+  royaltyMonth(world);
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
@@ -97,6 +100,7 @@ function processMonth(world: World) {
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
   legalMonth(world);
+  refreshRoyalSuccession(world,'background');
   for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
@@ -258,6 +262,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const politics = politicsCommandSchema.safeParse(command);
     const creator=creatorCommandSchema.safeParse(command);
     const service=serviceCommandSchema.safeParse(command);
+    const royalty=royaltyCommandSchema.safeParse(command);
     if (education.success) resolveEducation(world, education.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -275,8 +280,10 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     else if (politics.success) resolvePolitics(world,politics.data);
     else if(creator.success)resolveCreator(world,creator.data);
     else if(service.success)resolveService(world,service.data);
+    else if(royalty.success)resolveRoyalty(world,royalty.data);
     else throw new IneligibleAction('This action is not available');
   }
+  refreshRoyalSuccession(world,'background');
   world.revision++;
   return validateWorld(world);
 }

@@ -1,3 +1,4 @@
+import { publicRoyalDuty } from './royaltySchemas';
 import { z } from 'zod';
 import { World, ageOn } from '../model';
 import { countries } from '../countries';
@@ -36,6 +37,7 @@ export function creatorFocusReason(world:World,studio:Studio):string|undefined {
   if(studio.status!=='active'||account?.status!=='active')return 'An active studio and profile are required';
   if(person.skills.content<40)return 'Content Production skill of 40% is required';
   if(isConfined(world,person)||person.legal.wanted||hospitalized(world,person)||person.stats.health<25)return 'Recover or resolve custody/pursuit before full-time production';
+  if(publicRoyalDuty(world))return 'Choose a private royal life before full-time production';
   if(person.employment&&!jobs.find(item=>item.id===person.employment!.roleId)?.partTime||person.education.stage!=='none'||campaignCommitment(world,person.id)||recordingCommitment(world,person.id)||world.careers.some(item=>item.personId===person.id&&item.status==='active')||world.creatorStudios.some(item=>item.personId===person.id&&item.status==='active'&&item.focus==='full-time'&&item.id!==studio.id))return 'Finish or leave another full-time commitment first';
   if((ownedGear(world,studio,studio.laptopId,'laptop')?.condition??0)<40)return 'Select an owned Creative Laptop with at least 40% condition';
 }

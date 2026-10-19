@@ -1,3 +1,4 @@
+import { publicRoyalDuty } from './royaltySchemas';
 import { z } from 'zod';
 import { World, ageOn } from '../model';
 import { countries } from '../countries';
@@ -37,6 +38,7 @@ export function serviceSelectionReason(world:World,kind:ServiceKind):string|unde
  if(person.stats.smarts<definition.smarts||person.skills[definition.skill]<definition.skillRequired)return 'Requires Smarts '+definition.smarts+'% and '+(kind==='astronaut'?'Space Science':'Service Training')+' '+definition.skillRequired+'%';
  if(!person.education.qualifications.some(item=>item.level==='secondary'))return 'A secondary qualification is required';
  if(kind==='astronaut'&&!person.education.qualifications.some(item=>item.level==='degree'&&['science','computing'].includes(item.field)))return 'A science or computing degree is required';
+ if(publicRoyalDuty(world))return 'Choose a private royal life before service';
  if(person.employment||person.education.stage!=='none'||serviceCareer(world)||fullTimeCreator(world)||campaignCommitment(world)||recordingCommitment(world))return 'Finish or leave your other full-time commitment first';
  if((world.actionCounts[person.id+':service-selection:'+kind+':'+world.date.year]??0)>=2)return 'Two assessments are available per career each year';
 }
