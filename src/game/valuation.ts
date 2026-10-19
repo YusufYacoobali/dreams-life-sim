@@ -4,10 +4,14 @@ import { Currency, Money, convertMoney, currencyDigits, roundRatio } from './mon
 import { InstrumentId, instruments } from './content/markets';
 import { businessValue, companyClaimValue } from './businessValuation';
 
+export function fxRate(world: World, from: Currency, to: Currency) {
+  if (from === to) return { numerator: 1n, denominator: 1n };
+  const source = world.market.fx[from], target = world.market.fx[to];
+  return { numerator: target.numerator * source.denominator, denominator: target.denominator * source.numerator };
+}
 export function fxMoney(world: World, value: Money, currency: Currency): Money {
-  if (value.currency === currency) return { ...value };
-  const source = world.market.fx[value.currency], target = world.market.fx[currency];
-  return convertMoney(value, currency, target.numerator * source.denominator, target.denominator * source.numerator);
+  const rate = fxRate(world, value.currency, currency);
+  return convertMoney(value, currency, rate.numerator, rate.denominator);
 }
 export function investmentValue(world: World, id: InstrumentId, quantity: bigint, currency: Currency): bigint {
   const target = world.market.fx[currency], source = world.market.fx.USD;

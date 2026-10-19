@@ -1,3 +1,4 @@
+import { newWorkEarnings } from './earningsSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
@@ -66,7 +67,7 @@ export function selectionReason(world: World, kind: CareerKind): string | undefi
     if ((world.actionCounts[person.id + ':career-selection:' + kind + ':' + world.date.year] ?? 0) >= 2)
         return 'Two selection attempts are available per career each year';
 }
-function newProject(world: World, career: Career) { const definition = careerCatalog[career.kind], history = world.workHistory.find(item => item.id === career.employmentId)!; return { id: 'project_' + career.id + '_' + career.projects.length, name: definition.projects[draw(world, 'events', 0, definition.projects.length - 1)] + (['athlete', 'politician'].includes(career.kind) ? ' ' + (world.date.year + 1) : ''), started: { ...world.date }, ended: null, status: 'active' as const, targetMonths: definition.period, months: 0, employmentId: history.id, grossAtStart: history.grossEarned, grossEarned: 0n, responseRoll: draw(world, 'outcomes', 1, 100), quality: 0, award: null, periods: [] }; }
+function newProject(world: World, career: Career) { const definition = careerCatalog[career.kind], history = world.workHistory.find(item => item.id === career.employmentId)!; return { id: 'project_' + career.id + '_' + career.projects.length, currency: history.currency, name: definition.projects[draw(world, 'events', 0, definition.projects.length - 1)] + (['athlete', 'politician'].includes(career.kind) ? ' ' + (world.date.year + 1) : ''), started: { ...world.date }, ended: null, status: 'active' as const, targetMonths: definition.period, months: 0, employmentId: history.id, grossAtStart: history.grossEarned, grossEarned: 0n, responseRoll: draw(world, 'outcomes', 1, 100), quality: 0, award: null, periods: [] }; }
 function colleagues(world: World, career: Career) {
     if (career.contacts.some(id => !world.people[id].died))
         return;
@@ -106,8 +107,8 @@ export function startCareerContract(world: World, kind: CareerKind, annualPay: b
     career.lastMonth = absolute(world);
     career.contractMonthsRemaining = definition.contractMonths;
     const employmentId = 'employment_career_' + world.revision + '_' + world.workHistory.length;
-    person.employment = { id: employmentId, roleId: definition.roleId, employer: career.employer, companyId: null, rank: career.rank, annualPay: annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
-    world.workHistory.push({ id: employmentId, personId: person.id, roleId: definition.roleId, employer: career.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+    person.employment = { id: employmentId, roleId: definition.roleId, employer: career.employer, companyId: null, currency: career.currency, rank: career.rank, annualPay: annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
+    world.workHistory.push({ id: employmentId, personId: person.id, roleId: definition.roleId, employer: career.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(career.currency) });
     career.employmentId = employmentId;
     career.projects.push(newProject(world, career));
     colleagues(world, career);

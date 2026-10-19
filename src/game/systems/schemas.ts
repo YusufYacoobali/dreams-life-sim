@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { dateSchema } from '../calendar';
 import { instrumentIds } from '../content/markets';
+import { earningsCurrencySchema, pensionReceiptSchema } from './earningsSchemas';
+import type { Currency } from '../money';
 const currency = z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']);
 export const fields = ['business', 'computing', 'arts', 'medicine', 'law', 'science'] as const;
 export const qualificationSchema = z.object({ level: z.enum(['secondary', 'trade', 'degree', 'medicine', 'law']), field: z.string(), year: z.number().int() });
@@ -12,14 +14,17 @@ export const educationSchema = z.object({
 });
 export const employmentSchema = z.object({
   id: z.string(), roleId: z.string(), employer: z.string(), rank: z.number().int().min(0).max(3),
+  currency: earningsCurrencySchema,
   companyId: z.string().nullable().default(null),
   annualPay: z.bigint().nonnegative(), paidMonths: z.number().int().nonnegative(), performance: z.number().int().min(0).max(100),
   effort: z.enum(['relaxed', 'balanced', 'hard']),
 });
 export const financeSchema = z.object({
+  earningsCurrency: earningsCurrencySchema,
   cycleGross: z.bigint().nonnegative(), cycleWithheld: z.bigint().nonnegative(), lifetimeGross: z.bigint().nonnegative(),
   serviceMonths: z.number().int().nonnegative(), pensionAnnual: z.bigint().nonnegative(), pensionMonths: z.number().int().nonnegative(),
   supportIncomeDue: z.bigint().nonnegative(),
+  pensionRecordedFrom: z.number().int().nonnegative(), pensionReceipts: z.array(pensionReceiptSchema),
 });
 export const liabilitySchema = z.object({
   id: z.string(), ownerId: z.string(), currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']),
@@ -47,4 +52,4 @@ export const transactionSchema = z.object({
   cashDelta: z.bigint(), debtDelta: z.bigint(), category: z.string(), description: z.string(),
 });
 export const newEducation = (): z.infer<typeof educationSchema> => ({ stage: 'none', field: '', school: '', months: 0, requiredMonths: 0, grades: 50, effort: 'balanced', funding: 'public', tuition: 0n, tuitionPaidMonths: 0, paused: false, qualifications: [], lastStudyYear: null });
-export const newFinance = (): z.infer<typeof financeSchema> => ({ cycleGross: 0n, cycleWithheld: 0n, lifetimeGross: 0n, serviceMonths: 0, pensionAnnual: 0n, pensionMonths: 0, supportIncomeDue: 0n });
+export const newFinance = (currency: Currency): z.infer<typeof financeSchema> => ({ earningsCurrency: currency, cycleGross: 0n, cycleWithheld: 0n, lifetimeGross: 0n, serviceMonths: 0, pensionAnnual: 0n, pensionMonths: 0, supportIncomeDue: 0n, pensionRecordedFrom: 0, pensionReceipts: [] });

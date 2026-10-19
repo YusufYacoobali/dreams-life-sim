@@ -36,7 +36,7 @@ function finish(world: World) {
   return world;
 }
 test('a genuine v5 marriage result migrates without changing accounts, ring, household, decisions or streams', () => {
-  const migrated = decodeWorld(JSON.stringify(marriageFixture)); expect(migrated.schemaVersion).toBe(17);
+  const migrated = decodeWorld(JSON.stringify(marriageFixture)); expect(migrated.schemaVersion).toBe(18);
   expect(migrated.random).toEqual(marriageFixture.random); expect(migrated.pending?.id).toBe(marriageFixture.pending.id);
   expect(migrated.pregnancies).toEqual([]); expect(migrated.custody).toEqual([]);
   const acknowledged = acknowledge(migrated); expect(acknowledged.assets).toEqual(migrated.assets); expect(acknowledged.accounts).toEqual(migrated.accounts); expect(acknowledged.marriages).toEqual(migrated.marriages);

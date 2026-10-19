@@ -11,6 +11,9 @@ import { daysInMonth } from '../calendar';
 import { isConfined } from './legalSchemas';
 import { recordingCommitment } from './musicSchemas';
 import { campaignCommitment } from './politicsSchemas';
+import { countries } from '../countries';
+import { fxMoney } from '../valuation';
+import { pensionPayment, recordWageEarnings } from './earnings';
 
 /** Settle an unobserved contact's recorded contract once when they re-enter the story.
  * Background net earnings fund their ordinary/discretionary budget; no invented gift is credited to the player.
@@ -23,28 +26,27 @@ export function settleBackground(world: World, person: Person, throughMonth: num
     const before = debt.principal; for (let month = 0; month < months; month++) debt.principal += roundRatio(debt.principal * BigInt(debt.interestBps), 120000n);
     if (debt.principal > before) post(world, 0n, debt.principal - before, 'interest', 'Interest during the background period', debt.id, person, debt.currency);
   }
-  let wages = 0n, pension = 0n;
+  let wages = 0n;
+  const currency = countries[person.country].currency;
   if (person.employment) {
     const job = person.employment;
     wages = roundRatio(job.annualPay * BigInt(job.paidMonths + months), 12n) - roundRatio(job.annualPay * BigInt(job.paidMonths), 12n);
-    job.paidMonths += months; person.finance.serviceMonths += months; person.finance.lifetimeGross += wages;
-    const record = world.workHistory.find(item => item.id === job.id)!; record.monthsWorked += months; record.grossEarned += wages;
+    job.paidMonths += months; person.finance.serviceMonths += months;
+    const record = world.workHistory.find(item => item.id === job.id)!; record.monthsWorked += months; recordWageEarnings(world, person, record, wages, throughMonth);
+    if (wages) post(world, wages, 0n, 'background-income', 'Recorded employment pay for ' + months + ' months', null, person, job.currency);
   }
-  if (person.finance.pensionAnnual > 0n) {
-    pension = roundRatio(person.finance.pensionAnnual * BigInt(person.finance.pensionMonths + months), 12n) - roundRatio(person.finance.pensionAnnual * BigInt(person.finance.pensionMonths), 12n);
-    person.finance.pensionMonths += months;
-  }
-  const gross = wages + pension; const annual = (person.employment?.annualPay ?? 0n) + person.finance.pensionAnnual;
+  const pension = person.finance.pensionAnnual > 0n ? pensionPayment(world, person, months, true) : { gross: 0n, fee: 0n, annual: 0n };
+  const gross = fxMoney(world, { minor: wages, currency: person.employment?.currency ?? currency }, currency).minor + pension.gross;
+  const annual = fxMoney(world, { minor: person.employment?.annualPay ?? 0n, currency: person.employment?.currency ?? currency }, currency).minor + pension.annual;
   const years = Math.floor(months / 12); const partial = gross - annual * BigInt(years);
-  const tax = incomeTax(annual, rules[person.country]) * BigInt(years) + incomeTax(partial, rules[person.country]);
-  if (gross) post(world, gross, 0n, 'background-income', 'Recorded pay for ' + months + ' months', null, person);
-  if (tax) post(world, -tax, 0n, 'tax', 'Tax on the recorded background period', null, person);
+  const tax = incomeTax(annual, rules[person.country]) * BigInt(years) + incomeTax(partial > 0n ? partial : 0n, rules[person.country]);
+  if (tax) charge(world, tax, 'tax', 'Tax on the recorded background period', 'tax', undefined, person);
   const rule = rules[person.country]; const independentAge = Math.max(rule.adultAge, rule.schoolEnd);
   const birthdayDays = daysInMonth(person.born.year + independentAge, person.born.month);
   const independentMonth = (person.born.year + independentAge) * 12 + person.born.month - 1 + (Math.min(world.calendarAnchorDay, birthdayDays) < Math.min(person.born.day, birthdayDays) ? 1 : 0);
   const adultMonths = Math.max(0, throughMonth - Math.max(person.lastEconomicMonth, independentMonth - 1));
   const living = rule.livingCost * BigInt(adultMonths);
-  const surplus = gross - tax - living;
+  const surplus = gross - pension.fee - tax - living;
   const spendingBps = person.traits.includes('practical') ? 4000n : person.traits.includes('impulsive') ? 9000n : 6500n;
   const spending = living + (surplus > 0n ? roundRatio(surplus * spendingBps, 10000n) : 0n);
   if (ageOn(person, world.date) >= rules[person.country].adultAge && spending) charge(world, spending, 'background-living', 'Living and discretionary costs for ' + months + ' months', 'living', undefined, person);

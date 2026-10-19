@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { countryCodes } from './countries';
+import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
 import { dateSchema, daysInMonth, monthFrom, type GameDate } from './calendar';
 export { dateSchema, type GameDate } from './calendar';
@@ -30,6 +30,8 @@ import { validateRoyalty } from './systems/royaltyValidation';
 import { royalHouseSchema } from './systems/royaltySchemas';
 import { serviceCareerSchema } from './systems/serviceSchemas';
 import { creatorInvoiceSchema, creatorStudioSchema } from './systems/creatorSchemas';
+import { workEarningsSchema } from './systems/earningsSchemas';
+import { validateEarnings } from './systems/earningsValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -57,7 +59,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(17), engineVersion: z.literal(16), contentVersion: z.literal(1),
+  schemaVersion: z.literal(18), engineVersion: z.literal(17), contentVersion: z.literal(1),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -67,7 +69,7 @@ export const worldSchema = z.object({
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
-  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative() })),
+  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative(), ...workEarningsSchema.shape })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
@@ -133,7 +135,7 @@ export function validateWorld(value: unknown): World {
     if (person.employment) {
       const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
       const history = world.workHistory.find(record => record.id === person.employment!.id && record.personId === id && !record.ended);
-      if (!role || !history || history.roleId !== role.id || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
+      if (!role || !history || history.roleId !== role.id || history.currency !== person.employment.currency || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
     }
   }
   const workIds = new Set<string>();
@@ -143,7 +145,7 @@ export function validateWorld(value: unknown): World {
   }
   for (const person of Object.values(world.people)) {
     const records = world.workHistory.filter(record => record.personId === person.id);
-    if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.grossEarned, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
+    if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.normalizedGross, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
   const relationPairs = new Set<string>(), romanticPeople = new Set<string>();
   const parentsByChild = new Map<string, string[]>();
@@ -262,6 +264,7 @@ export function validateWorld(value: unknown): World {
   validateLegal(world);
   validateSocial(world);
   validateBusinesses(world);
+  validateEarnings(world);
   validateCareers(world);
   validateMusic(world);
   validatePolitics(world);
@@ -321,7 +324,7 @@ export function decodeWorld(text: string): World {
     parsed.schemaVersion = 3;
     parsed.engineVersion = 2;
     for (const person of Object.values(parsed.people ?? {}) as Record<string, unknown>[]) {
-      person.education = newEducation(); person.employment = null; person.finance = newFinance();
+      person.education = newEducation(); person.employment = null; person.finance = newFinance(countries[person.country as keyof typeof countries].currency);
     }
     for (const account of parsed.accounts ?? []) account.openingCash = account.cash;
     parsed.liabilities = []; parsed.ledger = [];
@@ -375,5 +378,16 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 14) { parsed.schemaVersion=15;parsed.engineVersion=14;parsed.creatorStudios=[];parsed.creatorInvoices=[]; }
   if(parsed&&parsed.schemaVersion===15){parsed.schemaVersion=16;parsed.engineVersion=15;parsed.serviceCareers=[];}
   if(parsed&&parsed.schemaVersion===16){parsed.schemaVersion=17;parsed.engineVersion=16;parsed.royalHouses=[];}
+  if (parsed && parsed.schemaVersion === 17) {
+    parsed.schemaVersion = 18; parsed.engineVersion = 17;
+    for (const person of Object.values(parsed.people) as Person[]) {
+      const currency = countries[person.country].currency;
+      Object.assign(person.finance, { earningsCurrency: currency, pensionRecordedFrom: person.finance.pensionMonths, pensionReceipts: [] });
+      if (person.employment) person.employment.currency = currency;
+    }
+    for (const record of parsed.workHistory) Object.assign(record, { currency: countries[parsed.people[record.personId].country as keyof typeof countries].currency, normalizedGross: record.grossEarned, conversions: [] });
+    for (const career of parsed.careers) for (const project of career.projects) project.currency = career.currency;
+    for (const career of parsed.serviceCareers) for (const contract of career.contracts) contract.currency = career.currency;
+  }
   return validateWorld(parsed);
 }

@@ -1,3 +1,4 @@
+import { newWorkEarnings } from './earningsSchemas';
 import { ageOn, fullName, World } from '../model';
 import { Business, businessSaleQuote, companyClaimValue } from '../businessValuation';
 import { Currency, formatMoney, roundRatio } from '../money';
@@ -42,7 +43,7 @@ export function exitBusiness(world: World, company: Business, mode: 'sale' | 'cl
     if (mode === 'sale' && contract && !person.died && !isConfined(world, person) && person.id !== owner.id) {
       const id = 'employment_transfer_' + person.id + '_' + world.workHistory.length, employer = company.name + ' (new ownership)';
       person.employment = { ...contract, id, companyId: null, employer, paidMonths: 0 };
-      world.workHistory.push({ id, personId: person.id, roleId: contract.roleId, companyId: null, employer, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+      world.workHistory.push({ id, personId: person.id, roleId: contract.roleId, companyId: null, employer, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(contract.currency) });
       fact(world, 'My employment continued under the new ownership of ' + company.name + '.', 'work', '', person.id);
     } else if (!person.died) fact(world, 'My employment at ' + company.name + ' ended.', 'work', '', person.id);
   }

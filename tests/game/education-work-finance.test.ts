@@ -5,6 +5,7 @@ import { decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/m
 import { incomeTax, monthlyAmount, rules } from '../../src/game/rules';
 import { educationMonth } from '../../src/game/systems/education';
 import { newEducation } from '../../src/game/systems/schemas';
+import { newWorkEarnings } from '../../src/game/systems/earningsSchemas';
 import { accountFor } from '../../src/game/systems/common';
 import { workMonth, salaryFor } from '../../src/game/systems/work';
 import { jobs } from '../../src/game/content/jobs';
@@ -29,8 +30,8 @@ function funded(world: World, amount: bigint) {
 }
 function employ(world: World, annualPay = rules.US.baseWage) {
   const person = world.people[world.activePersonId];
-  person.employment = { id: 'employment_test', roleId: 'retail', employer: 'Local Retail', companyId: null, rank: 0, annualPay, paidMonths: 0, performance: 60, effort: 'balanced' };
-  world.workHistory.push({ id: 'employment_test', personId: person.id, roleId: 'retail', employer: 'Local Retail', companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n });
+  person.employment = { id: 'employment_test', roleId: 'retail', employer: 'Local Retail', companyId: null, currency: countries[person.country].currency, rank: 0, annualPay, paidMonths: 0, performance: 60, effort: 'balanced' };
+  world.workHistory.push({ id: 'employment_test', personId: person.id, roleId: 'retail', employer: 'Local Retail', companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(countries[person.country].currency) });
 }
 
 test.each(countryCodes)('%s has exact local money, marginal tax and non-negative financed living costs', country => {

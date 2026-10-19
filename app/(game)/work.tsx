@@ -6,7 +6,7 @@ import { accountFor } from '../../src/game/systems/common';
 import { formatMoney } from '../../src/game/money';
 import { ageOn } from '../../src/game/model';
 import { rules } from '../../src/game/rules';
-import { ActionRow, Body, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
+import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { Illustration } from '../../src/assets/Illustration';
 import { useColors } from '../../src/ui/theme';
@@ -15,12 +15,14 @@ export default function Work() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();
   const player = world.people[world.activePersonId]; const job = player.employment; const role = jobs.find(candidate => candidate.id === job?.roleId); const account = accountFor(world); const rule = rules[player.country];
   const [dialog, setDialog] = useState<'routine' | 'quit' | 'retire' | null>(null);
+  const [pensionPage, setPensionPage] = useState(0);
   const event: EventPresentation | null = dialog === 'routine' ? { id: 'work-effort', kind: 'selection', title: 'Work routine', body: 'Effort affects performance and stress as time passes.', choices: [{ id: 'relaxed', label: 'Take it easy' }, { id: 'balanced', label: 'Balanced' }, { id: 'hard', label: 'Work hard' }], confirmLabel: 'Set Routine' } : dialog ? { id: dialog, kind: 'confirmation', title: dialog === 'quit' ? 'Resign from this job?' : 'Retire from work?', body: dialog === 'quit' ? 'Your pay will stop. You keep money already earned.' : 'Your job will end and an earned pension will start as time passes.', terms: [], confirmLabel: dialog === 'quit' ? 'Resign' : 'Retire' } : null;
   const retirementReason = ageOn(player, world.date) < rule.retirementAge ? 'Available from age ' + rule.retirementAge : player.finance.pensionAnnual > 0n ? 'You already receive a pension' : player.finance.serviceMonths < 120 ? 'Ten years of recorded work are required' : undefined;
   return <Page><Header title="Occupation" onBack={() => router.back()} /><Card><Illustration id="career" size={64} /><Heading>{job && role ? jobRanks[job.rank] + ' ' + role.title : 'No current job'}</Heading>
-    {job && <><Body>{job.employer}</Body><Body>{formatMoney({ minor: job.annualPay, currency: account.currency })} annual gross pay</Body><StatBar label="Performance" value={job.performance} color={c.blue} /><Body muted>{job.paidMonths} paid months · {job.effort} routine</Body></>}
-    {player.finance.pensionAnnual > 0n && <Body>Annual pension: {formatMoney({ minor: player.finance.pensionAnnual, currency: account.currency })}</Body>}
-  </Card>{error && <Body>{error}</Body>}<Card>
+    {job && <><Body>{job.employer}</Body><Body>{formatMoney({ minor: job.annualPay, currency: job.currency })} annual gross pay</Body><StatBar label="Performance" value={job.performance} color={c.blue} /><Body muted>{job.paidMonths} paid months · {job.effort} routine</Body></>}
+    {player.finance.pensionAnnual > 0n && <Body>Annual pension: {formatMoney({ minor: player.finance.pensionAnnual, currency: player.finance.earningsCurrency })}</Body>}
+    {player.finance.pensionAnnual > 0n && player.finance.earningsCurrency !== account.currency && <Body muted>Payments are converted into your residence currency at the current exchange quote, less a 1% conversion fee. Past earnings keep their original currency.</Body>}
+  </Card>{error && <Body>{error}</Body>}{!!player.finance.pensionReceipts.length && <Card><Heading size={19}>Pension Payments</Heading>{[...player.finance.pensionReceipts].reverse().slice(pensionPage * 12, (pensionPage + 1) * 12).map(payment => <React.Fragment key={payment.firstPeriod}><Body>{Math.floor(payment.month / 12)}-{String(payment.month % 12 + 1).padStart(2, '0')} · {payment.periods} monthly period{payment.periods === 1 ? '' : 's'}</Body><Body>Earned payment: {formatMoney({minor:payment.nativeGross,currency:payment.sourceCurrency})}</Body>{payment.sourceCurrency !== payment.currency && <Body>Converted gross: {formatMoney({minor:payment.gross,currency:payment.currency})} · Fee: {formatMoney({minor:payment.fee,currency:payment.currency})}</Body>}<Body>Tax withheld: {formatMoney({minor:payment.withheld,currency:payment.currency})} · Paid: {formatMoney({minor:payment.gross-payment.fee-payment.withheld,currency:payment.currency})}</Body></React.Fragment>)}<Button label="Newer Pension Payments" tone="secondary" disabled={!pensionPage} onPress={()=>setPensionPage(pensionPage-1)}/><Button label="Earlier Pension Payments" tone="secondary" disabled={(pensionPage+1)*12>=player.finance.pensionReceipts.length} onPress={()=>setPensionPage(pensionPage+1)}/></Card>}<Card>
     <ActionRow title="Find a Job" subtitle="Browse pay and qualification requirements" onPress={() => router.push('/jobs')} />
     <ActionRow title="Education" subtitle="School, university and professional qualifications" onPress={() => router.push('/education')} />
     <ActionRow title="Business" subtitle="Your companies, actual staff and operating roles" onPress={() => router.push('/business')} />
