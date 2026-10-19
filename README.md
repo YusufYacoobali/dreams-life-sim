@@ -2,6 +2,8 @@
 
 An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy, persistent health/clinical care, crime/courts/prison, social profiles/fame, businesses and acting/modelling/sport, musician, political, YouTuber, Streamer, Astronaut, Military and Royalty paths are connected. The free Time Machine restores complete historical states into separate saved branches, preserving the original future. Local archives include compressed history and branch origin. Holidays and gap years connect temporary location, paid/unpaid leave, actual household companions, local introductions and monthly experiences. Permanent household emigration and real work/study offers connect saved consent, old tax settlement, owned moving funds, foreign-currency jobs and paid tuition. Pets/hobbies, content depth and release validation remain pending; this is not the complete game.
 
+The opening experience is the current priority: welcome art, custom/random creation, a dedicated appearance editor, the one-time newborn introduction and the first Life dashboard now follow the reference structures; native visual acceptance remains pending. See [the opening plan and estimated completion breakdown](docs/OPENING_PLAN.md). The reported Android BigInt money-display crash is fixed in `0a44fc0`.
+
 The game is free and uses local saves. No account, subscription or cloud service is planned. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 
 ```sh
@@ -9,7 +11,7 @@ npm ci
 npm start
 ```
 
-Use an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. This cloud workspace has verified native bundle generation, not device execution.
+Use an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. This cloud workspace has verified native bundle generation. An official Android SDK and software emulator are now configured, but app execution is blocked while the required React Native AAR download host awaits environment-network publication. Native app fidelity is still unverified.
 
 ```sh
 npm run typecheck

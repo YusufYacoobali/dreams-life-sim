@@ -100,3 +100,8 @@ Native-device fidelity remains unverified.
 
 
 Travel artwork (`travel-atlas.png`) was generated for this project and copied unchanged from `/workspace/generated_images/exec-efa1c534-0024-4e61-a981-d2d7f5d647b1.png`. SHA-256: `420a9f8cdaa7a399b924fc2bf626898441c95999e8a2897745c7aad940ab6574`. The twelve destination illustrations and four travel subjects have measured source rectangles in `src/assets/travelLayout.ts`. All sixteen were inspected at original resolution and in a 128px browser composition; no adjacent artwork is clipped into the regions. The postcards are illustrative compositions rather than geographical photographs. Source generation and browser crops do not establish native-device fidelity.
+
+
+## Welcome hero — opening experience
+
+`welcome-hero.png` is an original image generated for the reference 04 welcome composition. The unchanged source is `/workspace/generated_images/exec-b34b0c5e-300b-46c5-a3ff-64a101522361.png`; SHA-256 `8973d44ad6d8a2c7c4e00e32f5e7b794e6efea1668e836e25b74c6bd304c5459`. It depicts a fictional coastal city at sunset, with a backpacked figure, empty navy sky above and dark foreground below. The illustration contains no embedded title, controls or screenshot frame. The app draws the native wordmark, buttons and gradient overlay over the original with `cover` scaling. The source was visually inspected; matched-viewport native composition remains pending because the Android build's required React Native AAR host is blocked by the current network policy. This is not a claim of native visual acceptance.

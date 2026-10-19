@@ -1,86 +1,57 @@
-import React, { useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { royalCountries } from '../src/game/content/royalty';
-import { CareerArt } from '../src/assets/CareerArt';
 import { countries, countryCodes, CountryCode } from '../src/game/countries';
-import { creationSchema, randomCreation } from '../src/game/createLife';
-import { useGame } from '../src/state/useGame';
-import { ActionRow, Body, Button, Card, Header, Page, Portrait } from '../src/ui/components';
+import { Creation, creationSchema } from '../src/game/createLife';
+import { freshSeed, useGame } from '../src/state/useGame';
+import { useCreationDraft } from '../src/state/creationDraft';
+import { ActionRow, Body, Button, Card, Header, Heading, Page, Portrait } from '../src/ui/components';
+import { avatarPresets, countryFlags, CreationProgress, SectionLabel } from '../src/ui/CreationElements';
 import { EventModal, EventPresentation } from '../src/ui/EventModal';
 import { useColors } from '../src/ui/theme';
-import { faceLabels, hairColors, hairLabels, skinTones } from '../src/assets/portraitLayout';
 import { FamilyPreferences } from '../src/ui/FamilyPreferences';
 import { genders } from '../src/game/systems/familySchemas';
 
 export default function NewLife() {
-  const params = useLocalSearchParams<{ seed?: string }>();
-  const parsedSeed = Number(params.seed);
+  const params = useLocalSearchParams<{ seed?: string; mode?: string }>(), parsedSeed = Number(params.seed);
   const seed = Number.isInteger(parsedSeed) && parsedSeed >= 0 && parsedSeed <= 0xFFFFFFFF ? parsedSeed : 0;
-  const [input, setInput] = useState(() => randomCreation(seed));
-  const [field, setField] = useState<'country' | 'city' | 'hair' | 'face' | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-  const [confirm, setConfirm] = useState(false);
-  const world = useGame(s => s.world);
-  const start = useGame(s => s.startLife);
-  const busy = useGame(s => s.busy);
-  const error = useGame(s => s.error);
-  const c = useColors();
-  const submit = async () => {
-    const result = creationSchema.safeParse(input);
-    if (!result.success) { setMessage(result.error.issues[0].message); return; }
-    if (await start(result.data, seed)) router.replace('/birth');
-  };
-  const selection: EventPresentation | null = field ? {
-    id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : field === 'city' ? 'Choose a city' : field === 'face' ? 'Face shape' : 'Hairstyle',
-    body: field === 'country' || field === 'city' ? 'Where will your life begin?' : 'What feels like you?', confirmLabel: 'Choose',
-    choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : field === 'city' ? countries[input.country].cities.map(id => ({ id, label: id })) : (field === 'face' ? faceLabels : hairLabels).map((label, index) => ({ id: index.toString(), label })),
-  } : null;
-  return <Page>
-    <Header title="New Life" onBack={() => router.back()} />
-    <View style={{ alignItems: 'center', gap: 12 }}>
-      <Portrait name={input.firstName + ' ' + input.lastName} appearance={input.appearance} age={25} size={110} />
-      <Body muted centered>Adult appearance</Body>
-      <Body muted centered>Meet your next questionable decision-maker.</Body>
-    </View>
-    <Card>
-      <Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>YOUR IDENTITY</Text>
-      <Text style={{ color: c.ink }}>First name</Text>
-      <TextInput accessibilityLabel="First name" value={input.firstName} maxLength={40} onChangeText={firstName => setInput({ ...input, firstName })} style={{ borderBottomWidth: 1, borderBottomColor: c.line, paddingVertical: 10, color: c.ink, fontSize: 17 }} />
-      <Text style={{ color: c.ink }}>Last name</Text>
-      <TextInput accessibilityLabel="Last name" value={input.lastName} maxLength={40} onChangeText={lastName => setInput({ ...input, lastName })} style={{ borderBottomWidth: 1, borderBottomColor: c.line, paddingVertical: 10, color: c.ink, fontSize: 17 }} />
-      <View accessibilityRole="radiogroup" accessibilityLabel="Gender" style={{ flexDirection: 'row', gap: 6 }}>
-        {(['male', 'female', 'nonbinary'] as const).map(gender => <Pressable key={gender} accessibilityRole="radio" accessibilityState={{ checked: input.gender === gender }} onPress={() => setInput({ ...input, gender })} style={{ flex: 1, minHeight: 44, borderRadius: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: input.gender === gender ? c.blue : c.background }}><Text style={{ color: input.gender === gender ? '#FFFFFF' : c.ink, fontWeight: '600' }}>{gender === 'nonbinary' ? 'Non-binary' : gender === 'male' ? 'Male' : 'Female'}</Text></Pressable>)}
+  const draft = useCreationDraft(s => s.draft), begin = useCreationDraft(s => s.begin), update = useCreationDraft(s => s.update), randomise = useCreationDraft(s => s.randomise), customise = useCreationDraft(s => s.customise);
+  const [field, setField] = useState<'country' | 'city' | null>(null), [message, setMessage] = useState<string | null>(null), [confirm, setConfirm] = useState(false), [advanced, setAdvanced] = useState(false);
+  const world = useGame(s => s.world), start = useGame(s => s.startLife), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
+  useEffect(() => { begin(seed, params.mode === 'random' ? 'random' : 'custom'); }, [seed, params.mode, begin]);
+  if (!draft) return <Page><ActivityIndicator accessibilityLabel="Preparing your new life" /></Page>;
+  const { input, mode } = draft, edit = (change: Partial<Creation>) => { if (busy) return; update({ ...input, ...change }); setMessage(null); };
+  const reroll = () => { const candidate = freshSeed(), next = candidate === draft.seed ? (candidate + 0x9e3779b9) >>> 0 : candidate; randomise(next); router.setParams?.({ seed: String(next), mode: 'random' }); };
+  const cycleAvatar = (direction: number) => { const current = avatarPresets.findIndex(item => JSON.stringify(item) === JSON.stringify(input.appearance)), index = (Math.max(0, current) + direction + avatarPresets.length) % avatarPresets.length; edit({ appearance: { ...avatarPresets[index] } }); };
+  const submit = async () => { const parsed = creationSchema.safeParse(input); if (!parsed.success) { setMessage(parsed.error.issues[0].message); return; } if (await start(parsed.data, draft.seed)) router.replace('/birth'); };
+  const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
+  return <Page><StatusBar style="dark" /><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
+    <View style={{ alignItems: 'center', gap: 8 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 28 }}>
+        <Pressable accessibilityRole="button" accessibilityLabel="Previous avatar" disabled={busy} onPress={() => cycleAvatar(-1)} style={{ padding: 10, borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel="Choose Appearance" disabled={busy} onPress={() => router.push('/appearance')}><Portrait name="Your adult appearance" appearance={input.appearance} age={25} size={118} /></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel="Next avatar" disabled={busy} onPress={() => cycleAvatar(1)} style={{ padding: 10, borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-forward" size={22} color={c.ink} /></Pressable>
       </View>
-    </Card>
-    <Card>
-      <Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>APPEARANCE</Text>
-      <ActionRow title="Face shape" value={faceLabels[input.appearance.face]} onPress={() => setField('face')} />
-      <Body muted>Skin tone</Body>
-      <View accessibilityRole="radiogroup" accessibilityLabel="Skin tone" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{skinTones.map((tone, skin) => <Pressable key={tone} accessibilityRole="radio" accessibilityLabel={'Skin tone ' + (skin + 1)} accessibilityState={{ checked: input.appearance.skin === skin }} onPress={() => setInput({ ...input, appearance: { ...input.appearance, skin } })} style={{ width: 44, height: 44, borderRadius: 22, borderColor: input.appearance.skin === skin ? c.blue : c.line, borderWidth: input.appearance.skin === skin ? 3 : 1, padding: 4 }}><View style={{ flex: 1, borderRadius: 18, backgroundColor: tone }} /></Pressable>)}</View>
-      <ActionRow title="Hairstyle" value={hairLabels[input.appearance.hair]} onPress={() => setField('hair')} />
-      <Body muted>Hair colour</Body>
-      <View accessibilityRole="radiogroup" accessibilityLabel="Hair colour" style={{ flexDirection: 'row', gap: 8 }}>{hairColors.map((tone, hairColor) => <Pressable key={tone} accessibilityRole="radio" accessibilityLabel={['Black', 'Brown', 'Chestnut', 'Blond', 'Auburn'][hairColor]} accessibilityState={{ checked: input.appearance.hairColor === hairColor }} onPress={() => setInput({ ...input, appearance: { ...input.appearance, hairColor } })} style={{ width: 44, height: 44, borderRadius: 22, borderColor: input.appearance.hairColor === hairColor ? c.blue : c.line, borderWidth: input.appearance.hairColor === hairColor ? 3 : 1, padding: 4 }}><View style={{ flex: 1, borderRadius: 18, backgroundColor: tone }} /></Pressable>)}</View>
-    </Card>
-    <Card>
-      <Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>WHERE WILL YOU BE BORN?</Text>
-      <ActionRow title="Country" value={countries[input.country].name} onPress={() => setField('country')} />
-      <ActionRow title="City" value={input.city} onPress={() => setField('city')} />
-    </Card>
-    <Card><Text style={{color:c.muted,fontSize:12,fontWeight:'600'}}>FAMILY BACKGROUND</Text><ActionRow title="Ordinary Family" subtitle="Your family makes its own way through life" value={input.background!=='royal'?'Selected':undefined} onPress={()=>setInput({...input,background:'ordinary'})}/><ActionRow title="Royal Family" subtitle="A title, public duties and an actual family succession" value={input.background==='royal'?'Selected':undefined} icon={<CareerArt id="royalty"/>} disabledReason={(royalCountries as readonly string[]).includes(input.country)?undefined:'Choose Great Britain, Japan or Spain'} onPress={()=>setInput({...input,background:'royal'})}/></Card>
-    <Card><Text style={{ color: c.muted, fontSize: 12, fontWeight: '600' }}>FUTURE FAMILY OPTIONS</Text>
-      <Body muted>These choices are independent of gender and appearance. Dating preferences can change in My Life when you are an adult.</Body>
-      <FamilyPreferences attractedTo={input.attractedTo ?? [...genders]} wantsChildren={input.wantsChildren ?? true} onChange={preferences => setInput({ ...input, ...preferences })} />
-      <Body>Reproductive capacity</Body>{(['carry', 'contribute', 'neither'] as const).map(role => <Button key={role} label={role === 'carry' ? 'Can carry a pregnancy' : role === 'contribute' ? 'Can contribute to conception' : 'Neither'} tone={(input.reproductiveRole ?? (input.gender === 'female' ? 'carry' : input.gender === 'male' ? 'contribute' : 'neither')) === role ? 'primary' : 'secondary'} onPress={() => setInput({ ...input, reproductiveRole: role })} />)}
-    </Card>
-    {(message || error) && <Body>{message ?? error}</Body>}
+      <Heading centered size={27}>{mode === 'random' ? 'Let Fate Decide' : 'A New Beginning'}</Heading><Body muted centered>{mode === 'random' ? 'Meet your next life. Keep it, or roll again.' : 'Every life has a story. What’s yours?'}</Body>
+    </View>
+    {mode === 'random' ? <><Card><Heading size={21}>{input.firstName} {input.lastName}</Heading><Body>{input.gender === 'nonbinary' ? 'Non-binary' : input.gender === 'male' ? 'Male' : 'Female'}</Body><Body>{countryFlags[input.country]} {input.city}, {countries[input.country].name}</Body><Body muted>Your family and starting circumstances unfold when your life begins.</Body></Card><Button label="Roll Again" tone="secondary" disabled={busy} onPress={reroll} /><Button label="Customise This Life" tone="secondary" disabled={busy} onPress={() => { customise(); router.setParams?.({ mode: 'custom' }); }} /></> : <>
+      <SectionLabel>YOUR IDENTITY</SectionLabel><Card style={{ gap: 0 }}>
+        {(['firstName', 'lastName'] as const).map(key => <View key={key} style={{ flexDirection: 'row', alignItems: 'center', gap: 12, minHeight: 55, borderBottomWidth: 1, borderBottomColor: c.line }}><Ionicons name="person" color={c.muted} size={22} /><Text style={{ flex: 1, color: c.muted, fontSize: 15 }}>{key === 'firstName' ? 'First Name' : 'Last Name'}</Text><TextInput accessibilityLabel={key === 'firstName' ? 'First name' : 'Last name'} value={input[key]} maxLength={40} editable={!busy} autoCapitalize="words" autoCorrect={false} onChangeText={value => edit({ [key]: value })} style={{ maxWidth: '55%', minWidth: 90, minHeight: 48, color: c.ink, fontWeight: '600', textAlign: 'right', fontSize: 16 }} /></View>)}
+        <View accessibilityRole="radiogroup" accessibilityLabel="Gender" style={{ flexDirection: 'row', gap: 6, paddingVertical: 12 }}>{genders.map(gender => <Pressable key={gender} accessibilityRole="radio" accessibilityLabel={gender === 'nonbinary' ? 'Non-binary' : gender === 'male' ? 'Male' : 'Female'} accessibilityState={{ checked: input.gender === gender, disabled: busy }} disabled={busy} onPress={() => edit({ gender })} style={{ flex: 1, minHeight: 44, borderRadius: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: input.gender === gender ? c.blue : c.inset }}><Text style={{ color: input.gender === gender ? '#FFFFFF' : c.ink, fontWeight: '600', fontSize: 13 }}>{gender === 'nonbinary' ? 'Non-binary' : gender === 'male' ? 'Male' : 'Female'}</Text></Pressable>)}</View>
+        <ActionRow title="Appearance" value="Customise" icon={<Ionicons name="color-palette" color={c.purple} size={25} />} disabledReason={busy ? 'Saving' : undefined} onPress={() => router.push('/appearance')} />
+      </Card>
+      <SectionLabel>WHERE WILL YOU BE BORN?</SectionLabel><Card style={{ gap: 0 }}><ActionRow title="Country" value={countryFlags[input.country] + ' ' + countries[input.country].name} icon={<Ionicons name="earth" color={c.muted} size={24} />} disabledReason={busy ? 'Saving' : undefined} onPress={() => setField('country')} /><ActionRow title="City" value={input.city} icon={<Ionicons name="location" color={c.muted} size={24} />} disabledReason={busy ? 'Saving' : undefined} onPress={() => setField('city')} /></Card>
+      <SectionLabel>FAMILY BACKGROUND</SectionLabel><Card style={{ gap: 0 }}><ActionRow title="Ordinary Family" subtitle="Make your own way through life" value={input.background !== 'royal' ? 'Selected' : undefined} onPress={() => edit({ background: 'ordinary' })} /><ActionRow title="Royal Family" subtitle="A title and a real family succession" value={input.background === 'royal' ? 'Selected' : undefined} disabledReason={(royalCountries as readonly string[]).includes(input.country) ? undefined : 'Choose the United Kingdom, Japan or Spain'} onPress={() => edit({ background: 'royal' })} /></Card>
+      <ActionRow title="More Options" subtitle="Future family preferences" value={advanced ? 'Open' : undefined} onPress={() => setAdvanced(!advanced)} />
+      {advanced && <Card><Body muted>These choices are independent of appearance and gender. Dating preferences can change in My Life when you are an adult.</Body><FamilyPreferences attractedTo={input.attractedTo ?? [...genders]} wantsChildren={input.wantsChildren ?? true} onChange={preferences => edit(preferences)} /><Body>Reproductive capacity</Body>{(['carry', 'contribute', 'neither'] as const).map(role => <Button key={role} label={role === 'carry' ? 'Can carry a pregnancy' : role === 'contribute' ? 'Can contribute to conception' : 'Neither'} tone={(input.reproductiveRole ?? (input.gender === 'female' ? 'carry' : input.gender === 'male' ? 'contribute' : 'neither')) === role ? 'primary' : 'secondary'} onPress={() => edit({ reproductiveRole: role })} />)}</Card>}
+      <SectionLabel>YOUR START</SectionLabel><Card style={{ gap: 0 }}><ActionRow title="Random Life" subtitle="Let fate decide everything" icon={<Ionicons name="dice" color={c.muted} size={28} />} disabledReason={busy ? 'Saving' : undefined} onPress={reroll} /></Card>
+    </>}
+    {(message || error) && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{message ?? error}</Text>}
     <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { if (world) setConfirm(true); else void submit(); }} />
-    <EventModal event={selection} onCancel={() => setField(null)} onChoose={id => {
-      if (field === 'country') { const country = id as CountryCode; setInput({ ...input, country, city: countries[country].cities[0], background:(royalCountries as readonly string[]).includes(country)?input.background:'ordinary' }); }
-      else if (field === 'city') setInput({ ...input, city: id });
-      else if (field === 'hair' || field === 'face') setInput({ ...input, appearance: { ...input.appearance, [field]: Number(id) } });
-      setField(null);
-    }} />
+    <EventModal event={selection} onCancel={() => setField(null)} onChoose={id => { if (field === 'country') { const country = id as CountryCode; edit({ country, city: countries[country].cities[0], background: (royalCountries as readonly string[]).includes(country) ? input.background : 'ordinary' }); } else edit({ city: id }); setField(null); }} />
     <EventModal event={confirm ? { id: 'new-life-confirm', kind: 'confirmation', title: 'Start another life?', body: 'Your current life will stay in Saved Lives. You can return to it later.', terms: [], confirmLabel: 'Start a New Life' } : null} busy={busy} onCancel={() => setConfirm(false)} onChoose={() => { setConfirm(false); void submit(); }} />
   </Page>;
 }

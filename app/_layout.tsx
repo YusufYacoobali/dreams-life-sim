@@ -12,6 +12,7 @@ export default function RootLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="new-life" />
+      <Stack.Screen name="appearance" />
       <Stack.Screen name="birth" options={{ gestureEnabled: false }} />
       <Stack.Screen name="death" options={{ gestureEnabled: false }} />
       <Stack.Screen name="life-summary" />

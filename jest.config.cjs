@@ -3,4 +3,5 @@ module.exports = {
   testMatch: ['<rootDir>/tests/**/*.test.[jt]s?(x)'],
   cacheDirectory: require('node:path').join(require('node:os').tmpdir(), 'dreams-life-sim-jest'),
   clearMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/tests/support/native-ui.cjs'],
 };
