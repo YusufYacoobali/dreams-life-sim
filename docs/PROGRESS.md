@@ -12,6 +12,15 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Checkpoint **`e5a4aaf` is pushed**. Its genuine world-28 archive was generated
+using the unchanged committed source, actual SQLite and production commands.
+The saved reading result keeps twelve paid months, one manual practice,
+25 proficiency, two earned Smarts points and all original consent/money/RNG.
+All five original mixed-codec moments remain byte-exact, with four new actual
+moments. The continuity check retains every old field, cold-acknowledges the
+result without duplicate practice/charges, then finishes the next reading year
+and the actual pet terminal history. Older fixtures are never regenerated.
+
 The world-28 / engine-27 / content-4 / database-6 candidate adds reading, video
 games, supervised cooking and gardening through actual consent, funding,
 attended/paused months, bounded proficiency and complete lifecycle histories.
@@ -25,8 +34,7 @@ regression passes in **668.278 seconds**, with strict typing, fresh Hermes
 exports (5.3/5.0 MB, 48 distinct assets) and both current Metro manifests/source.
 Game source stays fixed through final checks. Catalogue remains 90. Native and
 broader production gates/percentage baselines stay open; this remains partial
-leisure breadth. Commit/push before the next milestone and preserve a genuine
-world-28 archive with the unmodified committed engine first.
+leisure breadth. Its genuine world-28 archive now protects future migrations.
 
 Button checkpoint **`8de01d7` is pushed**. A genuine checkpoint-v2 archive now
 preserves the actual completed project result, five original moments and both

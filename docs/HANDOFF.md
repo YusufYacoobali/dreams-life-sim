@@ -1,6 +1,16 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
-The current **verified candidate is world 28 / engine 27 / content 4 /
+Checkpoint **`e5a4aaf` is pushed**. Its genuine
+`v28-ordinary-hobby-archive.json` was generated from that unmodified committed
+source through real SQLite and the production store. Revision 44 retains the
+actual reading result after twelve paid months and one optional practice:
+25 proficiency, two earned Smarts points, the original parent consent/payment
+history, 24 guitar months and 36 pet-care periods. All five original mixed-v1/v2
+moments remain byte-exact; four actual new moments bring the total to nine.
+Preserve all current/prior fields and both representations before the next
+game/schema/content change. Never regenerate older fixtures with newer code.
+
+The current **verified milestone is world 28 / engine 27 / content 4 /
 database 6**: reading, gaming, supervised cooking and gardening join the four
 existing hobbies. Read [LEISURE.md](LEISURE.md). All 112 domain checks and the
 connected genuine child reading/SQLite failure-retry-cold journey pass. Reader
@@ -15,9 +25,8 @@ with strict source/test typing, fresh Hermes exports (5.3/5.0 MB, 48 distinct
 assets) and current Metro manifests/source. Game source stayed fixed through
 the final checks. The original four-subject transparent hobby atlas is copied
 unmodified with its exact reviewed bounds. Catalogue remains 90. Native and
-broader release gates/percentage baselines remain open. Commit AND push this
-tested state before advancing; generate a genuine world-28 reading archive
-from its unmodified committed source before the next game/schema/content change.
+broader release gates/percentage baselines remain open. The tested state and its
+genuine archive are preserved; continue the native opening/full production plan.
 
 The button fix **`8de01d7` is pushed**. Its genuine
 `v27-responsive-archive.json` was generated with that unmodified source through

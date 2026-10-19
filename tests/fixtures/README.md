@@ -150,3 +150,19 @@ result use checkpoint-v2. The export is 170,819 bytes. No date, person, price,
 permission, money, progression, outcome or version was edited. Preserve both
 codec representations and all five earlier worlds when migrating later schemas;
 never regenerate this fixture with newer code.
+
+`v28-ordinary-hobby-archive.json` was generated with unmodified **`e5a4aaf`**
+(world 28 / engine 27 / content 4 / database 6). The real SQLite repository and
+production store import the genuine responsive archive, finish its original
+year and arrange community reading at age eight. The actual parent accepts
+(roll 47 / chance 87), with a monthly quote of 1,160 AUD minor units. Twelve
+attended months pay 13,920 minor units and earn 24 proficiency plus two bounded
+Smarts points. Actual optional practice then earns one proficiency, with no
+payment or RNG draw. Revision 44, 19 October 2035, retains that “Time for
+reading” result, proficiency 25, 24 guitar months and 36 pet-care periods.
+The 333,675-byte export preserves all five original mixed-v1/v2 moments
+byte-for-byte, plus genuine pre-plan (38), consent-result (39), pre-Age-Up (40)
+and pre-extra-practice (43) moments. No identity, date, consent, price, money,
+progress, RNG, outcome or version was manually changed. Preserve every field
+and all nine prior moments; cold acknowledgement/continuation must not repeat
+the manual practice or old monthly charges. Never regenerate with newer code.
