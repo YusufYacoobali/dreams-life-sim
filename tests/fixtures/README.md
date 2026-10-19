@@ -121,3 +121,18 @@ pet/vet/play state (24). The export is 95,075 bytes. No person, money, age, grad
 RNG, consent, pet outcome or version was manually edited. Preserve the current
 world and all three prior worlds when adding later schema defaults. Never
 regenerate this archive using newer code.
+
+`v27-leisure-archive.json` was generated with unmodified `117c4d1` (world 27 /
+engine 26 / content 4), before the remaining hobby variants. Real SQLite imports
+the genuine pet archive and resolves the original school-project promise.
+The actual parent agrees to community guitar (roll 44 / chance 87), then a
+parent-accompanied cinema visit (roll 48 / chance 87) pays 4,640 AUD minor units.
+Actual Age Up reaches 19 December 2033, revision 32, and pauses at the original
+month-two project deadline, “The project is due”. Two attended guitar months
+pay 6,960 minor units and earn four proficiency points; Biscuit retains fourteen
+actual care periods. The four selected genuine age-seven moments are pre-plan
+revision 27, committed plan result 28, committed outing result 30 and pre-Age-Up
+31. The export is 140,455 bytes. No person, money, date, RNG, consent, progression,
+callback participant or version was manually edited. Preserve current and all
+four earlier worlds, their project/annual cursor and every original hobby,
+outing and pet record. Never regenerate this archive with newer source.

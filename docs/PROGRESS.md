@@ -12,6 +12,13 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Checkpoint `117c4d1` is pushed. A genuine world-27 leisure archive now preserves
+the interrupted month-two school project, guitar/ticket/pet payments and four
+original earlier moments. Its focused continuity check and strict types pass;
+the existing project resumes without repeating charges. This adds a migration
+fixture after the complete 1,143-test regression; overlapping checks are not added
+into a fabricated new full-suite total.
+
 World **27 / engine 26 / content 4** adds [persistent leisure](LEISURE.md):
 guitar/painting/photography/chess routines with reviewed real funding, actual
 attended/paused months, limited optional extra practice, earned proficiency and

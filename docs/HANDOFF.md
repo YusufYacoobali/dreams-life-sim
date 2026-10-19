@@ -5,6 +5,15 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+Checkpoint **`117c4d1` is pushed**. Its genuine
+`v27-leisure-archive.json` was generated from that unmodified source through real
+SQLite. The current month-two project deadline retains two paid guitar months,
+a parent-accompanied movie and fourteen actual pet-care periods, with four
+original prior moments. The focused continuity check and strict typing pass;
+resuming finishes twelve hobby/twenty-four pet months without repeated charges.
+Preserve this archive before extending saved hobby kinds; never regenerate it
+with newer source.
+
 The current verified milestone is **world 27 / engine 26 / content 4** for
 [hobbies and paid outings](LEISURE.md). The core, surfaces and 52 domain checks
 plus a genuine pet-owning-child SQLite plan/outing/monthly rollback-retry/cold
@@ -15,7 +24,7 @@ with 10,683 attended/60 paused hobby months, 891 accepted/five refused outings
 and unchanged game hash `3add8417fde5c5b43c5414e29cd51698fe13d20a94cde4196f0d9147c2dc8f96`.
 The complete current regression passes **1,143 tests / 73 suites** in
 **788.232 seconds**, exit zero. Game source stayed fixed through the final sweep
-and regression. Preserve a genuine leisure archive from this committed source
+and regression. The genuine leisure archive above protects this committed source
 before the next saved-kind/schema expansion. The next four hobby/art subjects
 and scope are in [remaining-hobbies.md](planning/drafts/remaining-hobbies.md).
 This is partial hobby/entertainment breadth; the wider reference catalogue and
