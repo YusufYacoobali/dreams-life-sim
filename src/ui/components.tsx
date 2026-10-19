@@ -4,13 +4,14 @@ import {
   StyleProp, StyleSheet, Text, View, ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { radii, spacing, useColors } from './theme';
+import { radii, spacing, ThemedStatusBar, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
 
 export function Page({ children, scroll = true, bottomSafeArea = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean }>) {
   const c = useColors();
   return (
     <SafeAreaView edges={bottomSafeArea ? ['top', 'bottom'] : ['top']} style={[styles.page, { backgroundColor: c.background }]}>
+      <ThemedStatusBar />
       {scroll ? <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{children}</ScrollView>
         : <View style={styles.content}>{children}</View>}
     </SafeAreaView>

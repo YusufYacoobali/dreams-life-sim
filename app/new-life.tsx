@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { royalCountries } from '../src/game/content/royalty';
@@ -28,7 +27,7 @@ export default function NewLife() {
   const cycleAvatar = (direction: number) => { const current = avatarPresets.findIndex(item => JSON.stringify(item) === JSON.stringify(input.appearance)), index = (Math.max(0, current) + direction + avatarPresets.length) % avatarPresets.length; edit({ appearance: { ...avatarPresets[index] } }); };
   const submit = async () => { const parsed = creationSchema.safeParse(input); if (!parsed.success) { setMessage(parsed.error.issues[0].message); return; } if (await start(parsed.data, draft.seed)) router.replace('/birth'); };
   const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
-  return <Page bottomSafeArea><StatusBar style="dark" /><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
+  return <Page bottomSafeArea><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
     <View style={{ alignItems: 'center', gap: 8 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 28 }}>
         <Pressable accessibilityRole="button" accessibilityLabel="Previous avatar" disabled={busy} onPress={() => cycleAvatar(-1)} style={{ padding: 10, borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>

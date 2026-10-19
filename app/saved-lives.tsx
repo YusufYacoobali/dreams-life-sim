@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Pressable } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useColors } from '../src/ui/theme';
 import { router } from 'expo-router';
 import * as DocumentPicker from 'expo-document-picker';
 import * as Sharing from 'expo-sharing';
@@ -12,6 +15,7 @@ import { EventModal, EventPresentation } from '../src/ui/EventModal';
 
 type Preview = { kind: 'import'; text: string; world: World; replace: boolean } | { kind: 'recover'; world: World };
 export default function SavedLives() {
+  const c = useColors();
   const lives = useGame(s => s.lives);
   const busy = useGame(s => s.busy);
   const error = useGame(s => s.error);
@@ -45,7 +49,7 @@ export default function SavedLives() {
     terms: [{ id: 'name', label: 'Person', value: fullName(preview.world.people[preview.world.activePersonId]), tone: 'neutral' }, { id: 'age', label: 'Age', value: ageOn(preview.world.people[preview.world.activePersonId], preview.world.date).toString(), tone: 'neutral' }, { id: 'revision', label: 'Checkpoint', value: preview.world.revision.toString(), tone: 'neutral' }],
     confirmLabel: preview.kind === 'recover' ? 'Restore Checkpoint' : preview.replace ? 'Replace and Import' : 'Import Life',
   } : null;
-  return <Page><Header title="Saved Lives" onBack={() => router.back()} /><Body muted>Your lives stay on this device. Export a file to keep a copy somewhere you choose.</Body>
+  return <Page><Header title="Saved Lives" onBack={() => router.back()} trailing={<Pressable accessibilityRole="button" accessibilityLabel="Settings" onPress={() => router.push('/settings')} style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }}><Ionicons name="settings-outline" size={25} color={c.ink} /></Pressable>} /><Body muted>Your lives stay on this device. Export a file to keep a copy somewhere you choose.</Body>
     {(message || error) && <Card><Body>{message ?? error}</Body></Card>}
     <Button label="Import a Save" onPress={() => { void importFile(); }} disabled={busy || working} />
     {lives.length === 0 && <Card><Body>No lives saved yet.</Body></Card>}

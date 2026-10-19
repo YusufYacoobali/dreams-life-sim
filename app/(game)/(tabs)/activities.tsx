@@ -1,4 +1,6 @@
 import React from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useColors } from '../../../src/ui/theme';
 import { router } from 'expo-router';
 import { ActionRow, Card, Header, Page } from '../../../src/ui/components';
 import { Illustration } from '../../../src/assets/Illustration';
@@ -9,6 +11,7 @@ import { TravelArt } from '../../../src/assets/TravelArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 
 export default function Activities() {
+  const c = useColors();
   const world = useGame(s => s.world)!, confined = isConfined(world);
   return <Page><Header title="Activities" />
     <Card>
@@ -24,6 +27,7 @@ export default function Activities() {
       <ActionRow title="Travel" subtitle="Holidays, emigration, work and study abroad" icon={<TravelArt id="passport" />} onPress={() => router.push('/travel')} />
       <ActionRow title="My Life" subtitle="Your identity and personal profile" icon={<Illustration id="journal" />} onPress={() => router.push({ pathname: '/profile', params: { tab: 'activities' } })} />
       <ActionRow title="Saved Lives" subtitle="Import, export or restore a checkpoint" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />
+      <ActionRow title="Settings" subtitle="Appearance and local saved lives" icon={<Ionicons name="settings-outline" size={30} color={c.muted} />} onPress={() => router.push('/settings')} />
       <ActionRow title="Time Machine" subtitle="Restore a historical moment as a new branch" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />
     </Card>
   </Page>;

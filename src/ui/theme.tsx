@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 export const lightColors = {
   background: '#F8F7F5',
@@ -50,3 +51,6 @@ export function ThemeProvider({
 }
 
 export const useColors = () => useContext(ThemeContext);
+export function ThemedStatusBar() {
+  const colors = useColors(); return <StatusBar style={colors === darkColors ? 'light' : 'dark'} />;
+}

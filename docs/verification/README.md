@@ -8,6 +8,7 @@ See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
   capture. `android29-opening-20261019.log` preserves selected native log lines;
   [the attempt](../NATIVE_OPENING.md) did not establish playable opening UI.
 
+- `display-settings-20261019.json` records 107 connected UI/state/persistence checks, actual preference failure/retry and independent save archives, plus native configuration introspection. It is not a native rendering pass.
 - `scholarships-v25-20261019.json` records the complete 983-test/64-suite checkpoint, actual SQLite aid journey and frozen game-source hash. Its twenty story drafts remain unintegrated.
 - `sqlite-history-v25-20261019.json` records the current scholarship-world default-choice repository life (236 commands / 79 moments), scoped separately from the connected aid journey.
 - `education-recovery-v24-20261019.json` records the clean 938-test/62-suite

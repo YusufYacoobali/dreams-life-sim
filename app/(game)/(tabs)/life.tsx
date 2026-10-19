@@ -70,6 +70,6 @@ export default function Life() {
       </Pressable>
       <Pressable accessibilityRole="button" accessibilityLabel="More Life Options" onPress={() => setMenu(true)} style={{ minWidth: 54, minHeight: 62, borderRadius: 15, backgroundColor: '#8795A4', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="ellipsis-horizontal" size={27} color="#FFFFFF" /></Pressable>
     </View>
-    <EventModal event={menu ? { id: 'life-menu', kind: 'selection', title: 'Your Life', body: 'Where would you like to go?', choices: [{ id: 'profile', label: 'My Life' }, { id: 'saves', label: 'Saved Lives' }, { id: 'time', label: 'Time Machine' }], confirmLabel: 'Open' } : null} onCancel={() => setMenu(false)} onChoose={id => { setMenu(false); router.push(id === 'profile' ? '/profile' : id === 'saves' ? '/saved-lives' : '/time-machine'); }} />
+    <EventModal event={menu ? { id: 'life-menu', kind: 'selection', title: 'Your Life', body: 'Where would you like to go?', choices: [{ id: 'profile', label: 'My Life' }, { id: 'saves', label: 'Saved Lives' }, { id: 'time', label: 'Time Machine' }, { id: 'settings', label: 'Settings' }], confirmLabel: 'Open' } : null} onCancel={() => setMenu(false)} onChoose={id => { setMenu(false); router.push(id === 'profile' ? '/profile' : id === 'saves' ? '/saved-lives' : id === 'settings' ? '/settings' : '/time-machine'); }} />
   </SafeAreaView>;
 }

@@ -12,6 +12,16 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+[Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/device mode
+with real SQLite failure/retry, corrupt-data recovery and unchanged whole-life
+exports. Shared pages set their own themed status-bar props. All 107 UI/state/
+persistence checks (36 suites, 100.108 seconds), final opening checks, strict
+typing, fresh Hermes exports and current Metro source pass. Automatic native
+appearance configuration is introspected with SDK-aligned `expo-system-ui`.
+The complete 983-test regression below precedes this UI follow-up; no overlapping
+tests are added into a new full-suite total. Native and baseline estimates remain
+unchanged, and simulation source is frozen for its continuing sweep.
+
 The basic creation form now places optional family controls under More Options
 and shows a selected royal family in the closed row. All fourteen relevant
 component checks pass, including country eligibility and actual royal birth

@@ -3,7 +3,6 @@ import { royalTitle } from '../src/game/systems/royaltyMath';
 import React, { useCallback } from 'react';
 import { BackHandler, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StatusBar } from 'expo-status-bar';
 import { Redirect, router, useFocusEffect } from 'expo-router';
 import { useGame } from '../src/state/useGame';
 import { countries } from '../src/game/countries';
@@ -20,7 +19,7 @@ export default function Birth() {
   if (world.birthAcknowledged) return <Redirect href="/life" />;
   const player = world.people[world.activePersonId], parents = world.relationships.filter(edge => edge.roles.includes('parent') && edge.to === player.id).map(edge => world.people[edge.from]);
   const born = months[player.born.month - 1] + ' ' + player.born.day + ', ' + player.born.year, membership = royalMembership(world);
-  return <Page bottomSafeArea><StatusBar style="dark" />
+  return <Page bottomSafeArea>
     <View style={{ alignItems: 'center', paddingTop: 26, gap: 14 }}>
       <View style={{ width: 230, height: 180, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ backgroundColor: '#D9F2FE', width: 158, height: 158, borderRadius: 79, alignItems: 'center', justifyContent: 'center' }}><Portrait name={fullName(player)} appearance={player.appearance} age={0} size={145} /></View>

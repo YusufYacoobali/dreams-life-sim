@@ -5,6 +5,17 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+[Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/Use Device
+Appearance independently of all lives. Writes publish only after SQLite succeeds;
+failed/corrupt/future preferences have retry/explicit reset without rewriting life
+archives. Shared pages set theme-aware status-bar props. All **107 UI/state/
+persistence checks / 36 suites** pass in **100.108 seconds**, plus the final six
+opening/navigation checks, strict typing, fresh Hermes exports (46 assets) and
+current Metro manifests/source. Expo config introspection confirms Android/iOS
+automatic support with SDK-aligned `expo-system-ui` 57.0.4. No native rendering or
+standalone build pass is claimed. The complete 983-test regression below predates
+this display follow-up; simulation source and its running sweep are unchanged.
+
 The basic creation form now keeps optional family background/preferences under
 More Options, with a visible summary for a selected royal family. All fourteen
 relevant component checks pass, including opening the optional controls, country

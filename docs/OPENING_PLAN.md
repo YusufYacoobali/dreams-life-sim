@@ -73,6 +73,8 @@ unrun checks with a percentage.
 
 ## Current implementation and verification
 
+- Local display settings now save Light/Dark/device mode independently of lives, and shared pages own their status-bar contrast. All 107 UI/state/persistence checks, final opening checks, strict typing, fresh Hermes exports and current Metro source pass. Android/iOS automatic appearance configuration is introspected with SDK-aligned `expo-system-ui`. This follows the complete 983-test game checkpoint without changing simulation source. [Scope and native limits](DISPLAY_SETTINGS.md). Baseline estimates remain unchanged.
+
 - Optional family background/preferences now sit under More Options, with the selected royal background visible while closed. All fourteen relevant component checks pass, including country eligibility and the actual royal save/retry/cold flow; strict typing, fresh Hermes exports and current Metro source pass. This follows the complete 983-test scholarship regression without changing game source. Native comparison and baseline estimates remain unchanged.
 
 - World 25 adds two restricted tuition scholarships with real saved applications, separate admission, explicit acceptance, billed remainders and grade/resource renewal. Forty-four domain checks, a real SQLite application/enrolment/renewal rollback-retry/cold journey, strict typing, both Hermes exports and current Metro source pass. The complete 983-test / 64-suite regression passes in 743.271 seconds; the new 120-life sweep is still running. The completed world-24 expanded results below remain historical. [Scope and remaining education gates](SCHOLARSHIPS.md). Twenty more early-life situations remain unintegrated drafts and do not increase the 70-story count. Baseline estimates are unchanged.

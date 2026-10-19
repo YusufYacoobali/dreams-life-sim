@@ -23,6 +23,16 @@ export class SaveCorrupt extends Error {
 export class SaveRepository {
   constructor(private db: SqlDatabase, private now: () => string = () => new Date().toISOString()) {}
 
+  async loadAppSettings(): Promise<string | null> {
+    const row = await this.db.get<{ value: string }>("SELECT value FROM preferences WHERE key='app_settings'");
+    return row?.value ?? null;
+  }
+
+  async saveAppSettings(value: string): Promise<void> {
+    if (value.length > 1024) throw new Error('App settings are too large');
+    await this.db.run("INSERT INTO preferences(key,value) VALUES('app_settings',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [value]);
+  }
+
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
     // Version four writes compressed live rows. Older apps must refuse the new
