@@ -9,6 +9,7 @@ import { hospitalized } from '../systems/healthSchemas';
 import { isConfined } from '../systems/legalSchemas';
 import { serviceAway } from '../systems/serviceSchemas';
 import { relationFor } from '../systems/relationships';
+import { storyParent } from '../systems/storyContext';
 
 /** Original situations, not random names placed in interchangeable success text. */
 export const eventTemplates: readonly EventTemplate[] = [
@@ -226,12 +227,12 @@ export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
   const parent = world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
   const context = schoolContext(world);
-  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || parent) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || parent) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
   const player = world.people[world.activePersonId];
-  const parent = world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
+  const parent = template.choices.some(choice => choice.followUp === 'arcade-invitation') ? storyParent(world) : world.relationships.find(r => r.to === player.id && r.kind === 'parent' && !world.people[r.from].died);
   if (template.parent && !parent) throw new Error('This event needs a living parent');
   const person = parent ? world.people[parent.from] : null, context = schoolContext(world);
   if (template.school && (!context.school || template.school !== 'any' && template.school !== context.school.stage) || template.classmate && !context.peer || template.teacher && !context.teacher) throw new Error('This event needs the current school contacts');
@@ -246,6 +247,7 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
       ...(choice.teacherBond && teacherRelation ? [{ kind: 'relationship' as const, relationshipId: teacherRelation.id, delta: choice.teacherBond }] : []),
       ...(choice.grades && context.school ? [{ kind: 'school-grade' as const, personId: player.id, communityId: context.school.id, delta: choice.grades }] : []),
       ...(choice.skill ? [{ kind: 'skill' as const, personId: player.id, skill: choice.skill.id, delta: choice.skill.delta }] : []),
+      ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id }] : []),
     ],
     resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
   }));

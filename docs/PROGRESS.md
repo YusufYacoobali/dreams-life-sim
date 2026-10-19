@@ -12,6 +12,16 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The user is moving work to a new cloud chat. Continue from **`origin/work`** and
+read [HANDOFF.md](HANDOFF.md) first. The transfer checkpoint includes partial
+world-23 school callbacks and one new project situation (50 source templates),
+their focused tests and a genuine world-22 migration fixture. The 28 new callback
+checks pass; broader acceptance remains open. It also preserves paused pet source
+and generated artwork as an unintegrated archive outside the application folders.
+The 779-test result below applies to the prior world-22 startup checkpoint; final
+world-23 handoff verification is recorded in the handoff. Overall completion
+estimates are unchanged.
+
 The earlier missing-reference blocker was a stale checkout. Fetching origin/main at ed084db brought in all 27 supplied images under design/. Every image has now been opened and reviewed; the [design reconciliation](planning/design-reconciliation.md) records dimensions, provenance, canonical sources, overlaps and all conflict resolutions.
 
 The user explicitly resolved the Premium/cloud reference in favour of a free, offline game with local saves/export/import. No further general plan approval is needed. Implementation can proceed under the existing full-game authorisation.

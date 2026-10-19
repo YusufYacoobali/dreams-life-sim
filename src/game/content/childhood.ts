@@ -87,9 +87,18 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     id: 'school-arcade-invitation', min: 6, max: 11, parent: true, school: 'primary', classmate: true, illustration: 'birthday', title: 'Birthday invitation',
     body: '{classmate} invites you to a birthday party at an arcade. The invitation has more glitter than useful information.',
     choices: [
-      o('ask', 'Ask {parent} to check the details', { discipline: 2 }, 'Adults need an address', '{parent} helps you ask about the time and who will be supervising. You thank {classmate} for inviting you.', 'I asked {parent} to check {classmate}’s birthday invitation.', 2, { peerBond: 3 }),
+      o('ask', 'Ask {parent} for permission', { discipline: 2 }, 'Adults need an address', '{parent} checks the time and supervision. Their answer and any plan are recorded below. Nothing is paid just for asking.', 'I asked {parent} for permission to go to {classmate}’s arcade birthday.', 2, { peerBond: 3, followUp: 'arcade-invitation' }),
       o('details', 'Ask {classmate} for more details', { smarts: 2 }, 'Actual information', 'You find the date hidden under a glitter sticker. Now you can talk it over at home.', 'I asked {classmate} for the details of their birthday party.', undefined, { peerBond: 2 }),
       o('decline', 'Politely decline', { respect: 2 }, 'No hard feelings', 'You thank {classmate}. You can still spend time together at school.', 'I politely declined {classmate}’s birthday invitation.'),
+    ],
+  },
+  {
+    id: 'school-project-promise', min: 7, max: 16, school: 'any', classmate: true, teacher: true, illustration: 'education', title: 'Your name on the cover',
+    body: '{classmate} asks you to share a class project. {teacher} has given you two months. That sounds like a problem for Future You.',
+    choices: [
+      o('promise', 'Promise to write your section', { discipline: 1 }, 'Future You has been notified', 'You agree on a section to write. The deadline is saved; agreeing has not completed any work.', 'I agreed to write a section of a class project with {classmate}.', undefined, { peerBond: 1, followUp: 'project-promise' }),
+      o('separate', 'Ask to work separately', { respect: 2 }, 'Your own name, your own work', '{teacher} agrees that you can work separately. No shared project is scheduled.', 'I chose to work separately instead of making a project promise.'),
+      o('honest', 'Admit you cannot commit', { respect: 3 }, 'An early answer beats an empty page', '{classmate} appreciates knowing before the deadline. You do not make a promise you cannot keep.', 'I told {classmate} I could not commit to a shared project.'),
     ],
   },
   {

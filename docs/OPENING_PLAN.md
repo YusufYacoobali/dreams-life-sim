@@ -24,7 +24,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% | Paused, unintegrated work; persistent gameplay and native surfaces still pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% | 49 of at least 250 implemented; full coverage/editorial/release review remains open |
+| Distinct situational stories | 20% | 50 in the source catalogue; callback handoff acceptance, full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 

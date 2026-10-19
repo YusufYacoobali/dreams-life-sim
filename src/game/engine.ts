@@ -39,6 +39,7 @@ import { serviceAway } from './systems/serviceSchemas';
 import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resolveService } from './systems/services';
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 import { refreshSchools, resolveSchool, SchoolCommand, schoolCommandSchema, schoolMonth } from './systems/school';
+import { refreshStoryThreads, resolveStory, scheduleStory, storyMonth } from './systems/stories';
 export { IneligibleAction } from './errors';
 
 export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand;
@@ -81,6 +82,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
     if (related) journal(world, 'death_' + personId, fullName(person) + ' died at age ' + ageOn(person, world.date) + '.', 'family');
   }
   settleEstate(world, personId);
+  refreshStoryThreads(world);
 }
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
@@ -125,6 +127,7 @@ function processMonth(world: World) {
     }
   }
   travelMonth(world);
+  storyMonth(world);
 }
 
 function finishYear(world: World) {
@@ -167,6 +170,8 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
+    if (effect.kind === 'resolve-story') return resolveStory(world, effect.threadId, effect.resolution);
     if (effect.kind === 'brand-decision') return brandDecision(world, effect.sponsorId, effect.accepted);
     if (effect.kind === 'public-response') return respondPublicly(world, effect.controversyId, effect.response);
     if (effect.kind === 'legal-bail') return payBail(world, effect.caseId);
@@ -229,7 +234,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   const world = validateWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); world.revision++; return validateWorld(world);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshStoryThreads(world); world.revision++; return validateWorld(world);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -310,6 +315,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   refreshRoyalSuccession(world,'background');
   refreshTrips(world);
   refreshSchools(world);
+  refreshStoryThreads(world);
   world.revision++;
   return validateWorld(world);
 }

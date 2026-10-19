@@ -37,6 +37,8 @@ import { validateRelocations } from './systems/relocationValidation';
 import { tripSchema } from './systems/travelSchemas';
 import { validateTravel } from './systems/travelValidation';
 import { schoolCommunitySchema } from './systems/schoolSchemas';
+import { storyThreadSchema } from './systems/storySchemas';
+import { validateStoryThreads } from './systems/storyValidation';
 import { validateSchools } from './systems/schoolValidation';
 
 const percentage = z.number().int().min(0).max(100);
@@ -65,7 +67,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(22), engineVersion: z.literal(21), contentVersion: z.literal(1),
+  schemaVersion: z.literal(23), engineVersion: z.literal(22), contentVersion: z.literal(2),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -91,7 +93,7 @@ export const worldSchema = z.object({
   musicReleases: z.array(musicReleaseSchema),
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
-  trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema),
+  trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -274,6 +276,7 @@ export function validateWorld(value: unknown): World {
   validateEarnings(world);
   validateTravel(world);
   validateSchools(world);
+  validateStoryThreads(world);
   validateRelocations(world);
   validateCareers(world);
   validateMusic(world);
@@ -405,5 +408,6 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 19) { parsed.schemaVersion = 20; parsed.engineVersion = 19; parsed.relocations = []; }
   if (parsed && parsed.schemaVersion === 20) { parsed.schemaVersion = 21; parsed.engineVersion = 20; parsed.schoolCommunities = []; }
   if (parsed && parsed.schemaVersion === 21) { parsed.schemaVersion = 22; parsed.engineVersion = 21; }
+  if (parsed && parsed.schemaVersion === 22) { parsed.schemaVersion = 23; parsed.engineVersion = 22; parsed.contentVersion = 2; parsed.storyThreads = []; }
   return validateWorld(parsed);
 }
