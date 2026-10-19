@@ -73,6 +73,8 @@ unrun checks with a percentage.
 
 ## Current implementation and verification
 
+- Optional family background/preferences now sit under More Options, with the selected royal background visible while closed. All fourteen relevant component checks pass, including country eligibility and the actual royal save/retry/cold flow; strict typing, fresh Hermes exports and current Metro source pass. This follows the complete 983-test scholarship regression without changing game source. Native comparison and baseline estimates remain unchanged.
+
 - World 25 adds two restricted tuition scholarships with real saved applications, separate admission, explicit acceptance, billed remainders and grade/resource renewal. Forty-four domain checks, a real SQLite application/enrolment/renewal rollback-retry/cold journey, strict typing, both Hermes exports and current Metro source pass. The complete 983-test / 64-suite regression passes in 743.271 seconds; the new 120-life sweep is still running. The completed world-24 expanded results below remain historical. [Scope and remaining education gates](SCHOLARSHIPS.md). Twenty more early-life situations remain unintegrated drafts and do not increase the 70-story count. Baseline estimates are unchanged.
 
 - Creation, appearance and newborn pages reserve the bottom safe area. Strict typing, eleven relevant component checks and fresh Android/iOS Hermes exports pass. The lighter Android 29 software attempt reproduced a System UI ANR before the game launched; no native opening pass is claimed. [Actual capture and scoped evidence](NATIVE_OPENING.md). Baseline estimates remain unchanged.

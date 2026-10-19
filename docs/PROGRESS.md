@@ -12,6 +12,14 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The basic creation form now places optional family controls under More Options
+and shows a selected royal family in the closed row. All fourteen relevant
+component checks pass, including country eligibility and actual royal birth
+save/retry/cold resume. Strict typing, fresh Android/iOS Hermes exports and
+current Metro source pass. Simulation source is unchanged from `c09ec6b`; the
+complete 983-test scholarship regression below precedes this small UI follow-up.
+Native layout acceptance and baseline estimates remain unchanged.
+
 Creation, appearance and newborn pages now reserve the bottom safe area for
 their final controls. Strict source/test typing, all eleven relevant component
 checks and fresh Android/iOS Hermes exports pass. A second, lighter Android 29

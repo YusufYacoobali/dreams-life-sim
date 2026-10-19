@@ -7,9 +7,7 @@ frozen. It is not imported by the application and does not increase the current
 then add content migration, contextual tests, connected gameplay and editorial
 review before counting any addition.
 
-The next opening layout pass should keep optional family background and future
-family preferences under More Options, with a clear summary of the current
-background. The avatar remains the entry to appearance editing. Check ordinary
-and royal selection, country-change eligibility and draft preservation after
-navigation. This should shorten the basic form without removing those choices.
-Native viewport, keyboard and large-text acceptance remain open.
+The opening layout follow-up now keeps optional family background/preferences
+under More Options, with a selected royal-background summary. Fourteen relevant
+component checks, strict typing, fresh Hermes exports and current Metro source
+pass. Native viewport, keyboard and large-text acceptance remain open.

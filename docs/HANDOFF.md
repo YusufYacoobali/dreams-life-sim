@@ -5,6 +5,13 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+The basic creation form now keeps optional family background/preferences under
+More Options, with a visible summary for a selected royal family. All fourteen
+relevant component checks pass, including opening the optional controls, country
+eligibility and the actual royal birth/save-failure/retry/cold path. Strict typing,
+fresh Android/iOS Hermes exports and current Metro source pass. Game source is
+unchanged from the verified scholarship milestone. Native layout remains open.
+
 Creation, appearance and newborn pages now reserve the bottom safe area, keeping
 their final controls above the home indicator/navigation region. Strict source/
 test typing, eleven relevant component checks and fresh Android/iOS Hermes

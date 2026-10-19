@@ -14,7 +14,8 @@
     "tests": 983,
     "suites": 64,
     "seconds": 743.271,
-    "coreLives": 12
+    "coreLives": 12,
+    "sourceCommit": "c09ec6b"
   },
   "newScholarshipDomainChecks": 44,
   "strictTypes": true,
@@ -54,5 +55,22 @@
     "native opening, matched reference comparison, accessibility and hardware timing/memory",
     "1000-seed/person, 120-year and multi-generation gates",
     "pets/hobbies/entertainment, extras and complete content/art/release plan"
-  ]
+  ],
+  "openingFollowUp": {
+    "change": "Move optional family controls under More Options; retain selected royal summary",
+    "gameSourceUnchanged": true,
+    "relevantComponentTests": 14,
+    "suites": 4,
+    "seconds": 13.643,
+    "strictTypes": true,
+    "freshHermesExports": [
+      "android",
+      "ios"
+    ],
+    "metroCurrentManifestAndSourceHTTP200": [
+      "android",
+      "ios"
+    ],
+    "nativeAcceptance": false
+  }
 }
