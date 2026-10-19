@@ -4,7 +4,21 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-The current world-24 education checkpoint passes the clean 938-test / 62-suite
+The current world-25 scholarship candidate has 44 passing domain checks and
+an actual connected SQLite application/enrolment/renewal failure/retry/cold flow.
+Its complete **983-test / 64-suite** regression passes in **743.271 seconds**.
+The new 120-life pure-engine sweep remains in progress with frozen game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
+No completed current-world expanded result is claimed yet.
+
+The current real SQLite default-choice life completes 236 commands and retains
+all 79 historical moments, measuring 29,986,816 bytes closed / 36,397,376 peak.
+Historical payloads total 27,380,707 bytes and cold reload matches the whole world.
+[The world-25 record](verification/sqlite-history-v25-20261019.json) pins the
+source/driver hashes and separate scope from the aid journey. Cloud command p95
+is 1,937.4 ms and cold load 1,151.0 ms while other checks run. No native or controlled
+speed comparison, plain-row baseline or 120-year/multi-generation pass is claimed.
+
+The prior world-24 education checkpoint passes the clean 938-test / 62-suite
 regression in 697.17 seconds and a separate **120/120-life** pure-engine sweep in
 **2,040.171 seconds**, with unchanged
 game-source hash `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.

@@ -20,6 +20,22 @@ System UI ANR. Expo Go installation/local Metro connection did not establish
 usable opening gameplay. [Captured evidence and limits](NATIVE_OPENING.md)
 are retained; native acceptance and baseline percentages remain unchanged.
 
+World **25 / engine 24 / content 3** adds [tuition scholarships](SCHOLARSHIPS.md)
+with saved eligibility/draws, separate admission, explicit acceptance and actual
+bill reductions. Loans cover only the remainder; full waivers draw nothing.
+Renewal occurs with actual tuition years and records the grade/resource assessment.
+All **44 new domain checks** and the real SQLite application/enrolment/renewal
+write-failure/retry/cold journey pass. Genuine world-24 current/prior saves retain
+their original tuition, debt and progress with empty new award histories. Strict
+typing, fresh Android/iOS Hermes exports and current Metro manifests/source pass.
+The complete **983-test / 64-suite** current regression passes in **743.271
+seconds**. The fresh 120-life sweep remains in progress against frozen game hash `4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
+No completed current-world expanded pass is claimed yet. Twenty additional childhood
+situations are unintegrated drafts; the active catalogue stays at 70. Native,
+full national stages and broader production acceptance remain open.
+
+### Prior world-24 school outcome/recovery milestone
+
 World **24 / engine 23 / content 3** now records school completion and attended
 evening study. A secondary qualification needs 50% grades and twelve recorded
 study months at the configured age. Failed students can take a no-fee 24-month
@@ -163,7 +179,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
 | 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
-| 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery implemented; scholarships, national stage depth and broader acceptance remain pending |
+| 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery and restricted tuition scholarships implemented; national stage depth and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
 | 6 — Content, depth, legacy, Time Machine | In progress | 70 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
@@ -177,7 +193,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
 | Context-aware events, decisions, delayed consequences and journal | Partial: 70 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; file picker/share require device validation |
-| Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt; scholarships/adult remediation pending | Twelve profile boundary tests and connected school→degree→qualified job scenario pass |
+| Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt, attended adult remediation and restricted scholarships; national stage/qualification depth remains pending | Twelve profile boundaries, school→degree→qualified job, 44 scholarship checks and connected SQLite aid rollback/retry/cold journeys pass; national and native acceptance remain open |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |
 | Dating, marriage, children, divorce, custody and persistent NPCs | Partial: persistent courtship/marriage/households, NPC finances, nine-month pregnancy, births/inherited DNA, adoption, family tree, divorce equalisation, primary/shared care, support and guardianship; deeper autonomous NPC lives/legal proceedings pending | Domain conservation/gates, connected courtship and birth interruptions, genuine migration, native introduction/adoption→real SQLite flows; device acceptance pending |
 | Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | Partial: reconciled ledger; nineteen offers; mortgages, rent, upkeep, insurance/loss claims, sale offers, refinancing, forced sale, household shares and estate integration | Conservation and native-component→engine→real-SQLite purchase failure/retry pass; native-device acceptance pending |

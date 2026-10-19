@@ -37,10 +37,9 @@ monthly progression. Loading an old save must not invent prior attendance,
 retroactively fail a completed qualification, generate teachers or consume RNG.
 Health, travel and custody must pause actual attendance credits appropriately.
 
-Adult remediation needs completed work and a passing result. Scholarships need
-saved eligibility/decisions, real restricted tuition support and payment
-reconciliation; they must not grant a seat, qualification or spendable cash merely
-for browsing or applying. Costs and eligibility still need separate source work.
+The attended remediation courses and fictional institutional scholarships are now implemented through actual commands and restricted tuition bills; see [recovery](EDUCATION_RECOVERY.md) and [scholarships](SCHOLARSHIPS.md). These shared game rules do not verify national equivalency, fee or aid policies. Costs and country-specific eligibility still need separate source work.
+
+A follow-up found current indexed Ontario Education Act section 21 and two official India Code PDFs, but direct retrieval returned Ontario HTTP403 and India timeouts. No new operative text was read or country gate closed from those search snippets.
 
 Country-specific fees, tax, employment, healthcare, family, criminal, immigration
 and estate rules remain outside this narrow audit. See [COUNTRY_RULES.md](COUNTRY_RULES.md)

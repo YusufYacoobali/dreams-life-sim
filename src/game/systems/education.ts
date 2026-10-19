@@ -6,7 +6,7 @@ import { ageOn, Person, World } from '../model';
 import { IneligibleAction } from '../errors';
 import { rules } from '../rules';
 import { fields } from './schemas';
-import { accountFor, active, borrow, bounded, charge, draw, fact, result } from './common';
+import { accountFor, active, availableCash, borrow, bounded, charge, draw, fact, result } from './common';
 import { formatMoney } from '../money';
 import { jobs } from '../content/jobs';
 import { hospitalized } from './healthSchemas';
@@ -16,9 +16,10 @@ import { campaignCommitment } from './politicsSchemas';
 import { currentRecovery } from './educationRecoverySchemas';
 import { completeSecondary, hasSecondary } from './educationRecovery';
 import { serviceAway } from './serviceSchemas';
+import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']) }),
+  z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']), scholarshipId: z.string().optional() }),
   z.object({ type: z.literal('study') }),
   z.object({ type: z.literal('study-effort'), effort: z.enum(['relaxed', 'balanced', 'focused']) }),
   z.object({ type: z.literal('leave-school') }),
@@ -48,33 +49,44 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (education.qualifications.some(q => q.level === (program === 'university' ? 'degree' : program === 'graduate' ? field : 'trade') && q.field === field)) return 'You already hold this qualification';
   if (world.actionCounts[person.id + ':education:' + world.date.year + ':' + program + ':' + field]) return 'You already applied for this course this year';
 }
-function payTuition(world: World, funding: 'cash' | 'loan') {
+function payTuition(world: World, funding: 'cash' | 'loan', waiver = tuitionWaiver(world, active(world))) {
   const person = active(world); const education = person.education;
-  if (funding === 'loan') borrow(world, education.tuition, 'student', rules[person.country].studentInterestBps);
-  charge(world, education.tuition, 'tuition', 'Tuition: ' + education.school);
+  const billed = education.tuition - (waiver?.waived ?? 0n);
+  let loanTransactionId: string | null = null;
+  if (funding === 'loan' && billed > 0n) { borrow(world, billed, 'student', rules[person.country].studentInterestBps); loanTransactionId = world.ledger.at(-1)!.id; }
+  charge(world, billed, 'tuition', 'Tuition: ' + education.school);
+  if (waiver) waiver.item.periods.push({ date: { ...world.date }, studyMonth: education.tuitionPaidMonths, grades: education.grades, resources: waiver.resources, grossTuition: education.tuition, waived: waiver.waived, billed, funding, transactionId: billed > 0n ? world.ledger.at(-1)!.id : null, loanTransactionId });
   education.funding = funding; education.paused = false; education.tuitionPaidMonths += 12;
 }
 /** A confirmed admission starts with no completed study and a real annual tuition payment. */
-export function startCourse(world: World, program: 'university' | 'trade' | 'graduate', field: typeof fields[number], funding: 'cash' | 'loan', school?: string) {
+export function startCourse(world: World, program: 'university' | 'trade' | 'graduate', field: typeof fields[number], funding: 'cash' | 'loan', school?: string, scholarshipId?: string) {
   const person = active(world), education = person.education;
   education.stage = program; education.field = field; education.school = school ?? person.city + (program === 'trade' ? ' Technical College' : ' University');
   education.months = 0; education.requiredMonths = courseMonths(program, field);
-  education.tuition = tuitionFor(person, program); education.tuitionPaidMonths = 0; payTuition(world, funding);
+  education.tuition = tuitionFor(person, program); education.tuitionPaidMonths = 0;
+  activateScholarship(world, scholarshipId, program, field); payTuition(world, funding);
 }
 export function resolveEducation(world: World, command: EducationCommand) {
   const person = active(world); const education = person.education;
   if (command.type === 'enroll') {
     const reason = enrollmentReason(world, command.program, command.field); if (reason) throw new IneligibleAction(reason);
     const tuition = tuitionFor(person, command.program);
-    if (command.funding === 'cash' && accountFor(world).cash < tuition) throw new IneligibleAction('Your balance cannot cover the first year’s tuition');
+    let waived = 0n;
+    if (command.scholarshipId) {
+      const item = world.scholarships.find(candidate => candidate.id === command.scholarshipId);
+      if (!item) throw new IneligibleAction('Choose an available scholarship offer');
+      const offerReason = scholarshipOfferReason(world, item, command.program, command.field); if (offerReason) throw new IneligibleAction(offerReason);
+      waived = scholarshipWaiver(item, tuition);
+    }
+    if (command.funding === 'cash' && availableCash(accountFor(world)) < tuition - waived) throw new IneligibleAction('Your balance cannot cover the first year’s tuition');
     world.actionCounts[person.id + ':education:' + world.date.year + ':' + command.program + ':' + command.field] = 1;
     if (draw(world, 'outcomes', 1, 100) > Math.min(95, 20 + Math.round((education.grades + person.stats.smarts) / 2))) {
       fact(world, 'My application to study ' + command.field + ' was declined.', 'education');
       result(world, 'Application declined', 'The course did not offer you a place. Your money has not been spent.', 'education'); return;
     }
-    startCourse(world, command.program, command.field, command.funding);
+    startCourse(world, command.program, command.field, command.funding, undefined, command.scholarshipId);
     fact(world, 'I enrolled at ' + education.school + ' to study ' + command.field + '.', 'education');
-    result(world, 'You’re enrolled', 'Your place is confirmed. Tuition is charged each year; your funding choice stays in place until you change it.', 'education', [{ id: 'tuition', label: 'First-year tuition', value: formatMoney({ minor: tuition, currency: accountFor(world).currency }), tone: 'negative' }]);
+    result(world, 'You’re enrolled', 'Your place is confirmed. Tuition is charged for each year of study. ' + (waived ? 'Your scholarship waives part or all of tuition; renewal requirements apply. ' : '') + 'Living costs are separate.', 'education', [{ id: 'tuition', label: 'First-year tuition billed', value: formatMoney({ minor: tuition - waived, currency: accountFor(world).currency }), tone: tuition === waived ? 'neutral' : 'negative' }, ...(waived ? [{ id: 'waived', label: 'Tuition waived', value: formatMoney({ minor: waived, currency: accountFor(world).currency }), tone: 'positive' as const }] : [])]);
   } else if (command.type === 'study') {
     if (education.stage === 'none' || education.paused) throw new IneligibleAction('You need an active course to study');
     if (education.lastStudyYear === world.date.year) throw new IneligibleAction('You have already done extra study this year');
@@ -117,11 +129,12 @@ export function educationMonth(world: World, person: Person) {
   }
   if (education.stage === 'none' || education.paused) return;
   if (education.months >= education.tuitionPaidMonths && education.tuition > 0n && isPlayer) {
-    if (education.funding === 'cash' && accountFor(world).cash < education.tuition) {
+    const waiver = tuitionWaiver(world, person), billed = education.tuition - (waiver?.waived ?? 0n);
+    if (education.funding === 'cash' && availableCash(accountFor(world)) < billed) {
       education.paused = true;
       fact(world, 'My studies paused because I could not cover the next tuition payment. My completed work is preserved.', 'education'); return;
     }
-    payTuition(world, education.funding === 'loan' ? 'loan' : 'cash');
+    payTuition(world, education.funding === 'loan' ? 'loan' : 'cash', waiver);
   }
   education.months++;
   if (education.months % 12 === 0) {
@@ -135,6 +148,7 @@ export function educationMonth(world: World, person: Person) {
       education.qualifications.push({ level, field: education.field, year: world.date.year });
       if (isPlayer) fact(world, 'I completed my ' + education.field + ' ' + (level === 'degree' ? 'degree' : 'qualification') + ' with grades of ' + education.grades + '%.', 'education');
     } else if (isPlayer) fact(world, 'I finished the course but did not meet the passing grade. I was not awarded the qualification.', 'education');
+    finishScholarship(world, person, education.grades >= 50);
     education.stage = 'none'; education.paused = false; education.tuition = 0n;
   }
 }

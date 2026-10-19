@@ -1,0 +1,58 @@
+{
+  "recordedOn": "2026-10-19",
+  "basedOnCommit": "0422a0f",
+  "versions": {
+    "world": 25,
+    "engine": 24,
+    "content": 3,
+    "database": 4
+  },
+  "gameSourceHash": "4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8",
+  "fullRegression": {
+    "command": "npm test",
+    "exitCode": 0,
+    "tests": 983,
+    "suites": 64,
+    "seconds": 743.271,
+    "coreLives": 12
+  },
+  "newScholarshipDomainChecks": 44,
+  "strictTypes": true,
+  "hermesExports": [
+    "android",
+    "ios"
+  ],
+  "bundledAssets": 46,
+  "metroCurrentManifestAndSourceHTTP200": [
+    "android",
+    "ios"
+  ],
+  "scholarshipUi": {
+    "realSQLite": true,
+    "genuineHistoricalPupil": true,
+    "actualSchoolCompletion": true,
+    "applicationRollbackRetry": true,
+    "enrolmentPaymentLoanRollbackRetry": true,
+    "renewalRollbackRetry": true,
+    "coldExactResume": true,
+    "oldFutureFullTuitionPreserved": true
+  },
+  "storageRecord": "sqlite-history-v25-20261019.json",
+  "expandedSweepAtCheckpoint": "world25 120-life sweep in progress; no completed current-world expanded result claimed",
+  "drafts": {
+    "activeCatalogue": 70,
+    "unintegratedTemplates": 20,
+    "draftSourceSha256": "7e6ea8d435554d5ec6a5d00f6de84d8bbc3690e60cabef654c9d385acdef0048",
+    "countriesReviewed": 12,
+    "boundDraftDecisions": 240,
+    "resolvedDraftChoices": 720,
+    "catalogueIncrement": 0
+  },
+  "remaining": [
+    "national and regional school stages and qualification paths",
+    "broader admissions, household tuition support and country-specific source verification",
+    "native opening, matched reference comparison, accessibility and hardware timing/memory",
+    "1000-seed/person, 120-year and multi-generation gates",
+    "pets/hobbies/entertainment, extras and complete content/art/release plan"
+  ]
+}

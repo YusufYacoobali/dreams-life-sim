@@ -14,8 +14,24 @@ reproduced a System UI ANR before Expo Go launched; installation/Metro connectio
 did not yield usable gameplay. Its actual OS-failure screenshot/logs are retained.
 The isolated software emulator is stopped. Native opening gates remain open.
 
-The latest continuation adds **actual school outcomes and evening recovery**;
-see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). Current versions are **world
+The current production milestone is **world 25 / engine 24 / content 3 /
+database 4**, adding two [restricted tuition scholarships](SCHOLARSHIPS.md).
+They use saved applications, separate admission, explicit acceptance and actual
+tuition waivers rather than cash grants. Renewal records grades/resources and
+reconciles the remaining bill and loan to the ledger. All 44 new domain checks
+and the real SQLite application/enrolment/renewal rollback-retry/cold journey
+pass. The complete **983-test / 64-suite** regression passes in **743.271
+seconds**, with strict typing, fresh Android/iOS Hermes exports (46 assets) and
+current Metro manifests/source bundles. The new 120-life sweep remains running;
+no completed world-25 expanded result is claimed yet. The frozen
+world-25 game hash is
+`4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
+Do not change game source while the sweep runs or claim completion before exit
+zero and its final unchanged-hash summary. Twenty more early-life situations
+are unintegrated drafts under `docs/planning/drafts/`; they are not counted.
+
+The previous milestone adds **actual school outcomes and evening recovery**;
+see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). That milestone used **world
 24 / engine 23 / content 3 / database 4**. At the configured school-completion
 age, 50% grades and twelve recorded study months are required. Failure grants
 no qualification. Two no-fee evening paths fit around work: 24 attended months

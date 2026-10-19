@@ -1,6 +1,7 @@
 # School outcomes and evening recovery
 
-World 24 / engine 23 / content 3. These are authored game-course rules, not
+Introduced in world 24 / engine 23 / content 3 and retained in world 25.
+These are authored game-course rules, not
 verified national exam, attendance, fee or equivalency policies. Country entry
 and completion ages remain unchanged; [the source audit](EDUCATION_SOURCE_AUDIT.md)
 and deeper regional/stage work remain open.
@@ -71,5 +72,5 @@ with unchanged source hash. A real 236-command SQLite life retains all 79 histor
 moments and cold-reloads the entire world exactly. Native visual, timing, country accuracy and
 complete education acceptance remain open.
 
-Scholarships and restricted tuition support are not implemented by these free
-evening courses. The broader production backlog remains in [PROGRESS.md](PROGRESS.md).
+The separate [world-25 scholarship feature](SCHOLARSHIPS.md) provides restricted
+tuition support for new higher courses. These free evening courses need no award. The broader production backlog remains in [PROGRESS.md](PROGRESS.md).

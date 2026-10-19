@@ -16,7 +16,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Life screen and early childhood | 55% baseline | More early-story callbacks and native layout/interaction review |
 | Core simulation and Age Up | 80% | Broad system integration, long-life balance and performance |
 | Saves/recovery/export/import | 80% | Native picker/share, large archives and release acceptance |
-| Education and ordinary work | 70% | School contacts and evening recovery implemented; scholarships, country/stage depth and native acceptance remain |
+| Education and ordinary work | 70% | School contacts, evening recovery and tuition scholarships implemented; country/stage depth and native acceptance remain |
 | Relationships/family/inheritance | 75% | Broader autonomous-life depth, integrated scenarios and device acceptance |
 | Assets and finances | 80% | Balance, broad integration and native acceptance |
 | Health and crime/legal | 70% | Rule-source verification, balance, integrated scenarios and native acceptance |
@@ -72,6 +72,8 @@ unrun checks with a percentage.
 
 
 ## Current implementation and verification
+
+- World 25 adds two restricted tuition scholarships with real saved applications, separate admission, explicit acceptance, billed remainders and grade/resource renewal. Forty-four domain checks, a real SQLite application/enrolment/renewal rollback-retry/cold journey, strict typing, both Hermes exports and current Metro source pass. The complete 983-test / 64-suite regression passes in 743.271 seconds; the new 120-life sweep is still running. The completed world-24 expanded results below remain historical. [Scope and remaining education gates](SCHOLARSHIPS.md). Twenty more early-life situations remain unintegrated drafts and do not increase the 70-story count. Baseline estimates are unchanged.
 
 - Creation, appearance and newborn pages reserve the bottom safe area. Strict typing, eleven relevant component checks and fresh Android/iOS Hermes exports pass. The lighter Android 29 software attempt reproduced a System UI ANR before the game launched; no native opening pass is claimed. [Actual capture and scoped evidence](NATIVE_OPENING.md). Baseline estimates remain unchanged.
 
