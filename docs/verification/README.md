@@ -4,6 +4,12 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `education-recovery-v24-20261019.json` records the clean 938-test/62-suite
+  world-24 checkpoint, actual SQLite recovery journey and its exact source hash.
+- [school-art-20261019.png](school-art-20261019.png) records browser compositing
+  of the original six-subject PNG at 48/128px on light/dark cards. It is not a
+  native app capture.
+
 - `checkpoint-base64-20261019.json` compares the exact old/current decoder on the
   same input and records 10,000 differential cases. It measures base64 only.
 - `history-content3-20261019.json` records one actual current-content history,

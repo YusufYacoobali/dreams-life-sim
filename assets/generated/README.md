@@ -1,5 +1,28 @@
 # Original game artwork
 
+school-atlas.png was generated on 19 October 2026 as an original six-subject
+school/evening-study family. The unmodified 1536×1024 RGBA original remains at
+/workspace/generated_images/exec-535e69eb-34ca-4425-b0a2-15d73d4b8cc9.png.
+SHA-256: `60800298fd36cb6eeb74a51f7044b619f460f430ea7df786f758ecbb1158671e`.
+
+The brief specifies rounded, softly dimensional cartoon objects, consistent
+lighting, jewel blues/warm gold/coral, transparent gaps and no text/logos. Its
+six subjects are a study book/pencil, shared class project, arcade birthday,
+school-trip minibus, report folder and evening book/lamp/work briefcase. Measured
+rectangles in src/assets/schoolLayout.ts clip the original pixels. The apparent
+coloured background in the raw RGB preview is fully transparent in the gaps;
+browser compositing confirms clean silhouettes on light/dark cards at 48/128px.
+No opaque subject reaches a crop boundary; measured edge alpha is at most 1/255.
+
+An image-tool edit attempt is retained outside the bundle at
+/workspace/generated_images/exec-2ea9702b-c358-4952-9442-4ae9510ab297.png.
+The original was selected for its better spacing after composited inspection.
+The optional tools/preview-school.cjs reproduces the gallery. Status: generated,
+source/browser reviewed, exported and integrated into study, reports, saved
+arcade/project plans and evening classes. The recorded browser gallery is in
+docs/verification/school-art-20261019.png. Native-device acceptance remains pending. The trip subject is reserved for later
+school-trip content and is not evidence of a new trip mechanic.
+
 activity-atlas.png was generated with the image-generation tool on 18 October
 2026 for Dreams: Life Simulator. The original output is retained separately at
 /workspace/generated_images/exec-3acd6307-af4d-4200-a67c-6aedfb64e8f3.png.

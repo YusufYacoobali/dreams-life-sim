@@ -24,7 +24,7 @@ export function refreshSchools(world: World) {
   for (const community of world.schoolCommunities.filter(item => !item.ended)) {
     const person = world.people[community.personId];
     if (person.died || person.education.stage !== community.stage || person.education.school !== community.school || person.country !== community.country || person.city !== community.city) {
-      community.ended = { ...world.date }; community.endReason = person.died ? 'died' : person.education.stage === 'none' && person.education.qualifications.some(item => item.level === 'secondary') ? 'graduated' : 'changed-school';
+      community.ended = { ...world.date }; community.endReason = person.died ? 'died' : person.education.stage === 'none' && person.education.qualifications.some(item => item.level === 'secondary') ? 'graduated' : person.education.stage === 'none' && world.schoolCompletions.some(item => item.personId === person.id && !item.passed && item.school === community.school) ? 'unqualified' : 'changed-school';
     }
   }
 }

@@ -88,15 +88,19 @@ test('qualification, study and hiring gates cannot be bypassed by direct command
   expect(() => resolveCommand(employed, { type: 'enroll', program: 'university', field: 'computing', funding: 'loan' })).toThrow(/Resign/);
 });
 
-test('school progression starts locally and awards secondary qualifications at the configured completion age', () => {
+test('school progression uses actual study months and passing grades at the configured completion age', () => {
   for (const code of countryCodes) {
-    const world = fixture(code); const person = world.people[world.activePersonId]; person.education = newEducation();
-    world.date.year = person.born.year + rules[code].schoolStart;
+    const world = createLife('life_school_path', 42, { ...randomCreation(42), country: code, city: countries[code].cities[0] }, { year: 2000, month: 1, day: 1 });
+    const person = world.people[world.activePersonId]; person.stats.smarts = 90; person.stats.discipline = 80;
+    world.date.year += rules[code].schoolStart;
     educationMonth(world, person); expect(person.education.stage).toBe('primary');
-    world.date.year = person.born.year + rules[code].secondaryStart;
-    educationMonth(world, person); expect(person.education.stage).toBe('secondary');
-    world.date.year = person.born.year + rules[code].schoolEnd;
-    educationMonth(world, person); expect(person.education.qualifications.some(q => q.level === 'secondary')).toBe(true);
+    let sawSecondary = false;
+    while (world.date.year < person.born.year + rules[code].schoolEnd) {
+      world.date = { year: world.date.year + (world.date.month === 12 ? 1 : 0), month: world.date.month % 12 + 1, day: 1 };
+      educationMonth(world, person); if (person.education.stage === 'secondary') sawSecondary = true;
+    }
+    expect(sawSecondary).toBe(true); expect(person.education.qualifications.some(q => q.level === 'secondary')).toBe(true);
+    expect(world.schoolCompletions[0].recordedStudyMonths).toBeGreaterThanOrEqual(12); validateWorld(world);
   }
 });
 

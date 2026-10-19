@@ -40,9 +40,10 @@ import { ServiceCommand, serviceCommandSchema, serviceDeath, serviceMonth, resol
 import { CreatorCommand, creatorCommandSchema, creatorDeath, resolveCreator } from './systems/creators';
 import { refreshSchools, resolveSchool, SchoolCommand, schoolCommandSchema, schoolMonth } from './systems/school';
 import { refreshStoryThreads, resolveStory, scheduleStory, storyMonth } from './systems/stories';
+import { RecoveryCommand, recoveryCommandSchema, recoveryMonth, refreshRecoveries, resolveRecovery } from './systems/educationRecovery';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand;
 const clamp = (value: number) => Math.min(100, Math.max(0, value));
 const labels: Record<string, string> = { happiness: 'Happiness', health: 'Health', smarts: 'Smarts', looks: 'Looks', respect: 'Respect', energy: 'Energy', fitness: 'Fitness', stress: 'Stress', discipline: 'Discipline', fame: 'Fame' };
 
@@ -58,6 +59,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  refreshRecoveries(world);
   refreshTrips(world);
   refreshSchools(world);
   person.health.hospitalizedUntil = null;
@@ -89,6 +91,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 function processMonth(world: World) {
   healthMonth(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
+  recoveryMonth(world);
   schoolMonth(world);
   householdMonth(world);
   const actors = financialActors(world);
@@ -234,7 +237,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   const world = validateWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshStoryThreads(world); world.revision++; return validateWorld(world);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshStoryThreads(world); world.revision++; return validateWorld(world);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -270,6 +273,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
     const school = schoolCommandSchema.safeParse(command);
     const education = educationCommandSchema.safeParse(command);
+    const recovery = recoveryCommandSchema.safeParse(command);
     const work = workCommandSchema.safeParse(command);
     const finance = financeCommandSchema.safeParse(command);
     const assets = assetCommandSchema.safeParse(command);
@@ -291,6 +295,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
     const relocation=relocationCommandSchema.safeParse(command);
     if (school.success) resolveSchool(world, school.data);
     else if (education.success) resolveEducation(world, education.data);
+    else if (recovery.success) resolveRecovery(world, recovery.data);
     else if (work.success) resolveWork(world, work.data);
     else if (finance.success) resolveFinance(world, finance.data);
     else if (assets.success) resolveAssets(world, assets.data);
@@ -315,6 +320,7 @@ export function resolveCommand(previous: World, command: GameCommand): World {
   refreshRoyalSuccession(world,'background');
   refreshTrips(world);
   refreshSchools(world);
+  refreshRecoveries(world);
   refreshStoryThreads(world);
   world.revision++;
   return validateWorld(world);

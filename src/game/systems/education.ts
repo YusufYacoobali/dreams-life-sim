@@ -13,6 +13,9 @@ import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { recordingCommitment } from './musicSchemas';
 import { campaignCommitment } from './politicsSchemas';
+import { currentRecovery } from './educationRecoverySchemas';
+import { completeSecondary, hasSecondary } from './educationRecovery';
+import { serviceAway } from './serviceSchemas';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']) }),
@@ -32,6 +35,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (isConfined(world)) return 'Courses outside custody are unavailable';
   if (ageOn(person, world.date) < rules[person.country].schoolEnd) return 'Finish secondary education first';
   if (education.stage !== 'none') return 'You are already enrolled';
+  if (currentRecovery(world)) return 'Finish or leave your evening course before full-time study';
   if(publicRoyalDuty(world))return 'Choose a private royal life before full-time study';
   if(fullTimeCreator(world))return 'Switch your studio to part-time before full-time study';
   if(campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time study';
@@ -94,12 +98,12 @@ export function resolveEducation(world: World, command: EducationCommand) {
 }
 export function educationMonth(world: World, person: Person) {
   if (hospitalized(world, person) || activeTrip(world, person.id)) return;
-  if (isConfined(world, person) && !['none', 'primary', 'secondary'].includes(person.education.stage)) return;
+  if (isConfined(world, person) || person.legal.wanted || serviceAway(world, person.id)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;
   if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !education.qualifications.some(q => q.level === 'secondary')) {
     education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; education.school = person.city + (education.stage === 'primary' ? ' Primary School' : ' Secondary School');
-    education.grades = bounded(Math.round((person.stats.smarts + person.stats.discipline) / 2));
+    if (education.months === 0 && !world.schoolCompletions.some(item => item.personId === person.id)) education.grades = bounded(Math.round((person.stats.smarts + person.stats.discipline) / 2));
     if (isPlayer) fact(world, 'I started at ' + education.school + '.', 'education');
   }
   if (education.stage === 'primary' && age >= rule.secondaryStart) {
@@ -107,8 +111,8 @@ export function educationMonth(world: World, person: Person) {
     if (isPlayer) fact(world, 'I moved on to ' + education.school + '.', 'education');
   }
   if ((education.stage === 'primary' || education.stage === 'secondary') && age >= rule.schoolEnd) {
-    education.qualifications.push({ level: 'secondary', field: 'general', year: world.date.year }); education.stage = 'none';
-    if (isPlayer) fact(world, 'I completed secondary education with grades of ' + education.grades + '%.', 'education');
+    if (hasSecondary(person)) education.stage = 'none';
+    else completeSecondary(world, person);
     return;
   }
   if (education.stage === 'none' || education.paused) return;

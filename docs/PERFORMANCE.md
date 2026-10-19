@@ -4,6 +4,12 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
+The current world-24 education checkpoint passes the clean 938-test / 62-suite
+regression in 697.17 seconds and has a separate 120-life sweep in progress with
+game-source hash `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
+The completed expanded sweep and SQLite/history numbers below apply to world 23;
+they are retained as historical evidence, not a current-world performance pass.
+
 ## Database representation four: actual repository storage
 
 `node tools/benchmark-sqlite-history.cjs` runs the same seed/date/available choices
@@ -59,7 +65,7 @@ Expanded runs print the seed, completed/requested counts, age at death, world
 size and per-life/cumulative elapsed milliseconds after every completed life.
 The wrapper rejects invalid counts and propagates failures.
 
-The current content-three **120-life pure-engine Node sweep passes**; see the
+The world-23/content-three **120-life pure-engine Node sweep passed**; see the
 recorded result below. The duplicate expanded Jest run was stopped after 43
 completed lives and is not counted as a completed Jest sweep. The 1,000-life,
 120-year and multi-generation gates remain open. These first-available choices
@@ -144,7 +150,7 @@ completed 120-life pass.
 
 [Every seed and the final summary](verification/life-sweep-120-20261019.json) are
 preserved. The default regression covers twelve of the same seeds; overlapping
-runs are not counted as additional distinct lives. This closes the current
+runs are not counted as additional distinct lives. This closed the world-23
 120-seed core-engine check only. It does not establish all-choice balance,
 1,000-person/1,000-seed, SQLite, 120-year, multi-generation or native acceptance.
 

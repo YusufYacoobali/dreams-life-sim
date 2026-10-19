@@ -27,6 +27,7 @@ import { courseMonths, startCourse, tuitionFor } from './education';
 import { exchangeQuote, settleTax } from './finance';
 import { ownHousehold } from './households';
 import { newWorkEarnings } from './earningsSchemas';
+import { currentRecovery } from './educationRecoverySchemas';
 
 export const relocationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-relocation'), destinationId: z.enum(destinationIds), route: z.enum(relocationRoutes), roleId: z.string().nullable(), program: z.enum(relocationPrograms).nullable(), field: z.enum(fields).nullable(), quotedFee: z.bigint().positive() }),
@@ -47,6 +48,7 @@ function personalMoveReason(world: World, person: Person): string | undefined {
   if (publicRoyalDuty(world, person.id)) return 'Choose a private royal life before moving';
   if (recordingCommitment(world, person.id) || campaignCommitment(world, person.id)) return 'Finish or cancel the recording or campaign before moving';
   if (!['none', 'primary', 'secondary'].includes(person.education.stage)) return 'Finish or leave the current course before moving; existing qualifications stay yours';
+  if (currentRecovery(world, person.id)) return 'Finish or leave the evening course before moving abroad';
 }
 function offerReason(world: World, choice: RelocationChoice): string | undefined {
   const person = active(world), country = destinations[choice.destinationId].country, rule = rules[country];
@@ -173,7 +175,7 @@ export function resolveRelocation(world: World, command: RelocationCommand) {
   const householdId = ownHousehold(world, person, command.companionIds);
   for (const id of participantIds) {
     const member = world.people[id]; member.country = destination.country; member.city = destination.city; member.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; member.training = null;
-    if (['primary', 'secondary'].includes(member.education.stage)) { const previous = member.education; member.education = { ...newEducation(), grades: previous.grades, qualifications: previous.qualifications, effort: previous.effort }; const age = ageOn(member, world.date), rule = rules[member.country]; if (age >= rule.schoolStart && age < rule.schoolEnd) { member.education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; member.education.school = member.city + (member.education.stage === 'primary' ? ' Primary School' : ' Secondary School'); } }
+    if (['primary', 'secondary'].includes(member.education.stage)) { const previous = member.education; member.education = { ...newEducation(), grades: previous.grades, qualifications: previous.qualifications, effort: previous.effort }; const age = ageOn(member, world.date), rule = rules[member.country]; if (!previous.qualifications.some(item => item.level === 'secondary') && age >= rule.schoolStart && age < rule.schoolEnd) { member.education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; member.education.school = member.city + (member.education.stage === 'primary' ? ' Primary School' : ' Secondary School'); } }
     fact(world, 'I moved from ' + application.originCity + ' to ' + destination.city + ', ' + countries[destination.country].name + '. My nationality remains ' + countries[member.nationality].name + '.', 'relocation', '', id);
   }
   let newEmploymentId: string | null = null;

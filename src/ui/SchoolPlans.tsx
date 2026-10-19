@@ -5,6 +5,7 @@ import { fullName, World } from '../game/model';
 import { formatMoney } from '../game/money';
 import { storyMonthNumber } from '../game/systems/storyContext';
 import { Body, Card, Heading } from './components';
+import { SchoolArt } from '../assets/SchoolArt';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const when = (month: number) => months[month % 12] + ' ' + Math.floor(month / 12);
@@ -22,7 +23,7 @@ export function SchoolPlans({ world }: { world: World }) {
       const parent = thread.parentId && world.people[thread.parentId], teacher = thread.teacherId && world.people[thread.teacherId];
       const arcade = thread.kind === 'arcade-invitation', active = thread.status === 'scheduled' || thread.status === 'offered';
       return <View key={thread.id} style={{ gap: 5, paddingVertical: 9 }}>
-        <Heading size={16}>{arcade ? 'Arcade birthday' : 'Shared class project'} · {fullName(world.people[thread.peerId])}</Heading>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}><SchoolArt id={arcade ? 'arcade' : 'project'} size={40} /><View style={{ flex: 1 }}><Heading size={16}>{arcade ? 'Arcade birthday' : 'Shared class project'} · {fullName(world.people[thread.peerId])}</Heading></View></View>
         <Body muted>{thread.city}, {countries[thread.country].name} · {when(thread.dueMonth)}</Body>
         {parent && <Body>{thread.permission?.accepted ? 'Permission agreed by ' : 'Permission declined by '}{fullName(parent)}</Body>}
         {teacher && <Body>Teacher: {fullName(teacher)}</Body>}

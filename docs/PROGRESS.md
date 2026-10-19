@@ -12,6 +12,35 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+World **24 / engine 23 / content 3** now records school completion and attended
+evening study. A secondary qualification needs 50% grades and twelve recorded
+study months at the configured age. Failed students can take a no-fee 24-month
+evening course around work; already-qualified adults can take a twelve-month
+entry-grade course. Actual absence/custody/hospital care/travel/assignments pause
+credits. Prison-study qualification, withdrawal, repeated failure, permanent
+moves, death and existing-child legacy retain their real histories. Old earned
+qualifications survive the genuine 0%-diploma archive unchanged. See
+[the contract, tests and limits](EDUCATION_RECOVERY.md).
+
+The final clean regression passes **938 tests / 62 suites** in **697.17 seconds**,
+including twelve core lives and the real SQLite UI path through school failure,
+enrolment rollback/retry, the final awarding-command rollback/retry and cold
+resume. Strict application/test typing, fresh Android/iOS Hermes exports
+(5.1/4.8 MB, 46 assets) and both current Metro manifests/source bundles pass.
+Five school-art subjects are integrated; the six-subject original atlas is
+browser-reviewed at 48/128px on light/dark cards. Native screen acceptance remains
+open. The unused trip image does not add a trip mechanic; no situational template
+is counted for course acknowledgements. The catalogue stays at **70**.
+
+The new world-24 120-life sweep is running with frozen game-source hash
+`7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
+No completed current-world expanded result is claimed yet. The 120-life and
+storage measurements in the following paragraphs apply to world 23. Scholarships,
+full national stage/qualification models, native and release acceptance remain
+open. Overall/opening estimates are unchanged.
+
+### Prior world-23 persistence and opening checkpoints
+
 Database representation four now writes compressed current saves, recovery and
 new branch/import rows while reading older plain rows. The upgrade changes only
 the database marker, without rewriting all lives or consuming RNG; older apps
@@ -120,7 +149,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 1 — Technical and visual foundation | In progress | Shared UI/modal structures, routed four-tab app, committed-state coordinator and transactional persistence; device and visual acceptance pending |
 | 2 — Artwork and character creation | In progress | Generated layered portraits, appearance editor and eight age stages now integrated; native rendering/fidelity and remaining illustration families pending |
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
-| 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; remaining education funding and broader acceptance remain pending |
+| 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery implemented; scholarships, national stage depth and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
 | 6 — Content, depth, legacy, Time Machine | In progress | 70 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |

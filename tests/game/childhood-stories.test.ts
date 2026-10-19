@@ -15,6 +15,7 @@ import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { pupil } from '../support/pupil';
 import schoolArchive from '../fixtures/v21-school-archive.json';
 import { randomInteger } from '../../src/game/random';
+import { monthFrom } from '../../src/game/calendar';
 
 const scene = (id: string) => childhoodTemplates.find(item => item.id === id)!;
 const ageFor = (template: EventTemplate) => Math.max(template.min, template.school === 'secondary' ? 12 : template.school === 'primary' ? 6 : template.min);
@@ -82,18 +83,20 @@ test('story grades and actual skills report bounded changes and can create a fri
 });
 test('the real world-21 school archive preserves attendance, exact grades, people, help draw, paid earnings and the earlier planning checkpoint', () => {
   const save = decodeSave(JSON.stringify(schoolArchive)), original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(schoolArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(encodeWorld(save.world));
-  expect(original.schemaVersion).toBe(21); expect(save.world.schemaVersion).toBe(23); expect(save.world.engineVersion).toBe(22);
+  expect(original.schemaVersion).toBe(21); expect(save.world.schemaVersion).toBe(24); expect(save.world.engineVersion).toBe(23);
   for (const key of Object.keys(original).filter(key => key !== 'schemaVersion' && key !== 'engineVersion' && key !== 'contentVersion')) expect(encoded[key]).toEqual(original[key]);
   const school = currentSchool(save.world)!; expect(school.periods).toHaveLength(13); expect(school.exams).toEqual([{ month: 24083, term: 1, grade: 76 }]); expect(school.help[0]).toMatchObject({ chance: 80, roll: 68, accepted: true, gradeBefore: 71, gradeGain: 3 }); expect(save.world.people[save.world.activePersonId].skills.science).toBe(12);
   const prior = unpackCheckpoint(save.snapshots[0].payload), priorSchool = currentSchool(prior)!; expect(priorSchool.periods).toHaveLength(1); expect(priorSchool.exams).toEqual([]); expect(priorSchool.classmateIds).toEqual(school.classmateIds); expect(priorSchool.currentTeacherId).toBe(school.currentTeacherId); expect(prior.people[prior.activePersonId].skills.science).toBe(0); expect(priorSchool.help).toEqual(school.help);
 });
 test('a school choice changes later university eligibility using actual grades and still requires the earned secondary qualification', () => {
-  let world = pupil('US', 17); world.people[world.activePersonId].education.grades = 53;
+  let world = pupil('US', 17);
+  for (let month = 0; month < 11; month++) { world.date = monthFrom(world.date, 1); educationMonth(world, world.people[world.activePersonId]); schoolMonth(world); }
+  world.people[world.activePersonId].education.grades = 53;
   const event = bindEvent(world, scene('teen-exam-freeze')); offerPending(world, event); world = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: 'skip' });
   expect(world.people[world.activePersonId].education.grades).toBe(55); expect(world.people[world.activePersonId].education.qualifications).toEqual([]);
   if (world.pending?.kind === 'result') world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
   expect(enrollmentReason(world, 'university', 'computing')).toMatch(/Finish secondary/);
-  world.date.year++; educationMonth(world, world.people[world.activePersonId]); refreshSchools(world);
+  world.date = monthFrom(world.date, 1); educationMonth(world, world.people[world.activePersonId]); refreshSchools(world);
   expect(world.people[world.activePersonId].education.qualifications).toEqual([{ level: 'secondary', field: 'general', year: 2018 }]); expect(enrollmentReason(world, 'university', 'computing')).toBeUndefined(); validateWorld(world);
 });
 test('the first year guarantees a real choice without inventing a parent after both parents die', () => {

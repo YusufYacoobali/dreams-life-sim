@@ -60,6 +60,12 @@ change can affect later university eligibility; compulsory completion and actual
 qualifications remain prerequisites. Skills gained from a class activity provide
 early experience, without granting professional training, employment or awards.
 A classmate can become a friend while retaining the same identity and school role.
+
+World 24 now checks grades and recorded study for school completion and offers
+actual attended evening recovery. These system outcomes and acknowledgements add
+no distinct templates to the count. Their behaviour, genuine old-qualification
+preservation and remaining national-stage limits are in
+[EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md).
 No story in this batch claims a purchase, payment, legal outcome or award that its
 effects do not perform. The birthday invitation prepares a plan; it does not
 claim the party already happened.

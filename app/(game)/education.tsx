@@ -10,6 +10,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '.
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { Illustration } from '../../src/assets/Illustration';
 import { useColors } from '../../src/ui/theme';
+import { RecoveryStudy } from '../../src/ui/RecoveryStudy';
 
 type Application = { program: 'university' | 'trade' | 'graduate'; field: typeof fields[number]; funding: 'cash' | 'loan' };
 type Dialog = { kind: 'program-field'; program: Application['program'] } | { kind: 'funding'; application: Application } | { kind: 'confirm'; application: Application } | { kind: 'effort' } | { kind: 'leave' } | { kind: 'resume' };
@@ -30,11 +31,13 @@ export default function Education() {
       {education.qualifications.length === 0 ? <Body muted>No completed qualifications yet.</Body> : education.qualifications.map((q, index) => <Body key={index}>{q.level[0].toUpperCase() + q.level.slice(1)} · {q.field} · {q.year}</Body>)}
     </Card>
     {['primary', 'secondary'].includes(education.stage) && <Card><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
+    {education.stage === 'none' && (world.schoolCommunities.some(item => item.personId === player.id) || world.schoolCompletions.some(item => item.personId === player.id)) && <Card><ActionRow title="School Years" subtitle="Reports, plans and completion" onPress={() => router.push('/school')} /></Card>}
     {error && <Body>{error}</Body>}
     {education.stage !== 'none' && <Card>
       {education.paused ? <Button label="Fund Next Year" onPress={() => setDialog({ kind: 'resume' })} /> : <><ActionRow title="Study harder" subtitle="Extra study once this year" disabledReason={education.lastStudyYear === world.date.year ? 'You already did extra study this year' : undefined} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} onPress={() => setDialog({ kind: 'effort' })} /></>}
       {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" onPress={() => setDialog({ kind: 'leave' })} />}
     </Card>}
+    <RecoveryStudy world={world} busy={busy} error={error} dispatch={dispatch} />
     <Card><Heading size={18}>Further education</Heading>{(['university', 'trade', 'graduate'] as const).map(program => <ActionRow key={program} title={program === 'trade' ? 'Trade School' : program === 'graduate' ? 'Professional Study' : 'University'} subtitle={program === 'graduate' ? 'Medicine or law after a degree' : 'Choose a subject and review funding'} disabledReason={enrollmentReason(world, program, program === 'graduate' ? 'medicine' : 'business')} onPress={() => setDialog({ kind: 'program-field', program })} />)}</Card>
     <EventModal event={event} busy={busy} error={error} onCancel={() => setDialog(null)} onChoose={id => {
       if (!dialog) return;

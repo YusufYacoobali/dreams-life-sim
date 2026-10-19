@@ -40,6 +40,8 @@ import { schoolCommunitySchema } from './systems/schoolSchemas';
 import { storyThreadSchema } from './systems/storySchemas';
 import { validateStoryThreads } from './systems/storyValidation';
 import { validateSchools } from './systems/schoolValidation';
+import { recoveryCourseSchema, secondaryCompletionSchema } from './systems/educationRecoverySchemas';
+import { validateEducationRecovery } from './systems/educationRecoveryValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -67,7 +69,7 @@ export const personSchema = z.object({
 export type Person = z.infer<typeof personSchema>;
 export const journalSchema = z.object({ id: z.string(), date: dateSchema, personId, text: z.string().max(1200), category: z.string() });
 export const worldSchema = z.object({
-  schemaVersion: z.literal(23), engineVersion: z.literal(22), contentVersion: z.literal(3),
+  schemaVersion: z.literal(24), engineVersion: z.literal(23), contentVersion: z.literal(3),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -94,6 +96,7 @@ export const worldSchema = z.object({
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
+  schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -276,6 +279,7 @@ export function validateWorld(value: unknown): World {
   validateEarnings(world);
   validateTravel(world);
   validateSchools(world);
+  validateEducationRecovery(world);
   validateStoryThreads(world);
   validateRelocations(world);
   validateCareers(world);
@@ -411,5 +415,7 @@ export function decodeWorld(text: string): World {
   if (parsed && parsed.schemaVersion === 22) { parsed.schemaVersion = 23; parsed.engineVersion = 22; parsed.contentVersion = 2; parsed.storyThreads = []; }
   // Existing bound choices and callbacks retain their exact effects and saved draws.
   if (parsed && parsed.schemaVersion === 23 && parsed.contentVersion === 2) parsed.contentVersion = 3;
+  // Keep earlier qualifications/outcomes; new assessments and attendance start empty.
+  if (parsed && parsed.schemaVersion === 23) { parsed.schemaVersion = 24; parsed.engineVersion = 23; parsed.schoolCompletions = []; parsed.recoveryCourses = []; }
   return validateWorld(parsed);
 }

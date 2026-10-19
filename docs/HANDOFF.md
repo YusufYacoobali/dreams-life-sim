@@ -5,52 +5,64 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
-The continuation completed the listed automated callback acceptance cases; see
-[CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md). It then added twenty distinct
-early-life situations (**70 total**), including five parent-free preschool scenes,
-and a read-only School Plans section with original participants, due dates,
-permission, conditional costs and paid/cancelled outcomes. Welcome now scrolls
-when its content exceeds the viewport. Native visual/large-text review remains open.
+The latest continuation adds **actual school outcomes and evening recovery**;
+see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). Current versions are **world
+24 / engine 23 / content 3 / database 4**. At the configured school-completion
+age, 50% grades and twelve recorded study months are required. Failure grants
+no qualification. Two no-fee evening paths fit around work: 24 attended months
+for a missing secondary qualification, or twelve for entry-grade improvement.
+Attendance pauses for actual absence, hospital care, custody/pursuit and service
+assignments. Actual prison study can qualify through its separate route without
+inventing evening credits. Withdrawal, failure, relocation, death and legacy
+retain the original records. Country ages and the authored-country status are
+unchanged; detailed national stages and scholarships remain open.
 
-Current versions are **world 23 / engine 22 / content 3 / database 4**. Genuine
-world-22 and content-two archives retain their people, decisions, paid outings,
-projects, history and RNG. Permanently contradictory scheduled contexts are
-rejected on import; temporary absence before the deadline remains valid.
+The genuine pre-change archive in
+`tests/fixtures/v23-low-grade-school-archive.json` was generated at `55fee6b`
+through eighteen actual years and real SQLite commands. It retains the old
+0%-grade diploma and two earlier moments. Migration adds empty new histories
+without changing people, earned qualifications, bound choices, money or RNG.
+Continuing its unfinished seventeenth-year checkpoint applies the new rules only
+to future school completion. Never regenerate this archive with newer source.
 
-Database four stores newly written current/recovery/branch/import rows using the
-existing bounded checkpoint-v1 compression. It still reads old plain rows and
-upgrades the database marker transactionally without bulk rewriting lives or
-consuming RNG. An old plain row can remain the backup until the next real commit.
-Older app versions explicitly refuse the new database marker. The checkpoint
-format and world/engine versions did not change.
+The clean final regression passes **938 tests / 62 suites** in **697.17 seconds**,
+including twelve complete seeded lives, all genuine migrations, format-only Intl
+startup and the new connected SQLite/UI journey. That journey branches the real
+archive, fails/retries evening enrolment and the final awarding command, then
+resumes the same course/results cold without duplicate qualifications. Strict
+source/test typing, fresh Android/iOS Hermes exports (5.1/4.8 MB, **46 assets**)
+and current Metro manifests/source bundles also pass. Two royal UI checks now
+share one actually simulated childhood, decode independent worlds and have
+explicit cold-history budgets; the older test that skipped eleven study months
+now attends them. Native visual, performance and release gates remain open.
 
-The final clean regression passes **905 tests / 60 suites** in **667.495 seconds**,
-including genuine migration fixtures, SQLite rollback/retry/recovery/cold resume,
-format-only Intl startup, callback lifecycle and twelve complete seeded lives.
-Strict application/test typing, fresh Android/iOS Hermes exports (5.1/4.8 MB,
-45 assets) and current Metro manifests/source bundles also pass. These are
-cloud/native-component checks, not device or release acceptance.
+Five original school-art subjects are integrated into study, reports, saved arcade/
+project plans and evening classes. The six-subject unmodified atlas is source/
+browser reviewed at 48/128px on light/dark cards; its trip subject is reserved for
+later content, not a new trip mechanic. [The gallery](verification/school-art-20261019.png)
+is browser evidence, not a native screen comparison. The story catalogue remains
+**70 distinct situations**. The listed callback acceptance cases were completed
+before this milestone; see [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md).
 
-The separate direct Node sweep passes **120/120 distinct seeds** across all twelve
-countries in **2,209.809 seconds**, ages at death 40–98, at most 24 people and
-55,199 ledger rows. Its game-source hash is unchanged. The 43 overlapping
-completed Jest lives match terminal age/people/ledger metrics; that slower
-expanded Jest run was stopped and remains partial, not another completed sweep.
-[Per-seed records](verification/life-sweep-120-20261019.json) preserve the scope.
-The 1,000-seed, 1,000-person, 120-year and multi-generation gates remain open.
+A fresh world-24 120-life direct Node sweep is running. Its frozen game-source
+hash is `7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`.
+Do not count it as passed until exit zero and the final unchanged-hash summary.
+The completed world-23 sweep remains historical evidence: 120 distinct seeds,
+all twelve countries, 2,209.809 seconds and 43 matching partial-Jest terminal
+comparisons. It does not replace a current-world result. The 1,000-seed,
+1,000-person, 120-year and multi-generation release gates remain open.
 
-The real 79-observation SQLite workload now uses **29,933,568 bytes** closed and
-**36,327,648 bytes** peak including WAL/shared memory, compared with 72,376,320
-and 103,391,328 bytes for plain live/backup rows. All 235 commands, entire live
-and backup worlds, 79 historical payloads/metadata, receipts and preferences
-match. These are fresh-database comparisons; existing files may retain allocated
-pages, and native timing/storage acceptance is still open. The conservative
-120-late-checkpoint projection remains 95.7 MB. See [PERFORMANCE.md](PERFORMANCE.md)
-for scoped measurements, decoder differential checks and remaining gates.
+Database four still writes bounded checkpoint-v1 live/recovery/branch/import
+rows and reads old plain rows without an eager rewrite. The world-23 real
+79-observation workload measured 29.9 MB closed and 36.3 MB peak, compared with
+72.4/103.4 MB for plain live/backup rows, with entire worlds/history/receipts
+unchanged. This is historical scoped evidence, not a new-world native/storage
+acceptance pass. The conservative 120-late-checkpoint projection was 95.7 MB.
+See [PERFORMANCE.md](PERFORMANCE.md) and the machine-readable records.
 
-[EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records a partial official
-source review for the next school paths. No country-rule values changed and no
-complete country profile is release verified.
+[EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records partial official
+source research. No complete country profile is release verified. Overall and
+opening baseline estimates remain unchanged.
 
 ## User priorities and authorisation
 
@@ -154,8 +166,8 @@ atomic cancellation of two callbacks through SQLite failure/retry/cold resume.
 See [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md) for fixture scope and limits.
 Keep the 120/1,000-life performance gate open. The soak wrapper now accepts an
 explicit count and scales its timeout, with per-life progress on expanded runs.
-The current 120-seed pure-engine run passes; 1,000-seed, 120-year, multi-generation
-and native gates remain open. The current content-three history has 27.3 MB of
+The world-23 120-seed pure-engine run passed; the new world-24 sweep is in
+progress. The 1,000-seed, 120-year, multi-generation and native gates remain open. The current content-three history has 27.3 MB of
 actual payloads and projects 95.7 MB for 120 repeated late checkpoints, above the
 planned 50 MB budget; see [PERFORMANCE.md](PERFORMANCE.md).
 
@@ -201,7 +213,9 @@ blend modes, layout fidelity, performance and release acceptance remain open.
 
 ## Full-game backlog and preserved work
 
-Persistent school contacts, clubs, conduct, help and reports are already connected.
+Persistent school contacts, clubs, conduct, help, reports, grade/credit-based
+completion and evening recovery are connected. Scholarships and deeper country/
+stage-specific paths remain open.
 The broad systems in [PROGRESS.md](PROGRESS.md) are partial implementations, not
 release-complete features. Continue childhood depth and missing education paths,
 then the broader catalogue, pets/hobbies/entertainment, achievements/challenges/

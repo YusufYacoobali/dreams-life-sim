@@ -39,16 +39,16 @@ test.each(['parent', 'teacher', 'peer', 'player'] as const)('a scheduled plan ma
   world.people[id].health.hospitalizedUntil = world.date.year * 12 + world.date.month + 3;
   expect(decodeWorld(encodeWorld(world))).toEqual(world); expect(world.storyThreads.every(item => item.status === 'scheduled')).toBe(true);
 });
-test('the genuine content-two SQLite archive migrates current and prior choices by changing only content metadata', () => {
+test('the genuine content-two SQLite archive migrates current and prior choices without changing bound choices, money or random streams', () => {
   const original = originalWorld(archive.checkpoint), save = decodeSave(JSON.stringify(archive));
   expect(original.schemaVersion).toBe(23); expect(original.engineVersion).toBe(22); expect(original.contentVersion).toBe(2);
-  expect(save.world.contentVersion).toBe(3); expect(save.snapshots).toHaveLength(2);
+  expect(save.world.contentVersion).toBe(3); expect(save.snapshots).toHaveLength(2); expect(save.world.schoolCompletions).toEqual([]); expect(save.world.recoveryCourses).toEqual([]);
   const encoded = JSON.parse(encodeWorld(save.world));
-  for (const key of Object.keys(original).filter(key => key !== 'contentVersion')) expect(encoded[key]).toEqual(original[key]);
+  for (const key of Object.keys(original).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(original[key]);
   for (const record of save.snapshots) {
     const prior = originalWorld(record.payload), migrated = JSON.parse(encodeWorld(unpackCheckpoint(record.payload)));
     expect(prior.contentVersion).toBe(2); expect(migrated.contentVersion).toBe(3);
-    for (const key of Object.keys(prior).filter(key => key !== 'contentVersion')) expect(migrated[key]).toEqual(prior[key]);
+    for (const key of Object.keys(prior).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(migrated[key]).toEqual(prior[key]);
   }
   expect(save.world.storyThreads.map(item => item.status)).toEqual(['scheduled', 'resolved']);
   const paymentId = save.world.storyThreads[1].paidTransactionId;

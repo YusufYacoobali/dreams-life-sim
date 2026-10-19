@@ -6,7 +6,7 @@ export const schoolClubs = ['none', 'sport', 'music', 'drama', 'science'] as con
 export const schoolConducts = ['quiet', 'helpful', 'disruptive'] as const;
 export const schoolCommunitySchema = z.object({
   id: z.string(), personId: z.string(), stage: z.enum(['primary', 'secondary']), school: z.string(), country: z.enum(countryCodes), city: z.string(),
-  started: dateSchema, ended: dateSchema.nullable(), endReason: z.enum(['graduated', 'changed-school', 'died']).nullable(),
+  started: dateSchema, ended: dateSchema.nullable(), endReason: z.enum(['graduated', 'unqualified', 'changed-school', 'died']).nullable(),
   classmateIds: z.array(z.string()).min(1).max(6), teacherIds: z.array(z.string()).min(1), currentTeacherId: z.string(),
   club: z.enum(schoolClubs), conduct: z.enum(schoolConducts),
   periods: z.array(z.object({ month: z.number().int(), teacherId: z.string(), club: z.enum(schoolClubs), conduct: z.enum(schoolConducts), grades: z.number().int().min(0).max(100), skillGain: z.number().int().min(0).max(1) })),
