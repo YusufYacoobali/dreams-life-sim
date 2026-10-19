@@ -128,3 +128,26 @@ school paths, broad adult/system-specific stories and native visual review are
 still pending. The complete **763-test / 53-suite** regression, strict typing,
 fresh Android/iOS production bundles and current Metro source checks pass.
 The tested story code is pushed in `2f25f5e`.
+
+## Startup compatibility hotfix: missing formatToParts
+
+The user reported that Begin Life still crashed because the device’s NumberFormat
+implementation has no `formatToParts`. The previous BigInt-only compatibility
+check was insufficient. Reported startup issues now take priority over further
+features so the development build is playable while the game is built. The
+uncommitted callback work is preserved outside the active source and paused.
+
+The money formatter now requires only `.format(Number)`, probes safe small values
+for locale conventions, and builds the actual arbitrary-size balance from exact
+BigInt digits. It never calls `formatToParts` or needs `signDisplay`/`resolvedOptions`.
+A missing/unusable Intl constructor falls back to an exact readable amount.
+Grouping, decimal placement, currency affixes, explicit signs, non-Latin digits
+and JPY zero-decimal amounts remain covered. No save schema or gameplay changes
+are included in this hotfix.
+
+The format-only runtime check now follows real creation→Begin Life→first Age Up→
+choice/result→SQLite save→cold resume, then opens Assets, Relationships and
+Activities. The 38 focused checks, strict typing, both production Hermes bundles
+and both current Metro bundles pass. The full regression is running separately.
+Native hardware acceptance remains pending; the user’s exact missing-method
+limitation is reproduced by the tests.
