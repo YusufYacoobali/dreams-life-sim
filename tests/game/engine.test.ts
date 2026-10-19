@@ -97,8 +97,10 @@ test('result effects report the actual bounded change', () => {
 const sweepCount = Number(process.env.DREAMS_LIFE_SWEEP ?? '12');
 if (!Number.isInteger(sweepCount) || sweepCount < 1 || sweepCount > 1000) throw new Error('Invalid DREAMS_LIFE_SWEEP');
 test(`${sweepCount} complete seeded lives preserve invariants and terminate with factual death records`, () => {
+  const started = Date.now();
   const ages: number[] = [];
   for (let seed = 0; seed < sweepCount; seed++) {
+    const lifeStarted = Date.now();
     let world = born(seed);
     let turns = 0;
     while (!world.people[world.activePersonId].died && turns++ < 150) {
@@ -111,6 +113,7 @@ test(`${sweepCount} complete seeded lives preserve invariants and terminate with
     expect(world.pending).toBeNull();
     expect(world.annual).toBeNull();
     ages.push(ageOn(player, world.date));
+    if (sweepCount > 12) process.stdout.write(JSON.stringify({ sweep: 'core-life', seed, completed: seed + 1, requested: sweepCount, ageAtDeath: ages.at(-1), people: Object.keys(world.people).length, ledgerRows: world.ledger.length, lifeMs: Date.now() - lifeStarted, elapsedMs: Date.now() - started }) + '\n');
   }
-  expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));
-}, 900000);
+  if (sweepCount > 1) expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));
+}, Math.max(900000, sweepCount * 120000));

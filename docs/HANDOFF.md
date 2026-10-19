@@ -5,6 +5,13 @@ the genuine migration fixture and deferred source/art drafts are committed
 to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
 the older `checkpoint/early-school-callbacks-20261019-1346` branch.
 
+Continuation on 19 October completed the listed automated callback acceptance
+cases; see [the connection-by-connection evidence](CALLBACK_ACCEPTANCE.md).
+The complete regression now passes **831 tests / 56 suites** in 596.53 seconds,
+with strict typing, fresh Android/iOS Hermes exports and current Metro source
+requests. This closes those automated cases, not native or release acceptance.
+Continue the early-game work and full backlog below; estimates remain unchanged.
+
 ## User priorities and authorisation
 
 Build the entire production game through the [master plan](planning/MASTER_PLAN.md)
@@ -98,15 +105,17 @@ decision. Another parent, classmate or teacher is never silently substituted.
 This is a verified development checkpoint, not completion of callback acceptance
 or of the production game. The further cases below remain explicit work.
 
-Remaining callback acceptance work must be checked explicitly: real travel and
-custody, permanent relocation, teacher departure/replacement, parent household
-change/death, player death and actual existing-child legacy, multiple callbacks
-with medical/legal priorities at month 12, and grade/bond caps. The implementation
-must be reviewed against these cases; earlier tests for unrelated systems do not
-establish these new connections. Keep the 120/1,000-life performance gate open.
-The current default twelve-life engine sweep alone takes several minutes. The
-soak wrapper requests 120 lives while the suite currently has a fixed 900,000 ms
-timeout; scale and measure the harness before claiming larger sweeps completed.
+The originally remaining callback cases now have explicit connected checks:
+real travel/custody, permanent relocation, teacher departure/replacement, parent
+household change/death, player death and actual existing-child legacy, month-12
+medical/legal queues and grade/bond caps. The native-component check also proves
+atomic cancellation of two callbacks through SQLite failure/retry/cold resume.
+See [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md) for fixture scope and limits.
+Keep the 120/1,000-life performance gate open. The soak wrapper now accepts an
+explicit count and scales its timeout, with per-life progress on expanded runs.
+Its one-life diagnostic passes; larger sweeps remain unrun. The current history
+benchmark projects 68.5 MB for 120 repeated late checkpoints, above the planned
+50 MB history budget; see [PERFORMANCE.md](PERFORMANCE.md).
 
 ## Cloud environment and native limitations
 

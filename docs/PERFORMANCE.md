@@ -2,6 +2,39 @@
 
 These are cloud diagnostics, not native-device acceptance. Re-run after the remaining systems/content are integrated and measure actual iOS/Android hardware before release.
 
+## Reproducible core-life sweeps
+
+`npm run test:soak` requests 120 complete seeded lives. Use
+`npm run test:soak -- 1000` for the larger release sweep, or an explicit count
+from 1 to 1,000 for harness diagnostics. The engine test budget now scales with
+the requested count (at least 15 minutes, otherwise two minutes per life).
+Expanded runs print the seed, completed/requested counts, age at death, world
+size and per-life/cumulative elapsed milliseconds after every completed life.
+The wrapper rejects invalid counts and propagates failures.
+
+Changing the harness is not a completed sweep. The current 120/1,000-life gates
+remain open until their measured results are recorded here. These core-life
+choices also do not replace the connected career/family/custody/legacy matrices.
+
+## World-23 diagnostic, 19 October 2026
+
+The current harness was checked with one complete seeded life (25.350 seconds
+inside Jest, seven engine checks passing) and invalid CLI input. This establishes
+the configurable count and failure path, not the expanded sweeps.
+
+The separate history benchmark completed 79 annual observations, with death at
+78, 17 people and 33,604 ledger rows. Its largest encoded world was 10,561,992
+bytes; compressed checkpoint payloads totalled 20,764,622 bytes. Repeating its
+largest checkpoint 120 times projects **68,528,880 bytes**, above the planned
+50 MB history budget. This is a projection, not an actual 120-year or SQLite
+storage measurement. Current live/backup rows, WAL pages and assets are additional.
+The history/storage release gate remains open.
+
+Cloud p95 timings were 125.9 ms for Age Up, 330.9 ms for packing and 496.0 ms for
+decoding/validating. This run overlapped regression/Metro activity and uses a
+different workload from the older baselines below; it is not a controlled timing
+comparison or evidence of native responsiveness.
+
 `node tools/benchmark-history.cjs` runs one deterministic current-engine life, taking/restoring a compressed full-state checkpoint before every Age Up. The 18 October 2026 run used Node 24 in this cloud workspace:
 
 | Observation | Result |

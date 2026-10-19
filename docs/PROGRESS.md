@@ -12,6 +12,24 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The 19 October continuation completes the handoff's listed automated callback
+acceptance cases. [The acceptance matrix](CALLBACK_ACCEPTANCE.md) connects real
+travel, custody, relocation, parent/teacher changes, death/legacy, month-twelve
+priorities and capped effects. Twenty-two new domain checks and a second real
+SQLite/native-component flow pass. The clean complete regression passes
+**831 tests / 56 suites** in 596.53 seconds, including twelve complete seeded
+lives. Strict source/test typing, fresh Android/iOS production Hermes exports
+(5.1/4.8 MB, 45 assets), both current Metro manifests/source bundles and the
+offline dependency check also pass. The format-only startup checks remain green.
+Native opening/layout acceptance is still open.
+
+The soak harness now scales its budget and reports expanded per-life progress.
+A one-life diagnostic passes, but 120/1,000-life sweeps remain unrun. The history
+benchmark's actual 20.8 MB payload total and conservative 68.5 MB projection are
+recorded in [PERFORMANCE.md](PERFORMANCE.md); storage/performance gates stay open.
+Continue childhood/education depth and the full production backlog. Overall
+completion estimates are unchanged.
+
 The user is moving work to a new cloud chat. Continue from **`origin/work`** and
 read [HANDOFF.md](HANDOFF.md) first. The transfer checkpoint includes partial
 world-23 school callbacks and one new project situation (50 source templates),
@@ -45,7 +63,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; remaining education funding and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; pets and hobbies remain planned |
-| 6 — Content, depth, legacy, Time Machine | In progress | 49 implemented age/context templates, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
+| 6 — Content, depth, legacy, Time Machine | In progress | 50 implemented age/context templates, two saved callback families, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
 ## Feature status
@@ -55,7 +73,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | Partial: editable identity/appearance, deterministic random creation, actual parent links, generated portraits and eight visual age stages | Twelve-country creation/domain tests pass; 120px browser layer review complete; native rendering/fidelity pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
-| Context-aware events, decisions, delayed consequences and journal | Partial: 49 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; delayed consequences pending | Decision/result round-trip and eligibility tests pass; no system-event coverage claim |
+| Context-aware events, decisions, delayed consequences and journal | Partial: 50 original age/context templates, living-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; file picker/share require device validation |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt; scholarships/adult remediation pending | Twelve profile boundary tests and connected school→degree→qualified job scenario pass |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history and earned pension | Exact partial-year pay/tax, direct-command gates and connected work scenario pass; special careers and work contacts pending |
@@ -72,7 +90,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death, actual career/children/property summary, will/protected heirs, debt/tax-first settlement, specific ownership bequests, minor trusts and same-child continuation with preserved annual cursor | Conservation, all twelve local-currency NPC estates, real v6 migration, a three-generation journey and native legacy storage-failure→retry/cold-load pass; broader seeded/device acceptance pending |
 | Historical snapshots and Time Machine branches | Implemented core: complete compressed checkpoints before Age Up, explicit saved moments, reviewed separate-branch restore, original future preserved, only prior history copied, local archive round-trip | Atomic rollback/idempotency, exact RNG/outcomes/market restoration, corruption rejection, recovery history pruning and native confirmation→SQLite failure/retry pass; large/native acceptance pending |
 | Custom generated artwork and portrait continuity | Partial: twelve activity, sixteen ownership, twelve family and sixteen time/health/legal and sixteen social/fame/business illustrations, memorial and layered portraits; health/legal subjects connected to their systems | Sources inspected, 120px portrait and 128px ownership/family/health/legal browser reviews complete; native-device fidelity and remaining families pending |
-| 250+ distinct high-quality approved event templates | 49 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
+| 250+ distinct high-quality approved event templates | 50 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
 | Accessibility, performance, native-device UI and release builds | Partial: accessible shared controls and production bundles; broader audit/performance/device/release gates pending | Component interactions and bundle generation; no native-device claim |
 
 ## Verification record

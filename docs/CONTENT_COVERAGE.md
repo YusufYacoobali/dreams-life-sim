@@ -50,8 +50,9 @@ Current optional selection offers at most one situation at year-end, with a 78%
 offer chance and a five-year per-template cooldown. The first year is guaranteed.
 Two saved callback families are now in the handoff checkpoint: permission/attendance
 for the existing arcade invitation, and a new shared-project promise/deadline.
-Focused callback and real-SQLite interaction checks pass; broader acceptance cases
-remain open in [HANDOFF.md](HANDOFF.md). Their follow-up steps do not inflate the
+Focused callback and real-SQLite interaction checks pass; the handoff's listed
+connected automated cases now also pass in [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md).
+Native acceptance remains open. Their follow-up steps do not inflate the
 distinct-situation count. Rarity tiers, the broader pacing model, editorial metadata,
 further callbacks and comprehensive system-specific coverage remain pending.
 

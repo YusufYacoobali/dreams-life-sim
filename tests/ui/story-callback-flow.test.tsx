@@ -3,12 +3,15 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
+import { monthFrom } from '../../src/game/calendar';
 import { bindEvent, eventTemplates } from '../../src/game/content/events';
 import { resolveCommand } from '../../src/game/engine';
 import { offerPending } from '../../src/game/pendingQueue';
 import { randomInteger } from '../../src/game/random';
 import { storyParent } from '../../src/game/systems/storyContext';
 import { accountFor } from '../../src/game/systems/common';
+import { addCondition } from '../../src/game/systems/health';
+import { schoolMonth } from '../../src/game/systems/school';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
@@ -49,4 +52,50 @@ test('permission and actual Age Up→party→remaining year survive independent 
   }
   const completed = mockStore.getState().world!; expect(completed.pending).toBeNull(); expect(completed.annual).toBeNull(); expect(completed.date.year).toBe(initial.date.year + 1); expect(completed.date.month).toBe(initial.date.month);
   expect(completed.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1); expect(completed.storyThreads[0].paidTransactionId).toBe(paid.storyThreads[0].paidTransactionId); expect(await repository.load(initial.id)).toEqual(completed); view.unmount(); sqlite.close();
-});
+}, 30000);
+
+test('month-twelve urgent care cancels both saved callbacks atomically across SQLite failure, retry and cold resume', async () => {
+  let initial = pupil('US', 8);
+  const project = bindEvent(initial, eventTemplates.find(item => item.id === 'school-project-promise')!); offerPending(initial, project);
+  initial = resolveCommand(initial, { type: 'choose', eventId: project.id, choiceId: 'promise' });
+  if (initial.pending?.kind !== 'result') throw new Error('Missing origin result');
+  initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending.id });
+  initial.date = monthFrom(initial.date, 1); schoolMonth(initial);
+  const parent = storyParent(initial)!, chance = Math.min(95, 50 + Math.floor(parent.trust / 2));
+  initial.random.npcs = Array.from({ length: 1000 }, (_, i) => i + 1).find(seed => randomInteger(seed, 1, 100).value <= chance)!;
+  const arcade = bindEvent(initial, eventTemplates.find(item => item.id === 'school-arcade-invitation')!); offerPending(initial, arcade);
+  initial = resolveCommand(initial, { type: 'choose', eventId: arcade.id, choiceId: 'ask' });
+  if (initial.pending?.kind !== 'result') throw new Error('Missing permission result');
+  initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending.id });
+  addCondition(initial, initial.people[initial.activePersonId], 'asthma', 75);
+  const startDate = monthFrom(initial.date, -11);
+  initial.annual = { id: 'year_twelve_storage', startDate, targetDate: monthFrom(startDate, 12), monthsProcessed: 11, stage: 'months', pausedForPlanning: true };
+  initial = resolveCommand(initial, { type: 'resume' }); expect(initial.annual?.monthsProcessed).toBe(12);
+  expect(initial.storyThreads.map(item => item.status)).toEqual(['offered', 'offered']); expect(initial.deferred).toHaveLength(2);
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+  const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); };
+  await cold(); let view = render(frame());
+  sqlite.exec("CREATE TRIGGER fail_callback_cancellation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Accept hospital assessment' })));
+  await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0));
+  expect(mockStore.getState().world).toEqual(initial); expect(await repository.load(initial.id)).toEqual(initial);
+  sqlite.exec('DROP TRIGGER fail_callback_cancellation');
+  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Accept hospital assessment' })));
+  await waitFor(() => expect(screen.getByText('Medical care arranged')).toBeOnTheScreen());
+  const cancelled = mockStore.getState().world!;
+  expect(cancelled.storyThreads.map(item => item.status)).toEqual(['cancelled', 'cancelled']); expect(cancelled.deferred).toEqual([]);
+  expect(cancelled.ledger.some(item => item.category === 'story-outing')).toBe(false); expect(cancelled.annual?.monthsProcessed).toBe(12);
+  view.unmount(); await cold(); view = render(frame()); expect(mockStore.getState().world).toEqual(cancelled);
+  expect(screen.getByText('Medical care arranged')).toBeOnTheScreen();
+  for (let guard = 0; mockStore.getState().world!.pending && guard < 10; guard++) {
+    const world = mockStore.getState().world!, event = world.pending!;
+    await act(async () => fireEvent.press(screen.getByRole('button', { name: event.kind === 'result' ? 'Continue' : event.choices.find(item => !choiceUnavailable(world, item))!.label })));
+  }
+  const completed = mockStore.getState().world!;
+  expect(completed.annual).toBeNull(); expect(completed.date).toEqual(initial.date);
+  expect(completed.storyThreads).toEqual(cancelled.storyThreads);
+  expect(completed.ledger.slice(0, cancelled.ledger.length)).toEqual(cancelled.ledger);
+  expect(completed.people[completed.activePersonId].health.records).toEqual(cancelled.people[cancelled.activePersonId].health.records);
+  expect(completed.ledger.some(item => item.category === 'story-outing')).toBe(false);
+  expect(await repository.load(initial.id)).toEqual(completed); view.unmount(); sqlite.close();
+}, 30000);

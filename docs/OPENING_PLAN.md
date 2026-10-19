@@ -24,7 +24,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% | Paused, unintegrated work; persistent gameplay and native surfaces still pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% | 50 in the source catalogue; callback handoff acceptance, full coverage/editorial/release review remain open |
+| Distinct situational stories | 20% | 50 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 
@@ -73,6 +73,7 @@ unrun checks with a percentage.
 
 ## Current implementation and verification
 
+- The callback continuation now passes the handoff's listed connected acceptance cases; see [the acceptance matrix](CALLBACK_ACCEPTANCE.md). The clean complete regression passes 831 tests / 56 suites, including twelve complete seeded lives and SQLite cancellation rollback/retry/cold resume. Strict typing, both fresh production Hermes exports and current Metro source requests pass. Native layout/interaction and performance/release acceptance remain open; no baseline percentage is increased.
 - Welcome, custom/random previews, shared draft navigation, sixteen avatar presets and appearance tabs, actual newborn identity/family details, the compact five-stat Life screen, chronological journal, fixed Age Up and working menu are implemented in the current opening changes.
 - The custom navigation test selects an avatar, changes skin/hair/colour and country/city, persists that exact person, acknowledges birth, retries a failed first Age Up, finishes the actual first year and resumes the same life cold. Random reroll/customisation and preserving an existing life also have connected real-SQLite checks. These are native-component tests, not Android screenshots.
 - The SDK build caught an indirect `expo-font` 58 dependency in the Expo 57 project. It is now an explicit SDK-aligned `~57.0.4` dependency. Unused `expo-blur` was removed; the app's existing modal backdrop uses no BlurView and does not claim a blur implementation.
