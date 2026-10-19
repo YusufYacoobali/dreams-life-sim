@@ -152,3 +152,15 @@ complete seeded lives. The 38 focused checks, strict typing, both production
 Hermes bundles and both current Metro bundles also pass. Hotfix `0dde6b6` is pushed.
 Native hardware acceptance remains pending; the user’s exact missing-method
 limitation is reproduced by the tests.
+
+An additional Android attempt used the official [Expo Go 57.0.9 release](https://github.com/expo/expo-go-releases/releases/tag/Expo-Go-57.0.9)
+on the software Android 15 emulator. Installation, connection to this checkout,
+the SDK 57 bundle download and `Running main` succeeded. Android System UI and
+Phone repeatedly hung during the run; a usable opening interaction or visual
+comparison was not established. This is not a native acceptance pass.
+
+The attempt also found that the cloud's localhost Metro command bound only to
+IPv6 `::1`. Starting its Node process with `--dns-result-order=ipv4first` makes
+`127.0.0.1:8081/status` reachable for `adb reverse`. This verified development
+startup correction is saved in the environment configuration draft. The custom
+app build's separate React Native download restriction remains unresolved.
