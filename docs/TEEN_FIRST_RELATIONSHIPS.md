@@ -74,6 +74,13 @@ Final focused process12478 closed0: **42 tests /3 suites in10.436seconds**,
 `/tmp/dreams-teen-first-types-final.out`. No current integration source, whole
 regression, annual/cohort seeds, native action, export or performance gate ran.
 
+The unchanged runtime/tests then passed the five affected existing adult
+relationship, family, Best Friends, NPC dating and NPC courtship suites:
+**99 tests /5 suites in9.396seconds**, process20462 closed0,
+`/tmp/dreams-teen-first-adjacent-final.out`. This is an adjacent preservation
+check, not another complete regression or new lifetime-seed total. No process
+remains active and no further checks are represented as running.
+
 The domain cases cover both fixed declared consent outcomes, one saved draw,
 all12 countries' authored guards/no currency spend, age12/13/17/18 boundaries,
 day/leap-exact DOB gaps, actual availability and stale identity refusals, authority/
@@ -120,6 +127,6 @@ final42/3 result above. Logs are retained at
 `dreams-teen-first-` prefix. These `/tmp` paths are working evidence for the
 coordinator, not portable published artifact links.
 
-Independent review and the coordinator's shared final migration, adjacent/full
+Independent review and the coordinator's shared final migration, complete
 regression, native/layout/cold and release acceptance remain separate. No imported
 file/history feature expansion or extra catalogue/achievement count is claimed.
