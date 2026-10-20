@@ -1,5 +1,7 @@
 import { createLife, randomCreation } from '../../src/game/createLife';
-const { canonical, coverage, selectChoice, quantityWithinBudget, assertEstateConservation, parseOptions, phases, expectedVersions } = require('../../tools/run-entrepreneur-sweep.cjs');
+import { encodeWorld } from '../../src/game/model';
+import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
+const { canonical, coverage, selectChoice, quantityWithinBudget, reputationAllowed, assertEstateConservation, checkpointRoundTrip, assertEstateReceipts, parseOptions, phases, expectedVersions } = require('../../tools/run-entrepreneur-sweep.cjs');
 
 test('the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection', () => {
   const initial = createLife('life_entrepreneur_policy_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
@@ -53,6 +55,19 @@ test('whole fund quantities include rounded fees and never exceed actual discret
   const budget = 10n ** 40n, quantity = quantityWithinBudget(budget, quote); expect(quote(quantity).buyCost <= budget).toBe(true); expect(quote(quantity + 1n).buyCost > budget).toBe(true);
 });
 
+test('public reputation requires the actual visible age/fame, yearly availability and fee with the complete living reserve retained', () => {
+  const eligible = { age: 18, fame: 10, available: 6100n, reserve: 6000n, fee: 100n, used: false, confined: false, absent: false };
+  expect(reputationAllowed(eligible)).toBe(true);
+  for (const change of [{ age: 17 }, { fame: 9 }, { available: 6099n }, { used: true }, { confined: true }, { absent: true }]) expect(reputationAllowed({ ...eligible, ...change })).toBe(false);
+});
+
+test('policy cold proof uses the production checkpoint and compares every canonical world field', () => {
+  const initial = createLife('life_entrepreneur_codec_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
+  const checked = checkpointRoundTrip(initial, { encodeWorld, packCheckpoint, unpackCheckpoint });
+  expect(checked.world).toEqual(initial); expect(encodeWorld(checked.world)).toBe(encodeWorld(initial)); expect(checked.proof.canonicalBytes).toBe(Buffer.byteLength(encodeWorld(initial))); expect(checked.proof.checkpointBytes).toBe(Buffer.byteLength(checked.payload)); expect(checked.proof.checkpointSha256).toMatch(/^[a-f0-9]{64}$/);
+  expect(() => checkpointRoundTrip(initial, { encodeWorld, packCheckpoint, unpackCheckpoint: (payload: string) => ({ ...unpackCheckpoint(payload, true), revision: initial.revision + 1 }) })).toThrow(/complete canonical world/);
+});
+
 const money = (minor: bigint, currency = 'USD') => ({ minor, currency });
 test('estate conservation respects already-netted paid debt and includes fees, tax, charity and retained equity once', () => {
   const estate = { netWorthAtDeath: money(100n), debtPaid: money(300n), debtWrittenOff: money(0n), fees: money(5n), tax: money(7n), charity: money(3n), distributions: [{ cash: money(45n), assetValue: money(40n) }] };
@@ -64,4 +79,32 @@ test('estate conservation respects already-netted paid debt and includes fees, t
 test('a naturally insolvent estate can conserve without inventing a solvent payout', () => {
   const estate = { netWorthAtDeath: money(-50n), debtPaid: money(15n), debtWrittenOff: money(50n), fees: money(0n), tax: money(0n), charity: money(0n), distributions: [] };
   expect(assertEstateConservation(estate).distributed).toBe(0n); expect(() => assertEstateConservation({ ...estate, debtWrittenOff: money(49n) })).toThrow(/conserve/);
+});
+
+function receiptScenario() {
+  const estate = { personId: 'deceased', netWorthAtDeath: money(100n), debtPaid: money(10n), charity: money(5n), tax: money(5n), distributions: [{ personId: 'actual_heir', cash: money(80n), assetValue: money(0n) }] };
+  const base = { currency: 'USD', year: 2040, month: 1, debtDelta: 0n };
+  const world = { accounts: [{ id: 'heir_account', ownerId: 'actual_heir', currency: 'USD' }], ledger: [
+    { ...base, id: 'estate_debit', accountId: 'estate_account', personId: 'deceased', category: 'estate-distribution', cashDelta: -80n },
+    { ...base, id: 'heir_credit', accountId: 'heir_account', personId: 'actual_heir', category: 'inheritance', cashDelta: 80n },
+    { ...base, id: 'debt_payment', accountId: 'estate_account', personId: 'deceased', category: 'estate-debt', cashDelta: -10n },
+    { ...base, id: 'charity_payment', accountId: 'estate_account', personId: 'deceased', category: 'estate-charity', cashDelta: -5n },
+    { ...base, id: 'tax_payment', accountId: 'estate_account', personId: 'deceased', category: 'estate-tax', cashDelta: -5n },
+  ] };
+  return { estate, world };
+}
+
+test('estate proof reconciles actual matching heir debit/credit pairs and creditor, tax and charity payments', () => {
+  const { estate, world } = receiptScenario();
+  expect(assertEstateReceipts(world, estate)).toEqual({ actualReceiptPairs: [{ heirId: 'actual_heir', debitId: 'estate_debit', creditId: 'heir_credit', amount: 80n }], charity: 5n, tax: 5n, debtPaid: 10n, conserved: true });
+});
+
+test('correct summary totals cannot hide a wrong inheritance account or repeated transfer', () => {
+  const { estate, world } = receiptScenario(); world.accounts[0].ownerId = 'someone_else'; expect(() => assertEstateReceipts(world, estate)).toThrow(/actual heir account/);
+  world.accounts[0].ownerId = 'actual_heir'; world.ledger.push({ ...world.ledger[0], id: 'extra_debit' }, { ...world.ledger[1], id: 'extra_credit' }); expect(() => assertEstateReceipts(world, estate)).toThrow(/settled distribution/);
+});
+
+test('an unpaid or wrong-currency creditor/tax/charity claim cannot pass only the scalar estate check', () => {
+  const { estate, world } = receiptScenario(); world.ledger[2].cashDelta = -9n; expect(() => assertEstateReceipts(world, estate)).toThrow();
+  world.ledger[2].cashDelta = -10n; world.ledger[1].currency = 'EUR'; expect(() => assertEstateReceipts(world, estate)).toThrow(/currency/);
 });

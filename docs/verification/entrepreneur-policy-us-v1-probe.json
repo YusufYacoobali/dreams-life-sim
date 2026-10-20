@@ -1,0 +1,91 @@
+{
+  "format": "dreams-entrepreneur-v1-historical-probe",
+  "status": "failed-tool-plain-codec",
+  "scope": "US seed900 historical partial life only; not a completed natural death or Scenario C; real SQLite birth/ack then pure engine/plain-codec checks",
+  "policyVersion": 1,
+  "commit": "e4dc38f",
+  "sourceBefore": {
+    "game": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+    "gameAndPersistence": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+    "store": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+    "tool": "6a618de358aed1721eb8c47160185b5a45beb4be3747b7a72c4070c81ac01464"
+  },
+  "sourceAfter": {
+    "game": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+    "gameAndPersistence": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+    "store": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+    "tool": "6a618de358aed1721eb8c47160185b5a45beb4be3747b7a72c4070c81ac01464"
+  },
+  "sourcesStayedExact": true,
+  "country": "US",
+  "seed": 900,
+  "revision": 1254,
+  "date": {
+    "year": 2073,
+    "month": 5,
+    "day": 1
+  },
+  "age": 73,
+  "canonicalBytes": 20002811,
+  "lastValidWorldSha256": "697e4d0f5286bad2f1e159f4fc48cabd28ec4386ca4ceab0573a84668d66b8fe",
+  "traceSha256": "3c20b5ea1d5880e387fde6f4de6a96264de357104560161ff3dce3e925a79ee8",
+  "actualCommandsIncludingSQLiteStartAndAck": 1255,
+  "sqliteBirthCommands": [
+    {
+      "command": {
+        "birthDate": {
+          "day": 1,
+          "month": 1,
+          "year": 2000
+        },
+        "input": {
+          "appearance": {
+            "face": 0,
+            "hair": 0,
+            "hairColor": 3,
+            "skin": 1
+          },
+          "background": "ordinary",
+          "city": "New York",
+          "country": "US",
+          "firstName": "Yui",
+          "gender": "female",
+          "lastName": "Takahashi"
+        },
+        "seed": 900,
+        "type": "StartLife"
+      },
+      "commandIndex": 0,
+      "mode": "sqlite",
+      "revision": 0
+    },
+    {
+      "command": {
+        "type": "acknowledgeBirth"
+      },
+      "commandIndex": 1,
+      "mode": "sqlite",
+      "revision": 1
+    }
+  ],
+  "observations": {
+    "fame": 100,
+    "publicImage": 8,
+    "profiles": 1,
+    "companyStarts": [
+      {
+        "id": "business_person_player_257",
+        "started": {
+          "year": 2023,
+          "month": 1,
+          "day": 1
+        },
+        "status": "active"
+      }
+    ],
+    "sponsorships": 0,
+    "publicReputationCommands": 0
+  },
+  "error": "Save is too large",
+  "interpretation": "Plain decodeWorld import limit reached at20,002,811 canonical bytes; no production checkpoint limit was tested by this failure. v2 uses actual packCheckpoint/unpackCheckpoint. Public-image rebuilding is a separately approved actual paid annual choice; no world/RNG/outcome edits. No final twelve-country run claimed."
+}

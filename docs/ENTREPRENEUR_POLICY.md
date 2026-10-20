@@ -6,7 +6,7 @@ social/company unit checks and ordinary work/leisure lifetime policies do not
 establish this complete sequence. This separate policy adds evidence without
 changing gameplay or demanding that every naturally generated life succeeds.
 
-## Registered policy version 1
+## Registered policy version 2
 
 `tools/run-entrepreneur-sweep.cjs` pins World33 / engine34 / content9. It uses the
 same optional country cohort, seeds900..911 in existing country order; this is
@@ -17,11 +17,13 @@ born January1,2000 in the country's first configured city.
 1. Start Life and birth acknowledgement use the real game store/repository and
    a temporary on-disk SQLite database. Closing the connection and opening a new
    repository/store must recover the exact complete world and all eight tables.
-2. Thereafter, use only immutable production engine commands. Exact world codec
-   round trips check optional-action results, unanswered interviews, decisions,
-   annual boundaries and death. The birth database stays unchanged. These later
-   checks are pure-engine serialization checks, not SQLite gameplay saves,
-   native restarts or physical timing.
+2. Thereafter, use only immutable production engine commands. Actual production
+   checkpoint packing/unpacking plus complete canonical equality check optional
+   results, unanswered interviews, decisions, annual boundaries and death. No
+   plain-import limit or game/checkpoint limit is changed. The birth database
+   stays unchanged. These later checks are production-codec engine checks, not
+   SQLite gameplay saves, native restarts or physical timing. Checkpoint/canonical
+   sizes and hashes are recorded; the final real checkpoint is retained.
 3. From age6 choose walking, balanced diet, restful sleep, mindfulness and no
    smoking/drinking through the actual routine command. Attend actual school,
    select focused study and use annual extra study while enrolled. Seek ordinary
@@ -33,7 +35,11 @@ born January1,2000 in the country's first configured city.
    manual posts per calendar year. Use polished production only when actual
    spare money above six months of living costs exceeds ten production fees.
    Enable actual creator payments when eligible. Public disputes use the visible
-   apology choice. No viral response or favourable outcome is required.
+   apology choice. Once adult with actual Fame10+, choose at most one existing
+   paid public-reputation action per year, only outside custody/absence with its
+   quoted fee and the complete six-month living reserve affordable. Record its
+   real fee and public-image consequence. No viral response, favourable outcome
+   or guaranteed sponsorship is required.
 5. Preserve the stronger registered Fame50 gate. Start at most one managed café
    after actual Fame reaches50 and real savings cover its quoted capital/fee
    plus six months of personal living costs. Retain the actual external job.
@@ -57,7 +63,9 @@ born January1,2000 in the country's first configured city.
    guard. Verify the actual settled estate, original profile memorialisation,
    receipts and ledger reconciliation. Net estate plus debt written off equals
    distributions, retained property/equity, charity, fees and tax; debt paid was
-   already netted and must not be counted twice.
+   already netted and must not be counted twice. Each estate distribution must
+   have the actual matching same-currency debit and heir-account credit exactly
+   once; actual debt, tax and charity payments also reconcile.
 
 The policy never changes funds, dates, ages, stats, saved random streams or
 outcomes after creation. It never inspects a stored future roll to choose an
@@ -82,8 +90,33 @@ The output folder contains the unchanged birth databases, canonical per-life
 command traces, per-life summaries and aggregate result. No new twelve-country
 run is claimed in this preregistration.
 
-Nine focused checks pass in3.906seconds: source/cohort pins, canonical trace
+Fourteen focused checks pass in1.427seconds: source/cohort pins, canonical trace
 bytes, early-death/unordered goal reporting, visible decision policy without
-hidden-outcome access, exact fee-aware fund quantities and solvent/insolvent
-estate conservation. Syntax and whitespace checks pass. The first one-country
-probe and the final twelve-country evidence remain separate execution steps.
+hidden-outcome access, exact fee-aware quantities, reserve-protected public
+reputation, actual production checkpoint equality, solvent/insolvent estate
+conservation and matching real heir/creditor/tax/charity receipts. Syntax and
+whitespace checks and focused strict test/source compilation pass. The final v2
+natural-life run is unrun pending review.
+
+## Historical v1 US probe
+
+The [recorded v1 probe](verification/entrepreneur-policy-us-v1-probe.json) is
+historical evidence at source/tool commit `e4dc38f`, not a completed Scenario C.
+US/seed900 naturally reached creator payments at18 and started the actual café
+at23 after Fame50. By73 it had actual Fame100, public image8 and no sponsorship;
+v1 never selected the existing paid public-reputation action. No fame, funds,
+date, grade or outcome was changed to improve this result.
+
+At revision1254, May2073, the tool's plain JSON cold path rejected the complete
+20,002,811-byte canonical world. The game/persistence/tool source stayed exact.
+That is a tool/import-bound failure, not evidence of a production checkpoint
+failure. The full trace, birth database and last valid world remain in
+`/tmp/dreams-entrepreneur-policy-us-e4dc38f`. The compact record pins their hashes
+without turning the world into a fabricated or regenerated fixture.
+
+The coordinator approved v2 before the final run: use the production checkpoint
+codec; strengthen the financial proof; and add the existing, paid, affordable
+annual reputation choice. This is an explicit visible policy change, not a
+rerolled outcome. The Fame50 gate, ordinary newborn cohort, company/brand order,
+limits and honest unmet-goal reporting are retained. No twelve-country result
+is claimed for either version.
