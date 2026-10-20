@@ -14,7 +14,7 @@ export type EventPresentation = {
   | { kind: 'selection'; choices: readonly Choice[]; confirmLabel: string }
   | { kind: 'confirmation'; terms: readonly EffectRow[]; confirmLabel: string }
   | { kind: 'result'; effects: readonly EffectRow[]; continueLabel?: string }
-  | { kind: 'milestone'; facts: readonly EffectRow[]; continueLabel?: string }
+  | { kind: 'milestone'; facts: readonly EffectRow[]; continueLabel?: string; action?: { id: string; label: string } }
 );
 
 export function EventModal({
@@ -67,7 +67,8 @@ function EventCard({
               <Button label={event.confirmLabel} disabled={!selectedEligible} busy={busy} onPress={() => { if (selected && selectedEligible) onChoose(selected); }} />
             </>}
             {event.kind === 'confirmation' && <Button label={event.confirmLabel} busy={busy} onPress={() => onChoose('confirm')} />}
-            {(event.kind === 'result' || event.kind === 'milestone') && <Button label={event.continueLabel ?? 'Continue'} busy={busy} onPress={() => onChoose('continue')} />}
+            {event.kind === 'milestone' && event.action && <Button label={event.action.label} disabled={busy} onPress={() => onChoose(event.action!.id)} />}
+            {(event.kind === 'result' || event.kind === 'milestone') && <Button label={event.continueLabel ?? 'Continue'} tone={event.kind === 'milestone' && event.action ? 'secondary' : 'primary'} busy={busy} onPress={() => onChoose('continue')} />}
             {onCancel && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
           </ScrollView>
         </View>
