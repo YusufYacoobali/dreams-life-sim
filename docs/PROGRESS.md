@@ -12,6 +12,14 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The actual native revision-53 school world is preserved as a new genuine
+world-28 archive, exported with unmodified pushed `1d1e696`. Its current payload
+and all ten Riley historical payloads/metadata stay byte-exact; nine are the
+original reading moments. Three current/prior-field and SQLite cold/repeat-
+blocking checks pass in 15.058 seconds, with strict types. This internal
+regression fixture protects the real study/help/pet-loss/hobby history; it does
+not expand player file features or change simulation source. [Provenance](verification/native-school-archive-v28-20261020.json).
+
 [View Life Summary](SAVED_LIFE_VIEW.md) now opens each saved life read-only
 without selecting it. Local loading/retry and stale-response protection avoid
 global saving feedback, and the shared validated reader preserves the active

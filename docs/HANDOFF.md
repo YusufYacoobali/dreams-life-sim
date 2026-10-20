@@ -1,5 +1,19 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The genuine `v28-native-school-archive.json` is now preserved from unmodified
+pushed **`1d1e696`**, using the actual revision-53 Android SQLite copy. Its current
+checkpoint is byte-exact to native; all ten Riley moments retain original
+payloads/metadata, including all nine earlier reading moments (four v1/six v2).
+The two other lives account for the native database's twelve total moments.
+Never regenerate this fixture using newer source. Full current/prior field,
+cold grade/help/care/hobby and repeat-blocking checks pass: **three checks / two
+suites**, **15.058 seconds**, strict types. See
+[provenance](verification/native-school-archive-v28-20261020.json).
+Next native early-school callback check uses the existing `snapshot_r_31`
+(age seven, October 2033, Before Age Up) and its actual scheduled project.
+Keep the original three native lives unchanged; use a normal Time Machine
+branch for the callback, with original RNG and no edited world fields.
+
 Saved Lives now offers a [read-only summary](SAVED_LIFE_VIEW.md) for each life
 without selecting it. Screen-local loading/retry and stale-response protection
 keep viewing independent of global saving. The shared validated repository

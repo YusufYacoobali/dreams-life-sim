@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `native-school-archive-v28-20261020.json` records the new genuine revision-53
+  native childhood archive's unmodified `1d1e696` producer, complete world hash
+  and byte-exact native current/ten Riley moments, including all nine earlier
+  reading moments. Preserve this fixture; never regenerate it using later code.
+  The database's other two lives supply its remaining two moments. Three
+  field-preservation/cold/repeat-blocking checks and strict types pass.
+
 - `android24-saved-life-view-20261020/` retains actual Ren/Rohan read-only
   summaries and return to Riley/latest journal facts. Every row in all eight
   tables and all three complete worlds stay exact. `saved-life-view-20261020.json`
