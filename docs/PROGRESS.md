@@ -12,6 +12,14 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The actual native teen result at revision 46 is now a genuine regression archive
+exported with clean pushed `3c6df7e`. Its current checkpoint and sixteen original
+historical payloads/metadata remain byte-exact. Two preservation/SQLite failure-
+retry-cold checks pass in 9.817 seconds, with strict types. App/game/persistence
+source is unchanged; this protects existing lives before ordinary-workplace
+schema work and does not expand player file features or compose a new full-test
+total. [Provenance](verification/native-teen-archive-v28-20261020.json).
+
 Content five adds ten [early-teen home situations](TEEN_HOME_STORIES.md), thirty
 choices and a source total of **100 / 250 minimum**. Physical scenes use the
 actual available home parent; remote contact is explicit. Stat/bond effects

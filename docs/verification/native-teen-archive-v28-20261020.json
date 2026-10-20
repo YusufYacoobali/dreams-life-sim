@@ -1,0 +1,56 @@
+{
+  "scope": "Genuine native content-five teen result exported with clean unmodified pushed 3c6df7e before workplace schema work; no world/stat/RNG/version/outcome edits",
+  "producerCommit": "3c6df7ee58b1b7f0137dc6bfd668d08a9fe1e54a",
+  "producerCombinedGamePersistenceHash": "7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6",
+  "sourceDatabase": "Actual Android revision46 phone-result copy before cold restart",
+  "fixture": "tests/fixtures/v28-native-teen-archive.json",
+  "bytes": 575472,
+  "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+  "wholeWorldSha256": "a61d171b026e93ceb3d7f830346f53df194ae5ac30c04c76f3fe6d2b6a5f6262",
+  "currentCheckpointByteExact": true,
+  "originalSixteenMomentPayloadsAndMetadataExact": true,
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 5
+  },
+  "revision": 46,
+  "moments": 16,
+  "result": {
+    "kind": "result",
+    "id": "event_2042_teen-phone-at-dinner_result",
+    "title": "A mutual arrangement",
+    "body": "Ava puts the phone away. You agree to do the same when you are talking together.",
+    "illustration": "relationship",
+    "effects": [
+      {
+        "id": "effect_0",
+        "label": "Respect",
+        "value": "+3%",
+        "tone": "positive"
+      },
+      {
+        "id": "effect_1",
+        "label": "Happiness",
+        "value": "+0%",
+        "tone": "neutral"
+      },
+      {
+        "id": "effect_2",
+        "label": "Relationship",
+        "value": "+0%",
+        "tone": "neutral"
+      }
+    ]
+  },
+  "originalArcadePaymentId": "txn_33_2182",
+  "verification": {
+    "tests": 2,
+    "suites": 1,
+    "seconds": 9.817,
+    "strictApplicationAndTestTypes": true,
+    "appGamePersistenceUnchanged": true,
+    "allCurrentAndPriorWorldFieldsPreserved": true,
+    "ackFailureRetryColdResumeAndNoRepeat": true
+  }
+}

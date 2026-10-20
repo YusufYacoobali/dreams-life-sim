@@ -1,5 +1,17 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Before workplace schema work, the actual revision-46 teen result is preserved
+in `v28-native-teen-archive.json`, exported with clean unmodified pushed
+`3c6df7e`. The current checkpoint and sixteen original v1/v2 moments/metadata
+are byte-exact. Whole-world hash is the original `a61d171...`. Both full-field
+preservation and SQLite acknowledgement failure/retry/cold checks pass: **two
+checks / one suite**, **9.817 seconds**, strict types. This is fixture protection,
+not a new whole-regression total; app/game/persistence source and the complete
+baseline below remain unchanged. Never regenerate this fixture with newer code.
+[Producer and fingerprint](verification/native-teen-archive-v28-20261020.json).
+Next milestone: persistent ordinary-work colleagues/supervisor and feedback,
+with read-only browsing and explicit introductions, preserving responsiveness.
+
 Latest completed milestone: [content five](TEEN_HOME_STORIES.md) adds ten early-
 teen home situations and thirty choices, for **100 distinct source situations**.
 World **28 / engine 27 / content 5 / database 6** is current. Migration retains
