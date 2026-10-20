@@ -252,7 +252,8 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       const relation = world.relationships.find(r => r.id === effect.relationshipId);
       if (!relation) throw new IneligibleAction('That relationship no longer exists');
       const before = relation.strength; relation.strength = clamp(before + effect.delta); refreshFriendship(relation);
-      delta = relation.strength - before; label = 'Relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
+      const names = [relation.from, relation.to].filter(id => id !== world.activePersonId).map(id => fullName(world.people[id]));
+      delta = relation.strength - before; label = names.join(' and ') + ' · relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
     } else {
       const from = world.accounts.find(account => account.id === effect.fromAccountId);
       const to = world.accounts.find(account => account.id === effect.toAccountId);
