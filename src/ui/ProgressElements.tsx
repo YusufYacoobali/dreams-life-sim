@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ProgressArt } from '../progression/progress';
 import { SchoolArt } from '../assets/SchoolArt';
@@ -20,11 +20,6 @@ export function ProgressPicture({ art, size = 44 }: { art: ProgressArt; size?: n
   if (art === 'rings') return <FamilyArt id="rings" size={size} />;
   if (art === 'trophy') return <FameBusinessArt id="trophy" size={size} />;
   return <Illustration id={art === 'work' ? 'career' : art === 'money' ? 'money' : 'travel'} size={size} />;
-}
-
-export function ProgressFilters<T extends string>({ values, selected, onSelect }: { values: readonly { id: T; label: string }[]; selected: T; onSelect: (id: T) => void }) {
-  const c = useColors();
-  return <View accessibilityRole="tablist" style={{ flexDirection: 'row', gap: 5, flexWrap: 'wrap' }}>{values.map(item => <Pressable key={item.id} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: selected === item.id }} onPress={() => onSelect(item.id)} style={{ flex: 1, minWidth: 54, minHeight: 48, paddingHorizontal: 4, justifyContent: 'center', backgroundColor: selected === item.id ? c.blue : c.inset, borderRadius: 10 }}><Text style={{ color: selected === item.id ? '#FFFFFF' : c.ink, textAlign: 'center', fontSize: 12, fontWeight: '600' }}>{item.label}</Text></Pressable>)}</View>;
 }
 
 export function ProgressSummary({ complete, total, label }: { complete: number; total: number; label: string }) {

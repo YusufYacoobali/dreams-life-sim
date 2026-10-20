@@ -52,6 +52,12 @@ milestones. All 70 affected UI/projection checks, strict types and both fresh
 Hermes exports pass. This does not close the full catalogue or broader release
 gates; the conservative estimates below stay fixed.
 
+[Relationship browsing](RELATIONSHIP_LIST.md) now bounds mounted contacts and
+connects the reference filters/name search. Native parent profile/Back retains
+the selected view, and childhood Family no longer presents adult planning
+controls. Sixteen affected checks/types/exports pass; every native SQLite table
+stays exact. These scoped interactions leave broader baselines open.
+
 World 27 now connects [four persistent hobbies and four paid outings](LEISURE.md)
 with actual monthly practice/funding and the existing pet-owning-child save.
 The complete regression passes **1,143 tests / 73 suites** in **788.232

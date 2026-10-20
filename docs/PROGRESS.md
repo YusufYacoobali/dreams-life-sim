@@ -12,6 +12,17 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+[Relationships](RELATIONSHIP_LIST.md) now virtualises its contacts and adds
+All/Family/Friends/Romance filters, name search and compact existing shortcuts.
+Actual Android search/profile/Back retains the same parent and query/filter;
+ten targets meet 48dp. Childhood Family now shows local adult-age guidance in
+place of adult planning/adoption controls. All **16 affected checks / six
+suites** pass in **16.799 seconds**, strict types and fresh Hermes exports pass.
+Every row in all eight native SQLite tables remains exact, retaining revision
+53, three lives, twelve moments and seventeen receipts. Game/persistence and
+broader baselines remain unchanged; [raw native evidence](verification/android24-contacts-20261020/)
+and [source record](verification/contacts-20261020.json) retain scope.
+
 The initial [Extras catalogue](EXTRAS.md) now connects twelve factual
 achievements, four challenges, goal shortcuts, inherited possessions and Help.
 Filters/details read this person's existing history without RNG, money or save

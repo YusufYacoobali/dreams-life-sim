@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-contacts-20261020/` preserves actual relationship filters/search,
+  exact parent profile/Back, ten 48dp targets, empty Friends/Romance and childhood
+  Family before/after. Every SQLite table stays exact. `contacts-20261020.json`
+  records sixteen affected checks, strict types, source and fresh Hermes hashes.
+  See [relationship scope](../RELATIONSHIP_LIST.md); no large-person/device
+  performance or release gate is inferred.
+
 - `extras-projection-20261020.json` retains 31-sample read-only projection
   diagnostics on the existing genuine age-30/60 two-routine checkpoints. Entire
   worlds stay exact; this is cloud CPU scope, not native navigation/startup timing.

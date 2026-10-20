@@ -1,25 +1,58 @@
-import { PetsLeisureArt } from '../../../src/assets/PetsLeisureArt';
-import React from 'react';
-import { router } from 'expo-router';
+import React, { useMemo, useRef, useState } from 'react';
+import { FlatList, Keyboard, Pressable, Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Redirect, router } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../../src/state/useGame';
 import { ageOn, fullName } from '../../../src/game/model';
-import { ActionRow, Body, Card, Header, Page, Portrait, StatBar } from '../../../src/ui/components';
-import { useColors } from '../../../src/ui/theme';
-import { FamilyArt } from '../../../src/assets/FamilyArt';
-import { relationLabel } from '../../../src/game/systems/relationships';
+import { ActionRow, Body, Card, Header, Portrait, StatBar } from '../../../src/ui/components';
+import { ThemedStatusBar, useColors } from '../../../src/ui/theme';
+import { FilterTabs } from '../../../src/ui/FilterTabs';
+import { Relationship, relationLabel } from '../../../src/game/systems/relationships';
+
+const filters = [{ id: 'all', label: 'All' }, { id: 'family', label: 'Family' }, { id: 'friends', label: 'Friends' }, { id: 'romance', label: 'Romance' }] as const;
+type Filter = typeof filters[number]['id'];
+const shortcuts = [
+  { label: 'Pets', accessible: 'Household Pets', icon: 'paw', route: '/pets' },
+  { label: 'Family', accessible: 'Family & Children', icon: 'people', route: '/family' },
+  { label: 'Home', accessible: 'My Household', icon: 'home', route: '/household' },
+] as const;
 
 export default function Relationships() {
-  const world = useGame(s => s.world)!;
-  const c = useColors();
-  const edges = world.relationships.filter(edge => edge.from === world.activePersonId || edge.to === world.activePersonId);
-  return <Page><Header title="Relationships" />
-    <Card><ActionRow title="Household Pets" subtitle="Companions, adoption and care" icon={<PetsLeisureArt id="paw" size={40} />} onPress={() => router.push('/pets')} /><ActionRow title="Meet New People" subtitle="Friendship, introductions and dating" icon={<FamilyArt id="rose" size={40} />} onPress={() => router.push('/meet-people')} /><ActionRow title="Family & Children" icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="My Household" subtitle="Living arrangements and shared costs" icon={<FamilyArt id="family-tree" size={40} />} onPress={() => router.push('/household')} /></Card>
-    <Card>{edges.map(edge => {
-      const person = world.people[edge.from === world.activePersonId ? edge.to : edge.from];
-      return <React.Fragment key={edge.id}>
-        <ActionRow title={fullName(person)} subtitle={relationLabel(world, edge) + (person.died ? ' · Deceased' : ' · Age ' + ageOn(person, world.date))} icon={<Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={44} />} onPress={() => router.push({ pathname: '/person/[id]', params: { id: person.id } })} />
-        <StatBar label="Relationship" value={edge.strength} color={c.green} />
-      </React.Fragment>;
-    })}{edges.length === 0 && <Body muted>Your connections will appear here.</Body>}</Card>
-  </Page>;
+  const world = useGame(s => s.world), c = useColors(), list = useRef<FlatList<Relationship>>(null);
+  const [filter, setFilter] = useState<Filter>('all'), [query, setQuery] = useState('');
+  const contacts = useMemo(() => {
+    if (!world) return [];
+    const search = query.trim().toLocaleLowerCase();
+    return world.relationships.filter(edge => {
+      if (edge.from !== world.activePersonId && edge.to !== world.activePersonId) return false;
+      if (filter === 'family' && !edge.roles.some(role => role === 'parent' || role === 'guardian' || role === 'sibling') && edge.romance !== 'married' && edge.romance !== 'widowed') return false;
+      if (filter === 'friends' && !edge.roles.includes('friend')) return false;
+      if (filter === 'romance' && edge.romance === 'none') return false;
+      return !search || fullName(world.people[edge.from === world.activePersonId ? edge.to : edge.from]).toLocaleLowerCase().includes(search);
+    });
+  }, [world?.relationships, world?.people, world?.activePersonId, filter, query]);
+  if (!world) return <Redirect href="/" />;
+  const open = (route: typeof shortcuts[number]['route'] | '/meet-people') => { Keyboard.dismiss(); router.push(route); };
+  return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar />
+    <FlatList ref={list} data={contacts} keyExtractor={item => item.id} initialNumToRender={8} maxToRenderPerBatch={8} windowSize={7} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
+      ListHeaderComponent={<View style={{ gap: 16, paddingBottom: 16 }}>
+        <Header title="Relationships" trailing={<Pressable accessibilityRole="button" accessibilityLabel="Meet New People" onPress={() => open('/meet-people')} style={{ minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center' }}><Ionicons name="add" size={28} color={c.blue} /></Pressable>} />
+        <FilterTabs values={filters} selected={filter} onSelect={value => { setFilter(value); list.current?.scrollToOffset({ offset: 0, animated: false }); }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: c.surface, borderRadius: 12 }}>
+          <TextInput accessibilityLabel="Search relationships" placeholder="Search by name" placeholderTextColor={c.muted} value={query} onChangeText={setQuery} style={{ flex: 1, minHeight: 48, paddingHorizontal: 14, color: c.ink, fontSize: 16 }} />
+          {!!query && <Pressable accessibilityRole="button" accessibilityLabel="Clear relationship search" onPress={() => setQuery('')} style={{ minHeight: 48, minWidth: 48, alignItems: 'center', justifyContent: 'center' }}><Ionicons name="close-circle" size={22} color={c.muted} /></Pressable>}
+        </View>
+        <View style={{ flexDirection: 'row', gap: 8 }}>{shortcuts.map(item => <Pressable key={item.route} accessibilityRole="button" accessibilityLabel={item.accessible} onPress={() => open(item.route)} style={({ pressed }) => ({ flex: 1, minHeight: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, padding: 6, borderRadius: 10, backgroundColor: pressed ? c.selected : c.inset })}><Ionicons name={item.icon} color={c.blue} size={20} /><Text style={{ color: c.ink, fontSize: 13, flexShrink: 1 }}>{item.label}</Text></Pressable>)}</View>
+      </View>}
+      ListEmptyComponent={<Card><Body muted>{query.trim() ? 'No matching names in this view.' : filter === 'all' ? 'Your connections will appear here.' : filter === 'family' ? 'No family connections in this record yet.' : filter === 'friends' ? 'Your friendships will appear here as you get to know people.' : 'Your current and past partners will appear here.'}</Body></Card>}
+      renderItem={({ item: edge, index }) => {
+        const person = world.people[edge.from === world.activePersonId ? edge.to : edge.from], name = fullName(person);
+        return <View style={{ backgroundColor: c.surface, paddingHorizontal: 16, paddingBottom: 12, borderTopLeftRadius: index === 0 ? 18 : 0, borderTopRightRadius: index === 0 ? 18 : 0, borderBottomLeftRadius: index === contacts.length - 1 ? 18 : 0, borderBottomRightRadius: index === contacts.length - 1 ? 18 : 0 }}>
+          <ActionRow title={name} subtitle={relationLabel(world, edge) + (person.died ? ' · Deceased' : ' · Age ' + ageOn(person, world.date))} value={'Bond ' + edge.strength + '%'} icon={<Portrait name={name} appearance={person.appearance} age={ageOn(person, world.date)} size={44} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id } }); }} />
+          <StatBar label="Relationship" value={edge.strength} color={c.green} />
+        </View>;
+      }}
+    />
+  </SafeAreaView>;
 }

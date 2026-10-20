@@ -1,5 +1,18 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Relationships now virtualises contacts and adds the reference's All/Family/
+Friends/Romance filters plus name search, with compact family/pet/home links.
+Actual Android Family + `Ruby` opens the correct parent and retains its query/
+filter on Back; ten targets are 48dp. A real childhood Family review also removes
+adult planning/adoption controls in favour of the local adult-age guidance.
+All **16 affected checks / six suites** pass in **16.799 seconds**, strict types
+and fresh Hermes exports pass. Every native SQLite row stays exact (revision
+53; three lives/twelve moments/seventeen receipts). Read
+[scope](RELATIONSHIP_LIST.md), [raw proof](verification/android24-contacts-20261020/)
+and [source/checks](verification/contacts-20261020.json). Game/persistence remains
+fixed while the engine sweep below runs. Continue early-game/production work;
+the user's file-feature breadth remains deferred.
+
 The latest read-only [Extras increment](EXTRAS.md) connects twelve achievements,
 four challenges, inherited possessions and Help. Life Summary now virtualises
 its journal and shows actual milestones. All **70 affected checks / 37 suites**
