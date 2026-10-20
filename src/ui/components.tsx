@@ -45,7 +45,8 @@ export function Button({
   disabled?: boolean; busy?: boolean; accessibilityLabel?: string;
 }) {
   const c = useColors();
-  const background = tone === 'secondary' ? c.inset : tone === 'positive' ? c.green : tone === 'danger' ? c.red : c.blue;
+  const background = tone === 'secondary' ? c.inset : tone === 'positive' ? c.actionGreen : tone === 'danger' ? c.actionRed : c.actionBlue;
+  const pressedBackground = tone === 'secondary' ? c.selected : tone === 'positive' ? c.actionGreenPressed : tone === 'danger' ? c.actionRedPressed : c.actionBluePressed;
   const color = tone === 'secondary' ? c.ink : '#FFFFFF';
   const [submitted, setSubmitted] = useState(false);
   useEffect(() => { if (!busy) setSubmitted(false); }, [busy, submitted]);
@@ -56,7 +57,7 @@ export function Button({
       accessibilityRole="button" accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled: disabled || busy, busy: saving }}
       disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); }}
-      style={({ pressed }) => [styles.button, { backgroundColor: background, opacity: disabled || busy ? 0.5 : pressed ? 0.8 : 1 }]}
+      style={({ pressed }) => [styles.button, { backgroundColor: pressed ? pressedBackground : background, opacity: disabled || busy ? 0.5 : 1 }]}
     >
       {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" />}
       <Text style={[styles.buttonLabel, { color }]}>{label}</Text>
