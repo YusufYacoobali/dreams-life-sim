@@ -12,6 +12,28 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+[Large-save copying](LARGE_SAVE_RESPONSIVENESS.md) now clones only already-certified
+plain data directly, keeps all mutable fields isolated and indexes employment
+history per person. Full result validation, atomic saves, schema/content and all
+outcomes remain unchanged. All **1,385 tests / 100 suites** pass in **884.642s**,
+strict types and both Hermes exports. All **120 immutable lives** pass in
+**742.785s**, every complete terminal world exactly matching74be9e4.
+[Source/checks](verification/model-copy-20261020.json),
+[raw regression](verification/regression-model-copy-20261020.txt).
+
+Same-driver cloud stress inputs create100/1000 actual known contacts, with no
+native/natural-journey claim. All55warm samples per source avoid full decode;
+every cold current/backup and original Before Age Up payload is exact. Whole
+outcomes match. In this five-sample comparison, the1000-contact routine median
+changes261.05→165.65ms; its twelve-month Age Up step601.75→489.69ms. Timings remain
+host/GC-sensitive cloud diagnostics. [Raw comparison](verification/population-model-copy-comparison-20261020.json).
+Native routine78/cold result/ack79 match expected worlds and preserve all older
+lives/history; current five lives/36moments/67receipts. The corrected capture timing
+is explicit in [native evidence](verification/android24-model-copy-20261020/).
+Save packing, physical p95 and remaining integration/storage/release gates stay
+open. Full production remains about50%; catalogue110/250,140more situations.
+
+
 World **30 /engine29 /content6 /database6** adds ten [named workplace situations](WORKPLACE_STORIES.md)
 and thirty choices, for **110/250 minimum /140 remaining**. Actual available
 colleagues/current supervisor bind by exact IDs/full names without generation or

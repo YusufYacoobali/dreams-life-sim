@@ -4,6 +4,20 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `model-copy-20261020.json` records certified isolated direct copying, per-person
+  employment validation indexing, all1,385tests/100suites, strict types and both
+  fresh Hermes exports. Raw:`regression-model-copy-20261020.txt`. Native77→79
+  exact worlds/original-row protection and corrected capture timing are retained
+  in`android24-model-copy-20261020/`.
+- `life-sweep-model-copy-120-20261020.json` and matching`.ndjson` retain all120
+  current immutable seeds in742.785seconds, empty stderr/exit0. Every whole
+  terminal world exactly matches the same input at74be9e4; no extra seed claim.
+- `population-model-copy-comparison-20261020.json` links both raw fixed-driver
+  sources/11matched inputs. All55warm samples per source avoid full decode;
+  cold current/backup and Before Age Up payloads are exact. Generated-at-once
+  100/1000known-contact cloud cases do not establish native/physical p95 or
+  natural120-year/multigeneration/storage acceptance.
+
 - `workplace-stories-content6-20261020.json` records ten actual-contact situations,
   content-tag-only migration, school-leaver guidance and the complete1,379-test/
   99-suite pass, strict types and both Hermes exports. Raw complete output:

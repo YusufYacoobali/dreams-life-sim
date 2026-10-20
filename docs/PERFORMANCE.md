@@ -4,7 +4,34 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current content-six diagnostics
+## Current certified-copy and population diagnostics
+
+All1,385tests/100suites, strict types, both Hermes exports and120immutable lives
+pass. Every complete terminal world matches74be9e4. Certified direct copying and
+one local employment-history index preserve all integrity checks. [Details](LARGE_SAVE_RESPONSIVENESS.md).
+
+The same fixed driver measures the original74be9e4 source and optimised source
+serially after validation jobs close, with one warm-up/five samples per case.
+All11inputs and complete stress outcomes match. All55warm samples per source
+avoid full checkpoint decode; every cold current/backup and original Before Age
+Up payload is exact. [Source/raw records](verification/population-model-copy-comparison-20261020.json).
+
+| Cloud engine + SQLite case | Before median | After median |
+| --- | ---: | ---: |
+|100known contacts, routine |52.90ms |26.11ms |
+|100known contacts, twelve-month Age Up step |88.96ms |58.02ms |
+|1000known contacts, routine |261.05ms |165.65ms |
+|1000known contacts, twelve-month Age Up step |601.75ms |489.69ms |
+
+The generated-at-once1000-contact input has1007people and eight initial monthly
+financial actors, using the existing relevance/coarse-NPC model. It is not a
+natural/native120-year or multigeneration workload. Host load/GC affect these
+five-sample medians; no physical p95/release budget is inferred. Reproduce with
+`node tools/benchmark-actions.cjs --profile --population`;`--source` selects an
+isolated historical source tree for the matched baseline. Save packing remains
+significant and is the next cost to reduce without discarding saved history.
+
+## Earlier content-six diagnostics
 
 The complete1,379-test/99-suite regression, strict types, both Hermes exports and
 120current immutable lifetimes pass. After those processes close, ten serial

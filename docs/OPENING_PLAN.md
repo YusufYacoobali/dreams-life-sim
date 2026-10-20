@@ -15,6 +15,15 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+The latest [large-save copy improvement](LARGE_SAVE_RESPONSIVENESS.md) keeps full
+result validation and exact saves while removing repeated pre-action parsing and
+history scans. All1,385tests/100suites, strict types, both exports and120immutable
+lifetimes pass; every terminal world equals74be9e4. Matched cloud1000-contact
+routine median261.05→165.65ms; this is not physical timing. Actual native routine/
+cold result/ack79 are exact, retaining all original lives/history. [Current checks](verification/model-copy-20261020.json).
+Save packing remains the next responsiveness cost; keep current conservative
+completion estimates and broader production gates open.
+
 Current **world30/engine29/content6** adds ten actual-contact workplace situations,
 for110/250 minimum with140remaining. All1,379tests/99suites, strict types, both
 Hermes exports and120current immutable lifetimes pass. Actual native normal year,

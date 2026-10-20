@@ -1,0 +1,66 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "74be9e4",
+  "scope": "Current-source validated immutable first-eligible lifetimes; complete terminal worlds compare exactly with the same120content6 inputs at74be9e4",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 2957
+  },
+  "completion": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 29,
+      "content": 6
+    },
+    "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 742785
+  },
+  "distinctSeeds": 120,
+  "seeds": [
+    0,
+    119
+  ],
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "processSeconds": 745.836,
+  "raw": {
+    "file": "life-sweep-model-copy-120-20261020.ndjson",
+    "sha256": "684d02567b4444f3cae17c9c10663eaa1b4ac3b8f36d2b34708672681712a0d8"
+  },
+  "all120WholeTerminalWorldsAndMetricsExactTo74be9e4": true,
+  "overlappingRunsNotAdditionalDistinctSeeds": true,
+  "limits": "Pure engine/cloud Node, not native/SQLite, every optional action,120-year,1000-known-people or multigeneration acceptance. Population diagnostics and native durability have separate records."
+}

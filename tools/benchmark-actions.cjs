@@ -5,6 +5,7 @@ const assert = require('node:assert/strict'), { createHash } = require('node:cry
 const { DatabaseSync } = require('node:sqlite'), ts = require('typescript');
 require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText, file);
 const hash = value => createHash('sha256').update(value).digest('hex');
+const originalDriverHash = hash(fs.readFileSync(__filename));
 const sourceArg = process.argv.indexOf('--source'), source = sourceArg < 0 ? path.join(__dirname, '..') : path.resolve(process.argv[sourceArg + 1]);
 function sourceHash() {
   const digest = createHash('sha256');
@@ -26,7 +27,7 @@ function legacyPayload(text) {
   return JSON.stringify({ format: 'dreams-checkpoint-v1', bytes: bytes.length, hash: fingerprint.toString(16).padStart(8, '0'), data: encodeBase64(gzipSync(bytes, { level: 4, mtime: 0 })) });
 }
 let phases = null;
-for (const [module, name] of [[model, 'validateWorld'], [model, 'encodeWorld'], [checkpoints, 'packCheckpoint'], [checkpoints, 'unpackCheckpoint']]) {
+for (const [module, name] of [[model, 'copyWorld'], [model, 'validateWorld'], [model, 'encodeWorld'], [checkpoints, 'packCheckpoint'], [checkpoints, 'unpackCheckpoint']]) {
   const original = module[name]; module[name] = (...args) => {
     const start = performance.now(); try { return original(...args); } finally {
       if (phases) { const row = phases[name] ??= { calls: 0, inclusiveMs: 0 }; row.calls++; row.inclusiveMs += performance.now() - start; }
@@ -76,6 +77,26 @@ else if (historyIndex >= 0) {
     const world = checkpoints.unpackCheckpoint(row.payload);
     cases.push({ label: 'Age-' + age + ' routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine } });
   }
+if (process.argv.includes('--population')) {
+  const { createContact } = load('src/game/systems/npcs.ts'), { connectPerson } = load('src/game/systems/relationships.ts');
+  const { financialActors } = load('src/game/systems/households.ts'), { countryCodes } = load('src/game/countries.ts');
+  const original = cases.find(item => item.label === 'Age-30 routine').world;
+  for (const count of [100, 1000]) {
+    const world = model.copyWorld(original), initialPeople = Object.keys(world.people).length;
+    const known = new Set(world.relationships.filter(item => item.from === world.activePersonId || item.to === world.activePersonId).map(item => item.from === world.activePersonId ? item.to : item.from));
+    // An explicit generated-at-once stress setup, not a natural/native journey.
+    // Use real contact/background/relationship creation, with saved RNG draws.
+    let added = 0;
+    while (known.size < count) {
+      const contact = createContact(world, { age: 20 + added % 40, country: countryCodes[added % countryCodes.length] });
+      connectPerson(world, contact.id); known.add(contact.id); added++;
+    }
+    model.validateWorld(world);
+    const setup = { scope: 'generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression', initialPeople, addedContacts: added, knownContacts: known.size, totalPeople: Object.keys(world.people).length, monthlyFinancialActors: financialActors(world).length };
+    cases.push({ label: count + '-known-contact routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine }, setup });
+    cases.push({ label: count + '-known-contact first Age Up step', world, command: { type: 'advance' }, setup });
+  }
+}
 if (process.argv.includes('--workplaces') || process.argv.includes('--raises')) {
   // Continue a genuine saved teen result with ordinary production commands.
   // These prepared inputs exercise the new roster; no money, tenure or RNG edits.
@@ -125,6 +146,7 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
 (async () => {
   const results = [];
   for (const item of cases) {
+    let outcome;
     const trials = [], input = model.encodeWorld(item.world), oldPayload = legacyRows ? legacyPayload(input) : null;
     // One warm-up followed by five samples, each starting at the same actual world.
     for (let trial = 0; trial < 6; trial++) {
@@ -132,21 +154,33 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
       await repo.initialise(); await repo.create(item.world);
       if (oldPayload) for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(oldPayload);
       const opening = performance.now(), world = await repo.load(item.world.id), coldOpenMs = performance.now() - opening;
+      const keepSnapshot = item.command?.type === 'advance';
+      const priorPayload = keepSnapshot ? sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id).payload : null;
       phases = {}; const start = performance.now();
       const next = item.command ? resolveCommand(world, item.command, true) : { ...world, revision: world.revision + 1, birthAcknowledged: true };
       const resolved = performance.now();
-      const committed = await repo.commit(next, world.revision, 'benchmark:' + world.revision);
+      const committed = await repo.commit(next, world.revision, 'benchmark:' + world.revision, keepSnapshot);
       const finished = performance.now(), measured = phases; phases = null;
+      if (item.setup) {
+        const observed = { worldSha256: hash(model.encodeWorld(committed)), date: committed.date, people: Object.keys(committed.people).length, ledgerRows: committed.ledger.length, monthsProcessed: committed.annual?.monthsProcessed ?? null, annualStage: committed.annual?.stage ?? null, pendingKind: committed.pending?.kind ?? null, beforeAgeUpSnapshotRetained: keepSnapshot };
+        if (outcome) assert.deepEqual(observed, outcome, 'Stress input must resolve identically in every trial');
+        else outcome = observed;
+      }
       sqlite.close(); const cold = open(file);
       assert.deepEqual(await cold.repo.load(world.id), committed);
       assert.deepEqual(await cold.repo.recoveryPreview(world.id), world);
+      if (keepSnapshot) {
+        const moments = cold.sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=?').all(world.id);
+        assert.equal(moments.length, 1); assert.equal(moments[0].payload, priorPayload, 'Before Age Up retains the original current bytes');
+      }
       cold.sqlite.close();
       if (trial) trials.push({ totalMs: finished - start, resolveMs: resolved - start, commitMs: finished - resolved, coldOpenMs, phases: measured });
     }
-    results.push({ label: item.label, inputSha256: hash(input), inputBytes: Buffer.byteLength(input), ledgerRows: item.world.ledger.length,
+    results.push({ label: item.label, ...(item.setup ? { setup: item.setup, outcome } : {}), inputSha256: hash(input), inputBytes: Buffer.byteLength(input), ledgerRows: item.world.ledger.length,
       medianMs: Object.fromEntries(['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs'].map(name => [name, median(trials.map(row => row[name]))])), trials });
     process.stderr.write(item.label + ': ' + results.at(-1).medianMs.totalMs.toFixed(2) + ' ms\n');
   }
   assert.equal(sourceHash(), originalHash, 'Sources changed during measurement');
-  process.stdout.write(JSON.stringify({ scope: 'five warm cloud Node/on-disk SQLite samples per fixed actual world; every cold world and backup exact; not native', startingRows: legacyRows ? 'v1 current/backup, first write after cold open' : 'current format, compression blocks primed by cold open', node: process.version, sourceHash: originalHash, driverHash: hash(fs.readFileSync(__filename)), results }, null, 2) + '\n');
+  assert.equal(hash(fs.readFileSync(__filename)), originalDriverHash, 'Diagnostic driver changed during measurement');
+  process.stdout.write(JSON.stringify({ scope: 'five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native', startingRows: legacyRows ? 'v1 current/backup, first write after cold open' : 'current format, compression blocks primed by cold open', node: process.version, sourceHash: originalHash, driverHash: originalDriverHash, results }, null, 2) + '\n');
 })().catch(error => { process.stderr.write(error.stack + '\n'); process.exitCode = 1; }).finally(() => fs.rmSync(folder, { recursive: true, force: true }));

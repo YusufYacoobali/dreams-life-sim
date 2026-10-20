@@ -16,7 +16,52 @@ stays parked; the existing80%+ implementation's folder-save check passed. Read-o
 previous-life summaries are complete. Full production remains approximately
 **50%**; the catalogue is now **110/250 minimum**, with **140 situations remaining**.
 
-## Current verified milestone
+## Current performance checkpoint
+
+Certified worlds now make isolated mutable working copies directly, avoiding a
+second schema parse before each command. Every result still passes complete
+shape/integrity validation. A local per-person work-history index removes repeated
+whole-history scans without dropping any checks. Schema30/engine29/content6/DB6,
+game outcomes and all original fixtures remain unchanged.
+
+All **1,385 tests / 100 suites** pass in **884.642 seconds**, strict app/test types
+and both fresh Hermes exports. All **120 immutable lifetimes** pass in **742.785
+seconds**, with every complete terminal world exactly equal to74be9e4. These are
+the same seeds, not additional distinct cases. All gate processes have closed.
+[Source/checks](verification/model-copy-20261020.json),
+[complete regression](verification/regression-model-copy-20261020.txt),
+[lifetime proof](verification/life-sweep-model-copy-120-20261020.json).
+
+Game hash: `287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d`.
+Combined game/persistence:
+`0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c`.
+
+The fixed diagnostic driver now creates100/1000 actual known contacts through
+normal domain creation, from the genuine age30 input. The1000-contact case has
+1007people and eight initial monthly financial actors. This generated-at-once
+cloud stress setup is not a natural/native/multigeneration journey. Same inputs
+and whole outcomes match across the old/new implementation;55warm samples per
+source avoid full checkpoint decode and every cold current/backup is exact.
+Before Age Up snapshots retain original current bytes. In this five-sample cloud
+comparison,1000-contact routine median261.05→165.65ms; the observed twelve-month
+Age Up step601.75→489.69ms. Host load/GC affect timings; no physical p95 claim.
+[Method and remaining cost](LARGE_SAVE_RESPONSIVENESS.md),
+[raw comparison](verification/population-model-copy-comparison-20261020.json).
+
+Current native is Amahle **age20/revision79**, five lives/36moments/67receipts,
+no pending/year. Routine78 and acknowledgement79 match whole expected worlds;
+original four inactive worlds/backups,36moments/metadata and65old receipts remain
+exact. Initial cold/browsing/draft keep all eight tables exact. Confirmed78 taken
+after force-stop/before Continue stays exact through cold Continue. The native
+record explicitly discards an earlier premature77 capture; it is not a pre-stop78
+snapshot. [Four captures and exact scope](verification/android24-model-copy-20261020/).
+
+Next preserve actual named result76 with isolated unmodified pushed74be9e4, then
+reduce the remaining save-packing cost. The genuine producer must remain pinned;
+do not regenerate history with the optimised source. Keep the benchmark driver
+fixed for further matched comparisons and do not rerun unchanged full gates.
+
+## Earlier workplace-content milestone
 
 World **30 / engine29 / content6 / database6** adds ten named workplace situations
 and thirty choices. [WORKPLACE_STORIES.md](WORKPLACE_STORIES.md) lists the scenes,
@@ -55,7 +100,7 @@ paired comparison or physical/native p95. Reproduce with
 `node tools/benchmark-actions.cjs --profile --raises`.
 [Raw](verification/action-latency-workplace-stories-20261020.json).
 
-## Actual native save
+## Earlier native workplace save
 
 The same Amahle life naturally reaches the new shared-credit scene75 after an
 ordinary paid year. Actual Sipho Naidoo/person_npc_49_17 and Thando Naidoo/
@@ -65,7 +110,7 @@ qualification/RNG. Cold migration, guidance/job browsing and interrupted-result
 resume retain all eight tables. Eleven annual journal currency-spacing exceptions
 are explicitly enumerated; every simulation field matches, without native edits.
 
-Current: **Amahle age20/revision77**, `life_native_arcade_v28`, no pending/year;
+That milestone ended at **Amahle age20/revision77**, `life_native_arcade_v28`, no pending/year;
 **five lives/36moments/65receipts**. All four inactive live/backup worlds,35old
 moments/metadata and62prior receipts stay exact. New Before Age Up74 payload is
 byte-identical to the original content5 current row. Riley53 and branch38 remain
@@ -88,7 +133,9 @@ Environment (recheck if missing):
   `__UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo EXPO_OFFLINE=1 CI=1`.
 - Native DB `/data/user/0/host.exp.exponent/files/SQLite/dreams.db` plus WAL.
   Only copy for read-only verification; never edit native save data.
-- `/tmp/dreams-workplace-content6-final-db`77, `-result-db`76,
+- Current `/tmp/dreams-model-copy-final-db`79; confirmed routine result78 is
+  `/tmp/dreams-model-copy-confirmed-result-db`. Earlier:
+  `/tmp/dreams-workplace-content6-final-db`77, `-result-db`76,
   `-decision-db`75, `-before-db`74. Earlier `/tmp/dreams-journal-final-db`74
   and `/tmp/dreams-raises-finished-db`66 preserve earlier milestones.
 - `/tmp/dreams-native-ui.py` locates actual accessible controls. Await each
@@ -124,8 +171,8 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, investigate larger-life/population save and action costs against the
-remaining responsiveness/storage gates. Keep scoped diagnostic setup explicit;
+Next, reduce remaining save-packing cost after preserving the genuine named
+result76 with its original producer. Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration
 acceptance. Correct any measured bottleneck, and continue broader adult stories,
 interviews, real hours/hourly pay, work conflicts and career depth. Multi-person

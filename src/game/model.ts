@@ -148,6 +148,11 @@ export function validateWorld(value: unknown, immutable = false): World {
   const relationshipIds = new Set<string>();
   const journalIds = new Set<string>();
   const householdIds = new Set<string>(), householdMembers = new Set<string>();
+  const employmentByPerson = new Map<string, World['workHistory']>();
+  for (const record of world.workHistory) {
+    const records = employmentByPerson.get(record.personId) ?? [];
+    records.push(record); employmentByPerson.set(record.personId, records);
+  }
   for (const household of world.households) {
     if (householdIds.has(household.id)) throw new Error('Duplicate household'); householdIds.add(household.id);
     for (const id of household.members) {
@@ -173,7 +178,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     for (const vaccine of person.health.vaccinations) if (compareDates(vaccine.date, person.born) < 0 || compareDates(vaccine.date, world.date) > 0 || vaccine.expiresMonth <= vaccine.date.year * 12 + vaccine.date.month - 1) throw new Error('Invalid vaccination record');
     if (person.employment) {
       const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
-      const history = world.workHistory.find(record => record.id === person.employment!.id && record.personId === id && !record.ended);
+      const history = employmentByPerson.get(id)?.find(record => record.id === person.employment!.id && !record.ended);
       if (!role || !history || history.roleId !== role.id || history.currency !== person.employment.currency || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
     }
   }
@@ -183,7 +188,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     workIds.add(record.id);
   }
   for (const person of Object.values(world.people)) {
-    const records = world.workHistory.filter(record => record.personId === person.id);
+    const records = employmentByPerson.get(person.id) ?? [];
     if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.normalizedGross, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
   const relationPairs = new Set<string>(), romanticPeople = new Set<string>();
@@ -358,9 +363,27 @@ function freezeTree(value: unknown): void {
   for (const child of Object.values(value)) freezeTree(child);
   Object.freeze(value);
 }
+/** The caller must already have certified this plain-data tree. */
+function copyCertifiedTree(value: unknown): unknown {
+  if (!value || typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map(copyCertifiedTree);
+  const copy: Record<string, unknown> = {};
+  for (const key of Object.keys(value)) {
+    const child = copyCertifiedTree((value as Record<string, unknown>)[key]);
+    if (key === '__proto__') Object.defineProperty(copy, key, { value: child, enumerable: true, writable: true, configurable: true });
+    else copy[key] = child;
+  }
+  return copy;
+}
 /** Mutable working copy; certified immutable inputs need no repeated integrity audit. */
 export function copyWorld(world: World): World {
-  return immutableWorlds.has(world) ? parseWorldShape(world) : validateWorld(world);
+  if (!immutableWorlds.has(world)) return validateWorld(world);
+  // Every field has already passed schema/integrity checks. Clone mutable data
+  // directly instead of running the schema parser a second time before acting.
+  // The command's result still receives full shape and integrity validation.
+  const copy = copyCertifiedTree({ ...world, ledger: [] }) as World;
+  copy.ledger = [...world.ledger];
+  return copy;
 }
 /** Storage and the UI share only fully validated, recursively frozen worlds. */
 export function immutableWorld(world: World): World {

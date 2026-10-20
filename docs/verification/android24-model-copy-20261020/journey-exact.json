@@ -1,0 +1,151 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T08:19:27.896Z",
+  "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+  "combinedGamePersistenceSourceHash": "0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c",
+  "baseCommit": "74be9e4",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 6
+  },
+  "scope": "Actual existing native77, final-source cold opening, health-routine draft/browsing, real routine save78, force-stop/cold result and acknowledgement79; no native data edits",
+  "command": {
+    "type": "health-routine",
+    "routine": {
+      "exercise": "none",
+      "diet": "balanced",
+      "sleep": "regular",
+      "mindfulness": false,
+      "smoking": false,
+      "drinking": "none"
+    }
+  },
+  "initialColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "9486209935ef07e0ff289caf0b72bdeaf79e78052d69997c289aa570c8cd4e6a"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "9d66b80805b79d6c396c478ac2a2ccba30ac42d2f17dab66ee2e92a043316d09"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 65,
+      "sha256": "d7eb917d794df193b9ab1e4c2edd495917bd82a5146451f3108a9c4bd986f66c"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "browsingAndDraftAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "9486209935ef07e0ff289caf0b72bdeaf79e78052d69997c289aa570c8cd4e6a"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "9d66b80805b79d6c396c478ac2a2ccba30ac42d2f17dab66ee2e92a043316d09"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 65,
+      "sha256": "d7eb917d794df193b9ab1e4c2edd495917bd82a5146451f3108a9c4bd986f66c"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "routine78WholeExpectedWorldExact": true,
+  "peopleMoneyRelationshipsAndRngUnchanged": true,
+  "confirmedResultCaptureScope": "First local capture immediately after tapping Save Routine still contained77 and was discarded. The confirmed78 capture was taken after force-stop/relaunch and before Continue. Its entire world equals the expected saved result; all8tables then match after cold Continue.",
+  "confirmed78BeforeContinueVsColdContinued78All8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "72baf46049a545597a317dde27ab35748a3bf359f52568c23d7c037ba7e8d9bb"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "d546891064f1edf6e084e1ff075030105f7d420271e59bbaef2b0bf10e16b043"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 66,
+      "sha256": "1efa0d93da7d2a643ef6e537c22a922c35c11fdb615401fa0fea26e60b69a25e"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "ack79WholeExpectedWorldExact": true,
+  "old4LiveAndBackupWorlds36MomentsMetadata65ReceiptsExact": true,
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 67,
+    "restore_receipts": 1,
+    "snapshot_metadata": 36,
+    "snapshots": 36
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 79,
+  "finalAge": 20,
+  "worldHashes": {
+    "77": "cc35b072908d232f3ccb0f62883ff3c4216d83f6afcbdd552a9619bfa2acd446",
+    "78": "a330e556cac50e082c8dbbdd97a9fdd67dfb87ee9dbe835eee7addc9cc3b40c9",
+    "79": "c5006b2003ad98d3bcd476ae9c5e3d56aad8a8401fbd75ba594ab55ab51e88fa"
+  },
+  "limits": "Software Android24/ExpoGo. This establishes exact state/durability and basic compatibility, not physical timing,1000-native-contacts,standalone/iOS or complete accessibility/release acceptance."
+}

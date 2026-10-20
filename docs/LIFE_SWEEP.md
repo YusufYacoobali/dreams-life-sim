@@ -1,20 +1,20 @@
 # Production-state lifetime invariant sweep
 
-Current **world30/engine29/content6** passes all **120 distinct seeds0–119**,
-all twelve countries, through the validated-immutable engine in **744.535 seconds**,
-empty stderr/exit0. Game hash:
-`cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b`.
-[Summary and raw cases](verification/life-sweep-workplace-stories-120-20261020.json)
-retain ages40–98, max24people/55,199ledger rows. Same-seed ordinary metrics match
-the prior raise run; terminal hashes change with the content tag. Overlapping
-runs do not create additional distinct seeds.
+Current world30/engine29/content6 passes all **120 distinct seeds0–119**, all
+twelve countries, through the validated-immutable engine in **742.785 seconds**,
+empty stderr/exit0. Every complete terminal world and ordinary metric exactly
+matches the same input at74be9e4 after the certified-copy/index optimisation.
+[Summary and raw cases](verification/life-sweep-model-copy-120-20261020.json).
+Game hash: `287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d`.
+Ages40–98, max24people/55,199ledger rows. Overlapping runs are not additional seeds.
 
-The first-eligible policy does not introduce optional workplaces. New named
-workplace situations have separate all-choice/all-country, SQLite/UI and actual
-native coverage. Complete current regression: **1,379 tests/99 suites**. No
-current-source1000-seed claim. Earlier [raise](verification/life-sweep-raises-120-20261020.json),
-[workplace](verification/life-sweep-workplaces-120-20261020.json) and content5 runs
-retain their historical source hashes and scope.
+The first-eligible policy does not introduce optional workplaces. Named work
+situations have separate all-choice/all-country, SQLite/UI and native coverage;
+larger known-population diagnostics are separately scoped. Complete current
+regression: **1,385 tests / 100 suites**. No current-source1000-seed claim.
+Earlier [content6](verification/life-sweep-workplace-stories-120-20261020.json),
+[raise](verification/life-sweep-raises-120-20261020.json) and previous runs retain
+their historical source hashes and scope.
 
 ## Earlier content-four 1,000-seed gate
 
