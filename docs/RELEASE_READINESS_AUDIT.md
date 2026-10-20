@@ -6,8 +6,8 @@ This is a source/evidence audit. It does not establish a release candidate or
 replace the coordinator's checks after integrating concurrent branches.
 
 The game has substantial connected gameplay and scoped native acceptance.
-Remaining release work includes executable build identity, original launcher
-branding, release-device acceptance and distribution preparation. Those tasks
+Remaining release work includes native verification of configured build identity
+and original launcher branding, release-device acceptance and distribution preparation. Those tasks
 are distinct from missing gameplay and from the user's parked archive/storage
 work. Current overall and feature estimates stay in [OPENING_PLAN.md](OPENING_PLAN.md).
 
@@ -24,23 +24,23 @@ work. Current overall and feature estimates stay in [OPENING_PLAN.md](OPENING_PL
 | Performance | Scoped cloud timings and warm zero-unpack checks exist. | Named release devices, physical p95, restore time, memory and smooth scrolling; software-emulator observation is not physical timing. |
 | Country behavior | Twelve country packs and nine currencies are implemented with extensive mathematical/gameplay checks. | Country rules are explicitly authored approximations in [COUNTRY_RULES.md](COUNTRY_RULES.md); consistency tests do not verify national source accuracy. |
 
-## Concrete source and release-configuration gaps
+## Source and release-configuration status
 
-1. **Build identity is not configured.** [app.json](../app.json) contains the
-   display name, slug, version and URL scheme, but no `ios.bundleIdentifier`,
-   `android.package`, `ios.buildNumber` or `android.versionCode`. There is no
-   `eas.json` or checked-in native project. EAS itself is optional; a documented
-   local build path is sufficient. Before a distributable build, choose stable
-   identifiers, establish monotonically increasing build numbers and select the
-   intended distribution method. Signing credentials and store/account actions
-   have not been performed.
-2. **Launcher branding is still the Expo starter.** The configured
-   [icon](../assets/icon.png) was visually inspected: it displays the blue Expo
-   mark and construction guides. Android adaptive layers also remain the starter
-   files. Replace them with original game branding, verify adaptive/monochrome
-   masking and launch appearance, and inspect installed release builds. Existing
-   generated in-game illustrations are a separate asset family and do not close
-   launcher/store artwork acceptance.
+1. **Build identity is now configured in source.** [app.json](../app.json)
+   declares `com.yusufyacoobali.dreamslifesim` for Android/iOS, build numbers `1`,
+   display name Dreams Life Simulator and public version `1.0.0`. Offline Expo
+   config/plugin resolution and config types pass. There is no `eas.json` or
+   checked-in native project. EAS is optional; a documented local build path is
+   sufficient. Native generation, signing and the intended distribution method
+   still need acceptance. No credential or store/account action was performed.
+2. **Original launcher branding is prepared.** A generated opaque navy/gold
+   life-path/sun/cloud image now replaces the configured starter icon and Android
+   adaptive foreground. The starter files remain intact. The source composition
+   was visually accepted; native masks/sizes, launch appearance and installed
+   release builds remain unrun. No fake monochrome/transparency layer is used.
+   [Identity, artwork provenance and exact verification](APP_IDENTITY_AND_BRANDING.md)
+   record the source resolution and tool edit. In-game art and store artwork
+   retain their own acceptance scopes.
 3. **Hosted regression automation was absent.** This milestone adds
    [quality.yml](../.github/workflows/quality.yml): Node 24, locked `npm ci`, strict
    app/test types and in-band Jest, with a 45-minute job timeout and read-only
@@ -102,8 +102,9 @@ checks, not reasons to stop unrelated gameplay and local quality work.
 1. Integrate independent gameplay/UI streams and run the coordinator's relevant
    regression, strict types, exports, source-pinned natural journeys and native
    acceptance. Inspect the new hosted CI result after the safe push.
-2. Prepare original launcher/adaptive branding and stable application/build
-   identity; document a concrete build/signing path without exposing secrets.
+2. Verify the configured original launcher/adaptive branding and stable
+   application/build identity through native generation; document a concrete
+   build/signing path without exposing secrets.
 3. Once native build dependencies and suitable devices are available, produce
    release builds and execute offline/resume, permission/privacy, reference,
    accessibility, interruption and physical-performance checks with named
