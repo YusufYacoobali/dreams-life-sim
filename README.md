@@ -2,18 +2,18 @@
 
 Continuing in a new cloud chat: use branch **`work`** and read [the handoff](docs/HANDOFF.md) first for the current checkpoint, unfinished work and exact verification limits.
 
-An offline Expo / React Native life simulator for iOS and Android. Development is in progress against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy, persistent health/clinical care, crime/courts/prison, social profiles/fame, businesses and acting/modelling/sport, musician, political, YouTuber, Streamer, Astronaut, Military and Royalty paths are connected. The free Time Machine restores complete historical states into separate saved branches, preserving the original future. Local archives include compressed history and branch origin. Holidays and gap years connect temporary location, paid/unpaid leave, actual household companions, local introductions and monthly experiences. Permanent household emigration and real work/study offers connect saved consent, old tax settlement, owned moving funds, foreign-currency jobs and paid tuition. Pets/hobbies, content depth and release validation remain pending; this is not the complete game.
+An offline Expo / React Native life simulator for iOS and Android, in development against the 27 supplied references in `design/`. Creation, deterministic Age Up, education/work, ownership/markets, family/legacy, health, crime/courts/prison, social profiles/fame, businesses, travel/emigration, pets, hobbies and all eleven special-career paths are connected. The source catalogue meets the 250-situation minimum; editorial, balance, visual and release acceptance remain open. See [current progress](docs/PROGRESS.md) and the [completion breakdown](docs/OPENING_PLAN.md) for the implemented scope and remaining production work.
 
-The opening experience is the current priority: welcome art, custom/random creation, a dedicated appearance editor, the one-time newborn introduction and the first Life dashboard now follow the reference structures; native visual acceptance remains pending. See [the opening plan and estimated completion breakdown](docs/OPENING_PLAN.md). Money display now supports runtimes that reject BigInt inputs and omit `Intl.NumberFormat.formatToParts`. Exact amounts use basic number-format probes, with a readable fallback if Intl is unavailable. School connects persistent classmates and teachers, one attended club routine, classroom behaviour, academic help and factual reports. School Plans shows saved participants, permission, conditional costs and recent outcomes. School results now require passing grades and recorded study; free evening courses can earn a missing secondary qualification or improve entry grades around an ordinary job. The source catalogue contains 70 original situations. The listed automated callback acceptance cases pass; wider content, native interaction and release acceptance remain open.
+Smooth actions, startup/onboarding and early gameplay remain priorities. Automatic saving publishes only committed results, and reopening resumes the saved decision, outcome or interrupted year. The [opening actions](docs/OPENING_ACTIONS.md), [callback acceptance](docs/CALLBACK_ACCEPTANCE.md) and [hobby events](docs/HOBBY_COMMUNITY_EVENTS.md) documents record actual Android software-emulator checks and their limits. Physical-device performance, standalone builds, iOS interaction and complete reference/accessibility acceptance remain open.
 
-The game is free and uses local saves. No account, subscription or cloud service is planned. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
+The game is free and uses local saves. No account, subscription or cloud service is planned. Existing local archive/history features remain intact; additional import/export/sharing and history-storage work is parked under the user's current scope. Country models are authored game assumptions; see [rule verification status](docs/COUNTRY_RULES.md).
 
 ```sh
 npm ci
 npm start
 ```
 
-Use an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. Native bundle generation is verified. The custom Android build awaits access to its required React Native AAR host. Official Expo Go downloaded the real bundle on the software emulator, but repeated Android System UI/Phone hangs prevented opening interactions and visual acceptance; see the handoff. Native app fidelity remains unverified.
+Use Node 24 for the test suite and an Expo SDK 57-compatible device or development build. Android emulator commands require a configured Android SDK; iOS simulators require macOS. Android/iOS Hermes exports and scoped Android Expo Go interactions are verified. The standalone Android build remains blocked by its required React Native AAR host; it has not been retried through another route. See the [release-readiness audit](docs/RELEASE_READINESS_AUDIT.md) for build identity, branding, device and distribution work still required.
 
 ```sh
 npm run typecheck
@@ -22,7 +22,7 @@ npm run test:soak
 npx expo export --platform all
 ```
 
-Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. See [progress and verification](docs/PROGRESS.md), the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for implemented scope, remaining work and visual acceptance limits.
+Tests include native component interactions, deterministic domain checks and real SQLite transactions using Node 24's SQLite module. The [CI workflow](.github/workflows/quality.yml) runs strict app/test types and the Jest regression suite on pushes and pull requests; adding the workflow does not establish that its first hosted run has passed. See the [master plan](docs/planning/MASTER_PLAN.md) and [design reconciliation](docs/planning/design-reconciliation.md) for production requirements.
 
 The optional `node tools/benchmark-history.cjs` diagnostic measures the current engine/checkpoint workload in this cloud runtime. Its [results and limits](docs/PERFORMANCE.md) do not establish native-device performance.
 
