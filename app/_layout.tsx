@@ -14,6 +14,7 @@ export default function RootLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="new-life" />
       <Stack.Screen name="appearance" />
+      <Stack.Screen name="help" />
       <Stack.Screen name="settings" options={{ presentation: 'modal' }} />
       <Stack.Screen name="birth" options={{ gestureEnabled: false }} />
       <Stack.Screen name="death" options={{ gestureEnabled: false }} />

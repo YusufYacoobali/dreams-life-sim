@@ -12,6 +12,22 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The initial [Extras catalogue](EXTRAS.md) now connects twelve factual
+achievements, four challenges, goal shortcuts, inherited possessions and Help.
+Filters/details read this person's existing history without RNG, money or save
+writes. Life Summary includes recorded milestones and virtualises its journal.
+All **70 affected checks / 37 suites** pass in **82.193 seconds**, strict
+application/test types and fresh Hermes exports pass. Actual command scenarios
+cover school/help progression, distinct repayment months and an estate bequest
+followed by child continuation. Genuine age-30/60 projection medians are
+0.234/0.649 ms; these are scoped cloud CPU diagnostics, not device timing.
+Game/persistence and the complete-regression/production baselines stay fixed.
+Native Extras/filters/details/Back, View Pets, empty heirlooms, Help and
+scrolling summary preserve every row in all eight tables: three lives, twelve
+moments, seventeen receipts and revision 53. Four real milestones and one
+completed challenge match the actual world. [Raw native evidence](verification/android24-extras-20261020/)
+and [source/export record](verification/extras-20261020.json) retain scope.
+
 The next broader production check is the outstanding 1,000-seed lifetime
 invariant gate. The runner now supports the production validated-immutable state
 path, exact terminal-world hashes and failure traces, with fixed game/tool source

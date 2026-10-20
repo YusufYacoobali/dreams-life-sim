@@ -4,6 +4,16 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `extras-projection-20261020.json` retains 31-sample read-only projection
+  diagnostics on the existing genuine age-30/60 two-routine checkpoints. Entire
+  worlds stay exact; this is cloud CPU scope, not native navigation/startup timing.
+  [Extras scope](../EXTRAS.md) identifies the initial twelve-achievement/four-
+  challenge catalogue, affected UI checks and remaining gates.
+  `android24-extras-20261020/` retains actual filters/detail/Back, goal shortcut,
+  empty inherited collection, Help and scrolling summary captures; all eight
+  tables stay exact. `extras-20261020.json` records 70 affected checks / 37 suites,
+  strict types, source and fresh Hermes hashes. Game/persistence stays unchanged.
+
 - `life-sweep-mode-comparison-20261020.json` preserves seeds zero and one
   completed through mutable and production immutable APIs, with identical entire
   terminal-world hashes/metrics and fixed game/tool sources. Five invalid CLI

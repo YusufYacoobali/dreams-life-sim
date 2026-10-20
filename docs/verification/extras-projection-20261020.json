@@ -1,0 +1,52 @@
+{
+  "scope": "Read-only progress projection on existing genuine age-30/60 two-routine production checkpoints; cloud CPU diagnostics, not physical-device frame/startup or total navigation timing",
+  "sourceInput": "ordinary-hobby-action-inputs-v28-20261019.json",
+  "results": [
+    {
+      "age": 30,
+      "seed": 900,
+      "country": "US",
+      "date": {
+        "year": 2030,
+        "month": 1,
+        "day": 1
+      },
+      "kinds": [
+        "guitar",
+        "reading"
+      ],
+      "ledgerRows": 16480,
+      "journalEntries": 462,
+      "coldMs": 11.776127000000088,
+      "medianMs": 0.2339420000002974,
+      "p95Ms": 0.7335229999998774,
+      "samples": 31,
+      "wholeWorldUnchanged": true,
+      "achievements": 12,
+      "challenges": 4
+    },
+    {
+      "age": 60,
+      "seed": 900,
+      "country": "US",
+      "date": {
+        "year": 2060,
+        "month": 1,
+        "day": 1
+      },
+      "kinds": [
+        "guitar",
+        "reading"
+      ],
+      "ledgerRows": 38730,
+      "journalEntries": 939,
+      "coldMs": 2.2794450000001234,
+      "medianMs": 0.6488450000001649,
+      "p95Ms": 1.3591630000000805,
+      "samples": 31,
+      "wholeWorldUnchanged": true,
+      "achievements": 12,
+      "challenges": 4
+    }
+  ]
+}

@@ -45,6 +45,13 @@ checkpoint and genuine reading archive are pushed; current UI-only native
 polish leaves that game/persistence source unchanged. Broader leisure and the
 complete production plan remain part of the authorised goal.
 
+The initial [Extras increment](EXTRAS.md) adds twelve factual achievements,
+four challenges, inherited possessions and Help, with no gameplay/save writes
+when browsing. Life Summary virtualises journal rows and shows actual retained
+milestones. All 70 affected UI/projection checks, strict types and both fresh
+Hermes exports pass. This does not close the full catalogue or broader release
+gates; the conservative estimates below stay fixed.
+
 World 27 now connects [four persistent hobbies and four paid outings](LEISURE.md)
 with actual monthly practice/funding and the existing pet-owning-child save.
 The complete regression passes **1,143 tests / 73 suites** in **788.232

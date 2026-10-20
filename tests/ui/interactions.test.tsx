@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Modal } from 'react-native';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { ActionRow, Button, StatBar } from '../../src/ui/components';
 import { ThemeProvider } from '../../src/ui/theme';
@@ -63,6 +64,8 @@ test('required decisions have no cancel action and preserve stable choice IDs', 
   const choose = jest.fn();
   frame(<EventModal event={{ id: 'offer:4', kind: 'decision', title: 'Job offer', body: 'The terms are ready.', choices: [{ id: 'accept', label: 'Accept offer' }, { id: 'decline', label: 'Decline' }] }} onChoose={choose} />);
   expect(screen.queryByRole('button', { name: 'Never mind' })).toBeNull();
+  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
+  expect(choose).not.toHaveBeenCalled();
   fireEvent.press(screen.getByRole('button', { name: 'Accept offer' }));
   expect(choose).toHaveBeenCalledWith('accept');
 });

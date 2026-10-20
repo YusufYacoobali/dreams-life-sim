@@ -18,14 +18,14 @@ export type EventPresentation = {
 );
 
 export function EventModal({
-  event, busy = false, error, onChoose, onCancel,
-}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void }) {
-  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} /> : null;
+  event, busy = false, error, onChoose, onCancel, onClose,
+}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
+  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} onClose={onClose} /> : null;
 }
 
 function EventCard({
-  event, busy, error, onChoose, onCancel,
-}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void }) {
+  event, busy, error, onChoose, onCancel, onClose,
+}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
   const c = useColors();
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string | null>(null);
@@ -34,7 +34,7 @@ function EventCard({
   const effects = event.kind === 'result' ? event.effects
     : event.kind === 'confirmation' ? event.terms : event.kind === 'milestone' ? event.facts : [];
   return (
-    <Modal transparent animationType="fade" visible onRequestClose={() => { if (!busy) onCancel?.(); }}>
+    <Modal transparent animationType="fade" visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, { backgroundColor: c.surface }]}>
           {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}

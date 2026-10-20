@@ -1,5 +1,18 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The latest read-only [Extras increment](EXTRAS.md) connects twelve achievements,
+four challenges, inherited possessions and Help. Life Summary now virtualises
+its journal and shows actual milestones. All **70 affected checks / 37 suites**
+pass in **82.193 seconds**, strict types and fresh Hermes exports pass. Native
+All/Special achievements/detail/Back, All/Medium challenges/details, View Pets,
+empty heirlooms, Help and scrolling summary preserve every row in all eight
+SQLite tables. Actual Riley remains revision 53, three lives/twelve moments/
+seventeen receipts, four milestones and one completed challenge. See
+[native proof](verification/android24-extras-20261020/) and
+[source/export record](verification/extras-20261020.json). Game/persistence is
+unchanged. Continue early-game/native responsiveness review while the following
+immutable engine sweep completes; further file features remain deferred.
+
 The next production gate is the full **1,000 distinct seed** lifetime invariant
 run, using the production validated-immutable state path. Its runner/preflight
 checkpoint compares complete seeds 0/1 with the ordinary mutable API: entire
@@ -9,9 +22,13 @@ source hashes, covers every country for the full range, and retains an actual
 failure trace/last valid world. Read [LIFE_SWEEP.md](LIFE_SWEEP.md) and
 [preflight evidence](verification/life-sweep-mode-comparison-20261020.json).
 
-Start `node tools/run-life-sweep.cjs 1000 0 --immutable` from this committed tool
-checkpoint and preserve its raw output. Keep `src/game` and the tool fixed while
-it runs; independent UI/documentation work can continue. A request/partial run
+The run started from clean `53b8647` at **00:06:23 UTC on 20 October 2026**.
+It is running in unified-exec session **12194**, with raw stdout at
+`/tmp/dreams-life-sweep-1000-v28-20261020.ndjson` and stderr at the matching
+`.err` path. The latest recorded partial check completed **419 seeds** without
+an error, covering twelve countries; it is not the completed gate. Preserve the
+output and wait for the actual completion/exit. Keep `src/game` and the tool fixed
+while it runs; independent UI/documentation work can continue. A request/partial run
 is not a completed 1,000-seed gate. Current game-source hash under this runner's
 src/game-relative algorithm is
 `f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f`;

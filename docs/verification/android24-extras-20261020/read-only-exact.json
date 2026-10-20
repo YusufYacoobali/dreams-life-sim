@@ -1,0 +1,69 @@
+{
+  "scope": "Actual Android 24 Expo Go Extras/achievement filters and detail/Android Back/challenge filters and detail/goal navigation/heirloom empty/help/life summary browsing; native SQLite read-only comparisons",
+  "allEightTablesExact": true,
+  "revision": 53,
+  "wholeWorldSha256": "4b6958e4c994755f2c24518bbd9b9531ae6fdb50549e5a6bf9f1e0eafd95c708",
+  "tables": {
+    "backups": {
+      "rows": 3,
+      "sha256": "f291d0297b358b86ba4dfbef2f53f9411672fb9d2a4011cbe0634ef3d8ec9071"
+    },
+    "branches": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "lives": {
+      "rows": 3,
+      "sha256": "3e70bfc1421bdcade876300b7eb18da7908479942999342eaa2b1111f47de999"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "3a9b1ccc91b5e7dcb9b7a572dcb544740f83c96073c07df6c9b543d927c0e802"
+    },
+    "receipts": {
+      "rows": 17,
+      "sha256": "72ccdcc69b86b2510fe39bd9770ae6aeff17d7c117c7995dd31513622317379e"
+    },
+    "restore_receipts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "snapshot_metadata": {
+      "rows": 12,
+      "sha256": "3895362ac40a8e4954f29b84899f564b9046babdc46ebab934a72d13ac980eb6"
+    },
+    "snapshots": {
+      "rows": 12,
+      "sha256": "e98c90245ccf5c084e7f621c161f081fd6d0486196ebc1c8dfbeb9af22a9e8df"
+    }
+  },
+  "earned": [
+    "first-report",
+    "hobby-year",
+    "hobby-fifty",
+    "pet-year"
+  ],
+  "challenges": [
+    {
+      "id": "school-confidence",
+      "percent": 66.66666666666667,
+      "complete": false
+    },
+    {
+      "id": "care-and-craft",
+      "percent": 100,
+      "complete": true
+    },
+    {
+      "id": "work-and-life",
+      "percent": 24,
+      "complete": false
+    },
+    {
+      "id": "world-explorer",
+      "percent": 0,
+      "complete": false
+    }
+  ],
+  "heirlooms": 0
+}

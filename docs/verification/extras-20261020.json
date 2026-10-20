@@ -1,0 +1,57 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "53b8647",
+  "scope": "Read-only initial Extras catalogue: 12 achievements, 4 challenges, inherited possessions, Help and virtualised Life Summary; existing world history only",
+  "source": {
+    "app/(game)/(tabs)/activities.tsx": "28fb891f9abf4ace09d715d179583b75e91e004ec0b090e0a27cb78e4e27bf57",
+    "app/(game)/(tabs)/life.tsx": "55af3d8707765cab038992fbb2fea71efec44b722ad347115356b615dcfbacbb",
+    "app/(game)/_layout.tsx": "5fb9747cb4606d464e0164c562fc1b83df00cfc2059c3daf17f1b4c91aecd030",
+    "app/(game)/achievements.tsx": "47a3075413d715b486bd60758dde6fed1aa693e0a7f24260dc564e02d6167254",
+    "app/(game)/challenge/[id].tsx": "3144459e6dedf99f1b57426a959a791d3d3a0518cdb6671ea01a39ae5fb3cede",
+    "app/(game)/challenges.tsx": "eaa3294d962278bd8ac9cbd424161f2b5874f379f1e46f70d83bd88822bf5ece",
+    "app/(game)/extras.tsx": "8c487e91419cfdbebf2403541ed2b765cc366f644a59e9973e6a1f2683dd4c32",
+    "app/(game)/heirlooms.tsx": "a92d8d6a7132e1791c3b3b5729150b6f2bbd16425b2bdd5c90f9e5859a00c7e8",
+    "app/_layout.tsx": "5a7ae3d0f40d37a5e073221a936343710279d5875ba7dea67e263921de31ea64",
+    "app/help.tsx": "dafd873480bd87ef548c30f07baf4e7d0fd668b44c2066cee78d7ad7e591a75f",
+    "app/index.tsx": "c630ca028e36ca2c3b0fe646db7a34e21e90d4f020e1391560e6d71e331c5a6e",
+    "app/life-summary.tsx": "c32fe367b4c834e1c12e39c829724843d1731bac76544496de9d5be3542d01bf",
+    "app/settings.tsx": "d4b32fda2156b1fa86333df1fd08d5e6e5653e8690181e840ab4fc91c3d45eb1",
+    "src/progression/progress.ts": "5e1fc62bc7181082bdb82041d13b8c3239277ff197e9b8bd775f4b9a4834a5cd",
+    "src/ui/EventModal.tsx": "86457d15178cbd9e835e6b4a6b126bc8cf7addac02bda653f1d20e0d0e6df5ab",
+    "src/ui/ProgressElements.tsx": "cbc4d0cb0d9651869d80126b5b103c348f1c90bdbe75518e797ec2da09c1103d",
+    "tests/progression/progress.test.ts": "776337122d8369f5679f4ad15ee05eddc1440d636def880d390dfd775898dcc2",
+    "tests/ui/extras-flow.test.tsx": "a458f41bf3dc9f1b1aec69b8defdb5e636acca4bf6ffb58b3b5e956bd7b8177e",
+    "tests/ui/interactions.test.tsx": "1ab30f695a93def7f9d1a2dfe3bd7c5af5618ba1890938be8436d01ba67293c1"
+  },
+  "verification": {
+    "tests": 70,
+    "suites": 37,
+    "seconds": 82.193,
+    "strictApplicationAndTestTypes": true,
+    "allAffectedUiSuites": true,
+    "nativeRecord": "android24-extras-20261020/read-only-exact.json",
+    "projectionRecord": "extras-projection-20261020.json",
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-a1d79200e0ceb4b30eedfe21dd32b3af.hbc",
+      "bytes": 5345226,
+      "sha256": "61c2fc685dedfb3aa63a68e070572fca5a57254693aa5157a17d38e2f67f1d14"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-7928cd7bf24691fde724f6a0ec78fd3b.hbc",
+      "bytes": 5039979,
+      "sha256": "c5f55d0905534093ab68b5df0a84f3e86885fe10a984ba72ee14336dc9ad1584"
+    }
+  ],
+  "unchangedGameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+  "gameHashAlgorithm": "run-life-sweep.cjs src/game-relative traversal",
+  "gamePersistenceAndSweepToolUnchangedFromBase": true,
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4,
+    "database": 6
+  }
+}
