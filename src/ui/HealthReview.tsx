@@ -12,6 +12,7 @@ import { EventModal, type EffectRow, type EventPresentation } from './EventModal
 import { useColors } from './theme';
 
 type ReviewedHealthCommand = Extract<HealthCommand, { type: 'consult' | 'vaccinate' | 'treat' | 'stop-treatment' | 'fertility-care' | 'cosmetic-care' }>;
+type HealthReviewCommand = ReviewedHealthCommand | Extract<HealthCommand, { type: 'exercise' }>;
 
 /** Existing command restrictions only; opening a review neither books nor pays. */
 export function healthReviewReason(world: World, command: ReviewedHealthCommand): string | undefined {
@@ -46,12 +47,12 @@ export function useHealthReview(context = '') {
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
   const identity = useGame(s => s.world ? JSON.stringify([s.world.id, s.world.activePersonId, context]) : 'none');
   const identityRef = useRef(identity), submitting = useRef(false); identityRef.current = identity;
-  const [review, setReview] = useState<{ identity: string; command: ReviewedHealthCommand; event: EventPresentation } | null>(null);
+  const [review, setReview] = useState<{ identity: string; command: HealthReviewCommand; event: EventPresentation } | null>(null);
   useEffect(() => { setReview(saved => saved && saved.identity !== identity ? null : saved); }, [identity]);
   const current = review?.identity === identity ? review : null;
   return {
     isOpen: !!current,
-    confirm(command: ReviewedHealthCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'care', confirmLabel = 'Confirm') {
+    confirm(command: HealthReviewCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'care', confirmLabel = 'Confirm') {
       if (busy || submitting.current) return;
       setReview({ identity, command, event: { kind: 'confirmation', id: identity + ':' + command.type, title, body, terms, confirmLabel, illustration: <HealthLegalArt id={art} size={64} /> } });
     },
