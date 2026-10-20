@@ -22,6 +22,13 @@ visual/accessibility review and release gates. Overall production is about55%.
 [Current source and acceptance](../LIFE_CONTEXT_STORIES.md),
 [handoff](../HANDOFF.md).
 
+The progression increment now tracks40factual achievements and12challenges,
+with personal/archived history and virtualised rows. All129related checks,
+strict types, both exports and exact Android progress/cold results pass. Native
+large-text review also fixes wrapped100%labels. Continue hobby community events
+and remaining depth, balance, visual/accessibility and release work.
+[Progression evidence](../PROGRESSION_GOALS.md).
+
 ## Product decision
 
 Build a fast, offline life simulator around **Age Up → event → choice → consequence → journal**. The player can also take short, meaningful actions between years. A satisfying ordinary life must be as viable as a criminal, famous, wealthy, unlucky, or chaotic one.

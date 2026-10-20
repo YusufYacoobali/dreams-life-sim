@@ -110,7 +110,7 @@ export function StatBar({ label, value, color, icon }: { label: string; value: n
       <View style={[styles.track, { backgroundColor: c.track }]}>
         <View style={{ height: '100%', width: `${bounded}%`, borderRadius: 6, backgroundColor: color }} />
       </View>
-      <Text style={{ width: 38, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>
+      <Text numberOfLines={1} style={{ minWidth: 38, flexShrink: 0, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>
     </View>
   );
 }

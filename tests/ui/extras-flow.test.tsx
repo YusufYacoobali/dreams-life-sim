@@ -30,11 +30,15 @@ test('real child Extras, filters, milestone Back, goal routes, heirlooms, help a
   const rows = () => tables.map(({ name }) => ({ name, rows: sqlite.prepare('SELECT * FROM "' + name + '" ORDER BY rowid').all() }));
   const before = rows(), worldBefore = encodeWorld(mockStore.getState().world!);
   const view = render(frame(<Extras />));
-  expect(screen.getByText('3 / 12 earned in this life')).toBeOnTheScreen();
+  expect(screen.getByText('3 / 40 earned in this life')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: /^Achievements\./ })); expect(router.push).toHaveBeenLastCalledWith('/achievements');
   view.rerender(frame(<Achievements />));
   fireEvent.press(screen.getByRole('tab', { name: 'Wealth' })); expect(screen.getByRole('tab', { name: 'Wealth', selected: true })).toBeOnTheScreen();
   expect(screen.queryByText('Report Day')).toBeNull(); expect(screen.getByText('Keeping Your Word')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: /^Open for Business\./ })); expect(screen.getByText('1 business founded')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Close' }));
+  fireEvent.press(screen.getByRole('button', { name: /^Clear the Balance\./ })); expect(screen.getByText('1 repaid personal loan')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Close' }));
   fireEvent.press(screen.getByRole('tab', { name: 'Special' }));
   fireEvent.press(screen.getByRole('button', { name: /^Finding Your Rhythm\./ })); expect(screen.getByText('48 proficiency points')).toBeOnTheScreen();
   fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
@@ -46,6 +50,10 @@ test('real child Extras, filters, milestone Back, goal routes, heirlooms, help a
   mockParams = { id: 'care-and-craft' }; view.rerender(frame(<Challenge />));
   expect(screen.getByRole('progressbar', { name: 'Overall progress' })).toHaveAccessibilityValue({ min: 0, max: 100, now: 98 });
   expect(screen.getByText('1 / 2 goals completed')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
+  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Creators', '/creators']]) {
+    mockParams = { id }; view.rerender(frame(<Challenge />));
+    fireEvent.press(screen.getAllByRole('button', { name: 'View ' + label })[0]); expect(router.push).toHaveBeenLastCalledWith(route);
+  }
   mockParams = { id: 'unknown' }; view.rerender(frame(<Challenge />)); expect(screen.getByText('This challenge is unavailable.')).toBeOnTheScreen();
   view.rerender(frame(<Heirlooms />)); expect(screen.getByText('No inherited possessions in your care yet.')).toBeOnTheScreen();
   view.rerender(frame(<Help />)); expect(screen.getByText('A year at a time')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'Back' })); expect(router.back).toHaveBeenCalled();

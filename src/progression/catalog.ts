@@ -1,0 +1,104 @@
+import type { AchievementDefinition, ChallengeDefinition } from './types';
+
+export const achievementDefinitions: readonly AchievementDefinition[] = [
+  { id: 'first-report', title: 'Report Day', description: 'Receive your first school-year report.', category: 'life', art: 'school', goal: { id: 'schoolReports', label: 'Receive a school-year report', target: 1, unit: 'reports', route: '/school' } },
+  { id: 'secondary-graduate', title: 'High School Graduate', description: 'Earn a secondary-school qualification.', category: 'life', art: 'study', goal: { id: 'secondaryQualifications', label: 'Earn a secondary-school qualification', target: 1, unit: 'qualifications', route: '/education' } },
+  { id: 'further-study', title: 'Further Study', description: 'Complete trade, university or graduate study.', category: 'career', art: 'study', goal: { id: 'furtherQualifications', label: 'Earn a trade, degree, medicine or law qualification', target: 1, unit: 'qualifications', route: '/education' } },
+  { id: 'first-job', title: 'First Job', description: 'Complete a working month in a recorded job.', category: 'career', art: 'work', goal: { id: 'workMonths', label: 'Complete a month of work', target: 1, unit: 'working months', route: '/work' } },
+  { id: 'working-decade', title: 'A Working Decade', description: 'Build ten years of recorded working months.', category: 'career', art: 'work', goal: { id: 'workMonths', label: 'Complete 120 working months across your jobs', target: 120, unit: 'working months', route: '/work' } },
+  { id: 'hobby-year', title: 'A Year of Practice', description: 'Attend twelve months of one hobby routine.', category: 'life', art: 'hobby', goal: { id: 'hobbyMonths', label: 'Attend twelve months of the same hobby', target: 12, unit: 'attended months', route: '/hobbies' } },
+  { id: 'hobby-fifty', title: 'Finding Your Rhythm', description: 'Reach 50 proficiency in a personal hobby.', category: 'special', art: 'trophy', goal: { id: 'hobbyProficiency', label: 'Reach 50 proficiency in one hobby', target: 50, unit: 'proficiency points', route: '/hobbies' } },
+  { id: 'pet-year', title: 'A Year of Care', description: 'Arrange twelve funded care months for a pet you adopted.', category: 'life', art: 'pet', goal: { id: 'petCareMonths', label: 'Complete twelve funded care months for an adopted pet', target: 12, unit: 'care months', route: '/pets' } },
+  { id: 'wedding-day', title: 'Wedding Day', description: 'Have a marriage in your life history.', category: 'life', art: 'rings', goal: { id: 'marriages', label: 'Get married', target: 1, unit: 'marriages', route: '/family' } },
+  { id: 'world-traveller', title: 'World Traveller', description: 'Complete trips to ten different countries.', category: 'special', art: 'travel', goal: { id: 'destinationCountries', label: 'Complete trips to ten destination countries', target: 10, unit: 'destination countries', route: '/travel' } },
+  { id: 'repayment-year', title: 'Keeping Your Word', description: 'Make debt repayments in twelve different months.', category: 'wealth', art: 'money', goal: { id: 'repaymentMonths', label: 'Repay debt in twelve distinct months', target: 12, unit: 'repayment months', route: '/bank' } },
+  { id: 'professional-project', title: 'The Finished Work', description: 'Finish an acting, modelling, athletics, music or political career project.', category: 'career', art: 'trophy', goal: { id: 'completedProjects', label: 'Complete a project in an Actor, Model, Athlete, Musician or Politician career', target: 1, unit: 'completed projects', route: '/special-careers' } },
+  { id: "teacher-help", title: "Asking for Help", description: "Have a teacher agree to an academic-help session.", category: "life", art: "school", goal: { id: "acceptedHelp", label: "Have a teacher agree to an academic-help session", target: 1, unit: "accepted sessions", route: "/school" } },
+  { id: "club-year", title: "Part of the Club", description: "Attend a school club in twelve school months.", category: "life", art: "school", goal: { id: "clubMonths", label: "Attend a school club in twelve school months", target: 12, unit: "club months", route: "/school" } },
+  { id: "tuition-support", title: "A Little Breathing Room", description: "Receive an actual scholarship tuition waiver.", category: "career", art: "study", goal: { id: "tuitionWaivers", label: "Receive a billed scholarship tuition waiver", target: 1, unit: "tuition waivers", route: "/scholarships" } },
+  { id: "scholarship-graduate", title: "The Supported Graduate", description: "Finish a course supported by a scholarship.", category: "career", art: "study", goal: { id: "completedScholarships", label: "Complete a scholarship-supported course", target: 1, unit: "completed scholarships", route: "/scholarships" } },
+  { id: "work-feedback", title: "A Good Conversation", description: "Have a supervisor agree to a feedback session.", category: "career", art: "work", goal: { id: "acceptedFeedback", label: "Receive an accepted supervisor feedback session", target: 1, unit: "accepted sessions", route: "/coworkers" } },
+  { id: "first-raise", title: "A Better Pay Packet", description: "Negotiate an accepted pay raise.", category: "career", art: "work", goal: { id: "acceptedRaises", label: "Receive an accepted pay-raise request", target: 1, unit: "accepted raises", route: "/work" } },
+  { id: "first-pension", title: "Your First Pension", description: "Receive a recorded pension payment.", category: "career", art: "work", goal: { id: "pensionPeriods", label: "Receive a recorded pension payment", target: 1, unit: "paid pension months", route: "/work" } },
+  { id: "pension-year", title: "A New Routine", description: "Receive twelve recorded pension months.", category: "career", art: "work", goal: { id: "pensionPeriods", label: "Receive twelve recorded pension months", target: 12, unit: "paid pension months", route: "/work" } },
+  { id: "hobby-master", title: "A Craft of Your Own", description: "Reach 100 proficiency in one hobby.", category: "special", art: "trophy", goal: { id: "hobbyProficiency", label: "Reach 100 proficiency in one hobby", target: 100, unit: "proficiency points", route: "/hobbies" } },
+  { id: "hobby-variety", title: "More Than One Interest", description: "Attend twelve monthly practices in each of three hobby kinds.", category: "life", art: "hobby", goal: { id: "hobbyKindsPractised", label: "Attend twelve monthly practices in each of three hobby kinds", target: 3, unit: "established hobbies", route: "/hobbies" } },
+  { id: "pet-five-years", title: "A Familiar Presence", description: "Arrange sixty funded care months for a pet you adopted.", category: "life", art: "pet", goal: { id: "petCareMonths", label: "Complete sixty funded care months for an adopted pet", target: 60, unit: "care months", route: "/pets" } },
+  { id: "first-trip", title: "Away and Back", description: "Complete a trip as an actual participant.", category: "life", art: "travel", goal: { id: "completedTrips", label: "Complete a full trip", target: 1, unit: "completed trips", route: "/travel" } },
+  { id: "three-countries", title: "New Horizons", description: "Complete trips to three destination countries.", category: "life", art: "travel", goal: { id: "destinationCountries", label: "Visit three countries on completed trips", target: 3, unit: "destination countries", route: "/travel" } },
+  { id: "first-child", title: "A New Chapter", description: "Become a biological or adoptive parent.", category: "life", art: "rings", goal: { id: "children", label: "Become a biological or adoptive parent", target: 1, unit: "children", route: "/family" } },
+  { id: "first-business", title: "Open for Business", description: "Found your first business.", category: "wealth", art: "money", goal: { id: "foundedBusinesses", label: "Found a business", target: 1, unit: "businesses founded", route: "/business" } },
+  { id: "earned-profit", title: "The Work Pays Off", description: "Receive an actual distribution of business profit.", category: "wealth", art: "money", goal: { id: "profitMonths", label: "Receive an earned business-profit distribution", target: 1, unit: "profit payment months", route: "/business" } },
+  { id: "loan-repaid", title: "Clear the Balance", description: "Fully repay a personal bank loan you took out.", category: "wealth", art: "money", goal: { id: "repaidPersonalLoans", label: "Fully repay a personal bank loan with recorded repayments", target: 1, unit: "repaid personal loans", route: "/bank" } },
+  { id: "actor-project", title: "That Is a Wrap", description: "Finish an actual acting project.", category: "career", art: "trophy", goal: { id: "actorProjects", label: "Complete an acting project", target: 1, unit: "completed acting projects", route: "/special-careers" } },
+  { id: "model-project", title: "The Finished Campaign", description: "Finish an actual modelling project.", category: "career", art: "trophy", goal: { id: "modelProjects", label: "Complete a modelling project", target: 1, unit: "completed modelling projects", route: "/special-careers" } },
+  { id: "athlete-season", title: "The Full Season", description: "Finish an actual professional athletics season.", category: "career", art: "trophy", goal: { id: "athleteProjects", label: "Complete an athletics season", target: 1, unit: "completed seasons", route: "/special-careers" } },
+  { id: "musician-project", title: "The Last Note", description: "Finish an actual musician career project.", category: "career", art: "trophy", goal: { id: "musicianProjects", label: "Complete a musician career project", target: 1, unit: "completed music projects", route: "/special-careers" } },
+  { id: "politician-term", title: "The Work of Office", description: "Finish an actual political career project.", category: "career", art: "trophy", goal: { id: "politicianProjects", label: "Complete a political career project", target: 1, unit: "completed political projects", route: "/special-careers" } },
+  { id: "military-assignment", title: "Mission Complete", description: "Complete an actual military assignment.", category: "special", art: "trophy", goal: { id: "militaryAssignments", label: "Complete a military assignment", target: 1, unit: "completed assignments", route: "/special-careers" } },
+  { id: "space-assignment", title: "Back from Orbit", description: "Complete an actual space-programme assignment.", category: "special", art: "trophy", goal: { id: "spaceAssignments", label: "Complete an astronaut assignment", target: 1, unit: "completed assignments", route: "/special-careers" } },
+  { id: "youtuber-work", title: "Twelve Originals", description: "Publish twelve posts from your YouTuber studio.", category: "special", art: "trophy", goal: { id: "youtuberPosts", label: "Publish twelve posts from a YouTuber studio", target: 12, unit: "studio posts", route: "/creators" } },
+  { id: "streamer-work", title: "Live from Here", description: "Complete twelve actual live broadcasts.", category: "special", art: "trophy", goal: { id: "streamerBroadcasts", label: "Complete twelve live broadcasts from a Streamer studio", target: 12, unit: "live broadcasts", route: "/creators" } },
+  { id: "royal-service", title: "Showing Up", description: "Complete twelve actual royal engagements.", category: "special", art: "trophy", goal: { id: "royalEngagements", label: "Complete twelve royal engagements", target: 12, unit: "engagements", route: "/royalty" } },
+  { id: "varied-ventures", title: "Varied Ventures", description: "Receive earned profit from three different businesses.", category: "wealth", art: "money", goal: { id: "profitableBusinesses", label: "Receive an earned distribution from three distinct businesses", target: 3, unit: "profitable businesses", route: "/business" } },
+];
+
+export const challengeDefinitions: readonly ChallengeDefinition[] = [
+  { id: 'school-confidence', title: 'School Confidence', description: 'Find support, build a school routine and earn a strong report.', difficulty: 'easy', art: 'school', goals: [
+    { id: 'highReports', label: 'Receive a school report with grades of at least 80%', target: 1, unit: 'strong reports', route: '/school' },
+    { id: 'acceptedHelp', label: 'Have a teacher agree to an academic-help session', target: 1, unit: 'accepted sessions', route: '/school' },
+    { id: 'clubMonths', label: 'Attend a school club during twelve school months', target: 12, unit: 'club months', route: '/school' },
+  ] },
+  { id: 'care-and-craft', title: 'Care and Craft', description: 'Keep up pet care and develop a personal interest as the months pass.', difficulty: 'medium', art: 'pet', goals: [
+    { id: 'petCareMonths', label: 'Complete twelve funded care months for a pet you adopted', target: 12, unit: 'care months', route: '/pets' },
+    { id: 'hobbyProficiency', label: 'Reach 50 proficiency in one hobby', target: 50, unit: 'proficiency points', route: '/hobbies' },
+  ] },
+  { id: 'work-and-life', title: 'Work and Life', description: 'Finish further study, build a working history and keep a hobby growing.', difficulty: 'hard', art: 'work', goals: [
+    { id: 'furtherQualifications', label: 'Earn a trade, university or graduate qualification', target: 1, unit: 'qualifications', route: '/education' },
+    { id: 'workMonths', label: 'Complete ten years of actual working months', target: 120, unit: 'working months', route: '/work' },
+    { id: 'hobbyProficiency', label: 'Reach 100 proficiency in one hobby', target: 100, unit: 'proficiency points', route: '/hobbies' },
+  ] },
+  { id: 'world-explorer', title: 'World Explorer', description: 'Finish three trips across three different destination countries.', difficulty: 'medium', art: 'travel', goals: [
+    { id: 'completedTrips', label: 'Complete three full trips', target: 3, unit: 'completed trips', route: '/travel' },
+    { id: 'destinationCountries', label: 'Visit three destination countries on completed trips', target: 3, unit: 'destination countries', route: '/travel' },
+  ] },
+  { id: "learning-habit", title: "A Learning Habit", description: "Build a school routine and make time for an interest.", difficulty: "easy", art: "school", goals: [
+    { id: "schoolReports", label: "Receive a school-year report", target: 1, unit: "reports", route: "/school" },
+    { id: "clubMonths", label: "Attend twelve school-club months", target: 12, unit: "club months", route: "/school" },
+    { id: "hobbyMonths", label: "Attend twelve monthly hobby practices", target: 12, unit: "attended months", route: "/hobbies" },
+  ] },
+  { id: "working-confidence", title: "Working Confidence", description: "Build a working history, seek feedback and negotiate your pay.", difficulty: "medium", art: "work", goals: [
+    { id: "workMonths", label: "Complete twelve working months", target: 12, unit: "working months", route: "/work" },
+    { id: "acceptedFeedback", label: "Receive an accepted supervisor feedback session", target: 1, unit: "accepted sessions", route: "/coworkers" },
+    { id: "acceptedRaises", label: "Receive an accepted raise request", target: 1, unit: "accepted raises", route: "/work" },
+  ] },
+  { id: "supported-study", title: "Supported Study", description: "Turn actual scholarship support into a finished qualification.", difficulty: "medium", art: "study", goals: [
+    { id: "tuitionWaivers", label: "Receive a scholarship tuition waiver", target: 1, unit: "tuition waivers", route: "/scholarships" },
+    { id: "completedScholarships", label: "Finish a scholarship-supported course", target: 1, unit: "completed scholarships", route: "/scholarships" },
+    { id: "furtherQualifications", label: "Earn a trade, university or graduate qualification", target: 1, unit: "qualifications", route: "/education" },
+  ] },
+  { id: "retirement-rhythm", title: "A Retirement Rhythm", description: "Earn retirement income and keep a longstanding hobby.", difficulty: "hard", art: "hobby", goals: [
+    { id: "workMonths", label: "Complete ten years of recorded work", target: 120, unit: "working months", route: "/work" },
+    { id: "pensionPeriods", label: "Receive twelve recorded pension months", target: 12, unit: "paid pension months", route: "/work" },
+    { id: "hobbyMonths", label: "Attend sixty months of one hobby", target: 60, unit: "attended months", route: "/hobbies" },
+  ] },
+  { id: "small-business", title: "From Idea to Income", description: "Start a business and receive earned profit in twelve distinct months.", difficulty: "medium", art: "money", goals: [
+    { id: "foundedBusinesses", label: "Found a business", target: 1, unit: "businesses founded", route: "/business" },
+    { id: "profitMonths", label: "Receive business profit in twelve distinct months", target: 12, unit: "profit payment months", route: "/business" },
+  ] },
+  { id: "creative-consistency", title: "Creative Consistency", description: "Publish original studio work and spend real time live.", difficulty: "medium", art: "trophy", goals: [
+    { id: "creatorPosts", label: "Publish twenty-four studio posts", target: 24, unit: "studio posts", route: "/creators" },
+    { id: "liveMinutes", label: "Complete six hours of actual live broadcasts", target: 360, unit: "live minutes", route: "/creators" },
+  ] },
+  { id: "life-in-balance", title: "Life in Balance", description: "Build a working life with several interests and completed journeys.", difficulty: "hard", art: "travel", goals: [
+    { id: "workMonths", label: "Complete ten years of recorded work", target: 120, unit: "working months", route: "/work" },
+    { id: "hobbyKindsPractised", label: "Build twelve attended months in each of three hobbies", target: 3, unit: "established hobbies", route: "/hobbies" },
+    { id: "completedTrips", label: "Complete three full trips", target: 3, unit: "completed trips", route: "/travel" },
+  ] },
+  { id: "professional-craft", title: "Professional Craft", description: "Finish several career projects and earn an actual project award.", difficulty: "hard", art: "trophy", goals: [
+    { id: "completedProjects", label: "Complete three special-career projects", target: 3, unit: "completed projects", route: "/special-careers" },
+    { id: "awardedProjects", label: "Complete a project that earns an award", target: 1, unit: "awarded projects", route: "/special-careers" },
+    { id: "workMonths", label: "Complete sixty actual working months", target: 60, unit: "working months", route: "/work" },
+  ] },
+];
+

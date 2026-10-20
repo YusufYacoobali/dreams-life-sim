@@ -18,7 +18,47 @@ and old data stay intact. The current breakdown is in
 completion is approximately55%, with250/250minimum situations implemented;
 editorial, balance and release acceptance remain open.
 
-## Current milestone: immediate adoption details
+## Current milestone: broader factual progression
+
+There are now **40 achievements and 12 challenges**, using39facts from actual
+personal history. New goals cover scholarship support/completion, accepted work
+feedback/raises, paid pension receipts, hobby breadth/mastery, long-term pet care,
+travel, parenthood, real personal-loan payoff, business profit and all eleven
+special paths. Creator/royal archives retain progress through rollover; other
+people's histories and unfinished work do not grant credit. A real bank payoff
+stays earned after reborrowing, and deceased adopters cannot accumulate later
+pet-care credit. [Rules and limits](PROGRESSION_GOALS.md).
+
+The expanded lists render eight rows initially and in batches. A real130%text
+check also exposed100%labels wrapping; shared percentage values now size to their
+text on one line. All **129 UI/state/progression checks /48 suites** pass in
+**117.885 seconds**, strict app/test types and both fresh Hermes exports.
+[Source and checks](verification/progression-expanded-20261020.json),
+[raw regression](verification/regression-progression-expanded-ui-20261020.txt).
+Five warm cloud view reads of the unchanged natural year91world/63,304ledgerrows
+leave every field exact. These are host-sensitive view diagnostics, not action/
+save timings, physical p95 or a paired performance claim.
+[Raw scope](verification/progression-large-read-20261020.json).
+
+Actual Android initial browsing/navigation keep all eight tables exact at111.
+Normal introductions112/ack113, accepted feedback114/ack115, raise116/cold116 and
+ack117 match whole expected unchanged-engine worlds. Real progress moves4→6/40
+and Working Confidence33→66→100%; no upfront wages/service. Cold116 and final
+browse keep all tables exact. Six inactive lives/backups,58original moments and
+96old receipts stay exact. Final Nia22/revision117, seven lives/58moments/
+102receipts, no pending/year. Original font1.0 is restored. Twelve accepted
+capture pairs plus the reproduced percentage-wrap diagnostic retain exact scope.
+[Native record](verification/android24-progression-expanded-20261020/).
+
+Game/persistence are byte-identical to d7dcc0e; versions remain World30 / engine31 /
+content8 / reader10 / checkpointv4. The complete1,657-test/120-lifetime baseline
+below retains its own source scope. Overall production stays approximately55%;
+progression is now estimated55%, with further financial milestones/challenge
+and reward depth open. Continue meaningful hobby community events, remaining
+work/leisure depth, editorial/balance, visual/accessibility and release gates.
+Additional file/history breadth stays parked.
+
+## Prior milestone: immediate adoption details
 
 Selecting a shelter pet now opens its details at the top, with Review Adoption
 in a keyboard-aware footer. Actual care costs appear before confirmation; offer

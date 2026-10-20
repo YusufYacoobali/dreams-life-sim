@@ -1,5 +1,6 @@
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { FlatList, Pressable, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ProgressArt } from '../progression/progress';
 import { SchoolArt } from '../assets/SchoolArt';
@@ -9,9 +10,29 @@ import { FamilyArt } from '../assets/FamilyArt';
 import { FameBusinessArt } from '../assets/FameBusinessArt';
 import { Illustration } from '../assets/Illustration';
 import { Body, Heading, StatBar } from './components';
-import { useColors } from './theme';
+import { radii, ThemedStatusBar, useColors } from './theme';
 
-export const progressAmount = (value: number, unit: string) => value + ' ' + (value === 1 ? unit.replace(/ies$/, 'y').replace(/s$/, '') : unit);
+const singularUnits: Record<string, string> = { children: 'child', 'businesses founded': 'business founded' };
+export const progressAmount = (value: number, unit: string) => value + ' ' + (value === 1 ? singularUnits[unit] ?? unit.replace(/ies$/, 'y').replace(/s$/, '') : unit);
+
+type ProgressListItem = { id: string; title: string; description: string; art: ProgressArt; complete: boolean; percent?: number };
+export function ProgressList<T extends ProgressListItem>({ items, header, onSelect, showProgress = false, label, children }: React.PropsWithChildren<{
+  items: readonly T[]; header: React.ReactNode; onSelect: (item: T) => void; showProgress?: boolean; label: string;
+}>) {
+  const c = useColors();
+  return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar />
+    <FlatList accessibilityLabel={label} data={items} keyExtractor={item => item.id} initialNumToRender={8} maxToRenderPerBatch={8} windowSize={7}
+      contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
+      ListHeaderComponent={<View style={{ gap: 16, paddingBottom: 16 }}>{header}</View>}
+      ListEmptyComponent={<Body muted>No goals match this filter.</Body>}
+      renderItem={({ item, index }) => <View style={{ backgroundColor: c.surface, paddingHorizontal: 16, paddingTop: index === 0 ? 8 : 0, paddingBottom: index === items.length - 1 ? 8 : 0,
+        borderTopLeftRadius: index === 0 ? radii.card : 0, borderTopRightRadius: index === 0 ? radii.card : 0,
+        borderBottomLeftRadius: index === items.length - 1 ? radii.card : 0, borderBottomRightRadius: index === items.length - 1 ? radii.card : 0 }}>
+        <ProgressRow title={item.title} description={item.description} art={item.art} complete={item.complete} progress={showProgress ? item.percent : undefined} onPress={() => onSelect(item)} />
+      </View>} />
+    {children}
+  </SafeAreaView>;
+}
 
 export function ProgressPicture({ art, size = 44 }: { art: ProgressArt; size?: number }) {
   if (art === 'school' || art === 'study') return <SchoolArt id={art === 'school' ? 'report' : 'study'} size={size} />;

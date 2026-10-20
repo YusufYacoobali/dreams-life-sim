@@ -21,7 +21,69 @@ previous-life summaries are complete. Full production remains approximately
 **55%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: actual-life situation catalogue
+## Current checkpoint: factual progression and large text
+
+40 achievements /12 challenges /39 read-only facts. Details:
+[PROGRESSION_GOALS.md](PROGRESSION_GOALS.md),
+[source/checks](verification/progression-expanded-20261020.json).
+All129UI/state/progression tests48suites pass117.885s, strict types and both fresh
+Hermes exports. Five warm cloud goal-view reads of the actual year91fixture
+(36people/63,304ledgerrows) leave every field exact; not physical/action timings.
+No immutable fixtures regenerated. Eight-row initial/batch virtualisation avoids
+mounting every milestone. Shared StatBar percentage text sizes to content and
+stays one line at130%text; the earlier wrapped capture is diagnostic13.
+
+Actual Android Nia22/revision117, seven lives/58moments/102receipts, no pending/year.
+Read-only initial views111 and final views117 keep all eight tables exact.
+Normal introductions112/ack113, accepted feedback114/ack115, raise116/cold116/ack117
+match whole expected unchanged-engine worlds. Cold116 keeps all eight tables.
+Six inactive lives/backups,58old moments/metadata and96old receipts stay exact.
+Progress4→6/40 and WorkingConfidence33→66→100%; no upfront wage/service. Actual
+supervisor Jordan Carter. Final-source130%goal capture verifies single-line100%.
+Font1.0 restored, ExpoGo force-stopped. [Thirteen capture pairs/scope](verification/android24-progression-expanded-20261020/).
+
+Game/persistence unchanged fromd7dcc0e (combined12e1a38ca5104a66bae29665d7685983690773844247ce5fc38e46ef58e52740).
+World30 /engine31 /content8 /reader10 /checkpointv4. No new whole-regression or
+lifetime count;1,657/111and same120baseline retain C8source scope below. Overall
+about55%, achievements/challenges about55%, further financial peak/reward depth
+open. Last verified remote pushd7dcc0e16:27UTC; this progression checkpoint is
+being committed/pushed now. Inspect git log/remote for final SHA; next safe push
+deadline two hours from that push. No subagents. Do not stop at a routine milestone.
+
+## Continue immediately: hobby community events
+
+The user prioritises finishing gameplay, with smooth buttons and early play.
+Next add actual community events for all8hobbies (reading, gaming, cooking,
+gardening, guitar, piano, chess, painting), after real practiced months. Give
+meaningful familiar/stretch/relaxed approach choices, reviewed real fees and
+parent consent for minors, one entry per hobby/calendar year, actual bounded
+consequences and durable results/history. Use existing hobby artwork. This
+connects early hobby routines to meaningful optional gameplay; no invented
+professional qualification, salary or purchase. Check actual payer/availability,
+practice, dates, stale quotes, no reroll/duplicate fee, failed save/retry/cold.
+Keep browsing/preview read-only, visible primary action and only pressed feedback.
+
+No showcase implementation yet. World31 /engine32 /reader11 would be appropriate
+if adding persisted records; content8/250situations can stay fixed because system
+outcomes do not inflate the catalogue. Reuse leisurePresent/leisurePayer and
+consent rules; indexLedger for receipt checks (avoid scanning full ledger per
+record). Use actual paid monthly practice, not free extra-practice spam, for
+entry readiness. Early access around age7 after an attended year is reasonable.
+Maintain migrations/old raw bytes, frozen-source gates,120lifetimes and actual
+native outcome acceptance for an engine milestone. Further file/history work
+stays parked; reliable automatic save/resume remains required.
+
+Local helpers: /tmp/dreams-native-ui.py and /tmp/dreams-copy-native-db.py.
+ADB emulator5560, Metro8081. Welcome button is Continue as Nia Carter. Fresh
+hierarchies only; await tool sessions before dependent gestures. Actual latest
+DB copies /tmp/dreams-progress40-{final,browsed-final}-db117 and cold-raise116.
+Current native result/goal verification scripts and source manifest live under
+/tmp/dreams-progress40-*. Do not mistake any projection/partial/busy capture for
+native proof. OS font changes restart ExpoGo; missing-control refusals/old label
+waits are diagnostics, not physical latency. Preserve removeClippedSubviews=false
+on Life (reproduced Android24 RenderThread crash otherwise).
+
+## Prior checkpoint: actual-life situation catalogue
 
 World30 / engine31 / content8 / reader10 / checkpointv4.125new situations and
 375choices complete250minimum. See [LIFE_CONTEXT_STORIES.md](LIFE_CONTEXT_STORIES.md)
@@ -58,7 +120,7 @@ owner loss and connected SQLite retry/cold assertions. All earlier pins unchange
 The firstfullrun1655pass/2oldsequencefail1066.037s was corrected in tests only;
 finalfullrun passes. Never publish pre-literal diagnostics as final-source gates.
 
-## Current UI checkpoint: immediate adoption details
+## Prior UI checkpoint: immediate adoption details
 
 The reproduction is fixed: selecting a shelter pet opens a keyed detail view at
 its top, with Review in a keyboard-aware footer. Correct offer ages and actual
@@ -79,25 +141,6 @@ diagnostics, not app latency. [Native evidence](verification/android24-pet-adopt
 Read-only copies `/tmp/dreams-pets-detail-{before,cancelled,large-text,final}-db`;
 verification/publication scripts and rawlogs are in/tmp. Do not rerun unchanged
 engine120gate for this UI-only increment.
-
-## Continue immediately: factual progression and broader game
-
-Expand actual achievements/challenges beyond12/4, then ordinary work/leisure depth,
-editorial/balance, visual/accessibility and available release gates. The user
-explicitly wants continued work; no final reply at a routine milestone. Additional
-load/save/import/export/sharing/history breadth remains parked.
-Preparation: `/tmp/dreams-progression-backlog-next.md`, current implementation
-src/progression/progress.ts, tests/progression/progress.test.ts and UI extras flows.
-Reopen design/14-achievements-challenges-settings-end-of-life.png. Read actual
-retained/archived records once, filter every fact by person, avoid borrowed
-parent/heir/NPC outcomes and double counting. Keep existing goal IDs. No fake
-money or unlock rewards; actual engine accomplishments must drive the display.
-This can remain outside game/persistence, so preserveC8tags and avoid a redundant
-lifetime run when the simulation is unchanged.
-
-Last verified remote push77d1c6c, 20 October16:10UTC. The adoption UI checkpoint is
-being committed/pushed now; inspect git log/remote for its final SHA. Next safe
-push deadline two hours from that push. No subagents without user authorisation.
 
 ## Prior ordinary-job interviews
 

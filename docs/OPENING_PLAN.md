@@ -1,6 +1,11 @@
 # Opening experience: priority and completion estimates
 
-The latest adoption UI opens details immediately and keeps Review visible with
+The latest progression milestone adds40factual achievements/12challenges and
+virtualised goal lists. All129UI/state/progression checks, strict types, fresh
+exports and exact Android earned/cold-result checks pass. Shared100%labels also
+stay on one line at130%text. [Current evidence](verification/progression-expanded-20261020.json).
+
+The preceding adoption UI opens details immediately and keeps Review visible with
 normal/130%text and the keyboard. All106UI/state checks, strict types, both native
 exports and exact read-only Android checks pass. [Current UI evidence](verification/pet-adoption-details-20261020.json).
 
@@ -336,7 +341,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
 | Pets, hobbies and entertainment | 45% | Deeper leisure mechanics, balance and broader device review |
 | Situational stories | About70% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
-| Achievements and challenges | 25% | More factual goals, unlocks and meaningful challenges |
+| Achievements and challenges | 55% | Further financial milestones, challenge/reward depth and broader release review |
 | Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
@@ -347,7 +352,7 @@ work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Current next steps: expand factual achievements/challenges and remaining work/leisure depth; review
+Current next steps: add meaningful community events to hobbies, then remaining work/leisure depth; review
 all250stories for balance/editorial coverage; complete visual/accessibility and
 available device/release gates. Preserve fast atomic autosave/resume. Further
 import/export/sharing/history breadth stays parked. The original opening
