@@ -37,10 +37,17 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader thirteen protects actual NPC courtship, consent and wedding history. Existing
+    // Reader fourteen protects the next gameplay batch, including local hobby
+    // introductions, without discarding prior NPC courtship or wedding history. Existing
     // plain/v1/v2 rows and historical payloads need no eager rewrite.
-    if (!version || version.user_version > 13) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 13) return;
+    if (!version || version.user_version > 14) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 14) return;
+    if (version.user_version === 13) {
+      // The complete reader-13 database already has every required table and
+      // metadata row. Upgrade only the reader marker, not stored game payloads.
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 14'));
+      return;
+    }
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -80,7 +87,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 13');
+      await tx.run('PRAGMA user_version = 14');
     });
   }
 

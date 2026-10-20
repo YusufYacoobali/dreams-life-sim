@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { gunzipSync, strFromU8 } from 'fflate';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { decodeWorld, encodeWorld } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
@@ -42,7 +43,7 @@ test('the documented fallback reviews an actual visible permanent conception blo
   expect(childrenOf(result, partner.id).map(row => row.id)).toContain(child.id); expect(professionalAdoptionFallback(result)).toBeNull(); expect(decodeWorld(encodeWorld(result), true)).toEqual(result);
 });
 
-test('the genuine natural AU world beyond the plain20M limit cold-resumes through production v4 without changing any field or bound', () => {
+test('the genuine natural AU world beyond the plain20M limit retains its original canonical proof and cold-resumes with only current tags changed', () => {
   // New genuine pure-engine observation from the failed policy, not a rewritten
   // fixture or a claim that its post-birth progression used SQLite or a device.
   const bytes = readFileSync(join(__dirname, '../fixtures/v33-natural-professional-au-checkpoint.json'));
@@ -52,9 +53,17 @@ test('the genuine natural AU world beyond the plain20M limit cold-resumes throug
   expect(auCheckpoint.versions).toEqual({ world: 33, engine: 34, content: 9 });
   expect(sha(auCheckpoint.checkpoint)).toBe('4eb6bf75887b3bf3fab2538022e0d0fda7a67e0db0b356474f8c3d170a1c1144');
   const frame = JSON.parse(auCheckpoint.checkpoint); expect(frame.format).toBe('dreams-checkpoint-v4'); expect(frame.bytes).toBe(11494720); expect(frame.bytes).toBeLessThan(32_000_000);
+  const originalMain = JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.main.data, 'base64'))));
+  expect(originalMain).toMatchObject({ schemaVersion: 33, engineVersion: 34, contentVersion: 9 });
   const world = unpackCheckpoint(auCheckpoint.checkpoint, true), encoded = encodeWorld(world);
+  expect(world).toMatchObject({ schemaVersion: 34, engineVersion: 35, contentVersion: 9 });
   expect(world.revision).toBe(593); expect(Object.keys(world.people)).toHaveLength(34); expect(world.ledger).toHaveLength(69477); expect(encoded.length).toBe(22124524); expect(encoded.length).toBeGreaterThan(20_000_000); expect(Buffer.byteLength(encoded)).toBeLessThan(80_000_000);
-  expect(sha(encoded)).toBe('dfe1fc0f8ac438463c391d4af39945151c623d4f11c2945d0a4c53c280206184'); expect(() => decodeWorld(encoded, true)).toThrow('Save is too large');
+  // Restore only the two root version tags for the original immutable proof.
+  // The historical SHA is never replaced by a newly generated terminal world.
+  expect(encoded.startsWith('{"schemaVersion":34,"engineVersion":35,')).toBe(true);
+  const originalCanonical = encoded.replace(/^\{"schemaVersion":34,"engineVersion":35,/, '{"schemaVersion":33,"engineVersion":34,');
+  expect(sha(originalCanonical)).toBe('dfe1fc0f8ac438463c391d4af39945151c623d4f11c2945d0a4c53c280206184'); expect(() => decodeWorld(encoded, true)).toThrow('Save is too large');
+  expect(JSON.parse(encoded).npcCourtships).toEqual(originalMain.npcCourtships); expect(world.npcCourtships).toHaveLength(13);
   const cold = professionalColdResume(world, 'natural AU903 before the failing next command');
   expect(encodeWorld(cold)).toBe(encoded); expect(Object.isFrozen(cold)).toBe(true); expect(Object.isFrozen(cold.ledger)).toBe(true);
 }, 30000);

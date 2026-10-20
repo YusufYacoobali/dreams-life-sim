@@ -1,7 +1,7 @@
 // Scenario C acceptance policy. Production source and outcomes are never edited.
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os');
 const assert = require('node:assert/strict'), { createHash } = require('node:crypto');
-const policyVersion = 2, expectedVersions = { world: 33, engine: 34, content: 9 };
+const policyVersion = 2, expectedVersions = { world: 34, engine: 35, content: 9 };
 const phases = ['birth', 'school', 'social', 'fame50', 'business', 'brandEarned', 'investment', 'family', 'death'];
 const sha = value => createHash('sha256').update(value).digest('hex');
 function canonical(value) {

@@ -90,7 +90,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(33), engineVersion: z.literal(34), contentVersion: z.literal(9),
+  schemaVersion: z.literal(34), engineVersion: z.literal(35), contentVersion: z.literal(9),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -545,5 +545,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33 && parsed.contentVersion === 8) parsed.contentVersion = 9;
   // Autonomous courtship clocks begin now; old pay, people, bound scenes and history remain exact.
   if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33) { parsed.schemaVersion = 33; parsed.engineVersion = 34; parsed.npcCourtships = []; }
+  // Local hobby introductions and education eligibility reuse existing records.
+  // Preserve all prior bound outcomes and histories; only the version tags move.
+  if (parsed && parsed.schemaVersion === 33 && parsed.engineVersion === 34) { parsed.schemaVersion = 34; parsed.engineVersion = 35; }
   return validateWorld(parsed, immutable);
 }
