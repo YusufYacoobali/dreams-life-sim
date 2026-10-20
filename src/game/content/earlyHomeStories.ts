@@ -66,7 +66,7 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'toddler-caterpillar-crossing', min: 3, max: 5, illustration: 'journal', title: 'Heavy traffic',
+    id: 'toddler-caterpillar-crossing', min: 3, max: 5, local: true, illustration: 'journal', title: 'Heavy traffic',
     body: 'A caterpillar is crossing a path. It has a lot of feet and very little urgency.',
     choices: [
       o('watch', 'Crouch down and watch', { smarts: 3, discipline: 1 }, 'Eventually, the other side', 'It reaches the edge and disappears under a leaf. You remain impressed by all the feet.', 'I watched a caterpillar cross a path.'),

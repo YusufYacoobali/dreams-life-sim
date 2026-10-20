@@ -15,7 +15,7 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     id: 'friend-different-budget', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'The inexpensive version',
     body: 'You and {friend} are discussing things to do in {city}. A paid outing comes up. {friend} quietly says it is outside their budget.',
     choices: [
-      option('walk', 'Suggest a free walk together', { happiness: 3, energy: -2 }, 'Company was the point', 'You take a short walk without buying anything. The conversation is not noticeably less expensive.', 'I enjoyed a free walk with {friend}.', undefined, { friendBond: 4 }),
+      option('walk', 'Suggest a free walk together', { happiness: 3, energy: -2 }, 'Company was the point', 'You take a short walk without buying anything. The conversation is no less enjoyable.', 'I enjoyed a free walk with {friend}.', undefined, { friendBond: 4 }),
       option('ask', 'Ask what would feel comfortable', { respect: 3, stress: -1 }, 'No financial performance required', '{friend} suggests sitting and talking instead. You do exactly that.', 'I asked {friend} what suited their budget and kept things simple.', undefined, { friendBond: 5 }),
       option('insist', 'Say it cannot cost that much', { respect: -3, stress: 2 }, 'That is not your number to choose', '{friend} repeats the boundary. You spend the conversation defending a price rather than enjoying the company.', 'I dismissed {friend}’s budget instead of listening.', undefined, { friendBond: -5 }),
     ],

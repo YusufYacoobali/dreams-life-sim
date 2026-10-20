@@ -52,7 +52,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'library-card', min: 5, max: 10, illustration: 'education', title: 'Unlimited dragons, limited shelf space',
+    id: 'library-card', min: 5, max: 10, local: true, illustration: 'education', title: 'Unlimited dragons, limited shelf space',
     body: 'At the library, you find a book so big you need both arms to carry it. The return desk suddenly looks very far away.',
     choices: [
       option('big', 'Commit to the enormous book', { smarts: 5, energy: -3 }, 'An ambitious loan', 'You finish some of it, skip a confusing chapter, and learn three words you immediately misuse.', 'I borrowed the largest book I could carry.'),
@@ -124,7 +124,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'community-garden', min: 18, max: 85, illustration: 'wellbeing', title: 'The carrots have a committee',
+    id: 'community-garden', min: 18, max: 85, local: true, illustration: 'wellbeing', title: 'The carrots have a committee',
     body: 'A notice in {city} asks for volunteers at a community garden. It promises fresh air and makes no promises about the weather.',
     choices: [
       option('join', 'Help for an afternoon', { happiness: 4, fitness: 3, energy: -4 }, 'Useful dirt', 'You weed a patch, meet a few people, and leave with very honest shoes.', 'I volunteered at a community garden in {city}.'),
@@ -142,7 +142,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'rest-guilt', min: 20, max: 75, illustration: 'wellbeing', title: 'An aggressively empty afternoon',
+    id: 'rest-guilt', min: 20, max: 75, local: true, illustration: 'wellbeing', title: 'An aggressively empty afternoon',
     body: 'For once, nothing urgently needs you. Your brain suggests inventing a task so you can complain about having no free time.',
     choices: [
       option('rest', 'Rest without earning it first', { energy: 8, stress: -5 }, 'Nothing catches fire', 'You take a quiet afternoon. The world manages.', 'I let myself rest without turning it into another task.'),
@@ -160,7 +160,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'local-meeting', min: 25, max: 90, illustration: 'property', title: 'Public consultation, private impatience',
+    id: 'local-meeting', min: 25, max: 90, local: true, illustration: 'property', title: 'Public consultation, private impatience',
     body: 'A meeting in {city} is discussing a local public space. Someone has brought a seventeen-slide presentation about benches.',
     choices: [
       option('speak', 'Make one practical suggestion', { respect: 4, discipline: 2, energy: -3 }, 'Recorded in the minutes', 'Your point makes it into the discussion. It is not a promise, but it is a start.', 'I spoke at a local meeting about a public space.'),
@@ -178,7 +178,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'birthday-number', min: 30, max: 90, illustration: 'birthday', title: 'An unnecessarily round number',
+    id: 'birthday-number', min: 30, max: 90, illustration: 'birthday', title: 'Another year, another timetable',
     body: 'Another birthday makes you consider whether you are where you expected to be. Your younger self appears to have underestimated the cost of groceries.',
     choices: [
       option('notice', 'Notice what is actually going well', { happiness: 5, stress: -3 }, 'A fairer assessment', 'Your life contains things the old plan could not have predicted.', 'I measured my life more fairly on my birthday.'),
@@ -187,7 +187,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'familiar-street', min: 40, max: 100, illustration: 'travel', title: 'A place that remembers differently',
+    id: 'familiar-street', min: 40, max: 100, local: true, illustration: 'travel', title: 'A place that remembers differently',
     body: 'You return to a familiar part of {city}. A shop has changed, a wall has been painted, and one corner looks exactly as you remember.',
     choices: [
       option('walk', 'Take the longer way around', { happiness: 4, fitness: 2 }, 'Room for both versions', 'You find a few things you miss and a few things you like better.', 'I walked through a familiar neighbourhood and noticed its changes.'),
