@@ -10,6 +10,7 @@ export const effectSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('skill'), personId: z.string(), skill: z.enum(skillIds), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('stat'), personId: z.string(), stat: z.enum(statKeys), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('relationship'), relationshipId: z.string(), delta: z.number().int().min(-100).max(100) }),
+  z.object({ kind: z.literal('pet-bond'), petId: z.string(), personId: z.string(), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('transfer'), fromAccountId: z.string(), toAccountId: z.string(), minor: z.bigint().nonnegative() }),
   z.object({ kind: z.literal('asset-sale'), assetId: z.string(), minor: z.bigint().positive() }),
   z.object({ kind: z.literal('decline-sale'), assetId: z.string() }),

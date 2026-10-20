@@ -15,9 +15,53 @@ saving and resume, and park further load/save tools, import/export/sharing,
 Time Machine breadth and history-storage optimisation. Existing working features
 and old data stay intact. The current breakdown is in
 [Opening plan: current assessment](OPENING_PLAN.md#current-assessment); overall
-completion remains approximately50%, with125/250situations implemented.
+completion is approximately55%, with250/250minimum situations implemented;
+editorial, balance and release acceptance remain open.
 
-## Current milestone: ordinary-job interviews and work details
+## Current milestone: stories from actual life context
+
+**250/250 minimum situations** are now implemented, including125new situations
+and375choices about actual children, home, pets, attended hobbies, completed trips,
+long-term diagnosed active conditions, later life and current work/special careers.
+Names bind literally once; valid dollar/token-like names cannot alter the text.
+Pet choices change the actual named companion's bounded bond. They grant no
+fictional money, care periods, practice, service, qualifications or cure.
+[Mechanics and restrictions](LIFE_CONTEXT_STORIES.md),
+[source and checks](verification/life-context-stories-content8-20261020.json).
+
+All **1,657tests /111suites** pass in **941.489s**, strict app/test types and
+fresh Android/iOS Hermes exports. The first whole run found two old story-sequence
+assumptions; their corrected tests preserve the same rollback/retry/cold branch
+coverage. Existing immutable fixtures remain unchanged; two new old-producer
+fixtures pin native interviews and natural owner loss.
+[Full regression](verification/regression-life-context-20261020.txt),
+[fixture provenance](verification/life-context-immutable-fixtures-20261020.json).
+The same120immutable seeds0–119 pass in712.278s across twelve countries; this
+adds no distinct seeds. Twelve natural country-specific work/pet/two-hobby/leisure
+journeys pass in178.374s. Neither driver establishes all choices or native release
+acceptance. [Annual gate](verification/life-sweep-life-context-120-20261020.json),
+[natural journeys](verification/leisure-sweep-life-context-20261020.json).
+
+All70serial cloud warm action samples avoid full checkpoint decoding; cold
+current/backup and original Before Age Up bytes are exact. These are unpaired
+host-sensitive diagnostics, not physical p95.
+[Raw actions](verification/action-latency-life-context-20261020.json).
+Actual Android reader9→10, saved adult/pet stories, real paid work/adoption/care/vet,
+cold95/96/110 and acknowledgement111 match whole expected worlds. Cold comparisons
+keep all eight tables exact; six inactive lives/backups,55original moments and
+79old receipts remain exact. Final Nia22/revision111, seven lives/58moments/
+96receipts, no pending/year. Adult95/96 predate the literal-name correction;
+final-source cold96/ack97 and pet109/110/111 provide the later acceptance.
+[Thirteen captures and exact scope](verification/android24-life-context-stories-20261020/).
+
+World30 / engine31 / content8 / reader10 / checkpointv4. The source catalogue's
+minimum is complete; editorial, balance, visual and release acceptance remain
+open. Overall production is approximately **55%**, not a screen/test average.
+Continue immediate adoption details/visible Review action, then broader factual
+progression, work depth, balance, visual/accessibility and release gates. Further
+file/history work remains parked under the user's instruction.
+
+## Prior milestone: ordinary-job interviews and work details
 
 All18ordinary roles now offer a persisted role-specific interview before hiring.
 The selected answer adjusts the existing bounded hiring chance; withdrawal draws

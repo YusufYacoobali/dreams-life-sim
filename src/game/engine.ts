@@ -212,6 +212,13 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
     }
     if (effect.kind === 'emergency-care') return emergencyCare(world, effect.personId, effect.conditionId, effect.accepted, effect.quotedCost);
     if (effect.kind === 'connect-person') return connectPerson(world, effect.personId);
+    if (effect.kind === 'pet-bond') {
+      const pet = world.pets.find(item => item.id === effect.petId && item.status === 'active');
+      if (!pet || effect.personId !== world.activePersonId) throw new IneligibleAction('This pet is no longer available');
+      const before = pet.bonds[effect.personId] ?? 0; pet.bonds[effect.personId] = clamp(before + effect.delta);
+      const delta = pet.bonds[effect.personId] - before;
+      return [{ id: 'pet-bond', label: 'Bond with ' + pet.name, value: (delta >= 0 ? '+' : '') + delta + '%', tone: delta > 0 ? 'positive' as const : delta < 0 ? 'negative' as const : 'neutral' as const }];
+    }
     if (effect.kind === 'asset-sale') {
       const asset = ownedAsset(world, effect.assetId);
       if (asset.listing?.offer !== effect.minor) throw new IneligibleAction('That property offer is no longer available');

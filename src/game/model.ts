@@ -84,7 +84,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(30), engineVersion: z.literal(30), contentVersion: z.literal(7),
+  schemaVersion: z.literal(30), engineVersion: z.literal(31), contentVersion: z.literal(8),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -332,6 +332,7 @@ export function validateWorld(value: unknown, immutable = false): World {
       if (effect.kind === 'skill' && (!world.people[effect.personId] || !pending.personIds.includes(effect.personId))) throw new Error('Invalid bound skill target');
       if (effect.kind === 'stat' && !world.people[effect.personId]) throw new Error('Invalid effect person');
       if (effect.kind === 'relationship' && !world.relationships.some(relation => relation.id === effect.relationshipId)) throw new Error('Invalid effect relationship');
+      if (effect.kind === 'pet-bond' && (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !world.pets.some(pet => pet.id === effect.petId && pet.status === 'active'))) throw new Error('Invalid bound pet bond');
       if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
       if (effect.kind === 'emergency-care' && (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !world.people[effect.personId].health.conditions.some(item => item.id === effect.conditionId && item.status !== 'recovered'))) throw new Error('Invalid medical emergency target');
       if (effect.kind === 'legal-bail' || effect.kind === 'legal-remand' || effect.kind === 'legal-plea') {
@@ -523,5 +524,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 6) parsed.contentVersion = 7;
   // Interviews are created only by new applications; existing bound scenes stay exact.
   if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 29) parsed.engineVersion = 30;
+  // New life-context stories affect future selection only, never bound old scenes.
+  if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 30) parsed.engineVersion = 31;
+  if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 7) parsed.contentVersion = 8;
   return validateWorld(parsed, immutable);
 }

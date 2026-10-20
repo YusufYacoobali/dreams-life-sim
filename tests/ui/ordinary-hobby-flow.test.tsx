@@ -57,7 +57,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   await press('Ask For This Routine'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
   expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
   sqlite.exec('DROP TRIGGER fail_reading_plan'); await press('Ask For This Routine');
-  expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, roll: 47, chance: 87 } }] });
+  expect(reading()).toMatchObject({ proficiency: 0, practices: [], plans: [{ payerId: 'person_parent1', monthlyFee: 1160n, consent: { accepted: true, roll: 47, chance: 89 } }] });
   expect(world().accounts).toEqual(accounts); expect(world().assets).toEqual(assets);
   const planned = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Hobby />));
   expect(encodeWorld(world())).toBe(planned); await press('Continue');

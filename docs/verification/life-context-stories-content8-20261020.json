@@ -1,0 +1,100 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "2f8ad13c65abd072cb8c614e3aa99714b698adda",
+  "scope": "125 actual-life situations/375 choices complete the250 minimum source catalogue. Actual children, home, pets, attended hobbies, completed trips, long-term diagnosed active conditions and active careers. Literal names bind once. No extra player file/history scope.",
+  "versions": {
+    "world": 30,
+    "engine": 31,
+    "content": 8,
+    "database": 10,
+    "checkpoint": "v4"
+  },
+  "annualSituationCount": 250,
+  "newSituationCount": 125,
+  "newChoiceCount": 375,
+  "gameSourceHash": "809c034213bab2cb60a3ffc482ad26f106c68a86835913b6e5f02542c065d4ed",
+  "combinedGamePersistenceSourceHash": "12e1a38ca5104a66bae29665d7685983690773844247ce5fc38e46ef58e52740",
+  "source": {
+    "src/game/content/events.ts": "e0b1a2ed60017dab7bcf66b3bd4ad49d9dbc61af61f0f3b44a98121160071dfd",
+    "src/game/content/eventTypes.ts": "6b15d2a650e3c74f8307f27553a2bfa1f038fb07de4f408fc60ec4ecc5937755",
+    "src/game/systems/lifeStoryContext.ts": "349fcf00700fe435181294020a34afec1fb9d277473f8361f647731dfa74e8b9",
+    "src/game/runtime.ts": "90f44828183c2be01cd869b2353a067f17c1b592ddca514a2376f1ff0e41d62c",
+    "src/game/engine.ts": "849c1db9608e47dc10ad767bd33cbe013e92167bbc9077af6eecb8e7304dc79a",
+    "src/game/model.ts": "7149a6c262f91dce52d301737723d9f55042f6568cc3a8c1dfa99772d53e0f70",
+    "src/persistence/repository.ts": "ced0d0cbabafce7214c4812cd51eb9d381bd6e41ed664a1709a2ce143507b2fe",
+    "tests/game/everyday-life-stories.test.ts": "c71b996a4ec94abce5af0c8213de6e716fa02ecc469973de91ae7ed798ca165a",
+    "tests/ui/life-context-story-flow.test.tsx": "e4363d7d70eebb2b2468684bea3fe0aa68204944a998fd22d9ec0656bf6f0325",
+    "tests/ui/pets-flow.test.tsx": "5da7d768d21f88e9e6fba23201f3349f1bd37ac578c7d939d9d69521b8617839",
+    "tests/ui/ordinary-hobby-flow.test.tsx": "4a3e3f28d0629d8cd9b5ab1bed034c47e8b9b96764eae43ddea3bae7c02d5ecc"
+  },
+  "verification": {
+    "fullRegression": {
+      "tests": 1657,
+      "suites": 111,
+      "seconds": 941.489,
+      "exitCode": 0,
+      "raw": "regression-life-context-20261020.txt",
+      "rawSha256": "60bf2d653c4a318b99f53a8acb3bc7d4dead0a17c5429f75db53123f26cfa2fd",
+      "rawStdoutThenStderr": true,
+      "firstRun": "1655passed/2failed in1066.037s. Fixed old expected parental-consent score87→89 after actual story changes; owner-loss UI now loads immutable natural old-producer checkpoint instead of assuming unchanged full-life events. No runtime changes for either test correction."
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "freshAndroidAndIosHermesExports": true,
+    "exportsExitCode": 0,
+    "annualSweep": "life-sweep-life-context-120-20261020.json",
+    "naturalLeisureSweep": {
+      "raw": "leisure-sweep-life-context-20261020.json",
+      "rawSha256": "10426f8dba08a15ca9b3345c000544f316658e1eb456564361f103585e90cff6",
+      "driverSourceHash": "a19011f6606b6a08a43f35d728c08076b584960c2fa2ee56da2e367b089b3109",
+      "toolSpecificRootRelativeGameSourceHash": "3c36dbab6a9980784fa3d81dcf54d7038e41a869815e912583f2fbf0a8983a98",
+      "seconds": 178.374,
+      "lives": 12,
+      "countries": [
+        "US",
+        "CA",
+        "GB",
+        "AU",
+        "FR",
+        "DE",
+        "ES",
+        "IT",
+        "BR",
+        "IN",
+        "JP",
+        "ZA"
+      ],
+      "exitCode": 0,
+      "notAdditionalDistinctSeedClaim": true,
+      "notNativeOrAllChoices": true
+    },
+    "serialCloudActions": {
+      "raw": "action-latency-life-context-20261020.json",
+      "rawSha256": "a0ac64ba51c626e08b70e3534255c23cc767e212c345e2b6bba166ce03688bb2",
+      "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+      "samples": 70,
+      "allWarmSamplesAvoidFullCheckpointDecode": true,
+      "allColdCurrentBackupsAndOriginalBeforeAgeUpBytesExact": true,
+      "exitCode": 0,
+      "comparisonClaim": false,
+      "physicalTimingClaim": false,
+      "generatedPopulationIsNotNatural": true
+    },
+    "nativeRecord": "android24-life-context-stories-20261020/journey-exact.json",
+    "nativeChecksExitCode": 0,
+    "immutableFixtures": "life-context-immutable-fixtures-20261020.json",
+    "noPreviouslyPinnedFixturesRegenerated": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-b0f059ec79e8977eaa2ca386ff800a62.hbc",
+      "bytes": 5616979,
+      "sha256": "0538738aadc4379a643e38e6da51a2e24bc06d7ae12c05fe6eadcfc6c95bf3bd"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-f7fced3766ecc7afc42a921d9ba4c384.hbc",
+      "bytes": 5312840,
+      "sha256": "2f0a4a76af3dc93a420255d4f0f963b9b894d69f19cfa4c33372f4bb7c0e807d"
+    }
+  ]
+}

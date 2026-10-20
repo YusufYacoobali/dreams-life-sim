@@ -1,5 +1,11 @@
 # Opening experience: priority and completion estimates
 
+Current content8 implements250/250minimum situations. All1,657tests/111suites,
+strict types, both exports and exact Android story/cold-resume checks pass.
+Overall production is about55%; the current area estimates and remaining plan
+appear under Current assessment and Order of work below. Further file/history
+work is parked. [Current evidence](verification/life-context-stories-content8-20261020.json).
+
 The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
@@ -7,7 +13,10 @@ opening path before resuming pets, hobbies or other later features.
 Latest scope update, 20 October: keep automatic saving/resuming reliable; park
 additional load/save tools, import/export/sharing, Time Machine breadth and
 history-storage optimisation. Existing working features and old data stay intact.
-The current pushed 1542133 passes all 1,457 tests / 106 suites, strict types,
+
+## Prior milestones (historical source versions)
+
+The pushed 1542133 passed all 1,457 tests / 106 suites, strict types,
 both Hermes exports and the same 120 immutable lifetimes. Actual Android routine
 90 / cold 90 / acknowledgement 91 are exact. The natural three-generation journey
 runs for 172 years 8 months with 43 exact cold checks; storage/archive limits are
@@ -279,6 +288,13 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
+Current content8 completes the250-situation minimum with actual child/pet/home/
+hobby/trip/health/work contexts. All1,657tests/111suites, strict types, both Hermes
+exports, same120annual-policy lifetimes and twelve natural leisure/work journeys
+pass. Native cold adult/pet results and acknowledgement111 preserve original
+lives/history. [Current evidence](verification/life-context-stories-content8-20261020.json).
+Earlier milestones below retain their own source/count scope.
+
 An actual Android age-seven project callback now survives its saved deadline,
 teacher-help choice and interrupted-result cold resume. The remaining-year
 pet pause and birthday lunch finish age eight; full worlds and original lives/
@@ -298,7 +314,7 @@ fresh Hermes exports pass. Actual native older-life viewing returns to Riley
 with all eight tables exact. Engine/codec/schema stay fixed; file breadth and
 broader production gates remain deferred/open as recorded.
 
-The complete production scope is approximately **50% complete**. These are
+The complete production scope is approximately **55% complete**. These are
 conservative effort estimates, not measured screen acceptance scores. Passing
 mechanics tests does not establish visual fidelity or device readiness.
 
@@ -309,23 +325,30 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
 | Education and ordinary jobs | 75% | Hours/career ladders, national education depth and broader balance |
-| Relationships, family and inheritance | 75% | More autonomous-life depth, integrated stories and device acceptance |
+| Relationships, family and inheritance | 80% | More autonomous-life depth, balance and device acceptance |
 | Money, assets and markets | 80% | Balance, broad integration and device acceptance |
 | Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
 | Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
-| Pets, hobbies and entertainment | 35% | Existing persistent pets/eight hobbies/four outing paths need more breadth and native review |
-| Situational stories | 50% implemented | 125 of the minimum250 implemented;125remaining, plus full coverage/editorial acceptance |
+| Pets, hobbies and entertainment | 45% | Immediate adoption details, deeper leisure mechanics, balance and device review |
+| Situational stories | About70% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
 | Achievements and challenges | 25% | More factual goals, unlocks and meaningful challenges |
 | Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
-Overall remains approximately **50%**. These are conservative effort estimates,
+Overall is approximately **55%**. These are conservative effort estimates,
 not acceptance scores or a simple average. Story counts measure implemented source
 situations, not completed editorial/release acceptance. Additional file/history
 work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
+
+Current next steps: fix adoption selection so details and Review appear immediately;
+expand factual achievements/challenges and remaining work/leisure depth; review
+all250stories for balance/editorial coverage; complete visual/accessibility and
+available device/release gates. Preserve fast atomic autosave/resume. Further
+import/export/sharing/history breadth stays parked. The original opening
+priorities below retain their detailed references.
 
 The latest reported regression takes precedence: ordinary buttons must respond
 smoothly without “Saving” replacing unrelated subtitles or loading every button.

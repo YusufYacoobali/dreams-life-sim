@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **125 distinct situational templates** against
+The source catalogue contains **250 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -19,12 +19,27 @@ category.
 | Secondary school with actual contacts | 13 |
 | Shared primary/secondary project promise | 1 |
 | Early-teen / teenage family situations | 14 |
-| General adult/later-life situations | 12 |
-| Ordinary workplace with actual contacts | 10 |
+| General adult/later-life situations, home and wellbeing | 68 |
+| Ordinary workplace with actual contacts | 20 |
 | Adult friendship with actual contacts | 8 |
 | Current adult partner | 7 |
-| **Source total** | **125** |
-| **Additional distinct situations needed for the minimum** | **125** |
+| Actual children across four age groups | 20 |
+| Actual household pets | 10 |
+| Recent attended hobby practice | 10 |
+| Completed-trip memories | 10 |
+| Active special careers | 9 |
+| **Source total** | **250** |
+| **Additional distinct situations needed for the minimum** | **0** |
+
+Content eight adds125situations/375choices connected to actual children,
+household homes/pets, attended hobbies, completed trips, current special careers,
+diagnosed long-term conditions and known colleagues, alongside adult/later-life
+moments. Pet choices change the actual named pet's bond; other choices use
+existing stats/bonds. They do not invent costs, wages, practice, care periods,
+qualifications or cures. [Bindings, age/context rules and limits](LIFE_CONTEXT_STORIES.md).
+The minimum source count is met. Final editorial review, balance, further
+career-specific coverage and release acceptance remain open; source count is
+not a claim that the production game is finished.
 
 The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
@@ -113,8 +128,9 @@ result/remaining-year checks now pass with scoped evidence in HANDOFF. Their fol
 distinct-situation count. Rarity tiers, the broader pacing model, editorial metadata,
 further callbacks and comprehensive system-specific coverage remain pending.
 
-The remaining catalogue needs employment and all eleven special paths, adult
-relationships, finances/ownership, health/legal situations, travel, pets/hobbies,
-later-life/legacy callbacks and uncommon memorable outcomes. The existing system
-decisions do not satisfy those distinct-story allocations. The overall game
-estimate remains about 50%; 110/250 is a content count, not an overall score.
+The minimum250source situations are implemented. Coverage/editorial review still
+needs to assess deeper financial/legal/criminal situations, all eleven special
+paths, later-life/legacy callbacks and uncommon memorable outcomes against the
+planned allocations. Existing system decisions do not substitute for those
+allocations. The overall game is about55% complete; reaching250source situations
+does not establish full content or production acceptance.

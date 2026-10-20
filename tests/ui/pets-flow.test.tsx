@@ -3,7 +3,6 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
-import { randomCreation } from '../../src/game/createLife';
 import { petAdoptionFee, petAdoptionOwner, petCareReason, petVetCost } from '../../src/game/systems/pets';
 import { encodeWorld } from '../../src/game/model';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
@@ -12,6 +11,11 @@ import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
 import archive from '../fixtures/v25-content4-bubble-archive.json';
+import ownerLoss from '../fixtures/v30-pet-owner-loss.json';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 let mockStore: ReturnType<typeof createGameStore>, mockPetId = '';
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => ({ id: mockPetId }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
@@ -52,16 +56,19 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   view.unmount(); sqlite.close();
 }, 60000);
 
-test('an actual last-owner death and shelter outcome roll back atomically, retry with the same care history and resume cold without a second fee', async () => {
+test('the pinned natural owner-loss checkpoint rolls back atomically, retries with the same care history and resumes cold without a second fee', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2000, month: 1, day: 1 }), id: () => 'life_pet_owner_loss_ui' }); await mockStore.getState().bootstrap(); };
-  await cold(); expect(await mockStore.getState().startLife({ ...randomCreation(707), country: 'IT', city: 'Rome', background: 'ordinary' }, 707)).toBe(true); expect(await mockStore.getState().acknowledgeBirth()).toBe(true);
+  // Old producer's natural seed707 reaches this branch; current content can choose a different life.
+  const bytes = readFileSync(join(__dirname, '../fixtures/v30-pet-owner-loss.json'));
+  expect(createHash('sha256').update(bytes).digest('hex')).toBe('8a20bb94a0cfd128b8ecf10fa3fcdf2427638218ce0dca9a53a4504489c8a55b');
+  await repository.create(unpackCheckpoint(ownerLoss.payload)); await cold();
   const world = () => mockStore.getState().world!;
   const nextCommand = (): GameCommand => { const w = world(); return w.pending?.kind === 'decision' ? { type: 'choose', eventId: w.pending.id, choiceId: w.pending.choices.find(item => !choiceUnavailable(w, item))!.id } : w.pending ? { type: 'acknowledge', resultId: w.pending.id } : w.annual ? { type: 'resume' } : { type: 'advance' }; };
   const manualVet = async () => { const pet = world().pets.find(item => item.status === 'active' && item.illness === 'infection' && !petCareReason(world(), item, 'vet')); if (pet && !world().pending) { expect(await mockStore.getState().dispatch({ type: 'pet-vet', petId: pet.id, reviewedOwnerId: pet.ownerId, quotedFee: petVetCost(pet.country) })).toBe(true); return true; } return false; };
   const drain = async () => { let guard = 0; while ((world().pending || world().annual) && guard++ < 150) if (!await manualVet()) expect(await mockStore.getState().dispatch(nextCommand())).toBe(true); expect(guard).toBeLessThan(150); };
-  for (let year = 0; year < 6; year++) { expect(await mockStore.getState().dispatch({ type: 'advance' })).toBe(true); await drain(); }
-  const owner = petAdoptionOwner(world())!; expect(await mockStore.getState().dispatch({ type: 'adopt-pet', offerId: 'buddy', name: 'Buddy', reviewedOwnerId: owner.id, quotedFee: petAdoptionFee(world(), 'buddy') })).toBe(true); await drain(); expect(world().pets).toHaveLength(1);
+  expect(world().revision).toBe(38); expect(world().pets).toHaveLength(1);
+  const owner = world().people[world().pets[0].ownerId];
   const view = render(frame(<Life />)); let failedLoss = false;
   for (let guard = 0; guard < 300 && !failedLoss && !world().people[world().activePersonId].died; guard++) {
     let visited = false; if (!world().pending) await act(async () => { visited = await manualVet(); }); if (visited) continue;

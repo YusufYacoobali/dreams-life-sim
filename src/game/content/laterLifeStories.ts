@@ -1,0 +1,54 @@
+import { situation as s } from './lifeSituation';
+
+export const laterLifeTemplates = [
+  s('later-retirement-assumption', 'Apparently your days are free', 'A stranger asks how you fill your time now that you are retired. They have not asked what your current situation actually is.', [
+    ['accurate', 'Give the accurate short answer', { respect: 3, stress: -2 }, 'The assumption receives an update', 'You explain your current situation plainly. They look slightly embarrassed at having supplied it for you.', 'I corrected an assumption about what I do with my time.'],
+    ['humour', 'Make a gentle joke about the assumption', { happiness: 4, respect: 2 }, 'An unexpected schedule consultation', 'You point out that they seem to know a great deal about your calendar. The conversation becomes less presumptuous.', 'I joked about a stranger assuming how I spend my days.'],
+    ['lecture', 'Explain their mistake at considerable length', { stress: 4, energy: -3 }, 'A detailed answer about your time', 'They learn exactly how much time can be spent correcting one assumption. You finish feeling more irritated than when you began.', 'I spent too long correcting a stranger’s assumption about my life.'],
+  ]),
+  s('later-old-handwriting', 'You recognise the handwriting', 'You find an old note in your own handwriting. The letters are familiar, but the urgent little instruction belongs to a version of you with different worries.', [
+    ['kind', 'Read it with a little kindness', { happiness: 4, stress: -3 }, 'A person doing their best then', 'You remember the circumstances without judging them by what you know now. The old worry seems easier to understand.', 'I read an old note to myself with more kindness than criticism.'],
+    ['record', 'Write what you understand differently now', { smarts: 3, discipline: 2 }, 'Two versions of the same person', 'You put a short present-day thought beside the old instruction. Neither has to pretend to know the other’s whole life.', 'I wrote a present-day thought beside an old note.'],
+    ['judge', 'Scold the old version of yourself', { stress: 4, happiness: -3 }, 'A verdict delivered very late', 'You criticise an old uncertainty using information that person did not have. It does little for either version of you.', 'I judged an old worry too harshly with the benefit of hindsight.'],
+  ]),
+  s('later-forgotten-telephone-number', 'A number with nowhere to go', 'You suddenly remember a telephone number you have not used for years. You cannot remember what you entered a room to fetch, but the number is perfect.', [
+    ['laugh', 'Enjoy the memory’s strange priorities', { happiness: 4, stress: -2 }, 'An impressive useless recital', 'You repeat the number once and laugh at the timing. Memory has supplied an answer to a question nobody asked.', 'I remembered an old telephone number at an unhelpful moment.'],
+    ['pause', 'Return calmly to the original task', { discipline: 3, stress: -1 }, 'One thought at a time', 'You retrace what you were doing instead of treating the distraction as an emergency.', 'I calmly retraced a small task after an odd memory interrupted it.'],
+    ['panic', 'Treat the distraction as a personal crisis', { stress: 5, energy: -2 }, 'A small lapse gets a large audience', 'Worry fills the space where a simple pause might have helped. The old number remains unreasonably easy to remember.', 'I worried too much about a small distraction.'],
+  ]),
+  s('later-unfamiliar-word', 'A word has changed jobs', 'A younger person uses a familiar word in a way you do not recognise. You understand every word in the sentence separately, which is not currently enough.', [
+    ['ask', 'Ask what they mean by it', { smarts: 4, respect: 2 }, 'A short translation', 'They explain the usage. You acquire a new meaning without having to pretend it was always obvious.', 'I asked about an unfamiliar use of a familiar word.'],
+    ['context', 'Check the context before responding', { discipline: 3, smarts: 2 }, 'The sentence begins to cooperate', 'You work out the general meaning and check the uncertain part. The conversation keeps moving.', 'I used context to understand a changing expression.'],
+    ['condemn', 'Declare that language used to make sense', { respect: -3, stress: 3 }, 'An argument older than the word', 'The person points out that words have changed before. Your complaint has joined a very long tradition.', 'I complained about a changing word instead of asking what it meant.'],
+  ]),
+  s('later-old-competition', 'You can still explain the rules', 'A casual mention of an old game reminds you of a disputed result from years ago. You can still present the entire case with alarming precision.', [
+    ['funny', 'Tell it as a funny old argument', { happiness: 5, stress: -3 }, 'The result loses its jurisdiction', 'You enjoy how much the dispute once mattered without reopening it as a current legal matter.', 'I laughed about a game dispute that used to feel very important.'],
+    ['perspective', 'Notice how the stakes have changed', { smarts: 3, discipline: 2 }, 'A smaller trophy in memory', 'You remember the feeling and recognise its old scale. The memory can stay vivid without staying urgent.', 'I put an old competitive argument into perspective.'],
+    ['prosecute', 'Present the case as though still pending', { stress: 4, energy: -3 }, 'The appeal enters another decade', 'You make a detailed argument to an audience with no power to alter the result.', 'I reopened an old game dispute in unnecessary detail.'],
+  ]),
+  s('later-photo-at-edge', 'You are almost in the picture', 'An old photograph catches you at the edge of the frame, apparently concentrating on something outside it. You can no longer remember what seemed so important.', [
+    ['accept', 'Enjoy the unfinished little mystery', { happiness: 4, stress: -2 }, 'A life outside the frame', 'You let the unknown detail remain unknown. The photograph still holds an ordinary moment worth keeping.', 'I enjoyed an old photograph without solving every detail.'],
+    ['recall', 'Write down what you do remember', { smarts: 3, discipline: 2 }, 'Some details stay', 'You record the clear parts without inventing an explanation for the rest.', 'I preserved the details I actually remembered from an old photograph.'],
+    ['invent', 'Build a grand explanation around the pose', { happiness: 2, stress: 2 }, 'A very ambitious caption', 'You produce a story much more dramatic than the picture supports. It is entertaining as long as you remember it is a guess.', 'I invented an elaborate explanation for an old photograph.'],
+  ]),
+  s('later-offered-a-hand', 'Help has been offered', 'Someone offers a hand with a small practical task. You are not sure you need the help, but you notice yourself preparing a defence before considering the offer.', [
+    ['accept', 'Accept if the help would be useful', { respect: 3, energy: 3 }, 'A task shared', 'You take the useful part of the offer without treating it as a judgement on everything you can do.', 'I accepted useful help with a small task.'],
+    ['decline', 'Politely decline and explain your preference', { discipline: 3, respect: 2 }, 'A clear answer is enough', 'They accept your answer. You keep your independence without having to turn kindness into an argument.', 'I declined an offer of help politely.'],
+    ['attack', 'Treat the offer as an insult', { respect: -4, stress: 4 }, 'The task gains an argument', 'The person withdraws the offer. You have defended your independence at the expense of an ordinary friendly exchange.', 'I reacted harshly to a well-meant offer of help.'],
+  ]),
+  s('later-changed-favourite', 'You are allowed another favourite', 'You notice that something you used to call your favourite no longer appeals to you much. The old answer has been living on habit longer than enthusiasm.', [
+    ['update', 'Let your preference change', { happiness: 4, stress: -2 }, 'A current answer replaces an old one', 'You choose what you enjoy now. Loyalty to an earlier preference does not need to occupy every present choice.', 'I allowed an old favourite to stop being my current favourite.'],
+    ['compare', 'Think about what changed', { smarts: 3, discipline: 2 }, 'A more interesting answer', 'You notice the difference in your own taste. Changing it does not erase what you once enjoyed.', 'I thought about how one of my preferences had changed.'],
+    ['insist', 'Keep choosing it to remain consistent', { happiness: -3, stress: 2 }, 'A faithful but unenthusiastic choice', 'You preserve the answer other people expect while enjoying the choice rather less than before.', 'I kept an old preference out of habit rather than enjoyment.'],
+  ]),
+  s('later-recording-labelled-retro', 'The programme is now retro', 'A recording you remember as ordinary entertainment is introduced as a fascinating example of a past era. The past era appears to have included your evenings.', [
+    ['enjoy', 'Enjoy noticing what has changed', { happiness: 4, smarts: 2 }, 'An accidental historical perspective', 'You spot details that once passed unnoticed. Familiarity gives you another way to watch it.', 'I enjoyed seeing an old programme presented as a period piece.'],
+    ['share', 'Describe one detail you remember clearly', { respect: 3, happiness: 2 }, 'A small first-hand footnote', 'You add a useful detail without trying to speak for everyone who was there.', 'I shared a specific memory of something now described as retro.'],
+    ['protest', 'Object to the entire concept of retro', { stress: 3, respect: -2 }, 'The era continues being earlier than now', 'The label remains on the recording. Your objection has not moved the calendar backwards.', 'I took a retro label more personally than it deserved.'],
+  ]),
+  s('later-another-year-question', 'Another year, by the calendar', 'Someone asks how you feel about another birthday and seems to expect a complaint. Your actual answer is a little less tidy than that.', [
+    ['honest', 'Give the mixed, honest answer', { respect: 3, happiness: 3 }, 'More than a familiar complaint', 'You name something you value and something you find difficult. The answer feels more like your life than a ready-made line.', 'I gave an honest answer about another birthday.'],
+    ['ordinary', 'Mention one ordinary thing you enjoy now', { happiness: 5, stress: -2 }, 'A small present-day reason', 'You choose a detail that matters to you. It is enough for this conversation without becoming a verdict on every year.', 'I noticed something ordinary I enjoy at my current age.'],
+    ['perform', 'Deliver the complaint they seem to expect', { happiness: -2, stress: 3 }, 'A well-rehearsed answer', 'The line gets the expected response. It leaves rather less room for what you actually feel.', 'I answered a birthday question with a complaint that was not the whole truth.'],
+  ]),
+].map(template => ({ ...template, min: 55 }));

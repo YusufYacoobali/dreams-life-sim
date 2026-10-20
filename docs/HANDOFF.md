@@ -18,9 +18,64 @@ Stop only for material decisions, genuine blockers or unavailable tools. No
 subagents without explicit authorisation. Further import/export/sharing breadth
 stays parked; the existing80%+ implementation's folder-save check passed. Read-only
 previous-life summaries are complete. Full production remains approximately
-**50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
+**55%**; the catalogue contains **250/250 minimum**. Editorial, balance and
+release acceptance remain open.
 
-## Current ordinary-job interviews
+## Current checkpoint: actual-life situation catalogue
+
+World30 / engine31 / content8 / reader10 / checkpointv4.125new situations and
+375choices complete250minimum. See [LIFE_CONTEXT_STORIES.md](LIFE_CONTEXT_STORIES.md)
+and [source/checks](verification/life-context-stories-content8-20261020.json).
+All1,657tests/111suites pass in941.489s, strict app/test types and both fresh
+Hermes exports. Same120immutable seeds0–119 pass712.278s, twelve natural country
+work/pet/two-hobby/leisure journeys178.374s. All70serial cloud warm action samples
+avoid full checkpoint decoding, exact cold current/backup and Before Age Up bytes.
+These are not physical p95, extra distinct seeds or all-choice/native release gates.
+Game hash809c034213bab2cb60a3ffc482ad26f106c68a86835913b6e5f02542c065d4ed;
+combined12e1a38ca5104a66bae29665d7685983690773844247ce5fc38e46ef58e52740.
+
+Actual Android Nia22/revision111, seven lives/58moments/96receipts, no pending/year.
+All observed full worlds match normal projected commands from actual94. Cold95,
+96and110 keep all eight tables exact. Six inactive lives/backups,55original
+moments/metadata and79old receipts remain exact. Real monthly work/care, Buddy
+adoption40000USDminorunits and one4000vetvisit precede newpet109/greet110/ack111.
+Buddybond30→34. Adult95/96 predate the literal-name correction; final-source
+cold96/ack97 and pet109/110/111 are recorded separately. No native SQL/world/RNG
+edits or file imports. [Native evidence](verification/android24-life-context-stories-20261020/).
+Current `/tmp/dreams-content8-{final,cold-pet-story-result}-db`111/110 are read-only
+copies; projection/native scripts and helpers are in/tmp. Emulator5560/Metro8081.
+The welcome page is titledDreams and its button is **Continue as Nia Carter**, not a
+Welcome heading/genericContinue. The helper's old heading wait is diagnostic,
+not a native latency result. Null hierarchies must be rejected, never reused.
+
+New immutable old-producer fixtures, NEVER regenerate:
+- nativeinterview92/result93:190494bytes,SHA2014c9e936f325bce82aef47633f1c7697d22cc421c1a8edebaae09db477a6d3.
+- naturalownerlossage11/rev38:37124bytes,SHA8a20bb94a0cfd128b8ecf10fa3fcdf2427638218ce0dca9a53a4504489c8a55b.
+Both producer2f8ad13, engine30/content7. The owner-loss fixture is pure-engine,
+not native/current-content lifetime. Current AgeUp reaches the same natural
+owner loss and connected SQLite retry/cold assertions. All earlier pins unchanged.
+[Full provenance](verification/life-context-immutable-fixtures-20261020.json).
+The firstfullrun1655pass/2oldsequencefail1066.037s was corrected in tests only;
+finalfullrun passes. Never publish pre-literal diagnostics as final-source gates.
+
+## Continue immediately: adoption feedback and broader game
+
+Actual adoption selection appends details below six catalogue rows and leaves
+the viewport unchanged, needing two swipes. Make an immediate detail view with a
+visible Review footer/keyboard support, following Jobs/Hobbies. Correct offer ages
+“1 years”/“0 years”. Reopened reference10. A prepared **unapplied** UI candidate is
+`/tmp/dreams-pets-detail-next.tsx`; inspect it before applying. Existing failed-save
+review/draft retention must remain. Ordinary browse/cancel keeps all eight tables
+exact. Do not rerun unchanged engine120gate for this UI-only change.
+Then broaden factual achievements/challenges, ordinary work and leisure depth,
+editorial/balance, visual/accessibility and available release gates. Do not stop
+at this routine milestone. Additional file/history work stays parked.
+
+This content checkpoint is being committed and pushed now (20 October, 16:10 UTC).
+Read `git log -1` and verify `origin/work`; the next safe push deadline is 18:10 UTC.
+Commit AND push at least every two hours during active work. No subagents.
+
+## Prior ordinary-job interviews
 
 All18ordinary roles now have saved interviews with role-specific situations,
 three hiring responses and withdrawal. Search/type filters/details are read-only;

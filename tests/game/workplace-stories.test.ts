@@ -12,7 +12,7 @@ import { employee } from '../support/employee';
 test.each(countryCodes)('%s resolves all thirty workplace choices using existing people and bounded effects without wages, tenure, qualifications or draws', country => {
   const initial = employee(country), before = encodeWorld(initial), place = currentWorkplace(initial)!;
   const coworker = initial.people[place.members.find(item => item.role === 'coworker')!.personId], supervisor = initial.people[place.members.find(item => item.role === 'supervisor')!.personId];
-  expect(workplaceTemplates).toHaveLength(10); expect(eventTemplates).toHaveLength(125);
+  expect(workplaceTemplates).toHaveLength(10); expect(eventTemplates).toHaveLength(250);
   for (const template of workplaceTemplates) {
     expect(eligibleTemplates(initial)).toContainEqual(template); const event = bindEvent(initial, template); expect(encodeWorld(initial)).toBe(before);
     expect(JSON.stringify(event)).not.toMatch(/\{(?:coworker|supervisor|workplace)\}/);
@@ -82,9 +82,9 @@ test.each([0, 100])('all workplace choices clamp actual stats and named bonds at
 });
 
 test('work stories honour age endpoints, player availability and five-year cooldown', () => {
-  const young = employee('US', true, 16, 'shop-assistant-part'); expect(eligibleTemplates(young).filter(item => item.workplace)).toHaveLength(10);
+  const young = employee('US', true, 16, 'shop-assistant-part'); expect(eligibleTemplates(young).filter(item => item.workplace)).toHaveLength(20);
   young.date.year--; expect(eligibleTemplates(young).some(item => item.workplace)).toBe(false);
-  const older = employee(); older.date.year += 63; expect(eligibleTemplates(older).filter(item => item.workplace)).toHaveLength(10); older.date.year++; expect(eligibleTemplates(older).some(item => item.workplace)).toBe(false);
+  const older = employee(); older.date.year += 63; expect(eligibleTemplates(older).filter(item => item.workplace)).toHaveLength(20); older.date.year++; expect(eligibleTemplates(older).some(item => item.workplace)).toBe(false);
   const world = employee(); world.people[world.activePersonId].health.hospitalizedUntil = world.date.year * 12 + world.date.month + 2; expect(eligibleTemplates(world).some(item => item.workplace)).toBe(false);
   world.people[world.activePersonId].health.hospitalizedUntil = 0;
   for (const template of workplaceTemplates) { world.eventHistory = [{ templateId: template.id, year: world.date.year - 4 }]; expect(eligibleTemplates(world)).not.toContainEqual(template); world.eventHistory[0].year--; expect(eligibleTemplates(world)).toContainEqual(template); }
