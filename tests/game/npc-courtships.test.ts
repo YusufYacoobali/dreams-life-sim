@@ -1,5 +1,6 @@
 import { compareDates, decodeWorld, encodeWorld, fullName, validateWorld, type World } from '../../src/game/model';
 import { monthFrom } from '../../src/game/calendar';
+import { createLife, randomCreation } from '../../src/game/createLife';
 import { recordDeath, resolveCommand } from '../../src/game/engine';
 import { accountFor, post } from '../../src/game/systems/common';
 import * as common from '../../src/game/systems/common';
@@ -8,10 +9,11 @@ import { npcWeddingChance } from '../../src/game/systems/npcCourtshipSchemas';
 import { connectPerson, relationFor, weddingBudgets } from '../../src/game/systems/relationships';
 import { familyMonth, familyYear, addChild, childrenOf } from '../../src/game/systems/family';
 import { settleEstate } from '../../src/game/systems/estates';
-import { settleBackground } from '../../src/game/systems/npcBudget';
+import { npcYearDecisions, settleBackground } from '../../src/game/systems/npcBudget';
 import { netWorth } from '../../src/game/valuation';
 import { randomInteger } from '../../src/game/random';
 import { createContact } from '../../src/game/systems/npcs';
+import { annualCommand } from '../support/npcRelationships';
 import { npcFamilyCircle, npcWeddingJourney } from '../support/npcCourtships';
 import legacyMarriage from '../fixtures/v5-marriage-result.json';
 
@@ -116,6 +118,48 @@ test('a later real family pregnancy respects the wedding year, exact nine-month 
   world.date = monthFrom(pregnancy.conceived, 8, pregnancy.conceived.day); familyMonth(world); expect(pregnancy.childId).toBeNull(); expect(Object.keys(world.people)).toHaveLength(count);
   world.date = { ...pregnancy.due }; familyMonth(world); const childId = pregnancy.childId!; expect(world.people[childId]).toBeDefined(); expect(childrenOf(world, a.id).map(child => child.id)).toContain(childId); expect(childrenOf(world, b.id).map(child => child.id)).toContain(childId);
   familyMonth(world); expect(Object.keys(world.people)).toHaveLength(count + 1); validateWorld(world);
+});
+
+test('ordinary annual play carries the paid NPC marriage through a later pregnancy and real delayed birth without setup overrides', () => {
+  let { after: world } = npcWeddingJourney(); const wedding = accepted(world); let steps = 0;
+  while (steps++ < 500 && !world.people[world.activePersonId].died && !world.pregnancies.some(row => [wedding.a, wedding.b].includes(row.carrierId) && [wedding.a, wedding.b].includes(row.otherParentId) && row.status === 'born')) world = resolveCommand(world, annualCommand(world), true);
+  const pregnancy = world.pregnancies.find(row => [wedding.a, wedding.b].includes(row.carrierId) && [wedding.a, wedding.b].includes(row.otherParentId) && row.status === 'born');
+  expect(pregnancy).toBeDefined(); expect(pregnancy!.conceived.year).toBeGreaterThan(wedding.proposals.at(-1)!.date.year); expect(pregnancy!.due).toEqual(monthFrom(pregnancy!.conceived, 9, pregnancy!.conceived.day));
+  expect(world.people[pregnancy!.childId!].born).toEqual(pregnancy!.ended); expect(childrenOf(world, wedding.a).map(child => child.id)).toContain(pregnancy!.childId); expect(childrenOf(world, wedding.b).map(child => child.id)).toContain(pregnancy!.childId); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+}, 30000);
+
+test('thirteen genuinely paid helper marriages rotate family opportunities past twelve permanently ineligible earlier couples', () => {
+  // Explicit population/calendar/RNG boundary setup, followed by the actual
+  // courtship, settlement, consent and wedding helpers; not a natural journey.
+  const world = createLife('life_npc_family_window', 42, { ...randomCreation(42), country: 'US', city: 'New York' }, { year: 2026, month: 1, day: 1 });
+  world.birthAcknowledged = true;
+  for (let index = 0; index < 13; index++) {
+    const a = createContact(world, { age: 24, gender: 'female' }), b = createContact(world, { age: 24, gender: 'male' });
+    connectPerson(world, a.id); connectPerson(world, b.id); connectPerson(world, b.id, a.id); const relation = relationFor(world, a.id, b.id)!;
+    relation.romance = 'dating'; relation.kind = 'partner'; relation.roles.push('partner');
+  }
+  let agreeing = 0; for (let seed = 1; seed < 10000; seed++) { const a = randomInteger(seed, 1, 100), b = randomInteger(a.state, 1, 100); if (a.value <= 57 && b.value <= 57) { agreeing = seed; break; } }
+  let years = 0;
+  while (world.npcCourtships.filter(row => row.marriageId).length < 13 && years++ < 20) {
+    npcYearDecisions(world); world.random.npcs = agreeing; npcCourtshipsYear(world); world.date = monthFrom(world.date, 12, world.date.day);
+  }
+  expect(world.npcCourtships.filter(row => row.marriageId)).toHaveLength(13); validateWorld(world);
+  const last = world.marriages.filter(row => row.id.startsWith('marriage_npc_')).at(-1)!;
+  for (const person of Object.values(world.people)) person.wantsChildren = false;
+  world.people[last.a].wantsChildren = true; world.people[last.b].wantsChildren = true;
+  let fertileSeed = 0; for (let seed = 1; seed < 10000; seed++) if (randomInteger(seed, 1, 100).value <= 8) { fertileSeed = seed; break; }
+  for (let year = 0; year < 2 && !world.pregnancies.some(row => [last.a, last.b].includes(row.carrierId)); year++) {
+    world.random.npcs = fertileSeed; familyYear(world); world.date = monthFrom(world.date, 12, world.date.day);
+  }
+  expect(world.pregnancies.filter(row => [last.a, last.b].includes(row.carrierId) && [last.a, last.b].includes(row.otherParentId))).toHaveLength(1); validateWorld(world);
+});
+
+test.each(['first', 'second'] as const)('three actual prior children of the %s spouse prevent another autonomous-family pregnancy', parent => {
+  const { world, row, a, b } = ready(); npcCourtshipsYear(world); const chosen = parent === 'first' ? a : b;
+  for (let index = 0; index < 3; index++) addChild(world, [chosen], 'adoptive', 3);
+  world.date = monthFrom(world.date, 12, world.date.day); world.random.npcs = 1;
+  const forCouple = () => world.pregnancies.filter(item => [a.id, b.id].includes(item.carrierId) && [a.id, b.id].includes(item.otherParentId));
+  const count = forCouple().length; familyYear(world); expect(forCouple()).toHaveLength(count); expect(row.marriageId).not.toBeNull(); validateWorld(world);
 });
 
 test.each(['consent', 'payer', 'amount', 'baseline', 'missing-proof', 'orphan-payment', 'early-clock'] as const)('validation rejects %s tampering without accepting another identity or phantom payment', trap => {
