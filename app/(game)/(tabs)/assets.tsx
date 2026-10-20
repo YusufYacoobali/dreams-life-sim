@@ -27,6 +27,7 @@ export default function Assets() {
       <Body muted>Net worth</Body><Heading size={30}>{formatMoney(worth, countries[player.country].locale)}</Heading>
       {accounts.map(account => <Body key={account.id}>Bank: {formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Body>)}
       <Body muted>Cash less debt: {formatMoney({ minor: cashNetWorth(world), currency: accountFor(world).currency }, countries[player.country].locale)}</Body>
+      <ActionRow title="Finances" subtitle="Annual income, expenses, taxes and cash flow" onPress={() => router.push({ pathname: '/finances', params: { tab: 'assets' } })} />
       <ActionRow title="Bank & Loans" subtitle="Borrow, repay and view transactions" onPress={() => router.push('/bank')} />
     </Card>
     {(['property', 'vehicle', 'possession'] as const).map(kind => <Card key={kind}><Heading size={20}>{kind === 'property' ? 'Properties' : kind === 'vehicle' ? 'Vehicles' : 'Possessions'}</Heading>
