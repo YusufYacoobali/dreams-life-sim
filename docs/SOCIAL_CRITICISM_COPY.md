@@ -63,3 +63,5 @@ Strict application/test TypeScript checks pass. The existing-flow log is
 The coordinator owns combined regression, native layout and release acceptance.
 These arranged checks establish no new natural recurrence, all-choice,
 full-life SQLite or device acceptance.
+
+The coordinator consolidates this wording as content10 within World34 /engine35 /reader14. Migration updates only the content tag for already-saved worlds; existing bound decisions, queued incidents, results and history retain their original text. The AU historical canonical proof restores its original content9 tag as well as schema33/engine34 and removes only the newly defaulted empty withdrawal array. Original fixture bytes and historical hashes stay unchanged.

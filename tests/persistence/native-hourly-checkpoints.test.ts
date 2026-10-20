@@ -28,7 +28,7 @@ test('actual native129/130/132/134 remain pinned: migration adds only current ta
     expect(sha(item.payload)).toBe(item.payloadSha256);
     const original = originalObject(item.payload), current = checkpoints.unpackCheckpoint(item.payload);
     expect(original).toMatchObject({ schemaVersion: 32, engineVersion: 33, contentVersion: 9, revision: item.revision }); expect(original.npcCourtships).toBeUndefined();
-    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 34, engineVersion: 35, npcCourtships: [], schoolWithdrawals: [] });
+    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 34, engineVersion: 35, contentVersion: 10, npcCourtships: [], schoolWithdrawals: [] });
   }
   const year = checkpoints.unpackCheckpoint(pinned.checkpoints.year.payload), contract = year.hourlyContracts[0];
   expect(contract.terms).toEqual({ hourlyRate: 1603n, weeklyHours: 20, paidWeeks: 52 }); expect(contract.periods).toHaveLength(12);

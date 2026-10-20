@@ -90,7 +90,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(34), engineVersion: z.literal(35), contentVersion: z.literal(9),
+  schemaVersion: z.literal(34), engineVersion: z.literal(35), contentVersion: z.literal(10),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -548,5 +548,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Local hobby introductions and education eligibility reuse existing records.
   // Preserve all prior bound outcomes and histories; withdrawal is always explicit.
   if (parsed && parsed.schemaVersion === 33 && parsed.engineVersion === 34) { parsed.schemaVersion = 34; parsed.engineVersion = 35; parsed.schoolWithdrawals = []; }
+  // New social incident wording changes no existing bound decision or result.
+  if (parsed && parsed.schemaVersion === 34 && parsed.engineVersion === 35 && parsed.contentVersion === 9) parsed.contentVersion = 10;
   return validateWorld(parsed, immutable);
 }
