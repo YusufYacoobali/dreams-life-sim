@@ -120,3 +120,41 @@ annual reputation choice. This is an explicit visible policy change, not a
 rerolled outcome. The Fame50 gate, ordinary newborn cohort, company/brand order,
 limits and honest unmet-goal reporting are retained. No twelve-country result
 is claimed for either version.
+
+
+## Historical registration after C36 integration
+
+The repository's frozen policy driver deliberately retains its C35 guard,
+World34 / engine35 / content10, and unchanged tool SHA256
+`21cb42091ac828b797cccb27d11b712d517dac18d4cbcfdbe74fb620af17c89a`.
+Production C36 now creates World35 / engine36 / content11. Do not retag this
+historical driver, refresh its source/evidence hashes, or relabel the original
+policy observations as C36 coverage. The earlier registration/result sections
+retain their original producer scope, including the original World33 stage.
+A reproduction must use the matching historical source checkout.
+
+The actual frozen refusal boundary differs from the separate editorial tool:
+it checks versions **after** SQLite StartLife, birth acknowledgement and the
+closed-connection initial recovery, **before** defining or calling its later
+pure-engine play helper. It does not have a pre-birth source-refusal guard or an
+exported `main`. A current-source CLI attempt could therefore leave a temporary
+birth-only diagnostic before rejecting; it must not be described as refusing
+before all commands or as a successful new policy life.
+
+The integration unit check keeps the complete original driver file pinned,
+asserts its historical version tuple separately from the current newborn,
+and executes only its actual extracted `assert.deepEqual` guard statement on
+matching and mismatching tuples. Structural order checks bind that statement to
+the real post-birth/pre-engine-play boundary. No driver CLI, new SQLite birth,
+pure-engine command, seed sweep or native action is run by this check. Existing
+cohort/argument, visible-choice, fee/reserve, complete production-checkpoint and
+estate/receipt assertions remain intact. Other professional/criminal/editorial
+policy tests were inspected for the same stale current-vs-historical comparison;
+no further instance was found.
+
+The isolated C36 correction passes all18 focused checks in4.485seconds
+(`/tmp/dreams-c36-entrepreneur-pin-tests.out`). Affected strict test/source types
+close with exit0 and no diagnostics
+(`/tmp/dreams-c36-entrepreneur-pin-types.out`, config
+`/tmp/dreams-c36-entrepreneur-pin-tsconfig.json`). No frozen integration file or
+historical tool/evidence byte was changed by this test/doc-only correction.

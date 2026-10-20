@@ -1,11 +1,31 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { runInNewContext } from 'node:vm';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { encodeWorld } from '../../src/game/model';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 const { canonical, coverage, selectChoice, quantityWithinBudget, reputationAllowed, assertEstateConservation, checkpointRoundTrip, assertEstateReceipts, parseOptions, phases, expectedVersions } = require('../../tools/run-entrepreneur-sweep.cjs');
 
-test('the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection', () => {
+test('the historical policy registration refuses current versions at its actual post-birth, pre-engine-play boundary', () => {
   const initial = createLife('life_entrepreneur_policy_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
-  expect({ world: initial.schemaVersion, engine: initial.engineVersion, content: initial.contentVersion }).toEqual(expectedVersions);
+  const versions = { world: initial.schemaVersion, engine: initial.engineVersion, content: initial.contentVersion };
+  expect(expectedVersions).toEqual({ world: 34, engine: 35, content: 10 });
+  expect(versions).toEqual({ world: 35, engine: 36, content: 11 });
+  const driverSource = readFileSync(join(__dirname, '../../tools/run-entrepreneur-sweep.cjs'), 'utf8');
+  expect(createHash('sha256').update(driverSource).digest('hex')).toBe('21cb42091ac828b797cccb27d11b712d517dac18d4cbcfdbe74fb620af17c89a');
+  // Execute only the actual frozen guard statement, not the CLI or a new birth.
+  // Unlike the editorial tool, this driver checks after SQLite birth/ack/cold.
+  const guards = driverSource.match(/assert\.deepEqual\(versions, expectedVersions\)/g)!;
+  expect(guards).toHaveLength(1); const guard = guards[0];
+  const orderedBoundaries = ['store.getState().startLife(input, seed)', 'store.getState().acknowledgeBirth()', 'initialCold.getState().bootstrap()', guard, 'const run = command =>', 'world = resolveCommand(world, command, true)'].map(boundary => driverSource.indexOf(boundary));
+  expect(orderedBoundaries.every((position, index) => position >= 0 && (!index || position > orderedBoundaries[index - 1]))).toBe(true);
+  const evaluateGuard = (actual: typeof versions) => runInNewContext(guard, { assert, versions: actual, expectedVersions });
+  expect(() => evaluateGuard({ ...expectedVersions })).not.toThrow();
+  let refusal: unknown; try { evaluateGuard(versions); } catch (error) { refusal = error; }
+  expect(refusal).toMatchObject({ code: 'ERR_ASSERTION', actual: versions, expected: expectedVersions, operator: 'deepStrictEqual' });
+  expect(initial.revision).toBe(0); expect(initial.birthAcknowledged).toBe(false);
   expect(parseOptions(['--country', 'US'], ['US', 'CA'])).toEqual({ countries: ['US'], output: undefined });
   expect(parseOptions(['--all', '--output', '/tmp/example'], ['US', 'CA'])).toEqual({ countries: ['US', 'CA'], output: '/tmp/example' });
   for (const args of [[], ['--seed', '901'], ['--country', 'US', '--all'], ['--country', 'XX'], ['--country', 'US', '--country', 'CA']]) expect(() => parseOptions(args, ['US', 'CA'])).toThrow();
