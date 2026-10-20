@@ -1,5 +1,13 @@
 # Opening experience: priority and completion estimates
 
+The next reviewed integration (World33/engine34/content9/reader13) passes all
+2,100tests/147suites, strict app/test types, fresh Android/iOS Hermes exports and
+the same120annual seeds. Actual normal/130% opening/cancel and reader migration
+preserve all eight native tables; normal early play reaches School17 exactly.
+Edited school cold checks,70sample action measurements and remaining entrepreneur
+countries are still running. Overall stays58% at this source checkpoint.
+[Committed current checks](verification/autonomy-integration-checkpoint-20261020.json).
+
 The integrated hourly/financial/editorial milestone passes1,911tests/123suites,
 strict types, fresh Android/iOS exports, the same120annual seeds and12separate
 natural hourly journeys. Reviewed8/12/20-hour contracts record actual pay/time;
@@ -320,7 +328,7 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World32/engine33/content9 adds reviewed hourly work, actual paid/worked
+Prior World32/engine33/content9 adds reviewed hourly work, actual paid/worked
 time, financial transaction goals and editorial availability fixes. The C33
 source and native scope are linked at the top. Overall is now about58%; existing
 onboarding50% and other area estimates remain conservative pending their wider

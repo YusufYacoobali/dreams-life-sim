@@ -1,0 +1,52 @@
+Starting Metro Bundler
+
+| (node:112166) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:112166) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:112166) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+iOS Bundled 27240ms node_modules/expo-router/entry.js (1578 modules)
+Android Bundled 44823ms node_modules/expo-router/entry.js (1703 modules)
+
+› Assets (48):
+assets/generated/activity-atlas.png (1.3MB)
+assets/generated/career-atlas.png (1.8MB)
+assets/generated/death-memorial.png (1.1MB)
+assets/generated/fame-business-atlas.png (1.5MB)
+assets/generated/family-atlas.png (1.6MB)
+assets/generated/health-legal-atlas.png (1.7MB)
+assets/generated/ordinary-hobby-atlas.png (1.3MB)
+assets/generated/ownership-atlas.png (1.9MB)
+assets/generated/pets-leisure-atlas.png (2MB)
+assets/generated/portrait-layers.png (1.7MB)
+assets/generated/school-atlas.png (2MB)
+assets/generated/travel-atlas.png (3MB)
+assets/generated/welcome-hero.png (2MB)
+node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
+node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf (390KB)
+node_modules/expo-router/assets/arrow_down.png (9.5KB)
+node_modules/expo-router/assets/arrow_right.xml (307B)
+node_modules/expo-router/assets/checkmark.xml (312B)
+node_modules/expo-router/assets/error.png (469B)
+node_modules/expo-router/assets/file.png (138B)
+node_modules/expo-router/assets/forward.png (188B)
+node_modules/expo-router/assets/pkg.png (364B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+node_modules/expo-router/assets/react-navigation/elements/back-icon.png (8 variations | 359B)
+node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 variations | 592B)
+node_modules/expo-router/assets/sitemap.png (465B)
+node_modules/expo-router/assets/unmatched.png (4.8KB)
+
+› ios bundles (1):
+_expo/static/js/ios/entry-8ecf3dae931cea3308a68b8766be2fa8.hbc (5.4MB)
+
+› android bundles (1):
+_expo/static/js/android/entry-cdf36a24b6361dc7c308c0156a318768.hbc (5.7MB)
+
+› Files (1):
+metadata.json (5.2KB)
+
+Exported: /tmp/dreams-autonomy-export
