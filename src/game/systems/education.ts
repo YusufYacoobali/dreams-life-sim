@@ -17,6 +17,7 @@ import { campaignCommitment } from './politicsSchemas';
 import { currentRecovery } from './educationRecoverySchemas';
 import { completeSecondary, hasSecondary } from './educationRecovery';
 import { serviceAway } from './serviceSchemas';
+import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
@@ -31,6 +32,19 @@ export function tuitionFor(person: Person, program: 'university' | 'trade' | 'gr
   const rule = rules[person.country]; return program === 'trade' ? rule.tradeTuition : rule.universityTuition * (program === 'graduate' ? 2n : 1n);
 }
 export const courseMonths = (program: 'university' | 'trade' | 'graduate', field: string) => program === 'trade' ? 24 : program === 'graduate' && field === 'law' ? 36 : 48;
+/** Shared existing command gates; previewing a refusal never changes the course. */
+export function educationActionReason(world: World, command: Exclude<EducationCommand['type'], 'enroll'>): string | undefined {
+  const custody = custodyReason(world, command); if (custody) return custody;
+  const education = active(world).education;
+  if (command === 'study') {
+    if (education.stage === 'none' || education.paused) return 'You need an active course to study';
+    if (education.lastStudyYear === world.date.year) return 'You have already done extra study this year';
+  } else if (command === 'study-effort') {
+    if (education.stage === 'none') return 'You are not enrolled';
+  } else if (command === 'fund-studies') {
+    if (!education.paused || education.stage === 'none') return 'Your studies are not waiting for tuition';
+  } else if (education.stage === 'primary' || education.stage === 'secondary' || education.stage === 'none') return 'You cannot withdraw from compulsory education';
+}
 export function enrollmentReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
   if (activeTrip(world)) return 'Return from your trip before enrolling';
   const person = active(world); const education = person.education;
@@ -70,6 +84,7 @@ export function startCourse(world: World, program: 'university' | 'trade' | 'gra
 }
 export function resolveEducation(world: World, command: EducationCommand) {
   const person = active(world); const education = person.education;
+  if (command.type !== 'enroll') { const reason = educationActionReason(world, command.type); if (reason) throw new IneligibleAction(reason); }
   if (command.type === 'enroll') {
     const reason = enrollmentReason(world, command.program, command.field); if (reason) throw new IneligibleAction(reason);
     const tuition = tuitionFor(person, command.program);
@@ -90,21 +105,16 @@ export function resolveEducation(world: World, command: EducationCommand) {
     fact(world, 'I enrolled at ' + education.school + ' to study ' + command.field + '.', 'education');
     result(world, 'You’re enrolled', 'Your place is confirmed. Tuition is charged for each year of study. ' + (waived ? 'Your scholarship waives part or all of tuition; renewal requirements apply. ' : '') + 'Living costs are separate.', 'education', [{ id: 'tuition', label: 'First-year tuition billed', value: formatMoney({ minor: tuition - waived, currency: accountFor(world).currency }), tone: tuition === waived ? 'neutral' : 'negative' }, ...(waived ? [{ id: 'waived', label: 'Tuition waived', value: formatMoney({ minor: waived, currency: accountFor(world).currency }), tone: 'positive' as const }] : [])]);
   } else if (command.type === 'study') {
-    if (education.stage === 'none' || education.paused) throw new IneligibleAction('You need an active course to study');
-    if (education.lastStudyYear === world.date.year) throw new IneligibleAction('You have already done extra study this year');
     education.lastStudyYear = world.date.year;
     const before = education.grades; education.grades = bounded(before + 5 + Math.floor(person.stats.discipline / 25));
     person.stats.energy = bounded(person.stats.energy - 8); person.stats.stress = bounded(person.stats.stress + 3);
     fact(world, 'I put extra time into my studies.', 'education');
     result(world, 'The work starts to show', 'You understand more than you did before. It took a little energy to get there.', 'education', [{ id: 'grades', label: 'Grades', value: '+' + (education.grades - before) + '%', tone: 'positive' }]);
   } else if (command.type === 'study-effort') {
-    if (education.stage === 'none') throw new IneligibleAction('You are not enrolled');
     education.effort = command.effort; result(world, 'Study routine updated', 'Your new routine will affect your grades, energy and stress as time passes.', 'education');
   } else if (command.type === 'fund-studies') {
-    if (!education.paused || education.stage === 'none') throw new IneligibleAction('Your studies are not waiting for tuition');
     payTuition(world, command.funding); result(world, 'Studies resumed', 'Your next year is funded. Your completed study time is preserved.', 'education');
   } else {
-    if (education.stage === 'primary' || education.stage === 'secondary' || education.stage === 'none') throw new IneligibleAction('You cannot withdraw from compulsory education');
     fact(world, 'I left my ' + education.field + ' course. My existing qualifications remain valid.', 'education');
     education.stage = 'none'; education.paused = false;
     result(world, 'You left the course', 'Future tuition stops. Existing student debt still needs to be repaid.', 'education');

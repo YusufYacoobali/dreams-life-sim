@@ -13,6 +13,7 @@ import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
 import { SchoolPlans } from '../../src/ui/SchoolPlans';
 import { ageOn, fullName } from '../../src/game/model';
+import { rules } from '../../src/game/rules';
 
 export default function School() {
   const world = useGame(s => s.world)!, dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
@@ -29,7 +30,7 @@ export default function School() {
     <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}><SchoolArt id={['primary', 'secondary'].includes(education.stage) ? 'study' : 'report'} size={68} /><View style={{ flex: 1, gap: 5 }}><Heading size={20}>{school?.school || education.school || 'Your school years'}</Heading><Body muted>{player.city}, {countries[player.country].name}</Body></View></View></Card>
     {error && !dialog && <Body>{error}</Body>}
     {['primary', 'secondary'].includes(education.stage) ? <>
-      <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}><SchoolArt id="report" size={32} /><Heading size={17}>Academic Performance</Heading></View><StatBar label="Grades" value={education.grades} color={c.green} /><Body muted>{education.grades >= 80 ? 'You’re doing well in school. Keep up the good work!' : education.grades >= 50 ? 'There is room to grow. A steady routine and extra help can make a difference.' : 'School has been difficult. Extra study and help from your teacher can improve your grades.'}</Body>{education.stage === 'secondary' && <Body muted>The secondary course requires final grades of at least 50% and twelve recorded study months. Evening recovery classes remain an option if you leave without the qualification.</Body>}</Card>
+      <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}><SchoolArt id="report" size={32} /><Heading size={17}>Academic Performance</Heading></View><StatBar label="Grades" value={education.grades} color={c.green} /><Body muted>{education.grades >= 80 ? 'You’re doing well in school. Keep up the good work!' : education.grades >= 50 ? 'There is room to grow. A steady routine and extra help can make a difference.' : 'School has been difficult. Extra study and help from your teacher can improve your grades.'}</Body>{education.stage === 'secondary' && <Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. Public-school withdrawal is unavailable. The secondary course requires final grades of at least 50% and twelve recorded study months. Evening recovery classes remain an option if you finish without the qualification.</Body>}</Card>
       {!school && <Card><Body>Your classmates and teacher will appear after your next month attending school.</Body></Card>}
       <Card>
         <ActionRow disabled={busy} title="Study Harder" subtitle="Put in extra study once this year" icon={<SchoolArt id="study" size={42} />} disabledReason={unavailable ?? (education.lastStudyYear === world.date.year ? 'You already did extra study this year' : undefined)} onPress={() => void dispatch({ type: 'study' })} />

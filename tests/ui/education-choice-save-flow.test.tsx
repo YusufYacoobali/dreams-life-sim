@@ -8,8 +8,12 @@ import { copyWorld, encodeWorld, validateWorld, type World } from '../../src/gam
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { monthFrom } from '../../src/game/calendar';
 import { randomInteger } from '../../src/game/random';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { accountFor, availableCash } from '../../src/game/systems/common';
-import { educationMonth, enrollmentReason, tuitionFor } from '../../src/game/systems/education';
+import { educationActionReason, educationMonth, enrollmentReason, tuitionFor } from '../../src/game/systems/education';
+import { isConfined } from '../../src/game/systems/legalSchemas';
+import { rules } from '../../src/game/rules';
+import { pupil } from '../support/pupil';
 import { createContact } from '../../src/game/systems/npcs';
 import { SaveRepository } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
@@ -22,6 +26,7 @@ let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Education from '../../app/(game)/education';
+import School from '../../app/(game)/school';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Education /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
@@ -173,4 +178,76 @@ test.each(['leave-school', 'fund-studies'] as const)('%s keeps its confirmation/
     const savedRows = rows(); view.unmount(); await cold(); view = render(frame()); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().ledger).toEqual(predicted.ledger); expect(world().liabilities).toEqual(predicted.liabilities); expect(world().random).toEqual(predicted.random);
     const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); expectOldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
+});
+
+// Fixed ordinary command trace: genuine studying save / generated cash-funded
+// course, followed by actual offences and remand. No legal state or roll edits.
+async function enterActualRemand() {
+  for (const offence of ['shoplift', 'vandalism', 'burglary'] as const) {
+    expect(await mockStore.getState().dispatch({ type: 'crime', offence })).toBe(true);
+    if (world().pending?.kind === 'decision') break;
+    expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
+  }
+  let advanced = false;
+  const arrestOpen = () => { const pending = world().pending; return pending?.kind === 'decision' && pending.templateId === 'arrest'; };
+  for (let step = 0; step < 60 && !arrestOpen(); step++) {
+    const current = world();
+    if (current.pending?.kind === 'decision') {
+      const choice = current.pending.choices.find(item => !choiceUnavailable(current, item))!;
+      expect(await mockStore.getState().dispatch({ type: 'choose', eventId: current.pending.id, choiceId: choice.id })).toBe(true);
+    } else if (current.pending) expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: current.pending.id })).toBe(true);
+    else if (current.annual) expect(await mockStore.getState().dispatch({ type: 'resume' })).toBe(true);
+    else if (!advanced) { advanced = true; expect(await mockStore.getState().dispatch({ type: 'advance' })).toBe(true); }
+    else break;
+  }
+  expect(world().pending).toMatchObject({ kind: 'decision', templateId: 'arrest' });
+  expect(await mockStore.getState().dispatch({ type: 'choose', eventId: world().pending!.id, choiceId: 'remand' })).toBe(true);
+  expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
+  expect(isConfined(world())).toBe(true);
+}
+
+test.each([false, true])('real remand exposes the same existing education refusal for paused=%s and blocked controls never save', async paused => {
+  const initial = paused ? courseMonths(perform(applicant('administrator', true, true), { type: 'enroll', program: 'university', field: 'science', funding: 'cash' }), 13) : undefined;
+  const { sqlite, rows, cold, expectOldMoments } = await setup(initial);
+  try {
+    await enterActualRemand();
+    const confined = world(), beforeRows = rows(), before = encodeWorld(confined), reason = 'This activity is unavailable while you are in custody';
+    const commands: GameCommand[] = [{ type: 'study' }, { type: 'study-effort', effort: 'relaxed' }, { type: 'leave-school' }, { type: 'fund-studies', funding: 'loan' }];
+    for (const command of commands) {
+      expect(educationActionReason(confined, command.type as 'study' | 'study-effort' | 'leave-school' | 'fund-studies')).toBe(reason);
+      expect(() => resolveCommand(confined, command, true)).toThrow(reason);
+    }
+    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    for (const name of paused ? [/^Fund Next Year\./, /^Leave course\./] : [/^Study harder\./, /^Study routine\./, /^Leave course\./]) {
+      const control = screen.getByRole('button', { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityLabel).toContain(reason); await press(name);
+    }
+    expect(screen.queryByText('Leave this course?')).toBeNull(); expect(screen.queryByText('Fund your next year')).toBeNull(); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
+    expect(world()).toEqual(confined); expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); expectOldMoments(); unpack.mockRestore();
+    view.unmount(); await cold(); view = render(frame()); expect(world()).toEqual(confined); expect(rows()).toEqual(beforeRows); expect(screen.getByRole('button', { name: /^Leave course\./ })).toBeDisabled(); expectOldMoments(); view.unmount();
+  } finally { jest.restoreAllMocks(); sqlite.close(); }
+});
+
+test('the once-yearly study refusal is shared by direct commands and Education without another receipt or RNG change', async () => {
+  const { sqlite, rows, expectOldMoments } = await setup();
+  try {
+    expect(await mockStore.getState().dispatch({ type: 'study' })).toBe(true);
+    expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
+    const initial = world(), before = rows(), reason = 'You have already done extra study this year';
+    expect(educationActionReason(initial, 'study')).toBe(reason); expect(() => resolveCommand(initial, { type: 'study' }, true)).toThrow(reason);
+    const view = render(frame()); const button = screen.getByRole('button', { name: /^Study harder\./ }); expect(button).toBeDisabled(); expect(button.props.accessibilityLabel).toContain(reason);
+    await press(/^Study harder\./); expect(world()).toEqual(initial); expect(rows()).toEqual(before); expectOldMoments(); view.unmount();
+  } finally { sqlite.close(); }
+});
+
+test.each(['US', 'IT'] as const)('%s school and education explain the actual game assessment age without granting withdrawal or qualifications', async code => {
+  const { sqlite, rows, expectOldMoments } = await setup(pupil(code, rules[code].secondaryStart));
+  try {
+    const initial = world(), before = rows(), payload = encodeWorld(initial), explanation = "This game's school course is assessed at age " + rules[code].schoolEnd + '.';
+    expect(educationActionReason(initial, 'leave-school')).toBe('You cannot withdraw from compulsory education');
+    expect(() => resolveCommand(initial, { type: 'leave-school' }, true)).toThrow(/compulsory/);
+    let view = render(frame()); expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Leave course/ })).toBeNull(); view.unmount();
+    view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /></ThemeProvider></SafeAreaProvider>);
+    expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen();
+    expect(encodeWorld(world())).toBe(payload); expect(world()).toEqual(initial); expect(rows()).toEqual(before); expectOldMoments(); view.unmount();
+  } finally { sqlite.close(); }
 });
