@@ -1,0 +1,56 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "77d1c6c0cf5fa0a5c7660ec02aebc465aeb7d50a",
+  "scope": "Immediate shelter adoption details, fixed keyboard-aware Review footer, correct offer ages and focused Android Back. Actual adoption mechanics/save protocol unchanged.",
+  "source": {
+    "app/(game)/pets.tsx": "12029c6c7e5ec4e3be8655ae3af9a1bfb215b028a49780d1631a24605520f3dc",
+    "tests/ui/pets-flow.test.tsx": "f75f103d9dc5bd7eec37e567ec067cb5b74eea331f152e28988f36171c4a8a51"
+  },
+  "versions": {
+    "world": 30,
+    "engine": 31,
+    "content": 8,
+    "database": 10,
+    "checkpoint": "v4"
+  },
+  "combinedGamePersistenceSourceHash": "12e1a38ca5104a66bae29665d7685983690773844247ce5fc38e46ef58e52740",
+  "gameAndPersistenceUnchangedFromBase": true,
+  "verification": {
+    "uiState": {
+      "tests": 106,
+      "suites": 46,
+      "seconds": 113.793,
+      "exitCode": 0,
+      "raw": "regression-pet-adoption-details-ui-20261020.txt",
+      "sha256": "15e8a9558f216310357f96fad3549727e973d9cd0e17dd8ffe3b704c1d1198fd"
+    },
+    "focusedTypedEventCorrection": {
+      "tests": 2,
+      "suites": 1,
+      "seconds": 6.656,
+      "exitCode": 0,
+      "raw": "regression-pet-adoption-details-focused-20261020.txt",
+      "note": "Final test-only correction passes the React Native typed hardware event; callback behavior and app source unchanged from full106 UI/state run."
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "bothFreshHermesExports": true,
+    "exportsExitCode": 0,
+    "nativeRecord": "android24-pet-adoption-details-20261020/journey-exact.json",
+    "nativeChecksExitCode": 0,
+    "wholeRegressionBaseline": "life-context-stories-content8-20261020.json",
+    "noNewWholeRegressionOrLifetimeCountClaim": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-265520cc00f0977e508d170a647a83ee.hbc",
+      "bytes": 5619147,
+      "sha256": "e18b400171f2d717d9932ded8658e02c61143dbd8c3a4d612f6c7b174afc8d55"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-93c29884bcdf181260ef158bbf7b073b.hbc",
+      "bytes": 5314857,
+      "sha256": "a49a1170042468f7c881c6967641b8c7eaf370cd2eb79d251d523e7da8ea1d89"
+    }
+  ]
+}

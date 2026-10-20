@@ -1,9 +1,10 @@
 import React from 'react';
+import { BackHandler } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
-import { petAdoptionFee, petAdoptionOwner, petCareReason, petVetCost } from '../../src/game/systems/pets';
+import { petCareReason, petVetCost } from '../../src/game/systems/pets';
 import { encodeWorld } from '../../src/game/model';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { GameCommand, resolveCommand } from '../../src/game/engine';
@@ -16,8 +17,8 @@ import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-let mockStore: ReturnType<typeof createGameStore>, mockPetId = '';
-jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => ({ id: mockPetId }) }));
+let mockStore: ReturnType<typeof createGameStore>, mockPetId = '', mockPetFocused = true;
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => ({ id: mockPetId }), useFocusEffect: (callback: () => void | (() => void)) => require('react').useEffect(() => mockPetFocused ? callback() : undefined, [callback, mockPetFocused]) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Pets from '../../app/(game)/pets';
 import PetProfile from '../../app/(game)/pet/[id]';
@@ -29,6 +30,7 @@ const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ fr
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 
 test('a genuine newborn archive reaches age six, reviews actual parental costs and retries adoption, vet and monthly progression through real SQLite cold resumes', async () => {
+  mockPetFocused = true; const back = jest.spyOn(BackHandler, 'addEventListener');
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.import(JSON.stringify(archive));
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'unused' }); await mockStore.getState().bootstrap(); };
   await cold(); const world = () => mockStore.getState().world!;
@@ -37,7 +39,18 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   await finish(); for (let year = 0; year < 5; year++) { await dispatch({ type: 'advance' }); await finish(); }
   expect(world().date).toEqual({ year: 2032, month: 10, day: 19 }); const beforeBrowse = encodeWorld(world()), view = render(frame(<Relationships />));
   await press('Household Pets'); expect(router.push).toHaveBeenCalledWith('/pets'); view.rerender(frame(<Activities />)); await press(/^Household Pets\./); expect(router.push).toHaveBeenCalledWith({ pathname: '/pets', params: { tab: 'activities' } }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(beforeBrowse);
-  await press(/^Buddy\./); fireEvent.changeText(screen.getByLabelText('Pet name'), 'Biscuit'); await press('Review Adoption'); expect(screen.getByText('Responsible adult')).toBeOnTheScreen(); expect(screen.getByText('Adoption fee if accepted')).toBeOnTheScreen(); expect(screen.getByText('Monthly food and basic care')).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: 'Buddy. Golden Retriever · 1 year' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: 'Pip. Dwarf Rabbit · 6 months' })).toBeOnTheScreen();
+  await press(/^Buddy\./); expect(screen.getByRole('header', { name: 'Adoption Details' })).toBeOnTheScreen();
+  expect(screen.queryByRole('button', { name: /^Luna\./ })).toBeNull(); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeEnabled();
+  await press('Back'); expect(screen.getByText('Shelter Adoptions')).toBeOnTheScreen();
+  await press(/^Pip\./); const hardwareBack = back.mock.calls.at(-1)![1];
+  await act(async () => { expect(hardwareBack({ type: 'hardwareBackPress', timeStamp: 0 })).toBe(true); }); expect(screen.getByText('Shelter Adoptions')).toBeOnTheScreen();
+  await press(/^Pip\./); const removal = jest.spyOn(back.mock.results.at(-1)!.value, 'remove');
+  mockPetFocused = false; view.rerender(frame(<Pets />)); expect(removal).toHaveBeenCalledTimes(1);
+  mockPetFocused = true; view.rerender(frame(<Pets />)); await press('Close Adoption Details'); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
+  await press(/^Buddy\./); fireEvent.changeText(screen.getByLabelText('Pet name'), '   '); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled();
+  fireEvent.changeText(screen.getByLabelText('Pet name'), 'Biscuit'); await press('Review Adoption'); expect(screen.getByText('Responsible adult')).toBeOnTheScreen(); expect(screen.getByText('Adoption fee if accepted')).toBeOnTheScreen(); expect(screen.getByText('Monthly food and basic care')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_pet_adoption BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Ask For This Adoption'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
   sqlite.exec('DROP TRIGGER fail_pet_adoption'); await press('Ask For This Adoption'); expect(world().petAdoptions[0]).toMatchObject({ accepted: true, roll: 47, chance: 86 }); expect(world().pets[0].name).toBe('Biscuit'); expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1);
@@ -53,7 +66,7 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   sqlite.exec('DROP TRIGGER fail_pet_month'); await press('Age Up'); expect(encodeWorld(world())).toBe(encodeWorld(predicted)); const interrupted = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Life />)); expect(encodeWorld(world())).toBe(interrupted);
   await act(async () => { await finish(); }); view.rerender(frame(<PetProfile />)); expect(world().pets[0].periods).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-care')).toHaveLength(12); expect(world().ledger.filter(item => item.category === 'pet-vet')).toHaveLength(1); expect(world().ledger.filter(item => item.category === 'pet-adoption')).toHaveLength(1); expect(world().pets[0].ownerId).toBe(world().petAdoptions[0].ownerId); expect(world().pets[0].status).toBe('active'); expect(world().annual).toBeNull();
   const final = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(final); expect(encodeWorld(await repository.load(world().id))).toBe(final);
-  view.unmount(); sqlite.close();
+  view.unmount(); back.mockRestore(); sqlite.close();
 }, 60000);
 
 test('the pinned natural owner-loss checkpoint rolls back atomically, retries with the same care history and resumes cold without a second fee', async () => {

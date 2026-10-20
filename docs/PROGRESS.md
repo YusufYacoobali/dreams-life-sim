@@ -18,7 +18,32 @@ and old data stay intact. The current breakdown is in
 completion is approximately55%, with250/250minimum situations implemented;
 editorial, balance and release acceptance remain open.
 
-## Current milestone: stories from actual life context
+## Current milestone: immediate adoption details
+
+Selecting a shelter pet now opens its details at the top, with Review Adoption
+in a keyboard-aware footer. Actual care costs appear before confirmation; offer
+ages use “1 year” and “6 months”. Header/Close/Android Back return to the catalogue,
+and the Back handler is removed when focus changes. Read-only browsing and
+cancelling preserve the world; failed actual adoption saves keep their draft for
+retry. [Behavior](PET_ADOPTION_DETAILS.md).
+
+All **106 UI/state checks across 46 suites** pass in **113.793 seconds**. The final
+test-only typed hardware-event correction also passes both connected pet flows
+in6.656s. Strict app/test types and fresh Android/iOS Hermes exports pass.
+[Source, checks and export hashes](verification/pet-adoption-details-20261020.json).
+Actual Android normal/130%text, open keyboard, review/cancel, scrolled selection
+and hardware Back pass. All eight tables stay exact at Nia22/revision111, seven
+lives/58moments/96receipts. Original font scale1.0 is restored. Empty loading
+captures and helper label refusals are excluded from acceptance.
+[Nine captures and precise scope](verification/android24-pet-adoption-details-20261020/).
+
+Game/persistence are unchanged from77d1c6c; the1,657-test/120-lifetime baseline
+below retains its original scope. Overall production stays approximately55%.
+Continue factual achievements/challenges, remaining work/leisure depth, content
+balance/editorial and visual/accessibility/release gates. File/history breadth
+remains parked.
+
+## Prior milestone: stories from actual life context
 
 **250/250 minimum situations** are now implemented, including125new situations
 and375choices about actual children, home, pets, attended hobbies, completed trips,

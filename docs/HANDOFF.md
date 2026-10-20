@@ -58,22 +58,46 @@ owner loss and connected SQLite retry/cold assertions. All earlier pins unchange
 The firstfullrun1655pass/2oldsequencefail1066.037s was corrected in tests only;
 finalfullrun passes. Never publish pre-literal diagnostics as final-source gates.
 
-## Continue immediately: adoption feedback and broader game
+## Current UI checkpoint: immediate adoption details
 
-Actual adoption selection appends details below six catalogue rows and leaves
-the viewport unchanged, needing two swipes. Make an immediate detail view with a
-visible Review footer/keyboard support, following Jobs/Hobbies. Correct offer ages
-“1 years”/“0 years”. Reopened reference10. A prepared **unapplied** UI candidate is
-`/tmp/dreams-pets-detail-next.tsx`; inspect it before applying. Existing failed-save
-review/draft retention must remain. Ordinary browse/cancel keeps all eight tables
-exact. Do not rerun unchanged engine120gate for this UI-only change.
-Then broaden factual achievements/challenges, ordinary work and leisure depth,
-editorial/balance, visual/accessibility and available release gates. Do not stop
-at this routine milestone. Additional file/history work stays parked.
+The reproduction is fixed: selecting a shelter pet opens a keyed detail view at
+its top, with Review in a keyboard-aware footer. Correct offer ages and actual
+care costs are visible. Focused Android Back returns to the catalogue, with
+cleanup when focus changes. Existing failed-save/retry/draft behavior remains.
+All106UI/state checks46suites pass113.793s; strict app/test types and both final
+Hermes exports pass. A final test-only HardwareBackPressEvent argument correction
+passes2connected pet flows in6.656s. App hash12029c6c7e5ec4e3be8655ae3af9a1bfb215b028a49780d1631a24605520f3dc.
+Game/persistence remain byte-identical to77d1c6c; baseline1657/111and same120
+lives are unchanged, not a new whole-regression/seed claim.
+[UI source/checks](verification/pet-adoption-details-20261020.json).
 
-This content checkpoint is being committed and pushed now (20 October, 16:10 UTC).
-Read `git log -1` and verify `origin/work`; the next safe push deadline is 18:10 UTC.
-Commit AND push at least every two hours during active work. No subagents.
+Actual Android normal/130%text, keyboard, review/cancel, scroll reset and hardware
+Back pass. All eight tables stay exact againstC8final111: sevenlives/58moments/
+96receipts, no pending/year. Font1.0 restored; ExpoGo force-stopped. The setting
+change restarted ExpoGo; partial loading captures/missing-control refusals are
+diagnostics, not app latency. [Native evidence](verification/android24-pet-adoption-details-20261020/).
+Read-only copies `/tmp/dreams-pets-detail-{before,cancelled,large-text,final}-db`;
+verification/publication scripts and rawlogs are in/tmp. Do not rerun unchanged
+engine120gate for this UI-only increment.
+
+## Continue immediately: factual progression and broader game
+
+Expand actual achievements/challenges beyond12/4, then ordinary work/leisure depth,
+editorial/balance, visual/accessibility and available release gates. The user
+explicitly wants continued work; no final reply at a routine milestone. Additional
+load/save/import/export/sharing/history breadth remains parked.
+Preparation: `/tmp/dreams-progression-backlog-next.md`, current implementation
+src/progression/progress.ts, tests/progression/progress.test.ts and UI extras flows.
+Reopen design/14-achievements-challenges-settings-end-of-life.png. Read actual
+retained/archived records once, filter every fact by person, avoid borrowed
+parent/heir/NPC outcomes and double counting. Keep existing goal IDs. No fake
+money or unlock rewards; actual engine accomplishments must drive the display.
+This can remain outside game/persistence, so preserveC8tags and avoid a redundant
+lifetime run when the simulation is unchanged.
+
+Last verified remote push77d1c6c, 20 October16:10UTC. The adoption UI checkpoint is
+being committed/pushed now; inspect git log/remote for its final SHA. Next safe
+push deadline two hours from that push. No subagents without user authorisation.
 
 ## Prior ordinary-job interviews
 
