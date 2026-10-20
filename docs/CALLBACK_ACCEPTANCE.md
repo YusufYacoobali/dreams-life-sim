@@ -35,3 +35,13 @@ Automated callback acceptance does not establish Android/iOS interaction,
 layout fidelity, picker/share behavior, balance or release performance. Those
 gates remain in [OPENING_PLAN.md](OPENING_PLAN.md) and
 [PERFORMANCE.md](PERFORMANCE.md).
+
+The later world-28 [actual Android project journey](verification/android24-school-callback-20261020/)
+now covers an original v1 age-seven saved moment, normal branch, month-two
+deadline and teacher-help choice. Entire native worlds match production
+commands; grades 70→71 and saved bond/trust/energy effects survive force-stop/
+cold Continue with every SQLite row unchanged. Actual remaining months, a
+month-twelve pet pause and the birthday lunch complete age eight. The original
+three worlds/backups, twelve moments and seventeen receipts remain exact.
+This establishes that native positive project/cold/year path; other callback
+branches, physical timings and broader release gates retain their own scope.

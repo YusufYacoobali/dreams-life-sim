@@ -12,6 +12,18 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The actual native school callback now passes through a normal age-seven
+Time Machine branch, saved month-two deadline, teacher-help choice and exact
+cold result resume. Grades 70→71 and recorded effects match production; the
+free choice preserves accounts/ledger/RNG. Remaining months, the month-twelve
+pet interruption and birthday lunch reach age eight / revision 38. Complete
+current/backup/intermediate worlds match actual production commands, and every
+table is exact across the interrupted-result cold start. All original three
+worlds/backups, twelve moments and seventeen receipts survive unchanged.
+Final branch state: four lives, sixteen moments, twenty-four receipts; the
+age-ten source remains revision 53. [Raw native proof](verification/android24-school-callback-20261020/)
+retains scope; no app/game/codec source change or physical timing claim.
+
 The actual native revision-53 school world is preserved as a new genuine
 world-28 archive, exported with unmodified pushed `1d1e696`. Its current payload
 and all ten Riley historical payloads/metadata stay byte-exact; nine are the
@@ -29,7 +41,7 @@ with strict types and fresh Hermes exports. Native Ren/Rohan previews and
 Back/Welcome Continue return to Riley/latest facts with every SQLite row exact:
 three lives, twelve moments, seventeen receipts and revision 53.
 Only the repository read helper changes; game/codec/schema remain fixed, and
-the engine-only lifetime run continues. This follows the user's view-previous-
+the engine-only lifetime run below now passes. This follows the user's view-previous-
 lives scope without expanding import/export/sharing. Full-game and production
 baselines retain their original scopes.
 
@@ -60,15 +72,16 @@ moments, seventeen receipts and revision 53. Four real milestones and one
 completed challenge match the actual world. [Raw native evidence](verification/android24-extras-20261020/)
 and [source/export record](verification/extras-20261020.json) retain scope.
 
-The next broader production check is the outstanding 1,000-seed lifetime
-invariant gate. The runner now supports the production validated-immutable state
-path, exact terminal-world hashes and failure traces, with fixed game/tool source
-checks. Two complete preflight lives match the ordinary API in every terminal
-world field and metric; invalid CLI inputs are rejected. These overlap the
-larger requested range. The full gate is not established by preparation or
-partial progress. [Method and limits](LIFE_SWEEP.md) and
-[preflight record](verification/life-sweep-mode-comparison-20261020.json) retain
-scope. Game/persistence and all app bundles remain unchanged.
+The full **1,000-seed lifetime invariant gate passes** on the production
+validated-immutable world-28 path: every distinct seed 0–999, all twelve countries,
+unchanged game/tool hashes, empty stderr and exit 0 in **5,030.819 seconds**.
+[Completion record](verification/life-sweep-v28-1000-20261020.json) and
+[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson) retain exact
+terminal-world hashes. This is pure-engine first-eligible-policy scope; the
+range is age 25–102 with at most 26 people / 61,778 ledger rows. SQLite/native,
+120-year, 1,000-person, multiple-generation and broader production gates remain
+separate. The preflight overlaps these seeds; no whole-Jest total or complete-
+game percentage is inferred. [Method](LIFE_SWEEP.md).
 
 School classmate/teacher profiles now retain the Activities tab. Explicit source
 context reaches the shared tab bar through the active global route query; normal

@@ -1,0 +1,158 @@
+{
+  "scope": "Actual Android 24 ordinary Time Machine branch from original v1 snapshot31, month-two project help, force-stop/cold result resume, pet month-twelve interruption and remaining-year lunch choice; no edited world/RNG/stat/version/outcome",
+  "appSourceCommit": "1d1e696",
+  "branchId": "life_mvg00bcv_1sh3wmp_0",
+  "sourceLifeId": "life_content4_bubbles",
+  "sourceRevisionStill53": true,
+  "initialBranchExactlyProductionRestore": true,
+  "entireCurrentAndBackupExact": true,
+  "verifiedIntermediateRevisions": [
+    31,
+    32,
+    33,
+    36
+  ],
+  "finalRevision": 38,
+  "age": 8,
+  "projectGrades": {
+    "before": 70,
+    "afterHelp": 71,
+    "afterActualRemainingMonths": 75
+  },
+  "projectResolution": "ask-help",
+  "projectChoiceAccountsLedgerAndRandomUnchanged": true,
+  "allEightColdTablesExact": {
+    "backups": {
+      "rows": 4,
+      "sha256": "07161b48fe91cb1fad92f6975c0fc5257c69d6946962b83d8430bdf4b4a4f096"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 4,
+      "sha256": "c9d6cd3b26da6e5833cf25610b064a2718c53cf48e0919d04b3fee9bb03a45aa"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "077548b393364d3769864883c5b63b30c6f5dfa501bdf3dfc25765e9942facce"
+    },
+    "receipts": {
+      "rows": 19,
+      "sha256": "894d39fabca59f00e0e57c2b715d0f6938de49bfcc098ae27763f416fa90d001"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 16,
+      "sha256": "c0d951c46511974945b5479544e23641ce7a9122d38a0e31904df22b39eb3b28"
+    },
+    "snapshots": {
+      "rows": 16,
+      "sha256": "b9f4f78c7c111dd7572cb8065c62ee9a4b5cdfcc7e854c316112f4503e5281ed"
+    }
+  },
+  "originalRowsPreserved": {
+    "lives": 3,
+    "backups": 3,
+    "snapshots": 12,
+    "snapshot_metadata": 12,
+    "receipts": 17
+  },
+  "branchBeforeAgeUpMomentExactlyInitialRestoredWorld": true,
+  "counts": {
+    "backups": 4,
+    "branches": 1,
+    "lives": 4,
+    "preferences": 1,
+    "receipts": 24,
+    "restore_receipts": 1,
+    "snapshot_metadata": 16,
+    "snapshots": 16
+  },
+  "commands": [
+    {
+      "command": {
+        "type": "restoreBranch",
+        "snapshotId": "snapshot_r_31"
+      },
+      "revision": 31,
+      "pending": null,
+      "months": null,
+      "worldSha256": "b5f920e47a8a7e161869ccdf088a77dc713a8e9ae3feae4de69565ae50ca9310"
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 32,
+      "pending": "The project is due",
+      "months": 2,
+      "worldSha256": "2400c233cae40fa2b6fb2baa3d85acbcb70dd1b76d701b010f713daa1a64c501"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "story_25_0_due",
+        "choiceId": "ask-help"
+      },
+      "revision": 33,
+      "pending": "Less staring, more writing",
+      "months": 2,
+      "worldSha256": "032f789dc06cc80c74093dc79cc17cad5cf41958283baded2090c29bb0a73b4a"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "story_25_0_due_result"
+      },
+      "revision": 34,
+      "pending": "Biscuit became unwell",
+      "months": 12,
+      "worldSha256": "fa4c3f6b3efdb2bb351fa93c8a72a4633d4aee6a4eaa9489533d0b683d4cb4e4"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "pet_pet_18_0_33_24_illness"
+      },
+      "revision": 35,
+      "pending": null,
+      "months": 12,
+      "worldSha256": "9dd564647d343c3c5f26266c7dd09d396a0241d62a9b3e647b963a5cbff42412"
+    },
+    {
+      "command": {
+        "type": "resume"
+      },
+      "revision": 36,
+      "pending": "A disappointing lunch",
+      "months": 12,
+      "worldSha256": "47c41e9a045cd9a6a333b07003826f33a4f39a0f2b2224e3c5ee2759274efdc6"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2034_school-empty-lunchbox",
+        "choiceId": "quiet"
+      },
+      "revision": 37,
+      "pending": "Lunch gets sorted",
+      "months": 12,
+      "worldSha256": "a28f323b487b1559cca97aeee95711b8c1a0dddd492a77e571f23e9323fa91ab"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2034_school-empty-lunchbox_result"
+      },
+      "revision": 38,
+      "pending": null,
+      "months": null,
+      "worldSha256": "d32878fefb908e341c4edbfc1f41a9f6ca17b414e29506790945e72d5487a5d0"
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # Production-state lifetime invariant sweep
 
+The world-28 run now **passes all 1,000 distinct seeds 0–999** through the
+production validated-immutable API, across all twelve countries, in
+**5,030.819 seconds**. The actual completion record is present, stderr is empty
+and the process exits zero. Game and runner hashes stay unchanged. The
+[completion record](verification/life-sweep-v28-1000-20261020.json) and
+[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson) preserve exact
+terminal-world hashes. This closes this scoped world-28 engine gate.
+
 `node tools/run-life-sweep.cjs 1000 0 --immutable` exercises seeds 0–999 through
 actual birth-to-death engine progression using the validated immutable state path
 used by the production store. Without `--immutable`, the existing mutable domain
@@ -43,9 +51,14 @@ optional career/action, native rendering, SQLite durability, 120-year survival,
 journeys and twelve real work/pet/dual-hobby country lives retain their own scope.
 No historical fixture is regenerated or retagged.
 
-A requested 1,000-case run is **incomplete until** its completion record reports
-all 1,000 distinct seeds, unchanged source hashes and successful exit. Partial
-progress and overlapping preflight cases do not establish this gate or a new
-whole-Jest regression total. The complete 1,226-test / 80-suite result remains
-scoped to `e5a4aaf`; native/production acceptance and conservative baselines stay
-open. Continue independent UI/reference work while the game source is fixed.
+The completed run reaches ages **25–102**, at most **26 people** and **61,778
+ledger rows** in one world. It does not establish the separate 120-year,
+1,000-person or multi-generation budgets. The supported countries have 63–90
+completed cases each. All 1,000 versions match world 28 / engine 27 / content 4.
+
+Future changed-source runs remain incomplete until their actual completion
+record, distinct seed set, unchanged source hashes and successful exit are
+verified. Partial progress or overlapping preflight cases do not establish a
+new gate or whole-Jest regression total. The complete 1,226-test / 80-suite result
+remains scoped to `e5a4aaf`; native/production acceptance and conservative
+baselines stay open. Continue the full production plan from this verified state.

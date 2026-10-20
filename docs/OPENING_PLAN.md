@@ -73,6 +73,18 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
+An actual Android age-seven project callback now survives its saved deadline,
+teacher-help choice and interrupted-result cold resume. The remaining-year
+pet pause and birthday lunch finish age eight; full worlds and original lives/
+history stay exact. [Native callback evidence](verification/android24-school-callback-20261020/)
+extends early-game acceptance without changing app/game source or baseline estimates.
+
+The world-28 [lifetime invariant gate](LIFE_SWEEP.md) now passes all 1,000
+distinct seeds across twelve countries in 5,030.819 seconds, with unchanged
+source hashes and exit zero. This is pure-engine first-eligible-policy scope;
+native/SQLite, 120-year, 1,000-person and multi-generation gates remain separate.
+Conservative complete-production estimates stay fixed.
+
 [Read-only saved-life summaries](SAVED_LIFE_VIEW.md) now let the player inspect
 previous stories without switching the active game or disturbing its save
 cache. All 156 affected UI/state/persistence/progress checks, strict types and

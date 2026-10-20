@@ -4,6 +4,16 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
+## Completed world-28 lifetime invariant gate
+
+The production validated-immutable engine completes all **1,000 distinct seeds
+0–999** across twelve countries in **5,030.819 seconds**, with fixed game/tool
+hashes, empty stderr and exit zero. [All raw terminal hashes and summary](LIFE_SWEEP.md)
+retain scope. This first-eligible-policy cloud run reaches ages 25–102, max
+26 people / 61,778 ledger rows. It closes this engine invariant gate; it does
+not establish physical p95 timings, 120-year/multi-generation, 1,000-person or
+SQLite/storage budgets. The older smaller-run records below remain historical.
+
 ## Button-response milestone: world 27 / database 5
 
 [The implementation and trust boundaries](BUTTON_RESPONSIVENESS.md) retain
@@ -297,6 +307,6 @@ The 120-checkpoint projection deliberately repeats the largest observed payload.
 
 Checkpoints use deterministic gzip with an output-size cap and a content fingerprint, preserving the complete world/RNG/pending decision. The fingerprint detects damage; it is not an authenticity signature. Local archives contain the current checkpoint, compressed history and branch origin. Import validates the complete archive before replacing local data.
 
-Open gates include a fully integrated 120-year/multi-generation world, a 1,000-person performance case, large-archive import responsiveness, SQLite/WAL/storage measurements, low-memory devices, and actual native p95 interaction/year targets. The broader 1,000-seed and three-generation release matrices remain unrun.
+Open gates include a fully integrated 120-year/multi-generation world, a 1,000-person performance case, large-archive import responsiveness, SQLite/WAL/storage measurements, low-memory devices, and actual native p95 interaction/year targets. The scoped world-28 1,000-seed engine gate above now passes; the broader optional-system and three-generation release matrices remain open.
 
 After health/NPC clinical care was integrated, the same seed produced 78 annual observations, death at 77, ten people and 13,980 ledger rows. Its largest world was 4,130,069 bytes and checkpoint payloads totalled 7,966,330 bytes. Repeating the largest checkpoint 120 times projects 26,067,960 bytes. Cloud p95 timings were 22.5 ms for Age Up, 99.1 ms for packing and 133.9 ms for decoding/validating. Different health outcomes change both lifespan and workload; this is evidence of growth, not a controlled speedup/regression comparison or native acceptance.

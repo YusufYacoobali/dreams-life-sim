@@ -9,10 +9,22 @@ Never regenerate this fixture using newer source. Full current/prior field,
 cold grade/help/care/hobby and repeat-blocking checks pass: **three checks / two
 suites**, **15.058 seconds**, strict types. See
 [provenance](verification/native-school-archive-v28-20261020.json).
-Next native early-school callback check uses the existing `snapshot_r_31`
-(age seven, October 2033, Before Age Up) and its actual scheduled project.
-Keep the original three native lives unchanged; use a normal Time Machine
-branch for the callback, with original RNG and no edited world fields.
+The native callback/year check now passes. A normal Time Machine branch from
+`snapshot_r_31` reaches the actual month-two project; Harper's help records
+70→71 grades and exact effects without changing money/ledger/RNG. Force-stop/
+cold Continue preserves every row in all eight tables and the same result.
+Actual remaining months, Biscuit's month-twelve illness, Continue This Year
+and the birthday lunch choice reach age eight / revision **38**. Full current,
+backup and checked intermediate worlds match production restore/commands.
+All original three live/backup rows, twelve moments and seventeen receipts
+stay exact. Latest emulator state is **four lives/sixteen moments/twenty-four
+receipts**, with branch `life_mvg00bcv_1sh3wmp_0` active at revision 38; the
+original Riley source remains `life_content4_bubbles`, revision 53.
+Read [actual native proof](verification/android24-school-callback-20261020/).
+App/game/codec source is unchanged from `1d1e696`. Continue button-response/
+production work. Native debugger connection works with its required same-
+server Origin header, but this Expo Go runtime rejects CDP `Profiler.enable`.
+No native sampling-profile or physical timing pass is established by that probe.
 
 Saved Lives now offers a [read-only summary](SAVED_LIFE_VIEW.md) for each life
 without selecting it. Screen-local loading/retry and stale-response protection
@@ -31,7 +43,7 @@ and [source/checks](verification/saved-life-view-20261020.json) retain scope.
 Game/codec/schema/tool stay fixed; only the repository reader is refactored.
 The new combined game/persistence hash is
 `76d7c573d3061c31361c8a206c94c3049eb05ca93f6da19b78ac2475c7c0e620`.
-The engine-only sweep below remains valid. Further file-feature breadth is deferred.
+The engine-only sweep below now passes. Further file-feature breadth is deferred.
 
 Relationships now virtualises contacts and adds the reference's All/Family/
 Friends/Romance filters plus name search, with compact family/pet/home links.
@@ -43,7 +55,7 @@ and fresh Hermes exports pass. Every native SQLite row stays exact (revision
 53; three lives/twelve moments/seventeen receipts). Read
 [scope](RELATIONSHIP_LIST.md), [raw proof](verification/android24-contacts-20261020/)
 and [source/checks](verification/contacts-20261020.json). Game/persistence remains
-fixed while the engine sweep below runs. Continue early-game/production work;
+unchanged at that checkpoint. Continue early-game/production work;
 the user's file-feature breadth remains deferred.
 
 The latest read-only [Extras increment](EXTRAS.md) connects twelve achievements,
@@ -57,29 +69,22 @@ seventeen receipts, four milestones and one completed challenge. See
 [native proof](verification/android24-extras-20261020/) and
 [source/export record](verification/extras-20261020.json). Game/persistence is
 unchanged. Continue early-game/native responsiveness review while the following
-immutable engine sweep completes; further file features remain deferred.
+immutable engine sweep below recorded; further file features remain deferred.
 
-The next production gate is the full **1,000 distinct seed** lifetime invariant
-run, using the production validated-immutable state path. Its runner/preflight
-checkpoint compares complete seeds 0/1 with the ordinary mutable API: entire
-terminal worlds and all semantic metrics match exactly. Five invalid CLI cases
-are rejected. The runner records each seed/terminal-world hash, checks game/tool
-source hashes, covers every country for the full range, and retains an actual
-failure trace/last valid world. Read [LIFE_SWEEP.md](LIFE_SWEEP.md) and
-[preflight evidence](verification/life-sweep-mode-comparison-20261020.json).
-
-The run started from clean `53b8647` at **00:06:23 UTC on 20 October 2026**.
-It is running in unified-exec session **12194**, with raw stdout at
-`/tmp/dreams-life-sweep-1000-v28-20261020.ndjson` and stderr at the matching
-`.err` path. The 01:12 UTC partial check completed **789 seeds** without
-an error, covering twelve countries; it is not the completed gate. Preserve the
-output and wait for the actual completion/exit. Keep `src/game` and the tool fixed
-while it runs; independent UI/documentation work can continue. A request/partial run
-is not a completed 1,000-seed gate. Current game-source hash under this runner's
-src/game-relative algorithm is
-`f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f`;
-versions remain 28/27/4. This is engine-only, not native/SQLite/120-year/
-1,000-person/multi-generation acceptance. No complete-game percentage increase.
+The full **1,000 distinct seed** lifetime invariant gate now passes on world
+28 / engine 27 / content 4, through the production validated-immutable API.
+Seeds **0–999** are all present once; all twelve countries are covered. Runtime
+is **5,030.819 seconds**, stderr is empty, the completion record is present and
+session **12194 closed with exit 0**. No duplicate run is needed. The game/tool
+hashes stayed exact, including game hash
+`f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f`.
+Read [method/limits](LIFE_SWEEP.md), [completion record](verification/life-sweep-v28-1000-20261020.json)
+and [all raw cases](verification/life-sweep-v28-1000-20261020.ndjson).
+The range is age 25–102, at most 26 people / 61,778 ledger rows. This does not
+establish SQLite/native/all-optional-action/120-year/1,000-person/multi-generation
+acceptance or increase the complete-game percentage. The two preflight lives
+matched the mutable API exactly and overlap this range. Continue the full plan;
+a later game-source change needs its own current-source verification.
 
 The latest school navigation fix keeps classmate/teacher profiles under
 Activities. The shared foreground tab bar now follows the active route's query

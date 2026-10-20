@@ -4,6 +4,21 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-school-callback-20261020/` retains the actual ordinary v1-moment
+  branch, month-two project/help, exact cold result and remaining-year pet/
+  birthday flow. Entire current/backup/intermediate worlds match production;
+  all eight tables stay exact across cold start. Original three lives/backups,
+  twelve moments and seventeen receipts survive. Final active branch is age
+  eight/revision 38, with four lives/sixteen moments/twenty-four receipts total.
+  App/game/codec source stays at `1d1e696`; no physical timing/full-matrix claim.
+
+- `life-sweep-v28-1000-20261020.json` records the completed world-28 production
+  immutable sweep: all 1,000 distinct seeds 0–999, all twelve countries, exact
+  unchanged game/tool hashes, empty stderr and exit zero in 5,030.819 seconds.
+  The matching `.ndjson` retains every terminal-world hash. Ages 25–102, max
+  26 people / 61,778 ledger rows do not establish 120-year/1,000-person/multi-
+  generation, SQLite or native acceptance. [Method](../LIFE_SWEEP.md).
+
 - `native-school-archive-v28-20261020.json` records the new genuine revision-53
   native childhood archive's unmodified `1d1e696` producer, complete world hash
   and byte-exact native current/ten Riley moments, including all nine earlier
