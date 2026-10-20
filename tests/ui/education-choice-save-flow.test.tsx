@@ -4,7 +4,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { createLife, randomCreation } from '../../src/game/createLife';
-import { copyWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
+import { ageOn, copyWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { monthFrom } from '../../src/game/calendar';
 import { randomInteger } from '../../src/game/random';
@@ -12,7 +12,7 @@ import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { accountFor, availableCash } from '../../src/game/systems/common';
 import { educationActionReason, educationMonth, enrollmentReason, tuitionFor } from '../../src/game/systems/education';
 import { isConfined } from '../../src/game/systems/legalSchemas';
-import { rules } from '../../src/game/rules';
+import { minimumSchoolLeavingAge, rules } from '../../src/game/rules';
 import { pupil } from '../support/pupil';
 import { createContact } from '../../src/game/systems/npcs';
 import { SaveRepository } from '../../src/persistence/repository';
@@ -247,7 +247,12 @@ test.each(['US', 'IT'] as const)('%s school and education explain the actual gam
     expect(() => resolveCommand(initial, { type: 'leave-school' }, true)).toThrow(/compulsory/);
     let view = render(frame()); expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Leave course/ })).toBeNull(); view.unmount();
     view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /></ThemeProvider></SafeAreaProvider>);
-    expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen();
+    const schoolExplanation = "This game's school course is assessed at age " + rules[code].schoolEnd + '; its minimum leaving age is ' + minimumSchoolLeavingAge[code] + '.';
+    expect(screen.getByText(new RegExp(schoolExplanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen();
+    expect(screen.getByText(/Leaving early does not earn the qualification\./)).toBeOnTheScreen();
+    expect(ageOn(initial.people[initial.activePersonId], initial.date)).toBeLessThan(minimumSchoolLeavingAge[code]);
+    const withdrawal = screen.getByRole('button', { name: /^Withdraw from Secondary School/ }); expect(withdrawal).toBeDisabled(); expect(withdrawal.props.accessibilityLabel).toContain("This game's school rules allow withdrawal from age " + minimumSchoolLeavingAge[code]);
+    await press(/^Withdraw from Secondary School/); expect(screen.queryByText('Leave secondary school?')).toBeNull();
     expect(encodeWorld(world())).toBe(payload); expect(world()).toEqual(initial); expect(rows()).toEqual(before); expectOldMoments(); view.unmount();
   } finally { sqlite.close(); }
 });
