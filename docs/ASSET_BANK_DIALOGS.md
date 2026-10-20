@@ -13,7 +13,10 @@ and price-history previews remain immediate and read-only. Changing a relevant
 local input clears its old validation reason without changing the entered amount.
 
 Bank repayment review uses the selected actual debt, its principal and the
-selected currency account's spendable cash. An oversized or unaffordable payment
+selected currency account's spendable cash. Exchange review likewise excludes
+trust-held money in its actual source currency. Investment review checks the
+order and trading fee against spendable cash; its readout labels available cash
+and held-in-trust funds separately. An oversized or unaffordable payment
 shows its reason before opening a confirmation; it is never silently reduced.
 Cross-currency debts still require their native account. Existing exchange quotes,
 fees and BigInt arithmetic remain authoritative.
@@ -32,10 +35,15 @@ all eight tables, retained exact terms, retry with zero full checkpoint decodes,
 a newly opened database/store's exact cold result and acknowledgement without a
 second effect. Further cases cover busy/duplicate/Android Back guards, native
 currency and repayment reasons, unchanged refinancing, route identity and actual
-saved-life selection. Scenario funding is explicitly configured; these are not
+saved-life selection. Restricted-balance cases configure and validate adult
+checkpoints; the second currency account comes from an actual exchange. They
+verify input preservation and no confirmation/save when trust restrictions
+exclude otherwise sufficient total cash, including an order whose fee exceeds
+the spendable budget. These do not establish a natural inheritance transition.
+Scenario funding is explicitly configured; these are not
 natural-lifetime or native-device journeys, nor performance measurements.
 
-Twenty tests across two suites pass in 7.785 seconds with a 30-second test timeout,
+Twenty-two tests across two suites pass in 7.378 seconds with a 30-second test timeout,
 including both existing credit-flow checks. The initial diagnostic's only failure
 was test setup trying to acquire a second mortgage beyond the real income cap;
 that scenario now buys the second home with cash. No eligibility assertion or

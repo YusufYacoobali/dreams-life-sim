@@ -7,11 +7,11 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createGameStore } from '../../src/state/gameStore';
-import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
+import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { assetCatalog } from '../../src/game/content/assets';
 import { purchaseQuote, saleQuote, refinanceFee, mortgageInterestBps, mortgagePayment } from '../../src/game/systems/assets';
-import { investmentQuote, investmentValue } from '../../src/game/systems/markets';
+import { investmentQuote, investmentValue, formatQuantity } from '../../src/game/systems/markets';
 import { exchangeQuote } from '../../src/game/systems/finance';
 import { accountFor, availableCash } from '../../src/game/systems/common';
 import { currencyDigits, formatMoney, type Currency } from '../../src/game/money';
@@ -221,4 +221,42 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s draft belongs to its act
     else expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '1');
     expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); view.unmount();
   } finally { context.close(); }
+});
+
+
+test('investment review uses spendable cash including the fee and keeps inherited trust visibly separate without submitting', async () => {
+  const initial = funded(), account = accountFor(initial); account.lockedCash = account.cash - 10000n;
+  // Configured adult checkpoint with an existing restricted balance, validated
+  // as stored. This does not claim a natural inheritance/adulthood journey.
+  validateWorld(initial); const context = await setup(initial, 'buy');
+  try {
+    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('buy'));
+    const spendable = availableCash(accountFor(world())), unitPrice = investmentValue(world(), 'ORBIT', 1000000n, account.currency), quantity = spendable * 1000000n / unitPrice;
+    const quote = investmentQuote(world(), 'ORBIT', quantity), entered = formatQuantity(quantity, 'ORBIT');
+    expect(account.cash).toBeGreaterThan(quote.buyCost); expect(quote.value).toBeLessThanOrEqual(spendable); expect(quote.buyCost).toBeGreaterThan(spendable);
+    expect(screen.getByText('Available cash: ' + money(spendable))).toBeOnTheScreen(); expect(screen.getByText('Held in trust: ' + money(account.lockedCash))).toBeOnTheScreen();
+    edit('Trade quantity', entered); await press('Review Trade');
+    expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this order and its fee.'); expect(screen.queryByText('Buy ORBIT?')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', entered);
+    const affordable = quantity / 2n, affordableQuote = investmentQuote(world(), 'ORBIT', affordable); expect(affordableQuote.buyCost).toBeLessThanOrEqual(spendable);
+    edit('Trade quantity', formatQuantity(affordable, 'ORBIT')); await press('Review Trade'); expect(modal().getByText('Buy ORBIT?')).toBeOnTheScreen(); expect(modal().getByText(money(affordableQuote.buyCost))).toBeOnTheScreen(); await press('Never mind');
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+});
+
+test('exchange review uses the selected actual currency account spendable balance without clamping or saving', async () => {
+  let initial = apply(funded(), { type: 'exchange', from: 'USD', to: 'EUR', amount: 100000n, quotedNet: exchangeQuote(funded(), 100000n, 'USD', 'EUR').net });
+  initial = decodeWorld(encodeWorld(initial));
+  // Validated configured restrictions in two actual accounts. The EUR balance
+  // itself was created by the normal exchange above; no fixture was rewritten.
+  const home = accountFor(initial), euro = accountFor(initial, initial.people[initial.activePersonId], 'EUR'); home.lockedCash = home.cash - 10000n; euro.lockedCash = euro.cash - 100n; validateWorld(initial);
+  const context = await setup(initial, 'exchange');
+  try {
+    const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('exchange'));
+    expect(screen.getByRole('header', { name: money(10000n) })).toBeOnTheScreen(); edit('Amount in USD', '101'); await press('Review Exchange');
+    expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this exchange.'); expect(screen.queryByText('Exchange currencies?')).toBeNull(); expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', '101');
+    await press(/^Currency Account\./); await choose('EUR'); await press('Choose'); expect(screen.getByRole('header', { name: money(100n, 'EUR') })).toBeOnTheScreen();
+    edit('Amount in EUR', '2'); await press('Review Exchange'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this exchange.'); expect(screen.queryByText('Exchange currencies?')).toBeNull(); expect(screen.getByLabelText('Amount in EUR')).toHaveProp('value', '2');
+    edit('Amount in EUR', '1'); await press('Review Exchange'); const quote = exchangeQuote(world(), 100n, 'EUR', 'USD'); expect(modal().getByText('Exchange currencies?')).toBeOnTheScreen(); expect(modal().getByText(money(100n, 'EUR'))).toBeOnTheScreen(); expect(modal().getByText(money(quote.net, 'USD'))).toBeOnTheScreen(); await press('Never mind');
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
 });
