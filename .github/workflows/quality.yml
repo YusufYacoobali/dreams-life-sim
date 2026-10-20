@@ -32,4 +32,4 @@ jobs:
       - name: Check app and test types
         run: npm run typecheck
       - name: Run regression tests
-        run: npm test -- --ci
+        run: npm test -- --ci --testTimeout=30000

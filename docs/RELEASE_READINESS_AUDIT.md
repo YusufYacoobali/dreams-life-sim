@@ -47,14 +47,39 @@ work. Current overall and feature estimates stay in [OPENING_PLAN.md](OPENING_PL
    repository permission. It runs on `work`/`main` pushes, pull requests and
    manual dispatch. Checkout does not retain credentials. It contains no
    deployment, signing, native/Gradle build or secret requirement. Its first
-   GitHub-hosted execution is unrun at this audit checkpoint. Branch protection
-   and required-check configuration are also unverified.
+   hosted result and the explicit test-timeout correction are recorded below.
+   Branch protection and required-check configuration remain unverified.
 4. **Top-level documentation was stale.** The README claimed 70 situations and
    that Android opening interactions were prevented by old emulator hangs.
    It now links current progress/acceptance and accurately distinguishes scoped
    Expo Go evidence from remaining standalone, physical and iOS checks. Historic
    Phase 0 documents still describe their original planning state; current
    implementation evidence is authoritative in [PROGRESS.md](PROGRESS.md).
+
+## First hosted CI result and timeout correction
+
+The first [Quality run](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39480837966)
+was triggered by a `work` push of
+`e85fc78e0f91606170e75835806b3537a7e16c7a`. It completed with **failure** at
+19:26:30 UTC on 20 October 2026. Checkout, Node setup, locked `npm ci` and strict
+app/test types passed. Logs confirm Node **24.21.0**, npm **11.19.0**, and token
+permissions `Contents: read` / `Metadata: read`.
+
+Jest completed 119 suites / 1,825 tests in 1,044.034 seconds: 118 suites and
+1,824 tests passed. The sole failing case was
+`tests/ui/education-choice-save-flow.test.tsx:84`, “university remains open after
+a business degree and keeps exact individual subject reasons”, which exceeded
+Jest's default **5,000 ms** test timeout. No assertion failure was reported.
+
+The CI command now explicitly uses
+`npm test -- --ci --testTimeout=30000`, matching the coordinator's 30-second
+infrastructure allowance for connected UI/SQLite tests. Every assertion remains
+in place. This timeout is not an action-latency budget and does not relax the
+separate physical performance gates. The workflow parse, exact command and
+read-only permissions were validated locally; no full regression was repeated
+for the command-only correction. No new hosted pass is claimed until the next
+integrated push's run completes. This audit made only read requests and did not
+rerun or change any remote job or repository setting.
 
 ## Offline, assets and failure handling
 
