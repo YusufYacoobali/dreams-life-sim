@@ -13,12 +13,13 @@ import * as statisticsData from '../../src/ui/lifetimeStatistics';
 import { ThemeProvider } from '../../src/ui/theme';
 import archive from '../fixtures/v28-ordinary-hobby-archive.json';
 
-let mockStore: ReturnType<typeof createGameStore>, mockParams: { id?: string | string[] } = {};
-jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => mockParams, Redirect: () => null }));
+let mockStore: ReturnType<typeof createGameStore>, mockParams: { id?: string | string[]; tab?: string } = {}, mockPath = '/statistics';
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), navigate: jest.fn() }, useLocalSearchParams: () => mockParams, useGlobalSearchParams: () => mockParams, usePathname: () => mockPath, Redirect: () => null, Stack: Object.assign(({ children }: React.PropsWithChildren) => children, { Screen: () => null }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import { router } from 'expo-router';
 import Extras from '../../app/(game)/extras';
 import Statistics from '../../app/(game)/statistics';
+import GameLayout from '../../app/(game)/_layout';
 const frame = (children: React.ReactNode = <Statistics />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}</ThemeProvider></SafeAreaProvider>;
 const world = () => mockStore.getState().world!;
 
@@ -46,7 +47,7 @@ test('Extras opens read-only Statistics without selecting a life, changing pendi
   const context = await setup();
   try {
     const original = world(), encoded = encodeWorld(original), rows = context.rows(), projection = jest.spyOn(statisticsData, 'lifetimeStatistics'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); expect(Object.keys(rows)).toHaveLength(8);
-    let view = render(frame(<Extras />)); fireEvent.press(screen.getByRole('button', { name: /^Statistics\./ })); expect(router.push).toHaveBeenLastCalledWith('/statistics'); expect(projection).not.toHaveBeenCalled();
+    let view = render(frame(<Extras />)); fireEvent.press(screen.getByRole('button', { name: /^Statistics\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/statistics', params: { tab: 'activities' } }); expect(projection).not.toHaveBeenCalled();
     view.rerender(frame()); expect(projection).toHaveBeenCalledTimes(1); expect(screen.getByText('Riley Kelly')).toBeOnTheScreen(); expect(screen.getByRole('progressbar', { name: 'Discipline' })).toHaveAccessibilityValue({ now: original.people[original.activePersonId].stats.discipline }); expect(screen.getByText(/Older saves and background periods can be incomplete/)).toBeOnTheScreen();
     view.rerender(frame()); fireEvent.press(screen.getByRole('button', { name: 'Back' })); expect(router.back).toHaveBeenCalled(); expect(projection).toHaveBeenCalledTimes(1);
     // Same world, selected actual parent. No selectLife or active-person change.
@@ -55,6 +56,19 @@ test('Extras opens read-only Statistics without selecting a life, changing pendi
     mockParams = { id: ['person_player', 'person_parent1'] }; view.rerender(frame()); expect(screen.getByText('This person’s statistics are unavailable.')).toBeOnTheScreen();
     expect(world()).toBe(original); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(screen.queryByLabelText('Saving')).toBeNull(); context.oldMoments(); unpack.mockRestore(); projection.mockRestore();
     view.unmount(); await context.cold(); mockParams = {}; view = render(frame()); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(screen.getByText('Riley Kelly')).toBeOnTheScreen(); expect(world().pending).toEqual(original.pending); expect(world().annual).toEqual(original.annual); context.oldMoments(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+});
+
+test('the actual Extras navigation context keeps GameLayout Activities selected for Statistics and an actual parent view without saving', async () => {
+  const context = await setup();
+  try {
+    const original = world(), encoded = encodeWorld(original), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame(<Extras />));
+    fireEvent.press(screen.getByRole('button', { name: /^Statistics\./ }));
+    const destination = jest.mocked(router.push).mock.calls.at(-1)![0] as { pathname: string; params: { tab: string } };
+    expect(destination.pathname).toBe('/statistics'); mockPath = destination.pathname; mockParams = destination.params;
+    view.rerender(frame(<><GameLayout /><Statistics /></>)); expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen(); expect(screen.getByRole('tab', { name: 'Life', selected: false })).toBeOnTheScreen(); expect(screen.getByText('Riley Kelly')).toBeOnTheScreen();
+    mockParams = { ...destination.params, id: 'person_parent1' }; view.rerender(frame(<><GameLayout /><Statistics /></>)); expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen(); expect(screen.getByText(original.people.person_parent1.firstName + ' ' + original.people.person_parent1.lastName)).toBeOnTheScreen();
+    expect(world()).toBe(original); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(world().pending).toEqual(original.pending); context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
