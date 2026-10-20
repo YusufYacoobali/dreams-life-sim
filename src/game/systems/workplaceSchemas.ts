@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { hourlyRaiseSchema } from './hourlyWorkSchemas';
 import { dateSchema } from '../calendar';
 import { countryCodes } from '../countries';
 import type { World } from '../model';
@@ -26,7 +27,7 @@ export const workRaiseSchema = z.object({
   supervisorId: z.string(), supervisorEmploymentId: z.string(), currency: earningsCurrencySchema,
   paidMonths: z.number().int().min(12), performance: z.number().int().min(65).max(100), trust: z.number().int().min(0).max(100),
   chance: z.number().int().min(52).max(90), roll: z.number().int().min(1).max(100), accepted: z.boolean(),
-  annualPayBefore: z.bigint().positive(), annualPayAfter: z.bigint().positive(),
+  annualPayBefore: z.bigint().positive(), annualPayAfter: z.bigint().positive(), hourly: hourlyRaiseSchema.optional(),
 });
 export const raisedAnnualPay = (annualPay: bigint) => roundRatio(annualPay * 10500n, 10000n);
 export const raiseChance = (performance: number, trust: number) => Math.min(90, 20 + Math.floor(performance / 2) + Math.floor(trust / 4));

@@ -1,3 +1,5 @@
+import { hourlyAnnual } from './hourlyWork';
+import { roundRatio } from '../money';
 import { ageOn, compareDates, World } from '../model';
 import { countries } from '../countries';
 import { jobs } from '../content/jobs';
@@ -46,15 +48,15 @@ export function validateWorkplaces(world: World) {
     }
   }
   const places = new Map(world.workplaces.map(item => [item.id, item])), raiseIds = new Set<string>(), raiseYears = new Set<string>();
-  const priorRaises = new Map<string, typeof world.workRaises[number]>();
+  const priorRaises = new Map<string, typeof world.workRaises[number]>(), hourlyIds = new Set(world.hourlyContracts.map(row => row.employmentId));
   for (const request of world.workRaises) {
     const place = places.get(request.workplaceId), history = contracts.get(request.employmentId), person = world.people[request.personId];
     const supervisor = place?.members.find(item => item.personId === request.supervisorId && item.employmentId === request.supervisorEmploymentId && item.role === 'supervisor' && compareDates(item.joined, request.date) <= 0 && (!item.left || compareDates(request.date, item.left) <= 0));
     const key = request.personId + ':' + request.employmentId, yearKey = key + ':' + request.date.year, prior = priorRaises.get(key);
-    if (raiseIds.has(request.id) || raiseYears.has(yearKey) || !place || !person || !history || !supervisor || place.personId !== request.personId || place.employmentId !== request.employmentId || history.personId !== request.personId || request.currency !== history.currency ||
+    if (!!request.hourly !== hourlyIds.has(request.employmentId) || raiseIds.has(request.id) || raiseYears.has(yearKey) || !place || !person || !history || !supervisor || place.personId !== request.personId || place.employmentId !== request.employmentId || history.personId !== request.personId || request.currency !== history.currency ||
       compareDates(request.date, place.started) < 0 || compareDates(request.date, place.ended ?? world.date) > 0 || request.paidMonths > history.monthsWorked ||
       request.chance !== raiseChance(request.performance, request.trust) || request.accepted !== (request.roll <= request.chance) ||
-      request.annualPayAfter !== (request.accepted ? raisedAnnualPay(request.annualPayBefore) : request.annualPayBefore) || request.accepted && request.annualPayAfter <= request.annualPayBefore ||
+      (request.hourly ? request.annualPayBefore !== hourlyAnnual({ ...request.hourly, hourlyRate: request.hourly.hourlyRateBefore }) || request.annualPayAfter !== hourlyAnnual({ ...request.hourly, hourlyRate: request.hourly.hourlyRateAfter }) || request.hourly.hourlyRateAfter !== (request.accepted ? roundRatio(request.hourly.hourlyRateBefore * 10500n, 10000n) : request.hourly.hourlyRateBefore) : request.annualPayAfter !== (request.accepted ? raisedAnnualPay(request.annualPayBefore) : request.annualPayBefore)) || request.accepted && request.annualPayAfter <= request.annualPayBefore ||
       prior && (compareDates(prior.date, request.date) > 0 || request.paidMonths < prior.paidMonths || request.annualPayBefore < prior.annualPayAfter) ||
       person.employment?.id === history.id && person.employment.annualPay < request.annualPayAfter) throw new Error('Invalid work raise');
     raiseIds.add(request.id); raiseYears.add(yearKey); priorRaises.set(key, request);

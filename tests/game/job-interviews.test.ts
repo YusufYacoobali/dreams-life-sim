@@ -6,6 +6,7 @@ import { jobs } from '../../src/game/content/jobs';
 import { jobInterviews } from '../../src/game/content/jobInterviews';
 import { randomInteger } from '../../src/game/random';
 import { rules } from '../../src/game/rules';
+import { hourlyAnnual, hourlyQuote } from '../../src/game/systems/hourlyWork';
 import { jobReason, salaryFor } from '../../src/game/systems/work';
 import { interviewResult } from '../support/interview';
 import { employee } from '../support/employee';
@@ -26,7 +27,7 @@ test.each(jobs.filter(role => !role.specialCareer))('$id binds its actual duties
   if (next.pending?.kind !== 'decision') throw new Error('Missing interview');
   expect(next.pending.body).toContain(jobInterviews[role.id].question);
   expect(next.pending.choices).toHaveLength(4);
-  for (const choice of next.pending.choices) expect(choice.effects).toEqual([{ kind: 'job-interview', personId: world.activePersonId, roleId: role.id, employer: world.people[world.activePersonId].city + ' ' + role.sector, annualPay: salaryFor(world, role), answerId: choice.id }]);
+  for (const choice of next.pending.choices) expect(choice.effects).toEqual([{ kind: 'job-interview', personId: world.activePersonId, roleId: role.id, employer: world.people[world.activePersonId].city + ' ' + role.sector, annualPay: role.partTime ? hourlyAnnual(hourlyQuote(world.people[world.activePersonId].country, role)) : salaryFor(world, role), ...(role.partTime ? { hourly: hourlyQuote(world.people[world.activePersonId].country, role) } : {}), answerId: choice.id }]);
   expect(next.random).toEqual(world.random); expect(next.people).toEqual(world.people); expect(next.accounts).toEqual(world.accounts); expect(next.ledger).toEqual(world.ledger); expect(next.workHistory).toEqual(world.workHistory);
   expect(jobReason(next, role)).toMatch(/already applied/); expect(encodeWorld(world)).toBe(original); expect(decodeWorld(encodeWorld(next))).toEqual(next);
 });
@@ -79,5 +80,5 @@ test('country part-time ages still gate interviews and full-time work still requ
 
 test('engine 29 upgrades only its tag, preserving existing employment, people, money and RNG', () => {
   const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 31, engineVersion: 32, hobbyEvents: [] });
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 32, engineVersion: 33, contentVersion: 9, hobbyEvents: [], hourlyContracts: [] });
 });

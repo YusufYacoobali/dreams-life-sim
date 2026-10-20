@@ -45,6 +45,8 @@ import { recoveryCourseSchema, secondaryCompletionSchema } from './systems/educa
 import { validateEducationRecovery } from './systems/educationRecoveryValidation';
 import { scholarshipSchema } from './systems/scholarshipSchemas';
 import { hobbySchema, outingSchema } from './systems/leisureSchemas';
+import { hourlyContractSchema } from './systems/hourlyWorkSchemas';
+import { validateHourlyWork } from './systems/hourlyWorkValidation';
 import { hobbyEventSchema } from './systems/hobbyEventSchemas';
 import { validateHobbyEvents } from './systems/hobbyEventValidation';
 import { validateLeisure } from './systems/leisureValidation';
@@ -86,7 +88,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(31), engineVersion: z.literal(32), contentVersion: z.literal(8),
+  schemaVersion: z.literal(32), engineVersion: z.literal(33), contentVersion: z.literal(9),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -96,7 +98,7 @@ export const worldSchema = z.object({
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
-  workHistory: z.array(z.object({ id: z.string(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative(), ...workEarningsSchema.shape })),
+  workHistory: z.array(z.object({ id: z.string(), hourlyContractId: z.string().optional(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative(), ...workEarningsSchema.shape })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
   calendarAnchorDay: z.number().int().min(1).max(31),
@@ -114,7 +116,7 @@ export const worldSchema = z.object({
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
-  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), leisureOutings: z.array(outingSchema),
+  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), hourlyContracts: z.array(hourlyContractSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
@@ -182,7 +184,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (person.employment) {
       const role = jobs.find(candidate => candidate.id === person.employment!.roleId);
       const history = employmentByPerson.get(id)?.find(record => record.id === person.employment!.id && !record.ended);
-      if (!role || !history || history.roleId !== role.id || history.currency !== person.employment.currency || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
+      if (!role || !history || history.roleId !== role.id || history.currency !== person.employment.currency || history.hourlyContractId !== person.employment.hourlyContractId || person.died || (!role.partTime && person.education.stage !== 'none')) throw new Error('Invalid current employment');
     }
   }
   const workIds = new Set<string>();
@@ -308,6 +310,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateSocial(world);
   validateBusinesses(world);
   validateEarnings(world, ledger);
+  validateHourlyWork(world, ledger);
   validateTravel(world, ledger);
   validateSchools(world);
   validateWorkplaces(world);
@@ -532,5 +535,9 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 7) parsed.contentVersion = 8;
   // Community events start empty; old practice, payments, bound scenes and RNG stay exact.
   if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 31) { parsed.schemaVersion = 31; parsed.engineVersion = 32; parsed.hobbyEvents = []; }
+  // Existing annual contracts and bound interviews retain exact terms and history.
+  if (parsed && parsed.schemaVersion === 31 && parsed.engineVersion === 32) { parsed.schemaVersion = 32; parsed.engineVersion = 33; parsed.hourlyContracts = []; }
+  // Editorial/locality changes affect future selection only; already bound scenes remain exact.
+  if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33 && parsed.contentVersion === 8) parsed.contentVersion = 9;
   return validateWorld(parsed, immutable);
 }

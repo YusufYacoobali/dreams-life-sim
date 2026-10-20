@@ -1,3 +1,4 @@
+import { currentHourlyRate, hourlyContract, recordHourlyPeriod } from './hourlyWork';
 import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
@@ -30,11 +31,12 @@ export function settleBackground(world: World, person: Person, throughMonth: num
   let wages = 0n;
   const currency = countries[person.country].currency;
   if (person.employment) {
-    const job = person.employment;
-    wages = roundRatio(job.annualPay * BigInt(job.paidMonths + months), 12n) - roundRatio(job.annualPay * BigInt(job.paidMonths), 12n);
-    job.paidMonths += months; person.finance.serviceMonths += months;
-    const record = world.workHistory.find(item => item.id === job.id)!; record.monthsWorked += months; recordWageEarnings(world, person, record, wages, throughMonth);
-    if (wages) post(world, wages, 0n, 'background-income', 'Recorded employment pay for ' + months + ' months', null, person, job.currency);
+    const job = person.employment, hourly = hourlyContract(world, job.id), firstPeriod = job.paidMonths, wageMonths = hourly ? Math.max(0, throughMonth - Math.max(person.lastEconomicMonth, hourly.started.year * 12 + hourly.started.month - 1)) : months;
+    wages = roundRatio(job.annualPay * BigInt(job.paidMonths + wageMonths), 12n) - roundRatio(job.annualPay * BigInt(job.paidMonths), 12n);
+    job.paidMonths += wageMonths; person.finance.serviceMonths += wageMonths;
+    const record = world.workHistory.find(item => item.id === job.id)!; record.monthsWorked += wageMonths; recordWageEarnings(world, person, record, wages, throughMonth);
+    if (wages) post(world, wages, 0n, 'background-income', hourly ? 'Recorded hourly employment pay for ' + wageMonths + ' months' : 'Recorded employment pay for ' + months + ' months', null, person, job.currency);
+    if (hourly && wageMonths) recordHourlyPeriod(hourly, world.date, firstPeriod, wageMonths, currentHourlyRate(hourly), 'background', wages, wages ? world.ledger.at(-1)!.id : null);
   }
   const pension = person.finance.pensionAnnual > 0n ? pensionPayment(world, person, months, true) : { gross: 0n, fee: 0n, annual: 0n };
   const gross = fxMoney(world, { minor: wages, currency: person.employment?.currency ?? currency }, currency).minor + pension.gross;

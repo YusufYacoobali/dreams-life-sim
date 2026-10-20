@@ -1,3 +1,4 @@
+import { hourlyAnnual, hourlyQuote } from './hourlyWork';
 import type { World } from '../model';
 import type { Pending } from '../runtime';
 import { jobs } from '../content/jobs';
@@ -12,6 +13,6 @@ export function validateJobInterview(world: World, event: Extract<Pending, { kin
   const answers = new Set(['careful', 'rush', 'avoid', 'withdraw']);
   for (const choice of event.choices) {
     const effect = choice.effects[0];
-    if (choice.effects.length !== 1 || effect.kind !== 'job-interview' || !answers.delete(effect.answerId) || choice.id !== effect.answerId || effect.personId !== person.id || effect.roleId !== role.id || effect.employer !== person.city + ' ' + role.sector || effect.annualPay !== salaryFor(world, role)) throw new Error('Invalid bound job interview');
+    if (choice.effects.length !== 1 || effect.kind !== 'job-interview' || !answers.delete(effect.answerId) || choice.id !== effect.answerId || effect.personId !== person.id || effect.roleId !== role.id || effect.employer !== person.city + ' ' + role.sector || effect.annualPay !== (effect.hourly ? hourlyAnnual(effect.hourly) : salaryFor(world, role)) || !!effect.hourly !== !!first.hourly || effect.hourly && (!role.partTime || effect.hourly.hourlyRate !== hourlyQuote(person.country, role, effect.hourly.weeklyHours).hourlyRate || effect.hourly.hourlyRate !== first.hourly!.hourlyRate || effect.hourly.weeklyHours !== first.hourly!.weeklyHours || effect.hourly.paidWeeks !== first.hourly!.paidWeeks)) throw new Error('Invalid bound job interview');
   }
 }

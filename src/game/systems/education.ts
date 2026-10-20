@@ -1,3 +1,4 @@
+import { hourlyEnrollmentReason } from './hourlyWork';
 import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
@@ -42,6 +43,7 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if(campaignCommitment(world))return 'Finish or withdraw from your campaign before full-time study';
   if (recordingCommitment(world)) return 'Finish or cancel your recording before full-time study';
   if (person.employment && !jobs.find(job => job.id === person.employment!.roleId)?.partTime) return 'Resign from full-time work before starting this course';
+  const workload = hourlyEnrollmentReason(world, person); if (workload) return workload;
   if (!education.qualifications.some(q => q.level === 'secondary')) return 'A secondary qualification is required';
   if (program !== 'trade' && education.grades < 55) return 'Grades of at least 55% are required';
   if (program === 'graduate' && !education.qualifications.some(q => q.level === 'degree')) return 'A university degree is required';

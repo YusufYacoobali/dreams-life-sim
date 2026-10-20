@@ -1,3 +1,4 @@
+import { currentHourlyRate, hourlyAnnual, hourlyContract, updateHourlyRate } from './hourlyWork';
 import { z } from 'zod';
 import { countries } from '../countries';
 import { fullName, Person, World } from '../model';
@@ -11,7 +12,7 @@ import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { serviceAway } from './serviceSchemas';
 import { currentWorkplace, raisedAnnualPay, raiseChance, Workplace, WorkplaceMember } from './workplaceSchemas';
-import { formatMoney } from '../money';
+import { formatMoney, roundRatio } from '../money';
 
 export const workplaceCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-coworkers') }),
@@ -103,7 +104,8 @@ export function workRaiseReason(world: World, place: Workplace | undefined, supe
   if (world.workRaises.some(item => item.personId === person.id && item.employmentId === job.id && item.date.year === world.date.year)) return 'You already asked for a raise in this job this year';
   if (job.performance < 65) return 'Reach 65% work performance before requesting a raise';
   if (person.stats.energy < 6) return 'Rest before negotiating your pay';
-  if (raisedAnnualPay(job.annualPay) <= job.annualPay) return 'Your employer has no higher pay offer available';
+  const hourly = hourlyContract(world, job.id);
+  if (hourly && roundRatio(currentHourlyRate(hourly) * 10500n, 10000n) <= currentHourlyRate(hourly) || !hourly && raisedAnnualPay(job.annualPay) <= job.annualPay) return 'Your employer has no higher pay offer available';
 }
 export function resolveWorkplace(world: World, command: WorkplaceCommand) {
   const person = active(world);
@@ -120,9 +122,12 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
   if (command.type === 'request-raise') {
     const reason = workRaiseReason(world, place, command.supervisorId); if (reason) throw new IneligibleAction(reason);
     const supervisor = world.people[command.supervisorId], job = person.employment!, trust = relationFor(world, person.id, supervisor.id)!.trust;
-    const chance = raiseChance(job.performance, trust), roll = draw(world, 'outcomes', 1, 100), accepted = roll <= chance, annualPayBefore = job.annualPay, annualPayAfter = accepted ? raisedAnnualPay(annualPayBefore) : annualPayBefore;
-    world.workRaises.push({ id: 'raise_' + person.id + '_' + world.revision, workplaceId: place!.id, personId: person.id, employmentId: job.id, date: { ...world.date }, supervisorId: supervisor.id, supervisorEmploymentId: supervisor.employment!.id, currency: job.currency, paidMonths: job.paidMonths, performance: job.performance, trust, chance, roll, accepted, annualPayBefore, annualPayAfter });
-    person.stats.energy -= 6; job.annualPay = annualPayAfter;
+    const hourly = hourlyContract(world, job.id), hourlyRateBefore = hourly ? currentHourlyRate(hourly) : 0n;
+    const chance = raiseChance(job.performance, trust), roll = draw(world, 'outcomes', 1, 100), accepted = roll <= chance, annualPayBefore = job.annualPay;
+    const hourlyRateAfter = accepted && hourly ? roundRatio(hourlyRateBefore * 10500n, 10000n) : hourlyRateBefore;
+    const annualPayAfter = hourly ? hourlyAnnual({ ...hourly.terms, hourlyRate: hourlyRateAfter }) : accepted ? raisedAnnualPay(annualPayBefore) : annualPayBefore;
+    world.workRaises.push({ id: 'raise_' + person.id + '_' + world.revision, workplaceId: place!.id, personId: person.id, employmentId: job.id, date: { ...world.date }, supervisorId: supervisor.id, supervisorEmploymentId: supervisor.employment!.id, currency: job.currency, paidMonths: job.paidMonths, performance: job.performance, trust, chance, roll, accepted, annualPayBefore, annualPayAfter, ...(hourly ? { hourly: { hourlyRateBefore, hourlyRateAfter, weeklyHours: hourly.terms.weeklyHours, paidWeeks: hourly.terms.paidWeeks } } : {}) });
+    person.stats.energy -= 6; if (accepted && hourly) updateHourlyRate(world, person, 'raise', job.rank, world.workRaises.at(-1)!.id); else job.annualPay = annualPayAfter;
     const salary = formatMoney({ minor: annualPayAfter, currency: job.currency });
     fact(world, 'I asked ' + supervisor.firstName + ' for a raise. ' + (accepted ? 'My annual gross pay rose to ' + salary + '.' : 'The answer was no.'), 'work-raise');
     result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? supervisor.firstName + ' agrees to a 5% raise. Your higher rate starts with your next paid period.' : supervisor.firstName + ' says the budget will not stretch. Your current pay stays the same; you can ask again next year.', 'career', [
