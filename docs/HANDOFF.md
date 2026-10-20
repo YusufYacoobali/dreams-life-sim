@@ -22,7 +22,55 @@ previous-life summaries are complete. Full production remains approximately
 **55%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: hobby community events
+## Current checkpoint: parallel UI reliability and opening accessibility
+
+The user explicitly authorised concurrent agents in separate worktrees, with the
+primary agent responsible for integration, testing, commits and pushes. Work and
+School fixes were completed before that instruction; subsequent Education,
+purchase, accessibility, financial, hourly, editorial and release streams used
+isolated branches. Keep this ownership discipline for further independent work.
+
+Work, School and Education disable the current routine/club/conduct choices;
+cancelling or leaving Set unselected saves nothing. Real changes and purchase,
+admission, leave/resume, resignation and retirement confirmations close only
+after durable success. Failed saves retain the reviewed draft and an accessible
+error. Education categories check every actual offered subject, so an unrelated
+qualification or declined application cannot block an eligible course.
+Opening errors have polite live regions and disabled controls expose their state;
+keyboard Next/Done never creates a life. Original app identity/launcher art and
+read-only CI are configured; hosted CI and installed release branding are unrun.
+
+All **165 UI/state/progression tests /54 suites** pass in **191.348 seconds**,
+with a 30-second infrastructure test timeout during concurrent host work. Strict
+app/test types and fresh final Android/iOS Hermes exports pass. No assertion was
+relaxed and elapsed suite time is not action latency. Game/persistence are exact
+hobby-source hashes below: World31 /engine32 /content8 /reader11 /framev4. No new
+unchanged full-regression or 120-seed count is claimed.
+[Source/checks](verification/ui-reliability-20261020.json).
+
+Actual native Work: no-op/cancel126 all tables exact; real hard routine127,
+process-stop cold127 all tables exact, acknowledgement128. All six inactive lives/
+backups,59 moments and111 original receipts exact. Final seven lives/59 moments/
+113 receipts, Nia23/hard, no pending/year. Font1.0; app stopped.
+[Four capture pairs and exact scope](verification/android24-work-routine-20261020/).
+
+Continue immediately with ready independent branches: hourly **dde31a1**
+(World32/engine33/content9/reader12; final independent review approved), factual
+financial goals **4b6178e** (add challenge destination labels Investments/Assets
+and update UI totals45/14), editorial **17dee3e** (six physical-scene flags/two
+wording fixes). Keep Work dialog hunks when integrating hourly pay display.
+Run consolidated strict types, complete regression, the existing120annual seeds,
+appropriate optional-hourly natural policy, fresh exports and actual native
+new-interview/hourly payroll plus early School play. Preserve original fixtures,
+legacy annual contracts/bound scenes and automatic resume. Further file/history
+breadth stays parked. Overall remains about55%; onboarding now estimated50%.
+
+Last verified prior push e41a2db at18:44UTC; this verified UI checkpoint is being
+committed/pushed. Inspect git/remote for its final SHA, then continue; a routine
+checkpoint is not the end of the task. Ready branch histories remain in separate
+worktrees under /workspace/dreams-worktrees. Primary integration branch is work.
+
+## Prior checkpoint: hobby community events
 
 Eight local events, three approaches, actual12monthly practices/20proficiency,
 real reviewed fees/payer/consent, yearly uniqueness, bounded consequences and saved
@@ -60,25 +108,12 @@ safe-push deadline from it. Multiple agents are authorised; keep file ownership
 separate and consolidate integration checks. Overall about55%; leisure60%. A routine
 checkpoint is not the end: continue immediately with the authorised work below.
 
-## Continue immediately: work and school routine dialogs
+## Completed work/school audit
 
-Concrete next task: app/(game)/work.tsx lets the actual current effort be saved
-again and closes its modal before durable dispatch. Disable the current option,
-keep Set disabled until an actual edit, pass error into the modal and close only
-on successful save for routine/resign/retire. Existing EventModal selection state
-retains a failed draft if its key stays mounted. Disable dialog launch while busy.
-Read /tmp/dreams-next-work-routine-plan.md for the exact source audit/test plan.
-Then inspect school.tsx's same close-before-save behavior for effort/club/conduct;
-preserve completed callback/outing histories. Local asset deposit/term dialogs
-are read-only and should still close immediately; actual purchase is separate.
-
-For a UI-only correction preserve the game/persistence hash above. Do not repeat
-unchanged120/full engine gates. Use meaningful connected SQLite rollback/retry/
-warm0unpack/cold and unchanged-selection checks, fullUI/state/progression, types,
-exports and actual native current/change/resume. Use relevant supplied reference.
-Continue remaining work depth, financial/progression goals, editorial/balance,
-visual/accessibility and available release work. Extra file/history breadth stays
-parked; reliable automatic resume and original history stay required.
+The concrete routine no-op, premature modal close and failed-draft issues listed
+at this checkpoint are resolved in the newer UI milestone above. Local asset
+funding choices remain read-only; only actual purchase waits for durable saving.
+The native helper notes below remain useful for continuing early gameplay.
 
 Helpers: /tmp/dreams-native-ui.py now has wait-enabled and scroll-to. The latter
 uses exactly one actual fresh ScrollView bound and stops at an enabled visible

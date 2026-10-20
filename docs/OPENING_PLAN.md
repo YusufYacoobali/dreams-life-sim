@@ -1,5 +1,13 @@
 # Opening experience: priority and completion estimates
 
+The parallel UI milestone passes165 UI/state/progression tests, strict types and
+fresh Android/iOS exports. Work/School/Education prevent unchanged saves and retain
+failed drafts; eligible education fields remain reachable. Opening live alerts,
+keyboard focus and disabled semantics are improved. Actual native Work no-op126,
+edit/cold127 and acknowledgement128 are exact. Original launcher branding and
+build identity are configured; native packaging remains open. Onboarding is now
+estimated50%, overall about55%. [Evidence](verification/ui-reliability-20261020.json).
+
 The community-event milestone connects all8hobbies to actual attendance, reviewed
 fees/consent,3approaches, bounded saved results and history. All1,793tests,
 133UI/state/progression checks, strict types, fresh exports, same120annual
@@ -336,7 +344,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 
 | Area | Estimate | Remaining work |
 | --- | ---: | --- |
-| Onboarding and creation | 45% | Creation/newborn usability, matched native visual review and platform acceptance |
+| Onboarding and creation | 50% | Creation/newborn usability, matched native visual review and platform acceptance |
 | Life screen and early gameplay | 55% | More early consequences and native interaction/layout polish |
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
@@ -359,7 +367,7 @@ work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Current next steps: prevent redundant current-routine saves and preserve failed work/school selections, then remaining work/leisure depth; review
+Current next steps: integrate independently completed hourly contracts, financial goals and editorial fixes with full gates, then remaining work/leisure depth; review
 all250stories for balance/editorial coverage; complete visual/accessibility and
 available device/release gates. Preserve fast atomic autosave/resume. Further
 import/export/sharing/history breadth stays parked. The original opening
