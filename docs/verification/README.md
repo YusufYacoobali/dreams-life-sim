@@ -4,6 +4,18 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `people-blocks-20261020.json` records v3 people/ledger blocks, bounded exact-text
+  compression reuse, reader7/old-payload protection, all1,409tests/102suites, strict
+  types and both fresh Hermes exports. Complete clean and initial stale-assertion
+  logs:`regression-people-blocks-20261020.txt` and `-initial-20261020.txt`.
+  Unchanged game source retains the existing120-seed gate, without a new seed run.
+  `android24-people-blocks-20261020/` retains actual old-v2 upgrade/new-v3 result80/
+  cold/ack81 and exact original lives/history.
+- `population-people-blocks-comparison-20261020.json` links same-driver before/after
+  raw inputs,55warm samples per source, exact stress outcomes/cold/current/backup/
+  Before Age Up bytes and measured payload sizes. Generated1000-contact cloud
+  diagnostics do not close physical p95/natural120-year/multigeneration/50MB gates.
+
 - `native-workplace-story-archive-v30-20261020.json` pins actual named result76
   to isolated unmodified pushed74be9e4 source,1,024,130bytes and its SHA-256.
   All21worlds/20original moments, including18earlier raise moments, stay exact.

@@ -37,10 +37,10 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // The reader marker also protects expanded saved hobby variants from older
-    // apps. Existing plain/v1/v2 rows remain readable without an eager rewrite.
-    if (!version || version.user_version > 6) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 6) return;
+    // Reader seven protects people-block frames from older apps. Existing
+    // plain/v1/v2 rows and historical payloads need no eager rewrite.
+    if (!version || version.user_version > 7) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 7) return;
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -76,11 +76,11 @@ export class SaveRepository {
       for (const statement of statements) await tx.run(statement);
       const older = await tx.all<{ life_id: string; snapshot_id: string; payload: string }>('SELECT s.life_id,s.snapshot_id,s.payload FROM snapshots s LEFT JOIN snapshot_metadata m ON m.life_id=s.life_id AND m.snapshot_id=s.snapshot_id WHERE m.snapshot_id IS NULL');
       for (const row of older) {
-        const record = snapshotRecord(unpackCheckpoint(row.payload), this.now(), 'Earlier checkpoint');
+        const record = snapshotRecord(unpackCheckpoint(row.payload), this.now(), 'Earlier checkpoint', row.payload);
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 6');
+      await tx.run('PRAGMA user_version = 7');
     });
   }
 
@@ -89,18 +89,18 @@ export class SaveRepository {
     return rows.map(row => ({ id: row.id, name: row.name, revision: row.revision, updatedAt: row.updated_at, ...(row.branch ? { branch: branchInfoSchema.parse(JSON.parse(row.branch)) } : {}) }));
   }
 
-  private async readLife(id: string): Promise<{ world: World; payload: string }> {
+  private async readLife(id: string, primePeopleCache = false): Promise<{ world: World; payload: string }> {
     const row = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [id]);
     if (!row) throw new Error('Saved life not found');
     try {
-      const world = unpackCheckpoint(row.payload, true);
+      const world = unpackCheckpoint(row.payload, true, primePeopleCache);
       if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
       return { world, payload: row.payload };
     } catch { throw new SaveCorrupt(id); }
   }
 
   async load(id: string): Promise<World> {
-    const current = await this.readLife(id);
+    const current = await this.readLife(id, true);
     this.current = current;
     return current.world;
   }
@@ -238,7 +238,7 @@ export class SaveRepository {
   async recoveryPreview(id: string): Promise<World> {
     const backup = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM backups WHERE life_id=?', [id]);
     if (!backup) throw new Error('No previous checkpoint is available');
-    const world = unpackCheckpoint(backup.payload, true);
+    const world = unpackCheckpoint(backup.payload, true, false);
     if (world.id !== id || world.revision !== backup.revision) throw new Error('Previous checkpoint metadata is inconsistent');
     return world;
   }

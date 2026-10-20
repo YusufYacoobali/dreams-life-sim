@@ -4,7 +4,32 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current certified-copy and population diagnostics
+## Current people-block save diagnostics
+
+All **1,409 tests / 102 suites** pass in **825.637 seconds**, strict application/test types and both fresh Hermes exports.
+The unchanged game-source120-seed gate remains current. The new v3 frame reuses
+unchanged groups of32people alongside512-row ledger blocks. Reader7 retains
+old current/backup/history bytes; complete validation and save atomicity remain.
+[Method](PEOPLE_CHECKPOINT_BLOCKS.md), [current checks](verification/people-blocks-20261020.json).
+
+| Cloud engine + SQLite case | Before median | After median | Current payload before / after |
+| --- | ---: | ---: | ---: |
+| 100-known-contact routine | 25.86ms | 25.85ms | 230,482 / 236,286 bytes |
+| 100-known-contact first Age Up step | 61.34ms | 62.82ms | 250,477 / 256,173 bytes |
+| 1000-known-contact routine | 178.00ms | 112.17ms | 453,495 / 515,635 bytes |
+| 1000-known-contact first Age Up step | 459.85ms | 462.99ms | 557,747 / 621,971 bytes |
+
+The fixed driver compares isolated e8a9097 with the current codec serially after
+validation jobs close. All11inputs/four stress outcomes match;55warm samples per
+source avoid full decode, cold current/backup and Before Age Up payloads are exact.
+[Raw records](verification/population-people-blocks-comparison-20261020.json).
+The1000-known-contact setup has1007people/eight initial monthly financial actors.
+It is generated at once, not a natural/native120-year/three-generation journey.
+Five-sample medians are host/GC-sensitive, not physical p95. Payload lengths are
+not total SQLite/WAL/archive storage; the full50MB gate remains open.
+Actual Android old-v2→v3 routine80/cold/ack81 preserves all older lives/history.
+
+## Earlier certified-copy and population diagnostics
 
 All1,385tests/100suites, strict types, both Hermes exports and120immutable lives
 pass. Every complete terminal world matches74be9e4. Certified direct copying and

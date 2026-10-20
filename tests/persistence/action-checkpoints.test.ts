@@ -25,7 +25,7 @@ test('immutable actions preserve exact outcomes and reuse certified old transact
   expect(next.ledger).not.toBe(world.ledger);
   expect(next.ledger.every((row, index) => row === world.ledger[index])).toBe(true);
   const before = JSON.parse(checkpoints.packCheckpoint(world)), after = JSON.parse(checkpoints.packCheckpoint(next));
-  expect(before.format).toBe('dreams-checkpoint-v2');
+  expect(before.format).toBe('dreams-checkpoint-v3');
   expect(after.ledger).toEqual(before.ledger); expect(after.main).not.toEqual(before.main);
   expect(checkpoints.unpackCheckpoint(JSON.stringify(after))).toEqual(next);
   const cold = checkpoints.unpackCheckpoint(JSON.stringify(after), true);
@@ -127,24 +127,24 @@ test('the version-four upgrade is atomic and keeps the original v1 payload until
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   sqlite.exec('DROP TRIGGER fail_v5'); await updated.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
   expect(await updated.load(world.id)).toEqual(world);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   await updated.commit(next, world.revision, 'upgrade_project');
-  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v2');
+  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v3');
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(archive.checkpoint);
   expect(await new SaveRepository(driver).load(world.id)).toEqual(next);
   sqlite.close();
 });
 
-test('reader six upgrades a version-five database without rewriting its genuine v2 world or mixed-format history', async () => {
+test('reader seven upgrades a version-five database without rewriting its genuine v2 world or mixed-format history', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const imported = await repository.import(JSON.stringify(responsiveArchive));
   for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(responsiveArchive.checkpoint);
   sqlite.exec('PRAGMA user_version=5');
   const moments = sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all();
   const upgraded = new SaveRepository(driver); await upgraded.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);

@@ -1,0 +1,5579 @@
+{
+  "scope": "five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native",
+  "startingRows": "current format, compression blocks primed by cold open",
+  "node": "v24.19.0",
+  "sourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "driverHash": "3b093686c491ca24bf10eb1c3bb3ee5ee11eab3ff8ea7e02ee98d9bb43717d20",
+  "results": [
+    {
+      "label": "Begin Life",
+      "inputSha256": "2b2c2cd701990db23a0ce9b9164c9a1a9e9bbbf689730fbae4f29a3746ca3ba1",
+      "inputBytes": 11313,
+      "checkpointBytes": {
+        "input": 3615,
+        "current": 3615,
+        "backup": 3615,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 0,
+      "medianMs": {
+        "totalMs": 1.1192610000002787,
+        "resolveMs": 0.002492999999958556,
+        "commitMs": 1.1167680000003202,
+        "coldOpenMs": 0.7568570000003092
+      },
+      "trials": [
+        {
+          "totalMs": 2.8680789999998524,
+          "resolveMs": 0.0028339999998934218,
+          "commitMs": 2.865244999999959,
+          "coldOpenMs": 1.4668540000002395,
+          "phases": {
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.013390000000072177
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0036860000000160653
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.004175999999915803
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.002664000000095257
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0014929999997548293
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0013020000001233711
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.002113000000008469
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0015129999997043342
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0009820000000217988
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0027540000000954024
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.001972999999907188
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.003114999999979773
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0021539999997912673
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0026539999998931307
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.002834000000348169
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002844000000095548
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.005618000000140455
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.002122999999755848
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.002314000000296801
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.6729340000001685
+            }
+          }
+        },
+        {
+          "totalMs": 1.1192610000002787,
+          "resolveMs": 0.002492999999958556,
+          "commitMs": 1.1167680000003202,
+          "coldOpenMs": 0.7568570000003092,
+          "phases": {
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004957000000104017
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0035450000000309956
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0027540000000954024
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.001142000000072585
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0009910000003401365
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0009410000002390007
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0013319999998202547
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0008310000002893503
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0007310000000870787
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0014320000000225264
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0011009999998350395
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0015920000000733125
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0010919999999714491
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0018329999998059066
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.001922999999806052
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.001972999999907188
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0036260000001675508
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.001623000000108732
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.001352000000224507
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.7290450000000419
+            }
+          }
+        },
+        {
+          "totalMs": 1.1593419999999242,
+          "resolveMs": 0.002322999999705644,
+          "commitMs": 1.1570190000002185,
+          "coldOpenMs": 0.6601519999999255,
+          "phases": {
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004096000000117783
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.002613999999994121
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.002934999999979482
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0011120000003757013
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0011620000000220898
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0007210000003396999
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0011709999998856802
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0008910000001378648
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0005009999999856518
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0012820000001738663
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0008010000001377193
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0015919999996185652
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0011219999996683327
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0015220000000226719
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0017819999998209823
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0019430000002103043
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0033650000000307045
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0014120000000730215
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.001393000000007305
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.7789000000002488
+            }
+          }
+        },
+        {
+          "totalMs": 1.1176390000000538,
+          "resolveMs": 0.0023539999997410632,
+          "commitMs": 1.1152850000003127,
+          "coldOpenMs": 0.6698360000000321,
+          "phases": {
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.0042969999999513675
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.002854999999726715
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0025040000000444707
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0012419999998201092
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0010119999997186824
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0007610000002387096
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.001142000000072585
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0007310000000870787
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0004899999998997373
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0014920000003257883
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0008609999999862339
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.001502000000073167
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.001101999999718828
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.001702000000022963
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0017819999998209823
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0019019999999727588
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0036649999997280247
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.001592999999957101
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0014720000003762834
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.7015839999999116
+            }
+          }
+        },
+        {
+          "totalMs": 1.0196320000000014,
+          "resolveMs": 0.0031749999998282874,
+          "commitMs": 1.0164570000001731,
+          "coldOpenMs": 0.8462220000001253,
+          "phases": {
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004946999999901891
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.002813999999943917
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0027140000001963926
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0016730000002098677
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0009310000000368746
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0014430000001084409
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0017930000003616442
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.001772999999957392
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0008820000002742745
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0024839999996402184
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0011320000003252062
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.002915000000029977
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.001922999999806052
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0030639999999948486
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.003004000000146334
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0030339999998432177
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.09683499999982814
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0018530000002101588
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0018430000000080327
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 0.5142829999999776
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "First-year choice",
+      "inputSha256": "05cef71ad3ba451312a2c45bc873af1427d619b764be6a3c82476ea2bfdf19f5",
+      "inputBytes": 44025,
+      "checkpointBytes": {
+        "input": 7219,
+        "current": 6783,
+        "backup": 7219,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 2.1231809999999314,
+        "resolveMs": 0.6433470000001762,
+        "commitMs": 1.4237989999996898,
+        "coldOpenMs": 1.401075000000219
+      },
+      "trials": [
+        {
+          "totalMs": 2.3268259999999827,
+          "resolveMs": 0.9030270000002929,
+          "commitMs": 1.4237989999996898,
+          "coldOpenMs": 1.4824170000001686,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.19471199999998134
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004696999999850959
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0035250000000814907
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.005137000000104308
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0013920000001235167
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0009219999997185369
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0013619999999718857
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0010720000000219443
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0008620000003247696
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0007809999997334671
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00218300000005911
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.001040999999986525
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0023330000003625173
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0013619999999718857
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.002122999999755848
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.002122999999755848
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002454000000398082
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.003936000000066997
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0017520000001240987
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.004365999999663472
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5450989999999365
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.247794999999769
+            }
+          }
+        },
+        {
+          "totalMs": 2.0572510000001785,
+          "resolveMs": 0.7146840000000338,
+          "commitMs": 1.3425670000001446,
+          "coldOpenMs": 3.6360639999998057,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.10071100000004662
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.006560000000263244
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.003815000000031432
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.003845999999612104
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.001922999999806052
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0011519999998199637
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0013420000000223808
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0020839999997406267
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0017130000001088774
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0010919999999714491
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.002444000000195956
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0017330000000583823
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0030440000000453438
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0016319999999723223
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0029340000000956934
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0037149999998291605
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002943999999843072
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.00512799999978597
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0018829999999070424
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005939000000125816
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5366970000000038
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.1694280000001527
+            }
+          }
+        },
+        {
+          "totalMs": 1.7534739999996418,
+          "resolveMs": 0.5144229999996242,
+          "commitMs": 1.2390510000000177,
+          "coldOpenMs": 1.2889869999999064,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.07567299999982424
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.00374599999986458
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.002763999999842781
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0025030000001606822
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0013919999996687693
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0008910000001378648
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0007410000002892048
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0013619999999718857
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0008210000000872242
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.00043099999993501115
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0017229999998562562
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0007810000001882145
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.002073999999993248
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0011620000000220898
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.001803000000109023
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.001783000000159518
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002003000000058819
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0034549999995761027
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0012019999999210995
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.004267000000254484
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.34618000000000393
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.0873729999998432
+            }
+          }
+        },
+        {
+          "totalMs": 2.1231809999999314,
+          "resolveMs": 0.6433470000001762,
+          "commitMs": 1.4798339999997552,
+          "coldOpenMs": 1.1098079999997026,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.10263399999985268
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.006510000000162108
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.003956000000016502
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.004065999999966152
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.001952999999957683
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0014419999997699051
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0010720000000219443
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.002003000000058819
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0013119999998707499
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0007009999999354477
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0020329999997557024
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0013619999999718857
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.002494000000297092
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0016829999999572465
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0028049999996255792
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0027439999998932763
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0027540000000954024
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0050670000000536675
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0018019999997704872
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005187000000205444
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.46076300000004267
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.312662000000273
+            }
+          }
+        },
+        {
+          "totalMs": 2.188307999999779,
+          "resolveMs": 0.6404529999999795,
+          "commitMs": 1.5478549999997995,
+          "coldOpenMs": 1.401075000000219,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.1274820000003274
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004526000000169006
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0029749999998784915
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0032950000004348112
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0015429999998559651
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0010420000003250607
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0009110000000873697
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0013119999998707499
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0009719999998196727
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0005009999999856518
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0016420000001744484
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0008510000002388551
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.001952999999957683
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0012119999996684783
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.00224400000024616
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.002363000000059401
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0021030000002610905
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.025868999999602238
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0013819999999213906
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00457700000015393
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4372769999999946
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.3453119999999217
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "First-year choice Continue",
+      "inputSha256": "645d18f4a4693b492db234697eddf1ea078996f689643ece7e21728de7365f21",
+      "inputBytes": 43059,
+      "checkpointBytes": {
+        "input": 6783,
+        "current": 6451,
+        "backup": 6783,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 1.738050999999814,
+        "resolveMs": 0.5001620000002731,
+        "commitMs": 1.242225999999846,
+        "coldOpenMs": 1.160953999999947
+      },
+      "trials": [
+        {
+          "totalMs": 2.571484000000055,
+          "resolveMs": 0.8488259999999173,
+          "commitMs": 1.7226580000001377,
+          "coldOpenMs": 1.7202140000003965,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.17197899999973743
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.005347999999685271
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.003915000000233704
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.004226000000016938
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.002302999999756139
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0013519999997697596
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0012120000001232256
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0013720000001740118
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0014819999996689148
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0011320000003252062
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0023040000000946748
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0016319999999723223
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0020029999996040715
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0018430000000080327
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0026739999998426356
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0027139999997416453
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0030150000002322486
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.00577900000007503
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0016529999998056155
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005918999999721564
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5571780000000217
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.5434989999998834
+            }
+          }
+        },
+        {
+          "totalMs": 1.6985120000003917,
+          "resolveMs": 0.5001620000002731,
+          "commitMs": 1.1983500000001186,
+          "coldOpenMs": 1.1427570000000742,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.07068600000002334
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004186000000117929
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.002895000000080472
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0027640000002975285
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0014830000000074506
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0009919999997691775
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0008809999999357387
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.001352000000224507
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.00097200000027442
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.00040100000023812754
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0016319999999723223
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0010119999997186824
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0016729999997551204
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0011620000000220898
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0018430000000080327
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.00218300000005911
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0021839999999428983
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0038559999998142303
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.001051000000188651
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.004076000000168278
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.37607500000012806
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.0470329999998285
+            }
+          }
+        },
+        {
+          "totalMs": 1.5761680000000524,
+          "resolveMs": 0.41054599999961283,
+          "commitMs": 1.1656220000004396,
+          "coldOpenMs": 1.1379799999999705,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.07195799999999508
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.0035250000000814907
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0027949999998782005
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0026340000003983732
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0012719999999717402
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0008010000001377193
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0008509999997841078
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0012520000000222353
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0007510000000365835
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0005009999999856518
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0014730000002600718
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.000901000000339991
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0014830000000074506
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0030740000001969747
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0015619999999216816
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.001742999999805761
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0018529999997554114
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0031650000000809086
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0011020000001735752
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.004186000000117929
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.312069000000065
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.0461519999998927
+            }
+          }
+        },
+        {
+          "totalMs": 1.738050999999814,
+          "resolveMs": 0.495824999999968,
+          "commitMs": 1.242225999999846,
+          "coldOpenMs": 1.160953999999947,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.0785280000000057
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.005668000000241591
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0033149999999295687
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0027239999999437714
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0014220000002751476
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0010120000001734297
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0006210000001374283
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.001471999999921536
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.001071999999567197
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0005509999996320403
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.001592999999957101
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0010419999998703133
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0027239999999437714
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.00512799999978597
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0032350000001315493
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.002613999999994121
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002973999999994703
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.006210000000010041
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0019130000000586733
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005418000000190659
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.39066700000012133
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.0686249999998836
+            }
+          }
+        },
+        {
+          "totalMs": 1.9983029999998507,
+          "resolveMs": 0.720162000000073,
+          "commitMs": 1.2781409999997777,
+          "coldOpenMs": 1.1676550000001953,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.07072599999992235
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.004355999999916094
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0028750000001309672
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0029039999999440624
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0016420000001744484
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0008520000001226435
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0007310000000870787
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0011819999999715947
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0009609999997337582
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0005300000002534944
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0017219999999724678
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0008119999997688865
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0016519999999218271
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0010220000003755558
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0016630000000077416
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0018230000000585278
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.002763999999842781
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008551999999781401
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0015920000000733125
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.006010000000060245
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.6245279999998274
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.0873939999996765
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-seven callback",
+      "inputSha256": "a8346423d4cb4a3b271e468b457a76e9a9cde57f1af00a683a20cc3eb4a35903",
+      "inputBytes": 390979,
+      "checkpointBytes": {
+        "input": 30167,
+        "current": 29831,
+        "backup": 30167,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 4.937759000000369,
+        "resolveMs": 2.6607480000002397,
+        "commitMs": 2.2765509999999267,
+        "coldOpenMs": 11.312296999999944
+      },
+      "trials": [
+        {
+          "totalMs": 6.0681580000000395,
+          "resolveMs": 2.8604879999998047,
+          "commitMs": 3.2076700000002347,
+          "coldOpenMs": 17.153354000000036,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.3621640000001207
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.012928999999985535
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.008822999999665626
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.00815199999988181
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.005078000000139582
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.002363000000059401
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04312500000014552
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0034359999999651336
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0028940000001966837
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015220000000226719
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.09600399999999354
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0457990000004429
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.014380999999957567
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003294999999980064
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.00633899999957066
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004615999999714404
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0059389999996710685
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008483000000069296
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0029950000002827437
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0068099999998594285
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.3579329999997753
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.7730870000000323
+            }
+          }
+        },
+        {
+          "totalMs": 4.937759000000369,
+          "resolveMs": 2.6607480000002397,
+          "commitMs": 2.2770110000001296,
+          "coldOpenMs": 10.809781999999814,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.40087199999970835
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.01006500000039523
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.007591000000047643
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.006750999999894702
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.00577900000007503
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0017929999999068968
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.048012000000198896
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0033650000000307045
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.002312999999958265
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0012809999998353305
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.07722599999988233
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.038998999999876105
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.01242900000033842
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.002695000000130676
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.006188999999722
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004787000000305852
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.004737000000204716
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.006830000000263681
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.002484000000094966
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005417999999735912
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.1376820000000407
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.9922139999998763
+            }
+          }
+        },
+        {
+          "totalMs": 4.467192000000068,
+          "resolveMs": 2.300126000000091,
+          "commitMs": 2.167065999999977,
+          "coldOpenMs": 10.980588999999782,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.20307499999989886
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.008262999999715248
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.005327999999735766
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.006208999999671505
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.003756000000066706
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0013819999999213906
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.015063000000282045
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0023830000000089058
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0022730000000592554
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0009610000001885055
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0626750000001266
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.033611000000291824
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.010224999999991269
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0030639999999948486
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.004858000000240281
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0033650000000307045
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.003945999999814376
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.005658000000039465
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0024330000001100416
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005126999999902182
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.989289000000099
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.9061839999999393
+            }
+          }
+        },
+        {
+          "totalMs": 4.845491000000038,
+          "resolveMs": 2.5689400000001115,
+          "commitMs": 2.2765509999999267,
+          "coldOpenMs": 11.861092000000099,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.25834800000029645
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.009864000000106898
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.007802000000083353
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.006619999999657011
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0048269999997501145
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.001641999999719701
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.018898000000262982
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.003044999999929132
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.001942999999755557
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001352000000224507
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.07220800000004601
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.03807700000015757
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.012038000000302418
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0028839999999945576
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0048180000003412715
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0038260000001173466
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.004347000000052503
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.00716099999999642
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0029850000000806176
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005748999999923399
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.2218179999999847
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 2.025652999999693
+            }
+          }
+        },
+        {
+          "totalMs": 5.7832599999997,
+          "resolveMs": 3.5567940000000817,
+          "commitMs": 2.2264659999996184,
+          "coldOpenMs": 11.312296999999944,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4496550000003481
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.01436199999989185
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.009062999999969179
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.008612999999968451
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.006871000000046479
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0024939999998423446
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.06460699999979624
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.005478000000039174
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.003925999999864871
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001772999999957392
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.10713099999975384
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.05644499999971231
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.01723600000013903
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004186000000117929
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.008953000000019529
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0054879999997865525
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.005788999999822408
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009473999999954685
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.003665999999611813
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00923400000010588
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.979106000000229
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 1.9650830000000497
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-seven callback Continue",
+      "inputSha256": "a7afb973fae7d828fc26fd88172427ad66d4f88995a2af8062afec0699dae7c6",
+      "inputBytes": 390356,
+      "checkpointBytes": {
+        "input": 29831,
+        "current": 35100,
+        "backup": 29831,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 12.938840999999684,
+        "resolveMs": 7.044934000000012,
+        "commitMs": 5.65023999999994,
+        "coldOpenMs": 13.431802000000062
+      },
+      "trials": [
+        {
+          "totalMs": 15.214269999999942,
+          "resolveMs": 8.878469999999652,
+          "commitMs": 6.33580000000029,
+          "coldOpenMs": 13.212322000000313,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.40063199999985954
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.011958000000049651
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.008321999999679974
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.00731099999984508
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.005268000000341999
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0018629999999575375
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.02341500000011365
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.003674999999930151
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0028339999998934218
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015129999997043342
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.2475520000002689
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.07960000000002765
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.014711999999690306
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0029540000000451982
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.006789999999909924
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004877000000305998
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.005038000000240572
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007340999999996711
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.003224999999929423
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.006190000000060536
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.677365000000009
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 6.014918000000307
+            }
+          }
+        },
+        {
+          "totalMs": 12.119990000000143,
+          "resolveMs": 7.044934000000012,
+          "commitMs": 5.0750560000001315,
+          "coldOpenMs": 24.44168499999978,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.29682499999989886
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.016154000000369706
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.009184000000004744
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.008933000000070024
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.005878999999822554
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0020629999999073334
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.02243399999997564
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0035549999997783743
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0028149999998277053
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0017430000002605084
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.25137800000038624
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.08658999999988737
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.015694000000166852
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.002945000000181608
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0068500000002131856
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004737000000204716
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.005197999999836611
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007521999999880791
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0031749999998282874
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0068800000003648165
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.413608999999724
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.768065000000206
+            }
+          }
+        },
+        {
+          "totalMs": 14.008527999999842,
+          "resolveMs": 8.358287999999902,
+          "commitMs": 5.65023999999994,
+          "coldOpenMs": 13.431802000000062,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.33726700000033816
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.011156999999911932
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.00938399999995454
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.008271999999578838
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.005467999999837048
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0018829999999070424
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.023815000000013242
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.00330500000018219
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.002664000000095257
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0012620000002243614
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.251046999999744
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.06936399999995047
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.015102999999726308
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.002993999999944208
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0062190000003283785
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004116000000067288
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.005278000000089378
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007841999999982363
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0029650000001311128
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005548000000089814
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 4.85481400000026
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.255215999999564
+            }
+          }
+        },
+        {
+          "totalMs": 11.459608000000117,
+          "resolveMs": 6.09074099999998,
+          "commitMs": 5.368867000000137,
+          "coldOpenMs": 19.716104000000087,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.22740199999998367
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.009223999999903754
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0069410000000971195
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.006930000000011205
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.003414999999677093
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0014219999998204003
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.017946999999821855
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0028640000000450527
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.002393000000211032
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0010910000000876607
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.21567400000003545
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.056885999999849446
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.012990000000172586
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0027749999999286956
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.005107999999836466
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.003424999999879219
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0048569999999017455
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.00720099999989543
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0028539999998429266
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00603899999987334
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.9750589999998738
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.02174500000001
+            }
+          }
+        },
+        {
+          "totalMs": 12.938840999999684,
+          "resolveMs": 6.753636999999799,
+          "commitMs": 6.185203999999885,
+          "coldOpenMs": 13.165903000000071,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.24390600000015183
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.010936000000128843
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0074709999998958665
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.02533800000037445
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.0038359999998647254
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0017019999995682156
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.021533000000090396
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0025229999996554398
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.002594000000044616
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015530000000580912
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.22062099999993734
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.06387600000016391
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.016244999999798893
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0027239999999437714
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.005949000000327942
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004557000000204425
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.004496000000017375
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007340999999996711
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.002915000000029977
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.006669999999758147
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.8161740000000464
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.855057000000215
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-30 routine",
+      "inputSha256": "5e521b93b9519904083a879692c47e68e2d68201278a6e1eb50282900f5c1563",
+      "inputBytes": 3522269,
+      "checkpointBytes": {
+        "input": 205197,
+        "current": 205405,
+        "backup": 205197,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 18.808740999999827,
+        "resolveMs": 13.113534000000072,
+        "commitMs": 5.82278899999983,
+        "coldOpenMs": 91.43059600000015
+      },
+      "trials": [
+        {
+          "totalMs": 15.709855000000061,
+          "resolveMs": 9.887066000000232,
+          "commitMs": 5.82278899999983,
+          "coldOpenMs": 84.57819199999994,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.9759570000005624
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.028171999999358377
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.01211799999964569
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.01059499999973923
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.1285330000000613
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.00311500000043452
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.08627900000010413
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.007219999999506399
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.020399999999426655
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015519999997195555
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.008031999999730033
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.00493700000060926
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008302000000185217
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0037460000003193272
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.008092000000033295
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.00588900000002468
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.006218999999873631
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009353999999802909
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0038359999998647254
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.010706000000027416
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.735576000000037
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.173033000000032
+            }
+          }
+        },
+        {
+          "totalMs": 38.974019999999655,
+          "resolveMs": 31.812769999999546,
+          "commitMs": 7.161250000000109,
+          "coldOpenMs": 173.93952200000058,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 20.52095299999928
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.028932999999597087
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.012418999999681546
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.014130999999906635
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.10757099999955244
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.003095000000030268
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0902459999997518
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0066299999998591375
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.020631000000321364
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002352999999857275
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.007800999999744818
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004146000000218919
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0077419999997800915
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004417000000103144
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.008383000000321772
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.006749999999556167
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.008172999999260355
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009103999999751977
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.004777000000103726
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008583000000726315
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 11.101631000000452
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 6.349269999999706
+            }
+          }
+        },
+        {
+          "totalMs": 18.808740999999827,
+          "resolveMs": 13.113534000000072,
+          "commitMs": 5.695206999999755,
+          "coldOpenMs": 110.47329900000022,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.2470940000002884
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.020731000000523636
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.011427999999796157
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.01086699999996199
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.12436699999943812
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0023639999999431893
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0844569999999294
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.006951000000299246
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.020911000000523927
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002102999999806343
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.008503000000018801
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004836999999497493
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.006398999999873922
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003335000000333821
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.007572000000436674
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.005298000000038883
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.006720999999743071
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009704999999485153
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.004076000000168278
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.009143999999650987
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 11.679818999999952
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.030187000000296
+            }
+          }
+        },
+        {
+          "totalMs": 24.46350700000039,
+          "resolveMs": 18.360407000000123,
+          "commitMs": 6.103100000000268,
+          "coldOpenMs": 78.39986800000042,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.4938320000001113
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.018216999999822292
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.009263999999348016
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.009203999999954249
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.09405100000003586
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.00273399999969115
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.03425199999946926
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.004125999999814667
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.016725000000406
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0017330000000583823
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.005788999999822408
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0035949999992226367
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.006008999999721709
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0033149999999295687
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.006529999999656866
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004887000000053376
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.00637899999946967
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007571000000098138
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0032849999997779378
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00844299999971554
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 17.713854999999967
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 5.421164999999746
+            }
+          }
+        },
+        {
+          "totalMs": 12.17016700000022,
+          "resolveMs": 6.793988999999783,
+          "commitMs": 5.376178000000436,
+          "coldOpenMs": 91.43059600000015,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.5232359999999971
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.017426000000341446
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.009293999999499647
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.009905000000799191
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.09638499999982741
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.002274000000397791
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.03533300000071904
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.004707000000053085
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.016735000000153377
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001592999999957101
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.005298000000038883
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0037359999996624538
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.005898999999772059
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0033149999999295687
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.006749999999556167
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.004536999999800173
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.006239000000277883
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.007542000000285043
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0035449999995762482
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008141999999679683
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 6.1233710000005885
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 4.6490960000001
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Age-60 routine",
+      "inputSha256": "0b682577b0f64c3744582f0ecf949f84ec98503abf013d5a384759134fd3c608",
+      "inputBytes": 11326503,
+      "checkpointBytes": {
+        "input": 673127,
+        "current": 673327,
+        "backup": 673127,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 36154,
+      "medianMs": {
+        "totalMs": 59.96772999999848,
+        "resolveMs": 44.56159200000002,
+        "commitMs": 15.406137999998464,
+        "coldOpenMs": 362.7774680000002
+      },
+      "trials": [
+        {
+          "totalMs": 56.82179199999882,
+          "resolveMs": 35.49339499999951,
+          "commitMs": 21.328396999999313,
+          "coldOpenMs": 271.23679900000025,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.7849439999990864
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.028012000000671833
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.012097999999241438
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.011507999999594176
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 3.1126769999991666
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007221000001663924
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0628340000002936
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008612999999968451
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.027041000001190696
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001872999999250169
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.010446000000229105
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004666999999244581
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.007281000000148197
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0052569999988918426
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.012538999999378575
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0059290000008331845
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.008171999999831314
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009905000000799191
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.004347000000052503
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.012738999999783118
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 32.53342699999848
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 18.96618699999999
+            }
+          }
+        },
+        {
+          "totalMs": 64.75157199999921,
+          "resolveMs": 47.459108999999444,
+          "commitMs": 17.29246299999977,
+          "coldOpenMs": 401.2403970000014,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 4.527914000000237
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.041031000000657514
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.012688999999227235
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.016144000001077075
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 3.0106739999991987
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.00858199999856879
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04993500000091444
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.010134999998626881
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.04370600000038394
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0021130000004632166
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00934400000005553
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004557000000204425
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008512999998856685
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.00466700000106357
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.011376999998901738
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.007510999999794876
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.00839300000006915
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.010105000001203734
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.005076999999801046
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0075010000000474975
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 42.66938200000004
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 15.535323000000062
+            }
+          }
+        },
+        {
+          "totalMs": 59.96772999999848,
+          "resolveMs": 44.56159200000002,
+          "commitMs": 15.406137999998464,
+          "coldOpenMs": 371.4753240000009,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 3.1658879999995406
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.0378870000004099
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.011126000001240755
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.013660000000527361
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 2.5887689999999566
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.008421999998972751
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.05160699999942153
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.010546000001340872
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02528800000072806
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002383999999437947
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.009253999998691143
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004156999999395339
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.010345000000597793
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004486000001634238
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.011307000000670087
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0076819999994768295
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.05629399999997986
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.015542999999524909
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0066299999998591375
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0083520000007411
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 41.17247900000075
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 13.769189000000551
+            }
+          }
+        },
+        {
+          "totalMs": 60.824752000000444,
+          "resolveMs": 45.42642500000147,
+          "commitMs": 15.398326999998972,
+          "coldOpenMs": 348.76073499999984,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.5539370000005874
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.033329999998386484
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.01180700000077195
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.01249899999857007
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 2.6455349999996542
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0072309999995923135
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.051927999998952146
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.009855000000243308
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02628000000004249
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002473999998983345
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.009715000000142027
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.00360499999987951
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008401999999477994
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004687000000558328
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.0111269999997603
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.006699999999909778
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.007371000001512584
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009884999999485444
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.004566999999951804
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.011688000000503962
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 42.678955999999744
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 13.737111000000368
+            }
+          }
+        },
+        {
+          "totalMs": 57.358313000000635,
+          "resolveMs": 42.86728000000039,
+          "commitMs": 14.491033000000243,
+          "coldOpenMs": 362.7774680000002,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.406344999999419
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.033830000000307336
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.010275000000547152
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.011035999999876367
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 2.428239000000758
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0068799999990005745
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.050827000000936096
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.03931900000134192
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02557899999919755
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0025340000011055963
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00824300000022049
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.005127999998876476
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.009555000000545988
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.005127999998876476
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.011237000000619446
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0064199999997072155
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.008111999999528052
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009052999999767053
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.00561799999923096
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00832300000001851
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 40.32449999999881
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 12.988134999999602
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "100-known-contact routine",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "7c07f0f9575e50d35c252c634e9551bfa49c438a761aa81014de15c9c35f4129",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 107,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "inputBytes": 3798573,
+      "checkpointBytes": {
+        "input": 236106,
+        "current": 236286,
+        "backup": 236106,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 25.85273899999811,
+        "resolveMs": 14.415694999999687,
+        "commitMs": 10.205363999999463,
+        "coldOpenMs": 93.40598600000158
+      },
+      "trials": [
+        {
+          "totalMs": 19.94381599999906,
+          "resolveMs": 11.01758399999926,
+          "commitMs": 8.9262319999998,
+          "coldOpenMs": 91.12337599999955,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.2050209999997605
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.11356100000011793
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.05313000000023749
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03871800000160874
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.10165299999971467
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0027050000007875497
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.1120279999995546
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.005898999999772059
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.021392000000560074
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001922999999806052
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.006350000001475564
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.003705999999510823
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.005919000001085806
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0030239999996410916
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.027570999998715706
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.006108999999923981
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.01617399999850022
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008683000000019092
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007281000000148197
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008832999999867752
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.693685000000187
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 8.016284999999698
+            }
+          }
+        },
+        {
+          "totalMs": 25.85888899999918,
+          "resolveMs": 15.653524999999718,
+          "commitMs": 10.205363999999463,
+          "coldOpenMs": 91.57200499999999,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 0.9833780000008119
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.37950000000091677
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0763649999989866
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.05527299999994284
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.13116699999955017
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007030000000668224
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.07044599999971979
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0064199999997072155
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02594899999894551
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0019019999999727588
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.007271000000400818
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004166000000623171
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.0061600000008184
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003725000000486034
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.05050599999958649
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.006089000000429223
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.019860000000335276
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.00999500000034459
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007421000000249478
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.009363999999550288
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 14.557156999999279
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 9.487465000000157
+            }
+          }
+        },
+        {
+          "totalMs": 24.1780179999987,
+          "resolveMs": 14.391273000001092,
+          "commitMs": 9.786744999997609,
+          "coldOpenMs": 95.13314600000012,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.5528329999979178
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.04046099999686703
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.06360599999970873
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03053600000203005
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.21670499999891035
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0038660000027448405
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.05070699999851058
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.006470000000263099
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.022923999997146893
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015619999976479448
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.007170999997470062
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0038260000001173466
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.006140000001323642
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0034550000018498395
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.027210000000195578
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.005057000002125278
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.016274000001430977
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009384000000864035
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007170999997470062
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008272999999462627
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 12.711900999998761
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 9.073232999999163
+            }
+          }
+        },
+        {
+          "totalMs": 30.731179999998858,
+          "resolveMs": 15.504256000000169,
+          "commitMs": 15.22692399999869,
+          "coldOpenMs": 115.17845999999918,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.5638299999991432
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.040951000002678484
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.060149999997520354
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03045600000041304
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.11093600000094739
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0034950000008393545
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.046890999998140614
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.006901000000652857
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.021903000000747852
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0021730000007664785
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.006921000000147615
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.003816000000369968
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.005898999999772059
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0034950000008393545
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.024116000000503846
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.00581899999815505
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.015733000000182074
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008722999999008607
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0072309999995923135
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008772999997745501
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 13.807828000000882
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 14.289746000002197
+            }
+          }
+        },
+        {
+          "totalMs": 25.85273899999811,
+          "resolveMs": 14.415694999999687,
+          "commitMs": 11.437043999998423,
+          "coldOpenMs": 93.40598600000158,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.6595540000016626
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.04090200000064215
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.0625240000008489
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.0855489999994461
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.11004500000126427
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0034550000018498395
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.06369600000107312
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0054679999993823
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.024326999999175314
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015820000007806811
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.007100000002537854
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.003744999998161802
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.005568000000494067
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003365000000485452
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.02351500000077067
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.005357999998523155
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.012628000000404427
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009443999999348307
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007821999999578111
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00926400000025751
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 12.629702000001998
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 10.548929999997199
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "100-known-contact first Age Up step",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "37e6ce405e0d2e030f6d95981f647bf7242aa7c10db70f888ec4ef97b3aca3f8",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 109,
+        "ledgerRows": 12662,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "inputBytes": 3798573,
+      "checkpointBytes": {
+        "input": 236106,
+        "current": 256173,
+        "backup": 236106,
+        "beforeAgeUp": 236106,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 62.81614400000035,
+        "resolveMs": 45.67168400000082,
+        "commitMs": 17.589568999999756,
+        "coldOpenMs": 99.23318199999994
+      },
+      "trials": [
+        {
+          "totalMs": 70.35647400000016,
+          "resolveMs": 52.766905000000406,
+          "commitMs": 17.589568999999756,
+          "coldOpenMs": 100.5630600000004,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.0572309999988647
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.042022999998152955
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.056454999998095445
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03536299999905168
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.1615219999985129
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0026340000003983732
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04086099999767612
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0062800000014249235
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.021242000002530403
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0018930000005639158
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00820200000089244
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0033849999999802094
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008562999999412568
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003205000000889413
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.02567800000178977
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0057679999990796205
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.01561299999957555
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008513000000675675
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007441000001563225
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.0075620000025082845
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 17.892994999998336
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 16.303176000001258
+            }
+          }
+        },
+        {
+          "totalMs": 144.23518499999773,
+          "resolveMs": 124.59512499999983,
+          "commitMs": 19.640059999997902,
+          "coldOpenMs": 99.09817900000053,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.1843619999999646
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.057957000000897096
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.06315399999948568
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.038468000002467306
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.357467000001634
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.005477999999129679
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.12598000000070897
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.01056599999719765
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.028422999999747844
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002413999998680083
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.008794000001216773
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004125999999814667
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.013840999999956694
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003895999998348998
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.03287899999850197
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.006670999999187188
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.0178169999999227
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.010266000001138309
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.008832999999867752
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.005938999998761574
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 68.44304300000294
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 18.19626100000096
+            }
+          }
+        },
+        {
+          "totalMs": 52.92383500000142,
+          "resolveMs": 33.89398700000311,
+          "commitMs": 19.02984799999831,
+          "coldOpenMs": 99.23318199999994,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.2162669999997888
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.04633999999714433
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.059980000001814915
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.036274000001867535
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.15269899999839254
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0036150000014458783
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.051778000000922475
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008933000000979519
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02362600000196835
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.00166200000239769
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.007441000001563225
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0034550000018498395
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.015593000000080792
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004726999999547843
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.09411199999885866
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.0062090000028547365
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.018818000000464963
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009664999997767154
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.006919999999809079
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.007942000000184635
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 16.694695000001957
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 17.679328000001988
+            }
+          }
+        },
+        {
+          "totalMs": 44.79721900000004,
+          "resolveMs": 29.37411499999871,
+          "commitMs": 15.42310400000133,
+          "coldOpenMs": 103.79999400000088,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 1.4034590000010212
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.04230400000233203
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.060471000000688946
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03826699999990524
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.5005319999982021
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.005248000001301989
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.05357000000003609
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.006720000001223525
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.023154999998951098
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0016830000022309832
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.006870000001072185
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.003103999999439111
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.010306000000127824
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.002935000000434229
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.029204000002209796
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.00573900000017602
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.016975999998976476
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.010365999998612097
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.007862000002205605
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008192000001145061
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 16.321564000001672
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 14.250253000001976
+            }
+          }
+        },
+        {
+          "totalMs": 62.81614400000035,
+          "resolveMs": 45.67168400000082,
+          "commitMs": 17.144459999999526,
+          "coldOpenMs": 98.49613999999929,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 2.0302909999991243
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.04221300000062911
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.05887799999982235
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.03839700000025914
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.13662500000282307
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0036449999970500357
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0404099999977916
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.0061789999999746215
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.0720080000028247
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001502999999502208
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.006600000000617001
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0026340000003983732
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.00927400000000489
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0037259999990055803
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.025959000002330868
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.005587999999988824
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.015192999999271706
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.008832999999867752
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.00817300000198884
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.007291000001714565
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 16.386711999999534
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 15.988572999998723
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "1000-known-contact routine",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "be15d8ad350a2cc4f7c7e1aef538e66eceaf951cf364307f362474fc877a541f",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1007,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "inputBytes": 6514033,
+      "checkpointBytes": {
+        "input": 515427,
+        "current": 515635,
+        "backup": 515427,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 112.16978199999721,
+        "resolveMs": 62.086788999997225,
+        "commitMs": 50.08299299999999,
+        "coldOpenMs": 197.901087000002
+      },
+      "trials": [
+        {
+          "totalMs": 112.16978199999721,
+          "resolveMs": 62.086788999997225,
+          "commitMs": 50.08299299999999,
+          "coldOpenMs": 180.09507699999813,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.292550000001938
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.42637099999774364
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.37924000000202795
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.3716789999998582
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.9444489999987127
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0040259999987029005
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04712099999960628
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.009004000003187684
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02228300000206218
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0012319999987084884
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00885299999936251
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004566999999951804
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.006399000001692912
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003484999997453997
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.22440700000151992
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.008262999999715248
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.08243399999992107
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009894999999232823
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.041291999998065876
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.011608000000705943
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 53.66772800000035
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 48.701726999999664
+            }
+          }
+        },
+        {
+          "totalMs": 111.40908299999865,
+          "resolveMs": 68.13440099999934,
+          "commitMs": 43.2746819999993,
+          "coldOpenMs": 254.82592999999906,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.662105000003066
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.445439000002807
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.5346229999995558
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.3539420000015525
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.6562459999986459
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007762000001093838
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04983499999798369
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008522000000084518
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.025067000002309214
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002343000000109896
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.008483000001433538
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0031950000011420343
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008753000001888722
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0041359999995620456
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.2174570000024687
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.009244000000762753
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.11820799999986775
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.010286000000633067
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.04527800000141724
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.008123000003251946
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 59.21408700000029
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 42.07305700000143
+            }
+          }
+        },
+        {
+          "totalMs": 115.45858299999963,
+          "resolveMs": 61.625845999999,
+          "commitMs": 53.832737000000634,
+          "coldOpenMs": 201.8564800000022,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.639623999999458
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.48562999999921885
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.4271919999991951
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.40805299999919953
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.6422250000032363
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007942000000184635
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.04807300000175019
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.007892000001447741
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.029884999999922
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0020130000011704396
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.010265000000799773
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.005337999999028398
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.007610999997268664
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003435999999055639
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.25420200000007753
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.009523999997327337
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.09011499999905936
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009534000000712695
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0905460000030871
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.015212999998766463
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 51.86230599999908
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 52.150839999998425
+            }
+          }
+        },
+        {
+          "totalMs": 117.6138409999985,
+          "resolveMs": 69.12132799999745,
+          "commitMs": 48.492513000001054,
+          "coldOpenMs": 197.901087000002,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.284687999999733
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.4657699999988836
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.44649999999819556
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.5089049999987765
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.6924609999987297
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.010154999999940628
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.051057000000582775
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008832999999867752
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.02555900000152178
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0019929999980377033
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.009684999997261912
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004697000000305707
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008022000001801644
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0038650000024063047
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.26432699999713805
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.011247000002185814
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.10670100000061211
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.011207000003196299
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.02034099999946193
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.014621999998780666
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 60.70934900000066
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 47.24223399999755
+            }
+          }
+        },
+        {
+          "totalMs": 108.78051799999957,
+          "resolveMs": 56.862788999998884,
+          "commitMs": 51.91772900000069,
+          "coldOpenMs": 182.72962600000028,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.631827000001067
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.4166960000002291
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.38442700000086916
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.3196600000010221
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.9619550000024901
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007009999997535488
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.061052000000927364
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008513000000675675
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.028722999999445165
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.001883000000816537
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00805200000104378
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004387000000861008
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.00718100000085542
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.0032250000003841706
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.3009520000014163
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.009074000001419336
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.11529300000256626
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.011858000001666369
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.022304000001895474
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.012858999998570653
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 49.10732700000153
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 50.531105999998545
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "1000-known-contact first Age Up step",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "24ce54025fc51f41845ee13c0549415abcf0c6b2912e563162294c59fd3a0f4a",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1018,
+        "ledgerRows": 15234,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "inputBytes": 6514033,
+      "checkpointBytes": {
+        "input": 515427,
+        "current": 621971,
+        "backup": 515427,
+        "beforeAgeUp": 515427,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 462.9874869999985,
+        "resolveMs": 356.934154999999,
+        "commitMs": 114.44999900000039,
+        "coldOpenMs": 194.11650000000373
+      },
+      "trials": [
+        {
+          "totalMs": 486.45210900000166,
+          "resolveMs": 374.74884799999927,
+          "commitMs": 111.70326100000239,
+          "coldOpenMs": 189.20816800000102,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.858272000001307
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.32128300000113086
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.32165299999905983
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.2607010000028822
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.3414230000016687
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.004906999998638639
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0258590000012191
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.008161999998264946
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.021452000000863336
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002122999998391606
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.00733100000070408
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.003885999998601619
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.008363000000827014
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.004237000001012348
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.22689099999843165
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.00842200000261073
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.07694500000070548
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.009955000001355074
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.020741000000271015
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.00991499999872758
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 48.420265000000654
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 109.7942120000007
+            }
+          }
+        },
+        {
+          "totalMs": 462.9874869999985,
+          "resolveMs": 356.934154999999,
+          "commitMs": 106.0533319999995,
+          "coldOpenMs": 168.05404199999975,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 7.306358000001637
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.33145800000056624
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.3243980000006559
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.2919979999969655
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.33235899999999674
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.005748999999923399
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.02774200000203564
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.007680999999138294
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.024907999999413732
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0015730000013718382
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.006869999997434206
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.0031149999995250255
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.00813199999902281
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003936000000976492
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.23456199999782257
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.008593000002292683
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.07738600000084261
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.010515999998460757
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.021462000000610715
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.009945000001607696
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 54.875184000000445
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 104.1837830000004
+            }
+          }
+        },
+        {
+          "totalMs": 433.81755300000077,
+          "resolveMs": 319.3675540000004,
+          "commitMs": 114.44999900000039,
+          "coldOpenMs": 257.5229889999973,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.226934999998775
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.5680540000030305
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.45797899999888614
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.3996609999994689
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.7884540000013658
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.007852000002458226
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.06874299999981304
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.010686000001442153
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.03925899999740068
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.0026240000006509945
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.010505999998713378
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004646999997930834
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.016204999999899883
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.016644999999698484
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.3661099999990256
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.013259999999718275
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.12698099999761325
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.0152429999980086
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.0422340000004624
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.010475999999471242
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 66.37375999999858
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 112.57356999999683
+            }
+          }
+        },
+        {
+          "totalMs": 443.2839410000015,
+          "resolveMs": 325.1091180000003,
+          "commitMs": 118.1748230000012,
+          "coldOpenMs": 196.85576299999957,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 9.078862000002118
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.48769199999514967
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.47516400000313297
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.38113300000259187
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 0.8980789999986882
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.0069700000021839514
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.055443000004743226
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.009062999997695442
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.024997000000439584
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.00166200000239769
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.008011999998416286
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.004166000006080139
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.009643999997933861
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.003735999998752959
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.26877300000342075
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.008042000001296401
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.09287900000344962
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.01114600000437349
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.022332999993523117
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.01200799999787705
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 57.54139900000155
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 116.39829499999905
+            }
+          }
+        },
+        {
+          "totalMs": 515.7423980000021,
+          "resolveMs": 363.942200999998,
+          "commitMs": 151.80019700000412,
+          "coldOpenMs": 194.11650000000373,
+          "phases": {
+            "copyWorld": {
+              "calls": 1,
+              "inclusiveMs": 8.194932000005792
+            },
+            "validateLegal": {
+              "calls": 1,
+              "inclusiveMs": 0.5372370000040974
+            },
+            "validateSocial": {
+              "calls": 1,
+              "inclusiveMs": 0.5330410000024131
+            },
+            "validateBusinesses": {
+              "calls": 1,
+              "inclusiveMs": 0.4503970000005211
+            },
+            "validateEarnings": {
+              "calls": 1,
+              "inclusiveMs": 1.099421999999322
+            },
+            "validateTravel": {
+              "calls": 1,
+              "inclusiveMs": 0.008312999998452142
+            },
+            "validateSchools": {
+              "calls": 1,
+              "inclusiveMs": 0.0615029999971739
+            },
+            "validateWorkplaces": {
+              "calls": 1,
+              "inclusiveMs": 0.00890399999479996
+            },
+            "validateEducationRecovery": {
+              "calls": 1,
+              "inclusiveMs": 0.033389999996870756
+            },
+            "validateScholarships": {
+              "calls": 1,
+              "inclusiveMs": 0.002043000000412576
+            },
+            "validatePets": {
+              "calls": 1,
+              "inclusiveMs": 0.0109260000026552
+            },
+            "validateLeisure": {
+              "calls": 1,
+              "inclusiveMs": 0.005727999996452127
+            },
+            "validateStoryThreads": {
+              "calls": 1,
+              "inclusiveMs": 0.012488000000303145
+            },
+            "validateRelocations": {
+              "calls": 1,
+              "inclusiveMs": 0.005757999999332242
+            },
+            "validateCareers": {
+              "calls": 1,
+              "inclusiveMs": 0.2727200000008452
+            },
+            "validateMusic": {
+              "calls": 1,
+              "inclusiveMs": 0.008513000000675675
+            },
+            "validatePolitics": {
+              "calls": 1,
+              "inclusiveMs": 0.3081830000010086
+            },
+            "validateCreators": {
+              "calls": 1,
+              "inclusiveMs": 0.01808799999707844
+            },
+            "validateServices": {
+              "calls": 1,
+              "inclusiveMs": 0.10347600000386592
+            },
+            "validateRoyalty": {
+              "calls": 1,
+              "inclusiveMs": 0.01962999999523163
+            },
+            "validateWorld": {
+              "calls": 1,
+              "inclusiveMs": 71.90352900000289
+            },
+            "packCheckpoint": {
+              "calls": 1,
+              "inclusiveMs": 149.43734699999914
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

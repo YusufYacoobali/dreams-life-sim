@@ -15,6 +15,40 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+[People-block checkpoints](PEOPLE_CHECKPOINT_BLOCKS.md) now reuse exact unchanged
+people blocks instead of compressing every person on each save. The bounded cache
+keeps at most64entries/8MiB estimated string weight plus bounded object overhead.
+Read-only previews leave the active people's cache intact. Full world validation,
+atomic save-before-publish and all old current/backup/history bytes remain intact.
+Database reader7 protects new v3 frames; world30/engine29/content6 are unchanged.
+
+All **1,409 tests / 102 suites** pass in **825.637 seconds**, strict application/test types and both fresh Hermes exports. The first full run found only a stale test expecting DB6; that assertion
+was corrected to7, with no runtime edit, and the complete suite rerun cleanly.
+Game source is unchanged from the current120-seed gate; it was not rerun or added
+to the distinct seed count. [Source/checks](verification/people-blocks-20261020.json),
+[complete regression](verification/regression-people-blocks-20261020.txt).
+
+Serial fixed-driver cloud comparison against e8a9097 retains all11input hashes,
+all four complete stress outcomes,55warm samples per source without full decode,
+exact cold current/backup and original Before Age Up payloads. The1000-contact
+routine median changes178.00→112.17ms; its twelve-month
+Age Up step459.85→462.99ms. Payload sizes are
+recorded, including compression overhead. Five-sample host/GC-sensitive cloud
+medians are not physical p95; generated contacts are not a natural/native life.
+[Raw comparison](verification/population-people-blocks-comparison-20261020.json).
+
+Actual Android reader6→7 leaves all eight tables exact, with old v2 current bytes
+retained until a real routine save. Result80 writes v3 while keeping original
+v2 backup79 and all14ledger blocks exact; cold80 retains all eight tables.
+Acknowledgement81 matches the whole expected world, keeps people/ledger blocks
+and original v3 backup80 exact. All four inactive lives/backups,36moments/metadata
+and67old receipts stay exact. Current native: Amahle age20/revision81, five lives/
+36moments/69receipts, no pending/year; Riley53/branch38 untouched.
+[Four captures and exact native proof](verification/android24-people-blocks-20261020/).
+
+Completion remains about50%, with110/250situations and140remaining.
+Earlier checkpoints below retain their original scope.
+
 Actual named result76 and all20original moments are now protected with their
 unmodified74be9e4 producer. Two preservation/SQLite checks and strict types pass;
 no runtime or player-file-feature change. [Archive provenance](verification/native-workplace-story-archive-v30-20261020.json).

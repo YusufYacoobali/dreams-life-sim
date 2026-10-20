@@ -18,54 +18,49 @@ previous-life summaries are complete. Full production remains approximately
 
 ## Current performance checkpoint
 
-Certified worlds now make isolated mutable working copies directly, avoiding a
-second schema parse before each command. Every result still passes complete
-shape/integrity validation. A local per-person work-history index removes repeated
-whole-history scans without dropping any checks. Schema30/engine29/content6/DB6,
-game outcomes and all original fixtures remain unchanged.
+[People-block checkpoints](PEOPLE_CHECKPOINT_BLOCKS.md) now reuse exact unchanged
+people blocks instead of compressing every person on each save. The bounded cache
+keeps at most64entries/8MiB estimated string weight plus bounded object overhead.
+Read-only previews leave the active people's cache intact. Full world validation,
+atomic save-before-publish and all old current/backup/history bytes remain intact.
+Database reader7 protects new v3 frames; world30/engine29/content6 are unchanged.
 
-All **1,385 tests / 100 suites** pass in **884.642 seconds**, strict app/test types
-and both fresh Hermes exports. All **120 immutable lifetimes** pass in **742.785
-seconds**, with every complete terminal world exactly equal to74be9e4. These are
-the same seeds, not additional distinct cases. All gate processes have closed.
-[Source/checks](verification/model-copy-20261020.json),
-[complete regression](verification/regression-model-copy-20261020.txt),
-[lifetime proof](verification/life-sweep-model-copy-120-20261020.json).
+All **1,409 tests / 102 suites** pass in **825.637 seconds**, strict application/test types and both fresh Hermes exports. The first full run found only a stale test expecting DB6; that assertion
+was corrected to7, with no runtime edit, and the complete suite rerun cleanly.
+Game source is unchanged from the current120-seed gate; it was not rerun or added
+to the distinct seed count. [Source/checks](verification/people-blocks-20261020.json),
+[complete regression](verification/regression-people-blocks-20261020.txt).
+
+Serial fixed-driver cloud comparison against e8a9097 retains all11input hashes,
+all four complete stress outcomes,55warm samples per source without full decode,
+exact cold current/backup and original Before Age Up payloads. The1000-contact
+routine median changes178.00→112.17ms; its twelve-month
+Age Up step459.85→462.99ms. Payload sizes are
+recorded, including compression overhead. Five-sample host/GC-sensitive cloud
+medians are not physical p95; generated contacts are not a natural/native life.
+[Raw comparison](verification/population-people-blocks-comparison-20261020.json).
+
+Actual Android reader6→7 leaves all eight tables exact, with old v2 current bytes
+retained until a real routine save. Result80 writes v3 while keeping original
+v2 backup79 and all14ledger blocks exact; cold80 retains all eight tables.
+Acknowledgement81 matches the whole expected world, keeps people/ledger blocks
+and original v3 backup80 exact. All four inactive lives/backups,36moments/metadata
+and67old receipts stay exact. Current native: Amahle age20/revision81, five lives/
+36moments/69receipts, no pending/year; Riley53/branch38 untouched.
+[Four captures and exact native proof](verification/android24-people-blocks-20261020/).
 
 Game hash: `287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d`.
 Combined game/persistence:
-`0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c`.
+`4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111`.
+Earlier certified-copy evidence remains in [LARGE_SAVE_RESPONSIVENESS.md](LARGE_SAVE_RESPONSIVENESS.md)
+and [model-copy-20261020.json](verification/model-copy-20261020.json).
 
-The fixed diagnostic driver now creates100/1000 actual known contacts through
-normal domain creation, from the genuine age30 input. The1000-contact case has
-1007people and eight initial monthly financial actors. This generated-at-once
-cloud stress setup is not a natural/native/multigeneration journey. Same inputs
-and whole outcomes match across the old/new implementation;55warm samples per
-source avoid full checkpoint decode and every cold current/backup is exact.
-Before Age Up snapshots retain original current bytes. In this five-sample cloud
-comparison,1000-contact routine median261.05→165.65ms; the observed twelve-month
-Age Up step601.75→489.69ms. Host load/GC affect timings; no physical p95 claim.
-[Method and remaining cost](LARGE_SAVE_RESPONSIVENESS.md),
-[raw comparison](verification/population-model-copy-comparison-20261020.json).
-
-Current native is Amahle **age20/revision79**, five lives/36moments/67receipts,
-no pending/year. Routine78 and acknowledgement79 match whole expected worlds;
-original four inactive worlds/backups,36moments/metadata and65old receipts remain
-exact. Initial cold/browsing/draft keep all eight tables exact. Confirmed78 taken
-after force-stop/before Continue stays exact through cold Continue. The native
-record explicitly discards an earlier premature77 capture; it is not a pre-stop78
-snapshot. [Four captures and exact scope](verification/android24-model-copy-20261020/).
-
-Actual named result76 is now preserved with isolated unmodified pushed74be9e4:
+Actual named result76 remains pinned to isolated unmodified pushed74be9e4:
 `v30-native-workplace-story-archive.json`,21worlds/20original moments, including
 all18earlier raise moments. Bytes1,024,130; SHA
 `3774db894776ba92c4c6ef6b4c10678a4125c53a0ea5ec4044189701fe75e1f1`.
-Two preservation/SQLite failure-retry-cold checks pass in16.612s, strict types.
-Runtime/full1385baseline remain e8a9097; do not compose a new full count.
-[Producer and checks](verification/native-workplace-story-archive-v30-20261020.json).
-Never regenerate that fixture with newer source. Next reduce remaining packing
-cost while preserving all old frames/history and complete validation. Keep the
-benchmark driver fixed for matched comparisons; do not rerun unchanged full gates.
+Its two preservation checks are included in the current full1,409-test run.
+Never regenerate genuine fixtures with newer source. [Producer provenance](verification/native-workplace-story-archive-v30-20261020.json).
 
 ## Earlier workplace-content milestone
 
@@ -139,7 +134,9 @@ Environment (recheck if missing):
   `__UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo EXPO_OFFLINE=1 CI=1`.
 - Native DB `/data/user/0/host.exp.exponent/files/SQLite/dreams.db` plus WAL.
   Only copy for read-only verification; never edit native save data.
-- Current `/tmp/dreams-model-copy-final-db`79; confirmed routine result78 is
+- Current `/tmp/dreams-people-blocks-final-db`81; routine80/cold80 are
+  `/tmp/dreams-people-blocks-result-db` and `-result-cold-db`. Earlier
+  `/tmp/dreams-model-copy-final-db`79; confirmed routine result78 is
   `/tmp/dreams-model-copy-confirmed-result-db`. Earlier:
   `/tmp/dreams-workplace-content6-final-db`77, `-result-db`76,
   `-decision-db`75, `-before-db`74. Earlier `/tmp/dreams-journal-final-db`74
@@ -177,8 +174,9 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, reduce remaining save-packing cost; the genuine named result76 is now
-preserved with its original74be9e4 producer. Keep the diagnostic setup explicit;
+Next, continue early-game usability, broader adult content and the full plan.
+The genuine named result76 remains protected by its original74be9e4 producer.
+Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration
 acceptance. Correct any measured bottleneck, and continue broader adult stories,
 interviews, real hours/hourly pay, work conflicts and career depth. Multi-person

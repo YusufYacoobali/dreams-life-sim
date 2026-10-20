@@ -1,0 +1,202 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T09:14:33.608Z",
+  "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+  "combinedGamePersistenceSourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "baseCommit": "ad658c7",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 7,
+    "checkpoint": 3
+  },
+  "unchangedGame120SeedRecord": "life-sweep-model-copy-120-20261020.json",
+  "scope": "Actual native existing79 with reader6 baseline, reader7 reload/cold old-v2/current/backup/history retention, walking draft, real v3 save80, interrupted-result cold resume and acknowledgement81",
+  "reader6BaselineVsReader7All8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "7ddf930a3e50f659452f69feba7817f357feaf1b20ca1011d0332578584d890e"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "ed0035b4bd9b9ef26890911df9115e60a030f641ac96effc24f5379a65afa783"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 67,
+      "sha256": "e5415bf75c3027645e07b7ddc3ef82f800e4a2c449fc2f62d4ca4088c4c951e1"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "readerUpgradeTiming": "The reader6 baseline was captured before the codec edit; reader7 had already been applied by the app reload before the controlled cold restart. No native SQL/version/world edits were made.",
+  "reader7ColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "7ddf930a3e50f659452f69feba7817f357feaf1b20ca1011d0332578584d890e"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "ed0035b4bd9b9ef26890911df9115e60a030f641ac96effc24f5379a65afa783"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 67,
+      "sha256": "e5415bf75c3027645e07b7ddc3ef82f800e4a2c449fc2f62d4ca4088c4c951e1"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "browsingWalkingDraftAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "7ddf930a3e50f659452f69feba7817f357feaf1b20ca1011d0332578584d890e"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "ed0035b4bd9b9ef26890911df9115e60a030f641ac96effc24f5379a65afa783"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 67,
+      "sha256": "e5415bf75c3027645e07b7ddc3ef82f800e4a2c449fc2f62d4ca4088c4c951e1"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "command": {
+    "type": "health-routine",
+    "routine": {
+      "exercise": "walking",
+      "diet": "balanced",
+      "sleep": "regular",
+      "mindfulness": false,
+      "smoking": false,
+      "drinking": "none"
+    }
+  },
+  "result80EntireWorldExact": true,
+  "newFrame": {
+    "format": "dreams-checkpoint-v3",
+    "peopleBlocks": 1,
+    "ledgerBlocks": 14
+  },
+  "firstBackup79OriginalV2PayloadByteExact": true,
+  "result80ColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "006d32cd1fd2c52a4efb9965d1d66e0f37c86058aa4b4526e98edc1717ad331b"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "d02af4eb09b2178b59b1ef8c779d16230b7963e344ed6201c4ad6c4896bce29b"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 68,
+      "sha256": "e94ad560616f52688b0a9962209f0ce9eb00941f89a493d12e6d43b00f0dd514"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "ack81EntireWorldExact": true,
+  "ackBackup80OriginalV3PayloadByteExact": true,
+  "all14OriginalLedgerBlocksByteExactThrough81": true,
+  "allPeopleBlocksByteExactAcrossColdAck": true,
+  "noImmediateMoneyStatOrRngReward": true,
+  "onlySelectedRoutineChangesBeforeFutureMonths": true,
+  "old4WorldsBackups36MomentsMetadata67ReceiptsExact": true,
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 69,
+    "restore_receipts": 1,
+    "snapshot_metadata": 36,
+    "snapshots": 36
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 81,
+  "finalAge": 20,
+  "payloadBytes": {
+    "oldV2": 125857,
+    "resultV3": 126260,
+    "finalV3": 126064
+  },
+  "worldHashes": {
+    "79": "c5006b2003ad98d3bcd476ae9c5e3d56aad8a8401fbd75ba594ab55ab51e88fa",
+    "80": "dc7d9219f350555c252a8f70b73e71613c3b0c7ca32d3895ae1fd2cf386bc2a4",
+    "81": "3a99cbd22cad16ce3e0d842d42f6a56ff5306422952d01f5a37c6f5fcadb4b9f"
+  },
+  "limits": "Software Android24/ExpoGo, not physical p95 or native1000contacts,standalone/iOS or full release acceptance. Atomic reader-upgrade failure/retry and malformed/cache-poisoning cases have separate real-SQLite/unit checks. Original historical payloads are not rewritten."
+}

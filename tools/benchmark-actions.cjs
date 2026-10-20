@@ -146,7 +146,7 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
 (async () => {
   const results = [];
   for (const item of cases) {
-    let outcome;
+    let outcome, checkpointBytes;
     const trials = [], input = model.encodeWorld(item.world), oldPayload = legacyRows ? legacyPayload(input) : null;
     // One warm-up followed by five samples, each starting at the same actual world.
     for (let trial = 0; trial < 6; trial++) {
@@ -155,12 +155,16 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
       if (oldPayload) for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(oldPayload);
       const opening = performance.now(), world = await repo.load(item.world.id), coldOpenMs = performance.now() - opening;
       const keepSnapshot = item.command?.type === 'advance';
-      const priorPayload = keepSnapshot ? sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id).payload : null;
+      const priorPayload = sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id).payload;
       phases = {}; const start = performance.now();
       const next = item.command ? resolveCommand(world, item.command, true) : { ...world, revision: world.revision + 1, birthAcknowledged: true };
       const resolved = performance.now();
       const committed = await repo.commit(next, world.revision, 'benchmark:' + world.revision, keepSnapshot);
       const finished = performance.now(), measured = phases; phases = null;
+      const stored = sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id).payload;
+      const sizes = { input: Buffer.byteLength(priorPayload), current: Buffer.byteLength(stored), backup: Buffer.byteLength(sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(world.id).payload), beforeAgeUp: keepSnapshot ? Buffer.byteLength(priorPayload) : 0, inputFormat: JSON.parse(priorPayload).format, currentFormat: JSON.parse(stored).format };
+      if (checkpointBytes) assert.deepEqual(sizes, checkpointBytes, 'Checkpoint sizes must remain deterministic across trials');
+      else checkpointBytes = sizes;
       if (item.setup) {
         const observed = { worldSha256: hash(model.encodeWorld(committed)), date: committed.date, people: Object.keys(committed.people).length, ledgerRows: committed.ledger.length, monthsProcessed: committed.annual?.monthsProcessed ?? null, annualStage: committed.annual?.stage ?? null, pendingKind: committed.pending?.kind ?? null, beforeAgeUpSnapshotRetained: keepSnapshot };
         if (outcome) assert.deepEqual(observed, outcome, 'Stress input must resolve identically in every trial');
@@ -176,7 +180,7 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
       cold.sqlite.close();
       if (trial) trials.push({ totalMs: finished - start, resolveMs: resolved - start, commitMs: finished - resolved, coldOpenMs, phases: measured });
     }
-    results.push({ label: item.label, ...(item.setup ? { setup: item.setup, outcome } : {}), inputSha256: hash(input), inputBytes: Buffer.byteLength(input), ledgerRows: item.world.ledger.length,
+    results.push({ label: item.label, ...(item.setup ? { setup: item.setup, outcome } : {}), inputSha256: hash(input), inputBytes: Buffer.byteLength(input), checkpointBytes, ledgerRows: item.world.ledger.length,
       medianMs: Object.fromEntries(['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs'].map(name => [name, median(trials.map(row => row[name]))])), trials });
     process.stderr.write(item.label + ': ' + results.at(-1).medianMs.totalMs.toFixed(2) + ' ms\n');
   }

@@ -1,0 +1,463 @@
+{
+  "scope": "Same fixed worlds and frozen driver, serial cloud Node/on-disk SQLite after validation jobs closed. Generated-at-once100/1000known contacts, not natural/native journeys. Five samples/case, host/GC-sensitive medians, no physical p95 claim.",
+  "beforeSourceCommit": "e8a90970fc98ee0179314eff257ac3b3da06ae4b",
+  "beforeSourceHash": "0947b821b9783f68e204e16256ab06004475fe1f95153d48c212fed2ec71379c",
+  "afterSourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "driverHash": "3b093686c491ca24bf10eb1c3bb3ee5ee11eab3ff8ea7e02ee98d9bb43717d20",
+  "matchedInputs": 11,
+  "wholeStressOutcomesExact": true,
+  "samplesPerSource": 55,
+  "allWarmAvoidFullCheckpointDecode": true,
+  "allColdCurrentAndBackupWorldsExact": true,
+  "beforeAgeUpSnapshotsRetainOriginalPayloads": true,
+  "rawBefore": {
+    "file": "population-people-blocks-before-20261020.json",
+    "sha256": "4063540159ea7d22fe6dd8c6cae31a6da462a82eebc26626bf96d1daa5777a84"
+  },
+  "rawAfter": {
+    "file": "population-people-blocks-after-20261020.json",
+    "sha256": "aa20c8a978ef6b2476ae509bce44d74239fcb6e2d0b3494be3546b077a989f38"
+  },
+  "cases": [
+    {
+      "label": "Begin Life",
+      "inputSha256": "2b2c2cd701990db23a0ce9b9164c9a1a9e9bbbf689730fbae4f29a3746ca3ba1",
+      "beforeMedianMs": {
+        "totalMs": 1.09833000000026,
+        "resolveMs": 0.0026229999998577114,
+        "commitMs": 1.095716000000266,
+        "coldOpenMs": 0.7601830000003247
+      },
+      "afterMedianMs": {
+        "totalMs": 1.1192610000002787,
+        "resolveMs": 0.002492999999958556,
+        "commitMs": 1.1167680000003202,
+        "coldOpenMs": 0.7568570000003092
+      },
+      "beforeCheckpointBytes": {
+        "input": 3615,
+        "current": 3615,
+        "backup": 3615,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "afterCheckpointBytes": {
+        "input": 3615,
+        "current": 3615,
+        "backup": 3615,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      }
+    },
+    {
+      "label": "First-year choice",
+      "inputSha256": "05cef71ad3ba451312a2c45bc873af1427d619b764be6a3c82476ea2bfdf19f5",
+      "beforeMedianMs": {
+        "totalMs": 2.08313999999973,
+        "resolveMs": 0.79142899999988,
+        "commitMs": 1.345021000000088,
+        "coldOpenMs": 1.5319119999999202
+      },
+      "afterMedianMs": {
+        "totalMs": 2.1231809999999314,
+        "resolveMs": 0.6433470000001762,
+        "commitMs": 1.4237989999996898,
+        "coldOpenMs": 1.401075000000219
+      },
+      "beforeCheckpointBytes": {
+        "input": 7219,
+        "current": 6783,
+        "backup": 7219,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "afterCheckpointBytes": {
+        "input": 7219,
+        "current": 6783,
+        "backup": 7219,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      }
+    },
+    {
+      "label": "First-year choice Continue",
+      "inputSha256": "645d18f4a4693b492db234697eddf1ea078996f689643ece7e21728de7365f21",
+      "beforeMedianMs": {
+        "totalMs": 1.90544299999965,
+        "resolveMs": 0.5173369999997703,
+        "commitMs": 1.4426680000001397,
+        "coldOpenMs": 1.2314510000001064
+      },
+      "afterMedianMs": {
+        "totalMs": 1.738050999999814,
+        "resolveMs": 0.5001620000002731,
+        "commitMs": 1.242225999999846,
+        "coldOpenMs": 1.160953999999947
+      },
+      "beforeCheckpointBytes": {
+        "input": 6783,
+        "current": 6451,
+        "backup": 6783,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "afterCheckpointBytes": {
+        "input": 6783,
+        "current": 6451,
+        "backup": 6783,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      }
+    },
+    {
+      "label": "Age-seven callback",
+      "inputSha256": "a8346423d4cb4a3b271e468b457a76e9a9cde57f1af00a683a20cc3eb4a35903",
+      "beforeMedianMs": {
+        "totalMs": 7.232377999999699,
+        "resolveMs": 3.1495820000000094,
+        "commitMs": 3.519737999999961,
+        "coldOpenMs": 14.167398000000048
+      },
+      "afterMedianMs": {
+        "totalMs": 4.937759000000369,
+        "resolveMs": 2.6607480000002397,
+        "commitMs": 2.2765509999999267,
+        "coldOpenMs": 11.312296999999944
+      },
+      "beforeCheckpointBytes": {
+        "input": 29916,
+        "current": 29576,
+        "backup": 29916,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 30167,
+        "current": 29831,
+        "backup": 30167,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "Age-seven callback Continue",
+      "inputSha256": "a7afb973fae7d828fc26fd88172427ad66d4f88995a2af8062afec0699dae7c6",
+      "beforeMedianMs": {
+        "totalMs": 19.674611999999797,
+        "resolveMs": 10.502144999999928,
+        "commitMs": 7.2861079999997855,
+        "coldOpenMs": 16.444684000000052
+      },
+      "afterMedianMs": {
+        "totalMs": 12.938840999999684,
+        "resolveMs": 7.044934000000012,
+        "commitMs": 5.65023999999994,
+        "coldOpenMs": 13.431802000000062
+      },
+      "beforeCheckpointBytes": {
+        "input": 29576,
+        "current": 34841,
+        "backup": 29576,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 29831,
+        "current": 35100,
+        "backup": 29831,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "Age-30 routine",
+      "inputSha256": "5e521b93b9519904083a879692c47e68e2d68201278a6e1eb50282900f5c1563",
+      "beforeMedianMs": {
+        "totalMs": 21.754377000000204,
+        "resolveMs": 13.411612000000787,
+        "commitMs": 10.224061999999321,
+        "coldOpenMs": 92.81625200000053
+      },
+      "afterMedianMs": {
+        "totalMs": 18.808740999999827,
+        "resolveMs": 13.113534000000072,
+        "commitMs": 5.82278899999983,
+        "coldOpenMs": 91.43059600000015
+      },
+      "beforeCheckpointBytes": {
+        "input": 205002,
+        "current": 205186,
+        "backup": 205002,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 205197,
+        "current": 205405,
+        "backup": 205197,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "Age-60 routine",
+      "inputSha256": "0b682577b0f64c3744582f0ecf949f84ec98503abf013d5a384759134fd3c608",
+      "beforeMedianMs": {
+        "totalMs": 76.36677799999961,
+        "resolveMs": 42.625,
+        "commitMs": 33.94204200000058,
+        "coldOpenMs": 339.7667659999988
+      },
+      "afterMedianMs": {
+        "totalMs": 59.96772999999848,
+        "resolveMs": 44.56159200000002,
+        "commitMs": 15.406137999998464,
+        "coldOpenMs": 362.7774680000002
+      },
+      "beforeCheckpointBytes": {
+        "input": 672992,
+        "current": 673200,
+        "backup": 672992,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 673127,
+        "current": 673327,
+        "backup": 673127,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "100-known-contact routine",
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "7c07f0f9575e50d35c252c634e9551bfa49c438a761aa81014de15c9c35f4129",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 107,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "beforeMedianMs": {
+        "totalMs": 25.856920999998692,
+        "resolveMs": 11.757054999998218,
+        "commitMs": 14.38590099999783,
+        "coldOpenMs": 97.85690400000021
+      },
+      "afterMedianMs": {
+        "totalMs": 25.85273899999811,
+        "resolveMs": 14.415694999999687,
+        "commitMs": 10.205363999999463,
+        "coldOpenMs": 93.40598600000158
+      },
+      "beforeCheckpointBytes": {
+        "input": 230286,
+        "current": 230482,
+        "backup": 230286,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 236106,
+        "current": 236286,
+        "backup": 236106,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "100-known-contact first Age Up step",
+      "inputSha256": "faf49300020bd205f54a723c695a150cf12299276032c680ddee4f7c5a24f4d8",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "37e6ce405e0d2e030f6d95981f647bf7242aa7c10db70f888ec4ef97b3aca3f8",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 109,
+        "ledgerRows": 12662,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "beforeMedianMs": {
+        "totalMs": 61.34322100000281,
+        "resolveMs": 39.3804710000004,
+        "commitMs": 23.21554400000241,
+        "coldOpenMs": 99.6535040000017
+      },
+      "afterMedianMs": {
+        "totalMs": 62.81614400000035,
+        "resolveMs": 45.67168400000082,
+        "commitMs": 17.589568999999756,
+        "coldOpenMs": 99.23318199999994
+      },
+      "beforeCheckpointBytes": {
+        "input": 230286,
+        "current": 250477,
+        "backup": 230286,
+        "beforeAgeUp": 230286,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 236106,
+        "current": 256173,
+        "backup": 236106,
+        "beforeAgeUp": 236106,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "1000-known-contact routine",
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "be15d8ad350a2cc4f7c7e1aef538e66eceaf951cf364307f362474fc877a541f",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1007,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      },
+      "beforeMedianMs": {
+        "totalMs": 177.99937299999874,
+        "resolveMs": 77.62276800000109,
+        "commitMs": 95.5789420000001,
+        "coldOpenMs": 210.9217299999982
+      },
+      "afterMedianMs": {
+        "totalMs": 112.16978199999721,
+        "resolveMs": 62.086788999997225,
+        "commitMs": 50.08299299999999,
+        "coldOpenMs": 197.901087000002
+      },
+      "beforeCheckpointBytes": {
+        "input": 453283,
+        "current": 453495,
+        "backup": 453283,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 515427,
+        "current": 515635,
+        "backup": 515427,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    },
+    {
+      "label": "1000-known-contact first Age Up step",
+      "inputSha256": "b531bbe5cb28d5d813212c632e63b4f0ed2d9ebe7dfe96707e0546d62d432829",
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "24ce54025fc51f41845ee13c0549415abcf0c6b2912e563162294c59fd3a0f4a",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1018,
+        "ledgerRows": 15234,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      },
+      "beforeMedianMs": {
+        "totalMs": 459.84664200000407,
+        "resolveMs": 341.1862340000007,
+        "commitMs": 113.85729100000026,
+        "coldOpenMs": 183.85578600000008
+      },
+      "afterMedianMs": {
+        "totalMs": 462.9874869999985,
+        "resolveMs": 356.934154999999,
+        "commitMs": 114.44999900000039,
+        "coldOpenMs": 194.11650000000373
+      },
+      "beforeCheckpointBytes": {
+        "input": 453283,
+        "current": 557747,
+        "backup": 453283,
+        "beforeAgeUp": 453283,
+        "inputFormat": "dreams-checkpoint-v2",
+        "currentFormat": "dreams-checkpoint-v2"
+      },
+      "afterCheckpointBytes": {
+        "input": 515427,
+        "current": 621971,
+        "backup": 515427,
+        "beforeAgeUp": 515427,
+        "inputFormat": "dreams-checkpoint-v3",
+        "currentFormat": "dreams-checkpoint-v3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T09:47:46.747Z",
+  "baseCommit": "ad658c7",
+  "gameSourceHash": "287e381ef0d2b4dde9d684f600e47acdc2dd232c1a05f000e43f6a59e0565a2d",
+  "combinedGamePersistenceSourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 7,
+    "checkpoint": 3
+  },
+  "scope": "V3 people/ledger-block checkpoints with bounded exact-text people compression cache; reader7 protects new frames while preserving old current/backup/history bytes. Game source/schema/content/outcomes unchanged.",
+  "source": {
+    "src/persistence/checkpoints.ts": "50275364893bb9bf2de715f1763ad4fa86896634b1979fdb354d818a3ffe6e71",
+    "src/persistence/repository.ts": "7996dd54805244f0f3df2e77914b6cfa4a935dbe850064a28d8fa289ceb4c88c",
+    "tools/benchmark-actions.cjs": "3b093686c491ca24bf10eb1c3bb3ee5ee11eab3ff8ea7e02ee98d9bb43717d20",
+    "tests/persistence/people-blocks.test.ts": "3c4bb800f9859bee57d358b4640e325d8d6823edc62d915a9fd13cbd3815f1b2",
+    "tests/state/preferencesStore.test.ts": "44c74e1975fd1fe3ff10cfa9996788bc5d5b7199a9d7633289d21a078d67c1cc"
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1409,
+      "suites": 102,
+      "seconds": 825.637,
+      "processSeconds": 826.435,
+      "exitCode": 0,
+      "raw": "regression-people-blocks-20261020.txt",
+      "rawSha256": "4d47bcde56ee5d9d139216f026434dc1f0e94071323f0195aa8fc942297e74c8",
+      "rawStdoutThenStderr": true
+    },
+    "initialRegression": {
+      "passed": 1408,
+      "failed": 1,
+      "reason": "Only stale preferences test expected database6 after reader7 upgrade; assertion corrected to7. Runtime source unchanged.",
+      "raw": "regression-people-blocks-initial-20261020.txt",
+      "exitCode": 1
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "unchangedGame120SeedRecord": "life-sweep-model-copy-120-20261020.json",
+    "noNewSeedRunOrComposedSeedCount": true,
+    "atomicReaderUpgradeFailureRetryAndOldPayloadRetention": true,
+    "completeValidationBeforeCachePriming": true,
+    "cacheEntryAndWeightBounds": true,
+    "readOnlyPreviewsPreserveActivePeopleCache": true,
+    "nativeRecord": "android24-people-blocks-20261020/journey-exact.json",
+    "nativeColdUpgradeAndDraftAll8TablesExact": true,
+    "native80And81EntireWorldsExact": true,
+    "nativeCold80All8TablesExact": true,
+    "nativeOld4WorldsBackups36MomentsMetadata67ReceiptsExact": true,
+    "nativeFinalRevision": 81,
+    "nativeFinalCounts": {
+      "lives": 5,
+      "moments": 36,
+      "receipts": 69
+    }
+  },
+  "exports": {
+    "exitCode": 0,
+    "processSeconds": 33.008,
+    "bundles": [
+      {
+        "file": "_expo/static/js/android/entry-ba98b813033973255605b789dc554758.hbc",
+        "bytes": 5419918,
+        "sha256": "e6280b9e1984cd2a10b27a006d77e53c3b99e7227a6d1d66d3c65ed3e61fd473"
+      },
+      {
+        "file": "_expo/static/js/ios/entry-6213037114912484a4f2259e80a3b356.hbc",
+        "bytes": 5115098,
+        "sha256": "8f7b5d5a9e56fb27db2455acdd1ace1c72e30e0b652517a67712cdb4aea2b93e"
+      }
+    ]
+  },
+  "populationComparison": "population-people-blocks-comparison-20261020.json",
+  "catalogue": {
+    "distinctSituations": 110,
+    "minimum": 250,
+    "additionalNeeded": 140
+  },
+  "limits": "Cloud diagnostics and software Android24/ExpoGo durability, not physical p95 or standalone/iOS. Generated1000known-contact case retains eight initial monthly financial actors. Payload size is measured, not full120-year/three-generation SQLite/WAL below50MB acceptance. Further player file breadth parked; full production remains about50%."
+}
