@@ -51,6 +51,12 @@ beforeEach(async () => {
 });
 afterEach(() => { sqlite.close(); });
 
+test('View Life Summary routes to a read-only saved life without selecting it or starting a file operation', async () => {
+  const before = tables(), world = mockStore.getState().world!; render(frame());
+  await press('View Riley Kelly life summary'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/saved-life/[id]', params: { id: world.id } });
+  expect(mockStore.getState().world).toBe(world); expect(tables()).toEqual(before); expect(mockPickFile).not.toHaveBeenCalled(); expect(mockPickDirectory).not.toHaveBeenCalled(); expect(mockShare).not.toHaveBeenCalled();
+});
+
 test.each(['ERR_PICKER_CANCELLED', 'ERR_FILE_PICKING_CANCELLED'])('%s closes folder selection without an error, file or changed save', async code => {
   const before = tables(); mockPickDirectory.mockRejectedValueOnce(Object.assign(new Error('Picker cancelled'), { code })); render(frame());
   await press(exportButton); await waitFor(() => expect(screen.getByRole('button', { name: exportButton })).toBeEnabled());

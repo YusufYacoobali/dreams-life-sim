@@ -12,6 +12,19 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+[View Life Summary](SAVED_LIFE_VIEW.md) now opens each saved life read-only
+without selecting it. Local loading/retry and stale-response protection avoid
+global saving feedback, and the shared validated reader preserves the active
+save cache. Valid/corrupt preview checks retain the next warm commit without
+a full decode. All **156 affected checks / 52 suites** pass in **125.204 seconds**,
+with strict types and fresh Hermes exports. Native Ren/Rohan previews and
+Back/Welcome Continue return to Riley/latest facts with every SQLite row exact:
+three lives, twelve moments, seventeen receipts and revision 53.
+Only the repository read helper changes; game/codec/schema remain fixed, and
+the engine-only lifetime run continues. This follows the user's view-previous-
+lives scope without expanding import/export/sharing. Full-game and production
+baselines retain their original scopes.
+
 [Relationships](RELATIONSHIP_LIST.md) now virtualises its contacts and adds
 All/Family/Friends/Romance filters, name search and compact existing shortcuts.
 Actual Android search/profile/Back retains the same parent and query/filter;

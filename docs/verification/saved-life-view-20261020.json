@@ -1,0 +1,50 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "a240872",
+  "scope": "Read-only saved-life summaries, local loading/error/retry and stale-response protection; shared validated repository reader preserves active commit cache",
+  "source": {
+    "app/_layout.tsx": "698aa5c356a859c6732a5134a7f7fcfc2b2558a9545aa8be93e97549ce21a82c",
+    "app/life-summary.tsx": "851ad270389be1a40449074867b1361923e0193a81f183a8a2aaab0c2e57e747",
+    "app/saved-life/[id].tsx": "bc217a5f4ed31906a637d5b43a47c45a895adc9d673776d9d79dbe588a1481b2",
+    "app/saved-lives.tsx": "b383329446fcb3970f1089936f7232011e738b5e327b1b0ae4d0e9060bb976a4",
+    "src/persistence/repository.ts": "dd87ecb0a283f54b76aa55579dff2b40ab336541f065d190b778b4097af89cb1",
+    "src/ui/LifeSummaryContent.tsx": "1b689b008b444327b3c14e3cd7761a5832e43e696a7a8e17a5ab659f1a7adaa0",
+    "tests/persistence/life-preview.test.ts": "390a24f0674058d87f188270e43c1c367d53ad2f98e2f58b55939cc025410105",
+    "tests/ui/pets-flow.test.tsx": "24a5d5f13612ad9c02b14ff6d3dcfacd9d8c2b4deabf33360aa04b0bb2eb1436",
+    "tests/ui/saved-files-flow.test.tsx": "bde1f541dc920b3131aaf4f53afa17c82255d6a98046b9610857214a859b1077",
+    "tests/ui/saved-life-preview.test.tsx": "f64a2ccae07aef3ba417b3f92a35cb9b0c74b6e2b2e4bee514a8db891982246d"
+  },
+  "verification": {
+    "tests": 156,
+    "suites": 52,
+    "seconds": 125.204,
+    "strictApplicationAndTestTypes": true,
+    "coverage": "All UI, state, persistence and progress suites; game-domain source unchanged",
+    "activeCommitStillAvoidsFullDecodeAfterValidAndDamagedPreviews": true,
+    "nativeRecord": "android24-saved-life-view-20261020/read-only-exact.json",
+    "completeRegression": "1,226 tests / 80 suites at e5a4aaf; no new whole-suite total"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-a4dedbd5bd2c07ff008348c2b89e1e75.hbc",
+      "bytes": 5355716,
+      "sha256": "032ccaf52360c85c004dae004806b66b84cad37fae4601225d765438e616ab39"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-5adcd7b001a2a9cb1611831ad63258f3.hbc",
+      "bytes": 5049371,
+      "sha256": "40fa1ea1edff54f6a0a4bc2b4796216a74e7d9c82baecd6f5dd0bc6104cf1a2f"
+    }
+  ],
+  "gameCodecSchemaAndSweepToolUnchanged": true,
+  "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+  "gameHashAlgorithm": "run-life-sweep.cjs src/game-relative traversal",
+  "combinedGamePersistenceSourceHash": "76d7c573d3061c31361c8a206c94c3049eb05ca93f6da19b78ac2475c7c0e620",
+  "combinedHashAlgorithm": "benchmark-sqlite-history.cjs repository-relative traversal",
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4,
+    "database": 6
+  }
+}

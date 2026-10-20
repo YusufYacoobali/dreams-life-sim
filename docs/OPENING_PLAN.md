@@ -73,6 +73,13 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
+[Read-only saved-life summaries](SAVED_LIFE_VIEW.md) now let the player inspect
+previous stories without switching the active game or disturbing its save
+cache. All 156 affected UI/state/persistence/progress checks, strict types and
+fresh Hermes exports pass. Actual native older-life viewing returns to Riley
+with all eight tables exact. Engine/codec/schema stay fixed; file breadth and
+broader production gates remain deferred/open as recorded.
+
 The complete production scope is approximately **50% complete**. These are
 conservative effort estimates, not measured screen acceptance scores. Passing
 mechanics tests does not establish visual fidelity or device readiness.

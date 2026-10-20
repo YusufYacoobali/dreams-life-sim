@@ -57,11 +57,12 @@ export default function SavedLives() {
     terms: [{ id: 'name', label: 'Person', value: fullName(preview.world.people[preview.world.activePersonId]), tone: 'neutral' }, { id: 'age', label: 'Age', value: ageOn(preview.world.people[preview.world.activePersonId], preview.world.date).toString(), tone: 'neutral' }, { id: 'revision', label: 'Checkpoint', value: preview.world.revision.toString(), tone: 'neutral' }],
     confirmLabel: preview.kind === 'recover' ? 'Restore Checkpoint' : preview.replace ? 'Replace and Import' : 'Import Life',
   } : null;
-  return <Page bottomSafeArea><Header title="Saved Lives" onBack={() => router.back()} trailing={<Pressable accessibilityRole="button" accessibilityLabel="Settings" onPress={() => router.push('/settings')} style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }}><Ionicons name="settings-outline" size={25} color={c.ink} /></Pressable>} /><Body muted>Your lives stay on this device. Export a file to keep a copy somewhere you choose.</Body>
+  return <Page bottomSafeArea><Header title="Saved Lives" onBack={() => router.back()} trailing={<Pressable accessibilityRole="button" accessibilityLabel="Settings" onPress={() => router.push('/settings')} style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }}><Ionicons name="settings-outline" size={25} color={c.ink} /></Pressable>} /><Body muted>View a saved life’s story, or continue it from its latest checkpoint.</Body>
     {(message || error) && <Card><View accessible accessibilityLiveRegion="polite"><Body>{message ?? error}</Body></View></Card>}
     <Button label="Import a Save" onPress={() => { void importFile(); }} disabled={busy || working} />
     {lives.length === 0 && <Card><Body>No lives saved yet.</Body></Card>}
     {lives.map(life => <Card key={life.id}><Heading size={18}>{life.name}</Heading>{life.branch && <Body muted>Time Machine branch · {life.branch.name}, age {life.branch.age} in {life.branch.date.year}</Body>}
+      <Button label="View Life Summary" accessibilityLabel={'View ' + life.name + ' life summary'} tone="secondary" disabled={busy || working} onPress={() => router.push({ pathname: '/saved-life/[id]', params: { id: life.id } })} />
       <Button label="Continue" disabled={working} busy={busy} onPress={async () => { if (await select(life.id)) router.replace('/life'); }} />
       <ActionRow title="Export save file" subtitle="Save a copy to a folder you choose" disabled={busy || working} onPress={() => { void run(async () => {
         const folder = await Directory.pickDirectoryAsync();

@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `android24-saved-life-view-20261020/` retains actual Ren/Rohan read-only
+  summaries and return to Riley/latest journal facts. Every row in all eight
+  tables and all three complete worlds stay exact. `saved-life-view-20261020.json`
+  records 156 affected checks / 52 suites, strict types, source/Hermes hashes
+  and the repository reader/cache scope. [Viewer details](../SAVED_LIFE_VIEW.md)
+  distinguish this from new file-feature breadth or a complete-game regression.
+
 - `android24-contacts-20261020/` preserves actual relationship filters/search,
   exact parent profile/Back, ten 48dp targets, empty Friends/Romance and childhood
   Family before/after. Every SQLite table stays exact. `contacts-20261020.json`

@@ -88,15 +88,25 @@ export class SaveRepository {
     return rows.map(row => ({ id: row.id, name: row.name, revision: row.revision, updatedAt: row.updated_at, ...(row.branch ? { branch: branchInfoSchema.parse(JSON.parse(row.branch)) } : {}) }));
   }
 
-  async load(id: string): Promise<World> {
+  private async readLife(id: string): Promise<{ world: World; payload: string }> {
     const row = await this.db.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [id]);
     if (!row) throw new Error('Saved life not found');
     try {
       const world = unpackCheckpoint(row.payload, true);
       if (world.id !== id || world.revision !== row.revision) throw new Error('Saved life metadata is inconsistent');
-      this.current = { world, payload: row.payload };
-      return world;
+      return { world, payload: row.payload };
     } catch { throw new SaveCorrupt(id); }
+  }
+
+  async load(id: string): Promise<World> {
+    const current = await this.readLife(id);
+    this.current = current;
+    return current.world;
+  }
+
+  /** Inspect another life without selecting it or displacing the active save cache. */
+  async previewLife(id: string): Promise<World> {
+    return (await this.readLife(id)).world;
   }
 
   async active(): Promise<World | null> {

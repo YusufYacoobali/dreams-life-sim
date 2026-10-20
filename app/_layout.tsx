@@ -19,6 +19,7 @@ export default function RootLayout() {
       <Stack.Screen name="birth" options={{ gestureEnabled: false }} />
       <Stack.Screen name="death" options={{ gestureEnabled: false }} />
       <Stack.Screen name="life-summary" />
+      <Stack.Screen name="saved-life/[id]" />
       <Stack.Screen name="legacy" />
       <Stack.Screen name="time-machine" />
       <Stack.Screen name="(game)" />

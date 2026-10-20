@@ -1,5 +1,24 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Saved Lives now offers a [read-only summary](SAVED_LIFE_VIEW.md) for each life
+without selecting it. Screen-local loading/retry and stale-response protection
+keep viewing independent of global saving. The shared validated repository
+reader preserves the active action cache; valid and damaged preview checks
+introduce no decode into the next active commit. All **156 affected checks /
+52 suites** pass in **125.204 seconds**, strict types and fresh Hermes exports
+pass. These cover every UI/state/persistence/progress suite, not all game-domain
+tests. The complete 1,226-test baseline remains at `e5a4aaf`.
+
+Native read-only Ren/Rohan summaries retain their original first-year stories;
+Back/Welcome Continue returns to age-ten Riley and the latest help fact.
+Every row in all eight tables stays exact (three lives/twelve moments/seventeen
+receipts, active revision 53). [Native proof](verification/android24-saved-life-view-20261020/)
+and [source/checks](verification/saved-life-view-20261020.json) retain scope.
+Game/codec/schema/tool stay fixed; only the repository reader is refactored.
+The new combined game/persistence hash is
+`76d7c573d3061c31361c8a206c94c3049eb05ca93f6da19b78ac2475c7c0e620`.
+The engine-only sweep below remains valid. Further file-feature breadth is deferred.
+
 Relationships now virtualises contacts and adds the reference's All/Family/
 Friends/Romance filters plus name search, with compact family/pet/home links.
 Actual Android Family + `Ruby` opens the correct parent and retains its query/
@@ -38,7 +57,7 @@ failure trace/last valid world. Read [LIFE_SWEEP.md](LIFE_SWEEP.md) and
 The run started from clean `53b8647` at **00:06:23 UTC on 20 October 2026**.
 It is running in unified-exec session **12194**, with raw stdout at
 `/tmp/dreams-life-sweep-1000-v28-20261020.ndjson` and stderr at the matching
-`.err` path. The latest recorded partial check completed **419 seeds** without
+`.err` path. The 01:12 UTC partial check completed **789 seeds** without
 an error, covering twelve countries; it is not the completed gate. Preserve the
 output and wait for the actual completion/exit. Keep `src/game` and the tool fixed
 while it runs; independent UI/documentation work can continue. A request/partial run

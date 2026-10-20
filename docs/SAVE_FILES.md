@@ -63,8 +63,11 @@ unchanged. The raw folder/success captures and exact comparison are retained. Th
 share app, so an external file transfer is not established by the chooser.
 See [native records](verification/android24-files-20261019/).
 
-Game and SQLite repository source remain unchanged, hash
+At file checkpoint `3b5d961`, game and SQLite repository source stayed unchanged, hash
 `cca2039afee12cf05ff902cb6fc1ef3228777d90fd498fffdf91c63a381e8d30`.
+The later [read-only saved-life viewer](SAVED_LIFE_VIEW.md) refactors the shared
+repository reader while keeping the game/codec/schema fixed; this historical
+file-checkpoint hash is not the newer combined source hash.
 The complete 1,226-test / 80-suite checkpoint belongs to `e5a4aaf`; overlapping
 file/UI checks are not added to invent another complete regression. iOS native
 execution, physical-device performance, complete reference/accessibility and
