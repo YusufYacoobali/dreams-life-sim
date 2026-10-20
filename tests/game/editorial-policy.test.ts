@@ -17,7 +17,7 @@ import archived from '../fixtures/v23-school-plans-archive.json';
 const runtime = { resolveCommand, ageOn, encodeWorld, validateWorld, choiceUnavailable, eventTemplates, packCheckpoint, unpackCheckpoint };
 const birth = { createGameStore, SaveRepository, randomCreation, countries, database };
 type Decision = Extract<Pending, { kind: 'decision' }>;
-const driver = require('../../tools/run-editorial-policy.cjs') as { sourcePins: (root: string) => Record<string, string>; expectedC35: Record<string, string>; optionsFor: (argv: string[]) => { root: string; maxYears: number; manifestOnly: boolean } };
+const driver = require('../../tools/run-editorial-policy.cjs') as { sourcePins: (root: string) => Record<string, string>; expectedC35: Record<string, string>; main: (argv: string[]) => Promise<void>; optionsFor: (argv: string[]) => { root: string; maxYears: number; manifestOnly: boolean } };
 const sourceRoot = require('node:path').resolve(__dirname, '../..') as string;
 
 test('actual saved birth leaves all creation actors, money and RNG intact and uses only normal birth acknowledgement', async () => {
@@ -84,9 +84,23 @@ test('a genuine archived callback keeps its actual binding and outcome through r
   expect(encodeWorld(world)).toBe(before);
 }, 30000);
 
-test('source selection is explicit and pins the complete frozen C35 game, store and SQLite birth driver without starting a life', () => {
+test('the historical C35 registration stays exact and rejects newer source before manifest loading or any life can start', async () => {
+  expect(driver.expectedC35).toEqual({
+    referenceCommit: '5a2565458fa5de90c1acaf0e110fc980f6476b64',
+    game: '84625d5208d1a6815dccc2802ff75c83393eeb143c382e83d60ed0dafaf94f33',
+    gameAndPersistence: '12b49689991da671d72b3ac8bc0bfe6bb2aff788174cf1ccda73665c0195c2b8',
+    state: '4e54672a28860f4e4ec593943171268a9202b22d960cc0cec13db94b2cd8c7ea',
+    lockfile: '0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b',
+    store: '85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09',
+    birthDriver: 'b05662854da8a6439ddc559f3b1038895df94ba73cecb9c501b6a6ef5234a2f8',
+  });
   const pins = driver.sourcePins(sourceRoot);
-  for (const key of ['game', 'gameAndPersistence', 'state', 'lockfile', 'store', 'birthDriver']) expect(pins[key]).toBe(driver.expectedC35[key]);
+  for (const key of ['state', 'lockfile', 'store', 'birthDriver']) expect(pins[key]).toBe(driver.expectedC35[key]);
+  expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
+  expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
+  for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);
+  await expect(driver.main(['--source', sourceRoot, '--manifest-only'])).rejects.toThrow(/Source must match frozen C35 game/);
+  expect(driver.sourcePins(sourceRoot)).toEqual(pins);
   expect(driver.optionsFor(['--source', sourceRoot, '--manifest-only'])).toMatchObject({ root: sourceRoot, maxYears: 150, manifestOnly: true });
   expect(() => driver.optionsFor(['--all', '--output', '/tmp/unused-editorial-test-output'])).toThrow(/source/);
   expect(() => driver.optionsFor(['--source', sourceRoot, '--all', '--country', countryCodes[0], '--output', '/tmp/unused-editorial-test-output'])).toThrow(/one country/);

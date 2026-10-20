@@ -74,7 +74,17 @@ not change the reviewed production game. Every source pin, including tool and
 helper, is checked before/after loading and after each life and cohort. Node and
 TypeScript versions are recorded.
 
-A manifest-only command creates no life or output directory:
+This driver remains a historical C35 reproduction tool after production moves
+to World 35 / engine 36 / content 11. Its original registered game/persistence
+fingerprints and state/store/birth/lock pins are preserved. Supply a separate
+checkout of the exact historical C35 source (for example producer
+`73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa`) to `--source`; newer production
+source is intentionally rejected even with `--manifest-only`, before loading
+the runtime or starting a life. The current-source helper tests still exercise
+ordinary choice rotation, eligibility, codec preservation and deterministic
+replay; they do not relabel or rerun the completed C35 cohort.
+
+A manifest-only command against the historical source creates no life or output directory:
 
 ```sh
 node tools/run-editorial-policy.cjs --source /absolute/path/to/frozen-C35 --manifest-only
@@ -130,4 +140,6 @@ Actual trace SHA256:
 This is not a completed life or cohort. The final manifest-only executions are
 byte-identical; `/tmp/dreams-editorial-choice-policy-manifest-final.json` has SHA256
 `9628a46963379f0322a825e81df689d1f8b0de8f94e6e2f8e993e4a91b1c4048`.
-Re-register the actual selected source/checkout before a later run.
+Retain a manifest of the exact historical C35 source/checkout before any
+reproduction. Do not refresh these pins to relabel a newer production source
+as the original registered run.

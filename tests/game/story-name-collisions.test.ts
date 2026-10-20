@@ -1,13 +1,22 @@
 import { createHash } from 'node:crypto';
 import { bindEvent, eventTemplates } from '../../src/game/content/events';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
-import { copyWorld, encodeWorld, validateWorld } from '../../src/game/model';
+import { copyWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { choiceSchema } from '../../src/game/runtime';
 import { storyContactNames } from '../../src/game/storyNames';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import cohort from '../fixtures/story-name-collision-cohort.json';
 
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
+// Recover only the original C35 root framing; every captured gameplay field
+// and bound choice/result remains part of its immutable canonical proof.
+function originalC35Canonical(world: World) {
+  const original = JSON.parse(encodeWorld(world));
+  expect(original).toMatchObject({ schemaVersion: 35, engineVersion: 36, contentVersion: 11 });
+  expect(original.bestFriendships).toEqual([]); delete original.bestFriendships;
+  original.schemaVersion = 34; original.engineVersion = 35; original.contentVersion = 10;
+  return JSON.stringify(original);
+}
 const record = (country: string, index: number) => cohort.records.find(row => row.decisionPointer === country + '/result.json#/decisions/' + index)!;
 function bound(row: typeof cohort.records[number]) {
   const world = unpackCheckpoint(row.checkpoint), pending = world.pending;
@@ -16,14 +25,14 @@ function bound(row: typeof cohort.records[number]) {
 }
 
 test('six captured worlds retain complete original source pins, exact old bound choices and actual old chosen results', () => {
-  expect(cohort.sourceBefore).toEqual(cohort.sourceAfter); expect(cohort.sourceBefore.checkoutHead).toBe('73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa');
+  expect(cohort.records).toHaveLength(6); expect(cohort.sourceBefore).toEqual(cohort.sourceAfter); expect(cohort.sourceBefore.checkoutHead).toBe('73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa');
   expect(cohort.sourceBefore.gameAndPersistence).toBe('12b49689991da671d72b3ac8bc0bfe6bb2aff788174cf1ccda73665c0195c2b8');
   for (const row of cohort.records) {
     expect(sha(row.checkpoint)).toBe(row.checkpointSha256); expect(sha(row.resultCheckpoint)).toBe(row.resultCheckpointSha256);
     const world = unpackCheckpoint(row.checkpoint), original = encodeWorld(world);
-    expect(sha(original)).toBe(row.canonicalSha256); expect(world.pending?.kind === 'decision' && world.pending.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
+    expect(sha(originalC35Canonical(world))).toBe(row.canonicalSha256); expect(world.pending?.kind === 'decision' && world.pending.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
     const selected = resolveCommand(world, row.selected as GameCommand, true);
-    expect(selected).toEqual(unpackCheckpoint(row.resultCheckpoint)); expect(sha(encodeWorld(selected))).toBe(row.resultCanonicalSha256);
+    expect(selected).toEqual(unpackCheckpoint(row.resultCheckpoint)); expect(sha(originalC35Canonical(selected))).toBe(row.resultCanonicalSha256);
     expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(packCheckpoint(world))).toEqual(world);
   }
 });
