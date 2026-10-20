@@ -15,6 +15,10 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+Actual named result76 and all20original moments are now protected with their
+unmodified74be9e4 producer. Two preservation/SQLite checks and strict types pass;
+no runtime or player-file-feature change. [Archive provenance](verification/native-workplace-story-archive-v30-20261020.json).
+
 The latest [large-save copy improvement](LARGE_SAVE_RESPONSIVENESS.md) keeps full
 result validation and exact saves while removing repeated pre-action parsing and
 history scans. All1,385tests/100suites, strict types, both exports and120immutable

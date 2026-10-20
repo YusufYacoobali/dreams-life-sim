@@ -56,10 +56,16 @@ after force-stop/before Continue stays exact through cold Continue. The native
 record explicitly discards an earlier premature77 capture; it is not a pre-stop78
 snapshot. [Four captures and exact scope](verification/android24-model-copy-20261020/).
 
-Next preserve actual named result76 with isolated unmodified pushed74be9e4, then
-reduce the remaining save-packing cost. The genuine producer must remain pinned;
-do not regenerate history with the optimised source. Keep the benchmark driver
-fixed for further matched comparisons and do not rerun unchanged full gates.
+Actual named result76 is now preserved with isolated unmodified pushed74be9e4:
+`v30-native-workplace-story-archive.json`,21worlds/20original moments, including
+all18earlier raise moments. Bytes1,024,130; SHA
+`3774db894776ba92c4c6ef6b4c10678a4125c53a0ea5ec4044189701fe75e1f1`.
+Two preservation/SQLite failure-retry-cold checks pass in16.612s, strict types.
+Runtime/full1385baseline remain e8a9097; do not compose a new full count.
+[Producer and checks](verification/native-workplace-story-archive-v30-20261020.json).
+Never regenerate that fixture with newer source. Next reduce remaining packing
+cost while preserving all old frames/history and complete validation. Keep the
+benchmark driver fixed for matched comparisons; do not rerun unchanged full gates.
 
 ## Earlier workplace-content milestone
 
@@ -171,8 +177,8 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, reduce remaining save-packing cost after preserving the genuine named
-result76 with its original producer. Keep the diagnostic setup explicit;
+Next, reduce remaining save-packing cost; the genuine named result76 is now
+preserved with its original74be9e4 producer. Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration
 acceptance. Correct any measured bottleneck, and continue broader adult stories,
 interviews, real hours/hourly pay, work conflicts and career depth. Multi-person

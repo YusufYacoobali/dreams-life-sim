@@ -4,6 +4,12 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `native-workplace-story-archive-v30-20261020.json` pins actual named result76
+  to isolated unmodified pushed74be9e4 source,1,024,130bytes and its SHA-256.
+  All21worlds/20original moments, including18earlier raise moments, stay exact.
+  Two preservation/SQLite failure-retry-cold checks pass in16.612s, strict types.
+  Runtime/full1385baseline remain e8a9097; no composed new full-test total.
+
 - `model-copy-20261020.json` records certified isolated direct copying, per-person
   employment validation indexing, all1,385tests/100suites, strict types and both
   fresh Hermes exports. Raw:`regression-model-copy-20261020.txt`. Native77→79

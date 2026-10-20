@@ -12,6 +12,14 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The actual named workplace result76 is preserved with isolated unmodified pushed
+74be9e4 source before save-codec work. All21worlds/20original moments remain
+exact, including all18prior raise moments. Two preservation/SQLite failure-retry-
+cold checks pass in16.612s, strict types. Runtime/full1385baseline remain unchanged
+e8a9097; this is internal history protection, not player file breadth or a composed
+new whole-regression count. [Provenance](verification/native-workplace-story-archive-v30-20261020.json).
+
+
 [Large-save copying](LARGE_SAVE_RESPONSIVENESS.md) now clones only already-certified
 plain data directly, keeps all mutable fields isolated and indexes employment
 history per person. Full result validation, atomic saves, schema/content and all
