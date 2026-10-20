@@ -7,17 +7,20 @@ import { rules } from '../rules';
 import { activeHobbyPlan, HobbyPlan, LeisureEffect } from './leisureSchemas';
 import { hobbyFee } from './leisure';
 
+export function validateLeisurePermission(world: World, personId: string, payerId: string, date: World['date'], consent: HobbyPlan['consent']) {
+  const aliveAt = (id: string, date: World['date']) => { const person = world.people[id]; return person && compareDates(person.born, date) <= 0 && (!person.died || compareDates(person.died, date) >= 0); };
+  const person = world.people[personId], payer = world.people[payerId];
+  if (!person || !payer || !aliveAt(personId, date) || !aliveAt(payerId, date) || compareDates(date, world.date) > 0 || ageOn({ ...payer, died: null }, date) < 18 || consent.accepted !== (consent.roll <= consent.chance)) throw new Error('Invalid leisure consent or participant');
+  if (personId === payerId ? consent.strength !== null || consent.chance !== 100 || consent.roll !== 100 || ageOn({ ...person, died: null }, date) < 18 : ageOn({ ...person, died: null }, date) >= 18 || consent.strength === null || consent.chance !== Math.min(95, 45 + Math.floor(consent.strength / 2)) || !world.relationships.some(edge => edge.from === payerId && edge.to === personId && edge.roles.some(role => role === 'parent' || role === 'guardian')) && !world.custody.some(item => item.childId === personId && item.primaryId === payerId)) throw new Error('Leisure payer lacks the saved actual authority');
+}
+
 export function validateLeisure(world: World, ledger = indexLedger(world.ledger)) {
   if (!world.hobbies.length && !world.leisureOutings.length) {
     if (ledger.categories('hobby', 'entertainment').length > 0) throw new Error('Leisure payment lacks its actual history'); return;
   }
   const month = (date: World['date']) => date.year * 12 + date.month - 1, now = month(world.date), ids = new Set<string>(), profiles = new Set<string>(), used = new Set<string>(), activeCounts = new Map<string, number>(), transactions = ledger.positioned;
   const aliveAt = (id: string, date: World['date']) => { const person = world.people[id]; return person && compareDates(person.born, date) <= 0 && (!person.died || compareDates(person.died, date) >= 0); };
-  const permission = (personId: string, payerId: string, date: World['date'], consent: HobbyPlan['consent']) => {
-    const person = world.people[personId], payer = world.people[payerId];
-    if (!person || !payer || !aliveAt(personId, date) || !aliveAt(payerId, date) || compareDates(date, world.date) > 0 || ageOn({ ...payer, died: null }, date) < 18 || consent.accepted !== (consent.roll <= consent.chance)) throw new Error('Invalid leisure consent or participant');
-    if (personId === payerId ? consent.strength !== null || consent.chance !== 100 || consent.roll !== 100 || ageOn({ ...person, died: null }, date) < 18 : ageOn({ ...person, died: null }, date) >= 18 || consent.strength === null || consent.chance !== Math.min(95, 45 + Math.floor(consent.strength / 2)) || !world.relationships.some(edge => edge.from === payerId && edge.to === personId && edge.roles.some(role => role === 'parent' || role === 'guardian')) && !world.custody.some(item => item.childId === personId && item.primaryId === payerId)) throw new Error('Leisure payer lacks the saved actual authority');
-  };
+  const permission = (personId: string, payerId: string, date: World['date'], consent: HobbyPlan['consent']) => validateLeisurePermission(world, personId, payerId, date, consent);
   const payment = (id: string, personId: string, currency: string, paid: bigint, category: string, date: World['date'], cursor?: number) => {
     const entry = transactions.get(id), row = entry?.row;
     if (!row || used.has(id) || row.personId !== personId || row.currency !== currency || row.cashDelta !== -paid || row.debtDelta !== 0n || row.category !== category || row.year !== date.year || row.month !== date.month || cursor !== undefined && entry!.index !== cursor) throw new Error('Leisure payment does not reconcile with ledger'); used.add(id);

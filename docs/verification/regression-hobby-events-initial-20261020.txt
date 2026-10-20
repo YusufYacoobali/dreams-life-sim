@@ -1,0 +1,175 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand
+
+PASS tests/game/engine.test.ts (511.527 s)
+PASS tests/persistence/tuple-checkpoints.test.ts (45.178 s)
+PASS tests/ui/saved-files-flow.test.tsx (21.124 s)
+PASS tests/game/royalty.test.ts (22.343 s)
+PASS tests/game/copy-world.test.ts (22.817 s)
+PASS tests/game/everyday-life-stories.test.ts (20.983 s)
+PASS tests/persistence/people-blocks.test.ts (20.833 s)
+PASS tests/persistence/native-people-block-archive.test.ts (16.705 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (15.782 s)
+PASS tests/persistence/native-raise-archive.test.ts (13.347 s)
+PASS tests/progression/expanded-progress.test.ts (12.945 s)
+PASS tests/game/early-home-stories.test.ts (13.13 s)
+PASS tests/game/adult-relationship-stories.test.ts (12.191 s)
+PASS tests/game/teen-home-stories.test.ts (11.41 s)
+PASS tests/persistence/native-workplace-archive.test.ts (10.53 s)
+PASS tests/persistence/restored-action-cache.test.ts (8.324 s)
+PASS tests/persistence/native-teen-archive.test.ts (8.14 s)
+PASS tests/game/workplace-stories.test.ts (7.412 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.509 s)
+PASS tests/game/education-recovery.test.ts (7.807 s)
+PASS tests/ui/hobby-event-flow.test.tsx
+PASS tests/persistence/ordinary-hobby-archive.test.ts (6.82 s)
+PASS tests/game/childhood-stories.test.ts (6.069 s)
+PASS tests/persistence/life-preview.test.ts (5.786 s)
+PASS tests/persistence/action-checkpoints.test.ts (5.888 s)
+PASS tests/ui/scholarship-flow.test.tsx (5.75 s)
+PASS tests/persistence/native-school-archive.test.ts (5.076 s)
+PASS tests/game/services.test.ts (5.558 s)
+PASS tests/ui/education-recovery-flow.test.tsx (5.608 s)
+PASS tests/ui/royalty-flow.test.tsx
+PASS tests/game/hobby-events.test.ts
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/game/education-work-finance.test.ts
+PASS tests/game/estates.test.ts
+PASS tests/game/music.test.ts
+PASS tests/state/save-summaries.test.ts
+PASS tests/game/businesses.test.ts
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/game/politics.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/ui/health-flow.test.tsx
+PASS tests/game/legal.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/game/social.test.ts
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/progression/progress.test.ts
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/game/careers.test.ts
+PASS tests/game/assets-markets.test.ts
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/game/story-callbacks.test.ts
+PASS tests/game/pets.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/game/credit.test.ts
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/service-flow.test.tsx
+PASS tests/game/travel.test.ts
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/game/workplaces.test.ts
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/social-flow.test.tsx
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/ui/school-flow.test.tsx
+PASS tests/game/relationships.test.ts
+PASS tests/ui/music-flow.test.tsx
+PASS tests/game/job-interviews.test.ts
+PASS tests/ui/career-flow.test.tsx
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/game/school.test.ts
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/ui/family-flow.test.tsx
+PASS tests/game/family.test.ts
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/game/health.test.ts
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/ui/will-flow.test.tsx
+FAIL tests/state/preferencesStore.test.ts
+  ● old databases default to Light without a preference write; saved appearance survives a new store and leaves the complete life archive unchanged
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "user_version": 10,
+    +   "user_version": 11,
+      }
+
+      19 |   const cold = createPreferencesStore({ repository: async () => repository }); expect(await cold.getState().bootstrap()).toBe(true); expect(cold.getState().settings.appearance).toBe('dark');
+      20 |   expect(await repository.export(world.id)).toBe(archive); expect(await repository.active()).toEqual(world);
+    > 21 |   expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 10 }); sqlite.close();
+         |                                                       ^
+      22 | });
+      23 | test('a real SQLite write failure preserves the prior appearance, life, active preference and history; retry saves exactly the pending choice', async () => {
+      24 |   const { sqlite, repository, world, archive, store } = await fixture(); await store.getState().bootstrap(); await store.getState().setAppearance('dark');
+
+      at Object.toEqual (tests/state/preferencesStore.test.ts:21:55)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+PASS tests/game/save-json.test.ts
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/persistence/base64.test.ts
+PASS tests/game/creation.test.ts
+PASS tests/ui/interactions.test.tsx
+PASS tests/state/gameStore.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/game/primitives.test.ts
+
+Summary of all failing tests
+FAIL tests/state/preferencesStore.test.ts
+  ● old databases default to Light without a preference write; saved appearance survives a new store and leaves the complete life archive unchanged
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "user_version": 10,
+    +   "user_version": 11,
+      }
+
+      19 |   const cold = createPreferencesStore({ repository: async () => repository }); expect(await cold.getState().bootstrap()).toBe(true); expect(cold.getState().settings.appearance).toBe('dark');
+      20 |   expect(await repository.export(world.id)).toBe(archive); expect(await repository.active()).toEqual(world);
+    > 21 |   expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 10 }); sqlite.close();
+         |                                                       ^
+      22 | });
+      23 | test('a real SQLite write failure preserves the prior appearance, life, active preference and history; retry saves exactly the pending choice', async () => {
+      24 |   const { sqlite, repository, world, archive, store } = await fixture(); await store.getState().bootstrap(); await store.getState().setAppearance('dark');
+
+      at Object.toEqual (tests/state/preferencesStore.test.ts:21:55)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+
+Test Suites: 1 failed, 113 passed, 114 total
+Tests:       1 failed, 1792 passed, 1793 total
+Snapshots:   0 total
+Time:        1003.729 s
+Ran all test suites.

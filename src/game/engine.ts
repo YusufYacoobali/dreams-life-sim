@@ -1,3 +1,4 @@
+import { HobbyEventCommand, hobbyEventCommandSchema, resolveHobbyEvent } from './systems/hobbyEvents';
 import { LeisureCommand, leisureCommandSchema, resolveLeisure, refreshLeisure, leisureMonth } from './systems/leisure';
 import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } from './systems/pets';
 import { RelocationCommand, relocationCommandSchema, resolveRelocation } from './systems/relocation';
@@ -47,9 +48,9 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -328,10 +329,12 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const service=parseActivity(serviceCommandSchema, command);
     const royalty=parseActivity(royaltyCommandSchema, command);
     const travel=parseActivity(travelCommandSchema, command);
+    const hobbyEvent = parseActivity(hobbyEventCommandSchema, command);
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (leisure.success) resolveLeisure(world, leisure.data);
+    if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
+    else if (leisure.success) resolveLeisure(world, leisure.data);
     else if (pet.success) resolvePets(world, pet.data);
     else if (school.success) resolveSchool(world, school.data);
     else if (education.success) resolveEducation(world, education.data);

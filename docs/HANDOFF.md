@@ -14,14 +14,84 @@ never imply that coding continues in the background after ending the run.
 
 Autonomous implementation/testing/fixes/docs/commits/pushes are authorised.
 **Commit AND push at a safe point at least every two hours during active work.**
-Stop only for material decisions, genuine blockers or unavailable tools. No
-subagents without explicit authorisation. Further import/export/sharing breadth
+Stop only for material decisions, genuine blockers or unavailable tools. The user explicitly authorised multiple agents on 20 October; independent
+work/school UI tasks and a read-only review are delegated while the primary
+agent owns integration, consolidated gates and safe commits/pushes. Further import/export/sharing breadth
 stays parked; the existing80%+ implementation's folder-save check passed. Read-only
 previous-life summaries are complete. Full production remains approximately
 **55%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: factual progression and large text
+## Current checkpoint: hobby community events
+
+Eight local events, three approaches, actual12monthly practices/20proficiency,
+real reviewed fees/payer/consent, yearly uniqueness, bounded consequences and saved
+history. [Mechanics](HOBBY_COMMUNITY_EVENTS.md), [source/checks](verification/hobby-community-events-20261020.json).
+All1,793tests/114suites pass919.023s; all133UI/state/progression49suites pass123.200s;
+strict types and fresh Android/iOS Hermes exports pass. The initial full run's
+only failure was a stale preferences reader10expectation; corrected test only,
+full rerun clean. Runtime source was unchanged by that repair.
+
+World31 /engine32 /content8 /reader11 /checkpointv4. Game hash
+9a4a70c51fcab5737a9b22f84a9a83ff37cfa7c5fd3affcdac7427677eb2fd7e;
+combined game/persistence361f7acb1601a6ceabdc4fe13aaa2320f14743add90e380c924f564f8ef5226e.
+Old raw payloads are never eagerly rewritten; new empty history/tags only.
+No genuine fixtures regenerated. Same120annual seeds pass661.580s, same ordinary
+metrics asC8 but no full-world equality claim. Separate12natural country journeys
+pass176.729s:72requests/64attended/8refused/47commended, all8kinds,72cold results.
+All70serial warm fixed-driver action samples avoid full unpack, exact cold current/
+backup/original Before Age Up. These are scoped cloud/engine checks, not native
+birth-to-death, physical p95, extra annual seeds or full release gates.
+
+Actual native Nia23/revision126, seven lives/59moments/111receipts, no pending/year.
+Routine118/ack119, natural Buddy death120/ack121, resume122/hobby choice123/ack124,
+relaxed entry125/cold125/ack126 match entire expected worlds. All six inactive
+lives/backups,58original moments/metadata and102receipts exact. New Before Age Up119
+is raw original119byte for byte. Reading12attended months cost9600USDminorunits;
+entry400once, actual capped Happiness+4. Read-only117/large124/cold125/final126
+all eight tables exact. Font1.0 restored, ExpoGo force-stopped. Nine accepted
+capture pairs plus old cramped-row diagnostic. Shared modal columns now readable
+at130%; footer shows fee/error/action. The new event route correctly highlights
+Activities; early event captures precede that final navigation correction. [Native scope](verification/android24-hobby-events-20261020/).
+
+Last prior verified push2a2ea8217:33UTC. This verified milestone is being committed/
+pushed now; inspect git/remote for the final SHA and measure the next two-hour
+safe-push deadline from it. Multiple agents are authorised; keep file ownership
+separate and consolidate integration checks. Overall about55%; leisure60%. A routine
+checkpoint is not the end: continue immediately with the authorised work below.
+
+## Continue immediately: work and school routine dialogs
+
+Concrete next task: app/(game)/work.tsx lets the actual current effort be saved
+again and closes its modal before durable dispatch. Disable the current option,
+keep Set disabled until an actual edit, pass error into the modal and close only
+on successful save for routine/resign/retire. Existing EventModal selection state
+retains a failed draft if its key stays mounted. Disable dialog launch while busy.
+Read /tmp/dreams-next-work-routine-plan.md for the exact source audit/test plan.
+Then inspect school.tsx's same close-before-save behavior for effort/club/conduct;
+preserve completed callback/outing histories. Local asset deposit/term dialogs
+are read-only and should still close immediately; actual purchase is separate.
+
+For a UI-only correction preserve the game/persistence hash above. Do not repeat
+unchanged120/full engine gates. Use meaningful connected SQLite rollback/retry/
+warm0unpack/cold and unchanged-selection checks, fullUI/state/progression, types,
+exports and actual native current/change/resume. Use relevant supplied reference.
+Continue remaining work depth, financial/progression goals, editorial/balance,
+visual/accessibility and available release work. Extra file/history breadth stays
+parked; reliable automatic resume and original history stay required.
+
+Helpers: /tmp/dreams-native-ui.py now has wait-enabled and scroll-to. The latter
+uses exactly one actual fresh ScrollView bound and stops at an enabled visible
+control. Reading is below the initial130%Hobbies viewport: scroll, don't wait
+forever for an offscreen row. Null/transitional hierarchies and busy/missing taps
+are diagnostics, not latency. Never run concurrent XML helpers; await sessions.
+ADB5560/Metro8081; Welcome Continue as Nia Carter. Actual copies
+/tmp/dreams-hobby-events-final-db and -browsed-final-db (revision126),
+-entry-db/-cold-entry-db (125), -ready-db/-large-ready-db (124). Source/projection/
+verification/publication scripts remain in/tmp.
+Only read-only copies; no native SQL/world/date/funds/RNG edits or imports.
+
+## Prior checkpoint: factual progression and large text
 
 40 achievements /12 challenges /39 read-only facts. Details:
 [PROGRESSION_GOALS.md](PROGRESSION_GOALS.md),
@@ -46,42 +116,7 @@ Game/persistence unchanged fromd7dcc0e (combined12e1a38ca5104a66bae29665d7685983
 World30 /engine31 /content8 /reader10 /checkpointv4. No new whole-regression or
 lifetime count;1,657/111and same120baseline retain C8source scope below. Overall
 about55%, achievements/challenges about55%, further financial peak/reward depth
-open. Last verified remote pushd7dcc0e16:27UTC; this progression checkpoint is
-being committed/pushed now. Inspect git log/remote for final SHA; next safe push
-deadline two hours from that push. No subagents. Do not stop at a routine milestone.
-
-## Continue immediately: hobby community events
-
-The user prioritises finishing gameplay, with smooth buttons and early play.
-Next add actual community events for all8hobbies (reading, gaming, cooking,
-gardening, guitar, piano, chess, painting), after real practiced months. Give
-meaningful familiar/stretch/relaxed approach choices, reviewed real fees and
-parent consent for minors, one entry per hobby/calendar year, actual bounded
-consequences and durable results/history. Use existing hobby artwork. This
-connects early hobby routines to meaningful optional gameplay; no invented
-professional qualification, salary or purchase. Check actual payer/availability,
-practice, dates, stale quotes, no reroll/duplicate fee, failed save/retry/cold.
-Keep browsing/preview read-only, visible primary action and only pressed feedback.
-
-No showcase implementation yet. World31 /engine32 /reader11 would be appropriate
-if adding persisted records; content8/250situations can stay fixed because system
-outcomes do not inflate the catalogue. Reuse leisurePresent/leisurePayer and
-consent rules; indexLedger for receipt checks (avoid scanning full ledger per
-record). Use actual paid monthly practice, not free extra-practice spam, for
-entry readiness. Early access around age7 after an attended year is reasonable.
-Maintain migrations/old raw bytes, frozen-source gates,120lifetimes and actual
-native outcome acceptance for an engine milestone. Further file/history work
-stays parked; reliable automatic save/resume remains required.
-
-Local helpers: /tmp/dreams-native-ui.py and /tmp/dreams-copy-native-db.py.
-ADB emulator5560, Metro8081. Welcome button is Continue as Nia Carter. Fresh
-hierarchies only; await tool sessions before dependent gestures. Actual latest
-DB copies /tmp/dreams-progress40-{final,browsed-final}-db117 and cold-raise116.
-Current native result/goal verification scripts and source manifest live under
-/tmp/dreams-progress40-*. Do not mistake any projection/partial/busy capture for
-native proof. OS font changes restart ExpoGo; missing-control refusals/old label
-waits are diagnostics, not physical latency. Preserve removeClippedSubviews=false
-on Life (reproduced Android24 RenderThread crash otherwise).
+open. Last verified remote push2a2ea8217:33UTC; next safe commit/push deadline19:33UTC. No subagents. Do not stop at a routine milestone.
 
 ## Prior checkpoint: actual-life situation catalogue
 
@@ -526,7 +561,7 @@ acceptance. Correct any measured bottleneck, and continue broader adult stories,
 interviews, real hours/hourly pay, work conflicts and career depth. Multi-person
 result labels can also identify the actual affected people more clearly.
 
-There are125 more authored situations to reach250. All eleven special-career
+The250-situation minimum is now implemented; editorial and balance remain open. All eleven special-career
 story categories, adult relationships/finances/health/travel/leisure/later-life
 breadth, autonomous NPC depth, country-source verification, balance and broader
 integration remain open. The master specification still governs the complete

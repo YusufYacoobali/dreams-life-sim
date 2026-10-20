@@ -71,7 +71,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 30, engineVersion: 31, contentVersion: 8, id, revision: 0, date: { ...date },
+    schemaVersion: 31, engineVersion: 32, contentVersion: 8, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
@@ -87,7 +87,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     musicReleases: [],
     elections: [],
     creatorStudios:[],creatorInvoices:[],serviceCareers:[],royalHouses:[],trips:[],relocations:[],schoolCommunities:[],storyThreads:[],
-    schoolCompletions: [], recoveryCourses: [], scholarships: [], pets: [], petAdoptions: [], hobbies: [], leisureOutings: [], workplaces: [], workRaises: [],
+    schoolCompletions: [], recoveryCourses: [], scholarships: [], pets: [], petAdoptions: [], hobbies: [], hobbyEvents: [], leisureOutings: [], workplaces: [], workRaises: [],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };

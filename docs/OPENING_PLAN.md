@@ -1,5 +1,12 @@
 # Opening experience: priority and completion estimates
 
+The community-event milestone connects all8hobbies to actual attendance, reviewed
+fees/consent,3approaches, bounded saved results and history. All1,793tests,
+133UI/state/progression checks, strict types, fresh exports, same120annual
+lifetimes and12separate natural event journeys pass. Actual Android normal/130%
+entry, exact saved/cold result125and acknowledgement126 pass. Pets/hobbies now
+estimated60%, overall still about55%. [Current evidence](verification/hobby-community-events-20261020.json).
+
 The latest progression milestone adds40factual achievements/12challenges and
 virtualised goal lists. All129UI/state/progression checks, strict types, fresh
 exports and exact Android earned/cold-result checks pass. Shared100%labels also
@@ -339,7 +346,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
 | Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
-| Pets, hobbies and entertainment | 45% | Deeper leisure mechanics, balance and broader device review |
+| Pets, hobbies and entertainment | 60% | Further leisure depth, balance and broader device review |
 | Situational stories | About70% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
 | Achievements and challenges | 55% | Further financial milestones, challenge/reward depth and broader release review |
 | Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
@@ -352,7 +359,7 @@ work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Current next steps: add meaningful community events to hobbies, then remaining work/leisure depth; review
+Current next steps: prevent redundant current-routine saves and preserve failed work/school selections, then remaining work/leisure depth; review
 all250stories for balance/editorial coverage; complete visual/accessibility and
 available device/release gates. Preserve fast atomic autosave/resume. Further
 import/export/sharing/history breadth stays parked. The original opening

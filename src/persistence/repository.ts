@@ -37,10 +37,10 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader ten protects bound pet-story effects from older apps. Existing
+    // Reader eleven protects saved hobby event entries from older apps. Existing
     // plain/v1/v2 rows and historical payloads need no eager rewrite.
-    if (!version || version.user_version > 10) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 10) return;
+    if (!version || version.user_version > 11) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 11) return;
     const statements = [
       `CREATE TABLE IF NOT EXISTS lives (
         id TEXT PRIMARY KEY, name TEXT NOT NULL, revision INTEGER NOT NULL,
@@ -80,7 +80,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 10');
+      await tx.run('PRAGMA user_version = 11');
     });
   }
 

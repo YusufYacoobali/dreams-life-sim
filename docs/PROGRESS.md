@@ -18,7 +18,59 @@ and old data stay intact. The current breakdown is in
 completion is approximately55%, with250/250minimum situations implemented;
 editorial, balance and release acceptance remain open.
 
-## Current milestone: broader factual progression
+## Current milestone: community hobby events
+
+All eight hobbies now have local events after twelve actual attended monthly
+practices and20proficiency. Familiar, ambitious and relaxed approaches offer
+reviewed fees, different energy/chance/consequences, actual parental consent,
+one yearly entry/request and durable bounded outcomes/history. Refusals charge
+nothing and draw no performance outcome. Previewing and changing an approach
+save nothing. Entry's footer keeps the fee, accessible failure alert and action
+visible; failed saves retain the selected approach. Shared confirmation columns
+also correct a reproduced cramped label at130%text.
+[Mechanics and scope](HOBBY_COMMUNITY_EVENTS.md).
+
+All **1,793tests /114suites** pass in **919.023s**.
+All **133UI/state/progression checks /49suites** pass in
+**123.200s**, strict app/test types and both fresh Hermes exports.
+The first full run passed1,792checks and failed only an old preferences test's
+reader10expectation; that literal was corrected to11and the complete suite rerun.
+[Source and final checks](verification/hobby-community-events-20261020.json),
+[complete regression](verification/regression-hobby-events-20261020.txt).
+
+The same120immutable annual-policy seeds0–119 pass in661.580s. Recorded country,
+commands, death age, people and ledger metrics match content8; versions/new empty
+history change hashes, so no whole-world equality or extra-seed claim. A separate
+natural12-country event policy passes in176.729s:72requests,64attended events,
+eight refusals,47commendations and all8hobby kinds, with72exact cold result checks.
+Neither policy establishes native/all-choice/physical release acceptance.
+[Annual gate](verification/life-sweep-hobby-events-120-20261020.ndjson),
+[natural events](verification/hobby-event-natural-journeys-20261020.json).
+All70serial warm fixed-driver cloud action samples avoid full checkpoint decode;
+cold current/backup and original Before Age Up bytes remain exact. The new entry
+also retries without unpack in each connected UI approach test. These are not
+physical p95, a paired speedup or an extra natural1000-person journey.
+[Action scope](verification/action-latency-hobby-events-20261020.json).
+
+Actual Android Nia's reading118/ack119, interrupted normal year120–124,
+relaxed entry125/cold125/ack126 match entire expected production worlds. Normal/
+130%entry review, cancelled lessons review and final history keep all tables
+exact. Six inactive lives/backups,58old moments/metadata and102old receipts remain
+exact. New Before Age Up119 is the original current119payload byte for byte.
+Twelve actual monthly fees total9600USDminorunits; entry charges400once and
+changes Happiness by its actual capped4points. Final Nia23/revision126, seven
+lives/59moments/111receipts, no pending/year. Font1.0 restored; ExpoGo stopped.
+[Nine accepted capture pairs and diagnostic](verification/android24-hobby-events-20261020/).
+
+World31 /engine32 /content8 /reader11 /checkpointv4. Old lives gain an empty event
+collection and version tags without eager raw/history rewrites or invented
+practice/fees/draws. Immutable fixtures were not regenerated. Overall stays about
+55%; pets/hobbies/entertainment now estimated60%. Continue work/school routine
+usability, remaining work depth, factual goals, balance/editorial, visuals/
+accessibility and available release checks. Further file/history breadth stays
+parked under the user's instruction.
+
+## Prior milestone: broader factual progression
 
 There are now **40 achievements and 12 challenges**, using39facts from actual
 personal history. New goals cover scholarship support/completion, accepted work

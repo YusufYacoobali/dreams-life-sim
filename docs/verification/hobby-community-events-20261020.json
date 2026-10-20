@@ -1,0 +1,232 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "2a2ea82a491f264f56ab02c14ab3095c8dc0bdc0",
+  "versions": {
+    "world": 31,
+    "engine": 32,
+    "content": 8,
+    "database": 11,
+    "checkpoint": "v4"
+  },
+  "gameSourceHash": "9a4a70c51fcab5737a9b22f84a9a83ff37cfa7c5fd3affcdac7427677eb2fd7e",
+  "combinedGamePersistenceSourceHash": "361f7acb1601a6ceabdc4fe13aaa2320f14743add90e380c924f564f8ef5226e",
+  "source": {
+    "src/game/content/hobbyEvents.ts": "ec12b51daba74e61bc3c1150740bac52b9daece21370a60b31ec258a40a5bd1f",
+    "src/game/systems/hobbyEvents.ts": "915ee5c183c5a02c478aaeb7da591b63d896574aa811d447713fd22ceef4db26",
+    "src/game/systems/hobbyEventSchemas.ts": "6a398f69edbf8de33b26c0b5550d716fe2d045cab219ef76fa503edfd8592720",
+    "src/game/systems/hobbyEventValidation.ts": "5ff26415325a6235efcd83e8cfc57fe4be0e0802cbf313ee4d9a847bf4dae476",
+    "src/game/systems/leisure.ts": "a4eaf8b93a31f0d36726f2b1902e868f71fa02a566e91c55a286cd96a33ed504",
+    "src/game/systems/leisureValidation.ts": "fa2b900e5e5db2060db168c50e30a176d47501f67fb236528ccd96ae62c2f91e",
+    "src/game/model.ts": "64219297b80792a60a10390cdbeaa3fc43b2aea2e95af6cc495ccb4ff0711b7e",
+    "src/game/engine.ts": "a01c7086f253adb920e6adfcf874ebb66909fc60a9910f1d080a622fa7647eda",
+    "src/game/createLife.ts": "3d1bb6371904a3ce9d06dd4b7f0a89eed0a94b5ab270b2d92b5757702494d0d0",
+    "src/persistence/repository.ts": "6fb281fe214c6edc3fcb8591d7a55b1db311e7620d48e3d6916f41e15f0b194b",
+    "app/(game)/_layout.tsx": "bee8734b5b82395ea57d4f5ec9f0d21cbc0e9ea6f5fefce2f4538281c5dc4a22",
+    "src/ui/EventModal.tsx": "2a2e088cfda9d3f0deeca23ec9a7e78809c3bd2b21cc5740af426f6265a17c9d",
+    "src/ui/HobbyRoutine.tsx": "c1d7e37c6258db3b785221c0a1674629c11ba746a975a442b5b32cfd637363f1",
+    "src/ui/HobbyCommunityEvent.tsx": "f52865d0bb9997f385e992070ded2a9f9b4bff3b956d99838b7a899a75367648",
+    "app/(game)/hobby-event/[kind].tsx": "df2dd4711209d776a6a0eb46b24d1158e750b26f23db46d347cd2af9591ab191",
+    "tests/game/hobby-events.test.ts": "49c89ae282646a01c835e007810742f35b891f66d97d826bdcb04ad9e44616e9",
+    "tests/ui/hobby-event-flow.test.tsx": "c7c0258ad37365ae95f7f6c46cbbcf1e6bd16fadadde11efa3c3f78ae09c3c2d",
+    "tests/state/preferencesStore.test.ts": "9dc0d28505d14f8d16a07f2d60963f43af215d6db87247c8a8e70e13546d2819",
+    "tools/run-hobby-event-sweep.cjs": "f83201d1b7187b511a226a1ed9b101238a87318d5875a6b370fb5b89eb1ca3ef",
+    "tools/run-life-sweep.cjs": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "tools/benchmark-actions.cjs": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9"
+  },
+  "scope": "Eight persistent community hobby events, genuine attended-month readiness, reviewed actual fees, minor consent, three approaches, one yearly entry/request, bounded saved outcomes and read-only history. Clear footer errors, balanced shared modal columns and the correct Activities tab for the new route. Existing import/export/history breadth unchanged.",
+  "annualCatalogue": 250,
+  "events": 8,
+  "approaches": 3,
+  "checks": {
+    "regression": {
+      "exitCode": 0,
+      "suites": 114,
+      "tests": 1793,
+      "elapsedSeconds": 919.023,
+      "raw": "regression-hobby-events-20261020.txt",
+      "sha256": "c3869425828c62682aa3b34277e4dd719a5872e09e126d06629afa24a84ca5a2"
+    },
+    "initialDiagnostic": {
+      "exitCode": 1,
+      "passed": 1792,
+      "failed": 1,
+      "elapsedSeconds": 1003.729,
+      "reason": "Stale preferencesStore test expected database reader10 rather than11. Only that literal expectation changed; complete regression rerun. No game or persistence fix.",
+      "raw": "regression-hobby-events-initial-20261020.txt",
+      "sha256": "5c5da350c5e916c65f9051937a872a0b6d0c8d660ead6a3c0d88beb61db30e7f"
+    },
+    "uiStateProgression": {
+      "exitCode": 0,
+      "tests": 133,
+      "suites": 49,
+      "elapsedSeconds": 123.2,
+      "raw": "regression-hobby-events-ui-20261020.txt",
+      "sha256": "a478bd0535f1a5b072cad7d371f750ffe082247d42e9ecbf7b79a820cdbb056f"
+    },
+    "strictTypes": {
+      "exitCode": 0,
+      "scope": "App and tests",
+      "file": "types-hobby-events-20261020.txt",
+      "bytes": 89,
+      "sha256": "c9f2edf8d8877831dd7161eceb1f1ccf3ad923f51bcf25baf424c7c3e1a25934",
+      "logNormalization": "Trailing blank lines removed; command output otherwise exact."
+    },
+    "exports": {
+      "exitCode": 0,
+      "scope": "Fresh Android and iOS Hermes exports; not standalone/device acceptance",
+      "bundles": {
+        "android": {
+          "file": "_expo/static/js/android/entry-d0f520626279d9990c0e6b1f93a4406f.hbc",
+          "bytes": 5658336,
+          "sha256": "a6bd35962c501ccd4085de71abb24faa3e8df794e6bc6b36303597adae2bc88b"
+        },
+        "ios": {
+          "file": "_expo/static/js/ios/entry-87cc5441bae6b53b98cac9808de8438c.hbc",
+          "bytes": 5354405,
+          "sha256": "344f99fb9f5b92d0d8b438955cc4f30d74d818aeb2bffb88d8f262e73b13f69c"
+        }
+      },
+      "file": "exports-hobby-events-20261020.txt",
+      "bytes": 2336,
+      "sha256": "9bee3c39b05a3f9264f9fe8ea243aae93facf06b146c01ba0f99583754effcbb"
+    },
+    "lifetimes": {
+      "scope": "Same immutable annual-policy seeds0..119 and unchanged driver, all twelve countries. No new distinct seeds; optional hobby events not entered by this policy. Not native, SQLite or all choices.",
+      "exitCode": 0,
+      "stderrBytes": 0,
+      "start": {
+        "event": "sweep-start",
+        "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+        "stateMode": "validated immutable",
+        "node": "v24.19.0",
+        "count": 120,
+        "startSeed": 0,
+        "gameSourceHash": "9a4a70c51fcab5737a9b22f84a9a83ff37cfa7c5fd3affcdac7427677eb2fd7e",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "setupMs": 5016
+      },
+      "complete": {
+        "event": "sweep-complete",
+        "count": 120,
+        "startSeed": 0,
+        "completed": 120,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 31,
+          "engine": 32,
+          "content": 8
+        },
+        "gameSourceHash": "9a4a70c51fcab5737a9b22f84a9a83ff37cfa7c5fd3affcdac7427677eb2fd7e",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 10,
+          "IT": 11,
+          "BR": 12,
+          "ZA": 10,
+          "ES": 12,
+          "US": 13,
+          "CA": 10,
+          "GB": 10,
+          "DE": 12,
+          "FR": 6,
+          "IN": 6,
+          "JP": 8
+        },
+        "ageRange": [
+          40,
+          98
+        ],
+        "maxPeople": 24,
+        "maxLedgerRows": 55199,
+        "elapsedMs": 661580
+      },
+      "sameOrdinaryMetricsAsContent8": [
+        "seed",
+        "country",
+        "commands",
+        "ageAtDeath",
+        "people",
+        "ledgerRows"
+      ],
+      "completeWorldHashesCompared": false,
+      "hashLimit": "World/engine tags and the new empty event collection change complete hashes. No terminal-world equality claim.",
+      "file": "life-sweep-hobby-events-120-20261020.ndjson",
+      "bytes": 37663,
+      "sha256": "de1da863ac1ca265fadb2395c06ff38349096ef8f32c531aef4b1323e2759169"
+    },
+    "naturalEvents": {
+      "exitCode": 0,
+      "scope": "Separate twelve-country optional-event policy, seeds900..911: natural birth-to-death pure-engine journeys, first available story/interview choices, healthy routine, real work/retirement, one dog, two paid hobby routines rotating all eight kinds, at most three actual yearly entry requests per kind using familiar/stretch/relaxed in order, exact cold event results and annual venue cycle. No funds/stats/date/RNG overrides; not native, all-choice, extra annual-policy seeds, physical timing, 120-year or multigeneration acceptance",
+      "elapsedMs": 176729,
+      "lives": 12,
+      "requests": 72,
+      "attended": 64,
+      "declined": 8,
+      "commended": 47,
+      "attendedKinds": [
+        "guitar",
+        "painting",
+        "photography",
+        "chess",
+        "reading",
+        "gaming",
+        "cooking",
+        "gardening"
+      ],
+      "exactColdResultChecks": 72,
+      "file": "hobby-event-natural-journeys-20261020.json",
+      "bytes": 48636,
+      "sha256": "91e7e93581de32bcea8e33c78b7e39b670b1daf9b575d3cbdc013f66b3949497"
+    },
+    "actions": {
+      "exitCode": 0,
+      "scope": "Unchanged fixed driver,14inputs/commands and70serial warm Node/on-disk SQLite samples after gate processes closed and native app stopped. Every cold current/backup and original Before Age Up payload exact. Existing other-action driver, not a new club-entry timing, paired speedup, native/physical p95 or natural1000-person acceptance.",
+      "warmSamples": 70,
+      "warmFullDecodes": 0,
+      "file": "action-latency-hobby-events-20261020.json",
+      "bytes": 53714,
+      "sha256": "75e8cb2e3637321134ce4429d24a6fb13171a4f1ae4caf069a162a2420eb98bf"
+    },
+    "native": {
+      "scope": "Actual Android24 software emulator / official ExpoGo57.0.9. Existing Nia22 native117, real reading routine and normal paid year, natural pet death/interruption, hobby scene, reviewed relaxed club entry, cold result, acknowledgement and read-only history. No native SQL/world/date/funds/RNG edits or imports. Not native birth-to-event, physical latency, standalone or iOS acceptance.",
+      "initialRevision": 117,
+      "final": {
+        "revision": 126,
+        "age": 23,
+        "lives": 7,
+        "moments": 59,
+        "receipts": 111,
+        "reading": {
+          "attendedMonths": 12,
+          "proficiency": 24,
+          "paid": "9600",
+          "monthlyFee": "800",
+          "payerId": "person_player",
+          "currency": "USD"
+        },
+        "entry": {
+          "kind": "reading",
+          "approach": "relaxed",
+          "paid": "400",
+          "currency": "USD",
+          "recognized": false
+        },
+        "paidWorkMonths": 48,
+        "annualGross": "3360000"
+      },
+      "coldResultRevision": 125,
+      "allSixInactiveLivesBackupsAnd58OriginalMoments102ReceiptsExact": true,
+      "oneNewBeforeAgeUp119RawExact": true,
+      "record": "android24-hobby-events-20261020/journey-exact.json"
+    }
+  },
+  "limits": [
+    "Overall game remains approximately55%; this milestone is not complete production or release acceptance.",
+    "Further import/export/sharing/history breadth remains parked; automatic save/resume and preservation stay required.",
+    "Immutable fixtures were not regenerated.",
+    "Initial pre-alert and pre-column exports are private diagnostics, not the final export gate.",
+    "Early event captures precede the final Activities-tab highlight mapping; game behavior is unchanged and final history verifies the corrected tab. Capture10 preserves the reproduced cramped terms before the shared-column fix. Other early no-error screens have unchanged rendered content; the final large-text entry/cold/history use the final UI.",
+    "Native automation rejected a busy navigation tap and transient/null hierarchies. These and partial launch captures are diagnostic, not latency or completed acceptance.",
+    "The separate natural event policy is not the unchanged annual120policy or extra distinct annual seeds."
+  ]
+}

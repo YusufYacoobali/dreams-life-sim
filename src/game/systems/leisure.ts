@@ -29,7 +29,7 @@ export function leisurePayer(world: World, person = active(world)) {
 export const hobbyFee = (country: CountryCode, kind: HobbyKind, mode: HobbyPlan['mode']) => roundRatio(rules[country].baseWage * BigInt(hobbyContent[kind].feeBps * (mode === 'lessons' ? 4 : 1)), 10000n);
 export function outingFee(world: World, kind: OutingKind) { const person = active(world); return roundRatio(rules[person.country].baseWage * BigInt(outingContent[kind].feeBps), 10000n) * (ageOn(person, world.date) < 18 ? 2n : 1n); }
 const requestKey = (world: World, kind: HobbyKind, mode: HobbyPlan['mode'], payerId: string) => active(world).id + ':hobby-request:' + kind + ':' + mode + ':' + payerId + ':' + world.date.year;
-function consent(world: World, person: Person, payer: Person) {
+export function leisureConsent(world: World, person: Person, payer: Person) {
   const edge = world.relationships.find(item => item.from === payer.id && item.to === person.id || item.to === payer.id && item.from === person.id), strength = person.id === payer.id ? null : edge?.strength ?? 20, chance = strength === null ? 100 : Math.min(95, 45 + Math.floor(strength / 2)), roll = strength === null ? 100 : draw(world, 'npcs', 1, 100);
   return { strength, chance, roll, accepted: roll <= chance };
 }
@@ -100,7 +100,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
   if (command.type === 'hobby-plan') {
     const reason = hobbyReason(world, command.kind, command.mode); if (reason) throw new IneligibleAction(reason);
     const payer = leisurePayer(world)!, fee = hobbyFee(person.country, command.kind, command.mode); if (payer.id !== command.reviewedPayerId || fee !== command.quotedMonthlyFee) throw new IneligibleAction('The payer or routine cost changed; review the current terms');
-    const permission = consent(world, person, payer); let hobby = personHobbies(world).find(item => item.kind === command.kind);
+    const permission = leisureConsent(world, person, payer); let hobby = personHobbies(world).find(item => item.kind === command.kind);
     if (!hobby) { hobby = { id: 'hobby_' + person.id + '_' + command.kind, personId: person.id, kind: command.kind, proficiency: 0, plans: [], practices: [] }; world.hobbies.push(hobby); }
     const prior = activeHobbyPlan(hobby); if (permission.accepted && prior) closePlan(world, hobby, prior, 'stopped', 'I chose a different routine.');
     if (payer.id === person.id) { const key = person.id + ':hobby-change:' + command.kind + ':' + absolute(world); world.actionCounts[key] = (world.actionCounts[key] ?? 0) + 1; } else world.actionCounts[requestKey(world, command.kind, command.mode, payer.id)] = 1;
@@ -111,7 +111,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
   if (command.type === 'leisure-outing') {
     const reason = outingReason(world, command.kind); if (reason) throw new IneligibleAction(reason);
     const payer = leisurePayer(world)!, total = outingFee(world, command.kind); if (payer.id !== command.reviewedPayerId || total !== command.quotedTotal) throw new IneligibleAction('The payer or ticket cost changed; review this outing');
-    const permission = consent(world, person, payer), participants = payer.id === person.id ? [person.id] : [person.id, payer.id], ledgerCursor = world.ledger.length, available = availableCash(accountFor(world, payer));
+    const permission = leisureConsent(world, person, payer), participants = payer.id === person.id ? [person.id] : [person.id, payer.id], ledgerCursor = world.ledger.length, available = availableCash(accountFor(world, payer));
     world.actionCounts[person.id + ':outing:' + command.kind + ':' + absolute(world)] = 1;
     let outcome: 1 | 2 | 3 | null = null; const effects: LeisureEffect[] = [];
     if (permission.accepted) {

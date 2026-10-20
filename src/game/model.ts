@@ -45,6 +45,8 @@ import { recoveryCourseSchema, secondaryCompletionSchema } from './systems/educa
 import { validateEducationRecovery } from './systems/educationRecoveryValidation';
 import { scholarshipSchema } from './systems/scholarshipSchemas';
 import { hobbySchema, outingSchema } from './systems/leisureSchemas';
+import { hobbyEventSchema } from './systems/hobbyEventSchemas';
+import { validateHobbyEvents } from './systems/hobbyEventValidation';
 import { validateLeisure } from './systems/leisureValidation';
 import { petAdoptionSchema, petSchema } from './systems/petSchemas';
 import { validatePets } from './systems/petValidation';
@@ -84,7 +86,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(30), engineVersion: z.literal(31), contentVersion: z.literal(8),
+  schemaVersion: z.literal(31), engineVersion: z.literal(32), contentVersion: z.literal(8),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -112,7 +114,7 @@ export const worldSchema = z.object({
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
-  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), leisureOutings: z.array(outingSchema),
+  scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
@@ -313,6 +315,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateScholarships(world);
   validatePets(world, ledger);
   validateLeisure(world, ledger);
+  validateHobbyEvents(world, ledger);
   validateStoryThreads(world, ledger);
   validateRelocations(world, ledger);
   validateCareers(world);
@@ -527,5 +530,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // New life-context stories affect future selection only, never bound old scenes.
   if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 30) parsed.engineVersion = 31;
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 7) parsed.contentVersion = 8;
+  // Community events start empty; old practice, payments, bound scenes and RNG stay exact.
+  if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 31) { parsed.schemaVersion = 31; parsed.engineVersion = 32; parsed.hobbyEvents = []; }
   return validateWorld(parsed, immutable);
 }
