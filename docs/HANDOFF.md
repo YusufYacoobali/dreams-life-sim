@@ -1,5 +1,22 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Native outing acceptance now passes on unchanged `e29e634`. A separate seed-4
+life reaches an actual age-eleven Johannesburg invitation through normal
+Start/Begin and 29 production commands; the existing picker loads its preserved
+archive. Actual permission charges nothing; month-one attendance charges Ava
+exactly R75 once, with saved permission/RNG unchanged. Force-stop/cold result
+preserves all eight tables; the remaining eleven months and fort choice finish
+age twelve / revision 37. Simulation fields match production exactly, with
+explicitly recorded native-vs-Node currency-spacing presentation exceptions.
+All four existing worlds/backups, sixteen moments and eighteen receipts stay
+exact; the original input's eleven moments also remain byte-exact. Native state
+is now **five lives / twenty-eight moments / twenty-five receipts**, Amahle
+`life_native_arcade_v28` active at revision 37, original Riley 53 / branch 38
+unchanged. Read [raw proof and limits](verification/android24-arcade-20261020/).
+The preparation is not a native birth-to-eleven claim. No player file breadth
+or source change; all existing checks/exports and the 1,000-seed gate retain
+their scope. Continue the full production plan and early-game priority.
+
 Latest: import/recovery now publish their authoritative saved-life summary from
 the successful repository operation. Normal actions already retained branch
 origin; only the old import/recovery helper dropped it. No post-commit list or

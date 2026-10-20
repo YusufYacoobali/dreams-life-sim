@@ -23,6 +23,14 @@ keeps all original lives/history exact, and shows the label immediately.
 [Native proof](verification/android24-save-summary-20261020/) records this
 existing-path correction; further file breadth remains deferred.
 
+The native school outing now passes permission, one actual month, exact parent
+payment, cold paid-result resume and the remaining eleven months. All simulation
+data matches production; native currency-spacing presentation exceptions are
+recorded separately. Original saved lives/history remain exact. The separate
+acceptance input is naturally prepared with ordinary commands, not a native
+birth-to-eleven claim. [Raw scope](verification/android24-arcade-20261020/)
+retains those limits; no runtime source or file-feature breadth changes.
+
 A further actual childhood year and school study now show new journal facts
 using the native content end rather than FlatList's estimated row tail. Manual
 history reading stays available, and primary school shows relevant guidance.

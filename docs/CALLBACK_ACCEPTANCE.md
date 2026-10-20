@@ -45,3 +45,16 @@ month-twelve pet pause and the birthday lunch complete age eight. The original
 three worlds/backups, twelve moments and seventeen receipts remain exact.
 This establishes that native positive project/cold/year path; other callback
 branches, physical timings and broader release gates retain their own scope.
+
+The subsequent [actual Android outing check](verification/android24-arcade-20261020/)
+uses a naturally prepared seed-4 invitation and existing picker. Permission
+charges nothing; first-month attendance deducts the saved R75 quote from Ava
+once without rerolling permission/RNG. The paid result survives force-stop/cold
+Continue with all eight tables exact. Remaining months and a real age-twelve
+choice complete the year, preserving the single transaction. All simulation
+fields match replay; exact native-vs-Node currency-spacing differences are
+recorded for presentation strings. All four older worlds and history stay exact.
+This adds a native positive permission/payment/cold/year path. The preparation
+uses normal production commands in the cloud, not native birth-to-eleven play;
+negative native cases, injected device-storage failure and release gates remain
+separate. No app/game/codec source changes.

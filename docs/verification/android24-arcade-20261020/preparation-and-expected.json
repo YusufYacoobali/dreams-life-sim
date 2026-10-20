@@ -1,0 +1,282 @@
+{
+  "scope": "Separate acceptance fixture generated from unmodified e29e634 with normal randomCreation seed4, game-store startLife/acknowledgeBirth and every recorded ordinary command; no manual world/date/stat/RNG/event/outcome edits; not an original Android onboarding journey",
+  "producerCommit": "e29e634",
+  "seed": 4,
+  "creation": {
+    "firstName": "Amahle",
+    "lastName": "Nkosi",
+    "gender": "male",
+    "country": "ZA",
+    "city": "Johannesburg",
+    "appearance": {
+      "face": 2,
+      "skin": 0,
+      "hair": 7,
+      "hairColor": 3
+    },
+    "background": "ordinary"
+  },
+  "startDate": {
+    "year": 2026,
+    "month": 10,
+    "day": 20
+  },
+  "lifeId": "life_native_arcade_v28",
+  "preparationCommands": [
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2027_first-sock-escape",
+      "choiceId": "both"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2027_first-sock-escape_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2028_toddler-grocery-microphone",
+      "choiceId": "repeat"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2028_toddler-grocery-microphone_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "year_7_summary"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2030_toddler-why-machine",
+      "choiceId": "follow"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2030_toddler-why-machine_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2031_toddler-shadow-race",
+      "choiceId": "dance"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2031_toddler-shadow-race_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2032_child-boardgame-rules",
+      "choiceId": "accept"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2032_child-boardgame-rules_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2033_school-bench-reserve",
+      "choiceId": "sit"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2033_school-bench-reserve_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "year_21_summary"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2035_school-glitter-border",
+      "choiceId": "clean"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2035_school-glitter-border_result"
+    },
+    {
+      "type": "advance"
+    },
+    {
+      "type": "choose",
+      "eventId": "event_2036_school-inverted-map",
+      "choiceId": "turn"
+    },
+    {
+      "type": "acknowledge",
+      "resultId": "event_2036_school-inverted-map_result"
+    },
+    {
+      "type": "advance"
+    }
+  ],
+  "inputFile": "natural-invitation.dreams.json",
+  "inputFileBytes": 249097,
+  "inputFileSha256": "9f29358a7091140838611ff2a0b2929943f35cb5af9ead6329eaffaa51c8cb05",
+  "inputRevision": 30,
+  "moments": 11,
+  "expectedStates": [
+    {
+      "command": null,
+      "revision": 30,
+      "date": {
+        "year": 2037,
+        "month": 10,
+        "day": 20
+      },
+      "pending": "Birthday invitation",
+      "annualMonths": 12,
+      "sha256": "0de2b0319c63a97bf55a1d583f66af49c2fa90f4b9ca607045f769064289b1d3"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2037_school-arcade-invitation",
+        "choiceId": "ask"
+      },
+      "revision": 31,
+      "date": {
+        "year": 2037,
+        "month": 10,
+        "day": 20
+      },
+      "pending": "Adults need an address",
+      "annualMonths": 12,
+      "sha256": "c7b8a1d7d3e4f2920855a518ba3a8ba0be6d42a6c9a1a55e9b6bb7444b5ad99c"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2037_school-arcade-invitation_result"
+      },
+      "revision": 32,
+      "date": {
+        "year": 2037,
+        "month": 10,
+        "day": 20
+      },
+      "pending": null,
+      "annualMonths": null,
+      "sha256": "e22e55af209fd3c61ec06a756a6287c753202ef1966fd6a9f00d8cbc2534101d"
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 33,
+      "date": {
+        "year": 2037,
+        "month": 11,
+        "day": 20
+      },
+      "pending": "Party day",
+      "annualMonths": 1,
+      "sha256": "1306c431277f7e7f814c8e8e68f8853c9ee833192f49e89a13d348bf2a954387"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "story_30_0_due",
+        "choiceId": "attend"
+      },
+      "revision": 34,
+      "date": {
+        "year": 2037,
+        "month": 11,
+        "day": 20
+      },
+      "pending": "High score, low dignity",
+      "annualMonths": 1,
+      "sha256": "f19b688b6e3fdc792e9816a797bb16b962789097a7c42ae61bf0fc60c84f693e"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "story_30_0_due_result"
+      },
+      "revision": 35,
+      "date": {
+        "year": 2038,
+        "month": 10,
+        "day": 20
+      },
+      "pending": "Indoor architecture",
+      "annualMonths": 12,
+      "sha256": "cf6ab468e02d86c7393d463d1bd49a922d8fa991dce07972e8caf19f09b6ce08"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2038_rainy-fort",
+        "choiceId": "build"
+      },
+      "revision": 36,
+      "date": {
+        "year": 2038,
+        "month": 10,
+        "day": 20
+      },
+      "pending": "Approved for immediate occupancy",
+      "annualMonths": 12,
+      "sha256": "c9088e2b330fc39c31465b9a04853e234280b6d20599d8d9bcb490ecfad31617"
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2038_rainy-fort_result"
+      },
+      "revision": 37,
+      "date": {
+        "year": 2038,
+        "month": 10,
+        "day": 20
+      },
+      "pending": null,
+      "annualMonths": null,
+      "sha256": "81473a4a8854c2e00bc2cd4dc822d219b2298bbb3baab1ebcd60b5e319af713f"
+    }
+  ],
+  "permission": {
+    "personId": "person_parent1",
+    "trustAtRequest": 79,
+    "chance": 89,
+    "roll": 70,
+    "accepted": true
+  },
+  "quote": {
+    "amount": "7500",
+    "currency": "ZAR",
+    "payerId": "person_parent1"
+  },
+  "finalExpectedRevision": 37,
+  "presentationNote": "Node and Android 24 Intl currency spacing may differ in pending presentation strings. Record every actual string difference explicitly; compare all non-presentation fields exactly. No native world/output normalization or currency/amount edits.",
+  "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+  "combinedGamePersistenceSourceHash": "c7514395530d78c69341fff805b084308a8c5da600b4f3ef348d1564a495cf75"
+}

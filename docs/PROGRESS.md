@@ -12,6 +12,22 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Actual Android outing acceptance now covers a naturally prepared age-eleven
+Johannesburg invitation, permission with no charge, month-one attendance and
+one R75 payment by the original parent. Permission and RNG survive unchanged.
+Force-stop/cold paid-result Continue preserves every row across all eight
+tables; the actual remaining eleven months and fort choice finish age twelve,
+revision 37, without a repeat charge. All simulation fields match the production
+replay; native-vs-Node currency-spacing differences in presentation strings are
+enumerated explicitly. All four previous worlds/backups, sixteen moments and
+eighteen receipts remain exact, along with eleven original fixture moments.
+Native totals are five lives / twenty-eight moments / twenty-five receipts.
+The separate fixture was produced by normal Start/Begin and 29 ordinary game
+commands, then loaded through the existing picker; this does not establish a
+native birth-to-eleven journey or add file-feature breadth. App/game/codec source
+is unchanged from `e29e634`; regression/export/lifetime scopes stay fixed.
+[Raw evidence and limitations](verification/android24-arcade-20261020/).
+
 Import/recovery now retain the actual saved-life branch origin immediately,
 using the summary returned from the successful repository transaction. Normal
 actions already preserved it. This adds no post-commit list/decode and preserves
