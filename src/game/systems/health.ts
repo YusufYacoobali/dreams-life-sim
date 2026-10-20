@@ -97,7 +97,7 @@ function startTreatment(world: World, person: Person, condition: Condition, prov
 export function emergencyCare(world: World, personId: string, conditionId: string, accepted: boolean, quotedCost?: bigint) {
   const person = world.people[personId], condition = person?.health.conditions.find(item => item.id === conditionId && item.status !== 'recovered');
   if (!person || person.died || !condition) throw new IneligibleAction('This medical emergency is no longer active');
-  if (accepted) { condition.diagnosed = { ...world.date }; startTreatment(world, person, condition, providerFor(world, person), true, quotedCost); }
+  if (accepted) { condition.diagnosed ??= { ...world.date }; startTreatment(world, person, condition, providerFor(world, person), true, quotedCost); }
   else { condition.severity = bounded(condition.severity + 5); person.stats.stress = bounded(person.stats.stress + 5); record(world, person, 'declined-care', 'Emergency assessment was declined.', 0n, null, condition.id); }
   return [{ id: 'care', label: 'Medical care', value: accepted ? 'Admitted to hospital' : 'Declined', tone: accepted ? 'positive' as const : 'negative' as const }];
 }
@@ -209,7 +209,7 @@ export function healthMonth(world: World) {
       }
       if (person.id === world.activePersonId && condition.severity >= 70 && !world.pending && condition.lastEmergencyYear !== world.date.year && !hospitalized(world, person)) {
         condition.lastEmergencyYear = world.date.year; const cost = treatmentCost(world, condition, person);
-        world.pending = { kind: 'decision', id: 'emergency_' + condition.id + '_' + world.date.year, templateId: 'medical-emergency', title: 'You need medical attention', body: 'Your symptoms have become serious. A hospital assessment can begin treatment and may require a short stay. The quoted care costs ' + formatMoney({ minor: cost, currency: countries[person.country].currency }) + '; an unpaid emergency bill remains a real obligation.', illustration: 'care', personIds: [person.id], choices: [
+        world.pending = { kind: 'decision', id: 'emergency_' + condition.id + '_' + world.date.year, templateId: 'medical-emergency', title: 'You need medical attention', body: 'Your symptoms have become serious: ' + definition.symptoms.toLowerCase() + '. ' + (condition.diagnosed ? 'You have been diagnosed with ' + definition.name + '. ' : '') + 'A hospital assessment can begin treatment and may require a short stay. The quoted care costs ' + formatMoney({ minor: cost, currency: countries[person.country].currency }) + '; an unpaid emergency bill remains a real obligation.', illustration: 'care', personIds: [person.id], choices: [
           { id: 'care', label: 'Accept hospital assessment', effects: [{ kind: 'emergency-care', personId: person.id, conditionId: condition.id, accepted: true, quotedCost: cost }], resultTitle: 'Medical care arranged', resultBody: 'The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.', journal: 'I accepted urgent medical care.' },
           { id: 'decline', label: 'Decline assessment', effects: [{ kind: 'emergency-care', personId: person.id, conditionId: condition.id, accepted: false, quotedCost: cost }], resultTitle: 'Care declined', resultBody: 'You declined the assessment. The condition remains active and the risk has not gone away.', journal: 'I declined urgent medical assessment.' },
         ] };
@@ -226,7 +226,7 @@ export function healthFinanceMonth(world: World) {
     for (const condition of person.health.conditions.filter(item => item.status !== 'recovered')) {
       if (person.id !== world.activePersonId && condition.severity >= 35 && !condition.treatment && draw(world, 'npcs', 1, 100) <= (person.traits.includes('practical') ? 55 : 25)) {
         const quote = medicalQuote(world, treatmentCost(world, condition, person), person);
-        if (availableCash(accountFor(world, quote.payer)) >= quote.amount && (quote.payer.id !== person.id || ageOn(person, world.date) >= 18 || !quote.amount)) { const provider = providerFor(world, person); condition.diagnosed = { ...world.date }; startTreatment(world, person, condition, provider); }
+        if (availableCash(accountFor(world, quote.payer)) >= quote.amount && (quote.payer.id !== person.id || ageOn(person, world.date) >= 18 || !quote.amount)) { const provider = providerFor(world, person); condition.diagnosed ??= { ...world.date }; startTreatment(world, person, condition, provider); }
       }
       const treatment = condition.treatment; if (!treatment || treatment.lastPaymentMonth >= month) continue;
       const cost = isConfined(world, person) ? 0n : rules[person.country].doctorVisit / 6n, quote = medicalQuote(world, cost, person);
