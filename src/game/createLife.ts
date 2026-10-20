@@ -87,7 +87,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     musicReleases: [],
     elections: [],
     creatorStudios:[],creatorInvoices:[],serviceCareers:[],royalHouses:[],trips:[],relocations:[],schoolCommunities:[],storyThreads:[],
-    schoolCompletions: [], recoveryCourses: [], scholarships: [], pets: [], petAdoptions: [], hobbies: [], hobbyEvents: [], hourlyContracts: [], leisureOutings: [], workplaces: [], workRaises: [], npcCourtships: [],
+    schoolCompletions: [], schoolWithdrawals: [], recoveryCourses: [], scholarships: [], pets: [], petAdoptions: [], hobbies: [], hobbyEvents: [], hourlyContracts: [], leisureOutings: [], workplaces: [], workRaises: [], npcCourtships: [],
     accounts: [player, ...guardians].map(p => {
       const cash = p.id === player.id ? 0n : roundRatio(rules[input.country].baseWage * BigInt(roll(2, 18)), 10n);
       return { id: 'account_' + p.id, ownerId: p.id, currency: country.currency, cash, openingCash: cash };

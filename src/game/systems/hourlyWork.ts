@@ -5,6 +5,7 @@ import { roundRatio } from '../money';
 import { jobs, type JobRole } from '../content/jobs';
 import type { CountryCode } from '../countries';
 import type { HourlyContract, HourlyTerms } from './hourlyWorkSchemas';
+import { hasWithdrawnFromSchool } from './schoolSchemas';
 
 export const hourlyAnnual = (terms: HourlyTerms) => terms.hourlyRate * BigInt(terms.weeklyHours * terms.paidWeeks);
 /** Authored 12-hour baseline, not a claim about national minimum wages. */
@@ -14,7 +15,7 @@ export function hourlyQuote(country: CountryCode, role: JobRole, weeklyHours: Ho
   return { hourlyRate: rate > 0n ? rate : 1n, weeklyHours, paidWeeks: 52 };
 }
 export function hourlyStudentReason(world: World, hours: number, person = world.people[world.activePersonId]): string | undefined {
-  const schoolAge = ageOn(person, world.date) < rules[person.country].schoolEnd && !person.education.qualifications.some(q => q.level === 'secondary');
+  const schoolAge = ageOn(person, world.date) < rules[person.country].schoolEnd && !hasWithdrawnFromSchool(world, person.id) && !person.education.qualifications.some(q => q.level === 'secondary');
   if (hours > 16 && (person.education.stage !== 'none' || schoolAge)) return 'Students can work at most 16 contracted hours each week';
 }
 export const hourlyContract = (world: World, employmentId = world.people[world.activePersonId].employment?.id) => world.hourlyContracts.find(item => item.employmentId === employmentId);

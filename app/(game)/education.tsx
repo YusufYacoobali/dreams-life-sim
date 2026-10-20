@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { fields } from '../../src/game/systems/schemas';
 import { courseMonths, educationActionReason, enrollmentReason, tuitionFor } from '../../src/game/systems/education';
-import { rules } from '../../src/game/rules';
+import { minimumSchoolLeavingAge, rules } from '../../src/game/rules';
 import { accountFor, availableCash } from '../../src/game/systems/common';
 import { formatMoney } from '../../src/game/money';
 import { loanRateQuote } from '../../src/ui/loanRateQuote';
@@ -38,7 +38,7 @@ export default function Education() {
       {education.stage !== 'none' && <><Body>{education.field || education.stage} · {education.paused ? 'Paused — tuition required' : education.effort + ' routine'}</Body><StatBar label="Grades" value={education.grades} color={c.blue} />{education.requiredMonths > 0 && <Body muted>{education.months} of {education.requiredMonths} study months completed</Body>}</>}
       {education.qualifications.length === 0 ? <Body muted>No completed qualifications yet.</Body> : education.qualifications.map((q, index) => <Body key={index}>{q.level[0].toUpperCase() + q.level.slice(1)} · {q.field} · {q.year}</Body>)}
     </Card>
-    {['primary', 'secondary'].includes(education.stage) && <Card><Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. Public-school withdrawal is unavailable; a qualification requires the passing grade and recorded study.</Body><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
+    {['primary', 'secondary'].includes(education.stage) && <Card><Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. {education.stage === 'secondary' ? 'Its minimum leaving age is ' + minimumSchoolLeavingAge[player.country] + '; review early withdrawal from Your School. Leaving early does not award a qualification.' : 'Primary-school withdrawal is unavailable.'} A qualification requires the passing grade and recorded study.</Body><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
     {education.stage === 'none' && (world.schoolCommunities.some(item => item.personId === player.id) || world.schoolCompletions.some(item => item.personId === player.id)) && <Card><ActionRow title="School Years" subtitle="Reports, plans and completion" onPress={() => router.push('/school')} /></Card>}
     {error && !dialog && <Body>{error}</Body>}
     {education.stage !== 'none' && <Card>

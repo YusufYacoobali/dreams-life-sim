@@ -16,6 +16,7 @@ import { recordingCommitment } from './musicSchemas';
 import { campaignCommitment } from './politicsSchemas';
 import { currentRecovery } from './educationRecoverySchemas';
 import { completeSecondary, hasSecondary } from './educationRecovery';
+import { hasWithdrawnFromSchool } from './schoolSchemas';
 import { serviceAway } from './serviceSchemas';
 import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
@@ -125,7 +126,7 @@ export function educationMonth(world: World, person: Person) {
   if (isConfined(world, person) || person.legal.wanted || serviceAway(world, person.id)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;
-  if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !education.qualifications.some(q => q.level === 'secondary')) {
+  if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !hasWithdrawnFromSchool(world, person.id) && !education.qualifications.some(q => q.level === 'secondary')) {
     education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; education.school = person.city + (education.stage === 'primary' ? ' Primary School' : ' Secondary School');
     if (education.months === 0 && !world.schoolCompletions.some(item => item.personId === person.id)) education.grades = bounded(Math.round((person.stats.smarts + person.stats.discipline) / 2));
     if (isPlayer) fact(world, 'I started at ' + education.school + '.', 'education');

@@ -1,6 +1,14 @@
 import { CountryCode, countries } from './countries';
 import { currencyDigits, roundRatio } from './money';
 
+/** Authored game minimums for voluntary secondary withdrawal, separate from course assessment ages. */
+// V1 is retained for saved records. A later model must add a new version rather
+// than changing the historical table used to validate a recorded withdrawal.
+export const schoolLeavingRulesV1 = Object.freeze({
+  US: 16, CA: 16, GB: 16, AU: 17, FR: 16, DE: 16, ES: 16, IT: 16, BR: 17, IN: 14, JP: 15, ZA: 15,
+} satisfies Record<CountryCode, number>);
+export const minimumSchoolLeavingAge = schoolLeavingRulesV1;
+
 export type RulePack = {
   version: 1; schoolStart: number; secondaryStart: number; schoolEnd: number; partTimeAge: number; adultAge: number; retirementAge: number;
   baseWage: bigint; livingCost: bigint; universityTuition: bigint; tradeTuition: bigint; doctorVisit: bigint;

@@ -1,6 +1,6 @@
 import type { World } from '../model';
 import { ageOn, compareDates } from '../model';
-import { rules } from '../rules';
+import { rules, schoolLeavingRulesV1 } from '../rules';
 export function validateSchools(world: World) {
   const ids = new Set<string>(), activePeople = new Set<string>(), month = world.date.year * 12 + world.date.month - 1;
   for (const community of world.schoolCommunities) {
@@ -16,4 +16,11 @@ export function validateSchools(world: World) {
     const terms = new Set<number>();
     for (const help of community.help) { if (terms.has(help.term) || !community.teacherIds.includes(help.teacherId) || help.month < start || help.month > month || help.term !== Math.floor(community.periods.filter(period => period.month <= help.month).length / 12) || help.accepted !== (help.roll <= help.chance) || community.ended && help.month > community.ended.year * 12 + community.ended.month - 1 || help.gradeGain !== (help.accepted ? Math.min(3, 100 - help.gradeBefore) : 0)) throw new Error('Invalid academic help'); terms.add(help.term); }
   }
+  const communities = new Map(world.schoolCommunities.map(item => [item.id, item])), withdrawalIds = new Set<string>(), withdrawnPeople = new Set<string>(), withdrawnCommunities = new Set<string>();
+  for (const withdrawal of world.schoolWithdrawals) {
+    const person = world.people[withdrawal.personId], community = communities.get(withdrawal.communityId);
+    if (withdrawalIds.has(withdrawal.id) || withdrawnPeople.has(withdrawal.personId) || withdrawnCommunities.has(withdrawal.communityId) || !person || !community || community.personId !== person.id || community.stage !== 'secondary' || community.endReason !== 'withdrawn' || !community.ended || compareDates(community.ended, withdrawal.date) !== 0 || community.country !== withdrawal.country || community.city !== withdrawal.city || community.school !== withdrawal.school || compareDates(withdrawal.date, world.date) > 0 || person.died && compareDates(withdrawal.date, person.died) > 0 || ageOn({ ...person, died: null }, withdrawal.date) !== withdrawal.age || withdrawal.minimumLeavingAge !== schoolLeavingRulesV1[withdrawal.country] || withdrawal.age < withdrawal.minimumLeavingAge || withdrawal.recordedAttendanceMonths !== community.periods.length || activePeople.has(person.id) || ['primary', 'secondary'].includes(person.education.stage)) throw new Error('Invalid secondary school withdrawal');
+    withdrawalIds.add(withdrawal.id); withdrawnPeople.add(person.id); withdrawnCommunities.add(withdrawal.communityId);
+  }
+  for (const community of world.schoolCommunities) if (community.endReason === 'withdrawn' && !withdrawnCommunities.has(community.id)) throw new Error('Missing secondary school withdrawal');
 }

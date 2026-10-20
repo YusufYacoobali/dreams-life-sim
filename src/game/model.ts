@@ -37,7 +37,7 @@ import { relocationSchema } from './systems/relocationSchemas';
 import { validateRelocations } from './systems/relocationValidation';
 import { tripSchema } from './systems/travelSchemas';
 import { validateTravel } from './systems/travelValidation';
-import { schoolCommunitySchema } from './systems/schoolSchemas';
+import { schoolCommunitySchema, schoolWithdrawalSchema } from './systems/schoolSchemas';
 import { storyThreadSchema } from './systems/storySchemas';
 import { validateStoryThreads } from './systems/storyValidation';
 import { validateSchools } from './systems/schoolValidation';
@@ -118,7 +118,7 @@ export const worldSchema = z.object({
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
-  schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
+  schoolCompletions: z.array(secondaryCompletionSchema), schoolWithdrawals: z.array(schoolWithdrawalSchema), recoveryCourses: z.array(recoveryCourseSchema),
   scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), hourlyContracts: z.array(hourlyContractSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
@@ -546,7 +546,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Autonomous courtship clocks begin now; old pay, people, bound scenes and history remain exact.
   if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33) { parsed.schemaVersion = 33; parsed.engineVersion = 34; parsed.npcCourtships = []; }
   // Local hobby introductions and education eligibility reuse existing records.
-  // Preserve all prior bound outcomes and histories; only the version tags move.
-  if (parsed && parsed.schemaVersion === 33 && parsed.engineVersion === 34) { parsed.schemaVersion = 34; parsed.engineVersion = 35; }
+  // Preserve all prior bound outcomes and histories; withdrawal is always explicit.
+  if (parsed && parsed.schemaVersion === 33 && parsed.engineVersion === 34) { parsed.schemaVersion = 34; parsed.engineVersion = 35; parsed.schoolWithdrawals = []; }
   return validateWorld(parsed, immutable);
 }

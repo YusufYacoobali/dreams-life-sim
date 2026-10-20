@@ -20,7 +20,7 @@ function originalObject(payload: string) {
   return root;
 }
 
-test('actual native129/130/132/134 remain pinned: migration adds only current tags and empty courtship history', () => {
+test('actual native129/130/132/134 remain pinned: migration adds only current tags and empty courtship/withdrawal history', () => {
   const bytes = readFileSync(join(__dirname, '../fixtures/v32-native-hourly-checkpoints.json'));
   expect(bytes.length).toBe(547397); expect(sha(bytes)).toBe('9b12ebf08e9f316398db3ea2bfd7ccf9424bc6233b102be3223c7cb49a85258c');
   expect(pinned.producerCommit).toBe('944019d8fb07759c4fc2e644ddf8f717edcbd16c');
@@ -28,7 +28,7 @@ test('actual native129/130/132/134 remain pinned: migration adds only current ta
     expect(sha(item.payload)).toBe(item.payloadSha256);
     const original = originalObject(item.payload), current = checkpoints.unpackCheckpoint(item.payload);
     expect(original).toMatchObject({ schemaVersion: 32, engineVersion: 33, contentVersion: 9, revision: item.revision }); expect(original.npcCourtships).toBeUndefined();
-    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 34, engineVersion: 35, npcCourtships: [] });
+    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 34, engineVersion: 35, npcCourtships: [], schoolWithdrawals: [] });
   }
   const year = checkpoints.unpackCheckpoint(pinned.checkpoints.year.payload), contract = year.hourlyContracts[0];
   expect(contract.terms).toEqual({ hourlyRate: 1603n, weeklyHours: 20, paidWeeks: 52 }); expect(contract.periods).toHaveLength(12);

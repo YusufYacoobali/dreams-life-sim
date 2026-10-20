@@ -10,11 +10,14 @@ import { activeTrip } from './travelSchemas';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { serviceAway } from './serviceSchemas';
+import { countryCodes } from '../countries';
+import { minimumSchoolLeavingAge } from '../rules';
 
 export const schoolCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('school-club'), communityId: z.string(), club: z.enum(schoolClubs) }),
   z.object({ type: z.literal('school-conduct'), communityId: z.string(), conduct: z.enum(schoolConducts) }),
   z.object({ type: z.literal('school-help'), communityId: z.string(), teacherId: z.string() }),
+  z.object({ type: z.literal('school-withdraw'), communityId: z.string(), country: z.enum(countryCodes), city: z.string(), school: z.string() }),
 ]);
 export type SchoolCommand = z.infer<typeof schoolCommandSchema>;
 const absolute = (world: World) => world.date.year * 12 + world.date.month - 1;
@@ -73,8 +76,24 @@ export function schoolHelpReason(world: World, community: SchoolCommunity | unde
   if (community!.help.some(item => item.term === Math.floor(community!.periods.length / 12))) return 'You already asked for academic help this school year';
   if (active(world).stats.energy < 4) return 'Rest before the extra study session';
 }
+export function schoolWithdrawalReason(world: World, community = currentSchool(world)): string | undefined {
+  const reason = schoolActionReason(world, community); if (reason) return reason;
+  if (community!.stage !== 'secondary') return 'Only secondary school can be withdrawn from';
+  const person = active(world), minimum = minimumSchoolLeavingAge[community!.country];
+  if (ageOn(person, world.date) < minimum) return "This game's school rules allow withdrawal from age " + minimum;
+}
 export function resolveSchool(world: World, command: SchoolCommand) {
   const community = world.schoolCommunities.find(item => item.id === command.communityId), person = active(world), reason = schoolActionReason(world, community); if (reason) throw new IneligibleAction(reason);
+  if (command.type === 'school-withdraw') {
+    const unavailable = schoolWithdrawalReason(world, community); if (unavailable) throw new IneligibleAction(unavailable);
+    if (command.country !== community!.country || command.city !== community!.city || command.school !== community!.school) throw new IneligibleAction('Review your current secondary school before withdrawing');
+    const education = person.education;
+    world.schoolWithdrawals.push({ id: 'school_withdrawal_' + person.id + '_' + world.revision, personId: person.id, communityId: community!.id, country: community!.country, city: community!.city, school: community!.school, date: { ...world.date }, ruleVersion: 1, age: ageOn(person, world.date), minimumLeavingAge: minimumSchoolLeavingAge[community!.country], recordedStudyMonths: education.months, recordedAttendanceMonths: community!.periods.length, grade: education.grades, effort: education.effort, lastStudyYear: education.lastStudyYear });
+    community!.ended = { ...world.date }; community!.endReason = 'withdrawn';
+    education.stage = 'none'; education.paused = false; education.tuition = 0n;
+    fact(world, 'I withdrew from ' + community!.school + ' before completing secondary school. My recorded work and school contacts remain in my history.', 'education');
+    result(world, 'Secondary school withdrawn', 'You left without earning a secondary qualification from this course. School attendance and club practice stop. Your recorded work, existing qualifications and any debt remain. Adult recovery classes remain available when you meet their age and attendance requirements.', 'education'); return;
+  }
   if (command.type === 'school-club') { community!.club = command.club; result(world, 'After-school plans updated', command.club === 'none' ? 'Your club routine has stopped. Skills already learned stay yours.' : 'You joined the ' + clubLabels[command.club].toLowerCase() + '. Practice happens during actual attended school months. The school provides the activities without a fee; one club fits your timetable.', 'education'); return; }
   if (command.type === 'school-conduct') { community!.conduct = command.conduct; result(world, 'Classroom routine updated', command.conduct === 'helpful' ? 'You will help out in class. Your teacher will notice the work as school months pass.' : command.conduct === 'disruptive' ? 'You plan to test the limits. Your teacher’s trust and your term report can suffer.' : 'You will get on with your work quietly.', 'education'); return; }
   const helpReason = schoolHelpReason(world, community, command.teacherId); if (helpReason) throw new IneligibleAction(helpReason);
