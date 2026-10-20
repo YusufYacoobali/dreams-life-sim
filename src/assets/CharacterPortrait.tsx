@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, Platform, View } from 'react-native';
+import React, { useMemo } from 'react';
+import { Image, Platform, View, type ViewStyle } from 'react-native';
 import type { Person } from '../game/model';
 import { ageingHairColor, faceScales, hairColors, hairRects, headRects, portraitAgeStage, portraitAtlasSize, skinTones, SourceRect } from './portraitLayout';
 
@@ -20,11 +20,34 @@ function TintedLayer({ rect, color, width, left, top }: { rect: SourceRect; colo
   const [x, y, sourceWidth, sourceHeight] = rect;
   const scale = width / sourceWidth;
   const image = { position: 'absolute' as const, width: portraitAtlasSize * scale, height: portraitAtlasSize * scale, left: -x * scale, top: -y * scale };
-  // Android's native multiply blend starts at API 29. An opaque detail image
-  // otherwise hides the tint entirely; retain colour with lighter detail there.
+  // Native multiply starts at API 29. Earlier Android uses one cached colour
+  // matrix on the grayscale source, retaining detail instead of washing it out
+  // with a flat tint and a 35%-opacity grayscale overlay.
   const multiply = Platform.OS !== 'android' || Number(Platform.Version) >= 29;
+  const filter = useMemo(() => multiply ? undefined : legacyTintFilter(color), [multiply, color]);
   return <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ position: 'absolute', left, top, width, height: sourceHeight * scale, overflow: 'hidden', isolation: 'isolate' }}>
-    <Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { tintColor: color }]} />
-    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, mixBlendMode: multiply ? 'multiply' : 'normal' }}><Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { opacity: multiply ? 1 : 0.35 }]} /></View>
+    {multiply && <Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { tintColor: color }]} />}
+    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, mixBlendMode: multiply ? 'multiply' : 'normal', filter }}><Image source={atlas} resizeMode="stretch" accessible={false} style={[image, { opacity: 1 }]} /></View>
   </View>;
+}
+
+// React Native's Android ColorMatrixColorFilter works before API 29. These
+// native matrix coefficients map neutral source luminance to the exact tint;
+// no pixels, masks, appearance traits or source rectangles are rebuilt in JS.
+const sepiaWhite = [1.351, 1.203, 0.937];
+const luminance = 0.213 * sepiaWhite[0] + 0.715 * sepiaWhite[1] + 0.072 * sepiaWhite[2];
+const chroma = sepiaWhite.map(value => value - luminance);
+const rotated = [
+  -0.213 * sepiaWhite[0] - 0.715 * sepiaWhite[1] + 0.928 * sepiaWhite[2],
+  0.143 * sepiaWhite[0] + 0.140 * sepiaWhite[1] - 0.283 * sepiaWhite[2],
+  -0.787 * sepiaWhite[0] + 0.715 * sepiaWhite[1] + 0.072 * sepiaWhite[2],
+];
+const determinant = (chroma[0] - chroma[1]) * (rotated[2] - rotated[1]) - (chroma[2] - chroma[1]) * (rotated[0] - rotated[1]);
+function legacyTintFilter(color: string): NonNullable<ViewStyle['filter']> {
+  const [red, green, blue] = [1, 3, 5].map(index => parseInt(color.slice(index, index + 2), 16) / 255);
+  const cosine = ((red - green) * (rotated[2] - rotated[1]) - (blue - green) * (rotated[0] - rotated[1])) / determinant;
+  const sine = ((chroma[0] - chroma[1]) * (blue - green) - (chroma[2] - chroma[1]) * (red - green)) / determinant;
+  const brightness = (green - cosine * chroma[1] - sine * rotated[1]) / luminance;
+  // Android pre-concatenates these matrices: the rightmost sepia runs first.
+  return [{ brightness }, { hueRotate: Math.atan2(sine, cosine) * 180 / Math.PI + 'deg' }, { saturate: brightness > 0 ? Math.hypot(cosine, sine) / brightness : 0 }, { sepia: 1 }];
 }
