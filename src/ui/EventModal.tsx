@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
 import { useDelayedBusy } from './useDelayedBusy';
+import { useFeedback } from './feedback';
 
 export type EffectRow = { id: string; label: string; value: string; tone: 'positive' | 'negative' | 'neutral' };
 type Choice = { id: string; label: string; disabledReason?: string };
@@ -27,6 +28,7 @@ function EventCard({
   event, busy, error, onChoose, onCancel, onClose,
 }: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
   const c = useColors();
+  const { reducedMotion } = useFeedback();
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string | null>(null);
   const showProgress = useDelayedBusy(busy);
@@ -37,7 +39,7 @@ function EventCard({
     // RN's legacy Android modal wrapper otherwise fits system insets a second
     // time, leaving strips of the underlying page outside this backdrop.
     // Keep the navigation bar opaque; card spacing still uses safe-area insets.
-    <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType="fade" visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
+    <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, { backgroundColor: c.surface }]}>
           {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}

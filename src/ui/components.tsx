@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, ThemedStatusBar, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
 import { useDelayedBusy } from './useDelayedBusy';
+import { useFeedback } from './feedback';
 
 export function Page({ children, scroll = true, bottomSafeArea = false, footer }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode }>) {
   const c = useColors();
@@ -45,6 +46,7 @@ export function Button({
   disabled?: boolean; busy?: boolean; accessibilityLabel?: string;
 }) {
   const c = useColors();
+  const { buttonFeedback } = useFeedback();
   const background = tone === 'secondary' ? c.inset : tone === 'positive' ? c.actionGreen : tone === 'danger' ? c.actionRed : c.actionBlue;
   const pressedBackground = tone === 'secondary' ? c.selected : tone === 'positive' ? c.actionGreenPressed : tone === 'danger' ? c.actionRedPressed : c.actionBluePressed;
   const color = tone === 'secondary' ? c.ink : '#FFFFFF';
@@ -56,7 +58,7 @@ export function Button({
     <Pressable
       accessibilityRole="button" accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled: disabled || busy, busy: saving }}
-      disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); }}
+      disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); buttonFeedback(); }}
       style={({ pressed }) => [styles.button, { backgroundColor: pressed ? pressedBackground : background, opacity: disabled || busy ? 0.5 : 1 }]}
     >
       {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" />}
