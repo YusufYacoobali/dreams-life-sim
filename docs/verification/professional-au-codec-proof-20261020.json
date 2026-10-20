@@ -1,0 +1,36 @@
+{
+  "diagnostic": "/tmp/dreams-professional-policy-failures/AU-903-1792527848175.json",
+  "diagnosticSha256": "efe598182d2a3bca82b0bec54cbfae59ca537c2a1c5f8e71181f7bdf3d4ac18d",
+  "seed": 903,
+  "country": "AU",
+  "completedBeforeFailure": 3,
+  "producerSources": {
+    "game": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+    "gameAndPersistence": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+    "tool": "de3b3a1328889bd68ec7c4bad1f101ca1f63295890c24dd4480d548436821d71",
+    "policy": "5b57706375b132c3bb4be26d809161e88a8db369395bd3ded5d63e9285a6031d",
+    "sqliteBirthDriver": "b05662854da8a6439ddc559f3b1038895df94ba73cecb9c501b6a6ef5234a2f8",
+    "birthStore": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09"
+  },
+  "inspectionRuntimeCommit": "41c59d9",
+  "versions": {
+    "world": 33,
+    "engine": 34,
+    "content": 9
+  },
+  "lifeId": "life_professional_AU_903",
+  "revision": 593,
+  "age": 98,
+  "people": 34,
+  "ledgerRows": 69477,
+  "canonicalCharacters": 22124524,
+  "canonicalBytes": 22124585,
+  "canonicalSha256": "dfe1fc0f8ac438463c391d4af39945151c623d4f11c2945d0a4c53c280206184",
+  "checkpointFormat": "dreams-checkpoint-v4",
+  "checkpointBytes": 1220998,
+  "compactExpandedBytes": 11494720,
+  "checkpointSha256": "4eb6bf75887b3bf3fab2538022e0d0fda7a67e0db0b356474f8c3d170a1c1144",
+  "peopleBlocks": 2,
+  "ledgerBlocks": 136,
+  "productionColdCanonicalExact": true
+}

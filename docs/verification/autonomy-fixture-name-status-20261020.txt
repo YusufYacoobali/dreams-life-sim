@@ -1,0 +1,2 @@
+A	tests/fixtures/v32-native-hourly-checkpoints.json
+A	tests/fixtures/v33-natural-professional-au-checkpoint.json
