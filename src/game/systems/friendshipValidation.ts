@@ -27,7 +27,7 @@ export function validateBestFriendships(world: World) {
     if (row.status === 'declined') { if (row.ended || row.endReason || row.endedById) throw new Error('A declined proposal cannot end a best friendship'); continue; }
     for (const personId of [a.id, b.id]) prior.set(personId, row);
     if (row.status === 'active') {
-      if (row.ended || row.endReason || row.endedById || a.died || b.died || ['dating', 'engaged', 'married', 'ex', 'widowed'].includes(relation.romance)) throw new Error('Invalid current best friendship');
+      if (row.ended || row.endReason || row.endedById || a.died || b.died || ['teen-dating', 'dating', 'engaged', 'married', 'ex', 'widowed'].includes(relation.romance)) throw new Error('Invalid current best friendship');
     } else {
       if (!row.ended || !row.endReason || compareDates(row.ended, row.proposed) < 0 || compareDates(row.ended, world.date) > 0 || row.endedById && ![a.id, b.id].includes(row.endedById) || row.endReason === 'choice' && !row.endedById || row.endReason === 'romance' && (row.endedById || relation.romance === 'none')) throw new Error('Invalid best-friend ending');
       if (row.endReason === 'death') { const person = row.endedById && world.people[row.endedById]; if (!person || !person.died || compareDates(person.died, row.ended) !== 0) throw new Error('Best-friend death must retain the actual deceased person and date'); }

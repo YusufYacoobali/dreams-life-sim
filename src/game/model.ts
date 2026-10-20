@@ -1,5 +1,7 @@
 import { bestFriendshipSchema } from './systems/friendshipSchemas';
 import { validateBestFriendships } from './systems/friendshipValidation';
+import { teenRelationshipSchema } from './systems/teenRelationshipSchemas';
+import { validateTeenRelationships } from './systems/teenRelationshipValidation';
 import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
@@ -97,7 +99,11 @@ export const worldSchema = z.object({
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
-  relationships: z.array(relationshipSchema), bestFriendships: z.array(bestFriendshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
+  relationships: z.array(relationshipSchema), bestFriendships: z.array(bestFriendshipSchema),
+  // Isolated future-batch bridge only: root replaces this default with the
+  // explicit World35→36 empty-field migration and reader16 protection.
+  teenRelationships: z.array(teenRelationshipSchema).default([]),
+  households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
@@ -202,6 +208,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (records.reduce((sum, record) => sum + record.monthsWorked, 0) !== person.finance.serviceMonths || records.reduce((sum, record) => sum + record.normalizedGross, 0n) !== person.finance.lifetimeGross) throw new Error('Earnings do not reconcile with employment history');
   }
   const relationPairs = new Set<string>(), romanticPeople = new Set<string>();
+  const activeTeenRelations = validateTeenRelationships(world);
   const parentsByChild = new Map<string, string[]>();
   for (const relation of world.relationships) if (relation.roles.includes('parent')) parentsByChild.set(relation.to, [...(parentsByChild.get(relation.to) ?? []), relation.from]);
   const parentVisits = new Map<string, number>();
@@ -215,6 +222,10 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (relationPairs.has(pair) || new Set(relation.roles).size !== relation.roles.length || !relation.roles.includes(relation.kind) || compareDates(relation.since, world.date) > 0 || compareDates(relation.since, world.people[relation.from].born) < 0 || compareDates(relation.since, world.people[relation.to].born) < 0) throw new Error('Invalid relationship history');
     relationPairs.add(pair);
     if (relation.roles.includes('parent') && (!relation.parentType || (relation.parentType === 'biological' && ageOn({ ...world.people[relation.from], died: null }, world.people[relation.to].born) < 18))) throw new Error('Invalid parent record');
+    if (relation.romance === 'teen-dating') {
+      if (!activeTeenRelations.has(relation.id) || romanticPeople.has(relation.from) || romanticPeople.has(relation.to)) throw new Error('Invalid or overlapping recorded teenage relationship');
+      romanticPeople.add(relation.from); romanticPeople.add(relation.to);
+    }
     if (relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married') {
       const from = world.people[relation.from], to = world.people[relation.to]; const first = ancestors(from.id), second = ancestors(to.id);
       if (from.died || to.died || ageOn(from, world.date) < 18 || ageOn(to, world.date) < 18 || romanticPeople.has(from.id) || romanticPeople.has(to.id) || relation.roles.includes('guardian') || [...first].some(id => second.has(id))) throw new Error('Invalid romantic relationship');

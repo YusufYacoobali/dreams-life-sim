@@ -34,7 +34,7 @@ export const socialCommandSchema = z.discriminatedUnion('type', [
 ]);
 export type SocialCommand = z.infer<typeof socialCommandSchema>;
 export type Relationship = World['relationships'][number];
-export const activeRomance = (relation: Relationship) => relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married';
+export const activeRomance = (relation: Relationship) => relation.romance === 'teen-dating' || relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married';
 export function relationFor(world: World, a: string, b: string) { return world.relationships.find(relation => relation.from === a && relation.to === b || relation.from === b && relation.to === a); }
 export function partnerRelation(world: World, personId = world.activePersonId) { return world.relationships.find(relation => activeRomance(relation) && (relation.from === personId || relation.to === personId)); }
 export function otherPerson(world: World, relation: Relationship, personId = world.activePersonId): Person { return world.people[relation.from === personId ? relation.to : relation.from]; }
@@ -51,7 +51,7 @@ export function closeFamily(world: World, a: string, b: string): boolean {
 export function relationLabel(world: World, relation: Relationship, personId = world.activePersonId): string {
   if (relation.kind === 'parent') return relation.from === personId ? relation.parentType === 'adoptive' ? 'Adopted child' : 'Child' : relation.parentType === 'adoptive' ? 'Adoptive parent' : 'Parent';
   if (relation.kind === 'guardian') return relation.from === personId ? 'In your care' : 'Guardian';
-  if (relation.romance === 'married') return 'Spouse'; if (relation.romance === 'engaged') return 'Engaged'; if (relation.romance === 'dating') return 'Partner'; if (relation.romance === 'ex') return 'Former partner'; if (relation.romance === 'widowed') return 'Late partner';
+  if (relation.romance === 'married') return 'Spouse'; if (relation.romance === 'engaged') return 'Engaged'; if (relation.romance === 'dating' || relation.romance === 'teen-dating') return 'Partner'; if (relation.romance === 'ex') return 'Former partner'; if (relation.romance === 'widowed') return 'Late partner';
   if (currentBestFriendship(world, personId)?.relationshipId === relation.id) return 'Best friend';
   return relation.kind[0].toUpperCase() + relation.kind.slice(1);
 }

@@ -7,6 +7,7 @@ import { activeTrip } from './systems/travelSchemas';
 import { refreshTrips, resolveTravel, travelCommandSchema, TravelCommand, travelMonth } from './systems/travel';
 import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
+import { refreshTeenRelationships, resolveTeenRelationship, teenRelationshipCommandSchema, type TeenRelationshipCommand } from './systems/teenRelationships';
 import { bindEvent, eligibleTemplates } from './content/events';
 import { randomInteger } from './random';
 import { BoundChoice, Effect, effectRowSchema } from './runtime';
@@ -51,9 +52,9 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -88,6 +89,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   legalDeath(world, person);
   socialDeath(world, person);
   recordFamilyDeath(world, personId);
+  refreshTeenRelationships(world);
   refreshBestFriendships(world);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
@@ -114,6 +116,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
+  refreshTeenRelationships(world);
   refreshScholarships(world);
   healthMonth(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
@@ -337,11 +340,13 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const service=parseActivity(serviceCommandSchema, command);
     const royalty=parseActivity(royaltyCommandSchema, command);
     const travel=parseActivity(travelCommandSchema, command);
+    const teenRelationship = parseActivity(teenRelationshipCommandSchema, command);
     const hobbyEvent = parseActivity(hobbyEventCommandSchema, command);
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
+    if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);
+    else if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
     else if (leisure.success) resolveLeisure(world, leisure.data);
     else if (pet.success) resolvePets(world, pet.data);
     else if (school.success) resolveSchool(world, school.data);
@@ -379,6 +384,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshStoryThreads(world);
   refreshLeisure(world);
   refreshWorkplaces(world);
+  refreshTeenRelationships(world);
   refreshBestFriendships(world);
   world.revision++;
   return validateWorld(world, immutable);
