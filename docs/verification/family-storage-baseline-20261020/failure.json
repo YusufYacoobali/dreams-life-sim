@@ -1,0 +1,676 @@
+{
+  "event": "family-failed",
+  "error": "Error: Command failed: {\"type\":\"advance\"}: Your progress couldn't be saved. Please try again.\nError: This checkpoint exceeds the supported world size\n    at packCheckpoint (/workspace/dreams-life-sim/src/persistence/checkpoints.ts:106:19)\n    at SaveRepository.commit (/workspace/dreams-life-sim/src/persistence/repository.ts:140:58)\n    at repository.commit (/workspace/dreams-life-sim/tools/run-family-integration.cjs:51:61)\n    at /workspace/dreams-life-sim/src/state/gameStore.ts:110:52\n    at async run (/workspace/dreams-life-sim/src/state/gameStore.ts:23:17)\n    at async dispatch (/workspace/dreams-life-sim/tools/run-family-integration.cjs:67:70)\n    at async act (/workspace/dreams-life-sim/tools/run-family-integration.cjs:94:31)\n    at async main (/workspace/dreams-life-sim/tools/run-family-integration.cjs:149:48)\n    at dispatch (/workspace/dreams-life-sim/tools/run-family-integration.cjs:68:92)\n    at async act (/workspace/dreams-life-sim/tools/run-family-integration.cjs:94:31)\n    at async main (/workspace/dreams-life-sim/tools/run-family-integration.cjs:149:48)",
+  "lastCommitError": "Error: This checkpoint exceeds the supported world size\n    at packCheckpoint (/workspace/dreams-life-sim/src/persistence/checkpoints.ts:106:19)\n    at SaveRepository.commit (/workspace/dreams-life-sim/src/persistence/repository.ts:140:58)\n    at repository.commit (/workspace/dreams-life-sim/tools/run-family-integration.cjs:51:61)\n    at /workspace/dreams-life-sim/src/state/gameStore.ts:110:52\n    at async run (/workspace/dreams-life-sim/src/state/gameStore.ts:23:17)\n    at async dispatch (/workspace/dreams-life-sim/tools/run-family-integration.cjs:67:70)\n    at async act (/workspace/dreams-life-sim/tools/run-family-integration.cjs:94:31)\n    at async main (/workspace/dreams-life-sim/tools/run-family-integration.cjs:149:48)",
+  "sources": {
+    "gameSourceHash": "f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14",
+    "combinedGamePersistenceSourceHash": "6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d",
+    "toolSourceHash": "578487eb0279c34497ad15508318896ea6256e1338b903153f275415434cfa7c"
+  },
+  "seed": 0,
+  "country": "US",
+  "commands": 480,
+  "advances": 91,
+  "generation": 2,
+  "date": {
+    "year": 2117,
+    "month": 10,
+    "day": 20
+  },
+  "calendarMonths": 1092,
+  "deaths": [
+    {
+      "personId": "person_player",
+      "name": "Alex Walker",
+      "generation": 1,
+      "date": {
+        "year": 2113,
+        "month": 9,
+        "day": 20
+      },
+      "ageAtDeath": 86,
+      "cause": "natural causes",
+      "estateId": "estate_person_player"
+    }
+  ],
+  "coldChecks": [
+    {
+      "reason": "five-year observation",
+      "revision": 4,
+      "generation": 1,
+      "date": {
+        "year": 2027,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "18b7a35f51e2dc908f7f9ef8c2df9589d6ff8be2159ffabe385914086efd355c",
+      "milliseconds": 12.56176500000015
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 18,
+      "generation": 1,
+      "date": {
+        "year": 2032,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "e76a63e30ff23aab94777f9253c64ba07be5f1480d477c5e855725729d5ad0ef",
+      "milliseconds": 20.10328800000002
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 35,
+      "generation": 1,
+      "date": {
+        "year": 2037,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "33713175395b66ed6eda7fa80fc5a54c7ea86fdba8cebfbdc0562569fded8201",
+      "milliseconds": 52.04079800000022
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 49,
+      "generation": 1,
+      "date": {
+        "year": 2042,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "68bd66cf7ec081dc9d6abca698fc20cd1a0fe025962e266b772df94a3cc26053",
+      "milliseconds": 80.93705799999998
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 83,
+      "generation": 1,
+      "date": {
+        "year": 2047,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "d2b5f32b8d2d3008528b612bb33bf6ae1751b031981c8b5b44bb034c25dbd9ed",
+      "milliseconds": 145.8260610000002
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 117,
+      "generation": 1,
+      "date": {
+        "year": 2052,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "7ef58c8b64dfe7d81270c9dfa00321e68c4d4b61c7edb92aeb16fad9b9baea49",
+      "milliseconds": 196.97458800000004
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 151,
+      "generation": 1,
+      "date": {
+        "year": 2057,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "3e8a751f61c887d26d3d6486dd8648d1309a70d4c693eb54ecfde1d078c35110",
+      "milliseconds": 263.83631700000024
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 187,
+      "generation": 1,
+      "date": {
+        "year": 2062,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "0cd763588a4903ce66dae36d50e96faf5bcaa8834cde7e76691b412362acf6a5",
+      "milliseconds": 339.6644470000001
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 220,
+      "generation": 1,
+      "date": {
+        "year": 2067,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "6d115c47b176315b0c62242fcde482280d7cb7b9c4b1e4bbe05642ec369eefdf",
+      "milliseconds": 429.327577
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 250,
+      "generation": 1,
+      "date": {
+        "year": 2072,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "d19d29092e3747e1c10cf27497f7a1e06ff66890c5ec81acd43a6003d33cc3cb",
+      "milliseconds": 568.4283000000014
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 282,
+      "generation": 1,
+      "date": {
+        "year": 2077,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "e94ad0340fc5e3b8733f89760a3f6d1a0a66394a354fee5962d20b975c6d3a25",
+      "milliseconds": 679.2891639999998
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 316,
+      "generation": 1,
+      "date": {
+        "year": 2082,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "0de90cbce53b093e58b784af749375029895506663d053c529bc6be1df329645",
+      "milliseconds": 768.4731040000006
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 350,
+      "generation": 1,
+      "date": {
+        "year": 2087,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "bb58f33e18131c09b9762ffc0175e8db5c499e732cb5cf01e29bb64a08bbb298",
+      "milliseconds": 804.3748699999996
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 384,
+      "generation": 1,
+      "date": {
+        "year": 2092,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "21aeefcc7131a47465c7d54b8dc7d06e4a86f0503d411c5494aa60f0c570bf02",
+      "milliseconds": 883.7120860000032
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 403,
+      "generation": 1,
+      "date": {
+        "year": 2097,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "99dab9f085188f431a0a1e0ac8fed1c7828f79d1d6cbe19797f5f8871e6ad115",
+      "milliseconds": 1081.1757260000013
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 418,
+      "generation": 1,
+      "date": {
+        "year": 2102,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "78aa7353b7132400c3d4ef546aeb8b56026bea1156ba2aaa87ffa5324a5bd274",
+      "milliseconds": 1115.2668909999993
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 432,
+      "generation": 1,
+      "date": {
+        "year": 2107,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "f8c993c55606708e3e522d3535428d6f0e10dc2eb0b74ec8baa6fecef37031e6",
+      "milliseconds": 1141.2911409999979
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 447,
+      "generation": 1,
+      "date": {
+        "year": 2112,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "e9b13192c898c518723ae83faae1203a8ffc4a4b394166bee2fdda288839e92d",
+      "milliseconds": 1259.1284570000025
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 448,
+      "generation": 1,
+      "date": {
+        "year": 2113,
+        "month": 9,
+        "day": 20
+      },
+      "worldSha256": "fed90bcad9e3fb19622d005dc141471f60a90c39b169d0f883947b54a414810c",
+      "milliseconds": 1330.595524999997
+    },
+    {
+      "reason": "natural death",
+      "revision": 448,
+      "generation": 1,
+      "date": {
+        "year": 2113,
+        "month": 9,
+        "day": 20
+      },
+      "worldSha256": "fed90bcad9e3fb19622d005dc141471f60a90c39b169d0f883947b54a414810c",
+      "milliseconds": 1260.5396080000028
+    },
+    {
+      "reason": "existing heir",
+      "revision": 453,
+      "generation": 2,
+      "date": {
+        "year": 2113,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "b773fd80cae7cad9d3753de524f495e3f33c7fe5d78930166ca0932598c05203",
+      "milliseconds": 1399.1158299999952
+    },
+    {
+      "reason": "five-year observation",
+      "revision": 479,
+      "generation": 2,
+      "date": {
+        "year": 2117,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "fea16835d5974099093c2e4ad54a5c6a4f97b4c09484c5ef80321f0cd62b7a17",
+      "milliseconds": 1331.101029999998
+    }
+  ],
+  "observations": [
+    {
+      "elapsedYears": 1,
+      "calendarMonths": 12,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 1,
+      "revision": 4,
+      "people": 3,
+      "ledgerRows": 96,
+      "snapshots": 1,
+      "cash": "0",
+      "storage": {
+        "database": 4096,
+        "wal": 222512,
+        "shm": 32768,
+        "total": 259376
+      }
+    },
+    {
+      "elapsedYears": 6,
+      "calendarMonths": 72,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 6,
+      "revision": 18,
+      "people": 10,
+      "ledgerRows": 596,
+      "snapshots": 6,
+      "cash": "0",
+      "storage": {
+        "database": 4096,
+        "wal": 1050632,
+        "shm": 32768,
+        "total": 1087496
+      }
+    },
+    {
+      "elapsedYears": 11,
+      "calendarMonths": 132,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 11,
+      "revision": 35,
+      "people": 12,
+      "ledgerRows": 2131,
+      "snapshots": 11,
+      "cash": "0",
+      "storage": {
+        "database": 4096,
+        "wal": 2599752,
+        "shm": 32768,
+        "total": 2636616
+      }
+    },
+    {
+      "elapsedYears": 16,
+      "calendarMonths": 192,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 16,
+      "revision": 49,
+      "people": 16,
+      "ledgerRows": 4319,
+      "snapshots": 16,
+      "cash": "0",
+      "storage": {
+        "database": 704512,
+        "wal": 4276592,
+        "shm": 32768,
+        "total": 5013872
+      }
+    },
+    {
+      "elapsedYears": 21,
+      "calendarMonths": 252,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 21,
+      "revision": 83,
+      "people": 19,
+      "ledgerRows": 6877,
+      "snapshots": 21,
+      "cash": "5640666",
+      "storage": {
+        "database": 1421312,
+        "wal": 4404312,
+        "shm": 32768,
+        "total": 5858392
+      }
+    },
+    {
+      "elapsedYears": 26,
+      "calendarMonths": 312,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 26,
+      "revision": 117,
+      "people": 20,
+      "ledgerRows": 9928,
+      "snapshots": 26,
+      "cash": "22149627",
+      "storage": {
+        "database": 1957888,
+        "wal": 4404312,
+        "shm": 32768,
+        "total": 6394968
+      }
+    },
+    {
+      "elapsedYears": 31,
+      "calendarMonths": 372,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 31,
+      "revision": 151,
+      "people": 20,
+      "ledgerRows": 13069,
+      "snapshots": 31,
+      "cash": "51413577",
+      "storage": {
+        "database": 3239936,
+        "wal": 4429032,
+        "shm": 32768,
+        "total": 7701736
+      }
+    },
+    {
+      "elapsedYears": 36,
+      "calendarMonths": 432,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 36,
+      "revision": 187,
+      "people": 22,
+      "ledgerRows": 17061,
+      "snapshots": 36,
+      "cash": "90966628",
+      "storage": {
+        "database": 5001216,
+        "wal": 4639152,
+        "shm": 32768,
+        "total": 9673136
+      }
+    },
+    {
+      "elapsedYears": 41,
+      "calendarMonths": 492,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 41,
+      "revision": 220,
+      "people": 22,
+      "ledgerRows": 21595,
+      "snapshots": 41,
+      "cash": "138032990",
+      "storage": {
+        "database": 6520832,
+        "wal": 4758632,
+        "shm": 32768,
+        "total": 11312232
+      }
+    },
+    {
+      "elapsedYears": 46,
+      "calendarMonths": 552,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 46,
+      "revision": 250,
+      "people": 25,
+      "ledgerRows": 26482,
+      "snapshots": 46,
+      "cash": "194280280",
+      "storage": {
+        "database": 9375744,
+        "wal": 5491992,
+        "shm": 32768,
+        "total": 14900504
+      }
+    },
+    {
+      "elapsedYears": 51,
+      "calendarMonths": 612,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 51,
+      "revision": 282,
+      "people": 25,
+      "ledgerRows": 32104,
+      "snapshots": 51,
+      "cash": "274532593",
+      "storage": {
+        "database": 12398592,
+        "wal": 5533192,
+        "shm": 32768,
+        "total": 17964552
+      }
+    },
+    {
+      "elapsedYears": 56,
+      "calendarMonths": 672,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 56,
+      "revision": 316,
+      "people": 28,
+      "ledgerRows": 37173,
+      "snapshots": 56,
+      "cash": "373490957",
+      "storage": {
+        "database": 15876096,
+        "wal": 6077032,
+        "shm": 32768,
+        "total": 21985896
+      }
+    },
+    {
+      "elapsedYears": 61,
+      "calendarMonths": 732,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 61,
+      "revision": 350,
+      "people": 29,
+      "ledgerRows": 41421,
+      "snapshots": 61,
+      "cash": "475001221",
+      "storage": {
+        "database": 19742720,
+        "wal": 6077032,
+        "shm": 32768,
+        "total": 25852520
+      }
+    },
+    {
+      "elapsedYears": 66,
+      "calendarMonths": 792,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 66,
+      "revision": 384,
+      "people": 29,
+      "ledgerRows": 45508,
+      "snapshots": 66,
+      "cash": "599163757",
+      "storage": {
+        "database": 24059904,
+        "wal": 6077032,
+        "shm": 32768,
+        "total": 30169704
+      }
+    },
+    {
+      "elapsedYears": 71,
+      "calendarMonths": 852,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 71,
+      "revision": 403,
+      "people": 29,
+      "ledgerRows": 48942,
+      "snapshots": 71,
+      "cash": "647074007",
+      "storage": {
+        "database": 28643328,
+        "wal": 6497272,
+        "shm": 32768,
+        "total": 35173368
+      }
+    },
+    {
+      "elapsedYears": 76,
+      "calendarMonths": 912,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 76,
+      "revision": 418,
+      "people": 29,
+      "ledgerRows": 52335,
+      "snapshots": 76,
+      "cash": "670884942",
+      "storage": {
+        "database": 33587200,
+        "wal": 6971072,
+        "shm": 32768,
+        "total": 40591040
+      }
+    },
+    {
+      "elapsedYears": 81,
+      "calendarMonths": 972,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 81,
+      "revision": 432,
+      "people": 29,
+      "ledgerRows": 56022,
+      "snapshots": 81,
+      "cash": "694695877",
+      "storage": {
+        "database": 38916096,
+        "wal": 7156472,
+        "shm": 32768,
+        "total": 46105336
+      }
+    },
+    {
+      "elapsedYears": 86,
+      "calendarMonths": 1032,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 86,
+      "revision": 447,
+      "people": 30,
+      "ledgerRows": 59985,
+      "snapshots": 86,
+      "cash": "733364347",
+      "storage": {
+        "database": 44638208,
+        "wal": 7156472,
+        "shm": 32768,
+        "total": 51827448
+      }
+    },
+    {
+      "elapsedYears": 86,
+      "calendarMonths": 1043,
+      "generation": 1,
+      "activePersonId": "person_player",
+      "age": 86,
+      "revision": 448,
+      "people": 30,
+      "ledgerRows": 60625,
+      "snapshots": 87,
+      "cash": "0",
+      "storage": {
+        "database": 45789184,
+        "wal": 7156472,
+        "shm": 32768,
+        "total": 52978424
+      }
+    },
+    {
+      "elapsedYears": 91,
+      "calendarMonths": 1092,
+      "generation": 2,
+      "activePersonId": "person_npc_246_24",
+      "age": 46,
+      "revision": 479,
+      "people": 36,
+      "ledgerRows": 63304,
+      "snapshots": 91,
+      "cash": "310531056",
+      "storage": {
+        "database": 50696192,
+        "wal": 7156472,
+        "shm": 32768,
+        "total": 57885432
+      }
+    }
+  ],
+  "output": "/tmp/dreams-family-integration-baseline-v1-20261020",
+  "elapsedMs": 40226,
+  "lastValidStorage": {
+    "database": 50696192,
+    "wal": 7156472,
+    "shm": 32768,
+    "total": 57885432
+  },
+  "lastValidCanonicalWorldBytes": 19921889,
+  "lastValidWorldSha256": "61ec538d7e85244bd38051cda56c7b703e6a42329666efaef68a79ae9bf6d1db",
+  "lastValidHistoryAndReceiptsExact": true,
+  "sourcesUnchanged": true
+}

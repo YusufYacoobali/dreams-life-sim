@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `family-storage-baseline-20261020/` retains the natural normal-command SQLite
+  reproduction at91calendar years/generation two. Twenty-two cold checks and all
+  original moments/receipts pass; the next save exceeds20MB and live data already
+  exceeds50MB. Exit1 is an expected reproduced blocker, not completed acceptance.
+  Its last-valid1,208,705-byte checkpoint is pinned to unmodified pushed555d112
+  production source. No game/persistence changes are part of this diagnostic.
+
 - `adult-relationships-content7-20261020.json` records 15 adult friend/partner
   situations, all1,437tests/105suites, strict types and both Hermes exports.
   `regression-adult-relationships-20261020.txt` is the full clean output.

@@ -12,6 +12,13 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The new normal-command SQLite family runner reproduces a real capacity/storage
+block at91calendar years/generation two. Its22cold checks and all91original
+moments/metadata/481receipts pass, but the next save exceeds20MB. Database/WAL/
+SHM already total57,885,432bytes. No failed action is published. Runtime remains
+555d112; the existing full/lifetime gates below stay valid but do not close this
+broader case. [Failure and planned correction](FAMILY_STORAGE.md).
+
 Content seven adds **15 adult friendship/partner situations and 45 choices**,
 bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
 friends/current partners must be locally available. Exact names/person/bond IDs

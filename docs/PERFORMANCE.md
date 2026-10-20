@@ -4,6 +4,13 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
+The real normal-command family/storage case now reproduces a blocker at91calendar
+years in generation two: the next save exceeds20MB, while SQLite/WAL/SHM already
+total57,885,432bytes. All original history/receipts and22cold checks remain exact.
+This is a failed broader gate requiring compact encoding and less repeated
+checkpoint storage. [Raw scope and next work](FAMILY_STORAGE.md). Existing action
+and first-eligible lifetime measurements below retain their original scope.
+
 ## Current content-seven diagnostics
 
 | Cloud engine + SQLite action | Current median |

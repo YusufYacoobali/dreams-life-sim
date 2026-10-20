@@ -16,6 +16,25 @@ stays parked; the existing80%+ implementation's folder-save check passed. Read-o
 previous-life summaries are complete. Full production remains approximately
 **50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
 
+## Current long-family storage work
+
+The normal-command SQLite runner reproduces a real block at91calendar years/
+generation two. All22cold checks,91original annual moments/metadata and481receipts
+remain exact, but the next Age Up exceeds the20MB checkpoint limit. The last
+valid canonical world is19,921,889bytes (63,304ledger rows/36people); database+
+WAL+SHM=57,885,432bytes, already above50MB. Natural first death is86; the existing
+heir's full record and calendar remain exact. A repeat reaches the same failure.
+[Scope and next fix](FAMILY_STORAGE.md), [raw trace](verification/family-storage-baseline-20261020/).
+
+Runtime remains unchanged555d112: world30/engine29/content7/DB7/frame3; existing
+full1,437-test/120-seed gates below stay valid but do not close this broader gate.
+The natural last-valid checkpoint is pinned in `v30-family-year91-checkpoint.json`,
+1,208,705bytes, SHA
+`00941dcb880910e2156e86280ea0e2b8b3198b623902ae2ad340c182830793cb`.
+Never regenerate it. Next compact transaction storage with bounded old/new reads,
+then reduce duplicate retained checkpoint data without pruning original history.
+Re-run the real family case and full changed-runtime gates. No native data edits.
+
 ## Current adult relationship milestone
 
 Content seven adds **15 adult friendship/partner situations and 45 choices**,
