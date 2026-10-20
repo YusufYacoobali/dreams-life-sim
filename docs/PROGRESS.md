@@ -15,10 +15,88 @@ saving and resume, and park further load/save tools, import/export/sharing,
 Time Machine breadth and history-storage optimisation. Existing working features
 and old data stay intact. The current breakdown is in
 [Opening plan: current assessment](OPENING_PLAN.md#current-assessment); overall
-completion is approximately55%, with250/250minimum situations implemented;
+completion is approximately58%, with250/250minimum situations implemented;
 editorial, balance and release acceptance remain open.
 
-## Current milestone: parallel UI reliability and opening accessibility
+## Current milestone: hourly contracts, financial goals and editorial consistency
+
+Separate worktrees are integrated at944019d. Two ordinary part-time roles now
+offer reviewed8/12/20-hour contracts, default12, with52paid weeks.20hours waits
+until school ends; current20-hour work also blocks incompatible enrolment.
+Actual paid/worked minutes, cumulative exact pay, hourly raises/promotions,
+paid leave and hospital half-pay retain existing currency, earnings and service
+rules. Legacy annual salaries and already-bound interviews retain their old
+terms without invented hours. [Mechanics](HOURLY_WORK.md).
+
+The factual catalogue now contains45achievements/14challenges/43facts. Personal
+paid purchases, actual dividend months and cash-backed mortgage repayments earn
+the new financial goals; inherited assets, transfers, settlements and writeoffs
+cannot substitute. The goals add no money or random draws.
+[Financial scope](FINANCIAL_PROGRESSION_GOALS.md).
+
+Content9 corrects two wording errors and six existing physical-scene presence
+flags.250annual situations/750choices remain; IDs/effects/fees are unchanged.
+Previously bound scenes/results and raw history retain exact old data.
+[Editorial scope](STORY_EDITORIAL_REVIEW.md).
+
+All **1,911 tests / 123 suites** pass in **1,021.720 seconds**, strict app/test types
+and fresh Android/iOS Hermes exports pass. The same120immutable annual-policy
+seeds0–119 pass in670.474seconds across12countries. These are existing annual
+seeds, without a claim that complete terminal worlds equal an earlier version.
+[Source and checks](verification/hourly-finance-editorial-20261020.json).
+
+A separate12-country natural hourly policy passes in442.314seconds:29hiring
+answers/20accepted/9declined,12withdrawals,1,120exact cold codec checks,
+6,660paid periods,23,294,960paid minutes/23,098,400worked minutes,399rate changes,
+12paid-leave periods,120natural hospital periods and11earned retirements. The
+US life naturally died at42. Hours rotate8/12/20;20waits for real school completion.
+No funds/stats/age/date/RNG overrides follow creation; the documented initial
+birth-acknowledgement flag exception matches the existing pure-engine runners.
+These are scoped engine journeys, not native, SQLite, extra distinct annual
+seeds, all-choice, physical,120-year or multi-generation acceptance.
+[Raw natural journeys](verification/hourly-natural-journeys-20261020.json).
+
+All 70 serial warm fixed-world cloud samples avoid full checkpoint unpack;
+cold current/backup worlds and original Before Age Up bytes remain exact.
+These unpaired host/GC-sensitive five-sample measurements and generated contact
+stress inputs are not physical p95 or new natural population acceptance.
+[Action measurements](verification/action-latency-hourly-finance-20261020.json).
+
+Actual Android continues Nia23/revision128: read-only hourly previews128,
+reviewed interview129/cold129, hiring130/cold130, acknowledgement131, normal
+payroll year132/cold132, saved story result133 and acknowledgement134 all match
+complete projected production worlds. All eight tables match on read-only and
+cold observations. Six inactive lives/backups,59original moments and113original
+receipts remain exact; the new Before Age Up is original current131byte for byte.
+Final Nia, age 24 / revision 134: seven lives, 60 moments and 119 receipts;
+12 actual paid periods, 62,400 paid and worked minutes, and $16,671.20 gross pay.
+No pending decision or interrupted year. [12accepted capture pairs and exact scope](verification/android24-hourly-work-20261020/).
+
+World32 /engine33 /content9 /reader12 /checkpointv4. Immutable fixtures and
+original historical payloads were preserved. Game hash
+fbe7ba829156a20f60ce3150fdd1a215d36d7b734b4c9bf59d49a9b5faa23635;
+combined game/persistence
+080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1.
+Full production is conservatively about58%; onboarding stays50%. Source counts
+and these scoped gates do not establish broad balance, visual fidelity or release
+readiness. Hosted CI success, standalone Android, actual iOS and physical
+performance remain open. The prior hosted run failed only on a five-second UI
+test deadline; the workflow now uses the same explicit 30-second infrastructure
+timeout as the passing local checks, preserving every assertion.
+[Exact CI status and limits](RELEASE_READINESS_AUDIT.md). Further file/import/export/sharing/history work stays
+parked under the user's instruction.
+
+Continue immediately with the independently reviewed NPC dating/courtship and
+family depth, Health/Legal hospital-period consistency, Family UI and Asset/Bank
+UI branches in the next engine34 batch. Consolidate the new source/version gates
+after integrating them, then continue onboarding, Recovery Study and named early
+consequences, country/balance depth, remaining progression/rewards and visual/
+release work. Preserve current automatic resume and old bound data.
+Primary integration owns final checks, commits and pushes; agents keep separate
+worktrees. This checkpoint is being committed/pushed; inspect the remote for its
+final SHA and count the next two-hour safe-push deadline from that push.
+
+## Prior milestone: parallel UI reliability and opening accessibility
 
 The user explicitly authorised concurrent agents in separate worktrees, with the
 primary agent responsible for integration, testing, commits and pushes. Work and

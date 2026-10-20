@@ -1,0 +1,881 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "e85fc78e0f91606170e75835806b3537a7e16c7a",
+  "integratedCommit": "944019d8fb07759c4fc2e644ddf8f717edcbd16c",
+  "scope": "Integrated C33 hourly part-time contracts, factual financial progression and content9 editorial/context corrections. Separate worktrees; consolidated primary gates. Preserve annual legacy contracts, bound interviews/scenes, immutable fixtures and fast atomic automatic resume.",
+  "versions": {
+    "world": 32,
+    "engine": 33,
+    "content": 9,
+    "database": 12,
+    "checkpoint": "v4"
+  },
+  "gameSourceHash": "fbe7ba829156a20f60ce3150fdd1a215d36d7b734b4c9bf59d49a9b5faa23635",
+  "combinedGamePersistenceSourceHash": "080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1",
+  "progressionSourceHash": "6a304e6fb3e609ed2a9ce0496942a4965a4c58ef3544500df5f137b04b3f5b53",
+  "source": {
+    "app/(game)/challenge/[id].tsx": "5b7ccd486db1133dbdec7cff7c7cb1b9221cb3be997cab490d43d9092a62a572",
+    "app/(game)/jobs.tsx": "980f42533aa11b92977101e66acae436ee419f16db4d5bb02cc5a8546cfb9eac",
+    "app/(game)/work.tsx": "2a53be5b038ebc546fa4cd1853c8ac366af43e8736fb060caac814b26588f401",
+    "src/game/content/adultRelationshipStories.ts": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3",
+    "src/game/content/earlyHomeStories.ts": "1d1f3a06760ffbc9a3cb38333cd5543a632de5f1fe49261eb5e2d83aa13f6bb7",
+    "src/game/content/events.ts": "5e8fc88398c2765f8412548bfa6615a16703b1fdf0d519f69601a164de65b7f8",
+    "src/game/createLife.ts": "96b73ddc1745e62300191e0ecba8da4284f7084dcc0ec989e2da3f09e492aaf0",
+    "src/game/model.ts": "2630ea8706960b5faf7ac998a63a396b0e722defb08f4127e0ac674aafd0c8df",
+    "src/game/runtime.ts": "a9207f86ea2fbd28f1200e63d53cb72fb91381c1511fda1c53c2637b6b0d10c7",
+    "src/game/systems/education.ts": "ee048e66fdd53cc4560aa03179e3e11e5fcf5eda82f19dcff8e94fadba9dc124",
+    "src/game/systems/hourlyWork.ts": "9d5b63541c9740d6e5d64c5ffbd84c9c77e6901b0770c293e8b69e09cdbd07c0",
+    "src/game/systems/hourlyWorkSchemas.ts": "f2b989f143d3a86268096a03563ad79bfaa66ea540aaec9640133f6bdbec31ba",
+    "src/game/systems/hourlyWorkValidation.ts": "769f4a2c536a07e72554c3d8413d70aa764f24f0ebb503ec867e554197a9943f",
+    "src/game/systems/jobInterviewValidation.ts": "4ea270501c13da3108dcfcf6a51cbe5b9f8c1719b9dbfeaf7f4adde2cf850f7a",
+    "src/game/systems/npcBudget.ts": "5c1fdb9c90ca1429d63d115506330dd1b88e0170a962a2c14c16566799b0d6c8",
+    "src/game/systems/schemas.ts": "c4ccb630a14d20940053cb8ce673ab0e2014b7399aba29d22cf3f7d8f5ddca22",
+    "src/game/systems/work.ts": "5a132830df42bc06e8e8710e4e07283d9de8c9ac9e47f9eeb0c84cd6af727fce",
+    "src/game/systems/workplaceSchemas.ts": "f17f07256c16d78cc5330ef529933ec9b73e347f17e7c004c21958e3fd4c8131",
+    "src/game/systems/workplaceValidation.ts": "f7b500b01e1803b3458b605c37641ee9c8c02d87c7eeec64c922906e2d046f7f",
+    "src/game/systems/workplaces.ts": "f3b25cfa6e56baaf86020c94d8e2c7d1fca9e77515eabb8f5edda565968c7b99",
+    "src/persistence/repository.ts": "88af2b277d70393219b0cc4849c24cd26b011909dbb88af1c90d5ba271e560d4",
+    "src/progression/catalog.ts": "50cd265331152a7106ec947c4829c0a9567c1624a2a557378c08e822cf974af6",
+    "src/progression/facts.ts": "a7d0a6fdb130e415322820edc74af8fbe69221fc41bc9b2461d57f70e5fd8e82",
+    "src/progression/types.ts": "bfef75247b832a7ced43e883c93e92bc9f6f5308f42e5ace0bd2a5dd8fcddaf1",
+    "tests/game/assets-markets.test.ts": "68854223a28da98bf2bf1c846d9d68b2a36efc255bafadcdf7a1feb65b0f65ae",
+    "tests/game/businesses.test.ts": "86d1ae16369e6179d10020b3c8df818702d2c3d57f2576a8802b685bf59b69d4",
+    "tests/game/careers.test.ts": "2fb2d9b2cc72328b1b9386ebdc2e7c31607a3d599b42f103dd038696f70992a4",
+    "tests/game/childhood-stories.test.ts": "92251a28aecec6791beb7e7f81f1f03b315689dbf1785b90a16216bbe89f5511",
+    "tests/game/content-refresh.test.ts": "bab2dfcf40b4b2872908a6f6ede9af6895a0360c5b163aff665a909871d2e0d0",
+    "tests/game/creators.test.ts": "dfa0686f4048b8337ed836793097ca99ab61221a93b5d60f53d79c83071a5a4d",
+    "tests/game/early-home-stories.test.ts": "65467e744df785e9da36d80ccec8424d3b3137b6fb8595fd705140d78b3cbd21",
+    "tests/game/education-recovery.test.ts": "447d7d2f513e1232c038f101f9bda793c47ad7c8056de5636ba68777a2f84784",
+    "tests/game/estates.test.ts": "f309795d3679f28132025c5a272b37c4c9bf23080dbf3643fdf12ed601c5b218",
+    "tests/game/family.test.ts": "a9059edb0d334e928804bce9b2f03e48bfcbf496314812290f557a7e35309e1b",
+    "tests/game/foreign-earnings.test.ts": "9621b7242418b2e3101d6be98f883b2dc4bce318da9758653b3d370d9672ed70",
+    "tests/game/health.test.ts": "4537a8e985450e7dbdf31a4f8348f491e7c0d2ee3648d6551b4704463a0a9d8b",
+    "tests/game/hourly-work.test.ts": "bc3da5f8fc4e2a0484eebf98541325813a0313687245b4046914a81f27179dd1",
+    "tests/game/job-interviews.test.ts": "9bcdca58664f5b4b852447ead97cf3abfb40a05d09b572544b37a011883c0508",
+    "tests/game/legal.test.ts": "0e40c7f7487cc0f3ea75b0299f300d6c831f3147a41e87d0410c91e08151ca00",
+    "tests/game/leisure.test.ts": "4ec72a4c3c37d19d75cd9d511c9da59d884a19b099a5fa710345f631acadfac4",
+    "tests/game/music.test.ts": "7afff69fe754ea51b3999739493496d157637f67f97823918f2aaa4b72ab6f8a",
+    "tests/game/pets.test.ts": "0ca38fb6bd198614bf11dc0556f0ac45dcf948db90971cfdef914d76e072526b",
+    "tests/game/politics.test.ts": "f0b6ebf9bf384dbdd62f86e18ff13af168b50ce54cc5596ad7e27558599af14b",
+    "tests/game/relationships.test.ts": "3890f8f86f07c5609cac06592545a391a6b7284be4e1edd14e002cca6a8f1085",
+    "tests/game/relocation.test.ts": "0f3f330fe68bc2e236bc695f146dcb7b4a79976eaa05b9d342a820dc86e90541",
+    "tests/game/royalty.test.ts": "f0a0f3197497bdaa7a1f240848c54c313c9a589ca4745de3ceb1a8f44022f5a1",
+    "tests/game/scholarships.test.ts": "8afdc4d90c38377650fbe30e067db5663cd8c6436da5e19ba9b0542f5600fc25",
+    "tests/game/school.test.ts": "a1d0d8f354f48424940b06b3f914a3bcc75320394e168db5993ad1411bbc633b",
+    "tests/game/services.test.ts": "f78027119c1af43039c2f7d1641ce23e386e418e215401092c6afb1dd6f5622d",
+    "tests/game/social.test.ts": "4a3c8cf2938f4a4b0ca25ffffceef907319219ae6a4a362c8a80c67ba87526e3",
+    "tests/game/story-callbacks.test.ts": "075c7136e46e85510ffad8b2d3ccac9602cdb03702181b4dd2c7f29648cc83cc",
+    "tests/game/story-editorial-context.test.ts": "8fec69bfe3c69d8e210d9dd03b55e5aa7c4f5e53ff37687ac40bae232aa1210f",
+    "tests/game/travel.test.ts": "e5ecfb54e92968012e03b0a18a58088d8a683d41f810d3c48bdff26c87719933",
+    "tests/persistence/action-checkpoints.test.ts": "a2f7c4acc6cc0169f228e4b76f5ccda55a3c5b4cafa68d95a77be038dc92a0c1",
+    "tests/persistence/compressed-lives.test.ts": "a8b62475916f9189c4f7db9a000503a2f739cdd66403c14aa38098def342b02d",
+    "tests/persistence/native-arcade-archive.test.ts": "027f83cdaf91de1828524ad189f3731cdf116fbc8ffdc71c0a7032b7563076c1",
+    "tests/persistence/native-interview-checkpoints.test.ts": "b8ae9861f1a8dcc65c71a622aad4862a56c1b50eb1acaaef03217edabb251208",
+    "tests/persistence/native-people-block-archive.test.ts": "57e26deb061b3fa44ce218270b70496ae72f2f4dd7be3ab00f8b17a222b04ce9",
+    "tests/persistence/native-raise-archive.test.ts": "4c479f0124d73c0799690a23230b626d415a5122683ce0d5d9b2339df402ac3f",
+    "tests/persistence/native-teen-archive.test.ts": "05c8b9be86da3406a3c09acbbae630075c59617ad8a5f21487bb19813e701ee8",
+    "tests/persistence/people-blocks.test.ts": "dbe803258dd878d8b094bb0a2dfb75985c4aff9b931b6124b33c9e90b7d934cc",
+    "tests/persistence/repository.test.ts": "682701e34b00c729e47531b505fac9cd064d5a5d8e83f582256ad1e9bbdbd6d3",
+    "tests/persistence/tuple-checkpoints.test.ts": "4d01f4dba806cb5221602af2d8a7da2a92066c409d27634517b0ce57721b8a26",
+    "tests/progression/expanded-progress.test.ts": "c6187c229734df2f3d27aeb153c1905f529d43b3ed8d114678c7db3527e0a2db",
+    "tests/progression/financial-progress.test.ts": "fed30c4fa926428bc303d680064d4f8df97d8c0758bdc48c4956fdfd4251fd95",
+    "tests/state/preferencesStore.test.ts": "a498d6ff143e254f7a9643acd7a5716d0a2de2b9d2524c178a778902e33fd8de",
+    "tests/ui/extras-flow.test.tsx": "b34e08e9d071fa994d8e4d9fa34cea1b849667ab7118b6da364e18d1d5cdf611",
+    "tests/ui/hourly-work-flow.test.tsx": "54fd07e74388e67f387991ba9816b7f235f10a11c848579400253013f5ca1ec3",
+    "tools/run-life-sweep.cjs": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "tools/benchmark-actions.cjs": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+    "app.json": "cf66bfbf1f8f97a9eccd4a7a2eb792a65b44f927a59cb03504a66e62612731b3",
+    "assets/generated/dreams-app-icon.png": "260eecc71e31a4d05ba65deaff4dddabf32d4c5b9576e3faa448150983245cb9",
+    "tools/run-hourly-work-sweep.cjs": "0731959a7538564b633b2c602cad61a637636671c9e3932397f47fdde5beae43"
+  },
+  "catalogue": {
+    "achievements": 45,
+    "challenges": 14,
+    "facts": 43,
+    "annualSituations": 250,
+    "annualChoices": 750
+  },
+  "checks": {
+    "regression": {
+      "exitCode": 0,
+      "suites": 123,
+      "tests": 1911,
+      "elapsedSeconds": 1021.72,
+      "file": "regression-hourly-finance-20261020.txt",
+      "bytes": 5517,
+      "sha256": "eaedb712ea1920ac513dfbc8fd7bebdf8a4fe1f9ecda0a025f0ffa948d87348b"
+    },
+    "strictTypes": {
+      "exitCode": 0,
+      "scope": "Application and tests",
+      "file": "types-hourly-finance-20261020.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "annualPolicy": {
+      "exitCode": 0,
+      "scope": "The same existing 120 immutable annual-policy seeds0..119 across12countries; not additional distinct annual seeds, native or all-choice acceptance.",
+      "summary": {
+        "event": "sweep-complete",
+        "count": 120,
+        "startSeed": 0,
+        "completed": 120,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 32,
+          "engine": 33,
+          "content": 9
+        },
+        "gameSourceHash": "fbe7ba829156a20f60ce3150fdd1a215d36d7b734b4c9bf59d49a9b5faa23635",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 10,
+          "IT": 11,
+          "BR": 12,
+          "ZA": 10,
+          "ES": 12,
+          "US": 13,
+          "CA": 10,
+          "GB": 10,
+          "DE": 12,
+          "FR": 6,
+          "IN": 6,
+          "JP": 8
+        },
+        "ageRange": [
+          40,
+          98
+        ],
+        "maxPeople": 24,
+        "maxLedgerRows": 55203,
+        "elapsedMs": 670474
+      },
+      "file": "life-sweep-hourly-finance-120-20261020.ndjson",
+      "bytes": 37658,
+      "sha256": "551e11a555795d01e9850a793b34bbf601ecac9b3fc34827d94c17cd3aae9487",
+      "stderr": {
+        "file": "life-sweep-hourly-finance-120-20261020.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "naturalHourlyPolicy": {
+      "exitCode": 0,
+      "scope": "Separate optional hourly-work policy: twelve natural birth-to-death pure-engine cloud journeys, seeds900..911, existing birth-acknowledgement flag exception, healthy routine from age6, actual reviewed part-time interviews at rotating8/12/20 weekly hours (20 waits until school ends), one withdrawal per country, responsible hiring responses, retained hourly work/reapplication after loss, eligible annual supervisor feedback/raise requests, at most one affordable eligible paid-leave holiday, earned retirement, first available annual choices and exact cold codec checks. No funds/stat/age/date/RNG/outcome overrides after creation. Not native, SQLite, all-choice, physical/performance, additional distinct annual-policy seeds,120-year or multi-generation acceptance.",
+      "elapsedSeconds": 442.314,
+      "totals": {
+        "countries": 12,
+        "interviews": 29,
+        "accepted": 20,
+        "declined": 9,
+        "withdrawals": 12,
+        "coldChecks": 1120,
+        "paidPeriods": 6660,
+        "paidMinutes": 23294960,
+        "workedMinutes": 23098400,
+        "rateChanges": 399,
+        "paidLeavePeriods": 12,
+        "hospitalPeriods": 120,
+        "retired": 11
+      },
+      "sourceBefore": {
+        "game": "fbe7ba829156a20f60ce3150fdd1a215d36d7b734b4c9bf59d49a9b5faa23635",
+        "gameAndPersistence": "080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1",
+        "tool": "0731959a7538564b633b2c602cad61a637636671c9e3932397f47fdde5beae43"
+      },
+      "sourceAfter": {
+        "game": "fbe7ba829156a20f60ce3150fdd1a215d36d7b734b4c9bf59d49a9b5faa23635",
+        "gameAndPersistence": "080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1",
+        "tool": "0731959a7538564b633b2c602cad61a637636671c9e3932397f47fdde5beae43"
+      },
+      "file": "hourly-natural-journeys-20261020.json",
+      "bytes": 180704,
+      "sha256": "bd11ccf79c077b75cf0f299e44eb2e804f2eb12db13c644cf74e793c6547efc2",
+      "progress": {
+        "file": "hourly-natural-journeys-20261020.stderr.txt",
+        "bytes": 2353,
+        "sha256": "0ffcad0c6fd6e5019b7aeea00e6b0895290eff91659c08efadf195ea2c2a3eef"
+      }
+    },
+    "actions": {
+      "exitCode": 0,
+      "scope": "five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native",
+      "sourceHash": "080aa1144edd461d9df7898168e2c8f96ae6b8bf6ffcf0c043675aa75d487dc1",
+      "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+      "warmSamples": 70,
+      "warmFullUnpacks": 0,
+      "results": [
+        {
+          "label": "Begin Life",
+          "medianMs": {
+            "totalMs": 1.3335609999999178,
+            "resolveMs": 0.002613999999994121,
+            "commitMs": 1.331126999999924,
+            "coldOpenMs": 0.6629789999997229
+          }
+        },
+        {
+          "label": "First-year choice",
+          "medianMs": {
+            "totalMs": 1.9431989999998223,
+            "resolveMs": 0.639252999999826,
+            "commitMs": 1.3196100000000115,
+            "coldOpenMs": 1.378476999999748
+          }
+        },
+        {
+          "label": "First-year choice Continue",
+          "medianMs": {
+            "totalMs": 2.0006759999996575,
+            "resolveMs": 0.5443410000002586,
+            "commitMs": 1.4064199999997982,
+            "coldOpenMs": 1.3175460000002204
+          }
+        },
+        {
+          "label": "Age-seven callback",
+          "medianMs": {
+            "totalMs": 5.40168199999971,
+            "resolveMs": 2.7774570000001404,
+            "commitMs": 2.6242249999995693,
+            "coldOpenMs": 12.576696999999967
+          }
+        },
+        {
+          "label": "Age-seven callback Continue",
+          "medianMs": {
+            "totalMs": 9.745078999999805,
+            "resolveMs": 5.567262000000028,
+            "commitMs": 4.336786999999731,
+            "coldOpenMs": 11.056786000000102
+          }
+        },
+        {
+          "label": "Age-30 routine",
+          "medianMs": {
+            "totalMs": 16.663346999999703,
+            "resolveMs": 9.663856000000123,
+            "commitMs": 6.948765000000094,
+            "coldOpenMs": 85.84275400000024
+          }
+        },
+        {
+          "label": "Age-60 routine",
+          "medianMs": {
+            "totalMs": 51.67008100000021,
+            "resolveMs": 33.42079300000114,
+            "commitMs": 16.78568499999892,
+            "coldOpenMs": 280.75547799999913
+          }
+        },
+        {
+          "label": "100-known-contact routine",
+          "medianMs": {
+            "totalMs": 23.911731000000145,
+            "resolveMs": 14.191704000000755,
+            "commitMs": 9.332789000000048,
+            "coldOpenMs": 97.31776799999898
+          },
+          "setup": {
+            "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+            "initialPeople": 15,
+            "addedContacts": 92,
+            "knownContacts": 100,
+            "totalPeople": 107,
+            "monthlyFinancialActors": 8
+          },
+          "outcome": {
+            "worldSha256": "f11fb8d3eeb3c08e48c48b9fe3387aeb22b042018bb653cd48e6d3c1d7b02fa7",
+            "date": {
+              "year": 2056,
+              "month": 10,
+              "day": 18
+            },
+            "people": 107,
+            "ledgerRows": 11793,
+            "monthsProcessed": null,
+            "annualStage": null,
+            "pendingKind": "result",
+            "beforeAgeUpSnapshotRetained": false
+          }
+        },
+        {
+          "label": "100-known-contact first Age Up step",
+          "medianMs": {
+            "totalMs": 61.61419699999897,
+            "resolveMs": 46.88751300000149,
+            "commitMs": 15.175541000000521,
+            "coldOpenMs": 112.39979099999982
+          },
+          "setup": {
+            "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+            "initialPeople": 15,
+            "addedContacts": 92,
+            "knownContacts": 100,
+            "totalPeople": 107,
+            "monthlyFinancialActors": 8
+          },
+          "outcome": {
+            "worldSha256": "456c4d40f6894ec1341fb487f139686b1ca7f3cfd1c44e2d47c00c6aa4775436",
+            "date": {
+              "year": 2057,
+              "month": 10,
+              "day": 18
+            },
+            "people": 109,
+            "ledgerRows": 12662,
+            "monthsProcessed": 12,
+            "annualStage": "complete",
+            "pendingKind": "decision",
+            "beforeAgeUpSnapshotRetained": true
+          }
+        },
+        {
+          "label": "1000-known-contact routine",
+          "medianMs": {
+            "totalMs": 104.97598899999866,
+            "resolveMs": 62.17150799999945,
+            "commitMs": 45.64862599999833,
+            "coldOpenMs": 182.61447000000044
+          },
+          "setup": {
+            "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+            "initialPeople": 15,
+            "addedContacts": 992,
+            "knownContacts": 1000,
+            "totalPeople": 1007,
+            "monthlyFinancialActors": 8
+          },
+          "outcome": {
+            "worldSha256": "06aa33710e93f49cac55015cedbde0a3825e86d465771b24f7dd4e4f9b109407",
+            "date": {
+              "year": 2056,
+              "month": 10,
+              "day": 18
+            },
+            "people": 1007,
+            "ledgerRows": 11793,
+            "monthsProcessed": null,
+            "annualStage": null,
+            "pendingKind": "result",
+            "beforeAgeUpSnapshotRetained": false
+          }
+        },
+        {
+          "label": "1000-known-contact first Age Up step",
+          "medianMs": {
+            "totalMs": 423.47482300000047,
+            "resolveMs": 322.4550249999993,
+            "commitMs": 109.84974599999987,
+            "coldOpenMs": 179.01490799999738
+          },
+          "setup": {
+            "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+            "initialPeople": 15,
+            "addedContacts": 992,
+            "knownContacts": 1000,
+            "totalPeople": 1007,
+            "monthlyFinancialActors": 8
+          },
+          "outcome": {
+            "worldSha256": "42727415830f15b383cd9939c7468e2b0fac6e30a22a2585fe78b88b64a9602b",
+            "date": {
+              "year": 2057,
+              "month": 10,
+              "day": 18
+            },
+            "people": 1018,
+            "ledgerRows": 15234,
+            "monthsProcessed": 12,
+            "annualStage": "complete",
+            "pendingKind": "decision",
+            "beforeAgeUpSnapshotRetained": true
+          }
+        },
+        {
+          "label": "Prepared teen coworker introduction",
+          "medianMs": {
+            "totalMs": 7.710416000001715,
+            "resolveMs": 4.049710999999661,
+            "commitMs": 3.782308000001649,
+            "coldOpenMs": 30.315762999998697
+          }
+        },
+        {
+          "label": "Prepared supervisor feedback",
+          "medianMs": {
+            "totalMs": 8.336840999996639,
+            "resolveMs": 4.116601000001538,
+            "commitMs": 4.114118999998027,
+            "coldOpenMs": 35.11776699999609
+          }
+        },
+        {
+          "label": "Prepared raise request",
+          "medianMs": {
+            "totalMs": 9.61127999999735,
+            "resolveMs": 4.95846999999776,
+            "commitMs": 4.559779999995953,
+            "coldOpenMs": 42.5833599999969
+          }
+        }
+      ],
+      "file": "action-latency-hourly-finance-20261020.json",
+      "bytes": 53719,
+      "sha256": "ddd745d9395a70a826cf6261e3eadb511d5aed60336ff1dfee0bb85343744cbb",
+      "stderr": {
+        "file": "action-latency-hourly-finance-20261020.stderr.txt",
+        "bytes": 481,
+        "sha256": "d5d8a30beeb2804d2cbe95edb204c96f1aea078fa0ac172d3dc53b6ddf89455e"
+      }
+    },
+    "exports": {
+      "exitCode": 0,
+      "scope": "Fresh Android/iOS Hermes exports, not standalone or device acceptance",
+      "bundles": {
+        "android": {
+          "file": "_expo/static/js/android/entry-aa25644dafb28ba9ffce71eef37fea1e.hbc",
+          "bytes": 5688059,
+          "sha256": "30842ccef6c6819233f4f0ae670b7335c46b33fa6c81c05a9701c9f58b90c288"
+        },
+        "ios": {
+          "file": "_expo/static/js/ios/entry-c8a7c421f408c1c181877c8afa64f41b.hbc",
+          "bytes": 5384429,
+          "sha256": "683b8ca93a62f7b0801d4a1f281e2b07d52d827f5ef4ecbeac6a9fda7b5ca3eb"
+        }
+      },
+      "file": "exports-hourly-finance-20261020.txt",
+      "bytes": 2664,
+      "sha256": "a395e317211556abbebd34c6f16c1a7886b6c96a41839fd600a53dc845715bf0"
+    },
+    "native": {
+      "scope": "Actual Android24 software emulator / ExpoGo57.0.9. Existing Nia23 native128, read-only hourly previews, new reviewed20h interview, hiring, paid normal year and saved scene with process-stop cold checks. No native SQL/world/version/date/funds/stat/RNG edits or imports. Engine command projections start from actual128; not native birth-to-work, physical latency, standalone or iOS acceptance.",
+      "sourceRuntimeCommit": "944019d8fb07759c4fc2e644ddf8f717edcbd16c",
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "initialRevision": 128,
+      "phases": [
+        {
+          "phase": "before",
+          "revision": 128,
+          "worldSha256": "0325d666faf3f09436d526f2334a433aeb5aca08e5a38f0875c13cf206d71b1d",
+          "pending": null,
+          "annual": null,
+          "contracts": 0,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 113
+        },
+        {
+          "phase": "browsed",
+          "revision": 128,
+          "worldSha256": "0325d666faf3f09436d526f2334a433aeb5aca08e5a38f0875c13cf206d71b1d",
+          "pending": null,
+          "annual": null,
+          "contracts": 0,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 113
+        },
+        {
+          "phase": "interview",
+          "revision": 129,
+          "worldSha256": "8d6fcddb137e9c52460c5b58e5ab51c471801787003c5fcacf63dda12397b74b",
+          "pending": "Weekend Shop Assistant interview",
+          "annual": null,
+          "contracts": 0,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 114
+        },
+        {
+          "phase": "cold-interview",
+          "revision": 129,
+          "worldSha256": "8d6fcddb137e9c52460c5b58e5ab51c471801787003c5fcacf63dda12397b74b",
+          "pending": "Weekend Shop Assistant interview",
+          "annual": null,
+          "contracts": 0,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 114
+        },
+        {
+          "phase": "hired",
+          "revision": 130,
+          "worldSha256": "24e384917c2f28bd7eabdc0ccba0974462c203a7e81b6eaab52ab68131b22014",
+          "pending": "You got the job",
+          "annual": null,
+          "contracts": 1,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 115
+        },
+        {
+          "phase": "cold-hired",
+          "revision": 130,
+          "worldSha256": "24e384917c2f28bd7eabdc0ccba0974462c203a7e81b6eaab52ab68131b22014",
+          "pending": "You got the job",
+          "annual": null,
+          "contracts": 1,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 115
+        },
+        {
+          "phase": "ready",
+          "revision": 131,
+          "worldSha256": "0458d57c507a6bcd33f8db5d7fc8eacc727d6eb2c5a2f0344f01a4a7a81577fc",
+          "pending": null,
+          "annual": null,
+          "contracts": 1,
+          "paidPeriods": 0,
+          "paidMinutes": 0,
+          "workedMinutes": 0,
+          "gross": "0",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "lives": 7,
+          "moments": 59,
+          "receipts": 116
+        },
+        {
+          "phase": "year",
+          "revision": 132,
+          "worldSha256": "6273f2592098942a9e736d9a1b8ef24f7b4c3d0a04726176dd0ec93be80e9ad8",
+          "pending": "A biography of thirty seconds",
+          "annual": {
+            "id": "year_131",
+            "startDate": {
+              "year": 2049,
+              "month": 10,
+              "day": 20
+            },
+            "targetDate": {
+              "year": 2050,
+              "month": 10,
+              "day": 20
+            },
+            "monthsProcessed": 12,
+            "stage": "complete",
+            "pausedForPlanning": false
+          },
+          "contracts": 1,
+          "paidPeriods": 12,
+          "paidMinutes": 62400,
+          "workedMinutes": 62400,
+          "gross": "1667120",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "newBeforeAgeUpRaw131Exact": true,
+          "lives": 7,
+          "moments": 60,
+          "receipts": 117
+        },
+        {
+          "phase": "cold-year",
+          "revision": 132,
+          "worldSha256": "6273f2592098942a9e736d9a1b8ef24f7b4c3d0a04726176dd0ec93be80e9ad8",
+          "pending": "A biography of thirty seconds",
+          "annual": {
+            "id": "year_131",
+            "startDate": {
+              "year": 2049,
+              "month": 10,
+              "day": 20
+            },
+            "targetDate": {
+              "year": 2050,
+              "month": 10,
+              "day": 20
+            },
+            "monthsProcessed": 12,
+            "stage": "complete",
+            "pausedForPlanning": false
+          },
+          "contracts": 1,
+          "paidPeriods": 12,
+          "paidMinutes": 62400,
+          "workedMinutes": 62400,
+          "gross": "1667120",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "newBeforeAgeUpRaw131Exact": true,
+          "allEightTablesExact": true,
+          "lives": 7,
+          "moments": 60,
+          "receipts": 117
+        },
+        {
+          "phase": "story-result",
+          "revision": 133,
+          "worldSha256": "5ac602547b2bf0e34345381f15468727bd62356657be0cdd9aed6e7c4d253b65",
+          "pending": "Plenty to begin with",
+          "annual": {
+            "id": "year_131",
+            "startDate": {
+              "year": 2049,
+              "month": 10,
+              "day": 20
+            },
+            "targetDate": {
+              "year": 2050,
+              "month": 10,
+              "day": 20
+            },
+            "monthsProcessed": 12,
+            "stage": "complete",
+            "pausedForPlanning": false
+          },
+          "contracts": 1,
+          "paidPeriods": 12,
+          "paidMinutes": 62400,
+          "workedMinutes": 62400,
+          "gross": "1667120",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "newBeforeAgeUpRaw131Exact": true,
+          "lives": 7,
+          "moments": 60,
+          "receipts": 118
+        },
+        {
+          "phase": "final",
+          "revision": 134,
+          "worldSha256": "3416e86da8f8f3cca54cd6cc9dd6a1d99d22ec683d51c16950810a9fbc20245c",
+          "pending": null,
+          "annual": null,
+          "contracts": 1,
+          "paidPeriods": 12,
+          "paidMinutes": 62400,
+          "workedMinutes": 62400,
+          "gross": "1667120",
+          "allSixInactiveLivesBackupsAnd59OriginalMoments113OriginalReceiptsExact": true,
+          "newBeforeAgeUpRaw131Exact": true,
+          "lives": 7,
+          "moments": 60,
+          "receipts": 119
+        }
+      ],
+      "acceptedCaptures": [
+        "detail-default",
+        "detail-eight",
+        "detail-twenty",
+        "reviewed-terms-final",
+        "interview",
+        "cold-interview",
+        "hired",
+        "cold-hired",
+        "year",
+        "cold-year",
+        "story-result",
+        "final"
+      ],
+      "status": "passed",
+      "complete": true,
+      "record": "android24-hourly-work-20261020/journey-exact.json",
+      "captures": {
+        "detail-default": {
+          "png": {
+            "file": "android24-hourly-work-20261020/detail-default.png",
+            "bytes": 63062,
+            "sha256": "87095a116a45ee72a72466aead9d912361aae98484eca9d32bde68017646c9e9"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/detail-default.xml",
+            "bytes": 24325,
+            "sha256": "ff9d4ad55892ae12de93a51e2cb217061895cc71273f9627811c23fb1733e4f2"
+          }
+        },
+        "detail-eight": {
+          "png": {
+            "file": "android24-hourly-work-20261020/detail-eight.png",
+            "bytes": 63104,
+            "sha256": "88d018c2b35c6aee848fae73813fcda43aaeae21dc3ab3711ebea724aa8ee4bf"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/detail-eight.xml",
+            "bytes": 24323,
+            "sha256": "a917a5c20b3b28deea7fbfae78f39e0f9587926221fa76dedab57d294026c937"
+          }
+        },
+        "detail-twenty": {
+          "png": {
+            "file": "android24-hourly-work-20261020/detail-twenty.png",
+            "bytes": 63302,
+            "sha256": "43774b5878f90497b69e7b4241b4d5542b87b99bb3a616030047ac1ee1530903"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/detail-twenty.xml",
+            "bytes": 24343,
+            "sha256": "d47532bf199e33f806423f32e96d489e212f216713f9e6a3f0ec56ad02a1804c"
+          }
+        },
+        "reviewed-terms-final": {
+          "png": {
+            "file": "android24-hourly-work-20261020/reviewed-terms-final.png",
+            "bytes": 70287,
+            "sha256": "dc730ccb3829506e9c4e237e33fd204e4deb238f6535b4d87d803885711c52e7"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/reviewed-terms-final.xml",
+            "bytes": 22539,
+            "sha256": "d0b15c678abf5f5157b9b8842b6bda5eba7f6514a971059a8abb2640ccaaab82"
+          }
+        },
+        "interview": {
+          "png": {
+            "file": "android24-hourly-work-20261020/interview.png",
+            "bytes": 69977,
+            "sha256": "c545534ddc459b76a1410fde39dd7d287807fa213e5dc4c342ebf79decd49886"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/interview.xml",
+            "bytes": 8939,
+            "sha256": "69c7ef258ff29688957d16927acca6b4935a227ea45d5797a909369cdab66df9"
+          }
+        },
+        "cold-interview": {
+          "png": {
+            "file": "android24-hourly-work-20261020/cold-interview.png",
+            "bytes": 76472,
+            "sha256": "7b2ba9ac26329817949546c9b3d18c50d7d132fab3b04901c90f9d57b2eb7f8d"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/cold-interview.xml",
+            "bytes": 8939,
+            "sha256": "69c7ef258ff29688957d16927acca6b4935a227ea45d5797a909369cdab66df9"
+          }
+        },
+        "hired": {
+          "png": {
+            "file": "android24-hourly-work-20261020/hired.png",
+            "bytes": 75575,
+            "sha256": "6dd6e047c5bb2f688073ab566cbd47d43fd46ea72d194cca448d118f5b7f9bad"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/hired.xml",
+            "bytes": 7769,
+            "sha256": "88e7bc734a0c688c3d33896dac50de188c43cc99d23318632f5ee2396019f9e5"
+          }
+        },
+        "cold-hired": {
+          "png": {
+            "file": "android24-hourly-work-20261020/cold-hired.png",
+            "bytes": 74802,
+            "sha256": "caef5964dd287f165f6179f3857106d518e0bb1bffe61f1cf3155eee1115d3cb"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/cold-hired.xml",
+            "bytes": 7769,
+            "sha256": "88e7bc734a0c688c3d33896dac50de188c43cc99d23318632f5ee2396019f9e5"
+          }
+        },
+        "year": {
+          "png": {
+            "file": "android24-hourly-work-20261020/year.png",
+            "bytes": 71548,
+            "sha256": "13e8d4e403fc4b055606e76f7a65d1c772334f9b8d03e003f2ec661df9b66e98"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/year.xml",
+            "bytes": 8179,
+            "sha256": "8f2b79c3959614ede5f0364a7876d575e60bab5b308bebb31fe6f6f1b03c43af"
+          }
+        },
+        "cold-year": {
+          "png": {
+            "file": "android24-hourly-work-20261020/cold-year.png",
+            "bytes": 71718,
+            "sha256": "b0df45a5fcef7c9f20117d18602a873308392b2c276e0d432a06f1afaad21849"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/cold-year.xml",
+            "bytes": 8179,
+            "sha256": "8f2b79c3959614ede5f0364a7876d575e60bab5b308bebb31fe6f6f1b03c43af"
+          }
+        },
+        "story-result": {
+          "png": {
+            "file": "android24-hourly-work-20261020/story-result.png",
+            "bytes": 68199,
+            "sha256": "4edea0a7cb244f060c14a65bf8ee82e3c825fb7ee6d171e997823454e1273e97"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/story-result.xml",
+            "bytes": 8281,
+            "sha256": "bdd3041c63f7da86406ded2d64297e33cb47649534beb65000030f53a774865f"
+          }
+        },
+        "final": {
+          "png": {
+            "file": "android24-hourly-work-20261020/final.png",
+            "bytes": 76460,
+            "sha256": "1c9e3f0292d502c05fedeaebfbd904ff76ea642956374044f1e173c60b2cc891"
+          },
+          "xml": {
+            "file": "android24-hourly-work-20261020/final.xml",
+            "bytes": 40492,
+            "sha256": "bb27f6bbc0736e2f9ceb28d69e166eaed6dbc0ce0ca50688183744add7af15f4"
+          }
+        }
+      }
+    }
+  },
+  "immutableFixturesPreserved": true,
+  "limits": [
+    "Natural hourly policy is separate pure-engine cloud scope with the documented existing birth-acknowledgement flag exception. Its12journeys are not another120annual seeds, native, SQLite, all-choice, physical,120-year or multi-generation acceptance.",
+    "Warm action measurements are unpaired five-sample host/GC-sensitive cloud diagnostics on fixed worlds. Generated contact cases are explicit stress inputs, not natural populations or physical p95.",
+    "Native evidence continues actual Nia23/revision128. It is not a new native birth-to-work journey, physical timing, standalone Android, iOS or comprehensive large-text/keyboard acceptance.",
+    "250situations/750choices meet source minimum; editorial pacing, balance, country review and continuous integrated play remain open.45achievements/14challenges/43facts are read-only recognition, with broader rewards still open.",
+    "Hosted CI success, installed release branding, standalone Android, actual iOS, physical performance and full release acceptance remain unclaimed.",
+    "Overall production approximately58%; onboarding remains50%. Further import/export/sharing/history breadth remains parked."
+  ],
+  "publicationInputs": {
+    "source": {
+      "file": "hourly-finance-source-20261020.json",
+      "bytes": 8336,
+      "sha256": "09902da4ce7e47875f5c222758168ce4cab9c1db79923703693de7580a4a2864"
+    },
+    "immutableFixtureDiff": {
+      "file": "hourly-finance-fixture-diff-20261020.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reviewedCaptures": {
+      "file": "android24-hourly-work-20261020/accepted-captures.json",
+      "bytes": 335,
+      "sha256": "d72c3cfb754340f49366a1006691ba2e5420b5579227887d95080a2e96936fcb"
+    },
+    "nativeVerifierSha256": "5bd8abb38245497f86918dd885f18a9614fa4cbef3192a83639befc36deb2738",
+    "publisherSha256": "d5c54d9ed011af576962117eab0ee99a66e7628faded49eb31fc008b5126dcd7"
+  }
+}

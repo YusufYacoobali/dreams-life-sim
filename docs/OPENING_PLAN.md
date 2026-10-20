@@ -1,5 +1,13 @@
 # Opening experience: priority and completion estimates
 
+The integrated hourly/financial/editorial milestone passes1,911tests/123suites,
+strict types, fresh Android/iOS exports, the same120annual seeds and12separate
+natural hourly journeys. Reviewed8/12/20-hour contracts record actual pay/time;
+45achievements/14challenges/43facts recognise real transactions. Actual Android
+interview129/cold129, hire130/cold130, year132/cold132 and story/ack133–134 are
+exact. Onboarding remains50%; overall production is conservatively about58%.
+[Current evidence](verification/hourly-finance-editorial-20261020.json).
+
 The parallel UI milestone passes165 UI/state/progression tests, strict types and
 fresh Android/iOS exports. Work/School/Education prevent unchanged saves and retain
 failed drafts; eligible education fields remain reachable. Opening live alerts,
@@ -312,7 +320,13 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current content8 completes the250-situation minimum with actual child/pet/home/
+Current World32/engine33/content9 adds reviewed hourly work, actual paid/worked
+time, financial transaction goals and editorial availability fixes. The C33
+source and native scope are linked at the top. Overall is now about58%; existing
+onboarding50% and other area estimates remain conservative pending their wider
+acceptance. Earlier milestones below retain their historical source scope.
+
+Prior content8 completed the250-situation minimum with actual child/pet/home/
 hobby/trip/health/work contexts. All1,657tests/111suites, strict types, both Hermes
 exports, same120annual-policy lifetimes and twelve natural leisure/work journeys
 pass. Native cold adult/pet results and acknowledgement111 preserve original
@@ -338,7 +352,7 @@ fresh Hermes exports pass. Actual native older-life viewing returns to Riley
 with all eight tables exact. Engine/codec/schema stay fixed; file breadth and
 broader production gates remain deferred/open as recorded.
 
-The complete production scope is approximately **55% complete**. These are
+The complete production scope is approximately **58% complete**. These are
 conservative effort estimates, not measured screen acceptance scores. Passing
 mechanics tests does not establish visual fidelity or device readiness.
 
@@ -348,7 +362,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Life screen and early gameplay | 55% | More early consequences and native interaction/layout polish |
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
-| Education and ordinary jobs | 75% | Hours/career ladders, national education depth and broader balance |
+| Education and ordinary jobs | 75% | Career ladders, national education depth and broader balance |
 | Relationships, family and inheritance | 80% | More autonomous-life depth, balance and device acceptance |
 | Money, assets and markets | 80% | Balance, broad integration and device acceptance |
 | Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
@@ -356,20 +370,23 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
 | Pets, hobbies and entertainment | 60% | Further leisure depth, balance and broader device review |
 | Situational stories | About70% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
-| Achievements and challenges | 55% | Further financial milestones, challenge/reward depth and broader release review |
+| Achievements and challenges | 55% | Challenge/reward depth and broader release review |
 | Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
-Overall is approximately **55%**. These are conservative effort estimates,
+Overall is approximately **58%**. These are conservative effort estimates,
 not acceptance scores or a simple average. Story counts measure implemented source
 situations, not completed editorial/release acceptance. Additional file/history
 work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Current next steps: integrate independently completed hourly contracts, financial goals and editorial fixes with full gates, then remaining work/leisure depth; review
-all250stories for balance/editorial coverage; complete visual/accessibility and
-available device/release gates. Preserve fast atomic autosave/resume. Further
+Current next steps: integrate the independently reviewed NPC dating/courtship
+and family depth, Health/Legal hospital-period consistency, Family UI and Asset/
+Bank UI branches as the next engine34 batch and run the appropriate consolidated
+gates. Continue onboarding, Recovery Study and named early consequences, then
+remaining career/leisure/progression depth. Review all250stories for balance and
+pacing; complete visual/accessibility and available device/release gates. Preserve fast atomic autosave/resume. Further
 import/export/sharing/history breadth stays parked. The original opening
 priorities below retain their detailed references.
 

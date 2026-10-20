@@ -1,0 +1,18 @@
+{
+  "reviewed": true,
+  "sourceRuntimeCommit": "944019d8fb07759c4fc2e644ddf8f717edcbd16c",
+  "captures": [
+    "detail-default",
+    "detail-eight",
+    "detail-twenty",
+    "reviewed-terms-final",
+    "interview",
+    "cold-interview",
+    "hired",
+    "cold-hired",
+    "year",
+    "cold-year",
+    "story-result",
+    "final"
+  ]
+}
