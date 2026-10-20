@@ -76,7 +76,7 @@ else if (historyIndex >= 0) {
     const world = checkpoints.unpackCheckpoint(row.payload);
     cases.push({ label: 'Age-' + age + ' routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine } });
   }
-if (process.argv.includes('--workplaces')) {
+if (process.argv.includes('--workplaces') || process.argv.includes('--raises')) {
   // Continue a genuine saved teen result with ordinary production commands.
   // These prepared inputs exercise the new roster; no money, tenure or RNG edits.
   let world = decodeSave(fs.readFileSync(path.join(__dirname, '../tests/fixtures/v28-native-teen-archive.json'), 'utf8')).world;
@@ -99,6 +99,14 @@ if (process.argv.includes('--workplaces')) {
   assert.ok(place && supervisor, 'Missing current supervisor in prepared workplace');
   assert.ok(world.people[world.activePersonId].employment.paidMonths >= 3);
   cases.push({ label: 'Prepared supervisor feedback', world, command: { type: 'work-feedback', workplaceId: place.id, supervisorId: supervisor.personId } });
+  if (process.argv.includes('--raises')) {
+    world = resolveCommand(world, { type: 'work-effort', effort: 'hard' }, true); finish();
+    let years = 0;
+    while (world.people[world.activePersonId].employment?.performance < 65 && years++ < 3) { world = resolveCommand(world, { type: 'advance' }, true); finish(); }
+    const current = world.workplaces.find(item => item.personId === world.activePersonId && !item.ended), boss = current?.members.find(item => item.role === 'supervisor' && !item.left);
+    assert.ok(current && boss && world.people[world.activePersonId].employment?.performance >= 65, 'Prepared worker did not qualify for a raise');
+    cases.push({ label: 'Prepared raise request', world, command: { type: 'request-raise', workplaceId: current.id, supervisorId: boss.personId } });
+  }
 }
 const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'dreams-actions-'));
 function open(file) {

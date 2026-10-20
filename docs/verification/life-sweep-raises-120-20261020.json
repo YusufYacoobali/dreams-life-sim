@@ -1,0 +1,65 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "eb796ce",
+  "scope": "Current-source validated immutable pure-engine lifetimes, first eligible choices; no optional workplace introductions or raises, not native or SQLite",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 3130
+  },
+  "completion": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 29,
+      "content": 5
+    },
+    "gameSourceHash": "147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 731299
+  },
+  "distinctSeeds": 120,
+  "seeds": [
+    0,
+    119
+  ],
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "raw": {
+    "file": "life-sweep-raises-120-20261020.ndjson",
+    "sha256": "9bfe10a615750c7539a2cd70deb9d5304a738dd807a508ed3966ff98752b822f"
+  },
+  "priorWorkplaceSameSeedsOrdinaryMetricsExact": true,
+  "overlappingRunsNotAdditionalDistinctSeeds": true,
+  "limits": "Workplace/raise domain, UI/SQLite and native checks separately exercise optional commands and payroll. Earlier 1000 lives belong to world28/content4. No physical p95, every optional action, 120-year/1000-person/multigeneration acceptance."
+}

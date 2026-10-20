@@ -1,0 +1,138 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "eb796ce",
+  "scope": "Actual ordinary-work raise decisions and future payroll, promotion pay/currency preservation, empty request-history migration and responsive saves",
+  "recordedAt": "2026-10-20T06:15:30.170Z",
+  "gameSourceHash": "147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737",
+  "combinedGamePersistenceSourceHash": "ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637",
+  "sweepToolSha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 5,
+    "database": 6
+  },
+  "source": {
+    "src/game/systems/workplaceSchemas.ts": "8fda8791613a80aea64c1277ba3a3f9479f317dc942480f337cf7ba7f044b1ee",
+    "src/game/systems/workplaces.ts": "b6e793c1ee94b796327aca3eae86135bbf96b8e45234c766a6aff4ba7e4490bf",
+    "src/game/systems/workplaceValidation.ts": "0105502917da2e36aa2eba1bddc3d4d09a53d5f54db2ebad6dab06e3a05cab6b",
+    "src/game/systems/work.ts": "22c01922e5c7d4072d63a4487339f1c919b2962d93d433f6813ea937bc4c1007",
+    "src/game/model.ts": "76ad108ebdb19bc2add0f07cefb296196c257ff0ef81f76f314ffda97a8e27cb",
+    "src/game/createLife.ts": "81533ba3be219b27786af562a25d224c8311e0d6aef321aabdb2fb6929297e2d",
+    "app/(game)/work.tsx": "b31cbf278a9fa845d959b6dac6be6d5a5a340593c6bcf88db4f6e6f8952c1c14",
+    "app/(game)/person/[id].tsx": "12af2ba17b2ece481cffc2283fb946a716d61a89edce8831fd49b4d4f3db0e32",
+    "tests/game/work-raises.test.ts": "8cc744be205fd03fe903e9225dd80550ace17fa389d59758a3482fd9b5678614",
+    "tests/ui/workplace-flow.test.tsx": "13f1eb57a854c3b0efd165709a69acf5e1e786c1dace0b4a36f90084a8dc3827",
+    "tests/persistence/native-workplace-archive.test.ts": "94bc5b11da599a1fdf2d053761da6088775c7ebca2f9a01453b35bce79b17974",
+    "tools/benchmark-actions.cjs": "40ce8fc8b2231596c8a7e8a268ec4c612134c6ae9ae35c58edbf07303a6f211c"
+  },
+  "catalogue": {
+    "distinctSituations": 100,
+    "minimum": 250,
+    "additionalNeeded": 150,
+    "newStorySituations": 0
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1356,
+      "suites": 96,
+      "seconds": 798.22,
+      "exitCode": 0,
+      "raw": "regression-raises-20261020.txt",
+      "rawSha256": "7d588a890dad758c6d4d9e37e9edb7350bf8c6fb15784d6bc4d725e2ace5201a"
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "currentSourceLifetimeSeeds": 120,
+    "currentSourceLifetimeRecord": "life-sweep-raises-120-20261020.json",
+    "all18OrdinaryRolesAll12CountryUnraisedRankQuotesExact": true,
+    "earnedRaiseSurvivesForeignCurrencyPromotion": true,
+    "acceptedAndDeclinedConnectedSQLiteWarmRetryAndColdResult": true,
+    "genuineNativeWorkplaceArchive": "tests/fixtures/v29-native-workplace-archive.json",
+    "genuineProducerCommit": "60f5ed9",
+    "genuineArchiveSha256": "824ba73545b1ed57dc2a1b9df5f154c8eed4c5987aa071ea6fc68b1716a32de2",
+    "all18GenuineWorldFieldsAnd17OriginalMomentsPreserved": true,
+    "nativeRecord": "android24-raises-20261020/journey-exact.json",
+    "nativeAcceptedRaiseAllSimulationFieldsExact": true,
+    "nativeAcceptedResultColdAll8TablesExact": true,
+    "native12RaisedPayPeriodsExact": true,
+    "nativeNaturalPromotionRetainsNegotiatedPay": true,
+    "nativeFinalRevision": 66,
+    "nativeFinalCounts": {
+      "lives": 5,
+      "moments": 35,
+      "receipts": 54
+    },
+    "nativeOld4WorldsBackups33Moments43ReceiptsExact": true,
+    "nativeCurrencyTextExceptions": {
+      "year18": 13,
+      "raise": 2,
+      "payYear": 10
+    }
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-84153b9a0792de6fd2371ae854b74ff2.hbc",
+      "bytes": 5401704,
+      "sha256": "ee3f31d2cd794d65ce62679164df096fa49f861d8e41f28b4ffdf914e8fa10c6"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-e19220cc99209ff1fd6ed7f164735067.hbc",
+      "bytes": 5096744,
+      "sha256": "4ce5ef18e2823a8c3b6940597b921de4b9e6fd3094e539a02f9c2fee96b07ab6"
+    }
+  ],
+  "actionDiagnostics": {
+    "raw": "action-latency-raises-20261020.json",
+    "rawSha256": "896ceec67ab579ea468a764f8eb4a0b5c9a1a383ae98f15443b8a84241515219",
+    "samples": 50,
+    "allWarmAvoidFullCheckpointDecode": true,
+    "allColdCurrentAndBackupWorldsExact": true,
+    "sourceHash": "ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637",
+    "driverHash": "40ce8fc8b2231596c8a7e8a268ec4c612134c6ae9ae35c58edbf07303a6f211c",
+    "medians": [
+      {
+        "label": "Begin Life",
+        "totalMs": 1.2916399999999157
+      },
+      {
+        "label": "First-year choice",
+        "totalMs": 1.952592999999979
+      },
+      {
+        "label": "First-year choice Continue",
+        "totalMs": 1.7593929999998181
+      },
+      {
+        "label": "Age-seven callback",
+        "totalMs": 5.081905000000006
+      },
+      {
+        "label": "Age-seven callback Continue",
+        "totalMs": 12.207210000000032
+      },
+      {
+        "label": "Age-30 routine",
+        "totalMs": 26.687589000000116
+      },
+      {
+        "label": "Age-60 routine",
+        "totalMs": 81.70077300000048
+      },
+      {
+        "label": "Prepared teen coworker introduction",
+        "totalMs": 12.715335999999297
+      },
+      {
+        "label": "Prepared supervisor feedback",
+        "totalMs": 11.727933000000121
+      },
+      {
+        "label": "Prepared raise request",
+        "totalMs": 21.870774999999412
+      }
+    ],
+    "scope": "Cloud Node with real on-disk SQLite; seven original fixed inputs plus three normally prepared workplace inputs. Not native performance or a paired before/after comparison."
+  },
+  "limits": "Ordinary external local work only; further interviews/hours/conflicts and content depth remain open. Current lifetime gate120 distinct seeds; older1000 are content4. No complete-game, physical p95, standalone/iOS, every optional action, 120-year/1000-person/multigeneration claim. Further player file features stay parked."
+}

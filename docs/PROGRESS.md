@@ -12,6 +12,49 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+World **30 / engine 29 / content 5 / database 6** now adds [real raise requests](WORK_RAISES.md)
+from Occupation/current supervisor, with twelve paid periods, 65% performance,
+six energy and one request per employment/calendar year. A saved supervisor
+chance/draw accepts or declines 5% higher future pay, without upfront cash,
+service or qualification. Promotions now retain negotiated pay and the existing
+contract currency. All eighteen ordinary unraised scales stay exact across the
+twelve country profiles. Old worlds add empty request history; genuine
+colleagues, feedback, earnings, bound events and RNG stay exact.
+
+All **1,356 tests / 96 suites** pass in **798.22 seconds**, strict application/test
+types and both fresh Hermes exports pass. All **120 distinct current-source
+immutable lifetimes** pass across twelve countries in **731.299 seconds**, empty
+stderr/exit zero. Ordinary-life metrics match the same earlier seeds; these are
+not extra distinct cases and the policy does not request optional raises.
+[Source/checks](verification/raises-20261020.json), [raw regression](verification/regression-raises-20261020.txt),
+[lifetime scope](verification/life-sweep-raises-120-20261020.json).
+
+Fresh serial cloud SQLite diagnostics retain the warm path: first choice/
+Continue **1.95/1.76 ms**, age-seven choice/resume **5.08/12.21**, age-30/60
+routine **26.69/81.70**, introduction/feedback **12.72/11.73**, raise **21.87**.
+All **50 warm samples avoid full checkpoint decode**; every cold current/backup
+is exact. These are current prepared-input diagnostics, not paired comparisons,
+native startup/navigation or physical p95. [Raw](verification/action-latency-raises-20261020.json).
+
+Actual Android continues the same teen life through a hard routine, secondary
+completion at82%, twenty-four paid months and performance75. A natural accepted
+raise (65/3) changes annual R37,500→R39,375 with energy−6 and no immediate money/
+service. Cold result retains all eight tables; acknowledgement63 is exact.
+Twelve later payments of R3,281.25 total R39,375; a natural promotion retains the
+raise at annual R49,218.75. Choice/acknowledgement65/66 are exact from actual64.
+All simulation fields match; thirteen year18, two raise and ten pay-year strings
+retain explicitly enumerated native currency-spacing exceptions. All four old
+worlds/backups, thirty-three old moments/metadata and forty-three old receipts
+stay exact. Native state: **five lives / thirty-five moments / fifty-four
+receipts**, Amahle age19/revision**66**, Riley53/branch38 unchanged.
+[Native proof and nine captures](verification/android24-raises-20261020/).
+
+Full production stays approximately **50%**, content **100/250** with **150
+situations remaining**, and further file breadth stays parked. Continue named-
+contact work/adult stories, deeper work and the remaining integration/release
+gates. Earlier source versions/counts below remain historical.
+
+
 Before raise-request schema work, the actual native feedback result 54 is now
 preserved with clean unmodified pushed **60f5ed9**. Its current payload, seventeen
 original moments/metadata and all eighteen old worlds remain exact, including the
@@ -614,7 +657,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Context-aware events, decisions, delayed consequences and journal | Partial: 100 original age/context templates, available-household/explicit remote-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; native import/folder-save checks pass; broader platform/device acceptance remains open |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt, attended adult remediation and restricted scholarships; national stage/qualification depth remains pending | Twelve profile boundaries, school→degree→qualified job, 44 scholarship checks and connected SQLite aid rollback/retry/cold journeys pass; national and native acceptance remain open |
-| Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history, earned pension, persistent ordinary-work colleagues/supervisors and annual feedback | Exact partial-year pay/tax, twelve-country introductions, qualified professional/teen staff, genuine migration and SQLite/UI failure/retry/cold work checks pass; raises, richer interviews/hours, conflicts and broader balance remain open |
+| Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history, earned pension, persistent ordinary-work colleagues/supervisors and annual feedback | Exact partial-year pay/tax, twelve-country introductions, qualified professional/teen staff, genuine migration and SQLite/UI failure/retry/cold work checks pass; richer interviews/hours, conflicts and broader balance remain open |
 | Dating, marriage, children, divorce, custody and persistent NPCs | Partial: persistent courtship/marriage/households, NPC finances, nine-month pregnancy, births/inherited DNA, adoption, family tree, divorce equalisation, primary/shared care, support and guardianship; deeper autonomous NPC lives/legal proceedings pending | Domain conservation/gates, connected courtship and birth interruptions, genuine migration, native introduction/adoption→real SQLite flows; device acceptance pending |
 | Accounts, taxes, borrowing, insurance, properties, vehicles and possessions | Partial: reconciled ledger; nineteen offers; mortgages, rent, upkeep, insurance/loss claims, sale offers, refinancing, forced sale, household shares and estate integration | Conservation and native-component→engine→real-SQLite purchase failure/retry pass; native-device acceptance pending |
 | Stocks, funds, crypto, valuation, FX and net worth | Partial: six authored instruments, seeded monthly prices/dividends, positions/cost basis, buys/partial sales, FX accounts/exchange and complete implemented-asset net worth | All twelve local currency profiles, fractional JPY rounding, over-selling, 81 currency directions and fee conservation pass; not live market data |

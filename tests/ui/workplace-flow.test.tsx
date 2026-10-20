@@ -67,3 +67,28 @@ test('supervisor feedback uses real paid tenure and SQLite rollback/retry/cold r
   const final = mockStore.getState().world!; expect(final.people).toEqual(resolved.people); expect(final.random).toEqual(resolved.random); expect(currentWorkplace(final)?.feedback).toHaveLength(1); expect(screen.getByText('You already asked for work feedback this year')).toBeOnTheScreen();
   expect(await repository.load(final.id)).toEqual(final); view.unmount(); sqlite.close();
 });
+
+test.each([true, false])('Occupation raise %s rolls back every SQLite row, retries warm and cold-resumes the exact result once', async accepted => {
+  let initial = resolveCommand(employee(), { type: 'meet-coworkers' }); initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id });
+  for (let n = 0; n < 12; n++) { initial.date = monthFrom(initial.date, 1); workplaceMonth(initial); employmentMonth(initial); }
+  initial.people[initial.activePersonId].employment!.performance = 80;
+  initial.random.outcomes = Array.from({ length: 1000 }, (_, i) => i + 1).find(seed => (randomInteger(seed, 1, 100).value <= 68) === accepted)!;
+  const place = currentWorkplace(initial)!, supervisorId = place.members.find(item => item.role === 'supervisor')!.personId;
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
+  const cold = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+  await cold(); let view = render(frame(<Work />));
+  const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows(), before = encodeWorld(mockStore.getState().world!);
+  const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_raise BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+  await press('Ask for a Raise. 5% higher pay · Uses 6 energy'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
+  expect(rows()).toEqual(originalRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
+  sqlite.exec('DROP TRIGGER fail_raise'); await press('Ask for a Raise. 5% higher pay · Uses 6 energy');
+  await waitFor(() => expect(screen.getByText(accepted ? 'Worth the awkward conversation' : 'Not this year')).toBeOnTheScreen());
+  const result = mockStore.getState().world!;
+  expect(result).toEqual(resolveCommand(initial, { type: 'request-raise', workplaceId: place.id, supervisorId }, true));
+  expect(result.workRaises).toHaveLength(1); expect(result.workRaises[0].accepted).toBe(accepted); expect(result.accounts).toEqual(initial.accounts); expect(result.ledger).toEqual(initial.ledger); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+  view.unmount(); await cold(new SaveRepository(driver)); view = render(frame(<Work />)); expect(mockStore.getState().world).toEqual(result); await press('Continue');
+  expect(screen.getByText('You already asked for a raise in this job this year')).toBeOnTheScreen(); const final = mockStore.getState().world!, finalRows = rows();
+  expect(final.people).toEqual(result.people); expect(final.workRaises).toEqual(result.workRaises); expect(final.random).toEqual(result.random);
+  mockParams = { id: supervisorId }; view.rerender(frame(<Person />)); expect(screen.getByText('You already asked for a raise in this job this year')).toBeOnTheScreen(); expect(rows()).toEqual(finalRows);
+  view.unmount(); sqlite.close();
+});

@@ -10,11 +10,13 @@ import { activeTrip } from './travelSchemas';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { serviceAway } from './serviceSchemas';
-import { currentWorkplace, Workplace, WorkplaceMember } from './workplaceSchemas';
+import { currentWorkplace, raisedAnnualPay, raiseChance, Workplace, WorkplaceMember } from './workplaceSchemas';
+import { formatMoney } from '../money';
 
 export const workplaceCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-coworkers') }),
   z.object({ type: z.literal('work-feedback'), workplaceId: z.string(), supervisorId: z.string() }),
+  z.object({ type: z.literal('request-raise'), workplaceId: z.string(), supervisorId: z.string() }),
 ]);
 export type WorkplaceCommand = z.infer<typeof workplaceCommandSchema>;
 const supervisorRoles: Record<string, string> = { 'shop-assistant-part': 'retail', 'cafe-part': 'barista' };
@@ -80,14 +82,28 @@ export function workplaceMonth(world: World) {
   refreshWorkplaces(world); const place = currentWorkplace(world);
   if (place && !workplaceReason(world)) fillRoster(world, place);
 }
-export function workFeedbackReason(world: World, place: Workplace | undefined, supervisorId: string): string | undefined {
+function supervisorReason(world: World, place: Workplace | undefined, supervisorId: string): string | undefined {
   const reason = workplaceReason(world); if (reason) return reason;
   if (!place || currentWorkplace(world)?.id !== place.id) return 'Choose your current workplace';
   const member = place.members.find(item => item.personId === supervisorId && item.role === 'supervisor' && !item.left);
   if (!member || !stillEmployedHere(world, place, member) || colleagueAway(world, world.people[supervisorId])) return 'Your current supervisor is unavailable';
+}
+export function workFeedbackReason(world: World, place: Workplace | undefined, supervisorId: string): string | undefined {
+  const reason = supervisorReason(world, place, supervisorId); if (reason) return reason;
   if (active(world).employment!.paidMonths < 3) return 'Complete three paid months in this job first';
-  if (world.workplaces.some(item => item.personId === place.personId && item.employmentId === place.employmentId && item.feedback.some(feedback => feedback.date.year === world.date.year))) return 'You already asked for work feedback this year';
+  if (world.workplaces.some(item => item.personId === place!.personId && item.employmentId === place!.employmentId && item.feedback.some(feedback => feedback.date.year === world.date.year))) return 'You already asked for work feedback this year';
   if (active(world).stats.energy < 4) return 'Rest before this work discussion';
+}
+export function workRaiseReason(world: World, place: Workplace | undefined, supervisorId: string): string | undefined {
+  const unavailable = workplaceReason(world); if (unavailable) return unavailable;
+  if (!place) return 'Meet your supervisor through View Coworkers first';
+  const reason = supervisorReason(world, place, supervisorId); if (reason) return reason;
+  const person = active(world), job = person.employment!;
+  if (job.paidMonths < 12) return 'Complete twelve paid months in this job first';
+  if (world.workRaises.some(item => item.personId === person.id && item.employmentId === job.id && item.date.year === world.date.year)) return 'You already asked for a raise in this job this year';
+  if (job.performance < 65) return 'Reach 65% work performance before requesting a raise';
+  if (person.stats.energy < 6) return 'Rest before negotiating your pay';
+  if (raisedAnnualPay(job.annualPay) <= job.annualPay) return 'Your employer has no higher pay offer available';
 }
 export function resolveWorkplace(world: World, command: WorkplaceCommand) {
   const person = active(world);
@@ -100,7 +116,21 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
     fact(world, 'I got to know ' + names + ' at ' + place.employer + '.', 'work-contact');
     result(world, 'Faces to the names', 'Your colleagues are ' + names + '. You can get to know them from your workplace.', 'career'); return;
   }
-  const place = world.workplaces.find(item => item.id === command.workplaceId), reason = workFeedbackReason(world, place, command.supervisorId); if (reason) throw new IneligibleAction(reason);
+  const place = world.workplaces.find(item => item.id === command.workplaceId);
+  if (command.type === 'request-raise') {
+    const reason = workRaiseReason(world, place, command.supervisorId); if (reason) throw new IneligibleAction(reason);
+    const supervisor = world.people[command.supervisorId], job = person.employment!, trust = relationFor(world, person.id, supervisor.id)!.trust;
+    const chance = raiseChance(job.performance, trust), roll = draw(world, 'outcomes', 1, 100), accepted = roll <= chance, annualPayBefore = job.annualPay, annualPayAfter = accepted ? raisedAnnualPay(annualPayBefore) : annualPayBefore;
+    world.workRaises.push({ id: 'raise_' + person.id + '_' + world.revision, workplaceId: place!.id, personId: person.id, employmentId: job.id, date: { ...world.date }, supervisorId: supervisor.id, supervisorEmploymentId: supervisor.employment!.id, currency: job.currency, paidMonths: job.paidMonths, performance: job.performance, trust, chance, roll, accepted, annualPayBefore, annualPayAfter });
+    person.stats.energy -= 6; job.annualPay = annualPayAfter;
+    const salary = formatMoney({ minor: annualPayAfter, currency: job.currency });
+    fact(world, 'I asked ' + supervisor.firstName + ' for a raise. ' + (accepted ? 'My annual gross pay rose to ' + salary + '.' : 'The answer was no.'), 'work-raise');
+    result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? supervisor.firstName + ' agrees to a 5% raise. Your higher rate starts with your next paid period.' : supervisor.firstName + ' says the budget will not stretch. Your current pay stays the same; you can ask again next year.', 'career', [
+      { id: 'salary', label: 'Annual gross pay', value: salary, tone: accepted ? 'positive' : 'neutral' },
+      { id: 'energy', label: 'Energy', value: '−6%', tone: 'negative' },
+    ]); return;
+  }
+  const reason = workFeedbackReason(world, place, command.supervisorId); if (reason) throw new IneligibleAction(reason);
   const supervisor = world.people[command.supervisorId], relation = relationFor(world, person.id, supervisor.id)!, job = person.employment!;
   const trustAtRequest = relation.trust, chance = Math.min(95, 50 + Math.floor(trustAtRequest / 2)), roll = draw(world, 'outcomes', 1, 100), accepted = roll <= chance, performanceBefore = job.performance, performanceGain = accepted ? Math.min(3, 100 - performanceBefore) : 0;
   place!.feedback.push({ date: { ...world.date }, supervisorId: supervisor.id, supervisorEmploymentId: supervisor.employment!.id, paidMonths: job.paidMonths, trustAtRequest, chance, roll, accepted, performanceBefore, performanceGain });

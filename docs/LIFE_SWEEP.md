@@ -1,19 +1,20 @@
 # Production-state lifetime invariant sweep
 
-Current world **29 / engine 28 / content 5** passes **120 distinct seeds
-0–119**, across all twelve countries, through the validated-immutable engine
-in **668.791 seconds**, empty stderr and exit zero. Game hash:
-`ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db`.
-[Summary and all raw cases](verification/life-sweep-workplaces-120-20261020.json)
-retain ages 40–98, max 24 people / 55,199 ledger rows. All ordinary-life metrics
-match the same prior content-five seeds; schema and terminal hashes change.
-These overlapping runs do not create additional distinct cases.
+Current world **30 / engine 29 / content 5** passes **120 distinct seeds
+0–119** across all twelve countries through the validated-immutable engine in
+**731.299 seconds**, empty stderr and exit zero. Game hash:
+`147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737`.
+[Summary and all raw cases](verification/life-sweep-raises-120-20261020.json)
+retain ages 40–98, max 24 people / 55,199 ledger rows. Ordinary-life metrics
+match the same prior workplace seeds; schema and terminal hashes change.
+Overlapping runs do not create additional distinct cases.
 
-This first-eligible policy does not introduce optional workplaces. Separate
-workplace domain, SQLite/UI and native checks exercise those commands. The
-complete current regression passes **1,318 tests / 94 suites**. There is no
-current-source 1,000-seed claim. The earlier world-28/content-five 120-seed
-[record](verification/life-sweep-content5-120-20261020.json) remains historical.
+The first-eligible policy does not introduce optional workplaces or request
+raises. Separate domain, SQLite/UI and native checks cover those actions/payroll.
+The complete current regression passes **1,356 tests / 96 suites**. There is no
+current-source 1,000-seed claim. Earlier [world-29](verification/life-sweep-workplaces-120-20261020.json)
+and [world-28/content-five](verification/life-sweep-content5-120-20261020.json)
+120-seed records remain historical.
 
 ## Earlier content-four 1,000-seed gate
 

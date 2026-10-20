@@ -4,6 +4,19 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `raises-20261020.json` records world30/engine29/content5, real supervisor
+  requests, future payroll, promotion pay/currency retention and genuine
+  history migration. Full **1,356/96-suite** regression, strict types and both
+  Hermes exports pass. Raw output: `regression-raises-20261020.txt`.
+  `android24-raises-20261020/` retains actual accepted raise/cold result,
+  twelve raised pay periods, natural promotion and exact original saved rows.
+- `life-sweep-raises-120-20261020.json` and matching `.ndjson`: all120 distinct
+  current immutable seeds, twelve countries, 731.299 seconds, unchanged
+  hashes, empty stderr/exit0. Optional raises are separately checked.
+- `action-latency-raises-20261020.json`: ten cloud SQLite cases, five samples
+  each, all50 warm samples avoid full decode and every cold current/backup
+  exact. Raise median21.87ms; age60routine81.70ms. Not physical timing.
+
 - `workplaces-20261020.json` records world 29 / engine 28 / content 5,
   persistent ordinary colleagues/supervisors, annual feedback, empty migration,
   **1,318 tests / 94 suites**, strict types and both fresh Hermes exports.

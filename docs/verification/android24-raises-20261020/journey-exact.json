@@ -1,0 +1,324 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "eb796ce",
+  "scope": "Actual existing native acceptance life, work routine, real paid year/graduation/parent choice, raise request/cold result, twelve raised payroll periods and natural promotion. Not native birth-to-nineteen or physical timing.",
+  "recordedAt": "2026-10-20T06:15:30.170Z",
+  "gameSourceHash": "147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737",
+  "combinedGamePersistenceSourceHash": "ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637",
+  "sweepToolSha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 5,
+    "database": 6
+  },
+  "migrationColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "40556a30c96b8bd36143c87a6f8832fdbffc8590b463355e638f64f7bacbb54a"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "b663ab8f6743e7a271fcbcfa00fbff713bf3e11e3c51a80e63be6738aad9418c"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 43,
+      "sha256": "e25d3b0613a47abdd44fe2cbf35300a2fd5fb48b51d350162da4b5d1a073680a"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 33,
+      "sha256": "9f0548faac864e36049e92947ac69b6b69a1e8ebce01199e6ff626779c1618ce"
+    },
+    "snapshots": {
+      "rows": 33,
+      "sha256": "5ef0a02046894cf1fa2e5a4b55c492be8594e2fcc136d349aaa8af6353b8b471"
+    }
+  },
+  "browsingAndRoutineDraftAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "40556a30c96b8bd36143c87a6f8832fdbffc8590b463355e638f64f7bacbb54a"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "b663ab8f6743e7a271fcbcfa00fbff713bf3e11e3c51a80e63be6738aad9418c"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 43,
+      "sha256": "e25d3b0613a47abdd44fe2cbf35300a2fd5fb48b51d350162da4b5d1a073680a"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 33,
+      "sha256": "9f0548faac864e36049e92947ac69b6b69a1e8ebce01199e6ff626779c1618ce"
+    },
+    "snapshots": {
+      "rows": 33,
+      "sha256": "5ef0a02046894cf1fa2e5a4b55c492be8594e2fcc136d349aaa8af6353b8b471"
+    }
+  },
+  "acceptedRaiseColdAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "9ef095f348620501eeda3a748075698d55d146daf0d94c22ac3872bd88b8d14b"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "52dfc72d4fabe1359521c4d29191caa7b475c646699ba9493fc3900832ee40f6"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 50,
+      "sha256": "0d29a88dffccf56bbcb8c518d57ee3a9b7da630e36286eca0ded4ea390e9c24c"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 34,
+      "sha256": "591606f7a6a9377d4e8df0b4def1abba68edacf8a166ff934f8e85517e3627b2"
+    },
+    "snapshots": {
+      "rows": 34,
+      "sha256": "b626a85de4294dc98fce673bc84cc7ecef2831b593fafc8537ad8ac47784d954"
+    }
+  },
+  "routine56Ack57Graduation58EntireWorldsExact": true,
+  "year18AllSimulationFieldsExact": true,
+  "year18CurrencyTextDifferences": [
+    {
+      "path": "world.journal.224.text",
+      "actual": "My income for the year was ZAR37,500.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 37,500.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.225.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.226.text",
+      "actual": "My income for the year was ZAR405,000.00; income tax was ZAR69,000.00.",
+      "expected": "My income for the year was ZAR 405,000.00; income tax was ZAR 69,000.00."
+    },
+    {
+      "path": "world.journal.227.text",
+      "actual": "My income for the year was ZAR196,875.00; income tax was ZAR18,337.50.",
+      "expected": "My income for the year was ZAR 196,875.00; income tax was ZAR 18,337.50."
+    },
+    {
+      "path": "world.journal.228.text",
+      "actual": "My income for the year was ZAR56,250.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 56,250.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.229.text",
+      "actual": "My income for the year was ZAR65,625.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 65,625.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.230.text",
+      "actual": "My income for the year was ZAR225,000.00; income tax was ZAR23,400.00.",
+      "expected": "My income for the year was ZAR 225,000.00; income tax was ZAR 23,400.00."
+    },
+    {
+      "path": "world.journal.231.text",
+      "actual": "My income for the year was ZAR281,250.00; income tax was ZAR36,825.00.",
+      "expected": "My income for the year was ZAR 281,250.00; income tax was ZAR 36,825.00."
+    },
+    {
+      "path": "world.journal.232.text",
+      "actual": "My income for the year was ZAR423,450.00; income tax was ZAR73,797.00.",
+      "expected": "My income for the year was ZAR 423,450.00; income tax was ZAR 73,797.00."
+    },
+    {
+      "path": "world.journal.233.text",
+      "actual": "My income for the year was ZAR262,500.00; income tax was ZAR31,950.00.",
+      "expected": "My income for the year was ZAR 262,500.00; income tax was ZAR 31,950.00."
+    },
+    {
+      "path": "world.journal.234.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.235.text",
+      "actual": "My income for the year was ZAR262,500.00; income tax was ZAR31,950.00.",
+      "expected": "My income for the year was ZAR 262,500.00; income tax was ZAR 31,950.00."
+    },
+    {
+      "path": "world.journal.236.text",
+      "actual": "My income for the year was ZAR422,700.00; income tax was ZAR73,602.00.",
+      "expected": "My income for the year was ZAR 422,700.00; income tax was ZAR 73,602.00."
+    }
+  ],
+  "ack61EntireWorldExactFromActual60": true,
+  "acceptedRaise62AllSimulationFieldsExact": true,
+  "raiseCurrencyTextDifferences": [
+    {
+      "path": "world.journal.238.text",
+      "actual": "I asked Thando for a raise. My annual gross pay rose to ZAR39,375.00.",
+      "expected": "I asked Thando for a raise. My annual gross pay rose to ZAR 39,375.00."
+    },
+    {
+      "path": "world.pending.effects.0.value",
+      "actual": "ZAR39,375.00",
+      "expected": "ZAR 39,375.00"
+    }
+  ],
+  "ack63EntireWorldExactFromActual62": true,
+  "raiseRecord": {
+    "id": "raise_person_player_61",
+    "workplaceId": "workplace_person_player_49_0",
+    "personId": "person_player",
+    "employmentId": "employment_47",
+    "date": {
+      "year": 2044,
+      "month": 10,
+      "day": 20
+    },
+    "supervisorId": "person_npc_49_16",
+    "supervisorEmploymentId": "employment_background_person_npc_49_16",
+    "currency": "ZAR",
+    "paidMonths": 24,
+    "performance": 75,
+    "trust": 35,
+    "chance": 65,
+    "roll": 3,
+    "accepted": true,
+    "annualPayBefore": "3750000",
+    "annualPayAfter": "3937500"
+  },
+  "noImmediateCashServiceQualificationOrRankAward": true,
+  "raisedPayroll": {
+    "periods": 12,
+    "eachGrossMinor": "328125",
+    "totalGrossMinor": "3937500",
+    "currency": "ZAR"
+  },
+  "payYear64AllSimulationFieldsExact": true,
+  "payYearCurrencyTextDifferences": [
+    {
+      "path": "world.journal.242.text",
+      "actual": "My income for the year was ZAR39,375.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 39,375.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.243.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.244.text",
+      "actual": "My income for the year was ZAR405,000.00; income tax was ZAR69,000.00.",
+      "expected": "My income for the year was ZAR 405,000.00; income tax was ZAR 69,000.00."
+    },
+    {
+      "path": "world.journal.245.text",
+      "actual": "My income for the year was ZAR196,875.00; income tax was ZAR18,337.50.",
+      "expected": "My income for the year was ZAR 196,875.00; income tax was ZAR 18,337.50."
+    },
+    {
+      "path": "world.journal.246.text",
+      "actual": "My income for the year was ZAR56,250.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 56,250.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.247.text",
+      "actual": "My income for the year was ZAR65,625.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 65,625.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.248.text",
+      "actual": "My income for the year was ZAR225,000.00; income tax was ZAR23,400.00.",
+      "expected": "My income for the year was ZAR 225,000.00; income tax was ZAR 23,400.00."
+    },
+    {
+      "path": "world.journal.249.text",
+      "actual": "My income for the year was ZAR285,156.25; income tax was ZAR37,840.63.",
+      "expected": "My income for the year was ZAR 285,156.25; income tax was ZAR 37,840.63."
+    },
+    {
+      "path": "world.journal.250.text",
+      "actual": "My income for the year was ZAR422,700.00; income tax was ZAR73,602.00.",
+      "expected": "My income for the year was ZAR 422,700.00; income tax was ZAR 73,602.00."
+    },
+    {
+      "path": "world.journal.251.text",
+      "actual": "My income for the year was ZAR386,950.00; income tax was ZAR64,307.00.",
+      "expected": "My income for the year was ZAR 386,950.00; income tax was ZAR 64,307.00."
+    }
+  ],
+  "naturalPromotionPreservesRaise": {
+    "beforeRank": 0,
+    "rank": 1,
+    "beforeAnnualMinor": "3937500",
+    "afterAnnualMinor": "4921875",
+    "currency": "ZAR"
+  },
+  "choice65AndAck66EntireWorldsExactFromActual64": true,
+  "original57And63BeforeAgeUpPayloadsExact": true,
+  "oldRowsPreserved": {
+    "lives": 4,
+    "backups": 4,
+    "snapshots": 33,
+    "snapshot_metadata": 33,
+    "receipts": 43
+  },
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 54,
+    "restore_receipts": 1,
+    "snapshot_metadata": 35,
+    "snapshots": 35
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 66,
+  "finalAge": 19,
+  "worldHashes": {
+    "56": "c49d12f5ce488a6615a3dbf134e6fa203e94d481a46e9f51952d06893637bd28",
+    "57": "b7b1bacf79c06c5afd1e89dfcd6025bff33190a5dc72628894dda8f36b1ed1bb",
+    "58": "8cf7e23d2822b31af9c5c5b46bf3b86035f38fd9a19a7739defd78213c03f15d",
+    "61": "8ac00a9823900b6e744ad665397a8321f5b4880e78351d3733650e9a56d2a5a7",
+    "62": "5b1f9b5aea6e8895e398654f14f0c5284848f11384322f0d153f69dc3bc5ad3d",
+    "63": "d17847e7b6ec5f36a8efd3905d26d2f307e9f5b64b07450bd042e970ca186333",
+    "64": "1d87d26550046c69f66f0eb5acc11a8ea9ee5b36a9046207641c13db4e4b0fc8",
+    "65": "851779011755993f23821e492bf4542848098585d8d54c8d6773949bc3fed0ff",
+    "66": "af3461e8d30caa3dc89a1bf56d459895a3dace93b3847dabce51b57faef05b30"
+  },
+  "limits": "Software Android24/ExpoGo; no native world/stat/RNG/outcome/SQL edits. Declined branch, annual limit and storage faults have separate domain/UI/SQLite checks. Currency exceptions are enumerated without normalizing native worlds. No physical p95, standalone/iOS, complete reference/accessibility or release claim."
+}

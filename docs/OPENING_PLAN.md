@@ -15,6 +15,19 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+Current world **30 / engine 29 / content 5** adds actual ordinary-work raise
+requests and preserves negotiated pay/currency through later promotion. All
+**1,356 tests / 96 suites**, strict types, both Hermes exports and 120 current
+immutable lives pass. All 50 warm cloud action samples avoid full decode; raise
+median **21.87 ms** including SQLite. Actual Android accepted-result/cold resume,
+twelve raised pay periods and natural promotion pass, retaining all original
+lives/history. [Mechanics](WORK_RAISES.md), [source/checks](verification/raises-20261020.json)
+and [native scope](verification/android24-raises-20261020/) retain the limits.
+Native Amahle is age19/revision66, five lives/35moments/54receipts. Full production
+remains about50%, 150 situations still needed; further file breadth stays parked.
+Continue named work/adult content and remaining work/integration/release gates.
+Earlier checkpoints below retain their original versions and scope.
+
 Current world **29 / engine 28 / content 5 / database 6** connects ordinary
 local workplace people and supervisor feedback through the reference's Coworkers
 path. Browsing/search/profile/Back perform no save or generation; introductions

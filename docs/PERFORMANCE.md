@@ -4,7 +4,34 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current workplace diagnostics
+## Current raise diagnostics
+
+World **30 / engine 29 / content 5** passes **1,356 tests / 96 suites**, strict
+types, both fresh Hermes exports and 120 current immutable lifetimes. After
+those jobs close, ten serial fixed-input cases run one warm-up and five real
+SQLite samples. All **50 warm samples avoid full checkpoint decode**; every
+cold current/backup world is exact. Three workplace inputs are normally prepared
+from the genuine teen archive, without stat, money, tenure or RNG edits.
+
+[Raw current measurements](verification/action-latency-raises-20261020.json)
+record combined source hash
+`ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637`.
+
+| Action, cloud engine + SQLite | Median |
+| --- | ---: |
+| Begin Life | 1.29 ms |
+| First-year choice / Continue | 1.95 / 1.76 ms |
+| Age-seven choice / resumed Continue | 5.08 / 12.21 ms |
+| Age-30 / age-60 routine | 26.69 / 81.70 ms |
+| Coworker introduction / feedback | 12.72 / 11.73 ms |
+| Raise request | 21.87 ms |
+
+Reproduce with `node tools/benchmark-actions.cjs --profile --raises`. These
+are current diagnostics, not a paired comparison or physical p95. Native
+startup/navigation, hardware and release budgets remain open. Prior records
+below retain their original sources and scopes.
+
+## Earlier workplace diagnostics
 
 World **29 / engine 28 / content 5** passes **1,318 tests / 94 suites**, strict
 types, fresh Android/iOS Hermes exports and 120 distinct immutable lifetimes.

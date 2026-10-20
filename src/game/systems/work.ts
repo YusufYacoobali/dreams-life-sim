@@ -62,6 +62,8 @@ export function salaryForPerson(person: Person, role: JobRole, rank = 0): bigint
   return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + rank * 25), 1000000n);
 }
 export const salaryFor = (world: World, role: JobRole, rank = 0) => salaryForPerson(active(world), role, rank);
+/** Advance the existing contract's pay scale, retaining raises and its currency. */
+export const promotedAnnualPay = (job: NonNullable<Person['employment']>) => roundRatio(job.annualPay * BigInt(100 + (job.rank + 1) * 25), BigInt(100 + job.rank * 25));
 export function resolveWork(world: World, command: WorkCommand) {
   const person = active(world);
   if (command.type === 'apply-job') {
@@ -129,7 +131,7 @@ export function employmentMonth(world: World, person = active(world), fundWages?
   employment.performance = bounded(employment.performance + effort + draw(world, stream, -2, 2) + (person.stats.discipline >= 70 ? 1 : 0) - (person.stats.stress >= 75 ? 2 : 0) - (person.stats.health < 40 ? 2 : 0));
   person.stats.stress = bounded(person.stats.stress + (employment.effort === 'hard' ? 2 : employment.effort === 'relaxed' ? -1 : 0));
   if (employment.paidMonths % 12 === 0 && !role.specialCareer) {
-    if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) { employment.rank++; employment.annualPay = salaryForPerson(person, role, employment.rank); fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id); }
+    if (employment.performance >= 75 && employment.rank < 3 && draw(world, stream, 1, 100) <= 35) { employment.annualPay = promotedAnnualPay(employment); employment.rank++; fact(world, 'I was promoted to ' + jobRanks[employment.rank].toLowerCase() + ' ' + role.title.toLowerCase() + '.', 'work', '', person.id); }
     else if (employment.performance < 25 && draw(world, stream, 1, 100) <= 45) { fact(world, 'I lost my ' + role.title.toLowerCase() + ' job after poor performance.', 'work', '', person.id); endEmployment(world, person.id); }
   }
   }
