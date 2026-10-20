@@ -1,0 +1,51 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T10:05:52.202Z",
+  "baseCommit": "b9a5e65e298c4fdfa1229c97408a893560929a7a",
+  "scope": "Mind & Body enables Save only for a changed routine, including reverted drafts; unchanged native/component interaction performs no save. Real edits retain rollback, warm retry and exact cold result.",
+  "source": {
+    "app/(game)/lifestyle.tsx": "428d83430a177e0f0268cfe8c4b9c8e5c7fd052d16a234466d36fceac8a6b8ed",
+    "tests/ui/health-flow.test.tsx": "9238517fb822904e0ae970422c270c69289d388dd7e8468b817850c4e743f552"
+  },
+  "combinedGamePersistenceSourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "verification": {
+    "focusedTests": 10,
+    "focusedSuites": 2,
+    "focusedSeconds": 5.95,
+    "focusedExitCode": 0,
+    "raw": "routine-draft-tests-20261020.txt",
+    "rawSha256": "e0ed9880a35369373b43eaf608011926331be510c1f9ef9e7280f2dc62d57e9e",
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "freshBothHermesExports": true,
+    "exportsExitCode": 0,
+    "componentNoopNoCommitDecodeOrTableChanges": true,
+    "componentActualEditSqliteFailureRollbackWarmRetryColdAck": true,
+    "nativeRecord": "android24-routine-draft-20261020/journey-exact.json",
+    "nativeNoopAll8TablesExact": true,
+    "native82And83EntireWorldsExact": true,
+    "nativeCold82All8TablesExact": true,
+    "nativeFinalRevision": 83,
+    "nativeFinalCounts": {
+      "lives": 5,
+      "moments": 36,
+      "receipts": 71
+    },
+    "unchangedCompleteRuntimeBaseline": "people-blocks-20261020.json",
+    "unchanged120SeedRecord": "life-sweep-model-copy-120-20261020.json",
+    "noComposedNewFullRegressionOrSeedTotal": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-0ee921e120d757251341e59738f9aa2a.hbc",
+      "bytes": 5420154,
+      "sha256": "f4d891e077b2796b721e5edbafead29da60021c2ce9e59a14608eb7e5fb38eb8"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-166fa66300395c69bf2de0f48812b125.hbc",
+      "bytes": 5115353,
+      "sha256": "7eab44d69749ecf562ca752e030bbffdda9325c17877d0177f8538cc45fbd7a2"
+    }
+  ],
+  "limits": "UI-only change; game/persistence/database/content unchanged. Software Android24/ExpoGo durability does not establish physical p95 or full standalone/iOS/fidelity/accessibility acceptance. Production remains about50%, catalogue110/250; further player file breadth parked."
+}

@@ -49,6 +49,21 @@ and67old receipts stay exact. Current native: Amahle age20/revision81, five live
 Completion remains about50%, with110/250situations and140remaining.
 Earlier checkpoints below retain their original scope.
 
+Mind & Body now enables Save only after an actual routine change. Selecting the
+saved option or undoing an edit leaves Save disabled and performs no save/decode.
+Ten affected UI checks across two suites pass in5.950s, strict application/test
+types and both fresh Hermes exports. The connected SQLite flow retains a failed
+save's draft, rolls back every table, retries warm and resumes its exact result
+cold. [Source/checks](verification/routine-draft-20261020.json).
+
+Actual Android's unchanged/reverted routine and disabled Save tap keep all eight
+tables exact at81. A real no-exercise edit saves exact82; cold82 keeps every table,
+and acknowledgement83 matches the whole expected world. All four old lives/
+backups,36moments/metadata and69prior receipts stay exact. Current native: Amahle
+age20/revision83, five lives/36moments/71receipts, no pending/year. [Native proof](verification/android24-routine-draft-20261020/).
+Game/persistence/reader7/content6 remain b9a5e65. The full1,409-test and120-seed
+baselines remain unchanged; do not compose a new whole-regression or seed total.
+
 Actual named result76 and all20original moments are now protected with their
 unmodified74be9e4 producer. Two preservation/SQLite checks and strict types pass;
 no runtime or player-file-feature change. [Archive provenance](verification/native-workplace-story-archive-v30-20261020.json).

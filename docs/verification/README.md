@@ -4,6 +4,12 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `routine-draft-20261020.json` and `routine-draft-tests-20261020.txt` retain
+  the UI-only unchanged/reverted-routine Save guard, ten affected checks/two
+  suites, strict types and both Hermes exports. `android24-routine-draft-20261020/`
+  records actual no-op all-table retention, exact82/cold/ack83 and original
+  lives/history. Runtime full1,409-test/120-seed baselines remain unchanged.
+
 - `people-blocks-20261020.json` records v3 people/ledger blocks, bounded exact-text
   compression reuse, reader7/old-payload protection, all1,409tests/102suites, strict
   types and both fresh Hermes exports. Complete clean and initial stale-assertion

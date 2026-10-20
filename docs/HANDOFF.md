@@ -18,6 +18,21 @@ previous-life summaries are complete. Full production remains approximately
 
 ## Current performance checkpoint
 
+Mind & Body now enables Save only after an actual routine change. Selecting the
+saved option or undoing an edit leaves Save disabled and performs no save/decode.
+Ten affected UI checks across two suites pass in5.950s, strict application/test
+types and both fresh Hermes exports. The connected SQLite flow retains a failed
+save's draft, rolls back every table, retries warm and resumes its exact result
+cold. [Source/checks](verification/routine-draft-20261020.json).
+
+Actual Android's unchanged/reverted routine and disabled Save tap keep all eight
+tables exact at81. A real no-exercise edit saves exact82; cold82 keeps every table,
+and acknowledgement83 matches the whole expected world. All four old lives/
+backups,36moments/metadata and69prior receipts stay exact. Current native: Amahle
+age20/revision83, five lives/36moments/71receipts, no pending/year. [Native proof](verification/android24-routine-draft-20261020/).
+Game/persistence/reader7/content6 remain b9a5e65. The full1,409-test and120-seed
+baselines remain unchanged; do not compose a new whole-regression or seed total.
+
 [People-block checkpoints](PEOPLE_CHECKPOINT_BLOCKS.md) now reuse exact unchanged
 people blocks instead of compressing every person on each save. The bounded cache
 keeps at most64entries/8MiB estimated string weight plus bounded object overhead.
@@ -45,7 +60,7 @@ retained until a real routine save. Result80 writes v3 while keeping original
 v2 backup79 and all14ledger blocks exact; cold80 retains all eight tables.
 Acknowledgement81 matches the whole expected world, keeps people/ledger blocks
 and original v3 backup80 exact. All four inactive lives/backups,36moments/metadata
-and67old receipts stay exact. Current native: Amahle age20/revision81, five lives/
+and67old receipts stay exact. At the codec milestone: Amahle age20/revision81, five lives/
 36moments/69receipts, no pending/year; Riley53/branch38 untouched.
 [Four captures and exact native proof](verification/android24-people-blocks-20261020/).
 
@@ -134,7 +149,9 @@ Environment (recheck if missing):
   `__UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo EXPO_OFFLINE=1 CI=1`.
 - Native DB `/data/user/0/host.exp.exponent/files/SQLite/dreams.db` plus WAL.
   Only copy for read-only verification; never edit native save data.
-- Current `/tmp/dreams-people-blocks-final-db`81; routine80/cold80 are
+- Current `/tmp/dreams-routine-draft-final-db`83; confirmed result82/cold82 are
+  `/tmp/dreams-routine-draft-result-db` and `-cold-db`. Earlier
+  `/tmp/dreams-people-blocks-final-db`81; routine80/cold80 are
   `/tmp/dreams-people-blocks-result-db` and `-result-cold-db`. Earlier
   `/tmp/dreams-model-copy-final-db`79; confirmed routine result78 is
   `/tmp/dreams-model-copy-confirmed-result-db`. Earlier:
@@ -174,7 +191,8 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, continue early-game usability, broader adult content and the full plan.
+Next, add broader adult situations with actual saved friends/partners, then
+continue early-game usability, work depth and the full plan.
 The genuine named result76 remains protected by its original74be9e4 producer.
 Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration

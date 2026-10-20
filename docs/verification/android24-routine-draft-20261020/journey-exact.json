@@ -1,0 +1,142 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "b9a5e65e298c4fdfa1229c97408a893560929a7a",
+  "scope": "Actual native routine UI: opening at81, choose no exercise then revert to saved walking, tap disabled Save, unchanged all8tables, real no-exercise save82, interrupted-result cold resume and acknowledgement83",
+  "appSourceHash": "428d83430a177e0f0268cfe8c4b9c8e5c7fd052d16a234466d36fceac8a6b8ed",
+  "combinedGamePersistenceSourceHash": "4493ca6873739e3f07b7aec3a652d67c7872d97a7ab5fec86df8b46db652b111",
+  "openingAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "7e173cb196c44d9889c49587babd48aac9b76855705ed5879227055a26cb9499"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "0e39dc96937db6d39e5ff29ade06de37d98900545aa6307a2a0a96d6abf8f318"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 69,
+      "sha256": "1a6638f33541f8783952f3f9f630c687fc57c1f1a8348213054eb3d827bcd972"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "revertedDraftDisabledSaveAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "7e173cb196c44d9889c49587babd48aac9b76855705ed5879227055a26cb9499"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "0e39dc96937db6d39e5ff29ade06de37d98900545aa6307a2a0a96d6abf8f318"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 69,
+      "sha256": "1a6638f33541f8783952f3f9f630c687fc57c1f1a8348213054eb3d827bcd972"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "result82EntireWorldExact": true,
+  "coldResult82All8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "2693453e1f8939c131c282b5dddce806dcdceaef325f58ecf9642e0748ca0994"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "94a8ca3446e4f0a71b6773933555222d4ca6bfe14ac4002234f10bfb7ef14477"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 70,
+      "sha256": "d9f381cea622e5021b8fb2cba89d5bf5250ffbeec7f6780de6f7a246dc36c7e9"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 36,
+      "sha256": "f84c4003281b95e215ec364917322f37dbe7cdc20dcee19e9e5d61df9c731fc0"
+    },
+    "snapshots": {
+      "rows": 36,
+      "sha256": "ca8c8eacaf85d8e86aa153f5588cf1b31d381da9f1a4dceb9a6aae3e73e16846"
+    }
+  },
+  "ack83EntireWorldExact": true,
+  "backup81And82OriginalPayloadsByteExact": true,
+  "old4LivesBackups36MomentsMetadata69ReceiptsExact": true,
+  "command": {
+    "type": "health-routine",
+    "routine": {
+      "exercise": "none",
+      "diet": "balanced",
+      "sleep": "regular",
+      "mindfulness": false,
+      "smoking": false,
+      "drinking": "none"
+    }
+  },
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 71,
+    "restore_receipts": 1,
+    "snapshot_metadata": 36,
+    "snapshots": 36
+  },
+  "finalRevision": 83,
+  "finalAge": 20,
+  "worldHashes": {
+    "81": "3a99cbd22cad16ce3e0d842d42f6a56ff5306422952d01f5a37c6f5fcadb4b9f",
+    "82": "a2f8fed6fda5898aa0b8d50a6b7301896c54766b64fa1609a667f83b498b87bb",
+    "83": "d3603dfaaf50daa64f8eb78b5978d9f980f9f5f095a4453c58d1924f8b5a032f"
+  },
+  "limits": "Software Android24/ExpoGo compatibility/durability, not physical p95, standalone/iOS or complete accessibility/fidelity. SQLite failure/retry/warm-cache checks run separately in the connected component flow."
+}
