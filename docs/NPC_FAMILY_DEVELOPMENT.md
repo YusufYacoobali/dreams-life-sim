@@ -69,11 +69,11 @@ Temporary unavailability postpones a wedding rather than erasing relationship ti
 Automatic divorce, adoption, rings/gifts, dependent-family moving plans and wider
 unobserved populations remain future depth work.
 
-This isolated draft leaves global tags unchanged. The marked compatibility line
-in `decodeWorld` adds only an empty collection to old current-format worlds; root
-must replace it with the final World33/engine34 migration and reader13 guard.
-Old raw saves, fixtures, bound scenes and historical rows are never rewritten by
-this draft. Focused tests cover normal annual wedding progression, exact wait,
+Root integration uses World33/engine34/content9 and reader13. World32/engine33
+worlds gain only the new tags and empty courtship history; exact existing pay,
+people, bound scenes, choices, results and RNG remain. Original current, backup
+and historical payloads are never eagerly rewritten. Reader13 protects new
+consent and wedding records from older applications. Focused tests cover normal annual wedding progression, exact wait,
 payment/identity/consent traps, standard estate and delayed birth mechanics,
 bounded work, unchanged player wedding behavior, and all-table SQLite rollback,
 retry and exact cold resume. They do not claim native-device or full-release

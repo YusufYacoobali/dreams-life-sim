@@ -90,7 +90,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(32), engineVersion: z.literal(33), contentVersion: z.literal(9),
+  schemaVersion: z.literal(33), engineVersion: z.literal(34), contentVersion: z.literal(9),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -543,7 +543,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 31 && parsed.engineVersion === 32) { parsed.schemaVersion = 32; parsed.engineVersion = 33; parsed.hourlyContracts = []; }
   // Editorial/locality changes affect future selection only; already bound scenes remain exact.
   if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33 && parsed.contentVersion === 8) parsed.contentVersion = 9;
-  // DRAFT COMPATIBILITY ONLY: root replaces this with the World33/engine34 empty-history migration at integration.
-  if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33 && !('npcCourtships' in parsed)) parsed.npcCourtships = [];
+  // Autonomous courtship clocks begin now; old pay, people, bound scenes and history remain exact.
+  if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33) { parsed.schemaVersion = 33; parsed.engineVersion = 34; parsed.npcCourtships = []; }
   return validateWorld(parsed, immutable);
 }

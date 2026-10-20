@@ -65,8 +65,9 @@ cold load retains all eight tables, old payloads/receipts stay exact and finishi
 the interrupted year cannot repeat the news. This is archive-derived in-memory
 SQLite evidence, not new native device acceptance or a player-facing import task.
 
-The isolated branch deliberately retains its base World32/engine33/content9
-tags. Root integration owns the future engine/version bump, consolidated gates
-and native acceptance. No historical fixtures or persisted player data were
-rewritten. Broader NPC proposals, marriages, moves, relationship endings and
-autonomous family growth remain later production work.
+The coordinating integration uses World33/engine34/content9 and reader13.
+Old worlds gain empty courtship history without rewriting their original saved
+payloads or bound scenes. The follow-on [NPC family slice](NPC_FAMILY_DEVELOPMENT.md)
+adds observed courtships, paid marriages and later family growth. Autonomous moves
+and relationship endings remain outside these implemented slices. Consolidated
+source gates and native acceptance are recorded by the coordinating milestone.
