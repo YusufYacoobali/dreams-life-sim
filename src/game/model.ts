@@ -413,8 +413,8 @@ function restoreMoney(value: any): any {
   for (const key of keys) if (value[key] && typeof value[key] === 'object') value[key] = restoreMoney(value[key]);
   return value;
 }
-export function decodeWorld(text: string, immutable = false): World {
-  if (text.length > 20_000_000) throw new Error('Save is too large');
+export function decodeWorld(text: string, immutable = false, maxCharacters: 20_000_000 | 80_000_000 = 20_000_000): World {
+  if (text.length > maxCharacters) throw new Error('Save is too large');
   const parsed = restoreMoney(JSON.parse(text));
   // Version 1 shipped creation only. Preserve every identity, journal fact and RNG stream.
   if (parsed && parsed.schemaVersion === 1) {

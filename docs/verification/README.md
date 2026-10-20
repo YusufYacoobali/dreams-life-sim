@@ -4,6 +4,27 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `compact-transactions-20261020.json` records final source/gates for v4 / reader 8.
+  `compact-transactions-comparison-20261020.json` preserves the serial fixed-driver
+  pair: 14 identical worlds/commands, four exact complete stress outcomes and
+  70 warm samples per source with no full checkpoint decoding. Cold current/backup
+  and original Before Age Up payload checks all pass. These are five-sample cloud
+  medians, not physical p95 or natural population acceptance.
+- `regression-compact-transactions-20261020.txt` records all 1,457 tests / 106
+  suites passing on compact checkpoint v4 / reader 8. The lifetime `.json` and
+  `.ndjson` records cover the same 120 immutable seeds; every terminal-world hash
+  and metric equals content seven, with no additional seeds claimed.
+- `android24-compact-transactions-20261020/` retains four captures and the exact
+  routine 89→90 / cold 90 / acknowledgement 91 record. All inactive lives/history
+  remain exact; v3 backup 89 and v4 backup/blocks 90 are preserved. The initial
+  reader-upgrade timing is scoped separately from final-source interactions.
+
+- `family-storage-tuples-20261020/` preserves the normal-command three-generation
+  journey across 172 years 8 months: 43 cold comparisons, 173 original annual
+  payloads/metadata and 892 receipts remain exact. The capacity block is fixed;
+  storage and final archive remain failed gates. Its fragment estimate is read-only,
+  not an achieved database budget.
+
 - `family-storage-baseline-20261020/` retains the natural normal-command SQLite
   reproduction at91calendar years/generation two. Twenty-two cold checks and all
   original moments/receipts pass; the next save exceeds20MB and live data already

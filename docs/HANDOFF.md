@@ -16,26 +16,63 @@ stays parked; the existing80%+ implementation's folder-save check passed. Read-o
 previous-life summaries are complete. Full production remains approximately
 **50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
 
-## Current long-family storage work
+## Current compact checkpoint and family storage work
 
-The normal-command SQLite runner reproduces a real block at91calendar years/
-generation two. All22cold checks,91original annual moments/metadata and481receipts
-remain exact, but the next Age Up exceeds the20MB checkpoint limit. The last
-valid canonical world is19,921,889bytes (63,304ledger rows/36people); database+
-WAL+SHM=57,885,432bytes, already above50MB. Natural first death is86; the existing
-heir's full record and calendar remain exact. A repeat reaches the same failure.
-[Scope and next fix](FAMILY_STORAGE.md), [raw trace](verification/family-storage-baseline-20261020/).
+Checkpoint v4 removes the reproduced year-91 save-size block by recording ledger
+columns once and exact money as decimal strings. Full validation and immutable
+block reuse remain intact. Reader 8 opens old bytes without eagerly rewriting
+current, backup or history. Old readers retain their original bounds; bounded v4
+reconstruction alone permits larger canonical worlds. [Format](COMPACT_TRANSACTIONS.md).
 
-Runtime remains unchanged555d112: world30/engine29/content7/DB7/frame3; existing
-full1,437-test/120-seed gates below stay valid but do not close this broader gate.
-The natural last-valid checkpoint is pinned in `v30-family-year91-checkpoint.json`,
-1,208,705bytes, SHA
+The unchanged normal-command runner now reaches three natural deaths over
+172 years 8 months. All 43 cold comparisons, 173 original annual payloads/metadata
+and 892 receipts remain exact. Its year-91 world matches the pinned original
+world completely. The broader gate remains open: database/WAL/SHM reaches
+162,931,384 bytes and the final archive exceeds its existing size limit, so the
+process correctly exits 1. No save command failed. [Raw scope](verification/family-storage-tuples-20261020/).
+Next share repeated history blocks without pruning or changing original bytes;
+measure the real database again. A read-only fragment estimate is not a budget pass.
+
+All 1,457 tests / 106 suites pass in 999.106 seconds, strict app/test types and
+fresh Android/iOS Hermes exports. All same 120 immutable seeds pass in
+695.422 seconds, empty stderr/exit zero; every complete terminal-world hash and
+metric matches content seven. These are not additional seeds.
+[Full regression](verification/regression-compact-transactions-20261020.txt),
+[lifetime scope](verification/life-sweep-compact-transactions-120-20261020.json).
+
+Current world 30 / engine 29 / content 7 / database 8 / checkpoint v4.
+Game hash: `c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac`.
+Combined game/persistence:
+`836252759ee9fa23f06605573cf8186ae5f60164cafa0104d587c8feee7ddeae`.
+
+Actual Android's real mindfulness edit saves exact revision 90 in v4 while keeping
+original v3 backup 89. Cold result 90 retains all eight tables; acknowledgement 91
+matches the entire expected world and keeps v4 people/ledger blocks and original
+backup 90 exact. All five inactive lives/backups, 55 moments/metadata and 73 old
+receipts remain exact. Current native: **Nia age 19 / revision 91**, six lives /
+55 moments / 75 receipts, no pending/year. Native upgrade timing is scoped in
+[the exact record](verification/android24-compact-transactions-20261020/journey-exact.json);
+no native SQL/world/RNG edits or physical timing claim. Final native copy:
+`/tmp/dreams-tuples-final-db`; result/cold copies are `-result-db` and `-cold-db`.
+The app is force-stopped for serial cloud action measurements; Metro/VM remain available.
+
+Serial fixed-driver cloud comparison against e3dada8 preserves all 14 inputs /
+commands and all four complete stress outcomes. All 70 warm samples per source
+avoid full checkpoint decoding; cold current/backup and original Before Age Up
+bytes remain exact. Age-60 routine median 64.26→54.83ms; generated 1000-contact
+routine 115.23→109.95ms / twelve-month Age Up step 497.46→434.81ms. Five-sample
+host/GC-sensitive cloud medians are not physical p95 or a natural population run.
+[Source and gates](verification/compact-transactions-20261020.json),
+[raw comparison](verification/compact-transactions-comparison-20261020.json).
+All gate/measurement processes have closed. Do not rerun unchanged gates.
+
+The earlier baseline below failed after 91 years with a 19,921,889-byte world
+and 57,885,432-byte live storage footprint. Its exact natural checkpoint remains
+pinned in `v30-family-year91-checkpoint.json`, 1,208,705 bytes, SHA
 `00941dcb880910e2156e86280ea0e2b8b3198b623902ae2ad340c182830793cb`.
-Never regenerate it. Next compact transaction storage with bounded old/new reads,
-then reduce duplicate retained checkpoint data without pruning original history.
-Re-run the real family case and full changed-runtime gates. No native data edits.
+Never regenerate it. [Baseline](FAMILY_STORAGE.md).
 
-## Current adult relationship milestone
+## Prior adult relationship milestone
 
 Content seven adds **15 adult friendship/partner situations and 45 choices**,
 bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
@@ -66,13 +103,13 @@ school-year and social steps. Nia Carter naturally reaches the nickname scene at
 age 19 with actual schoolmate/friend Morgan Bennett. Native input87, choice88,
 cold saved result and acknowledgement89 match entire expected worlds; bond98→100.
 All five previous lives/backups,36moments/metadata and71old receipts stay exact;
-all19prepared moments retain original bytes/metadata. Current native: **Nia age19/
+all19prepared moments retain original bytes/metadata. At that milestone: **Nia age19/
 revision89**, **six lives/55moments/73receipts**. Amahle83, Riley53/branch38 remain
 untouched. Preparation is cloud production-command evidence; only the subsequent
 interactions are native evidence. No native SQL/world/RNG edits or new file-feature
 breadth. [Captures and exact scope](verification/android24-adult-relationships-20261020/).
 
-Current world30 / engine29 / content7 / database7 / checkpoint v3.
+At the adult-content milestone: world30 / engine29 / content7 / database7 / checkpoint v3.
 Game hash: `f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14`.
 Combined game/persistence:
 `6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d`.
@@ -85,7 +122,7 @@ SHA `1e4475aefee73e062ed4e5cb74bb0cd85ff90c2c6386ff94c50b66b7cc14b0e3`.
 Its migration/SQLite failure-retry-cold checks are in the current full regression.
 Never regenerate it with newer source. [Provenance](verification/native-people-block-archive-v30-20261020.json).
 
-Native current copy: `/tmp/dreams-adult-social-final-db`; result88/cold88 are
+Prior native copy: `/tmp/dreams-adult-social-final-db`; result88/cold88 are
 `/tmp/dreams-adult-social-result-db` and `-cold-result-db`. Prior original five-life
 baseline is `/tmp/dreams-routine-draft-final-db` at Amahle83. UI helper now deletes
 stale temporary XML and rejects a null hierarchy, disabled targets or empty

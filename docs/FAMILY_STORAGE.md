@@ -1,4 +1,8 @@
-# Long family journey: reproduced capacity and storage failures
+# Long family journey: original capacity and storage baseline
+
+This page preserves the original pushed-555d112 failure. [Compact checkpoint v4](COMPACT_TRANSACTIONS.md)
+now completes the three natural lifetimes; duplicate retained storage and the
+final archive limit remain open, with separate raw results.
 
 The normal-command SQLite runner starts with seed 0 in the United States, uses
 Start/Begin Life, free healthy routines, ordinary work/introductions/feedback/

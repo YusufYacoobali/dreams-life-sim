@@ -12,12 +12,42 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
-The new normal-command SQLite family runner reproduces a real capacity/storage
-block at91calendar years/generation two. Its22cold checks and all91original
-moments/metadata/481receipts pass, but the next save exceeds20MB. Database/WAL/
-SHM already total57,885,432bytes. No failed action is published. Runtime remains
-555d112; the existing full/lifetime gates below stay valid but do not close this
-broader case. [Failure and planned correction](FAMILY_STORAGE.md).
+Compact checkpoint v4 removes the reproduced year-91 save-size block. Ledger
+field names are recorded once; money remains exact decimal text. Old current,
+backup and historical bytes remain untouched until actual commands commit.
+Full validation, immutable block reuse and bounded old/new decoding remain intact;
+database reader 8 protects the new format. [Format and limits](COMPACT_TRANSACTIONS.md).
+
+All **1,457 tests / 106 suites** pass in **999.106 seconds**, strict app/test
+types and fresh Android/iOS Hermes exports. All same **120 immutable seeds** pass
+in **695.422 seconds**, with every complete terminal-world hash/metric equal to
+content seven. No additional seeds are claimed.
+[Full regression](verification/regression-compact-transactions-20261020.txt),
+[lifetime scope](verification/life-sweep-compact-transactions-120-20261020.json).
+
+Serial fixed-driver cloud measurements preserve all 14 inputs and four complete
+stress outcomes; all 70 warm samples per source avoid full checkpoint decoding.
+Age-60 routine median changes 64.26→54.83ms; generated 1000-contact routine
+115.23→109.95ms and twelve-month Age Up step 497.46→434.81ms. These five-sample
+host/GC-sensitive medians are not physical p95 or a natural population journey.
+[Source and gates](verification/compact-transactions-20261020.json),
+[raw comparison](verification/compact-transactions-comparison-20261020.json).
+
+The real SQLite family journey now completes three natural deaths over 172 years
+8 months. All 43 cold comparisons, 173 original annual checkpoint payloads/metadata
+and 892 receipts remain exact; its year-91 world equals the original pinned world.
+The complete storage gate stays open: database/WAL/SHM reaches 162,931,384 bytes
+and the final archive exceeds its existing limit (process exits 1). Next remove
+repeated history data without dropping or changing original checkpoints.
+[Raw results and limits](verification/family-storage-tuples-20261020/).
+
+Actual Android saves the real mindfulness edit as exact v4 result 90, retaining
+original v3 backup 89. Cold result 90 keeps all eight tables; acknowledgement 91
+matches the complete expected world with unchanged v4 people/ledger blocks and
+original v4 backup 90. All five inactive lives/backups, 55 moments/metadata and
+73 earlier receipts stay exact. Final native: Nia age 19 / revision 91, six lives /
+55 moments / 75 receipts. Upgrade timing and software-VM limitations are explicit.
+[Four captures and exact native proof](verification/android24-compact-transactions-20261020/).
 
 Content seven adds **15 adult friendship/partner situations and 45 choices**,
 bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
@@ -27,7 +57,7 @@ stats and the named bond, without money, qualifications or work rewards. Old liv
 change only their content tag; bound scenes and original history remain exact.
 [Mechanics and scene list](ADULT_RELATIONSHIP_STORIES.md).
 
-All **1,437 tests / 105 suites** pass in **854.241 seconds**, strict app/test
+At the preceding adult-content checkpoint, **1,437 tests / 105 suites** passed in **854.241 seconds**, strict app/test
 types and both fresh Hermes exports. All **120 immutable lifetimes** pass across
 twelve countries in **595.782 seconds**, empty stderr/exit zero. Same-seed ordinary
 metrics match content six; no whole-terminal-world equality or additional-seed

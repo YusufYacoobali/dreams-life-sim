@@ -25,7 +25,7 @@ test('immutable actions preserve exact outcomes and reuse certified old transact
   expect(next.ledger).not.toBe(world.ledger);
   expect(next.ledger.every((row, index) => row === world.ledger[index])).toBe(true);
   const before = JSON.parse(checkpoints.packCheckpoint(world)), after = JSON.parse(checkpoints.packCheckpoint(next));
-  expect(before.format).toBe('dreams-checkpoint-v3');
+  expect(before.format).toBe('dreams-checkpoint-v4');
   expect(after.ledger).toEqual(before.ledger); expect(after.main).not.toEqual(before.main);
   expect(checkpoints.unpackCheckpoint(JSON.stringify(after))).toEqual(next);
   const cold = checkpoints.unpackCheckpoint(JSON.stringify(after), true);
@@ -67,7 +67,7 @@ test('chunk damage, contradictory bounds and invalid framing are rejected before
   const edit = (change: (value: any) => void) => { const value = JSON.parse(original); change(value); return () => checkpoints.unpackCheckpoint(JSON.stringify(value)); };
   expect(edit(value => { value.ledger[0].hash = value.ledger[0].hash === '00000000' ? 'ffffffff' : '00000000'; })).toThrow('damaged');
   expect(edit(value => { value.bytes++; })).toThrow('size');
-  expect(edit(value => { value.bytes = 20_000_001; })).toThrow();
+  expect(edit(value => { value.bytes = 32_000_001; })).toThrow();
   expect(edit(value => { value.ledger[0].bytes--; value.bytes--; })).toThrow('size');
   expect(edit(value => { value.ledger = Array(513).fill(value.ledger[0]); })).toThrow();
   // Well-checksummed malformed content must still pass JSON framing and full world validation.
@@ -127,11 +127,11 @@ test('the version-four upgrade is atomic and keeps the original v1 payload until
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(4);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   sqlite.exec('DROP TRIGGER fail_v5'); await updated.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(8);
   expect(await updated.load(world.id)).toEqual(world);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(archive.checkpoint);
   await updated.commit(next, world.revision, 'upgrade_project');
-  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v3');
+  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v4');
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(archive.checkpoint);
   expect(await new SaveRepository(driver).load(world.id)).toEqual(next);
   sqlite.close();
@@ -144,7 +144,7 @@ test('reader seven upgrades a version-five database without rewriting its genuin
   sqlite.exec('PRAGMA user_version=5');
   const moments = sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all();
   const upgraded = new SaveRepository(driver); await upgraded.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(8);
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);

@@ -4,14 +4,39 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-The real normal-command family/storage case now reproduces a blocker at91calendar
-years in generation two: the next save exceeds20MB, while SQLite/WAL/SHM already
-total57,885,432bytes. All original history/receipts and22cold checks remain exact.
-This is a failed broader gate requiring compact encoding and less repeated
-checkpoint storage. [Raw scope and next work](FAMILY_STORAGE.md). Existing action
-and first-eligible lifetime measurements below retain their original scope.
+Compact checkpoint v4 now passes the reproduced year-91 capacity block. The real
+normal-command family journey reaches three natural deaths over 172 years 8 months,
+with all 43 cold comparisons, 173 original annual payloads/metadata and 892 receipts
+exact. The complete storage gate remains open: database/WAL/SHM reaches 162,931,384
+bytes, and the final archive exceeds its existing size limit. The process correctly
+exits 1. [Format and remaining storage work](COMPACT_TRANSACTIONS.md),
+[raw scope](verification/family-storage-tuples-20261020/).
 
-## Current content-seven diagnostics
+All 1,457 tests / 106 suites pass; the same 120 immutable lifetime seeds pass with
+every terminal-world hash/metric unchanged from content seven. These are not new
+seeds or physical timing acceptance. Historical measurements below retain their
+original source, driver and input scope.
+
+## Compact transaction diagnostics
+
+Serial fixed-driver comparison against e3dada8 uses the same 14 worlds/commands
+and all four exact complete stress outcomes, with 70 warm samples per source.
+Every warm action avoids full checkpoint decoding; cold current/backup worlds and
+original Before Age Up payloads remain exact.
+
+| Cloud median | Before (ms) | Compact (ms) |
+| --- | ---: | ---: |
+| Age-60 actual routine edit | 64.26 | 54.83 |
+| Generated 1000-contact actual routine edit | 115.23 | 109.95 |
+| Generated 1000-contact twelve-month Age Up step | 497.46 | 434.81 |
+
+These are five-sample, host/GC-sensitive cloud measurements after test/sweep/export
+and native action processes closed. The software VM/Metro remain idle. Generated
+1000 contacts means 1007 total people and eight financial actors, not a natural
+journey or physical p95. [Complete raw pair](verification/compact-transactions-comparison-20261020.json),
+[source and gates](verification/compact-transactions-20261020.json).
+
+## Previous content-seven diagnostics
 
 | Cloud engine + SQLite action | Current median |
 | --- | ---: |

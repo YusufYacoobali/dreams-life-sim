@@ -32,7 +32,7 @@ afterEach(() => jest.restoreAllMocks());
 
 test('large known populations round-trip with an empty ledger and reuse unchanged people blocks', () => {
   const world = immutableWorld(population()), first = JSON.parse(packCheckpoint(world)) as Frame;
-  expect(first.format).toBe('dreams-checkpoint-v3'); expect(first.people.length).toBeGreaterThan(1); expect(first.ledger).toEqual([]);
+  expect(first.format).toBe('dreams-checkpoint-v4'); expect(first.people.length).toBeGreaterThan(1); expect(first.ledger).toEqual([]);
   expect(unpackCheckpoint(JSON.stringify(first), true)).toEqual(world);
   const gzip = jest.spyOn(compression, 'gzipSync'), draft = copyWorld(world); draft.revision++;
   const next = immutableWorld(draft), packed = JSON.parse(packCheckpoint(next)) as Frame;
@@ -86,11 +86,11 @@ test('the bounded cache evicts old changed blocks while retaining recently used 
 
 test('a genuine mixed-format native archive keeps its entire world and every original historical byte', () => {
   const contents = decodeSave(JSON.stringify(archive)), world = immutableWorld(contents.world), frame = JSON.parse(packCheckpoint(world)) as Frame;
-  expect(frame.format).toBe('dreams-checkpoint-v3'); expect(frame.ledger.length).toBeGreaterThan(0); expect(unpackCheckpoint(JSON.stringify(frame), true)).toEqual(world);
+  expect(frame.format).toBe('dreams-checkpoint-v4'); expect(frame.ledger.length).toBeGreaterThan(0); expect(unpackCheckpoint(JSON.stringify(frame), true)).toEqual(world);
   expect(contents.snapshots).toEqual(archive.snapshots); expect(contents.snapshots).toHaveLength(20);
 });
 
-test('reader seven upgrades an actual v2 current save atomically, keeps all old bytes and only writes v3 after a durable command', async () => {
+test('reader eight upgrades an actual v2 current save atomically, keeps all old bytes and only writes v4 after a durable command', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); const imported = await repository.import(JSON.stringify(archive));
   for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(archive.checkpoint);
   sqlite.exec('PRAGMA user_version=6');
@@ -99,10 +99,10 @@ test('reader seven upgrades an actual v2 current save atomically, keeps all old 
   const upgraded = new SaveRepository(driver); await expect(upgraded.initialise()).rejects.toThrow('storage failure');
   expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(6); expect(rows()).toEqual(before);
   sqlite.exec('DROP TRIGGER fail_reader_seven'); await upgraded.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7); expect(rows()).toEqual(before);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(8); expect(rows()).toEqual(before);
   const world = await upgraded.load(imported.id);
   const next = resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id }, true); await upgraded.commit(next, world.revision, 'reader7-native-ack');
-  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v3');
+  expect(JSON.parse(sqlite.prepare('SELECT payload FROM lives').get()?.payload as string).format).toBe('dreams-checkpoint-v4');
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(archive.checkpoint);
   expect(await new SaveRepository(driver).load(world.id)).toEqual(next); expect(await new SaveRepository(driver).recoveryPreview(world.id)).toEqual(world);
   for (const point of archive.snapshots) { expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.payload).toBe(point.payload); expect(JSON.parse(sqlite.prepare('SELECT metadata FROM snapshot_metadata WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.metadata as string)).toEqual(point.summary); }
@@ -117,14 +117,14 @@ test('recovering missing historical metadata preserves the original old compress
   expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.payload).toBe(point.payload);
   const metadata = JSON.parse(sqlite.prepare('SELECT metadata FROM snapshot_metadata WHERE life_id=? AND snapshot_id=?').get(world.id, point.summary.id)?.metadata as string);
   expect(metadata).toMatchObject({ id: point.summary.id, revision: point.summary.revision, date: point.summary.date, name: point.summary.name, age: point.summary.age, size: point.payload.length, label: 'Earlier checkpoint' });
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(7); expect(await new SaveRepository(driver).load(world.id)).toEqual(world);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(8); expect(await new SaveRepository(driver).load(world.id)).toEqual(world);
   sqlite.close();
 });
 
 test.each([
   ['damaged people checksum', (frame: Frame) => { frame.people[0].hash = frame.people[0].hash === '00000000' ? 'ffffffff' : '00000000'; }],
   ['inconsistent byte total', (frame: Frame) => { frame.bytes++; }],
-  ['oversized world', (frame: Frame) => { frame.bytes = 20_000_001; }],
+  ['oversized world', (frame: Frame) => { frame.bytes = 32_000_001; }],
   ['duplicate person across blocks', (frame: Frame) => { frame.people[1] = frame.people[0]; recount(frame); }],
   ['empty people block', (frame: Frame) => { frame.people[0] = part('{}'); recount(frame); }],
   ['array-shaped people block', (frame: Frame) => { frame.people[0] = part('[]'); recount(frame); }],
@@ -134,6 +134,6 @@ test.each([
   ['ledger hidden in main body', (frame: Frame) => { const body = JSON.parse(inflate(frame.main)); body.ledger = []; frame.main = part(JSON.stringify(body)); recount(frame); }],
   ['empty ledger block', (frame: Frame) => { frame.ledger = [part('[]')]; recount(frame); }],
   ['too many people blocks', (frame: Frame) => { frame.people = Array(513).fill(frame.people[0]); recount(frame); }],
-] as const)('v3 rejects %s before accepting or caching a world', (_label, change) => {
+] as const)('v4 rejects %s before accepting or caching a world', (_label, change) => {
   const frame = JSON.parse(packCheckpoint(population())) as Frame; change(frame); expect(() => unpackCheckpoint(JSON.stringify(frame), true)).toThrow();
 });
