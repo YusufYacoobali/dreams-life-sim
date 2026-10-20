@@ -1,6 +1,6 @@
 # Dreams: Life Simulator — progress and verification
 
-Updated 19 October 2026.
+Updated 20 October 2026.
 
 ## Goal and authorisation
 
@@ -11,6 +11,16 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
 ## Current milestone: opening experience and startup reliability
+
+The next broader production check is the outstanding 1,000-seed lifetime
+invariant gate. The runner now supports the production validated-immutable state
+path, exact terminal-world hashes and failure traces, with fixed game/tool source
+checks. Two complete preflight lives match the ordinary API in every terminal
+world field and metric; invalid CLI inputs are rejected. These overlap the
+larger requested range. The full gate is not established by preparation or
+partial progress. [Method and limits](LIFE_SWEEP.md) and
+[preflight record](verification/life-sweep-mode-comparison-20261020.json) retain
+scope. Game/persistence and all app bundles remain unchanged.
 
 School classmate/teacher profiles now retain the Activities tab. Explicit source
 context reaches the shared tab bar through the active global route query; normal

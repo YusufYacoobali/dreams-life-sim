@@ -1,5 +1,23 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+The next production gate is the full **1,000 distinct seed** lifetime invariant
+run, using the production validated-immutable state path. Its runner/preflight
+checkpoint compares complete seeds 0/1 with the ordinary mutable API: entire
+terminal worlds and all semantic metrics match exactly. Five invalid CLI cases
+are rejected. The runner records each seed/terminal-world hash, checks game/tool
+source hashes, covers every country for the full range, and retains an actual
+failure trace/last valid world. Read [LIFE_SWEEP.md](LIFE_SWEEP.md) and
+[preflight evidence](verification/life-sweep-mode-comparison-20261020.json).
+
+Start `node tools/run-life-sweep.cjs 1000 0 --immutable` from this committed tool
+checkpoint and preserve its raw output. Keep `src/game` and the tool fixed while
+it runs; independent UI/documentation work can continue. A request/partial run
+is not a completed 1,000-seed gate. Current game-source hash under this runner's
+src/game-relative algorithm is
+`f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f`;
+versions remain 28/27/4. This is engine-only, not native/SQLite/120-year/
+1,000-person/multi-generation acceptance. No complete-game percentage increase.
+
 The latest school navigation fix keeps classmate/teacher profiles under
 Activities. The shared foreground tab bar now follows the active route's query
 instead of the layout's own local query, and school links explicitly retain their

@@ -4,6 +4,12 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `life-sweep-mode-comparison-20261020.json` preserves seeds zero and one
+  completed through mutable and production immutable APIs, with identical entire
+  terminal-world hashes/metrics and fixed game/tool sources. Five invalid CLI
+  cases are rejected. These overlap the planned 1,000-seed range; this preflight
+  is not that completed gate or native/SQLite acceptance. See [method](../LIFE_SWEEP.md).
+
 - `android24-school-context-20261019/` preserves actual classmate/teacher
   Activities context, ordinary Relationships/parent context and filtered Back
   search. Browsing leaves all tables exact. Real teacher help records chance 81 /
