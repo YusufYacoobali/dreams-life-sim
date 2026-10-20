@@ -1,0 +1,379 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "dd62665",
+  "scope": "Actual existing native teen life, ordinary job/introduction/profile/search/year/feedback/cold result. Separate prepared acceptance life, not a native birth-to-seventeen or physical timing claim.",
+  "recordedAt": "2026-10-20T04:22:10.173Z",
+  "gameSourceHash": "ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db",
+  "combinedGamePersistenceSourceHash": "9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878",
+  "sweepToolSha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "versions": {
+    "world": 29,
+    "engine": 28,
+    "content": 5,
+    "database": 6
+  },
+  "migrationColdTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "5e237f046f6380b671eb0ca364bdf4d8ea4af70c46225493f63588f01aa9b1a9"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "aeeeda888a0f43b064dad9b62bdf439634bf070372bbfc2fa039a244e2806ffa"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 35,
+      "sha256": "58a1173d1433e2162c0870fdc63455ac37d93e8e799bdbb47843e294cc90d96f"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 32,
+      "sha256": "e06c5b41a812c75e0c176e6f5897ff6fd479a8065abe21d9cc93f1ad402bc7cf"
+    },
+    "snapshots": {
+      "rows": 32,
+      "sha256": "a730d179705c04b3c36a2a5d76dddea1477dc9083e1d711f95050505adc343de"
+    }
+  },
+  "preApplicationBrowsingTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "5e237f046f6380b671eb0ca364bdf4d8ea4af70c46225493f63588f01aa9b1a9"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "aeeeda888a0f43b064dad9b62bdf439634bf070372bbfc2fa039a244e2806ffa"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 35,
+      "sha256": "58a1173d1433e2162c0870fdc63455ac37d93e8e799bdbb47843e294cc90d96f"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 32,
+      "sha256": "e06c5b41a812c75e0c176e6f5897ff6fd479a8065abe21d9cc93f1ad402bc7cf"
+    },
+    "snapshots": {
+      "rows": 32,
+      "sha256": "a730d179705c04b3c36a2a5d76dddea1477dc9083e1d711f95050505adc343de"
+    }
+  },
+  "preIntroductionBrowsingTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "3609c311e038ef9e1579d933b1e675cf35373c70b10d739eba7d37432c743274"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "a21ada875d49010deff56ad50d5f0c68f630258d3a3e583879d8fdcbbfc29fe2"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 37,
+      "sha256": "9fb175411f8f4393ccc1ab77146eeab0006baea35e73eac5f524a09515d56bba"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 32,
+      "sha256": "e06c5b41a812c75e0c176e6f5897ff6fd479a8065abe21d9cc93f1ad402bc7cf"
+    },
+    "snapshots": {
+      "rows": 32,
+      "sha256": "a730d179705c04b3c36a2a5d76dddea1477dc9083e1d711f95050505adc343de"
+    }
+  },
+  "introductionColdTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "4dc0a93f54d916f80c3230af180160cbc7e3759424c89e2de62e83912e16d77b"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "926de026f7e7ce50e5a4a75fce9496eceb6e05bb32e395263444396a8ea4a673"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 38,
+      "sha256": "3ee747b1f3416e60c9831c7ac91107009aa762c867a749a326cf27e0bd404a4b"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 32,
+      "sha256": "e06c5b41a812c75e0c176e6f5897ff6fd479a8065abe21d9cc93f1ad402bc7cf"
+    },
+    "snapshots": {
+      "rows": 32,
+      "sha256": "a730d179705c04b3c36a2a5d76dddea1477dc9083e1d711f95050505adc343de"
+    }
+  },
+  "contactSearchProfileBackTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "81d5c548a04c498c943c19e383271f19153dc1d1c927789a42d1a47f2ada6e52"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "35a18a7c01e595f56242978e0cef2c9aad138ba25ec3372c434b843a832df3cf"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 39,
+      "sha256": "f9e6792b2eb24e1a3b8a804ffdad219c3cdbfcbe173a4f369a4c6158ee1e4ec3"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 32,
+      "sha256": "e06c5b41a812c75e0c176e6f5897ff6fd479a8065abe21d9cc93f1ad402bc7cf"
+    },
+    "snapshots": {
+      "rows": 32,
+      "sha256": "a730d179705c04b3c36a2a5d76dddea1477dc9083e1d711f95050505adc343de"
+    }
+  },
+  "feedbackColdTablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "696d3742005a9b0a7940884a8d5dfcb81aa92534203d81b00200cd9d77c9ccde"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "7a8a7fc2443bb8792701e53d922b8038ef66a57a591cd65a275ae6541ba9de9f"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 42,
+      "sha256": "297b04b3e6d628f92c8438bb0d2e0b116c61f61341d467f6e9e1d1b50eafd882"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 33,
+      "sha256": "9f0548faac864e36049e92947ac69b6b69a1e8ebce01199e6ff626779c1618ce"
+    },
+    "snapshots": {
+      "rows": 33,
+      "sha256": "5ef0a02046894cf1fa2e5a4b55c492be8594e2fcc136d349aaa8af6353b8b471"
+    }
+  },
+  "jobApplicationAllSimulationFieldsExact": true,
+  "jobCurrencyTextDifferences": [
+    {
+      "path": "world.pending.effects.0.value",
+      "actual": "ZAR37,500.00",
+      "expected": "ZAR 37,500.00"
+    }
+  ],
+  "ack49EntireWorldExact": true,
+  "introduction50EntireWorldExact": true,
+  "ack51EntireWorldExact": true,
+  "year52AllSimulationFieldsExact": true,
+  "yearCurrencyTextDifferences": [
+    {
+      "path": "world.journal.191.text",
+      "actual": "My income for the year was ZAR37,500.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 37,500.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.192.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.193.text",
+      "actual": "My income for the year was ZAR405,000.00; income tax was ZAR69,000.00.",
+      "expected": "My income for the year was ZAR 405,000.00; income tax was ZAR 69,000.00."
+    },
+    {
+      "path": "world.journal.194.text",
+      "actual": "My income for the year was ZAR281,250.00; income tax was ZAR36,825.00.",
+      "expected": "My income for the year was ZAR 281,250.00; income tax was ZAR 36,825.00."
+    },
+    {
+      "path": "world.journal.195.text",
+      "actual": "My income for the year was ZAR262,500.00; income tax was ZAR31,950.00.",
+      "expected": "My income for the year was ZAR 262,500.00; income tax was ZAR 31,950.00."
+    },
+    {
+      "path": "world.journal.196.text",
+      "actual": "My income for the year was ZAR187,500.00; income tax was ZAR16,650.00.",
+      "expected": "My income for the year was ZAR 187,500.00; income tax was ZAR 16,650.00."
+    },
+    {
+      "path": "world.journal.197.text",
+      "actual": "My income for the year was ZAR225,000.00; income tax was ZAR23,400.00.",
+      "expected": "My income for the year was ZAR 225,000.00; income tax was ZAR 23,400.00."
+    },
+    {
+      "path": "world.journal.198.text",
+      "actual": "My income for the year was ZAR262,500.00; income tax was ZAR31,950.00.",
+      "expected": "My income for the year was ZAR 262,500.00; income tax was ZAR 31,950.00."
+    },
+    {
+      "path": "world.journal.199.text",
+      "actual": "My income for the year was ZAR196,875.00; income tax was ZAR18,337.50.",
+      "expected": "My income for the year was ZAR 196,875.00; income tax was ZAR 18,337.50."
+    },
+    {
+      "path": "world.journal.200.text",
+      "actual": "My income for the year was ZAR56,250.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 56,250.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.201.text",
+      "actual": "My income for the year was ZAR65,625.00; income tax was ZAR0.00.",
+      "expected": "My income for the year was ZAR 65,625.00; income tax was ZAR 0.00."
+    },
+    {
+      "path": "world.journal.202.text",
+      "actual": "My income for the year was ZAR423,975.00; income tax was ZAR73,933.50.",
+      "expected": "My income for the year was ZAR 423,975.00; income tax was ZAR 73,933.50."
+    },
+    {
+      "path": "world.journal.203.text",
+      "actual": "My income for the year was ZAR352,475.00; income tax was ZAR55,343.50.",
+      "expected": "My income for the year was ZAR 352,475.00; income tax was ZAR 55,343.50."
+    },
+    {
+      "path": "world.journal.204.text",
+      "actual": "My income for the year was ZAR95,815.12; income tax was ZAR146.72.",
+      "expected": "My income for the year was ZAR 95,815.12; income tax was ZAR 146.72."
+    }
+  ],
+  "ack53EntireWorldExactFromActual52": true,
+  "feedback54EntireWorldExact": true,
+  "ack55EntireWorldExact": true,
+  "feedbackRecord": {
+    "date": {
+      "year": 2043,
+      "month": 10,
+      "day": 20
+    },
+    "supervisorId": "person_npc_49_16",
+    "supervisorEmploymentId": "employment_background_person_npc_49_16",
+    "paidMonths": 12,
+    "trustAtRequest": 35,
+    "chance": 67,
+    "roll": 87,
+    "accepted": false,
+    "performanceBefore": 57,
+    "performanceGain": 0
+  },
+  "feedbackNoSalaryPayServiceOrQualificationAward": true,
+  "payroll": [
+    {
+      "personId": "person_player",
+      "paidPeriods": 12,
+      "grossIncrease": "3750000"
+    },
+    {
+      "personId": "person_npc_49_16",
+      "paidPeriods": 12,
+      "grossIncrease": "19687500"
+    },
+    {
+      "personId": "person_npc_49_17",
+      "paidPeriods": 12,
+      "grossIncrease": "5625000"
+    },
+    {
+      "personId": "person_npc_49_18",
+      "paidPeriods": 12,
+      "grossIncrease": "6562500"
+    }
+  ],
+  "keyboardDismissAndActivitiesOriginAndQueryBackObserved": true,
+  "blockedBeforeThreePaidPeriodsObserved": true,
+  "annualRepeatDisabledObserved": true,
+  "oldRowsPreserved": {
+    "lives": 4,
+    "backups": 4,
+    "snapshots": 32,
+    "snapshot_metadata": 32,
+    "receipts": 35
+  },
+  "beforeAgeUp51OriginalPayloadExact": true,
+  "backup54OriginalPayloadExact": true,
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 43,
+    "restore_receipts": 1,
+    "snapshot_metadata": 33,
+    "snapshots": 33
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 55,
+  "worldHashes": {
+    "49": "2b3d753ff69aa0ec96f079917ee5b812f26c2403760b9594c1aed1303dd34d46",
+    "50": "fc4e29772f2b9b82a80b90de175f986f79f2a70ff7f97a9438e4a7d264c87185",
+    "51": "98088420b54b84b706f9bca4f2ccd338eb8e8d739198103e2f6a99dd16c7fd56",
+    "52": "28790ff584883959d7f15a8e1eeda3b9e123175fd3c217faee6d64ce2b612596",
+    "53": "792510222f9d8c59ac12cf5a101d2f171c62a920c64e8c56cb42a815a84cacb3",
+    "54": "45676a9a913bfb17f0808f7128d733ca489eeea048e6533d8acbed1a6bbc34a5",
+    "55": "09e3ff65de4497880ac75d4b93025f8754e48812a7f5145f2d1d3b33e53848f2"
+  },
+  "limits": "Software Android24 / ExpoGo. No world, RNG, stat or SQL edits on native. Storage fault injection uses separate Node SQLite tests only. Native feedback naturally declines (67/87); accepted branch has domain and UI/SQLite checks. Currency display exceptions are enumerated without normalizing native worlds. Standalone/iOS, physical p95, complete reference/accessibility and release acceptance remain open."
+}

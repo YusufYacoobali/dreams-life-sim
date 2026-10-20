@@ -49,6 +49,8 @@ import { validateLeisure } from './systems/leisureValidation';
 import { petAdoptionSchema, petSchema } from './systems/petSchemas';
 import { validatePets } from './systems/petValidation';
 import { validateScholarships } from './systems/scholarshipValidation';
+import { workplaceSchema } from './systems/workplaceSchemas';
+import { validateWorkplaces } from './systems/workplaceValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -81,7 +83,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(28), engineVersion: z.literal(27), contentVersion: z.literal(5),
+  schemaVersion: z.literal(29), engineVersion: z.literal(28), contentVersion: z.literal(5),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -110,6 +112,7 @@ export const worldSchema = z.object({
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), recoveryCourses: z.array(recoveryCourseSchema),
   scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), leisureOutings: z.array(outingSchema),
+  workplaces: z.array(workplaceSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
   actionCounts: z.record(z.string(), z.number().int().nonnegative()),
 });
@@ -299,6 +302,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateEarnings(world, ledger);
   validateTravel(world, ledger);
   validateSchools(world);
+  validateWorkplaces(world);
   validateEducationRecovery(world);
   validateScholarships(world);
   validatePets(world, ledger);
@@ -485,5 +489,7 @@ export function decodeWorld(text: string, immutable = false): World {
   if (parsed && parsed.schemaVersion === 27) { parsed.schemaVersion = 28; parsed.engineVersion = 27; }
   // New teen situations affect future selection, never saved choices, effects or RNG.
   if (parsed && parsed.schemaVersion === 28 && parsed.contentVersion === 4) parsed.contentVersion = 5;
+  // Old employment, people, earnings and RNG remain exact; introductions are explicit.
+  if (parsed && parsed.schemaVersion === 28) { parsed.schemaVersion = 29; parsed.engineVersion = 28; parsed.workplaces = []; }
   return validateWorld(parsed, immutable);
 }

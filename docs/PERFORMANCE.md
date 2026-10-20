@@ -4,7 +4,38 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current content-five action diagnostics
+## Current workplace diagnostics
+
+World **29 / engine 28 / content 5** passes **1,318 tests / 94 suites**, strict
+types, fresh Android/iOS Hermes exports and 120 distinct immutable lifetimes.
+After those jobs close, serial fixed-input diagnostics run one warm-up and five
+real SQLite samples per case. All **45 warm samples avoid full checkpoint
+decode**; every cold current/backup is exact. The original seven inputs remain,
+with two prepared workplace cases continued normally from the genuine native
+teen archive, using no stat, tenure, money or RNG edits. The prepared introduction
+input is exactly the actual native revision-49 world. Feedback preparation
+includes a real engine year; its currency presentation follows cloud Intl.
+
+[Raw current measurements](verification/action-latency-workplaces-20261020.json)
+record combined hash
+`9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878`.
+
+| Action, cloud engine + SQLite | Median |
+| --- | ---: |
+| Begin Life | 1.45 ms |
+| First-year choice / Continue | 2.54 / 2.20 ms |
+| Age-seven callback / resumed Continue | 6.51 / 14.76 ms |
+| Age-30 / age-60 routine | 15.98 / 93.92 ms |
+| Coworker introduction | 10.60 ms |
+| Supervisor feedback | 11.42 ms |
+
+Reproduce with `node tools/benchmark-actions.cjs --profile --workplaces`.
+These are current diagnostics, not a paired before/after comparison or physical
+p95. Native startup, navigation, physical hardware and release budgets remain
+open. The old seven-case content-five measurements below retain their own
+source and scope.
+
+## Earlier content-five action diagnostics
 
 The final world-28 / engine-27 / content-five source passes **1,285 tests /
 91 suites**, strict types and both Hermes exports. A new serial measurement

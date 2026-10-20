@@ -1,15 +1,19 @@
 # Production-state lifetime invariant sweep
 
-Current content five passes **120 distinct seeds 0–119**, across all twelve
-countries, through the validated-immutable engine in **643.205 seconds**.
-The completion record, unchanged final source/tool hashes, empty stderr and
-zero exit are verified. Game hash:
-`b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e`.
-[Summary and raw records](verification/life-sweep-content5-120-20261020.json)
-retain ages 40–98, max 24 people / 55,199 ledger rows. All same 120 terminal
-worlds/metrics match the pre-hardening run exactly; those overlapping cases do
-not create 240 distinct seeds. The complete current regression separately
-passes 1,285 tests / 91 suites. There is no current content-five 1,000-seed claim.
+Current world **29 / engine 28 / content 5** passes **120 distinct seeds
+0–119**, across all twelve countries, through the validated-immutable engine
+in **668.791 seconds**, empty stderr and exit zero. Game hash:
+`ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db`.
+[Summary and all raw cases](verification/life-sweep-workplaces-120-20261020.json)
+retain ages 40–98, max 24 people / 55,199 ledger rows. All ordinary-life metrics
+match the same prior content-five seeds; schema and terminal hashes change.
+These overlapping runs do not create additional distinct cases.
+
+This first-eligible policy does not introduce optional workplaces. Separate
+workplace domain, SQLite/UI and native checks exercise those commands. The
+complete current regression passes **1,318 tests / 94 suites**. There is no
+current-source 1,000-seed claim. The earlier world-28/content-five 120-seed
+[record](verification/life-sweep-content5-120-20261020.json) remains historical.
 
 ## Earlier content-four 1,000-seed gate
 

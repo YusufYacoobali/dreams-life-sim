@@ -15,6 +15,24 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+Current world **29 / engine 28 / content 5 / database 6** connects ordinary
+local workplace people and supervisor feedback through the reference's Coworkers
+path. Browsing/search/profile/Back perform no save or generation; introductions
+are explicit and staff use actual monthly payroll. All **1,318 tests / 94 suites**,
+strict types, fresh Hermes exports and **120 current-source immutable lifetimes**
+pass. All 45 warm cloud action samples avoid full checkpoint decode; introduction
+and feedback medians are **10.60 / 11.42 ms** including SQLite. Physical p95 stays
+open. [Scope and checks](WORKPLACES.md) retain the narrower claims.
+
+Actual Android teen work completes zero-paid-month hiring, exact introduction,
+cold result, search/profile/Back, twelve paid months and naturally declined annual
+feedback. Full introduction/feedback/ack worlds and all original lives/history are
+exact; currency-text exceptions in hiring/year replay are explicit. Native state
+is Amahle age 17 / revision 55, five lives / thirty-three moments / forty-three
+receipts. [Native evidence](verification/android24-workplaces-20261020/) preserves
+that scope. Raises/work depth and 150 further situations remain open; production
+percentage and release gates stay fixed. Earlier records below remain historical.
+
 Content five adds ten [early-teen home situations](TEEN_HOME_STORIES.md), for
 100 distinct situations / 250 minimum. Existing lives retain their exact bound
 data under a content-tag-only migration. Durable callback origins also prevent

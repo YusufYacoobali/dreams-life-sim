@@ -4,6 +4,24 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `workplaces-20261020.json` records world 29 / engine 28 / content 5,
+  persistent ordinary colleagues/supervisors, annual feedback, empty migration,
+  **1,318 tests / 94 suites**, strict types and both fresh Hermes exports.
+  `regression-workplaces-20261020.txt` is the raw complete regression.
+  `android24-workplaces-20261020/` retains actual hiring/introduction/search/
+  profile/Back/payroll/declined-feedback/cold results and exact old-world/history
+  protection, with explicitly enumerated currency presentation exceptions.
+- `life-sweep-workplaces-120-20261020.json` and matching `.ndjson` retain all
+  120 distinct immutable current-source seeds across twelve countries in
+  668.791 seconds, unchanged source hashes, empty stderr and exit zero. The
+  policy does not introduce optional workplaces. Earlier overlapping seeds
+  are not additional distinct cases; the 1,000-life pass remains content four.
+- `action-latency-workplaces-20261020.json` records nine serial cloud SQLite
+  cases, five samples each. All 45 warm samples avoid full decode; every cold
+  current/backup is exact. Introduction / feedback: 10.60 / 11.42 ms; age-60
+  routine: 93.92 ms. Prepared introduction matches actual native 49. These
+  are current diagnostics, not physical timing or a paired comparison.
+
 - `teen-home-content5-20261020.json` records ten new situations, content-tag
   migration, sparse-history callback origin protection, the complete **1,285 /
   91-suite** pass, strict types and both fresh Hermes exports on final source.

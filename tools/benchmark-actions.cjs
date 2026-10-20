@@ -76,6 +76,30 @@ else if (historyIndex >= 0) {
     const world = checkpoints.unpackCheckpoint(row.payload);
     cases.push({ label: 'Age-' + age + ' routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine } });
   }
+if (process.argv.includes('--workplaces')) {
+  // Continue a genuine saved teen result with ordinary production commands.
+  // These prepared inputs exercise the new roster; no money, tenure or RNG edits.
+  let world = decodeSave(fs.readFileSync(path.join(__dirname, '../tests/fixtures/v28-native-teen-archive.json'), 'utf8')).world;
+  const finish = () => {
+    let guard = 0;
+    while ((world.pending || world.annual) && guard++ < 100) {
+      world = resolveCommand(world, world.pending?.kind === 'decision'
+        ? { type: 'choose', eventId: world.pending.id, choiceId: world.pending.choices.find(item => !choiceUnavailable(world, item)).id }
+        : world.pending ? { type: 'acknowledge', resultId: world.pending.id } : { type: 'resume' }, true);
+    }
+    assert.ok(guard < 100, 'Workplace input did not finish its pending year');
+  };
+  finish(); world = resolveCommand(world, { type: 'apply-job', roleId: 'shop-assistant-part' }, true); finish();
+  assert.equal(world.people[world.activePersonId].employment?.roleId, 'shop-assistant-part');
+  cases.push({ label: 'Prepared teen coworker introduction', world, command: { type: 'meet-coworkers' } });
+  world = resolveCommand(world, { type: 'meet-coworkers' }, true); finish();
+  world = resolveCommand(world, { type: 'advance' }, true); finish();
+  const place = world.workplaces.find(item => item.personId === world.activePersonId && !item.ended);
+  const supervisor = place?.members.find(item => item.role === 'supervisor' && !item.left);
+  assert.ok(place && supervisor, 'Missing current supervisor in prepared workplace');
+  assert.ok(world.people[world.activePersonId].employment.paidMonths >= 3);
+  cases.push({ label: 'Prepared supervisor feedback', world, command: { type: 'work-feedback', workplaceId: place.id, supervisorId: supervisor.personId } });
+}
 const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'dreams-actions-'));
 function open(file) {
   const sqlite = new DatabaseSync(file); sqlite.exec('PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL;');

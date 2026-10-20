@@ -10,10 +10,12 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '.
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { Illustration } from '../../src/assets/Illustration';
 import { useColors } from '../../src/ui/theme';
+import { currentWorkplace } from '../../src/game/systems/workplaceSchemas';
 
 export default function Work() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();
   const player = world.people[world.activePersonId]; const job = player.employment; const role = jobs.find(candidate => candidate.id === job?.roleId); const account = accountFor(world); const rule = rules[player.country];
+  const workplace = currentWorkplace(world);
   const [dialog, setDialog] = useState<'routine' | 'quit' | 'retire' | null>(null);
   const [pensionPage, setPensionPage] = useState(0);
   const event: EventPresentation | null = dialog === 'routine' ? { id: 'work-effort', kind: 'selection', title: 'Work routine', body: 'Effort affects performance and stress as time passes.', choices: [{ id: 'relaxed', label: 'Take it easy' }, { id: 'balanced', label: 'Balanced' }, { id: 'hard', label: 'Work hard' }], confirmLabel: 'Set Routine' } : dialog ? { id: dialog, kind: 'confirmation', title: dialog === 'quit' ? 'Resign from this job?' : 'Retire from work?', body: dialog === 'quit' ? 'Your pay will stop. You keep money already earned.' : 'Your job will end and an earned pension will start as time passes.', terms: [], confirmLabel: dialog === 'quit' ? 'Resign' : 'Retire' } : null;
@@ -27,7 +29,8 @@ export default function Work() {
     <ActionRow title="Education" subtitle="School, university and professional qualifications" onPress={() => router.push('/education')} />
     <ActionRow title="Business" subtitle="Your companies, actual staff and operating roles" onPress={() => router.push('/business')} />
     <ActionRow title="Special Careers" subtitle="Build skills and pursue timed professional contracts" onPress={() => router.push('/special-careers')} />
-    {job && <><ActionRow title="Work routine" value={job.effort} onPress={() => setDialog('routine')} /><ActionRow title="Resign" onPress={() => setDialog('quit')} /></>}
+    {job && <><ActionRow title="Work routine" value={job.effort} onPress={() => setDialog('routine')} />{!role?.specialCareer && !job.companyId && <ActionRow title="View Coworkers" subtitle={workplace ? 'Your supervisor and colleagues' : 'Introduce yourself to your team'} onPress={() => router.push({ pathname: '/coworkers', params: { tab: 'activities' } })} />}<ActionRow title="Resign" onPress={() => setDialog('quit')} /></>}
+    {!job && world.workplaces.some(item => item.personId === player.id) && <ActionRow title="Previous Workplaces" subtitle="People from your employment history" onPress={() => router.push({ pathname: '/coworkers', params: { tab: 'activities' } })} />}
     <ActionRow title="Retirement" disabledReason={retirementReason} onPress={() => setDialog('retire')} />
   </Card><EventModal event={event} busy={busy} onCancel={() => setDialog(null)} onChoose={id => { setDialog(null); void dispatch(dialog === 'routine' ? { type: 'work-effort', effort: id as 'relaxed' | 'balanced' | 'hard' } : { type: dialog === 'quit' ? 'quit-job' : 'retire' }); }} /></Page>;
 }

@@ -19,6 +19,7 @@ import { countries } from '../countries';
 import { fxMoney } from '../valuation';
 import { newWorkEarnings } from './earningsSchemas';
 import { pensionPayment, recordWageEarnings } from './earnings';
+import { endWorkplaceEmployment } from './workplaceSchemas';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string() }),
@@ -28,6 +29,7 @@ export const workCommandSchema = z.discriminatedUnion('type', [
 export type WorkCommand = z.infer<typeof workCommandSchema>;
 export function endEmployment(world: World, personId = world.activePersonId) {
   const person = world.people[personId];
+  if (person.employment) endWorkplaceEmployment(world, personId, person.employment.id);
   const history = world.workHistory.find(record => record.id === person.employment?.id);
   if (history) history.ended = { ...world.date };
   if (person.employment) {careerContractEnded(world,person.employment.id);serviceContractEnded(world,person.employment.id);}

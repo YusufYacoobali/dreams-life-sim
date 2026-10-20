@@ -148,7 +148,7 @@ test('reader six upgrades a version-five database without rewriting its genuine 
   expect(sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(responsiveArchive.checkpoint);
   expect(sqlite.prepare('SELECT snapshot_id,payload FROM snapshots ORDER BY snapshot_id').all()).toEqual(moments);
-  const world = await upgraded.load(imported.id); expect(world).toEqual(imported); expect(world.schemaVersion).toBe(28);
+  const world = await upgraded.load(imported.id); expect(world).toEqual(imported); expect(world.schemaVersion).toBe(29);
   if (world.pending?.kind !== 'result') throw new Error('Expected the genuine project result');
   const next = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id }, true);
   await upgraded.commit(next, world.revision, 'first_v28_action');

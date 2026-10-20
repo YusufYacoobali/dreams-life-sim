@@ -1,710 +1,161 @@
-# Continue Dreams: Life Simulator in a new cloud chat
-
-Before workplace schema work, the actual revision-46 teen result is preserved
-in `v28-native-teen-archive.json`, exported with clean unmodified pushed
-`3c6df7e`. The current checkpoint and sixteen original v1/v2 moments/metadata
-are byte-exact. Whole-world hash is the original `a61d171...`. Both full-field
-preservation and SQLite acknowledgement failure/retry/cold checks pass: **two
-checks / one suite**, **9.817 seconds**, strict types. This is fixture protection,
-not a new whole-regression total; app/game/persistence source and the complete
-baseline below remain unchanged. Never regenerate this fixture with newer code.
-[Producer and fingerprint](verification/native-teen-archive-v28-20261020.json).
-Next milestone: persistent ordinary-work colleagues/supervisor and feedback,
-with read-only browsing and explicit introductions, preserving responsiveness.
-
-Latest completed milestone: [content five](TEEN_HOME_STORIES.md) adds ten early-
-teen home situations and thirty choices, for **100 distinct source situations**.
-World **28 / engine 27 / content 5 / database 6** is current. Migration retains
-old bound choices, results, journal, people, money and RNG. The genuine native
-paid-arcade archive was exported with isolated unmodified `e29e634` source and
-its exact hash; all thirteen original worlds and twelve moment payloads remain
-protected. Never regenerate historical fixtures with newer game source.
-
-Selection also excludes an already-recorded callback origin ID even when old
-event history is sparse, preventing an offered promise whose choice would fail.
-Both callback families have dedicated checks. The final complete **1,285 tests /
-91 suites** pass in **713.383 seconds**, strict types and both fresh Hermes
-exports pass. All final verification jobs closed with exit zero; no regression/sweep job remains
-running. [Source/checks](verification/teen-home-content5-20261020.json) and
-[raw complete regression](verification/regression-content5-20261020.txt).
-
-Current game hash: `b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e`.
-Combined game/persistence hash: `7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6`.
-The final current-source **120 distinct immutable lives** pass across twelve
-countries in **643.205 seconds**, stderr empty. Terminal worlds/metrics exactly
-match the same 120 pre-hardening cases; these are not 240 distinct seeds.
-[Raw runs and scope](verification/life-sweep-content5-120-20261020.json).
-The older 1,000-seed pass below belongs to content four, not current source.
-
-Fresh ordinary-action diagnostics retain the lag fix: Begin Life **1.09 ms**,
-first-year choice **2.99 ms**, Continue **2.46 ms**, age-seven choice **6.18 ms**,
-resumed Continue **15.24 ms**, age-30 routine **28.44 ms**, age-60 routine
-**78.65 ms**, including real SQLite saves. All 35 warm samples avoid full
-checkpoint decode; every cold current/backup matches. [Raw diagnostics](verification/action-latency-content5-20261020.json).
-These are cloud engine/save timings, not native startup/navigation or physical p95.
-
-Actual Android continuation reaches the new phone scene at age sixteen.
-Final-source cold decision/result preserve all eight tables; choice 46 and
-acknowledgement 47 match entire expected worlds exactly. Respect rises 56→59;
-capped happiness/bond, money and RNG stay exact. Earlier annual replay matches
-simulation fields with explicitly recorded native currency-spacing exceptions.
-All four prior live/backup rows, twenty-eight original moments/metadata and
-twenty-five earlier receipts stay exact. Current native state is **five lives /
-thirty-two moments / thirty-five receipts**, Amahle `life_native_arcade_v28`
-active at revision **47**. Original Riley **53** and branch **38** stay unchanged.
-[Native provenance and scope](verification/android24-teen-home-20261020/).
-
-Continue the complete production plan and early-game priority. There are still
-150 situations needed for the minimum; work/adult stories, richer work contacts,
-broader integration and release/native/physical gates remain open. Further file
-breadth stays parked. Earlier checkpoints below retain their historical source,
-versions, counts and narrower validation scopes.
-
-Native outing acceptance now passes on unchanged `e29e634`. A separate seed-4
-life reaches an actual age-eleven Johannesburg invitation through normal
-Start/Begin and 29 production commands; the existing picker loads its preserved
-archive. Actual permission charges nothing; month-one attendance charges Ava
-exactly R75 once, with saved permission/RNG unchanged. Force-stop/cold result
-preserves all eight tables; the remaining eleven months and fort choice finish
-age twelve / revision 37. Simulation fields match production exactly, with
-explicitly recorded native-vs-Node currency-spacing presentation exceptions.
-All four existing worlds/backups, sixteen moments and eighteen receipts stay
-exact; the original input's eleven moments also remain byte-exact. At that checkpoint, native state
-was **five lives / twenty-eight moments / twenty-five receipts**, Amahle
-`life_native_arcade_v28` active at revision 37, original Riley 53 / branch 38
-unchanged. Read [raw proof and limits](verification/android24-arcade-20261020/).
-The preparation is not a native birth-to-eleven claim. No player file breadth
-or source change; all existing checks/exports and the 1,000-seed gate retain
-their scope. Continue the full production plan and early-game priority.
-
-At `e29e634`, import/recovery now publish their authoritative saved-life summary from
-the successful repository operation. Normal actions already retained branch
-origin; only the old import/recovery helper dropped it. No post-commit list or
-checkpoint reread is added, and the next action retains its warm save cache.
-All **161 affected checks / 54 suites** pass in **142.146 seconds**, with strict
-types and fresh Android/iOS Hermes exports. Actual Android recovery restores
-the saved lunch result at revision 37, acknowledges once to exact revision 38,
-and immediately shows the original Time Machine branch label. Original three
-lives/backups, twelve moments and seventeen receipts stay exact. Current native
-state is **four lives / sixteen moments / eighteen receipts**, branch active
-at revision 38. Existing recovery intentionally clears that branch's receipts;
-acknowledgement adds one. The earlier callback record below retains its original
-twenty-four-receipt scope. Read [recovery proof](verification/android24-save-summary-20261020/)
-and [source/checks](verification/save-summary-20261020.json).
-Game/codec/schema/tool remain unchanged. Current combined game/persistence hash:
-`c7514395530d78c69341fff805b084308a8c5da600b4f3ef348d1564a495cf75`.
-Further import/export/sharing breadth stays parked. Continue early-game/native
-responsiveness and the complete production plan; physical-device timing,
-standalone and iOS gates remain open.
-
-The genuine `v28-native-school-archive.json` is now preserved from unmodified
-pushed **`1d1e696`**, using the actual revision-53 Android SQLite copy. Its current
-checkpoint is byte-exact to native; all ten Riley moments retain original
-payloads/metadata, including all nine earlier reading moments (four v1/six v2).
-The two other lives account for the native database's twelve total moments.
-Never regenerate this fixture using newer source. Full current/prior field,
-cold grade/help/care/hobby and repeat-blocking checks pass: **three checks / two
-suites**, **15.058 seconds**, strict types. See
-[provenance](verification/native-school-archive-v28-20261020.json).
-The native callback/year check now passes. A normal Time Machine branch from
-`snapshot_r_31` reaches the actual month-two project; Harper's help records
-70→71 grades and exact effects without changing money/ledger/RNG. Force-stop/
-cold Continue preserves every row in all eight tables and the same result.
-Actual remaining months, Biscuit's month-twelve illness, Continue This Year
-and the birthday lunch choice reach age eight / revision **38**. Full current,
-backup and checked intermediate worlds match production restore/commands.
-All original three live/backup rows, twelve moments and seventeen receipts
-stay exact. Latest emulator state is **four lives/sixteen moments/twenty-four
-receipts**, with branch `life_mvg00bcv_1sh3wmp_0` active at revision 38; the
-original Riley source remains `life_content4_bubbles`, revision 53.
-Read [actual native proof](verification/android24-school-callback-20261020/).
-App/game/codec source is unchanged from `1d1e696`. Continue button-response/
-production work. Native debugger connection works with its required same-
-server Origin header, but this Expo Go runtime rejects CDP `Profiler.enable`.
-No native sampling-profile or physical timing pass is established by that probe.
-
-Saved Lives now offers a [read-only summary](SAVED_LIFE_VIEW.md) for each life
-without selecting it. Screen-local loading/retry and stale-response protection
-keep viewing independent of global saving. The shared validated repository
-reader preserves the active action cache; valid and damaged preview checks
-introduce no decode into the next active commit. All **156 affected checks /
-52 suites** pass in **125.204 seconds**, strict types and fresh Hermes exports
-pass. These cover every UI/state/persistence/progress suite, not all game-domain
-tests. The complete 1,226-test baseline remains at `e5a4aaf`.
-
-Native read-only Ren/Rohan summaries retain their original first-year stories;
-Back/Welcome Continue returns to age-ten Riley and the latest help fact.
-Every row in all eight tables stays exact (three lives/twelve moments/seventeen
-receipts, active revision 53). [Native proof](verification/android24-saved-life-view-20261020/)
-and [source/checks](verification/saved-life-view-20261020.json) retain scope.
-Game/codec/schema/tool stay fixed; only the repository reader is refactored.
-The new combined game/persistence hash is
-`76d7c573d3061c31361c8a206c94c3049eb05ca93f6da19b78ac2475c7c0e620`.
-The engine-only sweep below now passes. Further file-feature breadth is deferred.
-
-Relationships now virtualises contacts and adds the reference's All/Family/
-Friends/Romance filters plus name search, with compact family/pet/home links.
-Actual Android Family + `Ruby` opens the correct parent and retains its query/
-filter on Back; ten targets are 48dp. A real childhood Family review also removes
-adult planning/adoption controls in favour of the local adult-age guidance.
-All **16 affected checks / six suites** pass in **16.799 seconds**, strict types
-and fresh Hermes exports pass. Every native SQLite row stays exact (revision
-53; three lives/twelve moments/seventeen receipts). Read
-[scope](RELATIONSHIP_LIST.md), [raw proof](verification/android24-contacts-20261020/)
-and [source/checks](verification/contacts-20261020.json). Game/persistence remains
-unchanged at that checkpoint. Continue early-game/production work;
-the user's file-feature breadth remains deferred.
-
-The latest read-only [Extras increment](EXTRAS.md) connects twelve achievements,
-four challenges, inherited possessions and Help. Life Summary now virtualises
-its journal and shows actual milestones. All **70 affected checks / 37 suites**
-pass in **82.193 seconds**, strict types and fresh Hermes exports pass. Native
-All/Special achievements/detail/Back, All/Medium challenges/details, View Pets,
-empty heirlooms, Help and scrolling summary preserve every row in all eight
-SQLite tables. Actual Riley remains revision 53, three lives/twelve moments/
-seventeen receipts, four milestones and one completed challenge. See
-[native proof](verification/android24-extras-20261020/) and
-[source/export record](verification/extras-20261020.json). Game/persistence is
-unchanged. Continue early-game/native responsiveness review while the following
-immutable engine sweep below recorded; further file features remain deferred.
-
-The full **1,000 distinct seed** lifetime invariant gate now passes on world
-28 / engine 27 / content 4, through the production validated-immutable API.
-Seeds **0–999** are all present once; all twelve countries are covered. Runtime
-is **5,030.819 seconds**, stderr is empty, the completion record is present and
-session **12194 closed with exit 0**. No duplicate run is needed. The game/tool
-hashes stayed exact, including game hash
-`f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f`.
-Read [method/limits](LIFE_SWEEP.md), [completion record](verification/life-sweep-v28-1000-20261020.json)
-and [all raw cases](verification/life-sweep-v28-1000-20261020.ndjson).
-The range is age 25–102, at most 26 people / 61,778 ledger rows. This does not
-establish SQLite/native/all-optional-action/120-year/1,000-person/multi-generation
-acceptance or increase the complete-game percentage. The two preflight lives
-matched the mutable API exactly and overlap this range. Continue the full plan;
-a later game-source change needs its own current-source verification.
-
-The latest school navigation fix keeps classmate/teacher profiles under
-Activities. The shared foreground tab bar now follows the active route's query
-instead of the layout's own local query, and school links explicitly retain their
-Activities origin. Native Ruby Singh and Harper Walker profiles stay in Activities;
-ordinary Relationships/parent Ruby Kelly profiles stay in Relationships. On final
-source, Android Back preserves the `Ruby` search and its one actual matching row.
-All **14 affected checks / four suites** pass in **3.484 seconds**, strict types
-and fresh Hermes exports pass. Game/persistence remains unchanged.
-
-Native browsing leaves all eight tables exact. The actual teacher-help action
-then improves grades 89→92 (recorded chance 81, roll 22), accepts once, and blocks
-a repeat that school year. Current/backup match the production command and
-acknowledgement exactly; money/ledger/hobbies/pets/trips, all twelve moments and
-both inactive lives remain intact. Latest native state: revision **53**, three
-lives/twelve moments/seventeen receipts. Subsequent navigation again leaves all
-eight tables exact. See [record](verification/school-context-20261019.json) and
-[actual captures/comparisons](verification/android24-school-context-20261019/).
-Continue onboarding/early-game/full production work; further file breadth is deferred.
-
-The latest native onboarding check fixes a real keyboard/dialog boundary:
-opening Country while a name field was focused retained the keyboard's reduced
-modal height after the keyboard disappeared. Explicit dismissal before location/
-start dialogs restores the available picker height without a timer or save.
-Creation avatar/gender and appearance tabs/face controls now meet 48dp targets.
-At actual Android 130% text, the complete long-name draft survives Australia/
-Sydney selection, Avatar 7 and Continue. Native bounds confirm eleven controls;
-new-life confirmation/Android Back cancellation leaves all eight SQLite tables
-exact (three lives/twelve moments/fifteen receipts, active revision 51). The test
-emulator's default text scale is restored. All **14 affected checks / four
-suites** pass in **3.511 seconds**, strict types and fresh Hermes exports pass.
-Read [ONBOARDING_ACCESS.md](ONBOARDING_ACCESS.md) and
-[raw evidence](verification/android24-onboarding-access-20261019/).
-Game/persistence and conservative complete-production baselines stay fixed.
-Continue opening/early-game/full production work; no further file breadth.
-
-The latest native year/study review corrects one remaining journal edge case:
-FlatList still estimated the tail when new age-ten facts arrived. Life now uses
-the native ScrollView content end, preserving virtualisation, manual older-history
-reading and focused feedback. Primary school also stops showing secondary-only
-graduation/recovery guidance. All **18 affected checks / seven suites** pass in
-**11.328 seconds**, strict types and fresh Hermes exports pass.
-
-The actual native reading child advances once despite consecutive Age Up taps,
-acknowledges Biscuit's recorded loss at month ten, resumes the same year and
-reaches age ten. Real Study Harder changes grades 82→89 once. The full final
-world/backup and intermediate revisions match the six production commands
-exactly; all eleven original moments, nine old receipts and both inactive lives
-remain intact. One new moment retains the original revision-45 payload exactly.
-Final native state is revision 51, three lives/twelve moments/fifteen receipts.
-Final force-stop/cold Continue shows the latest study fact with every row in all
-eight SQLite tables unchanged.
-Read [journal/native scope](LIFE_JOURNAL.md) and
-[actual comparisons/captures](verification/android24-childhood-20261019/).
-Game/persistence remains unchanged; keep the world-28 fixture and conservative
-production baselines. Continue opening/early-game/full production work.
-
-The user's latest scope keeps **onboarding, startup, early gameplay and smooth
-buttons first**. Import/export/sharing may be skipped unless already over 80%
-complete. At that point this small file milestone already had working code,
-20 passing checks and actual native import, so its single remaining folder-save
-check was finished. Do not expand file features; return to early gameplay.
-
-[Local save files](SAVE_FILES.md) now pass **20 affected checks / five suites**
-in **22.355 seconds**, strict application/test types and fresh Hermes exports.
-The actual Android File picker fixes the SDK's mismatched scoped-cache read:
-native preview/import preserves the complete genuine reading world and all nine
-original moments, with both existing native lives intact. Directory export saves
-the selected inactive Ren life exactly while Riley remains active; all eight
-SQLite tables stay unchanged. Native share writes the valid file and opens the
-chooser, but this image has no receiving app. No external transfer is claimed.
-See [native records](verification/android24-files-20261019/). This is UI/file
-integration only; game/persistence remains the world-28 checkpoint below.
-
-Initial journal checkpoint `2c02781` is pushed with its thirteen affected
-checks / four suites and actual age-nine cold resume. The subsequent native
-age-ten new-fact case required the native content-end follow-up above; the
-[eighteen-check current scope](LIFE_JOURNAL.md) retains both historical records.
-Game/persistence and original snapshots remain unchanged.
-Native hobby selection is also corrected: details previously appeared below the
-eight-row catalogue, making the press look ineffective. Dedicated detail routes
-now open at the top with actual proficiency/payer/fee/eligibility; native/header
-Back returns to the catalogue and Activities stays selected. Actual Reading,
-Video Games and stop-confirmation cancellation leave all eight SQLite tables
-exact. All 14 affected checks / five suites pass in 10.365 seconds, strict types
-and fresh Hermes exports pass. [Leisure details](LEISURE.md) and
-[native evidence](verification/android24-hobbies-20261019/) retain the scope.
-Continue native early-game interaction review, then the full production plan;
-no more file breadth.
-
-The Android 24 software device now runs the actual Expo Go opening: custom
-creation/appearance/country, newborn, Begin Life, first Age Up/choice/result and
-cold resume. Every SQLite table stays exact during the interrupted-result cold
-startup; a second rerolled Japanese life preserves the entire original world.
-Native review fixes the welcome hero's intrinsic-size crop, legacy portrait tint,
-legacy status-bar contrast and two-parent newborn CTA spacing. Fresh captures
-confirm the corrected hero, visible colours/system text and full Begin Life.
-Read [NATIVE_OPENING.md](NATIVE_OPENING.md) for the actual raw captures/save and
-limits. All **14 affected checks / four suites** pass in **3.605 seconds**, with
-strict types and fresh Hermes exports. Game/persistence source remains exactly
-the world-28 checkpoint below. Complete reference/accessibility, physical-device
-performance, standalone and iOS gates stay open; baseline estimates stay fixed.
-This native UI/evidence checkpoint is committed and pushed as `05fe17a`.
-
-Checkpoint **`e5a4aaf` is pushed**. Its genuine
-`v28-ordinary-hobby-archive.json` was generated from that unmodified committed
-source through real SQLite and the production store. Revision 44 retains the
-actual reading result after twelve paid months and one optional practice:
-25 proficiency, two earned Smarts points, the original parent consent/payment
-history, 24 guitar months and 36 pet-care periods. All five original mixed-v1/v2
-moments remain byte-exact; four actual new moments bring the total to nine.
-Preserve all current/prior fields and both representations before the next
-game/schema/content change. Never regenerate older fixtures with newer code.
-
-The current **verified milestone is world 28 / engine 27 / content 4 /
-database 6**: reading, gaming, supervised cooking and gardening join the four
-existing hobbies. Read [LEISURE.md](LEISURE.md). All 112 domain checks and the
-connected genuine child reading/SQLite failure-retry-cold journey pass. Reader
-six keeps genuine v2 current/mixed prior bytes unchanged on upgrade, and old
-archives retain all original fields. The twelve dual-routine lives pass in
-154.477 seconds with 20,896 attended/124 paused months and unchanged game hash
-`afe7c166d6857985514bc96eee7374d416d8d7e10fc4dc279303e92bf277cabd`.
-Actual two-routine age-30/60 world/action diagnostics also pass (47.87/121.86 ms
-cloud medians, different inputs from the earlier fixed-input speed comparison).
-The complete **1,226-test / 80-suite** regression passes in **668.278 seconds**,
-with strict source/test typing, fresh Hermes exports (5.3/5.0 MB, 48 distinct
-assets) and current Metro manifests/source. Game source stayed fixed through
-the final checks. The original four-subject transparent hobby atlas is copied
-unmodified with its exact reviewed bounds. Catalogue remains 90. Native and
-broader release gates/percentage baselines remain open. The tested state and its
-genuine archive are preserved; continue the native opening/full production plan.
-
-The button fix **`8de01d7` is pushed**. Its genuine
-`v27-responsive-archive.json` was generated with that unmodified source through
-real SQLite: the committed project result at revision 33 retains the month-two
-cursor, two guitar/fourteen pet months and all original money/RNG. Four original
-v1 moments remain byte-exact; the new revision-32 deadline/current result use v2.
-Preserve all five prior worlds and both formats before extending hobby kinds.
-
-The entrypoint follow-up now primes imported/recovered/branched worlds before
-their next action, preserves valid backups when replaced current metadata is
-inconsistent, and rejects contradictory idempotent-branch metadata. All **130
-affected checks / 44 suites** pass in **74.861 seconds**, with strict types,
-fresh Hermes exports and current Metro source. Game/codec/UI source is unchanged
-from `8de01d7`; its full 1,157-test result below remains the complete regression
-checkpoint. Final follow-up game/persistence hash is
-`10e5bb40d834971628c363ff7d472fd0a5da543cd3dca561ee9b884579fd390a`.
-Resume the full production plan from the remaining four hobbies after pushing
-this small follow-up. The original and responsive genuine world-27 archives are
-both protected; do not regenerate either with later source.
-
-## Latest user priority: button responsiveness
-
-The user reported seconds of delay on ordinary presses and “Saving” appearing
-under other controls. [The verified fix](BUTTON_RESPONSIVENESS.md) keeps
-world 27 / engine 26 / content 4 and uses
-database 5, with validated immutable states, reusable ledger indexes/compressed
-blocks, byte-checked transactional save caching, focused/delayed progress and
-inactive-screen freezing. Time Machine must not reload history while hidden.
-The complete **1,157-test / 76-suite** regression passes in **717.063 seconds**,
-with strict source/test typing, fresh Android/iOS Hermes exports (5.3/5.0 MB,
-47 distinct assets) and current Metro manifests/source. Game/persistence hash
-`57dcf75ae5e75310792c86a5130dea0f6b75f1c35bf1d3338d02d67647e2a631`
-stayed fixed through final measurements/regression. Controlled cloud action
-medians improve 259.71 → 16.98 ms at age 30 and 1,086.20 → 81.29 ms at age 60;
-world-data loading improves too. The separately measured first v1 write still
-converts its history (367.30 ms at age 60). These are not native/app-startup times.
-
-Both complete seed-42 SQLite runs retain 236 commands / 79 moments. Entire live,
-backup and **all 79 prior worlds**, receipts and non-size metadata match exactly.
-Independent blocks add 3,096,576 closed bytes (29,995,008 → 33,091,584), without
-trimming history. All twelve optimized-state country/leisure lives also pass,
-matching every previously recorded semantic field and cold worlds. Native and
-large-world/storage release gates remain open. The checkpoint is pushed; resume
-the full plan after the entrypoint follow-up. Preserve the original v27
-leisure archive below before extending its saved hobby variants.
-
-This handoff was requested on 19 October 2026. All application changes, tests,
-the genuine migration fixture and deferred source/art drafts are committed
-to the **same `work` branch**. Fetch `origin/work`; do not start from `main` or
-the older `checkpoint/early-school-callbacks-20261019-1346` branch.
-
-Checkpoint **`117c4d1` is pushed**. Its genuine
-`v27-leisure-archive.json` was generated from that unmodified source through real
-SQLite. The current month-two project deadline retains two paid guitar months,
-a parent-accompanied movie and fourteen actual pet-care periods, with four
-original prior moments. The focused continuity check and strict typing pass;
-resuming finishes twelve hobby/twenty-four pet months without repeated charges.
-Preserve this archive before extending saved hobby kinds; never regenerate it
-with newer source.
-
-The current verified milestone is **world 27 / engine 26 / content 4** for
-[hobbies and paid outings](LEISURE.md). The core, surfaces and 52 domain checks
-plus a genuine pet-owning-child SQLite plan/outing/monthly rollback-retry/cold
-journey pass, with strict typing. The 54-check combined run passes in 10.996
-seconds. Fresh Hermes exports (47 assets) and current Metro manifests/source pass.
-The twelve scoped ordinary-work/pet/hobby/outing lives pass in **366.162 seconds**,
-with 10,683 attended/60 paused hobby months, 891 accepted/five refused outings
-and unchanged game hash `3add8417fde5c5b43c5414e29cd51698fe13d20a94cde4196f0d9147c2dc8f96`.
-The complete current regression passes **1,143 tests / 73 suites** in
-**788.232 seconds**, exit zero. Game source stayed fixed through the final sweep
-and regression. The genuine leisure archive above protects this committed source
-before the next saved-kind/schema expansion. The next four hobby/art subjects
-and scope are in [remaining-hobbies.md](planning/drafts/remaining-hobbies.md).
-This is partial hobby/entertainment breadth; the wider reference catalogue and
-native/production gates remain open. The prior pushed pet checkpoint remains historical evidence.
-
-World-26 checkpoint **`cfcab49` is pushed**. The genuine
-`v26-household-pet-archive.json` was subsequently generated from that unmodified
-source through real SQLite, preserving adoption/vet/play, twelve care payments,
-the actual year-seven school choice and three original prior moments. Its
-focused continuity check and strict types pass. Never regenerate old fixtures.
-
-The [reduced-density Android attempt](NATIVE_OPENING.md) used the same logical
-390×844 layout at 1× density. It again hit a pre-game System UI ANR, then the
-activity service was unavailable for Expo Go launch. Actual screenshot/selected
-logs are retained; no native gate closed. Continue independent work from the
-[hobbies/entertainment contract](planning/drafts/hobbies-integration.md), then
-remaining education, stories, extras, country/performance/native release work.
-
-The prior pet continuation was **world 26 / engine 25 / content 4 / database 4**,
-adding [persistent household pets](PETS.md). Real parents/guardians can take
-responsibility from age six, with reviewed named-payer consent and actual fees.
-Monthly food/boarding, optional care, illness/vet recovery, ownership/death/legacy,
-rehoming and permanent transport retain real financial and lifecycle histories.
-All 49 pet-domain checks and two connected real-SQLite UI journeys pass, with
-strict typing. The corrected-source pet sweep passes **12/12 complete lives**,
-all twelve countries, in **188.236 seconds**, with 1,772 care periods, forty vet
-visits and unchanged hash `982885fa55a26d1426a23aee9d04e1e158a15648fb378311a3e51f0ed3490f81`.
-Strict types, fresh Android/iOS Hermes exports (47 assets) and final current
-Metro manifests/source pass. The complete current regression passes **1,089
-tests / 70 suites** in **786.211 seconds**, exit zero. Game source stayed fixed
-through the corrected pet sweep and full regression. The genuine pet
-archive above now protects this committed state before the next schema change.
-The catalogue stays at 90; no routine pet result counts as a distinct situation.
-Native acceptance remains open. The genuine content-four first-year archive was
-preserved at `2d5eacf` before changing schema; never regenerate it with newer code.
-
-The prior early-home milestone uses **world 25 / engine 24 / content 4 / database
-4**, with **90 distinct situations**. [Early home/classroom stories](EARLY_HOME_STORIES.md)
-adds twenty scenes, five independent first-year alternatives in total, explicit
-remote-parent contexts and actual physical-household availability. Missing
-household IDs do not count as co-residence. The completed content-three 120-life
-sweep below is historical; no expanded content-four result is claimed. All **1,038 tests / 68 suites** pass in **714.295 seconds**, with strict
-source/test typing, fresh Android/iOS Hermes exports (5.2/4.9 MB, 46 assets)
-and current Metro manifests/source. No expanded content-four sweep is claimed.
-[The original pet integration checklist](planning/drafts/pets-integration.md) is
-retained; the current implementation and evidence are in PETS.md above.
-
-[Local display settings](DISPLAY_SETTINGS.md) now persist Light/Dark/Use Device
-Appearance independently of all lives. Writes publish only after SQLite succeeds;
-failed/corrupt/future preferences have retry/explicit reset without rewriting life
-archives. Shared pages set theme-aware status-bar props. All **107 UI/state/
-persistence checks / 36 suites** pass in **100.108 seconds**, plus the final six
-opening/navigation checks, strict typing, fresh Hermes exports (46 assets) and
-current Metro manifests/source. Expo config introspection confirms Android/iOS
-automatic support with SDK-aligned `expo-system-ui` 57.0.4. No native rendering or
-standalone build pass is claimed. The complete 983-test regression below predates
-this display follow-up; the 1,038-test content-four result above includes it.
-
-The basic creation form now keeps optional family background/preferences under
-More Options, with a visible summary for a selected royal family. All fourteen
-relevant component checks pass, including opening the optional controls, country
-eligibility and the actual royal birth/save-failure/retry/cold path. Strict typing,
-fresh Android/iOS Hermes exports and current Metro source pass. Game source is
-unchanged from the verified scholarship milestone. Native layout remains open.
-
-Creation, appearance and newborn pages now reserve the bottom safe area, keeping
-their final controls above the home indicator/navigation region. Strict source/
-test typing, eleven relevant component checks and fresh Android/iOS Hermes
-exports pass. This is a layout correction, not native visual acceptance.
-[The Android 29 attempt](NATIVE_OPENING.md) booted at 390×844 logical pixels but
-reproduced a System UI ANR before Expo Go launched; installation/Metro connection
-did not yield usable gameplay. Its actual OS-failure screenshot/logs are retained.
-The isolated software emulator is stopped. Native opening gates remain open.
-
-The prior scholarship milestone uses **world 25 / engine 24 / content 3 /
-database 4**, adding two [restricted tuition scholarships](SCHOLARSHIPS.md).
-They use saved applications, separate admission, explicit acceptance and actual
-tuition waivers rather than cash grants. Renewal records grades/resources and
-reconciles the remaining bill and loan to the ledger. All 44 new domain checks
-and the real SQLite application/enrolment/renewal rollback-retry/cold journey
-pass. The complete **983-test / 64-suite** regression passes in **743.271
-seconds**, with strict typing, fresh Android/iOS Hermes exports (46 assets) and
-current Metro manifests/source bundles. The separate pure-engine sweep passes
-**120/120 lives**, all twelve countries, in **1,994.655 seconds**, exit zero. Its
-[per-seed record](verification/life-sweep-v25-120-20261019.json) retains the
-first-available-choice scope and overlapping-seed limits. The unchanged
-world-25 game hash is
-`4875659620673b3e9a2e4c99b8777058d714e7237fcc6a1e95d7b47d8bfbb3c8`.
-Game source stayed unchanged from startup through the final summary. The
-1,000-seed/person, all-choice, 120-year and multi-generation gates remain open. The twenty early-life drafts were subsequently integrated by content four above.
-
-The previous milestone adds **actual school outcomes and evening recovery**;
-see [EDUCATION_RECOVERY.md](EDUCATION_RECOVERY.md). That milestone used **world
-24 / engine 23 / content 3 / database 4**. At the configured school-completion
-age, 50% grades and twelve recorded study months are required. Failure grants
-no qualification. Two no-fee evening paths fit around work: 24 attended months
-for a missing secondary qualification, or twelve for entry-grade improvement.
-Attendance pauses for actual absence, hospital care, custody/pursuit and service
-assignments. Actual prison study can qualify through its separate route without
-inventing evening credits. Withdrawal, failure, relocation, death and legacy
-retain the original records. Country ages and the authored-country status are
-unchanged; detailed national stages and scholarships remain open.
-
-The genuine pre-change archive in
-`tests/fixtures/v23-low-grade-school-archive.json` was generated at `55fee6b`
-through eighteen actual years and real SQLite commands. It retains the old
-0%-grade diploma and two earlier moments. Migration adds empty new histories
-without changing people, earned qualifications, bound choices, money or RNG.
-Continuing its unfinished seventeenth-year checkpoint applies the new rules only
-to future school completion. Never regenerate this archive with newer source.
-
-The clean final regression passes **938 tests / 62 suites** in **697.17 seconds**,
-including twelve complete seeded lives, all genuine migrations, format-only Intl
-startup and the new connected SQLite/UI journey. That journey branches the real
-archive, fails/retries evening enrolment and the final awarding command, then
-resumes the same course/results cold without duplicate qualifications. Strict
-source/test typing, fresh Android/iOS Hermes exports (5.1/4.8 MB, **46 assets**)
-and current Metro manifests/source bundles also pass. Two royal UI checks now
-share one actually simulated childhood, decode independent worlds and have
-explicit cold-history budgets; the older test that skipped eleven study months
-now attends them. Native visual, performance and release gates remain open.
-
-Five original school-art subjects are integrated into study, reports, saved arcade/
-project plans and evening classes. The six-subject unmodified atlas is source/
-browser reviewed at 48/128px on light/dark cards; its trip subject is reserved for
-later content, not a new trip mechanic. [The gallery](verification/school-art-20261019.png)
-is browser evidence, not a native screen comparison. The story catalogue remains
-**70 distinct situations**. The listed callback acceptance cases were completed
-before this milestone; see [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md).
-
-A fresh world-24 direct Node sweep passes **120/120 lives** (seeds 0–119) in
-**2,040.171 seconds**, covering all twelve countries. Its game-source hash
-`7680a530c54ea2a17e457f860db3a3ce793e993ff300eb2870f9c19103a32946`
-is unchanged at completion. [Every seed](verification/life-sweep-v24-120-20261019.json)
-is recorded. This is pure-engine cloud evidence, with first available choices;
-overlapping earlier/default seeds are not additional distinct lives.
-The completed world-23 sweep remains historical evidence: 120 distinct seeds,
-all twelve countries, 2,209.809 seconds and 43 matching partial-Jest terminal
-comparisons. It does not replace a current-world result. The 1,000-seed,
-1,000-person, 120-year and multi-generation release gates remain open.
-
-Database four still writes bounded checkpoint-v1 live/recovery/branch/import
-rows and reads old plain rows without an eager rewrite. The current world-24
-real SQLite run commits 236 commands and retains all 79 historical moments:
-**29,986,816 bytes closed / 36,397,376 bytes peak**. Cold reload preserves the
-entire world exactly. [Current measurements](verification/sqlite-history-v24-20261019.json)
-are cloud diagnostics, not native latency or 120-year/multi-generation acceptance.
-The world-23 real
-79-observation workload measured 29.9 MB closed and 36.3 MB peak, compared with
-72.4/103.4 MB for plain live/backup rows, with entire worlds/history/receipts
-unchanged. This is historical scoped evidence, not a new-world native/storage
-acceptance pass. The conservative 120-late-checkpoint projection was 95.7 MB.
-See [PERFORMANCE.md](PERFORMANCE.md) and the machine-readable records.
-
-[EDUCATION_SOURCE_AUDIT.md](EDUCATION_SOURCE_AUDIT.md) records partial official
-source research. No complete country profile is release verified. Overall and
-opening baseline estimates remain unchanged.
-
-## User priorities and authorisation
-
-Build the entire production game through the [master plan](planning/MASTER_PLAN.md)
-and [preserved specification](planning/source-specification.md). Do not stop at
-the first playable life. Work autonomously through tested, committed milestones.
-Keep [PROGRESS.md](PROGRESS.md) honest about implemented, unimplemented and
-unverified work. During active work, **commit AND push at a safe point at least
-every two hours**; do both before another handoff. No sub-agents are authorised.
-
-The user explicitly redirected work to **onboarding, Begin Life and the first
-years of playing** after runtime errors and substantial visual gaps. Fix reported
-startup/playability issues before adding later features. Keep the game free,
-offline, with local saves/export/import; no Premium, ads, subscription or cloud
-account. Target adults with non-graphic mature themes and all twelve launch
-countries. All 27 reference images in `design/` were already opened and reconciled
-in [the design reconciliation](planning/design-reconciliation.md).
-
-The conservative overall estimate remains about **50%**. The per-area baseline
-is in [OPENING_PLAN.md](OPENING_PLAN.md). Passing tests does not establish native
-visual fidelity or release readiness; do not inflate percentages for this checkpoint.
-
-## Stable startup fix to preserve
-
-`0dde6b6` fixed both reported Intl crashes in `src/game/money.ts`: Hermes may
-reject BigInt inputs and omit `formatToParts`. Money display now uses only safe
-Number probes with `.format`, then assembles the actual arbitrary-size balance
-as exact text. It does not need `formatToParts`, `resolvedOptions` or `signDisplay`.
-Missing/unusable Intl gets an exact readable fallback. Preserve all currencies,
-signs, grouping, fractions, JPY precision and existing saves.
-
-The prior world-22 checkpoint `52d081b` had **779 passing tests / 53 suites**,
-strict source/test typing, Android/iOS production Hermes bundles and current
-Metro source checks. The format-only opening check follows real SQLite creation,
-Begin Life, first Age Up, choice/result, save, cold resume and all four starting
-tabs. Users should pull `work`, restart `npx expo start -c`, and reload; clearing
-the bundler cache does not require deleting saved lives.
-
-## Callback implementation and completed automated acceptance
-
-The callback checkpoint moved to **world 23 / engine 22 / content 2** and added
-`world.storyThreads`. Older saves migrate to an empty history without executing
-a callback, consuming RNG or changing existing outcomes. A genuine world-22
-archive in `tests/fixtures/v22-school-story-archive.json` preserves an actual
-school story result and its earlier decision/checkpoint. It was generated from
-world-22 source at `2f25f5e`, not by editing version tags.
-
-New files:
-
-- `src/game/systems/storySchemas.ts`: saved threads and typed schedule/resolve effects.
-- `storyContext.ts`: actual school/peer/teacher/parent availability and saved location.
-- `stories.ts`: permission draw, real quote, due-month offers, payments/effects and cancellation.
-- `storyValidation.ts`: origin, permission arithmetic, pending references and payment reconciliation.
-- `tests/game/story-callbacks.test.ts` and `tests/ui/story-callback-flow.test.tsx`.
-
-The existing arcade invitation can ask the real co-resident parent for permission.
-One NPC-stream draw is saved with chance and trust at request. Refusal books and
-charges nothing. Acceptance schedules next month; actual attendance charges the
-named parent's available local-currency bank account once, with a real ledger
-reference. An unaffordable outing disables attendance while declining stays free.
-The player and party host receive no invented cash, gifts or achievements.
-
-One new distinct situation, `school-project-promise`, offers a genuine shared
-project with the current peer and teacher, due two months later. Its callback
-changes actual bounded grades, energy, peer bond and teacher trust. It grants no
-qualification. That checkpoint's catalogue contained **50 situations**; callback/result
-steps do not count as additional distinct stories.
-
-The scheduler runs after monthly mortality/travel. Saved decisions use the
-existing priority queue, so urgent medical/legal events can precede a callback.
-The annual cursor pauses at the real month and resumes the remaining months.
-Cancelled plans retain their original identities and remove their own queued
-decision. Another parent, classmate or teacher is never silently substituted.
-
-## Original callback checkpoint verification (historical)
-
-- The new **28 checks / 2 suites pass**, including all twelve party currencies,
-  saved permission/refusal, funds/decline, all project branches, exact due months,
-  repeat/replay rejection, cold results and remaining-year progression, hospital/
-  wanted cancellation, school change, death/priority-queue cleanup, tamper rejection
-  and genuine world-22 current/prior archive migration.
-- The native-component flow uses real SQLite: origin failure/retry preserves RNG
-  and permission, due-choice failure/retry preserves money, cold results preserve
-  the payment and cursor, and completing the year does not charge twice.
-- The complete world-23 regression passes: **808 tests / 55 suites**, 476.624 seconds,
-  including twelve complete seeded lives and the new callback/native-component
-  flows. Strict application/test typing and fresh Android/iOS production Hermes
-  exports pass (5.1/4.8 MB, 45 assets). Both current Metro source bundles return
-  HTTP200 and contain the new callbacks and exact-money code. The deferred archive's
-  seven file hashes and this handoff's local links were also checked.
-
-The 808-test result describes the original transfer checkpoint. The continuation
-completed the additional automated callback cases listed below; native/release
-acceptance and the complete production game remain unfinished.
-
-The originally remaining callback cases now have explicit connected checks:
-real travel/custody, permanent relocation, teacher departure/replacement, parent
-household change/death, player death and actual existing-child legacy, month-12
-medical/legal queues and grade/bond caps. The native-component check also proves
-atomic cancellation of two callbacks through SQLite failure/retry/cold resume.
-See [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md) for fixture scope and limits.
-Keep the 120/1,000-life performance gate open. The soak wrapper now accepts an
-explicit count and scales its timeout, with per-life progress on expanded runs.
-The world-23 120-seed pure-engine run passed; the new world-24 sweep is in
-progress. The 1,000-seed, 120-year, multi-generation and native gates remain open. The current content-three history has 27.3 MB of
-actual payloads and projects 95.7 MB for 120 repeated late checkpoints, above the
-planned 50 MB budget; see [PERFORMANCE.md](PERFORMANCE.md).
-
-## Cloud environment and native limitations
-
-Use the repository's existing checkout, not an extra worktree. Node **24.19** and
-npm **11.9** are validated. No application secret, account or backend is required.
-Use `npm ci` with the lockfile; if the default cache is not writable, the verified
-command is `npm ci --cache /workspace/.cache/npm`. Run `npm run typecheck`, targeted tests, then the
-required regression and `EXPO_OFFLINE=1 npx expo export --platform all`. SDK 57's
-offline `expo install --check` works. Dependencies were aligned, including explicit
-`expo-font ~57.0.4`; do not force dependency upgrades or change HOME/proxy/TLS.
-
-For cloud localhost Metro, keep CI unset and use Node's IPv4 preference:
-
-```bash
-env -u CI EXPO_OFFLINE=1 EXPO_NO_TELEMETRY=1 EXPO_UNSTABLE_HEADLESS=1 \
-  __UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo \
-  node --dns-result-order=ipv4first ./node_modules/expo/bin/cli start \
-  --localhost --port 8081 --max-workers 2
-```
-
-Inspect existing listeners before starting another server. `/status` must respond
-on `127.0.0.1:8081` for `adb reverse`; without IPv4 preference this environment
-bound only `::1`. Fetch Android/iOS manifests and actual current source bundles.
-Do not claim readiness from a PID/open port alone or present localhost previews.
-Services, tool caches and running processes need not survive a new cloud chat.
-
-A custom Android build remains blocked by the active policy: the required RN
-0.86.3 AAR redirects to `repo.reactnative.dev` and receives HTTP403. The exact
-domain is saved in the environment draft but has not been observed in the active
-policy. Saving a draft does not apply/publish it. Do not retry unchanged denied
-downloads or use a mirror/bypass. Recheck the managed runtime after a real change.
-
-The official Expo Go **57.0.9** APK from
-https://github.com/expo/expo-go-releases/releases/tag/Expo-Go-57.0.9 installed on
-the software Android 15 emulator and downloaded this checkout's SDK57 bundle,
-logging `Running main`. Repeated Android System UI/Phone hangs prevented usable
-opening interaction and visual comparison. Bundling and `Running main` are not a
-native pass. The unaccelerated emulator was stopped; there is no completed native
-test life. iOS simulator execution requires macOS. Native picker/share, portraits,
-blend modes, layout fidelity, performance and release acceptance remain open.
-
-## Full-game backlog and preserved work
-
-Persistent school contacts, clubs, conduct, help, reports, grade/credit-based
-completion and evening recovery are connected. Scholarships and deeper country/
-stage-specific paths remain open.
-The broad systems in [PROGRESS.md](PROGRESS.md) are partial implementations, not
-release-complete features. Continue childhood depth and missing education paths,
-then the broader catalogue, hobbies/entertainment, pet balance/depth, achievements/challenges/
-heirlooms, autonomous NPC depth, remaining art, accessibility, country-rule source
-verification, balance, performance, multi-generation sweeps and native release gates.
-At least **160 more distinct reviewed stories** are still needed after the
-content-four expansion; system offers/reports are not substitutes.
-
-The original pet draft source and opaque art are preserved in
-[planning/deferred-work](planning/deferred-work/README.md). World 26 adapts that
-work into the current schema and uses a reviewed transparent atlas. Preserve the
-original archive as provenance; do not reapply its older schema over the adaptation.
-The original detailed callback plan is also preserved there; this handoff takes
-precedence over its stale implementation-status paragraphs.
+# Continue Dreams: Life Simulator
+
+Read this first, then [PROGRESS.md](PROGRESS.md) and
+[OPENING_PLAN.md](OPENING_PLAN.md). Continue `YusufYacoobali/dreams-life-sim`, branch
+`work`, through the complete production plan. The user's priority is smooth
+buttons, startup/onboarding and early gameplay. All 27 design references are
+reconciled; reuse their canonical flows and the existing generated art.
+
+The user authorizes autonomous implementation, testing, fixes, documentation,
+commits and pushes. **Commit AND push at a safe point at least every two hours.**
+Stop only for material product decisions, genuine blockers or unavailable tools.
+Do not spawn agents without explicit authorization. The full production estimate
+remains approximately 50%; the game is not release-ready.
+
+Further import/export/sharing breadth stays parked. That existing implementation
+was already beyond the user's 80% exception and its last native folder-save check
+passed. Read-only Saved Lives summaries are complete. Do not expand file features.
+
+## Current tested source
+
+World **29 / engine 28 / content 5 / database 6** connects ordinary local
+workplace contacts and annual supervisor feedback. Read [WORKPLACES.md](WORKPLACES.md)
+for mechanics and limits. Read-only virtualised browsing creates no people or
+saves. Explicit introductions create one qualified adult supervisor and two
+colleagues; returning to the employer reuses them. Real monthly work pays them
+through existing payroll. Actual departure/move/death closes the observed roster;
+temporary absence retains identity. Replacements happen during work progression.
+
+Feedback requires three paid periods, the available current supervisor, four
+energy, and no prior discussion that calendar year for the same employment.
+Saved trust/chance/draw determine a bounded performance/relationship improvement
+or a declined discussion. There is no salary or extra-tenure award. Company staff
+and special-career teams remain in their existing flows; retained foreign jobs
+cannot invent local contacts. Raises and richer work conflicts are still open.
+Old worlds migrate with an empty workplace history and retain all prior fields,
+bound events/results, money and RNG apart from version tags.
+
+- Complete regression: **1,318 tests / 94 suites**, **725.302 seconds**, exit zero.
+- Strict application/test types and fresh Android/iOS Hermes exports pass.
+- Current-source lifetime gate: **120 distinct immutable seeds 0–119** across
+  twelve countries, **668.791 seconds**, empty stderr/exit zero. Ages 40–98,
+  max 24 people / 55,199 ledger rows. This first-eligible policy does not perform
+  optional introductions; separate domain/UI/native checks cover those actions.
+  The same ordinary-life metrics match prior content-five seeds, not additional
+  distinct cases. The older 1,000-seed pass belongs to world 28 / content 4.
+- Fresh cloud engine/SQLite medians: Begin 1.45 ms, first choice/Continue
+  2.54/2.20, age-seven choice/resumed Continue 6.51/14.76, age-30/60 routine
+  15.98/93.92, introduction 10.60, feedback 11.42. All **45 warm samples avoid
+  full checkpoint decode**; every cold current/backup is exact. The introduction
+  input exactly matches actual native 49; the feedback input is a normally
+  prepared engine year. These are not physical-device/startup/navigation timings.
+
+Game hash: `ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db`.
+Combined game/persistence hash:
+`9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878`.
+Runner hash: `b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e`.
+All verification processes have closed; do not rerun an unchanged gate.
+[Complete source/check record](verification/workplaces-20261020.json),
+[raw regression](verification/regression-workplaces-20261020.txt),
+[lifetime scope](verification/life-sweep-workplaces-120-20261020.json),
+[action measurements](verification/action-latency-workplaces-20261020.json).
+A later runtime-source change needs its own verification.
+
+There are **100 distinct authored situations / 250 minimum**, not including
+system reports/offers: **150 remain**. Content five's ten early-teen situations
+and callback-origin guard are unchanged. Excluding recorded callback origin IDs
+also protects sparse older histories; do not remove that selection guard.
+
+## Actual native acceptance and current save
+
+[Workplace native proof](verification/android24-workplaces-20261020/) continues
+Amahle from 47 with a real weekend job, exact introduction 50, cold result,
+exact acknowledgement 51, actual search/profile/Back, twelve paid months,
+feedback 54, cold result and exact acknowledgement **55**. Feedback naturally
+declines (chance 67 / roll 87), costs four energy and awards no pay/performance.
+The accepted branch has separate domain and SQLite/UI checks. All simulation
+fields match; one hiring-result string and fourteen annual journal strings have
+explicit Android-vs-Node ZAR spacing exceptions, without normalizing native data.
+
+All four original live/backup rows, thirty-two old moments/metadata and thirty-five
+old receipts stay exact. Native state: **five lives / thirty-three moments /
+forty-three receipts**, Amahle `life_native_arcade_v28` active at **age 17,
+revision 55**, no pending event or annual cursor. Original Riley
+`life_content4_bubbles` remains revision 53; branch
+`life_mvg00bcv_1sh3wmp_0` remains 38. The final backup is original native feedback
+54; the new Before Age Up snapshot is original introduced world 51.
+
+Native callback acceptance previously passed real reading/school-help/deadline/
+outing permission/payment/cold result/remaining-year checks. Their original
+source and narrower scopes remain in PROGRESS and verification records. No file
+breadth, native SQL/world/stat/RNG edits or forced outcomes are used in these
+journeys. The separate acceptance life's preparation is documented; do not call
+it a native birth-to-seventeen run.
+
+Useful current environment details (recheck if missing):
+- ADB: `/workspace/.cache/android-native-check/sdk/platform-tools/adb`, serial
+  `emulator-5560`, rooted isolated software Android 24 / official Expo Go 57.0.9.
+- Metro runs on port 8081 with ADB reverse; use
+  `__UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo EXPO_OFFLINE=1 CI=1`.
+- Native DB: `/data/user/0/host.exp.exponent/files/SQLite/dreams.db` plus WAL.
+  Copy both for read-only verification; never modify native save data.
+- Latest read-only copies: `/tmp/dreams-workplace-finished-db` (55),
+  `/tmp/dreams-workplace-feedback-result-db` (54),
+  `/tmp/dreams-workplace-before-feedback-db` (53),
+  `/tmp/dreams-workplace-introduced-db` (51),
+  `/tmp/dreams-content5-phone-finished-db` (original 47).
+- `/tmp/dreams-native-ui.py` locates actual accessibility controls and performs
+  normal input. Await each ADB/session completion before dependent gestures;
+  immediate screenshots often retain a transitional frame on the slow VM.
+- Native cold boot may take two minutes on TCG. Use fresh UI hierarchies and
+  actual names (welcome accessibility label is `Continue as Amahle Nkosi`).
+  Expo's require-cycle footer notification has close at (358,748).
+- `/tmp/dreams-workplace-native-verify.cjs` produced the checked native record.
+  Do not rerun historical fixture generators using newer source.
+
+## Preserve historical evidence and the responsiveness fix
+
+Genuine regression archives must retain their original producer/source/bytes:
+- `v28-native-teen-archive.json`: clean pushed **3c6df7e**, actual result 46,
+  sixteen original mixed v1/v2 moments, SHA
+  `396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82`.
+- Native arcade archive: clean **e29e634**, actual paid result 34 / twelve moments.
+- Native school archive: clean **1d1e696**, actual Riley 53 / ten Riley moments.
+- Ordinary-hobby/earlier archives and deferred originals keep their provenance;
+  never regenerate historical payloads with newer source or prune history.
+Before another workplace schema change, preserve the actual current native
+workplace result with the clean pushed world-29 producer if needed.
+
+Keep certified immutable worlds/ledger rows, compression block reuse and the
+repository's exact cached-payload check. Cache only after durable commit.
+Do not reintroduce whole-checkpoint decoding/cloning on ordinary presses.
+Save-before-publish, atomic backup/current/receipt/moment writes and deterministic
+failure/retry must remain intact. Busy feedback belongs only to the submitted
+control, with the existing frame yield and delayed spinner; unrelated subtitles
+must remain intact. Freeze background navigation stacks and avoid hidden history
+reads. Import/recovery retain their returned authoritative branch summary.
+Read-only Saved Lives previews must preserve the active warm action cache.
+Native money formatting must keep the checked simple formatter and exact money;
+Android's supported Intl subset cannot use the previously failing advanced path.
+
+## Next work and open release gates
+
+Continue the complete production plan with ordinary work depth: real raise
+requests, believable pay progression and richer interviews/hours/work conflicts,
+then more named-contact work/adult stories toward the remaining 150. Keep teen
+employment, qualifications, genuine save migration and fast ordinary actions
+covered. Reopen the relevant design reference before each UI milestone.
+
+Broader content, national law/education/country-rule source verification, deeper
+NPC autonomy, balance, multi-generation/120-year/1,000-person integration,
+<50 MB storage, full native fidelity/accessibility and physical performance remain
+open. Keep the conservative full-game percentage and explicit partial-feature
+matrix in PROGRESS. A scoped source sweep is not a complete-game release gate.
+
+Managed network status must be checked on resume/diagnosis. Current package/
+GitHub policy works; VPN is disabled. Do not expose credentials or bypass policy.
+The standalone RN artifact at `repo.reactnative.dev` was denied; don't retry it
+under the unchanged policy. iOS hardware/build execution needs macOS, unavailable
+here. Offline Hermes exports and Expo Go do not establish standalone/iOS release
+acceptance. The older long handoff remains in Git at `dd62665`; historical detail
+and complete evidence links stay in PROGRESS and the verification directory.

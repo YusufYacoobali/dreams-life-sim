@@ -44,11 +44,12 @@ import { refreshSchools, resolveSchool, SchoolCommand, schoolCommandSchema, scho
 import { refreshStoryThreads, resolveStory, scheduleStory, storyMonth } from './systems/stories';
 import { RecoveryCommand, recoveryCommandSchema, recoveryMonth, refreshRecoveries, resolveRecovery } from './systems/educationRecovery';
 import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshipCommandSchema } from './systems/scholarships';
+import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -103,6 +104,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   }
   settleEstate(world, personId);
   refreshStoryThreads(world);
+  refreshWorkplaces(world);
 }
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
@@ -112,6 +114,7 @@ function processMonth(world: World) {
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
   recoveryMonth(world);
   schoolMonth(world);
+  workplaceMonth(world);
   householdMonth(world);
   const actors = financialActors(world);
   const openingCash = new Map<string, bigint>();
@@ -258,7 +261,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); world.revision++; return validateWorld(world, immutable);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -297,6 +300,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const recovery = parseActivity(recoveryCommandSchema, command);
     const scholarship = parseActivity(scholarshipCommandSchema, command);
     const work = parseActivity(workCommandSchema, command);
+    const workplace = parseActivity(workplaceCommandSchema, command);
     const finance = parseActivity(financeCommandSchema, command);
     const assets = parseActivity(assetCommandSchema, command);
     const market = parseActivity(marketCommandSchema, command);
@@ -324,6 +328,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (recovery.success) resolveRecovery(world, recovery.data);
     else if (scholarship.success) resolveScholarship(world, scholarship.data);
     else if (work.success) resolveWork(world, work.data);
+    else if (workplace.success) resolveWorkplace(world, workplace.data);
     else if (finance.success) resolveFinance(world, finance.data);
     else if (assets.success) resolveAssets(world, assets.data);
     else if (market.success) resolveMarket(world, market.data);
@@ -351,6 +356,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshScholarships(world);
   refreshStoryThreads(world);
   refreshLeisure(world);
+  refreshWorkplaces(world);
   world.revision++;
   return validateWorld(world, immutable);
 }

@@ -1,0 +1,131 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "dd62665",
+  "scope": "Persistent ordinary-work contacts, supervisor feedback, empty-history migration and warm action path",
+  "recordedAt": "2026-10-20T04:22:10.173Z",
+  "gameSourceHash": "ffddd2e4436f75f6395deed03e6ebb88f10efa262186e5990b6f0745b95fb3db",
+  "combinedGamePersistenceSourceHash": "9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878",
+  "sweepToolSha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "versions": {
+    "world": 29,
+    "engine": 28,
+    "content": 5,
+    "database": 6
+  },
+  "source": {
+    "src/game/systems/workplaceSchemas.ts": "eb6ef3d42c7fcec4c00acaad94f2aceb1f9accf6cb06dc73d8296c2ed5d3af42",
+    "src/game/systems/workplaces.ts": "bd7536dd2208433ff0dc2985510c6d2a489e16a0f39e61c6913f31cbb6a2306e",
+    "src/game/systems/workplaceValidation.ts": "6190de3f73539211da1568bd57da54b2ad457e9c76065844e8d9f50b718d0d6f",
+    "src/game/model.ts": "d90182c7a0adedb0c6329969877f66b1a533fa1d0ccfc9f19d57e2803511930f",
+    "src/game/createLife.ts": "75a97bd9cec088c438bdda2b89a73158be42444f3c6a219ad2a04d237e6ac0b5",
+    "src/game/engine.ts": "caeebd297bde776e9e6231df0f41924284e797271c5b4ef5572cc8d3922925c9",
+    "src/game/systems/work.ts": "06e12f8f076ea750811bb415351144f390f3fe28be6d768e58dddd6058d8ae62",
+    "src/game/systems/households.ts": "68bb93d010cfff207a64ba43bd08d8503e2358e09493130eef113356569f0cad",
+    "app/(game)/coworkers.tsx": "53a919919b491dce39268e9f80166e68aee58f51d81a7705ef204d09be5ef389",
+    "app/(game)/person/[id].tsx": "cfee4828a6007762cabad65c205794c871fd152fb12b9ab132aa105d3dc8b243",
+    "app/(game)/work.tsx": "0869652c7e73677b01e81d4d23618c4b46dcab212b517668e2f12aa2156d251b",
+    "app/(game)/_layout.tsx": "3b508a50e6f9844240b2275dc49acf7b7636b5aa8eaac31d3954f94d1541e079",
+    "tools/benchmark-actions.cjs": "37294bc05aaf98129cc69e23128761f6b93dd0382c9b6b2bdf996ef1871b4294",
+    "tests/game/workplaces.test.ts": "8fb5662cc27e8ee3d4ddc8dbd6ca0dccb946ded4c4ed84423fdaedb51d09cbee",
+    "tests/ui/workplace-flow.test.tsx": "7058109c0a29dfe2a52aad44719e3eadfe453d17cdc3bf55d65a74cced74ca44",
+    "tests/persistence/native-teen-archive.test.ts": "593ed9c7dda8e3ca38303bd30ac717ef40e4cfb4a87f5d5fad9821f6b9db6d20",
+    "tests/persistence/native-arcade-archive.test.ts": "fed7a436f65c0d20ec3d7917cc9cd3b9fe8827c78c8ec679972f30aa1e3967ba"
+  },
+  "catalogue": {
+    "distinctSituations": 100,
+    "minimum": 250,
+    "additionalNeeded": 150,
+    "newStorySituations": 0
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1318,
+      "suites": 94,
+      "seconds": 725.302,
+      "exitCode": 0,
+      "raw": "regression-workplaces-20261020.txt",
+      "rawSha256": "85e2223340190f39746ddcca4f51f61836c8177de948173c9e546b3b03258c65"
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "currentSourceLifetimeSeeds": 120,
+    "currentSourceLifetimeRecord": "life-sweep-workplaces-120-20261020.json",
+    "genuineNativeTeenArchive": "tests/fixtures/v28-native-teen-archive.json",
+    "archiveProducerCommit": "3c6df7e",
+    "archiveSha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+    "all17OriginalWorldFieldsPreservedApartFromVersionTags": true,
+    "oldMomentPayloadsAndMetadataUntouched": true,
+    "nativeRecord": "android24-workplaces-20261020/journey-exact.json",
+    "nativeIntroductionAndFeedbackColdAll8TablesExact": true,
+    "nativeIntroduction50Ack51Feedback54Ack55EntireWorldsExact": true,
+    "nativeAnnual52SimulationExactWith14EnumeratedCurrencyTextExceptions": true,
+    "nativeJobResult48OneEnumeratedCurrencyTextException": true,
+    "nativePrevious4WorldsBackups32Moments35ReceiptsExact": true,
+    "nativeFinalRevision": 55,
+    "nativeCounts": {
+      "lives": 5,
+      "moments": 33,
+      "receipts": 43
+    }
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-315395af05f5a2353f182a7461f4b5d3.hbc",
+      "bytes": 5394179,
+      "sha256": "436fe2b4a9e4e004dd0df7b29bf5e1737574ee4ea215d45cb7adc65b5c5defd5"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-8dadff3e91309f0e25c6f7a5b3b4cd4c.hbc",
+      "bytes": 5089888,
+      "sha256": "0e9508d4b81ea2c980a85a185ae1a44639eeb3bff3ef1cc9b15a535d740dc01e"
+    }
+  ],
+  "actionDiagnostics": {
+    "raw": "action-latency-workplaces-20261020.json",
+    "rawSha256": "b557a858ee6ca8f5882fe7ca737273c342a29c953ff52b36f83cacee0f8408f2",
+    "samples": 45,
+    "allWarmSamplesAvoidFullCheckpointDecode": true,
+    "allColdCurrentAndBackupWorldsExact": true,
+    "medians": [
+      {
+        "label": "Begin Life",
+        "totalMs": 1.4542050000000017
+      },
+      {
+        "label": "First-year choice",
+        "totalMs": 2.539064999999937
+      },
+      {
+        "label": "First-year choice Continue",
+        "totalMs": 2.1997340000002623
+      },
+      {
+        "label": "Age-seven callback",
+        "totalMs": 6.514115999999831
+      },
+      {
+        "label": "Age-seven callback Continue",
+        "totalMs": 14.757821000000149
+      },
+      {
+        "label": "Age-30 routine",
+        "totalMs": 15.98077899999953
+      },
+      {
+        "label": "Age-60 routine",
+        "totalMs": 93.92297599999984
+      },
+      {
+        "label": "Prepared teen coworker introduction",
+        "totalMs": 10.598243999997067
+      },
+      {
+        "label": "Prepared supervisor feedback",
+        "totalMs": 11.423253999997542
+      }
+    ],
+    "preparedIntroductionInputExactlyNative49": true,
+    "scope": "Cloud Node with on-disk SQLite; seven original inputs plus two normally prepared workplace inputs; not native timing"
+  },
+  "limits": "Ordinary external local jobs only; company/special-career teams stay separate. Raises, richer hours/interviews/conflicts remain open. Current lifetime gate 120 distinct seeds; earlier 1000 are world28/content4. No complete-game, physical p95, standalone/iOS, every optional action or 120-year/1000-person/multigeneration claim. Further file features remain parked."
+}
