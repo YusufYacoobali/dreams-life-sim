@@ -16,6 +16,7 @@ export default function Extras() {
     <ActionRow title="Challenges" subtitle={progress.challenges.filter(item => item.complete).length + ' / ' + progress.challenges.length + ' completed'} icon={<Illustration id="journal" />} onPress={() => router.push('/challenges')} />
     <ActionRow title="Heirlooms" subtitle={inheritedPossessions(world).length + ' inherited possessions in your care'} icon={<FamilyArt id="gift" size={40} />} onPress={() => router.push('/heirlooms')} />
     <ActionRow title="Life Summary" subtitle="Your journal and recorded milestones" icon={<Illustration id="journal" />} onPress={() => router.push('/life-summary')} />
+    <ActionRow title="Statistics" subtitle="Recorded counts and personal receipts" icon={<FameBusinessArt id="growth" size={40} />} onPress={() => router.push('/statistics')} />
     <ActionRow title="Social Media" subtitle="Your profiles and posts" icon={<FameBusinessArt id="social" size={40} />} onPress={() => router.push('/social-media')} />
     <ActionRow title="Businesses" subtitle="Your companies and their progress" icon={<FameBusinessArt id="business" size={40} />} onPress={() => router.push('/business')} />
     <ActionRow title="Fame" subtitle="Your public reputation" icon={<FameBusinessArt id="fame" size={40} />} onPress={() => router.push('/fame')} />
