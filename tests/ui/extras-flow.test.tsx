@@ -50,7 +50,7 @@ test('real child Extras, filters, milestone Back, goal routes, heirlooms, help a
   mockParams = { id: 'care-and-craft' }; view.rerender(frame(<Challenge />));
   expect(screen.getByRole('progressbar', { name: 'Overall progress' })).toHaveAccessibilityValue({ min: 0, max: 100, now: 98 });
   expect(screen.getByText('1 / 2 goals completed')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
-  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Creators', '/creators'], ['patient-investor', 'Investments', '/investments'], ['paid-for-property', 'Assets', '/assets']]) {
+  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Special Careers', '/special-careers'], ['patient-investor', 'Investments', '/investments'], ['paid-for-property', 'Assets', '/assets']]) {
     mockParams = { id }; view.rerender(frame(<Challenge />));
     fireEvent.press(screen.getAllByRole('button', { name: 'View ' + label })[0]); expect(router.push).toHaveBeenLastCalledWith(route);
   }

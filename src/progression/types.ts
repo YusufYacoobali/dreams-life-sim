@@ -1,6 +1,6 @@
 export type ProgressCategory = 'life' | 'career' | 'wealth' | 'special';
 export type ProgressArt = 'school' | 'study' | 'work' | 'hobby' | 'pet' | 'rings' | 'travel' | 'money' | 'trophy';
-export type ProgressRoute = '/school' | '/education' | '/work' | '/hobbies' | '/pets' | '/family' | '/travel' | '/bank' | '/investments' | '/assets' | '/special-careers' | '/scholarships' | '/coworkers' | '/business' | '/creators' | '/royalty';
+export type ProgressRoute = '/school' | '/education' | '/work' | '/hobbies' | '/pets' | '/family' | '/travel' | '/bank' | '/investments' | '/assets' | '/special-careers' | '/scholarships' | '/coworkers' | '/business' | '/creator-studio/youtuber' | '/creator-studio/streamer' | '/royalty';
 export type ProgressFacts = {
   schoolReports: number; highReports: number; acceptedHelp: number; clubMonths: number;
   secondaryQualifications: number; furtherQualifications: number; workMonths: number;
