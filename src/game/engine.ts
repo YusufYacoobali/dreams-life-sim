@@ -14,7 +14,7 @@ import { currentSchool } from './systems/schoolSchemas';
 import { skillContent } from './content/careers';
 import { IneligibleAction } from './errors';
 import { educationCommandSchema, EducationCommand, educationMonth, resolveEducation } from './systems/education';
-import { workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
+import { resolveJobInterview, workCommandSchema, WorkCommand, workMonth, resolveWork, endEmployment } from './systems/work';
 import { financeCommandSchema, FinanceCommand, financeMonth, resolveFinance, settleTax } from './systems/finance';
 import { accountFor, post } from './systems/common';
 import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, ownedAsset, absoluteMonth, resolveAssets, updatePropertyMarket } from './systems/assets';
@@ -197,6 +197,7 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
     if (effect.kind === 'resolve-story') return resolveStory(world, effect.threadId, effect.resolution);
     if (effect.kind === 'brand-decision') return brandDecision(world, effect.sponsorId, effect.accepted);
@@ -283,10 +284,12 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     if (!choice) throw new IneligibleAction('Choose an available option');
     const unavailable = choiceUnavailable(world, choice); if (unavailable) throw new IneligibleAction(unavailable);
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
-    const effects = applyEffects(world, choice.effects);
-    journal(world, event.id + '_choice', choice.journal, 'event');
+    const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
+    const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : null;
+    const effects = outcome ? outcome.effects : applyEffects(world, choice.effects);
+    journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
-    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: choice.resultTitle, body: choice.resultBody, illustration: event.illustration, effects }, priority + 1);
+    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects }, priority + 1);
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null; world.pendingPriority = 0;

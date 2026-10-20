@@ -1,3 +1,4 @@
+import { interviewResult } from '../support/interview';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countryCodes, countries, CountryCode } from '../../src/game/countries';
 import { resolveCommand } from '../../src/game/engine';
@@ -79,7 +80,7 @@ test('a partial year pays exactly the worked months and refunds excess tax after
 
 test('qualification, study and hiring gates cannot be bypassed by direct commands', () => {
   const world = fixture();
-  expect(() => resolveCommand(world, { type: 'apply-job', roleId: 'doctor' })).toThrow(/medicine/);
+  expect(() => interviewResult(resolveCommand(world, { type: 'apply-job', roleId: 'doctor' }))).toThrow(/medicine/);
   expect(() => resolveCommand(world, { type: 'enroll', program: 'graduate', field: 'medicine', funding: 'loan' })).toThrow(/degree/);
   world.people[world.activePersonId].education = newEducation();
   expect(() => resolveCommand(world, { type: 'enroll', program: 'university', field: 'computing', funding: 'loan' })).toThrow(/secondary/);
@@ -153,7 +154,7 @@ test('one connected life earns school and university qualifications, finds work 
   for (let i = 0; i < 6 && !world.people[world.activePersonId].education.qualifications.some(q => q.level === 'degree' && q.field === 'computing'); i++) year();
   expect(world.people[world.activePersonId].education.qualifications.some(q => q.level === 'degree' && q.field === 'computing')).toBe(true);
   for (let attempt = 0; attempt < 5 && !world.people[world.activePersonId].employment; attempt++) {
-    world = acknowledge(resolveCommand(world, { type: 'apply-job', roleId: 'developer' }));
+    world = acknowledge(interviewResult(resolveCommand(world, { type: 'apply-job', roleId: 'developer' })));
     if (!world.people[world.activePersonId].employment) year();
   }
   expect(world.people[world.activePersonId].employment?.roleId).toBe('developer');

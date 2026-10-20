@@ -1,3 +1,4 @@
+import { interviewResult } from '../support/interview';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countryCodes, countries, CountryCode } from '../../src/game/countries';
 import { decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
@@ -16,7 +17,7 @@ import { settleTax } from '../../src/game/systems/finance';
 const ack = (w: World) => resolveCommand(w, { type: 'acknowledge', resultId: w.pending!.id }, true);
 function employee(country: CountryCode = 'US', periods = 12) {
   let world = createLife('life_raise', 42, { ...randomCreation(42), country, city: countries[country].cities[0] }, { year: 2000, month: 1, day: 1 }); world.birthAcknowledged = true; world.date.year += 22;
-  for (let seed = 1; seed < 100; seed++) { world.random.outcomes = seed; const next = resolveCommand(world, { type: 'apply-job', roleId: 'retail' }); if (next.people[next.activePersonId].employment) { world = ack(next); break; } }
+  for (let seed = 1; seed < 100; seed++) { world.random.outcomes = seed; const next = interviewResult(resolveCommand(world, { type: 'apply-job', roleId: 'retail' })); if (next.people[next.activePersonId].employment) { world = ack(next); break; } }
   if (!world.people[world.activePersonId].employment) throw new Error('No accepted unit application');
   world = decodeWorld(encodeWorld(ack(resolveCommand(world, { type: 'meet-coworkers' }, true))));
   // Financial units execute real pay periods; no UI/lifetime journey is claimed.

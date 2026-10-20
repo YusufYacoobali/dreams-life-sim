@@ -12,6 +12,13 @@ Time Machine breadth and history-storage optimisation. Existing implemented
 features/data remain intact. Continue the full gameplay, content, visual and
 release plan; this update takes precedence over older file-feature priorities.
 
+The ordinary-job interview milestone is now implemented and verified:18saved
+role-specific interviews, read-only search/type filters/details, exact gross-pay
+quotes and work expectations. It leaves annual stories at125/250. Continue the
+remaining125distinct situations, including actual family/pet/hobby/trip contexts,
+then broader mechanics, progression, visual polish and release gates. See
+[the current handoff](../HANDOFF.md) for source versions and acceptance scope.
+
 ## Product decision
 
 Build a fast, offline life simulator around **Age Up → event → choice → consequence → journal**. The player can also take short, meaningful actions between years. A satisfying ordinary life must be as viable as a criminal, famous, wealthy, unlucky, or chaotic one.

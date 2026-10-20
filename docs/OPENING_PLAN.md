@@ -13,6 +13,16 @@ both Hermes exports and the same 120 immutable lifetimes. Actual Android routine
 runs for 172 years 8 months with 43 exact cold checks; storage/archive limits are
 recorded as deferred. [Current save/resume evidence](COMPACT_TRANSACTIONS.md).
 
+Ordinary applications now include18persisted role-specific interviews, with a
+responsible response, shortcut, avoidance and withdrawal. Search/type filters/
+details save nothing; actual hiring uses one saved draw and no upfront wages.
+All1,504tests/108suites, strict types, both exports, same120annual-policy lifetimes
+and twelve natural country-specific work journeys pass. Actual Android exact
+interview92/cold92/hiring93/cold93/ack94 and old-life preservation pass.
+[Current job increment](JOB_INTERVIEWS.md), [proof](verification/job-interviews-20261020.json).
+Annual stories remain125/250; interviews do not inflate that count. Continue the
+remaining125situations and broader gameplay. Full production remains about50%.
+
 Opening actions now stay visible through creation, appearance and newborn,
 including above the keyboard. All99UI/state checks/44suites, strict types and both
 Hermes exports pass. Actual Android normal/130% text, keyboard validation, Avatar7
@@ -298,13 +308,13 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Life screen and early gameplay | 55% | More early consequences and native interaction/layout polish |
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
-| Education and ordinary jobs | 70% | Richer interviews/hours, national education depth and broader balance |
+| Education and ordinary jobs | 75% | Hours/career ladders, national education depth and broader balance |
 | Relationships, family and inheritance | 75% | More autonomous-life depth, integrated stories and device acceptance |
 | Money, assets and markets | 80% | Balance, broad integration and device acceptance |
 | Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
 | Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
-| Pets, hobbies and entertainment | 35% | Existing persistent pets/four hobbies/four outing paths need more breadth and native review |
+| Pets, hobbies and entertainment | 35% | Existing persistent pets/eight hobbies/four outing paths need more breadth and native review |
 | Situational stories | 50% implemented | 125 of the minimum250 implemented;125remaining, plus full coverage/editorial acceptance |
 | Achievements and challenges | 25% | More factual goals, unlocks and meaningful challenges |
 | Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |

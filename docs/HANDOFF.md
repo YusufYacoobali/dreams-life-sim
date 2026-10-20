@@ -20,7 +20,62 @@ stays parked; the existing80%+ implementation's folder-save check passed. Read-o
 previous-life summaries are complete. Full production remains approximately
 **50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
 
-## Current opening actions
+## Current ordinary-job interviews
+
+All18ordinary roles now have saved interviews with role-specific situations,
+three hiring responses and withdrawal. Search/type filters/details are read-only;
+Apply and answer use atomic save-before-publish. Exact employer/pay bind before
+selection. The answer adjusts the existing chance and draws once; withdrawal
+uses no draw. Decline/withdrawal retain current work. Starting work grants no
+upfront wage or service. Details explain gross pay, work type, qualifications and
+effort. These interviews do not increase the125annual-story count.
+[Mechanics and limits](JOB_INTERVIEWS.md).
+
+All **1,504 tests /108suites** pass in **1,138.081seconds**, strict app/test types
+and fresh Android/iOS Hermes exports. The same120immutable annual-policy seeds
+pass in750.572seconds, empty stderr/exit0. All recorded ordinary metrics match
+1542133; engine29→30 changes full world hashes, so no complete-world equality or
+new-seed claim. Separate twelve-country natural work journeys pass in63.712s:
+37hiring answers (27accepted/10declined),12withdrawals and120exact cold codec
+checks, with actual wages and eligible earned retirement. No world/stat/money/
+RNG overrides. [Source/checks](verification/job-interviews-20261020.json),
+[full regression](verification/regression-job-interviews-20261020.txt),
+[annual sweep](verification/life-sweep-interviews-120-20261020.json),
+[work journeys](verification/work-sweep-interviews-20261020.json).
+
+Actual Android reader8→9 and job browsing retain all eight tables. Nia's saved
+Barista interview92 and hiring result93 match entire expected worlds; cold92/93
+retain all eight tables. Acknowledgement94 applies once; work-details browsing
+also saves nothing. All six inactive lives/backups,55original moments/metadata
+and76old receipts remain exact. Current native: **Nia Carter age19/revision94**,
+`life_native_adult_friend_v30_s0`, Barista,3200000USD minor units annual gross,
+zero paid months; **seven lives /55moments /79receipts**, no pending/year. Alex1,
+Amahle83 and Riley53/branch38 remain untouched. Font scale1.0. The early busy
+capture and one rejected null hierarchy are diagnostic, not completed acceptance.
+[Seven captures and exact scope](verification/android24-job-interviews-20261020/).
+Copies: `/tmp/dreams-interviews-final-db` (94), `-work-details-db` (94),
+`-result-db`/`-cold-result-db` (93), `-first-restart-db`/`-cold-pending-db` (92),
+`-browsed-db`/`-selected-db`/`-before-db` (91). `-early-busy-db`91 is excluded.
+Read-only verifier: `/tmp/dreams-interviews-native-verify.cjs`. The app is
+force-stopped for serial cloud action diagnostics; Metro/VM remain available.
+
+Current **world30 / engine30 / content7 / reader9 / checkpointv4**.
+Game hash: `4d73f53c098e3fa1fb2a11fa4a116d34a16382fc7aafe85472c3cadd3ca297ad`.
+Combined game/persistence:
+`56cd3933c9fdeae567121f73009aafb9a8ddf2d1d63650d6b57d8f7da013c532`.
+All70serial warm cloud samples avoid full checkpoint decoding. Age60 real routine
+median57.27ms; generated1000-contact routine105.87ms and its twelve-month Age Up
+step469.21ms. Cold current/backups/original Before Age Up bytes are exact. These
+unpaired five-sample host/GC-sensitive measurements are not physical p95 or a
+natural1000-person journey. [Raw](verification/action-latency-interviews-20261020.json).
+All milestone gate/measurement processes have closed; do not rerun unchanged gates.
+
+Next: the remaining125distinct situations, including actual family/pet/hobby/trip
+contexts, then broader gameplay, progression, visual polish and release checks.
+The candidate next story allocation is in `/tmp/dreams-next-story-pack-plan.md`.
+Further file/history work stays parked. Continue after the safe commit/push.
+
+## Prior opening actions
 
 Creation, Appearance and newborn primary actions remain visible below scrolling
 content and above the keyboard. Blank names show useful errors before confirmation;
@@ -33,7 +88,7 @@ their original scope. Do not compose a new whole-regression or seed total.
 Actual Android normal/130% text, open keyboard, name error, Avatar7/editor return,
 newborn0, cold unfinished introduction, Begin Life1 and cold dashboard pass. Both
 cold comparisons retain all eight tables. All six old lives/backups,55moments/
-metadata and75old receipts stay exact. Current native: **Alex Martín age0 / revision1**,
+metadata and75old receipts stay exact. At that opening milestone: **Alex Martín age0 / revision1**,
 `life_mvgprdj2_16qsril_0`, **seven lives /55moments /76receipts**, no pending/year.
 Nia91, Amahle83, Riley53/branch38 remain untouched. Original system font scale1.0
 is restored. [Ten captures and exact scope](verification/android24-opening-actions-20261020/).
@@ -43,8 +98,8 @@ Native copies: `/tmp/dreams-opening-actions-cold-begun-db` (current), `-begun-db
 `dismiss-expo-notice`, requiring a fresh hierarchy and one unambiguous close.
 Temporary coordinate-only keyboard diagnostics were removed before final captures.
 
-Next: ordinary-job interviews and work details, then remaining125situations and
-broader gameplay. Further file/history work is explicitly parked by the user.
+The subsequent interview milestone above completes the ordinary application flow.
+Continue remaining125situations and broader gameplay; file/history work stays parked.
 
 ## Prior compact checkpoint and family storage work
 
@@ -73,7 +128,7 @@ metric matches content seven. These are not additional seeds.
 [Full regression](verification/regression-compact-transactions-20261020.txt),
 [lifetime scope](verification/life-sweep-compact-transactions-120-20261020.json).
 
-Current world 30 / engine 29 / content 7 / database 8 / checkpoint v4.
+At the compact checkpoint: world30 / engine29 / content7 / database8 / checkpointv4.
 Game hash: `c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac`.
 Combined game/persistence:
 `836252759ee9fa23f06605573cf8186ae5f60164cafa0104d587c8feee7ddeae`.

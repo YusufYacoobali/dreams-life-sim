@@ -1,0 +1,94 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "760c61372590069a190848543eb52ebe89a2ce42",
+  "scope": "Persisted role-specific ordinary-job interviews; read-only job search/filters/details and exact gross-pay/work expectations. Additional file/history features remain parked.",
+  "versions": {
+    "world": 30,
+    "engine": 30,
+    "content": 7,
+    "database": 9,
+    "checkpoint": "v4"
+  },
+  "annualSituationCount": 125,
+  "interviewsExcludedFromSituationCount": 18,
+  "gameSourceHash": "4d73f53c098e3fa1fb2a11fa4a116d34a16382fc7aafe85472c3cadd3ca297ad",
+  "combinedGamePersistenceSourceHash": "56cd3933c9fdeae567121f73009aafb9a8ddf2d1d63650d6b57d8f7da013c532",
+  "source": {
+    "app/(game)/jobs.tsx": "acabbcfcb742f51d63a3decf814643efcc32bd17e29e3dfca256a54e0eaf6222",
+    "app/(game)/work.tsx": "62715837e4f3b07cac50174707945e99ac8c5cc24be73fdeb9002dba05f4daa6",
+    "src/game/content/jobInterviews.ts": "6acb1cfbfa050f1e18c83092fb2d5ec0330d8b222dd387e72b966a695a734b42",
+    "src/game/systems/jobInterviewValidation.ts": "c01c3a2a1099bdcc47fa47a3758d0026869abd2e492627ad9f4060b381053f41",
+    "tests/game/job-interviews.test.ts": "77d7557dd0c9eaa8ed6f0ecbcd74d60a8349772a3d88449a077f2675a320e99d",
+    "tests/ui/job-interview-flow.test.tsx": "20c16d0a25a9048dd7e443d3c17d076edc30f5befc169eaca3d2999c9a346011"
+  },
+  "verification": {
+    "fullRegression": {
+      "tests": 1504,
+      "suites": 108,
+      "seconds": 1138.081,
+      "exitCode": 0,
+      "raw": "regression-job-interviews-20261020.txt",
+      "rawSha256": "d3e26b9ccaac5e4fd5581a155f5f5cb2f9a2a408e6e29bfe0f2faee392dc28d5",
+      "rawStdoutThenStderr": true
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "freshAndroidAndIosHermesExports": true,
+    "exportsExitCode": 0,
+    "annualSweep": "life-sweep-interviews-120-20261020.json",
+    "workSweep": {
+      "raw": "work-sweep-interviews-20261020.json",
+      "rawSha256": "a5b8e590e42cec5c01b526ad2baae4eda3234252a0a3ada9c962a97f5092373e",
+      "seconds": 63.712,
+      "lives": 12,
+      "countries": [
+        "US",
+        "CA",
+        "GB",
+        "AU",
+        "FR",
+        "DE",
+        "ES",
+        "IT",
+        "BR",
+        "IN",
+        "JP",
+        "ZA"
+      ],
+      "hiringAnswers": 37,
+      "accepted": 27,
+      "declined": 10,
+      "withdrawals": 12,
+      "coldCodecChecks": 120,
+      "exitCode": 0,
+      "notAdditionalDistinctSeedClaim": true
+    },
+    "serialCloudActions": {
+      "raw": "action-latency-interviews-20261020.json",
+      "rawSha256": "80f47e17f0b7b3187db92c935d8894445f260ed5b421dae50a6ff03fd06792f0",
+      "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+      "samples": 70,
+      "allWarmSamplesAvoidFullCheckpointDecode": true,
+      "allColdCurrentBackupsAndOriginalBeforeAgeUpBytesExact": true,
+      "exitCode": 0,
+      "comparisonClaim": false,
+      "physicalTimingClaim": false,
+      "generatedPopulationIsNotNatural": true
+    },
+    "nativeRecord": "android24-job-interviews-20261020/journey-exact.json",
+    "nativeChecksExitCode": 0,
+    "noImmutableFixturesRegenerated": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-34a69f0bf6aa01c21a2f270dc6b0bd42.hbc",
+      "bytes": 5460783,
+      "sha256": "dc18547c51eadfb1f9d92ce99cb92461f133604fbc8a083058d37e026bb38af8"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-11cc819a49a0b645d53b9120d2e76bea.hbc",
+      "bytes": 5156370,
+      "sha256": "bb7ab17ae9820dc3bc03106f2d9aaa15779fa25d2adfafd3ad6ae6f45bee3c78"
+    }
+  ]
+}

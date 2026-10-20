@@ -6,6 +6,8 @@ import { z } from 'zod';
 import { ageOn, Person, World } from '../model';
 import { IneligibleAction } from '../errors';
 import { jobs, JobRole, jobRanks } from '../content/jobs';
+import { jobInterviews } from '../content/jobInterviews';
+import type { Effect, RuntimeEffectRow } from '../runtime';
 import { incomeTax, monthlyAmount, rules } from '../rules';
 import { roundRatio, formatMoney } from '../money';
 import { accountFor, active, bounded, draw, fact, post, result } from './common';
@@ -39,7 +41,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
   }
   person.employment = null;
 }
-export function jobReason(world: World, role: JobRole): string | undefined {
+export function jobReason(world: World, role: JobRole, interview = false): string | undefined {
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
   if (activeTrip(world)) return 'Return from your trip before starting a job';
   if (role.specialCareer) return 'Use this special career’s selection process';
@@ -56,7 +58,7 @@ export function jobReason(world: World, role: JobRole): string | undefined {
   if (person.stats.smarts < role.smarts) return 'Smarts of at least ' + role.smarts + '% are required';
   if (role.qualification && !person.education.qualifications.some(q => q.level === role.qualification && (!role.field || q.field === role.field))) return 'Requires ' + role.qualification + (role.field ? ' in ' + role.field : ' qualification');
   if (person.employment?.roleId === role.id) return 'You already have this job';
-  if (world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) return 'You already applied for this role this year';
+  if (!interview && world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) return 'You already applied for this role this year';
 }
 export function salaryForPerson(person: Person, role: JobRole, rank = 0): bigint {
   return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + rank * 25), 1000000n);
@@ -71,17 +73,19 @@ export function resolveWork(world: World, command: WorkCommand) {
     if (!role) throw new IneligibleAction('This job is not available');
     const reason = jobReason(world, role); if (reason) throw new IneligibleAction(reason);
     world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id] = 1;
-    const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) + Math.floor(person.stats.fame / 20) - visibleConvictions(world, person).length * 10));
-    if (draw(world, 'outcomes', 1, 100) > chance) {
-      fact(world, 'I applied for a ' + role.title.toLowerCase() + ' role and was turned down.', 'work');
-      result(world, 'They chose another applicant', 'The application was unsuccessful. Your current work, if any, is unchanged.', 'career'); return;
-    }
-    const annualPay = salaryFor(world, role); const employer = person.city + ' ' + role.sector;
-    if (person.employment) endEmployment(world);
-    person.employment = { id: 'employment_' + world.revision, roleId: role.id, employer, companyId: null, currency: countries[person.country].currency, rank: 0, annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
-    world.workHistory.push({ id: person.employment.id, personId: person.id, roleId: role.id, employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(person.employment.currency) });
-    fact(world, 'I started work as a ' + role.title.toLowerCase() + ' at ' + employer + '.', 'work');
-    result(world, 'You got the job', 'Your contract is active. Pay starts as time passes; accepting the role does not create a year of salary upfront.', 'career', [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: annualPay, currency: accountFor(world).currency }), tone: 'positive' }]);
+    const interview = jobInterviews[role.id], annualPay = salaryFor(world, role), employer = person.city + ' ' + role.sector;
+    if (!interview) throw new IneligibleAction('This interview is not available');
+    const answers = [...interview.answers, { id: 'withdraw' as const, label: 'Withdraw my application' }];
+    world.pending = {
+      kind: 'decision', id: 'interview_' + world.revision, templateId: 'job-interview',
+      title: role.title + ' interview', body: employer + ' asks: “' + interview.question + '”',
+      illustration: 'career', personIds: [person.id],
+      choices: answers.map(answer => ({ id: answer.id, label: answer.label,
+        effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, answerId: answer.id }],
+        resultTitle: 'Interview complete', resultBody: 'Your application has been considered.',
+        journal: 'I attended an interview for a ' + role.title.toLowerCase() + ' role at ' + employer + '.',
+      })),
+    };
   } else if (command.type === 'work-effort') {
     if (!person.employment) throw new IneligibleAction('You need a job first');
     person.employment.effort = command.effort;
@@ -102,6 +106,20 @@ export function resolveWork(world: World, command: WorkCommand) {
     fact(world, 'I retired with a pension based on my recorded earnings.', 'work');
     result(world, 'A different pace', 'Your job has ended. Your earned pension will be paid as time passes.', 'career');
   }
+}
+export type JobInterviewEffect = Extract<Effect, { kind: 'job-interview' }>;
+export function resolveJobInterview(world: World, effect: JobInterviewEffect): { title: string; body: string; journal: string; effects: RuntimeEffectRow[] } {
+  const person = active(world), role = jobs.find(item => item.id === effect.roleId), interview = jobInterviews[effect.roleId];
+  if (!role || !interview || effect.personId !== person.id || effect.employer !== person.city + ' ' + role.sector || effect.annualPay !== salaryFor(world, role) || !world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) throw new IneligibleAction('This interview is no longer available');
+  if (effect.answerId === 'withdraw') return { title: 'Application withdrawn', body: 'You decided against this role. Your current work is unchanged. You can apply for this role again next year.', journal: 'I withdrew my application for a ' + role.title.toLowerCase() + ' role.', effects: [] };
+  const reason = jobReason(world, role, true); if (reason) throw new IneligibleAction(reason);
+  const answer = interview.answers.find(item => item.id === effect.answerId)!;
+  const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) + Math.floor(person.stats.fame / 20) - visibleConvictions(world, person).length * 10 + answer.chance));
+  if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer.feedback + ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.', journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
+  if (person.employment) endEmployment(world);
+  person.employment = { id: 'employment_' + world.revision, roleId: role.id, employer: effect.employer, companyId: null, currency: countries[person.country].currency, rank: 0, annualPay: effect.annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
+  world.workHistory.push({ id: person.employment.id, personId: person.id, roleId: role.id, employer: effect.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(person.employment.currency) });
+  return { title: 'You got the job', body: answer.feedback + ' Your contract is active. Pay starts as months pass, with income tax withheld. There is no salary payment upfront.', journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
 }
 /** Pay for one actual employment period. A company supplies cash through fundWages. */
 export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {

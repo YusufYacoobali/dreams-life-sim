@@ -17,7 +17,43 @@ and old data stay intact. The current breakdown is in
 [Opening plan: current assessment](OPENING_PLAN.md#current-assessment); overall
 completion remains approximately50%, with125/250situations implemented.
 
-## Current milestone: opening experience and startup reliability
+## Current milestone: ordinary-job interviews and work details
+
+All18ordinary roles now offer a persisted role-specific interview before hiring.
+The selected answer adjusts the existing bounded hiring chance; withdrawal draws
+nothing. Rejection/withdrawal preserve current work; hiring creates one contract
+with no upfront salary or service. Search, work-type filters and job details are
+read-only. Details explain duties, eligibility and exact gross pay; Occupation
+explains effort/performance and the next full monthly gross quote.
+[Mechanics, versions and remaining scope](JOB_INTERVIEWS.md). These interviews
+leave the annual situation catalogue at125/250.
+
+All **1,504tests /108suites** pass in **1,138.081s**, strict app/test types and
+fresh Android/iOS Hermes exports. Same120immutable annual-policy seeds pass in
+750.572s with empty stderr/exit0. Recorded ordinary metrics match1542133; engine
+tag29→30 changes complete hashes. Separate twelve-country natural work journeys
+pass:37hiring answers (27accepted/10declined),12withdrawals,120exact codec cold
+checks, real wages and eligible earned retirement; no fixture funds/stats/RNG.
+[Source/checks](verification/job-interviews-20261020.json),
+[regression](verification/regression-job-interviews-20261020.txt),
+[annual sweep](verification/life-sweep-interviews-120-20261020.json),
+[work journeys](verification/work-sweep-interviews-20261020.json).
+
+Actual Android reader8→9/browsing retain all eight tables. Interview92, hiring93,
+cold92/93 and single acknowledgement94 match whole expected worlds. Both cold
+comparisons keep all eight tables exact. Six inactive lives/backups,55original
+moments/metadata and76old receipts remain exact. Final: Nia19/revision94, Barista,
+seven lives/55moments/79receipts; zero upfront wages or paid months. Early busy
+capture/null hierarchy diagnostics are excluded from completed UI acceptance.
+[Seven captures and preservation scope](verification/android24-job-interviews-20261020/).
+
+World30 / engine30 / content7 / reader9 / checkpointv4. Full production remains
+approximately50%; education/jobs estimate75% now includes the ordinary interview
+flow. Hours, deeper career ladders, balance and broader release acceptance remain
+open. Continue remaining125stories and broader gameplay; file/history work stays
+parked under the latest user instruction.
+
+## Prior milestone: opening experience and startup reliability
 
 Opening primary actions now stay visible through creation, appearance and newborn
 introduction, including above the keyboard. Blank-name errors precede confirmation;
@@ -32,7 +68,7 @@ exact; all six old lives/backups,55moments/metadata and75old receipts remain exa
 Final native: Alex Martín age0/revision1, seven lives/55moments/76receipts. Original
 font scale1.0 restored. Broader visual/accessibility/physical/standalone/iOS gates
 remain open. [Ten native captures and exact scope](verification/android24-opening-actions-20261020/).
-Continue work interviews/details and remaining stories; extra file/history work is parked.
+Ordinary interviews/details are completed above; continue remaining stories and broader gameplay.
 
 The preceding compact checkpoint v4 removes the reproduced year-91 save-size block. Ledger
 field names are recorded once; money remains exact decimal text. Old current,

@@ -5,6 +5,7 @@ import { storyScheduleSchema, storyResolveSchema } from './systems/storySchemas'
 export const statKeys = ['happiness', 'health', 'smarts', 'looks', 'respect', 'energy', 'fitness', 'stress', 'discipline', 'fame'] as const;
 export const effectSchema = z.discriminatedUnion('kind', [
   storyScheduleSchema, storyResolveSchema,
+  z.object({ kind: z.literal('job-interview'), personId: z.string(), roleId: z.string(), employer: z.string().min(1).max(160), annualPay: z.bigint().nonnegative(), answerId: z.enum(['careful', 'rush', 'avoid', 'withdraw']) }),
   z.object({ kind: z.literal('school-grade'), personId: z.string(), communityId: z.string(), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('skill'), personId: z.string(), skill: z.enum(skillIds), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('stat'), personId: z.string(), stat: z.enum(statKeys), delta: z.number().int().min(-100).max(100) }),

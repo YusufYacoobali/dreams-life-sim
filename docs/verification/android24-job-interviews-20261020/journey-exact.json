@@ -1,0 +1,165 @@
+{
+  "scope": "Actual Android24 ExpoGo software VM; normal Saved Lives selection, job browsing, application, cold saved interview, real answer, cold result and acknowledgement. Read-only SQLite copies; no native SQL/world/RNG edits. Not standalone/iOS/physical performance or a new newborn-to-adult journey.",
+  "versions": {
+    "world": 30,
+    "engine": 30,
+    "content": 7,
+    "database": 9,
+    "checkpoint": "v4"
+  },
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "initialRevision": 91,
+  "age": 19,
+  "phases": [
+    {
+      "phase": "saved interview",
+      "revision": 92,
+      "pending": "Barista interview",
+      "worldSha256": "395a8d97554496b70c0af4c68e95f35f8d46ed72506064f368eca9bcd3416d70",
+      "lives": 7,
+      "moments": 55,
+      "receipts": 77,
+      "allInactiveLivesAndBackupsExact": true,
+      "allOriginalMomentsMetadataAndReceiptsExact": true,
+      "noUpfrontWagesOrService": true,
+      "previousPayloadKeptAsBackup": true
+    },
+    {
+      "phase": "cold interview",
+      "revision": 92,
+      "pending": "Barista interview",
+      "worldSha256": "395a8d97554496b70c0af4c68e95f35f8d46ed72506064f368eca9bcd3416d70",
+      "lives": 7,
+      "moments": 55,
+      "receipts": 77,
+      "allInactiveLivesAndBackupsExact": true,
+      "allOriginalMomentsMetadataAndReceiptsExact": true,
+      "noUpfrontWagesOrService": true,
+      "allEightTablesExact": true
+    },
+    {
+      "phase": "hiring result",
+      "revision": 93,
+      "pending": "You got the job",
+      "worldSha256": "5ac93c0db8dd25ca7b2fafcda3070665c790d80c2658745e4f5db52607e1d531",
+      "lives": 7,
+      "moments": 55,
+      "receipts": 78,
+      "allInactiveLivesAndBackupsExact": true,
+      "allOriginalMomentsMetadataAndReceiptsExact": true,
+      "noUpfrontWagesOrService": true,
+      "previousPayloadKeptAsBackup": true
+    },
+    {
+      "phase": "cold result",
+      "revision": 93,
+      "pending": "You got the job",
+      "worldSha256": "5ac93c0db8dd25ca7b2fafcda3070665c790d80c2658745e4f5db52607e1d531",
+      "lives": 7,
+      "moments": 55,
+      "receipts": 78,
+      "allInactiveLivesAndBackupsExact": true,
+      "allOriginalMomentsMetadataAndReceiptsExact": true,
+      "noUpfrontWagesOrService": true,
+      "allEightTablesExact": true
+    },
+    {
+      "phase": "acknowledged",
+      "revision": 94,
+      "pending": null,
+      "worldSha256": "edd6c43291ad399174bff86422d7916ee951872bcdc69f12b0e5cd533f3d7901",
+      "lives": 7,
+      "moments": 55,
+      "receipts": 79,
+      "allInactiveLivesAndBackupsExact": true,
+      "allOriginalMomentsMetadataAndReceiptsExact": true,
+      "noUpfrontWagesOrService": true,
+      "previousPayloadKeptAsBackup": true
+    }
+  ],
+  "browsingAllEightTablesExact": true,
+  "diagnostic": {
+    "earlyBusyCaptureRevision": 91,
+    "completedApplicationRevision": 92,
+    "note": "The first capture was taken while Apply was still busy. It is excluded from completed UI acceptance; the subsequent durable92 checkpoint matches the entire expected interview."
+  },
+  "readerUpgrade": {
+    "from": 8,
+    "to": 9,
+    "allEightTablesExact": true
+  },
+  "workDetailBrowsingAllEightTablesExact": true,
+  "captures": [
+    {
+      "file": "01-job-list.png",
+      "bytes": 52829,
+      "sha256": "6179d45f2073f18e015e186b62929ff6340cf2b2d95c74080787f80ef4a2fb8e"
+    },
+    {
+      "file": "01-job-list.xml",
+      "bytes": 28669,
+      "sha256": "ed5051ba2fc7f912e79c20ac0f0c77988057e00539f2475df7fe9f2fe02d32f4"
+    },
+    {
+      "file": "02-barista-detail.png",
+      "bytes": 64073,
+      "sha256": "ac586671534f809f531a38bb764c0903569c757ab9e46a52636dc75c948fbd0c"
+    },
+    {
+      "file": "02-barista-detail.xml",
+      "bytes": 24009,
+      "sha256": "1749aeb94bfac67a1716df617396f94c2c535130a532514841af7ca18eccebef"
+    },
+    {
+      "file": "03-cold-interview.png",
+      "bytes": 67025,
+      "sha256": "d272b0c695a791463584176bf1e653003d0cfbd33c08ab94df22c25cc2fc2324"
+    },
+    {
+      "file": "03-cold-interview.xml",
+      "bytes": 8853,
+      "sha256": "44c41eac578dade5afd7c3556d9f46eed8a3f2fefdad9e5b94ba59ab1717618d"
+    },
+    {
+      "file": "04-hiring-result.png",
+      "bytes": 69591,
+      "sha256": "68a0d7ac6552e3dea9196860947fda7b038be4993b68bd22d9c659343f83ca32"
+    },
+    {
+      "file": "04-hiring-result.xml",
+      "bytes": 7720,
+      "sha256": "3982caeb2a549d4e54aa85936593443da7ef81f95757491dae94ae8055ca17fc"
+    },
+    {
+      "file": "05-cold-hiring-result.png",
+      "bytes": 71134,
+      "sha256": "b6bd90ebd1fc3b7834702866f1b85ce05fe266290697c978442761ad24a5b81d"
+    },
+    {
+      "file": "05-cold-hiring-result.xml",
+      "bytes": 7720,
+      "sha256": "3982caeb2a549d4e54aa85936593443da7ef81f95757491dae94ae8055ca17fc"
+    },
+    {
+      "file": "06-acknowledged.png",
+      "bytes": 71638,
+      "sha256": "0a935b227bf41c51cb78f88336805b30a462464ed647c2775ae282af2a8c8496"
+    },
+    {
+      "file": "06-acknowledged.xml",
+      "bytes": 40825,
+      "sha256": "f694da2f99949063e2e68b46c27c661399a37c863ad9d21081c244500dc75771"
+    },
+    {
+      "file": "07-work-details.png",
+      "bytes": 64576,
+      "sha256": "bd0cb22eed32cce062642d085725083e825b7bc34393122eec309af487609a02"
+    },
+    {
+      "file": "07-work-details.xml",
+      "bytes": 26993,
+      "sha256": "11e9010b65e4f5a50bffbfb6b0336c222be6e053d81dc140043f654b0b3189a5"
+    }
+  ],
+  "transientAutomationDiagnostic": "One result wait encountered a null UiTestAutomationBridge root. The helper rejected it. A subsequent fresh hierarchy and screenshot show the saved result; the cold93 world and all eight tables match the pre-restart93 copy. No stale hierarchy was used."
+}

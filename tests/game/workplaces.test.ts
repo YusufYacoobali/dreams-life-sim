@@ -1,3 +1,4 @@
+import { interviewResult } from '../support/interview';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countryCodes, countries, CountryCode } from '../../src/game/countries';
 import { ageOn, decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
@@ -15,7 +16,7 @@ const ack = (world: World) => { if (world.pending?.kind !== 'result') throw new 
 function hire(world: World, roleId = 'retail') {
   for (let seed = 1; seed < 100; seed++) {
     const candidate = decodeWorld(encodeWorld(world)); candidate.random.outcomes = seed;
-    const hired = resolveCommand(candidate, { type: 'apply-job', roleId }, true);
+    const hired = interviewResult(resolveCommand(candidate, { type: 'apply-job', roleId }, true));
     if (hired.people[hired.activePersonId].employment?.roleId === roleId) return ack(hired);
   }
   throw new Error('No accepted application fixture');

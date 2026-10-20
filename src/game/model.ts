@@ -51,6 +51,7 @@ import { validatePets } from './systems/petValidation';
 import { validateScholarships } from './systems/scholarshipValidation';
 import { workplaceSchema, workRaiseSchema } from './systems/workplaceSchemas';
 import { validateWorkplaces } from './systems/workplaceValidation';
+import { validateJobInterview } from './systems/jobInterviewValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -83,7 +84,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(30), engineVersion: z.literal(29), contentVersion: z.literal(7),
+  schemaVersion: z.literal(30), engineVersion: z.literal(30), contentVersion: z.literal(7),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -323,6 +324,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
+    validateJobInterview(world, pending);
     if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
     for (const choice of pending.choices) for (const effect of choice.effects) {
@@ -519,5 +521,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Workplace stories change future selection only, preserving every bound event.
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 5) parsed.contentVersion = 6;
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 6) parsed.contentVersion = 7;
+  // Interviews are created only by new applications; existing bound scenes stay exact.
+  if (parsed && parsed.schemaVersion === 30 && parsed.engineVersion === 29) parsed.engineVersion = 30;
   return validateWorld(parsed, immutable);
 }

@@ -1,0 +1,58 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "760c61372590069a190848543eb52ebe89a2ce42",
+  "scope": "Same120immutable cloud first-eligible lifetime seeds0\u2013119; ordinary annual policy does not apply for jobs. Separate work sweep exercises interviews. Not additional seeds, native, SQLite or physical timing acceptance.",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "4d73f53c098e3fa1fb2a11fa4a116d34a16382fc7aafe85472c3cadd3ca297ad",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 1688
+  },
+  "complete": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 30,
+      "content": 7
+    },
+    "gameSourceHash": "4d73f53c098e3fa1fb2a11fa4a116d34a16382fc7aafe85472c3cadd3ca297ad",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 750572
+  },
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "raw": "life-sweep-interviews-120-20261020.ndjson",
+  "rawSha256": "f9c09107b7ae5e4854b2a747de9c93b82c0feaf6e803d1a49574c0242ae290d3",
+  "same120RecordedOrdinaryMetricsExactComparedWith": "life-sweep-compact-transactions-120-20261020.ndjson",
+  "noWholeTerminalWorldEqualityClaim": "Engine tag changes29\u219230; full world hashes differ.",
+  "newDistinctSeeds": 0
+}

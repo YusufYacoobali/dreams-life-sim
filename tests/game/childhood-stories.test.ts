@@ -83,7 +83,7 @@ test('story grades and actual skills report bounded changes and can create a fri
 });
 test('the real world-21 school archive preserves attendance, exact grades, people, help draw, paid earnings and the earlier planning checkpoint', () => {
   const save = decodeSave(JSON.stringify(schoolArchive)), original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(schoolArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(encodeWorld(save.world));
-  expect(original.schemaVersion).toBe(21); expect(save.world.schemaVersion).toBe(30); expect(save.world.engineVersion).toBe(29);
+  expect(original.schemaVersion).toBe(21); expect(save.world.schemaVersion).toBe(30); expect(save.world.engineVersion).toBe(30);
   for (const key of Object.keys(original).filter(key => key !== 'schemaVersion' && key !== 'engineVersion' && key !== 'contentVersion')) expect(encoded[key]).toEqual(original[key]);
   const school = currentSchool(save.world)!; expect(school.periods).toHaveLength(13); expect(school.exams).toEqual([{ month: 24083, term: 1, grade: 76 }]); expect(school.help[0]).toMatchObject({ chance: 80, roll: 68, accepted: true, gradeBefore: 71, gradeGain: 3 }); expect(save.world.people[save.world.activePersonId].skills.science).toBe(12);
   const prior = unpackCheckpoint(save.snapshots[0].payload), priorSchool = currentSchool(prior)!; expect(priorSchool.periods).toHaveLength(1); expect(priorSchool.exams).toEqual([]); expect(priorSchool.classmateIds).toEqual(school.classmateIds); expect(priorSchool.currentTeacherId).toBe(school.currentTeacherId); expect(prior.people[prior.activePersonId].skills.science).toBe(0); expect(priorSchool.help).toEqual(school.help);

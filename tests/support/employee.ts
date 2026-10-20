@@ -1,3 +1,4 @@
+import { interviewResult } from './interview';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countries, CountryCode } from '../../src/game/countries';
 import { resolveCommand } from '../../src/game/engine';
@@ -9,7 +10,7 @@ export function employee(country: CountryCode = 'US', introduce = true, age = 22
   world.birthAcknowledged = true; world.date.year += age;
   for (let seed = 1; seed < 100; seed++) {
     world.random.outcomes = seed;
-    const next = resolveCommand(world, { type: 'apply-job', roleId });
+    const next = interviewResult(resolveCommand(world, { type: 'apply-job', roleId }));
     if (next.people[next.activePersonId].employment) { world = resolveCommand(next, { type: 'acknowledge', resultId: next.pending!.id }); break; }
   }
   if (!world.people[world.activePersonId].employment) throw new Error('No accepted work story application');

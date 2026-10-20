@@ -1,3 +1,4 @@
+import { interviewResult } from '../support/interview';
 import React from 'react';
 import { Keyboard } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
@@ -27,7 +28,7 @@ const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ fr
 const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
 function employee(): World {
   const world = createLife('life_workplace_ui', 42, { ...randomCreation(42), country: 'US', city: 'New York' }, { year: 2000, month: 1, day: 1 }); world.birthAcknowledged = true; world.date.year += 22;
-  for (let seed = 1; seed < 100; seed++) { world.random.outcomes = seed; const next = resolveCommand(world, { type: 'apply-job', roleId: 'retail' }); if (next.people[next.activePersonId].employment?.roleId === 'retail') return resolveCommand(next, { type: 'acknowledge', resultId: next.pending!.id }); }
+  for (let seed = 1; seed < 100; seed++) { world.random.outcomes = seed; const next = interviewResult(resolveCommand(world, { type: 'apply-job', roleId: 'retail' })); if (next.people[next.activePersonId].employment?.roleId === 'retail') return resolveCommand(next, { type: 'acknowledge', resultId: next.pending!.id }); }
   throw new Error('No accepted employment scenario');
 }
 beforeEach(() => { mockParams = {}; });
