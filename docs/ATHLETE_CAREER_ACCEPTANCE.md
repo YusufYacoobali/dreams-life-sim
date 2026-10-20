@@ -54,8 +54,12 @@ personal employment income, coaching charge or pension-service month; the
 recorded Athlete career and earned work remain unchanged. Other real people's
 work can continue. A final cold restart retains the complete world and tables.
 
-Both archives' original snapshot payloads, metadata, branches and receipts stay
-exact. The separate inactive v30 current/backup rows also stay exact. Intentional
+Both archives' original snapshot payloads and imported metadata stay exact.
+Imported branch/restore/receipt rows are checked where present; these archives
+do not carry producer command receipts or branch entries, so no nonempty old
+producer-receipt preservation is claimed. New preparation and reviewed-action
+receipts still receive the actual all-table rollback/cold checks above.
+The separate inactive v30 current/backup rows also stay exact. Intentional
 new working-life current/backup rows and Before Age Up moments are allowed.
 No old fixture is regenerated, and no runtime, schema/version, persistence,
 shared matrix, main, frozen integration or native source is changed.
