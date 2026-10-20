@@ -34,7 +34,10 @@ function EventCard({
   const effects = event.kind === 'result' ? event.effects
     : event.kind === 'confirmation' ? event.terms : event.kind === 'milestone' ? event.facts : [];
   return (
-    <Modal transparent animationType="fade" visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
+    // RN's legacy Android modal wrapper otherwise fits system insets a second
+    // time, leaving strips of the underlying page outside this backdrop.
+    // Keep the navigation bar opaque; card spacing still uses safe-area insets.
+    <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType="fade" visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, { backgroundColor: c.surface }]}>
           {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}
