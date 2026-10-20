@@ -20,7 +20,7 @@ import { monthFrom } from '../../src/game/calendar';
 const scene = (id: string) => childhoodTemplates.find(item => item.id === id)!;
 const ageFor = (template: EventTemplate) => Math.max(template.min, template.school === 'secondary' ? 12 : template.school === 'primary' ? 6 : template.min);
 test('the distinct story catalogue has unique situations, bounded ages and explicit saved-person contexts', () => {
-  expect(childhoodTemplates).toHaveLength(78); expect(eventTemplates).toHaveLength(110);
+  expect(childhoodTemplates).toHaveLength(78); expect(eventTemplates).toHaveLength(125);
   for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(item => item[field])).size).toBe(eventTemplates.length);
   for (const template of childhoodTemplates) {
     expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices.length).toBeGreaterThanOrEqual(2); expect(template.choices.length).toBeLessThanOrEqual(4);

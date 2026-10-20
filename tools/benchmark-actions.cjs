@@ -75,7 +75,8 @@ else if (historyIndex >= 0) {
   for (const age of [30, 60]) {
     const row = historicalRows.find(row => row.summary.age === age); assert.ok(row, 'Missing age ' + age);
     const world = checkpoints.unpackCheckpoint(row.payload);
-    cases.push({ label: 'Age-' + age + ' routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine } });
+    const routine = world.people[world.activePersonId].health.routine;
+    cases.push({ label: 'Age-' + age + ' routine', world, command: { type: 'health-routine', routine: { ...routine, mindfulness: !routine.mindfulness } } });
   }
 if (process.argv.includes('--population')) {
   const { createContact } = load('src/game/systems/npcs.ts'), { connectPerson } = load('src/game/systems/relationships.ts');
@@ -93,7 +94,8 @@ if (process.argv.includes('--population')) {
     }
     model.validateWorld(world);
     const setup = { scope: 'generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression', initialPeople, addedContacts: added, knownContacts: known.size, totalPeople: Object.keys(world.people).length, monthlyFinancialActors: financialActors(world).length };
-    cases.push({ label: count + '-known-contact routine', world, command: { type: 'health-routine', routine: world.people[world.activePersonId].health.routine }, setup });
+    const routine = world.people[world.activePersonId].health.routine;
+    cases.push({ label: count + '-known-contact routine', world, command: { type: 'health-routine', routine: { ...routine, mindfulness: !routine.mindfulness } }, setup });
     cases.push({ label: count + '-known-contact first Age Up step', world, command: { type: 'advance' }, setup });
   }
 }
@@ -180,7 +182,7 @@ const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.len
       cold.sqlite.close();
       if (trial) trials.push({ totalMs: finished - start, resolveMs: resolved - start, commitMs: finished - resolved, coldOpenMs, phases: measured });
     }
-    results.push({ label: item.label, ...(item.setup ? { setup: item.setup, outcome } : {}), inputSha256: hash(input), inputBytes: Buffer.byteLength(input), checkpointBytes, ledgerRows: item.world.ledger.length,
+    results.push({ label: item.label, command: item.command, ...(item.setup ? { setup: item.setup, outcome } : {}), inputSha256: hash(input), inputBytes: Buffer.byteLength(input), checkpointBytes, ledgerRows: item.world.ledger.length,
       medianMs: Object.fromEntries(['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs'].map(name => [name, median(trials.map(row => row[name]))])), trials });
     process.stderr.write(item.label + ': ' + results.at(-1).medianMs.totalMs.toFixed(2) + ' ms\n');
   }

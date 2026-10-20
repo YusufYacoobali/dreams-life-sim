@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **110 distinct situational templates** against
+The source catalogue contains **125 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -21,8 +21,10 @@ category.
 | Early-teen / teenage family situations | 14 |
 | General adult/later-life situations | 12 |
 | Ordinary workplace with actual contacts | 10 |
-| **Source total** | **110** |
-| **Additional distinct situations needed for the minimum** | **140** |
+| Adult friendship with actual contacts | 8 |
+| Current adult partner | 7 |
+| **Source total** | **125** |
+| **Additional distinct situations needed for the minimum** | **125** |
 
 The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
@@ -64,6 +66,13 @@ with thirty choices bound to actual available colleagues/supervisors. Selection
 creates no people or draws, and choices change only real bounded stats/existing
 bonds, without awarding money, service, performance or qualifications. The source
 total is110; old bound scenes and every original historical payload stay exact.
+
+Content seven adds fifteen [adult friendship/partner situations](ADULT_RELATIONSHIP_STORIES.md)
+and forty-five choices. Actual existing adult contacts bind by exact IDs/full
+names, with local availability and explicit friendship/current romance required.
+Choices change bounded stats and the named bond, without payments, qualifications,
+work rewards, generated contacts or draws. This brings the source total to125.
+Old bound scenes and all original historical payloads remain exact.
 
 The School page now shows saved plans, their actual participants and dates,
 permission and conditional outing quote, and four recent outcomes. Paid outings

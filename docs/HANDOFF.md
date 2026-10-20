@@ -14,9 +14,67 @@ Stop only for material decisions, genuine blockers or unavailable tools. No
 subagents without explicit authorisation. Further import/export/sharing breadth
 stays parked; the existing80%+ implementation's folder-save check passed. Read-only
 previous-life summaries are complete. Full production remains approximately
-**50%**; the catalogue is now **110/250 minimum**, with **140 situations remaining**.
+**50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
 
-## Current performance checkpoint
+## Current adult relationship milestone
+
+Content seven adds **15 adult friendship/partner situations and 45 choices**,
+bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
+friends/current partners must be locally available. Exact names/person/bond IDs
+bind before display; selection creates no people or draws. Choices change bounded
+stats and the named bond, without money, qualifications or work rewards. Old lives
+change only their content tag; bound scenes and original history remain exact.
+[Mechanics and scene list](ADULT_RELATIONSHIP_STORIES.md).
+
+All **1,437 tests / 105 suites** pass in **854.241 seconds**, strict app/test
+types and both fresh Hermes exports. All **120 immutable lifetimes** pass across
+twelve countries in **595.782 seconds**, empty stderr/exit zero. Same-seed ordinary
+metrics match content six; no whole-terminal-world equality or additional-seed
+claim. [Source/checks](verification/adult-relationships-content7-20261020.json),
+[full regression](verification/regression-adult-relationships-20261020.txt),
+[lifetime scope](verification/life-sweep-adult-relationships-120-20261020.json).
+
+Current cloud diagnostics use **real routine edits**, toggling mindfulness after
+the unchanged-form guard. All 55 warm samples avoid full decode; every cold
+current/backup and original Before Age Up payload is exact. Age-60 routine
+67.81ms; generated 1000-contact routine
+114.55ms. These unpaired,
+host/GC-sensitive cloud measurements are not physical p95 or comparisons with
+older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json).
+
+Actual Android uses a separate life prepared through 88 normal Start/Begin Life,
+school-year and social steps. Nia Carter naturally reaches the nickname scene at
+age 19 with actual schoolmate/friend Morgan Bennett. Native input87, choice88,
+cold saved result and acknowledgement89 match entire expected worlds; bond98→100.
+All five previous lives/backups,36moments/metadata and71old receipts stay exact;
+all19prepared moments retain original bytes/metadata. Current native: **Nia age19/
+revision89**, **six lives/55moments/73receipts**. Amahle83, Riley53/branch38 remain
+untouched. Preparation is cloud production-command evidence; only the subsequent
+interactions are native evidence. No native SQL/world/RNG edits or new file-feature
+breadth. [Captures and exact scope](verification/android24-adult-relationships-20261020/).
+
+Current world30 / engine29 / content7 / database7 / checkpoint v3.
+Game hash: `f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14`.
+Combined game/persistence:
+`6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d`.
+Runner: `b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e`.
+Both gate processes have closed. Do not rerun unchanged gates.
+
+The genuine native v3 result82 remains pinned to unmodified pushed b9a5e65:
+`v30-native-people-block-archive.json`,1,024,189bytes,21worlds/20original moments,
+SHA `1e4475aefee73e062ed4e5cb74bb0cd85ff90c2c6386ff94c50b66b7cc14b0e3`.
+Its migration/SQLite failure-retry-cold checks are in the current full regression.
+Never regenerate it with newer source. [Provenance](verification/native-people-block-archive-v30-20261020.json).
+
+Native current copy: `/tmp/dreams-adult-social-final-db`; result88/cold88 are
+`/tmp/dreams-adult-social-result-db` and `-cold-result-db`. Prior original five-life
+baseline is `/tmp/dreams-routine-draft-final-db` at Amahle83. UI helper now deletes
+stale temporary XML and rejects a null hierarchy, disabled targets or empty
+bounds. Use `--allow-disabled` only for an intentional disabled-control check.
+Inspect the actual selected file before confirming an import; keyboard search
+for the exact filename works in the old Android document picker.
+
+## Earlier performance checkpoints
 
 Mind & Body now enables Save only after an actual routine change. Selecting the
 saved option or undoing an edit leaves Save disabled and performs no save/decode.
@@ -191,8 +249,9 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, add broader adult situations with actual saved friends/partners, then
-continue early-game usability, work depth and the full plan.
+Next, continue the complete plan: measure 120-calendar-year/three-generation
+SQLite/storage integration with retained history, correct measured problems, and
+continue early-game usability, adult content and work depth.
 The genuine named result76 remains protected by its original74be9e4 producer.
 Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration
@@ -200,7 +259,7 @@ acceptance. Correct any measured bottleneck, and continue broader adult stories,
 interviews, real hours/hourly pay, work conflicts and career depth. Multi-person
 result labels can also identify the actual affected people more clearly.
 
-There are140 more authored situations to reach250. All eleven special-career
+There are125 more authored situations to reach250. All eleven special-career
 story categories, adult relationships/finances/health/travel/leisure/later-life
 breadth, autonomous NPC depth, country-source verification, balance and broader
 integration remain open. The master specification still governs the complete

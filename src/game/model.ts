@@ -83,7 +83,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(30), engineVersion: z.literal(29), contentVersion: z.literal(6),
+  schemaVersion: z.literal(30), engineVersion: z.literal(29), contentVersion: z.literal(7),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -518,5 +518,6 @@ export function decodeWorld(text: string, immutable = false): World {
   if (parsed && parsed.schemaVersion === 29) { parsed.schemaVersion = 30; parsed.engineVersion = 29; parsed.workRaises = []; }
   // Workplace stories change future selection only, preserving every bound event.
   if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 5) parsed.contentVersion = 6;
+  if (parsed && parsed.schemaVersion === 30 && parsed.contentVersion === 6) parsed.contentVersion = 7;
   return validateWorld(parsed, immutable);
 }

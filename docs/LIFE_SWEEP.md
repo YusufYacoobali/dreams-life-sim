@@ -1,6 +1,21 @@
 # Production-state lifetime invariant sweep
 
-Current world30/engine29/content6 passes all **120 distinct seeds0–119**, all
+Current world30/engine29/content7 passes all **120 distinct seeds 0–119** across
+twelve countries in **595.782 seconds**, empty stderr and exit zero. Game and
+runner hashes stay fixed from start through completion. The same-seed ordinary
+metrics match content six; there is no whole-terminal-world equality claim
+across content tags or additional-seed claim.
+[Current summary and raw cases](verification/life-sweep-adult-relationships-120-20261020.json).
+Game hash: `f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14`.
+
+This first-eligible pure-engine run does not exercise every optional action or
+establish native/SQLite, 120-year, 1000-known-person, multigeneration, storage or
+release acceptance. All 45 new adult social choices have separate twelve-country
+branch checks and connected friend/partner SQLite/UI failure-retry-cold checks.
+The actual Android friendship scene uses a separately prepared normal-command
+life; its native scope remains in the linked milestone record.
+
+The earlier world30/engine29/content6 passes all **120 distinct seeds0–119**, all
 twelve countries, through the validated-immutable engine in **742.785 seconds**,
 empty stderr/exit0. Every complete terminal world and ordinary metric exactly
 matches the same input at74be9e4 after the certified-copy/index optimisation.

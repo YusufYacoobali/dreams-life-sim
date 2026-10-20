@@ -1,0 +1,1041 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Separate acceptance input prepared with normal production game-store Start/Begin Life, real annual school progression and actual social commands. No world/date/stat/role/RNG edits. Not native birth-to-adult evidence or new player file feature breadth.",
+  "source": {
+    "gameSourceHash": "f1db47a32ea4877c494394b73ea3b9b3670e964e4af955f0c17e3961cb499f14",
+    "combinedGamePersistenceSourceHash": "6a464e95da4e9845c2dd79ae70688df4fd9d6545da42bd9c7b56d5ce4060383d",
+    "baseCommit": "73a8027dd6b1e5919abc95d58e79ef5f618132ce",
+    "producer": "candidate fixed source hash; not unmodified base commit"
+  },
+  "seed": 0,
+  "input": {
+    "firstName": "Nia",
+    "lastName": "Carter",
+    "gender": "female",
+    "country": "US",
+    "city": "New York",
+    "appearance": {
+      "face": 2,
+      "skin": 3,
+      "hair": 5,
+      "hairColor": 2
+    },
+    "background": "ordinary"
+  },
+  "date": {
+    "year": 2026,
+    "month": 10,
+    "day": 20
+  },
+  "database": "/tmp/dreams-natural-adult-friend-s0-SkEMUs",
+  "archive": {
+    "file": "natural-adult-friend.dreams.json",
+    "bytes": 860811,
+    "sha256": "50218e3e670638ef162bfe2972772544fb3fce3699823f7f6b1df61b038c5610",
+    "currentCheckpointByteExact": true,
+    "moments": 19
+  },
+  "lifeId": "life_native_adult_friend_v30_s0",
+  "revision": 87,
+  "age": 19,
+  "friendId": "person_npc_15_5",
+  "friendBond": 98,
+  "friendRoles": [
+    "classmate",
+    "friend"
+  ],
+  "event": {
+    "kind": "decision",
+    "id": "event_2045_friend-unwanted-nickname",
+    "templateId": "friend-unwanted-nickname",
+    "title": "Please do not let that catch on",
+    "body": "Morgan Bennett tries out a new nickname for you. You would prefer it did not survive this conversation.",
+    "illustration": "relationship",
+    "personIds": [
+      "person_player",
+      "person_npc_15_5"
+    ],
+    "choices": [
+      {
+        "id": "plain",
+        "label": "Say you prefer your actual name",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "respect",
+            "delta": 3
+          },
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "stress",
+            "delta": -2
+          },
+          {
+            "kind": "relationship",
+            "relationshipId": "relation_person_player_person_npc_15_5",
+            "delta": 2
+          }
+        ],
+        "resultTitle": "A small, clear boundary",
+        "resultBody": "Morgan Bennett drops the nickname. The conversation continues without a naming ceremony.",
+        "journal": "I told Morgan Bennett I preferred my own name."
+      },
+      {
+        "id": "light",
+        "label": "Make the request with a light joke",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "happiness",
+            "delta": 3
+          },
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "stress",
+            "delta": -1
+          },
+          {
+            "kind": "relationship",
+            "relationshipId": "relation_person_player_person_npc_15_5",
+            "delta": 3
+          }
+        ],
+        "resultTitle": "Retired after one appearance",
+        "resultBody": "Morgan Bennett laughs and agrees. The nickname has an admirably short career.",
+        "journal": "I gently retired a nickname Morgan Bennett had invented."
+      },
+      {
+        "id": "pretend",
+        "label": "Laugh along despite disliking it",
+        "effects": [
+          {
+            "kind": "stat",
+            "personId": "person_player",
+            "stat": "stress",
+            "delta": 4
+          }
+        ],
+        "resultTitle": "Now apparently approved",
+        "resultBody": "Morgan Bennett uses it again. Your laugh did not communicate the objection you were having internally.",
+        "journal": "I pretended to like a nickname from Morgan Bennett."
+      }
+    ]
+  },
+  "choose": {
+    "type": "choose",
+    "eventId": "event_2045_friend-unwanted-nickname",
+    "choiceId": "plain"
+  },
+  "ack": {
+    "type": "acknowledge",
+    "resultId": "event_2045_friend-unwanted-nickname_result"
+  },
+  "expected": {
+    "offered": "609ef706352ed9cd33965aeab7ae2ee489ce7ec2c388d3e6e5fe7b7690f4f11a",
+    "result": "45fead67b9e6b9dc9f19d3d408382b551022d0e192fd02bf3a6b8eeea5e7e375",
+    "finished": "b729699808403af2bdbaa1a779a89d273415710c3cc580520e9ea32f1a863896"
+  },
+  "trace": [
+    {
+      "method": "startLife",
+      "input": {
+        "firstName": "Nia",
+        "lastName": "Carter",
+        "gender": "female",
+        "country": "US",
+        "city": "New York",
+        "appearance": {
+          "face": 2,
+          "skin": 3,
+          "hair": 5,
+          "hairColor": 2
+        },
+        "background": "ordinary"
+      },
+      "seed": 0,
+      "revision": 0,
+      "worldSha256": "9d5e90eb95b9360a8de645996bceb260be9a602b2fda1788d4bf3e52b77fca2a"
+    },
+    {
+      "method": "acknowledgeBirth",
+      "revision": 1,
+      "worldSha256": "17678b707a7045f6b89a63c6de4b924a7ff0dc877f6e2cf549f739cca38a410d"
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 2,
+      "age": 1,
+      "worldSha256": "9437b79301c1bc41dd36a17ee6462ce6bedc3a20349f90a7eb569dcecf4ea713",
+      "pendingTemplate": "first-bubble-catch"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2027_first-bubble-catch",
+        "choiceId": "chase"
+      },
+      "revision": 3,
+      "age": 1,
+      "worldSha256": "5cb71fec0eddbef951bc60e274c473d83d8b2f841f4b3e67872a6c515df9be83",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2027_first-bubble-catch_result"
+      },
+      "revision": 4,
+      "age": 1,
+      "worldSha256": "4616d5cc448de49f56512ee0912436376df45f0d8508711588e8f363b203210c",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 5,
+      "age": 2,
+      "worldSha256": "309a5f0b4d70e73329ecf51335be0311e08301a7d10581cf1f67e106ede9a7a6",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "year_4_summary"
+      },
+      "revision": 6,
+      "age": 2,
+      "worldSha256": "643f41891b2e4bbdc74516307d6081117c5ef01bf1748a35ac46a696ccc516a3",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 7,
+      "age": 3,
+      "worldSha256": "ee226a3988b0b5ab922e39ce095ec457917be33604061fa1c6fe7c943d3e551f",
+      "pendingTemplate": "shoe-principle"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2029_shoe-principle",
+        "choiceId": "cooperate"
+      },
+      "revision": 8,
+      "age": 3,
+      "worldSha256": "47ebc08ab37e480cb082d1039cbc0fba2a99d4d74efb1a20dcdd3f32c07102c4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2029_shoe-principle_result"
+      },
+      "revision": 9,
+      "age": 3,
+      "worldSha256": "ec41a657fc363e697b5bce58b03f0188767473c4b7ace9c072f58519f9cfde1d",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 10,
+      "age": 4,
+      "worldSha256": "752240d13854bd5731842c5ce29603665026ec921a4596a454ea48a9cf137af8",
+      "pendingTemplate": "toddler-ice-cube"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2030_toddler-ice-cube",
+        "choiceId": "watch"
+      },
+      "revision": 11,
+      "age": 4,
+      "worldSha256": "9081a7c23abc78eba77bdeffbf991f9f4a91d4d9a8e5471c6900199c8f635dde",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2030_toddler-ice-cube_result"
+      },
+      "revision": 12,
+      "age": 4,
+      "worldSha256": "aea79d80bce34b85ef692614c240342e3e7a90c618897627987429285339382e",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 13,
+      "age": 5,
+      "worldSha256": "a028a1dcfb88eb37847b8303f57b073eed510fe3798d899b26480d73bd95a16b",
+      "pendingTemplate": "toddler-zipper-puzzle"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2031_toddler-zipper-puzzle",
+        "choiceId": "align"
+      },
+      "revision": 14,
+      "age": 5,
+      "worldSha256": "4998b7bc27e3f77f0fd388f3337450fa64f8e6bd6d550d17c0d1a84f7756cb68",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2031_toddler-zipper-puzzle_result"
+      },
+      "revision": 15,
+      "age": 5,
+      "worldSha256": "b8b4f737072271254fed5996627a9264bf85c46dbcd5d9ea1e30f2abe5c74000",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 16,
+      "age": 6,
+      "worldSha256": "c75276c72a9ab2bd9f8fc48fae5fa6a5cf3ce9be8211fa47984029846743f166",
+      "pendingTemplate": "school-slide-queue"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2032_school-slide-queue",
+        "choiceId": "ask"
+      },
+      "revision": 17,
+      "age": 6,
+      "worldSha256": "dd1f5dfa0fe0d8c38655bb71ff412e50a9bf448424d33aa4a0639735c9fc93cc",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2032_school-slide-queue_result"
+      },
+      "revision": 18,
+      "age": 6,
+      "worldSha256": "bb925c83a1d665a0131af5eb2bed84017a64e7d8bdad2305d579280282300fee",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "talk"
+      },
+      "revision": 19,
+      "age": 6,
+      "worldSha256": "84f8e9ad5b7e7e8415cbaf8f3b4b1a327afe754aa2b475f509a953d816d01464",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_18"
+      },
+      "revision": 20,
+      "age": 6,
+      "worldSha256": "e3f634459c2e45de5688bac081c551e07d74d9ef1164e298202eb306fc4ae904",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "compliment"
+      },
+      "revision": 21,
+      "age": 6,
+      "worldSha256": "54f63703ae79f2db501f5f3bf3aa07400567e7b78c27242d7aa4ca69a8d0f873",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_20"
+      },
+      "revision": 22,
+      "age": 6,
+      "worldSha256": "d45dce7fb840ed077f5b90e7319ecd8dd498292e47980dbe25ddf7f2cd47330b",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "spend-time"
+      },
+      "revision": 23,
+      "age": 6,
+      "worldSha256": "a8a8015ce09b7217595cb4e92fc2196445054a40915b0c271e5d173b36798522",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_22"
+      },
+      "revision": 24,
+      "age": 6,
+      "worldSha256": "f5f46370bf56769322db7a909c170f6dc6430afc2837251dbb9a57d1b0ec5a87",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 25,
+      "age": 7,
+      "worldSha256": "9420f53052c40d0369a06252e58585ad990494e4df38bb716feeda55ce4efc8a",
+      "pendingTemplate": "school-project-promise"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2033_school-project-promise",
+        "choiceId": "promise"
+      },
+      "revision": 26,
+      "age": 7,
+      "worldSha256": "ede928998a6276b4c1f064d7e8aa99c863fed3af2123c68e4f0859e18638e2b4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2033_school-project-promise_result"
+      },
+      "revision": 27,
+      "age": 7,
+      "worldSha256": "ddbe91105a957d7192319a9b0e3dedaf444f2ba53d009b6f29830fcd075e092e",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "talk"
+      },
+      "revision": 28,
+      "age": 7,
+      "worldSha256": "179771f2c37660d77049168503bec70ba70c1ab5e68a5a100766dc200485f06e",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_27"
+      },
+      "revision": 29,
+      "age": 7,
+      "worldSha256": "ea47e97e309413b9d9c67dd673dc4343a7a5696832ae7cb88e95eb1fb518035e",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "compliment"
+      },
+      "revision": 30,
+      "age": 7,
+      "worldSha256": "a6c59aac8ff21918e0700bf8489e408fd20e95d5c6e44ae655829ac0ea11f6a4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_29"
+      },
+      "revision": 31,
+      "age": 7,
+      "worldSha256": "6543b75b75f732c6d546b356d9f1177fe295fd6d98e7ef7cac8bebe5627e8949",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "spend-time"
+      },
+      "revision": 32,
+      "age": 7,
+      "worldSha256": "8d9b875901b3a82d63aac2b9c52576f14a5d1bc72ffdb4f786644b26e0511935",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_31"
+      },
+      "revision": 33,
+      "age": 7,
+      "worldSha256": "5393fc75267545db85735d09d7020b401ed4df218ca8fdd42c6601581b0fb88c",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 34,
+      "age": 7,
+      "worldSha256": "17a25769229aa90cd3528e8cb519038369ecefa1304952d46f8f70f70ba6e879",
+      "pendingTemplate": "story-project-promise"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "story_25_0_due",
+        "choiceId": "complete"
+      },
+      "revision": 35,
+      "age": 7,
+      "worldSha256": "f413770a7c1b6c593d2337a499f53f4e1d65f7a2a48c383d5d451691432c26ef",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "story_25_0_due_result"
+      },
+      "revision": 36,
+      "age": 8,
+      "worldSha256": "fa9198006be95a6d1fa665325d1b6abb5e161d1ea4f820dbd57327b313c026af",
+      "pendingTemplate": "school-empty-lunchbox"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2034_school-empty-lunchbox",
+        "choiceId": "quiet"
+      },
+      "revision": 37,
+      "age": 8,
+      "worldSha256": "6fdc96ee54612678a72831a3274adf91097964363a403a3f5b566673336f2595",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2034_school-empty-lunchbox_result"
+      },
+      "revision": 38,
+      "age": 8,
+      "worldSha256": "928841b0b88de2cdd16e29f152c9283f107a8b39c25d763224c5bcccc786d759",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "talk"
+      },
+      "revision": 39,
+      "age": 8,
+      "worldSha256": "30a129a956bf1b6cbee2dccc84bedd61af1c83ed89654f950f64c0e280391c61",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_38"
+      },
+      "revision": 40,
+      "age": 8,
+      "worldSha256": "1e953a093e9ab1fc7e7bf90080ad3188186a861f696d43fcd954c07930771785",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "compliment"
+      },
+      "revision": 41,
+      "age": 8,
+      "worldSha256": "8f0beecae2ea2bdb5109e58f29f738c7adfed786d781e7f1aa3d2e6e687b549f",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_40"
+      },
+      "revision": 42,
+      "age": 8,
+      "worldSha256": "1646ab814cd7f63805fad521f64f10641b68dd25d56ec902e279b989e49742d4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "spend-time"
+      },
+      "revision": 43,
+      "age": 8,
+      "worldSha256": "efdeaa77e616cb637b5ec57e9c86ffb576ff1b0838da717798d909335ff1d84a",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_42"
+      },
+      "revision": 44,
+      "age": 8,
+      "worldSha256": "c7e845875f371d65f919ec3f570072dcac5e4c1d96c9f6e91f05786deefedb53",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 45,
+      "age": 9,
+      "worldSha256": "62ebf51e13c5c96b42b7643a4e520f8bf6438503042317b9cdefb30a78d8f7c6",
+      "pendingTemplate": "school-inverted-map"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2035_school-inverted-map",
+        "choiceId": "turn"
+      },
+      "revision": 46,
+      "age": 9,
+      "worldSha256": "eaea016dca8e60e54d7dce0e80804a6a632eff2ad9a573282a37a52c3d4e61de",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2035_school-inverted-map_result"
+      },
+      "revision": 47,
+      "age": 9,
+      "worldSha256": "1385f56de0307b696ecd709b9dd10df29b3b43bbe415eaf02ec34f64e87db9aa",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "talk"
+      },
+      "revision": 48,
+      "age": 9,
+      "worldSha256": "3e0f839d74bb8dfc512a705da38708f9be698e305554b852f665221be50f74b9",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_47"
+      },
+      "revision": 49,
+      "age": 9,
+      "worldSha256": "7e48f46b24e7a65a4cce75a8aec9f0a551802cadde3af6f31955f20de71afadc",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "compliment"
+      },
+      "revision": 50,
+      "age": 9,
+      "worldSha256": "fe372e80a6bdf13d8779d1647460bf48f6fc32cc915b3e83ce0e388709167148",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_49"
+      },
+      "revision": 51,
+      "age": 9,
+      "worldSha256": "e477a73953ccae1537cbff7ffed426602be5554e55e80ae8a801f6ab436204a4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "spend-time"
+      },
+      "revision": 52,
+      "age": 9,
+      "worldSha256": "12310882e77d15f78b565cf4bf2033f288944c16f2b628181ca948504b6e1226",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_51"
+      },
+      "revision": 53,
+      "age": 9,
+      "worldSha256": "41afb035fac9366c6a048873b1187258f2951dc033a525934459311033089a52",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 54,
+      "age": 10,
+      "worldSha256": "00e67b4814bfe1e8255a2b67bc44e25f6d04222a18f576e4fff30b393120881c",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "year_53_summary"
+      },
+      "revision": 55,
+      "age": 10,
+      "worldSha256": "b5e2702a51352c9124b3b5ab6b3eeeca8565d33c0ce85c02af1067d63839484a",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 56,
+      "age": 11,
+      "worldSha256": "45f2a878d07f57bf3cf31773d196db48fdf1873f4b040eba6ce7d8d0a180125f",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "year_55_summary"
+      },
+      "revision": 57,
+      "age": 11,
+      "worldSha256": "f8bf2770f8d84233741665bdfb23cc3b55fc9d839aeb8d92b4828174ac213bae",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 58,
+      "age": 12,
+      "worldSha256": "235f93be0e9362bd3d50a4dd2e3732e6988fa6ed815142f8ab4466c0f53a3bca",
+      "pendingTemplate": "first-presentation"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2038_first-presentation",
+        "choiceId": "breathe"
+      },
+      "revision": 59,
+      "age": 12,
+      "worldSha256": "a3db8a3e61c44acac6d9187de817c026f770d90b8421a3825d4dec907514cc41",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2038_first-presentation_result"
+      },
+      "revision": 60,
+      "age": 12,
+      "worldSha256": "40cbec9b7d0784187317b19f9db40ee81e2f5220d1958e4dd556abf79dd2de7a",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 61,
+      "age": 13,
+      "worldSha256": "392be9aad6ce7265763ddf175e2719f23032c29316e601cf8c28a63752dbce46",
+      "pendingTemplate": "teen-shrinking-sleeves"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2039_teen-shrinking-sleeves",
+        "choiceId": "compare"
+      },
+      "revision": 62,
+      "age": 13,
+      "worldSha256": "d8e1077d5a55f95637af66b2bcead142b215889bdd9ae4c3b69602fb5aaac7b0",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2039_teen-shrinking-sleeves_result"
+      },
+      "revision": 63,
+      "age": 13,
+      "worldSha256": "37e3313c8493425acb9c100b43b953e68643e93cb551638807d2b590a44e61a3",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 64,
+      "age": 14,
+      "worldSha256": "132a9a0c8aaefa8761e2dba3beb2b6ea5580272bfe90d0ce8c573cacae8d63d7",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "year_63_summary"
+      },
+      "revision": 65,
+      "age": 14,
+      "worldSha256": "78e45763b238a0ac8e8b2881124565d1a8d482b7018b536d868e8a4cba7390e6",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 66,
+      "age": 15,
+      "worldSha256": "aa06f09e231758a34eaf178a341741a67138fb2f9431f26ef7b88be1a05d28ac",
+      "pendingTemplate": "teen-solo-rehearsal"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2041_teen-solo-rehearsal",
+        "choiceId": "stay"
+      },
+      "revision": 67,
+      "age": 15,
+      "worldSha256": "94ff642148062f487aa523ac82a83b27ea54213fa1557b0b64ac82e7a9ac9b83",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2041_teen-solo-rehearsal_result"
+      },
+      "revision": 68,
+      "age": 15,
+      "worldSha256": "001f665b77426e045f430eb38ce43442dc0f0513ec29ebc1d34c4c7c179c8a0f",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 69,
+      "age": 15,
+      "worldSha256": "fb18610439cedc06c9f4c95ea6a93b11a1e28f56ce39304ca08dfc75de592ad7",
+      "pendingTemplate": "medical-emergency"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "emergency_condition_person_player_65_1_2042",
+        "choiceId": "care"
+      },
+      "revision": 70,
+      "age": 15,
+      "worldSha256": "6ff00ce824ec3e8a773d1974e9834018ffbb856f4da5f780078905caaf58c6c9",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "emergency_condition_person_player_65_1_2042_result"
+      },
+      "revision": 71,
+      "age": 16,
+      "worldSha256": "3332e72257ee5e0f761c41139eb790b6777f551d6eab717099b5b212eff312dc",
+      "pendingTemplate": "teen-homework-leak"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2042_teen-homework-leak",
+        "choiceId": "own"
+      },
+      "revision": 72,
+      "age": 16,
+      "worldSha256": "88b202cf82f7ff063a65f9bdeeca3e0ca97d99827d5acc4594afb66058075561",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2042_teen-homework-leak_result"
+      },
+      "revision": 73,
+      "age": 16,
+      "worldSha256": "481857b0bf842edcc22b0d1b61100147649c4d4a022025081812d8eb5c24062f",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 74,
+      "age": 17,
+      "worldSha256": "4ea55820a863e2e5b659be0e09916803e82215d514087a76fbfc755dece594f6",
+      "pendingTemplate": "teen-canteen-review"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2043_teen-canteen-review",
+        "choiceId": "feedback"
+      },
+      "revision": 75,
+      "age": 17,
+      "worldSha256": "0201f6c88c72b9480fa7d561d4af6c390608856c7d253cfe6b9e4c49346fc818",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2043_teen-canteen-review_result"
+      },
+      "revision": 76,
+      "age": 17,
+      "worldSha256": "11409bb687d2ab52aa2d8e781baefaf2d1393a65b942b8a8e9d8894707da6c9a",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "talk"
+      },
+      "revision": 77,
+      "age": 17,
+      "worldSha256": "844430d450e9246e5c0443ff4fcad7d5d1bb644e59baeae4b6fa403e38203f24",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_76"
+      },
+      "revision": 78,
+      "age": 17,
+      "worldSha256": "1c24e18cfc86b1184d2971cb691c7529839bf358f446a2b696d79e511be880b4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "compliment"
+      },
+      "revision": 79,
+      "age": 17,
+      "worldSha256": "9deaccdb8f6054d16d97cc647ad9c9e1f23b94f018ea599572b5971dd13209d6",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_78"
+      },
+      "revision": 80,
+      "age": 17,
+      "worldSha256": "1b03780c047ac8bb3453105b743da0c007779a2851e2fb4dd72ae4f58b987433",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "interact",
+        "personId": "person_npc_15_5",
+        "action": "spend-time"
+      },
+      "revision": 81,
+      "age": 17,
+      "worldSha256": "048cbe0370152eb20d49244250819c9bd6a58e54f7b07f739766ece7f043c161",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_80"
+      },
+      "revision": 82,
+      "age": 17,
+      "worldSha256": "43f6d1d1bbfebfc68fc339c49fcb8e3d5c359e9f34fafd97f399fbd14a6bf2b4",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 83,
+      "age": 18,
+      "worldSha256": "59b99ff96b2f9b0310263d6c884565061d086f714a3c27f48ed6393e6833a687",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_82"
+      },
+      "revision": 84,
+      "age": 18,
+      "worldSha256": "1ea44cc08d85ceae970a13b6980b534dec14c0689c7c0cd9007d5db51cdc79fc",
+      "pendingTemplate": "parent-boundary"
+    },
+    {
+      "command": {
+        "type": "choose",
+        "eventId": "event_2044_parent-boundary",
+        "choiceId": "explain"
+      },
+      "revision": 85,
+      "age": 18,
+      "worldSha256": "1b3aaf33f0db11ff1027af056390942eb16744af686f7ce6243eecd67a5191e3",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2044_parent-boundary_result"
+      },
+      "revision": 86,
+      "age": 18,
+      "worldSha256": "0808db9b002c119294c6f13165e390ebfb48e1d7661e37bb28f191cf47d150a6",
+      "pendingTemplate": null
+    },
+    {
+      "command": {
+        "type": "advance"
+      },
+      "revision": 87,
+      "age": 19,
+      "worldSha256": "609ef706352ed9cd33965aeab7ae2ee489ce7ec2c388d3e6e5fe7b7690f4f11a",
+      "pendingTemplate": "friend-unwanted-nickname"
+    }
+  ]
+}

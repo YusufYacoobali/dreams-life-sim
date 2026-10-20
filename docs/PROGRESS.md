@@ -12,6 +12,43 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Content seven adds **15 adult friendship/partner situations and 45 choices**,
+bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
+friends/current partners must be locally available. Exact names/person/bond IDs
+bind before display; selection creates no people or draws. Choices change bounded
+stats and the named bond, without money, qualifications or work rewards. Old lives
+change only their content tag; bound scenes and original history remain exact.
+[Mechanics and scene list](ADULT_RELATIONSHIP_STORIES.md).
+
+All **1,437 tests / 105 suites** pass in **854.241 seconds**, strict app/test
+types and both fresh Hermes exports. All **120 immutable lifetimes** pass across
+twelve countries in **595.782 seconds**, empty stderr/exit zero. Same-seed ordinary
+metrics match content six; no whole-terminal-world equality or additional-seed
+claim. [Source/checks](verification/adult-relationships-content7-20261020.json),
+[full regression](verification/regression-adult-relationships-20261020.txt),
+[lifetime scope](verification/life-sweep-adult-relationships-120-20261020.json).
+
+Current cloud diagnostics use **real routine edits**, toggling mindfulness after
+the unchanged-form guard. All 55 warm samples avoid full decode; every cold
+current/backup and original Before Age Up payload is exact. Age-60 routine
+67.81ms; generated 1000-contact routine
+114.55ms. These unpaired,
+host/GC-sensitive cloud measurements are not physical p95 or comparisons with
+older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json).
+
+Actual Android uses a separate life prepared through 88 normal Start/Begin Life,
+school-year and social steps. Nia Carter naturally reaches the nickname scene at
+age 19 with actual schoolmate/friend Morgan Bennett. Native input87, choice88,
+cold saved result and acknowledgement89 match entire expected worlds; bond98→100.
+All five previous lives/backups,36moments/metadata and71old receipts stay exact;
+all19prepared moments retain original bytes/metadata. Current native: **Nia age19/
+revision89**, **six lives/55moments/73receipts**. Amahle83, Riley53/branch38 remain
+untouched. Preparation is cloud production-command evidence; only the subsequent
+interactions are native evidence. No native SQL/world/RNG edits or new file-feature
+breadth. [Captures and exact scope](verification/android24-adult-relationships-20261020/).
+
+Full production remains approximately50%. Earlier records below retain their original scope.
+
 Mind & Body now enables Save only after an actual routine change. Selecting the
 saved option or undoing an edit leaves Save disabled and performs no save/decode.
 Ten affected UI checks across two suites pass in5.950s, strict application/test

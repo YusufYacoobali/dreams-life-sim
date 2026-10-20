@@ -4,6 +4,23 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `adult-relationships-content7-20261020.json` records 15 adult friend/partner
+  situations, all1,437tests/105suites, strict types and both Hermes exports.
+  `regression-adult-relationships-20261020.txt` is the full clean output.
+  `life-sweep-adult-relationships-120-20261020.json`/`.ndjson` retain all120 current
+  immutable seeds,12countries,595.782seconds, empty stderr/exit0 and fixed source.
+  These overlap prior seeds; ordinary metrics match, with no whole-world equality
+  claim across content tags. `action-latency-adult-relationships-20261020.json`
+  uses real changed routines,55warm samples, exact cold current/backup/history.
+- `android24-adult-relationships-20261020/` preserves the separate 88-step normal
+  production preparation, original19moments, actual named choice88/cold/ack89,
+  all five old lives/history and the exact native scope. No native birth-to-adult,
+  new player file breadth, physical p95 or release claim.
+- `native-people-block-archive-v30-20261020.json` pins actual v3 result82 to clean
+  pushed b9a5e65,1,024,189bytes/SHA and all21worlds/20original moments. Current full
+  regression includes its content-only migration and SQLite failure/retry/cold
+  protection. Original fixture bytes are never regenerated.
+
 - `routine-draft-20261020.json` and `routine-draft-tests-20261020.txt` retain
   the UI-only unchanged/reverted-routine Save guard, ten affected checks/two
   suites, strict types and both Hermes exports. `android24-routine-draft-20261020/`

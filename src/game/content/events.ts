@@ -4,6 +4,7 @@ import { BoundChoice, Pending } from '../runtime';
 import { EventTemplate, StoryStat, storyOption as option } from './eventTypes';
 import { childhoodTemplates } from './childhood';
 import { workplaceTemplates } from './workplaceStories';
+import { adultRelationshipTemplates } from './adultRelationshipStories';
 import { currentWorkplace } from '../systems/workplaceSchemas';
 import { countries } from '../countries';
 import { jobs } from './jobs';
@@ -12,7 +13,7 @@ import { activeTrip } from '../systems/travelSchemas';
 import { hospitalized } from '../systems/healthSchemas';
 import { isConfined } from '../systems/legalSchemas';
 import { serviceAway } from '../systems/serviceSchemas';
-import { relationFor } from '../systems/relationships';
+import { partnerRelation, relationFor } from '../systems/relationships';
 import { storyParent, storyPersonPresent } from '../systems/storyContext';
 
 /** Original situations, not random names placed in interchangeable success text. */
@@ -217,6 +218,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   },
   ...childhoodTemplates,
   ...workplaceTemplates,
+  ...adultRelationshipTemplates,
 ];
 
 /** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */
@@ -240,6 +242,18 @@ function workContext(world: World) {
   const coworker = available.find(member => member.role === 'coworker'), supervisor = available.find(member => member.role === 'supervisor');
   return { place, coworker: coworker && world.people[coworker.personId], supervisor: supervisor && world.people[supervisor.personId] };
 }
+/** Local adult scenes use existing social roles, never a generated substitute. */
+function socialContext(world: World) {
+  const player = world.people[world.activePersonId];
+  if (ageOn(player, world.date) < 18 || !storyPersonPresent(world, player)) return {};
+  const contact = (edge?: World['relationships'][number]) => {
+    const id = edge?.from === player.id ? edge.to : edge?.to === player.id ? edge.from : undefined;
+    const person = id && world.people[id];
+    return person && person.id !== player.id && ageOn(person, world.date) >= 18 && person.country === player.country && person.city === player.city && storyPersonPresent(world, person) ? person : undefined;
+  };
+  const friendEdge = world.relationships.find(edge => edge.roles.includes('friend') && !['dating', 'engaged', 'married'].includes(edge.romance) && contact(edge));
+  return { friend: contact(friendEdge), partner: contact(partnerRelation(world)) };
+}
 /** Physical family scenes require the actual household; remote contact is explicit. */
 function templateParent(world: World, template: EventTemplate) {
   if (!template.parent) return;
@@ -252,23 +266,25 @@ function templateParent(world: World, template: EventTemplate) {
 }
 export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
-  const context = schoolContext(world), work = workContext(world);
+  const context = schoolContext(world), work = workContext(world), social = socialContext(world);
   // Callback records remain authoritative even when an older history is sparse.
   // Never offer an origin ID that scheduleStory already considers recorded.
   const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));
-  return eventTemplates.filter(template => age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
   const player = world.people[world.activePersonId];
   const parent = templateParent(world, template);
   if (template.parent && !parent) throw new Error(template.parentContact ? 'This event needs a living parent who can be contacted' : 'This event needs a living parent at home');
-  const person = parent ? world.people[parent.from] : null, context = schoolContext(world), work = workContext(world);
+  const person = parent ? world.people[parent.from] : null, context = schoolContext(world), work = workContext(world), social = socialContext(world);
   if (template.school && (!context.school || template.school !== 'any' && template.school !== context.school.stage) || template.classmate && !context.peer || template.teacher && !context.teacher) throw new Error('This event needs the current school contacts');
   if (template.workplace && !work.place || template.coworker && !work.coworker || template.supervisor && !work.supervisor) throw new Error('This event needs the current available workplace contacts');
+  if (template.friend && !social.friend || template.partner && !social.partner) throw new Error('This event needs the existing available adult friend or partner');
   const peerRelation = context.peer && relationFor(world, player.id, context.peer.id), teacherRelation = context.teacher && relationFor(world, player.id, context.teacher.id);
   const coworkerRelation = work.coworker && relationFor(world, player.id, work.coworker.id), supervisorRelation = work.supervisor && relationFor(world, player.id, work.supervisor.id);
-  const text = (value: string) => value.replaceAll('{parent}', person?.firstName ?? '').replaceAll('{city}', player.city).replaceAll('{classmate}', context.peer?.firstName ?? '').replaceAll('{teacher}', context.teacher?.firstName ?? '').replaceAll('{school}', context.school?.school ?? '').replaceAll('{workplace}', work.place?.employer ?? '').replaceAll('{coworker}', work.coworker ? fullName(work.coworker) : '').replaceAll('{supervisor}', work.supervisor ? fullName(work.supervisor) : '');
+  const friendRelation = social.friend && relationFor(world, player.id, social.friend.id), romanticRelation = social.partner && relationFor(world, player.id, social.partner.id);
+  const text = (value: string) => value.replaceAll('{parent}', person?.firstName ?? '').replaceAll('{city}', player.city).replaceAll('{classmate}', context.peer?.firstName ?? '').replaceAll('{teacher}', context.teacher?.firstName ?? '').replaceAll('{school}', context.school?.school ?? '').replaceAll('{workplace}', work.place?.employer ?? '').replaceAll('{coworker}', work.coworker ? fullName(work.coworker) : '').replaceAll('{supervisor}', work.supervisor ? fullName(work.supervisor) : '').replaceAll('{friend}', social.friend ? fullName(social.friend) : '').replaceAll('{partner}', social.partner ? fullName(social.partner) : '');
   const choices: BoundChoice[] = template.choices.map(choice => ({
     id: choice.id, label: text(choice.label),
     effects: [
@@ -278,11 +294,13 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
       ...(choice.teacherBond && teacherRelation ? [{ kind: 'relationship' as const, relationshipId: teacherRelation.id, delta: choice.teacherBond }] : []),
       ...(choice.coworkerBond && coworkerRelation ? [{ kind: 'relationship' as const, relationshipId: coworkerRelation.id, delta: choice.coworkerBond }] : []),
       ...(choice.supervisorBond && supervisorRelation ? [{ kind: 'relationship' as const, relationshipId: supervisorRelation.id, delta: choice.supervisorBond }] : []),
+      ...(choice.friendBond && friendRelation ? [{ kind: 'relationship' as const, relationshipId: friendRelation.id, delta: choice.friendBond }] : []),
+      ...(choice.partnerBond && romanticRelation ? [{ kind: 'relationship' as const, relationshipId: romanticRelation.id, delta: choice.partnerBond }] : []),
       ...(choice.grades && context.school ? [{ kind: 'school-grade' as const, personId: player.id, communityId: context.school.id, delta: choice.grades }] : []),
       ...(choice.skill ? [{ kind: 'skill' as const, personId: player.id, skill: choice.skill.id, delta: choice.skill.delta }] : []),
       ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id }] : []),
     ],
     resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
   }));
-  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : []), ...(template.coworker && work.coworker ? [work.coworker.id] : []), ...(template.supervisor && work.supervisor ? [work.supervisor.id] : [])])], choices };
+  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : []), ...(template.coworker && work.coworker ? [work.coworker.id] : []), ...(template.supervisor && work.supervisor ? [work.supervisor.id] : []), ...(template.friend && social.friend ? [social.friend.id] : []), ...(template.partner && social.partner ? [social.partner.id] : [])])], choices };
 }

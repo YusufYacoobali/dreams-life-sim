@@ -4,7 +4,35 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current people-block save diagnostics
+## Current content-seven diagnostics
+
+| Cloud engine + SQLite action | Current median |
+| --- | ---: |
+| Begin Life | 1.24ms |
+| First-year choice | 2.33ms |
+| First-year choice Continue | 2.16ms |
+| Age-seven callback | 4.95ms |
+| Age-seven callback Continue | 13.34ms |
+| Age-30 routine | 13.94ms |
+| Age-60 routine | 67.81ms |
+| 100-known-contact routine | 21.32ms |
+| 100-known-contact first Age Up step | 54.30ms |
+| 1000-known-contact routine | 114.55ms |
+| 1000-known-contact first Age Up step | 482.61ms |
+
+All 1,437 tests/105 suites, strict types, both exports and 120 immutable lives
+pass before these serial diagnostics. All 55 warm samples avoid full decode;
+every cold current/backup and original Before Age Up payload is exact.
+[Raw](verification/action-latency-adult-relationships-20261020.json).
+Routine commands now toggle mindfulness, measuring a real edit accepted by the
+UI guard. These are unpaired current timings; older paired records used the
+then-permitted unchanged-routine command and their pinned drivers. No before/
+after claim is inferred across those commands/content versions. The generated
+1000-contact setup still has eight initial monthly financial actors, not full
+monthly accounting for all1000people. Physical p95,120-year/multigeneration and
+SQLite/WAL/archive storage budgets remain separate gates.
+
+## Earlier people-block save diagnostics
 
 All **1,409 tests / 102 suites** pass in **825.637 seconds**, strict application/test types and both fresh Hermes exports.
 The unchanged game-source120-seed gate remains current. The new v3 frame reuses
