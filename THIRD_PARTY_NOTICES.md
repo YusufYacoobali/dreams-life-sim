@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `4d38c49c976ab2645cfa81de3c5ba254347efc422b3c22dfe78a3577c05f4243`
-- `package-lock.json` SHA-256 `a15b67e5cb04cd0050d4ea4450d8c878cea7754a4908a71b388750100dd00342`
-- `app.json` SHA-256 `cf66bfbf1f8f97a9eccd4a7a2eb792a65b44f927a59cb03504a66e62612731b3`
+- `package.json` SHA-256 `5871768c43afd064038cb460fb9ee4c6b0ba9a8a219d4b1c4b617fb439ee88a8`
+- `package-lock.json` SHA-256 `0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b`
+- `app.json` SHA-256 `197cf886195e21399e262cd86a8dbe1d37aa30b93ac712ed311221b00b9f5935`
 
-**23 direct dependencies; 765 candidate non-dev lock entries; 755 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**25 direct dependencies; 766 candidate non-dev lock entries; 756 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-717 readable notice files are preserved as 276 exact text blocks. 1 entries lack lock license metadata; 54 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+718 readable notice files are preserved as 276 exact text blocks. 1 entries lack lock license metadata; 54 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -20,6 +20,8 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | --- | --- | --- | --- |
 | @expo/vector-icons | ^15.1.1 | 15.1.1 | node_modules/@expo/vector-icons |
 | expo | ~57.0.30 | 57.0.30 | node_modules/expo |
+| expo-asset | ~57.0.20 | 57.0.20 | node_modules/expo-asset |
+| expo-audio | ~57.0.5 | 57.0.5 | node_modules/expo-audio |
 | expo-document-picker | ~57.0.3 | 57.0.3 | node_modules/expo-document-picker |
 | expo-file-system | ~57.0.7 | 57.0.7 | node_modules/expo-file-system |
 | expo-font | ~57.0.4 | 57.0.4 | node_modules/expo-font |
@@ -378,6 +380,8 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | jest-diff@29.7.0 (node_modules/expect/node_modules/jest-diff) | MIT | version-matched | node_modules/expect/node_modules/jest-diff/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | jest-matcher-utils@29.7.0 (node_modules/expect/node_modules/jest-matcher-utils) | MIT | version-matched | node_modules/expect/node_modules/jest-matcher-utils/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | expo@57.0.30 (node_modules/expo) | MIT | version-matched | node_modules/expo/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-asset@57.0.20 (node_modules/expo-asset) | MIT | version-matched | node_modules/expo-asset/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-audio@57.0.5 (node_modules/expo-audio) | MIT | version-matched | node_modules/expo-audio/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-constants@57.0.22 (node_modules/expo-constants) | MIT | version-matched | node_modules/expo-constants/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/env@2.4.3 (node_modules/expo-constants/node_modules/@expo/env) | MIT | version-matched | node_modules/expo-constants/node_modules/@expo/env/LICENSE [text-9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a] |
 | expo-document-picker@57.0.3 (node_modules/expo-document-picker) | MIT | version-matched | node_modules/expo-document-picker/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
@@ -413,7 +417,6 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @expo/ws-tunnel@2.0.1 (node_modules/expo/node_modules/@expo/ws-tunnel) | MIT | version-matched | node_modules/expo/node_modules/@expo/ws-tunnel/LICENSE [text-49c5f9c7097c9a940ff663a54c27a4c60e379df6cc2b3052df0d37a09a85df93] |
 | accepts@1.3.8 (node_modules/expo/node_modules/accepts) | MIT | version-matched | node_modules/expo/node_modules/accepts/LICENSE [text-71f83c4c0621102a56d9853812777b85751bce7e9726f686f5b056c1f8a4b0e6] |
 | ci-info@3.9.0 (node_modules/expo/node_modules/ci-info) | MIT | version-matched | node_modules/expo/node_modules/ci-info/LICENSE [text-f58943cb354fb2707fea2f7b26b04e6014ddb56835cdfd414c9d2c6c59165b64] |
-| expo-asset@57.0.20 (node_modules/expo/node_modules/expo-asset) | MIT | version-matched | node_modules/expo/node_modules/expo-asset/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-keep-awake@57.0.2 (node_modules/expo/node_modules/expo-keep-awake) | MIT | version-matched | node_modules/expo/node_modules/expo-keep-awake/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | hermes-estree@0.36.1 (node_modules/expo/node_modules/hermes-estree) | MIT | version-matched | node_modules/expo/node_modules/hermes-estree/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | hermes-parser@0.36.1 (node_modules/expo/node_modules/hermes-parser) | MIT | version-matched | node_modules/expo/node_modules/hermes-parser/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
@@ -12446,6 +12449,8 @@ Sources:
 - `node_modules/@expo/osascript/LICENSE`
 - `node_modules/@expo/plist/LICENSE`
 - `node_modules/babel-preset-expo/LICENSE`
+- `node_modules/expo-asset/LICENSE`
+- `node_modules/expo-audio/LICENSE`
 - `node_modules/expo-constants/LICENSE`
 - `node_modules/expo-document-picker/LICENSE`
 - `node_modules/expo-file-system/LICENSE`
@@ -12467,7 +12472,6 @@ Sources:
 - `node_modules/expo/LICENSE`
 - `node_modules/expo/node_modules/@expo/cli/LICENSE`
 - `node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server/LICENSE`
-- `node_modules/expo/node_modules/expo-asset/LICENSE`
 - `node_modules/expo/node_modules/expo-keep-awake/LICENSE`
 
 ```text

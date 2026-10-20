@@ -77,6 +77,43 @@ device acceptance is part of this inventory.
 
 ## Recorded local validation
 
+### SDK 57 action-sound refresh
+
+The `8366895` integration source adds `expo-audio ~57.0.5` and promotes the
+already locked `expo-asset 57.0.20` to a direct dependency. Regeneration uses
+the same isolated dependency installation as the reviewed Settings change;
+no dependency is installed or fetched for this inventory refresh.
+
+The refreshed candidate contains 25 direct dependencies, 766 non-dev lock
+entries, 756 installed version matches, ten absent optional packages and zero
+version mismatches. Its 718 readable notice files still deduplicate to the same
+276 exact text blocks. All previous text strings, byte counts and SHA-256 hashes
+remain unchanged. The existing Expo text block gains the Audio source and the
+promoted Asset source replaces its former nested installation path.
+
+Audio's lock and installed manifest both report MIT. Its installed `LICENSE`
+contains the original 2015-present 650 Industries, Inc. notice: 1,106 bytes,
+SHA-256 `fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4`.
+The generated outputs preserve that actual text rather than assigning terms
+from a package name. This is npm source/install evidence; it does not establish
+the complete native Audio dependency/notice graph or distribution clearance.
+
+The original local action cue is separately documented in
+[its source record](../assets/audio/README.md) and
+[the feedback scope](FEEDBACK_SETTINGS.md). The generator's stated image/font
+scan does not fingerprint WAV assets. This refresh does not expand that scan or
+claim a complete shipped-resource inventory.
+
+The current-input check and a fresh separate-directory regeneration both pass;
+both generated artifacts match byte for byte. Every retained JSON text block
+and all 718 readable source files match their recorded original-byte hashes.
+The ten optional absences and 54 entries without readable notice files retain
+their explicit limitations. The root license, generator, installed files,
+game/persistence, dependencies and app configuration are unchanged by this
+refresh; no game, native or export gate was run.
+
+### Initial inventory baseline
+
 On the `944019d` source baseline, the inventory records 23 direct dependencies,
 765 candidate non-dev lock entries, 755 matching installed versions and ten
 absent optional packages. There are zero installed-version mismatches. The 717
