@@ -25,7 +25,7 @@ export const laterLifeTemplates = [
     ['funny', 'Tell it as a funny old argument', { happiness: 5, stress: -3 }, 'The result loses its jurisdiction', 'You enjoy how much the dispute once mattered without reopening it as a current legal matter.', 'I laughed about a game dispute that used to feel very important.'],
     ['perspective', 'Notice how the stakes have changed', { smarts: 3, discipline: 2 }, 'A smaller trophy in memory', 'You remember the feeling and recognise its old scale. The memory can stay vivid without staying urgent.', 'I put an old competitive argument into perspective.'],
     ['prosecute', 'Present the case as though still pending', { stress: 4, energy: -3 }, 'The appeal enters another decade', 'You make a detailed argument to an audience with no power to alter the result.', 'I reopened an old game dispute in unnecessary detail.'],
-  ]),
+  ], { rarity: 'uncommon' }),
   s('later-photo-at-edge', 'You are almost in the picture', 'An old photograph catches you at the edge of the frame, apparently concentrating on something outside it. You can no longer remember what seemed so important.', [
     ['accept', 'Enjoy the unfinished little mystery', { happiness: 4, stress: -2 }, 'A life outside the frame', 'You let the unknown detail remain unknown. The photograph still holds an ordinary moment worth keeping.', 'I enjoyed an old photograph without solving every detail.'],
     ['recall', 'Write down what you do remember', { smarts: 3, discipline: 2 }, 'Some details stay', 'You record the clear parts without inventing an explanation for the rest.', 'I preserved the details I actually remembered from an old photograph.'],

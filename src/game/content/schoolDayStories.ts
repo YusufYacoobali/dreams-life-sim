@@ -84,7 +84,7 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-secret-language', min: 7, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'A private language',
+    id: 'school-secret-language', rarity: 'uncommon', min: 7, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'A private language',
     body: 'You and {classmate} invent a secret language. By lunchtime, neither of you remembers the word for lunch.',
     choices: [
       o('dictionary', 'Write a tiny dictionary together', { smarts: 2, discipline: 1 }, 'Terms agreed', 'You settle on a few words you can both remember. Lunch gets a very short entry.', 'I wrote a small secret-language dictionary with {classmate}.', undefined, { peerBond: 3 }),
@@ -111,7 +111,7 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-label-swap', min: 8, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The wrong caption',
+    id: 'school-label-swap', rarity: 'uncommon', min: 8, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The wrong caption',
     body: 'Your classroom display has {classmate}’s label under your drawing and yours under a picture of a potato. {teacher} is about to show the class.',
     choices: [
       o('quiet', 'Point out the swap quietly', { respect: 2, discipline: 1 }, 'Labels corrected', '{teacher} swaps the labels before the display. The potato keeps its anonymity.', 'I quietly pointed out swapped labels on a classroom display.', undefined, { teacherBond: 2, peerBond: 1 }),
@@ -138,7 +138,7 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-yearbook-proof', min: 13, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'journal', title: 'Words to remember',
+    id: 'teen-yearbook-proof', rarity: 'uncommon', min: 13, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'journal', title: 'Words to remember',
     body: 'A proof of the class yearbook puts {classmate}’s quote beside your name. It says “Insert something memorable here.” {teacher} wants corrections today.',
     choices: [
       o('correct', 'Send the correct name and quote', { discipline: 2, respect: 1 }, 'Proof corrected', '{teacher} updates the draft. {classmate} also sends an actual quote this time.', 'I corrected the names and quotations on a yearbook proof.', undefined, { teacherBond: 2, peerBond: 1 }),
@@ -156,7 +156,7 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-family-interview', min: 14, max: 17, parent: true, parentContact: true, school: 'secondary', teacher: true, illustration: 'relationship', title: 'The long version',
+    id: 'teen-family-interview', rarity: 'uncommon', min: 14, max: 17, parent: true, parentContact: true, school: 'secondary', teacher: true, illustration: 'relationship', title: 'The long version',
     body: '{teacher} sets a family-history interview. You call {parent} with one question about school. Twenty minutes later, they are still describing the journey there.',
     choices: [
       o('listen', 'Listen and write useful follow-ups', { respect: 2, energy: -2 }, 'An unexpected detail', 'A follow-up produces a story you had not heard before. You organise your notes afterwards.', 'I listened to {parent}’s school memories for a class interview.', 4, { grades: 1 }),

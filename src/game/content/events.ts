@@ -170,7 +170,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'small-mistake', min: 25, max: 90, illustration: 'journal', title: 'Reply all',
+    id: 'small-mistake', rarity: 'uncommon', min: 25, max: 90, illustration: 'journal', title: 'Reply all',
     body: 'You send a harmless but spectacularly unfinished message to more people than intended. It ends halfway through “as I was saying”.',
     choices: [
       option('own', 'Send a short correction', { respect: 3, stress: -2 }, 'Mystery resolved', 'One clear sentence does more work than your original three paragraphs.', 'I corrected a message I sent too soon.'),

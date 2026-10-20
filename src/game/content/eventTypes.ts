@@ -4,6 +4,7 @@ import type { StoryKind } from '../systems/storySchemas';
 import type { HobbyKind } from './leisure';
 import type { PetSpecies } from './pets';
 export type StoryChildGroup = 'baby' | 'young' | 'teen' | 'adult';
+export type EventRarity = 'common' | 'uncommon' | 'rare' | 'extremely-rare';
 export type StoryStat = Extract<Effect, { kind: 'stat' }>['stat'];
 export type StoryOption = {
   id: string; label: string; changes: Partial<Record<StoryStat, number>>; bond?: number;
@@ -11,7 +12,7 @@ export type StoryOption = {
   title: string; result: string; journal: string;
 };
 export type EventTemplate = {
-  id: string; min: number; max: number; parent?: boolean; parentContact?: boolean;
+  id: string; min: number; max: number; rarity?: EventRarity; parent?: boolean; parentContact?: boolean;
   school?: 'primary' | 'secondary' | 'any'; classmate?: boolean; teacher?: boolean;
   workplace?: boolean; coworker?: boolean; supervisor?: boolean;
   friend?: boolean; partner?: boolean;

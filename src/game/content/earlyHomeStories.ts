@@ -156,7 +156,7 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'child-shop-separation', min: 5, max: 9, parent: true, illustration: 'relationship', title: 'The aisle looks different',
+    id: 'child-shop-separation', rarity: 'rare', min: 5, max: 9, parent: true, illustration: 'relationship', title: 'The aisle looks different',
     body: '{parent} steps around a shelf in a shop. You turn the other way and suddenly cannot see them.',
     choices: [
       o('stay', 'Stay nearby and call their name', { discipline: 3, stress: -2 }, 'Just around the shelf', '{parent} hears you and comes back. You agree to stay where you can see each other.', 'I stayed nearby and called for {parent} when we got separated in a shop.', 3),

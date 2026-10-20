@@ -108,7 +108,7 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-volcano-breach', min: 6, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The volcano has escaped',
+    id: 'school-volcano-breach', rarity: 'uncommon', min: 6, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The volcano has escaped',
     body: 'Your classroom volcano erupts across {classmate}’s desk. {teacher} grabs a towel. You have made geology personal.',
     choices: [
       o('clean', 'Help clean the desk', { discipline: 2, energy: -2 }, 'Containment team', 'You clean together. {teacher} asks you to use less mixture next time.', 'I cleaned up after our classroom volcano flooded {classmate}’s desk.', undefined, { peerBond: 3, teacherBond: 2 }),
@@ -117,7 +117,7 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-tree-audition', min: 6, max: 11, school: 'primary', teacher: true, illustration: 'education', title: 'A demanding role',
+    id: 'school-tree-audition', rarity: 'uncommon', min: 6, max: 11, school: 'primary', teacher: true, illustration: 'education', title: 'A demanding role',
     body: '{teacher} asks for volunteers to play a tree in the class show. The tree has one line: “I am a tree.”',
     choices: [
       o('audition', 'Audition like your career depends on it', { happiness: 3, energy: -2 }, 'Deep roots', 'You try three different readings. {teacher} says one will do.', 'I auditioned for a tree with more enthusiasm than the script required.', undefined, { skill: { id: 'acting', delta: 2 }, teacherBond: 2 }),
@@ -126,7 +126,7 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-mascot-petition', min: 7, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'journal', title: 'Vote for the damp sock',
+    id: 'school-mascot-petition', rarity: 'uncommon', min: 7, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'journal', title: 'Vote for the damp sock',
     body: '{classmate} starts a petition to make a damp sock the class mascot. {teacher} asks what values the sock represents.',
     choices: [
       o('speech', 'Give the sock a campaign speech', { happiness: 3, respect: -1 }, 'A moving argument', 'You promise less homework and more washing machines. {teacher} remains unconvinced.', 'I gave a speech supporting {classmate}’s damp-sock mascot.', undefined, { peerBond: 3, skill: { id: 'politics', delta: 1 } }),

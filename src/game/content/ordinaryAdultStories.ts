@@ -5,7 +5,7 @@ export const ordinaryAdultTemplates = [
     ['correct', 'Explain the badge mix-up', { respect: 3, stress: -2 }, 'Authority returned', 'The actual organiser takes the question. You hand over the badge with a surprising amount of relief.', 'I corrected a mistaken badge before becoming responsible for a room.'],
     ['help', 'Help find chairs anyway', { happiness: 3, energy: -3 }, 'A short unofficial appointment', 'You find the chairs, then the organiser. Your entire term of office lasts seven minutes.', 'I helped at a community event after being mistaken for its organiser.'],
     ['invent', 'Point confidently at a cupboard', { respect: -3, stress: 3 }, 'Several mops, no chairs', 'Your instructions lead to a cleaning cupboard. The badge has not supplied any relevant knowledge.', 'I gave confident directions to chairs I had never seen.'],
-  ]),
+  ], { rarity: 'uncommon' }),
   s('adult-wave-behind', 'A wave with another destination', 'Someone across the square waves enthusiastically. You wave back before noticing the person directly behind you carrying an enormous reunion balloon.', [
     ['laugh', 'Laugh and lower your hand', { happiness: 3, stress: -2 }, 'A brief public misunderstanding', 'The stranger smiles back. The balloon receives the reunion it was dressed for.', 'I survived waving at someone who was waving past me.'],
     ['commit', 'Give the balloon a wave too', { happiness: 5, respect: 1 }, 'Everyone is included', 'The balloon’s owner waves back. You have accidentally made the exchange less awkward.', 'I included a reunion balloon in an accidental greeting.'],
@@ -90,7 +90,7 @@ export const ordinaryAdultTemplates = [
     ['admit', 'Admit you may be mixing memories', { respect: 3, stress: -2 }, 'The audience understands', 'Someone else recognises the film. Your actual memory survives with a much smaller car chase.', 'I corrected a memory that had borrowed a scene from a film.'],
     ['separate', 'Stick to the part you remember clearly', { discipline: 3, smarts: 2 }, 'A shorter true story', 'You leave out the uncertain details. The story becomes less spectacular and easier to believe.', 'I separated a clear memory from uncertain embellishment.'],
     ['continue', 'Continue towards the dramatic ending', { stress: 4, respect: -3 }, 'A familiar screenplay', 'A listener supplies the next line. You discover that your memory has an unusually recognisable cast.', 'I continued a doubtful memory until someone recognised the film.'],
-  ]),
+  ], { rarity: 'uncommon' }),
   s('adult-free-sample-opinion', 'The very honest feedback form', 'After a free public demonstration, a volunteer asks for honest feedback. The form has space for one sentence, which seems a sensible limit.', [
     ['specific', 'Offer one useful improvement', { respect: 3, smarts: 2 }, 'Something they can actually use', 'You describe the confusing step and what would clarify it. The volunteer writes it down.', 'I gave specific feedback after a free demonstration.'],
     ['kind', 'Say what worked well', { happiness: 3, respect: 2 }, 'A useful bit of encouragement', 'The volunteer is relieved to hear which explanation landed. Praise can contain information too.', 'I told a volunteer which part of their demonstration worked.'],

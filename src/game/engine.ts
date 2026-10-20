@@ -9,6 +9,7 @@ import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { refreshTeenRelationships, resolveTeenRelationship, teenRelationshipCommandSchema, type TeenRelationshipCommand } from './systems/teenRelationships';
 import { bindEvent, eligibleTemplates } from './content/events';
+import { weightedEvent } from './content/eventRarity';
 import { randomInteger } from './random';
 import { BoundChoice, Effect, effectRowSchema } from './runtime';
 import { z } from 'zod';
@@ -185,7 +186,7 @@ function finishYear(world: World) {
   // Introductory year is guaranteed; later years leave room for quiet years.
   const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
   if (shouldOffer && eligible.length) {
-    const template = pool[roll(world, 'events', 0, pool.length - 1)];
+    const template = introductory.length ? pool[roll(world, 'events', 0, pool.length - 1)] : weightedEvent(pool, total => roll(world, 'events', 0, total - 1));
     offerPending(world, bindEvent(world, template));
     world.eventHistory.push({ templateId: template.id, year: world.date.year });
   } else {
