@@ -1,0 +1,155 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "50303dc",
+  "scope": "Actual Android24 journal continuation from66 through ordinary supervisor/coworker conversations, acknowledgements and cold resume to74",
+  "sourceUnchangedGamePersistence": "134c461",
+  "command": {
+    "type": "interact",
+    "action": "talk",
+    "personId": "person_npc_49_16"
+  },
+  "result67EntireWorldExact": true,
+  "ack68EntireWorldExact": true,
+  "coldAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "17c1db5db4d2ef93fd9cfc25ff45b5e8d632cda61c612958a09ba384407edb9d"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "a9a28b222b56908e089dac0d330b695532baa8a90b6db1f19ba62b6f2abf1632"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 56,
+      "sha256": "a7138012374b4e9364efe8e37b934a9321b11ae34fcf370e5ec54f0d0e52a5b8"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 35,
+      "sha256": "03fb00fdecc3d13bd2e8bad628c0b7e5b24a2484171dff0238f277c8ea309ed3"
+    },
+    "snapshots": {
+      "rows": 35,
+      "sha256": "be6fa2f20b3788d1619f67d1bcdbb6c86ce1d38a446c886d65fe54ed787b5a9f"
+    }
+  },
+  "finalSourceCold70All8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "cff638b97cd66b3ffdb09fe2945993ea3ec9163de49a2f292f65bf74dbdb3556"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "ca6ae3ad63e19fa66f7af74c4a487aa90291020acce3dc57cc025ed8932dd3bf"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 58,
+      "sha256": "0ac61d3bba45712c13f80a1db95950e03d9df974ccfd655a73c2019ebbef8365"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 35,
+      "sha256": "03fb00fdecc3d13bd2e8bad628c0b7e5b24a2484171dff0238f277c8ea309ed3"
+    },
+    "snapshots": {
+      "rows": 35,
+      "sha256": "be6fa2f20b3788d1619f67d1bcdbb6c86ce1d38a446c886d65fe54ed787b5a9f"
+    }
+  },
+  "all8CommandsEntireWorldsExact": true,
+  "oldInactiveWorldsBackupsExact": {
+    "lives": 4,
+    "backups": 4
+  },
+  "old35MomentsAndMetadataExact": true,
+  "old54ReceiptsExact": true,
+  "counts": {
+    "backups": 5,
+    "branches": 1,
+    "lives": 5,
+    "preferences": 1,
+    "receipts": 62,
+    "restore_receipts": 1,
+    "snapshot_metadata": 35,
+    "snapshots": 35
+  },
+  "activeLifeId": "life_native_arcade_v28",
+  "finalRevision": 74,
+  "latestJournalFact": {
+    "id": "fact_72_256",
+    "date": {
+      "year": 2045,
+      "month": 10,
+      "day": 20
+    },
+    "personId": "person_player",
+    "text": "I told Sipho something I appreciate about them.",
+    "category": "relationships"
+  },
+  "worldHashes": {
+    "before": "af3461e8d30caa3dc89a1bf56d459895a3dace93b3847dabce51b57faef05b30",
+    "result": "6cad4040d8e24ec8d81e16584f6d59c572fc009fc95f518a18b0eb66c1c786a3",
+    "ack": "12fe9bceaff710909dd430a24ed9506444c098c2a1ffd727d2953bdf4df5924d"
+  },
+  "limits": "Software emulator and ExpoGo only; physical timing, standalone/iOS and full reference/accessibility acceptance remain open. No native world/stat/RNG/outcome/SQL edits.",
+  "finalSourceReadOnlyHistoryTabReturnAll8TablesExact": {
+    "backups": {
+      "rows": 5,
+      "sha256": "f5f8d86ebf44de2b54905c6e70fd7c3e5750ca41c828f01ac82db1cef7e49b44"
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "ed59ba6261127dbabd51cd7e4b7a6ec02231e14f2745239576c27a04a7accc87"
+    },
+    "lives": {
+      "rows": 5,
+      "sha256": "d3c9f3ae6ac8349ba2c3704959609f5196d549cf246bd114aec41b52fb48533e"
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "c4129d2212432c3e9f35013de7517f0bdf2191073f4f05c11171717d3580834d"
+    },
+    "receipts": {
+      "rows": 62,
+      "sha256": "ca8982b83e9b922be89fce9b1986b615a7564304741ebc5b1074db13c0ef1c67"
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "5eb3e6db0bb239cdf5efa583d0098be417b79d46e1f74dfe62b13440219efdce"
+    },
+    "snapshot_metadata": {
+      "rows": 35,
+      "sha256": "03fb00fdecc3d13bd2e8bad628c0b7e5b24a2484171dff0238f277c8ea309ed3"
+    },
+    "snapshots": {
+      "rows": 35,
+      "sha256": "be6fa2f20b3788d1619f67d1bcdbb6c86ce1d38a446c886d65fe54ed787b5a9f"
+    }
+  },
+  "finalWorldSha256": "f087eadab1c44d009d4506ae0dee761569f81de02163b3a57fb243ddb6996561",
+  "finalSourceNativeClippingDisabled": true,
+  "finalSourceTwoNewFactReturnsWithoutRenderThreadCrash": true,
+  "initialDiagnostic": "The first individual-fact revision retained Android default native clipping and crashed libhwui RenderThread twice when returning after an append. diagnostic/ preserves those original logs and pre-final captures. Final source disables native clipping while retaining virtualisation. Actual71–74 then pass."
+}

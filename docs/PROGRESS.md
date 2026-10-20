@@ -12,13 +12,25 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Life now virtualises individual journal facts with age headings, fixing settled
+same-year tail clipping. Native view clipping is disabled to prevent the
+reproduced Android24 RenderThread reattachment crash; final-source two actual
+appends and manual-history/tab return pass. All eight commands66→74 match whole
+expected worlds. Cold/startup and read-only navigation retain all eight tables;
+all original lives/history stay exact. Native is age19/revision74, five lives/
+35moments/62receipts. Eleven affected checks/seven suites pass in11.328s, strict
+types and both fresh Hermes exports. Game/persistence/full1356 baseline stay at
+134c461. [Layout and scope](LIFE_JOURNAL.md), [native proof](verification/android24-journal-facts-20261020/),
+[source/checks](verification/journal-facts-20261020.json). Initial failed clipping
+experiments remain diagnostic evidence; physical/release gates stay open.
+
+
 The actual accepted native raise62 is now preserved with clean pushed134c461,
 retaining all nineteen worlds, eighteen original moments/metadata and the earlier
 seventeen workplace moments. Two preservation/SQLite failure-retry-cold/payroll
 checks pass in **13.72 seconds**, strict types. Runtime and the1,356-test baseline
 below stay unchanged; this is internal fixture protection. [Provenance](verification/native-raise-archive-v30-20261020.json).
-Native final review also finds the settled age19 journal still clipping its
-latest garden fact. Fix that read-only layout before continuing content work.
+The later journal follow-up above fixes the settled age19 tail clipping.
 
 
 World **30 / engine 29 / content 5 / database 6** now adds [real raise requests](WORK_RAISES.md)

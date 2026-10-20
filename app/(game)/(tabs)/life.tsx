@@ -35,12 +35,14 @@ export default function Life() {
   const account = accountFor(world);
   const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = useMemo(() => world.journal.filter(entry => entry.personId === player.id), [world.journal, player.id]);
-  const years = useMemo(() => {
-    const groups = new Map<number, typeof entries>();
-    for (const entry of entries) { const age = ageOn({ ...player, died: null }, entry.date); const facts = groups.get(age) ?? []; facts.push(entry); groups.set(age, facts); }
-    return [...groups.entries()].map(([age, facts]) => ({ age, facts }));
+  const journalRows = useMemo(() => {
+    const person = { ...player, died: null }; let previousAge: number | undefined;
+    return entries.map(entry => {
+      const age = ageOn(person, entry.date), startsYear = age !== previousAge; previousAge = age;
+      return { entry, age, startsYear };
+    });
   }, [entries, player.born]);
-  const journal = useRef<FlatList<typeof years[number]>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
+  const journal = useRef<FlatList<typeof journalRows[number]>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
   const cancelJournalScroll = useCallback(() => {
     if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
     scrollFrame.current = null;
@@ -81,12 +83,14 @@ export default function Life() {
       <StatBar label="Respect" value={player.stats.respect} color={c.amber} icon={<Ionicons name="star" size={22} color="#F6BE30" />} />
     </View>
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
-    <FlatList ref={journal} data={years} keyExtractor={item => String(item.age)} style={{ flex: 1, marginHorizontal: 16, borderRadius: 16, backgroundColor: c.surface }} contentContainerStyle={{ paddingBottom: 16 }} initialNumToRender={8}
+    <FlatList ref={journal} data={journalRows} keyExtractor={item => item.entry.id} style={{ flex: 1, marginHorizontal: 16, borderRadius: 16, backgroundColor: c.surface }} contentContainerStyle={{ paddingBottom: 16 }} initialNumToRender={12} maxToRenderPerBatch={12} windowSize={7} removeClippedSubviews={false}
+      // Keep native row views attached while a frozen tab acquires new facts.
+      // Android 24 can crash its RenderThread when clipped rows are reattached.
       // Keep following while virtualised rows acquire their real heights. The
       // first content event can precede layout and cannot settle the position.
       onLayout={followJournal} onContentSizeChange={followJournal}
       onScrollBeginDrag={() => { shouldScroll.current = false; cancelJournalScroll(); }}
-      renderItem={({ item }) => <View onLayout={followJournal} style={{ paddingHorizontal: 16, paddingTop: 18, gap: 7 }}><Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {item.age}</Text>{item.facts.map(entry => <Body key={entry.id} muted>{entry.text}</Body>)}</View>}
+      renderItem={({ item }) => <View onLayout={followJournal} style={{ paddingHorizontal: 16, paddingTop: item.startsYear ? 18 : 7, gap: 7 }}>{item.startsYear && <Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {item.age}</Text>}<Body muted>{item.entry.text}</Body></View>}
       ListEmptyComponent={<View style={{ padding: 16 }}><Body muted>Your journal is ready for your first year.</Body></View>}
       ListFooterComponent={ageOn(player, world.date) === 0 ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.'}</Body></View> : null}
     />

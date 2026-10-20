@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `journal-facts-20261020.json` and `android24-journal-facts-20261020/` retain
+  individual journal-fact rows, final-source native-clipping mitigation, two
+  successful native appends/manual history/tab return, exact commands66–74 and
+  original-row protection. Eleven affected checks/seven suites, strict types
+  and both fresh Hermes exports pass. Initial native rendering failures are
+  preserved under diagnostic/. Game/persistence stays unchanged134c461.
+
 - `raises-20261020.json` records world30/engine29/content5, real supervisor
   requests, future payroll, promotion pay/currency retention and genuine
   history migration. Full **1,356/96-suite** regression, strict types and both

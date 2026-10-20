@@ -1,0 +1,46 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "50303dc",
+  "scope": "Life journal individual-fact virtualisation, native clipping disabled for frozen-tab appends, latest/manual-history positioning; UI only",
+  "source": {
+    "app/(game)/(tabs)/life.tsx": "e3e5efd18406994d9be637f318a962f65c990bd775c4249caf9eb781115987bc"
+  },
+  "gamePersistenceUnchangedFrom": "134c461",
+  "combinedGamePersistenceSourceHash": "ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637",
+  "verification": {
+    "affectedTests": 11,
+    "suites": 7,
+    "seconds": 11.328,
+    "exitCode": 0,
+    "raw": "journal-facts-ui-20261020.txt",
+    "strictApplicationAndTestTypesExitCode": 0,
+    "hermesExportsExitCode": 0,
+    "nativeRecord": "android24-journal-facts-20261020/journey-exact.json",
+    "nativeFinalRevision": 74,
+    "nativeWholeWorldCommandsExact": 8,
+    "latestFactBottom": 631,
+    "journalViewportBottom": 647,
+    "historyTabReturnAll8TablesExact": true,
+    "finalSourceTwoAppendReturnsNoNativeCrash": true,
+    "rawSha256": "86236f117434e391897ee14eb85b11155647b80c6ce2437da6d5b7fa06286b4b"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-d814fcc6557754de131ae5998b944075.hbc",
+      "bytes": 5401386,
+      "sha256": "d8de2d80682400ebd4a0007a4702ae9cec71854c8062f213b4557865701bc900"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-98e7d60b3246d93f6156f2b711323af5.hbc",
+      "bytes": 5096400,
+      "sha256": "d868f4790a6e547b01f8d22177bef68fe7038703bdb5120f10bc22a9ea868b0d"
+    }
+  ],
+  "fullRegressionBaseline": {
+    "commit": "134c461",
+    "tests": 1356,
+    "suites": 96,
+    "notRerunForUIOnlyChange": true
+  },
+  "limits": "Software Android24/ExpoGo; not physical p95, standalone/iOS or complete visual/accessibility/release acceptance. Content remains100/250; full production estimate remains about50%."
+}

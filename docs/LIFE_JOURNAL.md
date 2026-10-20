@@ -1,5 +1,27 @@
 # Life journal positioning
 
+## Individual facts and same-year appends
+
+The later actual age-nineteen review found another case: appending the garden
+fact to an existing year could leave its final lines below the viewport after
+layout settled. Each age was one growing cell. The list now virtualises each
+fact under its own persistent journal ID, adding an age heading at the start
+of a year. This bounds a mounted cell to one fact and lets appends measure a
+new cell. The existing native-content-end follow and manual-drag cancellation
+remain in place. Native view clipping is disabled: the initial individual-row
+revision reproduced an Android24 libhwui RenderThread crash on tab return after
+an append. Final source retains virtualisation without detaching clipped views.
+No simulation or persistence source changes.
+
+Native continuation and verification are recorded in
+[the current evidence](verification/android24-journal-facts-20261020/). Eight actual normal commands66→74 match whole worlds; final-source two appends
+show their latest facts with16pixels of bottom padding. Manual older-history
+reading survives Activities/return at the exact same position. Cold startup and
+read-only navigation retain all eight tables; original lives/history stay exact.
+Eleven affected checks/seven suites pass in11.328s, strict types and both Hermes
+exports. Initial crashing experiments remain under diagnostic/. Earlier results
+below retain their original source and acceptance scope.
+
 Resuming the actual age-nine Riley life opened the journal at birth and ages
 zero to four. The first content-size event arrived before the virtualised list
 had its real viewport/cell metrics, and the old code immediately stopped trying.

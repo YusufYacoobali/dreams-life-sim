@@ -23,11 +23,23 @@ Two preservation/SQLite failure-retry-cold/payroll checks pass in **13.72 second
 strict types. Runtime and the full1,356-test baseline remain unchanged; no new
 whole-regression count or player file breadth. [Producer/hash](verification/native-raise-archive-v30-20261020.json).
 
-Next priority discovered in native review: the age19 journal still cuts off the
-last garden fact after it settles. Reproduce at actual66 (read-only), diagnose
-native scroll/layout metrics and fix before continuing named workplace stories.
-Do not advance/reapply a raise to reproduce it. A later capture confirms it is
-not just a transitional frame: `/tmp/dreams-raises-finished-later.png`.
+The journal append follow-up now passes: individual facts retain age headings,
+native view clipping is disabled to avoid the observed Android24 RenderThread
+reattachment crash, and two actual final-source appends return fully visible.
+Manual older reading/tab return and cold startup preserve all eight tables.
+All eight normal commands66→74 match entire expected worlds; native is now
+Amahle **age19/revision74**, five lives/35moments/62receipts, no pending/year.
+All four inactive worlds/backups,35moments/metadata and54prior receipts stay exact.
+Eleven affected checks/seven suites pass in11.328s, strict types and both fresh
+Hermes exports. Game/persistence/full1356 baseline remain unchanged134c461.
+[Native scope](verification/android24-journal-facts-20261020/),
+[source/checks](verification/journal-facts-20261020.json). Initial clipped-row
+experiments crashed twice; original logs remain diagnostic evidence, and final
+source passes the repeated append cases. Do not claim physical/native release.
+
+Continue the named workplace situations next: actual present contacts, no
+people/RNG on selection, preserve bound choices/history, content-tag migration.
+There are still100 situations/250 minimum; do not count journal layout as content.
 
 ## Current verified milestone
 
@@ -90,7 +102,7 @@ Cold migration/browsing/draft/result preserve every row in all eight tables.
 Declined raises, annual limits and storage faults have separate domain/UI checks.
 
 All four prior live/backup rows, thirty-three old moments/metadata and forty-three
-old receipts remain exact. Native state: **five lives / thirty-five moments /
+old receipts remain exact. At that raise milestone: **five lives / thirty-five moments /
 fifty-four receipts**, Amahle `life_native_arcade_v28` active at **age19/revision66**,
 no pending/annual frame. Original Riley `life_content4_bubbles` remains53; branch
 `life_mvg00bcv_1sh3wmp_0` remains38. New Before Age Up payloads57/63 are byte-exact;
@@ -105,7 +117,7 @@ Environment (recheck if missing):
   `__UNSAFE_EXPO_HOME_DIRECTORY=/workspace/.cache/expo EXPO_OFFLINE=1 CI=1`.
 - Native DB `/data/user/0/host.exp.exponent/files/SQLite/dreams.db` plus WAL.
   Only copy for read-only verification; never modify native save data.
-- Current copies: `/tmp/dreams-raises-finished-db`66, `-paid-year-db`64,
+- Current copies: `/tmp/dreams-journal-final-db`74 (current), `/tmp/dreams-raises-finished-db`66, `-paid-year-db`64,
   `-ack-db`63, `-result-db`62, `-before-request-db`61, `-before-year-db`57;
   older baseline `/tmp/dreams-workplace-finished-db`55.
 - `/tmp/dreams-native-ui.py` locates actual accessible controls. Await each
