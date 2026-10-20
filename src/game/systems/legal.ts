@@ -12,7 +12,7 @@ import { offerPending } from '../pendingQueue';
 import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result } from './common';
 import { activeSentence, isConfined, prisonRoutineSchema } from './legalSchemas';
 import { endEmployment } from './work';
-import { addCondition } from './health';
+import { addCondition, hospitalized } from './health';
 import { placeDependentChildren, oweFamily } from './family';
 import { createContact } from './npcs';
 import { connectPerson, relationFor } from './relationships';
@@ -274,7 +274,7 @@ function resolveUnderground(world: World, command: Exclude<LegalCommand, { type:
   throw new IneligibleAction('This legal action is unavailable');
 }
 /** Called after the month's ordinary pay and care: a new arrest cannot revoke pay already earned. */
-export function legalMonth(world: World) {
+export function legalMonth(world: World, dischargedFromHospital?: ReadonlySet<string>) {
   const month = absolute(world);
   for (const person of Object.values(world.people)) if (!person.died) {
     const remanded = world.cases.filter(item => item.personId === person.id && item.status === 'awaiting-trial' && item.detained && item.opened.year * 12 + item.opened.month - 1 < month);
@@ -282,11 +282,11 @@ export function legalMonth(world: World) {
     const sentence = activeSentence(world, person.id);
     if (sentence && sentence.lastServedMonth < month) {
       sentence.lastServedMonth = month; sentence.servedMonths++;
-      const routine = sentence.routine;
+      const routine = sentence.routine, attending = !hospitalized(world, person) && !dischargedFromHospital?.has(person.id);
       sentence.behavior = bounded(sentence.behavior + (routine.conduct === 'quiet' ? 3 : routine.conduct === 'social' ? 1 : -3));
-      if (routine.work) { const pay = rules[sentence.country].baseWage / 2400n; if (pay) { post(world, pay, 0n, 'prison-pay', 'Prison work stipend', null, person, countries[sentence.country].currency); person.finance.cycleGross += pay; } }
-      if (routine.study) { sentence.studyMonths++; person.stats.smarts = bounded(person.stats.smarts + (sentence.studyMonths % 3 === 0 ? 1 : 0)); if (sentence.studyMonths >= 12 && !person.education.qualifications.some(item => item.level === 'secondary')) { person.education.qualifications.push({ level: 'secondary', field: 'general', year: world.date.year }); person.education.stage = 'none'; fact(world, 'I earned a secondary equivalency qualification through prison study.', 'education', '', person.id); } }
-      if (routine.exercise) person.stats.fitness = bounded(person.stats.fitness + 1);
+      if (routine.work && attending) { const pay = rules[sentence.country].baseWage / 2400n; if (pay) { post(world, pay, 0n, 'prison-pay', 'Prison work stipend', null, person, countries[sentence.country].currency); person.finance.cycleGross += pay; } }
+      if (routine.study && attending) { sentence.studyMonths++; person.stats.smarts = bounded(person.stats.smarts + (sentence.studyMonths % 3 === 0 ? 1 : 0)); if (sentence.studyMonths >= 12 && !person.education.qualifications.some(item => item.level === 'secondary')) { person.education.qualifications.push({ level: 'secondary', field: 'general', year: world.date.year }); person.education.stage = 'none'; fact(world, 'I earned a secondary equivalency qualification through prison study.', 'education', '', person.id); } }
+      if (routine.exercise && attending) person.stats.fitness = bounded(person.stats.fitness + 1);
       person.stats.stress = bounded(person.stats.stress + (routine.conduct === 'gang' ? 2 : -1));
       if (sentence.servedMonths + sentence.creditedMonths >= sentence.totalMonths) release(world, sentence, 'served');
     }

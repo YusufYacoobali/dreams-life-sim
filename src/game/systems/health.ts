@@ -1,4 +1,4 @@
-import { activeTrip } from './travelSchemas';
+import { storyPersonPresent } from './storyContext';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, Person, World } from '../model';
@@ -42,9 +42,10 @@ export function medicalQuote(world: World, cost: bigint, patient = active(world)
 }
 export const consultationCost = (world: World, service: 'checkup' | 'symptoms' | 'tests' | 'specialist', person = active(world)) => isConfined(world, person) ? 0n : rules[person.country].doctorVisit * BigInt(service === 'specialist' ? 4 : service === 'tests' ? 2 : 1);
 export function providerFor(world: World, patient: Person): Person {
-  let provider = patient.health.providerId && world.people[patient.health.providerId];
+  let provider = patient.health.providerId ? world.people[patient.health.providerId] : undefined;
   const payerId = carePayer(world, patient).id;
-  if (!provider || provider.id === patient.id || provider.id === payerId || provider.died || activeTrip(world, provider.id) || isConfined(world, provider) || provider.country !== patient.country || provider.city !== patient.city || provider.employment?.roleId !== 'doctor') provider = Object.values(world.people).find(person => person.id !== patient.id && person.id !== payerId && !person.died && !activeTrip(world, person.id) && !isConfined(world, person) && person.country === patient.country && person.city === patient.city && person.employment?.roleId === 'doctor') ?? null;
+  const available = (candidate: Person | undefined) => !!candidate && candidate.id !== patient.id && candidate.id !== payerId && candidate.country === patient.country && candidate.city === patient.city && candidate.employment?.roleId === 'doctor' && storyPersonPresent(world, candidate);
+  if (!available(provider)) provider = Object.values(world.people).find(available);
   if (!provider) {
     provider = createContact(world, { age: draw(world, 'npcs', 35, 55), country: patient.country, city: patient.city });
     provider.stats.smarts = Math.max(80, provider.stats.smarts); endEmployment(world, provider.id);
@@ -217,7 +218,7 @@ export function healthMonth(world: World) {
   }
 }
 export function healthFinanceMonth(world: World) {
-  const month = absolute(world);
+  const month = absolute(world), discharged = new Set<string>();
   for (const person of Object.values(world.people)) {
     if (person.died) continue;
     const extra = isConfined(world, person) ? 0n : healthRoutineCost(world, person), payer = carePayer(world, person);
@@ -232,8 +233,11 @@ export function healthFinanceMonth(world: World) {
       if (availableCash(accountFor(world, quote.payer)) < quote.amount) { condition.treatment = null; condition.status = 'active'; record(world, person, 'funding-pause', 'Ongoing care paused because funding was unavailable.', 0n, person.health.providerId, condition.id); fact(world, 'My ongoing treatment paused because I could not fund it.', 'health', '', person.id); continue; }
       payMedical(world, person, providerFor(world, person), cost, 'Ongoing treatment'); treatment.paid += fxMoney(world, { minor: cost, currency: countries[person.country].currency }, treatment.currency).minor; treatment.lastPaymentMonth = month;
     }
-    if (person.health.hospitalizedUntil !== null && person.health.hospitalizedUntil <= month) { person.health.hospitalizedUntil = null; fact(world, 'I left hospital and continued my recovery.', 'health', '', person.id); }
+    if (person.health.hospitalizedUntil !== null && person.health.hospitalizedUntil <= month) { if (person.health.hospitalizedUntil === month) discharged.add(person.id); person.health.hospitalizedUntil = null; fact(world, 'I left hospital and continued my recovery.', 'health', '', person.id); }
   }
+  // Later systems still need to know this was a hospital period even though its
+  // end-of-period discharge is already visible. This is transient, never saved.
+  return discharged;
 }
 export function illnessMortality(person: Person) {
   const serious = person.health.conditions.filter(item => item.status === 'active' && item.severity >= 65).sort((a, b) => conditions[b.type].mortalityBps - conditions[a.type].mortalityBps);

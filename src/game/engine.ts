@@ -131,14 +131,14 @@ function processMonth(world: World) {
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
-  healthFinanceMonth(world);
+  const dischargedFromHospital = healthFinanceMonth(world);
   socialMonth(world);
   familyFinanceMonth(world);
   petMonth(world);
   leisureMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
-  legalMonth(world);
+  legalMonth(world, dischargedFromHospital);
   refreshRoyalSuccession(world,'background');
   for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
