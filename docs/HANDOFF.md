@@ -22,7 +22,32 @@ previous-life summaries are complete. Full production remains approximately
 **58%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: hourly contracts, financial goals and editorial consistency
+## Current integration checkpoint: reviewed gameplay and durable action flows
+
+World33 /engine34 /content9 /reader13 is integrated at5245fbb; final test source
+is e0bf44c. All **2,100 tests /147 suites** pass in **1,260.991 seconds**, strict
+app/test types and fresh Android/iOS Hermes exports pass. The same120immutable
+annual seeds0–119 pass in687.245seconds; no extra-seed or older full-world equality
+claim. The initial full run caught a stale future-reader test; corrected to14,
+then the complete current suite passed. [Committed source and raw checks](verification/autonomy-integration-checkpoint-20261020.json).
+
+This integrates reviewed autonomous NPC dating/courtship, family/financial/action
+review reliability, hospital/legal consistency, named consequences and opening
+focus/contrast improvements. Actual Android normal/130% opening/cancel and
+reader12→13 keep all eight tables exact. Existing Alex Martín reaches School17
+through normal play; unchanged school controls/cancel preserve all eight tables.
+Six other lives/backups,60original moments and119original receipts remain exact.
+The three real School edits/cold checks,70sample action gate, entrepreneur country
+continuation and detailed final publication remain in progress; do not claim them
+complete. Overall estimate remains58% until the milestone's remaining acceptance.
+
+Continue independent work concurrently in separate worktrees. Primary integration
+owns testing, commits and pushes. Current source is being pushed as a safe point;
+inspect the remote for final SHA/time and keep the two-hour push cadence. No new
+file/import/export/history breadth; preserve automatic saving and exact resume.
+A routine checkpoint does not end the authorised complete-game work.
+
+## Prior checkpoint: hourly contracts, financial goals and editorial consistency
 
 Separate worktrees are integrated at944019d. Two ordinary part-time roles now
 offer reviewed8/12/20-hour contracts, default12, with52paid weeks.20hours waits
