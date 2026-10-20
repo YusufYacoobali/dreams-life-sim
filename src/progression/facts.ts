@@ -21,6 +21,16 @@ export function progressFacts(world: World, personId = world.activePersonId): Pr
   }
 
   const repaymentMonths = new Set<number>(), profitMonths = new Set<number>(), repaidLoans = new Set<string>();
+  const dividendMonths = new Set<number>(), purchasedProperties = new Set<string>(), repaidMortgages = new Set<string>();
+  let investmentPurchases = 0;
+  // Asset/action IDs retain the original acquisition even after sale or inheritance.
+  // Names or current ownership alone do not prove that this person bought a home.
+  const properties = new Map(world.assets.filter(item => item.kind === 'property' && /^asset_\d+$/.test(item.id)).map(item => [item.id, item]));
+  const mortgageProperties = new Map(world.liabilities.flatMap(debt => {
+    const assetId = /^mortgage_(asset_\d+)_\d+$/.exec(debt.id)?.[1];
+    return assetId && properties.has(assetId) ? [[debt.id, assetId] as const] : [];
+  }));
+  const mortgages = new Map<string, { balance: bigint; ownBorrowing: boolean; ownRepayments: boolean }>();
   const personalLoans = new Set(world.liabilities.filter(item => item.kind === 'personal').map(item => item.id));
   const balances = new Map<string, { balance: bigint; ownBorrowing: boolean; ownRepayments: boolean }>();
   // One ledger pass. A zero balance alone could be forgiveness or estate settlement.
@@ -30,6 +40,27 @@ export function progressFacts(world: World, personId = world.activePersonId): Pr
       const month = row.year * 12 + row.month - 1;
       if (row.category === 'repayment' && row.liabilityId && row.cashDelta < 0n && row.debtDelta < 0n) repaymentMonths.add(month);
       if (row.category === 'business-owner-income' && row.cashDelta > 0n) profitMonths.add(month);
+      if (row.category === 'investment' && row.cashDelta < 0n && row.debtDelta === 0n) investmentPurchases++;
+      if (row.category === 'dividend' && row.cashDelta > 0n && row.debtDelta === 0n) dividendMonths.add(month);
+      if (row.category === 'purchase' && row.cashDelta < 0n && row.debtDelta === 0n) {
+        const revision = /^txn_(\d+)_\d+$/.exec(row.id)?.[1], asset = revision ? properties.get('asset_' + revision) : undefined;
+        if (asset && row.year === asset.acquired.year && row.month === asset.acquired.month && row.currency === asset.currency && -row.cashDelta >= asset.pricePaid && row.description === 'Purchased ' + asset.name) purchasedProperties.add(asset.id);
+      }
+    }
+    if (row.liabilityId && row.debtDelta && mortgageProperties.has(row.liabilityId)) {
+      const asset = properties.get(mortgageProperties.get(row.liabilityId)!)!;
+      const state = mortgages.get(row.liabilityId) ?? { balance: 0n, ownBorrowing: false, ownRepayments: true };
+      const ownDraw = row.category === 'borrowing' && row.personId === personId && row.currency === asset.currency && row.cashDelta === row.debtDelta && row.cashDelta > 0n && row.description === 'Mortgage funding: ' + asset.name;
+      const ownPayment = row.category === 'repayment' && row.personId === personId && row.currency === asset.currency && row.cashDelta === row.debtDelta && row.cashDelta < 0n && (row.description === 'Debt repayment' || row.description === 'Monthly mortgage payment');
+      if (row.debtDelta > 0n) {
+        if (state.balance === 0n) { state.ownBorrowing = ownDraw; state.ownRepayments = true; }
+        else if (row.category !== 'interest' || row.personId !== personId || row.cashDelta !== 0n) state.ownBorrowing = false;
+      } else if (!ownPayment) state.ownRepayments = false;
+      state.balance += row.debtDelta;
+      // Sale proceeds, refinancing and estate settlement also close balances.
+      // Only the person's own regular/extra repayments can earn this milestone.
+      if (state.balance === 0n && state.ownBorrowing && state.ownRepayments && ownPayment) repaidMortgages.add(row.liabilityId);
+      mortgages.set(row.liabilityId, state);
     }
     if (!row.liabilityId || !personalLoans.has(row.liabilityId) || !row.debtDelta) continue;
     const state = balances.get(row.liabilityId) ?? { balance: 0n, ownBorrowing: false, ownRepayments: true };
@@ -98,6 +129,8 @@ export function progressFacts(world: World, personId = world.activePersonId): Pr
     profitMonths: profitMonths.size,
     profitableBusinesses: new Set(world.businessLedger.filter(item => item.personId === personId && item.category === 'owner-distribution' && item.cashDelta < 0n).map(item => item.businessId)).size,
     repaidPersonalLoans: repaidLoans.size,
+    investmentPurchases, dividendMonths: dividendMonths.size, purchasedProperties: purchasedProperties.size,
+    repaidMortgages: [...repaidMortgages].filter(id => purchasedProperties.has(mortgageProperties.get(id)!)).length,
     actorProjects: projects.actor, modelProjects: projects.model, athleteProjects: projects.athlete,
     musicianProjects: projects.musician, politicianProjects: projects.politician,
     militaryAssignments: serviceAssignments('military'), spaceAssignments: serviceAssignments('astronaut'),

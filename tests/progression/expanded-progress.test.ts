@@ -51,8 +51,8 @@ test.each(examples)('%s uses the original person’s actual records without awar
   expect(lifeProgress(world)).toEqual(progress); expect(encodeWorld(world)).toBe(before); expect(lifeProgress(decodeWorld(before))).toEqual(progress);
 });
 
-test('all forty achievements and twelve challenges have unique stable IDs and real positive goals', () => {
-  expect(achievementDefinitions).toHaveLength(40); expect(challengeDefinitions).toHaveLength(12);
+test('all forty-five achievements and fourteen challenges have unique stable IDs and real positive goals', () => {
+  expect(achievementDefinitions).toHaveLength(45); expect(challengeDefinitions).toHaveLength(14);
   for (const entries of [achievementDefinitions, challengeDefinitions]) expect(new Set(entries.map(item => item.id)).size).toBe(entries.length);
   for (const goal of [...achievementDefinitions.map(item => item.goal), ...challengeDefinitions.flatMap(item => item.goals)]) {
     expect(goal.target).toBeGreaterThan(0); expect(Number.isInteger(goal.target)).toBe(true); expect(goal.label.trim()).not.toBe('');

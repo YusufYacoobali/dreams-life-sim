@@ -1,6 +1,6 @@
 export type ProgressCategory = 'life' | 'career' | 'wealth' | 'special';
 export type ProgressArt = 'school' | 'study' | 'work' | 'hobby' | 'pet' | 'rings' | 'travel' | 'money' | 'trophy';
-export type ProgressRoute = '/school' | '/education' | '/work' | '/hobbies' | '/pets' | '/family' | '/travel' | '/bank' | '/special-careers' | '/scholarships' | '/coworkers' | '/business' | '/creators' | '/royalty';
+export type ProgressRoute = '/school' | '/education' | '/work' | '/hobbies' | '/pets' | '/family' | '/travel' | '/bank' | '/investments' | '/assets' | '/special-careers' | '/scholarships' | '/coworkers' | '/business' | '/creators' | '/royalty';
 export type ProgressFacts = {
   schoolReports: number; highReports: number; acceptedHelp: number; clubMonths: number;
   secondaryQualifications: number; furtherQualifications: number; workMonths: number;
@@ -9,6 +9,7 @@ export type ProgressFacts = {
   tuitionWaivers: number; completedScholarships: number; acceptedFeedback: number; acceptedRaises: number;
   pensionPeriods: number; hobbyKindsPractised: number; children: number; foundedBusinesses: number;
   profitMonths: number; profitableBusinesses: number; repaidPersonalLoans: number;
+  investmentPurchases: number; dividendMonths: number; purchasedProperties: number; repaidMortgages: number;
   actorProjects: number; modelProjects: number; athleteProjects: number; musicianProjects: number; politicianProjects: number;
   militaryAssignments: number; spaceAssignments: number; youtuberPosts: number; streamerBroadcasts: number;
   creatorPosts: number; liveMinutes: number; royalEngagements: number; awardedProjects: number;

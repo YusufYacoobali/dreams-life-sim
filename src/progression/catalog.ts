@@ -41,6 +41,11 @@ export const achievementDefinitions: readonly AchievementDefinition[] = [
   { id: "streamer-work", title: "Live from Here", description: "Complete twelve actual live broadcasts.", category: "special", art: "trophy", goal: { id: "streamerBroadcasts", label: "Complete twelve live broadcasts from a Streamer studio", target: 12, unit: "live broadcasts", route: "/creators" } },
   { id: "royal-service", title: "Showing Up", description: "Complete twelve actual royal engagements.", category: "special", art: "trophy", goal: { id: "royalEngagements", label: "Complete twelve royal engagements", target: 12, unit: "engagements", route: "/royalty" } },
   { id: "varied-ventures", title: "Varied Ventures", description: "Receive earned profit from three different businesses.", category: "wealth", art: "money", goal: { id: "profitableBusinesses", label: "Receive an earned distribution from three distinct businesses", target: 3, unit: "profitable businesses", route: "/business" } },
+  { id: 'first-investment', title: 'A Stake in Something', description: 'Pay for a personal investment purchase.', category: 'wealth', art: 'money', goal: { id: 'investmentPurchases', label: 'Buy an investment with a recorded payment', target: 1, unit: 'paid purchases', route: '/investments' } },
+  { id: 'first-dividend', title: 'Dividend Day', description: 'Receive an actual investment dividend.', category: 'wealth', art: 'money', goal: { id: 'dividendMonths', label: 'Receive a positive dividend payment', target: 1, unit: 'dividend payment months', route: '/investments' } },
+  { id: 'dividend-twelve-months', title: 'Patient Capital', description: 'Receive dividends in twelve distinct months.', category: 'wealth', art: 'money', goal: { id: 'dividendMonths', label: 'Receive dividends in twelve distinct months', target: 12, unit: 'dividend payment months', route: '/investments' } },
+  { id: 'property-purchase', title: 'On the Deeds', description: 'Purchase a property with a recorded payment.', category: 'wealth', art: 'money', goal: { id: 'purchasedProperties', label: 'Personally purchase a property', target: 1, unit: 'properties purchased', route: '/assets' } },
+  { id: 'mortgage-repaid', title: 'The Last Mortgage Payment', description: 'Fully repay a mortgage on a property you purchased, using actual repayments.', category: 'wealth', art: 'money', goal: { id: 'repaidMortgages', label: 'Fully repay your own property mortgage without sale or refinancing settlement', target: 1, unit: 'mortgages repaid', route: '/assets' } },
 ];
 
 export const challengeDefinitions: readonly ChallengeDefinition[] = [
@@ -99,6 +104,14 @@ export const challengeDefinitions: readonly ChallengeDefinition[] = [
     { id: "completedProjects", label: "Complete three special-career projects", target: 3, unit: "completed projects", route: "/special-careers" },
     { id: "awardedProjects", label: "Complete a project that earns an award", target: 1, unit: "awarded projects", route: "/special-careers" },
     { id: "workMonths", label: "Complete sixty actual working months", target: 60, unit: "working months", route: "/work" },
+  ] },
+  { id: 'patient-investor', title: 'The Patient Investor', description: 'Make a personal investment and receive dividends across twelve distinct months.', difficulty: 'medium', art: 'money', goals: [
+    { id: 'investmentPurchases', label: 'Buy an investment with a recorded payment', target: 1, unit: 'paid purchases', route: '/investments' },
+    { id: 'dividendMonths', label: 'Receive dividends in twelve distinct months', target: 12, unit: 'dividend payment months', route: '/investments' },
+  ] },
+  { id: 'paid-for-property', title: 'Paid for in Full', description: 'Purchase a property and repay its mortgage through actual regular or extra payments.', difficulty: 'hard', art: 'money', goals: [
+    { id: 'purchasedProperties', label: 'Personally purchase a property', target: 1, unit: 'properties purchased', route: '/assets' },
+    { id: 'repaidMortgages', label: 'Fully repay your own property mortgage without sale or refinancing settlement', target: 1, unit: 'mortgages repaid', route: '/assets' },
   ] },
 ];
 
