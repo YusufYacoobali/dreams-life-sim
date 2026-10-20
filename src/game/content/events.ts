@@ -21,6 +21,7 @@ import { hobbyContent } from './leisure';
 import { conditions } from './health';
 import { formatMoney } from '../money';
 import { everydayLifeTemplates } from './everydayLifeStories';
+import { storyContactNames } from '../storyNames';
 
 /** Original situations, not random names placed in interchangeable success text. */
 export const eventTemplates: readonly EventTemplate[] = [
@@ -304,6 +305,21 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
     destination: life.visited ? destinations[life.visited.destinationId].city : '',
     condition: life.condition ? conditions[life.condition.type].name : '', salary,
   };
+  const contacts = storyContactNames([
+    ...(template.parent && person ? [{ token: 'parent', role: 'parent', person, display: names.parent }] : []),
+    ...(template.classmate && context.peer ? [{ token: 'classmate', role: 'classmate', person: context.peer, display: names.classmate }] : []),
+    ...(template.teacher && context.teacher ? [{ token: 'teacher', role: 'teacher', person: context.teacher, display: names.teacher }] : []),
+    ...(template.coworker && work.coworker ? [{ token: 'coworker', role: 'coworker', person: work.coworker, display: names.coworker }] : []),
+    ...(template.supervisor && work.supervisor ? [{ token: 'supervisor', role: 'supervisor', person: work.supervisor, display: names.supervisor }] : []),
+    ...(template.friend && social.friend ? [{ token: 'friend', role: 'friend', person: social.friend, display: names.friend }] : []),
+    ...(template.partner && social.partner ? [{ token: 'partner', role: 'partner', person: social.partner, display: names.partner }] : []),
+    ...(binding.child ? [{ token: 'child', role: 'child', person: binding.child.person, display: names.child }] : []),
+  ]);
+  Object.assign(names, contacts.names);
+  const relationshipLabels = [...contacts.consequenceNames].flatMap(([personId, label]) => {
+    const relation = relationFor(world, player.id, personId);
+    return relation ? [{ relationshipId: relation.id, label }] : [];
+  });
   // A name is literal text, including dollar signs or text resembling another token.
   const text = (value: string) => value.replace(/\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary)\}/g, (_match, key: keyof typeof names) => names[key]);
   const choices: BoundChoice[] = template.choices.map(choice => ({
@@ -324,6 +340,9 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
       ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id }] : []),
     ],
     resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
-  }));
+  })).map(choice => {
+    const labels = relationshipLabels.filter(row => choice.effects.some(effect => effect.kind === 'relationship' && effect.relationshipId === row.relationshipId));
+    return labels.length ? { ...choice, relationshipLabels: labels } : choice;
+  });
   return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : []), ...(template.coworker && work.coworker ? [work.coworker.id] : []), ...(template.supervisor && work.supervisor ? [work.supervisor.id] : []), ...(template.friend && social.friend ? [social.friend.id] : []), ...(template.partner && social.partner ? [social.partner.id] : []), ...(binding.child ? [binding.child.person.id] : [])])], choices };
 }

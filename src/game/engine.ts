@@ -8,7 +8,7 @@ import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { bindEvent, eligibleTemplates } from './content/events';
 import { randomInteger } from './random';
-import { Effect, effectRowSchema } from './runtime';
+import { BoundChoice, Effect, effectRowSchema } from './runtime';
 import { z } from 'zod';
 import { formatMoney } from './money';
 import { currentSchool } from './systems/schoolSchemas';
@@ -200,7 +200,7 @@ function continueYear(world: World) {
   if (world.annual?.stage === 'months' && world.annual.monthsProcessed === 12 && !world.pending && !world.annual.pausedForPlanning) finishYear(world);
 }
 
-function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRowSchema>[] {
+function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels']): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
@@ -255,7 +255,7 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       if (!relation) throw new IneligibleAction('That relationship no longer exists');
       const before = relation.strength; relation.strength = clamp(before + effect.delta); refreshFriendship(relation);
       const names = [relation.from, relation.to].filter(id => id !== world.activePersonId).map(id => fullName(world.people[id]));
-      delta = relation.strength - before; label = names.join(' and ') + ' · relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
+      delta = relation.strength - before; label = (relationshipLabels?.find(row => row.relationshipId === relation.id)?.label ?? names.join(' and ')) + ' · relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
     } else {
       const from = world.accounts.find(account => account.id === effect.fromAccountId);
       const to = world.accounts.find(account => account.id === effect.toAccountId);
@@ -299,7 +299,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
     const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : null;
-    const effects = outcome ? outcome.effects : applyEffects(world, choice.effects);
+    const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
     if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects }, priority + 1);

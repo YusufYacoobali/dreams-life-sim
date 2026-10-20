@@ -28,8 +28,16 @@ export const effectRowSchema = z.object({ id: z.string(), label: z.string(), val
 export type RuntimeEffectRow = z.infer<typeof effectRowSchema>;
 export const choiceSchema = z.object({
   id: z.string(), label: z.string(), effects: z.array(effectSchema),
+  // Saved only for new ambiguous bindings; absent on all earlier choices.
+  relationshipLabels: z.array(z.object({ relationshipId: z.string().min(1).max(160), label: z.string().min(1).max(240) })).min(1).max(8).optional(),
   disabledReason: z.string().optional(),
   resultTitle: z.string(), resultBody: z.string(), journal: z.string(),
+}).superRefine((choice, context) => {
+  const seen = new Set<string>();
+  for (const [index, row] of (choice.relationshipLabels ?? []).entries()) {
+    if (seen.has(row.relationshipId) || !choice.effects.some(effect => effect.kind === 'relationship' && effect.relationshipId === row.relationshipId)) context.addIssue({ code: 'custom', path: ['relationshipLabels', index], message: 'A display label must identify one of this choice’s relationship effects exactly once' });
+    seen.add(row.relationshipId);
+  }
 });
 export type BoundChoice = z.infer<typeof choiceSchema>;
 export const pendingSchema = z.discriminatedUnion('kind', [
