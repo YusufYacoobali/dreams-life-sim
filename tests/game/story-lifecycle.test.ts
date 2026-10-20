@@ -1,5 +1,5 @@
 import { pupil } from '../support/pupil';
-import { bindEvent, eventTemplates } from '../../src/game/content/events';
+import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
 import { recordDeath, resolveCommand } from '../../src/game/engine';
 import { monthFrom } from '../../src/game/calendar';
@@ -55,6 +55,15 @@ function promise(world: World, kind: Kind) {
   return ack(choose(world, kind === 'arcade' ? 'ask' : 'promise'));
 }
 const planned = (kind: Kind = 'arcade', age = 8) => promise(pupil('US', age), kind);
+test.each(['arcade', 'project'] as const)('a valid sparse history cannot offer the already-recorded %s origin again under the same ID', kind => {
+  const world = planned(kind), thread = world.storyThreads[0], template = eventTemplates.find(item => item.id === thread.originTemplateId)!;
+  expect(world.eventHistory).toEqual([]); validateWorld(world); const before = encodeWorld(world);
+  // The age and participants still fit. The durable origin, rather than a
+  // coincidental context restriction, must exclude the duplicate offer.
+  expect(bindEvent(world, template).id).toBe(thread.originEventId);
+  expect(eligibleTemplates(world)).not.toContainEqual(template); expect(eligibleTemplates(world).length).toBeGreaterThan(0);
+  expect(encodeWorld(world)).toBe(before); expect(eligibleTemplates(decodeWorld(before))).not.toContainEqual(template);
+});
 function funds(world: World, personId: string) {
   post(world, 100000000n, 0n, 'fixture-funding', 'Lifecycle fixture funds', null, world.people[personId]);
 }

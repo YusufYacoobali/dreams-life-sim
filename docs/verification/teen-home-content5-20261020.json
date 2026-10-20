@@ -1,0 +1,92 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "4939eb6",
+  "scope": "Ten early-teen situations and thirty choices; content-tag-only migration; prevent duplicate callback-origin offers in sparse histories",
+  "recordedAt": "2026-10-20T03:25:58.509Z",
+  "gameSourceHash": "b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e",
+  "combinedGamePersistenceSourceHash": "7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6",
+  "sweepToolSha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 5,
+    "database": 6
+  },
+  "source": {
+    "src/game/content/teenHomeStories.ts": "361f98615121075a206a2e20a555330a08d97de49c657f2c6d890c4eb0bcdd05",
+    "src/game/content/childhood.ts": "fb02af52b3a13212289200c23aecdfee6fa010c1b8a04dda5aa997fd36fad540",
+    "src/game/content/events.ts": "9dea387e8b8782527451a90869dadbde027ca130b593747a610d7735e6f55daa",
+    "src/game/model.ts": "90832f329ace9729b4eba3bf1cd2f36a0f80311af65740b211d0fd6add3cb615",
+    "src/game/createLife.ts": "a9929652ca09898da583cb13e3566762d52cc214b7e595f88516dc75c87aa3de",
+    "tests/game/teen-home-stories.test.ts": "3390814c7eecf38665968496183f5756a8bd0693c2ea57dbd55cccb05be6610c",
+    "tests/game/story-lifecycle.test.ts": "feebb071fc2eee439c61d00f9fb8629662740c1010fd6171b9dd6c6922269475",
+    "tests/persistence/native-arcade-archive.test.ts": "7f9cbf2deb6519d1551c95abcd3f9d044240dd1ee58b332ca607a30710fd196a",
+    "tests/game/childhood-stories.test.ts": "01df17cfd7a8ed2f2d0697858b7e5a687bacce42cf51a285345181d3f9cf87f6",
+    "tests/game/content-refresh.test.ts": "02c1d06d91708f68c1ac4910f485f3837e380ea7d4c534f82764dbb00686f06a",
+    "tests/game/early-home-stories.test.ts": "2f02bf4b60085c901ec9af9b35fc358f4a9cab025118f3e937137d9cf8821869",
+    "tests/game/story-callbacks.test.ts": "9925e53ace4b6e7dfce145b53f96b510de41610b137060837fc84ea610163808",
+    "tests/game/leisure.test.ts": "beb26188d27af41098b16327079c2b5a08f4fe64536c9b0d045a68928baa6d34",
+    "tests/game/pets.test.ts": "a87c5eac49cc99f31768f33f203b7e1e633ebcde2dcbddad2b77cf6711338581"
+  },
+  "catalogue": {
+    "distinctSituations": 100,
+    "minimum": 250,
+    "additionalNeeded": 150,
+    "newSituations": 10,
+    "newChoices": 30
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1285,
+      "suites": 91,
+      "seconds": 713.383,
+      "exitCode": 0,
+      "raw": "regression-content5-20261020.txt",
+      "rawSha256": "4da0c9182a95a1cd59e0309a42d7d2b181a559167e79bd2476727f446a59307d"
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "currentSourceLifetimeSeeds": 120,
+    "currentSourceLifetimeRecord": "life-sweep-content5-120-20261020.json",
+    "nativeRecord": "android24-teen-home-20261020/journey-exact.json",
+    "nativeDecisionAndResultColdTablesExact": true,
+    "nativeResult46AndAck47EntireWorldsExact": true,
+    "genuineNativePaidArchive": "tests/fixtures/v28-native-arcade-archive.json",
+    "genuineArchiveProducerCommit": "e29e634",
+    "genuineArchiveSha256": "012a5fd72c64c612e0877c496ff743742d4e8869e0c1673e60ab6d41a7059e50",
+    "oldTwelveMomentPayloadsAndMetadataPreserved": true,
+    "oldWorldFieldsPreservedApartFromContentTag": true,
+    "callbackSparseHistoryBothFamiliesCovered": true
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-08f7672d50361f11af02bb2b30af8cd9.hbc",
+      "bytes": 5367684,
+      "sha256": "0ce5ba450903c5c7689ed51eb1ca3cdc6873bd44fac0e4bce79f2db1038d9760"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-fd955ecd43f33f19c2fe1d749f771c25.hbc",
+      "bytes": 5062523,
+      "sha256": "9d54ae796c3dd5a7dc7d61cbf87b02e045635cf528d5c7b3078ac84a99c10f59"
+    }
+  ],
+  "actionDiagnostics": {
+    "raw": "action-latency-content5-20261020.json",
+    "rawSha256": "76392097144b926cf13018327238879b79f3fad3eba879db1d3cbf4fc6f3387b",
+    "scope": "five warm cloud Node/on-disk SQLite samples per fixed actual world; every cold world and backup exact; not native",
+    "sourceHash": "7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6",
+    "samplesPerCase": 5,
+    "all35WarmSamplesAvoidFullDecode": true,
+    "allColdCurrentAndBackupWorldsExact": true,
+    "medianTotalMs": {
+      "Begin Life": 1.0900080000001253,
+      "First-year choice": 2.9854050000003554,
+      "First-year choice Continue": 2.463702000000012,
+      "Age-seven callback": 6.184830000000147,
+      "Age-seven callback Continue": 15.239100999999664,
+      "Age-30 routine": 28.4408999999996,
+      "Age-60 routine": 78.6456820000003
+    }
+  },
+  "limits": "The content-four 1000-seed result remains historical; current content-five gate is 120 distinct seeds. No complete-game, physical p95, standalone/iOS, every optional action, 120-year/1000-person/multi-generation claim. Further file-feature breadth remains deferred."
+}

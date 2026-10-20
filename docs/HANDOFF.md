@@ -1,5 +1,53 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Latest completed milestone: [content five](TEEN_HOME_STORIES.md) adds ten early-
+teen home situations and thirty choices, for **100 distinct source situations**.
+World **28 / engine 27 / content 5 / database 6** is current. Migration retains
+old bound choices, results, journal, people, money and RNG. The genuine native
+paid-arcade archive was exported with isolated unmodified `e29e634` source and
+its exact hash; all thirteen original worlds and twelve moment payloads remain
+protected. Never regenerate historical fixtures with newer game source.
+
+Selection also excludes an already-recorded callback origin ID even when old
+event history is sparse, preventing an offered promise whose choice would fail.
+Both callback families have dedicated checks. The final complete **1,285 tests /
+91 suites** pass in **713.383 seconds**, strict types and both fresh Hermes
+exports pass. All final verification jobs closed with exit zero; no regression/sweep job remains
+running. [Source/checks](verification/teen-home-content5-20261020.json) and
+[raw complete regression](verification/regression-content5-20261020.txt).
+
+Current game hash: `b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e`.
+Combined game/persistence hash: `7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6`.
+The final current-source **120 distinct immutable lives** pass across twelve
+countries in **643.205 seconds**, stderr empty. Terminal worlds/metrics exactly
+match the same 120 pre-hardening cases; these are not 240 distinct seeds.
+[Raw runs and scope](verification/life-sweep-content5-120-20261020.json).
+The older 1,000-seed pass below belongs to content four, not current source.
+
+Fresh ordinary-action diagnostics retain the lag fix: Begin Life **1.09 ms**,
+first-year choice **2.99 ms**, Continue **2.46 ms**, age-seven choice **6.18 ms**,
+resumed Continue **15.24 ms**, age-30 routine **28.44 ms**, age-60 routine
+**78.65 ms**, including real SQLite saves. All 35 warm samples avoid full
+checkpoint decode; every cold current/backup matches. [Raw diagnostics](verification/action-latency-content5-20261020.json).
+These are cloud engine/save timings, not native startup/navigation or physical p95.
+
+Actual Android continuation reaches the new phone scene at age sixteen.
+Final-source cold decision/result preserve all eight tables; choice 46 and
+acknowledgement 47 match entire expected worlds exactly. Respect rises 56→59;
+capped happiness/bond, money and RNG stay exact. Earlier annual replay matches
+simulation fields with explicitly recorded native currency-spacing exceptions.
+All four prior live/backup rows, twenty-eight original moments/metadata and
+twenty-five earlier receipts stay exact. Current native state is **five lives /
+thirty-two moments / thirty-five receipts**, Amahle `life_native_arcade_v28`
+active at revision **47**. Original Riley **53** and branch **38** stay unchanged.
+[Native provenance and scope](verification/android24-teen-home-20261020/).
+
+Continue the complete production plan and early-game priority. There are still
+150 situations needed for the minimum; work/adult stories, richer work contacts,
+broader integration and release/native/physical gates remain open. Further file
+breadth stays parked. Earlier checkpoints below retain their historical source,
+versions, counts and narrower validation scopes.
+
 Native outing acceptance now passes on unchanged `e29e634`. A separate seed-4
 life reaches an actual age-eleven Johannesburg invitation through normal
 Start/Begin and 29 production commands; the existing picker loads its preserved
@@ -9,15 +57,15 @@ preserves all eight tables; the remaining eleven months and fort choice finish
 age twelve / revision 37. Simulation fields match production exactly, with
 explicitly recorded native-vs-Node currency-spacing presentation exceptions.
 All four existing worlds/backups, sixteen moments and eighteen receipts stay
-exact; the original input's eleven moments also remain byte-exact. Native state
-is now **five lives / twenty-eight moments / twenty-five receipts**, Amahle
+exact; the original input's eleven moments also remain byte-exact. At that checkpoint, native state
+was **five lives / twenty-eight moments / twenty-five receipts**, Amahle
 `life_native_arcade_v28` active at revision 37, original Riley 53 / branch 38
 unchanged. Read [raw proof and limits](verification/android24-arcade-20261020/).
 The preparation is not a native birth-to-eleven claim. No player file breadth
 or source change; all existing checks/exports and the 1,000-seed gate retain
 their scope. Continue the full production plan and early-game priority.
 
-Latest: import/recovery now publish their authoritative saved-life summary from
+At `e29e634`, import/recovery now publish their authoritative saved-life summary from
 the successful repository operation. Normal actions already retained branch
 origin; only the old import/recovery helper dropped it. No post-commit list or
 checkpoint reread is added, and the next action retains its warm save cache.

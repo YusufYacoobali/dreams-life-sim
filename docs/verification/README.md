@@ -4,6 +4,40 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `teen-home-content5-20261020.json` records ten new situations, content-tag
+  migration, sparse-history callback origin protection, the complete **1,285 /
+  91-suite** pass, strict types and both fresh Hermes exports on final source.
+  `regression-content5-20261020.txt` retains the raw complete test output.
+  `android24-teen-home-20261020/` preserves actual continuation, final-source
+  cold decision/result, exact full choice/ack worlds and original saved rows.
+  Its provenance distinguishes the original scene offer and currency-text
+  exceptions from final-source cold/choice/ack checks.
+
+- `life-sweep-content5-120-20261020.json` and matching `.ndjson` record all
+  120 distinct final-source immutable seeds 0–119, twelve countries, unchanged
+  hashes, empty stderr and zero exit in 643.205 seconds. The preserved pre-
+  hardening raw run has the same complete terminal worlds/metrics; these are
+  overlapping seeds, not 240 cases. The older 1,000-seed gate is content four.
+
+- `action-latency-content5-20261020.json` retains seven current-source cloud
+  action medians, five samples each. All 35 warm samples avoid full decode;
+  every cold current/backup is exact. Age-60 routine: 78.65 ms including SQLite.
+  This is not native timing or a new paired comparison with the older source.
+
+- `native-arcade-archive-v28-20261020.json` records the genuine native paid
+  result exported using isolated unmodified `e29e634` source and its exact
+  hash. Current checkpoint and all twelve original moments/metadata are byte-
+  exact; never regenerate that fixture using newer source.
+  `android24-arcade-20261020/` retains actual permission/no charge, month-one
+  parent payment, exact cold tables and remaining-year completion, with all
+  currency-text differences enumerated and original lives/history preserved.
+
+- `save-summary-20261020.json` and `android24-save-summary-20261020/` record
+  authoritative branch summary publication after existing import/recovery,
+  no post-commit list/decode, 161 affected checks and actual immediate native
+  label retention. Existing recovery receipt-reset behaviour remains explicit;
+  this adds no player file-feature breadth.
+
 - `android24-school-callback-20261020/` retains the actual ordinary v1-moment
   branch, month-two project/help, exact cold result and remaining-year pet/
   birthday flow. Entire current/backup/intermediate worlds match production;

@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **90 distinct situational templates** against
+The source catalogue contains **100 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -18,10 +18,10 @@ category.
 | Primary school with actual contacts | 27 |
 | Secondary school with actual contacts | 13 |
 | Shared primary/secondary project promise | 1 |
-| General teenage/family situations | 4 |
+| Early-teen / teenage family situations | 14 |
 | General adult/later-life situations | 12 |
-| **Source total** | **90** |
-| **Additional distinct situations needed for the minimum** | **160** |
+| **Source total** | **100** |
+| **Additional distinct situations needed for the minimum** | **150** |
 
 The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
@@ -49,6 +49,14 @@ Each of their three choices resolves in all twelve countries, and a real SQLite
 opening journey preserves decision/result writes through failure/retry/cold load.
 World 26 subsequently adds persistent pets; adoption, care and loss acknowledgements
 are system results and leave the distinct-source count at 90.
+
+Content five adds ten [early-teen home situations](TEEN_HOME_STORIES.md), with
+thirty choices about growing independence, family boundaries, attention and
+ordinary practical tasks. Five scenes use an actual home parent, one explicitly
+permits remote parent contact, and four are parent-independent. Their existing
+stat/bond effects do not invent purchases, qualifications, people or monthly
+practice. The source total is now 100. Old bound choices, results, paid outings,
+original historical payloads and RNG survive the content-tag migration.
 
 The School page now shows saved plans, their actual participants and dates,
 permission and conditional outing quote, and four recent outcomes. Paid outings
@@ -92,4 +100,4 @@ The remaining catalogue needs employment and all eleven special paths, adult
 relationships, finances/ownership, health/legal situations, travel, pets/hobbies,
 later-life/legacy callbacks and uncommon memorable outcomes. The existing system
 decisions do not satisfy those distinct-story allocations. The overall game
-estimate remains about 50%; 90/250 is a content count, not an overall score.
+estimate remains about 50%; 100/250 is a content count, not an overall score.

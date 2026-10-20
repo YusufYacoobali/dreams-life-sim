@@ -1,12 +1,25 @@
 # Production-state lifetime invariant sweep
 
-The world-28 run now **passes all 1,000 distinct seeds 0–999** through the
+Current content five passes **120 distinct seeds 0–119**, across all twelve
+countries, through the validated-immutable engine in **643.205 seconds**.
+The completion record, unchanged final source/tool hashes, empty stderr and
+zero exit are verified. Game hash:
+`b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e`.
+[Summary and raw records](verification/life-sweep-content5-120-20261020.json)
+retain ages 40–98, max 24 people / 55,199 ledger rows. All same 120 terminal
+worlds/metrics match the pre-hardening run exactly; those overlapping cases do
+not create 240 distinct seeds. The complete current regression separately
+passes 1,285 tests / 91 suites. There is no current content-five 1,000-seed claim.
+
+## Earlier content-four 1,000-seed gate
+
+The earlier world-28/content-four run **passes all 1,000 distinct seeds 0–999** through the
 production validated-immutable API, across all twelve countries, in
 **5,030.819 seconds**. The actual completion record is present, stderr is empty
 and the process exits zero. Game and runner hashes stay unchanged. The
 [completion record](verification/life-sweep-v28-1000-20261020.json) and
 [all raw cases](verification/life-sweep-v28-1000-20261020.ndjson) preserve exact
-terminal-world hashes. This closes this scoped world-28 engine gate.
+terminal-world hashes. This closes that scoped content-four engine gate.
 
 `node tools/run-life-sweep.cjs 1000 0 --immutable` exercises seeds 0–999 through
 actual birth-to-death engine progression using the validated immutable state path
@@ -59,6 +72,6 @@ completed cases each. All 1,000 versions match world 28 / engine 27 / content 4.
 Future changed-source runs remain incomplete until their actual completion
 record, distinct seed set, unchanged source hashes and successful exit are
 verified. Partial progress or overlapping preflight cases do not establish a
-new gate or whole-Jest regression total. The complete 1,226-test / 80-suite result
+new gate or whole-Jest regression total. The earlier complete 1,226-test / 80-suite result
 remains scoped to `e5a4aaf`; native/production acceptance and conservative
 baselines stay open. Continue the full production plan from this verified state.

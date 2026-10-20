@@ -236,7 +236,10 @@ function templateParent(world: World, template: EventTemplate) {
 export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
   const context = schoolContext(world);
-  return eventTemplates.filter(template => age >= template.min && age <= template.max && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  // Callback records remain authoritative even when an older history is sparse.
+  // Never offer an origin ID that scheduleStory already considers recorded.
+  const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));
+  return eventTemplates.filter(template => age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {

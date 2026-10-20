@@ -12,6 +12,45 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Content five adds ten [early-teen home situations](TEEN_HOME_STORIES.md), thirty
+choices and a source total of **100 / 250 minimum**. Physical scenes use the
+actual available home parent; remote contact is explicit. Stat/bond effects
+remain bounded and introduce no money, people, qualifications or monthly practice.
+Content migration changes only the tag for existing world-28 lives, retaining
+all already-bound effects, results, history and RNG. The genuine native paid
+arcade archive was exported with isolated unmodified `e29e634` source; all
+thirteen original worlds and twelve historical payloads remain protected.
+
+Callback selection also checks durable origin IDs, preventing a duplicate
+promise when older event history is sparse. Both families are covered. The
+final complete **1,285 tests / 91 suites** pass in **713.383 seconds**, strict
+application/test types and both fresh Hermes exports pass. All **120 distinct
+current-source immutable lives** pass across twelve countries in **643.205
+seconds**, empty stderr/exit zero. The same 120 pre-hardening worlds and metrics
+match exactly; they are not additional distinct cases. The earlier 1,000-life
+content-four pass remains historical. [Source and checks](verification/teen-home-content5-20261020.json),
+[raw complete regression](verification/regression-content5-20261020.txt),
+[lifetime scope](verification/life-sweep-content5-120-20261020.json).
+
+Actual Android continuation reaches the new age-sixteen phone scene. Final-
+source cold decision/result preserve every table; choice 46 and acknowledgement
+47 match entire expected worlds exactly. All four older lives/backups,
+twenty-eight moments/metadata and twenty-five earlier receipts stay exact;
+the old content-four Before Age Up payload also remains byte-exact. Native
+state is five lives / thirty-two moments / thirty-five receipts, Amahle 47 active,
+original Riley 53 / branch 38 unchanged. [Native provenance](verification/android24-teen-home-20261020/)
+distinguishes the earlier scene offer from final-source cold/choice checks and
+records annual currency-spacing exceptions without changing native data.
+
+Fresh current-source button diagnostics retain the warm path: Begin Life
+1.09 ms, first choice 2.99 ms, Continue 2.46 ms, age-seven choice 6.18 ms,
+resumed Continue 15.24 ms, age-30 routine 28.44 ms and age-60 routine **78.65 ms**,
+including SQLite. All 35 warm samples perform no full checkpoint decode;
+every cold current/backup matches. [Raw cloud measurements](verification/action-latency-content5-20261020.json)
+are engine/save timings, not native startup/navigation or physical p95. Further
+file-feature breadth stays deferred; the full production estimate remains
+approximately 50% and the remaining content, integration and release gates stay open.
+
 Actual Android outing acceptance now covers a naturally prepared age-eleven
 Johannesburg invitation, permission with no charge, month-one attendance and
 one R75 payment by the original parent. Permission and RNG survive unchanged.

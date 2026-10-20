@@ -4,13 +4,46 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Completed world-28 lifetime invariant gate
+## Current content-five action diagnostics
 
-The production validated-immutable engine completes all **1,000 distinct seeds
+The final world-28 / engine-27 / content-five source passes **1,285 tests /
+91 suites**, strict types and both Hermes exports. A new serial measurement
+runs after regression/export/lifetime work completes. Each fixed actual input
+has one warm-up and five on-disk SQLite samples; every cold current/backup
+world is exact. All **35 warm samples avoid full checkpoint decode**.
+[Full current measurements](verification/action-latency-content5-20261020.json)
+record combined source hash
+`7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6`.
+
+| Current action, cloud engine + SQLite | Median |
+| --- | ---: |
+| Begin Life | 1.09 ms |
+| First-year choice | 2.99 ms |
+| First-year Continue | 2.46 ms |
+| Age-seven callback choice | 6.18 ms |
+| Age-seven Continue with resumed months | 15.24 ms |
+| Age-30 routine | 28.44 ms |
+| Age-60 routine | 78.65 ms |
+
+These are current diagnostics using normally migrated actual inputs, not a new
+paired before/after comparison. The older controlled comparison below retains
+its original source and identical-input scope. State-only cold decode is also
+recorded separately, not described as complete app startup or navigation.
+Native physical p95 remains open.
+
+Current content five also passes **120 distinct immutable lifetimes** across
+twelve countries in **643.205 seconds**, with exact unchanged source hashes,
+empty stderr and exit zero. All 120 terminal worlds/metrics match the same
+pre-hardening cases; these are not 240 distinct seeds. [Current scope](LIFE_SWEEP.md)
+separates this gate from the older content-four 1,000-seed pass below.
+
+## Completed content-four lifetime invariant gate
+
+The earlier content-four validated-immutable engine completes all **1,000 distinct seeds
 0–999** across twelve countries in **5,030.819 seconds**, with fixed game/tool
 hashes, empty stderr and exit zero. [All raw terminal hashes and summary](LIFE_SWEEP.md)
 retain scope. This first-eligible-policy cloud run reaches ages 25–102, max
-26 people / 61,778 ledger rows. It closes this engine invariant gate; it does
+26 people / 61,778 ledger rows. It closes that content-four engine gate; it does
 not establish physical p95 timings, 120-year/multi-generation, 1,000-person or
 SQLite/storage budgets. The older smaller-run records below remain historical.
 

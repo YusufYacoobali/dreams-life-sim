@@ -15,6 +15,18 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+Content five adds ten [early-teen home situations](TEEN_HOME_STORIES.md), for
+100 distinct situations / 250 minimum. Existing lives retain their exact bound
+data under a content-tag-only migration. Durable callback origins also prevent
+duplicate offers with sparse older history. All **1,285 tests / 91 suites**,
+strict types, both Hermes exports and **120 current-source immutable lifetimes**
+pass. Native cold choice/result and acknowledgement of the new age-sixteen
+scene match complete expected worlds; original lives and history remain exact.
+Fresh age-60 routine diagnostics are **78.65 ms** including SQLite, with no
+warm checkpoint decode; these remain cloud measurements. The older 1,000-seed
+gate belongs to content four. Full-game/release estimates and remaining gates
+stay fixed; further player file features remain parked.
+
 The existing import/recovery path now retains its authoritative branch label
 without another list/decode; normal actions already preserved it. All 161
 affected checks, strict types and both Hermes exports pass. Actual Android
@@ -56,9 +68,9 @@ See [native evidence and remaining gates](NATIVE_OPENING.md). Complete reference
 accessibility, physical-device performance, standalone and iOS acceptance remain
 open; the conservative baseline estimates below stay fixed.
 
-World 28 completes all eight core hobby kinds. Its full 1,226-test / 80-suite
-checkpoint and genuine reading archive are pushed; current UI-only native
-polish leaves that game/persistence source unchanged. Broader leisure and the
+World 28 completes all eight core hobby kinds. Its earlier full 1,226-test /
+80-suite checkpoint and genuine reading archive are pushed; subsequent UI-only
+polish retained that source before content five above. Broader leisure and the
 complete production plan remain part of the authorised goal.
 
 The initial [Extras increment](EXTRAS.md) adds twelve factual achievements,
@@ -126,7 +138,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% baseline | Persistent pets plus four hobby/four outing paths implemented with automated checks; broader leisure breadth and native acceptance remain pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% baseline | 90 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
+| Distinct situational stories | 20% baseline | 100 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 

@@ -1,0 +1,59 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+  "stateMode": "validated immutable",
+  "node": "v24.19.0",
+  "seeds": {
+    "start": 0,
+    "end": 119,
+    "unique": 120,
+    "completeRange": true
+  },
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 5
+  },
+  "gameSourceHash": "b287f4deb6d2c931d9a69d0bce4287a8f8a3ed1488afb0c9574af043cacf2a1e",
+  "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+  "countryCounts": {
+    "AU": 10,
+    "IT": 11,
+    "BR": 12,
+    "ZA": 10,
+    "ES": 12,
+    "US": 13,
+    "CA": 10,
+    "GB": 10,
+    "DE": 12,
+    "FR": 6,
+    "IN": 6,
+    "JP": 8
+  },
+  "ageRange": [
+    40,
+    98
+  ],
+  "maxPeople": 24,
+  "maxLedgerRows": 55199,
+  "seconds": 643.205,
+  "stderrEmpty": true,
+  "exitCode": 0,
+  "raw": {
+    "file": "docs/verification/life-sweep-content5-120-20261020.ndjson",
+    "bytes": 37660,
+    "sha256": "c0c4ebe649717b416c2b49a52be30f5df35c92fbfbc96d8b7871374663123433"
+  },
+  "preHardeningComparison": {
+    "raw": {
+      "file": "docs/verification/life-sweep-content5-pre-hardening-120-20261020.ndjson",
+      "bytes": 37664,
+      "sha256": "7c329922f18ed51b1a9e37f1b5d2e07bf718073d37e2257b9273430a3f6af0b1"
+    },
+    "oldGameSourceHash": "9b18ebee24ce91fac40490eb86184454db7b818edf4889fa0f353fa603cb7cd7",
+    "same120Seeds": true,
+    "allTerminalWorldHashesAndMetricsExact": true,
+    "additionalDistinctCases": 0
+  },
+  "limitations": "Pure engine/Node/first eligible policy; not native, SQLite, every optional action/branch, 120-year, 1000-person or multi-generation acceptance. Content-four 1000-seed gate remains historical; no current-content5 1000-seed claim."
+}
