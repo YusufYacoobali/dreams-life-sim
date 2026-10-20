@@ -20,7 +20,7 @@ export default function Birth() {
   const player = world.people[world.activePersonId], parents = world.relationships.filter(edge => edge.roles.includes('parent') && edge.to === player.id).map(edge => world.people[edge.from]);
   const born = months[player.born.month - 1] + ' ' + player.born.day + ', ' + player.born.year, membership = royalMembership(world);
   return <Page bottomSafeArea footer={<>
-    {error && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{error}</Text>}
+    {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, lineHeight: 21 }}>{error}</Text>}
     <Button label="Begin Life!" busy={busy} onPress={async () => { if (await acknowledge()) router.replace('/life'); }} />
   </>}>
     <View style={{ alignItems: 'center', paddingTop: 12, gap: 14 }}>

@@ -5,12 +5,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { Body, Button, Card } from '../src/ui/components';
+import { Button, Card } from '../src/ui/components';
 import { freshSeed, useGame } from '../src/state/useGame';
 import { fullName } from '../src/game/model';
+import { useColors } from '../src/ui/theme';
 
 const hero = require('../assets/generated/welcome-hero.png');
 export default function Welcome() {
+  const c = useColors();
   const ready = useGame(s => s.ready), world = useGame(s => s.world), busy = useGame(s => s.busy), error = useGame(s => s.error), bootstrap = useGame(s => s.bootstrap);
   const open = () => { if (world) router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); };
   const create = (mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } });
@@ -18,11 +20,11 @@ export default function Welcome() {
     <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.contents}>
       <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
       <View style={styles.actions}>{!ready ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /> : <>
-        {error && <Card><Body>{error}</Body><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></Card>}
-        {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue as ' + fullName(world.people[world.activePersonId])} disabled={busy} onPress={open} style={styles.continue}><Ionicons name="play" size={20} color="#FFFFFF" /><Text style={styles.actionText}>Continue as {world.people[world.activePersonId].firstName}</Text></Pressable>}
-        <Pressable accessibilityRole="button" accessibilityLabel="Start Your Life" disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, { opacity: busy ? 0.5 : pressed ? 0.8 : 1 }]}><Text style={styles.actionText}>Start Your Life</Text></Pressable>
-        <Pressable accessibilityRole="button" accessibilityLabel="Random Life" disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.secondary, { opacity: busy ? 0.5 : pressed ? 0.8 : 1 }]}><Ionicons name="dice-outline" size={22} color="#FFFFFF" /><Text style={styles.actionText}>Random Life</Text></Pressable>
-        <View style={{ flexDirection: 'row', gap: 12 }}><Pressable accessibilityRole="button" accessibilityLabel="Saved Lives, Import and Export" disabled={busy} onPress={() => router.push('/saved-lives')} style={[styles.saved, { flex: 1 }]}><Ionicons name="folder-open-outline" size={18} color="#D4E1F5" /><Text style={styles.savedText}>Saved Lives</Text></Pressable><Pressable accessibilityRole="button" accessibilityLabel="Help" onPress={() => router.push('/help')} style={[styles.saved, { flex: 1 }]}><Ionicons name="help-circle-outline" size={20} color="#D4E1F5" /><Text style={styles.savedText}>Help</Text></Pressable></View><Text style={styles.offline}>Free to play · Offline · Your story stays with you</Text>
+        {error && <Card><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></Card>}
+        {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={styles.continue}><Ionicons name="play" size={20} color="#FFFFFF" /><Text style={styles.actionText}>Continue as {world.people[world.activePersonId].firstName}</Text></Pressable>}
+        <Pressable accessibilityRole="button" accessibilityLabel="Start Your Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, { opacity: busy ? 0.5 : pressed ? 0.8 : 1 }]}><Text style={styles.actionText}>Start Your Life</Text></Pressable>
+        <Pressable accessibilityRole="button" accessibilityLabel="Random Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.secondary, { opacity: busy ? 0.5 : pressed ? 0.8 : 1 }]}><Ionicons name="dice-outline" size={22} color="#FFFFFF" /><Text style={styles.actionText}>Random Life</Text></Pressable>
+        <View style={{ flexDirection: 'row', gap: 12 }}><Pressable accessibilityRole="button" accessibilityLabel="Saved Lives, Import and Export" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => router.push('/saved-lives')} style={[styles.saved, { flex: 1 }]}><Ionicons name="folder-open-outline" size={18} color="#D4E1F5" /><Text style={styles.savedText}>Saved Lives</Text></Pressable><Pressable accessibilityRole="button" accessibilityLabel="Help" onPress={() => router.push('/help')} style={[styles.saved, { flex: 1 }]}><Ionicons name="help-circle-outline" size={20} color="#D4E1F5" /><Text style={styles.savedText}>Help</Text></Pressable></View><Text style={styles.offline}>Free to play · Offline · Your story stays with you</Text>
       </>}</View>
     </ScrollView></SafeAreaView>
   </View>;
