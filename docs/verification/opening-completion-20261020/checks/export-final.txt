@@ -1,0 +1,47 @@
+Starting Metro Bundler
+
+iOS Bundled 66179ms ../settings-accessibility/node_modules/expo-router/entry.js (1603 modules)
+Android Bundled 82898ms ../settings-accessibility/node_modules/expo-router/entry.js (1728 modules)
+
+› Assets (49):
+../settings-accessibility/node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
+../settings-accessibility/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf (390KB)
+../settings-accessibility/node_modules/expo-router/assets/arrow_down.png (9.5KB)
+../settings-accessibility/node_modules/expo-router/assets/arrow_right.xml (307B)
+../settings-accessibility/node_modules/expo-router/assets/checkmark.xml (312B)
+../settings-accessibility/node_modules/expo-router/assets/error.png (469B)
+../settings-accessibility/node_modules/expo-router/assets/file.png (138B)
+../settings-accessibility/node_modules/expo-router/assets/forward.png (188B)
+../settings-accessibility/node_modules/expo-router/assets/pkg.png (364B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/back-icon.png (8 variations | 359B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+../settings-accessibility/node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 variations | 592B)
+../settings-accessibility/node_modules/expo-router/assets/sitemap.png (465B)
+../settings-accessibility/node_modules/expo-router/assets/unmatched.png (4.8KB)
+assets/audio/action-tap.wav (2KB)
+assets/generated/activity-atlas.png (1.3MB)
+assets/generated/career-atlas.png (1.8MB)
+assets/generated/death-memorial.png (1.1MB)
+assets/generated/fame-business-atlas.png (1.5MB)
+assets/generated/family-atlas.png (1.6MB)
+assets/generated/health-legal-atlas.png (1.7MB)
+assets/generated/ordinary-hobby-atlas.png (1.3MB)
+assets/generated/ownership-atlas.png (1.9MB)
+assets/generated/pets-leisure-atlas.png (2MB)
+assets/generated/portrait-layers.png (1.7MB)
+assets/generated/school-atlas.png (2MB)
+assets/generated/travel-atlas.png (3MB)
+assets/generated/welcome-hero.png (2MB)
+
+› ios bundles (1):
+_expo/static/js/ios/entry-aa0618470c823086a9f6670bfe36a2f4.hbc (5.5MB)
+
+› android bundles (1):
+_expo/static/js/android/entry-05acf8917342b09fb964dcab0ad334f2.hbc (5.8MB)
+
+› Files (1):
+metadata.json (5.3KB)
+
+Exported: /tmp/dreams-opening-next-export

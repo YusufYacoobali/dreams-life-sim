@@ -19,10 +19,81 @@ work/school UI tasks and a read-only review are delegated while the primary
 agent owns integration, consolidated gates and safe commits/pushes. Further import/export/sharing breadth
 stays parked; the existing80%+ implementation's folder-save check passed. Read-only
 previous-life summaries are complete. Full production remains approximately
-**60%**; the catalogue contains **250/250 minimum**. Editorial, balance and
+**65%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: autonomous family life, clear consequences and durable action reviews
+## Current checkpoint: complete personal overview and durable early actions
+
+World34 / engine35 / content10 / reader14 / checkpointv4 integrates the reviewed
+parallel opening and early-play work. Profile, Statistics and annual Finances
+show actual personal history, with separate currencies and honest sparse-history
+labels. Settings persist motion, optional haptics and a local tap sound independently;
+feedback defaults off and never delays the action. Health/Exercise reviews retain
+failed drafts and close after durable success. Current paid hobby practice can
+introduce one genuine acquaintance. Education includes explicit voluntary
+secondary withdrawal under authored country minimums, without qualifications or
+other rewards. Residence-aware emigration, factual progression destinations and
+remaining unchanged-form guards are integrated.
+
+The fresh final-source regression passes **2,282 tests /169 suites** in
+**1,315.195 seconds**. Strict app/all-test types, fresh Android/iOS Hermes exports
+and the same120 immutable annual seeds0–119 pass; the latter took753.071seconds.
+Initial5a and final73ced source maps differ only in one reviewed stale-wording test.
+The initial run had two known wording failures and was intentionally interrupted
+(exit143); it has no complete full-run summary. The original Expo home-path
+failure (exit7) and successful workspace-home retry are retained separately.
+[Complete source, checks and precise scopes](verification/opening-completion-20261020.json).
+
+Criminal policyv2 completes12 reused country seeds900–911 in179.765seconds,
+including actual secondary withdrawal at the first eligible normal window in
+all12. Acquittals, absent later milestones and674 negative observations remain;
+this is not complete ScenarioB or a verified national-law model. The separate
+varied-choice policy finishes12 lives in677.963seconds:633 catalogue choices,
+133/250 templates,274/750 distinct branches and1,412 correct capped-effect checks.
+Its complete87-file evidence is retained losslessly. Name-role ambiguity, generic
+medical prompts and overwritten diagnosis dates were found from actual traces;
+their fixes are isolated for the next integration. Birth alone uses SQLite in
+these policies; later engine/codec journeys are not native or full-life SQLite
+acceptance. Reused seeds do not increase the separate120-seed total.
+
+Actual Android24 ExpoGo acceptance retains25 personally reviewed PNG/XML pairs:
+normal/130% opening review cancellation, real soft-keyboard Next/Done, factual
+Profile/Statistics/Finances, independent settings cold resume and normal existing-
+life selection. No new life was created in this native increment. Two real saved
+results—practice introduction135 and vaccination137—return exactly after cold
+restarts; separate acknowledgements136/138 commit once. Reader13→14 rewrites no
+original payloads. All7 original lives/backups,66 original moments/metadata,
+141 old receipts, branches and restore records stay exact; final receipts145.
+The plan's aspirational all-four-command cold assertion is not credited: two
+saved-result cold reopens and two acknowledgements are the observed scope.
+
+All70 serial fixed-world warm action samples have zero full checkpoint unpack.
+The age60 routine median is46.77ms; the generated1,000-contact first AgeUp step
+is399.45ms. Whole cold current/backup worlds and original BeforeAgeUp payloads
+remain exact. These are unpaired cloud Node/SQLite diagnostics, not UI/physical
+p95. The native app was stopped, and the owned emulator/Metro were temporarily
+paused and then resumed during measurement; exact receipts and the initial
+pre-measurement process-guard diagnostic are retained. Existing frame-yield and
+pressed-button-only saving feedback remain intact.
+
+Overall production is approximately65%; onboarding65%, Life/early gameplay65%
+and family85%. These are effort estimates, not acceptance scores. The catalogue
+remains250 situations/750choices and45achievements/14challenges/43facts.
+
+Continue the complete production plan. Independent worktrees already contain
+reviewed late-spouse FamilyTree, factual death biography, new-story name labels,
+medical context/first-diagnosis fixes and genuine career-exit acceptance; Best
+Friends is independently approved at World35/engine36/content11/reader15 and
+awaits coordinated integration. The editorial driver is also ready. Integrate
+these existing changes, resolve shared version expectations, then run consolidated
+source/type/regression/lifetime/export/native/performance gates. Do not reimplement
+them or wait on one workstream before starting independent acceptance work.
+Broader country verification, balance, unobserved story contexts, visual/accessibility
+and physical/standalone/iOS release acceptance remain open. Further file/history
+breadth stays parked. Commit AND push at safe points at least every two hours;
+a routine checkpoint does not end the authorised task.
+
+## Prior checkpoint: autonomous family life, clear consequences and durable action reviews
 
 World33 / engine34 / content9 / reader13 / checkpointv4 integrates the reviewed
 parallel workstreams. Known adult NPCs can begin mutual relationships, observe
@@ -147,14 +218,7 @@ and consolidated integration gates; a routine checkpoint is not the end.
 Commit and push at safe points at least every two hours; inspect the actual
 remote push time when calculating the next deadline.
 
-The next isolated `integration/opening-next` batch is implemented and under
-consolidated acceptance: World34/engine35/content10/reader14; factual Profile,
-Statistics and annual Finances; operational motion/haptic/local-sound settings;
-retained Health/Exercise reviews; explicit secondary withdrawal; hobby contacts;
-progression destinations, emigration defaults and remaining unchanged-form guards.
-Its focused/independent reviews do not establish the final full-source gates.
-A separate criminal policyv2 will exercise actual withdrawal. Continue integration
-and actual native acceptance; do not reimplement these existing worktree changes.
+
 
 
 ## Prior checkpoint: hourly contracts, financial goals and editorial consistency

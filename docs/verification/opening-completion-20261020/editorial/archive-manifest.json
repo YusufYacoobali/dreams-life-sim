@@ -1,0 +1,847 @@
+{
+  "format": "dreams-editorial-lossless-archive-manifest-v1",
+  "scope": "Archive byte-preservation proof only. Every file/directory in the completed editorial raw folder is included without ignore rules; raw file bytes/path names are preserved, while tar modes/uid/gid/names/mtime and gzip header name/time are deliberately normalized for determinism. This proves no new gameplay, content coverage, native, action performance or full Scenario acceptance. Coordinator-reported editorial session24133 CLOSED0 remains a separate gate observation; Story owns actual analysis. Exact stdout/progress/root registration are distinct separately hash-pinned artifacts, not rewritten aggregate substitutes.",
+  "originalFolder": "/tmp/dreams-opening-next-editorial-20261020",
+  "archive": {
+    "file": "/tmp/dreams-opening-next-editorial-lossless.tar.gz",
+    "bytes": 6793399,
+    "sha256": "a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d"
+  },
+  "archiveFormat": {
+    "container": "POSIX USTAR",
+    "compression": "gzip",
+    "compressionLevel": 9,
+    "gzipFilename": "",
+    "gzipMtime": 0,
+    "entryOrdering": "root first, then relative UTF-8 path byte order",
+    "uid": 0,
+    "gid": 0,
+    "userName": "",
+    "groupName": "",
+    "mtime": 0,
+    "regularFileMode": "0644",
+    "directoryMode": "0755"
+  },
+  "counts": {
+    "regularFiles": 87,
+    "directoriesIncludingRoot": 13,
+    "archiveMembers": 100,
+    "uncompressedFileBytes": 30974791,
+    "expandedTarBytes": 31057920,
+    "excludedEntries": 0
+  },
+  "expandedTarSha256": "b9089e890c4dd33bcab9481708de857bc711ea7b3abee11d2fbc23f7ca2436a0",
+  "entries": [
+    {
+      "path": ".",
+      "archivePath": "dreams-opening-next-editorial-20261020/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "AU",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "AU/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3683,
+      "sha256": "cd34716412507bc081c3862b39d05c31f172895b3b58947d16ebf90149cbcf16"
+    },
+    {
+      "path": "AU/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/birth.json",
+      "type": "file",
+      "bytes": 480,
+      "sha256": "039e31938994ab0088520ade75fa0216a6c27709d4b0d6de713e26b1ed25ed0f"
+    },
+    {
+      "path": "AU/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/cold.ndjson",
+      "type": "file",
+      "bytes": 68032,
+      "sha256": "525315d920acbf7f824597f41e086e95f975a17bea47f3703587798fb91a984a"
+    },
+    {
+      "path": "AU/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/commands.ndjson",
+      "type": "file",
+      "bytes": 61079,
+      "sha256": "97c108776fca9f093007a2b060c13db2ab7de4844d0847a0fa4d4931118cb543"
+    },
+    {
+      "path": "AU/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/decisions.ndjson",
+      "type": "file",
+      "bytes": 549340,
+      "sha256": "66e2d41282e36fbd6a6dd596042dddca8e85d086eec46958226a27aebf343243"
+    },
+    {
+      "path": "AU/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/final.checkpoint.json",
+      "type": "file",
+      "bytes": 523955,
+      "sha256": "e8cc0a86044414c8ab4a5f399e7171c510f7de68d0dc9769e1e6800e55e3f74b"
+    },
+    {
+      "path": "AU/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/AU/result.json",
+      "type": "file",
+      "bytes": 943054,
+      "sha256": "fc6b3f1f5ea26297b70cc54f2dfc3f694821cff6ac55e4037969890fd1791c72"
+    },
+    {
+      "path": "BR",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "BR/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3675,
+      "sha256": "09f5818ece693b3eed3a549fd5b03c43bbe2c5c21cd1e0b6a44e015632dcb9b3"
+    },
+    {
+      "path": "BR/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/birth.json",
+      "type": "file",
+      "bytes": 483,
+      "sha256": "8c48be2bfd3a684f484692b7de7a6ee2fa1ff19019051e38bb82b60dcc08491a"
+    },
+    {
+      "path": "BR/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/cold.ndjson",
+      "type": "file",
+      "bytes": 78106,
+      "sha256": "1f3ff4b44e660e7d4fd656766da7f53c8112cf60073d3e222301cc6a5555b911"
+    },
+    {
+      "path": "BR/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/commands.ndjson",
+      "type": "file",
+      "bytes": 67936,
+      "sha256": "8011e0d6dd2eb374628b2a0ff46a036cbad419780a09a850db5600b8cc0c01a7"
+    },
+    {
+      "path": "BR/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/decisions.ndjson",
+      "type": "file",
+      "bytes": 562755,
+      "sha256": "dae30197f83221dec610bfaebc1972c7ee2cfac97f12b1c11da1327d222e41ba"
+    },
+    {
+      "path": "BR/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/final.checkpoint.json",
+      "type": "file",
+      "bytes": 445514,
+      "sha256": "0386812112086b55f0a5a5a1333002e2eabd33b34da2b3505a859c4ab8a28aa1"
+    },
+    {
+      "path": "BR/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/BR/result.json",
+      "type": "file",
+      "bytes": 1031822,
+      "sha256": "316ba179919d0da596f01476883a61a82ba77353c16ddd9d33f59108c855940c"
+    },
+    {
+      "path": "CA",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "CA/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3134,
+      "sha256": "c3ddfbd06216d089e69a3be5e52798c269c7ccafcb8a959f610e83b152fbee10"
+    },
+    {
+      "path": "CA/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/birth.json",
+      "type": "file",
+      "bytes": 482,
+      "sha256": "064994f7db45153261295bbd8ec1da92ecbb057f97817943697ed8f16a0c01fa"
+    },
+    {
+      "path": "CA/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/cold.ndjson",
+      "type": "file",
+      "bytes": 88278,
+      "sha256": "6db494eae93a223a5e57803714716a8af962d4869b91a581fa8dacc14d6e40c1"
+    },
+    {
+      "path": "CA/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/commands.ndjson",
+      "type": "file",
+      "bytes": 76890,
+      "sha256": "4f84420445676dac2699c7368d70a988a301623c7f8b27d44fde2cb544aadcfa"
+    },
+    {
+      "path": "CA/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/decisions.ndjson",
+      "type": "file",
+      "bytes": 649972,
+      "sha256": "b42ca4d687896376db727b50a199c4e79236ac7b3e000e3d7b30368e41def32a"
+    },
+    {
+      "path": "CA/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/final.checkpoint.json",
+      "type": "file",
+      "bytes": 492550,
+      "sha256": "923a14973a66c393022d6e7fc8b4b509ccccc0654f445b8d91942b5dbe14aec0"
+    },
+    {
+      "path": "CA/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/CA/result.json",
+      "type": "file",
+      "bytes": 1191174,
+      "sha256": "d9eacf267e6b98ef6f00b23d5da7083bf177564a049ab2eb09e4e8f70aaec868"
+    },
+    {
+      "path": "DE",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "DE/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3707,
+      "sha256": "428c41d957c71a77fef8762e58238625150bcb70c2a7bb11bf2c488f77ed4d53"
+    },
+    {
+      "path": "DE/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/birth.json",
+      "type": "file",
+      "bytes": 481,
+      "sha256": "f5962ded985f97fdd9272035a96fbd72ffba5ef33d5bd2933548bff1f45c8a63"
+    },
+    {
+      "path": "DE/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/cold.ndjson",
+      "type": "file",
+      "bytes": 115194,
+      "sha256": "70cefc114ed0d767aced8488ca309a12a324791a95c83d6f551a814eda7c8d76"
+    },
+    {
+      "path": "DE/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/commands.ndjson",
+      "type": "file",
+      "bytes": 109717,
+      "sha256": "0fee4f33d1cc0e2bbc2d8c3dc2c63edf174f58c1ecbcebaa06e08b8196c0309b"
+    },
+    {
+      "path": "DE/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/decisions.ndjson",
+      "type": "file",
+      "bytes": 949707,
+      "sha256": "f37617e8dfec9ef5ac82eab865f3642a7fec9209a5813443ed364a6e9ef012a2"
+    },
+    {
+      "path": "DE/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/final.checkpoint.json",
+      "type": "file",
+      "bytes": 631141,
+      "sha256": "998754aae519879893f2f4caa9dda0afab7c69e1456f53c70c369b7e8f9cf8d7"
+    },
+    {
+      "path": "DE/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/DE/result.json",
+      "type": "file",
+      "bytes": 1531395,
+      "sha256": "ecc5f8885b4f7f0176e90312c8759e0534df10aa6a0b8438db5ed7b609066793"
+    },
+    {
+      "path": "ES",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "ES/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3699,
+      "sha256": "03541c86ace1506d9629825a13a83f671385c3686ea6360c8920026b84f4da4e"
+    },
+    {
+      "path": "ES/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/birth.json",
+      "type": "file",
+      "bytes": 476,
+      "sha256": "ff110cba6afefbed76c0eae2a69c99a23b33ac8d5d0dab17b48cf7bba8fe3cc9"
+    },
+    {
+      "path": "ES/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/cold.ndjson",
+      "type": "file",
+      "bytes": 82985,
+      "sha256": "7d18193dc17ee74c6626226e7e4544c9e57839ff3fee126a05f87c6f7651b3a4"
+    },
+    {
+      "path": "ES/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/commands.ndjson",
+      "type": "file",
+      "bytes": 73970,
+      "sha256": "a1fb4c271fd1e2c4e6151952ed94d2c331421b09a03499864fd1aecdb82e57ff"
+    },
+    {
+      "path": "ES/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/decisions.ndjson",
+      "type": "file",
+      "bytes": 640141,
+      "sha256": "4503a7f4b4028b4eb8c06da6eab7cbe77b7deb9da214807259517dc6a59aff1d"
+    },
+    {
+      "path": "ES/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/final.checkpoint.json",
+      "type": "file",
+      "bytes": 427732,
+      "sha256": "1051752c396dcc02cd01ec121b66f6885a15975d932b7cfae0bb8195c361dba1"
+    },
+    {
+      "path": "ES/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ES/result.json",
+      "type": "file",
+      "bytes": 1127534,
+      "sha256": "e0efca829bc587890f0ba509486d5da45fdd5dee087a4b81a4fae54003b6a9cd"
+    },
+    {
+      "path": "FR",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "FR/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3675,
+      "sha256": "23c7e8a12c9687f3fa959f2b738f5aec2fcf6a45481da9bb0157529cc3364f75"
+    },
+    {
+      "path": "FR/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/birth.json",
+      "type": "file",
+      "bytes": 477,
+      "sha256": "20cdc311f2ad7d92f1ae14a21897efa2ef858d182ebfd91af0b3121ffb44650d"
+    },
+    {
+      "path": "FR/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/cold.ndjson",
+      "type": "file",
+      "bytes": 80812,
+      "sha256": "e43f1675323c043eb5e42334cd710101853750c18ff9b9db1fa0c76e54e6dea4"
+    },
+    {
+      "path": "FR/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/commands.ndjson",
+      "type": "file",
+      "bytes": 70881,
+      "sha256": "edef489dc862a5e0d2444f0625fca1a63d5ccc22ad0d9e61571a8186abc78d49"
+    },
+    {
+      "path": "FR/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/decisions.ndjson",
+      "type": "file",
+      "bytes": 630536,
+      "sha256": "b19faba1ba5558412396a4530860a26b8a9c3a54375cacde7e688cb4a895f7e4"
+    },
+    {
+      "path": "FR/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/final.checkpoint.json",
+      "type": "file",
+      "bytes": 635401,
+      "sha256": "ae7daa3f954b74c6ebc289827104e977cc8ae39be4e8f032f0e7866295e6e3ab"
+    },
+    {
+      "path": "FR/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/FR/result.json",
+      "type": "file",
+      "bytes": 1160034,
+      "sha256": "d3ec8799ae15de8788852715cdda7c70a5fb85a4beba4160de2cb3ae4304a9cb"
+    },
+    {
+      "path": "GB",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "GB/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3679,
+      "sha256": "fd85c93c78e756d41ea5fe87a9c811da60e1a18285a0a152b53c74c29cbc2ea0"
+    },
+    {
+      "path": "GB/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/birth.json",
+      "type": "file",
+      "bytes": 481,
+      "sha256": "5695d5d04abdbb393e0d741e23f78fb5e0ac894b15d42e8a31fbc34da3920db7"
+    },
+    {
+      "path": "GB/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/cold.ndjson",
+      "type": "file",
+      "bytes": 95211,
+      "sha256": "c4d02556110c7cd7f672dc491b0a8d8375c275efae46ae480ceb94dca5ff19d6"
+    },
+    {
+      "path": "GB/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/commands.ndjson",
+      "type": "file",
+      "bytes": 85016,
+      "sha256": "52254b5c2956fc5876efcee0596d3245767be5c191805c3445580c77badc0e5b"
+    },
+    {
+      "path": "GB/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/decisions.ndjson",
+      "type": "file",
+      "bytes": 802743,
+      "sha256": "870a7326fd4b70bdef82d50cb87ad342d8aa96c6609ff6628e677576593cf253"
+    },
+    {
+      "path": "GB/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/final.checkpoint.json",
+      "type": "file",
+      "bytes": 599962,
+      "sha256": "5ed5a9a7ee0c52ee7e0fe57a7da13a635246a09d7b99bc9db6da0f6094304b16"
+    },
+    {
+      "path": "GB/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/GB/result.json",
+      "type": "file",
+      "bytes": 1380440,
+      "sha256": "967d9a901e716a7302036be5f8d2e44ecbe9bcd8694e5884b7a06b5a2552c1c7"
+    },
+    {
+      "path": "IN",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "IN/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3683,
+      "sha256": "8ff0d0d707898f48cb3f61519f63fb12d9831cc101408664c475ed11134dde5c"
+    },
+    {
+      "path": "IN/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/birth.json",
+      "type": "file",
+      "bytes": 480,
+      "sha256": "fd47e47b5c66dbc7d86c25fe555849710fa2b2c6e28202996f2aafe61f23c298"
+    },
+    {
+      "path": "IN/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/cold.ndjson",
+      "type": "file",
+      "bytes": 59446,
+      "sha256": "9b7ce75b05b2ac6ec8d5a0b994b2c609131010831c159793f87459c670e1782b"
+    },
+    {
+      "path": "IN/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/commands.ndjson",
+      "type": "file",
+      "bytes": 52928,
+      "sha256": "9f72f2bc1a4754353f30368f1ad8369dd9e35b7fc7e4e1e5e0aad83a97d7c29b"
+    },
+    {
+      "path": "IN/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/decisions.ndjson",
+      "type": "file",
+      "bytes": 484903,
+      "sha256": "2deac5b283239b3c62e5d03672b78bfdd5b0b1b4c1dc187ad46608470ed4709f"
+    },
+    {
+      "path": "IN/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/final.checkpoint.json",
+      "type": "file",
+      "bytes": 460657,
+      "sha256": "9c97a1087fa2b4fc0159c81f91eeeb22c95407051b2ef91a9568ebf5bf1171fe"
+    },
+    {
+      "path": "IN/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IN/result.json",
+      "type": "file",
+      "bytes": 829159,
+      "sha256": "4fc3eef23ad6662d4a4a0bf9b6d74686a82446ae11f66163e7ff4b43ccce0254"
+    },
+    {
+      "path": "IT",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "IT/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3671,
+      "sha256": "153768bb0b8a638b32729e1ca6fd1bea0ac0ecab59454f088c30a4749e9bd091"
+    },
+    {
+      "path": "IT/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/birth.json",
+      "type": "file",
+      "bytes": 477,
+      "sha256": "b8a87cbc5eb05160c460749ddb78fba5595245b03dfa5d56955a5d9685841097"
+    },
+    {
+      "path": "IT/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/cold.ndjson",
+      "type": "file",
+      "bytes": 121479,
+      "sha256": "fd2fa8edb1f09fd0f6d8e53d5ef055346b4d2b154545301e8483401f46828674"
+    },
+    {
+      "path": "IT/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/commands.ndjson",
+      "type": "file",
+      "bytes": 115210,
+      "sha256": "784656622d17183b399a7946465f029e6628eea1fdcdc4e211d3235b267f500c"
+    },
+    {
+      "path": "IT/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/decisions.ndjson",
+      "type": "file",
+      "bytes": 982800,
+      "sha256": "5946d5d503ab24d4a40b35d9008826618674dd56f5a8be8a354a551b54d7ed90"
+    },
+    {
+      "path": "IT/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/final.checkpoint.json",
+      "type": "file",
+      "bytes": 613509,
+      "sha256": "539162559d874a24d416160a9190cbb5eef9db3b2b92233c31227750528d9fab"
+    },
+    {
+      "path": "IT/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/IT/result.json",
+      "type": "file",
+      "bytes": 1606540,
+      "sha256": "8c9ec98479e79f9dd200e48048db77d5fb6b8639f6cb16ce1f839e809101202a"
+    },
+    {
+      "path": "JP",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "JP/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3106,
+      "sha256": "50e99d87b97e6de1c9fb463606843cc2f4db18421129f53ffc5d101371f26b99"
+    },
+    {
+      "path": "JP/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/birth.json",
+      "type": "file",
+      "bytes": 480,
+      "sha256": "09a627d4c191a4b729d69aa4850931996de77e0183d326bd1311e11e6eb952c6"
+    },
+    {
+      "path": "JP/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/cold.ndjson",
+      "type": "file",
+      "bytes": 77845,
+      "sha256": "7d4505313a50cd2e8526b6979a81c11594da3eb728d21a503502e753a8d35a48"
+    },
+    {
+      "path": "JP/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/commands.ndjson",
+      "type": "file",
+      "bytes": 69518,
+      "sha256": "d8c0cef71289d39813a42fa5e3f415cc74a431cd9b1b183097e787ab8777855a"
+    },
+    {
+      "path": "JP/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/decisions.ndjson",
+      "type": "file",
+      "bytes": 592583,
+      "sha256": "c80ca7e8f3ca4fef884b3956f57113b2c46139bb434200efb1ad59dea0e5d29b"
+    },
+    {
+      "path": "JP/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/final.checkpoint.json",
+      "type": "file",
+      "bytes": 547061,
+      "sha256": "6687b9e8cddc9026a0cb9293d4c54c7cacf1e0653a7fbd94a22107675467bfe5"
+    },
+    {
+      "path": "JP/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/JP/result.json",
+      "type": "file",
+      "bytes": 1039076,
+      "sha256": "7965019c64af8615c053fa2acc57c0d2d9991a700f89f24e971d89ac19ac4fb4"
+    },
+    {
+      "path": "US",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "US/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3699,
+      "sha256": "2447ec9107abfb7bb39489c4104b52cbe00f9eb834adc68db2cfaf22bb9e1fdd"
+    },
+    {
+      "path": "US/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/birth.json",
+      "type": "file",
+      "bytes": 482,
+      "sha256": "d2b3c99cca8c7dcf148ca3804f8ca3509b385f644910999b887eef1f6b807bf3"
+    },
+    {
+      "path": "US/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/cold.ndjson",
+      "type": "file",
+      "bytes": 84783,
+      "sha256": "68e68221b08e53f9308462ef418b3ee89a7458301d2d8a5e309fabaa307dd71c"
+    },
+    {
+      "path": "US/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/commands.ndjson",
+      "type": "file",
+      "bytes": 81853,
+      "sha256": "0daf1cdd2982f4b8a4b22e44afaadd1fb2c7556838e90f2322cb79ae0f3ad341"
+    },
+    {
+      "path": "US/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/decisions.ndjson",
+      "type": "file",
+      "bytes": 746105,
+      "sha256": "0cfe1b33803bdf39f522be423482c4b58cd65e3fda85e28048670bf34b36d501"
+    },
+    {
+      "path": "US/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/final.checkpoint.json",
+      "type": "file",
+      "bytes": 526545,
+      "sha256": "afbd3a1a85bc05cbc046917fd61195545fa9e0704bd2aced19c0be1981809901"
+    },
+    {
+      "path": "US/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/US/result.json",
+      "type": "file",
+      "bytes": 1156697,
+      "sha256": "ee918d5efb92e1f6a4310d4d86f8d1367803ec15a20287960fbe773708f5f4eb"
+    },
+    {
+      "path": "ZA",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/",
+      "type": "directory",
+      "bytes": 0
+    },
+    {
+      "path": "ZA/birth.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/birth.checkpoint.json",
+      "type": "file",
+      "bytes": 3663,
+      "sha256": "660d584463a4a52dbe5c4ddfa14693839d17df30036b411a08aa428a80bab202"
+    },
+    {
+      "path": "ZA/birth.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/birth.json",
+      "type": "file",
+      "bytes": 485,
+      "sha256": "5fd366e32f0311f9d9e02f830bb2974acc9fcbc75d0a9c2828a9b06194381ea6"
+    },
+    {
+      "path": "ZA/cold.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/cold.ndjson",
+      "type": "file",
+      "bytes": 51690,
+      "sha256": "1ce3ee0c7c131332d1e891d8a889956a74931dbe7f8d3f4d513248bda95928d8"
+    },
+    {
+      "path": "ZA/commands.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/commands.ndjson",
+      "type": "file",
+      "bytes": 45797,
+      "sha256": "04334ea3cafdba90648d203d019f3da8e496a1e0d7aca39a699a59c7c619adb8"
+    },
+    {
+      "path": "ZA/decisions.ndjson",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/decisions.ndjson",
+      "type": "file",
+      "bytes": 423118,
+      "sha256": "c8670ef40bdfa171916bc2347e640ae9d26a316aba77a485a9494bae64b26b93"
+    },
+    {
+      "path": "ZA/final.checkpoint.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/final.checkpoint.json",
+      "type": "file",
+      "bytes": 321577,
+      "sha256": "d3c1b1b0352b24b98d36382ad54aa5045c9ee8d542a4d95ab905be78941600df"
+    },
+    {
+      "path": "ZA/result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/ZA/result.json",
+      "type": "file",
+      "bytes": 727185,
+      "sha256": "99933d917b90dbe9b21066d2aedacfca9dd4b1a598bc628c6be587cc969a71e9"
+    },
+    {
+      "path": "catalogue.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/catalogue.json",
+      "type": "file",
+      "bytes": 301499,
+      "sha256": "ae24de80ae3ab3dc70411f176b33c9e27d44ee3c241a05d51af3da47ae9b2e1c"
+    },
+    {
+      "path": "manifest.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/manifest.json",
+      "type": "file",
+      "bytes": 2566,
+      "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+    },
+    {
+      "path": "result.json",
+      "archivePath": "dreams-opening-next-editorial-20261020/result.json",
+      "type": "file",
+      "bytes": 742815,
+      "sha256": "438b794e729a42c7c285cb7cce7e63748f97e78abf75ae74e9da11be14486d9f"
+    }
+  ],
+  "separateExactRawReferences": {
+    "stdout": {
+      "file": "/tmp/dreams-opening-next-editorial.out",
+      "bytes": 742870,
+      "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+    },
+    "progress": {
+      "file": "/tmp/dreams-opening-next-editorial.ndjson",
+      "bytes": 16660,
+      "sha256": "7b8d9a80ebbba4f0d5df0cd36498fb27bd4c13fe428880adce7586be2e319c47"
+    },
+    "rootManifest": {
+      "file": "/tmp/dreams-opening-next-editorial-manifest.json",
+      "bytes": 2566,
+      "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+    },
+    "finalSourceSnapshot": {
+      "file": "/tmp/dreams-opening-next-final-source.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    }
+  },
+  "provenance": {
+    "runtimeCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+    "versions": {
+      "world": 34,
+      "engine": 35,
+      "content": 10,
+      "database": 14,
+      "checkpoint": "v4"
+    },
+    "registeredSource": {
+      "birthDriver": "b05662854da8a6439ddc559f3b1038895df94ba73cecb9c501b6a6ef5234a2f8",
+      "checkoutHead": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+      "game": "84625d5208d1a6815dccc2802ff75c83393eeb143c382e83d60ed0dafaf94f33",
+      "gameAndPersistence": "12b49689991da671d72b3ac8bc0bfe6bb2aff788174cf1ccda73665c0195c2b8",
+      "lockfile": "0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b",
+      "policy": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72",
+      "referenceCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+      "sourceRoot": "/workspace/dreams-worktrees/integration-opening-next",
+      "state": "4e54672a28860f4e4ec593943171268a9202b22d960cc0cec13db94b2cd8c7ea",
+      "store": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+      "tool": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706"
+    },
+    "sourceSnapshot": {
+      "file": "/tmp/dreams-opening-next-final-source.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    },
+    "producerFiles": [
+      {
+        "file": "/workspace/dreams-worktrees/editorial-choice-policy/tools/run-editorial-policy.cjs",
+        "bytes": 12868,
+        "sha256": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706",
+        "sourceField": "tool",
+        "originalCommit": "1d607b9dc18d22c0a056b2f8a9e1198654120ffd",
+        "relativePath": "tools/run-editorial-policy.cjs",
+        "byteIdenticalToCommit": true,
+        "separateExactSourceCopy": {
+          "file": "/tmp/dreams-opening-next-editorial-producer-runner.cjs.txt",
+          "bytes": 12868,
+          "sha256": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706"
+        }
+      },
+      {
+        "file": "/workspace/dreams-worktrees/editorial-choice-policy/tests/support/editorialPolicy.ts",
+        "bytes": 14958,
+        "sha256": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72",
+        "sourceField": "policy",
+        "originalCommit": "1d607b9dc18d22c0a056b2f8a9e1198654120ffd",
+        "relativePath": "tests/support/editorialPolicy.ts",
+        "byteIdenticalToCommit": true,
+        "separateExactSourceCopy": {
+          "file": "/tmp/dreams-opening-next-editorial-producer-policy.ts.txt",
+          "bytes": 14958,
+          "sha256": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72"
+        }
+      },
+      {
+        "file": "/workspace/dreams-worktrees/integration-opening-next/tests/support/sqlite.ts",
+        "bytes": 959,
+        "sha256": "b05662854da8a6439ddc559f3b1038895df94ba73cecb9c501b6a6ef5234a2f8",
+        "sourceField": "birthDriver",
+        "originalCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+        "relativePath": "tests/support/sqlite.ts",
+        "byteIdenticalToCommit": true
+      },
+      {
+        "file": "/workspace/dreams-worktrees/integration-opening-next/src/state/gameStore.ts",
+        "bytes": 6605,
+        "sha256": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+        "sourceField": "store",
+        "originalCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+        "relativePath": "src/state/gameStore.ts",
+        "byteIdenticalToCommit": true
+      },
+      {
+        "file": "/workspace/dreams-worktrees/integration-opening-next/package-lock.json",
+        "bytes": 389072,
+        "sha256": "0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b",
+        "sourceField": "lockfile",
+        "originalCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+        "relativePath": "package-lock.json",
+        "byteIdenticalToCommit": true
+      }
+    ],
+    "registrationEqualsFolderManifestBytes": true,
+    "stdoutEqualsAggregateOnlyAfterRemovingItsAdditionalOutputPathField": true,
+    "stdoutOriginalBytesPreservedSeparately": true
+  },
+  "verification": {
+    "archiveDecodedEveryMember": true,
+    "everyDecodedRegularFileByteIdentical": true,
+    "allDirectoriesPresent": true,
+    "noExtraMissingDuplicateOrIgnoredMembers": true,
+    "fullGzipTrailerValidated": true,
+    "secondIndependentBuildCompressedBytesIdentical": true,
+    "allOriginalFilesAndSeparateReferencesUnchangedAfterVerification": true
+  },
+  "compressionRuntime": {
+    "python": "3.12.14",
+    "zlibCompile": "1.3.2",
+    "zlibRuntime": "1.3.2"
+  }
+}

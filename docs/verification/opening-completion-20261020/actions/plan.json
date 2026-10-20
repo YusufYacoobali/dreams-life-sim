@@ -1,0 +1,89 @@
+{
+  "format": "dreams-c35-action-measurement-plan-v1",
+  "status": "prepared-only-not-a-measurement-pass",
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "versions": {
+    "world": 34,
+    "engine": 35,
+    "content": 10,
+    "database": 14,
+    "checkpoint": "v4"
+  },
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-opening-next-final-source.json",
+    "bytes": 63906,
+    "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+  },
+  "combinedGamePersistenceSourceHash": "12b49689991da671d72b3ac8bc0bfe6bb2aff788174cf1ccda73665c0195c2b8",
+  "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "cwd": "/workspace/dreams-worktrees/integration-opening-next",
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/integration-opening-next",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "shellCommand": "node tools/benchmark-actions.cjs --source /workspace/dreams-worktrees/integration-opening-next --profile --population --workplaces --raises > /tmp/dreams-opening-next-actions.json 2> /tmp/dreams-opening-next-actions.stderr.txt",
+  "rawFile": "/tmp/dreams-opening-next-actions.json",
+  "stderrFile": "/tmp/dreams-opening-next-actions.stderr.txt",
+  "registeredInputs": [
+    {
+      "file": "tests/fixtures/v25-content4-bubble-archive.json",
+      "bytes": 18099,
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v27-leisure-archive.json",
+      "bytes": 140456,
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v28-native-teen-archive.json",
+      "bytes": 575472,
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+      "bytes": 794714,
+      "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9",
+      "byteIdenticalToSourceCommit": true
+    }
+  ],
+  "expected": {
+    "cases": 14,
+    "labels": [
+      "Begin Life",
+      "First-year choice",
+      "First-year choice Continue",
+      "Age-seven callback",
+      "Age-seven callback Continue",
+      "Age-30 routine",
+      "Age-60 routine",
+      "100-known-contact routine",
+      "100-known-contact first Age Up step",
+      "1000-known-contact routine",
+      "1000-known-contact first Age Up step",
+      "Prepared teen coworker introduction",
+      "Prepared supervisor feedback",
+      "Prepared raise request"
+    ],
+    "measuredTrialsPerCase": 5,
+    "measuredWarmSamples": 70,
+    "excludedWarmups": 14,
+    "totalSuccessfulExecutions": 84,
+    "coldCurrentWholeWorldAssertions": 84,
+    "coldBackupWholeWorldAssertions": 84,
+    "originalBeforeAgeUpPayloadAssertions": 12,
+    "deterministicPopulationOutcomes": 4
+  },
+  "verificationBoundary": "Driver completion/exit0 establishes its cold/current/backup/raw-BeforeAgeUp, deterministic sizes/outcomes and source-before/after assertions. Warm zero full unpack must be checked from all70 measured phase maps by the publisher; the driver itself only records those counters. Counts84/12 are derived from the frozen six-trial loop/two Age Up cases, not extra stored measurement samples.",
+  "scope": "Unpaired cloud Node/on-disk SQLite diagnostics, one excluded warm-up plus five measured fixed-input trials per case. Resolve+atomic repository commit timing, separately recorded cold-open priming; no React rendering, UI scheduling, native/physical p95 or guaranteed speedup. Population worlds are generated-at-once stress inputs from a genuine age30 checkpoint, not natural/native progression. Prepared workplace worlds continue a genuine saved teen with real commands. Begin Life uses the unchanged driver birth-acknowledged revision save kernel, not the store/UI birth path.",
+  "readyForRootExecutionOnlyAfter": "Native app stopped; full regression/editorial/other heavy work closed or explicitly paused; record exact quiescence and actual process exit status. Do not overwrite older C34 artifacts."
+}

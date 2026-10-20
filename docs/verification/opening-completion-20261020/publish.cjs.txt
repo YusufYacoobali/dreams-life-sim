@@ -1,0 +1,154 @@
+// DRAFT: no repository writes until all actual native/action gates and explicit captures validate.
+// Root-only invocation after review: node THIS --inputs INPUTS.json --repo REPOSITORY
+// --validate-available checks only completed evidence, writes nothing and never claims pending gates.
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict'), crypto = require('node:crypto');
+const argv = process.argv.slice(2), validateOnly = argv.includes('--validate-available'), args = argv.filter(value => value !== '--validate-available'), options = {};
+for (let i = 0; i < args.length; i += 2) { assert.ok(['--inputs', '--repo'].includes(args[i]) && args[i + 1] && !options[args[i]], 'Use --inputs FILE --repo DIRECTORY [--validate-available]'); options[args[i]] = args[i + 1]; }
+const inputPath = options['--inputs'] ?? '/tmp/dreams-opening-next-publication-inputs.json';
+const read = file => fs.readFileSync(file, 'utf8'), json = file => JSON.parse(read(file)), sha = data => crypto.createHash('sha256').update(data).digest('hex');
+const info = file => { const bytes = fs.readFileSync(file); return { source: file, bytes: bytes.length, sha256: sha(bytes) }; };
+const inputs = json(inputPath), repo = path.resolve(options['--repo'] ?? '/workspace/dreams-worktrees/integration-opening-next');
+const finalCommit = '73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa', initialCommit = '5a2565458fa5de90c1acaf0e110fc980f6476b64';
+function treeHash(directories, relativeBase) { const digest = crypto.createHash('sha256'); const visit = directory => { for (const entry of fs.readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) { const file = path.join(directory, entry.name); if (entry.isDirectory()) visit(file); else if (file.endsWith('.ts')) digest.update(path.relative(relativeBase, file)).update('\0').update(fs.readFileSync(file)).update('\0'); } }; directories.forEach(visit); return digest.digest('hex'); }
+assert.equal(inputs.format, 'dreams-c35-publication-inputs-v1'); assert.equal(inputs.sourceCommit, finalCommit); assert.equal(inputs.initialSourceCommit, initialCommit);
+assert.deepEqual(inputs.versions, { world: 34, engine: 35, content: 10, database: 14, checkpoint: 'v4' });
+assert.equal(inputs.outputRecord, 'docs/verification/opening-completion-20261020.json');
+assert.equal(inputs.artifactDirectory, 'docs/verification/opening-completion-20261020');
+const copies = inputs.fixedCopies.map(row => ({ ...row })), byKey = new Map();
+function register(row) {
+  assert.ok(row.key && !byKey.has(row.key), 'Duplicate input key');
+  assert.ok(row.target.startsWith('opening-completion-20261020/') && !row.target.split('/').includes('..') && !path.isAbsolute(row.target));
+  assert.equal(copies.filter(other => other.target === row.target).length, 1, 'Duplicate artifact target');
+  const actual = info(row.source); assert.equal(actual.bytes, row.bytes); assert.equal(actual.sha256, row.sha256, 'Changed evidence bytes: ' + row.key);
+  byKey.set(row.key, row);
+}
+for (const row of copies) register(row);
+const item = key => { const row = byKey.get(key); assert.ok(row, 'Missing artifact key ' + key); return row; };
+const load = key => json(item(key).source), text = key => read(item(key).source);
+const artifact = key => { const row = item(key); return { file: row.target, bytes: row.bytes, sha256: row.sha256 }; };
+const dynamic = (key, source, suffix, expected) => {
+  assert.equal(typeof source, 'string', 'Missing completed input: ' + key); assert.ok(source);
+  const row = { key, ...info(source), target: 'opening-completion-20261020/' + suffix };
+  if (expected) { assert.equal(row.bytes, expected.bytes); assert.equal(row.sha256, expected.sha256, 'Dynamic input differs: ' + key); }
+  copies.push(row); register(row); return row;
+};
+const initial = load('source-initial'), final = load('source-final');
+assert.equal(initial.commit, initialCommit); assert.equal(final.commit, finalCommit); assert.deepEqual(final.versions, inputs.versions);
+assert.equal(item('source-final').sha256, '521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc');
+assert.equal(Object.keys(final.source).length, 583); assert.deepEqual(Object.keys(initial.source).sort(), Object.keys(final.source).sort());
+assert.equal(treeHash([path.join(repo, 'src/game')], path.join(repo, 'src/game')), final.gameSourceHash);
+assert.equal(treeHash([path.join(repo, 'src/game'), path.join(repo, 'src/persistence')], repo), final.combinedGamePersistenceSourceHash);
+const sourceDelta = Object.keys(final.source).filter(file => final.source[file] !== initial.source[file]);
+assert.deepEqual(sourceDelta, ['tests/ui/education-choice-save-flow.test.tsx'], 'Only the reviewed stale-copy test delta may bridge initial/final source');
+for (const file of Object.keys(final.source)) assert.equal(sha(fs.readFileSync(path.join(repo, file))), final.source[file], 'Repository differs from frozen final source: ' + file);
+for (const [label, capture] of [['initial', initial], ['final', final]]) for (const [kind, proof] of Object.entries(capture.coordinatorProofs)) assert.equal(item('source-' + label + '-' + kind).sha256, proof.sha256);
+assert.equal(text('source-initial-head').trim(), initialCommit); assert.equal(text('source-final-head').trim(), finalCommit);
+assert.equal(text('source-initial-status'), ''); assert.equal(text('source-final-status'), '');
+const after = load('source-after'); assert.deepEqual(after, { status: 'exact', commit: finalCommit, files: 583, snapshotSha256: item('source-final').sha256 });
+const expectedProcesses = { regression: [28548, 1315.195], types: [20372], annual120: [36516, 753071], exportsRetry: [12370], criminalV2: [96731, 179765], editorial: [24133, 677963] };
+for (const [key, [session]] of Object.entries(expectedProcesses)) { const closure = inputs.knownCoordinatorClosures[key]; assert.equal(closure.session, session); assert.equal(closure.complete, true); assert.equal(closure.exitCode, 0); }
+const regression = load('regression-receipt');
+assert.equal(regression.complete, true); assert.equal(regression.exitCode, 0); assert.equal(regression.sourceCommit, finalCommit);
+assert.equal(regression.tests, 2282); assert.equal(regression.suites, 169); assert.equal(regression.seconds, 1315.195);
+assert.equal(regression.finalSourceSnapshotSha256, item('source-final').sha256);
+assert.equal(regression.raw.sha256, item('regression').sha256); assert.equal(regression.raw.bytes, item('regression').bytes);
+assert.match(text('regression'), /Test Suites:\s+169 passed, 169 total/); assert.match(text('regression'), /Tests:\s+2282 passed, 2282 total/); assert.match(text('regression'), /Time:\s+1315\.195 s/); assert.doesNotMatch(text('regression'), /^FAIL /m);
+assert.match(text('types'), /tsc --noEmit && tsc --noEmit -p tests\/tsconfig\.json/);
+const interrupted = load('regression-interruption');
+assert.equal(interrupted.status, 'failed-and-intentionally-interrupted'); assert.equal(interrupted.exitCode, 143); assert.equal(interrupted.completeFullRun, false); assert.equal(interrupted.passingFullSummary, false);
+assert.equal(interrupted.sourceCommit, initialCommit); assert.equal(interrupted.sourceSnapshotSha256, item('source-initial').sha256); assert.equal(interrupted.rawLogSha256, item('regression-initial').sha256);
+assert.deepEqual(interrupted.knownFailedCases, ['US School assessment wording', 'IT School assessment wording']);
+assert.match(text('wording-focused'), /Tests:\s+21 passed, 21 total/);
+const annualRows = text('annual').trim().split('\n').map(line => JSON.parse(line)), annual = annualRows.at(-1), annualLives = annualRows.filter(row => row.event === 'life-complete');
+assert.equal(annual.event, 'sweep-complete'); assert.equal(annual.count, 120); assert.equal(annual.completed, 120); assert.equal(annual.startSeed, 0); assert.equal(annual.elapsedMs, 753071);
+assert.deepEqual(annualLives.map(row => row.seed), Array.from({ length: 120 }, (_, i) => i)); assert.deepEqual(annual.versions, { world: 34, engine: 35, content: 10 });
+assert.equal(annual.gameSourceHash, final.gameSourceHash); assert.equal(annual.toolSourceHash, item('annual-tool').sha256); assert.equal(text('annual-stderr'), '');
+assert.equal(inputs.knownCoordinatorClosures.exportsRetry.initialExitCode, 7); assert.match(text('export-initial'), /ENOENT/); assert.match(text('export-initial'), /\/home\/agent\/\.expo/); assert.match(text('export-final'), /Exported: \/tmp\/dreams-opening-next-export/);
+const metadata = load('exports-metadata'), bundles = {};
+for (const platform of ['android', 'ios']) { const name = metadata.fileMetadata[platform].bundle, file = path.join(path.dirname(item('exports-metadata').source), name); const value = info(file); bundles[platform] = { exportedBundleName: name, bytes: value.bytes, sha256: value.sha256, binaryCommitted: false }; assert.ok(name.endsWith('.hbc')); }
+const criminal = load('criminal-raw'), criminalSummary = load('criminal-summary'), criminalManifest = load('criminal-manifest');
+assert.equal(criminal.policyVersion, 2); assert.equal(criminal.records.length, 12); assert.equal(criminal.elapsedMs, 179765); assert.equal(criminal.scenarioBComplete, false);
+assert.deepEqual(criminal.records.map(row => row.seed), Array.from({ length: 12 }, (_, i) => i + 900)); assert.deepEqual(criminal.versions, { world: 34, engine: 35, content: 10 }); assert.deepEqual(criminal.sources, criminalManifest.sources);
+assert.equal(criminal.sources.game, final.gameSourceHash); assert.equal(criminal.sources.gameAndPersistence, final.combinedGamePersistenceSourceHash); assert.equal(criminal.sources.tool, item('criminal-tool').sha256); assert.equal(criminal.sources.policy, item('criminal-helper').sha256);
+assert.equal(criminalSummary.inputs.result.sha256, item('criminal-raw').sha256); assert.equal(criminalSummary.inputs.progress.sha256, item('criminal-progress').sha256);
+assert.equal(criminalSummary.totals.coldCheckpointChecks, 412); assert.equal(criminalSummary.totals.negativeObservations, 674);
+assert.equal(criminalSummary.records.reduce((n, row) => n + Object.keys(row.unreached).length, 0), 20); assert.equal(criminalSummary.scenarioScopeComplete, false);
+const archive = load('editorial-archive-manifest'), archiveProof = load('editorial-archive-proof'), editorialManifest = load('editorial-manifest'), editorialOutput = load('editorial-stdout'), analysis = load('editorial-analysis-summary.json');
+assert.equal(item('editorial-archive').sha256, 'a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d');
+assert.equal(archive.archive.sha256, item('editorial-archive').sha256); assert.equal(archive.archive.bytes, item('editorial-archive').bytes);
+assert.equal(archiveProof.status, 'byte-preservation-passed'); assert.equal(archiveProof.gameplayGateClaimedByArchive, false); assert.equal(archiveProof.perEntryManifest.sha256, item('editorial-archive-manifest').sha256);
+assert.equal(archive.counts.regularFiles, 87); assert.equal(archive.counts.uncompressedFileBytes, 30974791); assert.equal(archive.counts.archiveMembers, 100); assert.equal(archive.counts.excludedEntries, 0);
+assert.ok(Object.values(archive.verification).every(value => value === true));
+assert.equal(item('editorial-stdout').bytes, 742870); assert.equal(editorialOutput.completedLives, 12); assert.equal(editorialOutput.elapsedMs, 677963); assert.equal(editorialOutput.all250NaturalCoverageClaimed, false); assert.equal(editorialOutput.fullScenarioAcceptance, false);
+assert.deepEqual(editorialOutput.source, editorialManifest.source); assert.equal(editorialOutput.source.checkoutHead, finalCommit); assert.equal(editorialOutput.source.gameAndPersistence, final.combinedGamePersistenceSourceHash);
+assert.equal(editorialOutput.source.tool, item('editorial-producer-tool').sha256); assert.equal(editorialOutput.source.policy, item('editorial-producer-helper').sha256);
+assert.equal(item('editorial-analysis-REPORT.md').sha256, '4a7f31da2991865a6e26b5de6eb60b214c30ed6e332aa0bc66dbce95b24d3c0c'); assert.equal(item('editorial-analysis-summary.json').sha256, '96b75ff9ac9b0608b03cdddac03c2479942cb0234868e8a483066084e3c0b9d7');
+for (const line of text('editorial-analysis-SHA256SUMS').trim().split('\n')) { const match = /^([a-f0-9]{64})  (.+)$/.exec(line); assert.ok(match); assert.equal(item('editorial-analysis-' + match[2]).sha256, match[1]); }
+assert.equal(analysis.archive.sha256, item('editorial-archive').sha256); assert.equal(analysis.coordinatorClosure.exitCode, 0); assert.equal(analysis.coverage.catalogueChoices, 633); assert.equal(analysis.coverage.uniqueObservedTemplates, 133); assert.equal(analysis.coverage.uniqueObservedBranches, 274); assert.equal(analysis.checks.simpleActualCappedEffectChecks, 1412); assert.deepEqual(analysis.checks.anomalies, []);
+const hosted = load('ci-metadata'); assert.equal(hosted.sourceCommit, 'ed506a1338bf7369cb14efb1de1745be8033fcc7'); assert.equal(hosted.run.id, 39504687484); assert.equal(hosted.run.conclusion, 'success'); assert.equal(hosted.result.tests, 2100); assert.equal(hosted.result.suites, 147);
+if (validateOnly) { process.stdout.write(JSON.stringify({ draftOnly: true, repositoryWrites: 0, fixedEvidenceFilesValidated: copies.length, completedGateSourcesAndScopesChecked: true, pendingNativeAndActionsRequired: true, pending: inputs.pending }) + '\n'); process.exit(0); }
+
+// All missing/incomplete actual gates below reject before staging or repository writes.
+const pending = inputs.pending;
+assert.equal(inputs.status, 'ready-to-publish-after-actual-gates', 'Execution inputs are still a pending draft');
+assert.equal(pending.nativeExecution.complete, true, 'Actual native verifier execution remains pending'); assert.equal(pending.nativeExecution.exitCode, 0); assert.ok(typeof pending.nativeExecution.executionReference === 'string' && pending.nativeExecution.executionReference.trim());
+dynamic('native-result', pending.nativeVerifierResult, 'native/journey-exact.json'); dynamic('native-verifier-log', pending.nativeVerifierStdout, 'native/verifier-output.txt');
+const native = load('native-result'), plan = load('native-plan');
+assert.equal(native.status, 'passed'); assert.equal(native.complete, true); assert.equal(native.sourceRuntimeCommit, initialCommit); assert.equal(native.source.frozenRuntimeFilesVerified, 302); assert.equal(native.runtimeSourceSha256, plan.source.runtimeSourceSha256); assert.equal(native.projection.sha256, item('native-plan').sha256);
+const phaseNames = ['boot', 'browsed', 'settings', 'selected', 'intro135', 'cold-intro135', 'ack136', 'vaccine137', 'cold-vaccine137', 'final138'];
+assert.deepEqual(native.phases.map(row => row.phase), phaseNames); assert.deepEqual(native.phases.map(row => row.revision), [134,134,134,134,135,135,136,137,137,138]);
+for (const row of native.phases) { assert.equal(row.reader, 14); assert.equal(row.lives, 7); assert.equal(row.moments, 66); for (const flag of ['allSixOtherOriginalLivesAndBackupsExact', 'all66OriginalMomentsAndMetadataExact', 'all141OriginalReceiptsExact', 'branchesAndRestoreReceiptsExact', 'noNewSnapshots']) assert.equal(row[flag], true, row.phase + ':' + flag); }
+assert.equal(native.final.revision, 138); assert.equal(native.final.receipts, 145); assert.equal(native.final.pending, null); assert.equal(native.final.annual, null); assert.equal(native.final.worldSha256, plan.final.worldSha256); assert.equal(native.acknowledgements.count, 2); assert.equal(native.acknowledgements.exactlyOncePerActualResult, true);
+dynamic('native-accepted-manifest', pending.acceptedCaptureManifest, 'native/accepted-captures.json');
+const accepted = load('native-accepted-manifest');
+assert.equal(accepted.format, 'dreams-c35-explicit-native-capture-manifest-v1'); assert.equal(accepted.complete, true); assert.equal(accepted.sourceCommit, finalCommit); assert.equal(accepted.runtimeProjectionCommit, initialCommit); assert.ok(Array.isArray(accepted.captures) && accepted.captures.length > 0);
+const ids = new Set(), captureRows = [];
+for (const row of accepted.captures) {
+  assert.match(row.id, /^[a-z0-9][a-z0-9-]{0,99}$/); assert.ok(!ids.has(row.id)); ids.add(row.id); assert.equal(row.coordinatorPersonallyViewed, true); assert.equal(row.accepted, true); assert.ok(typeof row.note === 'string' && row.note.trim()); assert.ok(Number.isFinite(row.fontScale) && row.fontScale > 0); assert.equal(row.files.length, 2);
+  for (const extension of ['png', 'xml']) { const sources = row.files.filter(file => path.extname(file.file) === '.' + extension); assert.equal(sources.length, 1, 'Require one exact PNG/XML per accepted pair'); const source = sources[0]; assert.match(source.sha256, /^[a-f0-9]{64}$/); const entry = dynamic('capture-' + row.id + '-' + extension, source.file, 'native/captures/' + row.id + '.' + extension, source); if (extension === 'png') assert.equal(fs.readFileSync(entry.source).subarray(0, 8).toString('hex'), '89504e470d0a1a0a'); else assert.match(read(entry.source), /<hierarchy\b/); }
+  captureRows.push({ id: row.id, note: row.note, fontScale: row.fontScale, coordinatorPersonallyViewed: true, accepted: true, png: artifact('capture-' + row.id + '-png'), xml: artifact('capture-' + row.id + '-xml') });
+}
+for (const [key, field, target] of [['actions-raw','actionsRaw','raw.json'], ['actions-stderr','actionsStderr','stderr.txt'], ['actions-receipt','actionsReceipt','receipt.json'], ['actions-summary','actionsSummary','summary.json'], ['actions-short','actionsShort','summary.md']]) dynamic(key, pending[field], 'actions/' + target);
+const actionSummary = load('actions-summary'), actionReceipt = load('actions-receipt'), actions = load('actions-raw');
+assert.equal(actionSummary.status, 'passed'); assert.equal(actionSummary.complete, true); assert.equal(actionSummary.sourceCommit, finalCommit); assert.deepEqual(actionSummary.versions, inputs.versions); assert.equal(actionSummary.combinedGamePersistenceSourceHash, final.combinedGamePersistenceSourceHash);
+assert.equal(actionSummary.raw.sha256, item('actions-raw').sha256); assert.equal(actionSummary.coordinatorExecutionReceipt.sha256, item('actions-receipt').sha256); assert.equal(actionSummary.sourceSnapshot.sha256, item('source-final').sha256);
+assert.equal(actionReceipt.status, 'passed'); assert.equal(actionReceipt.complete, true); assert.equal(actionReceipt.exitCode, 0); assert.equal(actionReceipt.sourceCommit, finalCommit); assert.equal(actionReceipt.quiescence.nativeAppStopped, true); assert.equal(actionReceipt.quiescence.otherHeavyWorkPausedOrClosed, true);
+assert.equal(actions.driverHash, item('actions-driver').sha256); assert.equal(actions.sourceHash, final.combinedGamePersistenceSourceHash); assert.equal(actions.results.length, 14); assert.equal(actionSummary.totals.actualMeasuredWarmSamples, 70); assert.equal(actionSummary.totals.fullMeasuredWarmUnpackCalls, 0);
+assert.equal(actionSummary.results.length, 14); let samples = 0; for (const row of actions.results) { assert.equal(row.trials.length, 5); for (const trial of row.trials) { samples++; assert.equal(trial.phases.unpackCheckpoint?.calls ?? 0, 0); } } assert.equal(samples, 70);
+dynamic('publication-inputs', inputPath, 'publication-inputs.json');
+dynamic('publication-program', __filename, 'publish.cjs.txt');
+
+const record = {
+  format: 'dreams-opening-completion-verification-v1', recordedOn: '2026-10-20', sourceCommit: finalCommit, versions: inputs.versions,
+  scope: 'C35 integrated opening/early-life context, truthful secondary withdrawal, durable action/review and display improvements. Complete regression/types, same120 annual seeds, separate reused12 criminalv2 and editorial journeys, fresh Hermes exports, actual scoped Android database/capture evidence and serial fixed-world action diagnostics. This is a milestone, not full production completion.',
+  gameSourceHash: final.gameSourceHash, combinedGamePersistenceSourceHash: final.combinedGamePersistenceSourceHash,
+  source: { initial: artifact('source-initial'), final: artifact('source-final'), finalAfterRegressionVerification: artifact('source-after'), initialCommit, finalCommit, sourceFilesPinned: 583, onlyChangedTrackedSourceFileBetweenRuns: sourceDelta[0], runtimeConfigAndFixturesIdenticalBetweenInitialAndFinal: true, projectionRuntimeCommit: initialCommit, initialHead: artifact('source-initial-head'), initialTree: artifact('source-initial-tree'), initialStatus: artifact('source-initial-status'), finalHead: artifact('source-final-head'), finalTree: artifact('source-final-tree'), finalStatus: artifact('source-final-status') },
+  checks: {
+    regression: { complete: true, exitCode: 0, tests: 2282, suites: 169, seconds: 1315.195, raw: artifact('regression'), coordinatorReceipt: artifact('regression-receipt'), initialFailedInterruptedRunAddedToPassingCount: false },
+    strictTypes: { complete: true, exitCode: 0, scope: 'Strict application and all test types', raw: artifact('types') },
+    annual120: { complete: true, exitCode: 0, seeds: [0,119], count: 120, elapsedMs: 753071, additionalDistinctSeedsClaimed: 0, ageRange: annual.ageRange, maxPeople: annual.maxPeople, maxLedgerRows: annual.maxLedgerRows, raw: artifact('annual'), stderr: artifact('annual-stderr'), driver: artifact('annual-tool'), scope: 'Same immutable annual-policy seeds, current source; no older complete-world equality or extra120 claim.' },
+    exports: { complete: true, exitCode: 0, raw: artifact('export-final'), metadata: artifact('exports-metadata'), bundles, initialFailureRetained: artifact('export-initial'), initialExitCode: 7, retryReason: 'Initial Expo attempted unavailable /home/agent/.expo; retry used the existing workspace Expo home, with runtime/source unchanged.', scope: 'Fresh Android/iOS Hermes exports, not installable/device/standalone/iOS hardware acceptance.' },
+    criminalV2: { complete: true, exitCode: 0, elapsedMs: 179765, countryLives: 12, reusedSeeds: [900,911], additionalAnnualSeeds: 0, scenarioComplete: false, raw: artifact('criminal-raw'), progress: artifact('criminal-progress'), manifest: artifact('criminal-manifest'), summary: artifact('criminal-summary'), short: artifact('criminal-short'), totals: criminalSummary.totals, unmetMilestoneObjectsPreserved: 20, negativeObservationsPreserved: 674, fullCommandRowsSerialized: false, commandTraceHashesRetained: true, scope: 'Actual SQLite birth only; later immutable engine/checkpoint journeys. Italy acquittals/no prison and all other unmet outcomes retained. No extra annual seeds/native/full Scenario acceptance.' },
+    editorial: { complete: true, exitCode: 0, elapsedMs: 677963, countryLives: 12, reusedSeeds: [900,911], additionalAnnualSeeds: 0, stdout: artifact('editorial-stdout'), progress: artifact('editorial-progress'), manifest: artifact('editorial-manifest'), fullRawArchive: artifact('editorial-archive'), archiveManifest: artifact('editorial-archive-manifest'), archiveProof: artifact('editorial-archive-proof'), archiveMemberRoot: 'dreams-opening-next-editorial-20261020/', rawFiles: 87, rawFileBytes: 30974791, archiveIsBytePreservationOnly: true, report: artifact('editorial-analysis-REPORT.md'), analysisSummary: artifact('editorial-analysis-summary.json'), analysisInputs: artifact('editorial-analysis-inputs.json'), analysisHashes: artifact('editorial-analysis-SHA256SUMS'), coverage: { catalogueChoices: 633, uniqueTemplates: 133, uniqueBranches: 274, authoredBranchOccurrences: analysis.coverage.authoredBranchOccurrences, unseenTemplates: analysis.coverage.unseenCatalogueIds.length, unselectedBranches: analysis.coverage.unselectedCatalogueBranches.length, actualColdChecks: 2721, simpleCappedEffectChecks: 1412, anomaliesInThoseChecks: 0, callbackDecisions: 1, terminalStartedYearsNotCompleted: 12 }, findingsRemainOpen: analysis.findings.map(row => ({ id: row.id, priority: row.priority, title: row.title })), scope: 'Passive deterministic varied-choice policy; original commands/decisions/cold/birth/final frames retained losslessly. Observed contexts/branches and actual natural deaths only; no all250/all750/all-context/balance/full-Scenario/native claim. Story report retains concrete defects and annual telemetry limitation.' },
+    native: { complete: true, exitCode: 0, projectedRuntimeCommit: initialCommit, finalRuntimeBytesMatchCommit: finalCommit, runtimeFilesVerified: 302, result: artifact('native-result'), verifierOutput: artifact('native-verifier-log'), projection: artifact('native-plan'), acceptedCaptures: artifact('native-accepted-manifest'), captures: captureRows, phases: native.phases.map(row => ({ phase: row.phase, activeLife: row.activeLife, activeRevision: row.activeRevision, niaRevision: row.revision, reader: row.reader, lives: row.lives, moments: row.moments, receipts: row.receipts, worldSha256: row.worldSha256, allSixOtherOriginalLivesAndBackupsExact: true, all66OriginalMomentsAndMetadataExact: true, all141OriginalReceiptsExact: true })), final: { revision: 138, lives: 7, moments: 66, receipts: 145, pending: null, annual: null, worldSha256: native.final.worldSha256 }, databaseCapturesCommitted: false, actualSavedResultColdReopens: 2, separatelyCommittedAcknowledgements: 2, originalPlanEveryCommandColdAssertionIsFutureScopeOnly: true, additionalSettingsColdRawRows: artifact('native-additional-rows'), verifierSelfAudit: artifact('native-self-audit'), scope: 'Actual coordinator native actions plus read-only ten-capture full-world/eight-table verifier, exact original history and reviewed PNG/XML list. Captured databases remain external inputs; verifier raw records original provenance. No physical p95, standalone/iOS or complete native full-life claim.' },
+    actions: { complete: true, exitCode: 0, raw: artifact('actions-raw'), progress: artifact('actions-stderr'), coordinatorReceipt: artifact('actions-receipt'), summary: artifact('actions-summary'), short: artifact('actions-short'), driver: artifact('actions-driver'), measuredWarmSamples: 70, fullWarmUnpackCalls: 0, cases: 14, scope: 'Serial unpaired cloud Node/on-disk SQLite fixed-world samples, five per case. Complete cold current/backup and original Before Age Up driver assertions; generated population stress is not natural/native. No physical/UI p95 or speedup guarantee.' },
+    historicalHostedCI: { currentC35Source: false, sourceCommit: hosted.sourceCommit, runId: hosted.run.id, url: hosted.run.url, conclusion: 'success', tests: 2100, suites: 147, seconds: 692.706, observation: artifact('ci-metadata'), raw: artifact('ci-log'), scope: 'Actual pushed ed506a1 Linux hosted locked install/types/Jest only; no C35 hosted success claim.' },
+  },
+  diagnostics: { initialRegression: artifact('regression-initial'), interruption: artifact('regression-interruption'), reviewedWordingFix: artifact('wording-focused'), wordingTestTypes: artifact('wording-test-types'), initialExpoFailure: artifact('export-initial') },
+  limits: ['Overall production is not complete; onboarding/native visual/accessibility and broad release acceptance remain independently scoped.', 'Archive integrity, source equality and catalogue counts do not establish editorial/balance or all-context gameplay success.', 'Original source/receipt/raw JSON/Markdown files retain exact bytes including their original external provenance paths. Top-level published artifact references are repository-relative; archived country pointers resolve under fullRawArchive/member root.', 'No extra distinct annual seeds, complete ScenarioA/B/C, physical p95, 120-year/storage, multigeneration or standalone/iOS acceptance is inferred.', 'Old C34/v1/failed AU evidence is retained in its original published locations and not overwritten.'],
+  artifacts: copies.map(row => artifact(row.key)),
+};
+assert.ok(!JSON.stringify(record).includes('/tmp/'), 'Top-level publication record must use published relative artifact links');
+for (const row of copies) { const actual = info(row.source); assert.equal(actual.sha256, row.sha256); assert.equal(actual.bytes, row.bytes); }
+for (const file of Object.keys(final.source)) assert.equal(sha(fs.readFileSync(path.join(repo, file))), final.source[file], 'Final source changed before copy');
+assert.equal(treeHash([path.join(repo, 'src/game'), path.join(repo, 'src/persistence')], repo), final.combinedGamePersistenceSourceHash);
+const verification = path.join(repo, 'docs/verification'), directory = path.join(repo, inputs.artifactDirectory), output = path.join(repo, inputs.outputRecord);
+assert.ok(!fs.existsSync(directory) && !fs.existsSync(output), 'Preserve existing publication: destination already exists');
+fs.mkdirSync(verification, { recursive: true }); const stage = fs.mkdtempSync(path.join(verification, '.opening-completion-stage-'));
+try {
+  const nested = path.join(stage, 'opening-completion-20261020');
+  for (const row of copies) { const target = path.join(stage, row.target); fs.mkdirSync(path.dirname(target), { recursive: true }); fs.copyFileSync(row.source, target, fs.constants.COPYFILE_EXCL); assert.equal(sha(fs.readFileSync(target)), row.sha256); }
+  const finalJson = path.join(stage, 'opening-completion-20261020.json'); fs.writeFileSync(finalJson, JSON.stringify(record, null, 2) + '\n', { flag: 'wx' });
+  fs.renameSync(nested, directory); fs.renameSync(finalJson, output);
+} finally { fs.rmSync(stage, { recursive: true, force: true }); }
+process.stdout.write(JSON.stringify({ published: true, record: path.relative(repo, output), artifacts: copies.length, sourceCommit: finalCommit, gatesComplete: true }) + '\n');

@@ -12,6 +12,21 @@ Time Machine breadth and history-storage optimisation. Existing implemented
 features/data remain intact. Continue the full gameplay, content, visual and
 release plan; this update takes precedence over older file-feature priorities.
 
+## Current verified checkpoint — 20 October
+
+World34/engine35/content10/reader14 passes2,282tests/169suites, strict types,
+both Hermes exports, the same120annual seeds and scoped Android action/cold
+checks, including exact original history and70warm samples with zero full unpack.
+Profile/Statistics/Finances, motion/optional feedback, voluntary school withdrawal
+and actual hobby introductions are integrated. Overall production is about65%;
+[the current evidence and remaining limits](../verification/opening-completion-20261020.json)
+and [current workstreams](../HANDOFF.md) take precedence over historical milestones.
+Continue independent family/terminal/story/health/best-friend and career acceptance
+work with coordinated integration, testing and commits. Broad balance, country,
+visual/accessibility and device release acceptance remain open.
+
+## Earlier implementation milestones (historical sources)
+
 The minimum250annual situations are now implemented, including125actual-life
 contexts and375new choices, alongside18persisted ordinary-job interviews. Full
 1,657-test regression, same120immutable lifetimes, twelve natural country journeys

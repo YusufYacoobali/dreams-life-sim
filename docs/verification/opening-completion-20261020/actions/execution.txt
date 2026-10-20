@@ -1,0 +1,2 @@
+{"benchmarkStartedAt": "2026-10-20T22:56:04.411918+00:00", "pausedOwnedPids": [100274, 137273], "nativeAppStopped": true}
+{"benchmarkExitCode": 0, "quiescence": "/tmp/dreams-opening-next-actions-quiescence.json", "allOwnedProcessesResumed": true}

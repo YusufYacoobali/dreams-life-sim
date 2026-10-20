@@ -1,0 +1,394 @@
+{
+  "format": "dreams-c35-native-additional-raw-rows-v1",
+  "status": "passed",
+  "observedAt": "2026-10-20T22:53:35.511593+00:00",
+  "scope": "Read-only raw SQL comparison of actual coordinator native captures. Adds an observed settings-only cold reopen to the primary ten-phase whole-world verifier. No game commands, native input, migration or SQL writes. It does not independently verify canonical worlds, screenshot provenance or later actions.",
+  "assertions": {
+    "reader13To14AllEightTablesExact": true,
+    "readOnlyBrowseAllEightTablesExact": true,
+    "settingsOnlyExactAppSettingsInsertion": true,
+    "settingsColdAllEightTablesExact": true,
+    "selectionOnlyActiveLifePreference": true,
+    "intro135ColdAllEightTablesExact": true,
+    "inputDatabaseAndWalBytesUnchangedByVerification": true
+  },
+  "rowHashEncoding": "SHA256 of compact UTF-8 JSON array of sorted per-row compact key-sorted JSON strings; Unicode unescaped. Separate encoding from primary verifier.",
+  "captures": {
+    "baseline": {
+      "reader": 13,
+      "files": {
+        "/tmp/dreams-autonomy-native-school-final-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-autonomy-native-school-final-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "0c8d67187ad9845442147ca3075c9641c4f89ab7f796dae7da149c94025c22b4"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 1,
+          "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "boot": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-boot-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-boot-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "8f6ee3bc3c10af859d225b02b3bafd6fbfd9af022ce2f4d9864641b948c0f695"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 1,
+          "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "browsed": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-browsed-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-browsed-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "8f6ee3bc3c10af859d225b02b3bafd6fbfd9af022ce2f4d9864641b948c0f695"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 1,
+          "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "settings": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-settings-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-settings-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "b45b8f1290d7278173bd1176fa288aa297b646148159bd6ddcd029a46bd0ca57"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "ce78b6d0c7c532c7a34094e18f0e25ae1d72c9b120aca04a0e53a60eb4d8f3c5"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "settings-cold": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-settings-cold-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-settings-cold-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "b45b8f1290d7278173bd1176fa288aa297b646148159bd6ddcd029a46bd0ca57"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "ce78b6d0c7c532c7a34094e18f0e25ae1d72c9b120aca04a0e53a60eb4d8f3c5"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "selected": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-selected-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-selected-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "c7f4017255ac03d310f7b74e7c897ad48f5a1be8ef689792582f159bacb0b3ce"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "cf3cd2626faa16b6b07da99e0ef2a9914ab5a9bbff2dada718712f1a16d04173"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "01caf2170d2092394c02605cc7126d7312149ddb69feab9119e4b4a62d768817"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 141,
+          "sha256": "1cceabf9662de2ff22379a4df2bf049a6c735c5b5d81a816f33e674f6ecd77c7"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "intro135": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-intro135-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-intro135-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "bfd702797a567cf8df80e6c575978d76f0a4ddb9a913262b2f55205d9f3d574f"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "626be13e19550b47092ed1336d514296dc079d95bf702114aad60a6ea30eeda2"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "681372e4b96b2afe134e82731f97ff2d32cc02a9d02a7f1fc1b601cefc5c9ce3"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 142,
+          "sha256": "e13347c3011e1250800b8962235021459b4453f37493d2c63ca5895553ee7b6b"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    },
+    "cold-intro135": {
+      "reader": 14,
+      "files": {
+        "/tmp/dreams-opening-next-native-cold-intro135-db/dreams.db": {
+          "bytes": 3538944,
+          "sha256": "48c20956cbcc50ad6a298ab9107ff432f1e1ca6eabe6ce2add5785e5f346cf6b"
+        },
+        "/tmp/dreams-opening-next-native-cold-intro135-db/dreams.db-wal": {
+          "bytes": 4733912,
+          "sha256": "bfd702797a567cf8df80e6c575978d76f0a4ddb9a913262b2f55205d9f3d574f"
+        }
+      },
+      "tables": {
+        "backups": {
+          "rows": 7,
+          "sha256": "626be13e19550b47092ed1336d514296dc079d95bf702114aad60a6ea30eeda2"
+        },
+        "branches": {
+          "rows": 1,
+          "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+        },
+        "lives": {
+          "rows": 7,
+          "sha256": "681372e4b96b2afe134e82731f97ff2d32cc02a9d02a7f1fc1b601cefc5c9ce3"
+        },
+        "preferences": {
+          "rows": 2,
+          "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+        },
+        "receipts": {
+          "rows": 142,
+          "sha256": "e13347c3011e1250800b8962235021459b4453f37493d2c63ca5895553ee7b6b"
+        },
+        "restore_receipts": {
+          "rows": 1,
+          "sha256": "8f3438adaa30734181d11412661add7dbbb965ca51b1c34185bffb1cc68cb21f"
+        },
+        "snapshot_metadata": {
+          "rows": 66,
+          "sha256": "655370281918d85d738449450959abfed8f323daac600b261dd161f2dc79b8da"
+        },
+        "snapshots": {
+          "rows": 66,
+          "sha256": "dc82847be2784ac8c6be37ba2fc3d769ae86c6eafde1a615cc53db8cab6c9298"
+        }
+      }
+    }
+  }
+}

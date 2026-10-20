@@ -1,0 +1,29 @@
+{
+  "format": "dreams-c35-action-execution-receipt-v1",
+  "status": "passed",
+  "complete": true,
+  "exitCode": 0,
+  "executionReference": "root unified exec session6491; actual wrapper/benchmark closed exit0",
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "cwd": "/workspace/dreams-worktrees/integration-opening-next",
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/integration-opening-next",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "stdoutFile": "/tmp/dreams-opening-next-actions.json",
+  "stderrFile": "/tmp/dreams-opening-next-actions.stderr.txt",
+  "startedAt": "2026-10-20T22:56:04.411918+00:00",
+  "finishedAt": "2026-10-20T22:56:40.022195+00:00",
+  "quiescence": {
+    "nativeAppStopped": true,
+    "otherHeavyWorkPausedOrClosed": true,
+    "statement": "Actual adb pidof confirmed ExpoGo absent. Full regression28548/editorial24133 and all agent test/type jobs were closed; release compat20602 closed0 before measurement. Owned QEMU100274 and Metro137273 exact command identities were SIGSTOPped only during benchmark and SIGCONT resumed in finally; exact timestamps in separate quiescence receipt. No native UI/capture/archive/cohort/testing ran during samples."
+  },
+  "note": "One completed registered C35 serial benchmark. Initial wrapper proc/cwd proof guard failed before any process pause or benchmark; preserved diagnostic; successful wrapper validates exact known Metro argv instead."
+}

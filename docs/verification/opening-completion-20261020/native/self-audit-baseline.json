@@ -1,0 +1,52 @@
+{
+  "reader": 13,
+  "tables": {
+    "lives": {
+      "rows": 7,
+      "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef",
+      "exactToProjectionBaseline": true
+    },
+    "preferences": {
+      "rows": 1,
+      "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c",
+      "exactToProjectionBaseline": true
+    },
+    "receipts": {
+      "rows": 141,
+      "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483",
+      "exactToProjectionBaseline": true
+    },
+    "snapshots": {
+      "rows": 66,
+      "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5",
+      "exactToProjectionBaseline": true
+    },
+    "backups": {
+      "rows": 7,
+      "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479",
+      "exactToProjectionBaseline": true
+    },
+    "snapshot_metadata": {
+      "rows": 66,
+      "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9",
+      "exactToProjectionBaseline": true
+    },
+    "branches": {
+      "rows": 1,
+      "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370",
+      "exactToProjectionBaseline": true
+    },
+    "restore_receipts": {
+      "rows": 1,
+      "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7",
+      "exactToProjectionBaseline": true
+    }
+  },
+  "allBaselineTablesExact": true,
+  "preferences": [
+    {
+      "key": "active_life",
+      "value": "life_mvgprdj2_16qsril_0"
+    }
+  ]
+}

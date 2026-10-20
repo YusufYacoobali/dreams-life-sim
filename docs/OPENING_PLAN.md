@@ -1,5 +1,20 @@
 # Opening experience: priority and completion estimates
 
+Current World34/engine35/content10/reader14 integrates truthful Profile,
+Statistics, annual Finances, independent motion/feedback settings, durable
+Health/Exercise reviews, actual hobby introductions and voluntary secondary
+withdrawal. The fresh final regression passes2,282tests/169suites; strict types,
+both Hermes exports, same120annual seeds, criminalv2 and varied-choice12-country
+policies,70warm-zero-unpack samples and scoped Android cold actions pass.
+Normal/130% opening review and keyboard checks preserve every old life/history.
+[Current source, checks and exact limits](verification/opening-completion-20261020.json).
+Overall is approximately65%, onboarding65%, Life/early gameplay65%; full device,
+visual/accessibility, country/balance and remaining editorial acceptance stay open.
+The new isolated fixes listed in HANDOFF are ready for the next coordinated batch.
+
+The following opening milestones retain their own historical source/count scope.
+
+
 The integrated World33/engine34 checkpoint adds bounded autonomous NPC family
 life, factual named consequences and retained action reviews, with exact reader13
 resume. The fresh final-current-source regression passes2,100tests/147suites;
@@ -332,9 +347,9 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World33/engine34/content9/reader13 evidence is linked at the top. The
-coordinator's reviewed current estimate is60% overall; onboarding
-55%, Life/early gameplay60% and family85%.
+Current World34/engine35/content10/reader14 evidence is linked at the top. The
+coordinator's reviewed current estimate is65% overall; onboarding
+65%, Life/early gameplay65% and family85%.
 Earlier milestone prose retains its own source and historical estimates.
 
 Prior World32/engine33/content9 adds reviewed hourly work, actual paid/worked
@@ -367,45 +382,47 @@ fresh Hermes exports pass. Actual native older-life viewing returns to Riley
 with all eight tables exact. Engine/codec/schema stay fixed; file breadth and
 broader production gates remain deferred/open as recorded.
 
-The complete production scope is approximately **60% complete**. These are
+The complete production scope is approximately **65% complete**. These are
 conservative effort estimates, not measured screen acceptance scores. Passing
 mechanics tests does not establish visual fidelity or device readiness.
 
 | Area | Estimate | Remaining work |
 | --- | ---: | --- |
-| Onboarding and creation | 55% | Creation/newborn usability, matched native visual review and platform acceptance |
-| Life screen and early gameplay | 60% | More early consequences and native interaction/layout polish |
+| Onboarding and creation | 65% | Creation/newborn usability, matched native visual review and platform acceptance |
+| Life screen and early gameplay | 65% | More early consequences and native interaction/layout polish |
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
-| Education and ordinary jobs | 75% | Career ladders, national education depth and broader balance |
+| Education and ordinary jobs | 80% | Career ladders, national education depth and broader balance |
 | Relationships, family and inheritance | 85% | More autonomous-life depth, balance and device acceptance |
 | Money, assets and markets | 80% | Balance, broad integration and device acceptance |
-| Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
+| Health, crime and legal systems | 75% | Country-rule audit, balance and broader integrated journeys |
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
-| Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
-| Pets, hobbies and entertainment | 60% | Further leisure depth, balance and broader device review |
-| Situational stories | About70% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
-| Achievements and challenges | 55% | Challenge/reward depth and broader release review |
-| Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
+| Travel and emigration | 80% | Country verification and broader scenarios/device acceptance |
+| Pets, hobbies and entertainment | 65% | Further leisure depth, balance and broader device review |
+| Situational stories | About75% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
+| Achievements and challenges | 60% | Challenge/reward depth and broader release review |
+| Visual polish and accessibility | 55% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
-Overall is approximately **60%**. These are conservative effort estimates,
+Overall is approximately **65%**. These are conservative effort estimates,
 not acceptance scores or a simple average. Story counts measure implemented source
 situations, not completed editorial/release acceptance. Additional file/history
 work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Current next steps: continue the full production plan after the accepted C34
-batch. Keep onboarding/early play, country-rule and balance review, remaining
-career/leisure/progression depth, editorial pacing and available visual/device
-release gates active in independent worktrees. The optional A/B/C engine policies
-retain their own omissions and scopes; resolve approved remaining scenario gaps,
-including B's absent dropout, without forcing results or claiming full native
-lifetimes from engine evidence. Preserve fast
-atomic automatic save/resume and all original lives/history. Further import/
-export/sharing/history breadth remains parked. The original opening priorities
-below retain their detailed references.
+Continue the complete production plan. Independent worktrees already contain
+reviewed late-spouse FamilyTree, factual death biography, new-story name labels,
+medical context/first-diagnosis fixes and genuine career-exit acceptance; Best
+Friends is independently approved at World35/engine36/content11/reader15 and
+awaits coordinated integration. The editorial driver is also ready. Integrate
+these existing changes, resolve shared version expectations, then run consolidated
+source/type/regression/lifetime/export/native/performance gates. Do not reimplement
+them or wait on one workstream before starting independent acceptance work.
+Broader country verification, balance, unobserved story contexts, visual/accessibility
+and physical/standalone/iOS release acceptance remain open. Further file/history
+breadth stays parked. Commit AND push at safe points at least every two hours;
+a routine checkpoint does not end the authorised task.
 
 The latest reported regression takes precedence: ordinary buttons must respond
 smoothly without “Saving” replacing unrelated subtitles or loading every button.

@@ -1,0 +1,675 @@
+{
+  "status": "projection-only",
+  "nativeAcceptance": false,
+  "scope": "Final-source ordinary commands projected in memory from the actual captured C34 SQLite DB. Input DB is read only; no life selection, reader migration, settings write, native UI action, durable SQLite save or observed cold launch is performed by this tool. No time/funds/stats/RNG/age overrides or outcome search.",
+  "source": {
+    "root": "/workspace/dreams-worktrees/integration-opening-next",
+    "commit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+    "runtimeSourceSha256": "373e285304922ec79f55b9931f06b9896beb722374e5eef654a2f50d9ac052b4",
+    "healthReviewGuardSha256": "9e5fe2487ed8599b6481e8324d553d4121c719ac08a643fe6582c607457e9c1d",
+    "coordinatorProofs": [
+      {
+        "file": "/tmp/dreams-opening-next-source-tree.bin",
+        "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+      },
+      {
+        "file": "/tmp/dreams-opening-next-source-head.txt",
+        "sha256": "ce21d75d587fb0bee2a0b348b1ed1509425d1561f8456ff5ecacb74de59fa88f"
+      },
+      {
+        "file": "/tmp/dreams-opening-next-source-status.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "proofScope": "Coordinator-shell ls-tree/head/clean-status captures; current source bytes verified against exact Git blob object IDs before and after projection. Not a nested Git execution or a gate pass."
+  },
+  "input": {
+    "dbPath": "/tmp/dreams-autonomy-native-school-final-db/dreams.db",
+    "reader": 13,
+    "activeLife": "life_mvgprdj2_16qsril_0",
+    "settingsValue": null,
+    "tables": {
+      "lives": {
+        "rows": 7,
+        "sha256": "e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef"
+      },
+      "preferences": {
+        "rows": 1,
+        "sha256": "9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c"
+      },
+      "receipts": {
+        "rows": 141,
+        "sha256": "2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483"
+      },
+      "snapshots": {
+        "rows": 66,
+        "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+      },
+      "backups": {
+        "rows": 7,
+        "sha256": "1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479"
+      },
+      "snapshot_metadata": {
+        "rows": 66,
+        "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+      },
+      "branches": {
+        "rows": 1,
+        "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+      },
+      "restore_receipts": {
+        "rows": 1,
+        "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+      }
+    },
+    "alex": {
+      "lifeId": "life_mvgprdj2_16qsril_0",
+      "personId": "person_player",
+      "name": "Alex Martín",
+      "age": 6,
+      "revision": 23,
+      "date": {
+        "year": 2032,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "bbc0b07028aaeb4f8cda808fc2e0b3f426a96cf154712077a4ea20c36aea46b3",
+      "pending": null,
+      "annual": null
+    },
+    "nia": {
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 134,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null
+    },
+    "originalAlexPayloadSha256": "3c0b59bf16f7ec08a687fdfaff72e60e3c92046de4329b005d40a61146f5a474",
+    "originalNiaPayloadSha256": "6f6009bc889d5070ca885e5a71af7155d2a6ae0e88ed6c4404aecf96b2399cfe"
+  },
+  "metadataPlan": {
+    "fromReader": 13,
+    "toReader": 14,
+    "nativeObserved": false,
+    "expectedAllEightTablesExact": true,
+    "noEagerPayloadRewrite": true
+  },
+  "readOnlyPlan": {
+    "routes": [
+      "/profile",
+      {
+        "pathname": "/statistics",
+        "params": {
+          "tab": "activities"
+        }
+      },
+      "/finances"
+    ],
+    "actor": {
+      "lifeId": "life_mvgprdj2_16qsril_0",
+      "personId": "person_player",
+      "name": "Alex Martín",
+      "age": 6,
+      "revision": 23,
+      "date": {
+        "year": 2032,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "bbc0b07028aaeb4f8cda808fc2e0b3f426a96cf154712077a4ea20c36aea46b3",
+      "pending": null,
+      "annual": null
+    },
+    "expectedAllEightTablesExact": true,
+    "actualSelectorProjection": {
+      "statistics": {
+        "personId": "person_player",
+        "name": "Alex Martín",
+        "age": 6,
+        "died": false,
+        "sections": [
+          {
+            "id": "school",
+            "title": "Education",
+            "rows": [
+              {
+                "id": "reports",
+                "label": "School reports recorded",
+                "value": "0"
+              },
+              {
+                "id": "high-reports",
+                "label": "Reports with a grade of 80 or above",
+                "value": "0"
+              },
+              {
+                "id": "club-months",
+                "label": "Months with a school club",
+                "value": "0"
+              },
+              {
+                "id": "secondary",
+                "label": "Secondary qualifications",
+                "value": "0"
+              },
+              {
+                "id": "further",
+                "label": "Further qualifications",
+                "value": "0"
+              },
+              {
+                "id": "scholarships",
+                "label": "Scholarships completed",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "work",
+            "title": "Work",
+            "note": "Employment-months add each retained job record; overlapping jobs count separately. A recorded role is not proof of every past pay receipt.",
+            "rows": [
+              {
+                "id": "jobs",
+                "label": "Employment records",
+                "value": "0"
+              },
+              {
+                "id": "months",
+                "label": "Recorded employment-months",
+                "value": "0"
+              },
+              {
+                "id": "raises",
+                "label": "Accepted pay raises",
+                "value": "0"
+              },
+              {
+                "id": "feedback",
+                "label": "Accepted workplace feedback",
+                "value": "0"
+              },
+              {
+                "id": "pensions",
+                "label": "Recorded paid pension periods",
+                "value": "0"
+              },
+              {
+                "id": "businesses",
+                "label": "Businesses founded",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "money",
+            "title": "Recorded Personal Receipts",
+            "note": "Retained personal ledger receipts, before fees and taxes. Pay includes pensions and recorded background pay. Other earned receipts include creative work and royalties, freelance and clinical fees, media interviews, sponsorships, company profit distributions and attended public-duty allowances. Loans, gifts, inheritance, transfers and asset sales are excluded. Currencies stay separate; tax cash paid is before refunds.",
+            "rows": []
+          },
+          {
+            "id": "family",
+            "title": "Family and Travel",
+            "rows": [
+              {
+                "id": "children",
+                "label": "Recorded biological or adopted children",
+                "value": "0"
+              },
+              {
+                "id": "marriages",
+                "label": "Marriages recorded",
+                "value": "0"
+              },
+              {
+                "id": "trips",
+                "label": "Completed trips participated in",
+                "value": "0"
+              },
+              {
+                "id": "countries",
+                "label": "Destination countries on completed trips",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "leisure",
+            "title": "Hobbies and Pets",
+            "note": "A hobby-month is an attended monthly practice, not extra practice. Pet-months count each funded period while this person was the recorded owner; pets can overlap.",
+            "rows": [
+              {
+                "id": "hobby-months",
+                "label": "Most attended months in one hobby",
+                "value": "0"
+              },
+              {
+                "id": "proficiency",
+                "label": "Highest recorded hobby proficiency (%)",
+                "value": "0"
+              },
+              {
+                "id": "hobby-kinds",
+                "label": "Hobbies with at least 12 attended months",
+                "value": "0"
+              },
+              {
+                "id": "pets",
+                "label": "Pets adopted by this person",
+                "value": "0"
+              },
+              {
+                "id": "pet-months",
+                "label": "Funded pet-months while owner",
+                "value": "0"
+              },
+              {
+                "id": "outings",
+                "label": "Paid entertainment outings participated in",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "special",
+            "title": "Creative Work and Service",
+            "rows": [
+              {
+                "id": "projects",
+                "label": "Completed special-career projects",
+                "value": "0"
+              },
+              {
+                "id": "awards",
+                "label": "Awarded completed career projects",
+                "value": "0"
+              },
+              {
+                "id": "posts",
+                "label": "Published social posts, including archives",
+                "value": "0"
+              },
+              {
+                "id": "broadcasts",
+                "label": "Creator-studio live broadcasts",
+                "value": "0"
+              },
+              {
+                "id": "minutes",
+                "label": "Creator-studio live minutes",
+                "value": "0"
+              },
+              {
+                "id": "military",
+                "label": "Completed military assignments",
+                "value": "0"
+              },
+              {
+                "id": "space",
+                "label": "Completed space assignments",
+                "value": "0"
+              },
+              {
+                "id": "royal",
+                "label": "Attended royal engagements",
+                "value": "0"
+              }
+            ]
+          }
+        ]
+      },
+      "finances": {
+        "year": 2032,
+        "currency": "EUR",
+        "received": {
+          "$dreamsBigInt": "0"
+        },
+        "paid": {
+          "$dreamsBigInt": "0"
+        },
+        "debtAdded": {
+          "$dreamsBigInt": "0"
+        },
+        "debtReduced": {
+          "$dreamsBigInt": "0"
+        },
+        "entries": [],
+        "months": 10,
+        "income": {
+          "$dreamsBigInt": "0"
+        },
+        "expenses": {
+          "$dreamsBigInt": "0"
+        },
+        "taxPaid": {
+          "$dreamsBigInt": "0"
+        },
+        "taxRefunded": {
+          "$dreamsBigInt": "0"
+        },
+        "netCash": {
+          "$dreamsBigInt": "0"
+        },
+        "sections": [],
+        "incomeAverage": {
+          "$dreamsBigInt": "0"
+        },
+        "expenseAverage": {
+          "$dreamsBigInt": "0"
+        },
+        "current": {
+          "cash": {
+            "$dreamsBigInt": "0"
+          },
+          "available": {
+            "$dreamsBigInt": "0"
+          },
+          "debt": {
+            "$dreamsBigInt": "0"
+          }
+        }
+      }
+    }
+  },
+  "settingsPlan": {
+    "nativeObserved": false,
+    "executedByProjection": false,
+    "expectedMutation": "preferences.app_settings only for chosen settings; normal selectLife separately changes preferences.active_life",
+    "verifySeparately": "After real settings writes, allow only actual intended preference values to differ; all seven other tables and every life/current/backup payload must remain exact. Do not claim all eight unchanged across settings writes. Later read-only visits/cold checks compare against the post-settings baseline."
+  },
+  "selectionPlan": {
+    "method": "Normal existing-life UI / store.selectLife, no SQL override",
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "expectedActiveLife": "life_native_adult_friend_v30_s0",
+    "expectedWorld": {
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 134,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+      "pending": null,
+      "annual": null
+    },
+    "worldRevisionChanges": false,
+    "expectedMutation": "preferences.active_life only; all seven other tables remain byte exact"
+  },
+  "trace": [
+    {
+      "phase": "reading-introduction",
+      "command": {
+        "type": "meet-hobby-peer",
+        "hobbyId": "hobby_person_player_reading",
+        "planId": "hobby_plan_117_0",
+        "reviewedPayerId": "person_player",
+        "reviewedMonth": 24609
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 135,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+      "pending": {
+        "kind": "result",
+        "id": "action_134",
+        "title": "An introduction at practice",
+        "body": "You introduced yourself to Morgan Brooks after local reading practice. Your attended access already covers this visit. An introduction is a beginning; you can get to know each other through Relationships.",
+        "illustration": "leisure-reading",
+        "effects": [
+          {
+            "id": "contact",
+            "label": "New acquaintance",
+            "value": "Morgan Brooks",
+            "tone": "positive"
+          }
+        ]
+      },
+      "annual": null,
+      "codecCold": {
+        "kind": "packCheckpoint/unpackCheckpoint full canonical equality; no observed SQLite/app cold launch",
+        "exact": true,
+        "packedSha256": "e5ccd133435720e6559d8ab331172d7f9192303bfbdf46bbf5c0803167452ea2"
+      },
+      "expectedReceipts": 142,
+      "expectedLifeCount": 7,
+      "expectedMomentCount": 66,
+      "newPeople": [
+        {
+          "id": "person_npc_134_19",
+          "name": "Morgan Brooks",
+          "age": 28
+        }
+      ]
+    },
+    {
+      "phase": "reading-introduction-ack",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_134"
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 136,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "0eb0dd3174a0309446b923d5de06f2f3f37323a0151138de069976a2efb0f228",
+      "pending": null,
+      "annual": null,
+      "codecCold": {
+        "kind": "packCheckpoint/unpackCheckpoint full canonical equality; no observed SQLite/app cold launch",
+        "exact": true,
+        "packedSha256": "848b0725cc5772a45195d0dcfc33d88c65e286b40c680c7529843fd2a23ae7f2"
+      },
+      "expectedReceipts": 143,
+      "expectedLifeCount": 7,
+      "expectedMomentCount": 66,
+      "newPeople": []
+    },
+    {
+      "phase": "vaccination",
+      "command": {
+        "type": "vaccinate",
+        "vaccine": "routine"
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 137,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+      "pending": {
+        "kind": "result",
+        "id": "action_136",
+        "title": "Protection recorded",
+        "body": "This reduces the game’s infection risk for its recorded period. It does not cure an existing condition or grant a permanent health boost.",
+        "illustration": "care",
+        "effects": []
+      },
+      "annual": null,
+      "codecCold": {
+        "kind": "packCheckpoint/unpackCheckpoint full canonical equality; no observed SQLite/app cold launch",
+        "exact": true,
+        "packedSha256": "911d87377cd49dbd9c1ebc42493a9d7181d135b6d4a494b996890caf5a84796e"
+      },
+      "expectedReceipts": 144,
+      "expectedLifeCount": 7,
+      "expectedMomentCount": 66,
+      "newPeople": []
+    },
+    {
+      "phase": "vaccination-ack",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_136"
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 138,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+      "pending": null,
+      "annual": null,
+      "codecCold": {
+        "kind": "packCheckpoint/unpackCheckpoint full canonical equality; no observed SQLite/app cold launch",
+        "exact": true,
+        "packedSha256": "d10799ba09d72d7474544b54f34d41f517da86a0b876dc123cef0010a1f8f981"
+      },
+      "expectedReceipts": 145,
+      "expectedLifeCount": 7,
+      "expectedMomentCount": 66,
+      "newPeople": []
+    }
+  ],
+  "blocked": [],
+  "introduction": {
+    "hobbyId": "hobby_person_player_reading",
+    "plan": {
+      "id": "hobby_plan_117_0",
+      "payerId": "person_player",
+      "country": "US",
+      "city": "New York",
+      "currency": "USD",
+      "mode": "community",
+      "monthlyFee": {
+        "$dreamsBigInt": "800"
+      },
+      "consent": {
+        "strength": null,
+        "chance": 100,
+        "roll": 100,
+        "accepted": true
+      },
+      "started": {
+        "year": 2048,
+        "month": 10,
+        "day": 20
+      },
+      "ended": null,
+      "endReason": null,
+      "status": "active",
+      "lastMonth": 24609
+    },
+    "reason": null,
+    "fee": {
+      "$dreamsBigInt": "0"
+    },
+    "policy": "One actual current paid local reading introduction; stop and report real blocker, with no artificial preparation.",
+    "actualContacts": [
+      {
+        "id": "person_npc_134_19",
+        "name": "Morgan Brooks",
+        "age": 28
+      }
+    ]
+  },
+  "vaccination": {
+    "choices": [
+      {
+        "vaccine": "routine",
+        "disabledReason": null
+      },
+      {
+        "vaccine": "seasonal",
+        "disabledReason": null
+      }
+    ],
+    "selected": "routine",
+    "localCost": {
+      "$dreamsBigInt": "9000"
+    },
+    "localCurrency": "USD",
+    "quote": {
+      "amount": {
+        "$dreamsBigInt": "9000"
+      },
+      "currency": "USD",
+      "payerId": "person_player"
+    },
+    "availableCash": {
+      "$dreamsBigInt": "4778598"
+    },
+    "policy": "First currently offered routine-then-seasonal choice; no reroll or desired outcome search.",
+    "actualRecord": {
+      "id": "medical_136_person_player_5",
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "providerId": "person_npc_53_11",
+      "kind": "vaccination",
+      "text": "routine vaccination received.",
+      "cost": {
+        "$dreamsBigInt": "9000"
+      },
+      "currency": "USD",
+      "paidMinor": {
+        "$dreamsBigInt": "9000"
+      },
+      "paidCurrency": "USD",
+      "payerId": "person_player",
+      "conditionId": null
+    }
+  },
+  "final": {
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "personId": "person_player",
+    "name": "Nia Carter",
+    "age": 24,
+    "revision": 138,
+    "date": {
+      "year": 2050,
+      "month": 10,
+      "day": 20
+    },
+    "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+    "pending": null,
+    "annual": null
+  },
+  "nativeAssertions": {
+    "originalOtherSixLivesAndBackupsExact": true,
+    "allOriginalMomentsAndMetadataExact": true,
+    "allOriginalReceiptsRetainedExact": true,
+    "branchesAndRestoreReceiptsExact": true,
+    "eachCommandAndItsColdReopenFullWorldEqualsProjectedHash": true,
+    "eachActualResultAcknowledgedOnce": true,
+    "actualSaveAndColdTableRowsComparePerPhase": true,
+    "limitation": "These are future acceptance assertions, not observed outcomes. Codec equality above is not an on-disk save/cold-launch claim."
+  },
+  "inputReadOnlyAllEightTablesExact": true
+}

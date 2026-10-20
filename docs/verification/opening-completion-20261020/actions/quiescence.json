@@ -1,0 +1,38 @@
+{
+  "format": "dreams-c35-action-quiescence-v1",
+  "nativeAppPidCheckEmpty": true,
+  "nativePidCheckReturnCode": 1,
+  "paused": [
+    {
+      "pid": 100274,
+      "comm": "qemu-system-x86",
+      "stoppedAt": "2026-10-20T22:56:04.401397+00:00",
+      "stoppedStateVerified": true,
+      "resumedAt": "2026-10-20T22:56:40.022865+00:00"
+    },
+    {
+      "pid": 137273,
+      "comm": "MainThread",
+      "stoppedAt": "2026-10-20T22:56:04.401443+00:00",
+      "stoppedStateVerified": true,
+      "resumedAt": "2026-10-20T22:56:40.022378+00:00"
+    }
+  ],
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/integration-opening-next",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "cwd": "/workspace/dreams-worktrees/integration-opening-next",
+  "status": "passed",
+  "start": "2026-10-20T22:56:04.401303+00:00",
+  "benchmarkExitCode": 0,
+  "benchmarkStartedAt": "2026-10-20T22:56:04.411918+00:00",
+  "benchmarkFinishedAt": "2026-10-20T22:56:40.022195+00:00",
+  "finish": "2026-10-20T22:56:40.022869+00:00"
+}

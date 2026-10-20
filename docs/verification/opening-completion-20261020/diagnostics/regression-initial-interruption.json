@@ -1,0 +1,20 @@
+{
+  "status": "failed-and-intentionally-interrupted",
+  "sessionId": 2662,
+  "sessionClosed": true,
+  "exitCode": 143,
+  "sourceCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+  "sourceSnapshotSha256": "d8b64edf446bd213c4cf10418848bbe4b785362a3d9ce06fbc6ba8e8aae39359",
+  "all583PinnedSourcesExactBeforeTermination": true,
+  "knownFailedCases": [
+    "US School assessment wording",
+    "IT School assessment wording"
+  ],
+  "completeFullRun": false,
+  "passingFullSummary": false,
+  "passedSuitesBeforeInterruption": 96,
+  "failedSuitesBeforeInterruption": 1,
+  "rawLog": "/tmp/dreams-opening-next-regression-initial-failed-interrupted.out",
+  "rawLogSha256": "18b40c88a9383698f2365e93694685b3d3cfde7172944d8f837cb79457cc9e5c",
+  "reason": "Full run caught stale period-based School wording assertions after reviewed withdrawal guidance introduced semicolon/minimum. Stop after preserving actual failures; replace only those assertions and rerun all current tests. No runtime, timeout or historical fixture change."
+}

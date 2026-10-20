@@ -1,0 +1,1877 @@
+{
+  "format": "dreams-opening-completion-verification-v1",
+  "recordedOn": "2026-10-20",
+  "sourceCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "versions": {
+    "world": 34,
+    "engine": 35,
+    "content": 10,
+    "database": 14,
+    "checkpoint": "v4"
+  },
+  "scope": "C35 integrated opening/early-life context, truthful secondary withdrawal, durable action/review and display improvements. Complete regression/types, same120 annual seeds, separate reused12 criminalv2 and editorial journeys, fresh Hermes exports, actual scoped Android database/capture evidence and serial fixed-world action diagnostics. This is a milestone, not full production completion.",
+  "gameSourceHash": "84625d5208d1a6815dccc2802ff75c83393eeb143c382e83d60ed0dafaf94f33",
+  "combinedGamePersistenceSourceHash": "12b49689991da671d72b3ac8bc0bfe6bb2aff788174cf1ccda73665c0195c2b8",
+  "source": {
+    "initial": {
+      "file": "opening-completion-20261020/source/initial.json",
+      "bytes": 63888,
+      "sha256": "d8b64edf446bd213c4cf10418848bbe4b785362a3d9ce06fbc6ba8e8aae39359"
+    },
+    "final": {
+      "file": "opening-completion-20261020/source/final.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    },
+    "finalAfterRegressionVerification": {
+      "file": "opening-completion-20261020/source/final-verification.txt",
+      "bytes": 167,
+      "sha256": "16312056bd1b10cb502305dd9d8fdaad078062f6bd69fbe0b2c154970ed2d99d"
+    },
+    "initialCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+    "finalCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+    "sourceFilesPinned": 583,
+    "onlyChangedTrackedSourceFileBetweenRuns": "tests/ui/education-choice-save-flow.test.tsx",
+    "runtimeConfigAndFixturesIdenticalBetweenInitialAndFinal": true,
+    "projectionRuntimeCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+    "initialHead": {
+      "file": "opening-completion-20261020/source/initial-head.txt",
+      "bytes": 41,
+      "sha256": "ce21d75d587fb0bee2a0b348b1ed1509425d1561f8456ff5ecacb74de59fa88f"
+    },
+    "initialTree": {
+      "file": "opening-completion-20261020/source/initial-tree.bin",
+      "bytes": 154349,
+      "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+    },
+    "initialStatus": {
+      "file": "opening-completion-20261020/source/initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "finalHead": {
+      "file": "opening-completion-20261020/source/final-head.txt",
+      "bytes": 41,
+      "sha256": "9c6a2de022927e980e8d86e1fda78e7975c6c94c09722d50ca2f3c0c8917d52f"
+    },
+    "finalTree": {
+      "file": "opening-completion-20261020/source/final-tree.bin",
+      "bytes": 154349,
+      "sha256": "1ff2eed1274bd2a0ed16a24c13a68537b27fbb9b0f956cc371f6ed15ebd4b948"
+    },
+    "finalStatus": {
+      "file": "opening-completion-20261020/source/final-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mainAfterPublicationAndInstall": {
+      "file": "opening-completion-20261020/checks/main-byte-identity.json",
+      "bytes": 799,
+      "sha256": "8d15cf91c2b37931e8abbe785cef8659ec8e7eb0d2d1af2e48f7f2c93d8d2354"
+    }
+  },
+  "checks": {
+    "regression": {
+      "complete": true,
+      "exitCode": 0,
+      "tests": 2282,
+      "suites": 169,
+      "seconds": 1315.195,
+      "raw": {
+        "file": "opening-completion-20261020/checks/regression-final.txt",
+        "bytes": 7897,
+        "sha256": "62c79d62c0a42cc3ad079d8484ed8a338bbfb35fffe469488213d43433ed3c53"
+      },
+      "coordinatorReceipt": {
+        "file": "opening-completion-20261020/checks/regression-final-receipt.json",
+        "bytes": 931,
+        "sha256": "3c33b92e61ee78d7fe6ef1d1032008e0a9fb2f37fad9b396783a2df053792311"
+      },
+      "initialFailedInterruptedRunAddedToPassingCount": false
+    },
+    "strictTypes": {
+      "complete": true,
+      "exitCode": 0,
+      "scope": "Strict application and all test types",
+      "raw": {
+        "file": "opening-completion-20261020/checks/types-final.txt",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      }
+    },
+    "annual120": {
+      "complete": true,
+      "exitCode": 0,
+      "seeds": [
+        0,
+        119
+      ],
+      "count": 120,
+      "elapsedMs": 753071,
+      "additionalDistinctSeedsClaimed": 0,
+      "ageRange": [
+        40,
+        98
+      ],
+      "maxPeople": 27,
+      "maxLedgerRows": 65779,
+      "raw": {
+        "file": "opening-completion-20261020/checks/annual120.ndjson",
+        "bytes": 37786,
+        "sha256": "9c10119f4a54b365d01cac06fb4787f19dd467e7b51dd58f4eab8eedf2672464"
+      },
+      "stderr": {
+        "file": "opening-completion-20261020/checks/annual120.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "driver": {
+        "file": "opening-completion-20261020/checks/annual-driver.cjs.txt",
+        "bytes": 6982,
+        "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+      },
+      "scope": "Same immutable annual-policy seeds, current source; no older complete-world equality or extra120 claim."
+    },
+    "exports": {
+      "complete": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "opening-completion-20261020/checks/export-final.txt",
+        "bytes": 2660,
+        "sha256": "89b46d64f224dac1593e12080ab0e11c7de015f2b186f822bffebbfecfb3abd7"
+      },
+      "metadata": {
+        "file": "opening-completion-20261020/checks/export-metadata.json",
+        "bytes": 5282,
+        "sha256": "a65f544315d193ce18209e83d61ce4cb8cb865e71049f14c301ec3f69e8912c6"
+      },
+      "bundles": {
+        "android": {
+          "exportedBundleName": "_expo/static/js/android/entry-05acf8917342b09fb964dcab0ad334f2.hbc",
+          "bytes": 5845153,
+          "sha256": "33917d987ce8734b8da348a2d3766f70a15f585354b6e3a06560b3190118132a",
+          "binaryCommitted": false
+        },
+        "ios": {
+          "exportedBundleName": "_expo/static/js/ios/entry-aa0618470c823086a9f6670bfe36a2f4.hbc",
+          "bytes": 5539561,
+          "sha256": "905b064b57310a82c724014212baa9563948918786b929d3b7f00b0c361f87eb",
+          "binaryCommitted": false
+        }
+      },
+      "initialFailureRetained": {
+        "file": "opening-completion-20261020/diagnostics/export-initial-failed.txt",
+        "bytes": 1528,
+        "sha256": "fb8be16ede008a17674a46489d441a20e8f852d7a3ccacca6f6657a1ad9acee9"
+      },
+      "initialExitCode": 7,
+      "retryReason": "Initial Expo attempted unavailable /home/agent/.expo; retry used the existing workspace Expo home, with runtime/source unchanged.",
+      "scope": "Fresh Android/iOS Hermes exports, not installable/device/standalone/iOS hardware acceptance."
+    },
+    "criminalV2": {
+      "complete": true,
+      "exitCode": 0,
+      "elapsedMs": 179765,
+      "countryLives": 12,
+      "reusedSeeds": [
+        900,
+        911
+      ],
+      "additionalAnnualSeeds": 0,
+      "scenarioComplete": false,
+      "raw": {
+        "file": "opening-completion-20261020/criminal/raw-result.json",
+        "bytes": 609849,
+        "sha256": "42862c0fd39f1bf30d1348e626f37290dc5e950f109c2a0a8a7156b6ab92a2ff"
+      },
+      "progress": {
+        "file": "opening-completion-20261020/criminal/progress.ndjson",
+        "bytes": 13852,
+        "sha256": "fe1ea013de288a25f4d2453760a5f4ea74de9e7ab9f8271aa2db707f92029a5f"
+      },
+      "manifest": {
+        "file": "opening-completion-20261020/criminal/manifest.json",
+        "bytes": 3431,
+        "sha256": "effa51892cfffd55fb4a121e10ffabde3520efd998ca1b4fadf3cd568f8fce6f"
+      },
+      "summary": {
+        "file": "opening-completion-20261020/criminal/summary.json",
+        "bytes": 83430,
+        "sha256": "dab489544b3d4e22f3cdcb0e8eb2f0b3843eec8efe69b0506b1e9203b519987a"
+      },
+      "short": {
+        "file": "opening-completion-20261020/criminal/summary.md",
+        "bytes": 3655,
+        "sha256": "b4b4cc9ec54285a7d6b23c24f50cbf496c6286d1ac033603e97b08c58a68defd"
+      },
+      "totals": {
+        "commandsAttempted": 3375,
+        "commandsCommitted": 3318,
+        "coldCheckpointChecks": 412,
+        "actualCheckpointFormats": {
+          "dreams-checkpoint-v4": 404,
+          "dreams-checkpoint-v1": 8
+        },
+        "offences": 36,
+        "cases": 25,
+        "verdicts": {
+          "convicted": 16,
+          "acquitted": 9
+        },
+        "sentences": 16,
+        "actualServedMonths": 161,
+        "remandCreditedMonths": 7,
+        "actualPrisonStudyMonths": 161,
+        "custodyWindows": 33,
+        "legalAndCrimeReceiptCountsByCategory": {
+          "crime-proceeds": 36,
+          "bail-held": 14,
+          "legal-fee": 24,
+          "bail-return": 14,
+          "court-fine": 16,
+          "prison-pay": 161,
+          "restitution": 7
+        },
+        "negativeObservations": 674,
+        "negativeObservationsByOutcome": {
+          "ineligible": 598,
+          "rejected-without-state-or-rng-change": 57,
+          "careful": 12,
+          "committed": 7
+        },
+        "allObservationOutcomeCounts": {
+          "ineligible": 598,
+          "rebuild": 2,
+          "admit": 8,
+          "compare": 11,
+          "clean": 2,
+          "committed": 153,
+          "rejected-without-state-or-rng-change": 57,
+          "describe": 3,
+          "tell": 3,
+          "build": 4,
+          "turn": 1,
+          "ask": 34,
+          "attend": 3,
+          "breathe": 3,
+          "redo": 3,
+          "stay": 3,
+          "share": 9,
+          "try": 5,
+          "careful": 41,
+          "thanks": 11,
+          "actual-recorded-attempt": 36,
+          "bail": 14,
+          "reviewed-and-committed": 25,
+          "not-guilty": 25,
+          "clear": 6,
+          "pace": 9,
+          "small": 8,
+          "listen": 21,
+          "ground": 11,
+          "pause": 9,
+          "move": 14,
+          "finish": 10,
+          "care": 17,
+          "brief": 15,
+          "facts": 8,
+          "specific": 12,
+          "stop": 11,
+          "report": 19,
+          "clarify": 18,
+          "confirm": 5,
+          "observe": 9,
+          "honest": 15,
+          "correct": 13,
+          "patient": 9,
+          "walk": 10,
+          "check": 14,
+          "accept": 32,
+          "context": 3,
+          "savour": 2,
+          "face": 3,
+          "nose": 7,
+          "hello": 1,
+          "invite": 6,
+          "sort": 7,
+          "read": 5,
+          "dictionary": 2,
+          "support": 1,
+          "switch": 3,
+          "remand": 11,
+          "explain": 7,
+          "remember": 10,
+          "offer": 7,
+          "retake": 8,
+          "practical": 3,
+          "notice": 7,
+          "allow": 6,
+          "simple": 5,
+          "story": 5,
+          "laugh": 12,
+          "keep": 5,
+          "join": 9,
+          "update": 6,
+          "accurate": 4,
+          "concert": 5,
+          "watch": 4,
+          "repair": 4,
+          "ignore": 1,
+          "audition": 1,
+          "promise": 3,
+          "complete": 3,
+          "choose": 5,
+          "own": 10,
+          "close": 7,
+          "speak": 9,
+          "help": 5,
+          "return": 17,
+          "rules": 10,
+          "order": 5,
+          "send": 4,
+          "rest": 5,
+          "alternate": 3,
+          "quiet": 8,
+          "plain": 5,
+          "both": 4,
+          "align": 4,
+          "restart": 7,
+          "speech": 2,
+          "counter": 3,
+          "research": 1,
+          "desk": 5,
+          "adaptation": 6,
+          "later": 3,
+          "kind": 3,
+          "resume": 7,
+          "funny": 2,
+          "wait": 2,
+          "big": 2,
+          "repeat": 1,
+          "plan": 1,
+          "one": 1,
+          "practice": 1,
+          "enjoy": 3,
+          "spell": 1,
+          "agree": 2,
+          "name": 3,
+          "question": 1,
+          "rewrite": 3,
+          "nap": 1,
+          "chase": 1,
+          "measure": 1,
+          "away": 2,
+          "feedback": 1,
+          "boundary": 1,
+          "dance": 1,
+          "adapt": 1
+        },
+        "maxObservedCanonicalBytes": 23123453,
+        "maxObservedCheckpointBytes": 1246756
+      },
+      "unmetMilestoneObjectsPreserved": 20,
+      "negativeObservationsPreserved": 674,
+      "fullCommandRowsSerialized": false,
+      "commandTraceHashesRetained": true,
+      "scope": "Actual SQLite birth only; later immutable engine/checkpoint journeys. Italy acquittals/no prison and all other unmet outcomes retained. No extra annual seeds/native/full Scenario acceptance."
+    },
+    "editorial": {
+      "complete": true,
+      "exitCode": 0,
+      "elapsedMs": 677963,
+      "countryLives": 12,
+      "reusedSeeds": [
+        900,
+        911
+      ],
+      "additionalAnnualSeeds": 0,
+      "stdout": {
+        "file": "opening-completion-20261020/editorial/stdout.json",
+        "bytes": 742870,
+        "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+      },
+      "progress": {
+        "file": "opening-completion-20261020/editorial/progress.ndjson",
+        "bytes": 16660,
+        "sha256": "7b8d9a80ebbba4f0d5df0cd36498fb27bd4c13fe428880adce7586be2e319c47"
+      },
+      "manifest": {
+        "file": "opening-completion-20261020/editorial/manifest.json",
+        "bytes": 2566,
+        "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+      },
+      "fullRawArchive": {
+        "file": "opening-completion-20261020/editorial/full-raw.tar.gz",
+        "bytes": 6793399,
+        "sha256": "a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d"
+      },
+      "archiveManifest": {
+        "file": "opening-completion-20261020/editorial/archive-manifest.json",
+        "bytes": 31367,
+        "sha256": "1ec524b54baf7a22c3f6b9fe18d40271e398cf4261206b2c166914c939c420ca"
+      },
+      "archiveProof": {
+        "file": "opening-completion-20261020/editorial/archive-proof.json",
+        "bytes": 3215,
+        "sha256": "2a2afb368cc6a09b7c0f73ade3157b407409a318c28f5a7d5959ca4ea8acaefb"
+      },
+      "archiveMemberRoot": "dreams-opening-next-editorial-20261020/",
+      "rawFiles": 87,
+      "rawFileBytes": 30974791,
+      "archiveIsBytePreservationOnly": true,
+      "report": {
+        "file": "opening-completion-20261020/editorial/analysis/REPORT.md",
+        "bytes": 9496,
+        "sha256": "4a7f31da2991865a6e26b5de6eb60b214c30ed6e332aa0bc66dbce95b24d3c0c"
+      },
+      "analysisSummary": {
+        "file": "opening-completion-20261020/editorial/analysis/summary.json",
+        "bytes": 72747,
+        "sha256": "96b75ff9ac9b0608b03cdddac03c2479942cb0234868e8a483066084e3c0b9d7"
+      },
+      "analysisInputs": {
+        "file": "opening-completion-20261020/editorial/analysis/inputs.json",
+        "bytes": 18386,
+        "sha256": "3122853a595733566fe41decf8d25110173e1fcd8d3cb250c48543d5b425416d"
+      },
+      "analysisHashes": {
+        "file": "opening-completion-20261020/editorial/analysis/SHA256SUMS",
+        "bytes": 688,
+        "sha256": "3c03e4b1d4f363be76ed21f8f6219e6206b1fce965b82573ff4abb2cc7db2ad0"
+      },
+      "coverage": {
+        "catalogueChoices": 633,
+        "uniqueTemplates": 133,
+        "uniqueBranches": 274,
+        "authoredBranchOccurrences": {
+          "1": 208,
+          "2": 218,
+          "3": 207
+        },
+        "unseenTemplates": 117,
+        "unselectedBranches": 476,
+        "actualColdChecks": 2721,
+        "simpleCappedEffectChecks": 1412,
+        "anomaliesInThoseChecks": 0,
+        "callbackDecisions": 1,
+        "terminalStartedYearsNotCompleted": 12
+      },
+      "findingsRemainOpen": [
+        {
+          "id": "bound-name-role-collision",
+          "priority": "P2",
+          "title": "Distinct real school/parent roles collapse to the same displayed name"
+        },
+        {
+          "id": "medical-context-omitted",
+          "priority": "P2",
+          "title": "Emergency decisions hide which actual known condition needs care"
+        },
+        {
+          "id": "diagnosis-date-overwritten",
+          "priority": "P3",
+          "title": "Repeated hospital care replaces the original diagnosed timestamp"
+        }
+      ],
+      "scope": "Passive deterministic varied-choice policy; original commands/decisions/cold/birth/final frames retained losslessly. Observed contexts/branches and actual natural deaths only; no all250/all750/all-context/balance/full-Scenario/native claim. Story report retains concrete defects and annual telemetry limitation."
+    },
+    "native": {
+      "complete": true,
+      "exitCode": 0,
+      "projectedRuntimeCommit": "5a2565458fa5de90c1acaf0e110fc980f6476b64",
+      "finalRuntimeBytesMatchCommit": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+      "runtimeFilesVerified": 302,
+      "result": {
+        "file": "opening-completion-20261020/native/journey-exact.json",
+        "bytes": 26372,
+        "sha256": "950f4f38ad8324157a60e24547d5ecad103385bb45064abff49115feaa33f450"
+      },
+      "verifierOutput": {
+        "file": "opening-completion-20261020/native/verifier-output.txt",
+        "bytes": 2903,
+        "sha256": "3c7b60e0b377f6b955727c4fa09f1d62780b7adff18cade773c809f23f0d8312"
+      },
+      "projection": {
+        "file": "opening-completion-20261020/native/command-plan.json",
+        "bytes": 21045,
+        "sha256": "f0833c07dbd93877211b03c267701f7e24ff50cfc3c25b955c3617e3dd2d74df"
+      },
+      "acceptedCaptures": {
+        "file": "opening-completion-20261020/native/accepted-captures.json",
+        "bytes": 17637,
+        "sha256": "042c36b6f31caf8fd2054e787fa72d3146b0ed9c8afeae130e39bd51e4f7c103"
+      },
+      "captures": [
+        {
+          "id": "welcome",
+          "note": "Existing Alex Continue and ordinary custom/random opening controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/welcome.png",
+            "bytes": 376483,
+            "sha256": "a28d236925c4bb8ddefcfb839594fce56d200d9095dc5569cc409b3d60a98af2"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/welcome.xml",
+            "bytes": 16570,
+            "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+          }
+        },
+        {
+          "id": "keyboard-first",
+          "note": "Actual first-name focus and soft Next above persistent primary action.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/keyboard-first.png",
+            "bytes": 67432,
+            "sha256": "f5d3a1c1d47965b16ec6f97d5ef2c22484add147b31005bb9b228e92ae030b72"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/keyboard-first.xml",
+            "bytes": 28642,
+            "sha256": "924ae73e1bc15bf540755fbbc88da44337ad3d9e7fd6eeadd645d162164471cb"
+          }
+        },
+        {
+          "id": "keyboard-next",
+          "note": "Actual soft Next transferred focus to last name; soft Done reachable.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/keyboard-next.png",
+            "bytes": 66973,
+            "sha256": "a6a560c79f34cd3d74e4483ebe2a16f5534a2c27b2736330a30534b163185333"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/keyboard-next.xml",
+            "bytes": 29358,
+            "sha256": "b58008aa4d99445f60dba71712364cd9ee4aaeb072dfb0a5a60472cd6f8dd80d"
+          }
+        },
+        {
+          "id": "keyboard-done",
+          "note": "Actual soft Done removed keyboard without creating a life.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/keyboard-done.png",
+            "bytes": 62675,
+            "sha256": "67183159e1fb6897bae2b3c15c85d1dc3286f80101065e785a9defbccda0389c"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/keyboard-done.xml",
+            "bytes": 29359,
+            "sha256": "3afbf01a189637991f3b62b557b8b3792fe550077bb8817f708f58a31bd7bb2e"
+          }
+        },
+        {
+          "id": "review-normal",
+          "note": "Bound Alice Romano/Milan/Italy review; reachable confirmation/cancel; full app backdrop.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/review-normal.png",
+            "bytes": 54155,
+            "sha256": "eb5fcf26d5b2155279ad02abbdb2427a59ab6eedff15fd786b063e12601950a3"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/review-normal.xml",
+            "bytes": 7981,
+            "sha256": "ffece2c80c1f60b84331c1c73e1a55c38b3310e692095f1b81e305ec5b936f0d"
+          }
+        },
+        {
+          "id": "creation-large-clean",
+          "note": "Normally generated Mateo L\u00f3pez draft; primary creation action reachable.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/creation-large-clean.png",
+            "bytes": 66422,
+            "sha256": "8f679754615a8b31045eeb4f25acf9328f5878588c032ec926684489a3014f77"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/creation-large-clean.xml",
+            "bytes": 28653,
+            "sha256": "c5d7d49be36a57bd54527533cf296b9c7871c7d0f62a7485c812740118038067"
+          }
+        },
+        {
+          "id": "review-large-clean",
+          "note": "Bound Mateo L\u00f3pez/Valencia/Spain review; reachable58dp buttons; full app backdrop; cancelled.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/review-large-clean.png",
+            "bytes": 54486,
+            "sha256": "b664214c55c97b5c787415560eb47ac685a76875e65db0ea38df55310b092cb7"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/review-large-clean.xml",
+            "bytes": 7988,
+            "sha256": "7d807631a40c1f873c2a5e725cd82d0efa967dcd88b17265b733ec60bde11dd0"
+          }
+        },
+        {
+          "id": "profile-large",
+          "note": "Existing Alex identity and actual education/occupation/residence rows.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/profile-large.png",
+            "bytes": 83310,
+            "sha256": "2aa7fc81876a1e1429406b4d45186e4e494127eea19d23bddce17d482e384e33"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/profile-large.xml",
+            "bytes": 33535,
+            "sha256": "4e65247839c534dfe0178c0e524331460715ae1041e278eb6cb408513e335d26"
+          }
+        },
+        {
+          "id": "statistics-large",
+          "note": "Existing Alex personal statistics with recorded-history caveat.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/statistics-large.png",
+            "bytes": 67245,
+            "sha256": "ad3d5f1d5dd57f4ae198edad757bc1ece1c9a70264a58fdd7cfa72e265e8dfa2"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/statistics-large.xml",
+            "bytes": 32205,
+            "sha256": "cd6d80621c49d9223b288dd79ab8087b915fd578ac07322dea43601d7092e705"
+          }
+        },
+        {
+          "id": "statistics-stats-large",
+          "note": "All10 actual current stats fit as scrollable accessible content.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/statistics-stats-large.png",
+            "bytes": 58425,
+            "sha256": "5c435f8eddb0b019a292b056dfc0b6a899531e5358b4655f2f136879709a7e8d"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/statistics-stats-large.xml",
+            "bytes": 36490,
+            "sha256": "8168a55765f10abeda4ae0e644453eab28d1282ae1dc5756061b7e24610db7c1"
+          }
+        },
+        {
+          "id": "statistics-counts-large",
+          "note": "Recorded education/work rows and honest sparse-history labels.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/statistics-counts-large.png",
+            "bytes": 71512,
+            "sha256": "fc2fb5cf81f05abb231a0c8f6850ab5d31530b030489b4ac4b1229f181a5bf0c"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/statistics-counts-large.xml",
+            "bytes": 29309,
+            "sha256": "a1b27b9c4fe33d4e6124cdbe1da15e7642761240dfcc4ec073e961e33da11bf1"
+          }
+        },
+        {
+          "id": "finances-large",
+          "note": "Existing Alex2032/EUR current balances and independent year/currency scope.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/finances-large.png",
+            "bytes": 61592,
+            "sha256": "99f345e95420b2394bb402bb35ce6fe24b44fb96efa242301f5662a01c6b7aab"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/finances-large.xml",
+            "bytes": 24156,
+            "sha256": "2a11dfc64d7abb6147ebabebc99b3f9a04e42593455add3e586d508c3d1e0f21"
+          }
+        },
+        {
+          "id": "settings-off-large",
+          "note": "Appearance and app Reduce Motion off; actual OS reduced-motion acknowledgement.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/settings-off-large.png",
+            "bytes": 63164,
+            "sha256": "488bbd9be35e716a881b78bbe8e1aecab66520144019637b54cba02354018951"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/settings-off-large.xml",
+            "bytes": 17379,
+            "sha256": "4d5c0c2d34da5a51ad1bdf333c4d618cdd206b7b8ee8c816ea1077b6a1be2cf8"
+          }
+        },
+        {
+          "id": "feedback-large",
+          "note": "All3 actual app motion/haptic/sound switches on, no physical feedback claim.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/feedback-large.png",
+            "bytes": 82730,
+            "sha256": "a65c8b581834bc03b3e2d124b0d672e1167296fc3f3f1fa611a441bed513324a"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/feedback-large.xml",
+            "bytes": 16505,
+            "sha256": "e7502af1de21df092ab7a0736accdb0de15766e6d4af16746eb9af1bdcc7d10b"
+          }
+        },
+        {
+          "id": "settings-cold-welcome",
+          "note": "Font restored1.0; actual cold Welcome resumes Alex; development notice dismissed.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/settings-cold-welcome.png",
+            "bytes": 376671,
+            "sha256": "0969e18a2343f9fb4e46a39c13127642f4e0be0b2c7822b24c9e9b05361118ea"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/settings-cold-welcome.xml",
+            "bytes": 16570,
+            "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+          }
+        },
+        {
+          "id": "nia-existing-entry",
+          "note": "Existing Nia entry and genuine Continue; no new life created.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/nia-existing-entry.png",
+            "bytes": 49417,
+            "sha256": "db2810b68f84979b95c299669f6ec6560c913e98e2b46a5f28997e6673840171"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/nia-existing-entry.xml",
+            "bytes": 22134,
+            "sha256": "1e8f96b578896dbd0f0b0fcdd07eeaddece6100ac22cf0db710aa6bbbee1d055"
+          }
+        },
+        {
+          "id": "nia-selected",
+          "note": "Existing Nia age24/revision134 dashboard after normal selection.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/nia-selected.png",
+            "bytes": 77593,
+            "sha256": "ea3d425023f12d16fd4de6bf3b799982e483228f6c8c41d9ca4b61fa5a048206"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/nia-selected.xml",
+            "bytes": 40494,
+            "sha256": "6e82e18d58716ce0f995fa0dff40e2e2ed1f7ef39125fd2e0235f8eaf7ddefa3"
+          }
+        },
+        {
+          "id": "introduction-review",
+          "note": "Actual current paid reading access and self-attending Nia; zero additional fee; normal confirmation.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/introduction-review.png",
+            "bytes": 55366,
+            "sha256": "1bbd3daabc434a887f136ffc1733b8d94b7a2d4e2e4b97a66222a0eb6a05cbc4"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/introduction-review.xml",
+            "bytes": 9496,
+            "sha256": "6ed6f8091e8d404dac5ed90ba794a94e1af57cf7ee0b7ccc6fcd23c2ed2192d0"
+          }
+        },
+        {
+          "id": "intro135",
+          "note": "Actual durable practice introduction135 to Morgan Brooks; saved result remains unacknowledged.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/intro135.png",
+            "bytes": 71742,
+            "sha256": "3db185074854dd301e459fcc7d9b330518a1678dc92b1b4ee5a55b351a1f41f9"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/intro135.xml",
+            "bytes": 8082,
+            "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+          }
+        },
+        {
+          "id": "cold-intro135",
+          "note": "Actual cold restart and normal Continue restored the same saved Morgan Brooks result135 before acknowledgement.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/cold-intro135.png",
+            "bytes": 74282,
+            "sha256": "fe8def01d6faf434dff500eb84d9087c0053719e4eaf67764c041dfa09ba16a2"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/cold-intro135.xml",
+            "bytes": 8082,
+            "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+          }
+        },
+        {
+          "id": "ack136",
+          "note": "Actual acknowledgement136 saved once; no pending/year remains.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/ack136.png",
+            "bytes": 77858,
+            "sha256": "4100c05a34622941e04f665876df92be4c38fd94e1757ba176e34be098d64ab9"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/ack136.xml",
+            "bytes": 40485,
+            "sha256": "32ee10f9fd860774c8e659d7158b094bebfc4d55b7362b6509878d7586a85c58"
+          }
+        },
+        {
+          "id": "vaccination-review",
+          "note": "Routine10-year protection, actual self-paid90USD fee; both review controls reachable.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/vaccination-review.png",
+            "bytes": 59850,
+            "sha256": "7b55fd2ec7a67e0ec7bc5c1fd2725867be599e71a7c4b46189decfe2af3fced0"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/vaccination-review.xml",
+            "bytes": 9281,
+            "sha256": "1cb1633e6dba8a652b1058c2300526abebab666678bb51cdc2b2cd47254711e1"
+          }
+        },
+        {
+          "id": "vaccine137",
+          "note": "Actual durable vaccination137; no immediate health boost; result left unacknowledged.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/vaccine137.png",
+            "bytes": 60213,
+            "sha256": "855857cd76234dca5f76f78cb74903d43de16672e92149241060f49294c62a5e"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/vaccine137.xml",
+            "bytes": 7021,
+            "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+          }
+        },
+        {
+          "id": "cold-vaccine137",
+          "note": "Actual cold restart and normal Continue restored vaccination137 result before acknowledgement;90USD debit remains.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/cold-vaccine137.png",
+            "bytes": 69675,
+            "sha256": "1add28738f19d9c2a452667237776fe3641ef0a4400f170c45297980990e1c4f"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/cold-vaccine137.xml",
+            "bytes": 7021,
+            "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+          }
+        },
+        {
+          "id": "final138",
+          "note": "Actual acknowledgement138 saved once; normal Life screen, no pending/year; original game remains selectable.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "opening-completion-20261020/native/captures/final138.png",
+            "bytes": 77972,
+            "sha256": "553cc8ed1aaf8a8d81e5f385ba3b2ad71ac7694e320bfa1a9f8468700cd257d5"
+          },
+          "xml": {
+            "file": "opening-completion-20261020/native/captures/final138.xml",
+            "bytes": 40485,
+            "sha256": "5f3d83391d8738308cb8dbecd9ec097974d760221c0cb019c39b051325928852"
+          }
+        }
+      ],
+      "phases": [
+        {
+          "phase": "boot",
+          "activeLife": "life_mvgprdj2_16qsril_0",
+          "activeRevision": 23,
+          "niaRevision": 134,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 141,
+          "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "browsed",
+          "activeLife": "life_mvgprdj2_16qsril_0",
+          "activeRevision": 23,
+          "niaRevision": 134,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 141,
+          "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "settings",
+          "activeLife": "life_mvgprdj2_16qsril_0",
+          "activeRevision": 23,
+          "niaRevision": 134,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 141,
+          "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "selected",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 134,
+          "niaRevision": 134,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 141,
+          "worldSha256": "5f9793078108796cfa4ac958bf357449b2c82101a01b7f18dab4762024bf6537",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "intro135",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 135,
+          "niaRevision": 135,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 142,
+          "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "cold-intro135",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 135,
+          "niaRevision": 135,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 142,
+          "worldSha256": "8fffa66ebf6b2ab5d7511081e464c9956d7b36372788f885310076e79c69e195",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "ack136",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 136,
+          "niaRevision": 136,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 143,
+          "worldSha256": "0eb0dd3174a0309446b923d5de06f2f3f37323a0151138de069976a2efb0f228",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "vaccine137",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 137,
+          "niaRevision": 137,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 144,
+          "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "cold-vaccine137",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 137,
+          "niaRevision": 137,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 144,
+          "worldSha256": "9fe3c0363856183ec3cbe355be97752a99ed60eb2e5b9ee25d152b7bf3d04748",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        },
+        {
+          "phase": "final138",
+          "activeLife": "life_native_adult_friend_v30_s0",
+          "activeRevision": 138,
+          "niaRevision": 138,
+          "reader": 14,
+          "lives": 7,
+          "moments": 66,
+          "receipts": 145,
+          "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7",
+          "allSixOtherOriginalLivesAndBackupsExact": true,
+          "all66OriginalMomentsAndMetadataExact": true,
+          "all141OriginalReceiptsExact": true
+        }
+      ],
+      "final": {
+        "revision": 138,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 145,
+        "pending": null,
+        "annual": null,
+        "worldSha256": "35b9b53a927e833eee7aa87d99cb0008fc2190914bac66828cc7de0b0920ecb7"
+      },
+      "databaseCapturesCommitted": false,
+      "actualSavedResultColdReopens": 2,
+      "separatelyCommittedAcknowledgements": 2,
+      "originalPlanEveryCommandColdAssertionIsFutureScopeOnly": true,
+      "additionalSettingsColdRawRows": {
+        "file": "opening-completion-20261020/native/additional-raw-rows.json",
+        "bytes": 14093,
+        "sha256": "137ab75eac1c7fedf78ffc7c440780aa37532364a7d12141771e33250a431666"
+      },
+      "verifierSelfAudit": {
+        "file": "opening-completion-20261020/native/self-audit.md",
+        "bytes": 5948,
+        "sha256": "f359dcf29091c227041f3146e97bcda96dc8823c9e16dce93bb97a1c8369e274"
+      },
+      "scope": "Actual coordinator native actions plus read-only ten-capture full-world/eight-table verifier, exact original history and reviewed PNG/XML list. Captured databases remain external inputs; verifier raw records original provenance. No physical p95, standalone/iOS or complete native full-life claim."
+    },
+    "actions": {
+      "complete": true,
+      "exitCode": 0,
+      "raw": {
+        "file": "opening-completion-20261020/actions/raw.json",
+        "bytes": 248789,
+        "sha256": "24c66dfd2691eb744eee1f78207be01710f4ba1fcbc19ec6a438bde404c39674"
+      },
+      "progress": {
+        "file": "opening-completion-20261020/actions/stderr.txt",
+        "bytes": 481,
+        "sha256": "a1dbd10fd3561829bc8b4cf66d54c4480bfc6fcb1b28f60064e99b56b86da181"
+      },
+      "coordinatorReceipt": {
+        "file": "opening-completion-20261020/actions/receipt.json",
+        "bytes": 1523,
+        "sha256": "9bafdaf8dbf56e049096e05eaca3a232e3edd50417a2aa2397db5dbe5e67fefa"
+      },
+      "summary": {
+        "file": "opening-completion-20261020/actions/summary.json",
+        "bytes": 16161,
+        "sha256": "8c29ae6c3175a672a9c751a316020d4d2fdeeca3244a769d27d9e2b8a0f92a89"
+      },
+      "short": {
+        "file": "opening-completion-20261020/actions/summary.md",
+        "bytes": 2218,
+        "sha256": "8ac2f15d540a1978a5fea980b6c8063b46b07df2cfcf4119bc033ad2a1270d29"
+      },
+      "driver": {
+        "file": "opening-completion-20261020/actions/benchmark-driver.cjs.txt",
+        "bytes": 16065,
+        "sha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9"
+      },
+      "measuredWarmSamples": 70,
+      "fullWarmUnpackCalls": 0,
+      "cases": 14,
+      "scope": "Serial unpaired cloud Node/on-disk SQLite fixed-world samples, five per case. Complete cold current/backup and original Before Age Up driver assertions; generated population stress is not natural/native. No physical/UI p95 or speedup guarantee."
+    },
+    "historicalHostedCI": {
+      "currentC35Source": false,
+      "sourceCommit": "ed506a1338bf7369cb14efb1de1745be8033fcc7",
+      "runId": 39504687484,
+      "url": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39504687484",
+      "conclusion": "success",
+      "tests": 2100,
+      "suites": 147,
+      "seconds": 692.706,
+      "observation": {
+        "file": "opening-completion-20261020/historical-ci/ed506-observation.json",
+        "bytes": 909,
+        "sha256": "d5b9e33e4f74a590948d92fc1bceed649f1eabde07946439187dc4123476164d"
+      },
+      "raw": {
+        "file": "opening-completion-20261020/historical-ci/ed506-log.txt",
+        "bytes": 28144,
+        "sha256": "401e6eafce6a3f8448e8346b4d50abf91c2b2b27ab7996c97e65a29ec50e2afe"
+      },
+      "scope": "Actual pushed ed506a1 Linux hosted locked install/types/Jest only; no C35 hosted success claim."
+    },
+    "mainLockedInstall": {
+      "complete": true,
+      "exitCode": 0,
+      "session": 50424,
+      "packages": 757,
+      "scope": "Actual main checkout locked offline install using the previously populated Settings package cache; unchanged final lockfile. No dependency version change.",
+      "raw": {
+        "file": "opening-completion-20261020/checks/main-locked-install.txt",
+        "bytes": 1591,
+        "sha256": "fc8d192b0d78694e97b0fb9be562c1a8270251520bcdb1bb430e9a0e8d8687df"
+      }
+    },
+    "mainTypesAfterInstall": {
+      "complete": true,
+      "exitCode": 0,
+      "session": 37623,
+      "scope": "Actual merged main checkout strict application and all test types after locked install and publication; no whole regression rerun or extra test count.",
+      "raw": {
+        "file": "opening-completion-20261020/checks/main-types-after-install.txt",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      }
+    }
+  },
+  "diagnostics": {
+    "initialRegression": {
+      "file": "opening-completion-20261020/diagnostics/regression-initial-failed-interrupted.txt",
+      "bytes": 37824,
+      "sha256": "18b40c88a9383698f2365e93694685b3d3cfde7172944d8f837cb79457cc9e5c"
+    },
+    "interruption": {
+      "file": "opening-completion-20261020/diagnostics/regression-initial-interruption.json",
+      "bytes": 1024,
+      "sha256": "15136358c0e829f08d245716e33801c74756d01f468e8a67583f41e5f87c87ed"
+    },
+    "reviewedWordingFix": {
+      "file": "opening-completion-20261020/checks/wording-focused.txt",
+      "bytes": 2821,
+      "sha256": "00300c5e52a8428260c2d709b672281f2b55d6733ef53961f969aa11b1884915"
+    },
+    "wordingTestTypes": {
+      "file": "opening-completion-20261020/checks/wording-test-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "initialExpoFailure": {
+      "file": "opening-completion-20261020/diagnostics/export-initial-failed.txt",
+      "bytes": 1528,
+      "sha256": "fb8be16ede008a17674a46489d441a20e8f852d7a3ccacca6f6657a1ad9acee9"
+    }
+  },
+  "limits": [
+    "Overall production is not complete; onboarding/native visual/accessibility and broad release acceptance remain independently scoped.",
+    "Archive integrity, source equality and catalogue counts do not establish editorial/balance or all-context gameplay success.",
+    "Original source/receipt/raw JSON/Markdown files retain exact bytes including their original external provenance paths. Top-level published artifact references are repository-relative; archived country pointers resolve under fullRawArchive/member root.",
+    "No extra distinct annual seeds, complete ScenarioA/B/C, physical p95, 120-year/storage, multigeneration or standalone/iOS acceptance is inferred.",
+    "Old C34/v1/failed AU evidence is retained in its original published locations and not overwritten."
+  ],
+  "artifacts": [
+    {
+      "file": "opening-completion-20261020/source/initial.json",
+      "bytes": 63888,
+      "sha256": "d8b64edf446bd213c4cf10418848bbe4b785362a3d9ce06fbc6ba8e8aae39359"
+    },
+    {
+      "file": "opening-completion-20261020/source/initial-head.txt",
+      "bytes": 41,
+      "sha256": "ce21d75d587fb0bee2a0b348b1ed1509425d1561f8456ff5ecacb74de59fa88f"
+    },
+    {
+      "file": "opening-completion-20261020/source/initial-tree.bin",
+      "bytes": 154349,
+      "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+    },
+    {
+      "file": "opening-completion-20261020/source/initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "opening-completion-20261020/source/final.json",
+      "bytes": 63906,
+      "sha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc"
+    },
+    {
+      "file": "opening-completion-20261020/source/final-head.txt",
+      "bytes": 41,
+      "sha256": "9c6a2de022927e980e8d86e1fda78e7975c6c94c09722d50ca2f3c0c8917d52f"
+    },
+    {
+      "file": "opening-completion-20261020/source/final-tree.bin",
+      "bytes": 154349,
+      "sha256": "1ff2eed1274bd2a0ed16a24c13a68537b27fbb9b0f956cc371f6ed15ebd4b948"
+    },
+    {
+      "file": "opening-completion-20261020/source/final-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "opening-completion-20261020/source/capture-source.cjs.txt",
+      "bytes": 4525,
+      "sha256": "d99ce7361e293c4347078eff9ecde081b9a8347e8a79bc8edd72c53a80faec17"
+    },
+    {
+      "file": "opening-completion-20261020/source/final-verification.txt",
+      "bytes": 167,
+      "sha256": "16312056bd1b10cb502305dd9d8fdaad078062f6bd69fbe0b2c154970ed2d99d"
+    },
+    {
+      "file": "opening-completion-20261020/checks/regression-final.txt",
+      "bytes": 7897,
+      "sha256": "62c79d62c0a42cc3ad079d8484ed8a338bbfb35fffe469488213d43433ed3c53"
+    },
+    {
+      "file": "opening-completion-20261020/checks/regression-final-receipt.json",
+      "bytes": 931,
+      "sha256": "3c33b92e61ee78d7fe6ef1d1032008e0a9fb2f37fad9b396783a2df053792311"
+    },
+    {
+      "file": "opening-completion-20261020/checks/types-final.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "opening-completion-20261020/diagnostics/regression-initial-failed-interrupted.txt",
+      "bytes": 37824,
+      "sha256": "18b40c88a9383698f2365e93694685b3d3cfde7172944d8f837cb79457cc9e5c"
+    },
+    {
+      "file": "opening-completion-20261020/diagnostics/regression-initial-interruption.json",
+      "bytes": 1024,
+      "sha256": "15136358c0e829f08d245716e33801c74756d01f468e8a67583f41e5f87c87ed"
+    },
+    {
+      "file": "opening-completion-20261020/checks/annual120.ndjson",
+      "bytes": 37786,
+      "sha256": "9c10119f4a54b365d01cac06fb4787f19dd467e7b51dd58f4eab8eedf2672464"
+    },
+    {
+      "file": "opening-completion-20261020/checks/annual120.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "opening-completion-20261020/diagnostics/export-initial-failed.txt",
+      "bytes": 1528,
+      "sha256": "fb8be16ede008a17674a46489d441a20e8f852d7a3ccacca6f6657a1ad9acee9"
+    },
+    {
+      "file": "opening-completion-20261020/checks/export-final.txt",
+      "bytes": 2660,
+      "sha256": "89b46d64f224dac1593e12080ab0e11c7de015f2b186f822bffebbfecfb3abd7"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/raw-result.json",
+      "bytes": 609849,
+      "sha256": "42862c0fd39f1bf30d1348e626f37290dc5e950f109c2a0a8a7156b6ab92a2ff"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/progress.ndjson",
+      "bytes": 13852,
+      "sha256": "fe1ea013de288a25f4d2453760a5f4ea74de9e7ab9f8271aa2db707f92029a5f"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/manifest.json",
+      "bytes": 3431,
+      "sha256": "effa51892cfffd55fb4a121e10ffabde3520efd998ca1b4fadf3cd568f8fce6f"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/summary.json",
+      "bytes": 83430,
+      "sha256": "dab489544b3d4e22f3cdcb0e8eb2f0b3843eec8efe69b0506b1e9203b519987a"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/summary.md",
+      "bytes": 3655,
+      "sha256": "b4b4cc9ec54285a7d6b23c24f50cbf496c6286d1ac033603e97b08c58a68defd"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/full-raw.tar.gz",
+      "bytes": 6793399,
+      "sha256": "a947ddf5e84aaa39340ac3ff6bf8bf998177a297ba6547db92adbe7958e5621d"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/archive-manifest.json",
+      "bytes": 31367,
+      "sha256": "1ec524b54baf7a22c3f6b9fe18d40271e398cf4261206b2c166914c939c420ca"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/archive-proof.json",
+      "bytes": 3215,
+      "sha256": "2a2afb368cc6a09b7c0f73ade3157b407409a318c28f5a7d5959ca4ea8acaefb"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/stdout.json",
+      "bytes": 742870,
+      "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/progress.ndjson",
+      "bytes": 16660,
+      "sha256": "7b8d9a80ebbba4f0d5df0cd36498fb27bd4c13fe428880adce7586be2e319c47"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/manifest.json",
+      "bytes": 2566,
+      "sha256": "e6ecafc9f5dd2f9a078069204500db5cb52c428cb53183c0bff6f350e23db55a"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/producer-runner.cjs.txt",
+      "bytes": 12868,
+      "sha256": "e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/producer-policy.ts.txt",
+      "bytes": 14958,
+      "sha256": "0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72"
+    },
+    {
+      "file": "opening-completion-20261020/native/command-plan.json",
+      "bytes": 21045,
+      "sha256": "f0833c07dbd93877211b03c267701f7e24ff50cfc3c25b955c3617e3dd2d74df"
+    },
+    {
+      "file": "opening-completion-20261020/native/expected-settings.json",
+      "bytes": 91,
+      "sha256": "42d74e12e99c1dfe73012e00ec23296f2dd99d790c8c353b210ad1eadcc7b6e8"
+    },
+    {
+      "file": "opening-completion-20261020/native/project-native.cjs.txt",
+      "bytes": 18513,
+      "sha256": "876f6358ccf72a3e6caf7afda005dd74192c3c3ad827b5eb61c0a5ccdaa3a8f5"
+    },
+    {
+      "file": "opening-completion-20261020/native/verify-native.cjs.txt",
+      "bytes": 17580,
+      "sha256": "c60683d263cce17bc936e50ba936b3aa3e3a24d38ff8edaa14cf21e4f5a6b92e"
+    },
+    {
+      "file": "opening-completion-20261020/actions/plan.json",
+      "bytes": 4306,
+      "sha256": "1c4504a0d4148c360975ced71c5b475b6fc391cff26324023a8746cf089803af"
+    },
+    {
+      "file": "opening-completion-20261020/actions/input-pins.json",
+      "bytes": 1159,
+      "sha256": "f45d69f853f02855ebf3b669bbd39747448a2310df1c058775cece78af8c4a3d"
+    },
+    {
+      "file": "opening-completion-20261020/actions/summarize.cjs.txt",
+      "bytes": 13717,
+      "sha256": "d8f6ea364765cdc532362b38a681bd61bcdd4797fa9403196f403acddab54306"
+    },
+    {
+      "file": "opening-completion-20261020/actions/readiness.md",
+      "bytes": 3765,
+      "sha256": "6ec3aaa277a5c993a08d878a63a556f8a3fd684e2f05c16f70643b24fcc817b4"
+    },
+    {
+      "file": "opening-completion-20261020/checks/export-metadata.json",
+      "bytes": 5282,
+      "sha256": "a65f544315d193ce18209e83d61ce4cb8cb865e71049f14c301ec3f69e8912c6"
+    },
+    {
+      "file": "opening-completion-20261020/checks/wording-focused.txt",
+      "bytes": 2821,
+      "sha256": "00300c5e52a8428260c2d709b672281f2b55d6733ef53961f969aa11b1884915"
+    },
+    {
+      "file": "opening-completion-20261020/checks/wording-test-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "opening-completion-20261020/historical-ci/ed506-observation.json",
+      "bytes": 909,
+      "sha256": "d5b9e33e4f74a590948d92fc1bceed649f1eabde07946439187dc4123476164d"
+    },
+    {
+      "file": "opening-completion-20261020/historical-ci/ed506-log.txt",
+      "bytes": 28144,
+      "sha256": "401e6eafce6a3f8448e8346b4d50abf91c2b2b27ab7996c97e65a29ec50e2afe"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/producer-runner.cjs.txt",
+      "bytes": 9585,
+      "sha256": "eb64a09b4f3c91686f970c85359b3012439e9e581ff9e105e4fe223ff87b04bb"
+    },
+    {
+      "file": "opening-completion-20261020/criminal/producer-policy.ts.txt",
+      "bytes": 28848,
+      "sha256": "5091b729b69b514d6aab5a8105afd68ef652434e4ac40c549e5c51ce5f801a4f"
+    },
+    {
+      "file": "opening-completion-20261020/checks/annual-driver.cjs.txt",
+      "bytes": 6982,
+      "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+    },
+    {
+      "file": "opening-completion-20261020/actions/benchmark-driver.cjs.txt",
+      "bytes": 16065,
+      "sha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/REPORT.md",
+      "bytes": 9496,
+      "sha256": "4a7f31da2991865a6e26b5de6eb60b214c30ed6e332aa0bc66dbce95b24d3c0c"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/SHA256SUMS",
+      "bytes": 688,
+      "sha256": "3c03e4b1d4f363be76ed21f8f6219e6206b1fce965b82573ff4abb2cc7db2ad0"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/analyse.py",
+      "bytes": 17913,
+      "sha256": "4c82e90dda564546ca1b02868d22c4c417d72224b65775f60f6befa7c915d140"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/catalogue-observations.ndjson",
+      "bytes": 269005,
+      "sha256": "39f074712b1c9308e4ab45882ffdc87f3e6dfcb96f85752965d96e67bd683f5e"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/early-copy-review.ndjson",
+      "bytes": 39918,
+      "sha256": "0114e6d848147c6dc9453b4af0422640e1d3475212fa5f9862401ecd4d130954"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/inputs.json",
+      "bytes": 18386,
+      "sha256": "3122853a595733566fe41decf8d25110173e1fcd8d3cb250c48543d5b425416d"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/medical-context-evidence.json",
+      "bytes": 98625,
+      "sha256": "c92cd7fa3f593a00180ba3a50c2619a49eb068451397bdeeda3372f02d7ca022"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/name-collision-evidence.json",
+      "bytes": 14137,
+      "sha256": "d11c924c9a1dc35addfc3bf42c8bdd7af9fe6cffe98d00bb71c8211713bfb591"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis/summary.json",
+      "bytes": 72747,
+      "sha256": "96b75ff9ac9b0608b03cdddac03c2479942cb0234868e8a483066084e3c0b9d7"
+    },
+    {
+      "file": "opening-completion-20261020/editorial/analysis-plan.md",
+      "bytes": 11862,
+      "sha256": "d96ef1bf52f54b715ee8a45ae2247156a7a420df6cd2d49a338c8916f1be5e39"
+    },
+    {
+      "file": "opening-completion-20261020/native/additional-raw-rows.json",
+      "bytes": 14093,
+      "sha256": "137ab75eac1c7fedf78ffc7c440780aa37532364a7d12141771e33250a431666"
+    },
+    {
+      "file": "opening-completion-20261020/native/additional-raw-rows.py",
+      "bytes": 4148,
+      "sha256": "0d344e9037f6dc21a5a06fcc694e8ba64cbf32e428964474a4e242297a34bad1"
+    },
+    {
+      "file": "opening-completion-20261020/native/self-audit.md",
+      "bytes": 5948,
+      "sha256": "f359dcf29091c227041f3146e97bcda96dc8823c9e16dce93bb97a1c8369e274"
+    },
+    {
+      "file": "opening-completion-20261020/native/self-audit-baseline.json",
+      "bytes": 1525,
+      "sha256": "a8f19070d00feaacfe5446bc788ce066ef304c9f667cac9bc389048afd3bbb1a"
+    },
+    {
+      "file": "opening-completion-20261020/actions/quiescence.json",
+      "bytes": 1095,
+      "sha256": "534ecf40aad2db1e53ed5ea3a02a83c6e1f9cb4d6dcddf4ffeace38c4ee70c35"
+    },
+    {
+      "file": "opening-completion-20261020/actions/execution.txt",
+      "bytes": 247,
+      "sha256": "ba63c06b842622382cbb8050067e98e1b20f20b14777517e372c7687db14b901"
+    },
+    {
+      "file": "opening-completion-20261020/actions/execution.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "opening-completion-20261020/actions/run-actions.py",
+      "bytes": 2931,
+      "sha256": "3db424bc3a13651dac7d16891370f8c9d94223a9961c1fa350148ae063193215"
+    },
+    {
+      "file": "opening-completion-20261020/diagnostics/actions-initial-guard.txt",
+      "bytes": 619,
+      "sha256": "42d31ee9bba957d2de8eb77ea549bf7eec311c95e2ee676322c4a1842d288981"
+    },
+    {
+      "file": "opening-completion-20261020/diagnostics/actions-initial-wrapper.py",
+      "bytes": 2766,
+      "sha256": "7de28895470be56463b9ffd89587ba73c644b7d1b95df7de4c2b428ce035adac"
+    },
+    {
+      "file": "opening-completion-20261020/native/journey-exact.json",
+      "bytes": 26372,
+      "sha256": "950f4f38ad8324157a60e24547d5ecad103385bb45064abff49115feaa33f450"
+    },
+    {
+      "file": "opening-completion-20261020/native/verifier-output.txt",
+      "bytes": 2903,
+      "sha256": "3c7b60e0b377f6b955727c4fa09f1d62780b7adff18cade773c809f23f0d8312"
+    },
+    {
+      "file": "opening-completion-20261020/native/accepted-captures.json",
+      "bytes": 17637,
+      "sha256": "042c36b6f31caf8fd2054e787fa72d3146b0ed9c8afeae130e39bd51e4f7c103"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/welcome.png",
+      "bytes": 376483,
+      "sha256": "a28d236925c4bb8ddefcfb839594fce56d200d9095dc5569cc409b3d60a98af2"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/welcome.xml",
+      "bytes": 16570,
+      "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-first.png",
+      "bytes": 67432,
+      "sha256": "f5d3a1c1d47965b16ec6f97d5ef2c22484add147b31005bb9b228e92ae030b72"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-first.xml",
+      "bytes": 28642,
+      "sha256": "924ae73e1bc15bf540755fbbc88da44337ad3d9e7fd6eeadd645d162164471cb"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-next.png",
+      "bytes": 66973,
+      "sha256": "a6a560c79f34cd3d74e4483ebe2a16f5534a2c27b2736330a30534b163185333"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-next.xml",
+      "bytes": 29358,
+      "sha256": "b58008aa4d99445f60dba71712364cd9ee4aaeb072dfb0a5a60472cd6f8dd80d"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-done.png",
+      "bytes": 62675,
+      "sha256": "67183159e1fb6897bae2b3c15c85d1dc3286f80101065e785a9defbccda0389c"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/keyboard-done.xml",
+      "bytes": 29359,
+      "sha256": "3afbf01a189637991f3b62b557b8b3792fe550077bb8817f708f58a31bd7bb2e"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/review-normal.png",
+      "bytes": 54155,
+      "sha256": "eb5fcf26d5b2155279ad02abbdb2427a59ab6eedff15fd786b063e12601950a3"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/review-normal.xml",
+      "bytes": 7981,
+      "sha256": "ffece2c80c1f60b84331c1c73e1a55c38b3310e692095f1b81e305ec5b936f0d"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/creation-large-clean.png",
+      "bytes": 66422,
+      "sha256": "8f679754615a8b31045eeb4f25acf9328f5878588c032ec926684489a3014f77"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/creation-large-clean.xml",
+      "bytes": 28653,
+      "sha256": "c5d7d49be36a57bd54527533cf296b9c7871c7d0f62a7485c812740118038067"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/review-large-clean.png",
+      "bytes": 54486,
+      "sha256": "b664214c55c97b5c787415560eb47ac685a76875e65db0ea38df55310b092cb7"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/review-large-clean.xml",
+      "bytes": 7988,
+      "sha256": "7d807631a40c1f873c2a5e725cd82d0efa967dcd88b17265b733ec60bde11dd0"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/profile-large.png",
+      "bytes": 83310,
+      "sha256": "2aa7fc81876a1e1429406b4d45186e4e494127eea19d23bddce17d482e384e33"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/profile-large.xml",
+      "bytes": 33535,
+      "sha256": "4e65247839c534dfe0178c0e524331460715ae1041e278eb6cb408513e335d26"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-large.png",
+      "bytes": 67245,
+      "sha256": "ad3d5f1d5dd57f4ae198edad757bc1ece1c9a70264a58fdd7cfa72e265e8dfa2"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-large.xml",
+      "bytes": 32205,
+      "sha256": "cd6d80621c49d9223b288dd79ab8087b915fd578ac07322dea43601d7092e705"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-stats-large.png",
+      "bytes": 58425,
+      "sha256": "5c435f8eddb0b019a292b056dfc0b6a899531e5358b4655f2f136879709a7e8d"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-stats-large.xml",
+      "bytes": 36490,
+      "sha256": "8168a55765f10abeda4ae0e644453eab28d1282ae1dc5756061b7e24610db7c1"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-counts-large.png",
+      "bytes": 71512,
+      "sha256": "fc2fb5cf81f05abb231a0c8f6850ab5d31530b030489b4ac4b1229f181a5bf0c"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/statistics-counts-large.xml",
+      "bytes": 29309,
+      "sha256": "a1b27b9c4fe33d4e6124cdbe1da15e7642761240dfcc4ec073e961e33da11bf1"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/finances-large.png",
+      "bytes": 61592,
+      "sha256": "99f345e95420b2394bb402bb35ce6fe24b44fb96efa242301f5662a01c6b7aab"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/finances-large.xml",
+      "bytes": 24156,
+      "sha256": "2a11dfc64d7abb6147ebabebc99b3f9a04e42593455add3e586d508c3d1e0f21"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/settings-off-large.png",
+      "bytes": 63164,
+      "sha256": "488bbd9be35e716a881b78bbe8e1aecab66520144019637b54cba02354018951"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/settings-off-large.xml",
+      "bytes": 17379,
+      "sha256": "4d5c0c2d34da5a51ad1bdf333c4d618cdd206b7b8ee8c816ea1077b6a1be2cf8"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/feedback-large.png",
+      "bytes": 82730,
+      "sha256": "a65c8b581834bc03b3e2d124b0d672e1167296fc3f3f1fa611a441bed513324a"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/feedback-large.xml",
+      "bytes": 16505,
+      "sha256": "e7502af1de21df092ab7a0736accdb0de15766e6d4af16746eb9af1bdcc7d10b"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/settings-cold-welcome.png",
+      "bytes": 376671,
+      "sha256": "0969e18a2343f9fb4e46a39c13127642f4e0be0b2c7822b24c9e9b05361118ea"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/settings-cold-welcome.xml",
+      "bytes": 16570,
+      "sha256": "6fc675a37be5ba6e79cc76cdabbdd8ba65a422718be2e5867b86c4f3894c7ec6"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/nia-existing-entry.png",
+      "bytes": 49417,
+      "sha256": "db2810b68f84979b95c299669f6ec6560c913e98e2b46a5f28997e6673840171"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/nia-existing-entry.xml",
+      "bytes": 22134,
+      "sha256": "1e8f96b578896dbd0f0b0fcdd07eeaddece6100ac22cf0db710aa6bbbee1d055"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/nia-selected.png",
+      "bytes": 77593,
+      "sha256": "ea3d425023f12d16fd4de6bf3b799982e483228f6c8c41d9ca4b61fa5a048206"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/nia-selected.xml",
+      "bytes": 40494,
+      "sha256": "6e82e18d58716ce0f995fa0dff40e2e2ed1f7ef39125fd2e0235f8eaf7ddefa3"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/introduction-review.png",
+      "bytes": 55366,
+      "sha256": "1bbd3daabc434a887f136ffc1733b8d94b7a2d4e2e4b97a66222a0eb6a05cbc4"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/introduction-review.xml",
+      "bytes": 9496,
+      "sha256": "6ed6f8091e8d404dac5ed90ba794a94e1af57cf7ee0b7ccc6fcd23c2ed2192d0"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/intro135.png",
+      "bytes": 71742,
+      "sha256": "3db185074854dd301e459fcc7d9b330518a1678dc92b1b4ee5a55b351a1f41f9"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/intro135.xml",
+      "bytes": 8082,
+      "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/cold-intro135.png",
+      "bytes": 74282,
+      "sha256": "fe8def01d6faf434dff500eb84d9087c0053719e4eaf67764c041dfa09ba16a2"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/cold-intro135.xml",
+      "bytes": 8082,
+      "sha256": "8d3c335a541db63c6a1711bb8538601a22b1587caf99f9ca041ecd24dc1d1cd4"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/ack136.png",
+      "bytes": 77858,
+      "sha256": "4100c05a34622941e04f665876df92be4c38fd94e1757ba176e34be098d64ab9"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/ack136.xml",
+      "bytes": 40485,
+      "sha256": "32ee10f9fd860774c8e659d7158b094bebfc4d55b7362b6509878d7586a85c58"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/vaccination-review.png",
+      "bytes": 59850,
+      "sha256": "7b55fd2ec7a67e0ec7bc5c1fd2725867be599e71a7c4b46189decfe2af3fced0"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/vaccination-review.xml",
+      "bytes": 9281,
+      "sha256": "1cb1633e6dba8a652b1058c2300526abebab666678bb51cdc2b2cd47254711e1"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/vaccine137.png",
+      "bytes": 60213,
+      "sha256": "855857cd76234dca5f76f78cb74903d43de16672e92149241060f49294c62a5e"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/vaccine137.xml",
+      "bytes": 7021,
+      "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/cold-vaccine137.png",
+      "bytes": 69675,
+      "sha256": "1add28738f19d9c2a452667237776fe3641ef0a4400f170c45297980990e1c4f"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/cold-vaccine137.xml",
+      "bytes": 7021,
+      "sha256": "290ae88010c9656021b1935dff51fb8a76185155203307cfd4d48f68641adc93"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/final138.png",
+      "bytes": 77972,
+      "sha256": "553cc8ed1aaf8a8d81e5f385ba3b2ad71ac7694e320bfa1a9f8468700cd257d5"
+    },
+    {
+      "file": "opening-completion-20261020/native/captures/final138.xml",
+      "bytes": 40485,
+      "sha256": "5f3d83391d8738308cb8dbecd9ec097974d760221c0cb019c39b051325928852"
+    },
+    {
+      "file": "opening-completion-20261020/actions/raw.json",
+      "bytes": 248789,
+      "sha256": "24c66dfd2691eb744eee1f78207be01710f4ba1fcbc19ec6a438bde404c39674"
+    },
+    {
+      "file": "opening-completion-20261020/actions/stderr.txt",
+      "bytes": 481,
+      "sha256": "a1dbd10fd3561829bc8b4cf66d54c4480bfc6fcb1b28f60064e99b56b86da181"
+    },
+    {
+      "file": "opening-completion-20261020/actions/receipt.json",
+      "bytes": 1523,
+      "sha256": "9bafdaf8dbf56e049096e05eaca3a232e3edd50417a2aa2397db5dbe5e67fefa"
+    },
+    {
+      "file": "opening-completion-20261020/actions/summary.json",
+      "bytes": 16161,
+      "sha256": "8c29ae6c3175a672a9c751a316020d4d2fdeeca3244a769d27d9e2b8a0f92a89"
+    },
+    {
+      "file": "opening-completion-20261020/actions/summary.md",
+      "bytes": 2218,
+      "sha256": "8ac2f15d540a1978a5fea980b6c8063b46b07df2cfcf4119bc033ad2a1270d29"
+    },
+    {
+      "file": "opening-completion-20261020/publication-inputs.json",
+      "bytes": 23805,
+      "sha256": "df5b9e334cd934cfd4c6ce63da9d374f093c0fe6df3af8dc1c4ea8fe8a3e2168"
+    },
+    {
+      "file": "opening-completion-20261020/publish.cjs.txt",
+      "bytes": 29442,
+      "sha256": "3c69011c65c5faae540a7bfcf34a17412b28813e0096c5ed50b9ebcd3d573c18"
+    },
+    {
+      "file": "opening-completion-20261020/checks/main-locked-install.txt",
+      "bytes": 1591,
+      "sha256": "fc8d192b0d78694e97b0fb9be562c1a8270251520bcdb1bb430e9a0e8d8687df"
+    },
+    {
+      "file": "opening-completion-20261020/checks/main-types-after-install.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "opening-completion-20261020/checks/main-byte-identity.json",
+      "bytes": 799,
+      "sha256": "8d15cf91c2b37931e8abbe785cef8659ec8e7eb0d2d1af2e48f7f2c93d8d2354"
+    }
+  ]
+}

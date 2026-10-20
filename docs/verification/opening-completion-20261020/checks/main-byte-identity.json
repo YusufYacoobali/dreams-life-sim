@@ -1,0 +1,11 @@
+{
+  "format": "dreams-c35-main-byte-identity-v1",
+  "status": "passed",
+  "observedAt": "2026-10-20T23:01:39.132484+00:00",
+  "mainRoot": "/workspace/dreams-life-sim",
+  "mainHead": "73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa",
+  "originalProducerRoot": "/workspace/dreams-worktrees/integration-opening-next",
+  "originalSnapshotSha256": "521383d65749b98c4dab8396a3604857dbeff6b69020927b7d99cfee96e296cc",
+  "registeredFilesEqual": 583,
+  "scope": "Actual main source bytes equal every583 final producer pin after fast-forward, publication and locked install. The original source helper intentionally pins its producer root; main identity is a separate comparison, never relabeling that snapshot. Root independently decompressed all100 editorial archive members and matched87 original file hashes."
+}

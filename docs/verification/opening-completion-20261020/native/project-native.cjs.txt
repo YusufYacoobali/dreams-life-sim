@@ -1,0 +1,207 @@
+#!/usr/bin/env node
+'use strict';
+
+// Run only after the coordinator freezes the final next-source worktree.
+// The captured native DB is opened READ ONLY. No native/SQL mutation or simulation
+// of years is performed; only actual normal engine commands are projected in memory.
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
+const { createRequire } = require('node:module');
+const { DatabaseSync } = require('node:sqlite');
+
+const usage = 'node /tmp/dreams-opening-next-native-plan.cjs --source /ABS/FROZEN/WORKTREE --expect-commit FULL_SHA --output /tmp/NEW-plan.json [--db /tmp/dreams-autonomy-native-school-final-db/dreams.db]';
+const args = process.argv.slice(2);
+if (args.length === 1 && args[0] === '--help') { console.log(usage); process.exit(0); }
+const options = {};
+for (let i = 0; i < args.length; i += 2) {
+  assert(['--source', '--expect-commit', '--output', '--db'].includes(args[i]), 'Unknown option: ' + args[i]);
+  assert(args[i + 1] && !args[i + 1].startsWith('--'), 'Missing value for ' + args[i]);
+  assert(!Object.hasOwn(options, args[i]), 'Repeated option: ' + args[i]);
+  options[args[i]] = args[i + 1];
+}
+const source = options['--source'], expectedCommit = options['--expect-commit'], output = options['--output'];
+const dbPath = options['--db'] ?? '/tmp/dreams-autonomy-native-school-final-db/dreams.db';
+assert(source && path.isAbsolute(source) && output && path.isAbsolute(output), usage);
+assert(/^[0-9a-f]{40}$/.test(expectedCommit ?? ''), 'A complete frozen --expect-commit SHA is required');
+assert(!fs.existsSync(output), 'Output already exists; preserve previous projection evidence');
+const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+// The coordinator captures these three read-only Git commands in the shell.
+// Nested synchronous Git execution is unavailable in this environment; never
+// suppress that failure or substitute its partial stdout as a successful call.
+const treeProofFile = '/tmp/dreams-opening-next-source-tree.bin';
+const headProofFile = '/tmp/dreams-opening-next-source-head.txt';
+const statusProofFile = '/tmp/dreams-opening-next-source-status.txt';
+assert.equal(fs.readFileSync(headProofFile, 'utf8').trim(), expectedCommit, 'Final source commit differs');
+assert.equal(fs.readFileSync(statusProofFile, 'utf8'), '', 'Final tracked source must be frozen and clean');
+const sourceTree = new Map();
+for (const entry of fs.readFileSync(treeProofFile, 'utf8').split('\0').filter(Boolean)) {
+  const match = /^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(entry);
+  if (!match) { assert.match(entry, /^120000 blob [a-f0-9]{40}\t.+$/); continue; }
+  sourceTree.set(match[3], match[2]);
+}
+const gitBlobOid = bytes => crypto.createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\0')).update(bytes).digest('hex');
+const coordinatorProofs = [treeProofFile, headProofFile, statusProofFile].map(file => ({ file, sha256: hash(fs.readFileSync(file)) }));
+function sourceHash() {
+  const files = [...sourceTree.keys()].filter(file => /^(?:src\/|app\/|package\.json$)/.test(file) && /\.(?:ts|tsx|json)$/.test(file)).sort();
+  assert(files.length > 200, 'Complete frozen application tree proof required');
+  const digest = crypto.createHash('sha256');
+  for (const file of files) {
+    const bytes = fs.readFileSync(path.join(source, file));
+    assert.equal(gitBlobOid(bytes), sourceTree.get(file), 'Current source differs from frozen Git blob: ' + file);
+    digest.update(file + '\0'); digest.update(bytes); digest.update('\0');
+  }
+  return digest.digest('hex');
+}
+const initialSourceHash = sourceHash();
+const r = createRequire(path.join(source, 'package.json')), ts = r('typescript');
+require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), {
+  compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+}).outputText, file);
+const { unpackCheckpoint, packCheckpoint } = r('./src/persistence/checkpoints.ts');
+const { encodeWorld, ageOn, fullName, moneyJSON } = r('./src/game/model.ts');
+const { resolveCommand } = r('./src/game/engine.ts');
+const { activeHobbyPlan } = r('./src/game/systems/leisureSchemas.ts');
+const { hobbyIntroductionReason, hobbyContacts } = r('./src/game/systems/leisure.ts');
+const { medicalQuote, hospitalized } = r('./src/game/systems/health.ts');
+const { activeTrip } = r('./src/game/systems/travelSchemas.ts');
+const { serviceAway } = r('./src/game/systems/serviceSchemas.ts');
+const { custodyReason } = r('./src/game/systems/legal.ts');
+const { isConfined } = r('./src/game/systems/legalSchemas.ts');
+const { accountFor, availableCash } = r('./src/game/systems/common.ts');
+const { rules } = r('./src/game/rules.ts');
+const { countries } = r('./src/game/countries.ts');
+const { lifetimeStatistics } = r('./src/ui/lifetimeStatistics.ts');
+const { indexPersonalFinances, annualFinanceSummary } = r('./src/ui/annualFinances.ts');
+assert.equal(typeof hobbyIntroductionReason, 'function', 'Approved introduction command must be present in final source');
+
+// Evaluate the exact final UI guard without importing React Native or copying
+// its policy. Its actual pure imports are supplied; an added unknown dependency
+// fails rather than silently guessing a newly changed eligibility rule.
+const healthReviewPath = path.join(source, 'src/ui/HealthReview.tsx');
+const healthReviewSource = fs.readFileSync(healthReviewPath, 'utf8');
+const healthAST = ts.createSourceFile(healthReviewPath, healthReviewSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+const healthFunction = healthAST.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === 'healthReviewReason');
+assert(healthFunction, 'Final actual healthReviewReason function is required');
+const healthGuardJS = ts.transpileModule(healthFunction.getText(healthAST), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+const healthReviewReason = new Function('exports', 'ageOn', 'hospitalized', 'custodyReason', 'activeTrip', 'serviceAway', healthGuardJS + '\nreturn healthReviewReason;')({}, ageOn, hospitalized, custodyReason, activeTrip, serviceAway);
+
+const tableNames = ['lives', 'preferences', 'receipts', 'snapshots', 'backups', 'snapshot_metadata', 'branches', 'restore_receipts'];
+const db = new DatabaseSync(dbPath, { readOnly: true });
+try {
+  const tableHashes = () => Object.fromEntries(tableNames.map(table => {
+    const rows = db.prepare('SELECT * FROM ' + table).all().map(row => JSON.stringify(row)).sort();
+    return [table, { rows: rows.length, sha256: hash(JSON.stringify(rows)) }];
+  }));
+  const before = tableHashes(), reader = db.prepare('PRAGMA user_version').get().user_version;
+  const capturedTableHashes = {
+    lives: 'e1f32ca9023a7fa18372d45e832d4daf06284318f0092dc81e934963fbd0feef',
+    preferences: '9347b1e059921517e409be15aefbb52db2a2bc50690df6ec8a1deb0a2fe0777c',
+    receipts: '2c7ed331568da605dd8e2321361fc3259173118ac14697a5f599b9d22e12f483',
+    snapshots: '9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5',
+    backups: '1829a67d205a9cd06317f37c8790562f9c3142600936147c2d6cf16fe8f3a479',
+    snapshot_metadata: '3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9',
+    branches: 'fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370',
+    restore_receipts: '010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7',
+  };
+  for (const table of tableNames) assert.equal(before[table].sha256, capturedTableHashes[table], 'Captured C34 input rows differ: ' + table);
+  const activeLife = db.prepare("SELECT value FROM preferences WHERE key='active_life'").get()?.value;
+  const settingsValue = db.prepare("SELECT value FROM preferences WHERE key='app_settings'").get()?.value ?? null;
+  assert.equal(reader, 13, 'Input must be the captured supported C34 reader13 DB');
+  assert.equal(activeLife, 'life_mvgprdj2_16qsril_0', 'Input must retain actual Alex23 selection');
+  const load = id => { const row = db.prepare('SELECT payload FROM lives WHERE id=?').get(id); assert(row, 'Existing captured life missing: ' + id); return { payload: row.payload, world: unpackCheckpoint(row.payload) }; };
+  const alex = load(activeLife), nia = load('life_native_adult_friend_v30_s0');
+  assert.equal(alex.world.revision, 23); assert.equal(nia.world.revision, 134);
+  assert.equal(fullName(alex.world.people[alex.world.activePersonId]), 'Alex Martín');
+  assert.equal(fullName(nia.world.people[nia.world.activePersonId]), 'Nia Carter');
+  for (const { world } of [alex, nia]) {
+    assert.deepEqual([world.schemaVersion, world.engineVersion, world.contentVersion], [34, 35, 10], 'Final consolidated tags');
+    assert(Array.isArray(world.schoolWithdrawals), 'Final agreed schoolWithdrawals migration must be present');
+    assert.equal(world.pending, null); assert.equal(world.annual, null);
+  }
+  // Retain the already observed C34 canonical proofs. Only the approved new
+  // empty array and three root version tags may differ during this migration.
+  function originalCanonicalHash(world) {
+    assert.equal(world.schoolWithdrawals.length, 0, 'Old captured life cannot acquire invented withdrawals');
+    const original = JSON.parse(encodeWorld(world));
+    original.schemaVersion = 33; original.engineVersion = 34; original.contentVersion = 9;
+    delete original.schoolWithdrawals;
+    return hash(JSON.stringify(original));
+  }
+  assert.equal(originalCanonicalHash(alex.world), 'ee66b4c689feef21cf0f5de27733e6319534c35f91a3df29901a921d31d52986', 'Alex original whole C34 world changed');
+  assert.equal(originalCanonicalHash(nia.world), '22c88d6a879b54d3d1c9c89441999204f763bb640c3ebcfd563ca377bde612e6', 'Nia original whole C34 world changed');
+  const state = world => ({ lifeId: world.id, personId: world.activePersonId, name: fullName(world.people[world.activePersonId]), age: ageOn(world.people[world.activePersonId], world.date), revision: world.revision, date: world.date, worldSha256: hash(encodeWorld(world)), pending: world.pending, annual: world.annual });
+  const readOnlyWorldHash = hash(encodeWorld(alex.world));
+  const actor = alex.world.people[alex.world.activePersonId], currency = countries[actor.country].currency;
+  const statistics = lifetimeStatistics(alex.world, actor.id);
+  const finances = annualFinanceSummary(indexPersonalFinances(alex.world, actor.id), alex.world.date.year, currency);
+  assert.equal(hash(encodeWorld(alex.world)), readOnlyWorldHash, 'Actual read-only detail selectors changed world');
+  const plan = {
+    status: 'projection-only', nativeAcceptance: false,
+    scope: 'Final-source ordinary commands projected in memory from the actual captured C34 SQLite DB. Input DB is read only; no life selection, reader migration, settings write, native UI action, durable SQLite save or observed cold launch is performed by this tool. No time/funds/stats/RNG/age overrides or outcome search.',
+    source: { root: source, commit: expectedCommit, runtimeSourceSha256: initialSourceHash, healthReviewGuardSha256: hash(healthFunction.getText(healthAST)), coordinatorProofs, proofScope: 'Coordinator-shell ls-tree/head/clean-status captures; current source bytes verified against exact Git blob object IDs before and after projection. Not a nested Git execution or a gate pass.' },
+    input: { dbPath, reader, activeLife, settingsValue, tables: before, alex: state(alex.world), nia: state(nia.world), originalAlexPayloadSha256: hash(alex.payload), originalNiaPayloadSha256: hash(nia.payload) },
+    metadataPlan: { fromReader: 13, toReader: 14, nativeObserved: false, expectedAllEightTablesExact: true, noEagerPayloadRewrite: true },
+    readOnlyPlan: { routes: ['/profile', { pathname: '/statistics', params: { tab: 'activities' } }, '/finances'], actor: state(alex.world), expectedAllEightTablesExact: true, actualSelectorProjection: { statistics, finances } },
+    settingsPlan: { nativeObserved: false, executedByProjection: false, expectedMutation: "preferences.app_settings only for chosen settings; normal selectLife separately changes preferences.active_life", verifySeparately: 'After real settings writes, allow only actual intended preference values to differ; all seven other tables and every life/current/backup payload must remain exact. Do not claim all eight unchanged across settings writes. Later read-only visits/cold checks compare against the post-settings baseline.' },
+    selectionPlan: { method: 'Normal existing-life UI / store.selectLife, no SQL override', lifeId: nia.world.id, expectedActiveLife: nia.world.id, expectedWorld: state(nia.world), worldRevisionChanges: false, expectedMutation: 'preferences.active_life only; all seven other tables remain byte exact' },
+    trace: [], blocked: [],
+  };
+  let world = nia.world;
+  function run(phase, command) {
+    const prior = world, priorCanonical = encodeWorld(prior), next = resolveCommand(prior, command, true);
+    assert.equal(encodeWorld(prior), priorCanonical, 'Command mutated original input');
+    assert.equal(next.revision, prior.revision + 1);
+    const canonical = encodeWorld(next), packed = packCheckpoint(next), cold = unpackCheckpoint(packed);
+    assert.equal(encodeWorld(cold), canonical, 'Full production codec roundtrip');
+    world = next;
+    plan.trace.push({ phase, command, ...state(next), codecCold: { kind: 'packCheckpoint/unpackCheckpoint full canonical equality; no observed SQLite/app cold launch', exact: true, packedSha256: hash(packed) }, expectedReceipts: before.receipts.rows + plan.trace.length + 1, expectedLifeCount: before.lives.rows, expectedMomentCount: before.snapshots.rows, newPeople: Object.keys(next.people).filter(id => !Object.hasOwn(prior.people, id)).map(id => ({ id, name: fullName(next.people[id]), age: ageOn(next.people[id], next.date) })) });
+    return next;
+  }
+  function acknowledge(phase) {
+    assert.equal(world.pending?.kind, 'result', 'Expected the actual command result');
+    run(phase, { type: 'acknowledge', resultId: world.pending.id });
+    assert.equal(world.pending, null); assert.equal(world.annual, null);
+  }
+  const person = world.people[world.activePersonId];
+  const reading = world.hobbies.find(row => row.personId === person.id && row.kind === 'reading'), arrangement = reading && activeHobbyPlan(reading);
+  const introductionReason = !reading || !arrangement ? 'No current reading routine' : hobbyIntroductionReason(world, reading, arrangement);
+  plan.introduction = { hobbyId: reading?.id, plan: arrangement, reason: introductionReason ?? null, fee: 0n, policy: 'One actual current paid local reading introduction; stop and report real blocker, with no artificial preparation.' };
+  if (introductionReason) plan.blocked.push({ action: 'meet-hobby-peer', reason: introductionReason, ordinaryPreparation: 'Review the actual displayed blocker; no preparation is simulated by this tool.' });
+  else {
+    const beforeCash = accountFor(world).cash;
+    run('reading-introduction', { type: 'meet-hobby-peer', hobbyId: reading.id, planId: arrangement.id, reviewedPayerId: arrangement.payerId, reviewedMonth: world.date.year * 12 + world.date.month - 1 });
+    assert.equal(accountFor(world).cash, beforeCash, 'Attended access introduction must not add a second fee');
+    plan.introduction.actualContacts = hobbyContacts(world, world.hobbies.find(row => row.id === reading.id)).map(peer => ({ id: peer.id, name: fullName(peer), age: ageOn(peer, world.date) }));
+    acknowledge('reading-introduction-ack');
+  }
+  const patient = world.people[world.activePersonId];
+  const choices = ['routine', 'seasonal'].map(vaccine => ({ vaccine, disabledReason: healthReviewReason(world, { type: 'vaccinate', vaccine }) ?? null }));
+  const offered = choices.find(choice => !choice.disabledReason);
+  const localCost = isConfined(world, patient) ? 0n : rules[patient.country].doctorVisit / 2n, quote = medicalQuote(world, localCost);
+  const balance = availableCash(accountFor(world, quote.payer, quote.currency));
+  plan.vaccination = { choices, selected: offered?.vaccine ?? null, localCost, localCurrency: countries[patient.country].currency, quote: { amount: quote.amount, currency: quote.currency, payerId: quote.payer.id }, availableCash: balance, policy: 'First currently offered routine-then-seasonal choice; no reroll or desired outcome search.' };
+  const vaccineReason = !offered ? 'Neither recorded protection is currently offered' : balance < quote.amount ? 'Available payer balance cannot cover the actual vaccination fee' : null;
+  if (vaccineReason) plan.blocked.push({ action: 'vaccinate', reason: vaccineReason, ordinaryPreparation: 'Review the actual current protection/restriction/funding reason. No time or money preparation is simulated.' });
+  else {
+    run('vaccination', { type: 'vaccinate', vaccine: offered.vaccine });
+    plan.vaccination.actualRecord = world.people[world.activePersonId].health.records.at(-1);
+    acknowledge('vaccination-ack');
+  }
+  plan.final = state(world);
+  plan.nativeAssertions = {
+    originalOtherSixLivesAndBackupsExact: true, allOriginalMomentsAndMetadataExact: true,
+    allOriginalReceiptsRetainedExact: true, branchesAndRestoreReceiptsExact: true,
+    eachCommandAndItsColdReopenFullWorldEqualsProjectedHash: true, eachActualResultAcknowledgedOnce: true,
+    actualSaveAndColdTableRowsComparePerPhase: true,
+    limitation: 'These are future acceptance assertions, not observed outcomes. Codec equality above is not an on-disk save/cold-launch claim.',
+  };
+  assert.deepEqual(tableHashes(), before, 'Read-only input DB changed during projection');
+  assert.equal(db.prepare('PRAGMA user_version').get().user_version, reader);
+  for (const proof of coordinatorProofs) assert.equal(hash(fs.readFileSync(proof.file)), proof.sha256, 'Coordinator source proof changed');
+  assert.equal(sourceHash(), initialSourceHash, 'Source changed during projection');
+  plan.inputReadOnlyAllEightTablesExact = true;
+  fs.writeFileSync(output, JSON.stringify(plan, moneyJSON, 2) + '\n', { flag: 'wx' });
+  console.log(JSON.stringify({ output, sourceCommit: expectedCommit, initialNiaRevision: nia.world.revision, finalProjectedRevision: world.revision, commands: plan.trace.map(row => ({ phase: row.phase, revision: row.revision, command: row.command, worldSha256: row.worldSha256 })), blocked: plan.blocked, nativeAcceptance: false }, null, 2));
+} finally { db.close(); }

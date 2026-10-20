@@ -1,0 +1,864 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --testTimeout=30000
+
+PASS tests/game/pets.test.ts
+PASS tests/ui/asset-bank-save-flow.test.tsx (7.912 s)
+FAIL tests/ui/education-choice-save-flow.test.tsx (33.15 s)
+  ● US school and education explain the actual game assessment age without granting withdrawal or qualifications
+
+    Unable to find an element with text: /This game's school course is assessed at age 18\./
+
+    [36m<RNCSafeAreaProvider>[39m
+      [36m<RNCSafeAreaView>[39m
+        [36m<RCTScrollView>[39m
+          [36m<View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityLabel[39m=[32m"Back"[39m
+                  [33maccessibilityRole[39m=[32m"button"[39m
+                  [33maccessible[39m=[32m{true}[39m
+                [36m>[39m
+                  [36m<Text>[39m
+                    [0m‹[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+              [36m</View>[39m
+              [36m<View>[39m
+                [36m<Text[39m
+                  [33maccessibilityRole[39m=[32m"header"[39m
+                [36m>[39m
+                  [0mSecondary School[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View />[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33maccessible[39m=[32m{false}[39m
+                  [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                [36m>[39m
+                  [36m<View>[39m
+                    [36m<Image[39m
+                      [33maccessible[39m=[32m{false}[39m
+                    [36m/>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text[39m
+                    [33maccessibilityRole[39m=[32m"header"[39m
+                  [36m>[39m
+                    [0mNew York Secondary School[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mNew York[0m
+                    [0m, [0m
+                    [0mUnited States[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33maccessible[39m=[32m{false}[39m
+                  [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                [36m>[39m
+                  [36m<View>[39m
+                    [36m<Image[39m
+                      [33maccessible[39m=[32m{false}[39m
+                    [36m/>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityRole[39m=[32m"header"[39m
+                [36m>[39m
+                  [0mAcademic Performance[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Grades"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 80,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mGrades[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m80[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<Text>[39m
+                [0mYou’re doing well in school. Keep up the good work![0m
+              [36m</Text>[39m
+              [36m<Text>[39m
+                [0mThis game's school course is assessed at age [0m
+                [0m18[0m
+                [0m; its minimum leaving age is [0m
+                [0m16[0m
+                [0m. The secondary course requires final grades of at least 50% and twelve recorded study months. Leaving early does not earn the qualification. Adult recovery classes remain an option when eligible.[0m
+              [36m</Text>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Study Harder. Put in extra study once this year"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33maccessible[39m=[32m{false}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mStudy Harder[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mPut in extra study once this year[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Classmates. Make friends and spend time together. 4"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mClassmates[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mMake friends and spend time together[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m4[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Teachers. Build trust and ask for help"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{false}[39m
+                    [33maccessibilityLabel[39m=[32m"Avery Reed"[39m
+                    [33maccessibilityRole[39m=[32m"image"[39m
+                    [33maccessible[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"auto"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<View[39m
+                        [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                        [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                      [36m>[39m
+                        [36m<Image[39m
+                          [33maccessible[39m=[32m{false}[39m
+                        [36m/>[39m
+                        [36m<View>[39m
+                          [36m<Image[39m
+                            [33maccessible[39m=[32m{false}[39m
+                          [36m/>[39m
+                        [36m</View>[39m
+                      [36m</View>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mTeachers[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mBuild trust and ask for help[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Extracurricular Activities. Sports, music, drama and science. No Club"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View />[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mExtracurricular Activities[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mSports, music, drama and science[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mNo Club[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Behave in Class. Choose how you spend your school days. quiet"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View />[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mBehave in Class[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mChoose how you spend your school days[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mquiet[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Study Routine. Balance grades and stress. balanced"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mStudy Routine[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mBalance grades and stress[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mbalanced[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Withdraw from Secondary School. Keep your incomplete record without earning a qualification. This game's school rules allow withdrawal from age 16"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": true,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mWithdraw from Secondary School[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mThis game's school rules allow withdrawal from age 16[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<Text[39m
+                [33maccessibilityRole[39m=[32m"header"[39m
+              [36m>[39m
+                [0mSchool Reports[0m
+              [36m</Text>[39m
+              [36m<Text>[39m
+                [0mA report is recorded after twelve months attending the same school.[0m
+              [36m</Text>[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</RCTScrollView>[39m
+      [36m</RNCSafeAreaView>[39m
+    [36m</RNCSafeAreaProvider>[39m
+
+      248 |     let view = render(frame()); expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Leave course/ })).toBeNull(); view.unmount();
+      249 |     view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /></ThemeProvider></SafeAreaProvider>);
+    > 250 |     expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen();
+          |                   ^
+      251 |     expect(encodeWorld(world())).toBe(payload); expect(world()).toEqual(initial); expect(rows()).toEqual(before); expectOldMoments(); view.unmount();
+      252 |   } finally { sqlite.close(); }
+      253 | });
+
+      at getByText (tests/ui/education-choice-save-flow.test.tsx:250:19)
+      at asyncGeneratorStep (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+  ● IT school and education explain the actual game assessment age without granting withdrawal or qualifications
+
+    Unable to find an element with text: /This game's school course is assessed at age 19\./
+
+    [36m<RNCSafeAreaProvider>[39m
+      [36m<RNCSafeAreaView>[39m
+        [36m<RCTScrollView>[39m
+          [36m<View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityLabel[39m=[32m"Back"[39m
+                  [33maccessibilityRole[39m=[32m"button"[39m
+                  [33maccessible[39m=[32m{true}[39m
+                [36m>[39m
+                  [36m<Text>[39m
+                    [0m‹[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+              [36m</View>[39m
+              [36m<View>[39m
+                [36m<Text[39m
+                  [33maccessibilityRole[39m=[32m"header"[39m
+                [36m>[39m
+                  [0mSecondary School[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View />[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33maccessible[39m=[32m{false}[39m
+                  [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                [36m>[39m
+                  [36m<View>[39m
+                    [36m<Image[39m
+                      [33maccessible[39m=[32m{false}[39m
+                    [36m/>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text[39m
+                    [33maccessibilityRole[39m=[32m"header"[39m
+                  [36m>[39m
+                    [0mRome Secondary School[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mRome[0m
+                    [0m, [0m
+                    [0mItaly[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33maccessible[39m=[32m{false}[39m
+                  [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                [36m>[39m
+                  [36m<View>[39m
+                    [36m<Image[39m
+                      [33maccessible[39m=[32m{false}[39m
+                    [36m/>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityRole[39m=[32m"header"[39m
+                [36m>[39m
+                  [0mAcademic Performance[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Grades"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 80,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mGrades[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m80[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<Text>[39m
+                [0mYou’re doing well in school. Keep up the good work![0m
+              [36m</Text>[39m
+              [36m<Text>[39m
+                [0mThis game's school course is assessed at age [0m
+                [0m19[0m
+                [0m; its minimum leaving age is [0m
+                [0m16[0m
+                [0m. The secondary course requires final grades of at least 50% and twelve recorded study months. Leaving early does not earn the qualification. Adult recovery classes remain an option when eligible.[0m
+              [36m</Text>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Study Harder. Put in extra study once this year"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33maccessible[39m=[32m{false}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mStudy Harder[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mPut in extra study once this year[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Classmates. Make friends and spend time together. 4"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mClassmates[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mMake friends and spend time together[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m4[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Teachers. Build trust and ask for help"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{false}[39m
+                    [33maccessibilityLabel[39m=[32m"Sofia Ricci"[39m
+                    [33maccessibilityRole[39m=[32m"image"[39m
+                    [33maccessible[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"auto"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<View[39m
+                        [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                        [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                      [36m>[39m
+                        [36m<Image[39m
+                          [33maccessible[39m=[32m{false}[39m
+                        [36m/>[39m
+                        [36m<View>[39m
+                          [36m<Image[39m
+                            [33maccessible[39m=[32m{false}[39m
+                          [36m/>[39m
+                        [36m</View>[39m
+                      [36m</View>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mTeachers[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mBuild trust and ask for help[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Extracurricular Activities. Sports, music, drama and science. No Club"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View />[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mExtracurricular Activities[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mSports, music, drama and science[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mNo Club[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Behave in Class. Choose how you spend your school days. quiet"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View />[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mBehave in Class[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mChoose how you spend your school days[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mquiet[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Study Routine. Balance grades and stress. balanced"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mStudy Routine[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mBalance grades and stress[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mbalanced[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Withdraw from Secondary School. Keep your incomplete record without earning a qualification. This game's school rules allow withdrawal from age 16"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": true,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mWithdraw from Secondary School[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mThis game's school rules allow withdrawal from age 16[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<Text[39m
+                [33maccessibilityRole[39m=[32m"header"[39m
+              [36m>[39m
+                [0mSchool Reports[0m
+              [36m</Text>[39m
+              [36m<Text>[39m
+                [0mA report is recorded after twelve months attending the same school.[0m
+              [36m</Text>[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</RCTScrollView>[39m
+      [36m</RNCSafeAreaView>[39m
+    [36m</RNCSafeAreaProvider>[39m
+
+      248 |     let view = render(frame()); expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: /^Leave course/ })).toBeNull(); view.unmount();
+      249 |     view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><School /></ThemeProvider></SafeAreaProvider>);
+    > 250 |     expect(screen.getByText(new RegExp(explanation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))).toBeOnTheScreen();
+          |                   ^
+      251 |     expect(encodeWorld(world())).toBe(payload); expect(world()).toEqual(initial); expect(rows()).toEqual(before); expectOldMoments(); view.unmount();
+      252 |   } finally { sqlite.close(); }
+      253 | });
+
+      at getByText (tests/ui/education-choice-save-flow.test.tsx:250:19)
+      at asyncGeneratorStep (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+PASS tests/game/businesses.test.ts (5.058 s)
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/game/travel.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/royalty.test.ts (22.646 s)
+PASS tests/game/legal.test.ts
+PASS tests/game/education-recovery.test.ts (7.957 s)
+PASS tests/ui/profile-will-save-flow.test.tsx
+PASS tests/ui/family-dialog-save-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/game/npc-courtships.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/game/services.test.ts (5.925 s)
+PASS tests/game/health-legal-availability.test.ts
+PASS tests/ui/student-loan-rate-flow.test.tsx (11.448 s)
+PASS tests/ui/profile-overview-save-flow.test.tsx
+PASS tests/ui/health-review-save-flow.test.tsx (30.505 s)
+PASS tests/game/workplaces.test.ts
+PASS tests/game/hourly-work.test.ts
+PASS tests/game/social.test.ts
+PASS tests/game/politics.test.ts
+PASS tests/ui/business-review-save-flow.test.tsx
+PASS tests/ui/legal-review-save-flow.test.tsx
+PASS tests/ui/hobby-introduction-save-flow.test.tsx (8.328 s)
+PASS tests/ui/career-plan-context-flow.test.tsx (5.038 s)
+PASS tests/game/school-withdrawal.test.ts
+PASS tests/ui/royalty-review-save-flow.test.tsx (5.612 s)
+PASS tests/game/estates.test.ts
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/ui/social-review-save-flow.test.tsx
+PASS tests/ui/travel-review-save-flow.test.tsx
+PASS tests/game/story-callbacks.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/game/npc-relationships.test.ts
+PASS tests/progression/expanded-progress.test.ts (12.887 s)
+PASS tests/game/everyday-life-stories.test.ts (29.697 s)
+PASS tests/game/health.test.ts
+PASS tests/game/early-home-stories.test.ts (16.255 s)
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/progression/financial-progress.test.ts
+PASS tests/ui/exercise-review-save-flow.test.tsx (17.886 s)
+PASS tests/game/music.test.ts
+PASS tests/game/childhood-stories.test.ts (6.502 s)
+PASS tests/ui/saved-files-flow.test.tsx (21.604 s)
+PASS tests/persistence/people-blocks.test.ts (20.958 s)
+PASS tests/ui/work-routine-save-flow.test.tsx (9.022 s)
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/game/assets-markets.test.ts
+PASS tests/persistence/action-checkpoints.test.ts (5.736 s)
+PASS tests/game/education-work-finance.test.ts
+PASS tests/game/family.test.ts
+PASS tests/game/school.test.ts
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/school-withdrawal-flow.test.tsx
+PASS tests/game/hobby-introductions.test.ts (17.407 s)
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/game/entrepreneur-policy.test.ts
+PASS tests/ui/career-review-save-flow.test.tsx
+PASS tests/ui/emigration-country-default.test.tsx
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/recovery-routine-save-flow.test.tsx (23.617 s)
+PASS tests/game/adult-relationship-stories.test.ts (11.562 s)
+PASS tests/ui/lifetime-statistics-flow.test.tsx (15.811 s)
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/service-context-flow.test.tsx
+PASS tests/persistence/tuple-checkpoints.test.ts (37.157 s)
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/annual-finances-projection.test.ts
+PASS tests/ui/hourly-work-flow.test.tsx
+PASS tests/game/hobby-events.test.ts
+PASS tests/ui/royalty-flow.test.tsx (5.519 s)
+PASS tests/game/relationships.test.ts
+PASS tests/ui/school-routine-save-flow.test.tsx (6.406 s)
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/criminal-policy.test.ts (22.675 s)
+PASS tests/game/workplace-stories.test.ts (8.17 s)
+PASS tests/game/job-interviews.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/scholarship-flow.test.tsx (5.973 s)
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/ui/education-recovery-flow.test.tsx (6.239 s)
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/lifetime-statistics-data.test.ts (8.327 s)
+PASS tests/ui/workplace-story-flow.test.tsx (9.702 s)
+PASS tests/ui/school-flow.test.tsx
+Terminated
