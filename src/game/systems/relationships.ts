@@ -1,3 +1,4 @@
+import { currentBestFriendship } from './friendshipSchemas';
 import { activeTrip, physicalLocation, samePhysicalPlace } from './travelSchemas';
 import { royalMarriage } from './royalty';
 import { serviceAway } from './serviceSchemas';
@@ -51,6 +52,7 @@ export function relationLabel(world: World, relation: Relationship, personId = w
   if (relation.kind === 'parent') return relation.from === personId ? relation.parentType === 'adoptive' ? 'Adopted child' : 'Child' : relation.parentType === 'adoptive' ? 'Adoptive parent' : 'Parent';
   if (relation.kind === 'guardian') return relation.from === personId ? 'In your care' : 'Guardian';
   if (relation.romance === 'married') return 'Spouse'; if (relation.romance === 'engaged') return 'Engaged'; if (relation.romance === 'dating') return 'Partner'; if (relation.romance === 'ex') return 'Former partner'; if (relation.romance === 'widowed') return 'Late partner';
+  if (currentBestFriendship(world, personId)?.relationshipId === relation.id) return 'Best friend';
   return relation.kind[0].toUpperCase() + relation.kind.slice(1);
 }
 function syncKind(relation: Relationship) {

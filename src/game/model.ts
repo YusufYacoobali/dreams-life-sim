@@ -1,3 +1,5 @@
+import { bestFriendshipSchema } from './systems/friendshipSchemas';
+import { validateBestFriendships } from './systems/friendshipValidation';
 import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
@@ -90,12 +92,12 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(34), engineVersion: z.literal(35), contentVersion: z.literal(10),
+  schemaVersion: z.literal(35), engineVersion: z.literal(36), contentVersion: z.literal(11),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
-  relationships: z.array(relationshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
+  relationships: z.array(relationshipSchema), bestFriendships: z.array(bestFriendshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
@@ -315,6 +317,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateEarnings(world, ledger);
   validateHourlyWork(world, ledger);
   validateNpcCourtships(world, ledger);
+  validateBestFriendships(world);
   validateTravel(world, ledger);
   validateSchools(world);
   validateWorkplaces(world);
@@ -550,5 +553,10 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 33 && parsed.engineVersion === 34) { parsed.schemaVersion = 34; parsed.engineVersion = 35; parsed.schoolWithdrawals = []; }
   // New social incident wording changes no existing bound decision or result.
   if (parsed && parsed.schemaVersion === 34 && parsed.engineVersion === 35 && parsed.contentVersion === 9) parsed.contentVersion = 10;
+  // Best-friend agreements begin only through a new explicit consent command.
+  // Old people, bound scenes, memories, money and RNG retain their exact values.
+  if (parsed && parsed.schemaVersion === 34 && parsed.engineVersion === 35) { parsed.schemaVersion = 35; parsed.engineVersion = 36; parsed.bestFriendships = []; }
+  // New health/context display copy affects future prompts only; stored text stays exact.
+  if (parsed && parsed.schemaVersion === 35 && parsed.engineVersion === 36 && parsed.contentVersion === 10) parsed.contentVersion = 11;
   return validateWorld(parsed, immutable);
 }

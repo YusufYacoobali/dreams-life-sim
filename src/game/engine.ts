@@ -1,3 +1,4 @@
+import { friendshipCommandSchema, type FriendshipCommand, refreshBestFriendships, resolveFriendship } from './systems/friendships';
 import { HobbyEventCommand, hobbyEventCommandSchema, resolveHobbyEvent } from './systems/hobbyEvents';
 import { LeisureCommand, leisureCommandSchema, resolveLeisure, refreshLeisure, leisureMonth } from './systems/leisure';
 import { PetCommand, petCommandSchema, resolvePets, petMonth, petOwnerDied } from './systems/pets';
@@ -50,9 +51,9 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -87,6 +88,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   legalDeath(world, person);
   socialDeath(world, person);
   recordFamilyDeath(world, personId);
+  refreshBestFriendships(world);
   settleBackground(world, person, world.date.year * 12 + world.date.month - 1);
   settleTax(world, person);
   serviceDeath(world,personId);
@@ -321,6 +323,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const assets = parseActivity(assetCommandSchema, command);
     const market = parseActivity(marketCommandSchema, command);
     const social = parseActivity(socialCommandSchema, command);
+    const friendship = parseActivity(friendshipCommandSchema, command);
     const family = parseActivity(familyCommandSchema, command);
     const estate = parseActivity(estateCommandSchema, command);
     const health = parseActivity(healthCommandSchema, command);
@@ -351,6 +354,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (assets.success) resolveAssets(world, assets.data);
     else if (market.success) resolveMarket(world, market.data);
     else if (social.success) resolveSocial(world, social.data);
+    else if (friendship.success) resolveFriendship(world, friendship.data);
     else if (family.success) resolveFamily(world, family.data);
     else if (estate.success) resolveEstate(world, estate.data);
     else if (health.success) { resolveHealth(world, health.data); if (player.stats.health === 0) recordDeath(world, player.id, 'critical health decline'); }
@@ -375,6 +379,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshStoryThreads(world);
   refreshLeisure(world);
   refreshWorkplaces(world);
+  refreshBestFriendships(world);
   world.revision++;
   return validateWorld(world, immutable);
 }

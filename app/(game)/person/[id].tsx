@@ -1,3 +1,4 @@
+import { BestFriendshipCard } from '../../../src/ui/BestFriendship';
 import React, { useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -30,6 +31,7 @@ function PersonDetails({ id }: { id: string }) {
   const world = useGame(s => s.world)!;
   const person = world.people[id];
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
+  const [friendshipReviewOpen, setFriendshipReviewOpen] = useState(false);
   const [panel, setPanel] = useState<'gift' | 'wedding' | null>(null), [amount, setAmount] = useState(''), [message, setMessage] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<{ command: SocialCommand | FamilyCommand; event: EventPresentation } | null>(null), [childName, setChildName] = useState('');
   const player = world.people[world.activePersonId], relation = person && relationFor(world, player.id, person.id), age = ageOn(player, world.date);
@@ -51,7 +53,8 @@ function PersonDetails({ id }: { id: string }) {
       {world.socialAccounts.filter(item => item.ownerId === person.id).map(item => <ActionRow key={item.id} title={'@' + item.handle} subtitle={item.status === 'memorial' ? 'Memorial social profile' : 'Social profile'} onPress={() => router.push({ pathname: '/social-profile/[id]', params: { id: item.id } })} />)}
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
     </Card> : <Body>This person could not be found.</Body>}
-    {!confirmation && (error || message) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{message ?? error}</Text>}
+    {!confirmation && !friendshipReviewOpen && (error || message) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{message ?? error}</Text>}
+    {person && relation && <BestFriendshipCard key={world.id + ':' + player.id + ':' + person.id + ':' + player.country + ':' + player.city + ':' + person.country + ':' + person.city} world={world} personId={person.id} onReviewChange={setFriendshipReviewOpen} />}
     {person && !person.died && relation && <>
       {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" disabled={busy} disabledReason={schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
       {colleague && <Card><Heading size={18}>{colleague.role === 'supervisor' ? 'Your Supervisor' : 'Your Coworker'}</Heading><Body muted>{workplace!.employer}</Body>{colleague.role === 'supervisor' && <><ActionRow title="Ask for Work Feedback" subtitle="Once a year · Uses 4 energy" disabled={busy} disabledReason={workFeedbackReason(world, workplace, id)} onPress={() => void dispatch({ type: 'work-feedback', workplaceId: workplace!.id, supervisorId: id })} /><ActionRow title="Ask for a Raise" subtitle="5% higher pay · Uses 6 energy" disabled={busy} disabledReason={workRaiseReason(world, workplace, id)} onPress={() => void dispatch({ type: 'request-raise', workplaceId: workplace!.id, supervisorId: id })} /></>}</Card>}

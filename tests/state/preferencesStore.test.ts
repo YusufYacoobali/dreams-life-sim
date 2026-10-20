@@ -18,7 +18,7 @@ test('old databases default to Light without a preference write; saved appearanc
   expect(await store.getState().setAppearance('dark')).toBe(true);
   const cold = createPreferencesStore({ repository: async () => repository }); expect(await cold.getState().bootstrap()).toBe(true); expect(cold.getState().settings.appearance).toBe('dark');
   expect(await repository.export(world.id)).toBe(archive); expect(await repository.active()).toEqual(world);
-  expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 14 }); sqlite.close();
+  expect(sqlite.prepare('PRAGMA user_version').get()).toEqual({ user_version: 15 }); sqlite.close();
 });
 test('a real SQLite write failure preserves the prior appearance, life, active preference and history; retry saves exactly the pending choice', async () => {
   const { sqlite, repository, world, archive, store } = await fixture(); await store.getState().bootstrap(); await store.getState().setAppearance('dark');

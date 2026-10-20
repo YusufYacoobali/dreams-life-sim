@@ -71,13 +71,13 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 34, engineVersion: 35, contentVersion: 10, id, revision: 0, date: { ...date },
+    schemaVersion: 35, engineVersion: 36, contentVersion: 11, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },
     people,
     relationships: guardians.map((p, i) => ({ id: 'relation_parent_' + i, from: p.id, to: player.id, kind: 'parent' as const, roles: ['parent'], romance: 'none', since: { ...date }, parentType: 'biological', strength: roll(65, 95), trust: roll(65, 95), memories: ['birth'], lastInteractionYear: date.year })),
-    households: [{ id: 'household_birth', name: input.lastName + ' household', members: [player, ...guardians].map(person => person.id), homeAssetId: null }], marriages: [],
+    bestFriendships: [], households: [{ id: 'household_birth', name: input.lastName + ' household', members: [player, ...guardians].map(person => person.id), homeAssetId: null }], marriages: [],
     pregnancies: [], custody: [],
     legacyAnnual: null, wills: [], estates: [], generation: 1, legacies: [],
     deferred: [], pendingPriority: 0, incidents: [], cases: [], sentences: [], remand: [], contraband: [], gangs: [],

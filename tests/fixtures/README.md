@@ -166,3 +166,20 @@ and pre-extra-practice (43) moments. No identity, date, consent, price, money,
 progress, RNG, outcome or version was manually changed. Preserve every field
 and all nine prior moments; cold acknowledgement/continuation must not repeat
 the manual practice or old monthly charges. Never regenerate with newer code.
+
+`v34-natural-editorial-us-checkpoint.json` adds the **unchanged** 526,545-byte
+terminal production checkpoint from frozen `73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa`
+(World 34 / engine 35 / content 10), completed US900 varied-choice editorial
+policy v1. It records actual SQLite birth/acknowledgement, then 225 normal
+immutable pure-engine commands; the person naturally died at age 49 with Asthma
+on 1 June 2049, revision 226. This is one reused country seed from the completed
+12-country C35 editorial run, not a new seed, native run, full SQLite journey or
+all-template coverage. The wrapper retains exact game/store/driver/tool/lock
+source pins, trace and raw-record checksums. Original checkpoint SHA256 is
+`afbd3a1a85bc05cbc046917fd61195545fa9e0704bd2aced19c0be1981809901`;
+original canonical world SHA256 is
+`03cced796c1fb4a0b1f24e63ef0b3cd1673b5fec0412b4dcd4ca8b6b667a92fd`.
+Migration may only add empty `bestFriendships` and change the current root tags;
+removing that field and restoring 34/35/10 must recover the original proof.
+Never regenerate this fixture or change original school withdrawals, pending,
+thread, journal, estate, money, RNG or history to fit a later implementation.
