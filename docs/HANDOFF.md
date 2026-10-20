@@ -4,7 +4,11 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Continue `YusufYacoobali/dreams-life-sim`, branch `work`, through the complete
 production plan. Priorities: smooth buttons, startup/onboarding and early gameplay.
 All27 supplied references are reconciled; reopen the relevant reference for each
-UI milestone. The user explicitly wants continued work, including overnight.
+UI milestone. Latest user scope: prioritise finishing gameplay. Automatic saving
+and resuming exactly where play stopped are required. Additional load/save tools,
+import/export/sharing, Time Machine breadth and history-storage optimisation are
+parked; do not spend further milestones on them. Existing working features and
+old data remain intact. The user explicitly wants continued work, including overnight.
 A routine checkpoint is not the end of the task. A final reply stops active work;
 never imply that coding continues in the background after ending the run.
 
@@ -16,7 +20,33 @@ stays parked; the existing80%+ implementation's folder-save check passed. Read-o
 previous-life summaries are complete. Full production remains approximately
 **50%**; the catalogue is now **125/250 minimum**, with **125 situations remaining**.
 
-## Current compact checkpoint and family storage work
+## Current opening actions
+
+Creation, Appearance and newborn primary actions remain visible below scrolling
+content and above the keyboard. Blank names show useful errors before confirmation;
+the newborn copy explains Age Up. All99UI/state checks across44suites pass in
+113.682seconds, strict app/test types and both fresh Hermes exports. Simulation/
+persistence stay byte-identical to1542133; its full1,457-test/120-seed gates retain
+their original scope. Do not compose a new whole-regression or seed total.
+[Source/checks](verification/opening-actions-20261020.json), [mechanics/scope](OPENING_ACTIONS.md).
+
+Actual Android normal/130% text, open keyboard, name error, Avatar7/editor return,
+newborn0, cold unfinished introduction, Begin Life1 and cold dashboard pass. Both
+cold comparisons retain all eight tables. All six old lives/backups,55moments/
+metadata and75old receipts stay exact. Current native: **Alex Martín age0 / revision1**,
+`life_mvgprdj2_16qsril_0`, **seven lives /55moments /76receipts**, no pending/year.
+Nia91, Amahle83, Riley53/branch38 remain untouched. Original system font scale1.0
+is restored. [Ten captures and exact scope](verification/android24-opening-actions-20261020/).
+Native copies: `/tmp/dreams-opening-actions-cold-begun-db` (current), `-begun-db`,
+`-cold-born-db`, `-born-db`, `-draft-db`; original six-life baseline is
+`/tmp/dreams-creation-footer-before-db`. UI helper now also supports
+`dismiss-expo-notice`, requiring a fresh hierarchy and one unambiguous close.
+Temporary coordinate-only keyboard diagnostics were removed before final captures.
+
+Next: ordinary-job interviews and work details, then remaining125situations and
+broader gameplay. Further file/history work is explicitly parked by the user.
+
+## Prior compact checkpoint and family storage work
 
 Checkpoint v4 removes the reproduced year-91 save-size block by recording ledger
 columns once and exact money as decimal strings. Full validation and immutable
@@ -30,8 +60,11 @@ and 892 receipts remain exact. Its year-91 world matches the pinned original
 world completely. The broader gate remains open: database/WAL/SHM reaches
 162,931,384 bytes and the final archive exceeds its existing size limit, so the
 process correctly exits 1. No save command failed. [Raw scope](verification/family-storage-tuples-20261020/).
-Next share repeated history blocks without pruning or changing original bytes;
-measure the real database again. A read-only fragment estimate is not a budget pass.
+The user has now parked further history-storage/archive work. These limits are
+recorded rather than pursued. Normal save/continue and the three-generation
+capacity check remain verified. The sharing prototype is unintegrated outside
+the app at `/workspace/.cache/dreams-history-sharing-20261020`; its dependency was
+removed from package/lock files. A fragment estimate is not a production budget pass.
 
 All 1,457 tests / 106 suites pass in 999.106 seconds, strict app/test types and
 fresh Android/iOS Hermes exports. All same 120 immutable seeds pass in
@@ -49,7 +82,7 @@ Actual Android's real mindfulness edit saves exact revision 90 in v4 while keepi
 original v3 backup 89. Cold result 90 retains all eight tables; acknowledgement 91
 matches the entire expected world and keeps v4 people/ledger blocks and original
 backup 90 exact. All five inactive lives/backups, 55 moments/metadata and 73 old
-receipts remain exact. Current native: **Nia age 19 / revision 91**, six lives /
+receipts remain exact. At the compact checkpoint: **Nia age 19 / revision 91**, six lives /
 55 moments / 75 receipts, no pending/year. Native upgrade timing is scoped in
 [the exact record](verification/android24-compact-transactions-20261020/journey-exact.json);
 no native SQL/world/RNG edits or physical timing claim. Final native copy:
@@ -305,9 +338,10 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, continue the complete plan: measure 120-calendar-year/three-generation
-SQLite/storage integration with retained history, correct measured problems, and
-continue early-game usability, adult content and work depth.
+Next, continue opening/early-game usability, real work interviews/hours, the
+remaining125situations, family/career/leisure depth, achievements and visual/release
+work. The natural three-generation save/continue journey is verified. Further
+archive/history-storage work is explicitly parked by the latest user instruction.
 The genuine named result76 remains protected by its original74be9e4 producer.
 Keep the diagnostic setup explicit;
 a synthetic1000-person cloud case is not a natural/native120-year/multigeneration

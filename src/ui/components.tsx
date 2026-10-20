@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator, Pressable, ScrollView,
+  ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView,
   StyleProp, StyleSheet, Text, View, ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,13 +8,17 @@ import { radii, spacing, ThemedStatusBar, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
 import { useDelayedBusy } from './useDelayedBusy';
 
-export function Page({ children, scroll = true, bottomSafeArea = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean }>) {
+export function Page({ children, scroll = true, bottomSafeArea = false, footer }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode }>) {
   const c = useColors();
+  const content = <>
+    {scroll ? <ScrollView style={footer ? { flex: 1 } : undefined} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{children}</ScrollView>
+      : <View style={[styles.content, footer ? { flex: 1 } : undefined]}>{children}</View>}
+    {footer && <View style={[styles.footer, { backgroundColor: c.background, borderTopColor: c.line }]}>{footer}</View>}
+  </>;
   return (
     <SafeAreaView edges={bottomSafeArea ? ['top', 'bottom'] : ['top']} style={[styles.page, { backgroundColor: c.background }]}>
       <ThemedStatusBar />
-      {scroll ? <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{children}</ScrollView>
-        : <View style={styles.content}>{children}</View>}
+      {footer ? <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>{content}</KeyboardAvoidingView> : content}
     </SafeAreaView>
   );
 }
@@ -116,6 +120,7 @@ export const Portrait = CharacterPortrait;
 const styles = StyleSheet.create({
   page: { flex: 1 },
   content: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xl, gap: spacing.lg },
+  footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md, gap: spacing.sm, borderTopWidth: StyleSheet.hairlineWidth },
   card: { borderRadius: radii.card, padding: spacing.lg, gap: spacing.md },
   button: { minHeight: 50, paddingHorizontal: 16, paddingVertical: 13, borderRadius: 12, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 8 },
   buttonLabel: { fontSize: 17, fontWeight: '600', textAlign: 'center' },

@@ -50,3 +50,18 @@ test('random creation previews and rerolls a real separate seed; customising kee
 test('starting another life requires the concrete confirmation and keeps the previous saved life', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); const original = createLife('life_existing', 9, randomCreation(9), { year: 2026, month: 10, day: 19 }); original.birthAcknowledged = true; await repository.create(original); mockStore = createGameStore({ repository: async () => repository, date: () => original.date, id: () => 'life_second' }); await mockStore.getState().bootstrap(); mockParams = { seed: '42', mode: 'custom' }; const view = render(frame(<NewLife />)); await press('Start My Life'); expect(screen.getByText('Start another life?')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(original); await press(/Never mind/i); expect(await repository.list()).toHaveLength(1); await press('Start My Life'); await press('Start a New Life'); await waitFor(() => expect(mockStore.getState().world?.id).toBe('life_second')); expect(await repository.list()).toHaveLength(2); expect(await repository.load(original.id)).toEqual(original); view.unmount(); sqlite.close();
 });
+
+test('blank names show a useful error before new-life confirmation and leave the existing life untouched', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  const original = createLife('life_existing_names', 9, randomCreation(9), { year: 2026, month: 10, day: 19 }); original.birthAcknowledged = true;
+  await repository.create(original); mockStore = createGameStore({ repository: async () => repository, date: () => original.date, id: () => 'life_invalid_names' }); await mockStore.getState().bootstrap();
+  mockParams = { seed: '42', mode: 'custom' }; const view = render(frame(<NewLife />));
+  fireEvent.changeText(screen.getByLabelText('First name'), '   '); await press('Start My Life');
+  expect(screen.getByText('Enter a first name.')).toBeOnTheScreen(); expect(screen.queryByText('Start another life?')).toBeNull();
+  fireEvent.changeText(screen.getByLabelText('First name'), 'Alex'); fireEvent.changeText(screen.getByLabelText('Last name'), ''); await press('Start My Life');
+  expect(screen.getByText('Enter a last name.')).toBeOnTheScreen(); expect(screen.queryByText('Start another life?')).toBeNull();
+  expect(mockStore.getState().world).toEqual(original); expect(await repository.load(original.id)).toEqual(original); expect(await repository.list()).toHaveLength(1);
+  fireEvent.changeText(screen.getByLabelText('Last name'), 'Carter'); await press('Start My Life'); expect(screen.getByText('Start another life?')).toBeOnTheScreen();
+  await press(/Never mind/i); expect(useCreationDraft.getState().draft!.input).toMatchObject({ firstName: 'Alex', lastName: 'Carter' });
+  expect(await repository.list()).toHaveLength(1); view.unmount(); sqlite.close();
+});

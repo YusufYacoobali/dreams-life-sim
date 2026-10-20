@@ -19,7 +19,10 @@ export default function Birth() {
   if (world.birthAcknowledged) return <Redirect href="/life" />;
   const player = world.people[world.activePersonId], parents = world.relationships.filter(edge => edge.roles.includes('parent') && edge.to === player.id).map(edge => world.people[edge.from]);
   const born = months[player.born.month - 1] + ' ' + player.born.day + ', ' + player.born.year, membership = royalMembership(world);
-  return <Page bottomSafeArea>
+  return <Page bottomSafeArea footer={<>
+    {error && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{error}</Text>}
+    <Button label="Begin Life!" busy={busy} onPress={async () => { if (await acknowledge()) router.replace('/life'); }} />
+  </>}>
     <View style={{ alignItems: 'center', paddingTop: 12, gap: 14 }}>
       <View style={{ width: 230, height: 164, alignItems: 'center', justifyContent: 'center' }}>
         <View style={{ backgroundColor: '#D9F2FE', width: 158, height: 158, borderRadius: 79, alignItems: 'center', justifyContent: 'center' }}><Portrait name={fullName(player)} appearance={player.appearance} age={0} size={145} /></View>
@@ -34,8 +37,6 @@ export default function Birth() {
       <View style={{ flexDirection: 'row', gap: 15, paddingVertical: 12, borderTopWidth: 1, borderTopColor: c.line }}><Ionicons name="people" size={28} color={c.purple} /><View style={{ flex: 1 }}><Heading size={16}>{parents.length === 1 ? 'Parent' : 'Parents'}</Heading>{parents.map(parent => <Body key={parent.id} muted>{fullName(parent)} · {parent.gender === 'female' ? 'Mother' : parent.gender === 'male' ? 'Father' : 'Parent'}, {ageOn(parent, world.date)}</Body>)}</View></View>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, paddingVertical: 12, borderTopWidth: 1, borderTopColor: c.line }}><Ionicons name="home" size={28} color={c.teal} /><View style={{ flex: 1 }}><Heading size={16}>Hometown</Heading><Body muted>{player.city}, {countries[player.country].name}</Body></View></View>
     </Card>
-    <Card style={{ backgroundColor: c.inset }}><Body centered>Your story starts here. A family to meet, a world to discover, and plenty of decisions ahead.</Body></Card>
-    {error && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{error}</Text>}
-    <Button label="Begin Life!" busy={busy} onPress={async () => { if (await acknowledge()) router.replace('/life'); }} />
+    <Card style={{ backgroundColor: c.inset }}><Body centered>Tap Age Up to live through the next year. Your life pauses when a choice needs you.</Body></Card>
   </Page>;
 }

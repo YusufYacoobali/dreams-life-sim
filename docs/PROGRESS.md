@@ -10,9 +10,31 @@ After reconciliation, work autonomously through the phases. Each milestone must 
 
 Confirmed product choices: adults with non-graphic mature themes, and a wider international selection at launch. The current country proposal contains twelve countries and nine currencies; do not reduce launch scope to US/UK without a product decision.
 
+Latest user priority, 20 October: finish gameplay; require reliable automatic
+saving and resume, and park further load/save tools, import/export/sharing,
+Time Machine breadth and history-storage optimisation. Existing working features
+and old data stay intact. The current breakdown is in
+[Opening plan: current assessment](OPENING_PLAN.md#current-assessment); overall
+completion remains approximately50%, with125/250situations implemented.
+
 ## Current milestone: opening experience and startup reliability
 
-Compact checkpoint v4 removes the reproduced year-91 save-size block. Ledger
+Opening primary actions now stay visible through creation, appearance and newborn
+introduction, including above the keyboard. Blank-name errors precede confirmation;
+newborn copy explains Age Up. All **99 UI/state checks /44suites** pass in
+**113.682seconds**, strict app/test types and fresh Android/iOS Hermes exports.
+Game/persistence remain byte-identical to1542133; no new whole-regression or seed
+count is inferred. [Source and checks](verification/opening-actions-20261020.json).
+
+Actual Android normal/130% text, keyboard, name error, Avatar7/editor return,
+newborn0/cold0/BeginLife1/cold1 pass. Both cold comparisons keep all eight tables
+exact; all six old lives/backups,55moments/metadata and75old receipts remain exact.
+Final native: Alex Martín age0/revision1, seven lives/55moments/76receipts. Original
+font scale1.0 restored. Broader visual/accessibility/physical/standalone/iOS gates
+remain open. [Ten native captures and exact scope](verification/android24-opening-actions-20261020/).
+Continue work interviews/details and remaining stories; extra file/history work is parked.
+
+The preceding compact checkpoint v4 removes the reproduced year-91 save-size block. Ledger
 field names are recorded once; money remains exact decimal text. Old current,
 backup and historical bytes remain untouched until actual commands commit.
 Full validation, immutable block reuse and bounded old/new decoding remain intact;
@@ -37,8 +59,8 @@ The real SQLite family journey now completes three natural deaths over 172 years
 8 months. All 43 cold comparisons, 173 original annual checkpoint payloads/metadata
 and 892 receipts remain exact; its year-91 world equals the original pinned world.
 The complete storage gate stays open: database/WAL/SHM reaches 162,931,384 bytes
-and the final archive exceeds its existing limit (process exits 1). Next remove
-repeated history data without dropping or changing original checkpoints.
+and the final archive exceeds its existing limit (process exits 1). Further history/archive work is parked by the latest user instruction; normal
+automatic save/continue remains required.
 [Raw results and limits](verification/family-storage-tuples-20261020/).
 
 Actual Android saves the real mindfulness edit as exact v4 result 90, retaining
@@ -849,7 +871,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | 3 — Core playable life | In progress | Deterministic monthly/annual progression, persistent decisions/results, journal and terminal death; native-device acceptance and broader system integration pending |
 | 4 — Core life systems | In progress | Education, ordinary work, ownership/markets, relationships/family, divorce/custody and wills/estate implemented; persistent school contacts implemented; evening recovery and restricted tuition scholarships implemented; national stage depth and broader acceptance remain pending |
 | 5 — Expanded gameplay | In progress | Health/clinical care/lifestyle, crime/court/prison/black market and social media/fame, companies and acting/modelling/sport, live-music/recording, election/office, YouTuber/Streamer studios and Astronaut/Military service implemented; royal families/duties/succession implemented; holidays/gap years and permanent emigration/work/study offers implemented; persistent pets and four hobby/four outing routines implemented; broader leisure breadth and acceptance remain planned |
-| 6 — Content, depth, legacy, Time Machine | In progress | 90 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
+| 6 — Content, depth, legacy, Time Machine | In progress | 125 implemented age/context templates, two saved callback families, visible school plans, existing-child legacy and historical branch restore; 250+ target, broad coverage and extras remain pending |
 | 7 — Polish and release validation | Not started | Implementation has domain/component checks; native-device comparison and release gates remain open |
 
 ## Feature status
@@ -859,7 +881,7 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Four-tab UI, Life dashboard, shared components and modal flows | Partial: routed app and nested family/profile/health views; five bars, factual journal and cash | Native components and native bundles verified; no device fidelity claim |
 | Identity, custom/random creation, family, appearance and ageing | Partial: editable identity/appearance, deterministic random creation, actual parent links, generated portraits and eight visual age stages | Twelve-country creation/domain tests pass; 120px browser layer review complete; native rendering/fidelity pending |
 | Seeded engine, resumable annual progression, stats and invariants | Partial: monthly calendar, original leap-day anchor, NPC/player ageing and mortality, bounded effects, persistent annual frame | 120 complete seeded core lives; deterministic decisions, resume, terminal death and direct-command gates pass; no full-system balance claim |
-| Context-aware events, decisions, delayed consequences and journal | Partial: 100 original age/context templates, available-household/explicit remote-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
+| Context-aware events, decisions, delayed consequences and journal | Partial: 125 original age/context templates, available-household/explicit remote-parent/current-school contact binding, five-year cooldown, committed results and journal; arcade and project callbacks with visible school plans | Decision/result round-trip, eligibility and callback lifecycle checks pass; broader stories and device acceptance remain open |
 | SQLite saves, migrations, recovery and import/export | Partial: transactional commands/checkpoints, schema migration, explicit recovery and compressed full-history local archives | Real SQLite migration/recovery/failure/reload/archive tests pass; native import/folder-save checks pass; broader platform/device acceptance remains open |
 | Education, exams, admissions, tuition, scholarships and loans | Partial: public school progression, persistent classmates/teachers, clubs/conduct/reports, grades/study routines, admission, six subjects, trade/degree/professional study, tuition funding/pause and debt, attended adult remediation and restricted scholarships; national stage/qualification depth remains pending | Twelve profile boundaries, school→degree→qualified job, 44 scholarship checks and connected SQLite aid rollback/retry/cold journeys pass; national and native acceptance remain open |
 | Jobs, pay, performance, promotion, dismissal and retirement | Partial: eighteen ordinary roles, qualification/age gates, applications, monthly contracts, routines, promotion/dismissal, work history, earned pension, persistent ordinary-work colleagues/supervisors and annual feedback | Exact partial-year pay/tax, twelve-country introductions, qualified professional/teen staff, genuine migration and SQLite/UI failure/retry/cold work checks pass; richer interviews/hours, conflicts and broader balance remain open |
@@ -872,11 +894,11 @@ The first birth-to-death engine is implemented. Continue through every remaining
 | Businesses and all eleven special-career paths | Partial: five company types, actual staff/payroll, management, funding/distributions, distress/sale and company bequests; acting/modelling/sport/music selection, training and timed contracts, funded recording/royalties and actual campaigns/elections/office terms, YouTuber/Streamer equipment, live production and freelance crew; Astronaut/Military training, service and assignments; royal family/duty/succession path connected to actual birth/marriage/children/death | Domain, currency, deterministic journeys, migration and native-component→real-SQLite checks; device acceptance and broader balance remain open |
 | Travel, emigration, work/study abroad, pets, hobbies and entertainment | Partial: twelve destinations, prepaid holidays/gap years, actual monthly experiences, temporary location, employment/study leave, household companions/consent, caregiver checks, interruption and partial early-return refunds; permanent family moves, real work/study offers, source tax settlement, local reserve funding and tuition; persistent household pets with real monthly costs/ownership and care implemented; four persistent hobbies and four paid outings implemented; remaining leisure breadth and acceptance remain pending | Focused domain/component checks, country quotes, real SQLite rollback/retry and current/historical v18/v19 archive migration; complete regression/types/native bundles pass; device/release acceptance pending |
 | Country-specific rules and all proposed launch currencies | Partial: twelve authored education/work/finance/health-fee/estate profiles and nine currencies, with shared documented family/medical assumptions and twelve authored legal baselines; shared authored immigration/offer rules now connected | Arithmetic/progression and local fee/family/estate checks pass; partial official education-source audit is recorded in COUNTRY_RULES.md; all complete-profile verification gates remain open |
-| Achievements, challenges, heirlooms and statistics | No | No |
+| Achievements, challenges, heirlooms and statistics | Partial: factual per-person achievements/challenges, proportional goals, statistics and received-heirloom views; broader goals and gameplay depth remain | Current-person history, paid work/repayment months, trips and actual inheritance checks pass; broader balance and native acceptance remain open |
 | Death, factual life summary, estate and existing-child legacy | Partial: terminal full-screen death, actual career/children/property summary, will/protected heirs, debt/tax-first settlement, specific ownership bequests, minor trusts and same-child continuation with preserved annual cursor | Conservation, all twelve local-currency NPC estates, real v6 migration, a three-generation journey and native legacy storage-failure→retry/cold-load pass; broader seeded/device acceptance pending |
 | Historical snapshots and Time Machine branches | Implemented core: complete compressed checkpoints before Age Up, explicit saved moments, reviewed separate-branch restore, original future preserved, only prior history copied, local archive round-trip | Atomic rollback/idempotency, exact RNG/outcomes/market restoration, corruption rejection, recovery history pruning and native confirmation→SQLite failure/retry pass; large/native acceptance pending |
 | Custom generated artwork and portrait continuity | Partial: twelve activity, sixteen ownership, twelve family and sixteen time/health/legal and sixteen social/fame/business illustrations, memorial and layered portraits; health/legal subjects connected to their systems | Sources inspected, 120px portrait and 128px ownership/family/health/legal browser reviews complete; native-device fidelity and remaining families pending |
-| 250+ distinct high-quality approved event templates | 70 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
+| 250+ distinct high-quality approved event templates | 125 implemented; target remains at least 250, planned allocation 256 | Age/context/cooldown logic tested; full editorial review, breadth and system coverage remain pending |
 | Accessibility, performance, native-device UI and release builds | Partial: accessible shared controls and production bundles; broader audit/performance/device/release gates pending | Component interactions and bundle generation; no native-device claim |
 
 ## Verification record

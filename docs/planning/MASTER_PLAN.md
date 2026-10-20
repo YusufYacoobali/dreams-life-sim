@@ -6,6 +6,12 @@ Prepared 18 October 2026 against the supplied master specification. The user has
 
 [Implementation progress and verification](../PROGRESS.md) records the current gate, feature status, and evidence. The first playable milestone does not end the authorised scope.
 
+20 October scope update: automatic saving and resuming where play stopped remain
+required. The user explicitly parks further load/save tools, import/export/sharing,
+Time Machine breadth and history-storage optimisation. Existing implemented
+features/data remain intact. Continue the full gameplay, content, visual and
+release plan; this update takes precedence over older file-feature priorities.
+
 ## Product decision
 
 Build a fast, offline life simulator around **Age Up → event → choice → consequence → journal**. The player can also take short, meaningful actions between years. A satisfying ordinary life must be as viable as a criminal, famous, wealthy, unlucky, or chaotic one.

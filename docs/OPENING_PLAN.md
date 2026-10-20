@@ -4,6 +4,25 @@ The user redirected priority on 19 October 2026 after reporting a real startup
 crash and substantial differences from the supplied designs. Complete the
 opening path before resuming pets, hobbies or other later features.
 
+Latest scope update, 20 October: keep automatic saving/resuming reliable; park
+additional load/save tools, import/export/sharing, Time Machine breadth and
+history-storage optimisation. Existing working features and old data stay intact.
+The current pushed 1542133 passes all 1,457 tests / 106 suites, strict types,
+both Hermes exports and the same 120 immutable lifetimes. Actual Android routine
+90 / cold 90 / acknowledgement 91 are exact. The natural three-generation journey
+runs for 172 years 8 months with 43 exact cold checks; storage/archive limits are
+recorded as deferred. [Current save/resume evidence](COMPACT_TRANSACTIONS.md).
+
+Opening actions now stay visible through creation, appearance and newborn,
+including above the keyboard. All99UI/state checks/44suites, strict types and both
+Hermes exports pass. Actual Android normal/130% text, keyboard validation, Avatar7
+return, new life0/cold unfinished introduction/BeginLife1/cold dashboard are exact.
+All six old lives/history stay intact. Simulation/persistence remain1542133;
+no unchanged gate rerun or new whole-regression total is claimed.
+[Current opening milestone](OPENING_ACTIONS.md). Baseline production estimates
+remain conservative; this closes the primary-action/resume case, not complete
+visual/accessibility/platform acceptance.
+
 Content seven adds **15 adult friendship/partner situations and 45 choices**,
 bringing the catalogue to **125/250 minimum, with 125 remaining**. Existing adult
 friends/current partners must be locally available. Exact names/person/bond IDs
@@ -275,24 +294,26 @@ mechanics tests does not establish visual fidelity or device readiness.
 
 | Area | Estimate | Remaining work |
 | --- | ---: | --- |
-| Onboarding and creation | 45% baseline | Native visual review, creation/newborn polish and device acceptance |
-| Life screen and early childhood | 55% baseline | More early-story callbacks and native layout/interaction review |
-| Core simulation and Age Up | 80% | Broad system integration, long-life balance and performance |
-| Saves/recovery/export/import | 80% | Native picker/share, large archives and release acceptance |
-| Education and ordinary work | 70% | School contacts, evening recovery and tuition scholarships implemented; country/stage depth and native acceptance remain |
-| Relationships/family/inheritance | 75% | Broader autonomous-life depth, integrated scenarios and device acceptance |
-| Assets and finances | 80% | Balance, broad integration and native acceptance |
-| Health and crime/legal | 70% | Rule-source verification, balance, integrated scenarios and native acceptance |
-| Special careers/businesses | 70% | Breadth of stories, balance, integrated journeys and device acceptance |
-| Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
-| Pets/hobbies/entertainment | 5% baseline | Persistent pets plus four hobby/four outing paths implemented with automated checks; broader leisure breadth and native acceptance remain pending |
-| Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% baseline | 110 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
-| Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
-| Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
+| Onboarding and creation | 45% | Creation/newborn usability, matched native visual review and platform acceptance |
+| Life screen and early gameplay | 55% | More early consequences and native interaction/layout polish |
+| Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
+| Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
+| Education and ordinary jobs | 70% | Richer interviews/hours, national education depth and broader balance |
+| Relationships, family and inheritance | 75% | More autonomous-life depth, integrated stories and device acceptance |
+| Money, assets and markets | 80% | Balance, broad integration and device acceptance |
+| Health, crime and legal systems | 70% | Country-rule audit, balance and broader integrated journeys |
+| Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
+| Travel and emigration | 75% | Country verification and broader scenarios/device acceptance |
+| Pets, hobbies and entertainment | 35% | Existing persistent pets/four hobbies/four outing paths need more breadth and native review |
+| Situational stories | 50% implemented | 125 of the minimum250 implemented;125remaining, plus full coverage/editorial acceptance |
+| Achievements and challenges | 25% | More factual goals, unlocks and meaningful challenges |
+| Visual polish and accessibility | 50% | Matched-viewport comparisons, remaining art and full accessibility review |
+| Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
-These baseline estimates are retained until the corresponding opening checks
-are completed; a hotfix or generated illustration alone does not advance them.
+Overall remains approximately **50%**. These are conservative effort estimates,
+not acceptance scores or a simple average. Story counts measure implemented source
+situations, not completed editorial/release acceptance. Additional file/history
+work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 

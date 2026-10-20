@@ -4,6 +4,13 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `opening-actions-20261020.json` / `ui-state-opening-actions-20261020.txt`
+  record99UI/state checks/44suites, types and both Hermes exports for visible,
+  keyboard-aware opening actions. Game/persistence are unchanged1542133.
+  `android24-opening-actions-20261020/` retains ten captures, normal/130% text,
+  name validation, actual newborn0/cold0/BeginLife1/cold1 and exact old-data scope.
+  Original font scale is restored; no new whole-regression or seed total claim.
+
 - `compact-transactions-20261020.json` records final source/gates for v4 / reader 8.
   `compact-transactions-comparison-20261020.json` preserves the serial fixed-driver
   pair: 14 identical worlds/commands, four exact complete stress outcomes and

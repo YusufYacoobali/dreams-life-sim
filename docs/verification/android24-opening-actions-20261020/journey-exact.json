@@ -1,0 +1,171 @@
+{
+  "recordedOn": "2026-10-20",
+  "scope": "Actual Android24/ExpoGo 130% text, keyboard-aware opening actions, blank-name validation, Avatar7 return, actual new life0, interrupted newborn cold resume, BeginLife1 and cold resume. Only completed checks below are claimed. No imports/exports/native SQL/world/RNG edits.",
+  "source": {
+    "recordedOn": "2026-10-20",
+    "baseCommit": "1542133d223be743a697cffb477af10af5293fc8",
+    "scope": "Always-visible primary actions through creation/appearance/newborn; blank-name validation before confirmation; user parks further file/history work",
+    "source": {
+      "app/new-life.tsx": "4f4ec728cab337e194ef5ed0dfdb0d338a617d1c3cb8c875443caeafdbb5dc9b",
+      "app/appearance.tsx": "05fb1901bf8dc92d11bade791321938d3753a4f9bdb13b95714a9ed7e4325c78",
+      "app/birth.tsx": "69184edf4759dd155f96a7ff9f2cb541d24133ef98448088bdebe4860ed218ef",
+      "src/ui/components.tsx": "1933c266f3e63cad155c339017ed09afbc310f8ed0d1c3b193469e91918122a3",
+      "tests/ui/onboarding-flow.test.tsx": "661acdc31ed2291361f4ca3be4cd05840cb6dc6f537f863fc16422284247c359"
+    },
+    "unchangedGameSourceHash": "c0779428fd8b7b1757bae7e2c5e61915a84306a6037721b6840954ea422246ac",
+    "unchangedCombinedGamePersistenceSourceHash": "836252759ee9fa23f06605573cf8186ae5f60164cafa0104d587c8feee7ddeae"
+  },
+  "activeLifeId": "life_mvgprdj2_16qsril_0",
+  "person": {
+    "name": "Alex Mart\u00edn",
+    "country": "ES",
+    "city": "Barcelona",
+    "avatar": 7
+  },
+  "initialFontScale": "1.0",
+  "checks": {
+    "all8DraftTablesExact": true,
+    "bornEntireWorldAndAll6OldLivesBackups55Moments75ReceiptsExact": true,
+    "coldBornEntireWorldAndAll6OldLivesBackups55Moments75ReceiptsExact": true,
+    "begunEntireWorldAndAll6OldLivesBackups55Moments75ReceiptsExact": true,
+    "coldBegunEntireWorldAndAll6OldLivesBackups55Moments75ReceiptsExact": true,
+    "coldBegunAll8TablesExact": true,
+    "coldBornAll8TablesExact": true
+  },
+  "worldHashes": {
+    "born0": "751adb1f51f246759b310d3d1dfdac856b90507c7f569ca2bb7c18ca41cfe729",
+    "begun1": "7f8f479c72e3be62d269030427f41e162a3b7e36c1171caecc050800a84c4a69"
+  },
+  "limits": "Software Android24 compatibility/usability/durability, not full visual fidelity, physical p95, standalone or iOS acceptance. Font changes can recreate the activity; no unsaved-draft-across-recreation claim.",
+  "finalRevision": 1,
+  "finalAge": 0,
+  "fontScaleRestoredTo": "1.0",
+  "counts": {
+    "backups": 7,
+    "branches": 1,
+    "lives": 7,
+    "preferences": 1,
+    "receipts": 76,
+    "restore_receipts": 1,
+    "snapshot_metadata": 55,
+    "snapshots": 55
+  },
+  "origin": "Newborn0 was created by actual native form input; its identity/location/Avatar7 are checked. Expected BeginLife1 changes only birthAcknowledged/revision on that actual newborn. No known-seed replay of native creation is claimed.",
+  "primaryActionBounds": {
+    "01-standard-creation": "[16,734][374,784]",
+    "02-large-keyboard": "[16,444][374,502]",
+    "03-name-error": "[16,726][374,784]",
+    "04-appearance": "[16,726][374,784]",
+    "07-newborn": "[16,726][374,784]",
+    "08-cold-newborn": "[16,726][374,784]"
+  },
+  "keyboardObservation": {
+    "screenY": 514,
+    "height": 282,
+    "width": 390,
+    "source": "Temporary coordinate-only diagnostic, removed before final keyboard capture; actual keyboard also visible in capture02",
+    "finalKeyboardCaptureHasNoDiagnosticSource": true
+  },
+  "captures": [
+    {
+      "file": "01-standard-creation.png",
+      "bytes": 58252,
+      "sha256": "d72e400fec79f2f07fff4dd1d5ea26cfc06776519d86063171727a294ebb76cc"
+    },
+    {
+      "file": "01-standard-creation.xml",
+      "bytes": 28684,
+      "sha256": "718bca1a74f92eda49b5579b811165cdc28fa0cbfe027f64d5aaf6c98cc9c772"
+    },
+    {
+      "file": "02-large-keyboard.png",
+      "bytes": 60684,
+      "sha256": "0ef0f2373b0732cd769f1983a2d82629b98e98eca05fa622973a51a2ad499fba"
+    },
+    {
+      "file": "02-large-keyboard.xml",
+      "bytes": 27716,
+      "sha256": "82ce0150ebcc2a4b51a885f7eaa7fec26010657669ce8398f2331d403792f68f"
+    },
+    {
+      "file": "03-name-error.png",
+      "bytes": 58969,
+      "sha256": "6330bab1e3818d3a6f071d6ac80e65942790356b684058c6d04bbfc19098d187"
+    },
+    {
+      "file": "03-name-error.xml",
+      "bytes": 28041,
+      "sha256": "7b10202b3086afc64ac0fa6237c6913e7eab34a3894b69affb975fbbd01dfb66"
+    },
+    {
+      "file": "04-appearance.png",
+      "bytes": 157425,
+      "sha256": "7f64797d61060f25da0b4ec8e14bd694319a2373558e9b78bd746b85fd44e2dd"
+    },
+    {
+      "file": "04-appearance.xml",
+      "bytes": 64822,
+      "sha256": "f43b28b944bf535e645b90cf13b4e78256202d9140d59665b46bc37b9a179315"
+    },
+    {
+      "file": "05-draft-return.png",
+      "bytes": 70387,
+      "sha256": "3c86a7ff569c9ee569553f7518bce5d750ca83e70311588c20bcd0fe2cfae8c8"
+    },
+    {
+      "file": "05-draft-return.xml",
+      "bytes": 28695,
+      "sha256": "0b33d2f538b4fd02db129d1fdc67abe52a8904977a6b0eef2540e9528400c0d4"
+    },
+    {
+      "file": "06-confirmation.png",
+      "bytes": 62652,
+      "sha256": "00be610fbb5e8fa97f0844517958e489ba14be187dbae2060f592fd122c57673"
+    },
+    {
+      "file": "06-confirmation.xml",
+      "bytes": 6340,
+      "sha256": "d959a2a06588b941732fe3c74b3d7108ee0e5cc6c63fb27c955fce29311e3407"
+    },
+    {
+      "file": "07-newborn.png",
+      "bytes": 70170,
+      "sha256": "934a2630efb071ed78693e55dd9b92f09651a08a3f5318b6650602c1a913c763"
+    },
+    {
+      "file": "07-newborn.xml",
+      "bytes": 21473,
+      "sha256": "8c6ec702694204e1c17abadf5faeba9adce23c0d663c8febfc32479adaf8464f"
+    },
+    {
+      "file": "08-cold-newborn.png",
+      "bytes": 70234,
+      "sha256": "a199734f8567f8c81ae631ba67536c2162edf71e8c9612267e822af9db25801b"
+    },
+    {
+      "file": "08-cold-newborn.xml",
+      "bytes": 21473,
+      "sha256": "8c6ec702694204e1c17abadf5faeba9adce23c0d663c8febfc32479adaf8464f"
+    },
+    {
+      "file": "09-begun-large.png",
+      "bytes": 58075,
+      "sha256": "119ab18d392e8d53dbd390624355fe67bae0bbe8360ad111cd0b0ad4cbda7359"
+    },
+    {
+      "file": "09-begun-large.xml",
+      "bytes": 35365,
+      "sha256": "5afac43c7003291b3d189bc62c38d6905d470352ead4f5f5aa97d53e287e20fc"
+    },
+    {
+      "file": "10-cold-dashboard.png",
+      "bytes": 47538,
+      "sha256": "481da432db3c3086f0e72207353151f1eb8e2ec53f8b04faf29540d72efbcdc1"
+    },
+    {
+      "file": "10-cold-dashboard.xml",
+      "bytes": 35366,
+      "sha256": "fdbd1a7620cda25235fa14414adef210421bca2e598c57b9b95526523ccd27b1"
+    }
+  ]
+}

@@ -26,9 +26,19 @@ export default function NewLife() {
   const chooseLocation = (next: 'country' | 'city') => { Keyboard.dismiss(); setField(next); };
   const reroll = () => { const candidate = freshSeed(), next = candidate === draft.seed ? (candidate + 0x9e3779b9) >>> 0 : candidate; randomise(next); router.setParams?.({ seed: String(next), mode: 'random' }); };
   const cycleAvatar = (direction: number) => { const current = avatarPresets.findIndex(item => JSON.stringify(item) === JSON.stringify(input.appearance)), index = (Math.max(0, current) + direction + avatarPresets.length) % avatarPresets.length; edit({ appearance: { ...avatarPresets[index] } }); };
-  const submit = async () => { const parsed = creationSchema.safeParse(input); if (!parsed.success) { setMessage(parsed.error.issues[0].message); return; } if (await start(parsed.data, draft.seed)) router.replace('/birth'); };
+  const validated = () => {
+    const parsed = creationSchema.safeParse(input);
+    if (parsed.success) return parsed.data;
+    const field = parsed.error.issues[0].path[0];
+    setMessage(field === 'firstName' ? 'Enter a first name.' : field === 'lastName' ? 'Enter a last name.' : 'Check your life details and try again.');
+    return null;
+  };
+  const submit = async (creation = validated()) => { if (creation && await start(creation, draft.seed)) router.replace('/birth'); };
   const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
-  return <Page bottomSafeArea><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
+  return <Page bottomSafeArea footer={<>
+    {(message || error) && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{message ?? error}</Text>}
+    <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { Keyboard.dismiss(); const creation = validated(); if (!creation) return; if (world) setConfirm(true); else void submit(creation); }} />
+  </>}><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
     <View style={{ alignItems: 'center', gap: 8 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 28 }}>
         <Pressable accessibilityRole="button" accessibilityLabel="Previous avatar" disabled={busy} onPress={() => cycleAvatar(-1)} style={{ padding: 10, minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>
@@ -48,8 +58,6 @@ export default function NewLife() {
       {advanced && <><SectionLabel>FAMILY BACKGROUND</SectionLabel><Card style={{ gap: 0 }}><ActionRow title="Ordinary Family" subtitle="Make your own way through life" value={input.background !== 'royal' ? 'Selected' : undefined} onPress={() => edit({ background: 'ordinary' })} /><ActionRow title="Royal Family" subtitle="A title and a real family succession" value={input.background === 'royal' ? 'Selected' : undefined} disabledReason={(royalCountries as readonly string[]).includes(input.country) ? undefined : 'Choose the United Kingdom, Japan or Spain'} onPress={() => edit({ background: 'royal' })} /></Card><Card><Body muted>These choices are independent of appearance and gender. Dating preferences can change in My Life when you are an adult.</Body><FamilyPreferences attractedTo={input.attractedTo ?? [...genders]} wantsChildren={input.wantsChildren ?? true} onChange={preferences => edit(preferences)} /><Body>Reproductive capacity</Body>{(['carry', 'contribute', 'neither'] as const).map(role => <Button key={role} label={role === 'carry' ? 'Can carry a pregnancy' : role === 'contribute' ? 'Can contribute to conception' : 'Neither'} tone={(input.reproductiveRole ?? (input.gender === 'female' ? 'carry' : input.gender === 'male' ? 'contribute' : 'neither')) === role ? 'primary' : 'secondary'} onPress={() => edit({ reproductiveRole: role })} />)}</Card></>}
       <SectionLabel>YOUR START</SectionLabel><Card style={{ gap: 0 }}><ActionRow title="Random Life" subtitle="Let fate decide everything" icon={<Ionicons name="dice" color={c.muted} size={28} />} disabled={busy} disabledReason={undefined} onPress={reroll} /></Card>
     </>}
-    {(message || error) && <Text accessibilityRole="alert" style={{ color: c.red, lineHeight: 21 }}>{message ?? error}</Text>}
-    <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { Keyboard.dismiss(); if (world) setConfirm(true); else void submit(); }} />
     <EventModal event={selection} onCancel={() => setField(null)} onChoose={id => { if (field === 'country') { const country = id as CountryCode; edit({ country, city: countries[country].cities[0], background: (royalCountries as readonly string[]).includes(country) ? input.background : 'ordinary' }); } else edit({ city: id }); setField(null); }} />
     <EventModal event={confirm ? { id: 'new-life-confirm', kind: 'confirmation', title: 'Start another life?', body: 'Your current life will stay in Saved Lives. You can return to it later.', terms: [], confirmLabel: 'Start a New Life' } : null} busy={busy} onCancel={() => setConfirm(false)} onChoose={() => { setConfirm(false); void submit(); }} />
   </Page>;
