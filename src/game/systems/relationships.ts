@@ -86,7 +86,16 @@ export function romanceReason(world: World, target: Person, fromId = world.activ
   if (!samePhysicalPlace(world, player.id, target.id)) return 'Meet in the same city before arranging a date';
 }
 export const dateBudget = (world: World) => roundRatio(rules[active(world).country].baseWage, 1000n);
-export const weddingBudgets = (world: World) => [100n, 20n, 4n].map((denominator, index) => ({ id: ['simple', 'small', 'lavish'][index], label: ['Simple ceremony', 'Small celebration', 'Lavish wedding'][index], amount: roundRatio(rules[active(world).country].baseWage, denominator) }));
+export const weddingBudgets = (world: World, person = active(world)) => [100n, 20n, 4n].map((denominator, index) => ({ id: ['simple', 'small', 'lavish'][index], label: ['Simple ceremony', 'Small celebration', 'Lavish wedding'][index], amount: roundRatio(rules[person.country].baseWage, denominator) }));
+/** Completion only: callers establish eligibility, consent and actual payment first. */
+export function recordMarriage(world: World, player: Person, target: Person, relation: Relationship, id: string, budget: bigint) {
+  relation.romance = 'married'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.includes('spouse')) relation.roles.push('spouse'); syncKind(relation); relation.memories.push('married:' + world.date.year);
+  world.marriages.push({ id, a: player.id, b: target.id, started: { ...world.date }, ended: null, endReason: null, baselineA: netWorth(world, player.id), baselineB: netWorth(world, target.id), excludedA: 0n, excludedB: 0n, ledgerStart: world.ledger.length, weddingCost: { minor: budget, currency: accountFor(world, player).currency } });
+  const householdId = ownHousehold(world, player, [target.id]); const household = world.households.find(item => item.id === householdId)!;
+  if (!household.homeAssetId) household.homeAssetId = world.assets.find(asset => asset.ownerId === target.id && asset.primaryHome)?.id ?? null;
+  const home = world.assets.find(asset => asset.id === household.homeAssetId); if (home) { player.city = home.city; target.city = home.city; } else target.city = player.city;
+  royalMarriage(world,player.id,target.id);
+}
 function counter(world: World, targetId: string, action: string) {
   const key = world.activePersonId + ':social:' + world.date.year + ':' + targetId + ':' + action;
   if (world.actionCounts[key]) throw new IneligibleAction('You already tried this with this person this year');
@@ -207,12 +216,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
   if (relation.romance !== 'engaged') throw new IneligibleAction('Get engaged before planning the wedding');
   if (command.budget < weddingBudgets(world)[0].amount) throw new IneligibleAction('The budget does not cover the minimum ceremony cost');
   charge(world, command.budget, 'wedding', 'Wedding with ' + target.firstName);
-  relation.romance = 'married'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.includes('spouse')) relation.roles.push('spouse'); syncKind(relation); relation.memories.push('married:' + world.date.year);
-  world.marriages.push({ id: 'marriage_' + world.revision, a: player.id, b: target.id, started: { ...world.date }, ended: null, endReason: null, baselineA: netWorth(world, player.id), baselineB: netWorth(world, target.id), excludedA: 0n, excludedB: 0n, ledgerStart: world.ledger.length, weddingCost: { minor: command.budget, currency: accountFor(world).currency } });
-  const householdId = ownHousehold(world, player, [target.id]); const household = world.households.find(item => item.id === householdId)!;
-  if (!household.homeAssetId) household.homeAssetId = world.assets.find(asset => asset.ownerId === target.id && asset.primaryHome)?.id ?? null;
-  const home = world.assets.find(asset => asset.id === household.homeAssetId); if (home) { player.city = home.city; target.city = home.city; } else target.city = player.city;
-  royalMarriage(world,player.id,target.id);
+  recordMarriage(world, player, target, relation, 'marriage_' + world.revision, command.budget);
   fact(world, 'I married ' + fullName(target) + '.', 'relationships'); result(world, 'You’re married', 'Your marriage and ceremony payment are recorded. You now share a household while retaining your own accounts and legal ownership.', 'rings', statChanges(player, { happiness: 10, respect: 2 }));
 }
 export function recordFamilyDeath(world: World, personId: string) {

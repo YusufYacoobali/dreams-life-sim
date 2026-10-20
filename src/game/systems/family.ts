@@ -11,7 +11,7 @@ import { fxMoney, netWorth } from '../valuation';
 import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result } from './common';
 import { createContact } from './npcs';
 import { moveHousehold, ownHousehold } from './households';
-import { otherPerson, partnerRelation, relationFor } from './relationships';
+import { otherPerson, partnerRelation, relationFor, romanceReason } from './relationships';
 import { hospitalized } from './healthSchemas';
 import { offerPending } from '../pendingQueue';
 import { isConfined } from './legalSchemas';
@@ -236,9 +236,23 @@ export function familyFinanceMonth(world: World) {
   }
 }
 export function familyYear(world: World) {
+  const newUnions = new Set(world.npcCourtships.flatMap(row => row.marriageId ? [row.marriageId] : []));
+  const known = new Set<string>(), childCounts = new Map<string, number>();
+  for (const row of world.relationships) {
+    if (row.from === world.activePersonId) known.add(row.to); else if (row.to === world.activePersonId) known.add(row.from);
+    if (row.roles.includes('parent')) childCounts.set(row.from, (childCounts.get(row.from) ?? 0) + 1);
+  }
+  const relevant = world.marriages.filter(row => newUnions.has(row.id) && !row.ended && row.a !== world.activePersonId && row.b !== world.activePersonId && known.has(row.a) && known.has(row.b) && row.started.year < world.date.year && (childCounts.get(row.a) ?? 0) < 3 && (childCounts.get(row.b) ?? 0) < 3).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  const offset = relevant.length ? ((world.date.year % relevant.length) + relevant.length) % relevant.length : 0;
+  const window = new Set(Array.from({ length: Math.min(relevant.length, 12) }, (_, index) => relevant[(offset + index) % relevant.length].id));
+  const key = 'npc-family:' + world.date.year;
   for (const marriage of world.marriages.filter(item => !item.ended && item.a !== world.activePersonId && item.b !== world.activePersonId)) {
     const a = world.people[marriage.a], b = world.people[marriage.b];
+    const autonomous = newUnions.has(marriage.id);
+    const attemptKey = 'npc-family:' + marriage.id + ':' + world.date.year;
+    if (autonomous && (!window.has(marriage.id) || world.actionCounts[key] || world.actionCounts[attemptKey] || a.legal.wanted || b.legal.wanted || romanceReason(world, b, a.id))) continue;
     if (childrenOf(world, a.id).length >= 3 || conceptionReason(world, a, b)) continue;
-    if (draw(world, 'npcs', 1, 100) <= 8) startPregnancy(world, a, b);
+    if (autonomous) world.actionCounts[attemptKey] = 1;
+    if (draw(world, 'npcs', 1, 100) <= 8) { startPregnancy(world, a, b); if (autonomous) world.actionCounts[key] = 1; }
   }
 }

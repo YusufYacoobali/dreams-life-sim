@@ -24,6 +24,7 @@ import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear,
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 import { npcRelationshipsYear } from './systems/npcRelationships';
+import { npcCourtshipsYear } from './systems/npcCourtships';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
 import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
@@ -171,6 +172,7 @@ function finishYear(world: World) {
   npcYearDecisions(world);
   relationshipsYear(world);
   npcRelationshipsYear(world);
+  npcCourtshipsYear(world);
   familyYear(world);
   const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
   const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
