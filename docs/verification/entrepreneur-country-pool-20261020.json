@@ -1,0 +1,815 @@
+{
+  "format": "dreams-entrepreneur-country-pool-v1",
+  "status": "completed",
+  "startedAt": "2026-10-20T21:08:47.289Z",
+  "policyVersion": 2,
+  "versions": {
+    "world": 33,
+    "engine": 34,
+    "content": 9
+  },
+  "source": {
+    "game": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+    "gameAndPersistence": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+    "store": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+    "tool": "12656bd0c917d1b69157bb7e2d41eded1e17272cf4fe1ff608669a255d133e86"
+  },
+  "sourceFinalSnapshot": {
+    "file": "/tmp/dreams-autonomy-source-final.json",
+    "bytes": 58041,
+    "sha256": "067bd9e268e59e3502040ca4fd6e2db8899651aac8c52346b8feafb2cab61a43"
+  },
+  "runner": {
+    "file": "/tmp/dreams-entrepreneur-continuation-draft.cjs",
+    "bytes": 18365,
+    "sha256": "1355a7021618a535c46c6ebaa33ca6c995650e3b5cbbcc11c263abaf12acdc6b"
+  },
+  "originalInterruptionReceipt": {
+    "file": "/tmp/dreams-entrepreneur-serial-interruption.json",
+    "bytes": 1775,
+    "sha256": "6187205441837d410c6d6c30b122d8317380de7da9647f96ae45fe68deffc00f"
+  },
+  "originalAllInvocationSucceeded": false,
+  "originalCohortFinalSourceAssertionCompleted": false,
+  "completedCountryReused": "US",
+  "originalEvidenceArchive": [
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-serial-interruption.json",
+        "bytes": 1775,
+        "sha256": "6187205441837d410c6d6c30b122d8317380de7da9647f96ae45fe68deffc00f"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/dreams-entrepreneur-serial-interruption.json",
+        "bytes": 1775,
+        "sha256": "6187205441837d410c6d6c30b122d8317380de7da9647f96ae45fe68deffc00f"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-original-tool.cjs",
+        "bytes": 34668,
+        "sha256": "12656bd0c917d1b69157bb7e2d41eded1e17272cf4fe1ff608669a255d133e86"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/dreams-entrepreneur-original-tool.cjs",
+        "bytes": 34668,
+        "sha256": "12656bd0c917d1b69157bb7e2d41eded1e17272cf4fe1ff608669a255d133e86"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.json",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.json",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.ndjson",
+        "bytes": 316,
+        "sha256": "1c27992cebd767951ef6572023b7f6d30f2318d15d94b39ba2c918eaa5b0ddcf"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.ndjson",
+        "bytes": 316,
+        "sha256": "1c27992cebd767951ef6572023b7f6d30f2318d15d94b39ba2c918eaa5b0ddcf"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/CA/birth.db",
+        "bytes": 73728,
+        "sha256": "714cc6e7e2838347846421331092c93d1f2e4be2258024ebb128b455c2d0e02c"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/CA/birth.db",
+        "bytes": 73728,
+        "sha256": "714cc6e7e2838347846421331092c93d1f2e4be2258024ebb128b455c2d0e02c"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/CA/commands.ndjson",
+        "bytes": 132558,
+        "sha256": "a4c5f77754ba43f954e3edbc724865547e71b0b25b483fa3645ea91c54420526"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/CA/commands.ndjson",
+        "bytes": 132558,
+        "sha256": "a4c5f77754ba43f954e3edbc724865547e71b0b25b483fa3645ea91c54420526"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/US/birth.db",
+        "bytes": 73728,
+        "sha256": "beee71ebcd17bf1396dffc8865dfec76a7969efad46d66813fa3eaa5d55dcb84"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/US/birth.db",
+        "bytes": 73728,
+        "sha256": "beee71ebcd17bf1396dffc8865dfec76a7969efad46d66813fa3eaa5d55dcb84"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/US/commands.ndjson",
+        "bytes": 516332,
+        "sha256": "ad59c49af4933e678b6edcbaf73d7cc5e69a5b966ef54dcce4e66b2d34ddc474"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/US/commands.ndjson",
+        "bytes": 516332,
+        "sha256": "ad59c49af4933e678b6edcbaf73d7cc5e69a5b966ef54dcce4e66b2d34ddc474"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/US/final.checkpoint.json",
+        "bytes": 1337928,
+        "sha256": "2ab01b4e0be6fad8adc7421ebe1d225c2e33552489204a56dc3ccb58078e7754"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/US/final.checkpoint.json",
+        "bytes": 1337928,
+        "sha256": "2ab01b4e0be6fad8adc7421ebe1d225c2e33552489204a56dc3ccb58078e7754"
+      }
+    },
+    {
+      "original": {
+        "file": "/tmp/dreams-entrepreneur-policy-v2-20261020/US/result.json",
+        "bytes": 149669,
+        "sha256": "68877c33c542e7a4a33c3228e15d8d44a30ede83d6664206f7561b2c3ea42c51"
+      },
+      "preserved": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/interrupted-serial/original-output/US/result.json",
+        "bytes": 149669,
+        "sha256": "68877c33c542e7a4a33c3228e15d8d44a30ede83d6664206f7561b2c3ea42c51"
+      }
+    }
+  ],
+  "capacityChanges": [
+    {
+      "at": "2026-10-20T21:08:47.316Z",
+      "concurrency": 2,
+      "reviewedCapacityFile": null
+    },
+    {
+      "at": "2026-10-20T21:31:27.965Z",
+      "concurrency": 3,
+      "reviewedCapacityFile": {
+        "file": "/tmp/dreams-entrepreneur-country-capacity.json",
+        "bytes": 332,
+        "sha256": "185c6db79f98cbc8fed5b9c3b753e3cf7fdb56f5d46c563f49bb7333105592ae"
+      }
+    }
+  ],
+  "entries": [
+    {
+      "country": "CA",
+      "seed": 901,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/CA",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/CA.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/CA.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "CA",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/CA"
+      ],
+      "startedAt": "2026-10-20T21:08:47.317Z",
+      "pid": 122781,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:17:05.987Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/CA/result.json",
+        "bytes": 152377,
+        "sha256": "f3cf41c3e268f2dfdf8be69999a50b040c01c6770361b34c9316abe6b3542cfe"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/CA.stdout.json",
+        "bytes": 152377,
+        "sha256": "f3cf41c3e268f2dfdf8be69999a50b040c01c6770361b34c9316abe6b3542cfe"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/CA.progress.ndjson",
+        "bytes": 316,
+        "sha256": "c968b4a1957ad3f89f54b41fe56169ddd512af9de19cf1d4aa37ce959efd4a35"
+      },
+      "observed": {
+        "ageAtDeath": 91,
+        "commands": 2143,
+        "elapsedMs": 495897,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "2533752ba9159c34ee0a3cf918d83885a10b1cad990924b4f5a6f1ffc08c88a7",
+        "finalWorldSha256": "c8f06833a770689a421a96827d20430c42cb3bc6ccf36b41da5a045b5287720a"
+      }
+    },
+    {
+      "country": "GB",
+      "seed": 902,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/GB",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/GB.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/GB.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "GB",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/GB"
+      ],
+      "startedAt": "2026-10-20T21:08:47.321Z",
+      "pid": 122782,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:13:23.554Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/GB/result.json",
+        "bytes": 113886,
+        "sha256": "61a743753e54a73f4a63212cf634dcb178a32c7f4514eb499bf70432ed3325b8"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/GB.stdout.json",
+        "bytes": 113886,
+        "sha256": "61a743753e54a73f4a63212cf634dcb178a32c7f4514eb499bf70432ed3325b8"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/GB.progress.ndjson",
+        "bytes": 316,
+        "sha256": "16b2647912161c245660a1bb31317c3e68b5086bfe3cca6c02ac6858fa0f7064"
+      },
+      "observed": {
+        "ageAtDeath": 69,
+        "commands": 1307,
+        "elapsedMs": 273353,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "94d59dbd24044571c248117bc99375c4febec4abbabf2c4107d075348be1e2b0",
+        "finalWorldSha256": "7212518e35ff78efc098a60fc47f8f3c7e3cc418cd3c2e21607355a40d9a4aae"
+      }
+    },
+    {
+      "country": "AU",
+      "seed": 903,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/AU",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/AU.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/AU.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "AU",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/AU"
+      ],
+      "startedAt": "2026-10-20T21:13:23.602Z",
+      "pid": 123614,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:25:06.117Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/AU/result.json",
+        "bytes": 143692,
+        "sha256": "7fb9431351bd2bc4d24efef7edfc16a47d30988a8d4929f1a04085fbce36957f"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/AU.stdout.json",
+        "bytes": 143692,
+        "sha256": "7fb9431351bd2bc4d24efef7edfc16a47d30988a8d4929f1a04085fbce36957f"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/AU.progress.ndjson",
+        "bytes": 316,
+        "sha256": "14f214e0db4cf80bce661a06453c0747a9fce72eb46a2d2891e367a665a15be0"
+      },
+      "observed": {
+        "ageAtDeath": 88,
+        "commands": 1927,
+        "elapsedMs": 700068,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "c080220a087dff068ea24faa4edbcdfdf9bfb9c7f0527bc68202141c9260cb5f",
+        "finalWorldSha256": "c2340cffee7b57f6d18cc0296c901456deea7071b11deb6910791e089d7a7f33"
+      }
+    },
+    {
+      "country": "FR",
+      "seed": 904,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/FR",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/FR.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/FR.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "FR",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/FR"
+      ],
+      "startedAt": "2026-10-20T21:17:06.041Z",
+      "pid": 124592,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:20:42.327Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/FR/result.json",
+        "bytes": 97018,
+        "sha256": "f35e51efeb2735e0167c4f80e720b1c47a1f77fffe25ea79f2d6ca9c7db923c5"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/FR.stdout.json",
+        "bytes": 97018,
+        "sha256": "f35e51efeb2735e0167c4f80e720b1c47a1f77fffe25ea79f2d6ca9c7db923c5"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/FR.progress.ndjson",
+        "bytes": 316,
+        "sha256": "9eb492f0f254b472a5e7a6fceeb6715b30c0f282d279ce20c3e5cfc64b5fd588"
+      },
+      "observed": {
+        "ageAtDeath": 57,
+        "commands": 1071,
+        "elapsedMs": 213827,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "a03103a98ae08b1864fa9f5a2220dfd195ed4de5f79ceabf3dd6de7fdec4dea8",
+        "finalWorldSha256": "168c6f164c406a378e7db6020720fdd9ad193dc52b15cca24a6bbd88bb252a48"
+      }
+    },
+    {
+      "country": "DE",
+      "seed": 905,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/DE",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/DE.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/DE.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "DE",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/DE"
+      ],
+      "startedAt": "2026-10-20T21:20:42.367Z",
+      "pid": 125159,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:29:28.166Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/DE/result.json",
+        "bytes": 131747,
+        "sha256": "1bc7281b91f63e4ccb7e386abc6a78434cdad41c9234b1022de47f0cd2fc23f8"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/DE.stdout.json",
+        "bytes": 131747,
+        "sha256": "1bc7281b91f63e4ccb7e386abc6a78434cdad41c9234b1022de47f0cd2fc23f8"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/DE.progress.ndjson",
+        "bytes": 316,
+        "sha256": "7e310f66bef2beacb28777c07086ad67382f4c83a470d759b4ee38efa78ea3e6"
+      },
+      "observed": {
+        "ageAtDeath": 79,
+        "commands": 1699,
+        "elapsedMs": 524132,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "be2ae3c5ef10a2cbae67a0a86569178a9eca517bf5f1d536b51e6594c10088d5",
+        "finalWorldSha256": "228048c135b3dcf2a2eff32baf95e8a9cc89ad187bd54c6d4811906d4a76fef3"
+      }
+    },
+    {
+      "country": "ES",
+      "seed": 906,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/ES",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/ES.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/ES.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "ES",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/ES"
+      ],
+      "startedAt": "2026-10-20T21:25:06.161Z",
+      "pid": 125874,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:30:28.280Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ES/result.json",
+        "bytes": 122650,
+        "sha256": "ae7fa20757bb044da9760603484cfec7ecb549ab56d58662ea3037bfe0c73f32"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ES.stdout.json",
+        "bytes": 122650,
+        "sha256": "ae7fa20757bb044da9760603484cfec7ecb549ab56d58662ea3037bfe0c73f32"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ES.progress.ndjson",
+        "bytes": 316,
+        "sha256": "b185434eda749004c6e91142d0ce00f8521bc6a4f7285abbb2b54001930428f4"
+      },
+      "observed": {
+        "ageAtDeath": 74,
+        "commands": 1516,
+        "elapsedMs": 320221,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "08fb00700091c5b1ead45dbff4447d270a92f3e2916de487a589b3d0f6da6d0c",
+        "finalWorldSha256": "97c1561fa08dc5ba8f53fd13e98bedf7a2defd75e79052cfe7d15a9650645763"
+      }
+    },
+    {
+      "country": "IT",
+      "seed": 907,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/IT",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/IT.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/IT.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "IT",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/IT"
+      ],
+      "startedAt": "2026-10-20T21:29:28.211Z",
+      "pid": 127436,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:41:55.813Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IT/result.json",
+        "bytes": 148610,
+        "sha256": "6db3d2f0951f1a9f14bb1f3599275d2564d0c97495fc167eedb013bd3ae3bce4"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IT.stdout.json",
+        "bytes": 148610,
+        "sha256": "6db3d2f0951f1a9f14bb1f3599275d2564d0c97495fc167eedb013bd3ae3bce4"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IT.progress.ndjson",
+        "bytes": 316,
+        "sha256": "dd2d2625afc07c489f912f918f76f26471fd2f77e33563a32324a646958c10cb"
+      },
+      "observed": {
+        "ageAtDeath": 93,
+        "commands": 1999,
+        "elapsedMs": 709474,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "4f8a5f166ab8e52dfd4d3d1587497d693dba1d6bad6faebd28bdc49f72a9ebe6",
+        "finalWorldSha256": "9463f3f58f3744a41ff4a0e3ce36af0d21bdce71b82e107dfcb3f554d22fdb0a"
+      }
+    },
+    {
+      "country": "BR",
+      "seed": 908,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/BR",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/BR.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/BR.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "BR",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/BR"
+      ],
+      "startedAt": "2026-10-20T21:30:28.328Z",
+      "pid": 127681,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:35:29.526Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/BR/result.json",
+        "bytes": 115711,
+        "sha256": "17665039f3fe189289ab59cc4fb304aab21f78ceac3d6c4d3eb7e9e6b9419ac3"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/BR.stdout.json",
+        "bytes": 115711,
+        "sha256": "17665039f3fe189289ab59cc4fb304aab21f78ceac3d6c4d3eb7e9e6b9419ac3"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/BR.progress.ndjson",
+        "bytes": 316,
+        "sha256": "f78e2e9bfd958237e991e114e342c0a9bbdc085a696f83d22602a984bfc2f660"
+      },
+      "observed": {
+        "ageAtDeath": 70,
+        "commands": 1503,
+        "elapsedMs": 299428,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "7613c18f0b8a98487dae0f4d6ad7f4e1cf677146e476f79eab6779e06f1fa130",
+        "finalWorldSha256": "5ff54fb10d23c22455e045bd11935a463b91948f32f692fa5cfb665e52de4278"
+      }
+    },
+    {
+      "country": "IN",
+      "seed": 909,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/IN",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/IN.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/IN.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "IN",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/IN"
+      ],
+      "startedAt": "2026-10-20T21:31:27.965Z",
+      "pid": 127957,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:46:18.610Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IN/result.json",
+        "bytes": 160771,
+        "sha256": "bd9bdfa5ef87e6b9edaf99db106f3e3f762a8983fe052e5705596a9b57f20a64"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IN.stdout.json",
+        "bytes": 160771,
+        "sha256": "bd9bdfa5ef87e6b9edaf99db106f3e3f762a8983fe052e5705596a9b57f20a64"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/IN.progress.ndjson",
+        "bytes": 316,
+        "sha256": "59ec755790ab6157995042a90613402ecabf1b0f22d74f58ab1a6ac2498afe59"
+      },
+      "observed": {
+        "ageAtDeath": 98,
+        "commands": 2224,
+        "elapsedMs": 888692,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "62eb029029ee8367254a75627c09f599f4fd62c5614fa97ea131e50075f4a962",
+        "finalWorldSha256": "38aa440791fa5dc8e8d8997226f249523f45e2c6a870ec918c21d1738128b76c"
+      }
+    },
+    {
+      "country": "JP",
+      "seed": 910,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/JP",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/JP.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/JP.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "JP",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/JP"
+      ],
+      "startedAt": "2026-10-20T21:35:29.624Z",
+      "pid": 129372,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:45:27.607Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/JP/result.json",
+        "bytes": 147038,
+        "sha256": "e609fead9609e0945ed9da7655ca0a0c760803de9a075acac83e38fd91f4f824"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/JP.stdout.json",
+        "bytes": 147038,
+        "sha256": "e609fead9609e0945ed9da7655ca0a0c760803de9a075acac83e38fd91f4f824"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/JP.progress.ndjson",
+        "bytes": 316,
+        "sha256": "919689a834a128475d255fa4435cd41eedac34d3abda62f974ac82990b5f82ae"
+      },
+      "observed": {
+        "ageAtDeath": 88,
+        "commands": 1909,
+        "elapsedMs": 593659,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "3558320adbafa3c28ebea1f5516a5acfac5f3c26e481103fb791b5ad6b025e1d",
+        "finalWorldSha256": "ffcb7fe2b17cd4047ae0cc9f0ea1ee3101572e44ef6eb88f9e6e297f2c6ff193"
+      }
+    },
+    {
+      "country": "ZA",
+      "seed": 911,
+      "status": "completed",
+      "outputDirectory": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA",
+      "stdoutFile": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA.stdout.json",
+      "progressFile": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA.progress.ndjson",
+      "argv": [
+        "tools/run-entrepreneur-sweep.cjs",
+        "--country",
+        "ZA",
+        "--output",
+        "/tmp/dreams-entrepreneur-country-pool-20261020/ZA"
+      ],
+      "startedAt": "2026-10-20T21:41:55.859Z",
+      "pid": 130883,
+      "exitCode": 0,
+      "signal": null,
+      "finishedAt": "2026-10-20T21:55:51.745Z",
+      "resultArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA/result.json",
+        "bytes": 163844,
+        "sha256": "bbcf867e10a5367e5d686a9dd63a5757f94ff9afaab3a796222d8cd5cf92438b"
+      },
+      "stdoutArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA.stdout.json",
+        "bytes": 163844,
+        "sha256": "bbcf867e10a5367e5d686a9dd63a5757f94ff9afaab3a796222d8cd5cf92438b"
+      },
+      "progressArtifact": {
+        "file": "/tmp/dreams-entrepreneur-country-pool-20261020/ZA.progress.ndjson",
+        "bytes": 316,
+        "sha256": "54fbfd60dde7e199f3bc3580cf001af6d84c180fe833109e9161b530d24285a1"
+      },
+      "observed": {
+        "ageAtDeath": 97,
+        "commands": 2279,
+        "elapsedMs": 833984,
+        "coverage": {
+          "allPhasesReached": true,
+          "orderedScenarioCComplete": true,
+          "reached": [
+            "birth",
+            "school",
+            "social",
+            "fame50",
+            "business",
+            "brandEarned",
+            "investment",
+            "family",
+            "death"
+          ],
+          "unreached": []
+        },
+        "traceSha256": "8357cc71ebef0b0d0967174e1651b4bfd03cc73202a31f609878422c2658a862",
+        "finalWorldSha256": "b0e4acccbe816110f492cb47ed3bc24ceec3653afd50e7ee42462d290f8c1545"
+      }
+    }
+  ],
+  "finishedAt": "2026-10-20T21:55:51.796Z",
+  "remainingPoolWallElapsedMs": 2824507
+}

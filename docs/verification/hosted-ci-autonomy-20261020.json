@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-20 21:53:26 UTC",
+  "source": "GitHub connector read-only workflow run, job summaries and decoded job log",
+  "runId": 39498326237,
+  "commit": "0ea6177fa944b629ae349e965c5aae13b389b67d",
+  "event": "push",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39498326237",
+  "createdAt": "2026-10-20T21:11:25Z",
+  "updatedAt": "2026-10-20T21:32:53Z",
+  "jobId": 118889076480,
+  "jobs": [
+    {
+      "id": 118889076480,
+      "name": "regression",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 39498326237,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Check out source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Node",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install locked dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Check app and test types",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run regression tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Set up Node",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Check out source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "regression": {
+    "suites": 147,
+    "tests": 2100,
+    "elapsedSeconds": 1237.414
+  },
+  "node": "24.22.0",
+  "npm": "11.19.1",
+  "strictAppAndTests": true,
+  "lockedInstall": true,
+  "scope": "Exact pushed0ea6177 C34 source; hosted Linux types/Jest only. No native build/deployment/iOS/physical-performance acceptance.",
+  "rawLog": "/tmp/dreams-autonomy-hosted-ci-20261020.txt"
+}

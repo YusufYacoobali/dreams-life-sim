@@ -1,0 +1,13 @@
+{
+  "status": "resumed",
+  "pausedAt": "2026-10-20T21:29:29.612922+00:00",
+  "ownedPids": [
+    122773,
+    125874,
+    127436
+  ],
+  "runnerPid": 122773,
+  "sourcePolicyUnchanged": true,
+  "note": "No policy state/choices/source edits. Per-country elapsed wall times include this documented pause; not physical or paired action performance.",
+  "resumedAt": "2026-10-20T21:30:05.847942+00:00"
+}

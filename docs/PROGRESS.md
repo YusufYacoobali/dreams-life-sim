@@ -15,33 +15,143 @@ saving and resume, and park further load/save tools, import/export/sharing,
 Time Machine breadth and history-storage optimisation. Existing working features
 and old data stay intact. The current breakdown is in
 [Opening plan: current assessment](OPENING_PLAN.md#current-assessment); overall
-completion is approximately58%, with250/250minimum situations implemented;
+completion is approximately60%, with250/250minimum situations implemented;
 editorial, balance and release acceptance remain open.
 
-## Current integration checkpoint: reviewed gameplay and durable action flows
+## Current milestone: autonomous family life, clear consequences and durable action reviews
 
-World33 /engine34 /content9 /reader13 is integrated at5245fbb; final test source
-is e0bf44c. All **2,100 tests /147 suites** pass in **1,260.991 seconds**, strict
-app/test types and fresh Android/iOS Hermes exports pass. The same120immutable
-annual seeds0–119 pass in687.245seconds; no extra-seed or older full-world equality
-claim. The initial full run caught a stale future-reader test; corrected to14,
-then the complete current suite passed. [Committed source and raw checks](verification/autonomy-integration-checkpoint-20261020.json).
+World33 / engine34 / content9 / reader13 / checkpointv4 integrates the reviewed
+parallel workstreams. Known adult NPCs can begin mutual relationships, observe
+actual courtship time, pay their own consensual wedding costs and later use the
+existing pregnancy/birth pipeline. Annual guards bound attempts; saved names,
+consent, receipts and family links remain real. The player and current partner
+are excluded from this autonomous slice. [Mechanics](NPC_FAMILY_DEVELOPMENT.md).
 
-This integrates reviewed autonomous NPC dating/courtship, family/financial/action
-review reliability, hospital/legal consistency, named consequences and opening
-focus/contrast improvements. Actual Android normal/130% opening/cancel and
-reader12→13 keep all eight tables exact. Existing Alex Martín reaches School17
-through normal play; unchanged school controls/cancel preserve all eight tables.
-Six other lives/backups,60original moments and119original receipts remain exact.
-The three real School edits/cold checks,70sample action gate, entrepreneur country
-continuation and detailed final publication remain in progress; do not claim them
-complete. Overall estimate remains58% until the milestone's remaining acceptance.
+New consultations use available qualified clinicians. Hospital stays pause
+prison work, study and exercise through their final discharge period, retaining
+earned rewards and sentence timing. [Health/custody scope](HEALTH_CUSTODY_CONSISTENCY.md).
+New early-story results identify each person whose bond changed and retain
+actual capped effects. Existing saved result copy remains exact.
+[Named consequences](EARLY_STORY_CONSEQUENCES.md).
 
-Continue independent work concurrently in separate worktrees. Primary integration
-owns testing, commits and pushes. Current source is being pushed as a safe point;
-inspect the remote for final SHA/time and keep the two-hour push cadence. No new
-file/import/export/history breadth; preserve automatic saving and exact resume.
-A routine checkpoint does not end the authorised complete-game work.
+Opening identity/location reviews and Family, Asset/Bank, Recovery, Social,
+Travel, Career/Service, Business and Legal action reviews retain failed drafts
+and errors, close after durable success and prevent inappropriate unchanged
+submissions. New-life review retains its validated identity and seed; choosing
+the same country retains the selected city. Service context changes reset its
+local branch/history without discarding a same-context retry. Loan reviews
+display the actual reused debt line's rate. These UI changes preserve existing
+game commands and fast automatic saving/resuming.
+
+The fresh complete regression on the final current source, including all A/B/C
+acceptance additions and the corrected forward-database test,
+passes **2,100 tests / 147 suites** in
+**1,260.991 seconds**. No earlier focused check counts
+are added to this one complete run. The initial run remains explicitly failed:
+one failure /2,078 passed tests in145 suites,1,172.283 seconds. Its forward-reader
+test incorrectly treated13 as unsupported after reader13 was introduced; the
+future marker is now14. Final strict app/test types and fresh Android/iOS Hermes
+exports pass. Hosted [Quality run39498326237](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39498326237)
+also passed on the exact pushed0ea6177: locked install, strict app/test types and
+2,100tests/147suites in1,237.414seconds. That is hosted Linux evidence, with no
+native-build or device claim. The initial Node-only tools type
+boundary failure is retained as a diagnostic; the final app boundary excludes
+those acceptance tools while their test compilation remains checked. [Source, checks and precise scopes](verification/autonomy-gameplay-20261020.json).
+
+The same120 immutable annual-policy seeds0–119 pass in 687.245
+seconds across all12 countries. Separate professional Scenario A policy v2
+finishes12 reused country seeds900–911 in 499.208 seconds.
+Observed milestones include 12/12 degrees,
+12/12 paid qualified jobs, 8/12 actual
+children and 8/12 pension receipts; all12 natural deaths
+and estates are recorded. Each life retains its refusals and unreached goals;
+success is not forced. Only creation/Begin Life use SQLite in this policy;
+later commands and exact cold codec checks are pure-engine evidence. These
+reused journeys do not increase the120 distinct annual-policy seed total.
+The compact summary preserves every omitted goal, grouped unsuccessful commands,
+all observation pointers/hashes and each raw trace hash; command commitment does
+not mean a successful outcome.
+
+Separate criminal policy v1 completes12 reused country seeds in
+167.561 seconds: 11/12 observed
+convictions and 11/12 releases,
+10/12 completed holidays and
+9/12 retirements. Australia's actual acquittal and
+all failed applications remain explicit. **Scenario B is incomplete** because
+no compulsory-school dropout command exists; its negative leave guard and normal
+school exit do not replace that scope. Actual currency receipts, custody activity,
+release and record gates are credited only where observed.
+
+Root aggregated one completed US entrepreneur policy v2 observation from the
+intentionally interrupted serial parent (exit143), plus eleven separately
+completed unchanged country invocations. Each new invocation passed its own
+source-before/after and integrity checks; US source at launch is explicitly
+coordinator-attested from d259696 and unchanged runtime5245/source pins. The
+original parent's final source assertion did not run and it is not claimed passed.
+US took 965.349 seconds; the remaining-country pool took
+2,824.507 seconds of wall time at recorded two/three-worker
+capacity. These timing components are not an uninterrupted all-country duration. The pool
+and two active children were paused for36.235seconds during the serial action
+measurement and resumed unchanged; their elapsed wall times include that pause.
+Strict ordered Scenario C coverage is **12/12**; per-life missing
+phases remain: US: all phases reached; CA: all phases reached; GB: all phases reached; AU: all phases reached; FR: all phases reached; DE: all phases reached; ES: all phases reached; IT: all phases reached; BR: all phases reached; IN: all phases reached; JP: all phases reached; ZA: all phases reached. Integrity checks and full ordered milestones
+are separate. This policy uses real on-disk SQLite birth/initial recovery only,
+then actual immutable engine commands and production-codec checks. Earned brand
+payments, personal/company cash, investments and estate receipts use their real
+ledger and currency rules. No fame, family or survival outcome is forced. The
+three optional policies reuse the same seeds and add no distinct annual seeds;
+none establishes a native or SQLite full lifetime.
+
+The first final12 attempt failed in AU903 after three completed country lives
+because its helper used the plain20M reader. That failed log is preserved.
+The genuine last-valid revision593/age98 world has22.1M canonical characters;
+the unchanged production v4 codec packs it to1.22MB, with11.5MB compact expanded
+data within the existing32M/80M limits, and preserves every field exactly.
+The helper now uses that actual codec; the replacement12-country run above has
+its own completed evidence. No save limit, game policy or outcome was changed.
+
+All70 serial fixed-world cloud warm samples avoid full checkpoint unpack;
+cold current/backup and original Before Age Up bytes remain exact. These are
+unpaired host/GC-sensitive measurements, with explicit generated stress cases.
+Physical button p95 remains open. [Action scope](verification/action-latency-autonomy-20261020.json).
+
+Actual Android reader12→13 startup retains all eight tables exactly.
+Actual Android24 software emulator/ExpoGo57.0.9,390x844. Normal and130% Welcome, creation,16-avatar Appearance and visible-keyboard footer reviewed. Correct fresh130%draft MiaFischer/HamburgGermany/Avatar7; concrete review cancelled with Nevermind, no life created. All8table rows equal on reader12to13/startup, read-only previews/cancel and restored1.0font host-restart observation. Seven original lives/backups,60moments/metadata and119receipts exact; Nia134 unchanged. No unsaved creation-draft-across-host-recreation or on-screen IME Next/Done claim.
+Actual existing AlexMartin1 selected normally; native childhood advances/choices/acknowledgements reach BarcelonaSchool6/revision17. Disabled current club/conduct/study and unselectedconfirm controls were touched and cancelled; all8tables exact17. Actual science18/cold18/ack19,helpful20/cold20/ack21,focused22/cold22/ack23 match complete normal-command projected worlds. Each process-stop cold result retains all8tables. Six OTHER original lives/backups includingNia134,60originalmoments/metadata and119originalreceipts remainexact. Six new BeforeAgeUp complete worlds match originalpreyear projections; first keeps storedAlex1byte-for-byte. Final7lives66moments141receipts,Alex6/science/helpful/focused,no pending/year,font1.0,ExpoGo stopped.
+[18 accepted capture pairs and exact native scope](verification/android24-opening-school-20261020/).
+This opening/school evidence does not claim a physical NPC wedding journey.
+Hardware Enter probes do not establish onscreen IME Next/Done acceptance. The
+observed 24px modal-edge backdrop gap remains a next-batch issue; full modal
+coverage and complete accessibility are not claimed by this checkpoint.
+
+Every existing fixture stays unchanged. Exactly two genuine fixtures were added:
+the original World32 native hourly archive and the later World33 AU pure-engine
+observation, each retaining its own producer and evidence scope. Existing current,
+backup and historical player payloads are not eagerly rewritten. Game hash
+`ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f`; combined game/persistence
+`311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba`.
+
+Overall production is approximately 60%; onboarding
+55%, Life/early gameplay 60% and family
+85%, under the coordinator's reviewed estimates. The catalogue
+remains250 annual situations/750 choices and45 achievements/14 challenges/43 facts.
+These estimates and source counts do not close broad country verification,
+balance, pacing, native multigeneration/storage, physical performance or standalone
+Android/iOS release acceptance. Further import/export/sharing/history breadth
+remains parked. Continue the complete production plan with independent owners
+and consolidated integration gates; a routine checkpoint is not the end.
+Commit and push at safe points at least every two hours; inspect the actual
+remote push time when calculating the next deadline.
+
+The next isolated `integration/opening-next` batch is implemented and under
+consolidated acceptance: World34/engine35/content10/reader14; factual Profile,
+Statistics and annual Finances; operational motion/haptic/local-sound settings;
+retained Health/Exercise reviews; explicit secondary withdrawal; hobby contacts;
+progression destinations, emigration defaults and remaining unchanged-form guards.
+Its focused/independent reviews do not establish the final full-source gates.
+A separate criminal policyv2 will exercise actual withdrawal. Continue integration
+and actual native acceptance; do not reimplement these existing worktree changes.
+
 
 ## Prior milestone: hourly contracts, financial goals and editorial consistency
 

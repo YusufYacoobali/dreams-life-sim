@@ -1,0 +1,100 @@
+{
+  "reviewed": true,
+  "complete": true,
+  "finalSourceFile": "/tmp/dreams-autonomy-source-final.json",
+  "initialRegressionFile": "/tmp/dreams-autonomy-regression.out",
+  "initialRegressionSha256": "b2a645e7fc3050017aa291dc8d77a498c0194838ecb1e4ecf6b2a42adf6179b2",
+  "gates": {
+    "regression": {
+      "file": "/tmp/dreams-autonomy-regression-final.out",
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "e5376ac5c394fa1a7d7a4a432f3e58b9e4be7dee8c17ee83b86b08363f0c0cb9",
+      "sourceSnapshotSha256": "067bd9e268e59e3502040ca4fd6e2db8899651aac8c52346b8feafb2cab61a43",
+      "sessionId": 60848
+    },
+    "types": {
+      "file": "/tmp/dreams-autonomy-types-all-final.out",
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309",
+      "sourceSnapshotSha256": "067bd9e268e59e3502040ca4fd6e2db8899651aac8c52346b8feafb2cab61a43",
+      "sessionId": 78650
+    },
+    "annual120": {
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "94f9adb4ad2e849da21bb217d22fbaecc9a372f40c8bacd26c5fff0fcfdcce31",
+      "file": "/tmp/dreams-autonomy-120.ndjson"
+    },
+    "professional12": {
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "6a32420ef11401b8ed776dfcbc06dcfb1909f0c54bc1449c1fd1b9328fb1c91d",
+      "file": "/tmp/dreams-professional-natural-policy-20261020.json"
+    },
+    "criminal12": {
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "29d450099ee7ce8635c6661bfebac3334f1ff2c0fc6be2ae8f3663796f4d97a2",
+      "file": "/tmp/dreams-criminal-natural-policy-20261020.json"
+    },
+    "entrepreneur12": {
+      "file": "/tmp/dreams-entrepreneur-natural-policy-20261020.json",
+      "progressFile": "/tmp/dreams-entrepreneur-natural-policy-20261020.ndjson",
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "bd46bd6f762a5a7c946291e8f2e327a67a5f54980891853f7f3266024c01d252",
+      "kind": "continuation-aggregate",
+      "continuationReviewed": true,
+      "exitCodeScope": "Root aggregate helper completed exit0 only after country-pool unified session55184 closed0; original serial --all remains interrupted143.",
+      "remainingPoolSessionId": 55184
+    },
+    "actions": {
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "f51b53f7222182394b126ec253fedca44a2ee3d9aabee86cb61190225605dfd1",
+      "file": "/tmp/dreams-autonomy-actions.json"
+    },
+    "exports": {
+      "complete": true,
+      "sessionClosed": true,
+      "exitCode": 0,
+      "logSha256": "134f27ad51fb797690f7dad75a1363fd2cb17920e82cb1dba1ddc37deefc7002",
+      "file": "/tmp/dreams-autonomy-export.out"
+    }
+  },
+  "fixtureDiff": {
+    "file": "/tmp/dreams-autonomy-fixture-name-status.txt",
+    "sha256": "b1236bcd5af9a5e695870ebd8bd6ea1fd3dd1afef53d423916b6f66941692727",
+    "baseCommit": "32cd40a20390a8b7f789b50df8bc1e6f17acdbbe"
+  },
+  "actionsFile": "/tmp/dreams-autonomy-actions.json",
+  "nativeFile": "/tmp/dreams-autonomy-native-journey.json",
+  "acceptedCapturesFile": "/tmp/dreams-autonomy-accepted-captures.json",
+  "nativeVerifierFiles": [
+    "/tmp/dreams-autonomy-native-verify.cjs",
+    "/tmp/dreams-autonomy-native-snapshot-verify.cjs",
+    "/tmp/dreams-autonomy-normalize-native.cjs",
+    "/tmp/dreams-autonomy-native-verifier-results.json",
+    "/tmp/dreams-autonomy-native-new-snapshots.json",
+    "/tmp/dreams-autonomy-school-native-command-plan.json",
+    "/tmp/dreams-autonomy-school-noops.py",
+    "/tmp/dreams-autonomy-play-childhood.py"
+  ],
+  "estimates": {
+    "reviewedByCoordinator": true,
+    "acceptedProofSupportsIncrease": true,
+    "overall": 60,
+    "onboarding": 55,
+    "life": 60,
+    "family": 85
+  }
+}

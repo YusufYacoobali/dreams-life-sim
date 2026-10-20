@@ -1,0 +1,27 @@
+{
+  "recordedAt": "2026-10-20T21:03:16.763371+00:00",
+  "status": "coordinator-requested-interruption-after-one-completed-country",
+  "reason": "Continue eleven independent fixed-country policies concurrently using the exact unchanged policy; the parent all-country run is not claimed passed.",
+  "originalSourceAtStartAttestedByCoordinator": true,
+  "originalToolSourceCommit": "d259696",
+  "runtimeCommit": "5245fbb88f1dff6e92b5726bf730512bd2aa60ed",
+  "gameSourceHash": "ed3148b53360a79b7ee7237c7a1916d6e878f00662609bf0b3a2a7c027a39f6f",
+  "combinedGamePersistenceSourceHash": "311399f14576a4baba505d5045e890a48cb6365cd7f938159fc55601497200ba",
+  "toolSha256": "12656bd0c917d1b69157bb7e2d41eded1e17272cf4fe1ff608669a255d133e86",
+  "birthStoreSha256": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+  "sourceManifestSha256": "cf68e2a0512ee8163fe8d17aec73dba4abf560b0e54d0bf0336508b2a9ce3566",
+  "all302PinnedSourcesStillExactBeforeInterruption": true,
+  "completedCountries": [
+    "US"
+  ],
+  "completedUSResultFile": "/tmp/dreams-entrepreneur-policy-v2-20261020/US/result.json",
+  "completedUSResultSha256": "68877c33c542e7a4a33c3228e15d8d44a30ede83d6664206f7561b2c3ea42c51",
+  "completedUSTraceSha256": "ad59c49af4933e678b6edcbaf73d7cc5e69a5b966ef54dcce4e66b2d34ddc474",
+  "parentExitCode": 143,
+  "parentSessionClosed": true,
+  "partialOtherCountriesDoNotCount": true,
+  "parentJSONFile": "/tmp/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.json",
+  "parentJSONSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "parentNDJSONFile": "/tmp/dreams-entrepreneur-natural-policy-serial-interrupted-20261020.ndjson",
+  "parentNDJSONSha256": "1c27992cebd767951ef6572023b7f6d30f2318d15d94b39ba2c918eaa5b0ddcf"
+}

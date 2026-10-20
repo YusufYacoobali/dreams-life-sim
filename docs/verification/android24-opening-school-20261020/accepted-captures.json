@@ -1,0 +1,133 @@
+{
+  "reviewed": true,
+  "sourceRuntimeCommit": "5245fbb88f1dff6e92b5726bf730512bd2aa60ed",
+  "captures": [
+    {
+      "name": "welcome-normal",
+      "domain": "opening",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-welcome.png",
+      "xml": "/tmp/dreams-autonomy-native-welcome.xml"
+    },
+    {
+      "name": "creation-normal",
+      "domain": "opening",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-creation.png",
+      "xml": "/tmp/dreams-autonomy-native-creation.xml"
+    },
+    {
+      "name": "appearance-normal",
+      "domain": "opening",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-appearance.png",
+      "xml": "/tmp/dreams-autonomy-native-appearance.xml"
+    },
+    {
+      "name": "welcome-large",
+      "domain": "opening",
+      "purpose": "large-text",
+      "png": "/tmp/dreams-autonomy-native-welcome-large.png",
+      "xml": "/tmp/dreams-autonomy-native-welcome-large.xml"
+    },
+    {
+      "name": "appearance-large",
+      "domain": "opening",
+      "purpose": "large-text",
+      "png": "/tmp/dreams-autonomy-native-appearance-large.png",
+      "xml": "/tmp/dreams-autonomy-native-appearance-large.xml"
+    },
+    {
+      "name": "creation-keyboard-large",
+      "domain": "opening",
+      "purpose": "large-text",
+      "png": "/tmp/dreams-autonomy-native-creation-large-keyboard.png",
+      "xml": "/tmp/dreams-autonomy-native-creation-large-keyboard.xml"
+    },
+    {
+      "name": "creation-review-large",
+      "domain": "opening",
+      "purpose": "large-text",
+      "png": "/tmp/dreams-autonomy-native-creation-review-large.png",
+      "xml": "/tmp/dreams-autonomy-native-creation-review-large.xml"
+    },
+    {
+      "name": "school-newborn",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-selected.png",
+      "xml": "/tmp/dreams-autonomy-native-school-selected.xml"
+    },
+    {
+      "name": "school-first-choice",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-first-decision.png",
+      "xml": "/tmp/dreams-autonomy-native-school-first-decision.xml"
+    },
+    {
+      "name": "school-first-result",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-first-result.png",
+      "xml": "/tmp/dreams-autonomy-native-school-first-result.xml"
+    },
+    {
+      "name": "school-named-consequence",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-named-result.png",
+      "xml": "/tmp/dreams-autonomy-native-school-named-result.xml"
+    },
+    {
+      "name": "school-club-result",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-club-result.png",
+      "xml": "/tmp/dreams-autonomy-native-school-club-result.xml"
+    },
+    {
+      "name": "school-club-cold",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-cold-club.png",
+      "xml": "/tmp/dreams-autonomy-native-school-cold-club.xml"
+    },
+    {
+      "name": "school-conduct-result",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-conduct-result.png",
+      "xml": "/tmp/dreams-autonomy-native-school-conduct-result.xml"
+    },
+    {
+      "name": "school-conduct-cold",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-cold-conduct.png",
+      "xml": "/tmp/dreams-autonomy-native-school-cold-conduct.xml"
+    },
+    {
+      "name": "school-study-result",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-study-result.png",
+      "xml": "/tmp/dreams-autonomy-native-school-study-result.xml"
+    },
+    {
+      "name": "school-study-cold",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-cold-study.png",
+      "xml": "/tmp/dreams-autonomy-native-school-cold-study.xml"
+    },
+    {
+      "name": "school-final",
+      "domain": "school",
+      "purpose": "normal",
+      "png": "/tmp/dreams-autonomy-native-school-final.png",
+      "xml": "/tmp/dreams-autonomy-native-school-final.xml"
+    }
+  ],
+  "reviewScope": "Each listed image personally viewed by coordinator. Corrected current captures only; software Android24/ExpoGo normal and130% scope. No image existence-only acceptance or full platform/accessibility claim."
+}

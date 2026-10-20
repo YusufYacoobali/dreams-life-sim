@@ -1,0 +1,19 @@
+
+> dreams-life-sim@1.0.0 typecheck
+> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json
+
+tests/support/professionalPolicy.ts(1,20): error TS2591: Cannot find name 'node:assert/strict'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+tests/support/professionalPolicy.ts(106,27): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(106,120): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(106,143): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(106,162): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(107,33): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(107,64): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(108,34): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(108,59): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(108,133): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(108,163): error TS18048: 'estate' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(133,51): error TS18048: 'selected' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(133,91): error TS18048: 'selected' is possibly 'undefined'.
+tests/support/professionalPolicy.ts(134,60): error TS18048: 'selected' is possibly 'undefined'.
+tests/support/sqlite.ts(1,30): error TS2591: Cannot find name 'node:sqlite'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
