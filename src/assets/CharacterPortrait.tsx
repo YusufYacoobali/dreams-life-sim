@@ -4,11 +4,11 @@ import type { Person } from '../game/model';
 import { ageingHairColor, faceScales, hairColors, hairRects, headRects, portraitAgeStage, portraitAtlasSize, skinTones, SourceRect } from './portraitLayout';
 
 const atlas = require('../../assets/generated/portrait-layers.png');
-export function CharacterPortrait({ appearance, age, name, size = 56 }: { appearance: Person['appearance']; age: number; name: string; size?: number }) {
+export function CharacterPortrait({ appearance, age, name, size = 56, decorative = false }: { appearance: Person['appearance']; age: number; name: string; size?: number; decorative?: boolean }) {
   const head = headRects[portraitAgeStage(age)];
   const hair = age < 3 ? null : hairRects[appearance.hair];
   const [scaleX, scaleY] = faceScales[appearance.face];
-  return <View accessible accessibilityRole="image" accessibilityLabel={name} style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: '#EAF0F8', overflow: 'hidden' }}>
+  return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'image'} accessibilityLabel={decorative ? undefined : name} accessibilityElementsHidden={decorative} importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'} style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: '#EAF0F8', overflow: 'hidden' }}>
     <View style={{ position: 'absolute', width: size, height: size, transform: [{ scaleX }, { scaleY }] }}>
       <TintedLayer rect={head} color={skinTones[appearance.skin]} width={size * 0.69} left={size * 0.155} top={size * 0.14} />
       {hair && <TintedLayer rect={hair} color={ageingHairColor(hairColors[appearance.hairColor], age)} width={size * (appearance.hair >= 4 ? 0.9 : 0.78)} left={size * (appearance.hair >= 4 ? 0.05 : 0.11)} top={size * (appearance.hair === 6 ? -0.03 : 0.06)} />}
