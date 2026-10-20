@@ -1,4 +1,5 @@
 import { serviceAway } from './serviceSchemas';
+import { publicCriticismCopy } from '../content/socialCriticism';
 import { z } from 'zod';
 import { ageOn, fullName, Person, World } from '../model';
 import { platforms, PlatformId, platformContent, postContent, postKinds, PostKind, sponsorBrands } from '../content/social';
@@ -98,9 +99,10 @@ function archivePosts(account: Account) {
     if (item.response === 'viral') archive.virals++;
   }
 }
-function controversy(world: World, account: Account, postId: string) {
+function controversy(world: World, account: Account, post: Post) {
   const person = world.people[account.ownerId], impact = draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 5, 15);
-  const item: World['controversies'][number] = { id: 'controversy_' + postId, personId: person.id, accountId: account.id, postId, date: { ...world.date }, title: 'Your post has drawn criticism', body: 'An audience that laughed at part of your post is arguing about the rest. People are asking what you meant.', impact, responseRoll: draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 100), response: null, resolved: null };
+  const copy = publicCriticismCopy(account.platform, post, ageOn(person, world.date));
+  const item: World['controversies'][number] = { id: 'controversy_' + post.id, personId: person.id, accountId: account.id, postId: post.id, date: { ...world.date }, ...copy, impact, responseRoll: draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 1, 100), response: null, resolved: null };
   world.controversies.push(item); person.publicLife.image = bounded(person.publicLife.image - impact); account.strikes++;
   if (account.strikes % 3 === 0) { account.status = 'suspended'; account.suspendedUntil = absolute(world) + 2; }
   for (const relation of world.relationships.filter(item => (item.from === person.id || item.to === person.id) && (item.romance === 'married' || item.romance === 'dating'))) { relation.trust = bounded(relation.trust - 3); relation.memories.push('public-dispute:' + world.date.year); }
@@ -140,7 +142,7 @@ function publish(world: World, account: Account, kind: PostKind, intent: 'authen
   account.posts.push(item); account.totalPosts++; account.totalLikes += likes;
   let period = account.periods.find(row => row.month === item.periodMonth); if (!period) { period = { month: item.periodMonth, posts: 0, sponsored: 0 }; account.periods.push(period); } period.posts++; if (sponsored) period.sponsored++; account.periods = account.periods.filter(row => row.month >= absolute(world) - 1);
   person.stats.energy = bounded(person.stats.energy - creatorWorkEnergy(world,production.studio,automatic,liveMinutes)); person.stats.stress = bounded(person.stats.stress + (intent === 'provocative' ? 2 : viral ? 1 : 0));
-  archivePosts(account); if (controversial) controversy(world, account, item.id); updateFame(world, person);
+  archivePosts(account); if (controversial) controversy(world, account, item); updateFame(world, person);
   if (automatic && viral && person.id === world.activePersonId) { fact(world, 'A post on ' + platformContent[account.platform].name + ' went viral, reaching ' + views.toLocaleString('en-US') + ' views.', 'fame'); offerPending(world, { kind: 'result', id: 'viral_' + item.id, title: 'Viral post!', body: 'A scheduled post reached far beyond your usual audience. Its response is already part of your profile.', illustration: 'fame', effects: [effect('views', 'Views', views.toLocaleString('en-US')), effect('followers', 'New followers', '+' + delta.toLocaleString('en-US'), 'positive')] }, 55); }
   return item;
 }
