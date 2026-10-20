@@ -47,9 +47,11 @@ function checkpointRoundTrip(world, { encodeWorld, packCheckpoint, unpackCheckpo
 }
 function assertEstateReceipts(world, estate) {
   const expected = new Map(estate.distributions.map(row => [row.personId, row.cash.minor])), paid = new Map(), pairs = [];
+  const payments = new Set(['estate-charity', 'estate-tax', 'estate-debt', 'estate-distribution']);
   let charity = 0n, tax = 0n, debtPaid = 0n;
   for (const [index, debit] of world.ledger.entries()) {
     if (debit.personId !== estate.personId) continue;
+    if (payments.has(debit.category)) assert.equal(debit.currency, estate.netWorthAtDeath.currency, 'Estate payment must retain settlement currency');
     if (debit.category === 'estate-charity') charity -= debit.cashDelta;
     if (debit.category === 'estate-tax') tax -= debit.cashDelta;
     if (debit.category === 'estate-debt') debtPaid -= debit.cashDelta;

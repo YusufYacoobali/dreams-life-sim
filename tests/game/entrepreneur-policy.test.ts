@@ -104,7 +104,12 @@ test('correct summary totals cannot hide a wrong inheritance account or repeated
   world.accounts[0].ownerId = 'actual_heir'; world.ledger.push({ ...world.ledger[0], id: 'extra_debit' }, { ...world.ledger[1], id: 'extra_credit' }); expect(() => assertEstateReceipts(world, estate)).toThrow(/settled distribution/);
 });
 
-test('an unpaid or wrong-currency creditor/tax/charity claim cannot pass only the scalar estate check', () => {
+test('an unpaid creditor or wrong-currency heir receipt cannot pass only the scalar estate check', () => {
   const { estate, world } = receiptScenario(); world.ledger[2].cashDelta = -9n; expect(() => assertEstateReceipts(world, estate)).toThrow();
   world.ledger[2].cashDelta = -10n; world.ledger[1].currency = 'EUR'; expect(() => assertEstateReceipts(world, estate)).toThrow(/currency/);
+});
+
+test.each(['estate-debt', 'estate-charity', 'estate-tax', 'estate-distribution'])('an equal numeric %s payment in EUR cannot satisfy a USD estate', category => {
+  const { estate, world } = receiptScenario(); world.ledger.find(row => row.category === category)!.currency = 'EUR';
+  expect(() => assertEstateReceipts(world, estate)).toThrow(/settlement currency/);
 });
