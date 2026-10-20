@@ -45,7 +45,7 @@ function EventCard({
             {effects.length > 0 && <View style={[styles.effects, { backgroundColor: c.inset }]}>
               {effects.map(effect => <View key={effect.id} style={styles.effectRow}>
                 <Text style={{ color: c.ink, fontSize: 14, flex: 1 }}>{effect.label}</Text>
-                <Text style={{ color: effect.tone === 'positive' ? c.green : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: 'right', flex: 1 }}>{effect.value}</Text>
+                <Text style={{ color: effect.tone === 'positive' ? c.positiveText : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: 'right', flex: 1 }}>{effect.value}</Text>
               </View>)}
             </View>}
             {event.kind === 'decision' && showProgress && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}

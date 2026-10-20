@@ -23,6 +23,8 @@ import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from '
 import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
+import { npcRelationshipsYear } from './systems/npcRelationships';
+import { npcCourtshipsYear } from './systems/npcCourtships';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
 import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
@@ -131,14 +133,14 @@ function processMonth(world: World) {
   marketMonth(world);
   const propertyMovement = updatePropertyMarket(world);
   for (const person of actors) { assetsMonth(world, person, propertyMovement); financeMonth(world, person); person.lastEconomicMonth = world.date.year * 12 + world.date.month - 1; }
-  healthFinanceMonth(world);
+  const dischargedFromHospital = healthFinanceMonth(world);
   socialMonth(world);
   familyFinanceMonth(world);
   petMonth(world);
   leisureMonth(world);
   for (const person of actors) npcDiscretionaryMonth(world, person, openingCash.get(person.id)!);
   familyMonth(world);
-  legalMonth(world);
+  legalMonth(world, dischargedFromHospital);
   refreshRoyalSuccession(world,'background');
   for(const loss of serviceFatalities){recordDeath(world,loss.personId,loss.cause);if(world.people[world.activePersonId].died)return;}
   for (const person of Object.values(world.people)) {
@@ -169,6 +171,8 @@ function finishYear(world: World) {
   for (const person of financialActors(world)) settleTax(world, person);
   npcYearDecisions(world);
   relationshipsYear(world);
+  npcRelationshipsYear(world);
+  npcCourtshipsYear(world);
   familyYear(world);
   const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
   const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
@@ -250,7 +254,8 @@ function applyEffects(world: World, effects: Effect[]): z.infer<typeof effectRow
       const relation = world.relationships.find(r => r.id === effect.relationshipId);
       if (!relation) throw new IneligibleAction('That relationship no longer exists');
       const before = relation.strength; relation.strength = clamp(before + effect.delta); refreshFriendship(relation);
-      delta = relation.strength - before; label = 'Relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
+      const names = [relation.from, relation.to].filter(id => id !== world.activePersonId).map(id => fullName(world.people[id]));
+      delta = relation.strength - before; label = names.join(' and ') + ' · relationship'; value = (delta >= 0 ? '+' : '') + delta + '%';
     } else {
       const from = world.accounts.find(account => account.id === effect.fromAccountId);
       const to = world.accounts.find(account => account.id === effect.toAccountId);

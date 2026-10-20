@@ -31,3 +31,34 @@ existing-test change was made.
 These checks establish component semantics and persistence behavior. Actual
 TalkBack/VoiceOver speech and device keyboard acceptance remain separate native
 checks; no new visual, physical timing or release-completion claim is made.
+
+## Retained new-life review and location
+
+Starting another life now reviews its actual name and birthplace. The validated
+identity and selected creation seed remain attached to the confirmation until
+the new life saves successfully. A failed save keeps the confirmation and one
+polite accessible error visible; retry does not require reopening the review.
+The previous life remains intact. Cancelling changes no saved data.
+
+Choosing the current country preserves the selected city instead of resetting
+it to that country's first city. An actual country change still selects a valid
+city. Advanced family-background, dating/children and reproductive choices now
+expose their disabled state while creation is saving. The shared family-choice
+component's optional disabled prop defaults to false for existing callers.
+
+The new [review/location checks](../tests/ui/new-life-review-flow.test.tsx) use
+on-disk SQLite and ordinary production commands to prepare a previous life with
+its real first-year history. Failure after inserting the new life rolls back all
+eight tables; retry preserves original life/backup/moment/receipt rows, performs
+zero full checkpoint unpacks, creates one newborn and closes only on success.
+Closing/reopening the database resumes that exact newborn; Begin Life acknowledges
+once. Separate flows retain Japan/Osaka and edited appearance across cancelled
+pickers/navigation into the actual saved birth, and hold a save while advanced
+controls remain disabled and unable to change the identity being committed.
+
+All ten focused checks across the new suite and existing onboarding,
+accessibility and startup suites pass in 14.496 seconds with the explicit
+30-second infrastructure test allowance. Game, persistence, version tags, original
+fixtures and art are unchanged. Consolidated types/UI/export gates and native
+acceptance belong to the coordinator after integration; this isolated branch
+does not claim those checks ran again.

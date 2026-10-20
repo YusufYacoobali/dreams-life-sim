@@ -36,7 +36,7 @@ export function BottomNavigation({
   const insets = useSafeAreaInsets();
   return <View accessibilityRole="tablist" style={[styles.tabs, { paddingBottom: insets.bottom, backgroundColor: c.surface, borderTopColor: c.line }]}>
         {tabs.map(tab => {
-          const color = activeTab === tab.id ? c.blue : c.muted;
+          const color = activeTab === tab.id ? c.link : c.muted;
           return <Pressable
             key={tab.id} accessibilityRole="tab" accessibilityLabel={tab.label}
             accessibilityState={{ selected: activeTab === tab.id }}

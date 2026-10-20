@@ -56,6 +56,8 @@ import { validateScholarships } from './systems/scholarshipValidation';
 import { workplaceSchema, workRaiseSchema } from './systems/workplaceSchemas';
 import { validateWorkplaces } from './systems/workplaceValidation';
 import { validateJobInterview } from './systems/jobInterviewValidation';
+import { npcCourtshipSchema } from './systems/npcCourtshipSchemas';
+import { validateNpcCourtships } from './systems/npcCourtshipValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -88,12 +90,13 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(32), engineVersion: z.literal(33), contentVersion: z.literal(9),
+  schemaVersion: z.literal(33), engineVersion: z.literal(34), contentVersion: z.literal(9),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(relationshipSchema), households: z.array(householdSchema), marriages: z.array(marriageSchema),
+  npcCourtships: z.array(npcCourtshipSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
@@ -311,6 +314,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateBusinesses(world);
   validateEarnings(world, ledger);
   validateHourlyWork(world, ledger);
+  validateNpcCourtships(world, ledger);
   validateTravel(world, ledger);
   validateSchools(world);
   validateWorkplaces(world);
@@ -539,5 +543,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 31 && parsed.engineVersion === 32) { parsed.schemaVersion = 32; parsed.engineVersion = 33; parsed.hourlyContracts = []; }
   // Editorial/locality changes affect future selection only; already bound scenes remain exact.
   if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33 && parsed.contentVersion === 8) parsed.contentVersion = 9;
+  // Autonomous courtship clocks begin now; old pay, people, bound scenes and history remain exact.
+  if (parsed && parsed.schemaVersion === 32 && parsed.engineVersion === 33) { parsed.schemaVersion = 33; parsed.engineVersion = 34; parsed.npcCourtships = []; }
   return validateWorld(parsed, immutable);
 }
