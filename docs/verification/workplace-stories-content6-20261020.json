@@ -1,0 +1,131 @@
+{
+  "recordedOn": "2026-10-20",
+  "recordedAt": "2026-10-20T07:44:55.088Z",
+  "gameSourceHash": "cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b",
+  "combinedGamePersistenceSourceHash": "fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e",
+  "baseCommit": "3ceff8e",
+  "versions": {
+    "world": 30,
+    "engine": 29,
+    "content": 6,
+    "database": 6
+  },
+  "scope": "Ten actual-contact workplace situations, content-tag-only migration, accurate work-routine copy and school-leaver part-time guidance",
+  "source": {
+    "src/game/content/eventTypes.ts": "f11abb6e276e74336c0042f108cf3d960b39fcafc4951a4950ba34bf090e1903",
+    "src/game/content/events.ts": "2a0ee32da3697bf0c5312de4e56cc3eb0907b8c4d5374699bb5b749e148c4af5",
+    "src/game/content/workplaceStories.ts": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+    "src/game/createLife.ts": "b0042ddd1dadebfc30da0ea797302f88afa84a42cb823fc563240f3571870f08",
+    "src/game/model.ts": "50af4b62cfe424808ce3d6104a09d2e52c8983c1c52bc89074776ba3dec2a944",
+    "src/game/systems/work.ts": "27eff3597b280dca89ad08fa541c65c24e82537febb47cef2ac77cbc1f61b6bd",
+    "app/(game)/work.tsx": "c70ac8c81aa3f5a1cbe33af34016f10248bbe269d148557e5500575c95a6b71a",
+    "tests/game/workplace-stories.test.ts": "501d7295a752032665b91dc0a18eb34f83534f5e2545f08f507cee0fb0382dc3",
+    "tests/support/employee.ts": "3c26f40684579bb5674c33e14189af115133a706a48b200e15abc0f2e23545ca",
+    "tests/ui/workplace-story-flow.test.tsx": "b373e5698340bcf462ee8e8df3996239cda46248232bb8c1ac2428e005c7050a"
+  },
+  "catalogue": {
+    "distinctSituations": 110,
+    "minimum": 250,
+    "additionalNeeded": 140,
+    "newStorySituations": 10,
+    "newChoices": 30
+  },
+  "verification": {
+    "completeRegression": {
+      "tests": 1379,
+      "suites": 99,
+      "seconds": 801.364,
+      "processSeconds": 802.468,
+      "exitCode": 0,
+      "raw": "regression-workplace-stories-20261020.txt",
+      "rawSha256": "653858195bb5379fd8f78c0d71611a5f779b00a9da9de2849fe60c2fbf355b2d",
+      "rawStdoutThenStderr": true
+    },
+    "strictApplicationAndTestTypes": true,
+    "strictTypesExitCode": 0,
+    "currentSourceLifetimeSeeds": 120,
+    "currentSourceLifetimeRecord": "life-sweep-workplace-stories-120-20261020.json",
+    "all30ChoicesInAll12Countries": true,
+    "realSQLiteAllTableRollbackWarmRetryNoFullUnpackAndColdResult": true,
+    "genuineAcceptedRaise19WorldsAnd18OriginalMomentsPreserved": true,
+    "nativeRecord": "android24-workplace-stories-20261020/journey-exact.json",
+    "nativeMigrationAndBrowsingColdAll8TablesExact": true,
+    "nativeNaturalNewScene75AllSimulationFieldsExact": true,
+    "nativeAnnualCurrencyJournalExceptions": 11,
+    "nativeChoice76AndAck77WholeWorldsExact": true,
+    "nativeResultColdAll8TablesExact": true,
+    "nativeOld4WorldsBackups35Moments62ReceiptsExact": true,
+    "nativeNewBeforeAgeUp74PayloadOriginalContent5Exact": true,
+    "nativeFinalRevision": 77,
+    "nativeFinalCounts": {
+      "lives": 5,
+      "moments": 36,
+      "receipts": 65
+    }
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-de77671264ea2d68181965f00eda7c19.hbc",
+      "bytes": 5414977,
+      "sha256": "92db9f9a7dc37a4819512bb45cfe98e3c3ce3c3569497ca0a56e2dd60999b8f5"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-f1c6111d1ff250a5ce6497838c647819.hbc",
+      "bytes": 5110049,
+      "sha256": "abf0e01dccafc607b8f42fc267994e76616a7c05c43c0577a25ac20ae2ac5940"
+    }
+  ],
+  "actionDiagnostics": {
+    "raw": "action-latency-workplace-stories-20261020.json",
+    "rawSha256": "cb915b4aa05069df6987c4f5701edbb4f9f6db4a2df94e0555779e29fdf27508",
+    "samples": 50,
+    "allWarmAvoidFullCheckpointDecode": true,
+    "allColdCurrentAndBackupWorldsExact": true,
+    "sourceHash": "fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e",
+    "driverHash": "40ce8fc8b2231596c8a7e8a268ec4c612134c6ae9ae35c58edbf07303a6f211c",
+    "medians": [
+      {
+        "label": "Begin Life",
+        "totalMs": 1.0495970000001762
+      },
+      {
+        "label": "First-year choice",
+        "totalMs": 2.0510119999999006
+      },
+      {
+        "label": "First-year choice Continue",
+        "totalMs": 2.023971000000074
+      },
+      {
+        "label": "Age-seven callback",
+        "totalMs": 5.0875740000001315
+      },
+      {
+        "label": "Age-seven callback Continue",
+        "totalMs": 11.548361999999997
+      },
+      {
+        "label": "Age-30 routine",
+        "totalMs": 18.67489999999998
+      },
+      {
+        "label": "Age-60 routine",
+        "totalMs": 95.48159399999895
+      },
+      {
+        "label": "Prepared teen coworker introduction",
+        "totalMs": 10.27891499999896
+      },
+      {
+        "label": "Prepared supervisor feedback",
+        "totalMs": 12.314012000002549
+      },
+      {
+        "label": "Prepared raise request",
+        "totalMs": 12.955626999999367
+      }
+    ],
+    "scope": "Ten serial cloud SQLite cases after verification processes closed. Not physical/native performance or a paired comparison. New workplace choice has separate warm SQLite UI acceptance."
+  },
+  "limits": "Production remains about50%;140 distinct situations still needed. Further file breadth parked. Physical p95, full native fidelity/accessibility, standalone/iOS, 120-year/1000-person/multigeneration/storage and broader integration/release gates remain open."
+}

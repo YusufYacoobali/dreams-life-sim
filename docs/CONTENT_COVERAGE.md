@@ -1,6 +1,6 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **100 distinct situational templates** against
+The source catalogue contains **110 distinct situational templates** against
 the minimum of 250. Routine acknowledgements, generated job/asset offers,
 milestones, school reports and renamed copies do not increase this count.
 These are authored game stories; final editorial, balance and release acceptance
@@ -20,8 +20,9 @@ category.
 | Shared primary/secondary project promise | 1 |
 | Early-teen / teenage family situations | 14 |
 | General adult/later-life situations | 12 |
-| **Source total** | **100** |
-| **Additional distinct situations needed for the minimum** | **150** |
+| Ordinary workplace with actual contacts | 10 |
+| **Source total** | **110** |
+| **Additional distinct situations needed for the minimum** | **140** |
 
 The original expansion added 27 situations: three introductory scenes, six early-childhood
 scenes, twelve primary-school scenes and six secondary-school scenes. Every branch
@@ -55,8 +56,14 @@ thirty choices about growing independence, family boundaries, attention and
 ordinary practical tasks. Five scenes use an actual home parent, one explicitly
 permits remote parent contact, and four are parent-independent. Their existing
 stat/bond effects do not invent purchases, qualifications, people or monthly
-practice. The source total is now 100. Old bound choices, results, paid outings,
+practice. That checkpoint brought the source total to 100. Old bound choices, results, paid outings,
 original historical payloads and RNG survive the content-tag migration.
+
+Content six adds ten [ordinary workplace situations](WORKPLACE_STORIES.md),
+with thirty choices bound to actual available colleagues/supervisors. Selection
+creates no people or draws, and choices change only real bounded stats/existing
+bonds, without awarding money, service, performance or qualifications. The source
+total is110; old bound scenes and every original historical payload stay exact.
 
 The School page now shows saved plans, their actual participants and dates,
 permission and conditional outing quote, and four recent outcomes. Paid outings
@@ -92,7 +99,8 @@ Two saved callback families are now in the handoff checkpoint: permission/attend
 for the existing arcade invitation, and a new shared-project promise/deadline.
 Focused callback and real-SQLite interaction checks pass; the handoff's listed
 connected automated cases now also pass in [CALLBACK_ACCEPTANCE.md](CALLBACK_ACCEPTANCE.md).
-Native acceptance remains open. Their follow-up steps do not inflate the
+The listed native reading/school-help/deadline/outing permission/payment/cold
+result/remaining-year checks now pass with scoped evidence in HANDOFF. Their follow-up steps do not inflate the
 distinct-situation count. Rarity tiers, the broader pacing model, editorial metadata,
 further callbacks and comprehensive system-specific coverage remain pending.
 
@@ -100,4 +108,4 @@ The remaining catalogue needs employment and all eleven special paths, adult
 relationships, finances/ownership, health/legal situations, travel, pets/hobbies,
 later-life/legacy callbacks and uncommon memorable outcomes. The existing system
 decisions do not satisfy those distinct-story allocations. The overall game
-estimate remains about 50%; 100/250 is a content count, not an overall score.
+estimate remains about 50%; 110/250 is a content count, not an overall score.

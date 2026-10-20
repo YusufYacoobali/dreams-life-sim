@@ -1,20 +1,20 @@
 # Production-state lifetime invariant sweep
 
-Current world **30 / engine 29 / content 5** passes **120 distinct seeds
-0–119** across all twelve countries through the validated-immutable engine in
-**731.299 seconds**, empty stderr and exit zero. Game hash:
-`147c545c3af259b1ea88889ff68ca396d76767b9df9c9e7ad4fe9728ad69d737`.
-[Summary and all raw cases](verification/life-sweep-raises-120-20261020.json)
-retain ages 40–98, max 24 people / 55,199 ledger rows. Ordinary-life metrics
-match the same prior workplace seeds; schema and terminal hashes change.
-Overlapping runs do not create additional distinct cases.
+Current **world30/engine29/content6** passes all **120 distinct seeds0–119**,
+all twelve countries, through the validated-immutable engine in **744.535 seconds**,
+empty stderr/exit0. Game hash:
+`cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b`.
+[Summary and raw cases](verification/life-sweep-workplace-stories-120-20261020.json)
+retain ages40–98, max24people/55,199ledger rows. Same-seed ordinary metrics match
+the prior raise run; terminal hashes change with the content tag. Overlapping
+runs do not create additional distinct seeds.
 
-The first-eligible policy does not introduce optional workplaces or request
-raises. Separate domain, SQLite/UI and native checks cover those actions/payroll.
-The complete current regression passes **1,356 tests / 96 suites**. There is no
-current-source 1,000-seed claim. Earlier [world-29](verification/life-sweep-workplaces-120-20261020.json)
-and [world-28/content-five](verification/life-sweep-content5-120-20261020.json)
-120-seed records remain historical.
+The first-eligible policy does not introduce optional workplaces. New named
+workplace situations have separate all-choice/all-country, SQLite/UI and actual
+native coverage. Complete current regression: **1,379 tests/99 suites**. No
+current-source1000-seed claim. Earlier [raise](verification/life-sweep-raises-120-20261020.json),
+[workplace](verification/life-sweep-workplaces-120-20261020.json) and content5 runs
+retain their historical source hashes and scope.
 
 ## Earlier content-four 1,000-seed gate
 

@@ -85,7 +85,7 @@ export function resolveWork(world: World, command: WorkCommand) {
   } else if (command.type === 'work-effort') {
     if (!person.employment) throw new IneligibleAction('You need a job first');
     person.employment.effort = command.effort;
-    result(world, 'Work routine updated', 'Your effort affects performance, energy and stress as months pass.', 'career');
+    result(world, 'Work routine updated', 'Your effort affects performance and stress as months pass.', 'career');
   } else if (command.type === 'quit-job') {
     if (!person.employment) throw new IneligibleAction('You are not employed');
     const role = jobs.find(candidate => candidate.id === person.employment!.roleId)!;

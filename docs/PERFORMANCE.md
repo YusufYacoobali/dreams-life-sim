@@ -4,7 +4,30 @@ These are cloud diagnostics, not native-device acceptance. Re-run after the rema
 
 Machine-readable measurements are preserved in [verification/](verification/README.md).
 
-## Current raise diagnostics
+## Current content-six diagnostics
+
+The complete1,379-test/99-suite regression, strict types, both Hermes exports and
+120current immutable lifetimes pass. After those processes close, ten serial
+cloud SQLite cases run one warm-up and five samples each. All50warm samples avoid
+full checkpoint decode; every cold current/backup world is exact. New workplace
+choice failure/retry/cold acceptance separately verifies the warm UI path.
+[Raw](verification/action-latency-workplace-stories-20261020.json) retains combined
+source hash`fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e`.
+
+| Cloud engine + SQLite action | Median |
+| --- | ---: |
+| Begin Life |1.05ms |
+| First choice / Continue |2.05 /2.02ms |
+| Age7choice / resumed Continue |5.09 /11.55ms |
+| Age30 /60routine |18.67 /95.48ms |
+| Introduction / feedback / raise |10.28 /12.31 /12.96ms |
+
+These are current unpaired cloud diagnostics, not native startup/navigation,
+physical p95 or release budgets. Reproduce with
+`node tools/benchmark-actions.cjs --profile --raises`. Larger-life/population,
+120-year/multigeneration/storage and physical/native acceptance remain open.
+
+## Earlier raise diagnostics
 
 World **30 / engine 29 / content 5** passes **1,356 tests / 96 suites**, strict
 types, both fresh Hermes exports and 120 current immutable lifetimes. After

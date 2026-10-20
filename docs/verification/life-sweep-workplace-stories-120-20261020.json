@@ -1,0 +1,66 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "3ceff8e",
+  "scope": "Current content6 validated immutable pure-engine lifetimes, first eligible choices; no optional workplace introductions, not native or SQLite",
+  "start": {
+    "event": "sweep-start",
+    "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+    "stateMode": "validated immutable",
+    "node": "v24.19.0",
+    "count": 120,
+    "startSeed": 0,
+    "gameSourceHash": "cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "setupMs": 2111
+  },
+  "completion": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 30,
+      "engine": 29,
+      "content": 6
+    },
+    "gameSourceHash": "cc39bdfa720bf3fb0f8432d203771950e55189e64557a87e08a1c9b2f0e9ee9b",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 24,
+    "maxLedgerRows": 55199,
+    "elapsedMs": 744535
+  },
+  "distinctSeeds": 120,
+  "seeds": [
+    0,
+    119
+  ],
+  "exitCode": 0,
+  "stderrBytes": 0,
+  "processSeconds": 746.711,
+  "raw": {
+    "file": "life-sweep-workplace-stories-120-20261020.ndjson",
+    "sha256": "9227c191b7b220a6729f7664f14a15beb6815d386904aa3da7d53788d6cab16d"
+  },
+  "priorRaiseSameSeedsOrdinaryMetricsExact": true,
+  "overlappingRunsNotAdditionalDistinctSeeds": true,
+  "limits": "Named workplace stories have separate coupled domain, UI/SQLite and actual native acceptance. Earlier1000 lives belong to world28/content4. No physical p95, every optional action, 120-year/1000-person/multigeneration acceptance."
+}

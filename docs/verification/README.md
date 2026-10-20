@@ -4,6 +4,19 @@ These machine-readable records preserve measured cloud results and their scope.
 They are not native-device, visual, storage-budget or complete-game acceptance.
 See [PERFORMANCE.md](../PERFORMANCE.md) for interpretation and the open gates.
 
+- `workplace-stories-content6-20261020.json` records ten actual-contact situations,
+  content-tag-only migration, school-leaver guidance and the complete1,379-test/
+  99-suite pass, strict types and both Hermes exports. Raw complete output:
+  `regression-workplace-stories-20261020.txt`. Native named scene/cold result,
+  exact old rows and actual74→77 are in `android24-workplace-stories-20261020/`.
+- `life-sweep-workplace-stories-120-20261020.json` and matching`.ndjson` retain
+  all120distinct content6 immutable seeds, twelve countries,744.535seconds,
+  unchanged source hashes and empty stderr/exit0. Same-seed ordinary metrics
+  match prior raises; these are not additional distinct cases.
+- `action-latency-workplace-stories-20261020.json` retains ten serial cloud SQLite
+  cases/five samples each, all50warm samples without full checkpoint decode and
+  exact cold current/backup. Age60routine95.48ms; not physical/native timing.
+
 - `journal-facts-20261020.json` and `android24-journal-facts-20261020/` retain
   individual journal-fact rows, final-source native-clipping mitigation, two
   successful native appends/manual history/tab return, exact commands66–74 and

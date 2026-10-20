@@ -12,6 +12,37 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+World **30 /engine29 /content6 /database6** adds ten [named workplace situations](WORKPLACE_STORIES.md)
+and thirty choices, for **110/250 minimum /140 remaining**. Actual available
+colleagues/current supervisor bind by exact IDs/full names without generation or
+draws. Choices change bounded stats/existing bonds, without wages, service,
+performance or qualification. Old lives change only the content tag, preserving
+bound scenes/results/history/RNG. School leavers in part-time work get factual
+job-board guidance; future routine copy accurately names performance/stress.
+
+All **1,379 tests/99 suites** pass in **801.364 seconds**, strict types and both
+fresh Hermes exports. All **120 current immutable lifetimes**, twelve countries,
+pass in **744.535 seconds**, empty stderr/exit0. Same-seed ordinary metrics match
+prior raises; no additional seeds or current1000-seed claim. All50 serial warm
+SQLite samples avoid full checkpoint decode, with exact cold current/backup;
+first choice/Continue2.05/2.02ms, age60routine95.48ms. These are cloud diagnostics.
+[Source/checks](verification/workplace-stories-content6-20261020.json),
+[complete regression](verification/regression-workplace-stories-20261020.txt),
+[lifetime scope](verification/life-sweep-workplace-stories-120-20261020.json).
+
+Actual Android naturally offers shared credit75 after a normal paid year. Exact
+Sipho/Thando IDs bind; choice76/cold result/ack77 match whole expected worlds,
+with no choice money/service award. Cold migration and job guidance/browsing
+preserve all eight tables. Eleven annual currency-spacing journal exceptions are
+enumerated without editing native data; simulation fields are exact. All four
+inactive worlds/backups,35moments/metadata and62prior receipts stay exact; new
+Before Age Up74 payload keeps original content5 bytes. Current native is Amahle
+age20/revision77, five lives/36moments/65receipts, no pending/year. [Six captures
+and exact native proof](verification/android24-workplace-stories-20261020/).
+Full production stays approximately50%; further player file breadth stays parked.
+Earlier milestones below retain their original sources and scope.
+
+
 Life now virtualises individual journal facts with age headings, fixing settled
 same-year tail clipping. Native view clipping is disabled to prevent the
 reproduced Android24 RenderThread reattachment crash; final-source two actual

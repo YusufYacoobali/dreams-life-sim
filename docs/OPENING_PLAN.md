@@ -15,6 +15,16 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+Current **world30/engine29/content6** adds ten actual-contact workplace situations,
+for110/250 minimum with140remaining. All1,379tests/99suites, strict types, both
+Hermes exports and120current immutable lifetimes pass. Actual native normal year,
+named scene, choice/cold result/acknowledgement reach exact77 while preserving all
+original lives/history. [Source/checks](verification/workplace-stories-content6-20261020.json)
+and [native scope](verification/android24-workplace-stories-20261020/) retain limits.
+School-leaver part-time guidance opens the actual eligible job board read-only.
+Full production remains about50%, with broader responsiveness/integration/release
+gates open. Continue larger-life/population checks and the complete production plan.
+
 The latest journal follow-up virtualises individual facts while retaining age
 headings and manual older-history reading. Final source disables native clipping
 after a reproduced Android24 RenderThread crash. Two actual same-year appends
@@ -178,7 +188,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Travel/emigration | 75% | Native acceptance, country-source verification and broader scenarios |
 | Pets/hobbies/entertainment | 5% baseline | Persistent pets plus four hobby/four outing paths implemented with automated checks; broader leisure breadth and native acceptance remain pending |
 | Extras/achievements/challenges | 25% | Most extras and factual progress/unlock surfaces |
-| Distinct situational stories | 20% baseline | 100 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
+| Distinct situational stories | 20% baseline | 110 in the source catalogue; automated callback acceptance passes; full coverage/editorial/release review remain open |
 | Visual fidelity/polish | 50% | Matched-viewport native comparison, missing artwork/flows and accessibility polish |
 | Device/release readiness | 10% | Actual Android/iOS journeys, native builds, performance and release gates |
 
