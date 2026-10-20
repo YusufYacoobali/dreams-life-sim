@@ -16,6 +16,15 @@ Further import/export/sharing breadth stays parked. That existing implementation
 was already beyond the user's 80% exception and its last native folder-save check
 passed. Read-only Saved Lives summaries are complete. Do not expand file features.
 
+The actual native workplace result 54 is now preserved before raise work in
+`v29-native-workplace-archive.json`, exported with clean unmodified pushed
+**60f5ed9**. All eighteen worlds and seventeen original moment payloads/metadata
+are exact, including the earlier sixteen teen moments. Two preservation/SQLite
+failure-retry-cold checks pass in **11.775 seconds**, with strict types. Runtime
+source and the full 1,318-test baseline below stay unchanged; this is not a new
+composed full-test total. [Producer and hashes](verification/native-workplace-archive-v29-20261020.json).
+Never regenerate this fixture with newer source.
+
 ## Current tested source
 
 World **29 / engine 28 / content 5 / database 6** connects ordinary local
@@ -119,12 +128,15 @@ Genuine regression archives must retain their original producer/source/bytes:
 - `v28-native-teen-archive.json`: clean pushed **3c6df7e**, actual result 46,
   sixteen original mixed v1/v2 moments, SHA
   `396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82`.
+- `v29-native-workplace-archive.json`: clean **60f5ed9**, native feedback 54 /
+  seventeen original moments, SHA
+  `824ba73545b1ed57dc2a1b9df5f154c8eed4c5987aa071ea6fc68b1716a32de2`.
 - Native arcade archive: clean **e29e634**, actual paid result 34 / twelve moments.
 - Native school archive: clean **1d1e696**, actual Riley 53 / ten Riley moments.
 - Ordinary-hobby/earlier archives and deferred originals keep their provenance;
   never regenerate historical payloads with newer source or prune history.
-Before another workplace schema change, preserve the actual current native
-workplace result with the clean pushed world-29 producer if needed.
+The world-29 native workplace result is now preserved with producer 60f5ed9;
+keep its actual feedback, three people, paid history and seventeen moments exact.
 
 Keep certified immutable worlds/ledger rows, compression block reuse and the
 repository's exact cached-payload check. Cache only after durable commit.

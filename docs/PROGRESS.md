@@ -12,6 +12,15 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Before raise-request schema work, the actual native feedback result 54 is now
+preserved with clean unmodified pushed **60f5ed9**. Its current payload, seventeen
+original moments/metadata and all eighteen old worlds remain exact, including the
+sixteen original teen moments. Two preservation/SQLite failure-retry-cold checks
+pass in **11.775 seconds**, strict types. Runtime source and the complete 1,318-test
+baseline below are unchanged; this is fixture protection, not player file breadth
+or a composed new whole-regression count. [Producer and hashes](verification/native-workplace-archive-v29-20261020.json).
+
+
 World **29 / engine 28 / content 5 / database 6** now connects persistent
 [ordinary workplaces](WORKPLACES.md): explicit introductions, a real supervisor
 and two colleagues, read-only virtualised browsing/search/profile/Back, actual
