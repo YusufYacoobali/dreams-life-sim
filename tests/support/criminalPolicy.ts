@@ -8,7 +8,9 @@ import { countries, countryCodes, type CountryCode } from '../../src/game/countr
 import { ageOn, compareDates, encodeWorld, type World, type GameDate } from '../../src/game/model';
 import { IneligibleAction, resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
-import { rules } from '../../src/game/rules';
+import { minimumSchoolLeavingAge, rules } from '../../src/game/rules';
+import { currentSchool } from '../../src/game/systems/schoolSchemas';
+import { schoolWithdrawalReason } from '../../src/game/systems/school';
 import { legalRules } from '../../src/game/legalRules';
 import { jobs } from '../../src/game/content/jobs';
 import { accountFor, availableCash } from '../../src/game/systems/common';
@@ -24,7 +26,7 @@ import { tripQuote, tripReason } from '../../src/game/systems/travel';
 import { relocationFee, relocationReason } from '../../src/game/systems/relocation';
 import { netWorth } from '../../src/game/valuation';
 
-export const criminalPolicyVersion = 1;
+export const criminalPolicyVersion = 2;
 export const criminalMilestones = ['schoolAttendance', 'compulsoryLeaveGuard', 'schoolExit', 'paidJob', 'offence', 'arrest', 'delayedArrest', 'counsel', 'hearing', 'conviction', 'prisonRoutine', 'prisonTime', 'prisonStudy', 'prisonPay', 'prisonConnection', 'custodyGuard', 'release', 'recordWorkGate', 'foreignWorkApplication', 'holiday', 'holidayCompleted', 'recordExpired', 'rehired', 'retirement', 'death', 'estate'] as const;
 type Stage = typeof criminalMilestones[number];
 type Evidence = Record<string, unknown>;
@@ -49,7 +51,7 @@ export function runCriminalPolicy(initial: World, options: CriminalOptions = {})
   assert.ok(Number.isInteger(maxYears) && maxYears >= 1 && maxYears <= 150);
   const trace: GameCommand[] = [], reached = new Map<Stage, { age: number; date: GameDate; revision: number; evidence: Evidence }>(), observations: { stage: string; outcome: string; age: number; date: GameDate; detail: Evidence }[] = [], coldChecks: { reason: string; revision: number; canonicalBytes: number; checkpointBytes: number; format: string }[] = [], custodyWindows: Evidence[] = [];
   const reviewedCounsel = new Set<string>(), configured = new Set<string>(), befriended = new Set<string>(), visits = new Set<string>(), checkedCold = new Set<string>(), foreignApplications = new Set<string>(), blockedKeys = new Set<string>();
-  let years = 0, committed = 0, healthy = false, attemptedLeave = false, guardedCustody = false, offenceIndex = 0, lastOffenceYear: number | null = null, sawVisibleRecord = false;
+  let years = 0, committed = 0, healthy = false, attemptedLeave = false, guardedWithdrawal = false, guardedCustody = false, offenceIndex = 0, lastOffenceYear: number | null = null, sawVisibleRecord = false;
   const player = () => world.people[activeId], age = () => ageOn(player(), world.date), reserve = () => rules[player().country].livingCost * 3n, spendable = () => availableCash(accountFor(world));
   const destinationId = country === 'FR' ? 'london' : 'paris';
   const log = (stage: string, outcome: string, detail: Evidence = {}) => observations.push({ stage, outcome, age: age(), date: { ...world.date }, detail });
@@ -59,7 +61,13 @@ export function runCriminalPolicy(initial: World, options: CriminalOptions = {})
   const observe = () => {
     assert.equal(world.activePersonId, activeId);
     const school = world.schoolCommunities.find(row => row.personId === activeId && row.periods.length); if (school) mark('schoolAttendance', { schoolId: school.id, attendedMonths: school.periods.length });
-    const completion = world.schoolCompletions.find(row => row.personId === activeId); if (completion) mark('schoolExit', { completion, actualSchoolEnd: rules[completion.country].schoolEnd, exit: 'ordinary country school-end assessment; no compulsory dropout command exists' });
+    const withdrawal = world.schoolWithdrawals.find(row => row.personId === activeId);
+    if (withdrawal) {
+      const community = world.schoolCommunities.find(row => row.id === withdrawal.communityId);
+      assert.ok(community?.personId === activeId && community.endReason === 'withdrawn' && community.ended && compareDates(community.ended, withdrawal.date) === 0);
+      assert.ok(withdrawal.age >= withdrawal.minimumLeavingAge);
+      mark('schoolExit', { withdrawal, actualSchoolEnd: rules[withdrawal.country].schoolEnd, exit: 'voluntary-secondary-withdrawal' });
+    }
     const paid = world.workHistory.find(row => row.personId === activeId && row.monthsWorked > 0 && row.grossEarned > 0n); if (paid) mark('paidJob', { employmentId: paid.id, roleId: paid.roleId, actualMonths: paid.monthsWorked, actualGross: paid.grossEarned });
     const sources = world.incidents.filter(row => row.personId === activeId); for (const source of sources) { assert.ok(ageOn({ ...player(), died: null }, source.date) >= Math.max(18, rules[source.country].adultAge, rules[source.country].schoolEnd), 'Policy never commits a child offence'); }
     if (sources[0]) mark('offence', { incidentId: sources[0].id, offence: sources[0].offence, date: sources[0].date, actualGain: sources[0].gain });
@@ -95,6 +103,13 @@ export function runCriminalPolicy(initial: World, options: CriminalOptions = {})
       if (sentence && after && sentence.routine.study) { const months = after.servedMonths - sentence.servedMonths, blockedMonths = inpatientUntil === null ? 0 : Math.max(0, Math.min(after.lastServedMonth, inpatientUntil) - sentence.lastServedMonth); assert.equal(after.studyMonths - sentence.studyMonths, months - blockedMonths, 'Prison study needs actual nonhospital attendance'); }
       if (compareDates(before.date, world.date) !== 0) custodyWindows.push({ from: before.date, to: world.date, sentenceId: sentence?.id ?? null, ordinaryWageReceipts: 0, prisonStipends: stipend.map(row => row.id), inpatientUntil });
     }
+    if (command.type === 'school-withdraw') {
+      assert.equal(world.schoolWithdrawals.length, before.schoolWithdrawals.length + 1);
+      for (const field of ['accounts', 'ledger', 'liabilities', 'workHistory', 'hourlyContracts', 'schoolCompletions', 'random'] as const) assert.deepEqual(world[field], before[field], 'Withdrawal grants no ' + field);
+      assert.deepEqual(player().education.qualifications, before.people[activeId].education.qualifications);
+      assert.deepEqual(player().employment, before.people[activeId].employment);
+      assert.equal(player().education.stage, 'none');
+    }
     if (command.type === 'choose' && before.pending?.kind === 'decision' && before.pending.templateId === 'job-interview') { assert.deepEqual(world.ledger, before.ledger); assert.deepEqual(world.accounts, before.accounts); const hired = world.workHistory.find(row => row.personId === activeId && !before.workHistory.some(previous => previous.id === row.id)); if (hired) { assert.equal(hired.monthsWorked, 0); assert.equal(hired.grossEarned, 0n); } }
     observe(); options.onStep?.(world, trace);
   };
@@ -103,8 +118,23 @@ export function runCriminalPolicy(initial: World, options: CriminalOptions = {})
     catch (error) { if (!(error instanceof IneligibleAction)) throw error; blocked(stage, error.message); return false; }
   };
   const negative = (stage: string, command: GameCommand, reason: RegExp) => { const payload = encodeWorld(world); trace.push(command); assert.throws(() => resolveCommand(world, command, true), error => error instanceof IneligibleAction && reason.test(error.message)); assert.equal(encodeWorld(world), payload); log(stage, 'rejected-without-state-or-rng-change', { command: command.type }); };
+  const manageSchoolExit = () => {
+    if (reached.has('schoolExit')) return false;
+    const school = currentSchool(world), reason = schoolWithdrawalReason(world, school);
+    if (reason) {
+      blocked('schoolExit', reason);
+      if (!guardedWithdrawal && school?.stage === 'secondary' && age() < minimumSchoolLeavingAge[school.country] && reason.includes('withdrawal from age ')) {
+        negative('schoolExitMinimumGuard', { type: 'school-withdraw', communityId: school.id, country: school.country, city: school.city, school: school.school }, /withdrawal from age /);
+        guardedWithdrawal = true;
+      }
+      return false;
+    }
+    assert.ok(school?.stage === 'secondary');
+    return attempt('schoolExit', { type: 'school-withdraw', communityId: school.id, country: school.country, city: school.city, school: school.school });
+  };
   const managePause = () => {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) return false;
+    if (manageSchoolExit()) return true;
     const item = world.cases.find(row => row.personId === activeId && row.status === 'awaiting-trial' && !reviewedCounsel.has(row.id));
     if (item) { const counsel = spendable() >= item.counselFee.minor + reserve() ? 'private' : 'public', before = accountFor(world).cash; reviewedCounsel.add(item.id); run({ type: 'retain-counsel', caseId: item.id, counsel }); assert.equal(accountFor(world).cash, before - (counsel === 'private' && !item.counselPaid ? item.counselFee.minor : 0n)); mark('counsel', { caseId: item.id, counsel, paid: before - accountFor(world).cash }); log('counsel', 'reviewed-and-committed', { caseId: item.id, counsel }); return true; }
     const sentence = activeSentence(world);
@@ -162,7 +192,7 @@ export function runCriminalPolicy(initial: World, options: CriminalOptions = {})
     if (!player().died) { run({ type: 'advance' }); drain(); }
   }
   observe(); cold('final');
-  const milestones = Object.fromEntries(criminalMilestones.map(stage => [stage, reached.has(stage) ? { status: 'reached', ...reached.get(stage)! } : { status: player().died ? 'unreached-at-natural-death' : 'unreached-at-policy-bound' }]));
+  const milestones = Object.fromEntries(criminalMilestones.map(stage => [stage, reached.has(stage) ? { status: 'reached', ...reached.get(stage)! } : { status: player().died ? 'unreached-at-natural-death' : 'unreached-at-policy-bound', lastObservedRestriction: [...observations].reverse().find(row => row.stage === stage && row.outcome === 'ineligible') ?? null }]));
   const ownLedger = world.ledger.filter(row => row.personId === activeId);
-  return { world, trace, report: { policyVersion: criminalPolicyVersion, country, versions: { world: world.schemaVersion, engine: world.engineVersion, content: world.contentVersion }, birthRevision: initial.revision, finalRevision: world.revision, commandsAttempted: trace.length, commandsCommitted: committed, yearsAdvanced: years, ageAtEnd: age(), finalDate: world.date, naturallyDied: !!player().died, milestones, scenarioBComplete: false, explicitGaps: ['No compulsory-school dropout command exists; only its rejection and normal country-specific school exit are exercised.', 'Holiday travel has current custody/pursuit/court restrictions, not a blanket conviction ban. Work-abroad applications use actual record rules.', 'Only actual observed arrest/trial/prison/release outcomes are credited. No required verdict or life stage is forced.', 'Only birth uses SQLite/store; later cold checks pack and unpack actual automatic-save checkpoints in memory. Native, full-journey SQLite, seizure/contraband, Scenario A/C and multigeneration acceptance are unrun.'], observations, coldChecks, custodyWindows, schoolCompletions: world.schoolCompletions.filter(row => row.personId === activeId), qualifications: player().education.qualifications, incidents: world.incidents.filter(row => row.personId === activeId), cases: world.cases.filter(row => row.personId === activeId), sentences: world.sentences.filter(row => row.personId === activeId), remand: world.remand.filter(row => row.personId === activeId), workHistory: world.workHistory.filter(row => row.personId === activeId), legalAndCrimeReceipts: ownLedger.filter(row => ['crime-proceeds', 'bail-held', 'bail-return', 'legal-fee', 'court-fine', 'fine-reversal', 'fine-refund', 'prison-pay', 'restitution', 'family-collection'].includes(row.category)), foreignApplications: world.relocations.filter(row => row.personId === activeId), trips: world.trips.filter(row => row.organizerId === activeId), prisonConnections: world.relationships.filter(row => (row.from === activeId || row.to === activeId) && row.memories.some(memory => memory.startsWith('prison-friendship:'))), estate: world.estates.find(row => row.personId === activeId) ?? null } };
+  return { world, trace, report: { policyVersion: criminalPolicyVersion, country, versions: { world: world.schemaVersion, engine: world.engineVersion, content: world.contentVersion }, birthRevision: initial.revision, finalRevision: world.revision, commandsAttempted: trace.length, commandsCommitted: committed, yearsAdvanced: years, ageAtEnd: age(), finalDate: world.date, naturallyDied: !!player().died, milestones, scenarioBComplete: false, explicitGaps: ['Voluntary secondary withdrawal is attempted only at an eligible normal action window. Only its actual saved withdrawal record credits schoolExit; unavailable exit and ordinary completions remain explicit.', 'Holiday travel has current custody/pursuit/court restrictions, not a blanket conviction ban. Work-abroad applications use actual record rules.', 'Only actual observed arrest/trial/prison/release outcomes are credited. No required verdict or life stage is forced.', 'Only birth uses SQLite/store; later cold checks pack and unpack actual automatic-save checkpoints in memory. Native, full-journey SQLite, seizure/contraband, Scenario A/C and multigeneration acceptance are unrun.'], observations, coldChecks, custodyWindows, schoolWithdrawals: world.schoolWithdrawals.filter(row => row.personId === activeId), schoolCompletions: world.schoolCompletions.filter(row => row.personId === activeId), qualifications: player().education.qualifications, incidents: world.incidents.filter(row => row.personId === activeId), cases: world.cases.filter(row => row.personId === activeId), sentences: world.sentences.filter(row => row.personId === activeId), remand: world.remand.filter(row => row.personId === activeId), workHistory: world.workHistory.filter(row => row.personId === activeId), legalAndCrimeReceipts: ownLedger.filter(row => ['crime-proceeds', 'bail-held', 'bail-return', 'legal-fee', 'court-fine', 'fine-reversal', 'fine-refund', 'prison-pay', 'restitution', 'family-collection'].includes(row.category)), foreignApplications: world.relocations.filter(row => row.personId === activeId), trips: world.trips.filter(row => row.organizerId === activeId), prisonConnections: world.relationships.filter(row => (row.from === activeId || row.to === activeId) && row.memories.some(memory => memory.startsWith('prison-friendship:'))), estate: world.estates.find(row => row.personId === activeId) ?? null } };
 }
