@@ -13,11 +13,14 @@ import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { offerPending } from '../pendingQueue';
 import { activeHobbyPlan, Hobby, HobbyPlan, LeisureEffect, personHobbies } from './leisureSchemas';
+import { createContact } from './npcs';
+import { connectPerson, otherPerson, relationFor } from './relationships';
 const absolute = (world: World) => world.date.year * 12 + world.date.month - 1;
 export const leisureCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('hobby-plan'), kind: z.enum(hobbyKinds), mode: z.enum(hobbyModes), reviewedPayerId: z.string(), quotedMonthlyFee: z.bigint().nonnegative() }),
   z.object({ type: z.literal('stop-hobby'), hobbyId: z.string(), planId: z.string() }),
   z.object({ type: z.literal('practise-hobby'), hobbyId: z.string(), planId: z.string() }),
+  z.object({ type: z.literal('meet-hobby-peer'), hobbyId: z.string(), planId: z.string(), reviewedPayerId: z.string(), reviewedMonth: z.number().int() }),
   z.object({ type: z.literal('leisure-outing'), kind: z.enum(outingKinds), reviewedPayerId: z.string(), quotedTotal: z.bigint().positive() }),
 ]);
 export type LeisureCommand = z.infer<typeof leisureCommandSchema>;
@@ -63,6 +66,42 @@ export function hobbyPracticeReason(world: World, hobby: Hobby, plan: HobbyPlan)
   const reason = hobbyPauseReason(world, hobby, plan, true); if (reason) return hobbyPauseLabels[reason];
   if (!hobby.practices.some(item => item.planId === plan.id && item.source === 'monthly' && item.attended && item.date.year === world.date.year && item.date.month === world.date.month)) return 'Attend a month of this routine before extra practice';
   if (hobby.practices.some(item => item.source === 'manual' && item.date.year === world.date.year && item.date.month === world.date.month)) return 'You already did extra practice in this hobby this month';
+}
+const introductionKey = (world: World, hobby: Hobby) => hobby.personId + ':hobby-introduction:' + hobby.id + ':' + world.date.year;
+const introductionMemory = (hobby: Hobby) => 'hobby-introduction:' + hobby.id + ':';
+const attendedCurrentMonth = (world: World, hobby: Hobby, plan: HobbyPlan) => hobby.practices.some(row => row.planId === plan.id && row.source === 'monthly' && row.attended && row.date.year === world.date.year && row.date.month === world.date.month && row.paid === plan.monthlyFee && row.paid > 0n && !!row.paymentId);
+function responsibleHobbyPayer(world: World, person: Person, plan: HobbyPlan) {
+  const payer = world.people[plan.payerId];
+  return !!payer && !payer.died && (ageOn(person, world.date) >= 18 ? payer.id === person.id : payer.id !== person.id && ageOn(payer, world.date) >= 18 && !!person.householdId && payer.householdId === person.householdId && payer.country === plan.country && payer.city === plan.city && parentOf(world, payer.id, person.id));
+}
+/** Current paid local access permits one introduction, without a second fee. */
+export function hobbyIntroductionReason(world: World, hobby: Hobby, plan: HobbyPlan): string | undefined {
+  const person = world.people[hobby.personId];
+  if (hobby.personId !== world.activePersonId || activeHobbyPlan(hobby)?.id !== plan.id || !plan.consent.accepted) return 'Choose your current agreed hobby routine';
+  if (person.country !== plan.country || person.city !== plan.city || !leisurePresent(world, person)) return 'Be available at your current local routine';
+  if (!responsibleHobbyPayer(world, person, plan)) return 'Review the responsible payer for your current routine';
+  const paused = hobbyPauseReason(world, hobby, plan, true); if (paused) return hobbyPauseLabels[paused];
+  if (!attendedCurrentMonth(world, hobby, plan)) return 'Attend a paid month of this current routine before meeting someone';
+  if (world.actionCounts[introductionKey(world, hobby)]) return 'You already made an introduction in this hobby this calendar year';
+}
+/** Only actual introductions are listed; a view never creates a participant. */
+export function hobbyContacts(world: World, hobby: Hobby) {
+  return world.relationships.filter(edge => (edge.from === hobby.personId || edge.to === hobby.personId) && edge.memories.some(memory => memory.startsWith(introductionMemory(hobby)))).map(edge => otherPerson(world, edge, hobby.personId));
+}
+function introduceHobbyPeer(world: World, hobby: Hobby, plan: HobbyPlan) {
+  const person = active(world), age = ageOn(person, world.date), minimum = age < 18 ? age : Math.max(18, age - 8), maximum = age < 18 ? age : age + 8;
+  // Only this explicit action checks a bounded set of genuine local routines.
+  // Ordinary renders/months do not search the world's population for peers.
+  const existing = world.hobbies.slice(0, 64).find(candidate => {
+    const peer = world.people[candidate.personId], arrangement = activeHobbyPlan(candidate);
+    return candidate.kind === hobby.kind && peer.id !== person.id && arrangement && arrangement.consent.accepted && !relationFor(world, person.id, peer.id) && ageOn(peer, world.date) >= minimum && ageOn(peer, world.date) <= maximum && peer.country === plan.country && peer.city === plan.city && arrangement.country === plan.country && arrangement.city === plan.city && leisurePresent(world, peer) && responsibleHobbyPayer(world, peer, arrangement) && !hobbyPauseReason(world, candidate, arrangement, true) && attendedCurrentMonth(world, candidate, arrangement);
+  });
+  const peer = existing ? world.people[existing.personId] : createContact(world, { age: age < 18 ? age : draw(world, 'npcs', minimum, maximum), country: plan.country, city: plan.city });
+  const effects = connectPerson(world, peer.id), edge = relationFor(world, person.id, peer.id)!;
+  edge.memories.push(introductionMemory(hobby) + world.date.year);
+  world.actionCounts[introductionKey(world, hobby)] = 1;
+  fact(world, 'I met ' + fullName(peer) + ' through local ' + hobbyContent[hobby.kind].name.toLowerCase() + ' practice.', 'hobby');
+  result(world, 'An introduction at practice', 'You introduced yourself to ' + fullName(peer) + ' after local ' + hobbyContent[hobby.kind].name.toLowerCase() + ' practice.' + (plan.payerId !== person.id ? ' ' + fullName(world.people[plan.payerId]) + ' accompanied you.' : '') + ' Your attended access already covers this visit. An introduction is a beginning; you can get to know each other through Relationships.', 'leisure-' + hobby.kind, effects);
 }
 function change(world: World, person: Person, stat: LeisureEffect['stat'], delta: number): LeisureEffect {
   const before = stat === 'music' ? person.skills.music : person.stats[stat], after = bounded(before + delta);
@@ -125,6 +164,12 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
   }
   const hobby = personHobbies(world).find(item => item.id === command.hobbyId), plan = hobby && activeHobbyPlan(hobby); if (!hobby || !plan || plan.id !== command.planId) throw new IneligibleAction('Choose your current hobby routine');
   if (command.type === 'stop-hobby') { closePlan(world, hobby, plan, 'stopped', 'I left the local routine.'); result(world, 'Routine stopped', 'Your proficiency and attended history stay yours. No future fees are charged. Earlier access and lessons are not refunded.', 'leisure-' + hobby.kind); return; }
+  if (command.type === 'meet-hobby-peer') {
+    const reason = hobbyIntroductionReason(world, hobby, plan); if (reason) throw new IneligibleAction(reason);
+    if (command.reviewedPayerId !== plan.payerId) throw new IneligibleAction('The responsible payer changed; review this introduction');
+    if (command.reviewedMonth !== absolute(world)) throw new IneligibleAction('The attended month changed; review this introduction');
+    introduceHobbyPeer(world, hobby, plan); return;
+  }
   const reason = hobbyPracticeReason(world, hobby, plan); if (reason) throw new IneligibleAction(reason);
   practice(world, hobby, plan, true); const row = hobby.practices[hobby.practices.length - 1];
   fact(world, 'I did extra practice in ' + hobbyContent[hobby.kind].name.toLowerCase() + '.', 'hobby');
