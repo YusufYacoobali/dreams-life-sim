@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
+import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { database } from './sqlite';
 import { randomCreation } from '../../src/game/createLife';
 import { countries, type CountryCode } from '../../src/game/countries';
-import { ageOn, decodeWorld, encodeWorld, type World, type GameDate } from '../../src/game/model';
+import { ageOn, encodeWorld, type World, type GameDate } from '../../src/game/model';
 import { IneligibleAction, resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { rules } from '../../src/game/rules';
@@ -38,6 +39,13 @@ type Milestone = typeof professionalMilestones[number];
 type Proof = { age: number; date: GameDate; revision: number; evidence: Record<string, unknown> };
 export type ProfessionalObservation = { stage: string; outcome: string; age: number; date: GameDate; detail: Record<string, unknown> };
 export type ProfessionalOptions = { maxYears?: number; onStep?: (world: World, trace: readonly GameCommand[]) => void; onMilestone?: (stage: Milestone, proof: Proof) => void };
+
+/** Exercise the real save codec and its existing compact/canonical bounds. */
+export function professionalColdResume(world: World, reason: string): World {
+  const encoded = encodeWorld(world), cold = unpackCheckpoint(packCheckpoint(world), true);
+  assert.equal(encodeWorld(cold), encoded, 'Cold codec must retain every field: ' + reason);
+  return cold;
+}
 
 /** Family Planning exposes this permanent conception reason and an adoption
  * review. Partner willingness remains the real command's consent decision. */
@@ -79,7 +87,7 @@ export function runProfessionalPolicy(initial: World, options: ProfessionalOptio
   const player = () => world.people[activeId], age = () => ageOn(player(), world.date), spendable = () => availableCash(accountFor(world)), reserve = () => rules[player().country].livingCost * 3n;
   const record = (stage: string, outcome: string, detail: Record<string, unknown> = {}) => observations.push({ stage, outcome, age: age(), date: { ...world.date }, detail });
   const blocked = (stage: string, reason: string) => { const key = stage + ':' + world.date.year + ':' + reason; if (!blockKeys.has(key)) { blockKeys.add(key); record(stage, 'ineligible', { reason }); } };
-  const cold = (reason: string) => { const encoded = encodeWorld(world); world = decodeWorld(encoded, true); assert.equal(encodeWorld(world), encoded, 'Cold codec must retain every field: ' + reason); coldChecks.push({ reason, revision: world.revision }); };
+  const cold = (reason: string) => { world = professionalColdResume(world, reason); coldChecks.push({ reason, revision: world.revision }); };
   const mark = (stage: Milestone, evidence: Record<string, unknown>) => { if (reached.has(stage)) return; const proof = { age: age(), date: { ...world.date }, revision: world.revision, evidence }; reached.set(stage, proof); options.onMilestone?.(stage, proof); cold(stage); };
   const observe = () => {
     assert.equal(world.activePersonId, activeId, 'The policy never continues as or impersonates another person');
