@@ -1,0 +1,44 @@
+{
+  "recordedOn": "2026-10-20",
+  "baseCommit": "7206c52",
+  "scope": "Preserve authoritative branch origin immediately after existing import/recovery without another list/decode; normal actions already preserve origin",
+  "source": {
+    "src/persistence/repository.ts": "736fdd150a8f3dfa61c91275437452efeff691ba9f66e772c4ae625c42e570f4",
+    "src/state/gameStore.ts": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+    "tests/state/gameStore.test.ts": "119475ca70684891cdb8e00377e08f2a6f80de0c4e7dbcc23c12f74c1d9bd884",
+    "tests/state/save-summaries.test.ts": "822931a6758260d547f271b2bab3683c9042c5c9353a66d7fdeb45ce5ea48cbc",
+    "tests/ui/saved-files-flow.test.tsx": "d8584b05442427b8cc1e0febb00355937a866a7427accfebf0f2def5407678d6"
+  },
+  "verification": {
+    "tests": 161,
+    "suites": 54,
+    "seconds": 142.146,
+    "strictApplicationAndTestTypes": true,
+    "coverage": "All persistence/state/UI/progress suites; game domain unchanged",
+    "nextCommitAvoidsFullDecodeAndList": true,
+    "failedRecoveryRollsBack": true,
+    "plainWorldReplacementClearsStaleOrigin": true,
+    "nativeRecord": "android24-save-summary-20261020/recovery-exact.json"
+  },
+  "exports": [
+    {
+      "file": "_expo/static/js/android/entry-516674052f86ea336963134a43cc574f.hbc",
+      "bytes": 5356303,
+      "sha256": "07527dc789245843de00183564ec95f9e8c6bfb5e7448a4aa30f3867bfba5e4e"
+    },
+    {
+      "file": "_expo/static/js/ios/entry-7ce3db8ea525a796756dad26be5897b2.hbc",
+      "bytes": 5051185,
+      "sha256": "ff2ead19f88a678409ecb3ae30eda0b94f50d941a0cf9d4d3aaa9262753f1487"
+    }
+  ],
+  "gameCodecSchemaAndSweepToolUnchanged": true,
+  "gameSourceHash": "f58496a063413f6805d159d775abcd9f743feff3f5cddb24dd0672b487baec5f",
+  "combinedGamePersistenceSourceHash": "c7514395530d78c69341fff805b084308a8c5da600b4f3ef348d1564a495cf75",
+  "versions": {
+    "world": 28,
+    "engine": 27,
+    "content": 4,
+    "database": 6
+  }
+}

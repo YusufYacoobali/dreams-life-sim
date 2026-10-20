@@ -1,11 +1,11 @@
 import { createStore } from 'zustand/vanilla';
 import { Creation, createLife } from '../game/createLife';
 import { fullName, GameDate, immutableWorld, World } from '../game/model';
-import { SaveCorrupt, SaveConflict, type LifeSummary, type SaveRepository } from '../persistence/repository';
+import { SaveCorrupt, SaveConflict, type LifeSummary, type SavedLifeUpdate, type SaveRepository } from '../persistence/repository';
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
 
-type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
+type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
 type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void> };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
@@ -26,8 +26,8 @@ export type GameState = {
 export function createGameStore(deps: Dependencies) {
   return createStore<GameState>((set, get) => {
     let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
-    const publish = (world: World) => set({ world, snapshots: [], lives: [
-      { id: world.id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: '' },
+    const publish = ({ world, summary }: SavedLifeUpdate) => set({ world, snapshots: [], lives: [
+      summary,
       ...get().lives.filter(life => life.id !== world.id),
     ] });
     const run = async (action: () => Promise<void>, failure: string) => {
@@ -69,11 +69,11 @@ export function createGameStore(deps: Dependencies) {
       }, "Your progress couldn't be saved. Please try again."),
       importLife: (text, replace) => run(async () => {
         const repository = await deps.repository();
-        publish(await repository.import(text, replace));
+        publish(await repository.importWithSummary(text, replace));
       }, 'Could not import this life. Check the file and try again.'),
       recoverLife: id => run(async () => {
         const repository = await deps.repository();
-        publish(await repository.recover(id));
+        publish(await repository.recoverWithSummary(id));
       }, 'Could not restore the previous checkpoint. Your current save was kept.'),
       selectLife: id => run(async () => {
         const repository = await deps.repository();

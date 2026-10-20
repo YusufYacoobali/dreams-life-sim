@@ -12,6 +12,21 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+Import/recovery now retain the actual saved-life branch origin immediately,
+using the summary returned from the successful repository transaction. Normal
+actions already preserved it. This adds no post-commit list/decode and preserves
+the next warm action, with no new file-feature breadth. Failed recovery leaves
+the visible and durable state intact; retry and plain-world replacement handle
+origin correctly. All **161 affected checks / 54 suites** pass in **142.146
+seconds**, strict types and both fresh Hermes exports pass. Actual Android
+recovery/result/acknowledgement returns to the exact branch revision 38 and
+backup 37; Saved Lives retains its branch label immediately. Original three
+lives/backups, twelve moments and seventeen receipts remain exact. Native counts
+are now four lives / sixteen moments / eighteen receipts under the existing
+recovery receipt-reset policy. [Native proof](verification/android24-save-summary-20261020/)
+and [source record](verification/save-summary-20261020.json) retain scope. Game,
+codec, schema and the completed 1,000-seed gate remain unchanged.
+
 The actual native school callback now passes through a normal age-seven
 Time Machine branch, saved month-two deadline, teacher-help choice and exact
 cold result resume. Grades 70→71 and recorded effects match production; the

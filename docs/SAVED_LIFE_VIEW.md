@@ -54,3 +54,22 @@ This is view-only saved-life work;
 import/export/sharing receives no new feature breadth. Physical-device timing,
 standalone, iOS, complete accessibility/reference and broader production gates
 remain open.
+
+## Existing recovery summary correction
+
+The subsequent import/recovery correction returns the authoritative summary
+with the successfully committed world. Normal action summaries already retained
+branch origin. The fix avoids another list/history/decode operation after the
+write and keeps the next action warm. Plain-world replacement clears an old
+origin rather than copying it from stale state; failed recovery publishes
+nothing. No additional player file feature is introduced.
+
+All 161 affected UI/state/persistence/progress checks (54 suites) pass in
+142.146 seconds, plus strict types and both fresh Hermes exports. Actual Android
+recovery of the branch's saved lunch result and one acknowledgement returns to
+the exact expected current/backup worlds. Its branch label appears immediately
+on Saved Lives. Original lives and history stay exact; the existing recovery
+receipt-reset policy leaves eighteen global receipts. See
+[native proof](verification/android24-save-summary-20261020/) and
+[source/checks](verification/save-summary-20261020.json). Earlier records above
+retain their original source and counts.

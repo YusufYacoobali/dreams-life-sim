@@ -1,5 +1,25 @@
 # Continue Dreams: Life Simulator in a new cloud chat
 
+Latest: import/recovery now publish their authoritative saved-life summary from
+the successful repository operation. Normal actions already retained branch
+origin; only the old import/recovery helper dropped it. No post-commit list or
+checkpoint reread is added, and the next action retains its warm save cache.
+All **161 affected checks / 54 suites** pass in **142.146 seconds**, with strict
+types and fresh Android/iOS Hermes exports. Actual Android recovery restores
+the saved lunch result at revision 37, acknowledges once to exact revision 38,
+and immediately shows the original Time Machine branch label. Original three
+lives/backups, twelve moments and seventeen receipts stay exact. Current native
+state is **four lives / sixteen moments / eighteen receipts**, branch active
+at revision 38. Existing recovery intentionally clears that branch's receipts;
+acknowledgement adds one. The earlier callback record below retains its original
+twenty-four-receipt scope. Read [recovery proof](verification/android24-save-summary-20261020/)
+and [source/checks](verification/save-summary-20261020.json).
+Game/codec/schema/tool remain unchanged. Current combined game/persistence hash:
+`c7514395530d78c69341fff805b084308a8c5da600b4f3ef348d1564a495cf75`.
+Further import/export/sharing breadth stays parked. Continue early-game/native
+responsiveness and the complete production plan; physical-device timing,
+standalone and iOS gates remain open.
+
 The genuine `v28-native-school-archive.json` is now preserved from unmodified
 pushed **`1d1e696`**, using the actual revision-53 Android SQLite copy. Its current
 checkpoint is byte-exact to native; all ten Riley moments retain original

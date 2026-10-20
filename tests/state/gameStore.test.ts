@@ -11,11 +11,13 @@ function deferred<T>() {
   const promise = new Promise<T>((a, b) => { resolve = a; reject = b; });
   return { promise, resolve, reject };
 }
-function setup(overrides: Partial<Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'import' | 'recover'>> = {}) {
+function setup(overrides: Partial<Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary'>> = {}) {
   const repository = {
     active: jest.fn(async () => world), list: jest.fn(async () => []),
     create: jest.fn(async (next: typeof world) => ({ id: next.id, name: 'Saved person', revision: 0, updatedAt: 'today' })),
-    commit: jest.fn(async (next: typeof world) => next), select: jest.fn(async () => world), import: jest.fn(async () => world), recover: jest.fn(async () => world), ...overrides,
+    commit: jest.fn(async (next: typeof world) => next), select: jest.fn(async () => world),
+    importWithSummary: jest.fn(async () => ({ world, summary: { id: world.id, name: 'Saved person', revision: world.revision, updatedAt: 'today' } })),
+    recoverWithSummary: jest.fn(async () => ({ world, summary: { id: world.id, name: 'Saved person', revision: world.revision, updatedAt: 'today' } })), ...overrides,
     snapshots: jest.fn(async () => []), snapshot: jest.fn(async () => []), restoreBranch: jest.fn(async () => world),
   };
   const store = createGameStore({ repository: async () => repository, date: () => date, id: () => 'life_new' });

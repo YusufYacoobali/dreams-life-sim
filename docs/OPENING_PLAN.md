@@ -15,6 +15,14 @@ than appending controls below the catalogue; native/header Back and unchanged
 SQLite browsing checks pass. Continue native early-game interaction review.
 See [completed local file scope](SAVE_FILES.md).
 
+The existing import/recovery path now retains its authoritative branch label
+without another list/decode; normal actions already preserved it. All 161
+affected checks, strict types and both Hermes exports pass. Actual Android
+checkpoint recovery/acknowledgement matches the full expected world and backup,
+keeps all original lives/history exact, and shows the label immediately.
+[Native proof](verification/android24-save-summary-20261020/) records this
+existing-path correction; further file breadth remains deferred.
+
 A further actual childhood year and school study now show new journal facts
 using the native content end rather than FlatList's estimated row tail. Manual
 history reading stays available, and primary school shows relevant guidance.

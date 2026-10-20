@@ -57,6 +57,14 @@ test('View Life Summary routes to a read-only saved life without selecting it or
   expect(mockStore.getState().world).toBe(world); expect(tables()).toEqual(before); expect(mockPickFile).not.toHaveBeenCalled(); expect(mockPickDirectory).not.toHaveBeenCalled(); expect(mockShare).not.toHaveBeenCalled();
 });
 
+test('the visible branch label survives a real previous-checkpoint recovery without reloading the list', async () => {
+  mockStore = createGameStore({ repository: async () => mockRepository, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'life_visible_recovered_branch' }); await mockStore.getState().bootstrap(); await mockStore.getState().restoreSnapshot('snapshot_r_31'); await mockStore.getState().dispatch({ type: 'advance' });
+  const branchId = mockStore.getState().world!.id, list = jest.spyOn(mockRepository, 'list'); render(frame());
+  const label = /Time Machine branch · Riley Kelly, age 7 in 2033/; expect(screen.getByText(label)).toBeOnTheScreen();
+  await act(async () => { expect(await mockStore.getState().recoverLife(branchId)).toBe(true); });
+  expect(screen.getByText(label)).toBeOnTheScreen(); expect(mockStore.getState().world?.revision).toBe(31); expect(list).not.toHaveBeenCalled(); list.mockRestore();
+});
+
 test.each(['ERR_PICKER_CANCELLED', 'ERR_FILE_PICKING_CANCELLED'])('%s closes folder selection without an error, file or changed save', async code => {
   const before = tables(); mockPickDirectory.mockRejectedValueOnce(Object.assign(new Error('Picker cancelled'), { code })); render(frame());
   await press(exportButton); await waitFor(() => expect(screen.getByRole('button', { name: exportButton })).toBeEnabled());

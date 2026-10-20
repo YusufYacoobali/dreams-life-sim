@@ -13,6 +13,7 @@ export interface SqlDatabase extends SqlSession {
   transaction<T>(action: (session: SqlSession) => Promise<T>): Promise<T>;
 }
 export type LifeSummary = { id: string; name: string; revision: number; updatedAt: string; branch?: BranchInfo };
+export type SavedLifeUpdate = { world: World; summary: LifeSummary };
 export class SaveConflict extends Error {
   constructor() { super('This life changed. Reload it before trying that action again.'); }
 }
@@ -244,22 +245,34 @@ export class SaveRepository {
 
   /** Explicitly requested recovery, never a silent reset during a normal load. */
   async recover(id: string): Promise<World> {
+    return (await this.recoverWithSummary(id)).world;
+  }
+
+  async recoverWithSummary(id: string): Promise<SavedLifeUpdate> {
     const world = await this.recoveryPreview(id), payload = packCheckpoint(world);
+    let summary!: LifeSummary;
     await this.db.transaction(async tx => {
-      await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, id]);
+      const branch = await this.branch(id, tx);
+      summary = { id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: this.now(), ...(branch ? { branch } : {}) };
+      await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [summary.name, world.revision, summary.updatedAt, payload, id]);
       await tx.run('DELETE FROM receipts WHERE life_id=?', [id]);
       await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id IN (SELECT snapshot_id FROM snapshot_metadata WHERE life_id=? AND revision>?)', [id, id, world.revision]);
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [id]);
     });
     this.current = { world, payload };
-    return world;
+    return { world, summary };
   }
 
   async import(text: string, replace = false): Promise<World> {
+    return (await this.importWithSummary(text, replace)).world;
+  }
+
+  async importWithSummary(text: string, replace = false): Promise<SavedLifeUpdate> {
     const { world: imported, snapshots, branch } = decodeSave(text), world = immutableWorld(imported);
     const existing = await this.db.get<{ id: string }>('SELECT id FROM lives WHERE id=?', [world.id]);
     if (existing && !replace) throw new Error('This life already exists. Confirm replacement first.');
     const payload = packCheckpoint(world);
+    const summary: LifeSummary = { id: world.id, name: fullName(world.people[world.activePersonId]), revision: world.revision, updatedAt: this.now(), ...(branch ? { branch } : {}) };
     await this.db.transaction(async tx => {
       const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
       if (current) {
@@ -267,9 +280,9 @@ export class SaveRepository {
         try { const previous = unpackCheckpoint(current.payload); valid = previous.id === world.id && previous.revision === current.revision; } catch { /* Keep the existing recovery copy. */ }
         if (valid) await tx.run('UPDATE backups SET revision=?,payload=? WHERE life_id=?', [current.revision, current.payload, world.id]);
       }
-      if (existing) await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
+      if (existing) await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [summary.name, world.revision, summary.updatedAt, payload, world.id]);
       else {
-        await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [world.id, fullName(world.people[world.activePersonId]), world.revision, this.now(), payload]);
+        await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [world.id, summary.name, world.revision, summary.updatedAt, payload]);
         await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [world.id, world.revision, payload]);
       }
       await tx.run('DELETE FROM receipts WHERE life_id=?', [world.id]);
@@ -281,6 +294,6 @@ export class SaveRepository {
       await tx.run("INSERT INTO preferences(key,value) VALUES('active_life',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [world.id]);
     });
     this.current = { world, payload };
-    return world;
+    return { world, summary };
   }
 }
