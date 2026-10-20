@@ -21,14 +21,19 @@ const programLabels = { trade: 'Technical College', university: 'University', gr
 const titleCase = (text: string) => text[0].toUpperCase() + text.slice(1);
 export default function Emigrate() {
   const params = useLocalSearchParams<{ route?: string }>();
-  const identity = useGame(state => state.world ? state.world.id + ':' + state.world.activePersonId : 'none');
+  const identity = useGame(state => {
+    const world = state.world;
+    if (!world) return 'none';
+    const person = world.people[world.activePersonId];
+    return world.id + ':' + person.id + ':' + person.country + ':' + person.city;
+  });
   return <EmigrationPlan key={identity + ':' + (params.route ?? '')} routeHint={params.route} />;
 }
 
 function EmigrationPlan({ routeHint }: { routeHint?: string }) {
   const world = useGame(s => s.world)!, dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), colors = useColors();
   const person = world.people[world.activePersonId], offers = world.relocations.filter(item => item.personId === person.id);
-  const [destinationId, setDestination] = useState<DestinationId>('paris'), [route, setRoute] = useState<RelocationChoice['route']>(routeHint === 'work' || routeHint === 'study' ? routeHint : 'settlement');
+  const [destinationId, setDestination] = useState<DestinationId>(() => person.country === destinations.paris.country ? 'london' : 'paris'), [route, setRoute] = useState<RelocationChoice['route']>(routeHint === 'work' || routeHint === 'study' ? routeHint : 'settlement');
   const [roleId, setRole] = useState('administrator'), [program, setProgram] = useState<typeof relocationPrograms[number]>('university'), [field, setField] = useState<typeof fields[number]>('arts');
   const [offerId, setOfferId] = useState<string | null>(null), [companionIds, setCompanions] = useState<string[]>([]), [reserveMonths, setReserve] = useState<3 | 6>(3), [page, setPage] = useState(0);
   const [review, setReview] = useState<{ command: RelocationCommand; event: EventPresentation } | null>(null);
