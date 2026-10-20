@@ -16,6 +16,19 @@ stays parked; the existing 80%+ implementation's native folder-save check passed
 Read-only Saved Lives summaries are complete. The full-game estimate remains
 approximately **50%**, with substantial content/integration/release work open.
 
+The actual accepted native raise62 is preserved with clean pushed **134c461**
+in `v30-native-raise-archive.json`: all nineteen worlds and eighteen original
+moments/metadata remain exact, including the seventeen earlier workplace moments.
+Two preservation/SQLite failure-retry-cold/payroll checks pass in **13.72 seconds**,
+strict types. Runtime and the full1,356-test baseline remain unchanged; no new
+whole-regression count or player file breadth. [Producer/hash](verification/native-raise-archive-v30-20261020.json).
+
+Next priority discovered in native review: the age19 journal still cuts off the
+last garden fact after it settles. Reproduce at actual66 (read-only), diagnose
+native scroll/layout metrics and fix before continuing named workplace stories.
+Do not advance/reapply a raise to reproduce it. A later capture confirms it is
+not just a transitional frame: `/tmp/dreams-raises-finished-later.png`.
+
 ## Current verified milestone
 
 World **30 / engine 29 / content 5 / database 6** adds real ordinary-work raises.
@@ -115,8 +128,10 @@ new source or prune history:
 - Native arcade: clean **e29e634**, paid result34 / twelve moments.
 - Native school: clean **1d1e696**, Riley53 / ten Riley moments.
 - Other genuine archives/deferred originals keep their documented provenance.
-Before content/schema work, preserve actual native accepted raise62 with the
-clean pushed world30 producer if needed, retaining every older moment.
+Accepted native raise62 is now preserved with clean134c461 in
+`v30-native-raise-archive.json`, SHA
+`7a3988e9b7675e11ebf58d821a61192e97c759961b59d0a83df0e9c6b682964c`.
+Never regenerate it with newer source.
 
 Keep certified immutable worlds/ledger rows, compression block reuse, repository
 cached-payload byte checks and cache-after-durable-commit. Do not restore whole

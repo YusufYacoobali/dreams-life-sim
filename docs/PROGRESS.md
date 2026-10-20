@@ -12,6 +12,15 @@ Confirmed product choices: adults with non-graphic mature themes, and a wider in
 
 ## Current milestone: opening experience and startup reliability
 
+The actual accepted native raise62 is now preserved with clean pushed134c461,
+retaining all nineteen worlds, eighteen original moments/metadata and the earlier
+seventeen workplace moments. Two preservation/SQLite failure-retry-cold/payroll
+checks pass in **13.72 seconds**, strict types. Runtime and the1,356-test baseline
+below stay unchanged; this is internal fixture protection. [Provenance](verification/native-raise-archive-v30-20261020.json).
+Native final review also finds the settled age19 journal still clipping its
+latest garden fact. Fix that read-only layout before continuing content work.
+
+
 World **30 / engine 29 / content 5 / database 6** now adds [real raise requests](WORK_RAISES.md)
 from Occupation/current supervisor, with twelve paid periods, 65% performance,
 six energy and one request per employment/calendar year. A saved supervisor
