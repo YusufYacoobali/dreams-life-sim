@@ -33,7 +33,7 @@ export const socialCommandSchema = z.discriminatedUnion('type', [
 ]);
 export type SocialCommand = z.infer<typeof socialCommandSchema>;
 export type Relationship = World['relationships'][number];
-const activeRomance = (relation: Relationship) => relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married';
+export const activeRomance = (relation: Relationship) => relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married';
 export function relationFor(world: World, a: string, b: string) { return world.relationships.find(relation => relation.from === a && relation.to === b || relation.from === b && relation.to === a); }
 export function partnerRelation(world: World, personId = world.activePersonId) { return world.relationships.find(relation => activeRomance(relation) && (relation.from === personId || relation.to === personId)); }
 export function otherPerson(world: World, relation: Relationship, personId = world.activePersonId): Person { return world.people[relation.from === personId ? relation.to : relation.from]; }
@@ -70,16 +70,18 @@ export function connectPerson(world: World, id: string, fromId = world.activePer
   }
   return [{ id: 'contact', label: 'New acquaintance', value: fullName(person), tone: 'positive' }];
 }
-export function romanceReason(world: World, target: Person): string | undefined {
-  if(serviceAway(world)||serviceAway(world,target.id))return 'Arrange in-person time after both people return from their assignments';
-  if (isConfined(world) || isConfined(world, target)) return 'Romantic outings are unavailable in custody';
-  const player = active(world);
+/** Optional indexed lookups let bounded NPC decisions share the same romance rules. */
+export type RomanceLookups = { closeFamily: (a: string, b: string) => boolean; partner: (personId: string) => Relationship | undefined };
+export function romanceReason(world: World, target: Person, fromId = world.activePersonId, lookups?: RomanceLookups): string | undefined {
+  const player = world.people[fromId];
+  if(serviceAway(world,fromId)||serviceAway(world,target.id))return 'Arrange in-person time after both people return from their assignments';
+  if (isConfined(world, player) || isConfined(world, target)) return 'Romantic outings are unavailable in custody';
   if (target.died) return 'This person has died';
   if (ageOn(player, world.date) < rules[player.country].adultAge || ageOn(target, world.date) < rules[target.country].adultAge) return 'Both people must be adults';
-  if (closeFamily(world, player.id, target.id)) return 'You cannot date a close relative or guardian';
+  if (lookups ? lookups.closeFamily(player.id, target.id) : closeFamily(world, player.id, target.id)) return 'You cannot date a close relative or guardian';
   if (!player.attractedTo.includes(target.gender) || !target.attractedTo.includes(player.gender)) return 'Your dating preferences do not match';
-  const existing = partnerRelation(world), theirs = partnerRelation(world, target.id);
-  if (existing && otherPerson(world, existing).id !== target.id) return 'End your current relationship first';
+  const existing = lookups ? lookups.partner(fromId) : partnerRelation(world, fromId), theirs = lookups ? lookups.partner(target.id) : partnerRelation(world, target.id);
+  if (existing && otherPerson(world, existing, fromId).id !== target.id) return 'End your current relationship first';
   if (theirs && otherPerson(world, theirs, target.id).id !== player.id) return 'They are already in a relationship';
   if (!samePhysicalPlace(world, player.id, target.id)) return 'Meet in the same city before arranging a date';
 }

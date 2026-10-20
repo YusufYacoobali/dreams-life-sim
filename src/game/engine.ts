@@ -23,6 +23,7 @@ import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from '
 import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
 import { financialActors } from './systems/households';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
+import { npcRelationshipsYear } from './systems/npcRelationships';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
 import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
@@ -169,6 +170,7 @@ function finishYear(world: World) {
   for (const person of financialActors(world)) settleTax(world, person);
   npcYearDecisions(world);
   relationshipsYear(world);
+  npcRelationshipsYear(world);
   familyYear(world);
   const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
   const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
