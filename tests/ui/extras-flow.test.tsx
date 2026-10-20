@@ -30,7 +30,7 @@ test('real child Extras, filters, milestone Back, goal routes, heirlooms, help a
   const rows = () => tables.map(({ name }) => ({ name, rows: sqlite.prepare('SELECT * FROM "' + name + '" ORDER BY rowid').all() }));
   const before = rows(), worldBefore = encodeWorld(mockStore.getState().world!);
   const view = render(frame(<Extras />));
-  expect(screen.getByText('3 / 40 earned in this life')).toBeOnTheScreen();
+  expect(screen.getByText('3 / 45 earned in this life')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: /^Achievements\./ })); expect(router.push).toHaveBeenLastCalledWith('/achievements');
   view.rerender(frame(<Achievements />));
   fireEvent.press(screen.getByRole('tab', { name: 'Wealth' })); expect(screen.getByRole('tab', { name: 'Wealth', selected: true })).toBeOnTheScreen();
@@ -50,7 +50,7 @@ test('real child Extras, filters, milestone Back, goal routes, heirlooms, help a
   mockParams = { id: 'care-and-craft' }; view.rerender(frame(<Challenge />));
   expect(screen.getByRole('progressbar', { name: 'Overall progress' })).toHaveAccessibilityValue({ min: 0, max: 100, now: 98 });
   expect(screen.getByText('1 / 2 goals completed')).toBeOnTheScreen(); fireEvent.press(screen.getByRole('button', { name: 'View Hobbies' })); expect(router.push).toHaveBeenLastCalledWith('/hobbies');
-  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Creators', '/creators']]) {
+  for (const [id, label, route] of [['working-confidence', 'Coworkers', '/coworkers'], ['supported-study', 'Scholarships', '/scholarships'], ['small-business', 'Business', '/business'], ['creative-consistency', 'Creators', '/creators'], ['patient-investor', 'Investments', '/investments'], ['paid-for-property', 'Assets', '/assets']]) {
     mockParams = { id }; view.rerender(frame(<Challenge />));
     fireEvent.press(screen.getAllByRole('button', { name: 'View ' + label })[0]); expect(router.push).toHaveBeenLastCalledWith(route);
   }

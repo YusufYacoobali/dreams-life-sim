@@ -7,7 +7,7 @@ import { Body, Button, Card, Header, Heading, Page, StatBar } from '../../../src
 import { ProgressPicture, progressAmount } from '../../../src/ui/ProgressElements';
 import { useColors } from '../../../src/ui/theme';
 
-const destinations: Record<ProgressRoute, string> = { '/school': 'School', '/education': 'Education', '/work': 'Work', '/hobbies': 'Hobbies', '/pets': 'Pets', '/family': 'Family', '/travel': 'Travel', '/bank': 'Bank', '/special-careers': 'Special Careers', '/scholarships': 'Scholarships', '/coworkers': 'Coworkers', '/business': 'Business', '/creators': 'Creators', '/royalty': 'Royalty' };
+const destinations: Record<ProgressRoute, string> = { '/school': 'School', '/education': 'Education', '/work': 'Work', '/hobbies': 'Hobbies', '/pets': 'Pets', '/family': 'Family', '/travel': 'Travel', '/bank': 'Bank', '/investments': 'Investments', '/assets': 'Assets', '/special-careers': 'Special Careers', '/scholarships': 'Scholarships', '/coworkers': 'Coworkers', '/business': 'Business', '/creators': 'Creators', '/royalty': 'Royalty' };
 export default function ChallengeDetails() {
   const { id } = useLocalSearchParams<{ id?: string | string[] }>(), world = useGame(s => s.world), c = useColors();
   const progress = useMemo(() => world ? lifeProgress(world) : null, [world]);
