@@ -25,12 +25,12 @@ test.each(observations)('$name: an explicitly arranged C38 envelope changes only
   // unchanged producer. The 37/38/content12 envelope below is declared setup,
   // not a newly claimed genuine C38 save or an earned gameplay continuation.
   const original = unpackCheckpoint(observation.payload, true), encoded = encodeWorld(original), current = JSON.parse(encoded);
-  expect(current).toMatchObject({ schemaVersion: 38, engineVersion: 39, contentVersion: 13 });
+  expect(current).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 14 });
   expect(current.pending).toEqual(raw.pending); expect(current.annual).toEqual(raw.annual);
   for (const key of histories) expect(current[key]).toEqual([]);
   const legacy = { ...current, schemaVersion: 37, engineVersion: 38, contentVersion: 12 }, before = JSON.stringify(legacy);
   const migrated = decodeWorld(before, true);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 38, engineVersion: 39, contentVersion: 13 });
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 39, engineVersion: 40, contentVersion: 14 });
   expect(JSON.stringify(legacy)).toBe(before);
   expect(encodeWorld(original)).toBe(encoded);
 
