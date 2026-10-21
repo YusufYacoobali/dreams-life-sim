@@ -4,7 +4,7 @@ All confirmed approved-feature audit gaps are implemented and pushed, including 
 
 The15campus checks and final app/all-test strict types pass. Ordinary Android play now confirms paid enrolment → first-month pause → two introductions → club confirmation → same-year completion:12/36law months,11future club periods and11paid months for each peer. A real force-stop/Continue restores revision150 with ALL8tables exact; every prior inactive life, historical row, ledger entry and original course is retained. The branded value-offering company has genuinely operated24months. Final Android/iOS Hermes bundles are complete and their changed source-map bytes match. No extra local full regression or unchanged cohort was run.
 
-Exactb75 [Quality39689689849](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39689689849) is running. Prior4e passed2,820tests/221suites; its pass stays source-scoped. [HANDOFF](HANDOFF.md) records current results, saved data and dormant native ownership. The standalone candidate matchesb75, but the reconnected environment still excludes the required Android dependency host. Actual standalone/iOS/physical/spoken-reader/audio/signing/distribution acceptance remains open. Additional import/export/sharing/history breadth remains parked. Next source checkpoint due00:53activeUTC on22October.
+Exactb75 [Quality39689689849](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39689689849) **passed**: locked install, strict app/all-test types and **2,821tests/221suites in1837.719s**. Prior4e passed2,820tests/221suites; its pass stays source-scoped. [HANDOFF](HANDOFF.md) records current results, saved data and dormant native ownership. The standalone candidate matchesb75, but the reconnected environment still excludes the required Android dependency host. Actual standalone/iOS/physical/spoken-reader/audio/signing/distribution acceptance remains open. Additional import/export/sharing/history breadth remains parked. Next source checkpoint due00:53activeUTC on22October.
 
 ## Current assessment
 
@@ -37,7 +37,7 @@ Track three separate states from here: implemented scope, known defects, and rel
 
 ## Current order of work
 
-1. Inspect the single b75 automatic gate and address actual failures; ordinary Android first-month/campus/club/year/cold acceptance is complete. Both preceding complete gates passed. Avoid repeated local full regression or unchanged cohorts.
+1. The single b75 automatic gate and ordinary Android first-month/campus/club/year/cold acceptance are complete and passing. Continue final standalone/device/release work only when its actual prerequisites are available. Both preceding complete gates passed. Avoid repeated local full regression or unchanged cohorts.
 2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. The genuine first-year campus native journey is complete; do not repeat it. Preserve every original situation and historical save.
 3. Continue useful source-scoped native play and cold-resume checks alongside implementation. After the merged game is stable, complete standalone, actual iOS/physical, accessibility/audio and release acceptance. Do not count a Hermes export or Expo Go session as a standalone build.
 

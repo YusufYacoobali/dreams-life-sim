@@ -1,6 +1,6 @@
 # Dreams: Life Simulator — Phase 0 master plan
 
-All confirmed audit gaps are implemented, including the b75first-month campus fix. Its focused/types and actual Android campus/year/cold checks pass; final Android/iOS Hermes bundles contain the current source. Its automatic Quality gate is running; earlier full passes remain source-scoped. Remaining work is final standalone/device/accessibility/distribution acceptance, with Android dependency access still blocked. [Current handoff](../HANDOFF.md) records exact results and ownership. Preserve autosave and avoid repeated unchanged cohorts.
+All confirmed audit gaps are implemented, including the b75first-month campus fix. Its focused/types and actual Android campus/year/cold checks pass; final Android/iOS Hermes bundles contain the current source. Its exact-source Quality gate passed2,821tests/221suites and strict app/all-test types; earlier full passes retain their scopes. Remaining work is final standalone/device/accessibility/distribution acceptance, with Android dependency access still blocked. [Current handoff](../HANDOFF.md) records exact results and ownership. Preserve autosave and avoid repeated unchanged cohorts.
 
 ## Earlier source-scoped checkpoint notes
 

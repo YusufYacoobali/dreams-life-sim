@@ -1,6 +1,6 @@
 # Local release packet — unpublished draft
 
-Updated21October2026: runtime/candidateb75e617 includes all confirmed feature gaps and the first-month campus planning fix. Focused/types, ordinary Android campus/year/cold resume and final Android/iOS Hermes bundle checks pass; its automatic gate is running. No standalone artifact or publication is claimed. [Current handoff](HANDOFF.md) and [release audit](RELEASE_READINESS_AUDIT.md) identify exact results, remaining device/signing work and the unchanged dependency-access block.
+Updated21October2026: runtime/candidateb75e617 includes all confirmed feature gaps and the first-month campus planning fix. Focused/types, ordinary Android campus/year/cold resume and final Android/iOS Hermes bundle checks pass; its exact-source automatic gate passed2,821tests/221suites and strict app/all-test types. No standalone artifact or publication is claimed. [Current handoff](HANDOFF.md) and [release audit](RELEASE_READINESS_AUDIT.md) identify exact results, remaining device/signing work and the unchanged dependency-access block.
 
 ## Candidate identity and listing
 
