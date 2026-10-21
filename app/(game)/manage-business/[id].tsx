@@ -19,7 +19,7 @@ export default function ManageBusiness() {
 }
 
 function BusinessManagement({ id }: { id: string }) {
-  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useBusinessReview(), c = useColors(), [funding, setFunding] = useState(''), [withdrawal, setWithdrawal] = useState('');
+  const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useBusinessReview(id), c = useColors(), [funding, setFunding] = useState(''), [withdrawal, setWithdrawal] = useState('');
   const owner = world.people[world.activePersonId], company = world.businesses.find(item => item.id === id && item.ownerId === owner.id && item.status === 'active');
   if (!company) return <Page><Header title="Manage Business" onBack={() => router.back()} /><Body>This company is no longer yours to manage.</Body></Page>;
   const definition = businessCatalog[company.kind], money = (minor: bigint) => formatMoney({ minor, currency: company.currency }), staff = activeBusinessStaff(world, company), commonReason = ageOn(owner, world.date) < rules[owner.country].adultAge ? 'Your existing manager runs this company until adulthood' : undefined, reserve = businessReserve(world, company), profit = availableBusinessProfit(world, company), improvement = improvementQuote(company), expansion = expansionQuote(company);

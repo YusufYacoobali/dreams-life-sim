@@ -11,12 +11,15 @@ import { copyWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { accountFor } from '../../src/game/systems/common';
 import { businessStartupQuote } from '../../src/game/systems/businesses';
+import { moveQuote } from '../../src/game/systems/relocation';
 import { formatMoney } from '../../src/game/money';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { EventModal } from '../../src/ui/EventModal';
 import archive from '../fixtures/v11-business-archive.json';
+import relocationArchive from '../fixtures/v20-relocation-archive.json';
 
 let mockStore: ReturnType<typeof createGameStore>, mockCompanyId = '';
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => ({ id: mockCompanyId }) }));
@@ -31,7 +34,7 @@ const edit = async (name: string, value: string) => { await act(async () => { fi
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 
-async function setup() {
+async function setup(mode: 'business' | 'move' = 'business') {
   const directory = mkdtempSync(join(tmpdir(), 'dreams-business-review-')), path = join(directory, 'dreams.db'); let sqlite: DatabaseSync;
   function connect(): SqlDatabase {
     sqlite = new DatabaseSync(path); sqlite.exec('PRAGMA foreign_keys=ON'); const connection = sqlite;
@@ -44,15 +47,16 @@ async function setup() {
       connection.exec('BEGIN IMMEDIATE'); try { const value = await action(session); connection.exec('COMMIT'); return value; } catch (error) { connection.exec('ROLLBACK'); throw error; }
     } };
   }
-  const repository = new SaveRepository(connect()); await repository.initialise(); await repository.import(JSON.stringify(archive));
+  const repository = new SaveRepository(connect()); await repository.initialise(); const selectedArchive = mode === 'move' ? relocationArchive : archive; await repository.import(JSON.stringify(selectedArchive));
+  if (mode === 'move') { const original = (await repository.active())!; await repository.restoreBranch(original.id, selectedArchive.snapshots[0].summary.id, original.revision, 'life_business_move_review', 'business_review_original_move'); }
   let nextYield: Promise<void> | undefined;
   const pauseNextSave = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
   const bootstrap = async (repo: SaveRepository) => { mockStore = createGameStore({ repository: async () => repo, date: () => ({ year: 2026, month: 1, day: 1 }), id: () => 'unused', yieldToUI: async () => { const pause = nextYield; nextYield = undefined; if (pause) await pause; } }); expect(await mockStore.getState().bootstrap()).toBe(true); };
-  await bootstrap(repository); mockCompanyId = world().businesses.find(item => item.ownerId === world().activePersonId && item.status === 'active')!.id;
+  await bootstrap(repository); mockCompanyId = world().businesses.find(item => item.ownerId === world().activePersonId && item.status === 'active')?.id ?? '';
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   return { get sqlite() { return sqlite; }, repository, rows, pauseNextSave,
     cold: async () => { sqlite.close(); await bootstrap(new SaveRepository(connect())); },
-    oldMoments: () => { for (const point of archive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE snapshot_id=?').get(point.summary.id)?.payload).toBe(point.payload); },
+    oldMoments: () => { for (const point of selectedArchive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE snapshot_id=?').get(point.summary.id)?.payload).toBe(point.payload); },
     close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); },
   };
 }
@@ -120,7 +124,15 @@ test('switching between two actual owned company routes clears the old amounts a
   try {
     const quote = businessStartupQuote(world(), 'retail'); expect(await mockStore.getState().dispatch({ type: 'start-business', kind: 'retail', name: 'Second Actual Company', operation: 'manager', quotedCapital: quote.capital })).toBe(true); expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
     const initial = world(), beforeRows = context.rows(), firstId = mockCompanyId, secondId = initial.businesses.find(item => item.id !== firstId)!.id, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
-    await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding'); mockCompanyId = secondId; view.rerender(frame());
+    await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding');
+    const firstReview = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!, cancelledConfirm = firstReview.props.onChoose, cancelledCancel = firstReview.props.onCancel;
+    await press('Never mind'); await act(async () => { await cancelledConfirm('confirm'); }); expect(world().revision).toBe(initial.revision);
+    await edit('Additional business capital', '456.78'); await press('Review Funding');
+    const oldConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    await act(async () => { cancelledCancel(); await cancelledConfirm('confirm'); });
+    expect(world()).toEqual(initial); expect(modal().getByText(formatMoney({ minor: 45678n, currency: initial.businesses.find(item => item.id === firstId)!.currency }))).toBeOnTheScreen();
+    mockCompanyId = secondId; view.rerender(frame());
+    await act(async () => { await oldConfirm('confirm'); });
     expect(screen.queryByText('Invest more capital?')).toBeNull(); expect(screen.getByText('Second Actual Company')).toBeOnTheScreen(); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', '');
     mockCompanyId = firstId; view.rerender(frame()); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.queryByRole('button', { name: 'Fund Business' })).toBeNull(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
@@ -133,8 +145,48 @@ test.each([true, false])('an actual life switch clears the %s startup form or co
     // This checks local form scoping, not an earned inheritance or natural life.
     const initial = world(), other = copyWorld(initial); other.id = 'life_other_business_review'; await context.repository.create(other); expect(await mockStore.getState().selectLife(initial.id)).toBe(true);
     const view = render(frame(startup)); if (startup) { await edit('Business name', 'Old Life Draft'); await press('Review Startup'); } else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); await press('Review Funding'); }
+    const oldConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     const lives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all();
     await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); }); expect(screen.queryByRole('button', { name: startup ? 'Start Business' : 'Fund Business' })).toBeNull(); expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('value', '');
+    await act(async () => { await oldConfirm('confirm'); });
     if (!startup) expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', ''); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(lives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); context.oldMoments(); view.unmount();
   } finally { context.close(); }
+});
+
+test('an ordinary approved relocation invalidates the old startup quote while an unrelated revision retains it', async () => {
+  const context = await setup('move');
+  try {
+    // The unchanged v20 approved-move checkpoint supplies real funds and the
+    // saved work offer; no residence, money, success roll or company is forged.
+    const initial = world(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(true));
+    await edit('Business name', 'Move Review Cafe'); await press('Review Startup');
+    const confirmation = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
+    const retained = confirmation().props.event, oldConfirm = confirmation().props.onChoose;
+    await act(async () => {
+      expect(await mockStore.getState().dispatch({ type: 'meditate' })).toBe(true);
+      expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true);
+    });
+    expect(confirmation().props.event).toBe(retained);
+    const offer = world().relocations[0]; expect(offer.status).toBe('approved');
+    const quote = moveQuote(world(), offer);
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'relocate', applicationId: offer.id, companionIds: [], reserveMonths: 3, reviewedQuote: quote })).toBe(true); });
+    const moved = world(), movedRows = context.rows(), calls = dispatch.mock.calls.length;
+    expect(moved.id).toBe(initial.id); expect(moved.activePersonId).toBe(initial.activePersonId);
+    expect(moved.people[moved.activePersonId]).toMatchObject({ country: 'JP', city: 'Tokyo', nationality: 'US' });
+    expect(screen.queryByText('Start Move Review Cafe?')).toBeNull();
+    await act(async () => { await oldConfirm('confirm'); });
+    expect(dispatch).toHaveBeenCalledTimes(calls); expect(world()).toEqual(moved); expect(context.rows()).toEqual(movedRows);
+    expect(moved.businesses).toEqual([]);
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); });
+    const settled = world(), settledRows = context.rows(), newQuote = businessStartupQuote(settled, 'cafe');
+    expect(newQuote.currency).toBe('JPY');
+    expect(screen.getByText('Startup capital: ' + formatMoney({ minor: newQuote.capital, currency: newQuote.currency }))).toBeOnTheScreen();
+    expect(screen.getByText('Registration: ' + formatMoney({ minor: newQuote.registration, currency: newQuote.currency }))).toBeOnTheScreen();
+    // This real move leaves insufficient cash for the Japanese startup. Keep
+    // that refusal rather than arranging funds just to open another review.
+    expect(screen.getByText('Your available balance cannot fund this startup')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Review Startup' })).toBeDisabled();
+    expect(world()).toEqual(settled); expect(context.rows()).toEqual(settledRows);
+    view.unmount(); await context.cold(); expect(world()).toEqual(settled); expect(context.rows()).toEqual(settledRows); context.oldMoments();
+  } finally { jest.restoreAllMocks(); context.close(); }
 });
