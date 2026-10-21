@@ -36,7 +36,13 @@ test('a genuine newborn archive reaches age six, reviews actual parental costs a
   await cold(); const world = () => mockStore.getState().world!;
   const dispatch = async (command: GameCommand) => { expect(await mockStore.getState().dispatch(command)).toBe(true); };
   const finish = async () => { let guard = 0; while ((world().pending || world().annual) && guard++ < 150) { const w = world(); await dispatch(w.pending?.kind === 'decision' ? { type: 'choose', eventId: w.pending.id, choiceId: w.pending.choices.find(item => !choiceUnavailable(w, item))!.id } : w.pending ? { type: 'acknowledge', resultId: w.pending.id } : { type: 'resume' }); } expect(guard).toBeLessThan(150); };
-  await finish(); for (let year = 0; year < 5; year++) { await dispatch({ type: 'advance' }); await finish(); }
+  await finish();
+  const earlyWorld = world(), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), earlyRows = rows();
+  const earlyView = render(frame(<Pets />)); await press(/^Buddy\..*Meet and care for household pets from age six/);
+  expect(screen.getByRole('header', { name: 'Adoption Details' })).toBeOnTheScreen(); expect(screen.getByText(/Adoption fee if accepted:/)).toBeOnTheScreen(); expect(screen.getByText(/Monthly food and basic care:/)).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled(); await press('Review Adoption'); expect(screen.queryByRole('button', { name: 'Ask For This Adoption' })).toBeNull();
+  await press('Close Adoption Details'); expect(world()).toBe(earlyWorld); expect(rows()).toEqual(earlyRows); earlyView.unmount();
+  for (let year = 0; year < 5; year++) { await dispatch({ type: 'advance' }); await finish(); }
   expect(world().date).toEqual({ year: 2032, month: 10, day: 19 }); const beforeBrowse = encodeWorld(world()), view = render(frame(<Relationships />));
   await press('Household Pets'); expect(router.push).toHaveBeenCalledWith('/pets'); view.rerender(frame(<Activities />)); await press(/^Household Pets\./); expect(router.push).toHaveBeenCalledWith({ pathname: '/pets', params: { tab: 'activities' } }); view.rerender(frame(<Pets />)); expect(encodeWorld(world())).toBe(beforeBrowse);
   expect(screen.getByRole('button', { name: 'Buddy. Golden Retriever · 1 year' })).toBeOnTheScreen();
