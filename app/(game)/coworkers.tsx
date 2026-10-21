@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { FlatList, Keyboard, TextInput, View } from 'react-native';
+import { FlatList, Keyboard, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -9,6 +9,7 @@ import { colleagueAway, workplaceReason } from '../../src/game/systems/workplace
 import { relationFor } from '../../src/game/systems/relationships';
 import { ActionRow, Body, Button, Card, Header, Heading, Portrait, StatBar } from '../../src/ui/components';
 import { ThemedStatusBar, useColors } from '../../src/ui/theme';
+import { Illustration } from '../../src/assets/Illustration';
 
 type Row = { key: string; kind: 'person'; member: WorkplaceMember } | { key: string; kind: 'history'; place: Workplace } | { key: string; kind: 'history-heading' };
 export default function Coworkers() {
@@ -34,15 +35,16 @@ export default function Coworkers() {
     <FlatList data={rows} keyExtractor={item => item.key} initialNumToRender={8} maxToRenderPerBatch={8} windowSize={7} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
       ListHeaderComponent={<View style={{ gap: 16, paddingBottom: 16 }}>
         <Header title="Coworkers" onBack={() => router.back()} />
-        {place ? <><Heading size={18}>{place.employer}</Heading><Body muted>{place.city} · {place.ended ? 'Former workplace · ' + place.started.year + '–' + place.ended.year : 'Your current team'}</Body>
+        {place ? <><Card><View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 14 }}><Illustration id="career" size={64} /><View style={{ flexGrow: 1, flexBasis: 170, minWidth: 0, gap: 5 }}><Heading size={22}>{place.employer}</Heading><Body muted>{place.city} · {place.ended ? 'Former workplace · ' + place.started.year + '–' + place.ended.year : 'Your current team'}</Body></View></View><Body muted>Open a colleague to view their profile and your recorded relationship.</Body></Card>
           <TextInput accessibilityLabel="Search coworkers" placeholder="Search by name" placeholderTextColor={c.muted} value={query} onChangeText={setQuery} style={{ color: c.ink, backgroundColor: c.surface, minHeight: 48, padding: 14, borderRadius: 12, fontSize: 16 }} />
+          <Body muted>{rows.filter(row => row.kind === 'person').length} matching {query.trim() ? 'names' : 'recorded colleagues'}</Body>
         </> : selectedId ? <Card><Body>This workplace is not in your employment history.</Body></Card> : <Card>
           <Heading size={18}>{player.employment?.employer ?? 'No current workplace'}</Heading>
           <Body muted>{introductionReason ?? 'Introduce yourself to your supervisor and the people on your team.'}</Body>
           {!introductionReason && <Button label="Introduce Yourself" busy={busy} onPress={() => void dispatch({ type: 'meet-coworkers' })} />}
           {!player.employment && <Button label="Find a Job" onPress={() => router.push('/jobs')} />}
         </Card>}
-        {error && <Body>{error}</Body>}
+        {error && !world.pending && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
       </View>}
       ListEmptyComponent={place ? <Card><Body muted>{query.trim() ? 'No matching names.' : 'No colleagues are recorded here.'}</Body></Card> : null}
       renderItem={({ item }) => {
