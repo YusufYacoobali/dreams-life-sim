@@ -3,11 +3,24 @@ import type { World } from '../model';
 const compareDates = (a: World['date'], b: World['date']) => (a.year - b.year) || (a.month - b.month) || (a.day - b.day);
 import { countries } from '../countries';
 import { storyContextReason, storyMonthNumber } from './storyContext';
+import { projectRecallResolutionIds } from './storySchemas';
+import { storyPairKey, validateProjectRecall } from './projectRecallValidation';
+import type { Pending } from '../runtime';
 
 /** Save/load validates records without creating plans, rolling consent or advancing dates. */
 export function validateStoryThreads(world: World, ledger = indexLedger(world.ledger)) {
   const ids = new Set<string>(), origins = new Set<string>(), payments = new Set<string>();
   const queued = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
+  const threads = new Map(world.storyThreads.map(thread => [thread.id, thread]));
+  const recallQueued = new Map<string, Pending[]>(), recallRelations = new Set<string>();
+  const recallJournal = new Map<string, World['journal'][number]>();
+  if (world.storyThreads.some(thread => thread.projectRecall)) {
+    const pairs = new Set<string>(), choiceIds = new Set<string>();
+    for (const thread of world.storyThreads) if (thread.projectRecall) { pairs.add(storyPairKey(thread.personId, thread.peerId)); choiceIds.add(thread.id + '_project_recall_choice'); }
+    for (const event of queued) { const matches = recallQueued.get(event.id) ?? []; matches.push(event); recallQueued.set(event.id, matches); }
+    for (const edge of world.relationships) { const pair = storyPairKey(edge.from, edge.to); if (pairs.has(pair)) recallRelations.add(pair); if (recallRelations.size === pairs.size) break; }
+    for (const entry of world.journal) { if (choiceIds.has(entry.id)) recallJournal.set(entry.id, entry); if (recallJournal.size === choiceIds.size) break; }
+  }
   for (const thread of world.storyThreads) {
     const arcade = thread.kind === 'arcade-invitation', school = world.schoolCommunities.find(item => item.id === thread.communityId), origin = arcade ? 'school-arcade-invitation' : 'school-project-promise';
     const participants = [thread.personId, thread.peerId, ...(thread.parentId ? [thread.parentId] : []), ...(thread.teacherId ? [thread.teacherId] : [])];
@@ -17,6 +30,7 @@ export function validateStoryThreads(world: World, ledger = indexLedger(world.le
       thread.originTemplateId !== origin || thread.originChoiceId !== (arcade ? 'ask' : 'promise') || thread.originEventId !== 'event_' + thread.created.year + '_' + origin ||
       thread.dueMonth !== storyMonthNumber(thread.created) + (arcade ? 1 : 2) || thread.expiresMonth !== thread.dueMonth || thread.quote.currency !== countries[thread.country].currency) throw new Error('Invalid story origin or participants');
     ids.add(thread.id); origins.add(thread.originEventId);
+    validateProjectRecall(world, thread, recallQueued, recallRelations, recallJournal);
     if (arcade) {
       const permission = thread.permission;
       if (!thread.parentId || thread.teacherId || !world.relationships.some(edge => edge.from === thread.parentId && edge.to === thread.personId && edge.kind === 'parent') ||
@@ -46,11 +60,14 @@ export function validateStoryThreads(world: World, ledger = indexLedger(world.le
   }
   if (ledger.categories('story-outing').some(item => !payments.has(item.id))) throw new Error('Unrecorded story outing payment');
   for (const event of queued) if (event.kind === 'decision') for (const choice of event.choices) for (const effect of choice.effects) {
-    if (effect.kind === 'resolve-story' && !world.storyThreads.some(item => item.id === effect.threadId && item.status === 'offered' && item.offeredEventId === event.id)) throw new Error('Invalid bound story resolution');
+    if (effect.kind === 'resolve-story') {
+      const thread = threads.get(effect.threadId), recall = projectRecallResolutionIds.some(id => id === effect.resolution);
+      if (!thread || (recall ? thread.projectRecall?.status !== 'offered' || thread.projectRecall.offeredEventId !== event.id : thread.status !== 'offered' || thread.offeredEventId !== event.id)) throw new Error('Invalid bound story resolution');
+    }
     if (effect.kind === 'schedule-story' && (effect.personId !== world.activePersonId || effect.originEventId !== event.id || effect.originTemplateId !== event.templateId || effect.originChoiceId !== choice.id ||
       effect.originTemplateId !== (effect.storyKind === 'arcade-invitation' ? 'school-arcade-invitation' : 'school-project-promise') || effect.originChoiceId !== (effect.storyKind === 'arcade-invitation' ? 'ask' : 'promise') ||
       !world.schoolCommunities.some(item => item.id === effect.communityId && item.personId === effect.personId && item.classmateIds.includes(effect.peerId)) ||
       [effect.personId, effect.peerId, effect.parentId, effect.teacherId].some(id => id && !event.personIds.includes(id)) ||
-      effect.storyKind === 'arcade-invitation' && (!effect.parentId || effect.teacherId) || effect.storyKind === 'project-promise' && (!effect.teacherId || effect.parentId))) throw new Error('Invalid bound story origin');
+      effect.storyKind === 'arcade-invitation' && (!effect.parentId || effect.teacherId || effect.rememberProject) || effect.storyKind === 'project-promise' && (!effect.teacherId || effect.parentId))) throw new Error('Invalid bound story origin');
   }
 }

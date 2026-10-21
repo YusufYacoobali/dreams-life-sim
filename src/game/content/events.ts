@@ -339,7 +339,7 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
       ...(choice.petBond && binding.pet ? [{ kind: 'pet-bond' as const, petId: binding.pet.id, personId: player.id, delta: choice.petBond }] : []),
       ...(choice.grades && context.school ? [{ kind: 'school-grade' as const, personId: player.id, communityId: context.school.id, delta: choice.grades }] : []),
       ...(choice.skill ? [{ kind: 'skill' as const, personId: player.id, skill: choice.skill.id, delta: choice.skill.delta }] : []),
-      ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id }] : []),
+      ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id, ...(choice.followUp === 'project-promise' ? { rememberProject: true as const } : {}) }] : []),
     ],
     resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
   })).map(choice => {

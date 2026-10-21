@@ -8,7 +8,8 @@ import { nextPending, offerPending } from '../pendingQueue';
 import { accountFor, availableCash, bounded, draw, fact, post } from './common';
 import { refreshFriendship, relationFor } from './relationships';
 import { storyContextReason, storyMonthNumber } from './storyContext';
-import { storyThread, type StorySchedule, type StoryThread } from './storySchemas';
+import { projectRecallResolutionIds, storyThread, type StoryResolution, type StorySchedule, type StoryThread } from './storySchemas';
+import { offerProjectRecalls, projectRecallReason, refreshProjectRecalls, resolveProjectRecall } from './projectRecall';
 
 export function scheduleStory(world: World, effect: StorySchedule): RuntimeEffectRow[] {
   const reason = storyContextReason(world, effect); if (reason) throw new IneligibleAction(reason);
@@ -23,7 +24,8 @@ export function scheduleStory(world: World, effect: StorySchedule): RuntimeEffec
     communityId: effect.communityId, peerId: effect.peerId, teacherId: effect.teacherId, parentId: effect.parentId,
     status: accepted ? 'scheduled' : 'cancelled', permission: parent ? { personId: parent.id, trustAtRequest: trust, chance, roll, accepted } : null,
     quote: { amount: arcade ? (roundRatio(rules[person.country].baseWage, 2000n) || 1n) : 0n, currency: countries[person.country].currency, payerId: parent?.id ?? null },
-    offeredEventId: null, resolution: null, ended: accepted ? null : { ...world.date }, cancellationReason: accepted ? null : 'Permission was declined', paidTransactionId: null };
+    offeredEventId: null, resolution: null, ended: accepted ? null : { ...world.date }, cancellationReason: accepted ? null : 'Permission was declined', paidTransactionId: null,
+    ...(effect.rememberProject ? { rememberProject: true as const } : {}) };
   world.storyThreads.push(thread);
   if (!accepted) { fact(world, parent!.firstName + ' did not agree to the arcade party. No visit or payment was booked.', 'school'); return [{ id: 'permission', label: 'Permission', value: parent!.firstName + ' declined', tone: 'neutral' }]; }
   const when = Math.floor(thread.dueMonth / 12) + '-' + String(thread.dueMonth % 12 + 1).padStart(2, '0');
@@ -33,6 +35,7 @@ export function scheduleStory(world: World, effect: StorySchedule): RuntimeEffec
 
 export function storyChoiceReason(world: World, threadId: string, resolution: string): string | undefined {
   const thread = storyThread(world, threadId);
+  if (projectRecallResolutionIds.some(id => id === resolution)) return thread ? projectRecallReason(world, thread, resolution) : 'This memory is no longer open';
   if (!thread || thread.status !== 'offered' || thread.personId !== world.activePersonId) return 'This plan is no longer open';
   const valid = thread.kind === 'arcade-invitation' ? ['attend', 'decline'] : ['complete', 'ask-help', 'leave-to-peer'];
   if (!valid.includes(resolution)) return 'Choose an option for this plan';
@@ -63,6 +66,7 @@ function callback(world: World, thread: StoryThread): Extract<Pending, { kind: '
 
 /** Called by simulation/commands, never by a screen, import or render. */
 export function refreshStoryThreads(world: World) {
+  refreshProjectRecalls(world);
   for (const thread of world.storyThreads) {
     if (!['scheduled', 'offered'].includes(thread.status)) continue;
     const month = storyMonthNumber(world.date), reason = storyContextReason(world, thread, thread.status === 'scheduled' && month < thread.dueMonth, thread) ?? (month > thread.expiresMonth ? 'The date has passed' : undefined);
@@ -80,10 +84,12 @@ export function storyMonth(world: World) {
   for (const thread of world.storyThreads) if (thread.status === 'scheduled' && storyMonthNumber(world.date) === thread.dueMonth) {
     const event = callback(world, thread); thread.status = 'offered'; thread.offeredEventId = event.id; offerPending(world, event, 25);
   }
+  offerProjectRecalls(world);
 }
 
-export function resolveStory(world: World, threadId: string, resolution: NonNullable<StoryThread['resolution']>): RuntimeEffectRow[] {
+export function resolveStory(world: World, threadId: string, resolution: StoryResolution): RuntimeEffectRow[] {
   const reason = storyChoiceReason(world, threadId, resolution); if (reason) throw new IneligibleAction(reason);
+  if (projectRecallResolutionIds.some(id => id === resolution)) return resolveProjectRecall(world, storyThread(world, threadId)!, resolution);
   const thread = storyThread(world, threadId)!, person = world.people[thread.personId], rows: RuntimeEffectRow[] = [];
   const delta = (label: string, before: number, after: number) => rows.push({ id: 'story_' + rows.length, label, value: (after >= before ? '+' : '') + (after - before) + '%', tone: after > before ? 'positive' : after < before ? 'negative' : 'neutral' });
   const stat = (key: 'energy' | 'happiness', amount: number) => { const before = person.stats[key]; person.stats[key] = bounded(before + amount); delta(key === 'energy' ? 'Energy' : 'Happiness', before, person.stats[key]); };
@@ -96,6 +102,10 @@ export function resolveStory(world: World, threadId: string, resolution: NonNull
     const before = person.education.grades; person.education.grades = bounded(before + (resolution === 'complete' ? 3 : resolution === 'ask-help' ? 1 : -2)); delta('Grades', before, person.education.grades);
     stat('energy', resolution === 'complete' ? -5 : resolution === 'ask-help' ? -3 : 1); bond(thread.peerId, resolution === 'leave-to-peer' ? -6 : resolution === 'complete' ? 4 : 2); bond(thread.teacherId!, resolution === 'leave-to-peer' ? -2 : 2, resolution === 'leave-to-peer' ? -4 : 2);
   } else rows.push({ id: 'payment', label: 'Outing cost', value: 'No charge', tone: 'neutral' });
-  thread.status = 'resolved'; thread.resolution = resolution; thread.ended = { ...world.date };
+  thread.status = 'resolved'; thread.resolution = resolution as NonNullable<StoryThread['resolution']>; thread.ended = { ...world.date };
+  if (thread.rememberProject && thread.kind === 'project-promise') {
+    const dueMonth = storyMonthNumber(world.date) + 24;
+    thread.projectRecall = { dueMonth, expiresMonth: dueMonth + 2, status: 'scheduled', offeredEventId: null, offered: null, resolution: null, ended: null, cancellationReason: null };
+  }
   return rows;
 }

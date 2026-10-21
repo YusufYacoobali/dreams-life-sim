@@ -5,6 +5,13 @@ import type { World } from '../model';
 export const storyKinds = ['arcade-invitation', 'project-promise'] as const;
 export type StoryKind = typeof storyKinds[number];
 export const storyResolutionIds = ['attend', 'decline', 'complete', 'ask-help', 'leave-to-peer'] as const;
+export const projectRecallResolutionIds = ['remember-project', 'dismiss-project', 'pass-project'] as const;
+export const projectRecallSchema = z.object({
+  dueMonth: z.number().int(), expiresMonth: z.number().int(),
+  status: z.enum(['scheduled', 'offered', 'resolved', 'cancelled']),
+  offeredEventId: z.string().nullable(), offered: dateSchema.nullable(),
+  resolution: z.enum(projectRecallResolutionIds).nullable(), ended: dateSchema.nullable(), cancellationReason: z.string().nullable(),
+});
 const currency = z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']);
 export const storyThreadSchema = z.object({
   id: z.string(), kind: z.enum(storyKinds), personId: z.string(),
@@ -16,12 +23,16 @@ export const storyThreadSchema = z.object({
   quote: z.object({ amount: z.bigint().nonnegative(), currency, payerId: z.string().nullable() }),
   offeredEventId: z.string().nullable(), resolution: z.enum(storyResolutionIds).nullable(),
   ended: dateSchema.nullable(), cancellationReason: z.string().nullable(), paidTransactionId: z.string().nullable(),
+  // Absent on existing saved plans: only newly bound projects opt in, after actual resolution.
+  rememberProject: z.literal(true).optional(), projectRecall: projectRecallSchema.optional(),
 });
 export type StoryThread = z.infer<typeof storyThreadSchema>;
 export const storyScheduleSchema = z.object({
   kind: z.literal('schedule-story'), storyKind: z.enum(storyKinds), personId: z.string(), peerId: z.string(), teacherId: z.string().nullable(), parentId: z.string().nullable(), communityId: z.string(),
   originEventId: z.string(), originTemplateId: z.string(), originChoiceId: z.string(),
+  rememberProject: z.literal(true).optional(),
 });
-export const storyResolveSchema = z.object({ kind: z.literal('resolve-story'), threadId: z.string(), resolution: z.enum(storyResolutionIds) });
+export const storyResolveSchema = z.object({ kind: z.literal('resolve-story'), threadId: z.string(), resolution: z.enum([...storyResolutionIds, ...projectRecallResolutionIds]) });
+export type StoryResolution = z.infer<typeof storyResolveSchema>['resolution'];
 export type StorySchedule = z.infer<typeof storyScheduleSchema>;
 export const storyThread = (world: World, id: string) => world.storyThreads.find(item => item.id === id);
