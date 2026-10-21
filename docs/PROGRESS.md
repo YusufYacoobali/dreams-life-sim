@@ -1,5 +1,7 @@
 # Dreams: Life Simulator — progress and verification
 
+Goal continuation is blocked on release prerequisites: current enforced environment revision74 still excludes `repo.reactnative.dev`; actual iOS/physical-device acceptance and distribution setup remain unavailable. No runtime change, regression rerun or denied download retry was made. The passing b75checkpoint and saved data remain intact.
+
 All confirmed approved-feature audit gaps are implemented and pushed, including four business categories, Products & Services, name/logo Settings, final Statistics and campus social life. Runtime `b75e617` also fixes the first-month campus planning opportunity found in actual play. World41/engine42/content17/reader21/v4;274situations/822choices.
 
 The15campus checks and final app/all-test strict types pass. Ordinary Android play now confirms paid enrolment → first-month pause → two introductions → club confirmation → same-year completion:12/36law months,11future club periods and11paid months for each peer. A real force-stop/Continue restores revision150 with ALL8tables exact; every prior inactive life, historical row, ledger entry and original course is retained. The branded value-offering company has genuinely operated24months. Final Android/iOS Hermes bundles are complete and their changed source-map bytes match. No extra local full regression or unchanged cohort was run.
