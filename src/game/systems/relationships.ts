@@ -21,12 +21,16 @@ import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { conversationContext, conversationTopicIds, conversationTopics } from './conversations';
 import { writeConversation } from '../content/conversationWriting';
+import { dateActivities, dateActivityOutcome } from './dateActivities';
+import { dateActivityIds } from './dateActivitySchemas';
+import { activeRomance, dateBudget, otherPerson, relationFor, romanceReason, type Relationship } from './relationshipQueries';
+export { activeRomance, closeFamily, dateBudget, otherPerson, partnerRelation, relationFor, romanceReason, socialActionUsed, type Relationship, type RomanceLookups } from './relationshipQueries';
 
 export const socialCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-people'), purpose: z.enum(['friend', 'dating']), gender: z.enum(['any', ...genders]) }),
   z.object({ type: z.literal('interact'), personId: z.string(), action: z.enum(['talk', 'compliment', 'spend-time', 'argue', 'apologise']), topic: z.enum(conversationTopicIds).optional() }).refine(command => command.topic === undefined || command.action === 'talk', 'Only a conversation can have a topic'),
   z.object({ type: z.literal('gift-money'), personId: z.string(), amount: z.bigint().positive() }),
-  z.object({ type: z.literal('ask-date'), personId: z.string() }),
+  z.object({ type: z.literal('ask-date'), personId: z.string(), activity: z.enum(dateActivityIds).optional() }),
   z.object({ type: z.literal('propose'), personId: z.string(), ringId: z.string().optional() }),
   z.object({ type: z.literal('marry'), personId: z.string(), budget: z.bigint().nonnegative() }),
   z.object({ type: z.literal('breakup'), personId: z.string() }),
@@ -35,21 +39,6 @@ export const socialCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('relationship-preferences'), attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean() }),
 ]);
 export type SocialCommand = z.infer<typeof socialCommandSchema>;
-export type Relationship = World['relationships'][number];
-export const activeRomance = (relation: Relationship) => relation.romance === 'teen-dating' || relation.romance === 'dating' || relation.romance === 'engaged' || relation.romance === 'married';
-export function relationFor(world: World, a: string, b: string) { return world.relationships.find(relation => relation.from === a && relation.to === b || relation.from === b && relation.to === a); }
-export function partnerRelation(world: World, personId = world.activePersonId) { return world.relationships.find(relation => activeRomance(relation) && (relation.from === personId || relation.to === personId)); }
-export function otherPerson(world: World, relation: Relationship, personId = world.activePersonId): Person { return world.people[relation.from === personId ? relation.to : relation.from]; }
-function ancestors(world: World, id: string): Set<string> {
-  const result = new Set([id]); let frontier = [id];
-  for (let depth = 0; depth < 4; depth++) { const next: string[] = []; for (const personId of frontier) for (const relation of world.relationships) if (relation.kind === 'parent' && relation.to === personId && !result.has(relation.from)) { result.add(relation.from); next.push(relation.from); } frontier = next; }
-  return result;
-}
-export function closeFamily(world: World, a: string, b: string): boolean {
-  const direct = relationFor(world, a, b); if (direct && direct.roles.some(role => role === 'parent' || role === 'sibling' || role === 'guardian')) return true;
-  const first = ancestors(world, a), second = ancestors(world, b);
-  return [...first].some(id => second.has(id));
-}
 export function relationLabel(world: World, relation: Relationship, personId = world.activePersonId): string {
   if (relation.kind === 'parent') return relation.from === personId ? relation.parentType === 'adoptive' ? 'Adopted child' : 'Child' : relation.parentType === 'adoptive' ? 'Adoptive parent' : 'Parent';
   if (relation.kind === 'guardian') return relation.from === personId ? 'In your care' : 'Guardian';
@@ -74,22 +63,6 @@ export function connectPerson(world: World, id: string, fromId = world.activePer
   }
   return [{ id: 'contact', label: 'New acquaintance', value: fullName(person), tone: 'positive' }];
 }
-/** Optional indexed lookups let bounded NPC decisions share the same romance rules. */
-export type RomanceLookups = { closeFamily: (a: string, b: string) => boolean; partner: (personId: string) => Relationship | undefined };
-export function romanceReason(world: World, target: Person, fromId = world.activePersonId, lookups?: RomanceLookups): string | undefined {
-  const player = world.people[fromId];
-  if(serviceAway(world,fromId)||serviceAway(world,target.id))return 'Arrange in-person time after both people return from their assignments';
-  if (isConfined(world, player) || isConfined(world, target)) return 'Romantic outings are unavailable in custody';
-  if (target.died) return 'This person has died';
-  if (ageOn(player, world.date) < rules[player.country].adultAge || ageOn(target, world.date) < rules[target.country].adultAge) return 'Both people must be adults';
-  if (lookups ? lookups.closeFamily(player.id, target.id) : closeFamily(world, player.id, target.id)) return 'You cannot date a close relative or guardian';
-  if (!player.attractedTo.includes(target.gender) || !target.attractedTo.includes(player.gender)) return 'Your dating preferences do not match';
-  const existing = lookups ? lookups.partner(fromId) : partnerRelation(world, fromId), theirs = lookups ? lookups.partner(target.id) : partnerRelation(world, target.id);
-  if (existing && otherPerson(world, existing, fromId).id !== target.id) return 'End your current relationship first';
-  if (theirs && otherPerson(world, theirs, target.id).id !== player.id) return 'They are already in a relationship';
-  if (!samePhysicalPlace(world, player.id, target.id)) return 'Meet in the same city before arranging a date';
-}
-export const dateBudget = (world: World) => roundRatio(rules[active(world).country].baseWage, 1000n);
 export const weddingBudgets = (world: World, person = active(world)) => [100n, 20n, 4n].map((denominator, index) => ({ id: ['simple', 'small', 'lavish'][index], label: ['Simple ceremony', 'Small celebration', 'Lavish wedding'][index], amount: roundRatio(rules[person.country].baseWage, denominator) }));
 /** Completion only: callers establish eligibility, consent and actual payment first. */
 export function recordMarriage(world: World, player: Person, target: Person, relation: Relationship, id: string, budget: bigint) {
@@ -105,7 +78,6 @@ function counter(world: World, targetId: string, action: string) {
   if (world.actionCounts[key]) throw new IneligibleAction('You already tried this with this person this year');
   world.actionCounts[key] = 1;
 }
-export function socialActionUsed(world: World, personId: string, action: string) { return !!world.actionCounts[world.activePersonId + ':social:' + world.date.year + ':' + personId + ':' + action]; }
 function statChanges(person: Person, changes: Partial<Stats>): RuntimeEffectRow[] {
   return Object.entries(changes).map(([key, change]) => { const stat = key as keyof Stats; const before = person.stats[stat]; person.stats[stat] = bounded(before + change!); const delta = person.stats[stat] - before; return { id: stat, label: stat[0].toUpperCase() + stat.slice(1), value: (delta >= 0 ? '+' : '') + delta + '%', tone: (stat === 'stress' ? -delta : delta) > 0 ? 'positive' : (stat === 'stress' ? -delta : delta) < 0 ? 'negative' : 'neutral' }; });
 }
@@ -212,6 +184,21 @@ export function resolveSocial(world: World, command: SocialCommand) {
   }
   const reason = romanceReason(world, target); if (reason) throw new IneligibleAction(reason);
   if (command.type === 'ask-date') {
+    if (command.activity !== undefined) {
+      const activity = dateActivities(world, target.id).find(row => row.id === command.activity);
+      if (!activity || activity.disabledReason) throw new IneligibleAction(activity?.disabledReason ?? 'Choose an available date activity');
+      settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
+      counter(world, target.id, 'date');
+      const chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));
+      const accepted = draw(world, 'outcomes', 1, 100) <= chance, outcome = dateActivityOutcome(activity.id, fullName(target), accepted);
+      if (!accepted) { fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'rose', statChanges(player, { happiness: -2 })); return; }
+      if (activity.cost > 0n) charge(world, activity.cost, 'dating', activity.label + ' with ' + fullName(target));
+      if (!activeRomance(relation)) relation.romance = 'dating'; if (!relation.roles.includes('partner') && relation.romance !== 'married') relation.roles.push('partner'); syncKind(relation);
+      const beforeTrust = relation.trust;
+      relation.trust = bounded(relation.trust + 5); relation.lastInteractionYear = world.date.year; relation.memories.push('date:' + world.date.year);
+      const trust: RuntimeEffectRow = { id: 'trust', label: 'Trust', value: '+' + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : 'neutral' };
+      fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'hearts', [bond(relation, outcome.bond), trust, ...statChanges(player, { happiness: outcome.happiness, energy: outcome.energy })]); return;
+    }
     if (hospitalized(world, player) || hospitalized(world, target)) throw new IneligibleAction('Arrange a date after the hospital stay');
     settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
     counter(world, target.id, 'date'); const cost = dateBudget(world); if (accountFor(world).cash < cost) throw new IneligibleAction('Your balance cannot cover the date');
