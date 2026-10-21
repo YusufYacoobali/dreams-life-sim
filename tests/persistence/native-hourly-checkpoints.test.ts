@@ -28,7 +28,7 @@ test('actual native129/130/132/134 remain pinned: migration adds only current ta
     expect(sha(item.payload)).toBe(item.payloadSha256);
     const original = originalObject(item.payload), current = checkpoints.unpackCheckpoint(item.payload);
     expect(original).toMatchObject({ schemaVersion: 32, engineVersion: 33, contentVersion: 9, revision: item.revision }); expect(original.npcCourtships).toBeUndefined();
-    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 40, engineVersion: 41, contentVersion: 17, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], npcCourtships: [], schoolWithdrawals: [] });
+    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 41, engineVersion: 42, contentVersion: 17, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], npcCourtships: [], schoolWithdrawals: [] });
   }
   const year = checkpoints.unpackCheckpoint(pinned.checkpoints.year.payload), contract = year.hourlyContracts[0];
   expect(contract.terms).toEqual({ hourlyRate: 1603n, weeklyHours: 20, paidWeeks: 52 }); expect(contract.periods).toHaveLength(12);
@@ -49,7 +49,7 @@ test('reader12 upgrades without rewriting raw saves; the actual completed payrol
     for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(payload);
     sqlite.exec('PRAGMA user_version=12');
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(20); expect(rows()).toEqual(original);
+    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(rows()).toEqual(original);
     const store = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); expect(await store.getState().bootstrap()).toBe(true); expect(store.getState().world).toEqual(world); expect(rows()).toEqual(original);
     const command = { type: 'choose' as const, eventId: world.pending!.id, choiceId: 'brief' }, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_old_hourly BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");

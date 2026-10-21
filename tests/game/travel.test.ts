@@ -31,7 +31,7 @@ function finishYear(input: World) { let world = input, guard = 0; while (world.a
 
 test('the genuine v18 archive migrates all twelve paid foreign pension quotes and its prior unspent entitlement without alteration', () => {
   const save = decodeSave(JSON.stringify(pensionArchive)), world = save.world, original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(pensionArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(encodeWorld(world));
-  expect(world.schemaVersion).toBe(40); expect(world.trips).toEqual([]); expect(encoded.people).toEqual(original.people); expect(encoded.ledger).toEqual(original.ledger); expect(encoded.workHistory).toEqual(original.workHistory); expect(world.random).toEqual(original.random);
+  expect(world.schemaVersion).toBe(41); expect(world.trips).toEqual([]); expect(encoded.people).toEqual(original.people); expect(encoded.ledger).toEqual(original.ledger); expect(encoded.workHistory).toEqual(original.workHistory); expect(world.random).toEqual(original.random);
   const person = world.people[world.activePersonId]; expect(person.finance.pensionReceipts).toHaveLength(12); expect(person.finance.pensionReceipts.reduce((sum, row) => sum + row.nativeGross, 0n)).toBe(2408163n); expect(person.finance.pensionReceipts.reduce((sum, row) => sum + row.gross, 0n)).toBe(3642345n); expect(person.finance.pensionReceipts.reduce((sum, row) => sum + row.fee, 0n)).toBe(36430n);
   const prior = unpackCheckpoint(save.snapshots[0].payload); expect(prior.trips).toEqual([]); expect(prior.people[prior.activePersonId].finance.pensionReceipts).toEqual([]); expect(prior.people[prior.activePersonId].finance.pensionAnnual).toBe(person.finance.pensionAnnual);
 });

@@ -196,7 +196,7 @@ test('death closes real aid before estate settlement and cannot transfer an awar
 test('genuine world-24 tuition, debt, school result, RNG and both historical moments migrate without retroactive awards', () => {
   const save = decodeSave(JSON.stringify(archive)), raw = (text: string) => JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(text).data, 'base64'))));
   const original = [raw(archive.checkpoint), ...archive.snapshots.map(item => raw(item.payload))], worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];
-  worlds.forEach((world, index) => { const encoded = JSON.parse(encodeWorld(world)); expect(original[index].schemaVersion).toBe(24); expect(world.schemaVersion).toBe(40); expect(world.scholarships).toEqual([]); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(original[index][key]); });
+  worlds.forEach((world, index) => { const encoded = JSON.parse(encodeWorld(world)); expect(original[index].schemaVersion).toBe(24); expect(world.schemaVersion).toBe(41); expect(world.scholarships).toEqual([]); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(original[index][key]); });
   const player = save.world.people[save.world.activePersonId]; expect(player.education.months).toBe(12);
   const before = save.world.ledger.filter(row => row.category === 'tuition'); month(save.world);
   expect(save.world.scholarships).toEqual([]); expect(save.world.ledger.filter(row => row.category === 'tuition')).toHaveLength(before.length + 1);
