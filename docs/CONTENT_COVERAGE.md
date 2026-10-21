@@ -1,12 +1,8 @@
 # Story catalogue and remaining coverage
 
-The source catalogue contains **250 distinct situational templates** against
-the minimum of 250. Routine acknowledgements, generated job/asset offers,
-milestones, school reports and renamed copies do not increase this count.
-These are authored game stories; final editorial, balance and release acceptance
-remain open. The implementation and automated checks do not imply user approval
-of every scene or native visual acceptance.
+The current source catalogue contains **268 authored situations /804 choices**: the historical250-story prefix below, one rare adult situation, fourteen additional special-career situations and three grounded legal situations. The legal scenes require an actual future hearing, an existing known adult prison peer or an actual recent release; choices use existing bounded effects and preserve old bound scenes. Routine acknowledgements, generated job/asset offers, reports and renamed copies do not increase the count. Final balance, scenario and release acceptance remain open; source count is not game completion.
 
+The table below records the original250-story grouping and retains its historical scope.
 Each situation is counted once below, even where its age range overlaps another
 category.
 

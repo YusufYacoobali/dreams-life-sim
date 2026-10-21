@@ -379,7 +379,7 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World39/engine40/content14/reader19 source and exact gate scopes are linked in PROGRESS. Overall remains75% as an effort estimate; onboarding85%, Life/early85%, education/jobs90%, family90%. Current native/release acceptance remains open.
+Current World39/engine40/content15/reader19 source and exact gate scopes are linked in PROGRESS. Overall remains75% as an effort estimate; onboarding85%, Life/early85%, education/jobs90%, family90%. Current native/release acceptance remains open.
 Earlier milestone prose retains its own source and historical estimates.
 
 Prior World32/engine33/content9 adds reviewed hourly work, actual paid/worked
@@ -429,7 +429,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Special careers/business |85%| Current path balance and milestones |
 | Travel/emigration |85%| Country/scenario/device review |
 | Pets/hobbies/leisure |80%| Broader play review |
-| Situational stories |85%|265reviewed source situations/795choices; sequence/pacing and sparse thematic cells |
+| Situational stories |85%|268source situations/804choices; the original265reviewed ledger remains historically scoped; sequence/pacing and sparse thematic cells |
 | Achievements/challenges |80%| Reward and balance review |
 | Visual/accessibility |65%| Matched native,130%text and spoken-reader review |
 | Device/release |20%| StandaloneAndroid,actualiOS,physical performance/release gates |
