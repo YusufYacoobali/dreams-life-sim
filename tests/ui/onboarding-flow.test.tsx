@@ -32,17 +32,26 @@ const frame = (child: React.ReactNode, appearance: 'light' | 'dark' = 'light') =
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 beforeEach(() => { useCreationDraft.setState({ draft: null }); mockParams = {}; mockSeed = 42; });
 
-test('an actual archived result acknowledgement keeps unchanged Life presentation stable', async () => {
+test.each([false, true])('an actual archived result acknowledgement keeps presentation stable and respects journal drag=%s', async dragged => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const initial = unpackCheckpoint(friendship.backup.checkpoint); await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
   const portrait = jest.spyOn(components, 'Portrait'), journal = jest.spyOn(FlatList.prototype, 'render');
+  const scrollToEnd = jest.fn(), responder = jest.spyOn(FlatList.prototype, 'getScrollResponder').mockReturnValue({ scrollToEnd } as unknown as ReturnType<FlatList['getScrollResponder']>);
+  const frames = new Map<number, (time: number) => void>(); let nextFrame = 0;
+  const request = jest.spyOn(global, 'requestAnimationFrame').mockImplementation(callback => { frames.set(++nextFrame, callback); return nextFrame; });
+  const cancel = jest.spyOn(global, 'cancelAnimationFrame').mockImplementation(id => { frames.delete(id); });
+  const flushFrames = () => act(() => { const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(0)); });
   const view = render(frame(<Life />));
   try {
+    flushFrames(); expect(scrollToEnd).toHaveBeenCalledWith({ animated: false }); scrollToEnd.mockClear();
     const before = mockStore.getState().world!, identity = screen.getByRole('button', { name: /^My Life profile\./ }).props.accessibilityLabel;
     const data = screen.UNSAFE_getByType(FlatList).props.data, counts = { portrait: portrait.mock.calls.length, journal: journal.mock.calls.length };
     expect(counts.portrait).toBeGreaterThan(0); expect(counts.journal).toBeGreaterThan(0);
+    if (dragged) fireEvent(screen.UNSAFE_getByType(FlatList), 'scrollBeginDrag');
     await press('Continue'); const after = mockStore.getState().world!;
+    flushFrames(); expect(scrollToEnd).toHaveBeenCalledTimes(dragged ? 0 : 1);
+    if (!dragged) expect(scrollToEnd).toHaveBeenCalledWith({ animated: false });
     expect(after.people).toEqual(before.people); expect(after.journal).toEqual(before.journal); expect(after.accounts).toEqual(before.accounts); expect(after.pending).toBeNull();
     expect(screen.getByRole('button', { name: identity })).toBeOnTheScreen(); expect(after.revision).toBe(before.revision + 1); expect(await repository.load(after.id)).toEqual(after);
     expect(portrait).toHaveBeenCalledTimes(counts.portrait); expect(journal).toHaveBeenCalledTimes(counts.journal); expect(screen.UNSAFE_getByType(FlatList).props.data).toBe(data);
@@ -69,7 +78,7 @@ test('an actual archived result acknowledgement keeps unchanged Life presentatio
     const restored = copyWorld(changedLook); restored.id += '_restored_view'; const beforeRestore = portrait.mock.calls.length;
     await act(async () => { mockStore.setState({ world: restored }); }); expect(portrait.mock.calls.length).toBeGreaterThan(beforeRestore); expect(screen.UNSAFE_getByType(FlatList).props.data).not.toBe(datedRows);
     expect(encodeWorld(await repository.load(progressed.id))).toBe(stored);
-  } finally { view.unmount(); portrait.mockRestore(); journal.mockRestore(); sqlite.close(); }
+  } finally { view.unmount(); portrait.mockRestore(); journal.mockRestore(); responder.mockRestore(); request.mockRestore(); cancel.mockRestore(); sqlite.close(); }
 });
 
 test('custom identity, country/city and appearance survive editor navigation into the real newborn, first year and cold resume', async () => {

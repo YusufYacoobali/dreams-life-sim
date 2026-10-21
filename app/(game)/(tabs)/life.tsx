@@ -141,6 +141,13 @@ export default function Life() {
     followJournal();
     return cancelJournalScroll;
   }, [world.id, player.id, entries.length, followJournal, cancelJournalScroll]);
+  const pendingKind = world.pending?.kind, previousPendingKind = useRef(pendingKind);
+  useEffect(() => {
+    // A new entry may have laid out behind its result modal. Retry once it
+    // closes, while keeping an intentional drag through older entries intact.
+    if (previousPendingKind.current === 'result' && pendingKind === undefined) followJournal();
+    previousPendingKind.current = pendingKind;
+  }, [pendingKind, followJournal]);
   const firstYearHint = ageOn(player, world.date) === 0 ? world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.' : null;
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
     <LifeIdentity data={identity} />
