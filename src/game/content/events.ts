@@ -15,6 +15,7 @@ import { isConfined } from '../systems/legalSchemas';
 import { serviceAway } from '../systems/serviceSchemas';
 import { partnerRelation, relationFor } from '../systems/relationships';
 import { storyParent, storyPersonPresent } from '../systems/storyContext';
+import { studyStoryContext } from '../systems/studyStoryContext';
 import { lifeStoryContexts, lifeStoryBinding, lifeStoryAvailable } from '../systems/lifeStoryContext';
 import { destinations } from './travel';
 import { hobbyContent } from './leisure';
@@ -285,10 +286,11 @@ function templateParent(world: World, template: EventTemplate) {
 export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
   const context = schoolContext(world), work = workContext(world), social = socialContext(world), life = lifeStoryContexts(world), legal = legalStoryContexts(world);
+  const study = eventTemplates.some(template => template.study) ? studyStoryContext(world) : undefined;
   // Callback records remain authoritative even when an older history is sparse.
   // Never offer an origin ID that scheduleStory already considers recorded.
   const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));
-  return eventTemplates.filter(template => lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => (!template.study || template.study === study?.state) && lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
@@ -300,6 +302,8 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
   if (!legalStoryAvailable(legal, template)) throw new Error('This event needs its existing available legal context');
   const binding = lifeStoryBinding(life, template);
   const prisonPeer = template.legal === 'prison-peer' ? legal.peer : undefined;
+  const study = template.study ? studyStoryContext(world) : undefined;
+  if (template.study && template.study !== study?.state) throw new Error('This event needs its recorded current study context');
   if (template.school && (!context.school || template.school !== 'any' && template.school !== context.school.stage) || template.classmate && !context.peer || template.teacher && !context.teacher) throw new Error('This event needs the current school contacts');
   if (template.workplace && !work.place || template.coworker && !work.coworker || template.supervisor && !work.supervisor) throw new Error('This event needs the current available workplace contacts');
   if (template.friend && !social.friend || template.partner && !social.partner) throw new Error('This event needs the existing available adult friend or partner');
@@ -308,6 +312,7 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
   const friendRelation = social.friend && relationFor(world, player.id, social.friend.id), romanticRelation = social.partner && relationFor(world, player.id, social.partner.id);
   const salary = player.employment ? formatMoney({ minor: player.employment.annualPay, currency: player.employment.currency }) : '';
   const names = {
+    studySchool: study?.school ?? '', studyField: study?.field ?? '',
     parent: person?.firstName ?? '', city: player.city, classmate: context.peer?.firstName ?? '',
     teacher: context.teacher?.firstName ?? '', school: context.school?.school ?? '', workplace: work.place?.employer ?? '',
     coworker: work.coworker ? fullName(work.coworker) : '', supervisor: work.supervisor ? fullName(work.supervisor) : '',
@@ -336,7 +341,8 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
     return relation ? [{ relationshipId: relation.id, label }] : [];
   });
   // A name is literal text, including dollar signs or text resembling another token.
-  const text = (value: string) => value.replace(/\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary|offence|caseCity|facility|prisonPeer)\}/g, (_match, key: keyof typeof names) => names[key]);
+  const tokens = template.study ? /\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary|offence|caseCity|facility|prisonPeer|studySchool|studyField)\}/g : /\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary|offence|caseCity|facility|prisonPeer)\}/g;
+  const text = (value: string) => value.replace(tokens, (_match, key: keyof typeof names) => names[key]);
   const choices: BoundChoice[] = template.choices.map(choice => ({
     id: choice.id, label: text(choice.label),
     effects: [

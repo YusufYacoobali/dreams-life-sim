@@ -1,5 +1,5 @@
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
-import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
+import { copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { decodeSave } from '../../src/persistence/archive';
 import { addCondition, emergencyCare, hospitalized } from '../../src/game/systems/health';
@@ -10,6 +10,12 @@ import { pupil } from '../support/pupil';
 import { adultSocial } from '../support/adultSocial';
 import graduate from '../fixtures/v3-employed-graduate.json';
 import serviceArchive from '../fixtures/v16-service-archive.json';
+import studying from '../fixtures/v24-university-loan-archive.json';
+import { storyOption, type EventTemplate } from '../../src/game/content/eventTypes';
+import { studyStoryContext } from '../../src/game/systems/studyStoryContext';
+import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { offerPending } from '../../src/game/pendingQueue';
+import { startStudy, pausedStudy } from '../support/studyStory';
 
 const publicScenes = ['library-card', 'community-garden', 'local-meeting', 'familiar-street', 'toddler-caterpillar-crossing', 'rest-guilt'];
 const template = (id: string) => eventTemplates.find(item => item.id === id)!;
@@ -139,4 +145,107 @@ test('an already-bound mixed scene keeps its stored choices after actual hospita
   expect(result.people[result.activePersonId].health).toEqual(admitted.people[admitted.activePersonId].health);
   expect(result.ledger).toEqual(admitted.ledger);
   expect(result.random).toEqual(admitted.random);
+});
+
+// Prospective binding probes, not authored catalogue additions or natural encounters.
+const studyProbe = (state: 'active' | 'paused'): EventTemplate => ({
+  id: 'study-context-probe-' + state, min: 18, max: 120, study: state, illustration: 'education',
+  title: '{studySchool}: {studyField}', body: 'Your {studyField} course at {studySchool}.',
+  choices: [
+    storyOption('plan', 'Think about {studyField}', { stress: -1 }, 'Your course', '{studySchool} remains {studySchool}.', 'I thought about my {studyField} course at {studySchool}.'),
+    storyOption('worry', 'Worry about {studyField}', { stress: 1 }, 'Your course', 'You worry about {studyField}.', 'I worried about my {studyField} course.'),
+  ],
+});
+
+test.each(['trade', 'university', 'graduate'] as const)('a real paid %s enrolment supplies literal course facts before its first attended month, read-only', program => {
+  const world = startStudy(program), person = world.people[world.activePersonId], before = encodeWorld(world);
+  expect(person.education.months).toBe(0);
+  expect(world.studyCourses).toHaveLength(1);
+  expect(world.studyCourses[0]).toMatchObject({ origin: 'enrolment', status: 'active', months: 0, tuitionPaidMonths: 12 });
+  expect(world.studyCourses[0].firstPayment?.billed).toBeGreaterThan(0n);
+  const context = studyStoryContext(world), bound = bindEvent(world, studyProbe('active'));
+  expect(context).toEqual({ courseId: world.studyCourses[0].id, school: person.education.school, field: person.education.field, state: 'active' });
+  expect(bound.title).toBe(person.education.school + ': ' + person.education.field);
+  expect(bound.personIds).toEqual([person.id]);
+  expect(bound.choices[0].effects).toEqual([{ kind: 'stat', personId: person.id, stat: 'stress', delta: -1 }]);
+  expect(() => bindEvent(world, studyProbe('paused'))).toThrow(/recorded current study context/);
+  expect(encodeWorld(world)).toBe(before);
+});
+
+test('real unpaid graduate tuition produces only paused context; normal funding resumes the same recorded course', () => {
+  const world = pausedStudy(), person = world.people[world.activePersonId], before = encodeWorld(world), courseId = world.studyCourses[0].id;
+  expect(person.education).toMatchObject({ stage: 'graduate', field: 'medicine', paused: true, months: 12, tuitionPaidMonths: 12 });
+  expect(world.journal.some(item => item.text.includes('paused') && item.text.includes('tuition'))).toBe(true);
+  expect(studyStoryContext(world)?.state).toBe('paused');
+  expect(bindEvent(world, studyProbe('paused')).body).toBe('Your medicine course at ' + person.education.school + '.');
+  expect(() => bindEvent(world, studyProbe('active'))).toThrow(/recorded current study context/);
+  expect(encodeWorld(world)).toBe(before);
+  const resumed = acknowledge(resolveCommand(world, { type: 'fund-studies', funding: 'loan' }, true));
+  expect(studyStoryContext(resumed)).toMatchObject({ courseId, state: 'active' });
+  expect(resumed.people[person.id].education.months).toBe(12);
+  expect(resumed.studyCourses[0].firstPayment).toEqual(world.studyCourses[0].firstPayment);
+  expect(resumed.ledger.slice(0, world.ledger.length)).toEqual(world.ledger);
+});
+
+test('prospective study guards reject old unrecorded slots and mismatched predicate inputs without inventing their course evidence', () => {
+  expect(studyStoryContext(unpackCheckpoint(studying.checkpoint))).toBeUndefined();
+  const original = startStudy(), before = encodeWorld(original);
+  // These are isolated unvalidated predicate traps, not complete saves or natural outcomes.
+  const corruptions: ((value: World) => void)[] = [
+    value => { value.studyCourses = []; },
+    value => { value.studyCourses.push({ ...value.studyCourses[0], id: 'duplicate-study' }); },
+    value => { value.studyCourses[0].personId = 'someone-else'; },
+    value => { value.studyCourses[0].origin = 'legacy-current'; },
+    value => { value.studyCourses[0].started = null; },
+    value => { value.studyCourses[0].firstPayment = null; },
+    value => { value.studyCourses[0].ended = { ...value.date }; },
+    value => { value.studyCourses[0].field = 'arts'; },
+    value => { value.studyCourses[0].school += ' elsewhere'; },
+    value => { value.studyCourses[0].city = 'Boston'; },
+    value => { value.studyCourses[0].country = 'CA'; },
+    value => { value.studyCourses[0].currency = 'CAD'; },
+    value => { value.studyCourses[0].months++; },
+    value => { value.studyCourses[0].tuitionPaidMonths += 12; },
+    value => { value.studyCourses[0].funding = 'cash'; },
+    value => { value.studyCourses[0].grades--; },
+    value => { value.studyCourses[0].annualTuition++; },
+    value => { value.people[value.activePersonId].education.paused = true; },
+    value => { value.people[value.activePersonId].legal.wanted = true; },
+  ];
+  for (const corrupt of corruptions) {
+    const world = copyWorld(original); corrupt(world);
+    const bytes = () => JSON.stringify(world, (_key, value) => typeof value === 'bigint' ? value.toString() : value);
+    const unchanged = bytes();
+    expect(studyStoryContext(world)).toBeUndefined();
+    expect(() => bindEvent(world, studyProbe('active'))).toThrow(/recorded current study context/);
+    expect(bytes()).toBe(unchanged);
+  }
+  expect(studyStoryContext(admit(copyWorld(original)))).toBeUndefined();
+  expect(encodeWorld(original)).toBe(before);
+});
+
+test('all original 270 unflagged scenes keep eligibility and complete binding independent of the new course evidence', () => {
+  const world = startStudy(), legacySlot = copyWorld(world), originalIds = new Set(eventTemplates.slice(0, 270).map(item => item.id));
+  legacySlot.studyCourses = []; // Same current slot as an older save; no reconstructed enrolment.
+  expect(eventTemplates.slice(0, 270).every(item => item.study === undefined)).toBe(true);
+  const oldEligible = (value: World) => eligibleTemplates(value).filter(item => originalIds.has(item.id));
+  const expected = oldEligible(legacySlot), before = encodeWorld(world);
+  expect(oldEligible(world)).toEqual(expected);
+  expect(expected.map(item => bindEvent(world, item))).toEqual(expected.map(item => bindEvent(legacySlot, item)));
+  const unflagged = { ...studyProbe('active'), study: undefined };
+  expect(bindEvent(world, unflagged).title).toBe('{studySchool}: {studyField}');
+  expect(encodeWorld(world)).toBe(before);
+});
+
+test('already bound study copy survives real withdrawal, exact checkpoint restore and normal choice without prospective revalidation', () => {
+  const world = startStudy(), bound = bindEvent(world, studyProbe('active'));
+  const left = copyWorld(acknowledge(resolveCommand(world, { type: 'leave-school' }, true)));
+  expect(studyStoryContext(left)).toBeUndefined();
+  offerPending(left, bound); // Explicitly retain previously bound literal data, not a natural encounter.
+  const restored = unpackCheckpoint(packCheckpoint(left), true);
+  expect(restored).toEqual(left);
+  const result = resolveCommand(restored, { type: 'choose', eventId: bound.id, choiceId: bound.choices[0].id }, true);
+  expect(result.pending).toMatchObject({ kind: 'result', body: bound.choices[0].resultBody });
+  expect(result.people[result.activePersonId].education).toEqual(left.people[left.activePersonId].education);
+  for (const key of ['studyCourses', 'universityApplications', 'accounts', 'liabilities', 'ledger', 'random'] as const) expect(result[key]).toEqual(left[key]);
 });
