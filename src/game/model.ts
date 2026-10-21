@@ -103,7 +103,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(37), engineVersion: z.literal(38), contentVersion: z.literal(12),
+  schemaVersion: z.literal(38), engineVersion: z.literal(39), contentVersion: z.literal(13),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -599,6 +599,14 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Preserve all existing teen/admission/study/separation and friendship facts.
   if (parsed && parsed.schemaVersion === 36 && parsed.engineVersion === 37) {
     parsed.schemaVersion = 37; parsed.engineVersion = 38; parsed.npcMoves = [];
+  }
+  // New situational writing affects future selection only; old bound copy and
+  // choices retain their exact values. No old frame or interview is backfilled.
+  if (parsed && parsed.schemaVersion === 37 && parsed.engineVersion === 38 && parsed.contentVersion === 12) parsed.contentVersion = 13;
+  // Paid interview evidence and optional annual pacing are prospective fields.
+  // Preserve all five existing histories, friendships, people, money and RNG.
+  if (parsed && parsed.schemaVersion === 37 && parsed.engineVersion === 38) {
+    parsed.schemaVersion = 38; parsed.engineVersion = 39;
   }
   return validateWorld(parsed, immutable);
 }
