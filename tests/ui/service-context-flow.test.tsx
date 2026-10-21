@@ -22,6 +22,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Service from '../../app/(game)/service/[kind]';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Service /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+const chooseBranch = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('radio', { name }))); expect(screen.getByRole('radio', { name, checked: true })).toBeOnTheScreen(); };
 const world = () => mockStore.getState().world!;
 const acknowledge = (input: World) => resolveCommand(input, { type: 'acknowledge', resultId: input.pending!.id }, true);
 function finish(input: World) {
@@ -65,10 +66,10 @@ test.each(['astronaut', 'military'] as const)('switching into %s resets the prev
   let view: ReturnType<typeof render> | undefined;
   try {
     const initial = world(), original = encodeWorld(initial), beforeRows = context.rows(); view = render(frame());
-    if (mockKind === 'military') await press('Navy');
+    if (mockKind === 'military') await chooseBranch('Navy');
     await press('Review Service Application'); const oldTitle = 'Apply to the ' + mockKind + ' programme?'; expect(screen.getByText(oldTitle)).toBeOnTheScreen();
     mockKind = kind; view.rerender(frame()); expect(screen.queryByText(oldTitle)).toBeNull();
-    if (kind === 'military') { expect(screen.getByRole('button', { name: 'Army. Selected' })).toBeOnTheScreen(); await press('Navy'); }
+    if (kind === 'military') { expect(screen.getByRole('radio', { name: 'Army', checked: true })).toBeOnTheScreen(); await chooseBranch('Navy'); }
     expect(encodeWorld(world())).toBe(original); expect(context.rows()).toEqual(beforeRows);
     await press('Review Service Application'); const title = 'Apply to the ' + kind + ' programme?', command: GameCommand = { type: 'apply-service', kind, branch: kind === 'astronaut' ? 'space-program' : 'navy', quotedAnnualPay: servicePayQuote(initial, kind) }, expected = resolveCommand(initial, command, true);
     expect(expected.pending?.title).toBe('Your service begins');
@@ -77,7 +78,7 @@ test.each(['astronaut', 'military'] as const)('switching into %s resets the prev
     await press('Apply for Service'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getByText(title)).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     view.rerender(frame()); expect(screen.getByText(title)).toBeOnTheScreen(); expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/);
-    if (kind === 'military') expect(screen.getByRole('button', { name: 'Navy. Selected' })).toBeOnTheScreen();
+    if (kind === 'military') expect(screen.getByRole('radio', { name: 'Navy', checked: true })).toBeOnTheScreen();
     context.sqlite.exec('DROP TRIGGER fail_service_context'); await press('Apply for Service'); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const member = world().serviceCareers.find(item => item.kind === kind)!; expect(member.branch).toBe(command.branch); expect(member.contracts.at(-1)?.trainingScores).toEqual([]); expect(member.contracts.at(-1)?.months).toBe(0);
     if (kind === 'astronaut') { expect(serviceQualified(member)).toBe(false); expect(member.contracts.at(-1)?.trainingResult).toBe('pending'); }

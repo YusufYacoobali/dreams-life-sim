@@ -5,6 +5,7 @@ import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
+import { router } from 'expo-router';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), replace: jest.fn() }, useLocalSearchParams: () => ({ seed: '42' }), useFocusEffect: jest.fn(), Redirect: () => null }));
@@ -37,5 +38,6 @@ test('creation, Begin Life, first Age Up and cold resume work when Intl rejects 
   coldView.rerender(frame(<Assets />)); expect(screen.getByRole('header', { name: 'Assets' })).toBeOnTheScreen(); expect(screen.getByText('Net worth')).toBeOnTheScreen();
   coldView.rerender(frame(<Relationships />)); expect(screen.getByRole('header', { name: 'Relationships' })).toBeOnTheScreen();
   coldView.rerender(frame(<Activities />)); expect(screen.getByRole('header', { name: 'Activities' })).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(played);
+  await act(async () => fireEvent.press(screen.getByRole('button', { name: /^Mind & Body\./ }))); expect(router.push).toHaveBeenLastCalledWith('/lifestyle'); expect(mockStore.getState().world).toEqual(played); expect(await repository.load(played.id)).toEqual(played);
   coldView.unmount(); numberFormat.mockRestore(); sqlite.close();
 });
