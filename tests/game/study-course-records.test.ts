@@ -2,7 +2,12 @@ import { copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { observeIncompleteStudy } from '../../src/game/systems/studyCourses';
-import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { bindEvent } from '../../src/game/content/events';
+import { studyLifeTemplates } from '../../src/game/content/studyLifeStories';
+import { studyStoryContext } from '../../src/game/systems/studyStoryContext';
+import { offerPending } from '../../src/game/pendingQueue';
+import { startStudy, pausedStudy } from '../support/studyStory';
 import studying from '../fixtures/v24-university-loan-archive.json';
 import graduate from '../fixtures/v3-employed-graduate.json';
 import incomplete from '../fixtures/v35-legacy-incomplete-course.json';
@@ -20,6 +25,56 @@ function ordinaryYear(initial: World): World {
   }
   return world;
 }
+
+test.each(studyLifeTemplates.map(scene => [scene.id, scene] as const))('%s binds the actual course and all three responses preserve study, funding and qualifications through capped effects and saved results', (_id, scene) => {
+  // The shared setup uses the unchanged graduate's fixed ordinary application
+  // and real first payment; the paused path reaches an actual tuition pause.
+  // Only optional story binding/stat-cap boundaries are arranged here. This
+  // does not claim a natural annual encounter or additional attended study.
+  const original = scene.study === 'paused' ? pausedStudy() : startStudy(), personId = original.activePersonId;
+  const course = original.studyCourses.find(row => row.personId === personId && row.status === 'active')!;
+  const before = encodeWorld(original), event = bindEvent(original, scene);
+  expect(studyStoryContext(original)).toEqual({ courseId: course.id, school: course.school, field: course.field, state: scene.study });
+  expect(event.personIds).toEqual([personId]); expect(event.body).toContain(course.school); expect(event.body).toContain(course.field);
+  expect(JSON.stringify(event)).not.toMatch(/\{study(?:School|Field)\}/);
+  expect(encodeWorld(original)).toBe(before);
+  for (const boundary of [0, 100]) {
+    const input = copyWorld(original), person = input.people[personId];
+    for (const key of new Set(scene.choices.flatMap(choice => Object.keys(choice.changes)))) person.stats[key as keyof typeof person.stats] = boundary;
+    const bound = bindEvent(input, scene); offerPending(input, bound);
+    const encoded = encodeWorld(input), cold = unpackCheckpoint(packCheckpoint(input), true);
+    expect(encodeWorld(cold)).toBe(encoded); expect(cold.pending).toEqual(bound);
+    for (const choice of bound.choices) {
+      expect(choice.effects.every(effect => effect.kind === 'stat' && effect.personId === personId)).toBe(true);
+      const command = { type: 'choose' as const, eventId: bound.id, choiceId: choice.id }, result = resolveCommand(cold, command, true);
+      expect(encodeWorld(result)).toBe(encodeWorld(resolveCommand(input, command, true)));
+      if (result.pending?.kind !== 'result') throw new Error('Expected saved study scene consequence');
+      for (const key of Object.keys(person.stats) as (keyof typeof person.stats)[]) {
+        const effect = choice.effects.find(row => row.kind === 'stat' && row.stat === key), from = person.stats[key];
+        const to = Math.max(0, Math.min(100, from + (effect?.kind === 'stat' ? effect.delta : 0))), delta = to - from;
+        expect(result.people[personId].stats[key]).toBe(to);
+        if (effect) expect(result.pending.effects.find(row => row.label === key[0].toUpperCase() + key.slice(1))?.value).toBe((delta >= 0 ? '+' : '') + delta + '%');
+      }
+      for (const key of Object.keys(input) as (keyof World)[]) if (!['people', 'pending', 'journal', 'revision', 'pendingPriority'].includes(key)) expect(result[key]).toEqual(input[key]);
+      for (const [id, oldPerson] of Object.entries(input.people)) {
+        if (id !== personId) expect(result.people[id]).toEqual(oldPerson);
+        else { const { stats: _old, ...oldRest } = oldPerson, { stats: _next, ...nextRest } = result.people[id]; expect(nextRest).toEqual(oldRest); }
+      }
+      // In particular, even the pretended completion response grants no course
+      // months/grades, qualification, tuition payment or funding change.
+      expect(result.people[personId].education).toEqual(person.education); expect(result.studyCourses).toEqual(input.studyCourses);
+      expect(result.pending).toMatchObject({ title: choice.resultTitle, body: choice.resultBody });
+      expect(result.journal.slice(0, input.journal.length)).toEqual(input.journal); expect(result.journal.at(-1)?.text).toBe(choice.journal);
+      const saved = unpackCheckpoint(packCheckpoint(result), true); expect(encodeWorld(saved)).toBe(encodeWorld(result));
+      expect(() => resolveCommand(saved, command, true)).toThrow();
+      const done = resolveCommand(saved, { type: 'acknowledge', resultId: saved.pending!.id }, true);
+      expect(done.people).toEqual(result.people); expect(done.random).toEqual(result.random); expect(done.studyCourses).toEqual(result.studyCourses);
+      expect(() => resolveCommand(done, { type: 'acknowledge', resultId: saved.pending!.id }, true)).toThrow();
+    }
+    expect(encodeWorld(input)).toBe(encoded);
+  }
+  expect(encodeWorld(original)).toBe(before);
+}, 30000);
 
 test('the unchanged old course completes through real attended months without inventing its earlier admission, start date or first payment', () => {
   const initial = unpackCheckpoint(studying.checkpoint), personId = initial.activePersonId;
