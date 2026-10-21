@@ -106,12 +106,15 @@ test.each(categoryCases)('%s remains open after a %s and keeps exact individual 
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
-test('a category with no eligible offered subjects stays disabled with its shared exact reason', async () => {
+test('university subjects remain read-only to an enrolled student while other ineligible programmes retain their shared reason', async () => {
   const { sqlite, rows } = await setup();
   try {
-    const before = rows(), view = render(frame());
-    for (const program of ['university', 'trade', 'graduate'] as const) { const row = screen.getByRole('button', { name: category(program) }); expect(row).toBeDisabled(); expect(row.props.accessibilityLabel).toContain('You are already enrolled'); await press(category(program)); }
-    expect(screen.queryByText('Choose your subject')).toBeNull(); expect(rows()).toEqual(before); view.unmount();
+    const before = rows(), initial = world(), view = render(frame());
+    for (const program of ['trade', 'graduate'] as const) { const row = screen.getByRole('button', { name: category(program) }); expect(row).toBeDisabled(); expect(row.props.accessibilityLabel).toContain('You are already enrolled'); await press(category(program)); }
+    expect(screen.queryByText('Choose your subject')).toBeNull();
+    await press(category('university')); expect(screen.getAllByRole('radio').every(choice => choice.props.accessibilityState.disabled)).toBe(true);
+    await choose('Computing. You are already enrolled'); await press('Review Free Application'); expect(screen.getByRole('button', { name: 'Review Free Application' })).toBeDisabled(); await press('Never mind');
+    expect(world()).toBe(initial); expect(rows()).toEqual(before); view.unmount();
   } finally { sqlite.close(); }
 });
 

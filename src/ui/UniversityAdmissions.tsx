@@ -4,6 +4,8 @@ import { formatMoney } from '../game/money';
 import { fields } from '../game/systems/schemas';
 import { activeUniversityApplication, type UniversityApplication, universityTuitionV1 } from '../game/systems/universityAdmissionSchemas';
 import { universityApplicationReason, universityPlaceQuote, universityPlaceReason, type UniversityAdmissionCommand } from '../game/systems/universityAdmissions';
+import { courseMonths } from '../game/systems/education';
+import { rules } from '../game/rules';
 import { scholarshipOfferReason } from '../game/systems/scholarships';
 import { scholarshipPolicies } from '../game/systems/scholarshipSchemas';
 import { accountFor } from '../game/systems/common';
@@ -31,7 +33,7 @@ function AdmissionContext({ world, request, onReviewChange }: { world: World; re
   const money = (minor: bigint, currency = accountFor(world).currency) => formatMoney({ minor, currency });
   const apply = (field: typeof fields[number]) => {
     if (busy || submitting.current || universityApplicationReason(world, field)) return;
-    setDialog({ kind: 'confirm', command: { type: 'apply-university', field }, event: { id: 'university-apply-' + field, kind: 'confirmation', title: 'Apply to study ' + field + '?', body: 'This free application can be accepted, rejected or waitlisted for one final review in a calendar month. An accepted application offers a place; enrolling and choosing funding are separate. Applying starts no course, scholarship, tuition payment or loan. One attempt per subject each calendar year.', terms: [{ id: 'fee', label: 'Application fee', value: 'No fee or loan', tone: 'neutral' }, { id: 'tuition', label: 'Annual tuition if you later enrol', value: money(universityTuitionV1[person.country]), tone: 'neutral' }, { id: 'duration', label: 'Course length after enrolment', value: '4 years of study', tone: 'neutral' }], confirmLabel: 'Submit University Application' } });
+    setDialog({ kind: 'confirm', command: { type: 'apply-university', field }, event: { id: 'university-apply-' + field, kind: 'confirmation', title: 'Apply to study ' + field + '?', body: 'This free application can be accepted, rejected or waitlisted for one final review in a calendar month. An accepted application offers a place; enrolling and choosing funding are separate. Applying starts no course, scholarship, tuition payment or loan. One attempt per subject each calendar year.', terms: [{ id: 'fee', label: 'Application fee', value: 'No fee or loan', tone: 'neutral' }, { id: 'tuition', label: 'Annual tuition if you later enrol', value: money(universityTuitionV1[person.country]), tone: 'neutral' }, { id: 'duration', label: 'Course length after enrolment', value: courseMonths('university', field) / 12 + ' years of study', tone: 'neutral' }], confirmLabel: 'Submit University Application' } });
   };
   const funding = (item: UniversityApplication, scholarshipId?: string) => {
     if (busy || submitting.current || universityPlaceReason(world, item.id, undefined, scholarshipId)) return;
@@ -56,9 +58,9 @@ function AdmissionContext({ world, request, onReviewChange }: { world: World; re
   const items = world.universityApplications.filter(item => item.personId === person.id).slice().reverse();
   const reasons = fields.map(field => universityApplicationReason(world, field)), unavailable = reasons.every(Boolean) ? reasons.every(reason => reason === reasons[0]) ? reasons[0] : 'No subjects are currently available' : undefined;
   return <>
-    <ActionRow title="University" subtitle="Apply for a place, then separately review enrolment" disabled={busy} disabledReason={unavailable} onPress={() => {
-      if (busy || submitting.current || unavailable) return;
-      setDialog({ kind: 'fields', event: { id: 'university-subjects', kind: 'selection', title: 'Choose your university subject', body: 'Apply for one place at a time. There is no tuition payment until you separately accept an offered place.', choices: fields.map(field => ({ id: field, label: field[0].toUpperCase() + field.slice(1), disabledReason: universityApplicationReason(world, field) })), confirmLabel: 'Review Free Application' } });
+    <ActionRow title="University" subtitle={unavailable ? 'Browse subjects and costs. ' + unavailable : 'Explore subjects, then separately review your application'} disabled={busy} onPress={() => {
+      if (busy || submitting.current) return;
+      setDialog({ kind: 'fields', event: { id: 'university-subjects', kind: 'selection', title: 'Choose your university subject', body: 'To apply, you need to be at least ' + rules[person.country].schoolEnd + ' years old, hold a secondary qualification and have grades of at least 55%. Other current restrictions appear with each subject. A degree takes ' + courseMonths('university', fields[0]) / 12 + ' years; annual tuition is ' + money(universityTuitionV1[person.country]) + '. Applying is free. Enrolment and tuition need separate consent.', choices: fields.map(field => ({ id: field, label: field[0].toUpperCase() + field.slice(1), disabledReason: universityApplicationReason(world, field) })), confirmLabel: 'Review Free Application' } });
     }} />
     {items.length > 0 && <Card><Heading size={18}>University applications</Heading>{items.slice(0, limit).map(item => <React.Fragment key={item.id}>
       <Body>{item.school} · {item.field}</Body><Body>{statusLabels[item.status]}</Body><Body muted>Applied {dateLabel(item.applied)} · {money(item.annualTuition, item.currency)} annual tuition</Body>

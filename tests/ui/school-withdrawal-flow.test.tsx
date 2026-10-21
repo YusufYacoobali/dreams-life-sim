@@ -85,7 +85,10 @@ test('secondary-school education browsing stays read-only and changing selected 
   try {
     const before = mockStore.getState().world!, rows = context.rows();
     await press(/^Further Education\./); expect(router.push).toHaveBeenLastCalledWith('/education'); expect(mockStore.getState().world).toBe(before); expect(context.rows()).toEqual(rows);
-    view.rerender(frame(<Education />)); expect(screen.getByRole('button', { name: /^University\..*Finish secondary education first/ })).toBeDisabled();
+    view.rerender(frame(<Education />)); await press(/^University\..*Finish secondary education first/);
+    const computing = screen.getByRole('radio', { name: 'Computing. Finish secondary education first' }); expect(computing).toBeDisabled();
+    await act(async () => { fireEvent.press(computing); }); await press('Review Free Application'); expect(screen.getByRole('button', { name: 'Review Free Application' })).toBeDisabled();
+    expect(mockStore.getState().world).toBe(before); expect(context.rows()).toEqual(rows); await press('Never mind');
     expect(screen.getByText(/minimum leaving age is 16; review early withdrawal/)).toBeOnTheScreen(); await press('Your School'); expect(router.push).toHaveBeenLastCalledWith('/school'); expect(mockStore.getState().world).toBe(before); expect(context.rows()).toEqual(rows);
     view.rerender(frame()); await press(/^Withdraw from Secondary School/); expect(screen.getByRole('button', { name: 'Withdraw from School' })).toBeEnabled();
     await act(async () => { expect(await mockStore.getState().selectLife(context.old.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Withdraw from School' })).toBeNull();
