@@ -1,0 +1,143 @@
+{
+  "format": "dreams-source-checkpoint-v1",
+  "recordedAt": "2026-10-21T06:07:57.345973+00:00",
+  "sourceCommit": "85f6ff8637ba3de9d0f04421307419b1d9609864",
+  "versions": {
+    "world": 36,
+    "engine": 37,
+    "content": 12,
+    "database": 16,
+    "checkpoint": "v4"
+  },
+  "status": "source-gates-passed-native-and-performance-acceptance-pending",
+  "scope": "Working source checkpoint after complete regression. Original a4be runtime/native worktree remains frozen. This record does not close native or performance acceptance.",
+  "features": [
+    "Consent-based first teenage relationships",
+    "Saved university applications, offers and factual study-course records",
+    "Authored event rarity and one extremely rare adult scene",
+    "Same-person childhood project recall after two years",
+    "Bounded separation of unmarried adult NPC dating couples",
+    "Creation Back saving guard, durable scholarship review and adult full-time school-entry correction"
+  ],
+  "gates": {
+    "regression": {
+      "status": "passed",
+      "tests": 2520,
+      "suites": 200,
+      "jestSeconds": 1634.281,
+      "wrapperSeconds": 1635.063
+    },
+    "strict": {
+      "status": "passed",
+      "wrapperSeconds": 20.894
+    },
+    "exports": {
+      "status": "passed-runtime-equivalent",
+      "runtimeCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "mappedSourceFilesEach": 325
+    },
+    "annual": {
+      "status": "passed-runtime-core",
+      "reusedSeeds": [
+        0,
+        119
+      ],
+      "lives": 120,
+      "engineMilliseconds": 771874,
+      "scope": "Same immutable annual pure-engine policy; not additional seeds, optional-context, SQLite or native acceptance."
+    }
+  },
+  "diagnostics": {
+    "firstFull": {
+      "status": "failed",
+      "passed": 2509,
+      "failed": 11,
+      "suites": 200,
+      "jestSeconds": 1642.12,
+      "reason": "Eight stale acceptance suites corrected with independent review; original raw failure retained."
+    }
+  },
+  "remaining": [
+    "Complete actual custom newborn/first-year acknowledgement and cold journey",
+    "Separate actual existing-life university application journey",
+    "Fresh serial fixed-world action diagnostics",
+    "Consolidated author evidence and native/performance verification publication",
+    "Later retirement moves/accessibility batch and remaining production/release plan"
+  ],
+  "limits": [
+    "All runtime/application/config/assets/original fixtures are byte-exact between a4be and final85f; only eight acceptance tests differ, as pinned by the bridge.",
+    "Android/iOS Hermes exports are not installable standalone or physical-device acceptance.",
+    "Service usage pause interrupted coordination after 01:43 UTC; the already-running full check completed at02:10 UTC. Coordination resumed at06:05 UTC.",
+    "Further import/export/sharing and history/storage breadth remain parked."
+  ],
+  "artifacts": {
+    "production-gaps-source-checkpoint-20261021/final-source.json": {
+      "bytes": 72346,
+      "sha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-source.json": {
+      "bytes": 72349,
+      "sha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-final-bridge.json": {
+      "bytes": 1013,
+      "sha256": "050e2a3c95f35ba3fd973b9dbea90fadd38d6de74ae8aeeec9052288198cb194"
+    },
+    "production-gaps-source-checkpoint-20261021/runtime-accepted-bridge.json": {
+      "bytes": 805,
+      "sha256": "cc856f53ca5953e3e3efc798ca35671e5c5577e3f40f467ca394ba7b40797244"
+    },
+    "production-gaps-source-checkpoint-20261021/final-types.out.txt": {
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "production-gaps-source-checkpoint-20261021/final-types-receipt.json": {
+      "bytes": 1045,
+      "sha256": "c60534d4b4040e25180f4271d444a11ea394fb39e54929944a12306db628ca7d"
+    },
+    "production-gaps-source-checkpoint-20261021/final-regression.out.txt": {
+      "bytes": 16515,
+      "sha256": "f8ebb2950632c72f07a862664c531d772188ff829c4cf48e2ed4662a243993e1"
+    },
+    "production-gaps-source-checkpoint-20261021/final-regression-receipt.json": {
+      "bytes": 1088,
+      "sha256": "3c9f304848dfd595fae7e16ded63ef4e857c762999d854cd48dc03fa460595cb"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-regression.out.txt": {
+      "bytes": 245900,
+      "sha256": "c14a9f2e3ac07a3fddf4225a27de02af4432f8c6a66f54ac2b99013c44065b2d"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-regression-receipt.json": {
+      "bytes": 1089,
+      "sha256": "de5c8d84284f7b958ba947f08a7f2f17af5ea3658a5a474586357f9bad19ea15"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-export-provenance.json": {
+      "bytes": 72333,
+      "sha256": "64802cc55bc31258e1bf2284460bda49bab1f823cbdc86a9e4d68f831761ef0c"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-export.out.txt": {
+      "bytes": 2752,
+      "sha256": "53b417131efd777c7b22fb40a23bdf3270a9c2b78dd3ebe18d3f3bb3217bd4a6"
+    },
+    "production-gaps-source-checkpoint-20261021/accepted-export-receipt.json": {
+      "bytes": 1254,
+      "sha256": "1f31591170016e2c452feb9a3455f16d792f3eadd3182374c8489e3dd696bd15"
+    },
+    "production-gaps-source-checkpoint-20261021/120.ndjson.txt": {
+      "bytes": 37790,
+      "sha256": "a7b78f633ed8e727f656ab232e2bf8c383e3a1858f641188e0aa9e7df6f24c9a"
+    },
+    "production-gaps-source-checkpoint-20261021/120.err.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "production-gaps-source-checkpoint-20261021/120-receipt.json": {
+      "bytes": 1248,
+      "sha256": "d329fecbf95e0f859e87c3f0f73673e8de1fb6da4a957f94eb6ee8459ff39bc3"
+    }
+  }
+}

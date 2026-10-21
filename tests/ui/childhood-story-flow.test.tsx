@@ -4,7 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
-import { eligibleTemplates } from '../../src/game/content/events';
+import * as eventRarity from '../../src/game/content/eventRarity';
 import { currentSchool } from '../../src/game/systems/schoolSchemas';
 import { relationFor } from '../../src/game/systems/relationships';
 import { randomInteger } from '../../src/game/random';
@@ -18,17 +18,31 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
-test('actual Age Up offers a named school story; a failed choice saves no grades or teacher bond, retry applies once and cold resume preserves the result', async () => {
-  const initial = pupil('US', 7), preview = resolveCommand(initial, { type: 'advance' });
-  expect(preview.annual?.stage).toBe('complete');
-  const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), targetIndex = eligible.findIndex(item => item.id === 'school-homework-soap'); expect(targetIndex).toBeGreaterThanOrEqual(0);
-  // Select a persisted RNG state for this real Age Up; the engine still offers and binds the scene itself.
-  for (let seed = 1; seed < 10000; seed++) { const offer = randomInteger(seed, 1, 100), pick = randomInteger(offer.state, 0, eligible.length - 1); if (offer.value <= 78 && pick.value === targetIndex) { initial.random.events = seed; break; } }
+// A declared UI-unit selector arrangement: the real annual engine still checks
+// eligibility, advances months and binds its own people/effects. Preserve its
+// one selection draw; only the eligible ticket is arranged, without seed search.
+function arrangeEligibleTicket(templateId: string) {
+  const select = eventRarity.weightedEvent; let arranged = false;
+  return jest.spyOn(eventRarity, 'weightedEvent').mockImplementation((pool, draw) => {
+    const index = pool.findIndex(template => template.id === templateId);
+    if (arranged || index < 0) return select(pool, draw);
+    arranged = true;
+    const ticket = pool.slice(0, index).reduce((sum, template) => sum + eventRarity.eventWeight(template), 0);
+    return select(pool, total => { draw(total); return ticket; });
+  });
+}
+afterEach(() => { jest.restoreAllMocks(); });
+
+test('Age Up with an arranged eligible ticket offers a named school story; a failed choice saves no grades or teacher bond, retry applies once and cold resume preserves the result', async () => {
+  const initial = pupil('US', 7); initial.random.events = 1;
+  expect(randomInteger(1, 1, 100).value).toBe(63);
+  arrangeEligibleTicket('school-homework-soap');
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); const view = render(frame());
   await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Age Up' })));
   await waitFor(() => expect(screen.getByText('The homework needs rinsing')).toBeOnTheScreen());
   const offered = mockStore.getState().world!, expected = encodeWorld(offered), teacherId = currentSchool(offered)!.currentTeacherId, beforeGrade = offered.people[offered.activePersonId].education.grades, beforeBond = relationFor(offered, offered.activePersonId, teacherId)!.strength;
+  expect(offered.annual?.stage).toBe('complete');
   expect(offered.pending?.kind === 'decision' && offered.pending.personIds).toContain(teacherId);
   sqlite.exec("CREATE TRIGGER fail_child_story BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Offer to do it again' })));
   await waitFor(() => screen.getAllByRole('alert').forEach(message => expect(message).toHaveTextContent(/couldn't be saved/))); expect(encodeWorld(mockStore.getState().world!)).toBe(expected); expect(await repository.load(offered.id)).toEqual(offered);

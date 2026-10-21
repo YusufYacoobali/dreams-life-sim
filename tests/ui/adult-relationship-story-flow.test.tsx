@@ -5,7 +5,7 @@ import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld, fullName } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { randomInteger } from '../../src/game/random';
-import { eligibleTemplates } from '../../src/game/content/events';
+import * as eventRarity from '../../src/game/content/eventRarity';
 import { relationFor } from '../../src/game/systems/relationships';
 import { SaveRepository } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
@@ -20,16 +20,30 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Life /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
 
-test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conversation', 'honest', 'partner']] as const)('Age Up binds %s; failed choice %s rolls back, retries warm and cold-acknowledges the named %s once', async (templateId, choiceId, type) => {
-  const { world: initial, friendId, partnerId } = adultSocial(), otherId = type === 'friend' ? friendId : partnerId, preview = resolveCommand(initial, { type: 'advance' });
-  expect(preview.annual?.stage).toBe('complete'); const eligible = eligibleTemplates({ ...preview, eventHistory: initial.eventHistory }), index = eligible.findIndex(item => item.id === templateId); expect(index).toBeGreaterThanOrEqual(0);
-  // A deterministic domain input; Age Up performs actual monthly progression
-  // and binds its own story. No manual pending event or replacement people.
-  for (let seed = 1; seed < 10000; seed++) { const chance = randomInteger(seed, 1, 100), pick = randomInteger(chance.state, 0, eligible.length - 1); if (chance.value <= 78 && pick.value === index) { initial.random.events = seed; break; } }
+// A declared UI-unit selector arrangement: the real annual engine still checks
+// eligibility, advances months and binds its own people/effects. Preserve its
+// one selection draw; only the eligible ticket is arranged, without seed search.
+function arrangeEligibleTicket(templateId: string) {
+  const select = eventRarity.weightedEvent; let arranged = false;
+  return jest.spyOn(eventRarity, 'weightedEvent').mockImplementation((pool, draw) => {
+    const index = pool.findIndex(template => template.id === templateId);
+    if (arranged || index < 0) return select(pool, draw);
+    arranged = true;
+    const ticket = pool.slice(0, index).reduce((sum, template) => sum + eventRarity.eventWeight(template), 0);
+    return select(pool, total => { draw(total); return ticket; });
+  });
+}
+afterEach(() => { jest.restoreAllMocks(); });
+
+test.each([['friend-different-budget', 'walk', 'friend'], ['partner-money-conversation', 'honest', 'partner']] as const)('Age Up with an arranged eligible ticket binds %s; failed choice %s rolls back, retries warm and cold-acknowledges the named %s once', async (templateId, choiceId, type) => {
+  const { world: initial, friendId, partnerId } = adultSocial(), otherId = type === 'friend' ? friendId : partnerId;
+  initial.random.events = 1; expect(randomInteger(1, 1, 100).value).toBe(63);
+  arrangeEligibleTicket(templateId);
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
   await boot(); let view = render(frame()); await press('Age Up'); await waitFor(() => expect(mockStore.getState().world!.pending).toMatchObject({ kind: 'decision', templateId }));
   const offered = mockStore.getState().world!; if (offered.pending?.kind !== 'decision') throw new Error('Missing adult social scene'); const event = offered.pending, choice = event.choices.find(item => item.id === choiceId)!;
+  expect(offered.annual?.stage).toBe('complete');
   expect(event.personIds).toEqual([offered.activePersonId, otherId]); expect(screen.getByText(event.body)).toBeOnTheScreen(); expect(event.body).toContain(fullName(offered.people[otherId]));
   const before = encodeWorld(offered), rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])), originalRows = rows();
   const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_adult_story BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");

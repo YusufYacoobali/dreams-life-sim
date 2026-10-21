@@ -18,11 +18,23 @@ Stop only for material decisions, genuine blockers or unavailable tools. The use
 work/school UI tasks and a read-only review are delegated while the primary
 agent owns integration, consolidated gates and safe commits/pushes. Further import/export/sharing breadth
 stays parked; the existing80%+ implementation's folder-save check passed. Read-only
-previous-life summaries are complete. Full production remains approximately
-**65%**; the catalogue contains **250/250 minimum**. Editorial, balance and
+previous-life summaries are complete. Full production is approximately
+**70%**; the catalogue contains **251 situations /753 choices**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: persistent friendships and factual life stories
+## Current checkpoint: first relationships, education and early stories
+
+Accepted source `85f6ff8637ba3de9d0f04421307419b1d9609864` uses World36 / engine37 / content12 / reader16 / checkpointv4. It adds consent-based first teenage relationships, saved university applications and factual study-course records, authored event rarity and one extremely rare adult scene, a same-person childhood project recall after two years, and bounded separation of unmarried adult NPC dating couples. Creation Back is guarded during saving; scholarship reviews survive failed writes; full-time adult workers avoid unintended automatic school re-entry. Existing gameplay, automatic saving and old data remain protected.
+
+The complete corrected-source regression passes **2,520 tests /200 suites in1,634.281seconds**; strict app/all-test types pass. Fresh Android/iOS Hermes exports map325app/source files each. The same120 immutable annual-policy seeds0–119 finish in771.874seconds across all12countries; these remain pure-engine observations, not additional seeds or native/SQLite acceptance. The failed first full run (11failed/2,509passed) remains separate, with its eight stale acceptance suites corrected and independently reviewed. All runtime/application/config/assets/original fixture bytes match the frozen native/export source; only eight tests differ.
+
+This is a working **source checkpoint**. Complete actual native opening/first-year and university journeys, fresh serial action diagnostics and their consolidated evidence remain pending. Retirement moves and descriptive appearance/Profile labels are reviewed in a separate later worktree; they are not accepted under this source. Relevant paid interview experience, busy-year optional-story pacing, missing special-career situational writing, country/balance/editorial and release-device acceptance remain on the complete production plan. Overall production is roughly70% as an effort estimate, not an acceptance score. Further import/export/sharing, file tools and history-storage breadth remain parked.
+
+A service usage pause interrupted coordination after01:43UTC; the already-running regression completed at02:10UTC. Coordination resumed at06:05UTC. Commit and push working checkpoints at least every two hours of active work; a checkpoint does not end the authorised task.
+
+[Source, raw gates and pending acceptance](verification/production-gaps-source-checkpoint-20261021.json).
+
+## Prior checkpoint: persistent friendships and factual life stories
 
 Accepted source `ed296f91082a96b2fabe8973864bf6dba28344b3` uses World35 /
 engine36 / content11 / reader15 / checkpointv4. Best Friends now records an

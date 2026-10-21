@@ -1,0 +1,14 @@
+{
+  "scope": "Runtimeb767\u2192accepteda4be changes only two opening UI files and two reviewed acceptance tests. All game/persistence/assets/config/oldfixtures/other runtime bytes exact. Earlierb767 exports do not verify changed opening UI; a fresh accepted export is required.",
+  "from": "b76765e31597062d9f3f3a4f406f3cca56cdb8df",
+  "to": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "changedSourceFiles": [
+    "app/new-life.tsx",
+    "src/ui/components.tsx",
+    "tests/ui/onboarding-accessibility-flow.test.tsx",
+    "tests/ui/university-admissions-save-flow.test.tsx"
+  ],
+  "removedSourceFiles": [],
+  "gameSourceHash": "16ab454678ced7a223f1d6c3b6079ea6ac338dfaa11824b13fdb8edcc8ad0b3d",
+  "combinedGamePersistenceSourceHash": "c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5"
+}
