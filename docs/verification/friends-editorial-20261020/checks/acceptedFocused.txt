@@ -1,0 +1,55 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --testTimeout=30000 --runTestsByPath tests/game/entrepreneur-policy.test.ts tests/game/editorial-context-acceptance.test.ts tests/ui/astronaut-career-acceptance-flow.test.tsx tests/ui/athlete-career-acceptance.test.tsx
+
+PASS tests/game/entrepreneur-policy.test.ts
+PASS tests/ui/astronaut-career-acceptance-flow.test.tsx (8.25 s)
+  ● Console
+
+    console.info
+      Astronaut archive continuation {"sourceRevision":67,"sourceDate":{"year":2023,"month":1,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"coachedMonths":36,"coachingFees":"144000","preparedScience":72,"selectionAttempts":2,"traineeAnnualPay":"4800000","trainingMonths":24,"trainingResult":"passed","qualifiedDate":{"year":2028,"month":1,"day":1},"qualifiedAnnualPay":"7200000","mission":{"status":"completed","periods":6,"units":108,"distinction":"Meridian Research Distinction"},"leaveContractMonths":30,"serviceGross":"13200000","finalDate":{"year":2030,"month":1,"day":1},"finalRevision":109,"ordinaryPreparationAndContinuationCommands":31,"originalFixtureSha256":"de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef"}
+
+      at Object.info (tests/ui/astronaut-career-acceptance-flow.test.tsx:127:13)
+
+PASS tests/ui/athlete-career-acceptance.test.tsx (7.764 s)
+  ● Console
+
+    console.info
+      ATHLETE_OBSERVATION {"trainingMonths":34,"tuitionMinor":"136000","trainedSport":68,"selectionOutcomes":["Your contract is signed"],"attended":12,"wins":11,"seasonStatus":"completed","seasonGrossMinor":"7344000","award":null,"finalRevision":99}
+
+      at Object.info (tests/ui/athlete-career-acceptance.test.tsx:135:13)
+
+PASS tests/game/editorial-context-acceptance.test.ts (29.668 s)
+  ● Console
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"family-trip","commands":11,"decisions":[{"id":"adult-name-pronunciation","branch":1,"contexts":[],"old":false},{"id":"wellbeing-stretch-after-sitting","branch":2,"contexts":[],"old":false},{"id":"family-helpful-spill","branch":3,"contexts":["child"],"old":false}],"observedContexts":["child"],"absentContexts":["workplace","friend","partner","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"36fe742395136e979af5b42a2102a94da413fa0ef68fd7de3ffafd8fccd589fe"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"pet-hobbies","commands":10,"decisions":[{"id":"teen-unit-confusion","branch":1,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"2bdcd70c08621c4340d52cf2cead7198fa7ea5f3cadd16626f1e5bcb8e343f3d"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"workplace-friend","commands":20,"decisions":[{"id":"work-photo-blink","branch":1,"contexts":["workplace"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"friend-long-voice-note","branch":3,"contexts":["friend"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"adult-shortcut-stairs","branch":2,"contexts":[],"old":false}],"observedContexts":["friend","workplace"],"absentContexts":["partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"4eb4ddffb8814185bd4459432e1cfa9231392025ddaf7725494e4db9635fc30a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"owned-home","commands":24,"decisions":[{"id":"property-sale-offer","branch":2,"contexts":[],"old":true},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"adult-wrong-name-badge","branch":1,"contexts":[],"old":false},{"id":"adult-small-volunteer-task","branch":2,"contexts":[],"old":false},{"id":"home-window-cleaning-discovery","branch":3,"contexts":["home"],"old":false}],"observedContexts":["home"],"absentContexts":["workplace","friend","partner","child","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"ab0f3effc87a98af20dfe9aa4ba0772e4bf630bbf59a2f7f6ecf042ead91d25a"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"creator-studio","commands":21,"decisions":[{"id":"public-controversy","branch":1,"contexts":[],"old":false},{"id":"brand-offer","branch":2,"contexts":[],"old":false},{"id":"wellbeing-unhurried-breath","branch":3,"contexts":[],"old":false},{"id":"adult-perfect-introduction","branch":1,"contexts":[],"old":false},{"id":"wellbeing-quiet-not-silent","branch":2,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"1cc9b569600f8630f547fd0f40efd34e4d2cf499021167ef4c77087b5fb121d4"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+
+Test Suites: 4 passed, 4 total
+Tests:       25 passed, 25 total
+Snapshots:   0 total
+Time:        46.805 s
+Ran all test suites within paths "tests/game/entrepreneur-policy.test.ts", "tests/game/editorial-context-acceptance.test.ts", "tests/ui/astronaut-career-acceptance-flow.test.tsx", "tests/ui/athlete-career-acceptance.test.tsx".

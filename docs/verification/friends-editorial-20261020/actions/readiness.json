@@ -1,0 +1,43 @@
+{
+  "format": "dreams-c36-action-readiness-v1",
+  "status": "ready",
+  "recordedAt": "2026-10-21T00:24:26.821115+00:00",
+  "nativeAppStoppedByCoordinator": true,
+  "otherHeavyWorkPausedOrClosed": true,
+  "statement": "Root has closed accepted full regression58662, focused86112 and strict82359, native primary65832 and extra browsing42702. App was force-stopped and font restored1.0; root current proc observation shows no Jest/tsc/export/cohort jobs. All six agents are holding new heavy work while exact owned Metro/QEMU are paused by this wrapper.",
+  "closedGateEvidence": [
+    {
+      "file": "/tmp/dreams-friends-editorial-accepted-regression-receipt.json",
+      "sha256": "6a38459fcedc94da5840b17a447eab7b8234168861e062eae6891f7d01159d3b",
+      "processClosed": true,
+      "exitCode": 0
+    },
+    {
+      "file": "/tmp/dreams-friends-editorial-accepted-focused-receipt.json",
+      "sha256": "e4efc5ee6631330fc09dd1ac8a1d1700ec4bd01f6c7d1d03de5cb539b82fa305",
+      "processClosed": true,
+      "exitCode": 0
+    },
+    {
+      "file": "/tmp/dreams-friends-editorial-accepted-types-receipt.json",
+      "sha256": "968e075f370053b27ae01bf1056ad84786747de4c8201f6f12841b9bfa393294",
+      "processClosed": true,
+      "exitCode": 0
+    },
+    {
+      "file": "/tmp/dreams-friends-editorial-native-verifier-results.json",
+      "sha256": "5aaf83e978e69f145a49d26506f1f44f9ea1548835b01bc59028a9654213db43",
+      "processClosed": true,
+      "exitCode": 0
+    },
+    {
+      "file": "/tmp/dreams-friends-editorial-actions-heavy-process-observation.json",
+      "sha256": "d305f53cd8ead4763e84725e2b5a85a7bd608c141c2f2e04889d2545663ad461",
+      "processClosed": true,
+      "exitCode": 0
+    }
+  ],
+  "sourceSnapshotSha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5",
+  "registeredPlanSha256": "59e9f29edf48fc731acd2bc926b911e4515a5d589c69987d8d7b1b8f4cbc7b8f",
+  "ownedProcessManifestSha256": "ff3283014a4fb7e7a44c21024f87d963f0094e88a488394b93eee17cc7ee9960"
+}

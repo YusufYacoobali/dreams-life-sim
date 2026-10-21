@@ -1,0 +1,25 @@
+PASS tests/game/entrepreneur-policy.test.ts
+  ✓ the historical policy registration refuses current versions at its actual post-birth, pre-engine-play boundary (42 ms)
+  ✓ canonical trace bytes ignore object insertion order and retain nested commands and exact huge minor units
+  ✓ early death and missing entrepreneurship remain unmet product goals while an ordered actual timeline can complete
+  ✓ having every milestone does not pass the required order when family or brand income occurred too early (1 ms)
+  ✓ visible brand choices preserve the registered company-before-contract policy without inspecting hidden outcomes (1 ms)
+  ✓ interviews and public responses choose declared visible approaches rather than a favourable result
+  ✓ whole fund quantities include rounded fees and never exceed actual discretionary cash (1 ms)
+  ✓ public reputation requires the actual visible age/fame, yearly availability and fee with the complete living reserve retained (1 ms)
+  ✓ policy cold proof uses the production checkpoint and compares every canonical world field (53 ms)
+  ✓ estate conservation respects already-netted paid debt and includes fees, tax, charity and retained equity once (1 ms)
+  ✓ a naturally insolvent estate can conserve without inventing a solvent payout
+  ✓ estate proof reconciles actual matching heir debit/credit pairs and creditor, tax and charity payments (1 ms)
+  ✓ correct summary totals cannot hide a wrong inheritance account or repeated transfer (1 ms)
+  ✓ an unpaid creditor or wrong-currency heir receipt cannot pass only the scalar estate check
+  ✓ an equal numeric estate-debt payment in EUR cannot satisfy a USD estate (1 ms)
+  ✓ an equal numeric estate-charity payment in EUR cannot satisfy a USD estate
+  ✓ an equal numeric estate-tax payment in EUR cannot satisfy a USD estate (1 ms)
+  ✓ an equal numeric estate-distribution payment in EUR cannot satisfy a USD estate
+
+Test Suites: 1 passed, 1 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        4.485 s
+Ran all test suites within paths "tests/game/entrepreneur-policy.test.ts".

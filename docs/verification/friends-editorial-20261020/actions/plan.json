@@ -1,0 +1,104 @@
+{
+  "format": "dreams-c36-action-measurement-plan-v1",
+  "status": "prepared-only-not-a-measurement-pass",
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "versions": {
+    "world": 35,
+    "engine": 36,
+    "content": 11,
+    "database": 15,
+    "checkpoint": "v4"
+  },
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-friends-editorial-accepted-source.json",
+    "bytes": 67034,
+    "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+  },
+  "combinedGamePersistenceSourceHash": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+  "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "cwd": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/integration-friends-editorial",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "shellCommand": "node tools/benchmark-actions.cjs --source /workspace/dreams-worktrees/integration-friends-editorial --profile --population --workplaces --raises > /tmp/dreams-friends-editorial-actions.json 2> /tmp/dreams-friends-editorial-actions.stderr.txt",
+  "rawFile": "/tmp/dreams-friends-editorial-actions.json",
+  "stderrFile": "/tmp/dreams-friends-editorial-actions.stderr.txt",
+  "registeredInputs": [
+    {
+      "file": "tests/fixtures/v25-content4-bubble-archive.json",
+      "bytes": 18099,
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v27-leisure-archive.json",
+      "bytes": 140456,
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v28-native-teen-archive.json",
+      "bytes": 575472,
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+      "bytes": 794714,
+      "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9",
+      "byteIdenticalToSourceCommit": true
+    }
+  ],
+  "helper": {
+    "file": "/tmp/dreams-friends-editorial-actions-summary.cjs",
+    "bytes": 16500,
+    "sha256": "f4eb388a5e0704f55c6124347edbe035beaf5037a2384b97760d2f0133bd7a25"
+  },
+  "registrationHelper": {
+    "file": "/tmp/dreams-friends-editorial-actions-register.cjs",
+    "bytes": 7365,
+    "sha256": "09522107ab4ef5a6a9c830913c49d50e62a05311ed0c7e8accb5c710f5200823"
+  },
+  "quiescenceWrapper": {
+    "file": "/tmp/dreams-friends-editorial-actions-run.py",
+    "bytes": 10768,
+    "sha256": "a7b5bef3f4b596916b657c909c77b7fedef3b2cea338483509713ceb55c3a208"
+  },
+  "expected": {
+    "cases": 14,
+    "labels": [
+      "Begin Life",
+      "First-year choice",
+      "First-year choice Continue",
+      "Age-seven callback",
+      "Age-seven callback Continue",
+      "Age-30 routine",
+      "Age-60 routine",
+      "100-known-contact routine",
+      "100-known-contact first Age Up step",
+      "1000-known-contact routine",
+      "1000-known-contact first Age Up step",
+      "Prepared teen coworker introduction",
+      "Prepared supervisor feedback",
+      "Prepared raise request"
+    ],
+    "measuredTrialsPerCase": 5,
+    "measuredWarmSamples": 70,
+    "excludedWarmups": 14,
+    "totalSuccessfulExecutions": 84,
+    "coldCurrentWholeWorldAssertions": 84,
+    "coldBackupWholeWorldAssertions": 84,
+    "originalBeforeAgeUpPayloadAssertions": 12,
+    "deterministicPopulationOutcomes": 4
+  },
+  "verificationBoundary": "Driver completion/exit0 establishes its cold/current/backup/raw-BeforeAgeUp, deterministic sizes/outcomes and source-before/after assertions. Warm zero full unpack must be checked from all70 measured phase maps by the publisher; the driver itself only records those counters. Counts84/12 are derived from the frozen six-trial loop/two Age Up cases, not extra stored measurement samples.",
+  "scope": "Unpaired cloud Node/on-disk SQLite diagnostics, one excluded warm-up plus five measured fixed-input trials per case. Resolve+atomic repository commit timing, separately recorded cold-open priming; no React rendering, UI scheduling, native/physical p95 or guaranteed speedup. Population worlds are generated-at-once stress inputs from a genuine age30 checkpoint, not natural/native progression. Prepared workplace worlds continue a genuine saved teen with real commands. Begin Life uses the unchanged driver birth-acknowledged revision save kernel, not the store/UI birth path.",
+  "readyForRootExecutionOnlyAfter": "Native app stopped; full regression/editorial/other heavy work closed or explicitly paused; record exact quiescence and actual process exit status. Do not overwrite older C34 artifacts."
+}

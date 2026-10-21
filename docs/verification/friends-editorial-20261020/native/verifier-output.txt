@@ -1,0 +1,89 @@
+{
+  "output": "/tmp/dreams-friends-editorial-native-verifier-results.json",
+  "sha256": "5aaf83e978e69f145a49d26506f1f44f9ea1548835b01bc59028a9654213db43",
+  "status": "passed",
+  "complete": true,
+  "phases": [
+    {
+      "phase": "boot138",
+      "revision": 138,
+      "receipts": 145,
+      "worldSha256": "f99564d6e743a08ca8fc829076bee1286e60eff1a71acaaeb82c31f7a6b9ece8"
+    },
+    {
+      "phase": "review138",
+      "revision": 138,
+      "receipts": 145,
+      "worldSha256": "f99564d6e743a08ca8fc829076bee1286e60eff1a71acaaeb82c31f7a6b9ece8"
+    },
+    {
+      "phase": "proposal139",
+      "revision": 139,
+      "receipts": 146,
+      "worldSha256": "e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22"
+    },
+    {
+      "phase": "cold-proposal139",
+      "revision": 139,
+      "receipts": 146,
+      "worldSha256": "e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22"
+    },
+    {
+      "phase": "ack140",
+      "revision": 140,
+      "receipts": 147,
+      "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e"
+    },
+    {
+      "phase": "cold-final140",
+      "revision": 140,
+      "receipts": 147,
+      "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e"
+    }
+  ],
+  "final": {
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "personId": "person_player",
+    "name": "Nia Carter",
+    "age": 24,
+    "revision": 140,
+    "date": {
+      "year": 2050,
+      "month": 10,
+      "day": 20
+    },
+    "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e",
+    "pending": null,
+    "annual": null,
+    "bestFriendships": [
+      {
+        "id": "best_friendship_138",
+        "ruleVersion": 1,
+        "relationshipId": "relation_person_player_person_npc_15_5",
+        "proposerId": "person_player",
+        "friendId": "person_npc_15_5",
+        "proposed": {
+          "year": 2050,
+          "month": 10,
+          "day": 20
+        },
+        "country": "US",
+        "city": "New York",
+        "strength": 90,
+        "trust": 64,
+        "chance": 95,
+        "roll": 75,
+        "status": "active",
+        "ended": null,
+        "endReason": null,
+        "endedById": null
+      }
+    ],
+    "ledgerRows": 8392,
+    "people": 20,
+    "lives": 7,
+    "moments": 66,
+    "receipts": 147
+  },
+  "scope": "Read-only equality verification of all six coordinator-supplied native SQLite captures against the fixed actual-C35-Nia138 projection. This verifier performs no engine commands, SQL writes, native input, simulation or visual acceptance. Native provenance, actual app cold stops/restarts, visible controls and personally reviewed PNG/XML belong to the coordinator."
+}

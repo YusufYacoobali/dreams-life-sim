@@ -1,0 +1,1585 @@
+{
+  "format": "dreams-friends-editorial-verification-v1",
+  "recordedAt": "2026-10-21T00:25:29.523Z",
+  "recordedOn": "2026-10-21",
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "versions": {
+    "world": 35,
+    "engine": 36,
+    "content": 11,
+    "database": 15,
+    "checkpoint": "v4"
+  },
+  "scope": "C36 bounded Best Friends, truthful new story/health copy and source-reviewed UI fixes with separately scoped evidence. This milestone is not full production completion.",
+  "source": {
+    "initial": {
+      "file": "friends-editorial-20261020/source/initial.json",
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+    },
+    "firstFull": {
+      "file": "friends-editorial-20261020/source/first-full.json",
+      "bytes": 66657,
+      "sha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7"
+    },
+    "accepted": {
+      "file": "friends-editorial-20261020/source/accepted.json",
+      "bytes": 67034,
+      "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+    },
+    "initialBridge": {
+      "file": "friends-editorial-20261020/source/initial-to-first-full-bridge.json",
+      "bytes": 1968,
+      "sha256": "fabf90a2f2e714c6bc49365af06a88b12c92947dd858959f3ef008b8ae853dda"
+    },
+    "acceptedBridge": {
+      "file": "friends-editorial-20261020/source/first-full-to-accepted-bridge.json",
+      "bytes": 1085,
+      "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d"
+    },
+    "sourceFilesPinned": 610,
+    "gameSourceHash": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+    "combinedGamePersistenceSourceHash": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+    "sourceBridgeScope": "Initial606→firstFull607 includes reviewed UI/tests; firstFull607→accepted610 changes only one stale historical-policy test and adds three acceptance tests. App/runtime/config/assets/oldfixture bytes are exact across the latter bridge.",
+    "gateWrapper": {
+      "file": "friends-editorial-20261020/source/gate-wrapper.py.txt",
+      "bytes": 2012,
+      "sha256": "2610caf53a1fdc987bb5d545248afaa9f355401c679b9ae379c59f113129092b"
+    },
+    "captureHelper": {
+      "file": "friends-editorial-20261020/source/capture-source.cjs.txt",
+      "bytes": 4530,
+      "sha256": "1a198ca940c444b8341f7a077a2b94d27942e64074978190c348b7260cc3e8fa"
+    },
+    "environmentReconnect": {
+      "file": "friends-editorial-20261020/source/environment-reconnect-provenance.md",
+      "bytes": 2021,
+      "sha256": "23e441a3b8fb116fb5a04956ee0a7bbfb7957cb7b143826719370005cfa6394d"
+    }
+  },
+  "gates": {
+    "regression": {
+      "complete": true,
+      "exitCode": 0,
+      "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+      "suites": 185,
+      "tests": 2355,
+      "jestSeconds": 1386.145,
+      "wrapperSeconds": 1386.814,
+      "raw": {
+        "file": "friends-editorial-20261020/checks/acceptedRegression.txt",
+        "bytes": 14103,
+        "sha256": "2fc3921f91e740960e140001e56d917d32ae8a353bba7a896159e2ca9f56a44c"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/checks/acceptedRegression-receipt.json",
+        "bytes": 1094,
+        "sha256": "6a38459fcedc94da5840b17a447eab7b8234168861e062eae6891f7d01159d3b"
+      }
+    },
+    "strictTypes": {
+      "complete": true,
+      "exitCode": 0,
+      "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+      "raw": {
+        "file": "friends-editorial-20261020/checks/acceptedTypes.txt",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/checks/acceptedTypes-receipt.json",
+        "bytes": 1051,
+        "sha256": "968e075f370053b27ae01bf1056ad84786747de4c8201f6f12841b9bfa393294"
+      }
+    },
+    "acceptedFocused": {
+      "complete": true,
+      "exitCode": 0,
+      "tests": 25,
+      "suites": 4,
+      "raw": {
+        "file": "friends-editorial-20261020/checks/acceptedFocused.txt",
+        "bytes": 5609,
+        "sha256": "71aea6de8934a3ffbcea35d5303b66ce2504dc6abdf0c5a4adeba70e3aae0178"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/checks/acceptedFocused-receipt.json",
+        "bytes": 1322,
+        "sha256": "e4efc5ee6631330fc09dd1ac8a1d1700ec4bd01f6c7d1d03de5cb539b82fa305"
+      },
+      "overlappingCountsNotAddedToRegression": true
+    },
+    "annual120": {
+      "complete": true,
+      "count": 120,
+      "seeds": [
+        0,
+        119
+      ],
+      "elapsedMs": 651254,
+      "raw": {
+        "file": "friends-editorial-20261020/checks/annual120.ndjson",
+        "bytes": 37778,
+        "sha256": "7edbed3621aebe42477d696688e1928fdb4145c5668ad064131b682f3e3ed4d9"
+      },
+      "stderr": {
+        "file": "friends-editorial-20261020/checks/annual120.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "scope": "Same reused120 pure-engine first-eligible seeds; newborn acknowledgement flag set before engine progression. No SQLite/native/full-codec or optional Best Friends coverage inferred."
+    },
+    "exports": {
+      "complete": true,
+      "exitCode": 0,
+      "sourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+      "acceptedRuntimeSourceBridge": {
+        "file": "friends-editorial-20261020/source/first-full-to-accepted-bridge.json",
+        "bytes": 1085,
+        "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d"
+      },
+      "raw": {
+        "file": "friends-editorial-20261020/checks/exports.txt",
+        "bytes": 2745,
+        "sha256": "e22b6748612bb308911efbc598072662cf3d89684d0feafd365c091ca259cefe"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/checks/exports-receipt.json",
+        "bytes": 1247,
+        "sha256": "0fb1be6ae0fb2f2cb92527b83d78322510f330ecb354a6d30ecab66ebbd04c2f"
+      },
+      "provenance": {
+        "file": "friends-editorial-20261020/checks/exports-provenance.json",
+        "bytes": 67693,
+        "sha256": "f28393a1755c264ebe5f6325db1ab469709fd7fdeefc7f53526a77187566a48c"
+      },
+      "metadata": {
+        "file": "friends-editorial-20261020/checks/export-metadata.json",
+        "bytes": 5282,
+        "sha256": "7618e2b1bb66d39a522c1be775e873733677eaf7f35a6ecd14659e76eefbde78"
+      },
+      "platforms": {
+        "android": {
+          "bundleBytes": 4778484,
+          "bundleSha256": "1660c90913dcba94cff7f6bdfe0abc7c1f3eca8d9c9a5f8f144fbfbec0031553",
+          "sourceMapSha256": "dfb158db1a0d80a6c9ddbf9c9b952b689e027e176a9199170e7deb445ab9e54b",
+          "mappedAppAndSrcFiles": 306,
+          "bundlesAndMapsCommitted": false
+        },
+        "ios": {
+          "bundleBytes": 4511028,
+          "bundleSha256": "43d857c42d76283ec46daf78978ed9f5230637c78bc63329ffb30a70f7fc14d6",
+          "sourceMapSha256": "278daef57ef00a82c8d0bc9190fee779c074112cbb76272c884ac433631da2e5",
+          "mappedAppAndSrcFiles": 306,
+          "bundlesAndMapsCommitted": false
+        }
+      },
+      "scope": "Fresh isolated Android/iOS Hermes exports with306 mapped app/src files each; no standalone/device/iOS hardware acceptance."
+    },
+    "native": {
+      "complete": true,
+      "exitCode": 0,
+      "sourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+      "acceptedRuntimeSourceBridge": {
+        "file": "friends-editorial-20261020/source/first-full-to-accepted-bridge.json",
+        "bytes": 1085,
+        "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d"
+      },
+      "plan": {
+        "file": "friends-editorial-20261020/native/expected-only-plan.json",
+        "bytes": 10152,
+        "sha256": "aed1555240cab6f3b8862df88d92ac36d83ceb5215823b70a3efac7a96e25a1c"
+      },
+      "result": {
+        "file": "friends-editorial-20261020/native/journey-exact.json",
+        "bytes": 23321,
+        "sha256": "5aaf83e978e69f145a49d26506f1f44f9ea1548835b01bc59028a9654213db43"
+      },
+      "captureManifest": {
+        "file": "friends-editorial-20261020/native/captures-manifest.json",
+        "bytes": 2170,
+        "sha256": "c77215ed82e254a132bf8850603bd318185cc630e81de9f2aab09a8c8fbb42a7"
+      },
+      "verifierOutput": {
+        "file": "friends-editorial-20261020/native/verifier-output.txt",
+        "bytes": 2717,
+        "sha256": "4a31716ff4564bd5cb54702eee01eceb1efb10cdbc45b30523d5821cfc3d8e8f"
+      },
+      "sourceProof": {
+        "file": "friends-editorial-20261020/native/source-proof.json",
+        "bytes": 32436,
+        "sha256": "898391885e2797b58290bd003ffae21d8ec6f50b1a6b6a49919538eb606e62e8"
+      },
+      "reviewedImages": {
+        "file": "friends-editorial-20261020/native/accepted-images.json",
+        "bytes": 12840,
+        "sha256": "9360e838c3db2a5658b2792586d5fea12ae40a038bc572d04e5d2c07fc1836c6"
+      },
+      "images": [
+        {
+          "id": "launcher",
+          "note": "Actual root UI capture: launcher-normal. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/launcher.png",
+            "bytes": 376165,
+            "sha256": "d0854262d4e47f64e73d00ed2fddb89ab863d7d778912a527adff0b78ab50c3a"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/launcher.xml",
+            "bytes": 16563,
+            "sha256": "4b4d82e74aa765418ad0988cf5910cabe447d11a0702732fdb8bbd1417dad0c3"
+          }
+        },
+        {
+          "id": "friends",
+          "note": "Actual root UI capture: friends. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/friends.png",
+            "bytes": 39846,
+            "sha256": "55f90e3ea3cf3b0f28e9c908955e014092a91622652befd75912cc12cf07bd44"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/friends.xml",
+            "bytes": 31794,
+            "sha256": "d4f1e27065a8a873494606265a6ae6b5afbf0917535d4cc72a55281220bf98ec"
+          }
+        },
+        {
+          "id": "morgan-profile",
+          "note": "Actual root UI capture: morgan-normal. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/morgan-profile.png",
+            "bytes": 55703,
+            "sha256": "856916eee302c4ad34ee9bb81c1b4bd67006bb7aba15b45abd0a2f92fcac2fc6"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/morgan-profile.xml",
+            "bytes": 29865,
+            "sha256": "c0b6b6971e67e1073929558c9165d530cd405d9dcd4293f2a0404954127ac606"
+          }
+        },
+        {
+          "id": "best-friend-review-normal",
+          "note": "Actual root UI capture: review-normal. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-review-normal.png",
+            "bytes": 57265,
+            "sha256": "a9c0b9654017c39ba991b28e96c440a75c23a9891360cc34a841771c3a91ef6f"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-review-normal.xml",
+            "bytes": 6392,
+            "sha256": "5d55e48870e0fc6c6894459af77052e6acc92ce1c775bfce52526ae0898e60c5"
+          }
+        },
+        {
+          "id": "best-friend-review-large",
+          "note": "Actual root UI capture: review-130. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-review-large.png",
+            "bytes": 55653,
+            "sha256": "1805f95125fbf2a679f8e7186dd0886b2b9e559fc67870c7933557857517fd47"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-review-large.xml",
+            "bytes": 6391,
+            "sha256": "3a7fc366596c9f799c2b249315d026b0f993e819c2e35e18a129b76093a638ee"
+          }
+        },
+        {
+          "id": "best-friend-result-large",
+          "note": "Actual root UI capture: proposal139-130. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-result-large.png",
+            "bytes": 57993,
+            "sha256": "a15bac226e51563e68ef9a37ab8685b3c501b47779eab78c75993c7cdbaa3bce"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-result-large.xml",
+            "bytes": 7933,
+            "sha256": "04c1cd2c71e9e11388a186b10cf71bd3c8447cb5f2685d7a9a670017df364c28"
+          }
+        },
+        {
+          "id": "best-friend-cold-result-normal",
+          "note": "Actual root UI capture: cold-proposal139. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-cold-result-normal.png",
+            "bytes": 68025,
+            "sha256": "085d84f50dfa659726f9b8408da150543769ebca7978694bd99885885268f2c4"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-cold-result-normal.xml",
+            "bytes": 7934,
+            "sha256": "66ef898ba3f27bc86a4677169d96c682da0efbbc68fed690b5d56d9485cb52bd"
+          }
+        },
+        {
+          "id": "best-friend-ack",
+          "note": "Actual root UI capture: ack140. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-ack.png",
+            "bytes": 77051,
+            "sha256": "3f9769cda644161934eebaa1dc49f66c1d2ad9af47bbc7f3f36760deaf408094"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-ack.xml",
+            "bytes": 40471,
+            "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+          }
+        },
+        {
+          "id": "best-friend-cold-final",
+          "note": "Actual root UI capture: cold-final140. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/best-friend-cold-final.png",
+            "bytes": 77057,
+            "sha256": "2e2081623b0e5a3eefbf00cbf695776556e0bd85109c38e2ce9b46316218d74a"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/best-friend-cold-final.xml",
+            "bytes": 40471,
+            "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+          }
+        },
+        {
+          "id": "profile",
+          "note": "Actual root UI capture: profile-final140. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/profile.png",
+            "bytes": 80464,
+            "sha256": "4b0c15fbecc3bd4b23d63483e055ca589c17faa0e84e9426ba575f13ef7265dd"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/profile.xml",
+            "bytes": 35911,
+            "sha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef"
+          }
+        },
+        {
+          "id": "life-menu",
+          "note": "Actual root UI capture: more-life. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/life-menu.png",
+            "bytes": 48586,
+            "sha256": "414a301259c8dd8bcc31aa22d3df417373c36bca1da0666a8b7a169750d2a981"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/life-menu.xml",
+            "bytes": 9580,
+            "sha256": "f209b29c4be92b9f4cfeb9b8cc55d5d56db6e9ca76837b1c0a1c8b47fd6fd61d"
+          }
+        },
+        {
+          "id": "named-continue-normal",
+          "note": "Actual root UI capture: saved-lives-normal. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/named-continue-normal.png",
+            "bytes": 50007,
+            "sha256": "d836468c0d5e3cd1f7569f7f25c48fd68114f9f79c9106d8a6a71173a6ee27e3"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/named-continue-normal.xml",
+            "bytes": 21424,
+            "sha256": "bffe13a0553020c4f61a7ba7413c8ae74c22c3639be781db0e73c3c5f3d91e9e"
+          }
+        },
+        {
+          "id": "statistics-normal",
+          "note": "Actual root UI capture: statistics-normal. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/statistics-normal.png",
+            "bytes": 56809,
+            "sha256": "d1dd3c40a35258a0021ecd3620d941de9d173347f9538a88f083af13d43ecc90"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/statistics-normal.xml",
+            "bytes": 35447,
+            "sha256": "67295be5b3544d9db1831195f44d4551759200b7459f5f321b5021f0ea6cf6b3"
+          }
+        },
+        {
+          "id": "statistics-normal-full-stats",
+          "note": "Actual root UI capture: statistics-normal-fame. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/statistics-normal-full-stats.png",
+            "bytes": 54411,
+            "sha256": "d5fef1c8d9ddf6a025b6fcf5a6acba9b5fbc2f8af51beba350679fd049496bac"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/statistics-normal-full-stats.xml",
+            "bytes": 36852,
+            "sha256": "e14e613ffd5b22bdc354ea19a1aba8096c6b6e57c29d13cd5109cdcd370b41bc"
+          }
+        },
+        {
+          "id": "named-continue-large",
+          "note": "Actual root UI capture: saved-lives-130. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/named-continue-large.png",
+            "bytes": 59235,
+            "sha256": "53cc78b70e1b0855d561fa0e17635caa5ef5b93ffefcd2d49985a5b37b2d4aad"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/named-continue-large.xml",
+            "bytes": 19716,
+            "sha256": "341f472ea974791862b0e228d927ca5f66bc50bb67abf23403b94aa2baf179d2"
+          }
+        },
+        {
+          "id": "statistics-large",
+          "note": "Actual root UI capture: statistics-130. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/statistics-large.png",
+            "bytes": 68988,
+            "sha256": "a7db7392188e54d79f63d2f479e264eb24070bb49d0d3f7da7200590d9593f5a"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/statistics-large.xml",
+            "bytes": 32200,
+            "sha256": "6d25120ac0666297c6cd90a16560fcf93c49bafa20812706e62e8edb26185c7f"
+          }
+        },
+        {
+          "id": "statistics-large-full-stats",
+          "note": "Actual root UI capture: statistics-130-fame. Personally reviewed; correct current context and visible controls.",
+          "fontScale": 1.3,
+          "coordinatorPersonallyViewed": true,
+          "accepted": true,
+          "png": {
+            "file": "friends-editorial-20261020/native/images/statistics-large-full-stats.png",
+            "bytes": 68146,
+            "sha256": "e98f01332e77c9425067108411875c3ead4dece6f97bd2e10fd63f72d85c0a46"
+          },
+          "xml": {
+            "file": "friends-editorial-20261020/native/images/statistics-large-full-stats.xml",
+            "bytes": 34435,
+            "sha256": "00ae9bec9db385d8e6fe98d1ae718982f2b726396bf76f183f2b2f1348c3c14d"
+          }
+        }
+      ],
+      "phases": [
+        {
+          "phase": "boot138",
+          "revision": 138,
+          "reader": 15,
+          "worldSha256": "f99564d6e743a08ca8fc829076bee1286e60eff1a71acaaeb82c31f7a6b9ece8",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 145
+        },
+        {
+          "phase": "review138",
+          "revision": 138,
+          "reader": 15,
+          "worldSha256": "f99564d6e743a08ca8fc829076bee1286e60eff1a71acaaeb82c31f7a6b9ece8",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 145
+        },
+        {
+          "phase": "proposal139",
+          "revision": 139,
+          "reader": 15,
+          "worldSha256": "e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 146
+        },
+        {
+          "phase": "cold-proposal139",
+          "revision": 139,
+          "reader": 15,
+          "worldSha256": "e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 146
+        },
+        {
+          "phase": "ack140",
+          "revision": 140,
+          "reader": 15,
+          "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 147
+        },
+        {
+          "phase": "cold-final140",
+          "revision": 140,
+          "reader": 15,
+          "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e",
+          "lives": 7,
+          "moments": 66,
+          "receipts": 147
+        }
+      ],
+      "final": {
+        "revision": 140,
+        "lives": 7,
+        "moments": 66,
+        "receipts": 147,
+        "pending": null,
+        "annual": null,
+        "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e"
+      },
+      "scope": "Actual root ordinary proposal at130%text, cold saved-result reopening atnormaltext, separate acknowledgement and final cold reopening, all8 table verifier and personally reviewed images. Baseline/raw database/WAL files remain external; no physical performance or broad device acceptance inferred.",
+      "extraReadOnlyBrowse": {
+        "file": "friends-editorial-20261020/native/extra-browse.json",
+        "bytes": 9372,
+        "sha256": "adbb238408d39a577a8937cccd13ca9472e97477c98a3ae0f5c67d121f282ad2"
+      },
+      "extraBrowseScope": "Separately verified all8 original138 rows after130%review cancel and all8 final140 rows after normal/130%Profile/SavedLives/same-lifeContinue/Extras/Statistics browsing; receipts remain147. Statistics scroll area711px at both font scales. Font restored1.0 and appforce-stopped. No additional gamecommand or cold-result count inferred."
+    },
+    "actions": {
+      "complete": true,
+      "exitCode": 0,
+      "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+      "raw": {
+        "file": "friends-editorial-20261020/actions/raw.json",
+        "bytes": 258093,
+        "sha256": "66e8687ce51eacf58a70aed9010e6228ef09c466c40023d6dddbf2a825541202"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/actions/receipt.json",
+        "bytes": 1796,
+        "sha256": "e9377491ef2a6b80a1541f0a61b7c6ed7ad66c3218f91a75791f93c7e678b077"
+      },
+      "summary": {
+        "file": "friends-editorial-20261020/actions/summary.json",
+        "bytes": 21668,
+        "sha256": "99495aaed858ffc99155242b302dd131bc6ac43e8cbab209908c14b631260a02"
+      },
+      "short": {
+        "file": "friends-editorial-20261020/actions/summary.md",
+        "bytes": 2236,
+        "sha256": "3559420d16b27b5db6218bb4eeeb6f53b34464dc380244d5daa1dcbf7bb233a3"
+      },
+      "quiescence": {
+        "file": "friends-editorial-20261020/actions/quiescence.json",
+        "bytes": 3728,
+        "sha256": "2d9db11d232fb29bf94fb25bb3ce9018bb4cef22cec1580eadfddb8c056fe3c5"
+      },
+      "measuredWarmSamples": 70,
+      "cases": 14,
+      "fullMeasuredWarmUnpackCalls": 0,
+      "scope": "Serial unpaired cloud Node/on-disk SQLite fixed-world samples. Generated100/1000-contact stress inputs and prepared workplace contexts are explicit. No UI/physical p95, native latency or guaranteed speedup."
+    },
+    "historicalC35CI": {
+      "sourceCommit": "e938dbe7d2f949cd9acc5c1dabc16b3f34d02434",
+      "runId": 39512292979,
+      "jobId": 118936013095,
+      "url": "https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39512292979",
+      "conclusion": "success",
+      "tests": 2282,
+      "suites": 169,
+      "jestSeconds": 798.42,
+      "raw": {
+        "file": "friends-editorial-20261020/historical-ci/e938-linux-log.txt",
+        "bytes": 29488,
+        "sha256": "d08380f1fbb10ea791329818d7427b6e7b997b03207593953c344623444a1c7e"
+      },
+      "currentC36HostedSuccessClaimed": false
+    }
+  },
+  "diagnostics": {
+    "firstFull": {
+      "sourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+      "complete": true,
+      "exitCode": 1,
+      "testsPassed": 2347,
+      "testsFailed": 1,
+      "suitesPassed": 181,
+      "suitesFailed": 1,
+      "jestSeconds": 1360.397,
+      "wrapperSeconds": 1361.182,
+      "reason": "Stale historical entrepreneur-policy tuple assertion; frozen driver and raw historical records unchanged.",
+      "raw": {
+        "file": "friends-editorial-20261020/diagnostics/first-full-failed.txt",
+        "bytes": 12159,
+        "sha256": "35b3aa3f7215e9f07646f0c5782841b046a809e07ee4687b6bb13793d60015f6"
+      },
+      "receipt": {
+        "file": "friends-editorial-20261020/diagnostics/first-full-failed-receipt.json",
+        "bytes": 1088,
+        "sha256": "e0781f5eafd8599f6624d7e4213db41b969ff60a50cda6256d26af899691169c"
+      }
+    },
+    "initialFocused": {
+      "raw": {
+        "file": "friends-editorial-20261020/diagnostics/focused-initial-failed.txt",
+        "bytes": 3216,
+        "sha256": "ed0d91d34593a80aceb5631209b18b367f9b3118f314c2aa1e098f9e8a1c9e34"
+      },
+      "reason": "Default5000ms actor timeout and mistyped nonexistent Model test filename; separately retained from final66/13 explicit30000ms passing scope.",
+      "final": {
+        "file": "friends-editorial-20261020/checks/focused66-final.txt",
+        "bytes": 2637,
+        "sha256": "7ec320455cfc8038bdca8a52580c8661ee0d87ed63d2db60747a300a85f6eafb"
+      }
+    },
+    "portrait": {
+      "acceptance": {
+        "file": "friends-editorial-20261020/portrait/native-two-views-acceptance.json",
+        "bytes": 4550,
+        "sha256": "1d5f8b876abd2a210cc48f33a21c44bd9f4e3c79464f5a4b53945f38073bed39"
+      },
+      "nativeSourceProof": {
+        "file": "friends-editorial-20261020/portrait/native-source-proof.json",
+        "bytes": 869,
+        "sha256": "4ab451e577f121c320e1f079095dfb83cf1ff114cb51c6b0aa47a8891447c0c1"
+      },
+      "staleSourceExportRejected": {
+        "file": "friends-editorial-20261020/portrait/diagnostic-rejected-stale-source-export.txt",
+        "bytes": 3057,
+        "sha256": "258895e0d07ad5270d531133b64a0d6bec4280795c3c10f2a5f72537f10a4308"
+      },
+      "isolatedExportProof": {
+        "file": "friends-editorial-20261020/portrait/isolated-export-provenance.json",
+        "bytes": 944,
+        "sha256": "b5449ba53b6b3bb078f8624ff4b66c315bcb7a59f49193a170834a4ece6247f4"
+      },
+      "scope": "Original stale-source export and wrong-label observer interruption are diagnostics. Root accepted only the isolated candidate two actual views/all8 preserved at Nia138 reader14; no all-palette/modernAndroid/iOS claim."
+    }
+  },
+  "historicalReferences": [
+    {
+      "file": "opening-completion-20261020.json",
+      "bytes": 73609,
+      "sha256": "74a31bbf0b2fabad982699a81f13743f5a34fc1c90d94c98ed5ea1a64ea24507",
+      "scope": "Published C35 full milestone; its lossless editorial/criminal evidence remains historical, with no C36 rerun claim."
+    }
+  ],
+  "limits": [
+    "C35 lossless editorial/criminal observations remain at their original published locations and are not labeled rerun on C36.",
+    "Source equality, archive integrity and template counts do not establish all250 natural/context/branch coverage, editorial balance or overall completion.",
+    "Raw evidence bytes retain original provenance paths. This top-level record links repository-relative artifacts; databases, Hermes binaries and maps are not copied.",
+    "Physical devices, standalone Android/iOS builds and store/account/release acceptance remain separately scoped open gates.",
+    "Additional import/export/sharing and historical/storage breadth are parked per the user and are not active completion gates."
+  ],
+  "artifacts": [
+    {
+      "file": "friends-editorial-20261020/source/initial.json",
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+    },
+    {
+      "file": "friends-editorial-20261020/source/initial-head.txt",
+      "bytes": 41,
+      "sha256": "0869085beabfc80c20394290803e7030997fa60715d511d67e9f5698d1d75e0b"
+    },
+    {
+      "file": "friends-editorial-20261020/source/initial-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/source/initial-tree.bin",
+      "bytes": 174436,
+      "sha256": "1bb8e29d806c72a8b37aeeba9b468c13bc581d1a75c1ab7fc7df6282c6bf3e51"
+    },
+    {
+      "file": "friends-editorial-20261020/source/first-full.json",
+      "bytes": 66657,
+      "sha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7"
+    },
+    {
+      "file": "friends-editorial-20261020/source/first-full-head.txt",
+      "bytes": 41,
+      "sha256": "4d519f2bb7884c2b9e792f167e545c39f59172918d1d445acce004be169df9d4"
+    },
+    {
+      "file": "friends-editorial-20261020/source/first-full-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/source/first-full-tree.bin",
+      "bytes": 174705,
+      "sha256": "0ee142307f72cb0c1e97ef2ce9c763b0ad082a8fcad51b5f561ddcee88f95f90"
+    },
+    {
+      "file": "friends-editorial-20261020/source/accepted.json",
+      "bytes": 67034,
+      "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+    },
+    {
+      "file": "friends-editorial-20261020/source/accepted-head.txt",
+      "bytes": 41,
+      "sha256": "353cb20e8f98e5736aef67466ae3a6ccf209cb1b8cd9bbb76da376242d441d0d"
+    },
+    {
+      "file": "friends-editorial-20261020/source/accepted-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/source/accepted-tree.bin",
+      "bytes": 175277,
+      "sha256": "a1ce32cf381405047fb23a21e08789951c5723259efdeb05adb7637be3a1139f"
+    },
+    {
+      "file": "friends-editorial-20261020/source/initial-to-first-full-bridge.json",
+      "bytes": 1968,
+      "sha256": "fabf90a2f2e714c6bc49365af06a88b12c92947dd858959f3ef008b8ae853dda"
+    },
+    {
+      "file": "friends-editorial-20261020/source/first-full-to-accepted-bridge.json",
+      "bytes": 1085,
+      "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d"
+    },
+    {
+      "file": "friends-editorial-20261020/source/capture-source.cjs.txt",
+      "bytes": 4530,
+      "sha256": "1a198ca940c444b8341f7a077a2b94d27942e64074978190c348b7260cc3e8fa"
+    },
+    {
+      "file": "friends-editorial-20261020/source/gate-wrapper.py.txt",
+      "bytes": 2012,
+      "sha256": "2610caf53a1fdc987bb5d545248afaa9f355401c679b9ae379c59f113129092b"
+    },
+    {
+      "file": "friends-editorial-20261020/diagnostics/first-full-failed.txt",
+      "bytes": 12159,
+      "sha256": "35b3aa3f7215e9f07646f0c5782841b046a809e07ee4687b6bb13793d60015f6"
+    },
+    {
+      "file": "friends-editorial-20261020/diagnostics/first-full-failed-receipt.json",
+      "bytes": 1088,
+      "sha256": "e0781f5eafd8599f6624d7e4213db41b969ff60a50cda6256d26af899691169c"
+    },
+    {
+      "file": "friends-editorial-20261020/diagnostics/focused-initial-failed.txt",
+      "bytes": 3216,
+      "sha256": "ed0d91d34593a80aceb5631209b18b367f9b3118f314c2aa1e098f9e8a1c9e34"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/focused66-final.txt",
+      "bytes": 2637,
+      "sha256": "7ec320455cfc8038bdca8a52580c8661ee0d87ed63d2db60747a300a85f6eafb"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/first-full-types.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/first-full-types-receipt.json",
+      "bytes": 1045,
+      "sha256": "62bf59c0a14aefe8f272661bc33a23cc0004bbba7a376961bf1632ee519b25a3"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/annual120.ndjson",
+      "bytes": 37778,
+      "sha256": "7edbed3621aebe42477d696688e1928fdb4145c5668ad064131b682f3e3ed4d9"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/annual120.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/exports.txt",
+      "bytes": 2745,
+      "sha256": "e22b6748612bb308911efbc598072662cf3d89684d0feafd365c091ca259cefe"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/exports-receipt.json",
+      "bytes": 1247,
+      "sha256": "0fb1be6ae0fb2f2cb92527b83d78322510f330ecb354a6d30ecab66ebbd04c2f"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/exports-provenance.json",
+      "bytes": 67693,
+      "sha256": "f28393a1755c264ebe5f6325db1ab469709fd7fdeefc7f53526a77187566a48c"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/native-two-views-acceptance.json",
+      "bytes": 4550,
+      "sha256": "1d5f8b876abd2a210cc48f33a21c44bd9f4e3c79464f5a4b53945f38073bed39"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/native-source-proof.json",
+      "bytes": 869,
+      "sha256": "4ab451e577f121c320e1f079095dfb83cf1ff114cb51c6b0aa47a8891447c0c1"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/diagnostic-rejected-stale-source-export.txt",
+      "bytes": 3057,
+      "sha256": "258895e0d07ad5270d531133b64a0d6bec4280795c3c10f2a5f72537f10a4308"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/isolated-export.txt",
+      "bytes": 2826,
+      "sha256": "e6889e2b38ac0c16261ed2ce544cc291042045f1e9b45c85ec181c16fdae3feb"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/isolated-export-provenance.json",
+      "bytes": 944,
+      "sha256": "b5449ba53b6b3bb078f8624ff4b66c315bcb7a59f49193a170834a4ece6247f4"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/author-notes.md",
+      "bytes": 5778,
+      "sha256": "2ca0b1a7c8045996f826c3e59084c8c42afc8e302c4ffe765ae3373a67ba9ae8"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/source-audit.md",
+      "bytes": 5391,
+      "sha256": "2036875bc21d9568a11f4a20edb5b48cea3a13bc4a0c0ebf03a1b3254fb6e3ff"
+    },
+    {
+      "file": "friends-editorial-20261020/native/expected-only-plan.json",
+      "bytes": 10152,
+      "sha256": "aed1555240cab6f3b8862df88d92ac36d83ceb5215823b70a3efac7a96e25a1c"
+    },
+    {
+      "file": "friends-editorial-20261020/native/original-pending-capture-manifest.json",
+      "bytes": 1183,
+      "sha256": "657773948ef24a1d99783567da729c0cad065b68b971d7007bd865be2531f78e"
+    },
+    {
+      "file": "friends-editorial-20261020/native/pending-manifest-refusal.txt",
+      "bytes": 879,
+      "sha256": "42fd262c647fe8ed4e1b1b21c31bbf7e28b993193d4bafeb4e98875142269f5b"
+    },
+    {
+      "file": "friends-editorial-20261020/historical-ci/e938-linux-log.txt",
+      "bytes": 29488,
+      "sha256": "d08380f1fbb10ea791329818d7427b6e7b997b03207593953c344623444a1c7e"
+    },
+    {
+      "file": "friends-editorial-20261020/audit/independent-initial-source.md",
+      "bytes": 7767,
+      "sha256": "8e39ebd2cfde2d3794fdbe361c9ecb559eedffb22b29ecc2146fad32d4280db5"
+    },
+    {
+      "file": "friends-editorial-20261020/audit/independent-final-source-and-native-helpers.md",
+      "bytes": 7139,
+      "sha256": "80153c79f0775b038ecfd72821fa2df007a552365a919d8ae8ef655c57c0a9e4"
+    },
+    {
+      "file": "friends-editorial-20261020/audit/independent-evidence.json",
+      "bytes": 3376,
+      "sha256": "e8fd004443a1f70e2e7a21305b404da30cc95fe7cb0a82ac95441e39ecd9172f"
+    },
+    {
+      "file": "friends-editorial-20261020/diagnostics/historical-policy-correction-focused.txt",
+      "bytes": 2124,
+      "sha256": "43ee61a859e1f6a6582c01fee322f75064548a6de351906bf5684f5f77effde8"
+    },
+    {
+      "file": "friends-editorial-20261020/diagnostics/historical-policy-correction-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/run-life-sweep.cjs.txt",
+      "bytes": 6982,
+      "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/benchmark-actions.cjs.txt",
+      "bytes": 16065,
+      "sha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/export-metadata.json",
+      "bytes": 5282,
+      "sha256": "7618e2b1bb66d39a522c1be775e873733677eaf7f35a6ecd14659e76eefbde78"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/life.png",
+      "bytes": 77998,
+      "sha256": "c73fd274b38b52396c27a52e644666d805f51c7277d20704f713cdeec96125de"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/life.xml",
+      "bytes": 40491,
+      "sha256": "3a4bcaec441883f90e81a06c9d09cdc67ae286396dead484d4621dca0aaf279f"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/profile.png",
+      "bytes": 80388,
+      "sha256": "c5f1264f4cf6961af77cee5e59f2f2ef976600eb69adb16e4ba71d0a3c9fdc72"
+    },
+    {
+      "file": "friends-editorial-20261020/portrait/profile.xml",
+      "bytes": 35911,
+      "sha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef"
+    },
+    {
+      "file": "friends-editorial-20261020/native/helpers/friends-native-support.cjs.txt",
+      "bytes": 6790,
+      "sha256": "b0e8bcba35829b6b4e79ce660fd04f9f3853cee6fc54b5b19f3b08bc174a204a"
+    },
+    {
+      "file": "friends-editorial-20261020/native/helpers/project-friends-native.cjs.txt",
+      "bytes": 6704,
+      "sha256": "b322a603f7591d4edcd53d89c923b5f65ba834f63710bf51ade148b8888f6e09"
+    },
+    {
+      "file": "friends-editorial-20261020/native/helpers/verify-friends-native.cjs.txt",
+      "bytes": 9706,
+      "sha256": "b7932be8b8284e69b035a1d08e71202b36f9ff0a971f36964e5222bdefd6db87"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/helpers/actions-register.cjs.txt",
+      "bytes": 7365,
+      "sha256": "09522107ab4ef5a6a9c830913c49d50e62a05311ed0c7e8accb5c710f5200823"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/helpers/actions-summary.cjs.txt",
+      "bytes": 16500,
+      "sha256": "f4eb388a5e0704f55c6124347edbe035beaf5037a2384b97760d2f0133bd7a25"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/helpers/actions-run.py.txt",
+      "bytes": 10768,
+      "sha256": "a7b5bef3f4b596916b657c909c77b7fedef3b2cea338483509713ceb55c3a208"
+    },
+    {
+      "file": "friends-editorial-20261020/native/core-source-pins.json",
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+    },
+    {
+      "file": "friends-editorial-20261020/source/environment-reconnect-provenance.md",
+      "bytes": 2021,
+      "sha256": "23e441a3b8fb116fb5a04956ee0a7bbfb7957cb7b143826719370005cfa6394d"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/summary.json",
+      "bytes": 5207,
+      "sha256": "24f65336c3bd3ca2d81f5590a8ec8ad6563039899be808c10070d2ddc59679a1"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/original-focused.txt",
+      "bytes": 3996,
+      "sha256": "897f6fd2c0b789516da4b8ab6117a30abb0d38083fbc22709fd526f8b395b78f"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/raw/creator-studio.json",
+      "bytes": 18949,
+      "sha256": "60d87d7f8d3d491697ce8330e2d24ff36ea68526533c13979fd42bebd477e24a"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/raw/family-trip.json",
+      "bytes": 11403,
+      "sha256": "63e24c67abb5dad09c2839b971413fbc619a08ef9342c3ad5ad62a7f54fe9b3c"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/raw/owned-home.json",
+      "bytes": 25442,
+      "sha256": "e42c4f9d5efe2e37a126f818bb9909a3244b40414a75c6aa3e4e1fbd6bc7d519"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/raw/pet-hobbies.json",
+      "bytes": 6038,
+      "sha256": "77d17fef9c993fb358f5a48d6a06150fde00593417fd8a50b271eb0293cd08fe"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/raw/workplace-friend.json",
+      "bytes": 18002,
+      "sha256": "fc5e34f02cfe0b0d595df798545a16f002bab36d37fc774b418f1a603b085794"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/model/original-focused-final.txt",
+      "bytes": 1156,
+      "sha256": "d4628a406021197fa35b32800d9cd2ea3615f749f4a53315f0cc242ba165dbf5"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/model/original-focused-initial-failed.txt",
+      "bytes": 3334,
+      "sha256": "05e2db025b314a6f8c61e6a8df309c15bbdd54f0d5545b944457ad564ebab308"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/model/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/model/scope.md",
+      "bytes": 5214,
+      "sha256": "2607fb2e3af016e0b2a7546b042607505cad4e83dfb15e4098376e984cf121a7"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/astronaut/original-focused-final.txt",
+      "bytes": 1417,
+      "sha256": "73c14e12f9667b3e1464fca61bd0025888cb6ff9dcfec1f93d7008f0b49c5ec8"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/astronaut/original-focused-initial-failed.txt",
+      "bytes": 3256,
+      "sha256": "86a841507afc235ca870d57110e47a97718e0cc403d9dd8f448bc681579617c3"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/astronaut/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/astronaut/scope.md",
+      "bytes": 5725,
+      "sha256": "00237b46c07726a43f40f08fa422674004aedbc11cdd672737982f88083c9751"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/athlete/original-focused-final.txt",
+      "bytes": 763,
+      "sha256": "f011dafb31dc9e636787a4a70ddb27d191510fa00e9ab99beb945749d4dca436"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/athlete/original-focused-initial-failed.txt",
+      "bytes": 26224,
+      "sha256": "74eb05cc2dd36b5ff4403c60c7f0b79b59ea4d8a0eb638a10d04d38745436993"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/athlete/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "friends-editorial-20261020/careers/athlete/scope.md",
+      "bytes": 5787,
+      "sha256": "c44bd97650d67e83474a159eb6da13c77384d8291042fa3053267790b3f2faad"
+    },
+    {
+      "file": "friends-editorial-20261020/editorial/scope.md",
+      "bytes": 6815,
+      "sha256": "6f6a89e4298d86631c76606a64aae7fea7fd63cf29b2831d54f291808191db00"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/pre-registration-git-input-proof.json",
+      "bytes": 2797,
+      "sha256": "a06802bb67e79d5b0e813aef274f83a0f74e8d80d4ef980afa802da33259cad5"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/pre-registration-child-process-diagnostic.json",
+      "bytes": 1268,
+      "sha256": "a6465e69e4ee2e7b1b5c8cce2c997ecc99e76515c83522f008de4aa260bfb514"
+    },
+    {
+      "file": "friends-editorial-20261020/native/extra-browse.json",
+      "bytes": 9372,
+      "sha256": "adbb238408d39a577a8937cccd13ca9472e97477c98a3ae0f5c67d121f282ad2"
+    },
+    {
+      "file": "friends-editorial-20261020/native/journey-exact.json",
+      "bytes": 23321,
+      "sha256": "5aaf83e978e69f145a49d26506f1f44f9ea1548835b01bc59028a9654213db43"
+    },
+    {
+      "file": "friends-editorial-20261020/native/verifier-output.txt",
+      "bytes": 2717,
+      "sha256": "4a31716ff4564bd5cb54702eee01eceb1efb10cdbc45b30523d5821cfc3d8e8f"
+    },
+    {
+      "file": "friends-editorial-20261020/native/captures-manifest.json",
+      "bytes": 2170,
+      "sha256": "c77215ed82e254a132bf8850603bd318185cc630e81de9f2aab09a8c8fbb42a7"
+    },
+    {
+      "file": "friends-editorial-20261020/native/source-proof.json",
+      "bytes": 32436,
+      "sha256": "898391885e2797b58290bd003ffae21d8ec6f50b1a6b6a49919538eb606e62e8"
+    },
+    {
+      "file": "friends-editorial-20261020/native/accepted-images.json",
+      "bytes": 12840,
+      "sha256": "9360e838c3db2a5658b2792586d5fea12ae40a038bc572d04e5d2c07fc1836c6"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/launcher.png",
+      "bytes": 376165,
+      "sha256": "d0854262d4e47f64e73d00ed2fddb89ab863d7d778912a527adff0b78ab50c3a"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/launcher.xml",
+      "bytes": 16563,
+      "sha256": "4b4d82e74aa765418ad0988cf5910cabe447d11a0702732fdb8bbd1417dad0c3"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/friends.png",
+      "bytes": 39846,
+      "sha256": "55f90e3ea3cf3b0f28e9c908955e014092a91622652befd75912cc12cf07bd44"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/friends.xml",
+      "bytes": 31794,
+      "sha256": "d4f1e27065a8a873494606265a6ae6b5afbf0917535d4cc72a55281220bf98ec"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/morgan-profile.png",
+      "bytes": 55703,
+      "sha256": "856916eee302c4ad34ee9bb81c1b4bd67006bb7aba15b45abd0a2f92fcac2fc6"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/morgan-profile.xml",
+      "bytes": 29865,
+      "sha256": "c0b6b6971e67e1073929558c9165d530cd405d9dcd4293f2a0404954127ac606"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-review-normal.png",
+      "bytes": 57265,
+      "sha256": "a9c0b9654017c39ba991b28e96c440a75c23a9891360cc34a841771c3a91ef6f"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-review-normal.xml",
+      "bytes": 6392,
+      "sha256": "5d55e48870e0fc6c6894459af77052e6acc92ce1c775bfce52526ae0898e60c5"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-review-large.png",
+      "bytes": 55653,
+      "sha256": "1805f95125fbf2a679f8e7186dd0886b2b9e559fc67870c7933557857517fd47"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-review-large.xml",
+      "bytes": 6391,
+      "sha256": "3a7fc366596c9f799c2b249315d026b0f993e819c2e35e18a129b76093a638ee"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-result-large.png",
+      "bytes": 57993,
+      "sha256": "a15bac226e51563e68ef9a37ab8685b3c501b47779eab78c75993c7cdbaa3bce"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-result-large.xml",
+      "bytes": 7933,
+      "sha256": "04c1cd2c71e9e11388a186b10cf71bd3c8447cb5f2685d7a9a670017df364c28"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-cold-result-normal.png",
+      "bytes": 68025,
+      "sha256": "085d84f50dfa659726f9b8408da150543769ebca7978694bd99885885268f2c4"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-cold-result-normal.xml",
+      "bytes": 7934,
+      "sha256": "66ef898ba3f27bc86a4677169d96c682da0efbbc68fed690b5d56d9485cb52bd"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-ack.png",
+      "bytes": 77051,
+      "sha256": "3f9769cda644161934eebaa1dc49f66c1d2ad9af47bbc7f3f36760deaf408094"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-ack.xml",
+      "bytes": 40471,
+      "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-cold-final.png",
+      "bytes": 77057,
+      "sha256": "2e2081623b0e5a3eefbf00cbf695776556e0bd85109c38e2ce9b46316218d74a"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/best-friend-cold-final.xml",
+      "bytes": 40471,
+      "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/profile.png",
+      "bytes": 80464,
+      "sha256": "4b0c15fbecc3bd4b23d63483e055ca589c17faa0e84e9426ba575f13ef7265dd"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/profile.xml",
+      "bytes": 35911,
+      "sha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/life-menu.png",
+      "bytes": 48586,
+      "sha256": "414a301259c8dd8bcc31aa22d3df417373c36bca1da0666a8b7a169750d2a981"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/life-menu.xml",
+      "bytes": 9580,
+      "sha256": "f209b29c4be92b9f4cfeb9b8cc55d5d56db6e9ca76837b1c0a1c8b47fd6fd61d"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/named-continue-normal.png",
+      "bytes": 50007,
+      "sha256": "d836468c0d5e3cd1f7569f7f25c48fd68114f9f79c9106d8a6a71173a6ee27e3"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/named-continue-normal.xml",
+      "bytes": 21424,
+      "sha256": "bffe13a0553020c4f61a7ba7413c8ae74c22c3639be781db0e73c3c5f3d91e9e"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-normal.png",
+      "bytes": 56809,
+      "sha256": "d1dd3c40a35258a0021ecd3620d941de9d173347f9538a88f083af13d43ecc90"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-normal.xml",
+      "bytes": 35447,
+      "sha256": "67295be5b3544d9db1831195f44d4551759200b7459f5f321b5021f0ea6cf6b3"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-normal-full-stats.png",
+      "bytes": 54411,
+      "sha256": "d5fef1c8d9ddf6a025b6fcf5a6acba9b5fbc2f8af51beba350679fd049496bac"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-normal-full-stats.xml",
+      "bytes": 36852,
+      "sha256": "e14e613ffd5b22bdc354ea19a1aba8096c6b6e57c29d13cd5109cdcd370b41bc"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/named-continue-large.png",
+      "bytes": 59235,
+      "sha256": "53cc78b70e1b0855d561fa0e17635caa5ef5b93ffefcd2d49985a5b37b2d4aad"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/named-continue-large.xml",
+      "bytes": 19716,
+      "sha256": "341f472ea974791862b0e228d927ca5f66bc50bb67abf23403b94aa2baf179d2"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-large.png",
+      "bytes": 68988,
+      "sha256": "a7db7392188e54d79f63d2f479e264eb24070bb49d0d3f7da7200590d9593f5a"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-large.xml",
+      "bytes": 32200,
+      "sha256": "6d25120ac0666297c6cd90a16560fcf93c49bafa20812706e62e8edb26185c7f"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-large-full-stats.png",
+      "bytes": 68146,
+      "sha256": "e98f01332e77c9425067108411875c3ead4dece6f97bd2e10fd63f72d85c0a46"
+    },
+    {
+      "file": "friends-editorial-20261020/native/images/statistics-large-full-stats.xml",
+      "bytes": 34435,
+      "sha256": "00ae9bec9db385d8e6fe98d1ae718982f2b726396bf76f183f2b2f1348c3c14d"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedRegression-receipt.json",
+      "bytes": 1094,
+      "sha256": "6a38459fcedc94da5840b17a447eab7b8234168861e062eae6891f7d01159d3b"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedRegression.txt",
+      "bytes": 14103,
+      "sha256": "2fc3921f91e740960e140001e56d917d32ae8a353bba7a896159e2ca9f56a44c"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedFocused-receipt.json",
+      "bytes": 1322,
+      "sha256": "e4efc5ee6631330fc09dd1ac8a1d1700ec4bd01f6c7d1d03de5cb539b82fa305"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedFocused.txt",
+      "bytes": 5609,
+      "sha256": "71aea6de8934a3ffbcea35d5303b66ce2504dc6abdf0c5a4adeba70e3aae0178"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedTypes-receipt.json",
+      "bytes": 1051,
+      "sha256": "968e075f370053b27ae01bf1056ad84786747de4c8201f6f12841b9bfa393294"
+    },
+    {
+      "file": "friends-editorial-20261020/checks/acceptedTypes.txt",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/raw.json",
+      "bytes": 258093,
+      "sha256": "66e8687ce51eacf58a70aed9010e6228ef09c466c40023d6dddbf2a825541202"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/stderr.txt",
+      "bytes": 481,
+      "sha256": "1e7cc2812992121c8b8030f52109dadc6081cf332c1ba8c36df6d6cddbd49cfb"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/receipt.json",
+      "bytes": 1796,
+      "sha256": "e9377491ef2a6b80a1541f0a61b7c6ed7ad66c3218f91a75791f93c7e678b077"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/summary.json",
+      "bytes": 21668,
+      "sha256": "99495aaed858ffc99155242b302dd131bc6ac43e8cbab209908c14b631260a02"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/summary.md",
+      "bytes": 2236,
+      "sha256": "3559420d16b27b5db6218bb4eeeb6f53b34464dc380244d5daa1dcbf7bb233a3"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/plan.json",
+      "bytes": 4922,
+      "sha256": "59e9f29edf48fc731acd2bc926b911e4515a5d589c69987d8d7b1b8f4cbc7b8f"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/input-pins.json",
+      "bytes": 3243,
+      "sha256": "5c84adc74da4e232f0e1351e4bca8c5b6208c65ab36dccd5e2a399d0745f98c4"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/quiescence.json",
+      "bytes": 3728,
+      "sha256": "2d9db11d232fb29bf94fb25bb3ce9018bb4cef22cec1580eadfddb8c056fe3c5"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/readiness.json",
+      "bytes": 1996,
+      "sha256": "31001f5c987f8fd6cdd138ebba29cee7f808d76e4731fc9ae2d745b24fbb90c3"
+    },
+    {
+      "file": "friends-editorial-20261020/actions/owned-processes.json",
+      "bytes": 1271,
+      "sha256": "ff3283014a4fb7e7a44c21024f87d963f0094e88a488394b93eee17cc7ee9960"
+    },
+    {
+      "file": "friends-editorial-20261020/publication-inputs.json",
+      "bytes": 33147,
+      "sha256": "467bb9068d2960e39a29289e699c13d4bc6a24946aed85f1dd72a36baaea2d6c"
+    },
+    {
+      "file": "friends-editorial-20261020/publish.cjs.txt",
+      "bytes": 34600,
+      "sha256": "9f7ebd4e51ef503b48757809433abefa1bbc7eea6c36ca8f7d5e6e0d193666af"
+    }
+  ],
+  "acceptance": {
+    "editorial": {
+      "producerTestCommit": "d3840aaa403275f89808a932b00b844b2ea9015b",
+      "originalRuntimeBaseCommit": "1a90884119b2c4f8989d13f044f8e69101169b11",
+      "currentAcceptedValidation": {
+        "file": "friends-editorial-20261020/checks/acceptedFocused.txt",
+        "bytes": 5609,
+        "sha256": "71aea6de8934a3ffbcea35d5303b66ce2504dc6abdf0c5a4adeba70e3aae0178"
+      },
+      "summary": {
+        "file": "friends-editorial-20261020/editorial/summary.json",
+        "bytes": 5207,
+        "sha256": "24f65336c3bd3ca2d81f5590a8ec8ad6563039899be808c10070d2ddc59679a1"
+      },
+      "scopeDocument": {
+        "file": "friends-editorial-20261020/editorial/scope.md",
+        "bytes": 6815,
+        "sha256": "6f6a89e4298d86631c76606a64aae7fea7fd63cf29b2831d54f291808191db00"
+      },
+      "originalFocused": {
+        "file": "friends-editorial-20261020/editorial/original-focused.txt",
+        "bytes": 3996,
+        "sha256": "897f6fd2c0b789516da4b8ab6117a30abb0d38083fbc22709fd526f8b395b78f"
+      },
+      "originalTypes": {
+        "file": "friends-editorial-20261020/editorial/original-types.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rawReports": [
+        {
+          "name": "creator-studio",
+          "raw": {
+            "file": "friends-editorial-20261020/editorial/raw/creator-studio.json",
+            "bytes": 18949,
+            "sha256": "60d87d7f8d3d491697ce8330e2d24ff36ea68526533c13979fd42bebd477e24a"
+          }
+        },
+        {
+          "name": "family-trip",
+          "raw": {
+            "file": "friends-editorial-20261020/editorial/raw/family-trip.json",
+            "bytes": 11403,
+            "sha256": "63e24c67abb5dad09c2839b971413fbc619a08ef9342c3ad5ad62a7f54fe9b3c"
+          }
+        },
+        {
+          "name": "owned-home",
+          "raw": {
+            "file": "friends-editorial-20261020/editorial/raw/owned-home.json",
+            "bytes": 25442,
+            "sha256": "e42c4f9d5efe2e37a126f818bb9909a3244b40414a75c6aa3e4e1fbd6bc7d519"
+          }
+        },
+        {
+          "name": "pet-hobbies",
+          "raw": {
+            "file": "friends-editorial-20261020/editorial/raw/pet-hobbies.json",
+            "bytes": 6038,
+            "sha256": "77d17fef9c993fb358f5a48d6a06150fde00593417fd8a50b271eb0293cd08fe"
+          }
+        },
+        {
+          "name": "workplace-friend",
+          "raw": {
+            "file": "friends-editorial-20261020/editorial/raw/workplace-friend.json",
+            "bytes": 18002,
+            "sha256": "fc5e34f02cfe0b0d595df798545a16f002bab36d37fc774b418f1a603b085794"
+          }
+        }
+      ],
+      "counts": {
+        "cases": 5,
+        "newAnnualFrames": 15,
+        "ordinaryCommands": 86,
+        "decisions": 23,
+        "catalogueChoices": 13,
+        "systemChoices": 10,
+        "productionCodecChecks": 98,
+        "distinctCaseRevisions": 72,
+        "wholeCanonicalCommandReplays": 5
+      },
+      "observedOptionalContexts": [
+        "child",
+        "friend",
+        "home",
+        "workplace"
+      ],
+      "unselectedOptionalContexts": [
+        "partner",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "scope": "Five unchanged genuine-archive pure-engine continuations and complete production-codec/replay checks; no new natural seeds, forced templates, full-life SQLite/native, all250/750 or all-context coverage. Original1a producer logs and current accepted focused25/4 retain distinct source/run scopes."
+    },
+    "careers": {
+      "paths": [
+        {
+          "name": "model",
+          "originalSourceBase": "e938dbe7d2f949cd9acc5c1dabc16b3f34d02434",
+          "scopeDocument": {
+            "file": "friends-editorial-20261020/careers/model/scope.md",
+            "bytes": 5214,
+            "sha256": "2607fb2e3af016e0b2a7546b042607505cad4e83dfb15e4098376e984cf121a7"
+          },
+          "originalFocusedFinal": {
+            "file": "friends-editorial-20261020/careers/model/original-focused-final.txt",
+            "bytes": 1156,
+            "sha256": "d4628a406021197fa35b32800d9cd2ea3615f749f4a53315f0cc242ba165dbf5"
+          },
+          "initialFailedDiagnostic": {
+            "file": "friends-editorial-20261020/careers/model/original-focused-initial-failed.txt",
+            "bytes": 3334,
+            "sha256": "05e2db025b314a6f8c61e6a8df309c15bbdd54f0d5545b944457ad564ebab308"
+          },
+          "originalAffectedTypes": {
+            "file": "friends-editorial-20261020/careers/model/original-types.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "name": "astronaut",
+          "originalSourceBase": "e938dbe7d2f949cd9acc5c1dabc16b3f34d02434",
+          "scopeDocument": {
+            "file": "friends-editorial-20261020/careers/astronaut/scope.md",
+            "bytes": 5725,
+            "sha256": "00237b46c07726a43f40f08fa422674004aedbc11cdd672737982f88083c9751"
+          },
+          "originalFocusedFinal": {
+            "file": "friends-editorial-20261020/careers/astronaut/original-focused-final.txt",
+            "bytes": 1417,
+            "sha256": "73c14e12f9667b3e1464fca61bd0025888cb6ff9dcfec1f93d7008f0b49c5ec8"
+          },
+          "initialFailedDiagnostic": {
+            "file": "friends-editorial-20261020/careers/astronaut/original-focused-initial-failed.txt",
+            "bytes": 3256,
+            "sha256": "86a841507afc235ca870d57110e47a97718e0cc403d9dd8f448bc681579617c3"
+          },
+          "originalAffectedTypes": {
+            "file": "friends-editorial-20261020/careers/astronaut/original-types.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "name": "athlete",
+          "originalSourceBase": "e938dbe7d2f949cd9acc5c1dabc16b3f34d02434",
+          "scopeDocument": {
+            "file": "friends-editorial-20261020/careers/athlete/scope.md",
+            "bytes": 5787,
+            "sha256": "c44bd97650d67e83474a159eb6da13c77384d8291042fa3053267790b3f2faad"
+          },
+          "originalFocusedFinal": {
+            "file": "friends-editorial-20261020/careers/athlete/original-focused-final.txt",
+            "bytes": 763,
+            "sha256": "f011dafb31dc9e636787a4a70ddb27d191510fa00e9ab99beb945749d4dca436"
+          },
+          "initialFailedDiagnostic": {
+            "file": "friends-editorial-20261020/careers/athlete/original-focused-initial-failed.txt",
+            "bytes": 26224,
+            "sha256": "74eb05cc2dd36b5ff4403c60c7f0b79b59ea4d8a0eb638a10d04d38745436993"
+          },
+          "originalAffectedTypes": {
+            "file": "friends-editorial-20261020/careers/athlete/original-types.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      ],
+      "currentC36Validation": {
+        "file": "friends-editorial-20261020/checks/acceptedRegression.txt",
+        "bytes": 14103,
+        "sha256": "2fc3921f91e740960e140001e56d917d32ae8a353bba7a896159e2ca9f56a44c"
+      },
+      "scope": "Three bounded actual archived-context store/UI/file-SQLite progression and durable exit checks. Model completes a three-period project before exit; Athlete leaves after one completed twelve-period season with no observed rejection/award; Astronaut records first rejection, training/exam, one six-period mission and30/60-month exit. Original producer fixtures include explicitly arranged historical backgrounds; no natural-birth/newseed/allcareer/allfailure/native claim. Producer archives do not contain historical command receipts/branch entries, so no nonempty old producer-receipt preservation is claimed; original snapshots/metadata and inactive current/backup are preserved. Fresh accepted C36 gates establish current-source behavior; earlier author logs retain their own e938 scope."
+    }
+  }
+}

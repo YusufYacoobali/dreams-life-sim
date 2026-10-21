@@ -12,18 +12,34 @@ Time Machine breadth and history-storage optimisation. Existing implemented
 features/data remain intact. Continue the full gameplay, content, visual and
 release plan; this update takes precedence over older file-feature priorities.
 
-## Current verified checkpoint — 20 October
+## Current verified checkpoint — 21 October
 
-World34/engine35/content10/reader14 passes2,282tests/169suites, strict types,
-both Hermes exports, the same120annual seeds and scoped Android action/cold
-checks, including exact original history and70warm samples with zero full unpack.
-Profile/Statistics/Finances, motion/optional feedback, voluntary school withdrawal
-and actual hobby introductions are integrated. Overall production is about65%;
-[the current evidence and remaining limits](../verification/opening-completion-20261020.json)
-and [current workstreams](../HANDOFF.md) take precedence over historical milestones.
-Continue independent family/terminal/story/health/best-friend and career acceptance
-work with coordinated integration, testing and commits. Broad balance, country,
-visual/accessibility and device release acceptance remain open.
+Current World35/engine36/content11/reader15/v4 integrates Best Friends, factual
+family/death/medical/name fixes, career-exit acceptance and Saved Lives/Statistics/
+portrait polish. The accepted regression passes2,355tests/185suites in1,386.145s;
+strict app/all-test types, runtime-equivalent Hermes exports, same120annual seeds
+in651.254s and actual Android24/Expo Go friendship result139/cold/ack140/finalcold
+checks pass. All70 measured warm action samples have zero full checkpoint unpack.
+Original other lives/history remain exact. [Source, raw checks and precise limits](../verification/friends-editorial-20261020.json).
+Overall remains approximately65%; onboarding65%, Life/early gameplay65% and
+family85% are effort estimates. Five next gameplay gaps are being implemented
+and reviewed in parallel; their combined migration and acceptance remain open.
+Country/balance/editorial/visual/accessibility and physical/standalone/iOS release
+gates remain open. Further file/history breadth stays parked.
+
+Continue the complete production plan with independent worktrees and one
+coordinator for integration, quality gates and commits. The next batch combines
+reviewed teen first relationships, event rarity, a two-year childhood callback,
+university applications/factual study history and bounded adult NPC separation.
+The coordinator owns the World36/engine37/content12/reader16 union and exact
+old-data migration; these future features are not yet accepted in C36. The
+[production gap audit](../PRODUCTION_GAP_AUDIT_C36.md) distinguishes actual missing
+mechanics from remaining acceptance. A country audit also identified an Italy
+age18 work/school conflict; its bounded reproduction/fix is in progress. Continue
+country-rule verification, balance, unobserved story contexts, visual/accessibility
+and physical/standalone/iOS release gates. Further file/history breadth stays
+parked. Commit AND push at safe points at least every two hours; a checkpoint
+does not end the authorised task.
 
 ## Earlier implementation milestones (historical sources)
 

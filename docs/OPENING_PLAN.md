@@ -1,16 +1,17 @@
 # Opening experience: priority and completion estimates
 
-Current World34/engine35/content10/reader14 integrates truthful Profile,
-Statistics, annual Finances, independent motion/feedback settings, durable
-Health/Exercise reviews, actual hobby introductions and voluntary secondary
-withdrawal. The fresh final regression passes2,282tests/169suites; strict types,
-both Hermes exports, same120annual seeds, criminalv2 and varied-choice12-country
-policies,70warm-zero-unpack samples and scoped Android cold actions pass.
-Normal/130% opening review and keyboard checks preserve every old life/history.
-[Current source, checks and exact limits](verification/opening-completion-20261020.json).
-Overall is approximately65%, onboarding65%, Life/early gameplay65%; full device,
-visual/accessibility, country/balance and remaining editorial acceptance stay open.
-The new isolated fixes listed in HANDOFF are ready for the next coordinated batch.
+Current World35/engine36/content11/reader15/v4 integrates Best Friends, factual
+family/death/medical/name fixes, career-exit acceptance and Saved Lives/Statistics/
+portrait polish. The accepted regression passes2,355tests/185suites in1,386.145s;
+strict app/all-test types, runtime-equivalent Hermes exports, same120annual seeds
+in651.254s and actual Android24/Expo Go friendship result139/cold/ack140/finalcold
+checks pass. All70 measured warm action samples have zero full checkpoint unpack.
+Original other lives/history remain exact. [Source, raw checks and precise limits](verification/friends-editorial-20261020.json).
+Overall remains approximately65%; onboarding65%, Life/early gameplay65% and
+family85% are effort estimates. Five next gameplay gaps are being implemented
+and reviewed in parallel; their combined migration and acceptance remain open.
+Country/balance/editorial/visual/accessibility and physical/standalone/iOS release
+gates remain open. Further file/history breadth stays parked.
 
 The following opening milestones retain their own historical source/count scope.
 
@@ -347,7 +348,7 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World34/engine35/content10/reader14 evidence is linked at the top. The
+Current World35/engine36/content11/reader15 evidence is linked at the top. The
 coordinator's reviewed current estimate is65% overall; onboarding
 65%, Life/early gameplay65% and family85%.
 Earlier milestone prose retains its own source and historical estimates.
@@ -399,7 +400,7 @@ mechanics tests does not establish visual fidelity or device readiness.
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
 | Travel and emigration | 80% | Country verification and broader scenarios/device acceptance |
 | Pets, hobbies and entertainment | 65% | Further leisure depth, balance and broader device review |
-| Situational stories | About75% of content acceptance | 250/250minimum source situations; remaining editorial, balance and integrated coverage |
+| Situational stories | About75% of content acceptance | 250/250minimum source situations in accepted C36; remaining editorial, balance and integrated coverage |
 | Achievements and challenges | 60% | Challenge/reward depth and broader release review |
 | Visual polish and accessibility | 55% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
@@ -411,18 +412,19 @@ work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Continue the complete production plan. Independent worktrees already contain
-reviewed late-spouse FamilyTree, factual death biography, new-story name labels,
-medical context/first-diagnosis fixes and genuine career-exit acceptance; Best
-Friends is independently approved at World35/engine36/content11/reader15 and
-awaits coordinated integration. The editorial driver is also ready. Integrate
-these existing changes, resolve shared version expectations, then run consolidated
-source/type/regression/lifetime/export/native/performance gates. Do not reimplement
-them or wait on one workstream before starting independent acceptance work.
-Broader country verification, balance, unobserved story contexts, visual/accessibility
-and physical/standalone/iOS release acceptance remain open. Further file/history
-breadth stays parked. Commit AND push at safe points at least every two hours;
-a routine checkpoint does not end the authorised task.
+Continue the complete production plan with independent worktrees and one
+coordinator for integration, quality gates and commits. The next batch combines
+reviewed teen first relationships, event rarity, a two-year childhood callback,
+university applications/factual study history and bounded adult NPC separation.
+The coordinator owns the World36/engine37/content12/reader16 union and exact
+old-data migration; these future features are not yet accepted in C36. The
+[production gap audit](PRODUCTION_GAP_AUDIT_C36.md) distinguishes actual missing
+mechanics from remaining acceptance. A country audit also identified an Italy
+age18 work/school conflict; its bounded reproduction/fix is in progress. Continue
+country-rule verification, balance, unobserved story contexts, visual/accessibility
+and physical/standalone/iOS release gates. Further file/history breadth stays
+parked. Commit AND push at safe points at least every two hours; a checkpoint
+does not end the authorised task.
 
 The latest reported regression takes precedence: ordinary buttons must respond
 smoothly without “Saving” replacing unrelated subtitles or loading every button.

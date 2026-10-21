@@ -1,0 +1,50 @@
+{
+  "format": "dreams-c36-best-friend-native-captures-v1",
+  "complete": true,
+  "scope": "Actual coordinator six separately copied closed native SQLite captures: reader14\u219215 boot, normal review cancellation, one genuine Morgan Bennett proposal139 at130%text, actual force-stop/restart saved-result139 atnormaltext, separate acknowledgement140 and actual force-stop/restart final140. Original pending manifest remains unchanged. Images and acceptance separately reviewed by coordinator; no simulated capture substituted.",
+  "planSha256": "aed1555240cab6f3b8862df88d92ac36d83ceb5215823b70a3efac7a96e25a1c",
+  "runtimeSourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "runtimeSourceProof": {
+    "file": "/tmp/dreams-friends-editorial-native-source-proof.json",
+    "sha256": "898391885e2797b58290bd003ffae21d8ec6f50b1a6b6a49919538eb606e62e8"
+  },
+  "phases": [
+    {
+      "name": "boot138",
+      "database": "/tmp/dreams-friends-editorial-native-boot138-db/dreams.db"
+    },
+    {
+      "name": "review138",
+      "database": "/tmp/dreams-friends-editorial-native-review138-db/dreams.db"
+    },
+    {
+      "name": "proposal139",
+      "database": "/tmp/dreams-friends-editorial-native-proposal139-db/dreams.db"
+    },
+    {
+      "name": "cold-proposal139",
+      "database": "/tmp/dreams-friends-editorial-native-cold-proposal139-db/dreams.db"
+    },
+    {
+      "name": "ack140",
+      "database": "/tmp/dreams-friends-editorial-native-ack140-db/dreams.db"
+    },
+    {
+      "name": "cold-final140",
+      "database": "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db"
+    }
+  ],
+  "closedAt": "2026-10-20T23:52:03.216331+00:00",
+  "acceptedSourceBridge": {
+    "file": "/tmp/dreams-friends-editorial-accepted-source-bridge.json",
+    "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d"
+  },
+  "executionReferences": {
+    "boot138": "root unified53486 CLOSED0",
+    "review138": "root unified29662 CLOSED0",
+    "proposal139": "root unified69851 CLOSED0",
+    "cold-proposal139": "root unified40453 CLOSED0",
+    "ack140": "root unified52045 CLOSED0",
+    "cold-final140": "root unified52045 CLOSED0"
+  }
+}

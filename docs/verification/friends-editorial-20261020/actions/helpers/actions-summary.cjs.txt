@@ -1,0 +1,121 @@
+// /tmp-only preparation/publication helper. It never executes the benchmark.
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict'), { createHash } = require('node:crypto');
+const base = '/tmp/dreams-friends-editorial-', sourceFile = base + 'accepted-source.json', inputFile = base + 'actions-input-pins.json';
+const planFile = base + 'actions-plan.json', receiptFile = base + 'actions-receipt.json';
+const rawFile = base + 'actions.json', progressFile = base + 'actions.stderr.txt';
+const summaryFile = base + 'actions-summary.json', shortFile = base + 'actions-summary-short.md';
+const commit = JSON.parse(fs.readFileSync(sourceFile, 'utf8')).commit, driverHash = '19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9';
+const read = file => fs.readFileSync(file, 'utf8'), json = file => JSON.parse(read(file));
+const hash = value => createHash('sha256').update(value).digest('hex');
+const fileRef = file => { const data = fs.readFileSync(file); return { file, bytes: data.length, sha256: hash(data) }; };
+const pins = json(sourceFile), inputPins = json(inputFile), root = pins.root;
+assert.match(commit, /^[a-f0-9]{40}$/); assert.equal(pins.gameSourceHash, '24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5'); assert.equal(pins.combinedGamePersistenceSourceHash, '34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1'); assert.equal(pins.commit, commit); assert.equal(inputPins.sourceCommit, commit); assert.equal(inputPins.root, root);
+assert.deepEqual(pins.versions, { world: 35, engine: 36, content: 11, database: 15, checkpoint: 'v4' });
+const driver = path.join(root, 'tools/benchmark-actions.cjs');
+assert.equal(pins.source['tools/benchmark-actions.cjs'], driverHash);
+const argv = ['node', 'tools/benchmark-actions.cjs', '--source', root, '--profile', '--population', '--workplaces', '--raises'];
+const command = argv.join(' ') + ' > ' + rawFile + ' 2> ' + progressFile;
+const labels = ['Begin Life', 'First-year choice', 'First-year choice Continue', 'Age-seven callback', 'Age-seven callback Continue', 'Age-30 routine', 'Age-60 routine', '100-known-contact routine', '100-known-contact first Age Up step', '1000-known-contact routine', '1000-known-contact first Age Up step', 'Prepared teen coworker introduction', 'Prepared supervisor feedback', 'Prepared raise request'];
+const commandTypes = [null, 'choose', 'acknowledge', 'choose', 'acknowledge', 'health-routine', 'health-routine', 'health-routine', 'advance', 'health-routine', 'advance', 'meet-coworkers', 'work-feedback', 'request-raise'];
+function sourceHash() {
+  const digest = createHash('sha256');
+  const visit = directory => { for (const entry of fs.readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) visit(file);
+    else if (entry.name.endsWith('.ts')) digest.update(path.relative(root, file)).update('\0').update(fs.readFileSync(file)).update('\0');
+  } };
+  visit(path.join(root, 'src/game')); visit(path.join(root, 'src/persistence')); return digest.digest('hex');
+}
+function verifySource() {
+  assert.equal(hash(fs.readFileSync(driver)), driverHash, 'Changed benchmark driver');
+  assert.equal(sourceHash(), pins.combinedGamePersistenceSourceHash, 'Changed C36 game/persistence source');
+  for (const [file, pin] of Object.entries(pins.source)) assert.equal(hash(fs.readFileSync(path.join(root, file))), pin, 'Changed frozen tracked file: ' + file);
+  for (const input of inputPins.inputs) { const actual = fileRef(path.join(root, input.file)); assert.equal(actual.bytes, input.bytes); assert.equal(actual.sha256, input.sha256, 'Changed benchmark input: ' + input.file); }
+}
+verifySource();
+const scope = 'Unpaired cloud Node/on-disk SQLite diagnostics, one excluded warm-up plus five measured fixed-input trials per case. Resolve+atomic repository commit timing, separately recorded cold-open priming; no React rendering, UI scheduling, native/physical p95 or guaranteed speedup. Population worlds are generated-at-once stress inputs from a genuine age30 checkpoint, not natural/native progression. Prepared workplace worlds continue a genuine saved teen with real commands. Begin Life uses the unchanged driver birth-acknowledged revision save kernel, not the store/UI birth path.';
+const plan = {
+  format: 'dreams-c36-action-measurement-plan-v1', status: 'prepared-only-not-a-measurement-pass', sourceCommit: commit, versions: pins.versions,
+  sourceSnapshot: fileRef(sourceFile), combinedGamePersistenceSourceHash: pins.combinedGamePersistenceSourceHash, driverHash,
+  cwd: root, argv, shellCommand: command, rawFile, stderrFile: progressFile, registeredInputs: inputPins.inputs, helper: fileRef(__filename), registrationHelper: fileRef(base + 'actions-register.cjs'), quiescenceWrapper: fileRef(base + 'actions-run.py'),
+  expected: { cases: 14, labels, measuredTrialsPerCase: 5, measuredWarmSamples: 70, excludedWarmups: 14, totalSuccessfulExecutions: 84, coldCurrentWholeWorldAssertions: 84, coldBackupWholeWorldAssertions: 84, originalBeforeAgeUpPayloadAssertions: 12, deterministicPopulationOutcomes: 4 },
+  verificationBoundary: 'Driver completion/exit0 establishes its cold/current/backup/raw-BeforeAgeUp, deterministic sizes/outcomes and source-before/after assertions. Warm zero full unpack must be checked from all70 measured phase maps by the publisher; the driver itself only records those counters. Counts84/12 are derived from the frozen six-trial loop/two Age Up cases, not extra stored measurement samples.',
+  scope, readyForRootExecutionOnlyAfter: 'Native app stopped; full regression/editorial/other heavy work closed or explicitly paused; record exact quiescence and actual process exit status. Do not overwrite older C34 artifacts.',
+};
+function writeExclusiveOrEqual(file, value) { const output = JSON.stringify(value, null, 2) + '\n'; if (fs.existsSync(file)) assert.equal(read(file), output, 'Refusing to overwrite a different registration: ' + file); else fs.writeFileSync(file, output); }
+if (process.argv[2] === '--verify') { assert.deepEqual(json(planFile), plan, 'Registered source/helper plan changed'); process.stdout.write(JSON.stringify({status:'source-and-inputs-exact',benchmarkExecuted:false,commit,sourceSnapshot:fileRef(sourceFile)})+'\n'); process.exit(0); }
+if (process.argv[2] === '--prepare') {
+  writeExclusiveOrEqual(planFile, plan);
+  const template = { format: 'dreams-c36-action-execution-receipt-v1', status: 'pending', complete: false, exitCode: null, executionReference: null, sourceCommit: commit, cwd: root, argv, stdoutFile: rawFile, stderrFile: progressFile, startedAt: null, finishedAt: null, quiescence: { nativeAppStopped: null, otherHeavyWorkPausedOrClosed: null, statement: null }, note: 'Coordinator fills actual closed-process facts after running the registered command; this pending template is not acceptance.' };
+  const templateFile = base + 'actions-receipt-template.json';
+  writeExclusiveOrEqual(templateFile, template);
+  process.stdout.write(JSON.stringify({ status: 'prepared-only', benchmarkExecuted: false, plan: fileRef(planFile), receiptTemplate: fileRef(templateFile), command }) + '\n');
+  process.exit(0);
+}
+assert.equal(process.argv[2], '--publish', 'Use --prepare, --verify, or --publish [actual-receipt.json] after root execution');
+assert.deepEqual(json(planFile), plan, 'Registration no longer matches frozen source/inputs');
+const receiptPath = process.argv[3] ?? receiptFile, receipt = json(receiptPath);
+assert.equal(receipt.format, 'dreams-c36-action-execution-receipt-v1');
+assert.equal(receipt.status, 'passed'); assert.equal(receipt.complete, true); assert.equal(receipt.exitCode, 0);
+assert.equal(typeof receipt.executionReference, 'string'); assert.ok(receipt.executionReference.trim());
+assert.equal(receipt.sourceCommit, commit); assert.equal(receipt.cwd, root); assert.deepEqual(receipt.argv, argv);
+assert.equal(receipt.stdoutFile, rawFile); assert.equal(receipt.stderrFile, progressFile);
+assert.ok(Number.isFinite(Date.parse(receipt.startedAt)) && Number.isFinite(Date.parse(receipt.finishedAt)) && Date.parse(receipt.finishedAt) >= Date.parse(receipt.startedAt));
+assert.equal(receipt.quiescence.nativeAppStopped, true); assert.equal(receipt.quiescence.otherHeavyWorkPausedOrClosed, true);
+assert.equal(typeof receipt.quiescence.statement, 'string'); assert.ok(receipt.quiescence.statement.trim());
+const quiescenceFile = base + 'actions-quiescence.json', quiet = json(quiescenceFile);
+assert.equal(quiet.format, 'dreams-c36-action-quiescence-v1'); assert.equal(quiet.status, 'passed');
+assert.equal(quiet.benchmarkExitCode, 0); assert.equal(quiet.nativeAppPidCheckEmpty, true); assert.equal(quiet.allOwnedProcessesResumed, true);
+assert.equal(quiet.sourceCommit, commit); assert.equal(quiet.cwd, root); assert.deepEqual(quiet.argv, argv);
+assert.equal(quiet.paused.length, 2); assert.equal(quiet.paused[0].pid, 100274);
+for (const row of quiet.paused) { assert.equal(row.stoppedStateVerified, true); assert.equal(row.resumedStateVerified, true); assert.ok(Date.parse(row.resumedAt) >= Date.parse(row.stoppedAt)); }
+assert.equal(receipt.startedAt, quiet.benchmarkStartedAt); assert.equal(receipt.finishedAt, quiet.benchmarkFinishedAt);
+assert.deepEqual(receipt.quiescenceReceipt, fileRef(quiescenceFile));
+assert.deepEqual(receipt.raw, fileRef(rawFile)); assert.deepEqual(receipt.stderr, fileRef(progressFile));
+assert.deepEqual(quiet.sourceSnapshot, fileRef(sourceFile)); assert.deepEqual(quiet.registeredPlan, fileRef(planFile));
+const owned = json(base + 'actions-owned-processes.json'); assert.equal(owned.targets.length, 2);
+for (let index=0; index<2; index++) { assert.deepEqual(quiet.paused[index].identity, owned.targets[index]); assert.equal(quiet.paused[index].pid, owned.targets[index].pid); }
+assert.equal(quiet.paused[1].identity.role, 'metro'); assert.deepEqual(quiet.ownedProcessManifest, fileRef(base + 'actions-owned-processes.json')); assert.deepEqual(quiet.readiness, fileRef(base + 'actions-ready.json')); assert.deepEqual(quiet.wrapper, fileRef(base + 'actions-run.py')); assert.equal(quiet.sourceAfterExact.status, 'source-and-inputs-exact'); assert.equal(quiet.sourceAfterExact.commit, commit);
+const actual = json(rawFile), progress = read(progressFile);
+assert.equal(actual.sourceHash, pins.combinedGamePersistenceSourceHash); assert.equal(actual.driverHash, driverHash);
+assert.equal(actual.startingRows, 'current format, compression blocks primed by cold open');
+assert.equal(actual.scope, 'five warm cloud Node/on-disk SQLite samples per fixed world; optional population inputs are generated stress setups; every cold world and backup exact; not native');
+assert.deepEqual(actual.results.map(row => row.label), labels);
+const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
+let measured = 0, population = 0;
+const results = actual.results.map((row, index) => {
+  assert.equal(row.command?.type ?? null, commandTypes[index]);
+  assert.match(row.inputSha256, /^[0-9a-f]{64}$/); assert.ok(row.inputBytes > 0);
+  assert.equal(row.trials.length, 5); assert.ok(row.ledgerRows >= 0);
+  const sizes = row.checkpointBytes;
+  assert.ok(sizes.input > 0 && sizes.current > 0 && sizes.backup > 0);
+  assert.equal(sizes.beforeAgeUp, row.command?.type === 'advance' ? sizes.input : 0);
+  for (const trial of row.trials) {
+    measured++;
+    for (const metric of ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']) assert.ok(Number.isFinite(trial[metric]) && trial[metric] >= 0);
+    assert.ok(Math.abs(trial.totalMs - trial.resolveMs - trial.commitMs) < 0.00001);
+    assert.equal(trial.phases.unpackCheckpoint?.calls ?? 0, 0, row.label + ' used full warm unpack');
+    for (const phase of Object.values(trial.phases)) assert.ok(Number.isInteger(phase.calls) && phase.calls > 0 && Number.isFinite(phase.inclusiveMs) && phase.inclusiveMs >= 0);
+  }
+  for (const metric of ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs']) assert.equal(row.medianMs[metric], median(row.trials.map(trial => trial[metric])));
+  assert.ok(progress.split('\n').includes(row.label + ': ' + row.medianMs.totalMs.toFixed(2) + ' ms'), 'Missing completed stderr case: ' + row.label);
+  assert.equal(Boolean(row.setup), [7,8,9,10].includes(index), 'Only the four registered population cases are stress inputs');
+  if (row.setup) {
+    population++;
+    assert.equal(row.setup.scope, 'generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression');
+    assert.equal(row.setup.knownContacts, row.label.startsWith('1000-') ? 1000 : 100);
+    assert.equal(row.setup.totalPeople, row.setup.initialPeople + row.setup.addedContacts);
+    assert.match(row.outcome.worldSha256, /^[0-9a-f]{64}$/);
+    assert.equal(row.outcome.beforeAgeUpSnapshotRetained, row.command.type === 'advance');
+  }
+  return { label: row.label, rawJsonPointer: '/results/' + index, command: row.command, inputSha256: row.inputSha256, inputBytes: row.inputBytes, ledgerRows: row.ledgerRows, checkpointBytes: sizes, medianMs: row.medianMs, measuredWarmSamples: 5, fullWarmUnpackCalls: 0, ...(row.setup ? { setup: row.setup, outcome: row.outcome } : {}) };
+});
+assert.equal(measured, 70); assert.equal(population, 4);
+verifySource();
+const summary = { format: 'dreams-c36-action-measurement-summary-v1', status: 'passed', complete: true, sourceCommit: commit, versions: pins.versions, gameSourceHash: pins.gameSourceHash, combinedGamePersistenceSourceHash: actual.sourceHash, driverHash, node: actual.node, registeredPlan: fileRef(planFile), sourceSnapshot: fileRef(sourceFile), raw: fileRef(rawFile), stderr: fileRef(progressFile), coordinatorExecutionReceipt: { ...fileRef(receiptPath), ...receipt }, fixedInputs: inputPins.inputs, scope, totals: { ...plan.expected, actualMeasuredWarmSamples: measured, fullMeasuredWarmUnpackCalls: 0 }, assertions: { measuredWarmUnpackCountersChecked: true, completeColdCurrentAndBackup: 'Frozen driver asserts deep equality after close/reopen for every one of84 successful executions; no separate native claim.', originalBeforeAgeUp: 'Frozen driver asserts the saved moment payload is exactly the original prior current bytes for both Age Up cases in all six executions each.', deterministicStressOutcomes: 'Frozen driver compares whole outcome facts including canonical worldSHA across all six executions of each of four generated stress cases.', unchangedSourceBeforeAfter: 'Frozen driver rehashes game/persistence TS and itself before success; publication also matches the final frozen source map and registered fixed inputs.' }, results };
+writeExclusiveOrEqual(summaryFile, summary);
+const lines = ['# C36 fixed-world action diagnostics', '', 'Actual serial root run on `' + commit + '`; World35 /engine36 /content11 /configured reader15. All70 measured warm samples have zero full checkpoint unpack. Completed driver assertions cover whole cold current/backup worlds and original Before Age Up payloads. These are cloud Node/SQLite diagnostics; five-sample unpaired medians do not establish UI/native/physical p95 or guaranteed speedup.', '', '| Fixed input/action | Total median ms | Resolve ms | Commit ms | Cold-open priming ms |', '| --- | ---: | ---: | ---: | ---: |'];
+for (const row of results) lines.push('| ' + row.label + ' | ' + ['totalMs', 'resolveMs', 'commitMs', 'coldOpenMs'].map(metric => row.medianMs[metric].toFixed(2)).join(' | ') + ' |');
+lines.push('', 'The100/1000-contact worlds are generated-at-once stress inputs. Their Age Up cases cover only the actual first step/months/stage recorded in the raw output. Prepared workplace inputs continue a genuine saved teen through ordinary commands. Begin Life times the unchanged driver save kernel, without the store/UI path.', '', 'Raw `' + rawFile + '` SHA256 `' + summary.raw.sha256 + '`. Driver SHA256 `' + driverHash + '`. Source `' + sourceFile + '` SHA256 `' + summary.sourceSnapshot.sha256 + '`. Exact actual execution/quiescence: `' + receiptPath + '` SHA256 `' + summary.coordinatorExecutionReceipt.sha256 + '`.', '');
+if (fs.existsSync(shortFile)) assert.equal(read(shortFile), lines.join('\n')); else fs.writeFileSync(shortFile, lines.join('\n'), {flag:'wx'});
+process.stdout.write(JSON.stringify({ status: 'passed', summary: fileRef(summaryFile), short: fileRef(shortFile), measuredWarmSamples: measured, fullWarmUnpackCalls: 0 }) + '\n');

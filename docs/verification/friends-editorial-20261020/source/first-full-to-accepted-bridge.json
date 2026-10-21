@@ -1,0 +1,19 @@
+{
+  "format": "dreams-c36-accepted-source-bridge-v1",
+  "firstFullSourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "acceptedSourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "firstFullPinnedFiles": 607,
+  "acceptedPinnedFiles": 610,
+  "changed": [
+    "tests/game/entrepreneur-policy.test.ts"
+  ],
+  "added": [
+    "tests/game/editorial-context-acceptance.test.ts",
+    "tests/ui/astronaut-career-acceptance-flow.test.tsx",
+    "tests/ui/athlete-career-acceptance.test.tsx"
+  ],
+  "appRuntimeAssetsConfigsAndOldFixturesExact": true,
+  "gameSourceHash": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+  "combinedGamePersistenceSourceHash": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+  "scope": "Correction of stale historical policy assertion and three independently approved additional acceptance tests. No runtime/game/persistence/asset/configuration/oldfixture bytes differ. Fresh accepted full regression must still run; annual120, Hermes mapped app/src and actual native6f retain their observed source scope."
+}

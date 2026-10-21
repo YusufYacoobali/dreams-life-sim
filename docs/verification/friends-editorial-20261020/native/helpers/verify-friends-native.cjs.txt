@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+'use strict';
+
+// Verify explicit coordinator captures. No engine module, SQL writer or native API.
+const h = require('./friends-native-support.cjs');
+const { fs, path, assert, hash, readJSON, fileProof, rowsHash, argumentsFor, verifySource, toolsProof, runtime, capture, assertStableCapture, selectedLife, assertBaseline, writeJSON } = h;
+const usage = 'node tools/verify-friends-native.cjs --plan /tmp/FROZEN-plan.json --captures /tmp/EXPLICIT-captures.json --output /tmp/NEW-result.json [--source /ABS/FROZEN/SOURCE]';
+if (process.argv.includes('--help')) { console.log(usage); process.exit(0); }
+const options = argumentsFor(process.argv.slice(2), ['--plan', '--captures', '--output', '--source'], usage);
+assert(options['--plan'] && options['--captures'], usage);
+const plan = readJSON(options['--plan']), manifest = readJSON(options['--captures']);
+assert.equal(plan.format, 'dreams-c36-best-friend-native-plan-v1'); assert.equal(plan.status, 'expected-only-not-native-acceptance'); assert.equal(plan.complete, false);
+assert.equal(plan.engineCommandsProjected, 2); assert.equal(plan.proposalAttempts, 1); assert.equal(plan.nativeCommandsExecuted, 0);
+assert.deepEqual(plan.requiredNativePhases, h.phases); assert.equal(plan.inputAllEightRawTablesExact, true); assert.equal(plan.inputDatabaseAndWalBytesExact, true);
+assert.equal(manifest.format, 'dreams-c36-best-friend-native-captures-v1'); assert.equal(manifest.complete, true, 'Coordinator must explicitly close the capture manifest');
+assert.equal(manifest.planSha256, fileProof(options['--plan']).sha256, 'Capture manifest must bind the exact projection');
+assert.deepEqual(manifest.phases.map(row => row.name), h.phases.map(row => row.name), 'Require every planned actual phase in exact order, with no inferred captures');
+assert.equal(new Set(manifest.phases.map(row => row.database)).size, h.phases.length, 'Use separately copied actual captures');
+for (const row of manifest.phases) { assert(path.isAbsolute(row.database) && fs.existsSync(row.database), 'Missing explicit capture: ' + row.name); assert.notEqual(path.resolve(row.database), path.resolve(plan.input.dbPath), 'Baseline is not a native capture'); }
+const source = options['--source'] ?? plan.source.root;
+const sourceBefore = verifySource(source, plan.source.before.pins.file); assert.deepEqual(sourceBefore, plan.source.before);
+const toolsBefore = toolsProof(); assert.deepEqual(toolsBefore, plan.source.tools, 'Use exactly the projected verifier helpers');
+const game = runtime(source), serialize = value => JSON.parse(JSON.stringify(value, game.moneyJSON));
+const baseline = capture(plan.input.dbPath); assertBaseline(baseline); assert.deepEqual(baseline.hashes, plan.input.tables); assert.deepEqual(baseline.files, plan.input.files);
+const initial = selectedLife(baseline), lifeId = plan.input.activeLife; assert.equal(initial.id, lifeId); assert.equal(hash(initial.payload), plan.input.rawNiaPayloadSha256);
+const oldReceipts = new Map(baseline.rows.receipts.map(row => [row.life_id + '\0' + row.command_id, JSON.stringify(row)]));
+assert.deepEqual(plan.trace.map(row => row.command.type), ['propose-best-friendship', 'acknowledge']);
+const receipts = plan.trace.map((step, index) => ({ life_id: lifeId, command_id: 'revision:' + (138 + index) + ':' + step.command.type, revision: 139 + index }));
+const result = { format: 'dreams-c36-best-friend-native-verification-v1', status: 'passed', complete: true,
+  scope: 'Read-only equality verification of all six coordinator-supplied native SQLite captures against the fixed actual-C35-Nia138 projection. This verifier performs no engine commands, SQL writes, native input, simulation or visual acceptance. Native provenance, actual app cold stops/restarts, visible controls and personally reviewed PNG/XML belong to the coordinator.',
+  source: { root: source, before: sourceBefore, versions: plan.source.versions }, projection: fileProof(options['--plan']), capturesManifest: fileProof(options['--captures']), tools: toolsBefore,
+  baseline: { file: baseline.file, reader: baseline.reader, files: baseline.files, tables: baseline.hashes, revision: 138 },
+  readerMigration: { from: 14, to: 15, allEightTablesExactAtBoot: true, noEagerPayloadRewrite: true }, phases: [] };
+const observed = new Map(), readCaptures = []; let previousAction = initial, commandCount = 0;
+for (let index = 0; index < h.phases.length; index++) {
+  const spec = h.phases[index], saved = capture(manifest.phases[index].database), label = spec.name;
+  readCaptures.push(saved); assert.equal(saved.reader, 15, label + ': future reader marker');
+  const actual = selectedLife(saved); assert.equal(actual.id, lifeId, label + ': actual selected life'); assert.equal(actual.revision, spec.revision);
+  assert.equal(saved.rows.lives.length, 7); assert.equal(saved.rows.backups.length, 7);
+  if (!spec.commands) assert.deepEqual(saved.hashes, baseline.hashes, label + ': all8 raw exact, metadata-only migration and read-only browsing');
+  for (const table of ['preferences', 'snapshots', 'snapshot_metadata', 'branches', 'restore_receipts']) assert.equal(rowsHash(saved.rows[table]), rowsHash(baseline.rows[table]), label + ': unchanged full ' + table);
+  for (const table of ['lives', 'backups']) {
+    const key = table === 'lives' ? 'id' : 'life_id';
+    const others = saved.rows[table].filter(row => row[key] !== lifeId), original = baseline.rows[table].filter(row => row[key] !== lifeId);
+    assert.equal(others.length, 6); assert.equal(rowsHash(others), rowsHash(original), label + ': six other original ' + table);
+  }
+  const old = saved.rows.receipts.filter(row => oldReceipts.has(row.life_id + '\0' + row.command_id)); assert.equal(old.length, 145);
+  for (const row of old) assert.equal(JSON.stringify(row), oldReceipts.get(row.life_id + '\0' + row.command_id), label + ': exact original receipt');
+  const added = saved.rows.receipts.filter(row => !oldReceipts.has(row.life_id + '\0' + row.command_id));
+  assert.equal(rowsHash(added), rowsHash(receipts.slice(0, spec.commands)), label + ': only the exact real command receipts');
+  assert.equal(saved.rows.receipts.length, 145 + spec.commands);
+  const expected = spec.commands ? plan.trace[spec.commands - 1] : plan.input.migrated;
+  const world = game.unpackCheckpoint(actual.payload, true);
+  assert.equal(world.id, lifeId); assert.equal(world.activePersonId, expected.personId); assert.equal(world.revision, spec.revision);
+  assert.equal(actual.name, game.fullName(world.people[world.activePersonId])); assert.deepEqual([world.schemaVersion, world.engineVersion, world.contentVersion], [35, 36, 11]);
+  assert.equal(hash(game.encodeWorld(world)), expected.worldSha256, label + ': entire canonical world');
+  assert.deepEqual(serialize(world.pending), expected.pending); assert.deepEqual(serialize(world.annual), expected.annual); assert.deepEqual(serialize(world.bestFriendships), expected.bestFriendships);
+  const backup = saved.rows.backups.find(row => row.life_id === lifeId); assert(backup);
+  if (!spec.commands) assert.equal(rowsHash([backup]), rowsHash(baseline.rows.backups.filter(row => row.life_id === lifeId)));
+  else if (!spec.sameAs) {
+    assert.equal(spec.commands, commandCount + 1); assert.equal(backup.revision, previousAction.revision); assert.equal(backup.payload, previousAction.payload, label + ': exact prior raw current becomes backup');
+    previousAction = actual; commandCount = spec.commands;
+  }
+  if (spec.sameAs) { assert(observed.has(spec.sameAs)); assert.deepEqual(saved.hashes, observed.get(spec.sameAs).hashes, label + ': all8 exact to preceding actual capture'); }
+  observed.set(label, saved);
+  result.phases.push({ phase: label, database: saved.file, files: saved.files, reader: saved.reader, lifeId, personId: world.activePersonId, revision: world.revision, worldSha256: hash(game.encodeWorld(world)), pending: serialize(world.pending), friendship: serialize(world.bestFriendships), tables: saved.hashes, lives: 7, moments: 66, receipts: saved.rows.receipts.length, allSixOtherLivesAndBackupsExact: true, all66OriginalMomentsAndMetadataExact: true, all145OriginalReceiptsExact: true, preferencesBranchesAndRestoreExact: true, ...(spec.sameAs ? { allEightTablesExactToPhase: spec.sameAs } : {}), ...(!spec.commands ? { allEightTablesExactToC35Baseline: true, noEagerPayloadRewrite: true } : { exactOrdinaryCommandReceipts: spec.commands }) });
+}
+assert.equal(commandCount, 2); assert.equal(result.phases.length, 6); assert.equal(result.phases.at(-1).revision, 140);
+assertStableCapture(baseline); for (const saved of readCaptures) assertStableCapture(saved);
+result.source.after = verifySource(source, plan.source.before.pins.file); assert.deepEqual(result.source.after, sourceBefore); assert.deepEqual(toolsProof(), toolsBefore);
+assert.deepEqual(fileProof(options['--plan']), result.projection); assert.deepEqual(fileProof(options['--captures']), result.capturesManifest);
+result.final = { ...plan.final, lives: 7, moments: 66, receipts: 147 };
+result.acknowledgements = { count: 1, exactlyOnce: true, resultId: plan.trace[1].command.resultId };
+result.savedResultColdReopens = { count: 1, phase: 'cold-proposal139', allEightTablesExact: true };
+result.finalColdReopens = { count: 1, phase: 'cold-final140', allEightTablesExact: true };
+writeJSON(options['--output'], result);
+console.log(JSON.stringify({ output: options['--output'], sha256: fileProof(options['--output']).sha256, status: result.status, complete: result.complete, phases: result.phases.map(row => ({ phase: row.phase, revision: row.revision, receipts: row.receipts, worldSha256: row.worldSha256 })), final: result.final, scope: result.scope }, null, 2));

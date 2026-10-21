@@ -1,0 +1,13 @@
+  console.info
+    ATHLETE_OBSERVATION {"trainingMonths":34,"tuitionMinor":"136000","trainedSport":68,"selectionOutcomes":["Your contract is signed"],"attended":12,"wins":11,"seasonStatus":"completed","seasonGrossMinor":"7344000","award":null,"finalRevision":99}
+
+      at Object.info (tests/ui/athlete-career-acceptance.test.tsx:135:13)
+
+PASS tests/ui/athlete-career-acceptance.test.tsx (8.864 s)
+  ✓ an archived actor earns Athletics through paid months, signs a real team, plays a paid season and exits durably without erasing work or paying again (7394 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        8.953 s, estimated 14 s
+Ran all test suites matching /tests\/ui\/athlete-career-acceptance.test.tsx/i.

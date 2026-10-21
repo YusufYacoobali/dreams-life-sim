@@ -1,0 +1,619 @@
+FAIL tests/ui/athlete-career-acceptance.test.tsx (13.644 s)
+  ✕ an archived actor earns Athletics through paid months, signs a real team, plays a paid season and exits durably without erasing work or paying again (7095 ms)
+
+  ● an archived actor earns Athletics through paid months, signs a real team, plays a paid season and exits durably without erasing work or paying again
+
+    Unable to find an element with role: button, name: /^Athletics\./
+
+    [36m<RNCSafeAreaProvider>[39m
+      [36m<RNCSafeAreaView>[39m
+        [36m<RCTScrollView>[39m
+          [36m<View>[39m
+            [36m<View>[39m
+              [36m<View>[39m
+                [36m<View[39m
+                  [33maccessibilityLabel[39m=[32m"Back"[39m
+                  [33maccessibilityRole[39m=[32m"button"[39m
+                  [33maccessible[39m=[32m{true}[39m
+                [36m>[39m
+                  [36m<Text>[39m
+                    [0m‹[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+              [36m</View>[39m
+              [36m<View>[39m
+                [36m<Text[39m
+                  [33maccessibilityRole[39m=[32m"header"[39m
+                [36m>[39m
+                  [0mSkills & Training[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View />[39m
+            [36m</View>[39m
+            [36m<Text>[39m
+              [0mAthletics skill of 60% is required[0m
+            [36m</Text>[39m
+            [36m<View>[39m
+              [36m<Text[39m
+                [33maccessibilityRole[39m=[32m"header"[39m
+              [36m>[39m
+                [0mChoose a Skill[0m
+              [36m</Text>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Acting. Selected"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mActing[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mSelected[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 80,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m80[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Music"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mMusic[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Athletics"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mAthletics[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Public Speaking"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mPublic Speaking[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Modelling"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mModelling[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Content Production"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mContent Production[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Space Science"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mSpace Science[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Service Training"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<View[39m
+                    [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                    [33mimportantForAccessibility[39m=[32m"no-hide-descendants"[39m
+                  [36m>[39m
+                    [36m<View>[39m
+                      [36m<Image[39m
+                        [33maccessible[39m=[32m{false}[39m
+                      [36m/>[39m
+                    [36m</View>[39m
+                  [36m</View>[39m
+                [36m</View>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mService Training[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Skill"[39m
+                [33maccessibilityRole[39m=[32m"progressbar"[39m
+                [33maccessibilityValue[39m=[32m{
+                  {
+                    "max": 100,
+                    "min": 0,
+                    "now": 0,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mSkill[0m
+                [36m</Text>[39m
+                [36m<View>[39m
+                  [36m<View />[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0m0[0m
+                  [0m%[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+            [36m<View>[39m
+              [36m<Text[39m
+                [33maccessibilityRole[39m=[32m"header"[39m
+              [36m>[39m
+                [0mMake Time to Practise[0m
+              [36m</Text>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Self-directed Practice. No tuition · develops one skill point per attended month. Selected"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mSelf-directed Practice[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mNo tuition · develops one skill point per attended month[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text>[39m
+                  [0mSelected[0m
+                [36m</Text>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Coached Sessions. Develops two skill points per attended month; available funding required"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<View>[39m
+                  [36m<Text>[39m
+                    [0mCoached Sessions[0m
+                  [36m</Text>[39m
+                  [36m<Text>[39m
+                    [0mDevelops two skill points per attended month; available funding required[0m
+                  [36m</Text>[39m
+                [36m</View>[39m
+                [36m<Text[39m
+                  [33maccessibilityElementsHidden[39m=[32m{true}[39m
+                  [33mimportantForAccessibility[39m=[32m"no"[39m
+                [36m>[39m
+                  [0m›[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+              [36m<Text>[39m
+                [0mMonthly tuition: [0m
+                [0m$0.00[0m
+              [36m</Text>[39m
+              [36m<Text>[39m
+                [0mA parent or guardian funds a child's coached sessions. Protected inheritance stays locked. Fatigue, hospital care and custody can interrupt progress.[0m
+              [36m</Text>[39m
+              [36m<View[39m
+                [33maccessibilityLabel[39m=[32m"Review Training Routine"[39m
+                [33maccessibilityRole[39m=[32m"button"[39m
+                [33maccessibilityState[39m=[32m{
+                  {
+                    "busy": false,
+                    "disabled": false,
+                  }
+                }[39m
+                [33maccessible[39m=[32m{true}[39m
+              [36m>[39m
+                [36m<Text>[39m
+                  [0mReview Training Routine[0m
+                [36m</Text>[39m
+              [36m</View>[39m
+            [36m</View>[39m
+          [36m</View>[39m
+        [36m</RCTScrollView>[39m
+      [36m</RNCSafeAreaView>[39m
+    [36m</RNCSafeAreaProvider>[39m
+
+      32 | const athlete = () => world().careers.find(item => item.personId === world().activePersonId && item.kind === 'athlete');
+      33 | const frame = (training = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider>{training ? <Training /> : <Athlete />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+    > 34 | const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+         |                                                                                                 ^
+      35 | const modal = () => within(screen.UNSAFE_getByType(Modal));
+      36 | const confirm = async (name: string) => { await act(async () => { fireEvent.press(modal().getByRole('button', { name })); }); };
+      37 | const review = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
+
+      at getByRole (tests/ui/athlete-career-acceptance.test.tsx:34:97)
+      at asyncGeneratorStep (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at ../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at ../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at callback (../settings-accessibility/node_modules/@testing-library/react-native/src/act.ts:31:24)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (../settings-accessibility/node_modules/react/cjs/react.development.js:814:22)
+      at actImplementation (../settings-accessibility/node_modules/@testing-library/react-native/src/act.ts:30:25)
+      at tests/ui/athlete-career-acceptance.test.tsx:34:59
+      at asyncGeneratorStep (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at ../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at ../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (tests/ui/athlete-career-acceptance.test.tsx:34:12)
+      at Object.press (tests/ui/athlete-career-acceptance.test.tsx:98:39)
+      at asyncGeneratorStep (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../settings-accessibility/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        13.956 s
+Ran all test suites matching /tests\/ui\/athlete-career-acceptance.test.tsx/i.

@@ -1,0 +1,45 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runInBand --runTestsByPath tests/game/best-friends.test.ts tests/persistence/best-friends-migration.test.ts tests/ui/best-friends-flow.test.tsx tests/game/story-name-collisions.test.ts tests/ui/story-name-collision-flow.test.tsx tests/game/health-emergency-context.test.ts tests/game/editorial-policy.test.ts tests/ui/family-tree-late-spouse.test.tsx tests/ui/terminal-biography-data.test.ts tests/ui/terminal-biography-flow.test.tsx tests/ui/special-career-exits-flow.test.tsx tests/ui/music-career-exit-flow.test.tsx tests/ui/model-career-exit-flow.test.tsx
+
+FAIL tests/ui/special-career-exits-flow.test.tsx (31.344 s)
+  ● genuine actor exit retains failed UI review, retries durably and stops its future work through an ordinary year
+
+    thrown: "Exceeded timeout of 5000 ms for a test.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      123 | }
+      124 |
+    > 125 | test.each(domains)('genuine %s exit retains failed UI review, retries durably and stops its future work through an ordinary year', async domain => {
+          |                   ^
+      126 |   const context = await setup(domain);
+      127 |   try {
+      128 |     let view = render(frame(domain)); if (world().pending) { expect(world().pending!.kind).toBe('result'); await press('Continue'); }
+
+      at ../../dreams-life-sim/node_modules/jest-each/build/bind.js:47:15
+          at Array.forEach (<anonymous>)
+      at Object.<anonymous> (tests/ui/special-career-exits-flow.test.tsx:125:19)
+
+PASS tests/game/best-friends.test.ts
+PASS tests/ui/music-career-exit-flow.test.tsx (5.01 s)
+PASS tests/ui/best-friends-flow.test.tsx
+PASS tests/game/editorial-policy.test.ts
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/ui/family-tree-late-spouse.test.tsx
+PASS tests/game/story-name-collisions.test.ts (8.585 s)
+PASS tests/ui/story-name-collision-flow.test.tsx
+PASS tests/ui/terminal-biography-flow.test.tsx
+PASS tests/ui/terminal-biography-data.test.ts
+PASS tests/persistence/best-friends-migration.test.ts (12.287 s)
+FAIL tests/ui/model-career-exit-flow.test.tsx
+  ● Test suite failed to run
+
+    ENOENT: no such file or directory, open '/workspace/dreams-worktrees/integration-friends-editorial/tests/ui/model-career-exit-flow.test.tsx'
+
+      at runTestInternal (../../dreams-life-sim/node_modules/jest-runner/build/runTest.js:170:27)
+
+Test Suites: 2 failed, 11 passed, 13 total
+Tests:       1 failed, 64 passed, 65 total
+Snapshots:   0 total
+Time:        72.324 s
+Ran all test suites within paths "tests/game/best-friends.test.ts", "tests/persistence/best-friends-migration.test.ts", "tests/ui/best-friends-flow.test.tsx", "tests/game/story-name-collisions.test.ts", "tests/ui/story-name-collision-flow.test.tsx", "tests/game/health-emergency-context.test.ts", "tests/game/editorial-policy.test.ts", "tests/ui/family-tree-late-spouse.test.tsx", "tests/ui/terminal-biography-data.test.ts", "tests/ui/terminal-biography-flow.test.tsx", "tests/ui/special-career-exits-flow.test.tsx", "tests/ui/music-career-exit-flow.test.tsx", "tests/ui/model-career-exit-flow.test.tsx".

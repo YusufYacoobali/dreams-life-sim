@@ -22,7 +22,74 @@ previous-life summaries are complete. Full production remains approximately
 **65%**; the catalogue contains **250/250 minimum**. Editorial, balance and
 release acceptance remain open.
 
-## Current checkpoint: complete personal overview and durable early actions
+## Current checkpoint: persistent friendships and factual life stories
+
+Accepted source `ed296f91082a96b2fabe8973864bf6dba28344b3` uses World35 /
+engine36 / content11 / reader15 / checkpointv4. Best Friends now records an
+actual known person's saved consent and history, with durable review, failure
+retention and exact resume. FamilyTree retains actual late spouses; the death
+biography reports recorded career/accomplishment facts and correctly scoped
+choices. New story consequences disambiguate actual people, medical prompts use
+the real case context, and repeated diagnosis preserves the original diagnosis
+date. Existing bound scenes, identities, money and original histories remain
+intact. Career exits retain earned pay and completed work. Saved Lives has named
+accessible Continue controls; Statistics remains usable at normal and130% text.
+The legacy-Android portrait correction retains the intended layered shading.
+
+The fresh accepted-source regression passes **2,355 tests /185 suites in
+1,386.145seconds**. Strict application/all-test types pass. Android and iOS
+Hermes exports pass, and the same120 immutable annual-policy seeds0–119 finish
+across all12 country packs in651.254seconds. These first-eligible pure-engine
+journeys retain their documented initial birth-acknowledgement setup; they are
+not new distinct seeds, optional-policy reruns, native or full-life SQLite
+acceptance. The earlier failed full regression remains a separate diagnostic:
+its stale historical entrepreneur-version assertion was corrected without
+changing the frozen historical policy or its producer hashes.
+
+Exports, annual runs and native observations retain their actual runtime source
+scope. The accepted610-file source differs from the607-file `6f4b34c` checkpoint
+only in one corrected test and three added acceptance tests; application,
+game/persistence, assets, configuration and old fixtures are exact. Genuine
+archived Model, Athlete and Astronaut continuations strengthen paid progression,
+exit, rollback/retry and cold-resume acceptance. They do not establish natural
+birth-to-career attainment or every career transition.
+
+Actual Android24 Expo Go acceptance includes17 personally reviewed PNG/XML
+pairs. Reader14→15 changes metadata without rewriting original payloads.
+Normal/130% friendship review cancellation and read-only Profile, Saved Lives,
+same-life Continue and Statistics browsing preserve all eight tables. Nia's
+actual Best Friends result139 survives a process-stop cold reopen;
+acknowledgement140 commits once and survives a separate final cold reopen.
+The six other original lives/backups,66 original moments/metadata,145 original
+receipts, preferences, branches and restore records remain exact; final receipts
+are147. This is software-Android/Expo Go evidence, not physical-device,
+standalone Android or iOS acceptance.
+
+All70 serial fixed-world warm action samples have zero full checkpoint unpack.
+The age60 routine median is52.11ms; the generated1,000-contact first AgeUp step
+is431.07ms. Whole cold current/backup worlds and original BeforeAgeUp payloads
+remain exact. These are unpaired cloud Node/SQLite diagnostics, not rendered UI
+or physical p95. The app was stopped; the owned Metro/emulator were paused and
+actually resumed. [Complete source, raw checks and precise scopes](verification/friends-editorial-20261020.json).
+
+Overall production remains approximately **65%**; this is an effort estimate,
+not an acceptance score. The accepted catalogue remains250 situations/750choices
+and45achievements/14challenges/43facts. Five next gameplay gaps are being
+implemented and reviewed in separate worktrees: individual university
+applications and study courses; bounded first teenage relationships; authored
+event rarity and one extremely rare adult situation; a same-person childhood project
+callback two years later; and bounded separation of unmarried adult NPC dating
+couples. These are the next coordinated batch, not features accepted under this
+C36 source or a reason to recount historical seeds or story coverage.
+
+Continue country-rule verification, balance/pacing and unobserved story-context,
+visual/accessibility and release-device acceptance. Keep automatic saving and
+exact resume reliable; further import/export/sharing, save-tool and history
+storage breadth remain parked. Continue implementation and acceptance work, with
+commits and pushes at safe points at least every two hours; a checkpoint does
+not end the authorised task.
+
+## Prior checkpoint: complete personal overview and durable early actions
 
 World34 / engine35 / content10 / reader14 / checkpointv4 integrates the reviewed
 parallel opening and early-play work. Profile, Statistics and annual Finances
@@ -80,18 +147,8 @@ Overall production is approximately65%; onboarding65%, Life/early gameplay65%
 and family85%. These are effort estimates, not acceptance scores. The catalogue
 remains250 situations/750choices and45achievements/14challenges/43facts.
 
-Continue the complete production plan. Independent worktrees already contain
-reviewed late-spouse FamilyTree, factual death biography, new-story name labels,
-medical context/first-diagnosis fixes and genuine career-exit acceptance; Best
-Friends is independently approved at World35/engine36/content11/reader15 and
-awaits coordinated integration. The editorial driver is also ready. Integrate
-these existing changes, resolve shared version expectations, then run consolidated
-source/type/regression/lifetime/export/native/performance gates. Do not reimplement
-them or wait on one workstream before starting independent acceptance work.
-Broader country verification, balance, unobserved story contexts, visual/accessibility
-and physical/standalone/iOS release acceptance remain open. Further file/history
-breadth stays parked. Commit AND push at safe points at least every two hours;
-a routine checkpoint does not end the authorised task.
+This prior milestone's listed family/story/health/Best Friends work is now
+integrated and accepted in C36 above. Historical source/count scopes stay intact.
 
 ## Prior checkpoint: autonomous family life, clear consequences and durable action reviews
 

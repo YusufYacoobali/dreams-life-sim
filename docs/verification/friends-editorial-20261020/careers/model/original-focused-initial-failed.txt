@@ -1,0 +1,55 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/model-career-acceptance-flow.test.tsx --testTimeout=90000
+
+FAIL tests/ui/model-career-acceptance-flow.test.tsx (14.293 s)
+  ✕ the unchanged actor archive earns modelling training, signs and completes a real model contract, then leaves durably without future model pay (8389 ms)
+
+  ● the unchanged actor archive earns modelling training, signs and completes a real model contract, then leaves durably without future model pay
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  0
+    + Received  + 16
+
+    @@ -37,6 +37,22 @@
+          "id": "account_person_npc_67_4",
+          "lockedCash": 0n,
+          "openingCash": 800000n,
+          "ownerId": "person_npc_67_4",
+        },
+    +   Object {
+    +     "cash": 3200000n,
+    +     "currency": "USD",
+    +     "id": "account_person_npc_84_5",
+    +     "lockedCash": 0n,
+    +     "openingCash": 3200000n,
+    +     "ownerId": "person_npc_84_5",
+    +   },
+    +   Object {
+    +     "cash": 800000n,
+    +     "currency": "USD",
+    +     "id": "account_person_npc_84_6",
+    +     "lockedCash": 0n,
+    +     "openingCash": 800000n,
+    +     "ownerId": "person_npc_84_6",
+    +   },
+      ]
+
+      112 |       expect(world().journal.at(-1)?.text).toMatch(/not selected/); await press('Review Casting'); await press('Attend Casting'); await acknowledgeOnce();
+      113 |     }
+    > 114 |     expect(model()?.status).toBe('active'); expect(model().projects[0].grossEarned).toBe(0n); expect(model().projects[0].periods).toHaveLength(0); expect(actor().employment?.paidMonths).toBe(0); expect(actor().employment?.annualPay).toBe(quote); expect(world().accounts).toEqual(accounts); expect(world().ledger).toEqual(ledger);
+          |                                                                                                                                                                                                                                                                                ^
+      115 |     const selectionAttempts = world().actionCounts[world().activePersonId + ':career-selection:model:' + world().date.year]; expect(selectionAttempts).toBeGreaterThanOrEqual(1); expect(selectionAttempts).toBeLessThanOrEqual(2);
+      116 |     expect(model().contacts).toHaveLength(2); for (const id of model().contacts) expect(world().people[id]).toBeDefined();
+      117 |     const current = screen.getByRole('button', { name: /^Keep a Balance\..*This is your current career focus$/ }), selected = world(), selectedRows = context.rows(); expect(current).toBeDisabled(); await act(async () => { fireEvent.press(current); }); expect(world()).toBe(selected); expect(context.rows()).toEqual(selectedRows); expect(screen.queryByText('Update your career focus?')).toBeNull();
+
+      at Object.toEqual (tests/ui/model-career-acceptance-flow.test.tsx:114:272)
+      at asyncGeneratorStep (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        14.631 s
+Ran all test suites within paths "tests/ui/model-career-acceptance-flow.test.tsx".

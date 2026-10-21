@@ -1,0 +1,193 @@
+{
+  "scope": "Bounded C36 pure-engine genuine-archive continuations plus separately rerun prior-defect regression; no natural birth policy, new seeds, native/full-life SQLite, off-policy binding or all-context/250/750 completion claim",
+  "runtimeBaseCommit": "1a90884119b2c4f8989d13f044f8e69101169b11",
+  "versions": {
+    "world": 35,
+    "engine": 36,
+    "content": 11
+  },
+  "processes": {
+    "focused": {
+      "session": 90450,
+      "exitCode": 0,
+      "tests": 19,
+      "suites": 3,
+      "seconds": 44.005,
+      "path": "/tmp/dreams-c36-editorial-context-focused-attempt1.out"
+    },
+    "appAndAllTestTypes": {
+      "session": 82263,
+      "exitCode": 0,
+      "path": "/tmp/dreams-c36-editorial-context-types.out"
+    }
+  },
+  "continuations": {
+    "cases": 5,
+    "newAnnualFrames": 15,
+    "completedOriginalCursors": 3,
+    "ordinaryCommands": 86,
+    "decisions": 23,
+    "catalogueChoices": 13,
+    "systemChoices": 10,
+    "authoredBranches": {
+      "1": 5,
+      "2": 4,
+      "3": 4
+    },
+    "productionCodecChecks": 98,
+    "distinctColdCaseRevisions": 72,
+    "wholeCanonicalCommandReplays": 5,
+    "selectedOptionalContexts": [
+      "child",
+      "friend",
+      "home",
+      "workplace"
+    ],
+    "unselectedOptionalContexts": [
+      "partner",
+      "pet",
+      "hobby",
+      "visited",
+      "specialCareer"
+    ],
+    "runtimeBugsFound": []
+  },
+  "rawReports": [
+    {
+      "path": "/tmp/dreams-c36-editorial-context-attempt1/creator-studio.json",
+      "bytes": 18949,
+      "sha256": "60d87d7f8d3d491697ce8330e2d24ff36ea68526533c13979fd42bebd477e24a"
+    },
+    {
+      "path": "/tmp/dreams-c36-editorial-context-attempt1/family-trip.json",
+      "bytes": 11403,
+      "sha256": "63e24c67abb5dad09c2839b971413fbc619a08ef9342c3ad5ad62a7f54fe9b3c"
+    },
+    {
+      "path": "/tmp/dreams-c36-editorial-context-attempt1/owned-home.json",
+      "bytes": 25442,
+      "sha256": "e42c4f9d5efe2e37a126f818bb9909a3244b40414a75c6aa3e4e1fbd6bc7d519"
+    },
+    {
+      "path": "/tmp/dreams-c36-editorial-context-attempt1/pet-hobbies.json",
+      "bytes": 6038,
+      "sha256": "77d17fef9c993fb358f5a48d6a06150fde00593417fd8a50b271eb0293cd08fe"
+    },
+    {
+      "path": "/tmp/dreams-c36-editorial-context-attempt1/workplace-friend.json",
+      "bytes": 18002,
+      "sha256": "fc5e34f02cfe0b0d595df798545a16f002bab36d37fc774b418f1a603b085794"
+    }
+  ],
+  "cases": [
+    {
+      "name": "creator-studio",
+      "initialRevision": 101,
+      "finalRevision": 122,
+      "commands": 21,
+      "newAnnualFrames": 3,
+      "completedIncludingOriginalCursor": 3,
+      "observedContexts": [],
+      "absentContexts": [
+        "workplace",
+        "friend",
+        "partner",
+        "child",
+        "home",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "finalCanonicalSha256": "1cc9b569600f8630f547fd0f40efd34e4d2cf499021167ef4c77087b5fb121d4"
+    },
+    {
+      "name": "family-trip",
+      "initialRevision": 81,
+      "finalRevision": 92,
+      "commands": 11,
+      "newAnnualFrames": 3,
+      "completedIncludingOriginalCursor": 4,
+      "observedContexts": [
+        "child"
+      ],
+      "absentContexts": [
+        "workplace",
+        "friend",
+        "partner",
+        "home",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "finalCanonicalSha256": "36fe742395136e979af5b42a2102a94da413fa0ef68fd7de3ffafd8fccd589fe"
+    },
+    {
+      "name": "owned-home",
+      "initialRevision": 74,
+      "finalRevision": 98,
+      "commands": 24,
+      "newAnnualFrames": 3,
+      "completedIncludingOriginalCursor": 4,
+      "observedContexts": [
+        "home"
+      ],
+      "absentContexts": [
+        "workplace",
+        "friend",
+        "partner",
+        "child",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "finalCanonicalSha256": "ab0f3effc87a98af20dfe9aa4ba0772e4bf630bbf59a2f7f6ecf042ead91d25a"
+    },
+    {
+      "name": "pet-hobbies",
+      "initialRevision": 44,
+      "finalRevision": 54,
+      "commands": 10,
+      "newAnnualFrames": 3,
+      "completedIncludingOriginalCursor": 3,
+      "observedContexts": [],
+      "absentContexts": [
+        "workplace",
+        "friend",
+        "partner",
+        "child",
+        "home",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "finalCanonicalSha256": "2bdcd70c08621c4340d52cf2cead7198fa7ea5f3cadd16626f1e5bcb8e343f3d"
+    },
+    {
+      "name": "workplace-friend",
+      "initialRevision": 76,
+      "finalRevision": 96,
+      "commands": 20,
+      "newAnnualFrames": 3,
+      "completedIncludingOriginalCursor": 4,
+      "observedContexts": [
+        "friend",
+        "workplace"
+      ],
+      "absentContexts": [
+        "partner",
+        "child",
+        "home",
+        "pet",
+        "hobby",
+        "visited",
+        "specialCareer"
+      ],
+      "finalCanonicalSha256": "4eb4ddffb8814185bd4459432e1cfa9231392025ddaf7725494e4db9635fc30a"
+    }
+  ],
+  "historicalEvidence": "Original C35 varied-choice 633/133/274 and earlier991 first-choice audit remain separate and unchanged; this is no expanded cohort count."
+}

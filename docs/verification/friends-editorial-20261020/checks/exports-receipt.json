@@ -1,0 +1,41 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "sourceSnapshot": "/tmp/dreams-friends-editorial-final-source.json",
+  "sourceSnapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+  "root": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "argv": [
+    "node",
+    "./node_modules/expo/bin/cli",
+    "export",
+    "--platform",
+    "android",
+    "--platform",
+    "ios",
+    "--output-dir",
+    "/tmp/dreams-friends-editorial-export",
+    "--source-maps",
+    "--max-workers",
+    "1"
+  ],
+  "startedAt": "2026-10-20T23:27:48.540322+00:00",
+  "before": {
+    "files": 607,
+    "snapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-20T23:29:08.934257+00:00",
+  "elapsedSeconds": 80.394,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-friends-editorial-export-final.out",
+    "bytes": 2745,
+    "sha256": "e22b6748612bb308911efbc598072662cf3d89684d0feafd365c091ca259cefe"
+  },
+  "after": {
+    "files": 607,
+    "snapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+    "status": "exact"
+  }
+}

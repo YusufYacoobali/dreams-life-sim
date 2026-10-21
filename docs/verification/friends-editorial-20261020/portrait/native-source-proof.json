@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "candidateCommit": "b3bf10821605271a3b039815af2b61f352e49a48",
+  "manifestLaunchAsset": "http://127.0.0.1:8081/node_modules/expo-router/entry.bundle?platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=1&transform.routerRoot=app&unstable_transformProfile=hermes-stable",
+  "mapBytes": 19701991,
+  "mapSha256": "7c276550d96c754f05ff6f41dc8b09c491df79bd8e394d0b5f945e060e417f3a",
+  "candidateSources": [
+    {
+      "source": "/workspace/dreams-worktrees/portrait-fallback/src/assets/CharacterPortrait.tsx",
+      "bytes": 4552,
+      "sha256": "a00a7c1d0f45ff636bcccc9fe8f49018f6398e3a10bcc1f30c54db17d9c2ae3f"
+    }
+  ],
+  "scope": "Isolated Metro cache actual native-client query source map before native launch; exact candidate portrait source bytes. No native pixels or physical performance inferred."
+}

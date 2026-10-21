@@ -1,0 +1,757 @@
+{
+  "format": "dreams-c36-publication-inputs-v1",
+  "status": "ready-to-publish-after-actual-gates",
+  "scope": "Preparation only. Root reviews/fills actual closures and executes failclosed publisher after all actual gates. No repository copy or broad acceptance is claimed.",
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "versions": {
+    "world": 35,
+    "engine": 36,
+    "content": 11,
+    "database": 15,
+    "checkpoint": "v4"
+  },
+  "outputRecord": "docs/verification/friends-editorial-20261020.json",
+  "artifactDirectory": "docs/verification/friends-editorial-20261020",
+  "fixedCopies": [
+    {
+      "key": "source-initial",
+      "source": "/tmp/dreams-friends-editorial-initial-source.json",
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55",
+      "target": "friends-editorial-20261020/source/initial.json"
+    },
+    {
+      "key": "source-initial-head",
+      "source": "/tmp/dreams-friends-editorial-initial-source-head.txt",
+      "bytes": 41,
+      "sha256": "0869085beabfc80c20394290803e7030997fa60715d511d67e9f5698d1d75e0b",
+      "target": "friends-editorial-20261020/source/initial-head.txt"
+    },
+    {
+      "key": "source-initial-status",
+      "source": "/tmp/dreams-friends-editorial-initial-source-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "friends-editorial-20261020/source/initial-status.txt"
+    },
+    {
+      "key": "source-initial-tree",
+      "source": "/tmp/dreams-friends-editorial-initial-source-tree.bin",
+      "bytes": 174436,
+      "sha256": "1bb8e29d806c72a8b37aeeba9b468c13bc581d1a75c1ab7fc7df6282c6bf3e51",
+      "target": "friends-editorial-20261020/source/initial-tree.bin"
+    },
+    {
+      "key": "source-first-full",
+      "source": "/tmp/dreams-friends-editorial-final-source.json",
+      "bytes": 66657,
+      "sha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+      "target": "friends-editorial-20261020/source/first-full.json"
+    },
+    {
+      "key": "source-first-full-head",
+      "source": "/tmp/dreams-friends-editorial-final-source-head.txt",
+      "bytes": 41,
+      "sha256": "4d519f2bb7884c2b9e792f167e545c39f59172918d1d445acce004be169df9d4",
+      "target": "friends-editorial-20261020/source/first-full-head.txt"
+    },
+    {
+      "key": "source-first-full-status",
+      "source": "/tmp/dreams-friends-editorial-final-source-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "friends-editorial-20261020/source/first-full-status.txt"
+    },
+    {
+      "key": "source-first-full-tree",
+      "source": "/tmp/dreams-friends-editorial-final-source-tree.bin",
+      "bytes": 174705,
+      "sha256": "0ee142307f72cb0c1e97ef2ce9c763b0ad082a8fcad51b5f561ddcee88f95f90",
+      "target": "friends-editorial-20261020/source/first-full-tree.bin"
+    },
+    {
+      "key": "source-accepted",
+      "source": "/tmp/dreams-friends-editorial-accepted-source.json",
+      "bytes": 67034,
+      "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5",
+      "target": "friends-editorial-20261020/source/accepted.json"
+    },
+    {
+      "key": "source-accepted-head",
+      "source": "/tmp/dreams-friends-editorial-accepted-source-head.txt",
+      "bytes": 41,
+      "sha256": "353cb20e8f98e5736aef67466ae3a6ccf209cb1b8cd9bbb76da376242d441d0d",
+      "target": "friends-editorial-20261020/source/accepted-head.txt"
+    },
+    {
+      "key": "source-accepted-status",
+      "source": "/tmp/dreams-friends-editorial-accepted-source-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "friends-editorial-20261020/source/accepted-status.txt"
+    },
+    {
+      "key": "source-accepted-tree",
+      "source": "/tmp/dreams-friends-editorial-accepted-source-tree.bin",
+      "bytes": 175277,
+      "sha256": "a1ce32cf381405047fb23a21e08789951c5723259efdeb05adb7637be3a1139f",
+      "target": "friends-editorial-20261020/source/accepted-tree.bin"
+    },
+    {
+      "key": "source-bridge",
+      "source": "/tmp/dreams-friends-editorial-source-bridge.json",
+      "bytes": 1968,
+      "sha256": "fabf90a2f2e714c6bc49365af06a88b12c92947dd858959f3ef008b8ae853dda",
+      "target": "friends-editorial-20261020/source/initial-to-first-full-bridge.json"
+    },
+    {
+      "key": "source-accepted-bridge",
+      "source": "/tmp/dreams-friends-editorial-accepted-source-bridge.json",
+      "bytes": 1085,
+      "sha256": "cda26321fbf8a8ece2324021fb286420ba5704757f40840cc65f4614e8b8005d",
+      "target": "friends-editorial-20261020/source/first-full-to-accepted-bridge.json"
+    },
+    {
+      "key": "source-capture-helper",
+      "source": "/tmp/dreams-friends-editorial-source.cjs",
+      "bytes": 4530,
+      "sha256": "1a198ca940c444b8341f7a077a2b94d27942e64074978190c348b7260cc3e8fa",
+      "target": "friends-editorial-20261020/source/capture-source.cjs.txt"
+    },
+    {
+      "key": "gate-helper",
+      "source": "/tmp/dreams-c36-gate.py",
+      "bytes": 2012,
+      "sha256": "2610caf53a1fdc987bb5d545248afaa9f355401c679b9ae379c59f113129092b",
+      "target": "friends-editorial-20261020/source/gate-wrapper.py.txt"
+    },
+    {
+      "key": "regression-first",
+      "source": "/tmp/dreams-friends-editorial-regression-final.out",
+      "bytes": 12159,
+      "sha256": "35b3aa3f7215e9f07646f0c5782841b046a809e07ee4687b6bb13793d60015f6",
+      "target": "friends-editorial-20261020/diagnostics/first-full-failed.txt"
+    },
+    {
+      "key": "regression-first-receipt",
+      "source": "/tmp/dreams-friends-editorial-regression-final-receipt.json",
+      "bytes": 1088,
+      "sha256": "e0781f5eafd8599f6624d7e4213db41b969ff60a50cda6256d26af899691169c",
+      "target": "friends-editorial-20261020/diagnostics/first-full-failed-receipt.json"
+    },
+    {
+      "key": "focused-initial",
+      "source": "/tmp/dreams-friends-editorial-integration-focused-initial-failed.out",
+      "bytes": 3216,
+      "sha256": "ed0d91d34593a80aceb5631209b18b367f9b3118f314c2aa1e098f9e8a1c9e34",
+      "target": "friends-editorial-20261020/diagnostics/focused-initial-failed.txt"
+    },
+    {
+      "key": "focused-final",
+      "source": "/tmp/dreams-friends-editorial-integration-focused-final.out",
+      "bytes": 2637,
+      "sha256": "7ec320455cfc8038bdca8a52580c8661ee0d87ed63d2db60747a300a85f6eafb",
+      "target": "friends-editorial-20261020/checks/focused66-final.txt"
+    },
+    {
+      "key": "types-first",
+      "source": "/tmp/dreams-friends-editorial-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309",
+      "target": "friends-editorial-20261020/checks/first-full-types.txt"
+    },
+    {
+      "key": "types-first-receipt",
+      "source": "/tmp/dreams-friends-editorial-types-final-receipt.json",
+      "bytes": 1045,
+      "sha256": "62bf59c0a14aefe8f272661bc33a23cc0004bbba7a376961bf1632ee519b25a3",
+      "target": "friends-editorial-20261020/checks/first-full-types-receipt.json"
+    },
+    {
+      "key": "annual",
+      "source": "/tmp/dreams-friends-editorial-120.ndjson",
+      "bytes": 37778,
+      "sha256": "7edbed3621aebe42477d696688e1928fdb4145c5668ad064131b682f3e3ed4d9",
+      "target": "friends-editorial-20261020/checks/annual120.ndjson"
+    },
+    {
+      "key": "annual-stderr",
+      "source": "/tmp/dreams-friends-editorial-120.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "friends-editorial-20261020/checks/annual120.stderr.txt"
+    },
+    {
+      "key": "export-output",
+      "source": "/tmp/dreams-friends-editorial-export-final.out",
+      "bytes": 2745,
+      "sha256": "e22b6748612bb308911efbc598072662cf3d89684d0feafd365c091ca259cefe",
+      "target": "friends-editorial-20261020/checks/exports.txt"
+    },
+    {
+      "key": "export-receipt",
+      "source": "/tmp/dreams-friends-editorial-export-final-receipt.json",
+      "bytes": 1247,
+      "sha256": "0fb1be6ae0fb2f2cb92527b83d78322510f330ecb354a6d30ecab66ebbd04c2f",
+      "target": "friends-editorial-20261020/checks/exports-receipt.json"
+    },
+    {
+      "key": "export-provenance",
+      "source": "/tmp/dreams-friends-editorial-export-provenance.json",
+      "bytes": 67693,
+      "sha256": "f28393a1755c264ebe5f6325db1ab469709fd7fdeefc7f53526a77187566a48c",
+      "target": "friends-editorial-20261020/checks/exports-provenance.json"
+    },
+    {
+      "key": "portrait-native-acceptance",
+      "source": "/tmp/dreams-portrait-isolated-native-acceptance.json",
+      "bytes": 4550,
+      "sha256": "1d5f8b876abd2a210cc48f33a21c44bd9f4e3c79464f5a4b53945f38073bed39",
+      "target": "friends-editorial-20261020/portrait/native-two-views-acceptance.json"
+    },
+    {
+      "key": "portrait-source-proof",
+      "source": "/tmp/dreams-portrait-isolated-native-source-proof.json",
+      "bytes": 869,
+      "sha256": "4ab451e577f121c320e1f079095dfb83cf1ff114cb51c6b0aa47a8891447c0c1",
+      "target": "friends-editorial-20261020/portrait/native-source-proof.json"
+    },
+    {
+      "key": "portrait-export-stale",
+      "source": "/tmp/dreams-portrait-fallback-export-stale-source.out",
+      "bytes": 3057,
+      "sha256": "258895e0d07ad5270d531133b64a0d6bec4280795c3c10f2a5f72537f10a4308",
+      "target": "friends-editorial-20261020/portrait/diagnostic-rejected-stale-source-export.txt"
+    },
+    {
+      "key": "portrait-export-output",
+      "source": "/tmp/dreams-portrait-fallback-export-isolated.out",
+      "bytes": 2826,
+      "sha256": "e6889e2b38ac0c16261ed2ce544cc291042045f1e9b45c85ec181c16fdae3feb",
+      "target": "friends-editorial-20261020/portrait/isolated-export.txt"
+    },
+    {
+      "key": "portrait-export-proof",
+      "source": "/tmp/dreams-portrait-fallback-export-provenance.json",
+      "bytes": 944,
+      "sha256": "b5449ba53b6b3bb078f8624ff4b66c315bcb7a59f49193a170834a4ece6247f4",
+      "target": "friends-editorial-20261020/portrait/isolated-export-provenance.json"
+    },
+    {
+      "key": "portrait-notes",
+      "source": "/tmp/dreams-portrait-fallback-notes-20261020.md",
+      "bytes": 5778,
+      "sha256": "2ca0b1a7c8045996f826c3e59084c8c42afc8e302c4ffe765ae3373a67ba9ae8",
+      "target": "friends-editorial-20261020/portrait/author-notes.md"
+    },
+    {
+      "key": "portrait-source-audit",
+      "source": "/tmp/dreams-portrait-source-audit-20261020.md",
+      "bytes": 5391,
+      "sha256": "2036875bc21d9568a11f4a20edb5b48cea3a13bc4a0c0ebf03a1b3254fb6e3ff",
+      "target": "friends-editorial-20261020/portrait/source-audit.md"
+    },
+    {
+      "key": "native-plan",
+      "source": "/tmp/dreams-c36-best-friend-native-plan.json",
+      "bytes": 10152,
+      "sha256": "aed1555240cab6f3b8862df88d92ac36d83ceb5215823b70a3efac7a96e25a1c",
+      "target": "friends-editorial-20261020/native/expected-only-plan.json"
+    },
+    {
+      "key": "native-pending-manifest",
+      "source": "/tmp/dreams-c36-best-friend-native-captures-PENDING.json",
+      "bytes": 1183,
+      "sha256": "657773948ef24a1d99783567da729c0cad065b68b971d7007bd865be2531f78e",
+      "target": "friends-editorial-20261020/native/original-pending-capture-manifest.json"
+    },
+    {
+      "key": "native-pending-refusal",
+      "source": "/tmp/dreams-c36-best-friend-native-pending-refusal.out",
+      "bytes": 879,
+      "sha256": "42fd262c647fe8ed4e1b1b21c31bbf7e28b993193d4bafeb4e98875142269f5b",
+      "target": "friends-editorial-20261020/native/pending-manifest-refusal.txt"
+    },
+    {
+      "key": "ci-e938",
+      "source": "/tmp/dreams-c35-hosted-ci-e938-log.txt",
+      "bytes": 29488,
+      "sha256": "d08380f1fbb10ea791329818d7427b6e7b997b03207593953c344623444a1c7e",
+      "target": "friends-editorial-20261020/historical-ci/e938-linux-log.txt"
+    },
+    {
+      "key": "audit-initial",
+      "source": "/tmp/dreams-c36-compatibility-audit.md",
+      "bytes": 7767,
+      "sha256": "8e39ebd2cfde2d3794fdbe361c9ecb559eedffb22b29ecc2146fad32d4280db5",
+      "target": "friends-editorial-20261020/audit/independent-initial-source.md"
+    },
+    {
+      "key": "audit-final",
+      "source": "/tmp/dreams-c36-final-source-and-native-helper-audit.md",
+      "bytes": 7139,
+      "sha256": "80153c79f0775b038ecfd72821fa2df007a552365a919d8ae8ef655c57c0a9e4",
+      "target": "friends-editorial-20261020/audit/independent-final-source-and-native-helpers.md"
+    },
+    {
+      "key": "audit-evidence",
+      "source": "/tmp/dreams-c36-compatibility-evidence.json",
+      "bytes": 3376,
+      "sha256": "e8fd004443a1f70e2e7a21305b404da30cc95fe7cb0a82ac95441e39ecd9172f",
+      "target": "friends-editorial-20261020/audit/independent-evidence.json"
+    },
+    {
+      "key": "historical-policy-correction-test",
+      "source": "/tmp/dreams-c36-entrepreneur-pin-tests.out",
+      "bytes": 2124,
+      "sha256": "43ee61a859e1f6a6582c01fee322f75064548a6de351906bf5684f5f77effde8",
+      "target": "friends-editorial-20261020/diagnostics/historical-policy-correction-focused.txt"
+    },
+    {
+      "key": "historical-policy-correction-types",
+      "source": "/tmp/dreams-c36-entrepreneur-pin-types.out",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "target": "friends-editorial-20261020/diagnostics/historical-policy-correction-types.txt"
+    },
+    {
+      "key": "annual-tool",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/tools/run-life-sweep.cjs",
+      "bytes": 6982,
+      "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+      "target": "friends-editorial-20261020/checks/run-life-sweep.cjs.txt"
+    },
+    {
+      "key": "actions-driver",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/tools/benchmark-actions.cjs",
+      "bytes": 16065,
+      "sha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+      "target": "friends-editorial-20261020/actions/benchmark-actions.cjs.txt"
+    },
+    {
+      "key": "export-metadata",
+      "source": "/tmp/dreams-friends-editorial-export/metadata.json",
+      "bytes": 5282,
+      "sha256": "7618e2b1bb66d39a522c1be775e873733677eaf7f35a6ecd14659e76eefbde78",
+      "target": "friends-editorial-20261020/checks/export-metadata.json"
+    },
+    {
+      "key": "portrait-0-png",
+      "source": "/tmp/dreams-portrait-isolated-native-life.png",
+      "bytes": 77998,
+      "sha256": "c73fd274b38b52396c27a52e644666d805f51c7277d20704f713cdeec96125de",
+      "target": "friends-editorial-20261020/portrait/life.png"
+    },
+    {
+      "key": "portrait-0-xml",
+      "source": "/tmp/dreams-portrait-isolated-native-life.xml",
+      "bytes": 40491,
+      "sha256": "3a4bcaec441883f90e81a06c9d09cdc67ae286396dead484d4621dca0aaf279f",
+      "target": "friends-editorial-20261020/portrait/life.xml"
+    },
+    {
+      "key": "portrait-1-png",
+      "source": "/tmp/dreams-portrait-isolated-native-profile.png",
+      "bytes": 80388,
+      "sha256": "c5f1264f4cf6961af77cee5e59f2f2ef976600eb69adb16e4ba71d0a3c9fdc72",
+      "target": "friends-editorial-20261020/portrait/profile.png"
+    },
+    {
+      "key": "portrait-1-xml",
+      "source": "/tmp/dreams-portrait-isolated-native-profile.xml",
+      "bytes": 35911,
+      "sha256": "ea17b3e685dd1ea75276460da06a104140094641f6b154093a175c512cbbafef",
+      "target": "friends-editorial-20261020/portrait/profile.xml"
+    },
+    {
+      "key": "native-helper-friends-native-support.cjs",
+      "source": "/workspace/dreams-worktrees/friends-native-verify/tools/friends-native-support.cjs",
+      "bytes": 6790,
+      "sha256": "b0e8bcba35829b6b4e79ce660fd04f9f3853cee6fc54b5b19f3b08bc174a204a",
+      "target": "friends-editorial-20261020/native/helpers/friends-native-support.cjs.txt"
+    },
+    {
+      "key": "native-helper-project-friends-native.cjs",
+      "source": "/workspace/dreams-worktrees/friends-native-verify/tools/project-friends-native.cjs",
+      "bytes": 6704,
+      "sha256": "b322a603f7591d4edcd53d89c923b5f65ba834f63710bf51ade148b8888f6e09",
+      "target": "friends-editorial-20261020/native/helpers/project-friends-native.cjs.txt"
+    },
+    {
+      "key": "native-helper-verify-friends-native.cjs",
+      "source": "/workspace/dreams-worktrees/friends-native-verify/tools/verify-friends-native.cjs",
+      "bytes": 9706,
+      "sha256": "b7932be8b8284e69b035a1d08e71202b36f9ff0a971f36964e5222bdefd6db87",
+      "target": "friends-editorial-20261020/native/helpers/verify-friends-native.cjs.txt"
+    },
+    {
+      "key": "action-helper-actions-register.cjs",
+      "source": "/tmp/dreams-friends-editorial-actions-register.cjs",
+      "bytes": 7365,
+      "sha256": "09522107ab4ef5a6a9c830913c49d50e62a05311ed0c7e8accb5c710f5200823",
+      "target": "friends-editorial-20261020/actions/helpers/actions-register.cjs.txt"
+    },
+    {
+      "key": "action-helper-actions-summary.cjs",
+      "source": "/tmp/dreams-friends-editorial-actions-summary.cjs",
+      "bytes": 16500,
+      "sha256": "f4eb388a5e0704f55c6124347edbe035beaf5037a2384b97760d2f0133bd7a25",
+      "target": "friends-editorial-20261020/actions/helpers/actions-summary.cjs.txt"
+    },
+    {
+      "key": "action-helper-actions-run.py",
+      "source": "/tmp/dreams-friends-editorial-actions-run.py",
+      "bytes": 10768,
+      "sha256": "a7b5bef3f4b596916b657c909c77b7fedef3b2cea338483509713ceb55c3a208",
+      "target": "friends-editorial-20261020/actions/helpers/actions-run.py.txt"
+    },
+    {
+      "key": "native-core-source-pins",
+      "source": "/tmp/dreams-friends-editorial-initial-source.json",
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55",
+      "target": "friends-editorial-20261020/native/core-source-pins.json"
+    },
+    {
+      "key": "environment-reconnect",
+      "source": "/tmp/dreams-friends-editorial-environment-reconnect.md",
+      "target": "friends-editorial-20261020/source/environment-reconnect-provenance.md",
+      "bytes": 2021,
+      "sha256": "23e441a3b8fb116fb5a04956ee0a7bbfb7957cb7b143826719370005cfa6394d"
+    },
+    {
+      "key": "editorial-summary",
+      "source": "/tmp/dreams-c36-editorial-context-summary.json",
+      "target": "friends-editorial-20261020/editorial/summary.json",
+      "bytes": 5207,
+      "sha256": "24f65336c3bd3ca2d81f5590a8ec8ad6563039899be808c10070d2ddc59679a1"
+    },
+    {
+      "key": "editorial-focused",
+      "source": "/tmp/dreams-c36-editorial-context-focused-attempt1.out",
+      "target": "friends-editorial-20261020/editorial/original-focused.txt",
+      "bytes": 3996,
+      "sha256": "897f6fd2c0b789516da4b8ab6117a30abb0d38083fbc22709fd526f8b395b78f"
+    },
+    {
+      "key": "editorial-types",
+      "source": "/tmp/dreams-c36-editorial-context-types.out",
+      "target": "friends-editorial-20261020/editorial/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "editorial-creator-studio",
+      "source": "/tmp/dreams-c36-editorial-context-attempt1/creator-studio.json",
+      "target": "friends-editorial-20261020/editorial/raw/creator-studio.json",
+      "bytes": 18949,
+      "sha256": "60d87d7f8d3d491697ce8330e2d24ff36ea68526533c13979fd42bebd477e24a"
+    },
+    {
+      "key": "editorial-family-trip",
+      "source": "/tmp/dreams-c36-editorial-context-attempt1/family-trip.json",
+      "target": "friends-editorial-20261020/editorial/raw/family-trip.json",
+      "bytes": 11403,
+      "sha256": "63e24c67abb5dad09c2839b971413fbc619a08ef9342c3ad5ad62a7f54fe9b3c"
+    },
+    {
+      "key": "editorial-owned-home",
+      "source": "/tmp/dreams-c36-editorial-context-attempt1/owned-home.json",
+      "target": "friends-editorial-20261020/editorial/raw/owned-home.json",
+      "bytes": 25442,
+      "sha256": "e42c4f9d5efe2e37a126f818bb9909a3244b40414a75c6aa3e4e1fbd6bc7d519"
+    },
+    {
+      "key": "editorial-pet-hobbies",
+      "source": "/tmp/dreams-c36-editorial-context-attempt1/pet-hobbies.json",
+      "target": "friends-editorial-20261020/editorial/raw/pet-hobbies.json",
+      "bytes": 6038,
+      "sha256": "77d17fef9c993fb358f5a48d6a06150fde00593417fd8a50b271eb0293cd08fe"
+    },
+    {
+      "key": "editorial-workplace-friend",
+      "source": "/tmp/dreams-c36-editorial-context-attempt1/workplace-friend.json",
+      "target": "friends-editorial-20261020/editorial/raw/workplace-friend.json",
+      "bytes": 18002,
+      "sha256": "fc5e34f02cfe0b0d595df798545a16f002bab36d37fc774b418f1a603b085794"
+    },
+    {
+      "key": "career-model-focused",
+      "source": "/tmp/dreams-model-acceptance-tests-second.out",
+      "target": "friends-editorial-20261020/careers/model/original-focused-final.txt",
+      "bytes": 1156,
+      "sha256": "d4628a406021197fa35b32800d9cd2ea3615f749f4a53315f0cc242ba165dbf5"
+    },
+    {
+      "key": "career-model-initial",
+      "source": "/tmp/dreams-model-acceptance-tests.out",
+      "target": "friends-editorial-20261020/careers/model/original-focused-initial-failed.txt",
+      "bytes": 3334,
+      "sha256": "05e2db025b314a6f8c61e6a8df309c15bbdd54f0d5545b944457ad564ebab308"
+    },
+    {
+      "key": "career-model-types",
+      "source": "/tmp/dreams-model-acceptance-types.out",
+      "target": "friends-editorial-20261020/careers/model/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "career-model-doc",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/docs/MODEL_CAREER_ACCEPTANCE.md",
+      "target": "friends-editorial-20261020/careers/model/scope.md",
+      "bytes": 5214,
+      "sha256": "2607fb2e3af016e0b2a7546b042607505cad4e83dfb15e4098376e984cf121a7"
+    },
+    {
+      "key": "career-astronaut-focused",
+      "source": "/tmp/dreams-astronaut-acceptance-tests-final.out",
+      "target": "friends-editorial-20261020/careers/astronaut/original-focused-final.txt",
+      "bytes": 1417,
+      "sha256": "73c14e12f9667b3e1464fca61bd0025888cb6ff9dcfec1f93d7008f0b49c5ec8"
+    },
+    {
+      "key": "career-astronaut-initial",
+      "source": "/tmp/dreams-astronaut-acceptance-tests.out",
+      "target": "friends-editorial-20261020/careers/astronaut/original-focused-initial-failed.txt",
+      "bytes": 3256,
+      "sha256": "86a841507afc235ca870d57110e47a97718e0cc403d9dd8f448bc681579617c3"
+    },
+    {
+      "key": "career-astronaut-types",
+      "source": "/tmp/dreams-astronaut-acceptance-types.out",
+      "target": "friends-editorial-20261020/careers/astronaut/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "career-astronaut-doc",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/docs/ASTRONAUT_CAREER_ACCEPTANCE.md",
+      "target": "friends-editorial-20261020/careers/astronaut/scope.md",
+      "bytes": 5725,
+      "sha256": "00237b46c07726a43f40f08fa422674004aedbc11cdd672737982f88083c9751"
+    },
+    {
+      "key": "career-athlete-focused",
+      "source": "/tmp/dreams-athlete-acceptance-tests-second.out",
+      "target": "friends-editorial-20261020/careers/athlete/original-focused-final.txt",
+      "bytes": 763,
+      "sha256": "f011dafb31dc9e636787a4a70ddb27d191510fa00e9ab99beb945749d4dca436"
+    },
+    {
+      "key": "career-athlete-initial",
+      "source": "/tmp/dreams-athlete-acceptance-tests.out",
+      "target": "friends-editorial-20261020/careers/athlete/original-focused-initial-failed.txt",
+      "bytes": 26224,
+      "sha256": "74eb05cc2dd36b5ff4403c60c7f0b79b59ea4d8a0eb638a10d04d38745436993"
+    },
+    {
+      "key": "career-athlete-types",
+      "source": "/tmp/dreams-athlete-acceptance-types.out",
+      "target": "friends-editorial-20261020/careers/athlete/original-types.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "career-athlete-doc",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/docs/ATHLETE_CAREER_ACCEPTANCE.md",
+      "target": "friends-editorial-20261020/careers/athlete/scope.md",
+      "bytes": 5787,
+      "sha256": "c44bd97650d67e83474a159eb6da13c77384d8291042fa3053267790b3f2faad"
+    },
+    {
+      "key": "editorial-doc",
+      "source": "/workspace/dreams-worktrees/integration-friends-editorial/docs/C36_EDITORIAL_CONTEXT_ACCEPTANCE.md",
+      "target": "friends-editorial-20261020/editorial/scope.md",
+      "bytes": 6815,
+      "sha256": "6f6a89e4298d86631c76606a64aae7fea7fd63cf29b2831d54f291808191db00"
+    },
+    {
+      "key": "actions-input-git-proof",
+      "source": "/tmp/dreams-friends-editorial-actions-git-input-proof.json",
+      "bytes": 2797,
+      "sha256": "a06802bb67e79d5b0e813aef274f83a0f74e8d80d4ef980afa802da33259cad5",
+      "target": "friends-editorial-20261020/actions/pre-registration-git-input-proof.json"
+    },
+    {
+      "key": "actions-preflight-diagnostic",
+      "source": "/tmp/dreams-friends-editorial-actions-pre-registration-child-process-diagnostic.json",
+      "bytes": 1268,
+      "sha256": "a6465e69e4ee2e7b1b5c8cce2c997ecc99e76515c83522f008de4aa260bfb514",
+      "target": "friends-editorial-20261020/actions/pre-registration-child-process-diagnostic.json"
+    },
+    {
+      "key": "native-extra-browse",
+      "source": "/tmp/dreams-friends-editorial-native-extra-browse.json",
+      "bytes": 9372,
+      "sha256": "adbb238408d39a577a8937cccd13ca9472e97477c98a3ae0f5c67d121f282ad2",
+      "target": "friends-editorial-20261020/native/extra-browse.json"
+    }
+  ],
+  "historicalReferences": [
+    {
+      "file": "opening-completion-20261020.json",
+      "bytes": 73609,
+      "sha256": "74a31bbf0b2fabad982699a81f13743f5a34fc1c90d94c98ed5ea1a64ea24507",
+      "scope": "Published C35 full milestone; its lossless editorial/criminal evidence remains historical, with no C36 rerun claim."
+    }
+  ],
+  "knownCoordinatorClosures": {
+    "annual120": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actualsession48588 CLOSED0; unchanged120 reusedseeds and completed raw footer independently inspected."
+    }
+  },
+  "requiredActual": {
+    "acceptedRegression": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actual session58662 CLOSED0, observed2026-10-21T00:22:28Z;2355tests/185suites PASS1386.145s, wrapper1386.814s; all610 source files exact before/after.",
+      "receipt": {
+        "source": "/tmp/dreams-friends-editorial-accepted-regression-receipt.json",
+        "bytes": 1094,
+        "sha256": "6a38459fcedc94da5840b17a447eab7b8234168861e062eae6891f7d01159d3b"
+      },
+      "raw": {
+        "source": "/tmp/dreams-friends-editorial-accepted-regression.out",
+        "bytes": 14103,
+        "sha256": "2fc3921f91e740960e140001e56d917d32ae8a353bba7a896159e2ca9f56a44c"
+      }
+    },
+    "acceptedFocused": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actualsession86112 CLOSED0;25tests/4suites46.805s raw;47.598s wrapper.",
+      "receipt": {
+        "source": "/tmp/dreams-friends-editorial-accepted-focused-receipt.json",
+        "bytes": 1322,
+        "sha256": "e4efc5ee6631330fc09dd1ac8a1d1700ec4bd01f6c7d1d03de5cb539b82fa305"
+      },
+      "raw": {
+        "source": "/tmp/dreams-friends-editorial-accepted-focused.out",
+        "bytes": 5609,
+        "sha256": "71aea6de8934a3ffbcea35d5303b66ce2504dc6abdf0c5a4adeba70e3aae0178"
+      }
+    },
+    "acceptedTypes": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actualsession82359 CLOSED0;21.539s wrapper;all610 before/after exact.",
+      "receipt": {
+        "source": "/tmp/dreams-friends-editorial-accepted-types-receipt.json",
+        "bytes": 1051,
+        "sha256": "968e075f370053b27ae01bf1056ad84786747de4c8201f6f12841b9bfa393294"
+      },
+      "raw": {
+        "source": "/tmp/dreams-friends-editorial-accepted-types.out",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      }
+    },
+    "native": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actualsession65832 CLOSED0 primarysixphase read-only verifier; root actualextra native42702 CLOSED0, fontrestored1.0/appforce-stopped;17actualPNG/XMLpairs personally reviewed.",
+      "result": {
+        "source": "/tmp/dreams-friends-editorial-native-verifier-results.json",
+        "bytes": 23321,
+        "sha256": "5aaf83e978e69f145a49d26506f1f44f9ea1548835b01bc59028a9654213db43"
+      },
+      "stdout": {
+        "source": "/tmp/dreams-friends-editorial-native-verifier.out",
+        "bytes": 2717,
+        "sha256": "4a31716ff4564bd5cb54702eee01eceb1efb10cdbc45b30523d5821cfc3d8e8f"
+      },
+      "capturesManifest": {
+        "source": "/tmp/dreams-c36-best-friend-native-captures.json",
+        "bytes": 2170,
+        "sha256": "c77215ed82e254a132bf8850603bd318185cc630e81de9f2aab09a8c8fbb42a7"
+      },
+      "sourceProof": {
+        "source": "/tmp/dreams-friends-editorial-native-source-proof.json",
+        "bytes": 32436,
+        "sha256": "898391885e2797b58290bd003ffae21d8ec6f50b1a6b6a49919538eb606e62e8"
+      },
+      "visualManifest": {
+        "source": "/tmp/dreams-friends-editorial-native-reviewed-images.json",
+        "bytes": 12840,
+        "sha256": "9360e838c3db2a5658b2792586d5fea12ae40a038bc572d04e5d2c07fc1836c6"
+      },
+      "expectedExistingPaths": {
+        "result": "/tmp/dreams-friends-editorial-native-verifier-results.json",
+        "stdout": "/tmp/dreams-friends-editorial-native-verifier.out",
+        "capturesManifest": "/tmp/dreams-c36-best-friend-native-captures.json",
+        "sourceProof": "/tmp/dreams-friends-editorial-native-source-proof.json"
+      },
+      "note": "Actual primarysixphase and separately verified normal/130%extra browsing accepted by root; original pending manifest remains untouched. No physical/modernAndroid/iOS/standalone claim.",
+      "extraBrowse": {
+        "source": "/tmp/dreams-friends-editorial-native-extra-browse.json",
+        "bytes": 9372,
+        "sha256": "adbb238408d39a577a8937cccd13ca9472e97477c98a3ae0f5c67d121f282ad2"
+      },
+      "coordinatorExpectedEmptyPidProbe": {
+        "session": 39373,
+        "exitCode": 1,
+        "fontScaleOutput": 1.0,
+        "scope": "Expected empty stopped-app PID check, not a gameaction or failedgameplay gate."
+      }
+    },
+    "actions": {
+      "complete": true,
+      "exitCode": 0,
+      "executionReference": "Root actual session16064 CLOSED0; benchmark and both owned Metro/QEMU resumes verified. Summary publication exited0;70 warm measured samples, zero full-unpack calls.",
+      "raw": {
+        "source": "/tmp/dreams-friends-editorial-actions.json",
+        "bytes": 258093,
+        "sha256": "66e8687ce51eacf58a70aed9010e6228ef09c466c40023d6dddbf2a825541202"
+      },
+      "stderr": {
+        "source": "/tmp/dreams-friends-editorial-actions.stderr.txt",
+        "bytes": 481,
+        "sha256": "1e7cc2812992121c8b8030f52109dadc6081cf332c1ba8c36df6d6cddbd49cfb"
+      },
+      "receipt": {
+        "source": "/tmp/dreams-friends-editorial-actions-receipt.json",
+        "bytes": 1796,
+        "sha256": "e9377491ef2a6b80a1541f0a61b7c6ed7ad66c3218f91a75791f93c7e678b077"
+      },
+      "summary": {
+        "source": "/tmp/dreams-friends-editorial-actions-summary.json",
+        "bytes": 21668,
+        "sha256": "99495aaed858ffc99155242b302dd131bc6ac43e8cbab209908c14b631260a02"
+      },
+      "short": {
+        "source": "/tmp/dreams-friends-editorial-actions-summary-short.md",
+        "bytes": 2236,
+        "sha256": "3559420d16b27b5db6218bb4eeeb6f53b34464dc380244d5daa1dcbf7bb233a3"
+      },
+      "plan": {
+        "source": "/tmp/dreams-friends-editorial-actions-plan.json",
+        "bytes": 4922,
+        "sha256": "59e9f29edf48fc731acd2bc926b911e4515a5d589c69987d8d7b1b8f4cbc7b8f"
+      },
+      "inputs": {
+        "source": "/tmp/dreams-friends-editorial-actions-input-pins.json",
+        "bytes": 3243,
+        "sha256": "5c84adc74da4e232f0e1351e4bca8c5b6208c65ab36dccd5e2a399d0745f98c4"
+      },
+      "quiescence": {
+        "source": "/tmp/dreams-friends-editorial-actions-quiescence.json",
+        "bytes": 3728,
+        "sha256": "2d9db11d232fb29bf94fb25bb3ce9018bb4cef22cec1580eadfddb8c056fe3c5"
+      },
+      "ready": {
+        "source": "/tmp/dreams-friends-editorial-actions-ready.json",
+        "bytes": 1996,
+        "sha256": "31001f5c987f8fd6cdd138ebba29cee7f808d76e4731fc9ae2d745b24fbb90c3"
+      },
+      "ownedProcesses": {
+        "source": "/tmp/dreams-friends-editorial-actions-owned-processes.json",
+        "bytes": 1271,
+        "sha256": "ff3283014a4fb7e7a44c21024f87d963f0094e88a488394b93eee17cc7ee9960"
+      },
+      "note": "Actual serial cloud Node/on-disk SQLite diagnostics;14 cases and70 measured warm samples. No rendered native latency or physical p95 claim."
+    }
+  }
+}
