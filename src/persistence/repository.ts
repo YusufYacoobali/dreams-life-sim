@@ -147,18 +147,24 @@ export class SaveRepository {
     const payload = packCheckpoint(world);
     let duplicate = false;
     await this.db.transaction(async tx => {
-      const receipt = await tx.get<{ revision: number }>('SELECT revision FROM receipts WHERE life_id=? AND command_id=?', [world.id, commandId]);
-      if (receipt) { duplicate = true; return; }
-      const current = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [world.id]);
+      // One native read checks both facts. The anchor preserves receipt-first
+      // idempotency even if the current life row is missing.
+      const current = await tx.get<{ revision: number | null; payload: string | null; has_receipt: number }>(
+        'SELECT l.revision,l.payload,r.command_id IS NOT NULL AS has_receipt FROM (SELECT 1) AS anchor LEFT JOIN lives l ON l.id=? LEFT JOIN receipts r ON r.life_id=? AND r.command_id=?',
+        [world.id, world.id, commandId],
+      );
+      if (current?.has_receipt) { duplicate = true; return; }
       if (!current || current.revision !== expectedRevision) throw new SaveConflict();
+      // A matching revision proves the life exists; its payload is NOT NULL.
+      const currentPayload = current.payload!;
       // Compare the actual bytes as well as identity/revision: an external write
       // or damaged current row must never be hidden by the in-memory cache.
       const cached = this.current;
-      const previous = cached && cached.world.id === world.id && cached.world.revision === current.revision && cached.payload === current.payload
-        ? cached.world : unpackCheckpoint(current.payload, true);
+      const previous = cached && cached.world.id === world.id && cached.world.revision === current.revision && cached.payload === currentPayload
+        ? cached.world : unpackCheckpoint(currentPayload, true);
       if (previous.id !== world.id || previous.revision !== current.revision) throw new SaveCorrupt(world.id);
       if (captureBefore) {
-        const packed = current.payload.startsWith('{"format":"dreams-checkpoint-v') ? current.payload : undefined;
+        const packed = currentPayload.startsWith('{"format":"dreams-checkpoint-v') ? currentPayload : undefined;
         await this.writeSnapshot(tx, world.id, snapshotRecord(previous, this.now(), 'Before Age Up', packed));
       }
       // Copy within SQLite instead of sending the unchanged payload back over the native bridge.
