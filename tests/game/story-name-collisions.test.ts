@@ -51,8 +51,17 @@ test.each([
   expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(packCheckpoint(world)).pending).toEqual(pending);
 });
 
-test.each([['IN', 7], ['GB', 10]] as const)('%s decision%i remains byte-equivalent when names are unambiguous or the matching teacher is not bound', (country, index) => {
-  const { pending, next } = bound(record(country, index)); expect(next).toEqual(pending);
+test.each([['IN', 7], ['GB', 10]] as const)('%s decision%i retains every original byte apart from the explicit fresh project-recall opt-in', (country, index) => {
+  const { pending, next } = bound(record(country, index)), comparable = structuredClone(next);
+  const projects = comparable.choices.flatMap(choice => choice.effects.filter(effect => effect.kind === 'schedule-story' && effect.storyKind === 'project-promise'));
+  expect(projects).toHaveLength(country === 'GB' ? 1 : 0);
+  for (const effect of projects) {
+    if (effect.kind !== 'schedule-story') throw Error('Expected the actual project scheduling effect');
+    expect(effect.rememberProject).toBe(true);
+    expect(pending.choices.flatMap(choice => choice.effects).filter(item => item.kind === 'schedule-story').every(item => !Object.hasOwn(item, 'rememberProject'))).toBe(true);
+    delete effect.rememberProject;
+  }
+  expect(comparable).toEqual(pending);
   expect(next.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
 });
 
