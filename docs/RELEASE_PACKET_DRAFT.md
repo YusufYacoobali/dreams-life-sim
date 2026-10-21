@@ -1,6 +1,6 @@
 # Local release packet — unpublished draft
 
-Updated21October2026: final runtime4e4cfd5 and its clean standalone candidate include all confirmed missing features and the native Statistics window/contrast correction. Feature checkpointa13735c passes the complete2,820-test/221-suite gate;4e passes strict app/test types and scoped native checks, with its automatic gate running. This remains an unpublished distribution draft. [Current handoff](HANDOFF.md) and [release audit](RELEASE_READINESS_AUDIT.md) identify exact source/build boundaries.
+Updated21October2026: runtime/candidateb75e617 includes all confirmed feature gaps and the first-month campus planning fix. Focused/types, ordinary Android campus/year/cold resume and final Android/iOS Hermes bundle checks pass; its automatic gate is running. No standalone artifact or publication is claimed. [Current handoff](HANDOFF.md) and [release audit](RELEASE_READINESS_AUDIT.md) identify exact results, remaining device/signing work and the unchanged dependency-access block.
 
 ## Candidate identity and listing
 

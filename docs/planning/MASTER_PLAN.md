@@ -1,6 +1,6 @@
 # Dreams: Life Simulator — Phase 0 master plan
 
-All confirmed audit gaps are implemented and pushed. Complete feature checkpointa13735c passes2,820tests/221suites, locked install and strict app/all-test types. Final runtime4e4cfd5 fixes only the new Statistics modal geometry/legacy system-bar contrast; its strict/native checks pass and automatic CI is running. Business creation/offering/branding/cold resume and150% model selection pass; original data remain exact. Standalone/device acceptance is still separate and the fresh environment still blocks the required Android AAR host. [Current handoff](../HANDOFF.md) records exact scopes, ownership and blockers. Preserve autosave and avoid repeated unchanged cohorts.
+All confirmed audit gaps are implemented, including the b75first-month campus fix. Its focused/types and actual Android campus/year/cold checks pass; final Android/iOS Hermes bundles contain the current source. Its automatic Quality gate is running; earlier full passes remain source-scoped. Remaining work is final standalone/device/accessibility/distribution acceptance, with Android dependency access still blocked. [Current handoff](../HANDOFF.md) records exact results and ownership. Preserve autosave and avoid repeated unchanged cohorts.
 
 ## Earlier source-scoped checkpoint notes
 
