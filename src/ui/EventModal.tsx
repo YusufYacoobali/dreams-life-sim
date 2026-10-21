@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
@@ -31,6 +31,22 @@ function EventCard({
   const { reducedMotion } = useFeedback();
   const insets = useSafeAreaInsets();
   const [selected, setSelected] = useState<string | null>(null);
+  const mounted = useRef(true), closed = useRef(false), current = useRef({ event, busy });
+  if (current.current.event !== event) closed.current = false;
+  current.current = { event, busy };
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  // A retained native input belongs to this presentation. New render objects
+  // do not reset selection, and choosing never latches an unknown async save.
+  const canAct = () => mounted.current && !closed.current && current.current.event === event && !current.current.busy;
+  const choose = (id: string) => {
+    if (!canAct()) return;
+    if ((event.kind === 'decision' || event.kind === 'selection') && !event.choices.some(choice => choice.id === id && !choice.disabledReason)) return;
+    onChoose(id);
+  };
+  const dismiss = (handler?: () => void) => {
+    if (!handler || !canAct()) return;
+    closed.current = true; handler();
+  };
   const showProgress = useDelayedBusy(busy);
   const selectedEligible = event.kind === 'selection' && event.choices.some(choice => choice.id === selected && !choice.disabledReason);
   const effects = event.kind === 'result' ? event.effects
@@ -39,7 +55,7 @@ function EventCard({
     // RN's legacy Android modal wrapper otherwise fits system insets a second
     // time, leaving strips of the underlying page outside this backdrop.
     // Keep the navigation bar opaque; card spacing still uses safe-area insets.
-    <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
+    <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => dismiss(onCancel ?? onClose)}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, event.kind === 'selection' && styles.selectionCard, { backgroundColor: c.surface }]}>
           {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}
@@ -57,24 +73,24 @@ function EventCard({
             {event.kind === 'decision' && event.choices.map(choice => <Button
               key={choice.id} label={choice.label} disabled={busy || !!choice.disabledReason}
               accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
-              onPress={() => onChoose(choice.id)}
+              onPress={() => choose(choice.id)}
             />)}
             {event.kind === 'selection' && <>
               {event.choices.map(choice => <Pressable
                 key={choice.id} accessibilityRole="radio" accessibilityState={{ checked: selected === choice.id, disabled: busy || !!choice.disabledReason }}
                 accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
-                disabled={busy || !!choice.disabledReason} onPress={() => setSelected(choice.id)}
+                disabled={busy || !!choice.disabledReason} onPress={() => { if (canAct() && !choice.disabledReason) setSelected(choice.id); }}
                 style={[styles.option, { borderColor: selected === choice.id ? c.blue : c.line, backgroundColor: selected === choice.id ? c.selected : c.surface }]}
               ><Body>{choice.label}</Body>{choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}</Pressable>)}
             </>}
-            {event.kind === 'confirmation' && <Button label={event.confirmLabel} busy={busy} onPress={() => onChoose('confirm')} />}
-            {event.kind === 'milestone' && event.action && <Button label={event.action.label} disabled={busy} onPress={() => onChoose(event.action!.id)} />}
-            {(event.kind === 'result' || event.kind === 'milestone') && <Button label={event.continueLabel ?? 'Continue'} tone={event.kind === 'milestone' && event.action ? 'secondary' : 'primary'} busy={busy} onPress={() => onChoose('continue')} />}
-            {onCancel && event.kind !== 'selection' && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
+            {event.kind === 'confirmation' && <Button label={event.confirmLabel} busy={busy} onPress={() => choose('confirm')} />}
+            {event.kind === 'milestone' && event.action && <Button label={event.action.label} disabled={busy} onPress={() => choose(event.action!.id)} />}
+            {(event.kind === 'result' || event.kind === 'milestone') && <Button label={event.continueLabel ?? 'Continue'} tone={event.kind === 'milestone' && event.action ? 'secondary' : 'primary'} busy={busy} onPress={() => choose('continue')} />}
+            {onCancel && event.kind !== 'selection' && <Button label="Never mind" tone="secondary" disabled={busy} onPress={() => dismiss(onCancel)} />}
           </ScrollView>
           {event.kind === 'selection' && <View style={styles.selectionFooter}>
-            <Button label={event.confirmLabel} disabled={!selectedEligible} busy={busy} onPress={() => { if (selected && selectedEligible) onChoose(selected); }} />
-            {onCancel && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
+            <Button label={event.confirmLabel} disabled={!selectedEligible} busy={busy} onPress={() => { if (selected && selectedEligible) choose(selected); }} />
+            {onCancel && <Button label="Never mind" tone="secondary" disabled={busy} onPress={() => dismiss(onCancel)} />}
           </View>}
         </View>
       </View>

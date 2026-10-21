@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, ScrollView, StyleSheet } from 'react-native';
-import { fireEvent, render, screen, within } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
+import { Button } from '../../src/ui/components';
 import { lightColors, ThemeProvider } from '../../src/ui/theme';
 import { countries, countryCodes } from '../../src/game/countries';
 
@@ -16,6 +17,10 @@ const review: EventPresentation = {
 };
 const frame = (children: React.ReactNode, insets: { top: number; bottom: number; left: number; right: number }) =>
   <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets }}><ThemeProvider>{children}</ThemeProvider></SafeAreaProvider>;
+const noInsets = { top: 0, bottom: 0, left: 0, right: 0 };
+// Capture the actual rendered Button boundary's onPress, never EventModal's
+// public onChoose prop. This models a retained input from the closed card.
+const buttonCallback = (label: string) => screen.UNSAFE_getAllByType(Button).find(item => item.props.label === label)!.props.onPress as () => void;
 
 test.each([
   { label: 'legacy Android bars', insets: { top: 24, bottom: 48, left: 0, right: 0 } },
@@ -72,7 +77,7 @@ test('a twelve-country selection keeps explicit actions outside its scrolling co
   fireEvent.press(screen.getByRole('radio', { name: 'Canada' }));
   expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeOnTheScreen();
   expect(choose).not.toHaveBeenCalled();
-  view.rerender(frame(<EventModal event={event} busy onChoose={choose} onCancel={cancel} />, insets));
+  view.rerender(frame(<EventModal event={{ ...event }} busy onChoose={choose} onCancel={cancel} />, insets));
   expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
@@ -80,7 +85,7 @@ test('a twelve-country selection keeps explicit actions outside its scrolling co
   fireEvent.press(screen.getByRole('button', { name: 'Never mind' }));
   fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
   expect(choose).not.toHaveBeenCalled(); expect(cancel).not.toHaveBeenCalled();
-  view.rerender(frame(<EventModal event={event} error="Could not save this selection. Try again." onChoose={choose} onCancel={cancel} />, insets));
+  view.rerender(frame(<EventModal event={{ ...event }} error="Could not save this selection. Try again." onChoose={choose} onCancel={cancel} />, insets));
   expect(screen.getByRole('alert')).toHaveTextContent('Could not save this selection. Try again.');
   expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: 'Choose' }));
@@ -88,4 +93,43 @@ test('a twelve-country selection keeps explicit actions outside its scrolling co
   view.rerender(frame(<EventModal event={{ ...event, id: 'creation:city', title: 'Choose a city', choices: [{ id: 'Toronto', label: 'Toronto' }] }} onChoose={choose} onCancel={cancel} />, insets));
   expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
   fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(cancel).toHaveBeenCalledTimes(1);
+});
+
+test.each(['cancelled', 'Android-closed', 'unmounted'] as const)('queued native button callbacks cannot emit from a %s confirmation', state => {
+  const choose = jest.fn(), cancel = jest.fn(), view = render(frame(<EventModal event={review} onChoose={choose} onCancel={cancel} />, noInsets));
+  const confirm = buttonCallback('Start a New Life'), neverMind = buttonCallback('Never mind'), androidClose = screen.UNSAFE_getByType(Modal).props.onRequestClose;
+  if (state === 'cancelled') fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); else if (state === 'Android-closed') fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); else view.unmount();
+  act(() => { confirm(); neverMind(); androidClose(); });
+  expect(choose).not.toHaveBeenCalled(); expect(cancel).toHaveBeenCalledTimes(state === 'unmounted' ? 0 : 1);
+});
+
+test('queued native callbacks from a replaced same-id presentation cannot act on either review', () => {
+  const firstChoose = jest.fn(), firstCancel = jest.fn(), nextChoose = jest.fn(), nextCancel = jest.fn();
+  const view = render(frame(<EventModal event={review} onChoose={firstChoose} onCancel={firstCancel} />, noInsets));
+  const oldConfirm = buttonCallback('Start a New Life'), oldCancel = buttonCallback('Never mind');
+  view.rerender(frame(<EventModal event={{ ...review, title: 'A different reviewed life' }} onChoose={nextChoose} onCancel={nextCancel} />, noInsets));
+  act(() => { oldConfirm(); oldCancel(); });
+  expect(firstChoose).not.toHaveBeenCalled(); expect(firstCancel).not.toHaveBeenCalled(); expect(nextChoose).not.toHaveBeenCalled(); expect(nextCancel).not.toHaveBeenCalled();
+  fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(nextChoose).toHaveBeenCalledWith('confirm');
+});
+
+test('retained inputs respect current busy state, while a fresh failed-save confirmation remains retryable', () => {
+  const choose = jest.fn(), cancel = jest.fn(), view = render(frame(<EventModal event={review} onChoose={choose} onCancel={cancel} />, noInsets));
+  const confirm = buttonCallback('Start a New Life'), neverMind = buttonCallback('Never mind'), androidClose = screen.UNSAFE_getByType(Modal).props.onRequestClose;
+  fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(choose).toHaveBeenCalledTimes(1);
+  view.rerender(frame(<EventModal event={review} busy onChoose={choose} onCancel={cancel} />, noInsets));
+  act(() => { confirm(); neverMind(); androidClose(); }); expect(choose).toHaveBeenCalledTimes(1); expect(cancel).not.toHaveBeenCalled();
+  view.rerender(frame(<EventModal event={{ ...review }} error="Your save failed. Try again." onChoose={choose} onCancel={cancel} />, noInsets));
+  expect(screen.getByRole('alert')).toHaveTextContent('Your save failed. Try again.');
+  fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(choose).toHaveBeenCalledTimes(2);
+});
+
+test.each(['decision', 'result'] as const)('Android Back cannot dismiss or disable a protected %s without a close handler', kind => {
+  const choose = jest.fn(), event: EventPresentation = kind === 'decision'
+    ? { id: 'protected-decision', kind, title: 'A required decision', body: 'Choose what happens next.', choices: [{ id: 'act', label: 'Make This Choice' }] }
+    : { id: 'protected-result', kind, title: 'A saved result', body: 'This result is already recorded.', effects: [] };
+  render(frame(<EventModal event={event} onChoose={choose} />, noInsets));
+  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(choose).not.toHaveBeenCalled();
+  fireEvent.press(screen.getByRole('button', { name: kind === 'decision' ? 'Make This Choice' : 'Continue' }));
+  expect(choose).toHaveBeenCalledWith(kind === 'decision' ? 'act' : 'continue');
 });
