@@ -2,6 +2,7 @@ import type { World } from '../model';
 import type { BoundChoice, Pending, RuntimeEffectRow } from '../runtime';
 import { IneligibleAction } from '../errors';
 import { nextPending, offerPending } from '../pendingQueue';
+import { fullName } from '../personHelpers';
 import { bounded, fact } from './common';
 import { refreshFriendship, relationFor } from './relationships';
 import { storyMonthNumber, storyPersonPresent } from './storyContext';
@@ -35,9 +36,9 @@ function callback(world: World, thread: StoryThread): Extract<Pending, { kind: '
   const past = projectPast(thread);
   const option = (id: typeof projectRecallResolutionIds[number], label: string, title: string, body: string): BoundChoice => ({ id, label, effects: [{ kind: 'resolve-story', threadId: thread.id, resolution: id }], resultTitle: title, resultBody: body, journal: projectRecallJournal(thread, peer.firstName, id) });
   return { kind: 'decision', id: projectRecallEventId(thread), templateId: 'story-project-recall', title: 'A promise remembered',
-    body: 'Two years after that class project, ' + peer.firstName + ' brings it up. Back then, ' + past + '. The conversation is about what you actually did, not a new school mark.',
+    body: 'Two years after that class project, ' + fullName(peer) + ' brings it up. Back then, ' + past + '.',
     illustration: 'education', personIds: [thread.personId, thread.peerId], choices: [
-      option('remember-project', completed ? 'Remember doing your part' : helped ? 'Remember asking for help' : 'Own leaving your section blank', 'An old project, an honest conversation', 'You acknowledge that ' + past + '. ' + peer.firstName + ' hears you out. A conversation now cannot change the work recorded then.'),
+      option('remember-project', completed ? 'Remember doing your part' : helped ? 'Remember asking for help' : 'Own leaving your section blank', 'An old project, an honest conversation', 'You acknowledge that ' + past + '. ' + peer.firstName + ' hears you out.'),
       option('dismiss-project', 'Tell ' + peer.firstName + ' it does not matter', 'The subject lands badly', 'You brush the memory aside. ' + peer.firstName + ' is less comfortable trusting you with it.'),
       option('pass-project', 'Leave it in the past', 'The past stays put', 'You leave the subject alone. No new promise, payment or school result is created.'),
     ] };
