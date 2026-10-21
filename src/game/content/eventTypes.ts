@@ -15,6 +15,7 @@ export type EventTemplate = {
   id: string; min: number; max: number; rarity?: EventRarity; parent?: boolean; parentContact?: boolean;
   school?: 'primary' | 'secondary' | 'any'; classmate?: boolean; teacher?: boolean;
   study?: 'active' | 'paused';
+  retired?: true; widowed?: true;
   workplace?: boolean; coworker?: boolean; supervisor?: boolean;
   friend?: boolean; partner?: boolean;
   legal?: 'awaiting-trial' | 'prison-peer' | 'released';

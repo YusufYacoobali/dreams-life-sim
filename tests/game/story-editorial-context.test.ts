@@ -1,6 +1,6 @@
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
-import { resolveCommand } from '../../src/game/engine';
+import { recordDeath, resolveCommand } from '../../src/game/engine';
 import { decodeSave } from '../../src/persistence/archive';
 import { addCondition, emergencyCare, hospitalized } from '../../src/game/systems/health';
 import { activeTrip } from '../../src/game/systems/travelSchemas';
@@ -16,6 +16,12 @@ import { studyStoryContext } from '../../src/game/systems/studyStoryContext';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { offerPending } from '../../src/game/pendingQueue';
 import { startStudy, pausedStudy } from '../support/studyStory';
+import { retiredLife, widowedLife } from '../support/laterLifeStory';
+import { laterLifeStoryContext } from '../../src/game/systems/laterLifeStoryContext';
+import { fullName } from '../../src/game/personHelpers';
+import { otherPerson, partnerRelation } from '../../src/game/systems/relationshipQueries';
+import { divorceQuote } from '../../src/game/systems/family';
+import marriage from '../fixtures/v5-marriage-result.json';
 
 const publicScenes = ['library-card', 'community-garden', 'local-meeting', 'familiar-street', 'toddler-caterpillar-crossing', 'rest-guilt'];
 const template = (id: string) => eventTemplates.find(item => item.id === id)!;
@@ -248,4 +254,109 @@ test('already bound study copy survives real withdrawal, exact checkpoint restor
   expect(result.pending).toMatchObject({ kind: 'result', body: bound.choices[0].resultBody });
   expect(result.people[result.activePersonId].education).toEqual(left.people[left.activePersonId].education);
   for (const key of ['studyCourses', 'universityApplications', 'accounts', 'liabilities', 'ledger', 'random'] as const) expect(result[key]).toEqual(left[key]);
+});
+
+const laterProbe = (kind: 'retired' | 'widowed'): EventTemplate => ({
+  id: 'later-context-probe-' + kind, min: 18, max: 120, [kind]: true, illustration: 'journal',
+  title: 'Recorded circumstances', body: kind === 'widowed' ? '{lateSpouse}. {lateSpouse}.' : 'An earned pension.',
+  choices: [
+    storyOption('reflect', 'Take a moment', { stress: -1 }, 'A moment', 'You take a moment.', 'I took a moment.'),
+    storyOption('worry', 'Keep worrying', { stress: 1 }, 'A worry', 'You keep worrying.', 'I kept worrying.'),
+  ],
+});
+
+test('recorded paid work and actual pension receipts supply retirement context without treating age, another person or unpaid rights as evidence', () => {
+  const world = retiredLife(), person = world.people[world.activePersonId], before = encodeWorld(world);
+  expect(person.finance.serviceMonths).toBe(588);
+  expect(person.finance.pensionReceipts).toHaveLength(12);
+  expect(world.workHistory.some(item => item.personId === person.id && item.ended && item.grossEarned > 0n)).toBe(true);
+  expect(laterLifeStoryContext(world)).toMatchObject({ retired: true });
+  expect(bindEvent(world, laterProbe('retired')).personIds).toEqual([person.id]);
+  expect(laterLifeStoryContext(decodeSave(JSON.stringify(serviceArchive)).world)?.retired).toBe(false);
+  // Isolated predicate inputs, not validated saves or claimed gameplay transitions.
+  const traps: ((value: World) => void)[] = [
+    value => { value.people[person.id].finance.pensionReceipts = []; },
+    value => { value.people[person.id].finance.pensionAnnual = 0n; },
+    value => { value.people[person.id].finance.serviceMonths = 119; },
+    value => { value.people[person.id].finance.lifetimeGross = 0n; },
+    value => { value.workHistory = value.workHistory.filter(item => item.personId !== person.id); },
+    value => { for (const item of value.workHistory) if (item.personId === person.id) item.ended = null; },
+    value => { value.people[person.id].employment = decodeWorld(JSON.stringify(graduate)).people.person_player.employment; },
+    value => { value.people[person.id].education.stage = 'trade'; },
+  ];
+  for (const corrupt of traps) {
+    const invalid = copyWorld(world); corrupt(invalid);
+    expect(laterLifeStoryContext(invalid)?.retired).toBe(false);
+    expect(() => bindEvent(invalid, laterProbe('retired'))).toThrow(/recorded current later-life context/);
+  }
+  expect(laterLifeStoryContext(admit(copyWorld(world)))).toBeUndefined();
+  expect(encodeWorld(world)).toBe(before);
+});
+
+test('a production death on a genuine marriage binds only the actual late spouse, without fabricating a person, scene memory or bond effect', () => {
+  const world = widowedLife(), context = laterLifeStoryContext(world), spouse = context!.lateSpouse!, before = encodeWorld(world);
+  expect(world.pending).toBeNull(); expect(world.deferred).toEqual([]);
+  expect(spouse.died).toEqual(world.date);
+  expect(world.marriages.find(item => item.a === spouse.id || item.b === spouse.id)).toMatchObject({ ended: spouse.died, endReason: 'death' });
+  const bound = bindEvent(world, laterProbe('widowed'));
+  expect(bound.body).toBe(fullName(spouse) + '. ' + fullName(spouse) + '.');
+  expect(bound.personIds).toEqual([world.activePersonId, spouse.id]);
+  expect(bound.choices.every(choice => choice.effects.every(effect => effect.kind === 'stat' && effect.personId === world.activePersonId))).toBe(true);
+  expect(bindEvent(world, { ...laterProbe('widowed'), widowed: undefined }).body).toBe('{lateSpouse}. {lateSpouse}.');
+  expect(encodeWorld(world)).toBe(before);
+});
+
+test('a real divorce then former-spouse death is not widowhood, and current, ambiguous or mismatched relationships cannot supply a late spouse', () => {
+  let divorced = acknowledge(decodeWorld(JSON.stringify(marriage)));
+  const spouse = otherPerson(divorced, partnerRelation(divorced)!);
+  expect(laterLifeStoryContext(divorced)?.lateSpouse).toBeUndefined();
+  divorced = acknowledge(resolveCommand(divorced, { type: 'divorce', personId: spouse.id, custody: 'shared', quotedPayment: divorceQuote(divorced, spouse.id).signed }));
+  recordDeath(divorced, spouse.id, 'Explicit divorced-person story mortality boundary');
+  validateWorld(divorced);
+  expect(laterLifeStoryContext(divorced)?.lateSpouse).toBeUndefined();
+  const world = widowedLife(), late = laterLifeStoryContext(world)!.lateSpouse!;
+  // Unvalidated association/date ambiguity traps, not invented positive marriages.
+  const traps: ((value: World) => void)[] = [
+    value => { value.people[late.id].died = null; },
+    value => { value.marriages.at(-1)!.endReason = 'divorce'; },
+    value => { value.people[late.id].died = { ...value.date, day: value.date.day === 1 ? 2 : 1 }; },
+    value => { value.relationships.find(item => item.romance === 'widowed')!.romance = 'dating'; },
+    value => { value.marriages.push({ ...value.marriages.at(-1)!, id: 'ambiguous-latest-marriage' }); },
+    value => { value.marriages.push({ ...value.marriages.at(-1)!, id: 'later-divorce', started: { ...value.date, day: value.date.day + 1 }, endReason: 'divorce' }); },
+  ];
+  for (const corrupt of traps) {
+    const invalid = copyWorld(world); corrupt(invalid);
+    expect(laterLifeStoryContext(invalid)?.lateSpouse).toBeUndefined();
+    expect(() => bindEvent(invalid, laterProbe('widowed'))).toThrow(/recorded current later-life context/);
+  }
+});
+
+test('the original 272 scenes retain eligibility and all available literal bindings without the new retirement or marriage facts', () => {
+  const originalIds = new Set(eventTemplates.slice(0, 272).map(item => item.id));
+  expect(eventTemplates.slice(0, 272).every(item => !item.retired && !item.widowed)).toBe(true);
+  for (const world of [retiredLife(), widowedLife()]) {
+    const withoutFacts = copyWorld(world), before = encodeWorld(world);
+    withoutFacts.people[world.activePersonId].finance.pensionAnnual = 0n;
+    withoutFacts.marriages = [];
+    const oldEligible = (value: World) => eligibleTemplates(value).filter(item => originalIds.has(item.id));
+    const expected = oldEligible(withoutFacts);
+    expect(oldEligible(world)).toEqual(expected);
+    expect(expected.map(item => bindEvent(world, item))).toEqual(expected.map(item => bindEvent(withoutFacts, item)));
+    expect(encodeWorld(world)).toBe(before);
+  }
+});
+
+test('previously bound retired copy remains exact through real hospital admission, production checkpoint restore and ordinary choice', () => {
+  const world = retiredLife(), bound = bindEvent(world, laterProbe('retired'));
+  const admitted = admit(world);
+  expect(laterLifeStoryContext(admitted)).toBeUndefined();
+  offerPending(admitted, bound); // Explicit retained binding, not a naturally selected encounter.
+  const restored = unpackCheckpoint(packCheckpoint(admitted), true);
+  expect(restored).toEqual(admitted);
+  const result = resolveCommand(restored, { type: 'choose', eventId: bound.id, choiceId: 'reflect' }, true);
+  expect(result.pending).toMatchObject({ kind: 'result', body: bound.choices[0].resultBody });
+  for (const key of ['people', 'workHistory', 'accounts', 'liabilities', 'ledger', 'random', 'marriages'] as const) {
+    if (key === 'people') expect(result.people[result.activePersonId].finance).toEqual(admitted.people[admitted.activePersonId].finance);
+    else expect(result[key]).toEqual(admitted[key]);
+  }
 });
