@@ -80,10 +80,13 @@ test('withdrawal reviews and cancels without writes, keeps one failed review, re
   } finally { view?.unmount(); jest.restoreAllMocks(); context.close(); }
 }, 30000);
 
-test('changing actual selected lives dismisses the old school review and returning does not resurrect its command', async () => {
-  const context = await fixture(); const view = render(frame(<Education />));
+test('secondary-school education browsing stays read-only and changing selected lives dismisses the old review', async () => {
+  const context = await fixture(); const view = render(frame());
   try {
-    const before = mockStore.getState().world!, rows = context.rows(); expect(screen.getByText(/minimum leaving age is 16; review early withdrawal/)).toBeOnTheScreen(); await press('Your School'); expect(router.push).toHaveBeenLastCalledWith('/school'); expect(context.rows()).toEqual(rows);
+    const before = mockStore.getState().world!, rows = context.rows();
+    await press(/^Further Education\./); expect(router.push).toHaveBeenLastCalledWith('/education'); expect(mockStore.getState().world).toBe(before); expect(context.rows()).toEqual(rows);
+    view.rerender(frame(<Education />)); expect(screen.getByRole('button', { name: /^University\..*Finish secondary education first/ })).toBeDisabled();
+    expect(screen.getByText(/minimum leaving age is 16; review early withdrawal/)).toBeOnTheScreen(); await press('Your School'); expect(router.push).toHaveBeenLastCalledWith('/school'); expect(mockStore.getState().world).toBe(before); expect(context.rows()).toEqual(rows);
     view.rerender(frame()); await press(/^Withdraw from Secondary School/); expect(screen.getByRole('button', { name: 'Withdraw from School' })).toBeEnabled();
     await act(async () => { expect(await mockStore.getState().selectLife(context.old.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Withdraw from School' })).toBeNull();
     await act(async () => { expect(await mockStore.getState().selectLife(before.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Withdraw from School' })).toBeNull(); expect(mockStore.getState().world).toEqual(before); expect(mockStore.getState().world!.schoolWithdrawals).toEqual([]);
