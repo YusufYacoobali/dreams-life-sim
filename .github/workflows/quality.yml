@@ -3,6 +3,8 @@ name: Quality
 on:
   push:
     branches: [work, main]
+    paths-ignore:
+      - '**/*.md'
   pull_request:
   workflow_dispatch:
 
