@@ -1,10 +1,12 @@
 # Continue Dreams: Life Simulator
 
 Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_PLAN.md).
-The latest responsiveness fixes, conversation topics, date activities, school-name fix, checks and actual Android download block are in [current product work](PROGRESS.md#current-product-work). Runtime source is `b048dd8`, World39/engine40/content14/reader19. It adds one combined save read, a byte-identical faster checksum loop and literal person/date helper extraction that reduced native import-cycle warnings66→7. Relevant persistence/codec/game checks and strict types pass; the next hosted gate covers the combined source. The detailed `83adaea` checkpoint below is historical. Reduce repetitive evidence packaging and overlapping reviews; prioritise game-facing work, focused checks and the existing complete regression gate.
-The latest small gameplay fix `ea91b23` makes new sponsorship terms and unpaid-period journals factual when a profile is inactive despite enough delivered posts. Rules/money/RNG/tags/old bound copy are unchanged;3focused checks and scoped types pass. C/D outcome review is complete with the remaining scenario/coverage limits in PROGRESS; do not rerun those cohorts merely to package them. Current native play remains frozen onE5 and does not claim sponsor-copy UI acceptance.
-Current gameplay is pushed through `6812295`; subsequent notes are Markdown-only. The source's66focused checks, strict types, both production exports and actual normal/130% conversation save/cold/ack checks pass. Hosted Quality run39601947657 on6812295 completed successfully at13:11UTC, including locked installation, strict app/test types and full regression. The earlier local run's two test-maintenance failures were corrected and rechecked. The native build still has an observed403 at the required `repo.reactnative.dev` AAR redirect; enforced policy63 excludes that host despite the user's saved-environment access change. Legitimate host access is needed before another build attempt. The fresh clean `/workspace/dreams-worktrees/native-prebuild-gameplay` candidate at6bf38aa passes offline prebuild, points to the latest gameplay and shares existing tools/caches; use it instead of the older6aa candidate when finishing standalone/offline acceptance. No APK exists yet.
-Root is the sole device/Metro/emulator owner; `story_editorial` explicitly returned ownership after actual Ren7→11 play exposed slow Continue actions. Its19-minute segment is not a continuous30-minute pass. Root reproduced the exact project and birthday states from genuine snapshot48/backup51, then isolated native timings in `/workspace/dreams-worktrees/button-latency-native`; those temporary probes are uncommitted and must not ship. Clean final-source native resume acceptance is next. Earlier E5 chooser captures keep their original source/scope. Do not rerun unchanged1,000-life/performance gates or duplicate full local and hosted regressions without a new concern.
+Latest source is `055e897` on `work`, pushed, World39 / engine40 / content14 / reader19 / checkpointv4. Read [current product work](PROGRESS.md#current-product-work) for the actual gate scopes. Five responsiveness changes are integrated: one combined native save read; an identical indexed checksum; literal person/date helpers with fewer initialization cycles; no redundant freezing of certified ledger rows; and memoized Life identity/journal views during unchanged-world saving/menu updates. Gameplay, full validation, durable saving and old checkpoint bytes stay intact. Future project recalls name the actual classmate fully and omit two explanatory sentences. Focused checks and the combined hosted app/test typechecks pass; the [full regression](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39620728034) is running.
+
+Root alone owns the API24 emulator and Metro, serving clean `055e897` from `/workspace/dreams-worktrees/button-latency-native`; temporary timing probes were removed. Genuine play completed the original project at10, recalled it two years later at12 and reached the13th birthday. On clean responsiveness source7169598, the recalled result57 survives force-stop/cold Continue with every row across all eight SQLite tables exact; one receipt was added and all eight inactive lives/backups and older history stayed unchanged. The earlier19-minute play segment exposed real slow Continue actions and is not a continuous30-minute acceptance pass. Final055 source also cold-loads the saved13th-birthday result with all eight tables unchanged; acknowledgement commits once and returns to enabled Life controls. Brief final-source play is in progress. Do not repeat unchanged1,000-life gates or add evidence/hash/export packs.
+
+The standalone Android build remains blocked by the observed403 at the required `repo.reactnative.dev` AAR redirect. Live enforced policy63 excludes that host; the user's screenshot correctly adds it to the saved environment, but republishing does not change an existing task's saved runtime state. Use the republished environment for a new Cloud task when ready; preserve this task and its local native tools, AVD data, DBs and logs. No download retry, APK, standalone/offline acceptance, physical performance or iOS build is claimed. The clean generated candidate `/workspace/dreams-worktrees/native-prebuild-gameplay` and unrun `/tmp/dreams-build-current-private-apk.py` now point to055e897; installed tools/caches are shared. Its earlier successful offline prebuild remains source-scoped; native configuration/package inputs are unchanged. More file/history tooling stays parked.
+
 Continue `YusufYacoobali/dreams-life-sim`, branch `work`, through the complete
 production plan. Priorities: smooth buttons, startup/onboarding and early gameplay.
 All27 supplied references are reconciled; reopen the relevant reference for each
@@ -26,7 +28,7 @@ previous-life summaries are complete. Full production is approximately
 **75%**; the catalogue contains **265 situations /795 choices**. Editorial, balance and
 release acceptance remain open.
 
-## Current integration: production gameplay and acceptance
+## Prior checkpoint: World38/engine39 gameplay and acceptance
 
 Current UI source `83adaea6f92523d04a27df2e77b11e0a8b14ef1d` has 703 verified files and uses World38 / engine39 / content13 / reader18 / checkpointv4. Its game/persistence bytes match accepted core `33b6a5fcb0aae73dfc235a15394b34d8afda00cc`; two UI layout files change and 15 reviewed protocol tools are added. Retirement moves, descriptive appearance/Profile labels, relevant paid interview experience, busy-year optional-story pacing, fourteen new special-career scenes and selected-tab return to category root are integrated. The catalogue contains **265 situations /795 choices**, two dedicated scenes per eleven special-career paths. All265 entries have a Codex source-review ledger; thin thematic cells remain explicit. The camera result is appearance-neutral; original saved scenes and the historical golden retain an explicit one-field bridge.
 
@@ -951,27 +953,6 @@ active warm cache. Keep the checked Android-compatible exact money formatter.
 
 ## Continue the complete plan
 
-Next, continue opening/early-game usability, real work interviews/hours, the
-remaining125situations, family/career/leisure depth, achievements and visual/release
-work. The natural three-generation save/continue journey is verified. Further
-archive/history-storage work is explicitly parked by the latest user instruction.
-The genuine named result76 remains protected by its original74be9e4 producer.
-Keep the diagnostic setup explicit;
-a synthetic1000-person cloud case is not a natural/native120-year/multigeneration
-acceptance. Correct any measured bottleneck, and continue broader adult stories,
-interviews, real hours/hourly pay, work conflicts and career depth. Multi-person
-result labels can also identify the actual affected people more clearly.
+Prioritise the measured button/startup work and its final combined Quality/native checks. The original callback acceptance matrix,1,000-unique-seed annual gate, three-generation continuation and C/D outcome review are complete for their declared scopes; do not repeat them as unfinished tasks. All265situations/795choices and the eleven special-career story categories exist. Remaining work concerns unobserved story/scenario contexts, balance/pacing, visual/spoken-reader acceptance and a continuous30-minute native play session, followed by standalone Android/offline, actual iOS and physical-device performance/release acceptance. Use the [current progress](PROGRESS.md#current-product-work), [opening assessment](OPENING_PLAN.md#current-assessment) and master specification; the older checkpoints above retain their historical gaps and counts.
 
-The250-situation minimum is now implemented; editorial and balance remain open. All eleven special-career
-story categories, adult relationships/finances/health/travel/leisure/later-life
-breadth, autonomous NPC depth, country-source verification, balance and broader
-integration remain open. The master specification still governs the complete
-production goal. No whole-game completion claim from a scoped test run.
-
-Physical p95,120-year/1000-person/multigeneration integration, <50MB storage,
-complete native fidelity/accessibility and standalone Android/iOS release gates
-remain open. Package/GitHub network access works; VPN disabled. Check managed
-status on resume/diagnosis, don't expose credentials/bypass policy. Standalone RN
-artifact repo.reactnative.dev was denied under the unchanged policy; don't retry
-it. macOS/iOS hardware is unavailable. These do not block remaining authorised
-coding/integration work. Offline exports/ExpoGo are not standalone/iOS acceptance.
+Preserve automatic save/exact resume and existing gameplay. Further archive/history/file breadth stays parked. Commit AND push at safe points at least every two active hours; a routine checkpoint does not end the authorised task. Check managed status before diagnosing a network failure; retain the supported proxy/TLS policy. The Android AAR download remains blocked until the effective environment actually permits its required host. Keep this environment's genuine native data/tools/logs intact while the saved environment is republished. iOS/macOS and physical hardware remain unavailable here; Expo Go and production JS exports do not establish those release gates. No whole-game completion claim follows from a scoped test run.

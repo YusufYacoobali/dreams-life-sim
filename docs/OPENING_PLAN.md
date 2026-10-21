@@ -441,13 +441,9 @@ work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Continue independent worktrees with root integration/testing/commits. C37native/performance is complete for its declared source. Current final regression/annual and A/B technical cohorts are closed with their stated outcomes. Complete C and D outcome review and the1,000-total-seed annual run, current native normal/130% labels/navigation/interview/actions/cold checks, continuous30-minute UI and sequence/balance review, then standalone/iOS/physical release gates. Preserve automatic saving/exact resume, park further file/history breadth, commit AND push at least every two active hours and keep working after checkpoints.
+Continue independent worktrees with root integration/testing/commits. Prioritise the latest measured responsiveness fixes and final combined hosted/native acceptance described in [current progress](PROGRESS.md#current-product-work). The C/D outcome review and1,000-total-unique-seed annual gate have finished for their declared scopes; original callback checks, current interview/chooser cold checks and three-generation continuation also have source-scoped passes. Do not repeat these as open tasks. Finish continuous30-minute native play, unobserved sequence/scenario contexts, balance/pacing and visual/spoken-reader review, then standalone Android/offline, actual iOS and physical performance/release gates. Preserve automatic saving/exact resume, park further file/history breadth, commit AND push at least every two active hours and keep working after checkpoints.
 
-The latest reported regression takes precedence: ordinary buttons must respond
-smoothly without “Saving” replacing unrelated subtitles or loading every button.
-The [measured save/validation/hidden-screen fix](BUTTON_RESPONSIVENESS.md) now passes
-1,157 tests / 76 suites, strict typing and both Hermes exports and is pushed. Native acceptance remains open. The percentage baselines
-above remain unchanged until their corresponding acceptance gates close.
+Ordinary buttons must respond smoothly without unrelated “Saving” labels or global loading. The latest source055e897 reduces native reads, checksum and repeated immutable-row work, initialization cycles and unchanged Life view rendering. Focused checks pass; complete the combined gate and final native check. The [earlier measured save/validation/hidden-screen fix](BUTTON_RESPONSIVENESS.md) and numbered opening milestones below retain their own source scopes. Keep completion estimates conservative until the relevant acceptance closes.
 
 1. **Startup reliability.** Fix the `Intl`/BigInt crash with exact money display.
    Reproduce Number-only Intl in regression checks, including real SQLite
