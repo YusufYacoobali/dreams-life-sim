@@ -141,7 +141,7 @@ test('graduation, permanent moves and death close school history without telepor
 });
 test('real v20 foreign employment and its approved-move checkpoint migrate with empty school history and no changes to people, FX, money or RNG', () => {
   const archive = decodeSave(JSON.stringify(relocationArchive)), world = archive.world, raw = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(relocationArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(encodeWorld(world));
-  expect(world.schemaVersion).toBe(39); expect(world.engineVersion).toBe(40); expect(world.schoolCommunities).toEqual([]);
+  expect(world.schemaVersion).toBe(40); expect(world.engineVersion).toBe(41); expect(world.schoolCommunities).toEqual([]);
   for (const key of ['people', 'relationships', 'relocations', 'trips', 'ledger', 'workHistory', 'random', 'annual']) expect(encoded[key]).toEqual(raw[key]);
   const history = world.workHistory.find(item => item.personId === world.activePersonId && !item.ended)!; expect(history.monthsWorked).toBe(12); expect(history.currency).toBe('JPY'); expect(history.grossEarned).toBe(3200000n); expect(history.conversions).toHaveLength(12);
   const prior = unpackCheckpoint(archive.snapshots[0].payload); expect(prior.schoolCommunities).toEqual([]); expect(prior.people[prior.activePersonId].country).toBe('US'); expect(prior.relocations[0].status).toBe('approved');

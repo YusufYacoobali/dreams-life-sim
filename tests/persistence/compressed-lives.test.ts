@@ -24,7 +24,7 @@ async function previousDatabase() {
 test('the version-three upgrade reads genuine plain state and retains old bytes, moments and RNG until actual commands commit', async () => {
   const { sqlite, driver } = await previousDatabase(), repository = new SaveRepository(driver);
   const world = expected(); await repository.initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(19);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(20);
   for (const table of ['lives', 'backups']) expect(sqlite.prepare('SELECT payload FROM ' + table).get()?.payload).toBe(plain);
   expect(await repository.load(world.id)).toEqual(world); expect(await repository.recoveryPreview(world.id)).toEqual(world);
   const before = decodeSave(await repository.export(world.id));

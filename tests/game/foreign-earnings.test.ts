@@ -46,7 +46,7 @@ const countryFor = (currency: Currency) => (Object.keys(countries) as CountryCod
 test('the genuine v17 archive keeps every old money fact, royal archive, random stream and historical checkpoint', () => {
   const original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(royalArchive.checkpoint).data, 'base64'))));
   const save = decodeSave(JSON.stringify(royalArchive)), world = save.world, encoded = JSON.parse(encodeWorld(world));
-  expect(world.schemaVersion).toBe(39); expect(world.engineVersion).toBe(40);
+  expect(world.schemaVersion).toBe(40); expect(world.engineVersion).toBe(41);
   expect(encoded.royalHouses).toEqual(original.royalHouses); expect(encoded.ledger).toEqual(original.ledger); expect(encoded.accounts).toEqual(original.accounts); expect(world.random).toEqual(original.random); expect(world.annual).toEqual(original.annual);
   for (const person of Object.values(world.people)) {
     const old = original.people[person.id]; expect(person.finance.earningsCurrency).toBe('JPY'); expect(person.finance.lifetimeGross).toBe(BigInt(old.finance.lifetimeGross.$dreamsBigInt)); expect(person.finance.pensionAnnual).toBe(BigInt(old.finance.pensionAnnual.$dreamsBigInt)); expect(person.finance.pensionRecordedFrom).toBe(old.finance.pensionMonths); expect(person.finance.pensionReceipts).toEqual([]);
