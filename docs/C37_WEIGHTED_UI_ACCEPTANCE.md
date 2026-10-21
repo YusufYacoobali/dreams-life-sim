@@ -41,9 +41,11 @@ grades, bond, thirteen attended school periods, failed write, saved result and
 unchanged people/RNG after acknowledgement. Actual annual completion remains
 asserted in all three suites.
 
-These existing tests use the in-memory SQLite driver. Their cold checks create
-fresh stores/repositories on that same open database; they are not new physical
-file/closed-connection cold acceptance. Existing file-SQLite and immutable
+These existing tests use the in-memory SQLite driver. Their reload checks create
+fresh stores on that same open database. The adult and consequence-label cases
+also create fresh repositories; the childhood case reuses its original
+repository and cache. They are not new physical file/closed-connection cold
+acceptance. Existing file-SQLite and immutable
 archive gates remain separate. No existing raw fixture or historical hash was
 changed.
 
