@@ -1,4 +1,5 @@
 import React from 'react';
+import { Modal } from 'react-native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
@@ -102,6 +103,9 @@ test('actual heir and ancestor views remain isolated across route changes and a 
     fireEvent.press(screen.getByRole('button', { name: 'View Statistics' })); assertFinalStatistics();
     expect(projection).toHaveBeenLastCalledWith(world(), ancestor.id);
     fireEvent.press(screen.getByRole('button', { name: 'Back' }));
+    expect(screen.getByText('Life Summary')).toBeOnTheScreen(); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'View Statistics' })).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: 'View Statistics' }));
+    fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
     expect(screen.getByText('Life Summary')).toBeOnTheScreen(); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'View Statistics' })).toBeOnTheScreen();
     expect(router.back).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(save).not.toHaveBeenCalled();
     expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); reopened.unmount(); dispatch.mockRestore(); save.mockRestore();
