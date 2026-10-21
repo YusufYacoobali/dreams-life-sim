@@ -24,6 +24,7 @@ let mockStore: ReturnType<typeof createGameStore>, mockParams: Record<string, st
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => mockParams }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Campus from '../../app/(game)/campus';
+import Education from '../../app/(game)/education';
 import Person from '../../app/(game)/person/[id]';
 
 const world = () => mockStore.getState().world!;
@@ -86,7 +87,8 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     expect(course.months).toBe(before.people[before.activePersonId].education.months);
     expect(course.firstPayment).toEqual(enrolled.firstPayment); expect(currentCampus(before)).toBeUndefined();
     const beforeText = encodeWorld(before), beforeRows = context.rows(); expect(Object.keys(beforeRows)).toHaveLength(8);
-    view = render(frame());
+    view = render(frame(<Education />)); await press(/^Campus Life\./);
+    expect(router.push).toHaveBeenLastCalledWith('/campus'); expect(world()).toBe(before); expect(context.rows()).toEqual(beforeRows); view.rerender(frame());
     const commit = jest.spyOn(context.repository, 'commit'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
     const review = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
     await press('Meet Fellow Students'); expect(screen.getByText('Meet fellow students?')).toBeOnTheScreen();
