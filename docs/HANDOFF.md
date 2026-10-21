@@ -4,6 +4,16 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
+## Latest local continuation
+
+Local `work` is now `2768d7d`, not yet pushed while the combined visual gate runs on remote `5518f2c`. It adds factual active/tuition-paused course context, two distinct study scenes and investment quote/holding/fee presentation with validation beside the fixed Review Trade button. Current local markers39/40/**17**/19/v4 and **272 situations/816 choices**. Strict app/all-test types closed0 (47597);31 existing context/course/rarity/actual-old-pending checks pass in14.665s (18442). Original270 scenes/bindings and the original250 golden remain exact. Those narrow checks do not establish a new full-regression pass.
+
+`5518f2c` was successfully pushed at19:15UTC; [its combined Quality39660075499](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39660075499) is running. Both production HBC exports closed0 on5518 (55529), `/tmp/dreams-5518f2c-production-export`, Android6.2MB/iOS5.9MB. Its actual cold Continue restored Ren127’s genuine C15 repayment result with ALL eight raw tables/reader19 unchanged; root acknowledged once to128/C16 and reviewed normal Welcome/Life. These are not standalone builds or physical timing acceptance.
+
+**Story_editorial again exclusively owns all native/ADB/Metro/source/font controls** for focused read-only normal/150% visual review on frozen5518, Metro10662/log `/tmp/dreams-5518f2c-visual-metro.log`. No new game commands or timer chase. Root must await explicit return before changing source/server/device. Expected final raw DB differs from127 only by root’s one ACK128; retain the128C16 current/127C15 backup and all old history, restore normal font.
+
+School and Release are now independently implementing/proposing record-grounded retirement/widowhood context and two distinct scenes in preserved separate branches. They are not integrated. Purchase owns a bounded Will/Legacy visual followup. Keep those author commits separate until reviewed; the current published CI must finish before another source push. More automatic saving/import/export work is not a priority.
+
 ## User direction and working order
 
 Finish the complete production game autonomously. The latest priority is:
