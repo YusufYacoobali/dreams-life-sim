@@ -1,0 +1,49 @@
+Starting Metro Bundler
+
+iOS Bundled 68678ms ../../dreams-life-sim/node_modules/expo-router/entry.js (1624 modules)
+Android Bundled 84331ms ../../dreams-life-sim/node_modules/expo-router/entry.js (1753 modules)
+
+› Assets (49):
+../../dreams-life-sim/node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf (971KB)
+../../dreams-life-sim/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf (390KB)
+../../dreams-life-sim/node_modules/expo-router/assets/arrow_down.png (9.5KB)
+../../dreams-life-sim/node_modules/expo-router/assets/arrow_right.xml (307B)
+../../dreams-life-sim/node_modules/expo-router/assets/checkmark.xml (312B)
+../../dreams-life-sim/node_modules/expo-router/assets/error.png (469B)
+../../dreams-life-sim/node_modules/expo-router/assets/file.png (138B)
+../../dreams-life-sim/node_modules/expo-router/assets/forward.png (188B)
+../../dreams-life-sim/node_modules/expo-router/assets/pkg.png (364B)
+../../dreams-life-sim/node_modules/expo-router/assets/react-navigation/elements/back-icon-mask.png (653B)
+../../dreams-life-sim/node_modules/expo-router/assets/react-navigation/elements/back-icon.png (8 variations | 359B)
+../../dreams-life-sim/node_modules/expo-router/assets/react-navigation/elements/clear-icon.png (4 variations | 425B)
+../../dreams-life-sim/node_modules/expo-router/assets/react-navigation/elements/close-icon.png (4 variations | 235B)
+../../dreams-life-sim/node_modules/expo-router/assets/react-navigation/elements/search-icon.png (7 variations | 592B)
+../../dreams-life-sim/node_modules/expo-router/assets/sitemap.png (465B)
+../../dreams-life-sim/node_modules/expo-router/assets/unmatched.png (4.8KB)
+assets/audio/action-tap.wav (2KB)
+assets/generated/activity-atlas.png (1.3MB)
+assets/generated/career-atlas.png (1.8MB)
+assets/generated/death-memorial.png (1.1MB)
+assets/generated/fame-business-atlas.png (1.5MB)
+assets/generated/family-atlas.png (1.6MB)
+assets/generated/health-legal-atlas.png (1.7MB)
+assets/generated/ordinary-hobby-atlas.png (1.3MB)
+assets/generated/ownership-atlas.png (1.9MB)
+assets/generated/pets-leisure-atlas.png (2MB)
+assets/generated/portrait-layers.png (1.7MB)
+assets/generated/school-atlas.png (2MB)
+assets/generated/travel-atlas.png (3MB)
+assets/generated/welcome-hero.png (2MB)
+
+› ios bundles (2):
+_expo/static/js/ios/entry-4a30a4bf43a6b3ca6a5e3b0ada2ead86.hbc (4.6MB)
+_expo/static/js/ios/entry-4a30a4bf43a6b3ca6a5e3b0ada2ead86.hbc.map (11MB)
+
+› android bundles (2):
+_expo/static/js/android/entry-01896b4de52554a80750aa1e5d3ff7e8.hbc (4.9MB)
+_expo/static/js/android/entry-01896b4de52554a80750aa1e5d3ff7e8.hbc.map (11MB)
+
+› Files (1):
+metadata.json (5.3KB)
+
+Exported: /tmp/dreams-production-gaps-export

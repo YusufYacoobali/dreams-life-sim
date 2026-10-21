@@ -1,6 +1,18 @@
 # Dreams: Life Simulator — Phase 0 master plan
 
-## Current source checkpoint: first relationships, education and early stories
+## Current integration: production gameplay and acceptance
+
+Reviewed gameplay source `33b6a5fcb0aae73dfc235a15394b34d8afda00cc` uses World38 / engine39 / content13 / reader18 / checkpointv4. Retirement moves, descriptive appearance/Profile labels, relevant paid interview experience, busy-year optional-story pacing, fourteen new special-career scenes and selected-tab return to category root are integrated. The catalogue contains **265 situations /795 choices**, two dedicated scenes per eleven special-career paths. All265 entries have a Codex source-review ledger; thin thematic cells remain explicit. The camera result is appearance-neutral; original saved scenes and the historical golden retain an explicit one-field bridge.
+
+Retirement/accessibility passes2,600tests/204suites, strict app/all-test types, fresh Hermes exports, the same120 annual seeds and70 serial warm actions with zero full checkpoint unpack; its native acceptance remains pending. The later source first full run passed2,683tests and failed3 stale callback negative assertions. The test-only repair passes18focused checks and strict types; a fresh final full regression and same120annual gate are running. The copy correction passes87affected checks and334-file-per-platform Hermes maps. Serial diagnostics pass70warm samples on the runtime-equivalent corrected source; these cloud measurements are not physical-device p95.
+
+C37opening/university acceptance is complete for its declared scope: Maya's custom birth/first birthday and Nia's actual free application, separate paid enrolment and withdrawal retain27reviewed PNG/XML pairs,9actual cold reopens and exact command/RNG/backup/receipt replay. The final C37device has8lives,67moments and159receipts, with original other lives/history preserved.
+
+Overall production is about **75%**, an effort estimate. Most gameplay is85–90%; automatic save/resume90%; visual/accessibility65%; device/release acceptance20%. Continue current full/country gates, native upgrade/130%/cold review, a continuous30-minute UI session, balance and standalone/iOS/physical release checks. Further file/history breadth stays parked. Commit AND push safe checkpoints at least every two hours; keep working after each checkpoint.
+
+[Current source, raw checks and pending acceptance](../verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](../verification/production-gaps-20261021.json).
+
+## Prior source checkpoint: first relationships, education and early stories
 
 Accepted source `85f6ff8637ba3de9d0f04421307419b1d9609864` uses World36 / engine37 / content12 / reader16 / checkpointv4. It adds consent-based first teenage relationships, saved university applications and factual study-course records, authored event rarity and one extremely rare adult scene, a same-person childhood project recall after two years, and bounded separation of unmarried adult NPC dating couples. Creation Back is guarded during saving; scholarship reviews survive failed writes; full-time adult workers avoid unintended automatic school re-entry. Existing gameplay, automatic saving and old data remain protected.
 

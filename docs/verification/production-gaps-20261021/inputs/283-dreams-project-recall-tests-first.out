@@ -1,0 +1,44 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/game/project-years-callback.test.ts tests/ui/project-years-callback-flow.test.tsx tests/game/story-callbacks.test.ts
+
+PASS tests/game/story-callbacks.test.ts (6.683 s)
+FAIL tests/game/project-years-callback.test.ts (7.107 s)
+  ● a three-month availability window expires without a late result; inactive lineage never offers a replacement person
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /no longer open/
+    Received message: "Annual cursor does not match calendar"
+
+          290 |   }
+          291 |   if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
+        > 292 |   if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
+              |                                                                                                                                                                                                                                                                        ^
+          293 |   if (world.annual?.stage === 'complete' && world.annual.monthsProcessed !== 12) throw new Error('Incomplete year marked complete');
+          294 |   if (world.annual?.pausedForPlanning && world.annual.stage !== 'months') throw new Error('Invalid planning pause');
+          295 |   if (world.legacyAnnual && (!world.people[world.activePersonId].died || compareDates(world.date, monthFrom(world.legacyAnnual.startDate, world.legacyAnnual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.legacyAnnual.targetDate, monthFrom(world.legacyAnnual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Invalid archived annual frame');
+
+      at validateWorld (src/game/model.ts:292:264)
+      at validateWorld (src/game/model.ts:396:43)
+      at resolveCommand (src/game/engine.ts:277:26)
+      at tests/game/project-years-callback.test.ts:76:30
+      at Object.<anonymous> (../settings-accessibility/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../settings-accessibility/node_modules/expect/build/index.js:320:21)
+      at Object.toThrow (tests/game/project-years-callback.test.ts:76:108)
+      at Object.toThrow (tests/game/project-years-callback.test.ts:76:108)
+
+PASS tests/ui/project-years-callback-flow.test.tsx (8.409 s)
+  ● Console
+
+    console.info
+      PROJECT_RECALL_OBSERVATION {"personId":"person_player","peerId":"person_npc_14_6","original":"leave-to-peer","realElapsedMonths":24,"recall":{"dueMonth":24110,"expiresMonth":24112,"status":"resolved","offeredEventId":"story_26_0_project_recall","offered":{"year":2009,"month":3,"day":1},"resolution":"remember-project","ended":{"year":2009,"month":3,"day":1},"cancellationReason":null},"finalRevision":43}
+
+      at Object.info (tests/ui/project-years-callback-flow.test.tsx:87:13)
+
+
+Test Suites: 1 failed, 2 passed, 3 total
+Tests:       1 failed, 36 passed, 37 total
+Snapshots:   0 total
+Time:        22.548 s
+Ran all test suites within paths "tests/game/project-years-callback.test.ts", "tests/ui/project-years-callback-flow.test.tsx", "tests/game/story-callbacks.test.ts".

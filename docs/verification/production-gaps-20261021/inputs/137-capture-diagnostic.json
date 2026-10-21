@@ -1,0 +1,65 @@
+{
+  "complete": false,
+  "name": "cold-newborn",
+  "events": [
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "force-stop",
+        "host.exp.exponent"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T01:27:24.578370+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "pidof",
+        "host.exp.exponent"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T01:27:24.805613+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "start",
+        "-a",
+        "android.intent.action.VIEW",
+        "-d",
+        "exp://127.0.0.1:8081"
+      ],
+      "returncode": 0,
+      "stdout": "Starting: Intent { act=android.intent.action.VIEW dat=exp://127.0.0.1:8081 }\n",
+      "stderr": "",
+      "at": "2026-10-21T01:27:26.930873+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue as Maya Singh"
+      ],
+      "returncode": -15,
+      "stdout": "Fresh hierarchy unavailable; retrying\nFresh hierarchy unavailable; retrying\n",
+      "stderr": "ERROR: null root node returned by UiTestAutomationBridge.\nERROR: null root node returned by UiTestAutomationBridge.\n",
+      "at": "2026-10-21T01:29:08.936368+00:00"
+    }
+  ]
+}

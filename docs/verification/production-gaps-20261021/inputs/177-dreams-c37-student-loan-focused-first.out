@@ -1,0 +1,16 @@
+PASS tests/ui/student-loan-rate-flow.test.tsx (23.166 s)
+  ✓ university Arts quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement (4991 ms)
+  ✓ trade Arts quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement (1251 ms)
+  ✓ graduate Medicine quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement (1229 ms)
+  ✓ graduate Law quotes the reused French EUR rate through local review, rollback, retry and cold acknowledgement (1225 ms)
+  ✓ a cash-funded course paused by actual annual processing resumes at its existing EUR loan rate without losing completed months (1323 ms)
+  ✓ a fully repaid canonical EUR student line still quotes and reuses its original rate (1395 ms)
+  ✓ after an actual move to London an existing EUR student loan does not replace the new GBP country rate (1414 ms)
+  ✓ Bank personal borrowing in DE reviews the exact reused or new currency rate before committing (1478 ms)
+  ✓ Bank personal borrowing in GB reviews the exact reused or new currency rate before committing (1630 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        23.515 s
+Ran all test suites matching /tests\/ui\/student-loan-rate-flow.test.tsx/i.

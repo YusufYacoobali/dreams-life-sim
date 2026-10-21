@@ -1,0 +1,16 @@
+PASS tests/game/event-rarity.test.ts (7.878 s)
+  ● Console
+
+    console.info
+      ORIGINAL_250_COPY_SHA256 3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01
+
+      at Object.info (tests/game/event-rarity.test.ts:30:11)
+
+PASS tests/game/story-name-collisions.test.ts (8.539 s)
+PASS tests/game/story-consequence-labels.test.ts (7.895 s)
+
+Test Suites: 3 passed, 3 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        24.849 s
+Ran all test suites matching /tests\/game\/event-rarity.test.ts|tests\/game\/story-name-collisions.test.ts|tests\/game\/story-consequence-labels.test.ts/i.

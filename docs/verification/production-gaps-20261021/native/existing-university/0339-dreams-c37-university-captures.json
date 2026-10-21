@@ -1,0 +1,540 @@
+{
+  "format": "dreams-onboarding-native-captures-v1",
+  "complete": true,
+  "mode": "existing",
+  "device": "Android24 x86_64 software emulator,390x844,Expo Go57; not physical/standalone/iOS",
+  "scope": "Actual normally selected Nia Carter140; genuine20-hour contract availability refusal preserved read-only, actual normal resignation141/ack142; free computing application143 accepted on its actual saved roll2/chance93, ack144; separately reviewed cash enrolment145 charged USD14000 once and factual course started, ack146; normal withdrawal147 and finalack148. Actualfour process-stop cold reopens at application143/enrolment145/withdrawal147/finalack148. Root personally viewed all17independent PNGs and inspected all17actual XML label sets. Existing other7lives/backups (including newly created Maya), all original receipts/history/preferences/branches/restore records stay protected. No SQL/world/RNG/stat/seed injection, no outcome search and no unobserved waitlist/aid path credited.",
+  "sourceManifest": {
+    "file": "/tmp/dreams-production-gaps-native-source.json",
+    "bytes": 72136,
+    "sha256": "b8b478a3254a63daf2a2a2cfa8f8b91a8ef5e412f64921d0e513a4af2fe0bd90"
+  },
+  "baseline": {
+    "main": {
+      "file": "/tmp/dreams-c37-university-baseline-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+    },
+    "wal": {
+      "file": "/tmp/dreams-c37-university-baseline-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "9bf3d2ad4d9bad2966825b89d8f6fda324d8abe9122bc926011e2eeb314057a4"
+    }
+  },
+  "phases": [
+    {
+      "id": "existing-start",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "f2d9cf4632a0e761e6cc817091baa0871933ff7726f6f119d584623665dd9601"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/existing-start/ui.png",
+        "bytes": 77123,
+        "sha256": "c33a5c53b7bfdca0493dc8bf630027105cd2672eed61bb029177e5a55909d62f"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/existing-start/ui.xml",
+        "bytes": 40471,
+        "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "application-unavailable",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/application-unavailable/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/application-unavailable/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "f2d9cf4632a0e761e6cc817091baa0871933ff7726f6f119d584623665dd9601"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/application-unavailable/ui.png",
+        "bytes": 58902,
+        "sha256": "787c881e8e97ecfa92de28edd83cc686719bcef12f19712eb685c9c02006ba24"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/application-unavailable/ui.xml",
+        "bytes": 29898,
+        "sha256": "0d8f280694dc4b06ea8d502f809b223e65f6c7ffdc67781b57f6f38710662af0"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "preparation-resigned",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "a110747f79e9d1dc4a66b7218ea248a563f06ea1eb1aa1eafb7254d8429a211e"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/preparation-resigned/ui.png",
+        "bytes": 47431,
+        "sha256": "1b95bbd515f1e70bf59e449bbc5a7962a0b9333c5c86bd01e09ae22269b87162"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/preparation-resigned/ui.xml",
+        "bytes": 6601,
+        "sha256": "76192ad5571d3fce7c7184d59054f3f07e6a2adb11ee263abf01b4ae356d48ba"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "quit-job"
+      }
+    },
+    {
+      "id": "preparation-acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "be8f7058e1f780f0d20e51ce6b677a6135f439ef75c6ac1c76f48a179a181d0e"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/ui.png",
+        "bytes": 77936,
+        "sha256": "feee39cd3446bfe12a21a04fb2ac133c2f9f2b594e4534db275d15eaf1911839"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/ui.xml",
+        "bytes": 40824,
+        "sha256": "6ba66b833e121b33ec80d125da8f8c78c0bafe4336dd08ff4f399caadbcae9fb"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_140"
+      }
+    },
+    {
+      "id": "application-review",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/application-review/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/application-review/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "be8f7058e1f780f0d20e51ce6b677a6135f439ef75c6ac1c76f48a179a181d0e"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/application-review/ui.png",
+        "bytes": 63156,
+        "sha256": "9459b2328d8afed5c03b50361b3583c5ef36ab3003ed5b519e683ab3025ea20b"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/application-review/ui.xml",
+        "bytes": 8957,
+        "sha256": "057f66c8794704f2d3733b3c69c7aa6e296dbd535af96a606aa4f0fb0a43a20a"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "action-saved",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "54923b275f3b7a393365734d4402bd2430d692a0dce9064aadbdf9cc2ec8bd9d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/action-saved/ui.png",
+        "bytes": 60529,
+        "sha256": "10def752fd9632deed9b634db6cb60e5f14d4a7d73359271e610e6a7ea0c59ca"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/action-saved/ui.xml",
+        "bytes": 6725,
+        "sha256": "a932388158aa9a11c9d44b696b0e66bbe8e4fe6d6cafa0f2f93dfa60db81a31a"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "apply-university",
+        "field": "computing"
+      }
+    },
+    {
+      "id": "cold-action-saved",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "54923b275f3b7a393365734d4402bd2430d692a0dce9064aadbdf9cc2ec8bd9d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-action-saved/ui.png",
+        "bytes": 75185,
+        "sha256": "fd7135503aded8ba016013c9c7c9b5e7e5e5e339977713279a1d0f1e71dd5953"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-action-saved/ui.xml",
+        "bytes": 6725,
+        "sha256": "a932388158aa9a11c9d44b696b0e66bbe8e4fe6d6cafa0f2f93dfa60db81a31a"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "action-saved",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-action-saved/cold-attestation.json",
+        "bytes": 321,
+        "sha256": "232c998496ac4181436d71e06345b64c7e8ae8e439b0eb6c0148c39441b46213"
+      }
+    },
+    {
+      "id": "application-acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/application-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/application-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "d93ac21f79329f1bc1834c7acc4142e2dc4f46f1f38c4749cf65e4d20594115a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/application-acknowledged/ui.png",
+        "bytes": 79900,
+        "sha256": "de27303a5fc077cb18b067b05170b79ec7fc80980cb04e8a43bf7151b8713de4"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/application-acknowledged/ui.xml",
+        "bytes": 40830,
+        "sha256": "3ebf287c875df38d98c5107ee4e732eeb566f254f5f42029af24a2f67a30fad3"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_142"
+      }
+    },
+    {
+      "id": "enrolment-review",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-review/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-review/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "d93ac21f79329f1bc1834c7acc4142e2dc4f46f1f38c4749cf65e4d20594115a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-review/ui.png",
+        "bytes": 58001,
+        "sha256": "a8fb5b64ef8cf6b032601211a1d54641ecbaf1c327cbe192070e51658bd744ed"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-review/ui.xml",
+        "bytes": 10153,
+        "sha256": "ab96889488c4d4ae08c7729afa939fb7c5882436b431f723903ff7e177e5820b"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "enrolment-saved",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "554707ae0acfba22b2e95ffa47961231417befd5afc06a53ad6c4c63e3d947cb"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-saved/ui.png",
+        "bytes": 65925,
+        "sha256": "d617204a3444ec4471b512449ab3d59469e06da44edf4bdd5d0786439b6cfe7c"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-saved/ui.xml",
+        "bytes": 7760,
+        "sha256": "170b67030e2e5f9c741406923ec7b7822d7339c0016e5bc69ef830615255a16c"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "accept-university-place",
+        "applicationId": "admission_person_player_142_0",
+        "funding": "cash"
+      }
+    },
+    {
+      "id": "cold-enrolment-saved",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "554707ae0acfba22b2e95ffa47961231417befd5afc06a53ad6c4c63e3d947cb"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/ui.png",
+        "bytes": 70901,
+        "sha256": "bfb768d69c186f219f0a479c9d08f5d91f066fb7549439fad5d2e9f3b6fe37d1"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/ui.xml",
+        "bytes": 7760,
+        "sha256": "170b67030e2e5f9c741406923ec7b7822d7339c0016e5bc69ef830615255a16c"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "enrolment-saved",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/cold-attestation.json",
+        "bytes": 330,
+        "sha256": "8007b40cdda181da7fa4b2d58ad9bd59c598512b9645a9534d0480a420f58438"
+      }
+    },
+    {
+      "id": "enrolment-acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "2c8aa18f11fd1a3cb0c429d438d5fe51d2a91434684514e65399b948b8aa7863"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/ui.png",
+        "bytes": 80753,
+        "sha256": "c0cf3fdd17b7ec0220cef84e02255a0142f1c7d3bf8919fa24af900fb47b78ad"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/ui.xml",
+        "bytes": 40503,
+        "sha256": "6458f2a7c43c1b9e78d71f4256e00602faab334ae01fbb930345669577a0f832"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_144"
+      }
+    },
+    {
+      "id": "withdrawal-review",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-review/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-review/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "2c8aa18f11fd1a3cb0c429d438d5fe51d2a91434684514e65399b948b8aa7863"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/withdrawal-review/ui.png",
+        "bytes": 49885,
+        "sha256": "a46deb0c2ce6e86cd64a9143e40e15ec1b76b153c6dabaf47a2598cf8a626ac5"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/withdrawal-review/ui.xml",
+        "bytes": 6366,
+        "sha256": "cd880ac044e8e29b4728bcebc61a06e47621a5eaf2b00685a69d42f63d42b206"
+      },
+      "coordinatorPersonallyViewed": true
+    },
+    {
+      "id": "withdrawal-saved",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "682472d0dc2eae9f372aa306c32d4b3120edb1e8fce17a7b54eff5720d33d23d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/ui.png",
+        "bytes": 56559,
+        "sha256": "99bbf35ef4b25b23c4e4bdd8addeaa195dfa1ef153e455d47e51e1b36f038f98"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/ui.xml",
+        "bytes": 6621,
+        "sha256": "501f57ebc7a4c88b0bfda13d94d8f144fcdee6781b8e8e068d0dfa01918cfa31"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "leave-school"
+      }
+    },
+    {
+      "id": "cold-withdrawal-saved",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "682472d0dc2eae9f372aa306c32d4b3120edb1e8fce17a7b54eff5720d33d23d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/ui.png",
+        "bytes": 68795,
+        "sha256": "fd87aa8d7ac95ff12aacdcad7f521faa499f1a7a21aafb1edb8b803f4b5e21f3"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/ui.xml",
+        "bytes": 6621,
+        "sha256": "501f57ebc7a4c88b0bfda13d94d8f144fcdee6781b8e8e068d0dfa01918cfa31"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "withdrawal-saved",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/cold-attestation.json",
+        "bytes": 333,
+        "sha256": "02a629a1356d8504bd807d7982f842a1c10ddbbc9e5d5c3579193c1722d3089b"
+      }
+    },
+    {
+      "id": "acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "35bbee73d3395204cd236d07f0e2b8a692f68d15c226b0792de06549d823943a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-university-final-captures/acknowledged/ui.png",
+        "bytes": 84183,
+        "sha256": "1c8cfcfa81fd855083176f9e7f629b64568a51cd34f330a3acaae018402bae68"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-university-final-captures/acknowledged/ui.xml",
+        "bytes": 40507,
+        "sha256": "bd9491faee56f23f2f5b61f2fde89625eccb248b408b8e82e52d4c9e16cbb338"
+      },
+      "coordinatorPersonallyViewed": true,
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_146"
+      }
+    },
+    {
+      "id": "cold-acknowledged",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "35bbee73d3395204cd236d07f0e2b8a692f68d15c226b0792de06549d823943a"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/ui.png",
+        "bytes": 84088,
+        "sha256": "82da11992d3eec0242d70ecae194cdbc44a79e42ab0c057e8ea162645fbd8f2b"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/ui.xml",
+        "bytes": 40507,
+        "sha256": "0ffdb13c233c0756fd1d5f0fb288ba8fda95eab6fd196d784a29a09cc8e296eb"
+      },
+      "coordinatorPersonallyViewed": true,
+      "sameAs": "acknowledged",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/cold-attestation.json",
+        "bytes": 331,
+        "sha256": "490760d342ca68b7816eec1e4a5db809786e945c2efa9cd5030f721246da7679"
+      }
+    }
+  ]
+}

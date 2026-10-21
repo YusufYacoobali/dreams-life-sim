@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "acknowledged",
+  "to": "cold-acknowledged",
+  "evidence": {
+    "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/capture-log.json",
+    "bytes": 3459,
+    "sha256": "26f58d02a0aaeae0ae09320c8bc2d36139fdf0e3e69dddca4e9452810a295b94"
+  }
+}

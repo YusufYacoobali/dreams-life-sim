@@ -1,0 +1,21 @@
+PASS tests/ui/university-admissions-save-flow.test.tsx (44.147 s)
+  ● Console
+
+    console.info
+      UNIVERSITY_WAITLIST_CURRENT_OBSERVATION {"applied":{"year":2020,"month":1,"day":1},"review":{"date":{"year":2020,"month":2,"day":1},"grades":100,"secondaryQualified":true},"transitions":[{"date":{"year":2020,"month":1,"day":1},"status":"waitlisted"},{"date":{"year":2020,"month":2,"day":1},"status":"rejected"}],"savedRoll":96,"savedChance":92,"planningPausedAtReview":false,"dateAfterAcknowledgement":{"year":2020,"month":12,"day":1},"finalDate":{"year":2021,"month":1,"day":1},"finalRevision":78}
+
+      at Object.info (tests/ui/university-admissions-save-flow.test.tsx:172:13)
+
+PASS tests/ui/scholarship-durable-save-flow.test.tsx (13.848 s)
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/scholarship-flow.test.tsx (5.953 s)
+PASS tests/game/adult-work-school-entry.test.ts (6.734 s)
+PASS tests/ui/startup-flow.test.tsx
+
+Test Suites: 8 passed, 8 total
+Tests:       24 passed, 24 total
+Snapshots:   0 total
+Time:        74.589 s
+Ran all test suites matching /tests\/ui\/university-admissions-save-flow.test.tsx|tests\/ui\/scholarship-durable-save-flow.test.tsx|tests\/ui\/scholarship-flow.test.tsx|tests\/ui\/onboarding-accessibility-flow.test.tsx|tests\/ui\/onboarding-flow.test.tsx|tests\/ui\/new-life-review-flow.test.tsx|tests\/ui\/startup-flow.test.tsx|tests\/game\/adult-work-school-entry.test.ts/i.

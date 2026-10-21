@@ -1,0 +1,425 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --testTimeout=30000
+
+PASS tests/ui/university-admissions-save-flow.test.tsx (43.871 s)
+  ● Console
+
+    console.info
+      UNIVERSITY_WAITLIST_CURRENT_OBSERVATION {"applied":{"year":2020,"month":1,"day":1},"review":{"date":{"year":2020,"month":2,"day":1},"grades":100,"secondaryQualified":true},"transitions":[{"date":{"year":2020,"month":1,"day":1},"status":"waitlisted"},{"date":{"year":2020,"month":2,"day":1},"status":"rejected"}],"savedRoll":96,"savedChance":92,"planningPausedAtReview":false,"dateAfterAcknowledgement":{"year":2020,"month":12,"day":1},"finalDate":{"year":2021,"month":1,"day":1},"finalRevision":78}
+
+      at Object.info (tests/ui/university-admissions-save-flow.test.tsx:172:13)
+
+PASS tests/game/pets.test.ts
+PASS tests/ui/asset-bank-save-flow.test.tsx
+PASS tests/ui/education-choice-save-flow.test.tsx (30.308 s)
+PASS tests/game/businesses.test.ts
+PASS tests/ui/feedback-settings-flow.test.tsx
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/game/travel.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/royalty.test.ts (22.807 s)
+PASS tests/game/legal.test.ts
+PASS tests/game/education-recovery.test.ts (8.199 s)
+PASS tests/ui/profile-will-save-flow.test.tsx
+PASS tests/ui/family-dialog-save-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/game/npc-courtships.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/ui/special-career-exits-flow.test.tsx (24.481 s)
+PASS tests/ui/astronaut-career-acceptance-flow.test.tsx (7.269 s)
+  ● Console
+
+    console.info
+      Astronaut archive continuation {"sourceRevision":67,"sourceDate":{"year":2023,"month":1,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"coachedMonths":36,"coachingFees":"144000","preparedScience":72,"selectionAttempts":2,"traineeAnnualPay":"4800000","trainingMonths":24,"trainingResult":"passed","qualifiedDate":{"year":2028,"month":1,"day":1},"qualifiedAnnualPay":"7200000","mission":{"status":"completed","periods":6,"units":107,"distinction":"Meridian Research Distinction"},"leaveContractMonths":30,"serviceGross":"13200000","finalDate":{"year":2030,"month":1,"day":1},"finalRevision":109,"ordinaryPreparationAndContinuationCommands":31,"originalFixtureSha256":"de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef"}
+
+      at Object.info (tests/ui/astronaut-career-acceptance-flow.test.tsx:127:13)
+
+PASS tests/ui/student-loan-rate-flow.test.tsx (13.11 s)
+PASS tests/game/services.test.ts (6.211 s)
+PASS tests/game/npc-separations.test.ts (8.66 s)
+PASS tests/game/teen-relationships.test.ts
+PASS tests/game/health-legal-availability.test.ts
+PASS tests/game/npc-moves.test.ts
+PASS tests/ui/profile-overview-save-flow.test.tsx
+PASS tests/ui/health-review-save-flow.test.tsx (29.98 s)
+PASS tests/ui/athlete-career-acceptance.test.tsx (7.004 s)
+  ● Console
+
+    console.info
+      ATHLETE_OBSERVATION {"trainingMonths":34,"tuitionMinor":"136000","trainedSport":68,"selectionOutcomes":["Your contract is signed"],"attended":12,"wins":11,"seasonStatus":"completed","seasonGrossMinor":"7344000","award":null,"finalRevision":99}
+
+      at Object.info (tests/ui/athlete-career-acceptance.test.tsx:135:13)
+
+PASS tests/game/hourly-work.test.ts
+PASS tests/game/workplaces.test.ts
+PASS tests/game/social.test.ts
+PASS tests/game/politics.test.ts
+PASS tests/ui/business-review-save-flow.test.tsx
+PASS tests/ui/legal-review-save-flow.test.tsx
+PASS tests/ui/model-career-acceptance-flow.test.tsx (6.453 s)
+  ● Console
+
+    console.info
+      Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+
+      at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+
+PASS tests/ui/hobby-introduction-save-flow.test.tsx (8.636 s)
+PASS tests/ui/career-plan-context-flow.test.tsx (5.396 s)
+PASS tests/game/school-withdrawal.test.ts
+PASS tests/ui/royalty-review-save-flow.test.tsx (5.469 s)
+PASS tests/game/estates.test.ts (5.063 s)
+PASS tests/ui/scholarship-durable-save-flow.test.tsx (15.447 s)
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/ui/social-review-save-flow.test.tsx
+PASS tests/ui/travel-review-save-flow.test.tsx
+PASS tests/game/best-friends.test.ts
+PASS tests/game/story-callbacks.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/game/npc-relationships.test.ts
+PASS tests/progression/expanded-progress.test.ts (12.615 s)
+PASS tests/game/everyday-life-stories.test.ts (21.601 s)
+PASS tests/ui/music-career-exit-flow.test.tsx (5.323 s)
+PASS tests/game/health.test.ts
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/game/entrepreneur-policy.test.ts
+PASS tests/game/early-home-stories.test.ts (13.602 s)
+PASS tests/progression/financial-progress.test.ts
+PASS tests/ui/exercise-review-save-flow.test.tsx (16.378 s)
+PASS tests/ui/teen-relationship-save-flow.test.tsx
+PASS tests/game/music.test.ts
+PASS tests/game/childhood-stories.test.ts (6.883 s)
+PASS tests/ui/saved-files-flow.test.tsx (20.126 s)
+PASS tests/persistence/people-blocks.test.ts (20.432 s)
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/work-routine-save-flow.test.tsx (9.367 s)
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/game/assets-markets.test.ts
+PASS tests/ui/best-friends-flow.test.tsx
+FAIL tests/game/project-years-callback.test.ts (9.08 s)
+  ● a genuine saved pupil resolves complete, lives 24 real months, then chooses remember-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+  ● a genuine saved pupil resolves ask-help, lives 24 real months, then chooses dismiss-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+  ● a genuine saved pupil resolves leave-to-peer, lives 24 real months, then chooses pass-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+PASS tests/persistence/action-checkpoints.test.ts (5.882 s)
+PASS tests/game/education-work-finance.test.ts
+PASS tests/ui/progression-continuation-flow.test.tsx (7.53 s)
+PASS tests/game/family.test.ts
+PASS tests/game/school.test.ts
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/school-withdrawal-flow.test.tsx
+PASS tests/game/hobby-introductions.test.ts (17.804 s)
+PASS tests/game/editorial-policy.test.ts
+PASS tests/persistence/production-gaps-migration.test.ts (7.708 s)
+PASS tests/ui/project-years-callback-flow.test.tsx
+  ● Console
+
+    console.info
+      PROJECT_RECALL_OBSERVATION {"personId":"person_player","peerId":"person_npc_14_6","original":"leave-to-peer","realElapsedMonths":24,"recall":{"dueMonth":24110,"expiresMonth":24112,"status":"resolved","offeredEventId":"story_26_0_project_recall","offered":{"year":2009,"month":3,"day":1},"resolution":"remember-project","ended":{"year":2009,"month":3,"day":1},"cancellationReason":null},"finalRevision":43}
+
+      at Object.info (tests/ui/project-years-callback-flow.test.tsx:87:13)
+
+PASS tests/ui/story-callback-flow.test.tsx
+PASS tests/ui/career-review-save-flow.test.tsx
+PASS tests/ui/social-criticism-persistence-flow.test.tsx (6.728 s)
+PASS tests/ui/emigration-country-default.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/recovery-routine-save-flow.test.tsx (25.182 s)
+PASS tests/game/adult-relationship-stories.test.ts (13.078 s)
+PASS tests/game/editorial-context-acceptance.test.ts (25.681 s)
+  ● Console
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"family-trip","commands":11,"decisions":[{"id":"adult-shortcut-stairs","branch":1,"contexts":[],"old":false},{"id":"wellbeing-ordinary-water","branch":2,"contexts":[],"old":false},{"id":"family-helpful-spill","branch":3,"contexts":["child"],"old":false}],"observedContexts":["child"],"absentContexts":["workplace","friend","partner","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"ad2806c6ed8bbd23f1960b2f8ed6223584ba8ba1c4751bcd32000f033a8c1d87"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"pet-hobbies","commands":10,"decisions":[{"id":"teen-unit-confusion","branch":1,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"e3b50ead8ac12bc03dca42d673a0a39f61f507b0522164b30967c5afb08771d4"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"workplace-friend","commands":19,"decisions":[{"id":"work-photo-blink","branch":1,"contexts":["workplace"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"medical-emergency","branch":1,"contexts":[],"old":false},{"id":"adult-free-sample-opinion","branch":1,"contexts":[],"old":false}],"observedContexts":["workplace"],"absentContexts":["friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"5b0eb820eeab8d3c378014369eaf4a533c59538869b0423be1f95ce120da0607"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"owned-home","commands":24,"decisions":[{"id":"property-sale-offer","branch":2,"contexts":[],"old":true},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"adult-wrong-name-badge","branch":1,"contexts":[],"old":false},{"id":"adult-small-volunteer-task","branch":2,"contexts":[],"old":false},{"id":"home-found-old-list","branch":3,"contexts":["home"],"old":false}],"observedContexts":["home"],"absentContexts":["workplace","friend","partner","child","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"d97757e2a65fee52e6ce3945d753cbcc94fe3d8050011475c21fd5447703135d"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+    console.info
+      C36_EDITORIAL_CONTEXT {"name":"creator-studio","commands":21,"decisions":[{"id":"public-controversy","branch":1,"contexts":[],"old":false},{"id":"brand-offer","branch":2,"contexts":[],"old":false},{"id":"career-streamer-chair-soundcheck","branch":3,"contexts":["specialCareer"],"old":false},{"id":"adult-silent-notification","branch":1,"contexts":[],"old":false},{"id":"wellbeing-waiting-without-feed","branch":2,"contexts":[],"old":false}],"observedContexts":["specialCareer"],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited"],"finalCanonicalSha256":"7d93469019b4050763d2f9c3eae1b1efae43d43b652d48b4ff200043fe22bad8"}
+
+      at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/ui/service-context-flow.test.tsx
+PASS tests/persistence/tuple-checkpoints.test.ts (37.16 s)
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/annual-finances-projection.test.ts
+PASS tests/ui/hourly-work-flow.test.tsx
+University archived-pupil eight-year decisions: [{"year":2018,"initial":"accepted","final":"expired"},{"year":2019,"initial":"accepted","final":"withdrawn"},{"year":2020,"initial":"waitlisted","final":"rejected"},{"year":2021,"initial":"accepted","final":"withdrawn"},{"year":2022,"initial":"accepted","final":"withdrawn"},{"year":2023,"initial":"accepted","final":"withdrawn"},{"year":2024,"initial":"accepted","final":"withdrawn"},{"year":2025,"initial":"rejected","final":"rejected"}]
+PASS tests/game/university-admissions.test.ts
+PASS tests/game/hobby-events.test.ts
+PASS tests/ui/royalty-flow.test.tsx (5.558 s)
+PASS tests/game/relationships.test.ts
+PASS tests/persistence/opening-migration.test.ts (18.717 s)
+PASS tests/ui/scholarship-flow.test.tsx (6.077 s)
+PASS tests/game/adult-work-school-entry.test.ts (7.316 s)
+PASS tests/ui/school-routine-save-flow.test.tsx (7.495 s)
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/criminal-policy.test.ts (21.708 s)
+PASS tests/game/workplace-stories.test.ts (7.381 s)
+PASS tests/game/story-name-collisions.test.ts (9.145 s)
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/family-tree-late-spouse.test.tsx
+PASS tests/ui/education-recovery-flow.test.tsx (6.055 s)
+PASS tests/game/professional-policy.test.ts (11.052 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.998 s)
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/lifetime-statistics-data.test.ts (6.946 s)
+PASS tests/ui/school-flow.test.tsx
+PASS tests/game/engine.test.ts (576.246 s)
+PASS tests/state/npc-moves-save.test.ts
+PASS tests/ui/service-flow.test.tsx
+PASS tests/game/rare-adult-story.test.ts
+PASS tests/progression/progress.test.ts
+PASS tests/ui/hobby-event-flow.test.tsx
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/story-consequence-labels-flow.test.tsx
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/state/npc-separations-save.test.ts (7.427 s)
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/game/study-course-records.test.ts
+PASS tests/ui/story-name-collision-flow.test.tsx
+PASS tests/persistence/native-hourly-checkpoints.test.ts (7.687 s)
+PASS tests/state/preferencesStore.test.ts
+PASS tests/game/teen-home-stories.test.ts (10.568 s)
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/ui/terminal-biography-flow.test.tsx
+PASS tests/persistence/ordinary-hobby-archive.test.ts (6.3 s)
+PASS tests/persistence/native-raise-archive.test.ts (11.595 s)
+PASS tests/game/story-consequence-labels.test.ts (7.166 s)
+PASS tests/persistence/native-workplace-archive.test.ts (10.045 s)
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/appearance-labels.test.tsx
+PASS tests/progression/connections.test.ts
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/game/social-criticism-copy.test.ts
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/persistence/native-people-block-archive.test.ts (14.835 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (14.776 s)
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/persistence/native-teen-archive.test.ts (8.702 s)
+PASS tests/ui/theme-contrast.test.tsx
+PASS tests/persistence/restored-action-cache.test.ts (8.457 s)
+PASS tests/state/gameStore.test.ts
+PASS tests/ui/music-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/ui/terminal-biography-data.test.ts
+PASS tests/persistence/best-friends-migration.test.ts (30.336 s)
+PASS tests/state/save-summaries.test.ts (5.568 s)
+PASS tests/ui/modal-window-layout.test.tsx
+PASS tests/ui/social-flow.test.tsx
+PASS tests/state/npc-relationships-save.test.ts (6.833 s)
+PASS tests/persistence/native-school-archive.test.ts (5.313 s)
+PASS tests/ui/career-flow.test.tsx
+PASS tests/state/npc-courtships-save.test.ts (5.517 s)
+PASS tests/game/copy-world.test.ts (21.787 s)
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/persistence/life-preview.test.ts (5.672 s)
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/game/save-json.test.ts
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/game/primitives.test.ts
+PASS tests/ui/family-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/persistence/teen-relationship-compatibility.test.ts (5.706 s)
+PASS tests/ui/will-flow.test.tsx
+PASS tests/game/creation.test.ts
+PASS tests/persistence/base64.test.ts
+PASS tests/ui/portrait-accessibility.test.tsx
+PASS tests/persistence/npc-moves-migration.test.ts (44.888 s)
+PASS tests/game/special-career-depth.test.ts (22.037 s)
+PASS tests/game/interview-experience.test.ts (15.4 s)
+PASS tests/ui/lifetime-statistics-flow.test.tsx (14.822 s)
+PASS tests/ui/interview-experience-save-flow.test.tsx (7.52 s)
+PASS tests/state/annual-pacing-save.test.ts (5.059 s)
+PASS tests/game/annual-pacing.test.ts
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/ui/annual-finances-flow.test.tsx
+PASS tests/game/event-rarity.test.ts
+PASS tests/persistence/prospective-gameplay-migration.test.ts
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/ui/special-career-depth-flow.test.tsx
+PASS tests/game/job-interviews.test.ts
+PASS tests/ui/interactions.test.tsx
+
+Summary of all failing tests
+FAIL tests/game/project-years-callback.test.ts (9.08 s)
+  ● a genuine saved pupil resolves complete, lives 24 real months, then chooses remember-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+  ● a genuine saved pupil resolves ask-help, lives 24 real months, then chooses dismiss-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+  ● a genuine saved pupil resolves leave-to-peer, lives 24 real months, then chooses pass-project without rewriting school work
+
+    expect(received).toThrow(expected)
+
+    Expected pattern: /choice record/
+    Received message: "Invalid annual pacing choice observation"
+
+          28 |     for (const row of frame.pacing.decisions) {
+          29 |       const journal = world.journal[row.journalIndex], person = world.people[row.personId];
+        > 30 |       if (!person || !isImportant(row.templateId) || ids.has(row.eventId) || !journal || journal.id !== row.eventId + '_choice' || journal.category !== 'event' || journal.personId !== row.personId || compareDates(journal.date, row.date) !== 0) throw new Error('Invalid annual pacing choice observation');
+             |                                                                                                                                                                                                                                                           ^
+          31 |       if (compareDates(row.date, previous) < 0 || compareDates(row.date, frame.startDate) < 0 || compareDates(row.date, frame.targetDate) > 0 || compareDates(row.date, world.date) > 0 || compareDates(person.born, row.date) > 0 || person.died && compareDates(row.date, person.died) > 0) throw new Error('Invalid annual pacing observation date');
+          32 |       ids.add(row.eventId); previous = row.date;
+          33 |     }
+
+      at validateAnnualPacing (src/game/annualPacing.ts:30:251)
+      at validateWorld (src/game/model.ts:313:23)
+      at tests/game/project-years-callback.test.ts:32:193
+      at Object.<anonymous> (../../dreams-life-sim/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../dreams-life-sim/node_modules/expect/build/index.js:320:21)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+      at toThrow (tests/game/project-years-callback.test.ts:32:210)
+
+
+Test Suites: 1 failed, 210 passed, 211 total
+Tests:       3 failed, 2683 passed, 2686 total
+Snapshots:   0 total
+Time:        1781.432 s
+Ran all test suites.

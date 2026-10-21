@@ -1,0 +1,204 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/game/npc-moves.test.ts tests/state/npc-moves-save.test.ts --testTimeout=30000
+
+FAIL tests/game/npc-moves.test.ts
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    SyntaxError: /workspace/dreams-worktrees/npc-retirement-moves/src/game/systems/npcMoveSchemas.ts: 'import' and 'export' may only appear at the top level. (30:0)
+
+      28 |     return sum + (taxable > 0n ? roundRatio(taxable * BigInt(bps), 10000n) : 0n);
+      29 |   }, 0n);
+    > 30 | export const npcMoveAttemptKey = (year: number) => 'npc-move:' + year;
+         | ^
+      31 | export const npcMoveDestinationV1 = (country: CountryCode, origin: string, year: number) => {
+      32 |   const cities = npcMoveRulesV1[country].cities.filter(city => city !== origin);
+      33 |   return cities[((year % cities.length) + cities.length) % cities.length];
+
+    > 1 | import { npcMoveSchema } from './systems/npcMoveSchemas';
+        | ^
+      2 | import { validateNpcMoves } from './systems/npcMoveValidation';
+      3 | import { bestFriendshipSchema } from './systems/friendshipSchemas';
+      4 | import { validateBestFriendships } from './systems/friendshipValidation';
+
+      at constructor (../../dreams-life-sim/node_modules/@babel/parser/src/parse-error.ts:96:45)
+      at TypeScriptParserMixin.toParseError [as raise] (../../dreams-life-sim/node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.raise (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:640:16)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseStatementListItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:431:17)
+      at TypeScriptParserMixin.parseStatementListItem [as parseBlockOrModuleBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1444:16)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody [as parseBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseBlockBody [as parseBlock] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1385:10)
+      at TypeScriptParserMixin.parseBlock [as parseFunctionBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:2651:24)
+      at TypeScriptParserMixin.parseFunctionBody (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:2620:10)
+      at TypeScriptParserMixin.parseFunctionBodyAndFinish (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:2609:20)
+      at parseFunctionBodyAndFinish (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1695:12)
+      at TypeScriptParserMixin.callback [as withSmartMixTopicForbiddingContext] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:3201:14)
+      at TypeScriptParserMixin.withSmartMixTopicForbiddingContext [as parseFunction] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1693:10)
+      at TypeScriptParserMixin.parseFunction [as parseFunctionStatement] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1080:17)
+      at TypeScriptParserMixin.parseFunctionStatement (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:525:21)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseStatementListItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:431:17)
+      at TypeScriptParserMixin.parseStatementListItem (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2635:17)
+      at TypeScriptParserMixin.parseExportDeclaration (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3447:15)
+      at TypeScriptParserMixin.parseExportDeclaration [as maybeParseExportDeclaration] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2551:31)
+      at TypeScriptParserMixin.maybeParseExportDeclaration (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2432:29)
+      at TypeScriptParserMixin.parseExport (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3046:22)
+      at TypeScriptParserMixin.parseExport (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:649:25)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseModuleItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseModuleItem [as parseBlockOrModuleBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody [as parseBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseBlockBody [as parseProgram] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseProgram [as parseTopLevel] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parseTopLevel (../../dreams-life-sim/node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (../../dreams-life-sim/node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (../../dreams-life-sim/node_modules/@babel/core/src/parser/index.ts:29:19)
+          at parser.next (<anonymous>)
+      at normalizeFile (../../dreams-life-sim/node_modules/@babel/core/src/transformation/normalize-file.ts:49:24)
+          at normalizeFile.next (<anonymous>)
+      at run (../../dreams-life-sim/node_modules/@babel/core/src/transformation/index.ts:41:36)
+          at run.next (<anonymous>)
+      at transform (../../dreams-life-sim/node_modules/@babel/core/src/transform.ts:29:20)
+          at transform.next (<anonymous>)
+      at evaluateSync (../../dreams-life-sim/node_modules/gensync/index.js:251:28)
+      at sync (../../dreams-life-sim/node_modules/gensync/index.js:89:14)
+      at fn (../../dreams-life-sim/node_modules/@babel/core/src/errors/rewrite-stack-trace.ts:99:14)
+      at transformSync (../../dreams-life-sim/node_modules/@babel/core/src/transform.ts:66:52)
+      at ScriptTransformer.transformSource (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:545:31)
+      at ScriptTransformer._transformAndBuildScript (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:674:40)
+      at ScriptTransformer.transform (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:726:19)
+      at Object.require (src/game/model.ts:1:1)
+      at Object.require (src/game/systems/royalty.ts:3:1)
+      at Object.require (src/game/createLife.ts:2:1)
+      at Object.require (tests/game/npc-moves.test.ts:4:1)
+
+FAIL tests/state/npc-moves-save.test.ts
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.
+
+    By default "node_modules" folder is ignored by transformers.
+
+    Here's what you can do:
+     • If you are trying to use ECMAScript Modules, see https://jestjs.io/docs/ecmascript-modules for how to enable it.
+     • If you are trying to use TypeScript, see https://jestjs.io/docs/getting-started#using-typescript
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/configuration
+    For information about custom transformations, see:
+    https://jestjs.io/docs/code-transformation
+
+    Details:
+
+    SyntaxError: /workspace/dreams-worktrees/npc-retirement-moves/src/game/systems/npcMoveSchemas.ts: 'import' and 'export' may only appear at the top level. (30:0)
+
+      28 |     return sum + (taxable > 0n ? roundRatio(taxable * BigInt(bps), 10000n) : 0n);
+      29 |   }, 0n);
+    > 30 | export const npcMoveAttemptKey = (year: number) => 'npc-move:' + year;
+         | ^
+      31 | export const npcMoveDestinationV1 = (country: CountryCode, origin: string, year: number) => {
+      32 |   const cities = npcMoveRulesV1[country].cities.filter(city => city !== origin);
+      33 |   return cities[((year % cities.length) + cities.length) % cities.length];
+
+    > 1 | import { npcMoveSchema } from './systems/npcMoveSchemas';
+        | ^
+      2 | import { validateNpcMoves } from './systems/npcMoveValidation';
+      3 | import { bestFriendshipSchema } from './systems/friendshipSchemas';
+      4 | import { validateBestFriendships } from './systems/friendshipValidation';
+
+      at constructor (../../dreams-life-sim/node_modules/@babel/parser/src/parse-error.ts:96:45)
+      at TypeScriptParserMixin.toParseError [as raise] (../../dreams-life-sim/node_modules/@babel/parser/src/tokenizer/index.ts:1504:19)
+      at TypeScriptParserMixin.raise (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:640:16)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseStatementListItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:431:17)
+      at TypeScriptParserMixin.parseStatementListItem [as parseBlockOrModuleBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1444:16)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody [as parseBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseBlockBody [as parseBlock] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1385:10)
+      at TypeScriptParserMixin.parseBlock [as parseFunctionBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:2651:24)
+      at TypeScriptParserMixin.parseFunctionBody (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:2620:10)
+      at TypeScriptParserMixin.parseFunctionBodyAndFinish (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:2609:20)
+      at parseFunctionBodyAndFinish (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1695:12)
+      at TypeScriptParserMixin.callback [as withSmartMixTopicForbiddingContext] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/expression.ts:3201:14)
+      at TypeScriptParserMixin.withSmartMixTopicForbiddingContext [as parseFunction] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1693:10)
+      at TypeScriptParserMixin.parseFunction [as parseFunctionStatement] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1080:17)
+      at TypeScriptParserMixin.parseFunctionStatement (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:525:21)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseStatementListItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:431:17)
+      at TypeScriptParserMixin.parseStatementListItem (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2635:17)
+      at TypeScriptParserMixin.parseExportDeclaration (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3447:15)
+      at TypeScriptParserMixin.parseExportDeclaration [as maybeParseExportDeclaration] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2551:31)
+      at TypeScriptParserMixin.maybeParseExportDeclaration (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:2432:29)
+      at TypeScriptParserMixin.parseExport (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3046:22)
+      at TypeScriptParserMixin.parseExport (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:649:25)
+      at TypeScriptParserMixin.parseStatementContent (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:3220:20)
+      at TypeScriptParserMixin.parseStatementContent [as parseStatementLike] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:482:17)
+      at TypeScriptParserMixin.parseStatementLike [as parseModuleItem] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:419:17)
+      at TypeScriptParserMixin.parseModuleItem [as parseBlockOrModuleBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1443:16)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody [as parseBlockBody] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:1417:10)
+      at TypeScriptParserMixin.parseBlockBody [as parseProgram] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:229:10)
+      at TypeScriptParserMixin.parseProgram [as parseTopLevel] (../../dreams-life-sim/node_modules/@babel/parser/src/parser/statement.ts:203:25)
+      at TypeScriptParserMixin.parseTopLevel (../../dreams-life-sim/node_modules/@babel/parser/src/parser/index.ts:83:25)
+      at TypeScriptParserMixin.parse (../../dreams-life-sim/node_modules/@babel/parser/src/plugins/typescript/index.ts:4354:20)
+      at parse (../../dreams-life-sim/node_modules/@babel/parser/src/index.ts:86:38)
+      at parser (../../dreams-life-sim/node_modules/@babel/core/src/parser/index.ts:29:19)
+          at parser.next (<anonymous>)
+      at normalizeFile (../../dreams-life-sim/node_modules/@babel/core/src/transformation/normalize-file.ts:49:24)
+          at normalizeFile.next (<anonymous>)
+      at run (../../dreams-life-sim/node_modules/@babel/core/src/transformation/index.ts:41:36)
+          at run.next (<anonymous>)
+      at transform (../../dreams-life-sim/node_modules/@babel/core/src/transform.ts:29:20)
+          at transform.next (<anonymous>)
+      at evaluateSync (../../dreams-life-sim/node_modules/gensync/index.js:251:28)
+      at sync (../../dreams-life-sim/node_modules/gensync/index.js:89:14)
+      at fn (../../dreams-life-sim/node_modules/@babel/core/src/errors/rewrite-stack-trace.ts:99:14)
+      at transformSync (../../dreams-life-sim/node_modules/@babel/core/src/transform.ts:66:52)
+      at ScriptTransformer.transformSource (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:545:31)
+      at ScriptTransformer._transformAndBuildScript (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:674:40)
+      at ScriptTransformer.transform (../../dreams-life-sim/node_modules/@jest/transform/build/ScriptTransformer.js:726:19)
+      at Object.require (src/game/model.ts:1:1)
+      at Object.require (src/game/systems/royalty.ts:3:1)
+      at Object.require (src/game/createLife.ts:2:1)
+      at Object.require (src/state/gameStore.ts:2:1)
+      at Object.require (tests/state/npc-moves-save.test.ts:5:1)
+
+Test Suites: 2 failed, 2 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1.849 s
+Ran all test suites within paths "tests/game/npc-moves.test.ts", "tests/state/npc-moves-save.test.ts".

@@ -1,0 +1,10 @@
+const fs = require('node:fs'), path = require('node:path'), { createHash } = require('node:crypto');
+const root = process.argv[2], ts = require(path.join(root, 'node_modules/typescript'));
+require.extensions['.ts'] = (m, file) => m._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText, file);
+const { npcFamilyCircle } = require(path.join(root, 'tests/support/npcCourtships.ts'));
+const { annualCommand } = require(path.join(root, 'tests/support/npcRelationships.ts'));
+const { resolveCommand } = require(path.join(root, 'src/game/engine.ts'));
+const { encodeWorld } = require(path.join(root, 'src/game/model.ts'));
+let world = npcFamilyCircle(), commands = 0;
+while (commands < 120 && !world.people[world.activePersonId].died && !world.npcSeparations.some(row => row.outcome === 'separated')) { world = resolveCommand(world, annualCommand(world), true); commands++; }
+process.stdout.write(JSON.stringify({ scope: 'Original unchanged shared npcFamilyCircle: declared qualified-adult setup and actual two introductions, then only fixed ordinary commands until first actual separation or bounded120. No healthy50/50 setup, seed alternatives, post-setup overrides or roll peeks. Not a natural birth/lifetime acceptance run.', commands, versions: { world: world.schemaVersion, engine: world.engineVersion, content: world.contentVersion }, date: world.date, naturallyDied: !!world.people[world.activePersonId].died, attempts: world.npcSeparations, courtships: world.npcCourtships, worldSha256: createHash('sha256').update(encodeWorld(world)).digest('hex') }, null, 2) + '\n');

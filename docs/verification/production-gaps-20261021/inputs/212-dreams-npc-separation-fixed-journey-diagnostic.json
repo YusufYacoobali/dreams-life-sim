@@ -1,0 +1,239 @@
+{
+  "scope": "One bounded diagnostic replay of the original fixed3-pair arranged unit context. No new seeds, world mutations or roll peeks after setup.",
+  "steps": 120,
+  "date": {
+    "year": 2062,
+    "month": 1,
+    "day": 1
+  },
+  "attempts": [
+    {
+      "id": "npc_separation_0_0",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_2",
+      "relationshipId": "relation_person_npc_0_7_person_npc_0_8",
+      "a": "person_npc_0_7",
+      "b": "person_npc_0_8",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2027,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 43,
+      "outcome": "continued"
+    },
+    {
+      "id": "npc_separation_3_1",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_0",
+      "relationshipId": "relation_person_npc_0_3_person_npc_0_4",
+      "a": "person_npc_0_3",
+      "b": "person_npc_0_4",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2028,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 98,
+      "outcome": "continued"
+    },
+    {
+      "id": "npc_separation_6_2",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_1",
+      "relationshipId": "relation_person_npc_0_5_person_npc_0_6",
+      "a": "person_npc_0_5",
+      "b": "person_npc_0_6",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2029,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 93,
+      "outcome": "continued"
+    },
+    {
+      "id": "npc_separation_8_3",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_2",
+      "relationshipId": "relation_person_npc_0_7_person_npc_0_8",
+      "a": "person_npc_0_7",
+      "b": "person_npc_0_8",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2030,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 57,
+      "outcome": "continued"
+    },
+    {
+      "id": "npc_separation_11_4",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_1",
+      "relationshipId": "relation_person_npc_0_5_person_npc_0_6",
+      "a": "person_npc_0_5",
+      "b": "person_npc_0_6",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2031,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 78,
+      "outcome": "continued"
+    },
+    {
+      "id": "npc_separation_14_5",
+      "ruleVersion": 1,
+      "courtshipId": "courtship_0_0",
+      "relationshipId": "relation_person_npc_0_3_person_npc_0_4",
+      "a": "person_npc_0_3",
+      "b": "person_npc_0_4",
+      "observerId": "person_player",
+      "observerPartnerId": null,
+      "date": {
+        "year": 2032,
+        "month": 1,
+        "day": 1
+      },
+      "countryA": "US",
+      "countryB": "US",
+      "city": "New York",
+      "strength": 35,
+      "trust": 35,
+      "chance": 16,
+      "roll": 36,
+      "outcome": "continued"
+    }
+  ],
+  "courtships": [
+    {
+      "id": "courtship_0_0",
+      "observedSince": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "endReason": null,
+      "marriageId": "marriage_npc_14_3",
+      "proposals": [
+        {
+          "date": {
+            "year": 2028,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": false
+        },
+        {
+          "date": {
+            "year": 2032,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "id": "courtship_0_1",
+      "observedSince": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "endReason": null,
+      "marriageId": "marriage_npc_11_2",
+      "proposals": [
+        {
+          "date": {
+            "year": 2029,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": false
+        },
+        {
+          "date": {
+            "year": 2031,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "id": "courtship_0_2",
+      "observedSince": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "ended": null,
+      "endReason": null,
+      "marriageId": "marriage_npc_8_1",
+      "proposals": [
+        {
+          "date": {
+            "year": 2027,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": false
+        },
+        {
+          "date": {
+            "year": 2030,
+            "month": 1,
+            "day": 1
+          },
+          "accepted": true
+        }
+      ]
+    }
+  ],
+  "playerDied": false
+}

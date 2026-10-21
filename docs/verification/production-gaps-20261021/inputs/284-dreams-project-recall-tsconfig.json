@@ -1,0 +1,10 @@
+{
+  "extends": "/workspace/dreams-worktrees/childhood-years-callback/tests/tsconfig.json",
+  "compilerOptions": { "typeRoots": ["/workspace/dreams-worktrees/childhood-years-callback/node_modules/@types"] },
+  "include": [
+    "/workspace/dreams-worktrees/childhood-years-callback/tests/game/project-years-callback.test.ts",
+    "/workspace/dreams-worktrees/childhood-years-callback/tests/ui/project-years-callback-flow.test.tsx",
+    "/workspace/dreams-worktrees/childhood-years-callback/tests/game/story-callbacks.test.ts"
+  ],
+  "exclude": []
+}

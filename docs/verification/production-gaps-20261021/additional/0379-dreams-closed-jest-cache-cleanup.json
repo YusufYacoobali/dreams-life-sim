@@ -1,0 +1,6 @@
+{
+  "complete": true,
+  "at": "2026-10-21T07:42:58.643272+00:00",
+  "removed": "/tmp/dreams-life-sim-jest",
+  "reason": "Inactive generated transform cache only, after every Jest child closed; raw evidence/source/fixtures/native captures/export maps retained. Frees temporary disk for later device checks."
+}

@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "action-saved",
+  "to": "cold-action-saved",
+  "evidence": {
+    "file": "/tmp/dreams-c37-native-captures/cold-action-saved/capture-log.json",
+    "bytes": 3185,
+    "sha256": "85cb60c67f4e0f39e98d493bd6c5829c81a4dcaea130589c3ff5e7b84f74da56"
+  }
+}

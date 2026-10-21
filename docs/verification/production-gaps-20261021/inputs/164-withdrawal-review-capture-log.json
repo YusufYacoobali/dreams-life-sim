@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "withdrawal-review",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-native-captures/withdrawal-review/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Leave Course', '[42,414][348,464]'), ('', 'Never mind', '[42,476][348,526]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T07:10:49.115583+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-native-captures/withdrawal-review/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-native-captures/withdrawal-review/database\n",
+      "stderr": "",
+      "at": "2026-10-21T07:10:50.058662+00:00"
+    }
+  ]
+}

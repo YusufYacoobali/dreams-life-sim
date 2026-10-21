@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "cold-newborn-completed",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-native-captures/cold-newborn-completed/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Begin Life!', '[16,734][374,784]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T01:31:22.061111+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-native-captures/cold-newborn-completed/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-native-captures/cold-newborn-completed/database\n",
+      "stderr": "",
+      "at": "2026-10-21T01:31:22.918765+00:00"
+    }
+  ]
+}

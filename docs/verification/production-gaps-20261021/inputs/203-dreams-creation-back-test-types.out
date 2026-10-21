@@ -1,0 +1,4 @@
+tests/ui/onboarding-accessibility-flow.test.tsx(73,24): error TS2345: Argument of type '(event: HardwareBackPressEvent) => boolean | null | undefined' is not assignable to parameter of type '() => boolean | null | undefined'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+tests/ui/onboarding-accessibility-flow.test.tsx(73,79): error TS2345: Argument of type '(event: HardwareBackPressEvent) => boolean | null | undefined' is not assignable to parameter of type '() => boolean | null | undefined'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.

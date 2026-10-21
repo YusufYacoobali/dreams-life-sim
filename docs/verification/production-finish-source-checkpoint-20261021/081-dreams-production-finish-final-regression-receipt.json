@@ -1,0 +1,34 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+  "sourceSnapshot": "/tmp/dreams-production-finish-final-source.json",
+  "sourceSnapshotSha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a",
+  "root": "/workspace/dreams-worktrees/integration-production-finish",
+  "argv": [
+    "npm",
+    "test",
+    "--",
+    "--ci",
+    "--testTimeout=30000"
+  ],
+  "startedAt": "2026-10-21T07:09:57.420213+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:39:39.660041+00:00",
+  "elapsedSeconds": 1782.24,
+  "exitCode": 1,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-final-regression.out",
+    "bytes": 29144,
+    "sha256": "416444b2a5dc73f2f51cf9d4e7faddeb2e90ba5323b961c55c36d46a2e369135"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a",
+    "status": "exact"
+  }
+}

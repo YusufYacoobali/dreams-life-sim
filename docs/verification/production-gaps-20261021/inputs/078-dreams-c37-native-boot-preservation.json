@@ -1,0 +1,22 @@
+{
+  "complete": true,
+  "scope": "Actual C37 first boot upgrades reader15\u219216 only; all8 raw tables unchanged from rooted previous C36 data.",
+  "paths": [
+    "/tmp/dreams-production-gaps-native-rooted-before-boot-db",
+    "/tmp/dreams-c37-native-precreation-db"
+  ],
+  "readers": [
+    15,
+    16
+  ],
+  "tableCounts": {
+    "backups": 7,
+    "branches": 1,
+    "lives": 7,
+    "preferences": 2,
+    "receipts": 147,
+    "restore_receipts": 1,
+    "snapshot_metadata": 66,
+    "snapshots": 66
+  }
+}

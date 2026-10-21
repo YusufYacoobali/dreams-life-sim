@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "scope": "Actual identity/appearance/city navigation and creation review cancellation preserve all8 tables.",
+  "paths": [
+    "/tmp/dreams-c37-native-precreation-db",
+    "/tmp/dreams-c37-native-confirm-cancel-db"
+  ],
+  "tableCounts": {
+    "backups": 7,
+    "branches": 1,
+    "lives": 7,
+    "preferences": 2,
+    "receipts": 147,
+    "restore_receipts": 1,
+    "snapshot_metadata": 66,
+    "snapshots": 66
+  }
+}

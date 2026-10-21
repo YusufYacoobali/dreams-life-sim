@@ -1,0 +1,8 @@
+PASS tests/ui/scholarship-durable-save-flow.test.tsx (15.511 s)
+PASS tests/ui/scholarship-flow.test.tsx (6.12 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        21.731 s
+Ran all test suites matching /tests\/ui\/scholarship-durable-save-flow.test.tsx|tests\/ui\/scholarship-flow.test.tsx/i.

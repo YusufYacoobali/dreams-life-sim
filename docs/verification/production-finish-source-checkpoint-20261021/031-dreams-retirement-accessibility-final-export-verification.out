@@ -1,0 +1,1 @@
+{"status": "passed", "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592", "platforms": {"android": {"bytes": 4886156, "mappedAppSourceCount": 329}, "ios": {"bytes": 4619292, "mappedAppSourceCount": 329}}, "proof": "/tmp/dreams-retirement-accessibility-final-export-proof.json", "sha256": "df0cc4a21f2d50c285c58406da051aa2b2ca2daadf4fd8b409735a76967c5fe0"}

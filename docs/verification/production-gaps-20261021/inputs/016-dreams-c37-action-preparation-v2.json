@@ -1,0 +1,74 @@
+{
+  "format": "dreams-c37-action-preparation-v2",
+  "status": "prepared-only",
+  "benchmarkExecuted": false,
+  "processSignalsSent": false,
+  "nativeCommandsExecuted": false,
+  "wrapper": {
+    "file": "/tmp/dreams-c37-action-gate-v2.py",
+    "bytes": 18150,
+    "sha256": "475d888d251edd7c7058ad7a37f8c7604f7ab245636f69c02c52d67672c74a31"
+  },
+  "expectedRuntime": {
+    "world": 36,
+    "engine": 37,
+    "content": 12,
+    "database": 16,
+    "checkpoint": "v4",
+    "combinedGamePersistenceSourceHash": "c98f5ccef419042d820b377f36201ce1f4f63a479525ca943e865d77007ca9a5"
+  },
+  "originalDriverSha256": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "fixedInputs": [
+    {
+      "file": "tests/fixtures/v25-content4-bubble-archive.json",
+      "bytes": 18099,
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4"
+    },
+    {
+      "file": "tests/fixtures/v27-leisure-archive.json",
+      "bytes": 140456,
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a"
+    },
+    {
+      "file": "tests/fixtures/v28-native-teen-archive.json",
+      "bytes": 575472,
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82"
+    },
+    {
+      "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+      "bytes": 794714,
+      "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9"
+    }
+  ],
+  "existingAcceptedSnapshotForOrientationOnly": {
+    "file": "/tmp/dreams-production-gaps-accepted-source.json",
+    "bytes": 72349,
+    "sha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652"
+  },
+  "finalSnapshotMustBeProvidedByRoot": true,
+  "historicalC36Receipt": {
+    "file": "/tmp/dreams-friends-editorial-actions-receipt.json",
+    "bytes": 1796,
+    "sha256": "e9377491ef2a6b80a1541f0a61b7c6ed7ad66c3218f91a75791f93c7e678b077"
+  },
+  "historicalC36PublishedRecord": {
+    "file": "docs/verification/friends-editorial-20261020.json",
+    "pointer": "/gates/actions",
+    "note": "Historical C36 serial result only, not a C37 action pass."
+  },
+  "scope": "14 cases, exactly70 measured warm samples, one excluded warmup/case; original driver asserts84 whole cold current/backup executions and12 raw BeforeAgeUp payload checks; generated100/1000 contact worlds retain stress labels. No native/UI/physical p95 claim.",
+  "supersededStaticPreparation": {
+    "wrapper": {
+      "file": "/tmp/dreams-c37-action-gate.py",
+      "bytes": 15892,
+      "sha256": "58ea27535ecd8164b638dbfcd8cb529e70333ba7f77fdc929ba15c5ce8f994b3"
+    },
+    "preparation": {
+      "file": "/tmp/dreams-c37-action-preparation.json",
+      "bytes": 2374,
+      "sha256": "b234e45142691220d9a61ab5123156de84e5a27b12097bd772ccfd86727da718"
+    },
+    "reason": "Static review found v1 did not reject added non-TS shadowfiles; no benchmark or helper execution occurred."
+  },
+  "sourceInventoryGuard": "All extensions in src/app/tests/tools/assets/.github and root runtime/config candidates must match the complete supplied final source map. Symlink roots/entries/configs and fixed inputs are rejected before/after. Root/source path remain caller arguments; final source snapshot plus head/tree/status artifacts are immutable-pinned."
+}

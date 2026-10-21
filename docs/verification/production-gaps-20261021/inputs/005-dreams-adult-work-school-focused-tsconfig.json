@@ -1,0 +1,14 @@
+{
+  "extends": "/workspace/dreams-worktrees/country-gameplay-audit/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "/workspace/dreams-worktrees/country-gameplay-audit/node_modules/@types"
+    ]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/country-gameplay-audit/tests/game/adult-work-school-entry.test.ts",
+    "/workspace/dreams-worktrees/country-gameplay-audit/tests/game/education-recovery.test.ts",
+    "/workspace/dreams-worktrees/country-gameplay-audit/tests/game/school-withdrawal.test.ts"
+  ],
+  "exclude": []
+}

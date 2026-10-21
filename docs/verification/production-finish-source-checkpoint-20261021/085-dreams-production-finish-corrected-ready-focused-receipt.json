@@ -1,0 +1,38 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "sourceSnapshot": "/tmp/dreams-production-finish-corrected-source.json",
+  "sourceSnapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+  "root": "/workspace/dreams-worktrees/camera-copy-correction",
+  "argv": [
+    "node",
+    "node_modules/jest/bin/jest.js",
+    "--runInBand",
+    "--testTimeout=30000",
+    "--runTestsByPath",
+    "tests/game/early-home-stories.test.ts",
+    "tests/game/event-rarity.test.ts",
+    "tests/game/rare-adult-story.test.ts",
+    "tests/game/special-career-depth.test.ts"
+  ],
+  "startedAt": "2026-10-21T07:36:00.084010+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:37:01.323500+00:00",
+  "elapsedSeconds": 61.239,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-corrected-ready-focused.out",
+    "bytes": 487,
+    "sha256": "259f9f7af111a44ba35b5e34e70cf510ea7d428fb1ba34ffd0440ef5b1e96f69"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545",
+    "status": "exact"
+  }
+}

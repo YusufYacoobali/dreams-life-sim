@@ -1,0 +1,68 @@
+{
+  "format": "dreams-c37-publisher-report-type-audit-v1",
+  "scope": "Read-only field-type inspection of actual JSON reports and capture/cold attestations. No publisher, verifier, runtime, syntax import or device execution. This is not an independent semantic acceptance run.",
+  "filesRead": 30,
+  "booleanGuardsChecked": {
+    "complete": 34,
+    "nativeAppStopped": 1,
+    "allHeavyGatesClosed": 1,
+    "noReplacementEmulatorOrMetroRunning": 1,
+    "processClosed": 16,
+    "originalIdentityGoneOrZombie": 4,
+    "benchmarkExecuted": 1,
+    "allExtensionsChecked": 2,
+    "symlinksRejected": 2,
+    "coordinatorPersonallyViewed": 27,
+    "previouslyExisted": 2,
+    "allProtectedBaselineRowsExact": 27,
+    "onlyActualTargetLifeRowsChanged": 27,
+    "activeLifePreferenceOnly": 27,
+    "gameRuntimeLoaded": 2,
+    "visualAcceptance": 4,
+    "creationSeedReconstructed": 2,
+    "stopped": 9,
+    "restarted": 9,
+    "publicationApproved": 1,
+    "coordinatorPersonallyViewedAll": 2
+  },
+  "numericZeroFields": [
+    {
+      "file": "/tmp/dreams-c37-custom-raw-result.json",
+      "pointer": "/engineCommandsProjected",
+      "actualType": "int",
+      "value": 0
+    },
+    {
+      "file": "/tmp/dreams-c37-custom-raw-result.json",
+      "pointer": "/nativeActionsPerformed",
+      "actualType": "int",
+      "value": 0
+    },
+    {
+      "file": "/tmp/dreams-c37-custom-semantic-result.json",
+      "pointer": "/actualNativeActionsPerformed",
+      "actualType": "int",
+      "value": 0
+    },
+    {
+      "file": "/tmp/dreams-c37-university-raw-result.json",
+      "pointer": "/engineCommandsProjected",
+      "actualType": "int",
+      "value": 0
+    },
+    {
+      "file": "/tmp/dreams-c37-university-raw-result.json",
+      "pointer": "/nativeActionsPerformed",
+      "actualType": "int",
+      "value": 0
+    },
+    {
+      "file": "/tmp/dreams-c37-university-semantic-result.json",
+      "pointer": "/actualNativeActionsPerformed",
+      "actualType": "int",
+      "value": 0
+    }
+  ],
+  "mismatches": [],
+  "correctedGuard": "Raw nativeActionsPerformed requires type(value) is int and value==0; semantic actualNativeActionsPerformed already uses exact integer0. All remaining Boolean identity guards retain actual JSON Boolean types."
+}

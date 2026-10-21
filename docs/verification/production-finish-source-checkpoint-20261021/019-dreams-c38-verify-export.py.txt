@@ -1,0 +1,63 @@
+"""Coordinator source-map/Hermes verification; never starts a build or game."""
+import argparse
+import hashlib
+import json
+import pathlib
+
+p = argparse.ArgumentParser()
+p.add_argument('--source', required=True)
+p.add_argument('--export', dest='output', required=True)
+p.add_argument('--receipt', required=True)
+p.add_argument('--cache', required=True)
+p.add_argument('--proof', required=True)
+a = p.parse_args()
+source = pathlib.Path(a.source)
+snapshot = json.loads(source.read_text())
+root = pathlib.Path(snapshot['root'])
+output = pathlib.Path(a.output)
+receipt = json.loads(pathlib.Path(a.receipt).read_text())
+sha = lambda b: hashlib.sha256(b).hexdigest()
+assert receipt['complete'] is True and receipt['exitCode'] == 0
+assert receipt['sourceCommit'] == snapshot['commit']
+assert receipt['sourceSnapshotSha256'] == sha(source.read_bytes())
+for file, digest in snapshot['source'].items():
+    assert sha((root / file).read_bytes()) == digest, file
+metadata = json.loads((output / 'metadata.json').read_text())
+assert metadata['bundler'] == 'metro'
+expected = {f for f in snapshot['source'] if f.startswith(('app/', 'src/')) and f.endswith(('.ts', '.tsx'))}
+# This file exports types only and has no generated runtime module.
+allowed_unmapped = {'src/progression/types.ts'}
+platforms = {}
+for platform in ('android', 'ios'):
+    bundle = output / metadata['fileMetadata'][platform]['bundle']
+    data = bundle.read_bytes()
+    assert data[:8].hex() == 'c61fbc03c103191f', 'Expected actual Hermes bytecode'
+    map_path = pathlib.Path(str(bundle) + '.map')
+    map_bytes = map_path.read_bytes()
+    mapping = json.loads(map_bytes)
+    assert len(mapping['sources']) == len(mapping['sourcesContent'])
+    mapped = {}
+    for file, content in zip(mapping['sources'], mapping['sourcesContent']):
+        if not file.startswith(('/app/', '/src/')):
+            continue
+        file = file[1:]
+        assert file in expected and file not in mapped, file
+        assert isinstance(content, str)
+        digest = sha(content.encode())
+        assert digest == snapshot['source'][file], 'Stale bundled source: ' + file
+        mapped[file] = digest
+    assert expected - mapped.keys() == allowed_unmapped, sorted(expected - mapped.keys())
+    platforms[platform] = {'bundle': str(bundle), 'bytes': len(data), 'sha256': sha(data),
+        'sourceMap': str(map_path), 'sourceMapSha256': sha(map_bytes),
+        'mappedAppSourceFiles': mapped, 'mappedAppSourceCount': len(mapped),
+        'unmappedTypeOnlyFiles': sorted(allowed_unmapped)}
+proof = pathlib.Path(a.proof)
+assert not proof.exists(), 'Never overwrite an export observation'
+record = {'status': 'passed', 'sourceCommit': snapshot['commit'],
+    'sourceSnapshotSha256': sha(source.read_bytes()), 'uniqueCache': a.cache,
+    'metadataSha256': sha((output / 'metadata.json').read_bytes()), 'platforms': platforms,
+    'scope': 'Actual closed isolated Android/iOS Hermes exports with every runtime app/src source map byte checked. No standalone build or device acceptance inferred.'}
+proof.write_text(json.dumps(record, indent=2) + '\n')
+print(json.dumps({'status': 'passed', 'sourceCommit': snapshot['commit'],
+    'platforms': {k: {'bytes': v['bytes'], 'mappedAppSourceCount': v['mappedAppSourceCount']} for k, v in platforms.items()},
+    'proof': str(proof), 'sha256': sha(proof.read_bytes())}))

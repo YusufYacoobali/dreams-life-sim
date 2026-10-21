@@ -1,0 +1,11 @@
+{
+  "extends": "/workspace/dreams-worktrees/c37-hobby-collision-tests/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": ["/workspace/dreams-worktrees/c37-hobby-collision-tests/node_modules/@types"]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/c37-hobby-collision-tests/tests/ui/ordinary-hobby-flow.test.tsx",
+    "/workspace/dreams-worktrees/c37-hobby-collision-tests/tests/game/story-name-collisions.test.ts"
+  ],
+  "exclude": []
+}

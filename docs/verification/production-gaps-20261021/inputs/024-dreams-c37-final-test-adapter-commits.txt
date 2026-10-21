@@ -1,0 +1,62 @@
+commit 85f6ff8637ba3de9d0f04421307419b1d9609864
+Author:     Y Y <yyacoobali@gmail.com>
+AuthorDate: Wed Oct 21 01:42:33 2026 +0000
+Commit:     Y Y <yyacoobali@gmail.com>
+CommitDate: Wed Oct 21 01:42:57 2026 +0000
+
+    Clarify repository reuse in childhood UI reload evidence
+
+ docs/C37_WEIGHTED_UI_ACCEPTANCE.md | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit b0e4b7b90598602a9eb513aebe5a37b75f5f805c
+Author:     Y Y <yyacoobali@gmail.com>
+AuthorDate: Wed Oct 21 01:39:59 2026 +0000
+Commit:     Y Y <yyacoobali@gmail.com>
+CommitDate: Wed Oct 21 01:42:57 2026 +0000
+
+    Align targeted story UI acceptance with weighted selection
+
+ docs/C37_WEIGHTED_UI_ACCEPTANCE.md              | 57 +++++++++++++++++++++++++
+ tests/ui/adult-relationship-story-flow.test.tsx | 28 +++++++++---
+ tests/ui/childhood-story-flow.test.tsx          | 28 +++++++++---
+ tests/ui/story-consequence-labels-flow.test.tsx | 34 +++++++++------
+ 4 files changed, 120 insertions(+), 27 deletions(-)
+
+commit 01081a8d5779a3ef6fdcb56ba473d11bf19eecdb
+Author:     Y Y <yyacoobali@gmail.com>
+AuthorDate: Wed Oct 21 01:36:51 2026 +0000
+Commit:     Y Y <yyacoobali@gmail.com>
+CommitDate: Wed Oct 21 01:38:50 2026 +0000
+
+    Follow saved university offers in loan rate acceptance
+
+ docs/STUDENT_LOAN_RATE_QUOTES.md         | 39 +++++++++++++++++++++++++++++
+ tests/ui/student-loan-rate-flow.test.tsx | 42 ++++++++++++++++++++++----------
+ 2 files changed, 68 insertions(+), 13 deletions(-)
+
+commit eff7fd7f9dd9bb938cc3c495919e4f69c8b83a8b
+Author:     Y Y <yyacoobali@gmail.com>
+AuthorDate: Wed Oct 21 01:28:07 2026 +0000
+Commit:     Y Y <yyacoobali@gmail.com>
+CommitDate: Wed Oct 21 01:36:29 2026 +0000
+
+    Adapt story tests to recall cancellation and actual weighted scene
+
+ docs/C37_STORY_TEST_ADAPTERS.md        | 51 ++++++++++++++++++++++++++++++++++
+ tests/game/story-lifecycle.test.ts     |  8 ++++--
+ tests/ui/workplace-story-flow.test.tsx | 38 ++++++++++++-------------
+ 3 files changed, 76 insertions(+), 21 deletions(-)
+
+commit 244d65850327a23c4030ba96e837b271664879be
+Author:     Y Y <yyacoobali@gmail.com>
+AuthorDate: Wed Oct 21 01:25:38 2026 +0000
+Commit:     Y Y <yyacoobali@gmail.com>
+CommitDate: Wed Oct 21 01:36:29 2026 +0000
+
+    Align connected hobby and fresh project expectations with C37
+
+ docs/C37_HOBBY_COLLISION_EXPECTATIONS.md | 52 ++++++++++++++++++++++++++++++++
+ tests/game/story-name-collisions.test.ts | 13 ++++++--
+ tests/ui/ordinary-hobby-flow.test.tsx    | 37 ++++++++++++++++++-----
+ 3 files changed, 92 insertions(+), 10 deletions(-)

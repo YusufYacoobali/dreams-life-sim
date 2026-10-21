@@ -1,0 +1,18 @@
+{
+  "extends": "/workspace/dreams-worktrees/integration-retirement-accessibility/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "/workspace/dreams-worktrees/integration-retirement-accessibility/node_modules/@types"
+    ]
+  },
+  "files": [
+    "/workspace/dreams-worktrees/integration-retirement-accessibility/src/game/model.ts",
+    "/workspace/dreams-worktrees/integration-retirement-accessibility/src/game/createLife.ts",
+    "/workspace/dreams-worktrees/integration-retirement-accessibility/src/persistence/repository.ts"
+  ],
+  "include": [],
+  "exclude": []
+}

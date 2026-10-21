@@ -1,0 +1,34 @@
+{
+  "format": "dreams-c38-action-quiescence-attestation-v1",
+  "complete": false,
+  "root": "/workspace/dreams-worktrees/integration-retirement-accessibility-final",
+  "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+  "sourceSnapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+  "recordedAt": null,
+  "nativeAppStopped": null,
+  "allHeavyGatesClosed": null,
+  "noReplacementEmulatorOrMetroRunning": null,
+  "closedProcesses": [
+    {
+      "role": "qemu",
+      "pid": null,
+      "uid": 1000,
+      "startTicks": null,
+      "argv": null,
+      "closedAt": null,
+      "processClosed": null
+    },
+    {
+      "role": "metro",
+      "pid": null,
+      "uid": 1000,
+      "startTicks": null,
+      "argv": null,
+      "closedAt": null,
+      "processClosed": null
+    }
+  ],
+  "closedGateEvidence": [],
+  "statement": null,
+  "preparationNote": "Pending template, not quiescence evidence. Root records current actual identities and closure facts only after native/full/author/heavy work closes. No process control is performed by either wrapper."
+}

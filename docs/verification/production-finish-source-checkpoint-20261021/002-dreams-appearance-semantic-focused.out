@@ -1,0 +1,10 @@
+PASS tests/ui/new-life-review-flow.test.tsx (11.139 s)
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/ui/appearance-labels.test.tsx
+PASS tests/ui/portrait-accessibility.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       13 passed, 13 total
+Snapshots:   0 total
+Time:        14.086 s
+Ran all test suites matching /tests\/ui\/appearance-labels.test.tsx|tests\/ui\/portrait-accessibility.test.tsx|tests\/ui\/onboarding-flow.test.tsx|tests\/ui\/new-life-review-flow.test.tsx/i.

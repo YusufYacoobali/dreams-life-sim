@@ -1,0 +1,30 @@
+PASS tests/game/teen-relationships.test.ts (6.181 s)
+  ✓ fixed consent state1 gives its real saved outcome, one draw and exact cold result (132 ms)
+  ✓ fixed consent state4 gives its real saved outcome, one draw and exact cold result (30 ms)
+  ✓ exact calendar DOB gap includes its day and leap anniversary rather than rounded age labels
+  ✓ actual ages12/13 preserve the minor-only first-date boundary (5 ms)
+  ✓ actual ages13/13 preserve the minor-only first-date boundary (3 ms)
+  ✓ actual ages17/17 preserve the minor-only first-date boundary (4 ms)
+  ✓ actual ages18/17 preserve the minor-only first-date boundary (5 ms)
+  ✓ actual ages17/18 preserve the minor-only first-date boundary (4 ms)
+  ✓ stale identity/location and unavailable/authority/preference/bond/energy contexts reject before any change or draw (33 ms)
+  ✓ a real current best friendship closes through the shared romance ending and retains its exact original consent (14 ms)
+  ✓ mixed-age ongoing consent stays exclusive and can be ended remotely; both-adult refresh uses the actual date (32 ms)
+  ✓ actual death closes original consent with the deceased person/date and ordinary adult/family commands still reject minors (66 ms)
+  ✓ contradictory roll consent cannot be imported (38 ms)
+  ✓ contradictory chance consent cannot be imported (8 ms)
+  ✓ contradictory missing-guard consent cannot be imported (8 ms)
+  ✓ contradictory duplicate consent cannot be imported (7 ms)
+  ✓ contradictory missing-active-row consent cannot be imported (10 ms)
+  ✓ contradictory gender consent cannot be imported (9 ms)
+  ✓ contradictory false-death consent cannot be imported (10 ms)
+  ✓ contradictory false-adult consent cannot be imported (7 ms)
+  ✓ contradictory unbacked-state consent cannot be imported (8 ms)
+  ✓ a forged declined second-person invitation cannot bypass an earlier ongoing accepted relationship (11 ms)
+  ✓ frozen history/index is reused while mutable command copies cannot retain a stale current map (13 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       23 passed, 23 total
+Snapshots:   0 total
+Time:        6.521 s
+Ran all test suites matching /tests\/game\/teen-relationships.test.ts/i.

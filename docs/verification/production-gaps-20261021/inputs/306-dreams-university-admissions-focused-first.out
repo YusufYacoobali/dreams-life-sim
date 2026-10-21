@@ -1,0 +1,13 @@
+PASS tests/ui/university-admissions-save-flow.test.tsx (22.965 s)
+PASS tests/ui/education-choice-save-flow.test.tsx (34.754 s)
+PASS tests/game/scholarships.test.ts
+PASS tests/game/education-work-finance.test.ts
+University archived-pupil eight-year decisions: [{"year":2018,"initial":"accepted","final":"expired"},{"year":2019,"initial":"accepted","final":"withdrawn"},{"year":2020,"initial":"rejected","final":"rejected"},{"year":2021,"initial":"accepted","final":"withdrawn"},{"year":2022,"initial":"waitlisted","final":"withdrawn"},{"year":2023,"initial":"accepted","final":"withdrawn"},{"year":2024,"initial":"accepted","final":"withdrawn"},{"year":2025,"initial":"rejected","final":"rejected"}]
+PASS tests/game/university-admissions.test.ts
+PASS tests/ui/scholarship-flow.test.tsx (7.872 s)
+
+Test Suites: 6 passed, 6 total
+Tests:       100 passed, 100 total
+Snapshots:   0 total
+Time:        76.654 s
+Ran all test suites matching /tests\/game\/university-admissions.test.ts|tests\/ui\/university-admissions-save-flow.test.tsx|tests\/ui\/education-choice-save-flow.test.tsx|tests\/ui\/scholarship-flow.test.tsx|tests\/game\/education-work-finance.test.ts|tests\/game\/scholarships.test.ts/i.

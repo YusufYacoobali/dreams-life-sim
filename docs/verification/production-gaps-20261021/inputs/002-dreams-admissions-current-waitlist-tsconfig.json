@@ -1,0 +1,10 @@
+{
+  "extends": "/workspace/dreams-worktrees/admissions-current-waitlist/tests/tsconfig.json",
+  "compilerOptions": {
+    "typeRoots": ["/workspace/dreams-worktrees/admissions-current-waitlist/node_modules/@types"]
+  },
+  "include": [
+    "/workspace/dreams-worktrees/admissions-current-waitlist/tests/ui/university-admissions-save-flow.test.tsx"
+  ],
+  "exclude": []
+}

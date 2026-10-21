@@ -1,0 +1,96 @@
+{
+  "format": "dreams-exact-raw-whitespace-exceptions-v1",
+  "reason": "Preserve original raw gate logs, hostedCI text and Git patches byte-for-byte. Only these explicitly enumerated artifact files are excepted; source and documentation formatting checks remain strict.",
+  "files": [
+    {
+      "file": "docs/verification/production-finish-source-checkpoint-20261021/026-dreams-npc-retirement-moves-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-finish-source-checkpoint-20261021/044-dreams-retirement-accessibility-final-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-finish-source-checkpoint-20261021/054-dreams-retirement-accessibility-initial-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-finish-source-checkpoint-20261021/077-dreams-production-finish-accepted-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-finish-source-checkpoint-20261021/086-dreams-production-finish-corrected-ready-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/009-dreams-c36-hosted-ci-ee3c675-log.txt",
+      "bytes": 38070,
+      "sha256": "2c5da6c01f05b3cb9a3500f12bd29b382ab6d13e8c301fcf44c85513529a50fd"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/025-dreams-c37-final-test-adapters.patch",
+      "bytes": 47142,
+      "sha256": "63635306f9d81a65b0a578fd43a8d3029f9a5b64197e3eaef842ec2c3f948d2a"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/216-dreams-npc-separations-clock-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/221-dreams-npc-separations-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/241-dreams-production-gaps-accepted-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/242-dreams-production-gaps-coordinator-version-union.patch",
+      "bytes": 6877,
+      "sha256": "ee58d9b25fd64444319724ed2ffe8c334a5d054c3989923905ce123a7ac9f4f9"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/252-dreams-production-gaps-final-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/260-dreams-production-gaps-initial-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/292-dreams-scholarship-durable-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/295-dreams-study-course-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/302-dreams-teen-first-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/inputs/307-dreams-university-admissions-types-final.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    {
+      "file": "docs/verification/production-gaps-20261021/performance/quiescence/0365-dreams-production-finish-corrected-ready-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    }
+  ]
+}

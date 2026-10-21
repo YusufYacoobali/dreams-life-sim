@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-10-21T00:51:34.793487+00:00",
+  "qemuResumed": true,
+  "pid": 100274,
+  "startTicks": "10566888",
+  "observedState": "S",
+  "scope": "Exact root-owned emulator resumed before C37 native acceptance. Obsolete C36 Metro remains stopped."
+}

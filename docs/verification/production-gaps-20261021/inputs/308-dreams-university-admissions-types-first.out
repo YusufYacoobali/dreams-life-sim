@@ -1,0 +1,6 @@
+
+> dreams-life-sim@1.0.0 typecheck
+> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json
+
+src/ui/UniversityAdmissions.tsx(85,39): error TS2339: Property 'command' does not exist on type '{ kind: "funding" | "aid"; applicationId: string; scholarshipId?: string | undefined; event: EventPresentation; } | { kind: "confirm"; command: { type: "apply-university"; field: "medicine" | ... 4 more ... | "arts"; } | { ...; } | { ...; }; event: EventPresentation; }'.
+  Property 'command' does not exist on type '{ kind: "funding" | "aid"; applicationId: string; scholarshipId?: string | undefined; event: EventPresentation; }'.

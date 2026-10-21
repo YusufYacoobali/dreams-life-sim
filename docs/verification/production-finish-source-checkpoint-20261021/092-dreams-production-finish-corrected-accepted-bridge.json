@@ -1,0 +1,23 @@
+{
+  "format": "dreams-c39-callback-test-only-source-bridge-v1",
+  "complete": true,
+  "fromCommit": "3224c9ce5b9175075760a789c1402dd92345cd30",
+  "toCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "beforeSource": {
+    "file": "/tmp/dreams-production-finish-corrected-source.json",
+    "bytes": 75990,
+    "sha256": "c10e79e2c1798315e5267069f8389d6a5f475cd04719d1894a987903b45e7545"
+  },
+  "afterSource": {
+    "file": "/tmp/dreams-production-finish-accepted-source.json",
+    "bytes": 75993,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  "changedSourceFiles": [
+    "tests/game/project-years-callback.test.ts"
+  ],
+  "allOther687SourceFilesExact": true,
+  "allRuntimeAppPersistenceAssetConfigFixtureDriverBytesExact": true,
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "scope": "Only existing negative assertions now verify both current-pacing and separately valid optional-pacing-absent callback guards. Runtime/export/performance at3224 are byte-exact to33b. Fullregression andsame120annual at66ec remain separate pre-copy-correction observations; failed3negativeassertions retained. Fresh full accepted-source regression pending actualrootclosure."
+}

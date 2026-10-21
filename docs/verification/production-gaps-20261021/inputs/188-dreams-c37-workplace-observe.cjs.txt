@@ -1,0 +1,13 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const ts = require('/workspace/dreams-worktrees/settings-accessibility/node_modules/typescript');
+const root = '/workspace/dreams-worktrees/c37-story-test-adapters';
+require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText, file);
+const { employee } = require(path.join(root, 'tests/support/employee.ts'));
+const { resolveCommand } = require(path.join(root, 'src/game/engine.ts'));
+const { encodeWorld } = require(path.join(root, 'src/game/model.ts'));
+const initial = employee(), original = encodeWorld(initial);
+const next = resolveCommand(initial, { type: 'advance' }, true);
+assert.equal(encodeWorld(initial), original);
+console.log(JSON.stringify({ scope: 'One unmodified employee-helper input and one actual Advance observation, not a natural birth or archive journey; no event-stream changes or candidate search', source: 'a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361', initialEventStream: initial.random.events, date: next.date, annual: next.annual, pending: next.pending, paidMonths: next.people[next.activePersonId].employment?.paidMonths, gross: next.workHistory.find(item => item.personId === next.activePersonId)?.grossEarned }, (_, value) => typeof value === 'bigint' ? { $dreamsBigInt: value.toString() } : value));

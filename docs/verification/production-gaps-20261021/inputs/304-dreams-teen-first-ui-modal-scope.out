@@ -1,0 +1,28 @@
+FAIL tests/ui/teen-relationship-save-flow.test.tsx
+  ✓ actual Person first-date review retains a held failed save, retries warm, cold-resumes the same consent/result and acknowledges once (764 ms)
+  ✕ review survives unrelated revisions, rechecks actual eligibility and resets on actual selected-life/person change (783 ms)
+  ✓ actual Profile identifies a teen and a mixed-age ongoing pair without undefined marital status or marriage controls (262 ms)
+
+  ● review survives unrelated revisions, rechecks actual eligibility and resets on actual selected-life/person change
+
+    expect(received).toBeNull()
+
+    Received: {"_fiber": {"_debugHookTypes": null, "_debugInfo": null, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugStack": [Error: react-stack-top-frame], "_debugTask": null, "actualDuration": 0, "actualStartTime": 1792540336488, "alternate": null, "child": [FiberNode], "childLanes": 0, "deletions": null, "dependencies": null, "elementType": "View", "flags": 0, "index": 0, "key": null, "lanes": 0, "memoizedProps": [Object], "memoizedState": null, "mode": 3, "pendingProps": [Object], "ref": null, "refCleanup": null, "return": [FiberNode], "selfBaseDuration": 0, "sibling": null, "stateNode": [Object], "subtreeFlags": 1048577, "tag": 5, "treeBaseDuration": 0, "type": "View", "updateQueue": null}}
+
+      89 |     await act(async () => { mockStore.setState({ world: before }); }); await openDate();
+      90 |     await act(async () => { expect(await mockStore.getState().selectLife(context.old.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull();
+    > 91 |     await act(async () => { expect(await mockStore.getState().selectLife(before.id)).toBe(true); }); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull(); expect(mockStore.getState().world).toEqual(before);
+         |                                                                                                                                                                            ^
+      92 |     await openDate(); mockPersonId = before.relationships.find(row => row.kind === 'parent' && row.to === before.activePersonId)!.from; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Ask on a First Date' })).toBeNull();
+      93 |   } finally { view.unmount(); jest.restoreAllMocks(); context.close(); }
+      94 | }, 30000);
+
+      at Object.toBeNull (tests/ui/teen-relationship-save-flow.test.tsx:91:172)
+      at asyncGeneratorStep (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 2 passed, 3 total
+Snapshots:   0 total
+Time:        3.248 s, estimated 11 s
+Ran all test suites matching /tests\/ui\/teen-relationship-save-flow.test.tsx/i.

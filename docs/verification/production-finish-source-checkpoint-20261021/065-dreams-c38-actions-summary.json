@@ -1,0 +1,537 @@
+{
+  "node": "v24.19.0",
+  "totals": {
+    "cases": 14,
+    "measuredWarmSamples": 70,
+    "fullMeasuredWarmUnpackCalls": 0,
+    "excludedWarmups": 14,
+    "successfulDriverExecutions": 84,
+    "wholeColdCurrentAssertions": 84,
+    "wholeColdBackupAssertions": 84,
+    "originalBeforeAgeUpPayloadAssertions": 12
+  },
+  "assertionScope": "Successful unmodified driver exit establishes whole cold current/backup equality for all six executions per case, original raw BeforeAgeUp bytes for two AgeUp cases, deterministic size/outcome and source/driver before-after assertions. The wrapper independently checks all70 stored warm unpack counters. Counts84/12 are derived assertions, not extra stored timing samples.",
+  "results": [
+    {
+      "label": "Begin Life",
+      "command": null,
+      "inputSha256": "546504fd7d79bf6507eac9cb0f206ac1454a262e055a0f1ab2118b40faabdfbf",
+      "inputBytes": 11518,
+      "checkpointBytes": {
+        "input": 3723,
+        "current": 3723,
+        "backup": 3723,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 0,
+      "medianMs": {
+        "totalMs": 1.1543040000001383,
+        "resolveMs": 0.0025439999999434804,
+        "commitMs": 1.1520610000002307,
+        "coldOpenMs": 0.7201119999999719
+      },
+      "rawJsonPointer": "/results/0",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "First-year choice",
+      "command": {
+        "type": "choose",
+        "eventId": "event_2027_first-bubble-catch",
+        "choiceId": "chase"
+      },
+      "inputSha256": "0fd50d3bd42eb1e9dbbfc0729930488bdf684b2b89da2bdd9cce8baa9ca763a9",
+      "inputBytes": 44230,
+      "checkpointBytes": {
+        "input": 7331,
+        "current": 6895,
+        "backup": 7331,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 2.250351000000137,
+        "resolveMs": 0.6390900000001238,
+        "commitMs": 1.598681999999826,
+        "coldOpenMs": 1.480152999999973
+      },
+      "rawJsonPointer": "/results/1",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "First-year choice Continue",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "event_2027_first-bubble-catch_result"
+      },
+      "inputSha256": "057420300f2b60e7be5d91ce9666dcfbfaf57cea22c80f5da48796afb4cb7a57",
+      "inputBytes": 43264,
+      "checkpointBytes": {
+        "input": 6895,
+        "current": 6567,
+        "backup": 6895,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v1",
+        "currentFormat": "dreams-checkpoint-v1"
+      },
+      "ledgerRows": 96,
+      "medianMs": {
+        "totalMs": 2.052173000000039,
+        "resolveMs": 0.5605620000001181,
+        "commitMs": 1.4966279999998733,
+        "coldOpenMs": 1.397168999999849
+      },
+      "rawJsonPointer": "/results/2",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Age-seven callback",
+      "command": {
+        "type": "choose",
+        "eventId": "story_25_0_due",
+        "choiceId": "complete"
+      },
+      "inputSha256": "22955869cb89d59b331bb9bfe76e6782caafc4c5a9a03a9c6b49f115f42fbca0",
+      "inputBytes": 391184,
+      "checkpointBytes": {
+        "input": 28622,
+        "current": 28282,
+        "backup": 28622,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 4.653430999999728,
+        "resolveMs": 2.079494000000068,
+        "commitMs": 2.6433420000003025,
+        "coldOpenMs": 12.010143999999855
+      },
+      "rawJsonPointer": "/results/3",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Age-seven callback Continue",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "story_25_0_due_result"
+      },
+      "inputSha256": "51183274ec3eda372da5bc2f0a4280d1821ecbd62268443c677804aee0b179b4",
+      "inputBytes": 390561,
+      "checkpointBytes": {
+        "input": 28282,
+        "current": 33258,
+        "backup": 28282,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 1143,
+      "medianMs": {
+        "totalMs": 10.195346999999856,
+        "resolveMs": 5.5927230000002055,
+        "commitMs": 4.6557849999999235,
+        "coldOpenMs": 11.885416000000077
+      },
+      "rawJsonPointer": "/results/4",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Age-30 routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "a87815741322e115f25907fcd54e51d2757be8af0fa0778a73fe96849e118b02",
+      "inputBytes": 3522474,
+      "checkpointBytes": {
+        "input": 183495,
+        "current": 183719,
+        "backup": 183495,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 14.666921000000002,
+        "resolveMs": 8.66128000000026,
+        "commitMs": 6.075466999999662,
+        "coldOpenMs": 91.63909400000011
+      },
+      "rawJsonPointer": "/results/5",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Age-60 routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "811896c5260418e3daa13f675091553e146282646f0becd9afdf1d95f9a31fe8",
+      "inputBytes": 11326708,
+      "checkpointBytes": {
+        "input": 589553,
+        "current": 589753,
+        "backup": 589553,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 36154,
+      "medianMs": {
+        "totalMs": 59.25098799999978,
+        "resolveMs": 40.134830999999394,
+        "commitMs": 18.27414200000021,
+        "coldOpenMs": 293.903495999999
+      },
+      "rawJsonPointer": "/results/6",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "100-known-contact routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "5e04ffca33ab890353ec135391714e1e731e674c19424a2bde9846060199070d",
+      "inputBytes": 3798778,
+      "checkpointBytes": {
+        "input": 214400,
+        "current": 214600,
+        "backup": 214400,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 28.42811200000142,
+        "resolveMs": 17.085815000002185,
+        "commitMs": 10.972982999999658,
+        "coldOpenMs": 118.98237499999959
+      },
+      "rawJsonPointer": "/results/7",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0,
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "20833b7d17a3948da217d6ce7c2885b8cd6542ece69fb245a987870bd33a290b",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 107,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      }
+    },
+    {
+      "label": "100-known-contact first Age Up step",
+      "command": {
+        "type": "advance"
+      },
+      "inputSha256": "5e04ffca33ab890353ec135391714e1e731e674c19424a2bde9846060199070d",
+      "inputBytes": 3798778,
+      "checkpointBytes": {
+        "input": 214400,
+        "current": 232417,
+        "backup": 214400,
+        "beforeAgeUp": 214400,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 66.94611100000111,
+        "resolveMs": 42.833269999999175,
+        "commitMs": 18.768833000001905,
+        "coldOpenMs": 120.45332499999859
+      },
+      "rawJsonPointer": "/results/8",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0,
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 92,
+        "knownContacts": 100,
+        "totalPeople": 107,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "f50666b05bd43bfddaf9531a141ac4ca2676009b6b4807f447298adca79f06c5",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 109,
+        "ledgerRows": 12662,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      }
+    },
+    {
+      "label": "1000-known-contact routine",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "none",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      },
+      "inputSha256": "313f15a49a69eaeffe2bc5a256130aab99661f194de9c27d261a4be88d1a713d",
+      "inputBytes": 6514238,
+      "checkpointBytes": {
+        "input": 493741,
+        "current": 493965,
+        "backup": 493741,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 141.03941900000063,
+        "resolveMs": 86.89815300000191,
+        "commitMs": 59.145362999999634,
+        "coldOpenMs": 220.64929799999663
+      },
+      "rawJsonPointer": "/results/9",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0,
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "1b99b88c1ac3447eb84a28d1cbffb57aecf74369687c73fb9ee63862253293e3",
+        "date": {
+          "year": 2056,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1007,
+        "ledgerRows": 11793,
+        "monthsProcessed": null,
+        "annualStage": null,
+        "pendingKind": "result",
+        "beforeAgeUpSnapshotRetained": false
+      }
+    },
+    {
+      "label": "1000-known-contact first Age Up step",
+      "command": {
+        "type": "advance"
+      },
+      "inputSha256": "313f15a49a69eaeffe2bc5a256130aab99661f194de9c27d261a4be88d1a713d",
+      "inputBytes": 6514238,
+      "checkpointBytes": {
+        "input": 493741,
+        "current": 586190,
+        "backup": 493741,
+        "beforeAgeUp": 493741,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 11793,
+      "medianMs": {
+        "totalMs": 522.9844799999992,
+        "resolveMs": 361.3865399999995,
+        "commitMs": 127.48906500000157,
+        "coldOpenMs": 208.33516000000236
+      },
+      "rawJsonPointer": "/results/10",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0,
+      "setup": {
+        "scope": "generated-at-once known-contact stress case from the genuine age-30 checkpoint; not natural/native progression",
+        "initialPeople": 15,
+        "addedContacts": 992,
+        "knownContacts": 1000,
+        "totalPeople": 1007,
+        "monthlyFinancialActors": 8
+      },
+      "outcome": {
+        "worldSha256": "8c111b5855ac0932f16eec9d2df382be6f383f84e858b5554972a93b86350174",
+        "date": {
+          "year": 2057,
+          "month": 10,
+          "day": 18
+        },
+        "people": 1018,
+        "ledgerRows": 15234,
+        "monthsProcessed": 12,
+        "annualStage": "complete",
+        "pendingKind": "decision",
+        "beforeAgeUpSnapshotRetained": true
+      }
+    },
+    {
+      "label": "Prepared teen coworker introduction",
+      "command": {
+        "type": "meet-coworkers"
+      },
+      "inputSha256": "a333437beb093e124fb010a7d373d89d60ebfb55f9015489046e17ea957dc9e6",
+      "inputBytes": 1351255,
+      "checkpointBytes": {
+        "input": 74058,
+        "current": 75318,
+        "backup": 74058,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 4355,
+      "medianMs": {
+        "totalMs": 11.72059000000445,
+        "resolveMs": 6.785524999999325,
+        "commitMs": 4.929837000003317,
+        "coldOpenMs": 43.07383800000389
+      },
+      "rawJsonPointer": "/results/11",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Prepared supervisor feedback",
+      "command": {
+        "type": "work-feedback",
+        "workplaceId": "workplace_person_player_50_0",
+        "supervisorId": "person_npc_50_16"
+      },
+      "inputSha256": "c6a18b8b40dd2c2120f51c1a820e56893955060c98ead0956fb64c1e0504c1a0",
+      "inputBytes": 1585670,
+      "checkpointBytes": {
+        "input": 86786,
+        "current": 87170,
+        "backup": 86786,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 5086,
+      "medianMs": {
+        "totalMs": 11.15819499999634,
+        "resolveMs": 5.991852999999537,
+        "commitMs": 5.166341999996803,
+        "coldOpenMs": 44.997158999998646
+      },
+      "rawJsonPointer": "/results/12",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    },
+    {
+      "label": "Prepared raise request",
+      "command": {
+        "type": "request-raise",
+        "workplaceId": "workplace_person_player_50_0",
+        "supervisorId": "person_npc_50_16"
+      },
+      "inputSha256": "7b41782c7fed0f07d1c5b04a484a18f127bd8efa7e00a154731e62f514c33bc5",
+      "inputBytes": 1807238,
+      "checkpointBytes": {
+        "input": 99063,
+        "current": 99571,
+        "backup": 99063,
+        "beforeAgeUp": 0,
+        "inputFormat": "dreams-checkpoint-v4",
+        "currentFormat": "dreams-checkpoint-v4"
+      },
+      "ledgerRows": 5803,
+      "medianMs": {
+        "totalMs": 10.790612999997393,
+        "resolveMs": 6.120315000000119,
+        "commitMs": 4.933001000004879,
+        "coldOpenMs": 51.003052000000025
+      },
+      "rawJsonPointer": "/results/13",
+      "measuredWarmSamples": 5,
+      "fullWarmUnpackCalls": 0
+    }
+  ],
+  "format": "dreams-c38-action-summary-v1",
+  "status": "passed",
+  "complete": true,
+  "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+  "versions": {
+    "world": 37,
+    "engine": 38,
+    "content": 12,
+    "database": 17,
+    "checkpoint": "v4"
+  },
+  "combinedGamePersistenceSourceHash": "773fe2a217a84a97588f449ffd037744f2503e2ff020551c9df80e875cfb1a38",
+  "driverHash": "19da212c32feb53a2f264b4c6062cd0b7a68146a762f82841890ea410408bbe9",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-retirement-accessibility-final-source.json",
+    "bytes": 73358,
+    "sha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7"
+  },
+  "raw": {
+    "file": "/tmp/dreams-c38-actions.json",
+    "bytes": 307313,
+    "sha256": "e49287ec44da7fda6ef26c9cba10577ada2fd8a8f198c06ff509cf61f4ef7919"
+  },
+  "stderr": {
+    "file": "/tmp/dreams-c38-actions.stderr.txt",
+    "bytes": 485,
+    "sha256": "1c38e5fde864e2820a518f8b3f68eca79a9aee0aff2ab67377ded073fea44ee9"
+  },
+  "scope": "Unpaired cloud Node/on-disk SQLite fixed-world diagnostics: excluded warm-up then five measured trials per case; no rendered UI/native/physical p95 or guaranteed speedup. Four generated-at-once 100/1000-contact stress inputs and ordinary-command prepared workplace inputs retain the unchanged driver scope. Begin Life uses the driver save kernel, not the store/UI birth path."
+}

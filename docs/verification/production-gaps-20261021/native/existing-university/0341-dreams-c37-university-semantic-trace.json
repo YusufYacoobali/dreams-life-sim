@@ -1,0 +1,19 @@
+{
+  "format": "dreams-c37-semantic-replay-v1",
+  "complete": true,
+  "capturesManifest": {
+    "file": "/tmp/dreams-c37-university-captures.json",
+    "bytes": 21107,
+    "sha256": "d0b5691479346d6290b04acfc9f800f4fe5d3a24b5cc982a70e1994ad1e852d3"
+  },
+  "rawSupport": {
+    "file": "/workspace/dreams-worktrees/integration-production-gaps/tools/onboarding-native-support.cjs",
+    "bytes": 14609,
+    "sha256": "84ad027de6de2a71d6407c5678e94398519eab3b7d13399d6d5b441ca171132b"
+  },
+  "rawVerification": {
+    "file": "/tmp/dreams-c37-university-raw-result.json",
+    "bytes": 45931,
+    "sha256": "531746cb4652a7aee33ca2d6b1cf32628def2be84a655f76dcae1edd1fed3175"
+  }
+}

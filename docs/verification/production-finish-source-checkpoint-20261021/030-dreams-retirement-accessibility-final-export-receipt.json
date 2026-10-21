@@ -1,0 +1,41 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+  "sourceSnapshot": "/tmp/dreams-retirement-accessibility-final-source.json",
+  "sourceSnapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+  "root": "/workspace/dreams-worktrees/integration-retirement-accessibility-final",
+  "argv": [
+    "node",
+    "./node_modules/expo/bin/cli",
+    "export",
+    "--platform",
+    "android",
+    "--platform",
+    "ios",
+    "--output-dir",
+    "/tmp/dreams-retirement-accessibility-final-export",
+    "--source-maps",
+    "--max-workers",
+    "1"
+  ],
+  "startedAt": "2026-10-21T06:58:59.074172+00:00",
+  "before": {
+    "files": 665,
+    "snapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T07:00:25.040785+00:00",
+  "elapsedSeconds": 85.967,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-retirement-accessibility-final-export.out",
+    "bytes": 2758,
+    "sha256": "a5e30f2f6f0651d8a721b527b4a2a2c08020e1b7a3964a8c3468288b1042aff0"
+  },
+  "after": {
+    "files": 665,
+    "snapshotSha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+    "status": "exact"
+  }
+}

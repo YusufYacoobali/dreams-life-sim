@@ -1,0 +1,112 @@
+{
+  "scope": "Read-only actual captured current checkpoint observation; no command or future outcome executed.",
+  "sourceCommit": "a4be96ee1e60ab073fbbd2ae95d0ee2d0ee6f361",
+  "id": "life_native_adult_friend_v30_s0",
+  "revision": 143,
+  "versions": [
+    36,
+    37,
+    12
+  ],
+  "date": {
+    "year": 2050,
+    "month": 10,
+    "day": 20
+  },
+  "birthAcknowledged": true,
+  "person": {
+    "id": "person_player",
+    "name": "Nia Carter",
+    "born": {
+      "year": 2026,
+      "month": 10,
+      "day": 20
+    },
+    "appearance": {
+      "face": 2,
+      "skin": 3,
+      "hair": 5,
+      "hairColor": 2
+    },
+    "education": {
+      "stage": "none",
+      "field": "",
+      "school": "New York Secondary School",
+      "months": 142,
+      "requiredMonths": 0,
+      "grades": 74,
+      "effort": "balanced",
+      "funding": "public",
+      "tuition": "0n",
+      "tuitionPaidMonths": 0,
+      "paused": false,
+      "qualifications": [
+        {
+          "level": "secondary",
+          "field": "general",
+          "year": 2044
+        }
+      ],
+      "lastStudyYear": null
+    },
+    "employment": null
+  },
+  "pending": {
+    "kind": "result",
+    "id": "action_142",
+    "title": "A university place offer",
+    "body": "The university has accepted your application. Review and accept the place separately within twelve calendar months. No course, tuition, loan or scholarship has started.",
+    "illustration": "education",
+    "effects": []
+  },
+  "annual": null,
+  "universityApplications": [
+    {
+      "id": "admission_person_player_142_0",
+      "personId": "person_player",
+      "policyVersion": 1,
+      "field": "computing",
+      "country": "US",
+      "city": "New York",
+      "school": "New York University",
+      "currency": "USD",
+      "annualTuition": "1400000n",
+      "requiredMonths": 48,
+      "applied": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "grades": 74,
+      "smarts": 71,
+      "roll": 2,
+      "chance": 93,
+      "status": "accepted",
+      "transitions": [
+        {
+          "date": {
+            "year": 2050,
+            "month": 10,
+            "day": 20
+          },
+          "status": "accepted"
+        }
+      ],
+      "reviewDue": null,
+      "review": null,
+      "offered": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "expires": {
+        "year": 2051,
+        "month": 10,
+        "day": 20
+      },
+      "ended": null,
+      "enrolment": null
+    }
+  ],
+  "studyCourses": []
+}

@@ -1,0 +1,8 @@
+PASS tests/game/story-lifecycle.test.ts (6.846 s)
+PASS tests/ui/workplace-story-flow.test.tsx (13.272 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       28 passed, 28 total
+Snapshots:   0 total
+Time:        20.452 s
+Ran all test suites within paths "tests/game/story-lifecycle.test.ts", "tests/ui/workplace-story-flow.test.tsx".

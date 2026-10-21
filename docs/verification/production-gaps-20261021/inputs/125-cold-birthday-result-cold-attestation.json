@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "stopped": true,
+  "restarted": true,
+  "from": "birthday-result",
+  "to": "cold-birthday-result",
+  "evidence": {
+    "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/capture-log.json",
+    "bytes": 3197,
+    "sha256": "6c12167a0abc4503df49c78c3c04d6cbc6956cf5a1a0124229b6a75c5261543c"
+  }
+}

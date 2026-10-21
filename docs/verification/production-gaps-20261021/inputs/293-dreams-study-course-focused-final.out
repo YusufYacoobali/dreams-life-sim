@@ -1,0 +1,9 @@
+PASS tests/ui/university-admissions-save-flow.test.tsx (38.884 s)
+PASS tests/game/scholarships.test.ts
+PASS tests/game/study-course-records.test.ts
+
+Test Suites: 3 passed, 3 total
+Tests:       54 passed, 54 total
+Snapshots:   0 total
+Time:        44.405 s, estimated 47 s
+Ran all test suites matching /tests\/game\/study-course-records.test.ts|tests\/ui\/university-admissions-save-flow.test.tsx|tests\/game\/scholarships.test.ts/i.

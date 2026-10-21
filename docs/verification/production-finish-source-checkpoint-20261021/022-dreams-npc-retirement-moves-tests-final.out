@@ -1,0 +1,12 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/game/npc-moves.test.ts tests/state/npc-moves-save.test.ts --testTimeout=30000
+
+PASS tests/state/npc-moves-save.test.ts (5.774 s)
+PASS tests/game/npc-moves.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       61 passed, 61 total
+Snapshots:   0 total
+Time:        7.524 s, estimated 12 s
+Ran all test suites within paths "tests/game/npc-moves.test.ts", "tests/state/npc-moves-save.test.ts".

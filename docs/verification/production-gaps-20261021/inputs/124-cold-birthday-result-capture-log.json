@@ -1,0 +1,123 @@
+{
+  "complete": true,
+  "name": "cold-birthday-result",
+  "events": [
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "force-stop",
+        "host.exp.exponent"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T01:41:59.537656+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "pidof",
+        "host.exp.exponent"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T01:41:59.725935+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "start",
+        "-a",
+        "android.intent.action.VIEW",
+        "-d",
+        "exp://127.0.0.1:8081"
+      ],
+      "returncode": 0,
+      "stdout": "Starting: Intent { act=android.intent.action.VIEW dat=exp://127.0.0.1:8081 }\n",
+      "stderr": "",
+      "at": "2026-10-21T01:42:02.552562+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue as Maya Singh"
+      ],
+      "returncode": 0,
+      "stdout": "Fresh hierarchy unavailable; retrying\nFresh hierarchy unavailable; retrying\nEnabled: Continue as Maya Singh\n",
+      "stderr": "ERROR: null root node returned by UiTestAutomationBridge.\nERROR: null root node returned by UiTestAutomationBridge.\n",
+      "at": "2026-10-21T01:44:10.845168+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "dismiss-expo-notice"
+      ],
+      "returncode": 0,
+      "stdout": "Dismissed Expo development notice\n",
+      "stderr": "",
+      "at": "2026-10-21T01:44:19.873055+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "tap",
+        "Continue as Maya Singh"
+      ],
+      "returncode": 0,
+      "stdout": "Tapped Continue as Maya Singh\n",
+      "stderr": "",
+      "at": "2026-10-21T01:44:29.280919+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue"
+      ],
+      "returncode": 0,
+      "stdout": "Enabled: Continue\n",
+      "stderr": "",
+      "at": "2026-10-21T01:44:49.703745+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c37-native-captures/cold-birthday-result/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Continue', '[42,478][348,528]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T01:44:54.965371+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c37-native-captures/cold-birthday-result/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c37-native-captures/cold-birthday-result/database\n",
+      "stderr": "",
+      "at": "2026-10-21T01:44:55.746272+00:00"
+    }
+  ]
+}

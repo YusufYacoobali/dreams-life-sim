@@ -1,0 +1,52 @@
+{
+  "format": "dreams-retrospective-independent-approval-index-v1",
+  "reviewer": "/root/work_dialogs",
+  "purpose": "C38 publication references to exact approvals already delivered in coordinator chat. This retrospective index is not a new source review, gate, execution receipt or current runtime acceptance.",
+  "originalReviewRecord": "Chat-attested exact-SHA approval messages to root and each author. No separate per-review report was saved by this reviewer for these four approvals.",
+  "reviewerExecutionScope": {
+    "sourceAndExistingEvidenceReadOnly": true,
+    "reviewerTestsRerun": false,
+    "reviewerRuntimeLoaded": false,
+    "reviewerNativeActions": false,
+    "reviewerSourceEdits": false,
+    "newGateByThisIndex": false
+  },
+  "priorApprovals": [
+    {
+      "commit": "b041177e00b02620df46e7e0da0b51afb312d2e9",
+      "worktreeAtReview": "/workspace/dreams-worktrees/npc-retirement-moves",
+      "statusAlreadyCommunicated": "approved-no-actionable-findings",
+      "approvedScope": "Bounded actual self-funded domestic retirement moves: established known available independent pensioner, recorded paid periods and settled current economics, no excluded commitments or direct obligations; one rotating bounded world opportunity/year and one NPC draw; actual fee and reserve, historical prefix-cash proof, actual saved tax/journal/pension artifacts, dated move history and validation; existing tax call/order and zero-tax/no-native-account behavior preserved. File-SQLite rollback/retry/raw-backup/closed-cold evidence inspected with declared arranged context limits.",
+      "limits": "Not full taxable-cycle reconstruction, independent certification of every zero-adjustment empty ledger position, natural-birth coverage, native acceptance or a reviewer test run. The isolated default-array bridge was subsequently replaced by the separately reviewed required-field migration.",
+      "existingSeparateMoneyReview": "/tmp/dreams-npc-retirement-b041177-money-review.md"
+    },
+    {
+      "commit": "2a19bf7828a89aabec86668fda1242497dec444f",
+      "worktreeAtReview": "/workspace/dreams-worktrees/appearance-semantic-labels",
+      "statusAlreadyCommunicated": "approved-no-actionable-findings",
+      "approvedScope": "Actual preset/custom face, skin, hair and color descriptors; bald copy omits invisible hair color without changing its stored value. Life profile control uses already-visible actual name, age, occupation and the same once-formatted bank balance; only its nested portrait is decorative. Assets, IDs, defaults, selection, game and save behavior unchanged. Existing focused and strict evidence inspected.",
+      "limits": "Component accessibility semantics and source/evidence review, not actual screen-reader speech or native acceptance."
+    },
+    {
+      "commit": "125064588046271efd98f7132995c6fde5c13e96",
+      "worktreeAtReview": "/workspace/dreams-worktrees/integration-retirement-accessibility",
+      "statusAlreadyCommunicated": "approved-no-actionable-findings",
+      "approvedScope": "World37/engine38/content12, explicit new-life empty npcMoves and required current schema array; exact legacy36/37 bridge adds only empty npcMoves and root schema/engine tags while preserving existing histories, friendships, bound state, money and RNG. Readers13-16 advance marker-only transactionally to17; current17 no-op and future18 refusal before writes. Prior migration/backfill behavior preserved.",
+      "limits": "Exact runtime union source review and existing scoped strict evidence; no reviewer migration execution, full regression or native acceptance."
+    },
+    {
+      "commit": "dfd9a74046479672967868dc21ac6acfda734592",
+      "worktreeAtReview": "/workspace/dreams-worktrees/integration-retirement-accessibility-final",
+      "statusAlreadyCommunicated": "approved-no-actionable-findings",
+      "approvedScope": "Exact merge of frozen ace1e38e12ae2493501a30e6f003201e0fd6ab41 and pushed bc0cb5ccb560661c5d268a5c3bd550ba11f7fa4a. Runtime/app/config/assets/tools remain byte-exact to ace1e; eight previously reviewed C37 test repairs retained, seven byte-exact to bc0 and collision differing only by reviewed C38 current tags plus assert-empty npcMoves canonical adapter. No managed additions/deletions in the 665-file inventory.",
+      "sourceSnapshot": {
+        "file": "/tmp/dreams-retirement-accessibility-final-source.json",
+        "sha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7",
+        "files": 665
+      },
+      "existingSourceComparison": "/tmp/dreams-retirement-accessibility-final-comparison.json",
+      "existingSeparateCoordinatorReview": "/tmp/dreams-c38-final-merge-root-review.md",
+      "limits": "Source-bridge approval only. Coordinator full regression, exports, native and performance receipts are independent evidence and were not executed or newly certified by this reviewer."
+    }
+  ]
+}

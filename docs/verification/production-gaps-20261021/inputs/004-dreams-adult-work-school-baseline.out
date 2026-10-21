@@ -1,0 +1,131 @@
+FAIL tests/game/adult-work-school-entry.test.ts (13.347 s)
+  ✕ genuine failed-school continuation keeps valid adult work-relocation through actual monthly progress and cold resume (2446 ms)
+  ✕ genuine failed-school continuation keeps valid adult local-hiring through actual monthly progress and cold resume (3003 ms)
+  ✓ automatic school entry preserves pupils and adults with part-time work; ordinary full-time applications still refuse current pupils (38 ms)
+  ✕ the exception requires an adult full-time contract, gives no qualification or withdrawal and ends when the job ends (7 ms)
+  ✓ minors remain subject to normal school entry and cannot apply for a full-time role (10 ms)
+
+  ● genuine failed-school continuation keeps valid adult work-relocation through actual monthly progress and cold resume
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  0
+    + Received  + 16
+
+    @@ -13,6 +13,22 @@
+          "personId": "person_player",
+          "recordedStudyMonths": 142,
+          "requiredStudyMonths": 12,
+          "school": "New York Secondary School",
+        },
+    +   Object {
+    +     "city": "Rome",
+    +     "country": "IT",
+    +     "date": Object {
+    +       "day": 1,
+    +       "month": 1,
+    +       "year": 2019,
+    +     },
+    +     "grade": 0,
+    +     "id": "school_completion_person_player_24228",
+    +     "passed": false,
+    +     "personId": "person_player",
+    +     "recordedStudyMonths": 153,
+    +     "requiredStudyMonths": 12,
+    +     "school": "Rome Secondary School",
+    +   },
+      ]
+
+      93 |   expect(world.ledger.some(row => row.personId === person.id && row.category === 'income' && row.currency === 'EUR')).toBe(true);
+      94 |   expect(world.schoolCompletions.slice(0, oldCompletions.length)).toEqual(oldCompletions);
+    > 95 |   expect(world.schoolCompletions.filter(row => row.personId === person.id)).toEqual(oldCompletions.filter(row => row.personId === person.id));
+         |                                                                             ^
+      96 |   expect(world.schoolWithdrawals).toEqual(oldWithdrawals);
+      97 |   expect(world.schoolCommunities).toEqual(oldCommunities);
+      98 |   expect(world.journal.slice(0, journal.length)).toEqual(journal);
+
+      at toEqual (tests/game/adult-work-school-entry.test.ts:95:77)
+
+  ● genuine failed-school continuation keeps valid adult local-hiring through actual monthly progress and cold resume
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  0
+    + Received  + 16
+
+    @@ -13,6 +13,22 @@
+          "personId": "person_player",
+          "recordedStudyMonths": 142,
+          "requiredStudyMonths": 12,
+          "school": "New York Secondary School",
+        },
+    +   Object {
+    +     "city": "Rome",
+    +     "country": "IT",
+    +     "date": Object {
+    +       "day": 1,
+    +       "month": 1,
+    +       "year": 2019,
+    +     },
+    +     "grade": 0,
+    +     "id": "school_completion_person_player_24228",
+    +     "passed": false,
+    +     "personId": "person_player",
+    +     "recordedStudyMonths": 153,
+    +     "requiredStudyMonths": 12,
+    +     "school": "Rome Secondary School",
+    +   },
+      ]
+
+      93 |   expect(world.ledger.some(row => row.personId === person.id && row.category === 'income' && row.currency === 'EUR')).toBe(true);
+      94 |   expect(world.schoolCompletions.slice(0, oldCompletions.length)).toEqual(oldCompletions);
+    > 95 |   expect(world.schoolCompletions.filter(row => row.personId === person.id)).toEqual(oldCompletions.filter(row => row.personId === person.id));
+         |                                                                             ^
+      96 |   expect(world.schoolWithdrawals).toEqual(oldWithdrawals);
+      97 |   expect(world.schoolCommunities).toEqual(oldCommunities);
+      98 |   expect(world.journal.slice(0, journal.length)).toEqual(journal);
+
+      at toEqual (tests/game/adult-work-school-entry.test.ts:95:77)
+
+  ● the exception requires an adult full-time contract, gives no qualification or withdrawal and ends when the job ends
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 4
+    + Received  + 4
+
+      Object {
+        "effort": "balanced",
+        "field": "",
+        "funding": "public",
+    -   "grades": 50,
+    +   "grades": 66,
+        "lastStudyYear": null,
+    -   "months": 0,
+    +   "months": 1,
+        "paused": false,
+        "qualifications": Array [],
+        "requiredMonths": 0,
+    -   "school": "",
+    -   "stage": "none",
+    +   "school": "Rome Secondary School",
+    +   "stage": "secondary",
+        "tuition": 0n,
+        "tuitionPaidMonths": 0,
+      }
+
+      126 |   const education = structuredClone(person.education), random = structuredClone(world.random), cash = accountFor(world).cash;
+      127 |   educationPeriod(world);
+    > 128 |   expect(person.education).toEqual(education); expect(world.schoolCommunities).toEqual([]);
+          |                            ^
+      129 |   expect(world.schoolWithdrawals).toEqual([]); expect(world.schoolCompletions).toEqual([]);
+      130 |   expect(world.random).toEqual(random); expect(accountFor(world).cash).toBe(cash); validateWorld(world);
+      131 |   const resigned = act(world, { type: 'quit-job' });
+
+      at Object.toEqual (tests/game/adult-work-school-entry.test.ts:128:28)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 2 passed, 5 total
+Snapshots:   0 total
+Time:        13.764 s
+Ran all test suites matching /tests\/game\/adult-work-school-entry.test.ts/i.

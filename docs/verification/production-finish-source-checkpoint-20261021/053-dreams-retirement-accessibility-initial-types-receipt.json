@@ -1,0 +1,32 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "ace1e38e12ae2493501a30e6f003201e0fd6ab41",
+  "sourceSnapshot": "/tmp/dreams-retirement-accessibility-initial-source.json",
+  "sourceSnapshotSha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab",
+  "root": "/workspace/dreams-worktrees/integration-retirement-accessibility",
+  "argv": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "startedAt": "2026-10-21T01:25:10.307190+00:00",
+  "before": {
+    "files": 665,
+    "snapshotSha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T01:25:31.955944+00:00",
+  "elapsedSeconds": 21.649,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-retirement-accessibility-initial-types.out",
+    "bytes": 90,
+    "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+  },
+  "after": {
+    "files": 665,
+    "snapshotSha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab",
+    "status": "exact"
+  }
+}

@@ -1,0 +1,439 @@
+﻿2026-10-21T00:26:31.8316418Z Current runner version: '2.338.0'
+2026-10-21T00:26:31.8344108Z ##[group]Runner Image Provisioner
+2026-10-21T00:26:31.8345107Z Hosted Compute Agent
+2026-10-21T00:26:31.8345791Z Version: 20261012.601
+2026-10-21T00:26:31.8346644Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-21T00:26:31.8347512Z Build Date: 2026-10-12T17:48:21Z
+2026-10-21T00:26:31.8348330Z Worker ID: {0062845e-0259-4f3c-8aa5-9ec81a8bea2a}
+2026-10-21T00:26:31.8349209Z Region: eastus
+2026-10-21T00:26:31.8349966Z Cloud: Azure
+2026-10-21T00:26:31.8350633Z ##[endgroup]
+2026-10-21T00:26:31.8352495Z ##[group]Operating System
+2026-10-21T00:26:31.8353377Z Ubuntu
+2026-10-21T00:26:31.8354057Z 24.04.5
+2026-10-21T00:26:31.8354720Z LTS
+2026-10-21T00:26:31.8355361Z ##[endgroup]
+2026-10-21T00:26:31.8356013Z ##[group]Runner Image
+2026-10-21T00:26:31.8356833Z Image: ubuntu-24.04
+2026-10-21T00:26:31.8357562Z Version: 20261012.334.1
+2026-10-21T00:26:31.8359227Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-21T00:26:31.8361408Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-21T00:26:31.8362628Z ##[endgroup]
+2026-10-21T00:26:31.8363999Z ##[group]GITHUB_TOKEN Permissions
+2026-10-21T00:26:31.8366021Z Contents: read
+2026-10-21T00:26:31.8366889Z Metadata: read
+2026-10-21T00:26:31.8367547Z ##[endgroup]
+2026-10-21T00:26:31.8369916Z Secret source: Actions
+2026-10-21T00:26:31.8371221Z Cache mode: write
+2026-10-21T00:26:31.8372133Z Prepare workflow directory
+2026-10-21T00:26:31.8737698Z Prepare all required actions
+2026-10-21T00:26:31.8793731Z Getting action download info
+2026-10-21T00:26:32.0166251Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-21T00:26:32.2672408Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-21T00:26:32.5025309Z Complete job name: regression
+2026-10-21T00:26:32.5642645Z ##[group]Run actions/checkout@v4
+2026-10-21T00:26:32.5643317Z with:
+2026-10-21T00:26:32.5643685Z   persist-credentials: false
+2026-10-21T00:26:32.5644139Z   repository: YusufYacoobali/dreams-life-sim
+2026-10-21T00:26:32.5647176Z   token: ***
+2026-10-21T00:26:32.5647537Z   ssh-strict: true
+2026-10-21T00:26:32.5647898Z   ssh-user: git
+2026-10-21T00:26:32.5648243Z   clean: true
+2026-10-21T00:26:32.5648599Z   sparse-checkout-cone-mode: true
+2026-10-21T00:26:32.5649020Z   fetch-depth: 1
+2026-10-21T00:26:32.5649359Z   fetch-tags: false
+2026-10-21T00:26:32.5649710Z   show-progress: true
+2026-10-21T00:26:32.5650066Z   lfs: false
+2026-10-21T00:26:32.5650388Z   submodules: false
+2026-10-21T00:26:32.5650984Z   set-safe-directory: true
+2026-10-21T00:26:32.5651483Z   allow-unsafe-pr-checkout: false
+2026-10-21T00:26:32.5652099Z ##[endgroup]
+2026-10-21T00:26:32.6456656Z Syncing repository: YusufYacoobali/dreams-life-sim
+2026-10-21T00:26:32.6458267Z ##[group]Getting Git version info
+2026-10-21T00:26:32.6458977Z Working directory is '/home/runner/work/dreams-life-sim/dreams-life-sim'
+2026-10-21T00:26:32.6459956Z [command]/usr/bin/git version
+2026-10-21T00:26:32.7487540Z git version 2.55.0
+2026-10-21T00:26:32.7505140Z ##[endgroup]
+2026-10-21T00:26:32.7516772Z Temporarily overriding HOME='/home/runner/work/_temp/d914ea7d-3869-41a6-a794-668f8a26f9ed' before making global git config changes
+2026-10-21T00:26:32.7518316Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-21T00:26:32.7520711Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dreams-life-sim/dreams-life-sim
+2026-10-21T00:26:32.7763660Z Deleting the contents of '/home/runner/work/dreams-life-sim/dreams-life-sim'
+2026-10-21T00:26:32.7767272Z ##[group]Initializing the repository
+2026-10-21T00:26:32.7770990Z [command]/usr/bin/git init /home/runner/work/dreams-life-sim/dreams-life-sim
+2026-10-21T00:26:32.8166069Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-21T00:26:32.8167285Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-21T00:26:32.8168455Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-21T00:26:32.8169054Z hint: call:
+2026-10-21T00:26:32.8169371Z hint:
+2026-10-21T00:26:32.8169781Z hint: 	git config --global init.defaultBranch <name>
+2026-10-21T00:26:32.8170263Z hint:
+2026-10-21T00:26:32.8170880Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-21T00:26:32.8171717Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-21T00:26:32.8172288Z hint:
+2026-10-21T00:26:32.8172633Z hint: 	git branch -m <name>
+2026-10-21T00:26:32.8173004Z hint:
+2026-10-21T00:26:32.8173567Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-21T00:26:32.8174807Z Initialized empty Git repository in /home/runner/work/dreams-life-sim/dreams-life-sim/.git/
+2026-10-21T00:26:32.8177210Z [command]/usr/bin/git remote add origin https://github.com/YusufYacoobali/dreams-life-sim
+2026-10-21T00:26:32.8404913Z ##[endgroup]
+2026-10-21T00:26:32.8405631Z ##[group]Disabling automatic garbage collection
+2026-10-21T00:26:32.8410205Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-21T00:26:32.8445621Z ##[endgroup]
+2026-10-21T00:26:32.8446279Z ##[group]Setting up auth
+2026-10-21T00:26:32.8453550Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-21T00:26:32.8487054Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-21T00:26:33.0051525Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-21T00:26:33.0084052Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-21T00:26:33.0279810Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-21T00:26:33.0313785Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-21T00:26:33.0507997Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-21T00:26:33.0545973Z ##[endgroup]
+2026-10-21T00:26:33.0546702Z ##[group]Fetching the repository
+2026-10-21T00:26:33.0555219Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ee3c6755f925156dd3452749e9a266b964ff0fa9:refs/remotes/origin/work
+2026-10-21T00:26:38.9402257Z From https://github.com/YusufYacoobali/dreams-life-sim
+2026-10-21T00:26:38.9403784Z  * [new ref]         ee3c6755f925156dd3452749e9a266b964ff0fa9 -> origin/work
+2026-10-21T00:26:38.9407352Z ##[endgroup]
+2026-10-21T00:26:38.9408866Z ##[group]Determining the checkout info
+2026-10-21T00:26:38.9410485Z ##[endgroup]
+2026-10-21T00:26:38.9413736Z [command]/usr/bin/git sparse-checkout disable
+2026-10-21T00:26:38.9569672Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-21T00:26:39.0866619Z ##[group]Checking out the ref
+2026-10-21T00:26:39.0871482Z [command]/usr/bin/git checkout --progress --force -B work refs/remotes/origin/work
+2026-10-21T00:26:39.7101694Z Switched to a new branch 'work'
+2026-10-21T00:26:39.7104130Z branch 'work' set up to track 'origin/work'.
+2026-10-21T00:26:39.7129860Z ##[endgroup]
+2026-10-21T00:26:39.7171178Z [command]/usr/bin/git log -1 --format=%H
+2026-10-21T00:26:39.7195679Z ee3c6755f925156dd3452749e9a266b964ff0fa9
+2026-10-21T00:26:39.7203315Z ##[group]Removing auth
+2026-10-21T00:26:39.7206499Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-21T00:26:39.7240643Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-21T00:26:39.7430378Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-21T00:26:39.7453704Z http.https://github.com/.extraheader
+2026-10-21T00:26:39.7460965Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-21T00:26:39.7489655Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-21T00:26:39.7676732Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-21T00:26:39.7704441Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-21T00:26:39.7886150Z ##[endgroup]
+2026-10-21T00:26:39.8097088Z ##[group]Run actions/setup-node@v4
+2026-10-21T00:26:39.8097368Z with:
+2026-10-21T00:26:39.8097592Z   node-version: 24
+2026-10-21T00:26:39.8097796Z   cache: npm
+2026-10-21T00:26:39.8097992Z   always-auth: false
+2026-10-21T00:26:39.8098225Z   check-latest: false
+2026-10-21T00:26:39.8100090Z   token: ***
+2026-10-21T00:26:39.8100295Z ##[endgroup]
+2026-10-21T00:26:39.9577625Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-21T00:26:39.9580184Z (node:2162) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-21T00:26:39.9580888Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-21T00:26:39.9582772Z ##[group]Environment details
+2026-10-21T00:26:42.7923320Z node: v24.21.0
+2026-10-21T00:26:42.7923821Z npm: 11.19.0
+2026-10-21T00:26:42.7924080Z yarn: 1.22.22
+2026-10-21T00:26:42.7924844Z ##[endgroup]
+2026-10-21T00:26:42.7981992Z [command]/opt/hostedtoolcache/node/24.21.0/x64/bin/npm config get cache
+2026-10-21T00:26:43.5683363Z /home/runner/.npm
+2026-10-21T00:26:43.6784746Z Cache hit for: node-cache-Linux-x64-npm-7d60edbea7fcf92236021fbd89d394b23f372978e6c48262b5803cf5715563a1
+2026-10-21T00:26:43.6865010Z (node:2162) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-21T00:26:44.3706373Z Received 180833020 of 180833020 (100.0%), 263.3 MBs/sec
+2026-10-21T00:26:44.3707434Z Cache Size: ~172 MB (180833020 B)
+2026-10-21T00:26:44.3819812Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b3be33b2-b761-45c2-8e08-df9e18f1566c/cache.tzst -P -C /home/runner/work/dreams-life-sim/dreams-life-sim --use-compress-program unzstd
+2026-10-21T00:26:44.7262972Z Cache restored successfully
+2026-10-21T00:26:44.7341387Z Cache restored from key: node-cache-Linux-x64-npm-7d60edbea7fcf92236021fbd89d394b23f372978e6c48262b5803cf5715563a1
+2026-10-21T00:26:44.8190401Z ##[group]Run npm ci
+2026-10-21T00:26:44.8190694Z [36;1mnpm ci[0m
+2026-10-21T00:26:44.8939265Z shell: /usr/bin/bash -e {0}
+2026-10-21T00:26:44.8939572Z ##[endgroup]
+2026-10-21T00:26:50.2303933Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-10-21T00:26:50.3509139Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-21T00:26:50.3518828Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-21T00:26:50.3540239Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-21T00:26:50.3546821Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+2026-10-21T00:26:51.1284305Z npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+2026-10-21T00:26:59.5445900Z 
+2026-10-21T00:26:59.5446715Z added 757 packages, and audited 758 packages in 15s
+2026-10-21T00:26:59.5447145Z 
+2026-10-21T00:26:59.5447354Z 62 packages are looking for funding
+2026-10-21T00:26:59.5447733Z   run `npm fund` for details
+2026-10-21T00:26:59.6836277Z 
+2026-10-21T00:26:59.6837058Z 63 vulnerabilities (17 moderate, 46 high)
+2026-10-21T00:26:59.6837494Z 
+2026-10-21T00:26:59.6837774Z To address issues that do not require attention, run:
+2026-10-21T00:26:59.6838126Z   npm audit fix
+2026-10-21T00:26:59.6838271Z 
+2026-10-21T00:26:59.6838520Z To address all issues (including breaking changes), run:
+2026-10-21T00:26:59.6838928Z   npm audit fix --force
+2026-10-21T00:26:59.6839093Z 
+2026-10-21T00:26:59.6839230Z Run `npm audit` for details.
+2026-10-21T00:26:59.8093422Z ##[group]Run npm run typecheck
+2026-10-21T00:26:59.8093814Z [36;1mnpm run typecheck[0m
+2026-10-21T00:26:59.8156906Z shell: /usr/bin/bash -e {0}
+2026-10-21T00:26:59.8157123Z ##[endgroup]
+2026-10-21T00:27:00.0063910Z 
+2026-10-21T00:27:00.0064257Z > dreams-life-sim@1.0.0 typecheck
+2026-10-21T00:27:00.0064653Z > tsc --noEmit && tsc --noEmit -p tests/tsconfig.json
+2026-10-21T00:27:00.0064862Z 
+2026-10-21T00:27:14.1083181Z ##[group]Run npm test -- --ci --testTimeout=30000
+2026-10-21T00:27:14.1083533Z [36;1mnpm test -- --ci --testTimeout=30000[0m
+2026-10-21T00:27:14.1140058Z shell: /usr/bin/bash -e {0}
+2026-10-21T00:27:14.1140279Z ##[endgroup]
+2026-10-21T00:27:14.1972286Z 
+2026-10-21T00:27:14.1972872Z > dreams-life-sim@1.0.0 test
+2026-10-21T00:27:14.1973465Z > jest --runInBand --ci --testTimeout=30000
+2026-10-21T00:27:14.1973753Z 
+2026-10-21T00:27:20.2975976Z PASS tests/game/pets.test.ts (5.31 s)
+2026-10-21T00:27:28.8953993Z PASS tests/ui/asset-bank-save-flow.test.tsx (8.594 s)
+2026-10-21T00:27:54.7523440Z PASS tests/ui/education-choice-save-flow.test.tsx (25.854 s)
+2026-10-21T00:27:58.0318856Z PASS tests/game/businesses.test.ts
+2026-10-21T00:27:59.7607655Z PASS tests/ui/feedback-settings-flow.test.tsx
+2026-10-21T00:28:01.1159060Z PASS tests/game/story-lifecycle.test.ts
+2026-10-21T00:28:03.9674735Z PASS tests/game/scholarships.test.ts
+2026-10-21T00:28:04.9645201Z PASS tests/game/travel.test.ts
+2026-10-21T00:28:06.2875492Z PASS tests/game/relocation.test.ts
+2026-10-21T00:28:24.4521128Z PASS tests/game/royalty.test.ts (18.162 s)
+2026-10-21T00:28:27.0116595Z PASS tests/game/legal.test.ts
+2026-10-21T00:28:33.3426106Z PASS tests/game/education-recovery.test.ts (6.329 s)
+2026-10-21T00:28:38.7127909Z PASS tests/ui/profile-will-save-flow.test.tsx (5.368 s)
+2026-10-21T00:28:42.1066222Z PASS tests/ui/family-dialog-save-flow.test.tsx
+2026-10-21T00:28:44.3093988Z PASS tests/game/leisure.test.ts
+2026-10-21T00:28:47.3615940Z PASS tests/game/npc-courtships.test.ts
+2026-10-21T00:28:50.2877530Z PASS tests/game/creators.test.ts
+2026-10-21T00:29:11.9785280Z PASS tests/ui/special-career-exits-flow.test.tsx (21.689 s)
+2026-10-21T00:29:19.1734554Z PASS tests/ui/astronaut-career-acceptance-flow.test.tsx (7.193 s)
+2026-10-21T00:29:19.1802604Z   ● Console
+2026-10-21T00:29:19.1802901Z 
+2026-10-21T00:29:19.1805055Z     console.info
+2026-10-21T00:29:19.1807959Z       Astronaut archive continuation {"sourceRevision":67,"sourceDate":{"year":2023,"month":1,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"coachedMonths":36,"coachingFees":"144000","preparedScience":72,"selectionAttempts":2,"traineeAnnualPay":"4800000","trainingMonths":24,"trainingResult":"passed","qualifiedDate":{"year":2028,"month":1,"day":1},"qualifiedAnnualPay":"7200000","mission":{"status":"completed","periods":6,"units":108,"distinction":"Meridian Research Distinction"},"leaveContractMonths":30,"serviceGross":"13200000","finalDate":{"year":2030,"month":1,"day":1},"finalRevision":109,"ordinaryPreparationAndContinuationCommands":31,"originalFixtureSha256":"de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef"}
+2026-10-21T00:29:19.1810245Z 
+2026-10-21T00:29:19.1810495Z       at Object.info (tests/ui/astronaut-career-acceptance-flow.test.tsx:127:13)
+2026-10-21T00:29:19.1810950Z 
+2026-10-21T00:29:23.9705471Z PASS tests/game/services.test.ts
+2026-10-21T00:29:25.0999869Z PASS tests/game/health-legal-availability.test.ts
+2026-10-21T00:29:35.9302006Z PASS tests/ui/student-loan-rate-flow.test.tsx (10.828 s)
+2026-10-21T00:29:39.3940231Z PASS tests/ui/profile-overview-save-flow.test.tsx
+2026-10-21T00:30:06.1804733Z PASS tests/ui/health-review-save-flow.test.tsx (26.784 s)
+2026-10-21T00:30:12.2427374Z PASS tests/ui/athlete-career-acceptance.test.tsx (6.06 s)
+2026-10-21T00:30:12.2441894Z   ● Console
+2026-10-21T00:30:12.2443447Z 
+2026-10-21T00:30:12.2444989Z     console.info
+2026-10-21T00:30:12.2446094Z       ATHLETE_OBSERVATION {"trainingMonths":34,"tuitionMinor":"136000","trainedSport":68,"selectionOutcomes":["Your contract is signed"],"attended":12,"wins":11,"seasonStatus":"completed","seasonGrossMinor":"7344000","award":null,"finalRevision":99}
+2026-10-21T00:30:12.2447105Z 
+2026-10-21T00:30:12.2447415Z       at Object.info (tests/ui/athlete-career-acceptance.test.tsx:135:13)
+2026-10-21T00:30:12.2447787Z 
+2026-10-21T00:30:13.0914011Z PASS tests/game/workplaces.test.ts
+2026-10-21T00:30:14.3347539Z PASS tests/game/hourly-work.test.ts
+2026-10-21T00:30:16.9568271Z PASS tests/game/social.test.ts
+2026-10-21T00:30:19.9254962Z PASS tests/game/politics.test.ts
+2026-10-21T00:30:23.0260482Z PASS tests/ui/business-review-save-flow.test.tsx
+2026-10-21T00:30:25.0452472Z PASS tests/ui/legal-review-save-flow.test.tsx
+2026-10-21T00:30:31.5429438Z PASS tests/ui/model-career-acceptance-flow.test.tsx (6.496 s)
+2026-10-21T00:30:31.5433664Z   ● Console
+2026-10-21T00:30:31.5433806Z 
+2026-10-21T00:30:31.5433917Z     console.info
+2026-10-21T00:30:31.5435679Z       Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+2026-10-21T00:30:31.5436924Z 
+2026-10-21T00:30:31.5437180Z       at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+2026-10-21T00:30:31.5437434Z 
+2026-10-21T00:30:39.5819908Z PASS tests/ui/hobby-introduction-save-flow.test.tsx (8.037 s)
+2026-10-21T00:30:44.6142239Z PASS tests/ui/career-plan-context-flow.test.tsx (5.029 s)
+2026-10-21T00:30:45.5569711Z PASS tests/game/school-withdrawal.test.ts
+2026-10-21T00:30:50.4000838Z PASS tests/ui/royalty-review-save-flow.test.tsx
+2026-10-21T00:30:54.0553720Z PASS tests/game/estates.test.ts
+2026-10-21T00:30:55.7295419Z PASS tests/game/foreign-earnings.test.ts
+2026-10-21T00:30:57.6737742Z PASS tests/game/careers.test.ts
+2026-10-21T00:31:00.8051247Z PASS tests/ui/social-review-save-flow.test.tsx
+2026-10-21T00:31:04.4198287Z PASS tests/ui/travel-review-save-flow.test.tsx
+2026-10-21T00:31:06.3909865Z PASS tests/game/best-friends.test.ts
+2026-10-21T00:31:07.9342172Z PASS tests/game/story-callbacks.test.ts
+2026-10-21T00:31:11.4729687Z PASS tests/ui/pets-flow.test.tsx
+2026-10-21T00:31:12.6722151Z PASS tests/game/credit.test.ts
+2026-10-21T00:31:13.5037418Z PASS tests/ui/new-life-review-flow.test.tsx
+2026-10-21T00:31:14.3298667Z PASS tests/game/npc-relationships.test.ts
+2026-10-21T00:31:25.2040560Z PASS tests/progression/expanded-progress.test.ts (10.872 s)
+2026-10-21T00:31:42.7670181Z PASS tests/game/everyday-life-stories.test.ts (17.561 s)
+2026-10-21T00:31:47.4113272Z PASS tests/ui/music-career-exit-flow.test.tsx
+2026-10-21T00:31:47.9268232Z PASS tests/game/health.test.ts
+2026-10-21T00:31:49.3290493Z PASS tests/ui/annual-finances-flow.test.tsx
+2026-10-21T00:31:49.5019755Z PASS tests/game/entrepreneur-policy.test.ts
+2026-10-21T00:32:00.3796998Z PASS tests/game/early-home-stories.test.ts (10.876 s)
+2026-10-21T00:32:01.4124065Z PASS tests/ui/onboarding-flow.test.tsx
+2026-10-21T00:32:02.0685638Z PASS tests/progression/financial-progress.test.ts
+2026-10-21T00:32:16.8603231Z PASS tests/ui/exercise-review-save-flow.test.tsx (14.789 s)
+2026-10-21T00:32:20.1500672Z PASS tests/game/music.test.ts
+2026-10-21T00:32:25.3027221Z PASS tests/game/childhood-stories.test.ts (5.151 s)
+2026-10-21T00:32:42.9616998Z PASS tests/ui/saved-files-flow.test.tsx (17.657 s)
+2026-10-21T00:33:00.5791251Z PASS tests/persistence/people-blocks.test.ts (17.615 s)
+2026-10-21T00:33:08.0940689Z PASS tests/ui/work-routine-save-flow.test.tsx (7.513 s)
+2026-10-21T00:33:09.0578784Z PASS tests/ui/workplace-flow.test.tsx
+2026-10-21T00:33:11.0022352Z PASS tests/game/assets-markets.test.ts
+2026-10-21T00:33:13.5443241Z PASS tests/ui/best-friends-flow.test.tsx
+2026-10-21T00:33:18.8131345Z PASS tests/persistence/action-checkpoints.test.ts (5.267 s)
+2026-10-21T00:33:22.1885824Z PASS tests/game/education-work-finance.test.ts
+2026-10-21T00:33:28.8431793Z PASS tests/ui/progression-continuation-flow.test.tsx (6.655 s)
+2026-10-21T00:33:29.3968323Z PASS tests/game/family.test.ts
+2026-10-21T00:33:30.0158911Z PASS tests/game/school.test.ts
+2026-10-21T00:33:30.9941016Z PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+2026-10-21T00:33:32.6036633Z PASS tests/ui/school-withdrawal-flow.test.tsx
+2026-10-21T00:33:46.9417969Z PASS tests/game/hobby-introductions.test.ts (14.336 s)
+2026-10-21T00:33:50.3312126Z PASS tests/game/editorial-policy.test.ts
+2026-10-21T00:33:51.5101370Z PASS tests/ui/story-callback-flow.test.tsx
+2026-10-21T00:33:53.4461010Z PASS tests/ui/career-review-save-flow.test.tsx
+2026-10-21T00:33:59.8365458Z PASS tests/ui/social-criticism-persistence-flow.test.tsx (6.388 s)
+2026-10-21T00:34:01.6238202Z PASS tests/ui/emigration-country-default.test.tsx
+2026-10-21T00:34:02.4959733Z PASS tests/persistence/time-machine.test.ts
+2026-10-21T00:34:23.2072308Z PASS tests/ui/recovery-routine-save-flow.test.tsx (20.709 s)
+2026-10-21T00:34:33.1972405Z PASS tests/game/adult-relationship-stories.test.ts (9.986 s)
+2026-10-21T00:34:55.4772916Z PASS tests/game/editorial-context-acceptance.test.ts (22.277 s)
+2026-10-21T00:34:55.4798445Z   ● Console
+2026-10-21T00:34:55.4798612Z 
+2026-10-21T00:34:55.4798690Z     console.info
+2026-10-21T00:34:55.4800246Z       C36_EDITORIAL_CONTEXT {"name":"family-trip","commands":11,"decisions":[{"id":"adult-name-pronunciation","branch":1,"contexts":[],"old":false},{"id":"wellbeing-stretch-after-sitting","branch":2,"contexts":[],"old":false},{"id":"family-helpful-spill","branch":3,"contexts":["child"],"old":false}],"observedContexts":["child"],"absentContexts":["workplace","friend","partner","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"36fe742395136e979af5b42a2102a94da413fa0ef68fd7de3ffafd8fccd589fe"}
+2026-10-21T00:34:55.4801734Z 
+2026-10-21T00:34:55.4801926Z       at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+2026-10-21T00:34:55.4802148Z 
+2026-10-21T00:34:55.4802222Z     console.info
+2026-10-21T00:34:55.4803281Z       C36_EDITORIAL_CONTEXT {"name":"pet-hobbies","commands":10,"decisions":[{"id":"teen-unit-confusion","branch":1,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"2bdcd70c08621c4340d52cf2cead7198fa7ea5f3cadd16626f1e5bcb8e343f3d"}
+2026-10-21T00:34:55.4804523Z 
+2026-10-21T00:34:55.4804700Z       at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+2026-10-21T00:34:55.4804913Z 
+2026-10-21T00:34:55.4804990Z     console.info
+2026-10-21T00:34:55.4806730Z       C36_EDITORIAL_CONTEXT {"name":"workplace-friend","commands":20,"decisions":[{"id":"work-photo-blink","branch":1,"contexts":["workplace"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"friend-long-voice-note","branch":3,"contexts":["friend"],"old":false},{"id":"medical-emergency","branch":2,"contexts":[],"old":false},{"id":"adult-shortcut-stairs","branch":2,"contexts":[],"old":false}],"observedContexts":["friend","workplace"],"absentContexts":["partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"4eb4ddffb8814185bd4459432e1cfa9231392025ddaf7725494e4db9635fc30a"}
+2026-10-21T00:34:55.4808167Z 
+2026-10-21T00:34:55.4808345Z       at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+2026-10-21T00:34:55.4808558Z 
+2026-10-21T00:34:55.4808630Z     console.info
+2026-10-21T00:34:55.4814458Z       C36_EDITORIAL_CONTEXT {"name":"owned-home","commands":24,"decisions":[{"id":"property-sale-offer","branch":2,"contexts":[],"old":true},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"property-sale-offer","branch":2,"contexts":[],"old":false},{"id":"adult-wrong-name-badge","branch":1,"contexts":[],"old":false},{"id":"adult-small-volunteer-task","branch":2,"contexts":[],"old":false},{"id":"home-window-cleaning-discovery","branch":3,"contexts":["home"],"old":false}],"observedContexts":["home"],"absentContexts":["workplace","friend","partner","child","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"ab0f3effc87a98af20dfe9aa4ba0772e4bf630bbf59a2f7f6ecf042ead91d25a"}
+2026-10-21T00:34:55.4816902Z 
+2026-10-21T00:34:55.4817223Z       at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+2026-10-21T00:34:55.4817573Z 
+2026-10-21T00:34:55.4817757Z     console.info
+2026-10-21T00:34:55.4820724Z       C36_EDITORIAL_CONTEXT {"name":"creator-studio","commands":21,"decisions":[{"id":"public-controversy","branch":1,"contexts":[],"old":false},{"id":"brand-offer","branch":2,"contexts":[],"old":false},{"id":"wellbeing-unhurried-breath","branch":3,"contexts":[],"old":false},{"id":"adult-perfect-introduction","branch":1,"contexts":[],"old":false},{"id":"wellbeing-quiet-not-silent","branch":2,"contexts":[],"old":false}],"observedContexts":[],"absentContexts":["workplace","friend","partner","child","home","pet","hobby","visited","specialCareer"],"finalCanonicalSha256":"1cc9b569600f8630f547fd0f40efd34e4d2cf499021167ef4c77087b5fb121d4"}
+2026-10-21T00:34:55.4823440Z 
+2026-10-21T00:34:55.4823763Z       at info (tests/game/editorial-context-acceptance.test.ts:122:11)
+2026-10-21T00:34:55.4824118Z 
+2026-10-21T00:35:09.0470698Z PASS tests/ui/lifetime-statistics-flow.test.tsx (13.565 s)
+2026-10-21T00:35:10.0239531Z PASS tests/game/health-emergency-context.test.ts
+2026-10-21T00:35:10.4138314Z PASS tests/ui/onboarding-accessibility-flow.test.tsx
+2026-10-21T00:35:11.8578836Z PASS tests/ui/service-context-flow.test.tsx
+2026-10-21T00:35:42.4633958Z PASS tests/persistence/tuple-checkpoints.test.ts (30.603 s)
+2026-10-21T00:35:43.3269165Z PASS tests/game/work-raises.test.ts
+2026-10-21T00:35:43.8464586Z PASS tests/ui/annual-finances-projection.test.ts
+2026-10-21T00:35:45.6418504Z PASS tests/ui/hourly-work-flow.test.tsx
+2026-10-21T00:35:48.8502044Z PASS tests/game/hobby-events.test.ts
+2026-10-21T00:35:53.4056940Z PASS tests/ui/royalty-flow.test.tsx
+2026-10-21T00:35:54.1162021Z PASS tests/game/relationships.test.ts
+2026-10-21T00:36:10.4577739Z PASS tests/persistence/opening-migration.test.ts (16.341 s)
+2026-10-21T00:36:16.1435983Z PASS tests/ui/school-routine-save-flow.test.tsx (5.684 s)
+2026-10-21T00:36:17.9633829Z PASS tests/ui/relocation-flow.test.tsx
+2026-10-21T00:36:34.2982732Z PASS tests/game/criminal-policy.test.ts (16.332 s)
+2026-10-21T00:36:40.2531713Z PASS tests/game/workplace-stories.test.ts (5.953 s)
+2026-10-21T00:36:40.8247812Z PASS tests/game/job-interviews.test.ts
+2026-10-21T00:36:42.3223782Z PASS tests/game/ordinary-hobbies.test.ts
+2026-10-21T00:36:42.8219916Z PASS tests/game/story-editorial-context.test.ts
+2026-10-21T00:36:43.6378758Z PASS tests/ui/job-interview-flow.test.tsx
+2026-10-21T00:36:44.0441154Z PASS tests/persistence/repository.test.ts
+2026-10-21T00:36:49.2436119Z PASS tests/ui/scholarship-flow.test.tsx (5.198 s)
+2026-10-21T00:36:50.3227658Z PASS tests/ui/travel-flow.test.tsx
+2026-10-21T00:36:52.6706763Z PASS tests/ui/ordinary-hobby-flow.test.tsx
+2026-10-21T00:36:53.3589150Z PASS tests/ui/family-tree-late-spouse.test.tsx
+2026-10-21T00:36:58.2902011Z PASS tests/ui/education-recovery-flow.test.tsx
+2026-10-21T00:37:07.3848883Z PASS tests/game/professional-policy.test.ts (9.092 s)
+2026-10-21T00:37:09.4470243Z PASS tests/ui/leisure-flow.test.tsx
+2026-10-21T00:37:12.5754862Z PASS tests/ui/health-flow.test.tsx
+2026-10-21T00:37:19.7540013Z PASS tests/game/story-name-collisions.test.ts (7.176 s)
+2026-10-21T00:37:25.2364081Z PASS tests/ui/lifetime-statistics-data.test.ts (5.48 s)
+2026-10-21T00:37:31.9267709Z PASS tests/ui/workplace-story-flow.test.tsx (6.689 s)
+2026-10-21T00:37:32.6275450Z PASS tests/ui/school-flow.test.tsx
+2026-10-21T00:44:30.7824079Z PASS tests/game/engine.test.ts (418.151 s)
+2026-10-21T00:44:32.1907782Z PASS tests/ui/service-flow.test.tsx
+2026-10-21T00:44:34.5514868Z PASS tests/progression/progress.test.ts
+2026-10-21T00:44:38.6454703Z PASS tests/ui/hobby-event-flow.test.tsx
+2026-10-21T00:44:39.6488718Z PASS tests/game/content-refresh.test.ts
+2026-10-21T00:44:40.7138174Z PASS tests/ui/creator-studio-flow.test.tsx
+2026-10-21T00:44:43.4508290Z PASS tests/ui/contacts-flow.test.tsx
+2026-10-21T00:44:44.1210575Z PASS tests/ui/story-consequence-labels-flow.test.tsx
+2026-10-21T00:44:45.9270623Z PASS tests/ui/extras-flow.test.tsx
+2026-10-21T00:44:46.6233814Z PASS tests/ui/startup-flow.test.tsx
+2026-10-21T00:44:47.9500034Z PASS tests/ui/story-name-collision-flow.test.tsx
+2026-10-21T00:44:48.3094307Z PASS tests/state/preferencesStore.test.ts
+2026-10-21T00:44:56.8534887Z PASS tests/game/teen-home-stories.test.ts (8.542 s)
+2026-10-21T00:44:57.6972200Z PASS tests/persistence/compressed-lives.test.ts
+2026-10-21T00:44:57.8102061Z PASS tests/game/money-format.test.ts
+2026-10-21T00:45:04.6154688Z PASS tests/persistence/native-hourly-checkpoints.test.ts (6.802 s)
+2026-10-21T00:45:07.0761166Z PASS tests/ui/terminal-biography-flow.test.tsx
+2026-10-21T00:45:07.2100234Z PASS tests/ui/interactions.test.tsx
+2026-10-21T00:45:12.7945689Z PASS tests/persistence/ordinary-hobby-archive.test.ts (5.583 s)
+2026-10-21T00:45:13.7549446Z PASS tests/ui/adult-relationship-story-flow.test.tsx
+2026-10-21T00:45:24.5614350Z PASS tests/persistence/native-raise-archive.test.ts (10.804 s)
+2026-10-21T00:45:31.1937602Z PASS tests/game/story-consequence-labels.test.ts (6.63 s)
+2026-10-21T00:45:40.3248151Z PASS tests/persistence/native-workplace-archive.test.ts (9.129 s)
+2026-10-21T00:45:42.4204626Z PASS tests/progression/connections.test.ts
+2026-10-21T00:45:43.5083102Z PASS tests/ui/life-context-story-flow.test.tsx
+2026-10-21T00:45:44.0731195Z PASS tests/ui/pension-flow.test.tsx
+2026-10-21T00:45:44.5967945Z PASS tests/ui/early-home-story-flow.test.tsx
+2026-10-21T00:45:44.8950218Z PASS tests/ui/settings-flow.test.tsx
+2026-10-21T00:45:47.2933833Z PASS tests/game/social-criticism-copy.test.ts
+2026-10-21T00:45:48.0340671Z PASS tests/ui/childhood-story-flow.test.tsx
+2026-10-21T00:45:48.5860914Z PASS tests/ui/time-machine-flow.test.tsx
+2026-10-21T00:45:49.3515904Z PASS tests/ui/legal-flow.test.tsx
+2026-10-21T00:45:50.3561563Z PASS tests/ui/credit-flow.test.tsx
+2026-10-21T00:45:54.3104019Z PASS tests/ui/saved-life-preview.test.tsx
+2026-10-21T00:45:55.0987634Z PASS tests/ui/politics-flow.test.tsx
+2026-10-21T00:45:55.5926325Z PASS tests/ui/school-plans.test.tsx
+2026-10-21T00:46:08.7458196Z PASS tests/persistence/native-people-block-archive.test.ts (13.148 s)
+2026-10-21T00:46:21.7892247Z PASS tests/persistence/native-workplace-story-archive.test.ts (13.041 s)
+2026-10-21T00:46:25.5213859Z PASS tests/persistence/native-arcade-archive.test.ts
+2026-10-21T00:46:28.6618612Z PASS tests/persistence/native-interview-checkpoints.test.ts
+2026-10-21T00:46:36.2447582Z PASS tests/persistence/native-teen-archive.test.ts (7.581 s)
+2026-10-21T00:46:36.3639165Z PASS tests/ui/theme-contrast.test.tsx
+2026-10-21T00:46:43.9417622Z PASS tests/persistence/restored-action-cache.test.ts (7.576 s)
+2026-10-21T00:46:44.0679505Z PASS tests/state/gameStore.test.ts
+2026-10-21T00:46:44.7362125Z PASS tests/ui/music-flow.test.tsx
+2026-10-21T00:46:45.7708105Z PASS tests/ui/business-flow.test.tsx
+2026-10-21T00:46:47.2390207Z PASS tests/persistence/leisure-archive.test.ts
+2026-10-21T00:46:48.3266113Z PASS tests/ui/terminal-biography-data.test.ts
+2026-10-21T00:46:52.2142060Z PASS tests/state/save-summaries.test.ts
+2026-10-21T00:47:02.8037721Z PASS tests/persistence/best-friends-migration.test.ts (10.589 s)
+2026-10-21T00:47:02.9260115Z PASS tests/ui/modal-window-layout.test.tsx
+2026-10-21T00:47:03.5996935Z PASS tests/ui/social-flow.test.tsx
+2026-10-21T00:47:08.9443454Z PASS tests/state/npc-relationships-save.test.ts (5.342 s)
+2026-10-21T00:47:13.2317860Z PASS tests/persistence/native-school-archive.test.ts
+2026-10-21T00:47:13.8336038Z PASS tests/ui/career-flow.test.tsx
+2026-10-21T00:47:18.4328137Z PASS tests/state/npc-courtships-save.test.ts
+2026-10-21T00:47:36.4911757Z PASS tests/game/copy-world.test.ts (18.056 s)
+2026-10-21T00:47:38.6478323Z PASS tests/persistence/responsive-archive.test.ts
+2026-10-21T00:47:43.6636538Z PASS tests/persistence/life-preview.test.ts (5.013 s)
+2026-10-21T00:47:44.2179968Z PASS tests/ui/purchase-flow.test.tsx
+2026-10-21T00:47:44.6328619Z PASS tests/ui/legacy-flow.test.tsx
+2026-10-21T00:47:44.9284660Z PASS tests/game/save-json.test.ts
+2026-10-21T00:47:45.7479204Z PASS tests/persistence/pet-archive.test.ts
+2026-10-21T00:47:45.7866407Z PASS tests/game/primitives.test.ts
+2026-10-21T00:47:46.2892698Z PASS tests/ui/family-flow.test.tsx
+2026-10-21T00:47:46.8579211Z PASS tests/ui/relationship-flow.test.tsx
+2026-10-21T00:47:47.2108337Z PASS tests/ui/will-flow.test.tsx
+2026-10-21T00:47:47.3943284Z PASS tests/game/creation.test.ts
+2026-10-21T00:47:47.5643832Z PASS tests/persistence/base64.test.ts
+2026-10-21T00:47:47.6384402Z PASS tests/ui/portrait-accessibility.test.tsx
+2026-10-21T00:47:47.6398624Z 
+2026-10-21T00:47:47.6404885Z Test Suites: 185 passed, 185 total
+2026-10-21T00:47:47.6405180Z Tests:       2355 passed, 2355 total
+2026-10-21T00:47:47.6405418Z Snapshots:   0 total
+2026-10-21T00:47:47.6405615Z Time:        1232.939 s
+2026-10-21T00:47:47.6405803Z Ran all test suites.
+2026-10-21T00:47:47.8324433Z Post job cleanup.
+2026-10-21T00:47:47.9297453Z (node:2559) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-21T00:47:47.9298500Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-21T00:47:47.9300926Z Cache hit occurred on the primary key node-cache-Linux-x64-npm-7d60edbea7fcf92236021fbd89d394b23f372978e6c48262b5803cf5715563a1, not saving cache.
+2026-10-21T00:47:47.9448100Z Post job cleanup.
+2026-10-21T00:47:48.0133425Z [command]/usr/bin/git version
+2026-10-21T00:47:48.0169535Z git version 2.55.0
+2026-10-21T00:47:48.0201828Z Temporarily overriding HOME='/home/runner/work/_temp/beacb64e-e2d7-4e62-a6c2-0e329d833002' before making global git config changes
+2026-10-21T00:47:48.0203129Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-21T00:47:48.0206287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dreams-life-sim/dreams-life-sim
+2026-10-21T00:47:48.0241572Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-21T00:47:48.0269766Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-21T00:47:48.0488514Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-21T00:47:48.0519896Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-21T00:47:48.0759147Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-21T00:47:48.0792210Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-21T00:47:48.1181099Z Cleaning up orphan processes
+2026-10-21T00:47:48.1442312Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

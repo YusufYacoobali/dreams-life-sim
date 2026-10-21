@@ -1,0 +1,675 @@
+{
+  "format": "dreams-c37-publication-completion-v1",
+  "complete": true,
+  "publicationApproved": true,
+  "approvedBy": "root",
+  "reviewedAt": "2026-10-21T07:51:09.086123+00:00",
+  "sourceCommit": "85f6ff8637ba3de9d0f04421307419b1d9609864",
+  "inputIndex": {
+    "file": "/tmp/dreams-production-gaps-publication-inputs-v3.json",
+    "bytes": 303888,
+    "sha256": "2a4398bb79d2544db8326e582b2c7363da0a0fd5aba146078f4d81608e33c802"
+  },
+  "publisher": {
+    "file": "/tmp/dreams-production-gaps-publish-v3.py",
+    "bytes": 33599,
+    "sha256": "ea713fe13d29c97b740fc8f8f997b5324d08c3bbabb131967244b3a1ef8ce3fd"
+  },
+  "usage": "Actual root-reviewed completion after native/raw/semantic/performance closures. User authorized autonomous implementation, documentation, commits and pushes. Original pending template andv3 input draft remain immutable historical preparation.",
+  "native": {
+    "custom": {
+      "complete": true,
+      "processClosed": true,
+      "exitCode": 0,
+      "executionReference": "Root tool execution43328 actually CLOSED0 for complete custom raw and production semantic replay; five observed app process stops/cold reopens. Initial first-cold observer interruption and same actual restart completion are retained in linked evidence.",
+      "captures": {
+        "file": "/tmp/dreams-c37-custom-captures.json",
+        "bytes": 13326,
+        "sha256": "ee0b00c004003cc6dbd2443e7f873a2e970f84d69e17520d7b3150f33286e821"
+      },
+      "rawResult": {
+        "file": "/tmp/dreams-c37-custom-raw-result.json",
+        "bytes": 30167,
+        "sha256": "a332584a35b03f386fd31e08daedaaca76f7e76a383403566e383b12605587b6"
+      },
+      "semanticTrace": {
+        "file": "/tmp/dreams-c37-custom-semantic-trace.json",
+        "bytes": 664,
+        "sha256": "7a99d37b55fc5a57964bb58951174c1d82586183dd928cf4eb735a81d76c61e0"
+      },
+      "semanticResult": {
+        "file": "/tmp/dreams-c37-custom-semantic-result.json",
+        "bytes": 31742,
+        "sha256": "85fe9b1b55340a2e776f0ccb4daf2d940fb508f14d89a78aeb4864cb6fcd16dc"
+      },
+      "expected": {
+        "phaseCount": 10,
+        "coldReopens": 5,
+        "finalRevision": 4
+      },
+      "visualReview": {
+        "complete": true,
+        "coordinatorPersonallyViewedAll": true,
+        "statement": "Root personally reviewed all10actual independent Maya PNG/XML pairs before completing the original custom manifest, including customidentity/Avatar7/newborn/BeginLife/birthdaywatch/result/ack and5actualcolds. SoftwareAndroid24/Expo Go57 only; no physical/standalone/iOS or seedreconstruction claim. Helper visualAcceptance=false remains unchanged."
+      },
+      "extraCompactEvidence": []
+    },
+    "existingUniversity": {
+      "complete": true,
+      "processClosed": true,
+      "exitCode": 0,
+      "executionReference": "Coordinator root: raw session76152 and semantic session17377 both actually CLOSED0; actual17phase/fourcold journey ends148.",
+      "captures": {
+        "file": "/tmp/dreams-c37-university-captures.json",
+        "bytes": 21107,
+        "sha256": "d0b5691479346d6290b04acfc9f800f4fe5d3a24b5cc982a70e1994ad1e852d3"
+      },
+      "rawResult": {
+        "file": "/tmp/dreams-c37-university-raw-result.json",
+        "bytes": 45931,
+        "sha256": "531746cb4652a7aee33ca2d6b1cf32628def2be84a655f76dcae1edd1fed3175"
+      },
+      "semanticTrace": {
+        "file": "/tmp/dreams-c37-university-semantic-trace.json",
+        "bytes": 672,
+        "sha256": "5e20ad7cf2c00325b9e5e556c4578f3d942de2c6ce0ea5461152a085e18ce074"
+      },
+      "semanticResult": {
+        "file": "/tmp/dreams-c37-university-semantic-result.json",
+        "bytes": 38349,
+        "sha256": "b4aa6a8cdaaadb746ea6a55d249c9d095c0130861c38ac3328f8055f00bfa5ae"
+      },
+      "expected": {
+        "phaseCount": 17,
+        "coldReopens": 4,
+        "finalRevision": 148
+      },
+      "visualReview": {
+        "complete": true,
+        "coordinatorPersonallyViewedAll": true,
+        "statement": "Coordinator root personally viewed all17 actual PNGs and all corresponding XML label sets. This is distinct from helper visualAcceptance=false and is Android24 software/Expo Go only."
+      },
+      "extraCompactEvidence": [
+        {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/actual-checkpoint-observation.json",
+          "bytes": 704,
+          "sha256": "2d4f929f128328d332e87c7fb38d08264ff08256f5ed700ee55f79b8c64efef1"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/capture-log.json",
+          "bytes": 963,
+          "sha256": "639808747385fa39c462155c66989de523c8fec86acdac3980964e8009a184a6"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/ui.png",
+          "bytes": 50969,
+          "sha256": "815504b88500c53819b79beb8e4b495827a45db551506dea8ee3c8ed9c40e467"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/acknowledged/ui.xml",
+          "bytes": 35699,
+          "sha256": "3bead7fbd5a7fdee5bdb5a820e9e11ce98123e81a9a721aa1efea8b2b7cdf8be"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/actual-checkpoint-observation.json",
+          "bytes": 2519,
+          "sha256": "a299372e27e805635f2206f41540834dd81450dc088e4b67923581b2660d0bcc"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/capture-log.json",
+          "bytes": 715,
+          "sha256": "f780b3c0f7d0ba10f99455e7247752e66c5c83022d40ef4b73c4ef6f5bdb8eb1"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/ui.png",
+          "bytes": 60529,
+          "sha256": "10def752fd9632deed9b634db6cb60e5f14d4a7d73359271e610e6a7ea0c59ca"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/action-saved/ui.xml",
+          "bytes": 6725,
+          "sha256": "a932388158aa9a11c9d44b696b0e66bbe8e4fe6d6cafa0f2f93dfa60db81a31a"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-acknowledged/capture-log.json",
+          "bytes": 1011,
+          "sha256": "64763301ba54e335438065be5c8e5977e2dfec4e02e07f44eeaffb487156cf76"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-acknowledged/ui.png",
+          "bytes": 79900,
+          "sha256": "de27303a5fc077cb18b067b05170b79ec7fc80980cb04e8a43bf7151b8713de4"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-acknowledged/ui.xml",
+          "bytes": 40830,
+          "sha256": "3ebf287c875df38d98c5107ee4e732eeb566f254f5f42029af24a2f67a30fad3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-review/capture-log.json",
+          "bytes": 801,
+          "sha256": "16ccf3e820558a4bef6f1992c2c09ed053da3bbc845e4e18ac2992b59d59eb99"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-review/ui.png",
+          "bytes": 63156,
+          "sha256": "9459b2328d8afed5c03b50361b3583c5ef36ab3003ed5b519e683ab3025ea20b"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-review/ui.xml",
+          "bytes": 8957,
+          "sha256": "057f66c8794704f2d3733b3c69c7aa6e296dbd535af96a606aa4f0fb0a43a20a"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-unavailable/capture-log.json",
+          "bytes": 1773,
+          "sha256": "f8f712e6765081dc6290cef6664ea758959a690f9d0ab3bca3ff5b5358ed8eab"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-unavailable/ui.png",
+          "bytes": 58902,
+          "sha256": "787c881e8e97ecfa92de28edd83cc686719bcef12f19712eb685c9c02006ba24"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/application-unavailable/ui.xml",
+          "bytes": 29898,
+          "sha256": "0d8f280694dc4b06ea8d502f809b223e65f6c7ffdc67781b57f6f38710662af0"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/begun/actual-checkpoint-observation.json",
+          "bytes": 704,
+          "sha256": "fae3e006f6bbc6f8e71bed254ec362a1012c4620a858fce9767ac76f24c79803"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/begun/capture-log.json",
+          "bytes": 935,
+          "sha256": "a92d1d3601fe2ef9892b0341c5fe64fdb070ba03af1b1d0904d8be049c45f6fc"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/begun/ui.png",
+          "bytes": 48802,
+          "sha256": "cc2b8fe59bc47df9ec14831b9d5eac0e878d3c3032b91abc3bc2a46ee82204cc"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/begun/ui.xml",
+          "bytes": 35351,
+          "sha256": "15c5b90a434c6893edd89da7bb3b8a0ceb0d942077081577523b4e013cd6bed8"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/actual-checkpoint-observation.json",
+          "bytes": 3272,
+          "sha256": "b3dcb731bd5babe5b98d4d562eeacdd3b56f2edc73b861eecb12d4fa9af3a2e7"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/capture-log.json",
+          "bytes": 867,
+          "sha256": "6998da041894116a66b9404d0bca0a9677d0b6530b4c1707611211a0009a3a42"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/ui.png",
+          "bytes": 62789,
+          "sha256": "eb6b02d0dd2c8406251a8aeeaccae6675f23509213ade1bed87079960ea83e53"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-decision/ui.xml",
+          "bytes": 8084,
+          "sha256": "edbc966faeaecbcd7bcb3438d200b67a5dccd52d4a3d05fa0508e56efd119bc3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/actual-checkpoint-observation.json",
+          "bytes": 1468,
+          "sha256": "ac429ef51139465e46a1c391285b23e0dc2179b1e326e81c98e01b599d653c84"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/capture-log.json",
+          "bytes": 727,
+          "sha256": "3ffed8b25e073825c8df94093c01589be00cb566d281e206a55bf0d80ca568ee"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/ui.png",
+          "bytes": 58230,
+          "sha256": "f6293dacddd6e079b7284d7c106560672a097233c7e45c1baa4824e7f2467eec"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/birthday-result/ui.xml",
+          "bytes": 8253,
+          "sha256": "c850cd6c0bf87a360cd35d4ed271ea12686dbc7f8c0818cde6b0cc3ca8a4f2c2"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/capture-log.json",
+          "bytes": 3429,
+          "sha256": "0bce33469a4c2e61842c66d6bb03c19dabfe511e652078f895b789a08ff38c4e"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/cold-attestation.json",
+          "bytes": 321,
+          "sha256": "f9a584b5415c1187fefeaf34efdffb6bc3ba8cca9a8fae7502db475e0ad418c2"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/ui.png",
+          "bytes": 50925,
+          "sha256": "c3d3212bfd96ff4f7234735b0779e26d60d7f1312a26d43dbf3d6356d6d0e2a6"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-acknowledged/ui.xml",
+          "bytes": 35699,
+          "sha256": "3bead7fbd5a7fdee5bdb5a820e9e11ce98123e81a9a721aa1efea8b2b7cdf8be"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/capture-log.json",
+          "bytes": 3185,
+          "sha256": "85cb60c67f4e0f39e98d493bd6c5829c81a4dcaea130589c3ff5e7b84f74da56"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/cold-attestation.json",
+          "bytes": 321,
+          "sha256": "232c998496ac4181436d71e06345b64c7e8ae8e439b0eb6c0148c39441b46213"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/ui.png",
+          "bytes": 75185,
+          "sha256": "fd7135503aded8ba016013c9c7c9b5e7e5e5e339977713279a1d0f1e71dd5953"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-action-saved/ui.xml",
+          "bytes": 6725,
+          "sha256": "a932388158aa9a11c9d44b696b0e66bbe8e4fe6d6cafa0f2f93dfa60db81a31a"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/capture-log.json",
+          "bytes": 3499,
+          "sha256": "3bfda91fdb60c165acd2372dcadd316af31df3134ab38c5df5c7150d6409298e"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/cold-attestation.json",
+          "bytes": 300,
+          "sha256": "ede24fcbc2363fa3dbc1731b70f5669502f8e94f72d59f83a96329eb3e3b74c6"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/ui.png",
+          "bytes": 48780,
+          "sha256": "7c914e66021851e28bd5c062364f9ca8f10f4e0c2f40ea7bba9dcee285731adf"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-begun/ui.xml",
+          "bytes": 35351,
+          "sha256": "15c5b90a434c6893edd89da7bb3b8a0ceb0d942077081577523b4e013cd6bed8"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/capture-log.json",
+          "bytes": 3461,
+          "sha256": "b5f21a019d14af6367e0a9a3438843119e396f68ce1feca0a0d1bdbec9c210eb"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/cold-attestation.json",
+          "bytes": 336,
+          "sha256": "9a97742d3ec8d0506f9c0f30b7a1925d516ef39323c40a239f4bff047aeb4428"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/ui.png",
+          "bytes": 62757,
+          "sha256": "7660b74fb37282158d37d769ce1fda8b4d357e5d76b4a877969afe563927e5de"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-decision/ui.xml",
+          "bytes": 8084,
+          "sha256": "edbc966faeaecbcd7bcb3438d200b67a5dccd52d4a3d05fa0508e56efd119bc3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/capture-log.json",
+          "bytes": 3197,
+          "sha256": "6c12167a0abc4503df49c78c3c04d6cbc6956cf5a1a0124229b6a75c5261543c"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/cold-attestation.json",
+          "bytes": 330,
+          "sha256": "309343ef695a540b2d10fd9653e5c58cc9873912d791a492590d87b68a3b6ceb"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/ui.png",
+          "bytes": 58295,
+          "sha256": "48f7cd6c7d0f45aa4b73335c4804580edf580f9882dfd6e62523095938879969"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-birthday-result/ui.xml",
+          "bytes": 8253,
+          "sha256": "c850cd6c0bf87a360cd35d4ed271ea12686dbc7f8c0818cde6b0cc3ca8a4f2c2"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/capture-log.json",
+          "bytes": 3197,
+          "sha256": "eb0d80eff567159db91dbeb38362c3cc195e1e218cd940474b35dcda566e9c39"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/cold-attestation.json",
+          "bytes": 330,
+          "sha256": "8007b40cdda181da7fa4b2d58ad9bd59c598512b9645a9534d0480a420f58438"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/ui.png",
+          "bytes": 70901,
+          "sha256": "bfb768d69c186f219f0a479c9d08f5d91f066fb7549439fad5d2e9f3b6fe37d1"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-enrolment-saved/ui.xml",
+          "bytes": 7760,
+          "sha256": "170b67030e2e5f9c741406923ec7b7822d7339c0016e5bc69ef830615255a16c"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn/capture-diagnostic.json",
+          "bytes": 1672,
+          "sha256": "349caa8bf21d428cb9044ac9c4869ff6a727a25526d70ecaea3c000150a9f07f"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/capture-log.json",
+          "bytes": 758,
+          "sha256": "6ca75168d2339cd9372b6be471c48d1ee47346c60b9b8a753d74e9e1661b9013"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/cold-attestation.json",
+          "bytes": 327,
+          "sha256": "68a6192904c0c46f48499bf3bdce44bd2ece5861c1a2216e5ab077c9aaa2bff6"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/complete-cold-evidence.json",
+          "bytes": 1564,
+          "sha256": "b61eec8f3a3b1850c5e7cab7cb1c50e82f640874e5db214b36283a0b2de9aecc"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/ui.png",
+          "bytes": 72581,
+          "sha256": "123e6f42d168b417283c3d4efd97d17973b766dc19391746f3815028aa1082d3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-newborn-completed/ui.xml",
+          "bytes": 21464,
+          "sha256": "dd1926774e9462e7a2d4f27a69b1f9e4aec5870e405bf8c52611d8d046bdecb3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/capture-log.json",
+          "bytes": 3299,
+          "sha256": "701e85605e2f43d5fa10c526758f195cbc801a9a5133bde1a7f8c67c762da97c"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/cold-attestation.json",
+          "bytes": 333,
+          "sha256": "02a629a1356d8504bd807d7982f842a1c10ddbbc9e5d5c3579193c1722d3089b"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/ui.png",
+          "bytes": 68795,
+          "sha256": "fd87aa8d7ac95ff12aacdcad7f521faa499f1a7a21aafb1edb8b803f4b5e21f3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/cold-withdrawal-saved/ui.xml",
+          "bytes": 6621,
+          "sha256": "501f57ebc7a4c88b0bfda13d94d8f144fcdee6781b8e8e068d0dfa01918cfa31"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/capture-log.json",
+          "bytes": 1003,
+          "sha256": "98d7341715987b94f9c2944ed1e6b6bc4599dab08c170590ffd63d42f27548d0"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/ui.png",
+          "bytes": 80753,
+          "sha256": "c0cf3fdd17b7ec0220cef84e02255a0142f1c7d3bf8919fa24af900fb47b78ad"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-acknowledged/ui.xml",
+          "bytes": 40503,
+          "sha256": "6458f2a7c43c1b9e78d71f4256e00602faab334ae01fbb930345669577a0f832"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-review/capture-log.json",
+          "bytes": 786,
+          "sha256": "94556f3b9e5da18182c146819e50f0c651e1d8c2e570aab41e779073de60b738"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-review/ui.png",
+          "bytes": 58001,
+          "sha256": "a8fb5b64ef8cf6b032601211a1d54641ecbaf1c327cbe192070e51658bd744ed"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-review/ui.xml",
+          "bytes": 10153,
+          "sha256": "ab96889488c4d4ae08c7729afa939fb7c5882436b431f723903ff7e177e5820b"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/actual-checkpoint-observation.json",
+          "bytes": 4208,
+          "sha256": "c8beb4efe5257c6d1df8538b855aac62fa5c9ce1c8d6a7ecba540b404abb16a7"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/capture-log.json",
+          "bytes": 727,
+          "sha256": "4e4bf9192ac577361031db60d536e6bd9cfccafd5ad0190c5f9eb627087abc1b"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/ui.png",
+          "bytes": 65925,
+          "sha256": "d617204a3444ec4471b512449ab3d59469e06da44edf4bdd5d0786439b6cfe7c"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/enrolment-saved/ui.xml",
+          "bytes": 7760,
+          "sha256": "170b67030e2e5f9c741406923ec7b7822d7339c0016e5bc69ef830615255a16c"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/actual-checkpoint-observation.json",
+          "bytes": 714,
+          "sha256": "ecd6f3128ede7af9f67bb2ca6bda2c7d920bb39adb4339b180fe9c586e11c5eb"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/actual-education-observation.json",
+          "bytes": 1545,
+          "sha256": "5889466addcd7010b57cbd37bb07488b993055cf6b677b73efb0e0d83896d145"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/capture-log.json",
+          "bytes": 971,
+          "sha256": "6d6b6de8a05c7e8c9c34bed64fa06eba3968b9032d30a024e2f5044ffc9f99ff"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/ui.png",
+          "bytes": 77123,
+          "sha256": "c33a5c53b7bfdca0493dc8bf630027105cd2672eed61bb029177e5a55909d62f"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/existing-start/ui.xml",
+          "bytes": 40471,
+          "sha256": "2ea7b01c84b96e7bd837adc3f827029712243d22da98c76e4cb8bf50e54c9915"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/newborn/birth-checkpoint.txt",
+          "bytes": 3707,
+          "sha256": "6c95de6a7f597431a01daa5c0b5c4b9a88ac60334dd4ea49c932b9eb282c7a7d"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/newborn/capture-log.json",
+          "bytes": 698,
+          "sha256": "4c3f88a9d71dd98b3fb93ed4ac132411f2103050a83e5b585b6e5e9458370d65"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/newborn/ui.png",
+          "bytes": 72841,
+          "sha256": "a2ff5a56b08630d5c8de142825b0ef924944feaaa98d6dcc9d5098c66d4eef5a"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/newborn/ui.xml",
+          "bytes": 21464,
+          "sha256": "dd1926774e9462e7a2d4f27a69b1f9e4aec5870e405bf8c52611d8d046bdecb3"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/capture-log.json",
+          "bytes": 1011,
+          "sha256": "c0603aa0ecfc52da6d76ed202c81d2c105bbdddd50a53985b6633d8a002015a0"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/ui.png",
+          "bytes": 77936,
+          "sha256": "feee39cd3446bfe12a21a04fb2ac133c2f9f2b594e4534db275d15eaf1911839"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-acknowledged/ui.xml",
+          "bytes": 40824,
+          "sha256": "6ba66b833e121b33ec80d125da8f8c78c0bafe4336dd08ff4f399caadbcae9fb"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/actual-checkpoint-observation.json",
+          "bytes": 1413,
+          "sha256": "890bce6cb187b7160b9035719f2a28c708284141812b653daa68746d2bbb14ba"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/capture-log.json",
+          "bytes": 747,
+          "sha256": "313a7febca62ba98480b5d5798b1fe1228ec7d8c60d1266877c75e9a696f46b7"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/ui.png",
+          "bytes": 47431,
+          "sha256": "1b95bbd515f1e70bf59e449bbc5a7962a0b9333c5c86bd01e09ae22269b87162"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/preparation-resigned/ui.xml",
+          "bytes": 6601,
+          "sha256": "76192ad5571d3fce7c7184d59054f3f07e6a2adb11ee263abf01b4ae356d48ba"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-review/capture-log.json",
+          "bytes": 780,
+          "sha256": "6bc6605682967a05db0fc603904a3de545725d875b2c2b5313b2d955db0ba8a4"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-review/ui.png",
+          "bytes": 49885,
+          "sha256": "a46deb0c2ce6e86cd64a9143e40e15ec1b76b153c6dabaf47a2598cf8a626ac5"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-review/ui.xml",
+          "bytes": 6366,
+          "sha256": "cd880ac044e8e29b4728bcebc61a06e47621a5eaf2b00685a69d42f63d42b206"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/actual-checkpoint-observation.json",
+          "bytes": 3985,
+          "sha256": "8bc8fa225489ce7872379616cf859e51900af8e630a4c400d7b054af6ac8703e"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/capture-log.json",
+          "bytes": 731,
+          "sha256": "06febeaafc955ea6d315bd9229f12f1aa51ad25af43da12b99162853a96abc19"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/ui.png",
+          "bytes": 56559,
+          "sha256": "99bbf35ef4b25b23c4e4bdd8addeaa195dfa1ef153e455d47e51e1b36f038f98"
+        },
+        {
+          "file": "/tmp/dreams-c37-native-captures/withdrawal-saved/ui.xml",
+          "bytes": 6621,
+          "sha256": "501f57ebc7a4c88b0bfda13d94d8f144fcdee6781b8e8e068d0dfa01918cfa31"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/actual-checkpoint-observation.json",
+          "bytes": 3766,
+          "sha256": "726043aff169e63d69be4ee62513659f312db4808428eb458238c5dcd3c9a326"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/capture-log.json",
+          "bytes": 993,
+          "sha256": "039ab9a493de60b527280956d9f8d64faccf993d58d0c4694007c9bf00cf17df"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/ui.png",
+          "bytes": 84183,
+          "sha256": "1c8cfcfa81fd855083176f9e7f629b64568a51cd34f330a3acaae018402bae68"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/acknowledged/ui.xml",
+          "bytes": 40507,
+          "sha256": "bd9491faee56f23f2f5b61f2fde89625eccb248b408b8e82e52d4c9e16cbb338"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/capture-log.json",
+          "bytes": 3459,
+          "sha256": "26f58d02a0aaeae0ae09320c8bc2d36139fdf0e3e69dddca4e9452810a295b94"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/cold-attestation.json",
+          "bytes": 331,
+          "sha256": "490760d342ca68b7816eec1e4a5db809786e945c2efa9cd5030f721246da7679"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/ui.png",
+          "bytes": 84088,
+          "sha256": "82da11992d3eec0242d70ecae194cdbc44a79e42ab0c057e8ea162645fbd8f2b"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-final-captures/cold-acknowledged/ui.xml",
+          "bytes": 40507,
+          "sha256": "0ffdb13c233c0756fd1d5f0fb288ba8fda95eab6fd196d784a29a09cc8e296eb"
+        },
+        {
+          "file": "/tmp/dreams-c37-university-capture.py",
+          "bytes": 2036,
+          "sha256": "1510efba3481db8eb3046163b3bc2fac463f9a30d8e4558d8f74855c4bddec51"
+        }
+      ]
+    }
+  },
+  "performance": {
+    "complete": true,
+    "processClosed": true,
+    "exitCode": 0,
+    "executionReference": "Root tool91085 actually CLOSED0; source85f serial benchmark PID201872 finished2026-10-21T07:43:39.314271+00:00. All14cases/70measuredwarm0fullunpack; exactcurrent/backup/BeforeAgeUp checks. No competing emulator/Metro/heavygate, as actual closed identities and quiescence link show.",
+    "receipt": {
+      "file": "/tmp/dreams-c37-actions-receipt.json",
+      "bytes": 5346,
+      "sha256": "9c0bae44f7925f010ba4f9a6eaaa16924ff6804de4862f6160293eddfd242617"
+    },
+    "summary": {
+      "file": "/tmp/dreams-c37-actions-summary.json",
+      "bytes": 17158,
+      "sha256": "e3f5a1df1bdd4077b9fa332d04a47eecd77eb0b8260a243880b49203419cd1f6"
+    },
+    "quiescence": {
+      "file": "/tmp/dreams-c37-actions-ready.json",
+      "bytes": 5535,
+      "sha256": "3a38b729843e145736cc53147c6b56386eed04fc94a97e88e8b9be417847f9de"
+    },
+    "raw": {
+      "file": "/tmp/dreams-c37-actions.json",
+      "bytes": 298573,
+      "sha256": "d359be01a39c6547126487a1382af518bfa6c83f6421311bf2a9125f2e185615"
+    },
+    "stderr": {
+      "file": "/tmp/dreams-c37-actions.stderr.txt",
+      "bytes": 483,
+      "sha256": "7bcddea1212f937f94cd040ac6a06f6134c13592617b2499164f75bb3842a1e2"
+    }
+  },
+  "additionalCompactEvidence": [
+    {
+      "file": "/tmp/dreams-production-gaps-publish-v3-initial-static.py.txt",
+      "bytes": 33545,
+      "sha256": "47591933b81884b4d477592fa9c76817da1f8cceea3f8554a756c7f4fb2be6bb"
+    },
+    {
+      "file": "/tmp/dreams-production-gaps-publication-completion-initial-static.json",
+      "bytes": 26958,
+      "sha256": "70ec1f36f44370664d40f010d2e35049f733b18f42f7c6f562682c10a97829de"
+    },
+    {
+      "file": "/tmp/dreams-c37-native-owned-process-closure.json",
+      "bytes": 2542,
+      "sha256": "1735501eb9afbb60c94b3936ea95084e7ec052c74cb0d9596a1e8ea582883ae8"
+    },
+    {
+      "file": "/tmp/dreams-closed-jest-cache-cleanup.json",
+      "bytes": 309,
+      "sha256": "f1bb2ed3bf6c8d58e3514c02122222439f78453a3f9d3248e5f9ec5e9195d5de"
+    }
+  ],
+  "preparationDiagnostic": "Initial unexecuted publisher had a strict-identity False guard for a numeric zero semantic counter. Work static review found it; corrected exact integer0 while retaining original candidate/template as static-only diagnostics. No publisher or gate execution occurred."
+}
