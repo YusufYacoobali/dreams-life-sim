@@ -120,7 +120,7 @@ test('the ordinary custody year-end offers a genuinely eligible legal scene with
 test('content14 upgrades only its marker while the genuine saved medical/court choices and all facts remain exact', () => {
   const world = decodeSave(JSON.stringify(archive)).world, value = JSON.parse(encodeWorld(world)); value.contentVersion = 14;
   const migrated = decodeWorld(JSON.stringify(value));
-  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(15);
+  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(16);
   expect(migrated.pending).toEqual(world.pending); expect(migrated.deferred).toEqual(world.deferred); expect(migrated.random).toEqual(world.random);
   const bound = events.bindEvent(pendingCaseStoryWorld(), scene('awaiting-trial'));
   offerPending(world, bound); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');

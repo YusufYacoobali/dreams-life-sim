@@ -105,7 +105,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(39), engineVersion: z.literal(40), contentVersion: z.literal(15),
+  schemaVersion: z.literal(39), engineVersion: z.literal(40), contentVersion: z.literal(16),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -610,5 +610,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Legal situations use existing facts and effects for future selection only.
   // Preserve every already bound scene, legal record and random stream.
   if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40 && parsed.contentVersion === 14) parsed.contentVersion = 15;
+  // Later-life family situations add future writing only. Keep every saved
+  // binding, choice, journal, person, payment and random stream unchanged.
+  if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40 && parsed.contentVersion === 15) parsed.contentVersion = 16;
   return validateWorld(parsed, immutable);
 }

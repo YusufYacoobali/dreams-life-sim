@@ -8,7 +8,7 @@ import scenes from '../fixtures/story-name-collision-cohort.json';
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 function originalC35(world: World) {
   const old = JSON.parse(encodeWorld(world));
-  expect(old).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15 });
+  expect(old).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 16 });
   // Only these newly defaulted empty fields were absent from both C35 inputs.
   for (const key of ['bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves']) { expect(old[key]).toEqual([]); delete old[key]; }
   old.schemaVersion = 34; old.engineVersion = 35; old.contentVersion = 10;

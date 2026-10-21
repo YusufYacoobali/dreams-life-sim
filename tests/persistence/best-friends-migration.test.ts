@@ -12,7 +12,7 @@ test('the genuine completed C35 US checkpoint keeps its immutable canonical proo
   expect(terminal.producerCommit).toBe('73cedc7643fa3cbcd0ad32dfa27abfb59dac8aaa');
   expect(terminal.versions).toEqual({ world: 34, engine: 35, content: 10 }); expect(Buffer.byteLength(terminal.checkpoint)).toBe(526545); expect(sha(terminal.checkpoint)).toBe('afbd3a1a85bc05cbc046917fd61195545fa9e0704bd2aced19c0be1981809901');
   expect(terminal.provenance.source.game).toBe('84625d5208d1a6815dccc2802ff75c83393eeb143c382e83d60ed0dafaf94f33'); expect(terminal.provenance.commandsAfterAcknowledgedBirth).toBe(225); expect(terminal.observation.naturallyDied).toBe(true);
-  const world = unpackCheckpoint(terminal.checkpoint, true); expect(world).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15, revision: 226, bestFriendships: [] });
+  const world = unpackCheckpoint(terminal.checkpoint, true); expect(world).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 16, revision: 226, bestFriendships: [] });
   const old = JSON.parse(encodeWorld(world));
   for (const key of ['bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves']) { expect(old[key]).toEqual([]); delete old[key]; }
   old.schemaVersion = 34; old.engineVersion = 35; old.contentVersion = 10;

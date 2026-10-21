@@ -21,7 +21,7 @@ const observations = [
  * The actual nonempty best-friend agreement and every older field stay in the hash. */
 function originalCanonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15 });
+  expect(original).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 16 });
   for (const key of newHistories) { expect(original[key]).toEqual([]); delete original[key]; }
   expect(original.bestFriendships).toEqual([{
     id: 'best_friendship_138', ruleVersion: 1, relationshipId: 'relation_person_player_person_npc_15_5',
