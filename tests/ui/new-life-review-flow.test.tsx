@@ -153,7 +153,7 @@ test('advanced creation controls expose disabled state during a held save and ca
     const view = render(frame(<NewLife />)); await setJapaneseIdentity(); await press(/^More Options/); await act(async () => { fireEvent.press(screen.getByRole('checkbox', { name: 'Men' })); });
     await act(async () => { fireEvent(screen.getByRole('switch', { name: 'Would like children' }), 'valueChange', false); }); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Neither' })); });
     const draft = structuredClone(useCreationDraft.getState().draft!), beforeRows = context.rows(), release = context.pauseNextSave(); await press('Start My Life'); expect(mockStore.getState().busy).toBe(true);
-    for (const [role, name] of [['button', /^Ordinary Family/], ['button', /^Royal Family/], ['checkbox', 'Men'], ['checkbox', 'Women'], ['checkbox', 'Non-binary'], ['radio', 'Can carry a pregnancy'], ['radio', 'Can contribute to conception'], ['radio', 'Neither']] as const) {
+    for (const [role, name] of [['radio', /^Ordinary Family/], ['radio', /^Royal Family/], ['checkbox', 'Men'], ['checkbox', 'Women'], ['checkbox', 'Non-binary'], ['radio', 'Can carry a pregnancy'], ['radio', 'Can contribute to conception'], ['radio', 'Neither']] as const) {
       const control = screen.getByRole(role, { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityState.disabled).toBe(true); await act(async () => { fireEvent.press(control); });
     }
     const toggle = screen.getByRole('switch', { name: 'Would like children' }); expect(toggle).toBeDisabled(); expect(toggle).toHaveProp('accessibilityState', { disabled: true, checked: false });

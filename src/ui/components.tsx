@@ -91,16 +91,16 @@ export function Header({ title, onBack, trailing, backDisabled = false }: { titl
 }
 
 export function ActionRow({
-  title, subtitle, icon, value, onPress, disabledReason, disabled = false,
-}: { title: string; subtitle?: string; icon?: React.ReactNode; value?: string; onPress: () => void; disabledReason?: string; disabled?: boolean }) {
+  title, subtitle, icon, value, onPress, disabledReason, disabled = false, accessibilityRole = 'button', accessibilityState,
+}: { title: string; subtitle?: string; icon?: React.ReactNode; value?: string; onPress: () => void; disabledReason?: string; disabled?: boolean; accessibilityRole?: AccessibilityRole; accessibilityState?: AccessibilityState }) {
   const c = useColors();
   const { width, fontScale } = useWindowDimensions();
   const stackValue = !!value && (fontScale >= 1.2 || width < 360);
   return (
     <Pressable
-      accessibilityRole="button" accessibilityLabel={[title, subtitle, value, disabledReason].filter(Boolean).join('. ')}
-      accessibilityState={{ disabled: disabled || !!disabledReason }} disabled={disabled || !!disabledReason} onPress={onPress}
-      style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
+      accessibilityRole={accessibilityRole} accessibilityLabel={[title, subtitle, value, disabledReason].filter(Boolean).join('. ')}
+      accessibilityState={{ ...accessibilityState, disabled: disabled || !!disabledReason }} disabled={disabled || !!disabledReason} onPress={onPress}
+      style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed || accessibilityState?.checked ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
     >
       {icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.rowIcon}>{icon}</View>}
       <View style={[styles.rowContent, stackValue && styles.rowContentStacked]}>
@@ -110,7 +110,7 @@ export function ActionRow({
         </View>
         {value && <Text style={[styles.rowValue, { color: c.muted }, stackValue && styles.rowValueStacked]}>{value}</Text>}
       </View>
-      <Text allowFontScaling={false} accessibilityElementsHidden importantForAccessibility="no" style={{ color: c.muted, fontSize: 25 }}>›</Text>
+      <Text allowFontScaling={false} accessibilityElementsHidden importantForAccessibility="no" style={{ color: accessibilityState?.checked ? c.link : c.muted, fontSize: 25 }}>{accessibilityRole === 'radio' ? accessibilityState?.checked ? '●' : '○' : '›'}</Text>
     </Pressable>
   );
 }
