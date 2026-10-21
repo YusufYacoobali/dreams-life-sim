@@ -6,13 +6,17 @@ This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and
 
 ## Latest local continuation
 
-Local `work` is now `2768d7d`, not yet pushed while the combined visual gate runs on remote `5518f2c`. It adds factual active/tuition-paused course context, two distinct study scenes and investment quote/holding/fee presentation with validation beside the fixed Review Trade button. Current local markers39/40/**17**/19/v4 and **272 situations/816 choices**. Strict app/all-test types closed0 (47597);31 existing context/course/rarity/actual-old-pending checks pass in14.665s (18442). Original270 scenes/bindings and the original250 golden remain exact. Those narrow checks do not establish a new full-regression pass.
+Local `work` runtime is `a3a6ac2` (not yet pushed), plus validated registered-scene/prefix assertions. World39 / engine40 / content17 / reader19 / checkpointv4; **274 situations /822 choices**. It integrates recorded-course, earned-pension-retirement and actual-current-widowhood scenes, investment and purchase cost presentation, factual Will/Legacy screens and scalar portrait drawing reuse. Original272 scene positions and all original saved bindings remain literal. C17 is one prospective unpublished content increment; no new saved fields, rules or RNG rewrite.
 
-`5518f2c` was successfully pushed at19:15UTC; [its combined Quality39660075499](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39660075499) is running. Both production HBC exports closed0 on5518 (55529), `/tmp/dreams-5518f2c-production-export`, Android6.2MB/iOS5.9MB. Its actual cold Continue restored Ren127’s genuine C15 repayment result with ALL eight raw tables/reader19 unchanged; root acknowledged once to128/C16 and reviewed normal Welcome/Life. These are not standalone builds or physical timing acceptance.
+Remote `5518f2c` was successfully pushed at19:15UTC. [Quality39660075499](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39660075499) **failed** at19:32UTC:12 failed/2760 passed tests,5 failed/214 passed suites. Its strict types passed. Root `de79f22` fixes actual duplicate education/job save alerts and updates stale travel/platform accessibility queries. Four affected suites pass21cases; corrected destination queries plus the unchanged actual introduction save journey pass6cases/2suites in4.108s. The first corrective diagnostic retained three old Tokyo-text queries; these are corrected, not weakened rollback assertions. A fresh complete gate is required on the next push.
 
-**Story_editorial again exclusively owns all native/ADB/Metro/source/font controls** for focused read-only normal/150% visual review on frozen5518, Metro10662/log `/tmp/dreams-5518f2c-visual-metro.log`. No new game commands or timer chase. Root must await explicit return before changing source/server/device. Expected final raw DB differs from127 only by root’s one ACK128; retain the128C16 current/127C15 backup and all old history, restore normal font.
+New later-life validation caught an actual deceased participant/save-contract defect. `1ed5d02` fixes only the binder: the actual late spouse supplies frozen literal story copy, while pending participant IDs remain living people. The existing full-world/production-codec checks pass; no save schema relaxation. Root registered catalogue/context/original-golden/tab checks pass12cases/5suites in4.363s. Final registered-scene checks pass2cases in2.087s and combined strict app/all-test types ACTUALLY CLOSED0 in session80084.
 
-School and Release are now independently implementing/proposing record-grounded retirement/widowhood context and two distinct scenes in preserved separate branches. They are not integrated. Purchase owns a bounded Will/Legacy visual followup. Keep those author commits separate until reviewed; the current published CI must finish before another source push. More automatic saving/import/export work is not a priority.
+Both production HBC exports closed0 on5518 (55529), `/tmp/dreams-5518f2c-production-export`, Android6.2MB/iOS5.9MB. Its actual cold Continue restored Ren127’s genuine C15 repayment result with ALL eight raw tables/reader19 unchanged; root acknowledged once to128/C16. Normal Welcome/Life and eight feature families are personally reviewed. These are not standalone builds or physical timing acceptance.
+
+**Story_editorial exclusively owns all native/ADB/Metro/source/font controls** on frozen5518, Metro10662/log `/tmp/dreams-5518f2c-visual-metro.log`, until explicit return. Read-only150% Profile/Family is readable; native bottom-tab Relationships has an orphan final letter. Root9617ed0 adapts navigation columns without capping font scaling; this fix is not yet native-reviewed. Opening a creation draft was blocked before execution by automatic approval review; no workaround or creation occurred. Story will restore font1.0 and take one final raw copy. Expected data differs from127 only by root’s ACK128, retaining128C16 current/127C15 backup and all history.
+
+Further pet/legal/training visual batches and a concrete retained divorce-review save-failure fix continue in separate worktrees. Root owns integration, combined gates and the next safe push. Do not resume parked import/export/history breadth.
 
 ## User direction and working order
 
@@ -52,33 +56,27 @@ Accepted `2a68787` fixes unnecessary Life redraws after acknowledgements, actual
 
 ## Active independent work and ownership
 
-All trees share dependencies from main; sparse trees exclude design and docs/verification. Read original design references in main. Preserve previous author branches when reusing clean trees.
+All sparse trees exclude design and docs/verification; read original design in main and share main dependencies. Preserve old author branches. One narrow local Jest/type/export runner at a time; no author pushes or device commands.
 
 | Owner | Reused worktree | Current scope |
 | --- | --- | --- |
-| root | `/workspace/dreams-worktrees/death-presentation` | Opening, Appearance, FamilyPreferences, own Profile/Statistics; integration/docs/combined gates |
-| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Remaining investment feature polish in a separate future branch |
-| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | Prospective study-story context derived from actual course records; not integrated |
-| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Bank/music/campaign batches integrated; available for bounded followup |
-| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Asset/extras/travel/family batches integrated; available for followup |
-| release_audit | `/workspace/dreams-worktrees/startup-cycle-leaves` | Distinct study-plan/actual tuition-pause scenes against School’s new context; not integrated |
-| story_editorial | `/workspace/dreams-worktrees/button-latency-native` | Completed frozen2a ordinary journey; all device ownership returned to root |
+| root | main `/workspace/dreams-life-sim` | Integration, native-observed scaled navigation, introduction presentation, combined gates/docs/push |
+| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Pet list/detail actual costs, status and large-text presentation |
+| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | Scholarship and career-training visual followup |
+| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Portrait/purchase batches integrated; bounded review of root scaled navigation |
+| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Crime/underground/black-market/criminal-record visual followup |
+| release_audit | `/workspace/dreams-worktrees/startup-cycle-leaves` | Actual divorce confirmation closes before save; retained retry/identity fix and meaningful existing-suite regression |
+| story_editorial | `/workspace/dreams-worktrees/button-latency-native` | Exclusive native5518 normal/150% review, font restoration and final raw DB copy |
 
-Coordinate narrow local Jest runners serially to leave resources for native play. Root owns consolidated types/full CI. No author pushes, whole-regression runs, repeated exports or independent device commands.
+## Completed ordinary native journey
 
-## Native ownership and completed ordinary journey
+Frozen2a ordinary play completed Computing48/48, genuine Software Developer atCA86400/year, a full paid graduate year and all personal/living/student debt repayments. Ren24/revision127/date2050-10-21 hasCA29865.88 cash, zero principal and an unacknowledged final repayment result. Original café work/degree records remain.
 
-**Root owns ALL ADB/device/input/Metro/source/font operations. Story explicitly returned ownership after the final copy closed.** No in-flight child remains from that session.
+Raw `/tmp/dreams-2a-degree-play-final-db` has9lives/9backups/91moments/291receipts, reader19, annualnull. Against revision114 baseline `/tmp/dreams-2a68787-cold-normal-db`, ALL eight inactive lives/backups and every old row in the other six tables remain exact. The5518 cold restore and subsequent sole ACK128 are separate observations above.
 
-- Currently served native HEAD2a687870, emulator5560/API24 softwareTCG/ExpoGo57.0.9; Metro23345, port8081, `/tmp/dreams-352f885-clean-metro.log`; font1.0. Check actual processes/port before any replacement. Application bytes352/2a are identical.
-- Frozen2a ordinary play completed Computing48/48, genuine Software Developer atCA86400/year, a full paid graduate year and all personal/living/student debt repayments. Ren24/revision127/date2050-10-21 hasCA29865.88 cash and zero remaining principal. Original café work and qualification records remain.
-- Final natural student-repayment result `action_126` remains UNACKNOWLEDGED. Raw DB `/tmp/dreams-2a-degree-play-final-db`:9lives/9backups/91moments+metadata/291receipts, reader19, annualnull. Baseline114 is `/tmp/dreams-2a68787-cold-normal-db` (89moments/278receipts).
-- Root compared all eight tables: every inactive life/backup and ALL prior moment/metadata/receipt/preference/branch/restore rows remain exact. Only active life/backup and newly appended command/history rows differ as expected.
-- Session18:27:08.915→lastactive19:12:39.068 was45m30wall. Failed tools184.675s plus approval/keyboard/compaction/diagnostic/capture gaps prevent certifying35 or strict30 active minutes. Excluding all inter-command gaps over25s gives only23m22 as a deliberately conservative lower bound. Logs `/tmp/dreams-2a-degree-play-session.ndjson`; closing DB copy is excluded. The meaningful degree/work/debt journey is accepted for its scope; the timer gate remains unclaimed. Do not repeat that whole journey just to chase the clock.
-- Saving is finite but visibly slow in software emulation; no physical button p95 claim. Actual newest journal entries were visible after ordinary acknowledgements. The offscreen Bank validation defect is fixed in the new visual source.
-- Earlier normal/130% Life and selected-person images were reviewed on2a. New visual source still needs actual layout review. Next root action is one controlled current-source cold restore preserving this pending result and all old rows, then selected normal/large-text visual checks; supporting device work must not displace available product implementation.
+Session18:27:08.915→19:12:39.068 was45m30wall; tooling/approval/compaction gaps prevent strict30/35-active certification. Excluding all inter-command gaps over25s leaves a conservative23m22 lower bound. Closing copies are excluded; do not repeat the degree/work/debt journey to chase a timer. Saving is finite but visibly slow in softwareTCG, not physical-device timing. Logs `/tmp/dreams-2a-degree-play-session.ndjson`.
 
-Local helper `/tmp/dreams-native-ui.py` now handles SIGTERM/SIGINT gracefully: it lets its current ADB child finish before releasing the hierarchy lock and exits143 before another read. Never SIGKILL/cancel midway and start a second observer. A previous interrupted observer/config-change race crashed Android SYSTEM_SERVER; recovered with all eight raw tables exact before the current session began. That was not a proved game-JS crash.
+`/tmp/dreams-native-ui.py` handles SIGTERM/SIGINT by waiting for its current owned ADB child before releasing the hierarchy lock. Never interrupt a child then start another observer. Font/config recreation requires PNG-first startup observation before UiAutomation. A previous observer/config race affected Android SYSTEM_SERVER, recovered with all eight tables exact; it was not a proved game-JS crash.
 
 ## Invariants and already-completed scope
 

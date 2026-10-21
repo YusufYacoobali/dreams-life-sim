@@ -27,6 +27,8 @@ test.each(laterLifeRecordTemplates.map(scene => [scene.id, scene] as const))('%s
   // genuine married fixture; it is not a natural-death/annual-selection claim.
   const original = scene.widowed ? widowedLife() : retiredLife();
   expect(original.pending).toBeNull(); expect(original.deferred).toEqual([]);
+  expect(eventTemplates.slice(272)).toEqual(laterLifeRecordTemplates);
+  expect(eligibleTemplates(original)).toContainEqual(scene);
   const personId = original.activePersonId, before = encodeWorld(original), event = bindEvent(original, scene);
   if (scene.widowed) {
     const marriage = original.marriages.find(row => row.endReason === 'death' && (row.a === personId || row.b === personId))!;
@@ -72,7 +74,7 @@ test.each(laterLifeRecordTemplates.map(scene => [scene.id, scene] as const))('%s
 }, 30000);
 
 test('two later-life scenes append after the unchanged catalogue and need an actual local adult child, not retirement or an invented family', () => {
-  expect(eventTemplates.slice(-2)).toEqual(laterLifeFamilyTemplates);
+  expect(eventTemplates.slice(268, 270)).toEqual(laterLifeFamilyTemplates);
   for (const template of laterLifeFamilyTemplates) {
     expect(template).toMatchObject({ min: 55, max: 120, local: true, child: 'adult' });
     const world = lifeStoryWorld(), before = encodeWorld(world), context = lifeStoryContexts(world), child = context.children.adult!;
