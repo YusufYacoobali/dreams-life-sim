@@ -59,7 +59,7 @@ export default function Death() {
 }
 function DeathButton({ label, onPress, icon, primary = false }: { label: string; onPress: () => void; icon: 'chevron-forward' | 'refresh' | 'people'; primary?: boolean }) {
   const color = primary ? '#FFFFFF' : '#0B1545';
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? '#0879E8' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', opacity: pressed ? 0.8 : 1 })}>
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? pressed ? '#0063DC' : '#006DE5' : pressed ? '#E5EAF0' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center' })}>
     {!primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color="#61718B" size={24} /></View>}
     <Text style={{ color, fontSize: 16, fontWeight: '600', flexShrink: 1, textAlign: 'center' }}>{label}</Text>
     {primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color={color} size={24} /></View>}
