@@ -1,3 +1,4 @@
+import { npcMovesYear, settleAnnualTaxesForNpcMoves } from './systems/npcMoves';
 import { endStudyCourse, refreshStudyCourses } from './systems/studyCourses';
 import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
 import { friendshipCommandSchema, type FriendshipCommand, refreshBestFriendships, resolveFriendship } from './systems/friendships';
@@ -180,7 +181,8 @@ function finishYear(world: World) {
   const age = ageOn(player, world.date);
   player.stats.energy = clamp(player.stats.energy + 20);
   player.stats.stress = clamp(player.stats.stress - 3);
-  for (const person of financialActors(world)) settleTax(world, person);
+  const moveSettlements = settleAnnualTaxesForNpcMoves(world, financialActors(world));
+  npcMovesYear(world, moveSettlements);
   npcYearDecisions(world);
   relationshipsYear(world);
   npcRelationshipsYear(world);

@@ -1,3 +1,5 @@
+import { npcMoveSchema } from './systems/npcMoveSchemas';
+import { validateNpcMoves } from './systems/npcMoveValidation';
 import { bestFriendshipSchema } from './systems/friendshipSchemas';
 import { validateBestFriendships } from './systems/friendshipValidation';
 import { teenRelationshipSchema } from './systems/teenRelationshipSchemas';
@@ -110,6 +112,8 @@ export const worldSchema = z.object({
   households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
   npcSeparations: z.array(npcSeparationSchema),
+  // Isolated next-version bridge; root replaces with a required migrated array.
+  npcMoves: z.array(npcMoveSchema).default([]),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
@@ -336,6 +340,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateHourlyWork(world, ledger);
   validateNpcCourtships(world, ledger);
   validateNpcSeparations(world);
+  validateNpcMoves(world, ledger);
   validateBestFriendships(world);
   validateTravel(world, ledger);
   validateSchools(world);
