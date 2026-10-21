@@ -10,7 +10,7 @@ import { royalMembership } from './royaltySchemas';
 import { RoyalHouse,royalEligible,royalRole,royalSuccession,royalTitle } from './royaltyMath';
 import { accountFor,active,availableCash,bounded,charge,draw,fact,post,result } from './common';
 import { IneligibleAction } from '../errors';
-import { visibleConvictions } from './legal';
+import { visibleConvictions } from './legalRecords';
 import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
 import { serviceAway } from './serviceSchemas';
