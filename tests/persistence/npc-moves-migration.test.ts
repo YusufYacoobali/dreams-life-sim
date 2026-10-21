@@ -21,7 +21,7 @@ const observations = [
   { key: 'backup', revision: 139, payloadSha: 'a9b8f03be86f03d7e406cbbfa73d6ddbfb45767e75902917f94157ea43b1263e', canonicalSha: 'e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22' },
 ] as const;
 function freshLife() {
-  return createLife('c38_migration_newborn', 637, { firstName: 'Migration', lastName: 'Only', gender: 'female', country: 'US', city: 'New York', appearance: { face: 0, skin: 2, hair: 3, hairColor: 1 } }, { year: 2026, month: 10, day: 21 });
+  return createLife('life_c38_migration_newborn', 637, { firstName: 'Migration', lastName: 'Only', gender: 'female', country: 'US', city: 'New York', appearance: { face: 0, skin: 2, hair: 3, hairColor: 1 } }, { year: 2026, month: 10, day: 21 });
 }
 /** Explicitly arranged legacy envelope. This is NOT a genuine C37 producer:
  * every person/earned fact comes from the unchanged older native BF fixture.
@@ -99,13 +99,13 @@ async function fixtureDatabase(reader: number) {
   const archived = await repository.import(JSON.stringify(archive));
   // Genuine source snapshot + actual existing branch operation populate both
   // branch tables. This is arranged test setup, not a full original native DB.
-  await repository.restoreBranch(archived.id, archive.snapshots[0].summary.id, archived.revision, 'c38_migration_branch', 'c38_migration_restore');
+  await repository.restoreBranch(archived.id, archive.snapshots[0].summary.id, archived.revision, 'life_c38_migration_branch', 'c38_migration_restore');
   // A genuine fresh birth + actual store acknowledgement supplies a real receipt
   // without inventing a career, consent, qualification or historical award.
   await repository.create(freshLife());
   const store = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 21 }), id: () => 'unused' });
   expect(await store.getState().bootstrap()).toBe(true); expect(await store.getState().acknowledgeBirth()).toBe(true);
-  expect(sqlite.prepare('SELECT command_id,revision FROM receipts WHERE life_id=?').get('c38_migration_newborn')).toEqual({ command_id: 'birth:c38_migration_newborn', revision: 1 });
+  expect(sqlite.prepare('SELECT command_id,revision FROM receipts WHERE life_id=?').get('life_c38_migration_newborn')).toEqual({ command_id: 'birth:life_c38_migration_newborn', revision: 1 });
   // Preserve exact old strings in the storage harness rather than claiming that
   // importing into the current runtime left its current payload unmigrated.
   sqlite.prepare('UPDATE lives SET payload=? WHERE id=?').run(archive.checkpoint, archived.id);

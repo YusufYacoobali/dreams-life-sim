@@ -45,7 +45,9 @@ do not add gameplay saves after setup.
 The candidate is deliberately **unrun** until root's future union and gate
 authorization. Only syntax parsing and diff checks are allowed during preparation.
 TypeScript parser-only syntax check actually closed exit0 with zero diagnostics
-(`/tmp/dreams-c38-migration-prepare-syntax.out`); diff check passes. No typecheck,
+(`/tmp/dreams-c38-migration-prepare-syntax-final.out`); diff check passes. Static
+review corrected both arranged new-life/branch IDs to the required `life_`
+prefix before any runtime gate. No typecheck,
 test, game runtime or native operation ran for this candidate.
 There is no claimed native C37 nonempty study/admission fixture, passing runtime
 gate, migration performance result or new release acceptance at this stage.
