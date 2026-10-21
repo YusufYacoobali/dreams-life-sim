@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-native';
+import { Image, Switch } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
@@ -33,6 +33,7 @@ let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), replace: jest.fn(), push: jest.fn() }, Redirect: () => null }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Profile from '../../app/(game)/profile';
+import { CharacterPortrait } from '../../src/assets/CharacterPortrait';
 
 const frame = (pending = false) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Profile />{pending && <PendingEvent />}</ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
@@ -152,7 +153,12 @@ test('a failed preference save retains the reviewed form, freezes all inputs whi
     await toggleDating('Men'); await toggleChildren(true); await press('Save Preferences'); expect(screen.getByRole('checkbox', { name: 'Men' })).toBeOnTheScreen(); expect(screen.getByRole('switch', { name: 'Would like children' })).toHaveProp('value', false); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore(); expect(screen.queryByRole('alert')).toBeNull(); expect(screen.getByRole('button', { name: 'Save Preferences' })).toBeDisabled();
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(true)); expect(world()).toEqual(predicted); expect(context.rows()).toEqual(savedRows); expect(screen.getByRole('checkbox', { name: 'Men' })).toBeOnTheScreen(); expect(screen.getByRole('switch', { name: 'Would like children' })).toHaveProp('value', false);
-    await press('Continue'); expect(world()).toEqual(resolveCommand(predicted, { type: 'acknowledge', resultId: predicted.pending!.id }, true)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); const doneRows = context.rows(); await press('Save Preferences'); expect(context.rows()).toEqual(doneRows); context.original(); view.unmount();
+    const layers = () => screen.UNSAFE_getByType(CharacterPortrait).findAllByType(Image).map(image => image.props), beforeAcknowledgement = layers(), savedAppearance = world().people[player.id].appearance;
+    expect(beforeAcknowledgement.length).toBeGreaterThan(0);
+    await press('Continue'); expect(world()).toEqual(resolveCommand(predicted, { type: 'acknowledge', resultId: predicted.pending!.id }, true)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random);
+    expect(world().people[player.id].appearance).not.toBe(savedAppearance);
+    expect(layers()).toHaveLength(beforeAcknowledgement.length); layers().forEach((props, index) => { expect(props).toEqual(beforeAcknowledgement[index]); expect(props).toBe(beforeAcknowledgement[index]); });
+    const doneRows = context.rows(); await press('Save Preferences'); expect(context.rows()).toEqual(doneRows); context.original(); view.unmount();
   } finally { context.close(); }
 });
 
