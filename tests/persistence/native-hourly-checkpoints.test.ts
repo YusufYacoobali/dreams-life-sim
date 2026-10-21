@@ -20,7 +20,7 @@ function originalObject(payload: string) {
   return root;
 }
 
-test('actual native129/130/132/134 remain pinned: migration adds only current tags and empty courtship/withdrawal history', () => {
+test('actual native129/130/132/134 remain pinned: migration adds only current tags and proven empty new histories', () => {
   const bytes = readFileSync(join(__dirname, '../fixtures/v32-native-hourly-checkpoints.json'));
   expect(bytes.length).toBe(547397); expect(sha(bytes)).toBe('9b12ebf08e9f316398db3ea2bfd7ccf9424bc6233b102be3223c7cb49a85258c');
   expect(pinned.producerCommit).toBe('944019d8fb07759c4fc2e644ddf8f717edcbd16c');
@@ -28,7 +28,7 @@ test('actual native129/130/132/134 remain pinned: migration adds only current ta
     expect(sha(item.payload)).toBe(item.payloadSha256);
     const original = originalObject(item.payload), current = checkpoints.unpackCheckpoint(item.payload);
     expect(original).toMatchObject({ schemaVersion: 32, engineVersion: 33, contentVersion: 9, revision: item.revision }); expect(original.npcCourtships).toBeUndefined();
-    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 35, engineVersion: 36, contentVersion: 11, bestFriendships: [], npcCourtships: [], schoolWithdrawals: [] });
+    expect(JSON.parse(encodeWorld(current))).toEqual({ ...original, schemaVersion: 36, engineVersion: 37, contentVersion: 12, bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcCourtships: [], schoolWithdrawals: [] });
   }
   const year = checkpoints.unpackCheckpoint(pinned.checkpoints.year.payload), contract = year.hourlyContracts[0];
   expect(contract.terms).toEqual({ hourlyRate: 1603n, weeklyHours: 20, paidWeeks: 52 }); expect(contract.periods).toHaveLength(12);
@@ -49,7 +49,7 @@ test('reader12 upgrades without rewriting raw saves; the actual completed payrol
     for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE ' + table + ' SET payload=?').run(payload);
     sqlite.exec('PRAGMA user_version=12');
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(15); expect(rows()).toEqual(original);
+    const original = rows(), repository = new SaveRepository(driver); await repository.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(16); expect(rows()).toEqual(original);
     const store = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); expect(await store.getState().bootstrap()).toBe(true); expect(store.getState().world).toEqual(world); expect(rows()).toEqual(original);
     const command = { type: 'choose' as const, eventId: world.pending!.id, choiceId: 'brief' }, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_old_hourly BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
