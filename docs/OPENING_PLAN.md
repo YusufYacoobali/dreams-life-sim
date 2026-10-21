@@ -1,32 +1,39 @@
 # Opening experience: priority and completion estimates
 
-Remote `452a3fd` (pushed about20:20UTC) completes the broad visual/accessibility pass. Its [Quality39669498153](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39669498153) is running; exactdcb1427 [Quality39665238637](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39665238637) passed2,788tests/219suites plus both strict typechecks. Final452strict types and the read-only summary check also pass. Scaled native3c19 navigation/pet presentation passes at150%; font1.0 restored and ALL eight saved tables/reader19 remain exact. Root owns native controls.
+Remote `8817c3f` (pushed about20:43UTC) includes the broad visual/accessibility pass, campus gameplay and the scholarship lookup optimisation. Its [Quality39672695725](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39672695725) is running. Previous452Quality failed only2outdated career queries, now corrected with2affected cases passing; exactdcb1427 [Quality39665238637](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39665238637) passed2,788tests/219suites plus both strict typechecks. Final452strict types and the read-only summary check also pass. Scaled native3c19 navigation/pet presentation passes at150%; font1.0 restored and ALL eight saved tables/reader19 remain exact. Root owns native controls.
 
-Local **unpublished** campus gameplay fills the one concrete approved-design gap: real university/trade/graduate classmates and attended-month clubs. New classmates have their own paid courses and continuing own-cash tuition or pause; paused/absent/off-campus months earn no club progress. Current local markers40/41/17/20/v4;274situations/822choices unchanged. Historical world migration defaults only the empty campus array plus root tags; raw old database rows/bytes/goldens stay original. Final campus domain/UI15cases in2suites pass in8.007s, including ordinary annual progression and stale navigation confirmation. Compatibility21cases/3suites pass in13.617s; app/all-test strict types pass, including the final added tests. A bounded existing-ledger-index responsiveness improvement is being implemented before the next export/push. See [HANDOFF](HANDOFF.md) for live ownership and exact source scope. Automatic saving/resume remains required; extra file/history work stays parked. Next safe push due22:20activeUTC.
+Pushed campus gameplay fills the one concrete approved-design gap: real university/trade/graduate classmates and attended-month clubs. New classmates have their own paid courses and continuing own-cash tuition or pause; paused/absent/off-campus months earn no club progress. Current local markers40/41/17/20/v4;274situations/822choices unchanged. Historical world migration defaults only the empty campus array plus root tags; raw old database rows/bytes/goldens stay original. Final campus domain/UI15cases in2suites pass in8.007s, including ordinary annual progression and stale navigation confirmation. Compatibility21cases/3suites pass in13.617s; app/all-test strict types pass, including the final added tests. The existing ledger index now replaces repeated scholarship transaction searches; all45scholarship checks pass. Final strict types and Android/iOS production HBC exports actually close0 on9ac4270;8817changes only two test queries. Native9ac cold Continue restores Ren24/revision128; ALL eight raw tables remain exact, with reader19→20 only. Native campus gameplay acceptance continues. See [HANDOFF](HANDOFF.md) for live ownership and exact source scope. Automatic saving/resume remains required; extra file/history work stays parked. Next safe push due22:43activeUTC.
 
 Standalone/iOS/physical/spoken-reader acceptance remains open. Runtime environment72 still excludes the required AAR redirect host; no blocked retry or standalone artifact is claimed.
 
 ## Current assessment
 
-These are approximate effort estimates, not measured completion scores. Overall production remains **75%** until the integrated polish and remaining release work are accepted. Builds are supporting work now; final release acceptance follows the product pass.
+These are approximate effort estimates, not measured completion scores. Latest overall estimate is **80–85%**. Most gameplay is implemented; final standalone/device acceptance remains the largest gap. Builds are supporting work now; final release acceptance follows the product pass.
 
 | Area | Estimated complete |
 | --- | ---: |
 | Startup and onboarding |90%|
 | Life dashboard and early gameplay |90%|
 | Automatic saving and exact resume |90%|
-| Education and ordinary careers |90%|
+| Education, classmates and campus clubs |95%|
+| Ordinary jobs and careers |90%|
 | Relationships and family |90%|
-| Money, banking and assets |85%|
-| Health, crime and legal |85%|
-| Special careers and business |85%|
-| Travel and emigration |85%|
-| Pets, hobbies and entertainment |80%|
-| Stories and situational writing |85%|
-| Achievements and challenges |80%|
-| Button responsiveness |75%|
-| Visual polish and accessibility |70%|
+| Money, banking and assets |90%|
+| Health, crime and legal |90%|
+| Special careers and business |90%|
+| Travel and emigration |90%|
+| Pets, hobbies and entertainment |90%|
+| Stories and situational writing |90%|
+| Achievements and challenges |85%|
+| Button responsiveness |85%|
+| Visual polish and accessibility |85%|
 | Standalone builds and device release acceptance |20%|
+
+## What the remaining percentages mean
+
+The percentages above are broad effort estimates, not an itemised ten-percent feature backlog in each area. Startup/Life, ordinary careers, relationships/family, money/assets, health/legal, special careers/business, travel, pets/hobbies and the story system are implemented. The bounded approved-design review identified campus social life as the concrete missing core feature; that feature is now implemented and pushed. No additional major system is currently identified as absent.
+
+Track three separate states from here: implemented scope, known defects, and release acceptance. Current campus/save compatibility/focused checks pass; combined8817regression and native campus acceptance are in progress. Two prior career regression failures were obsolete UI queries and are corrected. Remaining code changes should address actual defects, missing approved behaviour or specific presentation/editorial/balance findings. Final standalone cold/offline/resume, spoken accessibility, physical-device performance and iOS acceptance remain open; they do not imply ten percent more mechanics must be invented in every system.
 
 ## Current order of work
 
