@@ -6,17 +6,15 @@ This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and
 
 ## Latest local continuation
 
-Remote `work` is `dcb1427`, successfully pushed19:51:24UTC. [Quality39665238637](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39665238637) is running. Local subsequent UI work through0506a09 and the form-error followup is validated but not yet pushed. World39 / engine40 / content17 / reader19 / checkpointv4; **274 situations /822 choices**. It integrates recorded-course, earned-pension-retirement and actual-current-widowhood scenes, investment and purchase cost presentation, factual Will/Legacy screens and scalar portrait drawing reuse. Original272 scene positions and all original saved bindings remain literal. C17 is one prospective published content increment; no new saved fields, rules or RNG rewrite.
+Remote `work` is `452a3fd`, successfully pushed about20:20UTC on21October. Its [Quality39669498153](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39669498153) is running. The previous exact `dcb1427` [Quality39665238637](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39665238637) **passed** at20:09:46UTC:2,788 tests/219 suites, locked install and strict app/all-test types. The earlier5518 failed gate is historical, corrected byde79f22.
 
-Remote `5518f2c` was successfully pushed at19:15UTC. [Quality39660075499](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39660075499) **failed** at19:32UTC:12 failed/2760 passed tests,5 failed/214 passed suites. Its strict types passed. Root `de79f22` fixes actual duplicate education/job save alerts and updates stale travel/platform accessibility queries. Four affected suites pass21cases; corrected destination queries plus the unchanged actual introduction save journey pass6cases/2suites in4.108s. The first corrective diagnostic retained three old Tokyo-text queries; these are corrected, not weakened rollback assertions. The corrective combined gate39665238637 is now running on exactdcb1427; do not transfer older source passes or cancel it with small source pushes.
+The complete broad visual pass is integrated and pushed in452a3fd: readable scaled navigation, factual costs/status/history across the remaining screens, retained failed divorce review, scalar portrait reuse and read-only life summary. Final strict app/all-test types actually closed0 (67808); the existing summary read-only journey passes1case in3.670s. This checkpoint uses World39/engine40/content17/reader19/v4 and274situations/822choices.
 
-New later-life validation caught an actual deceased participant/save-contract defect. `1ed5d02` fixes only the binder: the actual late spouse supplies frozen literal story copy, while pending participant IDs remain living people. The existing full-world/production-codec checks pass; no save schema relaxation. Root registered catalogue/context/original-golden/tab checks pass12cases/5suites in4.363s. Final registered-scene checks pass2cases in2.087s and combined strict app/all-test types ACTUALLY CLOSED0 in session80084.
+**Local campus gameplay is integrated but unpublished pending its focused gates.** Bounded approved-design review found university/trade/graduate social life absent. World40/engine41/content17/reader20 adds once-per-course introductions to exactly two new adult classmates with their own genuinely paid courses, and free clubs with effects only on newly attended eligible months. No automatic friendship, invented past attendance, free NPC tuition or rewards while absent. Historical worlds add only an empty campus array and root version tags; original database rows and checkpoint bytes remain untouched on marker-only upgrades. Forty-six existing test expectation adapters preserve all historical producers/goldens. Engine/model/monthly hooks are0ed6e80; core6d2+3812+8560 is integrated asab884ac/f65feb0/bfac0ff; UI7f66d96, connected testsf1c10ef/361d011, domain testd17842d plus89e147followup. Final campus domain/UI15cases in2suites actually pass in8.007s, including a complete ordinary engine year and queued profile-navigation confirmation. Root compatibility21cases/3suites pass in13.617s; app/all-test strict types pass, and final added-test strict types also close0. Source-only scholarship ledger-index optimisation review continues before the final bundle/push.
 
-Both production HBC exports closed0 on5518 (55529), `/tmp/dreams-5518f2c-production-export`, Android6.2MB/iOS5.9MB. Its actual cold Continue restored Ren127’s genuine C15 repayment result with ALL eight raw tables/reader19 unchanged; root acknowledged once to128/C16. Normal Welcome/Life and eight feature families are personally reviewed. These are not standalone builds or physical timing acceptance.
+Root again exclusively owns all native/ADB/Metro/source/font control. Native tree `/workspace/dreams-worktrees/button-latency-native` is clean frozen3c19e9d, ownMetro59600, log `/tmp/dreams-3c19-visual-metro.log`. Native150% review confirms the corrected four tabs wrap into readable2x2 targets, and actual pet cards/costs remain readable. Font1.0 restored and stable Welcome/Continue personally reviewed. Final `/tmp/dreams-3c19-visual-final-db` equals `/tmp/dreams-5518-visual-final-db` across **ALL eight tables and reader19**: Ren128,9lives/9backups/91moments/292receipts. These read-only checks issue no game command. TalkBack is not installed/configured; spoken-reader acceptance remains open. Creation draft navigation was blocked before execution by automatic approval review; no bypass or creation occurred.
 
-**Story_editorial exclusively owns all native/ADB/Metro/source/font controls** on frozen3c19e9d, own Metro59600/log `/tmp/dreams-3c19-visual-metro.log`, until explicit return. Root verified old ownedMetro277092/startticks19143131, stopped it with the existing guarded helper and10662 actually closed0 before handoff. Read-only150% Profile/Family is readable; native bottom-tab Relationships has an orphan final letter. Root9617ed0 adapts navigation columns without capping font scaling; this fix is not yet native-reviewed. Opening a creation draft was blocked before execution by automatic approval review; no workaround or creation occurred. The completed5518 final copy `/tmp/dreams-5518-visual-final-db` confirms all previous rows exact, sole ACK127→128/one receipt, and backup equals old127 current. Font1.0 was restored before new-source startup. Story is now checking the actual navigation fix at150% on3c19, then restores1.0 and takes one final copy. Expected data differs from127 only by root’s ACK128, retaining128C16 current/127C15 backup and all history.
-
-Pet/legal/contact/training/scholarship/royalty/outing presentation and the real retained divorce-review fix are now integrated locally. All author-focused checks pass. Combined strict app/all-test types and7 existing Royalty/relationship cases ACTUALLY CLOSED0 (26220),8.117s for the tests. The genuine divorce baseline failed at lost review; final real-file SQLite rollback/retry/cold/once-ACK and stale/held closure checks pass. Remaining career/service/case presentation and one bounded concrete product-gap review continue independently. Root owns integration, combined gates and the next safe push. Do not resume parked import/export/history breadth.
+Both production HBC exports actually closed0 on5518, `/tmp/dreams-5518f2c-production-export`; these are bundles, not standalone builds. Actual observed environment72 still restricts package-manager hosts and excludes required `repo.reactnative.dev`; no blocked Gradle retry. Finish available gameplay, responsiveness and accessibility work before final release acceptance. Do not repeat old degree journeys or unchanged proof packs.
 
 ## User direction and working order
 
@@ -26,13 +24,13 @@ Finish the complete production game autonomously. The latest priority is:
 2. Remaining distinct content, balance and complete gameplay journeys.
 3. Final standalone builds and device acceptance, with useful device/build checks continuing alongside product work.
 
-Use independent agents in separate worktrees, with root integrating, testing and committing. Do not wait for one plan phase to end before starting independent later work. **Commit AND push safe checkpoints at least every two active hours.** Latest successful safe push is dcb1427 at19:51:24UTC on21October; next push is due by21:51 activeUTC. Preserve the running combined gate; continue implementation locally.
+Use independent agents in separate worktrees, with root integrating, testing and committing. Do not wait for one plan phase to end before starting independent later work. **Commit AND push safe checkpoints at least every two active hours.** Latest successful safe push is452a3fd atabout20:20UTC on21October; next push is due by22:20 activeUTC. Preserve the running combined gate; continue implementation locally.
 
 Preserve automatic saving and exact resume. Extra import/export/sharing, file tools, Time Machine breadth and history-storage optimisation are parked; existing complete features and original data remain. Keep verification proportionate: focused meaningful checks per change, one combined type/regression gate, no repeated unchanged cohorts or proof packs. A final answer stops active coding; do not imply background continuation.
 
 Overall remains an approximate **75% effort estimate**, not a measured acceptance score. See the current assessment in OPENING_PLAN. Do not claim100% while actual release acceptance remains open.
 
-## Current integration
+## Prior integrated source scopes
 
 Runtime `8c03aaf` integrates the visual batches over accepted `2a68787`:
 
@@ -60,13 +58,13 @@ All sparse trees exclude design and docs/verification; read original design in m
 
 | Owner | Reused worktree | Current scope |
 | --- | --- | --- |
-| root | main `/workspace/dreams-life-sim` | Integration, native-observed scaled navigation, introduction presentation, combined gates/docs/push |
-| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Pet list/detail actual costs, status and large-text presentation |
-| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | One bounded actual non-file product-gap review to direct any remaining implementation |
-| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Ordinary special-career detail presentation; divorce exact review approved |
-| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Cases and service-detail actual record presentation |
-| release_audit | `/workspace/dreams-worktrees/startup-cycle-leaves` | Divorce fix integrated/approved; available for real remaining product work |
-| story_editorial | `/workspace/dreams-worktrees/button-latency-native` | Exclusive native3c19 C17 cold/read-only navigation150% review |
+| root | main `/workspace/dreams-life-sim` | Campus union integration, strict/compatibility gates, docs and safe push; exclusive dormant native controls |
+| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Campus connected UI/save flow; sole narrow UI runner after completed domain gate |
+| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | Campus core frozen6d2+3812+8560; no runners |
+| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Independent bounded campus UI accessibility/callback review |
+| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Current-version compatibility adapters414ee29 frozen/integrated; no runners |
+| release_audit | `/workspace/dreams-worktrees/startup-cycle-leaves` | Campus domain13cases pass; source frozen; no runners |
+| story_editorial | separate clean author tree | Source-only button hot-path review; no native or benchmark controls |
 
 ## Completed ordinary native journey
 

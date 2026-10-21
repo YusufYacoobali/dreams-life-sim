@@ -107,10 +107,11 @@ List/detail pairs have real distinct purposes. Their loading, empty, owned/unown
 | X40 | Criminal record and lasting restrictions | X13/X14 → real case details | 11 |
 | X41 | Social-post composer and content selection | X17 → post intent → actual simulated response | 12 |
 | X42 | Black market, offers and illicit-item ownership | X13/Extras → risk/quote/decision → legal/financial consequences | 14 |
+| X43 | Campus social life: actual course peers, club selection and attended history | X02 → reviewed introduction/club result; real peer → R02 | V04 / reference06 |
 | S01 | Restore/loading state | Launch/import → validated route or S02 | N |
 | S02 | Save recovery, incompatible-save, storage-error states | Failed restore/write → retry, backup/import, safe exit | N |
 
-**Count: 79 canonical screen definitions.** O01–O04: 4; L01–L08: 8; A01–A15: 15; R01–R08: 8; X01–X42: 42; S01–S02: 2. This is a route/content inventory, not a promise of 79 bespoke layouts. Pregnancy updates, interviews, graduation, promotions, hearings, and date outcomes usually use existing screens and the shared modal flow.
+**Count: 80 canonical screen definitions.** O01–O04: 4; L01–L08: 8; A01–A15: 15; R01–R08: 8; X01–X43: 43; S01–S02: 2. This is a route/content inventory, not a promise of 80 bespoke layouts. Pregnancy updates, interviews, graduation, promotions, hearings, and date outcomes usually use existing screens and the shared modal flow.
 
 Pregnancy and parenting live in the relevant person's profile with dedicated sections/actions. Custody and settlement use R05 because their terms require an inspectable summary. Classmates, coworkers, teachers, doctors, and family members use R02 with role-specific actions.
 
