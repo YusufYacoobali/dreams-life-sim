@@ -68,7 +68,7 @@ test('a genuine already-paid guitar practice enables Interests; arranging a rout
   const parent = arranged.relationships.find(row => row.roles.includes('parent') && row.to === arranged.activePersonId)!.from;
   expect(conversationTopics(arranged, parent).find(row => row.id === 'interests')!.disabledReason).toMatch(/practice/);
   expect(conversationTopics(arranged, parent).find(row => row.id === 'feelings')!.disabledReason).toMatch(/at least eight/);
-  let world = unpackCheckpoint(save.checkpoint);
+  let world = save.world;
   const originalPeople = Object.keys(world.people);
   // Drain only the actual already-saved school decision/year. No calendar, funds,
   // stats, identities or random streams are replaced to create hobby evidence.
