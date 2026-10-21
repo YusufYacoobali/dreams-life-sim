@@ -300,8 +300,13 @@ test('a production death on a genuine marriage binds only the actual late spouse
   expect(world.marriages.find(item => item.a === spouse.id || item.b === spouse.id)).toMatchObject({ ended: spouse.died, endReason: 'death' });
   const bound = bindEvent(world, laterProbe('widowed'));
   expect(bound.body).toBe(fullName(spouse) + '. ' + fullName(spouse) + '.');
-  expect(bound.personIds).toEqual([world.activePersonId, spouse.id]);
+  expect(bound.personIds).toEqual([world.activePersonId]);
+  expect(bound.personIds.every(id => world.people[id] && !world.people[id].died)).toBe(true);
   expect(bound.choices.every(choice => choice.effects.every(effect => effect.kind === 'stat' && effect.personId === world.activePersonId))).toBe(true);
+  const offered = copyWorld(world); offerPending(offered, bound);
+  expect(decodeWorld(encodeWorld(offered))).toEqual(offered);
+  expect(unpackCheckpoint(packCheckpoint(offered), true)).toEqual(offered);
+  expect(offered.people[spouse.id]).toEqual(spouse);
   expect(bindEvent(world, { ...laterProbe('widowed'), widowed: undefined }).body).toBe('{lateSpouse}. {lateSpouse}.');
   expect(encodeWorld(world)).toBe(before);
 });
