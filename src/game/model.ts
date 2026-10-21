@@ -107,7 +107,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(40), engineVersion: z.literal(41), contentVersion: z.literal(17),
+  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(17),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -624,6 +624,11 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // every old person, course, payment, choice and RNG without inventing peers.
   if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40) {
     parsed.schemaVersion = 40; parsed.engineVersion = 41; parsed.campusCommunities = [];
+  }
+  // Expanded business models require a newer reader. Existing company records
+  // and operating rules stay literal; no company or economic history is added.
+  if (parsed && parsed.schemaVersion === 40 && parsed.engineVersion === 41) {
+    parsed.schemaVersion = 41; parsed.engineVersion = 42;
   }
   return validateWorld(parsed, immutable);
 }
