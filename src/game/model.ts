@@ -103,7 +103,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(38), engineVersion: z.literal(39), contentVersion: z.literal(13),
+  schemaVersion: z.literal(39), engineVersion: z.literal(40), contentVersion: z.literal(14),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -607,6 +607,12 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Preserve all five existing histories, friendships, people, money and RNG.
   if (parsed && parsed.schemaVersion === 37 && parsed.engineVersion === 38) {
     parsed.schemaVersion = 38; parsed.engineVersion = 39;
+  }
+  // Topic-aware conversations affect only new explicit commands. Bound scenes,
+  // results, original talk commands and all existing facts remain unchanged.
+  if (parsed && parsed.schemaVersion === 38 && parsed.engineVersion === 39 && parsed.contentVersion === 13) parsed.contentVersion = 14;
+  if (parsed && parsed.schemaVersion === 38 && parsed.engineVersion === 39) {
+    parsed.schemaVersion = 39; parsed.engineVersion = 40;
   }
   return validateWorld(parsed, immutable);
 }

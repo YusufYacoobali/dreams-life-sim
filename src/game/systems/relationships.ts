@@ -19,10 +19,12 @@ import { exchangeQuote } from './finance';
 import { settleBackground } from './npcBudget';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
+import { conversationContext, conversationTopicIds, conversationTopics } from './conversations';
+import { writeConversation } from '../content/conversationWriting';
 
 export const socialCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('meet-people'), purpose: z.enum(['friend', 'dating']), gender: z.enum(['any', ...genders]) }),
-  z.object({ type: z.literal('interact'), personId: z.string(), action: z.enum(['talk', 'compliment', 'spend-time', 'argue', 'apologise']) }),
+  z.object({ type: z.literal('interact'), personId: z.string(), action: z.enum(['talk', 'compliment', 'spend-time', 'argue', 'apologise']), topic: z.enum(conversationTopicIds).optional() }).refine(command => command.topic === undefined || command.action === 'talk', 'Only a conversation can have a topic'),
   z.object({ type: z.literal('gift-money'), personId: z.string(), amount: z.bigint().positive() }),
   z.object({ type: z.literal('ask-date'), personId: z.string() }),
   z.object({ type: z.literal('propose'), personId: z.string(), ringId: z.string().optional() }),
@@ -113,6 +115,7 @@ function bond(relation: Relationship, delta: number): RuntimeEffectRow {
   return { id: 'bond', label: 'Relationship', value: (actual >= 0 ? '+' : '') + actual + '%', tone: actual >= 0 ? 'positive' : 'negative' };
 }
 export function resolveSocial(world: World, command: SocialCommand) {
+  if ('topic' in command && command.topic !== undefined && (command.type !== 'interact' || command.action !== 'talk')) throw new IneligibleAction('Only a conversation can have a topic');
   const player = active(world); const age = ageOn(player, world.date);
   if (command.type === 'meet-people') {
     if (age < (command.purpose === 'dating' ? rules[player.country].adultAge : 6)) throw new IneligibleAction(command.purpose === 'dating' ? 'Dating is available to adults' : 'Meet new people from age six');
@@ -154,6 +157,22 @@ export function resolveSocial(world: World, command: SocialCommand) {
     if (command.action === 'spend-time' && (isConfined(world, player) || isConfined(world, target)) && (player.country !== target.country || player.city !== target.city || isConfined(world, player) && isConfined(world, target))) throw new IneligibleAction('A visit requires an available person in the same city');
     if (age < 3) throw new IneligibleAction('Personal interactions unlock from age three');
     if (command.action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:'))) throw new IneligibleAction('There is no unresolved argument to apologise for');
+    if (command.topic !== undefined) {
+      const option = conversationTopics(world, target.id).find(row => row.id === command.topic);
+      if (!option || option.disabledReason) throw new IneligibleAction(option?.disabledReason ?? 'Choose an available conversation topic');
+      const context = conversationContext(world, target.id)!;
+      counter(world, target.id, 'talk'); relation.lastInteractionYear = world.date.year;
+      const chance = Math.min(90, command.topic === 'feelings' ? 45 + Math.floor(relation.trust / 2) : 70 + Math.floor(relation.trust / 5));
+      const open = draw(world, 'outcomes', 1, 100) <= chance;
+      const writing = writeConversation(context, command.topic, open ? 'open' : 'reserved');
+      const beforeTrust = relation.trust;
+      relation.trust = bounded(relation.trust + (open ? command.topic === 'family' || command.topic === 'feelings' ? 3 : 2 : 0));
+      const effects: RuntimeEffectRow[] = [bond(relation, open ? command.topic === 'interests' ? 6 : 4 : 1)];
+      effects.push({ id: 'trust', label: 'Trust', value: '+' + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : 'neutral' });
+      if (open) effects.push(...statChanges(player, command.topic === 'school' ? { smarts: 1, happiness: 1 } : command.topic === 'work' ? { stress: -2 } : command.topic === 'feelings' ? { stress: -3 } : { happiness: command.topic === 'interests' ? 3 : 2 }));
+      relation.memories.push('talk:' + world.date.year);
+      fact(world, writing.journal, 'relationships'); result(world, writing.title, writing.body, 'conversation', effects); return;
+    }
     counter(world, target.id, command.action); relation.lastInteractionYear = world.date.year;
     let body: string, journal: string, delta: number; const effects: RuntimeEffectRow[] = [];
     if (command.action === 'talk') { delta = draw(world, 'outcomes', 3, 6); relation.trust = bounded(relation.trust + 2); body = target.firstName + ' put their phone away. What started as a quick chat turned into a discussion about food.'; journal = 'I had a proper conversation with ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 2 })); }
