@@ -240,6 +240,58 @@ test('the actual final attended trade month is recorded once, while later comple
   expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });
 
+test('ordinary enrolment reaches a first-month campus planning break, survives a cold codec and resumes the same year after introductions', () => {
+  // Existing fixed graduate continuation: normal resignation, one application
+  // and real tuition. No manual initial month, age/funds/stat/RNG substitution.
+  const initial = startStudy(), original = encodeWorld(initial), actorId = initial.activePersonId;
+  const course = initial.studyCourses.find(item => item.personId === actorId && item.status === 'active')!, noticeId = 'campus-ready:' + course.id;
+  expect(course.months).toBe(0); expect(campusCourse(initial)).toBeUndefined();
+  const target = monthFrom(initial.date, 12, initial.calendarAnchorDay), firstMonth = monthFrom(initial.date, 1, initial.calendarAnchorDay);
+  let world = resolveCommand(initial, { type: 'advance' }, true);
+  expect(world.date).toEqual(firstMonth); expect(world.annual).toMatchObject({ monthsProcessed: 1, stage: 'months', pausedForPlanning: true, targetDate: target });
+  expect(world.studyCourses.find(item => item.id === course.id)!.months).toBe(1);
+  const notices = [world.pending, ...world.deferred.map(item => item.event)].filter(item => item?.id === noticeId);
+  expect(notices).toHaveLength(1); expect(notices[0]).toMatchObject({ kind: 'result', title: 'Your first course month' });
+  expect(world.campusCommunities).toEqual([]);
+  // The rest of processMonth still ran before stopping for planning.
+  expect(world.ledger.filter(item => item.personId === actorId && item.category === 'living')).toHaveLength(initial.ledger.filter(item => item.personId === actorId && item.category === 'living').length + 1);
+  const saved = encodeWorld(world), cold = unpackCheckpoint(packCheckpoint(world));
+  expect(encodeWorld(cold)).toBe(saved); world = cold;
+  let seenNotices = 0, commands = 0;
+  const ordinary = (current: World): GameCommand => {
+    const pending = current.pending;
+    if (pending?.kind === 'decision') {
+      const choice = pending.choices.find(item => !choiceUnavailable(current, item));
+      if (!choice) throw new Error('No available ordinary choice at the campus planning break');
+      return { type: 'choose', eventId: pending.id, choiceId: choice.id };
+    }
+    if (pending) { if (pending.id === noticeId) seenNotices++; return { type: 'acknowledge', resultId: pending.id }; }
+    return { type: 'resume' };
+  };
+  while (world.pending) {
+    if (++commands > 120) throw new Error('First-month decisions did not drain');
+    world = resolveCommand(world, ordinary(world), true);
+    expect(world.date).toEqual(firstMonth);
+  }
+  expect(seenNotices).toBe(1); expect(world.annual?.pausedForPlanning).toBe(true); expect(campusCourse(world)?.id).toBe(course.id);
+  expect(() => resolveCommand(world, { type: 'acknowledge', resultId: noticeId }, true)).toThrow();
+  world = act(world, { type: 'meet-campus', courseId: course.id });
+  const community = currentCampus(world)!;
+  world = act(world, { type: 'campus-club', communityId: community.id, club: 'science' });
+  expect(world.date).toEqual(firstMonth); expect(currentCampus(world)!.periods).toEqual([]);
+  world = resolveCommand(world, { type: 'resume' }, true);
+  while (world.pending || world.annual) {
+    if (++commands > 120) throw new Error('The remaining actual campus year did not finish');
+    world = resolveCommand(world, ordinary(world), true);
+  }
+  expect(world.date).toEqual(target); expect(world.pending).toBeNull(); expect(world.annual).toBeNull(); expect(seenNotices).toBe(1);
+  const completed = world.campusCommunities.find(item => item.id === community.id)!;
+  expect(completed.students).toEqual(community.students); expect(completed.periods.length).toBeGreaterThan(0); expect(completed.periods.length).toBeLessThanOrEqual(11);
+  expect(completed.periods.every(item => item.studyMonth > 1 && item.club === 'science')).toBe(true);
+  for (const student of completed.students) expect(world.studyCourses.find(item => item.id === student.courseId)!.months).toBeGreaterThan(0);
+  expect(decodeWorld(encodeWorld(world))).toEqual(world); expect(unpackCheckpoint(packCheckpoint(world))).toEqual(world); expect(encodeWorld(initial)).toBe(original);
+});
+
 test('one actual engine year after paid introductions persists campus attendance and both peers’ real study and living finances', () => {
   const ready = introduced();
   const initial = act(ready, { type: 'campus-club', communityId: currentCampus(ready)!.id, club: 'science' });

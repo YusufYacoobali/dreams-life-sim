@@ -11,6 +11,7 @@ import { connectPerson } from './relationshipContacts';
 import { relationFor } from './relationshipQueries';
 import { campusClubs, type CampusClub, type CampusCommand, type CampusCommunity } from './campusSchemas';
 import { storyContactNames } from '../storyNames';
+import { offerPending } from '../pendingQueue';
 export { campusCommandSchema } from './campusSchemas';
 export type { CampusCommand } from './campusSchemas';
 
@@ -93,6 +94,21 @@ export function resolveCampus(world: World, command: CampusCommand) {
   currentCampus(world)!.club = command.club;
   fact(world, command.club === 'none' ? 'I left my campus club.' : 'I chose the ' + command.club + ' club alongside my course.', 'campus');
   result(world, 'Campus routine updated', command.club === 'none' ? 'Your learned skills stay yours. No further club energy is spent.' : 'During each newly attended course month, the club develops up to one relevant skill point and uses up to two energy. Paused or interrupted study earns no club progress.', 'education');
+}
+
+/** A real first attended month opens planning once; loading/browsing never does. */
+export function campusPlanningOpportunity(world: World, beginningCourseId?: string) {
+  const frame = world.annual;
+  if (!beginningCourseId || frame?.stage !== 'months' || frame.pausedForPlanning) return;
+  const course = campusCourse(world);
+  if (!course || course.id !== beginningCourseId || course.months !== 1 || world.campusCommunities.some(item => item.courseId === course.id && item.personId === world.activePersonId)) return;
+  const id = 'campus-ready:' + course.id;
+  if (world.pending?.id === id || world.deferred.some(item => item.event.id === id)) return;
+  frame.pausedForPlanning = true;
+  offerPending(world, { kind: 'result', id, title: 'Your first course month',
+    body: 'You have attended the first month of your ' + course.field + ' course at ' + course.school + '. Review Education → Campus to meet course peers and choose a club while your course is active and you are available. The rest of this year is paused so you can make your plans.',
+    illustration: 'education', effects: [{ id: 'attendance', label: 'Course attendance', value: '1 month', tone: 'neutral' }],
+  }, 15);
 }
 
 /** Only newly introduced peers receive this tuition policy. Existing NPCs are untouched. */

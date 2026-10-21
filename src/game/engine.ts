@@ -1,6 +1,6 @@
 import { noteImportantDecision, optionalSceneChance } from './annualPacing';
 import { campusCommandSchema, type CampusCommand } from './systems/campusSchemas';
-import { campusMonth, prepareCampusTuition, resolveCampus } from './systems/campus';
+import { campusMonth, campusPlanningOpportunity, prepareCampusTuition, resolveCampus } from './systems/campus';
 import { npcMovesYear, settleAnnualTaxesForNpcMoves } from './systems/npcMoves';
 import { endStudyCourse, refreshStudyCourses } from './systems/studyCourses';
 import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
@@ -126,6 +126,9 @@ export function recordDeath(world: World, personId: string, cause: string) {
 
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
+  const student = world.people[world.activePersonId];
+  const firstCampusCourseId = student.education.months === 0 && ['trade', 'university', 'graduate'].includes(student.education.stage)
+    ? world.studyCourses.find(item => item.personId === student.id && item.origin === 'enrolment' && item.status === 'active' && item.months === 0)?.id : undefined;
   refreshTeenRelationships(world);
   universityAdmissionsMonth(world);
   refreshScholarships(world);
@@ -176,6 +179,7 @@ function processMonth(world: World) {
   }
   travelMonth(world);
   storyMonth(world);
+  campusPlanningOpportunity(world, firstCampusCourseId);
 }
 
 function finishYear(world: World) {
