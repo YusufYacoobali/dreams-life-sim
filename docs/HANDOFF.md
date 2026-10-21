@@ -1,6 +1,7 @@
 # Continue Dreams: Life Simulator
 
 Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_PLAN.md).
+The latest selection-dialog fix and active Android build are in [current product work](PROGRESS.md#current-product-work). The detailed `83adaea` UI checkpoint below predates that fix. Reduce repetitive evidence packaging; prioritise game-facing work and retain essential quality gates.
 Continue `YusufYacoobali/dreams-life-sim`, branch `work`, through the complete
 production plan. Priorities: smooth buttons, startup/onboarding and early gameplay.
 All27 supplied references are reconciled; reopen the relevant reference for each

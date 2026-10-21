@@ -2,6 +2,16 @@
 
 Updated 21 October 2026.
 
+## Current product work
+
+The latest UI source is `6aa96cba9a19e00e673f0aa838c8a437560db10d`. Selection dialogs now keep their confirmation and cancellation controls visible while long option lists scroll. Actual onboarding exposed the country picker's hidden confirmation; the fix preserves explicit selection, cancellation, disabled reasons and saving behavior. Its 22 focused tests, strict application/test types and fresh Android/iOS Hermes exports pass. Corrected normal/130% device layout remains pending.
+
+The current-source three-generation gameplay run passes: three natural deaths, two existing-child handovers, 171 years five months, and exact retained checkpoints/receipts. Its repository reloads use the same open SQLite connection. Separately, Nia's actual application, interview answer and acknowledgement pass three process-stop reopens and exact command/save comparisons on the preceding `83adaea` UI source. Original other lives remain intact.
+
+A private x86_64 Android release-profile build started at 11:27 UTC on the corrected UI. It uses the generated development signing key for internal testing; no successful APK or distribution build is claimed yet. A separate agent is continuing ordinary early play while integration/build work proceeds.
+
+User priority: reduce repetitive verification and evidence packaging. Focus on game-facing fixes, responsiveness and the standalone app; retain targeted tests and essential automatic-save/resume checks. Earlier detailed checkpoint records below keep their original source and observation scope.
+
 ## Goal and authorisation
 
 Build the complete production-quality game described in the [master specification](planning/source-specification.md) and [implementation plan](planning/MASTER_PLAN.md), not only the first playable life. The user approves the overall direction, with a specific prerequisite: reconcile all supplied design screenshots first.
