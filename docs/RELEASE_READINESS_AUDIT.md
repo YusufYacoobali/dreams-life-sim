@@ -1,163 +1,114 @@
 # Release-readiness audit
 
-Recorded 20 October 2026 against `e41a2db59149f4b6e6388f84044a339eca6d2467`:
-World 31 / engine 32 / content 8 / database reader 11 / checkpoint v4.
-This is a source/evidence audit. It does not establish a release candidate or
-replace the coordinator's checks after integrating concurrent branches.
+Updated 21 October 2026 from main `1c9e4eaf160a9c9a38befdbf4f34fbe79d4865f9`.
+Application source matches frozen combined UI source
+`83adaea6f92523d04a27df2e77b11e0a8b14ef1d`: World38 / engine39 / content13 /
+reader18 / checkpointv4. This is release preparation, not a signed-release
+approval or a new gameplay completion percentage.
 
-The game has substantial connected gameplay and scoped native acceptance.
-Remaining release work includes native verification of configured build identity
-and original launcher branding, release-device acceptance and distribution preparation. Those tasks
-are distinct from missing gameplay and from the user's parked archive/storage
-work. Current overall and feature estimates stay in [OPENING_PLAN.md](OPENING_PLAN.md).
+Current implementation has 265 situations / 795 choices. Gate results belong to
+their exact producer; consult [PROGRESS](PROGRESS.md),
+[the opening plan](OPENING_PLAN.md) and [current regression evidence](verification/final-regression-20261021.json).
+Additional import/export/sharing, file/history tools and storage breadth remain
+parked. Reliable automatic saving and exact resume remain required.
 
-## Evidence and limits
+## Current evidence and acceptance boundary
 
-| Area | Observed status and evidence | Remaining acceptance |
+| Area | Evidence available | Remaining release acceptance |
 | --- | --- | --- |
-| Regression and types | The recorded hobby milestone passes 1,793 tests / 114 suites, strict app/test types and 133 UI/state/progression checks; [source-pinned record](verification/hobby-community-events-20261020.json). This audit did not rerun them. | Run appropriate gates against the final integrated source; preserve original fixtures and failed-run diagnostics. |
-| Native bundles | Fresh Android and iOS Hermes exports passed for the recorded source. | Export success does not establish an installable, signed application. |
-| Android interaction | Actual Android 24 software-emulator / official Expo Go checks include opening, keyboard/130% text, callbacks, purchase/finance and exact saved/cold results; consult each [verification record](verification/) for its specific scope. | Current release build, compact/large phones and supported tablets, real hardware, accessibility services, background/foreground and process interruption. |
-| iOS | Linux Hermes export evidence exists. | macOS native build/simulator and real-device interaction remain unrun; no macOS runner/device was available to this audit. |
-| Automatic resume | Recorded SQLite rollback/retry, exact current/backup/history and native cold-result checks pass within their stated scenarios. | Continue final-build interruptions at annual stages, pending decisions/results and realistic storage failures. No additional archive UI is required by the current user scope. |
-| Life/content breadth | Minimum 250 situations, scoped current 120-seed annual policy and a separate 12-country natural hobby-event policy are recorded. | Editorial approval, balance, varied choices, integrated successful/criminal/famous lives and replayability remain independent gates. The historical 1,000-seed run is not a current-source 1,000-seed pass. |
-| Performance | Scoped cloud timings and warm zero-unpack checks exist. | Named release devices, physical p95, restore time, memory and smooth scrolling; software-emulator observation is not physical timing. |
-| Country behavior | Twelve country packs and nine currencies are implemented with extensive mathematical/gameplay checks. | Country rules are explicitly authored approximations in [COUNTRY_RULES.md](COUNTRY_RULES.md); consistency tests do not verify national source accuracy. |
+| Gameplay/types | Source-pinned `33b6a5f` regression passes 2,686 tests / 211 suites; strict app/all-test types pass. Later two UI layout fixes preserve every game/persistence file. This audit ran no game tests or overlapping author-count aggregation. | Coordinator publishes current scenario/editorial/annual/session outcomes with exact source bridges. A successful policy exit does not establish every goal/context. |
+| Bundles | Recorded Android/iOS Hermes exports exist. Actual corrected Android development manifest/map proof matches 334 runtime files against 703 source pins. | Neither kind of map establishes an APK/AAB/IPA, merged release manifest or installed standalone app. |
+| Android interaction | Scoped API 24 software-emulator/Expo Go opening, exact saved/cold results and large-text checks exist. Coordinator reports current reader 17→18 and corrected 130% read-only checks. | Current interview/normal-text/session work is coordinator-owned and still in progress at this audit boundary. Release-build interruptions, supported sizes/tablets and physical-device acceptance remain separate. |
+| Native project | Current offline Android prebuild actually exits0 from the installed SDK 57 local template, without installation. Correct identity/launcher resources are inspected below. | Native dependency resolution, compilation, release signing, merged resources/permissions and installed release acceptance remain unrun. |
+| iOS | Linux Hermes exports and source bundle ID/build number exist. | No macOS/Xcode build, simulator or physical iOS acceptance occurred. Android generation does not establish iOS icons, entitlements, privacy manifests or signing. |
+| Save/performance | Recorded SQLite rollback/retry, exact histories/backups/cold results and 70-sample warm zero-unpack diagnostics retain their own scope. | Named physical-device p95, cold restore, memory and smooth release-build scrolling remain unrun. Node/software-emulator timings are not physical p95. |
+| Accessibility/audio/offline | Source has descriptive controls, motion preferences and optional local feedback. Generated main manifest omits microphone recording permission. | TalkBack/VoiceOver speech/focus, real-device haptics/audio/silent-mode behavior and standalone airplane-mode play/save/force-stop/resume remain unrun. |
 
-## Source and release-configuration status
+The coordinator owns ongoing scenario/session review and expanded annual
+aggregation. Read their subsequent actual records rather than infer results
+from this document. Standalone/iOS/physical gates remain open independently.
 
-1. **Build identity is now configured in source.** [app.json](../app.json)
-   declares `com.yusufyacoobali.dreamslifesim` for Android/iOS, build numbers `1`,
-   display name Dreams Life Simulator and public version `1.0.0`. Offline Expo
-   config/plugin resolution and config types pass. There is no `eas.json` or
-   checked-in native project. EAS is optional; a documented local build path is
-   sufficient. Native generation, signing and the intended distribution method
-   still need acceptance. No credential or store/account action was performed.
-2. **Original launcher branding is prepared.** A generated opaque navy/gold
-   life-path/sun/cloud image now replaces the configured starter icon and Android
-   adaptive foreground. The starter files remain intact. The source composition
-   was visually accepted; native masks/sizes, launch appearance and installed
-   release builds remain unrun. No fake monochrome/transparency layer is used.
-   [Identity, artwork provenance and exact verification](APP_IDENTITY_AND_BRANDING.md)
-   record the source resolution and tool edit. In-game art and store artwork
-   retain their own acceptance scopes.
-3. **Hosted regression automation was absent.** This milestone adds
-   [quality.yml](../.github/workflows/quality.yml): Node 24, locked `npm ci`, strict
-   app/test types and in-band Jest, with a 45-minute job timeout and read-only
-   repository permission. It runs on `work`/`main` pushes, pull requests and
-   manual dispatch. Checkout does not retain credentials. It contains no
-   deployment, signing, native/Gradle build or secret requirement. Its first
-   hosted result and the explicit test-timeout correction are recorded below.
-   Branch protection and required-check configuration remain unverified.
-4. **Top-level documentation was stale.** The README claimed 70 situations and
-   that Android opening interactions were prevented by old emulator hangs.
-   It now links current progress/acceptance and accurately distinguishes scoped
-   Expo Go evidence from remaining standalone, physical and iOS checks. Historic
-   Phase 0 documents still describe their original planning state; current
-   implementation evidence is authoritative in [PROGRESS.md](PROGRESS.md).
+## Actual offline Android generation
 
-## First hosted CI result and timeout correction
+The isolated project is
+`/workspace/dreams-worktrees/native-prebuild-current/android`, from exact `83adaea`.
+It is ignored, unbuilt and has not been merged or distributed.
+[Exact command, exit and inspection](verification/native-prebuild-current-20261021/README.md)
+record the local template, source/lock hashes,757-package installation and actual
+start/closure. All 703 source files match before and after. Prebuild changed only
+the Android/iOS package convenience scripts; the generated version was retained
+as evidence and the original bytes restored. The tracked isolated tree is clean.
+No install, Gradle invocation, artifact request, ADB or production signing was
+requested.
 
-The first [Quality run](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39480837966)
-was triggered by a `work` push of
-`e85fc78e0f91606170e75835806b3537a7e16c7a`. It completed with **failure** at
-19:26:30 UTC on 20 October 2026. Checkout, Node setup, locked `npm ci` and strict
-app/test types passed. Logs confirm Node **24.21.0**, npm **11.19.0**, and token
-permissions `Contents: read` / `Metadata: read`.
+| Generated source | Actual finding | Scope/action |
+| --- | --- | --- |
+| Identity | Dreams Life Simulator; application ID/namespace `com.yusufyacoobali.dreamslifesim`; version 1.0.0 / code 1; portrait launcher; `dreams-life` deep link. | Source generation passes; installed identity/deep-link recovery remain unrun. iOS source build number remains 1. |
+| Toolchain | Expo 57.0.30 / RN 0.86.3; wrapper Gradle 9.3.1; source catalogue AGP 8.12.0, compile/target 36, minimum 24, build-tools 36.0.0 and NDK 27.1.12297006. Hermes/Fabric/edge-to-edge enabled. | Inspected defaults, not successful Gradle resolution. JDK 21 reports successfully; no Gradle task ran. |
+| Launcher |20 generated PNG/WebP files include 48–192px standard/round icons, 108–432px adaptive foregrounds and 288–1152px splash resources. Adaptive background is `#071D49`. The 192px resource shows the original life-path/sun/cloud mark. | Generated-source review only; installed masks, launch appearance, physical small-icon readability and iOS 1024px output remain unrun. [Original provenance](APP_IDENTITY_AND_BRANDING.md) stays authoritative. |
+| Fonts | No TTF/OTF copied into the generated Android source tree at this stage. Ionicons is a local Metro font dependency. | This is not a demonstrated missing-font defect: final native/Metro asset packaging has not run. Inspect actual release resources/notices/rendered glyphs later. |
+| Audio | Main manifest has `MODIFY_AUDIO_SETTINGS`/`VIBRATE`; no `RECORD_AUDIO`. Source disables microphone permission and background recording/playback. | Final dependency-merged manifest and hardware behavior remain unverified. |
+| Other permissions | Main source declares `INTERNET`, `SYSTEM_ALERT_WINDOW`, and read/write external storage limited to API 32 and below. Cleartext is explicitly enabled in debug/debugOptimized manifests. | Source declarations are not merged runtime permissions or transmission evidence. No permission configuration was changed. |
+| Android OS backup | `android:allowBackup="true"`; no explicit backup/data-extraction rules generated. | Device/platform settings may back up SQLite saved-life data. Draft privacy text acknowledges this; no in-game cloud-sync service or backup-policy change is claimed. |
+| Signing/profile | Generated release build type uses template debug signing; release minification defaults off. Development key material was excluded from copied evidence. | **Not distribution signed.** The owner must supply release signing through its chosen secure process before distribution. No production credential/account was created. |
 
-Jest completed 119 suites / 1,825 tests in 1,044.034 seconds: 118 suites and
-1,824 tests passed. The sole failing case was
-`tests/ui/education-choice-save-flow.test.tsx:84`, “university remains open after
-a business degree and keeps exact individual subject reasons”, which exceeded
-Jest's default **5,000 ms** test timeout. No assertion failure was reported.
+## External block and unrun matrix
 
-The CI command now explicitly uses
-`npm test -- --ci --testTimeout=30000`, matching the coordinator's 30-second
-infrastructure allowance for connected UI/SQLite tests. Every assertion remains
-in place. This timeout is not an action-latency budget and does not relax the
-separate physical performance gates. The workflow parse, exact command and
-read-only permissions were validated locally; no full regression was repeated
-for the command-only correction. No new hosted pass is claimed until the next
-integrated push's run completes. This audit made only read requests and did not
-rerun or change any remote job or repository setting.
+[Current safe observation](verification/native-prebuild-current-20261021/environment-status-safe.json):
+managed spec 54 / observed 54, observations current, running, restricted networking
+**enforced**, `package_managers`, zero custom hosts and 144 effective hosts.
+IDs, credential bindings and proxy details are omitted. `repo.reactnative.dev`
+is absent. No request to that host, unchanged build retry, alternate repository,
+mirror, proxy, CI build or policy change occurred.
 
-## Offline, assets and failure handling
+| Dependency/gate | Exact current evidence | Next action |
+| --- | --- | --- |
+| RN Android AAR | Current source requires `com.facebook.react:react-android:0.86.3`; HermesV1 defaults to `com.facebook.hermes:hermes-android:250829098.0.17`. Earlier custom-build access to `repo.reactnative.dev` was automatically rejected. | The denied host remains blocked. Current Gradle/AAR availability is unverified: default resolver source mentions Maven Central/Google, so do not invent a new failed request or label the historic denial a current 0.86.3 resolution. Coordinate legitimate toolchain/dependency access before a build; no bypass/unchanged retry. |
+| SDK platform | `platforms;android-36` absent in the observed SDK. Existing official index lists standard revision 2, 65,878,410-byte archive at permitted `dl.google.com`. | Package plan ready; installation waits for root's disk-space assessment. No SDK download/install occurred here. Preserve active API 24/AVD data and all raw captures/logs. |
+| NDK/CMake | NDK 27.1.12297006 absent; cached Linux archive 663,976,775 bytes. Generated app/RN plugin does not pin CMake; cached 3.22.1 is only a candidate, 22,308,647 bytes. | Hold large installation until extraction/build space fits. Actual AGP CMake resolution is unrun. [Exact package/host/size plan](verification/native-prebuild-current-20261021/sdk-preparation.json). |
+| Build tools/JDK | Build-tools36.0.0 present; JDK 21 available. | Presence is not build acceptance. No emulator image, SDK package or live process changed. |
+| Standalone Android | Native source generation passes; no APK/AAB or merged release artifact from this work. | After legitimate dependencies and sufficient space, compile/inspect a candidate, then test installed offline/resume/permissions/branding. Secure signing and upload are separate owner-controlled steps. |
+| iOS | Linux environment; macOS/Xcode/device unavailable here. | Genuine native build/simulator and real-device pass remain unrun. |
+| Physical/a11y/audio | No physical release-device, TalkBack/VoiceOver, hardware feedback or standalone airplane-mode pass. | Record real device/OS/build/outcomes; source searches/Expo Go cannot substitute. |
 
-Source searches of `app/` and `src/` found no `fetch`, `XMLHttpRequest`, HTTP URL
-asset source, remote font loading, analytics or tracking call. The runtime art
-components use static `require` references to locally bundled PNGs. The 13 unique
-PNG files directly referenced by those source calls total **23,090,937 bytes**
-(about 22.02 MiB) on this source snapshot. This measures source file bytes only;
-it excludes native/vector-font/package overhead, decoded image memory and final
-APK/IPA size. It does not establish the provisional 30 MB installed art budget.
+SDK package facts use an existing 19 October official repository index, not a
+newly fetched repository or successful installation. Permitted SDK preparation
+is separate from the unchanged denied artifact-host boundary.
 
-Generated-art provenance is documented in
-[assets/generated/README.md](../assets/generated/README.md). The root MIT license
-retains Expo's starter notice. A distributable third-party notice inventory and
-asset-rights/provenance review still need to be checked against the shipped
-dependency graph and final branding. This audit did not replace the license or
-claim legal clearance.
+## Offline source, notices and distribution draft
 
-The application has no custom exported Expo Router `ErrorBoundary` or not-found
-route; it uses the framework's defaults. Domain/storage failures are handled by
-the stores and rendered action/bootstrap errors. This absence alone is not a
-verified crash defect. Final-build acceptance should deliberately exercise an
-unexpected rendering failure and invalid deep link, then verify the default
-recovery behavior preserves the saved life and offers a usable route back.
-Do not replace existing atomic persistence or introduce broad catches that hide
-failed commands merely to pass a visual check.
+Current bounded `app/`/`src/` scan finds no `fetch`, XMLHttpRequest, HTTP URL,
+analytics/Firebase/Sentry identifier, privacy/support URL or mail link. This is
+application-source evidence, not a complete native SDK privacy/network audit.
+Thirteen statically required PNGs total 23,090,937 source bytes; the local tap cue
+is 2,028 bytes. Neither sum is an APK/IPA size or decoded-memory budget.
 
-A true **standalone airplane-mode** opening/play/save/force-stop/resume test is
-still needed. Source searches cannot establish SDK-level network behavior,
-merged native permissions, Android backup behavior, privacy manifests or store
-data-safety answers. Inspect those in actual generated release artifacts and
-prepare truthful privacy/support information before distribution.
+The [candidate notices](THIRD_PARTY_INVENTORY.md), artwork/font/audio provenance
+and original root Expo MIT notice remain intact. Compare with actual native
+AAR/Pod/resource graphs before distribution: npm metadata does not identify
+all shipped code or establish legal clearance.
 
-## Build/environment boundary
+[The unpublished local packet](RELEASE_PACKET_DRAFT.md) supplies listing and
+privacy/support drafts plus concrete handoff fields. The publisher still needs
+real support/privacy destinations, rating/data-safety answers, distribution/
+signing choices and final-artifact disclosures. No account, external message,
+credential, deployment or store action occurred. No legal/privacy conclusion or
+ready-to-submit claim is invented.
 
-The prior custom Android build could not obtain its required React Native AAR
-from `repo.reactnative.dev`; automatic approval review rejected that access.
-This audit made no request to that host, did not retry the build and did not use
-CI, another repository, proxy or downloaded replacement to bypass the decision.
-No iOS native toolchain was available. These are blocked/unrun native-build
-checks, not reasons to stop unrelated gameplay and local quality work.
+Unexpected-render failure/invalid-deep-link recovery are still final-build checks.
+Expo Router defaults are used; no custom ErrorBoundary is not itself a proven
+crash defect. Preserve authoritative saves and visible atomic-command failures.
 
-## Next release actions
+## Historical hosted CI and audit scope
 
-1. Integrate independent gameplay/UI streams and run the coordinator's relevant
-   regression, strict types, exports, source-pinned natural journeys and native
-   acceptance. Inspect the new hosted CI result after the safe push.
-2. Verify the configured original launcher/adaptive branding and stable
-   application/build identity through native generation; document a concrete
-   build/signing path without exposing secrets.
-3. Once native build dependencies and suitable devices are available, produce
-   release builds and execute offline/resume, permission/privacy, reference,
-   accessibility, interruption and physical-performance checks with named
-   devices/build revisions and captured discrepancies.
-4. Complete the existing scenario/content/balance plan, first-minute and
-   continuous-session reviews, and full lives. Preserve explicit failures,
-   blocked and unrun cases. Store metadata, mature-content rating, privacy and
-   support information, third-party notices and any publication remain later
-   distribution work; no submission has occurred.
+Initial [run39480837966](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39480837966)
+failed on one default 5-second connected-test timeout; CI explicitly uses 30 seconds
+without changing assertions. Later source-specific passes exist, including
+[C34](verification/hosted-ci-autonomy-20261020.json). The workflow remains
+read-only, Node 24, locked install, strict app/test types and Jest with a 45-minute
+job timeout. This audit did not poll/change/rerun CI or credit a current-main
+hosted result without an actual completed run.
 
-Local verification parsed the workflow as YAML, checked its events, read-only
-permissions, Node version, timeout and exact commands, confirmed package/lock
-dependency alignment, validated the new document links, and passed
-`git diff --check`. No Jest, export, Gradle, native or hosted CI run was performed
-for this documentation/workflow change.
-
-No completion percentage or quality gate was raised by this documentation/CI
-milestone. Additional import/export/sharing and history-storage work remain
-parked; reliable automatic saving and exact resume remain required.
-
-## Current C34 hosted confirmation
-
-Read-only GitHub connector observations on20 October confirm
-[Quality run39498326237](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39498326237)
-passed for exact pushed `0ea6177fa944b629ae349e965c5aae13b389b67d` at21:32:53UTC.
-Locked `npm ci`, strict application/test types, and all2,100tests/147suites passed;
-Jest took1,237.414seconds on Node24.22.0/npm11.19.1. The source remains
-World33/engine34/content9/reader13. [Raw job log and scope](verification/hosted-ci-autonomy-20261020.json).
-This supersedes earlier unrun-hosted status for that source only. Native builds,
-actual iOS, physical performance and forthcoming World34 integration retain
-separate acceptance requirements; no remote job was rerun or altered.
+Local work comprises offline prebuild, exact source/lock/generated-file checks,
+metadata/link/hash validation and `git diff --check`. No new game regression,
+annual/policy cohort, export, native interaction or denied build was run.

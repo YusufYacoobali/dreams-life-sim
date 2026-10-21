@@ -1,0 +1,21 @@
+{
+  "format": "dreams-current-release-environment-observation-v1",
+  "specRevision": "54",
+  "observedSpecRevision": "54",
+  "observationsCurrent": true,
+  "desiredPhase": "running",
+  "observedPhase": "running",
+  "network": {
+    "mode": "restricted",
+    "state": "enforced",
+    "presets": [
+      "package_managers"
+    ],
+    "customHostCount": 0,
+    "effectiveHostCount": 144,
+    "reactNativeArtifactHostPermitted": false,
+    "googleAndroidRepositoryHostPermitted": true
+  },
+  "source": "Actual cloud_environment.environment_status observation; IDs, credential bindings, proxy addresses, runtime variable names and outbound identities omitted.",
+  "scope": "No network request to the denied artifact host and no policy change."
+}

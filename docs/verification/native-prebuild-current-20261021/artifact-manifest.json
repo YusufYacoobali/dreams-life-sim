@@ -1,0 +1,141 @@
+{
+  "format": "dreams-current-native-prebuild-portable-inputs-v1",
+  "scope": "Actual offline generated-source preparation, selected exact raw source/log bytes and bounded inspection only; no release/native build/device acceptance.",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 2805,
+      "sha256": "4b14193960b79a3fbd0372605c1f8e1c5f635bdc7bf5032d3653bd78612f3423"
+    },
+    {
+      "file": "android__app__src__debugOptimized__AndroidManifest.xml.txt",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "file": "android__app__src__debug__AndroidManifest.xml.txt",
+      "bytes": 374,
+      "sha256": "fb1795032c764d975376e1612ab7022058eca2268a45efbe731a47a5d3ac0f60"
+    },
+    {
+      "file": "android__app__src__main__AndroidManifest.xml.txt",
+      "bytes": 2427,
+      "sha256": "e7bf01e9a093d1e0b1c0a96d4357b7383f70d8e4fca3cfad304de7c3ea5cb0df"
+    },
+    {
+      "file": "android__app__src__main__res__mipmap-anydpi-v26__ic_launcher.xml.txt",
+      "bytes": 257,
+      "sha256": "03d70962a0beea2bb6ab1a838b015d90da6c33adb045ff85f7b198aca70df08d"
+    },
+    {
+      "file": "android__app__src__main__res__values__colors.xml.txt",
+      "bytes": 172,
+      "sha256": "823bb0e4331391e7b6e58d5e9afc8f5e64294f131c9bbdfc975a48f60b9cdbc0"
+    },
+    {
+      "file": "android__app__src__main__res__values__strings.xml.txt",
+      "bytes": 174,
+      "sha256": "112c6739423407860af131a1d33306de998514f0b2831f39bfa6d98fd8d7bd87"
+    },
+    {
+      "file": "android__app__src__main__res__values__styles.xml.txt",
+      "bytes": 592,
+      "sha256": "e40414258372e05336fde31cd6a59ba286f0735dcc548fec42180b59af12b0f0"
+    },
+    {
+      "file": "android__build.gradle.txt",
+      "bytes": 556,
+      "sha256": "bdb916d3fe7085c9e9f3bb45bd5eacb97f5d2c5a2b2af965642f7d904739ca68"
+    },
+    {
+      "file": "android__gradle.properties.txt",
+      "bytes": 2567,
+      "sha256": "d02b52da10bf3abb24279fd102df47694b8130a6b7fe6110cc47a9476ac8673c"
+    },
+    {
+      "file": "android__gradle__wrapper__gradle-wrapper.properties.txt",
+      "bytes": 252,
+      "sha256": "a180163249c7252412ddaee1c7adcf59f6494b1183136f690fbd9a3b8aaed00e"
+    },
+    {
+      "file": "android__settings.gradle.txt",
+      "bytes": 1274,
+      "sha256": "41899038ac0f8569e07ecb260b77fe68f44710e153283cfcdece0eae9c0def54"
+    },
+    {
+      "file": "closed-at.txt",
+      "bytes": 21,
+      "sha256": "64bcaaafde03b2aa3572fa6b640b3cbe7c9012faa760b74575635c340f660e40"
+    },
+    {
+      "file": "environment-status-safe.json",
+      "bytes": 741,
+      "sha256": "6f87615ce46175395fc98313056b243d91506e903c927253b6531a6da291c6bd"
+    },
+    {
+      "file": "head-before.txt",
+      "bytes": 41,
+      "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+    },
+    {
+      "file": "ignored-native-path.txt",
+      "bytes": 8,
+      "sha256": "6b36dc2dd025111ba65c469fbef24ac432ba2aab39dd1e949cfedcf22c31cfe6"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 2052,
+      "sha256": "967cb1954c211811df1b629685acc967ed3bb6ec88f2dc7af16ea441139bdf28"
+    },
+    {
+      "file": "inspect-current-native-prebuild.py.txt",
+      "bytes": 7380,
+      "sha256": "4eafe4041af064d680b880865120bd405fab97c306f1d45aaf8b78cb9b706775"
+    },
+    {
+      "file": "inspection.json",
+      "bytes": 20370,
+      "sha256": "20e6f3cab1b66b5f176de7de8e382d7682400b8f1b6a4dc468ad5a89ea4e806e"
+    },
+    {
+      "file": "package-after-prebuild.json",
+      "bytes": 1526,
+      "sha256": "f917f2cfbdca0c465ae0945834c54c77bd4a70889e937b9112d7aa08697f4f97"
+    },
+    {
+      "file": "package-before.json",
+      "bytes": 1534,
+      "sha256": "5871768c43afd064038cb460fb9ee4c6b0ba9a8a219d4b1c4b617fb439ee88a8"
+    },
+    {
+      "file": "prebuild.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "file": "prebuild.out",
+      "bytes": 159,
+      "sha256": "2c7ed98130fe237bb437ecb89e0494653fece6501df1d4f8705f9b24a9db50ee"
+    },
+    {
+      "file": "sdk-preparation.json",
+      "bytes": 3870,
+      "sha256": "c4b1a5736aa057422c5784c161d11feb4595eb4c03c51cc6e4cfb3ce57c27435"
+    },
+    {
+      "file": "started-at.txt",
+      "bytes": 21,
+      "sha256": "3fff68fd871261e042f35d7bf1b329a8ea1f60c477e2ba3e2ac3b81a430c4261"
+    },
+    {
+      "file": "status-after.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "status-before.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
