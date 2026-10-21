@@ -27,6 +27,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Asset from '../../app/(game)/asset/[id]';
 import Bank from '../../app/(game)/bank';
 import Investment from '../../app/(game)/investment/[id]';
+import { EventModal } from '../../src/ui/EventModal';
 
 type Kind = 'listing' | 'refinance' | 'sale' | 'borrow' | 'repay' | 'exchange' | 'buy' | 'sell';
 const kinds: Kind[] = ['listing', 'refinance', 'sale', 'borrow', 'repay', 'exchange', 'buy', 'sell'];
@@ -99,9 +100,15 @@ async function openReview(kind: Kind): Promise<Review> {
     return { command: { type: 'sell-asset', assetId: asset.id, quotedPrice: quote.price }, title: 'Accept this sale offer?', confirm: 'Confirm', visibleAmounts: [money(quote.proceeds, asset.currency)] };
   }
   if (['borrow', 'repay', 'exchange'].includes(kind)) {
-    const amount = 10017n, value = decimal(amount, account.currency); edit('Amount in ' + account.currency, value);
+    const amount = 10017n, value = decimal(amount, account.currency);
+    if (kind === 'repay') {
+      const debt = current.liabilities.find(item => item.ownerId === current.activePersonId && item.kind === 'personal' && item.principal > 0n)!, label = 'Repayment amount in ' + debt.currency;
+      if (!screen.queryByLabelText(label)) await press(/^Personal debt\./);
+      edit(label, value); await press('Review Repayment');
+      return { command: { type: 'repay', liabilityId: debt.id, amount }, title: 'Make this repayment?', confirm: 'Repay', visibleAmounts: [money(amount)], draft: [label, value] };
+    }
+    edit('Amount in ' + account.currency, value);
     if (kind === 'borrow') { await press('Review Personal Loan'); return { command: { type: 'borrow', amount }, title: 'Take out this loan?', confirm: 'Accept Loan', visibleAmounts: [money(amount)], draft: ['Amount in ' + account.currency, value] }; }
-    if (kind === 'repay') { const debt = current.liabilities.find(item => item.ownerId === current.activePersonId && item.kind === 'personal' && item.principal > 0n)!; await press(/^Personal debt\./); return { command: { type: 'repay', liabilityId: debt.id, amount }, title: 'Make this repayment?', confirm: 'Repay', visibleAmounts: [money(amount)], draft: ['Amount in ' + account.currency, value] }; }
     const to = account.currency === 'USD' ? 'EUR' : 'USD', quote = exchangeQuote(current, amount, account.currency, to); await press('Review Exchange');
     return { command: { type: 'exchange', from: account.currency, to, amount, quotedNet: quote.net }, title: 'Exchange currencies?', confirm: 'Exchange', visibleAmounts: [money(amount), money(quote.fee, to), money(quote.net, to)], draft: ['Amount in ' + account.currency, value] };
   }
@@ -118,7 +125,10 @@ test.each(kinds)('%s preview/cancel saves nothing; failed commit retains exact t
   const context = await setup(prepare(kind), kind);
   try {
     const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    let view = render(frame(kind)); let review = await openReview(kind); expectReview(review); await press('Never mind');
+    let view = render(frame(kind)); let review = await openReview(kind); expectReview(review);
+    const cancelledRepayment = kind === 'repay' ? screen.UNSAFE_getByType(EventModal).props.onChoose : null;
+    await press('Never mind');
+    if (cancelledRepayment) await act(async () => { await cancelledRepayment('confirm'); });
     expect(screen.queryByText(review.title)).toBeNull(); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     review = await openReview(kind); const expected = resolveCommand(initial, review.command, true); expectReview(review);
     context.sqlite.exec("CREATE TRIGGER fail_financial_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
@@ -140,9 +150,9 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s save disables mutation i
     const initial = world(), beforeRows = context.rows(), view = render(frame(kind)), review = await openReview(kind), expected = resolveCommand(initial, review.command, true);
     const release = context.pauseNextSave(); await press(review.confirm); expect(mockStore.getState().busy).toBe(true);
     expect(screen.getByLabelText(review.draft![0])).toBeDisabled(); expect(modal().getByRole('button', { name: review.confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
-    const disabled = kind === 'refinance' ? [/^Refinance\./, /^New term\./, 'Review Refinancing'] : kind === 'repay' ? [/^Currency Account\./, /^Exchange To\./, /^Personal debt\./, 'Review Personal Loan', 'Review Exchange'] : ['Buy', 'Sell', 'Review Trade'];
+    const disabled = kind === 'refinance' ? [/^Refinance\./, /^New term\./, 'Review Refinancing'] : kind === 'repay' ? ['Review Repayment', 'Cancel Repayment', 'Back'] : ['Buy', 'Sell', 'Review Trade'];
     for (const name of disabled) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
-    const reviewButton = kind === 'refinance' ? 'Review Refinancing' : kind === 'repay' ? 'Review Personal Loan' : 'Review Trade';
+    const reviewButton = kind === 'refinance' ? 'Review Refinancing' : kind === 'repay' ? 'Review Repayment' : 'Review Trade';
     expect(screen.getByRole('button', { name: reviewButton })).toHaveProp('accessibilityState', { disabled: true, busy: false });
     await press(review.confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expectReview(review); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
@@ -173,8 +183,13 @@ test('currency choices and invalid repayment reasons are read-only and preserve 
   const context = await setup(initial, 'repay');
   try {
     const beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame('repay'));
-    edit('Amount in USD', '1000.01'); await press(/^Personal debt\./); expect(screen.getByRole('alert')).toHaveTextContent('The repayment exceeds the outstanding principal.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
-    expect(availableCash(accountFor(world()))).toBeLessThan(100000n); edit('Amount in USD', '1000'); await press(/^Personal debt\./); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this repayment.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
+    expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', ''); await press(/^Personal debt\./);
+    expect(screen.getByRole('header', { name: 'Repay personal debt' })).toBeOnTheScreen();
+    expect(screen.getByLabelText('Repayment amount in USD')).toHaveProp('value', ''); expect(screen.queryByLabelText('Amount in USD')).toBeNull();
+    await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('Enter a positive amount in USD.');
+    edit('Repayment amount in USD', '1000.01'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('The repayment exceeds the outstanding principal.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
+    expect(availableCash(accountFor(world()))).toBeLessThan(100000n); edit('Repayment amount in USD', '1000'); await press('Review Repayment'); expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this repayment.'); expect(screen.queryByText('Make this repayment?')).toBeNull();
+    await press('Cancel Repayment'); expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', ''); expect(screen.queryByRole('alert')).toBeNull();
     await press(/^Currency Account\./); await choose('EUR'); await press('Choose'); expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull(); expect(screen.getByLabelText('Amount in EUR')).toBeOnTheScreen(); expect(screen.queryByRole('alert')).toBeNull();
     expect(screen.getByRole('button', { name: /Personal debt\..*Repay from an account in USD/ })).toBeDisabled();
     await press(/^Exchange To\./); await choose('JPY'); await press('Choose'); expect(screen.getByRole('button', { name: 'Exchange To. JPY' })).toBeOnTheScreen();
@@ -213,13 +228,15 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s draft belongs to its act
   try {
     await context.repository.create(other); expect(await mockStore.getState().selectLife(initial.id)).toBe(true);
     const view = render(frame(kind)), review = await openReview(kind); expectReview(review);
+    const oldRepayment = kind === 'repay' ? screen.UNSAFE_getByType(EventModal).props.onChoose : null;
     const savedLives = context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all(), receipts = context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all();
     await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); });
     expect(world()).toEqual(other); expect(screen.queryByText(review.title)).toBeNull();
     if (kind === 'refinance') { expect(other.assets[0].id).toBe(initial.assets[0].id); expect(screen.queryByLabelText('New mortgage principal')).toBeNull(); await press(/^Refinance\./); expect(screen.getByLabelText('New mortgage principal')).toHaveProp('value', ''); expect(screen.getByRole('button', { name: 'New term. 30 years' })).toBeOnTheScreen(); }
     else if (kind === 'repay') expect(screen.getByLabelText('Amount in USD')).toHaveProp('value', '');
     else expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '1');
-    expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); view.unmount();
+    if (oldRepayment) await act(async () => { await oldRepayment('confirm'); });
+    expect(world()).toEqual(other); expect(context.sqlite.prepare('SELECT * FROM lives ORDER BY id').all()).toEqual(savedLives); expect(context.sqlite.prepare('SELECT * FROM receipts ORDER BY life_id,command_id').all()).toEqual(receipts); view.unmount();
   } finally { context.close(); }
 });
 
