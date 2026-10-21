@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { FlatList, Modal, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ageOn, fullName, World } from '../game/model';
 import { Body, Button, Card, Header, Heading, Portrait } from './components';
@@ -17,7 +17,7 @@ export function LifeSummaryContent({ world, personId = world.activePersonId, rea
   const entries = useMemo(() => world.journal.filter(entry => entry.personId === personId), [world.journal, personId]);
   const progress = useMemo(() => lifeProgress(world, personId), [world, personId]);
   if (!person) return null;
-  if (statisticsFor === identity) return <Modal visible animationType="none" presentationStyle="fullScreen" onRequestClose={() => setStatisticsFor(null)}><LifetimeStatisticsContent world={world} personId={personId} readOnly={readOnly} bottomSafeArea onBack={() => setStatisticsFor(null)} /></Modal>;
+  if (statisticsFor === identity) return <Modal visible animationType="none" presentationStyle="fullScreen" onRequestClose={() => setStatisticsFor(null)}><SafeAreaProvider style={{ flex: 1, backgroundColor: c.background }}><LifetimeStatisticsContent world={world} personId={personId} readOnly={readOnly} bottomSafeArea onBack={() => setStatisticsFor(null)} /></SafeAreaProvider></Modal>;
   const earned = progress?.achievements.filter(item => item.complete) ?? [];
   const dateLabel = (date: typeof world.date) => date.year + '-' + String(date.month).padStart(2, '0') + '-' + String(date.day).padStart(2, '0');
   return <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar />
