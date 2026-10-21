@@ -37,14 +37,14 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader nineteen protects new topic-aware conversation outcomes. Existing
-    // histories and payloads need no eager rewrite or invented conversation data.
-    if (!version || version.user_version > 19) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 19) return;
-    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18) {
-      // Complete reader-13 through reader-18 databases already have every table
+    // Reader twenty protects future campus records. Existing histories and
+    // payloads need no eager rewrite or invented campus people or attendance.
+    if (!version || version.user_version > 20) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 20) return;
+    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19) {
+      // Complete reader-13 through reader-19 databases already have every table
       // and metadata row. Upgrade only the marker, not stored game payloads.
-      await this.db.transaction(tx => tx.run('PRAGMA user_version = 19'));
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 20'));
       return;
     }
     const statements = [
@@ -86,7 +86,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 19');
+      await tx.run('PRAGMA user_version = 20');
     });
   }
 

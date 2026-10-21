@@ -51,6 +51,9 @@ export function financialActors(world: World): Person[] {
     }
   }
   for (const school of world.schoolCommunities.filter(item => !item.ended && item.personId === player.id)) { ids.add(school.currentTeacherId); for (const id of school.classmateIds) { ids.add(id); for (const relation of world.relationships) if (relation.to === id && relation.roles.some(role => role === 'parent' || role === 'guardian')) ids.add(relation.from); } }
+  // Introduced campus students keep their own real budgets after the player
+  // leaves the course. An ordinary classmate link alone is not a finance actor.
+  for (const community of world.campusCommunities) for (const student of community.students) ids.add(student.personId);
   for (const place of world.workplaces.filter(item => !item.ended && item.personId === player.id && item.employmentId === player.employment?.id)) for (const member of place.members.filter(item => !item.left)) ids.add(member.personId);
   for (const hobby of world.hobbies) for (const plan of hobby.plans.filter(item => item.status === 'active')) { ids.add(hobby.personId); ids.add(plan.payerId); }
   for (const pet of world.pets) if (pet.status === 'active') ids.add(pet.ownerId);

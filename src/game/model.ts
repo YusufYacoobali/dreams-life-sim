@@ -73,6 +73,7 @@ import { npcCourtshipSchema } from './systems/npcCourtshipSchemas';
 import { validateNpcCourtships } from './systems/npcCourtshipValidation';
 import { npcSeparationSchema } from './systems/npcSeparationSchemas';
 import { validateNpcSeparations } from './systems/npcSeparationValidation';
+import { campusCommunitySchema } from './systems/campusSchemas';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -105,7 +106,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(39), engineVersion: z.literal(40), contentVersion: z.literal(17),
+  schemaVersion: z.literal(40), engineVersion: z.literal(41), contentVersion: z.literal(17),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -140,6 +141,7 @@ export const worldSchema = z.object({
   schoolCompletions: z.array(secondaryCompletionSchema), schoolWithdrawals: z.array(schoolWithdrawalSchema), recoveryCourses: z.array(recoveryCourseSchema),
   universityApplications: z.array(universityAdmissionSchema),
   studyCourses: z.array(studyCourseSchema),
+  campusCommunities: z.array(campusCommunitySchema),
   scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), hourlyContracts: z.array(hourlyContractSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
@@ -616,5 +618,10 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Recorded-course and later-life scenes affect future selection only; bound
   // choices and all existing people, payments, history and RNG remain literal.
   if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40 && parsed.contentVersion === 16) parsed.contentVersion = 17;
+  // Campus communities begin only through new explicit introductions. Preserve
+  // every old person, course, payment, choice and RNG without inventing peers.
+  if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40) {
+    parsed.schemaVersion = 40; parsed.engineVersion = 41; parsed.campusCommunities = [];
+  }
   return validateWorld(parsed, immutable);
 }
