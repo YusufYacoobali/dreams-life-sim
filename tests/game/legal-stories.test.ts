@@ -85,7 +85,7 @@ test('a prison choice reports capped real bond/stress effects and never changes 
   ] });
   expect(next.random).toEqual(world.random); expect(next.cases).toEqual(world.cases); expect(next.sentences).toEqual(world.sentences);
   expect(next.accounts).toEqual(world.accounts); expect(next.ledger).toEqual(world.ledger); expect(Object.keys(next.people)).toEqual(Object.keys(world.people));
-  expect(next.relationships.find(edge => edge.id === context.peer!.relationshipId)?.trust).toBe(context.peer && world.relationships.find(edge => edge.id === context.peer.relationshipId)!.trust);
+  expect(next.relationships.find(edge => edge.id === context.peer!.relationshipId)?.trust).toBe(world.relationships.find(edge => edge.id === context.peer!.relationshipId)!.trust);
   expect(decodeWorld(encodeWorld(next)).pending).toEqual(next.pending);
 });
 
