@@ -1,0 +1,103 @@
+{
+  "summary": {
+    "file": "/tmp/dreams-c39-editorial-v2-review/summary.json",
+    "bytes": 51664,
+    "sha256": "1030c715100cc7c4c132b91cfe7a57486f2b3e01d68c678220686885899fcb2b"
+  },
+  "inputs": {
+    "file": "/tmp/dreams-c39-editorial-v2-review/inputs.json",
+    "bytes": 65990,
+    "sha256": "8a7bc8137862bb88c9a9a2ba3665c79ba73751b21dd2ed809c518cf4fc1ac5e1"
+  },
+  "totals": {
+    "naturalDeaths": 12,
+    "commands": 2436,
+    "catalogueChoices": 567,
+    "systemOrCallbackChoices": 138,
+    "systemTypes": {
+      "story-arcade-invitation": 1,
+      "medical-emergency": 135,
+      "story-project-promise": 1,
+      "story-project-recall": 1
+    },
+    "resultEvents": 934,
+    "quietSummaryResults": 218,
+    "producerColdComparisons": 2448,
+    "checkpointFormats": {
+      "dreams-checkpoint-v1": 187,
+      "dreams-checkpoint-v4": 2261
+    },
+    "catalogueTemplates": 265,
+    "catalogueBranches": 795,
+    "uniqueObservedTemplates": 127,
+    "unseenTemplates": 138,
+    "uniqueSelectedBranches": 263,
+    "unchosenBranches": 532,
+    "authoredBranchOccurrences": {
+      "1": 186,
+      "2": 194,
+      "3": 187
+    },
+    "eligiblePositionOccurrences": {
+      "1": 186,
+      "2": 194,
+      "3": 187
+    },
+    "withinLifeRepeatedTemplateOccurrences": 115,
+    "minimumRepeatGapYears": 5,
+    "simpleCappedEffectsChecked": 1260,
+    "cappedEffectsByKind": {
+      "stat": 1134,
+      "relationship": 108,
+      "school-grade": 11,
+      "skill": 7
+    },
+    "nonzeroRequestedEffectsCappedToZero": 192,
+    "selectedEffectKinds": {
+      "stat": 1134,
+      "relationship": 108,
+      "schedule-story": 3,
+      "resolve-story": 3,
+      "school-grade": 11,
+      "skill": 7,
+      "emergency-care": 135
+    },
+    "unavailableChoiceRows": 0,
+    "resolvedStoryCallbacks": 3,
+    "retainedThreadStatuses": {
+      "resolved": 2,
+      "cancelled": 1
+    }
+  },
+  "pacing": [
+    {
+      "actualImportantDecisionLoad": 0,
+      "authoredLaterYearChance": 78,
+      "catalogueOffersIncludingFirstBirthday": 534,
+      "laterYearCatalogueOffers": 522,
+      "quietSummaries": 158
+    },
+    {
+      "actualImportantDecisionLoad": 1,
+      "authoredLaterYearChance": 50,
+      "catalogueOffersIncludingFirstBirthday": 27,
+      "laterYearCatalogueOffers": 27,
+      "quietSummaries": 30
+    },
+    {
+      "actualImportantDecisionLoad": 2,
+      "authoredLaterYearChance": 25,
+      "catalogueOffersIncludingFirstBirthday": 6,
+      "laterYearCatalogueOffers": 6,
+      "quietSummaries": 23
+    },
+    {
+      "actualImportantDecisionLoad": 3,
+      "authoredLaterYearChance": 10,
+      "catalogueOffersIncludingFirstBirthday": 0,
+      "laterYearCatalogueOffers": 0,
+      "quietSummaries": 7
+    }
+  ],
+  "anomalies": []
+}

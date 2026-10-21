@@ -1,0 +1,2483 @@
+{
+  "format": "dreams-current-entrepreneur-v3-output-review-v1",
+  "reviewer": "/root/hobby_review",
+  "kind": "Codex actual-artifact reconciliation",
+  "externalHuman": false,
+  "reviewedAt": "2026-10-21T10:34:40.626329+00:00",
+  "status": "reviewed-no-reconciliation-defect",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "rootGate": {
+    "session": "97308",
+    "receipt": {
+      "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3-receipt.json",
+      "bytes": 1294,
+      "sha256": "a1361d2a86a1dfb4fc5e5a3a5eb4d676918208fe38af2bbaf2c0cffe0f394cd8"
+    },
+    "raw": {
+      "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3.out",
+      "bytes": 1540428,
+      "sha256": "bdfc74af3966310680db2a1458e35695fb32f8d1da201fccb71b86c4ab3e71ef"
+    },
+    "complete": true,
+    "exitCode": 0,
+    "wrapperSeconds": 5542.453,
+    "adapterSeconds": 5541.803,
+    "all688SourceBeforeAfterExact": true
+  },
+  "assignments": [
+    {
+      "country": "US",
+      "seed": 900
+    },
+    {
+      "country": "CA",
+      "seed": 901
+    },
+    {
+      "country": "GB",
+      "seed": 902
+    },
+    {
+      "country": "AU",
+      "seed": 903
+    },
+    {
+      "country": "FR",
+      "seed": 904
+    },
+    {
+      "country": "DE",
+      "seed": 905
+    },
+    {
+      "country": "ES",
+      "seed": 906
+    },
+    {
+      "country": "IT",
+      "seed": 907
+    },
+    {
+      "country": "BR",
+      "seed": 908
+    },
+    {
+      "country": "IN",
+      "seed": 909
+    },
+    {
+      "country": "JP",
+      "seed": 910
+    },
+    {
+      "country": "ZA",
+      "seed": 911
+    }
+  ],
+  "adapterVersion": 3,
+  "decisionPolicyVersion": 2,
+  "scope": "Scenario C optional natural entrepreneur policy v2; same seeds900..911 as other optional country policies, not additional120-seed coverage. Real on-disk SQLite StartLife/acknowledgement and closed-connection initial recovery ONLY; all subsequent play uses validated immutable pure-engine commands and exact production checkpoint pack/unpack plus complete canonical equality, NOT SQLite/native gameplay persistence. Ordinary newborns, actual school/work/audience/fame/company/brand/investment/family/death outcomes; at most one affordable eligible public-reputation action/year with six-month personal living reserve retained; no funds/stats/date/RNG/outcome overrides or future-outcome inspection. Reached and unmet goals are separate from integrity; no guaranteed famous entrepreneur, viral post, earnings, family or survival.",
+  "additionalAnnualSeeds": 0,
+  "countries": [
+    {
+      "country": "US",
+      "seed": 900,
+      "ageAtDeath": 70,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 15,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 15
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 61,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 61
+        },
+        {
+          "age": 24,
+          "commandIndex": 263,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "fame": 50,
+          "followers": 95343,
+          "phase": "fame50",
+          "revision": 263
+        },
+        {
+          "age": 24,
+          "businessId": "business_person_player_270",
+          "commandIndex": 271,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "business",
+          "revision": 271
+        },
+        {
+          "age": 24,
+          "commandIndex": 278,
+          "date": {
+            "day": 1,
+            "month": 7,
+            "year": 2024
+          },
+          "phase": "brandEarned",
+          "revision": 278
+        },
+        {
+          "age": 25,
+          "commandIndex": 297,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "phase": "investment",
+          "revision": 297
+        },
+        {
+          "age": 25,
+          "childIds": [
+            "person_npc_298_19"
+          ],
+          "commandIndex": 299,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "phase": "family",
+          "revision": 299
+        },
+        {
+          "age": 70,
+          "cause": "natural causes",
+          "commandIndex": 1339,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2070
+          },
+          "phase": "death",
+          "revision": 1339
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1340,
+      "pureEngineCommands": 1338,
+      "manualPosts": 291,
+      "viralPosts": 56,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "27096757125",
+      "currency": "USD",
+      "reputationActions": 52,
+      "companyFundingMinor": "121792021",
+      "companyProfitMinor": "-119052184",
+      "companyDividendsMinor": "3619837",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 1,
+        "completed": 44,
+        "terminated": 1
+      },
+      "brandEarnedMinor": "255988896",
+      "children": [
+        "person_npc_298_19"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "14930692986",
+          "creditId": "txn_1338_52958",
+          "debitId": "txn_1338_52957",
+          "heirId": "person_npc_298_19"
+        }
+      ],
+      "producerColdComparisons": 661,
+      "materializedColdProofRows": 89,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 17281673,
+      "maximumCheckpointBytes": 945830,
+      "traceSha256": "7a0277b26f52925a31cbcf14a1d88957019325961ee01fd4cb237e34b9088ee7",
+      "finalWorldSha256": "f697ebb52776e56b3b98d71983c29232b793c54c0e083a4b08fd26f84879d437",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/US/birth.db",
+          "bytes": 73728,
+          "sha256": "a7bad342dafde5241445dd48b4de154af88db38c1c2040ae9fc781a25855978c"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/US/commands.ndjson",
+          "bytes": 321784,
+          "sha256": "7a0277b26f52925a31cbcf14a1d88957019325961ee01fd4cb237e34b9088ee7"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/US/final.checkpoint.json",
+          "bytes": 945830,
+          "sha256": "51bc9668c3ba9e00c7aee8a7d54d44cfc721de55b93568c21dce5662bffe288b"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/US/result.json",
+          "bytes": 111280,
+          "sha256": "873e1f4f8bc800daa6da548d51f9bd716821e02abdfcc8a486d6bf19e9ed880e"
+        }
+      }
+    },
+    {
+      "country": "CA",
+      "seed": 901,
+      "ageAtDeath": 85,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 17,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 17
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 59,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 59
+        },
+        {
+          "age": 21,
+          "commandIndex": 203,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2021
+          },
+          "fame": 50,
+          "followers": 96723,
+          "phase": "fame50",
+          "revision": 203
+        },
+        {
+          "age": 21,
+          "businessId": "business_person_player_216",
+          "commandIndex": 217,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2021
+          },
+          "phase": "business",
+          "revision": 217
+        },
+        {
+          "age": 22,
+          "commandIndex": 224,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "brandEarned",
+          "revision": 224
+        },
+        {
+          "age": 22,
+          "commandIndex": 241,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "investment",
+          "revision": 241
+        },
+        {
+          "age": 22,
+          "childIds": [
+            "person_npc_242_16"
+          ],
+          "commandIndex": 243,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "family",
+          "revision": 243
+        },
+        {
+          "age": 85,
+          "cause": "natural causes",
+          "commandIndex": 2018,
+          "date": {
+            "day": 1,
+            "month": 11,
+            "year": 2085
+          },
+          "phase": "death",
+          "revision": 2018
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 2019,
+      "pureEngineCommands": 2017,
+      "manualPosts": 369,
+      "viralPosts": 67,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "51590171486",
+      "currency": "CAD",
+      "reputationActions": 68,
+      "companyFundingMinor": "180438165",
+      "companyProfitMinor": "-177464226",
+      "companyDividendsMinor": "3837939",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "completed": 60,
+        "terminated": 3
+      },
+      "brandEarnedMinor": "416904240",
+      "children": [
+        "person_npc_242_16"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "31074913720",
+          "creditId": "txn_2017_39466",
+          "debitId": "txn_2017_39465",
+          "heirId": "person_npc_242_16"
+        }
+      ],
+      "producerColdComparisons": 908,
+      "materializedColdProofRows": 105,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 14334202,
+      "maximumCheckpointBytes": 821862,
+      "traceSha256": "40387efc70b045a10292411129c6c3b0da73a174b96f3e7fb8cbea3fbaa54abb",
+      "finalWorldSha256": "282afd614e3b9ac3555f957ac192564de6fb1983d4f46bcc27a4388998f77ada",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/CA/birth.db",
+          "bytes": 73728,
+          "sha256": "5f5518d59a0a963ca2b389a11772e169b17e0d70ca4fab1f64719338961f9a41"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/CA/commands.ndjson",
+          "bytes": 478736,
+          "sha256": "40387efc70b045a10292411129c6c3b0da73a174b96f3e7fb8cbea3fbaa54abb"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/CA/final.checkpoint.json",
+          "bytes": 821862,
+          "sha256": "c9ecc36cdeeb35faeea49fd881829c970fb38b6830759a4db5951a22e4bd5f95"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/CA/result.json",
+          "bytes": 140588,
+          "sha256": "097c558bfd82cc1f59bf980e7837b0fce8cf2d160f96f8a2c86ebc2fdd3e4546"
+        }
+      }
+    },
+    {
+      "country": "GB",
+      "seed": 902,
+      "ageAtDeath": 82,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 5,
+          "commandIndex": 14,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2005
+          },
+          "phase": "school",
+          "revision": 14
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 64,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 64
+        },
+        {
+          "age": 20,
+          "commandIndex": 218,
+          "date": {
+            "day": 1,
+            "month": 9,
+            "year": 2020
+          },
+          "fame": 52,
+          "followers": 120097,
+          "phase": "fame50",
+          "revision": 218
+        },
+        {
+          "age": 21,
+          "businessId": "business_person_player_234",
+          "commandIndex": 235,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2021
+          },
+          "phase": "business",
+          "revision": 235
+        },
+        {
+          "age": 21,
+          "commandIndex": 242,
+          "date": {
+            "day": 1,
+            "month": 2,
+            "year": 2021
+          },
+          "phase": "brandEarned",
+          "revision": 242
+        },
+        {
+          "age": 22,
+          "commandIndex": 263,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "investment",
+          "revision": 263
+        },
+        {
+          "age": 22,
+          "childIds": [
+            "person_npc_264_17"
+          ],
+          "commandIndex": 265,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "family",
+          "revision": 265
+        },
+        {
+          "age": 82,
+          "cause": "natural causes",
+          "commandIndex": 1811,
+          "date": {
+            "day": 1,
+            "month": 5,
+            "year": 2082
+          },
+          "phase": "death",
+          "revision": 1811
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1812,
+      "pureEngineCommands": 1810,
+      "manualPosts": 350,
+      "viralPosts": 79,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "34146468333",
+      "currency": "GBP",
+      "reputationActions": 65,
+      "companyFundingMinor": "119497788",
+      "companyProfitMinor": "-117231054",
+      "companyDividendsMinor": "2904734",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 1,
+        "completed": 56,
+        "terminated": 4,
+        "ended-death": 1
+      },
+      "brandEarnedMinor": "247740042",
+      "children": [
+        "person_npc_264_17"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "14227146449",
+          "creditId": "txn_1810_40487",
+          "debitId": "txn_1810_40486",
+          "heirId": "person_npc_264_17"
+        }
+      ],
+      "producerColdComparisons": 838,
+      "materializedColdProofRows": 102,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 14434248,
+      "maximumCheckpointBytes": 842758,
+      "traceSha256": "b3a3f2d65e5401277b4379d2f6b0e9617509391b78a407c78e8ce3bcb9c17624",
+      "finalWorldSha256": "207c083f293cd80e56e6b99cc050ecc4ebd3925651d97a9e4ac2280552d19ce6",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/GB/birth.db",
+          "bytes": 73728,
+          "sha256": "ad769fe98f68420d772545db627b0b6f34de8f3c543f9649750bc2d62153fe9e"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/GB/commands.ndjson",
+          "bytes": 432427,
+          "sha256": "b3a3f2d65e5401277b4379d2f6b0e9617509391b78a407c78e8ce3bcb9c17624"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/GB/final.checkpoint.json",
+          "bytes": 842758,
+          "sha256": "68c745baf5fdd79ff54d9063737f466852330f56e030af733256dd263faddd22"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/GB/result.json",
+          "bytes": 136297,
+          "sha256": "e5485bb68e954fd2eb27ac84c1d6ffcd147ca8e62fccf4e2e3d5f10339201b34"
+        }
+      }
+    },
+    {
+      "country": "AU",
+      "seed": 903,
+      "ageAtDeath": 95,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 5,
+          "commandIndex": 14,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2005
+          },
+          "phase": "school",
+          "revision": 14
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 62,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 62
+        },
+        {
+          "age": 25,
+          "commandIndex": 265,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "fame": 51,
+          "followers": 113987,
+          "phase": "fame50",
+          "revision": 265
+        },
+        {
+          "age": 25,
+          "businessId": "business_person_player_278",
+          "commandIndex": 279,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "phase": "business",
+          "revision": 279
+        },
+        {
+          "age": 25,
+          "commandIndex": 286,
+          "date": {
+            "day": 1,
+            "month": 7,
+            "year": 2025
+          },
+          "phase": "brandEarned",
+          "revision": 286
+        },
+        {
+          "age": 26,
+          "commandIndex": 306,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2026
+          },
+          "phase": "investment",
+          "revision": 306
+        },
+        {
+          "age": 26,
+          "childIds": [
+            "person_npc_307_18"
+          ],
+          "commandIndex": 308,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2026
+          },
+          "phase": "family",
+          "revision": 308
+        },
+        {
+          "age": 95,
+          "cause": "natural causes",
+          "commandIndex": 2228,
+          "date": {
+            "day": 1,
+            "month": 7,
+            "year": 2095
+          },
+          "phase": "death",
+          "revision": 2228
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 2229,
+      "pureEngineCommands": 2227,
+      "manualPosts": 420,
+      "viralPosts": 93,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "80056998302",
+      "currency": "AUD",
+      "reputationActions": 78,
+      "companyFundingMinor": "146152469",
+      "companyProfitMinor": "-143302755",
+      "companyDividendsMinor": "3893714",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 3,
+        "completed": 65,
+        "terminated": 4
+      },
+      "brandEarnedMinor": "568534846",
+      "children": [
+        "person_npc_307_18"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "48601168784",
+          "creditId": "txn_2227_63963",
+          "debitId": "txn_2227_63962",
+          "heirId": "person_npc_307_18"
+        }
+      ],
+      "producerColdComparisons": 1006,
+      "materializedColdProofRows": 115,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 21843953,
+      "maximumCheckpointBytes": 1224952,
+      "traceSha256": "63d398e3070f14635f902543f368d602f925ef9558c7a417c2de3b5a9bbf2301",
+      "finalWorldSha256": "ce0d350ff078c8563f8a1f348a381f99cbd1be2d84eea225d572220cfddc15ce",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/AU/birth.db",
+          "bytes": 73728,
+          "sha256": "d1dbb04a2efc8085fef1379d7692f06365838fde699181d2d3be7ef2d4aea84b"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/AU/commands.ndjson",
+          "bytes": 530450,
+          "sha256": "63d398e3070f14635f902543f368d602f925ef9558c7a417c2de3b5a9bbf2301"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/AU/final.checkpoint.json",
+          "bytes": 1224952,
+          "sha256": "b9109b5f4624aa56451010e95ae7651a2e2ce2a40614b906abf69572589318f0"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/AU/result.json",
+          "bytes": 155763,
+          "sha256": "8494704b3e2c06e05ea3858d7f678099405c6b55ff4fcf05bb050cff5faa6831"
+        }
+      }
+    },
+    {
+      "country": "FR",
+      "seed": 904,
+      "ageAtDeath": 43,
+      "causeOfDeath": "Asthma",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 17,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 17
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 60,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 60
+        },
+        {
+          "age": 19,
+          "commandIndex": 191,
+          "date": {
+            "day": 1,
+            "month": 11,
+            "year": 2019
+          },
+          "fame": 50,
+          "followers": 101364,
+          "phase": "fame50",
+          "revision": 191
+        },
+        {
+          "age": 20,
+          "businessId": "business_person_player_205",
+          "commandIndex": 206,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2020
+          },
+          "phase": "business",
+          "revision": 206
+        },
+        {
+          "age": 20,
+          "commandIndex": 213,
+          "date": {
+            "day": 1,
+            "month": 4,
+            "year": 2020
+          },
+          "phase": "brandEarned",
+          "revision": 213
+        },
+        {
+          "age": 21,
+          "commandIndex": 234,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2021
+          },
+          "phase": "investment",
+          "revision": 234
+        },
+        {
+          "age": 21,
+          "childIds": [
+            "person_npc_235_17"
+          ],
+          "commandIndex": 236,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2021
+          },
+          "phase": "family",
+          "revision": 236
+        },
+        {
+          "age": 43,
+          "cause": "Asthma",
+          "commandIndex": 653,
+          "date": {
+            "day": 1,
+            "month": 11,
+            "year": 2043
+          },
+          "phase": "death",
+          "revision": 653
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 654,
+      "pureEngineCommands": 652,
+      "manualPosts": 154,
+      "viralPosts": 40,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "11072632145",
+      "currency": "EUR",
+      "reputationActions": 26,
+      "companyFundingMinor": "2064480",
+      "companyProfitMinor": "150292",
+      "companyDividendsMinor": "2922036",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 2,
+        "completed": 22
+      },
+      "brandEarnedMinor": "94675350",
+      "children": [
+        "person_npc_235_17"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "5475842765",
+          "creditId": "txn_652_19641",
+          "debitId": "txn_652_19640",
+          "heirId": "person_npc_235_17"
+        }
+      ],
+      "producerColdComparisons": 336,
+      "materializedColdProofRows": 62,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 6733196,
+      "maximumCheckpointBytes": 373361,
+      "traceSha256": "23297a25fdddeeada7290c67c5b5963e7cf181ee114329b1831d6243fd8938ae",
+      "finalWorldSha256": "712a62cd7f3d0251a066b1364e7721590f05b1b9fd0a50d5893cff7c5b3eaf94",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/FR/birth.db",
+          "bytes": 73728,
+          "sha256": "7077243afde3b1c7a529c1806e1d4d4393d05cf2b34b3c62f1d468cabaf68796"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/FR/commands.ndjson",
+          "bytes": 157326,
+          "sha256": "23297a25fdddeeada7290c67c5b5963e7cf181ee114329b1831d6243fd8938ae"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/FR/final.checkpoint.json",
+          "bytes": 373361,
+          "sha256": "0c7ae67c2362d6086d9241e79cfd9654c067a728afb8264c71bf853f6f5d20a7"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/FR/result.json",
+          "bytes": 70189,
+          "sha256": "579484aa4caf73bb21724d33dd710339878b551ff7188f8a81429658947e06c2"
+        }
+      }
+    },
+    {
+      "country": "DE",
+      "seed": 905,
+      "ageAtDeath": 91,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 17,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 17
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 59,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 59
+        },
+        {
+          "age": 22,
+          "commandIndex": 241,
+          "date": {
+            "day": 1,
+            "month": 6,
+            "year": 2022
+          },
+          "fame": 51,
+          "followers": 105655,
+          "phase": "fame50",
+          "revision": 241
+        },
+        {
+          "age": 23,
+          "businessId": "business_person_player_257",
+          "commandIndex": 258,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "business",
+          "revision": 258
+        },
+        {
+          "age": 24,
+          "commandIndex": 280,
+          "date": {
+            "day": 1,
+            "month": 2,
+            "year": 2024
+          },
+          "phase": "brandEarned",
+          "revision": 280
+        },
+        {
+          "age": 25,
+          "commandIndex": 300,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "phase": "investment",
+          "revision": 300
+        },
+        {
+          "age": 25,
+          "childIds": [
+            "person_npc_301_17"
+          ],
+          "commandIndex": 302,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2025
+          },
+          "phase": "family",
+          "revision": 302
+        },
+        {
+          "age": 91,
+          "cause": "natural causes",
+          "commandIndex": 2066,
+          "date": {
+            "day": 1,
+            "month": 11,
+            "year": 2091
+          },
+          "phase": "death",
+          "revision": 2066
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 2067,
+      "pureEngineCommands": 2065,
+      "manualPosts": 400,
+      "viralPosts": 91,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "50864459723",
+      "currency": "EUR",
+      "reputationActions": 74,
+      "companyFundingMinor": "134503629",
+      "companyProfitMinor": "-131541039",
+      "companyDividendsMinor": "3610590",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 3,
+        "completed": 60,
+        "terminated": 5
+      },
+      "brandEarnedMinor": "322982820",
+      "children": [
+        "person_npc_301_17"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "25342544459",
+          "creditId": "txn_2065_73079",
+          "debitId": "txn_2065_73078",
+          "heirId": "person_npc_301_17"
+        }
+      ],
+      "producerColdComparisons": 954,
+      "materializedColdProofRows": 111,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 24170288,
+      "maximumCheckpointBytes": 1325876,
+      "traceSha256": "dbf40eceaebb4ea5164709e0ae95d4c5bd2c4593004ebca64700abdc9ced98a6",
+      "finalWorldSha256": "e312563aa15ce8655fbb309eea816c7141fb43115a15c8cf0759bb816d933526",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/DE/birth.db",
+          "bytes": 73728,
+          "sha256": "99bf309c17d017e319b70027e5c54df296f8b7f0967f13d2dbbacfec81b21476"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/DE/commands.ndjson",
+          "bytes": 494105,
+          "sha256": "dbf40eceaebb4ea5164709e0ae95d4c5bd2c4593004ebca64700abdc9ced98a6"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/DE/final.checkpoint.json",
+          "bytes": 1325876,
+          "sha256": "cca2d3f7aac554ba3c0eb092c7704c221e6cd1546cd95a2bcf965183a0c1aaf3"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/DE/result.json",
+          "bytes": 148350,
+          "sha256": "28b4d0e14c89a405be7cc8cbbcb082d534cd50bcc0f945cc2a2ba57a35172a01"
+        }
+      }
+    },
+    {
+      "country": "ES",
+      "seed": 906,
+      "ageAtDeath": 72,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 17,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 17
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 61,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 61
+        },
+        {
+          "age": 23,
+          "commandIndex": 241,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "fame": 52,
+          "followers": 125188,
+          "phase": "fame50",
+          "revision": 241
+        },
+        {
+          "age": 23,
+          "businessId": "business_person_player_255",
+          "commandIndex": 256,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "business",
+          "revision": 256
+        },
+        {
+          "age": 24,
+          "commandIndex": 263,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "brandEarned",
+          "revision": 263
+        },
+        {
+          "age": 24,
+          "commandIndex": 281,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "investment",
+          "revision": 281
+        },
+        {
+          "age": 24,
+          "childIds": [
+            "person_npc_282_16"
+          ],
+          "commandIndex": 283,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "family",
+          "revision": 283
+        },
+        {
+          "age": 72,
+          "cause": "natural causes",
+          "commandIndex": 1519,
+          "date": {
+            "day": 1,
+            "month": 9,
+            "year": 2072
+          },
+          "phase": "death",
+          "revision": 1519
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1520,
+      "pureEngineCommands": 1518,
+      "manualPosts": 297,
+      "viralPosts": 56,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "21108550587",
+      "currency": "EUR",
+      "reputationActions": 55,
+      "companyFundingMinor": "76140825",
+      "companyProfitMinor": "-73802259",
+      "companyDividendsMinor": "2888566",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 3,
+        "completed": 47
+      },
+      "brandEarnedMinor": "169610258",
+      "children": [
+        "person_npc_282_16"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "10861416100",
+          "creditId": "txn_1518_25853",
+          "debitId": "txn_1518_25852",
+          "heirId": "person_npc_282_16"
+        }
+      ],
+      "producerColdComparisons": 696,
+      "materializedColdProofRows": 92,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 9368889,
+      "maximumCheckpointBytes": 546006,
+      "traceSha256": "6d77162e78a4cb1c2cecfede56a9fd74ebd4483eba8e112cbd42959f776c5ab0",
+      "finalWorldSha256": "4e770fd0883b99503eb51171b7d2c44b33acf8c657258276a6c2747a6f49cf25",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ES/birth.db",
+          "bytes": 73728,
+          "sha256": "55dff328ffbdb939a9498b4b72c79e6c1e5c666dafe80d5882dc6214100be25e"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ES/commands.ndjson",
+          "bytes": 360718,
+          "sha256": "6d77162e78a4cb1c2cecfede56a9fd74ebd4483eba8e112cbd42959f776c5ab0"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ES/final.checkpoint.json",
+          "bytes": 546006,
+          "sha256": "5c0a765defcdb19136479324b080d33f634c6690590701c15f3f788b8cfc4ed6"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ES/result.json",
+          "bytes": 116704,
+          "sha256": "253b94ba36017987adb80f25f5721cb71c4589c98d5c4542b87cf8cfb0341a7b"
+        }
+      }
+    },
+    {
+      "country": "IT",
+      "seed": 907,
+      "ageAtDeath": 66,
+      "causeOfDeath": "declining health",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 16,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 16
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 57,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 57
+        },
+        {
+          "age": 36,
+          "commandIndex": 473,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2036
+          },
+          "fame": 50,
+          "followers": 95569,
+          "phase": "fame50",
+          "revision": 473
+        },
+        {
+          "age": 36,
+          "businessId": "business_person_player_476",
+          "commandIndex": 477,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2036
+          },
+          "phase": "business",
+          "revision": 477
+        },
+        {
+          "age": 37,
+          "commandIndex": 484,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2037
+          },
+          "phase": "brandEarned",
+          "revision": 484
+        },
+        {
+          "age": 37,
+          "commandIndex": 502,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2037
+          },
+          "phase": "investment",
+          "revision": 502
+        },
+        {
+          "age": 37,
+          "childIds": [
+            "person_npc_503_19"
+          ],
+          "commandIndex": 504,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2037
+          },
+          "phase": "family",
+          "revision": 504
+        },
+        {
+          "age": 66,
+          "cause": "declining health",
+          "commandIndex": 1054,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2066
+          },
+          "phase": "death",
+          "revision": 1054
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1055,
+      "pureEngineCommands": 1053,
+      "manualPosts": 241,
+      "viralPosts": 37,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "5598641193",
+      "currency": "EUR",
+      "reputationActions": 44,
+      "companyFundingMinor": "26713287",
+      "companyProfitMinor": "-24368490",
+      "companyDividendsMinor": "2214001",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 5,
+        "completed": 22,
+        "terminated": 7
+      },
+      "brandEarnedMinor": "76298822",
+      "children": [
+        "person_npc_503_19"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "2957245713",
+          "creditId": "txn_1053_41395",
+          "debitId": "txn_1053_41394",
+          "heirId": "person_npc_503_19"
+        }
+      ],
+      "producerColdComparisons": 538,
+      "materializedColdProofRows": 84,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 13677784,
+      "maximumCheckpointBytes": 744638,
+      "traceSha256": "72f5d652a573343e511b870e76c59c9b14ac1dd93d7b1870c0be05c56a72e68a",
+      "finalWorldSha256": "45143951a254fcf749a2e0ce7051e4fece1a5678af0d393a8064a7d82faa824b",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IT/birth.db",
+          "bytes": 73728,
+          "sha256": "816f448d13e860a957da3b40b6b96647c44fcb9912261eb643c028c6cca7a8d2"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IT/commands.ndjson",
+          "bytes": 254043,
+          "sha256": "72f5d652a573343e511b870e76c59c9b14ac1dd93d7b1870c0be05c56a72e68a"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IT/final.checkpoint.json",
+          "bytes": 744638,
+          "sha256": "4c69563f213aa787a670360b3f4e1b66978d41e7bf2f1e4679ba5c8902878d73"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IT/result.json",
+          "bytes": 91831,
+          "sha256": "3777e246633f51b08a5d70ddc4569a6e6c2b0d4ccb87e5c3cbb1e6b6d7a01ce6"
+        }
+      }
+    },
+    {
+      "country": "BR",
+      "seed": 908,
+      "ageAtDeath": 86,
+      "causeOfDeath": "declining health",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 14,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 14
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 57,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 57
+        },
+        {
+          "age": 22,
+          "commandIndex": 234,
+          "date": {
+            "day": 1,
+            "month": 5,
+            "year": 2022
+          },
+          "fame": 50,
+          "followers": 95726,
+          "phase": "fame50",
+          "revision": 234
+        },
+        {
+          "age": 23,
+          "businessId": "business_person_player_249",
+          "commandIndex": 250,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "business",
+          "revision": 250
+        },
+        {
+          "age": 23,
+          "commandIndex": 257,
+          "date": {
+            "day": 1,
+            "month": 4,
+            "year": 2023
+          },
+          "phase": "brandEarned",
+          "revision": 257
+        },
+        {
+          "age": 24,
+          "commandIndex": 278,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "investment",
+          "revision": 278
+        },
+        {
+          "age": 24,
+          "childIds": [
+            "person_npc_279_16"
+          ],
+          "commandIndex": 280,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2024
+          },
+          "phase": "family",
+          "revision": 280
+        },
+        {
+          "age": 86,
+          "cause": "declining health",
+          "commandIndex": 1885,
+          "date": {
+            "day": 1,
+            "month": 4,
+            "year": 2086
+          },
+          "phase": "death",
+          "revision": 1885
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1886,
+      "pureEngineCommands": 1884,
+      "manualPosts": 341,
+      "viralPosts": 62,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "30994264333",
+      "currency": "BRL",
+      "reputationActions": 69,
+      "companyFundingMinor": "154717234",
+      "companyProfitMinor": "-153004137",
+      "companyDividendsMinor": "2313097",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 3,
+        "completed": 51,
+        "terminated": 10
+      },
+      "brandEarnedMinor": "225776700",
+      "children": [
+        "person_npc_279_16"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "21335894907",
+          "creditId": "txn_1884_32598",
+          "debitId": "txn_1884_32597",
+          "heirId": "person_npc_279_16"
+        }
+      ],
+      "producerColdComparisons": 860,
+      "materializedColdProofRows": 106,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 12142680,
+      "maximumCheckpointBytes": 691323,
+      "traceSha256": "33882d46d7b86e3b7f806a551742b3dadfdafe16f282f6cdd70bcd79a1b91bf9",
+      "finalWorldSha256": "c230c8a025eccfd0397686c7601a2b1961b888eab0149eb06aaaa8d17d792bc9",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/BR/birth.db",
+          "bytes": 73728,
+          "sha256": "79436e536266e76fc4945e03e94c834b707d04622e601288e9cfa70d9765f01f"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/BR/commands.ndjson",
+          "bytes": 446887,
+          "sha256": "33882d46d7b86e3b7f806a551742b3dadfdafe16f282f6cdd70bcd79a1b91bf9"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/BR/final.checkpoint.json",
+          "bytes": 691323,
+          "sha256": "72e509f9aa66c8ec038296fba794ed3e7cfe4646c7492df2ecd0259e6d102213"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/BR/result.json",
+          "bytes": 139509,
+          "sha256": "b7cf77128375b0748f270dc7d6eed12d7d782a654a1dee5acacca5bc8a3f7593"
+        }
+      }
+    },
+    {
+      "country": "IN",
+      "seed": 909,
+      "ageAtDeath": 74,
+      "causeOfDeath": "natural causes",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 17,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 17
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 59,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 59
+        },
+        {
+          "age": 28,
+          "commandIndex": 329,
+          "date": {
+            "day": 1,
+            "month": 10,
+            "year": 2028
+          },
+          "fame": 52,
+          "followers": 124616,
+          "phase": "fame50",
+          "revision": 329
+        },
+        {
+          "age": 29,
+          "businessId": "business_person_player_344",
+          "commandIndex": 345,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2029
+          },
+          "phase": "business",
+          "revision": 345
+        },
+        {
+          "age": 29,
+          "commandIndex": 352,
+          "date": {
+            "day": 1,
+            "month": 3,
+            "year": 2029
+          },
+          "phase": "brandEarned",
+          "revision": 352
+        },
+        {
+          "age": 30,
+          "commandIndex": 373,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2030
+          },
+          "phase": "investment",
+          "revision": 373
+        },
+        {
+          "age": 30,
+          "childIds": [
+            "person_npc_374_18"
+          ],
+          "commandIndex": 375,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2030
+          },
+          "phase": "family",
+          "revision": 375
+        },
+        {
+          "age": 74,
+          "cause": "natural causes",
+          "commandIndex": 1499,
+          "date": {
+            "day": 1,
+            "month": 8,
+            "year": 2074
+          },
+          "phase": "death",
+          "revision": 1499
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1500,
+      "pureEngineCommands": 1498,
+      "manualPosts": 315,
+      "viralPosts": 53,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "232062182715",
+      "currency": "INR",
+      "reputationActions": 54,
+      "companyFundingMinor": "982860695",
+      "companyProfitMinor": "-945768996",
+      "companyDividendsMinor": "44291699",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 2,
+        "completed": 44,
+        "terminated": 1
+      },
+      "brandEarnedMinor": "2351457000",
+      "children": [
+        "person_npc_374_18"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "166461315430",
+          "creditId": "txn_1498_50048",
+          "debitId": "txn_1498_50047",
+          "heirId": "person_npc_374_18"
+        }
+      ],
+      "producerColdComparisons": 713,
+      "materializedColdProofRows": 94,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 17018410,
+      "maximumCheckpointBytes": 935159,
+      "traceSha256": "c6a3dd57926740776d06ef933c361739707745f54878fb677fcdcbf21d17f6ee",
+      "finalWorldSha256": "8953b521928ed0a7af1c6cd513d6beccde5bdd6c8e26773f6e5147f5a2cc28be",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IN/birth.db",
+          "bytes": 73728,
+          "sha256": "683fb58e9a11683e5389c8dc62dc60969c5fbdf5d6a7f00eaa37e14e744be152"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IN/commands.ndjson",
+          "bytes": 358756,
+          "sha256": "c6a3dd57926740776d06ef933c361739707745f54878fb677fcdcbf21d17f6ee"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IN/final.checkpoint.json",
+          "bytes": 935159,
+          "sha256": "7b00bd840b01eb0cf6db5919eb6d35b5ed80a3ef7d10409641fb53d8fb9930eb"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/IN/result.json",
+          "bytes": 115005,
+          "sha256": "07362efa7170ecf855af90973810f5eaa6e3f479e7b62f27733a74944ed15c75"
+        }
+      }
+    },
+    {
+      "country": "JP",
+      "seed": 910,
+      "ageAtDeath": 83,
+      "causeOfDeath": "declining health",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 6,
+          "commandIndex": 16,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "phase": "school",
+          "revision": 16
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 61,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 61
+        },
+        {
+          "age": 22,
+          "commandIndex": 230,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "fame": 56,
+          "followers": 192164,
+          "phase": "fame50",
+          "revision": 230
+        },
+        {
+          "age": 22,
+          "businessId": "business_person_player_245",
+          "commandIndex": 246,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "business",
+          "revision": 246
+        },
+        {
+          "age": 23,
+          "commandIndex": 253,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "brandEarned",
+          "revision": 253
+        },
+        {
+          "age": 23,
+          "commandIndex": 270,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "investment",
+          "revision": 270
+        },
+        {
+          "age": 23,
+          "childIds": [
+            "person_npc_271_16"
+          ],
+          "commandIndex": 272,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2023
+          },
+          "phase": "family",
+          "revision": 272
+        },
+        {
+          "age": 83,
+          "cause": "declining health",
+          "commandIndex": 1783,
+          "date": {
+            "day": 1,
+            "month": 5,
+            "year": 2083
+          },
+          "phase": "death",
+          "revision": 1783
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 1784,
+      "pureEngineCommands": 1782,
+      "manualPosts": 332,
+      "viralPosts": 73,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "37033100570",
+      "currency": "JPY",
+      "reputationActions": 66,
+      "companyFundingMinor": "93620542",
+      "companyProfitMinor": "-91453871",
+      "companyDividendsMinor": "2870671",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "declined": 1,
+        "completed": 54,
+        "terminated": 5
+      },
+      "brandEarnedMinor": "255084000",
+      "children": [
+        "person_npc_271_16"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "18000507749",
+          "creditId": "txn_1782_54561",
+          "debitId": "txn_1782_54560",
+          "heirId": "person_npc_271_16"
+        }
+      ],
+      "producerColdComparisons": 826,
+      "materializedColdProofRows": 103,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 18215388,
+      "maximumCheckpointBytes": 1008050,
+      "traceSha256": "996d47f7da95a2990a5bac2c0cfa02865b34aa734989b87cd33a55aec7a4fa07",
+      "finalWorldSha256": "02e723de157d4d7e32cb5887e021b199d3e3335b5aec7ffb2fda3f215b6522fd",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/JP/birth.db",
+          "bytes": 73728,
+          "sha256": "65859e00d263207555ec1badc7e78e2fa230000ebb32088d3027497617d30c62"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/JP/commands.ndjson",
+          "bytes": 424006,
+          "sha256": "996d47f7da95a2990a5bac2c0cfa02865b34aa734989b87cd33a55aec7a4fa07"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/JP/final.checkpoint.json",
+          "bytes": 1008050,
+          "sha256": "62b757befabd7bb23a26811e62d0ac20250e61c4e0d20acf0e11a416448741f2"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/JP/result.json",
+          "bytes": 135063,
+          "sha256": "280552ab6c6c065242803ee62cc75ffa998a111e3ff2d11e036eb9239bcfdda5"
+        }
+      }
+    },
+    {
+      "country": "ZA",
+      "seed": 911,
+      "ageAtDeath": 93,
+      "causeOfDeath": "declining health",
+      "timeline": [
+        {
+          "age": 0,
+          "commandIndex": 0,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2000
+          },
+          "phase": "birth",
+          "revision": 0
+        },
+        {
+          "age": 7,
+          "commandIndex": 21,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2007
+          },
+          "phase": "school",
+          "revision": 21
+        },
+        {
+          "accountId": "social_person_player_photogram",
+          "age": 13,
+          "baselineFollowers": 0,
+          "commandIndex": 57,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2013
+          },
+          "phase": "social",
+          "revision": 57
+        },
+        {
+          "age": 19,
+          "commandIndex": 188,
+          "date": {
+            "day": 1,
+            "month": 10,
+            "year": 2019
+          },
+          "fame": 53,
+          "followers": 136251,
+          "phase": "fame50",
+          "revision": 188
+        },
+        {
+          "age": 20,
+          "businessId": "business_person_player_201",
+          "commandIndex": 202,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2020
+          },
+          "phase": "business",
+          "revision": 202
+        },
+        {
+          "age": 21,
+          "commandIndex": 228,
+          "date": {
+            "day": 1,
+            "month": 3,
+            "year": 2021
+          },
+          "phase": "brandEarned",
+          "revision": 228
+        },
+        {
+          "age": 22,
+          "commandIndex": 248,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "investment",
+          "revision": 248
+        },
+        {
+          "age": 22,
+          "childIds": [
+            "person_npc_249_17"
+          ],
+          "commandIndex": 250,
+          "date": {
+            "day": 1,
+            "month": 1,
+            "year": 2022
+          },
+          "phase": "family",
+          "revision": 250
+        },
+        {
+          "age": 93,
+          "cause": "declining health",
+          "commandIndex": 2122,
+          "date": {
+            "day": 1,
+            "month": 10,
+            "year": 2093
+          },
+          "phase": "death",
+          "revision": 2122
+        }
+      ],
+      "coverage": {
+        "allPhasesReached": true,
+        "orderedScenarioCComplete": true,
+        "reached": [
+          "birth",
+          "school",
+          "social",
+          "fame50",
+          "business",
+          "brandEarned",
+          "investment",
+          "family",
+          "death"
+        ],
+        "unreached": []
+      },
+      "commandsIncludingTwoBirthStoreSteps": 2123,
+      "pureEngineCommands": 2121,
+      "manualPosts": 388,
+      "viralPosts": 66,
+      "peakFollowers": 1000000000,
+      "socialIncomeMinor": "182203206204",
+      "currency": "ZAR",
+      "reputationActions": 76,
+      "companyFundingMinor": "683254685",
+      "companyProfitMinor": "-670890818",
+      "companyDividendsMinor": "14763867",
+      "finalCompanyStatus": "sold",
+      "lastAnnualCompanyStatus": "active",
+      "brandStatuses": {
+        "completed": 62,
+        "terminated": 8
+      },
+      "brandEarnedMinor": "1398750000",
+      "children": [
+        "person_npc_249_17"
+      ],
+      "investmentFinalQuantity": "0",
+      "estateReceiptPairs": [
+        {
+          "amount": "94639391550",
+          "creditId": "txn_2121_65426",
+          "debitId": "txn_2121_65425",
+          "heirId": "person_npc_249_17"
+        }
+      ],
+      "producerColdComparisons": 960,
+      "materializedColdProofRows": 113,
+      "additionalFinalCheckpointRoundTrip": 1,
+      "maximumCanonicalBytes": 22209402,
+      "maximumCheckpointBytes": 1187936,
+      "traceSha256": "a8dedb7274db861a20e3c214ef536971600b119070e3b2feff02458501704266",
+      "finalWorldSha256": "b6f085dcd22a045483673b64dce6283d8b92e3bf4d5a17c7d95bebf0a2859c8b",
+      "raw": {
+        "birth.db": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ZA/birth.db",
+          "bytes": 73728,
+          "sha256": "90d890a98ceabcc0ba7e578478cba6def4c1b8d0c4f0651d0ef9ee162b2f25ee"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ZA/commands.ndjson",
+          "bytes": 503796,
+          "sha256": "a8dedb7274db861a20e3c214ef536971600b119070e3b2feff02458501704266"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ZA/final.checkpoint.json",
+          "bytes": 1187936,
+          "sha256": "a1afd9ec9ea5a815670839229be0b29e6e27143dec975907e2b7837338dd00eb"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3/ZA/result.json",
+          "bytes": 154078,
+          "sha256": "cd1c2d8e1f071b88cbe71a0783429e4d0e23d62d392cd8fa392c5dbffb489ed3"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "completedLives": 12,
+    "orderedNineMilestonePaths": 12,
+    "unmetDeclaredMilestones": 0,
+    "commandsIncludingBirthStoreSteps": 19989,
+    "actualBirthStoreSteps": 24,
+    "pureEngineCommands": 19965,
+    "manualPosts": 3898,
+    "reputationActions": 727,
+    "commandsByType": {
+      "advance": 950,
+      "choose": 1611,
+      "acknowledge": 9682,
+      "health-routine": 12,
+      "study-effort": 12,
+      "study": 146,
+      "create-social": 12,
+      "social-routine": 12,
+      "publish-post": 3898,
+      "apply-job": 28,
+      "monetise-social": 12,
+      "public-action": 727,
+      "start-business": 12,
+      "fund-business": 1188,
+      "seek-sponsor": 590,
+      "buy-investment": 12,
+      "adopt": 12,
+      "resume": 1039,
+      "retire": 10
+    },
+    "brandStatuses": {
+      "declined": 24,
+      "completed": 587,
+      "terminated": 48,
+      "ended-death": 1
+    },
+    "positiveBrandDeliveryRows": 3526,
+    "zeroPaidBrandDeliveryRows": 143,
+    "companies": 12,
+    "paidAdoptedFamilies": 12,
+    "producerColdChecksCounted": 9296,
+    "producerColdLabels": {
+      "adoptResult": 12,
+      "annual": 950,
+      "apply-jobResult": 28,
+      "buy-investmentResult": 12,
+      "create-socialResult": 12,
+      "death": 12,
+      "decisionResult": 1611,
+      "fund-businessResult": 1188,
+      "fundedCompany": 12,
+      "health-routineResult": 12,
+      "monetise-socialResult": 12,
+      "public-actionResult": 727,
+      "publish-postResult": 3898,
+      "retireResult": 10,
+      "seek-sponsorResult": 590,
+      "social-routineResult": 12,
+      "start-businessResult": 12,
+      "study-effortResult": 12,
+      "studyResult": 146,
+      "unansweredInterview": 28
+    },
+    "materializedColdProofRows": 1176,
+    "additionalFinalRoundTripsOutsideColdCounters": 12
+  },
+  "evidence": {
+    "inputs": {
+      "file": "/tmp/dreams-c39-entrepreneur-v3-review/inputs.json",
+      "bytes": 35489,
+      "sha256": "75000564063d2387c52a5205bab0315ea6e67e25f737fad07e3e4f12fa336743"
+    },
+    "gapsAndReasons": {
+      "file": "/tmp/dreams-c39-entrepreneur-v3-review/gaps-and-reasons.json",
+      "bytes": 17188,
+      "sha256": "1fd25c3d635b809e7d69f62f625e3a29db542d124f715c69285faa6a8d1ec862"
+    }
+  },
+  "findings": [],
+  "limits": [
+    "All12 reach the preregistered nine ordered milestone names, not every original Scenario C validation path or every career.",
+    "Only birth/acknowledgement and initial closed-connection recovery use actual on-disk SQLite. Subsequent commands use immutable engine state; birth database rows are asserted unchanged by the producer.",
+    "Reviewer reads JSON/source/hashes only; no SQLite query, world unpack/decode, engine, policy, replay, test, outcome search or native action.",
+    "Raw traces and final checkpoint bytes are independently pinned. Full world equality, personal/company/creator ledger reconciliation, paid startup/adoption/fee-inclusive purchase cash deltas and actual receipt linkage remain closed producer assertions where no detailed raw ledger rows are emitted.",
+    "The cold counters include overlapping command/result/annual/death states; only the first proof per label plus annual/death proofs is materialized, and each final checkpoint is an additional full producer round trip outside those counters.",
+    "All cafes were active in the last recorded annual observation and sold during estate disposal. Sustained losses and real owner funding are recorded, but bankruptcy/failed-business closure is not covered.",
+    "Family means actual paid adoption here; no marriage/biological pregnancy/multigeneration acceptance.",
+    "Money totals remain per currency; no cross-currency wealth or income sum is implied.",
+    "Same reused country seeds900..911 add zero distinct annual seeds. No native, physical latency, full-life SQLite, all-choices or release-completion claim."
+  ]
+}

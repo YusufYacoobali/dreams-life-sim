@@ -1,0 +1,17 @@
+'use strict';
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), assert = require('node:assert/strict'), Module = require('node:module');
+const root = '/workspace/dreams-worktrees/project-callback-pacing-test', snapshotFile = '/tmp/dreams-production-finish-accepted-source.json';
+const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+assert.equal(hash(fs.readFileSync(snapshotFile)), '2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56');
+const snapshot = JSON.parse(fs.readFileSync(snapshotFile)), prefix = path.join(root, 'tools/current-policy') + path.sep;
+const output = process.env.DREAMS_POLICY_PREFLIGHT_GUARD_OUTPUT; assert(path.isAbsolute(output ?? '') && !output.startsWith(root + path.sep) && !fs.existsSync(output), 'New outside-source guard receipt required');
+const previous = Module._load, blocked = [], loadedTools = new Set();
+Module._load = function (request, parent, isMain) {
+  if (request === 'node:sqlite' || request === 'sqlite' || request === 'node:child_process' || request === 'child_process' || request === 'typescript' || request.startsWith('typescript/')) { blocked.push(request); throw new Error('Manifest-only must not load SQLite/TypeScript/child processes: ' + request); }
+  if (Module.isBuiltin(request)) return previous.call(this, request, parent, isMain);
+  const resolved = Module._resolveFilename(request, parent, isMain);
+  if (typeof resolved !== 'string' || !resolved.startsWith(prefix) || !resolved.endsWith('.cjs')) { blocked.push(String(resolved)); throw new Error('Manifest-only permits only pinned current-policy CJS tools: ' + resolved); }
+  const relative = path.relative(root, resolved).split(path.sep).join('/'); assert.equal(hash(fs.readFileSync(resolved)), snapshot.source[relative], 'Pinned manifest-only tool changed: ' + relative); loadedTools.add(relative);
+  return previous.call(this, request, parent, isMain);
+};
+process.on('exit', code => fs.writeFileSync(output, JSON.stringify({ format: 'dreams-manifest-only-module-guard-v1', sourceCommit: snapshot.commit, exitCode: code, blockedRuntimeOrTypeScriptOrSqliteLoads: blocked, evaluatedToolModules: [...loadedTools].sort(), scope: 'Source/manifest-only diagnostic. Only built-ins and exact pinned current-policy CJS may evaluate. No TS/SQLite/game/support/dependency/child-process module is permitted.' }, null, 2) + '\n', { flag: 'wx' }));

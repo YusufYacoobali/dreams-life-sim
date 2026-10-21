@@ -1,0 +1,56 @@
+{
+  "format": "dreams-current-policy-registration-v1",
+  "complete": true,
+  "cohortRunAuthorized": false,
+  "commit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-finish-accepted-source.json",
+    "bytes": 75993,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  "git": {
+    "head": {
+      "file": "/tmp/dreams-production-finish-accepted-head.txt",
+      "bytes": 41,
+      "sha256": "b9a599d126c0e48bba9068d643cdd829d293c7440013d5bed168fa3343b17554"
+    },
+    "status": {
+      "file": "/tmp/dreams-production-finish-accepted-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tree": {
+      "file": "/tmp/dreams-production-finish-accepted-tree.bin",
+      "bytes": 207286,
+      "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+    },
+    "commit": {
+      "file": "/tmp/dreams-production-finish-accepted-commit.bin",
+      "bytes": 258,
+      "sha256": "26498430e369b214199f030aee7f5a8fa6c9d87e5998d1342f4101ecc033824f"
+    }
+  },
+  "copyBridge": {
+    "file": "/tmp/dreams-production-finish-copy-bridge.json",
+    "bytes": 1574,
+    "sha256": "8bf26a7f43b5be065807094cd2a4ecac967727c3b5935ba9f928252fc10617ee"
+  },
+  "testOnlySourceBridge": {
+    "file": "/tmp/dreams-production-finish-corrected-accepted-bridge.json",
+    "bytes": 1268,
+    "sha256": "3cfa8821af8a0031996123a5d7f91c6248366c1e7aabe415c813cc5759500a8d"
+  },
+  "supersedesForFutureRunsOnly": {
+    "file": "/tmp/dreams-production-finish-corrected-policy-registration-readiness.json",
+    "bytes": 1984,
+    "sha256": "6956f2dd0a3282bb105195a0c0c8f4f3d005893b06240f1423e703f4af5ba0d2"
+  },
+  "scope": "Accepted33b C39 source and manifest-only readiness ONLY; no actual policy/cohort execution authorized. Original66ec full/annual and3224 runtime-equivalent performance/export evidence retain their original source plus explicit bridges. Root may create a separate authorized final registration after required gate/native/performance scope and queue closure."
+}

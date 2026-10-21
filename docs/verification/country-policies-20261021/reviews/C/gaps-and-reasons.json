@@ -1,0 +1,556 @@
+[
+  {
+    "country": "US",
+    "unmet": [],
+    "unmetRawPointer": "US/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 8,
+      "An existing deal or offer must end first": 45
+    },
+    "annualArraySha256": "540d9645e761a56ec700d9355c7767ab5a7d2e814283eb6a189e4b10eb1b7764",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_205_0"
+    ],
+    "zeroPaidDeliveryCount": 3,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "CA",
+    "unmet": [],
+    "unmetRawPointer": "CA/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 9,
+      "An existing deal or offer must end first": 63
+    },
+    "annualArraySha256": "379c53085e0fce57a3c244164763688bf54f4c04e4f6be8bcb8866b2a5656e9e",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [],
+    "zeroPaidDeliveryCount": 9,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "GB",
+    "unmet": [],
+    "unmetRawPointer": "GB/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 6,
+      "An existing deal or offer must end first": 61
+    },
+    "annualArraySha256": "26dc1e2c690064ba53ad17b4dd0e4f77becb61c0eff7809e8150fb3595dbaea8",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_198_0"
+    ],
+    "zeroPaidDeliveryCount": 10,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "AU",
+    "unmet": [],
+    "unmetRawPointer": "AU/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 8,
+      "An existing deal or offer must end first": 69
+    },
+    "annualArraySha256": "a364abba2d2e538a99a7e364ab88021ec506343bb5da2fac58af90e83046ba0a",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_182_0",
+      "sponsor_social_person_player_photogram_214_1",
+      "sponsor_social_person_player_photogram_248_2"
+    ],
+    "zeroPaidDeliveryCount": 13,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "FR",
+    "unmet": [],
+    "unmetRawPointer": "FR/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 7,
+      "An existing deal or offer must end first": 22
+    },
+    "annualArraySha256": "fd3ea77c82975e01e7d9c83bef60f896a62b8bd3403954448e372ddee29a3741",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_170_0",
+      "sponsor_social_person_player_photogram_188_1"
+    ],
+    "zeroPaidDeliveryCount": 2,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "DE",
+    "unmet": [],
+    "unmetRawPointer": "DE/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 10,
+      "An existing deal or offer must end first": 65
+    },
+    "annualArraySha256": "64b062600094a5d9e81d891f4ec837bb90041859debf8f7707d269139ddec632",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": false,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "retail"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_188_0",
+      "sponsor_social_person_player_photogram_191_1",
+      "sponsor_social_person_player_photogram_241_2"
+    ],
+    "zeroPaidDeliveryCount": 13,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "ES",
+    "unmet": [],
+    "unmetRawPointer": "ES/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 10,
+      "An existing deal or offer must end first": 46
+    },
+    "annualArraySha256": "503529f8965d328c97e4dc9669406baf47cfee085571632d445a8747cf530df5",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": false,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "retail"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_206_0",
+      "sponsor_social_person_player_photogram_222_1",
+      "sponsor_social_person_player_photogram_224_2"
+    ],
+    "zeroPaidDeliveryCount": 4,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "IT",
+    "unmet": [],
+    "unmetRawPointer": "IT/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 17,
+      "An existing deal or offer must end first": 28
+    },
+    "annualArraySha256": "d8b22b18a5aadcc9ddb72fbe8ccef1f6947d47dae6a2c8ff87a12bbd54a2713d",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 19,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2019
+        },
+        "roleId": "administrator"
+      },
+      {
+        "accepted": true,
+        "age": 59,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2059
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_315_0",
+      "sponsor_social_person_player_photogram_333_1",
+      "sponsor_social_person_player_photogram_352_2",
+      "sponsor_social_person_player_photogram_427_3",
+      "sponsor_social_person_player_photogram_444_4"
+    ],
+    "zeroPaidDeliveryCount": 17,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "BR",
+    "unmet": [],
+    "unmetRawPointer": "BR/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 8,
+      "An existing deal or offer must end first": 61
+    },
+    "annualArraySha256": "276fa6b37557f4541369deb75d394a23314e0525042b2b1fe60e73ef275df042",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_198_0",
+      "sponsor_social_person_player_photogram_217_1",
+      "sponsor_social_person_player_photogram_233_2"
+    ],
+    "zeroPaidDeliveryCount": 28,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "IN",
+    "unmet": [],
+    "unmetRawPointer": "IN/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 11,
+      "An existing deal or offer must end first": 45
+    },
+    "annualArraySha256": "99a75338df0d5130e343fda740567ac851e806e1435607be19509b923babb136",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_260_0",
+      "sponsor_social_person_player_photogram_277_1"
+    ],
+    "zeroPaidDeliveryCount": 5,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "JP",
+    "unmet": [],
+    "unmetRawPointer": "JP/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 9,
+      "An existing deal or offer must end first": 59
+    },
+    "annualArraySha256": "c35ff173fa4e96c56dc773511ac9408979b721443cc711093edd37271f273375",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": false,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "retail"
+      }
+    ],
+    "declinedBrandOffers": [
+      "sponsor_social_person_player_photogram_203_0"
+    ],
+    "zeroPaidDeliveryCount": 17,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  },
+  {
+    "country": "ZA",
+    "unmet": [],
+    "unmetRawPointer": "ZA/result.json#/unmet",
+    "annualBrandAvailabilityReasons": {
+      "No actual profile": 13,
+      "Requires an active adult profile, 5,000 followers and 45% public image": 9,
+      "An existing deal or offer must end first": 70
+    },
+    "annualArraySha256": "d65329ace926936fb056428a608fe1a268d488a3b24e0f488fcfda840b6f7bf6",
+    "interviews": [
+      {
+        "accepted": true,
+        "age": 16,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2016
+        },
+        "roleId": "cafe-part"
+      },
+      {
+        "accepted": true,
+        "age": 18,
+        "date": {
+          "day": 1,
+          "month": 1,
+          "year": 2018
+        },
+        "roleId": "administrator"
+      }
+    ],
+    "declinedBrandOffers": [],
+    "zeroPaidDeliveryCount": 22,
+    "limits": [
+      "No failed-business closure was required; final sold status is estate disposal, not operating failure.",
+      "Family phase is actual paid adoption, not marriage or biological pregnancy.",
+      "Detailed current contract/creator-income/company-ledger/estate currency reconciliation is asserted by the producer; this reviewer does not decode final ledger rows."
+    ]
+  }
+]

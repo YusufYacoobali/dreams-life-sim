@@ -1,0 +1,36 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+  "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+  "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+  "argv": [
+    "node",
+    "tools/current-policy/run-entrepreneur-v3.cjs",
+    "--registration",
+    "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+    "--all",
+    "--output",
+    "/workspace/.cache/dreams-current-c39-policies/entrepreneur-v3"
+  ],
+  "startedAt": "2026-10-21T08:14:32.357757+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T09:46:54.810923+00:00",
+  "elapsedSeconds": 5542.453,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-accepted-entrepreneur-v3.out",
+    "bytes": 1540428,
+    "sha256": "bdfc74af3966310680db2a1458e35695fb32f8d1da201fccb71b86c4ab3e71ef"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  }
+}

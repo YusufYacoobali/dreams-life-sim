@@ -1,0 +1,36 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+  "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+  "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+  "argv": [
+    "node",
+    "tools/current-policy/run-criminal-v2.cjs",
+    "--registration",
+    "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+    "--all",
+    "--output",
+    "/workspace/.cache/dreams-current-c39-policies/criminal-v2"
+  ],
+  "startedAt": "2026-10-21T08:08:13.084070+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T08:10:44.640808+00:00",
+  "elapsedSeconds": 151.557,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+    "bytes": 657841,
+    "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  }
+}

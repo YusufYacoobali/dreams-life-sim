@@ -1,0 +1,222 @@
+{
+  "format": "dreams-current-policy-manifest-only-readiness-v1",
+  "complete": true,
+  "cohortRunAuthorized": false,
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "registration": {
+    "file": "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+    "bytes": 2249,
+    "sha256": "bb039c3b661141a641b59fee85193e5db6b9daa0a03d6481ab421718ef65a370"
+  },
+  "nativeSourceManifest": {
+    "file": "/tmp/dreams-native-cohort-c39-accepted-source-complete.json",
+    "bytes": 76168,
+    "sha256": "0401a0d506c166f02acb09ce0c59d3d222bc2ece669510fda0eb09ec6d353ef0"
+  },
+  "nativeSourceVerification": {
+    "file": "/tmp/dreams-native-cohort-c39-accepted-source-verification-receipt.json",
+    "bytes": 4054,
+    "sha256": "10240043835984728f71f3723d970a2840fcc82c66df2d2c510c208a7427b53e"
+  },
+  "copyBridge": {
+    "file": "/tmp/dreams-production-finish-copy-bridge.json",
+    "bytes": 1574,
+    "sha256": "8bf26a7f43b5be065807094cd2a4ecac967727c3b5935ba9f928252fc10617ee"
+  },
+  "testOnlySourceBridge": {
+    "file": "/tmp/dreams-production-finish-corrected-accepted-bridge.json",
+    "bytes": 1268,
+    "sha256": "3cfa8821af8a0031996123a5d7f91c6248366c1e7aabe415c813cc5759500a8d"
+  },
+  "guardPreload": {
+    "file": "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+    "bytes": 2431,
+    "sha256": "cf4f0f39cc8cb6341fa1e55e1f3457de6af2b327e82863e8592ba47280433807"
+  },
+  "scope": "Actual positive guarded manifest-only source/Git readiness. No TS, runtime, support, SQLite, birth, world, command, policy output directory, actual cohort or native/performance acceptance. Original66ec and3224 source/registration records remain immutable; all old gates keep original source scope plus explicit bridges.",
+  "records": [
+    {
+      "policy": "A",
+      "argv": [
+        "node",
+        "--require",
+        "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+        "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-professional-v3.cjs",
+        "--registration",
+        "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+        "--all",
+        "--manifest-only"
+      ],
+      "exitCode": 0,
+      "toolWallTimeSeconds": 0.251071377,
+      "stdout": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-A-manifest-only.json",
+        "bytes": 2011,
+        "sha256": "a4d9809f3aa5aeebbd8edebf3c26430e2adc052af6911e8b92cce4ef2f7afaa0"
+      },
+      "stderr": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-A-manifest-only.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "guard": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-A-manifest-only-guard.json",
+        "bytes": 529,
+        "sha256": "8a8dab81aac35f237fea5434d77c1bcee0b0f6d65544142bfde923f7c9032405"
+      },
+      "exit": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-A-manifest-only.exit",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "policy": "B",
+      "argv": [
+        "node",
+        "--require",
+        "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+        "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-criminal-v2.cjs",
+        "--registration",
+        "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+        "--all",
+        "--manifest-only"
+      ],
+      "exitCode": 0,
+      "toolWallTimeSeconds": 0.387315046,
+      "stdout": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-B-manifest-only.json",
+        "bytes": 2031,
+        "sha256": "4d2f21f8e68455282ab81f20684fdd57dc85219bc316e7be7b1a68e23d3d149d"
+      },
+      "stderr": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-B-manifest-only.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "guard": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-B-manifest-only-guard.json",
+        "bytes": 525,
+        "sha256": "b5557bd479fae5cf56630307eaf7d8065f6273f15c0042bd3e8150118231fb7d"
+      },
+      "exit": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-B-manifest-only.exit",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "policy": "C",
+      "argv": [
+        "node",
+        "--require",
+        "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+        "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-entrepreneur-v3.cjs",
+        "--registration",
+        "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+        "--all",
+        "--manifest-only"
+      ],
+      "exitCode": 0,
+      "toolWallTimeSeconds": 0.389877078,
+      "stdout": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-C-manifest-only.json",
+        "bytes": 2038,
+        "sha256": "9fa1cc22dd2f4730be4033a8d64ea8cabe71c3d781ca76b695ca90cbc540faff"
+      },
+      "stderr": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-C-manifest-only.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "guard": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-C-manifest-only-guard.json",
+        "bytes": 490,
+        "sha256": "557fe6ef20f8a7e99f7f04d7beb347d5dee19178ad672c4690c8989fda90b088"
+      },
+      "exit": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-C-manifest-only.exit",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "policy": "D",
+      "argv": [
+        "node",
+        "--require",
+        "/tmp/dreams-production-finish-accepted-policy-preflight-guard.cjs",
+        "/workspace/dreams-worktrees/project-callback-pacing-test/tools/current-policy/run-editorial-v2.cjs",
+        "--registration",
+        "/tmp/dreams-production-finish-accepted-policy-registration-readiness.json",
+        "--all",
+        "--manifest-only"
+      ],
+      "exitCode": 0,
+      "toolWallTimeSeconds": 0.40810009,
+      "stdout": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-D-manifest-only.json",
+        "bytes": 2035,
+        "sha256": "81c865981fb44296ec87eaec8cdfd475ec67a5566b14fc47e2f79f2fd9b7a076"
+      },
+      "stderr": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-D-manifest-only.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "guard": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-D-manifest-only-guard.json",
+        "bytes": 487,
+        "sha256": "aec406e862149aaaf7c6e5369332221f62f22afa1099231f259ecf5b0266fbfb"
+      },
+      "exit": {
+        "file": "/tmp/dreams-production-finish-accepted-policy-D-manifest-only.exit",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  ],
+  "oldRegistrationsStillExact": [
+    {
+      "file": "/tmp/dreams-native-cohort-c39-source-complete.json",
+      "bytes": 76154,
+      "sha256": "28e4e5aa1405f61fa967eadf177edeb10609b16837d66bf60e1e9dbb33b3a681"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-policy-registration-readiness.json",
+      "bytes": 1444,
+      "sha256": "6c89b52c0a1acb87bdbd037684ee5b7e2f190a585957241b3c575a7ea1fe2203"
+    },
+    {
+      "file": "/tmp/dreams-c39-action-source-registration.json",
+      "bytes": 915,
+      "sha256": "85809d3784db1edbf78b2e8f3dd83ab05f674b816128e4d7e20e15acb4c09a94"
+    },
+    {
+      "file": "/tmp/dreams-native-cohort-c39-corrected-source-complete.json",
+      "bytes": 76167,
+      "sha256": "0bda031139ca3f7dc853e7152b440382733b7ae43e1ea6a91a9ca80d1e101e95"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-corrected-policy-registration-readiness.json",
+      "bytes": 1984,
+      "sha256": "6956f2dd0a3282bb105195a0c0c8f4f3d005893b06240f1423e703f4af5ba0d2"
+    },
+    {
+      "file": "/tmp/dreams-c39-corrected-action-source-registration.json",
+      "bytes": 1451,
+      "sha256": "329060d77c7e1b8c360258912466c48a8b4c47c756f8b2a68cab1a7b24f14966"
+    }
+  ],
+  "runtimeOrTypeScriptOrSqliteLoads": 0,
+  "policyRunsPerformed": 0,
+  "additionalAnnualSeeds": 0,
+  "noPolicyOutputDirectoriesRequestedOrCreated": true,
+  "newBenchmarkRegistrationCreated": false,
+  "nativeAcceptance": false,
+  "producer": {
+    "file": "/tmp/dreams-production-finish-accepted-policy-collect-readiness.py",
+    "bytes": 4530,
+    "sha256": "eb4b663c5ee6c9f7b8b7713b4a216971ff7b304797c587450ee2ce33d8c41968"
+  }
+}

@@ -1,0 +1,1350 @@
+{
+  "format": "dreams-current-editorial-v2-independent-review-v1",
+  "reviewer": "/root/hobby_review",
+  "kind": "Codex read-only actual-artifact reconciliation",
+  "externalHuman": false,
+  "reviewedAt": "2026-10-21T08:48:04.303116+00:00",
+  "status": "reviewed-no-reconciliation-anomaly",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-finish-accepted-source.json",
+    "bytes": 75993,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  "sourceFiles": 688,
+  "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "gate": {
+    "session": "2002",
+    "receipt": {
+      "file": "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json",
+      "bytes": 1283,
+      "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+    },
+    "raw": {
+      "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+      "bytes": 834714,
+      "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5"
+    },
+    "complete": true,
+    "exitCode": 0,
+    "wrapperSeconds": 608.289,
+    "adapterSeconds": 607.702,
+    "beforeAfter": "all 688 source files exact"
+  },
+  "assignments": [
+    {
+      "country": "US",
+      "seed": 900
+    },
+    {
+      "country": "CA",
+      "seed": 901
+    },
+    {
+      "country": "GB",
+      "seed": 902
+    },
+    {
+      "country": "AU",
+      "seed": 903
+    },
+    {
+      "country": "FR",
+      "seed": 904
+    },
+    {
+      "country": "DE",
+      "seed": 905
+    },
+    {
+      "country": "ES",
+      "seed": 906
+    },
+    {
+      "country": "IT",
+      "seed": 907
+    },
+    {
+      "country": "BR",
+      "seed": 908
+    },
+    {
+      "country": "IN",
+      "seed": 909
+    },
+    {
+      "country": "JP",
+      "seed": 910
+    },
+    {
+      "country": "ZA",
+      "seed": 911
+    }
+  ],
+  "additionalAnnualSeeds": 0,
+  "scope": "Current C39 editorial adapterv2 with unchanged ordinal decision-policyv1. Same twelve reused country seeds900..911. Real in-memory SQLite/store StartLife+birth acknowledgement ONLY; all subsequent play uses immutable pure-engine advance/resume/choose/acknowledge commands and exact whole production-codec comparisons. Select eligible choices[committedDecisionOrdinal % eligible.length] in actual saved order. No future-roll inspection, manual context/state preparation, outcome search or all-catalogue/all-branch/native/full-life SQLite claim. Current source/catalogue/observed/unreached contexts retain their own hashes; old C35 evidence remains unchanged.",
+  "countries": [
+    {
+      "country": "US",
+      "seed": 900,
+      "ageAtDeath": 39,
+      "causeOfDeath": "declining health",
+      "commands": 183,
+      "catalogueDecisions": 21,
+      "systemOrCallbackDecisions": 41,
+      "uniqueObservedTemplates": 19,
+      "uniqueSelectedBranches": 20,
+      "quietResults": 18,
+      "coldChecks": 184,
+      "birthRevision": 1,
+      "finalRevision": 184,
+      "years": {
+        "country": "US",
+        "started": 40,
+        "completedToTarget": 39,
+        "recordedAnnualClosures": 39,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 39,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [
+        {
+          "cancellationReason": null,
+          "city": "New York",
+          "communityId": "school_person_player_14_0",
+          "country": "US",
+          "created": {
+            "day": 1,
+            "month": 1,
+            "year": 2006
+          },
+          "dueMonth": 24073,
+          "ended": {
+            "day": 1,
+            "month": 2,
+            "year": 2006
+          },
+          "expiresMonth": 24073,
+          "id": "story_15_0",
+          "kind": "arcade-invitation",
+          "offeredEventId": "story_15_0_due",
+          "originChoiceId": "ask",
+          "originEventId": "event_2006_school-arcade-invitation",
+          "originTemplateId": "school-arcade-invitation",
+          "paidTransactionId": "txn_18_720",
+          "parentId": "person_parent1",
+          "peerId": "person_npc_14_8",
+          "permission": {
+            "accepted": true,
+            "chance": 85,
+            "personId": "person_parent1",
+            "roll": 32,
+            "trustAtRequest": 70
+          },
+          "personId": "person_player",
+          "quote": {
+            "amount": {
+              "$dreamsBigInt": "2000"
+            },
+            "currency": "USD",
+            "payerId": "person_parent1"
+          },
+          "resolution": "attend",
+          "status": "resolved",
+          "teacherId": null
+        },
+        {
+          "cancellationReason": "Permission was declined",
+          "city": "New York",
+          "communityId": "school_person_player_14_0",
+          "country": "US",
+          "created": {
+            "day": 1,
+            "month": 1,
+            "year": 2011
+          },
+          "dueMonth": 24133,
+          "ended": {
+            "day": 1,
+            "month": 1,
+            "year": 2011
+          },
+          "expiresMonth": 24133,
+          "id": "story_32_1",
+          "kind": "arcade-invitation",
+          "offeredEventId": null,
+          "originChoiceId": "ask",
+          "originEventId": "event_2011_school-arcade-invitation",
+          "originTemplateId": "school-arcade-invitation",
+          "paidTransactionId": null,
+          "parentId": "person_parent1",
+          "peerId": "person_npc_14_8",
+          "permission": {
+            "accepted": false,
+            "chance": 85,
+            "personId": "person_parent1",
+            "roll": 87,
+            "trustAtRequest": 70
+          },
+          "personId": "person_player",
+          "quote": {
+            "amount": {
+              "$dreamsBigInt": "2000"
+            },
+            "currency": "USD",
+            "payerId": "person_parent1"
+          },
+          "resolution": null,
+          "status": "cancelled",
+          "teacherId": null
+        }
+      ],
+      "traceSha256": "c214680d6d124d6c8d0991b9c735ac47f59db057178fc806404ca9ac06194a63",
+      "finalWorldSha256": "738a2637ec427f6ccf72085533f21ccdc5d3cf02d0b8694b6c7bbefdb2735db3",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "USD",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/birth.checkpoint.json",
+          "bytes": 3763,
+          "sha256": "02eb1e615d86933bad10925e76fc035f8ca519582d4bbeb03bf1f18b0a55915f"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/birth.json",
+          "bytes": 482,
+          "sha256": "3d20cc93411e86afa96910ce8590aed44372ed505823f16c5399a4feec83ca8c"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/cold.ndjson",
+          "bytes": 68848,
+          "sha256": "33d2a355b67c157d0ac4e68a1b7276aa39c9227345cb4e4fb10e9a2f874278b1"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/commands.ndjson",
+          "bytes": 97662,
+          "sha256": "c214680d6d124d6c8d0991b9c735ac47f59db057178fc806404ca9ac06194a63"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/decisions.ndjson",
+          "bytes": 557310,
+          "sha256": "c8f3e63a49abe2d1f5568f6bf7261cc641f4f44c2246f0a6afe38d5092831ad0"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/final.checkpoint.json",
+          "bytes": 300265,
+          "sha256": "1d73ee5dbb4a62056698325ebf50ad8c3a2faf095959f09a54570c7bfcc9b3f0"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/US/result.json",
+          "bytes": 952791,
+          "sha256": "929897cdfedea109e99890e0fd44111d7207b2d65c541f01f9cc2470fad691e5"
+        }
+      }
+    },
+    {
+      "country": "CA",
+      "seed": 901,
+      "ageAtDeath": 86,
+      "causeOfDeath": "natural causes",
+      "commands": 240,
+      "catalogueDecisions": 62,
+      "systemOrCallbackDecisions": 2,
+      "uniqueObservedTemplates": 44,
+      "uniqueSelectedBranches": 56,
+      "quietResults": 24,
+      "coldChecks": 241,
+      "birthRevision": 1,
+      "finalRevision": 241,
+      "years": {
+        "country": "CA",
+        "started": 87,
+        "completedToTarget": 86,
+        "recordedAnnualClosures": 86,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 86,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "96f2a195a7e0b050d76d34810c210c1eaa97d7a1ea25e4d03615d33bd834f1fa",
+      "finalWorldSha256": "768d01a648f9be204015e81e687e16ff61e99d2dce680f2162722f0127fdd5be",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "CAD",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/birth.checkpoint.json",
+          "bytes": 3194,
+          "sha256": "9f9ecdcd1b7e4afbc2d7c40487b661ade0bb6fc35e409f811662510d6ce2d2a8"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/birth.json",
+          "bytes": 482,
+          "sha256": "f8496e5be48dfb613995583349785e40e0e05b8556499d250ff60d833f5931c9"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/cold.ndjson",
+          "bytes": 87939,
+          "sha256": "e90854003c015dd355e34e8503546cae74593c8519f683b7473f334a295a8965"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/commands.ndjson",
+          "bytes": 83673,
+          "sha256": "96f2a195a7e0b050d76d34810c210c1eaa97d7a1ea25e4d03615d33bd834f1fa"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/decisions.ndjson",
+          "bytes": 639186,
+          "sha256": "ffd7b31038116d308f095278203b5fecfddfe8fc0a7e703da6d0a828c5176a1e"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/final.checkpoint.json",
+          "bytes": 464306,
+          "sha256": "e41be583aed1f299c9d6b7cc1e610512d91ab8179df7bb828643fd0e7102be6e"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/CA/result.json",
+          "bytes": 1185225,
+          "sha256": "3d2bf1ba5e2b003a423fc35f5e530a9a7528478a45607ab3a0202b3a08ab3ce5"
+        }
+      }
+    },
+    {
+      "country": "GB",
+      "seed": 902,
+      "ageAtDeath": 85,
+      "causeOfDeath": "natural causes",
+      "commands": 257,
+      "catalogueDecisions": 73,
+      "systemOrCallbackDecisions": 6,
+      "uniqueObservedTemplates": 55,
+      "uniqueSelectedBranches": 67,
+      "quietResults": 12,
+      "coldChecks": 258,
+      "birthRevision": 1,
+      "finalRevision": 258,
+      "years": {
+        "country": "GB",
+        "started": 86,
+        "completedToTarget": 85,
+        "recordedAnnualClosures": 85,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 85,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "6a8769f92dd52b90ce1ee3e0e9757ee4bd7a8cde410d28dd24548d444e56609a",
+      "finalWorldSha256": "233ebcff8a5be94efd8822eb3938a86cca6294432c03550b211e6a9581a80af8",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "GBP",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/birth.checkpoint.json",
+          "bytes": 3743,
+          "sha256": "26b0830adb3bc0958c946d0829b4c7ae6bae55b69b930df93686d6d2bc54f978"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/birth.json",
+          "bytes": 481,
+          "sha256": "43398d044064348c8aae59ee6e87ceea88a78c99be82915e5c3647e738530d16"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/cold.ndjson",
+          "bytes": 94820,
+          "sha256": "2851d775e9d586bcec8b3ca635dd630d36b58173b8ab780691c19485e8f537f0"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/commands.ndjson",
+          "bytes": 95303,
+          "sha256": "6a8769f92dd52b90ce1ee3e0e9757ee4bd7a8cde410d28dd24548d444e56609a"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/decisions.ndjson",
+          "bytes": 788516,
+          "sha256": "b96d2fdcea05abad5b1573b009eb7e11d248d421b81bdda2607e825445a3d076"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/final.checkpoint.json",
+          "bytes": 543506,
+          "sha256": "721566cd25f3724fe1fd891086aea0cb7df4d5b89e9f05ce709c4501ce438e5d"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/GB/result.json",
+          "bytes": 1367709,
+          "sha256": "2bbe34b659e9af7b0cd04ab094740a5ae70bdd3959fc7aa937e26dbaa1c417e0"
+        }
+      }
+    },
+    {
+      "country": "AU",
+      "seed": 903,
+      "ageAtDeath": 84,
+      "causeOfDeath": "natural causes",
+      "commands": 238,
+      "catalogueDecisions": 66,
+      "systemOrCallbackDecisions": 2,
+      "uniqueObservedTemplates": 49,
+      "uniqueSelectedBranches": 58,
+      "quietResults": 17,
+      "coldChecks": 239,
+      "birthRevision": 1,
+      "finalRevision": 239,
+      "years": {
+        "country": "AU",
+        "started": 84,
+        "completedToTarget": 83,
+        "recordedAnnualClosures": 83,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 83,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "76fffd3973694e2bb5960adb6e507f151228ab861b2e70445735080492e8d95a",
+      "finalWorldSha256": "ab701fb721008705f5e7a770d01a8e2b368ecc12ac61b287ef8d206cfdeddf44",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "AUD",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/birth.checkpoint.json",
+          "bytes": 3751,
+          "sha256": "75bc4df0694fd74d1fcdd70d44e69902f58a8ce4ad26e63746f7ddaeb1b201dd"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/birth.json",
+          "bytes": 480,
+          "sha256": "e8d9901c55ddaeb3ccb418ced046184d4c62b9d25654d5ee9d1b25f3d094cc6a"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/cold.ndjson",
+          "bytes": 87414,
+          "sha256": "b357396e3a1ef9a262f5de42dc06bb605338dd2085322188dbf00ff5ccdf26fd"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/commands.ndjson",
+          "bytes": 83912,
+          "sha256": "76fffd3973694e2bb5960adb6e507f151228ab861b2e70445735080492e8d95a"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/decisions.ndjson",
+          "bytes": 690134,
+          "sha256": "be2433351dea36097ddcfdf03363019163bc3ff26d0d778da84195510ffab734"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/final.checkpoint.json",
+          "bytes": 787548,
+          "sha256": "d4a692e1d5dc3dd1f46fbbfc9a5aa11de334456fb52f41a91095434ac4557435"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/AU/result.json",
+          "bytes": 1231883,
+          "sha256": "268dbf9ea074aaa1e8d2c25cd1e0310ff70271c3d0c1c2ef5df82531c092754a"
+        }
+      }
+    },
+    {
+      "country": "FR",
+      "seed": 904,
+      "ageAtDeath": 76,
+      "causeOfDeath": "natural causes",
+      "commands": 241,
+      "catalogueDecisions": 49,
+      "systemOrCallbackDecisions": 19,
+      "uniqueObservedTemplates": 39,
+      "uniqueSelectedBranches": 46,
+      "quietResults": 27,
+      "coldChecks": 242,
+      "birthRevision": 1,
+      "finalRevision": 242,
+      "years": {
+        "country": "FR",
+        "started": 77,
+        "completedToTarget": 76,
+        "recordedAnnualClosures": 76,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 76,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [
+        {
+          "cancellationReason": null,
+          "city": "Paris",
+          "communityId": "school_person_player_30_1",
+          "country": "FR",
+          "created": {
+            "day": 1,
+            "month": 1,
+            "year": 2014
+          },
+          "dueMonth": 24170,
+          "ended": {
+            "day": 1,
+            "month": 3,
+            "year": 2014
+          },
+          "expiresMonth": 24170,
+          "id": "story_40_0",
+          "kind": "project-promise",
+          "offeredEventId": "story_40_0_due",
+          "originChoiceId": "promise",
+          "originEventId": "event_2014_school-project-promise",
+          "originTemplateId": "school-project-promise",
+          "paidTransactionId": null,
+          "parentId": null,
+          "peerId": "person_npc_16_5",
+          "permission": null,
+          "personId": "person_player",
+          "projectRecall": {
+            "cancellationReason": null,
+            "dueMonth": 24194,
+            "ended": {
+              "day": 1,
+              "month": 3,
+              "year": 2016
+            },
+            "expiresMonth": 24196,
+            "offered": {
+              "day": 1,
+              "month": 3,
+              "year": 2016
+            },
+            "offeredEventId": "story_40_0_project_recall",
+            "resolution": "remember-project",
+            "status": "resolved"
+          },
+          "quote": {
+            "amount": {
+              "$dreamsBigInt": "0"
+            },
+            "currency": "EUR",
+            "payerId": null
+          },
+          "rememberProject": true,
+          "resolution": "ask-help",
+          "status": "resolved",
+          "teacherId": "person_npc_30_11"
+        }
+      ],
+      "traceSha256": "eee9529e0325ba8df8669a78413f6510bb6874b349d922221bd2552640053490",
+      "finalWorldSha256": "7c23408de17ef6496a29a00b7c9276043fdb3ee6505a27a62166a528a922433c",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "EUR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/birth.checkpoint.json",
+          "bytes": 3739,
+          "sha256": "e9f58034994b03a5fb1fb58f6a73fcab3f4cf592044e4889209dae0aa956310d"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/birth.json",
+          "bytes": 477,
+          "sha256": "363e9c51446f91333d881fc4401438db6be0951cd173f98a6963d4ad26e599d7"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/cold.ndjson",
+          "bytes": 88940,
+          "sha256": "499564921bad48c1196f440ff73192e6774b2e18f6e4fcb44dcd367799f87163"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/commands.ndjson",
+          "bytes": 96315,
+          "sha256": "eee9529e0325ba8df8669a78413f6510bb6874b349d922221bd2552640053490"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/decisions.ndjson",
+          "bytes": 654015,
+          "sha256": "4898d42ce70dc834c58f7122aa7b1699ecf71fb32c80c9d0e574259f902a244f"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/final.checkpoint.json",
+          "bytes": 666701,
+          "sha256": "c04409d78bb66ce4bf3bc404db841cf8eddeccee3482ba304cbf8e182487038f"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/FR/result.json",
+          "bytes": 1227013,
+          "sha256": "c55d8624082448296bc2ff1daf86953061b81a71aa3494f1748a3a74414d239d"
+        }
+      }
+    },
+    {
+      "country": "DE",
+      "seed": 905,
+      "ageAtDeath": 42,
+      "causeOfDeath": "Asthma",
+      "commands": 151,
+      "catalogueDecisions": 29,
+      "systemOrCallbackDecisions": 18,
+      "uniqueObservedTemplates": 27,
+      "uniqueSelectedBranches": 27,
+      "quietResults": 13,
+      "coldChecks": 152,
+      "birthRevision": 1,
+      "finalRevision": 152,
+      "years": {
+        "country": "DE",
+        "started": 43,
+        "completedToTarget": 42,
+        "recordedAnnualClosures": 42,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 42,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "518e97b4ffba71746b3339170da13364df85f038f50b772e8d8296a8c9e27264",
+      "finalWorldSha256": "fddfb51e93ffa23031c37be68633fdab7925d3aacc7fdf6256a527039e94de02",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "EUR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/birth.checkpoint.json",
+          "bytes": 3775,
+          "sha256": "f6f304d7194985738fe07bdd1e96323a1601dc2428057f2c4be2787025a8dda6"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/birth.json",
+          "bytes": 481,
+          "sha256": "d9445870a939f185db294feefb4ed55ef60c290661ae4b27362d81b03b9a18fa"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/cold.ndjson",
+          "bytes": 56082,
+          "sha256": "eefcc47f5996b879c3a6dec74bd3b50b13c72a9c929b606bf840ca914f68ec6d"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/commands.ndjson",
+          "bytes": 64158,
+          "sha256": "518e97b4ffba71746b3339170da13364df85f038f50b772e8d8296a8c9e27264"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/decisions.ndjson",
+          "bytes": 433256,
+          "sha256": "c705e73e52c2104248625baa968b2a8b2ef01515a259b1258fb05927c5440679"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/final.checkpoint.json",
+          "bytes": 327681,
+          "sha256": "bcdeec29f6243d643f5b458038d99c3297db7a3cbc69cda6e23fb18209ca0f0a"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/DE/result.json",
+          "bytes": 743145,
+          "sha256": "590b43b49ca4308717289ccb63e78d91144c64feb1af79a7c02a3ee0a9f2f9f1"
+        }
+      }
+    },
+    {
+      "country": "ES",
+      "seed": 906,
+      "ageAtDeath": 69,
+      "causeOfDeath": "natural causes",
+      "commands": 196,
+      "catalogueDecisions": 50,
+      "systemOrCallbackDecisions": 3,
+      "uniqueObservedTemplates": 40,
+      "uniqueSelectedBranches": 47,
+      "quietResults": 19,
+      "coldChecks": 197,
+      "birthRevision": 1,
+      "finalRevision": 197,
+      "years": {
+        "country": "ES",
+        "started": 70,
+        "completedToTarget": 69,
+        "recordedAnnualClosures": 69,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 69,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "fcc90ff404443e1f14e3ec0e19e93ad1b81d1c49a5f8637d9406d1a8a7af10c4",
+      "finalWorldSha256": "bc7615b9309e67cf3c39cbc5d09afafaad271ce52e4a55d96841376553e5ccdf",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "EUR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/birth.checkpoint.json",
+          "bytes": 3763,
+          "sha256": "c4a0eed70ccc65af00628ba53c6d5b7da32ea0f01dc4799284dec518faf241b9"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/birth.json",
+          "bytes": 476,
+          "sha256": "e6b4b1f464afdd191b16f05b17f46816778e6e2e12af4c3198782e32a70d9b80"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/cold.ndjson",
+          "bytes": 71962,
+          "sha256": "868efd6723146b698320174f8e8c8a5f2754efcfd6e7d0b8a71c0638bfed3267"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/commands.ndjson",
+          "bytes": 69604,
+          "sha256": "fcc90ff404443e1f14e3ec0e19e93ad1b81d1c49a5f8637d9406d1a8a7af10c4"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/decisions.ndjson",
+          "bytes": 531650,
+          "sha256": "889670a9c71289b091fd514cb4172ee8aaacef2124a21cc68341fe33ed94cc1d"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/final.checkpoint.json",
+          "bytes": 267576,
+          "sha256": "51f61c7731e3828cfe0438108dd33df553c8b72b3cf919fa787c2422440d1869"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ES/result.json",
+          "bytes": 971822,
+          "sha256": "4d7906118a17b8adb6cbcc523d5ce47fd856cb501918e89efcf861ed7b8a3354"
+        }
+      }
+    },
+    {
+      "country": "IT",
+      "seed": 907,
+      "ageAtDeath": 70,
+      "causeOfDeath": "Diabetes",
+      "commands": 213,
+      "catalogueDecisions": 47,
+      "systemOrCallbackDecisions": 12,
+      "uniqueObservedTemplates": 37,
+      "uniqueSelectedBranches": 43,
+      "quietResults": 23,
+      "coldChecks": 214,
+      "birthRevision": 1,
+      "finalRevision": 214,
+      "years": {
+        "country": "IT",
+        "started": 71,
+        "completedToTarget": 70,
+        "recordedAnnualClosures": 70,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 70,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "b9976dc671a86065c783cabd06dc82ba8bb2b850b3f154a34d1fc6b9ba1b585a",
+      "finalWorldSha256": "5002235da7f08b56c191309b3b22620543d0af510834359267d78e81a1bd554b",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "EUR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/birth.checkpoint.json",
+          "bytes": 3739,
+          "sha256": "806c8a8ba8a8dc76b64668fb949ee0cd5d7a6e6a48025b612ee83881f8dad730"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/birth.json",
+          "bytes": 477,
+          "sha256": "b0ebc3c1bdee3557562988be95f5e05b0efd4b88f58cd2164e06b81fbef674fa"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/cold.ndjson",
+          "bytes": 78566,
+          "sha256": "bc3325fb1616578eecbf0e9ab979b1a5b3abda3ec6e052430dfefb024501c598"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/commands.ndjson",
+          "bytes": 81311,
+          "sha256": "b9976dc671a86065c783cabd06dc82ba8bb2b850b3f154a34d1fc6b9ba1b585a"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/decisions.ndjson",
+          "bytes": 579104,
+          "sha256": "ec45d900a79aa8f8bf1fece1cbbfb704f788db0451fb7d5b7ba28e9ce366b0a5"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/final.checkpoint.json",
+          "bytes": 456301,
+          "sha256": "ab41b1137bc54bfe9a3002258a0a921aa5625b686bf448dff2731b0cb526edf4"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IT/result.json",
+          "bytes": 1040295,
+          "sha256": "df856747161776f323b4ffc4a763adf4b3f62113984f0fd488fafd6ee842ae92"
+        }
+      }
+    },
+    {
+      "country": "BR",
+      "seed": 908,
+      "ageAtDeath": 76,
+      "causeOfDeath": "natural causes",
+      "commands": 212,
+      "catalogueDecisions": 52,
+      "systemOrCallbackDecisions": 3,
+      "uniqueObservedTemplates": 39,
+      "uniqueSelectedBranches": 47,
+      "quietResults": 24,
+      "coldChecks": 213,
+      "birthRevision": 1,
+      "finalRevision": 213,
+      "years": {
+        "country": "BR",
+        "started": 77,
+        "completedToTarget": 76,
+        "recordedAnnualClosures": 76,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 76,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "692275bebfc8a52c8b3c535b0b39337380b2561163f395d659e2514aa2bac478",
+      "finalWorldSha256": "8535fb9ec870324fdc80df2325b12748399e4e4337a15cacbd8f602ee6e09301",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "BRL",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/birth.checkpoint.json",
+          "bytes": 3739,
+          "sha256": "ac7635bb8cf0bc43b8c4743d237e17f29f374522e7590bb1d83a53434f687318"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/birth.json",
+          "bytes": 483,
+          "sha256": "c1898278aebf059677a886ad572d78e279dbb03299cad84306416102f744e41e"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/cold.ndjson",
+          "bytes": 77671,
+          "sha256": "c9b01d0dc08e79381b28bdd7245c48711de1e67e0349270668fb0d0fc0ee00fe"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/commands.ndjson",
+          "bytes": 74492,
+          "sha256": "692275bebfc8a52c8b3c535b0b39337380b2561163f395d659e2514aa2bac478"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/decisions.ndjson",
+          "bytes": 542561,
+          "sha256": "740b7bea5349ca327ecf0f5f89cf338f18f84cbd270265d8cad36dae03c2f8d3"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/final.checkpoint.json",
+          "bytes": 360922,
+          "sha256": "a2f6f614e0047e2899f80a76f6ff4fbe464c64732a800c7796a9c9a63e63dfc2"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/BR/result.json",
+          "bytes": 1013233,
+          "sha256": "3c1a8ef24feda9f1bef767dbc5c72d22c5652e2b9d70419f499e27bf7d8c502c"
+        }
+      }
+    },
+    {
+      "country": "IN",
+      "seed": 909,
+      "ageAtDeath": 44,
+      "causeOfDeath": "Diabetes",
+      "commands": 151,
+      "catalogueDecisions": 33,
+      "systemOrCallbackDecisions": 14,
+      "uniqueObservedTemplates": 31,
+      "uniqueSelectedBranches": 33,
+      "quietResults": 11,
+      "coldChecks": 152,
+      "birthRevision": 1,
+      "finalRevision": 152,
+      "years": {
+        "country": "IN",
+        "started": 45,
+        "completedToTarget": 44,
+        "recordedAnnualClosures": 45,
+        "recordedInterruptedClosures": 1,
+        "visibleFinishYearFrames": 44,
+        "startedWithoutRecordedClosure": 0
+      },
+      "retainedThreads": [],
+      "traceSha256": "ec3d103ebaf13f68e32036148a07aa2d0b66a479954f410ef309d74c373305f7",
+      "finalWorldSha256": "41287ed924d6c7e46a72d1f358c71c734447fb3f8cba8aba1422cfa2a5b7841a",
+      "lastColdReason": "annual-interrupted",
+      "estateCurrency": "INR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/birth.checkpoint.json",
+          "bytes": 3755,
+          "sha256": "7c7434e55fd499eb01ac6bdb6b436e68cd189dcf85bc6669a433f66041e2e415"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/birth.json",
+          "bytes": 480,
+          "sha256": "6864f67917bb329ed14746e366c33a23190a2bde6ff7131ab7b944bc0af661cb"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/cold.ndjson",
+          "bytes": 56136,
+          "sha256": "e49e455860994027d999c7b8726d1f332d5ca2df083f63d503db1e6c1124f336"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/commands.ndjson",
+          "bytes": 63374,
+          "sha256": "ec3d103ebaf13f68e32036148a07aa2d0b66a479954f410ef309d74c373305f7"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/decisions.ndjson",
+          "bytes": 451385,
+          "sha256": "8d00e3dac53cdbc24995baa69144c09e94344484d9af8b8a78f7321f64940ae9"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/final.checkpoint.json",
+          "bytes": 326589,
+          "sha256": "7fdcd269d5c048d69cb7ff97d733a1e8e1a9fa3ba45ad5c0fd70e27799037473"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/IN/result.json",
+          "bytes": 770994,
+          "sha256": "0a900e015861eaf123903513649b2e4dd93062f896a561bf82b1f91749cdec90"
+        }
+      }
+    },
+    {
+      "country": "JP",
+      "seed": 910,
+      "ageAtDeath": 70,
+      "causeOfDeath": "critical health decline",
+      "commands": 215,
+      "catalogueDecisions": 48,
+      "systemOrCallbackDecisions": 14,
+      "uniqueObservedTemplates": 39,
+      "uniqueSelectedBranches": 45,
+      "quietResults": 21,
+      "coldChecks": 216,
+      "birthRevision": 1,
+      "finalRevision": 216,
+      "years": {
+        "country": "JP",
+        "started": 70,
+        "completedToTarget": 70,
+        "recordedAnnualClosures": 70,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 69,
+        "startedWithoutRecordedClosure": 0
+      },
+      "retainedThreads": [],
+      "traceSha256": "9e9f7d6982c53f838ca443ecc913e5a93588e1e753676753a5533761acc0864e",
+      "finalWorldSha256": "f45749fe21bdad48e048af56619facefeba3348e1ac09b0730b2ffc5810fa36e",
+      "lastColdReason": "year-end",
+      "estateCurrency": "JPY",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/birth.checkpoint.json",
+          "bytes": 3178,
+          "sha256": "5f6a042ce6d5f7253a30b63be9f093efd3e7b4d632e200437d0d479d72396fb6"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/birth.json",
+          "bytes": 480,
+          "sha256": "92a7ada8fcbced83ea3930b0e5f14ab5860427670b16260cc4fe7596e915c02f"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/cold.ndjson",
+          "bytes": 79308,
+          "sha256": "ff9cd4e6cadc965295166552773c9884533a8a1fc45fbbfa86e2884abf75d817"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/commands.ndjson",
+          "bytes": 82897,
+          "sha256": "9e9f7d6982c53f838ca443ecc913e5a93588e1e753676753a5533761acc0864e"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/decisions.ndjson",
+          "bytes": 599485,
+          "sha256": "da6c19e219581e74269cffcbace99074cf2ffb121d55e2f89a1ad01d40a06fc1"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/final.checkpoint.json",
+          "bytes": 580356,
+          "sha256": "bd705233f8964e30c16f8048ff41dbe82940e746bd49c5e3486a2504928bcc3a"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/JP/result.json",
+          "bytes": 1061962,
+          "sha256": "32d99ad651853ba5c0073f676245fa23369f0ddee69027ada0e69d5b138137e6"
+        }
+      }
+    },
+    {
+      "country": "ZA",
+      "seed": 911,
+      "ageAtDeath": 46,
+      "causeOfDeath": "natural causes",
+      "commands": 139,
+      "catalogueDecisions": 37,
+      "systemOrCallbackDecisions": 4,
+      "uniqueObservedTemplates": 33,
+      "uniqueSelectedBranches": 35,
+      "quietResults": 9,
+      "coldChecks": 140,
+      "birthRevision": 1,
+      "finalRevision": 140,
+      "years": {
+        "country": "ZA",
+        "started": 47,
+        "completedToTarget": 46,
+        "recordedAnnualClosures": 46,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 46,
+        "startedWithoutRecordedClosure": 1
+      },
+      "retainedThreads": [],
+      "traceSha256": "f98bae0deb24d70ccc6664960f7a3d015b8bb62dd16a7075e1982ba63e511939",
+      "finalWorldSha256": "7dd6d57271107cea4ddba0041969bc2fb0c3b5ffb69fa2d0c32013978a74601c",
+      "lastColdReason": "natural-death",
+      "estateCurrency": "ZAR",
+      "estateAmountsConserve": true,
+      "raw": {
+        "birth.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/birth.checkpoint.json",
+          "bytes": 3735,
+          "sha256": "ef0033a70b6fe517afce7f1aba7569a6a0b433abc9b176d3e840d9eabe19288a"
+        },
+        "birth.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/birth.json",
+          "bytes": 485,
+          "sha256": "0025bd7ddb49398455eb7d26f274819cea241b21771602683811bd368325139b"
+        },
+        "cold.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/cold.ndjson",
+          "bytes": 51302,
+          "sha256": "dd4851d03e6d2d601956d5328b46a8cc8fa3a9fc1a25213566ce749bdbd85502"
+        },
+        "commands.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/commands.ndjson",
+          "bytes": 51155,
+          "sha256": "f98bae0deb24d70ccc6664960f7a3d015b8bb62dd16a7075e1982ba63e511939"
+        },
+        "decisions.ndjson": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/decisions.ndjson",
+          "bytes": 417652,
+          "sha256": "e174ccb761ece2f4b22445c7e2da8d103ff27861c17797ed2dce04001c9fc1b7"
+        },
+        "final.checkpoint.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/final.checkpoint.json",
+          "bytes": 345585,
+          "sha256": "22071fe454aa2c5e68a7308fd47d28b6f59b1258d4c24862bd7d6e4bb6e14c6d"
+        },
+        "result.json": {
+          "file": "/workspace/.cache/dreams-current-c39-policies/editorial-v2/ZA/result.json",
+          "bytes": 725646,
+          "sha256": "42c1a3f3dca764ac44c3ac556251c563bc4e58c052f316cb0d4d88a7a51bf1ff"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "naturalDeaths": 12,
+    "commands": 2436,
+    "catalogueChoices": 567,
+    "systemOrCallbackChoices": 138,
+    "systemTypes": {
+      "story-arcade-invitation": 1,
+      "medical-emergency": 135,
+      "story-project-promise": 1,
+      "story-project-recall": 1
+    },
+    "resultEvents": 934,
+    "quietSummaryResults": 218,
+    "producerColdComparisons": 2448,
+    "checkpointFormats": {
+      "dreams-checkpoint-v1": 187,
+      "dreams-checkpoint-v4": 2261
+    },
+    "catalogueTemplates": 265,
+    "catalogueBranches": 795,
+    "uniqueObservedTemplates": 127,
+    "unseenTemplates": 138,
+    "uniqueSelectedBranches": 263,
+    "unchosenBranches": 532,
+    "authoredBranchOccurrences": {
+      "1": 186,
+      "2": 194,
+      "3": 187
+    },
+    "eligiblePositionOccurrences": {
+      "1": 186,
+      "2": 194,
+      "3": 187
+    },
+    "withinLifeRepeatedTemplateOccurrences": 115,
+    "minimumRepeatGapYears": 5,
+    "simpleCappedEffectsChecked": 1260,
+    "cappedEffectsByKind": {
+      "stat": 1134,
+      "relationship": 108,
+      "school-grade": 11,
+      "skill": 7
+    },
+    "nonzeroRequestedEffectsCappedToZero": 192,
+    "selectedEffectKinds": {
+      "stat": 1134,
+      "relationship": 108,
+      "schedule-story": 3,
+      "resolve-story": 3,
+      "school-grade": 11,
+      "skill": 7,
+      "emergency-care": 135
+    },
+    "unavailableChoiceRows": 0,
+    "resolvedStoryCallbacks": 3,
+    "retainedThreadStatuses": {
+      "resolved": 2,
+      "cancelled": 1
+    }
+  },
+  "pacing": {
+    "visibleFinishedFrames": 785,
+    "guaranteedFirstBirthdayOffers": 12,
+    "observedOutcomes": [
+      {
+        "actualImportantDecisionLoad": 0,
+        "authoredLaterYearChance": 78,
+        "catalogueOffersIncludingFirstBirthday": 534,
+        "laterYearCatalogueOffers": 522,
+        "quietSummaries": 158
+      },
+      {
+        "actualImportantDecisionLoad": 1,
+        "authoredLaterYearChance": 50,
+        "catalogueOffersIncludingFirstBirthday": 27,
+        "laterYearCatalogueOffers": 27,
+        "quietSummaries": 30
+      },
+      {
+        "actualImportantDecisionLoad": 2,
+        "authoredLaterYearChance": 25,
+        "catalogueOffersIncludingFirstBirthday": 6,
+        "laterYearCatalogueOffers": 6,
+        "quietSummaries": 23
+      },
+      {
+        "actualImportantDecisionLoad": 3,
+        "authoredLaterYearChance": 10,
+        "catalogueOffersIncludingFirstBirthday": 0,
+        "laterYearCatalogueOffers": 0,
+        "quietSummaries": 7
+      }
+    ],
+    "interpretation": "Observed command snapshots expose actual saved V1 load and optional offer/quiet outcomes. Twelve first birthdays are guaranteed and are reported separately from the later-year 78/50/25/10 chances. These are not a controlled balance comparison or independent proof of each hidden offer roll. Original effects, mandatory decisions and callback resolutions are not suppressed by this optional-scene count.",
+    "annualObserverLimits": [
+      {
+        "country": "US",
+        "started": 40,
+        "completedToTarget": 39,
+        "recordedAnnualClosures": 39,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 39,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "CA",
+        "started": 87,
+        "completedToTarget": 86,
+        "recordedAnnualClosures": 86,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 86,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "GB",
+        "started": 86,
+        "completedToTarget": 85,
+        "recordedAnnualClosures": 85,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 85,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "AU",
+        "started": 84,
+        "completedToTarget": 83,
+        "recordedAnnualClosures": 83,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 83,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "FR",
+        "started": 77,
+        "completedToTarget": 76,
+        "recordedAnnualClosures": 76,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 76,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "DE",
+        "started": 43,
+        "completedToTarget": 42,
+        "recordedAnnualClosures": 42,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 42,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "ES",
+        "started": 70,
+        "completedToTarget": 69,
+        "recordedAnnualClosures": 69,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 69,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "IT",
+        "started": 71,
+        "completedToTarget": 70,
+        "recordedAnnualClosures": 70,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 70,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "BR",
+        "started": 77,
+        "completedToTarget": 76,
+        "recordedAnnualClosures": 76,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 76,
+        "startedWithoutRecordedClosure": 1
+      },
+      {
+        "country": "IN",
+        "started": 45,
+        "completedToTarget": 44,
+        "recordedAnnualClosures": 45,
+        "recordedInterruptedClosures": 1,
+        "visibleFinishYearFrames": 44,
+        "startedWithoutRecordedClosure": 0
+      },
+      {
+        "country": "JP",
+        "started": 70,
+        "completedToTarget": 70,
+        "recordedAnnualClosures": 70,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 69,
+        "startedWithoutRecordedClosure": 0
+      },
+      {
+        "country": "ZA",
+        "started": 47,
+        "completedToTarget": 46,
+        "recordedAnnualClosures": 46,
+        "recordedInterruptedClosures": 0,
+        "visibleFinishYearFrames": 46,
+        "startedWithoutRecordedClosure": 1
+      }
+    ]
+  },
+  "checks": {
+    "all87RawFilesPinned": true,
+    "all12ProgressAndAggregateRecordsReconciled": true,
+    "all12RawCommandTraceHashesIndependentlyChecked": true,
+    "allBirthAndFinalCheckpointBytesMatchRecordedColdPins": true,
+    "allDecisionChoicesAndOrdinalAvailabilityReconciled": true,
+    "allRecordedPacingObservationsHaveActualResolvedChoiceJournalEvidence": true,
+    "allReportedEstateAmountsReconcilePerCurrency": true,
+    "anomalies": []
+  },
+  "rarity": {
+    "catalogueTemplateCounts": {
+      "common": 245,
+      "uncommon": 18,
+      "rare": 1,
+      "extremely-rare": 1
+    },
+    "actualChoiceOccurrences": {
+      "common": 560,
+      "uncommon": 7
+    },
+    "observedUniqueTemplates": {
+      "common": 121,
+      "uncommon": 6
+    },
+    "note": "Omitted rarity is common. Observed frequencies are not an independent relative-weight or controlled balance proof; rare and extremely-rare contexts remain unobserved."
+  },
+  "separateUS900NarrativeReview": {
+    "reviewer": "/root/story_editorial",
+    "kind": "Codex sequence review, not external-human review",
+    "pins": {
+      "REPORT.md": {
+        "file": "/tmp/dreams-c39-sequence-review-us900-20261021/REPORT.md",
+        "bytes": 8444,
+        "sha256": "8f9ce2716e4738bc3561524282ed728cf013f4ef1d34ac3bc616959897a177a7"
+      },
+      "summary.json": {
+        "file": "/tmp/dreams-c39-sequence-review-us900-20261021/summary.json",
+        "bytes": 8923,
+        "sha256": "198d2c52e5c0c6289574ab2f25284e6ab7dd74b1e66a69e6fff1f531a813e542"
+      }
+    },
+    "scope": "Preselected US900 bound sequence and condition chronology, independently authored by Story. This aggregate review does not repeat that narrative pass."
+  },
+  "evidence": {
+    "inputs.json": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/inputs.json",
+      "bytes": 65990,
+      "sha256": "8a7bc8137862bb88c9a9a2ba3665c79ba73751b21dd2ed809c518cf4fc1ac5e1"
+    },
+    "omissions.json": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/omissions.json",
+      "bytes": 86451,
+      "sha256": "b52d21a315adb8bb3915a7433a78f32d4c25000bbe9e9128d33a6a409ff3e82c"
+    },
+    "observed-catalogue.ndjson": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/observed-catalogue.ndjson",
+      "bytes": 234171,
+      "sha256": "8b77b6a60eff80cbee5d7632f15cb6ca6e394b3fe881510c8567ce4b722e22d0"
+    },
+    "effect-checks.ndjson": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/effect-checks.ndjson",
+      "bytes": 370822,
+      "sha256": "35fc6712a97ac152db1533d12beb0df2f5581e61ac3e3451ebe34599ca8b7110"
+    },
+    "pacing-frames.ndjson": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/pacing-frames.ndjson",
+      "bytes": 426799,
+      "sha256": "a02468dde6136a8207fbd5275c3ea2904d6ff3b0c3bbd84037c2612f962686f7"
+    },
+    "callbacks.json": {
+      "file": "/tmp/dreams-c39-editorial-v2-review/callbacks.json",
+      "bytes": 7340,
+      "sha256": "79d8f8a5befe83fd3a5009ca72dd4342871690f0b1dae703e112b41d4695b655"
+    }
+  },
+  "analysisDiagnostics": {
+    "preserved": [
+      "analysis-first.out",
+      "analysis-second.out",
+      "analysis-third.out"
+    ],
+    "scope": "Reviewer-only initial assumptions were corrected to account for the nested projectRecall resolution, its actual two-participant context, and revision-deduplicated terminal cold labels. No producer artifact, expected gameplay outcome or source was changed."
+  },
+  "limits": [
+    "SQLite/store is used only for birth and birth acknowledgement; later immutable engine and production codec checks are not full-life SQLite or native evidence.",
+    "Reviewer only reads actual JSON/source and hashes: no game loader, policy, codec, SQL, replay, tests, seed search or device operation.",
+    "Production whole-world equality and canonical world hashes remain producer assertions; reviewer pins endpoint checkpoint bytes and declared compact bounds without decompressing or decoding worlds.",
+    "The 1260 simple effect checks reconcile actual before/after snapshots with displayed cap values and tones. They do not independently replay complex emergency-care, scheduling or callback effect implementations.",
+    "Pacing observation journal IDs/persons/dates are cross-checked against captured actual resolved-choice journals. Global journalIndex positions remain producer-validated; this review does not decompress the full world to recheck those positions.",
+    "The ordinal policy passively advances and chooses available saved choices. Different life lengths or unseen careers/family contexts do not establish overall game balance or absence of those systems.",
+    "Same reused seeds 900..911 add zero distinct annual seeds. Separate 1000-seed root coverage totals 0..999, not 1120.",
+    "All catalogue/branch/context omissions remain explicit. This review does not establish every situation/branch, all choices, complete Scenarios A/B/C/D, external-human review or release completion.",
+    "US900 narrative sequence review is separately preselected and owned by Story; it is not performed or claimed here."
+  ]
+}

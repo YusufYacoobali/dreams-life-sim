@@ -1,0 +1,78 @@
+{
+  "summary": {
+    "file": "/tmp/dreams-c39-entrepreneur-v3-review/summary.json",
+    "bytes": 69561,
+    "sha256": "7116b393e49c0dd681b701bb92f16efc2493fef2213f946965fd30e73dab4c6e"
+  },
+  "inputs": {
+    "file": "/tmp/dreams-c39-entrepreneur-v3-review/inputs.json",
+    "bytes": 35489,
+    "sha256": "75000564063d2387c52a5205bab0315ea6e67e25f737fad07e3e4f12fa336743"
+  },
+  "totals": {
+    "completedLives": 12,
+    "orderedNineMilestonePaths": 12,
+    "unmetDeclaredMilestones": 0,
+    "commandsIncludingBirthStoreSteps": 19989,
+    "actualBirthStoreSteps": 24,
+    "pureEngineCommands": 19965,
+    "manualPosts": 3898,
+    "reputationActions": 727,
+    "commandsByType": {
+      "advance": 950,
+      "choose": 1611,
+      "acknowledge": 9682,
+      "health-routine": 12,
+      "study-effort": 12,
+      "study": 146,
+      "create-social": 12,
+      "social-routine": 12,
+      "publish-post": 3898,
+      "apply-job": 28,
+      "monetise-social": 12,
+      "public-action": 727,
+      "start-business": 12,
+      "fund-business": 1188,
+      "seek-sponsor": 590,
+      "buy-investment": 12,
+      "adopt": 12,
+      "resume": 1039,
+      "retire": 10
+    },
+    "brandStatuses": {
+      "declined": 24,
+      "completed": 587,
+      "terminated": 48,
+      "ended-death": 1
+    },
+    "positiveBrandDeliveryRows": 3526,
+    "zeroPaidBrandDeliveryRows": 143,
+    "companies": 12,
+    "paidAdoptedFamilies": 12,
+    "producerColdChecksCounted": 9296,
+    "producerColdLabels": {
+      "adoptResult": 12,
+      "annual": 950,
+      "apply-jobResult": 28,
+      "buy-investmentResult": 12,
+      "create-socialResult": 12,
+      "death": 12,
+      "decisionResult": 1611,
+      "fund-businessResult": 1188,
+      "fundedCompany": 12,
+      "health-routineResult": 12,
+      "monetise-socialResult": 12,
+      "public-actionResult": 727,
+      "publish-postResult": 3898,
+      "retireResult": 10,
+      "seek-sponsorResult": 590,
+      "social-routineResult": 12,
+      "start-businessResult": 12,
+      "study-effortResult": 12,
+      "studyResult": 146,
+      "unansweredInterview": 28
+    },
+    "materializedColdProofRows": 1176,
+    "additionalFinalRoundTripsOutsideColdCounters": 12
+  }
+}
