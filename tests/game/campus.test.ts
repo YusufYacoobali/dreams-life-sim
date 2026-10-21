@@ -198,6 +198,11 @@ test('saved peers pay their own actual renewals and living costs after actor wit
   let world = act(ready, { type: 'campus-club', communityId: community.id, club: 'music' });
   world = copyWorld(world); attend(world, true); const history = structuredClone(currentCampus(world)!);
   world = act(world, { type: 'leave-school' }); world = copyWorld(world);
+  // Declared peer-residence control, not an observed relocation command. The
+  // genuine course continues under existing education rules, so its original
+  // currency tuition must still be paid by this peer, never bypassed as absent.
+  const moved = world.people[community.students[0].personId], oldCity = moved.city;
+  moved.city = countries[moved.country].cities.find(city => city !== oldCity)!;
   expect(currentCampus(world)).toBeUndefined(); expect(world.studyCourses.find(item => item.id === community.courseId)?.status).toBe('withdrawn');
   const actorCash = accountFor(world).cash, actorSkills = { ...world.people[actorId].skills }, actorEnergy = world.people[actorId].stats.energy;
   for (let n = 0; n < 25; n++) {
@@ -211,7 +216,8 @@ test('saved peers pay their own actual renewals and living costs after actor wit
     expect(peer.education.paused).toBe(true); expect(peer.education.months).toBe(24); expect(peer.education.tuitionPaidMonths).toBe(24);
     expect(record.months).toBe(24); expect(record.tuitionPaidMonths).toBe(24); expect(record.status).toBe('active');
     const tuition = world.ledger.filter(item => item.personId === peer.id && item.category === 'tuition');
-    expect(tuition).toHaveLength(2); expect(tuition.every(item => item.cashDelta === -record.annualTuition && item.debtDelta === 0n)).toBe(true);
+    expect(tuition).toHaveLength(2); expect(tuition.every(item => item.cashDelta === -record.annualTuition && item.debtDelta === 0n && item.currency === record.currency)).toBe(true);
+    if (peer.id === moved.id) { expect(record.city).toBe(oldCity); expect(peer.city).not.toBe(record.city); }
     expect(world.ledger.filter(item => item.personId === peer.id && item.category === 'living')).toHaveLength(26);
     expect(world.liabilities.filter(item => item.ownerId === peer.id && item.kind === 'student')).toEqual([]);
   }
