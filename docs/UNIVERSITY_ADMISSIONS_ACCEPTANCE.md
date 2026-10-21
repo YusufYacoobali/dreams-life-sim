@@ -32,7 +32,12 @@ No old enrolment, paid amount, qualification, pending scene or admission is
 reconstructed. Factual incomplete-course records and the existing scholarship
 review reliability fix are separate subsequent commits.
 
-## Actual connected evidence
+These implementation and migration notes describe the original isolated slice.
+The combined World36/engine37/content12/reader16 runtime has its coordinated
+migration and additional ordinary story selection. Its current waitlist evidence
+is recorded separately below; the original observations are retained as history.
+
+## Historical isolated connected evidence
 
 The unchanged v24 historical pupil is reopened through the actual repository
 branch API, then completes the final secondary year using ordinary commands.
@@ -86,7 +91,7 @@ application and later consent. The genuine scholarship journey proves a real
 award remains unactivated until enrolment and that its actual tuition waiver,
 student debt and later renewal still reconcile.
 
-## Validation
+## Historical isolated validation
 
 - `/tmp/dreams-university-admissions-focused-first.out`: 100 tests / 6 suites
   passed, 76.654s (before the final explicit confirmation type guard).
@@ -102,3 +107,58 @@ checks but failed an overbroad test history assertion, corrected to capture
 original rows before creating the working branch. The first strict run exposed
 a grouped-union narrowing error, corrected with an explicit confirmation guard.
 Neither failed run is credited as a passing gate.
+
+## Current combined-runtime waitlist acceptance
+
+This test-only follow-up starts from combined source
+`4981d473b11bc587046f78caaeb69bcb3277464f`. The weighted ordinary story selection
+changes the pupil's actually reached academic history. The first waitlist now
+occurs on 1 January 2020 and ends in rejection at its 1 February final review.
+The root's existing eight-year domain run also observes an immediate accepted
+offer in 2022. These outcomes replace neither the historical isolated observations
+above nor the game's saved admissions policy.
+
+The connected check stops at that first actual waitlist. It uses the same
+unchanged historical pupil, ordinary secondary completion, one Computing
+application per calendar year, actual employment resignation and ordinary scene
+choices. No seed, date, statistics, funds, qualification or saved roll is edited,
+and no search continues past the rejection to find a waitlist offer.
+
+The real Life Age Up button holds one ordinary month during a receipt-write
+failure. All eight tables and the exact world roll back, the duplicate press is
+blocked, one visible error remains, and retry commits once with zero warm full
+checkpoint unpack. The saved review preserves its original roll/chance, closed
+rejection transitions and lack of tuition or borrowing. A closed connection and
+new repository restore that exact result and all eight tables.
+
+Rejection interrupts for its saved result but does not set the offer's planning
+pause. Acknowledging it immediately continues the remaining ordinary annual
+months, reaching the next actual scene on 1 December 2020. Completing that real
+year reaches 1 January 2021 with one final rejection
+journal entry. A further cold reopen displays the actual waitlist/rejection
+history without offer or withdrawal controls; stale acknowledgement, acceptance
+and withdrawal refuse without writes. Original imported payloads and history
+remain protected. The separate accepted-offer, funded-enrolment and offered-place
+withdrawal UI cases are unchanged.
+
+An actual waitlist-to-offer transition is not reached by this current policy.
+The isolated 2022 offer remains historical positive evidence. Scalar admission
+boundaries and conditional generic assertions do not establish a newly reached
+waitlist offer or current SQLite coverage of that offer's planning pause.
+
+Current validation:
+
+- `/tmp/dreams-admissions-current-waitlist-tests-first.out`: 6 connected tests /
+  1 suite passed, 48.116s, including the unchanged accepted-offer, enrolment and
+  withdrawal cases. The emitted actual observation records the saved roll 96,
+  chance 92, one February rejection, no planning pause and final revision 78.
+- `/tmp/dreams-admissions-current-waitlist-types.out`: affected strict TypeScript
+  check closed exit0 with no diagnostics, using
+  `/tmp/dreams-admissions-current-waitlist-tsconfig.json` to include the actual
+  UI test and its imported application/domain code.
+- `git diff --check` passed.
+
+No current native, visual, whole-suite, export or cohort pass is claimed by this
+follow-up. The original combined focused-run failure remains in
+`/tmp/dreams-production-gaps-initial-focused.out`; its stale 2020 expectation is
+the test defect repaired here, not a passing gate.
