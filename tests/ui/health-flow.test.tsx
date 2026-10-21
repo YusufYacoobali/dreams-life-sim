@@ -18,6 +18,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 import Doctor from '../../app/(game)/doctor';
 import Lifestyle from '../../app/(game)/lifestyle';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { Button } from '../../src/ui/components';
 test('rendering the clinic consumes no randomness, and a failed consultation cannot publish a clinician, bill or diagnosis', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const initial = decodeWorld(JSON.stringify(fixture)); accountFor(initial).cash += 10000000n; accountFor(initial).openingCash += 10000000n; initial.random.outcomes = 1;
@@ -39,7 +40,8 @@ test('unchanged routines and reverted drafts perform no save; an edited routine 
   const saved = checkpoints.unpackCheckpoint(nativeStory.checkpoint);
   const initial = resolveCommand(saved, { type: 'acknowledge', resultId: saved.pending!.id });
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
-  const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap(); };
+  let nextYield: Promise<void> | undefined;
+  const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused', yieldToUI: async () => { const held = nextYield; nextYield = undefined; if (held) await held; } }); await mockStore.getState().bootstrap(); };
   const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Lifestyle /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
@@ -53,11 +55,33 @@ test('unchanged routines and reverted drafts perform no save; an edited routine 
   await press('Regular walks'); sqlite.exec("CREATE TRIGGER fail_routine BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Save Routine'); await waitFor(() => expect(screen.getByText(/couldn't be saved/)).toBeOnTheScreen());
   expect(rows()).toEqual(originalRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before); expect(screen.getByRole('button', { name: '✓ Regular walks' })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Save Routine' })).toBeEnabled();
-  sqlite.exec('DROP TRIGGER fail_routine'); await press('Save Routine'); await waitFor(() => expect(screen.getByText('Routine saved')).toBeOnTheScreen());
+  sqlite.exec('DROP TRIGGER fail_routine'); let release!: () => void; nextYield = new Promise(resolve => { release = resolve; });
+  await press('Save Routine'); expect(mockStore.getState().busy).toBe(true);
+  expect(screen.getByRole('button', { name: '✓ Regular walks' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: 'Nutritious Meals. A modest extra budget and gradual health benefits' })).toBeDisabled();
+  expect(screen.getByLabelText('Smoking habit')).toBeDisabled();
+  await press('Regular sport'); expect(screen.getByRole('button', { name: '✓ Regular walks' })).toBeOnTheScreen(); expect(rows()).toEqual(originalRows);
+  await act(async () => { release(); }); await waitFor(() => expect(screen.getByText('Routine saved')).toBeOnTheScreen());
   const result = mockStore.getState().world!, routine = { ...initial.people[initial.activePersonId].health.routine, exercise: 'walking' as const };
   expect(result).toEqual(resolveCommand(initial, { type: 'health-routine', routine }, true)); expect(commit).toHaveBeenCalledTimes(2); expect(unpack).not.toHaveBeenCalled(); commit.mockRestore(); unpack.mockRestore();
   view.unmount(); await boot(new SaveRepository(driver)); view = render(frame()); expect(mockStore.getState().world).toEqual(result); expect(screen.getByText('Routine saved')).toBeOnTheScreen(); await press('Continue');
   const complete = mockStore.getState().world!; expect(complete).toEqual(resolveCommand(result, { type: 'acknowledge', resultId: result.pending!.id }, true));
   expect(screen.getByRole('button', { name: 'Save Routine' })).toBeDisabled(); const after = rows(); await press('Save Routine'); expect(rows()).toEqual(after); expect(mockStore.getState().world).toBe(complete);
+  expect(await repository.load(complete.id)).toEqual(complete);
+  // Actual life selection must discard the previous actor's unsaved habits,
+  // without applying a routine to either life or reviving a queued old submit.
+  await press('Nutritious Meals. A modest extra budget and gradual health benefits');
+  const oldSubmit = screen.UNSAFE_getAllByType(Button).find(item => item.props.label === 'Save Routine')!.props.onPress;
+  const second = decodeWorld(JSON.stringify(fixture)); await repository.create(second);
+  await act(async () => { expect(await mockStore.getState().selectLife(second.id)).toBe(true); });
+  expect(screen.getByRole('button', { name: '✓ No exercise routine' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: '✓ Balanced Meals. The regular household food budget' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: 'Save Routine' })).toBeDisabled();
+  const selected = rows(), selectedWorld = mockStore.getState().world!;
+  await act(async () => { await oldSubmit(); }); expect(rows()).toEqual(selected); expect(mockStore.getState().world).toBe(selectedWorld);
+  await act(async () => { expect(await mockStore.getState().selectLife(complete.id)).toBe(true); });
+  expect(screen.getByRole('button', { name: '✓ Regular walks' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: '✓ Balanced Meals. The regular household food budget' })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: 'Save Routine' })).toBeDisabled(); expect(await repository.load(second.id)).toEqual(second);
   expect(await repository.load(complete.id)).toEqual(complete); view.unmount(); sqlite.close();
 });
