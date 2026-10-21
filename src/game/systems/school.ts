@@ -12,6 +12,7 @@ import { isConfined } from './legalSchemas';
 import { serviceAway } from './serviceSchemas';
 import { countryCodes } from '../countries';
 import { minimumSchoolLeavingAge } from '../rules';
+import { storyContactNames } from '../storyNames';
 
 export const schoolCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('school-club'), communityId: z.string(), club: z.enum(schoolClubs) }),
@@ -61,7 +62,12 @@ function ensureSchool(world: World) {
     community = { id: 'school_' + person.id + '_' + world.revision + '_' + world.schoolCommunities.length, personId: person.id, stage, school: person.education.school, country: person.country, city: person.city, started: { ...world.date }, ended: null, endReason: null, classmateIds: peers.map(peer => peer.id), teacherIds: [], currentTeacherId: '', club: 'none', conduct: 'quiet', periods: [], exams: [], help: [] };
     world.schoolCommunities.push(community); addTeacher(world, community);
     const size = stage === 'primary' ? 3 : 4; while (community.classmateIds.length < size) addClassmate(world, community);
-    fact(world, 'I got to know ' + community.classmateIds.map(id => world.people[id].firstName).join(', ') + ' in my class at ' + community.school + '.', 'school-contact');
+    const classmates = community.classmateIds.map(id => world.people[id]);
+    const { names } = storyContactNames(classmates.map((peer, index) => ({
+      token: peer.id, person: peer, display: peer.firstName,
+      role: classmates.some(other => other.id !== peer.id && fullName(other) === fullName(peer)) ? 'classmate ' + (index + 1) : 'classmate',
+    })));
+    fact(world, 'I got to know ' + community.classmateIds.map(id => names[id]).join(', ') + ' in my class at ' + community.school + '.', 'school-contact');
   } else if (world.people[community.currentTeacherId].died || world.people[community.currentTeacherId].employment?.roleId !== 'teacher' || world.people[community.currentTeacherId].country !== community.country || world.people[community.currentTeacherId].city !== community.city) addTeacher(world, community);
   return community;
 }

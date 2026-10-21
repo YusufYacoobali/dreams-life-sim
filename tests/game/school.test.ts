@@ -14,6 +14,7 @@ import { endEmployment, workMonth } from '../../src/game/systems/work';
 import { decodeSave } from '../../src/persistence/archive';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import relocationArchive from '../fixtures/v20-relocation-archive.json';
+import * as npcs from '../../src/game/systems/npcs';
 
 
 function act(world: World, command: GameCommand) {
@@ -47,6 +48,37 @@ test('an eighteen-year-old Italian pupil has no invented adult job, degree, sala
   const world = pupil('IT', 18), school = currentSchool(world)!;
   expect(school.stage).toBe('secondary'); expect(school.classmateIds).toHaveLength(4);
   for (const id of school.classmateIds) { expect(world.people[id].employment).toBeNull(); expect(world.people[id].education.qualifications).toEqual([]); expect(accountFor(world, world.people[id]).cash).toBe(0n); }
+  expect(validateWorld(world)).toEqual(world);
+});
+test.each([
+  { label: 'distinct names', given: [['Sophie', 'Martin'], ['Jamie', 'Chen'], ['Noah', 'Roy']], expected: 'Sophie, Jamie, Noah' },
+  { label: 'same first name', given: [['Sophie', 'Martin'], ['Jamie', 'Chen'], ['Sophie', 'Roy']], expected: 'Sophie Martin (classmate), Jamie, Sophie Roy (classmate)' },
+  { label: 'same full name', given: [['Sophie', 'Martin'], ['Jamie', 'Chen'], ['Sophie', 'Martin']], expected: 'Sophie Martin (classmate 1), Jamie, Sophie Martin (classmate 3)' },
+])('new class introductions disambiguate $label without changing identities, simulation or already-written journals', ({ given, expected }) => {
+  const baseline = pupil('CA'), createContact = npcs.createContact;
+  let parents = 0, peers = 0;
+  // Arrange only lexical names in the existing configured pupil producer.
+  // Every original NPC draw, identity, qualification and family link still runs.
+  const names = jest.spyOn(npcs, 'createContact').mockImplementation((world, input) => {
+    const person = createContact(world, input);
+    if (input?.qualifiedRole === 'administrator') person.lastName = given[parents++][1];
+    if (input?.schoolStudent) person.firstName = given[peers++][0];
+    return person;
+  });
+  const world = (() => { try { return pupil('CA'); } finally { names.mockRestore(); } })();
+  const school = currentSchool(world)!, introduction = world.journal.find(row => row.text.startsWith('I got to know '))!;
+  expect(introduction.text).toBe('I got to know ' + expected + ' in my class at ' + school.school + '.');
+  expect(school.classmateIds).toEqual(currentSchool(baseline)!.classmateIds);
+  expect(new Set(school.classmateIds).size).toBe(3);
+  expect(world.random).toEqual(baseline.random);
+  for (const key of ['schoolCommunities', 'relationships', 'ledger', 'accounts', 'workHistory'] as const) expect(world[key]).toEqual(baseline[key]);
+  for (const [id, person] of Object.entries(world.people)) expect({ ...person, firstName: baseline.people[id].firstName, lastName: baseline.people[id].lastName }).toEqual(baseline.people[id]);
+  const baselineIntroduction = baseline.journal.find(row => row.text.startsWith('I got to know '))!;
+  expect(world.journal.map(row => row.id === introduction.id ? { ...row, text: baselineIntroduction.text } : row)).toEqual(baseline.journal);
+  const storedJournal = structuredClone(world.journal), random = { ...world.random };
+  schoolMonth(world);
+  expect(world.journal).toEqual(storedJournal);
+  expect(world.random).toEqual(random);
   expect(validateWorld(world)).toEqual(world);
 });
 test('club selection grants no instant skill or money; attendance and weighted classroom behaviour determine actual progress and reports', () => {
