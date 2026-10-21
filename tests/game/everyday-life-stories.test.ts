@@ -15,9 +15,9 @@ import { monthFrom } from '../../src/game/calendar';
 const setup = (template: EventTemplate) => template.specialCareer ? specialStoryWorld(template) : lifeStoryWorld('US', template.hobby && template.hobby !== 'any' ? template.hobby : 'guitar');
 const offered = (world: World, template: EventTemplate) => { const event = bindEvent(world, template); offerPending(world, event); return { world, event }; };
 
-test('251 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
-  expect(eventTemplates).toHaveLength(251); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
-  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(251);
+test('265 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
+  expect(eventTemplates).toHaveLength(265); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
+  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(265);
   for (const template of everydayLifeTemplates) {
     expect(template.local).toBe(true); expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices).toHaveLength(3); expect(new Set(template.choices.map(c => c.id)).size).toBe(3);
     const text = JSON.stringify(template);

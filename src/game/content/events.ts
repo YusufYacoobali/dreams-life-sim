@@ -22,6 +22,7 @@ import { conditions } from './health';
 import { formatMoney } from '../money';
 import { everydayLifeTemplates } from './everydayLifeStories';
 import { rareAdultTemplates } from './rareAdultStories';
+import { specialCareerDepthTemplates } from './specialCareerDepthStories';
 import { storyContactNames } from '../storyNames';
 
 /** Original situations, not random names placed in interchangeable success text. */
@@ -229,6 +230,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...adultRelationshipTemplates,
   ...everydayLifeTemplates,
   ...rareAdultTemplates,
+  ...specialCareerDepthTemplates,
 ];
 
 /** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */

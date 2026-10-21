@@ -16,16 +16,17 @@ import { database } from '../support/sqlite';
 import hobbies from '../fixtures/v28-ordinary-hobby-archive.json';
 import service from '../fixtures/v16-service-archive.json';
 
-test('version one authors all four tiers and retains the exact original 250 narratives beside one new extremely rare scene', () => {
+test('version one retains the original251 tiers and exact original250 narratives beside fourteen new career scenes', () => {
+  const originalCatalogue = events.eventTemplates.slice(0, 251);
   expect(EVENT_RARITY_VERSION).toBe(1);
   expect(EVENT_RARITY_WEIGHTS).toEqual({ common: 100, uncommon: 25, rare: 5, 'extremely-rare': 1 });
-  expect(events.eventTemplates).toHaveLength(251);
-  expect(events.eventTemplates.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
+  expect(events.eventTemplates).toHaveLength(265);
+  expect(originalCatalogue.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
     'adult-uncertain-memory', 'adult-wrong-name-badge', 'later-old-competition', 'pet-parrot-perfect-timing', 'school-label-swap', 'school-mascot-petition', 'school-secret-language', 'school-tree-audition', 'school-volcano-breach', 'small-mistake', 'teen-family-interview', 'teen-yearbook-proof',
   ]);
-  expect(events.eventTemplates.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
-  expect(events.eventTemplates.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
-  expect(events.eventTemplates.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
+  expect(originalCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
+  expect(originalCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
+  expect(originalCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
   const copy = events.eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   expect(createHash('sha256').update(JSON.stringify(copy)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
 });

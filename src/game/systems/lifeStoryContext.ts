@@ -5,6 +5,7 @@ import { householdPets } from './petSchemas';
 import { storyPersonPresent } from './storyContext';
 import { conditions } from '../content/health';
 import { publicRoyalDuty } from './royaltySchemas';
+import { creatorCatalog } from '../content/creators';
 
 /** Read once per annual selection. No people, purchases, practice or draws are created. */
 export function lifeStoryContexts(world: World) {
@@ -32,6 +33,14 @@ export function lifeStoryContexts(world: World) {
   for (const career of world.careers) if (career.personId === player.id && career.status === 'active' && career.employmentId === player.employment?.id) specialCareers.add(career.kind);
   for (const career of world.serviceCareers) if (career.personId === player.id && career.status === 'active' && career.employmentId === player.employment?.id) specialCareers.add(career.kind);
   if (world.creatorStudios.some(studio => studio.personId === player.id && studio.status === 'active')) specialCareers.add('creator');
+  // Dedicated platform situations need this person's actual local studio and
+  // its matching live account. Keep the older shared Creator predicate intact.
+  for (const studio of world.creatorStudios) {
+    if (studio.personId !== player.id || studio.status !== 'active' || studio.country !== player.country || studio.city !== player.city) continue;
+    const account = world.socialAccounts.find(item => item.id === studio.accountId);
+    if (account?.ownerId === player.id && account.platform === creatorCatalog[studio.kind].platform && account.status === 'active') specialCareers.add(studio.kind);
+  }
+  if (world.businesses.some(business => business.ownerId === player.id && business.status === 'active' && business.country === player.country && business.city === player.city)) specialCareers.add('business');
   if (publicRoyalDuty(world)) specialCareers.add('royalty');
   return { specialCareers, present: storyPersonPresent(world, player), children, home, pets, hobbies, visited, condition };
 }

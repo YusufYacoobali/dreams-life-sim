@@ -16,7 +16,7 @@ export type EventTemplate = {
   school?: 'primary' | 'secondary' | 'any'; classmate?: boolean; teacher?: boolean;
   workplace?: boolean; coworker?: boolean; supervisor?: boolean;
   friend?: boolean; partner?: boolean;
-  local?: boolean; child?: StoryChildGroup; home?: boolean; pet?: PetSpecies | 'any'; hobby?: HobbyKind | 'any'; visited?: boolean; chronicCondition?: boolean; specialCareer?: 'actor' | 'model' | 'athlete' | 'musician' | 'politician' | 'creator' | 'military' | 'astronaut' | 'royalty';
+  local?: boolean; child?: StoryChildGroup; home?: boolean; pet?: PetSpecies | 'any'; hobby?: HobbyKind | 'any'; visited?: boolean; chronicCondition?: boolean; specialCareer?: 'actor' | 'model' | 'athlete' | 'musician' | 'politician' | 'creator' | 'youtuber' | 'streamer' | 'business' | 'military' | 'astronaut' | 'royalty';
   illustration: string; title: string; body: string; choices: readonly StoryOption[];
 };
 export const storyOption = (id: string, label: string, changes: StoryOption['changes'], title: string, result: string, journal: string, bond?: number, extra: Pick<StoryOption, 'peerBond' | 'teacherBond' | 'coworkerBond' | 'supervisorBond' | 'friendBond' | 'partnerBond' | 'childBond' | 'petBond' | 'grades' | 'skill' | 'followUp'> = {}): StoryOption => ({ id, label, changes, title, result, journal, bond, ...extra });

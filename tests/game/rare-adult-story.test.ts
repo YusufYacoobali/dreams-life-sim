@@ -12,14 +12,14 @@ import child from '../fixtures/v28-ordinary-hobby-archive.json';
 import medical from '../fixtures/v8-medical-archive.json';
 
 const scene = rareAdultTemplates[0];
-test('one extremely rare original adult scene extends the catalogue to251/753 with every original250 narrative and choice unchanged', () => {
+test('one extremely rare original adult scene retains its original position/copy beside fourteen new career scenes', () => {
   expect(rareAdultTemplates).toHaveLength(1); expect(scene.id).toBe('adult-accidental-living-exhibit');
   expect(scene).toMatchObject({ min: 18, max: 120, local: true, rarity: 'extremely-rare' }); expect(eventWeight(scene)).toBe(1);
-  expect(eventTemplates).toHaveLength(251); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(753);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(251);
+  expect(eventTemplates).toHaveLength(265); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(795);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(265);
   const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   expect(createHash('sha256').update(JSON.stringify(original)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
-  expect(eventTemplates.at(-1)).toBe(scene); expect(scene.choices.map(row => row.id)).toEqual(['explain', 'pose', 'lecture']);
+  expect(eventTemplates[250]).toBe(scene); expect(scene.choices.map(row => row.id)).toEqual(['explain', 'pose', 'lecture']);
 });
 
 test('the extreme weight is available only to the actual eligible local adult pool and creates no read-time state or diagnosis', () => {
