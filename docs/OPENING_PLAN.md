@@ -1,6 +1,8 @@
 # Opening experience: priority and completion estimates
 
-## Current integration: production gameplay and acceptance
+Latest relationship gameplay and the current Android build blocker are recorded in [current product work](PROGRESS.md#current-product-work). The checkpoints below retain their original source scope.
+
+## Prior checkpoint: World38/engine39 gameplay and acceptance
 
 Current UI source `83adaea6f92523d04a27df2e77b11e0a8b14ef1d` has 703 verified files and uses World38 / engine39 / content13 / reader18 / checkpointv4. Its game/persistence bytes match accepted core `33b6a5fcb0aae73dfc235a15394b34d8afda00cc`; two UI layout files change and 15 reviewed protocol tools are added. Retirement moves, descriptive appearance/Profile labels, relevant paid interview experience, busy-year optional-story pacing, fourteen new special-career scenes and selected-tab return to category root are integrated. The catalogue contains **265 situations /795 choices**, two dedicated scenes per eleven special-career paths. All265 entries have a Codex source-review ledger; thin thematic cells remain explicit. The camera result is appearance-neutral; original saved scenes and the historical golden retain an explicit one-field bridge.
 
@@ -377,7 +379,7 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World38/engine39/content13/reader18 source and exact gate scopes are linked above. Overall is75% as an effort estimate; onboarding85%, Life/early85%, education/jobs90%, family90%. Current C/D/native/release acceptance remains open.
+Current World39/engine40/content14/reader19 source and exact gate scopes are linked in PROGRESS. Overall remains75% as an effort estimate; onboarding85%, Life/early85%, education/jobs90%, family90%. Current native/release acceptance remains open.
 Earlier milestone prose retains its own source and historical estimates.
 
 Prior World32/engine33/content9 adds reviewed hourly work, actual paid/worked

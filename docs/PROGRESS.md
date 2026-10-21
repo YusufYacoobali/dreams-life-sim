@@ -4,11 +4,19 @@ Updated 21 October 2026.
 
 ## Current product work
 
-The latest UI source is `6aa96cba9a19e00e673f0aa838c8a437560db10d`. Selection dialogs now keep their confirmation and cancellation controls visible while long option lists scroll. Actual onboarding exposed the country picker's hidden confirmation; the fix preserves explicit selection, cancellation, disabled reasons and saving behavior. Its 22 focused tests, strict application/test types and fresh Android/iOS Hermes exports pass. Corrected normal/130% device layout remains pending.
+Gameplay source `e5e4cee40ce3cbcd3395f07eaa36ac0dc2499eaf` adds six contextual conversation topics and four date activities: walking, coffee, a meal and a movie. Topics use actual people, attended interests and recorded school/work facts. Dates show actual country-currency prices and bounded effects; a declined invitation spends nothing. Both choosers stay local until confirmation, retain failed selections and guard duplicate submissions. New school introductions disambiguate classmates with colliding names. Stored journals and omitted-topic/activity legacy commands remain unchanged.
+
+The combined version is World39 / engine40 / content14 / reader19 / checkpointv4. Migration changes root tags only; complete readers13–18 advance only their database marker. Automatic saving and exact resume remain required. The catalogue remains265situations/795choices; these relationship actions do not inflate that count.
+
+All66focused checks in7suites pass, as do strict app/all-test types and fresh Android/iOS production Hermes exports (90.059seconds). The full regression is running. Its old entrepreneur version expectation and a five-second connected-journey timeout were corrected; all19affected checks pass. Local Jest now uses CI's existing30-second allowance. Actual Android has opened Ren7's contextual chooser with visible confirmation controls; the final130%/action/cold check is in progress. No full-regression or final native pass is claimed yet.
+
+The earlier `6aa96cb` fix keeps selection confirmation and cancellation visible while long lists scroll. It follows the large-text ActionRow and Lifestyle-tab fixes and is included in the new gameplay source.
 
 The current-source three-generation gameplay run passes: three natural deaths, two existing-child handovers, 171 years five months, and exact retained checkpoints/receipts. Its repository reloads use the same open SQLite connection. Separately, Nia's actual application, interview answer and acknowledgement pass three process-stop reopens and exact command/save comparisons on the preceding `83adaea` UI source. Original other lives remain intact.
 
-A private x86_64 Android release-profile build started at 11:27 UTC on the corrected UI. It uses the generated development signing key for internal testing; no successful APK or distribution build is claimed yet. A separate agent is continuing ordinary early play while integration/build work proceeds.
+Ordinary Android play reached Ren age7, twelve attended school months and twelve paid Reading months. A process-stop reopen returned to the same Life screen with all eight saved tables exact on the preceding83ad source. The coordination gap is not counted as a continuous30-minute session.
+
+The private x86_64 Android build actually reached native dependency resolution at12:10UTC, then failed: Maven Central redirected the required `react-android:0.86.3` release AAR to `repo.reactnative.dev`, which returned403. Current enforced network policy57 omits that host. No retry or bypass is planned without legitimate access. JDK17, platform36, NDK27.1, Build Tools35 and CMake3.22.1 are installed; caches and native source are retained. No APK was produced. macOS/iOS, physical-device and production-signing acceptance remain external release requirements.
 
 User priority: reduce repetitive verification and evidence packaging. Focus on game-facing fixes, responsiveness and the standalone app; retain targeted tests and essential automatic-save/resume checks. Earlier detailed checkpoint records below keep their original source and observation scope.
 
@@ -28,7 +36,7 @@ and old data stay intact. The current breakdown is in
 completion is approximately75%, with265situations/795choices implemented;
 editorial, balance and release acceptance remain open.
 
-## Current milestone: production gameplay and acceptance
+## Prior checkpoint: World38/engine39 gameplay and acceptance
 
 Current UI source `83adaea6f92523d04a27df2e77b11e0a8b14ef1d` has 703 verified files and uses World38 / engine39 / content13 / reader18 / checkpointv4. Its game/persistence bytes match accepted core `33b6a5fcb0aae73dfc235a15394b34d8afda00cc`; two UI layout files change and 15 reviewed protocol tools are added. Retirement moves, descriptive appearance/Profile labels, relevant paid interview experience, busy-year optional-story pacing, fourteen new special-career scenes and selected-tab return to category root are integrated. The catalogue contains **265 situations /795 choices**, two dedicated scenes per eleven special-career paths. All265 entries have a Codex source-review ledger; thin thematic cells remain explicit. The camera result is appearance-neutral; original saved scenes and the historical golden retain an explicit one-field bridge.
 
