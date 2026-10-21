@@ -45,7 +45,7 @@ test('the real reviewed topic saves atomically: held duplicate, all8 rollback, e
       for (const row of originals) expect(saved[table]).toContainEqual(row);
     }
     const backup = sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(before.id)!.payload as string;
-    expect(backup).toBe(baseline.lives.find(row => row.id === before.id)!.payload); expect(checkpoints.unpackCheckpoint(backup)).toEqual(before);
+    expect(backup).toBe(baseline.lives.find((row: { id: string }) => row.id === before.id)!.payload); expect(checkpoints.unpackCheckpoint(backup)).toEqual(before);
     reader.close(); reader = undefined; sqlite.close(); repository = new SaveRepository(connect()); await repository.initialise();
     const cold = createGameStore({ repository: async () => repository, date: () => before.date, id: () => 'unused' }); expect(await cold.getState().bootstrap()).toBe(true); expect(cold.getState().world).toEqual(expected); expect(rows()).toEqual(saved);
     const pending = expected.pending!; expect(pending.kind).toBe('result'); expect(cold.getState().world!.journal.at(-1)).toEqual(expected.journal.at(-1));
