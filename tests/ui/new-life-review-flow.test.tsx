@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Switch } from 'react-native';
+import { Modal, ScrollView, Switch } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
@@ -127,7 +127,16 @@ test('reselecting Japan retains Osaka and the creation draft across cancelled pi
     const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame(<NewLife />)); await setJapaneseIdentity();
     const selected = structuredClone(useCreationDraft.getState().draft!); await press(/^Country\./); await choose('Japan'); await press('Choose');
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(screen.getByRole('button', { name: 'City. Osaka' })).toBeOnTheScreen();
-    await press(/^Country\./); await choose('Canada'); await press('Never mind'); await press(/^City\./); await choose('Tokyo'); await press('Never mind');
+    await press(/^Country\./);
+    const countries = within(screen.UNSAFE_getByType(Modal).findByType(ScrollView));
+    expect(countries.getAllByRole('radio')).toHaveLength(12);
+    expect(countries.queryByRole('button', { name: 'Choose' })).toBeNull();
+    expect(countries.queryByRole('button', { name: 'Never mind' })).toBeNull();
+    await choose('Canada'); expect(modal().getByRole('radio', { name: 'Canada', checked: true })).toBeOnTheScreen();
+    // Picking a radio changes only this modal's candidate. It neither submits
+    // the creation draft nor changes any saved table or route until confirmed.
+    expect(useCreationDraft.getState().draft).toEqual(selected); expect(context.rows()).toEqual(beforeRows); expect(router.replace).not.toHaveBeenCalled();
+    await press('Never mind'); await press(/^City\./); await choose('Tokyo'); await press('Never mind');
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world).toBeNull();
     await press('Choose Appearance'); view.rerender(frame(<Appearance />)); await choose('Avatar 7, round face, very light skin tone, black long curls'); await press('Continue'); view.rerender(frame(<NewLife />));
     expect(screen.getByLabelText('First name')).toHaveProp('value', 'Alex'); expect(screen.getByLabelText('Last name')).toHaveProp('value', 'Carter');

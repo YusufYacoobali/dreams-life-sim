@@ -1,9 +1,10 @@
 import React from 'react';
 import { Modal, ScrollView, StyleSheet } from 'react-native';
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { lightColors, ThemeProvider } from '../../src/ui/theme';
+import { countries, countryCodes } from '../../src/game/countries';
 
 const review: EventPresentation = {
   id: 'new-life-window-review', kind: 'confirmation', title: 'Start another life?',
@@ -55,4 +56,36 @@ test('full-window review retains modal accessibility, live errors and guarded Ba
   fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(cancel).not.toHaveBeenCalled(); expect(choose).not.toHaveBeenCalled();
   view.rerender(frame(<EventModal event={review} onChoose={choose} onCancel={cancel} />, insets));
   fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose'); expect(cancel).toHaveBeenCalledTimes(1);
+});
+
+test('a twelve-country selection keeps explicit actions outside its scrolling content and retains the selection through busy/error updates', () => {
+  const choose = jest.fn(), cancel = jest.fn(), insets = { top: 24, bottom: 48, left: 0, right: 0 };
+  const event: EventPresentation = { id: 'creation:country', kind: 'selection', title: 'Choose a country', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: countryCodes.map(id => ({ id, label: countries[id].name })) };
+  const view = render(frame(<EventModal event={event} onChoose={choose} onCancel={cancel} />, insets));
+  const scrolling = within(screen.UNSAFE_getByType(ScrollView));
+  expect(scrolling.getAllByRole('radio')).toHaveLength(12);
+  // A screen reader can find clipped controls in a test tree. Their location
+  // outside the scroller is the regression contract; real geometry is native-owned.
+  expect(scrolling.queryByRole('button', { name: 'Choose' })).toBeNull();
+  expect(scrolling.queryByRole('button', { name: 'Never mind' })).toBeNull();
+  expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
+  fireEvent.press(screen.getByRole('radio', { name: 'Canada' }));
+  expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeOnTheScreen();
+  expect(choose).not.toHaveBeenCalled();
+  view.rerender(frame(<EventModal event={event} busy onChoose={choose} onCancel={cancel} />, insets));
+  expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeDisabled();
+  expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
+  fireEvent.press(screen.getByRole('button', { name: 'Choose' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Never mind' }));
+  fireEvent(screen.UNSAFE_getByType(Modal), 'requestClose');
+  expect(choose).not.toHaveBeenCalled(); expect(cancel).not.toHaveBeenCalled();
+  view.rerender(frame(<EventModal event={event} error="Could not save this selection. Try again." onChoose={choose} onCancel={cancel} />, insets));
+  expect(screen.getByRole('alert')).toHaveTextContent('Could not save this selection. Try again.');
+  expect(screen.getByRole('radio', { name: 'Canada', checked: true })).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Choose' }));
+  expect(choose).toHaveBeenCalledTimes(1); expect(choose).toHaveBeenLastCalledWith('CA');
+  view.rerender(frame(<EventModal event={{ ...event, id: 'creation:city', title: 'Choose a city', choices: [{ id: 'Toronto', label: 'Toronto' }] }} onChoose={choose} onCancel={cancel} />, insets));
+  expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
+  fireEvent.press(screen.getByRole('button', { name: 'Never mind' })); expect(cancel).toHaveBeenCalledTimes(1);
 });

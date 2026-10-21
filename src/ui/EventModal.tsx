@@ -41,9 +41,9 @@ function EventCard({
     // Keep the navigation bar opaque; card spacing still uses safe-area insets.
     <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => { if (!busy) (onCancel ?? onClose)?.(); }}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
-        <View accessibilityViewIsModal style={[styles.card, { backgroundColor: c.surface }]}>
+        <View accessibilityViewIsModal style={[styles.card, event.kind === 'selection' && styles.selectionCard, { backgroundColor: c.surface }]}>
           {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}
-          <ScrollView contentContainerStyle={styles.contents} keyboardShouldPersistTaps="handled" bounces={false}>
+          <ScrollView style={event.kind === 'selection' && styles.selectionScroll} contentContainerStyle={[styles.contents, event.kind === 'selection' && styles.selectionContents]} keyboardShouldPersistTaps="handled" bounces={false}>
             <View style={styles.title}><Heading size={24} centered>{event.title}</Heading></View>
             <Body centered>{event.body}</Body>
             {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, textAlign: 'center', fontSize: 14 }}>{error}</Text>}
@@ -66,13 +66,16 @@ function EventCard({
                 disabled={busy || !!choice.disabledReason} onPress={() => setSelected(choice.id)}
                 style={[styles.option, { borderColor: selected === choice.id ? c.blue : c.line, backgroundColor: selected === choice.id ? c.selected : c.surface }]}
               ><Body>{choice.label}</Body>{choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}</Pressable>)}
-              <Button label={event.confirmLabel} disabled={!selectedEligible} busy={busy} onPress={() => { if (selected && selectedEligible) onChoose(selected); }} />
             </>}
             {event.kind === 'confirmation' && <Button label={event.confirmLabel} busy={busy} onPress={() => onChoose('confirm')} />}
             {event.kind === 'milestone' && event.action && <Button label={event.action.label} disabled={busy} onPress={() => onChoose(event.action!.id)} />}
             {(event.kind === 'result' || event.kind === 'milestone') && <Button label={event.continueLabel ?? 'Continue'} tone={event.kind === 'milestone' && event.action ? 'secondary' : 'primary'} busy={busy} onPress={() => onChoose('continue')} />}
-            {onCancel && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
+            {onCancel && event.kind !== 'selection' && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
           </ScrollView>
+          {event.kind === 'selection' && <View style={styles.selectionFooter}>
+            <Button label={event.confirmLabel} disabled={!selectedEligible} busy={busy} onPress={() => { if (selected && selectedEligible) onChoose(selected); }} />
+            {onCancel && <Button label="Never mind" tone="secondary" disabled={busy} onPress={onCancel} />}
+          </View>}
         </View>
       </View>
     </Modal>
@@ -82,6 +85,10 @@ function EventCard({
 const styles = StyleSheet.create({
   backdrop: { flex: 1, paddingHorizontal: 20, alignItems: 'center', justifyContent: 'center' },
   card: { width: '100%', maxWidth: 440, maxHeight: '100%', borderRadius: 24, paddingTop: 30 },
+  selectionCard: { flexShrink: 1 },
+  selectionScroll: { flexShrink: 1 },
+  selectionContents: { paddingBottom: 12 },
+  selectionFooter: { flexShrink: 0, paddingHorizontal: 22, paddingBottom: 24, gap: 12 },
   illustration: { width: 88, height: 88, borderRadius: 44, borderWidth: 4, position: 'absolute', alignSelf: 'center', top: -44, alignItems: 'center', justifyContent: 'center' },
   contents: { paddingHorizontal: 22, paddingTop: 18, paddingBottom: 24, gap: 12 },
   title: { alignItems: 'center', marginTop: 6 },
