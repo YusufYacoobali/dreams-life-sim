@@ -14,6 +14,7 @@ import { decodeSave } from '../../src/persistence/archive';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { countryCodes, countries } from '../../src/game/countries';
 import { businessKinds, BusinessKind } from '../../src/game/content/businesses';
+import { jobs } from '../../src/game/content/jobs';
 import { settleTax } from '../../src/game/systems/finance';
 import { roundRatio } from '../../src/game/money';
 import { monthlyAmount } from '../../src/game/rules';
@@ -129,7 +130,23 @@ test('necessary income tax can be paid from a minor inheritance without unlockin
   const world = fixture(), owner = world.people[world.activePersonId], account = accountFor(world); owner.born = { ...world.date, year: world.date.year - 10 }; endEmployment(world); account.lockedCash = account.cash; owner.finance.cycleGross = 10000000n; owner.finance.cycleWithheld = 0n; const before = account.cash; settleTax(world);
   expect(account.cash).toBeLessThan(before); expect(account.lockedCash).toBe(account.cash); expect(world.liabilities.some(item => item.ownerId === owner.id && item.kind === 'tax' && item.principal > 0n)).toBe(false);
 });
-test.each(businessKinds)('%s has actual qualified people, local expenses and a complete first operating period', kind => { const world = month(start(fixture(), kind)); expect(world.businesses[0].months).toHaveLength(1); expect(world.businesses[0].months[0].customers).toBeGreaterThan(0); expect(world.businesses[0].staff.every(member => world.people[member.personId].employment?.companyId === world.businesses[0].id)).toBe(true); validateWorld(world); });
+test.each(businessKinds)('%s has actual qualified people, local expenses and a complete first operating period', kind => {
+  const initial = fixture(), quote = businessStartupQuote(initial, kind), founded = start(initial, kind), world = month(founded), company = world.businesses[0], period = company.months[0];
+  expect(accountFor(founded).cash).toBe(accountFor(initial).cash - quote.total);
+  expect(company.months).toHaveLength(1); expect(period.customers).toBeGreaterThan(0); expect(period.revenue).toBeGreaterThan(0n); expect(period.payroll).toBeGreaterThan(0n);
+  const workerRole = { cafe: 'barista', retail: 'retail', delivery: 'warehouse', software: 'developer', manufacturing: 'technician', fashion: 'designer', entertainment: 'designer', 'real-estate': 'administrator', online: 'warehouse' }[kind];
+  expect(company.staff).toHaveLength(2);
+  for (const member of company.staff) {
+    const person = world.people[member.personId], employment = person.employment!, job = jobs.find(item => item.id === employment.roleId)!;
+    expect(employment.companyId).toBe(company.id); expect(employment.roleId).toBe(member.role === 'manager' ? 'administrator' : workerRole);
+    if (job.qualification) expect(person.education.qualifications.some(item => item.level === job.qualification && (!job.field || item.field === job.field))).toBe(true);
+    expect(world.workHistory.find(item => item.id === employment.id)!.grossEarned).toBeGreaterThan(0n);
+  }
+  const book = world.businessLedger.filter(item => item.businessId === company.id), operating = book.filter(item => item.date.year === world.date.year && item.date.month === world.date.month);
+  for (const category of ['sales', 'supplies', 'premises', 'payroll']) expect(operating.some(item => item.category === category && item.cashDelta !== 0n)).toBe(true);
+  expect(book.every(item => item.currency === quote.currency)).toBe(true); expect(book.reduce((sum, item) => sum + item.cashDelta, 0n)).toBe(company.cash);
+  expect(period.profit).toBe(period.revenue - period.expenses); expect(world.assets).toEqual(initial.assets); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+});
 test.each(countryCodes)('%s startup and payroll reconcile in the country currency', country => {
   const initial = fixture(), owner = initial.people[initial.activePersonId], currency = countries[country].currency; owner.country = country; owner.city = countries[country].cities[0]; endEmployment(initial);
   if (!initial.accounts.some(item => item.ownerId === owner.id && item.currency === currency)) initial.accounts.push({ id: 'company_local_' + country, ownerId: owner.id, currency, cash: 100000000n, openingCash: 100000000n, lockedCash: 0n });
@@ -156,7 +173,7 @@ test.each([17, 93])('seed %i runs connected company years with deterministic rel
   expect(world.businesses[0].monthsOperated).toBeGreaterThan(0); expect(world.businessLedger.some(item => item.category === 'payroll')).toBe(true); validateWorld(world);
 });
 test('the genuine v10 creator archive migrates without resetting accrued support, offers, posts, history or RNG', () => {
-  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(40); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
+  const archive = decodeSave(JSON.stringify(creatorArchive)), world = archive.world; expect(world.schemaVersion).toBe(41); expect(world.businesses).toEqual([]); expect(world.businessLedger).toEqual([]); expect(world.businessPayables).toEqual([]);
   expect(world.people[world.activePersonId].finance.supportIncomeDue).toBe(119n); expect(world.socialAccounts[0].totalPosts).toBe(8); expect(world.socialAccounts[0].followers).toBe(5346); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('brand-offer'); expect(archive.snapshots).toHaveLength(1);
-  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(40); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+  const historical = unpackCheckpoint(archive.snapshots[0].payload); expect(historical.schemaVersion).toBe(41); expect(historical.businesses).toEqual([]); expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });

@@ -64,23 +64,36 @@ async function setup(mode: 'business' | 'move' = 'business') {
 // This is the unchanged, already funded historical business archive, not a
 // natural startup journey. All tested actions use the actual store, engine and
 // on-disk repository; neither source cash nor company records are fabricated.
-test.each(['startup', 'funding'] as const)('%s review survives exact all-table rollback, retries warm and resumes the durable result after reopening SQLite', async kind => {
-  const context = await setup(), startup = kind === 'startup';
+test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives exact all-table rollback, retries warm and resumes the durable result after reopening SQLite', async kind => {
+  const context = await setup(), startup = kind !== 'funding', custom = kind === 'custom-startup';
   try {
     const initial = world(), company = initial.businesses.find(item => item.id === mockCompanyId)!, beforeRows = context.rows(); expect(Object.keys(beforeRows)).toHaveLength(8);
     const quote = businessStartupQuote(initial, 'retail'), money = (minor: bigint) => formatMoney({ minor, currency: company.currency });
-    const command: GameCommand = startup ? { type: 'start-business', kind: 'retail', name: 'Reviewed Retail', operation: 'manager', quotedCapital: quote.capital } : { type: 'fund-business', businessId: company.id, amount: 12345n };
-    const expected = resolveCommand(initial, command, true), confirm = startup ? 'Start Business' : 'Fund Business', title = startup ? 'Start Reviewed Retail?' : 'Invest more capital?';
+    const brand = custom ? 'My Custom Brand' : 'Reviewed Retail', draftName = '  ' + brand + '  ';
+    const command: GameCommand = startup ? { type: 'start-business', kind: 'retail', name: brand, operation: 'manager', quotedCapital: quote.capital } : { type: 'fund-business', businessId: company.id, amount: 12345n };
+    const expected = resolveCommand(initial, command, true), confirm = startup ? 'Start Business' : 'Fund Business', title = startup ? 'Start ' + brand + '?' : 'Invest more capital?';
     let view = render(frame(startup));
-    if (startup) { await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', '  Reviewed Retail  '); }
+    if (custom) {
+      await edit('Business name', draftName);
+      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Other\./ })); });
+      await act(async () => { fireEvent.press(modal().getByRole('radio', { name: /^Retail Shop ·/ })); });
+      await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByLabelText('Business name')).toHaveProp('value', draftName);
+      expect(screen.getByRole('radio', { name: /^Coffee Shop\./, checked: true })).toBeOnTheScreen();
+      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Other\./ })); });
+      await act(async () => { fireEvent.press(modal().getByRole('radio', { name: /^Retail Shop ·/ })); }); await press('Use Model');
+      expect(screen.getByRole('radio', { name: /^Other\./, checked: true })).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: /^Retail Shop\./, checked: false })).toBeOnTheScreen();
+      expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
+    }
+    else if (startup) { await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', draftName); }
     else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); }
     const launch = startup ? 'Review Startup' : 'Review Funding';
-    const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); };
+    const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); if (custom) { expect(modal().getByText('Operating model')).toBeOnTheScreen(); expect(modal().getByText('Retail Shop')).toBeOnTheScreen(); } };
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); await press(launch); expectTerms(); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
     await press(launch); context.sqlite.exec("CREATE TRIGGER fail_business_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press(confirm); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expectTerms();
     expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
-    expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('value', startup ? '  Reviewed Retail  ' : '123.45');
+    expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('value', startup ? draftName : '123.45');
+    if (custom) expect(screen.getByRole('radio', { name: /^Other\./, checked: true })).toBeOnTheScreen();
     context.sqlite.exec('DROP TRIGGER fail_business_review'); const release = context.pauseNextSave(); await press(confirm); expect(mockStore.getState().busy).toBe(true); expectTerms();
     expect(screen.getByRole('button', { name: launch })).toBeDisabled(); expect(modal().getByRole('button', { name: confirm })).toBeDisabled(); expect(modal().getByRole('button', { name: 'Never mind' })).toBeDisabled();
     expect(screen.getAllByRole('button', { busy: true })).toHaveLength(1); expect(modal().getByRole('button', { name: confirm, busy: true })).toBeOnTheScreen();
@@ -90,7 +103,7 @@ test.each(['startup', 'funding'] as const)('%s review survives exact all-table r
     await press(confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expectTerms(); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(screen.queryByText(title)).toBeNull(); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - (startup ? quote.total : 12345n));
-    if (startup) { expect(world().businesses.find(item => item.id === company.id)).toEqual(company); const created = world().businesses.find(item => item.id !== company.id)!; expect(created.staff).toHaveLength(2); expect(world().businesses).toHaveLength(initial.businesses.length + 1); }
+    if (startup) { expect(world().businesses.find(item => item.id === company.id)).toEqual(company); const created = world().businesses.find(item => item.id !== company.id)!; expect(created).toMatchObject({ kind: 'retail', name: brand }); expect(created.staff).toHaveLength(2); expect(world().businesses).toHaveLength(initial.businesses.length + 1); }
     else { expect(world().businesses.find(item => item.id === company.id)!.cash).toBe(company.cash + 12345n); expect(world().businesses.find(item => item.id === company.id)!.cumulativeProfit).toBe(company.cumulativeProfit); expect(world().people).toEqual(initial.people); }
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(startup)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
     await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(world().businesses).toEqual(expected.businesses); expect(world().businessLedger).toEqual(expected.businessLedger); expect(world().accounts).toEqual(expected.accounts); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
