@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+"""JSON/hash aggregation only. Execute only after all three root gates close.
+
+No game modules, SQLite, checkpoint decode, commands, processes or replay.
+The first 120 rows are reused: this combines 1,000 total seeds, not 1,120.
+"""
+import argparse
+from collections import Counter
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import re
+
+COMMIT = '33b6a5fcb0aae73dfc235a15394b34d8afda00cc'
+SNAPSHOT = Path('/tmp/dreams-production-finish-accepted-source.json')
+SNAPSHOT_SHA = '2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56'
+GAME_SHA = '7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b'
+COMBINED_SHA = 'd72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0'
+TOOL_SHA = 'b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e'
+WORLD_VERSIONS = {'world': 38, 'engine': 39, 'content': 13}
+ALL_VERSIONS = {**WORLD_VERSIONS, 'database': 18, 'checkpoint': 'v4'}
+COUNTRIES = ['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'ES', 'IT', 'BR', 'IN', 'JP', 'ZA']
+SCOPE = 'pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite'
+PARTITIONS = [
+    (0, 120, Path('/tmp/dreams-production-finish-accepted-120-receipt.json'), Path('/tmp/dreams-production-finish-accepted-120.out')),
+    (120, 440, Path('/tmp/dreams-production-finish-accepted-sweep-120-559-receipt.json'), Path('/tmp/dreams-production-finish-accepted-sweep-120-559.out')),
+    (560, 440, Path('/tmp/dreams-production-finish-accepted-sweep-560-999-receipt.json'), Path('/tmp/dreams-production-finish-accepted-sweep-560-999.out')),
+]
+ROW_KEYS = {'event', 'seed', 'completed', 'requested', 'country', 'versions', 'commands', 'ageAtDeath', 'people', 'ledgerRows', 'worldSha256', 'lifeMs', 'elapsedMs'}
+HEADER_KEYS = {'event', 'scope', 'stateMode', 'node', 'count', 'startSeed', 'gameSourceHash', 'toolSourceHash', 'setupMs'}
+FOOTER_KEYS = {'event', 'count', 'startSeed', 'completed', 'stateMode', 'versions', 'gameSourceHash', 'toolSourceHash', 'countryCounts', 'ageRange', 'maxPeople', 'maxLedgerRows', 'elapsedMs'}
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+def pairs(items):
+    result = {}
+    for key, value in items:
+        require(key not in result, 'Duplicate JSON key: ' + key)
+        result[key] = value
+    return result
+
+def invalid_constant(value):
+    raise ValueError('Non-finite JSON constant: ' + value)
+
+def parse(data):
+    return json.loads(data, object_pairs_hook=pairs, parse_constant=invalid_constant)
+
+def integer(value, minimum=0):
+    return type(value) is int and value >= minimum
+
+def canonical(value):
+    return (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')) + '\n').encode()
+
+def capture(path, captured):
+    require(path.is_file() and not path.is_symlink(), 'Missing or symlink input: ' + str(path))
+    data = path.read_bytes()
+    ref = {'file': str(path), 'bytes': len(data), 'sha256': digest(data)}
+    if str(path) in captured:
+        require(captured[str(path)] == ref, 'Input changed during aggregation: ' + str(path))
+    captured[str(path)] = ref
+    return data, ref
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True, help='A new output directory; must not exist')
+    options = parser.parse_args()
+    output = options.output.absolute()
+    require(output.is_relative_to(Path('/tmp')) and '..' not in output.parts, 'Output must remain under /tmp')
+    require(not output.exists() and not output.is_symlink(), 'Refusing existing output path')
+    require(output.parent.is_dir(), 'Output parent does not exist')
+    require(output.parent.resolve() == output.parent, 'Refusing symlink output parent')
+    captured = {}
+    source_bytes, source_ref = capture(SNAPSHOT, captured)
+    require(source_ref['sha256'] == SNAPSHOT_SHA, 'Final source snapshot bytes differ')
+    source = parse(source_bytes)
+    require(source['commit'] == COMMIT and source['versions'] == ALL_VERSIONS, 'Final source identity differs')
+    require(len(source['source']) == 688, 'Expected complete 688-file source map')
+    require(source['gameSourceHash'] == GAME_SHA and source['combinedGamePersistenceSourceHash'] == COMBINED_SHA, 'Final runtime hashes differ')
+    require(source['source']['tools/run-life-sweep.cjs'] == TOOL_SHA, 'Original sweep producer hash differs')
+    source_root = Path(source['root'])
+    tool_bytes, tool_ref = capture(source_root / 'tools/run-life-sweep.cjs', captured)
+    require(digest(tool_bytes) == TOOL_SHA, 'Actual sweep producer bytes differ')
+    proof_refs = {}
+    for name, proof in source['coordinatorProofs'].items():
+        data, ref = capture(Path(proof['file']), captured)
+        require(ref['sha256'] == proof['sha256'], 'Coordinator source proof changed: ' + name)
+        proof_refs[name] = ref
+    require(proof_refs['head']['sha256'] == digest((COMMIT + '\n').encode()), 'Coordinator HEAD proof mismatch')
+    require(proof_refs['status']['bytes'] == 0, 'Coordinator frozen status proof was not clean')
+    expected_proof = {'files': 688, 'snapshotSha256': SNAPSHOT_SHA, 'status': 'exact'}
+
+    all_rows, raw_row_lines, partition_evidence = [], [], []
+    for start, count, receipt_path, raw_path in PARTITIONS:
+        receipt_bytes, receipt_ref = capture(receipt_path, captured)
+        receipt = parse(receipt_bytes)
+        require(receipt.get('complete') is True and type(receipt.get('exitCode')) is int and receipt['exitCode'] == 0, 'Partition is not actually closed with exit 0: ' + str(receipt_path))
+        require(receipt['format'] == 'dreams-coordinator-gate-execution-v1', 'Unexpected gate receipt format')
+        require(receipt['sourceCommit'] == COMMIT and receipt['sourceSnapshot'] == str(SNAPSHOT) and receipt['sourceSnapshotSha256'] == SNAPSHOT_SHA and receipt['root'] == str(source_root), 'Partition source/proof identity mismatch')
+        require(receipt['before'] == expected_proof and receipt['after'] == expected_proof, 'Partition source proof is not all 688 exact before/after')
+        require(receipt['argv'] == ['node', 'tools/run-life-sweep.cjs', str(count), str(start), '--immutable'], 'Partition command is not the unchanged immutable sweep')
+        begun, ended = datetime.fromisoformat(receipt['startedAt']), datetime.fromisoformat(receipt['endedAt'])
+        require(begun.tzinfo is not None and ended.tzinfo is not None and ended >= begun, 'Invalid partition closure timestamps')
+        require(type(receipt['elapsedSeconds']) in (int, float) and receipt['elapsedSeconds'] >= 0 and abs((ended - begun).total_seconds() - receipt['elapsedSeconds']) <= 0.002, 'Invalid wrapper elapsed interval')
+        require(receipt['raw']['file'] == str(raw_path), 'Unexpected raw output path')
+        raw_bytes, raw_ref = capture(raw_path, captured)
+        require(raw_ref == receipt['raw'], 'Raw output differs from actual closed receipt')
+        require(raw_bytes.endswith(b'\n'), 'Raw output lacks final newline')
+        raw_lines = raw_bytes.splitlines(keepends=True)
+        require(len(raw_lines) == count + 2 and all(line.endswith(b'\n') and line.strip() for line in raw_lines), 'Missing, blank or extra raw lines')
+        records = [parse(line) for line in raw_lines]
+        header, footer = records[0], records[-1]
+        rows = records[1:-1]
+        require(set(header) == HEADER_KEYS and header['event'] == 'sweep-start' and header['scope'] == SCOPE, 'Unexpected complete start record')
+        require(header['count'] == count and header['startSeed'] == start and header['stateMode'] == 'validated immutable', 'Start partition/mode mismatch')
+        require(header['gameSourceHash'] == GAME_SHA and header['toolSourceHash'] == TOOL_SHA and integer(header['setupMs']), 'Start source/time mismatch')
+        require(isinstance(header['node'], str) and bool(re.fullmatch(r'v\d+\.\d+\.\d+', header['node'])), 'Missing actual Node version')
+        require(set(footer) == FOOTER_KEYS and footer['event'] == 'sweep-complete', 'Missing exact full success footer')
+        require(footer['count'] == footer['completed'] == count and footer['startSeed'] == start and footer['stateMode'] == 'validated immutable', 'Footer count/mode mismatch')
+        require(footer['gameSourceHash'] == GAME_SHA and footer['toolSourceHash'] == TOOL_SHA and footer['versions'] == WORLD_VERSIONS, 'Footer source/version mismatch')
+        require(integer(footer['elapsedMs']), 'Invalid engine elapsed duration')
+        require([row.get('seed') for row in rows] == list(range(start, start + count)), 'Missing, unordered or duplicate partition seeds')
+        last_elapsed = -1
+        for index, row in enumerate(rows):
+            require(set(row) == ROW_KEYS and row['event'] == 'life-complete', 'Unexpected row or failure event')
+            require(row['completed'] == index + 1 and row['requested'] == count and type(row['seed']) is int, 'Invalid row progress fields')
+            require(row['versions'] == WORLD_VERSIONS and row['country'] in COUNTRIES, 'Row version or country mismatch')
+            require(integer(row['commands'], 1) and integer(row['ageAtDeath']) and row['ageAtDeath'] <= 150, 'Invalid command/death-age row')
+            require(integer(row['people'], 1) and integer(row['ledgerRows']), 'Invalid people/ledger counts')
+            require(isinstance(row['worldSha256'], str) and bool(re.fullmatch('[0-9a-f]{64}', row['worldSha256'])), 'Missing complete actual world hash')
+            require(integer(row['lifeMs']) and integer(row['elapsedMs']) and row['lifeMs'] <= row['elapsedMs'] and last_elapsed <= row['elapsedMs'] <= footer['elapsedMs'], 'Invalid row timing sequence')
+            last_elapsed = row['elapsedMs']
+        ages = [row['ageAtDeath'] for row in rows]
+        country_counts = dict(Counter(row['country'] for row in rows))
+        require(footer['countryCounts'] == country_counts, 'Footer country totals differ from actual rows')
+        require(footer['ageRange'] == [min(ages), max(ages)] and min(ages) < max(ages), 'Missing actual lifespan variation or incorrect age footer')
+        require(footer['maxPeople'] == max(row['people'] for row in rows) and footer['maxLedgerRows'] == max(row['ledgerRows'] for row in rows), 'Footer maxima differ from actual rows')
+        all_rows.extend(rows)
+        raw_row_lines.extend(raw_lines[1:-1])
+        partition_evidence.append({'startSeed': start, 'count': count, 'endSeed': start + count - 1, 'reusesPreviouslyClosed120': start == 0, 'receipt': receipt_ref, 'raw': raw_ref, 'header': header, 'footer': footer, 'wrapperSeconds': receipt['elapsedSeconds'], 'rootSourceBeforeAfter': {'before': receipt['before'], 'after': receipt['after']}, 'actualRowsSha256': digest(b''.join(raw_lines[1:-1]))})
+
+    require(len(all_rows) == 1000 and [row['seed'] for row in all_rows] == list(range(1000)) and len({row['seed'] for row in all_rows}) == 1000, 'Final seeds must be exactly 0..999 once each')
+    require(set(row['country'] for row in all_rows) == set(COUNTRIES), 'Final actual rows do not cover all 12 approved countries')
+    # Check original bytes remained stable before creating any output.
+    for file, ref in list(captured.items()):
+        capture(Path(file), captured)
+    self_bytes, self_ref = capture(Path(__file__).absolute(), captured)
+    rows_bytes = b''.join(raw_row_lines)
+    age_counts = Counter(row['ageAtDeath'] for row in all_rows)
+    countries = Counter(row['country'] for row in all_rows)
+    result = {
+        'format': 'dreams-current-c39-final-1000-actual-rows-v1', 'createdAt': datetime.now(timezone.utc).isoformat(),
+        'status': 'all-three-root-gates-actually-closed-zero-and-json-reconciled', 'sourceCommit': COMMIT, 'versions': ALL_VERSIONS,
+        'sourceSnapshot': source_ref, 'sourceFiles': 688, 'gameSourceHash': GAME_SHA, 'combinedGamePersistenceSourceHash': COMBINED_SHA, 'producer': tool_ref, 'coordinatorSourceProofs': proof_refs,
+        'scope': SCOPE, 'stateMode': 'validated immutable',
+        'coverage': {'totalUniqueSeededLives': 1000, 'seedRange': [0, 999], 'seedUniquenessAndContiguityChecked': True, 'reusedAlreadyAcceptedSeeds': 120, 'additionalUniqueSeedsBeyondAccepted120': 880, 'not1120': True, 'partitions': [120, 440, 440], 'countryCounts': dict(sorted(countries.items())), 'ageRange': [min(age_counts), max(age_counts)], 'ageCounts': {str(k): age_counts[k] for k in sorted(age_counts)}, 'commands': sum(row['commands'] for row in all_rows), 'maxWorldPeople': max(row['people'] for row in all_rows), 'maxLedgerRows': max(row['ledgerRows'] for row in all_rows)},
+        'partitions': partition_evidence,
+        'rowsNdjson': {'file': 'rows.ndjson', 'bytes': len(rows_bytes), 'sha256': digest(rows_bytes), 'encoding': 'Exact actual life-complete raw lines, newline retained, concatenated in seed order'},
+        'inputPins': list(captured.values()), 'aggregator': self_ref, 'rows': all_rows,
+        'limits': ['The first 120 are reused, not 120 additional lives beyond the total 1000.', 'Pure engine/cloud Node first-eligible policy; birthAcknowledged is explicitly set before immutable progression, not a saved native/store birth journey.', 'The unchanged producer asserts actual death/cause/death journal and cleared pending/annual state for each life. This JSON-only aggregation does not rerun or independently decode those worlds.', 'Rows.people counts NPCs and player in a world; this is not 1000 unique person identities, saved files, multigeneration or full-branch coverage.', 'No native, SQLite, UI, physical performance, production-codec cold or complete Scenario A/B/C/D acceptance is established by this annual sweep.', 'All-688 before/after source checks are actual root receipt proofs; this aggregator validates their pinned snapshots and actual producer bytes without re-running the full source gate.', 'Partition elapsed durations overlap and must not be summed as elapsed wall time or treated as a latency benchmark.'],
+    }
+    # New directory and exclusive files prevent overwriting prior evidence.
+    output.mkdir(mode=0o755)
+    with (output / 'rows.ndjson').open('xb') as stream:
+        stream.write(rows_bytes)
+    result_bytes = (json.dumps(result, indent=2, ensure_ascii=False) + '\n').encode()
+    with (output / 'aggregate.json').open('xb') as stream:
+        stream.write(result_bytes)
+    sums = digest(result_bytes) + '  aggregate.json\n' + digest(rows_bytes) + '  rows.ndjson\n'
+    with (output / 'SHA256SUMS').open('x') as stream:
+        stream.write(sums)
+    print(json.dumps({'output': str(output), 'totalUniqueSeededLives': 1000, 'aggregate': {'file': str(output / 'aggregate.json'), 'bytes': len(result_bytes), 'sha256': digest(result_bytes)}, 'rows': result['rowsNdjson']}, indent=2))
+
+if __name__ == '__main__':
+    main()

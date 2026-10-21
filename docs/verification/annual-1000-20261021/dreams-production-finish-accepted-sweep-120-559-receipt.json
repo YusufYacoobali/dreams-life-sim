@@ -1,0 +1,34 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+  "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+  "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+  "argv": [
+    "node",
+    "tools/run-life-sweep.cjs",
+    "440",
+    "120",
+    "--immutable"
+  ],
+  "startedAt": "2026-10-21T08:36:53.344297+00:00",
+  "before": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T09:31:42.937704+00:00",
+  "elapsedSeconds": 3289.593,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-production-finish-accepted-sweep-120-559.out",
+    "bytes": 137160,
+    "sha256": "37b1fe61a48ca27b78bed4e3ccdc704dcaf6a9aabce38ce5690b4b709faff04d"
+  },
+  "after": {
+    "files": 688,
+    "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "status": "exact"
+  }
+}

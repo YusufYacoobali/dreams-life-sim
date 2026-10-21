@@ -1,0 +1,577 @@
+{
+  "format": "dreams-annual-1000-portable-acceptance-v1",
+  "complete": true,
+  "overallGameAcceptanceComplete": false,
+  "recordedAt": "2026-10-21T10:33:53.137318+00:00",
+  "status": "three-root-gates-actually-closed-zero-and-root-aggregate-complete",
+  "source": {
+    "commit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "versions": {
+      "world": 38,
+      "engine": 39,
+      "content": 13,
+      "database": 18,
+      "checkpoint": "v4"
+    },
+    "files": 688,
+    "snapshot": {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "all688CurrentBytesCheckedByDocumentationAuthor": true,
+    "coordinatorGitProofs": {
+      "head": {
+        "file": "final-regression-20261021/001-source-head.txt",
+        "bytes": 41,
+        "sha256": "b9a599d126c0e48bba9068d643cdd829d293c7440013d5bed168fa3343b17554"
+      },
+      "status": {
+        "file": "final-regression-20261021/002-source-status.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tree": {
+        "file": "final-regression-20261021/003-source-tree.bin",
+        "bytes": 207286,
+        "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+      },
+      "commit": {
+        "file": "final-regression-20261021/004-source-commit.bin",
+        "bytes": 258,
+        "sha256": "26498430e369b214199f030aee7f5a8fa6c9d87e5998d1342f4101ecc033824f"
+      }
+    }
+  },
+  "currentUISourceBridge": {
+    "commit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "files": 703,
+    "snapshot": {
+      "file": "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+      "bytes": 77733,
+      "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+    },
+    "bridge": {
+      "file": "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json",
+      "bytes": 10332,
+      "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+    },
+    "all703CurrentBytesCheckedByDocumentationAuthor": true,
+    "gameAndPersistenceExactToAnnualProducerSource": true,
+    "scope": "This annual gate ran against33b/688. The existing bridge establishes unchanged game/persistence on83ad/703; it does not turn the sweep into native/UI acceptance."
+  },
+  "rootObservedClosure": {
+    "sessions": [
+      70315,
+      21918,
+      15417
+    ],
+    "remainingRangesObservedClosedAt": "2026-10-21T09:32/09:32:51Z",
+    "aggregatorActualExitCode": 0,
+    "aggregatorObservedByRootAt": "2026-10-21T09:34Z",
+    "authorExecutedAggregator": false
+  },
+  "coverage": {
+    "totalUniqueSeededLives": 1000,
+    "seedRange": [
+      0,
+      999
+    ],
+    "seedUniquenessAndContiguityChecked": true,
+    "reusedAlreadyAcceptedSeeds": 120,
+    "additionalUniqueSeedsBeyondAccepted120": 880,
+    "not1120": true,
+    "partitions": [
+      120,
+      440,
+      440
+    ],
+    "countryCounts": {
+      "AU": 88,
+      "BR": 87,
+      "CA": 84,
+      "DE": 77,
+      "ES": 81,
+      "FR": 86,
+      "GB": 89,
+      "IN": 63,
+      "IT": 87,
+      "JP": 90,
+      "US": 81,
+      "ZA": 87
+    },
+    "ageRange": [
+      25,
+      100
+    ],
+    "ageCounts": {
+      "25": 1,
+      "26": 1,
+      "27": 1,
+      "29": 1,
+      "32": 1,
+      "34": 2,
+      "35": 1,
+      "36": 1,
+      "37": 3,
+      "38": 4,
+      "40": 6,
+      "41": 2,
+      "42": 1,
+      "44": 1,
+      "45": 3,
+      "46": 5,
+      "47": 4,
+      "48": 8,
+      "49": 4,
+      "50": 4,
+      "51": 5,
+      "52": 8,
+      "53": 6,
+      "54": 6,
+      "55": 1,
+      "56": 7,
+      "57": 8,
+      "58": 7,
+      "59": 8,
+      "60": 5,
+      "61": 3,
+      "62": 6,
+      "63": 9,
+      "64": 4,
+      "65": 20,
+      "66": 13,
+      "67": 20,
+      "68": 21,
+      "69": 15,
+      "70": 16,
+      "71": 15,
+      "72": 13,
+      "73": 18,
+      "74": 19,
+      "75": 41,
+      "76": 39,
+      "77": 36,
+      "78": 43,
+      "79": 44,
+      "80": 26,
+      "81": 29,
+      "82": 36,
+      "83": 30,
+      "84": 38,
+      "85": 55,
+      "86": 48,
+      "87": 40,
+      "88": 32,
+      "89": 29,
+      "90": 23,
+      "91": 17,
+      "92": 14,
+      "93": 9,
+      "94": 10,
+      "95": 27,
+      "96": 10,
+      "97": 8,
+      "98": 5,
+      "99": 1,
+      "100": 3
+    },
+    "commands": 258580,
+    "maxWorldPeople": 31,
+    "maxLedgerRows": 67065
+  },
+  "scope": "pure engine / cloud Node; first eligible choices; newborn acknowledgement flag set before engine progression; not native or SQLite",
+  "stateMode": "validated immutable",
+  "aggregate": {
+    "file": "annual-1000-20261021/aggregate.json",
+    "bytes": 475217,
+    "sha256": "6e88b226ba4aca7d9ed925b6f0ae03b99e0eae1d922f5073a267fb455e7f0c7f"
+  },
+  "exactRows": {
+    "file": "annual-1000-20261021/rows.ndjson",
+    "bytes": 309306,
+    "sha256": "eb2568d25511fdeebcabf7ff07a606b53443f908dd81e3b83925f365379cacaf"
+  },
+  "partitions": [
+    {
+      "seedRange": [
+        0,
+        119
+      ],
+      "count": 120,
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T07:51:46.890063+00:00",
+      "endedAt": "2026-10-21T08:05:00.416817+00:00",
+      "wrapperSeconds": 793.527,
+      "receipt": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-120-receipt.json",
+        "bytes": 1096,
+        "sha256": "9fcc9e173f1cdbf3741d1d7ba228977378589190c3d600015680e5d8c2df7155"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-120.out.gz",
+        "bytes": 9008,
+        "sha256": "d61a20cb2ee9f6fb8e5b3d0bc30a8a110ac4d395177034920986894b87e9b497",
+        "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-120.out",
+        "bytes": 37787,
+        "sha256": "a6d271d7f79387461e4219423aa2061f079b242d7ff3c1751e0710ee7bf7dec1"
+      },
+      "footer": {
+        "event": "sweep-complete",
+        "count": 120,
+        "startSeed": 0,
+        "completed": 120,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 38,
+          "engine": 39,
+          "content": 13
+        },
+        "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 10,
+          "IT": 11,
+          "BR": 12,
+          "ZA": 10,
+          "ES": 12,
+          "US": 13,
+          "CA": 10,
+          "GB": 10,
+          "DE": 12,
+          "FR": 6,
+          "IN": 6,
+          "JP": 8
+        },
+        "ageRange": [
+          37,
+          97
+        ],
+        "maxPeople": 28,
+        "maxLedgerRows": 67065,
+        "elapsedMs": 791642
+      },
+      "sourceBeforeAfter": {
+        "before": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        },
+        "after": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        }
+      }
+    },
+    {
+      "seedRange": [
+        120,
+        559
+      ],
+      "count": 440,
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T08:36:53.344297+00:00",
+      "endedAt": "2026-10-21T09:31:42.937704+00:00",
+      "wrapperSeconds": 3289.593,
+      "receipt": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-120-559-receipt.json",
+        "bytes": 1110,
+        "sha256": "aab83833ddc4c6a08cfe3a199def75b8315a68359a497c9f6c6e03712383ffe1"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-120-559.out.gz",
+        "bytes": 31054,
+        "sha256": "ce73ccc2dd73908001a818ae7ca1a24a73121f81252162e7053d5c1b3397649f",
+        "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-120-559.out",
+        "bytes": 137160,
+        "sha256": "37b1fe61a48ca27b78bed4e3ccdc704dcaf6a9aabce38ce5690b4b709faff04d"
+      },
+      "footer": {
+        "event": "sweep-complete",
+        "count": 440,
+        "startSeed": 120,
+        "completed": 440,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 38,
+          "engine": 39,
+          "content": 13
+        },
+        "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "ZA": 37,
+          "US": 40,
+          "BR": 32,
+          "IN": 32,
+          "JP": 38,
+          "ES": 35,
+          "GB": 36,
+          "DE": 31,
+          "FR": 44,
+          "IT": 46,
+          "CA": 32,
+          "AU": 37
+        },
+        "ageRange": [
+          27,
+          98
+        ],
+        "maxPeople": 31,
+        "maxLedgerRows": 65671,
+        "elapsedMs": 3286789
+      },
+      "sourceBeforeAfter": {
+        "before": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        },
+        "after": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        }
+      }
+    },
+    {
+      "seedRange": [
+        560,
+        999
+      ],
+      "count": 440,
+      "actualExitCode": 0,
+      "startedAt": "2026-10-21T08:39:10.471068+00:00",
+      "endedAt": "2026-10-21T09:32:50.760584+00:00",
+      "wrapperSeconds": 3220.29,
+      "receipt": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-560-999-receipt.json",
+        "bytes": 1109,
+        "sha256": "f415c102c395c7eeb7cbc9f17048948c9ab451af9902fba8ca1101e44df44e14"
+      },
+      "rawOutputLosslessCopy": {
+        "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-560-999.out.gz",
+        "bytes": 30963,
+        "sha256": "66cc848f145204cc4c485f40609fb4b2c1329d2af3de52ab0543fd69642fa012",
+        "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+      },
+      "rawUncompressed": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-560-999.out",
+        "bytes": 137172,
+        "sha256": "d161e6937011f53cddb7d91b523c581cf8e3a480d5d538fd64152828321bb18f"
+      },
+      "footer": {
+        "event": "sweep-complete",
+        "count": 440,
+        "startSeed": 560,
+        "completed": 440,
+        "stateMode": "validated immutable",
+        "versions": {
+          "world": 38,
+          "engine": 39,
+          "content": 13
+        },
+        "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+        "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+        "countryCounts": {
+          "AU": 41,
+          "BR": 43,
+          "GB": 43,
+          "JP": 44,
+          "ZA": 40,
+          "ES": 34,
+          "IT": 30,
+          "CA": 42,
+          "DE": 34,
+          "IN": 25,
+          "US": 28,
+          "FR": 36
+        },
+        "ageRange": [
+          25,
+          100
+        ],
+        "maxPeople": 30,
+        "maxLedgerRows": 66542,
+        "elapsedMs": 3217488
+      },
+      "sourceBeforeAfter": {
+        "before": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        },
+        "after": {
+          "files": 688,
+          "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+          "status": "exact"
+        }
+      }
+    }
+  ],
+  "producer": {
+    "file": "annual-1000-20261021/run-life-sweep.cjs.txt",
+    "bytes": 6982,
+    "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+  },
+  "aggregator": {
+    "file": "annual-1000-20261021/dreams-c39-final-1000-aggregate.py.txt",
+    "bytes": 14976,
+    "sha256": "3069e1a1a077c56d8cf7d0aa7fb49833ec0abfcc0fa0d73b317155c665b55335"
+  },
+  "documentationChecks": {
+    "exactCopiedArtifactHashesAndLengths": true,
+    "gzipRawCopiesDecompressToExactOriginalBytes": true,
+    "threeRawLifeCompleteLineSequencesEqualExactAggregateRows": true,
+    "fullAggregateRows": 1000,
+    "runtimeOrGameReplaysByDocumentationAuthor": 0
+  },
+  "limits": [
+    "The first 120 are reused, not 120 additional lives beyond the total 1000.",
+    "Pure engine/cloud Node first-eligible policy; birthAcknowledged is explicitly set before immutable progression, not a saved native/store birth journey.",
+    "The unchanged producer asserts actual death/cause/death journal and cleared pending/annual state for each life. This JSON-only aggregation does not rerun or independently decode those worlds.",
+    "Rows.people counts NPCs and player in a world; this is not 1000 unique person identities, saved files, multigeneration or full-branch coverage.",
+    "No native, SQLite, UI, physical performance, production-codec cold or complete Scenario A/B/C/D acceptance is established by this annual sweep.",
+    "All-688 before/after source checks are actual root receipt proofs; this aggregator validates their pinned snapshots and actual producer bytes without re-running the full source gate.",
+    "Partition elapsed durations overlap and must not be summed as elapsed wall time or treated as a latency benchmark.",
+    "This complete flag applies only to the documented1000-life pure-engine gate, not release readiness or whole-game acceptance.",
+    "The three raw outputs are losslessly gzip-packed solely for portable size; original raw hashes/lengths remain explicit. Aggregate and rows are copied byte-exact without compression.",
+    "Historical pending preparations and earlier120/full/native records remain unchanged."
+  ],
+  "historicalReferences": {
+    "uiSaveCheckpoint": "ui-save-checkpoint-20261021.json",
+    "acceptedCoreGates": "final-regression-20261021.json",
+    "sourceCheckpoint": "production-finish-source-checkpoint-20261021.json",
+    "completedC37": "production-gaps-20261021.json"
+  },
+  "stillPending": [
+    "Current C outcome review (technical cohort actually closed, independently reviewed outcomes forthcoming).",
+    "Current native interview/game-command/cold and normal-font/continuous30-minute acceptance beyond the separately recorded09:24 read-only cells.",
+    "Country/balance and standalone/iOS/physical release acceptance."
+  ],
+  "overallEffortEstimatePercent": 75,
+  "artifacts": [
+    {
+      "file": "annual-1000-20261021/aggregate.json",
+      "bytes": 475217,
+      "sha256": "6e88b226ba4aca7d9ed925b6f0ae03b99e0eae1d922f5073a267fb455e7f0c7f",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-1000-aggregate/aggregate.json",
+        "bytes": 475217,
+        "sha256": "6e88b226ba4aca7d9ed925b6f0ae03b99e0eae1d922f5073a267fb455e7f0c7f"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/rows.ndjson",
+      "bytes": 309306,
+      "sha256": "eb2568d25511fdeebcabf7ff07a606b53443f908dd81e3b83925f365379cacaf",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-1000-aggregate/rows.ndjson",
+        "bytes": 309306,
+        "sha256": "eb2568d25511fdeebcabf7ff07a606b53443f908dd81e3b83925f365379cacaf"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-120-receipt.json",
+      "bytes": 1096,
+      "sha256": "9fcc9e173f1cdbf3741d1d7ba228977378589190c3d600015680e5d8c2df7155",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-120-receipt.json",
+        "bytes": 1096,
+        "sha256": "9fcc9e173f1cdbf3741d1d7ba228977378589190c3d600015680e5d8c2df7155"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-120.out.gz",
+      "bytes": 9008,
+      "sha256": "d61a20cb2ee9f6fb8e5b3d0bc30a8a110ac4d395177034920986894b87e9b497",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-120.out",
+        "bytes": 37787,
+        "sha256": "a6d271d7f79387461e4219423aa2061f079b242d7ff3c1751e0710ee7bf7dec1"
+      },
+      "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-120-559-receipt.json",
+      "bytes": 1110,
+      "sha256": "aab83833ddc4c6a08cfe3a199def75b8315a68359a497c9f6c6e03712383ffe1",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-120-559-receipt.json",
+        "bytes": 1110,
+        "sha256": "aab83833ddc4c6a08cfe3a199def75b8315a68359a497c9f6c6e03712383ffe1"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-120-559.out.gz",
+      "bytes": 31054,
+      "sha256": "ce73ccc2dd73908001a818ae7ca1a24a73121f81252162e7053d5c1b3397649f",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-120-559.out",
+        "bytes": 137160,
+        "sha256": "37b1fe61a48ca27b78bed4e3ccdc704dcaf6a9aabce38ce5690b4b709faff04d"
+      },
+      "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-560-999-receipt.json",
+      "bytes": 1109,
+      "sha256": "f415c102c395c7eeb7cbc9f17048948c9ab451af9902fba8ca1101e44df44e14",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-560-999-receipt.json",
+        "bytes": 1109,
+        "sha256": "f415c102c395c7eeb7cbc9f17048948c9ab451af9902fba8ca1101e44df44e14"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-sweep-560-999.out.gz",
+      "bytes": 30963,
+      "sha256": "66cc848f145204cc4c485f40609fb4b2c1329d2af3de52ab0543fd69642fa012",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-sweep-560-999.out",
+        "bytes": 137172,
+        "sha256": "d161e6937011f53cddb7d91b523c581cf8e3a480d5d538fd64152828321bb18f"
+      },
+      "encoding": "gzip; decompression yields the exact original raw bytes, without newline or JSON normalization"
+    },
+    {
+      "file": "annual-1000-20261021/run-life-sweep.cjs.txt",
+      "bytes": 6982,
+      "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+      "original": {
+        "file": "/workspace/dreams-worktrees/project-callback-pacing-test/tools/run-life-sweep.cjs",
+        "bytes": 6982,
+        "sha256": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-c39-final-1000-aggregate.py.txt",
+      "bytes": 14976,
+      "sha256": "3069e1a1a077c56d8cf7d0aa7fb49833ec0abfcc0fa0d73b317155c665b55335",
+      "original": {
+        "file": "/tmp/dreams-c39-final-1000-aggregate.py",
+        "bytes": 14976,
+        "sha256": "3069e1a1a077c56d8cf7d0aa7fb49833ec0abfcc0fa0d73b317155c665b55335"
+      }
+    },
+    {
+      "file": "annual-1000-20261021/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "original": {
+        "file": "/tmp/dreams-production-finish-accepted-source.json",
+        "bytes": 75993,
+        "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+      }
+    }
+  ]
+}
