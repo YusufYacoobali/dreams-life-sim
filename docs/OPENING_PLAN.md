@@ -31,14 +31,14 @@ These are approximate effort estimates, not measured completion scores. Latest o
 
 ## What the remaining percentages mean
 
-The percentages above are broad effort estimates, not an itemised ten-percent feature backlog in each area. Startup/Life, ordinary careers, relationships/family, money/assets, health/legal, special careers/business, travel, pets/hobbies and the story system are implemented. The bounded approved-design review identified campus social life as the concrete missing core feature; that feature is now implemented and pushed. No additional major system is currently identified as absent.
+The percentages above are broad effort estimates, not an itemised ten-percent feature backlog in each area. Startup/Life, ordinary careers, relationships/family, money/assets, health/legal, special careers/business, travel, pets/hobbies and the story system are implemented. The bounded approved-design review identified campus social life as the concrete missing core feature; that feature is now implemented and pushed. The subsequent user-requested audit found two concrete gaps: final statistics were unreachable after death, and four approved business operating models plus meaningful Other selection were missing. Final statistics and business categories are now implemented locally; product/service management and company name/logo Settings remain in progress.
 
 Track three separate states from here: implemented scope, known defects, and release acceptance. Current campus/save compatibility/focused checks pass; combined8817regression and native campus acceptance are in progress. Two prior career regression failures were obsolete UI queries and are corrected. Remaining code changes should address actual defects, missing approved behaviour or specific presentation/editorial/balance findings. Final standalone cold/offline/resume, spoken accessibility, physical-device performance and iOS acceptance remain open; they do not imply ten percent more mechanics must be invented in every system.
 
 ## Current order of work
 
-1. Complete focused campus integration gates and the source-only responsiveness review. The broad visual/accessibility pass, scaled navigation fix and dedicated repayment error presentation are integrated; exact accepted source and owners are in HANDOFF.
-2. Finish campus social life and clubs for the approved postsecondary design, then address any concrete remaining content/balance defects. Recorded-course and later-life scenes are already integrated. Preserve every original situation and historical save.
+1. Finish the confirmed missing business product/service management and name/logo Settings. New operating models/Other and final/archived statistics are now implemented locally. Integrate one batch and use focused behavior checks plus one combined type gate; avoid repeated full regression or unchanged cohorts.
+2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. Resume campus native acceptance after this feature batch. Preserve every original situation and historical save.
 3. Continue useful source-scoped native play and cold-resume checks alongside implementation. After the merged game is stable, complete standalone, actual iOS/physical, accessibility/audio and release acceptance. Do not count a Hermes export or Expo Go session as a standalone build.
 
 ## Prior checkpoint: World38/engine39 gameplay and acceptance

@@ -6,6 +6,14 @@ This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and
 
 ## Latest local continuation
 
+**Latest user steering:** prioritise actual missing features and reduce repeated regression/usage. One bounded source audit is now complete for ordinary life/family/travel/leisure (no further concrete missing feature found); the business audit confirmed four missing approved operating models and a functional Other choice. Root separately found final Statistics unreachable after death because the game layout redirects deceased players and Life Summary had no statistics entry.
+
+Local unpublished `a37f9c9` extracts the existing statistics presentation into a pure reusable component and adds local View Statistics/Back to Life Summary, using that exact viewed World/person even for a saved life. Existing living Statistics route reuses the same component. Focused genuine deceased-ancestor/other-active-life test8f84924 passes1case in15.423s, all10stats/history/zero writes/all8tables. Android modal Back is now handled too (33c7a38/0707a86); the final affected case passes1/2unrelatedskips in14.087s. A first filter matched no cases and was corrected; no skipped-only run is credited as acceptance. No synthetic death, new snapshot or source-evidence pack.
+
+Four missing business kinds (fashion/entertainment/real-estate/online) and functional Other→supported-model selection are now integrated locally aseebb074; old5models remain literal. Twelve selected business cases pass in4.730s. Further reference review confirmed Products & Services management and company name/logo Settings were absent. Work_dialogs now owns that coupled followup: optional model-specific offering with real future-month tradeoffs and optional branding using six existing illustrations. Missing fields retain original economics/JSON; no invented historical choices or image import. No additional version bump is planned within this unpublished41batch. Root `ebc89f8` stages ONE consolidated World41/engine42/content17/reader21 boundary for the new enum values: World40 changes only root tags, complete reader13–20 upgrades only its marker. Purchase_dialog owns existing version-expectation adapters (excluding Work's business domain file and root's prospective migration file). These local changes are not pushed or full-regression accepted yet. Root will run one combined type gate after the complete business integration and only affected behavior checks, then batch the next source checkpoint. No additional full/local regression or old cohorts are being repeated.
+
+Native campus gameplay checks are paused for this feature work. Root owns dormant9ac Metro17745 and ADB; Ren remains24/revision128 with no game command issued, only reader19→20 and read-only navigation. The last tap returned to Life. Do not run device commands or restart Metro without root handoff.
+
 Remote `work` is `8817c3f`, successfully pushed about20:43UTC on21October. Its [Quality39672695725](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39672695725) is running. Previous452a3fd Quality39669498153 failed only two outdated career text queries (2failed/2787passed,217/219suites);8817c3f adapts those two queries to the actual accessible earnings fact and ended-career status. Both affected files pass2cases in14.947s; all exact earnings/history/save assertions remain. The previous exact `dcb1427` [Quality39665238637](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39665238637) **passed** at20:09:46UTC:2,788 tests/219 suites, locked install and strict app/all-test types. The earlier5518 failed gate is historical, corrected byde79f22.
 
 The complete broad visual pass is integrated and pushed in452a3fd: readable scaled navigation, factual costs/status/history across the remaining screens, retained failed divorce review, scalar portrait reuse and read-only life summary. Final strict app/all-test types actually closed0 (67808); the existing summary read-only journey passes1case in3.670s. This checkpoint uses World39/engine40/content17/reader19/v4 and274situations/822choices.
@@ -59,10 +67,10 @@ All sparse trees exclude design and docs/verification; read original design in m
 | Owner | Reused worktree | Current scope |
 | --- | --- | --- |
 | root | main `/workspace/dreams-life-sim` | Campus union integration, strict/compatibility gates, docs and safe push; exclusive dormant native controls |
-| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Campus connected UI/save flow; sole narrow UI runner after completed domain gate |
-| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | Campus core frozen6d2+3812+8560; no runners |
-| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Independent bounded campus UI accessibility/callback review |
-| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Current-version compatibility adapters414ee29 frozen/integrated; no runners |
+| hobby_review | `/workspace/dreams-worktrees/career-social-review-identity` | Final statistics/Android Back test frozen and integrated; no runner |
+| school_dialogs | `/workspace/dreams-worktrees/education-work-polish` | Bounded ordinary-life/family/travel/leisure source audit complete; no additional gap or runner |
+| work_dialogs | `/workspace/dreams-worktrees/health-legal-callbacks` | Business offerings and Settings implementation; sole affected-business runner slot when ready |
+| purchase_dialog | `/workspace/dreams-worktrees/asset-visual-polish` | Final41/42/21 compatibility adapters1111c66 frozen/integrated640bb91; no runner |
 | release_audit | `/workspace/dreams-worktrees/startup-cycle-leaves` | Campus domain13cases pass; source frozen; no runners |
 | story_editorial | separate clean author tree | Source-only button hot-path review; no native or benchmark controls |
 
