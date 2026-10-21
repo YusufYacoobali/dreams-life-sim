@@ -26,8 +26,8 @@ const sha = (value: string | Buffer) => createHash('sha256').update(value).diges
 
 test('fourteen distinct original situations give each actual path two dedicated scenes, beside one unchanged shared Creator scene', () => {
   expect(scenes).toHaveLength(14); expect(scenes.flatMap(row => row.choices)).toHaveLength(42);
-  expect(eventTemplates).toHaveLength(272); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(816);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(272);
+  expect(eventTemplates).toHaveLength(274); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(822);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(274);
   for (const kind of namedPaths) expect([...specialCareerTemplates, ...scenes].filter(row => row.specialCareer === kind)).toHaveLength(2);
   expect(specialCareerTemplates.filter(row => row.specialCareer === 'creator')).toHaveLength(1);
   expect(scenes.filter(row => row.rarity === 'common')).toHaveLength(8); expect(scenes.filter(row => row.rarity === 'uncommon')).toHaveLength(6);

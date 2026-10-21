@@ -28,6 +28,7 @@ import { specialCareerDepthTemplates } from './specialCareerDepthStories';
 import { legalTemplates } from './legalStories';
 import { laterLifeFamilyTemplates } from './laterLifeFamilyStories';
 import { studyLifeTemplates } from './studyLifeStories';
+import { laterLifeRecordTemplates } from './laterLifeRecordStories';
 import { legalStoryAvailable, legalStoryContexts } from '../systems/legalStoryContext';
 import { offences } from './crime';
 import { storyContactNames } from '../storyNames';
@@ -241,6 +242,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...legalTemplates,
   ...laterLifeFamilyTemplates,
   ...studyLifeTemplates,
+  ...laterLifeRecordTemplates,
 ];
 const hasStudyTemplates = eventTemplates.some(template => template.study !== undefined);
 const hasLaterLifeTemplates = eventTemplates.some(template => template.retired || template.widowed);

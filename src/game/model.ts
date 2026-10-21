@@ -613,8 +613,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Later-life family situations add future writing only. Keep every saved
   // binding, choice, journal, person, payment and random stream unchanged.
   if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40 && parsed.contentVersion === 15) parsed.contentVersion = 16;
-  // Recorded-course scenes affect future selection only; bound choices and
-  // all existing education, payment, history and random state remain literal.
+  // Recorded-course and later-life scenes affect future selection only; bound
+  // choices and all existing people, payments, history and RNG remain literal.
   if (parsed && parsed.schemaVersion === 39 && parsed.engineVersion === 40 && parsed.contentVersion === 16) parsed.contentVersion = 17;
   return validateWorld(parsed, immutable);
 }

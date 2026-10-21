@@ -152,9 +152,9 @@ test.each([0, 100])('all six later-life choices cap actual stats and the bound f
   }
 });
 
-test('272 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
-  expect(eventTemplates).toHaveLength(272); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
-  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(272);
+test('274 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
+  expect(eventTemplates).toHaveLength(274); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
+  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(274);
   for (const template of everydayLifeTemplates) {
     expect(template.local).toBe(true); expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices).toHaveLength(3); expect(new Set(template.choices.map(c => c.id)).size).toBe(3);
     const text = JSON.stringify(template);
