@@ -1,3 +1,4 @@
+import { validateAnnualPacing } from './annualPacing';
 import { npcMoveSchema } from './systems/npcMoveSchemas';
 import { validateNpcMoves } from './systems/npcMoveValidation';
 import { bestFriendshipSchema } from './systems/friendshipSchemas';
@@ -309,6 +310,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     if (!world.people[entry.personId] || compareDates(entry.date, world.date) > 0 || compareDates(entry.date, world.people[entry.personId].born) < 0 || journalIds.has(entry.id)) throw new Error('Invalid journal fact');
     journalIds.add(entry.id);
   }
+  validateAnnualPacing(world);
   if (world.annual && (compareDates(world.date, world.annual.startDate) < 0 || compareDates(world.date, world.annual.targetDate) > 0 || world.annual.targetDate.year !== world.annual.startDate.year + 1)) throw new Error('Invalid annual frame');
   if (world.annual && (compareDates(world.date, monthFrom(world.annual.startDate, world.annual.monthsProcessed, world.calendarAnchorDay)) !== 0 || compareDates(world.annual.targetDate, monthFrom(world.annual.startDate, 12, world.calendarAnchorDay)) !== 0)) throw new Error('Annual cursor does not match calendar');
   if (world.annual?.stage === 'complete' && world.annual.monthsProcessed !== 12) throw new Error('Incomplete year marked complete');

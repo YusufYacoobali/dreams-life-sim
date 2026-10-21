@@ -1,3 +1,4 @@
+import { noteImportantDecision, optionalSceneChance } from './annualPacing';
 import { npcMovesYear, settleAnnualTaxesForNpcMoves } from './systems/npcMoves';
 import { endStudyCourse, refreshStudyCourses } from './systems/studyCourses';
 import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
@@ -193,9 +194,13 @@ function finishYear(world: World) {
   const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
   const pool = introductory.length ? introductory : eligible;
   // Introductory year is guaranteed; later years leave room for quiet years.
-  const shouldOffer = age === 1 || roll(world, 'events', 1, 100) <= 78;
-  if (shouldOffer && eligible.length) {
-    const template = introductory.length ? pool[roll(world, 'events', 0, pool.length - 1)] : weightedEvent(pool, total => roll(world, 'events', 0, total - 1));
+  const offerRoll = age === 1 ? null : roll(world, 'events', 1, 100);
+  const legacyOffer = offerRoll === null || offerRoll <= 78;
+  // Keep the original conditional draw schedule, including a busy-year scene
+  // that is suppressed. Binding is pure and unused candidates are never saved.
+  const template = legacyOffer && eligible.length ? introductory.length ? pool[roll(world, 'events', 0, pool.length - 1)] : weightedEvent(pool, total => roll(world, 'events', 0, total - 1)) : undefined;
+  const shouldOffer = offerRoll === null || offerRoll <= optionalSceneChance(frame);
+  if (shouldOffer && template) {
     offerPending(world, bindEvent(world, template));
     world.eventHistory.push({ templateId: template.id, year: world.date.year });
   } else {
@@ -299,7 +304,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   const custody = custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
   if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
-    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months', pausedForPlanning: false };
+    world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months', pausedForPlanning: false, pacing: { ruleVersion: 1, decisions: [] } };
     continueYear(world);
   } else if (command.type === 'resume') {
     if (!world.annual || world.pending) throw new IneligibleAction('There is no interrupted year to resume');
@@ -311,11 +316,13 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const choice = event.choices.find(item => item.id === command.choiceId);
     if (!choice) throw new IneligibleAction('Choose an available option');
     const unavailable = choiceUnavailable(world, choice); if (unavailable) throw new IneligibleAction(unavailable);
+    const decisionFrame = world.annual;
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
     const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : null;
     const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
+    noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
     if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects }, priority + 1);
   } else if (command.type === 'acknowledge') {
