@@ -1,0 +1,106 @@
+{
+  "format": "dreams-native-cohort-captures-v1",
+  "complete": false,
+  "mode": "custom",
+  "device": null,
+  "scope": null,
+  "sourceManifest": null,
+  "baseline": null,
+  "birthCheckpoint": null,
+  "phases": [
+    {
+      "id": "newborn",
+      "kind": "created",
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "cold-newborn",
+      "kind": "cold",
+      "sameAs": "newborn",
+      "coldAttestation": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "begun",
+      "kind": "begin-life",
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "cold-begun",
+      "kind": "cold",
+      "sameAs": "begun",
+      "coldAttestation": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "birthday-decision",
+      "kind": "command",
+      "command": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "cold-birthday-decision",
+      "kind": "cold",
+      "sameAs": "birthday-decision",
+      "coldAttestation": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "birthday-result",
+      "kind": "command",
+      "command": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "cold-birthday-result",
+      "kind": "cold",
+      "sameAs": "birthday-result",
+      "coldAttestation": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "acknowledged",
+      "kind": "command",
+      "command": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    },
+    {
+      "id": "cold-acknowledged",
+      "kind": "cold",
+      "sameAs": "acknowledged",
+      "coldAttestation": null,
+      "database": null,
+      "png": null,
+      "xml": null,
+      "coordinatorPersonallyViewed": false
+    }
+  ],
+  "cohort": "c38"
+}
