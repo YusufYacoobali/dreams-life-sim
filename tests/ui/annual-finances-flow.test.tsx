@@ -98,12 +98,12 @@ test('a genuine interleaved wage and company-payout year stays in original posti
   } finally { context.close(); }
 });
 
-test('a direct Finances route selects Assets without a tab override and issues no financial read or command', async () => {
+test('a direct Finances route selects Assets and its selected tab returns to Assets without a financial read or command', async () => {
   const context = await setup();
   try {
     const initial = world(), rows = context.rows(), index = jest.spyOn(projection, 'indexPersonalFinances'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(<GameLayout />));
     expect(screen.getByRole('tab', { name: 'Assets', selected: true })).toBeOnTheScreen(); await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Assets' })); });
-    expect(router.navigate).not.toHaveBeenCalled(); expect(index).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
+    expect(router.navigate).toHaveBeenCalledTimes(1); expect(router.navigate).toHaveBeenCalledWith('/assets'); expect(index).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(initial); expect(context.rows()).toEqual(rows); context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 

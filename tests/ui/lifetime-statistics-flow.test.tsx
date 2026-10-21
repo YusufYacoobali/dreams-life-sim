@@ -59,16 +59,23 @@ test('Extras opens read-only Statistics without selecting a life, changing pendi
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
-test('the actual Extras navigation context keeps GameLayout Activities selected for Statistics and an actual parent view without saving', async () => {
+test('the actual nested Activities context returns to its root on reselect, keeps root taps inert and preserves all saved data', async () => {
   const context = await setup();
   try {
-    const original = world(), encoded = encodeWorld(original), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame(<Extras />));
+    const original = world(), encoded = encodeWorld(original), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(<Extras />));
     fireEvent.press(screen.getByRole('button', { name: /^Statistics\./ }));
     const destination = jest.mocked(router.push).mock.calls.at(-1)![0] as { pathname: string; params: { tab: string } };
     expect(destination.pathname).toBe('/statistics'); mockPath = destination.pathname; mockParams = destination.params;
     view.rerender(frame(<><GameLayout /><Statistics /></>)); expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen(); expect(screen.getByRole('tab', { name: 'Life', selected: false })).toBeOnTheScreen(); expect(screen.getByText('Riley Kelly')).toBeOnTheScreen();
     mockParams = { ...destination.params, id: 'person_parent1' }; view.rerender(frame(<><GameLayout /><Statistics /></>)); expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen(); expect(screen.getByText(original.people.person_parent1.firstName + ' ' + original.people.person_parent1.lastName)).toBeOnTheScreen();
-    expect(world()).toBe(original); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(world().pending).toEqual(original.pending); context.oldMoments(); view.unmount();
+    fireEvent.press(screen.getByRole('tab', { name: 'Activities', selected: true })); expect(router.navigate).toHaveBeenCalledTimes(1); expect(router.navigate).toHaveBeenLastCalledWith('/activities');
+    mockPath = '/activities'; mockParams = {}; view.rerender(frame(<GameLayout />)); fireEvent.press(screen.getByRole('tab', { name: 'Activities', selected: true })); expect(router.navigate).toHaveBeenCalledTimes(1);
+    fireEvent.press(screen.getByRole('tab', { name: 'Life', selected: false })); expect(router.navigate).toHaveBeenCalledTimes(2); expect(router.navigate).toHaveBeenLastCalledWith('/life');
+    mockPath = '/life'; view.rerender(frame(<GameLayout />)); fireEvent.press(screen.getByRole('tab', { name: 'Life', selected: true })); expect(router.navigate).toHaveBeenCalledTimes(2);
+    // The observed Education issue also uses the actual pathname fallback,
+    // without a tab query or a visible/scrolled-in Back header.
+    mockPath = '/education'; view.rerender(frame(<GameLayout />)); fireEvent.press(screen.getByRole('tab', { name: 'Activities', selected: true })); expect(router.navigate).toHaveBeenCalledTimes(3); expect(router.navigate).toHaveBeenLastCalledWith('/activities');
+    expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(original); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(world().pending).toEqual(original.pending); expect(world().annual).toEqual(original.annual); context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 

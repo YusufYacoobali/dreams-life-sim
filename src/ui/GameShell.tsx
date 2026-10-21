@@ -27,9 +27,10 @@ export function GameShell({
 }
 
 export function BottomNavigation({
-  activeTab, onSelectTab, renderIcon,
+  activeTab, onSelectTab, onReselectTab, renderIcon,
 }: {
   activeTab: TabKey; onSelectTab: (tab: TabKey) => void;
+  onReselectTab?: (tab: TabKey) => void;
   renderIcon?: (tab: TabKey, color: string) => React.ReactNode;
 }) {
   const c = useColors();
@@ -40,7 +41,7 @@ export function BottomNavigation({
           return <Pressable
             key={tab.id} accessibilityRole="tab" accessibilityLabel={tab.label}
             accessibilityState={{ selected: activeTab === tab.id }}
-            onPress={() => { if (activeTab !== tab.id) onSelectTab(tab.id); }}
+            onPress={() => { if (activeTab !== tab.id) onSelectTab(tab.id); else onReselectTab?.(tab.id); }}
             style={styles.tab}
           >
             {renderIcon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants">{renderIcon(tab.id, color)}</View>}
