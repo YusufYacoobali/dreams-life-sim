@@ -27,6 +27,7 @@ test('version one retains the original251 tiers and exact original250 narratives
   expect(originalCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
   expect(originalCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
   expect(originalCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
+  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([245, 18, 1, 1]);
   const copy = events.eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   expect(createHash('sha256').update(JSON.stringify(copy)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
 });

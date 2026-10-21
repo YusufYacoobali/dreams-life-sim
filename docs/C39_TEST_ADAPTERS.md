@@ -24,13 +24,12 @@ the entrepreneur tool still expects 34/35/content10 and is refused under the
 new current tuple. Old bound interview metadata, annual frames and complete
 canonical fields are not normalized away or silently filled here.
 
-## Deferred catalogue and new-metadata acceptance
+## Integrated catalogue and migration acceptance preparation
 
-The target catalogue after Release's fourteen actual templates is 265 situations /
-795 choices. The source at this preparation base still contains 251/753, with an
-exact 237-common rarity distribution. Those assertions are deliberately retained
-until the templates and their authored rarity metadata are integrated. Then
-update only the actual current totals/distribution in these existing suites:
+The original preparation base contained 251 situations /753 choices. Its six
+catalogue adaptations were deferred until the fourteen actual career templates
+and their authored rarity metadata existed. Reviewed source commit `6c8ed7d`
+subsequently resolved all six suites before integration HEAD `ca7c72c`:
 
 - `tests/game/childhood-stories.test.ts`
 - `tests/game/everyday-life-stories.test.ts`
@@ -39,18 +38,41 @@ update only the actual current totals/distribution in these existing suites:
 - `tests/game/workplace-stories.test.ts`
 - `tests/game/adult-relationship-stories.test.ts`
 
-Preserve the original 250 narrative/choice hash and existing subfamily counts.
-New story IDs, contexts, branch counts and coverage need the actual integrated
-templates; none is fabricated by this version adapter. Optional future annual
-pacing and interview-experience metadata must preserve exact old absence, but
-their unfinished fields are not guessed or made required here. A genuine
+Current assertions now cover 265 situations /795 choices and unchanged existing
+subfamily counts. The original 250 narrative/choice SHA remains exact. The
+original 251-entry rarity prefix still has 237 common, 12 uncommon, one rare and
+one extremely rare scene. Fourteen actual additions supply eight common and six
+uncommon scenes; the full catalogue distribution is explicitly checked as
+245/18/1/1. No old prefix or historical producer count is rewritten. The new
+special-career domain and connected suites contain no stale current-version
+assertions requiring another tag adapter.
+
+`tests/persistence/prospective-gameplay-migration.test.ts` adds two focused
+common-bridge checks. Unchanged genuine original native interview and interrupted
+project payloads are pinned by fixture and payload SHA. Their older source tags
+remain asserted. An explicitly arranged 37/38/content12 envelope retains all
+five required histories and every field; decoding may change only the three root
+tags to 38/39/content13. Whole-object equality and an exact production-codec
+roundtrip protect the saved answers, money, identities, history, annual cursor
+and RNG. Original interview `experience` and annual `pacing` absence must stay
+absent. This is migration setup, not a genuine C38 producer, natural journey,
+SQLite cold connection or actual native observation. Existing author suites
+already exercise newly bound optional metadata; no new historical metadata is
+manufactured for these checks.
+
+The existing NPC-moves migration harness already covers reader13–17 to18,
+marker failure/rollback, all-eight-table preservation, real cold connections and
+future19 refusal. It is retained without a duplicate SQLite harness. A genuine
 nonempty C37 admissions/study fixture can strengthen later migration acceptance
 once its actual producer and bytes are supplied.
 
 ## Validation scope
 
-Only static TypeScript syntax and diff checks are authorized for this candidate.
-No application/domain module, command, test, typecheck, export, cohort or device
-operation has run. Runtime and strict validation wait for the coordinated C39
-union. All 49 edited TypeScript files parse with zero syntax errors
-(`/tmp/dreams-c39-test-adapters-syntax.out`), and `git diff --check` passes.
+The original preparation's 49 edited TypeScript files parse with zero syntax
+errors (`/tmp/dreams-c39-test-adapters-syntax.out`). The integrated follow-up is
+also limited to static TypeScript syntax and diff checks; its new migration
+tests and full catalogue distribution assertion remain unexecuted until the
+coordinator schedules C39 gates. No application/domain module, command,
+typecheck, export, cohort or device operation is run by this follow-up.
+All 13 audited catalogue, feature and new migration files parse with zero syntax
+errors (`/tmp/dreams-c39-union-adapters-syntax.out`); `git diff --check` passes.
