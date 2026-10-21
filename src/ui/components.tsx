@@ -109,11 +109,12 @@ export function ActionRow({
 
 export function StatBar({ label, value, color, icon }: { label: string; value: number; color: string; icon?: React.ReactNode }) {
   const c = useColors();
+  const { fontScale } = useWindowDimensions();
   const bounded = Number.isFinite(value) ? Math.round(Math.max(0, Math.min(100, value))) : 0;
   return (
     <View accessible accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: bounded }} style={styles.stat}>
       {icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ width: 24, alignItems: 'center' }}>{icon}</View>}
-      <Text style={{ width: 84, color: c.ink, fontSize: 13 }}>{label}</Text>
+      <Text style={{ width: 84 * Math.max(1, fontScale), color: c.ink, fontSize: 13 }}>{label}</Text>
       <View style={[styles.track, { backgroundColor: c.track }]}>
         <View style={{ height: '100%', width: `${bounded}%`, borderRadius: 6, backgroundColor: color }} />
       </View>
