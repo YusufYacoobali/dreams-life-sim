@@ -1,6 +1,6 @@
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { resolveCommand } from '../../src/game/engine';
-import { copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
+import { copyWorld, decodeWorld, encodeWorld, moneyJSON, validateWorld, type World } from '../../src/game/model';
 import { randomInteger } from '../../src/game/random';
 import { conversationContext, conversationTopics, type ConversationTopic } from '../../src/game/systems/conversations';
 import { relationFor, socialCommandSchema } from '../../src/game/systems/relationships';
@@ -160,7 +160,7 @@ test('an actual introduced acquaintance cannot be silently treated as family', (
 test('the prospective migration changes only three root tags and preserves old bound results and optional-absent metadata', () => {
   const bound = resolveCommand(fixture(), talk()), legacy = copyWorld(bound) as unknown as Record<string, unknown>;
   legacy.schemaVersion = 38; legacy.engineVersion = 39; legacy.contentVersion = 13;
-  const migrated = decodeWorld(encodeWorld(legacy as unknown as World));
+  const migrated = decodeWorld(JSON.stringify(legacy, moneyJSON));
   expect(migrated).toEqual(bound); expect(migrated.pending!.body).toContain('discussion about food');
   expect(migrated.people).toEqual(bound.people); expect(migrated.random).toEqual(bound.random);
   expect(Object.keys(migrated)).toEqual(Object.keys(bound));
