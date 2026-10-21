@@ -17,7 +17,7 @@ export function LifeSummaryContent({ world, personId = world.activePersonId, rea
   const entries = useMemo(() => world.journal.filter(entry => entry.personId === personId), [world.journal, personId]);
   const progress = useMemo(() => lifeProgress(world, personId), [world, personId]);
   if (!person) return null;
-  if (statisticsFor === identity) return <Modal visible animationType="none" presentationStyle="fullScreen" onRequestClose={() => setStatisticsFor(null)}><SafeAreaProvider style={{ flex: 1, backgroundColor: c.background }}><LifetimeStatisticsContent world={world} personId={personId} readOnly={readOnly} bottomSafeArea onBack={() => setStatisticsFor(null)} /></SafeAreaProvider></Modal>;
+  if (statisticsFor === identity) return <Modal visible transparent statusBarTranslucent navigationBarTranslucent animationType="none" presentationStyle="overFullScreen" onRequestClose={() => setStatisticsFor(null)}><SafeAreaProvider style={{ flex: 1, backgroundColor: c.background }}><LifetimeStatisticsContent world={world} personId={personId} readOnly={readOnly} bottomSafeArea onBack={() => setStatisticsFor(null)} /></SafeAreaProvider></Modal>;
   const earned = progress?.achievements.filter(item => item.complete) ?? [];
   const dateLabel = (date: typeof world.date) => date.year + '-' + String(date.month).padStart(2, '0') + '-' + String(date.day).padStart(2, '0');
   return <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar />
