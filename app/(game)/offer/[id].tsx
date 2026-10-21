@@ -11,7 +11,13 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../../../s
 import { EventModal, EventPresentation } from '../../../src/ui/EventModal';
 
 export default function Offer() {
-  const { id } = useLocalSearchParams<{ id: string }>(); const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error);
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const identity = useGame(state => state.world ? state.world.id + ':' + state.world.activePersonId : 'none');
+  return <OfferDetails key={identity + ':' + id} id={id} />;
+}
+
+function OfferDetails({ id }: { id: string }) {
+  const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error);
   const [financing, setFinancing] = useState<'cash' | 'mortgage'>('cash'); const [deposit, setDeposit] = useState(2000); const [term, setTerm] = useState<120 | 240 | 360>(360); const [dialog, setDialog] = useState<'deposit' | 'term' | 'confirm' | null>(null);
   const offer = assetCatalog.find(item => item.id === id);
   if (!offer) return <Page><Header title="Offer unavailable" onBack={() => router.back()} /><Body>This item could not be found.</Body></Page>;

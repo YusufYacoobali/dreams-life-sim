@@ -20,7 +20,8 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
 import graduateFixture from '../fixtures/v3-employed-graduate.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
-jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: 'studio' }), router: { back: jest.fn(), navigate: jest.fn() } }));
+let mockRouteId = 'studio';
+jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: mockRouteId }), router: { back: jest.fn(), navigate: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Offer from '../../app/(game)/offer/[id]';
 
@@ -31,6 +32,7 @@ const choose = async (name: string) => { await act(async () => { fireEvent.press
 const world = () => mockStore.getState().world!;
 
 async function setup() {
+  mockRouteId = 'studio';
   const directory = mkdtempSync(join(tmpdir(), 'dreams-purchase-confirmation-')), path = join(directory, 'dreams.db');
   let sqlite: DatabaseSync;
   function connect(): SqlDatabase {
@@ -60,7 +62,7 @@ async function setup() {
   };
   await bootstrap(repository);
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-  return { get sqlite() { return sqlite; }, rows, pauseNextSave,
+  return { get sqlite() { return sqlite; }, repository, rows, pauseNextSave,
     cold: async () => { sqlite.close(); await bootstrap(new SaveRepository(connect())); },
     close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); },
   };
@@ -92,6 +94,39 @@ test('local financing, deposit and term choices close immediately; review and ca
     expect(screen.queryByText('Buy City Studio?')).toBeNull(); await press('Cash'); await press('Mortgage');
     expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
     expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+});
+
+test.each(['offer', 'life'] as const)('changing the actual %s closes the old purchase review and starts with fresh funding choices', async contextChange => {
+  const context = await setup();
+  try {
+    const original = world();
+    const other = { ...original, id: 'life_other_purchase' };
+    if (contextChange === 'life') {
+      // A second copy of the genuine adult scenario deliberately reuses its
+      // person/offer IDs: only the actual saved-life identity differs.
+      await context.repository.create(other);
+      expect(await mockStore.getState().selectLife(original.id)).toBe(true);
+    }
+    const view = render(frame()); await reviewMortgage(); expectReviewedTerms();
+    const beforeRows = context.rows();
+    if (contextChange === 'offer') {
+      mockRouteId = 'apartment'; view.rerender(frame());
+      expect(context.rows()).toEqual(beforeRows); expect(world()).toEqual(original);
+      expect(screen.getByText('Two-Bedroom Apartment')).toBeOnTheScreen();
+    } else {
+      await act(async () => { expect(await mockStore.getState().selectLife(other.id)).toBe(true); });
+      expect(world()).toEqual(other);
+      expect(await context.repository.load(original.id)).toEqual(original);
+    }
+    expect(screen.queryByRole('button', { name: 'Confirm Purchase' })).toBeNull();
+    expect(screen.queryByRole('button', { name: /^Deposit\./ })).toBeNull();
+    const selectedRows = context.rows();
+    await press('Mortgage');
+    expect(screen.getByRole('button', { name: /^Deposit\. 20%/ })).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Term. 30 years' })).toBeOnTheScreen();
+    expect(context.rows()).toEqual(selectedRows); expect(world()).toEqual(contextChange === 'life' ? other : original);
+    view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
