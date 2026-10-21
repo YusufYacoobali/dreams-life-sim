@@ -100,20 +100,16 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(35), engineVersion: z.literal(36), contentVersion: z.literal(11),
+  schemaVersion: z.literal(36), engineVersion: z.literal(37), contentVersion: z.literal(12),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(relationshipSchema), bestFriendships: z.array(bestFriendshipSchema),
-  // Isolated future-batch bridge only: root replaces this default with the
-  // explicit World35→36 empty-field migration and reader16 protection.
-  teenRelationships: z.array(teenRelationshipSchema).default([]),
+  teenRelationships: z.array(teenRelationshipSchema),
   households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
-  // Isolated-branch bridge only: root's World36 union requires this field and
-  // supplies [] exclusively in the legacy <=35 migration, with reader16.
-  npcSeparations: z.array(npcSeparationSchema).default([]),
+  npcSeparations: z.array(npcSeparationSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
@@ -136,8 +132,8 @@ export const worldSchema = z.object({
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), schoolWithdrawals: z.array(schoolWithdrawalSchema), recoveryCourses: z.array(recoveryCourseSchema),
-  universityApplications: z.array(universityAdmissionSchema).default([]),
-  studyCourses: z.array(studyCourseSchema).default([]),
+  universityApplications: z.array(universityAdmissionSchema),
+  studyCourses: z.array(studyCourseSchema),
   scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), hourlyContracts: z.array(hourlyContractSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
@@ -583,5 +579,15 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 34 && parsed.engineVersion === 35) { parsed.schemaVersion = 35; parsed.engineVersion = 36; parsed.bestFriendships = []; }
   // New health/context display copy affects future prompts only; stored text stays exact.
   if (parsed && parsed.schemaVersion === 35 && parsed.engineVersion === 36 && parsed.contentVersion === 10) parsed.contentVersion = 11;
+  // New consent, study observations and NPC separation records begin only through
+  // actual future commands. Preserve every existing friendship, bound scene,
+  // person, payment, historical fact and RNG value.
+  if (parsed && parsed.schemaVersion === 35 && parsed.engineVersion === 36) {
+    parsed.schemaVersion = 36; parsed.engineVersion = 37;
+    parsed.teenRelationships = []; parsed.universityApplications = [];
+    parsed.studyCourses = []; parsed.npcSeparations = [];
+  }
+  // Weighted/new situations affect future selection only, never stored choices.
+  if (parsed && parsed.schemaVersion === 36 && parsed.engineVersion === 37 && parsed.contentVersion === 11) parsed.contentVersion = 12;
   return validateWorld(parsed, immutable);
 }

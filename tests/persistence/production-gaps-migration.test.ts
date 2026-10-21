@@ -3,7 +3,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { encodeWorld, type World } from '../../src/game/model';
+import { encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import * as checkpoints from '../../src/persistence/checkpoints';
@@ -131,4 +131,11 @@ test('unsupported reader17 is refused before any mutation of the retained native
     await expect(new SaveRepository(context.driver).initialise()).rejects.toThrow('newer version');
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(17); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
+});
+
+test.each(newHistories)('a current-format save cannot omit required %s history', key => {
+  const current: Partial<World> = structuredClone(unpackCheckpoint(native.current.checkpoint));
+  expect(validateWorld(current).schemaVersion).toBe(36);
+  delete current[key];
+  expect(() => validateWorld(current)).toThrow();
 });
