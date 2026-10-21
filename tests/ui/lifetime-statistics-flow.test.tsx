@@ -20,6 +20,8 @@ import { router } from 'expo-router';
 import Extras from '../../app/(game)/extras';
 import Statistics from '../../app/(game)/statistics';
 import GameLayout from '../../app/(game)/_layout';
+import LifeSummary from '../../app/life-summary';
+import { LifeSummaryContent } from '../../src/ui/LifeSummaryContent';
 const frame = (children: React.ReactNode = <Statistics />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{children}</ThemeProvider></SafeAreaProvider>;
 const world = () => mockStore.getState().world!;
 
@@ -36,11 +38,11 @@ async function setup(initial?: World) {
       connection.exec('BEGIN IMMEDIATE'); try { const value = await action(session); connection.exec('COMMIT'); return value; } catch (error) { connection.exec('ROLLBACK'); throw error; }
     } };
   }
-  const repository = new SaveRepository(connect()); await repository.initialise(); if (initial) await repository.create(initial); else await repository.import(JSON.stringify(archive));
+  let repository = new SaveRepository(connect()); await repository.initialise(); if (initial) await repository.create(initial); else await repository.import(JSON.stringify(archive));
   const bootstrap = async (repo: SaveRepository) => { mockStore = createGameStore({ repository: async () => repo, date: () => ({ year: 2026, month: 10, day: 20 }), id: () => 'unused' }); expect(await mockStore.getState().bootstrap()).toBe(true); };
   await bootstrap(repository); mockParams = {};
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-  return { rows, cold: async () => { sqlite.close(); await bootstrap(new SaveRepository(connect())); }, oldMoments: () => { if (!initial) for (const point of archive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE snapshot_id=?').get(point.summary.id)?.payload).toBe(point.payload); }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
+  return { rows, get repository() { return repository; }, cold: async () => { sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(repository); }, oldMoments: () => { if (!initial) for (const point of archive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE snapshot_id=?').get(point.summary.id)?.payload).toBe(point.payload); }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
 }
 
 test('Extras opens read-only Statistics without selecting a life, changing pending work, writing any of eight tables or unpacking; cold resume is exact', async () => {
@@ -85,6 +87,40 @@ test('actual heir and ancestor views remain isolated across route changes and a 
     const original = world(), encoded = encodeWorld(original), rows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
     expect(screen.getByLabelText('Recorded employment-months: 336')).toBeOnTheScreen();
     mockParams = { id: 'person_player' }; view.rerender(frame()); expect(screen.getByText('Age at death 86')).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded employment-months: 588')).toBeOnTheScreen(); expect(screen.queryByLabelText('Recorded employment-months: 336')).toBeNull(); expect(screen.getByText('Last Recorded Stats')).toBeOnTheScreen(); expect(world()).toBe(original); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    view.unmount(); await context.cold(); const reopened = render(frame()); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(world().activePersonId).toBe('person_npc_246_24'); expect(screen.getByText('Age at death 86')).toBeOnTheScreen(); reopened.unmount();
+    view.unmount(); await context.cold(); let reopened = render(frame()); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(world().activePersonId).toBe('person_npc_246_24'); expect(screen.getByText('Age at death 86')).toBeOnTheScreen();
+    const ancestor = original.people.person_player, projection = jest.spyOn(statisticsData, 'lifetimeStatistics'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), save = jest.spyOn(context.repository, 'commit');
+    const assertFinalStatistics = () => {
+      expect(screen.getByText(ancestor.firstName + ' ' + ancestor.lastName)).toBeOnTheScreen();
+      expect(screen.getByText('Last Recorded Stats')).toBeOnTheScreen(); expect(screen.getByText('Age at death 86')).toBeOnTheScreen();
+      expect(screen.getByLabelText('Recorded employment-months: 588')).toBeOnTheScreen();
+      expect(screen.queryByLabelText('Recorded employment-months: 336')).toBeNull();
+      for (const stat of ['happiness', 'health', 'smarts', 'looks', 'respect', 'energy', 'fitness', 'stress', 'discipline', 'fame'] as const) {
+        expect(screen.getByRole('progressbar', { name: stat[0].toUpperCase() + stat.slice(1) })).toHaveAccessibilityValue({ now: ancestor.stats[stat] });
+      }
+    };
+    reopened.rerender(frame(<LifeSummary />)); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(projection).not.toHaveBeenCalled();
+    fireEvent.press(screen.getByRole('button', { name: 'View Statistics' })); assertFinalStatistics();
+    expect(projection).toHaveBeenLastCalledWith(world(), ancestor.id);
+    fireEvent.press(screen.getByRole('button', { name: 'Back' }));
+    expect(screen.getByText('Life Summary')).toBeOnTheScreen(); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'View Statistics' })).toBeOnTheScreen();
+    expect(router.back).not.toHaveBeenCalled(); expect(dispatch).not.toHaveBeenCalled(); expect(save).not.toHaveBeenCalled();
+    expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); reopened.unmount(); dispatch.mockRestore(); save.mockRestore();
+
+    // Select another genuine saved life. Both worlds use person_player, so the
+    // archived summary must retain its explicit world as well as person ID.
+    await context.repository.import(JSON.stringify(archive)); await act(async () => { expect(await mockStore.getState().bootstrap()).toBe(true); });
+    const active = world(), activeText = encodeWorld(active), activeRows = context.rows();
+    expect(active.id).not.toBe(original.id); expect(active.people[active.activePersonId].stats).not.toEqual(ancestor.stats); expect(Object.keys(activeRows)).toHaveLength(8);
+    const savedDispatch = jest.spyOn(mockStore.getState(), 'dispatch'), savedWrite = jest.spyOn(context.repository, 'commit'); projection.mockClear();
+    reopened = render(frame(<LifeSummaryContent world={original} personId={ancestor.id} readOnly />));
+    expect(screen.getByText('Saved life · Read-only')).toBeOnTheScreen(); expect(projection).not.toHaveBeenCalled();
+    fireEvent.press(screen.getByRole('button', { name: 'View Statistics' })); assertFinalStatistics();
+    expect(projection).toHaveBeenCalledTimes(1); expect(projection).toHaveBeenLastCalledWith(original, ancestor.id);
+    expect(screen.queryByText('Riley Kelly')).toBeNull(); expect(screen.getByText('Saved life · Read-only')).toBeOnTheScreen();
+    fireEvent.press(screen.getByRole('button', { name: 'Back' }));
+    expect(screen.getByText('Life Summary')).toBeOnTheScreen(); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: 'Time Machine' })).toBeNull(); expect(router.back).not.toHaveBeenCalled();
+    expect(savedDispatch).not.toHaveBeenCalled(); expect(savedWrite).not.toHaveBeenCalled(); expect(projection).toHaveBeenCalledTimes(1);
+    expect(world()).toBe(active); expect(encodeWorld(world())).toBe(activeText); expect(context.rows()).toEqual(activeRows); context.oldMoments(); reopened.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
