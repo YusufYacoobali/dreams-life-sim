@@ -22,6 +22,8 @@ The private x86_64 Android build actually reached native dependency resolution a
 
 User priority: reduce repetitive verification and evidence packaging. Focus on game-facing fixes, responsiveness and the standalone app; retain targeted tests and essential automatic-save/resume checks. Earlier detailed checkpoint records below keep their original source and observation scope.
 
+The completed C/D outcome review found a concrete sponsorship-copy defect:20 recorded periods delivered enough posts but received no payment because the profile was inactive at assessment. `ea91b23` explains that existing condition in new offers and Brand Agreements, names the real reason in future unpaid journals, and uses a factual unpaid-period termination reason. Payment rules, balances, RNG, schema and previously bound copy stay unchanged. All3 focused sponsorship checks and scoped strict types pass; the next hosted gate covers this small change. The earlier frozen-source C cohort reached its9 declared milestones in12/12 lives, not the complete Scenario C. D covered127/265 situations and263/795 branches; unseen contexts and full scenario acceptance remain open. The cafe losses did not justify an economic buff: the observed policy left prices/staff/maintenance unchanged after initially profitable years.
+
 ## Goal and authorisation
 
 Build the complete production-quality game described in the [master specification](planning/source-specification.md) and [implementation plan](planning/MASTER_PLAN.md), not only the first playable life. The user approves the overall direction, with a specific prerequisite: reconcile all supplied design screenshots first.
