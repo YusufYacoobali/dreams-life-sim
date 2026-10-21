@@ -118,13 +118,16 @@ export function campusMonth(world: World) {
   for (const community of world.campusCommunities) {
     const course = courses.get(community.courseId), person = world.people[community.personId];
     if (!course || !person || course.months <= community.lastStudyMonths) continue;
+    const previousStudyMonths = community.lastStudyMonths;
+    community.lastStudyMonths = course.months;
     const finishing = (course.status === 'completed' || course.status === 'failed') && course.ended && compareDates(course.ended, world.date) === 0;
-    if (!storyPersonPresent(world, person) || !finishing && (course.status !== 'active' || person.education.paused || enrolment(world, person.id)?.id !== course.id)) continue;
-    if (course.months !== community.lastStudyMonths + 1 || community.periods.at(-1)?.month === month) throw new Error('Campus attendance must settle one actual course month at a time');
+    if (person.id !== world.activePersonId || !storyPersonPresent(world, person) || course.country !== person.country || course.city !== person.city ||
+      !finishing && (course.status !== 'active' || person.education.paused || enrolment(world, person.id)?.id !== course.id)) continue;
+    // A resumed historical cursor cannot establish participation in skipped months.
+    if (course.months !== previousStudyMonths + 1 || (community.periods.at(-1)?.month ?? -Infinity) >= month) continue;
     const skill = community.club === 'none' ? undefined : campusClubSkill[community.club], before = skill ? person.skills[skill] : null, energyBefore = person.stats.energy;
     if (skill) { person.skills[skill] = bounded(person.skills[skill] + 1); person.stats.energy = bounded(person.stats.energy - 2); }
     const after = skill ? person.skills[skill] : null;
     community.periods.push({ month, studyMonth: course.months, club: community.club, skillBefore: before, skillAfter: after, skillGain: before === null || after === null ? 0 : after - before, energyBefore, energyAfter: person.stats.energy });
-    community.lastStudyMonths = course.months;
   }
 }

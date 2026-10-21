@@ -34,8 +34,8 @@ export function validateCampusCommunities(world: World, ledger: LedgerIndex) {
       ids.has(community.id) || !community.id.startsWith('campus_' + person.id + '_') || ownerCourses.has(course.id) ||
       compareDates(community.started, course.started) < 0 || compareDates(community.started, world.date) > 0 || course.ended && compareDates(community.started, course.ended) > 0 ||
       person.died && compareDates(community.started, person.died) > 0 || ageOn({ ...person, died: null }, community.started) < Math.max(18, rules[course.country!].adultAge) ||
-      community.introducedStudyMonths < 1 || community.introducedStudyMonths >= course.requiredMonths || community.lastStudyMonths !== course.months ||
-      community.periods.length !== community.lastStudyMonths - community.introducedStudyMonths) throw new Error('Invalid recorded campus enrolment');
+      community.introducedStudyMonths < 1 || community.introducedStudyMonths >= course.requiredMonths || community.lastStudyMonths < community.introducedStudyMonths ||
+      community.lastStudyMonths > course.months) throw new Error('Invalid recorded campus enrolment');
     ids.add(community.id); ownerCourses.add(course.id);
     for (const member of community.students) {
       const peer = world.people[member.personId], enrolment = courses.get(member.courseId);
@@ -74,10 +74,10 @@ export function validateCampusCommunities(world: World, ledger: LedgerIndex) {
     }
     let previousMonth = startMonth, studyMonth = community.introducedStudyMonths;
     for (const period of community.periods) {
-      if (period.studyMonth !== ++studyMonth || period.month <= previousMonth || period.month > monthOf(world.date) || course.ended && period.month > monthOf(course.ended) || period.studyMonth > course.requiredMonths) throw new Error('Campus club lacks actual new attended course months');
+      if (period.studyMonth <= studyMonth || period.studyMonth > community.lastStudyMonths || period.month <= previousMonth || period.month > monthOf(world.date) || course.ended && period.month > monthOf(course.ended) || period.studyMonth > course.requiredMonths) throw new Error('Campus club lacks actual new attended course months');
       if (period.club === 'none' ? period.skillBefore !== null || period.skillAfter !== null || period.skillGain !== 0 || period.energyBefore !== period.energyAfter :
         period.skillBefore === null || period.skillAfter !== Math.min(100, period.skillBefore + 1) || period.skillGain !== period.skillAfter - period.skillBefore || period.energyAfter !== Math.max(0, period.energyBefore - 2)) throw new Error('Campus club effects do not match its recorded attendance');
-      previousMonth = period.month;
+      previousMonth = period.month; studyMonth = period.studyMonth;
     }
   }
 }
