@@ -33,6 +33,7 @@ export default function Life() {
   const showYearProgress = useDelayedBusy(busy && advancing);
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
+  const bankBalance = formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale);
   const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const entries = useMemo(() => world.journal.filter(entry => entry.personId === player.id), [world.journal, player.id]);
   const journalRows = useMemo(() => {
@@ -65,15 +66,15 @@ export default function Life() {
     return cancelJournalScroll;
   }, [world.id, player.id, entries.length, followJournal, cancelJournalScroll]);
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
-    <Pressable accessibilityRole="button" accessibilityLabel="My Life profile" onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
-      <Portrait name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={52} />
+    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + fullName(player) + '. Age ' + ageOn(player, world.date) + '. ' + occupation + '. Bank balance ' + bankBalance} onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
+      <Portrait decorative name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={52} />
       <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{fullName(player)}</Text>
         {royalMembership(world) && <Text style={{ color: c.muted, fontSize: 11 }}>{royalTitle(world, royalMembership(world)!.house, player.id)}</Text>}
         <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[player.country]} {occupation} · Age {ageOn(player, world.date)}</Text>
         {serviceAway(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {serviceAway(world)!.location}</Text>}
         {activeTrip(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {physicalLocation(world).city}</Text>}
       </View>
-      <View style={{ maxWidth: '35%', alignItems: 'flex-end' }}><Text adjustsFontSizeToFit minimumFontScale={0.55} numberOfLines={1} style={{ color: c.positiveText, fontSize: 18, fontWeight: '700' }}>{formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Text><Text style={{ color: c.muted, fontSize: 10, marginTop: 3 }}>Bank Balance</Text></View>
+      <View style={{ maxWidth: '35%', alignItems: 'flex-end' }}><Text adjustsFontSizeToFit minimumFontScale={0.55} numberOfLines={1} style={{ color: c.positiveText, fontSize: 18, fontWeight: '700' }}>{bankBalance}</Text><Text style={{ color: c.muted, fontSize: 10, marginTop: 3 }}>Bank Balance</Text></View>
     </Pressable>
     <View style={{ paddingHorizontal: 16, paddingBottom: 12, gap: 2 }}>
       <StatBar label="Happiness" value={player.stats.happiness} color={c.green} icon={<Ionicons name="heart" size={22} color="#FF665D" />} />

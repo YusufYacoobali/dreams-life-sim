@@ -129,7 +129,7 @@ test('reselecting Japan retains Osaka and the creation draft across cancelled pi
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(screen.getByRole('button', { name: 'City. Osaka' })).toBeOnTheScreen();
     await press(/^Country\./); await choose('Canada'); await press('Never mind'); await press(/^City\./); await choose('Tokyo'); await press('Never mind');
     expect(useCreationDraft.getState().draft).toEqual(selected); expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world).toBeNull();
-    await press('Choose Appearance'); view.rerender(frame(<Appearance />)); await choose('Avatar 7'); await press('Continue'); view.rerender(frame(<NewLife />));
+    await press('Choose Appearance'); view.rerender(frame(<Appearance />)); await choose('Avatar 7, round face, very light skin tone, black long curls'); await press('Continue'); view.rerender(frame(<NewLife />));
     expect(screen.getByLabelText('First name')).toHaveProp('value', 'Alex'); expect(screen.getByLabelText('Last name')).toHaveProp('value', 'Carter');
     expect(useCreationDraft.getState().draft!.input).toMatchObject({ country: 'JP', city: 'Osaka', appearance: avatarPresets[6] });
     const edited = structuredClone(useCreationDraft.getState().draft!); await press(/^Country\./); await choose('Japan'); await press('Choose'); expect(useCreationDraft.getState().draft).toEqual(edited);
