@@ -54,7 +54,9 @@ function CampusDetails() {
     reviewRef.current = null; setReview(null); setDraft({ identity, club });
   };
   const openPerson = (id: string) => {
-    if (canAct()) router.push({ pathname: '/person/[id]', params: { id, tab: 'activities' } });
+    if (!canAct()) return;
+    reviewRef.current = null; setReview(null);
+    router.push({ pathname: '/person/[id]', params: { id, tab: 'activities' } });
   };
   const reviewClub = () => {
     if (!canAct() || !community || !course || clubReason) return;
