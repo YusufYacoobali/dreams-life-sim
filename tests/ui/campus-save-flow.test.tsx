@@ -141,6 +141,17 @@ test('a genuine paid course earns campus access through attendance, retains a fa
     await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Science Club\b/ })); });
     expect(screen.getByRole('radio', { name: /^Science Club\b/, checked: true })).toBeOnTheScreen();
     expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(browseRows); expect(browseCommit).not.toHaveBeenCalled();
+    const queuedPeer = screen.getByText(fullName(peer)), clubDispatch = jest.spyOn(mockStore.getState(), 'dispatch');
+    await press('Review Club'); expect(screen.getByText('Join the Science Club?')).toBeOnTheScreen();
+    const abandonedConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    // A queued peer press can arrive while the stack keeps Campus mounted.
+    // Navigation must invalidate its review before the old confirm can run.
+    await act(async () => { fireEvent.press(queuedPeer); });
+    expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: peer.id, tab: 'activities' } });
+    expect(screen.queryByRole('button', { name: 'Join Club' })).toBeNull();
+    await act(async () => { await abandonedConfirm('confirm'); });
+    expect(clubDispatch).not.toHaveBeenCalled(); expect(browseCommit).not.toHaveBeenCalled();
+    expect(world()).toBe(acknowledged); expect(context.rows()).toEqual(browseRows);
     await press('Review Club'); expect(screen.getByText('Join the Science Club?')).toBeOnTheScreen(); const clubTerms = review();
     const clubCommand = { type: 'campus-club' as const, communityId: campus.id, club: 'science' as const }, expectedClub = resolveCommand(acknowledged, clubCommand, true);
     context.sqlite.exec("CREATE TRIGGER fail_campus_club BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
