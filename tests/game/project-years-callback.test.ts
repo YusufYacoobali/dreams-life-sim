@@ -11,10 +11,10 @@ import oldPlans from '../fixtures/v23-school-plans-archive.json';
 import oldResolved from '../fixtures/v28-native-school-archive.json';
 
 test.each([
-  ['complete', 'remember-project', 'you finished your section', 3, 2],
-  ['ask-help', 'dismiss-project', 'you asked for help and completed a shorter section', -3, -2],
-  ['leave-to-peer', 'pass-project', 'you left your promised section blank', 0, 0],
-] as const)('a genuine saved pupil resolves %s, lives 24 real months, then chooses %s without rewriting school work', (original, resolution, past, bond, trust) => {
+  ['complete', 'remember-project', 'you finished your section', 3, 2, 'I finished my section'],
+  ['ask-help', 'dismiss-project', 'you asked for help and completed a shorter section', -3, -2, 'I asked for help and completed a shorter section'],
+  ['leave-to-peer', 'pass-project', 'you left your promised section blank', 0, 0, 'I left my promised section blank'],
+] as const)('a genuine saved pupil resolves %s, lives 24 real months, then chooses %s without rewriting school work', (original, resolution, past, bond, trust, journalPast) => {
   const offered = realProjectRecall(original), thread = offered.storyThreads[0], recall = thread.projectRecall!, event = offered.pending!;
   expect(thread.resolution).toBe(original); expect(recall.dueMonth - storyMonthNumber(thread.ended!)).toBe(24); expect(storyMonthNumber(offered.date)).toBe(recall.dueMonth);
   expect(recall.expiresMonth).toBe(recall.dueMonth + 2); expect(event.kind === 'decision' && event.personIds).toEqual([thread.personId, thread.peerId]); expect(event.body).toContain(past);
@@ -24,6 +24,9 @@ test.each([
   expect(next.people).toEqual(offered.people); expect(next.ledger).toEqual(offered.ledger); expect(next.random).toEqual(offered.random);
   expect(relationFor(next, thread.personId, thread.peerId)).toMatchObject({ strength: Math.max(0, Math.min(100, edge.strength + bond)), trust: Math.max(0, Math.min(100, edge.trust + trust)) });
   expect(next.relationships.filter(item => item.id !== edge.id)).toEqual(offered.relationships.filter(item => item.id !== edge.id));
+  const remembered = resolution === 'remember-project' ? next : resolveCommand(offered, { type: 'choose', eventId: event.id, choiceId: 'remember-project' });
+  expect(remembered.journal.find(row => row.id === thread.id + '_project_recall_choice')!.text).toBe('I talked honestly with ' + offered.people[thread.peerId].firstName + ' about our old project, when ' + journalPast + '.');
+  expect(decodeWorld(encodeWorld(remembered))).toEqual(remembered);
   expect(decodeWorld(encodeWorld(next))).toEqual(next); expect(encodeWorld(offered)).toBe(before);
   const wrongChoice = decodeWorld(encodeWorld(next)); wrongChoice.storyThreads[0].projectRecall!.resolution = resolution === 'pass-project' ? 'remember-project' : 'pass-project'; expect(() => validateWorld(wrongChoice)).toThrow(/choice record/);
   const missingChoice = decodeWorld(encodeWorld(next)); missingChoice.journal = missingChoice.journal.filter(row => row.id !== thread.id + '_project_recall_choice'); expect(() => validateWorld(missingChoice)).toThrow(/choice record/);

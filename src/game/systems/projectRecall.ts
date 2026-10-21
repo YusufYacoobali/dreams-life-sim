@@ -8,9 +8,12 @@ import { storyMonthNumber, storyPersonPresent } from './storyContext';
 import { projectRecallResolutionIds, type StoryThread } from './storySchemas';
 
 export const projectRecallEventId = (thread: StoryThread) => thread.id + '_project_recall';
-const projectPast = (thread: StoryThread) => thread.resolution === 'complete' ? 'you finished your section' : thread.resolution === 'ask-help' ? 'you asked for help and completed a shorter section' : 'you left your promised section blank';
+const projectPast = (thread: StoryThread, firstPerson = false) => {
+  const subject = firstPerson ? 'I' : 'you', possessive = firstPerson ? 'my' : 'your';
+  return thread.resolution === 'complete' ? subject + ' finished ' + possessive + ' section' : thread.resolution === 'ask-help' ? subject + ' asked for help and completed a shorter section' : subject + ' left ' + possessive + ' promised section blank';
+};
 export function projectRecallJournal(thread: StoryThread, peerName: string, resolution: typeof projectRecallResolutionIds[number]) {
-  return resolution === 'remember-project' ? 'I talked honestly with ' + peerName + ' about our old project, when ' + projectPast(thread).replace(/^you /, 'I ') + '.' : resolution === 'dismiss-project' ? 'I dismissed ' + peerName + '’s memory of our old class project.' : 'I left the old project in the past when ' + peerName + ' mentioned it.';
+  return resolution === 'remember-project' ? 'I talked honestly with ' + peerName + ' about our old project, when ' + projectPast(thread, true) + '.' : resolution === 'dismiss-project' ? 'I dismissed ' + peerName + '’s memory of our old class project.' : 'I left the old project in the past when ' + peerName + ' mentioned it.';
 }
 
 /** The former teacher and school need not still be present; the actual two people do. */
