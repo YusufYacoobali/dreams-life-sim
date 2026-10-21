@@ -26,7 +26,7 @@ Do not infer a historical count from IDs, present conditions or today's state.
 ## Bounded proposed rules
 
 Only **new** annual frames opt into optional `annual.pacing` metadata:
-`{ruleVersion:1, decisions:[{eventId,templateId,personId,date}]}`. Retain at most
+`{ruleVersion:1, decisions:[{eventId,templateId,personId,date,journalIndex}]}`. Retain at most
 the first three important decisions actually resolved in that frame; its length
 is the bounded factual workload counter. No new world collection, journal entry,
 financial payment, reward, stat or achievement is created by recording it.
@@ -37,14 +37,16 @@ invitation callback, the project deadline callback and its two-year recall.
 These are actual scheduled choices. Manual introductions, job interviews,
 ordinary activity results and acknowledgements do not inflate the count.
 
-Record once in the successful `choose` command while the frame is in its monthly
-stage, after eligibility is checked. Record before effects so an actual death
-can archive the same frame; a rejected/failed-save command publishes neither
-count nor effects. Link each observation to the existing exact
-`eventId + '_choice'` journal fact, participant and date. Validate uniqueness,
-known V1 templates, chronological dates within the frame and actual journal
-identity. Use bounded lookup IDs in the existing journal validation pass rather
-than repeatedly scanning all history. A queued-but-unanswered, cancelled or
+Capture the actual monthly frame when `choose` begins, then record once after
+its successful effects and existing choice journal are written. Retain that
+frame reference if an effect archives it for a death; the normal critical-health
+death check also follows this observation. A rejected/failed-save command
+publishes neither count nor effects. Link each observation to the existing exact
+`eventId + '_choice'` journal fact, its actual array position, participant and
+date. Validate uniqueness, known V1 templates, chronological dates within the
+frame and actual journal identity with at most three direct journal lookups.
+The journal is append-only; no new scan/index of all history is required for an
+unrelated button. A queued-but-unanswered, cancelled or
 expired prompt is not a resolved decision; moving between pending/deferred/result
 states and cold reopening does not add another observation.
 
@@ -89,8 +91,8 @@ The ordinary quiet-year summary remains factual and is still acknowledged.
 ## Implementation and focused evidence
 
 Own only a small typed pacing helper/schema/validator, the optional annual-frame
-field, narrow new-frame/choose/finishYear hooks, a bounded addition to the current
-journal validation pass, new focused domain/save tests and dedicated documentation.
+field, narrow new-frame/choose/finishYear hooks, a bounded validation call, new
+focused domain/save tests and dedicated documentation.
 Coordinate engine/model/schema hunks with root; Story owns independent ordinary
 interview experience code. No global tags, old producer fixtures, main/source
 freeze, native tools, full regression, annual cohort or performance measurement.
