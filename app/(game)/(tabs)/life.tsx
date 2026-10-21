@@ -35,7 +35,7 @@ const LifeIdentity = React.memo(function LifeIdentity({ world }: { world: World 
       <Portrait decorative name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={52} />
       <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{fullName(player)}</Text>
         {royalMembership(world) && <Text style={{ color: c.muted, fontSize: 11 }}>{royalTitle(world, royalMembership(world)!.house, player.id)}</Text>}
-        <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[player.country]} {occupation} · Age {ageOn(player, world.date)}</Text>
+        <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[player.country]} {occupation} · {'Age\u00a0' + ageOn(player, world.date)}</Text>
         {serviceAway(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {serviceAway(world)!.location}</Text>}
         {activeTrip(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {physicalLocation(world).city}</Text>}
       </View>

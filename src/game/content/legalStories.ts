@@ -16,7 +16,7 @@ export const legalTemplates: readonly EventTemplate[] = [
   {
     id: 'prison-case-boundary', min: 18, max: 120, legal: 'prison-peer', illustration: 'prison',
     title: 'More than your case',
-    body: 'At {facility}, {prisonPeer} asks about your case again. You would like one conversation that does not begin with what brought you here.',
+    body: 'At {facility}, {prisonPeer} asks about your case. You would like one conversation that does not begin with what brought you here.',
     choices: [
       option('boundary', 'Kindly say you want a different subject', { respect: 2 }, 'A little room to talk', '{prisonPeer} leaves the question alone. Setting a boundary does not have to end the conversation.', 'I asked {prisonPeer} for a conversation about something other than my case.', undefined, { prisonPeerBond: 1 }),
       option('feelings', 'Say how you feel, without retelling the case', { stress: -2 }, 'An answer about today', 'You explain how the day is going instead of repeating the case. {prisonPeer} listens without getting another account of the proceedings.', 'I talked to {prisonPeer} about how I felt in custody, without retelling my case.', undefined, { prisonPeerBond: 3 }),
