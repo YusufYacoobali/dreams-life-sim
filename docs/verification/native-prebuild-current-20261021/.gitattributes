@@ -1,0 +1,3 @@
+# Exact Expo-generated evidence includes an original whitespace-only line.
+# Keep those source bytes intact; apply this exception only to that raw copy.
+android__settings.gradle.txt whitespace=-blank-at-eol
