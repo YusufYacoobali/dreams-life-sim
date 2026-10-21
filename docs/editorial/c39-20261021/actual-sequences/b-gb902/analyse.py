@@ -1,0 +1,75 @@
+import json,gzip,base64,hashlib,re,collections,copy
+from pathlib import Path
+out=Path(__file__).parent;p=Path('/workspace/.cache/dreams-current-c39-policies/criminal-v2');sha=lambda b:hashlib.sha256(b).hexdigest()
+def pin(f):
+ b=Path(f).read_bytes();return {'file':str(f),'bytes':len(b),'sha256':sha(b)}
+r=json.loads((p/'GB-result.json').read_text());commands=json.loads((p/'GB-commands.json').read_text());frame=json.loads((p/'GB-final.checkpoint.json').read_text());manifest=json.loads((p/'manifest.json').read_text());receipt=json.loads(Path('/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json').read_text());root=json.loads(Path('/tmp/dreams-production-finish-accepted-source.json').read_text())
+assert receipt['complete'] and receipt['exitCode']==0 and receipt['before']['status']==receipt['after']['status']=='exact' and receipt['before']['files']==receipt['after']['files']==688
+assert root['commit']==receipt['sourceCommit']==manifest['source']['commit']=='33b6a5fcb0aae73dfc235a15394b34d8afda00cc'
+assert r['country']=='GB' and r['seed']==902 and len(commands)==r['commandsAttempted']==282 and r['commandsCommitted']==277 and r['finalRevision']==278
+trace=sha(json.dumps(commands,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode());assert trace==r['traceSha256']
+# Plain artifact decompression only; no game/model/codec/validation imports or replay.
+main=json.loads(gzip.decompress(base64.b64decode(frame['main']['data'])));people={}
+for b in frame['people']:people.update(json.loads(gzip.decompress(base64.b64decode(b['data']))))
+player=people[main['activePersonId']];fullName=lambda id:people[id]['firstName']+' '+people[id]['lastName'];dateKey=lambda d:(d['year'],d['month'],d['day']);month=lambda d:d['year']*12+d['month']-1
+within=lambda date,start,end:dateKey(start)<=dateKey(date) and (end is None or dateKey(date)<dateKey(end))
+input=json.loads(Path('/tmp/dreams-c39-editorial-review-input-20261021.json').read_text());authored={r['id']:copy.deepcopy(r) for r in input['rows']};authored['first-camera-closeup']['choices'][2]['result']='{parent} gets a photograph of the back of your head. You have already found something else to do.'
+ledger=json.loads(Path('/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/ledger.json').read_text());lr={r['id']:r for r in ledger['rows']};pins=json.loads(Path('/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/current-source-pins.json').read_text());assert len(pins['files'])==335 and all(root['source'][x['path']]==x['sha256'] for x in pins['files'])
+for a in authored.values():assert sha(json.dumps(a,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode())==lr[a['id']]['source']['expandedLiteralSha256']
+chosen={c['eventId']:(i,c) for i,c in enumerate(commands) if c['type']=='choose'};journals={j['id']:j for j in main['journal']}
+def witness(token,value,date,commandIndex):
+ candidates=[]
+ if token=='parent':
+  for e in main['relationships']:
+   if e['kind']=='parent' and e['to']==player['id'] and people[e['from']]['firstName']==value:candidates.append({'personId':e['from'],'fullName':fullName(e['from']),'role':'parent','relationshipId':e['id']})
+ elif token in ['classmate','teacher']:
+  for s in main['schoolCommunities']:
+   if s['personId']==player['id'] and (within(date,s['started'],s['ended']) or s['ended']==date and s['endReason']=='withdrawn' and any(i>commandIndex and cmd['type']=='school-withdraw' and cmd.get('communityId')==s['id'] for i,cmd in enumerate(commands))):
+    ids=s['classmateIds'] if token=='classmate' else list({x['teacherId'] for x in s['periods'] if x['month']==month(date)})
+    for id in ids:
+     if people[id]['firstName']==value:candidates.append({'personId':id,'fullName':fullName(id),'role':token,'schoolId':s['id'],'school':s['school']})
+ elif token in ['coworker','supervisor']:
+  for w in main['workplaces']:
+   if w['personId']==player['id'] and within(date,w['started'],w['ended']):
+    for x in w['members']:
+     if x['role']==token and fullName(x['personId'])==value and within(date,x['joined'],x['left']):candidates.append({'personId':x['personId'],'fullName':value,'role':token,'workplaceId':w['id'],'employer':w['employer'],'joined':x['joined'],'left':x['left']})
+ elif token=='friend':
+  for e in main['relationships']:
+   if 'friend' in e.get('roles',[]) and player['id'] in [e['from'],e['to']] and dateKey(e['since'])<=dateKey(date):
+    id=e['to'] if e['from']==player['id'] else e['from']
+    if fullName(id)==value:candidates.append({'personId':id,'fullName':value,'role':'saved friend','relationshipId':e['id'],'since':e['since'],'memories':e['memories']})
+ elif token=='condition':
+  for c in player['health']['conditions']:
+   if c['type'].capitalize()==value and c['diagnosed'] and dateKey(c['diagnosed'])<=dateKey(date) and month(date)-month(c['onset'])>=12:return [{'conditionId':c['id'],'conditionType':c['type'],'onset':c['onset'],'diagnosed':c['diagnosed'],'calendarMonthsSinceOnsetAtEvent':month(date)-month(c['onset']),'scope':'Saved diagnosis/onset corroborate named condition; no historical condition-state replay.'}]
+ elif token=='salary':
+  facts=[j for j in main['journal'] if j['personId']==player['id'] and j['date']==date and j['category']=='finance' and ('My income for the year was '+value+';') in j['text']]
+  if facts:return [{'sameDateActualFinanceJournal':j,'scope':'Same-date actual reported gross corroborates the disclosure; not a reconstructed historical contract quote.'} for j in facts]
+ for c in candidates:
+  person=people[c['personId']];c['born']=person['born'];c['died']=person['died'];assert dateKey(person['born'])<=dateKey(date) and (person['died'] is None or dateKey(date)<dateKey(person['died']))
+ return candidates
+sequence=[]
+for e in main['eventHistory']:
+ eid=f"event_{e['year']}_{e['templateId']}";ci,cmd=chosen[eid];a=authored[e['templateId']];ch=next(x for x in a['choices'] if x['id']==cmd['choiceId']);j=journals[eid+'_choice'];age=j['date']['year']-player['born']['year'];assert a['min']<=age<=a['max'];tokens=re.findall(r'\{([a-zA-Z]+)\}',ch['journal']);pattern=re.escape(ch['journal'])
+ for token in tokens:pattern=pattern.replace(re.escape('{'+token+'}'),'(.*?)',1)
+ match=re.fullmatch(pattern,j['text']);assert match,(eid,j['text']);names=[]
+ for token,value in zip(tokens,match.groups()):
+  facts=witness(token,value,j['date'],ci);assert facts,(eid,token,value);names.append({'token':token,'actualJournalText':value,'savedFacts':facts})
+ obs=[x for x in r['observations'] if x['stage']==a['id'] and x.get('detail',{}).get('eventId')==eid];assert len(obs)==1 and obs[0]['outcome']==cmd['choiceId'] and obs[0]['detail']['result']==ch['title']
+ sequence.append({'age':age,'date':j['date'],'eventId':eid,'templateId':a['id'],'actualCommandIndexZeroBased':ci,'actualChoice':cmd,'actualAuthoredChoiceOrdinalOneBased':next(i+1 for i,c in enumerate(a['choices']) if c['id']==ch['id']),'actualObservation':obs[0],'actualPersistedJournal':j,'actualNameAndTermFacts':names,'sourceCorrelationOnly':{'source':lr[a['id']]['source'],'primaryCategory':lr[a['id']]['primaryCategory'],'title':a['title'],'setupTemplate':a['body'],'selectedChoice':ch,'authoredContextPredicates':{k:v for k,v in a.items() if k not in ['index','id','title','body','min','max','choices','sourceFile','illustration','rarity']},'actualBoundSetupCaptured':False,'actualBoundResultBodyCaptured':False,'actualEffectRowsCaptured':False}})
+assert len(sequence)==57 and len({x['templateId'] for x in sequence})==47 and all(x['actualAuthoredChoiceOrdinalOneBased']==1 for x in sequence)
+repeats=[]
+for tid in sorted({x['templateId'] for x in sequence}):
+ ages=[x['age'] for x in sequence if x['templateId']==tid]
+ if len(ages)>1:
+  gaps=[b-a for a,b in zip(ages,ages[1:])];assert min(gaps)>=5;repeats.append({'templateId':tid,'ages':ages,'gapYears':gaps})
+thread=main['storyThreads'][0];assert len(main['storyThreads'])==1 and thread['originEventId']=='event_2012_school-project-promise' and thread['resolution']=='complete';recall=thread['projectRecall'];assert recall['resolution']=='remember-project' and recall['dueMonth']==month(thread['ended'])+24==month(recall['offered'])==month(recall['ended']);assert thread['status']==recall['status']=='resolved'
+callbackJournals=[journals[thread['offeredEventId']+'_choice'],journals[recall['offeredEventId']+'_choice']];peer=people[thread['peerId']];assert all(peer['firstName'] in j['text'] for j in callbackJournals);assert callbackJournals[0]['text']=='I finished my section of the class project with '+peer['firstName']+'.';assert callbackJournals[1]['text']=='I talked honestly with '+peer['firstName']+' about our old project, when I finished my section.'
+callback={'actualThread':thread,'peer':{'id':peer['id'],'name':fullName(peer['id']),'born':peer['born'],'died':peer['died']},'teacher':{'id':thread['teacherId'],'name':fullName(thread['teacherId'])},'actualJournals':callbackJournals,'actualCommands':[chosen[x][1] for x in [thread['originEventId'],thread['offeredEventId'],recall['offeredEventId']]],'actualResultTitles':[x for x in r['observations'] if x['stage'] in ['story-project-promise','story-project-recall']],'calendarMonthsResolutionToRecall':24,'rawBoundBodiesAndEffectRowsCaptured':False,'scope':'Actual natural origin, two-month completion and same-peer24-month recall; complete/remember-project branch only. No native, failure/rollback or old-bound compatibility claim.'}
+periods=[]
+for name,lo,hi in [('early-childhood',1,4),('primary-school-age',5,10),('secondary-before-withdrawal',11,16),('adult-working-and-legal-years',17,66),('retirement-and-final-years',67,68)]:
+ xs=[x for x in sequence if lo<=x['age']<=hi];periods.append({'period':name,'inclusiveAgeRange':[lo,hi],'catalogueOccurrences':len(xs),'distinctTemplates':len({x['templateId'] for x in xs}),'birthdayYearsWithoutCatalogueEvent':hi-lo+1-len(xs)})
+files=[p/'manifest.json',p/'result.json',p/'GB-result.json',p/'GB-commands.json',p/'GB-final.checkpoint.json',Path('/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json'),Path('/tmp/dreams-production-finish-accepted-source.json'),Path('/tmp/dreams-production-finish-accepted-policy-registration-authorized.json'),Path('/tmp/dreams-production-finish-accepted-criminal-v2.out'),Path('/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/ledger.json'),Path('/tmp/dreams-c39-editorial-review-input-20261021.json')]
+provenance={'sourceCommit':root['commit'],'versions':manifest['versions'],'actualCoordinatorReceipt':receipt,'pins':[pin(f) for f in files],'all335AppSrcLedgerHashesEqualAcceptedManifest':True,'artifactInspection':'Standard gzip/base64/JSON main/people blocks only. No runtime/model/engine/codec import or replay; ledger blocks not decoded.','independentPureJsonTraceSha256':trace,'producerRecordedFinalWorldSha256':r['finalWorldSha256'],'fullCanonicalWorldHashIndependentlyRecomputed':False}
+summary={'format':'dreams-c39-recorded-sequence-review-v1','preselection':{'policy':'Criminal Bv2','country':'GB','seed':902,'selectedBeforeRun':True,'outcomeSearch':False},'sourceCommit':root['commit'],'versions':manifest['versions'],'reviewer':{'agent':'/root/story_editorial','kind':'Codex recorded-artifact/source-correlated narrative review','externalHuman':False},'player':{'id':player['id'],'name':fullName(player['id']),'born':player['born'],'died':player['died'],'ageAtDeath':r['ageAtEnd'],'country':player['country'],'city':player['city']},'timing':{'coordinatorCohortElapsedSeconds':receipt['elapsedSeconds'],'toolCohortElapsedMs':json.loads((p/'result.json').read_text())['elapsedMs'],'producerBritainElapsedMs':r['elapsedMs']},'actualCounts':{'attemptedCommands':len(commands),'committedCommands':r['commandsCommitted'],'uncommittedAttempts':len(commands)-r['commandsCommitted'],'advanceCommands':69,'completedChronologicalBirthdayYears':68,'fatalPartial69thAnnualAdvance':True,'observations':len(r['observations']),'producerRecordedColdChecks':len(r['coldChecks']),'totalChooseCommands':72,'catalogueOccurrences':57,'distinctCatalogueTemplates':47,'distinctCatalogueBranches':47,'catalogueChoiceOrdinalCounts':{'first':57,'second':0,'third':0},'actualCatalogueJournalsAndResultTitlesRead':57,'callbackThreads':1,'observedCallbackChoices':2,'actualRecordedBoundResultBodies':0,'actualRecordedEffectRowFrames':0,'persistedPlayerJournalFactsAvailable':len([j for j in main['journal'] if j['personId']==player['id']])},'periods':periods,'repeats':repeats,'quietCatalogueAges':[age for age in range(1,69) if age not in {x['age'] for x in sequence}],'categoryOccurrenceCounts':dict(collections.Counter(x['sourceCorrelationOnly']['primaryCategory'] for x in sequence)),'milestoneStatuses':{k:v['status'] for k,v in r['milestones'].items()},'driverScenarioBComplete':r['scenarioBComplete'],'callback':{'threadId':thread['id'],'origin':thread['created'],'completion':thread['ended'],'recall':recall['ended'],'samePeerId':thread['peerId'],'calendarMonthsCompletionToRecall':24,'observedResolution':'complete -> remember-project'},'unreached':['Completed holiday: actual paid Paris trip was interrupted at delayed arrest; no refund/completion invented','Both actual foreign work applications declined; no relocation or foreign job observed','Other original project branches, arcade permission/payment/cancellation and alternative recall choices not observed','No second/third catalogue choices; no full bound body/effect-row snapshots','No native/UI/store whole-life or30-minute acceptance by this review'],'findings':[],'conclusion':'No concrete narrative contradiction identified in57 actual catalogue journals/result titles, source-correlated selected branches and the actual same-peer two-month/24-month project callback chain. Full-bound result/effect telemetry and remaining callback cases are explicitly outside this natural sequence.','limits':['No runtime, replay, rerun, RNG, outcome search, native/device, product-source mutation or codec validation.','Actual role/date and diagnosis/pay witnesses support recorded text; they do not reconstruct every historical availability or contract quote.','Producer37codec comparisons/final-world hash are pinned, not re-executed or independently fully recomputed.','Two analysis-only diagnostics were corrected: the actual sentence field is ended/state rather than released; and school closure on the same calendar date requires actual command order. The16-year homework scene occurs before the actual withdrawal command. Neither was a game/producer failure.']}
+for file,data in [('sequence.json',sequence),('callback.json',callback),('provenance.json',provenance),('summary.json',summary)]: (out/file).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'occurrences':57,'uniqueTemplates':47,'actualNamedOrMoneyJournalTokens':sum(len(x['actualNameAndTermFacts']) for x in sequence),'callbackMonths':24,'strictDriverScenarioComplete':r['scenarioBComplete'],'concreteFindings':0},indent=2))

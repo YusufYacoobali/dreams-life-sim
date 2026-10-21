@@ -1,0 +1,966 @@
+{
+  "checked": [
+    {
+      "eventId": "event_2001_first-tower-demolition",
+      "age": 1,
+      "kind": "stat",
+      "requested": 3,
+      "before": 63,
+      "after": 66,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Smarts",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2001_first-tower-demolition",
+      "age": 1,
+      "kind": "stat",
+      "requested": 2,
+      "before": 31,
+      "after": 33,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2002_toddler-wall-gallery",
+      "age": 2,
+      "kind": "stat",
+      "requested": 3,
+      "before": 33,
+      "after": 36,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2002_toddler-wall-gallery",
+      "age": 2,
+      "kind": "stat",
+      "requested": -2,
+      "before": 100,
+      "after": 98,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2002_toddler-wall-gallery",
+      "age": 2,
+      "kind": "relationship",
+      "requested": 3,
+      "before": 69,
+      "after": 72,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Avery Takahashi · relationship",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2005_toddler-biscuit-halves",
+      "age": 5,
+      "kind": "stat",
+      "requested": 2,
+      "before": 66,
+      "after": 68,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Smarts",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2005_toddler-biscuit-halves",
+      "age": 5,
+      "kind": "stat",
+      "requested": -1,
+      "before": 100,
+      "after": 99,
+      "actualDelta": -1,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-1%"
+      }
+    },
+    {
+      "eventId": "event_2006_school-arcade-invitation",
+      "age": 6,
+      "kind": "stat",
+      "requested": 2,
+      "before": 36,
+      "after": 38,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2006_school-arcade-invitation",
+      "age": 6,
+      "kind": "relationship",
+      "requested": 2,
+      "before": 76,
+      "after": 78,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Avery Takahashi · relationship",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2006_school-arcade-invitation",
+      "age": 6,
+      "kind": "relationship",
+      "requested": 3,
+      "before": 35,
+      "after": 38,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Jordan Carter · relationship",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2007_school-slide-queue",
+      "age": 7,
+      "kind": "stat",
+      "requested": -4,
+      "before": 49,
+      "after": 45,
+      "actualDelta": -4,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Respect",
+        "tone": "negative",
+        "value": "-4%"
+      }
+    },
+    {
+      "eventId": "event_2007_school-slide-queue",
+      "age": 7,
+      "kind": "stat",
+      "requested": -2,
+      "before": 38,
+      "after": 36,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Discipline",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2007_school-slide-queue",
+      "age": 7,
+      "kind": "relationship",
+      "requested": -5,
+      "before": 43,
+      "after": 38,
+      "actualDelta": -5,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Jordan Carter · relationship",
+        "tone": "negative",
+        "value": "-5%"
+      }
+    },
+    {
+      "eventId": "event_2008_broken-mug",
+      "age": 8,
+      "kind": "stat",
+      "requested": 5,
+      "before": 45,
+      "after": 50,
+      "actualDelta": 5,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Respect",
+        "tone": "positive",
+        "value": "+5%"
+      }
+    },
+    {
+      "eventId": "event_2008_broken-mug",
+      "age": 8,
+      "kind": "stat",
+      "requested": -2,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2008_broken-mug",
+      "age": 8,
+      "kind": "relationship",
+      "requested": 4,
+      "before": 82,
+      "after": 86,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Avery Takahashi · relationship",
+        "tone": "positive",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2009_rainy-fort",
+      "age": 9,
+      "kind": "stat",
+      "requested": 4,
+      "before": 68,
+      "after": 72,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Smarts",
+        "tone": "positive",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2009_rainy-fort",
+      "age": 9,
+      "kind": "stat",
+      "requested": -3,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2010_parent-old-music",
+      "age": 10,
+      "kind": "stat",
+      "requested": 2,
+      "before": 72,
+      "after": 74,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Happiness",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2010_parent-old-music",
+      "age": 10,
+      "kind": "stat",
+      "requested": -2,
+      "before": 50,
+      "after": 48,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Respect",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2010_parent-old-music",
+      "age": 10,
+      "kind": "relationship",
+      "requested": -3,
+      "before": 88,
+      "after": 85,
+      "actualDelta": -3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Avery Takahashi · relationship",
+        "tone": "negative",
+        "value": "-3%"
+      }
+    },
+    {
+      "eventId": "event_2011_school-arcade-invitation",
+      "age": 11,
+      "kind": "stat",
+      "requested": 2,
+      "before": 36,
+      "after": 38,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2011_school-arcade-invitation",
+      "age": 11,
+      "kind": "relationship",
+      "requested": 2,
+      "before": 86,
+      "after": 88,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Avery Takahashi · relationship",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2011_school-arcade-invitation",
+      "age": 11,
+      "kind": "relationship",
+      "requested": 3,
+      "before": 30,
+      "after": 33,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Jordan Carter · relationship",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2012_teen-unit-confusion",
+      "age": 12,
+      "kind": "stat",
+      "requested": 2,
+      "before": 72,
+      "after": 74,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Smarts",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2012_teen-unit-confusion",
+      "age": 12,
+      "kind": "relationship",
+      "requested": 3,
+      "before": 45,
+      "after": 48,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Morgan Brooks · relationship",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2012_teen-unit-confusion",
+      "age": 12,
+      "kind": "school-grade",
+      "requested": 1,
+      "before": 54,
+      "after": 55,
+      "actualDelta": 1,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Grades",
+        "tone": "positive",
+        "value": "+1%"
+      }
+    },
+    {
+      "eventId": "event_2013_teen-debate-draw",
+      "age": 13,
+      "kind": "stat",
+      "requested": -1,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2013_teen-debate-draw",
+      "age": 13,
+      "kind": "stat",
+      "requested": -2,
+      "before": 48,
+      "after": 46,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Respect",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2013_teen-debate-draw",
+      "age": 13,
+      "kind": "relationship",
+      "requested": -3,
+      "before": 48,
+      "after": 45,
+      "actualDelta": -3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Morgan Brooks · relationship",
+        "tone": "negative",
+        "value": "-3%"
+      }
+    },
+    {
+      "eventId": "event_2013_teen-debate-draw",
+      "age": 13,
+      "kind": "school-grade",
+      "requested": -2,
+      "before": 54,
+      "after": 52,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_3",
+        "label": "Grades",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2014_teen-solo-rehearsal",
+      "age": 14,
+      "kind": "stat",
+      "requested": 2,
+      "before": 38,
+      "after": 40,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2014_teen-solo-rehearsal",
+      "age": 14,
+      "kind": "stat",
+      "requested": -3,
+      "before": 100,
+      "after": 97,
+      "actualDelta": -3,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-3%"
+      }
+    },
+    {
+      "eventId": "event_2014_teen-solo-rehearsal",
+      "age": 14,
+      "kind": "relationship",
+      "requested": 4,
+      "before": 27,
+      "after": 31,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Jordan Carter · relationship",
+        "tone": "positive",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2014_teen-solo-rehearsal",
+      "age": 14,
+      "kind": "skill",
+      "requested": 2,
+      "before": 0,
+      "after": 2,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_3",
+        "label": "Music",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2015_teen-marking-correction",
+      "age": 15,
+      "kind": "stat",
+      "requested": 2,
+      "before": 74,
+      "after": 76,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Smarts",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2015_teen-marking-correction",
+      "age": 15,
+      "kind": "stat",
+      "requested": -2,
+      "before": 100,
+      "after": 98,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2015_teen-marking-correction",
+      "age": 15,
+      "kind": "relationship",
+      "requested": 2,
+      "before": 41,
+      "after": 43,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Morgan Brooks · relationship",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2015_teen-marking-correction",
+      "age": 15,
+      "kind": "school-grade",
+      "requested": 2,
+      "before": 52,
+      "after": 54,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_3",
+        "label": "Grades",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2016_teen-household-small-meal",
+      "age": 16,
+      "kind": "stat",
+      "requested": -2,
+      "before": 40,
+      "after": 38,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2016_teen-household-small-meal",
+      "age": 16,
+      "kind": "stat",
+      "requested": 2,
+      "before": 0,
+      "after": 2,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "negative",
+        "value": "+2%"
+      }
+    },
+    {
+      "eventId": "event_2016_teen-household-small-meal",
+      "age": 16,
+      "kind": "relationship",
+      "requested": -2,
+      "before": 93,
+      "after": 91,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Avery Takahashi · relationship",
+        "tone": "negative",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2017_comparison-scroll",
+      "age": 17,
+      "kind": "stat",
+      "requested": 4,
+      "before": 38,
+      "after": 42,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2017_comparison-scroll",
+      "age": 17,
+      "kind": "stat",
+      "requested": -4,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2018_adult-repair-table",
+      "age": 18,
+      "kind": "stat",
+      "requested": 3,
+      "before": 42,
+      "after": 45,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2018_adult-repair-table",
+      "age": 18,
+      "kind": "stat",
+      "requested": -1,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2020_rest-guilt",
+      "age": 20,
+      "kind": "stat",
+      "requested": 3,
+      "before": 45,
+      "after": 48,
+      "actualDelta": 3,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+3%"
+      }
+    },
+    {
+      "eventId": "event_2020_rest-guilt",
+      "age": 20,
+      "kind": "stat",
+      "requested": 4,
+      "before": 0,
+      "after": 4,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "negative",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2020_rest-guilt",
+      "age": 20,
+      "kind": "stat",
+      "requested": -5,
+      "before": 100,
+      "after": 95,
+      "actualDelta": -5,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-5%"
+      }
+    },
+    {
+      "eventId": "event_2021_adult-neighbourhood-song",
+      "age": 21,
+      "kind": "stat",
+      "requested": 5,
+      "before": 74,
+      "after": 79,
+      "actualDelta": 5,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Happiness",
+        "tone": "positive",
+        "value": "+5%"
+      }
+    },
+    {
+      "eventId": "event_2021_adult-neighbourhood-song",
+      "age": 21,
+      "kind": "stat",
+      "requested": -2,
+      "before": 2,
+      "after": 0,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "positive",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2022_old-photo",
+      "age": 22,
+      "kind": "stat",
+      "requested": 5,
+      "before": 79,
+      "after": 84,
+      "actualDelta": 5,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Happiness",
+        "tone": "positive",
+        "value": "+5%"
+      }
+    },
+    {
+      "eventId": "event_2022_old-photo",
+      "age": 22,
+      "kind": "stat",
+      "requested": -2,
+      "before": 9,
+      "after": 7,
+      "actualDelta": -2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "positive",
+        "value": "-2%"
+      }
+    },
+    {
+      "eventId": "event_2022_old-photo",
+      "age": 22,
+      "kind": "relationship",
+      "requested": 6,
+      "before": 82,
+      "after": 88,
+      "actualDelta": 6,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Avery Takahashi · relationship",
+        "tone": "positive",
+        "value": "+6%"
+      }
+    },
+    {
+      "eventId": "event_2023_comparison-scroll",
+      "age": 23,
+      "kind": "stat",
+      "requested": -4,
+      "before": 84,
+      "after": 80,
+      "actualDelta": -4,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Happiness",
+        "tone": "negative",
+        "value": "-4%"
+      }
+    },
+    {
+      "eventId": "event_2023_comparison-scroll",
+      "age": 23,
+      "kind": "stat",
+      "requested": 4,
+      "before": 12,
+      "after": 16,
+      "actualDelta": 4,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "negative",
+        "value": "+4%"
+      }
+    },
+    {
+      "eventId": "event_2023_comparison-scroll",
+      "age": 23,
+      "kind": "stat",
+      "requested": -3,
+      "before": 100,
+      "after": 97,
+      "actualDelta": -3,
+      "actualRow": {
+        "id": "effect_2",
+        "label": "Energy",
+        "tone": "negative",
+        "value": "-3%"
+      }
+    },
+    {
+      "eventId": "event_2024_bad-review",
+      "age": 24,
+      "kind": "stat",
+      "requested": -3,
+      "before": 22,
+      "after": 19,
+      "actualDelta": -3,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Stress",
+        "tone": "positive",
+        "value": "-3%"
+      }
+    },
+    {
+      "eventId": "event_2024_bad-review",
+      "age": 24,
+      "kind": "stat",
+      "requested": 2,
+      "before": 48,
+      "after": 50,
+      "actualDelta": 2,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Discipline",
+        "tone": "positive",
+        "value": "+2%"
+      }
+    }
+  ],
+  "clipped": [
+    {
+      "eventId": "event_2008_broken-mug",
+      "age": 8,
+      "kind": "stat",
+      "requested": -2,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2009_rainy-fort",
+      "age": 9,
+      "kind": "stat",
+      "requested": -3,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2013_teen-debate-draw",
+      "age": 13,
+      "kind": "stat",
+      "requested": -1,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_0",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2017_comparison-scroll",
+      "age": 17,
+      "kind": "stat",
+      "requested": -4,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    },
+    {
+      "eventId": "event_2018_adult-repair-table",
+      "age": 18,
+      "kind": "stat",
+      "requested": -1,
+      "before": 0,
+      "after": 0,
+      "actualDelta": 0,
+      "actualRow": {
+        "id": "effect_1",
+        "label": "Stress",
+        "tone": "neutral",
+        "value": "+0%"
+      }
+    }
+  ]
+}

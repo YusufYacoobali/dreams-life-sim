@@ -1,0 +1,293 @@
+{
+  "format": "dreams-c39-preselected-actual-sequence-publication-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "publicationBaseCommit": "63a03c97166d5a45d997dd94f7bb5b9533297bf7",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "scope": "Three preselected recorded pure-engine sequences after SQLite birth, reviewed without runtime replay/rerun or seed search. Counts remain separate from the 265 / 795 source ledger and separate all-country policy summaries.",
+  "reviews": [
+    {
+      "id": "a-ca901",
+      "policy": "Professional A3",
+      "country": "CA",
+      "seed": 901,
+      "preselectedBeforeRun": true,
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "reviewer": {
+        "agent": "/root/story_editorial",
+        "kind": "Codex recorded-artifact/source-correlated narrative review",
+        "externalHuman": false
+      },
+      "player": {
+        "id": "person_player",
+        "name": "Robin Campbell",
+        "born": {
+          "year": 2000,
+          "month": 1,
+          "day": 1
+        },
+        "died": {
+          "year": 2096,
+          "month": 2,
+          "day": 1
+        },
+        "ageAtDeath": 96,
+        "city": "Toronto",
+        "country": "CA"
+      },
+      "actualCounts": {
+        "commandsCommitted": 584,
+        "observations": 257,
+        "producerRecordedColdChecks": 78,
+        "advanceCommands": 97,
+        "resumeCommands": 1,
+        "completedChronologicalBirthdayYears": 96,
+        "fatalPartialFinalAnnualPeriod": true,
+        "catalogueOccurrences": 69,
+        "distinctCatalogueTemplates": 58,
+        "distinctCatalogueBranches": 58,
+        "totalChooseCommands": 72,
+        "catalogueChoiceOrdinalCounts": {
+          "first": 69,
+          "second": 0,
+          "third": 0
+        },
+        "nonCatalogueChoices": 3,
+        "actualRecordedBoundCatalogueResults": 0,
+        "actualRecordedCatalogueEffectRowSnapshots": 0,
+        "actualCatalogueJournalsRead": 69,
+        "callbackThreads": 0,
+        "persistedPlayerJournalFactsAvailable": 427
+      },
+      "timing": {
+        "coordinatorCohortElapsedSeconds": 529.213,
+        "toolCohortElapsedMs": 528439,
+        "producerCanadaElapsedMs": 38659
+      },
+      "findings": [],
+      "conclusion": "No concrete narrative contradiction identified in this fixed life’s69 actual chosen-ID/journal occurrences and separately source-correlated58 selected branches. This is a scoped recorded-sequence review, not full result/effect-row/native/SQLite-life/30-minute/all-country/all 795-branch acceptance.",
+      "report": {
+        "file": "a-ca901/REPORT.md",
+        "sha256": "513e162387e6ef0159cc313081064d79fa4de288ea75ceb79251274f47d05a6a"
+      },
+      "summary": {
+        "file": "a-ca901/summary.json",
+        "sha256": "41e54223d205d75512a49ae851aad2b8a6842acddf96d0959d33e2e8aef6ff9d"
+      },
+      "provenance": {
+        "file": "a-ca901/provenance.json",
+        "sha256": "a85189a4c7631ff1b032384e8191db2fbc41dfabe213da74ddba5028a863cb5b"
+      },
+      "sequence": {
+        "file": "a-ca901/sequence.json",
+        "sha256": "f924149efa64d063335d0da5bf6502d9f37065b9af98e194acdf38a993afdf6e"
+      },
+      "receipt": "receipts/professional-v3.json",
+      "boundResultTelemetry": "not retained; selected result prose is explicitly source-correlated",
+      "actualEffectArithmeticReview": "not established by this telemetry",
+      "limits": [
+        "No game execution, replay, rerun, RNG call, seed search, native/UI action or source change.",
+        "The current authored setup/label/result/requested effects are correlated to actual selected IDs; they are not captured historical bound scenes.",
+        "Saved role/date records corroborate named journals but do not reconstruct every past location, choice availability or intermediate person stat.",
+        "Actual producer78coldChecks and final world hash are recorded/pinned, not re-executed or independently canonical-hash verified by this review.",
+        "B GB902 and D US900 are separate preselected future reviews; no evidence is borrowed from them.",
+        "All69 catalogue journals and separately selected milestone/health/education facts were read;427 player journal facts are available, not a claim that every financial line was independently audited here."
+      ]
+    },
+    {
+      "id": "b-gb902",
+      "policy": "Criminal Bv2",
+      "country": "GB",
+      "seed": 902,
+      "preselectedBeforeRun": true,
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "reviewer": {
+        "agent": "/root/story_editorial",
+        "kind": "Codex recorded-artifact/source-correlated narrative review",
+        "externalHuman": false
+      },
+      "player": {
+        "id": "person_player",
+        "name": "Hina Takahashi",
+        "born": {
+          "year": 2000,
+          "month": 1,
+          "day": 1
+        },
+        "died": {
+          "year": 2068,
+          "month": 4,
+          "day": 1
+        },
+        "ageAtDeath": 68,
+        "country": "GB",
+        "city": "London"
+      },
+      "actualCounts": {
+        "attemptedCommands": 282,
+        "committedCommands": 277,
+        "uncommittedAttempts": 5,
+        "advanceCommands": 69,
+        "completedChronologicalBirthdayYears": 68,
+        "fatalPartial69thAnnualAdvance": true,
+        "observations": 147,
+        "producerRecordedColdChecks": 37,
+        "totalChooseCommands": 72,
+        "catalogueOccurrences": 57,
+        "distinctCatalogueTemplates": 47,
+        "distinctCatalogueBranches": 47,
+        "catalogueChoiceOrdinalCounts": {
+          "first": 57,
+          "second": 0,
+          "third": 0
+        },
+        "actualCatalogueJournalsAndResultTitlesRead": 57,
+        "callbackThreads": 1,
+        "observedCallbackChoices": 2,
+        "actualRecordedBoundResultBodies": 0,
+        "actualRecordedEffectRowFrames": 0,
+        "persistedPlayerJournalFactsAvailable": 250
+      },
+      "timing": {
+        "coordinatorCohortElapsedSeconds": 151.557,
+        "toolCohortElapsedMs": 151006,
+        "producerBritainElapsedMs": 13151
+      },
+      "findings": [],
+      "conclusion": "No concrete narrative contradiction identified in57 actual catalogue journals/result titles, source-correlated selected branches and the actual same-peer two-month/24-month project callback chain. Full-bound result/effect telemetry and remaining callback cases are explicitly outside this natural sequence.",
+      "report": {
+        "file": "b-gb902/REPORT.md",
+        "sha256": "a2c3fc2c662afb6c890b362926c451f6d062d75092944514c5bbab8f204cf1a9"
+      },
+      "summary": {
+        "file": "b-gb902/summary.json",
+        "sha256": "092d75137c3cc7562d7223844b49bcdd76c550e1f25b66a70c997182746e4b60"
+      },
+      "provenance": {
+        "file": "b-gb902/provenance.json",
+        "sha256": "07554b6d29f4b3615cdfc18bfb3681b3d2e06447f47c0edf527c4b9af5f76694"
+      },
+      "sequence": {
+        "file": "b-gb902/sequence.json",
+        "sha256": "e8173d7cd61e3ae8a1cdca2b9a679455cde7c90647a040c7c99271813fe5f4c6"
+      },
+      "receipt": "receipts/criminal-v2.json",
+      "boundResultTelemetry": "not retained; selected result prose is explicitly source-correlated",
+      "actualEffectArithmeticReview": "not established by this telemetry",
+      "limits": [
+        "No runtime, replay, rerun, RNG, outcome search, native/device, product-source mutation or codec validation.",
+        "Actual role/date and diagnosis/pay witnesses support recorded text; they do not reconstruct every historical availability or contract quote.",
+        "Producer37codec comparisons/final-world hash are pinned, not re-executed or independently fully recomputed.",
+        "Two analysis-only diagnostics were corrected: the actual sentence field is ended/state rather than released; and school closure on the same calendar date requires actual command order. The16-year homework scene occurs before the actual withdrawal command. Neither was a game/producer failure."
+      ]
+    },
+    {
+      "id": "d-us900",
+      "policy": "Editorial varied-choice V2",
+      "country": "US",
+      "seed": 900,
+      "preselectedBeforeRun": true,
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "reviewer": {
+        "agent": "/root/story_editorial",
+        "kind": "Codex actual retained sequence review",
+        "externalHuman": false
+      },
+      "player": {
+        "id": "person_player",
+        "name": "Yui Takahashi",
+        "born": {
+          "year": 2000,
+          "month": 1,
+          "day": 1
+        },
+        "died": {
+          "year": 2039,
+          "month": 5,
+          "day": 1
+        },
+        "ageAtDeath": 39,
+        "cause": "declining health"
+      },
+      "actualCounts": {
+        "commandsCommitted": 183,
+        "decisions": 62,
+        "catalogueDecisions": 21,
+        "systemOrCallbackDecisions": 41,
+        "medicalEmergencyDecisions": 40,
+        "catalogueTemplatesEncountered": 19,
+        "distinctExecutedCatalogueBranches": 20,
+        "catalogueFirstChoice": 8,
+        "catalogueSecondChoice": 6,
+        "catalogueThirdChoice": 7,
+        "allOfferedCatalogueSlots": 63,
+        "distinctOfferedCatalogueBranchDefinitions": 57,
+        "resolvedCatalogueRowsArithmeticChecked": 59,
+        "actuallyClippedCatalogueRows": 5,
+        "coldFramesProducerRecorded": 184,
+        "completedYears": 39,
+        "yearsStarted": 40,
+        "fatalPartial40thYear": true,
+        "resultFramesRetained": 81,
+        "totalSourceCatalogue": 265,
+        "unseenTemplates": 246,
+        "unexecutedCatalogueBranches": 775
+      },
+      "timing": {
+        "actualWholeCohortCoordinatorSeconds": 608.289,
+        "individualUSLifeElapsedMs": null
+      },
+      "findings": [],
+      "conclusion": "No concrete contradiction in this fixed life’s actual retained bound copy,21 catalogue selected results/journals/59numeric rows, paid/refused outing facts or40 medical disclosure/first-date chronology frames. This is US900-only recorded sequence evidence; aggregate12-country review remains separate.",
+      "report": {
+        "file": "d-us900/REPORT.md",
+        "sha256": "8f9ce2716e4738bc3561524282ed728cf013f4ef1d34ac3bc616959897a177a7"
+      },
+      "summary": {
+        "file": "d-us900/summary.json",
+        "sha256": "198d2c52e5c0c6289574ab2f25284e6ab7dd74b1e66a69e6fff1f531a813e542"
+      },
+      "provenance": {
+        "file": "d-us900/provenance.json",
+        "sha256": "cc462577bed159af2e30fea2a2f81e84b1883bf651db60f0807839d5a9efa232"
+      },
+      "sequence": {
+        "file": "d-us900/sequence.json",
+        "sha256": "1583c8a0e058629d3c33468b8785d6d8fe88e1c72ccff10e015885fcc7288ea9"
+      },
+      "receipt": "receipts/editorial-v2.json",
+      "boundResultTelemetry": "retained actual bodies and affected snapshots",
+      "actualEffectArithmeticReview": "59 actual catalogue rows; five genuine lower-bound clips",
+      "limits": [
+        "No rerun/replay/RNG/seed search or source/native operation.",
+        "Unselected bound alternatives were read as offered bound branches, not credited as executed outcomes.",
+        "Cold/world hashes are producer evidence pinned here, not independently rerun codec/canonical proof.",
+        "Cohort closure is credited only after the actual608.289s exit0 receipt; individualUS files were already closed before that receipt."
+      ]
+    }
+  ],
+  "callbackReconciliation": {
+    "report": "callback-reconciliation.md",
+    "pins": "callback-reconciliation-pins.json",
+    "newRequiredCallbackFeaturesIdentified": 0,
+    "newNativeCombinatorialMatrixRequired": false
+  },
+  "sequenceToLedgerIndex": "sequence-index.json",
+  "pendingAtPublication": [
+    "Coordinator attribution of current native upgrade/actions/opening and cold observations",
+    "Actual continuous 30-minute UI review",
+    "Separate current expanded annual coverage and release/platform status"
+  ],
+  "limits": [
+    "No claim of all 265 natural encounters or all 795 executed branches.",
+    "A/B do not retain actual full bound result-body/effect-row snapshots; source correlation is separate.",
+    "D observed numeric cap checks are only the 59 rows retained in US900.",
+    "No actual native interaction, whole-life SQLite acceptance, external-human playtest or speech acceptance was produced by this review/publication.",
+    "Frozen historical callback/device/audit sources and all observed omissions/refusals/early death remain explicit."
+  ]
+}

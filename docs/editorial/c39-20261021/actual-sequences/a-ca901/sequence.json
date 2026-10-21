@@ -1,0 +1,4906 @@
+[
+  {
+    "age": 1,
+    "date": {
+      "year": 2001,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2001_first-mirror-guest",
+    "templateId": "first-mirror-guest",
+    "actualCommandIndexZeroBased": 1,
+    "actualChoice": {
+      "choiceId": "face",
+      "eventId": "event_2001_first-mirror-guest",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2001_first-mirror-guest_choice",
+      "date": {
+        "year": 2001,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I made faces at my reflection and laughed when it copied me.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/childhood.ts",
+        "line": 30,
+        "fileSha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6",
+        "expandedLiteralSha256": "53ed4532ac382d90eb5640e2243c9ec4f9516b2449a7ed4d53600e35ceb3fb4a"
+      },
+      "primaryCategory": "birth-early-childhood",
+      "title": "Who invited that baby?",
+      "setupTemplate": "There is a baby in the mirror. They copy every move you make. You have concerns about their manners.",
+      "authoredAge": {
+        "min": 1,
+        "max": 2
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "face",
+        "label": "Pull your strangest face",
+        "changes": {
+          "happiness": 4
+        },
+        "title": "Extremely rude guest",
+        "result": "They pull it right back. You laugh and try another one.",
+        "journal": "I made faces at my reflection and laughed when it copied me."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 2,
+    "date": {
+      "year": 2002,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2002_first-camera-closeup",
+    "templateId": "first-camera-closeup",
+    "actualCommandIndexZeroBased": 4,
+    "actualChoice": {
+      "choiceId": "nose",
+      "eventId": "event_2002_first-camera-closeup",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2002_first-camera-closeup_choice",
+      "date": {
+        "year": 2002,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I gave Camille a very close view of my nose.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "parent",
+        "actualJournalText": "Camille",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_parent1",
+            "fullName": "Camille Campbell",
+            "role": "parent",
+            "relationshipId": "relation_parent_0",
+            "born": {
+              "year": 1971,
+              "month": 7,
+              "day": 12
+            },
+            "died": {
+              "year": 2033,
+              "month": 7,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/earlyHomeStories.ts",
+        "line": 24,
+        "fileSha256": "0f9d310562d77aaae9451df840d95b1a80c6e0cb1928d85c3c91931e6667cc06",
+        "expandedLiteralSha256": "0454e39fbbcde37e84c4ca09715d05c06ead9c7aacff5ae7b02543e242bfea04",
+        "historicalExpandedLiteralSha256": "2f32ef1d7a21f3170883749d024d31f410a63d22ddfc4926b67a0ec012bf7a37"
+      },
+      "primaryCategory": "birth-early-childhood",
+      "title": "Ready for your close-up",
+      "setupTemplate": "{parent} points a phone camera at you. You can see yourself on the screen. Your nose deserves further investigation.",
+      "authoredAge": {
+        "min": 1,
+        "max": 3
+      },
+      "authoredContextPredicates": {
+        "parent": true
+      },
+      "selectedChoice": {
+        "id": "nose",
+        "label": "Move right up to the lens",
+        "changes": {
+          "happiness": 4
+        },
+        "title": "Mostly nostril",
+        "result": "{parent} keeps the picture. It is a bold choice of composition.",
+        "journal": "I gave {parent} a very close view of my nose.",
+        "bond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 3,
+    "date": {
+      "year": 2003,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2003_toddler-stairwell-echo",
+    "templateId": "toddler-stairwell-echo",
+    "actualCommandIndexZeroBased": 7,
+    "actualChoice": {
+      "choiceId": "hello",
+      "eventId": "event_2003_toddler-stairwell-echo",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2003_toddler-stairwell-echo_choice",
+      "date": {
+        "year": 2003,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I discovered an echo and gave it a very long greeting.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/schoolDayStories.ts",
+        "line": 6,
+        "fileSha256": "2064b0ff912eeb1c8eb2618236e0befa430f4c597d0f93fb9c84b4c2a66b12b4",
+        "expandedLiteralSha256": "dcf82f5d37c30ba592ee1183625a23024b670f09a09be3c4062d421d9da01540"
+      },
+      "primaryCategory": "birth-early-childhood",
+      "title": "Who said that?",
+      "setupTemplate": "Your voice echoes in a stairwell. Whoever lives in the walls knows the same words as you, but always says them late.",
+      "authoredAge": {
+        "min": 2,
+        "max": 4
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "hello",
+        "label": "Try a very long hello",
+        "changes": {
+          "happiness": 3,
+          "energy": -1
+        },
+        "title": "A late reply",
+        "result": "The walls return most of your hello. You start again before they finish.",
+        "journal": "I discovered an echo and gave it a very long greeting."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 4,
+    "date": {
+      "year": 2004,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2004_toddler-cardboard-rocket",
+    "templateId": "toddler-cardboard-rocket",
+    "actualCommandIndexZeroBased": 10,
+    "actualChoice": {
+      "choiceId": "invite",
+      "eventId": "event_2004_toddler-cardboard-rocket",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2004_toddler-cardboard-rocket_choice",
+      "date": {
+        "year": 2004,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "My cardboard rocket carried me and one of Camille’s feet.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "parent",
+        "actualJournalText": "Camille",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_parent1",
+            "fullName": "Camille Campbell",
+            "role": "parent",
+            "relationshipId": "relation_parent_0",
+            "born": {
+              "year": 1971,
+              "month": 7,
+              "day": 12
+            },
+            "died": {
+              "year": 2033,
+              "month": 7,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/childhood.ts",
+        "line": 57,
+        "fileSha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6",
+        "expandedLiteralSha256": "f5d0448cb855accbb3a72347ad50076ae35af323cca9087dcecf6a29428e2897"
+      },
+      "primaryCategory": "birth-early-childhood",
+      "title": "Launch delayed",
+      "setupTemplate": "You turn a cardboard box into a rocket. {parent} says dinner is ready. Mission Control has terrible timing.",
+      "authoredAge": {
+        "min": 3,
+        "max": 5
+      },
+      "authoredContextPredicates": {
+        "parent": true
+      },
+      "selectedChoice": {
+        "id": "invite",
+        "label": "Invite {parent} aboard",
+        "changes": {
+          "happiness": 4
+        },
+        "title": "Crew shortage solved",
+        "result": "{parent} puts one foot in the box. The rocket is now full.",
+        "journal": "My cardboard rocket carried me and one of {parent}’s feet.",
+        "bond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 5,
+    "date": {
+      "year": 2005,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2005_child-pocket-museum",
+    "templateId": "child-pocket-museum",
+    "actualCommandIndexZeroBased": 13,
+    "actualChoice": {
+      "choiceId": "sort",
+      "eventId": "event_2005_child-pocket-museum",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2005_child-pocket-museum_choice",
+      "date": {
+        "year": 2005,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I sorted a pocketful of stones and leaves.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/earlyHomeStories.ts",
+        "line": 96,
+        "fileSha256": "0f9d310562d77aaae9451df840d95b1a80c6e0cb1928d85c3c91931e6667cc06",
+        "expandedLiteralSha256": "e40d4ee71df1ea32581fd31c0518629553993e180a9382d9b6f7169f20d1180d"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "Admission is free",
+      "setupTemplate": "Your pocket contains three stones, a leaf and something that used to be a leaf. You are considering opening a museum.",
+      "authoredAge": {
+        "min": 4,
+        "max": 7
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "sort",
+        "label": "Sort the collection by shape",
+        "changes": {
+          "smarts": 3,
+          "discipline": 1
+        },
+        "title": "A respectable exhibition",
+        "result": "The smallest stone gets its own section. The crumbled leaf needs a larger display area.",
+        "journal": "I sorted a pocketful of stones and leaves."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 6,
+    "date": {
+      "year": 2006,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2006_child-first-sleepover-plan",
+    "templateId": "child-first-sleepover-plan",
+    "actualCommandIndexZeroBased": 16,
+    "actualChoice": {
+      "choiceId": "plan",
+      "eventId": "event_2006_child-first-sleepover-plan",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2006_child-first-sleepover-plan_choice",
+      "date": {
+        "year": 2006,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I camped in the living room with Camille’s help.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "parent",
+        "actualJournalText": "Camille",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_parent1",
+            "fullName": "Camille Campbell",
+            "role": "parent",
+            "relationshipId": "relation_parent_0",
+            "born": {
+              "year": 1971,
+              "month": 7,
+              "day": 12
+            },
+            "died": {
+              "year": 2033,
+              "month": 7,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/childhood.ts",
+        "line": 84,
+        "fileSha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6",
+        "expandedLiteralSha256": "b0e33f4bb7e40a2962c335616f901deb0a27fc02514f5fc0229cd22c80668f61"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "Hotel living room",
+      "setupTemplate": "You ask {parent} whether you can camp in the living room. Your packing list contains six cushions and no clothes.",
+      "authoredAge": {
+        "min": 4,
+        "max": 8
+      },
+      "authoredContextPredicates": {
+        "parent": true
+      },
+      "selectedChoice": {
+        "id": "plan",
+        "label": "Help make a proper sleeping spot",
+        "changes": {
+          "discipline": 3,
+          "happiness": 3
+        },
+        "title": "Room with a sofa",
+        "result": "{parent} helps you set up, then checks on you before bed.",
+        "journal": "I camped in the living room with {parent}’s help.",
+        "bond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 7,
+    "date": {
+      "year": 2007,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2007_school-rainy-break",
+    "templateId": "school-rainy-break",
+    "actualCommandIndexZeroBased": 31,
+    "actualChoice": {
+      "choiceId": "agree",
+      "eventId": "event_2007_school-rainy-break",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2007_school-rainy-break_choice",
+      "date": {
+        "year": 2007,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I agreed on board-game rules with Sophie before playing.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "classmate",
+        "actualJournalText": "Sophie",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_16_4",
+            "fullName": "Sophie Roy",
+            "role": "classmate",
+            "schoolId": "school_person_player_16_0",
+            "school": "Toronto Primary School",
+            "born": {
+              "year": 1999,
+              "month": 8,
+              "day": 13
+            },
+            "died": {
+              "year": 2045,
+              "month": 10,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/schoolDayStories.ts",
+        "line": 105,
+        "fileSha256": "2064b0ff912eeb1c8eb2618236e0befa430f4c597d0f93fb9c84b4c2a66b12b4",
+        "expandedLiteralSha256": "ba88fb5a2747c144096ad8f6e1b0f00f21a00a5a3653848ee5ee08a9700b8f70"
+      },
+      "primaryCategory": "school-teenage-life",
+      "title": "Indoor championship",
+      "setupTemplate": "Rain keeps your class inside at break. {classmate} proposes a board game, then explains a rule you are fairly sure they just invented.",
+      "authoredAge": {
+        "min": 6,
+        "max": 11
+      },
+      "authoredContextPredicates": {
+        "school": "primary",
+        "classmate": true
+      },
+      "selectedChoice": {
+        "id": "agree",
+        "label": "Agree on the rules first",
+        "changes": {
+          "discipline": 2,
+          "respect": 1
+        },
+        "title": "Before the first move",
+        "result": "You settle the argument before starting. The game is much closer without surprise rules.",
+        "journal": "I agreed on board-game rules with {classmate} before playing.",
+        "peerBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 8,
+    "date": {
+      "year": 2008,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2008_child-boardgame-rules",
+    "templateId": "child-boardgame-rules",
+    "actualCommandIndexZeroBased": 38,
+    "actualChoice": {
+      "choiceId": "accept",
+      "eventId": "event_2008_child-boardgame-rules",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2008_child-boardgame-rules_choice",
+      "date": {
+        "year": 2008,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I finished a board game fairly even though I was losing.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/earlyHomeStories.ts",
+        "line": 150,
+        "fileSha256": "0f9d310562d77aaae9451df840d95b1a80c6e0cb1928d85c3c91931e6667cc06",
+        "expandedLiteralSha256": "55b0cd45a6448c374c202fb6066628b54cd92f9bbac876f079563ee3e4675bdc"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "The rules have been updated",
+      "setupTemplate": "You are losing a board game with {parent}. You have just remembered a rule under which you would be winning.",
+      "authoredAge": {
+        "min": 5,
+        "max": 9
+      },
+      "authoredContextPredicates": {
+        "parent": true
+      },
+      "selectedChoice": {
+        "id": "accept",
+        "label": "Finish under the original rules",
+        "changes": {
+          "discipline": 3,
+          "respect": 2
+        },
+        "title": "A respectable defeat",
+        "result": "{parent} wins this round. You immediately request another.",
+        "journal": "I finished a board game fairly even though I was losing.",
+        "bond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 9,
+    "date": {
+      "year": 2009,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2009_school-microphone-rehearsal",
+    "templateId": "school-microphone-rehearsal",
+    "actualCommandIndexZeroBased": 45,
+    "actualChoice": {
+      "choiceId": "read",
+      "eventId": "event_2009_school-microphone-rehearsal",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2009_school-microphone-rehearsal_choice",
+      "date": {
+        "year": 2009,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I practised reading an announcement into the assembly microphone.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/schoolDayStories.ts",
+        "line": 96,
+        "fileSha256": "2064b0ff912eeb1c8eb2618236e0befa430f4c597d0f93fb9c84b4c2a66b12b4",
+        "expandedLiteralSha256": "93ae7bdf9cd7188fadd24b486a613ed44dde995d6c965dda7773e95147969e39"
+      },
+      "primaryCategory": "school-teenage-life",
+      "title": "Is this thing on?",
+      "setupTemplate": "At assembly rehearsal, {teacher} asks you to test the microphone. You say “Is this thing on?” The empty hall asks it back.",
+      "authoredAge": {
+        "min": 7,
+        "max": 11
+      },
+      "authoredContextPredicates": {
+        "school": "primary",
+        "teacher": true
+      },
+      "selectedChoice": {
+        "id": "read",
+        "label": "Practise the actual announcement",
+        "changes": {
+          "discipline": 2,
+          "energy": -2
+        },
+        "title": "Clear enough",
+        "result": "You slow down and read it through. {teacher} asks you to keep that pace.",
+        "journal": "I practised reading an announcement into the assembly microphone.",
+        "teacherBond": 2,
+        "skill": {
+          "id": "acting",
+          "delta": 2
+        }
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 10,
+    "date": {
+      "year": 2010,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2010_rainy-fort",
+    "templateId": "rainy-fort",
+    "actualCommandIndexZeroBased": 52,
+    "actualChoice": {
+      "choiceId": "build",
+      "eventId": "event_2010_rainy-fort",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2010_rainy-fort_choice",
+      "date": {
+        "year": 2010,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I built a blanket fort that almost met building regulations.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 76,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "4eb6ec72c5b7c261b139d5727df16c1ceee4add2b6161e5fe7be4e592c7c26f6"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "Indoor architecture",
+      "setupTemplate": "Rain cancels your afternoon plans. Two chairs and a blanket suggest a career in questionable structural engineering.",
+      "authoredAge": {
+        "min": 6,
+        "max": 12
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "build",
+        "label": "Build an elaborate fort",
+        "changes": {
+          "happiness": 5,
+          "smarts": 2,
+          "energy": -3
+        },
+        "title": "Approved for immediate occupancy",
+        "result": "It collapses twice. The third version has a reading corner.",
+        "journal": "I built a blanket fort that almost met building regulations."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 11,
+    "date": {
+      "year": 2011,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2011_school-race-false-start",
+    "templateId": "school-race-false-start",
+    "actualCommandIndexZeroBased": 59,
+    "actualChoice": {
+      "choiceId": "restart",
+      "eventId": "event_2011_school-race-false-start",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2011_school-race-false-start_choice",
+      "date": {
+        "year": 2011,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I restarted a practice race after jumping the whistle.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/childhood.ts",
+        "line": 183,
+        "fileSha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6",
+        "expandedLiteralSha256": "062cbfe0236391e84eeeddaf6e0f43527575f6fba9fe28ec23242ec20cce9f35"
+      },
+      "primaryCategory": "school-teenage-life",
+      "title": "An impressive illegal start",
+      "setupTemplate": "You start a practice race before {teacher} blows the whistle. You are winning by an enormous amount.",
+      "authoredAge": {
+        "min": 7,
+        "max": 11
+      },
+      "authoredContextPredicates": {
+        "school": "primary",
+        "teacher": true
+      },
+      "selectedChoice": {
+        "id": "restart",
+        "label": "Stop and restart fairly",
+        "changes": {
+          "respect": 3,
+          "energy": -2
+        },
+        "title": "Same starting line",
+        "result": "You run again with everyone else. It is harder when they are moving too.",
+        "journal": "I restarted a practice race after jumping the whistle.",
+        "skill": {
+          "id": "sport",
+          "delta": 2
+        },
+        "teacherBond": 2
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 15,
+    "date": {
+      "year": 2015,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2015_parent-old-music",
+    "templateId": "parent-old-music",
+    "actualCommandIndexZeroBased": 86,
+    "actualChoice": {
+      "choiceId": "listen",
+      "eventId": "event_2015_parent-old-music",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2015_parent-old-music_choice",
+      "date": {
+        "year": 2015,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened to Camille’s old music and the story behind it.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "parent",
+        "actualJournalText": "Camille",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_parent1",
+            "fullName": "Camille Campbell",
+            "role": "parent",
+            "relationshipId": "relation_parent_0",
+            "born": {
+              "year": 1971,
+              "month": 7,
+              "day": 12
+            },
+            "died": {
+              "year": 2033,
+              "month": 7,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 85,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "105b9da71bb49e56d4ae807ce9f8888c6bb8472816b8605d67614ce0fa87c44f"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "Apparently this was cool",
+      "setupTemplate": "{parent} plays a song they loved at your age. There is a lengthy explanation of how nobody makes music properly anymore.",
+      "authoredAge": {
+        "min": 10,
+        "max": 17
+      },
+      "authoredContextPredicates": {
+        "parent": true
+      },
+      "selectedChoice": {
+        "id": "listen",
+        "label": "Ask what it reminds them of",
+        "changes": {
+          "happiness": 3,
+          "respect": 2
+        },
+        "title": "Before they were your parent",
+        "result": "The story is better than expected. You learn something new about {parent}.",
+        "journal": "I listened to {parent}’s old music and the story behind it.",
+        "bond": 6
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 16,
+    "date": {
+      "year": 2016,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2016_teen-canteen-review",
+    "templateId": "teen-canteen-review",
+    "actualCommandIndexZeroBased": 93,
+    "actualChoice": {
+      "choiceId": "feedback",
+      "eventId": "event_2016_teen-canteen-review",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2016_teen-canteen-review_choice",
+      "date": {
+        "year": 2016,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I helped Sophie turn a canteen rant into useful feedback.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "classmate",
+        "actualJournalText": "Sophie",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_16_4",
+            "fullName": "Sophie Roy",
+            "role": "classmate",
+            "schoolId": "school_person_player_66_1",
+            "school": "Toronto Secondary School",
+            "born": {
+              "year": 1999,
+              "month": 8,
+              "day": 13
+            },
+            "died": {
+              "year": 2045,
+              "month": 10,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/childhood.ts",
+        "line": 255,
+        "fileSha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6",
+        "expandedLiteralSha256": "6e1a31748ada268f9d276be473c903114d33d87a2a7eb408033307eb231cd946"
+      },
+      "primaryCategory": "school-teenage-life",
+      "title": "One star. Still hungry.",
+      "setupTemplate": "{classmate} drafts a fake restaurant review of the school canteen. It includes the phrase “structural pasta”.",
+      "authoredAge": {
+        "min": 12,
+        "max": 17
+      },
+      "authoredContextPredicates": {
+        "school": "secondary",
+        "classmate": true,
+        "teacher": true
+      },
+      "selectedChoice": {
+        "id": "feedback",
+        "label": "Turn it into useful feedback",
+        "changes": {
+          "respect": 3,
+          "smarts": 1
+        },
+        "title": "Less funny, more useful",
+        "result": "You keep the specific complaints and remove the insults. {teacher} helps pass it on.",
+        "journal": "I helped {classmate} turn a canteen rant into useful feedback.",
+        "peerBond": 2,
+        "teacherBond": 2
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 18,
+    "date": {
+      "year": 2018,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2018_adult-open-mic-list",
+    "templateId": "adult-open-mic-list",
+    "actualCommandIndexZeroBased": 120,
+    "actualChoice": {
+      "choiceId": "correct",
+      "eventId": "event_2018_adult-open-mic-list",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2018_adult-open-mic-list_choice",
+      "date": {
+        "year": 2018,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I corrected an open-mic mix-up and stayed in the audience.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 29,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "5d918136951738aa621a1916db02b11610ecdcfa81b9320974d97fdbd02a669c"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "Your name is on the list",
+      "setupTemplate": "At a free open-mic afternoon, the host reads out a name very close to yours. People turn towards you. You came to listen.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "correct",
+        "label": "Point out the mistaken name",
+        "changes": {
+          "respect": 2,
+          "stress": -3
+        },
+        "title": "The intended performer appears",
+        "result": "Someone else stands up, clutching a poem. You applaud with the enthusiasm of a person narrowly spared a stage.",
+        "journal": "I corrected an open-mic mix-up and stayed in the audience."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 20,
+    "date": {
+      "year": 2020,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2020_work-room-temperature",
+    "templateId": "work-room-temperature",
+    "actualCommandIndexZeroBased": 160,
+    "actualChoice": {
+      "choiceId": "compare",
+      "eventId": "event_2020_work-room-temperature",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2020_work-room-temperature_choice",
+      "date": {
+        "year": 2020,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I discussed a workable shared temperature with Robin Roy.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Robin Roy",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_105_14",
+            "fullName": "Robin Roy",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_105_0",
+            "employer": "Toronto Hospitality",
+            "joined": {
+              "year": 2016,
+              "month": 1,
+              "day": 1
+            },
+            "left": null,
+            "born": {
+              "year": 1986,
+              "month": 9,
+              "day": 11
+            },
+            "died": {
+              "year": 2076,
+              "month": 1,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 24,
+        "fileSha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2",
+        "expandedLiteralSha256": "de1278a25a2d1171f293cbf67a69018273ff3cc37fdd1e8e14e93ffb48d87f3d"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "Two people, two climates",
+      "setupTemplate": "You and {coworker} disagree about the temperature of a shared work area. Apparently the same room is hosting two entirely different climates.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "coworker": true,
+        "workplace": true
+      },
+      "selectedChoice": {
+        "id": "compare",
+        "label": "Compare practical ways to make it comfortable",
+        "changes": {
+          "respect": 3,
+          "discipline": 2
+        },
+        "title": "A smaller climate negotiation",
+        "result": "You discuss what each person needs before arguing about a single perfect setting.",
+        "journal": "I discussed a workable shared temperature with {coworker}.",
+        "coworkerBond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 22,
+    "date": {
+      "year": 2022,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2022_partner-other-couples",
+    "templateId": "partner-other-couples",
+    "actualCommandIndexZeroBased": 199,
+    "actualChoice": {
+      "choiceId": "specific",
+      "eventId": "event_2022_partner-other-couples",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2022_partner-other-couples_choice",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I asked Robin Martin what mattered behind a comparison with other couples.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "partner",
+        "actualJournalText": "Robin Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_133_16",
+            "fullName": "Robin Martin",
+            "role": "spouse/partner",
+            "marriageId": "marriage_197",
+            "started": {
+              "year": 2021,
+              "month": 1,
+              "day": 1
+            },
+            "ended": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            },
+            "born": {
+              "year": 1996,
+              "month": 5,
+              "day": 9
+            },
+            "died": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/adultRelationshipStories.ts",
+        "line": 105,
+        "fileSha256": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3",
+        "expandedLiteralSha256": "d1f5aa8e68f27e4c67d05aefeffc47f4aa20209425d001cd079101af9a39e3be"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "Everybody else, apparently",
+      "setupTemplate": "{partner} looks at cheerful pictures of other couples and wonders whether you should be doing more. The pictures contain very few ordinary Tuesdays.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "partner": true
+      },
+      "selectedChoice": {
+        "id": "specific",
+        "label": "Ask what they would actually like more of",
+        "changes": {
+          "smarts": 2,
+          "respect": 2
+        },
+        "title": "A need instead of a comparison",
+        "result": "{partner} talks about wanting more attention. You can understand that better than a collection of photographs.",
+        "journal": "I asked {partner} what mattered behind a comparison with other couples.",
+        "partnerBond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 23,
+    "date": {
+      "year": 2023,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2023_adult-weather-expert",
+    "templateId": "adult-weather-expert",
+    "actualCommandIndexZeroBased": 209,
+    "actualChoice": {
+      "choiceId": "honest",
+      "eventId": "event_2023_adult-weather-expert",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2023_adult-weather-expert_choice",
+      "date": {
+        "year": 2023,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I admitted I could not predict the weather.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 39,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "6d68c4150c19eed19c06e3186211515ca29b8d6dd78e8b0c02b67ea139962256"
+      },
+      "primaryCategory": "university-early-independence",
+      "title": "The local weather department",
+      "setupTemplate": "A stranger asks whether the dark clouds mean rain. You look up. The clouds seem unwilling to publish a timetable.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "honest",
+        "label": "Say you are not sure",
+        "changes": {
+          "respect": 2,
+          "stress": -1
+        },
+        "title": "An accurate forecast of uncertainty",
+        "result": "You both look at the sky for another moment. Nobody mistakes you for a weather service.",
+        "journal": "I admitted I could not predict the weather."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 25,
+    "date": {
+      "year": 2025,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2025_wellbeing-waiting-without-feed",
+    "templateId": "wellbeing-waiting-without-feed",
+    "actualCommandIndexZeroBased": 226,
+    "actualChoice": {
+      "choiceId": "observe",
+      "eventId": "event_2025_wellbeing-waiting-without-feed",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2025_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 59,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "5eff463fb64fe8388d104456345393a546d71ed0391ba7147a2c37b1285b4833"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A minute without filling it",
+      "setupTemplate": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "observe",
+        "label": "Look around for a minute",
+        "changes": {
+          "stress": -3,
+          "smarts": 2
+        },
+        "title": "The world supplies a few details",
+        "result": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "journal": "I spent a short wait noticing what was around me."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 26,
+    "date": {
+      "year": 2026,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2026_wellbeing-ordinary-water",
+    "templateId": "wellbeing-ordinary-water",
+    "actualCommandIndexZeroBased": 233,
+    "actualChoice": {
+      "choiceId": "simple",
+      "eventId": "event_2026_wellbeing-ordinary-water",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2026_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I chose an ordinary drink of water without overcomplicating it.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 39,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "1799b09d974ef026c895fcad9ce5995c6c5271409922f523d36f3718bc627989"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "An unnecessarily complicated refreshment",
+      "setupTemplate": "You want a drink and begin comparing several elaborate options before noticing a perfectly ordinary glass of water within reach.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "simple",
+        "label": "Have the simple drink",
+        "changes": {
+          "energy": 2,
+          "discipline": 2
+        },
+        "title": "The problem was thirst",
+        "result": "You stop making the choice into a project. A simple refreshment is enough for this moment.",
+        "journal": "I chose an ordinary drink of water without overcomplicating it."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 30,
+    "date": {
+      "year": 2030,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2030_work-forgotten-lunch",
+    "templateId": "work-forgotten-lunch",
+    "actualCommandIndexZeroBased": 258,
+    "actualChoice": {
+      "choiceId": "offer",
+      "eventId": "event_2030_work-forgotten-lunch",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2030_work-forgotten-lunch_choice",
+      "date": {
+        "year": 2030,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I offered to share some lunch with Camille Martin.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 19,
+        "fileSha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2",
+        "expandedLiteralSha256": "039c0f2e616c5370a656b9baa95c9efcfd851b37ef3a71c4e9665cd6096a6bea"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "Lunch is in another location",
+      "setupTemplate": "{coworker} realises they left their prepared lunch elsewhere. They remember packing it with exceptional care, which has not made it more present.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "coworker": true,
+        "workplace": true
+      },
+      "selectedChoice": {
+        "id": "offer",
+        "label": "Offer to share a little of yours",
+        "changes": {
+          "happiness": 3,
+          "energy": -2
+        },
+        "title": "An ordinary small kindness",
+        "result": "You make a simple offer without turning it into a favour to be repaid. {coworker} appreciates being considered.",
+        "journal": "I offered to share some lunch with {coworker}.",
+        "coworkerBond": 5
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 31,
+    "date": {
+      "year": 2031,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2031_wellbeing-rehearsed-argument",
+    "templateId": "wellbeing-rehearsed-argument",
+    "actualCommandIndexZeroBased": 265,
+    "actualChoice": {
+      "choiceId": "ground",
+      "eventId": "event_2031_wellbeing-rehearsed-argument",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2031_wellbeing-rehearsed-argument_choice",
+      "date": {
+        "year": 2031,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I stopped rehearsing a disagreement that had not happened.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 44,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "8020909c2868762879695f10cf0da5eb5a515cd603370dcb037c07b2af934624"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "An argument without the other person",
+      "setupTemplate": "You catch yourself rehearsing a disagreement that has not happened. In your version, the other person keeps delivering exactly the wrong line.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "ground",
+        "label": "Return to what is happening now",
+        "changes": {
+          "stress": -4,
+          "discipline": 2
+        },
+        "title": "The rehearsal loses its stage",
+        "result": "You notice the room around you and let the imaginary exchange stop. Nothing requires a response at this moment.",
+        "journal": "I stopped rehearsing a disagreement that had not happened."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 33,
+    "date": {
+      "year": 2033,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2033_work-safety-arrow",
+    "templateId": "work-safety-arrow",
+    "actualCommandIndexZeroBased": 278,
+    "actualChoice": {
+      "choiceId": "report",
+      "eventId": "event_2033_work-safety-arrow",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2033_work-safety-arrow_choice",
+      "date": {
+        "year": 2033,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I reported a confusing safety sign to Jamie Roy.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "supervisor",
+        "actualJournalText": "Jamie Roy",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_19",
+            "fullName": "Jamie Roy",
+            "role": "supervisor",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2035,
+              "month": 11,
+              "day": 1
+            },
+            "born": {
+              "year": 1970,
+              "month": 10,
+              "day": 4
+            },
+            "died": {
+              "year": 2061,
+              "month": 1,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 60,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "c260ae08480f70236e0e6376e2321be872ac1c8a04c3d31989f7894aa844bc69"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "This way to the wall",
+      "setupTemplate": "A safety direction sign at {workplace} points straight at a blank wall. {supervisor} is nearby. The wall offers no further guidance.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "selectedChoice": {
+        "id": "report",
+        "label": "Point it out to {supervisor}",
+        "changes": {
+          "respect": 4,
+          "stress": -1
+        },
+        "title": "A useful thing to notice",
+        "result": "{supervisor} checks it and takes responsibility for getting it corrected. You leave the fitting to someone authorised.",
+        "journal": "I reported a confusing safety sign to {supervisor}.",
+        "supervisorBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 35,
+    "date": {
+      "year": 2035,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2035_wellbeing-stretch-after-sitting",
+    "templateId": "wellbeing-stretch-after-sitting",
+    "actualCommandIndexZeroBased": 291,
+    "actualChoice": {
+      "choiceId": "move",
+      "eventId": "event_2035_wellbeing-stretch-after-sitting",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2035_wellbeing-stretch-after-sitting_choice",
+      "date": {
+        "year": 2035,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I took a gentle movement break after sitting still.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 34,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "b126d34babcfabed351ae5977d79b4be6c21354e109a7f9d6ec8cddc85277c51"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Your shoulders have a complaint",
+      "setupTemplate": "After sitting in the same position for a while, you notice that your shoulders appear to have crept up towards your ears.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "move",
+        "label": "Take a gentle movement break",
+        "changes": {
+          "energy": 3,
+          "stress": -3
+        },
+        "title": "A different position helps",
+        "result": "You loosen up at a comfortable pace and return to what you were doing. You had not noticed how stiff you were.",
+        "journal": "I took a gentle movement break after sitting still."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 36,
+    "date": {
+      "year": 2036,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2036_work-quiet-kindness",
+    "templateId": "work-quiet-kindness",
+    "actualCommandIndexZeroBased": 298,
+    "actualChoice": {
+      "choiceId": "thanks",
+      "eventId": "event_2036_work-quiet-kindness",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2036_work-quiet-kindness_choice",
+      "date": {
+        "year": 2036,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I thanked Camille Martin for returning something I had misplaced.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 87,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "e77a68436c8dc829a02397578cbe069c7a2b145d6c3d0cc483a742b24eccbbc3"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "A small favour, correctly remembered",
+      "setupTemplate": "{coworker} quietly brings back something you left in the break area at {workplace}. You had been conducting a very serious search in the wrong place.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "coworker": true
+      },
+      "selectedChoice": {
+        "id": "thanks",
+        "label": "Thank {coworker} properly",
+        "changes": {
+          "happiness": 3,
+          "stress": -2
+        },
+        "title": "Found, with help",
+        "result": "You stop searching and say what the small favour saved you. {coworker} looks pleased.",
+        "journal": "I thanked {coworker} for returning something I had misplaced.",
+        "coworkerBond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 38,
+    "date": {
+      "year": 2038,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2038_work-message-love",
+    "templateId": "work-message-love",
+    "actualCommandIndexZeroBased": 311,
+    "actualChoice": {
+      "choiceId": "correct",
+      "eventId": "event_2038_work-message-love",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2038_work-message-love_choice",
+      "date": {
+        "year": 2038,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I corrected an accidental family sign-off in a message to Jamie Campbell.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "supervisor",
+        "actualJournalText": "Jamie Campbell",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_298_23",
+            "fullName": "Jamie Campbell",
+            "role": "supervisor",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2035,
+              "month": 12,
+              "day": 1
+            },
+            "left": {
+              "year": 2051,
+              "month": 5,
+              "day": 1
+            },
+            "born": {
+              "year": 1986,
+              "month": 4,
+              "day": 25
+            },
+            "died": {
+              "year": 2073,
+              "month": 10,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 42,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "bf4edf6a85df44c82d9907141b4373bf9f4aee1787dbf1c10e0ae5434e295fd3"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "An unexpected sign-off",
+      "setupTemplate": "You finish an ordinary message to {supervisor} with “Love you”. Your thumb appears to think you are talking to family.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "selectedChoice": {
+        "id": "correct",
+        "label": "Send “Sorry, wrong sign-off”",
+        "changes": {
+          "stress": -2,
+          "respect": 2
+        },
+        "title": "Four words do the job",
+        "result": "{supervisor} replies with “No problem”. The exchange ends without a committee.",
+        "journal": "I corrected an accidental family sign-off in a message to {supervisor}.",
+        "supervisorBond": 1
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 39,
+    "date": {
+      "year": 2039,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2039_work-photo-blink",
+    "templateId": "work-photo-blink",
+    "actualCommandIndexZeroBased": 318,
+    "actualChoice": {
+      "choiceId": "retake",
+      "eventId": "event_2039_work-photo-blink",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2039_work-photo-blink_choice",
+      "date": {
+        "year": 2039,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I asked Camille Martin to retake an impressively mistimed group photo.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 51,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "29d3eca241826eb15253244b9a07239c5859c203eafa18dd2e3db63a280a391f"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "Everybody blinked separately",
+      "setupTemplate": "{coworker} shows you a photo of a few people from {workplace}. Between you, the group has managed roughly one open eye.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "coworker": true
+      },
+      "selectedChoice": {
+        "id": "retake",
+        "label": "Ask for one quick retake",
+        "changes": {
+          "happiness": 3,
+          "stress": -1
+        },
+        "title": "A modest improvement in eyes",
+        "result": "{coworker} counts down this time. It helps most of you.",
+        "journal": "I asked {coworker} to retake an impressively mistimed group photo.",
+        "coworkerBond": 2
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 40,
+    "date": {
+      "year": 2040,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2040_adult-perfect-introduction",
+    "templateId": "adult-perfect-introduction",
+    "actualCommandIndexZeroBased": 325,
+    "actualChoice": {
+      "choiceId": "brief",
+      "eventId": "event_2040_adult-perfect-introduction",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2040_adult-perfect-introduction_choice",
+      "date": {
+        "year": 2040,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I kept a group introduction short enough to start a conversation.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 114,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "5f843aa31ebe1e5dec9d955e68b774432b6cf67b8b7e065926c713abdc436eea"
+      },
+      "primaryCategory": "university-early-independence",
+      "title": "A biography of thirty seconds",
+      "setupTemplate": "Before a discussion circle begins, the host asks everyone for a very short introduction. The first person has already described three previous homes.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "brief",
+        "label": "Give your name and one interest",
+        "changes": {
+          "respect": 3,
+          "stress": -2
+        },
+        "title": "Plenty to begin with",
+        "result": "Someone asks about the interest later. Your introduction leaves room for an actual conversation.",
+        "journal": "I kept a group introduction short enough to start a conversation."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 41,
+    "date": {
+      "year": 2041,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2041_home-found-old-list",
+    "templateId": "home-found-old-list",
+    "actualCommandIndexZeroBased": 332,
+    "actualChoice": {
+      "choiceId": "review",
+      "eventId": "event_2041_home-found-old-list",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2041_home-found-old-list_choice",
+      "date": {
+        "year": 2041,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I reviewed an old urgent list instead of inheriting all its worries.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/homeLifeStories.ts",
+        "line": 24,
+        "fileSha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702",
+        "expandedLiteralSha256": "a7f72eac070cc350ec8752696cca5adc5d2caefa57351885ea88533c075cdc81"
+      },
+      "primaryCategory": "university-early-independence",
+      "title": "Urgent, according to an old list",
+      "setupTemplate": "While sorting papers at home, you find a list headed “ABSOLUTELY ESSENTIAL”. Half the items no longer mean anything to you.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "home": true
+      },
+      "selectedChoice": {
+        "id": "review",
+        "label": "Keep only what still matters",
+        "changes": {
+          "discipline": 4,
+          "stress": -3
+        },
+        "title": "A shorter present-day list",
+        "result": "You separate current tasks from expired urgency. The old handwriting is allowed to have changed its mind.",
+        "journal": "I reviewed an old urgent list instead of inheriting all its worries."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 42,
+    "date": {
+      "year": 2042,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2042_work-break-playlist",
+    "templateId": "work-break-playlist",
+    "actualCommandIndexZeroBased": 339,
+    "actualChoice": {
+      "choiceId": "listen",
+      "eventId": "event_2042_work-break-playlist",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2042_work-break-playlist_choice",
+      "date": {
+        "year": 2042,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened to a favourite song with Camille Martin.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 33,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "073051669ca055e1c5259d1914228055d2d8ab60e1c682fb94dca8e79077ac9f"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "One song, several opinions",
+      "setupTemplate": "During a break, {coworker} offers to play a song. It has an introduction long enough to apply for its own break.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "coworker": true
+      },
+      "selectedChoice": {
+        "id": "listen",
+        "label": "Give it one proper listen",
+        "changes": {
+          "happiness": 3,
+          "stress": -2
+        },
+        "title": "A better chorus than expected",
+        "result": "The song eventually arrives at its point. {coworker} tells you why they like it.",
+        "journal": "I listened to a favourite song with {coworker}.",
+        "coworkerBond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 43,
+    "date": {
+      "year": 2043,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2043_bad-review",
+    "templateId": "bad-review",
+    "actualCommandIndexZeroBased": 346,
+    "actualChoice": {
+      "choiceId": "clarify",
+      "eventId": "event_2043_bad-review",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2043_bad-review_choice",
+      "date": {
+        "year": 2043,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I clarified an online misunderstanding without turning it into a project.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 139,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "e1b6b9dd8ce9be23582b4d01993ef8f21471dc30cfe2b80db43028488a7f565d"
+      },
+      "primaryCategory": "fame-social-media",
+      "title": "A masterpiece in the comments",
+      "setupTemplate": "A stranger misunderstands something you wrote online and responds with a paragraph that has clearly had a difficult morning.",
+      "authoredAge": {
+        "min": 18,
+        "max": 85
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "clarify",
+        "label": "Clarify once, politely",
+        "changes": {
+          "respect": 3,
+          "stress": 1
+        },
+        "title": "One reply is enough",
+        "result": "You explain what you meant, then leave it there. The internet survives.",
+        "journal": "I clarified an online misunderstanding without turning it into a project."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 44,
+    "date": {
+      "year": 2044,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2044_work-breakroom-sign",
+    "templateId": "work-breakroom-sign",
+    "actualCommandIndexZeroBased": 353,
+    "actualChoice": {
+      "choiceId": "clear",
+      "eventId": "event_2044_work-breakroom-sign",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2044_work-breakroom-sign_choice",
+      "date": {
+        "year": 2044,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I helped leave the break area tidier with Camille Martin.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 24,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "e58d876c3ad5540e8062599e9f22a02f1bf79b295c09fcb2e4a55620021ad7f1"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "Polite capitals",
+      "setupTemplate": "A note in the break area says PLEASE LEAVE THIS SPACE AS YOU FOUND IT. {coworker} points out that this would preserve the problem indefinitely.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "coworker": true
+      },
+      "selectedChoice": {
+        "id": "clear",
+        "label": "Clear your things and one extra mess",
+        "changes": {
+          "discipline": 3,
+          "energy": -2
+        },
+        "title": "A small local improvement",
+        "result": "You leave a clean space without launching a tribunal. {coworker} takes their things too.",
+        "journal": "I helped leave the break area tidier with {coworker}.",
+        "coworkerBond": 2
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 46,
+    "date": {
+      "year": 2046,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2046_work-training-slogan",
+    "templateId": "work-training-slogan",
+    "actualCommandIndexZeroBased": 366,
+    "actualChoice": {
+      "choiceId": "practical",
+      "eventId": "event_2046_work-training-slogan",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2046_work-training-slogan_choice",
+      "date": {
+        "year": 2046,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I turned a vague work slogan into a practical example for Camille Martin.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Camille Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_207_20",
+            "fullName": "Camille Martin",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2022,
+              "month": 1,
+              "day": 1
+            },
+            "left": {
+              "year": 2055,
+              "month": 9,
+              "day": 1
+            },
+            "born": {
+              "year": 1990,
+              "month": 8,
+              "day": 15
+            },
+            "died": {
+              "year": 2057,
+              "month": 6,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 29,
+        "fileSha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2",
+        "expandedLiteralSha256": "9f77aac42c5d04c5a4ef33d3786531b9007a466698ad5d09843ad86ba36f8b8f"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "The slide says to be excellent",
+      "setupTemplate": "A shared training slide instructs everyone to “deliver excellence proactively”. {coworker} quietly asks what anyone is supposed to do differently.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "coworker": true,
+        "workplace": true
+      },
+      "selectedChoice": {
+        "id": "practical",
+        "label": "Translate it into one practical example",
+        "changes": {
+          "smarts": 3,
+          "respect": 2
+        },
+        "title": "The slogan acquires a verb",
+        "result": "You identify a small action that would actually help. {coworker} finds the example more useful than the slide.",
+        "journal": "I turned a vague work slogan into a practical example for {coworker}.",
+        "coworkerBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 47,
+    "date": {
+      "year": 2047,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2047_adult-repair-table",
+    "templateId": "adult-repair-table",
+    "actualCommandIndexZeroBased": 373,
+    "actualChoice": {
+      "choiceId": "ask",
+      "eventId": "event_2047_adult-repair-table",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2047_adult-repair-table_choice",
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I learned how a repair volunteer worked through uncertainty.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 64,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "e9de891e12f29466f64c6bb05022006e46e990666f0d4115de861dcaafe9b7c5"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "The expert is also guessing",
+      "setupTemplate": "At a free repair demonstration, the volunteer studies a harmless practice mechanism and says, “Well, that is interesting,” three times.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "ask",
+        "label": "Ask what they are checking",
+        "changes": {
+          "smarts": 4,
+          "respect": 1
+        },
+        "title": "The thinking becomes visible",
+        "result": "They explain the possibilities and rule one out. Not knowing immediately is part of the demonstration.",
+        "journal": "I learned how a repair volunteer worked through uncertainty."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 49,
+    "date": {
+      "year": 2049,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2049_wellbeing-stretch-after-sitting",
+    "templateId": "wellbeing-stretch-after-sitting",
+    "actualCommandIndexZeroBased": 386,
+    "actualChoice": {
+      "choiceId": "move",
+      "eventId": "event_2049_wellbeing-stretch-after-sitting",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2049_wellbeing-stretch-after-sitting_choice",
+      "date": {
+        "year": 2049,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I took a gentle movement break after sitting still.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 34,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "b126d34babcfabed351ae5977d79b4be6c21354e109a7f9d6ec8cddc85277c51"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Your shoulders have a complaint",
+      "setupTemplate": "After sitting in the same position for a while, you notice that your shoulders appear to have crept up towards your ears.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "move",
+        "label": "Take a gentle movement break",
+        "changes": {
+          "energy": 3,
+          "stress": -3
+        },
+        "title": "A different position helps",
+        "result": "You loosen up at a comfortable pace and return to what you were doing. You had not noticed how stiff you were.",
+        "journal": "I took a gentle movement break after sitting still."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 50,
+    "date": {
+      "year": 2050,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2050_familiar-street",
+    "templateId": "familiar-street",
+    "actualCommandIndexZeroBased": 393,
+    "actualChoice": {
+      "choiceId": "walk",
+      "eventId": "event_2050_familiar-street",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2050_familiar-street_choice",
+      "date": {
+        "year": 2050,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I walked through a familiar neighbourhood and noticed its changes.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 193,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "d7623d1089aadeccace04e588ffac6d3b2e08cbf31eb83ce2fb14dde540778e7"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A place that remembers differently",
+      "setupTemplate": "You return to a familiar part of {city}. A shop has changed, a wall has been painted, and one corner looks exactly as you remember.",
+      "authoredAge": {
+        "min": 40,
+        "max": 100
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "walk",
+        "label": "Take the longer way around",
+        "changes": {
+          "happiness": 4,
+          "fitness": 2
+        },
+        "title": "Room for both versions",
+        "result": "You find a few things you miss and a few things you like better.",
+        "journal": "I walked through a familiar neighbourhood and noticed its changes."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 51,
+    "date": {
+      "year": 2051,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2051_work-final-file",
+    "templateId": "work-final-file",
+    "actualCommandIndexZeroBased": 400,
+    "actualChoice": {
+      "choiceId": "confirm",
+      "eventId": "event_2051_work-final-file",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2051_work-final-file_choice",
+      "date": {
+        "year": 2051,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I checked the current document version with Jamie Campbell.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "supervisor",
+        "actualJournalText": "Jamie Campbell",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_298_23",
+            "fullName": "Jamie Campbell",
+            "role": "supervisor",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2035,
+              "month": 12,
+              "day": 1
+            },
+            "left": {
+              "year": 2051,
+              "month": 5,
+              "day": 1
+            },
+            "born": {
+              "year": 1986,
+              "month": 4,
+              "day": 25
+            },
+            "died": {
+              "year": 2073,
+              "month": 10,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 14,
+        "fileSha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2",
+        "expandedLiteralSha256": "7437c957d493a8985f3ce52c939fbec4491344e5a40c1048ad2099eafa4e3f1f"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "FINAL, followed by several qualifications",
+      "setupTemplate": "{supervisor} asks you to check a shared document. The available copies include FINAL, FINAL_NEW and FINAL_NEW_ACTUAL.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "supervisor": true,
+        "workplace": true
+      },
+      "selectedChoice": {
+        "id": "confirm",
+        "label": "Confirm which copy is current",
+        "changes": {
+          "discipline": 4,
+          "respect": 2
+        },
+        "title": "One document gets the job",
+        "result": "{supervisor} identifies the current version. The others stop competing for your attention.",
+        "journal": "I checked the current document version with {supervisor}.",
+        "supervisorBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 52,
+    "date": {
+      "year": 2052,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2052_home-found-old-list",
+    "templateId": "home-found-old-list",
+    "actualCommandIndexZeroBased": 407,
+    "actualChoice": {
+      "choiceId": "review",
+      "eventId": "event_2052_home-found-old-list",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2052_home-found-old-list_choice",
+      "date": {
+        "year": 2052,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I reviewed an old urgent list instead of inheriting all its worries.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/homeLifeStories.ts",
+        "line": 24,
+        "fileSha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702",
+        "expandedLiteralSha256": "a7f72eac070cc350ec8752696cca5adc5d2caefa57351885ea88533c075cdc81"
+      },
+      "primaryCategory": "university-early-independence",
+      "title": "Urgent, according to an old list",
+      "setupTemplate": "While sorting papers at home, you find a list headed “ABSOLUTELY ESSENTIAL”. Half the items no longer mean anything to you.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "home": true
+      },
+      "selectedChoice": {
+        "id": "review",
+        "label": "Keep only what still matters",
+        "changes": {
+          "discipline": 4,
+          "stress": -3
+        },
+        "title": "A shorter present-day list",
+        "result": "You separate current tasks from expired urgency. The old handwriting is allowed to have changed its mind.",
+        "journal": "I reviewed an old urgent list instead of inheriting all its worries."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 53,
+    "date": {
+      "year": 2053,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2053_home-box-worth-keeping",
+    "templateId": "home-box-worth-keeping",
+    "actualCommandIndexZeroBased": 414,
+    "actualChoice": {
+      "choiceId": "recycle",
+      "eventId": "event_2053_home-box-worth-keeping",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2053_home-box-worth-keeping_choice",
+      "date": {
+        "year": 2053,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I recycled a good box instead of adding it to the collection.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/homeLifeStories.ts",
+        "line": 14,
+        "fileSha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702",
+        "expandedLiteralSha256": "0515e47c401117a99d6c5345fc0a5e91f4c0564abc6f1aa5a8d42c3fa48d8668"
+      },
+      "primaryCategory": "university-early-independence",
+      "title": "A box of exceptional quality",
+      "setupTemplate": "You finish unpacking an ordinary household item and decide its empty box might be too useful to throw away. The cupboard already contains evidence of this policy.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "home": true
+      },
+      "selectedChoice": {
+        "id": "recycle",
+        "label": "Recycle the box properly",
+        "changes": {
+          "discipline": 4,
+          "stress": -2
+        },
+        "title": "Space for a future decision",
+        "result": "You flatten it and clear the area. The hypothetical need for this exact box remains hypothetical.",
+        "journal": "I recycled a good box instead of adding it to the collection."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 55,
+    "date": {
+      "year": 2055,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2055_work-three-priorities",
+    "templateId": "work-three-priorities",
+    "actualCommandIndexZeroBased": 427,
+    "actualChoice": {
+      "choiceId": "order",
+      "eventId": "event_2055_work-three-priorities",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2055_work-three-priorities_choice",
+      "date": {
+        "year": 2055,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I asked Charlie Wilson to put three urgent tasks in order.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "supervisor",
+        "actualJournalText": "Charlie Wilson",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_407_25",
+            "fullName": "Charlie Wilson",
+            "role": "supervisor",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2051,
+              "month": 6,
+              "day": 1
+            },
+            "left": null,
+            "born": {
+              "year": 2006,
+              "month": 8,
+              "day": 2
+            },
+            "died": {
+              "year": 2095,
+              "month": 9,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workplaceStories.ts",
+        "line": 6,
+        "fileSha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93",
+        "expandedLiteralSha256": "acabe93552f2ffd23e2559bf6eb496f8fb4bbe8c06a9644204926d4e5057a03f"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "Three first priorities",
+      "setupTemplate": "At {workplace}, {supervisor} calls three different tasks “the first priority”. You have two hands and a follow-up question.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "workplace": true,
+        "supervisor": true
+      },
+      "selectedChoice": {
+        "id": "order",
+        "label": "Ask which one comes first",
+        "changes": {
+          "discipline": 3,
+          "stress": -2
+        },
+        "title": "A useful numbered list",
+        "result": "{supervisor} chooses an order. None of the tasks vanish, but they stop competing for the same minute.",
+        "journal": "I asked {supervisor} to put three urgent tasks in order.",
+        "supervisorBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 56,
+    "date": {
+      "year": 2056,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2056_home-squeak-investigation",
+    "templateId": "home-squeak-investigation",
+    "actualCommandIndexZeroBased": 434,
+    "actualChoice": {
+      "choiceId": "check",
+      "eventId": "event_2056_home-squeak-investigation",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2056_home-squeak-investigation_choice",
+      "date": {
+        "year": 2056,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I worked out where a repeated squeak in my home came from.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/homeLifeStories.ts",
+        "line": 9,
+        "fileSha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702",
+        "expandedLiteralSha256": "f3335fe2b8df78d2edeff636f75e9673bf8b19513233057cf3758069b3a61aab"
+      },
+      "primaryCategory": "money-assets-investments",
+      "title": "The house has one note",
+      "setupTemplate": "You notice a faint squeak each time you move a chair. After the fifth repetition, it begins to sound as though the room is commenting on your decisions.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "home": true
+      },
+      "selectedChoice": {
+        "id": "check",
+        "label": "Check where the sound comes from",
+        "changes": {
+          "smarts": 3,
+          "stress": -3
+        },
+        "title": "A small mystery identified",
+        "result": "You locate the contact point and stop treating the noise as a personal opinion. Identifying it is enough for now.",
+        "journal": "I worked out where a repeated squeak in my home came from."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 58,
+    "date": {
+      "year": 2058,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2058_rest-guilt",
+    "templateId": "rest-guilt",
+    "actualCommandIndexZeroBased": 447,
+    "actualChoice": {
+      "choiceId": "rest",
+      "eventId": "event_2058_rest-guilt",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2058_rest-guilt_choice",
+      "date": {
+        "year": 2058,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I let myself rest without turning it into another task.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 148,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "cf3a795af01cfa2f579b8e784fe24366a3480b7bb673d965e77fd6b759ed7b58"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "An aggressively empty afternoon",
+      "setupTemplate": "For once, nothing urgently needs you. Your brain suggests inventing a task so you can complain about having no free time.",
+      "authoredAge": {
+        "min": 20,
+        "max": 75
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "rest",
+        "label": "Rest without earning it first",
+        "changes": {
+          "energy": 8,
+          "stress": -5
+        },
+        "title": "Nothing catches fire",
+        "result": "You take a quiet afternoon. The world manages.",
+        "journal": "I let myself rest without turning it into another task."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 59,
+    "date": {
+      "year": 2059,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2059_partner-public-affection",
+    "templateId": "partner-public-affection",
+    "actualCommandIndexZeroBased": 454,
+    "actualChoice": {
+      "choiceId": "explain",
+      "eventId": "event_2059_partner-public-affection",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2059_partner-public-affection_choice",
+      "date": {
+        "year": 2059,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I explained a boundary around public affection to Robin Martin.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "partner",
+        "actualJournalText": "Robin Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_133_16",
+            "fullName": "Robin Martin",
+            "role": "spouse/partner",
+            "marriageId": "marriage_197",
+            "started": {
+              "year": 2021,
+              "month": 1,
+              "day": 1
+            },
+            "ended": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            },
+            "born": {
+              "year": 1996,
+              "month": 5,
+              "day": 9
+            },
+            "died": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/adultRelationshipStories.ts",
+        "line": 123,
+        "fileSha256": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3",
+        "expandedLiteralSha256": "33894f2c6a4ff0e9c01990af9032ddb847e1721ca72b83b12b911313175dee2a"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "Comfort has a location",
+      "setupTemplate": "While you are out together, {partner} reaches for your hand. You feel awkward about public affection today and are unsure how to say it kindly.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "partner": true
+      },
+      "selectedChoice": {
+        "id": "explain",
+        "label": "Explain your comfort without blaming them",
+        "changes": {
+          "respect": 3,
+          "stress": -2
+        },
+        "title": "A boundary with context",
+        "result": "{partner} understands that the request is about how you feel here. Neither of you has to guess what the hesitation means.",
+        "journal": "I explained a boundary around public affection to {partner}.",
+        "partnerBond": 3
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 62,
+    "date": {
+      "year": 2062,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2062_adult-small-volunteer-task",
+    "templateId": "adult-small-volunteer-task",
+    "actualCommandIndexZeroBased": 473,
+    "actualChoice": {
+      "choiceId": "help",
+      "eventId": "event_2062_adult-small-volunteer-task",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2062_adult-small-volunteer-task_choice",
+      "date": {
+        "year": 2062,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I helped secure a wind-blown community banner.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 84,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "8b1253f08f77a922d009fc68bad05eb2ce39f0ead52f215e1c8813d3f1709465"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "A very small responsibility",
+      "setupTemplate": "A community volunteer asks you to hold one end of a banner for a minute. The wind immediately applies for the other end.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "help",
+        "label": "Hold it while they secure it",
+        "changes": {
+          "respect": 3,
+          "energy": -2
+        },
+        "title": "A cooperative wind problem",
+        "result": "You work out a steadier angle together. The banner eventually becomes readable rather than airborne.",
+        "journal": "I helped secure a wind-blown community banner."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 63,
+    "date": {
+      "year": 2063,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2063_adult-free-lecture-question",
+    "templateId": "adult-free-lecture-question",
+    "actualCommandIndexZeroBased": 480,
+    "actualChoice": {
+      "choiceId": "ask",
+      "eventId": "event_2063_adult-free-lecture-question",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2063_adult-free-lecture-question_choice",
+      "date": {
+        "year": 2063,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I asked a specific question at a public talk.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/ordinaryAdultStories.ts",
+        "line": 14,
+        "fileSha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d",
+        "expandedLiteralSha256": "441800f1352e5089b3f3b992ff025ed0bcdfb730a76aaf5509eb9260b4449932"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "Any final questions?",
+      "setupTemplate": "At the end of a public talk, the speaker asks for questions. The person beside you has been whispering that the explanation was completely wrong.",
+      "authoredAge": {
+        "min": 18,
+        "max": 65
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "ask",
+        "label": "Ask about the disputed point",
+        "changes": {
+          "smarts": 3,
+          "respect": 2
+        },
+        "title": "A useful distinction",
+        "result": "The speaker explains what the claim does and does not cover. The whispering becomes interested listening.",
+        "journal": "I asked a specific question at a public talk."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 64,
+    "date": {
+      "year": 2064,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2064_work-invitation-outside",
+    "templateId": "work-invitation-outside",
+    "actualCommandIndexZeroBased": 487,
+    "actualChoice": {
+      "choiceId": "accept",
+      "eventId": "event_2064_work-invitation-outside",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2064_work-invitation-outside_choice",
+      "date": {
+        "year": 2064,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I spent a little time with Jamie Wilson outside work.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "coworker",
+        "actualJournalText": "Jamie Wilson",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_434_26",
+            "fullName": "Jamie Wilson",
+            "role": "coworker",
+            "workplaceId": "workplace_person_player_207_1",
+            "employer": "Toronto Finance",
+            "joined": {
+              "year": 2055,
+              "month": 10,
+              "day": 1
+            },
+            "left": null,
+            "born": {
+              "year": 2014,
+              "month": 10,
+              "day": 18
+            },
+            "died": null
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/workingLifeStories.ts",
+        "line": 39,
+        "fileSha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2",
+        "expandedLiteralSha256": "38ee1764340c64d057ff0cc45d528a419d6247aa832d45597b10df04d0ac3447"
+      },
+      "primaryCategory": "employment-special-careers",
+      "title": "An invitation past the workday",
+      "setupTemplate": "{coworker} suggests a free walk after work. You have got used to talking as colleagues, which makes the small invitation feel surprisingly different.",
+      "authoredAge": {
+        "min": 16,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true,
+        "coworker": true,
+        "workplace": true
+      },
+      "selectedChoice": {
+        "id": "accept",
+        "label": "Accept the short walk",
+        "changes": {
+          "happiness": 4,
+          "energy": -3
+        },
+        "title": "The conversation leaves the job behind",
+        "result": "You talk about ordinary things outside work. The shared employer is not the only subject you have.",
+        "journal": "I spent a little time with {coworker} outside work.",
+        "coworkerBond": 5
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 65,
+    "date": {
+      "year": 2065,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2065_wellbeing-waiting-without-feed",
+    "templateId": "wellbeing-waiting-without-feed",
+    "actualCommandIndexZeroBased": 494,
+    "actualChoice": {
+      "choiceId": "observe",
+      "eventId": "event_2065_wellbeing-waiting-without-feed",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2065_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2065,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 59,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "5eff463fb64fe8388d104456345393a546d71ed0391ba7147a2c37b1285b4833"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A minute without filling it",
+      "setupTemplate": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "observe",
+        "label": "Look around for a minute",
+        "changes": {
+          "stress": -3,
+          "smarts": 2
+        },
+        "title": "The world supplies a few details",
+        "result": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "journal": "I spent a short wait noticing what was around me."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 66,
+    "date": {
+      "year": 2066,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2066_community-garden",
+    "templateId": "community-garden",
+    "actualCommandIndexZeroBased": 499,
+    "actualChoice": {
+      "choiceId": "join",
+      "eventId": "event_2066_community-garden",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2066_community-garden_choice",
+      "date": {
+        "year": 2066,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I volunteered at a community garden in Toronto.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "city",
+        "actualJournalText": "Toronto",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "city": "Toronto",
+            "country": "CA",
+            "playerRelocationRecords": 0
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 130,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "7019e0347fefa5d0b1881b832cf0a922bbe80d13ebfc6550b05ccc7c977c0b35"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "The carrots have a committee",
+      "setupTemplate": "A notice in {city} asks for volunteers at a community garden. It promises fresh air and makes no promises about the weather.",
+      "authoredAge": {
+        "min": 18,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "join",
+        "label": "Help for an afternoon",
+        "changes": {
+          "happiness": 4,
+          "fitness": 3,
+          "energy": -4
+        },
+        "title": "Useful dirt",
+        "result": "You weed a patch, meet a few people, and leave with very honest shoes.",
+        "journal": "I volunteered at a community garden in {city}."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 67,
+    "date": {
+      "year": 2067,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2067_wellbeing-good-day-pressure",
+    "templateId": "wellbeing-good-day-pressure",
+    "actualCommandIndexZeroBased": 502,
+    "actualChoice": {
+      "choiceId": "pace",
+      "eventId": "event_2067_wellbeing-good-day-pressure",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2067_wellbeing-good-day-pressure_choice",
+      "date": {
+        "year": 2067,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I paced a good day instead of filling every available moment.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 64,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "a9ba4437c25b840fd4f2998f3d2ea7f27a31103788450aa5ffee8e1599a05536"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "You must make the most of it",
+      "setupTemplate": "You feel better rested than usual and immediately begin planning enough tasks to use every available bit of energy.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "pace",
+        "label": "Choose a few priorities and leave room",
+        "changes": {
+          "discipline": 3,
+          "stress": -2,
+          "energy": -1
+        },
+        "title": "A useful day with an ending",
+        "result": "You use some energy without treating all of it as a resource that must be exhausted.",
+        "journal": "I paced a good day instead of filling every available moment."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 68,
+    "date": {
+      "year": 2068,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2068_later-changed-favourite",
+    "templateId": "later-changed-favourite",
+    "actualCommandIndexZeroBased": 505,
+    "actualChoice": {
+      "choiceId": "update",
+      "eventId": "event_2068_later-changed-favourite",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2068_later-changed-favourite_choice",
+      "date": {
+        "year": 2068,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I allowed an old favourite to stop being my current favourite.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 39,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "03bb816fd970590889ca54657d4e21493337d372abd6583d25b59620f751bbd2"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "You are allowed another favourite",
+      "setupTemplate": "You notice that something you used to call your favourite no longer appeals to you much. The old answer has been living on habit longer than enthusiasm.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "update",
+        "label": "Let your preference change",
+        "changes": {
+          "happiness": 4,
+          "stress": -2
+        },
+        "title": "A current answer replaces an old one",
+        "result": "You choose what you enjoy now. Loyalty to an earlier preference does not need to occupy every present choice.",
+        "journal": "I allowed an old favourite to stop being my current favourite."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 69,
+    "date": {
+      "year": 2069,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2069_later-forgotten-telephone-number",
+    "templateId": "later-forgotten-telephone-number",
+    "actualCommandIndexZeroBased": 508,
+    "actualChoice": {
+      "choiceId": "laugh",
+      "eventId": "event_2069_later-forgotten-telephone-number",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2069_later-forgotten-telephone-number_choice",
+      "date": {
+        "year": 2069,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I remembered an old telephone number at an unhelpful moment.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 14,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "5291e75e50a1cbf946432d882ebc66b81611128de2d6efaa326e45dbca4c07df"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A number with nowhere to go",
+      "setupTemplate": "You suddenly remember a telephone number you have not used for years. You cannot remember what you entered a room to fetch, but the number is perfect.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "laugh",
+        "label": "Enjoy the memory’s strange priorities",
+        "changes": {
+          "happiness": 4,
+          "stress": -2
+        },
+        "title": "An impressive useless recital",
+        "result": "You repeat the number once and laugh at the timing. Memory has supplied an answer to a question nobody asked.",
+        "journal": "I remembered an old telephone number at an unhelpful moment."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 70,
+    "date": {
+      "year": 2070,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2070_useful-advice",
+    "templateId": "useful-advice",
+    "actualCommandIndexZeroBased": 511,
+    "actualChoice": {
+      "choiceId": "listen",
+      "eventId": "event_2070_useful-advice",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2070_useful-advice_choice",
+      "date": {
+        "year": 2070,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened before giving advice to someone younger.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 211,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "3adc3e983fed552a95f98b34767c786661adca0bdc93581349940abe2a6aa132"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "“What would you do?”",
+      "setupTemplate": "A younger person asks for your advice about a difficult decision. It is tempting to answer a question they have not actually asked.",
+      "authoredAge": {
+        "min": 60,
+        "max": 115
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "listen",
+        "label": "Ask what matters most to them",
+        "changes": {
+          "respect": 5,
+          "happiness": 3
+        },
+        "title": "Their decision, with company",
+        "result": "You listen first. The advice you give is shorter and more useful.",
+        "journal": "I listened before giving advice to someone younger."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 72,
+    "date": {
+      "year": 2072,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2072_later-offered-a-hand",
+    "templateId": "later-offered-a-hand",
+    "actualCommandIndexZeroBased": 516,
+    "actualChoice": {
+      "choiceId": "accept",
+      "eventId": "event_2072_later-offered-a-hand",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2072_later-offered-a-hand_choice",
+      "date": {
+        "year": 2072,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I accepted useful help with a small task.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 34,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "8c7746c6d846cc5eaffa4955b5dee3988e1f4e58ab88e02eb1aed2493fbc4632"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Help has been offered",
+      "setupTemplate": "Someone offers a hand with a small practical task. You are not sure you need the help, but you notice yourself preparing a defence before considering the offer.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "accept",
+        "label": "Accept if the help would be useful",
+        "changes": {
+          "respect": 3,
+          "energy": 3
+        },
+        "title": "A task shared",
+        "result": "You take the useful part of the offer without treating it as a judgement on everything you can do.",
+        "journal": "I accepted useful help with a small task."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 73,
+    "date": {
+      "year": 2073,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2073_familiar-street",
+    "templateId": "familiar-street",
+    "actualCommandIndexZeroBased": 519,
+    "actualChoice": {
+      "choiceId": "walk",
+      "eventId": "event_2073_familiar-street",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2073_familiar-street_choice",
+      "date": {
+        "year": 2073,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I walked through a familiar neighbourhood and noticed its changes.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 193,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "d7623d1089aadeccace04e588ffac6d3b2e08cbf31eb83ce2fb14dde540778e7"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A place that remembers differently",
+      "setupTemplate": "You return to a familiar part of {city}. A shop has changed, a wall has been painted, and one corner looks exactly as you remember.",
+      "authoredAge": {
+        "min": 40,
+        "max": 100
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "walk",
+        "label": "Take the longer way around",
+        "changes": {
+          "happiness": 4,
+          "fitness": 2
+        },
+        "title": "Room for both versions",
+        "result": "You find a few things you miss and a few things you like better.",
+        "journal": "I walked through a familiar neighbourhood and noticed its changes."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 74,
+    "date": {
+      "year": 2074,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2074_partner-disagreement-loop",
+    "templateId": "partner-disagreement-loop",
+    "actualCommandIndexZeroBased": 522,
+    "actualChoice": {
+      "choiceId": "reflect",
+      "eventId": "event_2074_partner-disagreement-loop",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2074_partner-disagreement-loop_choice",
+      "date": {
+        "year": 2074,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I checked that I understood Robin Martin during a disagreement.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "partner",
+        "actualJournalText": "Robin Martin",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "personId": "person_npc_133_16",
+            "fullName": "Robin Martin",
+            "role": "spouse/partner",
+            "marriageId": "marriage_197",
+            "started": {
+              "year": 2021,
+              "month": 1,
+              "day": 1
+            },
+            "ended": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            },
+            "born": {
+              "year": 1996,
+              "month": 5,
+              "day": 9
+            },
+            "died": {
+              "year": 2084,
+              "month": 2,
+              "day": 1
+            }
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/adultRelationshipStories.ts",
+        "line": 114,
+        "fileSha256": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3",
+        "expandedLiteralSha256": "7f3a4c11bcdc9f3b4d2810471217c1ce3658fcb3e8468ecdd3824f389e50c608"
+      },
+      "primaryCategory": "relationships-family",
+      "title": "The same point, slightly louder",
+      "setupTemplate": "You and {partner} have each explained your side of a disagreement twice. The third version appears to be the second version with more volume.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "partner": true
+      },
+      "selectedChoice": {
+        "id": "reflect",
+        "label": "Say what you understand of their point",
+        "changes": {
+          "smarts": 2,
+          "stress": -3
+        },
+        "title": "Finally discussing the same thing",
+        "result": "{partner} corrects one detail. You discover that part of the disagreement was about what each of you thought the other meant.",
+        "journal": "I checked that I understood {partner} during a disagreement.",
+        "partnerBond": 4
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 75,
+    "date": {
+      "year": 2075,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2075_useful-advice",
+    "templateId": "useful-advice",
+    "actualCommandIndexZeroBased": 525,
+    "actualChoice": {
+      "choiceId": "listen",
+      "eventId": "event_2075_useful-advice",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2075_useful-advice_choice",
+      "date": {
+        "year": 2075,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened before giving advice to someone younger.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 211,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "3adc3e983fed552a95f98b34767c786661adca0bdc93581349940abe2a6aa132"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "“What would you do?”",
+      "setupTemplate": "A younger person asks for your advice about a difficult decision. It is tempting to answer a question they have not actually asked.",
+      "authoredAge": {
+        "min": 60,
+        "max": 115
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "listen",
+        "label": "Ask what matters most to them",
+        "changes": {
+          "respect": 5,
+          "happiness": 3
+        },
+        "title": "Their decision, with company",
+        "result": "You listen first. The advice you give is shorter and more useful.",
+        "journal": "I listened before giving advice to someone younger."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 76,
+    "date": {
+      "year": 2076,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2076_wellbeing-one-more-episode",
+    "templateId": "wellbeing-one-more-episode",
+    "actualCommandIndexZeroBased": 528,
+    "actualChoice": {
+      "choiceId": "stop",
+      "eventId": "event_2076_wellbeing-one-more-episode",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2076_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2076,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I stopped watching when I had planned to stop.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 29,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "516d47e037b9eb942566dba0da033e2c65961a678dc34328896ffdb6efe50074"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "The next episode has already started",
+      "setupTemplate": "You intended to stop watching a programme, but the next episode begins before you have decided whether to stand up.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "stop",
+        "label": "Stop where you meant to stop",
+        "changes": {
+          "discipline": 4,
+          "energy": 3
+        },
+        "title": "The programme can wait",
+        "result": "You interrupt the automatic start and get on with your evening. The unfinished plot remains available for another day.",
+        "journal": "I stopped watching when I had planned to stop."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 77,
+    "date": {
+      "year": 2077,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2077_birthday-number",
+    "templateId": "birthday-number",
+    "actualCommandIndexZeroBased": 531,
+    "actualChoice": {
+      "choiceId": "notice",
+      "eventId": "event_2077_birthday-number",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2077_birthday-number_choice",
+      "date": {
+        "year": 2077,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I measured my life more fairly on my birthday.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 184,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "ca6d492eeaef382cc6108d217cc30d5caf99e00168ace66a444dae25a67b1658"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Another year, another timetable",
+      "setupTemplate": "Another birthday makes you consider whether you are where you expected to be. Your younger self appears to have underestimated the cost of groceries.",
+      "authoredAge": {
+        "min": 30,
+        "max": 90
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "notice",
+        "label": "Notice what is actually going well",
+        "changes": {
+          "happiness": 5,
+          "stress": -3
+        },
+        "title": "A fairer assessment",
+        "result": "Your life contains things the old plan could not have predicted.",
+        "journal": "I measured my life more fairly on my birthday."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 79,
+    "date": {
+      "year": 2079,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2079_community-garden",
+    "templateId": "community-garden",
+    "actualCommandIndexZeroBased": 536,
+    "actualChoice": {
+      "choiceId": "join",
+      "eventId": "event_2079_community-garden",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2079_community-garden_choice",
+      "date": {
+        "year": 2079,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I volunteered at a community garden in Toronto.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [
+      {
+        "token": "city",
+        "actualJournalText": "Toronto",
+        "savedHistoricalRoleWitnesses": [
+          {
+            "city": "Toronto",
+            "country": "CA",
+            "playerRelocationRecords": 0
+          }
+        ]
+      }
+    ],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 130,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "7019e0347fefa5d0b1881b832cf0a922bbe80d13ebfc6550b05ccc7c977c0b35"
+      },
+      "primaryCategory": "travel-pets-hobbies-entertainment",
+      "title": "The carrots have a committee",
+      "setupTemplate": "A notice in {city} asks for volunteers at a community garden. It promises fresh air and makes no promises about the weather.",
+      "authoredAge": {
+        "min": 18,
+        "max": 85
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "join",
+        "label": "Help for an afternoon",
+        "changes": {
+          "happiness": 4,
+          "fitness": 3,
+          "energy": -4
+        },
+        "title": "Useful dirt",
+        "result": "You weed a patch, meet a few people, and leave with very honest shoes.",
+        "journal": "I volunteered at a community garden in {city}."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 80,
+    "date": {
+      "year": 2080,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2080_wellbeing-quiet-not-silent",
+    "templateId": "wellbeing-quiet-not-silent",
+    "actualCommandIndexZeroBased": 539,
+    "actualChoice": {
+      "choiceId": "allow",
+      "eventId": "event_2080_wellbeing-quiet-not-silent",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2080_wellbeing-quiet-not-silent_choice",
+      "date": {
+        "year": 2080,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I accepted ordinary background sounds in a quiet moment.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 49,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "9c10d3d82274226c7e3fec941ebcb6df7b8f381e4436d11f6778a83270b2d7ba"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "The quiet place has noises",
+      "setupTemplate": "You sit somewhere quiet and immediately notice a clock, a distant door and somebody clearing their throat. Apparently quiet did not mean perfectly silent.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "allow",
+        "label": "Let the ordinary sounds be there",
+        "changes": {
+          "stress": -4,
+          "energy": 2
+        },
+        "title": "Quiet enough is available",
+        "result": "You stop checking each sound for a reason to be irritated. The place becomes restful without becoming silent.",
+        "journal": "I accepted ordinary background sounds in a quiet moment."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 81,
+    "date": {
+      "year": 2081,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2081_later-retirement-assumption",
+    "templateId": "later-retirement-assumption",
+    "actualCommandIndexZeroBased": 542,
+    "actualChoice": {
+      "choiceId": "accurate",
+      "eventId": "event_2081_later-retirement-assumption",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2081_later-retirement-assumption_choice",
+      "date": {
+        "year": 2081,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I corrected an assumption about what I do with my time.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 4,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "ffd56c7087d425de12e46c7137504e4c0edc10793d53217f85f92a18a10a3097"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Apparently your days are free",
+      "setupTemplate": "A stranger asks how you fill your time now that you are retired. They have not asked what your current situation actually is.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "accurate",
+        "label": "Give the accurate short answer",
+        "changes": {
+          "respect": 3,
+          "stress": -2
+        },
+        "title": "The assumption receives an update",
+        "result": "You explain your current situation plainly. They look slightly embarrassed at having supplied it for you.",
+        "journal": "I corrected an assumption about what I do with my time."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 82,
+    "date": {
+      "year": 2082,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2082_wellbeing-waiting-without-feed",
+    "templateId": "wellbeing-waiting-without-feed",
+    "actualCommandIndexZeroBased": 545,
+    "actualChoice": {
+      "choiceId": "observe",
+      "eventId": "event_2082_wellbeing-waiting-without-feed",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2082_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2082,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 59,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "5eff463fb64fe8388d104456345393a546d71ed0391ba7147a2c37b1285b4833"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A minute without filling it",
+      "setupTemplate": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "observe",
+        "label": "Look around for a minute",
+        "changes": {
+          "stress": -3,
+          "smarts": 2
+        },
+        "title": "The world supplies a few details",
+        "result": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "journal": "I spent a short wait noticing what was around me."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 85,
+    "date": {
+      "year": 2085,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2085_wellbeing-meal-comparison",
+    "templateId": "wellbeing-meal-comparison",
+    "actualCommandIndexZeroBased": 552,
+    "actualChoice": {
+      "choiceId": "context",
+      "eventId": "event_2085_wellbeing-meal-comparison",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2085_wellbeing-meal-comparison_choice",
+      "date": {
+        "year": 2085,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing ordinary meals with a staged picture.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 54,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "39281aab3007bf1196d20d880778924b5d8a24530058360a30892b0deacdffd7"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "A picture is not a meal plan",
+      "setupTemplate": "You see an exquisitely arranged meal online and compare it with the ordinary food you usually manage on an ordinary day.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "context",
+        "label": "Remember the picture has a different purpose",
+        "changes": {
+          "stress": -3,
+          "happiness": 2
+        },
+        "title": "Lunch is allowed to look ordinary",
+        "result": "You stop treating a staged picture as a daily requirement. Your food does not need professional lighting to count.",
+        "journal": "I stopped comparing ordinary meals with a staged picture."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 86,
+    "date": {
+      "year": 2086,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2086_birthday-number",
+    "templateId": "birthday-number",
+    "actualCommandIndexZeroBased": 555,
+    "actualChoice": {
+      "choiceId": "notice",
+      "eventId": "event_2086_birthday-number",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2086_birthday-number_choice",
+      "date": {
+        "year": 2086,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I measured my life more fairly on my birthday.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 184,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "ca6d492eeaef382cc6108d217cc30d5caf99e00168ace66a444dae25a67b1658"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Another year, another timetable",
+      "setupTemplate": "Another birthday makes you consider whether you are where you expected to be. Your younger self appears to have underestimated the cost of groceries.",
+      "authoredAge": {
+        "min": 30,
+        "max": 90
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "notice",
+        "label": "Notice what is actually going well",
+        "changes": {
+          "happiness": 5,
+          "stress": -3
+        },
+        "title": "A fairer assessment",
+        "result": "Your life contains things the old plan could not have predicted.",
+        "journal": "I measured my life more fairly on my birthday."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 87,
+    "date": {
+      "year": 2087,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2087_new-skill-late",
+    "templateId": "new-skill-late",
+    "actualCommandIndexZeroBased": 558,
+    "actualChoice": {
+      "choiceId": "try",
+      "eventId": "event_2087_new-skill-late",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2087_new-skill-late_choice",
+      "date": {
+        "year": 2087,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I tried learning something new and let myself be a beginner.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 202,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "13803e789544f5631bccd3c4d10985720aeb6da7eb0022b1980181154c522cd3"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Beginner is still an available setting",
+      "setupTemplate": "You find an introductory lesson in something you have always been curious about. Everyone begins with the same impressively basic exercise.",
+      "authoredAge": {
+        "min": 50,
+        "max": 100
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "try",
+        "label": "Be willing to be bad at it",
+        "changes": {
+          "smarts": 5,
+          "happiness": 3,
+          "energy": -3
+        },
+        "title": "A proper beginning",
+        "result": "You are not good yet. That is what the introductory bit was for.",
+        "journal": "I tried learning something new and let myself be a beginner."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 90,
+    "date": {
+      "year": 2090,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2090_wellbeing-quiet-not-silent",
+    "templateId": "wellbeing-quiet-not-silent",
+    "actualCommandIndexZeroBased": 565,
+    "actualChoice": {
+      "choiceId": "allow",
+      "eventId": "event_2090_wellbeing-quiet-not-silent",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2090_wellbeing-quiet-not-silent_choice",
+      "date": {
+        "year": 2090,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I accepted ordinary background sounds in a quiet moment.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 49,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "9c10d3d82274226c7e3fec941ebcb6df7b8f381e4436d11f6778a83270b2d7ba"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "The quiet place has noises",
+      "setupTemplate": "You sit somewhere quiet and immediately notice a clock, a distant door and somebody clearing their throat. Apparently quiet did not mean perfectly silent.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "allow",
+        "label": "Let the ordinary sounds be there",
+        "changes": {
+          "stress": -4,
+          "energy": 2
+        },
+        "title": "Quiet enough is available",
+        "result": "You stop checking each sound for a reason to be irritated. The place becomes restful without becoming silent.",
+        "journal": "I accepted ordinary background sounds in a quiet moment."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 92,
+    "date": {
+      "year": 2092,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2092_useful-advice",
+    "templateId": "useful-advice",
+    "actualCommandIndexZeroBased": 570,
+    "actualChoice": {
+      "choiceId": "listen",
+      "eventId": "event_2092_useful-advice",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2092_useful-advice_choice",
+      "date": {
+        "year": 2092,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I listened before giving advice to someone younger.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/events.ts",
+        "line": 211,
+        "fileSha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca",
+        "expandedLiteralSha256": "3adc3e983fed552a95f98b34767c786661adca0bdc93581349940abe2a6aa132"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "“What would you do?”",
+      "setupTemplate": "A younger person asks for your advice about a difficult decision. It is tempting to answer a question they have not actually asked.",
+      "authoredAge": {
+        "min": 60,
+        "max": 115
+      },
+      "authoredContextPredicates": {},
+      "selectedChoice": {
+        "id": "listen",
+        "label": "Ask what matters most to them",
+        "changes": {
+          "respect": 5,
+          "happiness": 3
+        },
+        "title": "Their decision, with company",
+        "result": "You listen first. The advice you give is shorter and more useful.",
+        "journal": "I listened before giving advice to someone younger."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 94,
+    "date": {
+      "year": 2094,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2094_later-another-year-question",
+    "templateId": "later-another-year-question",
+    "actualCommandIndexZeroBased": 575,
+    "actualChoice": {
+      "choiceId": "honest",
+      "eventId": "event_2094_later-another-year-question",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2094_later-another-year-question_choice",
+      "date": {
+        "year": 2094,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I gave an honest answer about another birthday.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 49,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "034233937d0e2b41fea4d5d1f162e47f17c023128aabf3cf794d1125adbfd8be"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "Another year, by the calendar",
+      "setupTemplate": "Someone asks how you feel about another birthday and seems to expect a complaint. Your actual answer is a little less tidy than that.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "honest",
+        "label": "Give the mixed, honest answer",
+        "changes": {
+          "respect": 3,
+          "happiness": 3
+        },
+        "title": "More than a familiar complaint",
+        "result": "You name something you value and something you find difficult. The answer feels more like your life than a ready-made line.",
+        "journal": "I gave an honest answer about another birthday."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 95,
+    "date": {
+      "year": 2095,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2095_wellbeing-one-more-episode",
+    "templateId": "wellbeing-one-more-episode",
+    "actualCommandIndexZeroBased": 578,
+    "actualChoice": {
+      "choiceId": "stop",
+      "eventId": "event_2095_wellbeing-one-more-episode",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2095_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2095,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I stopped watching when I had planned to stop.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/wellbeingStories.ts",
+        "line": 29,
+        "fileSha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443",
+        "expandedLiteralSha256": "516d47e037b9eb942566dba0da033e2c65961a678dc34328896ffdb6efe50074"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "The next episode has already started",
+      "setupTemplate": "You intended to stop watching a programme, but the next episode begins before you have decided whether to stand up.",
+      "authoredAge": {
+        "min": 18,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "stop",
+        "label": "Stop where you meant to stop",
+        "changes": {
+          "discipline": 4,
+          "energy": 3
+        },
+        "title": "The programme can wait",
+        "result": "You interrupt the automatic start and get on with your evening. The unfinished plot remains available for another day.",
+        "journal": "I stopped watching when I had planned to stop."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  },
+  {
+    "age": 96,
+    "date": {
+      "year": 2096,
+      "month": 1,
+      "day": 1
+    },
+    "eventId": "event_2096_later-old-handwriting",
+    "templateId": "later-old-handwriting",
+    "actualCommandIndexZeroBased": 581,
+    "actualChoice": {
+      "choiceId": "kind",
+      "eventId": "event_2096_later-old-handwriting",
+      "type": "choose"
+    },
+    "actualAuthoredChoiceOrdinalOneBased": 1,
+    "actualPersistedJournal": {
+      "id": "event_2096_later-old-handwriting_choice",
+      "date": {
+        "year": 2096,
+        "month": 1,
+        "day": 1
+      },
+      "personId": "person_player",
+      "text": "I read an old note to myself with more kindness than criticism.",
+      "category": "event"
+    },
+    "observedNamesWithSavedRoleFacts": [],
+    "sourceCorrelationOnly": {
+      "source": {
+        "file": "src/game/content/laterLifeStories.ts",
+        "line": 9,
+        "fileSha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50",
+        "expandedLiteralSha256": "2cf590b580bc96e374842153223e89705c767a34c3840d494a684166ceff0b76"
+      },
+      "primaryCategory": "health-later-life",
+      "title": "You recognise the handwriting",
+      "setupTemplate": "You find an old note in your own handwriting. The letters are familiar, but the urgent little instruction belongs to a version of you with different worries.",
+      "authoredAge": {
+        "min": 55,
+        "max": 120
+      },
+      "authoredContextPredicates": {
+        "local": true
+      },
+      "selectedChoice": {
+        "id": "kind",
+        "label": "Read it with a little kindness",
+        "changes": {
+          "happiness": 4,
+          "stress": -3
+        },
+        "title": "A person doing their best then",
+        "result": "You remember the circumstances without judging them by what you know now. The old worry seems easier to understand.",
+        "journal": "I read an old note to myself with more kindness than criticism."
+      },
+      "actualBoundSetupCaptured": false,
+      "actualBoundResultBodyCaptured": false,
+      "actualEffectRowsCaptured": false
+    }
+  }
+]

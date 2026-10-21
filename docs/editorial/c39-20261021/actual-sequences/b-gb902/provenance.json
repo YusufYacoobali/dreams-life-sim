@@ -1,0 +1,108 @@
+{
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "actualCoordinatorReceipt": {
+    "format": "dreams-coordinator-gate-execution-v1",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "sourceSnapshot": "/tmp/dreams-production-finish-accepted-source.json",
+    "sourceSnapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+    "root": "/workspace/dreams-worktrees/project-callback-pacing-test",
+    "argv": [
+      "node",
+      "tools/current-policy/run-criminal-v2.cjs",
+      "--registration",
+      "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "--all",
+      "--output",
+      "/workspace/.cache/dreams-current-c39-policies/criminal-v2"
+    ],
+    "startedAt": "2026-10-21T08:08:13.084070+00:00",
+    "before": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    },
+    "complete": true,
+    "endedAt": "2026-10-21T08:10:44.640808+00:00",
+    "elapsedSeconds": 151.557,
+    "exitCode": 0,
+    "raw": {
+      "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+      "bytes": 657841,
+      "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a"
+    },
+    "after": {
+      "files": 688,
+      "snapshotSha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56",
+      "status": "exact"
+    }
+  },
+  "pins": [
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/manifest.json",
+      "bytes": 21360,
+      "sha256": "b15d931728a2a9ae6577bf119dd908eab132f5b618a8ed2c9eb1867656fe72cf"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/result.json",
+      "bytes": 650431,
+      "sha256": "99dc8f787635845bb0bfc99dde919796a24500a54bcf793092e35e25e75ca0b9"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/GB-result.json",
+      "bytes": 60962,
+      "sha256": "61c21a964921156553d2a8984966c9e9301830f3f04046f414738013f735b92b"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/GB-commands.json",
+      "bytes": 16726,
+      "sha256": "9148fefca3ba00cfd56b9cd1a3eb69d08b9d5c7cb9b2a053e1f31198c2a51b02"
+    },
+    {
+      "file": "/workspace/.cache/dreams-current-c39-policies/criminal-v2/GB-final.checkpoint.json",
+      "bytes": 886164,
+      "sha256": "742025f8045344c0cbcd760359852facf440d0dfc20c596bfc062aa24ee00c91"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-criminal-v2-receipt.json",
+      "bytes": 1280,
+      "sha256": "bb07e686678b4f3737e4149b91eb97f7707a5dbdb88b6b187c784f770350948b"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-source.json",
+      "bytes": 75993,
+      "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-policy-registration-authorized.json",
+      "bytes": 2597,
+      "sha256": "5656dab6e031df8ff7ac291abed6188eaec2d87ad78b64181aff692c85788e57"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-accepted-criminal-v2.out",
+      "bytes": 657841,
+      "sha256": "7b5c3e4e65339175ddde47a730f9ef4b3aa89c2be32d98a5220bc82aad512c1a"
+    },
+    {
+      "file": "/workspace/dreams-worktrees/camera-copy-correction/docs/editorial/c39-20261021/ledger.json",
+      "bytes": 425321,
+      "sha256": "d23aa90c1e6e75ac1db06e8a48edb68efb63c6309b34a33e115167d73ba6c611"
+    },
+    {
+      "file": "/tmp/dreams-c39-editorial-review-input-20261021.json",
+      "bytes": 472370,
+      "sha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79"
+    }
+  ],
+  "all335AppSrcLedgerHashesEqualAcceptedManifest": true,
+  "artifactInspection": "Standard gzip/base64/JSON main/people blocks only. No runtime/model/engine/codec import or replay; ledger blocks not decoded.",
+  "independentPureJsonTraceSha256": "28951d82358d5fe713fc8cff38f8dcabc87d65e941ae842cd6e05425a9f6e900",
+  "producerRecordedFinalWorldSha256": "4ba56cbad72c7c2d730cb6b04bb51e6af0a0428dc4ee06eee78794f58f308e34",
+  "fullCanonicalWorldHashIndependentlyRecomputed": false
+}

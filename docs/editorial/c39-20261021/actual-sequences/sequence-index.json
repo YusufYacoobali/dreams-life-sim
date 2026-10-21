@@ -1,0 +1,4066 @@
+{
+  "format": "dreams-c39-source-ledger-to-recorded-sequence-index-v1",
+  "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+  "scope": "All265 original ledger IDs in their original order. An empty reference array means unobserved in these three preselected sequences, not missing source review. References do not change original per-ID validation/release status; unselected alternatives are not executed outcomes. Duplicate IDs across lives must not be summed as unique coverage.",
+  "rows": [
+    {
+      "index": 0,
+      "templateId": "first-cake",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 1,
+      "templateId": "shoe-principle",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 2,
+      "templateId": "blanket-dragon",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 3,
+      "templateId": "library-card",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 4,
+      "templateId": "broken-mug",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 5,
+              "age": 8,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2008
+              },
+              "eventId": "event_2008_broken-mug",
+              "selectedChoiceId": "tell",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "templateId": "rainy-fort",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 9,
+              "age": 10,
+              "date": {
+                "year": 2010,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2010_rainy-fort",
+              "selectedChoiceId": "build",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 6,
+              "age": 9,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2009
+              },
+              "eventId": "event_2009_rainy-fort",
+              "selectedChoiceId": "read",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "templateId": "parent-old-music",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 11,
+              "age": 15,
+              "date": {
+                "year": 2015,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2015_parent-old-music",
+              "selectedChoiceId": "listen",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 7,
+              "age": 10,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2010
+              },
+              "eventId": "event_2010_parent-old-music",
+              "selectedChoiceId": "roast",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "templateId": "group-chat-rumour",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 8,
+      "templateId": "first-presentation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 9,
+      "templateId": "parent-boundary",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 10,
+      "templateId": "comparison-scroll",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 20,
+              "age": 25,
+              "date": {
+                "year": 2025,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2025_comparison-scroll",
+              "selectedChoiceId": "close",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 14,
+              "age": 17,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2017
+              },
+              "eventId": "event_2017_comparison-scroll",
+              "selectedChoiceId": "close",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 19,
+              "age": 23,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2023
+              },
+              "eventId": "event_2023_comparison-scroll",
+              "selectedChoiceId": "scroll",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "templateId": "community-garden",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 46,
+              "age": 66,
+              "date": {
+                "year": 2066,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2066_community-garden",
+              "selectedChoiceId": "join",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 57,
+              "age": 79,
+              "date": {
+                "year": 2079,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2079_community-garden",
+              "selectedChoiceId": "join",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "templateId": "bad-review",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 29,
+              "age": 43,
+              "date": {
+                "year": 2043,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2043_bad-review",
+              "selectedChoiceId": "clarify",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 20,
+              "age": 24,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2024
+              },
+              "eventId": "event_2024_bad-review",
+              "selectedChoiceId": "leave",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "templateId": "rest-guilt",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 40,
+              "age": 58,
+              "date": {
+                "year": 2058,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2058_rest-guilt",
+              "selectedChoiceId": "rest",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 45,
+              "age": 55,
+              "date": {
+                "year": 2055,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2055_rest-guilt",
+              "selectedChoiceId": "rest",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 16,
+              "age": 20,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2020
+              },
+              "eventId": "event_2020_rest-guilt",
+              "selectedChoiceId": "fill",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "templateId": "old-photo",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 18,
+              "age": 22,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2022
+              },
+              "eventId": "event_2022_old-photo",
+              "selectedChoiceId": "story",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "templateId": "local-meeting",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 21,
+              "age": 26,
+              "date": {
+                "year": 2026,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2026_local-meeting",
+              "selectedChoiceId": "speak",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 32,
+              "age": 40,
+              "date": {
+                "year": 2040,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2040_local-meeting",
+              "selectedChoiceId": "speak",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "templateId": "small-mistake",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 17,
+      "templateId": "birthday-number",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 56,
+              "age": 77,
+              "date": {
+                "year": 2077,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2077_birthday-number",
+              "selectedChoiceId": "notice",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 62,
+              "age": 86,
+              "date": {
+                "year": 2086,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2086_birthday-number",
+              "selectedChoiceId": "notice",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 25,
+              "age": 30,
+              "date": {
+                "year": 2030,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2030_birthday-number",
+              "selectedChoiceId": "notice",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "templateId": "familiar-street",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 34,
+              "age": 50,
+              "date": {
+                "year": 2050,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2050_familiar-street",
+              "selectedChoiceId": "walk",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 52,
+              "age": 73,
+              "date": {
+                "year": 2073,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2073_familiar-street",
+              "selectedChoiceId": "walk",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 40,
+              "age": 48,
+              "date": {
+                "year": 2048,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2048_familiar-street",
+              "selectedChoiceId": "walk",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "templateId": "new-skill-late",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 63,
+              "age": 87,
+              "date": {
+                "year": 2087,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2087_new-skill-late",
+              "selectedChoiceId": "try",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "templateId": "useful-advice",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 50,
+              "age": 70,
+              "date": {
+                "year": 2070,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2070_useful-advice",
+              "selectedChoiceId": "listen",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 54,
+              "age": 75,
+              "date": {
+                "year": 2075,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2075_useful-advice",
+              "selectedChoiceId": "listen",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 65,
+              "age": 92,
+              "date": {
+                "year": 2092,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2092_useful-advice",
+              "selectedChoiceId": "listen",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "templateId": "quiet-morning",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 22,
+      "templateId": "toddler-stairwell-echo",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 2,
+              "age": 3,
+              "date": {
+                "year": 2003,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2003_toddler-stairwell-echo",
+              "selectedChoiceId": "hello",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "templateId": "toddler-zipper-puzzle",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 24,
+      "templateId": "toddler-shadow-race",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 25,
+      "templateId": "toddler-cardboard-postbox",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 26,
+      "templateId": "toddler-biscuit-halves",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 2,
+              "age": 5,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2005
+              },
+              "eventId": "event_2005_toddler-biscuit-halves",
+              "selectedChoiceId": "crumbs",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 27,
+      "templateId": "school-inverted-map",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 28,
+      "templateId": "school-library-whisper",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 29,
+      "templateId": "school-relay-handover",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 30,
+      "templateId": "school-bean-monitor",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 8,
+              "age": 9,
+              "date": {
+                "year": 2009,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2009_school-bean-monitor",
+              "selectedChoiceId": "measure",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 31,
+      "templateId": "school-secret-language",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 32,
+      "templateId": "school-microphone-rehearsal",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 8,
+              "age": 9,
+              "date": {
+                "year": 2009,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2009_school-microphone-rehearsal",
+              "selectedChoiceId": "read",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 6,
+              "age": 7,
+              "date": {
+                "year": 2007,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2007_school-microphone-rehearsal",
+              "selectedChoiceId": "read",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 33,
+      "templateId": "school-rainy-break",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 6,
+              "age": 7,
+              "date": {
+                "year": 2007,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2007_school-rainy-break",
+              "selectedChoiceId": "agree",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 34,
+      "templateId": "school-label-swap",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 35,
+      "templateId": "teen-unit-confusion",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 9,
+              "age": 12,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2012
+              },
+              "eventId": "event_2012_teen-unit-confusion",
+              "selectedChoiceId": "help",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 36,
+      "templateId": "teen-debate-draw",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 10,
+              "age": 13,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2013
+              },
+              "eventId": "event_2013_teen-debate-draw",
+              "selectedChoiceId": "refuse",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 37,
+      "templateId": "teen-yearbook-proof",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 38,
+      "templateId": "teen-study-soundtrack",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 39,
+      "templateId": "teen-family-interview",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 40,
+      "templateId": "teen-volunteer-roster",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 12,
+              "age": 14,
+              "date": {
+                "year": 2014,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2014_teen-volunteer-roster",
+              "selectedChoiceId": "share",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 41,
+      "templateId": "teen-marking-correction",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 12,
+              "age": 15,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2015
+              },
+              "eventId": "event_2015_teen-marking-correction",
+              "selectedChoiceId": "understand",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 42,
+      "templateId": "first-bubble-catch",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 43,
+      "templateId": "first-tower-demolition",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 0,
+              "age": 1,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2001
+              },
+              "eventId": "event_2001_first-tower-demolition",
+              "selectedChoiceId": "rebuild",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 44,
+      "templateId": "first-camera-closeup",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 1,
+              "age": 2,
+              "date": {
+                "year": 2002,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2002_first-camera-closeup",
+              "selectedChoiceId": "nose",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 45,
+      "templateId": "first-nap-negotiation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 46,
+      "templateId": "toddler-parent-name",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 47,
+      "templateId": "toddler-ice-cube",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 48,
+      "templateId": "toddler-lift-button",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 49,
+      "templateId": "toddler-caterpillar-crossing",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 2,
+              "age": 3,
+              "date": {
+                "year": 2003,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2003_toddler-caterpillar-crossing",
+              "selectedChoiceId": "watch",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "templateId": "toddler-why-machine",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 51,
+      "templateId": "child-first-loose-tooth",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 4,
+              "age": 5,
+              "date": {
+                "year": 2005,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2005_child-first-loose-tooth",
+              "selectedChoiceId": "leave",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 52,
+      "templateId": "child-pocket-museum",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 4,
+              "age": 5,
+              "date": {
+                "year": 2005,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2005_child-pocket-museum",
+              "selectedChoiceId": "sort",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 53,
+      "templateId": "school-wrong-jacket",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 54,
+      "templateId": "school-empty-lunchbox",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 55,
+      "templateId": "school-answer-blurt",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 56,
+      "templateId": "school-slide-queue",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 4,
+              "age": 7,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2007
+              },
+              "eventId": "event_2007_school-slide-queue",
+              "selectedChoiceId": "push",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 57,
+      "templateId": "school-show-tell-prop",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 58,
+      "templateId": "child-boardgame-rules",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 7,
+              "age": 8,
+              "date": {
+                "year": 2008,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2008_child-boardgame-rules",
+              "selectedChoiceId": "accept",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 59,
+      "templateId": "child-shop-separation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 60,
+      "templateId": "school-practice-alarm",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 5,
+              "age": 6,
+              "date": {
+                "year": 2006,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2006_school-practice-alarm",
+              "selectedChoiceId": "follow",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 61,
+      "templateId": "school-mysterious-noise",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 62,
+      "templateId": "teen-old-recording",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 63,
+      "templateId": "teen-shrinking-sleeves",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 9,
+              "age": 11,
+              "date": {
+                "year": 2011,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2011_teen-shrinking-sleeves",
+              "selectedChoiceId": "compare",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 64,
+      "templateId": "teen-family-game-timer",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 65,
+      "templateId": "teen-phone-at-dinner",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 11,
+              "age": 13,
+              "date": {
+                "year": 2013,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2013_teen-phone-at-dinner",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 66,
+      "templateId": "teen-notification-loop",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 67,
+      "templateId": "teen-borrowed-charger",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 68,
+      "templateId": "teen-old-interest-box",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 69,
+      "templateId": "teen-household-small-meal",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 13,
+              "age": 16,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2016
+              },
+              "eventId": "event_2016_teen-household-small-meal",
+              "selectedChoiceId": "guess",
+              "authoredChoiceOrdinalOneBased": 3
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 70,
+      "templateId": "teen-parent-voice-note",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 71,
+      "templateId": "teen-sunday-list",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 13,
+              "age": 15,
+              "date": {
+                "year": 2015,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2015_teen-sunday-list",
+              "selectedChoiceId": "choose",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 72,
+      "templateId": "first-echo",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 0,
+              "age": 1,
+              "date": {
+                "year": 2001,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2001_first-echo",
+              "selectedChoiceId": "concert",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 73,
+      "templateId": "first-sock-escape",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 74,
+      "templateId": "first-mirror-guest",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 0,
+              "age": 1,
+              "date": {
+                "year": 2001,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2001_first-mirror-guest",
+              "selectedChoiceId": "face",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 75,
+      "templateId": "toddler-wall-gallery",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 1,
+              "age": 2,
+              "date": {
+                "year": 2002,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2002_toddler-wall-gallery",
+              "selectedChoiceId": "admit",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 1,
+              "age": 2,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2002
+              },
+              "eventId": "event_2002_toddler-wall-gallery",
+              "selectedChoiceId": "clean",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 76,
+      "templateId": "toddler-grocery-microphone",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 77,
+      "templateId": "toddler-cardboard-rocket",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 3,
+              "age": 4,
+              "date": {
+                "year": 2004,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2004_toddler-cardboard-rocket",
+              "selectedChoiceId": "invite",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 78,
+      "templateId": "toddler-suspicious-haircut",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 79,
+      "templateId": "child-lost-button",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 3,
+              "age": 4,
+              "date": {
+                "year": 2004,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2004_child-lost-button",
+              "selectedChoiceId": "repair",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 80,
+      "templateId": "child-first-sleepover-plan",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 5,
+              "age": 6,
+              "date": {
+                "year": 2006,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2006_child-first-sleepover-plan",
+              "selectedChoiceId": "plan",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 81,
+      "templateId": "school-arcade-invitation",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 3,
+              "age": 6,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2006
+              },
+              "eventId": "event_2006_school-arcade-invitation",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 8,
+              "age": 11,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2011
+              },
+              "eventId": "event_2011_school-arcade-invitation",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 82,
+      "templateId": "school-project-promise",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 10,
+              "age": 12,
+              "date": {
+                "year": 2012,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2012_school-project-promise",
+              "selectedChoiceId": "promise",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 83,
+      "templateId": "school-volcano-breach",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 84,
+      "templateId": "school-tree-audition",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 7,
+              "age": 8,
+              "date": {
+                "year": 2008,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2008_school-tree-audition",
+              "selectedChoiceId": "audition",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 85,
+      "templateId": "school-mascot-petition",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 86,
+      "templateId": "school-recorder-solo",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 87,
+      "templateId": "school-lunch-trade",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 88,
+      "templateId": "school-name-joke",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 89,
+      "templateId": "school-homework-soap",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 90,
+      "templateId": "school-bench-reserve",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 91,
+      "templateId": "school-race-false-start",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 10,
+              "age": 11,
+              "date": {
+                "year": 2011,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2011_school-race-false-start",
+              "selectedChoiceId": "restart",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 92,
+      "templateId": "school-tiny-editor",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 93,
+      "templateId": "school-glitter-border",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 94,
+      "templateId": "teen-homework-leak",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 14,
+              "age": 16,
+              "date": {
+                "year": 2016,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2016_teen-homework-leak",
+              "selectedChoiceId": "own",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 95,
+      "templateId": "teen-group-project-credit",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 96,
+      "templateId": "teen-mic-still-live",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 97,
+      "templateId": "teen-solo-rehearsal",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 11,
+              "age": 14,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2014
+              },
+              "eventId": "event_2014_teen-solo-rehearsal",
+              "selectedChoiceId": "stay",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 98,
+      "templateId": "teen-exam-freeze",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 99,
+      "templateId": "teen-canteen-review",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 12,
+              "age": 16,
+              "date": {
+                "year": 2016,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2016_teen-canteen-review",
+              "selectedChoiceId": "feedback",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 100,
+      "templateId": "work-three-priorities",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 38,
+              "age": 55,
+              "date": {
+                "year": 2055,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2055_work-three-priorities",
+              "selectedChoiceId": "order",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 101,
+      "templateId": "work-unfamiliar-process",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 15,
+              "age": 17,
+              "date": {
+                "year": 2017,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2017_work-unfamiliar-process",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 19,
+              "age": 24,
+              "date": {
+                "year": 2024,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2024_work-unfamiliar-process",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 54,
+              "age": 66,
+              "date": {
+                "year": 2066,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2066_work-unfamiliar-process",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 102,
+      "templateId": "work-breakroom-sign",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 30,
+              "age": 44,
+              "date": {
+                "year": 2044,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2044_work-breakroom-sign",
+              "selectedChoiceId": "clear",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 103,
+      "templateId": "work-break-playlist",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 28,
+              "age": 42,
+              "date": {
+                "year": 2042,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2042_work-break-playlist",
+              "selectedChoiceId": "listen",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 104,
+      "templateId": "work-message-love",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 24,
+              "age": 38,
+              "date": {
+                "year": 2038,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2038_work-message-love",
+              "selectedChoiceId": "correct",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 105,
+      "templateId": "work-photo-blink",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 25,
+              "age": 39,
+              "date": {
+                "year": 2039,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2039_work-photo-blink",
+              "selectedChoiceId": "retake",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 106,
+      "templateId": "work-safety-arrow",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 21,
+              "age": 33,
+              "date": {
+                "year": 2033,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2033_work-safety-arrow",
+              "selectedChoiceId": "report",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 107,
+      "templateId": "work-shared-credit",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 108,
+      "templateId": "work-question-at-door",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 109,
+      "templateId": "work-quiet-kindness",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 23,
+              "age": 36,
+              "date": {
+                "year": 2036,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2036_work-quiet-kindness",
+              "selectedChoiceId": "thanks",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 110,
+      "templateId": "friend-long-voice-note",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 111,
+      "templateId": "friend-different-budget",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 112,
+      "templateId": "friend-advice-or-listening",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 113,
+      "templateId": "friend-creative-feedback",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 35,
+              "age": 43,
+              "date": {
+                "year": 2043,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2043_friend-creative-feedback",
+              "selectedChoiceId": "specific",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 114,
+      "templateId": "friend-interrupted-thought",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 115,
+      "templateId": "friend-unwanted-nickname",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 56,
+              "age": 68,
+              "date": {
+                "year": 2068,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2068_friend-unwanted-nickname",
+              "selectedChoiceId": "plain",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 116,
+      "templateId": "friend-quiet-company",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 18,
+              "age": 23,
+              "date": {
+                "year": 2023,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2023_friend-quiet-company",
+              "selectedChoiceId": "quiet",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 53,
+              "age": 65,
+              "date": {
+                "year": 2065,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2065_friend-quiet-company",
+              "selectedChoiceId": "quiet",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 117,
+      "templateId": "friend-changed-opinion",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 26,
+              "age": 31,
+              "date": {
+                "year": 2031,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2031_friend-changed-opinion",
+              "selectedChoiceId": "explain",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 55,
+              "age": 67,
+              "date": {
+                "year": 2067,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2067_friend-changed-opinion",
+              "selectedChoiceId": "explain",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 118,
+      "templateId": "partner-phone-attention",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 119,
+      "templateId": "partner-alone-time",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 120,
+      "templateId": "partner-money-conversation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 121,
+      "templateId": "partner-other-couples",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 15,
+              "age": 22,
+              "date": {
+                "year": 2022,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2022_partner-other-couples",
+              "selectedChoiceId": "specific",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 122,
+      "templateId": "partner-disagreement-loop",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 53,
+              "age": 74,
+              "date": {
+                "year": 2074,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2074_partner-disagreement-loop",
+              "selectedChoiceId": "reflect",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 123,
+      "templateId": "partner-public-affection",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 41,
+              "age": 59,
+              "date": {
+                "year": 2059,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2059_partner-public-affection",
+              "selectedChoiceId": "explain",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 124,
+      "templateId": "partner-arrives-late",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 125,
+      "templateId": "adult-wrong-name-badge",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 126,
+      "templateId": "adult-wave-behind",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 16,
+              "age": 19,
+              "date": {
+                "year": 2019,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2019_adult-wave-behind",
+              "selectedChoiceId": "laugh",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 127,
+      "templateId": "adult-free-lecture-question",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 43,
+              "age": 63,
+              "date": {
+                "year": 2063,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2063_adult-free-lecture-question",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 34,
+              "age": 42,
+              "date": {
+                "year": 2042,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2042_adult-free-lecture-question",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 128,
+      "templateId": "adult-queue-merge",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 50,
+              "age": 62,
+              "date": {
+                "year": 2062,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2062_adult-queue-merge",
+              "selectedChoiceId": "alternate",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 129,
+      "templateId": "adult-community-map",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 130,
+      "templateId": "adult-open-mic-list",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 13,
+              "age": 18,
+              "date": {
+                "year": 2018,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2018_adult-open-mic-list",
+              "selectedChoiceId": "correct",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 131,
+      "templateId": "adult-borrowed-pen",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 30,
+              "age": 38,
+              "date": {
+                "year": 2038,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2038_adult-borrowed-pen",
+              "selectedChoiceId": "return",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 132,
+      "templateId": "adult-weather-expert",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 16,
+              "age": 23,
+              "date": {
+                "year": 2023,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2023_adult-weather-expert",
+              "selectedChoiceId": "honest",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 46,
+              "age": 56,
+              "date": {
+                "year": 2056,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2056_adult-weather-expert",
+              "selectedChoiceId": "honest",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 133,
+      "templateId": "adult-instruction-last-page",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 134,
+      "templateId": "adult-empty-calendar",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 135,
+      "templateId": "adult-unwanted-speech",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 136,
+      "templateId": "adult-compliment-practice",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 137,
+      "templateId": "adult-repair-table",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 32,
+              "age": 47,
+              "date": {
+                "year": 2047,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2047_adult-repair-table",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 17,
+              "age": 21,
+              "date": {
+                "year": 2021,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2021_adult-repair-table",
+              "selectedChoiceId": "ask",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 15,
+              "age": 18,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2018
+              },
+              "eventId": "event_2018_adult-repair-table",
+              "selectedChoiceId": "observe",
+              "authoredChoiceOrdinalOneBased": 2
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 138,
+      "templateId": "adult-community-poster",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 39,
+              "age": 47,
+              "date": {
+                "year": 2047,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2047_adult-community-poster",
+              "selectedChoiceId": "check",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 139,
+      "templateId": "adult-name-pronunciation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 140,
+      "templateId": "adult-shortcut-stairs",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 141,
+      "templateId": "adult-small-volunteer-task",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 42,
+              "age": 62,
+              "date": {
+                "year": 2062,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2062_adult-small-volunteer-task",
+              "selectedChoiceId": "help",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 22,
+              "age": 27,
+              "date": {
+                "year": 2027,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2027_adult-small-volunteer-task",
+              "selectedChoiceId": "help",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 142,
+      "templateId": "adult-uncertain-memory",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 143,
+      "templateId": "adult-free-sample-opinion",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 28,
+              "age": 35,
+              "date": {
+                "year": 2035,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2035_adult-free-sample-opinion",
+              "selectedChoiceId": "specific",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 36,
+              "age": 44,
+              "date": {
+                "year": 2044,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2044_adult-free-sample-opinion",
+              "selectedChoiceId": "specific",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 144,
+      "templateId": "adult-seat-with-a-view",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 38,
+              "age": 46,
+              "date": {
+                "year": 2046,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2046_adult-seat-with-a-view",
+              "selectedChoiceId": "move",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 145,
+      "templateId": "adult-password-on-paper",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 146,
+      "templateId": "adult-lost-glove",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 147,
+      "templateId": "adult-perfect-introduction",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 26,
+              "age": 40,
+              "date": {
+                "year": 2040,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2040_adult-perfect-introduction",
+              "selectedChoiceId": "brief",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 27,
+              "age": 32,
+              "date": {
+                "year": 2032,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2032_adult-perfect-introduction",
+              "selectedChoiceId": "brief",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 43,
+              "age": 53,
+              "date": {
+                "year": 2053,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2053_adult-perfect-introduction",
+              "selectedChoiceId": "brief",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 148,
+      "templateId": "adult-silent-notification",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 149,
+      "templateId": "adult-neighbourhood-song",
+      "recordedSequenceReferences": [
+        {
+          "review": "d-us900",
+          "file": "d-us900/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 17,
+              "age": 21,
+              "date": {
+                "day": 1,
+                "month": 1,
+                "year": 2021
+              },
+              "eventId": "event_2021_adult-neighbourhood-song",
+              "selectedChoiceId": "laugh",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual retained bound body/results/snapshots"
+        }
+      ]
+    },
+    {
+      "index": 150,
+      "templateId": "family-baby-serious-face",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 151,
+      "templateId": "family-baby-ordinary-song",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 152,
+      "templateId": "family-baby-outfit-debate",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 153,
+      "templateId": "family-drawing-label",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 154,
+      "templateId": "family-helpful-spill",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 155,
+      "templateId": "family-bedtime-detour",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 156,
+      "templateId": "family-private-drawer",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 157,
+      "templateId": "family-game-rules-change",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 158,
+      "templateId": "family-impossible-question",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 159,
+      "templateId": "family-collection-tour",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 160,
+      "templateId": "family-teen-new-opinion",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 161,
+      "templateId": "family-teen-closed-door",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 162,
+      "templateId": "family-teen-music-volume",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 163,
+      "templateId": "family-teen-future-pressure",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 164,
+      "templateId": "family-teen-reliable-apology",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 165,
+      "templateId": "family-adult-advice-permission",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 166,
+      "templateId": "family-adult-inherited-phrase",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 167,
+      "templateId": "family-adult-family-story",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 168,
+      "templateId": "family-adult-new-tradition",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 169,
+      "templateId": "family-adult-parent-question",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 170,
+      "templateId": "home-key-bowl",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 171,
+      "templateId": "home-squeak-investigation",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 39,
+              "age": 56,
+              "date": {
+                "year": 2056,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2056_home-squeak-investigation",
+              "selectedChoiceId": "check",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 172,
+      "templateId": "home-box-worth-keeping",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 37,
+              "age": 53,
+              "date": {
+                "year": 2053,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2053_home-box-worth-keeping",
+              "selectedChoiceId": "recycle",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 173,
+      "templateId": "home-window-cleaning-discovery",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 174,
+      "templateId": "home-found-old-list",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 27,
+              "age": 41,
+              "date": {
+                "year": 2041,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2041_home-found-old-list",
+              "selectedChoiceId": "review",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 36,
+              "age": 52,
+              "date": {
+                "year": 2052,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2052_home-found-old-list",
+              "selectedChoiceId": "review",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 175,
+      "templateId": "home-unexpected-echo",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 176,
+      "templateId": "wellbeing-search-results",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 177,
+      "templateId": "wellbeing-miracle-recommendation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 178,
+      "templateId": "wellbeing-variable-day",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 44,
+              "age": 54,
+              "date": {
+                "year": 2054,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2054_wellbeing-variable-day",
+              "selectedChoiceId": "adapt",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 179,
+      "templateId": "wellbeing-private-information",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 180,
+      "templateId": "wellbeing-other-peoples-progress",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 181,
+      "templateId": "wellbeing-one-more-episode",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 55,
+              "age": 76,
+              "date": {
+                "year": 2076,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2076_wellbeing-one-more-episode",
+              "selectedChoiceId": "stop",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 67,
+              "age": 95,
+              "date": {
+                "year": 2095,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2095_wellbeing-one-more-episode",
+              "selectedChoiceId": "stop",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 182,
+      "templateId": "wellbeing-stretch-after-sitting",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 22,
+              "age": 35,
+              "date": {
+                "year": 2035,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2035_wellbeing-stretch-after-sitting",
+              "selectedChoiceId": "move",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 33,
+              "age": 49,
+              "date": {
+                "year": 2049,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2049_wellbeing-stretch-after-sitting",
+              "selectedChoiceId": "move",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 31,
+              "age": 39,
+              "date": {
+                "year": 2039,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2039_wellbeing-stretch-after-sitting",
+              "selectedChoiceId": "move",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 52,
+              "age": 64,
+              "date": {
+                "year": 2064,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2064_wellbeing-stretch-after-sitting",
+              "selectedChoiceId": "move",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 183,
+      "templateId": "wellbeing-ordinary-water",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 18,
+              "age": 26,
+              "date": {
+                "year": 2026,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2026_wellbeing-ordinary-water",
+              "selectedChoiceId": "simple",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 184,
+      "templateId": "wellbeing-rehearsed-argument",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 20,
+              "age": 31,
+              "date": {
+                "year": 2031,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2031_wellbeing-rehearsed-argument",
+              "selectedChoiceId": "ground",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 185,
+      "templateId": "wellbeing-quiet-not-silent",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 58,
+              "age": 80,
+              "date": {
+                "year": 2080,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2080_wellbeing-quiet-not-silent",
+              "selectedChoiceId": "allow",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 64,
+              "age": 90,
+              "date": {
+                "year": 2090,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2090_wellbeing-quiet-not-silent",
+              "selectedChoiceId": "allow",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 186,
+      "templateId": "wellbeing-meal-comparison",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 61,
+              "age": 85,
+              "date": {
+                "year": 2085,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2085_wellbeing-meal-comparison",
+              "selectedChoiceId": "context",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 187,
+      "templateId": "wellbeing-waiting-without-feed",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 17,
+              "age": 25,
+              "date": {
+                "year": 2025,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2025_wellbeing-waiting-without-feed",
+              "selectedChoiceId": "observe",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 45,
+              "age": 65,
+              "date": {
+                "year": 2065,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2065_wellbeing-waiting-without-feed",
+              "selectedChoiceId": "observe",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 60,
+              "age": 82,
+              "date": {
+                "year": 2082,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2082_wellbeing-waiting-without-feed",
+              "selectedChoiceId": "observe",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 188,
+      "templateId": "wellbeing-good-day-pressure",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 47,
+              "age": 67,
+              "date": {
+                "year": 2067,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2067_wellbeing-good-day-pressure",
+              "selectedChoiceId": "pace",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 189,
+      "templateId": "wellbeing-habit-one-miss",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 190,
+      "templateId": "wellbeing-unhurried-breath",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 191,
+      "templateId": "career-actor-written-pause",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 192,
+      "templateId": "career-model-expression-board",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 193,
+      "templateId": "career-athlete-ritual-discussion",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 194,
+      "templateId": "career-musician-setlist-handwriting",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 195,
+      "templateId": "career-politician-sentence-length",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 196,
+      "templateId": "career-creator-fourth-introduction",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 197,
+      "templateId": "career-military-checklist-language",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 198,
+      "templateId": "career-astronaut-plain-explanation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 199,
+      "templateId": "career-royalty-ribbon-end",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 200,
+      "templateId": "pet-dog-important-smell",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 201,
+      "templateId": "pet-dog-invisible-throw",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 202,
+      "templateId": "pet-dog-doorway-greeting",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 203,
+      "templateId": "pet-cat-chosen-paper",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 204,
+      "templateId": "pet-cat-unexpected-box",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 205,
+      "templateId": "pet-cat-slow-blink",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 206,
+      "templateId": "pet-rabbit-floor-level",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 207,
+      "templateId": "pet-parrot-perfect-timing",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 208,
+      "templateId": "pet-familiar-presence",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 209,
+      "templateId": "pet-care-name-voice",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 210,
+      "templateId": "hobby-guitar-familiar-chord",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 211,
+      "templateId": "hobby-painting-rotation",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 212,
+      "templateId": "hobby-photo-background",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 213,
+      "templateId": "hobby-chess-perfect-plan",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 214,
+      "templateId": "hobby-reading-ending-opinion",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 215,
+      "templateId": "hobby-gaming-helpful-tip",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 216,
+      "templateId": "hobby-cooking-last-instruction",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 217,
+      "templateId": "hobby-gardening-labels",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 218,
+      "templateId": "hobby-small-improvement",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 219,
+      "templateId": "hobby-explain-without-selling",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 220,
+      "templateId": "travel-memory-old-ticket",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 221,
+      "templateId": "travel-memory-forgotten-phrase",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 222,
+      "templateId": "travel-memory-folded-map",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 223,
+      "templateId": "travel-memory-food-photos",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 224,
+      "templateId": "travel-memory-one-good-habit",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 225,
+      "templateId": "travel-memory-worth-the-visit",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 226,
+      "templateId": "travel-memory-unsent-card",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 227,
+      "templateId": "travel-memory-directions",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 228,
+      "templateId": "travel-memory-imperfect-weather",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 229,
+      "templateId": "travel-memory-short-version",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 230,
+      "templateId": "later-retirement-assumption",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 59,
+              "age": 81,
+              "date": {
+                "year": 2081,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2081_later-retirement-assumption",
+              "selectedChoiceId": "accurate",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 231,
+      "templateId": "later-old-handwriting",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 68,
+              "age": 96,
+              "date": {
+                "year": 2096,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2096_later-old-handwriting",
+              "selectedChoiceId": "kind",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 232,
+      "templateId": "later-forgotten-telephone-number",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 49,
+              "age": 69,
+              "date": {
+                "year": 2069,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2069_later-forgotten-telephone-number",
+              "selectedChoiceId": "laugh",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 47,
+              "age": 57,
+              "date": {
+                "year": 2057,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2057_later-forgotten-telephone-number",
+              "selectedChoiceId": "laugh",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 233,
+      "templateId": "later-unfamiliar-word",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 234,
+      "templateId": "later-old-competition",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 235,
+      "templateId": "later-photo-at-edge",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 236,
+      "templateId": "later-offered-a-hand",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 51,
+              "age": 72,
+              "date": {
+                "year": 2072,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2072_later-offered-a-hand",
+              "selectedChoiceId": "accept",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 48,
+              "age": 58,
+              "date": {
+                "year": 2058,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2058_later-offered-a-hand",
+              "selectedChoiceId": "accept",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 237,
+      "templateId": "later-changed-favourite",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 48,
+              "age": 68,
+              "date": {
+                "year": 2068,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2068_later-changed-favourite",
+              "selectedChoiceId": "update",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 238,
+      "templateId": "later-recording-labelled-retro",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 239,
+      "templateId": "later-another-year-question",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 66,
+              "age": 94,
+              "date": {
+                "year": 2094,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2094_later-another-year-question",
+              "selectedChoiceId": "honest",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 240,
+      "templateId": "work-salary-privacy",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 51,
+              "age": 63,
+              "date": {
+                "year": 2063,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2063_work-salary-privacy",
+              "selectedChoiceId": "share",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 241,
+      "templateId": "work-shared-note-riddle",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 242,
+      "templateId": "work-final-file",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 35,
+              "age": 51,
+              "date": {
+                "year": 2051,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2051_work-final-file",
+              "selectedChoiceId": "confirm",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 29,
+              "age": 36,
+              "date": {
+                "year": 2036,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2036_work-final-file",
+              "selectedChoiceId": "confirm",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 243,
+      "templateId": "work-forgotten-lunch",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 19,
+              "age": 30,
+              "date": {
+                "year": 2030,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2030_work-forgotten-lunch",
+              "selectedChoiceId": "offer",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 244,
+      "templateId": "work-room-temperature",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 14,
+              "age": 20,
+              "date": {
+                "year": 2020,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2020_work-room-temperature",
+              "selectedChoiceId": "compare",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 23,
+              "age": 28,
+              "date": {
+                "year": 2028,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2028_work-room-temperature",
+              "selectedChoiceId": "compare",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 37,
+              "age": 45,
+              "date": {
+                "year": 2045,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2045_work-room-temperature",
+              "selectedChoiceId": "compare",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 245,
+      "templateId": "work-training-slogan",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 31,
+              "age": 46,
+              "date": {
+                "year": 2046,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2046_work-training-slogan",
+              "selectedChoiceId": "practical",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 246,
+      "templateId": "work-honest-view-invited",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 49,
+              "age": 60,
+              "date": {
+                "year": 2060,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2060_work-honest-view-invited",
+              "selectedChoiceId": "specific",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 247,
+      "templateId": "work-invitation-outside",
+      "recordedSequenceReferences": [
+        {
+          "review": "a-ca901",
+          "file": "a-ca901/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 44,
+              "age": 64,
+              "date": {
+                "year": 2064,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2064_work-invitation-outside",
+              "selectedChoiceId": "accept",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        },
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 24,
+              "age": 29,
+              "date": {
+                "year": 2029,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2029_work-invitation-outside",
+              "selectedChoiceId": "accept",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 248,
+      "templateId": "work-misnamed-complaint",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 42,
+              "age": 51,
+              "date": {
+                "year": 2051,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2051_work-misnamed-complaint",
+              "selectedChoiceId": "facts",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 249,
+      "templateId": "work-trivia-phone",
+      "recordedSequenceReferences": [
+        {
+          "review": "b-gb902",
+          "file": "b-gb902/sequence.json",
+          "occurrences": [
+            {
+              "sequenceArrayIndex": 33,
+              "age": 41,
+              "date": {
+                "year": 2041,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2041_work-trivia-phone",
+              "selectedChoiceId": "rules",
+              "authoredChoiceOrdinalOneBased": 1
+            },
+            {
+              "sequenceArrayIndex": 41,
+              "age": 49,
+              "date": {
+                "year": 2049,
+                "month": 1,
+                "day": 1
+              },
+              "eventId": "event_2049_work-trivia-phone",
+              "selectedChoiceId": "rules",
+              "authoredChoiceOrdinalOneBased": 1
+            }
+          ],
+          "scope": "actual chosen ID and journal; selected body/effects source-correlated only"
+        }
+      ]
+    },
+    {
+      "index": 250,
+      "templateId": "adult-accidental-living-exhibit",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 251,
+      "templateId": "career-actor-rehearsal-door",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 252,
+      "templateId": "career-model-backdrop-fan",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 253,
+      "templateId": "career-athlete-timer-reminder",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 254,
+      "templateId": "career-musician-count-in",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 255,
+      "templateId": "career-politician-moving-lectern",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 256,
+      "templateId": "career-military-boot-reflection",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 257,
+      "templateId": "career-astronaut-loose-snack",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 258,
+      "templateId": "career-royalty-temporary-badge",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 259,
+      "templateId": "career-youtuber-thumbnail-face",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 260,
+      "templateId": "career-youtuber-drill-interview",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 261,
+      "templateId": "career-streamer-chair-soundcheck",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 262,
+      "templateId": "career-streamer-greeting-loop",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 263,
+      "templateId": "career-business-automatic-application",
+      "recordedSequenceReferences": []
+    },
+    {
+      "index": 264,
+      "templateId": "career-business-breakfast-cards",
+      "recordedSequenceReferences": []
+    }
+  ]
+}

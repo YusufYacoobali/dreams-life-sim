@@ -10764,5 +10764,51 @@
     "savedPendingAndHistoryRewritten": false,
     "currentLiteralReview": "Codex source re-review of the exact one-field correction; independent Work exact-commit review requested separately.",
     "historicalGolden": "Three existing tests assert the exact current result then restore only that field on copied narrative projections before the unchanged3bca golden; no broad normalisation."
+  },
+  "actualSequenceReviewReferences": {
+    "format": "additive-recorded-sequence-references-v1",
+    "scope": "Separate actual 33b recorded-artifact reviews; all original 265 source-review rows, counts, statuses, hashes and raw reviewer records remain unchanged. These references are not all 795 executed outcomes or native acceptance.",
+    "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "publicationBaseCommit": "63a03c97166d5a45d997dd94f7bb5b9533297bf7",
+    "overview": "actual-sequences/README.md",
+    "summary": "actual-sequences/summary.json",
+    "perTemplateObservationIndex": "actual-sequences/sequence-index.json",
+    "sourceBridge": "actual-sequences/publication-source-bridge.json",
+    "reviews": [
+      {
+        "id": "a-ca901",
+        "policy": "Professional A3",
+        "country": "CA",
+        "seed": 901,
+        "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+        "boundResultTelemetry": "not retained; selected result prose is explicitly source-correlated",
+        "actualEffectArithmeticReview": "not established by this telemetry",
+        "report": "actual-sequences/a-ca901/REPORT.md",
+        "summary": "actual-sequences/a-ca901/summary.json"
+      },
+      {
+        "id": "b-gb902",
+        "policy": "Criminal Bv2",
+        "country": "GB",
+        "seed": 902,
+        "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+        "boundResultTelemetry": "not retained; selected result prose is explicitly source-correlated",
+        "actualEffectArithmeticReview": "not established by this telemetry",
+        "report": "actual-sequences/b-gb902/REPORT.md",
+        "summary": "actual-sequences/b-gb902/summary.json"
+      },
+      {
+        "id": "d-us900",
+        "policy": "Editorial varied-choice V2",
+        "country": "US",
+        "seed": 900,
+        "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+        "boundResultTelemetry": "retained actual bodies and affected snapshots",
+        "actualEffectArithmeticReview": "59 actual catalogue rows; five genuine lower-bound clips",
+        "report": "actual-sequences/d-us900/REPORT.md",
+        "summary": "actual-sequences/d-us900/summary.json"
+      }
+    ],
+    "callbackReconciliation": "actual-sequences/callback-reconciliation.md"
   }
 }
