@@ -102,7 +102,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(36), engineVersion: z.literal(37), contentVersion: z.literal(12),
+  schemaVersion: z.literal(37), engineVersion: z.literal(38), contentVersion: z.literal(12),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -112,8 +112,7 @@ export const worldSchema = z.object({
   households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
   npcSeparations: z.array(npcSeparationSchema),
-  // Isolated next-version bridge; root replaces with a required migrated array.
-  npcMoves: z.array(npcMoveSchema).default([]),
+  npcMoves: z.array(npcMoveSchema),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
@@ -594,5 +593,10 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   }
   // Weighted/new situations affect future selection only, never stored choices.
   if (parsed && parsed.schemaVersion === 36 && parsed.engineVersion === 37 && parsed.contentVersion === 11) parsed.contentVersion = 12;
+  // Independent retirement moves begin only with a future annual decision.
+  // Preserve all existing teen/admission/study/separation and friendship facts.
+  if (parsed && parsed.schemaVersion === 36 && parsed.engineVersion === 37) {
+    parsed.schemaVersion = 37; parsed.engineVersion = 38; parsed.npcMoves = [];
+  }
   return validateWorld(parsed, immutable);
 }
