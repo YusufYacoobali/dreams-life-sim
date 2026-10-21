@@ -98,6 +98,9 @@ test('missing runtime pins, partial commit trees, changed source and untracked r
     ['partial tree', f => { const pin = f.source.git.tree, records = fs.readFileSync(pin.file, 'utf8').split('\0').filter(Boolean); fs.writeFileSync(pin.file, records.slice(1).join('\0') + '\0'); f.source.git.tree = h.proof(pin.file); f.save(); }, /Incomplete or unrelated ls-tree/],
     ['changed source', f => { fs.appendFileSync(path.join(f.root, 'src/game/engine.ts'), '// changed'); }, /Git blob differs/],
     ['untracked runtime', f => { fs.writeFileSync(path.join(f.root, 'src/game/unlisted.ts'), 'throw 1'); }, /unlisted runtime/],
+    ['untracked root config', f => { fs.writeFileSync(path.join(f.root, 'metro.config.js'), 'throw 1'); }, /unlisted runtime/],
+    ['untracked root config symlink', f => { fs.symlinkSync(path.join(f.root, 'src/game/engine.ts'), path.join(f.root, 'metro.config.js')); }, /Runtime root config.*non-symlink/],
+    ['untracked root config directory', f => { fs.mkdirSync(path.join(f.root, 'babel.config.js')); }, /Runtime root config.*regular/],
   ]) await t.test(name, t => { const f = fixture(t); alter(f); assert.throws(() => h.preflight(f.capturePath), reason); });
 });
 

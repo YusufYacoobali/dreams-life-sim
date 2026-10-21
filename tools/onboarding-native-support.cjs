@@ -59,7 +59,7 @@ function verifySource(file) {
   const actual = [];
   const visit = directory => { for (const entry of fs.readdirSync(directory, { withFileTypes: true })) { const absolute = path.join(directory, entry.name); assert(!entry.isSymbolicLink(), 'Untracked runtime symlink'); if (entry.isDirectory()) visit(absolute); else { assert(entry.isFile(), 'Unexpected runtime file kind'); actual.push(path.relative(source.root, absolute).split(path.sep).join('/')); } } };
   for (const directory of ['app', 'src', 'assets']) if (fs.existsSync(path.join(source.root, directory))) { const absolute = path.join(source.root, directory), stat = fs.lstatSync(absolute); assert(stat.isDirectory() && !stat.isSymbolicLink(), 'Runtime root must be a real directory'); visit(absolute); }
-  for (const name of fs.readdirSync(source.root)) if (!name.includes('/') && managed(name) && fs.lstatSync(path.join(source.root, name)).isFile()) actual.push(name);
+  for (const name of fs.readdirSync(source.root)) if (!name.includes('/') && managed(name)) { const stat = fs.lstatSync(path.join(source.root, name)); assert(stat.isFile() && !stat.isSymbolicLink(), 'Runtime root config must be a regular non-symlink file: ' + name); actual.push(name); }
   assert.deepEqual(actual.sort(), required, 'Source tree contains missing/unlisted runtime files');
   return { manifest: proof(file), root: source.root, commit: source.commit, versions: source.versions, managedFilesVerified: required.length, git: source.git };
 }

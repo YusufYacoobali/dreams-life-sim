@@ -41,3 +41,5 @@ No real baseline, source, journey or capture has been processed by this draft. N
 ## Draft validation status
 
 Syntax and synthetic protocol checks are queued behind the shared agent runner; they have not run yet. The dedicated command is `node --test tools/tests/onboarding-native.test.cjs`. It uses temporary synthetic Git repositories and eight-table SQLite files containing deliberately invalid game payload text. Passing those tests can establish raw/provenance guards only, never a valid game world, natural birth, command outcome or native acceptance. No packages or game runtime are loaded by the helper.
+
+Independent source review found that an untracked root config symlink/directory could be skipped by the inventory's regular-file filter. Every recognized root config is now checked for regular/non-symlink kind before inventory comparison, with separate synthetic untracked regular/symlink/directory regressions. This fixes source-proof coverage only and changes no game/runtime behavior.
