@@ -1,0 +1,1472 @@
+{
+  "format": "dreams-editorial-source-review-v1",
+  "sourceCommit": "66ec642e4c9a9332eac322bd8fb12e0a6a3d8e87",
+  "inventorySha256": "a4fe4e6c5ab33d2a3507ce54db77198b2ab180fb59070db099036e916d10dcd7",
+  "reviewInputSha256": "e85f195f894440d751a5468c76d633bda541251d9eeff166991966fa9d418f79",
+  "range": {
+    "start": 0,
+    "end": 88
+  },
+  "reviewer": {
+    "agent": "/root/story_editorial",
+    "kind": "Codex source review",
+    "externalHuman": false
+  },
+  "reviewedFields": [
+    "title",
+    "setup",
+    "all3choices",
+    "all3results",
+    "all3journals",
+    "requestedEffects",
+    "eligibilityContext"
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "id": "first-cake",
+      "category": "birth-early-childhood",
+      "rationale": "A first cake becomes sensory play, sharing or observation; small stat and actual parent-bond effects match each result without inventing a purchase.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 31,
+      "sourceLiteralSha256": "2f0c7e8dded87c1fb0cc0afaa3144dac25b0496a1c215e6d7634a2b78c6d0adc",
+      "reviewedChoiceIds": [
+        "smash",
+        "share",
+        "observe"
+      ]
+    },
+    {
+      "index": 1,
+      "id": "shoe-principle",
+      "category": "birth-early-childhood",
+      "rationale": "Toddler shoe negotiation distinguishes accepting help, independent effort and protest; the parent context and modest discipline, stress and bond changes fit.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 40,
+      "sourceLiteralSha256": "bb4b9baa4b4ed7932f69bd39c30eac42ee1ae04d49f439f5bca29dbf329b40eb",
+      "reviewedChoiceIds": [
+        "cooperate",
+        "alone",
+        "protest"
+      ]
+    },
+    {
+      "index": 2,
+      "id": "blanket-dragon",
+      "category": "birth-early-childhood",
+      "rationale": "An explicitly imaginary bedtime dragon leads to shared storytelling, biography or reassurance, with no real creature, tax debt or new person implied.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 49,
+      "sourceLiteralSha256": "a95e31c3bccebb5ed7e2a35be020cb5756cee42c665ee865d3c33077770789dc",
+      "reviewedChoiceIds": [
+        "invite",
+        "write",
+        "check"
+      ]
+    },
+    {
+      "index": 3,
+      "id": "library-card",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Library reading is a local leisure incident: the large book costs effort, choosing a favourite brings enjoyment, and asking for advice improves understanding without financial borrowing.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 58,
+      "sourceLiteralSha256": "c5541c8328756f8479e6f6acce085cdee3b2b12a074d22076384d410c9dca4c0",
+      "reviewedChoiceIds": [
+        "big",
+        "small",
+        "ask"
+      ]
+    },
+    {
+      "index": 4,
+      "id": "broken-mug",
+      "category": "relationships-family",
+      "rationale": "The broken mug tests honesty with an actual present parent; supervised reuse, disclosure and concealment match the bond/stat changes and claim no cash repair.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 67,
+      "sourceLiteralSha256": "1c0fd364b67c1bf8d89c4b323f720b134b87b33c0e5dab39cc19269ca4ce9f3e",
+      "reviewedChoiceIds": [
+        "tell",
+        "fix",
+        "hide"
+      ]
+    },
+    {
+      "index": 5,
+      "id": "rainy-fort",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "Rainy-day blanket play, window reading and sulking have distinct enjoyment, learning and energy consequences; the fort is play rather than owned property.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 76,
+      "sourceLiteralSha256": "4eb6ec72c5b7c261b139d5727df16c1ceee4add2b6161e5fe7be4e592c7c26f6",
+      "reviewedChoiceIds": [
+        "build",
+        "read",
+        "sulk"
+      ]
+    },
+    {
+      "index": 6,
+      "id": "parent-old-music",
+      "category": "relationships-family",
+      "rationale": "Listening, swapping songs and mocking a real parent provide distinct cultural conversation outcomes, with existing-parent bond changes and no invented performance or account.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 85,
+      "sourceLiteralSha256": "105b9da71bb49e56d4ae807ce9f8888c6bb8472816b8605d67614ce0fa87c44f",
+      "reviewedChoiceIds": [
+        "listen",
+        "swap",
+        "roast"
+      ]
+    },
+    {
+      "index": 7,
+      "id": "group-chat-rumour",
+      "category": "fame-social-media",
+      "rationale": "An anonymous group-chat rumour offers evidence checking, muting or forwarding; respect/stress effects fit without fabricating a named victim, account or legal case.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 94,
+      "sourceLiteralSha256": "f875b026839aacdc44a0a94de70c8f4c99b86b567382727e8c235c4e7852eb3c",
+      "reviewedChoiceIds": [
+        "question",
+        "mute",
+        "forward"
+      ]
+    },
+    {
+      "index": 8,
+      "id": "first-presentation",
+      "category": "school-teenage-life",
+      "rationale": "The teen peer introduction contrasts measured speaking, a joke and rushing; anonymous room context and confidence-related stats promise no school award or new acquaintance.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 103,
+      "sourceLiteralSha256": "dce525baff86d12fa460d1ca26e8e780e7101dac1588f5c96583b7ba9a7401a2",
+      "reviewedChoiceIds": [
+        "breathe",
+        "joke",
+        "rush"
+      ]
+    },
+    {
+      "index": 9,
+      "id": "parent-boundary",
+      "category": "relationships-family",
+      "rationale": "Remote parent messages produce a negotiated check-in, reassuring photograph or avoidance; parentContact permits distance and existing-parent bond effects match the conversation.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 112,
+      "sourceLiteralSha256": "4d2d2fa699103baf367500a51d55c6d0b0cc1624a204f6dab72b99f9d3ebbbb9",
+      "reviewedChoiceIds": [
+        "explain",
+        "photo",
+        "ignore"
+      ]
+    },
+    {
+      "index": 10,
+      "id": "comparison-scroll",
+      "category": "fame-social-media",
+      "rationale": "Comparing a feed with laundry centres on social-media attention: closing it, messaging and more scrolling have distinct stress, enjoyment and effort costs without granting fame.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 121,
+      "sourceLiteralSha256": "1ac998e83a34d74d57e0b575a1ecb6d78640e1bab9cda7f7ed11176d98b3e0d9",
+      "reviewedChoiceIds": [
+        "close",
+        "message",
+        "scroll"
+      ]
+    },
+    {
+      "index": 11,
+      "id": "community-garden",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An adult local garden volunteer afternoon offers participation, instruction or refusal; modest fitness/learning effects create no persistent contact, wages or crop ownership.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 130,
+      "sourceLiteralSha256": "7019e0347fefa5d0b1881b832cf0a922bbe80d13ebfc6550b05ccc7c977c0b35",
+      "reviewedChoiceIds": [
+        "join",
+        "learn",
+        "pass"
+      ]
+    },
+    {
+      "index": 12,
+      "id": "bad-review",
+      "category": "fame-social-media",
+      "rationale": "The online misunderstanding contrasts one clarification, disengagement and an overworked reply; narrative and journal match respect/stress/energy outcomes without an invented controversy record.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 139,
+      "sourceLiteralSha256": "e1b6b9dd8ce9be23582b4d01993ef8f21471dc30cfe2b80db43028488a7f565d",
+      "reviewedChoiceIds": [
+        "clarify",
+        "leave",
+        "essay"
+      ]
+    },
+    {
+      "index": 13,
+      "id": "rest-guilt",
+      "category": "health-later-life",
+      "rationale": "Rest, a local walk and filling the afternoon create different energy, fitness and stress tradeoffs; local eligibility covers the physical walk and no paid routine is implied.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 148,
+      "sourceLiteralSha256": "cf3a795af01cfa2f579b8e784fe24366a3480b7bb673d965e77fd6b759ed7b58",
+      "reviewedChoiceIds": [
+        "rest",
+        "walk",
+        "fill"
+      ]
+    },
+    {
+      "index": 14,
+      "id": "old-photo",
+      "category": "relationships-family",
+      "rationale": "An actual contactable parent shares an old photograph; listening, labelling and joking alter the existing bond, with a past haircut rather than a claim about current appearance.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 157,
+      "sourceLiteralSha256": "35f7f1bd870620e81b29a51f3a5a5bbc28e91b201dd45a119e9117929fd8182b",
+      "reviewedChoiceIds": [
+        "story",
+        "scan",
+        "joke"
+      ]
+    },
+    {
+      "index": 15,
+      "id": "local-meeting",
+      "category": "university-early-independence",
+      "rationale": "A local adult civic meeting tests participation, listening and leaving; contribution is recorded only in the fictional meeting, with no office, public-policy or asset grant.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 166,
+      "sourceLiteralSha256": "8a2bb753ce91c3919c43012dbf5040c235bbcca6e9dcaa57c1f78bac4b423f01",
+      "reviewedChoiceIds": [
+        "speak",
+        "listen",
+        "leave"
+      ]
+    },
+    {
+      "index": 16,
+      "id": "small-mistake",
+      "category": "university-early-independence",
+      "rationale": "An unfinished message tests practical communication and rumination; correction, humour and rereading fit modest stats without assuming a workplace or changing employment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 175,
+      "sourceLiteralSha256": "9817cfbc61b2758ce29eb1df506f45783e55063ee6e1375e58c7a5fb9b577ada",
+      "reviewedChoiceIds": [
+        "own",
+        "laugh",
+        "reread"
+      ]
+    },
+    {
+      "index": 17,
+      "id": "birthday-number",
+      "category": "health-later-life",
+      "rationale": "Birthday self-assessment contrasts fair appraisal, a modest plan and comparison-driven worry; the emotional/discipline effects promise no achieved milestone or grocery payment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 184,
+      "sourceLiteralSha256": "ca6d492eeaef382cc6108d217cc30d5caf99e00168ace66a444dae25a67b1658",
+      "reviewedChoiceIds": [
+        "notice",
+        "plan",
+        "compare"
+      ]
+    },
+    {
+      "index": 18,
+      "id": "familiar-street",
+      "category": "health-later-life",
+      "rationale": "A later-life walk through a changed familiar street offers observation, written recollection or moving on; modest happiness, fitness, smarts and energy effects match without claiming restoration of a place.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 193,
+      "sourceLiteralSha256": "d7623d1089aadeccace04e588ffac6d3b2e08cbf31eb83ce2fb14dde540778e7",
+      "reviewedChoiceIds": [
+        "walk",
+        "write",
+        "rush"
+      ]
+    },
+    {
+      "index": 19,
+      "id": "new-skill-late",
+      "category": "health-later-life",
+      "rationale": "An older beginner can attempt a basic lesson, observe and ask, or leave; learning and confidence remain modest stats, with no instant qualification or guaranteed return.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 202,
+      "sourceLiteralSha256": "13803e789544f5631bccd3c4d10985720aeb6da7eb0022b1980181154c522cd3",
+      "reviewedChoiceIds": [
+        "try",
+        "watch",
+        "leave"
+      ]
+    },
+    {
+      "index": 20,
+      "id": "useful-advice",
+      "category": "health-later-life",
+      "rationale": "Later-life advice contrasts listening, admitting an old mistake and lecturing; respect and happiness effects fit the anonymous younger person without creating a family bond.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 211,
+      "sourceLiteralSha256": "3adc3e983fed552a95f98b34767c786661adca0bdc93581349940abe2a6aa132",
+      "reviewedChoiceIds": [
+        "listen",
+        "story",
+        "lecture"
+      ]
+    },
+    {
+      "index": 21,
+      "id": "quiet-morning",
+      "category": "health-later-life",
+      "rationale": "A peaceful older morning supports rest, a small conversation or worry; energy and emotional changes do not promise a medical cure or named contact.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/events.ts",
+      "line": 220,
+      "sourceLiteralSha256": "4fbc3f6f7e64baf01b54ca53df0c4a1ef30b722275d774f36493db71a9974df6",
+      "reviewedChoiceIds": [
+        "savour",
+        "reach",
+        "worry"
+      ]
+    },
+    {
+      "index": 22,
+      "id": "toddler-stairwell-echo",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler experiments with stairwell echoes using a long greeting, quiet word or patient silence; playful wall language matches observation rather than inventing a speaker.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 6,
+      "sourceLiteralSha256": "dcf82f5d37c30ba592ee1183625a23024b670f09a09be3c4062d421d9da01540",
+      "reviewedChoiceIds": [
+        "hello",
+        "quiet",
+        "wait"
+      ]
+    },
+    {
+      "index": 23,
+      "id": "toddler-zipper-puzzle",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler jacket zipper invites careful alignment, inspecting teeth or a break; discipline, understanding and recovery effects stay within practical early learning.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 15,
+      "sourceLiteralSha256": "7b47cee244c9515ce51c5df613176218158a64c7a183df6808a8e499c801bb84",
+      "reviewedChoiceIds": [
+        "align",
+        "inspect",
+        "break"
+      ]
+    },
+    {
+      "index": 24,
+      "id": "toddler-shadow-race",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler shadow race becomes dancing, observing light distance or resting; the result explains size changes and awards no literal race victory.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "3adbaf193d1d02e856267c7b62c9f70c11c8d2e1b59b52e97f52fc3c1ae38fa2",
+      "reviewedChoiceIds": [
+        "dance",
+        "light",
+        "rest"
+      ]
+    },
+    {
+      "index": 25,
+      "id": "toddler-cardboard-postbox",
+      "category": "birth-early-childhood",
+      "rationale": "A bottomless cardboard postbox is explicitly pretend correspondence; folding a base, colour sorting and repeating the drop match learning or amusement without a real postal transaction.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 33,
+      "sourceLiteralSha256": "74fe771ee3759d3d8bfc1ed856e6b35ad3cd1c9f67343b62b35e52f2829b6307",
+      "reviewedChoiceIds": [
+        "repair",
+        "sort",
+        "express"
+      ]
+    },
+    {
+      "index": 26,
+      "id": "toddler-biscuit-halves",
+      "category": "birth-early-childhood",
+      "rationale": "A broken biscuit invites fitting halves, celebrating or counting crumbs; the copy explicitly preserves the original portion, with only small learning and happiness effects.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 42,
+      "sourceLiteralSha256": "c886f5cf97dad16c2e7a52c2df83a3e6f932741a2544bf9817382a47e3117b3d",
+      "reviewedChoiceIds": [
+        "compare",
+        "celebrate",
+        "crumbs"
+      ]
+    },
+    {
+      "index": 27,
+      "id": "school-inverted-map",
+      "category": "school-teenage-life",
+      "rationale": "A primary map exercise uses the actual teacher: correcting orientation, asking about north or making a submarine joke have distinct grade, science and teacher-bond effects consistent with the classroom result.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 51,
+      "sourceLiteralSha256": "6a1afcc2b3b7d1e04918600d46e27acd2e1b07a3388eaafd148b5727cd68fc2f",
+      "reviewedChoiceIds": [
+        "turn",
+        "ask",
+        "submarine"
+      ]
+    },
+    {
+      "index": 28,
+      "id": "school-library-whisper",
+      "category": "school-teenage-life",
+      "rationale": "Quiet reading with an actual classmate contrasts self-control, postponing a funny story and another joke; modest peer bonding and the distracted-reading grade penalty match the journals.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 60,
+      "sourceLiteralSha256": "33d0c9e5e204ef8c34d892836b1a222482ac860f95c6a6ceabfb4bc7001e4f8a",
+      "reviewedChoiceIds": [
+        "pause",
+        "later",
+        "reply"
+      ]
+    },
+    {
+      "index": 29,
+      "id": "school-relay-handover",
+      "category": "school-teenage-life",
+      "rationale": "A primary relay with both real school participants gives joint practice, teacher demonstration or unfair blame; sport learning costs energy and blame harms the two relevant bonds without awarding a race.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "79f85a9a3893c6117b2796911d421ec168bfb63211146ccf5c11104ba7e6ce6e",
+      "reviewedChoiceIds": [
+        "practise",
+        "ask",
+        "blame"
+      ]
+    },
+    {
+      "index": 30,
+      "id": "school-bean-monitor",
+      "category": "school-teenage-life",
+      "rationale": "Monitoring one classroom bean offers consistent measurement, care advice or a comic speech; science/grade and teacher effects match learning while the joke claims no plant growth.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 78,
+      "sourceLiteralSha256": "dfd434fa2ca4f24c872a28931944a798f6380a95448b130340ccecb0824cbec0",
+      "reviewedChoiceIds": [
+        "measure",
+        "ask",
+        "speech"
+      ]
+    },
+    {
+      "index": 31,
+      "id": "school-secret-language",
+      "category": "school-teenage-life",
+      "rationale": "Inventing a private language with an existing primary classmate leads to a dictionary, gestures or ordinary words; peer, acting and stress effects preserve the failed-language premise.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 87,
+      "sourceLiteralSha256": "78da7d9c3d7604a0fb4acf3b4334747f3dd8024b2c6b930a940b7f6443bfa2b4",
+      "reviewedChoiceIds": [
+        "dictionary",
+        "gestures",
+        "ordinary"
+      ]
+    },
+    {
+      "index": 32,
+      "id": "school-microphone-rehearsal",
+      "category": "school-teenage-life",
+      "rationale": "An actual teacher supervises assembly microphone practice; measured reading, asking about pauses and making a monster noise consistently affect acting, stress and teacher trust without a public-performance award.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 96,
+      "sourceLiteralSha256": "93ae7bdf9cd7188fadd24b486a613ed44dde995d6c965dda7773e95147969e39",
+      "reviewedChoiceIds": [
+        "read",
+        "breathe",
+        "noise"
+      ]
+    },
+    {
+      "index": 33,
+      "id": "school-rainy-break",
+      "category": "school-teenage-life",
+      "rationale": "An indoor primary board game with the real classmate offers agreed rules, harmless house rules or an accusation; reciprocal fun and bond losses match whether the game continues.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 105,
+      "sourceLiteralSha256": "ba88fb5a2747c144096ad8f6e1b0f00f21a00a5a3653848ee5ee08a9700b8f70",
+      "reviewedChoiceIds": [
+        "agree",
+        "play",
+        "quit"
+      ]
+    },
+    {
+      "index": 34,
+      "id": "school-label-swap",
+      "category": "school-teenage-life",
+      "rationale": "Swapped primary display labels involve an actual teacher and classmate; quiet correction, a potato joke or an unsupported accusation match both bonds and promise no art credential.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 114,
+      "sourceLiteralSha256": "9e82d90855a4e53515345d9ce2e20b5434f5a4392cf5585c4af0c3b71a07c987",
+      "reviewedChoiceIds": [
+        "quiet",
+        "joke",
+        "accuse"
+      ]
+    },
+    {
+      "index": 35,
+      "id": "teen-unit-confusion",
+      "category": "school-teenage-life",
+      "rationale": "A secondary science unit-conversion error can be corrected, discussed with the actual teacher or defended; science and grades match the corrected or still-wrong answer without changing country units.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 123,
+      "sourceLiteralSha256": "8c3e1cfbc89215c8947ed61aef7b612df52a7c2f07ead34a4b38e3c1a9fdc13b",
+      "reviewedChoiceIds": [
+        "redo",
+        "help",
+        "defend"
+      ]
+    },
+    {
+      "index": 36,
+      "id": "teen-debate-draw",
+      "category": "school-teenage-life",
+      "rationale": "A real secondary debate assignment contrasts researching an opposing view, rehearsing with the actual classmate and refusing preparation; grades, politics skill and both school bonds match without forcing a belief.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 132,
+      "sourceLiteralSha256": "a459bbef85787087dfccde781ff33cf5c12b1635af2eb2afe6afa78c5355d681",
+      "reviewedChoiceIds": [
+        "research",
+        "practice",
+        "refuse"
+      ]
+    },
+    {
+      "index": 37,
+      "id": "teen-yearbook-proof",
+      "category": "school-teenage-life",
+      "rationale": "A real teacher and classmate participate in correcting a yearbook proof, choosing quotes together or knowingly retaining a placeholder; modest bonds and personal stats fit with no fame or publication income.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 141,
+      "sourceLiteralSha256": "d2497dd285f3053e9c295e448aadbb950d5761f170d717cc049c5a5764e103d1",
+      "reviewedChoiceIds": [
+        "correct",
+        "together",
+        "keep"
+      ]
+    },
+    {
+      "index": 38,
+      "id": "teen-study-soundtrack",
+      "category": "school-teenage-life",
+      "rationale": "Studying with the actual classmate offers quiet work, separate methods or singing instead; productivity raises grades, distraction lowers them and peer effects match the social arrangement.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 150,
+      "sourceLiteralSha256": "a5da7cbc4ec6615a6cbfcbb1b0f9aaeb4f00fe3070894112a551aa0f4a704e7a",
+      "reviewedChoiceIds": [
+        "quiet",
+        "separate",
+        "sing"
+      ]
+    },
+    {
+      "index": 39,
+      "id": "teen-family-interview",
+      "category": "school-teenage-life",
+      "rationale": "A secondary family-history assignment requires both the teacher and a contactable real parent; listening, focusing questions or interrupting consistently affect actual parent trust and school grades.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 159,
+      "sourceLiteralSha256": "965677d164787bc55b2a1d56ee9426e42ec2fad0e0f131450b774763dcffdbb9",
+      "reviewedChoiceIds": [
+        "listen",
+        "focus",
+        "interrupt"
+      ]
+    },
+    {
+      "index": 40,
+      "id": "teen-volunteer-roster",
+      "category": "school-teenage-life",
+      "rationale": "A real teacher allocates classroom cleanup to two real pupils; sharing, clarifying the rotation or leaving agree with both bond changes, energy use and the unfinished duty.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 168,
+      "sourceLiteralSha256": "dfb3af29c85ef787f1a8c354f9731d7a825c87c21906c8a02b10a658cff11e0a",
+      "reviewedChoiceIds": [
+        "share",
+        "clarify",
+        "leave"
+      ]
+    },
+    {
+      "index": 41,
+      "id": "teen-marking-correction",
+      "category": "school-teenage-life",
+      "rationale": "Balanced marking errors preserve the total in the disclosure and ignore branches; only working through answers adds current understanding/grades, with actual teacher trust and no contradictory mark change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/schoolDayStories.ts",
+      "line": 177,
+      "sourceLiteralSha256": "f42559bfe31cc963260fc39e929b12a73a5873abecddc9c500e5add9612101af",
+      "reviewedChoiceIds": [
+        "both",
+        "understand",
+        "ignore"
+      ]
+    },
+    {
+      "index": 42,
+      "id": "first-bubble-catch",
+      "category": "birth-early-childhood",
+      "rationale": "An infant chasing, watching or complaining about a soap bubble receives small emotional, energy or learning effects; fleeting possession and customer-service language are clearly playful.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 6,
+      "sourceLiteralSha256": "30e96dacaf375ef4eecd0212c3063611a713f336e2d597de48aef7fe6ad5c659",
+      "reviewedChoiceIds": [
+        "chase",
+        "watch",
+        "complain"
+      ]
+    },
+    {
+      "index": 43,
+      "id": "first-tower-demolition",
+      "category": "birth-early-childhood",
+      "rationale": "A first block tower can be rebuilt wider, demolished for fun or replaced by a line; practical learning and calm do not grant property, construction work or literal permits.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 15,
+      "sourceLiteralSha256": "fb8b226b265f73f4d9d0437e22a3a1b1301ffc6623f808bd4dc6a073963801f0",
+      "reviewedChoiceIds": [
+        "rebuild",
+        "crash",
+        "stop"
+      ]
+    },
+    {
+      "index": 44,
+      "id": "first-camera-closeup",
+      "category": "birth-early-childhood",
+      "rationale": "A first phone-camera interaction with an actual parent supports a close-up, waving at the screen or turning away; bonds and stats fit, but the last result assumes hair despite valid bald appearance.",
+      "reviewStatus": "reviewed-concrete-finding",
+      "findings": [
+        {
+          "id": "bald-photo-hair-assumption",
+          "severity": "minor-copy",
+          "sourceFile": "src/game/content/earlyHomeStories.ts",
+          "line": 29,
+          "copy": "{parent} gets a photograph of your hair.",
+          "actualMismatch": "Template eligibility permits any appearance at ages 1–3 with an actual parent. Valid saved appearance.hair===0 is bald, so this result can describe a trait absent from the character.",
+          "corroboratingSource": [
+            "src/game/content/earlyHomeStories.ts:24",
+            "src/game/model.ts:89",
+            "src/game/createLife.ts:65",
+            "src/ui/appearanceLabels.ts:9"
+          ],
+          "suggestedFutureCorrection": "Use appearance-neutral wording such as the back of your head.",
+          "evidenceScope": "Static source/copy contradiction; no runtime or natural encounter reproduction in this audit."
+        }
+      ],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "2f32ef1d7a21f3170883749d024d31f410a63d22ddfc4926b67a0ec012bf7a37",
+      "reviewedChoiceIds": [
+        "nose",
+        "wave",
+        "away"
+      ]
+    },
+    {
+      "index": 45,
+      "id": "first-nap-negotiation",
+      "category": "birth-early-childhood",
+      "rationale": "An infant nap negotiation with the actual parent offers sleeping, reassurance or protest; energy and stress changes reflect resting versus a tiring argument, and only the real parent bond changes.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 33,
+      "sourceLiteralSha256": "0c7330b8a460358b2c3343b45f02881759e82cdd763925e5cced5c13b244e583",
+      "reviewedChoiceIds": [
+        "nap",
+        "settle",
+        "protest"
+      ]
+    },
+    {
+      "index": 46,
+      "id": "toddler-parent-name",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler tests the real parent’s first name, asks about family names or resumes the usual name; the copy avoids assuming a gendered parental title and uses small learning/bond effects.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 42,
+      "sourceLiteralSha256": "584e2083b11b9c388c7edb6d5f23b48188f0db56618d62c90709ce2b0b13080b",
+      "reviewedChoiceIds": [
+        "repeat",
+        "ask",
+        "usual"
+      ]
+    },
+    {
+      "index": 47,
+      "id": "toddler-ice-cube",
+      "category": "birth-early-childhood",
+      "rationale": "A real parent supervises inspecting melting ice, repeated cold touching or moving it back to a colder place; water and observation results grant no medical or material reward.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 51,
+      "sourceLiteralSha256": "636cc9f09a3567e0cb09172ed5a5505fdf5241d5b8aa8e46acac171beb4811bd",
+      "reviewedChoiceIds": [
+        "watch",
+        "touch",
+        "save"
+      ]
+    },
+    {
+      "index": 48,
+      "id": "toddler-lift-button",
+      "category": "birth-early-childhood",
+      "rationale": "Lift-floor choice with the actual parent contrasts correct pressing, explanation and extra stops; small discipline and bond effects match supervised practical learning, without claiming owned property.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 60,
+      "sourceLiteralSha256": "1f8e37df19681324a0e08f5b25c64cd184b966cf8da2e549dd79d68675a0261f",
+      "reviewedChoiceIds": [
+        "one",
+        "check",
+        "more"
+      ]
+    },
+    {
+      "index": 49,
+      "id": "toddler-caterpillar-crossing",
+      "category": "birth-early-childhood",
+      "rationale": "A local toddler caterpillar encounter offers observing, leaving room or a pretend race; respect, learning and energy effects fit and the unaware animal wins no actual award.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "257fd9e591604c1b03d36c02ecdf499e8a0f79bcabc8fadf7f679622793c88e9",
+      "reviewedChoiceIds": [
+        "watch",
+        "space",
+        "race"
+      ]
+    },
+    {
+      "index": 50,
+      "id": "toddler-why-machine",
+      "category": "birth-early-childhood",
+      "rationale": "Repeated sky questions, a drawing or an invented paint theory involve an actual parent; the comic theory remains the child’s proposal and does not override world facts or qualifications.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 78,
+      "sourceLiteralSha256": "df9dd04d3f64611d7ca5002ad91d935e4c0a97d31ab87cdcd91ffaa84e841e28",
+      "reviewedChoiceIds": [
+        "follow",
+        "draw",
+        "invent"
+      ]
+    },
+    {
+      "index": 51,
+      "id": "child-first-loose-tooth",
+      "category": "birth-early-childhood",
+      "rationale": "A first loose tooth can be left, inspected or widely announced; tiny emotional and learning effects do not force an extraction, treatment or payment.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 87,
+      "sourceLiteralSha256": "fd081766e52d563744998e4f32ba8dfcfc3f254ad0088c72f2a3316e3beb4c3e",
+      "reviewedChoiceIds": [
+        "leave",
+        "check",
+        "announce"
+      ]
+    },
+    {
+      "index": 52,
+      "id": "child-pocket-museum",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "A child’s pocket collection becomes sorting, returning outdoors or imaginary dramatic names; the museum/title language is pretend and effects create no business or owned asset.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 96,
+      "sourceLiteralSha256": "e40d4ee71df1ea32581fd31c0518629553993e180a9382d9b6f7169f20d1180d",
+      "reviewedChoiceIds": [
+        "sort",
+        "return",
+        "names"
+      ]
+    },
+    {
+      "index": 53,
+      "id": "school-wrong-jacket",
+      "category": "school-teenage-life",
+      "rationale": "A primary pupil mistakes a real classmate’s jacket, returns it, jokes or disputes the label; peer trust and discipline match whether the mistake is resolved politely.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 105,
+      "sourceLiteralSha256": "2b51a397851271c9f561ec4effde7ffd44f46705fb34f3aeec07a92604c773d4",
+      "reviewedChoiceIds": [
+        "return",
+        "joke",
+        "insist"
+      ]
+    },
+    {
+      "index": 54,
+      "id": "school-empty-lunchbox",
+      "category": "school-teenage-life",
+      "rationale": "An empty school lunchbox belongs to the actual classmate and a real teacher can help; quiet referral, companionship or public embarrassment match both bonds without making the child pay for lunch.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 114,
+      "sourceLiteralSha256": "536350361f47ff487e2628549fc9b26040c4a21cb4a814336f8fd9a7e6b7ad83",
+      "reviewedChoiceIds": [
+        "quiet",
+        "ask",
+        "announce"
+      ]
+    },
+    {
+      "index": 55,
+      "id": "school-answer-blurt",
+      "category": "school-teenage-life",
+      "rationale": "Knowing an answer permits waiting, blurting or listening; the actual teacher’s turn-taking response and small grade changes are consistent with learning rather than automatic classroom awards.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 123,
+      "sourceLiteralSha256": "8790a2ece7748e6c97d5cd1396649d1b40497010c18f9a4573cea06a192a94e0",
+      "reviewedChoiceIds": [
+        "wait",
+        "blurt",
+        "listen"
+      ]
+    },
+    {
+      "index": 56,
+      "id": "school-slide-queue",
+      "category": "school-teenage-life",
+      "rationale": "An actual primary classmate cuts the slide queue; asserting a boundary mildly strains the bond, tolerating it preserves calm, and pushing back harms respect and the relationship.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 132,
+      "sourceLiteralSha256": "2019d2da2503f1d3641e4124e4d8b1d8f05821d7c1e5d7271c812384ce1b06d7",
+      "reviewedChoiceIds": [
+        "ask",
+        "let",
+        "push"
+      ]
+    },
+    {
+      "index": 57,
+      "id": "school-show-tell-prop",
+      "category": "school-teenage-life",
+      "rationale": "A forgotten show-and-tell prop leads to honest description, miming or a false value claim; actual teacher/classmate responses and acting practice award no property value or credential.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 141,
+      "sourceLiteralSha256": "103641e2fc8856d684f1c76802f41e0942fa133501ff3b1f9d4b7efd5d7079af",
+      "reviewedChoiceIds": [
+        "describe",
+        "mime",
+        "invent"
+      ]
+    },
+    {
+      "index": 58,
+      "id": "child-boardgame-rules",
+      "category": "relationships-family",
+      "rationale": "A board game with the actual parent tests fair rules, a later variant or dishonest mid-game revision; real parent bonding and discipline reflect the choices without changing law.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 150,
+      "sourceLiteralSha256": "55b0cd45a6448c374c202fb6066628b54cd92f9bbac876f079563ee3e4675bdc",
+      "reviewedChoiceIds": [
+        "accept",
+        "next",
+        "insist"
+      ]
+    },
+    {
+      "index": 59,
+      "id": "child-shop-separation",
+      "category": "relationships-family",
+      "rationale": "A brief shop separation binds the real present parent; staying nearby, staff help or a wider search all end with that parent and plausible emotional/bond changes rather than inventing a missing-person case.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 159,
+      "sourceLiteralSha256": "c73ab6b0e275cc2d9949a19f6fb1eee0202cb23ff1793bed5f78e4b5611dbb5d",
+      "reviewedChoiceIds": [
+        "stay",
+        "staff",
+        "search"
+      ]
+    },
+    {
+      "index": 60,
+      "id": "school-practice-alarm",
+      "category": "school-teenage-life",
+      "rationale": "A school practice alarm uses the actual teacher; following directions, asking the route or delaying for a bag consistently change discipline, stress and teacher trust, without depicting a real fire.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 168,
+      "sourceLiteralSha256": "f7be49d8a0d44af4c8ae44a54e10bfe5e8a3cd6cd4c3ec010991da060d263ff4",
+      "reviewedChoiceIds": [
+        "follow",
+        "ask",
+        "bag"
+      ]
+    },
+    {
+      "index": 61,
+      "id": "school-mysterious-noise",
+      "category": "school-teenage-life",
+      "rationale": "An anonymous classroom noise implicates the actual classmate; ignoring it, a quiet chair joke or an unsupported accusation have appropriate peer/teacher effects and do not establish the suspect’s guilt.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/earlyHomeStories.ts",
+      "line": 177,
+      "sourceLiteralSha256": "b9d7905b0ca076754b0c40f98187a80e8b0a727f23b72a2601f2812d48bdb0a1",
+      "reviewedChoiceIds": [
+        "ignore",
+        "joke",
+        "accuse"
+      ]
+    },
+    {
+      "index": 62,
+      "id": "teen-old-recording",
+      "category": "relationships-family",
+      "rationale": "A parent’s old childhood recording can be shared, kept private or jokingly defended; the implausible rain theory stays a recorded childhood idea, with no retcon of present knowledge or public-posting action.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 6,
+      "sourceLiteralSha256": "7254a862c14b0537e6e11758468c9feb7987e2e3d0673fb70a94640db7816634",
+      "reviewedChoiceIds": [
+        "watch",
+        "private",
+        "defend"
+      ]
+    },
+    {
+      "index": 63,
+      "id": "teen-shrinking-sleeves",
+      "category": "school-teenage-life",
+      "rationale": "Changing adolescent sleeve length can prompt comparison with a past photograph, practical rolling or anxious peer comparison; small learning/stress effects impose no exact body measurement or growth mechanic.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 15,
+      "sourceLiteralSha256": "5f3f9121c88130a777b81f0e2ed0f494ba307e323c117a6f86c8d1ad6ba0acce",
+      "reviewedChoiceIds": [
+        "compare",
+        "roll",
+        "compare-others"
+      ]
+    },
+    {
+      "index": 64,
+      "id": "teen-family-game-timer",
+      "category": "relationships-family",
+      "rationale": "A game stopping agreement with the actual parent distinguishes keeping a promise, setting a clearer future time and repeatedly extending it; discipline, stress and real parent trust match each outcome.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 24,
+      "sourceLiteralSha256": "483b902275fc961e64050a5adf2bd114512a862afdfac02fecd1599ed98193e3",
+      "reviewedChoiceIds": [
+        "stop",
+        "agree",
+        "extend"
+      ]
+    },
+    {
+      "index": 65,
+      "id": "teen-phone-at-dinner",
+      "category": "relationships-family",
+      "rationale": "A real parent’s phone interrupts conversation; asking for mutual phone-free time, waiting or keeping score produces appropriately different bonding and stress, without assuming a social account.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 33,
+      "sourceLiteralSha256": "4c6a777a90dad8ad8716e8a490783a343c16453c5ac92a27273babf0a0d9fa08",
+      "reviewedChoiceIds": [
+        "ask",
+        "wait",
+        "score"
+      ]
+    },
+    {
+      "index": 66,
+      "id": "teen-notification-loop",
+      "category": "fame-social-media",
+      "rationale": "Repeated message checking offers putting the phone away, naming the hoped-for reply or refreshing; stress, discipline and energy fit digital habits and no reply or contact is invented.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 42,
+      "sourceLiteralSha256": "a57a0bdd25e40a009542eddd243c6df1fa9df3fb52156d844de73f8759a7ab1b",
+      "reviewedChoiceIds": [
+        "away",
+        "name",
+        "refresh"
+      ]
+    },
+    {
+      "index": 67,
+      "id": "teen-borrowed-charger",
+      "category": "relationships-family",
+      "rationale": "A real parent’s forgotten charger is returned, assigned a return spot or denied while visible; trust effects match honesty and the loan metaphor creates no financial debt.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 51,
+      "sourceLiteralSha256": "253d634e4ac08e2e21d5006dd7b280b12c3c387f4e9f45a4debe0060467d49f0",
+      "reviewedChoiceIds": [
+        "return",
+        "place",
+        "deny"
+      ]
+    },
+    {
+      "index": 68,
+      "id": "teen-old-interest-box",
+      "category": "travel-pets-hobbies-entertainment",
+      "rationale": "An old drawing can be tried again, retained as a memory or judged harshly; happiness, energy and stress reflect an informal past interest without requiring or granting a formal hobby record.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 60,
+      "sourceLiteralSha256": "99e02ad1e6b189653c0af2992671f44404eca1e0ae2675c12a0dbfaf2df4f274",
+      "reviewedChoiceIds": [
+        "try",
+        "keep",
+        "judge"
+      ]
+    },
+    {
+      "index": 69,
+      "id": "teen-household-small-meal",
+      "category": "relationships-family",
+      "rationale": "Helping the actual parent cook permits reading ahead, asking for explanation or guessing out of order; small learning and bond changes match supervised meal preparation without a credential or food purchase.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 69,
+      "sourceLiteralSha256": "6093ed6d3bda468aa1331e092b75dd5ef96f81764c177fd7cf7c9e49be5f2c25",
+      "reviewedChoiceIds": [
+        "read",
+        "ask",
+        "guess"
+      ]
+    },
+    {
+      "index": 70,
+      "id": "teen-parent-voice-note",
+      "category": "relationships-family",
+      "rationale": "An explicitly contactable real parent sends an unclear voice message; requesting text, arranging a call or guessing consistently affects discipline, stress and that parent bond, with no co-residence assumption.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 78,
+      "sourceLiteralSha256": "2221aa64a727c948e97342cab1059148ce2ce43e9237e63f322a581358ac92f6",
+      "reviewedChoiceIds": [
+        "clarify",
+        "later",
+        "guess"
+      ]
+    },
+    {
+      "index": 71,
+      "id": "teen-sunday-list",
+      "category": "school-teenage-life",
+      "rationale": "A teen’s overloaded evening list can be narrowed, paused and revised or pursued all at once; the consequences describe realistic task completion and only personal discipline, stress and energy change.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/teenHomeStories.ts",
+      "line": 87,
+      "sourceLiteralSha256": "9f730f2db223d8f523b6ca53885d2c5aac57b488cb28f91a13ce45b3a69da20b",
+      "reviewedChoiceIds": [
+        "choose",
+        "break",
+        "all"
+      ]
+    },
+    {
+      "index": 72,
+      "id": "first-echo",
+      "category": "birth-early-childhood",
+      "rationale": "Infant spoon-and-bowl noise becomes repeated play, rhythm experiments or inspecting the bowl; modest smarts/discipline or enjoyment creates no musician role or hidden orchestra.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 12,
+      "sourceLiteralSha256": "57055be91812f38a8b125c5690d97dcf75bcd10276e137c7ff5c8185b82f7ac5",
+      "reviewedChoiceIds": [
+        "concert",
+        "rhythm",
+        "inspect"
+      ]
+    },
+    {
+      "index": 73,
+      "id": "first-sock-escape",
+      "category": "birth-early-childhood",
+      "rationale": "Removing socks offers freeing both feet, attempting replacement or waving one; small learning and enjoyment effects stay within infant discovery rather than inventory or clothing ownership mechanics.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 21,
+      "sourceLiteralSha256": "cc0d4f30cb87cdea003226324535a4001152d1172781e670947ada8ab1f814d3",
+      "reviewedChoiceIds": [
+        "both",
+        "replace",
+        "wave"
+      ]
+    },
+    {
+      "index": 74,
+      "id": "first-mirror-guest",
+      "category": "birth-early-childhood",
+      "rationale": "A mirror reflection prompts faces, looking behind or waving; result and journal make the apparent guest a reflection, never a new child or relationship.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 30,
+      "sourceLiteralSha256": "53ed4532ac382d90eb5640e2243c9ec4f9516b2449a7ed4d53600e35ceb3fb4a",
+      "reviewedChoiceIds": [
+        "face",
+        "peek",
+        "wave"
+      ]
+    },
+    {
+      "index": 75,
+      "id": "toddler-wall-gallery",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler’s wall drawing meets the actual parent; showing it, supervised cleaning or blaming a nonexistent baby aligns discipline and bond changes without a property bill or fabricated sibling.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 39,
+      "sourceLiteralSha256": "010eb53156352f8bbd82fde0af08c2adf76656349cc3c0e3ad8d309bba33d683",
+      "reviewedChoiceIds": [
+        "admit",
+        "clean",
+        "blame"
+      ]
+    },
+    {
+      "index": 76,
+      "id": "toddler-grocery-microphone",
+      "category": "birth-early-childhood",
+      "rationale": "A toddler’s loud shop observation can be repeated, poorly whispered or followed by a hug; the real parent’s embarrassment and bond effects match without a purchase or fame grant.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 48,
+      "sourceLiteralSha256": "5c43b20730073d5bf2b32f19d0f34a112bd7abb2f7f2492dc8d3f173f159a39b",
+      "reviewedChoiceIds": [
+        "repeat",
+        "whisper",
+        "hug"
+      ]
+    },
+    {
+      "index": 77,
+      "id": "toddler-cardboard-rocket",
+      "category": "birth-early-childhood",
+      "rationale": "A cardboard rocket delays dinner with the actual parent; inviting one foot aboard, finishing a countdown or refusing are clearly pretend space play and create no travel/service role.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 57,
+      "sourceLiteralSha256": "f5d0448cb855accbb3a72347ad50076ae35af323cca9087dcecf6a29428e2897",
+      "reviewedChoiceIds": [
+        "invite",
+        "countdown",
+        "refuse"
+      ]
+    },
+    {
+      "index": 78,
+      "id": "toddler-suspicious-haircut",
+      "category": "birth-early-childhood",
+      "rationale": "A supervised toddler haircut offers pretend magic, questions or the actual parent’s hand; the spell explicitly fails, and small learning or stress effects claim no medical or magical outcome.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 66,
+      "sourceLiteralSha256": "f8bf97256c73ab90ec7c4dac1168a6f5038aeebfbaddf126765993097748ad9f",
+      "reviewedChoiceIds": [
+        "spell",
+        "ask",
+        "hold"
+      ]
+    },
+    {
+      "index": 79,
+      "id": "child-lost-button",
+      "category": "relationships-family",
+      "rationale": "A teddy’s lost button eye prompts supervised repair, an imaginary pirate patch or companionship; the actual parent handles the needle and no person’s health, job or sailing qualification changes.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 75,
+      "sourceLiteralSha256": "c4b6291b67ab5d5874ed5d04a74f876fef7f2f1371f0a0488bfe93f27e9348cc",
+      "reviewedChoiceIds": [
+        "repair",
+        "patch",
+        "comfort"
+      ]
+    },
+    {
+      "index": 80,
+      "id": "child-first-sleepover-plan",
+      "category": "relationships-family",
+      "rationale": "Living-room camping with the real parent offers preparation, a shared story or returning to bed; energy and bonding match domestic play, with no hotel booking or property grant.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 84,
+      "sourceLiteralSha256": "b0e33f4bb7e40a2962c335616f901deb0a27fc02514f5fc0229cd22c80668f61",
+      "reviewedChoiceIds": [
+        "plan",
+        "invite",
+        "bed"
+      ]
+    },
+    {
+      "index": 81,
+      "id": "school-arcade-invitation",
+      "category": "school-teenage-life",
+      "rationale": "An arcade invitation binds the real parent and classmate; permission explicitly saves an answer/plan and pays nothing, details do not schedule attendance, and declining makes no false party memory.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 93,
+      "sourceLiteralSha256": "281cd84e5771fcf7a0d8b9050c1e5db81634268492c27117844086ddac1cfb14",
+      "reviewedChoiceIds": [
+        "ask",
+        "details",
+        "decline"
+      ]
+    },
+    {
+      "index": 82,
+      "id": "school-project-promise",
+      "category": "school-teenage-life",
+      "rationale": "A current-school project binds the actual classmate and teacher; only promising schedules the deadline and future continuation, while separate work or honest refusal creates no shared project or completed-work credit.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 102,
+      "sourceLiteralSha256": "b5157aea35cb5d885fee8af7f74014e92bcf5045d173b5729917148756d1485f",
+      "reviewedChoiceIds": [
+        "promise",
+        "separate",
+        "honest"
+      ]
+    },
+    {
+      "index": 83,
+      "id": "school-volcano-breach",
+      "category": "school-teenage-life",
+      "rationale": "A primary model volcano spills onto the real classmate’s desk; cleanup, measurement then cleanup or attempted escalation consistently affect school contacts and science without an injury, bill or award.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 111,
+      "sourceLiteralSha256": "e9267aa9597ea04b891b3475e1589e7114500dec75bc5a83581796100d9855d7",
+      "reviewedChoiceIds": [
+        "clean",
+        "measure",
+        "sequel"
+      ]
+    },
+    {
+      "index": 84,
+      "id": "school-tree-audition",
+      "category": "school-teenage-life",
+      "rationale": "A primary class-show tree role offers an enthusiastic audition, scenery help or watching; real teacher trust and acting practice do not grant professional employment or a career qualification.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 120,
+      "sourceLiteralSha256": "3c5305f0434e77ad51b4e5ccce526ebba84ee0c4f8e9e8c4696425e28a768864",
+      "reviewedChoiceIds": [
+        "audition",
+        "backstage",
+        "decline"
+      ]
+    },
+    {
+      "index": 85,
+      "id": "school-mascot-petition",
+      "category": "school-teenage-life",
+      "rationale": "A damp-sock classroom mascot petition provides comic campaigning, a cleaner design or abstention; school contacts and a small politics skill change match rehearsal rather than election, policy or legal power.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 129,
+      "sourceLiteralSha256": "a810782b343ef4fe332a716c7713c4b89e59d49bdb3ca5513ec252da4e855106",
+      "reviewedChoiceIds": [
+        "speech",
+        "design",
+        "abstain"
+      ]
+    },
+    {
+      "index": 86,
+      "id": "school-recorder-solo",
+      "category": "school-teenage-life",
+      "rationale": "Recorder practice with the actual classmate supports joint rehearsal, a polite break or mockery; energy/music gains and peer trust match the stated social outcome without a paid performance.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 138,
+      "sourceLiteralSha256": "3d2e5bf614e616dc540b1e94f0561843f846f2ce3e583a44aa321a47e650db9c",
+      "reviewedChoiceIds": [
+        "practice",
+        "polite",
+        "imitate"
+      ]
+    },
+    {
+      "index": 87,
+      "id": "school-lunch-trade",
+      "category": "school-teenage-life",
+      "rationale": "An actual classmate offers a poor snack exchange; a fair counteroffer, refusal or sharing produces social/learning effects and no cash trade, lawyer or financial asset.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 147,
+      "sourceLiteralSha256": "85eb9df33d332f4caddadbf32101d75775d7133bace3bb3054b082da04696753",
+      "reviewedChoiceIds": [
+        "counter",
+        "keep",
+        "share"
+      ]
+    },
+    {
+      "index": 88,
+      "id": "school-name-joke",
+      "category": "school-teenage-life",
+      "rationale": "A real classmate’s name is mocked by an anonymous other pupil; public support, private care or joining the mockery have distinct peer/respect effects without falsely naming the perpetrator.",
+      "reviewStatus": "reviewed-no-concrete-defect",
+      "findings": [],
+      "sourceFile": "src/game/content/childhood.ts",
+      "line": 156,
+      "sourceLiteralSha256": "a506143746cb62abb53b9b4bb64f3aaa034baaac221a7bb0c4ea37ec6dc1f76b",
+      "reviewedChoiceIds": [
+        "support",
+        "check",
+        "join"
+      ]
+    }
+  ],
+  "reviewedEntries": 89,
+  "reviewedChoices": 267,
+  "literalHashMethod": "SHA256 UTF-8 JSON of full expanded review-input row with sorted keys, compact separators and ensure_ascii=false.",
+  "sourceReadScope": "Actual literal title/setup/each choice/result/journal/requested effects and age/context read; shared eventTypes/events/storyContext source inspected without loading or executing it.",
+  "runtimeSourceIdenticalTo": "ca7c72c743b98eda7c73054960bea90256b0b76f"
+}

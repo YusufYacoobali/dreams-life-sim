@@ -1,0 +1,1681 @@
+{
+  "sourceCommit": "ca7c72c743b98eda7c73054960bea90256b0b76f",
+  "scope": "Read-only Git-object snapshot of all app/src files; no runtime/world/policy modules loaded or evaluated; excludes assets outside app/src and repository configuration, so not an entire release-build fingerprint.",
+  "files": [
+    {
+      "path": "app/(game)/(tabs)/_layout.tsx",
+      "bytes": 664,
+      "sha256": "40c022395d4e27c2a84fca8ee99f5785e9b6b6c68d95d50a995c2bf440933fb9"
+    },
+    {
+      "path": "app/(game)/(tabs)/activities.tsx",
+      "bytes": 4427,
+      "sha256": "28fb891f9abf4ace09d715d179583b75e91e004ec0b090e0a27cb78e4e27bf57"
+    },
+    {
+      "path": "app/(game)/(tabs)/assets.tsx",
+      "bytes": 4527,
+      "sha256": "de4a77838a30c92de2ecb23934ec32daf433f6d814e00730ad328ecf55540327"
+    },
+    {
+      "path": "app/(game)/(tabs)/life.tsx",
+      "bytes": 11051,
+      "sha256": "0b384c815dd21299cb4e463eeabf8134485714bb8979e8828fb249d849cd5aa5"
+    },
+    {
+      "path": "app/(game)/(tabs)/relationships.tsx",
+      "bytes": 6054,
+      "sha256": "b206f868d1d4cc9a9461ee1e094afbfd1c32d88f23fbde43ae615debb5af9c71"
+    },
+    {
+      "path": "app/(game)/_layout.tsx",
+      "bytes": 2882,
+      "sha256": "c794fa7552873ecb1c594c4e73bd489f4fdb01183330c4abdba45a46879f29b2"
+    },
+    {
+      "path": "app/(game)/achievements.tsx",
+      "bytes": 3697,
+      "sha256": "c0eb403a4b94dd3a69448f724e251bc6149d71faa5698619cee984d0236c050b"
+    },
+    {
+      "path": "app/(game)/asset/[id].tsx",
+      "bytes": 11065,
+      "sha256": "fe9efdd9eb46952e3bebf54cc976f74c178ba72d185c7447deafe206485c785e"
+    },
+    {
+      "path": "app/(game)/bank.tsx",
+      "bytes": 10350,
+      "sha256": "fcb2f74c4e95796ceef03320133ca861819af6ac1a3d3a715347ff5c3df38e7c"
+    },
+    {
+      "path": "app/(game)/black-market.tsx",
+      "bytes": 4823,
+      "sha256": "187bb2891c1b216324040d2bb191f1f584acb109087504b2d71e6dad44ec0daa"
+    },
+    {
+      "path": "app/(game)/business.tsx",
+      "bytes": 5272,
+      "sha256": "1edf55cbed533bc7a885615351ce26fa5af5af993b87799386a6cae0f8d89685"
+    },
+    {
+      "path": "app/(game)/business/[id].tsx",
+      "bytes": 5527,
+      "sha256": "570e6bfea317ae06b6456e6a23f4fac9910fe85f2e0938629eead75f1025e42c"
+    },
+    {
+      "path": "app/(game)/career-training.tsx",
+      "bytes": 3557,
+      "sha256": "a4c65b95f9ccd2fcb0651242d46c2eb1a36f72a7c6971058f975cc0fa87d2df7"
+    },
+    {
+      "path": "app/(game)/career/[kind].tsx",
+      "bytes": 7842,
+      "sha256": "04522418c20219eda23a23e06a82623b1e927295550dbff0782d35b106b55f4b"
+    },
+    {
+      "path": "app/(game)/case/[id].tsx",
+      "bytes": 5045,
+      "sha256": "9ee8a2b48b0806a5eb9ae67cb2143ef2ed01391d085d81acb5960db445074ba7"
+    },
+    {
+      "path": "app/(game)/cases.tsx",
+      "bytes": 1296,
+      "sha256": "6b75e27929680bf716245661d51c069aefbda5da7425b668d1c0b436fd4138a0"
+    },
+    {
+      "path": "app/(game)/challenge/[id].tsx",
+      "bytes": 2915,
+      "sha256": "c2ce3756134b51626e2fcc49e0b5d1617daed7dee848b568bd9487f19baae26e"
+    },
+    {
+      "path": "app/(game)/challenges.tsx",
+      "bytes": 1582,
+      "sha256": "b1cd1d73a14c9b7f310bc8d2ebde41008146a1e3c201c632f92e80ca7060df9d"
+    },
+    {
+      "path": "app/(game)/condition/[id].tsx",
+      "bytes": 4815,
+      "sha256": "29a405fd7d9ebd6b88d3f1070421c32a530cc193a1ccb247cc73a4e42a664097"
+    },
+    {
+      "path": "app/(game)/conditions.tsx",
+      "bytes": 2162,
+      "sha256": "6ab6cf8ac498b5b3522e3508670336875352ca8f6ef661d2c4bf08b02019eeb1"
+    },
+    {
+      "path": "app/(game)/coworkers.tsx",
+      "bytes": 6036,
+      "sha256": "53a919919b491dce39268e9f80166e68aee58f51d81a7705ef204d09be5ef389"
+    },
+    {
+      "path": "app/(game)/create-post.tsx",
+      "bytes": 5904,
+      "sha256": "ec5c1e04be8c821d82ca0bd20e8b890b50f2db2b1df5f3fe04d68509565097a7"
+    },
+    {
+      "path": "app/(game)/creator-studio/[kind].tsx",
+      "bytes": 11047,
+      "sha256": "83a500231d9fc23a56255c82f37ac5285a072e9c6daccac702429dca40b8d825"
+    },
+    {
+      "path": "app/(game)/creators.tsx",
+      "bytes": 3695,
+      "sha256": "a6a4dd3ba5cc8cb9bedcc8464b862f21effd22b99153acaba61620f85b40729f"
+    },
+    {
+      "path": "app/(game)/crime.tsx",
+      "bytes": 5136,
+      "sha256": "3483d0106af611419066113a3288e05d6c1149c002e65d9de15cad255b5ed545"
+    },
+    {
+      "path": "app/(game)/criminal-record.tsx",
+      "bytes": 1481,
+      "sha256": "81d59c4fc538a75f3982765c35d16dda49ac035a24be64487129fd1a5382d210"
+    },
+    {
+      "path": "app/(game)/destination/[id].tsx",
+      "bytes": 10504,
+      "sha256": "d5e5892e3503a8b4ce4d46a0cc7845e31bf0545df3347acf8f281ba0284cf314"
+    },
+    {
+      "path": "app/(game)/destinations.tsx",
+      "bytes": 2349,
+      "sha256": "8cd5a7fbbae865b7556c776c615337ad2c067eb71a3a26695956ffefafe04ce3"
+    },
+    {
+      "path": "app/(game)/divorce.tsx",
+      "bytes": 3189,
+      "sha256": "0e88c223a4a024310d15f35bed40c22cfda87455e1b17da8a7a05bd7fbbc710d"
+    },
+    {
+      "path": "app/(game)/doctor.tsx",
+      "bytes": 4659,
+      "sha256": "ef9af931b4635830cd9ebc5536f672b01a603e5f80ead84a63fbcb9c2ff7cd1f"
+    },
+    {
+      "path": "app/(game)/education.tsx",
+      "bytes": 12314,
+      "sha256": "bacd13f4ffeab6fc407bcd0395d70d413e43048a55b353c8f2541226f831fd2c"
+    },
+    {
+      "path": "app/(game)/emigrate.tsx",
+      "bytes": 14531,
+      "sha256": "876b2bf5ecf715fe2e488671f6fcab37c2f3a45f2a365c4b2ad9f5061c2cf361"
+    },
+    {
+      "path": "app/(game)/entertainment.tsx",
+      "bytes": 4386,
+      "sha256": "deaa9e0902793f21184337b9fac2fa53fa67b132c1e6f803aef9fca0cabdd65f"
+    },
+    {
+      "path": "app/(game)/exercise.tsx",
+      "bytes": 3260,
+      "sha256": "416ebf6ae949b3f843c07280fddc98364afe992c7dbf8b0529570922e8b029fa"
+    },
+    {
+      "path": "app/(game)/extras.tsx",
+      "bytes": 3083,
+      "sha256": "a4daef776c7ddb5614d7266785b6caa07eb4f4b0d16230c64818fab81611a580"
+    },
+    {
+      "path": "app/(game)/fame.tsx",
+      "bytes": 4424,
+      "sha256": "8ed8da35542fdc190d1b2f19f776e0d583c33e8910654684b091830de6fc3b5a"
+    },
+    {
+      "path": "app/(game)/family-tree.tsx",
+      "bytes": 2903,
+      "sha256": "747d28d198788a00791ac4106b7a0c252ae935d9f1dbac8396169ad312a7c400"
+    },
+    {
+      "path": "app/(game)/family.tsx",
+      "bytes": 5154,
+      "sha256": "bc579f27455820b6ae187a8d6069c16746c7d8e0c81dee4f48a9e009e98653a1"
+    },
+    {
+      "path": "app/(game)/finances.tsx",
+      "bytes": 7624,
+      "sha256": "d0d93e840e48f6219e03d9632b354fdf5220584602e30acf4966baf8407f9d43"
+    },
+    {
+      "path": "app/(game)/health.tsx",
+      "bytes": 5027,
+      "sha256": "0d16788eb82dd96ac306dadb8e59c7ec0d8380f2aef3a5f4425b19b3767daed9"
+    },
+    {
+      "path": "app/(game)/heirlooms.tsx",
+      "bytes": 1383,
+      "sha256": "a92d8d6a7132e1791c3b3b5729150b6f2bbd16425b2bdd5c90f9e5859a00c7e8"
+    },
+    {
+      "path": "app/(game)/hobbies.tsx",
+      "bytes": 1430,
+      "sha256": "a017e5c71f4bb6c83eb877af6bf8fa6758ff61100aed1c8a5f59f584a49fb457"
+    },
+    {
+      "path": "app/(game)/hobby-event/[kind].tsx",
+      "bytes": 691,
+      "sha256": "df2dd4711209d776a6a0eb46b24d1158e750b26f23db46d347cd2af9591ab191"
+    },
+    {
+      "path": "app/(game)/hobby/[kind].tsx",
+      "bytes": 818,
+      "sha256": "66d6175d86d1636ad4959ad0cf279bcf4550cd8e1b9ca9b951d48c29a5fc062c"
+    },
+    {
+      "path": "app/(game)/household.tsx",
+      "bytes": 2852,
+      "sha256": "2d8c2a5fe06a3ad33fbb1496763dbf59c8a7cc53534d05c71701347cc63147f5"
+    },
+    {
+      "path": "app/(game)/investment/[id].tsx",
+      "bytes": 8231,
+      "sha256": "d14aab4b80b3e8d1694a25d078ab15f4fdb8fabd165a1aceb5a19bb51311c564"
+    },
+    {
+      "path": "app/(game)/investments.tsx",
+      "bytes": 1530,
+      "sha256": "2dbc467074ee0d2e325f341ffe59d946b34d160fbb6d95a48219b14c7b104397"
+    },
+    {
+      "path": "app/(game)/jobs.tsx",
+      "bytes": 6797,
+      "sha256": "980f42533aa11b92977101e66acae436ee419f16db4d5bb02cc5a8546cfb9eac"
+    },
+    {
+      "path": "app/(game)/lifestyle.tsx",
+      "bytes": 6309,
+      "sha256": "428d83430a177e0f0268cfe8c4b9c8e5c7fd052d16a234466d36fceac8a6b8ed"
+    },
+    {
+      "path": "app/(game)/manage-business/[id].tsx",
+      "bytes": 14090,
+      "sha256": "d4af4bbafc8ecce89b28f2ca6510a9743ea16cc11c57afd7dc1c2bcdd69ba6f1"
+    },
+    {
+      "path": "app/(game)/meet-people.tsx",
+      "bytes": 2155,
+      "sha256": "39b74996475b27188676c2f90da167c472cc5cf86e3def18dcf80ead0009accd"
+    },
+    {
+      "path": "app/(game)/music-studio.tsx",
+      "bytes": 7481,
+      "sha256": "f9570408b305eadf175ac28a246263e42cf8877887fdec14ad89eafc825beb93"
+    },
+    {
+      "path": "app/(game)/offer/[id].tsx",
+      "bytes": 5327,
+      "sha256": "5977423fd37fae19f0dc4e5bc354cc3117ddb55df52e54fef54e4054542f7e90"
+    },
+    {
+      "path": "app/(game)/person/[id].tsx",
+      "bytes": 13819,
+      "sha256": "8d83a96e18c623aec676a5854e8fe7f969f581a19d58c334f8f4dad3ee87645c"
+    },
+    {
+      "path": "app/(game)/pet/[id].tsx",
+      "bytes": 6026,
+      "sha256": "3dfada59050a4259eac427d9dc33dcfcd28ef5b33e129797219db19648945284"
+    },
+    {
+      "path": "app/(game)/pets.tsx",
+      "bytes": 8544,
+      "sha256": "905ab5a31e17e8006aa403034601bd598d376cfdc3dd549aa0cde68860e979fe"
+    },
+    {
+      "path": "app/(game)/politics.tsx",
+      "bytes": 9081,
+      "sha256": "e9a43d91b8249582c18ba718c54bf10fa7421f3fed127e79ee2dbe70f28cb428"
+    },
+    {
+      "path": "app/(game)/prison-activities.tsx",
+      "bytes": 6596,
+      "sha256": "1e6855d56f99de684ccf748d3665cf6ac84140bd8768828bc4e1e2e6900b7b06"
+    },
+    {
+      "path": "app/(game)/prison.tsx",
+      "bytes": 2285,
+      "sha256": "300ac646b15e368c4127b8904a7ea9a580948995f263f026ec66ecfdf2e7fa4d"
+    },
+    {
+      "path": "app/(game)/profile.tsx",
+      "bytes": 10215,
+      "sha256": "53c6f4b519b5fe2e958a2b902f038d55e6a830b77e5f3523258c235f6a67f98c"
+    },
+    {
+      "path": "app/(game)/royalty.tsx",
+      "bytes": 10620,
+      "sha256": "8ed0218f409f12f85f673999798b6e28effcc3e823fe21cbf5705c71edb94e13"
+    },
+    {
+      "path": "app/(game)/scholarships.tsx",
+      "bytes": 7540,
+      "sha256": "cbb6de2692b21de8ef5497a6b52b9d15903b4effe0d42d9347021fee8cff7c33"
+    },
+    {
+      "path": "app/(game)/school-contacts.tsx",
+      "bytes": 2599,
+      "sha256": "bc28a506e4f2dccb96e72786f4d86d81e76007e644403522944394a7f6ce3fec"
+    },
+    {
+      "path": "app/(game)/school.tsx",
+      "bytes": 11822,
+      "sha256": "a865080f6b40754d511c95fca15bf1dd7d61ce62da540189705369ec7fc7cf53"
+    },
+    {
+      "path": "app/(game)/service/[kind].tsx",
+      "bytes": 11629,
+      "sha256": "ffb8e7bcba470e54a8910e92151eb42b49c531fa7b7a431305664acd787dba79"
+    },
+    {
+      "path": "app/(game)/shopping/[kind].tsx",
+      "bytes": 1414,
+      "sha256": "7d04347f44b62dd4f052b5df0150867cb905fb666d933b0d1cd4a4d24cda6be7"
+    },
+    {
+      "path": "app/(game)/social-media.tsx",
+      "bytes": 4161,
+      "sha256": "c96ab6d6639229a2120019b2a53ab272054aa26336ff80bb22761e8df6015fa3"
+    },
+    {
+      "path": "app/(game)/social-profile/[id].tsx",
+      "bytes": 10120,
+      "sha256": "a52c1118ccb3ee973cfe679f29d205a26d2e4ea2b5f308531d495953b027e5f6"
+    },
+    {
+      "path": "app/(game)/special-careers.tsx",
+      "bytes": 2924,
+      "sha256": "2db72ebc87f5b2346f79dd5ef7513b8183b83b51290cf06b9eb230aef96cd562"
+    },
+    {
+      "path": "app/(game)/sponsorships.tsx",
+      "bytes": 3510,
+      "sha256": "6ae16765c8c0bbb7094194b33aaab2eb5383b0e92f9ba05f5ccbb0f44b4a49c5"
+    },
+    {
+      "path": "app/(game)/statistics.tsx",
+      "bytes": 2963,
+      "sha256": "a6c198bb94d9afb1ddc0296bd16c36984b2c03783d28e855503fd09291964d68"
+    },
+    {
+      "path": "app/(game)/travel.tsx",
+      "bytes": 3252,
+      "sha256": "6e5ba16b423ab99a1fabe11535739a42e25b303c8da5aa2e9b221dbbb679141a"
+    },
+    {
+      "path": "app/(game)/underground.tsx",
+      "bytes": 3894,
+      "sha256": "6b99c48753fd4bef153af83624f262d3ed30e257ff044ac31f95b34532bfbe40"
+    },
+    {
+      "path": "app/(game)/will.tsx",
+      "bytes": 8270,
+      "sha256": "1c59d870d9d7f4d5b752ebed6aad33958684102d0f7649c8e4b2120ef5c793b4"
+    },
+    {
+      "path": "app/(game)/work.tsx",
+      "bytes": 8422,
+      "sha256": "2a53be5b038ebc546fa4cd1853c8ac366af43e8736fb060caac814b26588f401"
+    },
+    {
+      "path": "app/_layout.tsx",
+      "bytes": 1635,
+      "sha256": "e1ce9f9125e0e3005a695f526b781025359f74126416533c634dc75068ffbbf7"
+    },
+    {
+      "path": "app/appearance.tsx",
+      "bytes": 5478,
+      "sha256": "01da0ea0d59a330b8a9671e05f10ea68b3665178315282510fdf80f54c9c3580"
+    },
+    {
+      "path": "app/birth.tsx",
+      "bytes": 4867,
+      "sha256": "f3fa5adeb0128c330b89bd6734204e8035905d2a1ab23836cf674cdfbf430c7e"
+    },
+    {
+      "path": "app/death.tsx",
+      "bytes": 4736,
+      "sha256": "2a5e56ee8a173dda27557091489838ee168f0d09669cc821b3381ca135c79084"
+    },
+    {
+      "path": "app/help.tsx",
+      "bytes": 1566,
+      "sha256": "dafd873480bd87ef548c30f07baf4e7d0fd668b44c2066cee78d7ad7e591a75f"
+    },
+    {
+      "path": "app/index.tsx",
+      "bytes": 5798,
+      "sha256": "ffbb0760035c45c85a59fcf49b1a7f4d57d9a83a62081a3319c2933a35582554"
+    },
+    {
+      "path": "app/legacy.tsx",
+      "bytes": 2413,
+      "sha256": "129b570c1b0d25a4475b0234a962365a19dc39647d28114be044060aeb886340"
+    },
+    {
+      "path": "app/life-summary.tsx",
+      "bytes": 528,
+      "sha256": "851ad270389be1a40449074867b1361923e0193a81f183a8a2aaab0c2e57e747"
+    },
+    {
+      "path": "app/new-life.tsx",
+      "bytes": 12777,
+      "sha256": "4bad43254632488de3e9f0c76c009d2f2768f2821c5bcd4df722358f7acf7538"
+    },
+    {
+      "path": "app/saved-life/[id].tsx",
+      "bytes": 2555,
+      "sha256": "bc217a5f4ed31906a637d5b43a47c45a895adc9d673776d9d79dbe588a1481b2"
+    },
+    {
+      "path": "app/saved-lives.tsx",
+      "bytes": 7830,
+      "sha256": "9edec36baab575a5842ee7e8f580e65d9dcaecc82bd63d8e718a17026bcb4683"
+    },
+    {
+      "path": "app/settings.tsx",
+      "bytes": 6492,
+      "sha256": "953f921d28accf2042b353146872ec3eb7bb41a21f66cf58f9dc352d20a0ecd4"
+    },
+    {
+      "path": "app/time-machine.tsx",
+      "bytes": 3971,
+      "sha256": "02f5f3345519fe1a3b49bfbd788c23f06773d3ab04607f6bdcfdbdc83587db56"
+    },
+    {
+      "path": "src/assets/CareerArt.tsx",
+      "bytes": 872,
+      "sha256": "4d632889cf92512ad9d950db714ea4242942491c5d270dd68581caf3d8294613"
+    },
+    {
+      "path": "src/assets/CatalogArt.tsx",
+      "bytes": 1088,
+      "sha256": "1ba5f007ce84c0dbedc613e0f9a609cd9a87e0ac8c85899d5ea5c98bf65d6314"
+    },
+    {
+      "path": "src/assets/CharacterPortrait.tsx",
+      "bytes": 4552,
+      "sha256": "a00a7c1d0f45ff636bcccc9fe8f49018f6398e3a10bcc1f30c54db17d9c2ae3f"
+    },
+    {
+      "path": "src/assets/FameBusinessArt.tsx",
+      "bytes": 909,
+      "sha256": "6c28c1f90fde7d348152ffbb4393bf3e72ff35d788fd538681d6190923653dd6"
+    },
+    {
+      "path": "src/assets/FamilyArt.tsx",
+      "bytes": 906,
+      "sha256": "6753cfe6d98aef80d30ee2031bfadc1f1fef68a3f67ada88093b70a20ab7d745"
+    },
+    {
+      "path": "src/assets/HealthLegalArt.tsx",
+      "bytes": 901,
+      "sha256": "f2a109ea580e2fbe1532d41d3e247115bc7cd120b27406636839a0b11a962ade"
+    },
+    {
+      "path": "src/assets/HobbyArt.tsx",
+      "bytes": 1826,
+      "sha256": "dcb48878a7a695360e9acbec4dff0e6ecdda7b7d6a9da67d87f44e7a859b5b7e"
+    },
+    {
+      "path": "src/assets/Illustration.tsx",
+      "bytes": 1234,
+      "sha256": "b9f47a314a68c6578fec81b79c72d9c35a95fe64a3ece2eec95031ee179dbb11"
+    },
+    {
+      "path": "src/assets/PetsLeisureArt.tsx",
+      "bytes": 1630,
+      "sha256": "eaad60825a012bff5db023f5fb4d35e517ba793c68b2780e6527c8d909bdc600"
+    },
+    {
+      "path": "src/assets/SchoolArt.tsx",
+      "bytes": 1165,
+      "sha256": "e9e5de035731493d2a44fb186f63cb20f248d264cf5683def33c352494a372f0"
+    },
+    {
+      "path": "src/assets/TravelArt.tsx",
+      "bytes": 776,
+      "sha256": "56f218af2f7de6380199a5fc7d41fb736012d7a904fa2fe42ffd3a807ee72e88"
+    },
+    {
+      "path": "src/assets/careerLayout.ts",
+      "bytes": 611,
+      "sha256": "00277c7c85320fa1510ca6606c95dffaea38c9db77dd68092d8419c019d4505d"
+    },
+    {
+      "path": "src/assets/fameBusinessLayout.ts",
+      "bytes": 598,
+      "sha256": "e3739318972759d0e163c2d47562f27c70c3e4d7591b157cbc3d3bff7ba4a3de"
+    },
+    {
+      "path": "src/assets/familyLayout.ts",
+      "bytes": 504,
+      "sha256": "5615e254959380d47c63e097bc4931eb9b69d1b6ccd4253bb483c8dde91bfaa5"
+    },
+    {
+      "path": "src/assets/healthLegalLayout.ts",
+      "bytes": 612,
+      "sha256": "1449b2c10f6770ae2d9d80e1adb13918f6c95f614d5815052af1a7a5674f5fb2"
+    },
+    {
+      "path": "src/assets/ordinaryHobbyLayout.ts",
+      "bytes": 240,
+      "sha256": "958530b73ca8cb04f0c8b7b8772e3bb2c06d502e1dfbb8cc3182e8fa2c697a25"
+    },
+    {
+      "path": "src/assets/ownershipLayout.ts",
+      "bytes": 970,
+      "sha256": "0c2e3639a59ea5daca4ea7e9cfc558367895b2bc9dd378a852867738bfde1175"
+    },
+    {
+      "path": "src/assets/petsLeisureLayout.ts",
+      "bytes": 1019,
+      "sha256": "8f460d5c4a79ee6e9dcdb57bc13669defae3b61b631d0a55e411eef792f7b3e1"
+    },
+    {
+      "path": "src/assets/portraitLayout.ts",
+      "bytes": 1560,
+      "sha256": "118ff80163f4bd12153fc922ef47d91f94dc6c68b81084da2627344d5a5cd122"
+    },
+    {
+      "path": "src/assets/schoolLayout.ts",
+      "bytes": 353,
+      "sha256": "0d82c9e0f709b649e7954381dc925e6006d9c20f4884e334dae262422cc1ed6b"
+    },
+    {
+      "path": "src/assets/travelLayout.ts",
+      "bytes": 628,
+      "sha256": "96e4d56bae6e3db1bcf75f036479a285471516c79caf653eac46e70b28170fb9"
+    },
+    {
+      "path": "src/game/allocation.ts",
+      "bytes": 861,
+      "sha256": "066e9764fc85ff9f188d51e8b4c2073c8624997df436d29875e51593b258b0b6"
+    },
+    {
+      "path": "src/game/annualPacing.ts",
+      "bytes": 2724,
+      "sha256": "4dd069120b0a337023bf2c231549006cd845c28455dd3cf12d44a725ffb873b9"
+    },
+    {
+      "path": "src/game/businessValuation.ts",
+      "bytes": 2606,
+      "sha256": "5fdfea740148ba5f56624b963c3c5ee14e8580ca2dce4add5c8f80294fc4be2c"
+    },
+    {
+      "path": "src/game/calendar.ts",
+      "bytes": 940,
+      "sha256": "d75482a243b857f78d321eb1d53c818286b86c2479e77e75a215e7e718d633e8"
+    },
+    {
+      "path": "src/game/choiceAvailability.ts",
+      "bytes": 1800,
+      "sha256": "508f850166250d8ae5e52bc57a8c42bb3de8eb20eb0deb163fa45f027ea2052d"
+    },
+    {
+      "path": "src/game/content/adultRelationshipStories.ts",
+      "bytes": 18496,
+      "sha256": "b9c67d4786df03f35a80474a71cc460a6304ada8e070bb2b5338537baf07d0b3"
+    },
+    {
+      "path": "src/game/content/assets.ts",
+      "bytes": 3794,
+      "sha256": "e2849e2dac71fb4c1529e4227ce6d041c075db1b91d61fbdd3684936a5239204"
+    },
+    {
+      "path": "src/game/content/businesses.ts",
+      "bytes": 2128,
+      "sha256": "0702be9928ccb94411add0fa731338f43e396cafc9f2b61cf9806a13b0c2b5dc"
+    },
+    {
+      "path": "src/game/content/careers.ts",
+      "bytes": 2937,
+      "sha256": "af9ebd834ebf9065b38d7d21d6d82b88798fae6a1431200fbf33175fc9e6baf5"
+    },
+    {
+      "path": "src/game/content/childhood.ts",
+      "bytes": 29293,
+      "sha256": "cb9717d6cff94fea4b88a9b1aee60615e0d432ff75c828fadeed49b8626721f6"
+    },
+    {
+      "path": "src/game/content/creators.ts",
+      "bytes": 393,
+      "sha256": "51fd5f889b95d27b59d0107181d1c6f3ea61a8fe4e87ee428868a407c3ddafab"
+    },
+    {
+      "path": "src/game/content/crime.ts",
+      "bytes": 3670,
+      "sha256": "60383ae1a732e86cab581c96487da842e1f31f4ddf24b87eacb9f6617910d62f"
+    },
+    {
+      "path": "src/game/content/earlyHomeStories.ts",
+      "bytes": 20767,
+      "sha256": "321b8e9ac0af81c7e748b89a694fac02f81d5eda5f2dec9c3fb04534abb66fc0"
+    },
+    {
+      "path": "src/game/content/eventRarity.ts",
+      "bytes": 1397,
+      "sha256": "480bc1c306ef36d9683c13760395aaef0c793fd855af5ca67ac717f9282b2d8d"
+    },
+    {
+      "path": "src/game/content/eventTypes.ts",
+      "bytes": 2016,
+      "sha256": "18a3fb5421d9a676114a2a2c6b6c4322173006b6ee711a0e51a7c68de7d027cb"
+    },
+    {
+      "path": "src/game/content/events.ts",
+      "bytes": 36977,
+      "sha256": "bedbc38de54431894038b8564a5761e3af843aede20b1de2205b7565a68f53ca"
+    },
+    {
+      "path": "src/game/content/everydayLifeStories.ts",
+      "bytes": 1046,
+      "sha256": "61d379dbb3ea8ea4f4b76528d62c0a1f391a3c45325bdbea31ed4a92f45db65a"
+    },
+    {
+      "path": "src/game/content/health.ts",
+      "bytes": 3856,
+      "sha256": "ef2180cb058d19c1fcd963929caa53e18746cd5f23f15c7cd4fc7ff61d6467d2"
+    },
+    {
+      "path": "src/game/content/hobbyEvents.ts",
+      "bytes": 4578,
+      "sha256": "ec12b51daba74e61bc3c1150740bac52b9daece21370a60b31ec258a40a5bd1f"
+    },
+    {
+      "path": "src/game/content/hobbyLifeStories.ts",
+      "bytes": 11597,
+      "sha256": "453a4fb9c796dde78c33997dd3b8b700b01a3af1079d71eaeff60b0171d9c760"
+    },
+    {
+      "path": "src/game/content/homeLifeStories.ts",
+      "bytes": 6481,
+      "sha256": "2bbe896e1f82aff4b8b2c11f71bca78851fd2d07d8638bccb9534c95d83b1702"
+    },
+    {
+      "path": "src/game/content/jobInterviews.ts",
+      "bytes": 6366,
+      "sha256": "6acb1cfbfa050f1e18c83092fb2d5ec0330d8b222dd387e72b966a695a734b42"
+    },
+    {
+      "path": "src/game/content/jobs.ts",
+      "bytes": 3435,
+      "sha256": "07682391b67dcd7057eb65069f8522fcf99b1c1872e977ebc14b2a56d522d7de"
+    },
+    {
+      "path": "src/game/content/laterLifeStories.ts",
+      "bytes": 10932,
+      "sha256": "1eb43d62d45fe8219b0df96ecf232fa4b66b96ae8bf462768f357ae4a8fa0c50"
+    },
+    {
+      "path": "src/game/content/leisure.ts",
+      "bytes": 2199,
+      "sha256": "c53969e7d1f50ac034a21c9b0e54583cd7f707cb44ecb3ffa3a27e2c584837c8"
+    },
+    {
+      "path": "src/game/content/lifeSituation.ts",
+      "bytes": 1091,
+      "sha256": "ed4f094421bf67385a5bd627b84feb0fe0d263f4e741efc2afb1abb513b03aa0"
+    },
+    {
+      "path": "src/game/content/markets.ts",
+      "bytes": 2030,
+      "sha256": "4edd4253166123bfadbc8849c60078b709a8ba9d2a25eb400540cd7e9ba1376c"
+    },
+    {
+      "path": "src/game/content/music.ts",
+      "bytes": 654,
+      "sha256": "2336fa5ded4492c74d3e893f0cad167041ef6d386bb7db5e3199386fdebe1b2e"
+    },
+    {
+      "path": "src/game/content/ordinaryAdultStories.ts",
+      "bytes": 25103,
+      "sha256": "3a50385701b2bef4eba567aa3c127954f03f940163692f3bd123104ac6c79f3d"
+    },
+    {
+      "path": "src/game/content/parentingStories.ts",
+      "bytes": 22681,
+      "sha256": "0cd65f5a112137cf379ca95be07d86b235ed29d68136f396f2dd1ff036e72c2a"
+    },
+    {
+      "path": "src/game/content/petLifeStories.ts",
+      "bytes": 11285,
+      "sha256": "b9209d82dc45b4f3301b7a446cf937b1d44baadc30ef5408bce2b556568a261b"
+    },
+    {
+      "path": "src/game/content/pets.ts",
+      "bytes": 1785,
+      "sha256": "d17936d129800a1c1ecd0a3dc1ddfa6af0149cec79361711c450ed2b12696b1d"
+    },
+    {
+      "path": "src/game/content/rareAdultStories.ts",
+      "bytes": 1587,
+      "sha256": "c6211908be4b9482f40d27c0e76381d13e0b761cda33fca3de377a44d797c924"
+    },
+    {
+      "path": "src/game/content/royalty.ts",
+      "bytes": 451,
+      "sha256": "77e28609686578d7c3c11633fa8cf65a367890bcd9bc6af2b5ca4a5688e05fc0"
+    },
+    {
+      "path": "src/game/content/schoolDayStories.ts",
+      "bytes": 22704,
+      "sha256": "2064b0ff912eeb1c8eb2618236e0befa430f4c597d0f93fb9c84b4c2a66b12b4"
+    },
+    {
+      "path": "src/game/content/services.ts",
+      "bytes": 1777,
+      "sha256": "3b3101fe835597885e90e8f7a48761375ede57dd436c6a043ba971fa18d77286"
+    },
+    {
+      "path": "src/game/content/social.ts",
+      "bytes": 3279,
+      "sha256": "1cc90316493bcc8b0ef7c650ee9f624797739052322da208e36543c7bde7d4a6"
+    },
+    {
+      "path": "src/game/content/socialCriticism.ts",
+      "bytes": 1643,
+      "sha256": "7300a1fd9d8873a38698b3b09f50943ca11f91b7f0926b80ffec7a86ed4c3a0b"
+    },
+    {
+      "path": "src/game/content/specialCareerDepthStories.ts",
+      "bytes": 15788,
+      "sha256": "8b51ece89cf22baaa36fec60685ed1ffdce8dc62def2566f8ee04ec248a80353"
+    },
+    {
+      "path": "src/game/content/specialCareerStories.ts",
+      "bytes": 10235,
+      "sha256": "1411989c3e3dce9ae7825df24d1dea51d4babf721da9f4c88d2ba76ac582ffd2"
+    },
+    {
+      "path": "src/game/content/teenHomeStories.ts",
+      "bytes": 11209,
+      "sha256": "361f98615121075a206a2e20a555330a08d97de49c657f2c6d890c4eb0bcdd05"
+    },
+    {
+      "path": "src/game/content/travel.ts",
+      "bytes": 2958,
+      "sha256": "65ca4d06cc793da0d2eae38b70bccb277775597d46e63649fc18f9d5b53d269c"
+    },
+    {
+      "path": "src/game/content/travelMemoryStories.ts",
+      "bytes": 11491,
+      "sha256": "2161ff11bcef9d348e4f26f584cf471cff04fda3c35f785ad7b379141548a6fc"
+    },
+    {
+      "path": "src/game/content/wellbeingStories.ts",
+      "bytes": 16754,
+      "sha256": "1ec30a2da1e4706f559043ee5d743ec48ce4aa2f2fce9dd49c6307a760214443"
+    },
+    {
+      "path": "src/game/content/workingLifeStories.ts",
+      "bytes": 11739,
+      "sha256": "dbf95caa80cc818202aed45f6464601cb7ca816daa1b159530f4184d613317d2"
+    },
+    {
+      "path": "src/game/content/workplaceStories.ts",
+      "bytes": 12002,
+      "sha256": "fc17de8c9f9e18d1fabb04227dfb57564df7d5f6e62e3617cf27eca0a6b33a93"
+    },
+    {
+      "path": "src/game/countries.ts",
+      "bytes": 3376,
+      "sha256": "45f5b6ef166c808164840761c92cc461df3e686152f73bc1f54f105961234ed2"
+    },
+    {
+      "path": "src/game/createLife.ts",
+      "bytes": 8371,
+      "sha256": "c19cf81361209b27e403ae754be4049025ec630284b9fa0747ef0abe74dc55d1"
+    },
+    {
+      "path": "src/game/engine.ts",
+      "bytes": 31057,
+      "sha256": "36dfa895ecc6755c2445e9cd2c52f7020525d75c25fdd2c3b845695cf93746ee"
+    },
+    {
+      "path": "src/game/errors.ts",
+      "bytes": 47,
+      "sha256": "005515c7149ef051c6725cc60758fd86fea04175aee7455168e6c1d0ea3aab92"
+    },
+    {
+      "path": "src/game/ledgerIndex.ts",
+      "bytes": 2991,
+      "sha256": "ba509409f5aa5b7e0a0b2bc1a5159c9b05b0f95e79f489857194a8b237aef8ed"
+    },
+    {
+      "path": "src/game/legalRules.ts",
+      "bytes": 928,
+      "sha256": "6dd09a8cc469bd00300e6c2ff968f444ea87b4ec69e03a71c3e5c04c5fc5a0da"
+    },
+    {
+      "path": "src/game/model.ts",
+      "bytes": 56421,
+      "sha256": "2f2251d93885b617e1db05a69bff63867a28952bda5b62a4cc0e8cd99bcb6052"
+    },
+    {
+      "path": "src/game/money.ts",
+      "bytes": 8748,
+      "sha256": "59c00d59faa873a6e8a99e0e3b2eefba4387b4286f3749e6cd392871dbabe964"
+    },
+    {
+      "path": "src/game/pendingQueue.ts",
+      "bytes": 1154,
+      "sha256": "a853fd887411609f56932be87d29bc35ee9167701d34eb516dff609abdf86b6f"
+    },
+    {
+      "path": "src/game/random.ts",
+      "bytes": 1344,
+      "sha256": "20afe71f4bb038b57fd20323ab25e1e53626ec3002ad83979bb246c8026a4d14"
+    },
+    {
+      "path": "src/game/rules.ts",
+      "bytes": 7661,
+      "sha256": "38c1199f79cc266b5350064af3c35cd6fb87c2e8788edf7f73cefe4be3b4979a"
+    },
+    {
+      "path": "src/game/runtime.ts",
+      "bytes": 4315,
+      "sha256": "e274d5783c84b96178f7f2228bd4fd7f149e5ece121e204af1dc62063050d9dd"
+    },
+    {
+      "path": "src/game/storyNames.ts",
+      "bytes": 1083,
+      "sha256": "9793255b08082e40334d2a6e539e56e4200b438bfc8ec4526ada36e680e9e0a3"
+    },
+    {
+      "path": "src/game/systems/annualPacingSchemas.ts",
+      "bytes": 943,
+      "sha256": "03b135360936e11364c51dcbba3c9b55d601b9a99606dd0a5942e2231096c81d"
+    },
+    {
+      "path": "src/game/systems/assets.ts",
+      "bytes": 23113,
+      "sha256": "1e1471979a72a4393c46da0b394379541e61dddf66ffeb64c0f0e2321bce7a8e"
+    },
+    {
+      "path": "src/game/systems/businessCore.ts",
+      "bytes": 3969,
+      "sha256": "5935964c1bd6bf38e41d4b7519f892c25d2238c4226477b87f29f7ace161d57e"
+    },
+    {
+      "path": "src/game/systems/businessLifecycle.ts",
+      "bytes": 5000,
+      "sha256": "ee0a1d56d8f73f97d5881cd3b63784824a8e4c1be3969ed16eb347680fca6353"
+    },
+    {
+      "path": "src/game/systems/businessMonth.ts",
+      "bytes": 8677,
+      "sha256": "ce2eb1c428c7c5058031557c8ad4b25bc111240417b7b7beaec145ceac3f69a7"
+    },
+    {
+      "path": "src/game/systems/businessSchemas.ts",
+      "bytes": 2728,
+      "sha256": "b614bd70b7d073785a75d42d83e12e9db6b60a060991479ed13c7153b9cf2bfe"
+    },
+    {
+      "path": "src/game/systems/businessValidation.ts",
+      "bytes": 7457,
+      "sha256": "76312af83b3e2c337fa8d0184429b7b705ff0aef456c10d523618ee9a3f90c9b"
+    },
+    {
+      "path": "src/game/systems/businesses.ts",
+      "bytes": 17911,
+      "sha256": "bb9503a895ea06a57c9f9d17bf817ed93df80d1758235bdaf97ebf106caa0bfa"
+    },
+    {
+      "path": "src/game/systems/careerSchemas.ts",
+      "bytes": 2854,
+      "sha256": "eed53bc89ad3f9937a87d945e832ddba81e051ac2398a9a8db8295b98d775849"
+    },
+    {
+      "path": "src/game/systems/careerValidation.ts",
+      "bytes": 5171,
+      "sha256": "bd1d679f103635da6a4cf8084317bfb6d432d0cd15d412cae34f342e8b829693"
+    },
+    {
+      "path": "src/game/systems/careers.ts",
+      "bytes": 21748,
+      "sha256": "077e1e2cd3754000441224a80ed1229d1c692044d94bfa77a2829d6a1dcc3039"
+    },
+    {
+      "path": "src/game/systems/common.ts",
+      "bytes": 5240,
+      "sha256": "d6270d31b80720ec45da783ee1d9c64e0475cda3a674a4f00bfdcfc4dc1d0a7c"
+    },
+    {
+      "path": "src/game/systems/creatorSchemas.ts",
+      "bytes": 1708,
+      "sha256": "4fae2c91b989fbc54683b33b4cbd90e83004c860d108d566f1c3063141cb4a81"
+    },
+    {
+      "path": "src/game/systems/creatorValidation.ts",
+      "bytes": 7681,
+      "sha256": "851187dc7bee5bb293ffe7d3e38518455ff3fb2c7086a6b58c8c3c39657617c0"
+    },
+    {
+      "path": "src/game/systems/creators.ts",
+      "bytes": 15440,
+      "sha256": "0992b459a480a5590ac519536cfb2e4652788ea9a029101956603c4128cbef9c"
+    },
+    {
+      "path": "src/game/systems/credit.ts",
+      "bytes": 6238,
+      "sha256": "4b534bc68bffe560dbbe07bf5933faaa3d0dd6eeef7e920c4d3ce99ac725169e"
+    },
+    {
+      "path": "src/game/systems/earnings.ts",
+      "bytes": 3419,
+      "sha256": "e08e89a06b6d8bcdc7db300e6e85954e9ffd4a0e0817b4711e1f0c201839eff3"
+    },
+    {
+      "path": "src/game/systems/earningsSchemas.ts",
+      "bytes": 1351,
+      "sha256": "b5e6c9ce1563107fefd84c7dbf5b04168c89f5bf90201ce62c24a85a5674eaad"
+    },
+    {
+      "path": "src/game/systems/earningsValidation.ts",
+      "bytes": 3386,
+      "sha256": "e5d8f91f9c7e47987cebaaddf877abdf773645bace6358763a71e0998a9e069d"
+    },
+    {
+      "path": "src/game/systems/education.ts",
+      "bytes": 16443,
+      "sha256": "c1f608d15d3fb45849337d0f2b944aea187ab25c895ff5deedec479c258bc6be"
+    },
+    {
+      "path": "src/game/systems/educationRecovery.ts",
+      "bytes": 11042,
+      "sha256": "ca8fe222a429c3bd086c389f30d7cfd71d6398159d3c732a705d40c16a54486e"
+    },
+    {
+      "path": "src/game/systems/educationRecoverySchemas.ts",
+      "bytes": 1904,
+      "sha256": "92fa041968a9983f32e4c978ce27ad3c75ab9530f68fb63c87c3ca5c90a4584d"
+    },
+    {
+      "path": "src/game/systems/educationRecoveryValidation.ts",
+      "bytes": 4737,
+      "sha256": "005ac751fbf2b7e797ef4ffa44f2e757aeb8d0e4bcf9d0a8f550109ef7920bad"
+    },
+    {
+      "path": "src/game/systems/estateSchemas.ts",
+      "bytes": 1275,
+      "sha256": "e3e8690e3060d08b0f95a64eb9bddd3e6a43a8e151f70c182d55dfe40b348916"
+    },
+    {
+      "path": "src/game/systems/estates.ts",
+      "bytes": 20226,
+      "sha256": "e4ea042e33a0eb744dae2d9c972e3bceb3665e04981d5adacaf2601ef79de20a"
+    },
+    {
+      "path": "src/game/systems/family.ts",
+      "bytes": 28167,
+      "sha256": "806ea014b8eaa61f66d92f2e8371395bf4d39d595fc6b9f66ccb250d54d4d849"
+    },
+    {
+      "path": "src/game/systems/familySchemas.ts",
+      "bytes": 2497,
+      "sha256": "652b600eb0971bc1b5f463e53b75e96fd146570358d4a8005162da645f12b543"
+    },
+    {
+      "path": "src/game/systems/finance.ts",
+      "bytes": 6503,
+      "sha256": "c843ebffdcbe558cc5ce40ba6960e3728667c3d64d6a8857fcc5741e62e23008"
+    },
+    {
+      "path": "src/game/systems/friendshipSchemas.ts",
+      "bytes": 2708,
+      "sha256": "8d3085fb77cd10c96ab4e3125e87e168e178d3a74f3aae71d178c1f113f2e176"
+    },
+    {
+      "path": "src/game/systems/friendshipValidation.ts",
+      "bytes": 4415,
+      "sha256": "e66b017a42f4f8f0061822dfc6953e1966122ee2affef539d4a6b4933ddc367b"
+    },
+    {
+      "path": "src/game/systems/friendships.ts",
+      "bytes": 7737,
+      "sha256": "6f5aaad2d61229e72750e46b59b7b12bb7f0cbba9ad675c9b6d721d73525d60f"
+    },
+    {
+      "path": "src/game/systems/health.ts",
+      "bytes": 31829,
+      "sha256": "7ba437267ac929ca575c58f26ac4360536dedba6ead8afed1bfd68da745bf1fb"
+    },
+    {
+      "path": "src/game/systems/healthSchemas.ts",
+      "bytes": 2458,
+      "sha256": "fe89836e60b449ea80ad2dd6245f785b2f88f2b0fb1b8b753dcb7940c7a00c2a"
+    },
+    {
+      "path": "src/game/systems/hobbyEventSchemas.ts",
+      "bytes": 1308,
+      "sha256": "6a398f69edbf8de33b26c0b5550d716fe2d045cab219ef76fa503edfd8592720"
+    },
+    {
+      "path": "src/game/systems/hobbyEventValidation.ts",
+      "bytes": 4002,
+      "sha256": "5ff26415325a6235efcd83e8cfc57fe4be0e0802cbf313ee4d9a847bf4dae476"
+    },
+    {
+      "path": "src/game/systems/hobbyEvents.ts",
+      "bytes": 5770,
+      "sha256": "915ee5c183c5a02c478aaeb7da591b63d896574aa811d447713fd22ceef4db26"
+    },
+    {
+      "path": "src/game/systems/hourlyWork.ts",
+      "bytes": 4120,
+      "sha256": "de7d4c2aaee8ee7cec000d4d07c1dc9fe09b67385f083f2b30af6d6bd61d12c0"
+    },
+    {
+      "path": "src/game/systems/hourlyWorkSchemas.ts",
+      "bytes": 1812,
+      "sha256": "f2b989f143d3a86268096a03563ad79bfaa66ea540aaec9640133f6bdbec31ba"
+    },
+    {
+      "path": "src/game/systems/hourlyWorkValidation.ts",
+      "bytes": 7375,
+      "sha256": "769f4a2c536a07e72554c3d8413d70aa764f24f0ebb503ec867e554197a9943f"
+    },
+    {
+      "path": "src/game/systems/households.ts",
+      "bytes": 8533,
+      "sha256": "68bb93d010cfff207a64ba43bd08d8503e2358e09493130eef113356569f0cad"
+    },
+    {
+      "path": "src/game/systems/interviewExperience.ts",
+      "bytes": 4134,
+      "sha256": "641a5c7d4e732f9bbef98abcce6b9fe93c156c6b14479f60d4a22dcfb3f5ae21"
+    },
+    {
+      "path": "src/game/systems/interviewExperienceSchemas.ts",
+      "bytes": 338,
+      "sha256": "1e473fed6a5dee1e876401dcdd64ce5c4dc5a103ada1862022104a74ec44aa3f"
+    },
+    {
+      "path": "src/game/systems/jobInterviewValidation.ts",
+      "bytes": 2697,
+      "sha256": "8e4e023c6ce865e13adf49bc2402375b67ce0367714bf823980cfaf737b5a221"
+    },
+    {
+      "path": "src/game/systems/legal.ts",
+      "bytes": 40035,
+      "sha256": "fca112de9dd024b1040c34136e67513e1a30a9531f4efb9b1b7ef018f204e9ec"
+    },
+    {
+      "path": "src/game/systems/legalSchemas.ts",
+      "bytes": 4517,
+      "sha256": "0b35f4cdc29bdf25e67f835f99fb79b8eed7e924fb9e6da4f1da89e7ad1b36ee"
+    },
+    {
+      "path": "src/game/systems/legalValidation.ts",
+      "bytes": 7041,
+      "sha256": "e0074b56a134bf8cca74f48375cd1c108c4aa2efe2fad4979fc411f397ef68be"
+    },
+    {
+      "path": "src/game/systems/leisure.ts",
+      "bytes": 25764,
+      "sha256": "1af66c42edfb5e1f5de904c42ca170a91e943ea6e4a64c40e9cdb1f7e19d42ad"
+    },
+    {
+      "path": "src/game/systems/leisureSchemas.ts",
+      "bytes": 2727,
+      "sha256": "8960406a0467f115ffe5ba1dfd030a67d37fa8cb011cfde88ceaf1aa19a8848f"
+    },
+    {
+      "path": "src/game/systems/leisureValidation.ts",
+      "bytes": 11979,
+      "sha256": "fa2b900e5e5db2060db168c50e30a176d47501f67fb236528ccd96ae62c2f91e"
+    },
+    {
+      "path": "src/game/systems/lifeStoryContext.ts",
+      "bytes": 5086,
+      "sha256": "eeedeace0d92a47d76ac57a61b602d2c5477d23118c69538289caf919d8a556c"
+    },
+    {
+      "path": "src/game/systems/markets.ts",
+      "bytes": 6694,
+      "sha256": "04260aee2747d07feab4c93d704040c3b5105b5c061074970848cdca75743682"
+    },
+    {
+      "path": "src/game/systems/music.ts",
+      "bytes": 13653,
+      "sha256": "d5a0afca9fe9ae4217cfc64ca0a40726c84279c64e6fb4eb4cfcfe9d97f09ef6"
+    },
+    {
+      "path": "src/game/systems/musicSchemas.ts",
+      "bytes": 1887,
+      "sha256": "030c80c4e024f1f3bdc09bc8d15465eb65b869d4f4863bdf016483ff6d42a6b8"
+    },
+    {
+      "path": "src/game/systems/musicValidation.ts",
+      "bytes": 5370,
+      "sha256": "d54d92927cae1c571da1b0e01c7c125fd844d39f42278f33bba3b68639722ede"
+    },
+    {
+      "path": "src/game/systems/npcBudget.ts",
+      "bytes": 8154,
+      "sha256": "5c1fdb9c90ca1429d63d115506330dd1b88e0170a962a2c14c16566799b0d6c8"
+    },
+    {
+      "path": "src/game/systems/npcCourtshipSchemas.ts",
+      "bytes": 1516,
+      "sha256": "38a26029362c33a2e42a430619099b45a784a77677a709f9445b9cf55bc031bb"
+    },
+    {
+      "path": "src/game/systems/npcCourtshipValidation.ts",
+      "bytes": 5491,
+      "sha256": "0021d3a7dd003108ee4f531533189524c483d9e6206cf627831b1f067821092f"
+    },
+    {
+      "path": "src/game/systems/npcCourtships.ts",
+      "bytes": 8550,
+      "sha256": "dda91242192fb7496e7550b2c9afe00c0e1aa717e2c460b83509af78f9bbc122"
+    },
+    {
+      "path": "src/game/systems/npcMoveSchemas.ts",
+      "bytes": 5353,
+      "sha256": "08453fb0034cb0d86d1618b751650d1004ea0bb2bfe5d36cb22995b3886b8007"
+    },
+    {
+      "path": "src/game/systems/npcMoveValidation.ts",
+      "bytes": 9684,
+      "sha256": "e148f2da75c395a57bc207b66e95d20432b6ad37535ac63fa9123d6ad9872934"
+    },
+    {
+      "path": "src/game/systems/npcMoves.ts",
+      "bytes": 11130,
+      "sha256": "87265771f1fd8c25d3e41e8c2fa49c3b1cb137a75a49230fb5fab68d8fc9306c"
+    },
+    {
+      "path": "src/game/systems/npcRelationships.ts",
+      "bytes": 5463,
+      "sha256": "f011374ab6547adbac9d9a1632c6a0f57bfff663a3c4e3d12e01375af86c7d70"
+    },
+    {
+      "path": "src/game/systems/npcSeparationSchemas.ts",
+      "bytes": 1392,
+      "sha256": "1f3f806be24520cbf2c506942baf5046e36348af5718a7ed31b644b2000b8e89"
+    },
+    {
+      "path": "src/game/systems/npcSeparationValidation.ts",
+      "bytes": 5131,
+      "sha256": "ddeed9edc7c15242849cf1ac2d938adf060bb7b2888405fe1225dee2ffda0187"
+    },
+    {
+      "path": "src/game/systems/npcSeparations.ts",
+      "bytes": 6399,
+      "sha256": "c934800945566e3c28740e021e4ad38d9cf95d19cc9e6d9dd56a05cc322d16a3"
+    },
+    {
+      "path": "src/game/systems/npcs.ts",
+      "bytes": 10493,
+      "sha256": "12b17f008ed55493422ac47a2506718ffa2246d1462a9c5aa59cfd0e6c9893a8"
+    },
+    {
+      "path": "src/game/systems/petSchemas.ts",
+      "bytes": 3549,
+      "sha256": "45c1dee7f38a1da6b9bb68bf66d296d77f0d2f17460fe6bf3ea229297819bb68"
+    },
+    {
+      "path": "src/game/systems/petValidation.ts",
+      "bytes": 13749,
+      "sha256": "961ebaf4aa0ba2bff97b96ee66af2ee232939a7f0eca4c6ba793499b08cca51e"
+    },
+    {
+      "path": "src/game/systems/pets.ts",
+      "bytes": 19694,
+      "sha256": "7eb9476bcfb723f994865bbe5899fe45c84eb4528645acc9b49d61fc8cf47c82"
+    },
+    {
+      "path": "src/game/systems/politics.ts",
+      "bytes": 17031,
+      "sha256": "539129e38b7ff666aff5c64a66b344c0904c40187bba76a39886fd470eeb0cf9"
+    },
+    {
+      "path": "src/game/systems/politicsMath.ts",
+      "bytes": 887,
+      "sha256": "a7bcd3208fa608d18b4a699334e199a3ae11eac1674e5666af61ca0ed92f0975"
+    },
+    {
+      "path": "src/game/systems/politicsSchemas.ts",
+      "bytes": 1763,
+      "sha256": "930360510a8bcb7df448bb6a3972151dca12b1402358f23691b8402315c83884"
+    },
+    {
+      "path": "src/game/systems/politicsValidation.ts",
+      "bytes": 4383,
+      "sha256": "cbdb7cfe1e822148f6e789838e5fad442f049d2e273ca04d823285c8efcddcba"
+    },
+    {
+      "path": "src/game/systems/projectRecall.ts",
+      "bytes": 7353,
+      "sha256": "dc4716dd55cd462fe52a0778d35873c30bbb94bc5b6a3e821cfffa980ade3229"
+    },
+    {
+      "path": "src/game/systems/projectRecallValidation.ts",
+      "bytes": 4203,
+      "sha256": "25facf9fb0981d9884d67437c5b67af3d045fdecc2be1d7239b4f5e664147702"
+    },
+    {
+      "path": "src/game/systems/relationships.ts",
+      "bytes": 29214,
+      "sha256": "c0605114dd74b506f8ebd26ab8ce5106caf628ae3b516664b217f63c9d601831"
+    },
+    {
+      "path": "src/game/systems/relocation.ts",
+      "bytes": 23698,
+      "sha256": "f437fb4f29ee6c435abe437c8f5299c83d96521e1fb9bc63b2c4e176dd036b29"
+    },
+    {
+      "path": "src/game/systems/relocationSchemas.ts",
+      "bytes": 2614,
+      "sha256": "4de86781fe902eab305f412d1db90a4b4a98fb0486c0dc379c8f02085927aaaf"
+    },
+    {
+      "path": "src/game/systems/relocationValidation.ts",
+      "bytes": 9157,
+      "sha256": "444537d0c44e0e1d562d217e1edb822bce51c5a87d3000b28429ef387a7689ea"
+    },
+    {
+      "path": "src/game/systems/royalty.ts",
+      "bytes": 18540,
+      "sha256": "24ced71e505435b916792b3d6756b9484695938f8e1631043983e7aab00640bf"
+    },
+    {
+      "path": "src/game/systems/royaltyMath.ts",
+      "bytes": 3016,
+      "sha256": "3ec4ae92c25307c737b13d08ab8011dd01f0bf89cf76d152208d5f9c3942e0be"
+    },
+    {
+      "path": "src/game/systems/royaltySchemas.ts",
+      "bytes": 2036,
+      "sha256": "7d32188d516d0a6dcf26b83fe46d38fa0b7c8deee8bf126505bd208526b11f0d"
+    },
+    {
+      "path": "src/game/systems/royaltyValidation.ts",
+      "bytes": 7032,
+      "sha256": "6314cb130caac1e7c4a38697d203151e2ff7df26d7ce3b31c66ec5d6646e4bc6"
+    },
+    {
+      "path": "src/game/systems/schemas.ts",
+      "bytes": 5466,
+      "sha256": "c4ccb630a14d20940053cb8ce673ab0e2014b7399aba29d22cf3f7d8f5ddca22"
+    },
+    {
+      "path": "src/game/systems/scholarshipSchemas.ts",
+      "bytes": 2454,
+      "sha256": "a0a768a6d966deb01412313912155e4b0b53cd0eedd317d2991318fd490aac12"
+    },
+    {
+      "path": "src/game/systems/scholarshipValidation.ts",
+      "bytes": 6901,
+      "sha256": "ddf55460f5d9b89b1988cf95f6cc2f821f9884970a032e8c8dcbfa219a6c4a71"
+    },
+    {
+      "path": "src/game/systems/scholarships.ts",
+      "bytes": 9517,
+      "sha256": "dc25ffdd74a88cc1a325b522fa99e4575bf9880b6443d155372d319144e86b3c"
+    },
+    {
+      "path": "src/game/systems/school.ts",
+      "bytes": 14487,
+      "sha256": "15baf71fd1f000bd77fbab00e2112b21c7d5221e24092743f3cf065495a4a22c"
+    },
+    {
+      "path": "src/game/systems/schoolSchemas.ts",
+      "bytes": 2545,
+      "sha256": "e924d1969b3a0bd513bdec9e481d4ab3341212c2bb8ed3fbdbd2015d5d7ea1f6"
+    },
+    {
+      "path": "src/game/systems/schoolValidation.ts",
+      "bytes": 5355,
+      "sha256": "ad5800d83b90e5e9d53acd5d60d86f121c06b4f2bb1ee1684796feb691ea5acf"
+    },
+    {
+      "path": "src/game/systems/serviceSchemas.ts",
+      "bytes": 3297,
+      "sha256": "29e6853d63dc7be977cb841351c90249f767969c3153ffd9451c3727e52bbd45"
+    },
+    {
+      "path": "src/game/systems/serviceValidation.ts",
+      "bytes": 7720,
+      "sha256": "59e134381931ad98c3283b74d9939ac1d6e1f55b4c563a3504c123b8b0d599d1"
+    },
+    {
+      "path": "src/game/systems/services.ts",
+      "bytes": 20223,
+      "sha256": "421be7e9593cd94a9ae9005a4e89d3946455284a439aabe12e4b67a2b12e39c7"
+    },
+    {
+      "path": "src/game/systems/social.ts",
+      "bytes": 40596,
+      "sha256": "f76e1578d2e624060697ae90e7aca98afa9b233af6cbf58730bc0bdb675c686d"
+    },
+    {
+      "path": "src/game/systems/socialSchemas.ts",
+      "bytes": 4160,
+      "sha256": "61dd76589a03cebcf03895a69d8cafd07b2e2ec833ebaae451a5c0ca0695ffdd"
+    },
+    {
+      "path": "src/game/systems/socialValidation.ts",
+      "bytes": 6763,
+      "sha256": "e371e7bfbc4c42079cd78140ca6bd490195f454030cc104bb1474927fe9baaa8"
+    },
+    {
+      "path": "src/game/systems/stories.ts",
+      "bytes": 12385,
+      "sha256": "f32a12164874b1c3892a08bfef4818394e94dbe49db4d2f34befc43b5de087d3"
+    },
+    {
+      "path": "src/game/systems/storyContext.ts",
+      "bytes": 3525,
+      "sha256": "24a239302080a2a6d908bd874a6ab402ffb184a3e4671b0cd42ec5c5ab2ccb7c"
+    },
+    {
+      "path": "src/game/systems/storySchemas.ts",
+      "bytes": 3079,
+      "sha256": "8587b7e3c128900924f5a2a0570d08228c7478a47df687b9255f5e88015c77da"
+    },
+    {
+      "path": "src/game/systems/storyValidation.ts",
+      "bytes": 9036,
+      "sha256": "bea77382686a018c1d77a04579e71ee910ebef9071887bc856e9791fb64dd942"
+    },
+    {
+      "path": "src/game/systems/studyCourseSchemas.ts",
+      "bytes": 1477,
+      "sha256": "de065c8abc0e5b80a67c817c353d5e36ee98eff02ac0bf7b029b3d4ee1c3015e"
+    },
+    {
+      "path": "src/game/systems/studyCourseValidation.ts",
+      "bytes": 6820,
+      "sha256": "240cbe90669bf09210d9732a2b898c1254dbd8eab9b8a1c50f2f77c25fd831f4"
+    },
+    {
+      "path": "src/game/systems/studyCourses.ts",
+      "bytes": 4061,
+      "sha256": "1523d6c935253b769781666495fd1261292b14d6e97d9728b30d8207c074dd21"
+    },
+    {
+      "path": "src/game/systems/teenRelationshipSchemas.ts",
+      "bytes": 3537,
+      "sha256": "9f8db277d83ec6c8e8903baebe3413406feed791cd8765a331594747c824fc3a"
+    },
+    {
+      "path": "src/game/systems/teenRelationshipValidation.ts",
+      "bytes": 5401,
+      "sha256": "4e56d5c9920187b7ca5d7d803249c8713d08fd7a02a876d79a4ec7ad0c25bb29"
+    },
+    {
+      "path": "src/game/systems/teenRelationships.ts",
+      "bytes": 9476,
+      "sha256": "13a5a4e73c8dfb5ecf275a48b0815b36219a338f1ef2861e1aca22b21a21fa2b"
+    },
+    {
+      "path": "src/game/systems/travel.ts",
+      "bytes": 17904,
+      "sha256": "2d0cad94c9db329a2d59cedd1f0c07d7b83f5087e0ce6c0b0ae398185d7054ba"
+    },
+    {
+      "path": "src/game/systems/travelSchemas.ts",
+      "bytes": 3054,
+      "sha256": "52f8d869db5080bbebc1b79131d31b8c956280d65063317f31d17286ed64436f"
+    },
+    {
+      "path": "src/game/systems/travelValidation.ts",
+      "bytes": 6874,
+      "sha256": "fd39f2755b323c203ce13062a76d84be329de46d389b18c60bf4d4639b4064cf"
+    },
+    {
+      "path": "src/game/systems/universityAdmissionSchemas.ts",
+      "bytes": 2997,
+      "sha256": "c4b19c9929a9a16232b0d71573f3ef7a68e7b4c327af36ab53ec5e336ac84fdc"
+    },
+    {
+      "path": "src/game/systems/universityAdmissionValidation.ts",
+      "bytes": 7313,
+      "sha256": "4aa2bab962eddea69836ed937132526035aa2fc856695d5470d3e87c474eafa9"
+    },
+    {
+      "path": "src/game/systems/universityAdmissions.ts",
+      "bytes": 10606,
+      "sha256": "e1e96edee8b9a04da7d3e4573ab649aa0f1a374797dbe110e57a9e905873b16e"
+    },
+    {
+      "path": "src/game/systems/work.ts",
+      "bytes": 19632,
+      "sha256": "4995b1c0b1a1cb6531f7437911f4df604821ef955f697f509da1fe9b2deac683"
+    },
+    {
+      "path": "src/game/systems/workplaceSchemas.ts",
+      "bytes": 3404,
+      "sha256": "f17f07256c16d78cc5330ef529933ec9b73e347f17e7c004c21958e3fd4c8131"
+    },
+    {
+      "path": "src/game/systems/workplaceValidation.ts",
+      "bytes": 7865,
+      "sha256": "f7b500b01e1803b3458b605c37641ee9c8c02d87c7eeec64c922906e2d046f7f"
+    },
+    {
+      "path": "src/game/systems/workplaces.ts",
+      "bytes": 14411,
+      "sha256": "f3b25cfa6e56baaf86020c94d8e2c7d1fca9e77515eabb8f5edda565968c7b99"
+    },
+    {
+      "path": "src/game/valuation.ts",
+      "bytes": 4043,
+      "sha256": "c73a25f9023dd3249d4f4caa5305157123b090dec2107f46ab2dc684c49f830b"
+    },
+    {
+      "path": "src/persistence/archive.ts",
+      "bytes": 3554,
+      "sha256": "e233f3deec70d6846b25702a54e3c599b1d0363774fb4e9df56a1a596411fcab"
+    },
+    {
+      "path": "src/persistence/base64.ts",
+      "bytes": 1819,
+      "sha256": "f9ba2ae55337481065305dc358365a6d1a953b5ae0d1cb8225066422baaa9b9a"
+    },
+    {
+      "path": "src/persistence/checkpoints.ts",
+      "bytes": 16509,
+      "sha256": "5e59ef577fc18c6530676fc09f47ba0819d4f1321cf284ff03fb19b68d27b491"
+    },
+    {
+      "path": "src/persistence/native.ts",
+      "bytes": 1364,
+      "sha256": "1b91d5c8aa4a44f759507f08656bdd4468f18f20f3846b7560e5375a159bf797"
+    },
+    {
+      "path": "src/persistence/repository.ts",
+      "bytes": 20735,
+      "sha256": "4d2ad63d2f1d3e27b4800270970fe25092eb547aa09c5b9cd3db8e0c0d1e87e1"
+    },
+    {
+      "path": "src/progression/catalog.ts",
+      "bytes": 21058,
+      "sha256": "54e02bc82ac1f41bc104187e57fb019bf6cefa40ca0fc0e8d83e0ac217b49f14"
+    },
+    {
+      "path": "src/progression/connections.ts",
+      "bytes": 1151,
+      "sha256": "e8d8b41fe1300727e2f7f49e03133d38a56399a252963ea4526f62be3a925980"
+    },
+    {
+      "path": "src/progression/facts.ts",
+      "bytes": 11360,
+      "sha256": "a7d0a6fdb130e415322820edc74af8fbe69221fc41bc9b2461d57f70e5fd8e82"
+    },
+    {
+      "path": "src/progression/progress.ts",
+      "bytes": 1505,
+      "sha256": "140137641e35766abf26553120686c169df9754dfa36feeb8b8452009e38910f"
+    },
+    {
+      "path": "src/progression/routes.ts",
+      "bytes": 584,
+      "sha256": "a214d9479fefe63ee7bd901ad0601c95c82a853dfdd069c27958084f44ebcfe6"
+    },
+    {
+      "path": "src/progression/types.ts",
+      "bytes": 2403,
+      "sha256": "e450a6e261b27111538e7e9be42c40dc3b22960523e16284612f76a86ec2d3cf"
+    },
+    {
+      "path": "src/state/creationDraft.ts",
+      "bytes": 988,
+      "sha256": "f7a802db556c3c82f43d717cae6bda2c0b33e82d7509350eb452876f44a560cc"
+    },
+    {
+      "path": "src/state/gameStore.ts",
+      "bytes": 6605,
+      "sha256": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09"
+    },
+    {
+      "path": "src/state/preferencesStore.ts",
+      "bytes": 4186,
+      "sha256": "08d48dc738b05e6b4f3e642dbc0028ed1275c743ca93d158dc2205afd5972b61"
+    },
+    {
+      "path": "src/state/useGame.ts",
+      "bytes": 776,
+      "sha256": "4dc6ffd95fe52d117bd78bcdf292128aa870994cebf8a676b437ecce2572baf1"
+    },
+    {
+      "path": "src/state/usePreferences.ts",
+      "bytes": 388,
+      "sha256": "10397601bb8ff52ceaa4985b62d786008c07bc3385798c1ca68ed9cb91b968f4"
+    },
+    {
+      "path": "src/ui/AppFeedback.tsx",
+      "bytes": 1287,
+      "sha256": "ae8d07b7f69ad31dd7497d4942d17b32d006c07a359a1ab972bbd8569929777d"
+    },
+    {
+      "path": "src/ui/BestFriendship.tsx",
+      "bytes": 6423,
+      "sha256": "1c9b8f3a4cf7448aefd95a0e68a321f60f62cbf147dfe7e0d12e6883fb233134"
+    },
+    {
+      "path": "src/ui/BusinessReview.tsx",
+      "bytes": 1355,
+      "sha256": "a3e6f054fd4cff4491509bffa0f1d2282678fdeaeab5437984abaa30468c855d"
+    },
+    {
+      "path": "src/ui/CareerReview.tsx",
+      "bytes": 1982,
+      "sha256": "8a1e3d1b2cbc7ed49d7c903d3d664b5e1485ed68e3473c88eeb0afc954226120"
+    },
+    {
+      "path": "src/ui/CreationElements.tsx",
+      "bytes": 2167,
+      "sha256": "d426bd0d9e788c12c1f90da61df0033c785a135e645a205125479d512038bd6d"
+    },
+    {
+      "path": "src/ui/EstateDetails.tsx",
+      "bytes": 1435,
+      "sha256": "b16367db77dd20b8625c6f7f6a96f42ad5cd4304c497d332ed89e121033d91f6"
+    },
+    {
+      "path": "src/ui/EventModal.tsx",
+      "bytes": 6959,
+      "sha256": "e6118dc6cfdd2218fcffc234027fed567141d1250a3b808595518b8d58b301f5"
+    },
+    {
+      "path": "src/ui/FamilyPreferences.tsx",
+      "bytes": 1418,
+      "sha256": "e41cbc367f576ebbd1eaa23509afe114c980a8b2062abadc3ca935f6b00c3981"
+    },
+    {
+      "path": "src/ui/FilterTabs.tsx",
+      "bytes": 948,
+      "sha256": "4f1445cb6437591b401decb0c41c3f0a816d3839747cc33fe54a828929b1cbb7"
+    },
+    {
+      "path": "src/ui/GameShell.tsx",
+      "bytes": 2435,
+      "sha256": "0eedf86b2d3c919ec61fa78821f313bc476afa0126edca16c1308374add0b9c7"
+    },
+    {
+      "path": "src/ui/HealthReview.tsx",
+      "bytes": 4838,
+      "sha256": "c9572b9de3f673bde6050cfd58d3efd2568512c491b6207455634f1b9697a751"
+    },
+    {
+      "path": "src/ui/HobbyCommunityEvent.tsx",
+      "bytes": 5440,
+      "sha256": "f52865d0bb9997f385e992070ded2a9f9b4bff3b956d99838b7a899a75367648"
+    },
+    {
+      "path": "src/ui/HobbyRoutine.tsx",
+      "bytes": 10360,
+      "sha256": "cc5c360e37d51384c499b1f76ece2099e01b17299e92c70229d8c77a4e138282"
+    },
+    {
+      "path": "src/ui/LegalReview.tsx",
+      "bytes": 2219,
+      "sha256": "a5ab9336ef89b48f5ac3b7c39b3b7e0652b71bacfea12f71f9db652768518453"
+    },
+    {
+      "path": "src/ui/LifeSummaryContent.tsx",
+      "bytes": 2252,
+      "sha256": "1b689b008b444327b3c14e3cd7761a5832e43e696a7a8e17a5ab659f1a7adaa0"
+    },
+    {
+      "path": "src/ui/PendingEvent.tsx",
+      "bytes": 2774,
+      "sha256": "0c3e2e5d487ead4d387234dae3492b3a14d117569396ae2a45517551a5878c22"
+    },
+    {
+      "path": "src/ui/ProgressElements.tsx",
+      "bytes": 4754,
+      "sha256": "1fa0f96205c67d878e572b255c9c87fce3a40ce71b3074909bba5765666e817e"
+    },
+    {
+      "path": "src/ui/RecoveryStudy.tsx",
+      "bytes": 6187,
+      "sha256": "18f5fa0e8568aa9b589ac41ae01ed8231ad5cd1237e801f1c16f114b940a4e6f"
+    },
+    {
+      "path": "src/ui/Scholarships.tsx",
+      "bytes": 3252,
+      "sha256": "adb51914d66fdc6917058a4bd61a140bf247fa651656e4c0e42921826dded6f1"
+    },
+    {
+      "path": "src/ui/SchoolPlans.tsx",
+      "bytes": 3583,
+      "sha256": "6e3b1d45911264a0c7818d609f06107c90fbd4a3c7e28faf0182c63126b4d897"
+    },
+    {
+      "path": "src/ui/SocialReview.tsx",
+      "bytes": 1663,
+      "sha256": "6ac49017d0545cd0896ca29b1f789affca0a5051a73b63b7fbc1fa1edf4a979e"
+    },
+    {
+      "path": "src/ui/StudyCourseHistory.tsx",
+      "bytes": 1570,
+      "sha256": "2e049e997b1657993b59d031855ce34d13cf7df78baee63319437a0a1245cbae"
+    },
+    {
+      "path": "src/ui/TeenRelationship.tsx",
+      "bytes": 6981,
+      "sha256": "843e536d164a096819e5cf9e722e074e5b03bde34f936fc8e4246429a92f0f06"
+    },
+    {
+      "path": "src/ui/UniversityAdmissions.tsx",
+      "bytes": 12457,
+      "sha256": "18a53745943261e87c7f614a83b36945364b127f5a408a7522360dd4f1fba232"
+    },
+    {
+      "path": "src/ui/annualFinances.ts",
+      "bytes": 9040,
+      "sha256": "659f430b3b67e73de99520f4d9282a7e40c3fe579c5890201f5a5e1f31bef53f"
+    },
+    {
+      "path": "src/ui/appearanceLabels.ts",
+      "bytes": 1072,
+      "sha256": "286eb8114638ff88376b972cc9965c2bb084b9fdbe8b41960419e76f1abb4bd3"
+    },
+    {
+      "path": "src/ui/components.tsx",
+      "bytes": 8350,
+      "sha256": "947aafd656a74675b64fd0dadeb0735583e4ac1cdc0b30b73599b454bfa5df4b"
+    },
+    {
+      "path": "src/ui/feedback.tsx",
+      "bytes": 2540,
+      "sha256": "3ffcf8bc8fe8979c5dc9c2bc05db9b8562db02db6f17d1c1adfa5b3cb708924c"
+    },
+    {
+      "path": "src/ui/lifetimeStatistics.ts",
+      "bytes": 6270,
+      "sha256": "e16b14dc147ab7cf3f3d63cc1b7ae69391fae70d82d835031bf0ea60fcfc775c"
+    },
+    {
+      "path": "src/ui/loanRateQuote.ts",
+      "bytes": 751,
+      "sha256": "51b45e816d3902a57d331b0fdaa5cb01b42e615c5c1e115d51243cf9c57a4b50"
+    },
+    {
+      "path": "src/ui/terminalBiography.ts",
+      "bytes": 3159,
+      "sha256": "3808c5737128e2735c71d284b21660ce0546dc53c03d836dd3e44806dade6d68"
+    },
+    {
+      "path": "src/ui/theme.tsx",
+      "bytes": 2314,
+      "sha256": "faa85bcabed9b69ff5b7651717d1a1f737d3c299e68684a5f6716944ba30a46c"
+    },
+    {
+      "path": "src/ui/useActionSound.ts",
+      "bytes": 1995,
+      "sha256": "6c2cfcf796c7614c336e0799b575f9b434d51f696e4bfdab93166b03dbcc6139"
+    },
+    {
+      "path": "src/ui/useDelayedBusy.ts",
+      "bytes": 432,
+      "sha256": "e125828cbe3c1bbe4ae59051dea1374cbde2a9ad3f1712c805c82d5adf0c1f76"
+    }
+  ]
+}
