@@ -36,12 +36,17 @@ test('the genuine child can filter actual roles, search duplicate first names an
   expect(screen.queryByText('Ruby Singh')).toBeNull();
   fireEvent.press(screen.getByRole('button', { name: /^Ruby Kelly\./ })); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: 'person_parent1' } });
   fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches'); expect(screen.getByText('No matching names in this view.')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
+  expect(screen.getByLabelText('Search relationships')).toHaveDisplayValue(''); expect(screen.getByRole('tab', { name: 'All', selected: true })).toBeOnTheScreen();
+  expect(screen.getByText('Harper Walker')).toBeOnTheScreen();
+  fireEvent.press(screen.getByRole('tab', { name: 'Family' })); fireEvent.changeText(screen.getByLabelText('Search relationships'), 'nobody matches');
   fireEvent.press(screen.getByRole('button', { name: 'Clear relationship search' })); expect(screen.getByLabelText('Search relationships')).toHaveDisplayValue('');
   expect(screen.getByText('Ruby Kelly')).toBeOnTheScreen(); expect(screen.getByText('Jack Kelly')).toBeOnTheScreen(); expect(screen.queryByText('Harper Walker')).toBeNull();
   fireEvent.press(screen.getByRole('tab', { name: 'Friends' })); expect(screen.getByText('Your friendships will appear here as you get to know people.')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('tab', { name: 'Romance' })); expect(screen.getByText('Your current and past partners will appear here.')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('tab', { name: 'All' })); expect(screen.getByText('Harper Walker')).toBeOnTheScreen();
-  for (const [name, route] of [['Meet New People', '/meet-people'], ['Household Pets', '/pets'], ['Family & Children', '/family'], ['My Household', '/household']]) {
+  expect(screen.queryByRole('image', { name: 'Ruby Kelly' })).toBeNull();
+  for (const [name, route] of [['Meet New People', '/meet-people'], ['Household Pets', '/pets'], ['Family & Children', '/family'], ['Family Tree', '/family-tree'], ['My Household', '/household']]) {
     fireEvent.press(screen.getByRole('button', { name })); expect(router.push).toHaveBeenLastCalledWith(route);
   }
   expect(screen.queryByLabelText('Saving')).toBeNull(); expect(encodeWorld(mockStore.getState().world!)).toBe(encoded); expect(rows()).toEqual(before);

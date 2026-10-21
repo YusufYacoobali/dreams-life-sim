@@ -48,6 +48,10 @@ test.each([['childless', marriage], ['with the genuine child', birth]] as const)
   try {
     const spouseRow = screen.getByRole('button', { name: personButton(context.initial, spouse.id) });
     expect(screen.getAllByRole('button', { name: personButton(context.initial, spouse.id) })).toHaveLength(1);
+    expect(screen.queryByRole('image', { name: fullName(spouse) })).toBeNull();
+    expect(screen.getByRole('header', { name: 'Parents & Guardians' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Children & Dependants' })).toBeOnTheScreen();
+    if (_scope === 'childless') expect(screen.getByText('No children or dependants are recorded for you.')).toBeOnTheScreen();
     expect(spouseRow.props.accessibilityLabel).toContain('Late spouse · Age ');
     expect(spouseRow.props.accessibilityLabel).toContain('Died ' + married.date.year);
     for (const child of childrenOf(context.initial)) {
@@ -88,7 +92,8 @@ test('the genuine pension archive retains its deceased parent through existing f
   try {
     // This genuine world has two people called Sora Romano; age/death labels
     // distinguish the actual recorded parent instead of assuming names are IDs.
-    const person = current.people[deceased], label = fullName(person) + '. Age ' + ageOn(person, current.date) + ' · Died ' + person.died!.year;
+    const person = current.people[deceased], parent = current.relationships.find(edge => edge.from === deceased && edge.to === current.activePersonId && edge.roles.includes('parent'))!;
+    const label = fullName(person) + '. ' + (parent.parentType === 'adoptive' ? 'Adoptive parent' : 'Parent') + ' · Age ' + ageOn(person, current.date) + ' · Died ' + person.died!.year;
     const row = screen.getByRole('button', { name: label });
     expect(row.props.accessibilityLabel).toContain('Died ' + current.people[deceased].died!.year);
     expect(row.props.accessibilityLabel).not.toContain('Late spouse');

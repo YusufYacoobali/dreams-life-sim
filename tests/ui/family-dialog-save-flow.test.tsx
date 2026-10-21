@@ -26,6 +26,8 @@ import Family from '../../app/(game)/family';
 import FamilyTree from '../../app/(game)/family-tree';
 import Person from '../../app/(game)/person/[id]';
 import Legacy from '../../app/legacy';
+import Household from '../../app/(game)/household';
+import { EventModal } from '../../src/ui/EventModal';
 
 const frame = (child: React.ReactNode, pending = true) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}{pending && <PendingEvent />}</ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
@@ -72,6 +74,41 @@ async function setup(initial: World) {
   };
   return { sqlite, rows, cold, original, pauseNextSave, publishDeath };
 }
+
+test('the actual married household keeps a failed move-out review, blocks obsolete confirmations and reloads one committed move', async () => {
+  const { sqlite, rows, cold, original, pauseNextSave } = await setup(couple());
+  try {
+    const initial = world(), beforeRows = rows(), predicted = resolveCommand(initial, { type: 'move-out' }, true);
+    let view = render(frame(<Household />));
+    await press('Move Out');
+    const confirmation = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!;
+    const first = confirmation().props, reviewed = first.event;
+    sqlite.exec("CREATE TRIGGER fail_household_move BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    await confirm('Move Out'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+    expect(confirmation().props.event).toBe(reviewed); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
+    expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1);
+    sqlite.exec('DROP TRIGGER fail_household_move');
+    await press('Never mind'); await act(async () => { await first.onChoose('confirm'); });
+    expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
+    await press('Move Out'); const current = confirmation().props;
+    await act(async () => { first.onCancel(); await first.onChoose('confirm'); });
+    expect(confirmation().props.event).toBe(current.event); expect(rows()).toEqual(beforeRows);
+    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), release = pauseNextSave();
+    await confirm('Move Out'); expect(mockStore.getState().busy).toBe(true);
+    expect(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: 'Move Out', busy: true })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled();
+    await act(async () => { current.onCancel(); await current.onChoose('confirm'); screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
+    expect(confirmation().props.event).toBe(current.event); expect(rows()).toEqual(beforeRows);
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+    expect(world()).toEqual(predicted); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+    const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Household />));
+    expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue');
+    const done = world(), doneRows = rows(); expect(done).toEqual(acknowledge(predicted));
+    await act(async () => { await current.onChoose('confirm'); });
+    expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); expect(screen.getByRole('button', { name: 'Move Out' })).toBeDisabled();
+    original(); view.unmount();
+  } finally { jest.restoreAllMocks(); sqlite.close(); }
+});
 
 test.each(['adopt', 'try-child'] as const)('%s retains the reviewed family plan after rollback, retries warm, and cold-resumes one actual outcome', async action => {
   const { sqlite, rows, cold, original, pauseNextSave } = await setup(action === 'try-child' ? family() : couple());
