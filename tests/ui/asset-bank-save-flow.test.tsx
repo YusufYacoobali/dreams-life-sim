@@ -112,7 +112,10 @@ async function openReview(kind: Kind): Promise<Review> {
     const to = account.currency === 'USD' ? 'EUR' : 'USD', quote = exchangeQuote(current, amount, account.currency, to); await press('Review Exchange');
     return { command: { type: 'exchange', from: account.currency, to, amount, quotedNet: quote.net }, title: 'Exchange currencies?', confirm: 'Exchange', visibleAmounts: [money(amount), money(quote.fee, to), money(quote.net, to)], draft: ['Amount in ' + account.currency, value] };
   }
-  const quantity = 125001n, quote = investmentQuote(current, 'ORBIT', quantity); await press(kind === 'buy' ? 'Buy' : 'Sell'); edit('Trade quantity', '0.125001'); await press('Review Trade');
+  const quantity = 125001n, quote = investmentQuote(current, 'ORBIT', quantity); await choose(kind === 'buy' ? 'Buy' : 'Sell'); edit('Trade quantity', '0.125001');
+  expect(screen.getByText('Trading fee: ' + money(quote.fee))).toBeOnTheScreen();
+  expect(screen.getByText((kind === 'buy' ? 'Cash paid: ' : 'Net proceeds: ') + money(kind === 'buy' ? quote.buyCost : quote.sellProceeds))).toBeOnTheScreen();
+  await press('Review Trade');
   return { command: kind === 'buy' ? { type: 'buy-investment', instrumentId: 'ORBIT', quantity, quotedMinor: quote.value } : { type: 'sell-investment', holdingId: current.holdings.find(item => item.ownerId === current.activePersonId && item.instrumentId === 'ORBIT')!.id, quantity, quotedMinor: quote.value }, title: kind === 'buy' ? 'Buy ORBIT?' : 'Sell ORBIT?', confirm: kind === 'buy' ? 'Confirm Purchase' : 'Confirm Sale', visibleAmounts: [money(quote.value), money(quote.fee), money(kind === 'buy' ? quote.buyCost : quote.sellProceeds)], draft: ['Trade quantity', '0.125001'] };
 }
 function expectReview(review: Review) {
@@ -151,7 +154,10 @@ test.each(['refinance', 'repay', 'sell'] as Kind[])('%s save disables mutation i
     const release = context.pauseNextSave(); await press(review.confirm); expect(mockStore.getState().busy).toBe(true);
     expect(screen.getByLabelText(review.draft![0])).toBeDisabled(); expect(modal().getByRole('button', { name: review.confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     const disabled = kind === 'refinance' ? [/^Refinance\./, /^New term\./, 'Review Refinancing'] : kind === 'repay' ? ['Review Repayment', 'Cancel Repayment', 'Back'] : ['Buy', 'Sell', 'Review Trade'];
-    for (const name of disabled) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
+    for (const name of disabled) {
+      if (kind === 'sell' && (name === 'Buy' || name === 'Sell')) { expect(screen.getByRole('radio', { name })).toBeDisabled(); await choose(name); }
+      else { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
+    }
     const reviewButton = kind === 'refinance' ? 'Review Refinancing' : kind === 'repay' ? 'Review Repayment' : 'Review Trade';
     expect(screen.getByRole('button', { name: reviewButton })).toHaveProp('accessibilityState', { disabled: true, busy: false });
     await press(review.confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
@@ -216,8 +222,8 @@ test('switching trade side clears the previous quantity reason without saving or
   const context = await setup(prepare('sell'), 'sell');
   try {
     const initial = world(), beforeRows = context.rows(), view = render(frame('sell'));
-    await press('Sell'); edit('Trade quantity', '3'); await press('Review Trade'); expect(screen.getByRole('alert')).toHaveTextContent('You do not own that quantity.'); expect(screen.queryByText('Sell ORBIT?')).toBeNull();
-    await press('Buy'); expect(screen.queryByRole('alert')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '3'); await press('Review Trade'); expect(screen.getByText('Buy ORBIT?')).toBeOnTheScreen(); await press('Never mind');
+    await choose('Sell'); expect(screen.getByRole('radio', { name: 'Sell', checked: true })).toBeOnTheScreen(); edit('Trade quantity', '3'); await press('Review Trade'); expect(screen.getByRole('alert')).toHaveTextContent('You do not own that quantity.'); expect(screen.queryByText('Sell ORBIT?')).toBeNull();
+    await choose('Buy'); expect(screen.getByRole('radio', { name: 'Buy', checked: true })).toBeOnTheScreen(); expect(screen.queryByRole('alert')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', '3'); await press('Review Trade'); expect(screen.getByText('Buy ORBIT?')).toBeOnTheScreen(); await press('Never mind');
     expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); view.unmount();
   } finally { context.close(); }
 });
