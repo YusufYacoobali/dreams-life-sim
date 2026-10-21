@@ -1,0 +1,10 @@
+{
+  "format": "dreams-current-policy-registration-v1",
+  "complete": false,
+  "cohortRunAuthorized": false,
+  "commit": null,
+  "versions": { "world": 38, "engine": 39, "content": 13, "database": 18, "checkpoint": "v4" },
+  "sourceSnapshot": null,
+  "git": { "head": null, "status": null, "tree": null, "commit": null },
+  "scope": "Pending coordinator final C39 source freeze. No runtime, SQLite birth, world, policy or cohort is accepted or authorized by this template."
+}
