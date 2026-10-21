@@ -20,6 +20,8 @@ import { hasWithdrawnFromSchool } from './schoolSchemas';
 import { serviceAway } from './serviceSchemas';
 import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
+import { activeUniversityApplication } from './universityAdmissionSchemas';
+import { compareDates } from '../model';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']), scholarshipId: z.string().optional() }),
@@ -46,7 +48,8 @@ export function educationActionReason(world: World, command: Exclude<EducationCo
     if (!education.paused || education.stage === 'none') return 'Your studies are not waiting for tuition';
   } else if (education.stage === 'primary' || education.stage === 'secondary' || education.stage === 'none') return 'You cannot withdraw from compulsory education';
 }
-export function enrollmentReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
+/** Current course requirements, without consuming or testing an application attempt. */
+export function coursePrerequisiteReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
   if (activeTrip(world)) return 'Return from your trip before enrolling';
   const person = active(world); const education = person.education;
   if (isConfined(world)) return 'Courses outside custody are unavailable';
@@ -64,7 +67,12 @@ export function enrollmentReason(world: World, program: 'university' | 'trade' |
   if (program === 'graduate' && !education.qualifications.some(q => q.level === 'degree')) return 'A university degree is required';
   if (program === 'graduate' && field !== 'medicine' && field !== 'law') return 'Choose medicine or law for professional study';
   if (education.qualifications.some(q => q.level === (program === 'university' ? 'degree' : program === 'graduate' ? field : 'trade') && q.field === field)) return 'You already hold this qualification';
+}
+export function enrollmentReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
+  const reason = coursePrerequisiteReason(world, program, field); if (reason) return reason;
+  const person = active(world);
   if (world.actionCounts[person.id + ':education:' + world.date.year + ':' + program + ':' + field]) return 'You already applied for this course this year';
+  if (program === 'university' && activeUniversityApplication(world)) return 'Use or withdraw your existing university application first';
 }
 function payTuition(world: World, funding: 'cash' | 'loan', waiver = tuitionWaiver(world, active(world))) {
   const person = active(world); const education = person.education;
@@ -74,14 +82,17 @@ function payTuition(world: World, funding: 'cash' | 'loan', waiver = tuitionWaiv
   charge(world, billed, 'tuition', 'Tuition: ' + education.school);
   if (waiver) waiver.item.periods.push({ date: { ...world.date }, studyMonth: education.tuitionPaidMonths, grades: education.grades, resources: waiver.resources, grossTuition: education.tuition, waived: waiver.waived, billed, funding, transactionId: billed > 0n ? world.ledger.at(-1)!.id : null, loanTransactionId });
   education.funding = funding; education.paused = false; education.tuitionPaidMonths += 12;
+  return { billed, waived: waiver?.waived ?? 0n, transactionId: billed > 0n ? world.ledger.at(-1)!.id : null, loanTransactionId };
 }
 /** A confirmed admission starts with no completed study and a real annual tuition payment. */
-export function startCourse(world: World, program: 'university' | 'trade' | 'graduate', field: typeof fields[number], funding: 'cash' | 'loan', school?: string, scholarshipId?: string) {
+export function startCourse(world: World, program: 'university' | 'trade' | 'graduate', field: typeof fields[number], funding: 'cash' | 'loan', school?: string, scholarshipId?: string, admissionId?: string) {
   const person = active(world), education = person.education;
-  education.stage = program; education.field = field; education.school = school ?? person.city + (program === 'trade' ? ' Technical College' : ' University');
-  education.months = 0; education.requiredMonths = courseMonths(program, field);
-  education.tuition = tuitionFor(person, program); education.tuitionPaidMonths = 0;
-  activateScholarship(world, scholarshipId, program, field); payTuition(world, funding);
+  const admission = admissionId ? world.universityApplications.find(item => item.id === admissionId) : undefined;
+  if (admissionId && (!admission || admission.status !== 'accepted' || admission.personId !== person.id || program !== 'university' || admission.field !== field || admission.country !== person.country || admission.city !== person.city || !admission.expires || compareDates(world.date, admission.expires) >= 0)) throw new IneligibleAction('Choose a current university place offer');
+  education.stage = program; education.field = field; education.school = admission?.school ?? school ?? person.city + (program === 'trade' ? ' Technical College' : ' University');
+  education.months = 0; education.requiredMonths = admission?.requiredMonths ?? courseMonths(program, field);
+  education.tuition = admission?.annualTuition ?? tuitionFor(person, program); education.tuitionPaidMonths = 0;
+  activateScholarship(world, scholarshipId, program, field); return payTuition(world, funding);
 }
 export function resolveEducation(world: World, command: EducationCommand) {
   const person = active(world); const education = person.education;

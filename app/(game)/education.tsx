@@ -14,15 +14,22 @@ import { useColors } from '../../src/ui/theme';
 import { RecoveryStudy } from '../../src/ui/RecoveryStudy';
 import { Scholarships } from '../../src/ui/Scholarships';
 import { scholarshipWaiver, tuitionDue } from '../../src/game/systems/scholarships';
+import { UniversityAdmissions, type AdmissionReviewRequest } from '../../src/ui/UniversityAdmissions';
+import { activeUniversityApplication } from '../../src/game/systems/universityAdmissionSchemas';
 
 type Application = { program: 'university' | 'trade' | 'graduate'; field: typeof fields[number]; funding: 'cash' | 'loan'; scholarshipId?: string };
 type Dialog = { kind: 'program-field'; program: Application['program'] } | { kind: 'funding'; application: Application } | { kind: 'confirm'; application: Application } | { kind: 'effort' } | { kind: 'leave' } | { kind: 'resume' };
 const offeredFields = (program: Application['program']) => program === 'graduate' ? ['medicine', 'law'] as const : fields;
 export default function Education() {
+  const world = useGame(s => s.world)!;
+  return <EducationContext key={JSON.stringify([world.id, world.activePersonId])} />;
+}
+function EducationContext() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error);
   const player = world.people[world.activePersonId]; const education = player.education; const account = accountFor(world); const studentLoan = loanRateQuote(world, 'student'); const c = useColors();
   const loanNote = studentLoan.existing ? ' Borrowed tuition is added to your existing ' + account.currency + ' student loan at ' + studentLoan.interestBps / 100 + '% annual interest.' : '';
   const [dialog, setDialog] = useState<Dialog | null>(null);
+  const [admissionRequest, setAdmissionRequest] = useState<AdmissionReviewRequest>(null), [admissionReviewOpen, setAdmissionReviewOpen] = useState(false);
   const bill = (application: Application) => { const tuition = tuitionFor(player, application.program), offer = world.scholarships.find(item => item.id === application.scholarshipId && item.status === 'offered'); return tuition - (offer ? scholarshipWaiver(offer, tuition) : 0n); };
   const nextTuition = tuitionDue(world);
   const fundingReason = educationActionReason(world, 'fund-studies');
@@ -40,18 +47,22 @@ export default function Education() {
     </Card>
     {['primary', 'secondary'].includes(education.stage) && <Card><Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. {education.stage === 'secondary' ? 'Its minimum leaving age is ' + minimumSchoolLeavingAge[player.country] + '; review early withdrawal from Your School. Leaving early does not award a qualification.' : 'Primary-school withdrawal is unavailable.'} A qualification requires the passing grade and recorded study.</Body><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
     {education.stage === 'none' && (world.schoolCommunities.some(item => item.personId === player.id) || world.schoolCompletions.some(item => item.personId === player.id)) && <Card><ActionRow title="School Years" subtitle="Reports, plans and completion" onPress={() => router.push('/school')} /></Card>}
-    {error && !dialog && <Body>{error}</Body>}
+    {error && !dialog && !admissionReviewOpen && <Body>{error}</Body>}
     {education.stage !== 'none' && <Card>
       {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={fundingReason ? 'Fund Next Year. ' + fundingReason : undefined} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
       {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" disabled={busy} disabledReason={educationActionReason(world, 'leave-school')} onPress={() => setDialog({ kind: 'leave' })} />}
     </Card>}
     <ActionRow title="Scholarships" subtitle="Apply for tuition waivers before enrolling" onPress={() => router.push('/scholarships')} />
-    <Scholarships world={world} busy={busy} onUse={item => setDialog({ kind: 'funding', application: { program: item.program, field: item.field, funding: 'cash', scholarshipId: item.id } })} />
+    <Scholarships world={world} busy={busy} onUse={item => {
+      if (busy) return;
+      if (item.program === 'university') setAdmissionRequest(previous => ({ scholarshipId: item.id, serial: (previous?.serial ?? 0) + 1, identity: JSON.stringify([world.id, player.id, player.country, player.city, activeUniversityApplication(world)?.id ?? null]) }));
+      else setDialog({ kind: 'funding', application: { program: item.program, field: item.field, funding: 'cash', scholarshipId: item.id } });
+    }} />
     <RecoveryStudy world={world} busy={busy} error={error} dispatch={dispatch} />
-    <Card><Heading size={18}>Further education</Heading>{(['university', 'trade', 'graduate'] as const).map(program => {
+    <Card><Heading size={18}>Further education</Heading><UniversityAdmissions request={admissionRequest} onReviewChange={setAdmissionReviewOpen} />{(['trade', 'graduate'] as const).map(program => {
       const reasons = offeredFields(program).map(field => enrollmentReason(world, program, field));
       const disabledReason = reasons.every(Boolean) ? reasons.every(reason => reason === reasons[0]) ? reasons[0] : 'No subjects are currently available' : undefined;
-      return <ActionRow key={program} title={program === 'trade' ? 'Trade School' : program === 'graduate' ? 'Professional Study' : 'University'} subtitle={program === 'graduate' ? 'Medicine or law after a degree' : 'Choose a subject and review funding'} disabled={busy} disabledReason={disabledReason} onPress={() => setDialog({ kind: 'program-field', program })} />;
+      return <ActionRow key={program} title={program === 'trade' ? 'Trade School' : 'Professional Study'} subtitle={program === 'graduate' ? 'Medicine or law after a degree' : 'Choose a subject and review funding'} disabled={busy} disabledReason={disabledReason} onPress={() => setDialog({ kind: 'program-field', program })} />;
     })}</Card>
     <EventModal event={event} busy={busy} error={error} onCancel={() => setDialog(null)} onChoose={async id => {
       if (busy || !dialog) return;

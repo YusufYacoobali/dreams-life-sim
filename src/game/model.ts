@@ -57,6 +57,8 @@ import { validateLeisure } from './systems/leisureValidation';
 import { petAdoptionSchema, petSchema } from './systems/petSchemas';
 import { validatePets } from './systems/petValidation';
 import { validateScholarships } from './systems/scholarshipValidation';
+import { universityAdmissionSchema } from './systems/universityAdmissionSchemas';
+import { validateUniversityAdmissions } from './systems/universityAdmissionValidation';
 import { workplaceSchema, workRaiseSchema } from './systems/workplaceSchemas';
 import { validateWorkplaces } from './systems/workplaceValidation';
 import { validateJobInterview } from './systems/jobInterviewValidation';
@@ -127,6 +129,7 @@ export const worldSchema = z.object({
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
   trips: z.array(tripSchema), relocations: z.array(relocationSchema), schoolCommunities: z.array(schoolCommunitySchema), storyThreads: z.array(storyThreadSchema),
   schoolCompletions: z.array(secondaryCompletionSchema), schoolWithdrawals: z.array(schoolWithdrawalSchema), recoveryCourses: z.array(recoveryCourseSchema),
+  universityApplications: z.array(universityAdmissionSchema).default([]),
   scholarships: z.array(scholarshipSchema), pets: z.array(petSchema), petAdoptions: z.array(petAdoptionSchema), hobbies: z.array(hobbySchema), hobbyEvents: z.array(hobbyEventSchema), hourlyContracts: z.array(hourlyContractSchema), leisureOutings: z.array(outingSchema),
   workplaces: z.array(workplaceSchema), workRaises: z.array(workRaiseSchema),
   eventHistory: z.array(z.object({ templateId: z.string(), year: z.number().int() })),
@@ -334,6 +337,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateWorkplaces(world);
   validateEducationRecovery(world);
   validateScholarships(world);
+  validateUniversityAdmissions(world, ledger);
   validatePets(world, ledger);
   validateLeisure(world, ledger);
   validateHobbyEvents(world, ledger);

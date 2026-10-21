@@ -6,7 +6,8 @@ import { IneligibleAction } from '../errors';
 import { formatMoney } from '../money';
 import { fxMoney, netWorth } from '../valuation';
 import { active, draw, fact, result } from './common';
-import { enrollmentReason, tuitionFor } from './education';
+import { coursePrerequisiteReason, enrollmentReason, tuitionFor } from './education';
+import { matchingAdmission } from './universityAdmissions';
 import { fields } from './schemas';
 import { activeScholarship, Scholarship, scholarshipKinds, scholarshipPolicies, studyPrograms } from './scholarshipSchemas';
 
@@ -21,7 +22,7 @@ export function scholarshipResources(world: World, person = active(world)): bigi
 }
 const applicationKey = (world: World, kind: Scholarship['kind'], program: Scholarship['program'], field: Scholarship['field']) => world.activePersonId + ':scholarship:' + world.date.year + ':' + kind + ':' + program + ':' + field;
 export function scholarshipReason(world: World, kind: Scholarship['kind'], program: Scholarship['program'], field: Scholarship['field']): string | undefined {
-  const person = active(world), policy = scholarshipPolicies[kind], reason = enrollmentReason(world, program, field);
+  const person = active(world), policy = scholarshipPolicies[kind], reason = program === 'university' && matchingAdmission(world, field) ? coursePrerequisiteReason(world, program, field) : enrollmentReason(world, program, field);
   if (reason) return reason;
   if (world.scholarships.some(item => item.personId === person.id && ['offered', 'active'].includes(item.status))) return 'Use or decline your existing scholarship offer first';
   if (world.actionCounts[applicationKey(world, kind, program, field)]) return 'You already applied for this scholarship and course this calendar year';

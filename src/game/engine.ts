@@ -1,3 +1,4 @@
+import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
 import { friendshipCommandSchema, type FriendshipCommand, refreshBestFriendships, resolveFriendship } from './systems/friendships';
 import { HobbyEventCommand, hobbyEventCommandSchema, resolveHobbyEvent } from './systems/hobbyEvents';
 import { LeisureCommand, leisureCommandSchema, resolveLeisure, refreshLeisure, leisureMonth } from './systems/leisure';
@@ -53,9 +54,9 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -81,6 +82,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  refreshUniversityApplications(world);
   refreshScholarships(world);
   refreshLeisure(world);
   refreshRecoveries(world);
@@ -118,6 +120,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
 /** A month is the smallest ordinary progression unit; no system rounds a six-month term to a year. */
 function processMonth(world: World) {
   refreshTeenRelationships(world);
+  universityAdmissionsMonth(world);
   refreshScholarships(world);
   healthMonth(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
@@ -281,7 +284,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -321,6 +324,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const education = parseActivity(educationCommandSchema, command);
     const recovery = parseActivity(recoveryCommandSchema, command);
     const scholarship = parseActivity(scholarshipCommandSchema, command);
+    const admission = parseActivity(universityAdmissionCommandSchema, command);
     const work = parseActivity(workCommandSchema, command);
     const workplace = parseActivity(workplaceCommandSchema, command);
     const finance = parseActivity(financeCommandSchema, command);
@@ -354,6 +358,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (education.success) resolveEducation(world, education.data);
     else if (recovery.success) resolveRecovery(world, recovery.data);
     else if (scholarship.success) resolveScholarship(world, scholarship.data);
+    else if (admission.success) resolveUniversityAdmission(world, admission.data);
     else if (work.success) resolveWork(world, work.data);
     else if (workplace.success) resolveWorkplace(world, workplace.data);
     else if (finance.success) resolveFinance(world, finance.data);
@@ -378,6 +383,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else throw new IneligibleAction('This action is not available');
   }
   refreshRoyalSuccession(world,'background');
+  refreshUniversityApplications(world);
   refreshTrips(world);
   refreshSchools(world);
   refreshRecoveries(world);

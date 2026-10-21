@@ -96,9 +96,12 @@ test.each(categoryCases)('%s remains open after a %s and keeps exact individual 
     const beforeRows = rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
     expect(screen.getByRole('button', { name: category(program) })).toBeEnabled(); await press(category(program));
     const blockedLabel = blockedField[0].toUpperCase() + blockedField.slice(1), eligibleLabel = eligibleField[0].toUpperCase() + eligibleField.slice(1);
-    expect(screen.getByRole('radio', { name: blockedLabel + '. ' + reason })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
-    await choose(blockedLabel + '. ' + reason); expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
-    await choose(eligibleLabel); await press('Next'); await choose(/Student loan/); await press('Review Application'); expect(screen.getByText('Apply to study ' + eligibleField + '?')).toBeOnTheScreen();
+    const next = program === 'university' ? 'Review Free Application' : 'Next';
+    expect(screen.getByRole('radio', { name: blockedLabel + '. ' + reason })).toBeDisabled(); expect(screen.getByRole('button', { name: next })).toBeDisabled();
+    await choose(blockedLabel + '. ' + reason); expect(screen.getByRole('button', { name: next })).toBeDisabled();
+    await choose(eligibleLabel); await press(next);
+    if (program !== 'university') { await choose(/Student loan/); await press('Review Application'); }
+    expect(screen.getByText('Apply to study ' + eligibleField + '?')).toBeOnTheScreen();
     await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); expectOldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
@@ -138,11 +141,11 @@ test.each(['relaxed', 'balanced'] as const)('a real %s study routine rolls back 
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });
 
-test.each([true, false])('an actual admission accepted=%s keeps field/funding confirmation after rollback and retries without rerolling or duplicate tuition', async accepted => {
+test.each([true, false])('a legacy trade admission accepted=%s keeps field/funding confirmation after rollback and retries without rerolling or duplicate tuition', async accepted => {
   const { sqlite, rows, cold, pauseNextSave, expectOldMoments } = await setup(applicant('administrator', accepted));
   try {
-    const initial = world(), beforeRows = rows(), command: GameCommand = { type: 'enroll', program: 'university', field: 'science', funding: 'loan' }, predicted = resolveCommand(initial, command, true);
-    let view = render(frame()); await press(category('university')); await choose('Science'); await press('Next'); await choose(/Student loan/); await press('Review Application'); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
+    const initial = world(), beforeRows = rows(), command: GameCommand = { type: 'enroll', program: 'trade', field: 'science', funding: 'loan' }, predicted = resolveCommand(initial, command, true);
+    let view = render(frame()); await press(category('trade')); await choose('Science'); await press('Next'); await choose(/Student loan/); await press('Review Application'); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_education BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press('Apply'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getByText('Apply to study science?')).toBeOnTheScreen(); expect(screen.getByText(/a student loan funds the tuition/)).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_education'); const release = pauseNextSave(); await press('Apply'); expect(mockStore.getState().busy).toBe(true);
@@ -150,7 +153,7 @@ test.each([true, false])('an actual admission accepted=%s keeps field/funding co
     expect(screen.getByRole('button', { name: 'Apply' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled();
     await press('Apply'); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(screen.getByText('Apply to study science?')).toBeOnTheScreen(); expect(rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(screen.queryByText('Apply to study science?')).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(world().people[world().activePersonId].education.stage).toBe(accepted ? 'university' : 'none');
+    expect(world().people[world().activePersonId].education.stage).toBe(accepted ? 'trade' : 'none');
     expect(world().ledger.filter(item => item.category === 'tuition')).toHaveLength(initial.ledger.filter(item => item.category === 'tuition').length + (accepted ? 1 : 0));
     if (accepted) { expect(world().people[world().activePersonId].education.months).toBe(0); expect(world().people[world().activePersonId].education.qualifications).toEqual(initial.people[initial.activePersonId].education.qualifications); }
     else { expect(world().accounts).toEqual(initial.accounts); expect(world().liabilities).toEqual(initial.liabilities); }
