@@ -386,7 +386,7 @@ export function validateWorld(value: unknown, immutable = false): World {
     }
   }
   if (immutable) {
-    for (const row of world.ledger) immutableTransactions.add(Object.freeze(row));
+    for (const row of world.ledger) if (!immutableTransactions.has(row)) immutableTransactions.add(Object.freeze(row));
     freezeTree(world);
     rememberLedgerIndex(world.ledger, ledger);
     immutableWorlds.add(world);
@@ -395,7 +395,7 @@ export function validateWorld(value: unknown, immutable = false): World {
 }
 
 function freezeTree(value: unknown): void {
-  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return;
+  if (!value || typeof value !== 'object' || immutableTransactions.has(value) || Object.isFrozen(value)) return;
   for (const child of Object.values(value)) freezeTree(child);
   Object.freeze(value);
 }
