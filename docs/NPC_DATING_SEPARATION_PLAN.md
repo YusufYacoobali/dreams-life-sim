@@ -94,8 +94,11 @@ also cannot meet the12-month wait. The separation check must precede the same
 pass's wedding eligibility; it must not allow marriage first and reinterpret it
 as a dating breakup afterward.
 
-On `continued`, save only the attempt/counter and RNG progression; normal
-courtship and wedding checks continue unchanged afterward. On `separated`:
+On either actual outcome, record `lastChecked` as today: this check itself
+observes the current pair. The subsequent wedding observer uses a different
+bounded window and cannot be assumed to visit the same pair. This does not
+change `observedSince` or add waiting credit. On `continued`, retain the open
+clock; normal wedding checks continue unchanged afterward. On `separated`:
 
 - set that same relationship's romance to `ex` and remove only its partner role;
 - retain actual ordinary roles, bond, trust, memories and last interaction year;

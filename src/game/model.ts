@@ -64,6 +64,8 @@ import { validateWorkplaces } from './systems/workplaceValidation';
 import { validateJobInterview } from './systems/jobInterviewValidation';
 import { npcCourtshipSchema } from './systems/npcCourtshipSchemas';
 import { validateNpcCourtships } from './systems/npcCourtshipValidation';
+import { npcSeparationSchema } from './systems/npcSeparationSchemas';
+import { validateNpcSeparations } from './systems/npcSeparationValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -107,6 +109,9 @@ export const worldSchema = z.object({
   teenRelationships: z.array(teenRelationshipSchema).default([]),
   households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
+  // Isolated-branch bridge only: root's World36 union requires this field and
+  // supplies [] exclusively in the legacy <=35 migration, with reader16.
+  npcSeparations: z.array(npcSeparationSchema).default([]),
   pregnancies: z.array(pregnancySchema), custody: z.array(custodySchema),
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
@@ -331,6 +336,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateEarnings(world, ledger);
   validateHourlyWork(world, ledger);
   validateNpcCourtships(world, ledger);
+  validateNpcSeparations(world);
   validateBestFriendships(world);
   validateTravel(world, ledger);
   validateSchools(world);
