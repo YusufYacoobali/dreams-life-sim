@@ -24,6 +24,7 @@ import { everydayLifeTemplates } from './everydayLifeStories';
 import { rareAdultTemplates } from './rareAdultStories';
 import { specialCareerDepthTemplates } from './specialCareerDepthStories';
 import { legalTemplates } from './legalStories';
+import { laterLifeFamilyTemplates } from './laterLifeFamilyStories';
 import { legalStoryAvailable, legalStoryContexts } from '../systems/legalStoryContext';
 import { offences } from './crime';
 import { storyContactNames } from '../storyNames';
@@ -235,6 +236,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...rareAdultTemplates,
   ...specialCareerDepthTemplates,
   ...legalTemplates,
+  ...laterLifeFamilyTemplates,
 ];
 
 /** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */

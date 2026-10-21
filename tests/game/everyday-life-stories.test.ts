@@ -1,3 +1,7 @@
+import { laterLifeFamilyTemplates } from '../../src/game/content/laterLifeFamilyStories';
+import { decodeSave } from '../../src/persistence/archive';
+import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
+import pensionArchive from '../fixtures/v18-foreign-pension-archive.json';
 import { everydayLifeTemplates } from '../../src/game/content/everydayLifeStories';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { countryCodes } from '../../src/game/countries';
@@ -15,9 +19,90 @@ import { monthFrom } from '../../src/game/calendar';
 const setup = (template: EventTemplate) => template.specialCareer ? specialStoryWorld(template) : lifeStoryWorld('US', template.hobby && template.hobby !== 'any' ? template.hobby : 'guitar');
 const offered = (world: World, template: EventTemplate) => { const event = bindEvent(world, template); offerPending(world, event); return { world, event }; };
 
-test('268 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
-  expect(eventTemplates).toHaveLength(268); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
-  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(268);
+test('two later-life scenes append after the unchanged catalogue and need an actual local adult child, not retirement or an invented family', () => {
+  expect(eventTemplates.slice(-2)).toEqual(laterLifeFamilyTemplates);
+  for (const template of laterLifeFamilyTemplates) {
+    expect(template).toMatchObject({ min: 55, max: 120, local: true, child: 'adult' });
+    const world = lifeStoryWorld(), before = encodeWorld(world), context = lifeStoryContexts(world), child = context.children.adult!;
+    expect(eligibleTemplates(world)).toContain(template);
+    const event = bindEvent(world, template);
+    expect(event.personIds).toEqual([world.activePersonId, child.person.id]);
+    expect(event.body).toContain(fullName(child.person));
+    expect(event.choices.every(choice => choice.effects.every(effect => effect.kind === 'stat' || effect.kind === 'relationship' && effect.relationshipId === child.relationshipId))).toBe(true);
+    expect(encodeWorld(world)).toBe(before);
+    for (const missing of ['below55', 'minor-child', 'no-link', 'reverse-link', 'different-city', 'different-country', 'dead-child', 'hospital-child', 'wanted-child', 'hospital-parent', 'cooldown'] as const) {
+      // Explicit predicate boundaries on the established arranged domain setup;
+      // no claim of natural birth, ageing, travel, illness or bereavement.
+      const changed = decodeWorld(before), person = changed.people[changed.activePersonId], target = changed.people[child.person.id], edge = changed.relationships.find(row => row.id === child.relationshipId)!;
+      if (missing === 'below55') person.born = { ...changed.date, year: changed.date.year - 54 };
+      if (missing === 'minor-child') target.born = { ...changed.date, year: changed.date.year - 17 };
+      if (missing === 'no-link') edge.roles = [];
+      if (missing === 'reverse-link') { edge.from = target.id; edge.to = person.id; }
+      if (missing === 'different-city') target.city = 'Elsewhere';
+      if (missing === 'different-country') target.country = 'JP';
+      if (missing === 'dead-child') target.died = { ...changed.date };
+      if (missing === 'hospital-child') target.health.hospitalizedUntil = changed.date.year * 12 + changed.date.month + 2;
+      if (missing === 'wanted-child') target.legal.wanted = true;
+      if (missing === 'hospital-parent') person.health.hospitalizedUntil = changed.date.year * 12 + changed.date.month + 2;
+      if (missing === 'cooldown') changed.eventHistory.push({ templateId: template.id, year: changed.date.year - 4 });
+      const unchanged = structuredClone(changed);
+      expect(eligibleTemplates(changed)).not.toContain(template);
+      if (missing === 'cooldown') {
+        changed.eventHistory.at(-1)!.year--;
+        expect(eligibleTemplates(changed)).toContain(template);
+      } else expect(changed).toEqual(unchanged);
+    }
+    const independent = decodeWorld(before), adult = independent.people[child.person.id], edge = independent.relationships.find(row => row.id === child.relationshipId)!;
+    adult.householdId = null; edge.kind = 'guardian'; edge.roles = ['guardian']; edge.parentType = 'guardian';
+    expect(eligibleTemplates(independent)).toContain(template);
+    expect(bindEvent(independent, template).personIds).toEqual(event.personIds);
+    // This genuine older pensioner archive has no recorded child. Age/pension
+    // cannot manufacture one; its saved pending/journal/history stay untouched.
+    const pensioner = decodeSave(JSON.stringify(pensionArchive)).world, old = encodeWorld(pensioner);
+    expect(ageOn(pensioner.people[pensioner.activePersonId], pensioner.date)).toBeGreaterThanOrEqual(55);
+    expect(eligibleTemplates(pensioner)).not.toContain(template);
+    expect(() => bindEvent(pensioner, template)).toThrow(/available life context/);
+    expect(encodeWorld(unpackCheckpoint(packCheckpoint(pensioner), true))).toBe(old);
+  }
+});
+
+test.each([0, 100])('all six later-life choices cap actual stats and the bound family bond at%i without granting money, plans or other progress', boundary => {
+  for (const template of laterLifeFamilyTemplates) {
+    const initial = lifeStoryWorld(), person = initial.people[initial.activePersonId], child = lifeStoryContexts(initial).children.adult!;
+    const affected = new Set(template.choices.flatMap(choice => Object.keys(choice.changes)));
+    for (const key of affected) person.stats[key as keyof typeof person.stats] = boundary;
+    initial.relationships.find(row => row.id === child.relationshipId)!.strength = boundary;
+    const event = bindEvent(initial, template); offerPending(initial, event);
+    const before = encodeWorld(initial), cold = unpackCheckpoint(packCheckpoint(initial), true);
+    expect(encodeWorld(cold)).toBe(before);
+    for (const choice of event.choices) {
+      const command = { type: 'choose' as const, eventId: event.id, choiceId: choice.id }, result = resolveCommand(cold, command, true);
+      expect(encodeWorld(result)).toBe(encodeWorld(resolveCommand(initial, command, true)));
+      if (result.pending?.kind !== 'result') throw new Error('Expected saved later-family consequence');
+      for (const key of Object.keys(person.stats) as (keyof typeof person.stats)[]) {
+        const effect = choice.effects.find(row => row.kind === 'stat' && row.stat === key);
+        const beforeStat = person.stats[key], after = Math.max(0, Math.min(100, beforeStat + (effect?.kind === 'stat' ? effect.delta : 0))), delta = after - beforeStat;
+        expect(result.people[person.id].stats[key]).toBe(after);
+        if (effect) expect(result.pending.effects.find(row => row.label === key[0].toUpperCase() + key.slice(1))?.value).toBe((delta >= 0 ? '+' : '') + delta + '%');
+      }
+      const bond = choice.effects.find(row => row.kind === 'relationship')!;
+      expect(bond).toMatchObject({ kind: 'relationship', relationshipId: child.relationshipId });
+      const strength = Math.max(0, Math.min(100, boundary + (bond.kind === 'relationship' ? bond.delta : 0))), bondDelta = strength - boundary;
+      expect(result.relationships.find(row => row.id === child.relationshipId)?.strength).toBe(strength);
+      expect(result.pending.effects.find(row => row.label.endsWith(' · relationship'))?.value).toBe((bondDelta >= 0 ? '+' : '') + bondDelta + '%');
+      for (const key of Object.keys(initial) as (keyof World)[]) if (!['people', 'relationships', 'pending', 'journal', 'revision', 'pendingPriority'].includes(key)) expect(result[key]).toEqual(initial[key]);
+      expect(result.journal.slice(0, initial.journal.length)).toEqual(initial.journal);
+      expect(result.journal.at(-1)?.text).toBe(choice.journal);
+      expect(result.pending).toMatchObject({ kind: 'result', title: choice.resultTitle, body: choice.resultBody });
+      expect(encodeWorld(unpackCheckpoint(packCheckpoint(result), true))).toBe(encodeWorld(result));
+    }
+    expect(encodeWorld(initial)).toBe(before);
+  }
+});
+
+test('270 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
+  expect(eventTemplates).toHaveLength(270); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
+  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(270);
   for (const template of everydayLifeTemplates) {
     expect(template.local).toBe(true); expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices).toHaveLength(3); expect(new Set(template.choices.map(c => c.id)).size).toBe(3);
     const text = JSON.stringify(template);
@@ -26,7 +111,7 @@ test('268 unique source situations retain125 everyday scenes/375 choices with ex
   }
 });
 
-test.each(everydayLifeTemplates.map(template => [template.id, template] as const))('%s binds its existing context without draws and all three branches apply exact bounded effects once', (_id, template) => {
+test.each([...everydayLifeTemplates, ...laterLifeFamilyTemplates].map(template => [template.id, template] as const))('%s binds its existing context without draws and all three branches apply exact bounded effects once', (_id, template) => {
   const initial = setup(template), before = encodeWorld(initial); expect(eligibleTemplates(initial)).toContainEqual(template);
   const event = bindEvent(initial, template); expect(encodeWorld(initial)).toBe(before); expect(JSON.stringify(event)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/);
   if (template.child) { const id = event.personIds.find(id => id !== initial.activePersonId)!; const ages = { baby: [0, 2], young: [3, 11], teen: [12, 17], adult: [18, 200] }; expect(ageOn(initial.people[id], initial.date)).toBeGreaterThanOrEqual(ages[template.child][0]); expect(ageOn(initial.people[id], initial.date)).toBeLessThanOrEqual(ages[template.child][1]); expect(event.body).toContain(fullName(initial.people[id])); expect(relationFor(initial, initial.activePersonId, id)?.roles).toContain('parent'); }
