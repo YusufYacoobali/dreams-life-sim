@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView,
-  StyleProp, StyleSheet, Text, View, ViewStyle,
+  StyleProp, StyleSheet, Text, useWindowDimensions, View, ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, ThemedStatusBar, useColors } from './theme';
@@ -86,6 +86,8 @@ export function ActionRow({
   title, subtitle, icon, value, onPress, disabledReason, disabled = false,
 }: { title: string; subtitle?: string; icon?: React.ReactNode; value?: string; onPress: () => void; disabledReason?: string; disabled?: boolean }) {
   const c = useColors();
+  const { width, fontScale } = useWindowDimensions();
+  const stackValue = !!value && (fontScale >= 1.2 || width < 360);
   return (
     <Pressable
       accessibilityRole="button" accessibilityLabel={[title, subtitle, value, disabledReason].filter(Boolean).join('. ')}
@@ -93,11 +95,13 @@ export function ActionRow({
       style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
     >
       {icon && <View style={styles.rowIcon}>{icon}</View>}
-      <View style={styles.rowText}>
-        <Text style={{ color: c.ink, fontWeight: '600', fontSize: 16 }}>{title}</Text>
-        {(subtitle || disabledReason) && <Text style={{ color: c.muted, fontSize: 13, lineHeight: 18, marginTop: 3 }}>{disabledReason ?? subtitle}</Text>}
+      <View style={[styles.rowContent, stackValue && styles.rowContentStacked]}>
+        <View style={[styles.rowText, stackValue && styles.rowTextStacked]}>
+          <Text style={{ color: c.ink, fontWeight: '600', fontSize: 16 }}>{title}</Text>
+          {(subtitle || disabledReason) && <Text style={{ color: c.muted, fontSize: 13, lineHeight: 18, marginTop: 3 }}>{disabledReason ?? subtitle}</Text>}
+        </View>
+        {value && <Text style={[styles.rowValue, { color: c.muted }, stackValue && styles.rowValueStacked]}>{value}</Text>}
       </View>
-      {value && <Text style={{ color: c.muted, fontSize: 14, flexShrink: 1 }}>{value}</Text>}
       <Text accessibilityElementsHidden importantForAccessibility="no" style={{ color: c.muted, fontSize: 25 }}>›</Text>
     </Pressable>
   );
@@ -133,7 +137,12 @@ const styles = StyleSheet.create({
   back: { minWidth: 44, minHeight: 48, justifyContent: 'center' },
   row: { minHeight: 66, borderBottomWidth: StyleSheet.hairlineWidth, flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10 },
   rowIcon: { width: 40, alignItems: 'center', justifyContent: 'center' },
-  rowText: { flex: 1 },
+  rowContent: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  rowContentStacked: { flexDirection: 'column', alignItems: 'stretch', gap: 6 },
+  rowText: { flex: 1, minWidth: 0 },
+  rowTextStacked: { flex: 0 },
+  rowValue: { fontSize: 14, flexShrink: 1, maxWidth: '45%', textAlign: 'right' },
+  rowValueStacked: { maxWidth: '100%', textAlign: 'left' },
   stat: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 28 },
   track: { flex: 1, height: 10, borderRadius: 6, overflow: 'hidden' },
 });
