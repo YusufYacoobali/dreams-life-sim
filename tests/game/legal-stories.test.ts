@@ -117,8 +117,12 @@ test('the ordinary custody year-end offers a genuinely eligible legal scene with
   expect(next.random.events).toBe(selected.state); expect(next.eventHistory.at(-1)?.templateId).toBe('prison-case-boundary');
 });
 
-test('content14 upgrades only its marker while the genuine saved medical/court choices and all facts remain exact', () => {
-  const world = decodeSave(JSON.stringify(archive)).world, value = JSON.parse(encodeWorld(world)); value.contentVersion = 14;
+test('an explicitly arranged C14 envelope preserves the genuine saved medical/court choices and all facts through current migration', () => {
+  const world = decodeSave(JSON.stringify(archive)).world, value = JSON.parse(encodeWorld(world));
+  // The medical/court records are genuine. Only this old-version envelope is
+  // arranged; it is not a newly claimed C14 producer or gameplay continuation.
+  expect(value.campusCommunities).toEqual([]); delete value.campusCommunities;
+  value.schemaVersion = 39; value.engineVersion = 40; value.contentVersion = 14;
   const migrated = decodeWorld(JSON.stringify(value));
   expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(17);
   expect(migrated.pending).toEqual(world.pending); expect(migrated.deferred).toEqual(world.deferred); expect(migrated.random).toEqual(world.random);
