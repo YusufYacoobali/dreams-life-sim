@@ -26,7 +26,7 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     choices: [
       o('nose', 'Move right up to the lens', { happiness: 4 }, 'Mostly nostril', '{parent} keeps the picture. It is a bold choice of composition.', 'I gave {parent} a very close view of my nose.', 3),
       o('wave', 'Wave at the small person on screen', { smarts: 2, happiness: 2 }, 'A reliable correspondent', 'The small person waves back. {parent} joins in from behind the phone.', 'I waved at myself while {parent} took a picture.', 4),
-      o('away', 'Turn around at the crucial moment', { energy: 2 }, 'Excellent view of the back', '{parent} gets a photograph of your hair. You have already found something else to do.', 'I turned away just as {parent} took a picture.'),
+      o('away', 'Turn around at the crucial moment', { energy: 2 }, 'Excellent view of the back', '{parent} gets a photograph of the back of your head. You have already found something else to do.', 'I turned away just as {parent} took a picture.'),
     ],
   },
   {

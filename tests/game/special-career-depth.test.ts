@@ -38,6 +38,11 @@ test('fourteen distinct original situations give each actual path two dedicated 
     for (const choice of scene.choices) { expect(choice.journal).toMatch(/^I /); expect(Object.values(choice.changes).every(delta => delta !== 0 && Math.abs(delta!) <= 4)).toBe(true); }
   }
   const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
+  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
+  const cameraAway = original.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
+  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
+  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
   expect(sha(JSON.stringify(original))).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
   // Raw archive pins complement the complete decoded pending/result proof below.
   expect(sha(readFileSync(join(__dirname, '../fixtures/v12-career-archive.json')))).toBe('665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34');

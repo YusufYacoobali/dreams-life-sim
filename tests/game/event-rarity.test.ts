@@ -16,7 +16,7 @@ import { database } from '../support/sqlite';
 import hobbies from '../fixtures/v28-ordinary-hobby-archive.json';
 import service from '../fixtures/v16-service-archive.json';
 
-test('version one retains the original251 tiers and exact original250 narratives beside fourteen new career scenes', () => {
+test('version one retains original251 tiers and the historical original250 golden with one explicit neutral-copy bridge', () => {
   const originalCatalogue = events.eventTemplates.slice(0, 251);
   expect(EVENT_RARITY_VERSION).toBe(1);
   expect(EVENT_RARITY_WEIGHTS).toEqual({ common: 100, uncommon: 25, rare: 5, 'extremely-rare': 1 });
@@ -29,6 +29,11 @@ test('version one retains the original251 tiers and exact original250 narratives
   expect(originalCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
   expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([245, 18, 1, 1]);
   const copy = events.eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
+  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
+  const cameraAway = copy.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
+  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
+  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
   expect(createHash('sha256').update(JSON.stringify(copy)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
 });
 

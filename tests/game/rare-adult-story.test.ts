@@ -18,6 +18,11 @@ test('one extremely rare original adult scene retains its original position/copy
   expect(eventTemplates).toHaveLength(265); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(795);
   for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(265);
   const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
+  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
+  const cameraAway = original.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
+  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
+  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
   expect(createHash('sha256').update(JSON.stringify(original)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
   expect(eventTemplates[250]).toBe(scene); expect(scene.choices.map(row => row.id)).toEqual(['explain', 'pose', 'lecture']);
 });
