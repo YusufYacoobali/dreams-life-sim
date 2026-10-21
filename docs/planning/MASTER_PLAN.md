@@ -1,6 +1,6 @@
 # Dreams: Life Simulator — Phase 0 master plan
 
-The confirmed missing-feature batch is implemented and pushed in `a13735c`: final/archived statistics, four business models, functional Other selection, real future Products & Services and reviewed company name/logo Settings. The bounded ordinary-life/family/travel/leisure audit found no additional concrete feature gap. Runtimee58a506, World41/engine42/content17/reader21/v4, has focused/type/export and actual business cold-resume checks; one combined full CI is running. Release acceptance is still separate. [Current handoff](../HANDOFF.md) records exact scope, gates, ownership and blockers. Preserve automatic saving and avoid repeating unchanged cohorts or full regressions.
+All confirmed audit gaps are implemented and pushed. Complete feature checkpointa13735c passes2,820tests/221suites, locked install and strict app/all-test types. Final runtime4e4cfd5 fixes only the new Statistics modal geometry/legacy system-bar contrast; its strict/native checks pass and automatic CI is running. Business creation/offering/branding/cold resume and150% model selection pass; original data remain exact. Standalone/device acceptance is still separate and the fresh environment still blocks the required Android AAR host. [Current handoff](../HANDOFF.md) records exact scopes, ownership and blockers. Preserve autosave and avoid repeated unchanged cohorts.
 
 ## Earlier source-scoped checkpoint notes
 

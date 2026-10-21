@@ -1,9 +1,6 @@
 # Local release packet — unpublished draft
 
-Prepared 21 October 2026 from main `1c9e4eaf` and frozen combined UI source `83adaea`.
-This is a reviewable distribution draft, not a signed release, legal clearance,
-store submission or claim that every gameplay/device gate passes.
-[The release audit](RELEASE_READINESS_AUDIT.md) records actual source/build limits.
+Updated21October2026: final runtime4e4cfd5 and its clean standalone candidate include all confirmed missing features and the native Statistics window/contrast correction. Feature checkpointa13735c passes the complete2,820-test/221-suite gate;4e passes strict app/test types and scoped native checks, with its automatic gate running. This remains an unpublished distribution draft. [Current handoff](HANDOFF.md) and [release audit](RELEASE_READINESS_AUDIT.md) identify exact source/build boundaries.
 
 ## Candidate identity and listing
 
@@ -74,21 +71,21 @@ No GDPR/COPPA, content-rating or other legal-compliance conclusion is invented.
 ## Concrete build handoff
 
 The current ignored candidate is
-`/workspace/dreams-worktrees/native-prebuild-current/android`; original tracked
+`/workspace/dreams-worktrees/native-prebuild-gameplay/android`; original tracked
 files remain exact after restoring prebuild's two package script changes.
 [Portable inputs and inspected sources](verification/native-prebuild-current-20261021/README.md)
 retain the command/template/exit/source/lock. The unbuilt native project is not
 merged into the application.
 
-1. Confirm sufficient disk space while preserving active API 24/AVD data, saved
-   DB captures, frozen source and raw/published evidence. Prepare Android
-   platform 36 through the permitted Google SDK path after root's space review.
-   Hold large NDK work until download/extraction/build space fits. Record actual
-   package revisions/outcomes and preserve existing licences.
+1. Preserve active API24/AVD data, all saved DB copies, frozen source and existing
+   evidence. JDK17/platform36/BuildTools35+36/NDK27.1/CMake3.22.1/Gradle9.3.1
+   are already installed. The guarded wrapper matches4e and checks disk/memory
+   floors before launch; package/config/branding inputs remain unchanged from
+   successful offline prebuild, so do not regenerate it unnecessarily.
 2. Resolve the separately denied native dependency boundary through the
    environment owner's supported access process. No unchanged denied-host retry,
-   alternate mirror/proxy or CI bypass. Source generation has not proven current
-   AAR/Gradle resolution.
+   alternate mirror/proxy or CI bypass. The actual12:10Gradle attempt returned403 at the required React0.86.3 AAR
+   redirect host. Fresh enforced environment73 still excludes that host.
 3. Once dependencies/toolchain are legitimately available, compile a standalone
    candidate and inspect merged manifests/resources/native libraries/notices.
    The generated release profile uses template debug signing and must not be
