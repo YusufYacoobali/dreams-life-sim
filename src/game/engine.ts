@@ -1,5 +1,6 @@
 import { noteImportantDecision, optionalSceneChance } from './annualPacing';
 import { campusCommandSchema, type CampusCommand } from './systems/campusSchemas';
+import { campusMonth, prepareCampusTuition, resolveCampus } from './systems/campus';
 import { npcMovesYear, settleAnnualTaxesForNpcMoves } from './systems/npcMoves';
 import { endStudyCourse, refreshStudyCourses } from './systems/studyCourses';
 import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
@@ -129,7 +130,9 @@ function processMonth(world: World) {
   universityAdmissionsMonth(world);
   refreshScholarships(world);
   healthMonth(world);
+  prepareCampusTuition(world);
   for (const person of Object.values(world.people)) if (!person.died) educationMonth(world, person);
+  campusMonth(world);
   recoveryMonth(world);
   schoolMonth(world);
   workplaceMonth(world);
@@ -335,6 +338,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const campus = parseActivity(campusCommandSchema, command);
     const school = parseActivity(schoolCommandSchema, command);
     const education = parseActivity(educationCommandSchema, command);
     const recovery = parseActivity(recoveryCommandSchema, command);
@@ -365,7 +369,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);
+    if (campus.success) resolveCampus(world, campus.data);
+    else if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);
     else if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
     else if (leisure.success) resolveLeisure(world, leisure.data);
     else if (pet.success) resolvePets(world, pet.data);

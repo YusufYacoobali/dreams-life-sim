@@ -1,4 +1,5 @@
 import { validateAnnualPacing } from './annualPacing';
+import { validateCampusCommunities } from './systems/campusValidation';
 import { npcMoveSchema } from './systems/npcMoveSchemas';
 import { validateNpcMoves } from './systems/npcMoveValidation';
 import { bestFriendshipSchema } from './systems/friendshipSchemas';
@@ -345,6 +346,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateScholarships(world);
   validateUniversityAdmissions(world, ledger);
   validateStudyCourses(world, ledger);
+  validateCampusCommunities(world, ledger);
   validatePets(world, ledger);
   validateLeisure(world, ledger);
   validateHobbyEvents(world, ledger);
