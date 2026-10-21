@@ -50,7 +50,7 @@ test('failed startup exposes a live alert; retry disables opening controls and l
     const view = render(frame(<Welcome />)); expectAlert('Could not open saved lives. Please try again.');
     expect(screen.getByRole('button', { name: 'Try Again' })).toBeEnabled();
     const release = context.pauseNextSave(); await press('Try Again'); expect(mockStore.getState().busy).toBe(true);
-    for (const name of ['Start Your Life', 'Random Life', 'Saved Lives, Import and Export']) {
+    for (const name of ['Start Your Life', 'Random Life', 'Saved Lives']) {
       const control = screen.getByRole('button', { name }); expect(control).toBeDisabled(); expect(control).toHaveProp('accessibilityState', { disabled: true });
       await press(name);
     }
@@ -74,12 +74,13 @@ test('name keyboard navigation never submits; validation and creation/newborn fa
     });
     const view = render(frame(<NewLife />)), firstName = screen.getByLabelText('First name'), lastName = screen.getByLabelText('Last name');
     const lastInput = screen.UNSAFE_getAllByType(TextInput).find(input => input.props.accessibilityLabel === 'Last name')!;
-    const focusLast = jest.spyOn(lastInput.instance, 'focus'), dismiss = jest.spyOn(Keyboard, 'dismiss');
+    const firstInput = screen.UNSAFE_getAllByType(TextInput).find(input => input.props.accessibilityLabel === 'First name')!;
+    const focusFirst = jest.spyOn(firstInput.instance, 'focus'), focusLast = jest.spyOn(lastInput.instance, 'focus'), dismiss = jest.spyOn(Keyboard, 'dismiss');
     expect(firstName).toHaveProp('returnKeyType', 'next'); expect(lastName).toHaveProp('returnKeyType', 'done');
     fireEvent.changeText(firstName, ''); await act(async () => { fireEvent(firstName, 'submitEditing'); });
     expect(focusLast).toHaveBeenCalledTimes(1); expect(mockStore.getState().world).toBeNull(); expect(context.rows()).toEqual(beforeRows);
-    await press('Start My Life'); expectAlert('Enter a first name.'); expect(context.rows()).toEqual(beforeRows);
-    fireEvent.changeText(firstName, 'Alex'); fireEvent.changeText(lastName, ''); await press('Start My Life'); expectAlert('Enter a last name.');
+    const focusBeforeFirstValidation = focusFirst.mock.calls.length; await press('Start My Life'); expectAlert('Enter a first name.'); expect(focusFirst).toHaveBeenCalledTimes(focusBeforeFirstValidation + 1); expect(focusFirst.mock.contexts.at(-1)).toBe(firstInput.instance); expect(context.rows()).toEqual(beforeRows);
+    fireEvent.changeText(firstName, 'Alex'); fireEvent.changeText(lastName, ''); const focusBeforeLastValidation = focusLast.mock.calls.length; await press('Start My Life'); expectAlert('Enter a last name.'); expect(focusLast).toHaveBeenCalledTimes(focusBeforeLastValidation + 1); expect(focusLast.mock.contexts.at(-1)).toBe(lastInput.instance);
     fireEvent.changeText(lastName, 'Carter'); const dismissCalls = dismiss.mock.calls.length;
     await act(async () => { fireEvent(lastName, 'submitEditing'); }); expect(dismiss).toHaveBeenCalledTimes(dismissCalls + 1);
     expect(screen.queryByRole('alert')).toBeNull(); expect(mockStore.getState().world).toBeNull(); expect(context.rows()).toEqual(beforeRows); expect(router.replace).not.toHaveBeenCalled();

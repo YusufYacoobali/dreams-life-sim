@@ -150,13 +150,13 @@ test('reselecting Japan retains Osaka and the creation draft across cancelled pi
 test('advanced creation controls expose disabled state during a held save and cannot change the identity actually committed', async () => {
   const context = await setup(false);
   try {
-    const view = render(frame(<NewLife />)); await setJapaneseIdentity(); await press(/^More Options/); await press('✓ Men');
-    await act(async () => { fireEvent(screen.getByRole('switch', { name: 'Would like children' }), 'valueChange', false); }); await press('Neither');
+    const view = render(frame(<NewLife />)); await setJapaneseIdentity(); await press(/^More Options/); await act(async () => { fireEvent.press(screen.getByRole('checkbox', { name: 'Men' })); });
+    await act(async () => { fireEvent(screen.getByRole('switch', { name: 'Would like children' }), 'valueChange', false); }); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Neither' })); });
     const draft = structuredClone(useCreationDraft.getState().draft!), beforeRows = context.rows(), release = context.pauseNextSave(); await press('Start My Life'); expect(mockStore.getState().busy).toBe(true);
-    for (const name of [/^Ordinary Family/, /^Royal Family/, 'Men', '✓ Women', '✓ Non-binary', 'Can carry a pregnancy', 'Can contribute to conception', 'Neither']) {
-      const control = screen.getByRole('button', { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityState.disabled).toBe(true); await act(async () => { fireEvent.press(control); });
+    for (const [role, name] of [['button', /^Ordinary Family/], ['button', /^Royal Family/], ['checkbox', 'Men'], ['checkbox', 'Women'], ['checkbox', 'Non-binary'], ['radio', 'Can carry a pregnancy'], ['radio', 'Can contribute to conception'], ['radio', 'Neither']] as const) {
+      const control = screen.getByRole(role, { name }); expect(control).toBeDisabled(); expect(control.props.accessibilityState.disabled).toBe(true); await act(async () => { fireEvent.press(control); });
     }
-    const toggle = screen.getByRole('switch', { name: 'Would like children' }); expect(toggle).toBeDisabled(); expect(toggle).toHaveProp('accessibilityState', { disabled: true });
+    const toggle = screen.getByRole('switch', { name: 'Would like children' }); expect(toggle).toBeDisabled(); expect(toggle).toHaveProp('accessibilityState', { disabled: true, checked: false });
     await act(async () => { screen.UNSAFE_getByType(Switch).props.onValueChange(true); });
     expect(useCreationDraft.getState().draft).toEqual(draft); expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world).toBeNull();
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
