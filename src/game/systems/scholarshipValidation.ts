@@ -1,5 +1,6 @@
 import { ageOn, compareDates } from '../personHelpers';
 import type { World } from '../model';
+import type { LedgerIndex } from '../ledgerIndex';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
 import { rules } from '../rules';
@@ -7,7 +8,7 @@ import { courseMonths } from './education';
 import { scholarshipPolicies } from './scholarshipSchemas';
 import { scholarshipWaiver } from './scholarships';
 
-export function validateScholarships(world: World) {
+export function validateScholarships(world: World, ledger?: LedgerIndex) {
   const ids = new Set<string>(), open = new Set<string>(), transactions = new Set<string>();
   const month = (date: World['date']) => date.year * 12 + date.month - 1;
   for (const item of world.scholarships) {
@@ -39,12 +40,16 @@ export function validateScholarships(world: World) {
       if (period.billed === 0n) {
         if (period.transactionId || period.loanTransactionId) throw new Error('Full tuition waiver cannot draw or charge cash');
       } else {
-        const payment = world.ledger.find(row => row.id === period.transactionId);
+        const payment = ledger
+          ? period.transactionId === null ? undefined : ledger.transactions.get(period.transactionId)
+          : world.ledger.find(row => row.id === period.transactionId);
         if (!payment || transactions.has(payment.id) || payment.personId !== item.personId || payment.currency !== item.currency || payment.category !== 'tuition' || payment.cashDelta !== -period.billed || payment.debtDelta !== 0n || payment.year !== period.date.year || payment.month !== period.date.month) throw new Error('Scholarship bill does not reconcile with ledger');
         transactions.add(payment.id);
         if (period.funding === 'cash' && period.loanTransactionId) throw new Error('Cash tuition cannot invent a loan');
         if (period.funding === 'loan') {
-          const loan = world.ledger.find(row => row.id === period.loanTransactionId);
+          const loan = ledger
+            ? period.loanTransactionId === null ? undefined : ledger.transactions.get(period.loanTransactionId)
+            : world.ledger.find(row => row.id === period.loanTransactionId);
           if (!loan || transactions.has(loan.id) || loan.personId !== item.personId || loan.currency !== item.currency || loan.category !== 'borrowing' || loan.cashDelta !== period.billed || loan.debtDelta !== period.billed || loan.year !== period.date.year || loan.month !== period.date.month || !world.liabilities.some(debt => debt.id === loan.liabilityId && debt.kind === 'student')) throw new Error('Scholarship loan exceeds its actual bill');
           transactions.add(loan.id);
         }

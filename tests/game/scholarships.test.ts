@@ -18,6 +18,8 @@ import { moveQuote, relocationFee } from '../../src/game/systems/relocation';
 import { isConfined } from '../../src/game/systems/legalSchemas';
 import { decodeSave } from '../../src/persistence/archive';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { indexLedger } from '../../src/game/ledgerIndex';
+import * as scholarshipValidation from '../../src/game/systems/scholarshipValidation';
 import archive from '../fixtures/v24-university-loan-archive.json';
 import birthArchive from '../fixtures/v6-birth-result.json';
 
@@ -95,6 +97,31 @@ test('cash funding spends only the remainder; locked minor trust funds cannot pa
   expect(() => enroll(locked, 'cash')).toThrow(/balance/);
   const world = enroll(offered, 'cash'); expect(accountFor(world).cash).toBe(0n); expect(world.liabilities).toEqual([]);
   expect(world.ledger[0].cashDelta).toBe(-remainder); expect(activeScholarship(world)!.periods[0].loanTransactionId).toBeNull();
+});
+test('validation reuses the shared ledger index for paid scholarship bills without weakening payer or loan checks', () => {
+  // The existing arranged adult fixture pays through the real enrolment command.
+  const world = enroll(), before = encodeWorld(world), period = world.scholarships[0].periods[0];
+  expect(period.transactionId).not.toBeNull(); expect(period.loanTransactionId).not.toBeNull();
+  const ledger = indexLedger(world.ledger);
+  const noScan = { ...world, ledger: new Proxy(world.ledger, { get(target, key, receiver) {
+    if (key === 'find') throw new Error('Scholarship validation rescanned the ledger');
+    return Reflect.get(target, key, receiver);
+  } }) };
+  expect(() => scholarshipValidation.validateScholarships(noScan, ledger)).not.toThrow();
+  expect(() => scholarshipValidation.validateScholarships(world)).not.toThrow();
+  const validation = jest.spyOn(scholarshipValidation, 'validateScholarships');
+  try {
+    expect(encodeWorld(validateWorld(world))).toBe(before);
+    expect(validation).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ transactions: expect.any(Map) }));
+  } finally { validation.mockRestore(); }
+  const payer = decodeWorld(before), payerPeriod = payer.scholarships[0].periods[0];
+  payer.ledger.find(row => row.id === payerPeriod.transactionId)!.personId = Object.keys(payer.people).find(id => id !== payer.activePersonId)!;
+  expect(() => scholarshipValidation.validateScholarships(payer, indexLedger(payer.ledger))).toThrow(/bill does not reconcile/);
+  expect(() => scholarshipValidation.validateScholarships(payer)).toThrow(/bill does not reconcile/);
+  const loan = decodeWorld(before); loan.scholarships[0].periods[0].loanTransactionId = period.transactionId;
+  expect(() => scholarshipValidation.validateScholarships(loan, indexLedger(loan.ledger))).toThrow(/loan exceeds/);
+  expect(() => scholarshipValidation.validateScholarships(loan)).toThrow(/loan exceeds/);
+  expect(encodeWorld(world)).toBe(before);
 });
 test('an offer cannot be transferred to another subject, forged, replayed or applied retroactively', () => {
   const offered = offer(), item = offered.scholarships[0], before = encodeWorld(offered);

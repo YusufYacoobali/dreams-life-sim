@@ -343,7 +343,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateSchools(world);
   validateWorkplaces(world);
   validateEducationRecovery(world);
-  validateScholarships(world);
+  validateScholarships(world, ledger);
   validateUniversityAdmissions(world, ledger);
   validateStudyCourses(world, ledger);
   validateCampusCommunities(world, ledger);
