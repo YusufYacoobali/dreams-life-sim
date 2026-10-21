@@ -44,7 +44,8 @@ test('a genuine historical pupil earns an offer, retries application/enrolment/r
   sqlite.exec("CREATE TRIGGER fail_aid_application BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Apply For Scholarship'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
   expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
-  sqlite.exec('DROP TRIGGER fail_aid_application'); await press('Apply · Academic Scholarship'); await press('Apply For Scholarship');
+  expect(screen.getByText('Apply for an Academic Scholarship?')).toBeOnTheScreen();
+  sqlite.exec('DROP TRIGGER fail_aid_application'); await press('Apply For Scholarship');
   expect(world().scholarships[0]).toMatchObject({ status: 'offered', roll: 51, periods: [] });
   const offered = encodeWorld(world()); await act(async () => { await cold(); }); view.rerender(frame(<ScholarshipApplications />)); expect(encodeWorld(world())).toBe(offered); await press('Continue');
   await press('Review Course With This Offer'); expect(router.push).toHaveBeenCalledWith('/education'); view.rerender(frame(<Education />));
