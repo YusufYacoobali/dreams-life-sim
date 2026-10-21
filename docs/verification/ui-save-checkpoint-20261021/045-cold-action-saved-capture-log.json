@@ -1,0 +1,123 @@
+{
+  "complete": true,
+  "name": "cold-action-saved",
+  "events": [
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "force-stop",
+        "host.exp.exponent"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T08:47:02.677814+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "pidof",
+        "host.exp.exponent"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "at": "2026-10-21T08:47:03.372941+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/.cache/android-native-check/sdk/platform-tools/adb",
+        "-s",
+        "emulator-5560",
+        "shell",
+        "am",
+        "start",
+        "-a",
+        "android.intent.action.VIEW",
+        "-d",
+        "exp://127.0.0.1:8081"
+      ],
+      "returncode": 0,
+      "stdout": "Starting: Intent { act=android.intent.action.VIEW dat=exp://127.0.0.1:8081 }\n",
+      "stderr": "",
+      "at": "2026-10-21T08:47:07.798632+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue as Nia Carter"
+      ],
+      "returncode": 0,
+      "stdout": "Fresh hierarchy unavailable; retrying\nFresh hierarchy unavailable; retrying\nFresh hierarchy unavailable; retrying\nEnabled: Continue as Nia Carter\n",
+      "stderr": "ERROR: null root node returned by UiTestAutomationBridge.\nERROR: null root node returned by UiTestAutomationBridge.\nERROR: null root node returned by UiTestAutomationBridge.\n",
+      "at": "2026-10-21T08:51:19.640464+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "dismiss-expo-notice"
+      ],
+      "returncode": 0,
+      "stdout": "Dismissed Expo development notice\n",
+      "stderr": "",
+      "at": "2026-10-21T08:51:28.534786+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "tap",
+        "Continue as Nia Carter"
+      ],
+      "returncode": 0,
+      "stdout": "Tapped Continue as Nia Carter\n",
+      "stderr": "",
+      "at": "2026-10-21T08:51:39.140829+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "wait-enabled",
+        "Continue"
+      ],
+      "returncode": 0,
+      "stdout": "Fresh hierarchy unavailable; retrying\nEnabled: Continue\n",
+      "stderr": "ERROR: null root node returned by UiTestAutomationBridge.\n",
+      "at": "2026-10-21T08:52:14.771827+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c38-native-captures/cold-action-saved/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Continue', '[42,485][348,543]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T08:52:21.638406+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c38-native-captures/cold-action-saved/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c38-native-captures/cold-action-saved/database\n",
+      "stderr": "",
+      "at": "2026-10-21T08:52:22.682174+00:00"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "profile-130-corrected",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Back', '[16,24][60,85]'), ('', 'Education. Latest qualification \u00b7 general. Secondary qualification', '[32,341][358,451]'), ('', 'Occupation. Unemployed', '[32,451][358,534]'), ('', 'Net Worth. $12,234.51', '[32,534][358,617]'), ('', 'Residence. New York, United States', '[32,617][358,700]'), ('', 'Marital Status. Single', '[32,700][358,735]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T09:18:14.870039+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/database\n",
+      "stderr": "",
+      "at": "2026-10-21T09:18:16.086904+00:00"
+    }
+  ]
+}

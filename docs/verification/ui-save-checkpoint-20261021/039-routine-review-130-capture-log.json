@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "routine-review-130",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c38-native-captures/routine-review-130/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('OFF', 'Smoking habit', '[310,24][358,58]'), ('', '\u2713 No alcohol', '[32,169][358,235]'), ('', 'Moderate drinking', '[32,247][358,313]'), ('', 'Heavy drinking', '[32,325][358,391]'), ('', 'Save Routine', '[32,637][358,695]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T08:42:07.118532+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c38-native-captures/routine-review-130/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c38-native-captures/routine-review-130/database\n",
+      "stderr": "",
+      "at": "2026-10-21T08:42:08.269339+00:00"
+    }
+  ]
+}

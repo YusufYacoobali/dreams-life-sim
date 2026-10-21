@@ -1,0 +1,388 @@
+{
+  "format": "dreams-native-cohort-captures-v1",
+  "complete": true,
+  "cohort": "c38",
+  "mode": "existing",
+  "device": "Android API24 emulator-5560,390x844,Expo Go57; normal and1.3 font scale captures; no physical, iOS or standalone acceptance",
+  "scope": "Actual C38 existing-life selection, four read-only Profile/routine review captures, actual full health-routine save149 and actual action_148 acknowledgement150, each with separately captured process-stop cold resume. Assembly only pins actual bytes and supplied command terms; root raw and semantic verification are separate required actions. Baseline reader16 is root-reported until verifier measures it. The two historical font1.3 defects remain explicit and are NOT visual passes. Corrected83ad C39 UI requires a separate source-matched native journey.",
+  "sourceManifest": {
+    "file": "/tmp/dreams-native-cohort-c38-source-complete.json",
+    "bytes": 73541,
+    "sha256": "c84777ef8061dd8543d92b927c450b1b7cd6031bfb9d34b297ecc09191eb3335"
+  },
+  "baseline": {
+    "main": {
+      "file": "/tmp/dreams-c38-native-prelaunch-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+    },
+    "wal": {
+      "file": "/tmp/dreams-c38-native-prelaunch-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "35bbee73d3395204cd236d07f0e2b8a692f68d15c226b0792de06549d823943a"
+    }
+  },
+  "reportedBaselineReader": 16,
+  "savedActionObservation": {
+    "file": "/tmp/dreams-c38-action-saved-observation.json",
+    "bytes": 35134,
+    "sha256": "ee93211180f8feda1bf355d70620ed62e18b711d97099b74af805c8892522a68"
+  },
+  "phases": [
+    {
+      "id": "existing-start",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/existing-start/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/existing-start/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/existing-start/ui.png",
+        "bytes": 84352,
+        "sha256": "916351c2b74c97500a73b3328300564811977c48fb039c1d2c2850100cc44498"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/existing-start/ui.xml",
+        "bytes": 40553,
+        "sha256": "00921e61e423d99d88838c06dfbf9b97059c536cf757b2cd692e2f96a5eca87f"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/existing-start/capture-log.json",
+        "bytes": 1028,
+        "sha256": "65f24837a4a5c941cd1484b07a9d0ac288ad7508a307775ea4b01f01bdf23485"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions."
+    },
+    {
+      "id": "profile-normal",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/profile-normal/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/profile-normal/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/profile-normal/ui.png",
+        "bytes": 77342,
+        "sha256": "6208d2e1855e2ccab36e242c7d57ca4f11ae1b67800c89f57703167af95c1442"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/profile-normal/ui.xml",
+        "bytes": 35913,
+        "sha256": "24f41004a373aba3ae9abe4936d42c833cb0c0dfd7e1760df42b609f599426b1"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/profile-normal/capture-log.json",
+        "bytes": 1335,
+        "sha256": "d1a19f2aff48f2c3a2f7401d193ea35474d3d4512e95e3baf660c37884a7a4ab"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions."
+    },
+    {
+      "id": "profile-130-ready",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/profile-130-ready/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/profile-130-ready/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png",
+        "bytes": 71933,
+        "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml",
+        "bytes": 28933,
+        "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json",
+        "bytes": 1092,
+        "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions.",
+      "knownVisualDefect": "Education title/subtitle squeezed by long value at font1.3. This historical C38 capture is not a visual pass; later components.tsx correction is separate83ad source."
+    },
+    {
+      "id": "routine-unchanged-130",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.png",
+        "bytes": 62998,
+        "sha256": "5f6c347a8173e3fba871c3fa11452327a1d130bfedc73d8507ade5656d262c05"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.xml",
+        "bytes": 29218,
+        "sha256": "2987f63d4d7fdba82aaa4cd51042ab715d007423af8093d8d4cc64a851a99fb4"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/capture-log.json",
+        "bytes": 1179,
+        "sha256": "63a4f3d290c6887b18d596110de7a012fbc3ae1326065a9e5842b5c8dcdad669"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions.",
+      "knownVisualDefect": "Meditation wraps within a word at font1.3 in fixed-width Mind & Body tabs. This historical C38 capture is not a visual pass; later lifestyle.tsx correction is separate83ad source."
+    },
+    {
+      "id": "routine-review-130",
+      "kind": "read-only",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/routine-review-130/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/routine-review-130/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/routine-review-130/ui.png",
+        "bytes": 58567,
+        "sha256": "22ceaf36d7c0a671e84e48dc0454dbe94a052e441bee06f4d7c519c2e7ef21bf"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/routine-review-130/ui.xml",
+        "bytes": 22857,
+        "sha256": "74309e78e7ff5d2ada3338dad26e1e08f0c51fd750f4a4c4a11bf3295c5f35f7"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/routine-review-130/capture-log.json",
+        "bytes": 1087,
+        "sha256": "0612b821d3bfd0d755e21ab963f25f8ebaa2e94878bad7da852481d82333a032"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions."
+    },
+    {
+      "id": "action-saved",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/action-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/action-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9dc327333b73f4159a0fcffb7c7fc19a13fe137f09c98a443bf8ea9b9d73b1a0"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/action-saved/ui.png",
+        "bytes": 69138,
+        "sha256": "4420ec5f23506221daec912f2e9dc11583a380a95c9790c0a479d3796fdeeaa4"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/action-saved/ui.xml",
+        "bytes": 7007,
+        "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/action-saved/capture-log.json",
+        "bytes": 715,
+        "sha256": "f700da77e9d0dfd92900691c5f619d630423ec33a26c77185c6193d7f76a3887"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions.",
+      "command": {
+        "type": "health-routine",
+        "routine": {
+          "exercise": "walking",
+          "diet": "balanced",
+          "sleep": "regular",
+          "mindfulness": true,
+          "smoking": false,
+          "drinking": "none"
+        }
+      }
+    },
+    {
+      "id": "cold-action-saved",
+      "kind": "cold",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/cold-action-saved/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/cold-action-saved/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "9dc327333b73f4159a0fcffb7c7fc19a13fe137f09c98a443bf8ea9b9d73b1a0"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/cold-action-saved/ui.png",
+        "bytes": 79646,
+        "sha256": "594ea4daab3f05e7db4e415618fb4aa66f64eeede425b6439c8fc50c4b410e93"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/cold-action-saved/ui.xml",
+        "bytes": 7007,
+        "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/cold-action-saved/capture-log.json",
+        "bytes": 3381,
+        "sha256": "001d1e29329b7bb708f3784497b90561edcab03ea93083e66d0341f70764d670"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions.",
+      "sameAs": "action-saved",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c38-native-captures/cold-action-saved/cold-attestation.json",
+        "bytes": 321,
+        "sha256": "9f549aa38770f7b3358beb9f0d6aa35900300f121fb5cbd5628535b6ed14bfad"
+      }
+    },
+    {
+      "id": "acknowledged",
+      "kind": "command",
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "09efe86578909452e3d0584f9f51b377f15767d9cf232cea771800b2784a2839"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/acknowledged/ui.png",
+        "bytes": 87496,
+        "sha256": "2d73345d306156c5a52476b9df5c6e19125f82ab88825731ee58e326f9249f07"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/acknowledged/ui.xml",
+        "bytes": 38727,
+        "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+      },
+      "coordinatorPersonallyViewed": true,
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/acknowledged/capture-log.json",
+        "bytes": 1020,
+        "sha256": "8ad79301fe3d0493d49b3256ae2f7e6716a32efd0ddd331c02284e114aceb638"
+      },
+      "viewAttestationScope": "Root explicitly attested first eight actual PNG/XML pairs viewed in task message; author has not independently performed device actions.",
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_148"
+      }
+    },
+    {
+      "id": "cold-acknowledged",
+      "kind": "cold",
+      "sameAs": "acknowledged",
+      "coldAttestation": {
+        "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/cold-attestation.json",
+        "bytes": 321,
+        "sha256": "0059324bf90b14b82c97e34fb635f538b2658b87b85cd7c7373583999a9a4bc1"
+      },
+      "database": {
+        "main": {
+          "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/database/dreams.db",
+          "bytes": 3805184,
+          "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae"
+        },
+        "wal": {
+          "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/database/dreams.db-wal",
+          "bytes": 4733912,
+          "sha256": "09efe86578909452e3d0584f9f51b377f15767d9cf232cea771800b2784a2839"
+        }
+      },
+      "png": {
+        "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.png",
+        "bytes": 87561,
+        "sha256": "caa0e415bd621aacb60a348d677b1a0f282aca3bf2939d389eb128389e7d5c38"
+      },
+      "xml": {
+        "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.xml",
+        "bytes": 38727,
+        "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+      },
+      "captureLog": {
+        "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/capture-log.json",
+        "bytes": 3486,
+        "sha256": "c216d22a9c3b6bc0ea800ad1d12b29315c670ed0fe101a85125285fcb3807ba2"
+      },
+      "coordinatorPersonallyViewed": true,
+      "viewAttestationScope": "Root actual final process closure and personal PNG/XML review from separately pinned authorization."
+    }
+  ],
+  "knownVisualAcceptance": "NOT PASSED: historical Education label and Meditation tab defects explicitly retained. Corrected C39 native pixels require separate journey/source evidence.",
+  "verificationStatus": {
+    "raw": "NOT RUN by assembly producer",
+    "semantic": "NOT RUN by assembly producer",
+    "finalCold": "Root explicitly attested process38265 closed0 and personally viewed final PNG/XML; separate all8/semantic checks still required"
+  },
+  "producerScope": "Ordinary JSON and byte hashing only. No SQLite, game runtime, commands, projection, outcome search or device actions.",
+  "assembly": {
+    "draft": {
+      "file": "/tmp/dreams-c38-native-captures-DRAFT.json",
+      "bytes": 14888,
+      "sha256": "0823834b3c7c0d2f99e7900877b668773446f7e5a08f3081c94be6576c97b23b"
+    },
+    "authorization": {
+      "file": "/tmp/dreams-c38-native-capture-assembly-authorization-ACTUAL.json",
+      "bytes": 873,
+      "sha256": "4e76dfa8cb0f6ded7980bc65098df8d3c2846d9acaf387b17aa2ea8cc407e77c"
+    },
+    "producer": {
+      "file": "/tmp/dreams-c38-assemble-native-captures.py",
+      "bytes": 5378,
+      "sha256": "b8b1d963fca5a7fe43c47948aa333ebcb3002cf48d2731c9ee86c7ecebdebdfb"
+    },
+    "captureDatabasesOpened": 0,
+    "sourceRuntimeModulesLoaded": 0,
+    "engineCommandsExecuted": 0,
+    "nativeActionsPerformed": 0,
+    "rawSemanticVisualAcceptanceInferred": false
+  }
+}

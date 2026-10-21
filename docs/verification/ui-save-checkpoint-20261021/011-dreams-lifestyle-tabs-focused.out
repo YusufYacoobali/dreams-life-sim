@@ -1,0 +1,8 @@
+PASS tests/ui/health-review-save-flow.test.tsx (61.498 s)
+PASS tests/ui/health-flow.test.tsx (6.86 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        68.928 s
+Ran all test suites within paths "tests/ui/health-flow.test.tsx", "tests/ui/health-review-save-flow.test.tsx".

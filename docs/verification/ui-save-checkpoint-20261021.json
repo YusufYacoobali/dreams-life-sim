@@ -1,0 +1,1665 @@
+{
+  "format": "dreams-ui-and-save-source-checkpoint-v1",
+  "complete": true,
+  "status": "corrected-UI-source-export-and-historical-routine-technical-checkpoint-current-device-acceptance-pending",
+  "overallGameAcceptanceComplete": false,
+  "recordedAt": "2026-10-21T09:21:18.935221+00:00",
+  "documentationBase": "1c9e4eaf160a9c9a38befdbf4f34fbe79d4865f9",
+  "source": {
+    "commit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "versions": {
+      "world": 38,
+      "engine": 39,
+      "content": 13,
+      "database": 18,
+      "checkpoint": "v4"
+    },
+    "files": 703,
+    "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+    "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+    "pins": {
+      "snapshot": {
+        "file": "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+        "bytes": 77733,
+        "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+      },
+      "nativeSource": {
+        "file": "ui-save-checkpoint-20261021/002-dreams-native-cohort-c39-ui-complete-source-complete.json",
+        "bytes": 77900,
+        "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+      },
+      "nativeSourceVerification": {
+        "file": "ui-save-checkpoint-20261021/003-dreams-native-cohort-c39-ui-complete-source-verification-receipt.json",
+        "bytes": 4035,
+        "sha256": "8f70b6801a483bb8632a1e2663dde1087b059e3631e9824fa2f9626e8dc6f769"
+      },
+      "bridge": {
+        "file": "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json",
+        "bytes": 10332,
+        "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+      },
+      "head": {
+        "file": "ui-save-checkpoint-20261021/005-dreams-production-ui-complete-head.txt",
+        "bytes": 41,
+        "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+      },
+      "status": {
+        "file": "ui-save-checkpoint-20261021/006-dreams-production-ui-complete-status.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tree": {
+        "file": "ui-save-checkpoint-20261021/007-dreams-production-ui-complete-tree.bin",
+        "bytes": 281281,
+        "sha256": "b1ca930c9627f194b9a83989b9a760c78d035e6420de4b8e41804c7faec1e283"
+      },
+      "commit": {
+        "file": "ui-save-checkpoint-20261021/008-dreams-production-ui-complete-commit.bin",
+        "bytes": 252,
+        "sha256": "8ee104a4c41c1d3b625c688db3403f0c22f2a91c92dc831253c7b9eb4b36ed7c"
+      }
+    },
+    "scope": "All703namedcurrent source files directly SHA256-verified against the immutable83ad snapshot in this separate1c9-based docsworktree. Completeinventorynative-source verification retains its own receipt; this doc check is not a runtime gate.",
+    "verification": {
+      "file": "ui-save-checkpoint-20261021/source-verification.json",
+      "bytes": 590,
+      "sha256": "7363557ff4d2a66c517200432b4075b688c2d2e11a0bcca2c3fa88c9d769ee3e"
+    }
+  },
+  "coreSourceBridge": {
+    "acceptedCoreCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+    "bridge": {
+      "file": "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json",
+      "bytes": 10332,
+      "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+    },
+    "UIChangedFiles": [
+      "src/ui/components.tsx",
+      "app/(game)/lifestyle.tsx"
+    ],
+    "addedFiles": "15alreadyreviewednative-cohortprotocoltools",
+    "coreGameAndPersistenceBytesEqual": true,
+    "historicalClosedGates": {
+      "file": "final-regression-20261021.json",
+      "bytes": 38569,
+      "sha256": "5d4de66a8273f14606c28d9aa20824f1b1fbc603a21261942240e6441ae083db"
+    },
+    "scope": "Full2686/211, strict, same120annual and A/B/D policy evidence retain33bsource identity. UI fixes have separate21/3and9/2focused/type checks plus fresh703source exports; no newfullregression is invented."
+  },
+  "uiFixes": {
+    "actionRow": {
+      "sourceCommit": "e250c46a0740bd9eec62a9c064ee2bf5365fef2b",
+      "focusedTests": 21,
+      "focusedSuites": 3,
+      "jestSeconds": 22.125,
+      "focusedRaw": {
+        "file": "ui-save-checkpoint-20261021/009-dreams-action-row-responsive-focused.out",
+        "bytes": 603,
+        "sha256": "23bf199716770c4963ea0d3b87a02d499efb5e3fd11a063752590d9b2632705e"
+      },
+      "strictRawExternal": {
+        "file": "/tmp/dreams-action-row-responsive-types.out",
+        "bytes": 90,
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      },
+      "sourceDocument": {
+        "file": "ui-save-checkpoint-20261021/010-ACTION_ROW_LARGE_TEXT.md",
+        "bytes": 2162,
+        "sha256": "5ba260548a3e02a42f251d230e80777834b6d4aa293809c3e1a1b7a14e5385bb"
+      },
+      "closureBasis": "Actual author focused session76321andtypes99924closed0 as recorded in the frozen source document and coordinator review; no new test/type run by this documentation."
+    },
+    "lifestyle": {
+      "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+      "focusedTests": 9,
+      "focusedSuites": 2,
+      "jestSeconds": 68.928,
+      "focusedRaw": {
+        "file": "ui-save-checkpoint-20261021/011-dreams-lifestyle-tabs-focused.out",
+        "bytes": 319,
+        "sha256": "29d242a21a7aac93815d76ba50152311e6aee78c8dc2105da89015392ae1425b"
+      },
+      "focusedReceipt": {
+        "file": "ui-save-checkpoint-20261021/012-dreams-lifestyle-tabs-focused.receipt.json",
+        "bytes": 946,
+        "sha256": "03fff0256837b1837c5477408925e8146622deccc62a437593d090ec19daadfa"
+      },
+      "strictRaw": {
+        "file": "ui-save-checkpoint-20261021/013-dreams-lifestyle-tabs-types.out",
+        "bytes": 157,
+        "sha256": "e29294d6b4329b9c5e38440b63f80ff6f3b919daa00b5facc4ee12d6c1776ec2"
+      },
+      "strictReceipt": {
+        "file": "ui-save-checkpoint-20261021/014-dreams-lifestyle-tabs-types.receipt.json",
+        "bytes": 1075,
+        "sha256": "53c63767e7d99bcc7b45ec73a97f8c4f658dff1fc04de0be57726e40ff2d1cb7"
+      },
+      "sourceDocument": {
+        "file": "ui-save-checkpoint-20261021/015-LIFESTYLE_SECTION_REFLOW.md",
+        "bytes": 2469,
+        "sha256": "b86e17d989d2cc888370e8e669d90a77cae4aab6accc02a74e0bd8163117432e"
+      },
+      "scope": "Only section-row wrapping/content-basis flexGrow changed; actual existing connected routine save/no-op/rollback/retry/cold checks and app/all-test strict types closed0; native line measurement remains pending."
+    }
+  },
+  "freshHermesExports": {
+    "status": "passed-actual-fresh-Hermes-exports-source-maps",
+    "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "receipt": {
+      "file": "ui-save-checkpoint-20261021/016-dreams-production-ui-complete-export-receipt.json",
+      "bytes": 1235,
+      "sha256": "f8204b465238633f520bd9484ab3a6d353b0faa251f2f74a1140822bebd7a9ca"
+    },
+    "raw": {
+      "file": "ui-save-checkpoint-20261021/017-dreams-production-ui-complete-export.out",
+      "bytes": 2824,
+      "sha256": "4174b7db43e882bb05f07888da7906445681f9468b4a40e01c5d92eb05b5d119"
+    },
+    "mapProof": {
+      "file": "ui-save-checkpoint-20261021/018-dreams-production-ui-complete-export-map-proof.json",
+      "bytes": 75699,
+      "sha256": "cfb3e11e1af5435ebf0c408afb4962f13838fc6376f31cfa28653c909954fbf1"
+    },
+    "wrapperSeconds": 141.77,
+    "platforms": {
+      "android": {
+        "mappedRuntimeSources": 334,
+        "unmappedTypeOnly": [
+          "src/progression/types.ts"
+        ]
+      },
+      "ios": {
+        "mappedRuntimeSources": 334,
+        "unmappedTypeOnly": [
+          "src/progression/types.ts"
+        ]
+      }
+    },
+    "scope": "Actual fresh Android/iOS Hermes exports,334mappedruntime app/src files each against all703frozen source pins. Not standalone builds or device acceptance."
+  },
+  "C38NativeTechnicalRoutine": {
+    "status": "C38-routine-technical-save-replay-and-cold-scope-passed-visual-failures-retained",
+    "sourceCommit": "dfd9a74046479672967868dc21ac6acfda734592",
+    "versions": {
+      "world": 37,
+      "engine": 38,
+      "content": 12,
+      "reader": 17
+    },
+    "rootActualClosures": {
+      "file": "ui-save-checkpoint-20261021/019-dreams-c38-root-verifier-completions.json",
+      "bytes": 1543,
+      "sha256": "0e62feb04dadd8ea9c3874c3fbfafc08ebc285ef47cbdb76306d07e627b8d4db"
+    },
+    "captures": {
+      "file": "ui-save-checkpoint-20261021/020-dreams-c38-native-captures.json",
+      "bytes": 17089,
+      "sha256": "08fb77c72da287235214dc84b126ff6f830d2cc7e044b10ea9295cf80a0e5de8"
+    },
+    "rawResult": {
+      "file": "ui-save-checkpoint-20261021/021-dreams-c38-native-raw-result.json",
+      "bytes": 27051,
+      "sha256": "81b846407fc7bc6dd0db50c165c352538a781800e8635566a8a82f1370ac2276"
+    },
+    "semanticTrace": {
+      "file": "ui-save-checkpoint-20261021/022-dreams-c38-native-semantic-trace.json",
+      "bytes": 1150,
+      "sha256": "d03c87cc778b48735ea86830386fbab1610ce80eaa3e347ae67d6757f40ad4b2"
+    },
+    "semanticResult": {
+      "file": "ui-save-checkpoint-20261021/023-dreams-c38-native-semantic-result.json",
+      "bytes": 41030,
+      "sha256": "4ba2e8f71e724bf01db6c34ccece331c099b1e91283952cec0e9ae4209bb5211"
+    },
+    "sourceManifest": {
+      "file": "ui-save-checkpoint-20261021/024-dreams-native-cohort-c38-source-complete.json",
+      "bytes": 73541,
+      "sha256": "c84777ef8061dd8543d92b927c450b1b7cd6031bfb9d34b297ecc09191eb3335"
+    },
+    "actualDeviceCommands": 2,
+    "actualColdReopens": 2,
+    "actualPNGXMLPairsReviewedByRoot": 9,
+    "initialRevision": 148,
+    "finalRevision": 150,
+    "initialReader": 16,
+    "finalReader": 17,
+    "finalTableRows": {
+      "backups": 8,
+      "branches": 1,
+      "lives": 8,
+      "preferences": 2,
+      "receipts": 161,
+      "restore_receipts": 1,
+      "snapshot_metadata": 67,
+      "snapshots": 67
+    },
+    "helperVisualAcceptance": false,
+    "known130PercentFailures": [
+      "Profile Education label squeezed by the long Secondary qualification",
+      "Mind&Body Meditation section label word-break"
+    ],
+    "initialSplashDiagnostic": "An initial130percent reload captured splash; it remains a diagnostic, not a layout pass. Later actual130percent captures exposed the two layout defects.",
+    "phases": [
+      {
+        "id": "existing-start",
+        "kind": "read-only",
+        "revision": 148,
+        "worldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "ac866732e97a1dfaa9eb5a52072d72450bb479a82ad77546f939f4e8fb4a1938",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/025-existing-start-ui.png",
+          "bytes": 84352,
+          "sha256": "916351c2b74c97500a73b3328300564811977c48fb039c1d2c2850100cc44498"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/026-existing-start-ui.xml",
+          "bytes": 40553,
+          "sha256": "00921e61e423d99d88838c06dfbf9b97059c536cf757b2cd692e2f96a5eca87f"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/027-existing-start-capture-log.json",
+          "bytes": 1028,
+          "sha256": "65f24837a4a5c941cd1484b07a9d0ac288ad7508a307775ea4b01f01bdf23485"
+        },
+        "rootReviewed": true
+      },
+      {
+        "id": "profile-normal",
+        "kind": "read-only",
+        "revision": 148,
+        "worldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "ac866732e97a1dfaa9eb5a52072d72450bb479a82ad77546f939f4e8fb4a1938",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/028-profile-normal-ui.png",
+          "bytes": 77342,
+          "sha256": "6208d2e1855e2ccab36e242c7d57ca4f11ae1b67800c89f57703167af95c1442"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/029-profile-normal-ui.xml",
+          "bytes": 35913,
+          "sha256": "24f41004a373aba3ae9abe4936d42c833cb0c0dfd7e1760df42b609f599426b1"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/030-profile-normal-capture-log.json",
+          "bytes": 1335,
+          "sha256": "d1a19f2aff48f2c3a2f7401d193ea35474d3d4512e95e3baf660c37884a7a4ab"
+        },
+        "rootReviewed": true
+      },
+      {
+        "id": "profile-130-ready",
+        "kind": "read-only",
+        "revision": 148,
+        "worldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "ac866732e97a1dfaa9eb5a52072d72450bb479a82ad77546f939f4e8fb4a1938",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/031-profile-130-ready-ui.png",
+          "bytes": 71933,
+          "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/032-profile-130-ready-ui.xml",
+          "bytes": 28933,
+          "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/033-profile-130-ready-capture-log.json",
+          "bytes": 1092,
+          "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+        },
+        "rootReviewed": true,
+        "visualDisposition": "known-layout-failure; no visual acceptance"
+      },
+      {
+        "id": "routine-unchanged-130",
+        "kind": "read-only",
+        "revision": 148,
+        "worldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "ac866732e97a1dfaa9eb5a52072d72450bb479a82ad77546f939f4e8fb4a1938",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/034-routine-unchanged-130-ui.png",
+          "bytes": 62998,
+          "sha256": "5f6c347a8173e3fba871c3fa11452327a1d130bfedc73d8507ade5656d262c05"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/035-routine-unchanged-130-ui.xml",
+          "bytes": 29218,
+          "sha256": "2987f63d4d7fdba82aaa4cd51042ab715d007423af8093d8d4cc64a851a99fb4"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/036-routine-unchanged-130-capture-log.json",
+          "bytes": 1179,
+          "sha256": "63a4f3d290c6887b18d596110de7a012fbc3ae1326065a9e5842b5c8dcdad669"
+        },
+        "rootReviewed": true,
+        "visualDisposition": "known-layout-failure; no visual acceptance"
+      },
+      {
+        "id": "routine-review-130",
+        "kind": "read-only",
+        "revision": 148,
+        "worldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "ac866732e97a1dfaa9eb5a52072d72450bb479a82ad77546f939f4e8fb4a1938",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/037-routine-review-130-ui.png",
+          "bytes": 58567,
+          "sha256": "22ceaf36d7c0a671e84e48dc0454dbe94a052e441bee06f4d7c519c2e7ef21bf"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/038-routine-review-130-ui.xml",
+          "bytes": 22857,
+          "sha256": "74309e78e7ff5d2ada3338dad26e1e08f0c51fd750f4a4c4a11bf3295c5f35f7"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/039-routine-review-130-capture-log.json",
+          "bytes": 1087,
+          "sha256": "0612b821d3bfd0d755e21ab963f25f8ebaa2e94878bad7da852481d82333a032"
+        },
+        "rootReviewed": true
+      },
+      {
+        "id": "action-saved",
+        "kind": "command",
+        "revision": 149,
+        "worldSha256": "60815c79dcdd7a994f57703415c78aa4ed85c5df85d7886a4b24f31ac3a94018",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "669ace9411f0152b5197e9a8ebaab045205640a1d04be12ab23e24ed1b348462",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/040-action-saved-ui.png",
+          "bytes": 69138,
+          "sha256": "4420ec5f23506221daec912f2e9dc11583a380a95c9790c0a479d3796fdeeaa4"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/041-action-saved-ui.xml",
+          "bytes": 7007,
+          "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/042-action-saved-capture-log.json",
+          "bytes": 715,
+          "sha256": "f700da77e9d0dfd92900691c5f619d630423ec33a26c77185c6193d7f76a3887"
+        },
+        "rootReviewed": true,
+        "actualCommand": {
+          "type": "health-routine",
+          "routine": {
+            "exercise": "walking",
+            "diet": "balanced",
+            "sleep": "regular",
+            "mindfulness": true,
+            "smoking": false,
+            "drinking": "none"
+          }
+        }
+      },
+      {
+        "id": "cold-action-saved",
+        "kind": "cold",
+        "revision": 149,
+        "worldSha256": "60815c79dcdd7a994f57703415c78aa4ed85c5df85d7886a4b24f31ac3a94018",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "669ace9411f0152b5197e9a8ebaab045205640a1d04be12ab23e24ed1b348462",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "be51d6c91a7cf0087f2c8537546c1e5015bc984ce4bab7c6ba7103f0d095ec83",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/043-cold-action-saved-ui.png",
+          "bytes": 79646,
+          "sha256": "594ea4daab3f05e7db4e415618fb4aa66f64eeede425b6439c8fc50c4b410e93"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/044-cold-action-saved-ui.xml",
+          "bytes": 7007,
+          "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/045-cold-action-saved-capture-log.json",
+          "bytes": 3381,
+          "sha256": "001d1e29329b7bb708f3784497b90561edcab03ea93083e66d0341f70764d670"
+        },
+        "rootReviewed": true,
+        "allEightTablesExactTo": "action-saved",
+        "coldAttestation": {
+          "file": "ui-save-checkpoint-20261021/046-cold-action-saved-cold-attestation.json",
+          "bytes": 321,
+          "sha256": "9f549aa38770f7b3358beb9f0d6aa35900300f121fb5cbd5628535b6ed14bfad"
+        }
+      },
+      {
+        "id": "acknowledged",
+        "kind": "command",
+        "revision": 150,
+        "worldSha256": "0300c57915b5228ecd4c0627698187a2afa8e009accc14472f61ca084d555c7c",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "60815c79dcdd7a994f57703415c78aa4ed85c5df85d7886a4b24f31ac3a94018",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/047-acknowledged-ui.png",
+          "bytes": 87496,
+          "sha256": "2d73345d306156c5a52476b9df5c6e19125f82ab88825731ee58e326f9249f07"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/048-acknowledged-ui.xml",
+          "bytes": 38727,
+          "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/049-acknowledged-capture-log.json",
+          "bytes": 1020,
+          "sha256": "8ad79301fe3d0493d49b3256ae2f7e6716a32efd0ddd331c02284e114aceb638"
+        },
+        "rootReviewed": true,
+        "actualCommand": {
+          "type": "acknowledge",
+          "resultId": "action_148"
+        }
+      },
+      {
+        "id": "cold-acknowledged",
+        "kind": "cold",
+        "revision": 150,
+        "worldSha256": "0300c57915b5228ecd4c0627698187a2afa8e009accc14472f61ca084d555c7c",
+        "randomSha256": "3a0edcc96677f28eed9a39f0592efe0fce6c19bc3ca7858efb4a7442721657ee",
+        "pendingSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "annualSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "backupWorldSha256": "60815c79dcdd7a994f57703415c78aa4ed85c5df85d7886a4b24f31ac3a94018",
+        "png": {
+          "file": "ui-save-checkpoint-20261021/050-cold-acknowledged-ui.png",
+          "bytes": 87561,
+          "sha256": "caa0e415bd621aacb60a348d677b1a0f282aca3bf2939d389eb128389e7d5c38"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/051-cold-acknowledged-ui.xml",
+          "bytes": 38727,
+          "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/052-cold-acknowledged-capture-log.json",
+          "bytes": 3486,
+          "sha256": "c216d22a9c3b6bc0ea800ad1d12b29315c670ed0fe101a85125285fcb3807ba2"
+        },
+        "rootReviewed": true,
+        "allEightTablesExactTo": "acknowledged",
+        "coldAttestation": {
+          "file": "ui-save-checkpoint-20261021/053-cold-acknowledged-cold-attestation.json",
+          "bytes": 321,
+          "sha256": "0059324bf90b14b82c97e34fb635f538b2658b87b85cd7c7373583999a9a4bc1"
+        }
+      }
+    ],
+    "scope": "Actual Android24/ExpoGo routine health-routine command149andseparateack150, with independentprocess-stop cold149and150. Raw8table/oldlife/history preservation and completecanonical/RNG/pending/annual/previousbackup replay passed on DFD9. Known130percentlayout failures are NOTvisualpasses; Corrected83ad130percentProfile/Lifestylepixels and marker17→18 are separately accepted below; othercurrentnative/session cells remainpending. Helpers performed no native actions; root owned actual device commands/stops/reviews."
+  },
+  "C39ActualHTTPSourceProof": {
+    "status": "passed-source-manifest-and-development-map-only",
+    "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "sourceFiles": 703,
+    "mappedRuntimeAppSources": 334,
+    "deviceAcceptance": false,
+    "summary": {
+      "file": "ui-save-checkpoint-20261021/054-dreams-c39-ui-complete-native-http-summary.json",
+      "bytes": 4924,
+      "sha256": "c46b373bae1e32b91332609a40d29b719f12d32e350792d24248ee705578329a"
+    },
+    "actualStageExits": {
+      "prepare": 0,
+      "manifestCurl": 0,
+      "manifestVerifier": 0,
+      "mapCurl": 0,
+      "mapVerifier": 0
+    },
+    "actualHttpResponses": {
+      "manifest": {
+        "status": 200,
+        "bytes": 2009,
+        "seconds": 0.06052
+      },
+      "androidDevelopmentMap": {
+        "status": 200,
+        "bytes": 20182885,
+        "seconds": 35.238774
+      }
+    },
+    "actualMetro": {
+      "pid": 217646,
+      "command": [
+        "node",
+        "--dns-result-order=ipv4first",
+        "./node_modules/expo/bin/cli",
+        "start",
+        "--localhost",
+        "--port",
+        "8081",
+        "--max-workers",
+        "1"
+      ],
+      "startTicks": "15490935"
+    },
+    "cache": {
+      "directory": "/tmp/dreams-production-ui-complete-native-cache",
+      "transformCacheExistedBefore": false,
+      "transformFileCountAfter": 1930,
+      "filesCreatedDuringHttpRequests": 1930,
+      "allTransformsOnOrAfterMetroStartLowerBound": true,
+      "cacheFreshnessScope": "Root-restarted Metro dedicated cache; the actual before inventory and process-start lower bound are retained. Exact source-map bytes are checked independently. transformCacheExistedBefore reports observed state; do not infer an empty cache or which client created transforms.",
+      "tmpdirAttribution": "Coordinator-declared exact startup TMPDIR plus actual before/after cache observation. /proc PID environ and cwd are unreadable here; no retry/bypass."
+    },
+    "scope": "Actual localhost Expo manifest and Android development source-map exact-source/cache proof only. Root separately owns actual device loading, visual/reader/SQL/gameplay/cold/physical and release acceptance. Earlier33b/interim/C38 artifacts remain immutable.",
+    "artifacts": {
+      "mapProof": {
+        "file": "ui-save-checkpoint-20261021/055-dreams-c39-ui-complete-native-http-map-proof.json",
+        "bytes": 39710,
+        "sha256": "d3b9e4a4e54d476b3bc53e0efc61b9ed7a9cf3b76c22fb3b5b9fc7f180fc4fe0"
+      },
+      "manifestProof": {
+        "file": "ui-save-checkpoint-20261021/056-dreams-c39-ui-complete-native-http-manifest-proof.json",
+        "bytes": 2186,
+        "sha256": "0ca5465464a7f763f172fe504e61588a115be76cdb5d853be597a75c8138c375"
+      },
+      "context": {
+        "file": "ui-save-checkpoint-20261021/057-dreams-c39-ui-complete-native-http-http-context.json",
+        "bytes": 2314,
+        "sha256": "8cda0dc166232081e28c51bca34611597f2d2560f2a5ad902f9880b37ece5d4a"
+      },
+      "producer": {
+        "file": "ui-save-checkpoint-20261021/058-dreams-c39-ui-complete-native-http-proof.py.txt",
+        "bytes": 15507,
+        "sha256": "b073effd3855f3716515786f87dca84426ae1b36cbb2a0ed3bed635d8ee83e45"
+      },
+      "actualHttpManifest": {
+        "file": "ui-save-checkpoint-20261021/059-dreams-c39-ui-complete-native-http-manifest.json",
+        "bytes": 2009,
+        "sha256": "370cd5de84c9a610f6c25fcb1df92fc22da1f12ff062bf7f5d1be5061e88c13d"
+      },
+      "actualHttpManifestHeaders": {
+        "file": "ui-save-checkpoint-20261021/060-dreams-c39-ui-complete-native-http-manifest-headers.txt",
+        "bytes": 250,
+        "sha256": "e2453d5918fa55a22b57eed7c1411ca78f9766654f773456a8d0364551881f45"
+      },
+      "manifestHttpObservation": {
+        "file": "ui-save-checkpoint-20261021/061-dreams-c39-ui-complete-native-http-manifest-http.txt",
+        "bytes": 41,
+        "sha256": "fa8778e80c07259370ae9e2bf6e98bb8e42221999c13467563518d5707d40388"
+      },
+      "mapResponseHeaders": {
+        "file": "ui-save-checkpoint-20261021/062-dreams-c39-ui-complete-native-http-android-dev-map-headers.txt",
+        "bytes": 398,
+        "sha256": "58766f9ce55ab1d61c597b4028da5e44455239ad911301dc466ee1ae92e854e5"
+      },
+      "mapHttpObservation": {
+        "file": "ui-save-checkpoint-20261021/063-dreams-c39-ui-complete-native-http-android-dev-map-http.txt",
+        "bytes": 236,
+        "sha256": "19c403bdc742c28215ddab4e002b1b33dc5b73a0f23745fc9fdcae1d917ee149"
+      }
+    }
+  },
+  "sequenceReview": {
+    "files": {
+      "README.md": {
+        "file": "../editorial/c39-20261021/actual-sequences/README.md",
+        "bytes": 5801,
+        "sha256": "99d2bc309f86efc1d2be9e80ff058f2f1e691d95d94d9110479534756909262a"
+      },
+      "summary.json": {
+        "file": "../editorial/c39-20261021/actual-sequences/summary.json",
+        "bytes": 12587,
+        "sha256": "b34ca6e18cd9d38c9ceac01ef67235398fc0279985c4b6b526c9d5682bf16505"
+      },
+      "d-us900/REPORT.md": {
+        "file": "../editorial/c39-20261021/actual-sequences/d-us900/REPORT.md",
+        "bytes": 8444,
+        "sha256": "8f9ce2716e4738bc3561524282ed728cf013f4ef1d34ac3bc616959897a177a7"
+      }
+    },
+    "scope": "Three preselected33brecorded-life artifactreviews after SQLite birth; source correlation vs retainedboundresults distinguished. US900Dhas39completedbirthdayyears from40advances, thelastfatalpartial; no40fullyears or wholecohort UIclock claim. No795branch/native/continuousplay pass."
+  },
+  "pending": {
+    "C": "coordinator run still active; no completed output promoted here",
+    "expandedAnnual1000": "Both remaining120..559and560..999ranges active; total target1000includes alreadyclosed0..119, not1120new. No1000pass credited.",
+    "currentC39Device": "Normal-fontnative review, actualinterviewquote/gamecommandsandcoldchecks remainpending; only the specificread-only/upgrade/130percentcells listedabove passed.",
+    "continuous30MinuteUI": "pending actual timed session and observed sequence/balance review",
+    "release": "standaloneAndroid,actualiOS,physicalperformance/fullspokenaccessibility/release acceptance remainopen"
+  },
+  "historicalReferences": {
+    "C37Complete": {
+      "file": "production-gaps-20261021.json",
+      "bytes": 236086,
+      "sha256": "8067b89e987936adf0de9277e8253ac97c187282ec94fec71b96f157c4297acd"
+    },
+    "PriorCurrentCoreGates": {
+      "file": "final-regression-20261021.json",
+      "bytes": 38569,
+      "sha256": "5d4de66a8273f14606c28d9aa20824f1b1fbc603a21261942240e6441ae083db"
+    },
+    "PriorSourceCheckpoint": {
+      "file": "production-finish-source-checkpoint-20261021.json",
+      "bytes": 32190,
+      "sha256": "a63b2710fc517d890e6b8553c5e0c13b9c1d65c787f42a389a2033ff4f99356e"
+    }
+  },
+  "historicalUnavailableArtifacts": [
+    {
+      "expected": {
+        "file": "/tmp/dreams-npc-retirement-move-fixed-journey.json",
+        "bytes": 2562,
+        "sha256": "5af70cffbd0c2dc6ff300d2c143a3a16238161b0938cf436f05f9fa458da8b00"
+      },
+      "status": "historical-bytes-unavailable",
+      "reason": "npc-moves.test.ts159 unconditionally writes this fixed temporary report path in full runs; later tests overwrote its bytes. The old report origin cannot be proved from its hash alone. The old pin is unavailable and is not relabelled or reconstructed; other63manifest files are exact."
+    }
+  ],
+  "externalArtifacts": [
+    {
+      "file": "/tmp/dreams-action-row-responsive-types.out",
+      "bytes": 90,
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Exact small original strict stdout hash checked here; existing author source document records actual session99924closed0. Kept external rather than changing raw trailing newlines or adding whitespace exemptions."
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-export/_expo/static/js/android/entry-a1ac952c3baa0fa654924a82077d2125.hbc",
+      "bytes": 4912536,
+      "sha256": "48b0aa87e96fc4ec9f545d6386423343775b71e864b6b7da94d29328b9d838e5",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Closed export/map producer pin; not independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-export/_expo/static/js/android/entry-a1ac952c3baa0fa654924a82077d2125.hbc.map",
+      "bytes": 11131921,
+      "sha256": "10311c2a54338f04f380cb9b2cb96fa56f242b31b0cf5b14f44f3a9955e9541c",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Closed source-map producer pin; size observed only, not independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-export/_expo/static/js/ios/entry-8a37f2227b3de90bebf90e919e2fa409.hbc",
+      "bytes": 4644872,
+      "sha256": "b5dcb21abc19167d7dd69c402b19fa5ba695f48cd4037a7613dfcc97c565e879",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Closed export/map producer pin; not independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-export/_expo/static/js/ios/entry-8a37f2227b3de90bebf90e919e2fa409.hbc.map",
+      "bytes": 10622576,
+      "sha256": "416f86180130f29479d4a33e0c33f0579a275862c5e017687a47325c7a0dcd7b",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Closed source-map producer pin; size observed only, not independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-prelaunch-db/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-prelaunch-db/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "35bbee73d3395204cd236d07f0e2b8a692f68d15c226b0792de06549d823943a",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/existing-start/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/existing-start/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/profile-normal/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/profile-normal/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/profile-130-ready/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/profile-130-ready/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/routine-unchanged-130/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/routine-review-130/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/routine-review-130/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "20c37ab6cea0d712b9876d870248e08395f9cd184500e14c56c831a13bd0412d",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/action-saved/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/action-saved/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "9dc327333b73f4159a0fcffb7c7fc19a13fe137f09c98a443bf8ea9b9d73b1a0",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/cold-action-saved/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/cold-action-saved/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "9dc327333b73f4159a0fcffb7c7fc19a13fe137f09c98a443bf8ea9b9d73b1a0",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/acknowledged/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/acknowledged/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "09efe86578909452e3d0584f9f51b377f15767d9cf232cea771800b2784a2839",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/database/dreams.db",
+      "bytes": 3805184,
+      "sha256": "f144f28d9701ff2e4ea3cfe710e8acbc57c27ffee351caa4313f34314d3d7dae",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c38-native-captures/cold-acknowledged/database/dreams.db-wal",
+      "bytes": 4733912,
+      "sha256": "09efe86578909452e3d0584f9f51b377f15767d9cf232cea771800b2784a2839",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual closed raw/semantic capture input pin. Database/WAL bytes not opened, copied or independently rehashed by this documentation."
+    },
+    {
+      "file": "/tmp/dreams-c39-ui-complete-native-http-android-dev.map",
+      "bytes": 20182885,
+      "sha256": "7764f71d921c8a72f730d376e8ee713679f80d410eaba89c402af72c8045c5a8",
+      "storage": "external-only-not-copied",
+      "pinBasis": "Actual guarded HTTP/source-map producer pin; large developmentmap not copied or independently rehashed by this documentation."
+    }
+  ],
+  "originalToPortable": {
+    "/tmp/dreams-production-ui-complete-source.json": "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+    "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json": "ui-save-checkpoint-20261021/002-dreams-native-cohort-c39-ui-complete-source-complete.json",
+    "/tmp/dreams-native-cohort-c39-ui-complete-source-verification-receipt.json": "ui-save-checkpoint-20261021/003-dreams-native-cohort-c39-ui-complete-source-verification-receipt.json",
+    "/tmp/dreams-production-ui-complete-bridge.json": "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json",
+    "/tmp/dreams-production-ui-complete-head.txt": "ui-save-checkpoint-20261021/005-dreams-production-ui-complete-head.txt",
+    "/tmp/dreams-production-ui-complete-status.txt": "ui-save-checkpoint-20261021/006-dreams-production-ui-complete-status.txt",
+    "/tmp/dreams-production-ui-complete-tree.bin": "ui-save-checkpoint-20261021/007-dreams-production-ui-complete-tree.bin",
+    "/tmp/dreams-production-ui-complete-commit.bin": "ui-save-checkpoint-20261021/008-dreams-production-ui-complete-commit.bin",
+    "/tmp/dreams-action-row-responsive-focused.out": "ui-save-checkpoint-20261021/009-dreams-action-row-responsive-focused.out",
+    "/workspace/dreams-worktrees/ui-save-checkpoint/docs/ACTION_ROW_LARGE_TEXT.md": "ui-save-checkpoint-20261021/010-ACTION_ROW_LARGE_TEXT.md",
+    "/tmp/dreams-lifestyle-tabs-focused.out": "ui-save-checkpoint-20261021/011-dreams-lifestyle-tabs-focused.out",
+    "/tmp/dreams-lifestyle-tabs-focused.receipt.json": "ui-save-checkpoint-20261021/012-dreams-lifestyle-tabs-focused.receipt.json",
+    "/tmp/dreams-lifestyle-tabs-types.out": "ui-save-checkpoint-20261021/013-dreams-lifestyle-tabs-types.out",
+    "/tmp/dreams-lifestyle-tabs-types.receipt.json": "ui-save-checkpoint-20261021/014-dreams-lifestyle-tabs-types.receipt.json",
+    "/workspace/dreams-worktrees/ui-save-checkpoint/docs/LIFESTYLE_SECTION_REFLOW.md": "ui-save-checkpoint-20261021/015-LIFESTYLE_SECTION_REFLOW.md",
+    "/tmp/dreams-production-ui-complete-export-receipt.json": "ui-save-checkpoint-20261021/016-dreams-production-ui-complete-export-receipt.json",
+    "/tmp/dreams-production-ui-complete-export.out": "ui-save-checkpoint-20261021/017-dreams-production-ui-complete-export.out",
+    "/tmp/dreams-production-ui-complete-export-map-proof.json": "ui-save-checkpoint-20261021/018-dreams-production-ui-complete-export-map-proof.json",
+    "/tmp/dreams-c38-root-verifier-completions.json": "ui-save-checkpoint-20261021/019-dreams-c38-root-verifier-completions.json",
+    "/tmp/dreams-c38-native-captures.json": "ui-save-checkpoint-20261021/020-dreams-c38-native-captures.json",
+    "/tmp/dreams-c38-native-raw-result.json": "ui-save-checkpoint-20261021/021-dreams-c38-native-raw-result.json",
+    "/tmp/dreams-c38-native-semantic-trace.json": "ui-save-checkpoint-20261021/022-dreams-c38-native-semantic-trace.json",
+    "/tmp/dreams-c38-native-semantic-result.json": "ui-save-checkpoint-20261021/023-dreams-c38-native-semantic-result.json",
+    "/tmp/dreams-native-cohort-c38-source-complete.json": "ui-save-checkpoint-20261021/024-dreams-native-cohort-c38-source-complete.json",
+    "/tmp/dreams-c38-native-captures/existing-start/ui.png": "ui-save-checkpoint-20261021/025-existing-start-ui.png",
+    "/tmp/dreams-c38-native-captures/existing-start/ui.xml": "ui-save-checkpoint-20261021/026-existing-start-ui.xml",
+    "/tmp/dreams-c38-native-captures/existing-start/capture-log.json": "ui-save-checkpoint-20261021/027-existing-start-capture-log.json",
+    "/tmp/dreams-c38-native-captures/profile-normal/ui.png": "ui-save-checkpoint-20261021/028-profile-normal-ui.png",
+    "/tmp/dreams-c38-native-captures/profile-normal/ui.xml": "ui-save-checkpoint-20261021/029-profile-normal-ui.xml",
+    "/tmp/dreams-c38-native-captures/profile-normal/capture-log.json": "ui-save-checkpoint-20261021/030-profile-normal-capture-log.json",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png": "ui-save-checkpoint-20261021/031-profile-130-ready-ui.png",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml": "ui-save-checkpoint-20261021/032-profile-130-ready-ui.xml",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json": "ui-save-checkpoint-20261021/033-profile-130-ready-capture-log.json",
+    "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.png": "ui-save-checkpoint-20261021/034-routine-unchanged-130-ui.png",
+    "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.xml": "ui-save-checkpoint-20261021/035-routine-unchanged-130-ui.xml",
+    "/tmp/dreams-c38-native-captures/routine-unchanged-130/capture-log.json": "ui-save-checkpoint-20261021/036-routine-unchanged-130-capture-log.json",
+    "/tmp/dreams-c38-native-captures/routine-review-130/ui.png": "ui-save-checkpoint-20261021/037-routine-review-130-ui.png",
+    "/tmp/dreams-c38-native-captures/routine-review-130/ui.xml": "ui-save-checkpoint-20261021/038-routine-review-130-ui.xml",
+    "/tmp/dreams-c38-native-captures/routine-review-130/capture-log.json": "ui-save-checkpoint-20261021/039-routine-review-130-capture-log.json",
+    "/tmp/dreams-c38-native-captures/action-saved/ui.png": "ui-save-checkpoint-20261021/040-action-saved-ui.png",
+    "/tmp/dreams-c38-native-captures/action-saved/ui.xml": "ui-save-checkpoint-20261021/041-action-saved-ui.xml",
+    "/tmp/dreams-c38-native-captures/action-saved/capture-log.json": "ui-save-checkpoint-20261021/042-action-saved-capture-log.json",
+    "/tmp/dreams-c38-native-captures/cold-action-saved/ui.png": "ui-save-checkpoint-20261021/043-cold-action-saved-ui.png",
+    "/tmp/dreams-c38-native-captures/cold-action-saved/ui.xml": "ui-save-checkpoint-20261021/044-cold-action-saved-ui.xml",
+    "/tmp/dreams-c38-native-captures/cold-action-saved/capture-log.json": "ui-save-checkpoint-20261021/045-cold-action-saved-capture-log.json",
+    "/tmp/dreams-c38-native-captures/cold-action-saved/cold-attestation.json": "ui-save-checkpoint-20261021/046-cold-action-saved-cold-attestation.json",
+    "/tmp/dreams-c38-native-captures/acknowledged/ui.png": "ui-save-checkpoint-20261021/047-acknowledged-ui.png",
+    "/tmp/dreams-c38-native-captures/acknowledged/ui.xml": "ui-save-checkpoint-20261021/048-acknowledged-ui.xml",
+    "/tmp/dreams-c38-native-captures/acknowledged/capture-log.json": "ui-save-checkpoint-20261021/049-acknowledged-capture-log.json",
+    "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.png": "ui-save-checkpoint-20261021/050-cold-acknowledged-ui.png",
+    "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.xml": "ui-save-checkpoint-20261021/051-cold-acknowledged-ui.xml",
+    "/tmp/dreams-c38-native-captures/cold-acknowledged/capture-log.json": "ui-save-checkpoint-20261021/052-cold-acknowledged-capture-log.json",
+    "/tmp/dreams-c38-native-captures/cold-acknowledged/cold-attestation.json": "ui-save-checkpoint-20261021/053-cold-acknowledged-cold-attestation.json",
+    "/tmp/dreams-c39-ui-complete-native-http-summary.json": "ui-save-checkpoint-20261021/054-dreams-c39-ui-complete-native-http-summary.json",
+    "/tmp/dreams-c39-ui-complete-native-http-map-proof.json": "ui-save-checkpoint-20261021/055-dreams-c39-ui-complete-native-http-map-proof.json",
+    "/tmp/dreams-c39-ui-complete-native-http-manifest-proof.json": "ui-save-checkpoint-20261021/056-dreams-c39-ui-complete-native-http-manifest-proof.json",
+    "/tmp/dreams-c39-ui-complete-native-http-http-context.json": "ui-save-checkpoint-20261021/057-dreams-c39-ui-complete-native-http-http-context.json",
+    "/tmp/dreams-c39-ui-complete-native-http-proof.py": "ui-save-checkpoint-20261021/058-dreams-c39-ui-complete-native-http-proof.py.txt",
+    "/tmp/dreams-c39-ui-complete-native-http-manifest.json": "ui-save-checkpoint-20261021/059-dreams-c39-ui-complete-native-http-manifest.json",
+    "/tmp/dreams-c39-ui-complete-native-http-manifest-headers.txt": "ui-save-checkpoint-20261021/060-dreams-c39-ui-complete-native-http-manifest-headers.txt",
+    "/tmp/dreams-c39-ui-complete-native-http-manifest-http.txt": "ui-save-checkpoint-20261021/061-dreams-c39-ui-complete-native-http-manifest-http.txt",
+    "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-headers.txt": "ui-save-checkpoint-20261021/062-dreams-c39-ui-complete-native-http-android-dev-map-headers.txt",
+    "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-http.txt": "ui-save-checkpoint-20261021/063-dreams-c39-ui-complete-native-http-android-dev-map-http.txt",
+    "/tmp/dreams-c39-ui-boot-marker-only.json": "ui-save-checkpoint-20261021/c39-marker-only-proof.json",
+    "/tmp/dreams-c39-ui-readonly-acceptance.json": "ui-save-checkpoint-20261021/c39-readonly-acceptance.json",
+    "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/ui.png": "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/ui.xml": "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/capture-log.json": "ui-save-checkpoint-20261021/c39-upgrade-welcome-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/existing-start/ui.png": "ui-save-checkpoint-20261021/c39-existing-start-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/existing-start/ui.xml": "ui-save-checkpoint-20261021/c39-existing-start-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/existing-start/capture-log.json": "ui-save-checkpoint-20261021/c39-existing-start-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/ui.png": "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/ui.xml": "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/capture-log.json": "ui-save-checkpoint-20261021/c39-profile-130-corrected-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/ui.png": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/ui.xml": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/capture-log.json": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/education-nested-130/ui.png": "ui-save-checkpoint-20261021/c39-education-nested-130-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/education-nested-130/ui.xml": "ui-save-checkpoint-20261021/c39-education-nested-130-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/education-nested-130/capture-log.json": "ui-save-checkpoint-20261021/c39-education-nested-130-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/ui.png": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/ui.xml": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/capture-log.json": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/ui.png": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/ui.xml": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/capture-log.json": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/ui.png": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/ui.xml": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/capture-log.json": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-capture-log.json",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/ui.png": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.png",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/ui.xml": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.xml",
+    "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/capture-log.json": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-capture-log.json",
+    "/tmp/dreams-c39-startup-button-performance-audit.md": "ui-save-checkpoint-20261021/startup-button-performance-source-audit.md",
+    "/tmp/dreams-c39-startup-button-performance-pins.json": "ui-save-checkpoint-20261021/startup-button-performance-source-pins.json"
+  },
+  "artifacts": {
+    "ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json": {
+      "original": "/tmp/dreams-production-ui-complete-source.json",
+      "bytes": 77733,
+      "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+    },
+    "ui-save-checkpoint-20261021/002-dreams-native-cohort-c39-ui-complete-source-complete.json": {
+      "original": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+      "bytes": 77900,
+      "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+    },
+    "ui-save-checkpoint-20261021/003-dreams-native-cohort-c39-ui-complete-source-verification-receipt.json": {
+      "original": "/tmp/dreams-native-cohort-c39-ui-complete-source-verification-receipt.json",
+      "bytes": 4035,
+      "sha256": "8f70b6801a483bb8632a1e2663dde1087b059e3631e9824fa2f9626e8dc6f769"
+    },
+    "ui-save-checkpoint-20261021/004-dreams-production-ui-complete-bridge.json": {
+      "original": "/tmp/dreams-production-ui-complete-bridge.json",
+      "bytes": 10332,
+      "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+    },
+    "ui-save-checkpoint-20261021/005-dreams-production-ui-complete-head.txt": {
+      "original": "/tmp/dreams-production-ui-complete-head.txt",
+      "bytes": 41,
+      "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+    },
+    "ui-save-checkpoint-20261021/006-dreams-production-ui-complete-status.txt": {
+      "original": "/tmp/dreams-production-ui-complete-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ui-save-checkpoint-20261021/007-dreams-production-ui-complete-tree.bin": {
+      "original": "/tmp/dreams-production-ui-complete-tree.bin",
+      "bytes": 281281,
+      "sha256": "b1ca930c9627f194b9a83989b9a760c78d035e6420de4b8e41804c7faec1e283"
+    },
+    "ui-save-checkpoint-20261021/008-dreams-production-ui-complete-commit.bin": {
+      "original": "/tmp/dreams-production-ui-complete-commit.bin",
+      "bytes": 252,
+      "sha256": "8ee104a4c41c1d3b625c688db3403f0c22f2a91c92dc831253c7b9eb4b36ed7c"
+    },
+    "ui-save-checkpoint-20261021/009-dreams-action-row-responsive-focused.out": {
+      "original": "/tmp/dreams-action-row-responsive-focused.out",
+      "bytes": 603,
+      "sha256": "23bf199716770c4963ea0d3b87a02d499efb5e3fd11a063752590d9b2632705e"
+    },
+    "ui-save-checkpoint-20261021/010-ACTION_ROW_LARGE_TEXT.md": {
+      "original": "/workspace/dreams-worktrees/ui-save-checkpoint/docs/ACTION_ROW_LARGE_TEXT.md",
+      "bytes": 2162,
+      "sha256": "5ba260548a3e02a42f251d230e80777834b6d4aa293809c3e1a1b7a14e5385bb"
+    },
+    "ui-save-checkpoint-20261021/011-dreams-lifestyle-tabs-focused.out": {
+      "original": "/tmp/dreams-lifestyle-tabs-focused.out",
+      "bytes": 319,
+      "sha256": "29d242a21a7aac93815d76ba50152311e6aee78c8dc2105da89015392ae1425b"
+    },
+    "ui-save-checkpoint-20261021/012-dreams-lifestyle-tabs-focused.receipt.json": {
+      "original": "/tmp/dreams-lifestyle-tabs-focused.receipt.json",
+      "bytes": 946,
+      "sha256": "03fff0256837b1837c5477408925e8146622deccc62a437593d090ec19daadfa"
+    },
+    "ui-save-checkpoint-20261021/013-dreams-lifestyle-tabs-types.out": {
+      "original": "/tmp/dreams-lifestyle-tabs-types.out",
+      "bytes": 157,
+      "sha256": "e29294d6b4329b9c5e38440b63f80ff6f3b919daa00b5facc4ee12d6c1776ec2"
+    },
+    "ui-save-checkpoint-20261021/014-dreams-lifestyle-tabs-types.receipt.json": {
+      "original": "/tmp/dreams-lifestyle-tabs-types.receipt.json",
+      "bytes": 1075,
+      "sha256": "53c63767e7d99bcc7b45ec73a97f8c4f658dff1fc04de0be57726e40ff2d1cb7"
+    },
+    "ui-save-checkpoint-20261021/015-LIFESTYLE_SECTION_REFLOW.md": {
+      "original": "/workspace/dreams-worktrees/ui-save-checkpoint/docs/LIFESTYLE_SECTION_REFLOW.md",
+      "bytes": 2469,
+      "sha256": "b86e17d989d2cc888370e8e669d90a77cae4aab6accc02a74e0bd8163117432e"
+    },
+    "ui-save-checkpoint-20261021/016-dreams-production-ui-complete-export-receipt.json": {
+      "original": "/tmp/dreams-production-ui-complete-export-receipt.json",
+      "bytes": 1235,
+      "sha256": "f8204b465238633f520bd9484ab3a6d353b0faa251f2f74a1140822bebd7a9ca"
+    },
+    "ui-save-checkpoint-20261021/017-dreams-production-ui-complete-export.out": {
+      "original": "/tmp/dreams-production-ui-complete-export.out",
+      "bytes": 2824,
+      "sha256": "4174b7db43e882bb05f07888da7906445681f9468b4a40e01c5d92eb05b5d119"
+    },
+    "ui-save-checkpoint-20261021/018-dreams-production-ui-complete-export-map-proof.json": {
+      "original": "/tmp/dreams-production-ui-complete-export-map-proof.json",
+      "bytes": 75699,
+      "sha256": "cfb3e11e1af5435ebf0c408afb4962f13838fc6376f31cfa28653c909954fbf1"
+    },
+    "ui-save-checkpoint-20261021/019-dreams-c38-root-verifier-completions.json": {
+      "original": "/tmp/dreams-c38-root-verifier-completions.json",
+      "bytes": 1543,
+      "sha256": "0e62feb04dadd8ea9c3874c3fbfafc08ebc285ef47cbdb76306d07e627b8d4db"
+    },
+    "ui-save-checkpoint-20261021/020-dreams-c38-native-captures.json": {
+      "original": "/tmp/dreams-c38-native-captures.json",
+      "bytes": 17089,
+      "sha256": "08fb77c72da287235214dc84b126ff6f830d2cc7e044b10ea9295cf80a0e5de8"
+    },
+    "ui-save-checkpoint-20261021/021-dreams-c38-native-raw-result.json": {
+      "original": "/tmp/dreams-c38-native-raw-result.json",
+      "bytes": 27051,
+      "sha256": "81b846407fc7bc6dd0db50c165c352538a781800e8635566a8a82f1370ac2276"
+    },
+    "ui-save-checkpoint-20261021/022-dreams-c38-native-semantic-trace.json": {
+      "original": "/tmp/dreams-c38-native-semantic-trace.json",
+      "bytes": 1150,
+      "sha256": "d03c87cc778b48735ea86830386fbab1610ce80eaa3e347ae67d6757f40ad4b2"
+    },
+    "ui-save-checkpoint-20261021/023-dreams-c38-native-semantic-result.json": {
+      "original": "/tmp/dreams-c38-native-semantic-result.json",
+      "bytes": 41030,
+      "sha256": "4ba2e8f71e724bf01db6c34ccece331c099b1e91283952cec0e9ae4209bb5211"
+    },
+    "ui-save-checkpoint-20261021/024-dreams-native-cohort-c38-source-complete.json": {
+      "original": "/tmp/dreams-native-cohort-c38-source-complete.json",
+      "bytes": 73541,
+      "sha256": "c84777ef8061dd8543d92b927c450b1b7cd6031bfb9d34b297ecc09191eb3335"
+    },
+    "ui-save-checkpoint-20261021/025-existing-start-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/existing-start/ui.png",
+      "bytes": 84352,
+      "sha256": "916351c2b74c97500a73b3328300564811977c48fb039c1d2c2850100cc44498"
+    },
+    "ui-save-checkpoint-20261021/026-existing-start-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/existing-start/ui.xml",
+      "bytes": 40553,
+      "sha256": "00921e61e423d99d88838c06dfbf9b97059c536cf757b2cd692e2f96a5eca87f"
+    },
+    "ui-save-checkpoint-20261021/027-existing-start-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/existing-start/capture-log.json",
+      "bytes": 1028,
+      "sha256": "65f24837a4a5c941cd1484b07a9d0ac288ad7508a307775ea4b01f01bdf23485"
+    },
+    "ui-save-checkpoint-20261021/028-profile-normal-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/profile-normal/ui.png",
+      "bytes": 77342,
+      "sha256": "6208d2e1855e2ccab36e242c7d57ca4f11ae1b67800c89f57703167af95c1442"
+    },
+    "ui-save-checkpoint-20261021/029-profile-normal-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/profile-normal/ui.xml",
+      "bytes": 35913,
+      "sha256": "24f41004a373aba3ae9abe4936d42c833cb0c0dfd7e1760df42b609f599426b1"
+    },
+    "ui-save-checkpoint-20261021/030-profile-normal-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/profile-normal/capture-log.json",
+      "bytes": 1335,
+      "sha256": "d1a19f2aff48f2c3a2f7401d193ea35474d3d4512e95e3baf660c37884a7a4ab"
+    },
+    "ui-save-checkpoint-20261021/031-profile-130-ready-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png",
+      "bytes": 71933,
+      "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+    },
+    "ui-save-checkpoint-20261021/032-profile-130-ready-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml",
+      "bytes": 28933,
+      "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+    },
+    "ui-save-checkpoint-20261021/033-profile-130-ready-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json",
+      "bytes": 1092,
+      "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+    },
+    "ui-save-checkpoint-20261021/034-routine-unchanged-130-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.png",
+      "bytes": 62998,
+      "sha256": "5f6c347a8173e3fba871c3fa11452327a1d130bfedc73d8507ade5656d262c05"
+    },
+    "ui-save-checkpoint-20261021/035-routine-unchanged-130-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/routine-unchanged-130/ui.xml",
+      "bytes": 29218,
+      "sha256": "2987f63d4d7fdba82aaa4cd51042ab715d007423af8093d8d4cc64a851a99fb4"
+    },
+    "ui-save-checkpoint-20261021/036-routine-unchanged-130-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/routine-unchanged-130/capture-log.json",
+      "bytes": 1179,
+      "sha256": "63a4f3d290c6887b18d596110de7a012fbc3ae1326065a9e5842b5c8dcdad669"
+    },
+    "ui-save-checkpoint-20261021/037-routine-review-130-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/routine-review-130/ui.png",
+      "bytes": 58567,
+      "sha256": "22ceaf36d7c0a671e84e48dc0454dbe94a052e441bee06f4d7c519c2e7ef21bf"
+    },
+    "ui-save-checkpoint-20261021/038-routine-review-130-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/routine-review-130/ui.xml",
+      "bytes": 22857,
+      "sha256": "74309e78e7ff5d2ada3338dad26e1e08f0c51fd750f4a4c4a11bf3295c5f35f7"
+    },
+    "ui-save-checkpoint-20261021/039-routine-review-130-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/routine-review-130/capture-log.json",
+      "bytes": 1087,
+      "sha256": "0612b821d3bfd0d755e21ab963f25f8ebaa2e94878bad7da852481d82333a032"
+    },
+    "ui-save-checkpoint-20261021/040-action-saved-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/action-saved/ui.png",
+      "bytes": 69138,
+      "sha256": "4420ec5f23506221daec912f2e9dc11583a380a95c9790c0a479d3796fdeeaa4"
+    },
+    "ui-save-checkpoint-20261021/041-action-saved-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/action-saved/ui.xml",
+      "bytes": 7007,
+      "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+    },
+    "ui-save-checkpoint-20261021/042-action-saved-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/action-saved/capture-log.json",
+      "bytes": 715,
+      "sha256": "f700da77e9d0dfd92900691c5f619d630423ec33a26c77185c6193d7f76a3887"
+    },
+    "ui-save-checkpoint-20261021/043-cold-action-saved-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/cold-action-saved/ui.png",
+      "bytes": 79646,
+      "sha256": "594ea4daab3f05e7db4e415618fb4aa66f64eeede425b6439c8fc50c4b410e93"
+    },
+    "ui-save-checkpoint-20261021/044-cold-action-saved-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/cold-action-saved/ui.xml",
+      "bytes": 7007,
+      "sha256": "5d6ecd3117825c5191be81733aba0eba41f421c4acde767fe3d20707d3759bd0"
+    },
+    "ui-save-checkpoint-20261021/045-cold-action-saved-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/cold-action-saved/capture-log.json",
+      "bytes": 3381,
+      "sha256": "001d1e29329b7bb708f3784497b90561edcab03ea93083e66d0341f70764d670"
+    },
+    "ui-save-checkpoint-20261021/046-cold-action-saved-cold-attestation.json": {
+      "original": "/tmp/dreams-c38-native-captures/cold-action-saved/cold-attestation.json",
+      "bytes": 321,
+      "sha256": "9f549aa38770f7b3358beb9f0d6aa35900300f121fb5cbd5628535b6ed14bfad"
+    },
+    "ui-save-checkpoint-20261021/047-acknowledged-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/acknowledged/ui.png",
+      "bytes": 87496,
+      "sha256": "2d73345d306156c5a52476b9df5c6e19125f82ab88825731ee58e326f9249f07"
+    },
+    "ui-save-checkpoint-20261021/048-acknowledged-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/acknowledged/ui.xml",
+      "bytes": 38727,
+      "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+    },
+    "ui-save-checkpoint-20261021/049-acknowledged-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/acknowledged/capture-log.json",
+      "bytes": 1020,
+      "sha256": "8ad79301fe3d0493d49b3256ae2f7e6716a32efd0ddd331c02284e114aceb638"
+    },
+    "ui-save-checkpoint-20261021/050-cold-acknowledged-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.png",
+      "bytes": 87561,
+      "sha256": "caa0e415bd621aacb60a348d677b1a0f282aca3bf2939d389eb128389e7d5c38"
+    },
+    "ui-save-checkpoint-20261021/051-cold-acknowledged-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/cold-acknowledged/ui.xml",
+      "bytes": 38727,
+      "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+    },
+    "ui-save-checkpoint-20261021/052-cold-acknowledged-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/cold-acknowledged/capture-log.json",
+      "bytes": 3486,
+      "sha256": "c216d22a9c3b6bc0ea800ad1d12b29315c670ed0fe101a85125285fcb3807ba2"
+    },
+    "ui-save-checkpoint-20261021/053-cold-acknowledged-cold-attestation.json": {
+      "original": "/tmp/dreams-c38-native-captures/cold-acknowledged/cold-attestation.json",
+      "bytes": 321,
+      "sha256": "0059324bf90b14b82c97e34fb635f538b2658b87b85cd7c7373583999a9a4bc1"
+    },
+    "ui-save-checkpoint-20261021/054-dreams-c39-ui-complete-native-http-summary.json": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-summary.json",
+      "bytes": 4924,
+      "sha256": "c46b373bae1e32b91332609a40d29b719f12d32e350792d24248ee705578329a"
+    },
+    "ui-save-checkpoint-20261021/055-dreams-c39-ui-complete-native-http-map-proof.json": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-map-proof.json",
+      "bytes": 39710,
+      "sha256": "d3b9e4a4e54d476b3bc53e0efc61b9ed7a9cf3b76c22fb3b5b9fc7f180fc4fe0"
+    },
+    "ui-save-checkpoint-20261021/056-dreams-c39-ui-complete-native-http-manifest-proof.json": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-manifest-proof.json",
+      "bytes": 2186,
+      "sha256": "0ca5465464a7f763f172fe504e61588a115be76cdb5d853be597a75c8138c375"
+    },
+    "ui-save-checkpoint-20261021/057-dreams-c39-ui-complete-native-http-http-context.json": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-http-context.json",
+      "bytes": 2314,
+      "sha256": "8cda0dc166232081e28c51bca34611597f2d2560f2a5ad902f9880b37ece5d4a"
+    },
+    "ui-save-checkpoint-20261021/058-dreams-c39-ui-complete-native-http-proof.py.txt": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-proof.py",
+      "bytes": 15507,
+      "sha256": "b073effd3855f3716515786f87dca84426ae1b36cbb2a0ed3bed635d8ee83e45"
+    },
+    "ui-save-checkpoint-20261021/059-dreams-c39-ui-complete-native-http-manifest.json": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-manifest.json",
+      "bytes": 2009,
+      "sha256": "370cd5de84c9a610f6c25fcb1df92fc22da1f12ff062bf7f5d1be5061e88c13d"
+    },
+    "ui-save-checkpoint-20261021/060-dreams-c39-ui-complete-native-http-manifest-headers.txt": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-manifest-headers.txt",
+      "bytes": 250,
+      "sha256": "e2453d5918fa55a22b57eed7c1411ca78f9766654f773456a8d0364551881f45"
+    },
+    "ui-save-checkpoint-20261021/061-dreams-c39-ui-complete-native-http-manifest-http.txt": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-manifest-http.txt",
+      "bytes": 41,
+      "sha256": "fa8778e80c07259370ae9e2bf6e98bb8e42221999c13467563518d5707d40388"
+    },
+    "ui-save-checkpoint-20261021/062-dreams-c39-ui-complete-native-http-android-dev-map-headers.txt": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-headers.txt",
+      "bytes": 398,
+      "sha256": "58766f9ce55ab1d61c597b4028da5e44455239ad911301dc466ee1ae92e854e5"
+    },
+    "ui-save-checkpoint-20261021/063-dreams-c39-ui-complete-native-http-android-dev-map-http.txt": {
+      "original": "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-http.txt",
+      "bytes": 236,
+      "sha256": "19c403bdc742c28215ddab4e002b1b33dc5b73a0f23745fc9fdcae1d917ee149"
+    },
+    "ui-save-checkpoint-20261021/.gitattributes": {
+      "original": "Generated exact-two-header raw-CRLF preservation attributes only",
+      "bytes": 163,
+      "sha256": "11dfca52d37b487c23678fee9f76ea2fcc6ddd9c64aad0ab4bd674a6dc779610"
+    },
+    "ui-save-checkpoint-20261021/source-verification.json": {
+      "original": "Generated703namedfilebytecheck",
+      "bytes": 590,
+      "sha256": "7363557ff4d2a66c517200432b4075b688c2d2e11a0bcca2c3fa88c9d769ee3e"
+    },
+    "ui-save-checkpoint-20261021/c39-marker-only-proof.json": {
+      "original": "/tmp/dreams-c39-ui-boot-marker-only.json",
+      "bytes": 486,
+      "sha256": "6e660bf8a149bd4d65ba98fdd321f98f777cf23d5138e2861bc8a4ac100bbd1d"
+    },
+    "ui-save-checkpoint-20261021/c39-readonly-acceptance.json": {
+      "original": "/tmp/dreams-c39-ui-readonly-acceptance.json",
+      "bytes": 869,
+      "sha256": "1487cb26e5317f958a8216fee21fbc6fd9a3f9958e464def09c8d7986015a911"
+    },
+    "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/ui.png",
+      "bytes": 364895,
+      "sha256": "8b5639368f21efb85ac1cd81c402d0590a3932feb2d1f5eea000bdf2db9a655d"
+    },
+    "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/ui.xml",
+      "bytes": 16560,
+      "sha256": "8c40ca8ff5036883b8fc62ee4207d71e9f52970c86f73a99fe1a64240f6c1a1a"
+    },
+    "ui-save-checkpoint-20261021/c39-upgrade-welcome-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/upgrade-welcome/capture-log.json",
+      "bytes": 935,
+      "sha256": "c45c397cd91d4d3953a4c2158899124ce359bab6498784efd6e3f13bf9145c79"
+    },
+    "ui-save-checkpoint-20261021/c39-existing-start-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/existing-start/ui.png",
+      "bytes": 87259,
+      "sha256": "4993d5c89073822c983162e2c595bb0a74b47785cf824448b3be18ecb26b16fa"
+    },
+    "ui-save-checkpoint-20261021/c39-existing-start-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/existing-start/ui.xml",
+      "bytes": 38727,
+      "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+    },
+    "ui-save-checkpoint-20261021/c39-existing-start-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/existing-start/capture-log.json",
+      "bytes": 1037,
+      "sha256": "6ee4a9e99dd81d0d2231a359e55aeb63811bf9bcf7283ee5e79b103ca6bfe3c6"
+    },
+    "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/ui.png",
+      "bytes": 82133,
+      "sha256": "fa7f4ed4168020cde27d6138178ac3333b9c635ab8f6e9ec549f00a34dd7310d"
+    },
+    "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/ui.xml",
+      "bytes": 32913,
+      "sha256": "8aae0450a190d92466f13ee4794d0eced2e997adc1650d0eee2459a0e1209078"
+    },
+    "ui-save-checkpoint-20261021/c39-profile-130-corrected-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/profile-130-corrected/capture-log.json",
+      "bytes": 1235,
+      "sha256": "5219076125e5cb1055cf2164e4eab502f0d7e8f4e1a43c5723b8bbeb2176490a"
+    },
+    "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/ui.png",
+      "bytes": 87437,
+      "sha256": "8c24f0595d25ed56a7e9fb25eab92474675d441715817e720af61bf079f6f2a6"
+    },
+    "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/ui.xml",
+      "bytes": 38727,
+      "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+    },
+    "ui-save-checkpoint-20261021/c39-life-root-reselected-130-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/life-root-reselected-130/capture-log.json",
+      "bytes": 1077,
+      "sha256": "9f0190cecd974087891b8112ff400171ab859181999909736c40f46f87c8b232"
+    },
+    "ui-save-checkpoint-20261021/c39-education-nested-130-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/education-nested-130/ui.png",
+      "bytes": 64231,
+      "sha256": "0f887d436b3455e451ffc3a1bcb3c541f8ae7c99a44a250f598ca1f6cc06ee4b"
+    },
+    "ui-save-checkpoint-20261021/c39-education-nested-130-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/education-nested-130/ui.xml",
+      "bytes": 23472,
+      "sha256": "2e0f30a9ba8e6bca832ab76f5f2f20cb75fdf4b4f60b9026236a9596132fc899"
+    },
+    "ui-save-checkpoint-20261021/c39-education-nested-130-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/education-nested-130/capture-log.json",
+      "bytes": 1067,
+      "sha256": "a9ea8d1e7aad2a9ea68fc0a0fda1946bf5bffe7a69b13d2c1bc730b2f57f1aa4"
+    },
+    "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/ui.png",
+      "bytes": 70503,
+      "sha256": "b3878bf39aab1886dead936030951e2695ca5341ee629d9e5508144620f74615"
+    },
+    "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/ui.xml",
+      "bytes": 31769,
+      "sha256": "31a7538a4e79c4e7fbff7c5a0deb42f9cd0b64d3baa6a29270fa14f0d60f1dfb"
+    },
+    "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/activities-root-reselected-130/capture-log.json",
+      "bytes": 1387,
+      "sha256": "c9e4bf4d23c20480e2a9bbfe56af6153c55928c2a55d2001be8dadddc0a4d297"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/ui.png",
+      "bytes": 63386,
+      "sha256": "1ea6737b4e3b36a369f2deb5d027048cdc6f121020adfca648f189263b59eaaa"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/ui.xml",
+      "bytes": 29945,
+      "sha256": "62095c7a09ce6ebc0e16201c6bed8c4dcdb8742acdcbd20d219a1f75dd5d8ddb"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-tabs-130-corrected/capture-log.json",
+      "bytes": 1314,
+      "sha256": "1653c2aaa8016a62d2b7221ae96241278d42e707367cf8ad87af77b3c59dd630"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/ui.png",
+      "bytes": 62430,
+      "sha256": "2ef83a0a56241c46743cf3bdaab0a2cec778b89b4d6bd3db8e271edd729ba087"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/ui.xml",
+      "bytes": 30248,
+      "sha256": "369bb3ba28dece113bdc2c69735d36680ce29829dafbe3da5d715eabe6ced213"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-sleep-130/capture-log.json",
+      "bytes": 1257,
+      "sha256": "bfb5b9c7c28a6fe6ca4275294211c602161126e3d4d6b0913c3385c025d7baa8"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.png": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/ui.png",
+      "bytes": 58718,
+      "sha256": "52609339504737f786e4bda8209c653398f0d00f22729ad00b831316707b7297"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.xml": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/ui.xml",
+      "bytes": 28857,
+      "sha256": "1866bf82beccf614b6568e2c6aad9057f5f2820f6d488ab0e8cb11ada7b73059"
+    },
+    "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-capture-log.json": {
+      "original": "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/capture-log.json",
+      "bytes": 1251,
+      "sha256": "0c7af132e1978b93f7e6d64557fc1b510f93c3be3e9c5736e018f798a474cfd1"
+    },
+    "ui-save-checkpoint-20261021/startup-button-performance-source-audit.md": {
+      "original": "/tmp/dreams-c39-startup-button-performance-audit.md",
+      "bytes": 8085,
+      "sha256": "65f2b0ad707be0d7c879d37f30caa743c638769749d30e63cab13e1f2db4d349"
+    },
+    "ui-save-checkpoint-20261021/startup-button-performance-source-pins.json": {
+      "original": "/tmp/dreams-c39-startup-button-performance-pins.json",
+      "bytes": 11337,
+      "sha256": "75f4f732e84a1d322e5ef69201d0f1dd836b0987c9e70943255cc944192a0961"
+    }
+  },
+  "overallEffortEstimatePercent": 75,
+  "limits": [
+    "No tests/types/build/exports/HTTP/game/codec/SQLite/native/process operations executed by this documentation task. It reads supplied metadata/rawsmallfiles and checks exact copied bytes.",
+    "ActualHTTPsourceproof remainsnondevice evidence; separate rootread-onlyattestations credit marker17→18 andlisted130percentcells only. Otherquote/actions/cold/normal-font/30minute acceptance stayspending.",
+    "HistoricalC38routineproof isDFD9scope. ItsEducation/Meditation130percentfailures and initialsplash remainrawdiagnostics. Current83adfixesnowpassonlythe separatelylistedactual130percentread-onlycells; no historicalvisualpassisfabricated.",
+    "A/B/D technicalcohorts and selectedsequence reviews retain33bsource, firsteligible/variedpolicy, actualrefusals/unreached/earlydeath and birth-onlySQLite/pureenginecodec scopes.",
+    "Originalrecords, false-readiness/preparation flags and unavailableoldC38fixedreport5afpin remainunchanged. No fixture, producer, game/save rule, schema or version change.",
+    "AlllargeDB/WAL/HBC/maps remainexternallypinnedwiththeiractualproducerbasis, nevercopied/reconstructed/independentlyreadhere.",
+    "75percentis unchanged effortestimate, not acceptance score. Additionalimport/export/sharing/history/storagebreadth remainsparked."
+  ],
+  "C39ActualReadonlyAcceptance": {
+    "status": "actual-corrected-C39-readonly-upgrade-and-selected130percent-cells-passed-other-native-open",
+    "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+    "bootMarkerProof": {
+      "file": "ui-save-checkpoint-20261021/c39-marker-only-proof.json",
+      "bytes": 486,
+      "sha256": "6e660bf8a149bd4d65ba98fdd321f98f777cf23d5138e2861bc8a4ac100bbd1d"
+    },
+    "rootReadonlyClosure": {
+      "file": "ui-save-checkpoint-20261021/c39-readonly-acceptance.json",
+      "bytes": 869,
+      "sha256": "1487cb26e5317f958a8216fee21fbc6fd9a3f9958e464def09c8d7986015a911"
+    },
+    "actualFlowSession": 11837,
+    "actualExitCode": 0,
+    "rootPersonallyReviewedPNGXMLPairs": 9,
+    "actualGameCommands": 0,
+    "readerBefore": 17,
+    "readerAfter": 18,
+    "allEightTableRowsExactAcrossBootAndReadonly": true,
+    "target": "Existing Nia revision150; no rewritten current/backup payload or new receipt credited.",
+    "normalFontNativeReview": "pending",
+    "passedScopedCells": [
+      "130percentProfileEducation/Secondaryqualification readable",
+      "130percentLifestyleDiet/Sleep/Meditation wholewords fit",
+      "Sleep/Meditation section selection stayslocalwithnoSQLwrite",
+      "SelectedLife/Profile returnsLifeRoot",
+      "SelectedActivities/Education returnsActivitiesRoot"
+    ],
+    "phases": [
+      {
+        "id": "upgrade-welcome",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.png",
+          "bytes": 364895,
+          "sha256": "8b5639368f21efb85ac1cd81c402d0590a3932feb2d1f5eea000bdf2db9a655d"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-upgrade-welcome-ui.xml",
+          "bytes": 16560,
+          "sha256": "8c40ca8ff5036883b8fc62ee4207d71e9f52970c86f73a99fe1a64240f6c1a1a"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-upgrade-welcome-capture-log.json",
+          "bytes": 935,
+          "sha256": "c45c397cd91d4d3953a4c2158899124ce359bab6498784efd6e3f13bf9145c79"
+        }
+      },
+      {
+        "id": "existing-start",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-existing-start-ui.png",
+          "bytes": 87259,
+          "sha256": "4993d5c89073822c983162e2c595bb0a74b47785cf824448b3be18ecb26b16fa"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-existing-start-ui.xml",
+          "bytes": 38727,
+          "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-existing-start-capture-log.json",
+          "bytes": 1037,
+          "sha256": "6ee4a9e99dd81d0d2231a359e55aeb63811bf9bcf7283ee5e79b103ca6bfe3c6"
+        }
+      },
+      {
+        "id": "profile-130-corrected",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.png",
+          "bytes": 82133,
+          "sha256": "fa7f4ed4168020cde27d6138178ac3333b9c635ab8f6e9ec549f00a34dd7310d"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-profile-130-corrected-ui.xml",
+          "bytes": 32913,
+          "sha256": "8aae0450a190d92466f13ee4794d0eced2e997adc1650d0eee2459a0e1209078"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-profile-130-corrected-capture-log.json",
+          "bytes": 1235,
+          "sha256": "5219076125e5cb1055cf2164e4eab502f0d7e8f4e1a43c5723b8bbeb2176490a"
+        }
+      },
+      {
+        "id": "life-root-reselected-130",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.png",
+          "bytes": 87437,
+          "sha256": "8c24f0595d25ed56a7e9fb25eab92474675d441715817e720af61bf079f6f2a6"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-ui.xml",
+          "bytes": 38727,
+          "sha256": "75599e0ea30242f8cb3516c79ffd3d1b2b0dffae4388d6dc22b67e56351eccf9"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-life-root-reselected-130-capture-log.json",
+          "bytes": 1077,
+          "sha256": "9f0190cecd974087891b8112ff400171ab859181999909736c40f46f87c8b232"
+        }
+      },
+      {
+        "id": "education-nested-130",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-education-nested-130-ui.png",
+          "bytes": 64231,
+          "sha256": "0f887d436b3455e451ffc3a1bcb3c541f8ae7c99a44a250f598ca1f6cc06ee4b"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-education-nested-130-ui.xml",
+          "bytes": 23472,
+          "sha256": "2e0f30a9ba8e6bca832ab76f5f2f20cb75fdf4b4f60b9026236a9596132fc899"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-education-nested-130-capture-log.json",
+          "bytes": 1067,
+          "sha256": "a9ea8d1e7aad2a9ea68fc0a0fda1946bf5bffe7a69b13d2c1bc730b2f57f1aa4"
+        }
+      },
+      {
+        "id": "activities-root-reselected-130",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.png",
+          "bytes": 70503,
+          "sha256": "b3878bf39aab1886dead936030951e2695ca5341ee629d9e5508144620f74615"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-ui.xml",
+          "bytes": 31769,
+          "sha256": "31a7538a4e79c4e7fbff7c5a0deb42f9cd0b64d3baa6a29270fa14f0d60f1dfb"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-activities-root-reselected-130-capture-log.json",
+          "bytes": 1387,
+          "sha256": "c9e4bf4d23c20480e2a9bbfe56af6153c55928c2a55d2001be8dadddc0a4d297"
+        }
+      },
+      {
+        "id": "lifestyle-tabs-130-corrected",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.png",
+          "bytes": 63386,
+          "sha256": "1ea6737b4e3b36a369f2deb5d027048cdc6f121020adfca648f189263b59eaaa"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-ui.xml",
+          "bytes": 29945,
+          "sha256": "62095c7a09ce6ebc0e16201c6bed8c4dcdb8742acdcbd20d219a1f75dd5d8ddb"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-tabs-130-corrected-capture-log.json",
+          "bytes": 1314,
+          "sha256": "1653c2aaa8016a62d2b7221ae96241278d42e707367cf8ad87af77b3c59dd630"
+        }
+      },
+      {
+        "id": "lifestyle-sleep-130",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.png",
+          "bytes": 62430,
+          "sha256": "2ef83a0a56241c46743cf3bdaab0a2cec778b89b4d6bd3db8e271edd729ba087"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-ui.xml",
+          "bytes": 30248,
+          "sha256": "369bb3ba28dece113bdc2c69735d36680ce29829dafbe3da5d715eabe6ced213"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-sleep-130-capture-log.json",
+          "bytes": 1257,
+          "sha256": "bfb5b9c7c28a6fe6ca4275294211c602161126e3d4d6b0913c3385c025d7baa8"
+        }
+      },
+      {
+        "id": "lifestyle-meditation-130",
+        "kind": "read-only",
+        "rootReviewedPNGXML": true,
+        "png": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.png",
+          "bytes": 58718,
+          "sha256": "52609339504737f786e4bda8209c653398f0d00f22729ad00b831316707b7297"
+        },
+        "xml": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-ui.xml",
+          "bytes": 28857,
+          "sha256": "1866bf82beccf614b6568e2c6aad9057f5f2820f6d488ab0e8cb11ada7b73059"
+        },
+        "captureLog": {
+          "file": "ui-save-checkpoint-20261021/c39-lifestyle-meditation-130-capture-log.json",
+          "bytes": 1251,
+          "sha256": "0c7af132e1978b93f7e6d64557fc1b510f93c3be3e9c5736e018f798a474cfd1"
+        }
+      }
+    ],
+    "scope": "Actual softwareAndroid24/ExpoGo observations personallyviewed andXMLinspected byroot. Reader17→18 is marker-only; all8rows unchanged throughoutWelcome and8postContinuephases. No actual C39gamecommand, interviewquote, mutation/cold, continuous30minute, physical/iOS/standalone or wholeaccessibility pass."
+  },
+  "startupAndButtonSourceAudit": {
+    "report": {
+      "file": "ui-save-checkpoint-20261021/startup-button-performance-source-audit.md",
+      "bytes": 8085,
+      "sha256": "65f2b0ad707be0d7c879d37f30caa743c638769749d30e63cab13e1f2db4d349"
+    },
+    "pins": {
+      "file": "ui-save-checkpoint-20261021/startup-button-performance-source-pins.json",
+      "bytes": 11337,
+      "sha256": "75f4f732e84a1d322e5ef69201d0f1dd836b0987c9e70943255cc944192a0961"
+    },
+    "scope": "Read-only29file source audit found no new actionable source-proven regression. Welcome decodes only selectedlife, Continue routescachedworld, ordinaryactionsreuseactivecache, and onlysubmittedbuttongets150msdelayedindicator. No source re-run, startuptrace, physical/renderedlatency measurement or speculativeperformancefix is credited."
+  }
+}

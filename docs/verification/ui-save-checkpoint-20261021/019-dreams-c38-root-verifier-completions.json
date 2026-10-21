@@ -1,0 +1,49 @@
+{
+  "complete": true,
+  "at": "2026-10-21T09:11:29.917371+00:00",
+  "scope": "Coordinator actual tool completion observations; no new verifier execution inferred or performed by this attestation. Known C38 130% Education/Meditation layout failures remain explicit, not visual passes.",
+  "raw": {
+    "actualSessionId": 45552,
+    "actualClosed": true,
+    "exitCode": 0,
+    "command": [
+      "node",
+      "tools/verify-native-cohort-raw.cjs",
+      "--cohort",
+      "c38",
+      "--captures",
+      "/tmp/dreams-c38-native-captures.json",
+      "--output",
+      "/tmp/dreams-c38-native-raw-result.json"
+    ],
+    "result": {
+      "file": "/tmp/dreams-c38-native-raw-result.json",
+      "bytes": 27051,
+      "sha256": "81b846407fc7bc6dd0db50c165c352538a781800e8635566a8a82f1370ac2276"
+    }
+  },
+  "semantic": {
+    "actualSessionId": 93093,
+    "actualClosed": true,
+    "exitCode": 0,
+    "command": [
+      "node",
+      "tools/verify-native-cohort-semantic.cjs",
+      "--trace",
+      "/tmp/dreams-c38-native-semantic-trace.json",
+      "--output",
+      "/tmp/dreams-c38-native-semantic-result.json"
+    ],
+    "result": {
+      "file": "/tmp/dreams-c38-native-semantic-result.json",
+      "bytes": 41030,
+      "sha256": "4ba2e8f71e724bf01db6c34ccece331c099b1e91283952cec0e9ae4209bb5211"
+    }
+  },
+  "rootPersonallyReviewedPNGandXMLPhases": 9,
+  "actualDeviceCommands": 2,
+  "actualColdReopens": 2,
+  "finalRevision": 150,
+  "source": "dfd9a74046479672967868dc21ac6acfda734592",
+  "finalUICorrectionNativeStillPending": true
+}

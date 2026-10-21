@@ -1,0 +1,2 @@
+COMMAND ["node", "node_modules/typescript/bin/tsc", "--noEmit"]
+COMMAND ["node", "node_modules/typescript/bin/tsc", "--noEmit", "-p", "tests/tsconfig.json"]

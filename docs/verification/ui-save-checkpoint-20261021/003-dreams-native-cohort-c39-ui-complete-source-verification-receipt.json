@@ -1,0 +1,104 @@
+{
+  "format": "dreams-native-cohort-source-verification-v1",
+  "complete": true,
+  "status": "complete-source-proofs-only-native-acceptance-pending",
+  "producer": {
+    "file": "/tmp/dreams-native-cohort-prepare-c39-ui-complete-source.cjs",
+    "bytes": 5695,
+    "sha256": "3bff1735146a786da965ca252dd1d1e3c93b4dc841a88d476f0893856fc922da"
+  },
+  "approvedAdapterCommit": "c49e7966ebdd0499b28b7cfa636b0d6b0053aca4",
+  "support": {
+    "file": "/workspace/dreams-worktrees/native-cohort-adapters/tools/native-cohort-raw-support.cjs",
+    "bytes": 15099,
+    "sha256": "878716f2dbf2e0d820038e8a729a071f2c230e476e3a9c23dafc40034b2e3de0"
+  },
+  "profiles": [
+    {
+      "cohort": "c39",
+      "status": "complete-source-proof-only-native-acceptance-pending",
+      "manifest": {
+        "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+        "bytes": 77900,
+        "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+      },
+      "originSnapshot": {
+        "file": "/tmp/dreams-production-ui-complete-source.json",
+        "bytes": 77733,
+        "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+      },
+      "allProvidedSourcePinsVerified": 703,
+      "source": {
+        "manifest": {
+          "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+          "bytes": 77900,
+          "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+        },
+        "root": "/workspace/dreams-worktrees/lifestyle-tabs",
+        "commit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+        "versions": {
+          "world": 38,
+          "engine": 39,
+          "content": 13,
+          "reader": 18
+        },
+        "managedFilesVerified": 363,
+        "git": {
+          "head": {
+            "file": "/tmp/dreams-production-ui-complete-head.txt",
+            "bytes": 41,
+            "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+          },
+          "status": {
+            "file": "/tmp/dreams-production-ui-complete-status.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "tree": {
+            "file": "/tmp/dreams-production-ui-complete-tree.bin",
+            "bytes": 281281,
+            "sha256": "b1ca930c9627f194b9a83989b9a760c78d035e6420de4b8e41804c7faec1e283"
+          },
+          "commit": {
+            "file": "/tmp/dreams-production-ui-complete-commit.bin",
+            "bytes": 252,
+            "sha256": "8ee104a4c41c1d3b625c688db3403f0c22f2a91c92dc831253c7b9eb4b36ed7c"
+          }
+        }
+      },
+      "directCurrentGitChecks": {
+        "head": {
+          "file": "/tmp/dreams-native-cohort-c39-ui-complete-current-head.txt",
+          "bytes": 41,
+          "sha256": "7b434ac405c8ee4d621a1f917cc632c788063525e16b134b68e1f3eacbaf0fde"
+        },
+        "status": {
+          "file": "/tmp/dreams-native-cohort-c39-ui-complete-current-status.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "command": "git rev-parse HEAD; git status --porcelain=v1 --untracked-files=all",
+        "exitCode": 0,
+        "exactlyMatchesCapturedFrozenProofs": true
+      },
+      "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+      "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0"
+    }
+  ],
+  "moduleLoads": [
+    "/workspace/dreams-worktrees/native-cohort-adapters/tools/native-cohort-raw-support.cjs",
+    "node:fs",
+    "node:path",
+    "node:assert/strict",
+    "node:crypto"
+  ],
+  "forbiddenRuntimeSQLiteChildProcessLoads": 0,
+  "sourceRuntimeModulesLoaded": 0,
+  "checkpointWorldsDecoded": 0,
+  "captureDatabasesOpened": 0,
+  "engineCommandsReplayed": 0,
+  "nativeActionsPerformed": 0,
+  "nativeAcceptance": false,
+  "originalManifestsModified": false,
+  "frozenRootsModified": false
+}

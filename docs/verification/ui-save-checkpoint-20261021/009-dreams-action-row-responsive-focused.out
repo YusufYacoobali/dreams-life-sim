@@ -1,0 +1,13 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --runTestsByPath tests/ui/profile-overview-save-flow.test.tsx tests/ui/appearance-labels.test.tsx tests/ui/interactions.test.tsx --testTimeout=30000
+
+PASS tests/ui/profile-overview-save-flow.test.tsx (19.85 s)
+PASS tests/ui/interactions.test.tsx
+PASS tests/ui/appearance-labels.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       21 passed, 21 total
+Snapshots:   0 total
+Time:        22.125 s
+Ran all test suites within paths "tests/ui/profile-overview-save-flow.test.tsx", "tests/ui/appearance-labels.test.tsx", "tests/ui/interactions.test.tsx".

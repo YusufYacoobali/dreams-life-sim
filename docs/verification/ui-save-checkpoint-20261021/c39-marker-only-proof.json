@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "at": "2026-10-21T09:19:15.905165+00:00",
+  "scope": "Actual final C39 UI normalstartup changes reader17 to18 only. All8 table rows stay exact at Welcome, normallycontinued Nia150 and130%corrected Profile. No game command dispatched.",
+  "source": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "readerBefore": 17,
+  "readerAfter": 18,
+  "allEightTableRowsExact": true,
+  "phases": [
+    "upgrade-welcome",
+    "existing-start",
+    "profile-130-corrected"
+  ]
+}

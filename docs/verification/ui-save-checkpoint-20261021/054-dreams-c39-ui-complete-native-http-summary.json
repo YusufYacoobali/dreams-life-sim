@@ -1,0 +1,126 @@
+{
+  "format": "dreams-c39-ui-complete-native-http-summary-v1",
+  "recordedAt": "2026-10-21T09:10:11.018174+00:00",
+  "status": "passed-source-manifest-and-map-only",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "nativeSourceManifest": {
+    "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+    "bytes": 77900,
+    "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+  },
+  "sourceBridge": {
+    "file": "/tmp/dreams-production-ui-complete-bridge.json",
+    "bytes": 10332,
+    "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+  },
+  "sourceFilesVerifiedBeforeAndAfter": 703,
+  "mappedAppSourceCount": 334,
+  "unmappedTypeOnlyFiles": [
+    "src/progression/types.ts"
+  ],
+  "actualHttpManifest": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest.json",
+    "bytes": 2009,
+    "sha256": "370cd5de84c9a610f6c25fcb1df92fc22da1f12ff062bf7f5d1be5061e88c13d"
+  },
+  "actualHttpManifestHeaders": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest-headers.txt",
+    "bytes": 250,
+    "sha256": "e2453d5918fa55a22b57eed7c1411ca78f9766654f773456a8d0364551881f45"
+  },
+  "manifestProof": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest-proof.json",
+    "bytes": 2186,
+    "sha256": "0ca5465464a7f763f172fe504e61588a115be76cdb5d853be597a75c8138c375"
+  },
+  "manifestHttpObservation": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest-http.txt",
+    "bytes": 41,
+    "sha256": "fa8778e80c07259370ae9e2bf6e98bb8e42221999c13467563518d5707d40388"
+  },
+  "actualAndroidDevelopmentMap": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-android-dev.map",
+    "bytes": 20182885,
+    "sha256": "7764f71d921c8a72f730d376e8ee713679f80d410eaba89c402af72c8045c5a8"
+  },
+  "mapResponseHeaders": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-headers.txt",
+    "bytes": 398,
+    "sha256": "58766f9ce55ab1d61c597b4028da5e44455239ad911301dc466ee1ae92e854e5"
+  },
+  "mapHttpObservation": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-android-dev-map-http.txt",
+    "bytes": 236,
+    "sha256": "19c403bdc742c28215ddab4e002b1b33dc5b73a0f23745fc9fdcae1d917ee149"
+  },
+  "mapProof": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-map-proof.json",
+    "bytes": 39710,
+    "sha256": "d3b9e4a4e54d476b3bc53e0efc61b9ed7a9cf3b76c22fb3b5b9fc7f180fc4fe0"
+  },
+  "producer": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-proof.py",
+    "bytes": 15507,
+    "sha256": "b073effd3855f3716515786f87dca84426ae1b36cbb2a0ed3bed635d8ee83e45"
+  },
+  "context": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-http-context.json",
+    "bytes": 2314,
+    "sha256": "8cda0dc166232081e28c51bca34611597f2d2560f2a5ad902f9880b37ece5d4a"
+  },
+  "actualMetro": {
+    "pid": 217646,
+    "command": [
+      "node",
+      "--dns-result-order=ipv4first",
+      "./node_modules/expo/bin/cli",
+      "start",
+      "--localhost",
+      "--port",
+      "8081",
+      "--max-workers",
+      "1"
+    ],
+    "startTicks": "15490935"
+  },
+  "cache": {
+    "directory": "/tmp/dreams-production-ui-complete-native-cache",
+    "transformCacheExistedBefore": false,
+    "transformFileCountAfter": 1930,
+    "filesCreatedDuringHttpRequests": 1930,
+    "allTransformsOnOrAfterMetroStartLowerBound": true,
+    "cacheFreshnessScope": "Root-restarted Metro dedicated cache; the actual before inventory and process-start lower bound are retained. Exact source-map bytes are checked independently. transformCacheExistedBefore reports observed state; do not infer an empty cache or which client created transforms.",
+    "tmpdirAttribution": "Coordinator-declared exact startup TMPDIR plus actual before/after cache observation. /proc PID environ and cwd are unreadable here; no retry/bypass."
+  },
+  "actualStageExits": {
+    "prepare": 0,
+    "manifestCurl": 0,
+    "manifestVerifier": 0,
+    "mapCurl": 0,
+    "mapVerifier": 0
+  },
+  "actualHttpResponses": {
+    "manifest": {
+      "status": 200,
+      "bytes": 2009,
+      "seconds": 0.06052
+    },
+    "androidDevelopmentMap": {
+      "status": 200,
+      "bytes": 20182885,
+      "seconds": 35.238774
+    }
+  },
+  "phaseProofPinAssociationsVerified": true,
+  "actualProcessCommandAndStartTicksVerifiedBeforeFinalPublication": true,
+  "actualDeviceLoadAcceptedByThisProof": false,
+  "nativeActionsPerformed": 0,
+  "checkpointWorldsDecoded": 0,
+  "captureDatabasesOpened": 0,
+  "scope": "Actual localhost Expo manifest and Android development source-map exact-source/cache proof only. Root separately owns actual device loading, visual/reader/SQL/gameplay/cold/physical and release acceptance. Earlier33b/interim/C38 artifacts remain immutable."
+}

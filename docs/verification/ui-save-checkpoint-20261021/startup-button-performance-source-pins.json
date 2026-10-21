@@ -1,0 +1,277 @@
+{
+  "format": "dreams-c39-startup-button-readonly-audit-v1",
+  "capturedAt": "2026-10-21T09:22:46.042509+00:00",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "root": "/workspace/dreams-worktrees/lifestyle-tabs",
+  "cleanStatus": "",
+  "versions": {
+    "world": 38,
+    "engine": 39,
+    "content": 13,
+    "database": 18,
+    "checkpoint": "v4"
+  },
+  "sourceInventoryCount": 703,
+  "gameSourceHash": "7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b",
+  "combinedGamePersistenceSourceHash": "d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0",
+  "scope": "Read-only source and existing evidence audit. No runtime, SQL, native, tests or new performance observations. Prior test definitions are not fresh pass evidence. Coordinator-reported DEV timing is not independently reproduced.",
+  "report": {
+    "file": "/tmp/dreams-c39-startup-button-performance-audit.md",
+    "bytes": 8085,
+    "sha256": "65f2b0ad707be0d7c879d37f30caa743c638769749d30e63cab13e1f2db4d349"
+  },
+  "sourceFiles": [
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/_layout.tsx",
+      "bytes": 1635,
+      "sha256": "e1ce9f9125e0e3005a695f526b781025359f74126416533c634dc75068ffbbf7",
+      "relativePath": "app/_layout.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/index.tsx",
+      "bytes": 5798,
+      "sha256": "ffbb0760035c45c85a59fcf49b1a7f4d57d9a83a62081a3319c2933a35582554",
+      "relativePath": "app/index.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/_layout.tsx",
+      "bytes": 2882,
+      "sha256": "c794fa7552873ecb1c594c4e73bd489f4fdb01183330c4abdba45a46879f29b2",
+      "relativePath": "app/(game)/_layout.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/(tabs)/_layout.tsx",
+      "bytes": 664,
+      "sha256": "40c022395d4e27c2a84fca8ee99f5785e9b6b6c68d95d50a995c2bf440933fb9",
+      "relativePath": "app/(game)/(tabs)/_layout.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/(tabs)/life.tsx",
+      "bytes": 11051,
+      "sha256": "0b384c815dd21299cb4e463eeabf8134485714bb8979e8828fb249d849cd5aa5",
+      "relativePath": "app/(game)/(tabs)/life.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/profile.tsx",
+      "bytes": 10215,
+      "sha256": "53c6f4b519b5fe2e958a2b902f038d55e6a830b77e5f3523258c235f6a67f98c",
+      "relativePath": "app/(game)/profile.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/finances.tsx",
+      "bytes": 7624,
+      "sha256": "d0d93e840e48f6219e03d9632b354fdf5220584602e30acf4966baf8407f9d43",
+      "relativePath": "app/(game)/finances.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/(game)/statistics.tsx",
+      "bytes": 2963,
+      "sha256": "a6c198bb94d9afb1ddc0296bd16c36984b2c03783d28e855503fd09291964d68",
+      "relativePath": "app/(game)/statistics.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/app/time-machine.tsx",
+      "bytes": 3971,
+      "sha256": "02f5f3345519fe1a3b49bfbd788c23f06773d3ab04607f6bdcfdbdc83587db56",
+      "relativePath": "app/time-machine.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/state/gameStore.ts",
+      "bytes": 6605,
+      "sha256": "85b542e0c04192cf192c2eb018ef90dd3c77870261a0a124e75f444710689d09",
+      "relativePath": "src/state/gameStore.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/state/useGame.ts",
+      "bytes": 776,
+      "sha256": "4dc6ffd95fe52d117bd78bcdf292128aa870994cebf8a676b437ecce2572baf1",
+      "relativePath": "src/state/useGame.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/state/preferencesStore.ts",
+      "bytes": 4186,
+      "sha256": "08d48dc738b05e6b4f3e642dbc0028ed1275c743ca93d158dc2205afd5972b61",
+      "relativePath": "src/state/preferencesStore.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/state/usePreferences.ts",
+      "bytes": 388,
+      "sha256": "10397601bb8ff52ceaa4985b62d786008c07bc3385798c1ca68ed9cb91b968f4",
+      "relativePath": "src/state/usePreferences.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/persistence/native.ts",
+      "bytes": 1364,
+      "sha256": "1b91d5c8aa4a44f759507f08656bdd4468f18f20f3846b7560e5375a159bf797",
+      "relativePath": "src/persistence/native.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/persistence/repository.ts",
+      "bytes": 20735,
+      "sha256": "4d2ad63d2f1d3e27b4800270970fe25092eb547aa09c5b9cd3db8e0c0d1e87e1",
+      "relativePath": "src/persistence/repository.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/persistence/checkpoints.ts",
+      "bytes": 16509,
+      "sha256": "5e59ef577fc18c6530676fc09f47ba0819d4f1321cf284ff03fb19b68d27b491",
+      "relativePath": "src/persistence/checkpoints.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/game/model.ts",
+      "bytes": 56421,
+      "sha256": "2f2251d93885b617e1db05a69bff63867a28952bda5b62a4cc0e8cd99bcb6052",
+      "relativePath": "src/game/model.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/game/engine.ts",
+      "bytes": 31057,
+      "sha256": "36dfa895ecc6755c2445e9cd2c52f7020525d75c25fdd2c3b845695cf93746ee",
+      "relativePath": "src/game/engine.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/ui/components.tsx",
+      "bytes": 9024,
+      "sha256": "6fbcd3002eb9055dcf59bb4350bc9d9039d2d3fe5dd47167156f6fa2b5886834",
+      "relativePath": "src/ui/components.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/ui/useDelayedBusy.ts",
+      "bytes": 432,
+      "sha256": "e125828cbe3c1bbe4ae59051dea1374cbde2a9ad3f1712c805c82d5adf0c1f76",
+      "relativePath": "src/ui/useDelayedBusy.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/ui/PendingEvent.tsx",
+      "bytes": 2774,
+      "sha256": "0c3e2e5d487ead4d387234dae3492b3a14d117569396ae2a45517551a5878c22",
+      "relativePath": "src/ui/PendingEvent.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/src/ui/AppFeedback.tsx",
+      "bytes": 1287,
+      "sha256": "ae8d07b7f69ad31dd7497d4942d17b32d006c07a359a1ab972bbd8569929777d",
+      "relativePath": "src/ui/AppFeedback.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/state/gameStore.test.ts",
+      "bytes": 4615,
+      "sha256": "119475ca70684891cdb8e00377e08f2a6f80de0c4e7dbcc23c12f74c1d9bd884",
+      "relativePath": "tests/state/gameStore.test.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/state/save-summaries.test.ts",
+      "bytes": 4256,
+      "sha256": "822931a6758260d547f271b2bab3683c9042c5c9353a66d7fdeb45ce5ea48cbc",
+      "relativePath": "tests/state/save-summaries.test.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/persistence/restored-action-cache.test.ts",
+      "bytes": 4683,
+      "sha256": "16f6c30eb203ce847ea958c0b555e187996699962efa4c183b963bbfa04aef40",
+      "relativePath": "tests/persistence/restored-action-cache.test.ts",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/ui/interactions.test.tsx",
+      "bytes": 6177,
+      "sha256": "1ab30f695a93def7f9d1a2dfe3bd7c5af5618ba1890938be8436d01ba67293c1",
+      "relativePath": "tests/ui/interactions.test.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/ui/time-machine-flow.test.tsx",
+      "bytes": 5087,
+      "sha256": "d215d6844687904923a5db4d3d31062a970362f65b8ffcb3d36d627b1ee96612",
+      "relativePath": "tests/ui/time-machine-flow.test.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/ui/saved-life-preview.test.tsx",
+      "bytes": 5001,
+      "sha256": "f64a2ccae07aef3ba417b3f92a35cb9b0c74b6e2b2e4bee514a8db891982246d",
+      "relativePath": "tests/ui/saved-life-preview.test.tsx",
+      "matches703SourceManifest": true
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/tests/ui/hobby-introduction-save-flow.test.tsx",
+      "bytes": 16245,
+      "sha256": "bdad359844e789a8fc3209724e9be31c7930141b223c8db18967cccb366f49a0",
+      "relativePath": "tests/ui/hobby-introduction-save-flow.test.tsx",
+      "matches703SourceManifest": true
+    }
+  ],
+  "historicalPerformanceDocuments": [
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/docs/BUTTON_RESPONSIVENESS.md",
+      "bytes": 6720,
+      "sha256": "551a435f5cffeee971e32cd6c9743a0df143d99b628b09489435335e2df4ae4d"
+    },
+    {
+      "file": "/workspace/dreams-worktrees/lifestyle-tabs/docs/LARGE_SAVE_RESPONSIVENESS.md",
+      "bytes": 3558,
+      "sha256": "30a3860517058eefee1f0c9e83aba2a24a5cb7d9b47f7d657b8a9138eb9de9ce"
+    }
+  ],
+  "existingEvidence": [
+    {
+      "file": "/tmp/dreams-production-ui-complete-source.json",
+      "bytes": 77733,
+      "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+    },
+    {
+      "file": "/tmp/dreams-production-ui-complete-bridge.json",
+      "bytes": 10332,
+      "sha256": "80acaa6abbf5baa015d7f451c358312f37756d7f28737b781315c33107c5a73d"
+    },
+    {
+      "file": "/tmp/dreams-c39-actions-summary.json",
+      "bytes": 17365,
+      "sha256": "a7dc899c82b060529543989903f1fb4bf47b3a9e6bb64017612d1091b0e30b22"
+    },
+    {
+      "file": "/tmp/dreams-c39-actions.json",
+      "bytes": 307226,
+      "sha256": "4486f87ddc10d1abf76517b17c5e4c3bc9f69a4ee75a9c2176749a958a4e8bbc"
+    },
+    {
+      "file": "/tmp/dreams-production-finish-corrected-accepted-bridge.json",
+      "bytes": 1268,
+      "sha256": "3cfa8821af8a0031996123a5d7f91c6248366c1e7aabe415c813cc5759500a8d"
+    }
+  ],
+  "existingBenchmarkTotals": {
+    "cases": 14,
+    "measuredWarmSamples": 70,
+    "fullMeasuredWarmUnpackCalls": 0,
+    "excludedWarmups": 14,
+    "successfulDriverExecutions": 84,
+    "wholeColdCurrentAssertions": 84,
+    "wholeColdBackupAssertions": 84,
+    "originalBeforeAgeUpPayloadAssertions": 12
+  }
+}

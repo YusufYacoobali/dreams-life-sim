@@ -1,0 +1,4 @@
+200
+http://127.0.0.1:8081/node_modules/expo-router/entry.map?platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=1&transform.routerRoot=app&unstable_transformProfile=hermes-stable
+20182885
+35.238774

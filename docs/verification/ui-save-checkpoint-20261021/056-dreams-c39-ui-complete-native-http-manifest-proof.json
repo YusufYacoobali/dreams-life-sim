@@ -1,0 +1,45 @@
+{
+  "format": "dreams-c39-ui-native-http-manifest-proof-v1",
+  "status": "passed-source-manifest-only-not-device-load",
+  "sourceCommit": "83adaea6f92523d04a27df2e77b11e0a8b14ef1d",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-production-ui-complete-source.json",
+    "bytes": 77733,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  "nativeSourceManifest": {
+    "file": "/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json",
+    "bytes": 77900,
+    "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+  },
+  "producer": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-proof.py",
+    "bytes": 15507,
+    "sha256": "b073effd3855f3716515786f87dca84426ae1b36cbb2a0ed3bed635d8ee83e45"
+  },
+  "context": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-http-context.json",
+    "bytes": 2314,
+    "sha256": "8cda0dc166232081e28c51bca34611597f2d2560f2a5ad902f9880b37ece5d4a"
+  },
+  "manifest": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest.json",
+    "bytes": 2009,
+    "sha256": "370cd5de84c9a610f6c25fcb1df92fc22da1f12ff062bf7f5d1be5061e88c13d"
+  },
+  "responseHeaders": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest-headers.txt",
+    "bytes": 250,
+    "sha256": "e2453d5918fa55a22b57eed7c1411ca78f9766654f773456a8d0364551881f45"
+  },
+  "httpObservation": {
+    "file": "/tmp/dreams-c39-ui-complete-native-http-manifest-http.txt",
+    "bytes": 41,
+    "sha256": "fa8778e80c07259370ae9e2bf6e98bb8e42221999c13467563518d5707d40388"
+  },
+  "actualManifestProjectRoot": "/workspace/dreams-worktrees/lifestyle-tabs",
+  "launchAssetUrl": "http://127.0.0.1:8081/node_modules/expo-router/entry.bundle?platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=1&transform.routerRoot=app&unstable_transformProfile=hermes-stable",
+  "androidDevelopmentMapUrl": "http://127.0.0.1:8081/node_modules/expo-router/entry.map?platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=1&transform.routerRoot=app&unstable_transformProfile=hermes-stable",
+  "actualDeviceLoadAccepted": false,
+  "nativeActionsPerformed": 0
+}

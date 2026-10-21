@@ -1,0 +1,258 @@
+"""Pinned C39 UI source, actual local Metro manifest/map proof preparation.
+
+No HTTP, ADB/input, process control, child process, game imports or SQLite here.
+The coordinator supplies the actual Metro identity before prepare. Direct curl
+requests preserve actual HTTP response bytes separately between these stages.
+"""
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import os
+import time
+import urllib.parse
+
+ROOT = Path('/workspace/dreams-worktrees/lifestyle-tabs')
+COMMIT = '83adaea6f92523d04a27df2e77b11e0a8b14ef1d'
+SNAPSHOT = Path('/tmp/dreams-production-ui-complete-source.json')
+SNAPSHOT_SHA = '85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d'
+NATIVE_SOURCE = Path('/tmp/dreams-native-cohort-c39-ui-complete-source-complete.json')
+NATIVE_SOURCE_SHA = '6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4'
+COMMAND = ['node', '--dns-result-order=ipv4first', './node_modules/expo/bin/cli',
+           'start', '--localhost', '--port', '8081', '--max-workers', '1']
+MANIFEST_REQUEST = {'url': 'http://127.0.0.1:8081/', 'headers': {
+    'expo-platform': 'android', 'expo-protocol-version': '1',
+    'accept': 'application/expo+json', 'cache-control': 'no-cache'}}
+CONTEXT_FORMAT = 'dreams-c39-ui-native-http-context-v1'
+MANIFEST_FORMAT = 'dreams-c39-ui-native-http-manifest-proof-v1'
+MANIFEST_STATUS = 'passed-source-manifest-only-not-device-load'
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def pin(name):
+    path = Path(name)
+    data = path.read_bytes()
+    return {'file': str(path), 'bytes': len(data), 'sha256': sha(data)}
+
+
+def read(name):
+    return json.loads(Path(name).read_text())
+
+
+def write(name, value):
+    with Path(name).open('x') as handle:
+        handle.write(json.dumps(value, indent=2) + '\n')
+
+
+def checked_source():
+    assert pin(SNAPSHOT)['sha256'] == SNAPSHOT_SHA
+    source = read(SNAPSHOT)
+    assert source['root'] == str(ROOT) and source['commit'] == COMMIT
+    assert len(source['source']) == 703
+    assert pin(NATIVE_SOURCE)['sha256'] == NATIVE_SOURCE_SHA
+    native = read(NATIVE_SOURCE)
+    assert native['complete'] is True and native['cohort'] == 'c39'
+    assert native['root'] == str(ROOT) and native['commit'] == COMMIT
+    assert native['source'] == source['source']
+    for name, digest in source['source'].items():
+        assert sha((ROOT / name).read_bytes()) == digest, name
+    return source
+
+
+def observe_process(pid):
+    assert isinstance(pid, int) and pid > 1
+    proc = Path('/proc') / str(pid)
+    command = [part for part in (proc / 'cmdline').read_bytes().decode().split('\0') if part]
+    assert command == COMMAND, 'Actual Metro command changed or belongs to another process'
+    ticks = (proc / 'stat').read_text().rsplit(') ', 1)[1].split()[19]
+    return {'pid': pid, 'command': command, 'startTicks': ticks}
+
+
+def checked_context(context):
+    assert context['format'] == CONTEXT_FORMAT and context['sourceCommit'] == COMMIT
+    assert context['sourceSnapshot'] == pin(SNAPSHOT)
+    assert context['nativeSourceManifest'] == pin(NATIVE_SOURCE)
+    assert context['producer'] == pin(__file__)
+    assert context['manifestRequest'] == MANIFEST_REQUEST
+    assert context['actualMetro']['command'] == COMMAND
+    cache = Path(context['uniqueCache'])
+    assert cache.is_absolute() and cache.is_relative_to('/tmp')
+    assert cache.is_dir() and not cache.is_symlink()
+    assert observe_process(context['actualMetro']['pid']) == context['actualMetro']
+    return cache
+
+
+def checked_http(body, headers, observation, url):
+    meta = Path(observation).read_text().splitlines()
+    assert len(meta) == 4 and meta[0] == '200' and meta[1] == url
+    assert len(Path(body).read_bytes()) == int(float(meta[2]))
+    assert float(meta[3]) >= 0
+    assert Path(headers).read_text().splitlines()[0].endswith(' 200 OK')
+
+
+def checked_manifest(manifest):
+    client = manifest['extra']['expoClient']
+    assert client['_internal']['projectRoot'] == str(ROOT)
+    assert manifest['extra']['expoGo']['developer']['projectRoot'] == str(ROOT)
+    assert client['name'] == 'Dreams Life Simulator'
+    assert manifest['extra']['expoGo']['packagerOpts']['dev'] is True
+    launch = manifest['launchAsset']['url']
+    url = urllib.parse.urlsplit(launch)
+    query = urllib.parse.parse_qs(url.query)
+    assert url.scheme == 'http' and url.hostname in ['localhost', '127.0.0.1']
+    assert url.port == 8081 and url.path.endswith('.bundle')
+    assert query['platform'] == ['android'] and query['dev'] == ['true']
+    map_url = urllib.parse.urlunsplit((url.scheme, url.netloc,
+                                     url.path[:-7] + '.map', url.query, ''))
+    return launch, map_url
+
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('stage', choices=['prepare', 'manifest', 'verify'])
+parser.add_argument('--prefix', required=True, help='NEW direct /tmp output prefix')
+parser.add_argument('--pid', type=int, help='Actual root-supplied PID, prepare only')
+parser.add_argument('--cache', help='Actual root-supplied unique TMPDIR, prepare only')
+parser.add_argument('--metro-log', help='Actual root-supplied log, prepare only')
+args = parser.parse_args()
+prefix = Path(args.prefix)
+assert prefix.is_absolute() and prefix.parent == Path('/tmp') and not prefix.is_symlink()
+
+
+def out(suffix):
+    return Path(str(prefix) + suffix)
+
+
+source = checked_source()
+if args.stage == 'prepare':
+    assert args.pid and args.cache and args.metro_log, 'Wait for actual Metro identity'
+    for suffix in ['-http-context.json', '-manifest.json', '-manifest-headers.txt',
+                   '-manifest-http.txt', '-map-url.txt', '-android-dev.map',
+                   '-android-dev-map-headers.txt', '-android-dev-map-http.txt',
+                   '-manifest-proof.json', '-map-proof.json']:
+        assert not out(suffix).exists(), 'Preserve earlier attempt: ' + str(out(suffix))
+    cache = Path(args.cache)
+    metro_log = Path(args.metro_log)
+    assert cache.is_absolute() and cache.is_relative_to('/tmp')
+    assert cache.is_dir() and not cache.is_symlink()
+    assert metro_log.is_absolute() and metro_log.is_relative_to('/tmp')
+    assert metro_log.is_file() and not metro_log.is_symlink()
+    log = metro_log.read_text()
+    assert ('Starting project at ' + str(ROOT)) in log
+    assert 'Waiting on http://localhost:8081' in log
+    process = observe_process(args.pid)
+    boot_seconds = int(next(line.split()[1] for line in Path('/proc/stat').read_text().splitlines()
+                            if line.startswith('btime ')))
+    lower_ns = boot_seconds * 1_000_000_000 + int(process['startTicks']) * 1_000_000_000 // os.sysconf('SC_CLK_TCK')
+    before = [{'path': str(path.relative_to(cache)), 'bytes': path.stat().st_size,
+               'mtimeNs': path.stat().st_mtime_ns}
+              for path in sorted(cache.rglob('*')) if path.is_file()]
+    context = {'format': CONTEXT_FORMAT, 'sourceCommit': COMMIT,
+               'sourceSnapshot': pin(SNAPSHOT), 'nativeSourceManifest': pin(NATIVE_SOURCE),
+               'producer': pin(__file__), 'requestStartedAtUnixNs': time.time_ns(),
+               'manifestRequest': MANIFEST_REQUEST, 'actualMetro': process,
+               'uniqueCache': str(cache), 'actualMetroLogAtPrepare': pin(metro_log),
+               'cacheFilesBefore': before, 'transformCacheExistedBefore': (cache / 'metro-cache').exists(),
+               'processStartLowerUnixNs': lower_ns,
+               'cacheFreshnessScope': 'Root-restarted Metro dedicated cache; the actual before inventory and process-start lower bound are retained. Exact source-map bytes are checked independently. transformCacheExistedBefore reports observed state; do not infer an empty cache or which client created transforms.',
+               'tmpdirAttribution': 'Coordinator-declared exact startup TMPDIR plus actual before/after cache observation. /proc PID environ and cwd are unreadable here; no retry/bypass.'}
+    write(out('-http-context.json'), context)
+    print('prepared source-only context; no HTTP/device/game action')
+else:
+    assert not any([args.pid, args.cache, args.metro_log]), 'Use immutable prepared context'
+    context = read(out('-http-context.json'))
+    cache = checked_context(context)
+    manifest = read(out('-manifest.json'))
+    checked_http(out('-manifest.json'), out('-manifest-headers.txt'),
+                 out('-manifest-http.txt'), MANIFEST_REQUEST['url'])
+    launch, map_url = checked_manifest(manifest)
+    if args.stage == 'manifest':
+        with out('-map-url.txt').open('x') as handle:
+            handle.write(map_url + '\n')
+        proof = {'format': MANIFEST_FORMAT, 'status': MANIFEST_STATUS,
+                 'sourceCommit': COMMIT, 'sourceSnapshot': pin(SNAPSHOT),
+                 'nativeSourceManifest': pin(NATIVE_SOURCE), 'producer': pin(__file__),
+                 'context': pin(out('-http-context.json')), 'manifest': pin(out('-manifest.json')),
+                 'responseHeaders': pin(out('-manifest-headers.txt')),
+                 'httpObservation': pin(out('-manifest-http.txt')),
+                 'actualManifestProjectRoot': str(ROOT), 'launchAssetUrl': launch,
+                 'androidDevelopmentMapUrl': map_url, 'actualDeviceLoadAccepted': False,
+                 'nativeActionsPerformed': 0}
+        write(out('-manifest-proof.json'), proof)
+        print(json.dumps({'manifestProof': pin(out('-manifest-proof.json')),
+                          'androidDevelopmentMapUrl': map_url}))
+    else:
+        proof = read(out('-manifest-proof.json'))
+        assert proof['format'] == MANIFEST_FORMAT and proof['status'] == MANIFEST_STATUS
+        assert proof['sourceCommit'] == COMMIT and proof['sourceSnapshot'] == pin(SNAPSHOT)
+        assert proof['nativeSourceManifest'] == pin(NATIVE_SOURCE) and proof['producer'] == pin(__file__)
+        for key, suffix in [('context', '-http-context.json'), ('manifest', '-manifest.json'),
+                            ('responseHeaders', '-manifest-headers.txt'), ('httpObservation', '-manifest-http.txt')]:
+            assert proof[key] == pin(out(suffix)), 'Manifest-stage artifact changed: ' + key
+        assert proof['actualManifestProjectRoot'] == str(ROOT)
+        assert proof['launchAssetUrl'] == launch and proof['androidDevelopmentMapUrl'] == map_url
+        assert proof['actualDeviceLoadAccepted'] is False and proof['nativeActionsPerformed'] == 0
+        assert out('-map-url.txt').read_text() == map_url + '\n'
+        checked_http(out('-android-dev.map'), out('-android-dev-map-headers.txt'),
+                     out('-android-dev-map-http.txt'), map_url)
+        mapping = read(out('-android-dev.map'))
+        assert mapping['version'] == 3 and len(mapping['sources']) == len(mapping['sourcesContent'])
+        expected = {name for name in source['source'] if name.startswith(('app/', 'src/')) and name.endswith(('.ts', '.tsx'))}
+        assert len(expected) == 335
+        mapped = {}
+        root_prefix = str(ROOT) + '/'
+        for name, content in zip(mapping['sources'], mapping['sourcesContent']):
+            if '/node_modules/' in name:
+                continue
+            if name.startswith(root_prefix):
+                relative = name[len(root_prefix):]
+            elif name.startswith(('/app/', '/src/')):
+                relative = name[1:]
+            elif name.startswith(('app/', 'src/')):
+                relative = name
+            else:
+                assert not (name.startswith('/workspace/') and ('/app/' in name or '/src/' in name)), 'Foreign application source: ' + name
+                continue
+            if not relative.startswith(('app/', 'src/')):
+                continue
+            assert relative in expected and relative not in mapped and isinstance(content, str), relative
+            digest = sha(content.encode())
+            assert digest == source['source'][relative], 'Stale actual development map: ' + relative
+            mapped[relative] = digest
+        assert len(mapped) == 334 and expected - mapped.keys() == {'src/progression/types.ts'}
+        transform = cache / 'metro-cache'
+        assert transform.is_dir() and not transform.is_symlink()
+        files = [path for path in sorted(transform.rglob('*')) if path.is_file()]
+        assert files and all(not path.is_symlink() for path in files)
+        assert all(path.stat().st_mtime_ns >= context['processStartLowerUnixNs'] for path in files)
+        inventory = [{'path': str(path.relative_to(cache)), 'bytes': path.stat().st_size,
+                      'mtimeNs': path.stat().st_mtime_ns} for path in files]
+        created = [path for path in files if path.stat().st_mtime_ns >= context['requestStartedAtUnixNs']]
+        assert observe_process(context['actualMetro']['pid']) == context['actualMetro']
+        checked_source()
+        result = {'format': 'dreams-c39-ui-native-actual-development-map-proof-v1', 'status': 'passed',
+                  'sourceCommit': COMMIT, 'sourceSnapshot': pin(SNAPSHOT), 'nativeSourceManifest': pin(NATIVE_SOURCE),
+                  'sourceFilesVerifiedBeforeAndAfter': 703, 'sourceMap': pin(out('-android-dev.map')),
+                  'sourceMapResponseHeaders': pin(out('-android-dev-map-headers.txt')),
+                  'sourceMapHttpObservation': pin(out('-android-dev-map-http.txt')),
+                  'manifestProof': pin(out('-manifest-proof.json')), 'actualHttpManifest': pin(out('-manifest.json')),
+                  'actualHttpManifestHeaders': pin(out('-manifest-headers.txt')), 'actualAndroidDevelopmentMapUrl': map_url,
+                  'mappedAppSourceCount': len(mapped), 'mappedAppSourceFiles': mapped,
+                  'unmappedTypeOnlyFiles': ['src/progression/types.ts'],
+                  'uniqueMetroCache': {'directory': str(cache), 'actualMetro': context['actualMetro'],
+                                       'before': context['cacheFilesBefore'], 'transformCacheExistedBefore': context['transformCacheExistedBefore'],
+                                       'cacheFreshnessScope': context['cacheFreshnessScope'], 'processStartLowerUnixNs': context['processStartLowerUnixNs'],
+                                       'allTransformsOnOrAfterMetroStartLowerBound': True, 'transformFileCountAfter': len(files),
+                                       'filesCreatedDuringHttpRequests': len(created),
+                                       'transformInventorySha256': sha(json.dumps(inventory, sort_keys=True, separators=(',', ':')).encode()),
+                                       'tmpdirAttribution': context['tmpdirAttribution']},
+                  'context': pin(out('-http-context.json')), 'producer': pin(__file__),
+                  'actualMetroLogAtVerify': pin(context['actualMetroLogAtPrepare']['file']),
+                  'actualDeviceLoadAccepted': False, 'nativeActionsPerformed': 0, 'gameRuntimeProjected': False,
+                  'checkpointWorldsDecoded': 0, 'captureDatabasesOpened': 0,
+                  'scope': 'Actual local Expo manifest and Android DEVELOPMENT map; all334 runtime app/src match the703-file frozen UI snapshot. Cache observation is scoped to the actual root-owned Metro. No HBC-map substitution, device/app-load, gameplay, SQLite, cold, visual, physical or standalone acceptance. This verifier imports no game/runtime.'}
+        write(out('-map-proof.json'), result)
+        print(json.dumps({'status': 'passed', 'proof': pin(out('-map-proof.json')),
+                          'mappedAppSourceCount': len(mapped), 'actualDeviceLoadAccepted': False}))

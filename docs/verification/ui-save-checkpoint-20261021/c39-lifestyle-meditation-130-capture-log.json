@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "name": "lifestyle-meditation-130",
+  "events": [
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-native-ui.py",
+        "inspect",
+        "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/ui"
+      ],
+      "returncode": 0,
+      "stdout": "[('', 'Back', '[16,24][60,85]'), ('', 'Exercise. A session, class or personal trainer', '[32,281][358,382]'), ('', 'Diet', '[16,414][102,472]'), ('', 'Sleep', '[110,414][211,472]'), ('', 'Meditation', '[219,414][374,472]'), ('ON', 'Regular mindfulness', '[310,547][358,595]'), ('', 'Meditate', '[32,607][358,665]'), ('', 'Work on a Habit', '[32,677][358,735]'), ('', 'Life', '[0,740][98,796]'), ('', 'Assets', '[98,740][195,796]'), ('', 'Relationships', '[195,740][293,796]'), ('', 'Activities', '[293,740][390,796]')]\n",
+      "stderr": "",
+      "at": "2026-10-21T09:22:48.407900+00:00"
+    },
+    {
+      "argv": [
+        "python3",
+        "/tmp/dreams-copy-native-db.py",
+        "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/database"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/dreams-c39-ui-native-captures/lifestyle-meditation-130/database\n",
+      "stderr": "",
+      "at": "2026-10-21T09:22:49.809126+00:00"
+    }
+  ]
+}
