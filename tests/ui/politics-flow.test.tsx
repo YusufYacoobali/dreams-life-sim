@@ -34,6 +34,9 @@ test('native campaign failure rolls back registration and the rival; retry, real
     await mockStore.getState().bootstrap();
     const view = render(frame(<Politics />));
     expect(encodeWorld(mockStore.getState().world!)).toBe(encodeWorld(initial));
+    expect(screen.getByRole('radio', { name: /^Education\./, checked: true })).toBeOnTheScreen();
+    expect(screen.getByRole('radio', { name: /^Balanced Campaign\./, checked: true })).toBeOnTheScreen();
+    expect(screen.getByText('Annual pay only if elected')).toBeOnTheScreen();
     fireEvent.press(screen.getByRole('button', { name: 'Review Candidacy' }));
     sqlite.exec("CREATE TRIGGER fail_campaign BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Start Campaign' })); });

@@ -31,6 +31,7 @@ type Domain = 'politics' | 'music' | 'equipment';
 const world = () => mockStore.getState().world!;
 const frame = (domain: Domain) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{domain === 'politics' ? <Politics /> : domain === 'music' ? <MusicStudio /> : <CreatorStudio />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const pick = async (name: RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const acknowledge = (input: World) => resolveCommand(input, { type: 'acknowledge', resultId: input.pending!.id }, true);
 const prepare = (domain: Domain) => domain === 'politics' ? checkpoints.unpackCheckpoint(decodeSave(JSON.stringify(electionArchive)).snapshots[0].payload, true) : decodeSave(JSON.stringify(domain === 'music' ? musicArchive : studioArchive)).world;
@@ -51,13 +52,13 @@ async function setup(domain: Domain) {
 const title = (domain: Domain) => domain === 'politics' ? 'Update your campaign plan?' : domain === 'music' ? 'Record Another Unfinished Song?' : 'Change your setup?';
 const confirm = (domain: Domain) => domain === 'politics' ? 'Set Campaign Plan' : domain === 'music' ? 'Start Recording' : 'Update Setup';
 async function openReview(domain: Domain): Promise<GameCommand> {
-  if (domain === 'politics') { await press(/^Healthcare\./); await press(/^Public Profile\./); await press('Review Campaign Plan'); return { type: 'campaign-plan', electionId: world().elections[0].id, platform: 'health', effort: 'publicity' }; }
-  if (domain === 'music') { fireEvent.changeText(screen.getByLabelText('Music release title'), 'Another Unfinished Song'); await press(/^Album\./); await press(/^Classical\./); await press('Review Recording'); return { type: 'record-music', title: 'Another Unfinished Song', genre: 'classical', format: 'album', quotedCost: recordingQuote(world(), 'album').cost }; }
+  if (domain === 'politics') { await pick(/^Healthcare\./); await pick(/^Public Profile\./); await press('Review Campaign Plan'); return { type: 'campaign-plan', electionId: world().elections[0].id, platform: 'health', effort: 'publicity' }; }
+  if (domain === 'music') { fireEvent.changeText(screen.getByLabelText('Music release title'), 'Another Unfinished Song'); await pick(/^Album\./); await pick(/^Classical\./); await press('Review Recording'); return { type: 'record-music', title: 'Another Unfinished Song', genre: 'classical', format: 'album', quotedCost: recordingQuote(world(), 'album').cost }; }
   await press(/^Use no laptop/); return { type: 'creator-equipment', studioId: world().creatorStudios[0].id, laptopId: null, cameraId: null };
 }
 function expectDraft(domain: Domain) {
-  if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveDisplayValue('Another Unfinished Song'); expect(screen.getByRole('button', { name: /^Album\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Classical\./ })).toHaveTextContent(/Selected/); }
-  if (domain === 'politics') { expect(screen.getByRole('button', { name: /^Healthcare\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Public Profile\./ })).toHaveTextContent(/Selected/); }
+  if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveDisplayValue('Another Unfinished Song'); expect(screen.getByRole('radio', { name: /^Album\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Classical\./, checked: true })).toHaveTextContent(/Selected/); }
+  if (domain === 'politics') { expect(screen.getByRole('radio', { name: /^Healthcare\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Public Profile\./, checked: true })).toHaveTextContent(/Selected/); }
 }
 
 test.each(['politics', 'music', 'equipment'] as const)('genuine %s context keeps the exact reviewed choice after all-table rollback, retries warm, cold and acknowledges once', async domain => {
@@ -82,8 +83,8 @@ test.each(['politics', 'music', 'equipment'] as const)('%s held save blocks dupl
   try {
     const before = context.rows(), initial = world(), view = render(frame(domain)), command = await openReview(domain), expected = resolveCommand(initial, command, true), release = context.pauseNextSave(); await press(confirm(domain));
     expect(modal().getByRole('button', { name: confirm(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true }); expect(modal().getByRole('button', { name: 'Never mind' })).toHaveProp('accessibilityState', { disabled: true, busy: false });
-    if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveProp('editable', false); for (const name of [/^Album\./, /^Classical\./]) expect(screen.getByRole('button', { name })).toBeDisabled(); }
-    if (domain === 'politics') for (const name of [/^Healthcare\./, /^Public Profile\./]) expect(screen.getByRole('button', { name })).toBeDisabled();
+    if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveProp('editable', false); for (const name of [/^Album\./, /^Classical\./]) expect(screen.getByRole('radio', { name, checked: true })).toBeDisabled(); }
+    if (domain === 'politics') for (const name of [/^Healthcare\./, /^Public Profile\./]) expect(screen.getByRole('radio', { name, checked: true })).toBeDisabled();
     await press(confirm(domain)); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(modal().getByText(title(domain))).toBeOnTheScreen(); expect(context.rows()).toEqual(before); expect(world()).toEqual(initial);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); view.unmount();
   } finally { context.close(); }
@@ -104,10 +105,10 @@ test.each(['politics', 'music'] as const)('%s actual new-life/select round trip 
   try {
     const view = render(frame(domain)); await openReview(domain); const oldPerson = world().activePersonId, oldLife = world().id;
     await act(async () => { expect(await mockStore.getState().startLife(randomCreation(43), 43)).toBe(true); }); expect(world().id).not.toBe(oldLife); expect(world().activePersonId).toBe(oldPerson); expect(screen.queryByText(title(domain))).toBeNull();
-    if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveDisplayValue(''); expect(screen.getByRole('button', { name: /^Single\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Folk\./ })).toHaveTextContent(/Selected/); }
-    else { expect(screen.getByRole('button', { name: /^Education\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Balanced Campaign\./ })).toHaveTextContent(/Selected/); }
+    if (domain === 'music') { expect(screen.getByLabelText('Music release title')).toHaveDisplayValue(''); expect(screen.getByRole('radio', { name: /^Single\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Folk\./, checked: true })).toHaveTextContent(/Selected/); }
+    else { expect(screen.getByRole('radio', { name: /^Education\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Balanced Campaign\./, checked: true })).toHaveTextContent(/Selected/); }
     await act(async () => { expect(await mockStore.getState().selectLife(oldLife)).toBe(true); }); const before = context.rows(); expect(screen.queryByText(title(domain))).toBeNull();
-    if (domain === 'music') expect(screen.getByLabelText('Music release title')).toHaveDisplayValue(''); else { expect(screen.getByRole('button', { name: /^Education\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Focus on Outreach\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: 'Review Campaign Plan' })).toBeDisabled(); }
+    if (domain === 'music') expect(screen.getByLabelText('Music release title')).toHaveDisplayValue(''); else { expect(screen.getByRole('radio', { name: /^Education\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Focus on Outreach\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: 'Review Campaign Plan' })).toBeDisabled(); }
     view.rerender(frame(domain)); expect(context.rows()).toEqual(before); view.unmount();
   } finally { context.close(); }
 });
@@ -116,7 +117,7 @@ test('a real campaign withdrawal resets the ended campaign draft to a new candid
   const context = await setup('politics');
   try {
     const view = render(frame('politics')); await openReview('politics'); await press('Never mind'); await press(/^Withdraw from the Election/); await press('Withdraw Candidacy'); expect(world().elections[0].candidates[0].status).toBe('withdrawn'); await press('Continue');
-    const before = context.rows(); expect(screen.getByRole('button', { name: /^Education\./ })).toHaveTextContent(/Selected/); expect(screen.getByRole('button', { name: /^Balanced Campaign\./ })).toHaveTextContent(/Selected/); expect(screen.queryByRole('button', { name: 'Review Campaign Plan' })).toBeNull(); view.rerender(frame('politics')); expect(context.rows()).toEqual(before); view.unmount();
+    const before = context.rows(); expect(screen.getByRole('radio', { name: /^Education\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.getByRole('radio', { name: /^Balanced Campaign\./, checked: true })).toHaveTextContent(/Selected/); expect(screen.queryByRole('button', { name: 'Review Campaign Plan' })).toBeNull(); view.rerender(frame('politics')); expect(context.rows()).toEqual(before); view.unmount();
   } finally { context.close(); }
 });
 
