@@ -95,7 +95,7 @@ test('an archived actor earns Athletics through paid months, signs a real team, 
     const initial = world(), before = context.rows(); expect(Object.keys(before)).toHaveLength(8); view = render(frame());
     expect(screen.getByText('Athletics skill of 60% is required')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review Tryout' })).toBeDisabled(); await press('Review Tryout');
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'select-career', kind: 'athlete', quotedAnnualPay: careerPayQuote(initial, 'athlete') })).toBe(false); }); expect(world()).toBe(initial); expect(context.rows()).toEqual(before);
-    view.rerender(frame(true)); await press('Athletics'); await press(/^Coached Sessions\./); await press('Review Training Routine');
+    view.rerender(frame(true)); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Athletics\./ })); }); await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Coached Sessions\./ })); }); await press('Review Training Routine');
     expect(modal().getByText(formatMoney({ minor: coachingCost(world()), currency: 'USD' }))).toBeOnTheScreen(); await confirm('Set Training Routine'); await press('Continue');
     expect(person().skills.sport).toBe(0); expect(person().training).toMatchObject({ skill: 'sport', mode: 'coached', months: 0, fees: 0n }); view.unmount(); view = undefined;
     // Preregistered bounded preparation: at most four ordinary years, no monthly helper or saved-world edit.
