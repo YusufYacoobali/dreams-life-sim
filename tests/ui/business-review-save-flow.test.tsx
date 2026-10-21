@@ -72,7 +72,7 @@ test.each(['startup', 'funding'] as const)('%s review survives exact all-table r
     const command: GameCommand = startup ? { type: 'start-business', kind: 'retail', name: 'Reviewed Retail', operation: 'manager', quotedCapital: quote.capital } : { type: 'fund-business', businessId: company.id, amount: 12345n };
     const expected = resolveCommand(initial, command, true), confirm = startup ? 'Start Business' : 'Fund Business', title = startup ? 'Start Reviewed Retail?' : 'Invest more capital?';
     let view = render(frame(startup));
-    if (startup) { await press(/^Retail Shop\./); await edit('Business name', '  Reviewed Retail  '); }
+    if (startup) { await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', '  Reviewed Retail  '); }
     else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); }
     const launch = startup ? 'Review Startup' : 'Review Funding';
     const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); };
@@ -85,7 +85,7 @@ test.each(['startup', 'funding'] as const)('%s review survives exact all-table r
     expect(screen.getByRole('button', { name: launch })).toBeDisabled(); expect(modal().getByRole('button', { name: confirm })).toBeDisabled(); expect(modal().getByRole('button', { name: 'Never mind' })).toBeDisabled();
     expect(screen.getAllByRole('button', { busy: true })).toHaveLength(1); expect(modal().getByRole('button', { name: confirm, busy: true })).toBeOnTheScreen();
     expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('editable', false);
-    if (startup) { expect(screen.getByRole('button', { name: /^Employ a Manager\./ })).toBeDisabled(); expect(screen.getByRole('button', { name: /^Coffee Shop\./ })).toBeDisabled(); }
+    if (startup) { expect(screen.getByRole('radio', { name: /^Employ a Manager\./, checked: true })).toBeDisabled(); expect(screen.getByRole('radio', { name: /^Coffee Shop\./, checked: false })).toBeDisabled(); }
     else { expect(screen.getByRole('button', { name: 'Review Distribution' })).toBeDisabled(); expect(screen.getByRole('button', { name: /^125% of Standard Price/ })).toBeDisabled(); }
     await press(confirm); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expectTerms(); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(screen.queryByText(title)).toBeNull(); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
@@ -180,8 +180,8 @@ test('an ordinary approved relocation invalidates the old startup quote while an
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); });
     const settled = world(), settledRows = context.rows(), newQuote = businessStartupQuote(settled, 'cafe');
     expect(newQuote.currency).toBe('JPY');
-    expect(screen.getByText('Startup capital: ' + formatMoney({ minor: newQuote.capital, currency: newQuote.currency }))).toBeOnTheScreen();
-    expect(screen.getByText('Registration: ' + formatMoney({ minor: newQuote.registration, currency: newQuote.currency }))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Company capital: ' + formatMoney({ minor: newQuote.capital, currency: newQuote.currency }))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Registration fee: ' + formatMoney({ minor: newQuote.registration, currency: newQuote.currency }))).toBeOnTheScreen();
     // This real move leaves insufficient cash for the Japanese startup. Keep
     // that refusal rather than arranging funds just to open another review.
     expect(screen.getByText('Your available balance cannot fund this startup')).toBeOnTheScreen();

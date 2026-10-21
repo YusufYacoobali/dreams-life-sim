@@ -34,6 +34,7 @@ const caption = 'A carefully kept original afternoon.', biography = 'Original bi
 const world = () => mockStore.getState().world!;
 const frame = (domain: Domain, content?: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content ?? (domain === 'post' ? <CreatePost /> : domain === 'profile' ? <SocialProfile /> : <Fame />)}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const change = (name: string, value: string) => fireEvent.changeText(screen.getByLabelText(name), value);
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const confirmLabel = (domain: Domain) => domain === 'post' ? 'Publish Post' : domain === 'profile' ? 'Save Profile' : 'Confirm';
@@ -41,12 +42,12 @@ const reviewTitle = (domain: Domain) => domain === 'post' ? 'Publish this post?'
 const commandFor = (domain: Domain): GameCommand => domain === 'post' ? { type: 'publish-post', accountId: mockAccountId, kind: 'photo', intent: 'polished', caption, sponsored: false, liveMinutes: 0 } : domain === 'profile' ? { type: 'edit-social', accountId: mockAccountId, handle: 'reviewed_creator', bio: biography } : { type: 'public-action', action: 'event' };
 const acknowledge = (input: World) => resolveCommand(input, { type: 'acknowledge', resultId: input.pending!.id }, true);
 async function prepare(domain: Domain) {
-  if (domain === 'post') { change('Post caption', caption); await press(/^Produce a Polished Post\./); await press('Review Post'); }
+  if (domain === 'post') { change('Post caption', caption); await choose(/^Produce a Polished Post\./); await press('Review Post'); }
   else if (domain === 'profile') { await press(/^Edit Profile$/); change('Edit social handle', 'reviewed_creator'); change('Edit profile biography', biography); await press('Review Profile Changes'); }
   else await press(/^Attend an Event\./);
 }
 function draftRetained(domain: Domain) {
-  if (domain === 'post') { expect(screen.getByLabelText('Post caption')).toHaveProp('value', caption); expect(screen.getByRole('button', { name: /^Produce a Polished Post\./ })).toHaveProp('accessibilityLabel', expect.stringContaining('Selected')); }
+  if (domain === 'post') { expect(screen.getByLabelText('Post caption')).toHaveProp('value', caption); expect(screen.getByRole('radio', { name: /^Produce a Polished Post\./, checked: true })).toHaveProp('accessibilityLabel', expect.stringContaining('Selected')); }
   if (domain === 'profile') { expect(screen.getByLabelText('Edit social handle')).toHaveProp('value', 'reviewed_creator'); expect(screen.getByLabelText('Edit profile biography')).toHaveProp('value', biography); }
 }
 async function setup() {
@@ -96,7 +97,7 @@ test.each(['post', 'profile', 'fame'] as const)('%s preserves the reviewed comma
     const callbacks = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
     const release = context.pauseNextSave(); await act(async () => { fireEvent.press(screen.getByRole('button', { name: confirmLabel(domain) })); void callbacks.onChoose('confirm'); callbacks.onCancel(); });
     expect(dispatch).toHaveBeenCalledTimes(1); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true });
-    if (domain === 'post') { expect(screen.getByLabelText('Post caption')).toHaveProp('editable', false); expect(screen.getByRole('button', { name: /^Keep It Authentic\./ })).toBeDisabled(); await press(/^Keep It Authentic\./); }
+    if (domain === 'post') { expect(screen.getByLabelText('Post caption')).toHaveProp('editable', false); expect(screen.getByRole('radio', { name: /^Keep It Authentic\./ })).toBeDisabled(); await choose(/^Keep It Authentic\./); }
     if (domain === 'profile') { expect(screen.getByLabelText('Edit social handle')).toHaveProp('editable', false); expect(screen.getByRole('button', { name: 'Save Posting Routine' })).toHaveProp('accessibilityState', { disabled: true, busy: false }); }
     if (domain === 'fame') { expect(screen.getByRole('button', { name: /^Do an Interview\./ })).toBeDisabled(); await press(/^Do an Interview\./); }
     await press(confirmLabel(domain)); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(modal().getByText(reviewTitle(domain))).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
