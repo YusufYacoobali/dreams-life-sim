@@ -1,0 +1,17 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/astronaut-career-acceptance-flow.test.tsx --testTimeout=90000
+
+  console.info
+    Astronaut archive continuation {"sourceRevision":67,"sourceDate":{"year":2023,"month":1,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"coachedMonths":36,"coachingFees":"144000","preparedScience":72,"selectionAttempts":2,"traineeAnnualPay":"4800000","trainingMonths":24,"trainingResult":"passed","qualifiedDate":{"year":2028,"month":1,"day":1},"qualifiedAnnualPay":"7200000","mission":{"status":"completed","periods":6,"units":108,"distinction":"Meridian Research Distinction"},"leaveContractMonths":30,"serviceGross":"13200000","finalDate":{"year":2030,"month":1,"day":1},"finalRevision":109,"ordinaryPreparationAndContinuationCommands":31,"originalFixtureSha256":"de0ab866bf648b0be9c0303734d849d22c21d94b450b5066482f71e0e4822fef"}
+
+      at Object.info (tests/ui/astronaut-career-acceptance-flow.test.tsx:127:13)
+
+PASS tests/ui/astronaut-career-acceptance-flow.test.tsx (8.645 s)
+  ✓ the genuine computing graduate earns astronaut eligibility and qualification, records actual flight work, then leaves without future service pay (7249 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        8.741 s, estimated 15 s
+Ran all test suites within paths "tests/ui/astronaut-career-acceptance-flow.test.tsx".

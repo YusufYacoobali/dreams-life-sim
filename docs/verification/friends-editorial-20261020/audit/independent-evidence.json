@@ -1,0 +1,103 @@
+{
+  "auditCommit": "1a90884119b2c4f8989d13f044f8e69101169b11",
+  "root": "/workspace/dreams-worktrees/c36-compatibility-audit",
+  "capturedCommit": "195e77a0b6817d40992bffc587dd2018ed5ba275",
+  "capturedAt": "2026-10-20T23:06:55.942Z",
+  "capturedFiles": 606,
+  "changedCapturedFiles": [
+    "app/(game)/statistics.tsx",
+    "app/saved-lives.tsx",
+    "tests/game/editorial-policy.test.ts",
+    "tests/game/story-name-collisions.test.ts"
+  ],
+  "hashes": {
+    "game": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+    "combined": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+    "tool": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e"
+  },
+  "annual": {
+    "event": "sweep-complete",
+    "count": 120,
+    "startSeed": 0,
+    "completed": 120,
+    "stateMode": "validated immutable",
+    "versions": {
+      "world": 35,
+      "engine": 36,
+      "content": 11
+    },
+    "gameSourceHash": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+    "toolSourceHash": "b57b6bb3befdba4e776217b3ebf79c1fe4892f2cd7a260fa9b7e928bca75e20e",
+    "countryCounts": {
+      "AU": 10,
+      "IT": 11,
+      "BR": 12,
+      "ZA": 10,
+      "ES": 12,
+      "US": 13,
+      "CA": 10,
+      "GB": 10,
+      "DE": 12,
+      "FR": 6,
+      "IN": 6,
+      "JP": 8
+    },
+    "ageRange": [
+      40,
+      98
+    ],
+    "maxPeople": 27,
+    "maxLedgerRows": 65779,
+    "elapsedMs": 651254,
+    "rawLines": 122,
+    "countries": 12,
+    "uniqueWorldHashes": 120,
+    "commands": 32037
+  },
+  "focused": {
+    "suites": 13,
+    "tests": 66,
+    "seconds": 68.762,
+    "timeoutMs": 30000
+  },
+  "diagnostic": {
+    "suitesFailed": 2,
+    "suitesPassed": 11,
+    "testsFailed": 1,
+    "testsPassed": 64,
+    "seconds": 72.324,
+    "reasons": [
+      "default Jest timeout5000ms",
+      "nonexistent model-career-exit-flow.test.tsx CLI argument"
+    ]
+  },
+  "evidenceBounds": [
+    "Raw outputs and source inspected only; no simulations/tests/native actions rerun",
+    "Annual policy sets newborn acknowledgement before pure-engine progression; not SQLite/native, optional-career/friendship, full-replay or cold-codec acceptance",
+    "Final focused suite is overlapping evidence, not added to the failed diagnostic or another whole-regression count",
+    "Initial606-file source capture predates later UI/test/docs changes and is not final whole-app identity",
+    "Process exit0 is coordinator-attested; raw completion summaries are independently inspected"
+  ],
+  "artifacts": {
+    "dreams-friends-editorial-120.ndjson": {
+      "bytes": 37778,
+      "sha256": "7edbed3621aebe42477d696688e1928fdb4145c5668ad064131b682f3e3ed4d9"
+    },
+    "dreams-friends-editorial-120.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dreams-friends-editorial-integration-focused-initial-failed.out": {
+      "bytes": 3216,
+      "sha256": "ed0d91d34593a80aceb5631209b18b367f9b3118f314c2aa1e098f9e8a1c9e34"
+    },
+    "dreams-friends-editorial-integration-focused-final.out": {
+      "bytes": 2637,
+      "sha256": "7ec320455cfc8038bdca8a52580c8661ee0d87ed63d2db60747a300a85f6eafb"
+    },
+    "dreams-friends-editorial-initial-source.json": {
+      "bytes": 66541,
+      "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+    }
+  }
+}

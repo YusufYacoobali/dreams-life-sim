@@ -1,0 +1,83 @@
+{
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "root": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "inputs": [
+    {
+      "file": "tests/fixtures/v25-content4-bubble-archive.json",
+      "bytes": 18099,
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v27-leisure-archive.json",
+      "bytes": 140456,
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "tests/fixtures/v28-native-teen-archive.json",
+      "bytes": 575472,
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82",
+      "byteIdenticalToSourceCommit": true
+    },
+    {
+      "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+      "bytes": 794714,
+      "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9",
+      "byteIdenticalToSourceCommit": true
+    }
+  ],
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-friends-editorial-accepted-source.json",
+    "bytes": 67034,
+    "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+  },
+  "gitCoordinatorProofs": {
+    "head": {
+      "file": "/tmp/dreams-friends-editorial-accepted-source-head.txt",
+      "bytes": 41,
+      "sha256": "353cb20e8f98e5736aef67466ae3a6ccf209cb1b8cd9bbb76da376242d441d0d"
+    },
+    "status": {
+      "file": "/tmp/dreams-friends-editorial-accepted-source-status.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tree": {
+      "file": "/tmp/dreams-friends-editorial-accepted-source-tree.bin",
+      "bytes": 175277,
+      "sha256": "a1ce32cf381405047fb23a21e08789951c5723259efdeb05adb7637be3a1139f"
+    }
+  },
+  "gitBlobs": [
+    {
+      "file": "tests/fixtures/v25-content4-bubble-archive.json",
+      "mode": "100644",
+      "gitBlobSha1": "9b11aaa9fe67fab6d5881cedccb43a07c8e519fa",
+      "bytes": 18099,
+      "sha256": "62eb00b7031c2d7f866e784ccb59462069cfc58be0e0a8fa8cac34fe5b9ddcc4"
+    },
+    {
+      "file": "tests/fixtures/v27-leisure-archive.json",
+      "mode": "100644",
+      "gitBlobSha1": "5d8b083eab5a91a623789d02ad977a5b9dfe4f15",
+      "bytes": 140456,
+      "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a"
+    },
+    {
+      "file": "tests/fixtures/v28-native-teen-archive.json",
+      "mode": "100644",
+      "gitBlobSha1": "c4263ac1141167d2a702c3ee1b0d4639b860b24e",
+      "bytes": 575472,
+      "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82"
+    },
+    {
+      "file": "docs/verification/action-latency-inputs-v25-20261019.json",
+      "mode": "100644",
+      "gitBlobSha1": "3545385fc9c932d15a9bebf7e657ae6b979bae4b",
+      "bytes": 794714,
+      "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9"
+    }
+  ],
+  "scope": "Four unchanged fixed inputs verified against captured actual accepted-source Git blob IDs and exact SHA256. Actual head/status/tree captures are pinned by immutable accepted610 snapshot; no child process, timing or native command is executed."
+}

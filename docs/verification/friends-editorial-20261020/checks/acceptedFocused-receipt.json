@@ -1,0 +1,39 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "sourceSnapshot": "/tmp/dreams-friends-editorial-accepted-source.json",
+  "sourceSnapshotSha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5",
+  "root": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "argv": [
+    "npm",
+    "test",
+    "--",
+    "--ci",
+    "--testTimeout=30000",
+    "--runTestsByPath",
+    "tests/game/entrepreneur-policy.test.ts",
+    "tests/game/editorial-context-acceptance.test.ts",
+    "tests/ui/astronaut-career-acceptance-flow.test.tsx",
+    "tests/ui/athlete-career-acceptance.test.tsx"
+  ],
+  "startedAt": "2026-10-20T23:51:20.489367+00:00",
+  "before": {
+    "files": 610,
+    "snapshotSha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-20T23:52:08.086941+00:00",
+  "elapsedSeconds": 47.598,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-friends-editorial-accepted-focused.out",
+    "bytes": 5609,
+    "sha256": "71aea6de8934a3ffbcea35d5303b66ce2504dc6abdf0c5a4adeba70e3aae0178"
+  },
+  "after": {
+    "files": 610,
+    "snapshotSha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5",
+    "status": "exact"
+  }
+}

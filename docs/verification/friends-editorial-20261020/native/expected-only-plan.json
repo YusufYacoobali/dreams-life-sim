@@ -1,0 +1,341 @@
+{
+  "format": "dreams-c36-best-friend-native-plan-v1",
+  "status": "expected-only-not-native-acceptance",
+  "complete": false,
+  "scope": "One fixed ordinary immutable engine proposal to genuine eligible Morgan from actual C35 Nia138, then its actual result acknowledgement. Exactly two resolveCommand calls. No alternate choice, seed/stat/funds/date/world override, random peeking, outcome search, reroll, SQL write or native input. All projected outcomes remain expected until independently captured native databases match.",
+  "source": {
+    "root": "/workspace/dreams-worktrees/friends-native-verify",
+    "projectionBaseCommit": "1a90884119b2c4f8989d13f044f8e69101169b11",
+    "before": {
+      "game": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+      "gameAndPersistence": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+      "filesVerified": 157,
+      "pins": {
+        "file": "/tmp/dreams-friends-editorial-initial-source.json",
+        "bytes": 66541,
+        "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+      }
+    },
+    "after": {
+      "game": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+      "gameAndPersistence": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+      "filesVerified": 157,
+      "pins": {
+        "file": "/tmp/dreams-friends-editorial-initial-source.json",
+        "bytes": 66541,
+        "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+      }
+    },
+    "tools": [
+      {
+        "file": "/workspace/dreams-worktrees/friends-native-verify/tools/friends-native-support.cjs",
+        "bytes": 6790,
+        "sha256": "b0e8bcba35829b6b4e79ce660fd04f9f3853cee6fc54b5b19f3b08bc174a204a"
+      },
+      {
+        "file": "/workspace/dreams-worktrees/friends-native-verify/tools/project-friends-native.cjs",
+        "bytes": 6704,
+        "sha256": "b322a603f7591d4edcd53d89c923b5f65ba834f63710bf51ade148b8888f6e09"
+      },
+      {
+        "file": "/workspace/dreams-worktrees/friends-native-verify/tools/verify-friends-native.cjs",
+        "bytes": 9706,
+        "sha256": "b7932be8b8284e69b035a1d08e71202b36f9ff0a971f36964e5222bdefd6db87"
+      }
+    ],
+    "node": "v24.19.0",
+    "typescript": "6.0.3",
+    "versions": {
+      "world": 35,
+      "engine": 36,
+      "content": 11,
+      "reader": 15,
+      "checkpoint": "v4"
+    }
+  },
+  "input": {
+    "dbPath": "/tmp/dreams-opening-next-native-final138-db/dreams.db",
+    "files": [
+      {
+        "file": "/tmp/dreams-opening-next-native-final138-db/dreams.db",
+        "bytes": 3805184,
+        "sha256": "d89355bf9c69e4c8e413080dc6478ef39a230ea2287977abeaaecaae0da1da81"
+      },
+      {
+        "file": "/tmp/dreams-opening-next-native-final138-db/dreams.db-wal",
+        "bytes": 4733912,
+        "sha256": "ccd6c71ee84fab77c3bf0915d4e7c140be373c8519b9b8730ac37486f38f8bf7"
+      }
+    ],
+    "reader": 14,
+    "tables": {
+      "backups": {
+        "rows": 7,
+        "sha256": "8e52dd39fc6c26f365919d18304c059d1baa46b3604e00470bc08e91a567a584"
+      },
+      "branches": {
+        "rows": 1,
+        "sha256": "fbca8816f9bd06ea8d170416427ea734d77405d1c61fc324d0f91306b745f370"
+      },
+      "lives": {
+        "rows": 7,
+        "sha256": "70d23515f07bdd76c615172410e4fad9880b09965c7161d0c6bf0d97530442c5"
+      },
+      "preferences": {
+        "rows": 2,
+        "sha256": "439c7df07be842e2d88a5c4e3901fef292b80bc8317269fc0b356d8c055d0413"
+      },
+      "receipts": {
+        "rows": 145,
+        "sha256": "f3fa9f04eb9452e4a6b8c8d6f0c513dde98f168a824c78b4c1ae36f306e26b6b"
+      },
+      "restore_receipts": {
+        "rows": 1,
+        "sha256": "010397ecad34ae345dbefdd296eb4734aa3a81fe3c786f3ded62009733687ce7"
+      },
+      "snapshot_metadata": {
+        "rows": 66,
+        "sha256": "3847a02861aa0ffe07c81bede180502b2638f767292377e8b5c2e20a7a48c5b9"
+      },
+      "snapshots": {
+        "rows": 66,
+        "sha256": "9037634b6d1cf5b133816f83ba1e75855a40dd73b863f8428f724d152d4208b5"
+      }
+    },
+    "activeLife": "life_native_adult_friend_v30_s0",
+    "rawNiaPayloadSha256": "d10799ba09d72d7474544b54f34d41f517da86a0b876dc123cef0010a1f8f981",
+    "migrated": {
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 138,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "f99564d6e743a08ca8fc829076bee1286e60eff1a71acaaeb82c31f7a6b9ece8",
+      "pending": null,
+      "annual": null,
+      "bestFriendships": [],
+      "ledgerRows": 8392,
+      "people": 20
+    },
+    "readiness": {
+      "file": "/tmp/dreams-friends-native-readiness.json",
+      "bytes": 6059,
+      "sha256": "5ec905ef1b5e9f9f27e26db0a1b7bcdc8bb481a4336e6447bde3517b3a530f32"
+    }
+  },
+  "migrationExpectation": {
+    "from": 14,
+    "to": 15,
+    "allEightTablesExact": true,
+    "noEagerPayloadRewrite": true,
+    "noNativeMigrationObservedYet": true
+  },
+  "target": {
+    "personId": "person_npc_15_5",
+    "name": "Morgan Bennett",
+    "relationshipId": "relation_person_player_person_npc_15_5",
+    "bond": 90,
+    "trust": 64,
+    "country": "US",
+    "city": "New York"
+  },
+  "trace": [
+    {
+      "command": {
+        "type": "propose-best-friendship",
+        "lifeId": "life_native_adult_friend_v30_s0",
+        "actorId": "person_player",
+        "personId": "person_npc_15_5",
+        "relationshipId": "relation_person_player_person_npc_15_5",
+        "country": "US",
+        "city": "New York"
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 139,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22",
+      "pending": {
+        "kind": "result",
+        "id": "action_138",
+        "title": "Your best friend",
+        "body": "Morgan agreed to be your best friend. Nobody had a certificate ready.",
+        "illustration": "conversation",
+        "effects": [
+          {
+            "id": "best_friendship_138",
+            "label": "Morgan Bennett",
+            "value": "Best friends",
+            "tone": "positive"
+          }
+        ]
+      },
+      "annual": null,
+      "bestFriendships": [
+        {
+          "id": "best_friendship_138",
+          "ruleVersion": 1,
+          "relationshipId": "relation_person_player_person_npc_15_5",
+          "proposerId": "person_player",
+          "friendId": "person_npc_15_5",
+          "proposed": {
+            "year": 2050,
+            "month": 10,
+            "day": 20
+          },
+          "country": "US",
+          "city": "New York",
+          "strength": 90,
+          "trust": 64,
+          "chance": 95,
+          "roll": 75,
+          "status": "active",
+          "ended": null,
+          "endReason": null,
+          "endedById": null
+        }
+      ],
+      "ledgerRows": 8392,
+      "people": 20,
+      "expectedReceipts": 146
+    },
+    {
+      "command": {
+        "type": "acknowledge",
+        "resultId": "action_138"
+      },
+      "lifeId": "life_native_adult_friend_v30_s0",
+      "personId": "person_player",
+      "name": "Nia Carter",
+      "age": 24,
+      "revision": 140,
+      "date": {
+        "year": 2050,
+        "month": 10,
+        "day": 20
+      },
+      "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e",
+      "pending": null,
+      "annual": null,
+      "bestFriendships": [
+        {
+          "id": "best_friendship_138",
+          "ruleVersion": 1,
+          "relationshipId": "relation_person_player_person_npc_15_5",
+          "proposerId": "person_player",
+          "friendId": "person_npc_15_5",
+          "proposed": {
+            "year": 2050,
+            "month": 10,
+            "day": 20
+          },
+          "country": "US",
+          "city": "New York",
+          "strength": 90,
+          "trust": 64,
+          "chance": 95,
+          "roll": 75,
+          "status": "active",
+          "ended": null,
+          "endReason": null,
+          "endedById": null
+        }
+      ],
+      "ledgerRows": 8392,
+      "people": 20,
+      "expectedReceipts": 147
+    }
+  ],
+  "final": {
+    "lifeId": "life_native_adult_friend_v30_s0",
+    "personId": "person_player",
+    "name": "Nia Carter",
+    "age": 24,
+    "revision": 140,
+    "date": {
+      "year": 2050,
+      "month": 10,
+      "day": 20
+    },
+    "worldSha256": "cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e",
+    "pending": null,
+    "annual": null,
+    "bestFriendships": [
+      {
+        "id": "best_friendship_138",
+        "ruleVersion": 1,
+        "relationshipId": "relation_person_player_person_npc_15_5",
+        "proposerId": "person_player",
+        "friendId": "person_npc_15_5",
+        "proposed": {
+          "year": 2050,
+          "month": 10,
+          "day": 20
+        },
+        "country": "US",
+        "city": "New York",
+        "strength": 90,
+        "trust": 64,
+        "chance": 95,
+        "roll": 75,
+        "status": "active",
+        "ended": null,
+        "endReason": null,
+        "endedById": null
+      }
+    ],
+    "ledgerRows": 8392,
+    "people": 20
+  },
+  "requiredNativePhases": [
+    {
+      "name": "boot138",
+      "commands": 0,
+      "revision": 138
+    },
+    {
+      "name": "review138",
+      "commands": 0,
+      "revision": 138,
+      "sameAs": "boot138"
+    },
+    {
+      "name": "proposal139",
+      "commands": 1,
+      "revision": 139
+    },
+    {
+      "name": "cold-proposal139",
+      "commands": 1,
+      "revision": 139,
+      "sameAs": "proposal139"
+    },
+    {
+      "name": "ack140",
+      "commands": 2,
+      "revision": 140
+    },
+    {
+      "name": "cold-final140",
+      "commands": 2,
+      "revision": 140,
+      "sameAs": "ack140"
+    }
+  ],
+  "inputAllEightRawTablesExact": true,
+  "inputDatabaseAndWalBytesExact": true,
+  "engineCommandsProjected": 2,
+  "proposalAttempts": 1,
+  "nativeCommandsExecuted": 0
+}

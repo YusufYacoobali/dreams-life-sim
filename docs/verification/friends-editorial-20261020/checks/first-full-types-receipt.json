@@ -1,0 +1,32 @@
+{
+  "format": "dreams-coordinator-gate-execution-v1",
+  "sourceCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "sourceSnapshot": "/tmp/dreams-friends-editorial-final-source.json",
+  "sourceSnapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+  "root": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "argv": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "startedAt": "2026-10-20T23:27:48.540289+00:00",
+  "before": {
+    "files": 607,
+    "snapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+    "status": "exact"
+  },
+  "complete": true,
+  "endedAt": "2026-10-20T23:28:08.552777+00:00",
+  "elapsedSeconds": 20.012,
+  "exitCode": 0,
+  "raw": {
+    "file": "/tmp/dreams-friends-editorial-types-final.out",
+    "bytes": 90,
+    "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+  },
+  "after": {
+    "files": 607,
+    "snapshotSha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7",
+    "status": "exact"
+  }
+}

@@ -1,0 +1,17 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/model-career-acceptance-flow.test.tsx --testTimeout=90000
+
+  console.info
+    Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+
+      at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+
+PASS tests/ui/model-career-acceptance-flow.test.tsx (7.293 s)
+  ✓ the unchanged actor archive earns modelling training, signs and completes a real model contract, then leaves durably without future model pay (5876 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        7.395 s, estimated 15 s
+Ran all test suites within paths "tests/ui/model-career-acceptance-flow.test.tsx".

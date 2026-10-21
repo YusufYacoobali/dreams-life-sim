@@ -1,0 +1,124 @@
+{
+  "format": "dreams-c36-action-quiescence-v1",
+  "sourceCommit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+  "sourceSnapshot": {
+    "file": "/tmp/dreams-friends-editorial-accepted-source.json",
+    "bytes": 67034,
+    "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+  },
+  "registeredPlan": {
+    "file": "/tmp/dreams-friends-editorial-actions-plan.json",
+    "bytes": 4922,
+    "sha256": "59e9f29edf48fc731acd2bc926b911e4515a5d589c69987d8d7b1b8f4cbc7b8f"
+  },
+  "readiness": {
+    "file": "/tmp/dreams-friends-editorial-actions-ready.json",
+    "bytes": 1996,
+    "sha256": "31001f5c987f8fd6cdd138ebba29cee7f808d76e4731fc9ae2d745b24fbb90c3"
+  },
+  "ownedProcessManifest": {
+    "file": "/tmp/dreams-friends-editorial-actions-owned-processes.json",
+    "bytes": 1271,
+    "sha256": "ff3283014a4fb7e7a44c21024f87d963f0094e88a488394b93eee17cc7ee9960"
+  },
+  "wrapper": {
+    "file": "/tmp/dreams-friends-editorial-actions-run.py",
+    "bytes": 10768,
+    "sha256": "a7b5bef3f4b596916b657c909c77b7fedef3b2cea338483509713ceb55c3a208"
+  },
+  "wrapperPid": 164696,
+  "nativeAppPidCheckEmpty": true,
+  "nativePidCheckReturnCode": 1,
+  "paused": [
+    {
+      "pid": 100274,
+      "identity": {
+        "role": "qemu",
+        "pid": 100274,
+        "uid": 1000,
+        "comm": "qemu-system-x86",
+        "startTicks": "10566888",
+        "argv": [
+          "/workspace/.cache/android-native-check/sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless",
+          "-avd",
+          "dreams_api24",
+          "-port",
+          "5560",
+          "-no-window",
+          "-no-audio",
+          "-no-boot-anim",
+          "-no-snapshot",
+          "-no-metrics",
+          "-accel",
+          "off",
+          "-gpu",
+          "swiftshader_indirect",
+          "-memory",
+          "1536",
+          "-cores",
+          "2",
+          "-prop",
+          "dalvik.vm.heapsize=384m"
+        ]
+      },
+      "stoppedAt": "2026-10-21T00:24:27.121711+00:00",
+      "stoppedStateVerified": true,
+      "resumedAt": "2026-10-21T00:25:03.218346+00:00",
+      "resumedStateVerified": true
+    },
+    {
+      "pid": 152514,
+      "identity": {
+        "role": "metro",
+        "pid": 152514,
+        "uid": 1000,
+        "comm": "MainThread",
+        "startTicks": "12018140",
+        "argv": [
+          "node",
+          "--dns-result-order=ipv4first",
+          "./node_modules/expo/bin/cli",
+          "start",
+          "--localhost",
+          "--port",
+          "8081",
+          "--max-workers",
+          "1"
+        ]
+      },
+      "stoppedAt": "2026-10-21T00:24:27.121930+00:00",
+      "stoppedStateVerified": true,
+      "resumedAt": "2026-10-21T00:25:03.217250+00:00",
+      "resumedStateVerified": true
+    }
+  ],
+  "argv": [
+    "node",
+    "tools/benchmark-actions.cjs",
+    "--source",
+    "/workspace/dreams-worktrees/integration-friends-editorial",
+    "--profile",
+    "--population",
+    "--workplaces",
+    "--raises"
+  ],
+  "cwd": "/workspace/dreams-worktrees/integration-friends-editorial",
+  "status": "passed",
+  "start": "2026-10-21T00:24:27.121031+00:00",
+  "allOwnedProcessesResumed": true,
+  "benchmarkStartedAt": "2026-10-21T00:24:27.132156+00:00",
+  "benchmarkPid": 164710,
+  "benchmarkExitCode": 0,
+  "benchmarkFinishedAt": "2026-10-21T00:25:03.103063+00:00",
+  "sourceAfterExact": {
+    "status": "source-and-inputs-exact",
+    "benchmarkExecuted": false,
+    "commit": "ed296f91082a96b2fabe8973864bf6dba28344b3",
+    "sourceSnapshot": {
+      "file": "/tmp/dreams-friends-editorial-accepted-source.json",
+      "bytes": 67034,
+      "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+    }
+  },
+  "finish": "2026-10-21T00:25:03.218358+00:00"
+}

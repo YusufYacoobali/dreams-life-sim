@@ -1,0 +1,254 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --ci --testTimeout=30000
+
+PASS tests/game/pets.test.ts
+PASS tests/ui/asset-bank-save-flow.test.tsx (5.884 s)
+PASS tests/ui/education-choice-save-flow.test.tsx (29.815 s)
+PASS tests/game/businesses.test.ts
+PASS tests/ui/feedback-settings-flow.test.tsx
+PASS tests/game/story-lifecycle.test.ts
+PASS tests/game/scholarships.test.ts
+PASS tests/game/travel.test.ts
+PASS tests/game/relocation.test.ts
+PASS tests/game/royalty.test.ts (20.861 s)
+PASS tests/game/legal.test.ts
+PASS tests/game/education-recovery.test.ts (6.863 s)
+PASS tests/ui/profile-will-save-flow.test.tsx
+PASS tests/ui/family-dialog-save-flow.test.tsx
+PASS tests/game/leisure.test.ts
+PASS tests/game/npc-courtships.test.ts
+PASS tests/game/creators.test.ts
+PASS tests/game/services.test.ts (5.362 s)
+PASS tests/game/health-legal-availability.test.ts
+PASS tests/ui/student-loan-rate-flow.test.tsx (11.584 s)
+PASS tests/ui/profile-overview-save-flow.test.tsx
+PASS tests/ui/health-review-save-flow.test.tsx (27.742 s)
+PASS tests/game/workplaces.test.ts
+PASS tests/game/hourly-work.test.ts
+PASS tests/game/social.test.ts
+PASS tests/game/politics.test.ts
+PASS tests/ui/business-review-save-flow.test.tsx
+PASS tests/ui/legal-review-save-flow.test.tsx
+PASS tests/ui/hobby-introduction-save-flow.test.tsx (8.082 s)
+PASS tests/ui/career-plan-context-flow.test.tsx
+PASS tests/game/school-withdrawal.test.ts
+PASS tests/ui/royalty-review-save-flow.test.tsx (5.327 s)
+PASS tests/game/estates.test.ts
+PASS tests/game/foreign-earnings.test.ts
+PASS tests/game/careers.test.ts
+PASS tests/ui/social-review-save-flow.test.tsx
+PASS tests/ui/travel-review-save-flow.test.tsx
+PASS tests/game/story-callbacks.test.ts
+PASS tests/ui/pets-flow.test.tsx
+PASS tests/game/credit.test.ts
+PASS tests/ui/new-life-review-flow.test.tsx
+PASS tests/game/npc-relationships.test.ts
+PASS tests/progression/expanded-progress.test.ts (12.37 s)
+PASS tests/game/everyday-life-stories.test.ts (19.999 s)
+PASS tests/game/health.test.ts
+PASS tests/ui/annual-finances-flow.test.tsx
+PASS tests/game/early-home-stories.test.ts (12.314 s)
+PASS tests/ui/onboarding-flow.test.tsx
+PASS tests/progression/financial-progress.test.ts
+PASS tests/ui/exercise-review-save-flow.test.tsx (16.345 s)
+PASS tests/game/music.test.ts
+PASS tests/game/childhood-stories.test.ts (5.678 s)
+PASS tests/ui/saved-files-flow.test.tsx (18.89 s)
+PASS tests/persistence/people-blocks.test.ts (19.558 s)
+PASS tests/ui/work-routine-save-flow.test.tsx (7.725 s)
+PASS tests/ui/workplace-flow.test.tsx
+PASS tests/game/assets-markets.test.ts
+PASS tests/persistence/action-checkpoints.test.ts (5.731 s)
+PASS tests/game/education-work-finance.test.ts
+PASS tests/ui/progression-continuation-flow.test.tsx (7.133 s)
+PASS tests/game/family.test.ts
+PASS tests/game/school.test.ts
+PASS tests/ui/purchase-confirmation-save-flow.test.tsx
+PASS tests/ui/school-withdrawal-flow.test.tsx
+PASS tests/game/hobby-introductions.test.ts (15.161 s)
+PASS tests/ui/story-callback-flow.test.tsx
+FAIL tests/game/entrepreneur-policy.test.ts
+  ● the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+    -   "content": 10,
+    -   "engine": 35,
+    -   "world": 34,
+    +   "content": 11,
+    +   "engine": 36,
+    +   "world": 35,
+      }
+
+       6 | test('the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection', () => {
+       7 |   const initial = createLife('life_entrepreneur_policy_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
+    >  8 |   expect({ world: initial.schemaVersion, engine: initial.engineVersion, content: initial.contentVersion }).toEqual(expectedVersions);
+         |                                                                                                            ^
+       9 |   expect(parseOptions(['--country', 'US'], ['US', 'CA'])).toEqual({ countries: ['US'], output: undefined });
+      10 |   expect(parseOptions(['--all', '--output', '/tmp/example'], ['US', 'CA'])).toEqual({ countries: ['US', 'CA'], output: '/tmp/example' });
+      11 |   for (const args of [[], ['--seed', '901'], ['--country', 'US', '--all'], ['--country', 'XX'], ['--country', 'US', '--country', 'CA']]) expect(() => parseOptions(args, ['US', 'CA'])).toThrow();
+
+      at Object.toEqual (tests/game/entrepreneur-policy.test.ts:8:108)
+
+PASS tests/ui/career-review-save-flow.test.tsx
+PASS tests/ui/social-criticism-persistence-flow.test.tsx (6.17 s)
+PASS tests/ui/emigration-country-default.test.tsx
+PASS tests/persistence/time-machine.test.ts
+PASS tests/ui/recovery-routine-save-flow.test.tsx (23.46 s)
+PASS tests/game/adult-relationship-stories.test.ts (11.931 s)
+PASS tests/ui/lifetime-statistics-flow.test.tsx (15.542 s)
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/service-context-flow.test.tsx
+PASS tests/persistence/tuple-checkpoints.test.ts (33.643 s)
+PASS tests/game/work-raises.test.ts
+PASS tests/ui/annual-finances-projection.test.ts
+PASS tests/ui/hourly-work-flow.test.tsx
+PASS tests/game/hobby-events.test.ts
+PASS tests/ui/royalty-flow.test.tsx (5.01 s)
+PASS tests/game/relationships.test.ts
+PASS tests/persistence/opening-migration.test.ts (18.15 s)
+PASS tests/ui/school-routine-save-flow.test.tsx (6.768 s)
+PASS tests/ui/relocation-flow.test.tsx
+PASS tests/game/criminal-policy.test.ts (20.293 s)
+PASS tests/game/workplace-stories.test.ts (7.028 s)
+PASS tests/game/job-interviews.test.ts
+PASS tests/game/ordinary-hobbies.test.ts
+PASS tests/game/story-editorial-context.test.ts
+PASS tests/ui/job-interview-flow.test.tsx
+PASS tests/persistence/repository.test.ts
+PASS tests/ui/scholarship-flow.test.tsx (5.891 s)
+PASS tests/ui/travel-flow.test.tsx
+PASS tests/ui/ordinary-hobby-flow.test.tsx
+PASS tests/ui/education-recovery-flow.test.tsx (5.842 s)
+PASS tests/game/professional-policy.test.ts (10.313 s)
+PASS tests/ui/leisure-flow.test.tsx
+PASS tests/ui/health-flow.test.tsx
+PASS tests/ui/lifetime-statistics-data.test.ts (6.185 s)
+PASS tests/ui/workplace-story-flow.test.tsx (7.441 s)
+PASS tests/ui/school-flow.test.tsx
+PASS tests/game/engine.test.ts (490.08 s)
+PASS tests/ui/service-flow.test.tsx
+PASS tests/progression/progress.test.ts
+PASS tests/ui/hobby-event-flow.test.tsx (5.844 s)
+PASS tests/game/content-refresh.test.ts
+PASS tests/ui/creator-studio-flow.test.tsx
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/story-consequence-labels-flow.test.tsx
+PASS tests/ui/extras-flow.test.tsx
+PASS tests/ui/startup-flow.test.tsx
+PASS tests/state/preferencesStore.test.ts
+PASS tests/game/teen-home-stories.test.ts (10.596 s)
+PASS tests/persistence/compressed-lives.test.ts
+PASS tests/game/money-format.test.ts
+PASS tests/persistence/native-hourly-checkpoints.test.ts (8.414 s)
+PASS tests/ui/interactions.test.tsx
+PASS tests/persistence/ordinary-hobby-archive.test.ts (7.062 s)
+PASS tests/ui/adult-relationship-story-flow.test.tsx
+PASS tests/persistence/native-raise-archive.test.ts (13.731 s)
+PASS tests/game/story-consequence-labels.test.ts (8.059 s)
+PASS tests/persistence/native-workplace-archive.test.ts (11.055 s)
+PASS tests/progression/connections.test.ts
+PASS tests/ui/life-context-story-flow.test.tsx
+PASS tests/ui/pension-flow.test.tsx
+PASS tests/ui/early-home-story-flow.test.tsx
+PASS tests/ui/settings-flow.test.tsx
+PASS tests/game/social-criticism-copy.test.ts
+PASS tests/ui/childhood-story-flow.test.tsx
+PASS tests/ui/time-machine-flow.test.tsx
+PASS tests/ui/legal-flow.test.tsx
+PASS tests/ui/credit-flow.test.tsx
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/ui/politics-flow.test.tsx
+PASS tests/ui/school-plans.test.tsx
+PASS tests/persistence/native-people-block-archive.test.ts (14.856 s)
+PASS tests/persistence/native-workplace-story-archive.test.ts (16.121 s)
+PASS tests/persistence/native-arcade-archive.test.ts
+PASS tests/persistence/native-interview-checkpoints.test.ts
+PASS tests/persistence/native-teen-archive.test.ts (8.862 s)
+PASS tests/ui/theme-contrast.test.tsx
+PASS tests/persistence/restored-action-cache.test.ts (8.205 s)
+PASS tests/state/gameStore.test.ts
+PASS tests/ui/music-flow.test.tsx
+PASS tests/ui/business-flow.test.tsx
+PASS tests/persistence/leisure-archive.test.ts
+PASS tests/state/save-summaries.test.ts
+PASS tests/ui/modal-window-layout.test.tsx
+PASS tests/ui/social-flow.test.tsx
+PASS tests/state/npc-relationships-save.test.ts (6.429 s)
+PASS tests/persistence/native-school-archive.test.ts (5.094 s)
+PASS tests/ui/career-flow.test.tsx
+PASS tests/state/npc-courtships-save.test.ts (5.798 s)
+PASS tests/game/copy-world.test.ts (20.736 s)
+PASS tests/persistence/responsive-archive.test.ts
+PASS tests/persistence/life-preview.test.ts (5.547 s)
+PASS tests/ui/purchase-flow.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/game/save-json.test.ts
+PASS tests/persistence/pet-archive.test.ts
+PASS tests/game/primitives.test.ts
+PASS tests/ui/family-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/will-flow.test.tsx
+PASS tests/game/creation.test.ts
+PASS tests/persistence/base64.test.ts
+PASS tests/ui/portrait-accessibility.test.tsx
+PASS tests/ui/special-career-exits-flow.test.tsx (21.963 s)
+PASS tests/persistence/best-friends-migration.test.ts (11.449 s)
+PASS tests/game/story-name-collisions.test.ts (8.649 s)
+PASS tests/ui/model-career-acceptance-flow.test.tsx (5.613 s)
+  ● Console
+
+    console.info
+      Model archive continuation {"sourceRevision":70,"sourceDate":{"year":2023,"month":7,"day":1},"preparedDate":{"year":2026,"month":1,"day":1},"trainedMonths":30,"trainingFees":"120000","skill":60,"selectionAttempts":1,"annualPay":"4896000","projectPeriods":3,"modelGross":"1224000","currency":"USD","finalDate":{"year":2028,"month":1,"day":1},"finalRevision":96,"ordinaryPreparationAndContinuationCommands":22,"originalFixtureSha256":"665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34"}
+
+      at Object.info (tests/ui/model-career-acceptance-flow.test.tsx:132:13)
+
+PASS tests/ui/music-career-exit-flow.test.tsx
+PASS tests/game/editorial-policy.test.ts
+PASS tests/ui/terminal-biography-flow.test.tsx
+PASS tests/game/best-friends.test.ts
+PASS tests/ui/best-friends-flow.test.tsx
+PASS tests/ui/story-name-collision-flow.test.tsx
+PASS tests/ui/terminal-biography-data.test.ts
+PASS tests/game/health-emergency-context.test.ts
+PASS tests/ui/family-tree-late-spouse.test.tsx
+
+Summary of all failing tests
+FAIL tests/game/entrepreneur-policy.test.ts
+  ● the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Object {
+    -   "content": 10,
+    -   "engine": 35,
+    -   "world": 34,
+    +   "content": 11,
+    +   "engine": 36,
+    +   "world": 35,
+      }
+
+       6 | test('the policy version pin matches the actual frozen newborn source and requires an explicit fixed-cohort selection', () => {
+       7 |   const initial = createLife('life_entrepreneur_policy_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
+    >  8 |   expect({ world: initial.schemaVersion, engine: initial.engineVersion, content: initial.contentVersion }).toEqual(expectedVersions);
+         |                                                                                                            ^
+       9 |   expect(parseOptions(['--country', 'US'], ['US', 'CA'])).toEqual({ countries: ['US'], output: undefined });
+      10 |   expect(parseOptions(['--all', '--output', '/tmp/example'], ['US', 'CA'])).toEqual({ countries: ['US', 'CA'], output: '/tmp/example' });
+      11 |   for (const args of [[], ['--seed', '901'], ['--country', 'US', '--all'], ['--country', 'XX'], ['--country', 'US', '--country', 'CA']]) expect(() => parseOptions(args, ['US', 'CA'])).toThrow();
+
+      at Object.toEqual (tests/game/entrepreneur-policy.test.ts:8:108)
+
+
+Test Suites: 1 failed, 181 passed, 182 total
+Tests:       1 failed, 2347 passed, 2348 total
+Snapshots:   0 total
+Time:        1360.397 s
+Ran all test suites.

@@ -1,0 +1,42 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/astronaut-career-acceptance-flow.test.tsx --testTimeout=90000
+
+FAIL tests/ui/astronaut-career-acceptance-flow.test.tsx (14.998 s)
+  ✕ the genuine computing graduate earns astronaut eligibility and qualification, records actual flight work, then leaves without future service pay (9300 ms)
+
+  ● the genuine computing graduate earns astronaut eligibility and qualification, records actual flight work, then leaves without future service pay
+
+    Found multiple elements with role: button, name: Leave Service
+
+      34 | const absolute = (value = world()) => value.date.year * 12 + value.date.month - 1;
+      35 | const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Service /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+    > 36 | const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+         |                                                                                                 ^
+      37 | const modal = () => within(screen.UNSAFE_getByType(Modal));
+      38 | const reviewEvent = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
+      39 |
+
+      at getByRole (tests/ui/astronaut-career-acceptance-flow.test.tsx:36:97)
+      at asyncGeneratorStep (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at ../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at ../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at callback (../../dreams-life-sim/node_modules/@testing-library/react-native/src/act.ts:31:24)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.act (../../dreams-life-sim/node_modules/react/cjs/react.development.js:814:22)
+      at actImplementation (../../dreams-life-sim/node_modules/@testing-library/react-native/src/act.ts:30:25)
+      at tests/ui/astronaut-career-acceptance-flow.test.tsx:36:59
+      at asyncGeneratorStep (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at ../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at ../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (tests/ui/astronaut-career-acceptance-flow.test.tsx:36:12)
+      at press (tests/ui/astronaut-career-acceptance-flow.test.tsx:83:11)
+      at asyncGeneratorStep (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (../../dreams-life-sim/node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        15.334 s
+Ran all test suites within paths "tests/ui/astronaut-career-acceptance-flow.test.tsx".

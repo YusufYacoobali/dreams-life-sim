@@ -1,0 +1,34 @@
+{
+  "format": "dreams-c36-best-friend-native-captures-v1",
+  "complete": false,
+  "scope": "Pending coordinator native execution. Proposed filenames are not captures or accepted visual evidence. Set complete true only after all six real independently copied captures are supplied.",
+  "planSha256": "aed1555240cab6f3b8862df88d92ac36d83ceb5215823b70a3efac7a96e25a1c",
+  "runtimeSourceCommit": null,
+  "runtimeSourceProof": null,
+  "phases": [
+    {
+      "name": "boot138",
+      "database": "/tmp/dreams-friends-editorial-native-boot138-db/dreams.db"
+    },
+    {
+      "name": "review138",
+      "database": "/tmp/dreams-friends-editorial-native-review138-db/dreams.db"
+    },
+    {
+      "name": "proposal139",
+      "database": "/tmp/dreams-friends-editorial-native-proposal139-db/dreams.db"
+    },
+    {
+      "name": "cold-proposal139",
+      "database": "/tmp/dreams-friends-editorial-native-cold-proposal139-db/dreams.db"
+    },
+    {
+      "name": "ack140",
+      "database": "/tmp/dreams-friends-editorial-native-ack140-db/dreams.db"
+    },
+    {
+      "name": "cold-final140",
+      "database": "/tmp/dreams-friends-editorial-native-cold-final140-db/dreams.db"
+    }
+  ]
+}

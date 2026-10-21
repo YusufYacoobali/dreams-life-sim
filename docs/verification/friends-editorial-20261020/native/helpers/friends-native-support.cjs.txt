@@ -1,0 +1,91 @@
+'use strict';
+
+// Shared read-only inputs and exact-source checks. No SQL writer is exposed.
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
+const crypto = require('node:crypto'), { DatabaseSync } = require('node:sqlite');
+const { createRequire } = require('node:module');
+const tables = ['backups', 'branches', 'lives', 'preferences', 'receipts', 'restore_receipts', 'snapshot_metadata', 'snapshots'];
+const toolNames = ['friends-native-support.cjs', 'project-friends-native.cjs', 'verify-friends-native.cjs'];
+const expectedGame = '24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5';
+const expectedCombined = '34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1';
+const initialPins = '/tmp/dreams-friends-editorial-initial-source.json';
+const baselinePath = '/tmp/dreams-opening-next-native-final138-db/dreams.db';
+const phases = [
+  { name: 'boot138', commands: 0, revision: 138 },
+  { name: 'review138', commands: 0, revision: 138, sameAs: 'boot138' },
+  { name: 'proposal139', commands: 1, revision: 139 },
+  { name: 'cold-proposal139', commands: 1, revision: 139, sameAs: 'proposal139' },
+  { name: 'ack140', commands: 2, revision: 140 },
+  { name: 'cold-final140', commands: 2, revision: 140, sameAs: 'ack140' },
+];
+const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+const readJSON = file => JSON.parse(fs.readFileSync(file, 'utf8'));
+const fileProof = file => ({ file, bytes: fs.statSync(file).size, sha256: hash(fs.readFileSync(file)) });
+const canonicalRows = values => values.map(row => JSON.stringify(row)).sort();
+const rowsHash = values => hash(JSON.stringify(canonicalRows(values)));
+const tableHashes = rows => Object.fromEntries(tables.map(table => [table, { rows: rows[table].length, sha256: rowsHash(rows[table]) }]));
+function argumentsFor(argv, allowed, usage) {
+  const result = {};
+  for (let index = 0; index < argv.length; index += 2) {
+    assert(allowed.includes(argv[index]) && !Object.hasOwn(result, argv[index]), usage);
+    const value = argv[index + 1]; assert(value && !value.startsWith('--') && path.isAbsolute(value), 'Use an absolute path for ' + argv[index]);
+    result[argv[index]] = value;
+  }
+  assert(result['--output'] && !fs.existsSync(result['--output']), 'A new --output path is required; preserve previous evidence');
+  return result;
+}
+function treeHash(directories, base) {
+  const digest = crypto.createHash('sha256');
+  const visit = directory => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+      const file = path.join(directory, entry.name);
+      if (entry.isDirectory()) visit(file);
+      else if (file.endsWith('.ts')) digest.update(path.relative(base, file)).update('\0').update(fs.readFileSync(file)).update('\0');
+    }
+  };
+  directories.forEach(visit); return digest.digest('hex');
+}
+function verifySource(root, pinsFile = initialPins) {
+  const pins = readJSON(pinsFile), files = Object.entries(pins.source).filter(([file]) => /^(src\/game\/|src\/persistence\/)/.test(file));
+  assert.equal(pins.commit, '195e77a0b6817d40992bffc587dd2018ed5ba275');
+  assert.equal(pins.gameSourceHash, expectedGame); assert.equal(pins.combinedGamePersistenceSourceHash, expectedCombined);
+  for (const [file, sha256] of files) assert.equal(hash(fs.readFileSync(path.join(root, file))), sha256, 'Changed core file: ' + file);
+  const actual = { game: treeHash([path.join(root, 'src/game')], path.join(root, 'src/game')), gameAndPersistence: treeHash([path.join(root, 'src/game'), path.join(root, 'src/persistence')], root) };
+  assert.deepEqual(actual, { game: expectedGame, gameAndPersistence: expectedCombined });
+  return { ...actual, filesVerified: files.length, pins: fileProof(pinsFile) };
+}
+function toolsProof() { return toolNames.map(name => fileProof(path.join(__dirname, name))); }
+function runtime(root, includeEngine = false) {
+  const request = createRequire(path.join(root, 'package.json')), ts = request('typescript');
+  require.extensions['.ts'] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText, file);
+  return { ...request('./src/game/model.ts'), ...request('./src/persistence/checkpoints.ts'), ...request('./src/game/systems/friendships.ts'), ...request('./src/game/systems/friendshipSchemas.ts'), ...(includeEngine ? request('./src/game/engine.ts') : {}), node: process.version, typescript: ts.version };
+}
+function capture(file) {
+  const files = [file, file + '-wal'].filter(value => fs.existsSync(value)).map(fileProof);
+  const sql = new DatabaseSync(file, { readOnly: true }); let result;
+  try {
+    assert.deepEqual(sql.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => row.name), tables, 'Exact eight production tables');
+    const rows = Object.fromEntries(tables.map(table => [table, sql.prepare('SELECT * FROM ' + table).all()]));
+    result = { file, reader: sql.prepare('PRAGMA user_version').get().user_version, rows, hashes: tableHashes(rows), files };
+  } finally { sql.close(); }
+  assert.deepEqual(files.map(value => fileProof(value.file)), files, 'Read-only capture changed main/WAL bytes');
+  return result;
+}
+function assertStableCapture(original) {
+  const current = capture(original.file);
+  assert.equal(current.reader, original.reader, 'Read-only input reader changed');
+  assert.deepEqual(current.hashes, original.hashes, 'Read-only input tables changed');
+  assert.deepEqual(current.files, original.files, 'Read-only input main/WAL bytes changed');
+}
+function selectedLife(captured) {
+  const preference = captured.rows.preferences.find(row => row.key === 'active_life'); assert(preference);
+  const row = captured.rows.lives.find(life => life.id === preference.value); assert(row); return row;
+}
+function assertBaseline(captured) {
+  assert.equal(captured.reader, 14); assert.equal(selectedLife(captured).revision, 138); assert.match(selectedLife(captured).name, /^Nia\b/);
+  for (const table of ['lives', 'backups']) assert.equal(captured.rows[table].length, 7);
+  for (const table of ['snapshots', 'snapshot_metadata']) assert.equal(captured.rows[table].length, 66);
+  assert.equal(captured.rows.receipts.length, 145);
+}
+const writeJSON = (file, value) => fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n', { flag: 'wx' });
+module.exports = { fs, path, assert, tables, phases, hash, readJSON, fileProof, rowsHash, argumentsFor, verifySource, toolsProof, runtime, capture, assertStableCapture, selectedLife, assertBaseline, writeJSON, initialPins, baselinePath };

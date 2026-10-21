@@ -1,0 +1,22 @@
+{
+  "commit": "b3bf10821605271a3b039815af2b61f352e49a48",
+  "sourceSha256": "a00a7c1d0f45ff636bcccc9fe8f49018f6398e3a10bcc1f30c54db17d9c2ae3f",
+  "platforms": {
+    "android": {
+      "source": "/src/assets/CharacterPortrait.tsx",
+      "sourceContentExact": true,
+      "allAppAndSrcMapContentExact": true,
+      "bundle": "/tmp/dreams-portrait-fallback-export-isolated/_expo/static/js/android/entry-85d59e887d4211aaaad33f162de8e098.hbc",
+      "bytes": 4755136,
+      "sha256": "545713aef06e87d180608f9de028fc03873c4d98281ef532b1ac92fd311bdc7c"
+    },
+    "ios": {
+      "source": "/src/assets/CharacterPortrait.tsx",
+      "sourceContentExact": true,
+      "allAppAndSrcMapContentExact": true,
+      "bundle": "/tmp/dreams-portrait-fallback-export-isolated/_expo/static/js/ios/entry-bd504c6813e8579f5204202804d20eaa.hbc",
+      "bytes": 4487828,
+      "sha256": "012ca9a65ebda2d1b0bd741943ba3fc3b4fcc46c603311e3e1e5f6f78a1c8a5c"
+    }
+  }
+}

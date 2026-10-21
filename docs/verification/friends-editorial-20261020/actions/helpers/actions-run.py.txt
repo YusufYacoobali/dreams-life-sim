@@ -1,0 +1,128 @@
+"""Prepared-only until root explicitly invokes --execute. Never stops the app."""
+import argparse, datetime, hashlib, json, os, pathlib, signal, subprocess, time
+
+BASE = pathlib.Path('/tmp')
+PREFIX = 'dreams-friends-editorial-actions'
+ROOT = pathlib.Path('/workspace/dreams-worktrees/integration-friends-editorial')
+ADB = ['/workspace/.cache/android-native-check/sdk/platform-tools/adb', '-s', 'emulator-5560']
+def file(name): return BASE / (PREFIX + name)
+def now(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def load(path): return json.loads(path.read_text())
+def ref(path):
+    data = path.read_bytes()
+    return {'file': str(path), 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+def exclusive(path, value):
+    with path.open('x') as output: output.write(json.dumps(value, indent=2) + '\n')
+def identity(pid, role):
+    proc = pathlib.Path('/proc') / str(pid)
+    fields = proc.joinpath('stat').read_text().rsplit(') ', 1)[1].split()
+    status = proc.joinpath('status').read_text().splitlines()
+    uids = [int(value) for value in next(row for row in status if row.startswith('Uid:')).split()[1:]]
+    assert uids == [os.getuid()] * 4, 'Never signal an unowned process'
+    argv = [part.decode() for part in proc.joinpath('cmdline').read_bytes().split(b'\0') if part]
+    return {'role': role, 'pid': pid, 'uid': os.getuid(), 'comm': proc.joinpath('comm').read_text().strip(), 'startTicks': fields[19], 'argv': argv}
+def state(pid): return pathlib.Path('/proc', str(pid), 'stat').read_text().rsplit(') ', 1)[1].split()[0]
+def unchanged(target): assert identity(target['pid'], target['role']) == target, 'Owned PID identity changed or was reused'
+def source_exact():
+    result = subprocess.run(['node', str(file('-summary.cjs')), '--verify'], cwd=ROOT, capture_output=True, text=True, timeout=45)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+def interrupted(signum, _frame): raise InterruptedError('Wrapper received signal ' + str(signum))
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--capture-processes', action='store_true')
+    mode.add_argument('--execute', action='store_true')
+    parser.add_argument('--metro-pid', type=int)
+    parser.add_argument('--metro-port', type=int)
+    parser.add_argument('--ownership-note')
+    args = parser.parse_args()
+    if args.capture_processes:
+        assert args.metro_pid and args.metro_pid != 100274 and args.metro_port and args.ownership_note
+        qemu, metro = identity(100274, 'qemu'), identity(args.metro_pid, 'metro')
+        assert qemu['comm'] == 'qemu-system-x86' and 'qemu-system' in qemu['argv'][0]
+        assert pathlib.Path(metro['argv'][0]).name.startswith('node')
+        assert any(item.endswith(('/expo/bin/cli', '/.bin/expo', '/@expo/cli/build/bin/cli')) for item in metro['argv'])
+        assert 'start' in metro['argv'] and '--port' in metro['argv'] and '--max-workers' in metro['argv']
+        assert metro['argv'][metro['argv'].index('--port') + 1] == str(args.metro_port)
+        assert metro['argv'][metro['argv'].index('--max-workers') + 1] == '1'
+        for target in [qemu, metro]: assert state(target['pid']) not in ['T', 't'], 'Do not adopt an already-stopped process'
+        exclusive(file('-owned-processes.json'), {'format': 'dreams-c36-owned-action-processes-v1', 'capturedAt': now(), 'ownershipAttestation': args.ownership_note, 'metroPort': args.metro_port, 'targets': [qemu, metro]})
+        print(json.dumps({'status': 'identities-captured-only', 'benchmarkExecuted': False, 'signalsSent': False, 'manifest': ref(file('-owned-processes.json'))}))
+        return
+    assert not any([args.metro_pid, args.metro_port, args.ownership_note]), 'Execution uses only the exact captured identities'
+    paths = {name: file(name) for name in ['.json', '.stderr.txt', '-quiescence.json', '-receipt.json']}
+    for path in paths.values(): assert not path.exists(), 'Never overwrite a previous run or diagnostic: ' + str(path)
+    plan = load(file('-plan.json')); ready = load(file('-ready.json')); owned = load(file('-owned-processes.json'))
+    assert plan['format'] == 'dreams-c36-action-measurement-plan-v1' and plan['cwd'] == str(ROOT)
+    assert ready['format'] == 'dreams-c36-action-readiness-v1' and ready['status'] == 'ready'
+    assert ready['nativeAppStoppedByCoordinator'] is True and ready['otherHeavyWorkPausedOrClosed'] is True and ready['statement'].strip()
+    age = datetime.datetime.now(datetime.timezone.utc) - datetime.datetime.fromisoformat(ready['recordedAt'])
+    assert 0 <= age.total_seconds() <= 1800, 'Readiness must be an actual recent root attestation'
+    assert ready['sourceSnapshotSha256'] == ref(pathlib.Path(plan['sourceSnapshot']['file']))['sha256']
+    assert ready['registeredPlanSha256'] == ref(file('-plan.json'))['sha256']
+    assert ready['ownedProcessManifestSha256'] == ref(file('-owned-processes.json'))['sha256']
+    assert ready['closedGateEvidence'], 'Root must record actual heavy-process closure evidence'
+    for evidence in ready['closedGateEvidence']:
+        assert evidence['processClosed'] is True and isinstance(evidence['exitCode'], int)
+        assert ref(pathlib.Path(evidence['file']))['sha256'] == evidence['sha256']
+    assert owned['format'] == 'dreams-c36-owned-action-processes-v1' and owned['ownershipAttestation'].strip()
+    targets = owned['targets']; assert len(targets) == 2 and targets[0]['role'] == 'qemu' and targets[0]['pid'] == 100274 and targets[1]['role'] == 'metro'
+    for target in targets: unchanged(target); assert state(target['pid']) not in ['T', 't']
+    source_exact()
+    connected = subprocess.run(ADB + ['get-state'], capture_output=True, timeout=35)
+    assert connected.returncode == 0 and connected.stdout.strip() == b'device' and not connected.stderr.strip()
+    native = subprocess.run(ADB + ['shell', 'pidof', 'host.exp.exponent'], capture_output=True, timeout=35)
+    assert native.returncode in [0, 1] and not native.stdout.strip() and not native.stderr.strip(), 'Root must stop the native app before measurement'
+    argv = ['node', 'tools/benchmark-actions.cjs', '--source', str(ROOT), '--profile', '--population', '--workplaces', '--raises']
+    assert plan['argv'] == argv
+    record = {'format': 'dreams-c36-action-quiescence-v1', 'sourceCommit': plan['sourceCommit'], 'sourceSnapshot': plan['sourceSnapshot'], 'registeredPlan': ref(file('-plan.json')), 'readiness': ref(file('-ready.json')), 'ownedProcessManifest': ref(file('-owned-processes.json')), 'wrapper': ref(pathlib.Path(__file__)), 'wrapperPid': os.getpid(), 'nativeAppPidCheckEmpty': True, 'nativePidCheckReturnCode': native.returncode, 'paused': [], 'argv': argv, 'cwd': str(ROOT), 'status': 'running', 'start': now(), 'allOwnedProcessesResumed': False}
+    for signum in [signal.SIGINT, signal.SIGTERM, signal.SIGHUP]: signal.signal(signum, interrupted)
+    child = None
+    try:
+        for target in targets:
+            unchanged(target); os.kill(target['pid'], signal.SIGSTOP)
+            record['paused'].append({'pid': target['pid'], 'identity': target, 'stoppedAt': now()})
+        for row in record['paused']:
+            for _ in range(100):
+                if state(row['pid']) in ['T', 't']: break
+                time.sleep(.01)
+            else: raise AssertionError('Exact owned process did not stop')
+            row['stoppedStateVerified'] = True
+        record['benchmarkStartedAt'] = now()
+        print(json.dumps({'benchmarkStartedAt': record['benchmarkStartedAt'], 'pausedOwnedPids': [row['pid'] for row in record['paused']], 'nativeAppStopped': True}), flush=True)
+        with paths['.json'].open('x') as output, paths['.stderr.txt'].open('x') as errors:
+            child = subprocess.Popen(argv, cwd=ROOT, stdout=output, stderr=errors)
+            record['benchmarkPid'] = child.pid
+            record['benchmarkExitCode'] = child.wait(timeout=300)
+        record['benchmarkFinishedAt'] = now()
+        record['sourceAfterExact'] = source_exact()
+        record['status'] = 'passed' if record['benchmarkExitCode'] == 0 else 'failed'
+    except BaseException as error:
+        record['status'] = 'failed'; record['error'] = repr(error)
+        if child is not None and child.poll() is None:
+            child.terminate()
+            try: child.wait(timeout=10)
+            except subprocess.TimeoutExpired: child.kill(); child.wait(timeout=10)
+        if child is not None:
+            record['benchmarkExitCode'] = child.returncode; record.setdefault('benchmarkFinishedAt', now())
+    finally:
+        for row in reversed(record['paused']):
+            try:
+                unchanged(row['identity']); os.kill(row['pid'], signal.SIGCONT)
+                for _ in range(100):
+                    if state(row['pid']) not in ['T', 't']: break
+                    time.sleep(.01)
+                else: raise AssertionError('Owned process did not resume')
+                row['resumedAt'] = now(); row['resumedStateVerified'] = True
+            except BaseException as error: row['resumeError'] = repr(error); record['status'] = 'failed'
+        record['allOwnedProcessesResumed'] = len(record['paused']) == 2 and all(row.get('resumedStateVerified') is True for row in record['paused'])
+        record['finish'] = now(); exclusive(paths['-quiescence.json'], record)
+        passed = record['status'] == 'passed' and record['allOwnedProcessesResumed']
+        receipt = {'format': 'dreams-c36-action-execution-receipt-v1', 'status': 'passed' if passed else 'failed', 'complete': passed, 'exitCode': record.get('benchmarkExitCode'), 'executionReference': 'Actual root wrapper PID' + str(os.getpid()) + ', benchmark PID' + str(record.get('benchmarkPid')) + '; process closed', 'sourceCommit': plan['sourceCommit'], 'cwd': str(ROOT), 'argv': argv, 'stdoutFile': str(paths['.json']), 'stderrFile': str(paths['.stderr.txt']), 'startedAt': record.get('benchmarkStartedAt'), 'finishedAt': record.get('benchmarkFinishedAt'), 'quiescence': {'nativeAppStopped': True, 'otherHeavyWorkPausedOrClosed': True, 'statement': ready['statement']}, 'quiescenceReceipt': ref(paths['-quiescence.json']), 'raw': ref(paths['.json']) if paths['.json'].exists() else None, 'stderr': ref(paths['.stderr.txt']) if paths['.stderr.txt'].exists() else None}
+        exclusive(paths['-receipt.json'], receipt)
+    print(json.dumps({'status': record['status'], 'benchmarkExitCode': record.get('benchmarkExitCode'), 'allOwnedProcessesResumed': record['allOwnedProcessesResumed'], 'quiescence': str(paths['-quiescence.json'])}), flush=True)
+    raise SystemExit(0 if record['status'] == 'passed' else 1)
+
+if __name__ == '__main__': main()

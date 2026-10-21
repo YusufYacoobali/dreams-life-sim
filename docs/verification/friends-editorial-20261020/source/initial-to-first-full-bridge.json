@@ -1,0 +1,42 @@
+{
+  "format": "dreams-c36-source-bridge-v1",
+  "scope": "Annual120 launched at initial195e77a game/persistence; later reviewed test maintenance, one new Model acceptance test and three app/UI fixes. Full607pin regression/types/exports launched at final6f4b34c. Initial606 map is not labeled unchanged final source.",
+  "initialCommit": "195e77a0b6817d40992bffc587dd2018ed5ba275",
+  "finalCommit": "6f4b34c40005f5fba8eeee540bada9e0787ccbb0",
+  "initialFiles": 606,
+  "finalFiles": 607,
+  "gameSourceHash": "24a5a40521b31fa94eca4c4d161bbbd74e24c460a08bc675afcd340e392e7ba5",
+  "combinedGamePersistenceSourceHash": "34cc89201f1da71c8c118c09a78025c94161e69afae15ed5354cd413fdeca7e1",
+  "gameAndPersistenceIdentical": true,
+  "changed": [
+    {
+      "file": "app/(game)/statistics.tsx",
+      "initial": "c5d7992ee5391cedb6e0e701d7748dfa90cc9579c4a4b472b2cbb55cbfe78e24",
+      "final": "a6c198bb94d9afb1ddc0296bd16c36984b2c03783d28e855503fd09291964d68"
+    },
+    {
+      "file": "app/saved-lives.tsx",
+      "initial": "b383329446fcb3970f1089936f7232011e738b5e327b1b0ae4d0e9060bb976a4",
+      "final": "9edec36baab575a5842ee7e8f580e65d9dcaecc82bd63d8e718a17026bcb4683"
+    },
+    {
+      "file": "src/assets/CharacterPortrait.tsx",
+      "initial": "079b690f243c53ebd2c1b073e413a4ea8e003229aec8a5f643cf898326ad24b7",
+      "final": "a00a7c1d0f45ff636bcccc9fe8f49018f6398e3a10bcc1f30c54db17d9c2ae3f"
+    },
+    {
+      "file": "tests/game/editorial-policy.test.ts",
+      "initial": "1c6153c635041654ca66a5f23c8adacd7cb439d5f6bb8bd3c2b876e98e37fa6a",
+      "final": "fa1a9a46d25d28f182cb48b2cb217e74ba7b01d1d8d2833571d4ecf1e16a0629"
+    },
+    {
+      "file": "tests/game/story-name-collisions.test.ts",
+      "initial": "f6a1f115e9d1769c9b0378bfeae62e329f038949da094e4bf5fe24daf1609458",
+      "final": "2b901537b1bf61349663fe4fd58e1ce565b82a3714e2863356df10dd29952935"
+    }
+  ],
+  "added": [
+    "tests/ui/model-career-acceptance-flow.test.tsx"
+  ],
+  "removed": []
+}

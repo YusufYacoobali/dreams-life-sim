@@ -1,0 +1,24 @@
+{
+  "format": "dreams-c36-action-pre-registration-child-process-diagnostic-v1",
+  "scope": "Coordinator-reported pre-registration probe only; no registration, benchmark, native action or process signal.",
+  "coordinatorReportedObservation": {
+    "api": "Node child_process.spawnSync git",
+    "status": 0,
+    "errorCode": "EPERM",
+    "partialStdout": "HEAD output was returned; not accepted as successful Git execution"
+  },
+  "rawProbeFile": null,
+  "registrationAttempted": false,
+  "benchmarkExecuted": false,
+  "priorPreparationArchiveManifest": {
+    "file": "/tmp/dreams-friends-editorial-actions-pre-child-process-fix/archive-manifest.json",
+    "bytes": 1464,
+    "sha256": "8265fb2bbc9045751a338e7c98615c076cd917f97c34aa448a3bc72fbd7b77c6"
+  },
+  "repair": "No child_process import or child Node/Git execution in registration; actual captured accepted-source head/status/tree hashes and four Git blob SHA1 plus known SHA256 are verified locally. Three root direct shell commands prepare input pins, summary plan and readiness sequentially.",
+  "actualReadOnlyVerification": {
+    "file": "/tmp/dreams-friends-editorial-actions-git-input-proof.json",
+    "bytes": 2797,
+    "sha256": "a06802bb67e79d5b0e813aef274f83a0f74e8d80d4ef980afa802da33259cad5"
+  }
+}
