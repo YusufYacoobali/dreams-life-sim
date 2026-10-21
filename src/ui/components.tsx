@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  type AccessibilityRole, type AccessibilityState,
   ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView,
   StyleProp, StyleSheet, Text, useWindowDimensions, View, ViewStyle,
 } from 'react-native';
@@ -41,9 +42,11 @@ export function Card({ children, style }: React.PropsWithChildren<{ style?: Styl
 
 export function Button({
   label, onPress, tone = 'primary', disabled = false, busy = false, accessibilityLabel,
+  accessibilityRole = 'button', accessibilityState,
 }: {
   label: string; onPress: () => void; tone?: 'primary' | 'secondary' | 'positive' | 'danger';
   disabled?: boolean; busy?: boolean; accessibilityLabel?: string;
+  accessibilityRole?: AccessibilityRole; accessibilityState?: AccessibilityState;
 }) {
   const c = useColors();
   const { buttonFeedback } = useFeedback();
@@ -56,12 +59,12 @@ export function Button({
   const showProgress = useDelayedBusy(saving);
   return (
     <Pressable
-      accessibilityRole="button" accessibilityLabel={accessibilityLabel ?? label}
-      accessibilityState={{ disabled: disabled || busy, busy: saving }}
+      accessibilityRole={accessibilityRole} accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityState={{ ...accessibilityState, disabled: disabled || busy, busy: saving }}
       disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); buttonFeedback(); }}
       style={({ pressed }) => [styles.button, { backgroundColor: pressed ? pressedBackground : background, opacity: disabled || busy ? 0.5 : 1 }]}
     >
-      {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" />}
+      {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" style={{ flexShrink: 0 }} />}
       <Text style={[styles.buttonLabel, { color }]}>{label}</Text>
     </Pressable>
   );
@@ -69,13 +72,18 @@ export function Button({
 
 export function Header({ title, onBack, trailing, backDisabled = false }: { title: string; onBack?: () => void; trailing?: React.ReactNode; backDisabled?: boolean }) {
   const c = useColors();
+  const { width, fontScale } = useWindowDimensions();
+  const stacked = width < 340 || fontScale >= 1.5;
+  const back = onBack && <Pressable onPress={onBack} disabled={backDisabled} accessibilityRole="button" accessibilityLabel="Back" accessibilityState={{ disabled: backDisabled }} hitSlop={8} style={[styles.back, { opacity: backDisabled ? 0.5 : 1 }]}>
+    <Text allowFontScaling={false} accessibilityElementsHidden importantForAccessibility="no" style={{ fontSize: 34, color: c.ink }}>‹</Text>
+  </Pressable>;
+  if (stacked) return <View style={styles.headerStacked}>
+    {(onBack || trailing) && <View style={styles.headerControls}><View style={styles.headerSide}>{back}</View><View style={styles.headerSide}>{trailing}</View></View>}
+    <Heading size={21} centered>{title}</Heading>
+  </View>;
   return (
     <View style={styles.header}>
-      <View style={styles.headerSide}>{onBack && (
-        <Pressable onPress={onBack} disabled={backDisabled} accessibilityRole="button" accessibilityLabel="Back" accessibilityState={{ disabled: backDisabled }} hitSlop={8} style={[styles.back, { opacity: backDisabled ? 0.5 : 1 }]}>
-          <Text style={{ fontSize: 34, color: c.ink }}>‹</Text>
-        </Pressable>
-      )}</View>
+      <View style={styles.headerSide}>{back}</View>
       <View style={styles.headerTitle}><Heading size={21}>{title}</Heading></View>
       <View style={styles.headerSide}>{trailing}</View>
     </View>
@@ -94,7 +102,7 @@ export function ActionRow({
       accessibilityState={{ disabled: disabled || !!disabledReason }} disabled={disabled || !!disabledReason} onPress={onPress}
       style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
     >
-      {icon && <View style={styles.rowIcon}>{icon}</View>}
+      {icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.rowIcon}>{icon}</View>}
       <View style={[styles.rowContent, stackValue && styles.rowContentStacked]}>
         <View style={[styles.rowText, stackValue && styles.rowTextStacked]}>
           <Text style={{ color: c.ink, fontWeight: '600', fontSize: 16 }}>{title}</Text>
@@ -102,23 +110,33 @@ export function ActionRow({
         </View>
         {value && <Text style={[styles.rowValue, { color: c.muted }, stackValue && styles.rowValueStacked]}>{value}</Text>}
       </View>
-      <Text accessibilityElementsHidden importantForAccessibility="no" style={{ color: c.muted, fontSize: 25 }}>›</Text>
+      <Text allowFontScaling={false} accessibilityElementsHidden importantForAccessibility="no" style={{ color: c.muted, fontSize: 25 }}>›</Text>
     </Pressable>
   );
 }
 
 export function StatBar({ label, value, color, icon }: { label: string; value: number; color: string; icon?: React.ReactNode }) {
   const c = useColors();
-  const { fontScale } = useWindowDimensions();
+  const { width, fontScale } = useWindowDimensions();
+  const [availableWidth, setAvailableWidth] = useState(0);
+  const labelWidth = 84 * Math.max(1, fontScale), valueWidth = 38 * Math.max(1, fontScale);
+  const stacked = (availableWidth || width - spacing.lg * 2) < labelWidth + valueWidth + 56 + (icon ? 48 : 16);
   const bounded = Number.isFinite(value) ? Math.round(Math.max(0, Math.min(100, value))) : 0;
+  const picture = icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.statIcon}>{icon}</View>;
+  const percentage = <Text numberOfLines={1} style={{ minWidth: valueWidth, flexShrink: 0, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>;
+  const track = <View style={[styles.track, stacked && styles.trackStacked, { backgroundColor: c.track }]}>
+    <View style={{ height: '100%', width: `${bounded}%`, borderRadius: 6, backgroundColor: color }} />
+  </View>;
   return (
-    <View accessible accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: bounded }} style={styles.stat}>
-      {icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ width: 24, alignItems: 'center' }}>{icon}</View>}
-      <Text style={{ width: 84 * Math.max(1, fontScale), color: c.ink, fontSize: 13 }}>{label}</Text>
-      <View style={[styles.track, { backgroundColor: c.track }]}>
-        <View style={{ height: '100%', width: `${bounded}%`, borderRadius: 6, backgroundColor: color }} />
-      </View>
-      <Text numberOfLines={1} style={{ minWidth: 38, flexShrink: 0, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>
+    <View accessible accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: bounded }}
+      onLayout={({ nativeEvent }) => { const next = Math.round(nativeEvent.layout.width); setAvailableWidth(current => current === next ? current : next); }}
+      style={[styles.stat, stacked && styles.statStacked]}>
+      {stacked ? <View style={styles.statSummary}>
+        <View style={[styles.statLabelGroup, { flexBasis: labelWidth + (icon ? 32 : 0) }]}>{picture}<Text style={{ flexShrink: 1, color: c.ink, fontSize: 13 }}>{label}</Text></View>
+        {percentage}
+      </View> : <>{picture}<Text style={{ width: labelWidth, color: c.ink, fontSize: 13 }}>{label}</Text></>}
+      {track}
+      {!stacked && percentage}
     </View>
   );
 }
@@ -131,13 +149,15 @@ const styles = StyleSheet.create({
   footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md, gap: spacing.sm, borderTopWidth: StyleSheet.hairlineWidth },
   card: { borderRadius: radii.card, padding: spacing.lg, gap: spacing.md },
   button: { minHeight: 50, paddingHorizontal: 16, paddingVertical: 13, borderRadius: 12, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 8 },
-  buttonLabel: { fontSize: 17, fontWeight: '600', textAlign: 'center' },
+  buttonLabel: { fontSize: 17, fontWeight: '600', textAlign: 'center', flexShrink: 1, minWidth: 0 },
   header: { minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  headerSide: { minWidth: 44, alignItems: 'center', justifyContent: 'center' },
-  headerTitle: { flex: 1, alignItems: 'center' },
+  headerSide: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  headerTitle: { flex: 1, minWidth: 0, alignItems: 'center', paddingHorizontal: 8 },
+  headerStacked: { gap: 4, paddingBottom: 8 },
+  headerControls: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   back: { minWidth: 44, minHeight: 48, justifyContent: 'center' },
   row: { minHeight: 66, borderBottomWidth: StyleSheet.hairlineWidth, flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 10 },
-  rowIcon: { width: 40, alignItems: 'center', justifyContent: 'center' },
+  rowIcon: { width: 40, flexShrink: 0, alignItems: 'center', justifyContent: 'center' },
   rowContent: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'center', gap: 12 },
   rowContentStacked: { flexDirection: 'column', alignItems: 'stretch', gap: 6 },
   rowText: { flex: 1, minWidth: 0 },
@@ -145,5 +165,10 @@ const styles = StyleSheet.create({
   rowValue: { fontSize: 14, flexShrink: 1, maxWidth: '45%', textAlign: 'right' },
   rowValueStacked: { maxWidth: '100%', textAlign: 'left' },
   stat: { flexDirection: 'row', alignItems: 'center', gap: 8, minHeight: 28 },
+  statStacked: { flexDirection: 'column', alignItems: 'stretch', gap: 6, paddingVertical: 4 },
+  statIcon: { width: 24, alignItems: 'center', flexShrink: 0 },
+  statSummary: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
+  statLabelGroup: { flexDirection: 'row', alignItems: 'center', flexGrow: 1, flexShrink: 0, maxWidth: '100%', gap: 8 },
   track: { flex: 1, height: 10, borderRadius: 6, overflow: 'hidden' },
+  trackStacked: { flex: 0, width: '100%' },
 });

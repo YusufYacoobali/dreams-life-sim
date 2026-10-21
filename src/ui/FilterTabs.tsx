@@ -1,8 +1,21 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useColors } from './theme';
 
 export function FilterTabs<T extends string>({ values, selected, onSelect }: { values: readonly { id: T; label: string }[]; selected: T; onSelect: (id: T) => void }) {
   const c = useColors();
-  return <View accessibilityRole="tablist" style={{ flexDirection: 'row', gap: 5, flexWrap: 'wrap' }}>{values.map(item => <Pressable key={item.id} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: selected === item.id }} onPress={() => onSelect(item.id)} style={{ flex: 1, minWidth: 54, minHeight: 48, paddingHorizontal: 4, justifyContent: 'center', backgroundColor: selected === item.id ? c.actionBlue : c.inset, borderRadius: 10 }}><Text style={{ color: selected === item.id ? '#FFFFFF' : c.ink, textAlign: 'center', fontSize: 12, fontWeight: '600' }}>{item.label}</Text></Pressable>)}</View>;
+  return <View accessibilityRole="tablist" style={styles.tabs}>{values.map(item => {
+    const active = selected === item.id;
+    return <Pressable key={item.id} accessibilityRole="tab" accessibilityLabel={item.label} accessibilityState={{ selected: active }}
+      onPress={() => { if (!active) onSelect(item.id); }}
+      style={({ pressed }) => [styles.tab, { backgroundColor: active ? pressed ? c.actionBluePressed : c.actionBlue : pressed ? c.selected : c.inset }]}>
+      <Text style={[styles.label, { color: active ? '#FFFFFF' : c.ink }]}>{item.label}</Text>
+    </Pressable>;
+  })}</View>;
 }
+
+const styles = StyleSheet.create({
+  tabs: { flexDirection: 'row', gap: 5, flexWrap: 'wrap' },
+  tab: { flexGrow: 1, flexBasis: 'auto', minWidth: 54, maxWidth: '100%', minHeight: 48, paddingHorizontal: 12, paddingVertical: 10, justifyContent: 'center', borderRadius: 10 },
+  label: { textAlign: 'center', fontSize: 12, fontWeight: '600', flexShrink: 1 },
+});

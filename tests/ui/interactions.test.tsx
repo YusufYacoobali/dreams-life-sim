@@ -6,6 +6,7 @@ import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { ActionRow, Button, StatBar } from '../../src/ui/components';
 import { ThemeProvider } from '../../src/ui/theme';
 import { GameShell } from '../../src/ui/GameShell';
+import { FilterTabs } from '../../src/ui/FilterTabs';
 
 function frame(child: React.ReactNode) {
   return render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>);
@@ -43,6 +44,20 @@ test('only the submitted button shows progress while other controls keep their u
   fireEvent.press(screen.getByRole('button', { name: 'Something Else' }));
   expect(screen.queryByLabelText('Saving')).toBeNull();
   jest.useRealTimers();
+});
+
+test('choice buttons expose checked roles while their own saving state keeps them disabled', () => {
+  const submit = jest.fn();
+  function Choice() {
+    const [busy, setBusy] = React.useState(false);
+    return <Button label="Family" accessibilityRole="checkbox" accessibilityState={{ checked: true, busy: false, disabled: false }}
+      busy={busy} onPress={() => { submit(); setBusy(true); }} />;
+  }
+  frame(<Choice />);
+  fireEvent.press(screen.getByRole('checkbox', { name: 'Family', checked: true }));
+  expect(screen.getByRole('checkbox', { name: 'Family', checked: true }).props.accessibilityState).toEqual({ checked: true, busy: true, disabled: true });
+  fireEvent.press(screen.getByRole('checkbox', { name: 'Family' }));
+  expect(submit).toHaveBeenCalledTimes(1);
 });
 
 test('selection requires an eligible option and submits its actual stable ID', () => {
@@ -100,4 +115,17 @@ test('four tabs retain selection semantics and return stable route IDs', () => {
   expect(navigate).not.toHaveBeenCalled();
   fireEvent.press(screen.getByRole('tab', { name: 'Relationships' }));
   expect(navigate).toHaveBeenCalledWith('relationships');
+});
+
+test('a selected filter does not repeat its list reset while changing filters still returns the real ID', () => {
+  const select = jest.fn();
+  function Filters() {
+    const [selected, setSelected] = React.useState<'all' | 'family'>('all');
+    return <FilterTabs values={[{ id: 'all', label: 'All' }, { id: 'family', label: 'Family' }]} selected={selected} onSelect={id => { select(id); setSelected(id); }} />;
+  }
+  frame(<Filters />);
+  fireEvent.press(screen.getByRole('tab', { name: 'All', selected: true })); expect(select).not.toHaveBeenCalled();
+  fireEvent.press(screen.getByRole('tab', { name: 'Family' })); expect(select).toHaveBeenCalledTimes(1); expect(select).toHaveBeenLastCalledWith('family');
+  fireEvent.press(screen.getByRole('tab', { name: 'Family', selected: true })); expect(select).toHaveBeenCalledTimes(1);
+  fireEvent.press(screen.getByRole('tab', { name: 'All' })); expect(select).toHaveBeenCalledTimes(2); expect(select).toHaveBeenLastCalledWith('all');
 });

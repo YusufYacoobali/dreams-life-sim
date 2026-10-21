@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
@@ -30,6 +30,8 @@ function EventCard({
   const c = useColors();
   const { reducedMotion } = useFeedback();
   const insets = useSafeAreaInsets();
+  const { width, fontScale } = useWindowDimensions();
+  const stackedEffects = width < 360 || fontScale >= 1.3;
   const [selected, setSelected] = useState<string | null>(null);
   const mounted = useRef(true), closed = useRef(false), current = useRef({ event, busy });
   if (current.current.event !== event) closed.current = false;
@@ -64,9 +66,9 @@ function EventCard({
             <Body centered>{event.body}</Body>
             {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, textAlign: 'center', fontSize: 14 }}>{error}</Text>}
             {effects.length > 0 && <View style={[styles.effects, { backgroundColor: c.inset }]}>
-              {effects.map(effect => <View key={effect.id} style={styles.effectRow}>
-                <Text style={{ color: c.ink, fontSize: 14, flex: 1 }}>{effect.label}</Text>
-                <Text style={{ color: effect.tone === 'positive' ? c.positiveText : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: 'right', flex: 1 }}>{effect.value}</Text>
+              {effects.map(effect => <View key={effect.id} style={[styles.effectRow, stackedEffects && styles.effectRowStacked]}>
+                <Text style={{ color: c.ink, fontSize: 14, flex: stackedEffects ? 0 : 1, minWidth: 0 }}>{effect.label}</Text>
+                <Text style={{ color: effect.tone === 'positive' ? c.positiveText : effect.tone === 'negative' ? c.red : c.ink, fontWeight: '600', fontSize: 14, textAlign: stackedEffects ? 'left' : 'right', flex: stackedEffects ? 0 : 1, minWidth: 0 }}>{effect.value}</Text>
               </View>)}
             </View>}
             {event.kind === 'decision' && showProgress && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}
@@ -107,8 +109,9 @@ const styles = StyleSheet.create({
   selectionFooter: { flexShrink: 0, paddingHorizontal: 22, paddingBottom: 24, gap: 12 },
   illustration: { width: 88, height: 88, borderRadius: 44, borderWidth: 4, position: 'absolute', alignSelf: 'center', top: -44, alignItems: 'center', justifyContent: 'center' },
   contents: { paddingHorizontal: 22, paddingTop: 18, paddingBottom: 24, gap: 12 },
-  title: { alignItems: 'center', marginTop: 6 },
+  title: { alignItems: 'center', marginTop: 6, minWidth: 0 },
   effects: { borderRadius: 12, padding: 12, gap: 14 },
   effectRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
+  effectRowStacked: { flexDirection: 'column', alignItems: 'stretch', gap: 4 },
   option: { borderWidth: 1, borderRadius: 12, padding: 12, minHeight: 52, justifyContent: 'center' },
 });
