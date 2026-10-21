@@ -17,7 +17,7 @@ export type { CampusCommand } from './campusSchemas';
 export const campusClubSkill = { sport: 'sport', music: 'music', drama: 'acting', science: 'science' } as const;
 
 /** Record identity is separate from temporary availability so paused study retains its history. */
-function enrolment(world: World, personId = world.activePersonId) {
+function enrolment(world: World, personId = world.activePersonId, requireCampusResidence = true) {
   const person = world.people[personId];
   if (!person || person.died || !['trade', 'university', 'graduate'].includes(person.education.stage)) return;
   const education = person.education;
@@ -25,7 +25,8 @@ function enrolment(world: World, personId = world.activePersonId) {
   for (const item of world.studyCourses) if (item.personId === personId && item.status === 'active') { if (course) return; course = item; }
   if (!course || course.origin !== 'enrolment' || !course.started || !course.firstPayment || course.ended ||
     course.program !== education.stage || course.field !== education.field || course.school !== education.school ||
-    course.country !== person.country || course.city !== person.city || course.currency !== countries[person.country].currency ||
+    !course.country || !course.city || course.currency !== countries[course.country].currency ||
+    requireCampusResidence && (course.country !== person.country || course.city !== person.city) ||
     course.months !== education.months || course.requiredMonths !== education.requiredMonths || course.grades !== education.grades ||
     course.funding !== education.funding || course.annualTuition !== education.tuition || course.tuitionPaidMonths !== education.tuitionPaidMonths ||
     course.months >= course.requiredMonths) return;
@@ -101,7 +102,7 @@ export function prepareCampusTuition(world: World) {
   for (const community of world.campusCommunities) for (const member of community.students) {
     if (seen.has(member.courseId)) continue; seen.add(member.courseId);
     const course = courses.get(member.courseId), person = world.people[member.personId];
-    if (!course || !person || person.id === world.activePersonId || course.status !== 'active' || enrolment(world, person.id)?.id !== course.id || !storyPersonPresent(world, person)) continue;
+    if (!course || !person || person.id === world.activePersonId || course.status !== 'active' || enrolment(world, person.id, false)?.id !== course.id || !storyPersonPresent(world, person)) continue;
     const education = person.education;
     if (education.months < education.tuitionPaidMonths || education.tuition <= 0n) continue;
     if (availableCash(accountFor(world, person, course.currency!)) < education.tuition) { education.paused = true; continue; }
