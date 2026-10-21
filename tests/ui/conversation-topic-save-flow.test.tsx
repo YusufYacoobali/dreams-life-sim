@@ -79,8 +79,18 @@ test('changing the actual person resets the topic review and makes the former pe
   const context = await setup();
   try {
     const before = world(), payload = context.payload(), count = context.receipts(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
-    const view = render(frame()); await press('Have a Conversation'); await choose(/^Family\b/); const oldSubmit = selection().props.onChoose;
+    const view = render(frame());
+    const expectProfile = () => {
+      const person = before.people[mockPersonId];
+      for (const [label, stat] of [['Happiness', 'happiness'], ['Looks', 'looks'], ['Smarts', 'smarts']] as const) {
+        expect(screen.getByRole('progressbar', { name: label })).toHaveAccessibilityValue({ now: person.stats[stat] });
+      }
+      expect(person.education.stage).toBe('none'); expect(person.education.school).toBe('');
+      expect(screen.getByText('No current occupation')).toBeOnTheScreen();
+    };
+    expectProfile(); await press('Have a Conversation'); await choose(/^Family\b/); const oldSubmit = selection().props.onChoose;
     mockPersonId = 'person_parent2'; view.rerender(frame()); expect(screen.queryByRole('button', { name: 'Have Conversation' })).toBeNull();
+    expectProfile();
     await act(async () => { await oldSubmit('family'); }); expect(dispatch).not.toHaveBeenCalled();
     await press('Have a Conversation'); expect(screen.getByText('Talk to ' + fullName(before.people[mockPersonId]))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Have Conversation' })).toBeDisabled(); await choose(/^How you’re feeling\b/);

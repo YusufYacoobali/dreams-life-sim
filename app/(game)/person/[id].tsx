@@ -72,8 +72,11 @@ function PersonDetails({ id }: { id: string }) {
       <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
       <Body>{person.traits.join(', ')}</Body>
       <StatBar label="Health" value={person.stats.health} color={c.teal} />
+      <StatBar label="Happiness" value={person.stats.happiness} color={c.green} />
+      <StatBar label="Looks" value={person.stats.looks} color={c.purple} />
+      <StatBar label="Smarts" value={person.stats.smarts} color={c.blue} />
       {relation && <><Body>{relationLabel(world, relation)}</Body><StatBar label="Relationship" value={relation.strength} color={c.green} /><StatBar label="Trust" value={relation.trust} color={c.blue} /></>}
-      <Body>{isConfined(world, person) ? 'In custody' : person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.finance.pensionAnnual > 0n ? 'Retired' : person.education.school ?? 'No current occupation'}</Body>
+      <Body>{isConfined(world, person) ? 'In custody' : person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.education.stage !== 'none' ? person.education.school || 'Student' : person.finance.pensionAnnual > 0n ? 'Retired' : 'No current occupation'}</Body>
       {world.socialAccounts.filter(item => item.ownerId === person.id).map(item => <ActionRow key={item.id} title={'@' + item.handle} subtitle={item.status === 'memorial' ? 'Memorial social profile' : 'Social profile'} onPress={() => router.push({ pathname: '/social-profile/[id]', params: { id: item.id } })} />)}
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
     </Card> : <Body>This person could not be found.</Body>}
