@@ -116,12 +116,21 @@ test.each(['adopt', 'try-child'] as const)('%s retains the reviewed family plan 
     const initial = world(), beforeRows = rows(), command: GameCommand = action === 'adopt' ? { type: 'adopt', age: 6 } : { type: 'try-child' }, predicted = resolveCommand(initial, command, true);
     let view = render(frame(<Family />));
     const launch = action === 'adopt' ? 'Review Adoption' : 'Try for a Child', submit = action === 'adopt' ? 'Adopt a Child' : 'Try for a Child';
-    if (action === 'adopt') await press('Age 6'); await press(launch); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen(); await press('Never mind'); expect(rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
+    if (action === 'adopt') {
+      expect(screen.getByRole('radio', { name: 'Infant' })).toBeChecked();
+      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Age 6' })); });
+      expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked(); expect(screen.getByRole('radio', { name: 'Infant' })).not.toBeChecked();
+    }
+    await press(launch); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen(); await press('Never mind'); expect(rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
+    if (action === 'adopt') expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked();
     await press(launch); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_family BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm(submit); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: submit })).toBeEnabled(); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_family'); const release = pauseNextSave(); await confirm(submit); expect(mockStore.getState().busy).toBe(true);
-    for (const name of ['✓ Age 6', 'Age 2', 'Review Adoption']) if (action === 'adopt') expect(screen.getByRole('button', { name })).toBeDisabled();
+    if (action === 'adopt') {
+      for (const name of ['Age 6', 'Age 2']) expect(screen.getByRole('radio', { name })).toBeDisabled();
+      expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked(); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled();
+    }
     expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(screen.queryByRole('button', { name: 'Never mind' })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Family />)); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(predicted.accounts); expect(world().pregnancies).toEqual(predicted.pregnancies);
