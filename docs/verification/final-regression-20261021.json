@@ -649,11 +649,35 @@
   },
   "nativeProgress": {
     "status": "partial-coordinator-observation-only-full-acceptance-pending",
-    "observation": "Root team message21October08:23UTC; no new capture verification performed in this documentation task.",
+    "observation": "Root coordinator reported initial08:23metadata/Profile observations and actual08:32large-text finding. This documentation task only copies/hashes supplied capture bytes; it does not execute native checks or establish a native pass.",
     "C38readerTransition": "16→17",
     "allEightTablesExact": "Coordinator reported exact after metadata-only marker update; raw native closure is not established by this record.",
-    "profile": "Coordinator reviewed normal-font Profile only.",
-    "largeText130Percent": "Font change reloaded the app; first capture was splash. This is NOT a130percent UI pass.",
+    "profile": "Normal-font Profile reviewed by coordinator; later actual130percent capture has the known layout defect below.",
+    "largeText130Percent": {
+      "status": "failed-layout-acceptance-open",
+      "initialDiagnostic": "Changing to130percent caused reload; the initial capture was splash and is not a large-text UI pass.",
+      "laterActualCapture": {
+        "coordinatorObservedAt": "2026-10-21T08:32UTC",
+        "knownFinding": "A long Secondary qualification squeezes the Education title into Edu/cati/on.",
+        "rawImage": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-ui.png",
+          "bytes": 71933,
+          "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+        },
+        "rawLabels": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-ui.xml",
+          "bytes": 28933,
+          "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+        },
+        "captureLog": {
+          "file": "final-regression-20261021/native-profile-130-known-issue-capture-log.json",
+          "bytes": 1092,
+          "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+        },
+        "scope": "One actual C38 Profile capture supplied/reviewed by the root coordinator; no new routine, C39, full large-text or native acceptance pass.",
+        "followup": "School owns a responsive shared ActionRow fix in a separate9ad-based worktree. The fix and final130percent acceptance remain pending."
+      }
+    },
     "newRoutineActions": "pending",
     "C39Native": "pending",
     "continuous30MinuteUI": "pending"
@@ -795,6 +819,21 @@
       "original": "Generated documentation-only688namedfile SHA256 check",
       "bytes": 843,
       "sha256": "37084bff9d518f3c8ce3d6458d4c822ed9918bf4e20d3ce10d9a341f4cf8a395"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-ui.png": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png",
+      "bytes": 71933,
+      "sha256": "06ae4bcb128b27fc1cbbf18f39488c69af001558106ed513c34a6185dfcf0776"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-ui.xml": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml",
+      "bytes": 28933,
+      "sha256": "2492615ca1e2989f81e22f4dbddd468e570b5aca680575d52b235266abf31360"
+    },
+    "final-regression-20261021/native-profile-130-known-issue-capture-log.json": {
+      "original": "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json",
+      "bytes": 1092,
+      "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
     }
   },
   "originalToPortable": {
@@ -811,7 +850,10 @@
     "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.md": "final-regression-20261021/011-dreams-c39-professional-v3-country-outcomes-20261021.md",
     "/tmp/dreams-c39-professional-v3-country-outcomes-20261021.json": "final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json",
     "/tmp/dreams-production-finish-final-publication-inputs-v2-20261021.json": "final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json",
-    "/tmp/dreams-production-finish-final-publication-plan-v2-20261021.md": "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md"
+    "/tmp/dreams-production-finish-final-publication-plan-v2-20261021.md": "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png": "final-regression-20261021/native-profile-130-known-issue-ui.png",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml": "final-regression-20261021/native-profile-130-known-issue-ui.xml",
+    "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json": "final-regression-20261021/native-profile-130-known-issue-capture-log.json"
   },
   "overallEffortEstimatePercent": 75,
   "limits": [
