@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text, View, useWindowDimensions } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { countries } from '../../../src/game/countries';
@@ -12,9 +13,11 @@ import { instruments } from '../../../src/game/content/markets';
 import { Illustration } from '../../../src/assets/Illustration';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { businessValue } from '../../../src/game/businessValuation';
+import { useColors } from '../../../src/ui/theme';
 
 export default function Assets() {
   const world = useGame(s => s.world)!;
+  const c = useColors(), { width, fontScale } = useWindowDimensions(), stacked = width < 360 || fontScale >= 1.2;
   const player = world.people[world.activePersonId];
   const accounts = world.accounts.filter(account => account.ownerId === player.id);
   const worth = netWorth(world);
@@ -23,18 +26,20 @@ export default function Assets() {
   return <Page>
     <Header title="Assets" />
     <Card>
-      <Illustration id="money" size={44} />
-      <Body muted>Net worth</Body><Heading size={30}>{formatMoney(worth, countries[player.country].locale)}</Heading>
-      {accounts.map(account => <Body key={account.id}>Bank: {formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Body>)}
-      <Body muted>Cash less debt: {formatMoney({ minor: cashNetWorth(world), currency: accountFor(world).currency }, countries[player.country].locale)}</Body>
-      <ActionRow title="Finances" subtitle="Annual income, expenses, taxes and cash flow" onPress={() => router.push({ pathname: '/finances', params: { tab: 'assets' } })} />
-      <ActionRow title="Bank & Loans" subtitle="Borrow, repay and view transactions" onPress={() => router.push('/bank')} />
+      <View style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'flex-start' : 'center', gap: 14 }}>
+        <View style={{ padding: 10, borderRadius: 16, backgroundColor: c.inset }}><Illustration id="money" size={48} /></View>
+        <View style={{ flex: stacked ? undefined : 1, minWidth: 0, maxWidth: '100%', gap: 4 }}><Body muted>Net worth</Body><Text accessibilityRole="header" style={{ color: worth.minor < 0n ? c.red : c.positiveText, fontSize: 30, lineHeight: 39, fontWeight: '700' }}>{formatMoney(worth, countries[player.country].locale)}</Text><Body muted>Estimated total · {worth.currency}</Body></View>
+      </View>
+      <View style={{ borderTopWidth: 1, borderTopColor: c.line, paddingTop: 12, gap: 8 }}>{accounts.map(account => <View key={account.id} style={{ gap: 3 }}><Body>Bank: {formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale)}</Body>{account.lockedCash > 0n && <Body muted>Includes {formatMoney({ minor: account.lockedCash, currency: account.currency }, countries[player.country].locale)} held in trust.</Body>}</View>)}<Body muted>Cash less debt: {formatMoney({ minor: cashNetWorth(world), currency: accountFor(world).currency }, countries[player.country].locale)}</Body></View>
+      <ActionRow title="Finances" subtitle="Annual income, expenses, taxes and cash flow" icon={<Illustration id="money" size={36} />} onPress={() => router.push({ pathname: '/finances', params: { tab: 'assets' } })} />
+      <ActionRow title="Bank & Loans" subtitle="Borrow, repay and view transactions" icon={<Illustration id="money" size={36} />} onPress={() => router.push('/bank')} />
     </Card>
-    {(['property', 'vehicle', 'possession'] as const).map(kind => <Card key={kind}><Heading size={20}>{kind === 'property' ? 'Properties' : kind === 'vehicle' ? 'Vehicles' : 'Possessions'}</Heading>
-      {owned.filter(asset => asset.kind === kind).map(asset => <ActionRow key={asset.id} title={asset.name} subtitle={asset.primaryHome ? 'Primary home' : asset.rental === 'occupied' ? 'Rented out' : asset.listing ? 'Listed for sale' : asset.condition + '% condition'} value={formatMoney({ minor: asset.value, currency: asset.currency })} icon={<CatalogArt id={asset.catalogId} size={48} />} onPress={() => router.push({ pathname: '/asset/[id]', params: { id: asset.id } })} />)}
-      {!owned.some(asset => asset.kind === kind) && <Body muted>{kind === 'property' ? 'No property owned.' : kind === 'vehicle' ? 'No vehicles owned.' : 'No possessions owned.'}</Body>}
+    {(['property', 'vehicle', 'possession'] as const).map(kind => { const inventory = owned.filter(asset => asset.kind === kind); return <Card key={kind}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>{kind === 'possession' ? <CatalogArt id="watch" size={40} /> : <Illustration id={kind} size={40} />}<View style={{ flex: 1, minWidth: 0 }}><Heading size={20}>{kind === 'property' ? 'Properties' : kind === 'vehicle' ? 'Vehicles' : 'Possessions'}</Heading><Body muted>{inventory.length} owned</Body></View></View>
+      {inventory.map(asset => <ActionRow key={asset.id} title={asset.name} subtitle={asset.primaryHome ? 'Primary home' : asset.rental === 'occupied' ? 'Rented out' : asset.listing ? 'Listed for sale' : asset.condition + '% condition'} value={formatMoney({ minor: asset.value, currency: asset.currency })} icon={<CatalogArt id={asset.catalogId} size={48} />} onPress={() => router.push({ pathname: '/asset/[id]', params: { id: asset.id } })} />)}
+      {!inventory.length && <Body muted>{kind === 'property' ? 'No property owned.' : kind === 'vehicle' ? 'No vehicles owned.' : 'No possessions owned.'}</Body>}
       <ActionRow title={kind === 'property' ? 'Find a Home' : kind === 'vehicle' ? 'Buy a Vehicle' : 'Shop Possessions'} onPress={() => router.push({ pathname: '/shopping/[kind]', params: { kind } })} />
-    </Card>)}
+    </Card>; })}
     <Card><Heading size={20}>Businesses</Heading>{world.businesses.filter(item => item.ownerId === player.id && item.status === 'active').map(company => <ActionRow key={company.id} title={company.name} subtitle="Estimated company equity" value={formatMoney({ minor: businessValue(world, company), currency: company.currency })} onPress={() => router.push({ pathname: '/business/[id]', params: { id: company.id, tab: 'assets' } })} />)}<ActionRow title="Business Portfolio" icon={<FameBusinessArt id="business" size={44} />} onPress={() => router.push({ pathname: '/business', params: { tab: 'assets' } })} /></Card>
     <Card><Heading size={20}>Investments</Heading>{holdings.map(holding => <ActionRow key={holding.id} title={instruments[holding.instrumentId].name} subtitle={formatQuantity(holding.quantity, holding.instrumentId) + ' units'} value={formatMoney({ minor: investmentValue(world, holding.instrumentId, holding.quantity, accountFor(world).currency), currency: accountFor(world).currency })} onPress={() => router.push({ pathname: '/investment/[id]', params: { id: holding.instrumentId } })} />)}
       <ActionRow title="Stocks, Funds & Crypto" icon={<CatalogArt id="portfolio" size={44} />} onPress={() => router.push('/investments')} />
