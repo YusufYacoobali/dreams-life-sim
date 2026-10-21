@@ -1,5 +1,5 @@
 import { petMoveCost } from '../../src/game/systems/pets';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -35,9 +35,19 @@ function EmigrationPlan({ routeHint }: { routeHint?: string }) {
   const person = world.people[world.activePersonId], offers = world.relocations.filter(item => item.personId === person.id);
   const [destinationId, setDestination] = useState<DestinationId>(() => person.country === destinations.paris.country ? 'london' : 'paris'), [route, setRoute] = useState<RelocationChoice['route']>(routeHint === 'work' || routeHint === 'study' ? routeHint : 'settlement');
   const [roleId, setRole] = useState('administrator'), [program, setProgram] = useState<typeof relocationPrograms[number]>('university'), [field, setField] = useState<typeof fields[number]>('arts');
-  const [offerId, setOfferId] = useState<string | null>(null), [companionIds, setCompanions] = useState<string[]>([]), [reserveMonths, setReserve] = useState<3 | 6>(3), [page, setPage] = useState(0);
+  const [offerId, setOfferId] = useState<string | null>(() => {
+    const matching = routeHint === 'work' || routeHint === 'study' ? offers.filter(item => item.route === routeHint) : offers;
+    return matching.at(-1)?.id ?? null;
+  }), [companionIds, setCompanions] = useState<string[]>([]), [reserveMonths, setReserve] = useState<3 | 6>(3), [page, setPage] = useState(0);
   const [review, setReview] = useState<{ command: RelocationCommand; event: EventPresentation } | null>(null);
-  useEffect(() => { const last = offers.at(-1); if (last) { setOfferId(last.id); setCompanions([]); } }, [world.relocations.length, world.activePersonId]);
+  const knownApplicationCount = useRef(world.relocations.length);
+  useEffect(() => {
+    if (knownApplicationCount.current === world.relocations.length) return;
+    knownApplicationCount.current = world.relocations.length;
+    // A new actual application follows the player's current form, even when
+    // they chose a different route after entering through Work/Study Abroad.
+    const last = offers.at(-1); if (last) { setOfferId(last.id); setCompanions([]); }
+  }, [world.relocations.length, world.activePersonId]);
   const selected: RelocationChoice = { destinationId, route, roleId: route === 'work' ? roleId : null, program: route === 'study' ? program : null, field: route === 'study' ? field : null };
   const reason = relocationReason(world, selected), fee = relocationFee(world), money = (minor: bigint, currency: Currency = countries[person.country].currency) => formatMoney({ minor, currency });
   const offer = offers.find(item => item.id === offerId), quote = offer?.status === 'approved' ? moveQuote(world, offer, companionIds, reserveMonths) : null;

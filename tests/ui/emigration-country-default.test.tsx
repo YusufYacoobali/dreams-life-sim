@@ -23,9 +23,11 @@ let mockStore: ReturnType<typeof createGameStore>, mockRoute: string | undefined
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => ({ route: mockRoute }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Emigrate from '../../app/(game)/emigrate';
+import Travel from '../../app/(game)/travel';
+import { router } from 'expo-router';
 
 const world = () => mockStore.getState().world!;
-const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Emigrate /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const frame = (content: React.ReactNode = <Emigrate />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const ack = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
@@ -50,6 +52,39 @@ async function setup(mode: 'fr-birth' | 'archive') {
   return { get sqlite() { return sqlite; }, rows, cold: async () => { sqlite.close(); await boot(new SaveRepository(connect())); }, oldMoments: () => { for (const point of archive.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE snapshot_id=?').get(point.summary.id)?.payload).toBe(point.payload); }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
 }
 afterEach(() => { jest.restoreAllMocks(); });
+
+test('Study Abroad opens its course flow after a recorded work move and keeps that real work application available in history', async () => {
+  mockRoute = undefined; const db = await setup('archive');
+  try {
+    const initial = world(), beforeRows = db.rows();
+    expect(initial.relocations.at(-1)).toMatchObject({ route: 'work', status: 'moved', destinationId: 'tokyo' });
+    const view = render(frame());
+    expect(screen.getByText('Work Abroad · moved')).toBeOnTheScreen();
+    view.rerender(frame(<Travel />));
+    await press(/^Study Abroad\./);
+    expect(router.push).toHaveBeenLastCalledWith({ pathname: '/emigrate', params: { route: 'study' } });
+    mockRoute = 'study'; view.rerender(frame());
+    expect(screen.getByRole('button', { name: 'Study Abroad. Selected' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Course' })).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'University. Selected' })).toBeOnTheScreen();
+    expect(screen.queryByText('Work Abroad · moved')).toBeNull();
+    await press(/^Tokyo · Work Abroad\./);
+    expect(screen.getByText('Work Abroad · moved')).toBeOnTheScreen();
+    await press('Plan Another Move');
+    expect(screen.getByRole('button', { name: 'Study Abroad. Selected' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Course' })).toBeOnTheScreen();
+    expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows); db.oldMoments();
+    // An explicit new form choice takes precedence over the original entry
+    // link. Its real saved outcome must open, whatever the committed roll is.
+    await press('Emigration');
+    const application: GameCommand = { type: 'apply-relocation', destinationId: 'paris', route: 'settlement', roleId: null, program: null, field: null, quotedFee: relocationFee(initial) };
+    const expected = resolveCommand(initial, application, true);
+    await press('Review Application'); await press('Submit Application'); expect(world()).toEqual(expected);
+    await press('Continue'); expect(world()).toEqual(ack(expected));
+    expect(screen.getByText('Emigration · ' + expected.relocations.at(-1)!.status)).toBeOnTheScreen();
+    expect(world().relocations[0]).toEqual(initial.relocations[0]); db.oldMoments(); view.unmount();
+  } finally { db.close(); }
+});
 
 test.each(['work', 'study', undefined])('French-born %s entry selects a visible foreign country while preserving the real age gate and every saved row', async route => {
   mockRoute = route; const db = await setup('fr-birth');
