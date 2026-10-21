@@ -43,7 +43,7 @@ test('native audition rollback/retry creates exactly one contract and team; focu
     expect(selected.careers).toHaveLength(1);
     expect(career.contacts).toHaveLength(2);
     expect(career.projects[0].grossEarned).toBe(0n);
-    fireEvent.press(screen.getByRole('button', { name: /^Focus on the Work\./ }));
+    fireEvent.press(screen.getByRole('radio', { name: /^Focus on the Work\./ }));
     await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Set Career Focus' })); });
     await waitFor(() => expect(screen.getByText('Career focus updated')).toBeOnTheScreen());
     const saved = mockStore.getState().world!;
