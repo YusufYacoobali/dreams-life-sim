@@ -11,7 +11,7 @@ import { employee } from '../support/employee';
 
 test.each(countryCodes)('%s resolves all45 adult friendship/partner choices with exact existing people and no money, service, qualification or random awards', country => {
   const { world, friendId, partnerId } = adultSocial(country), before = encodeWorld(world);
-  expect(adultRelationshipTemplates).toHaveLength(15); expect(eventTemplates).toHaveLength(250);
+  expect(adultRelationshipTemplates).toHaveLength(15); expect(eventTemplates).toHaveLength(251);
   for (const template of adultRelationshipTemplates) {
     expect(eligibleTemplates(world)).toContainEqual(template); const event = bindEvent(world, template), otherId = template.friend ? friendId : partnerId;
     expect(encodeWorld(world)).toBe(before); expect(event.personIds).toEqual([world.activePersonId, otherId]); expect(event.body).toContain(fullName(world.people[otherId])); expect(JSON.stringify(event)).not.toMatch(/\{(?:friend|partner)\}/);

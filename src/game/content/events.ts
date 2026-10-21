@@ -21,6 +21,7 @@ import { hobbyContent } from './leisure';
 import { conditions } from './health';
 import { formatMoney } from '../money';
 import { everydayLifeTemplates } from './everydayLifeStories';
+import { rareAdultTemplates } from './rareAdultStories';
 import { storyContactNames } from '../storyNames';
 
 /** Original situations, not random names placed in interchangeable success text. */
@@ -227,6 +228,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...workplaceTemplates,
   ...adultRelationshipTemplates,
   ...everydayLifeTemplates,
+  ...rareAdultTemplates,
 ];
 
 /** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */
