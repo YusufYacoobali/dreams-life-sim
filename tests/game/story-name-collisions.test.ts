@@ -12,10 +12,10 @@ const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 // and bound choice/result remains part of its immutable canonical proof.
 function originalC35Canonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 36, engineVersion: 37, contentVersion: 12 });
+  expect(original).toMatchObject({ schemaVersion: 37, engineVersion: 38, contentVersion: 12 });
   // These captured World34 scenes predate best-friend and World36 histories.
   // Assert emptiness before removing only those new defaults, never old data.
-  for (const key of ['bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations']) { expect(original[key]).toEqual([]); delete original[key]; }
+  for (const key of ['bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves']) { expect(original[key]).toEqual([]); delete original[key]; }
   original.schemaVersion = 34; original.engineVersion = 35; original.contentVersion = 10;
   return JSON.stringify(original);
 }

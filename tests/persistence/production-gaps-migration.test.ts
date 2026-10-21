@@ -10,18 +10,18 @@ import * as checkpoints from '../../src/persistence/checkpoints';
 import native from '../fixtures/v35-native-best-friend-checkpoints.json';
 
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
-const newHistories = ['teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations'] as const;
+const newHistories = ['teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves'] as const;
 const tables = ['backups', 'branches', 'lives', 'preferences', 'receipts', 'restore_receipts', 'snapshot_metadata', 'snapshots'];
 const observations = [
   { key: 'current', revision: 140, bytes: 142116, payloadSha: 'a9b79b6317e443512bf7a4988a15cf9d196774fa5175501cae7512b023b8fef8', canonicalSha: 'cfa1a20ca78ebdd61fb6dd01edd09b2dab2ff48a3e3e698f84529a0cb9aca28e' },
   { key: 'backup', revision: 139, bytes: 142288, payloadSha: 'a9b8f03be86f03d7e406cbbfa73d6ddbfb45767e75902917f94157ea43b1263e', canonicalSha: 'e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22' },
 ] as const;
 
-/** Normalize only this future migration's empty fields and three root tags.
+/** Normalize only the C37/C38 empty histories and three current root tags.
  * The actual nonempty best-friend agreement and every older field stay in the hash. */
 function originalCanonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 36, engineVersion: 37, contentVersion: 12 });
+  expect(original).toMatchObject({ schemaVersion: 37, engineVersion: 38, contentVersion: 12 });
   for (const key of newHistories) { expect(original[key]).toEqual([]); delete original[key]; }
   expect(original.bestFriendships).toEqual([{
     id: 'best_friendship_138', ruleVersion: 1, relationshipId: 'relation_person_player_person_npc_15_5',
@@ -85,7 +85,7 @@ async function fixtureDatabase() {
   };
 }
 
-test('reader15→16 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
+test('reader15→17 changes only the marker and cold-loads both actual nonempty-friendship checkpoints without eager row rewrites', async () => {
   const context = await fixtureDatabase();
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);
@@ -93,7 +93,7 @@ test('reader15→16 changes only the marker and cold-loads both actual nonempty-
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(15); context.forbidRowWrites();
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), repository = new SaveRepository(context.driver);
     await repository.initialise(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(16); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(17); expect(context.rows()).toEqual(before);
     const current = await repository.active(), backup = await repository.recoveryPreview(native.current.lifeId);
     expect(current).not.toBeNull(); expect(sha(originalCanonical(current!))).toBe(observations[0].canonicalSha); expect(sha(originalCanonical(backup))).toBe(observations[1].canonicalSha);
     expect(current!.pending).toBeNull(); expect(backup.pending).toMatchObject({ kind: 'result', id: 'action_138', title: 'Your best friend' });
@@ -105,37 +105,37 @@ test('reader15→16 changes only the marker and cold-loads both actual nonempty-
     expect(context.rows()).toEqual(before);
     expect(context.sqlite.prepare('SELECT payload FROM lives').get()?.payload).toBe(native.current.checkpoint);
     expect(context.sqlite.prepare('SELECT payload FROM backups').get()?.payload).toBe(native.backup.checkpoint);
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(16);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(17);
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
-test('failure after writing the reader16 marker rolls back to supported15 with every original row intact before a cold retry', async () => {
+test('failure after writing the reader17 marker rolls back to supported15 with every original row intact before a cold retry', async () => {
   const context = await fixtureDatabase();
   try {
     const before = context.rows(); context.forbidRowWrites(); const driver = context.driver;
     const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => {
-      await tx.run(sql, values); if (sql === 'PRAGMA user_version = 16') throw new Error('controlled marker failure');
+      await tx.run(sql, values); if (sql === 'PRAGMA user_version = 17') throw new Error('controlled marker failure');
     } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('controlled marker failure');
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(15); expect(context.rows()).toEqual(before);
-    const retry = context.reopen(); await retry.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(16); expect(context.rows()).toEqual(before);
+    const retry = context.reopen(); await retry.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(17); expect(context.rows()).toEqual(before);
     expect(sha(originalCanonical((await retry.active())!))).toBe(observations[0].canonicalSha);
     expect(sha(originalCanonical(await retry.recoveryPreview(native.current.lifeId)))).toBe(observations[1].canonicalSha); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });
 
-test('unsupported reader17 is refused before any mutation of the retained native current/backup database', async () => {
+test('unsupported reader18 is refused before any mutation of the retained native current/backup database', async () => {
   const context = await fixtureDatabase();
   try {
-    context.sqlite.exec('PRAGMA user_version=17'); const before = context.rows(); context.forbidRowWrites();
+    context.sqlite.exec('PRAGMA user_version=18'); const before = context.rows(); context.forbidRowWrites();
     await expect(new SaveRepository(context.driver).initialise()).rejects.toThrow('newer version');
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(17); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(18); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });
 
 test.each(newHistories)('a current-format save cannot omit required %s history', key => {
   const current: Partial<World> = structuredClone(unpackCheckpoint(native.current.checkpoint));
-  expect(validateWorld(current).schemaVersion).toBe(36);
+  expect(validateWorld(current).schemaVersion).toBe(37);
   delete current[key];
   expect(() => validateWorld(current)).toThrow();
 });
