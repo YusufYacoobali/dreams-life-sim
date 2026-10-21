@@ -190,7 +190,8 @@ function finishYear(world: World) {
   npcSeparationsYear(world);
   npcCourtshipsYear(world);
   familyYear(world);
-  const eligible = isConfined(world) || activeTrip(world) ? eligibleTemplates(world).filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : eligibleTemplates(world);
+  const templates = eligibleTemplates(world);
+  const eligible = activeTrip(world) ? templates.filter(item => ['quiet-morning', 'useful-advice'].includes(item.id)) : isConfined(world) ? templates.filter(item => !!item.legal || ['quiet-morning', 'useful-advice'].includes(item.id)) : templates;
   const introductory = age === 1 ? eligible.filter(template => template.min === 1) : [];
   const pool = introductory.length ? introductory : eligible;
   // Introductory year is guaranteed; later years leave room for quiet years.
