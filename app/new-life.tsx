@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Keyboard, Pressable, Text, TextInput, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, BackHandler, Keyboard, Pressable, Text, TextInput, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { royalCountries } from '../src/game/content/royalty';
 import { countries, countryCodes, CountryCode } from '../src/game/countries';
 import { Creation, creationSchema } from '../src/game/createLife';
@@ -16,11 +16,16 @@ import { genders } from '../src/game/systems/familySchemas';
 
 export default function NewLife() {
   const lastNameInput = useRef<TextInput>(null);
+  const submitting = useRef(false);
   const params = useLocalSearchParams<{ seed?: string; mode?: string }>(), parsedSeed = Number(params.seed);
   const seed = Number.isInteger(parsedSeed) && parsedSeed >= 0 && parsedSeed <= 0xFFFFFFFF ? parsedSeed : 0;
   const draft = useCreationDraft(s => s.draft), begin = useCreationDraft(s => s.begin), update = useCreationDraft(s => s.update), randomise = useCreationDraft(s => s.randomise), customise = useCreationDraft(s => s.customise);
   const [field, setField] = useState<'country' | 'city' | null>(null), [message, setMessage] = useState<string | null>(null), [confirm, setConfirm] = useState<{ input: Creation; seed: number } | null>(null), [advanced, setAdvanced] = useState(false);
   const world = useGame(s => s.world), start = useGame(s => s.startLife), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
+  useFocusEffect(useCallback(() => {
+    const listener = BackHandler.addEventListener('hardwareBackPress', () => busy || submitting.current);
+    return () => listener.remove();
+  }, [busy]));
   useEffect(() => { begin(seed, params.mode === 'random' ? 'random' : 'custom'); }, [seed, params.mode, begin]);
   if (!draft) return <Page bottomSafeArea><ActivityIndicator accessibilityLabel="Preparing your new life" /></Page>;
   const { input, mode } = draft, edit = (change: Partial<Creation>) => { if (busy) return; update({ ...input, ...change }); setMessage(null); };
@@ -34,12 +39,17 @@ export default function NewLife() {
     setMessage(field === 'firstName' ? 'Enter a first name.' : field === 'lastName' ? 'Enter a last name.' : 'Check your life details and try again.');
     return null;
   };
-  const submit = async (creation = validated(), selectedSeed = draft.seed) => { if (!creation) return false; const saved = await start(creation, selectedSeed); if (saved) router.replace('/birth'); return saved; };
+  const submit = async (creation = validated(), selectedSeed = draft.seed) => {
+    if (!creation || busy || submitting.current) return false;
+    submitting.current = true;
+    try { const saved = await start(creation, selectedSeed); if (saved) router.replace('/birth'); return saved; }
+    finally { submitting.current = false; }
+  };
   const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
   return <Page bottomSafeArea footer={<>
     {!confirm && (message || error) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, lineHeight: 21 }}>{message ?? error}</Text>}
     <Button label="Start My Life" tone="positive" busy={busy} onPress={() => { Keyboard.dismiss(); const creation = validated(); if (!creation) return; if (world) setConfirm({ input: creation, seed: draft.seed }); else void submit(creation); }} />
-  </>}><Header title="New Life" onBack={() => router.back()} /><CreationProgress step={1} />
+  </>}><Header title="New Life" backDisabled={busy} onBack={() => { if (!busy && !submitting.current) router.back(); }} /><CreationProgress step={1} />
     <View style={{ alignItems: 'center', gap: 8 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 28 }}>
         <Pressable accessibilityRole="button" accessibilityLabel="Previous avatar" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => cycleAvatar(-1)} style={{ padding: 10, minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 24, backgroundColor: c.surface }}><Ionicons name="chevron-back" size={22} color={c.ink} /></Pressable>

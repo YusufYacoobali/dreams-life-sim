@@ -67,12 +67,12 @@ export function Button({
   );
 }
 
-export function Header({ title, onBack, trailing }: { title: string; onBack?: () => void; trailing?: React.ReactNode }) {
+export function Header({ title, onBack, trailing, backDisabled = false }: { title: string; onBack?: () => void; trailing?: React.ReactNode; backDisabled?: boolean }) {
   const c = useColors();
   return (
     <View style={styles.header}>
       <View style={styles.headerSide}>{onBack && (
-        <Pressable onPress={onBack} accessibilityRole="button" accessibilityLabel="Back" hitSlop={8} style={styles.back}>
+        <Pressable onPress={onBack} disabled={backDisabled} accessibilityRole="button" accessibilityLabel="Back" accessibilityState={{ disabled: backDisabled }} hitSlop={8} style={[styles.back, { opacity: backDisabled ? 0.5 : 1 }]}>
           <Text style={{ fontSize: 34, color: c.ink }}>‹</Text>
         </Pressable>
       )}</View>
