@@ -121,8 +121,16 @@ test('the actual doctor assessment keeps its exact reviewed service, payer and f
   const initial = decodeWorld(JSON.stringify(graduate)), db = await setup(initial);
   try {
     const expected = resolveCommand(initial, { type: 'consult', service: 'tests' }, true), before = db.rows(); let view = render(frame(<Doctor />));
-    await press(/^Request Tests\./); await confirm('Never mind'); expect(db.rows()).toEqual(before);
-    await press(/^Request Tests\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); db.sqlite.exec("CREATE TRIGGER fail_health_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm('Confirm Visit');
+    await press(/^Request Tests\./);
+    const cancelled = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
+    await confirm('Never mind'); await act(async () => { await cancelled.onChoose('confirm'); });
+    expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(before); expect(world()).toEqual(initial);
+    await press(/^Request Tests\./); await act(async () => { cancelled.onCancel(); });
+    expect(screen.getByText('Request Tests?')).toBeOnTheScreen();
+    const unmounted = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    view.unmount(); await act(async () => { await unmounted('confirm'); });
+    expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(before);
+    view = render(frame(<Doctor />)); await press(/^Request Tests\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); db.sqlite.exec("CREATE TRIGGER fail_health_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm('Confirm Visit');
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(screen.getByText('Request Tests?')).toBeOnTheScreen(); expect(db.rows()).toEqual(before); expect(world()).toEqual(initial);
     db.sqlite.exec('DROP TRIGGER fail_health_ui'); await confirm('Confirm Visit'); await waitFor(() => expect(screen.queryByText('Request Tests?')).toBeNull()); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - consultationCost(initial, 'tests')); expect(world().people[world().activePersonId].health.records.at(-1)?.kind).toBe('tests');
@@ -164,7 +172,9 @@ test('changing the actual condition route discards the previous review instead o
   const initial = treatedMedical(), id = initial.people[initial.activePersonId].health.conditions[0].id, db = await setup(initial); mockConditionId = id;
   try {
     const before = db.rows(), view = render(frame(<ConditionDetail />)); await press('Review Stopping Treatment');
+    const stale = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     mockConditionId = 'missing-condition'; view.rerender(frame(<ConditionDetail />)); expect(screen.getByText('This condition is unavailable.')).toBeOnTheScreen(); expect(screen.queryByRole('button', { name: 'Stop Treatment' })).toBeNull();
-    mockConditionId = id; view.rerender(frame(<ConditionDetail />)); expect(screen.queryByRole('button', { name: 'Stop Treatment' })).toBeNull(); expect(db.rows()).toEqual(before); expect(world()).toEqual(initial); db.original(); view.unmount();
+    await act(async () => { await stale('confirm'); }); expect(db.rows()).toEqual(before);
+    mockConditionId = id; view.rerender(frame(<ConditionDetail />)); await act(async () => { await stale('confirm'); }); expect(screen.queryByRole('button', { name: 'Stop Treatment' })).toBeNull(); expect(db.rows()).toEqual(before); expect(world()).toEqual(initial); db.original(); view.unmount();
   } finally { jest.restoreAllMocks(); db.close(); }
 });

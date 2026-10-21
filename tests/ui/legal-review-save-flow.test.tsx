@@ -16,6 +16,7 @@ import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/per
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { EventModal } from '../../src/ui/EventModal';
 import graduate from '../fixtures/v3-employed-graduate.json';
 import archive from '../fixtures/v9-court-archive.json';
 
@@ -86,8 +87,14 @@ test('the exact reviewed counsel/payment survives on-disk rollback, busy duplica
   const initial = openCase(), item = initial.cases[0], db = await setup(initial); mockCaseId = item.id;
   try {
     const command: GameCommand = { type: 'retain-counsel', caseId: item.id, counsel: 'private' }, expected = resolveCommand(initial, command, true), beforeRows = db.rows(), originalPayload = db.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)?.payload;
-    let view = render(frame(<CaseDetail />)); await press(/Private Counsel\./); await confirm('Never mind'); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
-    await press(/Private Counsel\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+    let view = render(frame(<CaseDetail />)); await press(/Private Counsel\./);
+    const cancelled = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
+    await confirm('Never mind'); await act(async () => { await cancelled.onChoose('confirm'); });
+    expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
+    await press(/Private Counsel\./); await act(async () => { cancelled.onCancel(); }); expect(screen.getByText('Change representation?')).toBeOnTheScreen();
+    const unmounted = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    view.unmount(); await act(async () => { await unmounted('confirm'); }); expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows);
+    view = render(frame(<CaseDetail />)); await press(/Private Counsel\./); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     db.sqlite.exec("CREATE TRIGGER fail_legal_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm('Choose Counsel');
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1);
     expect(screen.getByRole('button', { name: 'Choose Counsel' })).toBeEnabled(); expect(screen.getByText('Change representation?')).toBeOnTheScreen(); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
@@ -123,7 +130,10 @@ test('case identity navigation discards an old review; an ordinary revision reta
   let db = await setup(openCase()); mockCaseId = world().cases[0].id;
   try {
     const savedRows = db.rows(), originalId = mockCaseId, view = render(frame(<CaseDetail />)); await press(/Private Counsel\./);
-    mockCaseId = 'missing'; view.rerender(frame(<CaseDetail />)); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(screen.getByText('This case could not be found.')).toBeOnTheScreen(); mockCaseId = originalId; view.rerender(frame(<CaseDetail />)); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(db.rows()).toEqual(savedRows); view.unmount();
+    const stale = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    mockCaseId = 'missing'; view.rerender(frame(<CaseDetail />)); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(screen.getByText('This case could not be found.')).toBeOnTheScreen();
+    await act(async () => { await stale('confirm'); }); expect(db.rows()).toEqual(savedRows);
+    mockCaseId = originalId; view.rerender(frame(<CaseDetail />)); await act(async () => { await stale('confirm'); }); expect(screen.queryByRole('button', { name: 'Choose Counsel' })).toBeNull(); expect(db.rows()).toEqual(savedRows); view.unmount();
   } finally { db.close(); }
   db = await setup(prison());
   try {

@@ -46,21 +46,25 @@ export function HealthReviewError({ error }: { error: string | null }) {
 export function useHealthReview(context = '') {
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
   const identity = useGame(s => s.world ? JSON.stringify([s.world.id, s.world.activePersonId, context]) : 'none');
-  const identityRef = useRef(identity), submitting = useRef(false); identityRef.current = identity;
+  const identityRef = useRef(identity), mounted = useRef(true), submitting = useRef(false);
   const [review, setReview] = useState<{ identity: string; command: HealthReviewCommand; event: EventPresentation } | null>(null);
+  const activeReview = useRef<typeof review>(null);
+  if (identityRef.current !== identity) { identityRef.current = identity; activeReview.current = null; }
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; activeReview.current = null; }; }, []);
   useEffect(() => { setReview(saved => saved && saved.identity !== identity ? null : saved); }, [identity]);
   const current = review?.identity === identity ? review : null;
   return {
     isOpen: !!current,
     confirm(command: HealthReviewCommand, title: string, body: string, terms: EffectRow[] = [], art: HealthLegalArtId = 'care', confirmLabel = 'Confirm') {
-      if (busy || submitting.current) return;
-      setReview({ identity, command, event: { kind: 'confirmation', id: identity + ':' + command.type, title, body, terms, confirmLabel, illustration: <HealthLegalArt id={art} size={64} /> } });
+      if (!mounted.current || identityRef.current !== identity || busy || submitting.current) return;
+      const next = { identity, command, event: { kind: 'confirmation', id: identity + ':' + command.type, title, body, terms, confirmLabel, illustration: <HealthLegalArt id={art} size={64} /> } } satisfies NonNullable<typeof review>;
+      activeReview.current = next; setReview(next);
     },
-    modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => { if (!busy && !submitting.current) setReview(null); }} onChoose={async () => {
-      if (!current || busy || submitting.current || identityRef.current !== current.identity) return;
+    modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => { if (mounted.current && !busy && !submitting.current && activeReview.current === current) { activeReview.current = null; setReview(saved => saved === current ? null : saved); } }} onChoose={async () => {
+      if (!mounted.current || !current || busy || submitting.current || identityRef.current !== current.identity || activeReview.current !== current) return;
       submitting.current = true;
       try {
-        if (await dispatch(current.command) && identityRef.current === current.identity) setReview(saved => saved === current ? null : saved);
+        if (await dispatch(current.command) && mounted.current && identityRef.current === current.identity && activeReview.current === current) { activeReview.current = null; setReview(saved => saved === current ? null : saved); }
       } finally { submitting.current = false; }
     }} />,
   };
