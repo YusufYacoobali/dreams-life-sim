@@ -186,17 +186,21 @@ test('an actual existing-child legacy preserves school callback history and the 
   let world = drain(resolveCommand(planned('project', 16), { type: 'advance' }));
   world = drain(resolveCommand(world, { type: 'advance' })); // The former student is now eighteen.
   const student = world.people[world.activePersonId], child = addChild(world, [student], 'biological'), thread = structuredClone(world.storyThreads[0]);
+  expect(thread.status).toBe('resolved'); expect(thread.projectRecall?.status).toBe('scheduled');
   const startDate = { ...world.date }; world.date = monthFrom(startDate, 4);
   world.annual = { id: 'year_legacy_callback_history', startDate, targetDate: monthFrom(startDate, 12), monthsProcessed: 4, stage: 'months', pausedForPlanning: false };
   const cursor = structuredClone(world.annual); recordDeath(world, student.id, 'test illness');
-  expect(world.storyThreads[0]).toEqual(thread);
+  // The resolved school project stays exact; only its new, still-unoffered
+  // two-year continuation ends when its actual participant dies.
+  const endedThread = structuredClone(world.storyThreads[0]);
+  expect(endedThread).toEqual({ ...thread, projectRecall: { ...thread.projectRecall, status: 'cancelled', ended: world.date, cancellationReason: 'This part of the family story has ended' } });
   const atDeath = { ...world.date }, existing = structuredClone(world.people[child.id]), people = Object.keys(world.people), random = { ...world.random };
   world = resolveCommand(decodeWorld(encodeWorld(world)), { type: 'continue-child', personId: child.id });
   expect(world.activePersonId).toBe(child.id); expect(world.people[child.id]).toEqual(existing); expect(Object.keys(world.people)).toEqual(people);
   expect(world.random).toEqual(random); expect(world.date).toEqual(atDeath); expect(world.annual?.monthsProcessed).toBe(cursor!.monthsProcessed);
   expect(world.annual?.pausedForPlanning).toBe(true); expect(world.storyThreads[0].personId).toBe(thread.personId);
   world = ack(world); world = drain(resolveCommand(world, { type: 'resume' }));
-  expect(world.date).toEqual(cursor!.targetDate); expect(world.annual).toBeNull(); expect(world.storyThreads[0]).toEqual(thread);
+  expect(world.date).toEqual(cursor!.targetDate); expect(world.annual).toBeNull(); expect(world.storyThreads[0]).toEqual(endedThread);
   expect(world.ledger.some(item => item.category === 'story-outing')).toBe(false);
 });
 
