@@ -59,7 +59,7 @@ function ScholarshipContext() {
       {kind === 'access' && <Body muted>At application, acceptance and renewal, assessed resources must not exceed this course’s annual tuition. Assessment includes all cash and your net worth.</Body>}
       {reason && <Body muted>{reason}</Body>}<Button label={'Apply · ' + policy.label} disabled={busy || !!reason} onPress={() => apply(kind)} />
     </Card>; })}
-    {error && !review && !dialog && !world.pending && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.ink, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
+    {error && !review && !dialog && !world.pending && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
     <EventModal event={review?.event ?? event} busy={busy} error={error} onCancel={() => { if (!busy && !submitting.current) { setDialog(null); setReview(null); } }} onChoose={async id => {
       if (!mounted.current || busy || submitting.current) return;
       if (review) {

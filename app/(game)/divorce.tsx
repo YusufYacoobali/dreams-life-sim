@@ -107,7 +107,7 @@ function DivorceDetails() {
       </Pressable>)}</View>
       <Body muted>Shared care requires both parents to be available in the same country and city. Any support is collected from actual available money; unpaid support remains an obligation.</Body>
     </> : <Body muted>You have no shared dependent children with {fullName(spouse)}. No new custody arrangement will be recorded.</Body>}</Card>
-    {error && !current && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{error}</Text>}
+    {error && !world.pending && !current && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{error}</Text>}
     <Button label="Review Divorce" tone="danger" disabled={busy} onPress={open} />
   </> : <Card><Heading size={19}>No current marriage</Heading><Body>You have no current marriage to settle. Past relationships remain in your family records.</Body></Card>}
     <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={cancel} onChoose={async () => {

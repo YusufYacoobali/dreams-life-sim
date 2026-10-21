@@ -15,7 +15,7 @@ export default function CareerTraining() {
     return <Page footer={!review.reviewing && !world.pending ? <>
         <Body muted>{skillContent[skill].title} · {mode === 'coached' ? 'Coached sessions' : 'Self-directed practice'}</Body>
         {reason && <Body muted>{reason}</Body>}
-        {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.ink, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
+        {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
         <Button label="Review Training Routine" disabled={busy || !!reason} onPress={() => review.confirm({ type: 'career-training', skill, mode }, 'Start ' + skillContent[skill].title.toLowerCase() + ' training?', 'This replaces your current routine. Skill grows as months pass. Coached sessions pause if the payer cannot cover tuition; tired practice can produce no skill gain.', [{ id: 'cost', label: 'Monthly tuition', value: money, tone: cost ? 'negative' : 'neutral' }], skillContent[skill].art, 'Set Training Routine')}/>
     </> : undefined}>
         <Header title="Skills & Training" backDisabled={busy} onBack={() => { if (!busy) router.back(); }}/>
