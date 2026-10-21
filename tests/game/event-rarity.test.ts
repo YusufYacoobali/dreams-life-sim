@@ -20,14 +20,14 @@ test('version one retains original251 tiers and the historical original250 golde
   const originalCatalogue = events.eventTemplates.slice(0, 251);
   expect(EVENT_RARITY_VERSION).toBe(1);
   expect(EVENT_RARITY_WEIGHTS).toEqual({ common: 100, uncommon: 25, rare: 5, 'extremely-rare': 1 });
-  expect(events.eventTemplates).toHaveLength(265);
+  expect(events.eventTemplates).toHaveLength(268);
   expect(originalCatalogue.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
     'adult-uncertain-memory', 'adult-wrong-name-badge', 'later-old-competition', 'pet-parrot-perfect-timing', 'school-label-swap', 'school-mascot-petition', 'school-secret-language', 'school-tree-audition', 'school-volcano-breach', 'small-mistake', 'teen-family-interview', 'teen-yearbook-proof',
   ]);
   expect(originalCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
   expect(originalCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
   expect(originalCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
-  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([245, 18, 1, 1]);
+  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([248, 18, 1, 1]);
   const copy = events.eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
   // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.

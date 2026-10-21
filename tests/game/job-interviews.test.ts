@@ -80,5 +80,5 @@ test('country part-time ages still gate interviews and full-time work still requ
 
 test('engine 29 upgrades only its tag, preserving existing employment, people, money and RNG', () => {
   const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 39, engineVersion: 40, contentVersion: 14, bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 39, engineVersion: 40, contentVersion: 15, bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
 });

@@ -50,7 +50,7 @@ test('reader13→19 changes metadata only; genuine World33 courtships and old bo
     const before = context.rows(); expect(Object.keys(before)).toHaveLength(8); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13);
     for (const table of Object.keys(before)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) context.sqlite.exec('CREATE TRIGGER deny_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'unexpected row write'); END");
     const repository = new SaveRepository(context.driver); await repository.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(19); expect(context.rows()).toEqual(before);
-    const loaded = await repository.active(); expect(encodeWorld(loaded!)).toBe(encodeWorld(context.current)); expect(loaded).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 14, pending: { kind: 'result' } });
+    const loaded = await repository.active(); expect(encodeWorld(loaded!)).toBe(encodeWorld(context.current)); expect(loaded).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15, pending: { kind: 'result' } });
     const auId = [...context.expected.keys()].find(id => id.startsWith('life_professional_'))!, projectedAU = await repository.previewLife(auId);
     expect(encodeWorld(projectedAU)).toBe(encodeWorld(context.expected.get(auId)!)); expect(projectedAU.npcCourtships).toHaveLength(13); expect(unpackCheckpoint(packCheckpoint(projectedAU), true)).toEqual(projectedAU);
     expect(context.rows()).toEqual(before); expect(context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(auId)?.payload).toBe(au.checkpoint);

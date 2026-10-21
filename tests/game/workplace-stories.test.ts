@@ -12,7 +12,7 @@ import { employee } from '../support/employee';
 test.each(countryCodes)('%s resolves all thirty workplace choices using existing people and bounded effects without wages, tenure, qualifications or draws', country => {
   const initial = employee(country), before = encodeWorld(initial), place = currentWorkplace(initial)!;
   const coworker = initial.people[place.members.find(item => item.role === 'coworker')!.personId], supervisor = initial.people[place.members.find(item => item.role === 'supervisor')!.personId];
-  expect(workplaceTemplates).toHaveLength(10); expect(eventTemplates).toHaveLength(265);
+  expect(workplaceTemplates).toHaveLength(10); expect(eventTemplates).toHaveLength(268);
   for (const template of workplaceTemplates) {
     expect(eligibleTemplates(initial)).toContainEqual(template); const event = bindEvent(initial, template); expect(encodeWorld(initial)).toBe(before);
     expect(JSON.stringify(event)).not.toMatch(/\{(?:coworker|supervisor|workplace)\}/);
