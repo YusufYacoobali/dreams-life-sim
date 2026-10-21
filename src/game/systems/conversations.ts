@@ -1,4 +1,5 @@
-import { ageOn, fullName, type Person, type World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { jobs } from '../content/jobs';
 import { hobbyContent } from '../content/leisure';
 import type { ConversationContext, ConversationTopic } from '../content/conversationWriting';

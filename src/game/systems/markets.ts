@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ageOn, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { Currency, formatMoney, roundRatio } from '../money';
 import { InstrumentId, instrumentIds, instruments } from '../content/markets';
 import { rules } from '../rules';

@@ -1,6 +1,6 @@
 import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
-import { ageOn } from '../model';
+import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
 import { jobs } from '../content/jobs';
 import { electionOutcome } from './politicsMath';

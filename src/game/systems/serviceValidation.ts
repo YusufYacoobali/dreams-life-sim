@@ -1,4 +1,5 @@
-import { World, ageOn } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { assignmentCatalog, serviceCatalog } from '../content/services';
 const compare=(a:World['date'],b:World['date'])=>a.year-b.year||a.month-b.month||a.day-b.day;

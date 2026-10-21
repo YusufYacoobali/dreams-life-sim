@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { indexLedger } from '../ledgerIndex';
 import { roundRatio } from '../money';

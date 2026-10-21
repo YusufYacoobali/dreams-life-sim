@@ -2,7 +2,8 @@ import { currentHourlyRate, hourlyContract, recordHourlyPeriod } from './hourlyW
 import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
-import { ageOn, Person, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { Person, World } from '../model';
 import { roundRatio } from '../money';
 import { incomeTax, rules } from '../rules';
 import { accountFor, charge, draw, fact, post } from './common';

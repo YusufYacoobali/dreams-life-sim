@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ageOn, fullName, Person, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { countries, CountryCode } from '../countries';
 import { hobbyContent, hobbyKinds, HobbyKind, hobbyModes, outingContent, outingKinds, OutingKind } from '../content/leisure';
 import { roundRatio } from '../money';

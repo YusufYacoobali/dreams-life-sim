@@ -3,7 +3,8 @@ import { activeTrip, physicalLocation, samePhysicalPlace } from './travelSchemas
 import { royalMarriage } from './royalty';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
-import { ageOn, fullName, Person, Stats, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, Stats, World } from '../model';
 import { genders } from './familySchemas';
 import { IneligibleAction } from '../errors';
 import { rules } from '../rules';

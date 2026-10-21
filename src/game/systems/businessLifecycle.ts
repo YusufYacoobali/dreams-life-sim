@@ -1,5 +1,6 @@
 import { newWorkEarnings } from './earningsSchemas';
-import { ageOn, fullName, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { World } from '../model';
 import { Business, businessSaleQuote, companyClaimValue } from '../businessValuation';
 import { Currency, formatMoney, roundRatio } from '../money';
 import { fxMoney } from '../valuation';

@@ -1,4 +1,5 @@
-import { compareDates, type World } from './model';
+import { compareDates } from './personHelpers';
+import type { World } from './model';
 import type { Pending } from './runtime';
 import { importantDecisionTemplatesV1, optionalSceneChancesV1, type ImportantDecisionTemplate } from './systems/annualPacingSchemas';
 

@@ -1,7 +1,8 @@
 import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { z } from 'zod';
-import { World, ageOn } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { jobs } from '../content/jobs';
 import { rules } from '../rules';

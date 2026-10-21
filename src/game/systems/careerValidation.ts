@@ -1,5 +1,5 @@
 import type { World } from '../model';
-import { ageOn } from '../model';
+import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
 import { careerCatalog, skillContent } from '../content/careers';
 const compare = (a: World['date'], b: World['date']) => a.year - b.year || a.month - b.month || a.day - b.day;

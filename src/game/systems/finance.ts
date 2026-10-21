@@ -1,6 +1,7 @@
 import { personalBorrowReason } from './credit';
 import { z } from 'zod';
-import { ageOn, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { rules, incomeTax } from '../rules';
 import { IneligibleAction } from '../errors';
 import { Currency, formatMoney, roundRatio } from '../money';

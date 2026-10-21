@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { Person, World } from '../model';
-import { ageOn, fullName } from '../model';
+import { ageOn, fullName } from '../personHelpers';
 import { countries } from '../countries';
 import { destinationIds, destinations, DestinationId, tripFocuses } from '../content/travel';
 import { monthFrom } from '../calendar';

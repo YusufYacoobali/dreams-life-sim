@@ -1,4 +1,5 @@
-import { ageOn, GameDate, Person, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { GameDate, Person, World } from '../model';
 import { countries, CountryCode } from '../countries';
 import { daysInMonth } from '../calendar';
 import { jobs } from '../content/jobs';

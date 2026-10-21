@@ -1,5 +1,5 @@
 import type { World } from '../model';
-import { ageOn, compareDates } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
 import { rules, schoolLeavingRulesV1 } from '../rules';
 export function validateSchools(world: World) {
   const ids = new Set<string>(), activePeople = new Set<string>(), month = world.date.year * 12 + world.date.month - 1;

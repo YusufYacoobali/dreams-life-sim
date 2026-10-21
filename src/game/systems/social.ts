@@ -1,7 +1,8 @@
 import { serviceAway } from './serviceSchemas';
 import { publicCriticismCopy } from '../content/socialCriticism';
 import { z } from 'zod';
-import { ageOn, fullName, Person, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { platforms, PlatformId, platformContent, postContent, postKinds, PostKind, sponsorBrands } from '../content/social';
 import { countries } from '../countries';
 import { formatMoney, Money, roundRatio } from '../money';

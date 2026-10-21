@@ -1,5 +1,6 @@
 import { indexLedger } from '../ledgerIndex';
-import { ageOn, compareDates, World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { hobbyContent, outingContent } from '../content/leisure';
 import { roundRatio } from '../money';

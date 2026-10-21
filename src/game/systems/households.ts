@@ -1,4 +1,5 @@
-import { ageOn, fullName, Person, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
 import { isConfined } from './legalSchemas';

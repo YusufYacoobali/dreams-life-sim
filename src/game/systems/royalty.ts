@@ -1,6 +1,7 @@
 import { activeTrip, physicalLocation, samePhysicalPlace } from './travelSchemas';
 import { z } from 'zod';
-import { ageOn, fullName, Person, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { countries } from '../countries';
 import { monthlyAmount, rules } from '../rules';
 import { roundRatio } from '../money';

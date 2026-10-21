@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { hobbyContent } from '../content/leisure';
 import { hobbyEventApproachContent, hobbyEventChance, hobbyEventDeltas } from '../content/hobbyEvents';

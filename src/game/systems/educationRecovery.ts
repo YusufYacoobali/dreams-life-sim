@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ageOn, Person, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { Person, World } from '../model';
 import { rules } from '../rules';
 import { IneligibleAction } from '../errors';
 import { active, bounded, fact, result } from './common';

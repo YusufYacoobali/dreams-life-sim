@@ -1,4 +1,5 @@
-import { ageOn, compareDates, World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
 import { rules } from '../rules';

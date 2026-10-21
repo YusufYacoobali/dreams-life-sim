@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { rules } from '../rules';
 import { bestFriendshipAttemptKey, bestFriendshipChanceV1 } from './friendshipSchemas';
 

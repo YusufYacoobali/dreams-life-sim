@@ -1,6 +1,7 @@
 import { hourlyAnnual } from './hourlyWork';
 import { roundRatio } from '../money';
-import { ageOn, compareDates, World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { jobs } from '../content/jobs';
 import { rules } from '../rules';

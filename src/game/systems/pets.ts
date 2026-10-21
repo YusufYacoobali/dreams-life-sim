@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ageOn, compareDates, fullName, Person, World } from '../model';
+import { ageOn, compareDates, fullName } from '../personHelpers';
+import type { Person, World } from '../model';
 import { countries, CountryCode } from '../countries';
 import { monthFrom } from '../calendar';
 import { petOfferIds, petOffers, petRules, PetSpecies } from '../content/pets';

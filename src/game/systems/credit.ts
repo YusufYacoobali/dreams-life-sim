@@ -1,5 +1,5 @@
 import type { World } from '../model';
-import { ageOn } from '../model';
+import { ageOn } from '../personHelpers';
 import { countries } from '../countries';
 import { rules } from '../rules';
 import { roundRatio } from '../money';

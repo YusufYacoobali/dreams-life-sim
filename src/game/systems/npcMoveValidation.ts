@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type GameDate, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { GameDate, World } from '../model';
 import { indexLedger, type LedgerIndex } from '../ledgerIndex';
 import { npcMoveAttemptKey, npcMoveDestinationV1, npcMoveRulesV1, npcMoveTaxV1 } from './npcMoveSchemas';
 

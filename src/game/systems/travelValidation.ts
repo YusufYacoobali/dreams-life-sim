@@ -1,6 +1,6 @@
 import { indexLedger } from '../ledgerIndex';
 import type { World } from '../model';
-import { ageOn, compareDates } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
 import { destinations } from '../content/travel';

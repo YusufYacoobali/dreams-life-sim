@@ -1,6 +1,7 @@
 import { qualifyingAnnualIncome } from './credit';
 import { z } from 'zod';
-import { ageOn, fullName, World } from '../model';
+import { ageOn, fullName } from '../personHelpers';
+import type { World } from '../model';
 import { assetCatalog, AssetOffer } from '../content/assets';
 import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';

@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { teenAttemptKey, teenConsentChanceV1, withinTeenAgeGap } from './teenRelationshipSchemas';
 
 /** Index once; historical consent uses its saved date/preferences, never today's. */

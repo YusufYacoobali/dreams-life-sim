@@ -1,5 +1,5 @@
 import type { World } from '../model';
-import { ageOn } from '../model';
+import { ageOn } from '../personHelpers';
 import { visibleConvictions } from './legal';
 import type { RoyalRole } from '../content/royalty';
 export type RoyalHouse=World['royalHouses'][number];

@@ -1,4 +1,5 @@
-import { ageOn, compareDates, type GameDate, type World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { GameDate, World } from '../model';
 import { monthFrom } from '../calendar';
 import { npcSeparationAdultAgesV1, npcSeparationAtRiskV1, npcSeparationAttemptKey, npcSeparationChanceV1 } from './npcSeparationSchemas';
 

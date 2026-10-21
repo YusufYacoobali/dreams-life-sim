@@ -1,5 +1,6 @@
 import { indexLedger } from '../ledgerIndex';
-import { World, ageOn } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { creatorCatalog } from '../content/creators';
 import { creatorCrewQuote } from './creators';

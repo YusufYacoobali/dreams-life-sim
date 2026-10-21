@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { compareDates, Person, World } from '../model';
+import { compareDates } from '../personHelpers';
+import type { Person, World } from '../model';
 import { monthFrom } from '../calendar';
 import { countries } from '../countries';
 import { IneligibleAction } from '../errors';

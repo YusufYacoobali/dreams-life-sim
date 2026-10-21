@@ -1,7 +1,8 @@
 import { storyPersonPresent } from './storyContext';
 import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
-import { ageOn, compareDates, Person, World } from '../model';
+import { ageOn, compareDates } from '../personHelpers';
+import type { Person, World } from '../model';
 import { ConditionId, conditions } from '../content/health';
 import { countries } from '../countries';
 import { rules } from '../rules';

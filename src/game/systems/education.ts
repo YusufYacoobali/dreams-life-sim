@@ -3,7 +3,8 @@ import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
-import { ageOn, Person, World } from '../model';
+import { ageOn } from '../personHelpers';
+import type { Person, World } from '../model';
 import { IneligibleAction } from '../errors';
 import { rules } from '../rules';
 import { fields } from './schemas';
@@ -21,7 +22,7 @@ import { serviceAway } from './serviceSchemas';
 import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
 import { activeUniversityApplication } from './universityAdmissionSchemas';
-import { compareDates } from '../model';
+import { compareDates } from '../personHelpers';
 import { beginStudyCourse, endStudyCourse, observeIncompleteStudy, syncStudyCourse } from './studyCourses';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [

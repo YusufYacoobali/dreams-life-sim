@@ -1,4 +1,5 @@
-import { compareDates, type World } from '../model';
+import { compareDates } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import type { LedgerIndex } from '../ledgerIndex';
 import { courseMonths } from './education';

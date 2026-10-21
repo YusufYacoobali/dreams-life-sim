@@ -1,5 +1,6 @@
 import { indexLedger } from '../ledgerIndex';
-import { World,ageOn } from '../model';
+import { ageOn } from '../personHelpers';
+import type { World } from '../model';
 import { countries } from '../countries';
 import { daysInMonth } from '../calendar';
 import { monthlyAmount,rules } from '../rules';

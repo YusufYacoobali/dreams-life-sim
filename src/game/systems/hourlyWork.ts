@@ -1,5 +1,5 @@
 import type { Person, World } from '../model';
-import { ageOn } from '../model';
+import { ageOn } from '../personHelpers';
 import { rules, monthlyAmount } from '../rules';
 import { roundRatio } from '../money';
 import { jobs, type JobRole } from '../content/jobs';

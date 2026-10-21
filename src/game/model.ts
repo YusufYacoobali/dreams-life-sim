@@ -9,7 +9,9 @@ import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
-import { dateSchema, daysInMonth, monthFrom, type GameDate } from './calendar';
+import { dateSchema, monthFrom } from './calendar';
+import { ageOn, compareDates } from './personHelpers';
+export { ageOn, compareDates, fullName } from './personHelpers';
 export { dateSchema, type GameDate } from './calendar';
 import { educationSchema, employmentSchema, financeSchema, holdingSchema, liabilitySchema, marketSchema, newEducation, newFinance, physicalAssetSchema, transactionSchema } from './systems/schemas';
 import { jobs } from './content/jobs';
@@ -145,15 +147,6 @@ export const worldSchema = z.object({
 });
 export type World = z.infer<typeof worldSchema>;
 
-export function compareDates(a: GameDate, b: GameDate): number {
-  return a.year - b.year || a.month - b.month || a.day - b.day;
-}
-export function ageOn(person: Pick<Person, 'born' | 'died'>, date: GameDate): number {
-  const at = person.died ?? date;
-  const birthdayDay = Math.min(person.born.day, daysInMonth(at.year, person.born.month));
-  return at.year - person.born.year - (at.month < person.born.month || (at.month === person.born.month && at.day < birthdayDay) ? 1 : 0);
-}
-export const fullName = (person: Pick<Person, 'firstName' | 'lastName'>) => person.firstName + ' ' + person.lastName;
 
 function parseWorldShape(value: unknown): World {
   if (value && typeof value === 'object' && 'ledger' in value && Array.isArray(value.ledger)) {
