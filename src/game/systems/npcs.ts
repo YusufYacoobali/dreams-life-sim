@@ -76,8 +76,10 @@ function birthday(date: GameDate, age: number, month: number, day: number): Game
   if (month > date.month || (month === date.month && day > date.day)) year--;
   return { year, month, day: Math.min(day, daysInMonth(year, month)) };
 }
-export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string; schoolStudent?: boolean }): Person {
+export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string; schoolStudent?: boolean; postsecondaryStudent?: { program: 'trade' | 'university' | 'graduate'; annualTuition: bigint } }): Person {
   const player = world.people[world.activePersonId], code = options.country ?? player.country, country = countries[code], city = options.city ?? (code === player.country ? player.city : country.cities[0]);
+  const student = options.postsecondaryStudent;
+  if (student && (options.schoolStudent || options.qualifiedRole || student.annualTuition <= 0n || options.age < Math.max(18, rules[code].adultAge, rules[code].schoolEnd + (student.program === 'graduate' ? 4 : 0)))) throw new Error('Invalid new postsecondary student background');
   const gender = options.gender ?? genders[draw(world, 'npcs', 0, genders.length - 1)];
   const month = draw(world, 'npcs', 1, 12), day = draw(world, 'npcs', 1, 28);
   const id = 'person_npc_' + world.revision + '_' + Object.keys(world.people).length;
@@ -96,9 +98,15 @@ export function createContact(world: World, options: { age: number; gender?: Per
   person.wantsChildren = draw(world, 'npcs', 1, 100) <= 80;
   person.attractedTo = options.compatibleWith ? [options.compatibleWith] : [...genders];
   world.people[id] = person;
-  const cash = options.schoolStudent || options.age < rules[code].adultAge ? 0n : roundRatio(rules[code].baseWage * BigInt(draw(world, 'npcs', 2, 25)), 10n);
+  const cash = student ? student.annualTuition * 2n + rules[code].livingCost * 12n : options.schoolStudent || options.age < rules[code].adultAge ? 0n : roundRatio(rules[code].baseWage * BigInt(draw(world, 'npcs', 2, 25)), 10n);
   world.accounts.push({ id: 'account_' + id, ownerId: id, currency: country.currency, cash, openingCash: cash, lockedCash: 0n });
-  if (options.schoolStudent) {
+  if (student) {
+    person.education.qualifications.push({ level: 'secondary', field: 'general', year: person.born.year + rules[code].schoolEnd });
+    if (student.program === 'graduate') person.education.qualifications.push({ level: 'degree', field: 'science', year: person.born.year + rules[code].schoolEnd + 4 });
+    person.education.grades = Math.max(55, Math.round((person.stats.smarts + person.stats.discipline) / 2));
+    person.householdId = 'household_' + id;
+    world.households.push({ id: person.householdId, name: person.firstName + '’s household', members: [id], homeAssetId: null });
+  } else if (options.schoolStudent) {
     if (options.age < rules[code].schoolStart || options.age >= rules[code].schoolEnd) throw new Error('School contact age is outside compulsory education');
     person.education.stage = options.age < rules[code].secondaryStart ? 'primary' : 'secondary'; person.education.school = person.city + (person.education.stage === 'primary' ? ' Primary School' : ' Secondary School');
   } else if (options.age >= rules[code].adultAge) {
