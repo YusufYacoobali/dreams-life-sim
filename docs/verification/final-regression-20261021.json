@@ -690,12 +690,47 @@
       "mutableOutputCopied": false
     },
     "D": {
-      "status": "running-as-of-coordinator-update",
+      "status": "actual-process-closed0-observed-outcome-review-pending",
       "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "receipt": {
+        "file": "final-regression-20261021/editorial-v2-receipt.json",
+        "bytes": 1283,
+        "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
+      },
+      "raw": {
+        "file": "/tmp/dreams-production-finish-accepted-editorial-v2.out",
+        "bytes": 834714,
+        "sha256": "c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5",
+        "storage": "external-full-raw-not-copied",
+        "pinBasis": "Independent exact byte hash checked for this documentation followup; no editorial result/codec/gameplay replay performed."
+      },
       "startedAt": "2026-10-21T08:22:45.020904+00:00",
-      "mutableOutputCopied": false
+      "endedAt": "2026-10-21T08:32:53.310251+00:00",
+      "wrapperSeconds": 608.289,
+      "beforeAfter688Source": "exact",
+      "scope": "Actual completed driver process is credited; natural scene/branch/context coverage and refusals require separate review. No universal all795branches or native acceptance claim."
     },
-    "release": "Current native/cold/actions/normal130percent/continuous30minuteUI, balance/sequence, standaloneAndroid/actualiOS/physical/spokenaccessibility/release acceptance remain open."
+    "release": "Current native/cold/actions/normal130percent/continuous30minuteUI, balance/sequence, standaloneAndroid/actualiOS/physical/spokenaccessibility/release acceptance remain open.",
+    "expandedAnnualCoverage": {
+      "status": "partial-running-not-1000-accepted",
+      "sourceCommit": "33b6a5fcb0aae73dfc235a15394b34d8afda00cc",
+      "targetTotalUniqueSeeds": 1000,
+      "alreadyClosedSeedRange": [
+        0,
+        119
+      ],
+      "activeSeedRange": [
+        120,
+        559
+      ],
+      "pendingSeedRange": [
+        560,
+        999
+      ],
+      "activeCoordinatorSession": "21918",
+      "sameUnchangedAnnualDriver": true,
+      "scope": "Coordinator-reported active command on frozen33b. Existing120closed observations are part of the1000TOTAL, not1120newseeds. No receipt/footer/1000pass is provided or claimed here; running outputs are not copied."
+    }
   },
   "historicalRecords": {
     "alreadyCompleteC37": {
@@ -743,7 +778,7 @@
       "sha256": "fbbbb3795b6d2b2ba39c876830e0da89d791a599701a9c573fd3e68a3588c6d5"
     }
   },
-  "reportScope": "The professional report is a source/byte review of completed results. The copied v2 publishing preparation remains complete:false/publicationAllowed:false with C/D/native/30minute pending as observed then; it is not a publisher execution, authorization or acceptance pass. Its earlier pending D status predates the actual08:22D start.",
+  "reportScope": "The professional report is a source/byte review of completed results. The copied v2 publishing preparation remains complete:false/publicationAllowed:false with C/D/native/30minute pending as observed then; it is not a publisher execution, authorization or acceptance pass. Its earlier pending D status predates the actual08:22D start. This additive checkpoint now credits the separately observed08:32Dprocessclosure with outcome reviewpending; none of the copied earlier preparatory files were rewritten.",
   "artifacts": {
     "final-regression-20261021/001-source-head.txt": {
       "original": "/tmp/dreams-production-finish-accepted-head.txt",
@@ -834,6 +869,11 @@
       "original": "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json",
       "bytes": 1092,
       "sha256": "551b6ee9ddd7de30d1c0d378bd513b0587c4135264bd77d4a6ad73b17d7cab58"
+    },
+    "final-regression-20261021/editorial-v2-receipt.json": {
+      "original": "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json",
+      "bytes": 1283,
+      "sha256": "d7d718436e9bbc462743c47f0a66d3cbbadba74d4484579cc21b8544da726126"
     }
   },
   "originalToPortable": {
@@ -853,7 +893,8 @@
     "/tmp/dreams-production-finish-final-publication-plan-v2-20261021.md": "final-regression-20261021/014-dreams-production-finish-final-publication-plan-v2-20261021.md",
     "/tmp/dreams-c38-native-captures/profile-130-ready/ui.png": "final-regression-20261021/native-profile-130-known-issue-ui.png",
     "/tmp/dreams-c38-native-captures/profile-130-ready/ui.xml": "final-regression-20261021/native-profile-130-known-issue-ui.xml",
-    "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json": "final-regression-20261021/native-profile-130-known-issue-capture-log.json"
+    "/tmp/dreams-c38-native-captures/profile-130-ready/capture-log.json": "final-regression-20261021/native-profile-130-known-issue-capture-log.json",
+    "/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json": "final-regression-20261021/editorial-v2-receipt.json"
   },
   "overallEffortEstimatePercent": 75,
   "limits": [
