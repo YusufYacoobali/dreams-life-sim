@@ -13,6 +13,7 @@ import { childrenOf, divorceQuote, familyFinanceMonth } from '../../src/game/sys
 import marriageFixture from '../fixtures/v5-marriage-result.json';
 import graduateFixture from '../fixtures/v3-employed-graduate.json';
 import courtArchive from '../fixtures/v9-court-archive.json';
+import creatorArchive from '../fixtures/v10-creator-archive.json';
 function fixture() { const world = decodeWorld(JSON.stringify(graduateFixture)), account = accountFor(world); account.cash += 100000000n; account.openingCash += 100000000n; world.people[world.activePersonId].stats.energy = 100; return world; }
 function choose(world: World, id: string) { if (world.pending?.kind !== 'decision') throw new Error('Expected a decision'); return resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: id }); }
 function drain(input: World): World { let world = input, count = 0; while (world.pending && count++ < 100) { if (world.pending.kind === 'result') world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id }); else { const choice = world.pending.choices.find(item => !choiceUnavailable(world, item)); if (!choice) throw new Error('No available option'); world = choose(world, choice.id); } } return world; }
@@ -54,6 +55,34 @@ test('missing two delivery periods terminates a brand deal without inventing inc
   let world = established(); const accountId = world.socialAccounts[0].id, before = accountFor(world).cash; world = drain(choose(resolveCommand(world, { type: 'seek-sponsor', accountId }), 'accept'));
   for (let i = 0; i < 2; i++) { world.date = monthFrom(world.date, 1, world.date.day); socialMonth(world); world = drain(world); }
   expect(world.sponsorships[0].status).toBe('terminated'); expect(world.sponsorships[0].earned).toBe(0n); expect(accountFor(world).cash).toBe(before); validateWorld(world);
+});
+test('two real sponsored posts are unpaid during a suspended profile assessment without falsely blaming missing posts', () => {
+  const archive = decodeSave(JSON.stringify(creatorArchive)), savedOffer = archive.world.pending;
+  // The genuine old offer stays bound verbatim; only a newly-created offer
+  // discloses the condition already enforced by the existing payment rule.
+  expect(savedOffer?.body).not.toContain('profile must also be active');
+  expect(decodeWorld(encodeWorld(archive.world)).pending).toEqual(savedOffer);
+  const newOffer = resolveCommand(unpackCheckpoint(archive.snapshots[0].payload), { type: 'seek-sponsor', accountId: archive.world.socialAccounts[0].id });
+  expect(newOffer.pending?.body).toContain('profile must also be active when the monthly payment is assessed');
+  expect(newOffer.pending?.body).toContain('Two consecutive unpaid months');
+  let world = drain(choose(archive.world, 'accept'));
+  const id = world.socialAccounts[0].id, dealId = world.sponsorships[0].id;
+  for (let index = 0; index < 2; index++) world = drain(resolveCommand(world, { type: 'publish-post', accountId: id, kind: world.sponsorships[0].topic, intent: 'authentic', sponsored: true, caption: 'Recorded original sponsored work.' }));
+  const account = world.socialAccounts[0], period = world.date.year * 12 + world.date.month;
+  expect(account.periods.find(row => row.month === period)?.sponsored).toBe(2);
+  expect(account.posts.filter(row => row.sponsorId === dealId)).toHaveLength(2);
+  // Declared settlement boundary: the actual two delivered posts remain, while
+  // the profile is suspended at assessment, as in the observed US900 period.
+  account.status = 'suspended'; account.suspendedUntil = period + 2;
+  const cash = accountFor(world).cash, random = { ...world.random };
+  world.date = monthFrom(world.date, 1, world.date.day); socialMonth(world);
+  expect(world.sponsorships[0].deliveries).toEqual([{ month: period, posts: 2, paid: 0n }]);
+  expect(world.journal.at(-1)?.text).toContain('profile was not active');
+  expect(world.journal.at(-1)?.text).not.toContain('missed its monthly delivery requirement');
+  world.date = monthFrom(world.date, 1, world.date.day); socialMonth(world);
+  expect(world.sponsorships[0]).toMatchObject({ earned: 0n, misses: 2, status: 'terminated', endReason: 'Two consecutive unpaid delivery periods' });
+  expect(accountFor(world).cash).toBe(cash); expect(world.random).toEqual(random);
+  expect(decodeWorld(encodeWorld(world))).toEqual(world); validateWorld(world);
 });
 test('a collaboration uses two actual profiles, stored consent and two recorded post responses', () => {
   let world = accountWorld(); world = resolveCommand(world, { type: 'find-creators', platform: 'photogram' }); if (world.pending?.kind !== 'decision') throw new Error('Expected actual creators'); const personId = world.pending.choices[0].id; world = drain(choose(world, personId));
