@@ -1,6 +1,20 @@
 # Dreams: Life Simulator — Phase 0 master plan
 
-## Current integration: production gameplay and acceptance
+Current integrated runtime `8c03aaf` completes the first broad visual/accessibility pass across57 routes plus shared controls. It includes a dedicated repayment form fixing native-observed hidden validation, visible Prison save failures, checked local choices, large-text wrapping, factual costs/status, grouped Activities and clearer opening/Profile/Statistics. All author-focused checks pass within their stated scopes; combined strict app/all-test types closed0 (`/tmp/dreams-integrated-visual-c16-types.out`). Current full CI and new visual native acceptance are next. Catalogue270situations/810choices, World39/engine40/content16/reader19/checkpointv4. Two distinct older-parent/adult-child scenes retain the original268 prefix. An actual archived Android C15 pending choice migrates only its content tag; original world, choices, history/RNG and checkpoint bytes remain exact.
+
+Frozen2a ordinary Android play completed Ren’s Computing degree, genuineCA86400 Software Developer hire, a full paid year and all three real debts. Final age24/revision127 hasCA29865.88 cash, zero principal and an unacknowledged repayment result. Root verified every prior inactive life/backup and all old rows in the other six tables remain exact (9lives/9backups/91moments/291receipts). The45m30wall session contains tooling/recovery gaps, so strict30active is unclaimed. All native ownership is back with root. This is softwareExpoGo acceptance, not standalone/physical performance.
+
+
+Latest user priority,21October: finish visual polish, accessibility and responsive buttons first, then remaining distinct content and balance, with final standalone/device acceptance at the end and useful supporting checks alongside. The first visual batches are integrated through `5311c05`; their combined types/full/native acceptance is pending. Exact2a68787 [Quality39649633003](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) passed at18:38:53UTC. Story_editorial owns frozen2a native controls for the active degree-to-qualified-work journey; root must not disturb it. See [current handoff](../HANDOFF.md) for live ownership and next actions.
+
+## Earlier source-scoped checkpoint notes
+
+
+## Current integration: performance and production acceptance
+
+Current code is `2a68787`: World39 / engine40 / content15 / reader19 / checkpointv4,268situations/804choices. The latest batch fixes closed-review callbacks, unneeded Life redraws, post-result journal following, selected-person facts, school/university/pet browsing, route-specific abroad entry and large-text stat labels. Unchanged leaf imports remove observed native startup cycles. [Current progress and exact validation scopes](../PROGRESS.md#current-product-work) supersede the historical checkpoints below. Strict types and focused checks pass; [the current full Quality gate](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) and final native journey remain in progress. The earlier1,000-seed and bounded C/D reviews are finished for their declared scopes; do not repeat them as missing work. Overall remains approximately75%, with actual release-device/standalone/iOS, balance and accessibility acceptance still open. Preserve automatic saving/exact resume and park additional file/history tooling.
+
+## Prior checkpoint: C39 production gameplay and acceptance
 
 Current UI source `83adaea6f92523d04a27df2e77b11e0a8b14ef1d` has 703 verified files and uses World38 / engine39 / content13 / reader18 / checkpointv4. Its game/persistence bytes match accepted core `33b6a5fcb0aae73dfc235a15394b34d8afda00cc`; two UI layout files change and 15 reviewed protocol tools are added. Retirement moves, descriptive appearance/Profile labels, relevant paid interview experience, busy-year optional-story pacing, fourteen new special-career scenes and selected-tab return to category root are integrated. The catalogue contains **265 situations /795 choices**, two dedicated scenes per eleven special-career paths. All265 entries have a Codex source-review ledger; thin thematic cells remain explicit. The camera result is appearance-neutral; original saved scenes and the historical golden retain an explicit one-field bridge.
 

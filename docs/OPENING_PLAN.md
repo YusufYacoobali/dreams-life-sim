@@ -1,10 +1,48 @@
 # Opening experience: priority and completion estimates
 
+Current integrated runtime `8c03aaf` completes the first broad visual/accessibility pass across57 routes plus shared controls. It includes a dedicated repayment form fixing native-observed hidden validation, visible Prison save failures, checked local choices, large-text wrapping, factual costs/status, grouped Activities and clearer opening/Profile/Statistics. All author-focused checks pass within their stated scopes; combined strict app/all-test types closed0 (`/tmp/dreams-integrated-visual-c16-types.out`). Current full CI and new visual native acceptance are next. Catalogue270situations/810choices, World39/engine40/content16/reader19/checkpointv4. Two distinct older-parent/adult-child scenes retain the original268 prefix. An actual archived Android C15 pending choice migrates only its content tag; original world, choices, history/RNG and checkpoint bytes remain exact.
+
+Frozen2a ordinary Android play completed Ren’s Computing degree, genuineCA86400 Software Developer hire, a full paid year and all three real debts. Final age24/revision127 hasCA29865.88 cash, zero principal and an unacknowledged repayment result. Root verified every prior inactive life/backup and all old rows in the other six tables remain exact (9lives/9backups/91moments/291receipts). The45m30wall session contains tooling/recovery gaps, so strict30active is unclaimed. All native ownership is back with root. This is softwareExpoGo acceptance, not standalone/physical performance.
+
+
+Latest user priority,21October: finish visual polish, accessibility and responsive buttons first, then remaining distinct content and balance, with final standalone/device acceptance at the end and useful supporting checks alongside. The first visual batches are integrated through `5311c05`; their combined types/full/native acceptance is pending. Exact2a68787 [Quality39649633003](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) passed at18:38:53UTC. Story_editorial owns frozen2a native controls for the active degree-to-qualified-work journey; root must not disturb it. See [current handoff](HANDOFF.md) for live ownership and next actions.
+
+## Earlier source-scoped checkpoint notes
+
+
 Latest relationship gameplay and the current Android build blocker are recorded in [current product work](PROGRESS.md#current-product-work). The checkpoints below retain their original source scope.
 
-Product source `9455ba4` closes reproduced stale-confirmation payment/action defects, scopes Lifestyle drafts correctly and improves abroad/pet browsing. Focused connected checks and strict types pass; f230's preceding combined full regression passed at16:57UTC. Ordinary adult Android play validates natural admission/aid/enrolment,12study months, paid work, real living costs and a consenting date; all old data stays intact. The coordination hold leaves strict continuous30 acceptance open. Root owns current native cold/review work. The newer combined gate and standalone/iOS/physical release acceptance remain; overall stays an approximate75% effort estimate, with268situations/804choices and no version changes.
+Current code `2a68787` reuses unchanged Life presentation after saved acknowledgements, retries following the latest journal sentence after result dismissal, rejects queued closed-modal input and keeps stat labels readable at130% text. Ten focused Life checks, twelve modal checks and strict app/test types pass. Final native cold loading logs zero startup cycle warnings. The [current combined Quality gate](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) is running;16861f1's full gate passed17:42UTC. Actual ordinary adult play reached Ren22 with higher-paid work, real debts and paused/resumed Computing study; a conservative29m34active lower bound leaves strict30 open. Root owns final normal-font restoration and native review before the higher-education/qualified-work continuation. Versions39/40/15/19/v4 and268situations/804choices remain. Overall stays an approximate75% effort estimate; standalone/iOS/physical and broader balance/release acceptance remain open. The candidate/wrapper match2a68787, unrun; active policy69 still omits the required AAR host. Keep automatic saving/resume and park extra file/history tools.
 
 Latest product integration `a50ab76` improves school/university browsing, selected-person profiles, purchase review identity, the factual death screen and legal choice explanations. It also removes a bounded redundant monthly calculation and restructures unchanged selectors behind seven reported import-cycle paths. Versions remain39/40/15/19/v4;268situations/804choices. Focused checks pass; combined full regression is next. Overall remains approximately75%, with current Android adult play and visual/release acceptance open. Active policy68 still omits the required native dependency host; no APK/build retry or measured physical speedup is claimed. Continue useful product work and automatic-save/resume acceptance, keeping extra file/history tools parked.
+
+## Current assessment
+
+These are approximate effort estimates, not measured completion scores. Overall production remains **75%** until the integrated polish and remaining release work are accepted. Builds are supporting work now; final release acceptance follows the product pass.
+
+| Area | Estimated complete |
+| --- | ---: |
+| Startup and onboarding |90%|
+| Life dashboard and early gameplay |90%|
+| Automatic saving and exact resume |90%|
+| Education and ordinary careers |90%|
+| Relationships and family |90%|
+| Money, banking and assets |85%|
+| Health, crime and legal |85%|
+| Special careers and business |85%|
+| Travel and emigration |85%|
+| Pets, hobbies and entertainment |80%|
+| Stories and situational writing |85%|
+| Achievements and challenges |80%|
+| Button responsiveness |75%|
+| Visual polish and accessibility |70%|
+| Standalone builds and device release acceptance |20%|
+
+## Current order of work
+
+1. Finish and integrate the parallel visual/accessibility/responsiveness pass, including the native-observed offscreen repayment error. Root handles opening controls and combined gates; owners and exact accepted source are in HANDOFF.
+2. Complete supported distinct later-life/family content and address concrete content/balance gaps found through ordinary journeys. Preserve every original situation and historical save.
+3. Continue useful source-scoped native play and cold-resume checks alongside implementation. After the merged game is stable, complete standalone, actual iOS/physical, accessibility/audio and release acceptance. Do not count a Hermes export or Expo Go session as a standalone build.
 
 ## Prior checkpoint: World38/engine39 gameplay and acceptance
 
@@ -381,7 +419,7 @@ checks pass; the complete regression passes **1,089 tests / 70 suites** in
 **786.211 seconds**. The corrected-source pet sweep passes twelve complete country-specific
 lives; final native exports and current Metro source pass. Native opening acceptance remains open, so baseline estimates stay fixed.
 
-## Current assessment
+## Historical assessment before the current polish pass
 
 Current World39/engine40/content15/reader19 source and exact gate scopes are linked in PROGRESS. Overall remains75% as an effort estimate; onboarding85%, Life/early85%, education/jobs90%, family90%. Current native/release acceptance remains open.
 Earlier milestone prose retains its own source and historical estimates.
@@ -443,7 +481,7 @@ not acceptance scores or a simple average. Story counts measure implemented sour
 situations, not completed editorial/release acceptance. Additional file/history
 work is excluded from current priorities under the user's latest instruction.
 
-## Order of work
+## Historical order of work
 
 Continue independent worktrees with root integration/testing/commits. Prioritise the latest measured responsiveness fixes and final combined hosted/native acceptance described in [current progress](PROGRESS.md#current-product-work). The C/D outcome review and1,000-total-unique-seed annual gate have finished for their declared scopes; original callback checks, current interview/chooser cold checks and three-generation continuation also have source-scoped passes. Do not repeat these as open tasks. Finish continuous30-minute native play, unobserved sequence/scenario contexts, balance/pacing and visual/spoken-reader review, then standalone Android/offline, actual iOS and physical performance/release gates. Preserve automatic saving/exact resume, park further file/history breadth, commit AND push at least every two active hours and keep working after checkpoints.
 

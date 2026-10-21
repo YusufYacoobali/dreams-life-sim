@@ -1,5 +1,26 @@
 # Release-readiness audit
 
+Current integrated runtime `8c03aaf` completes the first broad visual/accessibility pass across57 routes plus shared controls. It includes a dedicated repayment form fixing native-observed hidden validation, visible Prison save failures, checked local choices, large-text wrapping, factual costs/status, grouped Activities and clearer opening/Profile/Statistics. All author-focused checks pass within their stated scopes; combined strict app/all-test types closed0 (`/tmp/dreams-integrated-visual-c16-types.out`). Current full CI and new visual native acceptance are next. Catalogue270situations/810choices, World39/engine40/content16/reader19/checkpointv4. Two distinct older-parent/adult-child scenes retain the original268 prefix. An actual archived Android C15 pending choice migrates only its content tag; original world, choices, history/RNG and checkpoint bytes remain exact.
+
+Frozen2a ordinary Android play completed Ren’s Computing degree, genuineCA86400 Software Developer hire, a full paid year and all three real debts. Final age24/revision127 hasCA29865.88 cash, zero principal and an unacknowledged repayment result. Root verified every prior inactive life/backup and all old rows in the other six tables remain exact (9lives/9backups/91moments/291receipts). The45m30wall session contains tooling/recovery gaps, so strict30active is unclaimed. All native ownership is back with root. This is softwareExpoGo acceptance, not standalone/physical performance.
+
+
+Latest user priority,21October: finish visual polish, accessibility and responsive buttons first, then remaining distinct content and balance, with final standalone/device acceptance at the end and useful supporting checks alongside. The first visual batches are integrated through `5311c05`; their combined types/full/native acceptance is pending. Exact2a68787 [Quality39649633003](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) passed at18:38:53UTC. Story_editorial owns frozen2a native controls for the active degree-to-qualified-work journey; root must not disturb it. See [current handoff](HANDOFF.md) for live ownership and next actions.
+
+## Earlier source-scoped checkpoint notes
+
+
+## Current continuation — 21 October2026
+
+Current application code is `2a68787`, versions39/40/15/19/v4,268situations/804choices. [Current progress](PROGRESS.md#current-product-work) is authoritative for the newer callback, browsing, factual profile, responsiveness and layout fixes. Strict types/focused checks pass; [current Quality39649633003](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39649633003) and final native journey remain in progress. Ordinary API24 software-Android/Expo Go play and exact cold restores preserve all other lives/history. Normal/130% final Life and selected-person layout reviews pass; these are not standalone or physical-device acceptance.
+
+The clean generated candidate `/workspace/dreams-worktrees/native-prebuild-gameplay` and guarded unrun wrapper match2a68787. Native configuration/package inputs are unchanged from the earlier successful offline prebuild. JDK17, Android platform36, Build Tools35/36, NDK27.1 and CMake3.22.1 are installed. The actual private build at12:10UTC reached dependency resolution and failed when required React0.86.3's release AAR redirected to `repo.reactnative.dev` and returned403. Current enforced policy69 still omits that host; no blocked retry, mirror or alternate build route occurred. No APK/AAB/IPA, installed standalone/offline pass or production signing is claimed. Build launch also requires the guarded disk/memory floors.
+
+Actual iOS/macOS, named physical-device performance, spoken-reader/audio/haptics, final merged native permissions/resources, signing and distribution disclosures remain open. The audit below retains its original83adaea source, earlier tool-installation and observed-policy scope; its historical unrun entries must not overwrite the current installed/build-failure facts above.
+
+## Historical audit — original83adaea scope
+
+
 Updated 21 October 2026 from main `1c9e4eaf160a9c9a38befdbf4f34fbe79d4865f9`.
 Application source matches frozen combined UI source
 `83adaea6f92523d04a27df2e77b11e0a8b14ef1d`: World38 / engine39 / content13 /
