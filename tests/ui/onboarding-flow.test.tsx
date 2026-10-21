@@ -40,7 +40,7 @@ test.each([false, true])('an actual archived result acknowledgement keeps presen
   const scrollToEnd = jest.fn(), responder = jest.spyOn(FlatList.prototype, 'getScrollResponder').mockReturnValue({ scrollToEnd } as unknown as ReturnType<FlatList['getScrollResponder']>);
   const frames = new Map<number, (time: number) => void>(); let nextFrame = 0;
   const request = jest.spyOn(global, 'requestAnimationFrame').mockImplementation(callback => { frames.set(++nextFrame, callback); return nextFrame; });
-  const cancel = jest.spyOn(global, 'cancelAnimationFrame').mockImplementation(id => { frames.delete(id); });
+  const cancel = jest.spyOn(global, 'cancelAnimationFrame').mockImplementation(id => { if (typeof id === 'number') frames.delete(id); });
   const flushFrames = () => act(() => { const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(0)); });
   const view = render(frame(<Life />));
   try {
