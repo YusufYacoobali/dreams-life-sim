@@ -29,7 +29,18 @@ test.each([
   expect(decodeWorld(encodeWorld(remembered))).toEqual(remembered);
   expect(decodeWorld(encodeWorld(next))).toEqual(next); expect(encodeWorld(offered)).toBe(before);
   const wrongChoice = decodeWorld(encodeWorld(next)); wrongChoice.storyThreads[0].projectRecall!.resolution = resolution === 'pass-project' ? 'remember-project' : 'pass-project'; expect(() => validateWorld(wrongChoice)).toThrow(/choice record/);
-  const missingChoice = decodeWorld(encodeWorld(next)); missingChoice.journal = missingChoice.journal.filter(row => row.id !== thread.id + '_project_recall_choice'); expect(() => validateWorld(missingChoice)).toThrow(/choice record/);
+  const missingChoice = decodeWorld(encodeWorld(next));
+  expect(missingChoice.annual?.pacing?.decisions).toContainEqual(expect.objectContaining({ eventId: event.id }));
+  missingChoice.journal = missingChoice.journal.filter(row => row.id !== thread.id + '_project_recall_choice');
+  expect(() => validateWorld(missingChoice)).toThrow(/^Invalid annual pacing choice observation$/);
+  // Declared legacy-frame boundary: omit only optional pacing on a valid clone
+  // before damaging the journal, preserving the original callback guard check.
+  const legacyMissingChoice = decodeWorld(encodeWorld(next));
+  if (!legacyMissingChoice.annual?.pacing) throw new Error('Expected the actual current annual pacing frame');
+  delete legacyMissingChoice.annual.pacing;
+  expect(validateWorld(legacyMissingChoice)).toEqual(legacyMissingChoice);
+  legacyMissingChoice.journal = legacyMissingChoice.journal.filter(row => row.id !== thread.id + '_project_recall_choice');
+  expect(() => validateWorld(legacyMissingChoice)).toThrow(/choice record/);
   expect(() => resolveCommand(next, { type: 'choose', eventId: event.id, choiceId: resolution })).toThrow(/no longer open/);
 });
 
