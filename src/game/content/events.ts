@@ -26,6 +26,7 @@ import { rareAdultTemplates } from './rareAdultStories';
 import { specialCareerDepthTemplates } from './specialCareerDepthStories';
 import { legalTemplates } from './legalStories';
 import { laterLifeFamilyTemplates } from './laterLifeFamilyStories';
+import { studyLifeTemplates } from './studyLifeStories';
 import { legalStoryAvailable, legalStoryContexts } from '../systems/legalStoryContext';
 import { offences } from './crime';
 import { storyContactNames } from '../storyNames';
@@ -238,7 +239,9 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...specialCareerDepthTemplates,
   ...legalTemplates,
   ...laterLifeFamilyTemplates,
+  ...studyLifeTemplates,
 ];
+const hasStudyTemplates = eventTemplates.some(template => template.study !== undefined);
 
 /** Read saved contacts only. Eligibility/binding never creates people or draws RNG. */
 function schoolContext(world: World) {
@@ -286,7 +289,7 @@ function templateParent(world: World, template: EventTemplate) {
 export function eligibleTemplates(world: World): readonly EventTemplate[] {
   const player = world.people[world.activePersonId], age = ageOn(player, world.date);
   const context = schoolContext(world), work = workContext(world), social = socialContext(world), life = lifeStoryContexts(world), legal = legalStoryContexts(world);
-  const study = eventTemplates.some(template => template.study) ? studyStoryContext(world) : undefined;
+  const study = hasStudyTemplates ? studyStoryContext(world) : undefined;
   // Callback records remain authoritative even when an older history is sparse.
   // Never offer an origin ID that scheduleStory already considers recorded.
   const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));

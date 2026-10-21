@@ -15,8 +15,8 @@ const scene = rareAdultTemplates[0];
 test('one extremely rare original adult scene retains its original position/copy beside fourteen new career scenes', () => {
   expect(rareAdultTemplates).toHaveLength(1); expect(scene.id).toBe('adult-accidental-living-exhibit');
   expect(scene).toMatchObject({ min: 18, max: 120, local: true, rarity: 'extremely-rare' }); expect(eventWeight(scene)).toBe(1);
-  expect(eventTemplates).toHaveLength(270); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(810);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(270);
+  expect(eventTemplates).toHaveLength(272); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(816);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(272);
   const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
   // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
