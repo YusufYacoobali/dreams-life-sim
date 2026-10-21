@@ -1,5 +1,5 @@
 import { BestFriendshipCard } from '../../../src/ui/BestFriendship';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Text, TextInput } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
@@ -20,6 +20,7 @@ import { currentSchool } from '../../../src/game/systems/schoolSchemas';
 import { schoolHelpReason } from '../../../src/game/systems/school';
 import { currentWorkplace } from '../../../src/game/systems/workplaceSchemas';
 import { workFeedbackReason, workRaiseReason } from '../../../src/game/systems/workplaces';
+import { conversationTopics } from '../../../src/game/systems/conversations';
 
 export default function PersonProfile() {
   const { id } = useLocalSearchParams<{ id?: string | string[] }>();
@@ -34,6 +35,10 @@ function PersonDetails({ id }: { id: string }) {
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
   const [friendshipReviewOpen, setFriendshipReviewOpen] = useState(false);
   const [teenReviewOpen, setTeenReviewOpen] = useState(false);
+  const [conversationOpen, setConversationOpen] = useState(false);
+  const conversationOpenRef = useRef(false), conversationSubmitting = useRef(false), worldRef = useRef(world);
+  worldRef.current = world;
+  useEffect(() => () => { conversationOpenRef.current = false; }, []);
   const [panel, setPanel] = useState<'gift' | 'wedding' | null>(null), [amount, setAmount] = useState(''), [message, setMessage] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<{ command: SocialCommand | FamilyCommand; event: EventPresentation } | null>(null), [childName, setChildName] = useState('');
   const player = world.people[world.activePersonId], relation = person && relationFor(world, player.id, person.id), age = ageOn(player, world.date);
@@ -42,9 +47,16 @@ function PersonDetails({ id }: { id: string }) {
   const workplace = currentWorkplace(world), colleague = workplace?.members.find(item => item.personId === id && !item.left);
   const custody = world.custody.find(item => item.childId === id && !item.ended && (item.a === player.id || item.b === player.id));
   const currentName = childName.trim() === person?.firstName;
+  const topics = useMemo(() => person && relation ? conversationTopics(world, id) : [], [world, id]);
+  const conversationReason = topics.some(topic => !topic.disabledReason) ? undefined : topics[0]?.disabledReason;
+  const conversation: EventPresentation | null = conversationOpen && person && !person.died && !player.died && relation ? {
+    id: 'conversation:' + id, kind: 'selection', title: 'Talk to ' + fullName(person),
+    body: 'What would you like to talk about? Choose a topic, then confirm. You can have one conversation with this person each year.',
+    confirmLabel: 'Have Conversation', choices: topics.map(topic => ({ id: topic.id, label: topic.label + '\n' + topic.body, disabledReason: topic.disabledReason })),
+  } : null;
   const confirm = (command: SocialCommand | FamilyCommand, title: string, body: string, confirmLabel: string) => setConfirmation({ command, event: { id: command.type + ':' + id, kind: 'confirmation', title, body, terms: [], confirmLabel } });
   const used = (action: string) => socialActionUsed(world, id, action) ? 'Already tried this year' : undefined;
-  return <Page><Header title="Person Profile" onBack={() => router.back()} />
+  return <Page><Header title="Person Profile" backDisabled={!!conversation && busy} onBack={() => { if (!conversationSubmitting.current) router.back(); }} />
     {person ? <Card>
       <Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
       <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
@@ -55,14 +67,20 @@ function PersonDetails({ id }: { id: string }) {
       {world.socialAccounts.filter(item => item.ownerId === person.id).map(item => <ActionRow key={item.id} title={'@' + item.handle} subtitle={item.status === 'memorial' ? 'Memorial social profile' : 'Social profile'} onPress={() => router.push({ pathname: '/social-profile/[id]', params: { id: item.id } })} />)}
       {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
     </Card> : <Body>This person could not be found.</Body>}
-    {!confirmation && !friendshipReviewOpen && !teenReviewOpen && (error || message) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{message ?? error}</Text>}
+    {!confirmation && !conversation && !friendshipReviewOpen && !teenReviewOpen && (error || message) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{message ?? error}</Text>}
     {person && relation && <TeenRelationshipCard key={'teen:' + world.id + ':' + player.id + ':' + person.id} world={world} personId={person.id} onReviewChange={setTeenReviewOpen} />}
     {person && relation && <BestFriendshipCard key={world.id + ':' + player.id + ':' + person.id + ':' + player.country + ':' + player.city + ':' + person.country + ':' + person.city} world={world} personId={person.id} onReviewChange={setFriendshipReviewOpen} />}
     {person && !person.died && relation && <>
       {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" disabled={busy} disabledReason={schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
       {colleague && <Card><Heading size={18}>{colleague.role === 'supervisor' ? 'Your Supervisor' : 'Your Coworker'}</Heading><Body muted>{workplace!.employer}</Body>{colleague.role === 'supervisor' && <><ActionRow title="Ask for Work Feedback" subtitle="Once a year · Uses 4 energy" disabled={busy} disabledReason={workFeedbackReason(world, workplace, id)} onPress={() => void dispatch({ type: 'work-feedback', workplaceId: workplace!.id, supervisorId: id })} /><ActionRow title="Ask for a Raise" subtitle="5% higher pay · Uses 6 energy" disabled={busy} disabledReason={workRaiseReason(world, workplace, id)} onPress={() => void dispatch({ type: 'request-raise', workplaceId: workplace!.id, supervisorId: id })} /></>}</Card>}
       {relation.roles.includes('parent') && relation.from === player.id && ageOn(person, world.date) < rules[person.country].adultAge && <Card><Heading size={18}>Care & identity</Heading><Body>Lives in {person.city}{person.householdId === player.householdId ? ' with you' : ' in another household'}.</Body>{person.householdId === player.householdId && <><TextInput accessibilityLabel="Child first name" editable={!busy} value={childName} onChangeText={setChildName} maxLength={40} placeholder={person.firstName} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10 }} /><Button label="Save Child’s Name" accessibilityLabel={currentName ? "Save Child’s Name. This is their current name" : undefined} busy={busy} disabled={!childName.trim() || currentName} onPress={async () => { if (!person || childName.trim() === person.firstName) return; setMessage(null); if (await dispatch({ type: 'name-child', childId: id, firstName: childName })) setChildName(''); }} />{currentName && <Body muted>This is their current name.</Body>}</>}{custody && <><Body>{custody.arrangement === 'shared' ? 'Shared care' : 'Primary care'} · Primary home with {world.people[custody.primaryId].firstName}</Body>{(['shared', 'me', 'them'] as const).map(preference => <ActionRow disabled={busy} key={preference} title={preference === 'shared' ? 'Request Shared Care' : preference === 'me' ? 'Request Primary Care' : 'Request Other Parent’s Care'} disabledReason={custody.lastReviewYear === world.date.year ? 'Reviewed this year' : undefined} onPress={() => confirm({ type: 'review-custody', childId: id, preference }, 'Review custody?', 'The arrangement considers the child’s needs, both parents’ ability to care and your preference.', 'Review Custody')} />)}</>}</Card>}
-      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time', 'argue', 'apologise'] as const).map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together', argue: 'Argue', apologise: 'Apologise' }[action]} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={age < 3 ? 'Available from age three' : action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used(action)} onPress={() => action === 'argue' ? confirm({ type: 'interact', action, personId: id }, 'Start an argument?', 'This can damage trust and leave an unresolved disagreement.', 'Argue') : void dispatch({ type: 'interact', action, personId: id })} />)}
+      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time', 'argue', 'apologise'] as const).map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together', argue: 'Argue', apologise: 'Apologise' }[action]} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={action === 'talk' ? conversationReason : age < 3 ? 'Available from age three' : action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used(action)} onPress={() => {
+        if (action === 'talk') {
+          if (busy || conversationSubmitting.current || conversationReason || confirmation || friendshipReviewOpen || teenReviewOpen) return;
+          setMessage(null); conversationOpenRef.current = true; setConversationOpen(true);
+        } else if (action === 'argue') confirm({ type: 'interact', action, personId: id }, 'Start an argument?', 'This can damage trust and leave an unresolved disagreement.', 'Argue');
+        else void dispatch({ type: 'interact', action, personId: id });
+      }} />)}
         <ActionRow disabled={busy} title="Give Money" icon={<FamilyArt id="gift" size={40} />} disabledReason={age < 8 ? 'Available from age eight' : used('gift')} onPress={() => setPanel(panel === 'gift' ? null : 'gift')} />
         {panel === 'gift' && <><TextInput accessibilityLabel="Gift amount" editable={!busy} value={amount} onChangeText={setAmount} placeholder={'Amount in ' + accountFor(world).currency} placeholderTextColor={c.muted} keyboardType="decimal-pad" style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10, fontSize: 18 }} /><Button label="Review Gift" disabled={busy} onPress={() => { try { const minor = parseMoney(amount, accountFor(world).currency).minor; if (minor <= 0n) throw new Error(); setMessage(null); confirm({ type: 'gift-money', personId: id, amount: minor }, 'Give ' + money(minor) + '?', person.firstName + ' will receive the gift in their own account. Currency exchange fees apply if needed.', 'Give Gift'); } catch { setMessage('Enter a positive gift amount.'); } }} /></>}
       </Card>
@@ -76,5 +94,16 @@ function PersonDetails({ id }: { id: string }) {
       </Card>}
     </>}
     <EventModal event={person && !person.died && relation ? confirmation?.event ?? null : null} busy={busy} error={error} onCancel={() => setConfirmation(null)} onChoose={async () => { if (person && !person.died && relation && confirmation && await dispatch(confirmation.command)) { setConfirmation(null); setPanel(null); } }} />
+    <EventModal event={conversation} busy={busy} error={error} onCancel={() => {
+      if (!busy && !conversationSubmitting.current) { conversationOpenRef.current = false; setConversationOpen(false); }
+    }} onChoose={async selected => {
+      if (!conversationOpenRef.current || !conversation || busy || conversationSubmitting.current) return;
+      const topic = conversationTopics(worldRef.current, id).find(item => item.id === selected);
+      if (!topic || topic.disabledReason) return;
+      conversationSubmitting.current = true;
+      try {
+        if (await dispatch({ type: 'interact', personId: id, action: 'talk', topic: topic.id })) { conversationOpenRef.current = false; setConversationOpen(false); }
+      } finally { conversationSubmitting.current = false; }
+    }} />
   </Page>;
 }
