@@ -16,7 +16,7 @@ import { roundRatio, formatMoney } from '../money';
 import { accountFor, active, bounded, draw, fact, post, result } from './common';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
-import { visibleConvictions } from './legal';
+import { visibleConvictions } from './legalRecords';
 import { careerContractEnded } from './careerSchemas';
 import { recordingCommitment } from './musicSchemas';
 import { campaignCommitment } from './politicsSchemas';

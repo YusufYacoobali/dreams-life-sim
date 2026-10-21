@@ -1,6 +1,6 @@
 import type { World } from '../model';
 import { ageOn } from '../personHelpers';
-import { visibleConvictions } from './legal';
+import { visibleConvictions } from './legalRecords';
 import type { RoyalRole } from '../content/royalty';
 export type RoyalHouse=World['royalHouses'][number];
 const compare=(a:World['date'],b:World['date'])=>a.year-b.year||a.month-b.month||a.day-b.day;

@@ -7,8 +7,8 @@ import { IneligibleAction } from '../errors';
 import { formatMoney } from '../money';
 import { fxMoney, netWorth } from '../valuation';
 import { active, draw, fact, result } from './common';
-import { coursePrerequisiteReason, enrollmentReason, tuitionFor } from './education';
-import { matchingAdmission } from './universityAdmissions';
+import { coursePrerequisiteReason, enrollmentReason, tuitionFor } from './educationEligibility';
+import { matchingAdmission } from './universityAdmissionSelectors';
 import { fields } from './schemas';
 import { activeScholarship, Scholarship, scholarshipKinds, scholarshipPolicies, studyPrograms } from './scholarshipSchemas';
 

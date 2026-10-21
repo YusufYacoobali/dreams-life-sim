@@ -8,10 +8,12 @@ import { formatMoney } from '../money';
 import { offerPending } from '../pendingQueue';
 import { rules } from '../rules';
 import { accountFor, active, availableCash, draw, fact, result } from './common';
-import { coursePrerequisiteReason, enrollmentReason, startCourse } from './education';
+import { coursePrerequisiteReason, enrollmentReason } from './educationEligibility';
+import { startCourse } from './education';
+export { matchingAdmission } from './universityAdmissionSelectors';
 import { fields } from './schemas';
 import { scholarshipOfferReason, scholarshipWaiver } from './scholarships';
-import { activeUniversityApplication, admissionAttemptKey, admissionChance, initialAdmissionStatus, universityTuitionV1, type UniversityApplication } from './universityAdmissionSchemas';
+import { admissionAttemptKey, admissionChance, initialAdmissionStatus, universityTuitionV1, type UniversityApplication } from './universityAdmissionSchemas';
 
 export const universityAdmissionCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-university'), field: z.enum(fields) }),
@@ -22,10 +24,6 @@ export type UniversityAdmissionCommand = z.infer<typeof universityAdmissionComma
 
 export function universityApplicationReason(world: World, field: typeof fields[number]): string | undefined {
   return enrollmentReason(world, 'university', field);
-}
-export function matchingAdmission(world: World, field: string) {
-  const item = activeUniversityApplication(world), person = active(world);
-  return item?.field === field && item.country === person.country && item.city === person.city ? item : undefined;
 }
 export function universityPlaceQuote(world: World, item: UniversityApplication, scholarshipId?: string) {
   let waived = 0n;

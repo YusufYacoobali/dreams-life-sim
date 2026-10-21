@@ -19,6 +19,8 @@ import { createContact } from './npcs';
 import { connectPerson, relationFor } from './relationships';
 import { publicConviction } from './social';
 export { activeSentence, isConfined } from './legalSchemas';
+import { visibleConvictions } from './legalRecords';
+export { visibleConvictions } from './legalRecords';
 
 export const legalCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('crime'), offence: z.enum(actionableCrimes), victimId: z.string().optional() }),
@@ -51,9 +53,6 @@ const row = (id: string, label: string, value: string, tone: RuntimeEffectRow['t
 function limit(world: World, name: string, person = active(world)) {
   const key = person.id + ':legal:' + world.date.year + ':' + name;
   if (world.actionCounts[key]) throw new IneligibleAction('You have already tried this this year'); world.actionCounts[key] = 1;
-}
-export function visibleConvictions(world: World, person = active(world)) {
-  return world.cases.filter(item => item.personId === person.id && item.status === 'convicted' && item.resolved && world.date.year - item.resolved.year < (item.juvenile ? legalRules[item.country].juvenileRecordYears : legalRules[item.country].recordYears));
 }
 export function crimeReason(world: World, offence: typeof actionableCrimes[number]): string | undefined {
   const person = active(world), definition = offences[offence];

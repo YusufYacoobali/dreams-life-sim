@@ -11,7 +11,7 @@ import { roundRatio } from '../money';
 import { salaryForPerson } from './work';
 import { newHealth } from './healthSchemas';
 import { isConfined, newLegal } from './legalSchemas';
-import { visibleConvictions } from './legal';
+import { visibleConvictions } from './legalRecords';
 import { newPublicLife } from './socialSchemas';
 import { newSkills } from './careerSchemas';
 import { newWorkEarnings } from './earningsSchemas';
