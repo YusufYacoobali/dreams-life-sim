@@ -1,0 +1,38 @@
+{
+  "format": "dreams-runtime-life-gate-v1",
+  "sourceCommit": "b76765e31597062d9f3f3a4f406f3cca56cdb8df",
+  "sourceSnapshot": "/tmp/dreams-production-gaps-runtime-source.json",
+  "sourceSnapshotSha256": "414aff8b4cdb7fac863e2251015cbd38ca59833d2ee0b802e9b608eb5221c6c4",
+  "argv": [
+    "node",
+    "tools/run-life-sweep.cjs",
+    "120",
+    "0",
+    "--immutable"
+  ],
+  "startedAt": "2026-10-21T00:48:05.963245+00:00",
+  "before": {
+    "files": 169,
+    "status": "exact",
+    "scope": "All game source plus unchanged annual driver; later test/doc-only source changes are outside this runtime gate."
+  },
+  "complete": true,
+  "endedAt": "2026-10-21T01:00:59.656638+00:00",
+  "elapsedSeconds": 773.69,
+  "exitCode": 0,
+  "after": {
+    "files": 169,
+    "status": "exact",
+    "scope": "All game source plus unchanged annual driver; later test/doc-only source changes are outside this runtime gate."
+  },
+  "raw": {
+    "file": "/tmp/dreams-production-gaps-120.ndjson",
+    "bytes": 37790,
+    "sha256": "a7b78f633ed8e727f656ab232e2bf8c383e3a1858f641188e0aa9e7df6f24c9a"
+  },
+  "stderr": {
+    "file": "/tmp/dreams-production-gaps-120.err",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

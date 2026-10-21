@@ -1,6 +1,19 @@
 # Opening experience: priority and completion estimates
 
-Current World35/engine36/content11/reader15/v4 integrates Best Friends, factual
+## Current source checkpoint: first relationships, education and early stories
+
+Accepted source `85f6ff8637ba3de9d0f04421307419b1d9609864` uses World36 / engine37 / content12 / reader16 / checkpointv4. It adds consent-based first teenage relationships, saved university applications and factual study-course records, authored event rarity and one extremely rare adult scene, a same-person childhood project recall after two years, and bounded separation of unmarried adult NPC dating couples. Creation Back is guarded during saving; scholarship reviews survive failed writes; full-time adult workers avoid unintended automatic school re-entry. Existing gameplay, automatic saving and old data remain protected.
+
+The complete corrected-source regression passes **2,520 tests /200 suites in1,634.281seconds**; strict app/all-test types pass. Fresh Android/iOS Hermes exports map325app/source files each. The same120 immutable annual-policy seeds0–119 finish in771.874seconds across all12countries; these remain pure-engine observations, not additional seeds or native/SQLite acceptance. The failed first full run (11failed/2,509passed) remains separate, with its eight stale acceptance suites corrected and independently reviewed. All runtime/application/config/assets/original fixture bytes match the frozen native/export source; only eight tests differ.
+
+This is a working **source checkpoint**. Complete actual native opening/first-year and university journeys, fresh serial action diagnostics and their consolidated evidence remain pending. Retirement moves and descriptive appearance/Profile labels are reviewed in a separate later worktree; they are not accepted under this source. Relevant paid interview experience, busy-year optional-story pacing, missing special-career situational writing, country/balance/editorial and release-device acceptance remain on the complete production plan. Overall production is roughly70% as an effort estimate, not an acceptance score. Further import/export/sharing, file tools and history-storage breadth remain parked.
+
+A service usage pause interrupted coordination after01:43UTC; the already-running regression completed at02:10UTC. Coordination resumed at06:05UTC. Commit and push working checkpoints at least every two hours of active work; a checkpoint does not end the authorised task.
+
+[Source, raw gates and pending acceptance](verification/production-gaps-source-checkpoint-20261021.json).
+
+
+Prior World35/engine36/content11/reader15/v4 integrates Best Friends, factual
 family/death/medical/name fixes, career-exit acceptance and Saved Lives/Statistics/
 portrait polish. The accepted regression passes2,355tests/185suites in1,386.145s;
 strict app/all-test types, runtime-equivalent Hermes exports, same120annual seeds
@@ -348,9 +361,7 @@ lives; final native exports and current Metro source pass. Native opening accept
 
 ## Current assessment
 
-Current World35/engine36/content11/reader15 evidence is linked at the top. The
-coordinator's reviewed current estimate is65% overall; onboarding
-65%, Life/early gameplay65% and family85%.
+Current World36/engine37/content12/reader16 source-gate evidence is linked at the top; complete native/performance acceptance is pending. The coordinator's current effort estimate is70% overall; onboarding70%, Life/early gameplay70%, education/ordinary jobs85% and family85%.
 Earlier milestone prose retains its own source and historical estimates.
 
 Prior World32/engine33/content9 adds reviewed hourly work, actual paid/worked
@@ -383,48 +394,36 @@ fresh Hermes exports pass. Actual native older-life viewing returns to Riley
 with all eight tables exact. Engine/codec/schema stay fixed; file breadth and
 broader production gates remain deferred/open as recorded.
 
-The complete production scope is approximately **65% complete**. These are
+The complete production scope is approximately **70% complete**. These are
 conservative effort estimates, not measured screen acceptance scores. Passing
 mechanics tests does not establish visual fidelity or device readiness.
 
 | Area | Estimate | Remaining work |
 | --- | ---: | --- |
-| Onboarding and creation | 65% | Creation/newborn usability, matched native visual review and platform acceptance |
-| Life screen and early gameplay | 65% | More early consequences and native interaction/layout polish |
+| Onboarding and creation | 70% | Creation/newborn usability, matched native visual review and platform acceptance |
+| Life screen and early gameplay | 70% | More early consequences and native interaction/layout polish |
 | Core simulation and Age Up | 80% | Broad integration, balance and performance across systems |
 | Automatic saving and resuming | 90% | Preserve tested cold/interrupted-year behavior; iOS end-to-end acceptance |
-| Education and ordinary jobs | 80% | Career ladders, national education depth and broader balance |
+| Education and ordinary jobs | 85% | Career ladders, national education depth and broader balance |
 | Relationships, family and inheritance | 85% | More autonomous-life depth, balance and device acceptance |
 | Money, assets and markets | 80% | Balance, broad integration and device acceptance |
 | Health, crime and legal systems | 75% | Country-rule audit, balance and broader integrated journeys |
 | Special careers and businesses | 70% | Story/mechanical depth, balance and device acceptance |
 | Travel and emigration | 80% | Country verification and broader scenarios/device acceptance |
 | Pets, hobbies and entertainment | 65% | Further leisure depth, balance and broader device review |
-| Situational stories | About75% of content acceptance | 250/250minimum source situations in accepted C36; remaining editorial, balance and integrated coverage |
+| Situational stories | About80% of content effort | 251situations/753choices in C37; remaining special-career writing, editorial, balance and integrated coverage |
 | Achievements and challenges | 60% | Challenge/reward depth and broader release review |
 | Visual polish and accessibility | 55% | Matched-viewport comparisons, remaining art and full accessibility review |
 | Device testing and release readiness | 10% | Standalone Android, actual iOS, physical performance and release gates |
 
-Overall is approximately **65%**. These are conservative effort estimates,
+Overall is approximately **70%**. These are conservative effort estimates,
 not acceptance scores or a simple average. Story counts measure implemented source
 situations, not completed editorial/release acceptance. Additional file/history
 work is excluded from current priorities under the user's latest instruction.
 
 ## Order of work
 
-Continue the complete production plan with independent worktrees and one
-coordinator for integration, quality gates and commits. The next batch combines
-reviewed teen first relationships, event rarity, a two-year childhood callback,
-university applications/factual study history and bounded adult NPC separation.
-The coordinator owns the World36/engine37/content12/reader16 union and exact
-old-data migration; these future features are not yet accepted in C36. The
-[production gap audit](PRODUCTION_GAP_AUDIT_C36.md) distinguishes actual missing
-mechanics from remaining acceptance. A country audit also identified an Italy
-age18 work/school conflict; its bounded reproduction/fix is in progress. Continue
-country-rule verification, balance, unobserved story contexts, visual/accessibility
-and physical/standalone/iOS release gates. Further file/history breadth stays
-parked. Commit AND push at safe points at least every two hours; a checkpoint
-does not end the authorised task.
+Continue the complete production plan with independent worktrees and one coordinator for integration, quality gates and commits. First finish actual C37 native opening/first-year and university journeys and the fresh serial action diagnostic. Integrate and accept the independently reviewed retirement moves and descriptive appearance/Profile labels next. Complete relevant paid interview experience, busy-year optional-event pacing and the required special-career situational writing in separate worktrees. Continue country-rule verification, balance, unobserved story contexts, matched visual/accessibility and physical/standalone/iOS release gates. Preserve automatic saving and exact resume. Further file/history breadth stays parked. Commit AND push at safe points at least every two hours; a checkpoint does not end the authorised task.
 
 The latest reported regression takes precedence: ordinary buttons must respond
 smoothly without “Saving” replacing unrelated subtitles or loading every button.
