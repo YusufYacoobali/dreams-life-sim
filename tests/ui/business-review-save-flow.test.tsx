@@ -11,6 +11,7 @@ import { copyWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { accountFor } from '../../src/game/systems/common';
 import { businessStartupQuote } from '../../src/game/systems/businesses';
+import { businessOfferings } from '../../src/game/content/businesses';
 import { moveQuote } from '../../src/game/systems/relocation';
 import { formatMoney } from '../../src/game/money';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
@@ -75,7 +76,10 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
     let view = render(frame(startup));
     if (custom) {
       await edit('Business name', draftName);
+      const queuedStartup = screen.getByRole('button', { name: 'Review Startup' });
       await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Other\./ })); });
+      await act(async () => { fireEvent.press(queuedStartup); });
+      expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1); expect(modal().getByText('Choose an operating model')).toBeOnTheScreen(); expect(screen.queryByText(title)).toBeNull();
       await act(async () => { fireEvent.press(modal().getByRole('radio', { name: /^Retail Shop ·/ })); });
       await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByLabelText('Business name')).toHaveProp('value', draftName);
       expect(screen.getByRole('radio', { name: /^Coffee Shop\./, checked: true })).toBeOnTheScreen();
@@ -108,6 +112,42 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(startup)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
     await press('Continue'); expect(world()).toEqual(acknowledge(expected)); expect(world().businesses).toEqual(expected.businesses); expect(world().businessLedger).toEqual(expected.businessLedger); expect(world().accounts).toEqual(expected.accounts); expect(world().ledger).toEqual(expected.ledger); expect(world().random).toEqual(expected.random);
     const doneRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: expected.pending!.id })).toBe(false); }); expect(context.rows()).toEqual(doneRows); context.oldMoments(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+});
+
+test('offering and brand settings retain reviewed choices after failure and resume the same real company', async () => {
+  const context = await setup();
+  try {
+    const initial = world(), originalCompany = initial.businesses.find(item => item.id === mockCompanyId)!, offering = businessOfferings[originalCompany.kind].specialist;
+    let view = render(frame());
+    const durableReview = async (launch: string, confirm: string, command: GameCommand, checkDraft: () => void) => {
+      const before = world(), rows = context.rows(), expected = resolveCommand(before, command, true);
+      await press(launch); await press('Never mind'); expect(world()).toEqual(before); expect(context.rows()).toEqual(rows); checkDraft();
+      await press(launch); context.sqlite.exec("CREATE TRIGGER fail_business_settings BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+      await press(confirm); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+      expect(screen.getAllByRole('alert')).toHaveLength(1); expect(world()).toEqual(before); expect(context.rows()).toEqual(rows); checkDraft();
+      context.sqlite.exec('DROP TRIGGER fail_business_settings'); await press(confirm); expect(world()).toEqual(expected);
+      expect(world().accounts).toEqual(before.accounts); expect(world().ledger).toEqual(before.ledger); expect(world().businessLedger).toEqual(before.businessLedger);
+      await press('Continue'); expect(world()).toEqual(acknowledge(expected));
+    };
+    const selectOffering = new RegExp('^' + offering.title + '\\.');
+    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: selectOffering })); });
+    expect(world()).toEqual(initial);
+    await durableReview('Review Offering', 'Set Offering', { type: 'business-offering', businessId: mockCompanyId, offering: 'specialist' }, () => {
+      expect(screen.getByRole('radio', { name: selectOffering, checked: true })).toBeOnTheScreen();
+    });
+    expect(world().businesses.find(item => item.id === mockCompanyId)!.months).toEqual(originalCompany.months);
+    await edit('Company brand name', '  My Renamed Company  ');
+    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Factory Logo' })); });
+    await durableReview('Review Settings', 'Save Settings', { type: 'business-settings', businessId: mockCompanyId, name: 'My Renamed Company', logo: 'factory' }, () => {
+      expect(screen.getByLabelText('Company brand name')).toHaveProp('value', '  My Renamed Company  '); expect(screen.getByRole('radio', { name: /^Factory Logo/, checked: true })).toBeOnTheScreen();
+    });
+    const saved = world(), savedRows = context.rows(), company = saved.businesses.find(item => item.id === mockCompanyId)!;
+    expect(company).toEqual({ ...originalCompany, offering: 'specialist', name: 'My Renamed Company', logo: 'factory' });
+    expect(saved.people).toEqual(initial.people); expect(saved.workHistory).toEqual(initial.workHistory); expect(saved.random).toEqual(initial.random);
+    view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(saved); expect(context.rows()).toEqual(savedRows);
+    expect(screen.getByText('My Renamed Company')).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: selectOffering, checked: true })).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: /^Factory Logo/, checked: true })).toBeOnTheScreen();
+    context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 

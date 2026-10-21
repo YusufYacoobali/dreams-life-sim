@@ -4,7 +4,7 @@ import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
 import { ageOn, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
-import { businessCatalog, businessKinds, BusinessKind } from '../content/businesses';
+import { businessCatalog, businessKinds, BusinessKind, businessLogoIds, businessOfferingIds, businessOfferings } from '../content/businesses';
 import { jobs } from '../content/jobs';
 import { Business, businessSaleQuote } from '../businessValuation';
 import { countries } from '../countries';
@@ -25,6 +25,8 @@ export const businessCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('start-business'), kind: z.enum(businessKinds), name: z.string().trim().min(1).max(50).refine(value => !/[\u0000-\u001F]/.test(value)), operation: z.enum(['owner', 'manager']), quotedCapital: z.bigint().positive() }),
   z.object({ type: z.literal('business-prices'), businessId: z.string(), priceBps: z.number().int().min(7500).max(15000) }),
   z.object({ type: z.literal('business-marketing'), businessId: z.string(), marketing: z.enum(['none', 'local', 'regional']) }),
+  z.object({ type: z.literal('business-offering'), businessId: z.string(), offering: z.enum(businessOfferingIds) }),
+  z.object({ type: z.literal('business-settings'), businessId: z.string(), name: z.string().trim().min(1).max(50).refine(value => !/[\u0000-\u001F]/.test(value)), logo: z.enum(businessLogoIds).optional() }),
   z.object({ type: z.literal('business-payout-policy'), businessId: z.string(), payoutBps: z.number().int().min(0).max(8000) }),
   z.object({ type: z.literal('hire-business-staff'), businessId: z.string(), role: z.enum(['worker', 'manager']), quotedPay: z.bigint().positive() }),
   z.object({ type: z.literal('dismiss-business-staff'), businessId: z.string(), employmentId: z.string() }),
@@ -122,6 +124,19 @@ export function resolveBusiness(world: World, command: BusinessCommand) {
   const company = companyFor(world, command.businessId);
   if (command.type === 'business-prices') company.priceBps = command.priceBps;
   else if (command.type === 'business-marketing') company.marketing = command.marketing;
+  else if (command.type === 'business-offering') {
+    if ((company.offering ?? 'standard') === command.offering) throw new IneligibleAction('This is your current offering');
+    company.offering = command.offering;
+    fact(world, 'I chose ' + businessOfferings[company.kind][command.offering].title.toLowerCase() + ' for ' + company.name + '.', 'business');
+  }
+  else if (command.type === 'business-settings') {
+    if (company.name === command.name && company.logo === command.logo) throw new IneligibleAction('These are your current business settings');
+    const previous = company.name; company.name = command.name;
+    if (command.logo) company.logo = command.logo; else delete company.logo;
+    // Existing employment and ledger labels record the brand used when agreed.
+    // Contracts, people, pay history and the company identity remain unchanged.
+    fact(world, previous === company.name ? 'I updated the logo for ' + company.name + '.' : 'I renamed ' + previous + ' to ' + company.name + '.', 'business');
+  }
   else if (command.type === 'business-payout-policy') company.payoutBps = command.payoutBps;
   else if (command.type === 'fund-business') { charge(world, command.amount, 'business-investment', 'Additional capital: ' + company.name, undefined, company.currency); businessBook(world, company, command.amount, 0n, 'capital-contribution', 'Additional owner capital', null, owner.id); company.costBasis += command.amount; }
   else if (command.type === 'hire-business-staff') { if (command.quotedPay !== staffPayQuote(world, company, command.role)) throw new IneligibleAction('Review the current salary quote'); const key = owner.id + ':business-hire:' + company.id + ':' + world.date.year; if ((world.actionCounts[key] ?? 0) >= 4) throw new IneligibleAction('Four agency placements are available per business each year'); world.actionCounts[key] = (world.actionCounts[key] ?? 0) + 1; hireCompanyStaff(world, company, command.role); }
@@ -140,5 +155,5 @@ export function resolveBusiness(world: World, command: BusinessCommand) {
     const person = world.people[member.personId], severance = roundRatio(person.employment!.annualPay, 12n), payment = businessCost(world, company, severance, 'severance', 'One month of severance', 'wages', person.id, member.employmentId); company.pendingPayroll += severance;
     employmentBackPay(world, person, member.employmentId, payment.paid); endEmployment(world, person.id); fact(world, 'My employment at ' + company.name + ' ended with a recorded severance obligation.', 'work', '', person.id);
   }
-  result(world, 'Business updated', 'Your company’s actual plan and balances are updated. Recurring effects take place over time.', businessCatalog[company.kind].art);
+  result(world, 'Business updated', 'Your company’s actual plan and balances are updated. Recurring effects take place over time.', company.logo ?? businessCatalog[company.kind].art);
 }

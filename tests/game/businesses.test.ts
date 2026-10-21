@@ -147,6 +147,49 @@ test.each(businessKinds)('%s has actual qualified people, local expenses and a c
   expect(book.every(item => item.currency === quote.currency)).toBe(true); expect(book.reduce((sum, item) => sum + item.cashDelta, 0n)).toBe(company.cash);
   expect(period.profit).toBe(period.revenue - period.expenses); expect(world.assets).toEqual(initial.assets); expect(decodeWorld(encodeWorld(world))).toEqual(world);
 });
+test.each(['cafe', 'retail', 'delivery', 'software', 'manufacturing'] as const)('%s standard offering preserves legacy company bytes and every RNG stream', kind => {
+  let configured = start(fixture(), kind); const id = configured.businesses[0].id;
+  expect(Object.hasOwn(configured.businesses[0], 'offering')).toBe(false); expect(Object.hasOwn(configured.businesses[0], 'logo')).toBe(false);
+  configured = drain(resolveCommand(configured, { type: 'business-offering', businessId: id, offering: 'value' }));
+  configured = drain(resolveCommand(configured, { type: 'business-offering', businessId: id, offering: 'standard' }));
+  // Declared compatibility boundary: the same valid state without the optional
+  // setting represents the old default. No historical fixture is rewritten.
+  const legacy = decodeWorld(encodeWorld(configured)); delete legacy.businesses[0].offering; validateWorld(legacy);
+  const expected = month(legacy), actual = month(configured);
+  expect(actual.random).toEqual(expected.random); expect(actual.businesses[0].months[0].offering).toBe('standard');
+  delete actual.businesses[0].offering; delete actual.businesses[0].months[0].offering;
+  expect(encodeWorld(actual)).toBe(encodeWorld(expected));
+});
+test('offering changes trade future demand against revenue and material cost without rerolling or inventing past selections', () => {
+  const attended = month(start()), id = attended.businesses[0].id;
+  const initial = drain(resolveCommand(attended, { type: 'business-prices', businessId: id, priceBps: 15000 })), before = encodeWorld(initial), standard = month(initial);
+  const value = month(drain(resolveCommand(initial, { type: 'business-offering', businessId: id, offering: 'value' }))), specialist = month(drain(resolveCommand(initial, { type: 'business-offering', businessId: id, offering: 'specialist' })));
+  const baseline = standard.businesses[0].months.at(-1)!, cheaper = value.businesses[0].months.at(-1)!, premium = specialist.businesses[0].months.at(-1)!;
+  expect(cheaper.customers).toBeGreaterThan(baseline.customers); expect(premium.customers).toBeLessThan(baseline.customers);
+  expect(cheaper.revenue * BigInt(baseline.customers)).toBeLessThan(baseline.revenue * BigInt(cheaper.customers));
+  expect(premium.revenue * BigInt(baseline.customers)).toBeGreaterThan(baseline.revenue * BigInt(premium.customers));
+  const supplies = (world: World) => -world.businessLedger.filter(item => item.businessId === id && item.category === 'supplies' && item.date.year === world.date.year && item.date.month === world.date.month).reduce((sum, item) => sum + item.cashDelta, 0n);
+  expect(supplies(value) * BigInt(baseline.customers)).toBeLessThan(supplies(standard) * BigInt(cheaper.customers));
+  expect(supplies(specialist) * BigInt(baseline.customers)).toBeGreaterThan(supplies(standard) * BigInt(premium.customers));
+  for (const world of [value, specialist]) {
+    expect(world.random).toEqual(standard.random); expect(world.businesses[0].months[0]).toEqual(initial.businesses[0].months[0]);
+    expect(Object.hasOwn(world.businesses[0].months[0], 'offering')).toBe(false); expect(world.businesses[0].staff).toEqual(initial.businesses[0].staff);
+    expect(world.businesses[0].months.at(-1)!.payroll).toBe(baseline.payroll); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+  }
+  expect(cheaper.offering).toBe('value'); expect(premium.offering).toBe('specialist'); expect(encodeWorld(initial)).toBe(before);
+});
+test('brand settings preserve actual company and employment identities, books and historical wording', () => {
+  const initial = month(start()), company = initial.businesses[0], before = encodeWorld(initial);
+  const changed = resolveCommand(initial, { type: 'business-settings', businessId: company.id, name: '  New Company Brand  ', logo: 'factory' });
+  expect(changed.businesses[0]).toEqual({ ...company, name: 'New Company Brand', logo: 'factory' });
+  expect(changed.pending?.illustration).toBe('factory');
+  for (const key of ['people', 'workHistory', 'accounts', 'ledger', 'businessLedger', 'businessPayables', 'random'] as const) expect(changed[key]).toEqual(initial[key]);
+  expect(changed.journal.slice(0, initial.journal.length)).toEqual(initial.journal); expect(encodeWorld(initial)).toBe(before); expect(decodeWorld(encodeWorld(changed))).toEqual(changed);
+  const restored = drain(resolveCommand(drain(changed), { type: 'business-settings', businessId: company.id, name: 'New Company Brand' }));
+  expect(Object.hasOwn(restored.businesses[0], 'logo')).toBe(false); expect(restored.people).toEqual(initial.people); expect(restored.workHistory).toEqual(initial.workHistory);
+  expect(() => resolveCommand(initial, { type: 'business-settings', businessId: company.id, name: '\u0000bad', logo: 'shop' })).toThrow();
+  expect(() => resolveCommand(initial, { type: 'business-offering', businessId: company.id, offering: 'standard' })).toThrow(/current offering/);
+});
 test.each(countryCodes)('%s startup and payroll reconcile in the country currency', country => {
   const initial = fixture(), owner = initial.people[initial.activePersonId], currency = countries[country].currency; owner.country = country; owner.city = countries[country].cities[0]; endEmployment(initial);
   if (!initial.accounts.some(item => item.ownerId === owner.id && item.currency === currency)) initial.accounts.push({ id: 'company_local_' + country, ownerId: owner.id, currency, cash: 100000000n, openingCash: 100000000n, lockedCash: 0n });

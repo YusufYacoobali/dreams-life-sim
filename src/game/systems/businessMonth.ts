@@ -1,7 +1,7 @@
 import { activeTrip } from './travelSchemas';
 import { ageOn, World } from '../model';
 import { Business } from '../businessValuation';
-import { businessCatalog } from '../content/businesses';
+import { businessCatalog, businessOfferings } from '../content/businesses';
 import { jobs } from '../content/jobs';
 import { rules, monthlyAmount } from '../rules';
 import { roundRatio } from '../money';
@@ -46,8 +46,11 @@ export function businessMonth(world: World) {
     const capacity = Math.max(0, Math.floor(1000 * capacityBps * (100 + company.facilities * 8) * (50 + company.condition / 2) * (leadership ? 1 : 0.35) / 100000000));
     const market = draw(world, 'economy', 80, 120), image = owner.publicLife.image, publicFactor = image < 30 ? 7500 : 10000 + Math.floor(owner.stats.fame * image / 2), marketingFactor = company.marketing === 'regional' ? 12500 : company.marketing === 'local' ? 11000 : 10000;
     const demand = Number(roundRatio(1600n * BigInt(company.locations) * BigInt(7500 + company.reputation * 50) * BigInt(publicFactor) * BigInt(marketingFactor) * BigInt(market) * 100000000n, 10000n * 10000n * 10000n * 100n * BigInt(company.priceBps) * BigInt(company.priceBps)));
-    const customers = Math.min(capacity, Math.max(0, demand));
-    const baseSales = roundRatio(base * BigInt(definition.revenueBps) * BigInt(customers), 120000000n), revenue = roundRatio(baseSales * BigInt(company.priceBps), 10000n), supplies = roundRatio(baseSales * BigInt(definition.variableCostBps), 10000n);
+    // Absence and the standard focus retain the original arithmetic and draws.
+    const offering = company.offering && company.offering !== 'standard' ? businessOfferings[company.kind][company.offering] : undefined;
+    const customers = Math.min(capacity, Math.max(0, offering ? Math.floor(demand * offering.demandBps / 10000) : demand));
+    const baseSales = roundRatio(base * BigInt(definition.revenueBps) * BigInt(customers), 120000000n), standardRevenue = roundRatio(baseSales * BigInt(company.priceBps), 10000n), standardSupplies = roundRatio(baseSales * BigInt(definition.variableCostBps), 10000n);
+    const revenue = offering ? roundRatio(standardRevenue * BigInt(offering.revenueBps), 10000n) : standardRevenue, supplies = offering ? roundRatio(standardSupplies * BigInt(offering.suppliesBps), 10000n) : standardSupplies;
     if (revenue) businessBook(world, company, revenue, 0n, 'sales', 'Delivered customer orders');
     settleBusinessPayables(world, company);
     const fixed = monthlyAmount(roundRatio(base * BigInt(definition.fixedCostBps) * BigInt(company.locations), 10000n), company.monthsOperated), marketing = monthlyAmount(roundRatio(base * BigInt(company.marketing === 'regional' ? 1200 : company.marketing === 'local' ? 300 : 0), 10000n), company.monthsOperated);
@@ -66,7 +69,7 @@ export function businessMonth(world: World) {
     company.reputation = bounded(company.reputation + (customers ? satisfaction >= 75 ? 1 : satisfaction < 45 ? -2 : 0 : -2));
     const arrears = world.businessPayables.some(item => item.businessId === company.id && item.principal > 0n); company.distressMonths = arrears ? company.distressMonths + 1 : 0;
     if (!arrears && profit > 0n && company.payoutBps) { const requested = roundRatio(profit * BigInt(company.payoutBps), 10000n), available = availableBusinessProfit(world, company); payBusinessDividend(world, company, requested < available ? requested : available); }
-    company.months.push({ month, revenue, expenses, profit, payroll, tax, cash: company.cash, customers }); archiveMonths(company);
+    company.months.push({ month, revenue, expenses, profit, payroll, tax, cash: company.cash, customers, ...(company.offering ? { offering: company.offering } : {}) }); archiveMonths(company);
     if (company.distressMonths >= 3) {
       exitBusiness(world, company, 'failure');
       if (owner.id === world.activePersonId) { offerPending(world, { kind: 'result', id: 'business_failure_' + company.id, title: 'The business has closed', body: company.name + ' could not meet its obligations for three consecutive periods. Available assets were liquidated, actual creditors paid and unpaid claims recorded as losses.', illustration: 'business', effects: [] }, 80); if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true; }
