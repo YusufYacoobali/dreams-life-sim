@@ -15,6 +15,7 @@ import { decodeSave } from '../../src/persistence/archive';
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { EventModal } from '../../src/ui/EventModal';
 import actorArchive from '../fixtures/v12-career-archive.json';
 import serviceArchive from '../fixtures/v16-service-archive.json';
 
@@ -69,7 +70,8 @@ test.each(['career', 'service'] as const)('%s current option/cancel saves nothin
   try {
     const initial = world(), beforeRows = context.rows(), before = encodeWorld(initial), command = commandFor(domain), expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     let view = render(frame(domain)); expect(screen.getByRole('button', { name: currentLabel(domain) })).toBeDisabled(); await press(currentLabel(domain)); expect(screen.queryByText(reviewTitle(domain))).toBeNull();
-    await press(changedLabel(domain)); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
+    await press(changedLabel(domain)); const discarded = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    await press('Never mind'); await act(async () => { await discarded('confirm'); }); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     await press(changedLabel(domain)); context.sqlite.exec("CREATE TRIGGER fail_career_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press(confirmLabel(domain)); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1); expect(modal().getByText(reviewTitle(domain))).toBeOnTheScreen(); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toBeEnabled(); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     context.sqlite.exec('DROP TRIGGER fail_career_review'); await press(confirmLabel(domain)); expect(world()).toEqual(expected); expect(screen.queryByText(reviewTitle(domain))).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
@@ -83,18 +85,39 @@ test.each(['career', 'service'] as const)('%s current option/cancel saves nothin
 test.each(['career', 'service'] as const)('%s review keeps its chosen command through busy duplicate presses, cancellation and Android Back', async domain => {
   const context = await setup(domain);
   try {
-    const initial = world(), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), view = render(frame(domain)); await press(changedLabel(domain));
-    const release = context.pauseNextSave(); await press(confirmLabel(domain)); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true });
+    const initial = world(), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(domain)); await press(changedLabel(domain));
+    const callbacks = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
+    const release = context.pauseNextSave(); await act(async () => { fireEvent.press(screen.getByRole('button', { name: confirmLabel(domain) })); void callbacks.onChoose('confirm'); callbacks.onCancel(); });
+    expect(dispatch).toHaveBeenCalledTimes(1); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     expect(screen.getByRole('button', { name: otherLabel(domain) })).toBeDisabled(); await press(otherLabel(domain)); await press(confirmLabel(domain)); await press('Never mind'); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expect(modal().getByText(reviewTitle(domain))).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); view.unmount();
-  } finally { context.close(); }
+  } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test('a new career kind drops the previous reviewed command and does not resurrect it on return', async () => {
   const context = await setup('career');
   try {
-    const initial = world(), beforeRows = context.rows(), view = render(frame('career')); await press(changedLabel('career')); expect(screen.getByText(reviewTitle('career'))).toBeOnTheScreen();
-    mockKind = 'model'; view.rerender(frame('career')); expect(screen.queryByText(reviewTitle('career'))).toBeNull(); mockKind = 'actor'; view.rerender(frame('career')); expect(screen.queryByText(reviewTitle('career'))).toBeNull(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); view.unmount();
+    const initial = world(), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor('career'), true), view = render(frame('career')); await press(changedLabel('career')); expect(screen.getByText(reviewTitle('career'))).toBeOnTheScreen();
+    const captured = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    mockKind = 'model'; view.rerender(frame('career')); expect(screen.queryByText(reviewTitle('career'))).toBeNull(); mockKind = 'actor'; view.rerender(frame('career')); expect(screen.queryByText(reviewTitle('career'))).toBeNull();
+    await act(async () => { await captured('confirm'); });
+    expect(expected.revision).toBe(initial.revision + 1);
+    expect(world().revision).toBe(initial.revision); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); view.unmount();
+  } finally { context.close(); }
+});
+
+test('a cancelled career confirmation and cancellation cannot act on its replacement review', async () => {
+  const context = await setup('career');
+  try {
+    const initial = world(), rows = context.rows(), view = render(frame('career')); await press(changedLabel('career'));
+    const old = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
+    await press('Never mind'); await press(otherLabel('career'));
+    const replacement = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event;
+    await act(async () => { old.onCancel(); await old.onChoose('confirm'); });
+    expect(world()).toBe(initial); expect(context.rows()).toEqual(rows);
+    expect(screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.event).toBe(replacement);
+    const expected = resolveCommand(initial, { type: 'career-focus', careerId: initial.careers[0].id, focus: 'publicity' }, true);
+    await press('Set Career Focus'); expect(world()).toEqual(expected); view.unmount();
   } finally { context.close(); }
 });

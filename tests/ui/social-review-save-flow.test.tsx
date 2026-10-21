@@ -17,6 +17,9 @@ import { decodeSave } from '../../src/persistence/archive';
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { EventModal } from '../../src/ui/EventModal';
+import { useSocialReview } from '../../src/ui/SocialReview';
+import { Button } from '../../src/ui/components';
 import creatorArchive from '../fixtures/v10-creator-archive.json';
 
 let mockStore: ReturnType<typeof createGameStore>, mockAccountId = '', mockLive: string | undefined;
@@ -29,7 +32,7 @@ import Fame from '../../app/(game)/fame';
 type Domain = 'post' | 'profile' | 'fame';
 const caption = 'A carefully kept original afternoon.', biography = 'Original biography remains here.';
 const world = () => mockStore.getState().world!;
-const frame = (domain: Domain) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{domain === 'post' ? <CreatePost /> : domain === 'profile' ? <SocialProfile /> : <Fame />}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const frame = (domain: Domain, content?: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content ?? (domain === 'post' ? <CreatePost /> : domain === 'profile' ? <SocialProfile /> : <Fame />)}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const change = (name: string, value: string) => fireEvent.changeText(screen.getByLabelText(name), value);
 const modal = () => within(screen.UNSAFE_getByType(Modal));
@@ -73,7 +76,8 @@ test.each(['post', 'profile', 'fame'] as const)('%s retains an exact reviewed dr
     const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     expect(Object.keys(beforeRows)).toHaveLength(8); let view = render(frame(domain)); await prepare(domain); const originalReview = modal().getByText(reviewTitle(domain)); expect(originalReview).toBeOnTheScreen();
     if (domain !== 'profile') expect(modal().getByText(domain === 'post' ? formatMoney(postCost(initial, 'polished')) : formatMoney(publicActionQuote(initial, 'event')))).toBeOnTheScreen();
-    await press('Never mind'); draftRetained(domain); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
+    const discarded = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    await press('Never mind'); await act(async () => { await discarded('confirm'); }); draftRetained(domain); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     if (domain === 'profile') await press('Review Profile Changes'); else if (domain === 'post') await press('Review Post'); else await prepare(domain);
     context.sqlite.exec("CREATE TRIGGER fail_social_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(confirmLabel(domain));
     await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1); expect(modal().getByText(reviewTitle(domain))).toBeOnTheScreen(); draftRetained(domain); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(router.back).not.toHaveBeenCalled(); expect(router.push).not.toHaveBeenCalled();
@@ -88,8 +92,10 @@ test.each(['post', 'profile', 'fame'] as const)('%s retains an exact reviewed dr
 test.each(['post', 'profile', 'fame'] as const)('%s preserves the reviewed command during duplicate presses, busy edits, cancellation and Android Back', async domain => {
   const context = await setup();
   try {
-    const initial = world(), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), view = render(frame(domain)); await prepare(domain);
-    const release = context.pauseNextSave(); await press(confirmLabel(domain)); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true });
+    const initial = world(), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), view = render(frame(domain)); await prepare(domain);
+    const callbacks = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
+    const release = context.pauseNextSave(); await act(async () => { fireEvent.press(screen.getByRole('button', { name: confirmLabel(domain) })); void callbacks.onChoose('confirm'); callbacks.onCancel(); });
+    expect(dispatch).toHaveBeenCalledTimes(1); expect(mockStore.getState().busy).toBe(true); expect(modal().getByRole('button', { name: confirmLabel(domain) })).toHaveProp('accessibilityState', { disabled: true, busy: true });
     if (domain === 'post') { expect(screen.getByLabelText('Post caption')).toHaveProp('editable', false); expect(screen.getByRole('button', { name: /^Keep It Authentic\./ })).toBeDisabled(); await press(/^Keep It Authentic\./); }
     if (domain === 'profile') { expect(screen.getByLabelText('Edit social handle')).toHaveProp('editable', false); expect(screen.getByRole('button', { name: 'Save Posting Routine' })).toHaveProp('accessibilityState', { disabled: true, busy: false }); }
     if (domain === 'fame') { expect(screen.getByRole('button', { name: /^Do an Interview\./ })).toBeDisabled(); await press(/^Do an Interview\./); }
@@ -113,9 +119,31 @@ test('current posting plan saves nothing; local picker choices and cancellation 
 test.each(['post', 'profile'] as const)('%s route identity drops stale local drafts and reviews without game, save or random work', async domain => {
   const context = await setup();
   try {
-    const initial = world(), beforeRows = context.rows(), id = mockAccountId, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame(domain)); await prepare(domain);
+    const initial = world(), beforeRows = context.rows(), id = mockAccountId, expected = resolveCommand(initial, commandFor(domain), true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame(domain)); await prepare(domain);
+    const captured = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     mockAccountId = 'unavailable_profile'; view.rerender(frame(domain)); expect(screen.queryByText(reviewTitle(domain))).toBeNull(); mockAccountId = id; view.rerender(frame(domain)); expect(screen.queryByText(reviewTitle(domain))).toBeNull();
     if (domain === 'post') expect(screen.getByLabelText('Post caption')).toHaveProp('value', ''); else { expect(screen.queryByLabelText('Edit social handle')).toBeNull(); await press('Edit Profile'); expect(screen.getByLabelText('Edit social handle')).toHaveProp('value', initial.socialAccounts[0].handle); }
-    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    await act(async () => { await captured('confirm'); });
+    expect(expected.revision).toBe(initial.revision + 1);
+    expect(world().revision).toBe(initial.revision); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+  } finally { context.close(); }
+});
+
+function SavedCallbackReview({ context, onSaved }: { context: string; onSaved: () => void }) {
+  const review = useSocialReview(context);
+  return <><Button label="Review Profile" onPress={() => review.confirm(commandFor('profile') as Parameters<typeof review.confirm>[0], 'Update this profile?', 'Keep the recorded audience and identity.', [], 'social', 'Save Profile', onSaved)} />{review.modal}</>;
+}
+
+test.each(['changed context', 'unmounted'] as const)('an already submitted social save may finish after %s without calling its old onSaved', async change => {
+  const context = await setup();
+  try {
+    const initial = world(), expected = resolveCommand(initial, commandFor('profile'), true), onSaved = jest.fn(), view = render(frame('profile', <SavedCallbackReview context="original" onSaved={onSaved} />));
+    await press('Review Profile'); const captured = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
+    const release = context.pauseNextSave(); await press('Save Profile'); expect(mockStore.getState().busy).toBe(true);
+    if (change === 'unmounted') view.unmount(); else view.rerender(frame('profile', <SavedCallbackReview context="another" onSaved={onSaved} />));
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+    expect(world()).toEqual(expected); expect(onSaved).not.toHaveBeenCalled();
+    const rows = context.rows(); await act(async () => { await captured('confirm'); }); expect(context.rows()).toEqual(rows);
+    if (change !== 'unmounted') view.unmount();
   } finally { context.close(); }
 });
