@@ -1,15 +1,19 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
 import { useCreationDraft } from '../../src/state/creationDraft';
 import { createLife, randomCreation } from '../../src/game/createLife';
-import { encodeWorld, fullName, ageOn } from '../../src/game/model';
+import { copyWorld, encodeWorld, fullName, ageOn } from '../../src/game/model';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { avatarPresets } from '../../src/ui/CreationElements';
 import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
+import * as components from '../../src/ui/components';
+import { unpackCheckpoint } from '../../src/persistence/checkpoints';
+import friendship from '../fixtures/v35-native-best-friend-checkpoints.json';
 let mockStore: ReturnType<typeof createGameStore>, mockSeed = 42;
 let mockParams: { seed?: string; mode?: string } = {};
 jest.mock('expo-router', () => ({
@@ -24,9 +28,49 @@ import Appearance from '../../app/appearance';
 import Birth from '../../app/birth';
 import Life from '../../app/(game)/(tabs)/life';
 import { PendingEvent } from '../../src/ui/PendingEvent';
-const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const frame = (child: React.ReactNode, appearance: 'light' | 'dark' = 'light') => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={appearance}>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 beforeEach(() => { useCreationDraft.setState({ draft: null }); mockParams = {}; mockSeed = 42; });
+
+test('an actual archived result acknowledgement keeps unchanged Life presentation stable', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  const initial = unpackCheckpoint(friendship.backup.checkpoint); await repository.create(initial);
+  mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'unused' }); await mockStore.getState().bootstrap();
+  const portrait = jest.spyOn(components, 'Portrait'), journal = jest.spyOn(FlatList.prototype, 'render');
+  const view = render(frame(<Life />));
+  try {
+    const before = mockStore.getState().world!, identity = screen.getByRole('button', { name: /^My Life profile\./ }).props.accessibilityLabel;
+    const data = screen.UNSAFE_getByType(FlatList).props.data, counts = { portrait: portrait.mock.calls.length, journal: journal.mock.calls.length };
+    expect(counts.portrait).toBeGreaterThan(0); expect(counts.journal).toBeGreaterThan(0);
+    await press('Continue'); const after = mockStore.getState().world!;
+    expect(after.people).toEqual(before.people); expect(after.journal).toEqual(before.journal); expect(after.accounts).toEqual(before.accounts); expect(after.pending).toBeNull();
+    expect(screen.getByRole('button', { name: identity })).toBeOnTheScreen(); expect(after.revision).toBe(before.revision + 1); expect(await repository.load(after.id)).toEqual(after);
+    expect(portrait).toHaveBeenCalledTimes(counts.portrait); expect(journal).toHaveBeenCalledTimes(counts.journal); expect(screen.UNSAFE_getByType(FlatList).props.data).toBe(data);
+
+    view.rerender(frame(<Life />, 'dark')); expect(screen.getByText(fullName(after.people[after.activePersonId]))).toHaveStyle({ color: '#F6F8FF' });
+    expect(screen.UNSAFE_getByType(FlatList).props.data).toBe(data); expect(mockStore.getState().world).toBe(after);
+    await press('Age Up'); const progressed = mockStore.getState().world!, player = progressed.people[progressed.activePersonId], progressedRows = screen.UNSAFE_getByType(FlatList).props.data;
+    expect(progressed.date).not.toEqual(after.date); expect(progressedRows).not.toBe(data); expect(portrait.mock.calls.length).toBeGreaterThan(counts.portrait); expect(journal.mock.calls.length).toBeGreaterThan(counts.journal);
+    expect(screen.getByRole('button', { name: new RegExp('^My Life profile\\. ' + fullName(player) + '\\. Age ' + ageOn(player, progressed.date) + '\\.') })).toBeOnTheScreen();
+    for (const [label, value] of [['Happiness', player.stats.happiness], ['Health', player.stats.health], ['Smarts', player.stats.smarts], ['Looks', player.stats.looks], ['Respect', player.stats.respect]] as const) expect(screen.getByRole('progressbar', { name: label })).toHaveAccessibilityValue({ now: value });
+    expect(await repository.load(progressed.id)).toEqual(progressed);
+
+    // View-only restore/invalidation controls: these are never saved or passed
+    // off as engine outcomes. In particular, equal lengths/IDs are insufficient.
+    const stored = encodeWorld(await repository.load(progressed.id)), firstId = progressedRows[0].entry.id;
+    const edited = copyWorld(progressed), entry = edited.journal.find(item => item.id === firstId)!; entry.text = 'Updated journal wording for this read-only view.';
+    await act(async () => { mockStore.setState({ world: edited }); }); const editedRows = screen.UNSAFE_getByType(FlatList).props.data;
+    expect(editedRows).not.toBe(progressedRows); expect(editedRows).toHaveLength(progressedRows.length); expect(screen.getByText(entry.text)).toBeOnTheScreen();
+    const dated = copyWorld(edited); dated.journal.find(item => item.id === firstId)!.date.year++;
+    await act(async () => { mockStore.setState({ world: dated }); }); const datedRows = screen.UNSAFE_getByType(FlatList).props.data;
+    expect(datedRows).not.toBe(editedRows); expect(datedRows[0].age).toBe(editedRows[0].age + 1);
+    const changedLook = copyWorld(dated), appearance = changedLook.people[changedLook.activePersonId].appearance; appearance.face = (appearance.face + 1) % 4;
+    await act(async () => { mockStore.setState({ world: changedLook }); }); expect(portrait.mock.calls.at(-1)![0].appearance).toEqual(appearance);
+    const restored = copyWorld(changedLook); restored.id += '_restored_view'; const beforeRestore = portrait.mock.calls.length;
+    await act(async () => { mockStore.setState({ world: restored }); }); expect(portrait.mock.calls.length).toBeGreaterThan(beforeRestore); expect(screen.UNSAFE_getByType(FlatList).props.data).not.toBe(datedRows);
+    expect(encodeWorld(await repository.load(progressed.id))).toBe(stored);
+  } finally { view.unmount(); portrait.mockRestore(); journal.mockRestore(); sqlite.close(); }
+});
 
 test('custom identity, country/city and appearance survive editor navigation into the real newborn, first year and cold resume', async () => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 19 }), id: () => 'life_onboarding' }); await mockStore.getState().bootstrap();

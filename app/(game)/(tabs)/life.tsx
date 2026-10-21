@@ -23,30 +23,45 @@ import { accountFor } from '../../../src/game/systems/common';
 import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
 import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
 
-// Save progress and local menus do not change this world's portrait or stats.
-const LifeIdentity = React.memo(function LifeIdentity({ world }: { world: World }) {
-  const c = useColors();
+// Derive only displayed facts and the identity/date scope, never a cached World.
+function identityPresentation(world: World) {
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
   const bankBalance = formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale);
   const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
+  const membership = royalMembership(world), assignment = serviceAway(world);
+  return {
+    scope: [world.id, player.id, account.currency, world.date.year, world.date.month, world.date.day, player.born.year, player.born.month, player.born.day],
+    name: fullName(player), age: ageOn(player, world.date), appearance: player.appearance,
+    country: player.country, bankBalance, occupation,
+    royalLabel: membership ? royalTitle(world, membership.house, player.id) : null,
+    serviceLocation: assignment ? assignment.location : null,
+    tripCity: activeTrip(world) ? physicalLocation(world).city : null,
+    stats: { happiness: player.stats.happiness, health: player.stats.health, smarts: player.stats.smarts, looks: player.stats.looks, respect: player.stats.respect },
+  };
+}
+type IdentityPresentation = ReturnType<typeof identityPresentation>;
+
+// Theme context still updates this memoized child independently of its facts.
+const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: IdentityPresentation }) {
+  const c = useColors();
   return <>
-    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + fullName(player) + '. Age ' + ageOn(player, world.date) + '. ' + occupation + '. Bank balance ' + bankBalance} onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
-      <Portrait decorative name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={52} />
-      <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{fullName(player)}</Text>
-        {royalMembership(world) && <Text style={{ color: c.muted, fontSize: 11 }}>{royalTitle(world, royalMembership(world)!.house, player.id)}</Text>}
-        <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[player.country]} {occupation} · {'Age\u00a0' + ageOn(player, world.date)}</Text>
-        {serviceAway(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {serviceAway(world)!.location}</Text>}
-        {activeTrip(world) && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {physicalLocation(world).city}</Text>}
+    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance} onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
+      <Portrait decorative name={data.name} appearance={data.appearance} age={data.age} size={52} />
+      <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{data.name}</Text>
+        {data.royalLabel !== null && <Text style={{ color: c.muted, fontSize: 11 }}>{data.royalLabel}</Text>}
+        <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[data.country]} {data.occupation} · {'Age\u00a0' + data.age}</Text>
+        {data.serviceLocation !== null && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {data.serviceLocation}</Text>}
+        {data.tripCity !== null && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {data.tripCity}</Text>}
       </View>
-      <View style={{ maxWidth: '35%', alignItems: 'flex-end' }}><Text adjustsFontSizeToFit minimumFontScale={0.55} numberOfLines={1} style={{ color: c.positiveText, fontSize: 18, fontWeight: '700' }}>{bankBalance}</Text><Text style={{ color: c.muted, fontSize: 10, marginTop: 3 }}>Bank Balance</Text></View>
+      <View style={{ maxWidth: '35%', alignItems: 'flex-end' }}><Text adjustsFontSizeToFit minimumFontScale={0.55} numberOfLines={1} style={{ color: c.positiveText, fontSize: 18, fontWeight: '700' }}>{data.bankBalance}</Text><Text style={{ color: c.muted, fontSize: 10, marginTop: 3 }}>Bank Balance</Text></View>
     </Pressable>
     <View style={{ paddingHorizontal: 16, paddingBottom: 12, gap: 2 }}>
-      <StatBar label="Happiness" value={player.stats.happiness} color={c.green} icon={<Ionicons name="heart" size={22} color="#FF665D" />} />
-      <StatBar label="Health" value={player.stats.health} color={c.teal} icon={<Ionicons name="bulb" size={22} color="#EAC54E" />} />
-      <StatBar label="Smarts" value={player.stats.smarts} color={c.blue} icon={<Ionicons name="book" size={22} color="#419BF8" />} />
-      <StatBar label="Looks" value={player.stats.looks} color={c.purple} icon={<Ionicons name="people" size={22} color="#A36BE3" />} />
-      <StatBar label="Respect" value={player.stats.respect} color={c.amber} icon={<Ionicons name="star" size={22} color="#F6BE30" />} />
+      <StatBar label="Happiness" value={data.stats.happiness} color={c.green} icon={<Ionicons name="heart" size={22} color="#FF665D" />} />
+      <StatBar label="Health" value={data.stats.health} color={c.teal} icon={<Ionicons name="bulb" size={22} color="#EAC54E" />} />
+      <StatBar label="Smarts" value={data.stats.smarts} color={c.blue} icon={<Ionicons name="book" size={22} color="#419BF8" />} />
+      <StatBar label="Looks" value={data.stats.looks} color={c.purple} icon={<Ionicons name="people" size={22} color="#A36BE3" />} />
+      <StatBar label="Respect" value={data.stats.respect} color={c.amber} icon={<Ionicons name="star" size={22} color="#F6BE30" />} />
     </View>
   </>;
 });
@@ -81,14 +96,28 @@ export default function Life() {
   const [advancing, setAdvancing] = useState(false);
   const showYearProgress = useDelayedBusy(busy && advancing);
   const player = world.people[world.activePersonId];
+  const identityCache = useRef<{ key: string; data: IdentityPresentation } | null>(null);
+  const identity = useMemo(() => {
+    const data = identityPresentation(world), key = JSON.stringify(data);
+    if (identityCache.current?.key === key) return identityCache.current.data;
+    identityCache.current = { key, data }; return data;
+  }, [world]);
   const entries = useMemo(() => world.journal.filter(entry => entry.personId === player.id), [world.journal, player.id]);
+  const journalScope = JSON.stringify([world.id, player.id, world.date.year, world.date.month, world.date.day, player.born.year, player.born.month, player.born.day]);
+  const rowCache = useRef<{ scope: string; rows: JournalRow[] } | null>(null);
   const journalRows = useMemo(() => {
+    const previous = rowCache.current;
+    if (previous?.scope === journalScope && previous.rows.length === entries.length && entries.every((entry, index) => {
+      const prior = previous.rows[index].entry;
+      return entry.id === prior.id && entry.text === prior.text && entry.date.year === prior.date.year && entry.date.month === prior.date.month && entry.date.day === prior.date.day;
+    })) return previous.rows;
     const person = { ...player, died: null }; let previousAge: number | undefined;
-    return entries.map(entry => {
+    const rows = entries.map(entry => {
       const age = ageOn(person, entry.date), startsYear = age !== previousAge; previousAge = age;
       return { entry, age, startsYear };
     });
-  }, [entries, player.born]);
+    rowCache.current = { scope: journalScope, rows }; return rows;
+  }, [entries, journalScope]);
   const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
   const cancelJournalScroll = useCallback(() => {
     if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
@@ -114,7 +143,7 @@ export default function Life() {
   }, [world.id, player.id, entries.length, followJournal, cancelJournalScroll]);
   const firstYearHint = ageOn(player, world.date) === 0 ? world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.' : null;
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
-    <LifeIdentity world={world} />
+    <LifeIdentity data={identity} />
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
     <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
