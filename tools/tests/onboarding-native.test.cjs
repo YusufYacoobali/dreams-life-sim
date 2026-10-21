@@ -3,7 +3,7 @@
 // Synthetic Git/SQLite protocol tests only. No game world, device or runtime is used.
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os');
-const { execFileSync } = require('node:child_process'), { DatabaseSync } = require('node:sqlite');
+const { DatabaseSync } = require('node:sqlite');
 const h = require('../onboarding-native-support.cjs');
 const { verifyRaw } = require('../verify-onboarding-native.cjs');
 const json = (file, value) => fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n');
@@ -12,11 +12,14 @@ function fixture(t, existing = false) {
   const root = path.join(directory, 'source'); fs.mkdirSync(root);
   const files = ['src/game/model.ts', 'src/game/engine.ts', 'src/state/gameStore.ts', 'src/persistence/checkpoints.ts', 'src/persistence/repository.ts', 'app/new-life.tsx', 'app/birth.tsx', 'package.json', 'package-lock.json', 'app.json'];
   for (const name of files) { const absolute = path.join(root, name); fs.mkdirSync(path.dirname(absolute), { recursive: true }); fs.writeFileSync(absolute, name.endsWith('.json') ? '{}\n' : "throw new Error('Synthetic source must never execute');\n"); }
-  const git = args => execFileSync('git', ['-C', root, ...args], { env: { ...process.env, GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_SYSTEM: '/dev/null' } });
-  git(['init', '-q', '-b', 'test', '--object-format=sha1']); git(['add', '.']); git(['-c', 'user.name=Protocol Test', '-c', 'user.email=protocol@example.invalid', 'commit', '-qm', 'Synthetic source protocol fixture']);
+  // Independently produced by actual shell Git from these ten synthetic files;
+  // no nested subprocess or validator tree encoder manufactures this expected root.
+  const commit = '87039d41756e567b0d7ea04f28f689db8fe2c526';
+  const tree = files.slice().sort().map(name => '100644 blob ' + (name.endsWith('.json') ? '0967ef424bce6791893e9a57bb952f80fd536e93' : '827bab20e1870de024fecc5b10764866fb81a527') + '\t' + name + '\0').join('');
+  const gitProofs = { head: commit + '\n', status: '', tree, commit: 'tree 2df60beb3ebea67e70d318991d759ae648cb673b\nauthor Protocol Test <protocol@example.invalid> 946684800 +0000\ncommitter Protocol Test <protocol@example.invalid> 946684800 +0000\n\nSynthetic source protocol fixture\n' };
   const proofs = {};
-  for (const [key, args] of [['head', ['rev-parse', 'HEAD']], ['status', ['status', '--porcelain']], ['tree', ['ls-tree', '-rz', 'HEAD']], ['commit', ['cat-file', 'commit', 'HEAD']]]) { const file = path.join(directory, key + '.proof'); fs.writeFileSync(file, git(args)); proofs[key] = h.proof(file); }
-  const source = { format: 'dreams-onboarding-native-source-v1', complete: true, root, commit: git(['rev-parse', 'HEAD']).toString().trim(), versions: h.versions, git: proofs, source: Object.fromEntries(files.map(name => [name, h.proof(path.join(root, name)).sha256])) };
+  for (const [key, bytes] of Object.entries(gitProofs)) { const file = path.join(directory, key + '.proof'); fs.writeFileSync(file, bytes); proofs[key] = h.proof(file); }
+  const source = { format: 'dreams-onboarding-native-source-v1', complete: true, root, commit, versions: h.versions, git: proofs, source: Object.fromEntries(files.map(name => [name, h.proof(path.join(root, name)).sha256])) };
   const sourcePath = path.join(directory, 'source.json'); json(sourcePath, source);
   const baseline = path.join(directory, 'baseline.db'), db = new DatabaseSync(baseline);
   db.exec("CREATE TABLE lives(id TEXT PRIMARY KEY,name TEXT,revision INTEGER,updated_at TEXT,payload TEXT); CREATE TABLE backups(life_id TEXT PRIMARY KEY,revision INTEGER,payload TEXT); CREATE TABLE preferences(key TEXT PRIMARY KEY,value TEXT); CREATE TABLE receipts(life_id TEXT,command_id TEXT,revision INTEGER,PRIMARY KEY(life_id,command_id)); CREATE TABLE snapshots(life_id TEXT,snapshot_id TEXT,payload TEXT,PRIMARY KEY(life_id,snapshot_id)); CREATE TABLE snapshot_metadata(life_id TEXT,snapshot_id TEXT,revision INTEGER,metadata TEXT,PRIMARY KEY(life_id,snapshot_id)); CREATE TABLE branches(life_id TEXT PRIMARY KEY,metadata TEXT); CREATE TABLE restore_receipts(source_life_id TEXT,command_id TEXT,target_life_id TEXT,PRIMARY KEY(source_life_id,command_id)); PRAGMA user_version=15;");
@@ -99,6 +102,7 @@ test('missing runtime pins, partial commit trees, changed source and untracked r
     ['changed source', f => { fs.appendFileSync(path.join(f.root, 'src/game/engine.ts'), '// changed'); }, /Git blob differs/],
     ['untracked runtime', f => { fs.writeFileSync(path.join(f.root, 'src/game/unlisted.ts'), 'throw 1'); }, /unlisted runtime/],
     ['untracked root config', f => { fs.writeFileSync(path.join(f.root, 'metro.config.js'), 'throw 1'); }, /unlisted runtime/],
+    ['untracked Expo config', f => { fs.writeFileSync(path.join(f.root, 'app.config.js'), 'throw 1'); }, /unlisted runtime/],
     ['untracked root config symlink', f => { fs.symlinkSync(path.join(f.root, 'src/game/engine.ts'), path.join(f.root, 'metro.config.js')); }, /Runtime root config.*non-symlink/],
     ['untracked root config directory', f => { fs.mkdirSync(path.join(f.root, 'babel.config.js')); }, /Runtime root config.*regular/],
   ]) await t.test(name, t => { const f = fixture(t); alter(f); assert.throws(() => h.preflight(f.capturePath), reason); });

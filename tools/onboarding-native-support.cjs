@@ -17,7 +17,7 @@ function checkedFile(pin, label) {
   const stat = fs.lstatSync(pin.file); assert(stat.isFile() && !stat.isSymbolicLink(), label + ': regular non-symlink file required');
   assert.deepEqual(proof(pin.file), pin, label + ': pinned file changed'); return pin;
 }
-const managed = file => /^(?:app\/|src\/|assets\/)/.test(file) || ['package.json', 'package-lock.json', 'app.json', 'babel.config.cjs', 'babel.config.js', 'metro.config.cjs', 'metro.config.js', 'tsconfig.json'].includes(file);
+const managed = file => /^(?:app\/|src\/|assets\/)/.test(file) || /^(?:(?:app|babel|metro)\.config\.(?:[cm]?[jt]s|json)|\.babelrc(?:\.(?:[cm]?[jt]s|json))?)$/.test(file) || ['package.json', 'package-lock.json', 'app.json', 'tsconfig.json'].includes(file);
 function verifySource(file) {
   const source = readJSON(file);
   assert.equal(source.format, 'dreams-onboarding-native-source-v1'); assert.equal(source.complete, true, 'Source manifest is pending/incomplete');
