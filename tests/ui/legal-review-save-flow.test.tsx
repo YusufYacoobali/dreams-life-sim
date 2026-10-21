@@ -1,4 +1,5 @@
 import React from 'react';
+import { router } from 'expo-router';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -24,11 +25,14 @@ let mockStore: ReturnType<typeof createGameStore>, mockCaseId = '';
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() }, useLocalSearchParams: () => ({ id: mockCaseId }) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import CaseDetail from '../../app/(game)/case/[id]';
+import Cases from '../../app/(game)/cases';
+import Prison from '../../app/(game)/prison';
 import PrisonActivities from '../../app/(game)/prison-activities';
 import BlackMarket from '../../app/(game)/black-market';
 
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
+const chooseConduct = async (name: RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const confirm = async (name: string) => { await act(async () => { fireEvent.press(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name })); }); };
 const world = () => mockStore.getState().world!;
 const ack = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
@@ -87,7 +91,8 @@ test('the exact reviewed counsel/payment survives on-disk rollback, busy duplica
   const initial = openCase(), item = initial.cases[0], db = await setup(initial); mockCaseId = item.id;
   try {
     const command: GameCommand = { type: 'retain-counsel', caseId: item.id, counsel: 'private' }, expected = resolveCommand(initial, command, true), beforeRows = db.rows(), originalPayload = db.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(initial.id)?.payload;
-    let view = render(frame(<CaseDetail />)); await press(/Private Counsel\./);
+    let view = render(frame(<Cases />)); await press(/^Vandalism\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/case/[id]', params: { id: item.id } }); expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows);
+    view.rerender(frame(<CaseDetail />)); await press(/Private Counsel\./);
     const cancelled = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props;
     await confirm('Never mind'); await act(async () => { await cancelled.onChoose('confirm'); });
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash); expect(db.rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
@@ -114,15 +119,19 @@ test('an unchanged prison routine saves nothing; a changed draft survives rollba
   try {
     const initialRows = db.rows(), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'); let view = render(frame(<PrisonActivities />));
     expect(screen.getByRole('button', { name: 'Save Prison Routine. This is your current routine' })).toBeDisabled(); await press('Save Prison Routine. This is your current routine'); expect(dispatch).not.toHaveBeenCalled(); expect(db.rows()).toEqual(initialRows);
-    fireEvent(screen.getByLabelText('Prison work'), 'valueChange', true); fireEvent(screen.getByLabelText('Prison study'), 'valueChange', true); await press(/Socialise in the Yard/);
+    fireEvent(screen.getByLabelText('Prison work'), 'valueChange', true); fireEvent(screen.getByLabelText('Prison study'), 'valueChange', true); await chooseConduct(/Socialise in the Yard/);
     const routine = { work: true, study: true, exercise: false, conduct: 'social' as const }, command: GameCommand = { type: 'prison-routine', routine }, expected = resolveCommand(initial, command, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     db.sqlite.exec("CREATE TRIGGER fail_legal_ui BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Save Prison Routine');
-    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getByLabelText('Prison work').props.value).toBe(true); expect(screen.getByLabelText('Prison study').props.value).toBe(true); expect(screen.getByRole('button', { name: /Socialise in the Yard.*Selected/ })).toBeDisabled(); expect(world()).toEqual(initial); expect(db.rows()).toEqual(initialRows);
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getByLabelText('Prison work').props.value).toBe(true); expect(screen.getByLabelText('Prison study').props.value).toBe(true); expect(screen.getByRole('radio', { name: /Socialise in the Yard.*Selected/, checked: true })).toBeDisabled(); expect(world()).toEqual(initial); expect(db.rows()).toEqual(initialRows);
     db.sqlite.exec('DROP TRIGGER fail_legal_ui'); const release = db.pauseNextSave(); await press('Save Prison Routine'); expect(screen.getByRole('button', { name: 'Save Prison Routine', busy: true })).toBeDisabled(); expect(screen.getByLabelText('Prison study')).toBeDisabled(); await press('Save Prison Routine');
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random); expect(activeSentence(world())?.servedMonths).toBe(activeSentence(initial)?.servedMonths); expect(activeSentence(world())?.studyMonths).toBe(activeSentence(initial)?.studyMonths);
     const savedRows = db.rows(); view.unmount(); await db.cold(); view = render(frame(<PrisonActivities />)); expect(world()).toEqual(expected); expect(db.rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(ack(expected)); expect(world().ledger).toEqual(initial.ledger);
-    const doneRows = db.rows(); await press('Save Prison Routine. This is your current routine'); expect(db.rows()).toEqual(doneRows); db.original(); view.unmount();
+    const doneRows = db.rows(); await press('Save Prison Routine. This is your current routine'); expect(db.rows()).toEqual(doneRows); db.original();
+    view.rerender(frame(<Prison />)); const beforeContinue = encodeWorld(world());
+    db.sqlite.exec("CREATE TRIGGER fail_prison_continue BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(world().annual ? 'Continue This Year' : 'Age Up');
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(encodeWorld(world())).toBe(beforeContinue); expect(db.rows()).toEqual(doneRows);
+    db.sqlite.exec('DROP TRIGGER fail_prison_continue'); view.unmount();
   } finally { jest.restoreAllMocks(); db.close(); }
 });
 
