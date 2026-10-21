@@ -28,7 +28,7 @@ import Offer from '../../app/(game)/offer/[id]';
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Offer /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
-const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
+const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 
 async function setup() {
@@ -69,7 +69,7 @@ async function setup() {
 }
 
 async function reviewMortgage() {
-  await press('Mortgage'); await press(/^Deposit\./); await choose('40%'); await press('Choose');
+  await choose(/^Mortgage\./); await press(/^Deposit\./); await choose('40%'); await press('Choose');
   await press(/^Term\./); await choose('20 years'); await press('Choose'); await press('Review Purchase');
 }
 
@@ -86,12 +86,17 @@ test('local financing, deposit and term choices close immediately; review and ca
   const context = await setup();
   try {
     const before = encodeWorld(world()), beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
-    const view = render(frame()); await press('Mortgage'); await press(/^Deposit\./); await choose('40%'); await press('Choose');
+    const view = render(frame()); expect(screen.getByRole('radio', { name: /^Cash\./, checked: true })).toBeOnTheScreen();
+    await choose(/^Mortgage\./); expect(screen.getByRole('radio', { name: /^Mortgage\./, checked: true })).toBeOnTheScreen(); await press(/^Deposit\./); await choose('40%'); await press('Choose');
     expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull(); expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen();
     await press(/^Term\./); await choose('20 years'); await press('Choose'); expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull();
     expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
+    const quote = purchaseQuote(world(), assetCatalog.find(item => item.id === 'studio')!, 'mortgage', 4000, 240), money = (minor: bigint) => formatMoney({ minor, currency: accountFor(world()).currency });
+    expect(screen.getByLabelText('Cash paid upfront: ' + money(quote.cashRequired) + '. Includes purchase fees')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Purchase fees: ' + money(quote.fee))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Monthly payment: ' + money(quote.payment))).toBeOnTheScreen();
     await press('Review Purchase'); expectReviewedTerms(); await press('Never mind');
-    expect(screen.queryByText('Buy City Studio?')).toBeNull(); await press('Cash'); await press('Mortgage');
+    expect(screen.queryByText('Buy City Studio?')).toBeNull(); await choose(/^Cash\./); await choose(/^Mortgage\./);
     expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
     expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
@@ -122,7 +127,7 @@ test.each(['offer', 'life'] as const)('changing the actual %s closes the old pur
     expect(screen.queryByRole('button', { name: 'Confirm Purchase' })).toBeNull();
     expect(screen.queryByRole('button', { name: /^Deposit\./ })).toBeNull();
     const selectedRows = context.rows();
-    await press('Mortgage');
+    await choose(/^Mortgage\./);
     expect(screen.getByRole('button', { name: /^Deposit\. 20%/ })).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Term. 30 years' })).toBeOnTheScreen();
     expect(context.rows()).toEqual(selectedRows); expect(world()).toEqual(contextChange === 'life' ? other : original);
@@ -163,9 +168,10 @@ test('a pending purchase disables financing changes and duplicate confirmations,
     const initial = world(), beforeRows = context.rows(), view = render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
     const expected = resolveCommand(initial, { type: 'buy-asset', catalogId: 'studio', financing: 'mortgage', depositBps: 4000, termMonths: 240, quotedPrice: quote.price }, true);
     const release = context.pauseNextSave(); await press('Confirm Purchase'); expect(mockStore.getState().busy).toBe(true);
-    for (const name of ['Cash', 'Mortgage', 'Review Purchase', 'Confirm Purchase', 'Never mind']) expect(screen.getByRole('button', { name })).toBeDisabled();
+    for (const name of [/^Cash\./, /^Mortgage\./]) expect(screen.getByRole('radio', { name })).toBeDisabled();
+    for (const name of ['Review Purchase', 'Confirm Purchase', 'Never mind']) expect(screen.getByRole('button', { name })).toBeDisabled();
     expect(screen.getByRole('button', { name: /^Deposit\./ })).toBeDisabled(); expect(screen.getByRole('button', { name: /^Term\./ })).toBeDisabled();
-    await press('Cash'); await press('Review Purchase'); await press('Confirm Purchase'); await press('Never mind');
+    await choose(/^Cash\./); await press('Review Purchase'); await press('Confirm Purchase'); await press('Never mind');
     await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expectReviewedTerms(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
