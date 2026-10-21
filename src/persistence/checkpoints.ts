@@ -4,7 +4,7 @@ import { decodeWorld, moneyJSON, worldForEncoding, World } from '../game/model';
 import { encodeBase64 as base64, decodeBase64 as unbase64 } from './base64';
 function fingerprint(bytes: Uint8Array) {
   let hash = 2166136261;
-  for (const byte of bytes) hash = Math.imul(hash ^ byte, 16777619) >>> 0;
+  for (let index = 0, length = bytes.length; index < length; index++) hash = Math.imul(hash ^ bytes[index], 16777619) >>> 0;
   return hash.toString(16).padStart(8, '0');
 }
 const maxBytes = 20_000_000;
