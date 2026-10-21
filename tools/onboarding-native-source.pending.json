@@ -1,0 +1,9 @@
+{
+  "format": "dreams-onboarding-native-source-v1",
+  "complete": false,
+  "root": null,
+  "commit": null,
+  "versions": { "world": 36, "engine": 37, "content": 12, "reader": 16 },
+  "git": { "head": null, "status": null, "tree": null, "commit": null },
+  "source": {}
+}

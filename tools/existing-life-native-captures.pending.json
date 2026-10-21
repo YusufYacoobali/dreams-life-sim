@@ -1,0 +1,16 @@
+{
+  "format": "dreams-onboarding-native-captures-v1",
+  "complete": false,
+  "mode": "existing",
+  "device": null,
+  "scope": null,
+  "sourceManifest": null,
+  "baseline": null,
+  "phases": [
+    { "id": "existing-start", "kind": "read-only", "database": null, "png": null, "xml": null, "coordinatorPersonallyViewed": false },
+    { "id": "action-saved", "kind": "command", "command": null, "database": null, "png": null, "xml": null, "coordinatorPersonallyViewed": false },
+    { "id": "cold-action-saved", "kind": "cold", "sameAs": "action-saved", "coldAttestation": null, "database": null, "png": null, "xml": null, "coordinatorPersonallyViewed": false },
+    { "id": "acknowledged", "kind": "command", "command": null, "database": null, "png": null, "xml": null, "coordinatorPersonallyViewed": false },
+    { "id": "cold-acknowledged", "kind": "cold", "sameAs": "acknowledged", "coldAttestation": null, "database": null, "png": null, "xml": null, "coordinatorPersonallyViewed": false }
+  ]
+}
