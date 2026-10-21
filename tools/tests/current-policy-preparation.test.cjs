@@ -34,3 +34,24 @@ test('historical incomplete Git proof fails closed even with a target-version sn
   fs.writeFileSync(file, JSON.stringify({ format: 'dreams-current-policy-registration-v1', complete: true, commit: '1'.repeat(40), versions: h.versions, sourceSnapshot: h.pin(snapshot), git: {} }));
   assert.throws(() => h.verifySource(file), /Git head: complete absolute file proof required/);
 }));
+const emptySource = root => { for (const directory of ['app', 'src', 'assets', 'tools/current-policy', 'tests/support']) fs.mkdirSync(path.join(root, directory), { recursive: true }); };
+test('an untracked sqlite.js cannot shadow the pinned extensionless support import', () => temporary(directory => {
+  emptySource(directory); fs.writeFileSync(path.join(directory, 'tests/support/sqlite.js'), 'throw new Error("shadow module must never load");\n');
+  assert.throws(() => h.assertInventory(directory, []), /Untracked\/missing runtime\/adapter\/support files/);
+}));
+test('unlisted support file and directory symlinks are refused without following them', () => temporary(directory => {
+  emptySource(directory); const target = path.join(directory, 'outside.js'); fs.writeFileSync(target, 'throw new Error("must never load");\n');
+  const link = path.join(directory, 'tests/support/shadow.js'); fs.symlinkSync(target, link);
+  assert.throws(() => h.assertInventory(directory, []), /Unlisted source symlink/); fs.unlinkSync(link);
+  fs.symlinkSync(directory, path.join(directory, 'tests/support/linked-directory'), 'dir');
+  assert.throws(() => h.assertInventory(directory, []), /Unlisted source symlink/);
+}));
+test('a changed tracked support file fails its actual byte proof before compilation', () => temporary(directory => {
+  emptySource(directory); const name = 'tests/support/sqlite.ts', file = path.join(directory, name), bytes = Buffer.from('export const sentinel = true;\n'); fs.writeFileSync(file, bytes);
+  const entry = { mode: '100644', oid: require('node:crypto').createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\0')).update(bytes).digest('hex') };
+  fs.writeFileSync(file, 'export const sentinel = false;\n');
+  assert.throws(() => h.checkedSourceFile(directory, name, h.hash(bytes), entry), /Source SHA differs/);
+}));
+test('preloaded JS, CJS, JSON and TS support/source caches are all refused', () => temporary(directory => {
+  for (const name of ['tests/support/sqlite.js', 'tests/support/helper.cjs', 'tests/support/data.json', 'src/game/model.ts']) assert.throws(() => h.assertNoSourceCache(directory, { [path.join(directory, name)]: {} }), /Refuse stale\/preloaded source\/support/);
+}));

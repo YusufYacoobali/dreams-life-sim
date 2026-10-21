@@ -1,6 +1,6 @@
 // Current-source acceptance tools only. No game module is imported by preflight.
 const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
-const { createHash } = require('node:crypto'), { createRequire } = require('node:module');
+const { createHash } = require('node:crypto'), Module = require('node:module'), { createRequire } = Module;
 const versions = Object.freeze({ world: 38, engine: 39, content: 13, database: 18, checkpoint: 'v4' });
 const countries = Object.freeze(['US', 'CA', 'GB', 'AU', 'FR', 'DE', 'ES', 'IT', 'BR', 'IN', 'JP', 'ZA']);
 const originals = Object.freeze({
@@ -23,7 +23,26 @@ function checkedFile(proof, label) {
   const stat = fs.lstatSync(proof.file); assert(stat.isFile() && !stat.isSymbolicLink(), label + ': regular file required');
   assert.deepEqual(pin(proof.file), proof, label + ': bytes/hash changed'); return fs.readFileSync(proof.file);
 }
-const managed = name => /^(?:app\/|src\/|assets\/|tools\/current-policy\/)/.test(name) || /^(?:(?:app|babel|metro)\.config\.(?:[cm]?[jt]s|json)|\.babelrc(?:\.(?:[cm]?[jt]s|json))?)$/.test(name) || ['package.json', 'package-lock.json', 'app.json', 'tsconfig.json', 'tests/support/professionalPolicyV3.ts', ...Object.keys(originals)].includes(name);
+const sourceDirectories = ['app', 'src', 'assets', 'tools/current-policy', 'tests/support'];
+const inSourceDirectory = name => sourceDirectories.some(directory => name.startsWith(directory + '/'));
+const managed = name => inSourceDirectory(name) || /^(?:(?:app|babel|metro)\.config\.(?:[cm]?[jt]s|json)|\.babelrc(?:\.(?:[cm]?[jt]s|json))?)$/.test(name) || ['package.json', 'package-lock.json', 'app.json', 'tsconfig.json', ...Object.keys(originals)].includes(name);
+function checkedSourceFile(root, name, sha, entry) {
+  assert(entry && entry.mode !== '120000' && /^[a-f0-9]{64}$/.test(sha), 'Tracked regular source file required');
+  let parent = root;
+  for (const part of name.split('/').slice(0, -1)) { parent = path.join(parent, part); const stat = fs.lstatSync(parent); assert(stat.isDirectory() && !stat.isSymbolicLink(), 'Source ancestor must be a real directory: ' + name); }
+  const file = path.join(root, name), stat = fs.lstatSync(file); assert(stat.isFile() && !stat.isSymbolicLink(), 'Pinned source must be a regular file');
+  const bytes = fs.readFileSync(file); assert.equal(hash(bytes), sha, 'Source SHA differs: ' + name); assert.equal(oid('blob', bytes), entry.oid, 'Source Git blob differs: ' + name); return bytes;
+}
+function assertInventory(root, required) {
+  const actual = [];
+  const visit = directory => { for (const entry of fs.readdirSync(directory, { withFileTypes: true })) { assert(!entry.isSymbolicLink(), 'Unlisted source symlink'); const file = path.join(directory, entry.name); if (entry.isDirectory()) visit(file); else { assert(entry.isFile()); const name = path.relative(root, file).split(path.sep).join('/'); if (managed(name)) actual.push(name); } } };
+  for (const directory of sourceDirectories) { const file = path.join(root, directory); assert(fs.lstatSync(file).isDirectory() && !fs.lstatSync(file).isSymbolicLink()); visit(file); }
+  for (const name of fs.readdirSync(root)) if (managed(name)) { const stat = fs.lstatSync(path.join(root, name)); assert(stat.isFile() && !stat.isSymbolicLink(), 'Root config must be a regular file'); actual.push(name); }
+  for (const name of required.filter(name => name.includes('/') && !inSourceDirectory(name))) { assert(fs.existsSync(path.join(root, name))); actual.push(name); }
+  assert.deepEqual(actual.sort(), required, 'Untracked/missing runtime/adapter/support files');
+}
+const isSourceModule = (root, file) => typeof file === 'string' && (file.startsWith(path.join(root, 'src') + path.sep) || file.startsWith(path.join(root, 'tests/support') + path.sep));
+function assertNoSourceCache(root, cache = require.cache) { assert(!Object.keys(cache).some(file => isSourceModule(root, file)), 'Refuse stale/preloaded source/support modules of any extension'); }
 function verifySource(registrationFile) {
   assert(path.isAbsolute(registrationFile), 'Use an explicit absolute registration path');
   const registrationPin = pin(registrationFile), registration = JSON.parse(checkedFile(registrationPin, 'Registration'));
@@ -33,6 +52,7 @@ function verifySource(registrationFile) {
   assert(path.isAbsolute(source.root ?? '') && /^[a-f0-9]{40}$/.test(source.commit ?? ''), 'Full frozen source root and commit required');
   assert.deepEqual(source.versions, versions); assert.equal(registration.commit, source.commit);
   assert(fs.lstatSync(source.root).isDirectory() && !fs.lstatSync(source.root).isSymbolicLink(), 'Source root must be a real directory');
+  assert.equal(fs.realpathSync(source.root), source.root, 'Source root must be its explicit canonical directory');
   const git = registration.git;
   for (const name of ['head', 'status', 'tree', 'commit']) checkedFile(git?.[name], 'Git ' + name);
   assert.equal(fs.readFileSync(git.head.file, 'utf8').trim(), source.commit);
@@ -56,17 +76,9 @@ function verifySource(registrationFile) {
   for (const name of required) assert(Object.hasOwn(source.source, name), 'Missing source SHA: ' + name);
   for (const [name, sha] of Object.entries(source.source)) {
     assert(tree.has(name) && /^[a-f0-9]{64}$/.test(sha), 'Untracked/invalid source pin: ' + name);
-    let parent = source.root;
-    for (const part of name.split('/').slice(0, -1)) { parent = path.join(parent, part); const stat = fs.lstatSync(parent); assert(stat.isDirectory() && !stat.isSymbolicLink(), 'Source ancestor must be a real directory: ' + name); }
-    const file = path.join(source.root, name), stat = fs.lstatSync(file); assert(tree.get(name).mode !== '120000' && stat.isFile() && !stat.isSymbolicLink(), 'Pinned source must be a regular file');
-    const bytes = fs.readFileSync(file); assert.equal(hash(bytes), sha, 'Source SHA differs: ' + name); assert.equal(oid('blob', bytes), tree.get(name).oid, 'Source Git blob differs: ' + name);
+    checkedSourceFile(source.root, name, sha, tree.get(name));
   }
-  const actual = [];
-  const visit = directory => { for (const entry of fs.readdirSync(directory, { withFileTypes: true })) { assert(!entry.isSymbolicLink(), 'Unlisted source symlink'); const file = path.join(directory, entry.name); if (entry.isDirectory()) visit(file); else { assert(entry.isFile()); const name = path.relative(source.root, file).split(path.sep).join('/'); if (managed(name)) actual.push(name); } } };
-  for (const directory of ['app', 'src', 'assets', 'tools/current-policy']) { const file = path.join(source.root, directory); assert(fs.lstatSync(file).isDirectory() && !fs.lstatSync(file).isSymbolicLink()); visit(file); }
-  for (const name of fs.readdirSync(source.root)) if (managed(name)) { const stat = fs.lstatSync(path.join(source.root, name)); assert(stat.isFile() && !stat.isSymbolicLink(), 'Root config must be a regular file'); actual.push(name); }
-  for (const name of required.filter(name => name.includes('/') && !/^(?:app\/|src\/|assets\/|tools\/current-policy\/)/.test(name))) { assert(fs.existsSync(path.join(source.root, name))); actual.push(name); }
-  assert.deepEqual(actual.sort(), required, 'Untracked/missing runtime/adapter files');
+  assertInventory(source.root, required);
   for (const [name, sha] of Object.entries(originals)) assert.equal(source.source[name], sha, 'Historical producer/support changed: ' + name);
   const model = fs.readFileSync(path.join(source.root, 'src/game/model.ts'), 'utf8');
   for (const [field, expected] of [['schemaVersion', versions.world], ['engineVersion', versions.engine], ['contentVersion', versions.content]]) assert.equal(Number(new RegExp(field + ':\\s*z\\.literal\\((\\d+)\\)').exec(model)?.[1]), expected, 'Target source literal differs: ' + field);
@@ -75,7 +87,7 @@ function verifySource(registrationFile) {
   assert([...repository.matchAll(/PRAGMA user_version = (\d+)/g)].length > 0);
   for (const match of repository.matchAll(/PRAGMA user_version = (\d+)/g)) assert.equal(Number(match[1]), versions.database, 'Target reader writes differ');
   assert.equal(fs.realpathSync(__filename), path.join(fs.realpathSync(source.root), 'tools/current-policy/source.cjs'), 'Execute adapters from the registered final source tree');
-  return { registration, registrationPin, source, git, provenance: { registration: registrationPin, sourceSnapshot: registration.sourceSnapshot, commit: source.commit, versions, sourceFiles: Object.keys(source.source).length, originalProducerHashes: originals } };
+  return { registration, registrationPin, source, git, tree, provenance: { registration: registrationPin, sourceSnapshot: registration.sourceSnapshot, commit: source.commit, versions, sourceFiles: Object.keys(source.source).length, originalProducerHashes: originals } };
 }
 function recheck(verified) { assert.deepEqual(verifySource(verified.registrationPin.file).provenance, verified.provenance, 'Source/registration changed'); }
 function optionsFor(argv) {
@@ -101,18 +113,27 @@ function prepare(argv, adapter, runnerFile) {
   return { options, verified, manifest };
 }
 function loadRuntime(verified) {
-  recheck(verified); const root = verified.source.root, request = createRequire(path.join(root, 'package.json')), lock = request('./package-lock.json');
+  recheck(verified); const root = verified.source.root, request = createRequire(path.join(root, 'package.json')), lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json')));
   const ts = request('typescript'), zustand = request('zustand/package.json');
   assert.equal(ts.version, lock.packages?.['node_modules/typescript']?.version); assert.equal(zustand.version, lock.packages?.['node_modules/zustand']?.version);
-  const allowed = file => file.startsWith(path.join(root, 'src') + path.sep) || file.startsWith(path.join(root, 'tests/support') + path.sep);
-  assert(!Object.keys(require.cache).some(file => allowed(file) && file.endsWith('.ts')), 'Refuse stale/preloaded TS runtime');
-  const previous = require.extensions['.ts'], loaded = new Map();
+  const allowed = file => isSourceModule(root, file);
+  assertNoSourceCache(root);
+  const previous = require.extensions['.ts'], previousLoad = Module._load, loaded = new Map();
+  Module._load = function (specifier, parent, isMain) {
+    const file = Module._resolveFilename(specifier, parent, isMain);
+    if (parent && allowed(parent.filename) && (specifier.startsWith('.') || path.isAbsolute(specifier))) assert(typeof file === 'string' && allowed(file), 'Relative runtime import escapes pinned source/support');
+    if (typeof file === 'string' && allowed(file)) {
+      const relative = path.relative(root, file).split(path.sep).join('/'); assert(Object.hasOwn(verified.source.source, relative), 'Unpinned resolved runtime/support import: ' + relative);
+      const bytes = checkedSourceFile(root, relative, verified.source.source[relative], verified.tree.get(relative)); loaded.set(relative, hash(bytes));
+    }
+    return previousLoad.call(this, specifier, parent, isMain);
+  };
   require.extensions['.ts'] = (module, file) => {
     const relative = path.relative(root, file).split(path.sep).join('/'); assert(allowed(file) && Object.hasOwn(verified.source.source, relative), 'Unpinned TS import: ' + file);
     const bytes = fs.readFileSync(file); assert.equal(hash(bytes), verified.source.source[relative], 'TS changed before compile: ' + relative); loaded.set(relative, hash(bytes));
     module._compile(ts.transpileModule(bytes.toString(), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText, file);
   };
-  const close = () => { if (previous) require.extensions['.ts'] = previous; else delete require.extensions['.ts']; for (const file of Object.keys(require.cache)) if (allowed(file) && file.endsWith('.ts')) delete require.cache[file]; };
+  const close = () => { Module._load = previousLoad; if (previous) require.extensions['.ts'] = previous; else delete require.extensions['.ts']; for (const file of Object.keys(require.cache)) if (allowed(file)) delete require.cache[file]; };
   return { load: relative => { assert(!path.isAbsolute(relative) && !relative.split('/').includes('..') && Object.hasOwn(verified.source.source, relative)); return request('./' + relative); }, close, provenance: () => ({ node: process.version, typescript: ts.version, zustand: zustand.version, loadedSource: Object.fromEntries([...loaded].sort()), dependencyScope: 'Installed versions checked against pinned lock; installed dependency bytes are not an independent reproducible-build proof.' }) };
 }
-module.exports = { fs, path, assert, versions, countries, originals, hash, json, pin, checkedFile, verifySource, recheck, optionsFor, prepare, loadRuntime };
+module.exports = { fs, path, assert, versions, countries, originals, hash, json, pin, checkedFile, checkedSourceFile, assertInventory, assertNoSourceCache, verifySource, recheck, optionsFor, prepare, loadRuntime };

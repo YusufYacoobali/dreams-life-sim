@@ -73,8 +73,9 @@ versions and a40-character final commit, plus the following pinned files:
   identity, rejecting an unrelated or incomplete listing.
 
 Adapters must be integrated into and executed from that same frozen source tree.
-The source capture covers runtime/config/assets, all loaded support and these
-adapters. Every listed SHA also matches its tracked Git blob. Missing/untracked
+The source capture covers runtime/config/assets, the entire tests/support tree
+with all extensions, and these adapters. Every listed SHA also matches its
+tracked Git blob. Missing/untracked
 runtime files, symlinks, changed original producers and wrong source schema/
 engine/content/reader literals are rejected. No child-process partial Git result
 is accepted as proof. The explicit manifest can later show readiness without
@@ -88,9 +89,10 @@ C preserves its original fixed150-year bound and rejects another value. This
 flag records the coordinator's resource/freeze authorization; the preparation
 template grants none. No real invocation is performed in this milestone.
 
-The TypeScript loader accepts only pinned `src/` and `tests/support/` modules
-from that root, checks bytes before compilation and refuses preloaded/stale
-source caches. Installed TypeScript/Zustand versions must match the pinned lock.
+The loader accepts only pinned `src/` and `tests/support/` modules from that root,
+checks resolved JS/CJS/JSON/TS support/source bytes as well as TS compilation,
+rejects relative imports escaping those roots and refuses preloaded/stale
+source/support caches of every extension. Installed TypeScript/Zustand versions must match the pinned lock.
 Installed dependency bytes are not independently claimed as a reproducible
 native build. Complete source/registration is rechecked after each life/end;
 loaded-source provenance is retained. Equality never removes new fields,
@@ -124,7 +126,9 @@ runtime/assets/fixtures/original-driver/support Git delta is empty.
 
 `tools/tests/current-policy-preparation.test.cjs` contains synthetic pending/
 wrong-version/changed-snapshot/incomplete-Git input refusals and explicit bounded
-argument checks. These tests are **authored, unrun**. They make no actual-source
+argument checks, plus untracked sqlite.js shadow, support file/directory symlink,
+changed tracked support and all-extension stale-cache negatives. These tests
+are **authored, unrun**. They make no actual-source
 or game-policy claim. The pending-file tests install a TS-load sentinel and
 require no output directory to be created; no fake accepted game outcome exists.
 
@@ -133,3 +137,10 @@ admission control under real command scenarios, and all real bounded/cohort
 execution remain pending coordinator authorization after final C39 freeze.
 Do not treat syntax, design/static review or manifest-only output as a pass.
 The final source/tool SHA must be independently reviewed before root executes it.
+
+Independent source review of initial c907056 identified that a support sqlite.js
+could shadow an extensionless import because only named .ts support files were
+inventoried. That candidate was not approved. The follow-up includes the whole
+support subtree in actual-vs-Git inventory and resolved-module checks, checks
+every source/support cache extension, and adds the four synthetic negative cases
+above. No real source/runtime or test was executed to obtain this finding/fix.
