@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { World } from '../game/model';
 import { currentRecovery, recoveryPaths } from '../game/systems/educationRecoverySchemas';
@@ -8,10 +8,11 @@ import { EventModal, EventPresentation } from './EventModal';
 import { useColors } from './theme';
 import { SchoolArt } from '../assets/SchoolArt';
 
-export function RecoveryStudy({ world, busy, error, dispatch }: { world: World; busy: boolean; error: string | null; dispatch: (command: RecoveryCommand) => Promise<boolean> }) {
+export function RecoveryStudy({ world, busy, error, dispatch, onReviewChange }: { world: World; busy: boolean; error: string | null; dispatch: (command: RecoveryCommand) => Promise<boolean>; onReviewChange?: (open: boolean) => void }) {
   const person = world.people[world.activePersonId], course = currentRecovery(world), purpose = hasSecondary(person) ? 'grades' : 'secondary', path = recoveryPaths[purpose], c = useColors();
   const [dialog, setDialog] = useState<'enroll' | 'effort' | 'leave' | null>(null);
   const [historyLimit, setHistoryLimit] = useState(4);
+  useEffect(() => { onReviewChange?.(!!dialog); return () => onReviewChange?.(false); }, [!!dialog, onReviewChange]);
   const finished = world.recoveryCourses.filter(item => item.personId === person.id && item.status !== 'active').slice().reverse(), history = finished.slice(0, historyLimit);
   const labels = { passed: 'Passed', failed: 'Passing grade not met', withdrawn: 'Left the course', died: 'Ended', superseded: 'Qualified through another route', active: 'In progress' };
   const unavailable = recoveryAttendanceReason(world, person);

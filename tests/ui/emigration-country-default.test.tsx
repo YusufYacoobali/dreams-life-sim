@@ -33,7 +33,8 @@ const modal = () => within(screen.UNSAFE_getByType(Modal));
 const ack = (value: World) => resolveCommand(value, { type: 'acknowledge', resultId: value.pending!.id }, true);
 const selectedLondon = () => {
   expect(screen.getByRole('button', { name: 'United Kingdom. London. Selected' })).toBeOnTheScreen();
-  expect(screen.getByText('London, United Kingdom')).toBeOnTheScreen();
+  expect(screen.getByRole('header', { name: 'London' })).toBeOnTheScreen();
+  expect(screen.getByText(/^United Kingdom · (?:Emigration|Work Abroad|Study Abroad)$/)).toBeOnTheScreen();
   expect(screen.queryByRole('button', { name: /^France\./ })).toBeNull();
   expect(screen.queryByText('Choose a country outside your current residence')).toBeNull();
 };
@@ -92,7 +93,10 @@ test.each(['work', 'study', undefined])('French-born %s entry selects a visible 
     const initial = world(), beforeRows = db.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), view = render(frame());
     expect(initial.people[initial.activePersonId]).toMatchObject({ country: 'FR', nationality: 'FR' }); selectedLondon();
     expect(screen.getByText('Apply to move abroad from age eighteen')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review Application' })).toBeDisabled();
-    await press(/^Japan\./); expect(screen.getByText('Tokyo, Japan')).toBeOnTheScreen(); await press(/^United Kingdom\./); selectedLondon();
+    await press(/^Japan\./);
+    expect(screen.getByRole('header', { name: 'Tokyo' })).toBeOnTheScreen();
+    expect(screen.getByText(/^Japan · (?:Emigration|Work Abroad|Study Abroad)$/)).toBeOnTheScreen();
+    await press(/^United Kingdom\./); selectedLondon();
     expect(world()).toEqual(initial); expect(db.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
   } finally { db.close(); }
 });

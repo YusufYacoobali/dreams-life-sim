@@ -114,7 +114,7 @@ test.each([
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/social-media', params: { platform: platformId } });
   mockParams = { platform: platformId }; view.rerender(frame(<SocialMedia />));
   expect(screen.getByLabelText('Social handle')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review New Profile' })).toBeDisabled();
-  expect(within(screen.getByRole('button', { name: new RegExp('^' + platform + '\\.') })).getByText('Selected')).toBeOnTheScreen();
+  expect(within(screen.getByRole('radio', { name: new RegExp('^' + platform + '\\.') })).getByText('Selected')).toBeOnTheScreen();
   expect(encodeWorld(mockStore.getState().world!)).toBe(payload); expect(rows()).toEqual(before);
   const cold = new SaveRepository(driver); await cold.initialise(); expect(encodeWorld((await cold.active())!)).toBe(payload); expect(rows()).toEqual(before);
   view.unmount(); sqlite.close();
