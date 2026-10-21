@@ -143,7 +143,10 @@ export function educationMonth(world: World, person: Person) {
   if (isConfined(world, person) || person.legal.wanted || serviceAway(world, person.id)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
   const isPlayer = person.id === world.activePersonId;
-  if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !hasWithdrawnFromSchool(world, person.id) && !education.qualifications.some(q => q.level === 'secondary')) {
+  // Automatic entry must not add a course around an existing adult full-time job.
+  // Current pupils still progress, and leaving the job permits later entry.
+  if (education.stage === 'none' && age >= rule.schoolStart && age < rule.schoolEnd && !hasWithdrawnFromSchool(world, person.id) && !education.qualifications.some(q => q.level === 'secondary') &&
+    !(age >= rule.adultAge && person.employment && jobs.some(role => role.id === person.employment?.roleId && !role.partTime))) {
     education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; education.school = person.city + (education.stage === 'primary' ? ' Primary School' : ' Secondary School');
     if (education.months === 0 && !world.schoolCompletions.some(item => item.personId === person.id)) education.grades = bounded(Math.round((person.stats.smarts + person.stats.discipline) / 2));
     if (isPlayer) fact(world, 'I started at ' + education.school + '.', 'education');
