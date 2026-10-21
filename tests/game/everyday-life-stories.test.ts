@@ -1,4 +1,6 @@
 import { laterLifeFamilyTemplates } from '../../src/game/content/laterLifeFamilyStories';
+import { laterLifeRecordTemplates } from '../../src/game/content/laterLifeRecordStories';
+import { retiredLife, widowedLife } from '../support/laterLifeStory';
 import { decodeSave } from '../../src/persistence/archive';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import pensionArchive from '../fixtures/v18-foreign-pension-archive.json';
@@ -18,6 +20,56 @@ import { monthFrom } from '../../src/game/calendar';
 
 const setup = (template: EventTemplate) => template.specialCareer ? specialStoryWorld(template) : lifeStoryWorld('US', template.hobby && template.hobby !== 'any' ? template.hobby : 'guitar');
 const offered = (world: World, template: EventTemplate) => { const event = bindEvent(world, template); offerPending(world, event); return { world, event }; };
+
+test.each(laterLifeRecordTemplates.map(scene => [scene.id, scene] as const))('%s uses recorded retirement or the actual late spouse; every capped response preserves all pension, marriage, death and other facts', (_id, scene) => {
+  // Retirement is the fixed historical financial fixture, not newly earned
+  // here. Widowhood explicitly arranges the actual spouse's death on the
+  // genuine married fixture; it is not a natural-death/annual-selection claim.
+  const original = scene.widowed ? widowedLife() : retiredLife();
+  expect(original.pending).toBeNull(); expect(original.deferred).toEqual([]);
+  const personId = original.activePersonId, before = encodeWorld(original), event = bindEvent(original, scene);
+  if (scene.widowed) {
+    const marriage = original.marriages.find(row => row.endReason === 'death' && (row.a === personId || row.b === personId))!;
+    const spouseId = marriage.a === personId ? marriage.b : marriage.a;
+    expect(original.people[spouseId].died).toEqual(marriage.ended);
+    expect(event.personIds).toEqual([personId]); expect(event.body).toContain(fullName(original.people[spouseId]));
+  } else expect(event.personIds).toEqual([personId]);
+  expect(event.personIds.every(id => original.people[id] && !original.people[id].died)).toBe(true);
+  expect(JSON.stringify(event)).not.toContain('{lateSpouse}'); expect(encodeWorld(original)).toBe(before);
+  for (const boundary of [0, 100]) {
+    const input = decodeWorld(before), person = input.people[personId];
+    for (const key of new Set(scene.choices.flatMap(choice => Object.keys(choice.changes)))) person.stats[key as keyof typeof person.stats] = boundary;
+    const bound = bindEvent(input, scene); offerPending(input, bound);
+    const encoded = encodeWorld(input), cold = unpackCheckpoint(packCheckpoint(input), true);
+    expect(encodeWorld(cold)).toBe(encoded); expect(cold.pending).toEqual(bound);
+    for (const choice of bound.choices) {
+      expect(choice.effects.every(effect => effect.kind === 'stat' && effect.personId === personId)).toBe(true);
+      const command = { type: 'choose' as const, eventId: bound.id, choiceId: choice.id }, result = resolveCommand(cold, command, true);
+      if (result.pending?.kind !== 'result') throw new Error('Expected recorded later-life consequence');
+      expect(encodeWorld(result)).toBe(encodeWorld(resolveCommand(input, command, true)));
+      for (const key of Object.keys(person.stats) as (keyof typeof person.stats)[]) {
+        const effect = choice.effects.find(row => row.kind === 'stat' && row.stat === key), from = person.stats[key];
+        const to = Math.max(0, Math.min(100, from + (effect?.kind === 'stat' ? effect.delta : 0))), delta = to - from;
+        expect(result.people[personId].stats[key]).toBe(to);
+        if (effect) expect(result.pending.effects.find(row => row.label === key[0].toUpperCase() + key.slice(1))?.value).toBe((delta >= 0 ? '+' : '') + delta + '%');
+      }
+      for (const key of Object.keys(input) as (keyof World)[]) if (!['people', 'pending', 'journal', 'revision', 'pendingPriority'].includes(key)) expect(result[key]).toEqual(input[key]);
+      for (const [id, oldPerson] of Object.entries(input.people)) {
+        if (id !== personId) expect(result.people[id]).toEqual(oldPerson);
+        else { const { stats: _old, ...oldRest } = oldPerson, { stats: _next, ...nextRest } = result.people[id]; expect(nextRest).toEqual(oldRest); }
+      }
+      expect(result.pending).toMatchObject({ title: choice.resultTitle, body: choice.resultBody });
+      expect(result.journal.slice(0, input.journal.length)).toEqual(input.journal); expect(result.journal.at(-1)?.text).toBe(choice.journal);
+      const saved = unpackCheckpoint(packCheckpoint(result), true); expect(encodeWorld(saved)).toBe(encodeWorld(result));
+      expect(() => resolveCommand(saved, command, true)).toThrow();
+      const done = resolveCommand(saved, { type: 'acknowledge', resultId: saved.pending!.id }, true);
+      expect(done.people).toEqual(result.people); expect(done.random).toEqual(result.random); expect(done.marriages).toEqual(result.marriages);
+      expect(() => resolveCommand(done, { type: 'acknowledge', resultId: saved.pending!.id }, true)).toThrow();
+    }
+    expect(encodeWorld(input)).toBe(encoded);
+  }
+  expect(encodeWorld(original)).toBe(before);
+}, 30000);
 
 test('two later-life scenes append after the unchanged catalogue and need an actual local adult child, not retirement or an invented family', () => {
   expect(eventTemplates.slice(-2)).toEqual(laterLifeFamilyTemplates);
