@@ -31,10 +31,12 @@ async function setup(initial = applicant()) {
 
 test('job search, type filters, locked requirements and details browse without saving', async () => {
   const { sqlite, rows } = await setup(), before = rows(), original = encodeWorld(mockStore.getState().world!); const view = render(frame(<Jobs />));
+  const filter = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('tab', { name }))); expect(screen.getByRole('tab', { name, selected: true })).toBeOnTheScreen(); };
+  expect(screen.getByRole('tab', { name: 'All Jobs', selected: true })).toBeOnTheScreen();
   fireEvent.changeText(screen.getByLabelText('Search jobs'), ' café '); expect(screen.getByRole('button', { name: /^Part-time Café Assistant\./ })).toBeOnTheScreen();
-  await press('Full-time'); expect(screen.getByText(/No roles match/)).toBeOnTheScreen(); await press('Part-time'); await press(/^Part-time Café Assistant\./);
+  await filter('Full-time'); expect(screen.getByText(/No roles match/)).toBeOnTheScreen(); await filter('Part-time'); await press(/^Part-time Café Assistant\./);
   expect(screen.getByText('Work type: Part-time')).toBeOnTheScreen(); expect(screen.getByText(/First full month’s gross pay:/)).toBeOnTheScreen(); expect(screen.getByText(/once per year/)).toBeOnTheScreen();
-  await press('Back'); fireEvent.changeText(screen.getByLabelText('Search jobs'), 'doctor'); await press('All Jobs'); await press('Show All Requirements'); await press(/^Doctor\./);
+  await press('Back'); fireEvent.changeText(screen.getByLabelText('Search jobs'), 'doctor'); await filter('All Jobs'); await press('Show All Requirements'); await press(/^Doctor\./);
   expect(screen.getByRole('button', { name: 'Apply for this Job' })).toBeDisabled(); expect(screen.getByText(/Requirements: medicine qualification/)).toBeOnTheScreen();
   expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(original); view.unmount(); sqlite.close();
 });

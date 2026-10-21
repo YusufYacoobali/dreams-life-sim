@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Text, View } from 'react-native';
 import { router } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
 import { fields } from '../../src/game/systems/schemas';
 import { courseMonths, educationActionReason, enrollmentReason, tuitionFor } from '../../src/game/systems/education';
@@ -10,6 +12,7 @@ import { loanRateQuote } from '../../src/ui/loanRateQuote';
 import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { Illustration } from '../../src/assets/Illustration';
+import { SchoolArt } from '../../src/assets/SchoolArt';
 import { useColors } from '../../src/ui/theme';
 import { RecoveryStudy } from '../../src/ui/RecoveryStudy';
 import { Scholarships } from '../../src/ui/Scholarships';
@@ -42,19 +45,17 @@ function EducationContext() {
   if (dialog?.kind === 'leave') event = { id: 'leave-course', kind: 'confirmation', title: 'Leave this course?', body: 'Future tuition stops. Paid tuition is not refunded and student debt remains. Completed qualifications stay yours.', terms: [], confirmLabel: 'Leave Course' };
   if (dialog?.kind === 'resume') event = { id: 'resume-study', kind: 'selection', title: 'Fund your next year', body: 'Your completed study months are preserved.' + loanNote, choices: [{ id: 'cash', label: 'Pay ' + formatMoney({ minor: nextTuition, currency: account.currency }), disabledReason: availableCash(account) < nextTuition ? 'Insufficient balance' : undefined }, { id: 'loan', label: 'Borrow tuition at ' + studentLoan.interestBps / 100 + '% annual interest' }], confirmLabel: 'Resume Studies' };
   return <Page><Header title="Education" onBack={() => router.back()} />
-    <Card><Illustration id="education" size={64} /><Heading>{education.stage === 'none' ? 'Your Education' : education.school}</Heading>
-      {education.stage !== 'none' && <><Body>{education.field || education.stage} · {education.paused ? 'Paused — tuition required' : education.effort + ' routine'}</Body><StatBar label="Grades" value={education.grades} color={c.blue} />{education.requiredMonths > 0 && <Body muted>{education.months} of {education.requiredMonths} study months completed</Body>}</>}
-      {education.qualifications.length === 0 ? <Body muted>No completed qualifications yet.</Body> : education.qualifications.map((q, index) => <Body key={index}>{q.level[0].toUpperCase() + q.level.slice(1)} · {q.field} · {q.year}</Body>)}
+    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><Illustration id="education" size={56} /><View style={{ flex: 1, gap: 4 }}><Heading size={20}>{education.stage === 'none' ? 'Your Education' : education.school}</Heading><Body muted>{education.stage === 'none' ? 'Explore study options and review your qualifications.' : education.field || education.stage}</Body></View></View>
+      {education.stage !== 'none' && <><StatBar label="Grades" value={education.grades} color={c.green} /><Body muted>{education.paused ? 'Paused — tuition required' : education.effort + ' routine'}</Body>{education.requiredMonths > 0 && <Body muted>{education.months} of {education.requiredMonths} study months completed</Body>}</>}
     </Card>
-    {['primary', 'secondary'].includes(education.stage) && <Card><Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. {education.stage === 'secondary' ? 'Its minimum leaving age is ' + minimumSchoolLeavingAge[player.country] + '; review early withdrawal from Your School. Leaving early does not award a qualification.' : 'Primary-school withdrawal is unavailable.'} A qualification requires the passing grade and recorded study.</Body><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" onPress={() => router.push('/school')} /></Card>}
+    {['primary', 'secondary'].includes(education.stage) && <Card><ActionRow title="Your School" subtitle="Classmates, teachers, activities and reports" icon={<SchoolArt id="study" size={38} />} onPress={() => router.push('/school')} /><Body muted>This game's school course is assessed at age {rules[player.country].schoolEnd}. {education.stage === 'secondary' ? 'Its minimum leaving age is ' + minimumSchoolLeavingAge[player.country] + '; review early withdrawal from Your School. Leaving early does not award a qualification.' : 'Primary-school withdrawal is unavailable.'} A qualification requires the passing grade and recorded study.</Body></Card>}
     {education.stage === 'none' && (world.schoolCommunities.some(item => item.personId === player.id) || world.schoolCompletions.some(item => item.personId === player.id)) && <Card><ActionRow title="School Years" subtitle="Reports, plans and completion" onPress={() => router.push('/school')} /></Card>}
-    {error && !dialog && !admissionReviewOpen && <Body>{error}</Body>}
-    {education.stage !== 'none' && <Card>
-      {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={fundingReason ? 'Fund Next Year. ' + fundingReason : undefined} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
-      {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" disabled={busy} disabledReason={educationActionReason(world, 'leave-school')} onPress={() => setDialog({ kind: 'leave' })} />}
+    {error && !dialog && !admissionReviewOpen && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
+    {education.stage !== 'none' && <Card><Heading size={18}>Current Studies</Heading>
+      {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={fundingReason ? 'Fund Next Year. ' + fundingReason : undefined} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" icon={<SchoolArt id="study" size={38} />} disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} icon={<Ionicons name="book" size={32} color={c.blue} />} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
+      {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" icon={<Ionicons name="exit-outline" size={32} color={c.red} />} disabled={busy} disabledReason={educationActionReason(world, 'leave-school')} onPress={() => setDialog({ kind: 'leave' })} />}
     </Card>}
-    <StudyCourseHistory key={JSON.stringify([world.id, player.id])} world={world} />
-    <ActionRow title="Scholarships" subtitle="Apply for tuition waivers before enrolling" onPress={() => router.push('/scholarships')} />
+    <Card><ActionRow title="Scholarships" subtitle="Apply for tuition waivers before enrolling" icon={<Ionicons name="ribbon" size={32} color={c.amber} />} onPress={() => router.push('/scholarships')} /></Card>
     <Scholarships world={world} busy={busy} onUse={item => {
       if (busy) return;
       if (item.program === 'university') setAdmissionRequest(previous => ({ scholarshipId: item.id, serial: (previous?.serial ?? 0) + 1, identity: JSON.stringify([world.id, player.id, player.country, player.city, activeUniversityApplication(world)?.id ?? null]) }));
@@ -66,6 +67,8 @@ function EducationContext() {
       const disabledReason = reasons.every(Boolean) ? reasons.every(reason => reason === reasons[0]) ? reasons[0] : 'No subjects are currently available' : undefined;
       return <ActionRow key={program} title={program === 'trade' ? 'Trade School' : 'Professional Study'} subtitle={program === 'graduate' ? 'Medicine or law after a degree' : 'Choose a subject and review funding'} disabled={busy} disabledReason={disabledReason} onPress={() => setDialog({ kind: 'program-field', program })} />;
     })}</Card>
+    <Card><Heading size={18}>Completed Qualifications</Heading>{education.qualifications.length === 0 ? <Body muted>No completed qualifications yet.</Body> : education.qualifications.map((q, index) => <View key={index} style={{ gap: 3, paddingVertical: 4 }}><Body>{q.level[0].toUpperCase() + q.level.slice(1)} · {q.field} · {q.year}</Body></View>)}</Card>
+    <StudyCourseHistory key={JSON.stringify([world.id, player.id])} world={world} />
     <EventModal event={event} busy={busy} error={error} onCancel={() => setDialog(null)} onChoose={async id => {
       if (busy || !dialog) return;
       if (dialog.kind === 'program-field') { setDialog({ kind: 'funding', application: { program: dialog.program, field: id as Application['field'], funding: 'cash' } }); return; }
