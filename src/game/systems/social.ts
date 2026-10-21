@@ -15,7 +15,8 @@ import { accountFor, active, availableCash, bounded, charge, draw, fact, post, r
 import { socialIntent } from './socialSchemas';
 import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
-import { connectPerson, relationFor } from './relationships';
+import { connectPerson } from './relationshipContacts';
+import { relationFor } from './relationshipQueries';
 import { createContact } from './npcs';
 import { financialActors } from './households';
 import { studioForAccount } from './creatorSchemas';

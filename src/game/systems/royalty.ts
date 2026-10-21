@@ -20,7 +20,7 @@ import { recordingCommitment } from './musicSchemas';
 import { jobs } from '../content/jobs';
 import { endEmployment } from './work';
 import { createContact } from './npcs';
-import { connectPerson } from './relationships';
+import { connectPerson } from './relationshipContacts';
 import { offerPending } from '../pendingQueue';
 import { fxMoney } from '../valuation';
 import { gainPublicFame } from './social';

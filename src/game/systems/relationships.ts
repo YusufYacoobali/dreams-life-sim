@@ -25,6 +25,7 @@ import { writeConversation } from '../content/conversationWriting';
 import { dateActivities, dateActivityOutcome } from './dateActivities';
 import { dateActivityIds } from './dateActivitySchemas';
 import { activeRomance, dateBudget, otherPerson, relationFor, romanceReason, type Relationship } from './relationshipQueries';
+export { connectPerson } from './relationshipContacts';
 export { activeRomance, closeFamily, dateBudget, otherPerson, partnerRelation, relationFor, romanceReason, socialActionUsed, type Relationship, type RomanceLookups } from './relationshipQueries';
 
 export const socialCommandSchema = z.discriminatedUnion('type', [
@@ -53,16 +54,6 @@ function syncKind(relation: Relationship) {
 /** A friendship can grow from an existing classmate or coworker role. */
 export function refreshFriendship(relation: Relationship) {
   if (relation.strength >= 60 && !relation.roles.includes('friend') && relation.roles.some(role => role === 'acquaintance' || role === 'classmate' || role === 'coworker')) { relation.roles.push('friend'); syncKind(relation); }
-}
-export function connectPerson(world: World, id: string, fromId = world.activePersonId): RuntimeEffectRow[] {
-  const person = world.people[id]; const player = world.people[fromId];
-  if (!person || !player || player.died || person.died || person.id === player.id) throw new IneligibleAction('This person is unavailable');
-  if (!relationFor(world, player.id, id)) {
-    const classmate = player.education.school && player.education.school === person.education.school && person.education.stage !== 'none';
-    const kind = classmate ? 'classmate' : 'acquaintance';
-    world.relationships.push({ id: 'relation_' + player.id + '_' + id, from: player.id, to: id, kind, roles: [kind], romance: 'none', since: { ...world.date }, parentType: null, strength: 35, trust: 35, memories: ['met:' + world.date.year], lastInteractionYear: world.date.year });
-  }
-  return [{ id: 'contact', label: 'New acquaintance', value: fullName(person), tone: 'positive' }];
 }
 export const weddingBudgets = (world: World, person = active(world)) => [100n, 20n, 4n].map((denominator, index) => ({ id: ['simple', 'small', 'lavish'][index], label: ['Simple ceremony', 'Small celebration', 'Lavish wedding'][index], amount: roundRatio(rules[person.country].baseWage, denominator) }));
 /** Completion only: callers establish eligibility, consent and actual payment first. */
