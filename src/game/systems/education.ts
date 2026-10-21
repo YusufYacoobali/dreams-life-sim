@@ -22,6 +22,7 @@ import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
 import { activeUniversityApplication } from './universityAdmissionSchemas';
 import { compareDates } from '../model';
+import { beginStudyCourse, endStudyCourse, observeIncompleteStudy, syncStudyCourse } from './studyCourses';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']), scholarshipId: z.string().optional() }),
@@ -89,10 +90,12 @@ export function startCourse(world: World, program: 'university' | 'trade' | 'gra
   const person = active(world), education = person.education;
   const admission = admissionId ? world.universityApplications.find(item => item.id === admissionId) : undefined;
   if (admissionId && (!admission || admission.status !== 'accepted' || admission.personId !== person.id || program !== 'university' || admission.field !== field || admission.country !== person.country || admission.city !== person.city || !admission.expires || compareDates(world.date, admission.expires) >= 0)) throw new IneligibleAction('Choose a current university place offer');
+  observeIncompleteStudy(world, person);
   education.stage = program; education.field = field; education.school = admission?.school ?? school ?? person.city + (program === 'trade' ? ' Technical College' : ' University');
   education.months = 0; education.requiredMonths = admission?.requiredMonths ?? courseMonths(program, field);
   education.tuition = admission?.annualTuition ?? tuitionFor(person, program); education.tuitionPaidMonths = 0;
-  activateScholarship(world, scholarshipId, program, field); return payTuition(world, funding);
+  activateScholarship(world, scholarshipId, program, field); const payment = payTuition(world, funding);
+  beginStudyCourse(world, person, { ...payment, funding, scholarshipId: scholarshipId ?? null }, admissionId); return payment;
 }
 export function resolveEducation(world: World, command: EducationCommand) {
   const person = active(world); const education = person.education;
@@ -128,11 +131,14 @@ export function resolveEducation(world: World, command: EducationCommand) {
     payTuition(world, command.funding); result(world, 'Studies resumed', 'Your next year is funded. Your completed study time is preserved.', 'education');
   } else {
     fact(world, 'I left my ' + education.field + ' course. My existing qualifications remain valid.', 'education');
+    endStudyCourse(world, person, 'withdrawn');
     education.stage = 'none'; education.paused = false;
     result(world, 'You left the course', 'Future tuition stops. Existing student debt still needs to be repaid.', 'education');
   }
+  syncStudyCourse(world, person);
 }
 export function educationMonth(world: World, person: Person) {
+  syncStudyCourse(world, person);
   if (hospitalized(world, person) || activeTrip(world, person.id)) return;
   if (isConfined(world, person) || person.legal.wanted || serviceAway(world, person.id)) return;
   const age = ageOn(person, world.date); const rule = rules[person.country]; const education = person.education;
@@ -166,6 +172,7 @@ export function educationMonth(world: World, person: Person) {
     education.grades = bounded(education.grades + change);
     person.stats.stress = bounded(person.stats.stress + (education.effort === 'focused' ? 5 : education.effort === 'relaxed' ? -4 : 0));
   }
+  syncStudyCourse(world, person);
   if (education.requiredMonths > 0 && education.months >= education.requiredMonths) {
     const level = education.stage === 'trade' ? 'trade' : education.stage === 'graduate' ? education.field as 'medicine' | 'law' : 'degree';
     if (education.grades >= 50) {
@@ -173,6 +180,7 @@ export function educationMonth(world: World, person: Person) {
       if (isPlayer) fact(world, 'I completed my ' + education.field + ' ' + (level === 'degree' ? 'degree' : 'qualification') + ' with grades of ' + education.grades + '%.', 'education');
     } else if (isPlayer) fact(world, 'I finished the course but did not meet the passing grade. I was not awarded the qualification.', 'education');
     finishScholarship(world, person, education.grades >= 50);
+    endStudyCourse(world, person, education.grades >= 50 ? 'completed' : 'failed');
     education.stage = 'none'; education.paused = false; education.tuition = 0n;
   }
 }

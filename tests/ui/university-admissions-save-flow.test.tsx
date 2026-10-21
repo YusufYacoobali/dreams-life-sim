@@ -21,6 +21,7 @@ import { EventModal } from '../../src/ui/EventModal';
 import schoolArchive from '../fixtures/v24-university-loan-archive.json';
 import pinnedArchive from '../fixtures/v30-native-workplace-story-archive.json';
 import relocationArchive from '../fixtures/v20-relocation-archive.json';
+import incompleteFixture from '../fixtures/v35-legacy-incomplete-course.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
@@ -43,7 +44,7 @@ async function finishYear() {
     await command(pending?.kind === 'decision' ? { type: 'choose', eventId: pending.id, choiceId: choice!.id } : pending ? { type: 'acknowledge', resultId: pending.id } : { type: 'resume' });
   }
 }
-async function setup(mode: 'pupil' | 'move' = 'pupil') {
+async function setup(mode: 'pupil' | 'move' | 'legacy' | 'incomplete' = 'pupil') {
   const directory = mkdtempSync(join(tmpdir(), 'dreams-university-admissions-')), path = join(directory, 'dreams.db'); let sqlite: DatabaseSync;
   const connect = (): SqlDatabase => {
     sqlite = new DatabaseSync(path); sqlite.exec('PRAGMA foreign_keys=ON'); const connection = sqlite;
@@ -52,9 +53,9 @@ async function setup(mode: 'pupil' | 'move' = 'pupil') {
   };
   let repository = new SaveRepository(connect()); await repository.initialise(); await repository.import(JSON.stringify(pinnedArchive));
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()])) as Record<string, Record<string, unknown>[]>;
-  const selectedArchive = mode === 'pupil' ? schoolArchive : relocationArchive;
+  const selectedArchive = mode === 'move' ? relocationArchive : mode === 'incomplete' ? { ...schoolArchive, checkpoint: incompleteFixture.after.checkpoint } : schoolArchive;
   const pinned = rows(); await repository.import(JSON.stringify(selectedArchive)); const original = (await repository.active())!, imported = rows();
-  await repository.restoreBranch(original.id, selectedArchive.snapshots[0].summary.id, original.revision, 'life_university_admissions', 'admissions_original_checkpoint');
+  if (mode === 'pupil' || mode === 'move') await repository.restoreBranch(original.id, selectedArchive.snapshots[0].summary.id, original.revision, 'life_university_admissions', 'admissions_original_checkpoint');
   let nextYield: Promise<void> | undefined;
   const pause = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
   const bootstrap = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => original.date, id: () => 'unused', yieldToUI: async () => { const wait = nextYield; nextYield = undefined; if (wait) await wait; } }); expect(await mockStore.getState().bootstrap()).toBe(true); }; await bootstrap();
@@ -62,10 +63,11 @@ async function setup(mode: 'pupil' | 'move' = 'pupil') {
     expect(world().date.year).toBe(2017); expect(world().people[world().activePersonId].education.qualifications).toEqual([]);
     await command({ type: 'advance' }); await finishYear();
     expect(world().date.year).toBe(2018); expect(world().schoolCompletions.find(item => item.personId === world().activePersonId)?.passed).toBe(true); expect(world().people[world().activePersonId].education.stage).toBe('none');
-  } else { await command({ type: 'quit-job' }); await command({ type: 'acknowledge', resultId: world().pending!.id }); }
+  } else if (mode === 'move') { await command({ type: 'quit-job' }); await command({ type: 'acknowledge', resultId: world().pending!.id }); }
+  else { expect(world().people[world().activePersonId].education).toMatchObject({ stage: mode === 'legacy' ? 'university' : 'none', months: 12 }); expect(world().studyCourses).toEqual([]); }
   return { get sqlite() { return sqlite; }, rows, pause, cold: async () => { sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(); },
     original: () => {
-      const now = rows(); for (const table of ['lives', 'backups']) for (const row of imported[table]) expect(now[table]).toContainEqual(row);
+      const now = rows(); for (const table of ['lives', 'backups']) for (const row of imported[table]) if (mode !== 'legacy' && mode !== 'incomplete' || row.id !== original.id && row.life_id !== original.id) expect(now[table]).toContainEqual(row);
       for (const table of ['snapshots', 'snapshot_metadata', 'branches', 'restore_receipts']) for (const row of imported[table]) expect(now[table]).toContainEqual(row);
       for (const row of imported.receipts) expect(sqlite.prepare('SELECT * FROM receipts WHERE life_id=? AND command_id=?').get(String(row.life_id), String(row.command_id))).toEqual(row);
       for (const [input, lifeId] of [[selectedArchive, original.id], [pinnedArchive, String(pinned.lives[0].id)]] as const) for (const point of input.snapshots) expect(sqlite.prepare('SELECT payload FROM snapshots WHERE life_id=? AND snapshot_id=?').get(lifeId, point.summary.id)?.payload).toBe(point.payload);
@@ -75,12 +77,16 @@ async function applyReview() { await press(/^University\./); await choose('Compu
 async function failureRetry(context: Awaited<ReturnType<typeof setup>>, confirm: string, actual: GameCommand) {
   const initial = world(), before = context.rows(), event = review(), expected = resolveCommand(initial, actual, true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
   const release = context.pause(); context.sqlite.exec("CREATE TRIGGER fail_admission BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await press(confirm); expect(modal().getByRole('button', { name: confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
-  await act(async () => { fireEvent.press(modal().getByRole('button', { name: confirm })); fireEvent.press(modal().getByRole('button', { name: 'Never mind' })); screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(review()).toBe(event); expect(context.rows()).toEqual(before);
-  await act(async () => { release(); }); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(review()).toBe(event); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
-  context.sqlite.exec('DROP TRIGGER fail_admission'); await press(confirm); expect(world()).toEqual(expected); expect(screen.queryByRole('button', { name: confirm })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-  expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(item => item.id === initial.id)!.payload);
-  return expected;
+  try {
+    await press(confirm); expect(modal().getByRole('button', { name: confirm })).toHaveProp('accessibilityState', { disabled: true, busy: true });
+    await act(async () => { fireEvent.press(modal().getByRole('button', { name: confirm })); fireEvent.press(modal().getByRole('button', { name: 'Never mind' })); screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(review()).toEqual(event); expect(context.rows()).toEqual(before);
+    await act(async () => { release(); }); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(review()).toEqual(event); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
+    context.sqlite.exec('DROP TRIGGER fail_admission'); await press(confirm); expect(world()).toEqual(expected); expect(screen.queryByRole('button', { name: confirm })).toBeNull(); expect(unpack).not.toHaveBeenCalled();
+    expect(context.sqlite.prepare('SELECT payload FROM backups WHERE life_id=?').get(initial.id)?.payload).toBe(before.lives.find(item => item.id === initial.id)!.payload);
+    return expected;
+  } finally {
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); unpack.mockRestore();
+  }
 }
 
 test('a genuine pupil applies for free, separately consents to exact student debt/tuition and cold resumes both durable steps without duplicate payment', async () => {
@@ -99,6 +105,9 @@ test('a genuine pupil applies for free, separately consents to exact student deb
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(enrolled); expect(context.rows()).toEqual(savedRows); await press('Continue');
     const acknowledged = world(), acknowledgedRows = context.rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: enrolled.pending!.id })).toBe(false); expect(await mockStore.getState().dispatch({ type: 'accept-university-place', applicationId: item.id, funding: 'loan' })).toBe(false); }); expect(world()).toEqual(acknowledged); expect(context.rows()).toEqual(acknowledgedRows); context.original(); view.unmount();
     await command({ type: 'advance' }); await finishYear(); const later = world(); expect(later.people[later.activePersonId].education.months).toBeGreaterThan(0); expect(later.universityApplications[0]).toEqual(acknowledged.universityApplications[0]); expect(later.ledger.filter(row => row.category === 'tuition')).toHaveLength(1); context.original();
+    expect(later.studyCourses[0]).toMatchObject({ origin: 'enrolment', status: 'active', started: entry.date, admissionId: item.id, months: later.people[later.activePersonId].education.months, firstPayment: { transactionId: entry.transactionId, loanTransactionId: entry.loanTransactionId, billed: 1400000n } });
+    view = render(frame()); await press('Leave course'); const left = await failureRetry(context, 'Leave Course', { type: 'leave-school' }); expect(left.accounts).toEqual(later.accounts); expect(left.liabilities).toEqual(later.liabilities); expect(left.ledger).toEqual(later.ledger); expect(left.people[left.activePersonId].education.qualifications).toEqual(later.people[later.activePersonId].education.qualifications); expect(left.studyCourses[0]).toEqual({ ...later.studyCourses[0], status: 'withdrawn', ended: left.date, recorded: left.date });
+    const leftRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(left); expect(context.rows()).toEqual(leftRows); await press('Continue'); expect(screen.getByText('Previous courses')).toBeOnTheScreen(); expect(screen.getByText('Left the course')).toBeOnTheScreen(); const viewed = context.rows(); expect(screen.getByText('Started 1/1/2018 · Ended 1/1/2019')).toBeOnTheScreen(); expect(context.rows()).toEqual(viewed); context.original(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
 
@@ -155,3 +164,25 @@ test('the genuinely reached waitlist survives a failed ordinary month, cold resu
     const withdrawnRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(withdrawn); expect(context.rows()).toEqual(withdrawnRows); await press('Continue'); view.unmount(); await finishYear(); expect(world().universityApplications.at(-1)).toEqual(withdrawn.universityApplications.at(-1)); expect(world().ledger.filter(row => row.category === 'tuition')).toEqual([]); expect(world().liabilities.filter(row => row.kind === 'student')).toEqual([]); context.original();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 120000);
+
+test('actually leaving the unchanged legacy course records its real incomplete study while keeping past dates, currency and costs unknown', async () => {
+  const context = await setup('legacy');
+  try {
+    const initial = world(), education = initial.people[initial.activePersonId].education; let view = render(frame()); expect(screen.queryByText('Previous courses')).toBeNull(); await press('Leave course'); const left = await failureRetry(context, 'Leave Course', { type: 'leave-school' });
+    expect(left.studyCourses).toHaveLength(1); expect(left.studyCourses[0]).toMatchObject({ origin: 'legacy-current', status: 'withdrawn', program: 'university', field: 'computing', school: education.school, months: 12, requiredMonths: 48, tuitionPaidMonths: 12, annualTuition: 1400000n, funding: 'loan', started: null, ended: initial.date, recorded: initial.date, country: null, city: null, currency: null, firstPayment: null, admissionId: null });
+    expect(left.ledger).toEqual(initial.ledger); expect(left.accounts).toEqual(initial.accounts); expect(left.liabilities).toEqual(initial.liabilities); expect(left.people[left.activePersonId].education.qualifications).toEqual(education.qualifications); expect(left.random).toEqual(initial.random);
+    const saved = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(left); expect(context.rows()).toEqual(saved); await press('Continue'); expect(screen.getByText('12 of 48 study months recorded · 12 months of tuition coverage recorded')).toBeOnTheScreen(); expect(screen.getByText('Start date unrecorded · Ended 1/1/2019')).toBeOnTheScreen(); expect(screen.getByText(/Earlier payment amounts and course currency were not reconstructed/)).toBeOnTheScreen(); const viewed = context.rows(); expect(context.rows()).toEqual(viewed); context.original(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+}, 60000);
+
+test('a genuine old-runtime incomplete slot is observed only when an actual new course overwrites it, with rollback and exact cold history', async () => {
+  const context = await setup('incomplete');
+  try {
+    const initial = world(), old = initial.people[initial.activePersonId].education, before = context.rows(); let view = render(frame()); expect(screen.queryByText('Previous courses')).toBeNull();
+    await press(/^Trade School\./); await choose('Business'); await press('Next'); await choose(/Student loan/); await press('Review Application'); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(before);
+    await press(/^Trade School\./); await choose('Business'); await press('Next'); await choose(/Student loan/); await press('Review Application'); const enrolled = await failureRetry(context, 'Apply', { type: 'enroll', program: 'trade', field: 'business', funding: 'loan' });
+    expect(enrolled.people[enrolled.activePersonId].education.stage).toBe('trade'); expect(enrolled.studyCourses).toHaveLength(2); expect(enrolled.studyCourses[0]).toMatchObject({ origin: 'legacy-incomplete', status: 'observed-incomplete', program: null, field: 'computing', school: old.school, months: 12, requiredMonths: 48, tuitionPaidMonths: 12, annualTuition: old.tuition, recorded: initial.date, started: null, ended: null, country: null, city: null, currency: null, firstPayment: null, admissionId: null }); expect(enrolled.studyCourses[1]).toMatchObject({ origin: 'enrolment', status: 'active', program: 'trade', field: 'business', started: initial.date, months: 0, firstPayment: { billed: 450000n, waived: 0n, funding: 'loan' } });
+    expect(enrolled.people[enrolled.activePersonId].education.qualifications).toEqual(old.qualifications); expect(enrolled.universityApplications).toEqual([]); expect(enrolled.ledger.slice(0, initial.ledger.length)).toEqual(initial.ledger); expect(enrolled.ledger.slice(initial.ledger.length).map(row => [row.category, row.cashDelta, row.debtDelta])).toEqual([['borrowing', 450000n, 450000n], ['tuition', -450000n, 0n]]);
+    const saved = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(enrolled); expect(context.rows()).toEqual(saved); await press('Continue'); expect(screen.getByText('Earlier incomplete course observed')).toBeOnTheScreen(); expect(screen.getByText('Start date unrecorded · Historical end date unrecorded')).toBeOnTheScreen(); context.original(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
+}, 60000);

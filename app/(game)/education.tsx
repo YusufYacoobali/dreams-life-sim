@@ -16,6 +16,7 @@ import { Scholarships } from '../../src/ui/Scholarships';
 import { scholarshipWaiver, tuitionDue } from '../../src/game/systems/scholarships';
 import { UniversityAdmissions, type AdmissionReviewRequest } from '../../src/ui/UniversityAdmissions';
 import { activeUniversityApplication } from '../../src/game/systems/universityAdmissionSchemas';
+import { StudyCourseHistory } from '../../src/ui/StudyCourseHistory';
 
 type Application = { program: 'university' | 'trade' | 'graduate'; field: typeof fields[number]; funding: 'cash' | 'loan'; scholarshipId?: string };
 type Dialog = { kind: 'program-field'; program: Application['program'] } | { kind: 'funding'; application: Application } | { kind: 'confirm'; application: Application } | { kind: 'effort' } | { kind: 'leave' } | { kind: 'resume' };
@@ -52,6 +53,7 @@ function EducationContext() {
       {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={fundingReason ? 'Fund Next Year. ' + fundingReason : undefined} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
       {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" disabled={busy} disabledReason={educationActionReason(world, 'leave-school')} onPress={() => setDialog({ kind: 'leave' })} />}
     </Card>}
+    <StudyCourseHistory key={JSON.stringify([world.id, player.id])} world={world} />
     <ActionRow title="Scholarships" subtitle="Apply for tuition waivers before enrolling" onPress={() => router.push('/scholarships')} />
     <Scholarships world={world} busy={busy} onUse={item => {
       if (busy) return;

@@ -1,3 +1,4 @@
+import { endStudyCourse, refreshStudyCourses } from './systems/studyCourses';
 import { universityAdmissionCommandSchema, type UniversityAdmissionCommand, refreshUniversityApplications, resolveUniversityAdmission, universityAdmissionsMonth } from './systems/universityAdmissions';
 import { friendshipCommandSchema, type FriendshipCommand, refreshBestFriendships, resolveFriendship } from './systems/friendships';
 import { HobbyEventCommand, hobbyEventCommandSchema, resolveHobbyEvent } from './systems/hobbyEvents';
@@ -83,6 +84,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  endStudyCourse(world, person, 'died');
   refreshUniversityApplications(world);
   refreshScholarships(world);
   refreshLeisure(world);
@@ -286,7 +288,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
   if (command.type === 'continue-child') {
-    resolveEstate(world, estateCommandSchema.parse(command)); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
+    resolveEstate(world, estateCommandSchema.parse(command)); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
   }
   if (player.died) throw new IneligibleAction('This life has ended');
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
@@ -385,6 +387,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else throw new IneligibleAction('This action is not available');
   }
   refreshRoyalSuccession(world,'background');
+  refreshStudyCourses(world);
   refreshUniversityApplications(world);
   refreshTrips(world);
   refreshSchools(world);
