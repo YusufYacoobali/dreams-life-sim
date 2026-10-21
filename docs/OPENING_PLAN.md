@@ -2,6 +2,8 @@
 
 Latest relationship gameplay and the current Android build blocker are recorded in [current product work](PROGRESS.md#current-product-work). The checkpoints below retain their original source scope.
 
+Product source `9455ba4` closes reproduced stale-confirmation payment/action defects, scopes Lifestyle drafts correctly and improves abroad/pet browsing. Focused connected checks and strict types pass; f230's preceding combined full regression passed at16:57UTC. Ordinary adult Android play validates natural admission/aid/enrolment,12study months, paid work, real living costs and a consenting date; all old data stays intact. The coordination hold leaves strict continuous30 acceptance open. Root owns current native cold/review work. The newer combined gate and standalone/iOS/physical release acceptance remain; overall stays an approximate75% effort estimate, with268situations/804choices and no version changes.
+
 Latest product integration `a50ab76` improves school/university browsing, selected-person profiles, purchase review identity, the factual death screen and legal choice explanations. It also removes a bounded redundant monthly calculation and restructures unchanged selectors behind seven reported import-cycle paths. Versions remain39/40/15/19/v4;268situations/804choices. Focused checks pass; combined full regression is next. Overall remains approximately75%, with current Android adult play and visual/release acceptance open. Active policy68 still omits the required native dependency host; no APK/build retry or measured physical speedup is claimed. Continue useful product work and automatic-save/resume acceptance, keeping extra file/history tools parked.
 
 ## Prior checkpoint: World38/engine39 gameplay and acceptance
