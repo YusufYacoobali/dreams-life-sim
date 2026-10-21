@@ -1,5 +1,6 @@
 import { monthFrom } from '../../src/game/calendar';
 import { countries } from '../../src/game/countries';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { ageOn, copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { accountFor } from '../../src/game/systems/common';
@@ -237,6 +238,42 @@ test('the actual final attended trade month is recorded once, while later comple
   expect(person.skills.acting).toBe(skill); expect(person.stats.energy).toBe(energy); expect(community.periods).toEqual(periods);
   expect(() => resolveCommand(world, { type: 'campus-club', communityId: id, club: 'science' }, true)).toThrow();
   expect(decodeWorld(encodeWorld(world))).toEqual(world);
+});
+
+test('one actual engine year after paid introductions persists campus attendance and both peers’ real study and living finances', () => {
+  const ready = introduced();
+  const initial = act(ready, { type: 'campus-club', communityId: currentCampus(ready)!.id, club: 'science' });
+  const community = currentCampus(initial)!, target = monthFrom(initial.date, 12, initial.calendarAnchorDay), original = encodeWorld(initial);
+  const priorTransactions = new Set(initial.ledger.map(item => item.id));
+  // The existing fixture/application and initial attended-month setup above
+  // remain declared. Everything below uses only ordinary engine commands:
+  // one full advance, currently available first choices, acknowledgements and
+  // resume when an actual planning pause requires it. No future state is peeked.
+  let world = resolveCommand(initial, { type: 'advance' }, true), commands = 0;
+  while (world.pending || world.annual) {
+    if (++commands > 120) throw new Error('The bounded actual campus year did not finish');
+    const pending = world.pending;
+    if (pending?.kind === 'decision') {
+      const choice = pending.choices.find(item => !choiceUnavailable(world, item));
+      if (!choice) throw new Error('No currently available choice in the actual campus year');
+      world = resolveCommand(world, { type: 'choose', eventId: pending.id, choiceId: choice.id }, true);
+    } else world = resolveCommand(world, pending ? { type: 'acknowledge', resultId: pending.id } : { type: 'resume' }, true);
+  }
+  expect(world.date).toEqual(target); expect(world.pending).toBeNull(); expect(world.annual).toBeNull();
+  const saved = world.campusCommunities.find(item => item.id === community.id)!;
+  expect(saved.students).toEqual(community.students); expect(world.campusCommunities.filter(item => item.courseId === community.courseId)).toHaveLength(1);
+  expect(world.studyCourses.find(item => item.id === community.courseId)!.months).toBeGreaterThan(community.introducedStudyMonths);
+  expect(saved.periods.length).toBeGreaterThan(0); expect(saved.periods.length).toBeLessThanOrEqual(12);
+  expect(saved.periods.every(period => period.club === 'science' && period.studyMonth > community.introducedStudyMonths)).toBe(true);
+  for (const student of saved.students) {
+    const course = world.studyCourses.find(item => item.id === student.courseId)!;
+    expect(course.personId).toBe(student.personId); expect(course.months).toBeGreaterThan(0); expect(course.firstPayment!.transactionId).toBe(initial.studyCourses.find(item => item.id === student.courseId)!.firstPayment!.transactionId);
+    const living = world.ledger.filter(item => item.personId === student.personId && item.category === 'living' && !priorTransactions.has(item.id));
+    expect(living.length).toBeGreaterThan(0); expect(living.every(item => item.cashDelta < 0n || item.debtDelta > 0n)).toBe(true);
+    expect(financialActors(world).map(item => item.id)).toContain(student.personId);
+  }
+  expect(validateWorld(world)).toEqual(world); expect(decodeWorld(encodeWorld(world))).toEqual(world);
+  expect(unpackCheckpoint(packCheckpoint(world))).toEqual(world); expect(encodeWorld(initial)).toBe(original);
 });
 
 test('old empty worlds and ineligible browsing retain all fields and RNG; raw roster, payment, relationship and period tampering is rejected', () => {
