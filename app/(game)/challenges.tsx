@@ -14,6 +14,6 @@ export default function Challenges() {
   if (!progress) return <Redirect href="/" />;
   return <ProgressList label="Challenges list" items={visible} showProgress onSelect={item => router.push({ pathname: '/challenge/[id]', params: { id: item.id } })} header={<><Header title="Challenges" onBack={() => router.back()} />
     <FilterTabs values={filters} selected={difficulty} onSelect={setDifficulty} />
-    <Card><ProgressSummary complete={progress.challenges.filter(item => item.complete).length} total={progress.challenges.length} label="Completed" /><Body muted>Explore goals at your own pace. Progress follows what happens in this life.</Body></Card>
+    <Card><ProgressSummary complete={progress.challenges.filter(item => item.complete).length} total={progress.challenges.length} label="Completed" /><Body muted>Explore goals at your own pace. Progress follows what happens in this life.</Body><Body>{visible.length} shown · {visible.filter(item => item.complete).length} completed in this view</Body></Card>
     </>} />;
 }

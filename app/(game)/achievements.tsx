@@ -25,7 +25,7 @@ function AchievementsContent({ world }: { world: World }) {
   if (!progress) return <Redirect href="/" />;
   return <ProgressList label="Achievements list" items={visible} onSelect={item => setSelectedId(item.id)} header={<><Header title="Achievements" onBack={() => router.back()} />
     <FilterTabs values={filters} selected={category} onSelect={id => { setCategory(id); setSelectedId(null); }} />
-    <Card><ProgressSummary complete={progress.achievements.filter(item => item.complete).length} total={progress.achievements.length} label="Earned" /><Body muted>Milestones from this person’s life and timeline.</Body></Card>
+    <Card><ProgressSummary complete={progress.achievements.filter(item => item.complete).length} total={progress.achievements.length} label="Earned" /><Body muted>Milestones from this person’s life and timeline.</Body><Body>{visible.length} shown · {visible.filter(item => item.complete).length} earned in this view</Body></Card>
     </>}>
     <EventModal event={selected ? { id: 'achievement-' + selected.id, kind: 'milestone', title: selected.title, body: selected.goal.label + '.', illustration: <ProgressPicture art={selected.art} size={58} />, facts: [
       { id: 'record', label: 'Your record', value: progressAmount(selected.goal.value, selected.goal.unit), tone: 'neutral' },
