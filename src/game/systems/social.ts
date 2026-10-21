@@ -228,7 +228,7 @@ export function resolveSocialMedia(world: World, command: SocialMediaCommand) {
   throw new IneligibleAction('This social action is unavailable');
 }
 export function socialMonth(world: World) {
-  const month = absolute(world), tracked = new Set(financialActors(world).map(person => person.id));
+  const month = absolute(world), tracked = new Set(world.socialAccounts.length ? financialActors(world).map(person => person.id) : []);
   for (const account of world.socialAccounts) {
     const person = world.people[account.ownerId]; if (person.died || account.lastMonth >= month) continue; account.lastMonth = month;
     if (account.status === 'suspended' && account.suspendedUntil !== null && account.suspendedUntil <= month) { account.status = 'active'; account.suspendedUntil = null; }
