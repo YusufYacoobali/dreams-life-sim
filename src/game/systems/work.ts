@@ -24,6 +24,7 @@ import { fxMoney } from '../valuation';
 import { newWorkEarnings } from './earningsSchemas';
 import { pensionPayment, recordWageEarnings } from './earnings';
 import { endWorkplaceEmployment } from './workplaceSchemas';
+import { interviewExperienceCopy, paidInterviewExperience } from './interviewExperience';
 
 export const workCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('apply-job'), roleId: z.string(), reviewedHourlyTerms: hourlyTermsSchema.optional() }),
@@ -69,6 +70,10 @@ export function salaryForPerson(person: Person, role: JobRole, rank = 0): bigint
 export const salaryFor = (world: World, role: JobRole, rank = 0) => salaryForPerson(active(world), role, rank);
 /** Advance the existing contract's pay scale, retaining raises and its currency. */
 export const promotedAnnualPay = (job: NonNullable<Person['employment']>) => roundRatio(job.annualPay * BigInt(100 + (job.rank + 1) * 25), BigInt(100 + job.rank * 25));
+export function jobInterviewChance(world: World, answerChance: number, experienceBonus = 0) {
+  const person = active(world);
+  return Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) + Math.floor(person.stats.fame / 20) - visibleConvictions(world, person).length * 10 + answerChance + experienceBonus));
+}
 export function resolveWork(world: World, command: WorkCommand) {
   const person = active(world);
   if (command.type === 'apply-job') {
@@ -81,12 +86,13 @@ export function resolveWork(world: World, command: WorkCommand) {
     const interview = jobInterviews[role.id], annualPay = hourly ? hourlyAnnual(hourly) : salaryFor(world, role), employer = person.city + ' ' + role.sector;
     if (!interview) throw new IneligibleAction('This interview is not available');
     const answers = [...interview.answers, { id: 'withdraw' as const, label: 'Withdraw my application' }];
+    const experience = paidInterviewExperience(world, role);
     world.pending = {
       kind: 'decision', id: 'interview_' + world.revision, templateId: 'job-interview',
-      title: role.title + ' interview', body: (hourly ? 'Reviewed contract: ' + formatMoney({ minor: hourly.hourlyRate, currency: countries[person.country].currency }) + ' per hour, ' + hourly.weeklyHours + ' hours per week and ' + hourly.paidWeeks + ' paid weeks per year. ' : '') + employer + ' asks: “' + interview.question + '”',
+      title: role.title + ' interview', body: (hourly ? 'Reviewed contract: ' + formatMoney({ minor: hourly.hourlyRate, currency: countries[person.country].currency }) + ' per hour, ' + hourly.weeklyHours + ' hours per week and ' + hourly.paidWeeks + ' paid weeks per year. ' : '') + interviewExperienceCopy(role.sector, experience) + employer + ' asks: “' + interview.question + '”',
       illustration: 'career', personIds: [person.id],
       choices: answers.map(answer => ({ id: answer.id, label: answer.label,
-        effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, ...(hourly ? { hourly } : {}), answerId: answer.id }],
+        effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, ...(hourly ? { hourly } : {}), experience: { policyVersion: 1, ...experience, chance: answer.id === 'withdraw' ? null : jobInterviewChance(world, answer.chance, experience.bonus) }, answerId: answer.id }],
         resultTitle: 'Interview complete', resultBody: 'Your application has been considered.',
         journal: 'I attended an interview for a ' + role.title.toLowerCase() + ' role at ' + employer + '.',
       })),
@@ -116,16 +122,20 @@ export type JobInterviewEffect = Extract<Effect, { kind: 'job-interview' }>;
 export function resolveJobInterview(world: World, effect: JobInterviewEffect): { title: string; body: string; journal: string; effects: RuntimeEffectRow[] } {
   const person = active(world), role = jobs.find(item => item.id === effect.roleId), interview = jobInterviews[effect.roleId];
   if (!role || !interview || effect.personId !== person.id || effect.employer !== person.city + ' ' + role.sector || effect.annualPay !== (effect.hourly ? hourlyAnnual(effect.hourly) : salaryFor(world, role)) || effect.hourly && (!role.partTime || effect.hourly.hourlyRate !== hourlyQuote(person.country, role, effect.hourly.weeklyHours).hourlyRate) || !world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) throw new IneligibleAction('This interview is no longer available');
+  const answer = interview.answers.find(item => item.id === effect.answerId);
+  if (effect.experience) {
+    const experience = paidInterviewExperience(world, role), expected = effect.answerId === 'withdraw' ? null : answer && jobInterviewChance(world, answer.chance, experience.bonus);
+    if (effect.experience.policyVersion !== 1 || effect.experience.paidMonths !== experience.paidMonths || effect.experience.bonus !== experience.bonus || effect.experience.chance !== expected) throw new IneligibleAction('This interview experience quote is no longer available');
+  }
   if (effect.answerId === 'withdraw') return { title: 'Application withdrawn', body: 'You decided against this role. Your current work is unchanged. You can apply for this role again next year.', journal: 'I withdrew my application for a ' + role.title.toLowerCase() + ' role.', effects: [] };
   const reason = jobReason(world, role, true, effect.hourly?.weeklyHours); if (reason) throw new IneligibleAction(reason);
-  const answer = interview.answers.find(item => item.id === effect.answerId)!;
-  const chance = Math.max(15, Math.min(95, 40 + Math.round((person.stats.smarts + person.stats.respect + person.stats.discipline) / 6) + Math.floor(person.stats.fame / 20) - visibleConvictions(world, person).length * 10 + answer.chance));
-  if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer.feedback + ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.', journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
+  const chance = effect.experience?.chance ?? jobInterviewChance(world, answer!.chance);
+  if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer!.feedback + ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.', journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
   if (person.employment) endEmployment(world);
   person.employment = { id: 'employment_' + world.revision, ...(effect.hourly ? { hourlyContractId: 'employment_' + world.revision } : {}), roleId: role.id, employer: effect.employer, companyId: null, currency: countries[person.country].currency, rank: 0, annualPay: effect.annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
   if (effect.hourly) world.hourlyContracts.push({ employmentId: person.employment.id, personId: person.id, roleId: role.id as 'shop-assistant-part' | 'cafe-part', country: person.country, currency: person.employment.currency, started: { ...world.date }, terms: { ...effect.hourly }, rates: [], periods: [] });
   world.workHistory.push({ id: person.employment.id, ...(effect.hourly ? { hourlyContractId: person.employment.id } : {}), personId: person.id, roleId: role.id, employer: effect.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(person.employment.currency) });
-  return { title: 'You got the job', body: answer.feedback + ' Your contract is active. ' + (effect.hourly ? 'Your reviewed ' + effect.hourly.weeklyHours + '-hour week pays ' + formatMoney({ minor: effect.hourly.hourlyRate, currency: person.employment.currency }) + ' per hour. ' : '') + 'Pay starts as months pass, with income tax withheld. There is no salary payment upfront.', journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
+  return { title: 'You got the job', body: answer!.feedback + ' Your contract is active. ' + (effect.hourly ? 'Your reviewed ' + effect.hourly.weeklyHours + '-hour week pays ' + formatMoney({ minor: effect.hourly.hourlyRate, currency: person.employment.currency }) + ' per hour. ' : '') + 'Pay starts as months pass, with income tax withheld. There is no salary payment upfront.', journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
 }
 /** Pay for one actual employment period. A company supplies cash through fundWages. */
 export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {
