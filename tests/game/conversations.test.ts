@@ -28,7 +28,7 @@ function withoutTalkFields(world: World) {
 test('omitting topic retains the original exact food conversation, bounded rewards and single original draw', () => {
   const before = fixture(), relation = relationFor(before, before.activePersonId, targetId)!, draw = randomInteger(before.random.outcomes, 3, 6);
   const after = resolveCommand(before, talk());
-  expect(after.pending).toEqual({ kind: 'result', id: 'action_67', title: 'Time together', body: 'Avery put their phone away. What started as a quick chat turned into a discussion about food.', illustration: 'conversation', effects: [
+  expect(after.pending).toEqual({ kind: 'result', id: 'action_67', title: 'Time together', body: 'Avery put their phone away. What started as a quick chat turned into a discussion about food.', illustration: 'conversation', participants: [{ personId:targetId, name:'Avery Ricci', role:'father' }], effects: [
     { id: 'bond', label: 'Relationship', value: '+' + draw.value + '%', tone: 'positive' },
     { id: 'happiness', label: 'Happiness', value: '+0%', tone: 'neutral' },
   ] });

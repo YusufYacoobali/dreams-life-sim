@@ -418,11 +418,17 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if(travel.success)resolveTravel(world,travel.data);
     else if(relocation.success)resolveRelocation(world,relocation.data);
     else throw new IneligibleAction('This action is not available');
-    // This branch starts with no pending scene, so a direct action-created
-    // decision is new. Never relabel an old bound decision/result on resume.
+    // This branch starts with no pending scene. Labels come from the new
+    // decision or explicit command targets, never from parsing saved prose.
     const created = world.pending as World['pending']; // Commands above may create a scene.
-    if (created?.kind === 'decision' && !created.participants) {
-      const participants = storyParticipants(world,created.personIds);
+    if (created && !created.participants) {
+      const targetIds = created.kind === 'decision' ? created.personIds : [
+        ...('personId' in command ? [command.personId] : []),
+        ...('childId' in command ? [command.childId] : []),
+        ...('reviewedPayerId' in command ? [command.reviewedPayerId] : []),
+        ...('ownerId' in command ? [command.ownerId] : []),
+      ];
+      const participants = storyParticipants(world,targetIds.filter((id): id is string => typeof id === 'string'));
       if (participants.length) created.participants = participants;
     }
   }

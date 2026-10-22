@@ -65,6 +65,28 @@ test('family labels use actual saved direction, adoption and guardianship; liter
   relation.parentType = 'guardian'; expect(storyParticipants(world,[childId])[0].role).toBe('child in your care');
 });
 
+test('an immediate targeted action freezes its actual contact role without rewriting result copy or randomness',()=>{
+  const initial = pupil('US',7), parentId = initial.relationships.find(row=>row.to===initial.activePersonId&&row.roles.includes('parent'))!.from;
+  const expected = storyParticipants(initial,[parentId]), before = encodeWorld(initial);
+  const result = resolveCommand(initial,{type:'interact',personId:parentId,action:'compliment'});
+  expect(result.pending).toMatchObject({kind:'result',participants:expected});
+  expect(result.pending!.body).toContain(initial.people[parentId].firstName);
+  expect(unpackCheckpoint(packCheckpoint(result)).pending).toEqual(result.pending);
+  expect(encodeWorld(initial)).toBe(before);
+  const acknowledged = resolveCommand(result,{type:'acknowledge',resultId:result.pending!.id});
+  expect(acknowledged.people).toEqual(result.people);expect(acknowledged.random).toEqual(result.random);
+});
+
+test('manual introduction decisions label all their new contacts and preserve them in the chosen result',()=>{
+  const initial = pupil('US',7), offered = resolveCommand(initial,{type:'meet-people',purpose:'friend',gender:'any'});
+  if(offered.pending?.kind!=='decision')throw new Error('Expected a new introduction');
+  expect(offered.pending.participants).toHaveLength(3);
+  expect(offered.pending.participants!.every(row=>row.role==='new acquaintance')).toBe(true);
+  const result = resolveCommand(offered,{type:'choose',eventId:offered.pending.id,choiceId:offered.pending.choices[0].id});
+  expect(result.pending?.participants).toEqual(offered.pending.participants);
+  expect(result.random).toEqual(offered.random);
+});
+
 test('participant metadata is optional for old saves and bounded for new scenes',()=>{
   const { event } = project(), old = structuredClone(event); delete old.participants;
   expect(pendingSchema.parse(old)).not.toHaveProperty('participants');
