@@ -43,7 +43,10 @@
     "32-women-sizes-dark.png",
     "33-front-only-crewnecks.png",
     "34-infant-heads.png",
-    "35-infant-to-child.png"
+    "35-infant-to-child.png",
+    "36-infant-saved-face-shapes.png",
+    "37-child-head-position.png",
+    "38-child-necklines.png"
   ],
   "creationGrid": {
     "cells": 16,
@@ -54,8 +57,8 @@
       4
     ]
   },
-  "images": 1184,
-  "svgImages": 375,
+  "images": 1296,
+  "svgImages": 407,
   "allDecoded": true,
   "uniqueSvgClipIds": true,
   "allSvgClipReferencesResolve": true,

@@ -17,6 +17,10 @@ for(let identity=0;identity<16;identity++)for(let face=0;face<4;face++)for(let s
   const valid=age<3 ? layers.length===1&&layers[0].asset===`head-${identity}-0-${skin}`
     : layers.length>=3&&layers.length<=5&&layers.some(layer=>layer.asset===`clothing-${outfit}`);
   if(!valid)failures.push('Incomplete age-specific portrait plan');
+  if(age<3){
+    const crop=layers[0].crop;
+    if(!crop||Math.abs(-crop.left/(crop.width/1088)-manifest.defaults.face[identity]*272)>1e-6)failures.push('Infant must use its original illustrated contour');
+  }
   let decoded=0;const textures=new Set();
   for(const layer of layers){
     const asset=manifest.layers[layer.asset];
@@ -39,7 +43,7 @@ function walk(directory){for(const item of fs.readdirSync(directory,{withFileTyp
 }}}
 walk(path.join(root,'app'));walk(path.join(root,'src/ui'));
 if(failures.length||missingPersonIds.length)throw new Error(JSON.stringify({failures,missingPersonIds}));
-const result={combinations:count,completeLocalAssets:true,cropsWithinActualSourceDimensions:true,minImageLayers:minLayers,maxImageLayers:maxLayers,infantHeadOnlyPlansVerified:infants,
+const result={combinations:count,completeLocalAssets:true,cropsWithinActualSourceDimensions:true,minImageLayers:minLayers,maxImageLayers:maxLayers,infantHeadOnlyPlansVerified:infants,infantAuthoredContoursVerified:true,
   jsPlanElapsedMs:Number(elapsedMs.toFixed(2)),jsPlanMicrosecondsPerPortrait:Number((elapsedMs*1000/count).toFixed(2)),
   maxTheoreticalDecodedBytesPerPortrait:maxDecoded,adultSixteenPresetGridUniqueTextures:grid.size,adultSixteenPresetGridDecodedBytes:gridDecodedBytes,
   personPortraitConsumers,missingPersonIds,scope:'Node layer-plan and static-image budget checks, not native GPU/frame-time measurements'};

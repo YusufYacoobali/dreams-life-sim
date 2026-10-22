@@ -4,6 +4,7 @@ import { ageingHairColor, hairColors, portraitAgeStage } from '../../src/assets/
 import { avatarPresets } from '../../src/ui/CreationElements';
 import { fitPortraitHair } from '../../src/assets/portraitFitting';
 import approvedMen from '../../tools/fixtures/avatar-v2-approved-men.json';
+import { naturalFaces } from '../../src/assets/portraitFit';
 
 const ages = [0, 7, 16, 25, 48, 68, 86, 100];
 
@@ -44,6 +45,34 @@ test('ages 0–2 show only their baby head and restore saved hair and clothing a
     expect(child.some(layer => layer.asset === 'clothing-14')).toBe(true);
     expect(child.some(layer => layer.asset.endsWith('-3-front'))).toBe(true);
     expect(appearance).toEqual(before);
+  }
+});
+
+test('every saved face shape uses the original baby illustration without changing the saved preference', () => {
+  for (const preset of avatarPresets) for (let skin = 0; skin < 6; skin++) {
+    const original = portraitLayers(portraitTraits({ ...preset,skin,face:naturalFaces[preset.identity!] },0));
+    for (const face of [0,1,2,3]) for (const age of [0,1,2]) {
+      const appearance = { ...preset,skin,face }, before = { ...appearance };
+      expect(portraitLayers(portraitTraits(appearance,age))).toEqual(original);
+      expect(portraitTraits(appearance,25).face).toBe(face);
+      expect(appearance).toEqual(before);
+    }
+  }
+});
+
+test('children have a lower head position while the hair stays attached and face proportions stay unchanged', () => {
+  for (const preset of avatarPresets) {
+    const adultHead = portraitLayers(portraitTraits(preset,25)).find(layer => layer.asset.startsWith('head-'))!;
+    for (const age of [3,7,11]) {
+      const layers = portraitLayers(portraitTraits(preset,age));
+      const head = layers.find(layer => layer.asset.startsWith('head-'))!;
+      const hair = layers.find(layer => layer.asset.endsWith('-front'))!;
+      expect(head.top).toBeGreaterThan(adultHead.top);
+      expect(head.crop).toEqual(adultHead.crop);
+      const fit = fitPortraitHair(preset.identity!,preset.identity!,1,preset.face);
+      const scale = head.crop!.height/248;
+      expect(hair.top-fit.top*scale).toBeCloseTo(head.top-44*scale);
+    }
   }
 });
 

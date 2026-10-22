@@ -35,7 +35,10 @@
     "women-sizes-dark",
     "crewnecks",
     "infants",
-    "infant-transition"
+    "infant-transition",
+    "infant-saved-faces",
+    "child-head-fits",
+    "child-clothing"
   ],
-  "uniqueAssets": 195
+  "uniqueAssets": 201
 }

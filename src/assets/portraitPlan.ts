@@ -3,6 +3,7 @@ import { facialIdentity } from '../game/appearance';
 import { portraitImages, type PortraitAsset } from './portraitImages';
 import { portraitAgeStage, type PortraitAgeStage } from './portraitLayout';
 import { fitPortraitHair } from './portraitFitting';
+import { naturalFaces } from './portraitFit';
 
 export const portraitCanvasSize = 320;
 export const identityHair = [3,4,3,2,4,2,4,3,4,1,5,4,3,5,3,4] as const;
@@ -31,19 +32,23 @@ export function portraitTraits(appearance: Person['appearance'], age: number, pe
 export function portraitLayers({ identity, face, skin, hair, stage, hairColor, grey, clothing }: PortraitTraits): PortraitLayer[] {
   if (stage === 0) {
     // Infant portraits use the existing baby illustration alone, centred and
-    // enlarged for small profile circles. Keep saved clothes/hair for age 3+.
+    // enlarged for small profile circles. Adult jaw deformations do not fit
+    // baby anatomy; use the authored contour without changing the saved face.
+    // Keep saved clothes/hair for age 3+.
     const scale = 1.35;
     return [{ asset:`head-${identity}-0-${skin}` as PortraitAsset,
       left:(320-272*scale)/2, top:0,
       width:272*scale, height:248*scale,
-      crop:{ left:-face*272*scale, top:0, width:1088*scale, height:248*scale } }];
+      crop:{ left:-naturalFaces[identity]*272*scale, top:0, width:1088*scale, height:248*scale } }];
   }
   const layers: PortraitLayer[] = [];
   const add = (asset: PortraitAsset, opacity = 1, scale = 1, left = 0, top = 0) => {
     if (asset in portraitImages) layers.push({ asset, opacity, width: 320*scale, height: 320*scale, left, top });
   };
   const wig = hair === identityHair[identity] ? identity : 15+hair;
-  const headScale = .8, headLeft = 32, headTop = 10;
+  // Young children have shorter exposed necks. Move the whole head/hair rig
+  // towards the shoulders, preserving both facial and hairstyle proportions.
+  const headScale = .8, headLeft = 32, headTop = stage === 1 ? 34 : 10;
   const bodyScale = [0.78,0.88,0.96,1,1,1,1,1][stage];
   // Reuse the illustrated neck/chest under each actual garment opening. The
   // clip prevents skin peeking above shoulders or leaving holes inside a V-neck.
