@@ -14,7 +14,7 @@ The user asked to continue without the blocked release prerequisites. Runtime `8
 - Pending choice eligibility is reused during busy/error-only renders, and refreshed for a changed World or scene. Event presentations stay fresh, preserving queued-input guards. The existing genuine held-save failure/retry/raw-backup/closed-file-cold case passes.
 - Help correctly explains normal automatic year continuation, explicit planning pauses, and first-month campus introductions/clubs.
 
-Focused checks: Page2cases/4.313s; existing pending save case1pass/3unrelated skips/1.893s; existing Stats+Extras journeys2passes/2unrelated skips/24.491s; buttons4passes/7unrelated skips/1.041s. Final combined strict app/all-test types actually close0 (9435; `/tmp/dreams-navigation-buttons-final-types.exit`). No local full regression or old cohort was rerun. The final source's automatic CI is authoritative; the earlier fe97152 automatic run is superseded by the final local-button fix.
+Focused checks: Page2cases/4.313s; existing pending save case1pass/3unrelated skips/1.893s; existing Stats+Extras journeys2passes/2unrelated skips/24.491s; buttons4passes/7unrelated skips/1.041s. Final combined strict app/all-test types actually close0 (9435; `/tmp/dreams-navigation-buttons-final-types.exit`). No local full regression or old cohort was rerun. Final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) is pending/running and is authoritative for runtime80a10b5. The earlierfe97152 automatic run is superseded by the final local-button fix; no full pass is claimed for this new source yet.
 
 Current UI has no new native visual acceptance. An attempted emulator launch stopped at its disk-space guard before boot; no blocked dependency download/build was retried. The diagnostic Metro40460 startup also encountered a missing temporary file-map cache; Ctrl+C was sent, but its shutdown is not certified. Do not edit its frozen native tree or assume an available8081server. Existing native tree is `review/navigation-feedback-fe97152`; future native work needs a fresh temporary cache and confirmed process ownership. Original saved API24AVD data stays under `/workspace/.cache/android-native-check/avd`; earlier `/tmp` captures/exports are no longer present after reconnect. Keep historical accepted observations distinct from currently available artifacts.
 
@@ -40,7 +40,7 @@ The clean standalone candidate and guarded unrun wrapper now matchb75, branch`re
 
 All confirmed approved-feature audit gaps are implemented: four business categories and functional Other selection, Products & Services, name/logo Settings, final/archived Statistics and campus social life. No further ordinary-life/family/travel/leisure gap was found. Current markers are World41/engine42/content17/reader21/v4;274situations/822choices. User requests actual missing-feature work and proportionate checks: no filler mechanics, unchanged cohorts or repeated regressions. The single b75 gate is complete and passing. Remaining finish-line work needs the blocked dependencies/devices/distribution setup; no extra regression or unchanged cohort is needed.
 
-Latest successful source push isb75 about22:53UTC on21October; next source checkpoint is due by00:53activeUTC on22October. Documentation-only followups do not cancel its automatic gate.
+That prior campus source push wasb75 on21October. Current source checkpoint isa022467 on22October; keep the at-most-two-active-hour push cadence from the latest checkpoint. Documentation-only followups do not cancel its automatic gate.
 
 ## User direction and working order
 
@@ -50,7 +50,7 @@ Finish the complete production game autonomously. The latest priority is:
 2. Remaining distinct content, balance and complete gameplay journeys.
 3. Final standalone builds and device acceptance, with useful device/build checks continuing alongside product work.
 
-Use independent agents in separate worktrees, with root integrating, testing and committing. Do not wait for one plan phase to end before starting independent later work. **Commit AND push safe checkpoints at least every two active hours.** Latest successful source push isb75e617 atabout22:53UTC on21October; next source push is due by00:53 activeUTC on22October. The final combined gate has passed; do not launch extra audits or runners merely because author slots are free.
+Use independent agents in separate worktrees, with root integrating, testing and committing. Do not wait for one plan phase to end before starting independent later work. **Commit AND push safe checkpoints at least every two active hours.** Latest source checkpoint isa022467 on22October; commit/push again within two active hours if work continues. Its final combined gate is pending/running; the preceding b75gate passed; do not launch extra audits or runners merely because author slots are free.
 
 Preserve automatic saving and exact resume. Extra import/export/sharing, file tools, Time Machine breadth and history-storage optimisation are parked; existing complete features and original data remain. Keep verification proportionate: focused meaningful checks per change, one combined type/regression gate, no repeated unchanged cohorts or proof packs. A final answer stops active coding; do not imply background continuation.
 
