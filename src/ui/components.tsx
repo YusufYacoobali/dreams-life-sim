@@ -12,15 +12,19 @@ import { useFeedback } from './feedback';
 
 export function Page({ children, scroll = true, bottomSafeArea = false, footer }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode }>) {
   const c = useColors();
-  const content = <>
-    {scroll ? <ScrollView style={footer ? { flex: 1 } : undefined} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{children}</ScrollView>
-      : <View style={[styles.content, footer ? { flex: 1 } : undefined]}>{children}</View>}
-    {footer && <View style={[styles.footer, { backgroundColor: c.background, borderTopColor: c.line }]}>{footer}</View>}
-  </>;
+  // Inspect only the direct first child; leave nested lists and their keys intact.
+  const first = Array.isArray(children) ? children[0] : children;
+  const header = React.isValidElement(first) && first.type === Header ? first : null;
+  const body = header ? Array.isArray(children) ? children.slice(1) : null : children;
   return (
     <SafeAreaView edges={bottomSafeArea ? ['top', 'bottom'] : ['top']} style={[styles.page, { backgroundColor: c.background }]}>
       <ThemedStatusBar />
-      {footer ? <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>{content}</KeyboardAvoidingView> : content}
+      {header && <View style={[styles.pageHeader, { backgroundColor: c.background }]}>{header}</View>}
+      <KeyboardAvoidingView style={styles.pageBody} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        {scroll ? <ScrollView style={styles.pageBody} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{body}</ScrollView>
+          : <View style={[styles.content, footer ? styles.pageBody : undefined]}>{body}</View>}
+        {footer && <View style={[styles.footer, { backgroundColor: c.background, borderTopColor: c.line }]}>{footer}</View>}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -145,6 +149,8 @@ export const Portrait = CharacterPortrait;
 
 const styles = StyleSheet.create({
   page: { flex: 1 },
+  pageHeader: { paddingHorizontal: spacing.lg, paddingBottom: spacing.lg },
+  pageBody: { flex: 1 },
   content: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xl, gap: spacing.lg },
   footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md, gap: spacing.sm, borderTopWidth: StyleSheet.hairlineWidth },
   card: { borderRadius: radii.card, padding: spacing.lg, gap: spacing.md },
