@@ -16,6 +16,7 @@ const assign = (section: FinanceSection, categories: string[]) => categories.for
 assign('income', ['income', 'background-income', 'rent', 'dividend', 'creator-income', 'sponsorship', 'media-income', 'clinic-income', 'business-owner-income', 'career-royalties', 'creator-contract-income', 'royal-allowance', 'prison-pay']);
 assign('expenses', ['living', 'background-living', 'npc-budget', 'tuition', 'maintenance', 'upkeep', 'insurance', 'sale-fee', 'loan-fee', 'skill-training', 'creator-agency', 'creator-contract-fee', 'adoption', 'prenatal-care', 'healthcare', 'exercise', 'lifestyle', 'hobby-event', 'legal-fee', 'court-fine', 'bribery-loss', 'group-fee', 'illicit-purchase', 'crime-loss', 'entertainment', 'hobby', 'music-production', 'pet-adoption', 'pet-vet', 'pet-care', 'campaign-spend', 'community-meeting', 'social', 'dating', 'wedding', 'npc-wedding', 'relocation-application', 'relocation-transport', 'royal-reception', 'royal-occasion', 'content-production', 'collaboration-production', 'public-event', 'charity', 'story-outing', 'pension-exchange-fee', 'travel']);
 assign('taxes', ['tax', 'tax-refund', 'estate-tax']);
+assign('expenses',['housing-rent']);
 assign('borrowing', ['borrowing', 'repayment', 'interest', 'fine-reversal']);
 assign('investments', ['investment', 'investment-sale']);
 assign('assets', ['purchase', 'asset-sale']);
@@ -28,7 +29,7 @@ assign('testing', ['god-mode-adjustment']);
 const labels: Record<string, string> = {
   'god-mode-adjustment': 'God Mode testing adjustment',
   income: 'Employment pay / pensions', 'background-income': 'Recorded background pay / pensions',
-  rent: 'Rental receipts', dividend: 'Investment dividends', 'business-owner-income': 'Company profit payouts received',
+  rent: 'Rental receipts', 'housing-rent':'Home rent paid', dividend: 'Investment dividends', 'business-owner-income': 'Company profit payouts received',
   borrowing: 'Loan proceeds', repayment: 'Debt repayments', interest: 'Interest added to debt',
   'tax-refund': 'Income tax refunds', tax: 'Income tax paid / withheld', 'estate-tax': 'Estate tax',
   investment: 'Investment purchases', 'investment-sale': 'Investment sale proceeds', purchase: 'Owned goods purchases',

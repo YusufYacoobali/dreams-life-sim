@@ -14,10 +14,16 @@ import { accountFor, active, availableCash, bounded, charge, draw, fact, post, r
 import { fxMoney } from './markets';
 import { offerPending } from '../pendingQueue';
 import { isConfined } from './legalSchemas';
+import { assetPrice } from './assetPricing';
+export { assetPrice } from './assetPricing';
+import { rentalResidence } from './rentalSchemas';
+import { leaveHomeLease, signHomeLease } from './rentalHomes';
 
 export type OwnedAsset = World['assets'][number];
 const termSchema = z.union([z.literal(120), z.literal(240), z.literal(360)]);
 export const assetCommandSchema = z.discriminatedUnion('type', [
+  z.object({ type:z.literal('sign-home-lease'),catalogId:z.string(),quotedRent:z.bigint().positive() }),
+  z.object({ type:z.literal('end-home-lease'),leaseId:z.string() }),
   z.object({ type: z.literal('buy-asset'), catalogId: z.string(), financing: z.enum(['cash', 'mortgage']), depositBps: z.number().int().min(2000).max(10000), termMonths: termSchema, quotedPrice: z.bigint().positive() }),
   z.object({ type: z.literal('sell-asset'), assetId: z.string(), quotedPrice: z.bigint().nonnegative() }),
   z.object({ type: z.literal('list-property'), assetId: z.string(), askingPrice: z.bigint().positive() }),
@@ -33,10 +39,6 @@ export type AssetCommand = z.infer<typeof assetCommandSchema>;
 export const absoluteMonth = (world: World) => world.date.year * 12 + world.date.month - 1;
 export const mortgageInterestBps = (world: World) => 450 + Math.floor(rules[active(world).country].personalInterestBps / 10);
 export const refinanceFee = (principal: bigint) => roundRatio(principal * 100n, 10000n);
-export function assetPrice(world: World, offer: AssetOffer): bigint {
-  const base = rules[active(world).country].baseWage * BigInt(offer.priceBps);
-  return roundRatio(base * BigInt(offer.kind === 'property' ? world.market.propertyIndex : 10000), 100000000n);
-}
 export function mortgagePayment(principal: bigint, annualBps: number, months: number): bigint {
   if (principal <= 0n || !Number.isInteger(months) || months < 1 || months > 600 || annualBps < 0) throw new Error('Invalid mortgage terms');
   if (annualBps === 0) return (principal + BigInt(months - 1)) / BigInt(months);
@@ -112,13 +114,15 @@ export const monthlyInsurance = (asset: OwnedAsset) => roundRatio(asset.value * 
 export const monthlyRent = (asset: OwnedAsset) => roundRatio(asset.value * 600n, 120000n);
 export function resolveAssets(world: World, command: AssetCommand, presentPurchase = true) {
   const person = active(world);
+  if(command.type==='sign-home-lease') {signHomeLease(world,command.catalogId,command.quotedRent);return;}
+  if(command.type==='end-home-lease') {leaveHomeLease(world,command.leaseId);return;}
   if (command.type === 'buy-asset') {
     const offer = assetCatalog.find(candidate => candidate.id === command.catalogId);
     if (!offer) throw new IneligibleAction('This offer is unavailable');
     const quote = purchaseQuote(world, offer, command.financing, command.depositBps, command.termMonths);
     if (quote.price !== command.quotedPrice) throw new IneligibleAction('The price changed. Review the offer again');
     const reason = purchaseReason(world, offer, command.financing, command.depositBps, command.termMonths); if (reason) throw new IneligibleAction(reason);
-    const asset: OwnedAsset = { id: 'asset_' + world.revision, ownerId: person.id, catalogId: offer.id, kind: offer.kind, name: offer.name, country: person.country, city: person.city, currency: accountFor(world).currency, pricePaid: quote.price, costBasis: quote.price + quote.fee, value: quote.price, condition: offer.condition, ageMonths: 0, acquired: { ...world.date }, mortgageId: null, primaryHome: offer.kind === 'property' && !world.assets.some(item => item.ownerId === person.id && item.primaryHome), rental: 'none', rentPerMonth: 0n, upkeepBps: offer.upkeepBps, insured: false, listing: null, provenance: ['Purchased by ' + fullName(person) + ' in ' + world.date.year], ownershipSource: 'purchase', titleSince: { ...world.date } };
+    const asset: OwnedAsset = { id: 'asset_' + world.revision, ownerId: person.id, catalogId: offer.id, kind: offer.kind, name: offer.name, country: person.country, city: person.city, currency: accountFor(world).currency, pricePaid: quote.price, costBasis: quote.price + quote.fee, value: quote.price, condition: offer.condition, ageMonths: 0, acquired: { ...world.date }, mortgageId: null, primaryHome: offer.kind === 'property' && !rentalResidence(world,person) && !world.assets.some(item => item.ownerId === person.id && item.primaryHome), rental: 'none', rentPerMonth: 0n, upkeepBps: offer.upkeepBps, insured: false, listing: null, provenance: ['Purchased by ' + fullName(person) + ' in ' + world.date.year], ownershipSource: 'purchase', titleSince: { ...world.date } };
     world.assets.push(asset);
     if (asset.primaryHome) { const household = world.households.find(item => item.id === person.householdId); if (household) household.homeAssetId = asset.id; }
     if (quote.principal) makeMortgage(world, asset, quote.principal, quote.interestBps, quote.termMonths);

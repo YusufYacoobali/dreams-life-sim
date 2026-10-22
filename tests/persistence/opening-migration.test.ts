@@ -44,13 +44,13 @@ async function fixtureDatabase(includeAU = false) {
   return { get sqlite() { return sqlite; }, get driver() { return driver; }, current, expected, rows, reopen: () => { sqlite.close(); driver = connect(); return new SaveRepository(driver); }, close: () => { sqlite.close(); rmSync(directory, { recursive: true, force: true }); } };
 }
 
-test('reader13→21 changes metadata only; genuine World33 courtships and old bound hiring results survive closed-connection loading and durable acknowledgement', async () => {
+test('reader13→22 changes metadata only; genuine World33 courtships and old bound hiring results survive closed-connection loading and durable acknowledgement', async () => {
   const context = await fixtureDatabase(true);
   try {
     const before = context.rows(); expect(Object.keys(before)).toHaveLength(8); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13);
     for (const table of Object.keys(before)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) context.sqlite.exec('CREATE TRIGGER deny_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'unexpected row write'); END");
-    const repository = new SaveRepository(context.driver); await repository.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(context.rows()).toEqual(before);
-    const loaded = await repository.active(); expect(encodeWorld(loaded!)).toBe(encodeWorld(context.current)); expect(loaded).toMatchObject({ schemaVersion: 41, engineVersion: 43, contentVersion: 20, pending: { kind: 'result' } });
+    const repository = new SaveRepository(context.driver); await repository.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before);
+    const loaded = await repository.active(); expect(encodeWorld(loaded!)).toBe(encodeWorld(context.current)); expect(loaded).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21, pending: { kind: 'result' } });
     const auId = [...context.expected.keys()].find(id => id.startsWith('life_professional_'))!, projectedAU = await repository.previewLife(auId);
     expect(encodeWorld(projectedAU)).toBe(encodeWorld(context.expected.get(auId)!)); expect(projectedAU.npcCourtships).toHaveLength(13); expect(unpackCheckpoint(packCheckpoint(projectedAU), true)).toEqual(projectedAU);
     expect(context.rows()).toEqual(before); expect(context.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(auId)?.payload).toBe(au.checkpoint);
@@ -68,15 +68,15 @@ test('reader13→21 changes metadata only; genuine World33 courtships and old bo
 test('a failed reader metadata transaction leaves the actual supported13 marker and all original rows intact before retry', async () => {
   const context = await fixtureDatabase();
   try {
-    const before = context.rows(), driver = context.driver, failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 21') throw new Error('metadata failure'); } })) };
+    const before = context.rows(), driver = context.driver, failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 22') throw new Error('metadata failure'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('metadata failure'); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(13); expect(context.rows()).toEqual(before);
-    const repository = context.reopen(); await repository.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(context.rows()).toEqual(before);
+    const repository = context.reopen(); await repository.initialise(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });
 
-test('future reader22 is refused before any mutation of a real retained life database', async () => {
+test('future reader23 is refused before any mutation of a real retained life database', async () => {
   const context = await fixtureDatabase();
   try {
-    context.sqlite.exec('PRAGMA user_version=22'); const before = context.rows(); await expect(new SaveRepository(context.driver).initialise()).rejects.toThrow('newer version'); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before);
+    context.sqlite.exec('PRAGMA user_version=23'); const before = context.rows(); await expect(new SaveRepository(context.driver).initialise()).rejects.toThrow('newer version'); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(23); expect(context.rows()).toEqual(before);
   } finally { context.close(); }
 });

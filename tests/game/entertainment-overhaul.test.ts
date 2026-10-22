@@ -179,10 +179,10 @@ test('a declared current-schema content-17 envelope migrates only its version ta
   // The underlying pending decision is a genuine historical fixture. Only its
   // root version tags are arranged here to isolate the new 17-to-18 migration.
   const current = unpackCheckpoint(nativeChoice.checkpoint);
-  const prior = { ...JSON.parse(encodeWorld(current)), engineVersion: 42, contentVersion: 17 };
+  const prior = { ...JSON.parse(encodeWorld(current)), schemaVersion: 41, engineVersion: 42, contentVersion: 17 };
   const migrated = decodeWorld(JSON.stringify(prior));
-  expect(migrated.contentVersion).toBe(20);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, engineVersion: 43, contentVersion: 20 });
+  expect(migrated.contentVersion).toBe(21);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, schemaVersion: 42, engineVersion: 44, contentVersion: 21, rentalLeases: [] });
   expect(migrated.pending).toEqual(current.pending); expect(migrated.random).toEqual(current.random);
   expect(migrated.journal).toEqual(current.journal); expect(migrated.ledger).toEqual(current.ledger);
 });

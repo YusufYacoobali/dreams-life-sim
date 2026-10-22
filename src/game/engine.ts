@@ -32,6 +32,7 @@ import { assetCommandSchema, AssetCommand, assetsMonth, completeAssetSale, owned
 import { marketCommandSchema, MarketCommand, marketMonth, resolveMarket } from './systems/markets';
 import { connectPerson, recordFamilyDeath, refreshFriendship, relationshipsYear, resolveSocial, socialCommandSchema, SocialCommand } from './systems/relationships';
 import { financialActors } from './systems/households';
+import { refreshRentalLeases } from './systems/rentalSchemas';
 import { householdMonth, npcDiscretionaryMonth, npcYearDecisions, settleBackground } from './systems/npcBudget';
 import { npcRelationshipsYear } from './systems/npcRelationships';
 import { npcCourtshipsYear } from './systems/npcCourtships';
@@ -93,6 +94,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  refreshRentalLeases(world);
   endStudyCourse(world, person, 'died');
   refreshUniversityApplications(world);
   refreshScholarships(world);
@@ -445,5 +447,6 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshTeenRelationships(world);
   refreshBestFriendships(world);
   world.revision++;
+  refreshRentalLeases(world);
   return validateWorld(world, immutable);
 }

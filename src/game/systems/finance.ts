@@ -8,6 +8,7 @@ import { Currency, formatMoney, roundRatio } from '../money';
 import { accountFor, active, borrow, charge, fact, post, result, trustForNecessaryCost } from './common';
 import { fxMoney } from './markets';
 import { householdLivingCost } from './households';
+import { rentalHomeMonth } from './rentalHomes';
 const currencySchema = z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']);
 
 export const financeCommandSchema = z.discriminatedUnion('type', [
@@ -58,6 +59,7 @@ export function financeMonth(world: World, person = active(world)) {
     const interest = roundRatio(debt.principal * BigInt(debt.interestBps), 120000n);
     if (interest) { debt.principal += interest; post(world, 0n, interest, 'interest', 'Interest added to ' + debt.kind + ' debt', debt.id, person, debt.currency); }
   }
+  rentalHomeMonth(world, person);
   if (ageOn(person, world.date) >= rule.adultAge) charge(world, householdLivingCost(world, person), 'living', 'Monthly household living costs', 'living', undefined, person);
 }
 export function settleTax(world: World, person = active(world)) {

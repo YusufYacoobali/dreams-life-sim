@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
 import { router } from 'expo-router';
+import { rentalResidence } from '../../src/game/systems/rentalSchemas';
+import { CatalogArt } from '../../src/assets/CatalogArt';
 import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName } from '../../src/game/model';
 import { householdLivingCost } from '../../src/game/systems/households';
@@ -23,7 +25,8 @@ function HouseholdDetails() {
   const world = useGame(s => s.world)!, dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
   const player = world.people[world.activePersonId], household = world.households.find(item => item.id === player.householdId);
   const members = household?.members.map(id => world.people[id]).filter(person => !person.died) ?? [player];
-  const cost = householdLivingCost(world, player);
+  const lease = rentalResidence(world), rent = lease?.tenantId === player.id ? lease.monthlyRent : 0n;
+  const cost = householdLivingCost(world, player) + rent;
   const identity = JSON.stringify([world.id, player.id, player.country, player.city, player.died, player.householdId, members.map(person => person.id)]);
   const identityRef = useRef(identity), mounted = useRef(true), submitting = useRef(false), reviewRef = useRef<Review | null>(null);
   identityRef.current = identity;
@@ -31,7 +34,7 @@ function HouseholdDetails() {
   const [review, setReview] = useState<Review | null>(null), current = review?.identity === identity && reviewRef.current === review ? review : null;
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; reviewRef.current = null; }; }, []);
   useEffect(() => { setReview(saved => saved && saved.identity !== identity ? null : saved); }, [identity]);
-  const reason = ageOn(player, world.date) < rules[player.country].adultAge ? 'Independent housing is available from age ' + rules[player.country].adultAge + '.' : members.length < 2 ? 'You already live in an independent household.' : undefined;
+  const reason = lease?.tenantId === player.id ? 'Manage your rental to end your lease before moving out.' : ageOn(player, world.date) < rules[player.country].adultAge ? 'Independent housing is available from age ' + rules[player.country].adultAge + '.' : members.length < 2 ? 'You already live in an independent household.' : undefined;
   const open = () => {
     if (!mounted.current || busy || submitting.current || reason || identityRef.current !== identity) return;
     const next: Review = { identity, event: { id: 'move-out:' + identity, kind: 'confirmation', title: 'Move into your own household?', body: 'You will cover an independent household budget from this month onward. Existing property and accounts remain in their owners’ names.', terms: [{ id: 'budget', label: 'Base monthly living cost', value: formatMoney({ minor: rules[player.country].livingCost, currency: accountFor(world).currency }), tone: 'neutral' }], confirmLabel: 'Move Out' } };
@@ -45,10 +48,11 @@ function HouseholdDetails() {
   return <Page><Header title="My Household" backDisabled={!!current && busy} onBack={() => { if (!submitting.current) router.back(); }} />
     <Card><Heading>{household?.name ?? 'Independent household'}</Heading><Body muted>{player.city}, {countries[player.country].name}</Body>
       <Heading size={17}>Your Monthly Share</Heading><Heading size={27}>{formatMoney({ minor: cost, currency: accountFor(world).currency })}</Heading>
-      <Body muted>Adults share the household budget. Children add to the costs adults cover. A primary home reduces this budget; upkeep and mortgage payments are separate owner expenses.</Body>
+      <Body muted>Adults share the household bills. Your total includes rent if you hold the lease. Homeowners pay upkeep and mortgages separately.</Body>
     </Card>
+    {lease && <Card><Heading size={19}>Rented Residence</Heading><ActionRow title={lease.name} subtitle={'Leaseholder: ' + fullName(world.people[lease.tenantId])} value={formatMoney({minor:lease.monthlyRent,currency:lease.currency}) + ' / month'} icon={<CatalogArt id={lease.catalogId} size={56} />} onPress={() => router.push({pathname:'/rental/[id]',params:{id:lease.catalogId}})} /></Card>}
     <Card><Heading size={19}>Household Members</Heading>{members.map(person => <ActionRow key={person.id} title={fullName(person)} subtitle={(person.id === player.id ? 'You · ' : '') + 'Age ' + ageOn(person, world.date)} icon={<Portrait decorative name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={40} />} onPress={() => { if (person.id === player.id) router.push('/profile'); else router.push({ pathname: '/person/[id]', params: { id: person.id } }); }} />)}</Card>
-    <Card><Heading size={19}>Your Next Home</Heading>{reason ? <Body muted>{reason}</Body> : <Body muted>Review the independent household budget before moving. Your family relationships, property and accounts remain recorded.</Body>}
+    <Card><Heading size={19}>Your Next Home</Heading><ActionRow title="Rent a Home" subtitle="Browse homes with monthly leases" onPress={() => router.push('/rentals')} />{reason ? <Body muted>{reason}</Body> : <Body muted>Review the independent household budget before moving. Your family relationships, property and accounts remain recorded.</Body>}
       {error && !current && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{error}</Text>}
       <Button label="Move Out" tone="secondary" disabled={busy || !!reason} onPress={open} />
     </Card>

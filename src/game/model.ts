@@ -76,6 +76,8 @@ import { validateNpcCourtships } from './systems/npcCourtshipValidation';
 import { npcSeparationSchema } from './systems/npcSeparationSchemas';
 import { validateNpcSeparations } from './systems/npcSeparationValidation';
 import { campusCommunitySchema } from './systems/campusSchemas';
+import { rentalLeaseSchema } from './systems/rentalSchemas';
+import { validateRentalLeases } from './systems/rentalValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -108,7 +110,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(41), engineVersion: z.literal(43), contentVersion: z.literal(20),
+  schemaVersion: z.literal(42), engineVersion: z.literal(44), contentVersion: z.literal(21),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -123,6 +125,7 @@ export const worldSchema = z.object({
   accounts: z.array(z.object({ id: z.string(), ownerId: personId, currency: z.enum(['USD', 'CAD', 'GBP', 'AUD', 'EUR', 'BRL', 'INR', 'JPY', 'ZAR']), cash: z.bigint(), openingCash: z.bigint().nonnegative(), lockedCash: z.bigint().nonnegative().default(0n) })),
   liabilities: z.array(liabilitySchema), ledger: z.array(transactionSchema),
   assets: z.array(physicalAssetSchema), holdings: z.array(holdingSchema), market: marketSchema,
+  rentalLeases: z.array(rentalLeaseSchema),
   workHistory: z.array(z.object({ id: z.string(), hourlyContractId: z.string().optional(), personId, roleId: z.string(), employer: z.string(), companyId: z.string().nullable().default(null), started: dateSchema, ended: dateSchema.nullable(), monthsWorked: z.number().int().nonnegative(), grossEarned: z.bigint().nonnegative(), ...workEarningsSchema.shape })),
   journal: z.array(journalSchema),
   birthAcknowledged: z.boolean(),
@@ -349,6 +352,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateStudyCourses(world, ledger);
   validateCampusCommunities(world, ledger);
   validatePets(world, ledger);
+  validateRentalLeases(world, ledger);
   validateLeisure(world, ledger);
   validateHobbyEvents(world, ledger);
   validateStoryThreads(world, ledger);
@@ -640,5 +644,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Versioned scene resolutions and optional athlete checks start prospectively.
   // Existing bound choices, career records and RNG are preserved verbatim.
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 19) { parsed.engineVersion = 43; parsed.contentVersion = 20; }
+  // Renting is prospective. Old ownership, balances, ledger, bound scenes and
+  // RNG remain exact; no lease or historical housing payment is invented.
+  if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 43 && parsed.contentVersion === 20) { parsed.schemaVersion = 42; parsed.engineVersion = 44; parsed.contentVersion = 21; parsed.rentalLeases = []; }
   return validateWorld(parsed, immutable);
 }

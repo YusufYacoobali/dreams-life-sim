@@ -23,7 +23,7 @@ const sourceRoot = require('node:path').resolve(__dirname, '../..') as string;
 test('actual saved birth leaves all creation actors, money and RNG intact and uses only normal birth acknowledgement', async () => {
   const result = await createEditorialLife(birth, 'US', 900), created = createLife('life_editorial_US_900', 900, result.input, result.date), world = result.world;
   expect(created.birthAcknowledged).toBe(false); expect(world.birthAcknowledged).toBe(true); expect(world.revision).toBe(1); expect(Object.isFrozen(world)).toBe(true);
-  expect(world).toMatchObject({ schemaVersion: 41, engineVersion: 43, contentVersion: 20 });
+  expect(world).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21 });
   for (const field of ['people', 'accounts', 'ledger', 'random', 'storyThreads'] as const) expect(world[field]).toEqual(created[field]);
 });
 

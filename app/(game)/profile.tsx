@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Redirect, router, type Href } from 'expo-router';
+import { rentalResidence } from '../../src/game/systems/rentalSchemas';
 import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName, type World } from '../../src/game/model';
 import { countries } from '../../src/game/countries';
@@ -62,7 +63,7 @@ export default function Profile() {
 }
 
 function ProfileDetails() {
-  const world = useGame(s => s.world)!, player = world.people[world.activePersonId];
+  const world = useGame(s => s.world)!, player = world.people[world.activePersonId], residence = rentalResidence(world);
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
   const [preferences, setPreferences] = useState(() => ({ attractedTo: [...player.attractedTo], wantsChildren: player.wantsChildren })), [attempted, setAttempted] = useState(false);
   const changed = preferences.wantsChildren !== player.wantsChildren || preferences.attractedTo.length !== player.attractedTo.length || preferences.attractedTo.some(gender => !player.attractedTo.includes(gender));
@@ -77,7 +78,7 @@ function ProfileDetails() {
       <ActionRow title="Education" value={educationLabel(world)} subtitle={education.stage !== 'none' ? education.school ?? undefined : qualification ? 'Latest qualification · ' + qualification.field : undefined} icon={<Illustration id="education" />} onPress={() => router.push(schoolRoute)} />
       <ActionRow title="Occupation" value={work.label} subtitle={player.employment?.employer} icon={<Illustration id="career" />} onPress={() => router.push(work.href)} />
       <ActionRow title="Net Worth" value={formatMoney(netWorth(world), countries[player.country].locale)} icon={<Illustration id="money" />} onPress={() => router.push('/assets')} />
-      <ActionRow title="Residence" value={player.city + ', ' + countries[player.country].name} icon={<Illustration id="property" />} onPress={() => router.push('/household')} />
+      <ActionRow title="Residence" value={residence ? residence.name + ' (rented)' : player.city + ', ' + countries[player.country].name} icon={<Illustration id="property" />} onPress={() => router.push('/household')} />
       <ActionRow title="Marital Status" value={maritalStatus} subtitle={partner ? fullName(otherPerson(world, partner)) : undefined} icon={<FamilyArt id="hearts" size={40} />} onPress={() => router.push(partner ? { pathname: '/person/[id]', params: { id: otherPerson(world, partner).id } } : '/relationships')} />
       <ActionRow title="Children" value={children.length ? String(children.length) : 'None'} subtitle={children.some(child => child.died) ? children.filter(child => !child.died).length + ' living' : undefined} icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} />
       <ActionRow title="Reputation" value={'Respect ' + player.stats.respect + '%'} subtitle={fameLevel(player.stats.fame) + ' · Public image ' + player.publicLife.image + '%'} icon={<FameBusinessArt id="fame" size={40} />} onPress={() => router.push('/fame')} />

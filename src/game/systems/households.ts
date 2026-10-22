@@ -3,6 +3,7 @@ import type { Person, World } from '../model';
 import { rules } from '../rules';
 import { roundRatio } from '../money';
 import { isConfined } from './legalSchemas';
+import { rentalResidence } from './rentalSchemas';
 
 export function moveHousehold(world: World, personIds: string[], targetId: string) {
   const target = world.households.find(household => household.id === targetId);
@@ -34,7 +35,7 @@ export function householdLivingCost(world: World, person: Person): bigint {
   let total = roundRatio(rule.livingCost * BigInt(weight), 10000n);
   const localHome = (asset: World['assets'][number]) => asset.country === person.country && asset.city === person.city && !!asset.ownerId && members.some(member => member.id === asset.ownerId);
   const home = world.assets.find(asset => asset.id === household.homeAssetId && localHome(asset)) ?? world.assets.find(asset => asset.primaryHome && localHome(asset));
-  if (home) total = roundRatio(total * 4500n, 10000n);
+  if (home || rentalResidence(world,person)) total = roundRatio(total * 4500n, 10000n);
   const count = BigInt(adults.length || 1); const index = adults.findIndex(member => member.id === person.id);
   return total / count + (BigInt(Math.max(index, 0)) < total % count ? 1n : 0n);
 }
@@ -58,6 +59,7 @@ export function financialActors(world: World): Person[] {
   for (const hobby of world.hobbies) for (const plan of hobby.plans.filter(item => item.status === 'active')) { ids.add(hobby.personId); ids.add(plan.payerId); }
   for (const pet of world.pets) if (pet.status === 'active') ids.add(pet.ownerId);
   for (const asset of world.assets) if (asset.ownerId) ids.add(asset.ownerId);
+  for (const lease of world.rentalLeases) if (!lease.ended) ids.add(lease.tenantId);
   for (const holding of world.holdings) if (holding.quantity > 0n) ids.add(holding.ownerId);
   for (const company of world.businesses.filter(item => item.status === 'active')) { if (company.ownerId) ids.add(company.ownerId); for (const member of company.staff.filter(item => !item.ended)) ids.add(member.personId); }
   for (const trip of world.trips.filter(item => item.status === 'active')) for (const id of trip.participantIds) ids.add(id);

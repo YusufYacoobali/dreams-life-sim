@@ -16,7 +16,7 @@ test('the exact pushed2f8ad13 Android92/93 checkpoints remain pinned and tag-onl
   const { gunzipSync, strFromU8 } = require('fflate') as typeof import('fflate');
   for (const payload of [pinned.interview, pinned.result]) {
     const frame = JSON.parse(payload), root = JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.main.data, 'base64')))); expect(root).toMatchObject({ schemaVersion: 30, engineVersion: 30, contentVersion: 7 });
-    const current = unpackCheckpoint(payload), encoded = JSON.parse(encodeWorld(current)); expect(current.engineVersion).toBe(43); expect(current.contentVersion).toBe(20);
+    const current = unpackCheckpoint(payload), encoded = JSON.parse(encodeWorld(current)); expect(current.engineVersion).toBe(44); expect(current.contentVersion).toBe(21);
     for (const key of Object.keys(root).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion', 'people', 'ledger'].includes(key))) expect(encoded[key]).toEqual(root[key]);
   }
   const before = unpackCheckpoint(pinned.interview), after = resolveCommand(before, { type: 'choose', eventId: before.pending!.id, choiceId: 'careful' }, true);
@@ -28,7 +28,7 @@ test('reader9→10 retains exact old current/backup bytes; the actual interview 
     const repo = new SaveRepository(driver); await repo.initialise(); const world = unpackCheckpoint(pinned.interview); await repo.create(world);
     for (const table of ['lives', 'backups']) sqlite.prepare('UPDATE '+table+' SET payload=?').run(pinned.interview); sqlite.exec('PRAGMA user_version=9');
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(r => [r.name, sqlite.prepare('SELECT * FROM '+r.name+' ORDER BY 1,2').all()])); const original = rows();
-    const upgraded = new SaveRepository(driver); await upgraded.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(rows()).toEqual(original);
+    const upgraded = new SaveRepository(driver); await upgraded.initialise(); expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(rows()).toEqual(original);
     const makeStore = async () => { const repository = new SaveRepository(driver), store = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); await store.getState().bootstrap(); return store; };
     let store = await makeStore(); expect(store.getState().world).toEqual(world); const command = { type: 'choose' as const, eventId: world.pending!.id, choiceId: 'careful' };
     sqlite.exec("CREATE TRIGGER fail_old_interview BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); expect(await store.getState().dispatch(command)).toBe(false); expect(rows()).toEqual(original); expect(store.getState().world).toEqual(world);

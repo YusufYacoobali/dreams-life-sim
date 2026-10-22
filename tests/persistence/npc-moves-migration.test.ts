@@ -28,17 +28,17 @@ function freshLife() {
  * Only root tags and absence of future npcMoves are arranged for World36 compatibility. */
 function arrangedWorld36() {
   const original = JSON.parse(encodeWorld(unpackCheckpoint(native.current.checkpoint, true)));
-  expect(original).toMatchObject({ schemaVersion: 41, engineVersion: 43, contentVersion: 20, npcMoves: [] });
+  expect(original).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21, npcMoves: [] });
   for (const key of histories) expect(original[key]).toEqual([]);
-  delete original.npcMoves; original.schemaVersion = 36; original.engineVersion = 37; original.contentVersion = 12;
+  delete original.rentalLeases; delete original.npcMoves; original.schemaVersion = 36; original.engineVersion = 37; original.contentVersion = 12;
   return original;
 }
 /** Remove only fields demonstrably absent from this immutable World35 input.
  * All nonempty friendship facts and all older source fields stay in the hash. */
 function originalNativeCanonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 41, engineVersion: 43, contentVersion: 20, npcMoves: [] });
-  delete original.npcMoves;
+  expect(original).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21, npcMoves: [] });
+  delete original.rentalLeases; delete original.npcMoves;
   expect(original.campusCommunities).toEqual([]); delete original.campusCommunities;
   for (const key of histories) { expect(original[key]).toEqual([]); delete original[key]; }
   expect(original.bestFriendships).toEqual([{
@@ -52,7 +52,7 @@ function originalNativeCanonical(world: World) {
 
 test('arranged legacy World36 adds only empty npcMoves and the three current root tags; every prior field remains exact', () => {
   const legacy = arrangedWorld36(), before = JSON.stringify(legacy), migrated = decodeWorld(before, true);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 41, engineVersion: 43, contentVersion: 20, campusCommunities: [], npcMoves: [] });
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 42, engineVersion: 44, contentVersion: 21, rentalLeases: [], campusCommunities: [], npcMoves: [] });
   expect(JSON.stringify(legacy)).toBe(before); expect(migrated.bestFriendships).toHaveLength(1);
   for (const key of histories) expect(migrated[key]).toEqual(legacy[key]);
   expect(unpackCheckpoint(packCheckpoint(migrated), true)).toEqual(migrated);
@@ -68,7 +68,7 @@ test.each(histories)('legacy World36 cannot erase or repair omitted or corrupt n
 
 test('actual new-life construction requires npcMoves in current World41; decoding cannot silently default a missing current array', () => {
   const newborn = freshLife(), current = JSON.parse(encodeWorld(newborn));
-  expect(current).toMatchObject({ schemaVersion: 41, engineVersion: 43, contentVersion: 20, npcMoves: [], revision: 0, birthAcknowledged: false });
+  expect(current).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21, npcMoves: [], revision: 0, birthAcknowledged: false });
   const missingRuntime: Record<string, unknown> = { ...newborn }; delete missingRuntime.npcMoves;
   const missing = { ...current }; delete missing.npcMoves;
   expect(() => validateWorld(missingRuntime)).toThrow(); expect(() => decodeWorld(JSON.stringify(missing))).toThrow();
@@ -138,28 +138,28 @@ test.each([13, 14, 15, 16, 17, 18])('complete reader%s→21 rolls back a failed 
     for (const table of tables) expect(before[table].length).toBeGreaterThan(0);
     context.originalPayloads(); context.forbidWrites();
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), driver = context.driver;
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 21') throw new Error('controlled C39 marker failure'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 22') throw new Error('controlled C39 marker failure'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('controlled C39 marker failure');
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(reader); expect(context.rows()).toEqual(before); expect(unpack).not.toHaveBeenCalled();
     // Both retry and final reopen close the real file connection and cache.
     const retry = context.reopen(); await retry.initialise(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before);
     const current = (await retry.active())!, backup = await retry.recoveryPreview(native.current.lifeId), prior = await retry.previewLife(context.archivedId);
     expect(sha(originalNativeCanonical(current))).toBe(observations[0].canonicalSha); expect(sha(originalNativeCanonical(backup))).toBe(observations[1].canonicalSha);
     expect(encodeWorld(prior)).toBe(encodeWorld(unpackCheckpoint(archive.checkpoint, true))); expect(context.rows()).toEqual(before); context.originalPayloads();
-    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader21 must not open a migration transaction'); } };
+    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader22 must not open a migration transaction'); } };
     await new SaveRepository(noTransaction).initialise(); await cold.initialise();
     expect(encodeWorld((await cold.active())!)).toBe(encodeWorld(current)); expect(encodeWorld(await cold.recoveryPreview(native.current.lifeId))).toBe(encodeWorld(backup)); expect(encodeWorld(await cold.previewLife(context.archivedId))).toBe(encodeWorld(prior));
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(21); expect(context.rows()).toEqual(before); context.originalPayloads();
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before); context.originalPayloads();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
 
-test('future reader22 is refused without decode, transaction or changes to any of the eight populated tables', async () => {
-  const context = await fixtureDatabase(22);
+test('future reader23 is refused without decode, transaction or changes to any of the eight populated tables', async () => {
+  const context = await fixtureDatabase(23);
   try {
     const before = context.rows(); context.forbidWrites(); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const forbidden: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('future reader must refuse before a transaction'); } };
     await expect(new SaveRepository(forbidden).initialise()).rejects.toThrow('newer version');
-    expect(unpack).not.toHaveBeenCalled(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22); expect(context.rows()).toEqual(before); context.originalPayloads();
+    expect(unpack).not.toHaveBeenCalled(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(23); expect(context.rows()).toEqual(before); context.originalPayloads();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);

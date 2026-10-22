@@ -167,9 +167,9 @@ test.each(['project', 'supplier', 'due', 'result', 'roll', 'duplicate'] as const
 
 test.each(['dramatic-double-fiance', 'dramatic-athlete-doping'] as const)('%s migrates old pending V1 choices without inventing a guest or a scheduled check', id => {
   const before = offer(id, 7, true), raw = JSON.parse(encodeWorld(before));
-  raw.engineVersion = 42; raw.contentVersion = 19;
+  raw.schemaVersion = 41; raw.engineVersion = 42; raw.contentVersion = 19;
   const migrated = decodeWorld(JSON.stringify(raw));
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...raw, engineVersion: 43, contentVersion: 20 });
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...raw, schemaVersion: 42, engineVersion: 44, contentVersion: 21, rentalLeases: [] });
   expect(migrated.pending).toEqual(before.pending); expect(migrated.random).toEqual(before.random);
   expect(migrated.careers.every(row => row.dopingChecks === undefined)).toBe(true);
   const after = choose(migrated, id === 'dramatic-double-fiance' ? 'dinner' : 'risk');
