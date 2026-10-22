@@ -38,21 +38,21 @@ function PersonalFinances() {
       <ActionRow title="Finance Currency" value={currency} onPress={() => setChoosing('currency')} />
       <View style={{ padding: 14, backgroundColor: c.inset, borderRadius: 12, gap: 5 }}><Body muted>Current balance · {world.date.year}-{String(world.date.month).padStart(2, '0')}-{String(world.date.day).padStart(2, '0')}</Body><Text accessibilityRole="header" style={{ color: summary.current.cash < 0n ? c.red : c.positiveText, fontSize: 28, lineHeight: 37, fontWeight: '700' }}>{money(summary.current.cash)}</Text></View>
       <FinanceFact label="Available now" value={money(summary.current.available)} /><FinanceFact label="Outstanding debt now" value={money(summary.current.debt)} debt={summary.current.debt > 0n} />
-      <Body muted>These balances are current. Past balances and portfolio values are not reconstructed.</Body>
+      <Body muted>Current balances, regardless of the year selected above.</Body>
     </Card>
     <Card><Heading size={20}>Recorded in {year}</Heading>
       <FinanceFact label="Income received before personal tax" value={money(summary.income)} positive />
       <FinanceFact label="Expenses paid" value={money(summary.expenses)} />
       <FinanceFact label="Taxes paid / withheld" value={money(summary.taxPaid)} /><FinanceFact label="Tax refunds received" value={money(summary.taxRefunded)} />
-      {summary.months > 0 && <><FinanceFact label="Monthly income average" value={money(summary.incomeAverage!)} positive /><FinanceFact label="Monthly expense average" value={money(summary.expenseAverage!)} /><Body muted>Calendar averages over {summary.months} elapsed {summary.months === 1 ? 'month' : 'months'} of this year in the saved life. These use recorded payments, not a salary forecast.</Body></>}
-      <Body muted>Pay and pensions, rent, dividends and actual company payouts count as income. Borrowing, sales, transfers and inheritance are shown separately. Corporate revenue and expenses stay in the company's books.</Body>
-      <ActionRow title="Work & Income" subtitle="Review your actual work and contract" onPress={() => router.push('/work')} />
+      {summary.months > 0 && <><FinanceFact label="Monthly income average" value={money(summary.incomeAverage!)} positive /><FinanceFact label="Monthly expense average" value={money(summary.expenseAverage!)} /><Body muted>Calendar averages over {summary.months} elapsed {summary.months === 1 ? 'month' : 'months'} of this year, based on payments received and made.</Body></>}
+      <Body muted>Income includes pay, pensions, rent, dividends and company payouts. Loans, sales, transfers and inheritance appear separately; company trading stays in its own books.</Body>
+      <ActionRow title="Work & Income" subtitle="Review your work and contract" onPress={() => router.push('/work')} />
     </Card>
     <Card><Heading size={20}>Cash Flow</Heading><FinanceFact label="All cash received" value={money(summary.received)} positive /><FinanceFact label="All cash paid" value={money(summary.paid)} /><FinanceFact label="Net cash movement" value={money(summary.netCash, true)} positive={summary.netCash >= 0n} debt={summary.netCash < 0n} />
       <FinanceFact label="Debt added" value={money(summary.debtAdded)} /><FinanceFact label="Debt reduced" value={money(summary.debtReduced)} />
-      <Body muted>Interest and unpaid bills can add debt without paying cash. Debt reductions include recorded repayments, reversals and estate closures; they do not all mean a loan was paid off.</Body>
+      <Body muted>Interest and unpaid bills can add debt without moving cash. Repayments, reversals and estate closures can reduce debt.</Body>
     </Card>
-    <Card><Heading size={20}>Income, Expenses & Taxes</Heading><Body muted>Tax rows show payments or refunds posted this year, which can settle another earning period. Purchase and sale flows do not measure investment gains. Earlier unrecorded activity is not invented.</Body>
+    <Card><Heading size={20}>Income, Expenses & Taxes</Heading><Body muted>Tax payments and refunds may settle an earlier earning period. Purchases and sales show cash flow, rather than investment gains.</Body>
       <FinanceFilter title="All Recorded Transactions" count={summary.entries.length} selected={section === 'all'} onPress={() => { setSection('all'); setLimit(20); }} />
       {summary.sections.map(item => <FinanceFilter key={item.id} title={item.label} subtitle={'Received ' + money(item.received) + ' · Paid ' + money(item.paid) + (item.debtAdded || item.debtReduced ? ' · Debt +' + money(item.debtAdded) + ' / −' + money(item.debtReduced) : '')} count={item.entries.length} selected={section === item.id} onPress={() => { setSection(item.id); setLimit(20); }} />)}
       {!summary.entries.length && <Body muted>No personal transactions recorded for {year} in {currency}.</Body>}

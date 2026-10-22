@@ -20,7 +20,7 @@ export default function Investments() {
         <Body muted>Current market value before sale fees.</Body>
       </View>
     </View>
-      {!held.length && <Body muted>No investments are held yet. Browse an instrument below to review its current price and trading costs.</Body>}
+      {!held.length && <Body muted>Your portfolio is empty. Browse prices and trading costs below.</Body>}
       <View style={{ backgroundColor: c.inset, borderRadius: 12, padding: 12, gap: 5 }}>
         <Text style={{ color: c.ink, fontSize: 16, fontWeight: '600' }}>Know the costs</Text>
         <Body muted>Each purchase and sale has a 1% trading fee. Prices move as months pass, and crypto has wider swings. Values can fall as well as rise.</Body>

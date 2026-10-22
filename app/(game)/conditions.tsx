@@ -26,6 +26,6 @@ export default function MedicalConditions() {
           onPress={() => router.push({ pathname: '/condition/[id]', params: { id: item.id } })} />)}
       </Card>;
     })}
-    <Card><Heading size={18}>Need an assessment?</Heading><Body>Persistent symptoms can be discussed with a clinician. A diagnosis and recovery are separate parts of your medical record.</Body><Button label="Visit the Doctor" onPress={() => router.push('/doctor')} /></Card>
+    <Card><Heading size={18}>Need an assessment?</Heading><Body>Symptoms hanging around? Talk to a clinician. Diagnosis is the first step towards care.</Body><Button label="Visit the Doctor" onPress={() => router.push('/doctor')} /></Card>
   </Page>;
 }

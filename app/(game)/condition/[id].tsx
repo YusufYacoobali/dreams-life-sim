@@ -28,7 +28,7 @@ export default function ConditionDetail() {
   const confirm = (start: boolean) => {
     const command = { type: start ? 'treat' as const : 'stop-treatment' as const, conditionId: id };
     if (healthReviewReason(world, command)) return;
-    review.confirm(command, start ? 'Begin this care programme?' : 'Stop this treatment?', start ? quote.payer.firstName + ' pays the initial fee. Ongoing care is billed monthly and pauses if funding is unavailable. Improvement takes time.' : 'Future programme costs stop. The condition remains in your record and can worsen without care.', start ? [{ id: 'cost', label: 'Initial fee', value: formatMoney({ minor: cost, currency }), tone: 'neutral' }, { id: 'ongoing', label: 'Monthly fee', value: formatMoney({ minor: monthlyCost, currency }), tone: 'neutral' }] : [], 'medicine', start ? 'Begin Treatment' : 'Stop Treatment');
+    review.confirm(command, start ? 'Begin this care programme?' : 'Stop this treatment?', start ? quote.payer.firstName + ' pays the initial fee. Care continues monthly while funded; improvement takes time.' : 'Future programme costs stop. The condition remains in your record and can worsen without care.', start ? [{ id: 'cost', label: 'Initial fee', value: formatMoney({ minor: cost, currency }), tone: 'neutral' }, { id: 'ongoing', label: 'Monthly fee', value: formatMoney({ minor: monthlyCost, currency }), tone: 'neutral' }] : [], 'medicine', start ? 'Begin Treatment' : 'Stop Treatment');
   };
   return <Page><Header title="Condition & Care" onBack={() => router.back()} />{condition ? <>
     <Card>
@@ -60,7 +60,7 @@ export default function ConditionDetail() {
           <Body>Programme payments: {formatMoney({ minor: condition.treatment.paid, currency: condition.treatment.currency })}</Body>
           <Body muted>Current monthly fee: {formatMoney({ minor: monthlyCost, currency })}</Body>
         </View>
-        <Body muted>Payments already recorded remain in your history. Stopping affects future programme costs.</Body>
+        <Body muted>Stopping ends future programme charges.</Body>
         <Button label="Review Stopping Treatment" tone="secondary" disabled={busy} onPress={() => confirm(false)} />
       </> : <>
         <View style={{ backgroundColor: c.inset, borderRadius: 12, padding: 12, gap: 6 }}>
@@ -68,13 +68,13 @@ export default function ConditionDetail() {
           <Body>Ongoing monthly fee: {formatMoney({ minor: monthlyCost, currency })}</Body>
           <Body muted>Initial payer: {fullName(quote.payer)}</Body>
         </View>
-        <Body muted>Care is billed as time passes and pauses if funding is unavailable. Beginning a programme does not resolve the condition immediately.</Body>
+        <Body muted>Pay monthly while care continues. Unpaid fees pause treatment; recovery takes time.</Body>
         <Button label="Review Treatment" disabled={busy || !!startReason} accessibilityLabel={['Review Treatment', startReason].filter(Boolean).join('. ')} onPress={() => confirm(true)} />
         {startReason && <Body muted>{startReason}</Body>}
       </>}
     </> : <>
       <Heading size={20}>Assessment first</Heading>
-      <Body>Assessment is needed before a treatment programme can begin. The condition remains unnamed until a diagnosis is recorded.</Body>
+      <Body>See a clinician for a diagnosis before starting treatment.</Body>
       <Button label="Get an Assessment" onPress={() => router.push('/doctor')} />
     </>}</Card>}
     {!review.isOpen && <HealthReviewError error={error} />}

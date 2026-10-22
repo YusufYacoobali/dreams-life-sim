@@ -53,7 +53,7 @@ export default function SavedLives() {
   const presentation: EventPresentation | null = preview ? {
     id: preview.kind + ':' + preview.world.id, kind: 'confirmation',
     title: preview.kind === 'recover' ? 'Restore previous checkpoint?' : preview.replace ? 'Replace this saved life?' : 'Import this life?',
-    body: preview.kind === 'recover' ? 'Progress and checkpoints after this moment will be discarded. This checkpoint includes its saved event and exact outcomes.' : preview.replace ? 'A life with this ID already exists. Importing replaces its current progress and Time Machine history with this file’s contents. A previous checkpoint is kept for recovery.' : 'This adds a local saved life, including any historical checkpoints and branch record in its archive, and makes it active.',
+    body: preview.kind === 'recover' ? 'Discard progress and checkpoints after this moment. Resume its saved event and outcomes.' : preview.replace ? 'A life with this ID already exists. Importing replaces its current progress and Time Machine history with this file’s contents. A previous checkpoint is kept for recovery.' : 'Add this life with its checkpoints and branch history, then open it.',
     terms: [{ id: 'name', label: 'Person', value: fullName(preview.world.people[preview.world.activePersonId]), tone: 'neutral' }, { id: 'age', label: 'Age', value: ageOn(preview.world.people[preview.world.activePersonId], preview.world.date).toString(), tone: 'neutral' }, { id: 'revision', label: 'Checkpoint', value: preview.world.revision.toString(), tone: 'neutral' }],
     confirmLabel: preview.kind === 'recover' ? 'Restore Checkpoint' : preview.replace ? 'Replace and Import' : 'Import Life',
   } : null;

@@ -28,7 +28,7 @@ function HealthContent({ world }: { world: World }) {
   const vaccines = [{ id: 'routine', label: 'Routine protection · 10 years' }, { id: 'seasonal', label: 'Seasonal flu protection · 12 months' }] as const;
   const choices = vaccines.map(item => ({ ...item, disabledReason: healthReviewReason(world, { type: 'vaccinate', vaccine: item.id }) }));
   const unavailable = choices.every(item => item.disabledReason) ? choices[0].disabledReason === choices[1].disabledReason ? choices[0].disabledReason : 'Both protections are unavailable' : undefined;
-  const event: EventPresentation | null = choosing ? { id: 'vaccine-choose', kind: 'selection', title: 'Vaccinations', body: 'Protection is recorded for a fixed period. It reduces the relevant infection risk and does not cure a current condition.', choices, confirmLabel: 'Review' } : null;
+  const event: EventPresentation | null = choosing ? { id: 'vaccine-choose', kind: 'selection', title: 'Vaccinations', body: 'Protection lasts for the stated period. It lowers infection risk and cannot cure an existing condition.', choices, confirmLabel: 'Review' } : null;
   return <Page><Header title="Health" onBack={() => router.back()} />
     <Card><View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 14 }}><HealthLegalArt id="care" size={72} /><View style={{ flexGrow: 1, flexBasis: 170, minWidth: 0, gap: 5 }}><Heading size={22}>Your health today</Heading><Body muted>Recorded {world.date.year}-{String(world.date.month).padStart(2, '0')}. Assessment, treatment and recovery each have their own history.</Body></View></View>
       <StatBar label="Health" value={stats.health} color={c.green} />

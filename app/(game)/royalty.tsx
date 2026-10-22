@@ -57,9 +57,9 @@ export default function Royalty() {
         {reason && <Body muted>{reason}</Body>}
         {royalFocuses.map(focus => <ActionRow key={focus} title={focus === 'balanced' ? 'Balanced Public Duties' : focus === 'community' ? 'Community Work' : 'Ceremonial Duties'} subtitle={focus === 'community' ? 'More attention to your public image' : focus === 'ceremonial' ? 'More engagements and more stress' : 'A steady programme of public work'}
           accessibilityRole="radio" accessibilityState={{ checked: membership.member.mode === 'public' && membership.member.focus === focus }} disabled={busy} disabledReason={membership.member.mode === 'public' && membership.member.focus === focus ? 'This is your current public duty focus' : reason}
-          onPress={() => review.confirm({type:'royal-duties',mode:'public',focus,quotedAnnualPay:quote.annual},'Take up these public duties?','This occupies your full-time working schedule. Allowances follow the role you hold and the months you attend; future annual pay is not handed over now.',[{id:'allowance',label:'Annual rate for attended work',value:money(quote.annual),tone:'positive'}],'royalty','Set Public Duties')} />)}
+          onPress={() => review.confirm({type:'royal-duties',mode:'public',focus,quotedAnnualPay:quote.annual},'Take up these public duties?','Duties occupy your full-time work schedule. Your role and attendance determine each month’s allowance.',[{id:'allowance',label:'Annual rate for attended work',value:money(quote.annual),tone:'positive'}],'royalty','Set Public Duties')} />)}
         <ActionRow title="Lead a Private Life" subtitle="Keep your title; stop public duties and future allowances" accessibilityRole="radio" accessibilityState={{ checked: membership.member.mode === 'private' }} disabled={busy} disabledReason={membership.member.mode === 'private' ? 'You already lead a private royal life' : undefined}
-          onPress={() => review.confirm({type:'royal-duties',mode:'private',focus:membership.member.focus,quotedAnnualPay:quote.annual},'Choose a private royal life?','Public duties and future allowances stop. Your title, family position and personal property remain. Other work and study become possible.',[],'royalty','Choose Private Life')} />
+          onPress={() => review.confirm({type:'royal-duties',mode:'private',focus:membership.member.focus,quotedAnnualPay:quote.annual},'Choose a private royal life?','Stop duties and future allowances. Keep your title, family position and property; make room for other work or study.',[],'royalty','Choose Private Life')} />
       </Card>
       <Card>
         <Heading size={20}>An Official Occasion</Heading>
@@ -103,7 +103,7 @@ export default function Royalty() {
       </Card>
       <Card>
         <Heading size={20}>Your Allowances</Heading>
-        <Body muted>Recorded payments, separate from the annual rate for future attended duties.</Body>
+        <Body muted>Allowances already received for attended duties.</Body>
         {!payments.length && <Body muted>No monthly allowance records yet.</Body>}
         {payments.slice(paymentIndex * pageSize, (paymentIndex + 1) * pageSize).map(item => <View key={item.key} accessible accessibilityLabel={item.period + '. ' + item.detail + '. ' + money(item.allowance)} style={{ gap: 4, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
           <Body muted>{item.period} · {item.detail}</Body>
@@ -113,7 +113,7 @@ export default function Royalty() {
       </Card>
       {membership && <Card>
         <Heading size={20}>Set the Title Aside</Heading>
-        <Body muted>Renunciation is permanent for you. Duties and future allowances end. Your actual children keep their own rights, and your personal property stays yours.</Body>
+        <Body muted>Give up your title permanently. Duties and allowances end; your children keep their rights and you keep your property.</Body>
         {ageOn(person, world.date) < 18 && <Body muted>Renunciation is available from age eighteen.</Body>}
         <Button label="Review Renunciation" tone="secondary" disabled={busy || ageOn(person, world.date) < 18} onPress={() => review.confirm({type:'renounce-title'},'Permanently renounce your title?','You cannot take this title back. Your descendants retain their own succession rights. The crown may pass to the next eligible family member; personal estates follow the normal will and inheritance rules.',[],'royalty','Renounce My Title')} />
       </Card>}

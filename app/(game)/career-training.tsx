@@ -16,7 +16,7 @@ export default function CareerTraining() {
         <Body muted>{skillContent[skill].title} · {mode === 'coached' ? 'Coached sessions' : 'Self-directed practice'}</Body>
         {reason && <Body muted>{reason}</Body>}
         {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
-        <Button label="Review Training Routine" disabled={busy || !!reason} onPress={() => review.confirm({ type: 'career-training', skill, mode }, 'Start ' + skillContent[skill].title.toLowerCase() + ' training?', 'This replaces your current routine. Skill grows as months pass. Coached sessions pause if the payer cannot cover tuition; tired practice can produce no skill gain.', [{ id: 'cost', label: 'Monthly tuition', value: money, tone: cost ? 'negative' : 'neutral' }], skillContent[skill].art, 'Set Training Routine')}/>
+        <Button label="Review Training Routine" disabled={busy || !!reason} onPress={() => review.confirm({ type: 'career-training', skill, mode }, 'Start ' + skillContent[skill].title.toLowerCase() + ' training?', 'Replace your current routine with monthly practice. Coaching pauses if tuition goes unpaid; exhaustion can stall progress.', [{ id: 'cost', label: 'Monthly tuition', value: money, tone: cost ? 'negative' : 'neutral' }], skillContent[skill].art, 'Set Training Routine')}/>
     </> : undefined}>
         <Header title="Skills & Training" backDisabled={busy} onBack={() => { if (!busy) router.back(); }}/>
         <Card>
@@ -33,7 +33,7 @@ export default function CareerTraining() {
         <Card><Heading size={19}>Make Time to Practise</Heading><View accessibilityRole="radiogroup" accessibilityLabel="Practice method">
             <ActionRow title="Self-directed Practice" subtitle="No tuition · up to one skill point per attended month" accessibilityRole="radio" accessibilityState={{ checked: mode === 'self' }} disabled={busy} onPress={() => { if (!busy && mode !== 'self') setMode('self'); }}/>
             <ActionRow title="Coached Sessions" subtitle="Up to two skill points per attended month; available funding required" accessibilityRole="radio" accessibilityState={{ checked: mode === 'coached' }} disabled={busy} onPress={() => { if (!busy && mode !== 'coached') setMode('coached'); }}/>
-        </View><Body muted>A parent or guardian funds a child's coached sessions. Protected inheritance stays locked. Fatigue, hospital care and custody can interrupt progress.</Body></Card>
+        </View><Body muted>A parent or guardian pays for a child’s coaching; inheritance stays protected. Fatigue, hospital care and custody can interrupt practice.</Body></Card>
         <Card><Heading size={19}>Choose a Skill</Heading><View accessibilityRole="radiogroup" accessibilityLabel="Training skill">{skillIds.map(id => <ActionRow key={id} title={skillContent[id].title} subtitle={'Available from age ' + skillContent[id].minAge} value={person.skills[id] + '%'} accessibilityRole="radio" accessibilityState={{ checked: skill === id }} disabled={busy} icon={<CareerArt id={skillContent[id].art} size={36}/>} onPress={() => { if (!busy && skill !== id) setSkill(id); }}/>)}</View></Card>
         {review.modal}
     </Page>;

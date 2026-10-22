@@ -52,7 +52,7 @@ export default function CareerDashboard() {
                 { label: 'Gross earned so far', value: formatMoney({ minor: project.grossEarned, currency: project.currency }), note: 'Before tax; separate from the annual contract rate.' },
                 { label: 'Attended periods', value: String(project.periods.filter(item => item.attended).length), ...(kind === 'athlete' ? { note: project.periods.filter(item => item.success).length + ' wins' } : {}) },
             ]} />
-            <Body muted>Health and absences affect recorded quality. The final audience response is resolved when the project ends.</Body>
+            <Body muted>Health and absences affect quality. See how audiences respond when the project ends.</Body>
         </Card>}
         {!active && kind === 'politician' && <Card><ActionRow title="Plan an Election Campaign" subtitle="Run for a local seat and review the real campaign budget" onPress={() => router.push('/politics')} /></Card>}
         {!active && kind !== 'politician' && <Card>
@@ -66,7 +66,7 @@ export default function CareerDashboard() {
             <SocialBusinessFacts items={requirements} />
             <Body muted>Two selection attempts are available per calendar year. Talent and prior reputation improve your chances; signing pays no salary upfront.</Body>
             {reason && <Body muted>{reason}</Body>}
-            <Button label={'Review ' + selection} disabled={busy || !!reason} onPress={() => review.confirm({ type: 'select-career', kind, quotedAnnualPay: quote }, 'Attend the ' + selection.toLowerCase() + '?', kind === 'athlete' ? 'If selected, you join an actual team contract with twelve-month seasons. Monthly pay, match attendance, performance and injuries are recorded.' : 'If selected, you sign a timed paid contract. Quality and the saved audience response determine the result. Pay stops when the contract ends.', [{ id: 'pay', label: 'Annual gross rate', value: money(quote), tone: 'neutral' }, { id: 'term', label: 'Calendar contract', value: definition.contractMonths + ' months', tone: 'neutral' }], definition.art, 'Attend ' + selection)} />
+            <Button label={'Review ' + selection} disabled={busy || !!reason} onPress={() => review.confirm({ type: 'select-career', kind, quotedAnnualPay: quote }, 'Attend the ' + selection.toLowerCase() + '?', kind === 'athlete' ? 'Sign a team contract with twelve-month seasons. Earn monthly pay, attend matches and manage performance and injuries.' : 'Sign a paid contract for a fixed term. Quality and audience response shape the result; pay stops when the contract ends.', [{ id: 'pay', label: 'Annual gross rate', value: money(quote), tone: 'neutral' }, { id: 'term', label: 'Calendar contract', value: definition.contractMonths + ' months', tone: 'neutral' }], definition.art, 'Attend ' + selection)} />
         </Card>}
         {active && <Card>
             <Heading size={20}>Your Approach</Heading>
