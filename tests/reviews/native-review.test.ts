@@ -1,5 +1,6 @@
 import { AppState, Linking, Platform } from 'react-native';
 let mockModule:{isAvailableAsync?:jest.Mock;requestReview?:jest.Mock}|null;
+jest.unmock('../../src/reviews/nativeReview');
 jest.mock('expo-modules-core',()=>({requireOptionalNativeModule:jest.fn(()=>mockModule)}));
 import { nativeReviewAvailable, requestNativeReview } from '../../src/reviews/nativeReview';
 const reviewGlobals=global as typeof globalThis & {__DEV__:boolean};
