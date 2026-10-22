@@ -122,18 +122,29 @@ export function ActionRow({
   );
 }
 
+/** One track style for personal stats, pets and compact relationship rows. */
+export const statTrackHeight = 14;
+export function StatTrack({ value, color, label, decorative = false }: { value: number; color: string; label?: string; decorative?: boolean }) {
+  const c = useColors();
+  const bounded = Number.isFinite(value) ? Math.round(Math.max(0,Math.min(100,value))) : 0;
+  return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'progressbar'} accessibilityLabel={label}
+    accessibilityValue={decorative ? undefined : {min:0,max:100,now:bounded}}
+    accessibilityElementsHidden={decorative} importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'}
+    style={{width:'100%',height:statTrackHeight,borderRadius:statTrackHeight/2,overflow:'hidden',backgroundColor:c.track}}>
+    <View style={{height:'100%',width:`${bounded}%`,borderRadius:statTrackHeight/2,backgroundColor:color}} />
+  </View>;
+}
+
 export function StatBar({ label, value, color, icon }: { label: string; value: number; color: string; icon?: React.ReactNode }) {
   const c = useColors();
   const { width, fontScale } = useWindowDimensions();
   const [availableWidth, setAvailableWidth] = useState(0);
   const labelWidth = 84 * Math.max(1, fontScale), valueWidth = 38 * Math.max(1, fontScale);
-  const stacked = (availableWidth || width - spacing.lg * 2) < labelWidth + valueWidth + 56 + (icon ? 48 : 16);
+  const stacked = (availableWidth || width - spacing.lg * 4) < labelWidth + valueWidth + 56 + (icon ? 48 : 16);
   const bounded = Number.isFinite(value) ? Math.round(Math.max(0, Math.min(100, value))) : 0;
   const picture = icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.statIcon}>{icon}</View>;
   const percentage = <Text numberOfLines={1} style={{ minWidth: valueWidth, flexShrink: 0, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>;
-  const track = <View style={[styles.track, stacked && styles.trackStacked, { backgroundColor: c.track }]}>
-    <View style={{ height: '100%', width: `${bounded}%`, borderRadius: 6, backgroundColor: color }} />
-  </View>;
+  const track = <View style={[styles.track, stacked && styles.trackStacked]}><StatTrack value={bounded} color={color} decorative /></View>;
   return (
     <View accessible accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: bounded }}
       onLayout={({ nativeEvent }) => { const next = Math.round(nativeEvent.layout.width); setAvailableWidth(current => current === next ? current : next); }}
@@ -178,6 +189,6 @@ const styles = StyleSheet.create({
   statIcon: { width: 24, alignItems: 'center', flexShrink: 0 },
   statSummary: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
   statLabelGroup: { flexDirection: 'row', alignItems: 'center', flexGrow: 1, flexShrink: 0, maxWidth: '100%', gap: 8 },
-  track: { flex: 1, height: 10, borderRadius: 6, overflow: 'hidden' },
+  track: { flex: 1, height: statTrackHeight },
   trackStacked: { flex: 0, width: '100%' },
 });

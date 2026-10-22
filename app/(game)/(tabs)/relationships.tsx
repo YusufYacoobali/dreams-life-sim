@@ -5,7 +5,8 @@ import { Redirect, router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../../src/state/useGame';
 import { ageOn, fullName } from '../../../src/game/model';
-import { ActionRow, Body, Button, Card, Header, Portrait, StatBar } from '../../../src/ui/components';
+import { Body, Button, Card, Header } from '../../../src/ui/components';
+import { RelationshipRow } from '../../../src/ui/RelationshipRow';
 import { ThemedStatusBar, useColors } from '../../../src/ui/theme';
 import { FilterTabs } from '../../../src/ui/FilterTabs';
 import { Relationship, relationLabel } from '../../../src/game/systems/relationships';
@@ -50,10 +51,8 @@ export default function Relationships() {
       ListEmptyComponent={<Card><Body muted>{query.trim() ? 'No matching names in this view.' : filter === 'all' ? 'Your connections will appear here.' : filter === 'family' ? 'No family connections in this record yet.' : filter === 'friends' ? 'Your friendships will appear here as you get to know people.' : 'Your current and past partners will appear here.'}</Body>{(query.trim() || filter !== 'all') ? <Button label="Show All Connections" tone="secondary" onPress={() => { setQuery(''); setFilter('all'); Keyboard.dismiss(); list.current?.scrollToOffset({ offset: 0, animated: false }); }} /> : <Body muted>Use the + button to meet someone new.</Body>}</Card>}
       renderItem={({ item: edge, index }) => {
         const person = world.people[edge.from === world.activePersonId ? edge.to : edge.from], name = fullName(person);
-        return <View style={{ backgroundColor: c.surface, paddingHorizontal: 16, paddingBottom: 12, borderTopLeftRadius: index === 0 ? 18 : 0, borderTopRightRadius: index === 0 ? 18 : 0, borderBottomLeftRadius: index === contacts.length - 1 ? 18 : 0, borderBottomRightRadius: index === contacts.length - 1 ? 18 : 0 }}>
-          <ActionRow title={name} subtitle={relationLabel(world, edge) + (person.died ? ' · Deceased' : ' · Age ' + ageOn(person, world.date))} value={'Bond ' + edge.strength + '%'} icon={<Portrait decorative name={name} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={44} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id } }); }} />
-          <StatBar label="Relationship" value={edge.strength} color={c.green} />
-        </View>;
+        return <RelationshipRow person={person} name={name} role={relationLabel(world,edge)} age={ageOn(person,world.date)} strength={edge.strength}
+          first={index===0} last={index===contacts.length-1} onPress={()=>{Keyboard.dismiss();router.push({pathname:'/person/[id]',params:{id:person.id}});}} />;
       }}
     />
   </SafeAreaView>;

@@ -14,6 +14,7 @@ import { Illustration, type IllustrationId } from '../src/assets/Illustration';
 import { FamilyArt } from '../src/assets/FamilyArt';
 import { LifeMilestoneArt } from '../src/ui/LifeMilestoneArt';
 import { useFeedbackPress } from '../src/ui/feedback';
+import { statTrackHeight } from '../src/ui/components';
 
 export default function Death() {
   const world = useGame(s => s.world);
@@ -50,7 +51,7 @@ export default function Death() {
         <Illustration id="wellbeing" size={30} />
         <View style={{ flex: 1, gap: 8 }}>
           <View style={{ flexDirection: 'row', gap: 12 }}><Text style={{ color: '#0B1545', fontSize: 15, flex: 1 }}>Happiness</Text><Text style={{ color: '#0B1545', fontSize: 15, fontWeight: '600', flexShrink: 1, textAlign: 'right' }}>{player.stats.happiness}%</Text></View>
-          <View accessible accessibilityRole="progressbar" accessibilityLabel="Happiness" accessibilityValue={{ min: 0, max: 100, now: player.stats.happiness }} style={{ height: 10, borderRadius: 5, backgroundColor: '#E5EAF0', overflow: 'hidden' }}><View style={{ width: `${player.stats.happiness}%`, height: '100%', borderRadius: 5, backgroundColor: '#28B65A' }} /></View>
+          <View accessible accessibilityRole="progressbar" accessibilityLabel="Happiness" accessibilityValue={{ min: 0, max: 100, now: player.stats.happiness }} style={{ height: statTrackHeight, borderRadius: statTrackHeight/2, backgroundColor: '#E5EAF0', overflow: 'hidden' }}><View style={{ width: `${player.stats.happiness}%`, height: '100%', borderRadius: statTrackHeight/2, backgroundColor: '#28B65A' }} /></View>
         </View>
       </View>
     </View>

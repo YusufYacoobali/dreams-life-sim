@@ -1,6 +1,6 @@
 import { BestFriendshipCard } from '../../../src/ui/BestFriendship';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { ageOn, fullName } from '../../../src/game/model';
@@ -11,6 +11,10 @@ import { accountFor } from '../../../src/game/systems/common';
 import { formatMoney, parseMoney } from '../../../src/game/money';
 import { useColors } from '../../../src/ui/theme';
 import { FamilyArt } from '../../../src/assets/FamilyArt';
+import { Illustration } from '../../../src/assets/Illustration';
+import { PolishArt } from '../../../src/assets/PolishArt';
+import { affectionColor } from '../../../src/ui/RelationshipRow';
+import { countries } from '../../../src/game/countries';
 import { rules } from '../../../src/game/rules';
 import { jobs } from '../../../src/game/content/jobs';
 import { isConfined } from '../../../src/game/systems/legalSchemas';
@@ -34,6 +38,7 @@ function PersonDetails({ id }: { id: string }) {
   const world = useGame(s => s.world)!;
   const person = world.people[id];
   const dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error), c = useColors();
+  const { width, fontScale } = useWindowDimensions(), stackedIdentity = width < 360 || fontScale >= 1.3;
   const [friendshipReviewOpen, setFriendshipReviewOpen] = useState(false);
   const [teenReviewOpen, setTeenReviewOpen] = useState(false);
   const [conversationOpen, setConversationOpen] = useState(false);
@@ -54,40 +59,56 @@ function PersonDetails({ id }: { id: string }) {
   const conversationReason = topics.some(topic => !topic.disabledReason) ? undefined : topics[0]?.disabledReason;
   const conversation: EventPresentation | null = conversationOpen && person && !person.died && !player.died && relation ? {
     id: 'conversation:' + id, kind: 'selection', title: 'Talk to ' + fullName(person),
-    body: 'What would you like to talk about? Choose a topic, then confirm. You can have one conversation with this person each year.',
+    body: 'Pick a topic. One conversation per person each year.',
     confirmLabel: 'Have Conversation', choices: topics.map(topic => ({ id: topic.id, label: topic.label + '\n' + topic.body, disabledReason: topic.disabledReason })),
   } : null;
   const activities = useMemo(() => person && relation && age >= rules[player.country].adultAge ? dateActivities(world, id) : [], [world, id]);
   const dateReason = activities.some(activity => !activity.disabledReason) ? undefined : activities[0]?.disabledReason;
   const date: EventPresentation | null = dateOpen && person && !person.died && !player.died && relation ? {
     id: 'date-activity:' + id, kind: 'selection', title: 'A date with ' + fullName(person),
-    body: 'Choose how you would like to spend time together. They can decline; you pay only if they accept.',
+    body: 'Pick a plan. They can decline; you pay only if they accept.',
     confirmLabel: 'Invite ' + person.firstName, choices: activities.map(activity => ({ id: activity.id, label: activity.label + ' · ' + formatMoney({ minor: activity.cost, currency: activity.currency }) + '\n' + activity.body, disabledReason: activity.disabledReason })),
   } : null;
   const confirm = (command: SocialCommand | FamilyCommand, title: string, body: string, confirmLabel: string) => setConfirmation({ command, event: { id: command.type + ':' + id, kind: 'confirmation', title, body, terms: [], confirmLabel } });
   const used = (action: string) => socialActionUsed(world, id, action) ? 'Already tried this year' : undefined;
+  const familyRelation = relation?.roles.some(role=>role==='parent'||role==='guardian'||role==='sibling');
+  const bondIcon = familyRelation ? 'family-life' : 'friends';
+  const occupation = person && (isConfined(world,person) ? 'In custody' : person.employment ? jobs.find(job=>job.id===person.employment!.roleId)?.title ?? 'Employed'
+    : person.education.stage !== 'none' ? person.education.school || 'Student' : person.finance.pensionAnnual>0n ? 'Retired' : 'No current occupation');
   return <Page><Header title="Person Profile" backDisabled={(!!conversation || !!date) && busy} onBack={() => { if (!conversationSubmitting.current && !dateSubmitting.current) router.back(); }} />
-    {person ? <Card>
-      <Portrait name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
-      <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
-      <Body>{person.traits.join(', ')}</Body>
-      <StatBar label="Health" value={person.stats.health} color={c.teal} />
-      <StatBar label="Happiness" value={person.stats.happiness} color={c.green} />
-      <StatBar label="Looks" value={person.stats.looks} color={c.purple} />
-      <StatBar label="Smarts" value={person.stats.smarts} color={c.blue} />
-      {relation && <><Body>{relationLabel(world, relation)}</Body><StatBar label="Relationship" value={relation.strength} color={c.green} /><StatBar label="Trust" value={relation.trust} color={c.blue} /></>}
-      <Body>{isConfined(world, person) ? 'In custody' : person.employment ? jobs.find(job => job.id === person.employment!.roleId)?.title : person.education.stage !== 'none' ? person.education.school || 'Student' : person.finance.pensionAnnual > 0n ? 'Retired' : 'No current occupation'}</Body>
-      {world.socialAccounts.filter(item => item.ownerId === person.id).map(item => <ActionRow key={item.id} title={'@' + item.handle} subtitle={item.status === 'memorial' ? 'Memorial social profile' : 'Social profile'} onPress={() => router.push({ pathname: '/social-profile/[id]', params: { id: item.id } })} />)}
-      {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={() => router.push({ pathname: '/life-summary', params: { id: person.id } })} /></>}
-    </Card> : <Body>This person could not be found.</Body>}
+    {person ? <>
+      <Card><View style={{flexDirection:stackedIdentity?'column':'row',alignItems:stackedIdentity?'flex-start':'center',gap:16}}>
+        <Portrait name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person,world.date)} size={88} />
+        <View style={{flex:stackedIdentity?undefined:1,minWidth:0,gap:5}}>
+          <Heading size={22}>{fullName(person)}</Heading>
+          <View style={{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',gap:8}}>
+            {relation && <Text style={{color:c.muted,fontSize:14}}>{relationLabel(world,relation)}</Text>}
+            <Text style={{color:c.ink,fontSize:14,fontWeight:'600'}}>Age {ageOn(person,world.date)}</Text>
+          </View>
+          <Text style={{color:c.muted,fontSize:14,lineHeight:20}}>{occupation}</Text>
+          <Text style={{color:c.muted,fontSize:13,lineHeight:19}}>{person.city}, {countries[person.country].name}</Text>
+        </View>
+      </View>
+        {!!person.traits.length && <View style={{backgroundColor:c.inset,borderRadius:10,padding:12}}><Body muted>{person.traits.join(' · ')}</Body></View>}
+      </Card>
+      <Card><Heading size={18}>Relationship & Wellbeing</Heading>
+        {relation && <><StatBar label="Relationship" value={relation.strength} color={affectionColor(relation.strength,c)} icon={relation.romance==='none'?<PolishArt id={bondIcon} size={24} />:<FamilyArt id="hearts" size={24} />} /><StatBar label="Trust" value={relation.trust} color={c.blue} icon={<FamilyArt id="conversation" size={24} />} /></>}
+        <StatBar label="Happiness" value={person.stats.happiness} color={c.green} icon={<Illustration id="wellbeing" size={24} />} />
+        <StatBar label="Health" value={person.stats.health} color={c.teal} icon={<PolishArt id="health-check" size={24} />} />
+        <StatBar label="Looks" value={person.stats.looks} color={c.purple} icon={<PolishArt id="life-star" size={24} />} />
+        <StatBar label="Smarts" value={person.stats.smarts} color={c.blue} icon={<Illustration id="education" size={24} />} />
+      </Card>
+      {(person.died || world.socialAccounts.some(item=>item.ownerId===person.id)) && <Card><Heading size={18}>{person.died?'Life Record':'Social Profiles'}</Heading>
+        {world.socialAccounts.filter(item=>item.ownerId===person.id).map(item=><ActionRow key={item.id} title={'@'+item.handle} subtitle={item.status==='memorial'?'Memorial social profile':'Social profile'} icon={<Illustration id="journal" size={40} />} onPress={()=>router.push({pathname:'/social-profile/[id]',params:{id:item.id}})} />)}
+        {person.died && <><Body>Died in {person.died.year}: {person.causeOfDeath}</Body><Button label="View Life & Estate Summary" tone="secondary" onPress={()=>router.push({pathname:'/life-summary',params:{id:person.id}})} /></>}
+      </Card>}
+    </> : <Body>This person could not be found.</Body>}
     {!confirmation && !conversation && !date && !friendshipReviewOpen && !teenReviewOpen && (error || message) && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{message ?? error}</Text>}
-    {person && relation && <TeenRelationshipCard key={'teen:' + world.id + ':' + player.id + ':' + person.id} world={world} personId={person.id} onReviewChange={setTeenReviewOpen} />}
-    {person && relation && <BestFriendshipCard key={world.id + ':' + player.id + ':' + person.id + ':' + player.country + ':' + player.city + ':' + person.country + ':' + person.city} world={world} personId={person.id} onReviewChange={setFriendshipReviewOpen} />}
     {person && !person.died && relation && <>
-      {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" disabled={busy} disabledReason={schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
-      {colleague && <Card><Heading size={18}>{colleague.role === 'supervisor' ? 'Your Supervisor' : 'Your Coworker'}</Heading><Body muted>{workplace!.employer}</Body>{colleague.role === 'supervisor' && <><ActionRow title="Ask for Work Feedback" subtitle="Once a year · Uses 4 energy" disabled={busy} disabledReason={workFeedbackReason(world, workplace, id)} onPress={() => void dispatch({ type: 'work-feedback', workplaceId: workplace!.id, supervisorId: id })} /><ActionRow title="Ask for a Raise" subtitle="5% higher pay · Uses 6 energy" disabled={busy} disabledReason={workRaiseReason(world, workplace, id)} onPress={() => void dispatch({ type: 'request-raise', workplaceId: workplace!.id, supervisorId: id })} /></>}</Card>}
-      {relation.roles.includes('parent') && relation.from === player.id && ageOn(person, world.date) < rules[person.country].adultAge && <Card><Heading size={18}>Care & identity</Heading><Body>Lives in {person.city}{person.householdId === player.householdId ? ' with you' : ' in another household'}.</Body>{person.householdId === player.householdId && <><TextInput accessibilityLabel="Child first name" editable={!busy} value={childName} onChangeText={setChildName} maxLength={40} placeholder={person.firstName} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10 }} /><Button label="Save Child’s Name" accessibilityLabel={currentName ? "Save Child’s Name. This is their current name" : undefined} busy={busy} disabled={!childName.trim() || currentName} onPress={async () => { if (!person || childName.trim() === person.firstName) return; setMessage(null); if (await dispatch({ type: 'name-child', childId: id, firstName: childName })) setChildName(''); }} />{currentName && <Body muted>This is their current name.</Body>}</>}{custody && <><Body>{custody.arrangement === 'shared' ? 'Shared care' : 'Primary care'} · Primary home with {world.people[custody.primaryId].firstName}</Body>{(['shared', 'me', 'them'] as const).map(preference => <ActionRow disabled={busy} key={preference} title={preference === 'shared' ? 'Request Shared Care' : preference === 'me' ? 'Request Primary Care' : 'Request Other Parent’s Care'} disabledReason={custody.lastReviewYear === world.date.year ? 'Reviewed this year' : undefined} onPress={() => confirm({ type: 'review-custody', childId: id, preference }, 'Review custody?', 'The arrangement considers the child’s needs, both parents’ ability to care and your preference.', 'Review Custody')} />)}</>}</Card>}
-      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time', 'argue', 'apologise'] as const).map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together', argue: 'Argue', apologise: 'Apologise' }[action]} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={action === 'talk' ? conversationReason : age < 3 ? 'Available from age three' : action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used(action)} onPress={() => {
+      {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" icon={<Illustration id="education" size={40} />} disabled={busy} disabledReason={schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
+      {colleague && <Card><Heading size={18}>{colleague.role === 'supervisor' ? 'Your Supervisor' : 'Your Coworker'}</Heading><Body muted>{workplace!.employer}</Body>{colleague.role === 'supervisor' && <><ActionRow title="Ask for Work Feedback" icon={<Illustration id="career" size={40} />} subtitle="Once a year · Uses 4 energy" disabled={busy} disabledReason={workFeedbackReason(world, workplace, id)} onPress={() => void dispatch({ type: 'work-feedback', workplaceId: workplace!.id, supervisorId: id })} /><ActionRow title="Ask for a Raise" icon={<Illustration id="money" size={40} />} subtitle="5% higher pay · Uses 6 energy" disabled={busy} disabledReason={workRaiseReason(world, workplace, id)} onPress={() => void dispatch({ type: 'request-raise', workplaceId: workplace!.id, supervisorId: id })} /></>}</Card>}
+      {relation.roles.includes('parent') && relation.from === player.id && ageOn(person, world.date) < rules[person.country].adultAge && <Card><Heading size={18}>Care & identity</Heading><Body>Lives in {person.city}{person.householdId === player.householdId ? ' with you' : ' in another household'}.</Body>{person.householdId === player.householdId && <><TextInput accessibilityLabel="Child first name" editable={!busy} value={childName} onChangeText={setChildName} maxLength={40} placeholder={person.firstName} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10 }} /><Button label="Save Child’s Name" accessibilityLabel={currentName ? "Save Child’s Name. This is their current name" : undefined} busy={busy} disabled={!childName.trim() || currentName} onPress={async () => { if (!person || childName.trim() === person.firstName) return; setMessage(null); if (await dispatch({ type: 'name-child', childId: id, firstName: childName })) setChildName(''); }} />{currentName && <Body muted>This is their current name.</Body>}</>}{custody && <><Body>{custody.arrangement === 'shared' ? 'Shared care' : 'Primary care'} · Primary home with {world.people[custody.primaryId].firstName}</Body>{(['shared', 'me', 'them'] as const).map(preference => <ActionRow disabled={busy} key={preference} title={preference === 'shared' ? 'Request Shared Care' : preference === 'me' ? 'Request Primary Care' : 'Request Other Parent’s Care'} icon={<FamilyArt id="family-tree" size={40} />} disabledReason={custody.lastReviewYear === world.date.year ? 'Reviewed this year' : undefined} onPress={() => confirm({ type: 'review-custody', childId: id, preference }, 'Review custody?', 'The arrangement considers the child’s needs, both parents’ ability to care and your preference.', 'Review Custody')} />)}</>}</Card>}
+      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time', 'argue', 'apologise'] as const).map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together', argue: 'Argue', apologise: 'Apologise' }[action]} icon={action==='spend-time'?<PolishArt id={bondIcon} size={40} />:action==='compliment'?<PolishArt id="life-star" size={40} />:<FamilyArt id="conversation" size={40} />} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={action === 'talk' ? conversationReason : age < 3 ? 'Available from age three' : action === 'apologise' && !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used(action)} onPress={() => {
         if (action === 'talk') {
           if (busy || conversationSubmitting.current || dateOpenRef.current || conversationReason || confirmation || friendshipReviewOpen || teenReviewOpen) return;
           setMessage(null); conversationOpenRef.current = true; setConversationOpen(true);
@@ -103,12 +124,14 @@ function PersonDetails({ id }: { id: string }) {
           setMessage(null); dateOpenRef.current = true; setDateOpen(true);
         }} />
         {relation.romance === 'dating' && <ActionRow disabled={busy} title="Propose" subtitle="Give a ring and ask about your future" icon={<FamilyArt id="rings" size={40} />} disabledReason={relation.strength < 75 || relation.trust < 60 ? 'Build a stronger bond and trust first' : used('propose')} onPress={() => confirm({ type: 'propose', personId: id }, 'Ask them to marry you?', 'An engagement ring you own will be offered, or a new ring will be purchased from your balance. If they decline, you keep the ring.', 'Propose')} />}
-        {relation.romance === 'engaged' && <><ActionRow disabled={busy} title="Plan Your Wedding" icon={<FamilyArt id="rings" size={40} />} onPress={() => setPanel(panel === 'wedding' ? null : 'wedding')} />{panel === 'wedding' && weddingBudgets(world).map(budget => <ActionRow disabled={busy} key={budget.id} title={budget.label} value={money(budget.amount)} onPress={() => confirm({ type: 'marry', personId: id, budget: budget.amount }, 'Celebrate your wedding?', 'Your balance will pay ' + money(budget.amount) + '. You will share a household while retaining your accounts and ownership.', 'Get Married')} />)}</>}
+        {relation.romance === 'engaged' && <><ActionRow disabled={busy} title="Plan Your Wedding" icon={<FamilyArt id="rings" size={40} />} onPress={() => setPanel(panel === 'wedding' ? null : 'wedding')} />{panel === 'wedding' && weddingBudgets(world).map(budget => <ActionRow disabled={busy} key={budget.id} title={budget.label} icon={<FamilyArt id="rings" size={40} />} value={money(budget.amount)} onPress={() => confirm({ type: 'marry', personId: id, budget: budget.amount }, 'Celebrate your wedding?', 'Your balance will pay ' + money(budget.amount) + '. You will share a household while retaining your accounts and ownership.', 'Get Married')} />)}</>}
         {relation.romance === 'married' && <><ActionRow title="Family Planning" icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="Divorce & Settlement" icon={<FamilyArt id="breakup" size={40} />} onPress={() => router.push('/divorce')} /></>}
         {(relation.romance === 'dating' || relation.romance === 'engaged') && <ActionRow disabled={busy} title="End Relationship" icon={<FamilyArt id="breakup" size={40} />} onPress={() => confirm({ type: 'breakup', personId: id }, 'Go separate ways?', 'The relationship will end. Gifts already given remain with their recipient.', 'End Relationship')} />}
-        {relation.roles.some(role => role === 'parent' || role === 'guardian') && person.householdId !== player.householdId && relation.to === player.id && <ActionRow disabled={busy} title="Ask to Move In" disabledReason={used('move-in')} onPress={() => confirm({ type: 'ask-to-move-in', personId: id }, 'Ask to share their household?', 'They can accept or decline. If accepted, you will share living costs in their city.', 'Ask to Move In')} />}
+        {relation.roles.some(role => role === 'parent' || role === 'guardian') && person.householdId !== player.householdId && relation.to === player.id && <ActionRow disabled={busy} title="Ask to Move In" icon={<Illustration id="property" size={40} />} disabledReason={used('move-in')} onPress={() => confirm({ type: 'ask-to-move-in', personId: id }, 'Ask to share their household?', 'They can accept or decline. If accepted, you will share living costs in their city.', 'Ask to Move In')} />}
       </Card>}
     </>}
+    {person && relation && <TeenRelationshipCard key={'teen:' + world.id + ':' + player.id + ':' + person.id} world={world} personId={person.id} onReviewChange={setTeenReviewOpen} />}
+    {person && relation && <BestFriendshipCard key={world.id + ':' + player.id + ':' + person.id + ':' + player.country + ':' + player.city + ':' + person.country + ':' + person.city} world={world} personId={person.id} onReviewChange={setFriendshipReviewOpen} />}
     <EventModal event={person && !person.died && relation ? confirmation?.event ?? null : null} busy={busy} error={error} onCancel={() => setConfirmation(null)} onChoose={async () => { if (person && !person.died && relation && confirmation && await dispatch(confirmation.command)) { setConfirmation(null); setPanel(null); } }} />
     <EventModal event={conversation} busy={busy} error={error} onCancel={() => {
       if (!busy && !conversationSubmitting.current) { conversationOpenRef.current = false; setConversationOpen(false); }

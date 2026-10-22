@@ -42,8 +42,15 @@ export const socialCommandSchema = z.discriminatedUnion('type', [
 ]);
 export type SocialCommand = z.infer<typeof socialCommandSchema>;
 export function relationLabel(world: World, relation: Relationship, personId = world.activePersonId): string {
-  if (relation.kind === 'parent') return relation.from === personId ? relation.parentType === 'adoptive' ? 'Adopted child' : 'Child' : relation.parentType === 'adoptive' ? 'Adoptive parent' : 'Parent';
-  if (relation.kind === 'guardian') return relation.from === personId ? 'In your care' : 'Guardian';
+  const outward = relation.from === personId;
+  const person = world.people[outward ? relation.to : relation.from];
+  if (relation.roles.includes('guardian') || relation.parentType === 'guardian') return outward ? 'In your care' : 'Guardian';
+  if (relation.roles.includes('parent')) {
+    const role = outward ? person.gender === 'female' ? 'Daughter' : person.gender === 'male' ? 'Son' : 'Child'
+      : person.gender === 'female' ? 'Mother' : person.gender === 'male' ? 'Father' : 'Parent';
+    return relation.parentType === 'adoptive' ? (outward ? 'Adopted ' : 'Adoptive ') + (role === 'Child' || role === 'Parent' ? role.toLowerCase() : role) : role;
+  }
+  if (relation.roles.includes('sibling')) return person.gender === 'female' ? 'Sister' : person.gender === 'male' ? 'Brother' : 'Sibling';
   if (relation.romance === 'married') return 'Spouse'; if (relation.romance === 'engaged') return 'Engaged'; if (relation.romance === 'dating' || relation.romance === 'teen-dating') return 'Partner'; if (relation.romance === 'ex') return 'Former partner'; if (relation.romance === 'widowed') return 'Late partner';
   if (currentBestFriendship(world, personId)?.relationshipId === relation.id) return 'Best friend';
   return relation.kind[0].toUpperCase() + relation.kind.slice(1);
