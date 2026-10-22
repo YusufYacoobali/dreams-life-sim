@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
 import { encodeWorld } from '../../src/game/model';
@@ -35,6 +35,8 @@ test.each(['Use familiar skills', 'Try something ambitious', 'Enjoy taking part'
     }
     expect(guard).toBeLessThan(100); mockHobbyKind = 'guitar'; const world = () => mockStore.getState().world!, before = encodeWorld(world()), beforeRows = rows();
     const view = render(frame(<Hobby />)); await press('View Community Event'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/hobby-event/[kind]', params: { kind: 'guitar' } }); view.rerender(frame(<HobbyEvent />));
+    // The game tab bar reserves the system-navigation inset below this page.
+    expect(screen.UNSAFE_getByType(SafeAreaView).props.edges).toEqual(['top']);
     expect(screen.getByText('Open Mic Afternoon')).toBeOnTheScreen(); expect(screen.getByText(/Responsible payer:/)).toBeOnTheScreen(); await press('Back'); expect(router.back).toHaveBeenCalled();
     await act(async () => { fireEvent.press(screen.getByRole('radio', { name: label })); });
     expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows);
