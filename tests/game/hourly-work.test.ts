@@ -122,7 +122,7 @@ test('world31 migration preserves a legacy part-time interview and resulting ann
   const world = apply(applicant()), role = jobs[0]; if (world.pending?.kind !== 'decision') throw new Error('Missing interview');
   for (const choice of world.pending.choices) { const effect = choice.effects[0]; if (effect.kind !== 'job-interview') throw new Error('Missing effect'); delete effect.hourly; effect.annualPay = salaryFor(world, role); }
   const encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 31; encoded.engineVersion = 32; encoded.contentVersion = 8; delete encoded.hourlyContracts;
-  const next = decodeWorld(JSON.stringify(encoded)); expect(JSON.parse(encodeWorld(next))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 42, contentVersion: 19, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hourlyContracts: [] });
+  const next = decodeWorld(JSON.stringify(encoded)); expect(JSON.parse(encodeWorld(next))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 43, contentVersion: 20, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hourlyContracts: [] });
   const hired = ack(resolveCommand(next, { type: 'choose', eventId: next.pending!.id, choiceId: 'careful' })); expect(hired.hourlyContracts).toEqual([]); expect(hired.people[hired.activePersonId].employment!.hourlyContractId).toBeUndefined(); expect(hired.people[hired.activePersonId].employment!.annualPay).toBe(salaryFor(hired, role)); expect(pay(hired).hourlyContracts).toEqual([]);
 });
 

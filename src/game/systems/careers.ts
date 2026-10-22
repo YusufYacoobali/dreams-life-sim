@@ -21,6 +21,7 @@ import { addCondition, medicalQuote } from './health';
 import { gainPublicFame } from './social';
 import { recordingCommitment } from './musicSchemas';
 import { campaignCommitment } from './politicsSchemas';
+import { athleteSuspensionReason } from './athleteDopingSchemas';
 export const careerCommandSchema = z.discriminatedUnion('type', [
     z.object({ type: z.literal('career-training'), skill: z.enum(skillIds), mode: z.enum(['self', 'coached']) }), z.object({ type: z.literal('stop-career-training') }),
     z.object({ type: z.literal('select-career'), kind: z.enum(careerKinds), quotedAnnualPay: z.bigint().nonnegative() }),
@@ -42,6 +43,7 @@ export function trainingReason(world: World, skill: typeof skillIds[number], per
 export function careerPayQuote(world: World, kind: CareerKind, person = active(world)) { const career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
 export function selectionReason(world: World, kind: CareerKind): string | undefined {
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
+    if (kind === 'athlete') { const suspension = athleteSuspensionReason(world); if (suspension) return suspension; }
     if (activeTrip(world)) return 'Return from your trip before a new career contract';
     if (kind === 'politician')
         return 'Run an election campaign to seek public office';
@@ -96,6 +98,7 @@ function colleagues(world: World, career: Career) {
     }
 }
 export function startCareerContract(world: World, kind: CareerKind, annualPay: bigint, person: Person = active(world), announce = true): Career {
+    if (kind === 'athlete') { const suspension = athleteSuspensionReason(world, person.id); if (suspension) throw new IneligibleAction(suspension); }
     const definition = careerCatalog[kind], prior = world.careers.find(item => item.personId === person.id && item.kind === kind);
     if (person.employment || world.careers.some(item => item.personId === person.id && item.status === 'active'))
         throw new IneligibleAction('This person already has a current work commitment');
@@ -265,6 +268,9 @@ export function careerMonth(world: World) {
     }
 }
 export function careerDeath(world: World, personId: string) {
+    for (const career of world.careers.filter(item => item.personId === personId)) for (const check of career.dopingChecks ?? []) {
+        if (check.status === 'pending') { check.status = 'cancelled'; check.resolved = { ...world.date }; }
+    }
     for (const career of world.careers.filter(item => item.personId === personId && ['active', 'between'].includes(item.status))) {
         career.status = 'deceased';
         career.ended = { ...world.date };

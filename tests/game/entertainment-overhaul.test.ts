@@ -175,14 +175,14 @@ test('a genuine pre-overhaul pending decision and historical result retain their
   expect(acknowledged.relationships).toEqual(historical.relationships); expect(acknowledged.ledger).toEqual(historical.ledger);
 });
 
-test('a declared current-schema content-17 envelope migrates only its content tag and preserves the whole stored world', () => {
+test('a declared current-schema content-17 envelope migrates only its version tags and preserves the whole stored world', () => {
   // The underlying pending decision is a genuine historical fixture. Only its
-  // root version tag is arranged here to isolate the new 17-to-18 migration.
+  // root version tags are arranged here to isolate the new 17-to-18 migration.
   const current = unpackCheckpoint(nativeChoice.checkpoint);
-  const prior = { ...JSON.parse(encodeWorld(current)), contentVersion: 17 };
+  const prior = { ...JSON.parse(encodeWorld(current)), engineVersion: 42, contentVersion: 17 };
   const migrated = decodeWorld(JSON.stringify(prior));
-  expect(migrated.contentVersion).toBe(19);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, contentVersion: 19 });
+  expect(migrated.contentVersion).toBe(20);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, engineVersion: 43, contentVersion: 20 });
   expect(migrated.pending).toEqual(current.pending); expect(migrated.random).toEqual(current.random);
   expect(migrated.journal).toEqual(current.journal); expect(migrated.ledger).toEqual(current.ledger);
 });

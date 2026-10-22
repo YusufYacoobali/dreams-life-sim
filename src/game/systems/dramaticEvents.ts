@@ -1,4 +1,4 @@
-import { fullName, type World } from '../model';
+import { ageOn, fullName, type World } from '../model';
 import type { BoundChoice, Pending, RuntimeEffectRow } from '../runtime';
 import type { EventTemplate } from '../content/eventTypes';
 import { dramaticTemplates } from '../content/dramaticEvents';
@@ -9,7 +9,9 @@ import { formatMoney } from '../money';
 import { active, accountFor, availableCash, bounded, draw, post } from './common';
 import { dramaticContext, type DramaticContext } from './dramaticContext';
 import type { DramaticEffect, DramaticEventId } from './dramaticSchemas';
-import { resolveSocial, relationFor } from './relationships';
+import { connectPerson, resolveSocial, relationFor } from './relationships';
+import { createContact } from './npcs';
+import { recordDopingUse } from './athleteDoping';
 import { endFriendship } from './friendships';
 import { hearCase, recordDramaticCorruption, resolveLegal } from './legal';
 import { resolveBusiness } from './businesses';
@@ -36,7 +38,8 @@ export function bindDramaticEvent(world: World, template: EventTemplate, subject
   const text = (s: string) => s.replace(/\{([A-Za-z]+)\}/g, (token, name: string) => c.names[name] ?? token);
   const { names: _names, personIds, ...binding } = c;
   const choices: BoundChoice[] = template.choices.map(choice => {
-    const effect: DramaticEffect = { kind: 'dramatic-choice', ruleVersion: 1, eventId: template.id as DramaticEventId, choiceId: choice.id, ...binding };
+    const ruleVersion = ['dramatic-double-fiance', 'dramatic-athlete-doping'].includes(template.id) ? 2 : 1;
+    const effect: DramaticEffect = { kind: 'dramatic-choice', ruleVersion, eventId: template.id as DramaticEventId, choiceId: choice.id, ...binding };
     const disabledReason = dramaticChoiceReason(world, effect);
     return { id: choice.id, label: text(choice.label), effects: [effect], resultTitle: choice.title, resultBody: choice.result, journal: choice.journal, ...(disabledReason ? { disabledReason } : {}) };
   });
@@ -84,6 +87,23 @@ export function resolveDramaticChoice(world: World, effect: DramaticEffect, deat
   }
   if (effect.eventId === 'dramatic-double-fiance' || effect.eventId === 'dramatic-dating-profile') {
     const partnerId = effect.contextId!, edge = relationFor(world, player.id, partnerId)!;
+    if (effect.eventId === 'dramatic-double-fiance' && choice === 'dinner' && effect.ruleVersion === 2) {
+      const partner = world.people[partnerId];
+      const other = createContact(world, { age: ageOn(partner, world.date), gender: partner.attractedTo[draw(world, 'npcs', 0, partner.attractedTo.length - 1)], compatibleWith: partner.gender });
+      connectPerson(world, other.id);
+      const ally = relationFor(world, player.id, other.id)!;
+      ally.kind = 'friend'; ally.roles = ['acquaintance', 'friend']; ally.strength = 60; ally.trust = 65;
+      ally.memories.push('double-engagement-dinner:' + partner.id);
+      connectPerson(world, other.id, partner.id);
+      const betrayal = relationFor(world, partner.id, other.id)!;
+      betrayal.romance = 'ex'; betrayal.strength = 10; betrayal.trust = 0;
+      betrayal.memories.push('engagement-disclosed:' + world.date.year, 'engagement-ended-at-dinner:' + player.id);
+      edge.memories.push('double-engagement-dinner:' + other.id);
+      bond(partnerId, -40, -60); stat('stress', 12);
+      invoke(() => resolveSocial(world, { type: 'breakup', personId: partnerId }));
+      row('Engagement', 'Ended', 'negative'); row('New friend', fullName(other), 'positive');
+      return finish('Two engagements end before dessert', `${fullName(other)} arrives wearing the matching ring. You compare dates. Your fiancé stops ordering. Both engagements end at the table; you and ${other.firstName} exchange numbers. They are now a friend you can contact, and their broken engagement stays in the relationship history.`);
+    }
     if (choice === 'end') { invoke(() => resolveSocial(world, { type: 'breakup', personId: partnerId })); stat('happiness', -12); return finish('The engagement is over', `You ended your engagement to ${fullName(world.people[partnerId])}. Their ring can no longer reserve two futures.`); }
     const fiance = effect.eventId === 'dramatic-double-fiance';
     bond(partnerId, fiance ? choice === 'dinner' ? -30 : -20 : choice === 'admit' ? -15 : choice === 'old' ? -25 : -35, fiance ? -40 : choice === 'admit' ? -25 : choice === 'old' ? -40 : -45); stat('stress', fiance ? 10 : 8);
@@ -157,6 +177,14 @@ export function resolveDramaticChoice(world: World, effect: DramaticEffect, deat
   }
   const career = world.careers.find(row => row.id === effect.subjectId)!;
   if (effect.eventId === 'dramatic-athlete-doping') {
+    if (choice === 'risk' && effect.ruleVersion === 2) {
+      stat('health', -12);
+      const beforeSkill = player.skills.sport; player.skills.sport = bounded(beforeSkill + 8);
+      row('Sport skill', `${beforeSkill} → ${player.skills.sport}`, 'positive');
+      recordDopingUse(world, career, effect.contextId!, effect.relatedId!);
+      row('Drug check', 'Due next month');
+      return finish('The shortcut has a laboratory waiting', 'Your sport skill rises and your health suffers. Nobody has exposed you, so your public image and athletic reputation are unchanged. A drug check is due next month. A positive result will cost you the contract and suspend you from professional athletics for twelve months.');
+    }
     const before = career.reputation; career.reputation = bounded(before + (choice === 'refuse' ? 4 : choice === 'report' ? 8 : -15)); row('Career reputation', `${before} → ${career.reputation}`, choice === 'risk' ? 'negative' : 'positive');
     if (choice === 'risk') { stat('health', -12); const beforeSkill = player.skills.sport; player.skills.sport = bounded(beforeSkill + 8); row('Sport skill', `${beforeSkill} → ${player.skills.sport}`, 'positive'); image(-10); }
     else bond(effect.relatedId!, choice === 'report' ? -25 : -5, choice === 'report' ? -20 : 0);

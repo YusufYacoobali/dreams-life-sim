@@ -108,7 +108,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(19),
+  schemaVersion: z.literal(41), engineVersion: z.literal(43), contentVersion: z.literal(20),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -637,5 +637,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 17) parsed.contentVersion = 18;
   // Prospective content only: preserve all saved choices, results and RNG states.
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 18) parsed.contentVersion = 19;
+  // Versioned scene resolutions and optional athlete checks start prospectively.
+  // Existing bound choices, career records and RNG are preserved verbatim.
+  if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 19) { parsed.engineVersion = 43; parsed.contentVersion = 20; }
   return validateWorld(parsed, immutable);
 }

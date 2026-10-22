@@ -44,6 +44,7 @@ import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, 
 import { isConfined } from './systems/legalSchemas';
 import { choiceUnavailable } from './choiceAvailability';
 import { resolveDramaticChoice } from './systems/dramaticEvents';
+import { athleteDopingMonth } from './systems/athleteDoping';
 import { brandDecision, respondPublicly, resolveSocialMedia, socialDeath, socialMediaCommandSchema, SocialMediaCommand, socialMonth } from './systems/social';
 import { businessCommandSchema, BusinessCommand, resolveBusiness } from './systems/businesses';
 import { businessMonth } from './systems/businessMonth';
@@ -147,6 +148,7 @@ function processMonth(world: World) {
   businessMonth(world);
   for (const person of actors) workMonth(world, person);
   careerTrainingMonth(world);
+  athleteDopingMonth(world);
   careerMonth(world);
   musicMonth(world);
   politicsMonth(world);

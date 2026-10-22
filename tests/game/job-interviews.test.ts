@@ -78,9 +78,9 @@ test('country part-time ages still gate interviews and full-time work still requ
   const world = applicant(); world.people[world.activePersonId].education.stage = 'secondary'; expect(() => apply(world)).toThrow(/studying/);
 });
 
-test('engine 29 upgrades only its tag, preserving existing employment, people, money and RNG', () => {
-  const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 42, contentVersion: 19, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+test('an arranged engine-29/content-6 envelope upgrades its versions, preserving employment, people, money and RNG', () => {
+  const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; encoded.contentVersion = 6; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 43, contentVersion: 20, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
 });
 
 

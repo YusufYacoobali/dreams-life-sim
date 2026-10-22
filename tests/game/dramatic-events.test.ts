@@ -57,10 +57,10 @@ test('only the fifteen requested situations and their forty-five choices join th
   }
 });
 
-test('the content18 migration changes only the content tag and preserves all saved state and draws', () => {
-  const world = employee(), old = JSON.parse(encodeWorld(world)); old.contentVersion = 18;
+test('the content18 migration changes only the version tags and preserves all saved state and draws', () => {
+  const world = employee(), old = JSON.parse(encodeWorld(world)); old.engineVersion = 42; old.contentVersion = 18;
   const migrated = decodeWorld(JSON.stringify(old));
-  expect(migrated.contentVersion).toBe(19);
+  expect(migrated.contentVersion).toBe(20);
   expect(migrated).toEqual(world);
 });
 
@@ -75,7 +75,7 @@ test.each(dramaticEventIds)('%s binds saved people and situation identities with
   expect(new Set(event.personIds).size).toBe(event.personIds.length);
   for (const choice of event.choices) {
     expect(choice.effects).toHaveLength(1);
-    expect(choice.effects[0]).toMatchObject({ kind: 'dramatic-choice', ruleVersion: 1, eventId: id, choiceId: choice.id, subjectId: context!.subjectId });
+    expect(choice.effects[0]).toMatchObject({ kind: 'dramatic-choice', ruleVersion: ['dramatic-double-fiance', 'dramatic-athlete-doping'].includes(id) ? 2 : 1, eventId: id, choiceId: choice.id, subjectId: context!.subjectId });
     expect(choice.effects[0]).not.toHaveProperty('followUp');
   }
   expect(encodeWorld(world)).toBe(before);

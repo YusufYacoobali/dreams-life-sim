@@ -8,9 +8,9 @@ export const dramaticEventIds = [
   'dramatic-election-scandal', 'dramatic-athlete-doping', 'dramatic-scandal-movie',
 ] as const;
 export type DramaticEventId = typeof dramaticEventIds[number];
-/** V1 binds an existing situation's identities and quote, never a future story. */
+/** Saved V1 choices retain their original rules; new dinner/doping choices use V2. */
 export const dramaticEffectSchema = z.object({
-  kind: z.literal('dramatic-choice'), ruleVersion: z.literal(1), eventId: z.enum(dramaticEventIds),
+  kind: z.literal('dramatic-choice'), ruleVersion: z.union([z.literal(1), z.literal(2)]), eventId: z.enum(dramaticEventIds),
   choiceId: z.string(), subjectId: z.string(), contextId: z.string().optional(),
   relatedId: z.string().optional(), otherId: z.string().optional(), quote: z.bigint().nonnegative().optional(),
 });
