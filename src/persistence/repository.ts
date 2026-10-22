@@ -70,14 +70,14 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader twenty-two protects rental leases. Stored payloads and histories
-    // remain untouched; old worlds gain an empty lease list only when decoded.
-    if (!version || version.user_version > 22) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 22) return;
-    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20 || version.user_version === 21) {
-      // Complete reader-13 through reader-21 databases already have every table
+    // Reader twenty-three protects saved personal support and action histories.
+    // Old payloads stay untouched and gain prospective empty fields on decode.
+    if (!version || version.user_version > 23) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 23) return;
+    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20 || version.user_version === 21 || version.user_version === 22) {
+      // Complete reader-13 through reader-22 databases already have every table
       // and metadata row. Upgrade only the marker, not stored game payloads.
-      await this.db.transaction(tx => tx.run('PRAGMA user_version = 22'));
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 23'));
       return;
     }
     const statements = [
@@ -119,7 +119,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 22');
+      await tx.run('PRAGMA user_version = 23');
     });
   }
 
