@@ -77,6 +77,16 @@ device acceptance is part of this inventory.
 
 ## Recorded local validation
 
+### Daily local reminders
+
+The22October source update adds `expo-notifications ~57.0.23` and its locked
+`badgin 1.2.3`/`expo-application 57.0.3` dependencies. The existing generator was
+run once against the installed graph:26direct dependencies,769non-dev lock
+entries,759installed version matches,10absent optional packages and zero
+version mismatches.720readable notice files still deduplicate to276exact text
+blocks. The new packages' available metadata/notices are retained in the
+generated artifacts; this does not establish the final native AAR/Pod inventory.
+
 ### SDK 57 action-sound refresh
 
 The `8366895` integration source adds `expo-audio ~57.0.5` and promotes the

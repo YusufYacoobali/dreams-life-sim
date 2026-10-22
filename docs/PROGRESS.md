@@ -1,5 +1,13 @@
 # Dreams: Life Simulator — progress and verification
 
+The22October user-requested batch changes Android/iOS identity to **com.yacoobali.lifesim**, retains the existing icon as subsequently requested, and closes three Android bottom-inset inconsistencies: Legacy, deceased-person Time Machine and duplicate hobby-event padding.
+
+Optional daily reminders are now implemented: off by default,19:00local time adjustable in Settings,28messages/seven repeating weekday slots, explicit permission, no expiry or remote token, serialized owned-only scheduling/cancellation and ordinary Continue tap routing. Old app settings remain readable without an eager write; actual SQLite failure/retry/closed-file tests preserve life data and independent preferences. Expo Go skips the unsupported native notification import.
+
+All56affected cases pass across their scopes:55in the original7-suite batch, plus the sole corrected Legacy case on rerun. The two corrections concern the new test's layout-node query, with no product change. Final strict app/all-test types actually exit0. Native-config introspection confirms both identifiers/current icon/no remote entitlement or background mode; refreshed notices check passes. One automatic full hosted gate follows the completed source push. No full local regression, old cohort, prebuild or blocked build retry was run. Actual installed reminder delivery/new package, standalone/device acceptance and the earlier native JNI crash remain open; [HANDOFF](HANDOFF.md) records exact boundaries.
+
+## Accepted navigation/button checkpoint — prior runtime80a10b5
+
 Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
 
 Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. Final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) **passed at07:36:58UTC on22October**, including locked install, both strict typechecks and **2,824tests/222suites in1851.444s**. No full local regression or unchanged cohort was rerun.

@@ -7,7 +7,7 @@ Updated21October2026: runtime/candidateb75e617 includes all confirmed feature ga
 | Field | Draft/source value |
 | --- | --- |
 | Name | Dreams Life Simulator |
-| Package/bundle ID | `com.yusufyacoobali.dreamslifesim` |
+| Package/bundle ID | `com.yacoobali.lifesim` |
 | Public version | 1.0.0 |
 | Android code / iOS build | 1 / 1; increment for later distributed builds as appropriate |
 | Direction | Free offline gameplay; no account, subscription or paywall required by the approved design |
@@ -55,6 +55,8 @@ Candidate player-facing text:
 > location or application you choose. That provider's handling is outside the
 > game's local save mechanism. Optional sound and haptic settings control local
 > feedback; the configured game does not request microphone recording.
+> Optional daily reminders are scheduled locally at a time you choose. You can
+> turn them off in Settings. They do not require an account or a push token.
 >
 > For support or privacy questions: [publisher must supply the actual public
 > contact and policy destination before publication].

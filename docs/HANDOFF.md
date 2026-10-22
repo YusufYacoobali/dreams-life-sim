@@ -4,7 +4,23 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Current product continuation — 22 October
+## Current package, system-bar and daily-reminder batch — 22 October
+
+The requested package is now **`com.yacoobali.lifesim`** on Android and iOS. The user deferred the proposed icon change; the existing icon file and configuration are retained.
+
+Android system navigation uses dynamic safe-area insets, including gesture/three-button heights. BottomNavigation reserves the bottom edge once for GameShell screens. This batch fixes three concrete exceptions: standalone Legacy and deceased-person Time Machine now protect their bottom edge, and hobby events no longer add that edge a second time above the game tabs. Existing modal/system-bar policies remain unchanged.
+
+Settings now offers **optional daily local reminders**, initially off, with a configurable24-hour time defaulting to19:00. Seven repeating local weekday slots provide one reminder a day without expiring;28original messages rotate in weekly banks when the app refreshes. Permission is requested only on explicit enable. Native changes are serialized, reconcile on startup/foreground/time/timezone changes, preserve unrelated notifications and remove owned requests on disable or revoked permission. Tapping an owned notification only opens the ordinary Continue route. No push token/account/server, extra game command, sound, vibration or badge is requested. Expo Go is detected before importing the notification module, so it adds no unsupported-module startup warning; reminder delivery needs an installed native app.
+
+The three reminder preferences are optional version1app-settings fields. Legacy settings read without eager writes; failed saves retain the prior choice and draft, retry atomically, and survive closing/reopening real SQLite. Normal appearance reset retains reminder choices. No World/engine/content/reader/schema/RNG/price/history change: World41/engine42/content17/reader21/v4;274situations/822choices.
+
+Focused acceptance is complete:55affected cases passed in the initial7-suite batch (11.093s); the new Legacy layout assertion needed query-only corrections, then its single case passed in1.942s. Its original save-failure/retry/child-handover assertions remain intact. No other passing suite, full local regression or old cohort was rerun. Final strict app/all-test types actually exit0 (`/tmp/dreams-reminders-types.exit`). Offline native-config introspection confirms both identifiers, retained icon, no APNs push entitlement and no remote-notification background mode. The notification plugin's mod order was corrected after the first inspection exposed the unwanted default entitlement. The existing notices generator was refreshed once and its current-input check passes.
+
+This completed source batch needs its one automatic hosted Quality gate on push. The older80a10b5gate below remains separately passing; no new full pass, native delivery or installed new-identity acceptance is claimed yet. The older generated b75native candidate is now stale in both source and native configuration: regenerate from final inputs when packaging resumes. Native emulator/Metro controls remain dormant; no blocked download, Gradle attempt, prebuild or repeat campus journey occurred. The previously observed font-reset/immediate-Expo-reload JNI crash remains open in [RELEASE_READINESS_AUDIT.md](RELEASE_READINESS_AUDIT.md).
+
+Continue to commit **and push at least every two active hours**. All three independent author workstreams are frozen and integrated; root owns final integration/checkpoint/export. Avoid unchanged regressions and new audit/proof packs.
+
+## Accepted navigation/button checkpoint — prior runtime80a10b5
 
 The user asked to continue without the blocked release prerequisites. Runtime `80a10b5` continues product work over the accepted b75checkpoint; packaging and unavailable device/signing work are parked, not completion claims.
 

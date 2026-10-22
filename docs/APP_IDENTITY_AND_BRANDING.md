@@ -3,6 +3,11 @@
 Prepared 20 October 2026. This change configures reversible source settings and
 original launcher artwork; it does not establish an installed or signed release.
 
+Updated22October2026: Android package and iOS bundle identifier are now
+`com.yacoobali.lifesim`, as requested. The current launcher artwork is retained;
+the user deferred the proposed replacement picture. These source changes need
+fresh native generation/build acceptance; the older generated candidate is stale.
+
 ## Identity
 
 [app.json](../app.json) now declares:
@@ -10,8 +15,8 @@ original launcher artwork; it does not establish an installed or signed release.
 | Setting | Value |
 | --- | --- |
 | Display name | Dreams Life Simulator |
-| Android package | `com.yusufyacoobali.dreamslifesim` |
-| iOS bundle identifier | `com.yusufyacoobali.dreamslifesim` |
+| Android package | `com.yacoobali.lifesim` |
+| iOS bundle identifier | `com.yacoobali.lifesim` |
 | Public version | `1.0.0` |
 | Android version code | `1` |
 | iOS build number | `1` |

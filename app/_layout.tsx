@@ -6,11 +6,12 @@ import { gameStore } from '../src/state/useGame';
 import { preferencesStore, usePreferences } from '../src/state/usePreferences';
 import { AppFeedback } from '../src/ui/AppFeedback';
 import { useFeedback } from '../src/ui/feedback';
+import { AppReminders } from '../src/ui/AppReminders';
 
 export default function RootLayout() {
   const appearance = usePreferences(s => s.settings.appearance);
   useEffect(() => { void gameStore.getState().bootstrap(); void preferencesStore.getState().bootstrap(); }, []);
-  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><RootNavigator /></AppFeedback></ThemeProvider></SafeAreaProvider>;
+  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><RootNavigator /><AppReminders /></AppFeedback></ThemeProvider></SafeAreaProvider>;
 }
 
 function RootNavigator() {

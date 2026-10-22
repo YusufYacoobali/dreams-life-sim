@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { createGameStore } from '../../src/state/gameStore';
@@ -26,10 +27,10 @@ test('a failed legacy write leaves the deceased life intact and a retry cold-loa
   const view = render(frame(<Legacy />));
   // Terminal routes have no game tab bar to reserve the system-navigation edge.
   expect(screen.UNSAFE_getByType(SafeAreaView).props.edges).toEqual(['top', 'bottom']);
-  expect(screen.queryByRole('tablist')).toBeNull();
+  expect(screen.queryAllByRole('tab')).toHaveLength(0);
   view.rerender(frame(<TimeMachine />)); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
   expect(screen.UNSAFE_getByType(SafeAreaView).props.edges).toEqual(['top', 'bottom']);
-  expect(screen.queryByRole('tablist')).toBeNull(); expect(mockStore.getState().world).toEqual(initial);
+  expect(screen.queryAllByRole('tab')).toHaveLength(0); expect(mockStore.getState().world).toEqual(initial);
   view.rerender(frame(<Legacy />));
   fireEvent.press(screen.getByRole('button', { name: 'Continue as ' + child.firstName }));
   await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue Their Life' })); });
@@ -42,7 +43,10 @@ test('a failed legacy write leaves the deceased life intact and a retry cold-loa
   expect(mockStore.getState().lives[0].name).toBe(child.firstName + ' ' + child.lastName);
   view.rerender(frame(<TimeMachine />)); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
   expect(screen.UNSAFE_getByType(SafeAreaView).props.edges).toEqual(['top']);
-  expect(screen.getByRole('tablist')).toHaveStyle({ paddingBottom: 48 });
+  expect(screen.getByRole('tab', { name: 'Activities' })).toBeSelected();
+  const navigation = screen.UNSAFE_getAllByType(View).find(node => node.props.accessibilityRole === 'tablist');
+  expect(navigation).toBeDefined();
+  expect(StyleSheet.flatten(navigation!.props.style)).toMatchObject({ paddingBottom: 48 });
   expect(mockStore.getState().world).toEqual(durable);
   view.unmount(); sqlite.close();
 });

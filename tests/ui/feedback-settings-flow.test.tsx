@@ -25,6 +25,11 @@ jest.mock('expo-haptics', () => ({ impactAsync: (...args: unknown[]) => mockImpa
   ImpactFeedbackStyle: { Light: 'light' }, AndroidHaptics: { Virtual_Key: 'virtual-key' } }));
 jest.mock('expo-audio', () => ({ setAudioModeAsync: (...args: unknown[]) => mockAudioMode(...args), createAudioPlayer: (...args: unknown[]) => mockAudioCreate(...args) }));
 jest.mock('../../assets/audio/action-tap.wav', () => 42);
+jest.mock('../../src/notifications/dailyReminders', () => ({
+  reconcileDailyReminders: async (config: { enabled: boolean }) => ({ status: config.enabled ? 'scheduled' : 'off' }),
+  requestDailyReminderPermission: async () => ({ status: 'granted', canAskAgain: true }),
+  subscribeToDailyReminderResponses: () => () => {},
+}));
 jest.mock('../../src/state/usePreferences', () => ({ usePreferences: (selector: unknown) => require('zustand').useStore(mockPreferences, selector), preferencesStore: { getState: () => mockPreferences.getState() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockGame, selector), gameStore: { getState: () => mockGame.getState() } }));
 jest.mock('expo-router', () => {
@@ -137,7 +142,7 @@ test('a failed appearance reset stays open with one error, retries exactly, and 
     const before = context.rows(), view = await renderFrame(); await press('Restore Default Appearance'); await press('Never mind'); expect(context.rows()).toEqual(before); await press('Restore Default Appearance');
     context.sqlite.exec("CREATE TRIGGER fail_reset BEFORE INSERT ON preferences WHEN NEW.key='app_settings' BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Restore Appearance'); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/could not be saved/));
     expect(screen.getAllByRole('alert')).toHaveLength(1); expect(modal().getByText('Restore the default appearance?')).toBeOnTheScreen(); expect(context.rows()).toEqual(before);
-    context.sqlite.exec('DROP TRIGGER fail_reset'); await press('Restore Appearance'); await waitFor(() => expect(screen.queryByText('Restore the default appearance?')).toBeNull()); expect(mockPreferences.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true }); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); view.unmount();
+    context.sqlite.exec('DROP TRIGGER fail_reset'); await press('Restore Appearance'); await waitFor(() => expect(screen.queryByText('Restore the default appearance?')).toBeNull()); expect(mockPreferences.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true, dailyReminder: false, reminderHour: 19, reminderMinute: 0 }); expect(context.lifeRows()).toEqual({ ...before, preferences: before.preferences.filter(row => row.key !== 'app_settings') }); view.unmount();
   } finally { context.close(); }
 });
 

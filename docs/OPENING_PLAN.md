@@ -1,5 +1,9 @@
 # Opening experience: priority and completion estimates
 
+Current22October feature batch: Android/iOS identity **com.yacoobali.lifesim**; existing icon retained at the user's request; three corrected Android system-navigation insets; optional daily local reminders with28messages, configurable19:00default and explicit permission. All56affected cases pass in their declared scopes, strict app/all-test types exit0, offline configuration and current notices checks pass. The full automatic gate follows the source push. Actual installed reminder delivery/new identity and the existing native crash still need standalone/device acceptance. No extra full local regression or unchanged cohort was run. [HANDOFF](HANDOFF.md) is authoritative.
+
+## Accepted navigation/button checkpoint — prior runtime80a10b5
+
 Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
 
 Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. Final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) **passed at07:36:58UTC on22October**, including locked install, both strict typechecks and **2,824tests/222suites in1851.444s**. No full local regression or unchanged cohort was rerun.
@@ -45,9 +49,9 @@ Track three separate states from here: implemented scope, known defects, and rel
 
 ## Current order of work
 
-1. The latest80a10b5navigation/keyboard/button/Help fixes pass focused checks, strict types and the complete automatic gate. Scoped Android keyboard/normal/large-text layout checks pass. Address concrete defects or missing approved behaviour; do not repeat unchanged regressions/cohorts or invent mechanics to fill estimated percentages.
+1. The package/inset/reminder batch passes its focused checks, strict types and configuration/notices checks; inspect its single automatic hosted gate after push. Prior80a10b5navigation/keyboard/button/Help and scoped Android keyboard/large-text checks remain accepted in their own scope. Address concrete defects or missing approved behaviour; avoid unchanged regressions/cohorts or invented filler mechanics.
 2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. The genuine first-year campus native journey is complete; do not repeat it. Preserve every original situation and historical save.
-3. Isolate the observed text-reset/immediate-reload native JNI crash on the eventual standalone build; recovered exact saves do not close crash acceptance. Complete standalone, actual iOS/physical, accessibility/audio and release acceptance when their prerequisites are available. Keep the blocked download/build parked as requested; do not count Hermes exports or Expo Go as standalone builds.
+3. Regenerate the now-stale native project from the final package/reminder inputs when packaging resumes. Isolate the observed text-reset/immediate-reload native JNI crash; verify notification permission/one-per-day/time-change/off/cold-tap behavior and Android gesture/three-button layouts on installed builds. Complete actual iOS/physical, accessibility/audio and release acceptance when prerequisites are available. Keep the blocked download/build parked; Hermes exports and Expo Go do not establish standalone acceptance.
 
 ## Prior checkpoint: World38/engine39 gameplay and acceptance
 

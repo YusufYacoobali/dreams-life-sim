@@ -2,9 +2,9 @@
   "formatVersion": 1,
   "scope": "Candidate lock/install/source inventory; includes build tooling and optional packages. Not a shipped-library count, legal clearance, complete font-rights determination, or final native/Metro artifact inventory.",
   "inputs": {
-    "package.json": "5871768c43afd064038cb460fb9ee4c6b0ba9a8a219d4b1c4b617fb439ee88a8",
-    "package-lock.json": "0079491a8e148250f4d4fda7c9fab44d0e1bcb126dea893d06f269489e6a4e1b",
-    "app.json": "197cf886195e21399e262cd86a8dbe1d37aa30b93ac712ed311221b00b9f5935"
+    "package.json": "1957084c683526bb4f78aea8abedde55503f4ae57d768c4e1a1fbcdba1cfaf1f",
+    "package-lock.json": "23101149e3b2f08ba44c2f0f9fb5318c01426525b80078854b493c0449b06501",
+    "app.json": "4b55e670e89507f0762c36fbe2da206800b304e5c93f94cb729a7a8f1985283f"
   },
   "installationPlatform": {
     "os": "linux",
@@ -13,14 +13,14 @@
   "selection": "All root dependencies and lockfile package records whose dev flag is not true. License/notice filenames are searched recursively, excluding nested node_modules, .git and .cache. Directory symlinks are not followed. Text is deduplicated by exact source bytes; no SPDX value is inferred from filenames or contents.",
   "evidenceLimits": "Missing metadata is not a licensing conclusion. Installed version mismatches must be reconciled. Optional/absent files and source-only art/font references remain explicit. SDK, native Pods/AARs, OS resources, dynamic imports and the final shipped graph need artifact-level review.",
   "summary": {
-    "directDependencies": 25,
-    "candidateNonDevLockEntries": 766,
-    "versionMatched": 756,
+    "directDependencies": 26,
+    "candidateNonDevLockEntries": 769,
+    "versionMatched": 759,
     "versionMismatches": 0,
     "notInstalled": 10,
     "missingLockLicenseMetadata": 1,
-    "withoutReadableNoticeFile": 54,
-    "readableNoticeFiles": 718,
+    "withoutReadableNoticeFile": 55,
+    "readableNoticeFiles": 720,
     "uniqueExactNoticeTexts": 276,
     "detectedFontFamilies": 1,
     "projectArtFiles": 14
@@ -85,6 +85,12 @@
       "requested": "~57.0.13",
       "lockPath": "node_modules/expo-linking",
       "lockedVersion": "57.0.13"
+    },
+    {
+      "name": "expo-notifications",
+      "requested": "~57.0.23",
+      "lockPath": "node_modules/expo-notifications",
+      "lockedVersion": "57.0.23"
     },
     {
       "name": "expo-router",
@@ -5768,6 +5774,21 @@
       ]
     },
     {
+      "name": "badgin",
+      "lockPath": "node_modules/badgin",
+      "version": "1.2.3",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "badgin",
+      "installedVersion": "1.2.3",
+      "installedLicense": "MIT",
+      "noticeFiles": []
+    },
+    {
       "name": "balanced-match",
       "lockPath": "node_modules/balanced-match",
       "version": "4.0.4",
@@ -7661,6 +7682,29 @@
       ]
     },
     {
+      "name": "expo-application",
+      "lockPath": "node_modules/expo-application",
+      "version": "57.0.3",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "expo-application",
+      "installedVersion": "57.0.3",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/expo-application/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+        }
+      ]
+    },
+    {
       "name": "expo-asset",
       "lockPath": "node_modules/expo-asset",
       "version": "57.0.20",
@@ -7975,6 +8019,29 @@
       "noticeFiles": [
         {
           "path": "node_modules/expo-modules-jsi/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+        }
+      ]
+    },
+    {
+      "name": "expo-notifications",
+      "lockPath": "node_modules/expo-notifications",
+      "version": "57.0.23",
+      "rootDirectDependency": true,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "expo-notifications",
+      "installedVersion": "57.0.23",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/expo-notifications/LICENSE",
           "status": "text",
           "bytes": 1106,
           "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
@@ -17461,11 +17528,19 @@
         "app/(game)/(tabs)/life.tsx",
         "app/(game)/(tabs)/relationships.tsx",
         "app/(game)/_layout.tsx",
+        "app/(game)/education.tsx",
+        "app/(game)/emigrate.tsx",
+        "app/(game)/extras.tsx",
+        "app/(game)/finances.tsx",
         "app/(game)/school.tsx",
+        "app/(game)/work.tsx",
+        "app/appearance.tsx",
         "app/birth.tsx",
+        "app/death.tsx",
         "app/index.tsx",
         "app/new-life.tsx",
         "app/saved-lives.tsx",
+        "app/settings.tsx",
         "app/time-machine.tsx",
         "src/ui/ProgressElements.tsx"
       ],
@@ -20467,6 +20542,7 @@
         "node_modules/@expo/osascript/LICENSE",
         "node_modules/@expo/plist/LICENSE",
         "node_modules/babel-preset-expo/LICENSE",
+        "node_modules/expo-application/LICENSE",
         "node_modules/expo-asset/LICENSE",
         "node_modules/expo-audio/LICENSE",
         "node_modules/expo-constants/LICENSE",
@@ -20480,6 +20556,7 @@
         "node_modules/expo-modules-autolinking/LICENSE",
         "node_modules/expo-modules-core/LICENSE",
         "node_modules/expo-modules-jsi/LICENSE",
+        "node_modules/expo-notifications/LICENSE",
         "node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE",
         "node_modules/expo-server/LICENSE",
         "node_modules/expo-sharing/LICENSE",

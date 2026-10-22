@@ -12,7 +12,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yusufyacoobali.dreamslifesim",
+      "bundleIdentifier": "com.yacoobali.lifesim",
       "buildNumber": "1"
     },
     "android": {
@@ -21,12 +21,13 @@
         "foregroundImage": "./assets/generated/dreams-app-icon.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.yusufyacoobali.dreamslifesim",
+      "package": "com.yacoobali.lifesim",
       "versionCode": 1
     },
     "plugins": [
       "expo-router",
       "expo-sqlite",
+      ["./plugins/withLocalNotifications.cjs", { "color": "#1478F8" }],
       ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false, "enableBackgroundPlayback": false, "enableBackgroundRecording": false }]
     ],
     "scheme": "dreams-life"
