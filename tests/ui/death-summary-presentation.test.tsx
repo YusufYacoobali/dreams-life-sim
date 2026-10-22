@@ -45,7 +45,7 @@ test.each([false, true])('memorial summary, child continuation and read-only fam
   // Explicit mortality boundary on a real saved family; no new history is earned.
   recordDeath(mockWorld, person.id, 'Declared memorial presentation boundary');
   const original = encodeWorld(mockWorld), expected = deathSummary(mockWorld)!, width = dark ? 320 : 390;
-  jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
+  jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
   const suffix = dark ? 'dark-large' : 'light', view = render(frame(<Death />));
   expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen();

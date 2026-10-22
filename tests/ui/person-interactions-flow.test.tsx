@@ -175,7 +175,7 @@ function capture(name: string, tree: ReturnType<ReturnType<typeof render>['toJSO
 
 test.each([false, true])('parent, partner and saved loan-offer profiles keep their data and export portable trees, dark=%s', async dark => {
   const width = dark ? 320 : 390, fontScale = dark ? 1.4 : 1;
-  jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale });
+  jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale });
   const parent = decodeWorld(JSON.stringify(graduate)), { predicted } = loanFixture();
   let partner = decodeWorld(JSON.stringify(marriage));
   while (partner.pending?.kind === 'result') partner = resolveCommand(partner, { type: 'acknowledge', resultId: partner.pending.id });

@@ -41,7 +41,7 @@ const press=async(name:string)=>{await act(async()=>{fireEvent.press(screen.getB
 afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks();request.mockClear();available.mockResolvedValue(true);expect(modalPresenceStore.getState().owners.size).toBe(0);});
 
 test.each([false,true])('warm pre-prompt stays visible through its own registration; Sure persists before native request (dark=%s)',async dark=>{
-  const context=await setup(),width=dark?320:390;jest.spyOn(Native,'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame({dark}));
+  const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame({dark}));
   try {
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());expect(screen.getByRole('button',{name:'Maybe later'})).toBeOnTheScreen();expect(hasAppModal()).toBe(false);expect(modalPresenceStore.getState().owners.size).toBe(1);capture('review-preprompt-'+(dark?'dark-large':'light'),view.toJSON());
     const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;context.sqlite.exec("CREATE TRIGGER fail_ui_review BEFORE INSERT ON preferences WHEN NEW.key='app_review' BEGIN SELECT RAISE(ABORT,'review save failure'); END");await press('Sure');expect(request).not.toHaveBeenCalled();expect(screen.getByRole('button',{name:'Sure'})).toBeOnTheScreen();expect(screen.getByText('Could not save that. Please try again.')).toBeOnTheScreen();

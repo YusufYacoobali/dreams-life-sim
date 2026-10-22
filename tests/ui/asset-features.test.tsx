@@ -81,7 +81,7 @@ test('all forty listings have varied, plausible specifications without changing 
 test.each([false, true])('browse, offer and lease screens share feature values without mutating the life (dark=%s)', dark => {
   mockWorld = funded(); mockRoute = { id: 'studio', kind: 'property' };
   const original = encodeWorld(mockWorld), width = dark ? 320 : 390;
-  jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
+  jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
   const suffix = dark ? 'dark-large' : 'light', view = render(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
@@ -90,6 +90,7 @@ test.each([false, true])('browse, offer and lease screens share feature values w
   fireEvent.press(home); expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio' } });
   view.rerender(frame(<Offer />));
   for (const label of ['Beds: 1', 'Baths: 1', 'Sq ft: 420']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
+  expect(screen.getByLabelText('Beds: 1')).toHaveStyle({ flexBasis: dark ? '46%' : '30%' });
   capture('asset-property-offer-' + suffix, view.toJSON());
   mockRoute = { id: 'used-compact', kind: 'vehicle' }; view.rerender(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
@@ -119,7 +120,7 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   mockWorld = decodeWorld(encodeWorld(mockWorld));
   expect(mockWorld.assets.find(asset => asset.id === car.id)!.condition).toBe(37);
   const original = encodeWorld(mockWorld), width = dark ? 320 : 390;
-  jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
+  jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
   mockRoute = { id: car.id, kind: 'vehicle' };
   const suffix = dark ? 'dark-large' : 'light', view = render(frame(<OwnedAsset />));
