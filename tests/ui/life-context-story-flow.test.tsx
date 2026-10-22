@@ -10,6 +10,7 @@ import { ageOn, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { SaveRepository } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
+import * as choiceAvailability from '../../src/game/choiceAvailability';
 import { database } from '../support/sqlite';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync } from 'node:fs';
@@ -76,21 +77,44 @@ test('an explicitly bound older-family photograph scene retains the exact review
   };
   repository = new SaveRepository(connect());
   try {
+    const availability = jest.spyOn(choiceAvailability, 'choiceUnavailable');
     await repository.initialise(); await repository.create(initial); await bootstrap(); view = render(frame());
     const before = rows(), world = mockStore.getState().world!, beforeWorld = encodeWorld(world);
     expect(Object.keys(before)).toHaveLength(8); expect(screen.getByText(event.body)).toBeOnTheScreen();
+    if (world.pending?.kind !== 'decision') throw new Error('Missing saved family decision');
+    const uiCalls = (snapshot: World) => availability.mock.calls.filter(([candidate]) => candidate === snapshot).length;
+    expect(uiCalls(world)).toBe(event.choices.length);
+    // UI-only immutable identity replacements retain every saved field. A new
+    // world with the same pending object must still refresh current eligibility.
+    const replacedWorld = Object.freeze({ ...world });
+    await act(async () => { mockStore.setState({ world: replacedWorld }); });
+    expect(replacedWorld.pending).toBe(world.pending); expect(uiCalls(replacedWorld)).toBe(event.choices.length);
+    const replacedPending = Object.freeze({ ...world, pending: Object.freeze({ ...world.pending }) });
+    await act(async () => { mockStore.setState({ world: replacedPending }); });
+    expect(replacedPending.pending).not.toBe(world.pending); expect(uiCalls(replacedPending)).toBe(event.choices.length);
+    await act(async () => { mockStore.setState({ world }); });
+    expect(mockStore.getState().world).toBe(world); expect(encodeWorld(mockStore.getState().world!)).toBe(beforeWorld); expect(rows()).toEqual(before);
+    const beforeBusyCalls = uiCalls(world), beforeEngineCalls = availability.mock.calls.length;
+    const presentation = () => screen.UNSAFE_getAllByType(EventModal).find(modal => modal.props.event?.id === event.id)!.props.event;
+    const beforeBusyPresentation = presentation();
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), oldChoose = screen.UNSAFE_getAllByType(EventModal).find(modal => modal.props.event?.id === event.id)!.props.onChoose;
     let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; });
     sqlite.exec("CREATE TRIGGER fail_later_family BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await act(async () => { fireEvent.press(screen.getByRole('button', { name: choice.label })); oldChoose(choice.id); });
     expect(mockStore.getState().busy).toBe(true); expect(screen.getByRole('button', { name: choice.label })).toBeDisabled();
     expect(mockStore.getState().world).toBe(world); expect(rows()).toEqual(before);
+    const heldCalls = uiCalls(world), busyPresentation = presentation();
+    expect(busyPresentation).not.toBe(beforeBusyPresentation);
     await act(async () => release()); await waitFor(() => {
       const modal = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.id === event.id)!;
       expect(within(modal).getByRole('alert')).toHaveTextContent(/couldn't be saved/);
     });
     expect(encodeWorld(mockStore.getState().world!)).toBe(beforeWorld); expect(rows()).toEqual(before);
     expect(mockStore.getState().world?.pending).toBe(world.pending); expect(screen.getByText(event.body)).toBeOnTheScreen();
+    expect(heldCalls).toBe(beforeBusyCalls); expect(uiCalls(world)).toBe(beforeBusyCalls);
+    const engineCalls = availability.mock.calls.slice(beforeEngineCalls);
+    expect(engineCalls).toHaveLength(1); expect(engineCalls[0][0]).not.toBe(world); expect(engineCalls[0][1].id).toBe(choice.id);
+    expect(presentation()).not.toBe(busyPresentation);
     sqlite.exec('DROP TRIGGER fail_later_family'); await press(choice.label);
     const command = { type: 'choose' as const, eventId: event.id, choiceId: choice.id }, expected = resolveCommand(world, command, true);
     expect(mockStore.getState().world).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
