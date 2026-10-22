@@ -229,7 +229,10 @@ export function familyFinanceMonth(world: World) {
     arrangements.forEach((custody, index) => oweFamily(world, payerId, custody.primaryId, total / count + (BigInt(index) < total % count ? 1n : 0n), accountFor(world, payer).currency, 'child-support'));
   }
   for (const person of Object.values(world.people)) person.finance.supportIncomeDue = 0n;
-  for (const debt of world.liabilities.filter(item => item.creditorId && item.principal > 0n && living(world, item.ownerId) && living(world, item.creditorId))) {
+  // Voluntary interest-free personal loans keep the explicit repayment terms
+  // agreed by both people. Mandatory family/restitution collections are unchanged.
+  const voluntaryLoans = new Set(world.personSupportRequests.flatMap(row=>row.liabilityId?[row.liabilityId]:[]));
+  for (const debt of world.liabilities.filter(item => item.creditorId && item.principal > 0n && !voluntaryLoans.has(item.id) && living(world, item.ownerId) && living(world, item.creditorId))) {
     const payer = world.people[debt.ownerId]; const account = accountFor(world, payer, debt.currency);
     const limit = availableCash(account) / 5n, paid = debt.principal < limit ? debt.principal : limit;
     const category = debt.kind === 'restitution' ? 'restitution-collection' : 'family-collection';

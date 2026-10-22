@@ -62,13 +62,15 @@ import { refreshStoryThreads, resolveStory, scheduleStory, storyMonth } from './
 import { RecoveryCommand, recoveryCommandSchema, recoveryMonth, refreshRecoveries, resolveRecovery } from './systems/educationRecovery';
 import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshipCommandSchema } from './systems/scholarships';
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
+import { personSupportCommandSchema, type PersonSupportCommand, refreshPersonSupportOffers, resolvePersonSupport } from './systems/personSupport';
+import { personActionCommandSchema, type PersonActionCommand, resolvePersonAction } from './systems/personInteractions';
 export { IneligibleAction } from './errors';
 
 const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
 export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -94,6 +96,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   const person = world.people[personId];
   if (person.died) return;
   person.died = { ...world.date }; person.causeOfDeath = cause;
+  refreshPersonSupportOffers(world);
   refreshRentalLeases(world);
   endStudyCourse(world, person, 'died');
   refreshUniversityApplications(world);
@@ -357,6 +360,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const support = parseActivity(personSupportCommandSchema, command);
+    const personAction = parseActivity(personActionCommandSchema, command);
     const campus = parseActivity(campusCommandSchema, command);
     const school = parseActivity(schoolCommandSchema, command);
     const education = parseActivity(educationCommandSchema, command);
@@ -388,7 +393,9 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (campus.success) resolveCampus(world, campus.data);
+    if (support.success) resolvePersonSupport(world, support.data);
+    else if (personAction.success) resolvePersonAction(world, personAction.data);
+    else if (campus.success) resolveCampus(world, campus.data);
     else if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);
     else if (hobbyEvent.success) resolveHobbyEvent(world, hobbyEvent.data);
     else if (leisure.success) resolveLeisure(world, leisure.data);
@@ -448,5 +455,6 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   refreshBestFriendships(world);
   world.revision++;
   refreshRentalLeases(world);
+  refreshPersonSupportOffers(world);
   return validateWorld(world, immutable);
 }

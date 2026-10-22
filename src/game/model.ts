@@ -78,6 +78,9 @@ import { validateNpcSeparations } from './systems/npcSeparationValidation';
 import { campusCommunitySchema } from './systems/campusSchemas';
 import { rentalLeaseSchema } from './systems/rentalSchemas';
 import { validateRentalLeases } from './systems/rentalValidation';
+import { personSupportRequestSchema } from './systems/personSupportSchemas';
+import { personActionRecordSchema } from './systems/personActionSchemas';
+import { validatePersonSupport } from './systems/personSupportValidation';
 
 const percentage = z.number().int().min(0).max(100);
 const personId = z.string().regex(/^person_[a-zA-Z0-9_-]+$/);
@@ -110,13 +113,14 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(42), engineVersion: z.literal(44), contentVersion: z.literal(21),
+  schemaVersion: z.literal(43), engineVersion: z.literal(45), contentVersion: z.literal(22),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
   people: z.record(personId, personSchema),
   relationships: z.array(relationshipSchema), bestFriendships: z.array(bestFriendshipSchema),
   teenRelationships: z.array(teenRelationshipSchema),
+  personSupportRequests: z.array(personSupportRequestSchema), personActionHistory: z.array(personActionRecordSchema),
   households: z.array(householdSchema), marriages: z.array(marriageSchema),
   npcCourtships: z.array(npcCourtshipSchema),
   npcSeparations: z.array(npcSeparationSchema),
@@ -353,6 +357,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateCampusCommunities(world, ledger);
   validatePets(world, ledger);
   validateRentalLeases(world, ledger);
+  validatePersonSupport(world, ledger);
   validateLeisure(world, ledger);
   validateHobbyEvents(world, ledger);
   validateStoryThreads(world, ledger);
@@ -647,5 +652,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Renting is prospective. Old ownership, balances, ledger, bound scenes and
   // RNG remain exact; no lease or historical housing payment is invented.
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 43 && parsed.contentVersion === 20) { parsed.schemaVersion = 42; parsed.engineVersion = 44; parsed.contentVersion = 21; parsed.rentalLeases = []; }
+  // Personal support and role-specific actions start prospectively. Preserve
+  // every previous balance, bound result, relationship and random stream.
+  if (parsed && parsed.schemaVersion === 42 && parsed.engineVersion === 44 && parsed.contentVersion === 21) { parsed.schemaVersion = 43; parsed.engineVersion = 45; parsed.contentVersion = 22; parsed.personSupportRequests = []; parsed.personActionHistory = []; }
   return validateWorld(parsed, immutable);
 }
