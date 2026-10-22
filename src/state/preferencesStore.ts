@@ -5,14 +5,16 @@ import type { SaveRepository } from '../persistence/repository';
 export const appSettingsSchema = z.object({
   version: z.literal(1), appearance: z.enum(['light', 'dark', 'system']),
   reducedMotion: z.boolean().default(false), haptics: z.boolean().default(false), soundEffects: z.boolean().default(false),
+  dailyReminder: z.boolean().default(false), reminderHour: z.number().int().min(0).max(23).default(19), reminderMinute: z.number().int().min(0).max(59).default(0),
 }).strict();
 export type AppSettings = z.infer<typeof appSettingsSchema>;
-export const defaultAppSettings: AppSettings = { version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false };
+export const defaultAppSettings: AppSettings = { version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false, dailyReminder: false, reminderHour: 19, reminderMinute: 0 };
 export type PreferencesState = {
   settings: AppSettings; ready: boolean; busy: boolean; error: string | null; loadFailed: boolean;
   bootstrap: () => Promise<boolean>; setAppearance: (appearance: AppSettings['appearance']) => Promise<boolean>;
   setReducedMotion: (enabled: boolean) => Promise<boolean>; setHaptics: (enabled: boolean) => Promise<boolean>;
   setSoundEffects: (enabled: boolean) => Promise<boolean>;
+  setDailyReminder: (enabled: boolean) => Promise<boolean>; setReminderTime: (hour: number, minute: number) => Promise<boolean>;
   retry: () => Promise<boolean>; reset: () => Promise<boolean>;
 };
 type Dependencies = { repository: () => Promise<Pick<SaveRepository, 'loadAppSettings' | 'saveAppSettings'>> };
@@ -22,7 +24,8 @@ export function createPreferencesStore(deps: Dependencies) {
     const write = async (input: AppSettings) => {
       if (get().busy) return false;
       const current = get().settings;
-      if (!get().loadFailed && current.appearance === input.appearance && current.reducedMotion === input.reducedMotion && current.haptics === input.haptics && current.soundEffects === input.soundEffects) {
+      if (!get().loadFailed && current.appearance === input.appearance && current.reducedMotion === input.reducedMotion && current.haptics === input.haptics && current.soundEffects === input.soundEffects &&
+        current.dailyReminder === input.dailyReminder && current.reminderHour === input.reminderHour && current.reminderMinute === input.reminderMinute) {
         failedWrite = null; set({ error: null }); return true;
       }
       set({ busy: true, error: null });
@@ -30,7 +33,9 @@ export function createPreferencesStore(deps: Dependencies) {
         const settings = appSettingsSchema.parse(input);
         // Optional fields keep existing version-1 appearance records readable without an eager rewrite.
         await (await deps.repository()).saveAppSettings(JSON.stringify({ version: settings.version, appearance: settings.appearance,
-          ...(settings.reducedMotion ? { reducedMotion: true } : {}), ...(settings.haptics ? { haptics: true } : {}), ...(settings.soundEffects ? { soundEffects: true } : {}) }));
+          ...(settings.reducedMotion ? { reducedMotion: true } : {}), ...(settings.haptics ? { haptics: true } : {}), ...(settings.soundEffects ? { soundEffects: true } : {}),
+          ...(settings.dailyReminder ? { dailyReminder: true } : {}), ...(settings.reminderHour !== defaultAppSettings.reminderHour ? { reminderHour: settings.reminderHour } : {}),
+          ...(settings.reminderMinute !== defaultAppSettings.reminderMinute ? { reminderMinute: settings.reminderMinute } : {}) }));
         failedWrite = null; set({ settings, ready: true, loadFailed: false }); return true;
       } catch {
         failedWrite = { ...input }; set({ error: 'Your app setting could not be saved. Try again.' }); return false;
@@ -54,6 +59,8 @@ export function createPreferencesStore(deps: Dependencies) {
       setReducedMotion: reducedMotion => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, reducedMotion }),
       setHaptics: haptics => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, haptics }),
       setSoundEffects: soundEffects => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, soundEffects }),
+      setDailyReminder: dailyReminder => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, dailyReminder }),
+      setReminderTime: (reminderHour, reminderMinute) => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, reminderHour, reminderMinute }),
       retry: () => failedWrite ? write(failedWrite) : get().bootstrap(),
       reset: () => get().ready ? write(get().loadFailed ? { ...defaultAppSettings } : { ...get().settings, appearance: 'light' }) : Promise.resolve(false),
     };
