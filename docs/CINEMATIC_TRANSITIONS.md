@@ -31,7 +31,8 @@ The player waits for native decoding before starting. Birth covers at 1.4 second
 and death at 1.2 seconds, holds that exact opaque native frame until the target
 route commits plus two layout frames, then plays the remaining segment natively.
 Load/decode failure settles through the same once-only navigation boundary as
-Skip, reduced motion, and the watchdog. Welcome keeps a navy loading surface.
+Reduced Motion and the watchdog. Welcome keeps a navy loading surface and has
+no Skip button.
 
 A local 60 FPS H.264 video was considered. Native vector playback preserves the
 transparent liquid boundary over the actual next screen on both platforms,
@@ -53,7 +54,7 @@ updated for the new SDK-compatible playback dependency.
 The root host uses a full-window iOS overlay and an Android translucent native
 Modal above navigation and event dialogs. iOS avoids presenting a second modal
 controller while a successful-creation confirmation is dismissing. Status bars
-are hidden during playback; safe-area insets keep Skip reachable.
+are hidden during playback.
 
 The native splash remains until the overlay has laid out/shown. Both native
 backgrounds are navy in light/dark mode. `assets/cinematic-splash.png` is one
@@ -79,7 +80,7 @@ applies the splash configuration and links the native animation dependency.
   and death navigate exactly once when fully covered, wait for the destination
   path to commit plus two layout frames, then reveal it. Their ordinary native
   route animations are disabled.
-- Skip, backgrounding, Reduce Motion changes and the watchdog settle a request.
+- Backgrounding, Reduce Motion changes and the watchdog settle a request.
   Request IDs reject late callbacks from an older sequence. Reduced/unknown
   motion navigates directly; no animation delay is required.
 
@@ -154,8 +155,8 @@ npx expo run:ios --configuration Release --device
 Use Android Studio/Perfetto FrameTimeline and Xcode's Animation Hitches/Core
 Animation instruments during a cold welcome, a successfully saved birth, and a
 committed death. Target a stable 60 Hz cadence (16.7 ms budget) during motion;
-check slow navigation's opaque hold separately. Also check background/foreground,
-Skip and Reduce Motion. Debug/Expo Go timing and the reference MP4s do not establish
+check slow navigation's opaque hold separately. Also check background/foreground
+and Reduce Motion. Debug/Expo Go timing and the reference MP4s do not establish
 release-device performance. Detailed local evidence is in
 [smooth-playback.json](verification/cinematics-20261022/smooth-playback.json).
 

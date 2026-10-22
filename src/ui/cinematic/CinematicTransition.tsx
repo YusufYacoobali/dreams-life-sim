@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { AppState, BackHandler, Modal, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { AppState, BackHandler, Modal, Platform, StyleSheet, Text, View } from 'react-native';
 import { FullWindowOverlay } from 'react-native-screens';
 import { StatusBar } from 'expo-status-bar';
 import { router, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import type LottieView from 'lottie-react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { gameStore } from '../../state/useGame';
 import { usePreferences } from '../../state/usePreferences';
 import { useFeedback } from '../feedback';
@@ -35,7 +34,7 @@ export function CinematicTransitionProvider({ children }: React.PropsWithChildre
     if (!active || active.id !== id || active.covered) return;
     const next = { ...active, covered: true };
     current.current = next; setRequest(next);
-    // Mark first, so late UI callbacks, backgrounding and skipping cannot repeat navigation.
+    // Mark first, so late UI callbacks and backgrounding cannot repeat navigation.
     try { active.navigate?.(); }
     catch { current.current = null; setRequest(null); setRunning(false); }
   }, []);
@@ -109,7 +108,7 @@ function OverlaySurface({ children, onClose }: React.PropsWithChildren<{ onClose
 function CinematicPlayer({ request, running, destinationReady, onCovered, onFinished }: {
   request: Request; running: boolean; destinationReady: boolean; onCovered: (id: number) => void; onFinished: (id: number) => void;
 }) {
-  const player = useRef<LottieView>(null), insets = useSafeAreaInsets();
+  const player = useRef<LottieView>(null);
   const [loaded, setLoaded] = useState(false);
   const stage = useRef<'loading' | 'cover' | 'holding' | 'reveal' | 'finished'>('loading');
   const { id, kind } = request;
@@ -145,14 +144,12 @@ function CinematicPlayer({ request, running, destinationReady, onCovered, onFini
   return <View testID={`cinematic-${kind}`} accessibilityViewIsModal style={[styles.canvas, kind === 'welcome' && !loaded ? { backgroundColor: NAVY } : undefined]}>
     <StatusBar hidden />
     <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}><CinematicInk ref={player} kind={kind} onLoaded={() => setLoaded(true)} onFinished={animationFinished} onFailure={() => onFinished(id)} /></View>
-    {kind === 'welcome' ? <Pressable accessibilityRole="button" accessibilityLabel="Skip welcome animation" onPress={() => onFinished(id)} style={[styles.skip, { top: Math.max(insets.top, 20) + 8 }]}><Text style={styles.skipText}>Skip</Text></Pressable> : <Text accessibilityRole="text" accessibilityLiveRegion="polite" style={styles.accessibleLabel}>{kind === 'birth' ? 'A New Life Begins' : 'Remembering your life'}</Text>}
+    {kind !== 'welcome' && <Text accessibilityRole="text" accessibilityLiveRegion="polite" style={styles.accessibleLabel}>{kind === 'birth' ? 'A New Life Begins' : 'Remembering your life'}</Text>}
   </View>;
 }
 
 const styles = StyleSheet.create({
   host: { flex: 1, backgroundColor: NAVY },
   canvas: { flex: 1 },
-  skip: { position: 'absolute', right: 20, minWidth: 60, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 24, backgroundColor: '#061633B3', borderWidth: 1, borderColor: '#F3D5A744' },
-  skipText: { color: '#F3D5A7', fontSize: 14, fontWeight: '500' },
   accessibleLabel: { position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0 },
 });

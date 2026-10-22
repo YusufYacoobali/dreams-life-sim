@@ -52,14 +52,15 @@ beforeEach(() => {
 });
 afterEach(() => { jest.useRealTimers(); AppState.currentState = previousAppState; jest.restoreAllMocks(); });
 
-test('cold welcome waits for preferences, runs 3.2 seconds, can be skipped, ignores late callbacks and never replays on return', () => {
+test('cold welcome waits for preferences, runs 3.2 seconds without a Skip button, ignores late callbacks and never replays on return', () => {
   mockPath = '/'; mockPreferencesReady = false; mockFeedback = { reducedMotion: true, deviceReducedMotion: null };
   const view = render(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
   mockPreferencesReady = true; view.rerender(frame()); expect(screen.getByTestId('cinematic-welcome')).toBeOnTheScreen(); expect(mockRuns).toHaveLength(0);
   mockPreferencesReady = true; mockFeedback = { reducedMotion: false, deviceReducedMotion: false }; view.rerender(frame());
   expect(mockRuns).toHaveLength(1); expect(mockRuns[0]).toMatchObject({ to: 3200, duration: 3200 });
+  expect(screen.queryByRole('button', { name: 'Skip welcome animation' })).toBeNull();
   const finished = mockRuns[0].done;
-  fireEvent.press(screen.getByRole('button', { name: 'Skip welcome animation' })); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
+  act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
   act(() => finished(true)); expect(screen.queryByTestId('cinematic-welcome')).toBeNull();
   view.unmount(); render(frame()); expect(screen.queryByTestId('cinematic-welcome')).toBeNull(); expect(mockRuns).toHaveLength(1);
   expect(mockHideSplash).toHaveBeenCalled();
