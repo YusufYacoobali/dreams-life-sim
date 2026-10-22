@@ -21,6 +21,8 @@ import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import archive from '../fixtures/v25-content4-bubble-archive.json';
 import serviceArchive from '../fixtures/v16-service-archive.json';
 import { pupil } from '../support/pupil';
+import { offerPending } from '../../src/game/pendingQueue';
+import { bindEvent, eventTemplates } from '../../src/game/content/events';
 
 function drain(world: World, annual = false): World {
   let guard = 0;
@@ -99,6 +101,58 @@ test('separation keeps the original owner and their actual monthly financial par
 test('an adult-owned pet is rehomed explicitly without a refund and deceased companions never age, revive or receive further care', () => {
   let world = pupil('US', 20); fund(world); world = act(world, adoptCommand(world)); const before = structuredClone(world.accounts), petId = world.pets[0].id; world = act(world, { type: 'rehome-pet', petId }); expect(world.pets[0].status).toBe('rehomed'); expect(world.accounts).toEqual(before); expect(() => resolveCommand(world, { type: 'rehome-pet', petId })).toThrow(/responsible owner/);
   world = adopted(); world.pets[0].health = 1; world.pets[0].illness = 'infection'; world = month(world); expect(world.pets[0].status).toBe('deceased'); const months = world.pets[0].periods.length, age = petAgeMonths(world, world.pets[0]); world.date = monthFrom(world.date, 12); petMonth(world); expect(world.pets[0].periods).toHaveLength(months); expect(petAgeMonths(world, world.pets[0])).toBe(age); expect(world.pets[0].health).toBe(0); validateWorld(world);
+});
+
+test('a pet memorial survives an urgent queued result and reload, then stays acknowledged without another care payment', () => {
+  let world = pupil('US', 20); fund(world); world = adopted(world);
+  const pet = world.pets[0]; pet.health = 1; pet.illness = 'infection';
+  offerPending(world, { id:'urgent-existing-result',kind:'result',title:'An urgent appointment',body:'Resolve the appointment first.',illustration:'health',effects:[] },120);
+  world.date = monthFrom(world.date,1); petMonth(world);
+  expect(world.pending?.id).toBe('urgent-existing-result');
+  const memorial = world.deferred.find(item=>item.event.title==='Goodbye, '+pet.name)!;
+  expect(memorial).toMatchObject({ priority:60,event:{kind:'result',illustration:'pet-memorial'} });
+  expect(memorial.event.body).toContain(pet.name+' the '+pet.species+' died');
+  const saved = encodeWorld(validateWorld(world));
+  world = decodeWorld(saved); expect(world.deferred.filter(item=>item.event.id===memorial.event.id)).toHaveLength(1);
+  world = resolveCommand(world,{type:'acknowledge',resultId:'urgent-existing-result'});
+  expect(world.pending?.id).toBe(memorial.event.id);
+  world = decodeWorld(encodeWorld(world));
+  world = resolveCommand(world,{type:'acknowledge',resultId:memorial.event.id});
+  expect(world.pending).toBeNull(); expect(world.deferred).toEqual([]);
+  const payments = world.ledger.filter(row=>row.category==='pet-care').length;
+  world.date = monthFrom(world.date,1); petMonth(world);
+  expect(world.pending).toBeNull(); expect(world.ledger.filter(row=>row.category==='pet-care')).toHaveLength(payments);
+  expect(decodeWorld(encodeWorld(validateWorld(world))).pets[0].status).toBe('deceased');
+});
+
+test('a known former household pet still has a death notice when its saved bond is zero', () => {
+  let world = pupil('US',20); fund(world); world = adopted(world);
+  const pet = world.pets[0], owner = world.people[pet.ownerId];
+  const observer = Object.values(world.people).find(person=>person.id!==owner.id&&!person.died)!;
+  ownHousehold(world,owner); pet.bonds[observer.id]=0; world.activePersonId=observer.id;
+  expect(observer.householdId).not.toBe(owner.householdId);
+  expect(pet.adoptedById).not.toBe(observer.id);
+  pet.health=1; pet.illness='infection'; world.date=monthFrom(world.date,1); petMonth(world);
+  expect(world.pending).toMatchObject({kind:'result',title:'Goodbye, '+pet.name,illustration:'pet-memorial'});
+  expect(decodeWorld(encodeWorld(validateWorld(world))).pending).toEqual(world.pending);
+});
+
+test('a memorial preserves an already bound family decision and its choices while it waits in the saved queue', () => {
+  let world = adopted(); fund(world);
+  const decision = bindEvent(world,eventTemplates.find(item=>item.id==='broken-mug')!);
+  expect(decision.personIds.length).toBeGreaterThan(0);
+  offerPending(world,decision);
+  world.pets[0].health=1; world.pets[0].illness='infection';
+  world.date=monthFrom(world.date,1); petMonth(world);
+  expect(world.pending).toMatchObject({kind:'result',illustration:'pet-memorial'});
+  expect(world.deferred).toContainEqual({priority:20,event:decision});
+  world=decodeWorld(encodeWorld(validateWorld(world)));
+  world=resolveCommand(world,{type:'acknowledge',resultId:world.pending!.id});
+  expect(world.pending).toEqual(decision);
+  world=resolveCommand(world,{type:'choose',eventId:decision.id,choiceId:decision.choices[0].id});
+  expect(world.pending).toMatchObject({kind:'result',id:decision.id+'_result'});
+  world=resolveCommand(world,{type:'acknowledge',resultId:world.pending!.id});
+  expect(world.pending).toBeNull(); expect(world.deferred).toEqual([]);
 });
 test('genuine content-four current/decision/newborn archives gain empty pet histories without altering any original financial, participant, RNG or pending field', () => {
   const raw = (payload: string) => JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(payload).data, 'base64')))), originals = [raw(archive.checkpoint), ...archive.snapshots.map(item => raw(item.payload))], save = decodeSave(JSON.stringify(archive)), worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];

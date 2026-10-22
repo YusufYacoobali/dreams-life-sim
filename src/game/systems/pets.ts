@@ -50,17 +50,21 @@ export function petAdoptionReason(world: World, offerId: typeof petOfferIds[numb
   if (world.actionCounts[adoptionKey(world, offerId)]) return 'You already requested this adoption this calendar year';
   if (availableCash(accountFor(world, owner)) < petAdoptionFee(world, offerId)) return fullName(owner) + ' cannot cover the adoption fee';
 }
-function notify(world: World, pet: Pet, title: string, body: string) {
+function notify(world: World, pet: Pet, title: string, body: string, illustration = 'pet-' + pet.species, priority = 35) {
   const player = active(world), owner = world.people[pet.ownerId];
-  if (player.died || !(pet.adoptedById === player.id || pet.bonds[player.id] || !!owner.householdId && owner.householdId === player.householdId)) return;
-  offerPending(world, { id: 'pet_' + pet.id + '_' + world.revision + '_' + pet.periods.length + '_' + (pet.endKind ?? (pet.unfundedMonths ? 'unfunded' : 'illness')), kind: 'result', title, body, illustration: 'pet-' + pet.species, effects: [] }, 35);
+  // A known companion can have a zero bond after a falling-out. Their profile
+  // and history remain accessible, so their death must not silently disappear.
+  if (player.died || !(pet.adoptedById === player.id || pet.ownerId === player.id || pet.bonds[player.id] !== undefined || !!owner.householdId && owner.householdId === player.householdId)) return;
+  offerPending(world, { id: 'pet_' + pet.id + '_' + world.revision + '_' + pet.periods.length + '_' + (pet.endKind ?? (pet.unfundedMonths ? 'unfunded' : 'illness')), kind: 'result', title, body, illustration, effects: [] }, priority);
   if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
 }
 function endPet(world: World, pet: Pet, status: 'rehomed' | 'deceased', reason: string, kind: NonNullable<Pet['endKind']>) {
   pet.endKind = kind; pet.status = status; pet.ended = { ...world.date }; pet.endReason = reason; pet.owners.at(-1)!.ended = { ...world.date };
   fact(world, pet.name + (status === 'deceased' ? ' died. ' : ' found a new home through the shelter. ') + reason, 'pet', '', pet.ownerId);
   if (status === 'deceased') for (const [id, bond] of Object.entries(pet.bonds)) if (!world.people[id].died && bond >= 30) world.people[id].stats.happiness = bounded(world.people[id].stats.happiness - (bond >= 70 ? 12 : 6));
-  notify(world, pet, status === 'deceased' ? 'Goodbye, ' + pet.name : pet.name + ' has a new home', reason);
+  notify(world, pet, status === 'deceased' ? 'Goodbye, ' + pet.name : pet.name + ' has a new home', status === 'deceased'
+    ? pet.name + ' the ' + pet.species + ' died' + (kind === 'age' ? ' of old age' : '') + '. You’ll miss your time together.'
+    : reason, status === 'deceased' ? 'pet-memorial' : 'pet-' + pet.species, status === 'deceased' ? 60 : 35);
 }
 export function petRehomeReason(world: World, pet: Pet): string | undefined {
   const person = active(world);
@@ -89,10 +93,10 @@ export function resolvePets(world: World, command: PetCommand) {
     const offer = petOffers[command.offerId], definition = petRules[offer.species], relation = world.relationships.find(item => item.from === owner.id && item.to === person.id || item.to === owner.id && item.from === person.id), chance = owner.id === person.id ? 100 : Math.min(95, 45 + Math.floor((relation?.strength ?? 20) / 2)), roll = owner.id === person.id ? 100 : draw(world, 'npcs', 1, 100), accepted = roll <= chance;
     world.actionCounts[adoptionKey(world, command.offerId)] = 1;
     const attempt = { id: 'pet_adoption_' + world.revision, personId: person.id, ownerId: owner.id, offerId: command.offerId, date: { ...world.date }, chance, roll, accepted, relationshipStrength: owner.id === person.id ? null : relation?.strength ?? 20, country: owner.country, city: owner.city, petId: accepted ? 'pet_' + world.revision + '_' + world.pets.length : null }; world.petAdoptions.push(attempt);
-    if (!accepted) { fact(world, owner.firstName + ' did not agree to take responsibility for the proposed pet adoption.', 'pet-adoption'); result(world, 'Not the right time for a pet', owner.firstName + ' did not agree. No pet was adopted and no adoption fee was charged. The request can be made again next calendar year.', 'pet-paw'); return; }
+    if (!accepted) { fact(world, owner.firstName + ' did not agree to take responsibility for the proposed pet adoption.', 'pet-adoption'); result(world, 'Not the right time for a pet', owner.firstName + ' said no. Keep the pet photos handy for next year. No adoption fee was charged.', 'pet-paw'); return; }
     charge(world, fee, 'pet-adoption', 'Adopted ' + command.name, undefined, countries[owner.country].currency, owner);
     const pet: Pet = { id: attempt.petId!, species: offer.species, offerId: command.offerId, breed: offer.breed, name: command.name, born: monthFrom(world.date, -Math.min(offer.ageMonths, absolute(world) - 12), world.calendarAnchorDay), adopted: { ...world.date }, adoptedById: person.id, originalOwnerId: owner.id, ownerId: owner.id, country: owner.country, city: owner.city, status: 'active', ended: null, endReason: null, endKind: null, lifespanMonths: draw(world, 'outcomes', definition.minimumLife, definition.maximumLife), health: 90, happiness: 75, bonds: { [person.id]: 30, ...(owner.id === person.id ? {} : { [owner.id]: 20 }) }, temperament: (['gentle', 'playful', 'independent'] as const)[draw(world, 'outcomes', 0, 2)], illness: 'none', recoveryMonths: 0, adoptionFee: fee, adoptionCurrency: countries[owner.country].currency, adoptionTransactionId: world.ledger.at(-1)!.id, consent: { roll, chance }, lastMonth: absolute(world), unfundedMonths: 0, lastVetMonth: null, owners: [{ personId: owner.id, since: { ...world.date }, ended: null }], periods: [], visits: [], moves: [] };
-    world.pets.push(pet); person.stats.happiness = bounded(person.stats.happiness + 4); fact(world, 'I welcomed ' + pet.name + ', a ' + pet.breed.toLowerCase() + ', into our household. ' + fullName(owner) + ' took responsibility for care costs.', 'pet-adoption'); result(world, 'Welcome, ' + pet.name, 'Your new companion is home. Food and basic care are funded automatically each actual month by ' + owner.firstName + '. Walks and play are optional. When nobody at home can care for your pet, paid boarding is needed; two unfunded care months lead to a shelter finding a new home.', 'pet-' + pet.species); return;
+    world.pets.push(pet); person.stats.happiness = bounded(person.stats.happiness + 4); fact(world, 'I welcomed ' + pet.name + ', a ' + pet.breed.toLowerCase() + ', into our household. ' + fullName(owner) + ' took responsibility for care costs.', 'pet-adoption'); result(world, 'Welcome, ' + pet.name, pet.name + ' is home. Your household just got a little livelier.', 'pet-' + pet.species); return;
   }
   const pet = world.pets.find(item => item.id === command.petId); if (!pet) throw new IneligibleAction('Choose an existing pet');
   if (command.type === 'rehome-pet') { const reason = petRehomeReason(world, pet); if (reason) throw new IneligibleAction(reason); endPet(world, pet, 'rehomed', 'I arranged for the shelter to find a suitable home. Adoption and care costs are not refunded.', 'voluntary'); return; }
@@ -105,11 +109,11 @@ export function resolvePets(world: World, command: PetCommand) {
     charge(world, paid, 'pet-vet', 'Veterinary care: ' + pet.name, undefined, countries[pet.country].currency, owner);
     const roll = draw(world, 'outcomes', 1, 100), successful = roll <= 90; pet.lastVetMonth = absolute(world); pet.visits.push({ date: { ...world.date }, personId: person.id, ownerId: owner.id, country: pet.country, city: pet.city, currency: countries[pet.country].currency, paid, paymentId: world.ledger.at(-1)!.id, roll, successful });
     if (pet.illness !== 'none' && successful) { pet.illness = 'recovering'; pet.recoveryMonths = 2; } else if (pet.illness === 'none' && successful) pet.health = bounded(pet.health + 3);
-    fact(world, 'I took ' + pet.name + ' to the vet. ' + (pet.illness === 'recovering' ? 'Treatment began; recovery will take time.' : pet.illness === 'infection' ? 'The first treatment did not resolve the illness.' : 'The routine check-up was complete.'), 'pet-care'); result(world, 'Veterinary Visit', pet.illness === 'recovering' ? 'Treatment was started. Two actual months of funded care support recovery.' : pet.illness === 'infection' ? 'This treatment did not work. Your pet still needs care; a follow-up is possible next month.' : 'The check-up is recorded. Basic care still matters as your pet ages.', 'pet-vet'); return;
+    fact(world, 'I took ' + pet.name + ' to the vet. ' + (pet.illness === 'recovering' ? 'Treatment began; recovery will take time.' : pet.illness === 'infection' ? 'The first treatment did not resolve the illness.' : 'The routine check-up was complete.'), 'pet-care'); result(world, 'Veterinary Visit', pet.illness === 'recovering' ? 'Treatment has started. Recovery takes two months of funded care.' : pet.illness === 'infection' ? 'The treatment did not work. You can try another visit next month.' : 'The check-up is done. Keep making time for your companion.', 'pet-vet'); return;
   }
   const bond = pet.bonds[person.id] ?? 0; pet.bonds[person.id] = bounded(bond + (command.activity === 'play' ? 5 : 3)); pet.happiness = bounded(pet.happiness + (command.activity === 'play' ? 5 : 3)); person.stats.happiness = bounded(person.stats.happiness + 2); person.stats.stress = bounded(person.stats.stress - 2);
   if (command.activity === 'walk') { person.stats.energy = bounded(person.stats.energy - 4); person.stats.fitness = bounded(person.stats.fitness + 1); }
-  fact(world, command.activity === 'walk' ? 'I took ' + pet.name + ' for a walk.' : command.activity === 'feed' ? 'I spent feeding time with ' + pet.name + '; regular food stays part of automatic monthly care.' : 'I played with ' + pet.name + '.', 'pet-care'); result(world, 'Time with ' + pet.name, 'You spent some time together. Regular food and care continue automatically; you do not need to repeat these activities to keep your pet fed.', 'pet-' + pet.species);
+  fact(world, command.activity === 'walk' ? 'I took ' + pet.name + ' for a walk.' : command.activity === 'feed' ? 'I kept ' + pet.name + ' company at mealtime.' : 'I played with ' + pet.name + '.', 'pet-care'); result(world, 'Time with ' + pet.name, command.activity === 'walk' ? 'Fresh air, interesting smells, excellent company.' : command.activity === 'feed' ? 'You kept ' + pet.name + ' company over a meal.' : 'You made a little time for ' + pet.name + '. A good use of the day.', 'pet-' + command.activity);
 }
 export function petMonth(world: World) {
   const month = absolute(world);
@@ -131,10 +135,10 @@ export function petMonth(world: World) {
     else if (pet.illness === 'infection') pet.health = bounded(pet.health - 4);
     else if (healthRoll <= 2) { pet.illness = 'infection'; pet.health = bounded(pet.health - 8);  }
     pet.periods.push({ month, ledgerCursor, country: pet.country, city: pet.city, ownerId: owner.id, currency, foodDue, boardingDue, paid: funded ? total : 0n, paymentId: funded ? world.ledger.at(-1)!.id : null, care: !funded ? 'unfunded' : carer?.id === owner.id ? 'owner' : carer ? 'family' : 'boarding', carerId: carer?.id ?? null, healthRoll, health: pet.health, happiness: pet.happiness });
-    if (pet.unfundedMonths >= 2) endPet(world, pet, 'rehomed', 'Two actual care periods could not be funded. The shelter arranged a new home. No refund or sale income was created.', 'unfunded');
+    if (pet.unfundedMonths >= 2) endPet(world, pet, 'rehomed', 'Two months of care went unpaid. The shelter found a new home. No payments were refunded.', 'unfunded');
     else if (pet.health === 0 || petAgeMonths(world, pet) >= pet.lifespanMonths) endPet(world, pet, 'deceased', pet.health === 0 ? 'Their health declined despite the time we had together.' : 'They reached the end of their life.', pet.health === 0 ? 'health' : 'age');
-    else if (newlyIll) notify(world, pet, pet.name + ' became unwell', pet.name + ' became unwell this month. Review their current condition and veterinary options from their profile.');
-    else if (!funded) notify(world, pet, pet.name + ' needs funded care', 'This month’s care could not be funded. Add available cash to ' + owner.firstName + '’s ' + currency + ' account before the next month to keep care in place.');
+    else if (newlyIll) notify(world, pet, pet.name + ' became unwell', pet.name + ' is unwell. A vet visit may help.');
+    else if (!funded) notify(world, pet, pet.name + ' needs funded care', owner.firstName + ' could not cover this month’s care. Pay next month to avoid shelter rehoming.');
   }
 }
 export function relocatePets(world: World, personIds: string[], country: CountryCode, city: string, relocationId: string, transactionId: string) {
@@ -150,7 +154,7 @@ export function petOwnerDied(world: World, personId: string) {
   for (const pet of world.pets.filter(item => item.status === 'active' && item.ownerId === personId)) {
     const eligible = Object.values(world.people).filter(member => availableCarer(world, member) && member.country === pet.country && member.city === pet.city && (!!oldOwner.householdId && member.householdId === oldOwner.householdId || world.relationships.some(relation => relation.from === personId && relation.to === member.id && relation.roles.some(role => role === 'parent' || role === 'guardian') || relation.romance === 'married' && [relation.from, relation.to].includes(personId) && [relation.from, relation.to].includes(member.id))));
     const next = eligible.find(member => member.id === world.activePersonId) ?? eligible[0];
-    if (!next) { endPet(world, pet, 'rehomed', 'After the responsible owner died, no existing available local adult could take over. A shelter found a new home.', 'owner-unavailable'); continue; }
+    if (!next) { endPet(world, pet, 'rehomed', 'No local adult could take over after their owner died. The shelter found a new home.', 'owner-unavailable'); continue; }
     pet.owners.at(-1)!.ended = { ...world.date }; pet.owners.push({ personId: next.id, since: { ...world.date }, ended: null }); pet.ownerId = next.id; pet.bonds[next.id] ??= 10;
     fact(world, 'I took responsibility for ' + pet.name + ' after ' + oldOwner.firstName + ' died.', 'pet-guardian', '', next.id);
   }

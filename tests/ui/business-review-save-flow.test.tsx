@@ -76,28 +76,24 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
     let view = render(frame(startup));
     if (custom) {
       await edit('Business name', draftName);
-      const queuedStartup = screen.getByRole('button', { name: 'Review Startup' });
-      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Other\./ })); });
-      await act(async () => { fireEvent.press(queuedStartup); });
-      expect(screen.UNSAFE_getAllByType(Modal)).toHaveLength(1); expect(modal().getByText('Choose an operating model')).toBeOnTheScreen(); expect(screen.queryByText(title)).toBeNull();
-      await act(async () => { fireEvent.press(modal().getByRole('radio', { name: /^Retail Shop ·/ })); });
-      await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByLabelText('Business name')).toHaveProp('value', draftName);
-      expect(screen.getByRole('radio', { name: /^Coffee Shop\./, checked: true })).toBeOnTheScreen();
-      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Other\./ })); });
-      await act(async () => { fireEvent.press(modal().getByRole('radio', { name: /^Retail Shop ·/ })); }); await press('Use Model');
-      expect(screen.getByRole('radio', { name: /^Other\./, checked: true })).toBeOnTheScreen(); expect(screen.getByRole('radio', { name: /^Retail Shop\./, checked: false })).toBeOnTheScreen();
+      expect(screen.queryByRole('radio', { name: /^Other\./ })).toBeNull();
+      expect(screen.queryByText('Operating model')).toBeNull();
+      await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); });
+      expect(screen.UNSAFE_queryAllByType(Modal)).toHaveLength(0);
+      expect(screen.getByRole('radio', { name: /^Retail Shop\./, checked: true })).toBeOnTheScreen();
+      expect(screen.getByLabelText('Business name')).toHaveProp('value', draftName);
       expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     }
     else if (startup) { await act(async () => { fireEvent.press(screen.getByRole('radio', { name: /^Retail Shop\./ })); }); await edit('Business name', draftName); }
     else { await edit('Additional business capital', '123.45'); await edit('Business profit withdrawal', '17.25'); }
     const launch = startup ? 'Review Startup' : 'Review Funding';
-    const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); if (custom) { expect(modal().getByText('Operating model')).toBeOnTheScreen(); expect(modal().getByText('Retail Shop')).toBeOnTheScreen(); } };
+    const expectTerms = () => { expect(modal().getByText(title)).toBeOnTheScreen(); for (const value of startup ? [quote.capital, quote.registration, quote.total] : [12345n]) expect(modal().getByText(money(value))).toBeOnTheScreen(); if (startup) { expect(modal().getByText('Business type')).toBeOnTheScreen(); expect(modal().getByText('Retail Shop')).toBeOnTheScreen(); } };
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); await press(launch); expectTerms(); await press('Never mind'); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
     await press(launch); context.sqlite.exec("CREATE TRIGGER fail_business_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press(confirm); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expectTerms();
     expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     expect(screen.getByLabelText(startup ? 'Business name' : 'Additional business capital')).toHaveProp('value', startup ? draftName : '123.45');
-    if (custom) expect(screen.getByRole('radio', { name: /^Other\./, checked: true })).toBeOnTheScreen();
+    if (custom) expect(screen.getByRole('radio', { name: /^Retail Shop\./, checked: true })).toBeOnTheScreen();
     context.sqlite.exec('DROP TRIGGER fail_business_review'); const release = context.pauseNextSave(); await press(confirm); expect(mockStore.getState().busy).toBe(true); expectTerms();
     expect(screen.getByRole('button', { name: launch })).toBeDisabled(); expect(modal().getByRole('button', { name: confirm })).toBeDisabled(); expect(modal().getByRole('button', { name: 'Never mind' })).toBeDisabled();
     expect(screen.getAllByRole('button', { busy: true })).toHaveLength(1); expect(modal().getByRole('button', { name: confirm, busy: true })).toBeOnTheScreen();
