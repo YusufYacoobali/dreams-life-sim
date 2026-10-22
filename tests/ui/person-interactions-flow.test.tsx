@@ -2,11 +2,11 @@ import React from 'react';
 import * as Native from 'react-native';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
-import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
+import { decodeWorld, encodeWorld, fullName, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { accountFor, post } from '../../src/game/systems/common';
 import { personActionOptions } from '../../src/game/systems/personInteractions';
@@ -34,6 +34,7 @@ const frame = (width = 390, dark = false) => <SafeAreaProvider initialMetrics={{
 const press = async (name: string | RegExp) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
 const world = () => mockStore.getState().world!;
 const selection = () => screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.id.startsWith('person-support:'))!;
+const pressSelection = async (name: string) => { await act(async () => fireEvent.press(within(selection()).getByRole('button', { name }))); };
 
 async function setup(initial: World) {
   const context = database(), repository = new SaveRepository(context.driver); await repository.initialise(); await repository.create(initial);
@@ -88,10 +89,10 @@ test('requesting a loan saves the real offer and only explicit acceptance create
     await press(/^Ask for a Loan\./);
     await act(async () => fireEvent.press(screen.getByRole('radio', { name: /^Small\b/ })));
     context.sqlite.exec("CREATE TRIGGER fail_person_request BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-    await press('Ask for a Loan'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+    await pressSelection('Ask for a Loan'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(encodeWorld(world())).toBe(before); expect(encodeWorld(await context.repository.load(initial.id))).toBe(before);
     expect(screen.getByRole('radio', { name: /^Small\b/, checked: true })).toBeOnTheScreen();
-    context.sqlite.exec('DROP TRIGGER fail_person_request'); await press('Ask for a Loan');
+    context.sqlite.exec('DROP TRIGGER fail_person_request'); await pressSelection('Ask for a Loan');
     expect(encodeWorld(world())).toBe(encodeWorld(predicted)); const offer = world().personSupportRequests.at(-1)!;
     expect(offer.status).toBe('offered'); expect(offer.offered).toBeGreaterThan(0n); expect(offer.requested).toBe(option.amount);
     expect(world().liabilities).toEqual(initial.liabilities);
@@ -135,7 +136,8 @@ test('a captured money-request callback cannot send to a former profile after ch
     const before = encodeWorld(world()); mockPersonId = 'person_parent2'; view.rerender(frame());
     await act(async () => { await stale.onChoose('small'); stale.onCancel(); });
     expect(encodeWorld(world())).toBe(before); expect(encodeWorld(await context.repository.load(initial.id))).toBe(before);
-    expect(screen.queryByRole('button', { name: 'Ask for Money' })).toBeNull(); view.unmount();
+    expect(screen.getByRole('header', { name: fullName(world().people[mockPersonId]) })).toBeOnTheScreen();
+    expect(screen.UNSAFE_getAllByType(EventModal).filter(item => item.props.event?.id.startsWith('person-support:'))).toHaveLength(0); view.unmount();
   } finally { context.sqlite.close(); }
 });
 
