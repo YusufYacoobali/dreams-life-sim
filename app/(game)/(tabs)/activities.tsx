@@ -10,6 +10,7 @@ import { useGame } from '../../../src/state/useGame';
 import { isConfined } from '../../../src/game/systems/legalSchemas';
 import { TravelArt } from '../../../src/assets/TravelArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
+import { EndLifeAction } from '../../../src/ui/EndLifeAction';
 
 export default function Activities() {
   const c = useColors();
@@ -41,6 +42,7 @@ export default function Activities() {
       <ActionRow title="Saved Lives" subtitle="Continue a saved life or view previous lives" icon={<Illustration id="property" />} onPress={() => router.push('/saved-lives')} />
       <ActionRow title="Settings" subtitle="Appearance and local saved lives" icon={<Ionicons name="settings-outline" size={30} color={c.muted} />} onPress={() => router.push('/settings')} />
       <ActionRow title="Time Machine" subtitle="Restore a historical moment as a new branch" icon={<HealthLegalArt id="rewind" />} onPress={() => router.push('/time-machine')} />
+      <EndLifeAction />
     </Card>
   </Page>;
 }

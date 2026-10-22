@@ -62,7 +62,9 @@ import { refreshScholarships, resolveScholarship, ScholarshipCommand, scholarshi
 import { refreshWorkplaces, resolveWorkplace, workplaceCommandSchema, workplaceMonth, WorkplaceCommand } from './systems/workplaces';
 export { IneligibleAction } from './errors';
 
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand;
+const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
+export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand;
 const commandOwners = new Map<string, z.ZodType>();
 for (const schema of [campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
@@ -314,8 +316,13 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   if (!world.birthAcknowledged) throw new IneligibleAction('Begin this life first');
   if(serviceAway(world)&&['meet-people','move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','vaccinate','exercise','fertility-care','cosmetic-care','public-action'].includes(command.type))throw new IneligibleAction('Return from your assignment before this in-person activity');
   if (activeTrip(world) && ['move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','treat','vaccinate','exercise','fertility-care','cosmetic-care','public-action','adopt','try-child','review-custody','divorce'].includes(command.type)) throw new IneligibleAction('Return from your trip before this activity at home');
-  const custody = custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
-  if (command.type === 'advance') {
+  const custody = command.type === 'end-life' ? undefined : custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
+  if (command.type === 'end-life') {
+    const reviewed = endLifeCommandSchema.safeParse(command);
+    if (!reviewed.success || reviewed.data.lifeId !== world.id || reviewed.data.personId !== player.id || reviewed.data.expectedRevision !== world.revision) throw new IneligibleAction('This life changed. Review End This Life again before confirming.');
+    if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    recordDeath(world, player.id, 'Ended by choice');
+  } else if (command.type === 'advance') {
     if (world.pending || world.annual) throw new IneligibleAction('Finish the current event first');
     world.annual = { id: 'year_' + world.revision, startDate: { ...world.date }, targetDate: monthFrom(world.date, 12, world.calendarAnchorDay), monthsProcessed: 0, stage: 'months', pausedForPlanning: false, pacing: { ruleVersion: 1, decisions: [] } };
     continueYear(world);

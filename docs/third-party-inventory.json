@@ -23,7 +23,7 @@
     "readableNoticeFiles": 734,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1097
+    "projectArtFiles": 1031
   },
   "directDependencies": [
     {
@@ -17918,6 +17918,7 @@
         "app/saved-lives.tsx",
         "app/settings.tsx",
         "app/time-machine.tsx",
+        "src/ui/EndLifeAction.tsx",
         "src/ui/LifeMilestoneArt.tsx",
         "src/ui/ProgressElements.tsx"
       ],
@@ -18813,8 +18814,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-0.png",
       "status": "present",
-      "bytes": 24126,
-      "sha256": "f934d8107a80458431377b328a54559e5e430644edc5eb6a6b22fc3988412a56",
+      "bytes": 40023,
+      "sha256": "cb560824444fea0196ad2a9b4da514430c4f1f7c1cbee0e5c28efe8d02268b9b",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18822,8 +18823,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-1.png",
       "status": "present",
-      "bytes": 19410,
-      "sha256": "106ac7d3cd6fdf090b28eec8c93c16b68bf652bdfb58d1c662920aa2c265d230",
+      "bytes": 34176,
+      "sha256": "edb553baa277971976b2cc12c8fa13c608c6c531124005ee17f55372d7bb6ede",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18831,8 +18832,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-10.png",
       "status": "present",
-      "bytes": 19321,
-      "sha256": "9cf3d0fd506e1588bf8f1d6de28458923db0617d6833827232bbf9fdd9329b83",
+      "bytes": 32427,
+      "sha256": "4c6e3c5e25c201558ad9cba600c9432d4082dbd3e7432343fb9570effec7b0f4",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18840,8 +18841,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-11.png",
       "status": "present",
-      "bytes": 22100,
-      "sha256": "4073b3cdb41cdb1656cd316ad2c39318d238fc3258726234951af9719f388e32",
+      "bytes": 38233,
+      "sha256": "3c37c6f2105a99d89230c2f0f36540ea9c5ef73bd9a53d0f32d1db045e49028e",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18849,8 +18850,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-12.png",
       "status": "present",
-      "bytes": 24756,
-      "sha256": "35a7f2f9e50844c8ff63458584d2d9146ba64ed2f64092ace2aebef4da738df6",
+      "bytes": 39190,
+      "sha256": "712fd27b64fa74cd029ca1c068d05b2cb0be452f0c993fe9c130bf53b1eca5bc",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18858,8 +18859,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-13.png",
       "status": "present",
-      "bytes": 18206,
-      "sha256": "09465e89cf68cbac4b74dd70f8b5f3dc3fbfa38b985797eb5fa30a4e11a2e292",
+      "bytes": 31770,
+      "sha256": "b7107450aa35913cda24a4244a81cd67b6df2430a60cbddf9acccbe65e1dfbf2",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18867,8 +18868,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-14.png",
       "status": "present",
-      "bytes": 20235,
-      "sha256": "d0e1bd71aef673ed394e45c8a28660c5d05f6eace203fb61cbc99ec529d17350",
+      "bytes": 33480,
+      "sha256": "155eb73227a1666c76960a0586cf7e8cf0b08e8151dc52262d1be6a456d16d64",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18876,8 +18877,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-15.png",
       "status": "present",
-      "bytes": 20405,
-      "sha256": "2f9061ddae4decbe458eff8bf3533ae8acb4a2b66634dd97e511e119404ec6e5",
+      "bytes": 34888,
+      "sha256": "1d94176203f87e2ac3cbb996636b5503ceffaeba496c4188ad110e51372cf149",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18885,8 +18886,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-2.png",
       "status": "present",
-      "bytes": 21000,
-      "sha256": "29d0f8599c67166265785cb1279626014b3c16f4a11c7d68fb5af6a86a7795c2",
+      "bytes": 35995,
+      "sha256": "5b17b18b2896b5e2e42d53d34ca7efc624d35ba4aca0becc292f98fa3f541c18",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18894,8 +18895,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-3.png",
       "status": "present",
-      "bytes": 20686,
-      "sha256": "25d9be2d6fe32843aef25909ce3da84fc8d918bb7b8d048fc1e8f70e337e4324",
+      "bytes": 34549,
+      "sha256": "fba6a6d39caa4dbe5c630fa1109731aaac510fd71b0de5b088ff6f9103f31484",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18903,8 +18904,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-4.png",
       "status": "present",
-      "bytes": 17698,
-      "sha256": "9fdf1198039251e9270b098c720c02c1cc7d298578eaaf46c17101e129bce345",
+      "bytes": 33206,
+      "sha256": "165e69854e68c22640bf0fe3df7edb2a60d06edeeb6992d75cad05dc75c5c5d1",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18912,8 +18913,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-5.png",
       "status": "present",
-      "bytes": 19740,
-      "sha256": "a1e1477b194c9d25ea524364b6c743b97b17e5e179e247a8fd192d0dd3824f99",
+      "bytes": 32824,
+      "sha256": "5aa4aee45e92980ba589f2a929bf5638b6ab9cf9e29c6a3dc8ba8af68f70f14c",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18921,8 +18922,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-6.png",
       "status": "present",
-      "bytes": 18002,
-      "sha256": "4f907286bfde16a690a200818c487fe30f167e1636b6a0e6583a6707d54cb730",
+      "bytes": 31479,
+      "sha256": "b52008e17ffd99905cde1dfe0081bc9f2c602cec107c97ef06fd66ff96bbf0b1",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18930,8 +18931,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-7.png",
       "status": "present",
-      "bytes": 21280,
-      "sha256": "6b2b8d6315b52896a8ce002394b7fc178e9d25985f5b82380398addfd2dc7860",
+      "bytes": 37527,
+      "sha256": "d695571edbed45884abc12e3a84ba1a66594fc50e4ddbe5803f82cd2cb8057f6",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18939,8 +18940,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-8.png",
       "status": "present",
-      "bytes": 20205,
-      "sha256": "93af73d3637025259f5a7a523105fa1e7500a3d14137cb9259094a635ba59f92",
+      "bytes": 38320,
+      "sha256": "fe78e0f99a6e386e71138cbbbd0997d9e1ddee547bfe3d6480777a7dfb2764b0",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -18948,8 +18949,8 @@
     {
       "path": "assets/generated/avatars-v2/clothing-9.png",
       "status": "present",
-      "bytes": 21639,
-      "sha256": "512fec97a526ff4adcc99c488eb6f545828bff531343162be5a8313d89cd93a6",
+      "bytes": 35844,
+      "sha256": "b58b31b30ea22973a9bd062c4485949833c82e0ca3ef282cd2caa8a7546ef042",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19009,28 +19010,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-1-0-back.png",
-      "status": "present",
-      "bytes": 8764,
-      "sha256": "14430da8579522a16097089df93d793f0cdee014c1f860d2ba0f4c03bf81c8fa",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-1-0-front.png",
       "status": "present",
-      "bytes": 64925,
-      "sha256": "9a75f8cce6b9576a91071ffe9dbb72f874904c91adf42567a8c3ecc4a846591e",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-1-1-back.png",
-      "status": "present",
-      "bytes": 9105,
-      "sha256": "d901e8cd68f678980cf909b293460297e52f785a7db7bb9d2d94a4dc12ff0c58",
+      "bytes": 78219,
+      "sha256": "22f36022a250ab0dc254d3706e23f1d6e939361c905f6ca0a64945df31f47e03",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19038,17 +19021,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-1-1-front.png",
       "status": "present",
-      "bytes": 69275,
-      "sha256": "ab1097bdf463ae150811c68ecb5927414946dfdce4f9d05e27c47e60c5b2af6b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-1-2-back.png",
-      "status": "present",
-      "bytes": 10591,
-      "sha256": "ae98419cbcecbbfac6d5eba357156ec435d0ab809bde11a6e26453bc45fcf894",
+      "bytes": 86138,
+      "sha256": "ebaf4739b2a88052b7c43b757d5dac14fede02805f23177f8f41a2b52258ef88",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19056,17 +19030,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-1-2-front.png",
       "status": "present",
-      "bytes": 72148,
-      "sha256": "e5ea5c7dae36597f31be1135ddd41253694368d9f9739f4140ac69a529592ff5",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-1-3-back.png",
-      "status": "present",
-      "bytes": 11375,
-      "sha256": "43528326a4524017fdfc4e4773eccc098035cb41d3b26ec1daca493e8b9b0835",
+      "bytes": 87521,
+      "sha256": "1d623a38177a30daf27e31c62fcf7e3aed9cada7b4facd30fb5c82b2f71efd73",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19074,17 +19039,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-1-3-front.png",
       "status": "present",
-      "bytes": 73125,
-      "sha256": "8470618868feba18a3a1c91589c8a91a8591016ed938d0f426c0419258ce44bb",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-1-4-back.png",
-      "status": "present",
-      "bytes": 10409,
-      "sha256": "94d77aaa23396cbc88c7d2daae5a2a39905f2dc625d7b29ecbcfef2bb2217341",
+      "bytes": 88619,
+      "sha256": "1c96f8a6e7f27ebaed838a7903da39c8c270242e9b090f8de8b5de26d35b56da",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19092,17 +19048,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-1-4-front.png",
       "status": "present",
-      "bytes": 71849,
-      "sha256": "7e6e79b479cae9f0143a909a1432aabc87be5d57a1e0807dbb63679c5b489f9b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-1-5-back.png",
-      "status": "present",
-      "bytes": 11746,
-      "sha256": "b26dc1d5aa30c14f32f712e8f3b9a61dab2af54fc63819e3e0187655c13c93cf",
+      "bytes": 87413,
+      "sha256": "20353def35fc6b9860387609f4351b41d86b0cc8a62d276eb01c842570a8127d",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19110,17 +19057,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-1-5-front.png",
       "status": "present",
-      "bytes": 74623,
-      "sha256": "1d5fa952d61b37cc1290e1b3996a88a92aef42e7da85d35c59059d507b998340",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-0-back.png",
-      "status": "present",
-      "bytes": 13007,
-      "sha256": "a270e4cb9a13b5e2af147b2f0cbfa55e832717cd2d9ceea18623a1cff5ae8c07",
+      "bytes": 90719,
+      "sha256": "acfe4990048ba13e42e4590dfb8b97f8051c983cda4dd59673257bebc6084623",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19128,17 +19066,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-0-front.png",
       "status": "present",
-      "bytes": 60726,
-      "sha256": "08aac6dec2f890c154cb4e59e00c4391c8ea7922fa952be7889f908bad5240b9",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-1-back.png",
-      "status": "present",
-      "bytes": 13295,
-      "sha256": "5144c818912e51c7d3ace16158cf4e64965a977b2021cb306135b0aeb2650c1c",
+      "bytes": 108758,
+      "sha256": "6762dcfce25809dbe2f5a48cc5ae91ecff683085a014f73741b17c3b47f22ab5",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19146,17 +19075,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-1-front.png",
       "status": "present",
-      "bytes": 63182,
-      "sha256": "cd50dfb4f1e1bdbd6b1362fc2c059006fb15c8ce28e2b0d42e0adbd5e9eb723f",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-2-back.png",
-      "status": "present",
-      "bytes": 15659,
-      "sha256": "6cf943e5de9085d21fef37acb04df676f4ac649d118d94f3418ab00b17ffd60c",
+      "bytes": 114013,
+      "sha256": "5c79aa9b05133603288e18d0a8563f9f24fbd71346dfba9ceed3e095ec322729",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19164,17 +19084,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-2-front.png",
       "status": "present",
-      "bytes": 68476,
-      "sha256": "bebd36f9456410531f93a1486d8adaebfecb577dd0215e8e9b9baae9ed338ddf",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-3-back.png",
-      "status": "present",
-      "bytes": 16898,
-      "sha256": "15e7070f09a1e5f5a53f5c8c03c9c03587892d0e52777e10b2bf58768a1aef22",
+      "bytes": 116719,
+      "sha256": "a762667680eafb37feb815952d5a468f2b045d89d09631eda58f191b84b16606",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19182,17 +19093,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-3-front.png",
       "status": "present",
-      "bytes": 70221,
-      "sha256": "09a6b9ba77fb6ece5028c2f30826946c15fc5799b60f5c572dd8cfe03c4887f6",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-4-back.png",
-      "status": "present",
-      "bytes": 15587,
-      "sha256": "233fc986e6d00c2b4f558f62fe4429fc1f5fc261275a612ba6ca20cc0763beda",
+      "bytes": 122426,
+      "sha256": "04eb296bbda97def7c821433b490276e0dc9f8d419911ae4429df4d6b76153e4",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19200,17 +19102,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-4-front.png",
       "status": "present",
-      "bytes": 69044,
-      "sha256": "f2f9d5f4a24591c5a4aaca568e295798127357c728133d866b8d00f72c5e46b9",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-10-5-back.png",
-      "status": "present",
-      "bytes": 17493,
-      "sha256": "83fc379edd2de2ae5286443141163fb0a59fddf5a438ea9e99b396024e05b1dd",
+      "bytes": 117229,
+      "sha256": "a8cb54c1d4d91b36c47b117c9067e8dfd02e7cea052085ef6ff074becd6b4a6b",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19218,17 +19111,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-10-5-front.png",
       "status": "present",
-      "bytes": 72352,
-      "sha256": "28904d0bb102598b190ee793a64a75fed032c8938675ac8b1031b5a237f29002",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-0-back.png",
-      "status": "present",
-      "bytes": 9765,
-      "sha256": "db872b0aea7847379d560c55572e3b3b56f4463997e73c5974f8e3a68303d4c6",
+      "bytes": 115683,
+      "sha256": "f09ed350ad0aed4141715249cfa9430bbf6da12ea6920ee0b9d1adeeb247379b",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19236,17 +19120,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-0-front.png",
       "status": "present",
-      "bytes": 66312,
-      "sha256": "e61fce57758b1547a4455d9d5d889a08c37d1e5beb465df03df73714ca901109",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-1-back.png",
-      "status": "present",
-      "bytes": 10712,
-      "sha256": "8004e159b59301356733a78eeecae769e5962a1d93d591525c6fcfa932bac821",
+      "bytes": 107604,
+      "sha256": "0095e603f0647a28cb98201b5f32b69df210aa936d216413fcaac67ad754cd9f",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19254,17 +19129,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-1-front.png",
       "status": "present",
-      "bytes": 69071,
-      "sha256": "fc406e863a427ae7c28a0b507d7666c1425b891e38a84d3f354d68e695ead338",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-2-back.png",
-      "status": "present",
-      "bytes": 11673,
-      "sha256": "2499088165944f0e040006665befd3f742e3f3b502844750c158363939bebbf3",
+      "bytes": 112829,
+      "sha256": "5de0090e399bae9e6d77baf9e9f9ed08225b08fc42c1d712e67890da0e45c3a6",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19272,17 +19138,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-2-front.png",
       "status": "present",
-      "bytes": 70030,
-      "sha256": "079062587a43b2e211d4322a6a91a2e270efb6a8b9811d489195a6c88d36aa03",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-3-back.png",
-      "status": "present",
-      "bytes": 12863,
-      "sha256": "e0767599fde8a16d977cdf68102782fc5edd7c99f7c75bf7c523c601de026941",
+      "bytes": 115113,
+      "sha256": "374fa9957c275067cf1a61a6489700e6b232e9d8be3bea60ca1bda28495ed0cd",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19290,17 +19147,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-3-front.png",
       "status": "present",
-      "bytes": 73162,
-      "sha256": "88a8b8014bd1f845ce2cf679e8640e2c2ed487badda3ba6067391da2ee414f39",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-4-back.png",
-      "status": "present",
-      "bytes": 11530,
-      "sha256": "61cf3c2e80d418b3f2a4ce2a6de019b3eaede0399f7c7d2bbe17bc86a1adc984",
+      "bytes": 120825,
+      "sha256": "79a645b54a6fae1c6c14a84bc568c655d0e7bf141f99c1e5a9a5a08ddc43d3c2",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19308,17 +19156,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-4-front.png",
       "status": "present",
-      "bytes": 70705,
-      "sha256": "6a9b8ea07002d3ebd2ed490d1249f0f8871afac4d62e30d98b90a0db2e84d886",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-11-5-back.png",
-      "status": "present",
-      "bytes": 12743,
-      "sha256": "7f9567f90cd775a052b9e3f464509aacd3dcf1347a51ab70e4579a346fb52ab2",
+      "bytes": 115636,
+      "sha256": "f1decc20139ffd46dbc95646d3308602363e697a6bcf7c9dc8ce90a05b7a0397",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19326,8 +19165,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-11-5-front.png",
       "status": "present",
-      "bytes": 68279,
-      "sha256": "d188c668548faeceac6776f3ec989578ff4f054aa87bc93f2577de2345f3f8eb",
+      "bytes": 114347,
+      "sha256": "ca9d065f35ce32426f54d9f6b44ff3474e503d9a69daaa6b77fbda1996eaf082",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19387,28 +19226,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-13-0-back.png",
-      "status": "present",
-      "bytes": 5305,
-      "sha256": "965aaa7800a7a8684ea2bab87dffcbd7600c08166a8d314127ae1051e580eb4b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-13-0-front.png",
       "status": "present",
-      "bytes": 80676,
-      "sha256": "b025891fd39c74a835571f93d87316e9d9378f70eeb04004cd463e2f73f72eeb",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-13-1-back.png",
-      "status": "present",
-      "bytes": 5965,
-      "sha256": "42b83cce3630213a78de050ce5c349fc97f5c92ec746be2596c664f53cbd93b6",
+      "bytes": 103945,
+      "sha256": "f60ef72d32b191d02c6195e4ddb5cde4892166782cb4ad0c35ac85611a20c8dd",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19416,17 +19237,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-13-1-front.png",
       "status": "present",
-      "bytes": 87899,
-      "sha256": "83226e6050f05257a387b20ddc03d43d2ce954cf604d435b38d41ea9448b557b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-13-2-back.png",
-      "status": "present",
-      "bytes": 6389,
-      "sha256": "35c26b0947f3a2bb81ccec4f237d5dbd72cb1011b174dad1ff2f932ebc2db32e",
+      "bytes": 118955,
+      "sha256": "26250f438e9f177b1d0c69fa7a88c5582378048010dd53730e31a3e626bac1bd",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19434,17 +19246,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-13-2-front.png",
       "status": "present",
-      "bytes": 93713,
-      "sha256": "8b2e4854f6da9bf00b1aa312b7f2f7567ad1263a71e8e155d5b8673bc7e3bd28",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-13-3-back.png",
-      "status": "present",
-      "bytes": 6790,
-      "sha256": "c08bfea376ba88acde55e4f75075b08a220e6d825e8b6c27afe75dc8b846b55c",
+      "bytes": 126862,
+      "sha256": "cb7b748932a737bbf204950cc775a558791a55aea3417f1c3f3419e130149527",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19452,17 +19255,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-13-3-front.png",
       "status": "present",
-      "bytes": 97291,
-      "sha256": "a0324916c5cbd78e2de02df8fab5ebea49bbbed082aa3a1b0a8fdc8d9782ec8b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-13-4-back.png",
-      "status": "present",
-      "bytes": 6293,
-      "sha256": "010e65dcd2b05a501e3bb5006db41c86f642945ed518ee6071cae5e992fe4851",
+      "bytes": 131766,
+      "sha256": "2d1944b942bf4eae99a6fb033fe00fe1b9fcf2318585eb969ecdde18a4742b13",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19470,17 +19264,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-13-4-front.png",
       "status": "present",
-      "bytes": 93108,
-      "sha256": "1419ff2ccfb8c1e1f3797832af69986d67934d2b6e76944be1814cdf3bf62365",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-13-5-back.png",
-      "status": "present",
-      "bytes": 6957,
-      "sha256": "9a1f09ea6a8fc7d2ea32d9e88aebdb0e8100592c600f318e79e701b48f718e04",
+      "bytes": 126165,
+      "sha256": "3fcbf580d4437bae433becb00c31e3f653e2fa40037e06c1c0b9552695cc34cf",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19488,8 +19273,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-13-5-front.png",
       "status": "present",
-      "bytes": 99519,
-      "sha256": "4083dddfa6ea4a1b1d228940f59409a9d84c4a98dc7618e6a1b52193158a4b9d",
+      "bytes": 133396,
+      "sha256": "0b5c6d851471df60807d57dc9c3f02be58128e3fef3a7dd318c460e27f1e1aa8",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19549,28 +19334,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-15-0-back.png",
-      "status": "present",
-      "bytes": 5824,
-      "sha256": "1575b01db3caf39cc0fd6136a900466c87347473d7f666f2ea4f39fa4f0d9d63",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-15-0-front.png",
       "status": "present",
-      "bytes": 68100,
-      "sha256": "129ab1762d3804fc80efa23ea75b79fdb912985febe25846f56cf3a445950328",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-15-1-back.png",
-      "status": "present",
-      "bytes": 6476,
-      "sha256": "3345b061b5f91209c1fa3271db8023828df67df6018c2788399c1c89df1a8dc0",
+      "bytes": 75303,
+      "sha256": "302b5796802ce655d3b8c0050b30d386cd05e111a577bdd760ca0145c56dde1e",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19578,17 +19345,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-15-1-front.png",
       "status": "present",
-      "bytes": 73081,
-      "sha256": "ae5966c935332abcb8795ba1abe79abf9c6a1add76e079e86770941654150a34",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-15-2-back.png",
-      "status": "present",
-      "bytes": 6901,
-      "sha256": "7a02333c5fef1eb027c545963016d09601c17efbb4cc3cdc872979062548316b",
+      "bytes": 81629,
+      "sha256": "2d64c337be1302b79fba215afc1dfb5f8e43c0e4d0689d96970c2c6054926e0b",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19596,17 +19354,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-15-2-front.png",
       "status": "present",
-      "bytes": 76832,
-      "sha256": "46ce825e54a803a64b05fa06c80d4c22b065f502029a7fb1556287d902b1d010",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-15-3-back.png",
-      "status": "present",
-      "bytes": 7309,
-      "sha256": "17fdc88fc2e669732fac3147b99e2d59a32f50ccab01f9a772804ac4cc8299f2",
+      "bytes": 86141,
+      "sha256": "83feb45abab750e7db9f05c63000ec0ec9275f6721bc1380b46d3ce54f68f173",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19614,17 +19363,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-15-3-front.png",
       "status": "present",
-      "bytes": 79407,
-      "sha256": "dfe7dfbd36a8955871deb9cce2a830df3fd329ad1377d80d225d12148060b845",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-15-4-back.png",
-      "status": "present",
-      "bytes": 6811,
-      "sha256": "e08b5aaf2dac91cbf656b220bf3bc50e84e960bbbf29a47a32b74f2ef918f979",
+      "bytes": 88390,
+      "sha256": "ac971a766a41046772a45b316e9a1d6816168eaaf2a9f0558732597c33e8b269",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19632,17 +19372,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-15-4-front.png",
       "status": "present",
-      "bytes": 76936,
-      "sha256": "41165b379d9f8c69d12a4b63811d4cf8cc856f4cef80883f9ab395a8341ca77e",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-15-5-back.png",
-      "status": "present",
-      "bytes": 7479,
-      "sha256": "617645b244a028bc1a3e3be8b91088cf3038af056a5a8c1193f96b1cd2431b9b",
+      "bytes": 85958,
+      "sha256": "bbed7a5fdcff1a768356977e56a0d19c3ab80224953a761fe0fc9e94ef391799",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19650,8 +19381,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-15-5-front.png",
       "status": "present",
-      "bytes": 79934,
-      "sha256": "ebe6912f4b90aaba014667a0696065f1ceea16fa92219e4a4e30d0d7d6b7ded5",
+      "bytes": 89102,
+      "sha256": "8cc18c3fc31f3a52bc3d2dfa6b75ed562a0257c77411693ad721a438f8f2365a",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19819,28 +19550,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-19-0-back.png",
-      "status": "present",
-      "bytes": 6922,
-      "sha256": "dcef4dda92fcd5f38c47da1adcb35e37aebdca2a646bde5b29ce0937111a7fdd",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-19-0-front.png",
       "status": "present",
-      "bytes": 65854,
-      "sha256": "e98cc3c1cac6a1aba5cdaeb1cf04d966fa4de87737688365d242cbfec16cfb96",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-19-1-back.png",
-      "status": "present",
-      "bytes": 7690,
-      "sha256": "1e34ca9f51d545245bf62855f674e64c17a3a5fc3d9f7fa4279f2e2e7d977b73",
+      "bytes": 75303,
+      "sha256": "302b5796802ce655d3b8c0050b30d386cd05e111a577bdd760ca0145c56dde1e",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19848,17 +19561,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-19-1-front.png",
       "status": "present",
-      "bytes": 70874,
-      "sha256": "0df0d9b8a6046e6350195c4c21616b6beade672be23200f0c9e72e3f3f376e7b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-19-2-back.png",
-      "status": "present",
-      "bytes": 8339,
-      "sha256": "1d10d5f554ae31206d791c85c429901c5fa612c2b0f5ccfddd403b64efc77f0f",
+      "bytes": 81629,
+      "sha256": "2d64c337be1302b79fba215afc1dfb5f8e43c0e4d0689d96970c2c6054926e0b",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19866,17 +19570,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-19-2-front.png",
       "status": "present",
-      "bytes": 74098,
-      "sha256": "3d4f54de18937b7aa2707615cc54949f6abbb434d2188f632eda5479d37e859b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-19-3-back.png",
-      "status": "present",
-      "bytes": 9031,
-      "sha256": "0da5957aef6c842ab7e218946a3a7a43322baa290536c8eb7bc10651397f4373",
+      "bytes": 86141,
+      "sha256": "83feb45abab750e7db9f05c63000ec0ec9275f6721bc1380b46d3ce54f68f173",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19884,17 +19579,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-19-3-front.png",
       "status": "present",
-      "bytes": 75617,
-      "sha256": "06261b8736408400ff384240e7395ba51730496c978c06c5fe2c3ac5f60a563d",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-19-4-back.png",
-      "status": "present",
-      "bytes": 8201,
-      "sha256": "6598069c1b436b9f9de0cd365a89d4d8488850a1fbe2b8504df91b6495da6baf",
+      "bytes": 88390,
+      "sha256": "ac971a766a41046772a45b316e9a1d6816168eaaf2a9f0558732597c33e8b269",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19902,17 +19588,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-19-4-front.png",
       "status": "present",
-      "bytes": 74137,
-      "sha256": "ea847f5725e087bff4bb2e4185f9c6d3aa80a04e0aa26de77d181aee2e6f6932",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-19-5-back.png",
-      "status": "present",
-      "bytes": 9301,
-      "sha256": "8c5adc433b6b0afdf20945205cbe58f6c46fb89857cc16656959b56390b1c101",
+      "bytes": 85958,
+      "sha256": "bbed7a5fdcff1a768356977e56a0d19c3ab80224953a761fe0fc9e94ef391799",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19920,8 +19597,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-19-5-front.png",
       "status": "present",
-      "bytes": 77526,
-      "sha256": "060444397e8b3c4d81275aa82fde5459270f4d81ab117d0fee58a1c8d89302be",
+      "bytes": 89102,
+      "sha256": "8cc18c3fc31f3a52bc3d2dfa6b75ed562a0257c77411693ad721a438f8f2365a",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -19981,28 +19658,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-20-0-back.png",
-      "status": "present",
-      "bytes": 14787,
-      "sha256": "825454fd0921664037a66514ef6c1ac56fc1bf3a5924c1c6bd6e6334f40e5a6f",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-20-0-front.png",
       "status": "present",
-      "bytes": 61416,
-      "sha256": "3d545270766b30801697bc40928147b7f20f5e43a193adbedef5c99492ec69c7",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-20-1-back.png",
-      "status": "present",
-      "bytes": 16500,
-      "sha256": "e074edd8152488b71e4c15cfa4aac28233d7e48ebf04d2a08b81f5be4f9e13d7",
+      "bytes": 110944,
+      "sha256": "e0e36bad600ef5ebec81694c8e5690a3cb88e0adb881446fb73e0afebbe64759",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20010,17 +19669,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-20-1-front.png",
       "status": "present",
-      "bytes": 66101,
-      "sha256": "fbf0ca464d8135ec8c575ac735777b3634ed85e93aae232cc3d4ed162fa023c0",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-20-2-back.png",
-      "status": "present",
-      "bytes": 17864,
-      "sha256": "053d47b922be448389c68d7b88f70816524d16d5cb37263361191d8413cf81ec",
+      "bytes": 116007,
+      "sha256": "4dbf5543bc6445b3526ecd5d4605ed6f34a2e6d400d77030afeab42ec3be51e9",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20028,17 +19678,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-20-2-front.png",
       "status": "present",
-      "bytes": 69155,
-      "sha256": "652715f73dce300097362bc18b5f416d4900fc51cc638ed6a031f32141a8cfa9",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-20-3-back.png",
-      "status": "present",
-      "bytes": 19213,
-      "sha256": "014cf2c1653461fdac74dfa819613163c5626bbc3da1c09ddd86f18d65cfb2f2",
+      "bytes": 118412,
+      "sha256": "65203195bc3c1ec1e80788e6745113b6d01eb61bd89c7fb8471775a7520bf8b0",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20046,17 +19687,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-20-3-front.png",
       "status": "present",
-      "bytes": 71045,
-      "sha256": "e4092dc9a38e2003112d26cdd5f35d9977a768d47de050f8c3385356c0f75cec",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-20-4-back.png",
-      "status": "present",
-      "bytes": 17852,
-      "sha256": "9739f2c5a8196320d01734a74888bce7e3e374a8bcd7f15d60b856cc2920a731",
+      "bytes": 124341,
+      "sha256": "4c7eee027e02887d446e9366269bb0ea7ab005da90368166a9abba16dbbffe5e",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20064,17 +19696,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-20-4-front.png",
       "status": "present",
-      "bytes": 69553,
-      "sha256": "2514569097cea3e161dd8dd63492fb2afe1b4d26a49bdacfd09d3dd100762074",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-20-5-back.png",
-      "status": "present",
-      "bytes": 19969,
-      "sha256": "d8366f4647198571e7eb8d4177928acf439868b61d68c6b6a99c19a298c11635",
+      "bytes": 119065,
+      "sha256": "9580866dc91e7089eb8d308628111c4f1c34adbb3aba8097d4a662fd58203578",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20082,8 +19705,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-20-5-front.png",
       "status": "present",
-      "bytes": 72551,
-      "sha256": "e77475dfdf60a99c64e50663bc6ee18fe36051cde0d6c72dd40624f9fb8f7ca8",
+      "bytes": 117424,
+      "sha256": "6227eb1d57d851e3e2de75d7b2bd2da1f74e770f82ed0da27c573ad7ea9d03ff",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20143,28 +19766,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-22-0-back.png",
-      "status": "present",
-      "bytes": 9016,
-      "sha256": "734fb961abf7ca713e3494b448dab8b77ebed8ef3feb0fa6c36a5f36dc26738d",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-22-0-front.png",
       "status": "present",
-      "bytes": 81183,
-      "sha256": "da6a04b21e1fa0e47506f649107507a655f28445f265cba05f633e3a393497d2",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-22-1-back.png",
-      "status": "present",
-      "bytes": 9936,
-      "sha256": "d03e74f9771a747efee82325b408d6e8cf55e83fe6936592ded96e5989c4d99d",
+      "bytes": 100340,
+      "sha256": "41fc08155684c47535ecae76ef8c15e2163c8b87ede48c54b3d94c378889dde7",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20172,17 +19777,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-22-1-front.png",
       "status": "present",
-      "bytes": 88807,
-      "sha256": "9d709b100f161f2249377d25f5a110779e57bc8a9be1da0010bd667ccaf4cd56",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-22-2-back.png",
-      "status": "present",
-      "bytes": 10692,
-      "sha256": "606b9a15d5df72079f0b64d2eb644735cbd03ce7ff756a705dbcf52d9a967d7c",
+      "bytes": 114897,
+      "sha256": "216e66b9422463d6a5eb82bd97f25980b81ec48c52d1e7f3ce5afda8cdfc7d74",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20190,17 +19786,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-22-2-front.png",
       "status": "present",
-      "bytes": 94272,
-      "sha256": "fbde7883ef8dfaf21860564f77e3ab24766dafa4203165bf8be69a8497f7aa7b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-22-3-back.png",
-      "status": "present",
-      "bytes": 11468,
-      "sha256": "16cb3a7fd3eeac8e2ed2bb21c2e36fc3f37e1a0545b2fe18ebe8d8701bae28c0",
+      "bytes": 122954,
+      "sha256": "778873235c734d6d3d5d7d1de7a40f941a8de2c4eff804c3539d2bff7eb4b06d",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20208,17 +19795,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-22-3-front.png",
       "status": "present",
-      "bytes": 97807,
-      "sha256": "8bb5d74a8a0ebbf82427930024c7064ee75dfaf987e643a6d9746c032f6bbd86",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-22-4-back.png",
-      "status": "present",
-      "bytes": 10521,
-      "sha256": "5faba0b73a4b50fa012493b546f382ede898b707aa1dec8cbfee1b517c7aa7ff",
+      "bytes": 127528,
+      "sha256": "e5abc7f37422e1805c0828f2476b46681bb8a0152a5ee847d988e484fc05454d",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20226,17 +19804,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-22-4-front.png",
       "status": "present",
-      "bytes": 94073,
-      "sha256": "c2f3adc5b23fc049f19221c1c94251abbf0c22a1bd96014a7d4f35e91f463a0b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-22-5-back.png",
-      "status": "present",
-      "bytes": 11828,
-      "sha256": "5275a8bc9d06fcfc61f7605dc511b041290e37330f69621f54a036a23e40d2ce",
+      "bytes": 122103,
+      "sha256": "97a338308de941a2bdd39f6c14a1eef1b0ca952f6f003f254492807ff039be73",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20244,8 +19813,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-22-5-front.png",
       "status": "present",
-      "bytes": 100285,
-      "sha256": "ce548de7e7bce6ffb2d23b6fe79494474dc3d62d01b192130b890b5a27ec0ee3",
+      "bytes": 128865,
+      "sha256": "622943b978a52118d497d4a7f9e2003c7bd95381c99ac5e08482712b7a6faeee",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20305,28 +19874,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-4-0-back.png",
-      "status": "present",
-      "bytes": 7065,
-      "sha256": "98dfab23613020fe8187999644c2c77fbee02103321acfcfbaf535fced75e9fd",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-4-0-front.png",
       "status": "present",
-      "bytes": 66648,
-      "sha256": "14de21d3bea64fb9cd6619bc674283e5ad2c10e23c91eeefb285d8df15f7d3fc",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-4-1-back.png",
-      "status": "present",
-      "bytes": 7942,
-      "sha256": "3b99cd644f1f702c8e21c7a7cea8c39928e7ca88b2e71d0797ac789b5204076c",
+      "bytes": 74790,
+      "sha256": "0882654652d349fcc820b11b3f7702f40dcbb8ed51cdee9374cfb020c45a4d05",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20334,17 +19885,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-4-1-front.png",
       "status": "present",
-      "bytes": 71348,
-      "sha256": "fd658543dca4e81c0c3a9ce247a72a46d32414b98e5d03420a6201f708d395b5",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-4-2-back.png",
-      "status": "present",
-      "bytes": 8471,
-      "sha256": "6e24146f739bf7a976373a73e26b9644ef7314ebbc19bc4879788a18bd673796",
+      "bytes": 81039,
+      "sha256": "1f002231869b02472fdc455c7e6b3653414bec704bbbe7a181bb09f35c1dc7be",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20352,17 +19894,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-4-2-front.png",
       "status": "present",
-      "bytes": 74924,
-      "sha256": "b61b4b601bca285e47dcf8083c31dff413ff19baa5655b86e2c156276bcf8606",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-4-3-back.png",
-      "status": "present",
-      "bytes": 8971,
-      "sha256": "5a0610c7a10fe7613cc1c5c206f49f4e107ef9201993f5f975ca4afe4e0416c2",
+      "bytes": 85314,
+      "sha256": "11b69cb47dc92d35b3dc02b9af82b76e6f35d1dc38b62dffdb899e6e4338c064",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20370,17 +19903,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-4-3-front.png",
       "status": "present",
-      "bytes": 77129,
-      "sha256": "acdfe46bcd51631da2566f9ccd2dddca18698e74bff0e647c46efdbe28eba827",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-4-4-back.png",
-      "status": "present",
-      "bytes": 8323,
-      "sha256": "50194d1d66e92b6c4bda3a7af2ce78edad55330572515b64731b68f4f515a5d5",
+      "bytes": 87768,
+      "sha256": "2b358cc2767a8cc532a9940cf63104ee88d7985b8cd527637f16f166750a4e6a",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20388,17 +19912,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-4-4-front.png",
       "status": "present",
-      "bytes": 74885,
-      "sha256": "95f366eca9c246b01d5b90f7c5b0e7a28f7f2e967eb225b4ec924053434c0a02",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-4-5-back.png",
-      "status": "present",
-      "bytes": 9187,
-      "sha256": "69d11ee02fed8aa2dc85bbb75bc68ec30f7d0285ce7bdc969937d3a03cd66451",
+      "bytes": 85310,
+      "sha256": "d426a1f2f9e5cb6cf1922c0f9babcb08bd1451c8add5fb81c0ab5b10cb53c705",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20406,8 +19921,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-4-5-front.png",
       "status": "present",
-      "bytes": 77808,
-      "sha256": "57898ad554f64264ccf476b2f15984867bdb58110e77464dfa5ca356fa51bc5f",
+      "bytes": 88269,
+      "sha256": "e645fdd597e63a3b32345a7bdf6b6b4ebff40bb9c6ce7346263b1387a9fc8342",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20467,28 +19982,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-6-0-back.png",
-      "status": "present",
-      "bytes": 3522,
-      "sha256": "b41d3bb8099c3a1bcc6fe5ccc20722937e968159cfe87f4ce5eb9b3fc53a9f35",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-6-0-front.png",
       "status": "present",
-      "bytes": 64170,
-      "sha256": "fe3ae23470dab8b1b5c11e9f95247873ab7784f85ad703924d2e847731e96fcf",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-6-1-back.png",
-      "status": "present",
-      "bytes": 3857,
-      "sha256": "fb94490e5e2b3c92293f8ca2524ea5a86fa1f6e7740847f2e92b579d757233d5",
+      "bytes": 78219,
+      "sha256": "22f36022a250ab0dc254d3706e23f1d6e939361c905f6ca0a64945df31f47e03",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20496,17 +19993,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-6-1-front.png",
       "status": "present",
-      "bytes": 67750,
-      "sha256": "1c9cf5d2c6cbb06cf44681a31178d939d158d53dfbd6baeaf31f4b09a5f0593e",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-6-2-back.png",
-      "status": "present",
-      "bytes": 4075,
-      "sha256": "a47c598d0f6928c2d49661d826515827fbf07118b3079fdf5e7a80784d946157",
+      "bytes": 86138,
+      "sha256": "ebaf4739b2a88052b7c43b757d5dac14fede02805f23177f8f41a2b52258ef88",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20514,17 +20002,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-6-2-front.png",
       "status": "present",
-      "bytes": 70960,
-      "sha256": "e903ad97011c743932da993707bdf4353097824da474827ea6eb3061bca45389",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-6-3-back.png",
-      "status": "present",
-      "bytes": 4291,
-      "sha256": "a8380cf021d25f215f1c7d88475f4c317cad76d30224b5291c6ef58f819987fa",
+      "bytes": 87521,
+      "sha256": "1d623a38177a30daf27e31c62fcf7e3aed9cada7b4facd30fb5c82b2f71efd73",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20532,17 +20011,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-6-3-front.png",
       "status": "present",
-      "bytes": 73010,
-      "sha256": "4e046451b81a4683a6445edf94e25a803cfb85f63381d144e1af4ce96f943851",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-6-4-back.png",
-      "status": "present",
-      "bytes": 4010,
-      "sha256": "614b5f3f01a407e2523d03258078b3092c6ec59b50b36de0cd48a7759a74c5a6",
+      "bytes": 88619,
+      "sha256": "1c96f8a6e7f27ebaed838a7903da39c8c270242e9b090f8de8b5de26d35b56da",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20550,17 +20020,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-6-4-front.png",
       "status": "present",
-      "bytes": 70755,
-      "sha256": "08838019e9c336feba3cd32caa6549831f63e455d1096575b910238cac5d0b88",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-6-5-back.png",
-      "status": "present",
-      "bytes": 4386,
-      "sha256": "d5851756ff410cca615e4e4ea85e04d3d51b124268602935364e6631c19862ce",
+      "bytes": 87413,
+      "sha256": "20353def35fc6b9860387609f4351b41d86b0cc8a62d276eb01c842570a8127d",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20568,8 +20029,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-6-5-front.png",
       "status": "present",
-      "bytes": 74377,
-      "sha256": "61e3d3bb523d9e5fcd00e7008d3072138641d64d455ac92af823a9a0e7377a18",
+      "bytes": 90719,
+      "sha256": "acfe4990048ba13e42e4590dfb8b97f8051c983cda4dd59673257bebc6084623",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20629,28 +20090,10 @@
       ]
     },
     {
-      "path": "assets/generated/avatars-v2/hair-8-0-back.png",
-      "status": "present",
-      "bytes": 9873,
-      "sha256": "e5dba17a54fb217dc52c030799db9cd0ec0a3ed470bd950128fa536be43dc128",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
       "path": "assets/generated/avatars-v2/hair-8-0-front.png",
       "status": "present",
-      "bytes": 65460,
-      "sha256": "9df4cae1025d4db302c52d708dc04f86363bcb1cc1d0dbaafa0a851581da7167",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-8-1-back.png",
-      "status": "present",
-      "bytes": 10840,
-      "sha256": "d689e49836ead44a52257283eb3618f36a9e6ebc1c22a59431f66ecea7afa0e3",
+      "bytes": 107604,
+      "sha256": "0095e603f0647a28cb98201b5f32b69df210aa936d216413fcaac67ad754cd9f",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20658,17 +20101,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-8-1-front.png",
       "status": "present",
-      "bytes": 69102,
-      "sha256": "fe7664d75f6427ac1cbe8b08f66c091e02e809a26111ec8e659856bd1eef500b",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-8-2-back.png",
-      "status": "present",
-      "bytes": 11709,
-      "sha256": "63a98372df4b20074c00e2838ba7a4c9aeae34608e9005a38336453f1149a9dc",
+      "bytes": 112829,
+      "sha256": "5de0090e399bae9e6d77baf9e9f9ed08225b08fc42c1d712e67890da0e45c3a6",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20676,17 +20110,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-8-2-front.png",
       "status": "present",
-      "bytes": 71369,
-      "sha256": "1022f441f849064f549c7ca0127087db8ee84c25ff9807ef0e2eb43bf14b8314",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-8-3-back.png",
-      "status": "present",
-      "bytes": 12537,
-      "sha256": "48b80b7d872831c8aef3489238a572af27ac4b9120379b75e734e1e68e6ebac1",
+      "bytes": 115113,
+      "sha256": "374fa9957c275067cf1a61a6489700e6b232e9d8be3bea60ca1bda28495ed0cd",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20694,17 +20119,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-8-3-front.png",
       "status": "present",
-      "bytes": 71680,
-      "sha256": "604006dfa20b8217afe0553de33f64fbbada40110cc560d36befe1eb4d13bf4d",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-8-4-back.png",
-      "status": "present",
-      "bytes": 11589,
-      "sha256": "f04206c156578e075a0e2cb191cd7bb5eb20331b0a3fd9409898cc5635538ddc",
+      "bytes": 120825,
+      "sha256": "79a645b54a6fae1c6c14a84bc568c655d0e7bf141f99c1e5a9a5a08ddc43d3c2",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20712,17 +20128,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-8-4-front.png",
       "status": "present",
-      "bytes": 74843,
-      "sha256": "08dcf3bc99660de7d7f7b469f25656e6a15bf8ae0dd49f3130ce0256aceeabd3",
-      "referencedBy": [
-        "src/assets/portraitImages.ts"
-      ]
-    },
-    {
-      "path": "assets/generated/avatars-v2/hair-8-5-back.png",
-      "status": "present",
-      "bytes": 12977,
-      "sha256": "8ad7db7ed60c916876cfca07c88e4b35f6e233412c2a66bf611ac603be3e6f70",
+      "bytes": 115636,
+      "sha256": "f1decc20139ffd46dbc95646d3308602363e697a6bcf7c9dc8ce90a05b7a0397",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]
@@ -20730,8 +20137,8 @@
     {
       "path": "assets/generated/avatars-v2/hair-8-5-front.png",
       "status": "present",
-      "bytes": 72933,
-      "sha256": "4bd071191386890011bcaaca5629fd6e027677f1fe5ca518669f334b73343bd6",
+      "bytes": 114347,
+      "sha256": "ca9d065f35ce32426f54d9f6b44ff3474e503d9a69daaa6b77fbda1996eaf082",
       "referencedBy": [
         "src/assets/portraitImages.ts"
       ]

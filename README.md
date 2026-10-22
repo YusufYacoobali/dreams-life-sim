@@ -31,4 +31,6 @@ Full-screen welcome, birth and death ink transitions use local SVG/Reanimated ch
 
 Development and configured internal preview builds include **Settings → God Mode** for testing money, stats, skills and relationships. Public production builds disable access. See [God Mode setup and save behavior](docs/GOD_MODE.md).
 
+**Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.
