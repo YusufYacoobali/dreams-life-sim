@@ -10,6 +10,7 @@ import { CatalogArt } from '../../../src/assets/CatalogArt';
 import { countries } from '../../../src/game/countries';
 import { Illustration } from '../../../src/assets/Illustration';
 import { ActionRow, Body, Card, Header, Heading, Page } from '../../../src/ui/components';
+import { AssetListing } from '../../../src/ui/AssetFeatures';
 
 export default function Shopping() {
   const { kind } = useLocalSearchParams<{ kind: string }>(); const world = useGame(s => s.world)!;
@@ -18,6 +19,12 @@ export default function Shopping() {
   return <Page><Header title={title} onBack={() => router.back()} />
     {offers.length > 0 && <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>{kind === 'possession' ? <CatalogArt id="watch" size={52} /> : <Illustration id={kind === 'property' ? 'property' : 'vehicle'} size={52} />}<View style={{ flex: 1, minWidth: 0 }}><Heading size={20}>{kind === 'property' ? 'Find Your Next Home' : kind === 'vehicle' ? 'Your Next Vehicle' : 'Shop Possessions'}</Heading><Body muted>{countries[world.people[world.activePersonId].country].name} · {accountFor(world).currency}</Body></View></View><Body muted>Review the price, funding and ongoing costs before buying.</Body></Card>}
     {kind === 'property' && <Card><ActionRow title="Rent a Home" subtitle="Browse monthly leases for your household" icon={<Illustration id="property" />} onPress={() => router.push('/rentals')} /></Card>}
-    <Card><Heading size={19}>Available Listings</Heading>{offers.map(offer => <ActionRow key={offer.id} title={offer.name} subtitle={offer.description + (offer.bedrooms ? ' · ' + offer.bedrooms + (offer.bedrooms === 1 ? ' bedroom' : ' bedrooms') : '') + ' · ' + offer.condition + '% condition'} value={formatMoney({ minor: assetPrice(world, offer), currency: accountFor(world).currency })} icon={<CatalogArt id={offer.id} size={56} />} onPress={() => router.push({ pathname: '/offer/[id]', params: { id: offer.id } })} />)}{offers.length === 0 && <Body>This category is unavailable.</Body>}</Card>
+    <Card><Heading size={19}>Available Listings</Heading>{offers.map(offer => {
+      const value = formatMoney({ minor: assetPrice(world, offer), currency: accountFor(world).currency });
+      const onPress = () => router.push({ pathname: '/offer/[id]', params: { id: offer.id } });
+      return offer.kind === 'possession'
+        ? <ActionRow key={offer.id} title={offer.name} subtitle={offer.description + ' · ' + offer.condition + '% condition'} value={value} icon={<CatalogArt id={offer.id} size={56} />} onPress={onPress} />
+        : <AssetListing key={offer.id} offer={offer} subtitle={offer.description + (offer.kind === 'property' ? ' · ' + offer.condition + '% condition' : '')} value={value} onPress={onPress} />;
+    })}{offers.length === 0 && <Body>This category is unavailable.</Body>}</Card>
   </Page>;
 }

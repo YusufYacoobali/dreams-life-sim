@@ -15,6 +15,7 @@ import { Body, Button, Card, Header, Heading, Page } from '../../../src/ui/compo
 import { EventModal, type EventPresentation } from '../../../src/ui/EventModal';
 import { SocialBusinessFacts as Facts } from '../../../src/ui/SocialBusinessPresentation';
 import { useColors } from '../../../src/ui/theme';
+import { AssetFeatures } from '../../../src/ui/AssetFeatures';
 
 type Review = { identity: string; command: GameCommand; event: EventPresentation };
 export default function Rental() {
@@ -43,7 +44,7 @@ function RentalDetails({id}:{id:string}) {
   };
   const cancel=()=>{if(!mounted.current||!current||busy||submitting.current||reviewRef.current!==current||identityRef.current!==current.identity)return;reviewRef.current=null;setReview(null);};
   return <Page><Header title="Rental Details" backDisabled={!!current&&busy} onBack={()=>{if(!submitting.current)router.back();}} />
-    <Card><View style={{alignItems:'center'}}><CatalogArt id={offer.id} size={190} /></View><Heading>{offer.name}</Heading><Body>{offer.description}</Body><Body muted>{player.city}, {countries[player.country].name}</Body><Heading size={28}>{money(rent)} / month</Heading>{offer.bedrooms&&<Body muted>{offer.bedrooms} {offer.bedrooms===1?'bedroom':'bedrooms'}</Body>}</Card>
+    <Card><View style={{alignItems:'center'}}><CatalogArt id={offer.id} size={190} /></View><Heading>{offer.name}</Heading><Body>{offer.description}</Body><Body muted>{player.city}, {countries[player.country].name}</Body><Heading size={28}>{money(rent)} / month</Heading><AssetFeatures offer={offer} /></Card>
     {lease ? <Card><Heading size={20}>Your Rented Home</Heading><Body>Leaseholder: {fullName(holder!)}</Body><Facts items={[{label:'Monthly rent',value:money(rent)},{label:'Lease term',value:'Month to month'}]} /><Body muted>Rent is paid once a month by the leaseholder. Adults share the other household bills.</Body>{lease.tenantId===player.id?<Button label="Review Move Out" tone="secondary" disabled={busy} onPress={()=>open(true)} />:<Body muted>Only the leaseholder can end this lease.</Body>}</Card> : <Card><Heading size={20}>Review your lease</Heading><Facts items={[{label:'Monthly rent',value:money(rent)},{label:'Due today',value:money(rent),note:'First month · no deposit or signing fee'},{label:'Account balance',value:formatMoney({minor:accountFor(world).cash,currency:accountFor(world).currency})},{label:'Lease term',value:'Month to month'}]} /><Body muted>Rent replaces your usual housing costs. You still pay your share of other bills. Any home you own remains yours.</Body>{reason&&<Body>{reason}</Body>}<Button label="Review Lease" accessibilityLabel={['Review Lease',reason].filter(Boolean).join('. ')} disabled={busy||!!reason} onPress={()=>open(false)} /></Card>}
     {error&&!current&&<Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{color:c.red,fontSize:16}}>{error}</Text>}
     <EventModal event={current?.event??null} busy={busy} error={error} onCancel={cancel} onChoose={async()=>{

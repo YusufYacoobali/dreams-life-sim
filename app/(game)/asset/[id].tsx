@@ -10,6 +10,7 @@ import { assetCatalog } from '../../../src/game/content/assets';
 import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '../../../src/ui/components';
 import { EventModal, EventPresentation, EffectRow } from '../../../src/ui/EventModal';
 import { useColors } from '../../../src/ui/theme';
+import { AssetFeatures } from '../../../src/ui/AssetFeatures';
 
 export default function AssetDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -30,7 +31,7 @@ function OwnedAsset({ id }: { id: string }) {
   const fieldAmount = (fallback: bigint): bigint | null => { try { const value = input.trim() ? parseMoney(input, asset.currency).minor : fallback; if (value <= 0n) throw new Error(); setMessage(null); return value; } catch { setMessage('Enter a positive amount in ' + asset.currency + '.'); return null; } };
   const termEvent: EventPresentation | null = pickTerm ? { id: 'refinance-term', kind: 'selection', title: 'New mortgage term', body: 'The new term changes your payment and total interest.', choices: [120, 240, 360].map(months => ({ id: months.toString(), label: months / 12 + ' years' })), confirmLabel: 'Choose' } : null;
   return <Page><Header title={asset.kind === 'property' ? 'Property Details' : asset.kind === 'vehicle' ? 'Vehicle Details' : 'Possession'} onBack={() => router.back()} />
-    <Card><View style={{ alignItems: 'center', backgroundColor: c.inset, borderRadius: 14, padding: 12 }}><CatalogArt id={asset.catalogId} size={180} /></View><Heading>{asset.name}</Heading><Body muted>{asset.city} · {asset.country}</Body><View style={{ gap: 4 }}><Body muted>Current value</Body><Text accessibilityRole="header" style={{ color: c.positiveText, fontSize: 28, lineHeight: 37, fontWeight: '700' }}>{money(asset.value)}</Text></View><StatBar label="Condition" value={asset.condition} color={c.green} />
+    <Card><View style={{ alignItems: 'center', backgroundColor: c.inset, borderRadius: 14, padding: 12 }}><CatalogArt id={asset.catalogId} size={180} /></View><Heading>{asset.name}</Heading><Body muted>{asset.city} · {asset.country}</Body><View style={{ gap: 4 }}><Body muted>Current value</Body><Text accessibilityRole="header" style={{ color: c.positiveText, fontSize: 28, lineHeight: 37, fontWeight: '700' }}>{money(asset.value)}</Text></View><AssetFeatures offer={catalog} condition={asset.condition} />{asset.kind !== 'vehicle' && <StatBar label="Condition" value={asset.condition} color={c.green} />}
       {asset.primaryHome && <Body>Your primary home</Body>}{asset.rental !== 'none' && <Body>{asset.rental === 'listed' ? 'Looking for a tenant' : 'Rented out · ' + money(asset.rentPerMonth) + ' / month'}</Body>}
     </Card>
     <Card><Heading size={19}>Ownership & Costs</Heading>
@@ -39,7 +40,6 @@ function OwnedAsset({ id }: { id: string }) {
       {asset.ownershipSource === 'inheritance' && <Body muted>Inherited ownership. The previous owner's purchase price is not a payment by you.</Body>}
       {asset.ownershipSource === 'gift' && <Body muted>Received as a gift.</Body>}
       {asset.ownershipSource === 'legacy' && <Body muted>This earlier record does not identify how you acquired the asset.</Body>}
-      {catalog?.bedrooms !== undefined && <OwnershipFact label="Bedrooms" value={String(catalog.bedrooms)} stacked={stacked} />}
       {loan && loan.principal > 0n && <OwnershipFact label="Mortgage remaining" value={money(loan.principal)} stacked={stacked} debt />}
       <OwnershipFact label="Estimated monthly upkeep" value={money(monthlyUpkeep(asset))} stacked={stacked} />
       {asset.insured && <OwnershipFact label="Monthly insurance" value={money(monthlyInsurance(asset))} stacked={stacked} />}

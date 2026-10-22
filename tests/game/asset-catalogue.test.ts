@@ -8,7 +8,8 @@ import propertyOfferFixture from '../fixtures/v4-property-offer.json';
 import previousCatalog from '../fixtures/asset-catalogue-before-expansion.json';
 
 test('the expanded catalogue preserves every existing offer, ID, price and condition', () => {
-  expect(assetCatalog.slice(0,previousCatalog.length)).toEqual(previousCatalog);
+  // Added display specifications may extend offers; every pre-existing field stays exact.
+  expect(assetCatalog.slice(0,previousCatalog.length)).toMatchObject(previousCatalog);
   expect(new Set(assetCatalog.map(offer => offer.id)).size).toBe(assetCatalog.length);
   expect(new Set(assetCatalog.map(offer => offer.name)).size).toBe(assetCatalog.length);
   for (const kind of ['property','vehicle'] as const) {
