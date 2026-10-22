@@ -1,0 +1,16 @@
+{
+  "renderer": "Browser adapter of actual production CatalogArt trees, NOT native device captures",
+  "captures": 5,
+  "illustratedSubjects": 40,
+  "componentSizes": [
+    40,
+    56,
+    128
+  ],
+  "allImagesDecoded": true,
+  "narrowWidth": 320,
+  "narrowOverflow": false,
+  "errors": [],
+  "externalRequests": [],
+  "nativeDeviceVisualTesting": false
+}
