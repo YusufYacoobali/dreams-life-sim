@@ -67,6 +67,9 @@ for (const id of Object.keys(familyCells) as FamilyArtId[]) register(id,<FamilyA
 for (const id of Object.keys(healthLegalRects) as HealthLegalArtId[]) register(id,<HealthLegalArt id={id} size={64} />,legalArt.has(id) ? 'legal' : 'health');
 for (const id of Object.keys(fameBusinessRects) as FameBusinessArtId[]) register(id,<FameBusinessArt id={id} size={64} />,businessArt.has(id) ? 'business' : 'career');
 for (const id of Object.keys(careerRects) as CareerArtId[]) register(id,<CareerArt id={id} size={64} />,'career');
+// Authored music scenes saved this older ID before the career atlas named its
+// guitar/microphone illustration "musician". Keep the saved ID compatible.
+register('music',<CareerArt id="musician" size={64} />,'hobby');
 for (const id of Object.keys(petIllustrations) as (keyof typeof petIllustrations)[]) register(id,<PetsLeisureArt id={petIllustrations[id]} size={64} />,id.startsWith('pet-') ? 'pets' : 'hobby');
 for (const id of Object.keys(ordinaryHobbyIllustrations) as (keyof typeof ordinaryHobbyIllustrations)[]) register(id,<OrdinaryHobbyArt id={ordinaryHobbyIllustrations[id]} size={64} />,'hobby');
 for (const id of travelArtIds) register(id,<TravelArt id={id} width={64} />,'travel');

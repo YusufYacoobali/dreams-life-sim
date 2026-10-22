@@ -30,6 +30,9 @@ import { resolveEventArtwork, presentationArtwork, type EventCategory } from '..
 import { ThemeProvider } from '../../src/ui/theme';
 import { pupil } from '../support/pupil';
 import cohort from '../fixtures/story-name-collision-cohort.json';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import ts from 'typescript';
 
 let mockWorld: World;
 const mockDispatch = jest.fn();
@@ -50,6 +53,7 @@ test.each([
   ['pet-parrot',PetsLeisureArt,'pets'], ['pet-dog',PolishArt,'pets'], ['leisure-guitar',PetsLeisureArt,'hobby'],
   ['leisure-reading',OrdinaryHobbyArt,'hobby'], ['paris',TravelArt,'travel'], ['project',SchoolArt,'school'],
   ['laptop',CatalogArt,'assets'], ['studio',CatalogArt,'assets'], ['engagement-ring',CatalogArt,'romance'], ['toys',PolishArt,'childhood'],
+  ['music',CareerArt,'hobby'], ['stage',CareerArt,'career'], ['royalty',CareerArt,'career'], ['will',FamilyArt,'family'],
 ] as const)('saved artwork %s resolves through its actual bundled registry', (id,type,category) => {
   const world = pupil(), before = encodeWorld(world), pending = result(id);
   expect(descriptor(pending,world)).toMatchObject({ type,category });
@@ -57,6 +61,30 @@ test.each([
   expect(screen.UNSAFE_getAllByType(Image)).toHaveLength(1);
   expect(screen.UNSAFE_getByType(Image).props.accessible).toBe(false);
   expect(encodeWorld(world)).toBe(before);
+});
+
+test('authored popup illustration IDs have bundled artwork instead of silently falling back to everyday', () => {
+  const ids = new Set<string>();
+  const walk = (directory:string) => {
+    for (const entry of readdirSync(directory,{ withFileTypes:true })) {
+      const file = join(directory,entry.name);
+      if (entry.isDirectory()) { walk(file); continue; }
+      if (!/\.tsx?$/.test(entry.name)) continue;
+      const source = ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);
+      const visit = (node:ts.Node) => {
+        if (ts.isPropertyAssignment(node) && node.name.getText(source) === 'illustration' && ts.isStringLiteral(node.initializer)) ids.add(node.initializer.text);
+        if (ts.isCallExpression(node) && node.expression.getText(source) === 'result' && node.arguments[0]?.getText(source) === 'world' && node.arguments[3] && ts.isStringLiteral(node.arguments[3])) ids.add(node.arguments[3].text);
+        ts.forEachChild(node,visit);
+      };
+      visit(source);
+    }
+  };
+  walk(join(__dirname,'../../src/game'));
+  const world = pupil(), intentionalGeneric = new Set(['relationship','journal','everyday']);
+  expect(ids.size).toBeGreaterThanOrEqual(60);
+  for (const id of ids) if (!intentionalGeneric.has(id)) {
+    expect({ authoredId:id,art:descriptor(result(id),world).id }).not.toEqual({ authoredId:id,art:'everyday' });
+  }
 });
 
 test('every existing registry ID remains renderable, including all catalogue entries and safe unknown IDs', () => {
