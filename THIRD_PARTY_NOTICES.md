@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `a64c0b98a65dfe0bf38f05572dfd9d37a77bccc2c700bde4eafcb1115c8d0443`
-- `package-lock.json` SHA-256 `fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138`
+- `package.json` SHA-256 `0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673`
+- `package-lock.json` SHA-256 `763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb`
 - `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
 
-**30 direct dependencies; 785 candidate non-dev lock entries; 775 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**31 direct dependencies; 786 candidate non-dev lock entries; 776 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-734 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+735 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -35,6 +35,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | expo-splash-screen | ~57.0.10 | 57.0.10 | node_modules/expo-splash-screen |
 | expo-sqlite | ~57.0.4 | 57.0.4 | node_modules/expo-sqlite |
 | expo-status-bar | ~57.0.1 | 57.0.1 | node_modules/expo-status-bar |
+| expo-store-review | ~57.0.3 | 57.0.3 | node_modules/expo-store-review |
 | expo-system-ui | ~57.0.4 | 57.0.4 | node_modules/expo-system-ui |
 | fflate | ^0.8.2 | 0.8.2 | node_modules/fflate |
 | lottie-react-native | ~7.3.8 | 7.3.8 | node_modules/lottie-react-native |
@@ -432,6 +433,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | expo-splash-screen@57.0.10 (node_modules/expo-splash-screen) | MIT | version-matched | node_modules/expo-splash-screen/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-sqlite@57.0.4 (node_modules/expo-sqlite) | MIT | version-matched | node_modules/expo-sqlite/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-status-bar@57.0.1 (node_modules/expo-status-bar) | MIT | version-matched | node_modules/expo-status-bar/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-store-review@57.0.3 (node_modules/expo-store-review) | MIT | version-matched | node_modules/expo-store-review/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-symbols@57.0.3 (node_modules/expo-symbols) | MIT | version-matched | node_modules/expo-symbols/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-system-ui@57.0.4 (node_modules/expo-system-ui) | MIT | version-matched | node_modules/expo-system-ui/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/cli@57.0.32 (node_modules/expo/node_modules/@expo/cli) | MIT | version-matched | node_modules/expo/node_modules/@expo/cli/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
@@ -12704,6 +12706,7 @@ Sources:
 - `node_modules/expo-splash-screen/LICENSE`
 - `node_modules/expo-sqlite/LICENSE`
 - `node_modules/expo-status-bar/LICENSE`
+- `node_modules/expo-store-review/LICENSE`
 - `node_modules/expo-symbols/LICENSE`
 - `node_modules/expo-system-ui/LICENSE`
 - `node_modules/expo/LICENSE`

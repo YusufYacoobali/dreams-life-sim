@@ -2,8 +2,8 @@
   "formatVersion": 1,
   "scope": "Candidate lock/install/source inventory; includes build tooling and optional packages. Not a shipped-library count, legal clearance, complete font-rights determination, or final native/Metro artifact inventory.",
   "inputs": {
-    "package.json": "a64c0b98a65dfe0bf38f05572dfd9d37a77bccc2c700bde4eafcb1115c8d0443",
-    "package-lock.json": "fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138",
+    "package.json": "0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673",
+    "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb",
     "app.json": "eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8"
   },
   "installationPlatform": {
@@ -13,14 +13,14 @@
   "selection": "All root dependencies and lockfile package records whose dev flag is not true. License/notice filenames are searched recursively, excluding nested node_modules, .git and .cache. Directory symlinks are not followed. Text is deduplicated by exact source bytes; no SPDX value is inferred from filenames or contents.",
   "evidenceLimits": "Missing metadata is not a licensing conclusion. Installed version mismatches must be reconciled. Optional/absent files and source-only art/font references remain explicit. SDK, native Pods/AARs, OS resources, dynamic imports and the final shipped graph need artifact-level review.",
   "summary": {
-    "directDependencies": 30,
-    "candidateNonDevLockEntries": 785,
-    "versionMatched": 775,
+    "directDependencies": 31,
+    "candidateNonDevLockEntries": 786,
+    "versionMatched": 776,
     "versionMismatches": 0,
     "notInstalled": 10,
     "missingLockLicenseMetadata": 1,
     "withoutReadableNoticeFile": 57,
-    "readableNoticeFiles": 734,
+    "readableNoticeFiles": 735,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
     "projectArtFiles": 1057
@@ -127,6 +127,12 @@
       "requested": "~57.0.1",
       "lockPath": "node_modules/expo-status-bar",
       "lockedVersion": "57.0.1"
+    },
+    {
+      "name": "expo-store-review",
+      "requested": "~57.0.3",
+      "lockPath": "node_modules/expo-store-review",
+      "lockedVersion": "57.0.3"
     },
     {
       "name": "expo-system-ui",
@@ -8748,6 +8754,29 @@
       "noticeFiles": [
         {
           "path": "node_modules/expo-status-bar/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+        }
+      ]
+    },
+    {
+      "name": "expo-store-review",
+      "lockPath": "node_modules/expo-store-review",
+      "version": "57.0.3",
+      "rootDirectDependency": true,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "expo-store-review",
+      "installedVersion": "57.0.3",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/expo-store-review/LICENSE",
           "status": "text",
           "bytes": 1106,
           "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
@@ -17918,6 +17947,7 @@
         "app/saved-lives.tsx",
         "app/settings.tsx",
         "app/time-machine.tsx",
+        "src/ui/AssetFeatures.tsx",
         "src/ui/EndLifeAction.tsx",
         "src/ui/LifeMilestoneArt.tsx",
         "src/ui/ProgressElements.tsx"
@@ -30373,6 +30403,7 @@
         "node_modules/expo-splash-screen/LICENSE",
         "node_modules/expo-sqlite/LICENSE",
         "node_modules/expo-status-bar/LICENSE",
+        "node_modules/expo-store-review/LICENSE",
         "node_modules/expo-symbols/LICENSE",
         "node_modules/expo-system-ui/LICENSE",
         "node_modules/expo/LICENSE",
