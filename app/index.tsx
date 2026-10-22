@@ -1,7 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
@@ -9,16 +8,16 @@ import { Button, Card } from '../src/ui/components';
 import { freshSeed, useGame } from '../src/state/useGame';
 import { fullName } from '../src/game/model';
 import { useColors } from '../src/ui/theme';
+import { OpeningBrandAccent, OpeningScene } from '../src/ui/OpeningScene';
 
-const hero = require('../assets/generated/welcome-hero.png');
 export default function Welcome() {
   const c = useColors();
   const ready = useGame(s => s.ready), world = useGame(s => s.world), busy = useGame(s => s.busy), error = useGame(s => s.error), bootstrap = useGame(s => s.bootstrap);
   const open = () => { if (world) router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); };
   const create = (mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } });
-  return <View style={styles.page}><StatusBar style="light" /><Image source={hero} accessible={false} resizeMode="cover" style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]} /><LinearGradient colors={['rgba(3,18,54,0.15)', 'transparent', 'rgba(2,12,31,0.96)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
+  return <View style={styles.page}><StatusBar style="light" /><OpeningScene />
     <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.contents}>
-      <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
+      <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><OpeningBrandAccent /><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
       <View style={styles.actions}>{!ready ? <View style={styles.loading}><ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /><Text accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.loadingText}>Opening your story…</Text></View> : <>
         {error && <Card><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></Card>}
         {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.continue, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><Text style={styles.actionText}>Continue as {world.people[world.activePersonId].firstName}</Text></Pressable>}
