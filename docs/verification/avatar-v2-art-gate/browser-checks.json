@@ -1,0 +1,29 @@
+{
+  "scope": "Phase 2 finished artwork browser review; not native app screenshots",
+  "browser": "154.0.8037.57",
+  "captures": [
+    "01-sixteen-avatar-grid.png",
+    "02-original-vs-v2.png",
+    "03-four-enlarged-portraits.png",
+    "04-profile-sizes.png",
+    "05-transparency.png"
+  ],
+  "cssProfileSizes": [
+    52,
+    88,
+    140
+  ],
+  "desktopViewport": [
+    1240,
+    1000
+  ],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "desktopOverflow": false,
+  "mobileOverflow": false,
+  "allImagesDecoded": true,
+  "errors": [],
+  "externalRequests": []
+}

@@ -1,0 +1,140 @@
+{
+  "status": "Phase 1 and Phase 2 complete; awaiting user visual approval before Phases 3\u20137",
+  "baseCommit": "cd122b2d69dc424d82c0d9bb266ae39a8042481e",
+  "reference": "design/01-character-appearance.png",
+  "referenceUsedForGeneration": "Original reference only; rejected production artwork was not used as a style reference",
+  "generator": "built-in image_gen.imagegen",
+  "candidate": "candidate-sheet.png",
+  "sourceSize": [
+    1261,
+    1247
+  ],
+  "sourceSha256": "028c6b5283b1f5128457092e4e9d9f9c9141e90ec6ba83d80701f45194fbe04f",
+  "portraits": [
+    {
+      "id": 1,
+      "label": "Black quiff / burgundy overshirt"
+    },
+    {
+      "id": 2,
+      "label": "Chestnut hair / lilac blouse"
+    },
+    {
+      "id": 3,
+      "label": "Brown quiff / teal polo"
+    },
+    {
+      "id": 4,
+      "label": "Cropped coils / cobalt crew neck"
+    },
+    {
+      "id": 5,
+      "label": "Black bob / rose V-neck"
+    },
+    {
+      "id": 6,
+      "label": "Brown curls / navy tee"
+    },
+    {
+      "id": 7,
+      "label": "Dark long bob / turquoise top"
+    },
+    {
+      "id": 8,
+      "label": "Blond crop / blue collar"
+    },
+    {
+      "id": 9,
+      "label": "Auburn length / pink blouse"
+    },
+    {
+      "id": 10,
+      "label": "Short black hair / rectangular glasses"
+    },
+    {
+      "id": 11,
+      "label": "Brown waves / burgundy top"
+    },
+    {
+      "id": 12,
+      "label": "Blonde waves / lavender cardigan"
+    },
+    {
+      "id": 13,
+      "label": "Wavy black hair / blue henley"
+    },
+    {
+      "id": 14,
+      "label": "Full curls / turquoise blouse"
+    },
+    {
+      "id": 15,
+      "label": "Copper quiff / dark teal tee"
+    },
+    {
+      "id": 16,
+      "label": "Smooth black bob / aqua top"
+    }
+  ],
+  "enlargedCrops": [
+    {
+      "file": "01-black-quiff.png",
+      "sourceRect": [
+        0,
+        0,
+        314,
+        320
+      ],
+      "size": [
+        314,
+        320
+      ],
+      "sha256": "2d17051a9326c0328f291dfe579d3080e5bb3402f865a4f59d6a30afe0905056"
+    },
+    {
+      "file": "04-cropped-coils.png",
+      "sourceRect": [
+        937,
+        0,
+        1261,
+        320
+      ],
+      "size": [
+        324,
+        320
+      ],
+      "sha256": "1fde0266bf19182b8357b5b4bedbfca22c8eb0fa5c818d1f5c4ea62c57a11fa4"
+    },
+    {
+      "file": "10-glasses.png",
+      "sourceRect": [
+        317,
+        626,
+        617,
+        924
+      ],
+      "size": [
+        300,
+        298
+      ],
+      "sha256": "9b991a393d04bdb448e3647804f809a3602cbbe18e68ac5f063ce8c8e29aa49c"
+    },
+    {
+      "file": "12-blonde-waves.png",
+      "sourceRect": [
+        945,
+        626,
+        1261,
+        924
+      ],
+      "size": [
+        316,
+        298
+      ],
+      "sha256": "05c6d597556f8060048bec3d098f3d68b083fad3cdbaf0bba0979360f71e2fbe"
+    }
+  ],
+  "preparation": "Generated complete full-colour portraits. Candidate sheet is unmodified. Four detail views are lossless rectangular crops; no skin or hair masks, RGB classification, recolouring, feature reconstruction or resampling.",
+  "productionRendererChanged": false,
+  "approvalRequirement": "Complete Phase 1 and Phase 2 first, then stop for my visual approval. Once approved, implement Phases 3\u20137."
+}

@@ -1,0 +1,208 @@
+# Codex Master Plan — Avatar Artwork V2
+
+**Repository:** `YusufYacoobali/dreams-life-sim`
+**Branch:** `work`
+**Priority:** High — visual quality and character identity
+
+## Goal
+
+Replace the current mediocre 2D avatars with polished, distinct cartoon characters matching `design/01-character-appearance.png`.
+
+The latest implementation is an improvement over the old 3D portraits, but it still looks generic, childish and repetitive.
+
+**The original reference is the visual target, not the current generated artwork.**
+
+Do not redesign the UI, change gameplay or compromise character customisation.
+
+## Phase 1 — Audit the current artwork system
+
+Inspect:
+
+- `src/assets/CharacterPortrait.tsx`
+- `src/assets/portraitPlan.ts`
+- `src/assets/portraitLayout.ts`
+- `src/assets/portraitImages.ts`
+- `tools/build-portrait-art.py`
+- `assets/generated/avatars/`
+- `src/ui/CreationElements.tsx`
+- `app/appearance.tsx`
+
+Identify which restrictions are causing repetitive faces and lost illustration quality.
+
+Known problems:
+
+- Four base face contours are not enough to create distinctive characters.
+- Nearly identical eye shapes and expressions.
+- Faces look too young and round.
+- Only four clothing illustrations.
+- Automatic masking and recolouring can flatten artwork detail.
+- Outfit selection is tied to appearance traits.
+- Some presets have different hair but effectively identical identities.
+
+Document what can be reused and what should be replaced.
+
+## Phase 2 — Create 16 genuinely distinct avatars
+
+Generate a new coordinated set of 16 adult cartoon portraits inspired by the original reference.
+
+### Visual direction
+
+- Premium 2D mobile-game character artwork.
+- Similar visual language to the supplied reference.
+- Clean, intentional outlines.
+- Soft, controlled cel shading.
+- Attractive, friendly characters with natural proportions.
+- Expressive faces without exaggerated childlike eyes.
+- Properly illustrated hair, necks and shoulders.
+- Consistent framing and lighting.
+- Transparent backgrounds.
+
+Avoid 3D renders, excessive gradients, glossy plastic skin, muddy colours, flat emoji faces and mismatched illustration styles.
+
+### Individuality requirements
+
+The 16 characters should have meaningful variation in:
+
+- Face silhouettes and jaw shapes.
+- Eyes, eyebrows and facial expressions.
+- Nose and mouth shapes.
+- Haircuts, lengths and textures.
+- Skin tones.
+- Clothing styles and colours.
+
+Make characters feel like **16 different people**, not four faces with different wigs.
+
+Keep the lineup diverse without locking particular appearances to gender identities.
+
+### First quality gate
+
+Before rebuilding the avatar system, produce:
+
+1. A complete 4×4 grid of the 16 finished adult portraits.
+2. A side-by-side comparison with `design/01-character-appearance.png`.
+3. Four enlarged individual portraits to inspect facial detail.
+
+Stop here for approval.
+
+Do not proceed with mediocre results simply because image generation technically succeeded.
+
+## Phase 3 — Build proper reusable character artwork
+
+After artwork approval, construct a reusable layered illustration system.
+
+Use individually authored, registered artwork layers rather than relying on approximate automatic segmentation.
+
+Supported visual components should include:
+
+- Distinct facial identities.
+- Four face-shape choices.
+- Skin tone variations.
+- Front and rear hairstyles.
+- Hair colours.
+- Multiple illustrated outfits.
+- Age-related facial changes.
+
+**Important:** Do not reduce the approved character illustrations to generic vector shapes during integration.
+
+Preserve antialiasing, line quality, shading and expressive details.
+
+A hybrid approach is acceptable: independently illustrated facial bases combined with interchangeable hair, skin and clothing layers.
+
+If a visual feature cannot be made modular without degrading quality, prefer a small set of curated artwork variants instead.
+
+## Phase 4 — Preserve customisation and identity
+
+Maintain all current options:
+
+| Feature | Minimum |
+|---|---|
+| Avatar presets | 16 distinct |
+| Skin tones | 6 |
+| Hairstyles | 8 |
+| Hair colours | 5 |
+| Face shapes | 4 |
+| Age stages | 8 existing stages |
+
+Each control must cause the expected visible change.
+
+Critically, changing hair colour must not change clothes or facial identity. Changing hairstyle should preserve the character's face.
+
+If additional facial-identity data is needed, introduce it carefully, preserving backwards compatibility with existing saves. Existing characters must retain a stable, deterministic appearance.
+
+Do not use gameplay randomness to select artwork.
+
+## Phase 5 — Natural ageing
+
+Develop age-specific artwork while retaining character identity.
+
+- **Baby (0–2):** Clearly infant proportions.
+- **Child (3–11):** Youthful facial features.
+- **Teenager (12–18):** Transitional proportions.
+- **Young adult (19–39):** Mature, attractive cartoon proportions.
+- **Middle age (40–59):** Subtle age details.
+- **Older adult (60–79):** Visible ageing and greying.
+- **Elderly (80–94):** More pronounced ageing.
+- **Very elderly (95+):** Advanced age details.
+
+Ageing must be more than changing hair colour or stretching a head.
+
+The person should remain recognisable throughout their life.
+
+## Phase 6 — Integrate without UI changes
+
+Replace the underlying avatar renderer while retaining its existing interface wherever possible.
+
+Update portraits everywhere:
+
+- Character creation.
+- Main Life screen.
+- Player profile.
+- Relationships and NPC profiles.
+- Family members and children.
+- Saved-life and legacy screens.
+- Any other portrait usage.
+
+Keep the current screen layouts, controls, positioning and overall design unchanged.
+
+Optimise artwork for offline Expo/React Native on Android and iOS. Avoid excessive simultaneous layers, memory usage or rerenders.
+
+## Phase 7 — Visual acceptance and testing
+
+Produce actual rendered screenshots, not just source artwork.
+
+Required screenshots:
+
+1. Full 16-avatar creation grid.
+2. Four portraits enlarged to 140px.
+3. Hair and skin customisation examples.
+4. The same character at all eight age stages.
+5. Main Life screen with the new portrait.
+6. NPC and family profiles.
+
+Compare these against the original designs and approved Phase 2 artwork.
+
+Test:
+
+- No artwork clipping or visible layer seams.
+- Colours and shading remain accurate.
+- All controls function.
+- Saved appearances survive reloads.
+- Existing save compatibility.
+- iOS and Android rendering where environments permit.
+- TypeScript and regression tests.
+
+Do not report native visual testing as passed unless it was actually performed.
+
+## Final acceptance criteria
+
+The finished system must:
+
+- Match the polish and art direction of the original reference.
+- Deliver 16 visibly distinct characters.
+- Look good at both small and large avatar sizes.
+- Preserve the quality of the generated illustrations.
+- Support full customisation and natural ageing.
+- Work consistently for players and NPCs.
+- Require no UI redesign or gameplay changes.
+
+**Execution instruction:** Complete Phase 1 and Phase 2 first, then stop for my visual approval. Once approved, implement Phases 3–7. Do not invest in another full rendering system before we know the artwork is genuinely better.
