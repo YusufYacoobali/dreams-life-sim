@@ -6,6 +6,8 @@ Optional daily reminders are now implemented: off by default,19:00local time adj
 
 All56affected cases pass across their scopes:55in the original7-suite batch, plus the sole corrected Legacy case on rerun. The two corrections concern the new test's layout-node query, with no product change. Final strict app/all-test types actually exit0. Native-config introspection confirms both identifiers/current icon/no remote entitlement or background mode; refreshed notices check passes. One automatic full hosted gate follows the completed source push. No full local regression, old cohort, prebuild or blocked build retry was run. Actual installed reminder delivery/new package, standalone/device acceptance and the earlier native JNI crash remain open; [HANDOFF](HANDOFF.md) records exact boundaries.
 
+Runtime0e72896 is pushed; its exact-source [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) is running. Final production Hermes export actually exits0: Android5,215,540bytes/iOS4,944,476bytes, both HBC headers and all12changed runtime sources in both maps exact. This is bundle generation, not standalone or notification-delivery acceptance. All author streams are frozen/integrated and root's exporter is closed.
+
 ## Accepted navigation/button checkpoint — prior runtime80a10b5
 
 Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.

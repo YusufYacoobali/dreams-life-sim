@@ -4,6 +4,8 @@ Updated22October: package/bundle ID is now **com.yacoobali.lifesim** and the exi
 
 The old b75generated native project is **stale after these native-config/dependency changes**. Regenerate from final source before the next actual build; do not run the old project or assume the earlier native-config equality still applies. No new prebuild/Gradle/blocked download was attempted. Add installed daily delivery, time/timezone/permission changes, disable/reboot, cold-tap routing, system-bar layouts and iOS local-only signing checks to final acceptance. The batch's automatic full Quality run follows its completed source push.
 
+Current runtime0e72896 is pushed and [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) is running. Its final Android/iOS production Hermes export actually exits0 with both HBC headers and all12changed runtime source-map files exact. These are bundles, not standalone artifacts. Scoped tests/introspection do not establish native delivery, reboot recovery, actual permission prompts, status-bar notification glyphs or installed new-identity behavior; complete those on the final builds.
+
 ## Accepted navigation/button checkpoint — prior runtime80a10b5
 
 Current runtime `80a10b5` adds navigation/keyboard/button/Help fixes over `b75e617`. Its exact final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) passes locked install, strict app/all-test types and2,824tests/222suites. Scoped API24/Expo Go keyboard and normal/150% Statistics layout checks pass. Prior b75campus/year/cold and bundle observations retain their own source scope. [HANDOFF](HANDOFF.md) is authoritative for current results.

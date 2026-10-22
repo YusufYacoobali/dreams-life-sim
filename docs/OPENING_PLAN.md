@@ -2,6 +2,8 @@
 
 Current22October feature batch: Android/iOS identity **com.yacoobali.lifesim**; existing icon retained at the user's request; three corrected Android system-navigation insets; optional daily local reminders with28messages, configurable19:00default and explicit permission. All56affected cases pass in their declared scopes, strict app/all-test types exit0, offline configuration and current notices checks pass. The full automatic gate follows the source push. Actual installed reminder delivery/new identity and the existing native crash still need standalone/device acceptance. No extra full local regression or unchanged cohort was run. [HANDOFF](HANDOFF.md) is authoritative.
 
+Current runtime0e72896 is pushed; [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) is running. Its final Android/iOS production Hermes export actually exits0; both HBC headers and all12changed runtime sources match the maps. No standalone/device/notification-delivery pass is inferred.
+
 ## Accepted navigation/button checkpoint — prior runtime80a10b5
 
 Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
