@@ -1,0 +1,26 @@
+{
+  "renderer": "Chromium/react-native-web; real gameplay components, practice state only",
+  "nativeDevice": false,
+  "viewport": "400x900",
+  "scenarios": [
+    {
+      "kind": "sports",
+      "played": true,
+      "result": "\nPerfect\n100 / 100\nTop corner. Unstoppable.\nPractice only. No saved life, money, skills or records are changed.\nReturn\nPlay again"
+    },
+    {
+      "kind": "crime",
+      "played": true,
+      "result": "\nPerfect\n94 / 100\nAll three bolts released\nPractice only. No saved life, money, skills or records are changed.\nReturn\nPlay again"
+    },
+    {
+      "kind": "astronaut",
+      "played": true,
+      "result": "\nPerfect\n99 / 100\nA perfect, soft capture\nPractice only. No saved life, money, skills or records are changed.\nReturn\nPlay again"
+    }
+  ],
+  "reducedMotion": {
+    "assistedDefault": true
+  },
+  "errors": []
+}

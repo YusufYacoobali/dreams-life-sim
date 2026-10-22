@@ -847,7 +847,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 
 The source-import scan detects Ionicons. Its actual font bytes and source imports are recorded in JSON; the vector-icons package and embedded vendor notice files are indexed above. Package metadata does not alone settle every font-specific notice. Only static default imports from `@expo/vector-icons/FAMILY` are detected; this is not an exhaustive final-bundle graph.
 
-Project-generated art is separate from npm licensing. JSON records source/config-referenced image hashes; provenance is in [the generated-art record](assets/generated/README.md), [launcher provenance](docs/APP_IDENTITY_AND_BRANDING.md) and [ordinary-hobby source manifest](docs/planning/drafts/ordinary-hobby-art.json). Historic candidate labels do not establish current runtime or legal acceptance. Final native resources, store art, OS fonts and Pods/AAR notices remain outside this candidate inventory.
+Project-generated art is separate from npm licensing. JSON records source/config-referenced image hashes; provenance is in [the generated-art record](assets/generated/README.md), [launcher provenance](docs/APP_IDENTITY_AND_BRANDING.md), [mini-game art](assets/minigames/art/README.md) and [ordinary-hobby source manifest](docs/planning/drafts/ordinary-hobby-art.json). Historic candidate labels do not establish current runtime or legal acceptance. Final native resources, store art, OS fonts and Pods/AAR notices remain outside this candidate inventory.
 
 ## Installed notice text display
 

@@ -1,3 +1,6 @@
+import { miniGameCommandSchema, type MiniGameCommand } from '../minigames/core/types';
+import { resolveMiniGame } from '../minigames/core/session';
+import { activeMiniGame } from '../minigames/core/eligibility';
 import { noteImportantDecision, optionalSceneChance } from './annualPacing';
 import { campusCommandSchema, type CampusCommand } from './systems/campusSchemas';
 import { campusMonth, campusPlanningOpportunity, prepareCampusTuition, resolveCampus } from './systems/campus';
@@ -42,7 +45,7 @@ import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from 
 import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
 import { conditions } from './content/health';
 import { nextPending, offerPending, priorityOf } from './pendingQueue';
-import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
+import { resolveReservedBurglary, custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
 import { isConfined } from './systems/legalSchemas';
 import { choiceUnavailable } from './choiceAvailability';
 import { resolveDramaticChoice } from './systems/dramaticEvents';
@@ -68,9 +71,9 @@ export { IneligibleAction } from './errors';
 
 const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
 export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -315,6 +318,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   // Mutable callers are fully checked; stored immutable worlds safely share old ledger rows.
   const world = copyWorld(previous);
   const player = world.people[world.activePersonId];
+  if (activeMiniGame(world) && !command.type.startsWith('mini-game-')) throw new IneligibleAction('Resume or forfeit your saved mini-game first');
   if (command.type === 'continue-child') {
     resolveEstate(world, estateCommandSchema.parse(command)); refreshStudyCourses(world); refreshUniversityApplications(world); refreshRecoveries(world); refreshScholarships(world); refreshStoryThreads(world); refreshWorkplaces(world); world.revision++; return validateWorld(world, immutable);
   }
@@ -323,7 +327,12 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
   if(serviceAway(world)&&['meet-people','move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','vaccinate','exercise','fertility-care','cosmetic-care','public-action'].includes(command.type))throw new IneligibleAction('Return from your assignment before this in-person activity');
   if (activeTrip(world) && ['move-in','move-out','ask-to-move-in','crime','black-market','contraband-action','consult','treat','vaccinate','exercise','fertility-care','cosmetic-care','public-action','adopt','try-child','review-custody','divorce'].includes(command.type)) throw new IneligibleAction('Return from your trip before this activity at home');
   const custody = command.type === 'end-life' ? undefined : custodyReason(world, command.type); if (custody) throw new IneligibleAction(custody);
-  if (command.type === 'end-life') {
+  const miniGame = parseActivity(miniGameCommandSchema, command);
+  if (miniGame.success) {
+    const settled = resolveMiniGame(world, miniGame.data);
+    if (settled?.kind === 'crime') resolveReservedBurglary(world, settled.id, recordDeath);
+    else { world.revision++; return validateWorld(world, immutable); }
+  } else if (command.type === 'end-life') {
     const reviewed = endLifeCommandSchema.safeParse(command);
     if (!reviewed.success || reviewed.data.lifeId !== world.id || reviewed.data.personId !== player.id || reviewed.data.expectedRevision !== world.revision) throw new IneligibleAction('This life changed. Review End This Life again before confirming.');
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');

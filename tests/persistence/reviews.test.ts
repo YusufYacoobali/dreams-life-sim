@@ -8,7 +8,9 @@ import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
-import { newReviewTracker, type ReviewTracker } from '../../src/reviews/tracker';
+import { miniGameFixture } from '../support/miniGames';
+import { burglaryContext } from '../../src/minigames/core/eligibility';
+import { reviewCandidateEligible, newReviewTracker, type ReviewTracker } from '../../src/reviews/tracker';
 const date={year:2026,month:10,day:22};
 async function context() {
   const directory=mkdtempSync(join(tmpdir(),'dreams-reviews-')),path=join(directory,'save.db');let sqlite!:DatabaseSync,repository!:SaveRepository,store!:ReturnType<typeof createGameStore>,sequence=0;
@@ -75,5 +77,30 @@ test('claim, response retry and cold kill persist scheduling without inventing a
     c.sqlite.exec('DROP TRIGGER fail_review_answer');expect(await c.store.getState().respondReview('sure')).toBe(true);expect((await c.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(22);expect((await c.repository.respondToReview(offer.id,'sure',10)).accepted).toBe(false);
     await c.repository.saveAppSettings('{}');await c.cold();expect(c.store.getState().reviewOffer).toBeNull();expect(await c.store.getState().claimReview()).toBe(false);expect(c.store.getState().reviewTracker!.reviewCompletedOrDismissedCount).toBe(1);
     const tracker=timingBoundary(c.store.getState().world!);tracker.offerSequence=1;tracker.globalYearsPlayed=22;tracker.candidate!.globalYear=22;tracker.reviewCompletedOrDismissedCount=1;c.sqlite.prepare("UPDATE preferences SET value=? WHERE key='app_review'").run(JSON.stringify(tracker));await c.cold();expect(await c.store.getState().claimReview()).toBe(true);await c.cold();expect(await c.store.getState().claimReview()).toBe(false);expect(c.store.getState().reviewTracker!.nextReviewPromptAtGlobalYear).toBe(32);
+  }finally{c.close();}
+});
+
+
+test('a saved running mini-game blocks a Life review claim without consuming its eligible schedule',async()=>{
+  const c=await context();try{
+    const initial=miniGameFixture(),player=initial.people[initial.activePersonId];
+    Object.assign(player.stats,{health:95,happiness:95,stress:0});
+    const tracker=timingBoundary(initial);
+    expect(reviewCandidateEligible(tracker,initial)).toBe(true);
+    const active=resolveCommand(initial,{type:'mini-game-start',kind:'crime',ownerId:player.id,contextId:burglaryContext(initial),assisted:true},true);
+    expect(active.miniGames.some(session=>session.personId===player.id&&session.status==='active')).toBe(true);
+    // Deliberately align this otherwise eligible boundary with the saved attempt.
+    // Even a Life caller with a matching revision must not steal the active game.
+    tracker.candidate!.revision=active.revision;
+    await c.repository.create(active);
+    const before=JSON.stringify(tracker);
+    c.sqlite.prepare("INSERT INTO preferences(key,value) VALUES('app_review',?)").run(before);
+    await c.cold();
+    expect(await c.store.getState().claimReview()).toBe(false);
+    expect(c.store.getState().reviewOffer).toBeNull();
+    expect(await c.repository.claimReview(active.id,player.id,active.revision)).toBeNull();
+    expect(c.sqlite.prepare("SELECT value FROM preferences WHERE key='app_review'").get()?.value).toBe(before);
+    expect((await c.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(tracker.nextReviewPromptAtGlobalYear);
+    expect((await c.repository.loadReviewTracker())!.lastReviewPromptGlobalYear).toBeNull();
   }finally{c.close();}
 });

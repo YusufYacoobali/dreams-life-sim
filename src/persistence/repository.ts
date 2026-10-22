@@ -50,7 +50,7 @@ export class SaveRepository {
       const life = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [lifeId]);
       if (!life || life.revision !== revision) return null;
       const world = this.current?.world.id === lifeId && this.current.world.revision === revision && this.current.payload === life.payload ? this.current.world : unpackCheckpoint(life.payload, true);
-      if (world.activePersonId !== personId || !reviewCandidateEligible(tracker, world)) return null;
+      if (world.activePersonId !== personId || world.miniGames.some(session => session.personId === personId && session.status === 'active') || !reviewCandidateEligible(tracker, world)) return null;
       const offered = offerReview(tracker);
       await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(offered.tracker)]);
       return offered;
@@ -70,14 +70,13 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader twenty-three protects saved personal support and action histories.
-    // Old payloads stay untouched and gain prospective empty fields on decode.
-    if (!version || version.user_version > 23) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 23) return;
-    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20 || version.user_version === 21 || version.user_version === 22) {
-      // Complete reader-13 through reader-22 databases already have every table
-      // and metadata row. Upgrade only the marker, not stored game payloads.
-      await this.db.transaction(tx => tx.run('PRAGMA user_version = 23'));
+    // Reader 24 protects leases, personal support and persisted mini-games.
+    // Compatible installations upgrade only the marker; payloads stay literal.
+    if (!version || version.user_version > 24) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 24) return;
+    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20 || version.user_version === 21 || version.user_version === 22 || version.user_version === 23) {
+      // Existing eight-table databases need no row or checkpoint rewrites.
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 24'));
       return;
     }
     const statements = [
@@ -119,7 +118,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 23');
+      await tx.run('PRAGMA user_version = 24');
     });
   }
 
@@ -273,7 +272,7 @@ export class SaveRepository {
         const row = await tx.get<{ payload: string; metadata: string }>('SELECT s.payload,m.metadata FROM snapshots s JOIN snapshot_metadata m ON m.life_id=s.life_id AND m.snapshot_id=s.snapshot_id WHERE s.life_id=? AND s.snapshot_id=?', [sourceId, snapshotId]);
         if (!row) throw new Error('Historical checkpoint not found');
         const summary = snapshotSummarySchema.parse(JSON.parse(row.metadata)), before = validateSnapshot({ summary, payload: row.payload });
-        restored = immutableWorld({ ...before, id: newId }); const payload = packCheckpoint(restored), now = this.now(); restoredPayload = payload;
+        restored = immutableWorld({ ...before, id: newId, miniGames: before.miniGames.map(session => ({ ...session, lifeId: newId })) }); const payload = packCheckpoint(restored), now = this.now(); restoredPayload = payload;
         await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [newId, fullName(restored.people[restored.activePersonId]), restored.revision, now, payload]);
         await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [newId, restored.revision, payload]);
         const branch: BranchInfo = { sourceLifeId: sourceId, snapshotId, personId: summary.personId, name: summary.name, date: summary.date, age: summary.age };

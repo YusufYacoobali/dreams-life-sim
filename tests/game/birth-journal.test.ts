@@ -48,10 +48,10 @@ test('all 512 sample generations retain the exact pre-feature family, stats, mon
     const input = randomCreation(seed); input.background = seed % 4 === 0 && ['GB', 'ES', 'JP'].includes(input.country) ? 'royal' : 'ordinary';
     const world = newborn(seed, input), family = birthFamily(world), story = selectBirthStory(seed, family.context);
     // Reproduce the recorded World41 envelope, excluding only the new, empty
-    // rental/support histories. All generated family, money, stats and RNG stay in proof.
+    // rental/support/mini-game histories. All generated family, money, stats and RNG stay in proof.
     const original = JSON.parse(encodeWorld({ ...world, journal: [] }));
-    expect(original).toMatchObject({ schemaVersion: 43, engineVersion: 45, contentVersion: 22, rentalLeases: [] });
-    for (const key of ['rentalLeases', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; }
+    expect(original).toMatchObject({ schemaVersion: 44, engineVersion: 46, contentVersion: 23, rentalLeases: [] });
+    for (const key of ['miniGames', 'rentalLeases', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; }
     original.schemaVersion = 41; original.engineVersion = 43; original.contentVersion = 20;
     hash.update(JSON.stringify(original) + '\n');
     expect(newborn(seed, input)).toEqual(world); expect(validateWorld(world)).toEqual(world);

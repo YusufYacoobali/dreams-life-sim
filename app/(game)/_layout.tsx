@@ -1,3 +1,4 @@
+import { MiniGameResume } from '../../src/minigames/components/MiniGameEntry';
 import React from 'react';
 import { Redirect, router, Stack, useGlobalSearchParams, usePathname } from 'expo-router';
 import { View } from 'react-native';
@@ -24,12 +25,14 @@ export default function GameLayout() {
   if (!world.birthAcknowledged) return <Redirect href="/birth" />;
   // Keep this route mounted while ink spreads; the root navigates under cover.
   if (world.people[world.activePersonId].died && activeKind !== 'death') return <Redirect href="/death" />;
+  const miniGameRoute = ['/mini-game', '/mini-game-playground'].includes(path);
+  const runningMiniGame = world.miniGames.some(session => session.personId === world.activePersonId && session.status === 'active');
   const tab: TabKey = params.tab === 'life' || params.tab === 'assets' || params.tab === 'relationships' || params.tab === 'activities' ? params.tab
     : ['/assets', '/asset/', '/shopping/', '/offer/', '/investment', '/bank', '/finances'].some(prefix => path.startsWith(prefix)) ? 'assets' : ['/relationships', '/person', '/household', '/meet-people', '/family', '/divorce', '/will'].some(prefix => path.startsWith(prefix)) ? 'relationships'
     : ['/extras', '/achievements', '/challenges', '/challenge/', '/heirlooms', '/hobbies', '/hobby/', '/hobby-event/', '/entertainment', '/pets', '/pet/', '/activities', '/health', '/doctor', '/condition', '/lifestyle', '/exercise', '/education', '/scholarships', '/campus', '/school', '/work', '/coworkers', '/jobs', '/crime', '/case', '/criminal-record', '/prison', '/underground', '/black-market', '/social', '/create-post', '/creators', '/sponsorship', '/fame', '/business', '/manage-business', '/special-careers', '/career', '/music-studio', '/politics', '/creator-studio', '/service/', '/royalty', '/travel', '/emigrate', '/destinations', '/destination/'].some(prefix => path.startsWith(prefix)) ? 'activities' : 'life';
-  return <View style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar /><View style={{ flex: 1 }}><Stack key={world.id + ':' + world.activePersonId} screenOptions={{ headerShown: false, freezeOnBlur: true, animation: reducedMotion ? 'none' : 'default' }}><Stack.Screen name="(tabs)" /></Stack></View>
+  return <View style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar /><MiniGameResume world={world}/><View style={{ flex: 1 }}><Stack key={world.id + ':' + world.activePersonId} screenOptions={{ headerShown: false, freezeOnBlur: true, animation: reducedMotion ? 'none' : 'default' }}><Stack.Screen name="(tabs)" /></Stack></View>
     <BottomNavigation activeTab={tab} onSelectTab={id => router.navigate('/' + id)} onReselectTab={id => { const root = '/' + id; if (path !== root) router.navigate(root); }} renderIcon={(id, color) => <Ionicons name={icons[id]} color={color} size={26} />} />
-    <PendingEvent />
-    <ReviewPromptHost visible={path === '/life' && !activeKind} />
+    {!miniGameRoute && <PendingEvent />}
+    <ReviewPromptHost visible={path === '/life' && !activeKind && !runningMiniGame} />
   </View>;
 }

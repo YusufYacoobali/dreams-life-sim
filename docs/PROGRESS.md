@@ -1,11 +1,16 @@
 # Dreams: Life Simulator — progress and verification
 
+## Integrated polish and mini-games — 22 October 2026
+
+Both feature batches are retained. Current saves use **World44 / engine46 / content23 / reader24 / database v4**. Migration distinguishes published mini-game saves (42/44/20) from rental saves (42/44/21) and personal-support saves (43/45/22); existing sessions and histories are preserved. The verification reports below describe their respective pre-merge source snapshots. Combined verification will be recorded after this integration is complete.
+
+
 ## Life context, interactions, review timing and memorial polish —22October
 
 Implemented the second user brief: central Life shortcut, shared home/car
 feature boxes, grouped person actions and actual funded support/loan offers,
 app-wide native review timing, and a compact factual death summary with
-read-only family history. Current markers advance to43/45/22/reader23/v4.
+read-only family history. This pre-merge checkpoint used43/45/22/reader23/v4.
 See [the batch review](verification/next-polish/README.md). Focused checks,
 strict types and both offline Hermes exports pass. Full regression plus
 affected test-only reruns verify all270suites/3,471tests; exact counts and
@@ -23,6 +28,18 @@ World42/engine44/content21/reader22/v4. [The integrated review](verification/pro
 contains before/after browser captures, catalogue art, offline Android/iOS
 bundle checks and final test results. Physical/native visual acceptance remains
 open; no device screenshot is claimed.
+
+## Mini-game visual overhaul — 22 October
+
+Clutch Shot, Orbital Docking and Safe Cracker now use Image Gen artwork with separate animated layers. Football has aim/power stages; compact controls/results expose the actual recorded outcome. Preloading gates Play and supports retry without consuming an attempt. Thirty-seven focused tests pass, including native worklet mirroring and the existing live save/legal/career integration, plus types/import checks and fresh native production exports. Browser reports at three sizes are [recorded here](verification/minigame-overhaul-20261022/README.md). Gameplay physics, scoring, saves and ordinary entry points are retained. Device release/FPS acceptance remains outstanding; unchanged broad regression and soak were not repeated.
+
+## Interactive mini-games — 22 October
+
+All three games are implemented with real input, local SVG/Reanimated presentation, preference-aware feedback and accessible assisted controls. Athlete challenges modify one actual match period; Safe Cracker reserves and resolves the ordinary yearly burglary attempt through existing legal consequences; docking modifies one eligible orbital/habitat mission period while preserving six-month assignments, pay and accident risks. Saved transcripts, pause/background recovery, forfeit, completion receipts and Time Machine branches prevent replay farming. Internal God Mode offers an isolated level 1–5 playground.
+
+Current save markers are **World42 / engine44 / content20 / reader22 / checkpointv4**. Old payloads migrate prospectively; genuine fixtures and historical fingerprints remain intact. The [implementation report](MINIGAMES.md) and [verification record](verification/minigames-20261022/results.json) give exact test/export results and limits. Actual native release interaction, spoken accessibility, hardware feedback and sustained device frame rate remain unverified in this environment. Earlier checkpoint claims below retain their original source scope.
+
+## Earlier checkpoints
 
 The user subsequently selected `assets/app_icon.png`. Both the main Android/iOS icon and Android adaptive foreground now use that exact original file. Offline resolved config,1024/432/48px Expo icon generation and refreshed notices checks pass. Native launcher acceptance awaits a new build; no gameplay regression/export was repeated for this asset/config-only change. [Current branding](APP_IDENTITY_AND_BRANDING.md).
 

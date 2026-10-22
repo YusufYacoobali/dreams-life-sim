@@ -92,7 +92,7 @@ function sourceFiles(directory) {
       }
       for (const match of text.matchAll(/require\(\s*['"]([^'"]+\.(?:png|jpe?g|webp))['"]\s*\)/g)) {
         const asset = slash(path.relative(root, path.resolve(root, directory, match[1])));
-        if (asset.startsWith('assets/generated/')) {
+        if (asset.startsWith('assets/generated/') || asset.startsWith('assets/minigames/art/')) {
           if (!artReferences.has(asset)) artReferences.set(asset, new Set());
           artReferences.get(asset).add(relative);
         }
@@ -143,7 +143,7 @@ let markdown = '# Third-party notices — candidate inventory\n\n' + inventory.s
   '## Candidate package evidence\n\nSPDX/license values below are copied metadata, not inferred or verified legal conclusions. Installed text applies to the recorded installed version; any mismatch requires review.\n\n| Package/version | Lock license metadata | Installation | Notice sources and text references |\n| --- | --- | --- | --- |\n' +
   packages.map(item => '| ' + [item.name + '@' + item.version + ' (' + item.lockPath + ')', item.lockLicense === null ? '(not provided)' : typeof item.lockLicense === 'string' ? item.lockLicense : JSON.stringify(item.lockLicense), item.installStatus + (item.optional ? ' · optional' : ''), item.noticeFiles.map(file => file.path + ' [' + (file.documentId ?? file.status) + ']').join('; ') || '(none found)'].map(escape).join(' | ') + ' |').join('\n') + '\n\n' +
   '## Font and project-art scope\n\nThe source-import scan detects ' + fontEvidence.map(font => font.family).join(', ') + '. Its actual font bytes and source imports are recorded in JSON; the vector-icons package and embedded vendor notice files are indexed above. Package metadata does not alone settle every font-specific notice. Only static default imports from `@expo/vector-icons/FAMILY` are detected; this is not an exhaustive final-bundle graph.\n\n' +
-  'Project-generated art is separate from npm licensing. JSON records source/config-referenced image hashes; provenance is in [the generated-art record](assets/generated/README.md), [launcher provenance](docs/APP_IDENTITY_AND_BRANDING.md) and [ordinary-hobby source manifest](docs/planning/drafts/ordinary-hobby-art.json). Historic candidate labels do not establish current runtime or legal acceptance. Final native resources, store art, OS fonts and Pods/AAR notices remain outside this candidate inventory.\n\n' +
+  'Project-generated art is separate from npm licensing. JSON records source/config-referenced image hashes; provenance is in [the generated-art record](assets/generated/README.md), [launcher provenance](docs/APP_IDENTITY_AND_BRANDING.md), [mini-game art](assets/minigames/art/README.md) and [ordinary-hobby source manifest](docs/planning/drafts/ordinary-hobby-art.json). Historic candidate labels do not establish current runtime or legal acceptance. Final native resources, store art, OS fonts and Pods/AAR notices remain outside this candidate inventory.\n\n' +
   '## Installed notice text display\n\nOriginal contents are data; preserve their upstream notices and source references. Text blocks are deduplicated only when the original byte hash matches. Exact text strings, bytes and hashes are retained in JSON. This Markdown display normalizes line endings and removes trailing line whitespace; substantive notice text is unchanged.\n\n';
 for (const document of documents) {
   const display = document.text.replace(/\r\n?/g, '\n').split('\n').map(line => line.replace(/[ \t]+$/g, '')).join('\n').trimEnd();

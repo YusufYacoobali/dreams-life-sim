@@ -1,3 +1,4 @@
+import { consumeMiniGameModifier } from '../../minigames/core/modifiers';
 import { activeTrip } from './travelSchemas';
 import { newWorkEarnings } from './earningsSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
@@ -225,7 +226,7 @@ export function careerMonth(world: World) {
             continue;
         }
         const attended = !isConfined(world, person) && !person.legal.wanted && !hospitalized(world, person) && !(career.kind === 'athlete' && person.health.conditions.some(item => item.status !== 'recovered' && ['sprain', 'fracture'].includes(item.type) && item.severity >= 20));
-        const score = attended ? bounded(Math.round((person.skills[definition.skill] * 2 + person.employment.performance + person.stats.discipline) / 4) + (career.focus === 'craft' ? 4 : career.focus === 'publicity' ? -3 : 0) + draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', -8, 8)) : 0;
+        const score = attended ? bounded(Math.round((person.skills[definition.skill] * 2 + person.employment.performance + person.stats.discipline) / 4) + (career.focus === 'craft' ? 4 : career.focus === 'publicity' ? -3 : 0) + draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', -8, 8) + (career.kind === 'athlete' ? consumeMiniGameModifier(world, 'sports', person.id, project.id, month) : 0)) : 0;
         project.periods.push({ month, score, attended, success: attended && draw(world, 'outcomes', 1, 100) <= score });
         project.months++;
         career.contractMonthsRemaining--;

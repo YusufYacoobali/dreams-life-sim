@@ -17,7 +17,7 @@ export function GodModeSettings() {
   if (!isGodModeBuild()) return null;
   return <Card><Heading size={19}>God Mode</Heading><Body muted>Testing controls for money, stats, skills and relationships. Switching off keeps saved changes.</Body>
     <View style={{ minHeight: 48, justifyContent: 'center', alignSelf: 'flex-start' }}><Switch accessibilityRole="switch" accessibilityLabel="God Mode" accessibilityState={{ checked: enabled, disabled: !ready || busy || failed }} value={enabled} disabled={!ready || busy || failed} onValueChange={value => { void change(value); }} trackColor={{ false: c.track, true: c.actionBlue }} /></View>
-    {enabled && ready && !failed && <Button label="Open God Mode Editor" disabled={busy} onPress={() => router.push('/god-mode')} />}
+    {enabled && ready && !failed && <><Button label="Open God Mode Editor" disabled={busy} onPress={() => router.push('/god-mode')} /><Button label="Mini-Game Playground" tone="secondary" disabled={busy} onPress={() => router.push('/mini-game-playground')} /></>}
   </Card>;
 }
 

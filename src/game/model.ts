@@ -1,3 +1,5 @@
+import { miniGameSessionSchema } from '../minigames/core/types';
+import { validateMiniGames } from '../minigames/core/validation';
 import { validateAnnualPacing } from './annualPacing';
 import { validateCampusCommunities } from './systems/campusValidation';
 import { npcMoveSchema } from './systems/npcMoveSchemas';
@@ -113,7 +115,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(43), engineVersion: z.literal(45), contentVersion: z.literal(22),
+  schemaVersion: z.literal(44), engineVersion: z.literal(46), contentVersion: z.literal(23),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -142,7 +144,7 @@ export const worldSchema = z.object({
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
   businesses: z.array(businessSchema), businessLedger: z.array(businessTransactionSchema), businessPayables: z.array(businessPayableSchema),
-  careers: z.array(careerSchema),
+  careers: z.array(careerSchema), miniGames: z.array(miniGameSessionSchema),
   musicReleases: z.array(musicReleaseSchema),
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
@@ -362,6 +364,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateHobbyEvents(world, ledger);
   validateStoryThreads(world, ledger);
   validateRelocations(world, ledger);
+  validateMiniGames(world);
   validateCareers(world);
   validateMusic(world, ledger);
   validatePolitics(world, ledger);
@@ -655,5 +658,16 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Personal support and role-specific actions start prospectively. Preserve
   // every previous balance, bound result, relationship and random stream.
   if (parsed && parsed.schemaVersion === 42 && parsed.engineVersion === 44 && parsed.contentVersion === 21) { parsed.schemaVersion = 43; parsed.engineVersion = 45; parsed.contentVersion = 22; parsed.personSupportRequests = []; parsed.personActionHistory = []; }
+  // Our support release had no mini-games. Add only its empty prospective
+  // history; all leases, support offers, bound scenes and RNG remain literal.
+  if (parsed && parsed.schemaVersion === 43 && parsed.engineVersion === 45 && parsed.contentVersion === 22) { parsed.schemaVersion = 44; parsed.engineVersion = 46; parsed.contentVersion = 23; parsed.miniGames = []; }
+  // The independently published mini-game release used 42/44/content20.
+  // Distinguish its full tuple from our rental release (content21), and retain
+  // every session, input, score, reservation, seed and settlement exactly.
+  if (parsed && parsed.schemaVersion === 42 && parsed.engineVersion === 44 && parsed.contentVersion === 20) {
+    if (!Array.isArray(parsed.miniGames)) throw new Error('Mini-game save is missing its session history');
+    parsed.schemaVersion = 44; parsed.engineVersion = 46; parsed.contentVersion = 23;
+    parsed.rentalLeases = []; parsed.personSupportRequests = []; parsed.personActionHistory = [];
+  }
   return validateWorld(parsed, immutable);
 }

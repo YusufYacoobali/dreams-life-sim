@@ -101,10 +101,12 @@ test('result effects report the actual bounded change', () => {
 
 const sweepCount = Number(process.env.DREAMS_LIFE_SWEEP ?? '12');
 if (!Number.isInteger(sweepCount) || sweepCount < 1 || sweepCount > 1000) throw new Error('Invalid DREAMS_LIFE_SWEEP');
-test(`${sweepCount} complete seeded lives preserve invariants and terminate with factual death records`, () => {
+const sweepShards = Number(process.env.DREAMS_LIFE_SWEEP_SHARDS ?? '1'), sweepShard = Number(process.env.DREAMS_LIFE_SWEEP_SHARD ?? '0');
+if (!Number.isInteger(sweepShards) || sweepShards < 1 || sweepShards > 4 || !Number.isInteger(sweepShard) || sweepShard < 0 || sweepShard >= sweepShards || sweepShard >= sweepCount) throw new Error('Invalid life sweep shard');
+test(`${sweepCount} complete seeded lives preserve invariants and terminate with factual death records${sweepShards > 1 ? ` (shard ${sweepShard + 1}/${sweepShards})` : ''}`, () => {
   const started = Date.now();
   const ages: number[] = [];
-  for (let seed = 0; seed < sweepCount; seed++) {
+  for (let seed = sweepShard; seed < sweepCount; seed += sweepShards) {
     const lifeStarted = Date.now();
     let world = born(seed);
     let turns = 0;
@@ -118,7 +120,7 @@ test(`${sweepCount} complete seeded lives preserve invariants and terminate with
     expect(world.pending).toBeNull();
     expect(world.annual).toBeNull();
     ages.push(ageOn(player, world.date));
-    if (sweepCount > 12) process.stdout.write(JSON.stringify({ sweep: 'core-life', seed, completed: seed + 1, requested: sweepCount, ageAtDeath: ages.at(-1), people: Object.keys(world.people).length, ledgerRows: world.ledger.length, lifeMs: Date.now() - lifeStarted, elapsedMs: Date.now() - started }) + '\n');
+    if (sweepCount > 12) process.stdout.write(JSON.stringify({ sweep: 'core-life', seed, shard: sweepShard, shards: sweepShards, completed: ages.length, requested: sweepCount, ageAtDeath: ages.at(-1), people: Object.keys(world.people).length, ledgerRows: world.ledger.length, lifeMs: Date.now() - lifeStarted, elapsedMs: Date.now() - started }) + '\n');
   }
-  if (sweepCount > 1) expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));
+  if (ages.length > 1) expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));
 }, Math.max(900000, sweepCount * 120000));

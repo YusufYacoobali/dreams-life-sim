@@ -1,10 +1,15 @@
 # Continue Dreams: Life Simulator
 
+## Integrated polish and mini-games — 22 October 2026
+
+Both feature batches are retained. Current saves use **World44 / engine46 / content23 / reader24 / database v4**. Migration distinguishes published mini-game saves (42/44/20) from rental saves (42/44/21) and personal-support saves (43/45/22); existing sessions and histories are preserved. The verification reports below describe their respective pre-merge source snapshots. Combined verification will be recorded after this integration is complete.
+
+
 Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_PLAN.md).
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Current Life and relationship polish —22October
+## Pre-merge Life and relationship polish —22October
 
 The second user brief is implemented after the reference-art/rental batch.
 See [the new review](verification/next-polish/README.md) for behavior, save
@@ -15,7 +20,7 @@ Reviews use app-wide preferences and committed completed-year counts, with
 negative-year/modal guards. Death has a factual compact memorial and safe
 read-only family history. Existing appearance and earlier artwork are retained.
 
-Current markers are **World43/engine45/content22/SQLite reader23/v4**. Migration
+That checkpoint used **World43/engine45/content22/SQLite reader23/v4**. Migration
 adds only prospective empty support/action histories. Reader13–22 upgrades are
 metadata-only; old payload bytes and original fixture hashes remain intact.
 The native review dependency needs a fresh native build; a store sheet remains
@@ -55,7 +60,21 @@ tools, iOS simulator or attached device, so those captures are not native
 device acceptance. No further artwork is missing for this requested batch.
 Preserve the final source push's automatic Quality run until it finishes.
 
-## Current app icon selection — 22 October
+## Current mini-game visual overhaul — 22 October
+
+All three live mini-games now use original Image Gen environment plates and transparent animated sprites, including Safe Cracker as the user requested. Compact blue controls, staged football aiming/power, recorded-outcome result cards, preloading/retry and correct leftward keeper mirroring replace the procedural scene construction. No Krea generation, gameplay/save changes or additional runtime packages. See [current report](MINIGAMES.md), [art provenance](../assets/minigames/art/README.md) and [overhaul verification](verification/minigame-overhaul-20261022/README.md). The preceding full regression/soak results below retain their original source scope; the presentation change has focused tests and fresh native Hermes exports, with physical-device acceptance outstanding.
+
+## Current mini-games — 22 October
+
+Clutch Shot, Safe Cracker and Orbital Docking are playable full-screen challenges connected to actual athlete seasons, the existing burglary/legal pipeline and orbital/habitat astronaut assignments. Typed saved transcripts, deterministic scoring, pause/background recovery, one-time bounded modifiers, explicit forfeits and transaction/idempotency protections are implemented. Internal God Mode adds a practice-only playground at difficulty 1–5. Existing cinematics and the subsequent avatar, End This Life and birth-journal work are retained.
+
+Current markers are **World42 / engine44 / content20 / SQLite reader22 / checkpointv4**. Migration adds empty mini-game history to preceding saves without changing their archived payload bytes or RNG; snapshot branches retain attempts under their new life identity. The current-version test expectation updates do not change genuine fixtures or frozen historical fingerprints.
+
+See [MINIGAMES.md](MINIGAMES.md) for controls, exact caps, persistence, artwork/audio and the implementation report, and [verification results](verification/minigames-20261022/results.json) for command outcomes and source boundaries. Browser screenshots and native Babel/VM checks are explicitly separated from native-device acceptance. There is no Android/iOS SDK or physical device in this environment; no installed release, spoken-reader, hardware-feedback or 60 FPS acceptance is claimed. A fresh internal native build can review all three games through Settings → God Mode → Mini-Game Playground.
+
+The soak runner optionally supports `DREAMS_SOAK_WORKERS=1..4`, partitioning the same seeded-life range across independent Jest processes. Default execution remains serial. Do not launch duplicate unchanged soak/regression work after the recorded runs pass.
+
+## Prior app icon selection — 22 October
 
 The user now explicitly selected `assets/app_icon.png`. `app.json` uses that exact unchanged1254×1254opaque PNG for the main Android/iOS icon and Android adaptive foreground. The existing package `com.yacoobali.lifesim` is retained. Offline resolved prebuild configuration confirms both icon references and identifiers; Expo image utilities successfully generate1024px iOS,432px Android adaptive and48px legacy PNGs in `/tmp/dreams-user-icon-sizes`. Current notices/inventory were refreshed and their check passes. This asset/config-only change reruns no gameplay regression or Hermes export. It requires fresh native generation/build to appear on an installed launcher; existing native candidates remain stale. See [APP_IDENTITY_AND_BRANDING.md](APP_IDENTITY_AND_BRANDING.md).
 

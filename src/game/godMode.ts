@@ -29,6 +29,7 @@ export function applyGodModeEdits(before: World, input: GodModeEdit): World {
   const edit = parsed.data;
   if (before.id !== edit.lifeId || before.activePersonId !== edit.personId || before.revision !== edit.expectedRevision) throw new IneligibleAction('This life changed while the editor was open. Reload the values before saving.');
   if (active(before).died || !before.birthAcknowledged) throw new IneligibleAction('Open a living character before using God Mode.');
+  if (before.miniGames.some(row => row.personId === before.activePersonId && row.status === 'active')) throw new IneligibleAction('Resume or forfeit your saved mini-game before editing this life.');
   const world = copyWorld(before), person = active(world);
   world.revision++;
   for (const command of edit.commands) {
