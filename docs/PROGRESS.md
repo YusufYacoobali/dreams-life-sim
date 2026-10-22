@@ -1,5 +1,17 @@
 # Dreams: Life Simulator — progress and verification
 
+The latest reference-polish batch follows the user's six-phase brief: original
+contextual event/pet artwork, coloured modal badges and frozen participant
+roles; larger relationship/profile rows and14px stat tracks; durable school
+milestones;20 homes and20 vehicles with distinct art; and renter leases with
+separate residence/monthly-finance records. Business, care, hobby, travel and
+other visible prose is shorter. Existing avatars, birth journals, catalogue
+IDs/prices, old fixtures and saved bound scenes are retained. Current markers:
+World42/engine44/content21/reader22/v4. [The integrated review](verification/product-polish/README.md)
+contains before/after browser captures, catalogue art, offline Android/iOS
+bundle checks and final test results. Physical/native visual acceptance remains
+open; no device screenshot is claimed.
+
 The user subsequently selected `assets/app_icon.png`. Both the main Android/iOS icon and Android adaptive foreground now use that exact original file. Offline resolved config,1024/432/48px Expo icon generation and refreshed notices checks pass. Native launcher acceptance awaits a new build; no gameplay regression/export was repeated for this asset/config-only change. [Current branding](APP_IDENTITY_AND_BRANDING.md).
 
 The latest22October batch adds preference-aware haptics throughout welcome, creation and appearance choices, navigation and Age Up/Continue This Year. Hardware requests never delay commands; duplicate held-save taps are blocked and failed saves remain retryable. The original saved off preference is preserved. Opening gains a sunrise/light reveal, birth gains halos/stars and life's end gains a quiet memorial. All are one-shot decorative native-driver effects, at most1.8seconds, with immediately available controls and a reduced-motion still frame. [Feedback/motion design](FEEDBACK_SETTINGS.md) records the placement analysis.

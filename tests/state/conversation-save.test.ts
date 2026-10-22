@@ -57,7 +57,7 @@ test('the real reviewed topic saves atomically: held duplicate, all8 rollback, e
   } finally { release(); reader?.close(); jest.restoreAllMocks(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
 }, 30000);
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20])('complete reader%i upgrades its marker only, retaining all8 rows and exact legacy conversation payload', async marker => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21])('complete reader%i upgrades its marker only, retaining all8 rows and exact legacy conversation payload', async marker => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver);
   try {
     await repository.initialise(); const before = decodeWorld(JSON.stringify(graduate)); await repository.create(before);
@@ -71,7 +71,7 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20])('complete reader%i upgrades its mark
     sqlite.exec('PRAGMA user_version=' + marker); const migrated = new SaveRepository(driver); await migrated.initialise();
     expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(22); expect(rows()).toEqual(baseline);
     expect(await migrated.active()).toEqual(before); expect(rows()).toEqual(baseline); await migrated.initialise(); expect(rows()).toEqual(baseline);
-    sqlite.exec('PRAGMA user_version=22'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(22);
+    sqlite.exec('PRAGMA user_version=23'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(23);
   } finally { sqlite.close(); }
 });
 

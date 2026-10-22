@@ -4,6 +4,34 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
+## Current reference polish and rental leases —22October
+
+The user's six-phase polish brief is implemented on top of8891d4d, preserving
+its birth journals and the existing avatar overhaul. See the
+[integrated review](verification/product-polish/README.md) for source scope,
+reference panels, before/after captures, save compatibility and verification.
+World42/engine44/content21/SQLite reader22/v4 are the current markers; earlier
+sections below retain their historical marker values.
+
+The batch adds contextual event art/colours and frozen participant labels,
+larger relationship rows with saved family roles,14px shared stat tracks,
+saved school milestones,20 distinct homes and20 vehicles, and renter leases
+separate from landlord income. Renting removes the normal housing portion of
+living costs and records one monthly rent charge. Existing catalogue IDs/prices,
+owned assets, bound scenes, queues and old archive fixtures remain valid.
+Pet deaths now notify even when the known pet's bond is zero; memorials retain
+normal saved one-time delivery. Business drops the redundant operating-model
+step. Travel art fits rows, companions start visibly unchecked, and repetitive
+UI/care/hobby prose is shorter without changing costs or eligibility.
+
+Strict types/imports and both offline Hermes exports pass. The full integrated
+Jest result is recorded in verification/product-polish/test-summary.json.
+Browser captures exercise320/390px, large text and dark mode; component checks
+exercise Android/iOS layout branches. This environment has no Android native
+tools, iOS simulator or attached device, so those captures are not native
+device acceptance. No further artwork is missing for this requested batch.
+Preserve the final source push's automatic Quality run until it finishes.
+
 ## Current app icon selection — 22 October
 
 The user now explicitly selected `assets/app_icon.png`. `app.json` uses that exact unchanged1254×1254opaque PNG for the main Android/iOS icon and Android adaptive foreground. The existing package `com.yacoobali.lifesim` is retained. Offline resolved prebuild configuration confirms both icon references and identifiers; Expo image utilities successfully generate1024px iOS,432px Android adaptive and48px legacy PNGs in `/tmp/dreams-user-icon-sizes`. Current notices/inventory were refreshed and their check passes. This asset/config-only change reruns no gameplay regression or Hermes export. It requires fresh native generation/build to appear on an installed launcher; existing native candidates remain stale. See [APP_IDENTITY_AND_BRANDING.md](APP_IDENTITY_AND_BRANDING.md).

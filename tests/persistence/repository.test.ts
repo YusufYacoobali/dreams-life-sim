@@ -66,10 +66,10 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
 
 test('newer database versions are refused without resetting their version marker', async () => {
   const { sqlite, driver } = database();
-  sqlite.exec('PRAGMA user_version=22');
+  sqlite.exec('PRAGMA user_version=23');
   const repository = new SaveRepository(driver);
   await expect(repository.initialise()).rejects.toThrow('newer version');
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(22);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(23);
   sqlite.close();
 });
 

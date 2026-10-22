@@ -91,7 +91,7 @@ test('three actual prepared years cap proficiency without invented qualification
   expect(result.hobbies[0].practices.at(-1)).toMatchObject({ source: 'manual', before: 100, after: 100, gain: 0, paid: 0n });
   expect(result.accounts).toEqual(accounts);
   expect(result.pending).toMatchObject({ kind: 'result', effects: [{ id: 'proficiency', value: '100% · unchanged', tone: 'neutral' }, { id: 'energy', value: '-2%', tone: 'negative' }, expect.anything(), expect.anything()] });
-  expect(result.pending?.kind === 'result' && result.pending.body).toMatch(/familiar practice/);
+  expect(result.pending?.kind === 'result' && result.pending.body).toMatch(/know this routine inside out/);
   expect(decodeWorld(encodeWorld(result))).toEqual(result);
 });
 test('a genuinely qualified service member’s actual assignment prevents local practice and outings until the recorded return', () => {

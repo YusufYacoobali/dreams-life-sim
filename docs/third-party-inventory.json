@@ -23,7 +23,7 @@
     "readableNoticeFiles": 734,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1031
+    "projectArtFiles": 1057
   },
   "directDependencies": [
     {
@@ -17900,10 +17900,10 @@
     {
       "family": "Ionicons",
       "importedBy": [
-        "app/(game)/(tabs)/activities.tsx",
         "app/(game)/(tabs)/life.tsx",
         "app/(game)/(tabs)/relationships.tsx",
         "app/(game)/_layout.tsx",
+        "app/(game)/destination/[id].tsx",
         "app/(game)/education.tsx",
         "app/(game)/emigrate.tsx",
         "app/(game)/extras.tsx",
@@ -27119,6 +27119,24 @@
       ]
     },
     {
+      "path": "assets/generated/catalogue-homes.png",
+      "status": "present",
+      "bytes": 1833669,
+      "sha256": "80a039139c2d9a68ed23294046a375e5a16bdf821da4175333ddcf70005fd80d",
+      "referencedBy": [
+        "src/assets/CatalogArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/catalogue-vehicles.png",
+      "status": "present",
+      "bytes": 2436368,
+      "sha256": "ef218bb0e22cf785de28a550ab5909bba2512082a7b71f3c5aaeb448bda4296c",
+      "referencedBy": [
+        "src/assets/CatalogArt.tsx"
+      ]
+    },
+    {
       "path": "assets/generated/death-memorial.png",
       "status": "present",
       "bytes": 1068647,
@@ -27179,6 +27197,222 @@
       "sha256": "a4c124c8bca59e84ad175e8eaa136bc15f54291745043bfce845655bbd44be26",
       "referencedBy": [
         "src/assets/PetsLeisureArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/archive.png",
+      "status": "present",
+      "bytes": 79674,
+      "sha256": "4ae6bd6ed80b90d60687d88d48853ab59dea96aa08a4685544c70da84bf214ca",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/everyday.png",
+      "status": "present",
+      "bytes": 74470,
+      "sha256": "18201ded36a57c7a7a9f992496cb2dc047d99e286d7d20c8e47bd0691a1a0661",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/family-life.png",
+      "status": "present",
+      "bytes": 94961,
+      "sha256": "05e558ad87635fa42f4228aaebafac5d5ea0735e5605fd9e71f14db2c2b29cdc",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/friends.png",
+      "status": "present",
+      "bytes": 73062,
+      "sha256": "767f336ff287ab064536e038ce954deb89379daf3770d7800504450531c656ed",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/health-check.png",
+      "status": "present",
+      "bytes": 86818,
+      "sha256": "e0edbf5481d342752c0cf03821692d35d1b124003e10ff35cb807407ca3094b3",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/life-star.png",
+      "status": "present",
+      "bytes": 69586,
+      "sha256": "93d5ccf5df4c705c30a4296c70d2e8c7726e58dc37ea627aac031f1ff0bc370b",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/loan.png",
+      "status": "present",
+      "bytes": 80974,
+      "sha256": "d477a46328e43009f21badd100fdfb229128060118db2e01cb0b2b7aa5ffb05f",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/mischief.png",
+      "status": "present",
+      "bytes": 73958,
+      "sha256": "14fd82c2154bda79dda77162e405560fde61718af7ef2c36e434130929a885a0",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-adoption.png",
+      "status": "present",
+      "bytes": 82378,
+      "sha256": "57fa8e0bee521b7aecda5b2cc4d5c80296d7638ab21d0b36be6bac8d646678c0",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-bed.png",
+      "status": "present",
+      "bytes": 66587,
+      "sha256": "f7c7a2a143e3e2615593fc24d657412fbfce16c2654f22180eef4724983092f6",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-bird.png",
+      "status": "present",
+      "bytes": 67156,
+      "sha256": "7f2ea7badf8c72cda68102647c13802f9fdc04e983ff69c503c99fd9943f769b",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-cat.png",
+      "status": "present",
+      "bytes": 80626,
+      "sha256": "afb41bcb5eeb403c573c51b8970049767c976f99497c77cb487be646ab4d6a24",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-dog.png",
+      "status": "present",
+      "bytes": 85897,
+      "sha256": "2fe8fca9a72ca5213b68217318439311717ad6415ac8368f5106b034bc22e80a",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-feed.png",
+      "status": "present",
+      "bytes": 59063,
+      "sha256": "54935500657049406c32db780fd18493714e1e5eba38ab9b69f0d2797dc0a395",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-memorial.png",
+      "status": "present",
+      "bytes": 79401,
+      "sha256": "99cbb24e40552d207863889d56a0adf04e81360d4f7fae28f92ff127670cde39",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-play.png",
+      "status": "present",
+      "bytes": 61248,
+      "sha256": "e40e6a5ef6abfc010d9db8c785adc5b96ea2b4371c7a2bffd35fc6108b74e6a2",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-rabbit.png",
+      "status": "present",
+      "bytes": 56738,
+      "sha256": "3c95f440038a73276cf2a319e5e99f59cfb7f542c7014ee02bda38b67f4a31d3",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-training.png",
+      "status": "present",
+      "bytes": 68159,
+      "sha256": "65bc1b5db98137c6fb617947b13da11cb849afecae84e910fd59e19eb82a4a4c",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-vet.png",
+      "status": "present",
+      "bytes": 80333,
+      "sha256": "fafe58506d19a92e6cf65344e2e7b30f54dd16f1657556ee8f610e3fd002a9d0",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/pet-walk.png",
+      "status": "present",
+      "bytes": 87124,
+      "sha256": "9d57281495a62c3ef3ffeda20fae4b515e78958caf9d1b7e1d75a6c87293701d",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/school-life.png",
+      "status": "present",
+      "bytes": 88588,
+      "sha256": "5ef25173a8a36fa4793d1ae5c7c4c5cce3c0a36440d253333e6ee58acf530af0",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/settings.png",
+      "status": "present",
+      "bytes": 78285,
+      "sha256": "bdca7820bda861125ae8f36be91e8faae338cc07f5e4926e10e51dfc055f66eb",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/surprise.png",
+      "status": "present",
+      "bytes": 78725,
+      "sha256": "3fe4a5e01a712dd86b020f1fb413f0d5379794034a07418e24dca1fcabb10515",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/polish/toys.png",
+      "status": "present",
+      "bytes": 79331,
+      "sha256": "e3372b5e8b7f3babcd35729aaabf6a95b35f5e5bde5cccd93cb9c16ec55cbd13",
+      "referencedBy": [
+        "src/assets/polishImages.ts"
       ]
     },
     {

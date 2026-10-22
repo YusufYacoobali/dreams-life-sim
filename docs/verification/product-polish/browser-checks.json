@@ -1,0 +1,118 @@
+{
+  "renderer": "Browser CSS/SVG adapter of production React Native trees; NOT native screenshots",
+  "browser": "154.0.8037.57",
+  "deviceScaleFactor": 2,
+  "captures": [
+    "activities-dark-large",
+    "activities-light",
+    "assets-dark-large",
+    "assets-light",
+    "destinations-dark-large",
+    "destinations-light",
+    "emigration-dark-large",
+    "emigration-light",
+    "event-friend-different-budget-dark-large",
+    "event-friend-different-budget-light",
+    "event-new-pet-memorial-dark-large",
+    "event-new-pet-memorial-light",
+    "event-partner-alone-time-dark-large",
+    "event-partner-alone-time-light",
+    "event-pet-memorial-dark-large",
+    "event-pet-memorial-light",
+    "event-shoe-principle-dark-large",
+    "event-shoe-principle-light",
+    "hobby-review",
+    "person-dark-large",
+    "person-light",
+    "relationships-dark-large",
+    "relationships-light",
+    "rentals-android-dark-large",
+    "rentals-android-light",
+    "rentals-ios-dark-large",
+    "rentals-ios-light",
+    "rented-assets-android-dark-large",
+    "rented-assets-android-light",
+    "rented-assets-ios-dark-large",
+    "rented-assets-ios-light",
+    "travel-dark-large",
+    "travel-light",
+    "trip-companions-dark-large",
+    "trip-companions-light"
+  ],
+  "scrolledCaptures": [
+    "activities-light-travel.png",
+    "activities-dark-large-travel.png",
+    "activities-light-saved-lives.png",
+    "activities-dark-large-saved-lives.png",
+    "assets-light-investments.png",
+    "assets-dark-large-investments.png",
+    "trip-companions-light-travel-with.png",
+    "trip-companions-dark-large-travel-with.png",
+    "emigration-light-move-with.png",
+    "emigration-dark-large-move-with.png",
+    "rented-assets-android-light-your-residence.png",
+    "rented-assets-android-dark-large-your-residence.png",
+    "rented-assets-ios-light-your-residence.png",
+    "rented-assets-ios-dark-large-your-residence.png",
+    "event-friend-different-budget-dark-large-actions.png",
+    "event-new-pet-memorial-dark-large-actions.png",
+    "event-partner-alone-time-dark-large-actions.png",
+    "event-pet-memorial-dark-large-actions.png",
+    "event-shoe-principle-dark-large-actions.png"
+  ],
+  "modalScrollChecks": [
+    {
+      "tree": "event-friend-different-budget-dark-large-before",
+      "scrollable": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-friend-different-budget-dark-large-after",
+      "scrollable": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-new-pet-memorial-dark-large-after",
+      "scrollable": false,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-partner-alone-time-dark-large-before",
+      "scrollable": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-partner-alone-time-dark-large-after",
+      "scrollable": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-pet-memorial-dark-large-before",
+      "scrollable": false,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-pet-memorial-dark-large-after",
+      "scrollable": false,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-shoe-principle-dark-large-before",
+      "scrollable": false,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "event-shoe-principle-dark-large-after",
+      "scrollable": false,
+      "lastActionVisible": true
+    }
+  ],
+  "allImagesDecoded": true,
+  "uniqueClipIds": true,
+  "clipReferencesResolve": true,
+  "phoneOverflow": [],
+  "imageCount": 458,
+  "fontLoaded": true,
+  "errors": [],
+  "externalRequests": []
+}

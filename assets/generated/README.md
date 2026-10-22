@@ -149,3 +149,35 @@ World 27 registers the remaining eight leisure subjects for actual hobby and
 paid-outing flows. All sixteen pet/leisure subjects now have connected uses;
 this does not establish the remaining hobby/media reference catalogue or native
 visual acceptance. The PNG/rectangles are unchanged from the reviewed source.
+
+## Reference polish — event, pet and catalogue artwork
+
+The October22 polish adds24 original event/pet illustrations in `polish/` and
+forty independent home/vehicle subjects in `catalogue-homes.png` and
+`catalogue-vehicles.png`. These were generated with the built-in image generation
+workflow, matching the rounded, colourful established activity/ownership art.
+Krea was not used. Runtime images are bundled locally and need no generation
+service or network connection.
+
+`design/polish/event-icons.png` and `design/polish/pet-icons.png` preserve the
+generated RGBA source sheets. `tools/build-polish-art.py` registers their alpha
+components and fits each intact illustration into a256px transparent sprite;
+it does not repaint, tint or stretch the art. `polish/manifest.json` records
+source hashes, rectangles and runtime hashes. `PolishArt` uses predictable
+40px row or64px popup footprints. The new subjects cover childhood, friends,
+family, school, surprises, everyday life, health, archives, settings, banking,
+four pet species, care and memorials.
+
+The two catalogue atlases remain unchanged from their generated source files.
+`catalogue-art.json` and `src/assets/catalogueLayout.ts` register twenty distinct
+homes and twenty distinct vehicles; all prior catalogue IDs and prices remain
+valid. The original seven possessions retain their existing illustrations.
+The new event/pet sprites total1,833,142bytes, and the two catalogue atlases
+total4,270,037bytes. Their transparent bounds and source hashes were checked.
+
+See [the integrated review](../../docs/verification/product-polish/README.md)
+and [the catalogue gallery](../../docs/verification/catalogue-polish/README.md).
+The browser captures show actual application component trees in light/dark
+themes and small/large-text layouts. Android/iOS Hermes exports bundle all26
+new runtime PNG files unchanged. These checks do not establish native-device
+visual or GPU acceptance.

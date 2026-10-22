@@ -1,0 +1,26 @@
+[
+  {
+    "platform": "android",
+    "records": 1075,
+    "checkedNewArtFiles": 26,
+    "sourceArtBytes": 6103179,
+    "missing": [],
+    "modified": [],
+    "hermesBundle": "_expo/static/js/android/entry-671a493004ff7f9729e7cdd44051c296.hbc",
+    "bundleBytes": 7344478,
+    "bundleSHA256": "ee4f6885eae87b0b86c63745316c24d6f213a024ac2118133082c500b4e99093",
+    "hermesMagicHex": "c61fbc03c103191f"
+  },
+  {
+    "platform": "ios",
+    "records": 1072,
+    "checkedNewArtFiles": 26,
+    "sourceArtBytes": 6103179,
+    "missing": [],
+    "modified": [],
+    "hermesBundle": "_expo/static/js/ios/entry-794ae739488f17855612acc725df52ac.hbc",
+    "bundleBytes": 7039008,
+    "bundleSHA256": "0e9b314f4bcd05458a7b83ea9fa28b08bad987ef4cc76bad4461d034c1aec49e",
+    "hermesMagicHex": "c61fbc03c103191f"
+  }
+]
