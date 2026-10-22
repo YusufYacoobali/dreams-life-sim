@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-22",
+  "integratedWorkBase": "016cbbf23de545f52317d68ca8cfe48dec059e94",
+  "durationsMs": {
+    "welcome": 3200,
+    "birth": 3300,
+    "death": 2800
+  },
+  "coveredMs": {
+    "welcome": 0,
+    "birth": 1400,
+    "death": 1200
+  },
+  "runtime": {
+    "renderer": "lottie-react-native 7.3.8 HARDWARE (Core Animation on iOS / hardware mode on Android)",
+    "perFrameJavaScriptGeometry": false,
+    "nativeFramesPerSecondMeasured": false,
+    "assets": {
+      "welcome": {
+        "bytes": 2954631,
+        "sha256": "54a58875ff4a66c721aae68101ff94404530a9a5934f9d6d8280960c32084119"
+      },
+      "birth": {
+        "bytes": 3345169,
+        "sha256": "cf607b61178f2fbb88a8266979d729a1e7b231211787404ff1ce10224abbb824"
+      },
+      "death": {
+        "bytes": 305154,
+        "sha256": "a5b24638f9ef999d685e20a19ac78fd0fc4b70f588e07a850d051da9dca63cdf"
+      }
+    }
+  },
+  "checks": {
+    "typescript": "app and tests pass",
+    "jest": {
+      "suites": 13,
+      "tests": 137,
+      "passed": true
+    },
+    "runtimeImports": {
+      "modules": 394,
+      "cycles": 0
+    },
+    "sdkCompatibility": "Official Expo SDK 57 installed bundled metadata (offline); no mismatches",
+    "deterministicAssetRegeneration": "pass, including America/New_York timezone",
+    "thirdPartyInventory": "regenerated after integrating latest avatar assets; check passes",
+    "diffWhitespace": "pass"
+  },
+  "exports": {
+    "android": {
+      "format": "Hermes production export; not a device-installed release build",
+      "bundle": "_expo/static/js/android/entry-aaa57831681a196b476266322bfa0a15.hbc",
+      "bundleSha256": "7e71c6964ac90b867946a10b91b101291307586b5b98c860545ac797de808b2f",
+      "assets": [
+        {
+          "kind": "welcome",
+          "sha256": "54a58875ff4a66c721aae68101ff94404530a9a5934f9d6d8280960c32084119",
+          "bytes": 2954631
+        },
+        {
+          "kind": "birth",
+          "sha256": "cf607b61178f2fbb88a8266979d729a1e7b231211787404ff1ce10224abbb824",
+          "bytes": 3345169
+        },
+        {
+          "kind": "death",
+          "sha256": "a5b24638f9ef999d685e20a19ac78fd0fc4b70f588e07a850d051da9dca63cdf",
+          "bytes": 305154
+        }
+      ]
+    },
+    "ios": {
+      "format": "Hermes production export; not a device-installed release build",
+      "bundle": "_expo/static/js/ios/entry-338576278049a7970cee7569b1f7494c.hbc",
+      "bundleSha256": "9c5eaafbd5435ae2a0d96a6ac57005911d13029f05addc208ceca97a571ef0e8",
+      "assets": [
+        {
+          "kind": "welcome",
+          "sha256": "54a58875ff4a66c721aae68101ff94404530a9a5934f9d6d8280960c32084119",
+          "bytes": 2954631
+        },
+        {
+          "kind": "birth",
+          "sha256": "cf607b61178f2fbb88a8266979d729a1e7b231211787404ff1ce10224abbb824",
+          "bytes": 3345169
+        },
+        {
+          "kind": "death",
+          "sha256": "a5b24638f9ef999d685e20a19ac78fd0fc4b70f588e07a850d051da9dca63cdf",
+          "bytes": 305154
+        }
+      ]
+    }
+  },
+  "previews": {
+    "welcome": {
+      "width": 400,
+      "height": 900,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "3.200000",
+      "nb_frames": "192",
+      "sha256": "03bcd98ce28892436f9879196dc6247928558165598a00b7c51845bad742e300",
+      "renderer": "lottie-web reference renderer of bundled native assets over actual screens; does not measure native frame delivery"
+    },
+    "birth": {
+      "width": 400,
+      "height": 900,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "3.300000",
+      "nb_frames": "198",
+      "sha256": "1f2421fbe15ce5e575d5937b1f993e0d04327d8e366e206dae39c36d056f3f63",
+      "renderer": "lottie-web reference renderer of bundled native assets over actual screens; does not measure native frame delivery"
+    },
+    "death": {
+      "width": 400,
+      "height": 900,
+      "r_frame_rate": "60/1",
+      "avg_frame_rate": "60/1",
+      "duration": "2.800000",
+      "nb_frames": "168",
+      "sha256": "04a544561ad08742dc24f441caa1cfa1254040a72c39bebb8101af3bc67d2c23",
+      "renderer": "lottie-web reference renderer of bundled native assets over actual screens; does not measure native frame delivery"
+    }
+  },
+  "visualReview": {
+    "viewports": [
+      "400x900",
+      "768x1024"
+    ],
+    "continuousInterpolation": "All 60 Hz frames compared against original quadratic ink curves; coordinate error <0.6 design pixels"
+  },
+  "deviceVerification": {
+    "available": false,
+    "reason": "Linux environment has no attached physical phone, adb/Android SDK, iOS simulator or signing configuration",
+    "releaseDeviceBuildRun": false,
+    "stableNative60FpsConfirmed": false
+  }
+}

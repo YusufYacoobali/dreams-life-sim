@@ -4,14 +4,13 @@ import { FullWindowOverlay } from 'react-native-screens';
 import { StatusBar } from 'expo-status-bar';
 import { router, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { cancelAnimation, Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-import { scheduleOnRN } from 'react-native-worklets';
+import type LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { gameStore } from '../../state/useGame';
 import { usePreferences } from '../../state/usePreferences';
 import { useFeedback } from '../feedback';
 import { CinematicInk } from './CinematicInk';
-import { COVER_TIME, DURATION, NAVY, type CinematicKind } from './inkGeometry';
+import { COVER_TIME, DURATION, FPS, NAVY, type CinematicKind } from './cinematicTiming';
 import { isNewDeath } from './committedDeath';
 import { CinematicContext, type PlayCinematic } from './CinematicContext';
 
@@ -110,31 +109,42 @@ function OverlaySurface({ children, onClose }: React.PropsWithChildren<{ onClose
 function CinematicPlayer({ request, running, destinationReady, onCovered, onFinished }: {
   request: Request; running: boolean; destinationReady: boolean; onCovered: (id: number) => void; onFinished: (id: number) => void;
 }) {
-  const clock = useSharedValue(0), insets = useSafeAreaInsets();
+  const player = useRef<LottieView>(null), insets = useSafeAreaInsets();
+  const [loaded, setLoaded] = useState(false);
+  const stage = useRef<'loading' | 'cover' | 'holding' | 'reveal' | 'finished'>('loading');
   const { id, kind } = request;
+  const animationFinished = useCallback((cancelled: boolean) => {
+    if (cancelled) return;
+    if (stage.current === 'cover') {
+      stage.current = 'holding'; onCovered(id);
+    } else if (stage.current === 'reveal') {
+      stage.current = 'finished'; onFinished(id);
+    }
+  }, [id, onCovered, onFinished]);
   useEffect(() => {
-    if (!running) return;
-    const coverTime = COVER_TIME[kind], end = coverTime || DURATION[kind];
-    clock.value = withTiming(end, { duration: end, easing: Easing.linear }, finished => {
-      if (finished) scheduleOnRN(coverTime ? onCovered : onFinished, id);
-    });
-    return () => cancelAnimation(clock);
-  }, [running, id, kind, clock, onCovered, onFinished]);
+    if (!running || !loaded || stage.current !== 'loading') return;
+    const cover = COVER_TIME[kind];
+    stage.current = cover ? 'cover' : 'reveal';
+    player.current?.play(0, (cover || DURATION[kind]) * FPS / 1000);
+  }, [running, loaded, kind]);
   useEffect(() => {
-    if (!destinationReady || kind === 'welcome') return;
+    if (!destinationReady || !loaded || kind === 'welcome') return;
     let frame = requestAnimationFrame(() => {
-      // Navigation has committed. Give native layout a frame while completely covered.
+      // Hold the exact opaque native frame until the destination has laid out.
       frame = requestAnimationFrame(() => {
-        clock.value = withTiming(DURATION[kind], { duration: DURATION[kind] - COVER_TIME[kind], easing: Easing.linear }, finished => {
-          if (finished) scheduleOnRN(onFinished, id);
-        });
+        stage.current = 'reveal';
+        player.current?.play(COVER_TIME[kind] * FPS / 1000, DURATION[kind] * FPS / 1000);
       });
     });
     return () => cancelAnimationFrame(frame);
-  }, [destinationReady, id, kind, clock, onFinished]);
-  return <View testID={`cinematic-${kind}`} accessibilityViewIsModal style={styles.canvas}>
+  }, [destinationReady, loaded, kind]);
+  useEffect(() => {
+    const animation = player.current;
+    return () => { stage.current = 'finished'; animation?.pause(); };
+  }, []);
+  return <View testID={`cinematic-${kind}`} accessibilityViewIsModal style={[styles.canvas, kind === 'welcome' && !loaded ? { backgroundColor: NAVY } : undefined]}>
     <StatusBar hidden />
-    <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}><CinematicInk kind={kind} clock={clock} /></View>
+    <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}><CinematicInk ref={player} kind={kind} onLoaded={() => setLoaded(true)} onFinished={animationFinished} onFailure={() => onFinished(id)} /></View>
     {kind === 'welcome' ? <Pressable accessibilityRole="button" accessibilityLabel="Skip welcome animation" onPress={() => onFinished(id)} style={[styles.skip, { top: Math.max(insets.top, 20) + 8 }]}><Text style={styles.skipText}>Skip</Text></Pressable> : <Text accessibilityRole="text" accessibilityLiveRegion="polite" style={styles.accessibleLabel}>{kind === 'birth' ? 'A New Life Begins' : 'Remembering your life'}</Text>}
   </View>;
 }

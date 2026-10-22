@@ -1,14 +1,14 @@
-/** Local vector choreography. All coordinates are decorative, never game RNG.
- * These functions also drive the frame-review tool. Path updates run on the UI
- * runtime; there is no JS frame timer, remote asset, or bitmap frame sequence.
+/** Authoring geometry, evaluated OFFLINE by tools/generate-cinematics.cjs.
+ * The app plays bundled native assets and never imports this module.
+ * All coordinates are decorative, never game RNG.
  */
-export type CinematicKind = 'welcome' | 'birth' | 'death';
-export const DURATION = { welcome: 2600, birth: 1500, death: 1800 } as const;
-export const COVER_TIME = { welcome: 0, birth: 620, death: 760 } as const;
-export const NAVY = '#061633';
+import { DURATION, type CinematicKind } from './cinematicTiming';
+
+export function choreographyTime(kind: CinematicKind, milliseconds: number) {
+  return milliseconds / DURATION[kind] * ({ welcome: 2600, birth: 1500, death: 1800 }[kind]);
+}
 
 export function smooth(from: number, to: number, value: number) {
-  'worklet';
   const t = Math.max(0, Math.min(1, (value - from) / (to - from)));
   return t * t * (3 - 2 * t);
 }
@@ -17,7 +17,6 @@ export function smooth(from: number, to: number, value: number) {
  * Overscan guarantees both fully clear and fully opaque endpoints on tablets.
  */
 export function inkFront(coverage: number, phase = 0) {
-  'worklet';
   let path = 'M -700 -220 L ';
   for (let i = 0; i <= 56; i++) {
     const s = i / 56;
@@ -45,12 +44,9 @@ export const streams: Point[][] = controlPoints.map((points, strand) => Array.fr
   return { x, y, nx: -dy / length, ny: dx / length, width: (strand ? 55 : 79) * (1 + 0.36 * Math.sin(i * 0.21) + 0.15 * Math.sin(i * 0.73)) };
 }));
 
-// Worklet closures capture their dependencies during module initialization.
-// Declare leaf worklets before the worklets that call them.
 // Curl-field advection folds both sides of the wet contour around local eddies.
 // The radius falls off smoothly so the pours stretch into fine, connected wisps.
 function curl(x: number, y: number, time: number, strand: number) {
-  'worklet';
   const vortices = strand ? [[170, 340, 165, -2.1], [270, 590, 155, 2.5]] : [[145, 585, 175, 2.4], [240, 320, 165, -2.6]];
   for (const [cx, cy, radius, spin] of vortices) {
     const dx = x - cx, dy = y - cy;
@@ -63,7 +59,6 @@ function curl(x: number, y: number, time: number, strand: number) {
 }
 
 function roundedContour(points: number[][]) {
-  'worklet';
   const last = points[points.length - 1], first = points[0];
   let path = `M${((last[0] + first[0]) / 2).toFixed(2)} ${((last[1] + first[1]) / 2).toFixed(2)} `;
   for (let i = 0; i < points.length; i++) {
@@ -77,7 +72,6 @@ function roundedContour(points: number[][]) {
  * form veins inside each pour; the contour keeps folding as the ink advances.
  */
 export function inkRibbon(time: number, strand: number, offset = 0, thickness = 1) {
-  'worklet';
   const points = streams[strand], head = smooth(0.04 + strand * 0.12, 1.38, time) * 1.28;
   const left: number[][] = [], right: number[][] = [];
   for (let i = 0; i < points.length; i++) {
@@ -94,8 +88,7 @@ export function inkRibbon(time: number, strand: number, offset = 0, thickness = 
 }
 
 export function coverageAt(kind: CinematicKind, milliseconds: number) {
-  'worklet';
-  if (kind === 'welcome') return 1 - smooth(2100, 2600, milliseconds);
-  const cover = COVER_TIME[kind], reveal = kind === 'birth' ? 820 : 1120;
-  return smooth(0, cover - 50, milliseconds) * (1 - smooth(reveal, DURATION[kind], milliseconds));
+  const t = choreographyTime(kind, milliseconds);
+  if (kind === 'welcome') return 1 - smooth(2100, 2600, t);
+  return smooth(0, kind === 'birth' ? 570 : 710, t) * (1 - smooth(kind === 'birth' ? 820 : 1120, kind === 'birth' ? 1500 : 1800, t));
 }

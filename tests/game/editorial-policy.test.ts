@@ -96,12 +96,13 @@ test('the historical C35 registration stays exact and rejects newer source befor
     birthDriver: 'b05662854da8a6439ddc559f3b1038895df94ba73cecb9c501b6a6ef5234a2f8',
   });
   const pins = driver.sourcePins(sourceRoot);
-  for (const key of ['store', 'birthDriver']) expect(pins[key]).toBe(driver.expectedC35[key]);
-  // The starting work branch already includes state changes after frozen C35.
+  expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
+  expect(pins.store).toBe('03ae91af16945a8e94f5c247bd74c763876625a22e27a26477b3dd457c2b10a4');
+  // The work branch includes God Mode and appearance state changes after frozen C35.
   // Pin that unchanged work state without rewriting the historical registration.
-  expect(pins.state).toBe('c2c92e871746c8fac27345021bd1f253127abdbb627c650db03f7da7cb2dae77');
-  // Current UI dependencies include SDK 57 SVG/splash support; frozen C35 stays exact above.
-  expect(pins.lockfile).toBe('0540a10c2117503815f9407ee4271fd2ee8fb9c819d6717d0e90c5f9665a6d20');
+  expect(pins.state).toBe('2cf4283a80c014c267139aa78116fb12294c27477937c10d23e075e6d26ae530');
+  // Current UI dependencies include SDK 57 native cinematic playback; frozen C35 stays exact above.
+  expect(pins.lockfile).toBe('fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);

@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `1639accbbe2deda438f70ba8b2499ad8d2df8be8dd23f6a2cee37e3a5b6c4cfe`
-- `package-lock.json` SHA-256 `57e36de7942b0fddac071842fdbf3570664c753914e040b6b919a9e6ab8deb16`
+- `package.json` SHA-256 `a64c0b98a65dfe0bf38f05572dfd9d37a77bccc2c700bde4eafcb1115c8d0443`
+- `package-lock.json` SHA-256 `fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138`
 - `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
 
-**29 direct dependencies; 784 candidate non-dev lock entries; 774 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**30 direct dependencies; 785 candidate non-dev lock entries; 775 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-734 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 56 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+734 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -37,6 +37,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | expo-status-bar | ~57.0.1 | 57.0.1 | node_modules/expo-status-bar |
 | expo-system-ui | ~57.0.4 | 57.0.4 | node_modules/expo-system-ui |
 | fflate | ^0.8.2 | 0.8.2 | node_modules/fflate |
+| lottie-react-native | ~7.3.8 | 7.3.8 | node_modules/lottie-react-native |
 | react | 19.2.3 | 19.2.3 | node_modules/react |
 | react-dom | 19.2.3 | 19.2.3 | node_modules/react-dom |
 | react-native | 0.86.3 | 0.86.3 | node_modules/react-native |
@@ -597,6 +598,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | has-flag@3.0.0 (node_modules/log-symbols/node_modules/has-flag) | MIT | version-matched | node_modules/log-symbols/node_modules/has-flag/license [text-48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0] |
 | supports-color@5.5.0 (node_modules/log-symbols/node_modules/supports-color) | MIT | version-matched | node_modules/log-symbols/node_modules/supports-color/license [text-48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0] |
 | loose-envify@1.4.0 (node_modules/loose-envify) | MIT | version-matched | node_modules/loose-envify/LICENSE [text-4eb7543b08d955a6d23fcc224601d43ff566e775be918805e26210d7f6eb4893] |
+| lottie-react-native@7.3.8 (node_modules/lottie-react-native) | Apache-2.0 | version-matched | (none found) |
 | lru-cache@5.1.1 (node_modules/lru-cache) | ISC | version-matched | node_modules/lru-cache/LICENSE [text-4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b] |
 | make-dir@4.0.0 (node_modules/make-dir) | MIT | version-matched | node_modules/make-dir/license [text-5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3] |
 | makeerror@1.0.12 (node_modules/makeerror) | BSD-3-Clause | version-matched | node_modules/makeerror/license [text-efd6f9e708b909de1a18730b90fb6394a3125680ac2f98a87cd23d1a0c93afa2] |
