@@ -58,7 +58,7 @@ test.each([
   expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(packCheckpoint(world)).pending).toEqual(pending);
 });
 
-test('the unchanged project scene retains every original byte apart from the explicit fresh project-recall opt-in', () => {
+test('the unchanged project scene retains its original copy/mechanics apart from fresh recall opt-in and participant labels', () => {
   const country = 'GB', index = 10;
   const { pending, next } = bound(record(country, index)), comparable = structuredClone(next);
   const projects = comparable.choices.flatMap(choice => choice.effects.filter(effect => effect.kind === 'schedule-story' && effect.storyKind === 'project-promise'));
@@ -69,6 +69,8 @@ test('the unchanged project scene retains every original byte apart from the exp
     expect(pending.choices.flatMap(choice => choice.effects).filter(item => item.kind === 'schedule-story').every(item => !Object.hasOwn(item, 'rememberProject'))).toBe(true);
     delete effect.rememberProject;
   }
+  expect(comparable.participants).toEqual(expect.arrayContaining([{ personId:next.personIds[1], name:'Grace Ahmed', role:'classmate' }]));
+  delete comparable.participants;
   expect(comparable).toEqual(pending);
   expect(next.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
 });

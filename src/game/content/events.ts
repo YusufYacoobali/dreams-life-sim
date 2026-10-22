@@ -34,7 +34,7 @@ import { studyLifeTemplates } from './studyLifeStories';
 import { laterLifeRecordTemplates } from './laterLifeRecordStories';
 import { legalStoryAvailable, legalStoryContexts } from '../systems/legalStoryContext';
 import { offences } from './crime';
-import { storyContactNames } from '../storyNames';
+import { storyContactNames, storyParticipants } from '../storyNames';
 
 /** Original situations, not random names placed in interchangeable success text. */
 export const eventTemplates: readonly EventTemplate[] = [
@@ -340,7 +340,7 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
     offence: legal.awaitingCase ? offences[legal.awaitingCase.offence].title.toLowerCase() : '', caseCity: legal.awaitingCase?.city ?? '',
     facility: (template.legal === 'prison-peer' ? legal.sentence : legal.released)?.facility ?? '', prisonPeer: prisonPeer ? fullName(prisonPeer.person) : '',
   };
-  const contacts = storyContactNames([
+  const namedContacts = [
     ...(lateSpouse ? [{ token: 'lateSpouse', role: 'late spouse', person: lateSpouse, display: names.lateSpouse }] : []),
     ...(template.parent && person ? [{ token: 'parent', role: 'parent', person, display: names.parent }] : []),
     ...(template.classmate && context.peer ? [{ token: 'classmate', role: 'classmate', person: context.peer, display: names.classmate }] : []),
@@ -351,7 +351,10 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
     ...(template.partner && social.partner ? [{ token: 'partner', role: 'partner', person: social.partner, display: names.partner }] : []),
     ...(binding.child ? [{ token: 'child', role: 'child', person: binding.child.person, display: names.child }] : []),
     ...(prisonPeer ? [{ token: 'prisonPeer', role: 'prison contact', person: prisonPeer.person, display: names.prisonPeer }] : []),
-  ]);
+  ];
+  const contacts = storyContactNames(namedContacts);
+  const roleOverrides = Object.fromEntries(namedContacts.filter(contact => contact.role !== 'parent' && contact.role !== 'child').map(contact => [contact.person.id,contact.role]));
+  const participants = storyParticipants(world,namedContacts.map(contact => contact.person.id),roleOverrides);
   Object.assign(names, contacts.names);
   const relationshipLabels = [...contacts.consequenceNames].flatMap(([personId, label]) => {
     const relation = relationFor(world, player.id, personId);
@@ -388,5 +391,5 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
   });
   // Participant IDs must stay living. A recorded late spouse supplies frozen
   // narrative text above, without becoming an actor in the pending decision.
-  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : []), ...(template.coworker && work.coworker ? [work.coworker.id] : []), ...(template.supervisor && work.supervisor ? [work.supervisor.id] : []), ...(template.friend && social.friend ? [social.friend.id] : []), ...(template.partner && social.partner ? [social.partner.id] : []), ...(binding.child ? [binding.child.person.id] : []), ...(prisonPeer ? [prisonPeer.person.id] : [])])], choices };
+  return { kind: 'decision', id: 'event_' + world.date.year + '_' + template.id, templateId: template.id, title: text(template.title), body: text(template.body), illustration: template.illustration, personIds: [...new Set([player.id, ...(template.parent && person ? [person.id] : []), ...(template.classmate && context.peer ? [context.peer.id] : []), ...(template.teacher && context.teacher ? [context.teacher.id] : []), ...(template.coworker && work.coworker ? [work.coworker.id] : []), ...(template.supervisor && work.supervisor ? [work.supervisor.id] : []), ...(template.friend && social.friend ? [social.friend.id] : []), ...(template.partner && social.partner ? [social.partner.id] : []), ...(binding.child ? [binding.child.person.id] : []), ...(prisonPeer ? [prisonPeer.person.id] : [])])], choices, ...(participants.length ? {participants} : {}) };
 }

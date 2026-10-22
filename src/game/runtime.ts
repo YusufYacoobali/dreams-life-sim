@@ -28,6 +28,9 @@ export const effectSchema = z.discriminatedUnion('kind', [
 export type Effect = z.infer<typeof effectSchema>;
 export const effectRowSchema = z.object({ id: z.string(), label: z.string(), value: z.string(), tone: z.enum(['positive', 'negative', 'neutral']) });
 export type RuntimeEffectRow = z.infer<typeof effectRowSchema>;
+export const storyParticipantSchema = z.object({ personId:z.string().min(1).max(160), name:z.string().min(1).max(240), role:z.string().min(1).max(80) });
+export type StoryParticipant = z.infer<typeof storyParticipantSchema>;
+const participants = z.array(storyParticipantSchema).min(1).max(12).optional();
 export const choiceSchema = z.object({
   id: z.string(), label: z.string(), effects: z.array(effectSchema),
   // Saved only for new ambiguous bindings; absent on all earlier choices.
@@ -43,7 +46,7 @@ export const choiceSchema = z.object({
 });
 export type BoundChoice = z.infer<typeof choiceSchema>;
 export const pendingSchema = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('decision'), id: z.string(), templateId: z.string(), title: z.string(), body: z.string(), illustration: z.string(), personIds: z.array(z.string()), choices: z.array(choiceSchema).min(2).max(4) }),
-  z.object({ kind: z.literal('result'), id: z.string(), title: z.string(), body: z.string(), illustration: z.string(), effects: z.array(effectRowSchema) }),
+  z.object({ kind: z.literal('decision'), id: z.string(), templateId: z.string(), title: z.string(), body: z.string(), illustration: z.string(), personIds: z.array(z.string()), choices: z.array(choiceSchema).min(2).max(4), participants }),
+  z.object({ kind: z.literal('result'), id: z.string(), title: z.string(), body: z.string(), illustration: z.string(), effects: z.array(effectRowSchema), participants }),
 ]);
 export type Pending = z.infer<typeof pendingSchema>;

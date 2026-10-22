@@ -21,6 +21,7 @@ import { custodyReason } from './legal';
 import { activateScholarship, finishScholarship, scholarshipOfferReason, scholarshipWaiver, tuitionWaiver } from './scholarships';
 import { compareDates } from '../personHelpers';
 import { beginStudyCourse, endStudyCourse, observeIncompleteStudy, syncStudyCourse } from './studyCourses';
+import { educationMilestone } from './educationMilestones';
 
 export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll'), program: z.enum(['university', 'trade', 'graduate']), field: z.enum(fields), funding: z.enum(['cash', 'loan']), scholarshipId: z.string().optional() }),
@@ -117,11 +118,20 @@ export function educationMonth(world: World, person: Person) {
     !(age >= rule.adultAge && person.employment && jobs.some(role => role.id === person.employment?.roleId && !role.partTime))) {
     education.stage = age < rule.secondaryStart ? 'primary' : 'secondary'; education.school = person.city + (education.stage === 'primary' ? ' Primary School' : ' Secondary School');
     if (education.months === 0 && !world.schoolCompletions.some(item => item.personId === person.id)) education.grades = bounded(Math.round((person.stats.smarts + person.stats.discipline) / 2));
-    if (isPlayer) fact(world, 'I started at ' + education.school + '.', 'education');
+    if (isPlayer) {
+      fact(world, 'I started at ' + education.school + '.', 'education');
+      educationMilestone(world, person, education.stage + '-started', education.stage === 'primary' ? 'First day of primary school' : 'Secondary school starts',
+        education.stage === 'primary' ? 'You started at ' + education.school + '. Your pencil case has never looked this organised.' : 'You started at ' + education.school + '. New classrooms. Bigger backpacks.');
+    }
   }
   if (education.stage === 'primary' && age >= rule.secondaryStart) {
+    const primarySchool = education.school;
     education.stage = 'secondary'; education.school = person.city + ' Secondary School';
-    if (isPlayer) fact(world, 'I moved on to ' + education.school + '.', 'education');
+    if (isPlayer) {
+      fact(world, 'I moved on to ' + education.school + '.', 'education');
+      educationMilestone(world, person, 'primary-completed', 'Primary school completed', 'You finished at ' + primarySchool + '. Secondary school is next.');
+      educationMilestone(world, person, 'secondary-started', 'Secondary school starts', 'You started at ' + education.school + '. New classrooms. Bigger backpacks.');
+    }
   }
   if ((education.stage === 'primary' || education.stage === 'secondary') && age >= rule.schoolEnd) {
     if (hasSecondary(person)) education.stage = 'none';
@@ -146,10 +156,15 @@ export function educationMonth(world: World, person: Person) {
   syncStudyCourse(world, person);
   if (education.requiredMonths > 0 && education.months >= education.requiredMonths) {
     const level = education.stage === 'trade' ? 'trade' : education.stage === 'graduate' ? education.field as 'medicine' | 'law' : 'degree';
+    const passed = education.grades >= 50;
     if (education.grades >= 50) {
       education.qualifications.push({ level, field: education.field, year: world.date.year });
       if (isPlayer) fact(world, 'I completed my ' + education.field + ' ' + (level === 'degree' ? 'degree' : 'qualification') + ' with grades of ' + education.grades + '%.', 'education');
     } else if (isPlayer) fact(world, 'I finished the course but did not meet the passing grade. I was not awarded the qualification.', 'education');
+    educationMilestone(world, person, education.stage + '-' + (passed ? 'completed' : 'failed'), passed ? 'You graduated!' : 'No qualification this time',
+      passed ? 'You earned your ' + education.field + ' ' + (level === 'degree' ? 'degree' : 'qualification') + ' at ' + education.school + '. Time to update your résumé.'
+        : 'You finished your ' + education.field + ' course at ' + education.school + ', but your grades fell below the 50% pass mark.',
+      [{ id:'final-grades',label:'Final grades',value:education.grades+'%',tone:passed?'positive':'negative' }]);
     finishScholarship(world, person, education.grades >= 50);
     endStudyCourse(world, person, education.grades >= 50 ? 'completed' : 'failed');
     education.stage = 'none'; education.paused = false; education.tuition = 0n;

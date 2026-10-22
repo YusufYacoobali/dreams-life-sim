@@ -15,6 +15,7 @@ import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { refreshTeenRelationships, resolveTeenRelationship, teenRelationshipCommandSchema, type TeenRelationshipCommand } from './systems/teenRelationships';
 import { bindEvent, eligibleTemplates } from './content/events';
+import { storyParticipants } from './storyNames';
 import { weightedEvent } from './content/eventRarity';
 import { randomInteger } from './random';
 import { BoundChoice, Effect, effectRowSchema } from './runtime';
@@ -345,7 +346,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
-    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects }, priority + 1);
+    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects, ...(event.participants ? {participants:event.participants} : {}) }, priority + 1);
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null; world.pendingPriority = 0;
@@ -417,6 +418,13 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if(travel.success)resolveTravel(world,travel.data);
     else if(relocation.success)resolveRelocation(world,relocation.data);
     else throw new IneligibleAction('This action is not available');
+    // This branch starts with no pending scene, so a direct action-created
+    // decision is new. Never relabel an old bound decision/result on resume.
+    const created = world.pending as World['pending']; // Commands above may create a scene.
+    if (created?.kind === 'decision' && !created.participants) {
+      const participants = storyParticipants(world,created.personIds);
+      if (participants.length) created.participants = participants;
+    }
   }
   refreshRoyalSuccession(world,'background');
   refreshStudyCourses(world);

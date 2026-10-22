@@ -9,6 +9,7 @@ import { activeTrip } from './travelSchemas';
 import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { serviceAway } from './serviceSchemas';
+import { educationMilestone } from './educationMilestones';
 
 export const recoveryCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('enroll-recovery'), purpose: z.enum(['secondary', 'grades']) }),
@@ -62,7 +63,9 @@ export function completeSecondary(world: World, person: Person) {
   if (passed && !hasSecondary(person)) education.qualifications.push({ level: 'secondary', field: 'general', year: world.date.year });
   education.stage = 'none'; education.paused = false; education.tuition = 0n;
   fact(world, passed ? 'I completed secondary education with grades of ' + education.grades + '%.' : 'I finished school with grades of ' + education.grades + '%. I did not earn the secondary qualification. An adult recovery course is still an option.', 'education', '', person.id);
-  if (person.id === world.activePersonId) result(world, passed ? 'Secondary school completed' : 'No diploma in the envelope', passed ? 'You met the course’s 50% passing grade and minimum twelve recorded study months. Your secondary qualification is recorded.' : 'This course requires final grades of at least 50% and twelve recorded study months. You can work, or take evening classes to earn the qualification later.', 'education', [{ id: 'school-grade', label: 'Final grades', value: education.grades + '%', tone: education.grades >= 50 ? 'positive' : 'negative' }, { id: 'school-attendance', label: 'Recorded study', value: education.months + ' months', tone: education.months >= 12 ? 'positive' : 'negative' }]);
+  educationMilestone(world, person, 'secondary-completed', passed ? 'Secondary school completed' : 'No diploma in the envelope',
+    passed ? 'You graduated from ' + education.school + '. Your secondary qualification is recorded.' : 'You finished at ' + education.school + ' without a diploma. Evening classes offer another route.',
+    [{ id: 'school-grade', label: 'Final grades', value: education.grades + '% (50% required)', tone: education.grades >= 50 ? 'positive' : 'negative' }, { id: 'school-attendance', label: 'Recorded study', value: education.months + ' months (12 required)', tone: education.months >= 12 ? 'positive' : 'negative' }]);
 }
 
 export function resolveRecovery(world: World, command: RecoveryCommand) {

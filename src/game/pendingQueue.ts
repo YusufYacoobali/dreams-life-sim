@@ -1,10 +1,17 @@
 import type { World } from './model';
 import type { Pending } from './runtime';
+import { storyParticipants } from './storyNames';
 export function priorityOf(event: Pending): number {
   if (event.kind === 'decision') return event.templateId === 'medical-emergency' ? 120 : event.templateId === 'court-hearing' ? 110 : event.templateId === 'arrest' ? 100 : event.templateId === 'property-sale-offer' ? 40 : 20;
   return 30;
 }
 export function offerPending(world: World, event: Pending, priority = priorityOf(event)) {
+  // Only the freshly offered decision gets labels. Existing saved scenes moved
+  // into/out of the deferred queue retain every original byte.
+  if (event.kind === 'decision' && !event.participants) {
+    const participants = storyParticipants(world,event.personIds);
+    if (participants.length) event = { ...event,participants };
+  }
   if (!world.pending) { world.pending = event; world.pendingPriority = priority; return; }
   const currentPriority = world.pendingPriority || priorityOf(world.pending);
   world.pendingPriority = currentPriority;
