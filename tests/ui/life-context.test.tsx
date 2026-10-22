@@ -1,6 +1,5 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet } from 'react-native';
-import * as Native from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { router, type Href } from 'expo-router';
@@ -100,6 +99,16 @@ function studying(program:'university'|'trade'|'graduate') {
   return validateWorld(world);
 }
 function remand() { const world=pendingCaseStoryWorld(); world.cases[0].detained=true; return validateWorld(world); }
+function retired() {
+  const world=archive(pension);
+  // This archive also contains ongoing public royal duties. Prepare a private
+  // royal life so this case tests retirement without a higher-priority role.
+  for (const house of world.royalHouses) {
+    const member=house.members.find(item=>item.personId===world.activePersonId);
+    if (member) member.mode='private';
+  }
+  return validateWorld(world);
+}
 type Scenario = { name:string; world:()=>World; label:string; href:Href };
 const scenarios: Scenario[] = [
   { name:'newborn',world:()=>baby(),label:'Profile',href:'/profile' },
@@ -111,7 +120,7 @@ const scenarios: Scenario[] = [
   { name:'graduate study',world:()=>studying('graduate'),label:'Studies',href:'/education' },
   { name:'ordinary job',world:worker,label:'Job',href:'/work' },
   { name:'unemployed adult',world:unemployed,label:'Career',href:'/work' },
-  { name:'retirement',world:()=>archive(pension),label:'Profile',href:'/profile' },
+  { name:'retirement',world:retired,label:'Profile',href:'/profile' },
   { name:'business owner',world:()=>archive(company),label:'Business',href:{ pathname:'/manage-business/[id]',params:{ id:'business_person_player_67' } } },
   ...(['actor','model','athlete','musician','politician'] as const).map((kind,index)=>({
     name:kind,world:()=>contracted(kind),label:['Acting','Model','Sports','Music','Politics'][index],
@@ -128,7 +137,16 @@ const scenarios: Scenario[] = [
   { name:'remand',world:remand,label:'Prison',href:'/prison' },
 ];
 const frame = (child:React.ReactNode,dark=false,width=390) => <SafeAreaProvider initialMetrics={{ frame:{ x:0,y:0,width,height:844 },insets:{ top:47,bottom:34,left:0,right:0 } }}><ThemeProvider appearance={dark?'dark':'light'}>{child}</ThemeProvider></SafeAreaProvider>;
-const pressHandler = (label:string) => screen.UNSAFE_getAllByType(Pressable).find(node=>node.props.accessibilityLabel===label)!.props.onPress as ()=>unknown;
+function pressHandler(label:string) {
+  // React Native's memo/forwardRef wrapper is not a stable findByType boundary.
+  // Walk from the real accessible button to its committed press callback.
+  let control=screen.getByRole('button',{ name:label });
+  while (typeof control.props.onPress!=='function') {
+    if (!control.parent) throw new Error('Missing native press handler');
+    control=control.parent;
+  }
+  return control.props.onPress as ()=>unknown;
+}
 afterEach(()=>{ jest.restoreAllMocks(); jest.mocked(router.push).mockClear(); mockDispatch.mockClear(); mockBusy=false; });
 
 test.each(scenarios)('$name resolves and opens the actual current context without a game command',scenario=>{
@@ -147,6 +165,8 @@ test('custody wins over work; business wins over employment; a live creator stud
   const business=archive(company); expect(business.people[business.activePersonId].employment).not.toBeNull();
   expect(resolveLifeContext(business).key).toBe('business');
   expect(resolveLifeContext(creator('youtuber',true)).key).toBe('creator-youtuber');
+  const retiredRoyal=archive(pension); expect(retiredRoyal.people[retiredRoyal.activePersonId].finance.pensionAnnual).toBeGreaterThan(0n);
+  expect(resolveLifeContext(retiredRoyal).key).toBe('royalty');
 });
 
 test('ended careers, royalties, left studios, private royal titles and training do not masquerade as current careers',()=>{
@@ -164,7 +184,8 @@ test('ended careers, royalties, left studios, private royal titles and training 
 
 test.each([false,true])('the actual footer keeps Age Up dominant and its context accessible at small/large text (dark=%s)',dark=>{
   const width=dark?320:390,fontScale=dark?1.4:1;
-  jest.spyOn(Native,'useWindowDimensions').mockReturnValue({ width,height:844,scale:2,fontScale });
+  // Spy on the exported module used by Life, rather than Babel's namespace copy.
+  jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({ width,height:844,scale:2,fontScale });
   mockWorld=pupil('US',7); render(frame(<Life />,dark,width));
   const shortcut=screen.getByRole('button',{ name:'School' }),advance=screen.getByRole('button',{ name:'Age Up' });
   expect(shortcut).toHaveStyle({ width:dark?54:88,minHeight:62,flexShrink:0 });
@@ -222,7 +243,7 @@ test('optionally export actual Life context trees for normal and cramped layouts
       contentContainerStyle:StyleSheet.flatten(node.props?.contentContainerStyle),edges:node.props?.edges,
       accessibilityRole:node.props?.accessibilityRole,accessibilityLabel:node.props?.accessibilityLabel,
       allowFontScaling:node.props?.allowFontScaling,resizeMode:node.props?.resizeMode },children:node.children?.map(clean) });
-  const dimensions=jest.spyOn(Native,'useWindowDimensions');
+  const dimensions=jest.spyOn(require('react-native'),'useWindowDimensions');
   for (const dark of [false,true]) for (const [name,world] of [['school',()=>pupil('US',7)],['job',worker],['prison',prisonPeerStoryWorld],['business',()=>archive(company)]] as const) {
     const width=dark?320:390; dimensions.mockReturnValue({ width,height:844,scale:2,fontScale:dark?1.4:1 });
     mockWorld=world(); const before=encodeWorld(mockWorld),view=render(frame(<Life />,dark,width));
