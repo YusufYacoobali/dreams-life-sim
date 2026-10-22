@@ -40,9 +40,9 @@ test('court preparation and a saved verdict survive SQLite failure, retry and co
   await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Age Up to Hearing' })); });
   await waitFor(() => expect(screen.getByText('Your day in court')).toBeOnTheScreen()); const hearing = mockStore.getState().world!;
   sqlite.exec("CREATE TRIGGER fail_verdict BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Plead guilty' })); });
+  await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Plead guilty: take the shorter term' })); });
   await waitFor(() => expect(screen.getAllByText(/couldn't be saved/).length).toBeGreaterThan(0)); expect(await repository.load(initial.id)).toEqual(hearing); expect(mockStore.getState().world!.sentences).toHaveLength(0);
-  sqlite.exec('DROP TRIGGER fail_verdict'); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Plead guilty' })); });
+  sqlite.exec('DROP TRIGGER fail_verdict'); await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Plead guilty: take the shorter term' })); });
   await waitFor(() => expect(screen.getByText('The court has decided')).toBeOnTheScreen()); expect(mockStore.getState().world!.sentences).toHaveLength(1);
   await act(async () => { fireEvent.press(screen.getByRole('button', { name: 'Continue' })); });
   const cold = await repository.load(initial.id); expect(cold.cases[0].status).toBe('convicted'); expect(cold.cases[0].bailState).toBe('returned'); expect(cold.annual?.pausedForPlanning).toBe(true); expect(cold.people[cold.activePersonId].employment).toBeNull(); expect(cold.sentences).toHaveLength(1); expect(cold.ledger.filter(item => item.category === 'legal-fee')).toHaveLength(1);

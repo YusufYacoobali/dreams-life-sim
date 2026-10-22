@@ -48,6 +48,17 @@ node tools/run-professional-policy.cjs --country US --max-years 150
 
 The final focused overhaul suite passed 93 tests with 30 new events: all 90 new choices were resolved at both stat boundaries, alongside 30 context/cooldown checks, the catalogue/history checks and an exact tag-only content-17-to-18 migration check. TypeScript checks and the continuation tool's syntax check passed.
 
-An initial five-path continuation pass reached five actual deaths after 262 additional Age Ups, 326 decisions, 1,680 commands and 1,375 cold checks, encountering 71 distinct catalogue situations. Reviewing the captured creator decisions found an additional prose issue: failed public responses claimed further public-image loss when the actual image was already zero. The final pass must follow the reception-only wording correction, preserving the simulation. The actor archive begins between projects and this advance-only policy does not apply for another role, so no actor-specific scene encounter is claimed. The short historical court sentence also produced no authored legal-scene encounter; all new legal choices are covered by controlled domain tests instead.
+The final five-path continuation pass completed on the fixed game/persistence source hash `ca7cdabff8af765bb0fb4bcc9db0a7a79c4eab00facafb6dfb805faab8971521`. Evidence is in `/tmp/dreams-entertainment-final-lives/result.json`, with complete decisions, results, command traces and cold proofs beside each scenario.
 
-Final coverage and complete-life results belong in the completion report after the final content version is tested.
+| Archived starting context | Additional Age Ups | Decisions | Commands | Cold checks | Actual age at death |
+|---|---:|---:|---:|---:|---:|
+| Family and completed trip | 53 | 44 | 153 | 152 | 77 |
+| Criminal case | 54 | 104 | 293 | 291 | 77 |
+| Actor between projects | 52 | 87 | 253 | 252 | 75 |
+| Creator studio | 55 | 54 | 844 | 545 | 78 |
+| Business owner | 48 | 37 | 137 | 135 | 71 |
+| Total | 262 | 326 | 1,680 | 1,375 | — |
+
+The five continuations encountered 71 distinct catalogue situations. Reviewed examples include a child's proposed celebrity-apology-writing career with a real child-bond cost, an overheard insulting partner impression with a real nine-point partner-bond loss, a business replying to its owner's complaint as a job application, and an older person discovering that a photograph about existential loneliness actually captured them avoiding pigeon mess. Existing quiet family and travel memories provided contrast. The captured court verdict imposed a real four-month sentence and fine. A real business later failed and liquidated after three consecutive unpaid periods. Brand agreements recorded zero upfront payment, with subsequent payment conditional on actual delivery. A failed public response at an already-zero public image now describes its poor reception without claiming another impossible decrease.
+
+The actor archive begins between projects and this advance-only policy does not apply for another role, so no actor-specific scene encounter is claimed. The short historical court sentence also produced no authored legal-scene encounter; all new legal choices are covered by controlled domain tests instead. These limitations and the absence of visual/human playtesting remain explicit.

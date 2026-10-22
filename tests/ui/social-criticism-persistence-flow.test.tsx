@@ -26,6 +26,16 @@ const world = () => mockStore.getState().world!;
 function legacyScene(queued: boolean) {
   const old = jest.spyOn(copy, 'publicCriticismCopy').mockReturnValue(legacyCriticism), initial = arrangedCriticismRoll(criticismProfile());
   let next = resolveCommand(initial, criticismPost(initial), true); old.mockRestore();
+  // Freeze the historical choice copy as well as the setup; mocking only the
+  // setup would otherwise construct old prose with the current choice labels.
+  const historical = copyWorld(next);
+  if (historical.pending?.kind !== 'decision') throw new Error('Expected bound criticism');
+  for (const choice of historical.pending.choices) {
+    choice.label = choice.id === 'apologise' ? 'Acknowledge the harm and apologise' : choice.id === 'clarify' ? 'Explain what you meant' : 'Let the argument run its course';
+    choice.resultTitle = 'Your response is recorded';
+    choice.resultBody = 'Your audience and public image reflect the response. Reopening the profile cannot change it.';
+  }
+  next = immutableWorld(historical);
   if (queued) {
     // Explicit queue arrangement to preserve an older bound decision behind a saved result.
     const arranged = copyWorld(next); offerPending(arranged, { kind: 'result', id: 'arranged_existing_result', title: 'Earlier saved result', body: 'An existing result is ahead of this decision.', illustration: 'journal', effects: [] }, 120); next = immutableWorld(arranged);
@@ -95,6 +105,6 @@ test('a new criticism binds the same actual post and copy after failed publicati
     context.sqlite.exec("CREATE TRIGGER fail_criticism BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.queryByText(expected.pending!.body)).toBeNull();
     context.sqlite.exec('DROP TRIGGER fail_criticism'); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); }); expect(world()).toEqual(expected); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen(); expect(world().socialAccounts[0].totalPosts).toBe(1); expect(world().controversies).toHaveLength(1); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
-    const choice = { type: 'choose' as const, eventId: expected.pending!.id, choiceId: 'ignore' }; await press('Let the argument run its course'); expect(world()).toEqual(resolveCommand(expected, choice, true)); context.original(); view.unmount();
+    const choice = { type: 'choose' as const, eventId: expected.pending!.id, choiceId: 'ignore' }; await press('Give the comments absolutely nothing'); expect(world()).toEqual(resolveCommand(expected, choice, true)); context.original(); view.unmount();
   } finally { context.close(); }
 });

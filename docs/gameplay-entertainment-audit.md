@@ -333,3 +333,7 @@ Authored templates cannot directly alter cash, employment, offences, sentence le
 | `travel-memory-imperfect-weather` | KEEP | Legitimate mixed-memory contrast; no unsupported consequences. |
 | `travel-memory-short-version` | KEEP | Documentary-length answer has a clear friend-bond cost and recognisable joke. |
 | `adult-accidental-living-exhibit` | ENHANCE | Overhaul: memorable misunderstanding deserves a more outrageous improvised explanation and concise payoff; retain extremely-rare weight. |
+
+## Completion and evidence
+
+All selected changes are implemented. See [the completion report](gameplay-entertainment-report.md) for the 30 new IDs, exact final test matrix, source-pinned complete-life results and limitations.

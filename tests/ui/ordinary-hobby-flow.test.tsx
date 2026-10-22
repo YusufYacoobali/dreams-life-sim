@@ -66,7 +66,7 @@ test('the genuine child keeps original history, browses all new hobbies, and ret
   const parentStrength = parent.strength, consentChance = Math.min(95, 45 + Math.floor(parentStrength / 2));
   // The unchanged archive now reaches a different ordinary-story relationship;
   // the payer formula and saved47 roll have not changed.
-  expect(consentChance).toBe(87); expect(Object.keys(beforePlanRows)).toHaveLength(8);
+  expect(consentChance).toBe(89); expect(Object.keys(beforePlanRows)).toHaveLength(8);
   await press('Review Hobby Routine'); expect(screen.getByText('Responsible payer')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_reading_plan BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Ask For This Routine'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));

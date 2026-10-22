@@ -45,16 +45,24 @@ test.each([
   ['IT', 10, 'Leonardo Ferrari (classmate)', 'Leonardo Ferrari (teacher)'],
 ] as const)('%s decision%i qualifies only the actual colliding bound people, without changing any effect or source world', (country, index, first, second) => {
   const row = record(country, index), { world, pending, next } = bound(row), original = encodeWorld(world);
-  expect(next.body).toContain(first); expect(next.body).toContain(second); expect(next.personIds).toEqual(pending.personIds);
+  const source = JSON.stringify(eventTemplates.find(scene => scene.id === next.templateId));
+  for (const name of [first, second]) {
+    const role = name.match(/\(([^)]+)\)$/)![1];
+    // A rewritten scene may no longer mention every eligible role. Every role
+    // it actually names must still be disambiguated in the full bound copy.
+    if (source.includes('{' + role + '}')) expect(JSON.stringify(next)).toContain(name);
+  }
+  expect(next.personIds).toEqual(pending.personIds);
   expect(next.choices.map(choice => choice.effects)).toEqual(pending.choices.map(choice => choice.effects));
   expect(next.choices.map(choice => choice.id)).toEqual(pending.choices.map(choice => choice.id));
   expect(encodeWorld(world)).toBe(original); expect(unpackCheckpoint(packCheckpoint(world)).pending).toEqual(pending);
 });
 
-test.each([['IN', 7], ['GB', 10]] as const)('%s decision%i retains every original byte apart from the explicit fresh project-recall opt-in', (country, index) => {
+test('the unchanged project scene retains every original byte apart from the explicit fresh project-recall opt-in', () => {
+  const country = 'GB', index = 10;
   const { pending, next } = bound(record(country, index)), comparable = structuredClone(next);
   const projects = comparable.choices.flatMap(choice => choice.effects.filter(effect => effect.kind === 'schedule-story' && effect.storyKind === 'project-promise'));
-  expect(projects).toHaveLength(country === 'GB' ? 1 : 0);
+  expect(projects).toHaveLength(1);
   for (const effect of projects) {
     if (effect.kind !== 'schedule-story') throw Error('Expected the actual project scheduling effect');
     expect(effect.rememberProject).toBe(true);

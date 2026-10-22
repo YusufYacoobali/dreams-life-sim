@@ -60,7 +60,7 @@ test('unchanged routines and reverted drafts perform no save; an edited routine 
   const boot = async (repo = repository) => { mockStore = createGameStore({ repository: async () => repo, date: () => initial.date, id: () => 'unused', yieldToUI: async () => { const held = nextYield; nextYield = undefined; if (held) await held; } }); await mockStore.getState().bootstrap(); };
   const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Lifestyle /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
-  const press = async (name: string) => { await act(async () => fireEvent.press(screen.getByRole('button', { name }))); };
+  const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
   const chooseRoutine = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
   await boot(); let view = render(frame()); const originalRows = rows(), before = encodeWorld(mockStore.getState().world!);
   const commit = jest.spyOn(repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
