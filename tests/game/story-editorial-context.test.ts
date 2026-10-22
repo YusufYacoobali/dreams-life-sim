@@ -1,3 +1,4 @@
+import { originalCatalogue } from '../support/entertainmentBaseline';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { copyWorld, decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { recordDeath, resolveCommand } from '../../src/game/engine';
@@ -231,9 +232,9 @@ test('prospective study guards reject old unrecorded slots and mismatched predic
 });
 
 test('all original 270 unflagged scenes keep eligibility and complete binding independent of the new course evidence', () => {
-  const world = startStudy(), legacySlot = copyWorld(world), originalIds = new Set(eventTemplates.slice(0, 270).map(item => item.id));
+  const world = startStudy(), legacySlot = copyWorld(world), originalIds = new Set(originalCatalogue(eventTemplates, 270).map(item => item.id));
   legacySlot.studyCourses = []; // Same current slot as an older save; no reconstructed enrolment.
-  expect(eventTemplates.slice(0, 270).every(item => item.study === undefined)).toBe(true);
+  expect(originalCatalogue(eventTemplates, 270).every(item => item.study === undefined)).toBe(true);
   const oldEligible = (value: World) => eligibleTemplates(value).filter(item => originalIds.has(item.id));
   const expected = oldEligible(legacySlot), before = encodeWorld(world);
   expect(oldEligible(world)).toEqual(expected);
@@ -337,8 +338,8 @@ test('a real divorce then former-spouse death is not widowhood, and current, amb
 });
 
 test('the original 272 scenes retain eligibility and all available literal bindings without the new retirement or marriage facts', () => {
-  const originalIds = new Set(eventTemplates.slice(0, 272).map(item => item.id));
-  expect(eventTemplates.slice(0, 272).every(item => !item.retired && !item.widowed)).toBe(true);
+  const originalIds = new Set(originalCatalogue(eventTemplates, 272).map(item => item.id));
+  expect(originalCatalogue(eventTemplates, 272).every(item => !item.retired && !item.widowed)).toBe(true);
   for (const world of [retiredLife(), widowedLife()]) {
     const withoutFacts = copyWorld(world), before = encodeWorld(world);
     withoutFacts.people[world.activePersonId].finance.pensionAnnual = 0n;

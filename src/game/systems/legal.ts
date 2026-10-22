@@ -103,9 +103,9 @@ function arrest(world: World, source: Incident): Case {
   placeDependentChildren(world, person.id);
   fact(world, 'I was arrested on a charge of ' + definition.title.toLowerCase() + '. A hearing was set for next month.', 'legal', '', person.id);
   if (person.id === world.activePersonId) {
-    offerPending(world, { kind: 'decision', id: 'arrest_' + item.id, templateId: 'arrest', title: 'Under arrest', body: 'You have been charged with ' + definition.title.toLowerCase() + ' in ' + item.city + '. Bail is held until the case ends. A public defender is assigned; you can review counsel before continuing the year.', illustration: 'police', personIds: [person.id], choices: [
-      { id: 'bail', label: 'Post bail: ' + formatMoney(item.bail), effects: [{ kind: 'legal-bail', caseId: item.id }], resultTitle: 'Bail recorded', resultBody: 'Your hearing remains scheduled. Review your case before continuing time.', journal: 'I posted bail for my pending case.' },
-      { id: 'remand', label: 'Remain in custody', effects: [{ kind: 'legal-remand', caseId: item.id }], resultTitle: 'Held on remand', resultBody: 'Ordinary work and outside activities pause in custody. You can review counsel before continuing time.', journal: 'I remained in custody until my hearing.' },
+    offerPending(world, { kind: 'decision', id: 'arrest_' + item.id, templateId: 'arrest', title: 'Under arrest', body: 'The police in ' + item.city + ' charge you with ' + definition.title.toLowerCase() + '. Your next appointment is a hearing. Bail is held until the case ends; a public defender is assigned, and you can review counsel before continuing the year.', illustration: 'police', personIds: [person.id], choices: [
+      { id: 'bail', label: 'Post bail: ' + formatMoney(item.bail), effects: [{ kind: 'legal-bail', caseId: item.id }], resultTitle: 'Bail recorded', resultBody: 'An expensive way to keep the hearing on your calendar. Bail is held in escrow; any other custody order still applies. Review your case before continuing time.', journal: 'I posted bail for my pending case.' },
+      { id: 'remand', label: 'Remain in custody', effects: [{ kind: 'legal-remand', caseId: item.id }], resultTitle: 'Held on remand', resultBody: 'You stay in custody. Ordinary work and outside activities pause; the hearing does not. You can review counsel before continuing time.', journal: 'I remained in custody until my hearing.' },
     ] }); planningPause(world);
   }
   return item;
@@ -124,12 +124,14 @@ function ensurePrisonContacts(world: World, sentence: Sentence) {
     const source = incident(world, person, juvenile ? 'vandalism' : 'burglary'); arrest(world, source);
   }
 }
+const convictionChance = (world: World, item: Case, person: Person) => Math.max(10, Math.min(98, item.evidence + 20 + visibleConvictions(world, person).length * 3 - (item.counsel === 'private' ? 30 : item.counsel === 'public' ? 15 : 0) - (item.cooperation ? 15 : 0)));
+
 export function hearCase(world: World, caseId: string, plea: 'guilty' | 'not-guilty' | 'leniency'): RuntimeEffectRow[] {
   const item = world.cases.find(candidate => candidate.id === caseId && candidate.status === 'awaiting-trial');
   if (!item || world.people[item.personId].legal.wanted) throw new IneligibleAction('This hearing is no longer available');
   const person = world.people[item.personId], source = world.incidents.find(candidate => candidate.id === item.incidentId)!;
   item.plea = plea; item.resolved = { ...world.date }; item.detained = false; source.stage = 'closed'; bailReturn(world, item);
-  const chance = Math.max(10, Math.min(98, item.evidence + 20 + visibleConvictions(world, person).length * 3 - (item.counsel === 'private' ? 30 : item.counsel === 'public' ? 15 : 0) - (item.cooperation ? 15 : 0)));
+  const chance = convictionChance(world, item, person);
   if (plea === 'not-guilty' && item.trialRoll > chance) {
     item.status = 'acquitted'; fact(world, 'I was acquitted of ' + offences[item.offence].title.toLowerCase() + '.', 'legal', '', person.id); planningPause(world, person.id);
     return [row('verdict', 'Verdict', 'Not guilty', 'positive'), row('bail', 'Bail', item.bailState === 'returned' ? 'Returned in full' : 'No escrow held')];
@@ -172,7 +174,7 @@ function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime
   }
   fact(world, 'I committed ' + definition.title.toLowerCase() + (victim ? ' against ' + fullName(victim) : '') + '. The consequences became part of my history.', 'crime');
   if (source.detectionRoll <= source.riskBps) arrest(world, source);
-  else result(world, 'An unresolved risk', 'You were not arrested at the scene. The incident, its evidence and any later investigation are already recorded.', 'handcuffs', [row('gain', 'Proceeds', formatMoney(source.gain), gain ? 'positive' : 'neutral')]);
+  else result(world, 'An unresolved risk', 'You leave without handcuffs. That is a head start, not an acquittal: the evidence can still lead to an investigation.', 'handcuffs', [row('gain', 'Proceeds', formatMoney(source.gain), gain ? 'positive' : 'neutral')]);
 }
 export function resolveLegal(world: World, command: LegalCommand, death: Death) {
   const person = active(world), sentence = activeSentence(world);
@@ -182,7 +184,7 @@ export function resolveLegal(world: World, command: LegalCommand, death: Death) 
     const item = world.cases.find(candidate => candidate.id === command.caseId && candidate.personId === person.id && candidate.status === 'awaiting-trial');
     if (!item) throw new IneligibleAction('Choose an open case');
     if (command.counsel === 'private' && !item.counselPaid) { charge(world, item.counselFee.minor, 'legal-fee', 'Private counsel', undefined, item.counselFee.currency); item.counselPaid = true; }
-    item.counsel = command.counsel; result(world, 'Representation recorded', 'Your representative will use the evidence already recorded for this case. Changing counsel does not reroll the hearing.', 'court'); return;
+    item.counsel = command.counsel; result(world, 'Representation recorded', command.counsel === 'self' ? 'You are now both the client and the person expected to know what they are doing. The evidence has not changed.' : command.counsel === 'private' ? 'You have paid for an advocate, not a verdict. Your private counsel will argue against the existing evidence.' : 'A public defender will argue your case. The evidence still needs answering.', 'court'); return;
   }
   if (command.type === 'prison-routine') {
     if (!sentence) throw new IneligibleAction('An active sentence is required');
@@ -203,7 +205,7 @@ export function resolveLegal(world: World, command: LegalCommand, death: Death) 
     if (!sentence || sentence.appealed) throw new IneligibleAction('One appeal is available per sentence');
     const cost = amount(world, 200); charge(world, cost, 'legal-fee', 'Sentence appeal'); sentence.appealed = true;
     if (sentence.appealRoll <= 15) { for (const id of sentence.caseIds) { const item = world.cases.find(candidate => candidate.id === id)!; item.status = 'dismissed'; refundFine(world, item); } release(world, sentence, 'appeal'); }
-    else result(world, 'Appeal dismissed', 'The original judgment stands. The recorded appeal cannot be repeated for another outcome.', 'court'); return;
+    else result(world, 'Appeal dismissed', 'You paid to hear that the original judgment stands. The appeal fee is spent, and this sentence has no second appeal.', 'court'); return;
   }
   if (command.type === 'parole') {
     if (!sentence || sentence.servedMonths + sentence.creditedMonths < Math.ceil(sentence.totalMonths / 2) || sentence.behavior < 65) throw new IneligibleAction('Serve at least half the sentence and build good conduct to request parole');
@@ -216,7 +218,7 @@ export function resolveLegal(world: World, command: LegalCommand, death: Death) 
     if (draw(world, 'outcomes', 1, 100) <= Math.max(5, Math.min(45, Math.round((person.stats.smarts + person.stats.fitness) / 5)))) {
       sentence.state = 'escaped'; person.legal.wanted = true;
       for (const item of world.cases.filter(candidate => candidate.personId === person.id && candidate.status === 'awaiting-trial')) { if (item.bailState === 'held') item.bailState = 'forfeited'; item.detained = false; }
-      fact(world, 'I escaped from custody. My remaining sentence stopped counting down.', 'legal'); result(world, 'Fugitive', 'Your identity and record remain unchanged. Time outside custody does not count toward your sentence. You may surrender.', 'handcuffs');
+      fact(world, 'I escaped from custody. My remaining sentence stopped counting down.', 'legal'); result(world, 'Fugitive', 'You got out. Now you are wanted, and your remaining sentence has stopped counting down. Any held bail is forfeited. You can surrender; freedom currently comes with an arrest risk.', 'handcuffs');
     } else { sentence.behavior = bounded(sentence.behavior - 25); arrest(world, source); }
     return;
   }
@@ -300,7 +302,7 @@ export function legalMonth(world: World, dischargedFromHospital?: ReadonlySet<st
     if (item.personId !== world.activePersonId) { hearCase(world, item.id, 'not-guilty'); continue; }
     const id = 'hearing_' + item.id;
     if (world.pending?.id === id || world.deferred.some(entry => entry.event.id === id)) continue;
-    const person = world.people[item.personId]; offerPending(world, { kind: 'decision', id, templateId: 'court-hearing', title: 'Your day in court', body: offences[item.offence].title + ' · ' + item.city + '. Evidence strength: ' + item.evidence + '%. Counsel: ' + item.counsel + '. The baseline sentence is ' + item.baseMonths + ' months. A guilty plea reduces the term; a not-guilty plea uses the recorded evidence and trial outcome.', illustration: 'court', personIds: [person.id], choices: (['not-guilty', 'guilty', 'leniency'] as const).map(plea => ({ id: plea, label: plea === 'not-guilty' ? 'Plead not guilty' : plea === 'guilty' ? 'Plead guilty' : 'Accept responsibility and seek leniency', effects: [{ kind: 'legal-plea' as const, caseId: item.id, plea }], resultTitle: 'The court has decided', resultBody: 'The verdict, fine, bail and custody changes below are now part of your permanent history.', journal: 'I entered a ' + plea + ' plea at my hearing.' })) }); planningPause(world);
+    const person = world.people[item.personId]; offerPending(world, { kind: 'decision', id, templateId: 'court-hearing', title: 'Your day in court', body: 'The court in ' + item.city + ' calls your ' + offences[item.offence].title.toLowerCase() + ' case. This is a bad time to discover that confidence is not evidence. Evidence strength: ' + item.evidence + '%. Counsel: ' + item.counsel + '. Baseline sentence: ' + item.baseMonths + ' months. A guilty plea cuts the term; seeking leniency cuts the fine further. Contesting the charge risks the full penalty.', illustration: 'court', personIds: [person.id], choices: (['not-guilty', 'guilty', 'leniency'] as const).map(plea => ({ id: plea, label: plea === 'not-guilty' ? 'Plead not guilty: fight the charge' : plea === 'guilty' ? 'Plead guilty: take the shorter term' : 'Accept responsibility and seek leniency', effects: [{ kind: 'legal-plea' as const, caseId: item.id, plea }], resultTitle: 'The court has decided', resultBody: plea === 'not-guilty' ? 'You fight the charge. The court gives its verdict below; any fine, remand credit and sentence are real.' : plea === 'guilty' ? 'You plead guilty for a shorter term. The conviction, reduced sentence and fine are below; any unpaid fine becomes debt.' : 'You accept responsibility and ask for mercy. The reduced fine and sentence are below; a lighter penalty still leaves a conviction.', journal: 'I entered a ' + plea + ' plea at my hearing.' })) }); planningPause(world);
   }
 }
 export function legalDeath(world: World, person: Person) {

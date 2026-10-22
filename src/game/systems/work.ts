@@ -93,7 +93,7 @@ export function resolveWork(world: World, command: WorkCommand) {
       title: role.title + ' interview', body: (hourly ? 'Reviewed contract: ' + formatMoney({ minor: hourly.hourlyRate, currency: countries[person.country].currency }) + ' per hour, ' + hourly.weeklyHours + ' hours per week and ' + hourly.paidWeeks + ' paid weeks per year. ' : '') + interviewExperienceCopy(role.sector, experience) + employer + ' asks: “' + interview.question + '”',
       illustration: 'career', personIds: [person.id],
       choices: answers.map(answer => ({ id: answer.id, label: answer.label,
-        effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, ...(hourly ? { hourly } : {}), experience: { policyVersion: 1, ...experience, chance: answer.id === 'withdraw' ? null : jobInterviewChance(world, answer.chance, experience.bonus) }, answerId: answer.id }],
+        effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, ...(hourly ? { hourly } : {}), experience: { policyVersion: 1, ...experience, chance: answer.id === 'withdraw' ? null : jobInterviewChance(world, answer.chance, experience.bonus) }, copyVersion: 18, answerId: answer.id }],
         resultTitle: 'Interview complete', resultBody: 'Your application has been considered.',
         journal: 'I attended an interview for a ' + role.title.toLowerCase() + ' role at ' + employer + '.',
       })),
@@ -107,7 +107,7 @@ export function resolveWork(world: World, command: WorkCommand) {
     const role = jobs.find(candidate => candidate.id === person.employment!.roleId)!;
     endEmployment(world);
     fact(world, 'I resigned from my ' + role.title.toLowerCase() + ' role.', 'work');
-    result(world, 'You resigned', 'Future pay stops. Money you already earned stays yours.', 'career');
+    result(world, 'You resigned', 'You leave the job. The relief is immediate; the missing future pay will also be real. Your earned wages stay yours.', 'career');
   } else {
     const rule = rules[person.country];
     if (ageOn(person, world.date) < rule.retirementAge) throw new IneligibleAction('Retirement is available from age ' + rule.retirementAge);
@@ -131,12 +131,12 @@ export function resolveJobInterview(world: World, effect: JobInterviewEffect): {
   if (effect.answerId === 'withdraw') return { title: 'Application withdrawn', body: 'You decided against this role. Your current work is unchanged. You can apply for this role again next year.', journal: 'I withdrew my application for a ' + role.title.toLowerCase() + ' role.', effects: [] };
   const reason = jobReason(world, role, true, effect.hourly?.weeklyHours); if (reason) throw new IneligibleAction(reason);
   const chance = effect.experience?.chance ?? jobInterviewChance(world, answer!.chance);
-  if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer!.feedback + ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.', journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
+  if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer!.feedback + (effect.copyVersion === 18 ? ' They give the job to someone else. You leave with your current work intact and a year to think of a better answer.' : ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.'), journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
   if (person.employment) endEmployment(world);
   person.employment = { id: 'employment_' + world.revision, ...(effect.hourly ? { hourlyContractId: 'employment_' + world.revision } : {}), roleId: role.id, employer: effect.employer, companyId: null, currency: countries[person.country].currency, rank: 0, annualPay: effect.annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
   if (effect.hourly) world.hourlyContracts.push({ employmentId: person.employment.id, personId: person.id, roleId: role.id as 'shop-assistant-part' | 'cafe-part', country: person.country, currency: person.employment.currency, started: { ...world.date }, terms: { ...effect.hourly }, rates: [], periods: [] });
   world.workHistory.push({ id: person.employment.id, ...(effect.hourly ? { hourlyContractId: person.employment.id } : {}), personId: person.id, roleId: role.id, employer: effect.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(person.employment.currency) });
-  return { title: 'You got the job', body: answer!.feedback + ' Your contract is active. ' + (effect.hourly ? 'Your reviewed ' + effect.hourly.weeklyHours + '-hour week pays ' + formatMoney({ minor: effect.hourly.hourlyRate, currency: person.employment.currency }) + ' per hour. ' : '') + 'Pay starts as months pass, with income tax withheld. There is no salary payment upfront.', journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
+  return { title: 'You got the job', body: answer!.feedback + ' Your contract is active. ' + (effect.hourly ? 'Your reviewed ' + effect.hourly.weeklyHours + '-hour week pays ' + formatMoney({ minor: effect.hourly.hourlyRate, currency: person.employment.currency }) + ' per hour. ' : '') + (effect.copyVersion === 18 ? 'You have a job and a new reason to set an alarm. Pay arrives as months pass, with income tax withheld; signing pays nothing upfront.' : 'Pay starts as months pass, with income tax withheld. There is no salary payment upfront.'), journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
 }
 /** Pay for one actual employment period. A company supplies cash through fundWages. */
 export function employmentMonth(world: World, person = active(world), fundWages?: (due: bigint, employmentId: string) => bigint): bigint {

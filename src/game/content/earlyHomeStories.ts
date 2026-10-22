@@ -75,21 +75,21 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'toddler-why-machine', min: 3, max: 5, parent: true, illustration: 'education', title: 'One more question',
-    body: 'You ask {parent} why the sky is blue. The answer contains at least four things you can ask about next.',
+    id: 'toddler-why-machine', min: 3, max: 5, parent: true, illustration: 'education', title: 'The watermelon investigation',
+    body: '{parent} jokes that swallowing a seed could grow a watermelon in your tummy. You have questions. Several concern the size of your tummy.',
     choices: [
-      o('follow', 'Keep asking about the answer', { smarts: 4, energy: -2 }, 'A substantial interview', '{parent} answers until they need to look something up. This creates a new question about looking things up.', 'I kept asking {parent} questions about the sky.', 2),
-      o('draw', 'Draw what you think they mean', { smarts: 2, happiness: 3 }, 'An original diagram', '{parent} looks at your drawing. There is rather more purple than the explanation required.', 'I drew my own explanation of the sky.', 3),
-      o('invent', 'Explain your much better theory', { happiness: 3 }, 'Paint, obviously', 'You propose that somebody painted it. {parent} asks who does the clouds.', 'I proposed that the sky had been painted.', 1),
+      o('follow', 'Demand to know where the leaves go', { smarts: 4, energy: -2 }, 'The witness changes their story', '{parent} admits it was a joke and explains what seeds actually need. You ask why they left out the soil problem.', 'I questioned {parent} until they explained a joke about swallowing seeds.', 2),
+      o('draw', 'Draw a plan for your indoor garden', { smarts: 2, happiness: 3 }, 'Limited growing space', 'Your drawing has a watermelon, a ladder and a tiny gardener. {parent} explains why none of them will be moving in.', 'I drew an imaginary watermelon garden inside my tummy.', 3),
+      o('invent', 'Announce you are growing a fruit salad', { happiness: 3 }, 'An ambitious harvest', '{parent} explains that this will not happen. You request a spoon anyway, in case they are wrong.', 'I claimed I could grow a fruit salad in my tummy.', 1),
     ],
   },
   {
-    id: 'child-first-loose-tooth', min: 5, max: 7, illustration: 'wellbeing', title: 'An unreliable tooth',
-    body: 'One tooth has started wobbling. The others appear to be staying out of the argument.',
+    id: 'child-first-loose-tooth', min: 5, max: 7, illustration: 'wellbeing', title: 'A mouth with sound effects',
+    body: 'Your first loose tooth makes a clicking noise. You discover you can make it louder. Lunch is about to become a performance.',
     choices: [
-      o('leave', 'Leave it alone for now', { discipline: 3, stress: -1 }, 'No deadline', 'It can come out when it is ready. You get on with your day.', 'I decided to let a loose tooth come out in its own time.'),
-      o('check', 'Inspect it in the mirror', { smarts: 2 }, 'The tooth remains attached', 'You establish that it is definitely wobbling. This does not make it any less distracting.', 'I inspected my first loose tooth in the mirror.'),
-      o('announce', 'Tell everyone you see', { happiness: 3, respect: -1 }, 'Widely reported', 'Several people already knew. They hear the update anyway.', 'I made sure everyone knew about my loose tooth.'),
+      o('leave', 'Let everyone eat in peace', { discipline: 3, stress: -1 }, 'A private dental matter', 'You leave the tooth alone. Lunch proceeds without an audience inspecting your mouth.', 'I kept my loose tooth out of the lunchtime conversation.'),
+      o('check', 'Check the wobble in a mirror', { smarts: 2 }, 'Still attached', 'You can see the gap when it moves. Watching yourself do it is fascinating; apparently this is less exciting for other people.', 'I inspected my first loose tooth in the mirror.'),
+      o('announce', 'Give everyone a live demonstration', { happiness: 3, respect: -1 }, 'Lunch briefly postponed', 'You click it three times and demand that everyone look. Several people put their food down.', 'I interrupted lunch to demonstrate my loose tooth.'),
     ],
   },
   {
@@ -120,12 +120,12 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-answer-blurt', min: 6, max: 10, school: 'primary', teacher: true, illustration: 'education', title: 'You know this one',
-    body: '{teacher} asks a question. You know the answer. Waiting for your hand to be noticed feels like a serious design flaw.',
+    id: 'school-answer-blurt', min: 6, max: 10, school: 'primary', teacher: true, illustration: 'education', title: 'Forty-two. Definitely forty-two.',
+    body: '{teacher} starts a question and your hand shoots up. You have an excellent answer. You are still waiting to hear what the question is.',
     choices: [
-      o('wait', 'Keep your hand up and wait', { discipline: 3 }, 'Eventually, your turn', '{teacher} calls on you. The answer survives the wait.', 'I waited for my turn to answer {teacher}’s question.', undefined, { teacherBond: 3, grades: 1 }),
-      o('blurt', 'Shout it out before it escapes', { happiness: 2, discipline: -2 }, 'Correct, but loud', '{teacher} agrees with your answer and reminds you about taking turns.', 'I shouted out an answer in class.', undefined, { teacherBond: -2 }),
-      o('listen', 'Listen to someone else’s explanation', { smarts: 2, respect: 1 }, 'Same answer, different route', 'They explain a step you had done in your head. It turns out to be useful.', 'I listened to another way of solving a classroom question.', undefined, { grades: 1 }),
+      o('wait', 'Hear the rest before committing', { discipline: 3 }, 'A useful last-minute adjustment', 'The question is about the number of sides on a triangle. You quietly retire forty-two and give the correct answer.', 'I waited to hear a whole classroom question before answering.', undefined, { teacherBond: 3, grades: 1 }),
+      o('blurt', 'Shout “forty-two” with total confidence', { happiness: 2, discipline: -2 }, 'A very complicated triangle', '{teacher} draws three sides on the board and asks where the other thirty-nine should go.', 'I shouted the wrong answer before {teacher} finished a question.', undefined, { teacherBond: -2 }),
+      o('listen', 'Let someone else risk it first', { smarts: 2, respect: 1 }, 'A safer number', 'Their explanation makes sense. You learn the answer without having to defend your original guess.', 'I listened to another explanation instead of guessing at a question.', undefined, { grades: 1 }),
     ],
   },
   {
@@ -138,12 +138,12 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-show-tell-prop', min: 6, max: 9, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'Please imagine the object',
-    body: 'It is your turn at show-and-tell. The thing you meant to show is at home. {classmate} has noticed your empty hands.',
+    id: 'school-show-tell-prop', min: 6, max: 9, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The invisible exhibit',
+    body: 'You forgot your show-and-tell. {classmate} has already announced that yours is “the best one”. Everyone turns towards your empty hands.',
     choices: [
-      o('describe', 'Describe it honestly', { respect: 3, smarts: 1 }, 'An unusually portable exhibit', '{teacher} lets you explain what you meant to bring. {classmate} asks a useful question.', 'I did show-and-tell without the object I meant to show.', undefined, { teacherBond: 2, peerBond: 1 }),
-      o('mime', 'Demonstrate it with enormous gestures', { happiness: 3, energy: -2 }, 'A lively presentation', 'You nearly knock over a chair. The class remembers the demonstration.', 'I acted out my missing show-and-tell object.', undefined, { skill: { id: 'acting', delta: 2 }, peerBond: 2 }),
-      o('invent', 'Claim it is too valuable to display', { respect: -3, stress: 2 }, 'A question about value', '{teacher} asks what makes it valuable. Your explanation becomes steadily less convincing.', 'I made up a story about why I had brought nothing to show-and-tell.', undefined, { teacherBond: -3 }),
+      o('describe', 'Admit you left it at home', { respect: 3, smarts: 1 }, 'A disappointing lack of magic', '{teacher} lets you describe it. {classmate} whispers that the publicity may have been a mistake.', 'I admitted forgetting my show-and-tell object.', undefined, { teacherBond: 2, peerBond: 1 }),
+      o('mime', 'Act out an escaped dinosaur', { happiness: 3, energy: -2 }, 'The exhibit has escaped', 'You roar, crawl under a desk and nearly lose a shoe. {classmate} applauds. Nobody remembers to ask about the object.', 'I improvised a dinosaur performance at show-and-tell.', undefined, { skill: { id: 'acting', delta: 2 }, peerBond: 2 }),
+      o('invent', 'Claim it is invisible and dangerous', { respect: -3, stress: 2 }, 'Please contain your exhibit', '{teacher} asks why your invisible crocodile has no cage. You say the cage is invisible too. Their face says this has gone far enough.', 'I claimed I had brought an invisible crocodile to show-and-tell.', undefined, { teacherBond: -3 }),
     ],
   },
   {

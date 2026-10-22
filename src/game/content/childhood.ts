@@ -144,12 +144,12 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-lunch-trade', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Snack negotiations',
-    body: '{classmate} offers to swap a plain cracker for your favourite snack. They describe it as “an incredible deal”.',
+    id: 'school-lunch-trade', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Hostile snack takeover',
+    body: '{classmate} offers a plain cracker for your favourite snack. They call the cracker “rare”. There are twelve more in the packet.',
     choices: [
-      o('counter', 'Make a fair counteroffer', { smarts: 2, respect: 1 }, 'Better terms', 'You agree on a smaller swap. Nobody needs a lawyer.', 'I negotiated a fair snack swap with {classmate}.', undefined, { peerBond: 2 }),
-      o('keep', 'Keep your snack', { discipline: 2 }, 'Deal declined', '{classmate} eats the cracker. You enjoy your snack.', 'I turned down {classmate}’s terrible snack offer.'),
-      o('share', 'Offer to share a little', { happiness: 2, respect: 2 }, 'Two happy customers', 'You both get a taste. The cracker remains unpopular.', 'I shared a little of my favourite snack with {classmate}.', undefined, { peerBond: 3 }),
+      o('counter', 'Demand two snacks for your one', { smarts: 2, respect: -1 }, 'The negotiator gets greedy', '{classmate} nearly agrees, then notices you smiling. They withdraw the cracker and their goodwill.', 'I tried to turn {classmate}’s snack offer into a better deal for myself.', undefined, { peerBond: -2 }),
+      o('keep', 'Eat your snack during the sales pitch', { discipline: 2 }, 'Offer expired', '{classmate} is still describing the cracker’s qualities when you finish the last bite.', 'I ate my snack instead of swapping it with {classmate}.'),
+      o('share', 'Split yours and spare the cracker', { happiness: 2, respect: 2 }, 'A rescue operation', 'You both enjoy half a decent snack. {classmate} admits the cracker was a difficult sell.', 'I shared my snack with {classmate}.', undefined, { peerBond: 3 }),
     ],
   },
   {
@@ -189,12 +189,12 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-tiny-editor', min: 8, max: 11, school: 'primary', classmate: true, illustration: 'journal', title: 'Breaking news: lunch',
-    body: '{classmate} wants help making a class newsletter. Their lead story is “The Soup Was Weird Again”.',
+    id: 'school-tiny-editor', min: 8, max: 11, school: 'primary', classmate: true, illustration: 'journal', title: 'The headteacher is three mice',
+    body: '{classmate} wants help with a class newsletter. The headline is “Headteacher Replaced by Three Mice”. Their evidence is a chewed worksheet.',
     choices: [
-      o('report', 'Help write a proper report', { smarts: 3, discipline: 1 }, 'A second source', 'You ask what was in the soup. The story gets less dramatic and more accurate.', 'I helped {classmate} check a class newsletter story.', undefined, { peerBond: 3, skill: { id: 'content', delta: 1 } }),
-      o('cartoon', 'Draw a soup monster', { happiness: 3 }, 'Editorial illustration', 'The cartoon gets more attention than the recipe.', 'I drew a soup monster for {classmate}’s class newsletter.', undefined, { peerBond: 2 }),
-      o('decline', 'Leave the soup investigation to them', { energy: 2 }, 'Independent press', '{classmate} writes it without your help.', 'I declined to join {classmate}’s newsletter.'),
+      o('report', 'Investigate before printing it', { smarts: 3, discipline: 1 }, 'One human, several questions', 'The headteacher is visibly one person. {classmate} reluctantly changes the headline to “Worksheet Damaged”. Your reporting improves; circulation probably will not.', 'I helped {classmate} check a ridiculous newsletter claim.', undefined, { peerBond: 3, skill: { id: 'content', delta: 1 } }),
+      o('cartoon', 'Draw a wanted poster for the mice', { happiness: 3 }, 'Artist’s impression', 'You draw three mice sharing a tie. {classmate} laughs so hard the real headline can wait.', 'I drew a mouse conspiracy cartoon for {classmate}’s newsletter.', undefined, { peerBond: 2 }),
+      o('decline', 'Leave the rodent conspiracy to them', { energy: 2 }, 'No comment', '{classmate} calls this suspicious. You remain comfortable with your decision to leave mouse journalism.', 'I declined to help with {classmate}’s newsletter.', undefined),
     ],
   },
   {
@@ -234,21 +234,21 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-solo-rehearsal', min: 12, max: 17, school: 'secondary', classmate: true, illustration: 'education', title: 'They are watching the door',
-    body: '{classmate} keeps stopping during a music rehearsal whenever someone walks past. They ask whether you can stay for one more run-through.',
+    id: 'teen-solo-rehearsal', min: 12, max: 17, school: 'secondary', classmate: true, illustration: 'education', title: 'You are in verse two',
+    body: '{classmate} asks you to help rehearse a song about everyone who has annoyed them. Your name appears in verse two. The rhyme is frankly weak.',
     choices: [
-      o('stay', 'Stay and rehearse with them', { discipline: 2, energy: -3 }, 'One complete run', 'You play through without stopping. Nobody has to be perfect today.', 'I stayed for another rehearsal with {classmate}.', undefined, { peerBond: 4, skill: { id: 'music', delta: 2 } }),
-      o('talk', 'Ask what is worrying them', { respect: 2 }, 'Stage fright has company', 'They talk about feeling watched. You listen before offering advice.', 'I listened when {classmate} talked about nerves before performing.', undefined, { peerBond: 4 }),
-      o('leave', 'Say you need to head home', { energy: 2 }, 'An honest answer', 'You wish them luck and leave. They keep practising.', 'I could not stay for another rehearsal with {classmate}.'),
+      o('stay', 'Suggest a better rhyme for your insult', { discipline: 2, happiness: 3, energy: -3 }, 'An unwilling co-writer', 'You improve the line and rehearse the chorus. {classmate} laughs, then admits that your original offence was borrowing a pencil.', 'I helped {classmate} rehearse a song that included an insult about me.', undefined, { peerBond: 4, skill: { id: 'music', delta: 2 } }),
+      o('talk', 'Ask why you made the track list', { respect: 2, stress: 1 }, 'A very small grudge', '{classmate} explains the pencil incident. You point out that it has been six months. They apologise and cut your verse.', 'I asked {classmate} why they had written an insulting song about me.', undefined, { peerBond: 4 }),
+      o('leave', 'Walk out before verse three', { energy: 2 }, 'No backing vocals', '{classmate} has to rehearse alone. You leave wondering how much material they have saved for the bridge.', 'I left after hearing my name in {classmate}’s insulting song.', undefined, { peerBond: -3 }),
     ],
   },
   {
-    id: 'teen-exam-freeze', min: 13, max: 17, school: 'secondary', teacher: true, illustration: 'education', title: 'Question one has left the building',
-    body: 'In a practice exam, you read the first question four times. Your brain appears to have taken the day off.',
+    id: 'teen-exam-freeze', min: 13, max: 17, school: 'secondary', teacher: true, illustration: 'education', title: 'At least you know your name',
+    body: 'Your practice exam is going badly. So far, you have written your name and the date. The date is wrong.',
     choices: [
-      o('skip', 'Start with a question you know', { discipline: 3, stress: -2 }, 'Something comes back', 'An easier question gets you moving. You return to the first one later.', 'I got through a practice exam by starting with a question I knew.', undefined, { grades: 2 }),
-      o('help', 'Ask {teacher} for help afterwards', { respect: 2, energy: -2 }, 'Find the gap', 'You review the part that went wrong. It makes more sense without the clock running.', 'I reviewed a difficult practice exam with {teacher}.', undefined, { grades: 2, teacherBond: 3 }),
-      o('panic', 'Stare at question one until time is up', { stress: 4, energy: -2 }, 'Very well acquainted', 'You know every word of the question. Most of the paper is still blank.', 'I froze on the first question of a practice exam.', undefined, { grades: -2 }),
+      o('skip', 'Hunt for every easy mark first', { discipline: 3, stress: -2 }, 'A rescue in small pieces', 'You collect enough answers to get moving. Even question one looks less hostile on your second visit.', 'I recovered from freezing in a practice exam by answering easier questions first.', undefined, { grades: 2 }),
+      o('help', 'Take the wreckage to {teacher} afterwards', { respect: 2, energy: -2 }, 'Recoverable damage', '{teacher} finds the step you missed. You work through it together. Correcting the date takes considerably less time.', 'I reviewed a difficult practice exam with {teacher}.', undefined, { grades: 2, teacherBond: 3 }),
+      o('panic', 'Write an apology in the answer box', { stress: 4, energy: -2 }, 'Unfortunately, this is not English', 'Your explanation is sincere and beautifully punctuated. It earns none of the missing marks.', 'I wrote an apology instead of answering a practice exam question.', undefined, { grades: -2 }),
     ],
   },
   {
@@ -258,6 +258,42 @@ export const childhoodTemplates: readonly EventTemplate[] = [
       o('feedback', 'Turn it into useful feedback', { respect: 3, smarts: 1 }, 'Less funny, more useful', 'You keep the specific complaints and remove the insults. {teacher} helps pass it on.', 'I helped {classmate} turn a canteen rant into useful feedback.', undefined, { peerBond: 2, teacherBond: 2 }),
       o('private', 'Keep the joke between you', { happiness: 3 }, 'Private critic', 'You laugh over the draft and leave it unpublished.', 'I laughed at {classmate}’s canteen review without sharing it.', undefined, { peerBond: 2 }),
       o('read', 'Read it aloud in class', { happiness: 2, respect: -3 }, 'Review interrupted', '{teacher} stops you halfway through “pasta”. You lose the rest of your break explaining.', 'I read {classmate}’s canteen rant aloud in class.', undefined, { teacherBond: -4 }),
+    ],
+  },
+  {
+    id: 'school-corpse-stage-notes', rarity: 'uncommon', min: 8, max: 11, school: 'primary', classmate: true, teacher: true, illustration: 'education', title: 'The corpse has notes',
+    body: 'During a class play rehearsal, {classmate} plays the dead monarch. They keep sitting up to complain that your funeral speech is not sad enough. {teacher} asks you to try once more.',
+    choices: [
+      o('flatter', 'Invent a wildly flattering eulogy', { happiness: 3, energy: -2 }, 'A tragic loss to sandwich making', 'You praise their kindness, courage and ability to open crisp packets. {classmate} stays dead for almost the whole speech.', 'I improvised a flattering funeral speech for {classmate} in a class play.', undefined, { peerBond: 4, skill: { id: 'acting', delta: 2 } }),
+      o('direct', 'Ask the corpse to stop directing', { respect: 2, discipline: 2 }, 'A quieter royal household', '{teacher} backs you up. {classmate} folds their arms, then remembers that corpses usually keep still.', 'I asked {classmate} to stop interrupting our class play rehearsal.', undefined, { teacherBond: 2, peerBond: -2 }),
+      o('resurrect', 'Announce a miracle and cancel the funeral', { happiness: 4, respect: -3 }, 'The monarch objects to recovery', 'You shout that they are alive. {classmate} demands their death scene back, and {teacher} sends everyone to the start of the script.', 'I derailed a class play rehearsal by bringing {classmate}’s character back to life.', undefined, { peerBond: -3, teacherBond: -4 }),
+    ],
+  },
+  {
+    id: 'teen-exam-lucky-snail', rarity: 'rare', min: 12, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'education', title: 'The luck is escaping',
+    body: '{classmate} brought a “lucky snail” to a practice exam. It has escaped the pencil case and reached {teacher}’s answer sheet. Nobody appears to have consulted the snail.',
+    choices: [
+      o('rescue', 'Quietly help move it somewhere safe', { discipline: 2, energy: -2 }, 'A slower evacuation', '{teacher} helps you lift it onto a leaf. {classmate} thanks you for saving their luck; you suggest keeping it outside next time.', 'I helped move {classmate}’s snail safely out of a practice exam.', undefined, { peerBond: 4, teacherBond: 2, skill: { id: 'science', delta: 1 } }),
+      o('tell', 'Identify its owner immediately', { respect: -2, stress: 2 }, 'No chance of mistaken custody', '{teacher} thanks you for explaining. {classmate} spends the rest of the practice exam avoiding your eye.', 'I told {teacher} that the escaped snail belonged to {classmate}.', undefined, { teacherBond: 3, peerBond: -6 }),
+      o('defend', 'Insist the snail is your study partner', { happiness: 4, stress: 3 }, 'It has not answered question one', 'You explain its excellent listening skills. {teacher} points to the slime on the answer sheet. {classmate} is grateful, but your defence does not impress.', 'I tried to defend an escaped snail as a study partner.', undefined, { peerBond: 4, teacherBond: -5, skill: { id: 'acting', delta: 1 } }),
+    ],
+  },
+  {
+    id: 'teen-mind-reading-helmet', rarity: 'rare', min: 13, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'education', title: 'The helmet knows too much',
+    body: '{classmate} built a “mind-reading helmet” from a colander. {teacher} wants a demonstration. You are supposed to feed {classmate} the answers with hand signals.',
+    choices: [
+      o('test', 'Suggest an actual test instead', { respect: 3, energy: -2 }, 'The colander fails peer review', 'You test questions neither of you has rehearsed. The helmet reads no minds. {teacher} appreciates the method; {classmate} dislikes your timing.', 'I tested {classmate}’s fake mind-reading helmet honestly.', undefined, { skill: { id: 'science', delta: 2 }, teacherBond: 3, peerBond: -4 }),
+      o('assist', 'Deliver the hand signals theatrically', { happiness: 3, respect: -3 }, 'The thought transmission is visible', 'You hide neither hand particularly well. {teacher} watches your performance and asks whether the helmet works with your hands in your pockets.', 'I helped stage {classmate}’s fake mind-reading demonstration.', undefined, { peerBond: 4, teacherBond: -4, skill: { id: 'acting', delta: 2 } }),
+      o('credit', 'Claim the mind-reading genius was yours', { respect: -4, stress: 3 }, 'Shared credit for a kitchen utensil', '{classmate} immediately reveals the signals to disprove you. {teacher} now knows that both inventors were bluffing.', 'I tried to take credit for {classmate}’s fake mind-reading helmet.', undefined, { peerBond: -6, teacherBond: -3 }),
+    ],
+  },
+  {
+    id: 'teen-insult-cake', rarity: 'uncommon', min: 13, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'relationship', title: 'The cake has a message',
+    body: '{classmate} made a cake iced with an insult about {teacher}. It was meant for a private joke. {teacher} has just asked what is in the box.',
+    choices: [
+      o('eat', 'Eat the incriminating slice immediately', { happiness: 3, energy: -2, stress: 2 }, 'The evidence was mostly icing', 'You stuff the message into your mouth. {teacher} asks a second question, which you cannot answer. {classmate} struggles not to laugh.', 'I ate a slice of {classmate}’s cake to hide its insulting message.', undefined, { peerBond: 4, teacherBond: -2 }),
+      o('admit', 'Tell {teacher} what the cake says', { respect: 2, stress: 2 }, 'An unusually literal confession', '{teacher} is disappointed. {classmate} thinks a less complete description would have been sufficient.', 'I told {teacher} about an insult iced onto {classmate}’s cake.', undefined, { teacherBond: 2, peerBond: -5 }),
+      o('offer', 'Open the box and offer them a slice', { happiness: 2, respect: -4 }, 'A generous serving of consequences', '{teacher} reads the icing. The silence lasts until {classmate} closes the box. Neither of you receives a thank-you.', 'I showed {teacher} the insulting cake {classmate} had made.', undefined, { teacherBond: -6, peerBond: -3 }),
     ],
   },
 ];

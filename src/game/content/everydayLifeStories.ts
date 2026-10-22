@@ -10,7 +10,7 @@ import { travelMemoryTemplates } from './travelMemoryStories';
 import { laterLifeTemplates } from './laterLifeStories';
 import { workingLifeTemplates } from './workingLifeStories';
 
-/**125 new distinct situations. System acknowledgements and interviews are excluded. */
+/** Context-bound situations. System acknowledgements and interviews are excluded. */
 export const everydayLifeTemplates: readonly EventTemplate[] = [
   ...ordinaryAdultTemplates, ...parentingTemplates, ...homeLifeTemplates,
   ...wellbeingTemplates, ...specialCareerTemplates, ...petLifeTemplates,

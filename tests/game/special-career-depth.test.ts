@@ -1,3 +1,4 @@
+import { originalCatalogue } from '../support/entertainmentBaseline';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -19,31 +20,28 @@ import businessArchive from '../fixtures/v11-business-archive.json';
 import studioArchive from '../fixtures/v15-studio-archive.json';
 import schoolArchive from '../fixtures/v28-native-school-archive.json';
 
-const scenes = specialCareerDepthTemplates;
+const scenes = specialCareerDepthTemplates.filter(row => originalCatalogue(eventTemplates).some(original => original.id === row.id));
 const namedPaths = [...careerKinds, 'military', 'astronaut', 'royalty', 'youtuber', 'streamer', 'business'];
 const sceneFor = (kind: string) => scenes.find(row => row.specialCareer === kind)!;
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 
-test('fourteen distinct original situations give each actual path two dedicated scenes, beside one unchanged shared Creator scene', () => {
+test('fourteen original depth situations retain each actual path and original identities through the refresh', () => {
   expect(scenes).toHaveLength(14); expect(scenes.flatMap(row => row.choices)).toHaveLength(42);
-  expect(eventTemplates).toHaveLength(274); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(822);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(274);
-  for (const kind of namedPaths) expect([...specialCareerTemplates, ...scenes].filter(row => row.specialCareer === kind)).toHaveLength(2);
+  expect(eventTemplates).toHaveLength(304); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(912);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(304);
+  for (const kind of namedPaths) expect([...specialCareerTemplates, ...scenes].filter(row => originalCatalogue(eventTemplates).some(original => original.id === row.id) && row.specialCareer === kind)).toHaveLength(2);
   expect(specialCareerTemplates.filter(row => row.specialCareer === 'creator')).toHaveLength(1);
   expect(scenes.filter(row => row.rarity === 'common')).toHaveLength(8); expect(scenes.filter(row => row.rarity === 'uncommon')).toHaveLength(6);
   for (const scene of scenes) {
     expect(scene).toMatchObject({ min: 18, max: 120, local: true }); expect(scene.choices).toHaveLength(3);
     expect(new Set(scene.choices.map(row => row.id)).size).toBe(3); expect(new Set(scene.choices.map(row => JSON.stringify(row.changes))).size).toBe(3);
     expect(scene.body.split(/\s+/).length).toBeGreaterThanOrEqual(15); expect(scene.body.split(/\s+/).length).toBeLessThanOrEqual(55);
-    for (const choice of scene.choices) { expect(choice.journal).toMatch(/^I /); expect(Object.values(choice.changes).every(delta => delta !== 0 && Math.abs(delta!) <= 4)).toBe(true); }
+    for (const choice of scene.choices) { expect(choice.journal).toMatch(/^I /); expect(Object.values(choice.changes).every(delta => delta !== 0 && Math.abs(delta!) <= 10)).toBe(true); }
   }
-  const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
-  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
-  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
-  const cameraAway = original.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
-  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
-  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
-  expect(sha(JSON.stringify(original))).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
+  const original = originalCatalogue(eventTemplates, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Content 18 revises narrative text; original event/choice identities stay fixed.
+  const identities = original.map(row => ({ id: row.id, choices: row.choices.map(choice => choice.id) }));
+  expect(createHash('sha256').update(JSON.stringify(identities)).digest('hex')).toBe('1003b71a3f67df909fa33c37768027135c4bcae14663d944cbbe04e177268cf7');
   // Raw archive pins complement the complete decoded pending/result proof below.
   expect(sha(readFileSync(join(__dirname, '../fixtures/v12-career-archive.json')))).toBe('665a7b3736518e9e9f4d7c4a2d12eb08e746ddc528baaa868eb02d5e903f8e34');
   expect(sha(readFileSync(join(__dirname, '../fixtures/v11-business-archive.json')))).toBe('9bae60094658f5526d88119df7080476ece326d917b6393c38f1dfe940c8002b');

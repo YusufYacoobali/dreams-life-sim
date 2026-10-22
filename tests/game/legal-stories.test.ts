@@ -23,7 +23,7 @@ function unavailable(world: World, kind: Parameters<typeof scene>[0]) {
 afterEach(() => jest.restoreAllMocks());
 
 test('the three distinct legal dilemmas bind only existing cases, custody and release; a free graduate gets none', () => {
-  expect(legalTemplates).toHaveLength(3); expect(legalTemplates.flatMap(item => item.choices)).toHaveLength(9);
+  expect(legalTemplates).toHaveLength(9); expect(legalTemplates.flatMap(item => item.choices)).toHaveLength(27);
   const free = decodeWorld(JSON.stringify(graduate)), before = encodeWorld(free);
   expect(events.eligibleTemplates(free).filter(item => item.legal)).toEqual([]);
   expect(encodeWorld(free)).toBe(before);
@@ -124,7 +124,7 @@ test('an explicitly arranged C14 envelope preserves the genuine saved medical/co
   expect(value.campusCommunities).toEqual([]); delete value.campusCommunities;
   value.schemaVersion = 39; value.engineVersion = 40; value.contentVersion = 14;
   const migrated = decodeWorld(JSON.stringify(value));
-  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(17);
+  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(18);
   expect(migrated.pending).toEqual(world.pending); expect(migrated.deferred).toEqual(world.deferred); expect(migrated.random).toEqual(world.random);
   const bound = events.bindEvent(pendingCaseStoryWorld(), scene('awaiting-trial'));
   offerPending(world, bound); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');

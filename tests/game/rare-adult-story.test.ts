@@ -1,3 +1,4 @@
+import { originalCatalogue } from '../support/entertainmentBaseline';
 import { createHash } from 'node:crypto';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { eventWeight, weightedEvent } from '../../src/game/content/eventRarity';
@@ -12,26 +13,23 @@ import child from '../fixtures/v28-ordinary-hobby-archive.json';
 import medical from '../fixtures/v8-medical-archive.json';
 
 const scene = rareAdultTemplates[0];
-test('one extremely rare original adult scene retains its original position/copy beside fourteen new career scenes', () => {
+test('the original extremely rare adult scene retains its identity, context and relative rarity', () => {
   expect(rareAdultTemplates).toHaveLength(1); expect(scene.id).toBe('adult-accidental-living-exhibit');
   expect(scene).toMatchObject({ min: 18, max: 120, local: true, rarity: 'extremely-rare' }); expect(eventWeight(scene)).toBe(1);
-  expect(eventTemplates).toHaveLength(274); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(822);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(274);
-  const original = eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
-  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
-  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
-  const cameraAway = original.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
-  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
-  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
-  expect(createHash('sha256').update(JSON.stringify(original)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
-  expect(eventTemplates[250]).toBe(scene); expect(scene.choices.map(row => row.id)).toEqual(['explain', 'pose', 'lecture']);
+  expect(eventTemplates).toHaveLength(304); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(912);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(304);
+  const original = originalCatalogue(eventTemplates, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Content 18 revises narrative text; original event/choice identities stay fixed.
+  const identities = original.map(row => ({ id: row.id, choices: row.choices.map(choice => choice.id) }));
+  expect(createHash('sha256').update(JSON.stringify(identities)).digest('hex')).toBe('1003b71a3f67df909fa33c37768027135c4bcae14663d944cbbe04e177268cf7');
+  expect(originalCatalogue(eventTemplates, 251)[250]).toBe(scene); expect(scene.choices.map(row => row.id)).toEqual(['explain', 'pose', 'lecture']);
 });
 
 test('the extreme weight is available only to the actual eligible local adult pool and creates no read-time state or diagnosis', () => {
   const adult = decodeWorld(JSON.stringify(graduate)), original = encodeWorld(adult), eligible = eligibleTemplates(adult);
   expect(eligible).toContain(scene);
   // Explicit selector-boundary ticket, not a natural occurrence claim.
-  expect(weightedEvent(eligible, total => total - 1)).toBe(scene);
+  expect(weightedEvent(eligible, () => eligible.slice(0, eligible.indexOf(scene)).reduce((sum, row) => sum + eventWeight(row), 0))).toBe(scene);
   expect(encodeWorld(adult)).toBe(original);
   const young = decodeSave(JSON.stringify(child)).world;
   expect(eligibleTemplates(young)).not.toContain(scene);

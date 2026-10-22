@@ -1,3 +1,4 @@
+import { originalCatalogue } from '../support/entertainmentBaseline';
 import { createHash } from 'node:crypto';
 import * as events from '../../src/game/content/events';
 import { EVENT_RARITY_VERSION, EVENT_RARITY_WEIGHTS, eventWeight, weightedEvent } from '../../src/game/content/eventRarity';
@@ -16,25 +17,22 @@ import { database } from '../support/sqlite';
 import hobbies from '../fixtures/v28-ordinary-hobby-archive.json';
 import service from '../fixtures/v16-service-archive.json';
 
-test('version one retains original251 tiers and the historical original250 golden with one explicit neutral-copy bridge', () => {
-  const originalCatalogue = events.eventTemplates.slice(0, 251);
+test('version one retains original rarity tiers and all original identities through the entertainment refresh', () => {
+  const legacyCatalogue = originalCatalogue(events.eventTemplates, 251);
   expect(EVENT_RARITY_VERSION).toBe(1);
   expect(EVENT_RARITY_WEIGHTS).toEqual({ common: 100, uncommon: 25, rare: 5, 'extremely-rare': 1 });
-  expect(events.eventTemplates).toHaveLength(274);
-  expect(originalCatalogue.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
+  expect(events.eventTemplates).toHaveLength(304);
+  expect(legacyCatalogue.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
     'adult-uncertain-memory', 'adult-wrong-name-badge', 'later-old-competition', 'pet-parrot-perfect-timing', 'school-label-swap', 'school-mascot-petition', 'school-secret-language', 'school-tree-audition', 'school-volcano-breach', 'small-mistake', 'teen-family-interview', 'teen-yearbook-proof',
   ]);
-  expect(originalCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
-  expect(originalCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
-  expect(originalCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
-  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([254, 18, 1, 1]);
-  const copy = events.eventTemplates.slice(0, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
-  // Preserve the C12 historical narrative golden by restoring ONLY this copied result.
-  // Newly bound C13 scenes use neutral copy; existing saved choices are never rewritten.
-  const cameraAway = copy.find(row => row.id === 'first-camera-closeup')!.choices.find(choice => choice.id === 'away')!;
-  expect(cameraAway.result).toBe('{parent} gets a photograph of the back of your head. You have already found something else to do.');
-  cameraAway.result = '{parent} gets a photograph of your hair. You have already found something else to do.';
-  expect(createHash('sha256').update(JSON.stringify(copy)).digest('hex')).toBe('3bcaeee8d5d03b0710cf9a96d0dff6cb53b182f452bc8f52c9a85e5c26be6d01');
+  expect(legacyCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
+  expect(legacyCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
+  expect(legacyCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
+  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([254, 34, 15, 1]);
+  const copy = originalCatalogue(events.eventTemplates, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
+  // Content 18 revises narrative text; original event/choice identities stay fixed.
+  const identities = copy.map(row => ({ id: row.id, choices: row.choices.map(choice => choice.id) }));
+  expect(createHash('sha256').update(JSON.stringify(identities)).digest('hex')).toBe('1003b71a3f67df909fa33c37768027135c4bcae14663d944cbbe04e177268cf7');
 });
 
 test('cumulative selection gives each tier its exact relative span, including first and last positions, using one draw', () => {

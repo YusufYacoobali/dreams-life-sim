@@ -12,21 +12,21 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-shrinking-sleeves', min: 11, max: 16, illustration: 'wellbeing', title: 'The sleeves have retreated',
-    body: 'A familiar top now stops well above your wrists. Either you have grown or somebody has moved the ends.',
+    id: 'teen-shrinking-sleeves', min: 11, max: 16, illustration: 'wellbeing', title: 'Your top has become a crop top',
+    body: 'You stretch in a familiar top and discover an alarming amount of midriff. Your sleeves have also retreated. Apparently, your body has been making decisions without consulting your wardrobe.',
     choices: [
-      o('compare', 'Compare it with an older photograph', { smarts: 2, stress: -1 }, 'A fairly ordinary explanation', 'The top looks the same. Your arms have been busy.', 'I noticed how much I had grown when my sleeves became too short.'),
-      o('roll', 'Roll the sleeves up deliberately', { happiness: 2, discipline: 1 }, 'An intentional length', 'It is still the same top. At least the sleeves now look as though they received instructions.', 'I rolled up sleeves I had grown out of.'),
-      o('compare-others', 'Spend the afternoon comparing heights', { stress: 3, happiness: -2 }, 'An inconclusive league table', 'People your age are growing at different rates. Checking again does not make yours change.', 'I worried about how quickly other people were growing.'),
+      o('compare', 'Check an old photo for evidence', { smarts: 2, stress: -1 }, 'The sleeves were innocent', 'The photo confirms it: you have grown. The top has been doing the same job with less and less material to work with.', 'I realised how much I had grown after comparing an old photo with my clothes.'),
+      o('roll', 'Roll the sleeves and call it fashion', { happiness: 2, discipline: 1 }, 'Extremely limited edition', 'You commit to the look. It remains a short top, but you stop tugging at it every few seconds.', 'I rolled up short sleeves and wore the top as it was.'),
+      o('compare-others', 'Check everyone else’s growth rate', { stress: 3, happiness: -2 }, 'An unwinnable investigation', 'Some people are taller. Some are shorter. None of your checking gives your top another centimetre of fabric.', 'I worried about how my growth compared with other people’s.'),
     ],
   },
   {
-    id: 'teen-family-game-timer', min: 11, max: 17, parent: true, illustration: 'relationship', title: 'After this round',
-    body: 'You tell {parent} you will stop playing after this round. The game helpfully begins another round before you have finished the sentence.',
+    id: 'teen-family-game-timer', min: 11, max: 17, parent: true, illustration: 'relationship', title: 'Your parent knows this level',
+    body: 'You promise {parent} one last round. They sit down, watch your first attempt and say, “I used to beat this blindfolded.” This is an outrageous development.',
     choices: [
-      o('stop', 'Stop at the end of the round', { discipline: 3, stress: -1 }, 'An actual stopping point', 'You leave the next round alone. {parent} does not have to ask again.', 'I stopped a game when I had agreed to stop.', 3),
-      o('agree', 'Agree on a clear time for next time', { respect: 2, discipline: 2 }, 'Terms that fit on a clock', 'You stop now and discuss a time you can both recognise. “Soon” is removed from the agreement.', 'I agreed on a clearer stopping time with {parent}.', 2),
-      o('extend', 'Keep announcing one more round', { happiness: 2, discipline: -2, stress: 2 }, 'The round develops sequels', '{parent} points out how many times you have said it. The argument lasts longer than the final round.', 'I kept extending a game after promising {parent} I would stop.', -3),
+      o('stop', 'Stop before they can demonstrate', { discipline: 3, stress: -1 }, 'Dignity preserved', 'You keep your promise and turn it off. {parent} seems more pleased about that than any old high score.', 'I stopped a game when I had promised {parent} I would.', 3),
+      o('agree', 'Agree on one round each, then stop', { respect: 2, discipline: 2 }, 'Management still has it', '{parent} is annoyingly good. You both stop at the agreed time, although you explain that the controls have changed.', 'I played one agreed round with {parent} before stopping.', 2),
+      o('extend', 'Demand rematches until you win', { happiness: 2, discipline: -2, stress: 2 }, 'One more humiliation', '{parent} wins again. You accuse them of practising in secret. The argument lasts longer than the round you promised would be last.', 'I kept extending a game after losing to {parent}.', -3),
     ],
   },
   {
@@ -39,21 +39,21 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-notification-loop', min: 12, max: 17, illustration: 'wellbeing', title: 'Nothing has happened again',
-    body: 'You check for a new message. There is none. A few seconds later, you investigate whether that finding still holds.',
+    id: 'teen-notification-loop', min: 12, max: 17, illustration: 'wellbeing', title: 'Sent to the group',
+    body: 'You send “Whoever made this group is unbearable” to the group itself. The admin replies, “Hi.” You can see several people typing.',
     choices: [
-      o('away', 'Put the phone aside for a while', { discipline: 3, stress: -3 }, 'A longer interval', 'You get on with something else. The next check can wait until you have finished it.', 'I put my phone aside instead of repeatedly checking for messages.'),
-      o('name', 'Notice what you are waiting for', { smarts: 2, stress: -2 }, 'A more useful question', 'You are hoping for a reply, rather than expecting new information every few seconds. Naming it makes the checking easier to stop.', 'I noticed why I kept checking for a message.'),
-      o('refresh', 'Check just a few more times', { energy: -2, stress: 3 }, 'A thorough absence of news', 'The screen remains well inspected. Your afternoon receives less attention.', 'I kept checking for a message that had not arrived.'),
+      o('away', 'Mute the group and disappear', { discipline: 3, stress: -3 }, 'A successful retreat', 'You miss the replies and spend the afternoon doing something else. The message remains embarrassing; you stop watching it happen.', 'I muted a group after sending an insulting message to it.'),
+      o('name', 'Admit you meant a different chat', { smarts: 2, stress: -2 }, 'An explanation with limits', 'Someone asks which group you were insulting. You apologise instead of opening a second investigation. The typing indicators finally stop.', 'I apologised for an insulting group message.'),
+      o('refresh', 'Explain that autocorrect meant “adorable”', { energy: -2, stress: 3 }, 'Please show your keyboard', 'Nobody believes you. Someone types “unbearably adorable” and you keep checking as the joke gets worse.', 'I blamed an insulting group message on autocorrect.'),
     ],
   },
   {
-    id: 'teen-borrowed-charger', min: 12, max: 17, parent: true, illustration: 'relationship', title: 'Temporary ownership',
-    body: 'You borrow {parent}’s charger and find it in your room several days later. Your room appears to have extended the loan.',
+    id: 'teen-borrowed-charger', min: 12, max: 17, parent: true, illustration: 'relationship', title: 'The cable is in your hand',
+    body: '{parent} announces that their charger has been missing for three days. You look down. Their charger is in your hand. There is still time to make this worse.',
     choices: [
-      o('return', 'Return it and explain', { respect: 3, discipline: 1 }, 'The charger goes home', '{parent} had been looking for it. Returning it is more useful than your explanation.', 'I returned {parent}’s charger after forgetting I had borrowed it.', 3),
-      o('place', 'Agree on a place to return borrowed things', { discipline: 3 }, 'A less ambitious system', 'You return the charger and choose a visible spot for future returns. Remembering remains your part of the arrangement.', 'I agreed on a place to return things I borrowed from {parent}.', 2),
-      o('deny', 'Deny having seen it', { respect: -3, stress: 2 }, 'A recognisable cable', '{parent} spots it beside you. You now have to explain the charger and the denial.', 'I denied borrowing {parent}’s charger while it was beside me.', -4),
+      o('return', 'Hand over the evidence', { respect: 3, discipline: 1 }, 'Found at the scene', '{parent} accepts the charger and your apology. Three days of mystery ends in approximately two seconds.', 'I returned {parent}’s charger and admitted forgetting about it.', 3),
+      o('place', 'Negotiate a shared charging spot', { discipline: 3 }, 'Conditional amnesty', 'You return the charger and choose a place everyone can find it. {parent} makes you repeat the part about returning it.', 'I agreed on a shared place for {parent}’s charger.', 2),
+      o('deny', 'Say “What charger?” without hiding it', { respect: -3, stress: 2 }, 'A remarkably short cross-examination', '{parent} points at your hand. You look at it as though the cable has just appeared there. Nobody is convinced.', 'I denied taking {parent}’s charger while holding it.', -4),
     ],
   },
   {
@@ -66,12 +66,12 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-household-small-meal', min: 13, max: 17, parent: true, illustration: 'wellbeing', title: 'The recipe says “simply”',
-    body: 'You help {parent} prepare a simple meal. The recipe uses “simply” just before the step neither of you can understand.',
+    id: 'teen-household-small-meal', min: 13, max: 17, parent: true, illustration: 'wellbeing', title: 'The pancake is on the ceiling',
+    body: 'You help {parent} make “foolproof” pancakes. The first one is stuck to the ceiling. Neither of you wants to discuss how it got there.',
     choices: [
-      o('read', 'Read the next few steps before continuing', { discipline: 3, smarts: 1 }, 'Fewer surprises', 'You work out what needs to happen first. {parent} handles the part that needs a more experienced hand.', 'I read ahead while helping {parent} prepare a meal.', 2),
-      o('ask', 'Ask {parent} to explain what they are doing', { smarts: 3, energy: -1 }, 'A useful running commentary', '{parent} explains each step as you help. You ask why the supposedly simple recipe needed so many bowls.', 'I asked {parent} to explain the steps while we prepared a meal.', 3),
-      o('guess', 'Skip ahead to the part that looks obvious', { discipline: -2, stress: 2 }, 'The bowls had a reason', '{parent} stops to sort out the order. You return to the step you skipped.', 'I guessed at a recipe step and made preparing a meal harder.', -2),
+      o('read', 'Consult the recipe before pancake two', { discipline: 3, smarts: 1 }, 'The pan is a serving suggestion', 'The instructions recommend turning it gently. You complete the next batch without adding anything else to the ceiling.', 'I read the recipe after a disastrous pancake toss with {parent}.', 2),
+      o('ask', 'Ask {parent} to demonstrate', { smarts: 3, energy: -1 }, 'A quieter technique', '{parent} uses a spatula. The pancake stays below head height. You both agree that this method has advantages.', 'I learned a less dramatic way to turn pancakes from {parent}.', 3),
+      o('guess', 'Attempt the exact same toss again', { discipline: -2, stress: 2 }, 'Reproducible results', 'The second pancake hits the cupboard. {parent} takes the pan and gives you the cloth.', 'I repeated a failed pancake toss and made more mess.', -2),
     ],
   },
   {
@@ -84,12 +84,12 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-sunday-list', min: 13, max: 17, illustration: 'education', title: 'A very ambitious evening',
-    body: 'Your list for the evening contains more tasks than the evening appears to contain hours. Writing smaller has not helped.',
+    id: 'teen-sunday-list', min: 13, max: 17, illustration: 'education', title: 'The plan needs another colour',
+    body: 'You promised to finish everything by Sunday. Sunday is nearly over. You have completed six versions of the to-do list, including a colour key.',
     choices: [
-      o('choose', 'Choose one useful thing to finish', { discipline: 3, stress: -2 }, 'One actual tick', 'You finish a manageable task and move the rest to a realistic place on the list.', 'I made an overfull evening list more manageable.'),
-      o('break', 'Take a short break, then revise the list', { energy: 2, stress: -2 }, 'A second draft', 'After a pause, you make a shorter plan. It includes time to stop.', 'I took a break and made a more realistic plan for my evening.'),
-      o('all', 'Try to do everything at once', { energy: -4, stress: 4, discipline: -1 }, 'Several things started', 'You move between tasks without finishing much. The list looks much the same when you stop.', 'I tried to do too many things at once and made little progress.'),
+      o('choose', 'Finish one task without making a new list', { discipline: 3, stress: -2 }, 'An unexpected practical development', 'One thing actually gets done. You resist the urge to redesign the tick beside it.', 'I stopped revising a to-do list and completed one task.'),
+      o('break', 'Cross out half the tasks without remorse', { energy: 2, stress: -2 }, 'The list finally fits', 'Some plans are simply not happening tonight. Admitting it gives you room to stop; it does not complete the crossed-out tasks.', 'I cut an unrealistic evening plan instead of trying to finish everything.'),
+      o('all', 'Declare an all-nighter. Design a new schedule.', { energy: -4, stress: 4, discipline: -1 }, 'Version seven is beautiful', 'You move between tasks, headings and snacks. Very little gets finished, but the colour key has become exceptional.', 'I exhausted myself planning too much and finishing very little.'),
     ],
   },
 ];

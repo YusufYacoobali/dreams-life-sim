@@ -148,7 +148,7 @@ export function resolveCareer(world: World, command: CareerCommand) {
         const definition = careerCatalog[command.kind], prior = world.careers.find(item => item.personId === person.id && item.kind === command.kind), chance = Math.max(10, Math.min(92, 20 + Math.floor(person.skills[definition.skill] / 2) + Math.floor(person.stats.discipline / 8) + Math.floor((prior?.reputation ?? 40) / 8) + Math.floor(person.stats.fame / 10)));
         if (draw(world, 'outcomes', 1, 100) > chance) {
             fact(world, 'I was not selected for a ' + definition.title.toLowerCase() + ' contract.', 'career');
-            result(world, 'They chose someone else', 'The selection did not lead to a contract. No future salary was paid. You can train and try again within the yearly limit.', definition.art);
+            result(world, 'They chose someone else', 'The answer is no. You leave without a contract or future pay, and with a powerful new interest in proving them wrong. You can train and try again within the yearly limit.', definition.art);
             return;
         }
         startCareerContract(world, command.kind, command.quotedAnnualPay);
@@ -214,7 +214,7 @@ export function careerMonth(world: World) {
             career.ended = { ...world.date };
             fact(world, 'I left my ' + definition.title.toLowerCase() + ' career because of ' + (person.stats.health < 15 ? 'my health.' : 'the career age limit.'), 'career', '', person.id);
             if (person.id === world.activePersonId) {
-                offerPending(world, { kind: 'result', id: 'career_retirement_' + career.id, title: 'A career comes to an end', body: 'Your current contract has ended. Your actual earnings, skills, completed work and colleagues remain recorded.', illustration: definition.art, effects: [] }, 50);
+                offerPending(world, { kind: 'result', id: 'career_retirement_' + career.id, title: 'A career comes to an end', body: 'The contract ends. The career you built is still yours: the earnings, skills, completed work and people you met. The next step is open.', illustration: definition.art, effects: [] }, 50);
                 if (world.annual?.stage === 'months')
                     world.annual.pausedForPlanning = true;
             }
@@ -258,7 +258,7 @@ export function careerMonth(world: World) {
             career.projects.push(newProject(world, career));
         }
         if (person.id === world.activePersonId) {
-            offerPending(world, { kind: 'result', id: 'career_result_' + project.id, title: career.kind === 'politician' ? 'A year of public service' : career.kind === 'athlete' ? 'The season is over' : project.status === 'completed' ? 'The project is complete' : 'The project has ended', body: project.name + (project.status === 'cancelled' ? ' ended without enough attendance to complete the work.' : success ? career.kind === 'politician' ? ' met its service goals.' : ' found its audience.' : career.kind === 'politician' ? ' fell short of its service goals.' : ' received a mixed response.') + (career.status === 'between' ? ' Your contract has ended. You can choose your next step before continuing.' : career.kind === 'politician' ? ' Your elected term continues.' : ' Your existing contract continues into another season.'), illustration: definition.art, effects: [{ id: 'quality', label: 'Recorded quality', value: project.quality + '%', tone: 'neutral' }, { id: 'pay', label: 'Actual contract earnings', value: formatMoney({ minor: project.grossEarned, currency: career.currency }), tone: 'positive' }, ...(project.award ? [{ id: 'award', label: 'Award', value: project.award, tone: 'positive' as const }] : [])] }, 50);
+            offerPending(world, { kind: 'result', id: 'career_result_' + project.id, title: career.kind === 'politician' ? 'A year of public service' : career.kind === 'athlete' ? 'The season is over' : project.status === 'completed' ? 'The project is complete' : 'The project has ended', body: project.name + (project.status === 'cancelled' ? ' ends unfinished. You were not there often enough to complete the work.' : success ? career.kind === 'politician' ? ' met its service goals.' : ' finds its audience. The work finally speaks for itself.' : career.kind === 'politician' ? ' fell short of its service goals.' : ' receives a mixed response. Apparently your audience contains several different audiences.') + (career.status === 'between' ? ' Your contract has ended. You can choose your next step before continuing.' : career.kind === 'politician' ? ' Your elected term continues.' : ' Your existing contract continues into another season.'), illustration: definition.art, effects: [{ id: 'quality', label: 'Recorded quality', value: project.quality + '%', tone: 'neutral' }, { id: 'pay', label: 'Actual contract earnings', value: formatMoney({ minor: project.grossEarned, currency: career.currency }), tone: 'positive' }, ...(project.award ? [{ id: 'award', label: 'Award', value: project.award, tone: 'positive' as const }] : [])] }, 50);
             if (world.annual?.stage === 'months')
                 world.annual.pausedForPlanning = true;
         }

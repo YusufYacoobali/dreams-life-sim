@@ -27,7 +27,7 @@ test.each(jobs.filter(role => !role.specialCareer))('$id binds its actual duties
   if (next.pending?.kind !== 'decision') throw new Error('Missing interview');
   expect(next.pending.body).toContain(jobInterviews[role.id].question);
   expect(next.pending.choices).toHaveLength(4);
-  for (const choice of next.pending.choices) expect(choice.effects).toEqual([{ kind: 'job-interview', personId: world.activePersonId, roleId: role.id, employer: world.people[world.activePersonId].city + ' ' + role.sector, annualPay: role.partTime ? hourlyAnnual(hourlyQuote(world.people[world.activePersonId].country, role)) : salaryFor(world, role), ...(role.partTime ? { hourly: hourlyQuote(world.people[world.activePersonId].country, role) } : {}), experience: { policyVersion: 1, paidMonths: 0, bonus: 0, chance: choice.id === 'withdraw' ? null : ({ careful: 85, rush: 65, avoid: 55 } as Record<string, number>)[choice.id] }, answerId: choice.id }]);
+  for (const choice of next.pending.choices) expect(choice.effects).toEqual([{ kind: 'job-interview', personId: world.activePersonId, roleId: role.id, employer: world.people[world.activePersonId].city + ' ' + role.sector, annualPay: role.partTime ? hourlyAnnual(hourlyQuote(world.people[world.activePersonId].country, role)) : salaryFor(world, role), ...(role.partTime ? { hourly: hourlyQuote(world.people[world.activePersonId].country, role) } : {}), experience: { policyVersion: 1, paidMonths: 0, bonus: 0, chance: choice.id === 'withdraw' ? null : ({ careful: 85, rush: 65, avoid: 55 } as Record<string, number>)[choice.id] }, copyVersion: 18, answerId: choice.id }]);
   expect(next.random).toEqual(world.random); expect(next.people).toEqual(world.people); expect(next.accounts).toEqual(world.accounts); expect(next.ledger).toEqual(world.ledger); expect(next.workHistory).toEqual(world.workHistory);
   expect(jobReason(next, role)).toMatch(/already applied/); expect(encodeWorld(world)).toBe(original); expect(decodeWorld(encodeWorld(next))).toEqual(next);
 });
@@ -80,5 +80,24 @@ test('country part-time ages still gate interviews and full-time work still requ
 
 test('engine 29 upgrades only its tag, preserving existing employment, people, money and RNG', () => {
   const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 42, contentVersion: 17, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 41, engineVersion: 42, contentVersion: 18, campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+});
+
+
+test.each(['hired', 'rejected'] as const)('content-18 interview copy preserves an unmarked saved %s result and all actual consequences', outcome => {
+  const initial = applicant();
+  let seed = 0;
+  while ((randomInteger(seed, 1, 100).value <= 85) !== (outcome === 'hired')) seed++;
+  initial.random.outcomes = seed;
+  const current = apply(initial), legacy = decodeWorld(encodeWorld(current));
+  if (current.pending?.kind !== 'decision' || legacy.pending?.kind !== 'decision') throw new Error('Expected actual interviews');
+  for (const choice of legacy.pending.choices) for (const effect of choice.effects) if (effect.kind === 'job-interview') delete effect.copyVersion;
+  const selected = { type: 'choose' as const, eventId: current.pending.id, choiceId: 'careful' };
+  const next = resolveCommand(current, selected, true), old = resolveCommand(decodeWorld(encodeWorld(legacy)), selected, true);
+  if (next.pending?.kind !== 'result' || old.pending?.kind !== 'result') throw new Error('Expected interview results');
+  expect(next.pending.body).toContain(outcome === 'hired' ? 'new reason to set an alarm' : 'a year to think of a better answer');
+  expect(old.pending.body).toContain(outcome === 'hired' ? 'Pay starts as months pass' : 'The application was unsuccessful');
+  expect({ ...next, pending: { ...next.pending, body: old.pending.body } }).toEqual(old);
+  expect(next.random).toEqual({ ...current.random, outcomes: randomInteger(seed, 1, 100).state });
+  expect(decodeWorld(encodeWorld(old)).pending).toEqual(old.pending);
 });

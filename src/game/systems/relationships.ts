@@ -172,7 +172,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     if (relation.romance !== 'dating' && relation.romance !== 'engaged') throw new IneligibleAction(relation.romance === 'married' ? 'A marriage requires a divorce settlement' : 'You are not in a relationship with this person');
     relation.romance = 'ex'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.length) relation.roles.push('acquaintance'); syncKind(relation); relation.memories.push('breakup:' + world.date.year);
     relation.trust = bounded(relation.trust - 10); target.stats.happiness = bounded(target.stats.happiness - 8);
-    fact(world, 'I ended my relationship with ' + target.firstName + '.', 'relationships'); result(world, 'You went separate ways', 'The relationship ended. Gifts already given remain with their recipient.', 'breakup', [bond(relation, -25), ...statChanges(player, { happiness: -5, stress: 3 })]); return;
+    fact(world, 'I ended my relationship with ' + target.firstName + '.', 'relationships'); result(world, 'You went separate ways', 'You end the relationship. There is no undo button in the conversation, and the gifts you gave are still theirs.', 'breakup', [bond(relation, -25), ...statChanges(player, { happiness: -5, stress: 3 })]); return;
   }
   const reason = romanceReason(world, target); if (reason) throw new IneligibleAction(reason);
   if (command.type === 'ask-date') {
@@ -207,7 +207,7 @@ export function resolveSocial(world: World, command: SocialCommand) {
     let ring = command.ringId ? world.assets.find(asset => asset.id === command.ringId && asset.ownerId === player.id && asset.catalogId === 'engagement-ring') : world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring');
     if (command.ringId && !ring) throw new IneligibleAction('Choose an engagement ring you own');
     if (!ring) { const offer = assetCatalog.find(asset => asset.id === 'engagement-ring')!; resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 360, quotedPrice: assetPrice(world, offer) }, false); ring = world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring')!; }
-    if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', 'The relationship is still a relationship. The ring stays in your possessions.', 'rings', statChanges(player, { happiness: -4 })); return; }
+    if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', target.firstName + ' is not ready. You are still together, and the ring makes the journey home with you.', 'rings', statChanges(player, { happiness: -4 })); return; }
     ring.ownerId = target.id; ring.ownershipSource = 'gift'; ring.titleSince = { ...world.date }; ring.provenance.push('Given to ' + fullName(target) + ' by ' + fullName(player) + ' in ' + world.date.year);
     if (!world.accounts.some(account => account.ownerId === target.id && account.currency === ring!.currency)) world.accounts.push({ id: 'account_' + target.id + '_' + ring.currency, ownerId: target.id, currency: ring.currency, cash: 0n, openingCash: 0n, lockedCash: 0n });
     relation.romance = 'engaged'; relation.memories.push('engagement:' + world.date.year); syncKind(relation);

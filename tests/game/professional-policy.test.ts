@@ -56,7 +56,7 @@ test('the genuine natural AU world beyond the plain20M limit retains its origina
   const originalMain = JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.main.data, 'base64'))));
   expect(originalMain).toMatchObject({ schemaVersion: 33, engineVersion: 34, contentVersion: 9 });
   const world = unpackCheckpoint(auCheckpoint.checkpoint, true), encoded = encodeWorld(world);
-  expect(world).toMatchObject({ schemaVersion: 41, engineVersion: 42, contentVersion: 17 });
+  expect(world).toMatchObject({ schemaVersion: 41, engineVersion: 42, contentVersion: 18 });
   expect(world.revision).toBe(593); expect(Object.keys(world.people)).toHaveLength(34); expect(world.ledger).toHaveLength(69477); expect(encoded.length).toBeGreaterThan(20_000_000); expect(Buffer.byteLength(encoded)).toBeLessThan(80_000_000);
   // Remove only the new, proven-empty histories absent from this actual World33
   // producer, then restore its three original root version tags.

@@ -3,12 +3,12 @@ import { EventTemplate, storyOption as option } from './eventTypes';
 /** Free ordinary moments with an actual adult friend or current partner. */
 export const adultRelationshipTemplates: readonly EventTemplate[] = [
   {
-    id: 'friend-long-voice-note', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'A message with chapters',
-    body: '{friend} plays you a voice note explaining a very small misunderstanding. The progress bar suggests it has a middle act.',
+    id: 'friend-long-voice-note', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'You were at that table',
+    body: '{friend} plays you a nine-minute voice note about an evening full of “unbearably dull people”. You were there. At minute six, your laugh gets an impression.',
     choices: [
-      option('listen', 'Give it your full attention', { energy: -2, stress: -1 }, 'The extended version', 'You hear the whole story. {friend} notices that you listened instead of waiting for a gap.', 'I listened properly to a long story from {friend}.', undefined, { friendBond: 5 }),
-      option('summary', 'Ask which part needs an answer', { smarts: 2, discipline: 2 }, 'A useful short version', '{friend} finds the actual question. The rest turns out to be background, foreground and weather.', 'I helped {friend} find the question inside a long explanation.', undefined, { friendBond: 2 }),
-      option('guess', 'Guess the ending halfway through', { happiness: 2, respect: -2 }, 'Not that kind of story', 'Your guess is wrong. {friend} stops explaining before you learn why.', 'I interrupted {friend} with a confident guess.', undefined, { friendBond: -3 }),
+      option('listen', 'Wait for them to realise who is listening', { energy: -2, stress: 2 }, 'The apology has a shorter running time', '{friend} reaches your impression and grabs the phone. You hear an apology without having to ask for one.', 'I let {friend} realise they were playing me a rant about me.', undefined, { friendBond: 3 }),
+      option('summary', 'Ask for your personal highlights reel', { happiness: 4, discipline: 2 }, 'Apparently you say “actually” a lot', '{friend} looks mortified. You admit the impression is good and demand only that the next version make you sound richer.', 'I laughed at {friend}’s unflattering impression of me.', undefined, { friendBond: 4 }),
+      option('guess', 'Interrupt with your impression of them', { happiness: 4, respect: -3, stress: 3 }, 'Two comedians, no audience', 'Your impression goes for the thing {friend} is actually sensitive about. They stop laughing before you do.', 'I retaliated against {friend}’s impression with a cruel one of my own.', undefined, { friendBond: -8 }),
     ],
   },
   {
@@ -21,21 +21,21 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'friend-advice-or-listening', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'No solution requested',
-    body: '{friend} tells you about a frustrating day. Your first three solutions are already lining up. None has been requested.',
+    id: 'friend-advice-or-listening', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'An apology with conditions',
+    body: '{friend} wants help apologising for pretending not to know you when someone impressive walked over. Their first draft begins, “Sorry you made it awkward.”',
     choices: [
-      option('ask', 'Ask whether they want ideas or company', { smarts: 2, respect: 3 }, 'The right sort of help', '{friend} chooses company. You let the story finish without turning it into a project.', 'I asked {friend} what kind of support they wanted.', undefined, { friendBond: 5 }),
-      option('listen', 'Listen and acknowledge the hard part', { stress: -2, energy: -1 }, 'A little room to be annoyed', 'You do not fix the day. {friend} looks relieved not to have to justify finding it difficult.', 'I let {friend} talk through a difficult day.', undefined, { friendBond: 4 }),
-      option('lecture', 'Deliver all three solutions', { discipline: 2, respect: -2 }, 'An unsolicited presentation', '{friend} explains why the first two will not work, then gives up on the third.', 'I gave {friend} a lecture when they wanted someone to listen.', undefined, { friendBond: -4 }),
+      option('ask', 'Ask whether they want advice or an alibi', { smarts: 2, respect: 3, stress: 2 }, 'The second draft loses a few words', '{friend} admits the opening is terrible. You help them say sorry without turning you into the problem.', 'I challenged {friend}’s attempt to blame me in an apology.', undefined, { friendBond: 5 }),
+      option('listen', 'Make them rehearse introducing you as a celebrity', { happiness: 5, energy: -2 }, 'An extremely important person', '{friend} gives you a ridiculous introduction with imaginary awards. You accept the performance as a start.', 'I made {friend} practise an absurd introduction after they snubbed me.', undefined, { friendBond: 3 }),
+      option('lecture', 'Present every offence from the friendship', { discipline: 2, respect: -3, stress: 4 }, 'The apology becomes a hearing', 'You get several satisfying minutes of uninterrupted complaints. {friend} stops trying to finish the apology.', 'I turned {friend}’s apology into a list of old grievances.', undefined, { friendBond: -8 }),
     ],
   },
   {
-    id: 'friend-creative-feedback', min: 18, max: 120, friend: true, illustration: 'journal', title: 'Be honest, but also be my friend',
-    body: '{friend} reads you a short poem they wrote and asks what you think. You like one line much more than the other lines.',
+    id: 'friend-creative-feedback', min: 18, max: 120, friend: true, illustration: 'journal', title: 'The villain has your haircut',
+    body: '{friend} reads you a poem about a selfish idiot. The idiot has your haircut, your laugh and a suspiciously familiar opinion about brunch. “Be honest,” says {friend}.',
     choices: [
-      option('specific', 'Name the line you liked and explain why', { smarts: 2, respect: 2 }, 'Praise with a location', '{friend} knows exactly what worked for you. Neither of you has to pretend the poem is finished.', 'I gave {friend} specific encouragement about a poem.', undefined, { friendBond: 4 }),
-      option('permission', 'Ask whether they want detailed feedback', { discipline: 2, respect: 3 }, 'The requested amount of honesty', '{friend} asks about one uncertain passage. You discuss that part without taking over the poem.', 'I checked what feedback {friend} wanted before giving it.', undefined, { friendBond: 3 }),
-      option('brutal', 'Treat honesty as a competition', { stress: 2, respect: -4 }, 'The poem was not the only fragile thing', 'You find several sharp ways to say the same criticism. {friend} puts the poem away.', 'I was needlessly harsh about something {friend} had made.', undefined, { friendBond: -5 }),
+      option('specific', 'Compliment the villain’s excellent hair', { happiness: 4, respect: 2 }, 'A flattering monster', '{friend} cracks up and admits the haircut was yours. You let the rest remain a literary mystery.', 'I joked about recognising myself in {friend}’s poem.', undefined, { friendBond: 4 }),
+      option('permission', 'Ask whether this is a poem or a complaint', { discipline: 2, stress: 3 }, 'Literary criticism gets personal', '{friend} admits one line came from an actual annoyance. You discuss that instead of pretending to analyse the rhyme.', 'I asked {friend} about a personal dig in a poem.', undefined, { friendBond: 3 }),
+      option('brutal', 'Roast the poem harder than it roasted you', { happiness: 3, respect: -5, stress: 4 }, 'The next poem writes itself', 'You attack the rhymes, the rhythm and the need to read it aloud. {friend} folds the page without asking for an encore.', 'I insulted {friend}’s poem after recognising myself in it.', undefined, { friendBond: -9 }),
     ],
   },
   {
@@ -75,39 +75,39 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'partner-phone-attention', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'One more notification',
-    body: '{partner} is telling you something when your phone lights up. You have checked it twice already. The third glance is apparently less subtle than you think.',
+    id: 'partner-phone-attention', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Caught in portrait mode',
+    body: 'You are scrolling while {partner} tells you something important. You finally look up. They have been silently filming your “listening face” for the last thirty seconds.',
     choices: [
-      option('away', 'Put it away and ask what you missed', { discipline: 3, respect: 2 }, 'Attention, returned', 'You acknowledge the interruption. {partner} picks up the thread without competing with a screen.', 'I put my phone away and listened to {partner}.', undefined, { partnerBond: 5 }),
-      option('explain', 'Explain why you need a short pause', { respect: 2, stress: -1 }, 'An actual pause', '{partner} agrees to wait a moment. You finish looking, then return to the conversation properly.', 'I asked {partner} for a clear pause instead of half-listening.', undefined, { partnerBond: 2 }),
-      option('deny', 'Insist you heard every word', { stress: 3, respect: -3 }, 'A difficult claim to demonstrate', '{partner} asks what the last sentence was. Your answer is mostly a description of your phone.', 'I pretended to be listening to {partner}.', undefined, { partnerBond: -5 }),
+      option('away', 'Put the phone away and own it', { discipline: 3, respect: 2, stress: 2 }, 'An uncomfortable replay', 'You watch three seconds of yourself nodding at nothing, then ask {partner} to start again. This time you actually listen.', 'I apologised to {partner} after being caught half-listening.', undefined, { partnerBond: 5 }),
+      option('explain', 'Ask to keep the humiliating footage private', { respect: 2, stress: -1 }, 'One audience was enough', '{partner} agrees to keep it between you. You finish checking your phone and give the conversation a proper restart.', 'I asked {partner} to keep an embarrassing recording private and restarted our conversation.', undefined, { partnerBond: 2 }),
+      option('deny', 'Claim you were listening. Demand a quiz.', { happiness: 2, stress: 5, respect: -4 }, 'First question, immediate disaster', '{partner} asks what they were talking about. You answer with the headline you just read. Neither of you is impressed.', 'I failed my own listening challenge with {partner}.', undefined, { partnerBond: -8 }),
     ],
   },
   {
-    id: 'partner-alone-time', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'An afternoon with nobody',
-    body: '{partner} says they could use a little time alone. Your first instinct is to ask what you have done. They have not said you have done anything.',
+    id: 'partner-alone-time', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'An afternoon without your commentary',
+    body: '{partner} asks for an afternoon alone. Their proposed activities include silence, more silence and eating something without explaining why they chose it.',
     choices: [
-      option('respect', 'Respect the request without a quiz', { respect: 3, stress: -2 }, 'Space can be ordinary', '{partner} thanks you for understanding. A short boundary does not have to become a long explanation.', 'I respected {partner}’s need for some time alone.', undefined, { partnerBond: 4 }),
-      option('clarify', 'Ask what amount of space would help', { discipline: 2, stress: -1 }, 'Less guessing', 'You understand what {partner} means. Neither of you has to read a hidden message into the request.', 'I clarified what {partner} meant by needing space.', undefined, { partnerBond: 3 }),
-      option('test', 'Treat it as a test of your relationship', { stress: 5, respect: -2 }, 'A request becomes an exam', '{partner} now has to reassure you before getting the quiet they asked for.', 'I made {partner}’s request for space about me.', undefined, { partnerBond: -4 }),
+      option('respect', 'Wish them a wonderful day of not explaining', { respect: 3, stress: -2 }, 'No follow-up interview', '{partner} laughs with relief. You find your own way to spend the afternoon.', 'I gave {partner} some time alone without interrogating the plan.', undefined, { partnerBond: 4 }),
+      option('clarify', 'Negotiate one ridiculous ceremonial goodbye', { happiness: 4, discipline: 2 }, 'Farewell, brave traveller', 'You exchange exaggerated farewells for a journey of several metres. Then you actually leave them in peace.', 'I turned {partner}’s request for quiet into a brief joke and respected it.', undefined, { partnerBond: 3 }),
+      option('test', 'Perform a wounded exit with an empty bag', { happiness: 3, stress: 5, respect: -3 }, 'The audience declines the drama', '{partner} points out that the bag is empty. Your attempt to make them feel guilty has become another reason they want quiet.', 'I tried to guilt {partner} over wanting an afternoon alone.', undefined, { partnerBond: -8 }),
     ],
   },
   {
-    id: 'partner-money-conversation', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Before choosing the expensive option',
-    body: '{partner} asks what you feel comfortable spending on paid plans together. The question is about comfort, but you hear an invitation to sound more wealthy.',
+    id: 'partner-money-conversation', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Your share is emotional support',
+    body: 'You and {partner} are imagining a lottery win. They draw a pie chart of the money. Your slice is labelled “moral support”.',
     choices: [
-      option('honest', 'Say what feels affordable without showing off', { respect: 3, stress: -3 }, 'A useful limit', 'You discuss a limit rather than making a purchase. {partner} is glad the answer is real.', 'I had an honest conversation about spending with {partner}.', undefined, { partnerBond: 4 }),
-      option('both', 'Ask what feels comfortable for both of you', { smarts: 2, respect: 2 }, 'Two people in the budget', 'The discussion leaves room for both sets of priorities. No money changes hands.', 'I compared spending boundaries with {partner}.', undefined, { partnerBond: 5 }),
-      option('boast', 'Claim the price never matters to you', { stress: 4, respect: -2 }, 'An expensive sentence', '{partner} asks you to be serious. You have made a practical question needlessly awkward without buying anything.', 'I boasted instead of discussing money honestly with {partner}.', undefined, { partnerBond: -3 }),
+      option('honest', 'Ask why even imaginary money makes them greedy', { respect: 3, stress: 2 }, 'A surprisingly real question', '{partner} admits they got carried away. You talk about what sharing would mean before the joke stops being funny.', 'I questioned {partner}’s selfish plan for an imaginary lottery win.', undefined, { partnerBond: 4 }),
+      option('both', 'Redraw it with a joint escape fund', { happiness: 4, smarts: 2 }, 'Two people in the fantasy', 'You invent a gloriously impractical trip together. For a few minutes, winning feels less important than planning it.', 'I included both of us in a lottery fantasy with {partner}.', undefined, { partnerBond: 5 }),
+      option('boast', 'Reserve your imaginary fortune for a hotter partner', { happiness: 3, stress: 5, respect: -4 }, 'An imaginary upgrade causes a real silence', '{partner} puts the pen down. You have defended your fictional wealth by insulting your actual relationship.', 'I insulted {partner} during an argument about imaginary lottery money.', undefined, { partnerBond: -10 }),
     ],
   },
   {
-    id: 'partner-other-couples', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Everybody else, apparently',
-    body: '{partner} looks at cheerful pictures of other couples and wonders whether you should be doing more. The pictures contain very few ordinary Tuesdays.',
+    id: 'partner-other-couples', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Perfect couple, terrible timing',
+    body: '{partner} shows you a perfect couple online and asks why you cannot be more like them. While you look, the couple posts a video titled “WE HAVE BEEN MISERABLE FOR YEARS”.',
     choices: [
-      option('specific', 'Ask what they would actually like more of', { smarts: 2, respect: 2 }, 'A need instead of a comparison', '{partner} talks about wanting more attention. You can understand that better than a collection of photographs.', 'I asked {partner} what mattered behind a comparison with other couples.', undefined, { partnerBond: 4 }),
-      option('ordinary', 'Talk about what you enjoy in ordinary life', { happiness: 3, stress: -2 }, 'The parts nobody photographs', 'You and {partner} remember a few small things you like together. The pictures stop setting the whole standard.', 'I appreciated ordinary moments with {partner}.', undefined, { partnerBond: 3 }),
-      option('compete', 'Compare your relationship to theirs in return', { stress: 4, respect: -2 }, 'A contest with no judges', 'Now both of you are defending yourselves against people who are not in the conversation.', 'I turned {partner}’s comparison into a competition.', undefined, { partnerBond: -4 }),
+      option('specific', 'Ask what they wanted before the plot twist', { smarts: 2, respect: 2 }, 'The useful part survives', '{partner} admits they would like more attention. That is something you can discuss without borrowing strangers’ holiday photos.', 'I asked {partner} what they wanted behind an online comparison.', undefined, { partnerBond: 4 }),
+      option('ordinary', 'Celebrate your lack of a breakup thumbnail', { happiness: 5, stress: -2 }, 'An ordinary Tuesday looks better', 'You both laugh. Neither of you has needed to announce a relationship crisis in capital letters today.', 'I laughed with {partner} about a supposedly perfect online couple.', undefined, { partnerBond: 4 }),
+      option('compete', 'Explain that you are clearly the better catch', { happiness: 3, stress: 4, respect: -3 }, 'A very selective comparison', '{partner} asks whether you heard the part about the relationship. You were busy presenting your own highlights.', 'I turned {partner}’s relationship concern into praise for myself.', undefined, { partnerBond: -8 }),
     ],
   },
   {
@@ -129,12 +129,30 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'partner-arrives-late', min: 18, max: 120, partner: true, illustration: 'conversation', title: 'You have had time to rehearse',
-    body: '{partner} arrives later than you expected. During the wait, you have composed a speech with an opening, three accusations and a conclusion.',
+    id: 'partner-arrives-late', min: 18, max: 120, partner: true, illustration: 'conversation', title: 'They heard the impression',
+    body: 'While waiting for {partner}, you rehearse a furious speech to an empty chair. You are doing their voice when they arrive behind you.',
     choices: [
-      option('ask', 'Ask what happened before delivering the speech', { discipline: 3, stress: -2 }, 'Information before conclusions', '{partner} explains the delay. You can discuss the wait without defending an accusation you made before knowing the story.', 'I asked {partner} about a delay before assuming the worst.', undefined, { partnerBond: 3 }),
-      option('impact', 'Explain how the wait affected you', { respect: 3, stress: -1 }, 'A clear point', 'You describe the impact without guessing at motives. {partner} acknowledges it.', 'I told {partner} how an unexpected wait affected me.', undefined, { partnerBond: 4 }),
-      option('speech', 'Deliver the whole rehearsed speech', { energy: -3, stress: 4, respect: -2 }, 'An audience of one unhappy person', '{partner} barely gets a sentence in. The explanation has to wait behind your conclusion.', 'I accused {partner} before hearing why they were late.', undefined, { partnerBond: -5 }),
+      option('ask', 'Stop performing and ask what happened', { discipline: 3, stress: 2 }, 'The actual explanation gets a turn', '{partner} explains the delay. You apologise for the impression before talking about the wait.', 'I stopped a mocking rehearsal when {partner} arrived and heard them out.', undefined, { partnerBond: 3 }),
+      option('impact', 'Admit the wait annoyed you and the voice was unfair', { respect: 3, stress: -1 }, 'Two things can be true', '{partner} acknowledges the wait. You acknowledge that your impression made them sound like a malfunctioning kettle.', 'I told {partner} I was annoyed about waiting and apologised for mocking them.', undefined, { partnerBond: 4 }),
+      option('speech', 'Finish the speech. Keep doing the voice.', { happiness: 3, energy: -3, stress: 5, respect: -4 }, 'The chair was a better audience', '{partner} listens without smiling. The explanation for being late is now the smaller problem.', 'I mocked {partner} to their face while complaining about their delay.', undefined, { partnerBond: -9 }),
+    ],
+  },
+  {
+    id: 'partner-breakup-script', min: 18, max: 120, partner: true, rarity: 'rare', illustration: 'conversation', title: 'Why I would survive without you',
+    body: '{partner} is drafting a list called “WHY I WOULD SURVIVE WITHOUT YOU”. They say it is a joke. Item seven is very specific about how you load a dishwasher.',
+    choices: [
+      option('ask', 'Ask how much of the joke is serious', { respect: 3, stress: 4 }, 'One complaint leaves the list', '{partner} admits something has been bothering them. You talk about the actual complaint instead of adding to the list.', 'I asked {partner} about a hurtful list and heard the complaint behind it.', undefined, { partnerBond: 5 }),
+      option('edit', 'Offer funnier descriptions of your own flaws', { happiness: 5, respect: -1 }, 'An unexpectedly cooperative edit', 'You suggest a more devastating version of item seven. {partner} laughs, and the list turns into something you are both in on.', 'I helped {partner} make a joke about my flaws less spiteful.', undefined, { partnerBond: 3 }),
+      option('retaliate', 'Write a longer list about them', { happiness: 4, stress: 5, respect: -4 }, 'Nobody enjoys the comparison', 'You win on word count. {partner} looks genuinely hurt, which makes the victory feel smaller.', 'I answered {partner}’s hurtful list with a crueler one.', undefined, { partnerBond: -10 }),
+    ],
+  },
+  {
+    id: 'friend-fake-laugh-rehearsal', min: 18, max: 120, friend: true, rarity: 'uncommon', illustration: 'conversation', title: 'The laugh has three settings',
+    body: '{friend} asks you to help choose a convincing fake laugh for people they cannot stand. Their demonstration includes the exact laugh they use with you.',
+    choices: [
+      option('ask', 'Ask which audience category you are in', { respect: 3, stress: 2 }, 'A less rehearsed answer', '{friend} drops the performance and admits the practice looks awful. You get an honest laugh out of how badly this is going.', 'I challenged {friend} about recognising their fake laugh.', undefined, { friendBond: 4 }),
+      option('coach', 'Coach them towards something magnificently worse', { happiness: 5, energy: -2 }, 'The donkey setting', 'You invent a laugh that could clear a room. {friend} forgets to fake the real one that follows.', 'I helped {friend} turn a fake-laugh rehearsal into a ridiculous joke.', undefined, { friendBond: 3 }),
+      option('imitate', 'Use their fake laugh for the rest of the conversation', { happiness: 4, respect: -3, stress: 3 }, 'The demonstration outlasts its welcome', 'You enjoy making the point until {friend} asks you to stop. Then you do it once more.', 'I kept mocking {friend}’s fake laugh after they asked me to stop.', undefined, { friendBond: -7 }),
     ],
   },
 ];

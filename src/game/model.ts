@@ -107,7 +107,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(17),
+  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(18),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -630,5 +630,8 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 40 && parsed.engineVersion === 41) {
     parsed.schemaVersion = 41; parsed.engineVersion = 42;
   }
+  // Entertainment refresh changes future authored scenes only. Saved choices,
+  // results, effects, history, identities, money and random streams stay literal.
+  if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 17) parsed.contentVersion = 18;
   return validateWorld(parsed, immutable);
 }

@@ -1,3 +1,4 @@
+import { originalCatalogue } from '../support/entertainmentBaseline';
 import { laterLifeFamilyTemplates } from '../../src/game/content/laterLifeFamilyStories';
 import { laterLifeRecordTemplates } from '../../src/game/content/laterLifeRecordStories';
 import { retiredLife, widowedLife } from '../support/laterLifeStory';
@@ -27,7 +28,7 @@ test.each(laterLifeRecordTemplates.map(scene => [scene.id, scene] as const))('%s
   // genuine married fixture; it is not a natural-death/annual-selection claim.
   const original = scene.widowed ? widowedLife() : retiredLife();
   expect(original.pending).toBeNull(); expect(original.deferred).toEqual([]);
-  expect(eventTemplates.slice(272)).toEqual(laterLifeRecordTemplates);
+  expect(originalCatalogue(eventTemplates).slice(272)).toEqual(laterLifeRecordTemplates);
   expect(eligibleTemplates(original)).toContainEqual(scene);
   const personId = original.activePersonId, before = encodeWorld(original), event = bindEvent(original, scene);
   if (scene.widowed) {
@@ -74,7 +75,7 @@ test.each(laterLifeRecordTemplates.map(scene => [scene.id, scene] as const))('%s
 }, 30000);
 
 test('two later-life scenes append after the unchanged catalogue and need an actual local adult child, not retirement or an invented family', () => {
-  expect(eventTemplates.slice(268, 270)).toEqual(laterLifeFamilyTemplates);
+  expect(originalCatalogue(eventTemplates).slice(268, 270)).toEqual(laterLifeFamilyTemplates.filter(item => originalCatalogue(eventTemplates).some(original => original.id === item.id)));
   for (const template of laterLifeFamilyTemplates) {
     expect(template).toMatchObject({ min: 55, max: 120, local: true, child: 'adult' });
     const world = lifeStoryWorld(), before = encodeWorld(world), context = lifeStoryContexts(world), child = context.children.adult!;
@@ -154,9 +155,9 @@ test.each([0, 100])('all six later-life choices cap actual stats and the bound f
   }
 });
 
-test('274 unique source situations retain125 everyday scenes/375 choices with explicit context and no interview/report inflation', () => {
-  expect(eventTemplates).toHaveLength(274); expect(everydayLifeTemplates).toHaveLength(125); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(375);
-  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(274);
+test('304 unique situations include136 everyday scenes with explicit context and three real choices', () => {
+  expect(eventTemplates).toHaveLength(304); expect(everydayLifeTemplates).toHaveLength(136); expect(everydayLifeTemplates.flatMap(t => t.choices)).toHaveLength(408);
+  for (const key of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(t => t[key])).size).toBe(304);
   for (const template of everydayLifeTemplates) {
     expect(template.local).toBe(true); expect(template.min).toBeLessThanOrEqual(template.max); expect(template.choices).toHaveLength(3); expect(new Set(template.choices.map(c => c.id)).size).toBe(3);
     const text = JSON.stringify(template);
@@ -186,7 +187,7 @@ test.each([...everydayLifeTemplates, ...laterLifeFamilyTemplates].map(template =
 }, 30000);
 
 test.each(countryCodes)('%s reads actual family/pet/hobby/home/trip/condition context without generating people, charges or RNG', country => {
-  const world = lifeStoryWorld(country), before = encodeWorld(world), available = eligibleTemplates(world).filter(t => everydayLifeTemplates.includes(t)); expect(available).toHaveLength(109);
+  const world = lifeStoryWorld(country), before = encodeWorld(world), available = eligibleTemplates(world).filter(t => everydayLifeTemplates.includes(t)); expect(available).toHaveLength(119);
   for (const template of available) { const event = bindEvent(world, template); expect(event.personIds.every(id => !!world.people[id])).toBe(true); expect(JSON.stringify(event)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/); }
   expect(encodeWorld(world)).toBe(before);
 });
