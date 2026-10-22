@@ -2,6 +2,12 @@
 
 Clutch Shot, Safe Cracker and Orbital Docking are full-screen, playable challenges integrated into the existing simulation. All six implementation steps are complete on `work`. No new runtime dependency or rendering engine was added.
 
+## Visual overhaul — 22 October 2026
+
+The sports/astronaut visual brief was also applied to Safe Cracker as explicitly requested. Image Gen supplied original illustrated backgrounds and transparent moving layers; no Krea generation was submitted. The written brief was available, but its referenced screenshot was not attached. Gameplay logic, difficulty, physics, command/session formats, save markers and live career/crime entry points are unchanged.
+
+The overhaul passes **37 focused cases in four suites**, app/test typechecks, the 428-module zero-cycle import check, and fresh Android/iOS production Hermes exports. Native worklet coverage also verifies that a leftward keeper dive mirrors horizontally without turning upside down. Browser gameplay at 400×900, 320×568 and 768×1024 covers actual target dragging, staged power controls, all three results, local artwork loading and reduced-motion defaults with no page errors. [Overhaul screenshots and results](verification/minigame-overhaul-20261022/README.md). The original full regression/120-life soak below describes the preceding gameplay implementation; it was not repeated for this presentation-only change. Native device FPS and installed release interaction remain unverified.
+
 ## Where to play
 
 | Game | Live entry | Opportunity | Normal-time limit |
@@ -16,9 +22,9 @@ Before Play, **Not now** leaves an optional career challenge unused. **Use norma
 
 ## Gameplay and presentation
 
-- **Clutch Shot:** drag the gold aiming target or use placement buttons, watch the moving power indicator, then shoot. A moving goalkeeper reacts to the release. The ball spins along an eased trajectory, with a shot trail, goal/save/miss presentation and crowd reaction. Skill and recorded career experience determine difficulty.
+- **Clutch Shot:** drag the green aiming target, choose **Set aim**, then stop the power indicator in the green zone. Assisted mode exposes placement buttons and deliberate power choices. A textured keeper sprite dives as the ball follows a curved, perspective-scaled trajectory; the goal/net responds to a goal. Skill and recorded career experience determine difficulty.
 - **Safe Cracker:** time the dial against three successive targets. Incorrect inputs increase suspicion; three mistakes trigger the alarm. Metallic layers, moving bolts, warning flashes, a restrained shake and an opening safe distinguish the scene. Difficulty uses crime skill and recorded incidents.
-- **Orbital Docking:** tap four directional thrusters to change velocity; coast between impulses. Align with the port while keeping approach speed safe, before time or fuel runs out. Earth, atmospheric layers, stars, station panels, thruster flares and a final capture animate around deterministic flight. Skill and actual service periods determine difficulty.
+- **Orbital Docking:** tap four directional thrusters to change velocity; coast between impulses. Align with the port while keeping approach speed safe, before time or fuel runs out. Separate illustrated Earth, station, capsule and thruster layers surround deterministic flight. Docking captures the craft at the port; a failed approach drifts away without an explosion. Skill and actual service periods determine difficulty.
 
 The shared framework provides instructions, a short countdown, remaining-time progress, pause/resume, explicit forfeit confirmation and saved results. Backgrounding, Android Back and navigation blur pause the attempt. Saving failures offer retry, authoritative reload and exit with previously saved progress. A lost completion acknowledgement reuses its original receipt rather than applying the outcome again.
 
@@ -55,9 +61,9 @@ Restoring a Time Machine branch rebinds session `lifeId` while retaining session
 
 Reanimated drives the clock, progress, dial, power, goalkeeper, ball and ship on the UI runtime. SVG shapes are static; moving groups update numeric affine matrices through a native SVG adapter. There is no per-frame complex SVG path construction. Docking uses analytic motion between impulses, shared by UI worklets and command replay, so its outcome does not depend on render rate. Telemetry crosses to React at most twice per second plus accepted input; countdown labels update once per second.
 
-Controls use at least 48-point targets, text labels and scrollable instructions/results. Reduced Motion removes decorative travel, shake, twinkle and the success particle effect, and defaults to **Assisted controls**. Screen-reader detection also defaults to assisted mode. Assisted controls retain the same scoring bounds while removing fast timing: deliberate placement/power choices, manual dial steps, or 0.4-second flight turns. Text exposes aiming position/keeper side and flight alignment, range, velocity direction, speed and fuel.
+Controls use at least 48-point targets, text labels and scrollable instructions/results. Reduced Motion removes decorative travel, shake and guide pulses, and defaults to **Assisted controls**. Screen-reader detection also defaults to assisted mode. Assisted controls retain the same scoring bounds while removing fast timing: deliberate placement/power choices, manual dial steps, or 0.4-second flight turns. Text exposes aiming position/keeper side and flight alignment, range, velocity direction, speed and fuel.
 
-Sound and haptic requests respect existing saved preferences. Three short authored WAV cues and one small Lottie success effect are bundled locally; together they total 38,636 bytes. SVG artwork is code, and all assets work offline. No AI generation, network request, new renderer or additional runtime package is involved in play.
+Sound and haptic requests respect existing saved preferences. Three short authored WAV cues remain local. Twelve new Image Gen artwork layers total 2,489,398 bytes: WebP environment plates and transparent PNG sprites. All are bundled and preloaded before Play. A failed preload can be retried without reserving an attempt. Compact translucent blue-accented controls and a result card preserve the final scene; the former result particle effect is no longer played. No AI generation, external asset request, new renderer or additional runtime package is involved in play. [Artwork provenance and hashes](../assets/minigames/art/README.md).
 
 Regenerate or check the authored effects:
 

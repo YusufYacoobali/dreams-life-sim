@@ -1,9 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import LottieView from 'lottie-react-native';
 import { evaluateSession } from '../core/evaluation';
-import { consequenceText, ratingFor } from '../core/scoring';
+import { consequenceText } from '../core/scoring';
 import type { MiniGameSession } from '../core/types';
 import { GameButton } from './GameButton';
 import { gameStyles as s, palette as c } from './gameStyles';
@@ -29,37 +28,27 @@ export function MiniGameResult({
   const insets = useSafeAreaInsets();
   const result = evaluateSession(session),
     score = session.score ?? result.score,
-    rating = ratingFor(score),
     saved = session.status !== 'active';
   return (
     <View
-      style={[s.overlay, { top: insets.top, bottom: insets.bottom }]}
+      style={[
+        s.overlay,
+        {
+          top: insets.top,
+          bottom: insets.bottom,
+          justifyContent: 'flex-end',
+          backgroundColor: '#02091444',
+        },
+      ]}
       accessibilityViewIsModal
     >
       <ScrollView
-        style={{ width: '100%', maxWidth: 460, maxHeight: '95%' }}
-        contentContainerStyle={s.card}
+        style={{ width: '100%', maxWidth: 460, maxHeight: '75%', flexGrow: 0 }}
+        contentContainerStyle={[
+          s.card,
+          { gap: 10, backgroundColor: '#091829F5' },
+        ]}
       >
-        {!reducedMotion && saved && score >= 60 && (
-          <View
-            pointerEvents="none"
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: -80,
-              height: 300,
-            }}
-          >
-            <LottieView
-              source={require('../../../assets/minigames/success.json')}
-              autoPlay
-              loop={false}
-              renderMode="HARDWARE"
-              style={{ width: '100%', height: '100%' }}
-            />
-          </View>
-        )}
         <Text style={s.eyebrow}>
           {practice
             ? 'PRACTICE RESULT'
@@ -72,21 +61,33 @@ export function MiniGameResult({
         <Text
           accessibilityRole="header"
           accessibilityLiveRegion="polite"
-          style={[s.title, { fontSize: 32 }]}
+          style={[s.title, { fontSize: 28 }]}
         >
           {session.status === 'forfeited'
             ? 'Forfeited'
-            : rating === 'perfect'
-              ? 'Perfect'
-              : rating === 'good'
-                ? 'Well played'
-                : rating === 'poor'
-                  ? 'A tough finish'
-                  : 'Challenge failed'}
+            : result.detail === 'Time expired'
+              ? 'Time up'
+              : session.kind === 'sports'
+                ? score >= 85
+                  ? 'Perfect!'
+                  : score >= 30
+                    ? 'Good shot!'
+                    : result.detail === 'The keeper makes the save'
+                      ? 'Saved!'
+                      : 'Missed!'
+                : session.kind === 'crime'
+                  ? score >= 30
+                    ? 'Safe opened'
+                    : 'Safe locked'
+                  : score >= 60
+                    ? 'Docked!'
+                    : score >= 30
+                      ? 'Rough docking'
+                      : 'Approach aborted'}
         </Text>
-        <Text style={{ color: c.gold, fontSize: 56, fontWeight: '800' }}>
+        <Text style={{ color: c.blue, fontSize: 30, fontWeight: '800' }}>
           {score}
-          <Text style={{ fontSize: 22 }}> / 100</Text>
+          <Text style={{ fontSize: 15 }}> / 100</Text>
         </Text>
         <Text style={s.text}>
           {session.status === 'forfeited'
@@ -111,9 +112,8 @@ export function MiniGameResult({
           />
         )}
         <GameButton
-          label={saved ? 'Return' : 'Exit & retry later'}
+          label={saved ? 'Continue' : 'Exit & retry later'}
           disabled={saving}
-          secondary
           onPress={onExit}
         />
         {practice && onRestart && (

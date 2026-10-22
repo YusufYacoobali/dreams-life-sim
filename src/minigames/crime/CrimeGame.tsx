@@ -1,15 +1,11 @@
 import React, { useEffect, useId, useState } from 'react';
-import { Platform, Text, useWindowDimensions, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import Svg, {
   Circle,
-  Defs,
   G,
-  Line,
-  LinearGradient,
+  Image as SvgImage,
   Path,
   Rect,
-  Stop,
-  Text as SvgText,
 } from 'react-native-svg';
 import Animated, {
   useAnimatedProps,
@@ -22,6 +18,8 @@ import { nativeSvgProps, svgMotion } from '../core/svgMotion';
 import { dialAngle, lockState, targetAngle } from './crimeLogic';
 import type { MiniGameAction, MiniGameSession } from '../core/types';
 import { GameButton } from '../components/GameButton';
+import { SceneCanvas } from '../components/SceneCanvas';
+import { sceneArt } from '../components/sceneArtwork';
 import { gameStyles as s, palette as c } from '../components/gameStyles';
 const svgAdapter = Platform.OS === 'web' ? undefined : nativeSvgProps;
 const MovingGroup = Animated.createAnimatedComponent(G);
@@ -38,13 +36,6 @@ export function CrimeGame({
   reducedMotion: boolean;
   onInput: (action: MiniGameAction, at: number) => void;
 }) {
-  const viewport = useWindowDimensions(),
-    sceneHeight = Math.max(
-      160,
-      viewport.height -
-        180 -
-        (session.assisted ? 225 : 165) * Math.max(1, viewport.fontScale),
-    );
   const id = useId().replace(/:/g, ''),
     state = lockState(session, session.inputs),
     [angle, setAngle] = useState(0),
@@ -66,194 +57,124 @@ export function CrimeGame({
     [session.assisted, angle, clock, session.difficulty],
     svgAdapter,
   );
-  const tremor = useAnimatedProps(
+  const door = useAnimatedProps(
     () => ({
       transform: svgMotion(
         shake.value,
         0,
         0,
-        1 - opening.value * 0.28,
+        1 - opening.value * 0.2,
         1,
-        38,
+        25,
         0,
       ),
     }),
     [shake, opening],
     svgAdapter,
   );
+  const warning = useAnimatedProps(() => ({ opacity: flash.value }), [flash]);
   useEffect(() => {
     if (state.suspicion && !reducedMotion) {
       shake.value = withSequence(
-        withTiming(-4, { duration: 55 }),
-        withTiming(4, { duration: 65 }),
-        withTiming(0, { duration: 65 }),
+        withTiming(-3, { duration: 60 }),
+        withTiming(3, { duration: 70 }),
+        withTiming(0, { duration: 90 }),
       );
       flash.value = withSequence(
-        withTiming(0.12, { duration: 50 }),
-        withTiming(0, { duration: 180 }),
+        withTiming(0.1, { duration: 65 }),
+        withTiming(0, { duration: 220 }),
       );
     }
   }, [state.suspicion, reducedMotion, shake, flash]);
   useEffect(() => {
     if (state.stage === 3)
-      opening.value = withTiming(1, { duration: reducedMotion ? 0 : 500 });
+      opening.value = withTiming(1, { duration: reducedMotion ? 0 : 650 });
   }, [state.stage, reducedMotion, opening]);
-  const warning = useAnimatedProps(() => ({ opacity: flash.value }), [flash]);
   const target = targetAngle(session.seed, Math.min(2, state.stage)),
     radians = ((target - 90) * Math.PI) / 180,
     tx = 200 + Math.cos(radians) * 137,
     ty = 262 + Math.sin(radians) * 137;
   return (
     <>
-      <View style={{ height: sceneHeight }}>
+      <SceneCanvas controlsHeight={session.assisted ? 245 : 185}>
         <Svg
           width="100%"
           height="100%"
           viewBox="0 0 400 560"
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid slice"
           accessible={false}
         >
-          <Defs>
-            <LinearGradient id={id + 'metal'} x1="0" y1="0" x2="1" y2="1">
-              <Stop stopColor="#425668" />
-              <Stop offset="0.45" stopColor="#1B2D3F" />
-              <Stop offset="1" stopColor="#091827" />
-            </LinearGradient>
-            <LinearGradient id={id + 'dial'} x1="0" y1="0" x2="1" y2="1">
-              <Stop stopColor="#CED5D4" />
-              <Stop offset="0.45" stopColor="#8C9B9F" />
-              <Stop offset="1" stopColor="#344A5B" />
-            </LinearGradient>
-          </Defs>
-          <Rect width="400" height="560" fill="#071422" />
-          <Path
-            d="M0 65L400 0M0 505L400 455"
-            stroke="#213548"
-            strokeWidth="1"
-          />
-          <Rect
-            x="24"
-            y="50"
-            width="352"
-            height="460"
-            rx="24"
-            fill="#263A4B"
-            stroke="#5B6A76"
-            strokeWidth="3"
-          />
-          <Rect x="38" y="65" width="324" height="430" rx="16" fill="#060E1A" />
-          <Rect
-            x="285"
-            y="130"
-            width="60"
-            height="280"
-            rx="6"
-            fill="#C7A568"
-            opacity="0.25"
-          />
-          <MovingGroup animatedProps={tremor}>
-            <Rect
-              x="38"
-              y="65"
-              width="324"
-              height="430"
-              rx="16"
-              fill={`url(#${id}metal)`}
-              stroke="#091725"
-              strokeWidth="6"
+          <Rect x="25" y="18" width="350" height="524" rx="10" fill="#03090F" />
+          <Path d="M60 380H349M60 425H349" stroke="#6F829344" strokeWidth="6" />
+          <MovingGroup animatedProps={door}>
+            <SvgImage
+              href={sceneArt.safe}
+              x="0"
+              y="0"
+              width="400"
+              height="560"
+              preserveAspectRatio="xMidYMid slice"
             />
-            {[0, 1, 2].map((i) => (
-              <G key={i}>
-                <Rect
-                  x="354"
-                  y={150 + i * 112}
-                  width={state.stage > i ? 10 : 26}
-                  height="30"
-                  rx="5"
-                  fill={state.stage > i ? c.green : '#77848A'}
-                />
-                <Circle
-                  cx={162 + i * 38}
-                  cy="95"
-                  r="7"
-                  fill={state.stage > i ? c.green : '#3A4E60'}
-                />
-              </G>
-            ))}
+            <Circle cx="200" cy="262" r="145" fill="#020A10" opacity="0.55" />
             <Circle
               cx="200"
               cy="262"
-              r="151"
-              fill="#091523"
-              stroke="#849295"
-              strokeWidth="2"
-            />
-            <Circle cx="200" cy="262" r="130" fill={`url(#${id}dial)`} />
-            {Array.from({ length: 48 }, (_, i) => {
-              const a = ((i * 7.5 - 90) * Math.PI) / 180;
-              return (
-                <Line
-                  key={i}
-                  x1={200 + Math.cos(a) * (i % 4 ? 114 : 107)}
-                  y1={262 + Math.sin(a) * (i % 4 ? 114 : 107)}
-                  x2={200 + Math.cos(a) * 123}
-                  y2={262 + Math.sin(a) * 123}
-                  stroke="#152B3C"
-                  strokeWidth={i % 4 ? 1 : 2}
-                />
-              );
-            })}
-            <Circle cx={tx} cy={ty} r="13" fill={c.gold} />
-            <Circle
-              cx={tx}
-              cy={ty}
-              r="21"
+              r="141"
+              stroke="#A0B6C4"
+              opacity="0.3"
+              strokeWidth="1"
               fill="none"
-              stroke={c.gold}
-              opacity="0.35"
-              strokeWidth="4"
             />
             <MovingGroup id={id + '-dial'} animatedProps={rotation}>
-              <Path d="M200 134L193 158H207Z" fill="#061633" />
-              <Circle
-                cx="200"
-                cy="262"
-                r="67"
-                fill="#243B4D"
-                stroke="#6C7F87"
-                strokeWidth="3"
+              <SvgImage
+                href={sceneArt.dial}
+                x="75"
+                y="137"
+                width="250"
+                height="250"
               />
-              <Path
-                d="M200 207V248"
-                stroke={c.gold}
-                strokeWidth="5"
-                strokeLinecap="round"
-              />
-              <Circle
-                cx="200"
-                cy="262"
-                r="18"
-                fill="#102635"
-                stroke="#87928F"
-                strokeWidth="2"
-              />
+              <Path d="M200 127L195 144H205Z" fill="#D8F3FF" />
             </MovingGroup>
-            <SvgText
-              x="200"
-              y="445"
-              textAnchor="middle"
-              fill={c.gold}
-              fontSize="11"
-              letterSpacing="4"
-            >
-              MERIDIAN SECURITY
-            </SvgText>
+            {state.stage < 3 && (
+              <G>
+                <Circle cx={tx} cy={ty} r="14" fill="#75E9B8" opacity="0.13" />
+                <Circle
+                  cx={tx}
+                  cy={ty}
+                  r="8"
+                  fill="none"
+                  stroke="#8CFFD0"
+                  strokeWidth="2"
+                />
+                <Circle cx={tx} cy={ty} r="2.5" fill="#D4FFEC" />
+              </G>
+            )}
+            {[0, 1, 2].map((i) => (
+              <G key={i}>
+                <Rect
+                  x="348"
+                  y={145 + i * 112}
+                  width={state.stage > i ? 9 : 23}
+                  height="26"
+                  rx="4"
+                  fill={state.stage > i ? '#6FC5AA' : '#75818B'}
+                  stroke="#B2CBD2"
+                  strokeWidth="0.5"
+                />
+                <Circle
+                  cx={176 + i * 24}
+                  cy="445"
+                  r="4"
+                  fill={state.stage > i ? '#88F7C4' : '#40515E'}
+                />
+              </G>
+            ))}
           </MovingGroup>
           <MovingGroup animatedProps={warning}>
             <Rect width="400" height="560" fill="#D73945" />
           </MovingGroup>
         </Svg>
-      </View>
+      </SceneCanvas>
       <View style={s.controls}>
         <View style={s.row}>
           {[0, 1, 2].map((i) => (
@@ -268,15 +189,19 @@ export function CrimeGame({
             </Text>
           ))}
         </View>
-        <Text style={s.text} accessibilityLiveRegion="polite">
+        <Text style={s.controlTitle} accessibilityLiveRegion="polite">
           {state.stage === 3
             ? 'All bolts released'
-            : `Target ${Math.round(target)}° · ${session.assisted ? 'Dial ' + angle + '°' : 'Tap when the pointer meets gold'}`}
+            : state.suspicion >= 100
+              ? 'Alarm triggered'
+              : `Target ${Math.round(target)}° · ${session.assisted ? 'Dial ' + angle + '°' : 'Meet the green marker'}`}
         </Text>
-        <View style={{ height: 7, backgroundColor: c.panel, borderRadius: 4 }}>
+        <View
+          style={{ height: 4, backgroundColor: '#233548', borderRadius: 4 }}
+        >
           <View
             style={{
-              height: 7,
+              height: 4,
               width: `${state.suspicion}%`,
               backgroundColor: c.red,
               borderRadius: 4,

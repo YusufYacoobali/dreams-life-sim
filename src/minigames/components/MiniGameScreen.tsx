@@ -36,6 +36,8 @@ import { SportsGame } from '../sports/SportsGame';
 import { CrimeGame } from '../crime/CrimeGame';
 import { DockingGame } from '../astronaut/DockingGame';
 import { GameButton } from './GameButton';
+import { SceneBackdrop, ScenePreview } from './SceneBackdrop';
+import { preloadSceneArt } from './sceneArtwork';
 import { MiniGameHUD } from './MiniGameHUD';
 import { MiniGameResult } from './MiniGameResult';
 import { gameStyles as s, palette as c } from './gameStyles';
@@ -68,11 +70,11 @@ type Props = {
 };
 const instructions = {
   sports:
-    'Drag the gold target into a corner. Watch the power bar, then shoot in the gold zone. Your keeper is moving — aim away from them.',
+    'Drag the green target into a corner, then set your aim. Stop the power indicator in the green zone to shoot. The goalkeeper is moving — aim away from them.',
   crime:
-    'Tap Lock alignment as the pointer meets the gold marker. Release three bolts before time runs out. Three mistakes trigger the alarm.',
+    'Tap Lock alignment as the pointer meets the green marker. Release three bolts before time runs out. Three mistakes trigger the alarm.',
   astronaut:
-    'Tap directional thrusters to change velocity. Line up with the blue port, then use downward thrust to brake. You keep drifting between taps.',
+    'Tap directional thrusters to change velocity. Line up with the green port, then use downward thrust to brake. You keep drifting between taps.',
 };
 
 export function MiniGameScreen(props: Props) {
@@ -85,7 +87,26 @@ export function MiniGameScreen(props: Props) {
     [assisted, setAssisted] = useState(feedback.reducedMotion),
     [countdown, setCountdown] = useState(3),
     [writing, setWriting] = useState(false),
-    [confirmForfeit, setConfirmForfeit] = useState(false);
+    [confirmForfeit, setConfirmForfeit] = useState(false),
+    [artReady, setArtReady] = useState(false),
+    [artError, setArtError] = useState(false),
+    [artRetry, setArtRetry] = useState(0);
+  useEffect(() => {
+    let live = true;
+    setArtReady(false);
+    setArtError(false);
+    void preloadSceneArt(kind).then(
+      () => {
+        if (live) setArtReady(true);
+      },
+      () => {
+        if (live) setArtError(true);
+      },
+    );
+    return () => {
+      live = false;
+    };
+  }, [kind, artRetry]);
   const playSound = useMiniGameAudio(kind);
   const clock = useSharedValue(session?.elapsedMs ?? 0),
     current = useRef(props),
@@ -156,8 +177,8 @@ export function MiniGameScreen(props: Props) {
         feedback.reducedMotion
           ? 0
           : current.current.kind === 'sports'
-            ? 900
-            : 550,
+            ? 1150
+            : 750,
       );
     },
     [clock, feedback.reducedMotion, saveResult],
@@ -184,7 +205,7 @@ export function MiniGameScreen(props: Props) {
     } else if (session.status !== 'active') setPhase('result');
   }, [session, clock]);
   useEffect(() => {
-    if (phase !== 'countdown') return;
+    if (phase !== 'countdown' || !artReady) return;
     setCountdown(3);
     let remaining = 3;
     const timer = setInterval(() => {
@@ -195,9 +216,10 @@ export function MiniGameScreen(props: Props) {
       } else setCountdown(remaining);
     }, 350);
     return () => clearInterval(timer);
-  }, [phase]);
+  }, [phase, artReady]);
   useEffect(() => {
-    if (phase !== 'playing' || !session || session.assisted) return;
+    if (phase !== 'playing' || !session || session.assisted || !artReady)
+      return;
     const total = durationMs[kind];
     clock.value = withTiming(
       total,
@@ -207,7 +229,7 @@ export function MiniGameScreen(props: Props) {
       },
     );
     return () => cancelAnimation(clock);
-  }, [phase, session?.id, session?.assisted, kind, clock, finish]);
+  }, [phase, session?.id, session?.assisted, kind, clock, finish, artReady]);
   useEffect(() => {
     if (
       session &&
@@ -330,33 +352,35 @@ export function MiniGameScreen(props: Props) {
       if (mounted.current) setWriting(false);
     }
   };
-  const enabled = phase === 'playing' && !writing && !busy;
+  const enabled = phase === 'playing' && !writing && !busy && artReady;
   return (
     <SafeAreaView style={s.screen} edges={['top', 'bottom', 'left', 'right']}>
+      <SceneBackdrop kind={kind} />
       <StatusBar style="light" />
       <View style={s.header}>
+        <GameButton
+          label="‹"
+          accessibilityLabel={session?.status === 'active' ? 'Pause' : 'Back'}
+          secondary
+          disabled={
+            writing ||
+            busy ||
+            (session?.status === 'active' &&
+              !['playing', 'countdown', 'finishing'].includes(phase))
+          }
+          onPress={() => {
+            if (session?.status === 'active') void pause();
+            else props.onExit();
+          }}
+        />
         <View style={{ flex: 1 }}>
           <Text style={s.eyebrow}>
             {practice ? 'DREAMS · PLAYGROUND' : 'DREAMS · CHALLENGE'}
           </Text>
-          <Text accessibilityRole="header" style={s.title}>
+          <Text accessibilityRole="header" style={[s.title, { fontSize: 17 }]}>
             {titles[kind]}
           </Text>
         </View>
-        {session?.status === 'active' && (
-          <GameButton
-            label="Pause"
-            secondary
-            disabled={
-              writing ||
-              busy ||
-              !['playing', 'countdown', 'finishing'].includes(phase)
-            }
-            onPress={() => {
-              void pause();
-            }}
-          />
-        )}
       </View>
       {session && (
         <MiniGameHUD
@@ -374,7 +398,7 @@ export function MiniGameScreen(props: Props) {
         style={{ flex: 1 }}
         contentContainerStyle={{
           flexGrow: 1,
-          minHeight: Math.max(430, height - 180),
+          minHeight: Math.max(430, height - insets.top - insets.bottom - 100),
         }}
         bounces={false}
       >
@@ -406,29 +430,18 @@ export function MiniGameScreen(props: Props) {
             />
           )
         ) : (
-          <View
-            style={{
-              flex: 1,
-              backgroundColor:
-                kind === 'crime'
-                  ? '#0A1929'
-                  : kind === 'sports'
-                    ? '#184C46'
-                    : '#071024',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Text style={{ fontSize: 90, color: c.gold }}>
-              {kind === 'sports' ? '◎' : kind === 'crime' ? '◉' : '✦'}
-            </Text>
-          </View>
+          <ScenePreview kind={kind} />
         )}
       </ScrollView>
       {phase === 'intro' && (
         <View style={overlay} accessibilityViewIsModal>
           <ScrollView
-            style={{ maxHeight: '95%', width: '100%', maxWidth: 460 }}
+            style={{
+              maxHeight: '95%',
+              flexGrow: 0,
+              width: '100%',
+              maxWidth: 460,
+            }}
             contentContainerStyle={s.card}
           >
             <Text style={s.eyebrow}>
@@ -469,9 +482,27 @@ export function MiniGameScreen(props: Props) {
                 {error ?? props.unavailable}
               </Text>
             )}
+            {artError && (
+              <>
+                <Text accessibilityRole="alert" style={s.text}>
+                  The scene could not be prepared. Your attempt has not started.
+                </Text>
+                <GameButton
+                  label="Reload artwork"
+                  secondary
+                  onPress={() => setArtRetry((value) => value + 1)}
+                />
+              </>
+            )}
             <GameButton
-              label={busy ? 'Saving attempt…' : 'Play'}
-              disabled={busy || writing || !!props.unavailable}
+              label={
+                busy
+                  ? 'Saving attempt…'
+                  : !artReady
+                    ? 'Preparing scene…'
+                    : 'Play'
+              }
+              disabled={busy || writing || !artReady || !!props.unavailable}
               onPress={() => {
                 feedback.buttonFeedback();
                 void props.onStart(assisted);
@@ -492,7 +523,7 @@ export function MiniGameScreen(props: Props) {
           </ScrollView>
         </View>
       )}
-      {phase === 'countdown' && (
+      {phase === 'countdown' && !artError && (
         <View style={overlay} accessibilityViewIsModal>
           <Text
             accessibilityRole="text"
@@ -504,10 +535,15 @@ export function MiniGameScreen(props: Props) {
           <Text style={s.text}>Get ready</Text>
         </View>
       )}
-      {phase === 'paused' && (
+      {phase === 'paused' && !artError && (
         <View style={overlay} accessibilityViewIsModal>
           <ScrollView
-            style={{ width: '100%', maxWidth: 460, maxHeight: '95%' }}
+            style={{
+              width: '100%',
+              maxWidth: 460,
+              maxHeight: '95%',
+              flexGrow: 0,
+            }}
             contentContainerStyle={s.card}
           >
             <Text style={s.eyebrow}>SAVED CHALLENGE</Text>
@@ -539,7 +575,7 @@ export function MiniGameScreen(props: Props) {
               <>
                 <GameButton
                   label={error ? 'Retry save & resume' : 'Resume'}
-                  disabled={busy || writing}
+                  disabled={busy || writing || !artReady}
                   onPress={() => {
                     void resume();
                   }}
@@ -622,6 +658,24 @@ export function MiniGameScreen(props: Props) {
           onExit={props.onExit}
           onRestart={props.onRestart}
         />
+      )}
+      {artError && phase !== 'intro' && (
+        <View style={overlay} accessibilityViewIsModal>
+          <View style={s.card}>
+            <Text style={s.text}>
+              The scene could not be prepared. Your saved progress is safe.
+            </Text>
+            <GameButton
+              label="Reload artwork"
+              onPress={() => setArtRetry((value) => value + 1)}
+            />
+            <GameButton
+              label="Exit with saved progress"
+              secondary
+              onPress={props.onExit}
+            />
+          </View>
+        </View>
       )}
     </SafeAreaView>
   );

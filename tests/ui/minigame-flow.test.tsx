@@ -77,6 +77,7 @@ jest.mock('../../src/ui/GodModeAccess', () => ({
   useGodModeAccess: () => mockAllowed,
 }));
 jest.mock('lottie-react-native', () => () => null);
+jest.mock('expo-asset', () => ({ Asset: { loadAsync: jest.fn(async () => []) } }));
 jest.mock('../../assets/minigames/sports.wav', () => 101);
 jest.mock('../../assets/minigames/crime.wav', () => 102);
 jest.mock('../../assets/minigames/astronaut.wav', () => 103);
@@ -212,7 +213,7 @@ test('assisted football uses real controls, commits a derived result and honours
   expect(mockHaptic).not.toHaveBeenCalled();
   expect(mockSound).not.toHaveBeenCalled();
   expect(screen.getByText('CHALLENGE SAVED')).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Return' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
   expect(mockBack).toHaveBeenCalledTimes(1);
 });
 
@@ -267,7 +268,8 @@ test('playground difficulty, input, forfeit and replay never dispatch a live com
   await show(<MiniGamePlayground />);
   fireEvent.press(screen.getByRole('radio', { name: 'Level 5' }));
   fireEvent.press(screen.getByText('Orbital Docking', { exact: true }));
-  fireEvent.press(screen.getByRole('button', { name: 'Play' }));
+  fireEvent.press(await screen.findByRole('button', { name: 'Play' }));
+  await act(async () => {});
   act(() => jest.advanceTimersByTime(1100));
   fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
   await act(async () => {});
@@ -278,6 +280,7 @@ test('playground difficulty, input, forfeit and replay never dispatch a live com
   await act(async () => {});
   expect(screen.getByText('PRACTICE RESULT')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: 'Play again' }));
+  await act(async () => {});
   act(() => jest.advanceTimersByTime(1100));
   expect(
     screen.getByRole('button', { name: 'Thrust right' }),
@@ -484,4 +487,56 @@ test('burglary consequences remain saved behind the challenge and present only a
   expect(screen.getByText('Saved legal scene')).toBeOnTheScreen();
   expect(mockStore.getState().world).toBe(world);
   expect(mockStore.getState().world!.pending).toBe(pending);
+});
+
+
+test('artwork must preload before a saved attempt starts and a failed preload can be retried', async () => {
+  await setup();
+  const load = jest.requireMock('expo-asset').Asset.loadAsync as jest.Mock;
+  load.mockRejectedValueOnce(Error('Local asset unavailable'));
+  await show(<LiveMiniGame />);
+  expect(screen.getByRole('button', { name: 'Preparing scene…' })).toBeDisabled();
+  expect(mockStore.getState().world!.miniGames).toHaveLength(0);
+  fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Play' })).toBeEnabled());
+  expect(mockStore.getState().world!.miniGames).toHaveLength(0);
+  await play();
+  expect(mockStore.getState().world!.miniGames).toHaveLength(1);
+});
+
+test('standard football confirms aim before showing power and submits the original typed shot', async () => {
+  await setup();
+  await show(<LiveMiniGame />);
+  fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
+  await play();
+  expect(screen.queryByRole('button', { name: 'Shoot' })).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
+  expect(screen.getByRole('button', { name: 'Shoot' })).toBeEnabled();
+  fireEvent.press(screen.getByRole('button', { name: 'Adjust aim' }));
+  expect(screen.queryByRole('button', { name: 'Shoot' })).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Set aim' }));
+  fireEvent.press(screen.getByRole('button', { name: 'Shoot' }));
+  await waitFor(() => expect(mockStore.getState().world!.miniGames[0].inputs).toHaveLength(1));
+  expect(mockStore.getState().world!.miniGames[0].inputs[0].action).toEqual({ type: 'shot', x: 0.8, y: 0.25 });
+  act(() => jest.advanceTimersByTime(1200));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Continue' })).toBeEnabled());
+  expect(mockStore.getState().world!.miniGames[0].status).toBe('completed');
+});
+
+
+test('a restored attempt can retry missing artwork before its paused controls become available', async () => {
+  await setup('crime');
+  const view = await show(<LiveMiniGame />);
+  await play();
+  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await waitFor(() => expect(mockStore.getState().world!.miniGames[0].paused).toBe(true));
+  const id = mockStore.getState().world!.miniGames[0].id;
+  view.unmount();
+  jest.requireMock('expo-asset').Asset.loadAsync.mockRejectedValueOnce(Error('Local asset unavailable'));
+  await show(<LiveMiniGame />);
+  expect(screen.queryByRole('button', { name: 'Resume' })).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: 'Reload artwork' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeEnabled());
+  expect(mockStore.getState().world!.miniGames).toHaveLength(1);
+  expect(mockStore.getState().world!.miniGames[0].id).toBe(id);
 });

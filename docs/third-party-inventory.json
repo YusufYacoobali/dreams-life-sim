@@ -23,7 +23,7 @@
     "readableNoticeFiles": 734,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1031
+    "projectArtFiles": 1043
   },
   "directDependencies": [
     {
@@ -27206,6 +27206,114 @@
       "sha256": "8973d44ad6d8a2c7c4e00e32f5e7b794e6efea1668e836e25b74c6bd304c5459",
       "referencedBy": [
         "src/ui/OpeningScene.tsx"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/ball.png",
+      "status": "present",
+      "bytes": 132954,
+      "sha256": "d77841c4c48e61f730d586ff3aa9b5ee2308cf923601ad0c93443f5d9214cd97",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/dial.png",
+      "status": "present",
+      "bytes": 274299,
+      "sha256": "68f408a9b4e75e2009f7f86218e39d20df044dd4701b0ff8a043bc1c85f80c79",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/earth.png",
+      "status": "present",
+      "bytes": 543763,
+      "sha256": "ce94671b018f7ece7ff8aac4989f1b19383c9af0b34701f148374053888095bf",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/goal.png",
+      "status": "present",
+      "bytes": 302419,
+      "sha256": "38222ca7bba14144da8b8796e7ec4e0f9be95fc7a65343793408f2304722481d",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/keeper-dive.png",
+      "status": "present",
+      "bytes": 161487,
+      "sha256": "80d614f25df0112bcf24a47cbfcc751147d0c2ebb5faa6fc880d3513c81aa203",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/keeper.png",
+      "status": "present",
+      "bytes": 167955,
+      "sha256": "be44d1095b61418160eb701b442ae10f18968c7470b630e4704a8e2d61f980e7",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/safe.webp",
+      "status": "present",
+      "bytes": 91578,
+      "sha256": "ba93a779e9feed387858923561efeee8983bc5d8cc4738749ebfb91172423ac5",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/ship.png",
+      "status": "present",
+      "bytes": 168939,
+      "sha256": "aabfe81bcd96fdec32b968450013e9ab83efe4e964d9e96f28e5404e9a6a3112",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/space.webp",
+      "status": "present",
+      "bytes": 24148,
+      "sha256": "ed90640243341bb9f8bd336fa053d6bd239bcbfcc04218b19c118d583fe6c6e3",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/stadium.webp",
+      "status": "present",
+      "bytes": 176526,
+      "sha256": "c67702531cd12f5a05c307867e92d7deb277b3008a9fc3c2015a173cba706211",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/station.png",
+      "status": "present",
+      "bytes": 400716,
+      "sha256": "73b94c67b0cc1ec661929fa9128b57cffd38be11ecb8fe229297c1f33859ca9e",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
+      ]
+    },
+    {
+      "path": "assets/minigames/art/thruster.png",
+      "status": "present",
+      "bytes": 44614,
+      "sha256": "4ff257d784e3468e9d0715014583d7b5214f31d7fd4d15e5c2e8114205a25424",
+      "referencedBy": [
+        "src/minigames/components/sceneArtwork.ts"
       ]
     }
   ],

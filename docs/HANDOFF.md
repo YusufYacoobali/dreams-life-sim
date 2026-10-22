@@ -4,6 +4,10 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
+## Current mini-game visual overhaul — 22 October
+
+All three live mini-games now use original Image Gen environment plates and transparent animated sprites, including Safe Cracker as the user requested. Compact blue controls, staged football aiming/power, recorded-outcome result cards, preloading/retry and correct leftward keeper mirroring replace the procedural scene construction. No Krea generation, gameplay/save changes or additional runtime packages. See [current report](MINIGAMES.md), [art provenance](../assets/minigames/art/README.md) and [overhaul verification](verification/minigame-overhaul-20261022/README.md). The preceding full regression/soak results below retain their original source scope; the presentation change has focused tests and fresh native Hermes exports, with physical-device acceptance outstanding.
+
 ## Current mini-games — 22 October
 
 Clutch Shot, Safe Cracker and Orbital Docking are playable full-screen challenges connected to actual athlete seasons, the existing burglary/legal pipeline and orbital/habitat astronaut assignments. Typed saved transcripts, deterministic scoring, pause/background recovery, one-time bounded modifiers, explicit forfeits and transaction/idempotency protections are implemented. Internal God Mode adds a practice-only playground at difficulty 1–5. Existing cinematics and the subsequent avatar, End This Life and birth-journal work are retained.

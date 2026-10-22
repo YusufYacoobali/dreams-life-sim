@@ -1,5 +1,9 @@
 # Dreams: Life Simulator — progress and verification
 
+## Mini-game visual overhaul — 22 October
+
+Clutch Shot, Orbital Docking and Safe Cracker now use Image Gen artwork with separate animated layers. Football has aim/power stages; compact controls/results expose the actual recorded outcome. Preloading gates Play and supports retry without consuming an attempt. Thirty-seven focused tests pass, including native worklet mirroring and the existing live save/legal/career integration, plus types/import checks and fresh native production exports. Browser reports at three sizes are [recorded here](verification/minigame-overhaul-20261022/README.md). Gameplay physics, scoring, saves and ordinary entry points are retained. Device release/FPS acceptance remains outstanding; unchanged broad regression and soak were not repeated.
+
 ## Interactive mini-games — 22 October
 
 All three games are implemented with real input, local SVG/Reanimated presentation, preference-aware feedback and accessible assisted controls. Athlete challenges modify one actual match period; Safe Cracker reserves and resolves the ordinary yearly burglary attempt through existing legal consequences; docking modifies one eligible orbital/habitat mission period while preserving six-month assignments, pay and accident risks. Saved transcripts, pause/background recovery, forfeit, completion receipts and Time Machine branches prevent replay farming. Internal God Mode offers an isolated level 1–5 playground.

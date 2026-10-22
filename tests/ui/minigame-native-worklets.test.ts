@@ -202,6 +202,8 @@ test.each(
             name.startsWith('react/jsx-')
           )
             return require(name);
+          if (name.endsWith('/sceneArtwork')) return { sceneArt: new Proxy({}, { get: () => 1 }) };
+          if (name.endsWith('/SceneCanvas')) return { SceneCanvas: 'SceneCanvas' };
           if (name.endsWith('/GameButton')) return { GameButton: 'GameButton' };
           if (name.endsWith('/gameStyles'))
             return {
@@ -244,6 +246,17 @@ test.each(
         expect(props).not.toHaveProperty('transform');
         expect(props.matrix).toHaveLength(6);
         expect(props.matrix.every(Number.isFinite)).toBe(true);
+      }
+      if (name === 'SportsGame') {
+        captured.length = 0;
+        load(join(__dirname, '../../src/minigames', file))[name]({
+          session: { ...session, inputs: [{ at: 1200, action: { type: 'shot', x: 0.1, y: 0.6 } }] },
+          clock: { value: 1200 }, enabled: true, reducedMotion: false, onInput: () => {},
+        });
+        const keeper = captured.find(props => props.matrix)!.matrix;
+        // Leftward dives mirror only horizontally; the keeper stays upright.
+        expect(keeper[0]).toBe(-1);
+        expect(keeper[3]).toBe(1);
       }
     }
   },

@@ -1,7 +1,9 @@
-# Local mini-game effects
+# Local mini-game assets
 
-`sports.wav`, `crime.wav` and `astronaut.wav` are short synthesized cues authored by `tools/generate-minigame-effects.py`. `success.json` is a small authored Lottie particle burst. There are no sampled recordings, fonts or third-party visual assets in this directory.
+`art/` contains the new layered scene artwork created with Image Gen. Its [provenance and optimization record](art/README.md) and [binary manifest](art/manifest.json) cover all twelve bundled images.
 
-All files are bundled for offline playback. Sound obeys the existing sound-effects preference; the decorative Lottie effect is omitted with Reduced Motion. Gameplay artwork is static SVG geometry in `src/minigames/`.
+`sports.wav`, `crime.wav` and `astronaut.wav` are short synthesized cues authored by `tools/generate-minigame-effects.py`. They respect the saved sound-effects preference. `success.json` is the earlier authored Lottie burst, retained for generator compatibility; the compact result panel no longer plays it.
 
-Regenerate with `python tools/generate-minigame-effects.py`; verify exact output with `--check`. Implementation and verification limits are documented in [MINIGAMES.md](../../docs/MINIGAMES.md).
+All active artwork and audio are bundled locally. No generation or external asset request occurs during play. SVG is used for targets, guides, progress and small effects; Reanimated moves the separate sprites.
+
+Regenerate the original effects with `python tools/generate-minigame-effects.py`; verify with `--check`. See [MINIGAMES.md](../../docs/MINIGAMES.md) for controls, integration and verification limits.

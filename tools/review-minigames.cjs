@@ -83,7 +83,7 @@ fs.mkdirSync(output, { recursive: true });
         },
       },
     ],
-    loader: { '.js': 'jsx', '.ttf': 'file', '.png': 'file', '.wav': 'file' },
+    loader: { '.js': 'jsx', '.ttf': 'file', '.png': 'file', '.webp': 'file', '.wav': 'file' },
   });
   fs.writeFileSync(
     path.join(output, 'index.html'),
@@ -100,7 +100,7 @@ fs.mkdirSync(output, { recursive: true });
       'Content-Type',
       file.endsWith('.js')
         ? 'text/javascript'
-        : file.endsWith('.png')
+        : file.endsWith('.webp') ? 'image/webp' : file.endsWith('.png')
           ? 'image/png'
           : file.endsWith('.ttf')
             ? 'font/ttf'
@@ -148,14 +148,19 @@ fs.mkdirSync(output, { recursive: true });
       });
       await page.getByRole('button', { name: 'Play', exact: true }).click();
       await page.waitForTimeout(1100);
+      if (kind === 'sports') {
+        const box = await page.locator('svg[viewBox="0 0 400 560"]').boundingBox();
+        const scale = Math.min(box.width / 400, box.height / 560),
+          ox = box.x + (box.width - 400 * scale) / 2,
+          oy = box.y + (box.height - 560 * scale) / 2;
+        await page.mouse.move(ox + 301 * scale, oy + 155 * scale);
+        await page.mouse.down();
+        await page.mouse.move(ox + 321 * scale, oy + 137 * scale, { steps: 8 });
+        await page.mouse.up();
+      }
       await page.screenshot({ path: path.join(output, kind + '-playing.png') });
       if (kind === 'sports') {
-        await page
-          .getByRole('button', { name: 'Aim right', exact: true })
-          .click();
-        await page
-          .getByRole('button', { name: 'Aim higher', exact: true })
-          .click();
+        await page.getByRole('button', { name: 'Set aim', exact: true }).click();
         await page.waitForFunction(
           () => {
             const rect = document.querySelector('[id$="-power"]');
@@ -169,6 +174,8 @@ fs.mkdirSync(output, { recursive: true });
           { timeout: 9000 },
         );
         await page.getByRole('button', { name: 'Shoot', exact: true }).click();
+        await page.waitForTimeout(550);
+        await page.screenshot({ path: path.join(output, 'sports-shot.png') });
       } else if (kind === 'crime') {
         for (let i = 0; i < 3; i++) {
           const line = await page.getByText(/^Target \d+°/).textContent(),
@@ -241,6 +248,10 @@ fs.mkdirSync(output, { recursive: true });
         .isChecked(),
     };
     await page.screenshot({ path: path.join(output, 'reduced-motion.png') });
+    report.artwork = await page.evaluate(() => ({
+      loaded: Array.from(document.images).every(image => image.complete && image.naturalWidth > 0),
+      localOnly: performance.getEntriesByType('resource').filter(item => /\.(png|webp)/.test(item.name)).every(item => new URL(item.name).origin === location.origin),
+    }));
     report.errors = errors;
     fs.writeFileSync(
       path.join(output, 'browser-checks.json'),

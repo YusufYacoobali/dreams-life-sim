@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-22",
+  "branch": "work",
+  "scope": "Mini-game visual overhaul, original Image Gen art and compact controls; gameplay domain, scoring, physics and save format unchanged.",
+  "referenceImageAvailable": false,
+  "kreaGenerationUsed": false,
+  "checks": {
+    "typecheck": "passed (app and tests)",
+    "imports": {
+      "status": "passed",
+      "modules": 428,
+      "cycles": []
+    },
+    "featureTests": {
+      "status": "passed",
+      "suites": 4,
+      "cases": 37,
+      "seconds": 14.109,
+      "log": "/tmp/dreams-mini-overhaul-complete-tests.log"
+    },
+    "notices": "passed",
+    "authoredEffects": "passed",
+    "diffWhitespace": "passed",
+    "androidIosHermesExport": "passed, exit 0",
+    "fullRegressionAndSoak": "not repeated for this presentation-only change; previous records retain original source scope"
+  },
+  "exports": [
+    {
+      "platform": "android",
+      "file": "_expo/static/js/android/entry-935e6cf23553835c3b9b27020eed8370.hbc",
+      "bytes": 8337560,
+      "sha256": "1b34b6bb0fcb14e408191b156e3a302d89d99f1aae91e031efe708543fc8107c"
+    },
+    {
+      "platform": "ios",
+      "file": "_expo/static/js/ios/entry-eda7a1642eff629b1d194fa14bcfee56.hbc",
+      "bytes": 8136885,
+      "sha256": "7d5d24b988cb8939843694a49cff9dd10892122d5878ead22ec56caf696633ae"
+    }
+  ],
+  "artManifest": "../../../assets/minigames/art/manifest.json",
+  "browser": {
+    "phone": {
+      "renderer": "Chromium/react-native-web; real gameplay components, practice state only",
+      "nativeDevice": false,
+      "viewport": "400x900",
+      "scenarios": [
+        {
+          "kind": "sports",
+          "played": true,
+          "result": "\nPerfect!\n98 / 100\nTop corner. Unstoppable.\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "crime",
+          "played": true,
+          "result": "\nSafe opened\n94 / 100\nAll three bolts released\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "astronaut",
+          "played": true,
+          "result": "\nDocked!\n98 / 100\nA perfect, soft capture\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        }
+      ],
+      "reducedMotion": {
+        "assistedDefault": true
+      },
+      "artwork": {
+        "loaded": true,
+        "localOnly": true
+      },
+      "errors": []
+    },
+    "small": {
+      "renderer": "Chromium/react-native-web; real gameplay components, practice state only",
+      "nativeDevice": false,
+      "viewport": "320x568",
+      "scenarios": [
+        {
+          "kind": "sports",
+          "played": true,
+          "result": "\nPerfect!\n98 / 100\nTop corner. Unstoppable.\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "crime",
+          "played": true,
+          "result": "\nSafe opened\n90 / 100\nAll three bolts released\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "astronaut",
+          "played": true,
+          "result": "\nDocked!\n98 / 100\nA perfect, soft capture\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        }
+      ],
+      "reducedMotion": {
+        "assistedDefault": true
+      },
+      "artwork": {
+        "loaded": true,
+        "localOnly": true
+      },
+      "errors": []
+    },
+    "tablet": {
+      "renderer": "Chromium/react-native-web; real gameplay components, practice state only",
+      "nativeDevice": false,
+      "viewport": "768x1024",
+      "scenarios": [
+        {
+          "kind": "sports",
+          "played": true,
+          "result": "\nPerfect!\n98 / 100\nTop corner. Unstoppable.\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "crime",
+          "played": true,
+          "result": "\nSafe opened\n95 / 100\nAll three bolts released\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        },
+        {
+          "kind": "astronaut",
+          "played": true,
+          "result": "\nDocked!\n99 / 100\nA perfect, soft capture\nPractice only. No saved life, money, skills or records are changed.\nContinue\nPlay again"
+        }
+      ],
+      "reducedMotion": {
+        "assistedDefault": true
+      },
+      "artwork": {
+        "loaded": true,
+        "localOnly": true
+      },
+      "errors": []
+    }
+  },
+  "runtimeSourceSha256": {
+    "src/minigames/LiveMiniGame.tsx": "fe886f5c9c13c29561b07ef98257c471cb1934806ab57602f12e77ea1f83edd6",
+    "src/minigames/MiniGamePlayground.tsx": "a1e9c585fe4ab755bf783389e4ca257d726823202f2c2565f434848846e4fd0e",
+    "src/minigames/astronaut/DockingGame.tsx": "1ebe9dcfa28095aa417b1e42b667b8a985505332e9c59127a51b5abf783d3934",
+    "src/minigames/astronaut/dockingPhysics.ts": "5b6c25a5f0747ac97e6ad54c018978f209d402e19f2074bf5683a371d9847723",
+    "src/minigames/components/GameButton.tsx": "a7673a300f1ec7146694501f739af9e6e7d21d7741b2ac6b65ac18475d239750",
+    "src/minigames/components/MiniGameEntry.tsx": "242633d5de8f64674cdc33afd01269bd8bb7cb3582abf64075f6dcbfcf3edae4",
+    "src/minigames/components/MiniGameHUD.tsx": "f2d2739e6f7f37261c24411aa1462b34f66d046e266c129a96c09c554e6bcb3f",
+    "src/minigames/components/MiniGameResult.tsx": "d08ef64d1c39bdab8b90de209afe0b6ab1c3ebcef5a0e6e5fef2fdfc23f73f1f",
+    "src/minigames/components/MiniGameScreen.tsx": "91cb5084ece12d282309328fa5a02eeb6a59e186f0d5ec599f645e25c3cf13fa",
+    "src/minigames/components/SceneBackdrop.tsx": "b0a660801e8f87b8d84e63001e8eae63f357376745d1d2cb1660a0810bd334cd",
+    "src/minigames/components/SceneCanvas.tsx": "210cea27ded86c80b500044870ccc52451ff5c859419493be1d90c0b241799a3",
+    "src/minigames/components/gameStyles.ts": "fb390bddb3981e08a440bb9f27f43f54e5f3ad098747d6e5ed18f1a24404d35f",
+    "src/minigames/components/sceneArtwork.ts": "b85f5665532987b33fec99f834be28a60034ddbfe9753ebc6aaec6de25c28c92",
+    "src/minigames/core/difficulty.ts": "c2387b242c468b1a38e52893b71c6035bffd285637f7df8ad6d8843f5863d936",
+    "src/minigames/core/eligibility.ts": "e7c44ed1be2d0fd9a35ceb8739a54a698a7a6b4f13b0ef824cba6a230c90a3b3",
+    "src/minigames/core/evaluation.ts": "b66504d9ca14fc3f06bfc11d19db23b37ca2da24542fcd183ff16ebbfc24eac6",
+    "src/minigames/core/modifiers.ts": "1213b21f99a501feb0881c4d2d8a2d00f675ed4c8fa4cb2054e9f94a27e3f772",
+    "src/minigames/core/scoring.ts": "fc962b56552955802b19385752643d8d5f9e2ba9e1738f9ca0d9cab73adc43e2",
+    "src/minigames/core/session.ts": "bb6cf00b4f6d0eb7d6a623a780aad244092ee18ff02cfd19ec9b45b6379d0360",
+    "src/minigames/core/svgMotion.ts": "a966153bf3e585d8e354fdbc8741e6344406e39ab546ddcebc8805bb5176d381",
+    "src/minigames/core/types.ts": "2b3b548184457347a8944c2c224116de22c0d6e649b8920133e01a85fd64cdd7",
+    "src/minigames/core/useMiniGameAudio.ts": "5feedf1aea905d223f2a9db6efa18bc7c4b517c68883a344dedf0083b9383d9e",
+    "src/minigames/core/validation.ts": "9a3a691ee96096a2f836ef06b0706eade110cd4903b551d39166f226c8be3a5b",
+    "src/minigames/crime/CrimeGame.tsx": "763652b173eb55c9ecbdcee4ceef63ef7938a4781416fd12eba2c5dd7a311b0c",
+    "src/minigames/crime/crimeLogic.ts": "cb68ba82843a096b8584950fd78503607358d3e7c14036a39d28a59ca3d35161",
+    "src/minigames/sports/SportsGame.tsx": "41f463fdfef64329bb9289b743e08cb8a254ce48916ad3c25e806484dcdce5b7",
+    "src/minigames/sports/sportsLogic.ts": "98c16331cd72eb366214bc58d28022da14c1ca002c50ba60d15b8e8dc3a08d77"
+  },
+  "deviceAcceptance": {
+    "performed": false,
+    "unverified": [
+      "installed Android/iOS release interaction",
+      "physical-device 60 FPS/frame pacing",
+      "spoken VoiceOver/TalkBack",
+      "physical audio/haptic feel"
+    ]
+  },
+  "browserSourceScope": "Final visual/layout source. Subsequent nonvisual changes add artwork-recovery overlay ordering and retain aim on gesture cancellation; those paths are covered by the final component/worklet tests and production exports."
+}

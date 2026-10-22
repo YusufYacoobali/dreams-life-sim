@@ -1,23 +1,13 @@
 import React, { useEffect, useId, useMemo, useState } from 'react';
-import {
-  PanResponder,
-  Platform,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { PanResponder, Platform, Text, View } from 'react-native';
 import Svg, {
   Circle,
-  Defs,
   Ellipse,
   G,
+  Image as SvgImage,
   Line,
-  LinearGradient,
   Path,
-  Polygon,
   Rect,
-  Stop,
-  Text as SvgText,
 } from 'react-native-svg';
 import Animated, {
   Easing,
@@ -30,10 +20,13 @@ import { nativeSvgProps, svgMotion } from '../core/svgMotion';
 import { evaluateShot, keeperPosition, shotPower } from './sportsLogic';
 import type { MiniGameAction, MiniGameSession } from '../core/types';
 import { GameButton } from '../components/GameButton';
+import { SceneCanvas } from '../components/SceneCanvas';
+import { sceneArt } from '../components/sceneArtwork';
 import { gameStyles as s, palette as c } from '../components/gameStyles';
 const svgAdapter = Platform.OS === 'web' ? undefined : nativeSvgProps;
 const MovingGroup = Animated.createAnimatedComponent(G),
-  MovingRect = Animated.createAnimatedComponent(Rect);
+  MovingRect = Animated.createAnimatedComponent(Rect),
+  MovingLine = Animated.createAnimatedComponent(Line);
 export function SportsGame({
   session,
   clock,
@@ -47,16 +40,10 @@ export function SportsGame({
   reducedMotion: boolean;
   onInput: (action: MiniGameAction, at: number) => void;
 }) {
-  const viewport = useWindowDimensions(),
-    sceneHeight = Math.max(
-      160,
-      viewport.height -
-        180 -
-        (session.assisted ? 340 : 275) * Math.max(1, viewport.fontScale),
-    );
   const id = useId().replace(/:/g, ''),
     [aim, setAim] = useState({ x: 0.8, y: 0.25 }),
     [power, setPower] = useState(0.78),
+    [stage, setStage] = useState<'aim' | 'power'>('aim'),
     [size, setSize] = useState({ width: 400, height: 560 });
   const targetX = useSharedValue(32 + aim.x * 336),
     targetY = useSharedValue(112 + aim.y * 170),
@@ -69,44 +56,36 @@ export function SportsGame({
   useEffect(() => {
     if (shot)
       flight.value = withTiming(1, {
-        duration: reducedMotion ? 0 : 850,
+        duration: reducedMotion ? 0 : 1050,
         easing: Easing.out(Easing.cubic),
       });
   }, [shot, flight, reducedMotion]);
-  const savedShot = shot?.action.type === 'shot' ? shot.action : null;
-  const releasedPower = shot
-    ? session.assisted
-      ? (savedShot?.power ?? 0.5)
-      : shotPower(shot.at)
-    : 0.5;
-  const endX = 32 + (savedShot?.x ?? aim.x) * 336,
+  const savedShot = shot?.action.type === 'shot' ? shot.action : null,
+    releasedPower = shot
+      ? session.assisted
+        ? (savedShot?.power ?? 0.5)
+        : shotPower(shot.at)
+      : 0.5,
+    outcome = shot ? evaluateShot(session, shot) : null,
+    caught = outcome?.detail === 'The keeper makes the save',
+    goal = !!outcome && outcome.score >= 30,
+    endX = 32 + (savedShot?.x ?? aim.x) * 336,
     endY =
       releasedPower > 0.97
-        ? 78
+        ? 88
         : releasedPower < 0.12
-          ? 360
-          : 112 + (savedShot?.y ?? aim.y) * 170;
-  const keeperAtRelease = keeperPosition(
+          ? 390
+          : 112 + (savedShot?.y ?? aim.y) * 170,
+    keeperAtRelease = keeperPosition(
       session.assisted ? 0 : (shot?.at ?? 0),
       session.seed,
       session.difficulty,
     ),
-    caught =
-      !!savedShot &&
-      releasedPower >= 0.12 &&
-      releasedPower <= 0.97 &&
-      savedShot.x >= 0.08 &&
-      savedShot.x <= 0.92 &&
-      savedShot.y > 0.24 &&
-      savedShot.y <= 0.9 &&
-      Math.abs(savedShot.x - keeperAtRelease) <
-        0.09 + session.difficulty * 0.012;
-  const diveSign = savedShot && savedShot.x < keeperAtRelease ? -1 : 1,
-    keeperEndY = caught ? endY - 23 : 220;
-  const diveX = savedShot
-    ? (savedShot.x - keeperAtRelease) * (caught ? 1 : 0.6) -
-      (caught ? (diveSign * 36) / 336 : 0)
-    : 0;
+    diveSign = savedShot && savedShot.x < keeperAtRelease ? -1 : 1,
+    diveX = savedShot
+      ? (savedShot.x - keeperAtRelease) * (caught ? 1 : 0.65) -
+        (caught ? (diveSign * 58) / 336 : 0)
+      : 0;
   const keeper = useAnimatedProps(
     () => ({
       transform: svgMotion(
@@ -119,15 +98,18 @@ export function SportsGame({
                 session.difficulty,
               )) *
             336,
-        232 + (keeperEndY - 232) * flight.value,
-        diveSign * 32 * flight.value,
+        242 + (caught ? endY + 38 - 242 : -9) * flight.value,
+        shot ? diveSign * -10 * flight.value : 0,
+        shot ? diveSign : 1,
+        1,
       ),
     }),
     [
       shot,
       keeperAtRelease,
       diveX,
-      keeperEndY,
+      caught,
+      endY,
       diveSign,
       flight,
       session.assisted,
@@ -137,42 +119,67 @@ export function SportsGame({
     ],
     svgAdapter,
   );
+  const idle = useAnimatedProps(
+    () => ({ opacity: 1 - Math.min(1, flight.value * 5) }),
+    [flight],
+  );
+  const dive = useAnimatedProps(
+    () => ({ opacity: Math.min(1, flight.value * 5) }),
+    [flight],
+  );
   const target = useAnimatedProps(
-    () => ({ transform: svgMotion(targetX.value, targetY.value) }),
-    [targetX, targetY],
+    () => ({
+      transform: svgMotion(targetX.value, targetY.value),
+      opacity: shot ? 0 : 1,
+    }),
+    [targetX, targetY, shot],
     svgAdapter,
+  );
+  const guide = useAnimatedProps(
+    () => ({
+      d: `M200 480 Q${(200 + targetX.value) / 2} 310 ${targetX.value} ${targetY.value}`,
+    }),
+    [targetX, targetY],
   );
   const ball = useAnimatedProps(
     () => ({
       transform: svgMotion(
         200 + (endX - 200) * flight.value,
-        470 +
-          (endY - 470) * flight.value -
-          Math.sin(flight.value * Math.PI) * 75,
-        flight.value * 300,
-        1 - flight.value * 0.6,
+        480 +
+          (endY - 480) * flight.value -
+          Math.sin(flight.value * Math.PI) * 72,
+        flight.value * 290,
+        1 - flight.value * 0.67,
       ),
     }),
     [endX, endY, flight],
     svgAdapter,
   );
-  const cheering = !!shot && evaluateShot(session, shot).score >= 30;
-  const crowd = useAnimatedProps(
+  const shadow = useAnimatedProps(
+    () => ({
+      transform: svgMotion(
+        200 + (endX - 200) * flight.value,
+        498 + (275 - 498) * flight.value,
+        0,
+        1 - flight.value * 0.65,
+      ),
+      opacity: 0.32 - Math.sin(flight.value * Math.PI) * 0.24,
+    }),
+    [endX, flight],
+    svgAdapter,
+  );
+  const net = useAnimatedProps(
     () => ({
       transform: svgMotion(
         0,
-        cheering && !reducedMotion ? -Math.sin(flight.value * Math.PI) * 3 : 0,
+        goal && !reducedMotion
+          ? Math.sin(flight.value * Math.PI * 5) *
+              Math.max(0, flight.value - 0.65) *
+              7
+          : 0,
       ),
     }),
-    [cheering, reducedMotion, flight],
-    svgAdapter,
-  );
-  const callout = useAnimatedProps(
-    () => ({
-      opacity: flight.value,
-      transform: svgMotion(0, 8 * (1 - flight.value)),
-    }),
-    [flight],
+    [goal, reducedMotion, flight],
     svgAdapter,
   );
   const meter = useAnimatedProps(
@@ -181,48 +188,41 @@ export function SportsGame({
     }),
     [session.assisted, power, clock],
   );
-  const drag = useMemo(
-    () =>
-      PanResponder.create({
-        onStartShouldSetPanResponder: () =>
-          enabled && !shot && !session.assisted,
-        onMoveShouldSetPanResponder: () =>
-          enabled && !shot && !session.assisted,
-        onPanResponderGrant: (event) =>
-          setAim({
-            x: Math.max(
-              0.01,
-              Math.min(
-                0.99,
-                ((event.nativeEvent.locationX / size.width) * 400 - 32) / 336,
-              ),
-            ),
-            y: Math.max(
-              0.01,
-              Math.min(
-                0.99,
-                ((event.nativeEvent.locationY / size.height) * 560 - 112) / 170,
-              ),
-            ),
-          }),
-        onPanResponderMove: (event) => {
-          targetX.value = Math.max(
-            35,
-            Math.min(365, (event.nativeEvent.locationX / size.width) * 400),
-          );
-          targetY.value = Math.max(
-            114,
-            Math.min(279, (event.nativeEvent.locationY / size.height) * 560),
-          );
-        },
-        onPanResponderRelease: () =>
-          setAim({
-            x: (targetX.value - 32) / 336,
-            y: (targetY.value - 112) / 170,
-          }),
-      }),
-    [enabled, shot, session.assisted, size, targetX, targetY],
+  const indicator = useAnimatedProps(
+    () => ({
+      x1: (session.assisted ? power : shotPower(clock.value)) * 260,
+      x2: (session.assisted ? power : shotPower(clock.value)) * 260,
+    }),
+    [session.assisted, power, clock],
   );
+  const drag = useMemo(() => {
+    const locate = (x: number, y: number) => {
+      const scale = Math.min(size.width / 400, size.height / 560),
+        ox = (size.width - 400 * scale) / 2,
+        oy = (size.height - 560 * scale) / 2;
+      targetX.value = Math.max(35, Math.min(365, (x - ox) / scale));
+      targetY.value = Math.max(114, Math.min(279, (y - oy) / scale));
+    };
+    return PanResponder.create({
+      onStartShouldSetPanResponder: () => enabled && !shot && stage === 'aim',
+      onMoveShouldSetPanResponder: () => enabled && !shot && stage === 'aim',
+      onPanResponderGrant: (e) =>
+        locate(e.nativeEvent.locationX, e.nativeEvent.locationY),
+      onPanResponderMove: (e) =>
+        locate(e.nativeEvent.locationX, e.nativeEvent.locationY),
+      onPanResponderRelease: () =>
+        setAim({
+          x: (targetX.value - 32) / 336,
+          y: (targetY.value - 112) / 170,
+        }),
+      onPanResponderTerminate: () =>
+        setAim({
+          x: (targetX.value - 32) / 336,
+          y: (targetY.value - 112) / 170,
+        }),
+      onPanResponderTerminationRequest: () => false,
+    });
+  }, [enabled, shot, stage, size, targetX, targetY]);
   const adjust = (x: number, y: number) =>
     setAim((previous) => ({
       x: Math.max(0.05, Math.min(0.95, previous.x + x)),
@@ -230,265 +230,187 @@ export function SportsGame({
     }));
   return (
     <>
-      <View
-        style={{ height: sceneHeight }}
-        onLayout={(event) => setSize(event.nativeEvent.layout)}
+      <SceneCanvas
+        controlsHeight={session.assisted ? 280 : 140}
+        onLayout={(e) => setSize(e.nativeEvent.layout)}
         {...drag.panHandlers}
-        accessible={false}
       >
         <Svg
           width="100%"
           height="100%"
           viewBox="0 0 400 560"
-          preserveAspectRatio="none"
+          pointerEvents="none"
           accessible={false}
         >
-          <Defs>
-            <LinearGradient id={id + 'sky'} x1="0" y1="0" x2="0" y2="1">
-              <Stop stopColor="#122C53" />
-              <Stop offset="1" stopColor="#526D89" />
-            </LinearGradient>
-            <LinearGradient id={id + 'pitch'} x1="0" y1="0" x2="0" y2="1">
-              <Stop stopColor="#266B59" />
-              <Stop offset="1" stopColor="#0C453D" />
-            </LinearGradient>
-          </Defs>
-          <Rect width="400" height="560" fill={`url(#${id}sky)`} />
-          <Path d="M0 64 Q200 140 400 64V238H0Z" fill="#10223D" />
-          <MovingGroup animatedProps={crowd}>
-            {[0, 1, 2, 3].map((row) => (
-              <G key={row}>
-                {Array.from({ length: 30 }, (_, i) => (
-                  <Circle
-                    key={i}
-                    cx={i * 14 - 4}
-                    cy={106 + row * 25 + Math.sin(i) * 4}
-                    r={2.2}
-                    fill={['#DBBC7B', '#739AB1', '#BAA9A2'][i % 3]}
-                    opacity={0.5 + row * 0.08}
-                  />
-                ))}
-              </G>
-            ))}
+          <MovingGroup animatedProps={net}>
+            <SvgImage
+              href={sceneArt.goal}
+              x="49"
+              y="118"
+              width="302"
+              height="159"
+            />
           </MovingGroup>
-          <Path d="M0 235H400V560H0Z" fill={`url(#${id}pitch)`} />
-          <Path
-            d="M35 560L130 275H270L365 560M0 362H400M125 560Q200 410 275 560"
-            fill="none"
-            stroke="#B4E0C1"
-            strokeWidth="2"
-            opacity="0.5"
-          />
-          <Rect
-            x="58"
-            y="126"
-            width="284"
-            height="140"
-            rx="3"
-            fill="#112C34"
-            opacity="0.7"
-          />
-          {Array.from({ length: 15 }, (_, i) => (
-            <Line
-              key={i}
-              x1={58 + i * 20}
-              x2={58 + i * 20}
-              y1="126"
-              y2="266"
-              stroke="#A0C4CD"
-              opacity="0.24"
-            />
-          ))}
-          {Array.from({ length: 8 }, (_, i) => (
-            <Line
-              key={i}
-              x1="58"
-              x2="342"
-              y1={126 + i * 20}
-              y2={126 + i * 20}
-              stroke="#A0C4CD"
-              opacity="0.24"
-            />
-          ))}
-          <Path
-            d="M58 266V126H342V266"
-            fill="none"
-            stroke="#EAF4EF"
-            strokeWidth="7"
-          />
           <MovingGroup animatedProps={keeper}>
-            <Ellipse cy="48" rx="34" ry="8" fill="#032C2E" opacity="0.5" />
-            <Path
-              d="M-11 1L-30 15L-42 0M11 1L30 15L42 0M-8 25L-18 47M8 25L18 47"
-              stroke="#F4CB7C"
-              strokeWidth="11"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <Rect x="-15" y="-5" width="30" height="37" rx="9" fill="#F9AE53" />
-            <Circle cy="-17" r="13" fill="#DDAF8F" />
-            <Path
-              d="M-12-21Q0-35 12-21"
-              stroke="#392D2B"
-              strokeWidth="5"
-              fill="none"
-            />
-            <Circle cx="-4" cy="-17" r="1.2" fill="#24303B" />
-            <Circle cx="4" cy="-17" r="1.2" fill="#24303B" />
-            <Circle cx="-43" r="6" fill="#F4F8FF" />
-            <Circle cx="43" r="6" fill="#F4F8FF" />
-          </MovingGroup>
-          <MovingGroup animatedProps={target} opacity={shot ? 0.8 : 1}>
-            <Circle r="19" fill="none" stroke={c.gold} strokeWidth="2" />
-            <Circle r="4" fill={c.gold} />
-            <Path
-              d="M-27 0H-12M12 0H27M0-27V-12M0 12V27"
-              stroke={c.gold}
-              strokeWidth="2"
-            />
-          </MovingGroup>
-          {shot && (
-            <Path
-              d={`M200 470 Q${(200 + endX) / 2} ${endY - 95} ${endX} ${endY}`}
-              stroke="#F6CD8255"
-              strokeWidth="3"
-              strokeDasharray="4 8"
-              fill="none"
-            />
-          )}
-          <Ellipse
-            cx="200"
-            cy="488"
-            rx="23"
-            ry="7"
-            fill="#031C1E"
-            opacity="0.45"
-          />
-          <MovingGroup animatedProps={ball}>
-            <Circle r="15" fill="#F5F1E7" stroke="#28434B" strokeWidth="2" />
-            <Polygon points="0,-10 9,-2 5,8 -5,8 -9,-2" fill="#263845" />
-            <Path
-              d="M-14-5L-9-2M14-5L9-2M0 15V8"
-              stroke="#28434B"
-              strokeWidth="1"
-            />
-          </MovingGroup>
-          {shot && (
-            <MovingGroup animatedProps={callout}>
-              <SvgText
-                x="200"
-                y="355"
-                textAnchor="middle"
-                fill={c.gold}
-                fontSize="32"
-                fontWeight="800"
-              >
-                {cheering
-                  ? 'GOAL!'
-                  : caught
-                    ? 'SAVED'
-                    : releasedPower < 0.12
-                      ? 'SHORT'
-                      : releasedPower > 0.97
-                        ? 'OVER'
-                        : 'WIDE'}
-              </SvgText>
+            <MovingGroup animatedProps={idle}>
+              <SvgImage
+                href={sceneArt.keeper}
+                x="-43"
+                y="-88"
+                width="86"
+                height="114"
+              />
             </MovingGroup>
+            <MovingGroup animatedProps={dive}>
+              <SvgImage
+                href={sceneArt.keeperDive}
+                x="-68"
+                y="-36"
+                width="136"
+                height="70"
+              />
+            </MovingGroup>
+          </MovingGroup>
+          {!shot && (
+            <AnimatedPath
+              animatedProps={guide}
+              fill="none"
+              stroke="#ACF5CB"
+              strokeWidth="1.3"
+              strokeDasharray="4 9"
+              opacity="0.35"
+            />
           )}
-          <Rect
-            x="68"
-            y="31"
-            width="264"
-            height="32"
-            rx="16"
-            fill="#061633BD"
-          />
-          <SvgText
-            x="200"
-            y="52"
-            fill={c.white}
-            fontSize="12"
-            fontWeight="700"
-            textAnchor="middle"
-          >
-            90:00 · THE LAST KICK
-          </SvgText>
+          <MovingGroup animatedProps={target}>
+            <Circle
+              r="23"
+              stroke="#83F7B3"
+              strokeWidth="7"
+              opacity="0.14"
+              fill="none"
+            />
+            <Circle
+              r="18"
+              stroke="#99FFC2"
+              strokeWidth="1.5"
+              fill="#64E49C22"
+            />
+            <Path
+              d="M-26 0H-11M11 0H26M0-26V-11M0 11V26"
+              stroke="#B2FFD1"
+              strokeWidth="1.5"
+            />
+          </MovingGroup>
+          <MovingGroup animatedProps={shadow}>
+            <Ellipse rx="20" ry="5" fill="#00120B" />
+          </MovingGroup>
+          <MovingGroup animatedProps={ball}>
+            <SvgImage
+              href={sceneArt.ball}
+              x="-20"
+              y="-20"
+              width="40"
+              height="40"
+            />
+          </MovingGroup>
         </Svg>
-      </View>
+      </SceneCanvas>
       <View style={s.controls}>
-        <Text style={s.muted}>
-          {session.assisted
-            ? 'Choose placement and power. Take your time.'
-            : 'Drag the target. Shoot when power reaches the gold zone.'}
+        <Text style={s.controlTitle}>
+          {shot
+            ? goal
+              ? 'Goal!'
+              : caught
+                ? 'Saved!'
+                : 'Missed!'
+            : session.assisted
+              ? 'Choose placement and power'
+              : stage === 'aim'
+                ? 'Drag to aim'
+                : 'Tap to set your power'}
         </Text>
-        <View style={s.row}>
-          <GameButton
-            label="←"
-            accessibilityLabel="Aim left"
-            secondary
-            disabled={!enabled || !!shot}
-            onPress={() => adjust(-0.1, 0)}
-          />
-          <GameButton
-            label="↑"
-            accessibilityLabel="Aim higher"
-            secondary
-            disabled={!enabled || !!shot}
-            onPress={() => adjust(0, -0.1)}
-          />
-          <GameButton
-            label="↓"
-            accessibilityLabel="Aim lower"
-            secondary
-            disabled={!enabled || !!shot}
-            onPress={() => adjust(0, 0.1)}
-          />
-          <GameButton
-            label="→"
-            accessibilityLabel="Aim right"
-            secondary
-            disabled={!enabled || !!shot}
-            onPress={() => adjust(0.1, 0)}
-          />
-        </View>
-        <Text accessibilityLiveRegion="polite" style={s.muted}>
-          {aim.x < 0.08 || aim.x > 0.92 || aim.y < 0.08 || aim.y > 0.9
-            ? 'Outside the goal'
-            : (aim.y < 0.3 ? 'High ' : aim.y > 0.7 ? 'Low ' : '') +
-              (aim.x < 0.4 ? 'left' : aim.x > 0.6 ? 'right' : 'centre')}
-          {session.assisted
-            ? ' · Keeper: ' +
-              (keeperAtRelease < 0.4
-                ? 'left'
-                : keeperAtRelease > 0.6
-                  ? 'right'
-                  : 'centre')
-            : ' · ' + Math.round(aim.x * 100) + '% across'}
-        </Text>
-        <Svg
-          width="100%"
-          height="18"
-          viewBox="0 0 260 18"
-          preserveAspectRatio="none"
-          accessible={false}
-        >
-          <Rect width="260" height="18" rx="9" fill="#102C45" />
-          <MovingRect
-            id={id + '-power'}
-            animatedProps={meter}
+        {(session.assisted || stage === 'aim') && (
+          <Text accessibilityLiveRegion="polite" style={s.muted}>
+            {aim.x < 0.08 || aim.x > 0.92 || aim.y < 0.08 || aim.y > 0.9
+              ? 'Outside the goal'
+              : (aim.y < 0.3 ? 'High ' : aim.y > 0.7 ? 'Low ' : '') +
+                (aim.x < 0.4 ? 'left' : aim.x > 0.6 ? 'right' : 'centre')}
+            {session.assisted
+              ? ' · Keeper: ' +
+                (keeperAtRelease < 0.4
+                  ? 'left'
+                  : keeperAtRelease > 0.6
+                    ? 'right'
+                    : 'centre')
+              : ' · Aim away from the keeper'}
+          </Text>
+        )}
+        {session.assisted && (
+          <View style={s.row}>
+            <GameButton
+              label="←"
+              accessibilityLabel="Aim left"
+              secondary
+              disabled={!enabled || !!shot}
+              onPress={() => adjust(-0.1, 0)}
+            />
+            <GameButton
+              label="↑"
+              accessibilityLabel="Aim higher"
+              secondary
+              disabled={!enabled || !!shot}
+              onPress={() => adjust(0, -0.1)}
+            />
+            <GameButton
+              label="↓"
+              accessibilityLabel="Aim lower"
+              secondary
+              disabled={!enabled || !!shot}
+              onPress={() => adjust(0, 0.1)}
+            />
+            <GameButton
+              label="→"
+              accessibilityLabel="Aim right"
+              secondary
+              disabled={!enabled || !!shot}
+              onPress={() => adjust(0.1, 0)}
+            />
+          </View>
+        )}
+        {(session.assisted || stage === 'power') && (
+          <Svg
+            width="100%"
             height="18"
-            rx="9"
-            fill={c.blue}
-          />
-          <Rect
-            x="185"
-            width="35"
-            height="18"
-            rx="3"
-            fill={c.gold}
-            opacity="0.8"
-          />
-        </Svg>
+            viewBox="-2 -3 264 24"
+            preserveAspectRatio="none"
+            accessible={false}
+          >
+            <Rect width="260" height="18" rx="9" fill="#07172AE8" />
+            <MovingRect
+              id={id + '-power'}
+              animatedProps={meter}
+              height="18"
+              rx="9"
+              fill="#4FA3EC"
+              opacity="0.3"
+            />
+            <Rect
+              x="185"
+              width="35"
+              height="18"
+              rx="3"
+              fill="#82E8AF"
+              opacity="0.8"
+            />
+            <MovingLine
+              animatedProps={indicator}
+              y1="-2"
+              y2="20"
+              stroke="#F4FCFF"
+              strokeWidth="3"
+            />
+          </Svg>
+        )}
         {session.assisted && (
           <View style={s.row}>
             {[0.55, 0.78, 0.9].map((value) => (
@@ -502,22 +424,41 @@ export function SportsGame({
             ))}
           </View>
         )}
-        <GameButton
-          label={shot ? 'Shot away' : 'Shoot'}
-          disabled={!enabled || !!shot}
-          onPress={() =>
-            onInput(
-              {
-                type: 'shot',
-                x: aim.x,
-                y: aim.y,
-                ...(session.assisted ? { power } : {}),
-              },
-              clock.value,
-            )
-          }
-        />
+        {!session.assisted && stage === 'aim' ? (
+          <GameButton
+            label="Set aim"
+            disabled={!enabled || !!shot}
+            onPress={() => setStage('power')}
+          />
+        ) : (
+          <View style={s.row}>
+            {!session.assisted && !shot && (
+              <GameButton
+                label="Adjust aim"
+                secondary
+                disabled={!enabled}
+                onPress={() => setStage('aim')}
+              />
+            )}
+            <GameButton
+              label={shot ? 'Shot away' : 'Shoot'}
+              disabled={!enabled || !!shot}
+              onPress={() =>
+                onInput(
+                  {
+                    type: 'shot',
+                    x: aim.x,
+                    y: aim.y,
+                    ...(session.assisted ? { power } : {}),
+                  },
+                  clock.value,
+                )
+              }
+            />
+          </View>
+        )}
       </View>
     </>
   );
 }
+const AnimatedPath = Animated.createAnimatedComponent(Path);
