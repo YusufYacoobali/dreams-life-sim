@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { assetCatalog } from '../../src/game/content/assets';
-import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
+import { copyWorld, decodeWorld, encodeWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { assetPrice } from '../../src/game/systems/assets';
 import { accountFor } from '../../src/game/systems/common';
@@ -111,10 +111,13 @@ test.each([false, true])('browse, offer and lease screens share feature values w
 });
 
 test.each([false, true])('owned assets retain listing specs, use actual condition and survive a cold save (dark=%s)', dark => {
-  mockWorld = purchase(purchase(funded(), 'used-compact'), 'family-house');
+  // Commands return frozen production worlds. Configure wear on a mutable copy.
+  mockWorld = copyWorld(purchase(purchase(funded(), 'used-compact'), 'family-house'));
   const car = mockWorld.assets.find(asset => asset.catalogId === 'used-compact')!;
   car.condition = 37;
+  expect(car.condition).toBe(37);
   mockWorld = decodeWorld(encodeWorld(mockWorld));
+  expect(mockWorld.assets.find(asset => asset.id === car.id)!.condition).toBe(37);
   const original = encodeWorld(mockWorld), width = dark ? 320 : 390;
   jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
