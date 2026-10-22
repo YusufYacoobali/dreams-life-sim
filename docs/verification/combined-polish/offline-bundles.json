@@ -1,0 +1,32 @@
+[
+  {
+    "platform": "android",
+    "runtimeRevision": "047ce13278c59a36b6c603eb998e57675d8d1db2",
+    "bundle": "_expo/static/js/android/entry-ad5d03ac0072b398845666373ab0698d.hbc",
+    "bundleBytes": 6995512,
+    "bundleSHA256": "baa9b683d2e42d28a01be0cc804adc32d5e7fb7e4cd76d2dd6b0794e6d30143e",
+    "hermesMagicHex": "c61fbc03c103191f",
+    "runtimeSourcesMatched": 158,
+    "missingSources": [],
+    "modifiedSources": [],
+    "assetRecords": 1102,
+    "checkedArtAndAudioFiles": 41,
+    "sourceArtAndAudioBytes": 8621815,
+    "missingArtAndAudio": []
+  },
+  {
+    "platform": "ios",
+    "runtimeRevision": "047ce13278c59a36b6c603eb998e57675d8d1db2",
+    "bundle": "_expo/static/js/ios/entry-542869e2cc789ed5efce54510582366c.hbc",
+    "bundleBytes": 6814680,
+    "bundleSHA256": "0cf0b0aba644395ea5988d8608310abcbfe9ff3506108737561dd35ef2b617c6",
+    "hermesMagicHex": "c61fbc03c103191f",
+    "runtimeSourcesMatched": 158,
+    "missingSources": [],
+    "modifiedSources": [],
+    "assetRecords": 1098,
+    "checkedArtAndAudioFiles": 41,
+    "sourceArtAndAudioBytes": 8621815,
+    "missingArtAndAudio": []
+  }
+]

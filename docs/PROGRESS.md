@@ -2,7 +2,7 @@
 
 ## Integrated polish and mini-games — 22 October 2026
 
-Both feature batches are retained. Current saves use **World44 / engine46 / content23 / reader24 / database v4**. Migration distinguishes published mini-game saves (42/44/20) from rental saves (42/44/21) and personal-support saves (43/45/22); existing sessions and histories are preserved. The verification reports below describe their respective pre-merge source snapshots. Combined verification will be recorded after this integration is complete.
+Both feature batches are retained. Current saves use **World44 / engine46 / content23 / reader24 / database v4**. Migration distinguishes published mini-game saves (42/44/20) from rental saves (42/44/21) and personal-support saves (43/45/22); existing sessions and histories are preserved. The verification reports below describe their respective pre-merge source snapshots. Combined verification passed in one full invocation: **275 suites / 3,527 tests**, plus strict app/test types, the 456-module import graph and both offline Android/iOS Hermes exports. See [the combined verification report](verification/combined-polish/README.md).
 
 
 ## Life context, interactions, review timing and memorial polish —22October
