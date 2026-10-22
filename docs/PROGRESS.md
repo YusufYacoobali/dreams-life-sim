@@ -1,6 +1,8 @@
 # Dreams: Life Simulator — progress and verification
 
-Goal continuation is blocked on release prerequisites: current enforced environment revision74 still excludes `repo.reactnative.dev`; actual iOS/physical-device acceptance and distribution setup remain unavailable. No runtime change, regression rerun or denied download retry was made. The passing b75checkpoint and saved data remain intact.
+Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
+
+Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. No full local regression or unchanged cohort was rerun; final-source automatic CI remains separate from the earlier passing b75gate. The emulator stopped at its disk-space guard, so new native geometry/physical-device acceptance is unclaimed. [HANDOFF](HANDOFF.md) records exact results and temporary-artifact/process limitations.
 
 All confirmed approved-feature audit gaps are implemented and pushed, including four business categories, Products & Services, name/logo Settings, final Statistics and campus social life. Runtime `b75e617` also fixes the first-month campus planning opportunity found in actual play. World41/engine42/content17/reader21/v4;274situations/822choices.
 

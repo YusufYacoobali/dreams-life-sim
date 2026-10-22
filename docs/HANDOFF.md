@@ -4,7 +4,23 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Latest local continuation
+## Current product continuation — 22 October
+
+The user asked to continue without the blocked release prerequisites. Runtime `80a10b5` continues product work over the accepted b75checkpoint; packaging and unavailable device/signing work are parked, not completion claims.
+
+- Shared Page keeps its first direct Header/Back above the scrolling body. Inline forms now use the same stable keyboard-avoiding body as footer forms; drafts/input instances survive busy/error/footer updates.
+- Long Life Summary and Statistics lists also keep Back outside their FlatLists, with existing modal safe areas and legacy Android system-bar contrast preserved.
+- Local buttons without a saving lifecycle no longer enter/reset submitted state. Saving controls still prevent duplicates and show progress only on the pressed button. A profiler case reproduced the extra renders before the fix and shows none afterwards.
+- Pending choice eligibility is reused during busy/error-only renders, and refreshed for a changed World or scene. Event presentations stay fresh, preserving queued-input guards. The existing genuine held-save failure/retry/raw-backup/closed-file-cold case passes.
+- Help correctly explains normal automatic year continuation, explicit planning pauses, and first-month campus introductions/clubs.
+
+Focused checks: Page2cases/4.313s; existing pending save case1pass/3unrelated skips/1.893s; existing Stats+Extras journeys2passes/2unrelated skips/24.491s; buttons4passes/7unrelated skips/1.041s. Final combined strict app/all-test types actually close0 (9435; `/tmp/dreams-navigation-buttons-final-types.exit`). No local full regression or old cohort was rerun. The final source's automatic CI is authoritative; the earlier fe97152 automatic run is superseded by the final local-button fix.
+
+Current UI has no new native visual acceptance. An attempted emulator launch stopped at its disk-space guard before boot; no blocked dependency download/build was retried. The diagnostic Metro40460 startup also encountered a missing temporary file-map cache; Ctrl+C was sent, but its shutdown is not certified. Do not edit its frozen native tree or assume an available8081server. Existing native tree is `review/navigation-feedback-fe97152`; future native work needs a fresh temporary cache and confirmed process ownership. Original saved API24AVD data stays under `/workspace/.cache/android-native-check/avd`; earlier `/tmp` captures/exports are no longer present after reconnect. Keep historical accepted observations distinct from currently available artifacts.
+
+No engine, data, random stream, price, catalogue or save-format change: World41/engine42/content17/reader21/v4;274situations/822choices. The old standalone candidate/wrapper still targetb75 and must move to the final runtime when packaging is resumed; native config inputs are unchanged. Commit and push safe checkpoints at least every two active hours. Do not rerun unchanged regressions or reopen the completed campus journey.
+
+## Accepted campus checkpoint — prior source
 
 Runtime `b75e617` is committed and pushed. Native play found and closed a real campus reachability defect: Age Up could pass the first attended month without an actionable planning opportunity. The fix completes the normal monthly pipeline, then pauses that same year when the original eligible paid course genuinely advances0→1months. A low-priority result directs the player to Education → Campus. Urgent events keep priority. No automatic peers/rewards, new schema/reader marker, extra RNG or historical rewrite.
 

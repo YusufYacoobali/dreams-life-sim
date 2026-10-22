@@ -1,5 +1,9 @@
 # Opening experience: priority and completion estimates
 
+Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
+
+Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. No full local regression or unchanged cohort was rerun; final-source automatic CI remains separate from the earlier passing b75gate. The emulator stopped at its disk-space guard, so new native geometry/physical-device acceptance is unclaimed. [HANDOFF](HANDOFF.md) records exact results and temporary-artifact/process limitations.
+
 All confirmed approved-feature audit gaps are implemented and pushed, including four business categories, Products & Services, name/logo Settings, final Statistics and campus social life. Runtime `b75e617` also fixes the first-month campus planning opportunity found in actual play. World41/engine42/content17/reader21/v4;274situations/822choices.
 
 The15campus checks and final app/all-test strict types pass. Ordinary Android play now confirms paid enrolment → first-month pause → two introductions → club confirmation → same-year completion:12/36law months,11future club periods and11paid months for each peer. A real force-stop/Continue restores revision150 with ALL8tables exact; every prior inactive life, historical row, ledger entry and original course is retained. The branded value-offering company has genuinely operated24months. Final Android/iOS Hermes bundles are complete and their changed source-map bytes match. No extra local full regression or unchanged cohort was run.
@@ -37,7 +41,7 @@ Track three separate states from here: implemented scope, known defects, and rel
 
 ## Current order of work
 
-1. The single b75 automatic gate and ordinary Android first-month/campus/club/year/cold acceptance are complete and passing. Continue final standalone/device/release work only when its actual prerequisites are available. Both preceding complete gates passed. Avoid repeated local full regression or unchanged cohorts.
+1. Continue unblocked product work as requested. The latest80a10b5navigation/keyboard/button/Help fixes pass their focused checks and strict types; inspect their final automatic gate without repeating the old full local regressions or cohorts. Standalone/device prerequisites remain parked.
 2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. The genuine first-year campus native journey is complete; do not repeat it. Preserve every original situation and historical save.
 3. Continue useful source-scoped native play and cold-resume checks alongside implementation. After the merged game is stable, complete standalone, actual iOS/physical, accessibility/audio and release acceptance. Do not count a Hermes export or Expo Go session as a standalone build.
 
