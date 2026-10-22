@@ -23,6 +23,7 @@ import { accountFor } from '../../../src/game/systems/common';
 import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
 import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
 import { useFeedbackPress } from '../../../src/ui/feedback';
+import { rentalResidence } from '../../../src/game/systems/rentalSchemas';
 
 // Derive only displayed facts and the identity/date scope, never a cached World.
 function identityPresentation(world: World) {
@@ -38,6 +39,7 @@ function identityPresentation(world: World) {
     royalLabel: membership ? royalTitle(world, membership.house, player.id) : null,
     serviceLocation: assignment ? assignment.location : null,
     tripCity: activeTrip(world) ? physicalLocation(world).city : null,
+    rentedHome: rentalResidence(world)?.name ?? null,
     stats: { happiness: player.stats.happiness, health: player.stats.health, smarts: player.stats.smarts, looks: player.stats.looks, respect: player.stats.respect },
   };
 }
@@ -55,6 +57,7 @@ const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: Identity
         <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[data.country]} {data.occupation} · {'Age\u00a0' + data.age}</Text>
         {data.serviceLocation !== null && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {data.serviceLocation}</Text>}
         {data.tripCity !== null && <Text style={{ color: c.muted, fontSize: 11 }}>Away: {data.tripCity}</Text>}
+        {data.rentedHome !== null && <Text style={{ color: c.muted, fontSize: 11 }}>Home: {data.rentedHome}</Text>}
       </View>
       <View style={{ maxWidth: '35%', alignItems: 'flex-end' }}><Text adjustsFontSizeToFit minimumFontScale={0.55} numberOfLines={1} style={{ color: c.positiveText, fontSize: 18, fontWeight: '700' }}>{data.bankBalance}</Text><Text style={{ color: c.muted, fontSize: 10, marginTop: 3 }}>Bank Balance</Text></View>
     </Pressable>
