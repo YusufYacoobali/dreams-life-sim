@@ -4,7 +4,7 @@
   "inputs": {
     "package.json": "1957084c683526bb4f78aea8abedde55503f4ae57d768c4e1a1fbcdba1cfaf1f",
     "package-lock.json": "23101149e3b2f08ba44c2f0f9fb5318c01426525b80078854b493c0449b06501",
-    "app.json": "4b55e670e89507f0762c36fbe2da206800b304e5c93f94cb729a7a8f1985283f"
+    "app.json": "4a8879b7826acebe343dd81e83201dc15c59d67a0908fab9f0a541bcae161d8b"
   },
   "installationPlatform": {
     "os": "linux",
@@ -17553,6 +17553,15 @@
   ],
   "projectArt": [
     {
+      "path": "assets/app_icon.png",
+      "status": "present",
+      "bytes": 1646450,
+      "sha256": "f133cbad41330af856a5e854568005ebcde5707f53a9b58b572278c3bccbfbb8",
+      "referencedBy": [
+        "app.json"
+      ]
+    },
+    {
       "path": "assets/generated/activity-atlas.png",
       "status": "present",
       "bytes": 1328352,
@@ -17577,15 +17586,6 @@
       "sha256": "a9cd8f76d9dd00c97cc1ce4b35c2371cb09cdd1169ca8e116a64a7f8a52467cc",
       "referencedBy": [
         "app/death.tsx"
-      ]
-    },
-    {
-      "path": "assets/generated/dreams-app-icon.png",
-      "status": "present",
-      "bytes": 1420852,
-      "sha256": "260eecc71e31a4d05ba65deaff4dddabf32d4c5b9576e3faa448150983245cb9",
-      "referencedBy": [
-        "app.json"
       ]
     },
     {

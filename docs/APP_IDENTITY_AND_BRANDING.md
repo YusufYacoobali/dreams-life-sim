@@ -4,8 +4,9 @@ Prepared 20 October 2026. This change configures reversible source settings and
 original launcher artwork; it does not establish an installed or signed release.
 
 Updated22October2026: Android package and iOS bundle identifier are now
-`com.yacoobali.lifesim`, as requested. The current launcher artwork is retained;
-the user deferred the proposed replacement picture. These source changes need
+`com.yacoobali.lifesim`, as requested. The user subsequently supplied and selected
+`assets/app_icon.png`; it is now the main Android/iOS icon and Android adaptive
+foreground. These source changes need
 fresh native generation/build acceptance; the older generated candidate is stale.
 
 ## Identity
@@ -27,9 +28,31 @@ EAS/cloud project, account, native build or store submission was created. Future
 distributed builds must increase their build numbers. The game, persistence,
 existing lives and original historical payloads are unchanged.
 
-## Original artwork and provenance
+## Current artwork
 
-The configured [launcher image](../assets/generated/dreams-app-icon.png) shows a
+The user supplied [app_icon.png](../assets/app_icon.png) in commit27077cd and
+explicitly selected it as the launcher icon. Its original bytes are unchanged:
+**1,646,450 bytes,1254 ×1254, PNG RGB**, SHA-256
+`f133cbad41330af856a5e854568005ebcde5707f53a9b58b572278c3bccbfbb8`.
+It shows a child facing branching life paths, with graduation, heart and money
+symbols above. The global Expo icon supplies iOS and Android's legacy launcher;
+Android's adaptive foreground uses the same source with the existing navy
+background. Expo's native asset pipeline derives platform sizes. No replacement
+art was generated, and no splash or notification glyph change is implied.
+
+Installed launcher masks, small-size readability and iOS native acceptance remain
+part of the final native build/device checks. Existing generated native projects
+must be regenerated before building the updated launcher resources.
+
+Offline `expo config --type prebuild --json` resolves both new icon references
+and the retained identifiers. Expo image utilities successfully generated1024px
+iOS,432px Android adaptive and48px legacy PNGs in `/tmp/dreams-user-icon-sizes`.
+These are asset-generation checks, not installed launcher acceptance. The updated
+notices/inventory generator check passes; no gameplay regression was repeated.
+
+## Historical original artwork and provenance
+
+The previous [launcher image](../assets/generated/dreams-app-icon.png) shows a
 golden winding life path toward a sunrise, with coral/cream clouds on a navy
 background. Its rounded dimensional forms follow the game's illustrated style;
 its colours connect to the inspected existing welcome hero. It contains no text,
@@ -58,12 +81,12 @@ without mechanical image editing. Expo's native icon pipeline derives platform
 sizes during native builds. A generated 1024-pixel iOS artifact has not been
 produced or accepted in this environment.
 
-The same opaque source is configured as the main icon and Android adaptive
+That opaque source was configured as the main icon and Android adaptive
 foreground, with background colour `#071D49`. Old starter background and
 monochrome references were removed; no false transparent/monochrome layer is
 claimed. All existing starter files and in-game artwork remain intact.
 
-## Verification and remaining acceptance
+## Historical verification and remaining acceptance
 
 - The coordinator visually reviewed the final source composition and accepted
   its readability. A read-only warm-colour pixel diagnostic bounds the emblem

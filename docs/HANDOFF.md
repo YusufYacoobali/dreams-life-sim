@@ -4,7 +4,13 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Current onboarding haptics and milestone animations — 22 October
+## Current app icon selection — 22 October
+
+The user now explicitly selected `assets/app_icon.png`. `app.json` uses that exact unchanged1254×1254opaque PNG for the main Android/iOS icon and Android adaptive foreground. The existing package `com.yacoobali.lifesim` is retained. Offline resolved prebuild configuration confirms both icon references and identifiers; Expo image utilities successfully generate1024px iOS,432px Android adaptive and48px legacy PNGs in `/tmp/dreams-user-icon-sizes`. Current notices/inventory were refreshed and their check passes. This asset/config-only change reruns no gameplay regression or Hermes export. It requires fresh native generation/build to appear on an installed launcher; existing native candidates remain stale. See [APP_IDENTITY_AND_BRANDING.md](APP_IDENTITY_AND_BRANDING.md).
+
+This new user-requested source push supersedes the preceding haptic/motion checkpoint's still-running automatic gate39758889916. No full pass is claimed for that checkpoint. The new final source gets the normal automatic Quality gate; preserve it until completion.
+
+## Prior onboarding haptics and milestone animations — 22 October
 
 Runtime **569e5b7** integrates the three independent author workstreams and the user's later `27077cd` upload of `assets/app_icon.png`. That uploaded file is retained; app icon configuration remains unchanged as requested. Haptic Feedback now covers accepted welcome/creation/appearance choices, shared navigation, birth/death controls and Age Up/Continue This Year. It honours the existing saved preference, which defaults off. Keyboard typing and unchanged/disabled choices add no pulses. Actions never await haptic hardware; a held save rejects duplicate taps and failed saves remain retryable. Specific event-presentation guards are retained.
 

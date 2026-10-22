@@ -1,5 +1,7 @@
 # Opening experience: priority and completion estimates
 
+Current icon selection now uses the user's `assets/app_icon.png` for Android/iOS and the Android adaptive foreground. Offline resolved config and Expo icon-size generation pass, with source pixels unchanged. Fresh native generation/build is required for installed launcher acceptance. The haptic/motion checkpoint below retains its own source scope.
+
 Latest22October runtime569e5b7 implements the requested onboarding/creation and Age Up haptics through the existing Haptic Feedback setting. Opening, birth and life's end now have distinct one-shot decorative animations; actual controls remain immediately usable. Reduced Motion uses still artwork. The placement analysis is in [FEEDBACK_SETTINGS.md](FEEDBACK_SETTINGS.md).45affected connected UI/save/accessibility cases plus5unchanged shared-motion cases pass in their scopes; strict app/all-test types and current notices pass. No full local regression or repeat native journey was run. Physical haptic feel, native animation review and standalone/device acceptance remain open. No game/save/data version changes. [HANDOFF](HANDOFF.md) tracks final export and push status.
 
 The one final Android/iOS production export actually exits0, with both HBC headers and all13changed runtime files exact in both source maps. No standalone or physical animation/haptic acceptance is inferred. The final test-only subscription-mock correction does not change these application bytes.

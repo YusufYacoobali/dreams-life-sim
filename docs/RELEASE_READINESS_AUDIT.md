@@ -1,5 +1,7 @@
 # Release-readiness audit
 
+The user subsequently selected `assets/app_icon.png` as the main Android/iOS icon and Android adaptive foreground. Offline resolved config and1024/432/48px Expo image generation pass. Original bytes are preserved; notices/inventory are refreshed. Actual installed launcher masks/readability and iOS acceptance require final native builds. Existing generated projects remain stale; no native build or unchanged gameplay regression/export was repeated for this config-only change.
+
 Latest22October source569e5b7 adds haptics on onboarding/creation/navigation and Age Up through the existing preference, plus decorative opening/birth/death scenes. Reduced-motion/unknown settings use still artwork; controls never await the animation or hardware.45affected UI/save/accessibility checks and5unchanged shared-motion checks pass in their scopes; strict app/all-test types and current notices check pass. Native visual quality, physical haptic feel and standalone/device acceptance remain unverified. No native config/dependency or game/save change in this animation batch. The user's uploaded `assets/app_icon.png` is preserved without changing configured icons.
 
 Its final Android/iOS production Hermes export actually exits0: Android5,229,812bytes/iOS4,959,084bytes; both headers and all13changed runtime sources match their maps. Final test-only mock typing does not change those application bytes. This is bundle generation, not a standalone/native visual or hardware pass.
