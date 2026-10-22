@@ -57,7 +57,7 @@ test('the real reviewed topic saves atomically: held duplicate, all8 rollback, e
   } finally { release(); reader?.close(); jest.restoreAllMocks(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }
 }, 30000);
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21])('complete reader%i upgrades its marker only, retaining all8 rows and exact legacy conversation payload', async marker => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22])('complete reader%i upgrades its marker only, retaining all8 rows and exact legacy conversation payload', async marker => {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver);
   try {
     await repository.initialise(); const before = decodeWorld(JSON.stringify(graduate)); await repository.create(before);
@@ -69,9 +69,9 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21])('complete reader%i upgrades its 
     const baseline = rows(); expect(Object.keys(baseline)).toHaveLength(8);
     for (const table of Object.keys(baseline)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) sqlite.exec('CREATE TRIGGER no_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'must not rewrite rows'); END");
     sqlite.exec('PRAGMA user_version=' + marker); const migrated = new SaveRepository(driver); await migrated.initialise();
-    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(22); expect(rows()).toEqual(baseline);
+    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(23); expect(rows()).toEqual(baseline);
     expect(await migrated.active()).toEqual(before); expect(rows()).toEqual(baseline); await migrated.initialise(); expect(rows()).toEqual(baseline);
-    sqlite.exec('PRAGMA user_version=23'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(23);
+    sqlite.exec('PRAGMA user_version=24'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(24);
   } finally { sqlite.close(); }
 });
 
@@ -80,8 +80,8 @@ test('a failed reader18 marker transaction rolls back and retries without rewrit
   try {
     await new SaveRepository(driver).initialise(); await new SaveRepository(driver).create(decodeWorld(JSON.stringify(graduate)));
     const payloads = () => sqlite.prepare('SELECT payload FROM lives UNION ALL SELECT payload FROM backups').all(); const before = payloads(); sqlite.exec('PRAGMA user_version=18');
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 22') throw new Error('Interrupted marker write'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 23') throw new Error('Interrupted marker write'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow(/Interrupted marker/); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(18); expect(payloads()).toEqual(before);
-    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(22); expect(payloads()).toEqual(before);
+    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(23); expect(payloads()).toEqual(before);
   } finally { sqlite.close(); }
 });

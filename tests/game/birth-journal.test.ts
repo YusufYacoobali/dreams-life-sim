@@ -50,7 +50,7 @@ test('all 512 sample generations retain the exact pre-feature family, stats, mon
     // Reproduce the recorded World41 envelope, excluding only the new, empty
     // rental history. All generated family, money, stats and RNG stay in proof.
     const original = JSON.parse(encodeWorld({ ...world, journal: [] }));
-    expect(original).toMatchObject({ schemaVersion: 42, engineVersion: 44, contentVersion: 21, rentalLeases: [] });
+    expect(original).toMatchObject({ schemaVersion: 43, engineVersion: 45, contentVersion: 22, rentalLeases: [] });
     delete original.rentalLeases;
     original.schemaVersion = 41; original.engineVersion = 43; original.contentVersion = 20;
     hash.update(JSON.stringify(original) + '\n');

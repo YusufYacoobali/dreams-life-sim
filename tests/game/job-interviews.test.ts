@@ -80,7 +80,7 @@ test('country part-time ages still gate interviews and full-time work still requ
 
 test('an arranged engine-29/content-6 envelope upgrades its versions, preserving employment, people, money and RNG', () => {
   const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; encoded.contentVersion = 6; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 42, engineVersion: 44, contentVersion: 21, rentalLeases: [], campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 43, engineVersion: 45, contentVersion: 22, personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
 });
 
 

@@ -60,7 +60,7 @@ test('only the fifteen requested situations and their forty-five choices join th
 test('the content18 migration changes only the version tags and preserves all saved state and draws', () => {
   const world = employee(), old = JSON.parse(encodeWorld(world)); old.schemaVersion = 41; old.engineVersion = 42; old.contentVersion = 18;
   const migrated = decodeWorld(JSON.stringify(old));
-  expect(migrated.contentVersion).toBe(21);
+  expect(migrated.contentVersion).toBe(22);
   expect(migrated).toEqual(world);
 });
 
