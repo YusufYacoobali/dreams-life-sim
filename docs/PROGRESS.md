@@ -1,12 +1,20 @@
 # Dreams: Life Simulator — progress and verification
 
+The latest22October batch adds preference-aware haptics throughout welcome, creation and appearance choices, navigation and Age Up/Continue This Year. Hardware requests never delay commands; duplicate held-save taps are blocked and failed saves remain retryable. The original saved off preference is preserved. Opening gains a sunrise/light reveal, birth gains halos/stars and life's end gains a quiet memorial. All are one-shot decorative native-driver effects, at most1.8seconds, with immediately available controls and a reduced-motion still frame. [Feedback/motion design](FEEDBACK_SETTINGS.md) records the placement analysis.
+
+Runtime569e5b7 integrates all three author branches and preserves the user's27077cd icon-file upload without changing icon configuration.45affected connected UI/save/accessibility cases pass after the generic callback-identity guard correction; the5unchanged shared-motion cases also passed. Final strict app/all-test types actually exit0, and current notices check passes. The original rollback/retry/cold assertions remain. No full local regression, old cohort, native visual/hardware acceptance or standalone build is claimed. No game/save/version/RNG/history change. [HANDOFF](HANDOFF.md) tracks the final frozen export/push and automatic gate.
+
+The single final569e5b7 Android/iOS production export actually exits0: Android5,229,812bytes/iOS4,959,084bytes. Both HBC headers and all13changed runtime source contents match both maps. The final subscription-mock correction changes only tests; application bytes remain exact. Exporter closed; no extra regression or native build attempted.
+
+## Prior package, system-bar and daily-reminder batch
+
 The22October user-requested batch changes Android/iOS identity to **com.yacoobali.lifesim**, retains the existing icon as subsequently requested, and closes three Android bottom-inset inconsistencies: Legacy, deceased-person Time Machine and duplicate hobby-event padding.
 
 Optional daily reminders are now implemented: off by default,19:00local time adjustable in Settings,28messages/seven repeating weekday slots, explicit permission, no expiry or remote token, serialized owned-only scheduling/cancellation and ordinary Continue tap routing. Old app settings remain readable without an eager write; actual SQLite failure/retry/closed-file tests preserve life data and independent preferences. Expo Go skips the unsupported native notification import.
 
 All56affected cases pass across their scopes:55in the original7-suite batch, plus the sole corrected Legacy case on rerun. The two corrections concern the new test's layout-node query, with no product change. Final strict app/all-test types actually exit0. Native-config introspection confirms both identifiers/current icon/no remote entitlement or background mode; refreshed notices check passes. One automatic full hosted gate follows the completed source push. No full local regression, old cohort, prebuild or blocked build retry was run. Actual installed reminder delivery/new package, standalone/device acceptance and the earlier native JNI crash remain open; [HANDOFF](HANDOFF.md) records exact boundaries.
 
-Runtime0e72896 is pushed; its exact-source [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) is running. Final production Hermes export actually exits0: Android5,215,540bytes/iOS4,944,476bytes, both HBC headers and all12changed runtime sources in both maps exact. This is bundle generation, not standalone or notification-delivery acceptance. All author streams are frozen/integrated and root's exporter is closed.
+Runtime0e72896 is pushed; its exact-source [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) was cancelled after the user's subsequent icon-file upload started a newer run. Final production Hermes export actually exits0: Android5,215,540bytes/iOS4,944,476bytes, both HBC headers and all12changed runtime sources in both maps exact. This is bundle generation, not standalone or notification-delivery acceptance. All author streams are frozen/integrated and that exporter is closed.
 
 ## Accepted navigation/button checkpoint — prior runtime80a10b5
 

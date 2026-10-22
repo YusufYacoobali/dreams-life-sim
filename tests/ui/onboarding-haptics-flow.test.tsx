@@ -52,7 +52,7 @@ async function setup(bootstrap = true) {
 beforeEach(() => {
   jest.clearAllMocks(); useCreationDraft.setState({ draft: null }); jest.replaceProperty(Platform, 'OS', 'ios');
   jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
-  jest.spyOn(AccessibilityInfo, 'addEventListener').mockReturnValue({ remove: jest.fn() } as ReturnType<typeof AccessibilityInfo.addEventListener>);
+  jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation(jest.fn().mockReturnValue({ remove: jest.fn() }));
   mockHaptic.mockResolvedValue(undefined); mockAndroidHaptic.mockResolvedValue(undefined); mockSound.mockResolvedValue(undefined);
 });
 afterEach(() => { jest.restoreAllMocks(); });

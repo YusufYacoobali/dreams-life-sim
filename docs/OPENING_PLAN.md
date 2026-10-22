@@ -1,8 +1,14 @@
 # Opening experience: priority and completion estimates
 
+Latest22October runtime569e5b7 implements the requested onboarding/creation and Age Up haptics through the existing Haptic Feedback setting. Opening, birth and life's end now have distinct one-shot decorative animations; actual controls remain immediately usable. Reduced Motion uses still artwork. The placement analysis is in [FEEDBACK_SETTINGS.md](FEEDBACK_SETTINGS.md).45affected connected UI/save/accessibility cases plus5unchanged shared-motion cases pass in their scopes; strict app/all-test types and current notices pass. No full local regression or repeat native journey was run. Physical haptic feel, native animation review and standalone/device acceptance remain open. No game/save/data version changes. [HANDOFF](HANDOFF.md) tracks final export and push status.
+
+The one final Android/iOS production export actually exits0, with both HBC headers and all13changed runtime files exact in both source maps. No standalone or physical animation/haptic acceptance is inferred. The final test-only subscription-mock correction does not change these application bytes.
+
+## Prior package, system-bar and daily-reminder batch
+
 Current22October feature batch: Android/iOS identity **com.yacoobali.lifesim**; existing icon retained at the user's request; three corrected Android system-navigation insets; optional daily local reminders with28messages, configurable19:00default and explicit permission. All56affected cases pass in their declared scopes, strict app/all-test types exit0, offline configuration and current notices checks pass. The full automatic gate follows the source push. Actual installed reminder delivery/new identity and the existing native crash still need standalone/device acceptance. No extra full local regression or unchanged cohort was run. [HANDOFF](HANDOFF.md) is authoritative.
 
-Current runtime0e72896 is pushed; [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) is running. Its final Android/iOS production Hermes export actually exits0; both HBC headers and all12changed runtime sources match the maps. No standalone/device/notification-delivery pass is inferred.
+Runtime0e72896 is pushed; [Quality39754127738](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39754127738) was cancelled by the later icon-upload run. Its final Android/iOS production Hermes export actually exits0; both HBC headers and all12changed runtime sources match the maps. No standalone/device/notification-delivery pass is inferred.
 
 ## Accepted navigation/button checkpoint — prior runtime80a10b5
 
@@ -51,7 +57,7 @@ Track three separate states from here: implemented scope, known defects, and rel
 
 ## Current order of work
 
-1. The package/inset/reminder batch passes its focused checks, strict types and configuration/notices checks; inspect its single automatic hosted gate after push. Prior80a10b5navigation/keyboard/button/Help and scoped Android keyboard/large-text checks remain accepted in their own scope. Address concrete defects or missing approved behaviour; avoid unchanged regressions/cohorts or invented filler mechanics.
+1. The requested haptic/motion batch's final frozen export is complete; inspect its single automatic hosted gate after the completed source push. Prior package/reminder and80a10b5navigation/keyboard/button/Help checks retain their declared scope. Address concrete defects or missing approved behaviour; avoid unchanged regressions/cohorts or invented filler mechanics.
 2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. The genuine first-year campus native journey is complete; do not repeat it. Preserve every original situation and historical save.
 3. Regenerate the now-stale native project from the final package/reminder inputs when packaging resumes. Isolate the observed text-reset/immediate-reload native JNI crash; verify notification permission/one-per-day/time-change/off/cold-tap behavior and Android gesture/three-button layouts on installed builds. Complete actual iOS/physical, accessibility/audio and release acceptance when prerequisites are available. Keep the blocked download/build parked; Hermes exports and Expo Go do not establish standalone acceptance.
 
