@@ -107,3 +107,8 @@ current screen trees, export the capture tests with
 `product-polish-review.test.tsx`, `relationship-polish.test.tsx` and
 `travel-planning-polish.test.tsx`. The baseline trees were exported using the
 same scenarios at8891d4d before applying this batch.
+
+The [subsequent full regression](../next-polish/test-summary.json) caught a
+pre-existing hobby-introduction copy assertion missed by the final focused
+follow-up recorded above. It is corrected in the later batch; that record
+supersedes this earlier aggregate coverage claim for the current source.

@@ -45,12 +45,13 @@ import GameLayout from '../../app/(game)/_layout';
 import RootLayout from '../../app/_layout';
 
 let motionChanged: (enabled: boolean) => void, appStateChanged: (state: AppStateStatus) => void, previousAppState: AppStateStatus;
-const removedMotion = jest.fn(), removedAppState = jest.fn();
+const removedMotion = jest.fn(), appStateRemovals: jest.Mock[] = [];
 beforeEach(() => {
+  appStateRemovals.length = 0;
   jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
   const subscribe = jest.fn(); subscribe.mockImplementation((_event: string, listener: (enabled: boolean) => void) => { motionChanged = listener; return { remove: removedMotion }; });
   jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation(subscribe);
-  jest.spyOn(AppState, 'addEventListener').mockImplementation((_event, listener) => { appStateChanged = listener; return { remove: removedAppState }; });
+  jest.spyOn(AppState, 'addEventListener').mockImplementation((_event, listener) => { appStateChanged = listener; const remove = jest.fn(); appStateRemovals.push(remove); return { remove }; });
   previousAppState = AppState.currentState; AppState.currentState = 'active';
   mockImpact.mockResolvedValue(undefined); mockAndroidHaptic.mockResolvedValue(undefined); mockAudioMode.mockResolvedValue(undefined); mockAudioCreate.mockReturnValue(mockPlayer); mockPlayer.seekTo.mockResolvedValue(undefined);
 });
@@ -181,7 +182,9 @@ test('backgrounding suppresses a pending sound and unavailable native feedback c
     const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); mockImpact.mockRejectedValue(new Error('hardware unavailable')); await press('Restore Default Appearance');
     await act(async () => { AppState.currentState = 'background'; appStateChanged('background'); releaseSound(); }); expect(mockPlayer.pause).toHaveBeenCalledTimes(1); expect(mockPlayer.play).not.toHaveBeenCalled(); await press('Never mind');
     await act(async () => { AppState.currentState = 'active'; appStateChanged('active'); }); mockImpact.mockImplementation(() => { throw new Error('native module missing'); }); mockPlayer.seekTo.mockRejectedValue(new Error('audio session unavailable'));
-    await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(mockGame.getState().error).toBeNull(); expect(mockPreferences.getState().error).toBeNull(); expect(screen.getByRole('button', { name: 'Begin Test Life' })).toBeOnTheScreen(); view.unmount(); expect(removedAppState).toHaveBeenCalledTimes(1);
+    await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(mockGame.getState().error).toBeNull(); expect(mockPreferences.getState().error).toBeNull(); expect(screen.getByRole('button', { name: 'Begin Test Life' })).toBeOnTheScreen(); view.unmount();
+    // Feedback and the new review host each own a foreground subscription.
+    expect(appStateRemovals).toHaveLength(2); for (const remove of appStateRemovals) expect(remove).toHaveBeenCalledTimes(1);
   } finally { context.close(); }
 });
 

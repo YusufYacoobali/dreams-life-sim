@@ -1597,5 +1597,7 @@
       "tests": 3,
       "passed": 3
     }
-  ]
+  ],
+  "supersededBy": "../next-polish/test-summary.json",
+  "laterRegressionFinding": "The next complete regression found a hobby-introductions copy assertion left stale by the final hobby wording follow-up. That assertion was outside this earlier12-suite rerun. The later record provides complete current coverage."
 }

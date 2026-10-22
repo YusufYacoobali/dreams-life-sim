@@ -7,8 +7,9 @@ feature boxes, grouped person actions and actual funded support/loan offers,
 app-wide native review timing, and a compact factual death summary with
 read-only family history. Current markers advance to43/45/22/reader23/v4.
 See [the batch review](verification/next-polish/README.md). Focused checks,
-strict types and both offline Hermes exports pass; the full regression is
-running before the authorized final push.
+strict types and both offline Hermes exports pass. Full regression plus
+affected test-only reruns verify all270suites/3,471tests; exact counts and
+corrections are in the batch review.
 
 
 The latest reference-polish batch follows the user's six-phase brief: original

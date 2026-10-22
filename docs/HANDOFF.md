@@ -22,8 +22,9 @@ The native review dependency needs a fresh native build; a store sheet remains
 subject to OS availability. No simulator/device execution is claimed.
 
 Focused checks, strict types, import graph and both offline Hermes exports pass.
-The final full regression is running; finish it and record its result before
-pushing this completed batch. The user's requested ordering was respected:
+Final verified coverage is270suites/3,471tests, all passing across the full
+regression and affected test-only reruns; exact invocation counts are in
+verification/next-polish/test-summary.json. The user's requested ordering was respected:
 all new features were integrated before testing began.
 
 ## Prior reference polish and rental leases —22October

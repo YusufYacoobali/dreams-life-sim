@@ -1,7 +1,7 @@
 import { monthFrom } from '../../src/game/calendar';
 import { hobbyKinds } from '../../src/game/content/leisure';
 import { resolveCommand } from '../../src/game/engine';
-import { ageOn, copyWorld, encodeWorld, World } from '../../src/game/model';
+import { ageOn, copyWorld, encodeWorld, fullName, World } from '../../src/game/model';
 import { accountFor, post } from '../../src/game/systems/common';
 import { activeHobbyPlan } from '../../src/game/systems/leisureSchemas';
 import { hobbyContacts, hobbyFee, hobbyIntroductionReason, leisureMonth, resolveLeisure } from '../../src/game/systems/leisure';
@@ -25,7 +25,7 @@ test.each([0, 1])('actual saved child hobby %s creates exactly one local peer wi
   expect(ageOn(peer, next.date)).toBe(ageOn(world.people[world.activePersonId], world.date)); expect(peer.country).toBe(world.people[world.activePersonId].country); expect(peer.city).toBe(world.people[world.activePersonId].city);
   expect(edge).toMatchObject({ strength: 35, trust: 35, romance: 'none', memories: ['met:' + world.date.year, 'hobby-introduction:' + hobby.id + ':' + world.date.year] }); expect(edge.roles).not.toContain('friend');
   expect(next.accounts.slice(0, world.accounts.length)).toEqual(world.accounts); expect(accountFor(next, peer).cash).toBe(0n); expect(next.ledger).toEqual(world.ledger); expect(next.liabilities).toEqual(world.liabilities); expect(next.hobbies).toEqual(world.hobbies); expect(next.people[world.activePersonId]).toEqual(world.people[world.activePersonId]);
-  expect(next.pending).toMatchObject({ kind: 'result', title: 'An introduction at practice' }); expect(next.pending?.kind === 'result' && next.pending.body).toContain('accompanied you');
+  expect(next.pending).toMatchObject({ kind: 'result', title: 'An introduction at practice' }); expect(next.pending?.kind === 'result' && next.pending.body).toContain(fullName(world.people[command.reviewedPayerId]) + ', came with you.');
   const cold = unpackCheckpoint(packCheckpoint(next), true); expect(encodeWorld(cold)).toBe(encodeWorld(next));
   const done = acknowledge(cold), exact = encodeWorld(done); expect(() => resolveCommand(done, command, true)).toThrow(/already made an introduction/); expect(encodeWorld(done)).toBe(exact); expect(encodeWorld(world)).toBe(before);
 });

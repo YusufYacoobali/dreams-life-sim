@@ -80,4 +80,16 @@ the actual component trees, **not native Android/iOS screenshots**.
 | Review pre-prompt | [Modal](review-preprompt-light.png) | [Modal](review-preprompt-dark-large.png) |
 | Memorial | [Summary](death-summary-light.png) | [Summary](death-summary-dark-large.png) |
 
-Full regression is running. Its final result must be recorded before delivery.
+Final verified coverage is **270 suites / 3,471 tests**, all passing across the
+full regression and affected reruns. The initial complete invocation passed
+262 suites; the remaining failures were test hardware integration, old copy
+expectations and current-version framing. The follow-up also checks that each
+feedback/review foreground subscription removes itself exactly once. No
+production source changed during these corrections. This is not a claim that
+the first full invocation was green; exact counts and corrections are in
+[the test record](test-summary.json).
+
+The earlier art batch's source snapshot fixture for the old catalogue was
+added prospectively. No original archive fixture was modified or removed.
+No Android SDK, iOS simulator or physical device was available; native store
+sheet display and device rendering remain outside this verification.

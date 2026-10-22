@@ -97,12 +97,12 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  expect(pins.store).toBe('ad7a6e1da6cbe8406bd094131733ecdac62c00168c645430011396bd4b58a237');
-  // The work branch includes God Mode, appearance and End This Life state changes after frozen C35.
-  // Pin that unchanged work state without rewriting the historical registration.
-  expect(pins.state).toBe('f5bb057081addf04972681db4f720482ec947757be62fbf66a8a2fdd549d5e0d');
-  // Current UI dependencies include SDK 57 native cinematic playback; frozen C35 stays exact above.
-  expect(pins.lockfile).toBe('fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138');
+  // Current work adds app-wide review metadata and store operations. These are
+  // current-source observations; the historical C35 registration above stays exact.
+  expect(pins.store).toBe('932826a5183376ab33b8f9471839de0209c1df4b21a987dd4bcf612d89110501');
+  expect(pins.state).toBe('6a4f7fe0bd50fff8f18b149faaebf59eaca4110b154fe3594de69ac8f559a9a9');
+  // The SDK57 native review dependency changes the current lockfile only.
+  expect(pins.lockfile).toBe('763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);
