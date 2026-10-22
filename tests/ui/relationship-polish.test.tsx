@@ -14,6 +14,11 @@ let mockWorld: World, mockPersonId = 'person_parent1';
 const mockDispatch = jest.fn();
 jest.mock('expo-router', () => ({ router: { push: jest.fn(),back:jest.fn() },Redirect:()=>null,useLocalSearchParams:()=>({id:mockPersonId}) }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: (state: unknown)=>unknown) => selector({world:mockWorld,dispatch:mockDispatch,busy:false,error:null}) }));
+jest.mock('@expo/vector-icons/Ionicons', () => {
+  const React = require('react'), { Text } = require('react-native');
+  const glyphs = require('@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/Ionicons.json');
+  return ({ name, size, color, style, ...props }: any) => <Text {...props} allowFontScaling={false} style={[{ fontFamily: 'Ionicons', fontSize: size, color }, style]}>{String.fromCodePoint(glyphs[name] || glyphs['ellipse-outline'])}</Text>;
+});
 import Relationships from '../../app/(game)/(tabs)/relationships';
 import PersonProfile from '../../app/(game)/person/[id]';
 import { StatBar, StatTrack } from '../../src/ui/components';
@@ -27,7 +32,8 @@ function capture(name: string, tree: ReturnType<ReturnType<typeof render>['toJSO
     type:node.type,props:{style:Native.StyleSheet.flatten(node.props?.style),source:node.props?.source,
       svg:node.type?.startsWith('RNSVG') ? Object.fromEntries(['d','name','clipPath','matrix','x','y','width','height','minX','minY','vbWidth','vbHeight','src','align'].filter(key=>node.props?.[key]!==undefined).map(key=>[key,node.props[key]])) : undefined,
       contentContainerStyle:Native.StyleSheet.flatten(node.props?.contentContainerStyle),edges:node.props?.edges,
-      accessibilityRole:node.props?.accessibilityRole,accessibilityLabel:node.props?.accessibilityLabel},children:node.children?.map(clean)});
+      accessibilityRole:node.props?.accessibilityRole,accessibilityLabel:node.props?.accessibilityLabel,
+      allowFontScaling:node.props?.allowFontScaling,resizeMode:node.props?.resizeMode,placeholder:node.props?.placeholder,value:node.props?.value},children:node.children?.map(clean)});
   mkdirSync(directory,{recursive:true});writeFileSync(join(directory,name+'.json'),JSON.stringify(clean(tree)));
 }
 
