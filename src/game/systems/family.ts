@@ -138,7 +138,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     const chance = Math.max(1, Math.round(ageFactor * Math.min(player.biology.fertility, partner!.biology.fertility) / 100 * Math.min(player.stats.health, partner!.stats.health) / 100));
     if (draw(world, 'outcomes', 1, 100) > chance) { fact(world, 'We tried for a child, but no pregnancy began this year.', 'family'); result(world, 'No pregnancy this year', 'You can try again next year. Age, health and fertility affect the chance.', 'hearts'); return; }
     startPregnancy(world, player, partner!); const due = world.pregnancies.at(-1)!.due;
-    result(world, 'A baby on the way', carrier.firstName + ' is pregnant. The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '. Time, care and health will matter in the coming months.', 'carriage'); return;
+    result(world, 'A baby on the way', (carrier.id === player.id ? 'You are pregnant.' : 'Your partner, ' + fullName(carrier) + ', is pregnant.') + ' The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '. Time, care and health will matter in the coming months.', 'carriage'); return;
   }
   if (command.type === 'adopt') {
     if(serviceAway(world)||partner&&serviceAway(world,partner.id))throw new IneligibleAction('Return from your assignment before adoption placement');
@@ -147,7 +147,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     if (partner && (!partner.wantsChildren || partner.stats.health < 40)) throw new IneligibleAction('Your partner is not ready for adoption');
     yearLimit(world, 'adopt'); charge(world, adoptionFee(world), 'adoption', 'Adoption assessment and placement');
     const parents = partner && (relation!.romance === 'married' || partner.householdId === player.householdId) ? [player, partner] : [player];
-    const child = addChild(world, parents, 'adoptive', command.age); result(world, 'Welcome to the family', fullName(child) + ' has joined your household. Their identity, family links and future are now part of this world.', 'adoption'); return;
+    const child = addChild(world, parents, 'adoptive', command.age); result(world, 'Welcome to the family', 'Your adopted child, ' + fullName(child) + ', has joined your family.', 'adoption'); return;
   }
   if (command.type === 'review-custody') {
     const existing = world.custody.find(item => item.childId === command.childId && !item.ended && (item.a === player.id || item.b === player.id));
@@ -168,7 +168,7 @@ export function resolveFamily(world: World, command: FamilyCommand) {
   for (const child of shared) setCustody(world, child, player, spouse, command.custody);
   player.stats.happiness = bounded(player.stats.happiness - 8); spouse.stats.happiness = bounded(spouse.stats.happiness - 8);
   fact(world, 'I divorced ' + fullName(spouse) + '. The marital gain settlement was ' + formatMoney({ minor: quote.amount, currency: quote.currency }) + '.', 'family');
-  result(world, 'Separate lives', 'Your marriage ended. Starting wealth is accounted for in the equalisation of marital gains. Payments use real balances; any unpaid amount is a recorded obligation owed to the other person. Children have recorded living arrangements and support.', 'breakup');
+  result(world, 'Separate lives', 'Your marriage has ended. The settlement reflects starting wealth and marital gains. Payments use available funds; any unpaid amount stays owed to your former spouse. Children’s living arrangements and support are set.', 'breakup');
 }
 export function careAfterDeath(world: World, personId: string) {
   for (const pregnancy of world.pregnancies.filter(item => item.status === 'pregnant' && item.carrierId === personId)) { pregnancy.status = 'ended-death'; pregnancy.ended = { ...world.date }; }

@@ -226,7 +226,7 @@ export function resolveSocialMedia(world: World, command: SocialMediaCommand) {
     const cost = collaborationCost(world); if (availableCash(accountFor(world)) < cost.minor) throw new IneligibleAction('Your available balance cannot fund production');
     const chance = Math.max(10, Math.min(90, 25 + Math.round(relation.trust / 2) - (target.followers > Math.max(1000, account.followers * 10) ? 20 : 0)));
     const accepted = draw(world, 'outcomes', 1, 100) <= chance, item: World['collaborations'][number] = { id: 'collab_' + world.revision, a: account.id, b: target.id, date: { ...world.date }, accepted, fee: { ...cost, minor: accepted ? cost.minor : 0n }, postIds: [] }; world.collaborations.push(item);
-    if (!accepted) { result(world, 'Not this time', other.firstName + ' declined. No production fee was spent and no post was invented.', 'team'); return; }
+    if (!accepted) { result(world, 'Not this time', 'Creator ' + fullName(other) + ' declined the collaboration. No production fee was charged.', 'team'); return; }
     charge(world, cost.minor, 'collaboration-production', 'Joint content production'); const firstFollowers = account.followers, secondFollowers = target.followers;
     const first = publish(world, account, account.topic, 'authentic', false, 'A collaboration with ' + other.firstName + '.', false, item.id, Math.floor(secondFollowers / 4));
     const second = publish(world, target, target.topic, 'authentic', false, 'A collaboration with ' + person.firstName + '.', false, item.id, Math.floor(firstFollowers / 4)); item.postIds = [first.id, second.id]; relation.strength = bounded(relation.strength + 5); relation.trust = bounded(relation.trust + 3);

@@ -130,7 +130,7 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
     person.stats.energy -= 6; if (accepted && hourly) updateHourlyRate(world, person, 'raise', job.rank, world.workRaises.at(-1)!.id); else job.annualPay = annualPayAfter;
     const salary = formatMoney({ minor: annualPayAfter, currency: job.currency });
     fact(world, 'I asked ' + supervisor.firstName + ' for a raise. ' + (accepted ? 'My annual gross pay rose to ' + salary + '.' : 'The answer was no.'), 'work-raise');
-    result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? supervisor.firstName + ' agrees to a 5% raise. Your higher rate starts with your next paid period.' : supervisor.firstName + ' says the budget will not stretch. Your current pay stays the same; you can ask again next year.', 'career', [
+    result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? 'Your supervisor, ' + fullName(supervisor) + ', agrees to a 5% raise. Your higher rate starts with your next paid period.' : 'Your supervisor, ' + fullName(supervisor) + ', says the budget will not stretch. Your current pay stays the same; you can ask again next year.', 'career', [
       { id: 'salary', label: 'Annual gross pay', value: salary, tone: accepted ? 'positive' : 'neutral' },
       { id: 'energy', label: 'Energy', value: '−6%', tone: 'negative' },
     ]); return;
@@ -142,7 +142,7 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
   person.stats.energy -= 4; job.performance += performanceGain; const bondBefore = relation.strength;
   if (accepted) { relation.strength = bounded(relation.strength + 2); relation.trust = bounded(relation.trust + 1); }
   fact(world, 'I asked ' + supervisor.firstName + ' for work feedback. ' + (accepted ? 'We found a useful change to make.' : 'They could not fit in the discussion this year.'), 'work-feedback');
-  result(world, accepted ? 'A clearer target' : 'Not a good time', accepted ? supervisor.firstName + ' gives you one useful thing to change. It is considerably more helpful than “be more proactive”.' : supervisor.firstName + ' is too busy to talk. You leave the discussion for another year.', 'career', [
+  result(world, accepted ? 'A clearer target' : 'Not a good time', accepted ? 'Your supervisor, ' + fullName(supervisor) + ', gives you one useful thing to change. It is considerably more helpful than “be more proactive”.' : 'Your supervisor, ' + fullName(supervisor) + ', is too busy to talk. You leave the discussion for another year.', 'career', [
     { id: 'performance', label: 'Performance', value: '+' + performanceGain + '%', tone: performanceGain ? 'positive' : 'neutral' },
     { id: 'energy', label: 'Energy', value: '−4%', tone: 'negative' },
     ...(accepted ? [{ id: 'bond', label: 'Relationship', value: '+' + (relation.strength - bondBefore) + '%', tone: relation.strength > bondBefore ? 'positive' as const : 'neutral' as const }] : []),

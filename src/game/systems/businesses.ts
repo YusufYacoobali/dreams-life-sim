@@ -119,7 +119,7 @@ export function resolveBusiness(world: World, command: BusinessCommand) {
     world.businesses.push(company); businessBook(world, company, quote.capital, 0n, 'capital-contribution', 'Owner startup capital', null, owner.id);
     const equipment = roundRatio(quote.capital * BigInt(businessCatalog[command.kind].equipmentBps), 10000n); businessBook(world, company, -equipment, 0n, 'equipment', 'Initial productive equipment'); company.equipment = equipment;
     if (command.operation === 'owner') addCompanyEmployee(world, company, owner, 'worker'); else { hireCompanyStaff(world, company, 'manager'); hireCompanyStaff(world, company, 'worker'); }
-    fact(world, 'I founded ' + company.name + ', a ' + businessCatalog[company.kind].title.toLowerCase() + ' in ' + company.city + '.', 'business'); result(world, 'Open for business', 'Capital, equipment and actual employment contracts are in place. Sales, wages and expenses accrue as months pass.', businessCatalog[company.kind].art); return;
+    fact(world, 'I founded ' + company.name + ', a ' + businessCatalog[company.kind].title.toLowerCase() + ' in ' + company.city + '.', 'business'); result(world, 'Open for business', 'Your capital, equipment and team are ready. Sales, wages and bills follow each month.', businessCatalog[company.kind].art); return;
   }
   const company = companyFor(world, command.businessId);
   if (command.type === 'business-prices') company.priceBps = command.priceBps;
@@ -155,5 +155,5 @@ export function resolveBusiness(world: World, command: BusinessCommand) {
     const person = world.people[member.personId], severance = roundRatio(person.employment!.annualPay, 12n), payment = businessCost(world, company, severance, 'severance', 'One month of severance', 'wages', person.id, member.employmentId); company.pendingPayroll += severance;
     employmentBackPay(world, person, member.employmentId, payment.paid); endEmployment(world, person.id); fact(world, 'My employment at ' + company.name + ' ended with a recorded severance obligation.', 'work', '', person.id);
   }
-  result(world, 'Business updated', 'Your company’s actual plan and balances are updated. Recurring effects take place over time.', company.logo ?? businessCatalog[company.kind].art);
+  result(world, 'Business updated', 'Your business plan and balances are updated. Recurring changes take effect as months pass.', company.logo ?? businessCatalog[company.kind].art);
 }

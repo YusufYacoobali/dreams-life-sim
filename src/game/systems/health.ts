@@ -122,7 +122,7 @@ export function resolveHealth(world: World, command: HealthCommand) {
     if (!condition) throw new IneligibleAction('Choose an active diagnosed condition');
     if (command.type === 'stop-treatment') { if (!condition.treatment) throw new IneligibleAction('No treatment is active'); condition.treatment = null; condition.status = 'active'; record(world, person, 'treatment-stopped', 'I stopped treatment for ' + conditions[condition.type].name + '.', 0n, null, condition.id); result(world, 'Treatment stopped', 'Further programme costs stop. The underlying condition still needs monitoring.', 'medicine'); return; }
     if (condition.treatment) throw new IneligibleAction('Treatment is already active'); limit(world, 'treat:' + condition.id);
-    startTreatment(world, person, condition, providerFor(world, person)); result(world, 'Care has begun', 'The programme is recorded and takes time. It can work well, have a limited effect or cause side effects. Ongoing care uses actual funds; the condition record tracks progress.', 'medicine'); return;
+    startTreatment(world, person, condition, providerFor(world, person)); result(world, 'Care has begun', 'Treatment takes time. It may help, have limited benefit or cause side effects. Monthly care pauses if funding runs out; follow progress in your condition record.', 'medicine'); return;
   }
   if (command.type === 'vaccinate') {
     const current = person.health.vaccinations.find(item => item.id === command.vaccine && item.expiresMonth > absolute(world)); if (current) throw new IneligibleAction('This protection is still current');
