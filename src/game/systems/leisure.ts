@@ -113,7 +113,7 @@ function closePlan(world: World, hobby: Hobby, plan: HobbyPlan, status: Exclude<
   plan.status = status; plan.ended = { ...world.date }; plan.endReason = reason;
   fact(world, 'My ' + hobbyContent[hobby.kind].name.toLowerCase() + ' routine ended. ' + reason, 'hobby', '', hobby.personId);
   if (notify && hobby.personId === world.activePersonId && !active(world).died) {
-    offerPending(world, { kind: 'result', id: 'hobby_end_' + plan.id + '_' + status + '_' + world.revision, title: 'Review your ' + hobbyContent[hobby.kind].name.toLowerCase() + ' routine', body: reason + ' Your proficiency and actual practice history remain. Review current terms to return; no future routine fees are charged.', illustration: 'leisure-' + hobby.kind, effects: [] }, 30);
+    offerPending(world, { kind: 'result', id: 'hobby_end_' + plan.id + '_' + status + '_' + world.revision, title: 'Review your ' + hobbyContent[hobby.kind].name.toLowerCase() + ' routine', body: reason + ' Your progress stays, and future fees stop. You can arrange another routine when you are ready.', illustration: 'leisure-' + hobby.kind, effects: [] }, 30);
     if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
   }
 }
@@ -146,7 +146,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
     if (payer.id === person.id) { const key = person.id + ':hobby-change:' + command.kind + ':' + absolute(world); world.actionCounts[key] = (world.actionCounts[key] ?? 0) + 1; } else world.actionCounts[requestKey(world, command.kind, command.mode, payer.id)] = 1;
     hobby.plans.push({ id: 'hobby_plan_' + world.revision + '_' + hobby.plans.length, payerId: payer.id, country: person.country, city: person.city, currency: countries[person.country].currency, mode: command.mode, monthlyFee: fee, consent: permission, started: { ...world.date }, ended: permission.accepted ? null : { ...world.date }, endReason: permission.accepted ? null : 'The responsible adult did not agree.', status: permission.accepted ? 'active' : 'declined', lastMonth: absolute(world) });
     fact(world, permission.accepted ? 'I arranged a ' + hobbyContent[hobby.kind].name.toLowerCase() + ' routine, funded by ' + fullName(payer) + '.' : fullName(payer) + ' declined my proposed ' + hobbyContent[hobby.kind].name.toLowerCase() + ' routine.', 'hobby');
-    result(world, permission.accepted ? 'Your routine is arranged' : 'Not this routine', permission.accepted ? 'Actual attended months build proficiency. Community access includes shared equipment/materials; lessons include instruction. Monthly fees come from ' + fullName(payer) + ' only when attendance and funds permit. No practice credit or bill is created by setting the plan.' : 'The original adult did not agree. Your existing progress and any other current routine stay in place. No attendance, charge or loan was created.', 'leisure-' + hobby.kind); return;
+    result(world, permission.accepted ? 'Your routine is arranged' : 'Not this routine', permission.accepted ? 'Your place is booked. Now comes the part where you practise. Fees apply only to months you attend.' : 'Your responsible adult said no. Your other routines stay put, and no fee was charged.', 'leisure-' + hobby.kind); return;
   }
   if (command.type === 'leisure-outing') {
     const reason = outingReason(world, command.kind); if (reason) throw new IneligibleAction(reason);
@@ -164,7 +164,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
     result(world, permission.accepted ? outingContent[command.kind].name : 'Staying home', copy, 'leisure-' + command.kind, effects.map(item => ({ id: item.stat, label: item.stat[0].toUpperCase() + item.stat.slice(1), value: (item.after - item.before >= 0 ? '+' : '') + (item.after - item.before) + '%', tone: item.after === item.before ? 'neutral' : (item.stat === 'stress' ? item.after < item.before : item.after > item.before) ? 'positive' : 'negative' }))); return;
   }
   const hobby = personHobbies(world).find(item => item.id === command.hobbyId), plan = hobby && activeHobbyPlan(hobby); if (!hobby || !plan || plan.id !== command.planId) throw new IneligibleAction('Choose your current hobby routine');
-  if (command.type === 'stop-hobby') { closePlan(world, hobby, plan, 'stopped', 'I left the local routine.'); result(world, 'Routine stopped', 'Your proficiency and attended history stay yours. No future fees are charged. Earlier access and lessons are not refunded.', 'leisure-' + hobby.kind); return; }
+  if (command.type === 'stop-hobby') { closePlan(world, hobby, plan, 'stopped', 'I left the local routine.'); result(world, 'Routine stopped', 'Your progress stays. Future fees stop; past sessions are not refunded.', 'leisure-' + hobby.kind); return; }
   if (command.type === 'meet-hobby-peer') {
     const reason = hobbyIntroductionReason(world, hobby, plan); if (reason) throw new IneligibleAction(reason);
     if (command.reviewedPayerId !== plan.payerId) throw new IneligibleAction('The responsible payer changed; review this introduction');
@@ -174,7 +174,7 @@ export function resolveLeisure(world: World, command: LeisureCommand) {
   const reason = hobbyPracticeReason(world, hobby, plan); if (reason) throw new IneligibleAction(reason);
   practice(world, hobby, plan, true); const row = hobby.practices[hobby.practices.length - 1];
   fact(world, 'I did extra practice in ' + hobbyContent[hobby.kind].name.toLowerCase() + '.', 'hobby');
-  result(world, 'Time for ' + hobbyContent[hobby.kind].name.toLowerCase(), row.gain ? 'You spent time practising and built a little more personal proficiency. Your actual changes are recorded below.' : 'You spent time on familiar practice. Your proficiency is already at its current maximum; the actual energy and mood changes are recorded below.', 'leisure-' + hobby.kind, [
+  result(world, 'Time for ' + hobbyContent[hobby.kind].name.toLowerCase(), row.gain ? 'A little less guessing. A little more skill. Your practice paid off.' : 'You know this routine inside out. You still made time for it.', 'leisure-' + hobby.kind, [
     { id: 'proficiency', label: 'Proficiency', value: row.gain ? '+' + row.gain + '%' : '100% · unchanged', tone: row.gain ? 'positive' : 'neutral' },
     ...row.effects.map(item => ({ id: item.stat, label: item.stat[0].toUpperCase() + item.stat.slice(1), value: (item.after - item.before >= 0 ? '+' : '') + (item.after - item.before) + '%', tone: item.after === item.before ? 'neutral' as const : (item.stat === 'stress' ? item.after < item.before : item.after > item.before) ? 'positive' as const : 'negative' as const })),
   ]);

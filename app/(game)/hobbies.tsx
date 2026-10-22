@@ -13,11 +13,11 @@ import { useColors } from '../../src/ui/theme';
 export default function Hobbies() {
   const world = useGame(s => s.world)!, hobbies = personHobbies(world), current = hobbies.filter(hobby => activeHobbyPlan(hobby)), c = useColors();
   return <Page><Header title="Hobbies" onBack={() => router.back()} />
-    <Card><Body muted>Keep up to two routines. Practice continues as months pass; extra practice is optional. School and work can continue alongside your hobbies.</Body></Card>
+    <Card><Body muted>Pick up to two regular hobbies. Keep school and work; make time for something you enjoy.</Body></Card>
     {current.length > 0 && <Card><Heading size={18}>Your routines</Heading>{current.map(hobby => {
       const plan = activeHobbyPlan(hobby)!;
       return <View key={hobby.id} style={{ gap: 8 }}>
-        <ActionRow title={hobbyContent[hobby.kind].name} subtitle={(plan.mode === 'lessons' ? 'Guided lessons' : 'Community access') + ' · ' + formatMoney({ minor: plan.monthlyFee, currency: plan.currency }) + ' per attended month'} icon={<HobbyArt kind={hobby.kind} size={40} />} onPress={() => router.push({ pathname: '/hobby/[kind]', params: { kind: hobby.kind } })} />
+        <ActionRow title={hobbyContent[hobby.kind].name} subtitle={(plan.mode === 'lessons' ? 'Guided lessons' : 'Community access') + ' · ' + formatMoney({ minor: plan.monthlyFee, currency: plan.currency }) + ' per month attended'} icon={<HobbyArt kind={hobby.kind} size={40} />} onPress={() => router.push({ pathname: '/hobby/[kind]', params: { kind: hobby.kind } })} />
         <StatBar label={hobbyContent[hobby.kind].name + ' proficiency'} value={hobby.proficiency} color={c.green} />
       </View>;
     })}</Card>}
