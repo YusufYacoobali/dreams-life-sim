@@ -25,6 +25,7 @@ import { ThemeProvider } from '../../src/ui/theme';
 import { FeedbackProvider } from '../../src/ui/feedback';
 import { pupil } from '../support/pupil';
 import { pendingCaseStoryWorld, prisonPeerStoryWorld } from '../support/legalStories';
+import { retiredLife } from '../support/laterLifeStory';
 import graduate from '../fixtures/v3-employed-graduate.json';
 import oldCareer from '../fixtures/v12-career-archive.json';
 import music from '../fixtures/v13-music-archive.json';
@@ -100,13 +101,17 @@ function studying(program:'university'|'trade'|'graduate') {
 }
 function remand() { const world=pendingCaseStoryWorld(); world.cases[0].detained=true; return validateWorld(world); }
 function retired() {
+  // The established fixture contains the actual retiree and twelve paid
+  // foreign-pension periods, rather than an NPC pension in someone else's life.
+  return ready(retiredLife());
+}
+function royalPensionRecipient() {
   const world=archive(pension);
-  // This archive also contains ongoing public royal duties. Prepare a private
-  // royal life so this case tests retirement without a higher-priority role.
-  for (const house of world.royalHouses) {
-    const member=house.members.find(item=>item.personId===world.activePersonId);
-    if (member) member.mode='private';
-  }
+  const recipient=Object.values(world.people).find(person=>!person.died&&person.finance.pensionAnnual>0n&&world.royalHouses.some(house=>house.members.some(member=>member.personId===person.id&&member.status==='active'&&member.mode==='public')));
+  if (!recipient) throw new Error('Expected the saved royal pension recipient');
+  // Select a genuine, living recipient without changing their pension, duties,
+  // work history, money, dates or random streams.
+  world.activePersonId=recipient.id;
   return validateWorld(world);
 }
 type Scenario = { name:string; world:()=>World; label:string; href:Href };
@@ -165,7 +170,7 @@ test('custody wins over work; business wins over employment; a live creator stud
   const business=archive(company); expect(business.people[business.activePersonId].employment).not.toBeNull();
   expect(resolveLifeContext(business).key).toBe('business');
   expect(resolveLifeContext(creator('youtuber',true)).key).toBe('creator-youtuber');
-  const retiredRoyal=archive(pension); expect(retiredRoyal.people[retiredRoyal.activePersonId].finance.pensionAnnual).toBeGreaterThan(0n);
+  const retiredRoyal=royalPensionRecipient(); expect(retiredRoyal.people[retiredRoyal.activePersonId].finance.pensionAnnual).toBeGreaterThan(0n);
   expect(resolveLifeContext(retiredRoyal).key).toBe('royalty');
 });
 
