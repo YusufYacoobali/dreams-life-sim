@@ -164,8 +164,8 @@ test('turning feedback off stops pending sound, releases the player, and leaves 
   const context = await setup(false, '{"version":1,"appearance":"light","haptics":true,"soundEffects":true}');
   try {
     let releaseSound!: () => void; mockPlayer.seekTo.mockImplementation(() => new Promise<void>(resolve => { releaseSound = resolve; }));
-    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); await press('How to Play. Years, routines, milestones and local progress'); // ActionRow has text and no central Button feedback.
-    expect(mockImpact).not.toHaveBeenCalled(); await press('Restore Default Appearance'); expect(mockPlayer.seekTo).toHaveBeenCalledTimes(1); await press('Never mind');
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); await press('How to Play. Years, routines, milestones and local progress'); // Navigation rows use haptics without adding button sounds.
+    expect(mockImpact).toHaveBeenCalledTimes(1); expect(mockPlayer.seekTo).not.toHaveBeenCalled(); await press('Restore Default Appearance'); expect(mockPlayer.seekTo).toHaveBeenCalledTimes(1); await press('Never mind');
     await toggle('Sound Effects', false); await toggle('Haptic Feedback', false); const writes = context.rows(), count = mockImpact.mock.calls.length;
     await act(async () => { releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await press('Restore Default Appearance'); await press('Never mind'); expect(mockImpact).toHaveBeenCalledTimes(count); expect(context.rows()).toEqual(writes); view.unmount();
   } finally { context.close(); }

@@ -28,11 +28,12 @@ function EventCard({
   event, busy, error, onChoose, onCancel, onClose,
 }: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
   const c = useColors();
-  const { reducedMotion } = useFeedback();
+  const { reducedMotion, hapticFeedback } = useFeedback();
   const insets = useSafeAreaInsets();
   const { width, fontScale } = useWindowDimensions();
   const stackedEffects = width < 360 || fontScale >= 1.3;
   const [selected, setSelected] = useState<string | null>(null);
+  const selectedRef = useRef<string | null>(null);
   const mounted = useRef(true), closed = useRef(false), current = useRef({ event, busy });
   if (current.current.event !== event) closed.current = false;
   current.current = { event, busy };
@@ -81,7 +82,7 @@ function EventCard({
               {event.choices.map(choice => <Pressable
                 key={choice.id} accessibilityRole="radio" accessibilityState={{ checked: selected === choice.id, disabled: busy || !!choice.disabledReason }}
                 accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
-                disabled={busy || !!choice.disabledReason} onPress={() => { if (canAct() && !choice.disabledReason) setSelected(choice.id); }}
+                disabled={busy || !!choice.disabledReason} onPress={() => { if (canAct() && !choice.disabledReason && selectedRef.current !== choice.id) { selectedRef.current = choice.id; setSelected(choice.id); hapticFeedback(); } }}
                 style={[styles.option, { borderColor: selected === choice.id ? c.blue : c.line, backgroundColor: selected === choice.id ? c.selected : c.surface }]}
               ><Body>{choice.label}</Body>{choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}</Pressable>)}
             </>}

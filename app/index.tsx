@@ -9,12 +9,15 @@ import { freshSeed, useGame } from '../src/state/useGame';
 import { fullName } from '../src/game/model';
 import { useColors } from '../src/ui/theme';
 import { OpeningBrandAccent, OpeningScene } from '../src/ui/OpeningScene';
+import { useFeedbackPress } from '../src/ui/feedback';
 
 export default function Welcome() {
   const c = useColors();
   const ready = useGame(s => s.ready), world = useGame(s => s.world), busy = useGame(s => s.busy), error = useGame(s => s.error), bootstrap = useGame(s => s.bootstrap);
-  const open = () => { if (world) router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); };
-  const create = (mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } });
+  const open = useFeedbackPress(() => { if (!world) return false; router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); }, busy || !ready);
+  const create = useFeedbackPress((mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } }), busy || !ready);
+  const savedLives = useFeedbackPress(() => router.push('/saved-lives'), busy || !ready);
+  const help = useFeedbackPress(() => router.push('/help'), !ready);
   return <View style={styles.page}><StatusBar style="light" /><OpeningScene />
     <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.contents}>
       <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><OpeningBrandAccent /><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
@@ -23,7 +26,7 @@ export default function Welcome() {
         {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.continue, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><Text style={styles.actionText}>Continue as {world.people[world.activePersonId].firstName}</Text></Pressable>}
         <Pressable accessibilityRole="button" accessibilityLabel="Start Your Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? c.actionBluePressed : c.actionBlue, opacity: busy ? 0.5 : 1 }]}><Text style={styles.actionText}>Start Your Life</Text></Pressable>
         <Pressable accessibilityRole="button" accessibilityLabel="Random Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.secondary, { backgroundColor: pressed ? '#142539' : 'rgba(20,37,57,0.75)', opacity: busy ? 0.5 : 1 }]}><Ionicons name="dice-outline" size={22} color="#FFFFFF" /><Text style={styles.actionText}>Random Life</Text></Pressable>
-        <View style={{ flexDirection: 'row', gap: 12 }}><Pressable accessibilityRole="button" accessibilityLabel="Saved Lives" accessibilityHint="View your previous lives or continue a saved life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => router.push('/saved-lives')} style={[styles.saved, { flex: 1 }]}><Ionicons name="folder-open-outline" size={18} color="#D4E1F5" /><Text style={styles.savedText}>Saved Lives</Text></Pressable><Pressable accessibilityRole="button" accessibilityLabel="Help" onPress={() => router.push('/help')} style={[styles.saved, { flex: 1 }]}><Ionicons name="help-circle-outline" size={20} color="#D4E1F5" /><Text style={styles.savedText}>Help</Text></Pressable></View><Text style={styles.offline}>Free to play · Offline · Your story stays with you</Text>
+        <View style={{ flexDirection: 'row', gap: 12 }}><Pressable accessibilityRole="button" accessibilityLabel="Saved Lives" accessibilityHint="View your previous lives or continue a saved life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={savedLives} style={[styles.saved, { flex: 1 }]}><Ionicons name="folder-open-outline" size={18} color="#D4E1F5" /><Text style={styles.savedText}>Saved Lives</Text></Pressable><Pressable accessibilityRole="button" accessibilityLabel="Help" onPress={help} style={[styles.saved, { flex: 1 }]}><Ionicons name="help-circle-outline" size={20} color="#D4E1F5" /><Text style={styles.savedText}>Help</Text></Pressable></View><Text style={styles.offline}>Free to play · Offline · Your story stays with you</Text>
       </>}</View>
     </ScrollView></SafeAreaView>
   </View>;

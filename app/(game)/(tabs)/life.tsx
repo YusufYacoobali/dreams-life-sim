@@ -22,6 +22,7 @@ import { jobs } from '../../../src/game/content/jobs';
 import { accountFor } from '../../../src/game/systems/common';
 import { activeSentence, isConfined } from '../../../src/game/systems/legalSchemas';
 import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
+import { useFeedbackPress } from '../../../src/ui/feedback';
 
 // Derive only displayed facts and the identity/date scope, never a cached World.
 function identityPresentation(world: World) {
@@ -45,8 +46,9 @@ type IdentityPresentation = ReturnType<typeof identityPresentation>;
 // Theme context still updates this memoized child independently of its facts.
 const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: IdentityPresentation }) {
   const c = useColors();
+  const openProfile = useFeedbackPress(() => router.push('/profile'));
   return <>
-    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance} onPress={() => router.push('/profile')} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
+    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance} onPress={openProfile} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
       <Portrait decorative name={data.name} appearance={data.appearance} age={data.age} size={52} />
       <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{data.name}</Text>
         {data.royalLabel !== null && <Text style={{ color: c.muted, fontSize: 11 }}>{data.royalLabel}</Text>}
@@ -149,15 +151,17 @@ export default function Life() {
     previousPendingKind.current = pendingKind;
   }, [pendingKind, followJournal]);
   const firstYearHint = ageOn(player, world.date) === 0 ? world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.' : null;
+  const advanceYear = useFeedbackPress(async () => { setAdvancing(true); try { return await dispatch({ type: world.annual ? 'resume' : 'advance' }); } finally { setAdvancing(false); } }, busy || !!world.pending);
+  const openMenu = useFeedbackPress(() => { if (menu) return false; setMenu(true); });
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
     <LifeIdentity data={identity} />
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
     <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={async () => { setAdvancing(true); try { await dispatch({ type: world.annual ? 'resume' : 'advance' }); } finally { setAdvancing(false); } }} style={({ pressed }) => ({ flex: 1, minHeight: 62, borderRadius: 15, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
+      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minHeight: 62, borderRadius: 15, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
         {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
       </Pressable>
-      <Pressable accessibilityRole="button" accessibilityLabel="More Life Options" onPress={() => setMenu(true)} style={{ minWidth: 54, minHeight: 62, borderRadius: 15, backgroundColor: '#8795A4', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="ellipsis-horizontal" size={27} color="#FFFFFF" /></Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel="More Life Options" onPress={openMenu} style={{ minWidth: 54, minHeight: 62, borderRadius: 15, backgroundColor: '#8795A4', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="ellipsis-horizontal" size={27} color="#FFFFFF" /></Pressable>
     </View>
     <EventModal event={menu ? { id: 'life-menu', kind: 'selection', title: 'Your Life', body: 'Where would you like to go?', choices: [{ id: 'profile', label: 'My Life' }, { id: 'extras', label: 'Extras' }, { id: 'saves', label: 'Saved Lives' }, { id: 'time', label: 'Time Machine' }, { id: 'settings', label: 'Settings' }], confirmLabel: 'Open' } : null} onCancel={() => setMenu(false)} onChoose={id => { setMenu(false); router.push(id === 'profile' ? '/profile' : id === 'extras' ? '/extras' : id === 'saves' ? '/saved-lives' : id === 'settings' ? '/settings' : '/time-machine'); }} />
   </SafeAreaView>;
