@@ -29,6 +29,8 @@ test('standalone portraits keep their image role and person label by default', (
   expect(screen.getByRole('image', { name: 'Alex Rivera' })).toBeOnTheScreen();
   const adultLayers = layers(); view.rerender(<CharacterPortrait {...props} age={1} />);
   expect(layers().length).toBeLessThan(adultLayers.length);
+  expect(layers()).toHaveLength(1);
+  expect(String(layers()[0].source.testUri)).toContain('/head-');
   // A newborn retains its saved hair preference without rendering an adult wig.
   expect(layers().every(layer => !layer.style.tintColor)).toBe(true);
   expect(layers().some(layer => String(layer.source.testUri).includes('hair-'))).toBe(false);

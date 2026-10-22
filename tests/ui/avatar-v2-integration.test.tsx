@@ -150,6 +150,8 @@ test('actual Life, player profile and family screens use the same saved artwork;
   show('all-presets',avatarPresets.map((appearance,identity)=>({ appearance,age:25,size:140,label:'Identity '+(identity+1) })));
   show('four-140',[0,3,9,11].map(identity=>({ appearance:avatarPresets[identity],age:25,size:140,label:'Identity '+(identity+1)+' · 140px' })));
   show('ages',[0,7,16,25,48,68,86,100].map(age=>({ appearance:avatarPresets[0],age,size:140,label:'Age '+age })));
+  show('infants',avatarPresets.map((appearance,identity)=>({ appearance,age:1,size:140,label:'Identity '+(identity+1)+' · age 1' })));
+  show('infant-transition',[0,1,2,3].flatMap(age=>[52,88,140].map(size=>({ appearance:avatarPresets[0],age,size,label:'Age '+age+' · '+size+'px' }))));
   show('skin',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[1],skin },age:25,size:140,label:'Skin '+(skin+1) })));
   show('skin-dark-base',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[3],skin },age:25,size:140,label:'Skin '+(skin+1) })));
   show('hair-colours',Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[0],hairColor },age:25,size:140,label:hairColorLabels[hairColor] })));

@@ -4,7 +4,7 @@ const {performance}=require('node:perf_hooks');
 const {portraitLayers,portraitTraits,portraitImages,presets,root}=require('./portrait-review-data.cjs');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'assets/generated/avatars-v2/manifest.json'),'utf8'));
 const ages=[0,7,16,25,48,68,86,100];
-const grid=new Set(),failures=[];let count=0,maxLayers=0,maxDecoded=0;
+const grid=new Set(),failures=[];let count=0,minLayers=Infinity,maxLayers=0,maxDecoded=0,infants=0;
 presets.forEach((preset,identity)=>{
   if(preset.identity!==identity)throw new Error('Preset identity order changed');
   for(const [trait,values]of Object.entries(manifest.defaults))if(preset[trait]!==values[identity])throw new Error('Approved preset/source mismatch: '+identity+' '+trait);
@@ -12,8 +12,11 @@ presets.forEach((preset,identity)=>{
 for(const [key,file] of Object.entries(portraitImages))if(!fs.existsSync(file))failures.push('Missing '+key);
 const started=performance.now();
 for(let identity=0;identity<16;identity++)for(let face=0;face<4;face++)for(let skin=0;skin<6;skin++)for(let hair=0;hair<8;hair++)for(let hairColor=0;hairColor<5;hairColor++)for(const age of ages)for(let outfit=0;outfit<16;outfit++){
-  const appearance={identity,face,skin,hair,hairColor,outfit};const layers=portraitLayers(portraitTraits(appearance,age));count++;maxLayers=Math.max(maxLayers,layers.length);
-  if(layers.length<3||layers.length>5||!layers.some(layer=>layer.asset===`clothing-${outfit}`))failures.push('Incomplete clothing plan');
+  const appearance={identity,face,skin,hair,hairColor,outfit};const layers=portraitLayers(portraitTraits(appearance,age));count++;minLayers=Math.min(minLayers,layers.length);maxLayers=Math.max(maxLayers,layers.length);
+  if(age<3)infants++;
+  const valid=age<3 ? layers.length===1&&layers[0].asset===`head-${identity}-0-${skin}`
+    : layers.length>=3&&layers.length<=5&&layers.some(layer=>layer.asset===`clothing-${outfit}`);
+  if(!valid)failures.push('Incomplete age-specific portrait plan');
   let decoded=0;const textures=new Set();
   for(const layer of layers){
     const asset=manifest.layers[layer.asset];
@@ -36,7 +39,7 @@ function walk(directory){for(const item of fs.readdirSync(directory,{withFileTyp
 }}}
 walk(path.join(root,'app'));walk(path.join(root,'src/ui'));
 if(failures.length||missingPersonIds.length)throw new Error(JSON.stringify({failures,missingPersonIds}));
-const result={combinations:count,completeLocalAssets:true,cropsWithinActualSourceDimensions:true,maxImageLayers:maxLayers,
+const result={combinations:count,completeLocalAssets:true,cropsWithinActualSourceDimensions:true,minImageLayers:minLayers,maxImageLayers:maxLayers,infantHeadOnlyPlansVerified:infants,
   jsPlanElapsedMs:Number(elapsedMs.toFixed(2)),jsPlanMicrosecondsPerPortrait:Number((elapsedMs*1000/count).toFixed(2)),
   maxTheoreticalDecodedBytesPerPortrait:maxDecoded,adultSixteenPresetGridUniqueTextures:grid.size,adultSixteenPresetGridDecodedBytes:gridDecodedBytes,
   personPortraitConsumers,missingPersonIds,scope:'Node layer-plan and static-image budget checks, not native GPU/frame-time measurements'};

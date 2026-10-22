@@ -29,6 +29,15 @@ export function portraitTraits(appearance: Person['appearance'], age: number, pe
 
 /** Pure local layer plan, shared by the app and visual verification. */
 export function portraitLayers({ identity, face, skin, hair, stage, hairColor, grey, clothing }: PortraitTraits): PortraitLayer[] {
+  if (stage === 0) {
+    // Infant portraits use the existing baby illustration alone, centred and
+    // enlarged for small profile circles. Keep saved clothes/hair for age 3+.
+    const scale = 1.35;
+    return [{ asset:`head-${identity}-0-${skin}` as PortraitAsset,
+      left:(320-272*scale)/2, top:0,
+      width:272*scale, height:248*scale,
+      crop:{ left:-face*272*scale, top:0, width:1088*scale, height:248*scale } }];
+  }
   const layers: PortraitLayer[] = [];
   const add = (asset: PortraitAsset, opacity = 1, scale = 1, left = 0, top = 0) => {
     if (asset in portraitImages) layers.push({ asset, opacity, width: 320*scale, height: 320*scale, left, top });

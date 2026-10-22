@@ -20,15 +20,31 @@ test('all 1,966,080 identity/customisation/outfit/age combinations have complete
   for (let identity = 0; identity < 16; identity++) for (let face = 0; face < 4; face++) for (let skin = 0; skin < 6; skin++) {
     for (let hair = 0; hair < 8; hair++) for (let hairColor = 0; hairColor < 5; hairColor++) for (const age of ages) for (let outfit = 0; outfit < 16; outfit++) {
       const layers = portraitLayers(portraitTraits({ identity, face, skin, hair, hairColor, outfit }, age)); count++;
-      const valid = layers.length <= 5 && layers.length >= 3 &&
+      const infant = age < 3;
+      const valid = layers.length <= 5 && layers.length >= (infant ? 1 : 3) &&
         layers.every(layer => Object.hasOwn(portraitImages, layer.asset) &&
           [layer.width, layer.height, layer.left, layer.top, layer.opacity ?? 1].every(Number.isFinite)) &&
-        layers.some(layer => layer.asset.startsWith('head-')) && layers.some(layer => layer.asset.startsWith('body-')) && layers.some(layer => layer.asset === `clothing-${outfit}`) &&
+        layers.some(layer => layer.asset.startsWith('head-')) &&
+        (infant ? layers.length === 1 : layers.some(layer => layer.asset.startsWith('body-')) && layers.some(layer => layer.asset === `clothing-${outfit}`)) &&
         layers.some(layer => layer.asset.endsWith('-front')) === (age >= 3 && hair !== 0);
       if (!valid) failures.push(JSON.stringify({ identity, face, skin, hair, hairColor, age }));
     }
   }
   expect(count).toBe(1966080); expect(failures).toEqual([]);
+});
+
+test('ages 0–2 show only their baby head and restore saved hair and clothing at age 3', () => {
+  for (const preset of avatarPresets) for (const age of [0,1,2]) {
+    const appearance = { ...preset,outfit:14,hair:7,hairColor:3 }, before = { ...appearance };
+    const infant = portraitLayers(portraitTraits(appearance,age));
+    expect(infant).toHaveLength(1);
+    expect(infant[0].asset).toBe(`head-${preset.identity}-0-${preset.skin}`);
+    expect(portraitLayers(portraitTraits({ ...appearance,outfit:3,hair:1,hairColor:0 },age))).toEqual(infant);
+    const child = portraitLayers(portraitTraits(appearance,3));
+    expect(child.some(layer => layer.asset === 'clothing-14')).toBe(true);
+    expect(child.some(layer => layer.asset.endsWith('-3-front'))).toBe(true);
+    expect(appearance).toEqual(before);
+  }
 });
 
 test('the sixteen presets have distinct facial identities and independently selectable outfits', () => {

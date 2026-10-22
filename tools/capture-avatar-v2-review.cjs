@@ -20,6 +20,7 @@ async function main(){
       ['screen-creation','12-creation-screen.png'],['screen-life','13-life-screen.png'],['screen-profile','14-player-profile.png'],
       ['screen-npc','15-npc-profile.png'],['screen-family-profile','16-family-profile.png'],['screen-family-tree','17-family-tree.png'],['skin-dark-base','18-skin-tones-dark-source.png'],['clothing','19-sixteen-clothing-choices.png'],['screen-clothing-screen','20-clothing-screen.png'],['polish-comparison','21-framing-before-after.png'],['hair-fit-4','22-shoulder-hair-face-fits.png'],['hair-fit-5','23-long-curls-face-fits.png'],['hair-fit-7','24-coily-hair-face-fits.png'],['long-hair-ages','25-long-hair-age-fits.png']];
     captures.push(['women-comparison','26-women-hair-before-after.png'],['women-defaults','27-eight-women-hairstyles.png'],['women-ages','28-women-age-fits.png'],['women-hair-options','29-women-short-hair-and-buns.png'],['women-colours','30-women-hair-colours.png'],['women-sizes-light','31-women-sizes-light.png'],['women-sizes-dark','32-women-sizes-dark.png'],['crewnecks','33-front-only-crewnecks.png']);
+    captures.push(['infants','34-infant-heads.png'],['infant-transition','35-infant-to-child.png']);
     for(const[id,file]of captures){
       await page.locator('#'+id).screenshot({path:path.join(directory,file),animations:'disabled'});
       if(file==='04-four-at-140px.png'||file==='03-sixteen-rendered-identities.png'){

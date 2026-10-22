@@ -33,7 +33,9 @@
     "women-colours",
     "women-sizes-light",
     "women-sizes-dark",
-    "crewnecks"
+    "crewnecks",
+    "infants",
+    "infant-transition"
   ],
-  "uniqueAssets": 180
+  "uniqueAssets": 195
 }
