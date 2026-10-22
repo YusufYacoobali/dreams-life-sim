@@ -91,7 +91,7 @@ test('artwork identity never consumes gameplay randomness or changes generated f
   expect(encodeWorld(a)).toBe(encodeWorld(b));
 });
 
-test('real creation controls preserve the chosen facial identity and outfit through hair, skin and contour edits', async () => {
+test('real creation controls preserve facial identity and outfit, with no obsolete face-shape controls', async () => {
   useCreationDraft.getState().begin(42,'custom');
   const draft = useCreationDraft.getState().draft!;
   useCreationDraft.getState().update({ ...draft.input,appearance:{ ...avatarPresets[9] } });
@@ -101,9 +101,11 @@ test('real creation controls preserve the chosen facial identity and outfit thro
   await press('tab','Hair Color'); await press('radio','Blond');
   await press('tab','Hair Style'); await press('radio','Bun');
   await press('tab','Skin Tone'); await press('radio','Skin tone 6, deep brown');
-  await press('tab','Avatars'); await press('radio','Broad');
+  await press('tab','Avatars');
+  expect(screen.queryByRole('radiogroup',{ name:'Face shape' })).toBeNull();
+  expect(screen.queryByText('FACE SHAPE')).toBeNull();
   const result = useCreationDraft.getState().draft!.input.appearance;
-  expect(result).toEqual({ identity:9,outfit:9,face:3,skin:5,hair:6,hairColor:3 });
+  expect(result).toEqual({ identity:9,outfit:9,face:2,skin:5,hair:6,hairColor:3 });
   expect(new Set(screen.UNSAFE_getAllByType(CharacterPortrait).map(item => item.props.appearance.identity ?? 0)).size).toBe(16);
   expect(portraitTraits(result,25).identity).toBe(original.identity);
   expect(portraitTraits(result,25).clothing).toBe(original.clothing);
@@ -130,6 +132,7 @@ test('actual Life, player profile and family screens use the same saved artwork;
     if (!directory) return;
     const clean = (node:any):any => Array.isArray(node) ? node.map(clean) : !node || typeof node !== 'object' ? node : ({
       type:node.type,props:{ style:StyleSheet.flatten(node.props?.style),source:node.props?.source,
+        svg:node.type?.startsWith('RNSVG') ? Object.fromEntries(['d','name','clipPath','matrix','x','y','width','height','minX','minY','vbWidth','vbHeight','src','align'].filter(key=>node.props?.[key]!==undefined).map(key=>[key,node.props[key]])) : undefined,
         contentContainerStyle:StyleSheet.flatten(node.props?.contentContainerStyle),edges:node.props?.edges,
         accessibilityRole:node.props?.accessibilityRole,accessibilityLabel:node.props?.accessibilityLabel },children:node.children?.map(clean) });
     mkdirSync(directory,{ recursive:true }); writeFileSync(join(directory,name+'.json'),JSON.stringify(clean(tree)));
@@ -151,10 +154,12 @@ test('actual Life, player profile and family screens use the same saved artwork;
   show('skin-dark-base',Array.from({length:6},(_,skin)=>({ appearance:{ ...avatarPresets[3],skin },age:25,size:140,label:'Skin '+(skin+1) })));
   show('hair-colours',Array.from({length:5},(_,hairColor)=>({ appearance:{ ...avatarPresets[0],hairColor },age:25,size:140,label:hairColorLabels[hairColor] })));
   show('hairstyles',Array.from({length:8},(_,hair)=>({ appearance:{ ...avatarPresets[0],hair },age:25,size:140,label:hairLabels[hair] })));
-  show('face-shapes',Array.from({length:4},(_,face)=>({ appearance:{ ...avatarPresets[0],face },age:25,size:140,label:['Oval','Round','Long','Broad'][face] })));
+  show('face-shapes',Array.from({length:4},(_,face)=>({ appearance:{ ...avatarPresets[0],face },age:25,size:140,label:'Legacy '+['Oval','Round','Long','Broad'][face] })));
+  for (const hair of [4,5,7]) show('hair-fit-'+hair,avatarPresets.map((appearance,identity)=>({ appearance:{ ...appearance,hair },age:25,size:140,label:'Face '+(identity+1) })));
+  show('long-hair-ages',[1,3,11,13].flatMap(identity=>[7,25,86].map(age=>({ appearance:avatarPresets[identity],age,size:140,label:'Face '+(identity+1)+' · age '+age }))));
   show('clothing',outfitLabels.map((label,outfit)=>({ appearance:{ ...avatarPresets[0],outfit },age:25,size:140,label })));
   for (const dark of [false,true]) show(dark?'sizes-dark':'sizes-light',[0,3,9,11].flatMap(identity=>[52,88,140].map(size=>({ appearance:avatarPresets[identity],age:25,size,label:(identity+1)+' · '+size+'px' }))),dark);
   expect(encodeWorld(mockStore.getState().world!)).toBe(before);
-  expect(portraitLayers(portraitTraits(avatarPresets[0],25)).length).toBeLessThanOrEqual(7);
+  expect(portraitLayers(portraitTraits(avatarPresets[0],25)).length).toBeLessThanOrEqual(5);
   view.unmount();
 });

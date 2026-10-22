@@ -2,6 +2,7 @@ import type { Person } from '../game/model';
 import { facialIdentity } from '../game/appearance';
 import { portraitImages, type PortraitAsset } from './portraitImages';
 import { portraitAgeStage, type PortraitAgeStage } from './portraitLayout';
+import { fitPortraitHair, longHairFaceBounds } from './portraitFitting';
 
 export const portraitCanvasSize = 320;
 export const identityHair = [3,4,3,2,4,2,4,3,4,1,5,4,3,5,3,4] as const;
@@ -12,7 +13,8 @@ export type PortraitTraits = {
 export type PortraitLayer = {
   asset: PortraitAsset; left: number; top: number; width: number; height: number;
   opacity?: number;
-  /** A single face-shape tile inside a four-contour head atlas. */
+  skinClip?: { outfit: number; scale: number };
+  /** A window into the illustrated head atlas. */
   crop?: { left: number; top: number; width: number; height: number };
 };
 
@@ -32,17 +34,33 @@ export function portraitLayers({ identity, face, skin, hair, stage, hairColor, g
     if (asset in portraitImages) layers.push({ asset, opacity, width: 320*scale, height: 320*scale, left, top });
   };
   const wig = hair === identityHair[identity] ? identity : 15+hair;
-  const hairPart = (part: 'back' | 'front') => {
-    add(`hair-${wig}-${hairColor}-${part}` as PortraitAsset);
-    if (grey > 0) add(`hair-${wig}-5-${part}` as PortraitAsset, grey);
-  };
-  if (hair) hairPart('back');
+  const headScale = .8, headLeft = 32, headTop = 10;
   const bodyScale = [0.78,0.88,0.96,1,1,1,1,1][stage];
-  add(`body-${identity}-${skin}` as PortraitAsset, 1, bodyScale, 160*(1-bodyScale),320*(1-bodyScale));
+  // Reuse the illustrated neck/chest under each actual garment opening. The
+  // clip prevents skin peeking above shoulders or leaving holes inside a V-neck.
+  const body = `body-${identity}-${skin}` as PortraitAsset;
+  layers.push({ asset:body,left:160-320*bodyScale,top:320-422*bodyScale,
+    width:640*bodyScale,height:422*bodyScale,skinClip:{outfit:clothing,scale:bodyScale} });
+  // Long locks are a continuous foreground illustration. Crop covered ears
+  // out of the head's viewport so they cannot peek through an old ear opening.
+  // This clips existing pixels; it never stretches or repaints facial features.
+  const longHair = [4,5,7].includes(hair);
+  const bounds = longHair ? longHairFaceBounds(identity,stage,face) : { left:24,right:296 };
+  // Child/teen source necks flare at their bottom edge. Keep that concealed
+  // under the fitted anatomical neck rather than showing a skin-coloured rim.
+  const headHeight = stage === 1 || stage === 2 ? 216 : 248;
   layers.push({ asset: `head-${identity}-${stage}-${skin}` as PortraitAsset,
-    left: 24, top: 44, width: 272, height: 248,
-    crop: { left: -face*272, top: 0, width: 1088, height: 248 } });
+    left:headLeft+bounds.left*headScale, top:headTop+44*headScale,
+    width:(bounds.right-bounds.left)*headScale, height:headHeight*headScale,
+    crop: { left:-(face*272+bounds.left-24)*headScale, top:0, width:1088*headScale, height:248*headScale } });
   add(`clothing-${clothing}` as PortraitAsset, 1, bodyScale, 160*(1-bodyScale),320*(1-bodyScale));
-  if (hair) hairPart('front');
+  if (hair) {
+    const fit = fitPortraitHair(wig,identity,stage,face);
+    const hairLayer = (color: number, opacity: number) => layers.push({ asset:`hair-${wig}-${color}-front` as PortraitAsset,
+      left:headLeft+fit.left*headScale, top:headTop+fit.top*headScale,
+      width:fit.width*headScale, height:fit.height*headScale, opacity });
+    hairLayer(hairColor,1);
+    if (grey > 0) hairLayer(5,grey);
+  }
   return layers;
 }

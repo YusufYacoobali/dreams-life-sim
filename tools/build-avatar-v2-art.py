@@ -10,6 +10,7 @@ Requires Pillow, numpy and scipy. Run from the repository root.
 from pathlib import Path
 import hashlib
 import json
+import runpy
 import sys
 import numpy as np
 from PIL import Image
@@ -32,11 +33,14 @@ HAIR_TOP = [18]*23
 HAIR_WIDTH[21] = 192
 HAIR_TOP[21] = 4  # bun has its own silhouette and higher crown
 entries, sources = {}, []
-hair_only = '--hair-only' in sys.argv
+rig_only = '--rig-only' in sys.argv
+hair_only = '--hair-only' in sys.argv or rig_only
 if hair_only:
     previous = json.loads((OUT/'manifest.json').read_text())
     entries = {k:v for k,v in previous['layers'].items() if not k.startswith('hair-')}
-    sources = [v for v in previous['sources'] if v['file'] not in ['identity-hair.png','hairstyles.png','clean-waves.png','extra-hairstyles.png']]
+    sources = [v for v in previous['sources'] if v['file'] not in ['identity-hair.png','hairstyles.png','clean-waves.png','extra-hairstyles.png','hair-fronts.png']]
+    if rig_only:
+        sources = [v for v in sources if v['file'] not in ['outfits.png','outfits-front.png']]
 
 
 def extract(file, count, columns=4, barrier=None):
@@ -197,12 +201,9 @@ if not hair_only:
                     atlas.paste(contour(colored,face,DEFAULT_FACE[identity]).crop(HEAD_BOX),(face*272,0))
                 save(f'head-{identity}-{stage}-{skin}',atlas)
 
-    outfits = extract('outfits.png',16,barrier=(631,730,900))
     shoulders = extract('shoulders.png',2,columns=2)
-    for identity, outfit in enumerate(outfits):
-        shirt = register(outfit,width=304,top=250 if identity in [0,2,7,8,9,12] else 261)
+    for identity in range(16):
         plate = register(shoulders[identity % 2],width=285,top=229)
-        save(f'clothing-{identity}',shirt)
         p = np.array(plate); reference = np.median(p[273:279,154:166,:3],axis=(0,1))
         for skin in range(6):
             head = registered_heads[3][identity]
@@ -214,6 +215,16 @@ if not hair_only:
             body = grade(plate,reference,target)
             save(f'body-{identity}-{skin}',body)
 
+if not hair_only or rig_only:
+    outfits = extract('outfits.png',16,barrier=(631,730,900))
+    fronts = extract('outfits-front.png',3,columns=3)
+    for index, replacement in zip([2,7,9],fronts):
+        outfits[index] = replacement
+    for identity, outfit in enumerate(outfits):
+        # Keep enough of the actual shirt/chest in the texture to show an outfit,
+        # rather than baking only its collar into the bottom of a head crop.
+        save(f'clothing-{identity}',register(outfit,width=304,top=210 if identity in [0,2,7,8,9,12] else 219))
+
 wigs = extract('identity-hair.png',16,barrier=(946,600,940))+extract('hairstyles.png',7)
 waves = extract('clean-waves.png',2,columns=2)
 wigs[10], wigs[11] = waves
@@ -222,12 +233,23 @@ wigs[10], wigs[11] = waves
 wigs[20] = waves[0]
 extra = extract('extra-hairstyles.png',2,columns=2)
 wigs[16], wigs[21] = extra
+foreground = extract('hair-fronts.png',4,columns=2)
+foreground_styles = {1:0,4:1,6:0,8:2,10:2,11:2,13:3,15:1,19:1,20:2,22:3}
+foreground_colors = [1,0,3,0]
+for wig, style in foreground_styles.items():
+    wigs[wig] = foreground[style]
 for wig, illustration in enumerate(wigs):
     registered = register(illustration,width=HAIR_WIDTH[wig],top=HAIR_TOP[wig])
     p = np.array(registered)
     reference = np.median(p[p[:,:,3]>230,:3],axis=0)
     for color in range(6):
-        colored = registered if wig < 16 and color == DEFAULT_COLOR[wig] else grade(registered,reference,hex_rgb(HAIRS[color]),skin_grade=False)
+        natural_color = foreground_colors[foreground_styles[wig]] if wig in foreground_styles else DEFAULT_COLOR[wig] if wig < 16 else -1
+        colored = registered if color == natural_color else grade(registered,reference,hex_rgb(HAIRS[color]),skin_grade=False)
+        if wig in [1,4,6,8,10,11,13,15,19,20,22]:
+            # Continuous foreground locks cover the ears, cheeks and clothing.
+            # Do not put any part of a long hairstyle behind the head layer.
+            save(f'hair-{wig}-{color}-front',colored)
+            continue
         # Hand-authored neckline occlusion curve. Lower locks go behind clothes;
         # the entire forehead/fringe and upper side locks stay in the foreground.
         front = np.array(colored); back = front.copy()
@@ -246,7 +268,7 @@ manifest = {'version':2,'generator':'built-in image_gen.imagegen only','canvasSi
  'defaults':{'face':DEFAULT_FACE,'skin':DEFAULT_SKIN,'hair':DEFAULT_HAIR,'hairColor':DEFAULT_COLOR,'outfit':list(range(16))},
  'skinTones':SKINS,'hairColors':HAIRS[:5],'sources':sources,'layers':entries,
  'notes':['128 independently illustrated age/identity heads.','Each skin-grade head atlas contains four local cheek/jaw contours, not four stretched faces.',
- 'No RGB segmentation or quantised tint masks. Natural head and hair colours preserve source pixels apart from registration resampling.',
+ 'No RGB segmentation or quantised tint masks. Natural head colours preserve source pixels apart from registration resampling; hair grades retain full-colour authored shading.',
  'Six skin grades and five hair grades preserve continuous authored shading and antialiasing; a continuous perceptual colour grade protects neutral ink/sclera and non-skin iris hues.',
  'Sixteen independent illustrated outfits; legacy defaults follow identity and optional outfit metadata stores explicit selections. Only head/hair/shoulder/clothing layers, never complete portrait combinations.']}
 (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -260,3 +282,4 @@ registry += '} as const;\nexport type PortraitAsset = keyof typeof portraitImage
 (ROOT/'src/assets/portraitImages.ts').write_text(registry)
 (SOURCE/'registration.json').write_text(json.dumps({key:manifest[key] for key in ['canvasSize','headViewport','defaults','skinTones','hairColors','sources','notes']},indent=2)+'\n')
 print(json.dumps({'assets':len(entries),'bytes':sum(v['bytes'] for v in entries.values()),'headAtlasDecodedBytes':1088*248*4}))
+runpy.run_path(str(ROOT/'tools/build-avatar-v2-fit.py'))

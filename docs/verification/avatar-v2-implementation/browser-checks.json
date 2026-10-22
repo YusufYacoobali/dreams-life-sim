@@ -1,11 +1,12 @@
 {
-  "renderer": "Chromium CSS adapter of actual React Native production screen/component trees; NOT native device screenshots",
+  "renderer": "Chromium CSS/SVG adapter of actual React Native production screen/component trees; NOT native device screenshots",
   "browser": "154.0.8037.57",
   "deviceScaleFactor": 2,
   "cssProfileSizes": [
     52,
     88,
-    140
+    140,
+    184
   ],
   "captures": [
     "01-reference-previous-new.png",
@@ -27,7 +28,12 @@
     "17-family-tree.png",
     "18-skin-tones-dark-source.png",
     "19-sixteen-clothing-choices.png",
-    "20-clothing-screen.png"
+    "20-clothing-screen.png",
+    "21-framing-before-after.png",
+    "22-shoulder-hair-face-fits.png",
+    "23-long-curls-face-fits.png",
+    "24-coily-hair-face-fits.png",
+    "25-long-hair-age-fits.png"
   ],
   "creationGrid": {
     "cells": 16,
@@ -38,8 +44,11 @@
       4
     ]
   },
-  "images": 744,
+  "images": 709,
+  "svgImages": 229,
   "allDecoded": true,
+  "uniqueSvgClipIds": true,
+  "allSvgClipReferencesResolve": true,
   "desktopOverflow": false,
   "mobileOverflow": false,
   "errors": [],

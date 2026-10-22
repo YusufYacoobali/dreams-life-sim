@@ -1,6 +1,10 @@
 # Validation results
 
-Integration base: `901ea01` from remote `work`. The existing ink cinematics, native worklet fixes and internal God Mode editor were preserved.
+Current polish preserves the newer `e460be8` cinematic-playback update from remote `work` and builds on the `016cbbf` avatar overhaul. TypeScript and the final targeted run pass: **11 suites, 46 tests**, covering actual appearance controls, absent face-shape UI, independent clothing, SQLite reload, immutable facial identity, per-face/age hair fits, accessibility/memoization all onboarding journeys, runtime import architecture and the updated cinematic assets/transitions. The complete 1,966,080-combination local-layer/crop audit passes with a maximum of five image layers. The browser review includes 25 captures, a 184px clothing preview, all sixteen faces with each long-hair style and age comparisons. SVG clip IDs are namespaced per capture instance and their references are checked. Android/iOS exports audit all 1,018 current PNG layers. The final neckline fitting data was followed by another passing appearance integration run (5 tests) and refreshed captures/exports. Native device rendering remains untested.
+
+The earlier integration validation below is retained as historical coverage, not a claim that those broad suites were rerun for this polish.
+
+Original integration base: `901ea01` from remote `work`. The existing ink cinematics, native worklet fixes and internal God Mode editor were preserved.
 
 - `npm run typecheck`: passed, application and test TypeScript projects.
 - `npm run check:imports`: passed, 393 runtime modules, zero cycles.

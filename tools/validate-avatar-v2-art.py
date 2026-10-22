@@ -25,6 +25,12 @@ for key, layer in layers.items():
 assert sum(k.startswith('head-') for k in layers) == 16*8*6
 assert sum(k.startswith('body-') for k in layers) == 16*6
 assert sum(k.startswith('clothing-') for k in layers) == 16
+assert sum(k.startswith('hair-') for k in layers) == 23*6
+assert not any(k.endswith('-back') for k in layers)
+for outfit in [2,7,9]:
+    alpha = np.array(Image.open(OUT/f'clothing-{outfit}.png'))[:,:,3]
+    # An open neckline through the neck attachment; no rear collar can cross it.
+    assert not np.any(alpha[210:245,158:162] > 16), outfit
 for identity in range(16):
     for skin in range(6):
         for stage in range(8):
@@ -71,6 +77,8 @@ result = {'assetCount':len(checks),'independentlyIllustratedIdentityAgeHeads':12
           'centralEyeAndNosePixelsIdenticalAcrossFaceShapeChoices':True,'allFourContoursVisiblyDistinct':True,'noHeadPixelsTouchTileSideBorders':True,
           'allHashesMatch':True,'allSixSkinTonesOrderedForEveryIdentityAndAge':True,'transparentPixelsHaveZeroRGB':True,'headAtlasDecodedBytes':1088*248*4,
           'runtimeNetworkRequired':False,'runtimeTintOrColourFilters':False,'nativeDeviceRenderingTested':False}
+result.update({'continuousForegroundHairstyles':23,'hairColourLayers':138,
+               'rearHairTextures':0,'frontOnlyCollarNecklinesVerified':[2,7,9]})
 directory = ROOT/'docs/verification/avatar-v2-implementation';directory.mkdir(parents=True,exist_ok=True)
 (directory/'art-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result,indent=2))

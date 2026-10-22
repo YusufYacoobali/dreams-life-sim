@@ -13,14 +13,14 @@ for(const [key,file] of Object.entries(portraitImages))if(!fs.existsSync(file))f
 const started=performance.now();
 for(let identity=0;identity<16;identity++)for(let face=0;face<4;face++)for(let skin=0;skin<6;skin++)for(let hair=0;hair<8;hair++)for(let hairColor=0;hairColor<5;hairColor++)for(const age of ages)for(let outfit=0;outfit<16;outfit++){
   const appearance={identity,face,skin,hair,hairColor,outfit};const layers=portraitLayers(portraitTraits(appearance,age));count++;maxLayers=Math.max(maxLayers,layers.length);
-  if(layers.length<3||layers.length>7||!layers.some(layer=>layer.asset===`clothing-${outfit}`))failures.push('Incomplete clothing plan');
-  let decoded=0;
+  if(layers.length<3||layers.length>5||!layers.some(layer=>layer.asset===`clothing-${outfit}`))failures.push('Incomplete clothing plan');
+  let decoded=0;const textures=new Set();
   for(const layer of layers){
     const asset=manifest.layers[layer.asset];
     if(!asset){failures.push('Missing '+layer.asset);continue;}
-    decoded+=asset.size[0]*asset.size[1]*4;
-    if(layer.crop){const x=-layer.crop.left,y=-layer.crop.top;
-      if(layer.crop.width!==asset.size[0]||layer.crop.height!==asset.size[1]||x<0||y<0||x+layer.width>asset.size[0]||y+layer.height>asset.size[1])failures.push('Invalid crop '+JSON.stringify(layer));
+    if(!textures.has(layer.asset)){decoded+=asset.size[0]*asset.size[1]*4;textures.add(layer.asset);}
+    if(layer.crop){const scaleX=layer.crop.width/asset.size[0],scaleY=layer.crop.height/asset.size[1],x=-layer.crop.left/scaleX,y=-layer.crop.top/scaleY;
+      if(x<0||y<0||x+layer.width/scaleX>asset.size[0]+1e-6||y+layer.height/scaleY>asset.size[1]+1e-6)failures.push('Invalid crop '+JSON.stringify(layer));
     }
   }
   maxDecoded=Math.max(maxDecoded,decoded);

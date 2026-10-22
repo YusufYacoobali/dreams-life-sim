@@ -22,7 +22,11 @@
     "ages",
     "sizes-light",
     "sizes-dark",
-    "clothing"
+    "clothing",
+    "hair-fit-4",
+    "hair-fit-5",
+    "hair-fit-7",
+    "long-hair-ages"
   ],
-  "uniqueAssets": 124
+  "uniqueAssets": 134
 }

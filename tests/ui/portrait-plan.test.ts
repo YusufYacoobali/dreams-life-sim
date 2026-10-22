@@ -2,6 +2,7 @@ import { portraitImages } from '../../src/assets/portraitImages';
 import { portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
 import { ageingHairColor, hairColors, portraitAgeStage } from '../../src/assets/portraitLayout';
 import { avatarPresets } from '../../src/ui/CreationElements';
+import { fitPortraitHair } from '../../src/assets/portraitFitting';
 
 const ages = [0, 7, 16, 25, 48, 68, 86, 100];
 
@@ -11,7 +12,7 @@ test('all 1,966,080 identity/customisation/outfit/age combinations have complete
   for (let identity = 0; identity < 16; identity++) for (let face = 0; face < 4; face++) for (let skin = 0; skin < 6; skin++) {
     for (let hair = 0; hair < 8; hair++) for (let hairColor = 0; hairColor < 5; hairColor++) for (const age of ages) for (let outfit = 0; outfit < 16; outfit++) {
       const layers = portraitLayers(portraitTraits({ identity, face, skin, hair, hairColor, outfit }, age)); count++;
-      const valid = layers.length <= 7 && layers.length >= 3 &&
+      const valid = layers.length <= 5 && layers.length >= 3 &&
         layers.every(layer => Object.hasOwn(portraitImages, layer.asset) &&
           [layer.width, layer.height, layer.left, layer.top, layer.opacity ?? 1].every(Number.isFinite)) &&
         layers.some(layer => layer.asset.startsWith('head-')) && layers.some(layer => layer.asset.startsWith('body-')) && layers.some(layer => layer.asset === `clothing-${outfit}`) &&
@@ -31,7 +32,12 @@ test('the sixteen presets have distinct facial identities and independently sele
     for (let hairColor = 0; hairColor < 5; hairColor++) for (let hair = 0; hair < 8; hair++) {
       const changed = portraitTraits({ ...preset, hair, hairColor },25), next = portraitLayers(changed);
       expect(changed.identity).toBe(original.identity); expect(changed.clothing).toBe(original.clothing);
-      expect(next.find(layer => layer.asset.startsWith('head-'))).toEqual(head);
+      const nextHead = next.find(layer => layer.asset.startsWith('head-'))!;
+      expect(nextHead.asset).toBe(head!.asset);
+      expect(nextHead.crop?.width).toBe(head!.crop?.width);
+      expect(nextHead.crop?.height).toBe(head!.crop?.height);
+      expect(nextHead.left+nextHead.crop!.left).toBeCloseTo(head!.left+head!.crop!.left);
+      expect(nextHead.top).toBe(head!.top);
       expect(next.find(layer => layer.asset.startsWith('body-'))).toEqual(body);
     }
     for (let skin = 0; skin < 6; skin++) for (let face = 0; face < 4; face++) {
@@ -44,7 +50,8 @@ test('the sixteen presets have distinct facial identities and independently sele
     for (let outfit = 0; outfit < 16; outfit++) {
       const changed = portraitTraits({ ...preset, outfit },25), next = portraitLayers(changed);
       expect({ ...changed, clothing: original.clothing }).toEqual(original);
-      expect(next.filter(layer => !layer.asset.startsWith('clothing-'))).toEqual(layers.filter(layer => !layer.asset.startsWith('clothing-')));
+      const sameIdentityLayers = (items: typeof layers) => items.filter(layer => !layer.asset.startsWith('clothing-')).map(layer => layer.skinClip ? { ...layer,skinClip:{...layer.skinClip,outfit:original.clothing} } : layer);
+      expect(sameIdentityLayers(next)).toEqual(sameIdentityLayers(layers));
       expect(next.find(layer => layer.asset.startsWith('clothing-'))?.asset).toBe(`clothing-${outfit}`);
     }
   }
@@ -65,12 +72,26 @@ test('all eight independently illustrated age stages retain identity and latent 
   expect(ageingHairColor(hairColors[0],45)).toBe(hairColors[0].toLowerCase());
 });
 
-test('rear locks sit behind shoulders and full-colour foreground hair sits above the facial base', () => {
+test('continuous long hair sits in front of the face, ears and clothes, without an occluded rear layer', () => {
   const layers = portraitLayers(portraitTraits(avatarPresets[1],68));
   const index = (fragment: string) => layers.findIndex(layer => layer.asset.includes(fragment));
-  expect(index('-back')).toBeLessThan(index('body-'));
+  expect(index('-back')).toBe(-1);
   expect(index('body-')).toBeLessThan(index('head-'));
   expect(index('head-')).toBeLessThan(index('clothing-'));
   expect(index('clothing-')).toBeLessThan(index('-front'));
   expect(layers.every(layer => !('color' in layer))).toBe(true);
+  const head = layers.find(layer => layer.asset.startsWith('head-'))!;
+  const shortHead = portraitLayers(portraitTraits({ ...avatarPresets[1],hair:1 },68)).find(layer => layer.asset.startsWith('head-'))!;
+  expect(head.width).toBeLessThan(shortHead.width);
+  expect(head.crop?.height).toBe(shortHead.crop?.height);
+  expect(head.crop?.width).toBe(shortHead.crop?.width);
+});
+
+test('hair is fitted to each measured face, contour and age rather than using one fixed-size wig', () => {
+  for (const wig of [16,17,18,19,20,21,22]) {
+    const fits = avatarPresets.map(preset => fitPortraitHair(wig,preset.identity!,3,preset.face));
+    expect(new Set(fits.map(fit => fit.width.toFixed(3))).size).toBeGreaterThan(8);
+    expect(fitPortraitHair(wig,0,1,0)).not.toEqual(fitPortraitHair(wig,0,3,0));
+    expect(fitPortraitHair(wig,0,3,0)).not.toEqual(fitPortraitHair(wig,0,3,3));
+  }
 });

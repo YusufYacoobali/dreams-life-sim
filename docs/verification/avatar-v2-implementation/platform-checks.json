@@ -2,14 +2,14 @@
   "scope": "Offline Expo Android/iOS JavaScript and asset exports; not native builds or device/emulator rendering",
   "android": {
     "expoExportSucceeded": true,
-    "avatarLayersVerified": 1084,
+    "avatarLayersVerified": 1018,
     "allExportedPngHashesMatch": true,
     "allSourceDimensionsMatch": true,
     "obsoletePortraitAssetsBundled": 0
   },
   "ios": {
     "expoExportSucceeded": true,
-    "avatarLayersVerified": 1084,
+    "avatarLayersVerified": 1018,
     "allExportedPngHashesMatch": true,
     "allSourceDimensionsMatch": true,
     "obsoletePortraitAssetsBundled": 0

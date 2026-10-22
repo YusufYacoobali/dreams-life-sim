@@ -940,6 +940,25 @@
       ]
     },
     {
+      "file": "shoulders.png",
+      "sha256": "8140bf43163d29cccb5ce57400d6b6356f9f20e59077c7734b7312397b0a1ba1",
+      "sprites": 2,
+      "rects": [
+        [
+          39,
+          177,
+          1071,
+          394
+        ],
+        [
+          1156,
+          198,
+          951,
+          373
+        ]
+      ]
+    },
+    {
       "file": "outfits.png",
       "sha256": "57cf5bf8bdeaa0e4fae8eb2effbbb4c2386b169e5c39ad9185620690e44a40d8",
       "sprites": 16,
@@ -1043,21 +1062,27 @@
       ]
     },
     {
-      "file": "shoulders.png",
-      "sha256": "8140bf43163d29cccb5ce57400d6b6356f9f20e59077c7734b7312397b0a1ba1",
-      "sprites": 2,
+      "file": "outfits-front.png",
+      "sha256": "cb0657295091439be5281709339f05155a56db9fc2f194862b844422f65dc98b",
+      "sprites": 3,
       "rects": [
         [
-          39,
-          177,
-          1071,
-          394
+          7,
+          206,
+          701,
+          335
         ],
         [
-          1156,
-          198,
-          951,
-          373
+          719,
+          201,
+          735,
+          340
+        ],
+        [
+          1464,
+          206,
+          703,
+          335
         ]
       ]
     },
@@ -1250,12 +1275,43 @@
           752
         ]
       ]
+    },
+    {
+      "file": "hair-fronts.png",
+      "sha256": "e23a78278e7421ec316816a3b4a12743dedbfff1002f4ccbd3e1ebe95735f149",
+      "sprites": 4,
+      "rects": [
+        [
+          32,
+          28,
+          615,
+          550
+        ],
+        [
+          643,
+          44,
+          594,
+          532
+        ],
+        [
+          17,
+          592,
+          616,
+          638
+        ],
+        [
+          639,
+          622,
+          616,
+          577
+        ]
+      ]
     }
   ],
   "notes": [
     "128 independently illustrated age/identity heads.",
     "Each skin-grade head atlas contains four local cheek/jaw contours, not four stretched faces.",
-    "No RGB segmentation or quantised tint masks. Natural head and hair colours preserve source pixels apart from registration resampling.",
+    "No RGB segmentation or quantised tint masks. Natural head colours preserve source pixels apart from registration resampling; hair grades retain full-colour authored shading.",
     "Six skin grades and five hair grades preserve continuous authored shading and antialiasing; a continuous perceptual colour grade protects neutral ink/sclera and non-skin iris hues.",
     "Sixteen independent illustrated outfits; legacy defaults follow identity and optional outfit metadata stores explicit selections. Only head/hair/shoulder/clothing layers, never complete portrait combinations."
   ]
