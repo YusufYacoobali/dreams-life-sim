@@ -11,7 +11,7 @@ import { copyWorld, decodeWorld, encodeWorld, immutableWorld, type World } from 
 import { recordDeath } from '../../src/game/engine';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
-import * as biographies from '../../src/ui/terminalBiography';
+import * as summaries from '../../src/ui/deathSummary';
 import native from '../fixtures/v32-native-hourly-checkpoints.json';
 import family from '../fixtures/v6-birth-result.json';
 import history from '../fixtures/v7-history-archive.json';
@@ -42,13 +42,16 @@ afterEach(() => { jest.restoreAllMocks(); jest.clearAllMocks(); });
 test.each(['hourly', 'family'] as const)('%s terminal detail is factual, read-only across all eight tables and real cold resume, with original estate and action routes', async kind => {
   const input = kind === 'hourly' ? checkpoints.unpackCheckpoint(native.checkpoints.final.payload) : decodeWorld(JSON.stringify(family)), context = await setup(input);
   try {
-    const initial = context.initial, expected = biographies.terminalBiography(initial)!, before = encodeWorld(initial), beforeRows = context.rows(), selector = jest.spyOn(biographies, 'terminalBiography'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
-    expect(screen.getByText('You Died')).toBeOnTheScreen(); expect(screen.getByText(expected.text)).toBeOnTheScreen(); expect(screen.getByText(expected.scope)).toBeOnTheScreen(); expect(screen.getByText(expected.careerTitle)).toBeOnTheScreen(); expect(selector).toHaveBeenCalledTimes(1);
+    const initial = context.initial, expected = summaries.deathSummary(initial)!, before = encodeWorld(initial), beforeRows = context.rows(), selector = jest.spyOn(summaries, 'deathSummary'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
+    expect(screen.getByText('You Died')).toBeOnTheScreen(); expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen(); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen();
+    for (const row of expected.rows) expect(screen.getByLabelText(row.label + ': ' + row.value)).toBeOnTheScreen();
+    expect(screen.getByRole('progressbar', { name: 'Final happiness' })).toHaveAccessibilityValue({ min: 0, max: 100, now: initial.people[initial.activePersonId].stats.happiness }); expect(selector).toHaveBeenCalledTimes(1);
     view.rerender(frame()); expect(selector).toHaveBeenCalledTimes(1); expect(unpack).not.toHaveBeenCalled(); expect(Object.keys(beforeRows)).toHaveLength(8); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
     fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenCalledWith('/life-summary'); fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(router.push).toHaveBeenCalledWith({ pathname: '/new-life', params: { seed: '12345' } });
+    fireEvent.press(screen.getByRole('button', { name: 'Journal' })); expect(router.push).toHaveBeenLastCalledWith('/life-summary'); fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenLastCalledWith('/family-history');
     if (kind === 'family') { fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenCalledWith('/legacy'); }
     else expect(screen.getByRole('button', { name: 'Continue as Child. No living child is available.' })).toBeDisabled();
     expect(context.rows()).toEqual(beforeRows); expect(mockStore.getState().world!.estates).toEqual(initial.estates); unpack.mockRestore(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame());
-    expect(mockStore.getState().world).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByText(expected.text)).toBeOnTheScreen(); expect(screen.getByText(expected.scope)).toBeOnTheScreen(); expect(mockStore.getState().world!.generation).toBe(initial.generation); view.unmount();
+    expect(mockStore.getState().world).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen(); expect(mockStore.getState().world!.generation).toBe(initial.generation); view.unmount();
   } finally { context.close(); }
 });
