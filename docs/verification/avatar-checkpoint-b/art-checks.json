@@ -1,0 +1,799 @@
+{
+  "assetCount": 88,
+  "pngBytes": 2025239,
+  "frontBackDisjoint": true,
+  "textures": [
+    {
+      "asset": "head-0-0-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-0-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-1-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-1-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-2-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-2-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-3-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-3-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-4-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-4-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-5-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-5-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-6-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-6-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-7-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-0-7-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-0-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-0-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-1-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-1-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-2-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-2-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-3-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-3-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-4-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-4-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-5-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-5-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-6-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-6-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-7-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-1-7-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-0-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-0-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-1-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-1-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-2-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-2-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-3-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-3-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-4-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-4-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-5-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-5-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-6-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-6-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-7-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-2-7-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-0-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-0-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-1-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-1-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-2-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-2-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-3-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-3-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-4-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-4-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-5-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-5-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-6-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-6-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-7-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "head-3-7-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-1-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-1-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-2-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-2-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-3-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-3-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-4-back-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-4-back-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-4-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-4-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-5-back-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-5-back-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-5-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-5-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-6-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-6-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-7-back-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-7-back-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-7-front-mask",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "hair-7-front-detail",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "clothing-0",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "clothing-1",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "clothing-2",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    },
+    {
+      "asset": "clothing-3",
+      "size": [
+        512,
+        512
+      ],
+      "alphaBorderClear": true,
+      "sha256Matches": true
+    }
+  ]
+}

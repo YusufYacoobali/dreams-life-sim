@@ -1,0 +1,20 @@
+
+> dreams-life-sim@1.0.0 test
+> jest --runInBand --runTestsByPath tests/ui/portrait-accessibility.test.tsx tests/ui/portrait-plan.test.ts tests/ui/appearance-labels.test.tsx tests/ui/onboarding-flow.test.tsx tests/ui/profile-overview-save-flow.test.tsx tests/ui/onboarding-accessibility-flow.test.tsx tests/ui/relationship-flow.test.tsx tests/ui/saved-life-preview.test.tsx tests/ui/contacts-flow.test.tsx tests/ui/legacy-flow.test.tsx
+
+PASS tests/ui/onboarding-accessibility-flow.test.tsx
+PASS tests/ui/relationship-flow.test.tsx
+PASS tests/ui/contacts-flow.test.tsx
+PASS tests/ui/saved-life-preview.test.tsx
+PASS tests/ui/legacy-flow.test.tsx
+PASS tests/ui/onboarding-flow.test.tsx (7.416 s)
+PASS tests/ui/profile-overview-save-flow.test.tsx
+PASS tests/ui/portrait-plan.test.ts
+PASS tests/ui/appearance-labels.test.tsx
+PASS tests/ui/portrait-accessibility.test.tsx
+
+Test Suites: 10 passed, 10 total
+Tests:       36 passed, 36 total
+Snapshots:   0 total
+Time:        24.243 s
+Ran all test suites within paths "tests/ui/portrait-accessibility.test.tsx", "tests/ui/portrait-plan.test.ts", "tests/ui/appearance-labels.test.tsx", "tests/ui/onboarding-flow.test.tsx", "tests/ui/profile-overview-save-flow.test.tsx", "tests/ui/onboarding-accessibility-flow.test.tsx", "tests/ui/relationship-flow.test.tsx", "tests/ui/saved-life-preview.test.tsx", "tests/ui/contacts-flow.test.tsx", "tests/ui/legacy-flow.test.tsx".

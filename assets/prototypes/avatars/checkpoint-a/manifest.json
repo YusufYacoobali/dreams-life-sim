@@ -1,0 +1,211 @@
+{
+  "checkpoint": "A",
+  "status": "approved by user; reusable implementation completed in Checkpoint B",
+  "created": "2026-10-22",
+  "baseBranch": "origin/work",
+  "baseCommit": "fd83b19971f57a21f558bba311d395e571980cc7",
+  "generator": "built-in image_gen.imagegen",
+  "reference": "design/01-character-appearance.png",
+  "source": "source-sheet.png",
+  "sourceSize": [
+    1292,
+    1218
+  ],
+  "sourceSha256": "62d2782a982f7ce31cca21a0c48479943f0223831695cc7526227a1ce38b0b7b",
+  "preparation": "Lossless extraction from measured source rectangles and padding to a common 640x640 alpha canvas. No resampling or recolouring. Visible shirt baseline registered at y=620. Source original preserved.",
+  "avatars": [
+    {
+      "id": 1,
+      "file": "01-short-black.png",
+      "label": "Short black hair",
+      "description": "Young man, short black hair, medium skin tone, teal-blue shirt",
+      "appearance": {
+        "face": 0,
+        "skin": 2,
+        "hair": 1,
+        "hairColor": 0
+      },
+      "referenceRect": [
+        23,
+        144,
+        57,
+        64
+      ],
+      "sourceRect": [
+        140,
+        23,
+        449,
+        581
+      ],
+      "canvasOffset": [
+        95,
+        49
+      ],
+      "canvasSize": [
+        640,
+        640
+      ],
+      "visibleBounds": [
+        105,
+        59,
+        534,
+        620
+      ],
+      "bytes": 201218,
+      "sha256": "4c8d512b4ce075f59c3769b8db8d78f246bc9b0d0871a858fce4568f9467bb02"
+    },
+    {
+      "id": 2,
+      "file": "02-brown-shoulder.png",
+      "label": "Chestnut shoulder length",
+      "description": "Young woman, shoulder-length brown hair, light skin tone, coral shirt",
+      "appearance": {
+        "face": 0,
+        "skin": 0,
+        "hair": 4,
+        "hairColor": 1
+      },
+      "referenceRect": [
+        95,
+        144,
+        57,
+        64
+      ],
+      "sourceRect": [
+        667,
+        47,
+        510,
+        557
+      ],
+      "canvasOffset": [
+        65,
+        73
+      ],
+      "canvasSize": [
+        640,
+        640
+      ],
+      "visibleBounds": [
+        75,
+        83,
+        565,
+        620
+      ],
+      "bytes": 232997,
+      "sha256": "e3cf17f9292d1cfe8070abfde2f823db911d1ae56e24a865024743efd618c7e4"
+    },
+    {
+      "id": 3,
+      "file": "03-curly-black.png",
+      "label": "Black curls",
+      "description": "Young man, curly black hair, dark skin tone, cobalt shirt",
+      "appearance": {
+        "face": 3,
+        "skin": 5,
+        "hair": 2,
+        "hairColor": 0
+      },
+      "referenceRect": [
+        237,
+        144,
+        57,
+        64
+      ],
+      "sourceRect": [
+        127,
+        619,
+        471,
+        574
+      ],
+      "canvasOffset": [
+        84,
+        56
+      ],
+      "canvasSize": [
+        640,
+        640
+      ],
+      "visibleBounds": [
+        94,
+        66,
+        545,
+        620
+      ],
+      "bytes": 188982,
+      "sha256": "e5876f8681eec30b2acb8b14df14c1086570d4a5ec98daaea33c115df7fd37cb"
+    },
+    {
+      "id": 4,
+      "file": "04-blonde.png",
+      "label": "Golden blonde",
+      "description": "Young woman, blonde hair, light skin tone, turquoise shirt",
+      "appearance": {
+        "face": 1,
+        "skin": 0,
+        "hair": 4,
+        "hairColor": 3
+      },
+      "referenceRect": [
+        237,
+        289,
+        57,
+        64
+      ],
+      "sourceRect": [
+        660,
+        630,
+        543,
+        562
+      ],
+      "canvasOffset": [
+        48,
+        68
+      ],
+      "canvasSize": [
+        640,
+        640
+      ],
+      "visibleBounds": [
+        58,
+        78,
+        581,
+        620
+      ],
+      "bytes": 246696,
+      "sha256": "b7687abb00228beab207041f437fb059fd472610fa4131633686d85a545dbde8"
+    }
+  ],
+  "portraitConsumers": [
+    "app/(game)/(tabs)/life.tsx",
+    "app/(game)/(tabs)/relationships.tsx",
+    "app/(game)/business/[id].tsx",
+    "app/(game)/campus.tsx",
+    "app/(game)/career/[kind].tsx",
+    "app/(game)/coworkers.tsx",
+    "app/(game)/creators.tsx",
+    "app/(game)/crime.tsx",
+    "app/(game)/destination/[id].tsx",
+    "app/(game)/doctor.tsx",
+    "app/(game)/emigrate.tsx",
+    "app/(game)/family-tree.tsx",
+    "app/(game)/family.tsx",
+    "app/(game)/household.tsx",
+    "app/(game)/person/[id].tsx",
+    "app/(game)/politics.tsx",
+    "app/(game)/profile.tsx",
+    "app/(game)/school-contacts.tsx",
+    "app/(game)/school.tsx",
+    "app/(game)/social-profile/[id].tsx",
+    "app/(game)/underground.tsx",
+    "app/(game)/will.tsx",
+    "app/appearance.tsx",
+    "app/birth.tsx",
+    "app/legacy.tsx",
+    "app/new-life.tsx",
+    "src/assets/CharacterPortrait.tsx",
+    "src/ui/LifeSummaryContent.tsx",
+    "src/ui/LifetimeStatisticsContent.tsx"
+  ],
+  "approvalBoundary": "Resolved by user approval on 2026-10-22.",
+  "approvedOn": "2026-10-22"
+}

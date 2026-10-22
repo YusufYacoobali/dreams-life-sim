@@ -1,0 +1,1179 @@
+{
+  "version": 1,
+  "generator": "built-in image_gen.imagegen",
+  "styleApproval": "User approved Checkpoint A on 2026-10-22",
+  "canvasSize": 512,
+  "headWidths": [
+    [
+      337,
+      309,
+      294,
+      291,
+      293,
+      297,
+      299,
+      299
+    ],
+    [
+      357,
+      355,
+      347,
+      349,
+      343,
+      347,
+      348,
+      346
+    ],
+    [
+      313,
+      288,
+      276,
+      272,
+      277,
+      278,
+      281,
+      280
+    ],
+    [
+      358,
+      331,
+      319,
+      315,
+      324,
+      318,
+      320,
+      321
+    ]
+  ],
+  "sources": [
+    {
+      "source": "heads-oval.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "4a449b17ba06ecf3003ea0107199f540538c7be532a1fbd2775974e1334c364f",
+      "rects": [
+        [
+          73,
+          89,
+          335,
+          342
+        ],
+        [
+          496,
+          45,
+          349,
+          388
+        ],
+        [
+          921,
+          28,
+          349,
+          408
+        ],
+        [
+          1351,
+          19,
+          352,
+          416
+        ],
+        [
+          66,
+          459,
+          351,
+          412
+        ],
+        [
+          493,
+          461,
+          354,
+          410
+        ],
+        [
+          918,
+          461,
+          357,
+          411
+        ],
+        [
+          1349,
+          461,
+          357,
+          411
+        ]
+      ]
+    },
+    {
+      "source": "heads-round.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "ee77a40480738949d0f0de559daebf4b9a11cd70640f3b0ab6e348e06e5f0e44",
+      "rects": [
+        [
+          63,
+          94,
+          355,
+          342
+        ],
+        [
+          479,
+          71,
+          377,
+          365
+        ],
+        [
+          907,
+          53,
+          386,
+          383
+        ],
+        [
+          1339,
+          54,
+          388,
+          382
+        ],
+        [
+          44,
+          459,
+          387,
+          388
+        ],
+        [
+          472,
+          461,
+          390,
+          387
+        ],
+        [
+          911,
+          461,
+          390,
+          386
+        ],
+        [
+          1341,
+          458,
+          393,
+          391
+        ]
+      ]
+    },
+    {
+      "source": "heads-long.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "3f4439b365425571f837ed7379a44c60c12180e18757a79ebdd5f678062dafdb",
+      "rects": [
+        [
+          81,
+          74,
+          314,
+          345
+        ],
+        [
+          507,
+          36,
+          323,
+          386
+        ],
+        [
+          934,
+          22,
+          322,
+          402
+        ],
+        [
+          1366,
+          10,
+          328,
+          415
+        ],
+        [
+          78,
+          452,
+          329,
+          408
+        ],
+        [
+          513,
+          452,
+          330,
+          409
+        ],
+        [
+          934,
+          453,
+          334,
+          409
+        ],
+        [
+          1365,
+          451,
+          335,
+          412
+        ]
+      ]
+    },
+    {
+      "source": "heads-broad.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "13d7352bf11b57b3458799b433aadf0b84deb2338aae7856ce3f80d3517bba58",
+      "rects": [
+        [
+          67,
+          90,
+          355,
+          341
+        ],
+        [
+          488,
+          46,
+          373,
+          388
+        ],
+        [
+          908,
+          33,
+          374,
+          403
+        ],
+        [
+          1335,
+          25,
+          376,
+          411
+        ],
+        [
+          56,
+          458,
+          380,
+          404
+        ],
+        [
+          488,
+          456,
+          376,
+          407
+        ],
+        [
+          910,
+          455,
+          379,
+          408
+        ],
+        [
+          1336,
+          453,
+          383,
+          410
+        ]
+      ]
+    },
+    {
+      "source": "hair.png",
+      "size": [
+        1774,
+        887
+      ],
+      "sha256": "5c82d90f7796db40a37915ef6cdc8aac3d31c3439d4712e90e7745bfe98ad0de",
+      "rects": [
+        [
+          47,
+          30,
+          378,
+          297
+        ],
+        [
+          472,
+          42,
+          369,
+          294
+        ],
+        [
+          904,
+          32,
+          377,
+          305
+        ],
+        [
+          1298,
+          31,
+          458,
+          422
+        ],
+        [
+          12,
+          438,
+          457,
+          433
+        ],
+        [
+          498,
+          409,
+          309,
+          425
+        ],
+        [
+          834,
+          443,
+          518,
+          412
+        ]
+      ]
+    },
+    {
+      "source": "hair-bun.png",
+      "size": [
+        1292,
+        1218
+      ],
+      "sha256": "cf2319a3f24f1e9bc5ca5805949ca84a7a4d84dcbe39a233eb15fb7cff6eb8a9",
+      "rects": [
+        [
+          224,
+          104,
+          852,
+          840
+        ]
+      ]
+    },
+    {
+      "source": "clothing.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "942585e52b57ad4f9f5aa85c5741efccefb651afbf9072178c8cd6976f7205a5",
+      "rects": [
+        [
+          52,
+          213,
+          699,
+          222
+        ],
+        [
+          783,
+          212,
+          698,
+          223
+        ],
+        [
+          46,
+          588,
+          710,
+          261
+        ],
+        [
+          784,
+          595,
+          712,
+          255
+        ]
+      ]
+    }
+  ],
+  "layers": {
+    "head-0-0-mask": {
+      "file": "head-0-0-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17179,
+      "sha256": "2512f4c15aeee64e381c8def4f4fd60bd0cd9b8b85a0e8705ea6f3169830d41b"
+    },
+    "head-0-0-detail": {
+      "file": "head-0-0-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 26411,
+      "sha256": "3ad25d6c6a4d01c71306c63f105e450cec94e204e57049c197eb39d41b1dc1f9"
+    },
+    "head-0-1-mask": {
+      "file": "head-0-1-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16248,
+      "sha256": "64b81078e21d27f747fc3d5bf36041b3675712b7cecd38fd9dc25bfd24b66e6a"
+    },
+    "head-0-1-detail": {
+      "file": "head-0-1-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22407,
+      "sha256": "c589eec020bf857108c6bf2622959b0d5d229c80f4b1273842690b4040a64ec9"
+    },
+    "head-0-2-mask": {
+      "file": "head-0-2-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16030,
+      "sha256": "14faa3ae5adf9de4108527734bd33daf5588df0bad4d083698e5cf63a0cd65ed"
+    },
+    "head-0-2-detail": {
+      "file": "head-0-2-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22377,
+      "sha256": "640507e9c64d110e5b76e7f5f7349a8c0a7eba91ef7ffd39ee3b3c58e20478d7"
+    },
+    "head-0-3-mask": {
+      "file": "head-0-3-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15853,
+      "sha256": "3cb8b8c3186f2124a050c99f116b9e9c9ac22c6b2f8af3174acafb1c5e10dd21"
+    },
+    "head-0-3-detail": {
+      "file": "head-0-3-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22196,
+      "sha256": "005eb7c1e7388217e9a7439ce2e6ae7ab59d8b0feea2cbe1f8cb9768535df0f8"
+    },
+    "head-0-4-mask": {
+      "file": "head-0-4-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15325,
+      "sha256": "03f16277b540cbdc03c9ce7484d4528cfa0b4335b74001c1d8ed89520f592655"
+    },
+    "head-0-4-detail": {
+      "file": "head-0-4-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22226,
+      "sha256": "732efd63ded04b829414960b9f4c9cc04cfa4d25983595acdf50a8be567d280d"
+    },
+    "head-0-5-mask": {
+      "file": "head-0-5-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15334,
+      "sha256": "c468a2c8e09cdd3268126ddcc802c7183db0f5807ad073885fc31242e8eb415f"
+    },
+    "head-0-5-detail": {
+      "file": "head-0-5-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22241,
+      "sha256": "da2c6b1fd1c257542538e38247b682c8ca39cb1601bf06d2c5b690a5106b952c"
+    },
+    "head-0-6-mask": {
+      "file": "head-0-6-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15129,
+      "sha256": "fd144752dd690c37236364f99bc6644624ec80f6e8c0a37781db1c917b43acc7"
+    },
+    "head-0-6-detail": {
+      "file": "head-0-6-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 21693,
+      "sha256": "faf94aaa629cecdc8c6ffe8c0aeec91c20c4004d9d62b268c7a8b96e55916526"
+    },
+    "head-0-7-mask": {
+      "file": "head-0-7-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15015,
+      "sha256": "9dbd08ff0585f5672c2fbf9884236493a76ae8921ca549a72e34bf5d78c71173"
+    },
+    "head-0-7-detail": {
+      "file": "head-0-7-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22322,
+      "sha256": "a9ceda1d367fd5239262d3034e0c7a2d3451c6d41ceb356db8cc784c3625e4b5"
+    },
+    "head-1-0-mask": {
+      "file": "head-1-0-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17286,
+      "sha256": "2c2e7eadce5ce1967ff0df6002eb734c40fbacaa53cc378c10a17e9fb9a7d00e"
+    },
+    "head-1-0-detail": {
+      "file": "head-1-0-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 30929,
+      "sha256": "5cbc915544f1ba92c9239e6156f170b8a5b69a4e52552fc0561db788aed3b854"
+    },
+    "head-1-1-mask": {
+      "file": "head-1-1-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17036,
+      "sha256": "635970565fa36db4080dcdbfc1d2fbbd3949f9c3c535b61e2dbe6f8b7620c75e"
+    },
+    "head-1-1-detail": {
+      "file": "head-1-1-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29068,
+      "sha256": "e0e090e31b8aff7c42ed171b9616040f278af7f8e446c1488e4ad6129fd45f73"
+    },
+    "head-1-2-mask": {
+      "file": "head-1-2-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16365,
+      "sha256": "7decc914d455c050f5749b27492563508c04576a2396ae1358aff7e2518a7fc0"
+    },
+    "head-1-2-detail": {
+      "file": "head-1-2-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29135,
+      "sha256": "a6362de946eaa6245f18f8b52bf770d08fd4c07fd248e97133b7fe15b23ed634"
+    },
+    "head-1-3-mask": {
+      "file": "head-1-3-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16832,
+      "sha256": "8217ce9f686eb9f4c8e0395254b3b67f75c0237a181a3779e994dc268177aaa0"
+    },
+    "head-1-3-detail": {
+      "file": "head-1-3-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29381,
+      "sha256": "5dd2797af48b47d33034e4a8fba3da7ed71a5d2f7b149d971ffa1f918f3edc94"
+    },
+    "head-1-4-mask": {
+      "file": "head-1-4-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16566,
+      "sha256": "3d5a7f98e7c02a8a12ac0bc8f57f1d67e10aebce0ad3be19317bfd4a5f7d511a"
+    },
+    "head-1-4-detail": {
+      "file": "head-1-4-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 28902,
+      "sha256": "641f3ee7087dedd8d685b7ec95a283f096a1ff029c7b1b742fbb5fb119de1088"
+    },
+    "head-1-5-mask": {
+      "file": "head-1-5-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17465,
+      "sha256": "1eceb6c024b232d4b0899a3cb4f696c699b6978ccf3f72ae50911e5922f6640f"
+    },
+    "head-1-5-detail": {
+      "file": "head-1-5-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29229,
+      "sha256": "c9e3fa47810d0b5cb610d9915e28afec896e720804d66e3151b46b382c16b272"
+    },
+    "head-1-6-mask": {
+      "file": "head-1-6-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16776,
+      "sha256": "e05fef339cfe712ab14cb808db28e07805f0c400703d62ee6b345b44364b98b9"
+    },
+    "head-1-6-detail": {
+      "file": "head-1-6-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29141,
+      "sha256": "5030858f438de105e8c76a75bb3daaaa7cb28327b2930fd60760413d9ecb6310"
+    },
+    "head-1-7-mask": {
+      "file": "head-1-7-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16986,
+      "sha256": "5bf087e4270ae79353cfdbf21b18b35c506cc7aef8a05606c9cf4f554a141e1e"
+    },
+    "head-1-7-detail": {
+      "file": "head-1-7-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 29036,
+      "sha256": "1ef88ab4318db6b811ec0f7450e3bfe02f42935011e194b86cf4255e8392aca3"
+    },
+    "head-2-0-mask": {
+      "file": "head-2-0-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15653,
+      "sha256": "fb1026c61318047266bc73d603195e802e816f3e70f89f0a9d07d095fb7074f2"
+    },
+    "head-2-0-detail": {
+      "file": "head-2-0-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24674,
+      "sha256": "6c3b04cea0552a2d1adbf5437d6ee007aed302eec603c4de5e3de3e48b6d337e"
+    },
+    "head-2-1-mask": {
+      "file": "head-2-1-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15750,
+      "sha256": "49ccbad9179b0ba8147a23c6028992e78ae7dc87489194b5dc2841200478536d"
+    },
+    "head-2-1-detail": {
+      "file": "head-2-1-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22015,
+      "sha256": "7e9efe6f736d0dc5ae9cf4ef68794911759f10cacb1c4f59a8b37a0283c9256f"
+    },
+    "head-2-2-mask": {
+      "file": "head-2-2-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15471,
+      "sha256": "46f30de2b864d0c3101b8c40f3557aae0fba81233e5faace923c3ce118271537"
+    },
+    "head-2-2-detail": {
+      "file": "head-2-2-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22141,
+      "sha256": "4d03ae749f3effa5f7571526e91abb76d13a93c68093e72d6c1554c0e1128220"
+    },
+    "head-2-3-mask": {
+      "file": "head-2-3-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 14910,
+      "sha256": "0127957f9f7967185352c8cae255fd018da7cf98378231956feff8d5c9f3b16e"
+    },
+    "head-2-3-detail": {
+      "file": "head-2-3-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22037,
+      "sha256": "5d9993c22f5a7239c1e432eda85bfb3d7c3d2390554cf1e385f76f39587b66d5"
+    },
+    "head-2-4-mask": {
+      "file": "head-2-4-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15358,
+      "sha256": "312d9ba9be37236159a36ff65e69446a93525915da33a36a8e96988176764723"
+    },
+    "head-2-4-detail": {
+      "file": "head-2-4-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22374,
+      "sha256": "d5bd5f97f807262910d14351f1be910f81a3117a4a6e225aec3d8f868be0884a"
+    },
+    "head-2-5-mask": {
+      "file": "head-2-5-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15516,
+      "sha256": "9fe474f5a1d5931ea4a6accc072a7a933b8bfd9ff9cf65e6c63ff38d33c03e97"
+    },
+    "head-2-5-detail": {
+      "file": "head-2-5-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22466,
+      "sha256": "2015937e666328cfa88bdadd1ec096971cb061581dc85e353e5e6f466839c680"
+    },
+    "head-2-6-mask": {
+      "file": "head-2-6-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15390,
+      "sha256": "e2fcfe1f5cd9d0bf2fae074c13e2fb26c05ede7ade97508914d65bc0f8c4ea5c"
+    },
+    "head-2-6-detail": {
+      "file": "head-2-6-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22896,
+      "sha256": "0b91c8089591ffc54b85d8cfbd60864b6a225a0fab637b6716f14aec52ed574f"
+    },
+    "head-2-7-mask": {
+      "file": "head-2-7-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 14907,
+      "sha256": "c44751481b32cd45a92ffda3386fc779a48749e218384c1390f885e5e29778ee"
+    },
+    "head-2-7-detail": {
+      "file": "head-2-7-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22778,
+      "sha256": "73359cc7bc557a97a23d8a7a737ff88f34feb77393d9e74e52b266470309a52b"
+    },
+    "head-3-0-mask": {
+      "file": "head-3-0-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17000,
+      "sha256": "5e445026dcb081e7b52255c02dd348c36aab4e2b467f96576874e1edeb4c3106"
+    },
+    "head-3-0-detail": {
+      "file": "head-3-0-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 26935,
+      "sha256": "8d2719d394d23dc285152c02c3105d4e1dbc0f9590782425b941cced3acb13a8"
+    },
+    "head-3-1-mask": {
+      "file": "head-3-1-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15967,
+      "sha256": "566e8320d59f606b38b0ffaaf327f3fa7613ba89d3faba5f6df6193d6e54a646"
+    },
+    "head-3-1-detail": {
+      "file": "head-3-1-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24597,
+      "sha256": "e3e088e1150b48239801c5a32b539a1231bf38aa2d8866cf51769f26a9a2f796"
+    },
+    "head-3-2-mask": {
+      "file": "head-3-2-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16086,
+      "sha256": "27589f86f076ec919a3b35fbf849c3635a0f2d59f37f89ba23ddfb84b8c65f00"
+    },
+    "head-3-2-detail": {
+      "file": "head-3-2-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24150,
+      "sha256": "3f9d25718c6fa9ef63db9cdc3d912c8a3eb39962f3033c58fa35c52145c9cce4"
+    },
+    "head-3-3-mask": {
+      "file": "head-3-3-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16091,
+      "sha256": "19d549c8ac7a58d7d964b48f5d5ccc7b5942aa4410f0d4ea9ba866bfb43e576d"
+    },
+    "head-3-3-detail": {
+      "file": "head-3-3-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24395,
+      "sha256": "8cdf91e9eb33cd132a7c341e8bd6e4b7a770c5904784ab6ca90b52f0f564256e"
+    },
+    "head-3-4-mask": {
+      "file": "head-3-4-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16310,
+      "sha256": "b1747c315abc9eecae499bd0664b84bbe1df248ba5cc8f2373b45e598273f469"
+    },
+    "head-3-4-detail": {
+      "file": "head-3-4-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24777,
+      "sha256": "5de24b887be0305f14f6584d6a5df07c99d8a7a9a94f78c20644120225f08d47"
+    },
+    "head-3-5-mask": {
+      "file": "head-3-5-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16022,
+      "sha256": "e456fbd3ca68bfe5151ff2800d85502a26cdf42ab406147a06373affc5ee98a6"
+    },
+    "head-3-5-detail": {
+      "file": "head-3-5-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 23922,
+      "sha256": "fdfffba52da6cefb226182034f9d70e06a61cc8e73afe3643de075bf099bd44b"
+    },
+    "head-3-6-mask": {
+      "file": "head-3-6-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16006,
+      "sha256": "65640794e90f67b06e91040a302da66153ef774edb99be803bd36d7ac611cf7c"
+    },
+    "head-3-6-detail": {
+      "file": "head-3-6-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 23626,
+      "sha256": "9ec5730461c3dae3c65344c15e2576d9af27a0f66ce9264de18341423b1c85a8"
+    },
+    "head-3-7-mask": {
+      "file": "head-3-7-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 15860,
+      "sha256": "06d73f37f9934c636f9d5fb15f086a2868b0f2cc7e3d9a83b35d46dc0debcaed"
+    },
+    "head-3-7-detail": {
+      "file": "head-3-7-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 24345,
+      "sha256": "0648ff975ac42cef7dcfe3688ccc74f6a781c8fa909d83857cd8638f0fafa2bc"
+    },
+    "hair-1-front-mask": {
+      "file": "hair-1-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 17086,
+      "sha256": "625f6e2d36c4a05755a0196c7e0eacf9e677f898b3133758f8570d2cbdaf4cad"
+    },
+    "hair-1-front-detail": {
+      "file": "hair-1-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 33653,
+      "sha256": "17eeadd451466aaf4937d78c62b66f8524293bcd6d7884e957420c964e253208"
+    },
+    "hair-2-front-mask": {
+      "file": "hair-2-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16104,
+      "sha256": "af5ba15fd40e326d403742e30ed13035f513b81ff0bee70870af84363a4d5732"
+    },
+    "hair-2-front-detail": {
+      "file": "hair-2-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 31627,
+      "sha256": "6ae02f329ad509adff55c1b0e5412adfa7c3d7c972a8d880f333a38bf0f205e8"
+    },
+    "hair-3-front-mask": {
+      "file": "hair-3-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16404,
+      "sha256": "360e0f6983c89faac1e4476b84959e18806c37018863c2a879e9a1970023835d"
+    },
+    "hair-3-front-detail": {
+      "file": "hair-3-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 35397,
+      "sha256": "5dd42d9022c8bf3cf312c0155d8dcda30741706afcab9eac703318ed9fc8c79f"
+    },
+    "hair-4-back-mask": {
+      "file": "hair-4-back-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 8979,
+      "sha256": "52e671babbc23e10e9ff96d09cf1c22252a7fc2316aa8c94722060d8a12a7765"
+    },
+    "hair-4-back-detail": {
+      "file": "hair-4-back-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 12458,
+      "sha256": "dbccd624d548bc4d05169f4fba682d4be1db4b400ab45cbde2aea23687d74bd4"
+    },
+    "hair-4-front-mask": {
+      "file": "hair-4-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 22478,
+      "sha256": "31f1d1b895e10fe6562e8de1ea8636bbee6b0914bbd3ff3d79ca526e41e885dd"
+    },
+    "hair-4-front-detail": {
+      "file": "hair-4-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 44506,
+      "sha256": "0a314f335b1f7aa177e2f0eeddd9ec54fada13e788f1ed8184e90b9728c75938"
+    },
+    "hair-5-back-mask": {
+      "file": "hair-5-back-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 11414,
+      "sha256": "011e394a2b25cfe2148966c7095aedaf899f9aff5a1ccfa09e18fe49b2691b0f"
+    },
+    "hair-5-back-detail": {
+      "file": "hair-5-back-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 19034,
+      "sha256": "602cb204e0740ac5a11904c8548de1127e27cdc06c05178160582c2809f823c3"
+    },
+    "hair-5-front-mask": {
+      "file": "hair-5-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 25232,
+      "sha256": "068292d6ecbf47da5763f0e960efd2b7430640ace2690a7a14470b55cb584e23"
+    },
+    "hair-5-front-detail": {
+      "file": "hair-5-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 55498,
+      "sha256": "2978bd0471382bad59ff87b8970717b423fd6c8f4305d072d0d8499e1f69ee44"
+    },
+    "hair-6-front-mask": {
+      "file": "hair-6-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 16142,
+      "sha256": "75802f31fcc5eaa695a898e8fa4a623dc02b2bd5b27f2f53ce931b4d234fe6fe"
+    },
+    "hair-6-front-detail": {
+      "file": "hair-6-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 39512,
+      "sha256": "289660ca2b15f40d079a0088c459b3f1a63bc079665463f7c5f3827c04c3675c"
+    },
+    "hair-7-back-mask": {
+      "file": "hair-7-back-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 8466,
+      "sha256": "0afbc4314653cd2b768760a8b6f8e5d0b9008286bf83e5bd11a102a818da6cdf"
+    },
+    "hair-7-back-detail": {
+      "file": "hair-7-back-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 12287,
+      "sha256": "247b8313cbd26ae8c09cbc8d66d61014a2d34a2ebef4a53999ea70f072ddbdf5"
+    },
+    "hair-7-front-mask": {
+      "file": "hair-7-front-mask.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 19440,
+      "sha256": "e0e60fefd3d643fecaf2e0f922172de5180ec63135bef194f19aa615c234676c"
+    },
+    "hair-7-front-detail": {
+      "file": "hair-7-front-detail.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 47478,
+      "sha256": "25762f7be7d539a7ab1d884e4ec74086825b1eb2a70d602d0d4c45b27646a298"
+    },
+    "clothing-0": {
+      "file": "clothing-0.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 51154,
+      "sha256": "9a9b9c87aa862471ca8cb9c8a61c634795210cd36c6e9c7271c681201c6ce6d1"
+    },
+    "clothing-1": {
+      "file": "clothing-1.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 52468,
+      "sha256": "df56dce1f6ebcf862f30d9bdd2abb9683d116026e587b8f15a59e802db0d5c1a"
+    },
+    "clothing-2": {
+      "file": "clothing-2.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 55326,
+      "sha256": "b215ed007badb814462e935729ee37d6f0314b344ebbecc0e136fbba15021b0b"
+    },
+    "clothing-3": {
+      "file": "clothing-3.png",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 64552,
+      "sha256": "a065e45e7c9fd4aaa86fb1f1b7950cd032afd76f23d30fc3cd3fad1c1b614327"
+    }
+  },
+  "notes": "Uniform face registration only; four independently illustrated contours at eight ages. Skin/hair masks are tinted independently of facial features. No whole-portrait stretching or full-portrait combination catalogue."
+}

@@ -1,0 +1,8 @@
+{
+  "scope": "Node JS descriptor construction only; not native rendering or device FPS",
+  "combinations": 7680,
+  "maxImageLayers": 7,
+  "elapsedMs": 12.881380999999976,
+  "meanMsPerPortrait": 0.0016772631510416636,
+  "node": "v24.19.0"
+}

@@ -1,0 +1,35 @@
+{
+  "renderer": "Browser screenshots of the production layer plan, not native device captures",
+  "browser": "154.0.8037.57",
+  "captures": [
+    "01-new-cast.png",
+    "02-reference-previous-new.png",
+    "03-all-16-presets.png",
+    "04-sizes-light-dark.png",
+    "05-skin-hair-colours.png",
+    "06-face-hair-matrix.png",
+    "07-eight-age-stages.png",
+    "08-child-adult-elderly.png",
+    "09-transparency.png",
+    "10-interactive-combination.png"
+  ],
+  "cssSizes": [
+    52,
+    88,
+    140
+  ],
+  "deviceScaleFactor": 1,
+  "desktopViewport": [
+    1240,
+    1000
+  ],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "desktopOverflow": false,
+  "mobileOverflow": false,
+  "interactivePlanMatchesProduction": true,
+  "errors": [],
+  "externalRequests": []
+}
