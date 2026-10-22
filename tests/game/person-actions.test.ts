@@ -44,8 +44,13 @@ test('child praise, discipline and later-life help have specific eligible effect
   const setup=child(),world=copyWorld(setup.world),childId=world.activePersonId;world.activePersonId=setup.parent;const relation=relationFor(world,world.activePersonId,childId)!;
   const praise=done(resolveCommand(validateWorld(world),action(world,childId,'praise')));expect(praise.people[childId].stats.discipline).toBeGreaterThanOrEqual(world.people[childId].stats.discipline);expect(relationFor(praise,praise.activePersonId,childId)!.strength).toBeGreaterThan(relation.strength);
   const scold=resolveCommand(praise,action(praise,childId,'scold'));expect(scold.people[childId].stats.discipline).toBeGreaterThanOrEqual(praise.people[childId].stats.discipline);
-  const older=done(scold),prepared=copyWorld(older);prepared.people[childId].born.year-=15;prepared.people[prepared.activePersonId].stats.stress=60;roll(prepared,10);
-  const helped=resolveCommand(validateWorld(prepared),action(prepared,childId,'ask-help'));expect(helped.people[helped.activePersonId].stats.stress).toBe(52);expect(helped.people[childId].stats.energy).toBe(prepared.people[childId].stats.energy-4);
+  // A separate older family keeps the earlier child's birth and both parents'
+  // genealogy intact; turning that child into an adult would rewrite history.
+  const prepared=decodeWorld(JSON.stringify(graduate)),caregiver=createContact(prepared,{age:55}),grownChild=createContact(prepared,{age:25,city:caregiver.city});
+  prepared.activePersonId=caregiver.id;prepared.people[caregiver.id].stats.stress=60;grownChild.traits=['kind'];
+  prepared.relationships.push({id:'relation_adult_child_help',from:caregiver.id,to:grownChild.id,kind:'parent',roles:['parent'],romance:'none',since:{...prepared.date},parentType:'biological',strength:90,trust:90,memories:[],lastInteractionYear:prepared.date.year});
+  roll(prepared,10);
+  const helped=resolveCommand(validateWorld(prepared),action(prepared,grownChild.id,'ask-help'));expect(helped.people[helped.activePersonId].stats.stress).toBe(52);expect(helped.people[grownChild.id].stats.energy).toBe(prepared.people[grownChild.id].stats.energy-4);
 });
 
 test('stale people/lives and invented permissions or gift funding reject without mutating input',()=>{
