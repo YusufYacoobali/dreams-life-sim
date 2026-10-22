@@ -14,10 +14,12 @@ import { useColors } from '../src/ui/theme';
 import { FamilyPreferences } from '../src/ui/FamilyPreferences';
 import { genders } from '../src/game/systems/familySchemas';
 import { useFeedbackPress } from '../src/ui/feedback';
+import { useCinematicTransition } from '../src/ui/cinematic/CinematicContext';
 
 export default function NewLife() {
   const firstNameInput = useRef<TextInput>(null), lastNameInput = useRef<TextInput>(null);
   const submitting = useRef(false);
+  const { play } = useCinematicTransition();
   const params = useLocalSearchParams<{ seed?: string; mode?: string }>(), parsedSeed = Number(params.seed);
   const seed = Number.isInteger(parsedSeed) && parsedSeed >= 0 && parsedSeed <= 0xFFFFFFFF ? parsedSeed : 0;
   const draft = useCreationDraft(s => s.draft), begin = useCreationDraft(s => s.begin), update = useCreationDraft(s => s.update), randomise = useCreationDraft(s => s.randomise), customise = useCreationDraft(s => s.customise);
@@ -51,8 +53,12 @@ export default function NewLife() {
   const submit = async (creation = validated(), selectedSeed = draft.seed) => {
     if (!creation || busy || submitting.current) return false;
     submitting.current = true;
-    try { const saved = await start(creation, selectedSeed); if (saved) router.replace('/birth'); return saved; }
-    finally { submitting.current = false; }
+    let saved = false;
+    try {
+      saved = await start(creation, selectedSeed);
+      if (saved) play('birth', '/birth', () => { try { router.replace('/birth'); } finally { submitting.current = false; } });
+      return saved;
+    } finally { if (!saved) submitting.current = false; }
   };
   const selection: EventPresentation | null = field ? { id: 'creation:' + field, kind: 'selection', title: field === 'country' ? 'Choose a country' : 'Choose a city', body: 'Where will your life begin?', confirmLabel: 'Choose', choices: field === 'country' ? countryCodes.map(id => ({ id, label: countries[id].name })) : countries[input.country].cities.map(id => ({ id, label: id })) } : null;
   return <Page bottomSafeArea footer={<>

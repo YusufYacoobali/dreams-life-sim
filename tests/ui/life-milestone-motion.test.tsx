@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { router } from 'expo-router';
 import { decodeWorld, encodeWorld, fullName, type World } from '../../src/game/model';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
-import { SceneMotion } from '../../src/ui/SceneMotion';
+import { LifeMilestoneArt } from '../../src/ui/LifeMilestoneArt';
 import { ThemeProvider } from '../../src/ui/theme';
 import newborn from '../fixtures/v1-newborn.json';
 
@@ -32,15 +32,15 @@ beforeEach(() => {
 afterEach(() => { AppState.currentState = previousAppState; jest.restoreAllMocks(); });
 
 const expectDecorativeOnly = () => {
-  const scene = within(screen.UNSAFE_getByType(SceneMotion));
+  const scene = within(screen.UNSAFE_getByType(LifeMilestoneArt));
   expect(scene.queryByRole('button')).toBeNull(); expect(scene.queryByRole('header')).toBeNull(); expect(scene.queryByRole('image')).toBeNull();
 };
 
-test('birth facts and Begin stay available during the halo, with no automatic acknowledgement or replay for busy and failed-save rerenders', async () => {
+test('birth facts and Begin stay available beneath static artwork, without acknowledgement or entrance replay', async () => {
   const world = decodeWorld(JSON.stringify(newborn)), before = encodeWorld(world);
   mockState = { world, busy: false, error: null, acknowledgeBirth: jest.fn(async () => false) };
   const view = render(frame(<Birth />));
-  expect(Animated.timing).toHaveBeenCalledTimes(1); expect(Animated.timing).toHaveBeenLastCalledWith(expect.anything(), expect.objectContaining({ duration: 1500, useNativeDriver: true }));
+  expect(Animated.timing).not.toHaveBeenCalled();
   expect(screen.getByRole('header', { name: 'Welcome to the World!' })).toBeOnTheScreen();
   expect(screen.getByText(fullName(world.people[world.activePersonId]))).toBeOnTheScreen(); expectDecorativeOnly();
   expect(mockState.acknowledgeBirth).not.toHaveBeenCalled(); expect(screen.getByRole('button', { name: 'Begin Life!' })).toBeEnabled();
@@ -48,12 +48,12 @@ test('birth facts and Begin stay available during the halo, with no automatic ac
   mockState.busy = true; view.rerender(frame(<Birth />)); expect(screen.getByRole('button', { name: 'Begin Life!' })).toBeDisabled();
   mockState.busy = false; mockState.error = 'Your progress could not be saved.'; view.rerender(frame(<Birth />));
   expect(screen.getByRole('alert')).toHaveTextContent(mockState.error); expect(screen.getByRole('button', { name: 'Begin Life!' })).toBeEnabled();
-  expect(Animated.timing).toHaveBeenCalledTimes(1); expect(encodeWorld(world)).toBe(before); expect(router.replace).not.toHaveBeenCalled();
-  mockReducedMotion = true; view.rerender(frame(<Birth />)); expect(Animated.timing).toHaveBeenCalledTimes(1); expectDecorativeOnly();
+  expect(Animated.timing).not.toHaveBeenCalled(); expect(encodeWorld(world)).toBe(before); expect(router.replace).not.toHaveBeenCalled();
+  mockReducedMotion = true; view.rerender(frame(<Birth />)); expect(Animated.timing).not.toHaveBeenCalled(); expectDecorativeOnly();
   expect(screen.getByRole('header', { name: 'Welcome to the World!' })).toBeOnTheScreen(); view.unmount();
 });
 
-test('the genuine deceased ancestor keeps factual text and navigation outside the memorial motion, with an attractive static reduced-motion view', () => {
+test('an already deceased ancestor opens with static memorial artwork and working factual text and navigation', () => {
   const recorded = unpackCheckpoint(readFileSync(join(__dirname, '../fixtures/v30-family-year91-checkpoint.json'), 'utf8'), true);
   // Select the already deceased ancestor for this read-only UI scenario; no
   // death, legacy handover, earned history or game command is manufactured.
@@ -62,12 +62,12 @@ test('the genuine deceased ancestor keeps factual text and navigation outside th
   // the genuine original checkpoint valid and assert its complete bytes below.
   expect(person.died).toBeTruthy(); mockState = { world, busy: false, error: null, acknowledgeBirth: jest.fn() };
   const view = render(frame(<Death />));
-  expect(Animated.timing).toHaveBeenCalledTimes(1); expect(Animated.timing).toHaveBeenLastCalledWith(expect.anything(), expect.objectContaining({ duration: 1800, useNativeDriver: true }));
+  expect(Animated.timing).not.toHaveBeenCalled();
   expect(screen.getByRole('header', { name: 'You Died' })).toBeOnTheScreen(); expect(screen.getByText(fullName(person))).toBeOnTheScreen();
   expect(screen.getByText('Cause of death: ' + person.causeOfDeath)).toBeOnTheScreen(); expectDecorativeOnly();
   expect(screen.getByRole('button', { name: 'View Life Summary' })).toBeEnabled(); expect(screen.getByRole('button', { name: 'Start a New Life' })).toBeEnabled();
-  mockState.busy = true; mockState.error = 'Unrelated local feedback'; view.rerender(frame(<Death />)); expect(Animated.timing).toHaveBeenCalledTimes(1);
-  mockReducedMotion = true; view.rerender(frame(<Death />)); expect(Animated.timing).toHaveBeenCalledTimes(1); expectDecorativeOnly();
+  mockState.busy = true; mockState.error = 'Unrelated local feedback'; view.rerender(frame(<Death />)); expect(Animated.timing).not.toHaveBeenCalled();
+  mockReducedMotion = true; view.rerender(frame(<Death />)); expect(Animated.timing).not.toHaveBeenCalled(); expectDecorativeOnly();
   fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenLastCalledWith('/life-summary');
   expect(encodeWorld(recorded)).toBe(before); expect(mockState.acknowledgeBirth).not.toHaveBeenCalled(); view.unmount();
 });

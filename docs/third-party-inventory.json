@@ -2,9 +2,9 @@
   "formatVersion": 1,
   "scope": "Candidate lock/install/source inventory; includes build tooling and optional packages. Not a shipped-library count, legal clearance, complete font-rights determination, or final native/Metro artifact inventory.",
   "inputs": {
-    "package.json": "1957084c683526bb4f78aea8abedde55503f4ae57d768c4e1a1fbcdba1cfaf1f",
-    "package-lock.json": "23101149e3b2f08ba44c2f0f9fb5318c01426525b80078854b493c0449b06501",
-    "app.json": "4a8879b7826acebe343dd81e83201dc15c59d67a0908fab9f0a541bcae161d8b"
+    "package.json": "fee3de95aef6ed862c317d351129e904d55c00fa35ae54d999488362f2743de2",
+    "package-lock.json": "af9fa547fb9616b5b98ed318a962de26a4165bbd5b1d533ad8524feb83622c47",
+    "app.json": "eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8"
   },
   "installationPlatform": {
     "os": "linux",
@@ -13,17 +13,17 @@
   "selection": "All root dependencies and lockfile package records whose dev flag is not true. License/notice filenames are searched recursively, excluding nested node_modules, .git and .cache. Directory symlinks are not followed. Text is deduplicated by exact source bytes; no SPDX value is inferred from filenames or contents.",
   "evidenceLimits": "Missing metadata is not a licensing conclusion. Installed version mismatches must be reconciled. Optional/absent files and source-only art/font references remain explicit. SDK, native Pods/AARs, OS resources, dynamic imports and the final shipped graph need artifact-level review.",
   "summary": {
-    "directDependencies": 26,
-    "candidateNonDevLockEntries": 769,
-    "versionMatched": 759,
+    "directDependencies": 28,
+    "candidateNonDevLockEntries": 783,
+    "versionMatched": 773,
     "versionMismatches": 0,
     "notInstalled": 10,
     "missingLockLicenseMetadata": 1,
-    "withoutReadableNoticeFile": 55,
-    "readableNoticeFiles": 720,
-    "uniqueExactNoticeTexts": 276,
+    "withoutReadableNoticeFile": 56,
+    "readableNoticeFiles": 733,
+    "uniqueExactNoticeTexts": 281,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 14
+    "projectArtFiles": 101
   },
   "directDependencies": [
     {
@@ -105,6 +105,12 @@
       "lockedVersion": "57.0.23"
     },
     {
+      "name": "expo-splash-screen",
+      "requested": "~57.0.10",
+      "lockPath": "node_modules/expo-splash-screen",
+      "lockedVersion": "57.0.10"
+    },
+    {
       "name": "expo-sqlite",
       "requested": "~57.0.4",
       "lockPath": "node_modules/expo-sqlite",
@@ -163,6 +169,12 @@
       "requested": "~4.26.0",
       "lockPath": "node_modules/react-native-screens",
       "lockedVersion": "4.26.2"
+    },
+    {
+      "name": "react-native-svg",
+      "requested": "15.15.4",
+      "lockPath": "node_modules/react-native-svg",
+      "lockedVersion": "15.15.4"
     },
     {
       "name": "react-native-worklets",
@@ -5881,6 +5893,21 @@
       ]
     },
     {
+      "name": "boolbase",
+      "lockPath": "node_modules/boolbase",
+      "version": "1.0.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "ISC",
+      "installStatus": "version-matched",
+      "installedName": "boolbase",
+      "installedVersion": "1.0.0",
+      "installedLicense": "ISC",
+      "noticeFiles": []
+    },
+    {
       "name": "bplist-creator",
       "lockPath": "node_modules/bplist-creator",
       "version": "0.1.0",
@@ -6854,6 +6881,98 @@
       ]
     },
     {
+      "name": "css-select",
+      "lockPath": "node_modules/css-select",
+      "version": "5.2.2",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "css-select",
+      "installedVersion": "5.2.2",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/css-select/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
+      "name": "css-tree",
+      "lockPath": "node_modules/css-tree",
+      "version": "1.1.3",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "css-tree",
+      "installedVersion": "1.1.3",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/css-tree/LICENSE",
+          "status": "text",
+          "bytes": 1065,
+          "sha256": "d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899",
+          "documentId": "text-d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899"
+        }
+      ]
+    },
+    {
+      "name": "source-map",
+      "lockPath": "node_modules/css-tree/node_modules/source-map",
+      "version": "0.6.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-3-Clause",
+      "installStatus": "version-matched",
+      "installedName": "source-map",
+      "installedVersion": "0.6.1",
+      "installedLicense": "BSD-3-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/css-tree/node_modules/source-map/LICENSE",
+          "status": "text",
+          "bytes": 1526,
+          "sha256": "6cb0631f71c7749763fd3dd1d5bee52dd1070ec17f2edc1710079ad070bd2fbd",
+          "documentId": "text-6cb0631f71c7749763fd3dd1d5bee52dd1070ec17f2edc1710079ad070bd2fbd"
+        }
+      ]
+    },
+    {
+      "name": "css-what",
+      "lockPath": "node_modules/css-what",
+      "version": "6.2.2",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "css-what",
+      "installedVersion": "6.2.2",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/css-what/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
       "name": "csstype",
       "lockPath": "node_modules/csstype",
       "version": "3.2.3",
@@ -7153,6 +7272,98 @@
       ]
     },
     {
+      "name": "dom-serializer",
+      "lockPath": "node_modules/dom-serializer",
+      "version": "2.0.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "dom-serializer",
+      "installedVersion": "2.0.0",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/dom-serializer/LICENSE",
+          "status": "text",
+          "bytes": 1098,
+          "sha256": "94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff",
+          "documentId": "text-94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff"
+        }
+      ]
+    },
+    {
+      "name": "domelementtype",
+      "lockPath": "node_modules/domelementtype",
+      "version": "2.3.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "domelementtype",
+      "installedVersion": "2.3.0",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/domelementtype/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
+      "name": "domhandler",
+      "lockPath": "node_modules/domhandler",
+      "version": "5.0.3",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "domhandler",
+      "installedVersion": "5.0.3",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/domhandler/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
+      "name": "domutils",
+      "lockPath": "node_modules/domutils",
+      "version": "3.2.2",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "domutils",
+      "installedVersion": "3.2.2",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/domutils/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
+        }
+      ]
+    },
+    {
       "name": "ee-first",
       "lockPath": "node_modules/ee-first",
       "version": "1.1.1",
@@ -7264,6 +7475,29 @@
           "bytes": 1089,
           "sha256": "7585ea7bba616ccbbe43cb54ecb67956688c3c5641bb84f3099a652a73193afe",
           "documentId": "text-7585ea7bba616ccbbe43cb54ecb67956688c3c5641bb84f3099a652a73193afe"
+        }
+      ]
+    },
+    {
+      "name": "entities",
+      "lockPath": "node_modules/entities",
+      "version": "4.5.0",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "entities",
+      "installedVersion": "4.5.0",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/entities/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
         }
       ]
     },
@@ -8295,6 +8529,29 @@
       "noticeFiles": [
         {
           "path": "node_modules/expo-sharing/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+        }
+      ]
+    },
+    {
+      "name": "expo-splash-screen",
+      "lockPath": "node_modules/expo-splash-screen",
+      "version": "57.0.10",
+      "rootDirectDependency": true,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "expo-splash-screen",
+      "installedVersion": "57.0.10",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/expo-splash-screen/LICENSE",
           "status": "text",
           "bytes": 1106,
           "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
@@ -12277,6 +12534,29 @@
       ]
     },
     {
+      "name": "mdn-data",
+      "lockPath": "node_modules/mdn-data",
+      "version": "2.0.14",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "CC0-1.0",
+      "installStatus": "version-matched",
+      "installedName": "mdn-data",
+      "installedVersion": "2.0.14",
+      "installedLicense": "CC0-1.0",
+      "noticeFiles": [
+        {
+          "path": "node_modules/mdn-data/LICENSE",
+          "status": "text",
+          "bytes": 6555,
+          "sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+          "documentId": "text-36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673"
+        }
+      ]
+    },
+    {
       "name": "memoize-one",
       "lockPath": "node_modules/memoize-one",
       "version": "5.2.1",
@@ -12981,6 +13261,29 @@
           "bytes": 1109,
           "sha256": "48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0",
           "documentId": "text-48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0"
+        }
+      ]
+    },
+    {
+      "name": "nth-check",
+      "lockPath": "node_modules/nth-check",
+      "version": "2.1.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "BSD-2-Clause",
+      "installStatus": "version-matched",
+      "installedName": "nth-check",
+      "installedVersion": "2.1.1",
+      "installedLicense": "BSD-2-Clause",
+      "noticeFiles": [
+        {
+          "path": "node_modules/nth-check/LICENSE",
+          "status": "text",
+          "bytes": 1260,
+          "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+          "documentId": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164"
         }
       ]
     },
@@ -14345,6 +14648,29 @@
           "bytes": 1099,
           "sha256": "95b52e497653b738fd50e4bd3a8197dc41593c63129acb4f8069dbf49530ef82",
           "documentId": "text-95b52e497653b738fd50e4bd3a8197dc41593c63129acb4f8069dbf49530ef82"
+        }
+      ]
+    },
+    {
+      "name": "react-native-svg",
+      "lockPath": "node_modules/react-native-svg",
+      "version": "15.15.4",
+      "rootDirectDependency": true,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "react-native-svg",
+      "installedVersion": "15.15.4",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/react-native-svg/LICENSE",
+          "status": "text",
+          "bytes": 1083,
+          "sha256": "1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb",
+          "documentId": "text-1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb"
         }
       ]
     },
@@ -17571,6 +17897,798 @@
       ]
     },
     {
+      "path": "assets/generated/avatars/clothing-0.png",
+      "status": "present",
+      "bytes": 51154,
+      "sha256": "9a9b9c87aa862471ca8cb9c8a61c634795210cd36c6e9c7271c681201c6ce6d1",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/clothing-1.png",
+      "status": "present",
+      "bytes": 52468,
+      "sha256": "df56dce1f6ebcf862f30d9bdd2abb9683d116026e587b8f15a59e802db0d5c1a",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/clothing-2.png",
+      "status": "present",
+      "bytes": 55326,
+      "sha256": "b215ed007badb814462e935729ee37d6f0314b344ebbecc0e136fbba15021b0b",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/clothing-3.png",
+      "status": "present",
+      "bytes": 64552,
+      "sha256": "a065e45e7c9fd4aaa86fb1f1b7950cd032afd76f23d30fc3cd3fad1c1b614327",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-1-front-detail.png",
+      "status": "present",
+      "bytes": 33653,
+      "sha256": "17eeadd451466aaf4937d78c62b66f8524293bcd6d7884e957420c964e253208",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-1-front-mask.png",
+      "status": "present",
+      "bytes": 17086,
+      "sha256": "625f6e2d36c4a05755a0196c7e0eacf9e677f898b3133758f8570d2cbdaf4cad",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-2-front-detail.png",
+      "status": "present",
+      "bytes": 31627,
+      "sha256": "6ae02f329ad509adff55c1b0e5412adfa7c3d7c972a8d880f333a38bf0f205e8",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-2-front-mask.png",
+      "status": "present",
+      "bytes": 16104,
+      "sha256": "af5ba15fd40e326d403742e30ed13035f513b81ff0bee70870af84363a4d5732",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-3-front-detail.png",
+      "status": "present",
+      "bytes": 35397,
+      "sha256": "5dd42d9022c8bf3cf312c0155d8dcda30741706afcab9eac703318ed9fc8c79f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-3-front-mask.png",
+      "status": "present",
+      "bytes": 16404,
+      "sha256": "360e0f6983c89faac1e4476b84959e18806c37018863c2a879e9a1970023835d",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-4-back-detail.png",
+      "status": "present",
+      "bytes": 12458,
+      "sha256": "dbccd624d548bc4d05169f4fba682d4be1db4b400ab45cbde2aea23687d74bd4",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-4-back-mask.png",
+      "status": "present",
+      "bytes": 8979,
+      "sha256": "52e671babbc23e10e9ff96d09cf1c22252a7fc2316aa8c94722060d8a12a7765",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-4-front-detail.png",
+      "status": "present",
+      "bytes": 44506,
+      "sha256": "0a314f335b1f7aa177e2f0eeddd9ec54fada13e788f1ed8184e90b9728c75938",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-4-front-mask.png",
+      "status": "present",
+      "bytes": 22478,
+      "sha256": "31f1d1b895e10fe6562e8de1ea8636bbee6b0914bbd3ff3d79ca526e41e885dd",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-5-back-detail.png",
+      "status": "present",
+      "bytes": 19034,
+      "sha256": "602cb204e0740ac5a11904c8548de1127e27cdc06c05178160582c2809f823c3",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-5-back-mask.png",
+      "status": "present",
+      "bytes": 11414,
+      "sha256": "011e394a2b25cfe2148966c7095aedaf899f9aff5a1ccfa09e18fe49b2691b0f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-5-front-detail.png",
+      "status": "present",
+      "bytes": 55498,
+      "sha256": "2978bd0471382bad59ff87b8970717b423fd6c8f4305d072d0d8499e1f69ee44",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-5-front-mask.png",
+      "status": "present",
+      "bytes": 25232,
+      "sha256": "068292d6ecbf47da5763f0e960efd2b7430640ace2690a7a14470b55cb584e23",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-6-front-detail.png",
+      "status": "present",
+      "bytes": 39512,
+      "sha256": "289660ca2b15f40d079a0088c459b3f1a63bc079665463f7c5f3827c04c3675c",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-6-front-mask.png",
+      "status": "present",
+      "bytes": 16142,
+      "sha256": "75802f31fcc5eaa695a898e8fa4a623dc02b2bd5b27f2f53ce931b4d234fe6fe",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-7-back-detail.png",
+      "status": "present",
+      "bytes": 12287,
+      "sha256": "247b8313cbd26ae8c09cbc8d66d61014a2d34a2ebef4a53999ea70f072ddbdf5",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-7-back-mask.png",
+      "status": "present",
+      "bytes": 8466,
+      "sha256": "0afbc4314653cd2b768760a8b6f8e5d0b9008286bf83e5bd11a102a818da6cdf",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-7-front-detail.png",
+      "status": "present",
+      "bytes": 47478,
+      "sha256": "25762f7be7d539a7ab1d884e4ec74086825b1eb2a70d602d0d4c45b27646a298",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/hair-7-front-mask.png",
+      "status": "present",
+      "bytes": 19440,
+      "sha256": "e0e60fefd3d643fecaf2e0f922172de5180ec63135bef194f19aa615c234676c",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-0-detail.png",
+      "status": "present",
+      "bytes": 26411,
+      "sha256": "3ad25d6c6a4d01c71306c63f105e450cec94e204e57049c197eb39d41b1dc1f9",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-0-mask.png",
+      "status": "present",
+      "bytes": 17179,
+      "sha256": "2512f4c15aeee64e381c8def4f4fd60bd0cd9b8b85a0e8705ea6f3169830d41b",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-1-detail.png",
+      "status": "present",
+      "bytes": 22407,
+      "sha256": "c589eec020bf857108c6bf2622959b0d5d229c80f4b1273842690b4040a64ec9",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-1-mask.png",
+      "status": "present",
+      "bytes": 16248,
+      "sha256": "64b81078e21d27f747fc3d5bf36041b3675712b7cecd38fd9dc25bfd24b66e6a",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-2-detail.png",
+      "status": "present",
+      "bytes": 22377,
+      "sha256": "640507e9c64d110e5b76e7f5f7349a8c0a7eba91ef7ffd39ee3b3c58e20478d7",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-2-mask.png",
+      "status": "present",
+      "bytes": 16030,
+      "sha256": "14faa3ae5adf9de4108527734bd33daf5588df0bad4d083698e5cf63a0cd65ed",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-3-detail.png",
+      "status": "present",
+      "bytes": 22196,
+      "sha256": "005eb7c1e7388217e9a7439ce2e6ae7ab59d8b0feea2cbe1f8cb9768535df0f8",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-3-mask.png",
+      "status": "present",
+      "bytes": 15853,
+      "sha256": "3cb8b8c3186f2124a050c99f116b9e9c9ac22c6b2f8af3174acafb1c5e10dd21",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-4-detail.png",
+      "status": "present",
+      "bytes": 22226,
+      "sha256": "732efd63ded04b829414960b9f4c9cc04cfa4d25983595acdf50a8be567d280d",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-4-mask.png",
+      "status": "present",
+      "bytes": 15325,
+      "sha256": "03f16277b540cbdc03c9ce7484d4528cfa0b4335b74001c1d8ed89520f592655",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-5-detail.png",
+      "status": "present",
+      "bytes": 22241,
+      "sha256": "da2c6b1fd1c257542538e38247b682c8ca39cb1601bf06d2c5b690a5106b952c",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-5-mask.png",
+      "status": "present",
+      "bytes": 15334,
+      "sha256": "c468a2c8e09cdd3268126ddcc802c7183db0f5807ad073885fc31242e8eb415f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-6-detail.png",
+      "status": "present",
+      "bytes": 21693,
+      "sha256": "faf94aaa629cecdc8c6ffe8c0aeec91c20c4004d9d62b268c7a8b96e55916526",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-6-mask.png",
+      "status": "present",
+      "bytes": 15129,
+      "sha256": "fd144752dd690c37236364f99bc6644624ec80f6e8c0a37781db1c917b43acc7",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-7-detail.png",
+      "status": "present",
+      "bytes": 22322,
+      "sha256": "a9ceda1d367fd5239262d3034e0c7a2d3451c6d41ceb356db8cc784c3625e4b5",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-0-7-mask.png",
+      "status": "present",
+      "bytes": 15015,
+      "sha256": "9dbd08ff0585f5672c2fbf9884236493a76ae8921ca549a72e34bf5d78c71173",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-0-detail.png",
+      "status": "present",
+      "bytes": 30929,
+      "sha256": "5cbc915544f1ba92c9239e6156f170b8a5b69a4e52552fc0561db788aed3b854",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-0-mask.png",
+      "status": "present",
+      "bytes": 17286,
+      "sha256": "2c2e7eadce5ce1967ff0df6002eb734c40fbacaa53cc378c10a17e9fb9a7d00e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-1-detail.png",
+      "status": "present",
+      "bytes": 29068,
+      "sha256": "e0e090e31b8aff7c42ed171b9616040f278af7f8e446c1488e4ad6129fd45f73",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-1-mask.png",
+      "status": "present",
+      "bytes": 17036,
+      "sha256": "635970565fa36db4080dcdbfc1d2fbbd3949f9c3c535b61e2dbe6f8b7620c75e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-2-detail.png",
+      "status": "present",
+      "bytes": 29135,
+      "sha256": "a6362de946eaa6245f18f8b52bf770d08fd4c07fd248e97133b7fe15b23ed634",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-2-mask.png",
+      "status": "present",
+      "bytes": 16365,
+      "sha256": "7decc914d455c050f5749b27492563508c04576a2396ae1358aff7e2518a7fc0",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-3-detail.png",
+      "status": "present",
+      "bytes": 29381,
+      "sha256": "5dd2797af48b47d33034e4a8fba3da7ed71a5d2f7b149d971ffa1f918f3edc94",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-3-mask.png",
+      "status": "present",
+      "bytes": 16832,
+      "sha256": "8217ce9f686eb9f4c8e0395254b3b67f75c0237a181a3779e994dc268177aaa0",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-4-detail.png",
+      "status": "present",
+      "bytes": 28902,
+      "sha256": "641f3ee7087dedd8d685b7ec95a283f096a1ff029c7b1b742fbb5fb119de1088",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-4-mask.png",
+      "status": "present",
+      "bytes": 16566,
+      "sha256": "3d5a7f98e7c02a8a12ac0bc8f57f1d67e10aebce0ad3be19317bfd4a5f7d511a",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-5-detail.png",
+      "status": "present",
+      "bytes": 29229,
+      "sha256": "c9e3fa47810d0b5cb610d9915e28afec896e720804d66e3151b46b382c16b272",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-5-mask.png",
+      "status": "present",
+      "bytes": 17465,
+      "sha256": "1eceb6c024b232d4b0899a3cb4f696c699b6978ccf3f72ae50911e5922f6640f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-6-detail.png",
+      "status": "present",
+      "bytes": 29141,
+      "sha256": "5030858f438de105e8c76a75bb3daaaa7cb28327b2930fd60760413d9ecb6310",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-6-mask.png",
+      "status": "present",
+      "bytes": 16776,
+      "sha256": "e05fef339cfe712ab14cb808db28e07805f0c400703d62ee6b345b44364b98b9",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-7-detail.png",
+      "status": "present",
+      "bytes": 29036,
+      "sha256": "1ef88ab4318db6b811ec0f7450e3bfe02f42935011e194b86cf4255e8392aca3",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-1-7-mask.png",
+      "status": "present",
+      "bytes": 16986,
+      "sha256": "5bf087e4270ae79353cfdbf21b18b35c506cc7aef8a05606c9cf4f554a141e1e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-0-detail.png",
+      "status": "present",
+      "bytes": 24674,
+      "sha256": "6c3b04cea0552a2d1adbf5437d6ee007aed302eec603c4de5e3de3e48b6d337e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-0-mask.png",
+      "status": "present",
+      "bytes": 15653,
+      "sha256": "fb1026c61318047266bc73d603195e802e816f3e70f89f0a9d07d095fb7074f2",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-1-detail.png",
+      "status": "present",
+      "bytes": 22015,
+      "sha256": "7e9efe6f736d0dc5ae9cf4ef68794911759f10cacb1c4f59a8b37a0283c9256f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-1-mask.png",
+      "status": "present",
+      "bytes": 15750,
+      "sha256": "49ccbad9179b0ba8147a23c6028992e78ae7dc87489194b5dc2841200478536d",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-2-detail.png",
+      "status": "present",
+      "bytes": 22141,
+      "sha256": "4d03ae749f3effa5f7571526e91abb76d13a93c68093e72d6c1554c0e1128220",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-2-mask.png",
+      "status": "present",
+      "bytes": 15471,
+      "sha256": "46f30de2b864d0c3101b8c40f3557aae0fba81233e5faace923c3ce118271537",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-3-detail.png",
+      "status": "present",
+      "bytes": 22037,
+      "sha256": "5d9993c22f5a7239c1e432eda85bfb3d7c3d2390554cf1e385f76f39587b66d5",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-3-mask.png",
+      "status": "present",
+      "bytes": 14910,
+      "sha256": "0127957f9f7967185352c8cae255fd018da7cf98378231956feff8d5c9f3b16e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-4-detail.png",
+      "status": "present",
+      "bytes": 22374,
+      "sha256": "d5bd5f97f807262910d14351f1be910f81a3117a4a6e225aec3d8f868be0884a",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-4-mask.png",
+      "status": "present",
+      "bytes": 15358,
+      "sha256": "312d9ba9be37236159a36ff65e69446a93525915da33a36a8e96988176764723",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-5-detail.png",
+      "status": "present",
+      "bytes": 22466,
+      "sha256": "2015937e666328cfa88bdadd1ec096971cb061581dc85e353e5e6f466839c680",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-5-mask.png",
+      "status": "present",
+      "bytes": 15516,
+      "sha256": "9fe474f5a1d5931ea4a6accc072a7a933b8bfd9ff9cf65e6c63ff38d33c03e97",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-6-detail.png",
+      "status": "present",
+      "bytes": 22896,
+      "sha256": "0b91c8089591ffc54b85d8cfbd60864b6a225a0fab637b6716f14aec52ed574f",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-6-mask.png",
+      "status": "present",
+      "bytes": 15390,
+      "sha256": "e2fcfe1f5cd9d0bf2fae074c13e2fb26c05ede7ade97508914d65bc0f8c4ea5c",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-7-detail.png",
+      "status": "present",
+      "bytes": 22778,
+      "sha256": "73359cc7bc557a97a23d8a7a737ff88f34feb77393d9e74e52b266470309a52b",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-2-7-mask.png",
+      "status": "present",
+      "bytes": 14907,
+      "sha256": "c44751481b32cd45a92ffda3386fc779a48749e218384c1390f885e5e29778ee",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-0-detail.png",
+      "status": "present",
+      "bytes": 26935,
+      "sha256": "8d2719d394d23dc285152c02c3105d4e1dbc0f9590782425b941cced3acb13a8",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-0-mask.png",
+      "status": "present",
+      "bytes": 17000,
+      "sha256": "5e445026dcb081e7b52255c02dd348c36aab4e2b467f96576874e1edeb4c3106",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-1-detail.png",
+      "status": "present",
+      "bytes": 24597,
+      "sha256": "e3e088e1150b48239801c5a32b539a1231bf38aa2d8866cf51769f26a9a2f796",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-1-mask.png",
+      "status": "present",
+      "bytes": 15967,
+      "sha256": "566e8320d59f606b38b0ffaaf327f3fa7613ba89d3faba5f6df6193d6e54a646",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-2-detail.png",
+      "status": "present",
+      "bytes": 24150,
+      "sha256": "3f9d25718c6fa9ef63db9cdc3d912c8a3eb39962f3033c58fa35c52145c9cce4",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-2-mask.png",
+      "status": "present",
+      "bytes": 16086,
+      "sha256": "27589f86f076ec919a3b35fbf849c3635a0f2d59f37f89ba23ddfb84b8c65f00",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-3-detail.png",
+      "status": "present",
+      "bytes": 24395,
+      "sha256": "8cdf91e9eb33cd132a7c341e8bd6e4b7a770c5904784ab6ca90b52f0f564256e",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-3-mask.png",
+      "status": "present",
+      "bytes": 16091,
+      "sha256": "19d549c8ac7a58d7d964b48f5d5ccc7b5942aa4410f0d4ea9ba866bfb43e576d",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-4-detail.png",
+      "status": "present",
+      "bytes": 24777,
+      "sha256": "5de24b887be0305f14f6584d6a5df07c99d8a7a9a94f78c20644120225f08d47",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-4-mask.png",
+      "status": "present",
+      "bytes": 16310,
+      "sha256": "b1747c315abc9eecae499bd0664b84bbe1df248ba5cc8f2373b45e598273f469",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-5-detail.png",
+      "status": "present",
+      "bytes": 23922,
+      "sha256": "fdfffba52da6cefb226182034f9d70e06a61cc8e73afe3643de075bf099bd44b",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-5-mask.png",
+      "status": "present",
+      "bytes": 16022,
+      "sha256": "e456fbd3ca68bfe5151ff2800d85502a26cdf42ab406147a06373affc5ee98a6",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-6-detail.png",
+      "status": "present",
+      "bytes": 23626,
+      "sha256": "9ec5730461c3dae3c65344c15e2576d9af27a0f66ce9264de18341423b1c85a8",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-6-mask.png",
+      "status": "present",
+      "bytes": 16006,
+      "sha256": "65640794e90f67b06e91040a302da66153ef774edb99be803bd36d7ac611cf7c",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-7-detail.png",
+      "status": "present",
+      "bytes": 24345,
+      "sha256": "0648ff975ac42cef7dcfe3688ccc74f6a781c8fa909d83857cd8638f0fafa2bc",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
+      "path": "assets/generated/avatars/head-3-7-mask.png",
+      "status": "present",
+      "bytes": 15860,
+      "sha256": "06d73f37f9934c636f9d5fb15f086a2868b0f2cc7e3d9a83b35d46dc0debcaed",
+      "referencedBy": [
+        "src/assets/portraitImages.ts"
+      ]
+    },
+    {
       "path": "assets/generated/career-atlas.png",
       "status": "present",
       "bytes": 1781042,
@@ -17640,15 +18758,6 @@
       "sha256": "a4c124c8bca59e84ad175e8eaa136bc15f54291745043bfce845655bbd44be26",
       "referencedBy": [
         "src/assets/PetsLeisureArt.tsx"
-      ]
-    },
-    {
-      "path": "assets/generated/portrait-layers.png",
-      "status": "present",
-      "bytes": 1705939,
-      "sha256": "a55709a94080a6bb22c67e756e29c8ecd92a94fa6184ed6c51343eaaa6990fde",
-      "referencedBy": [
-        "src/assets/CharacterPortrait.tsx"
       ]
     },
     {
@@ -18021,6 +19130,15 @@
       ]
     },
     {
+      "id": "text-1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb",
+      "sha256": "1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb",
+      "bytes": 1083,
+      "text": "The MIT License (MIT)\n\nCopyright (c) [2015-2016] [Horcrux]\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "sources": [
+        "node_modules/react-native-svg/LICENSE"
+      ]
+    },
+    {
       "id": "text-1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0",
       "sha256": "1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0",
       "bytes": 1084,
@@ -18353,6 +19471,15 @@
       "text": "(The MIT License)\n\nCopyright (c) 2010-2017 Nathan Rajlich <nathan@tootallnate.net>\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\nOF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT\nHOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\nFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR\nOTHER DEALINGS IN THE SOFTWARE.\n",
       "sources": [
         "node_modules/plist/LICENSE"
+      ]
+    },
+    {
+      "id": "text-36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+      "sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+      "bytes": 6555,
+      "text": "CC0 1.0 Universal\n\nStatement of Purpose\n\nThe laws of most jurisdictions throughout the world automatically confer\nexclusive Copyright and Related Rights (defined below) upon the creator and\nsubsequent owner(s) (each and all, an \"owner\") of an original work of\nauthorship and/or a database (each, a \"Work\").\n\nCertain owners wish to permanently relinquish those rights to a Work for the\npurpose of contributing to a commons of creative, cultural and scientific\nworks (\"Commons\") that the public can reliably and without fear of later\nclaims of infringement build upon, modify, incorporate in other works, reuse\nand redistribute as freely as possible in any form whatsoever and for any\npurposes, including without limitation commercial purposes. These owners may\ncontribute to the Commons to promote the ideal of a free culture and the\nfurther production of creative, cultural and scientific works, or to gain\nreputation or greater distribution for their Work in part through the use and\nefforts of others.\n\nFor these and/or other purposes and motivations, and without any expectation\nof additional consideration or compensation, the person associating CC0 with a\nWork (the \"Affirmer\"), to the extent that he or she is an owner of Copyright\nand Related Rights in the Work, voluntarily elects to apply CC0 to the Work\nand publicly distribute the Work under its terms, with knowledge of his or her\nCopyright and Related Rights in the Work and the meaning and intended legal\neffect of CC0 on those rights.\n\n1. Copyright and Related Rights. A Work made available under CC0 may be\nprotected by copyright and related or neighboring rights (\"Copyright and\nRelated Rights\"). Copyright and Related Rights include, but are not limited\nto, the following:\n\n  i. the right to reproduce, adapt, distribute, perform, display, communicate,\n  and translate a Work;\n\n  ii. moral rights retained by the original author(s) and/or performer(s);\n\n  iii. publicity and privacy rights pertaining to a person's image or likeness\n  depicted in a Work;\n\n  iv. rights protecting against unfair competition in regards to a Work,\n  subject to the limitations in paragraph 4(a), below;\n\n  v. rights protecting the extraction, dissemination, use and reuse of data in\n  a Work;\n\n  vi. database rights (such as those arising under Directive 96/9/EC of the\n  European Parliament and of the Council of 11 March 1996 on the legal\n  protection of databases, and under any national implementation thereof,\n  including any amended or successor version of such directive); and\n\n  vii. other similar, equivalent or corresponding rights throughout the world\n  based on applicable law or treaty, and any national implementations thereof.\n\n2. Waiver. To the greatest extent permitted by, but not in contravention of,\napplicable law, Affirmer hereby overtly, fully, permanently, irrevocably and\nunconditionally waives, abandons, and surrenders all of Affirmer's Copyright\nand Related Rights and associated claims and causes of action, whether now\nknown or unknown (including existing as well as future claims and causes of\naction), in the Work (i) in all territories worldwide, (ii) for the maximum\nduration provided by applicable law or treaty (including future time\nextensions), (iii) in any current or future medium and for any number of\ncopies, and (iv) for any purpose whatsoever, including without limitation\ncommercial, advertising or promotional purposes (the \"Waiver\"). Affirmer makes\nthe Waiver for the benefit of each member of the public at large and to the\ndetriment of Affirmer's heirs and successors, fully intending that such Waiver\nshall not be subject to revocation, rescission, cancellation, termination, or\nany other legal or equitable action to disrupt the quiet enjoyment of the Work\nby the public as contemplated by Affirmer's express Statement of Purpose.\n\n3. Public License Fallback. Should any part of the Waiver for any reason be\njudged legally invalid or ineffective under applicable law, then the Waiver\nshall be preserved to the maximum extent permitted taking into account\nAffirmer's express Statement of Purpose. In addition, to the extent the Waiver\nis so judged Affirmer hereby grants to each affected person a royalty-free,\nnon transferable, non sublicensable, non exclusive, irrevocable and\nunconditional license to exercise Affirmer's Copyright and Related Rights in\nthe Work (i) in all territories worldwide, (ii) for the maximum duration\nprovided by applicable law or treaty (including future time extensions), (iii)\nin any current or future medium and for any number of copies, and (iv) for any\npurpose whatsoever, including without limitation commercial, advertising or\npromotional purposes (the \"License\"). The License shall be deemed effective as\nof the date CC0 was applied by Affirmer to the Work. Should any part of the\nLicense for any reason be judged legally invalid or ineffective under\napplicable law, such partial invalidity or ineffectiveness shall not\ninvalidate the remainder of the License, and in such case Affirmer hereby\naffirms that he or she will not (i) exercise any of his or her remaining\nCopyright and Related Rights in the Work or (ii) assert any associated claims\nand causes of action with respect to the Work, in either case contrary to\nAffirmer's express Statement of Purpose.\n\n4. Limitations and Disclaimers.\n\n  a. No trademark or patent rights held by Affirmer are waived, abandoned,\n  surrendered, licensed or otherwise affected by this document.\n\n  b. Affirmer offers the Work as-is and makes no representations or warranties\n  of any kind concerning the Work, express, implied, statutory or otherwise,\n  including without limitation warranties of title, merchantability, fitness\n  for a particular purpose, non infringement, or the absence of latent or\n  other defects, accuracy, or the present or absence of errors, whether or not\n  discoverable, all to the greatest extent permissible under applicable law.\n\n  c. Affirmer disclaims responsibility for clearing rights of other persons\n  that may apply to the Work or any use thereof, including without limitation\n  any person's Copyright and Related Rights in the Work. Further, Affirmer\n  disclaims responsibility for obtaining any necessary consents, permissions\n  or other rights required for any use of the Work.\n\n  d. Affirmer understands and acknowledges that Creative Commons is not a\n  party to this document and has no duty or obligation with respect to this\n  CC0 or use of the Work.\n\nFor more information, please see\n<http://creativecommons.org/publicdomain/zero/1.0/>\n",
+      "sources": [
+        "node_modules/mdn-data/LICENSE"
       ]
     },
     {
@@ -19077,6 +20204,7 @@
       "bytes": 1526,
       "text": "\nCopyright (c) 2009-2011, Mozilla Foundation and contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the names of the Mozilla Foundation nor the names of project\n  contributors may be used to endorse or promote products derived from this\n  software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
       "sources": [
+        "node_modules/css-tree/node_modules/source-map/LICENSE",
         "node_modules/istanbul-lib-source-maps/node_modules/source-map/LICENSE",
         "node_modules/jest-runner/node_modules/source-map/LICENSE",
         "node_modules/source-map-js/LICENSE",
@@ -19477,6 +20605,15 @@
       "text": "Copyright JS Foundation and other contributors, https://js.foundation/\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n  * Redistributions of source code must retain the above copyright\n    notice, this list of conditions and the following disclaimer.\n  * Redistributions in binary form must reproduce the above copyright\n    notice, this list of conditions and the following disclaimer in the\n    documentation and/or other materials provided with the distribution.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY\nDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\nON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
       "sources": [
         "node_modules/esprima/LICENSE.BSD"
+      ]
+    },
+    {
+      "id": "text-94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff",
+      "sha256": "94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff",
+      "bytes": 1098,
+      "text": "License\n\n(The MIT License)\n\nCopyright (c) 2014 The cheeriojs contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "sources": [
+        "node_modules/dom-serializer/LICENSE"
       ]
     },
     {
@@ -20014,6 +21151,21 @@
       ]
     },
     {
+      "id": "text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+      "sha256": "cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164",
+      "bytes": 1260,
+      "text": "Copyright (c) Felix Böhm\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\nTHIS IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS,\nEVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "sources": [
+        "node_modules/css-select/LICENSE",
+        "node_modules/css-what/LICENSE",
+        "node_modules/domelementtype/LICENSE",
+        "node_modules/domhandler/LICENSE",
+        "node_modules/domutils/LICENSE",
+        "node_modules/entities/LICENSE",
+        "node_modules/nth-check/LICENSE"
+      ]
+    },
+    {
       "id": "text-cc06054a391f6b5dbcf6f142d2bb9d637db897746b0e6c58ed913834b581cae4",
       "sha256": "cc06054a391f6b5dbcf6f142d2bb9d637db897746b0e6c58ed913834b581cae4",
       "bytes": 1070,
@@ -20050,6 +21202,15 @@
         "node_modules/expo/node_modules/picomatch/LICENSE",
         "node_modules/picomatch/LICENSE",
         "node_modules/tinyglobby/node_modules/picomatch/LICENSE"
+      ]
+    },
+    {
+      "id": "text-d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899",
+      "sha256": "d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899",
+      "bytes": 1065,
+      "text": "Copyright (C) 2016-2019 by Roman Dvornov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "sources": [
+        "node_modules/css-tree/LICENSE"
       ]
     },
     {
@@ -20561,6 +21722,7 @@
         "node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE",
         "node_modules/expo-server/LICENSE",
         "node_modules/expo-sharing/LICENSE",
+        "node_modules/expo-splash-screen/LICENSE",
         "node_modules/expo-sqlite/LICENSE",
         "node_modules/expo-status-bar/LICENSE",
         "node_modules/expo-symbols/LICENSE",

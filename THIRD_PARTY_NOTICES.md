@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `1957084c683526bb4f78aea8abedde55503f4ae57d768c4e1a1fbcdba1cfaf1f`
-- `package-lock.json` SHA-256 `23101149e3b2f08ba44c2f0f9fb5318c01426525b80078854b493c0449b06501`
-- `app.json` SHA-256 `4a8879b7826acebe343dd81e83201dc15c59d67a0908fab9f0a541bcae161d8b`
+- `package.json` SHA-256 `fee3de95aef6ed862c317d351129e904d55c00fa35ae54d999488362f2743de2`
+- `package-lock.json` SHA-256 `af9fa547fb9616b5b98ed318a962de26a4165bbd5b1d533ad8524feb83622c47`
+- `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
 
-**26 direct dependencies; 769 candidate non-dev lock entries; 759 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**28 direct dependencies; 783 candidate non-dev lock entries; 773 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-720 readable notice files are preserved as 276 exact text blocks. 1 entries lack lock license metadata; 55 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+733 readable notice files are preserved as 281 exact text blocks. 1 entries lack lock license metadata; 56 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -31,6 +31,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | expo-notifications | ~57.0.23 | 57.0.23 | node_modules/expo-notifications |
 | expo-router | ~57.0.28 | 57.0.28 | node_modules/expo-router |
 | expo-sharing | ~57.0.23 | 57.0.23 | node_modules/expo-sharing |
+| expo-splash-screen | ~57.0.10 | 57.0.10 | node_modules/expo-splash-screen |
 | expo-sqlite | ~57.0.4 | 57.0.4 | node_modules/expo-sqlite |
 | expo-status-bar | ~57.0.1 | 57.0.1 | node_modules/expo-status-bar |
 | expo-system-ui | ~57.0.4 | 57.0.4 | node_modules/expo-system-ui |
@@ -41,6 +42,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | react-native-reanimated | 4.5.1 | 4.5.1 | node_modules/react-native-reanimated |
 | react-native-safe-area-context | ~5.7.0 | 5.7.0 | node_modules/react-native-safe-area-context |
 | react-native-screens | ~4.26.0 | 4.26.2 | node_modules/react-native-screens |
+| react-native-svg | 15.15.4 | 15.15.4 | node_modules/react-native-svg |
 | react-native-worklets | 0.10.1 | 0.10.1 | node_modules/react-native-worklets |
 | zod | ^4.6.7 | 4.6.7 | node_modules/zod |
 | zustand | ^5.0.15 | 5.0.15 | node_modules/zustand |
@@ -303,6 +305,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | base64-js@1.5.1 (node_modules/base64-js) | MIT | version-matched | node_modules/base64-js/LICENSE [text-5b37224c080cdcc97c871ada971c224e9926370fe74f11b539aa1cf9f3b1aca1] |
 | baseline-browser-mapping@2.11.29 (node_modules/baseline-browser-mapping) | Apache-2.0 | version-matched | node_modules/baseline-browser-mapping/LICENSE.txt [text-c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4] |
 | big-integer@1.6.52 (node_modules/big-integer) | Unlicense | version-matched | node_modules/big-integer/LICENSE [text-e9b0e94f628e00b5ed98046cfa041696ff89eebbbdd54108ee350625bc6d0363] |
+| boolbase@1.0.0 (node_modules/boolbase) | ISC | version-matched | (none found) |
 | bplist-creator@0.1.0 (node_modules/bplist-creator) | MIT | version-matched | node_modules/bplist-creator/LICENSE [text-d9bacb8be7c3a210dfe531bde8503eb567f51a8fdbfc438fcf7a171d7ab338d8] |
 | bplist-parser@0.3.1 (node_modules/bplist-parser) | MIT | version-matched | (none found) |
 | brace-expansion@5.0.12 (node_modules/brace-expansion) | MIT | version-matched | node_modules/brace-expansion/LICENSE [text-9c63a23124d68cd30cd316a94a1a0bca34f032786df6df69fc4b5f136bac8d2e] |
@@ -346,6 +349,10 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | core-js-compat@3.50.0 (node_modules/core-js-compat) | MIT | version-matched | node_modules/core-js-compat/LICENSE [text-b87653fff2d44426ab5cd4723cee3b1364dc8d35a0acdf098c54689543123bf8] |
 | create-jest@29.7.0 (node_modules/create-jest) | MIT | version-matched | node_modules/create-jest/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | cross-spawn@7.0.6 (node_modules/cross-spawn) | MIT | version-matched | node_modules/cross-spawn/LICENSE [text-aaa78451b6fecd1b9c4594c796c133c0e90cad100372ff8bc6de615e9ef9adf1] |
+| css-select@5.2.2 (node_modules/css-select) | BSD-2-Clause | version-matched | node_modules/css-select/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
+| css-tree@1.1.3 (node_modules/css-tree) | MIT | version-matched | node_modules/css-tree/LICENSE [text-d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899] |
+| source-map@0.6.1 (node_modules/css-tree/node_modules/source-map) | BSD-3-Clause | version-matched | node_modules/css-tree/node_modules/source-map/LICENSE [text-6cb0631f71c7749763fd3dd1d5bee52dd1070ec17f2edc1710079ad070bd2fbd] |
+| css-what@6.2.2 (node_modules/css-what) | BSD-2-Clause | version-matched | node_modules/css-what/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
 | csstype@3.2.3 (node_modules/csstype) | MIT | version-matched | node_modules/csstype/LICENSE [text-11d55bd4541c75ee7879547ac49089c489163dae49551389713c3d026cab383e] |
 | debug@4.4.3 (node_modules/debug) | MIT | version-matched | node_modules/debug/LICENSE [text-3a61c6c96caf5c1d9b623fb9b04c822b783dfcb78aa7e49c76a3f643e6ed7f95] |
 | decode-uri-component@0.2.2 (node_modules/decode-uri-component) | MIT | version-matched | node_modules/decode-uri-component/license [text-ed7a9a0f74e43951b2520efe1a4349cb9ed5f3dff0b0f268e2e51a4d38df7ea4] |
@@ -359,11 +366,16 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | detect-node-es@1.1.0 (node_modules/detect-node-es) | MIT | version-matched | node_modules/detect-node-es/LICENSE [text-54b32293ea560d22cd9b62af9b2cda1a030d910a48c6601d227c5ff2338d95f8] |
 | diff-sequences@29.6.3 (node_modules/diff-sequences) | MIT | version-matched | node_modules/diff-sequences/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | dnssd-advertise@1.1.6 (node_modules/dnssd-advertise) | MIT | version-matched | node_modules/dnssd-advertise/LICENSE.md [text-479b48ab7acdf844b2f44d6a3ce806f932ad009d84d2c71651355b372a2ad0ad] |
+| dom-serializer@2.0.0 (node_modules/dom-serializer) | MIT | version-matched | node_modules/dom-serializer/LICENSE [text-94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff] |
+| domelementtype@2.3.0 (node_modules/domelementtype) | BSD-2-Clause | version-matched | node_modules/domelementtype/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
+| domhandler@5.0.3 (node_modules/domhandler) | BSD-2-Clause | version-matched | node_modules/domhandler/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
+| domutils@3.2.2 (node_modules/domutils) | BSD-2-Clause | version-matched | node_modules/domutils/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
 | ee-first@1.1.1 (node_modules/ee-first) | MIT | version-matched | node_modules/ee-first/LICENSE [text-965ef284f7f4c176842ec2e87fa13e79feed777d56d7a21a5a3b38f1bb6dc288] |
 | electron-to-chromium@1.5.459 (node_modules/electron-to-chromium) | ISC | version-matched | node_modules/electron-to-chromium/LICENSE [text-25ba5c59dad3e0dd8f9540beaa0f0a86a10e3aec35af5fdc8e88c5f6a5c0d8c6] |
 | emittery@0.13.1 (node_modules/emittery) | MIT | version-matched | node_modules/emittery/license [text-5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3] |
 | emoji-regex@8.0.0 (node_modules/emoji-regex) | MIT | version-matched | node_modules/emoji-regex/LICENSE-MIT.txt [text-483acb265f182907d1caf6cff9c16c96f31325ed23792832cc5d8b12d5f88c8a] |
 | encodeurl@1.0.2 (node_modules/encodeurl) | MIT | version-matched | node_modules/encodeurl/LICENSE [text-7585ea7bba616ccbbe43cb54ecb67956688c3c5641bb84f3099a652a73193afe] |
+| entities@4.5.0 (node_modules/entities) | BSD-2-Clause | version-matched | node_modules/entities/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
 | error-ex@1.3.4 (node_modules/error-ex) | MIT | version-matched | node_modules/error-ex/LICENSE [text-92b07a2e5b0e051d37dde85042c736d6d551cfcbc0983f39d7ef903b3986bbc1] |
 | is-arrayish@0.2.1 (node_modules/error-ex/node_modules/is-arrayish) | MIT | version-matched | node_modules/error-ex/node_modules/is-arrayish/LICENSE [text-92b07a2e5b0e051d37dde85042c736d6d551cfcbc0983f39d7ef903b3986bbc1] |
 | error-stack-parser@2.1.4 (node_modules/error-stack-parser) | MIT | version-matched | node_modules/error-stack-parser/LICENSE [text-899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420] |
@@ -409,6 +421,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | react-is@19.3.1 (node_modules/expo-router/node_modules/react-is) | MIT | version-matched | node_modules/expo-router/node_modules/react-is/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | expo-server@57.0.3 (node_modules/expo-server) | MIT | version-matched | node_modules/expo-server/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-sharing@57.0.23 (node_modules/expo-sharing) | MIT | version-matched | node_modules/expo-sharing/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-splash-screen@57.0.10 (node_modules/expo-splash-screen) | MIT | version-matched | node_modules/expo-splash-screen/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-sqlite@57.0.4 (node_modules/expo-sqlite) | MIT | version-matched | node_modules/expo-sqlite/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-status-bar@57.0.1 (node_modules/expo-status-bar) | MIT | version-matched | node_modules/expo-status-bar/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-symbols@57.0.3 (node_modules/expo-symbols) | MIT | version-matched | node_modules/expo-symbols/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
@@ -585,6 +598,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | make-dir@4.0.0 (node_modules/make-dir) | MIT | version-matched | node_modules/make-dir/license [text-5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3] |
 | makeerror@1.0.12 (node_modules/makeerror) | BSD-3-Clause | version-matched | node_modules/makeerror/license [text-efd6f9e708b909de1a18730b90fb6394a3125680ac2f98a87cd23d1a0c93afa2] |
 | marky@1.3.0 (node_modules/marky) | Apache-2.0 | version-matched | node_modules/marky/LICENSE [text-f1d42ae4dd4e847f03e57241ab62538f35580ce533acf1d8274426283b01151c] |
+| mdn-data@2.0.14 (node_modules/mdn-data) | CC0-1.0 | version-matched | node_modules/mdn-data/LICENSE [text-36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673] |
 | memoize-one@5.2.1 (node_modules/memoize-one) | MIT | version-matched | node_modules/memoize-one/LICENSE [text-b1c501095de70182748cb8e8d97ac5577701a4ef3b755ba30d59fd87b24bdb0f] |
 | merge-stream@2.0.0 (node_modules/merge-stream) | MIT | version-matched | node_modules/merge-stream/LICENSE [text-2cee71bf4612fc2efe1c6261e3f2b21f3c7259ef8a4f3593b095ae7a7bd65ad9] |
 | metro@0.84.5 (node_modules/metro) | MIT | version-matched | (none found) |
@@ -621,6 +635,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | normalize-path@3.0.0 (node_modules/normalize-path) | MIT | version-matched | node_modules/normalize-path/LICENSE [text-e70ff771504ba41f2be55de812a017ff46433d7a250c862e38fc419159e44500] |
 | npm-package-arg@11.0.3 (node_modules/npm-package-arg) | ISC | version-matched | node_modules/npm-package-arg/LICENSE [text-898c2bcff663681498ad1ca8235d45b6e70b10cdf1f869a5b5e69f6e46efedd3] |
 | npm-run-path@4.0.1 (node_modules/npm-run-path) | MIT | version-matched | node_modules/npm-run-path/license [text-48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0] |
+| nth-check@2.1.1 (node_modules/nth-check) | BSD-2-Clause | version-matched | node_modules/nth-check/LICENSE [text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164] |
 | nullthrows@1.1.1 (node_modules/nullthrows) | MIT | version-matched | node_modules/nullthrows/LICENSE [text-dd5f97aa25431e25fea6654f12f4ce167dc19b3148ab515cc271aa8efe6eb0be] |
 | ob1@0.84.5 (node_modules/ob1) | MIT | version-matched | (none found) |
 | on-finished@2.3.0 (node_modules/on-finished) | MIT | version-matched | node_modules/on-finished/LICENSE [text-8089bcc08845ec143e5761f4a101a65b8c792a0dedbfeeb90a15560c0b77f768] |
@@ -681,6 +696,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | react-native-reanimated@4.5.1 (node_modules/react-native-reanimated) | MIT | version-matched | node_modules/react-native-reanimated/LICENSE [text-f1ae22eddd3a96c3b7b8a494ef03749ae6a1e19574bacc9c195d83c916de09e2] |
 | react-native-safe-area-context@5.7.0 (node_modules/react-native-safe-area-context) | MIT | version-matched | node_modules/react-native-safe-area-context/LICENSE [text-f5c7a4d527258e11fdfe3d84eb73cd14fe6d64224ef051e59f6ee21fe378800c] |
 | react-native-screens@4.26.2 (node_modules/react-native-screens) | MIT | version-matched | node_modules/react-native-screens/LICENSE [text-95b52e497653b738fd50e4bd3a8197dc41593c63129acb4f8069dbf49530ef82] |
+| react-native-svg@15.15.4 (node_modules/react-native-svg) | MIT | version-matched | node_modules/react-native-svg/LICENSE [text-1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb] |
 | react-native-worklets@0.10.1 (node_modules/react-native-worklets) | MIT | version-matched | node_modules/react-native-worklets/LICENSE [text-92c22d327a6644efda43527bfa6f136f4382359f40bc288eda0764f67be9c269] |
 | commander@12.1.0 (node_modules/react-native/node_modules/commander) | MIT | version-matched | node_modules/react-native/node_modules/commander/LICENSE [text-04512a63dce4d2d506ad612dc0bd7681ccf6e3655f7b6eaef7dfac8323d1ec0b] |
 | react-refresh@0.14.2 (node_modules/react-refresh) | MIT | version-matched | node_modules/react-refresh/LICENSE [text-52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85] |
@@ -2059,6 +2075,38 @@ MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 ------------- End of ThirdPartyNotices ------------------------------------------- */
 ```
 
+### text-1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb
+
+SHA-256 `1bc2aa7dad15097cd71308d9ae013ff14d11a84357b170c1554f4035fb8a3acb` · 1083 original bytes.
+
+Sources:
+
+- `node_modules/react-native-svg/LICENSE`
+
+```text
+The MIT License (MIT)
+
+Copyright (c) [2015-2016] [Horcrux]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ### text-1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0
 
 SHA-256 `1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0` · 1084 original bytes.
@@ -3220,6 +3268,133 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+```
+
+### text-36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673
+
+SHA-256 `36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673` · 6555 original bytes.
+
+Sources:
+
+- `node_modules/mdn-data/LICENSE`
+
+```text
+CC0 1.0 Universal
+
+Statement of Purpose
+
+The laws of most jurisdictions throughout the world automatically confer
+exclusive Copyright and Related Rights (defined below) upon the creator and
+subsequent owner(s) (each and all, an "owner") of an original work of
+authorship and/or a database (each, a "Work").
+
+Certain owners wish to permanently relinquish those rights to a Work for the
+purpose of contributing to a commons of creative, cultural and scientific
+works ("Commons") that the public can reliably and without fear of later
+claims of infringement build upon, modify, incorporate in other works, reuse
+and redistribute as freely as possible in any form whatsoever and for any
+purposes, including without limitation commercial purposes. These owners may
+contribute to the Commons to promote the ideal of a free culture and the
+further production of creative, cultural and scientific works, or to gain
+reputation or greater distribution for their Work in part through the use and
+efforts of others.
+
+For these and/or other purposes and motivations, and without any expectation
+of additional consideration or compensation, the person associating CC0 with a
+Work (the "Affirmer"), to the extent that he or she is an owner of Copyright
+and Related Rights in the Work, voluntarily elects to apply CC0 to the Work
+and publicly distribute the Work under its terms, with knowledge of his or her
+Copyright and Related Rights in the Work and the meaning and intended legal
+effect of CC0 on those rights.
+
+1. Copyright and Related Rights. A Work made available under CC0 may be
+protected by copyright and related or neighboring rights ("Copyright and
+Related Rights"). Copyright and Related Rights include, but are not limited
+to, the following:
+
+  i. the right to reproduce, adapt, distribute, perform, display, communicate,
+  and translate a Work;
+
+  ii. moral rights retained by the original author(s) and/or performer(s);
+
+  iii. publicity and privacy rights pertaining to a person's image or likeness
+  depicted in a Work;
+
+  iv. rights protecting against unfair competition in regards to a Work,
+  subject to the limitations in paragraph 4(a), below;
+
+  v. rights protecting the extraction, dissemination, use and reuse of data in
+  a Work;
+
+  vi. database rights (such as those arising under Directive 96/9/EC of the
+  European Parliament and of the Council of 11 March 1996 on the legal
+  protection of databases, and under any national implementation thereof,
+  including any amended or successor version of such directive); and
+
+  vii. other similar, equivalent or corresponding rights throughout the world
+  based on applicable law or treaty, and any national implementations thereof.
+
+2. Waiver. To the greatest extent permitted by, but not in contravention of,
+applicable law, Affirmer hereby overtly, fully, permanently, irrevocably and
+unconditionally waives, abandons, and surrenders all of Affirmer's Copyright
+and Related Rights and associated claims and causes of action, whether now
+known or unknown (including existing as well as future claims and causes of
+action), in the Work (i) in all territories worldwide, (ii) for the maximum
+duration provided by applicable law or treaty (including future time
+extensions), (iii) in any current or future medium and for any number of
+copies, and (iv) for any purpose whatsoever, including without limitation
+commercial, advertising or promotional purposes (the "Waiver"). Affirmer makes
+the Waiver for the benefit of each member of the public at large and to the
+detriment of Affirmer's heirs and successors, fully intending that such Waiver
+shall not be subject to revocation, rescission, cancellation, termination, or
+any other legal or equitable action to disrupt the quiet enjoyment of the Work
+by the public as contemplated by Affirmer's express Statement of Purpose.
+
+3. Public License Fallback. Should any part of the Waiver for any reason be
+judged legally invalid or ineffective under applicable law, then the Waiver
+shall be preserved to the maximum extent permitted taking into account
+Affirmer's express Statement of Purpose. In addition, to the extent the Waiver
+is so judged Affirmer hereby grants to each affected person a royalty-free,
+non transferable, non sublicensable, non exclusive, irrevocable and
+unconditional license to exercise Affirmer's Copyright and Related Rights in
+the Work (i) in all territories worldwide, (ii) for the maximum duration
+provided by applicable law or treaty (including future time extensions), (iii)
+in any current or future medium and for any number of copies, and (iv) for any
+purpose whatsoever, including without limitation commercial, advertising or
+promotional purposes (the "License"). The License shall be deemed effective as
+of the date CC0 was applied by Affirmer to the Work. Should any part of the
+License for any reason be judged legally invalid or ineffective under
+applicable law, such partial invalidity or ineffectiveness shall not
+invalidate the remainder of the License, and in such case Affirmer hereby
+affirms that he or she will not (i) exercise any of his or her remaining
+Copyright and Related Rights in the Work or (ii) assert any associated claims
+and causes of action with respect to the Work, in either case contrary to
+Affirmer's express Statement of Purpose.
+
+4. Limitations and Disclaimers.
+
+  a. No trademark or patent rights held by Affirmer are waived, abandoned,
+  surrendered, licensed or otherwise affected by this document.
+
+  b. Affirmer offers the Work as-is and makes no representations or warranties
+  of any kind concerning the Work, express, implied, statutory or otherwise,
+  including without limitation warranties of title, merchantability, fitness
+  for a particular purpose, non infringement, or the absence of latent or
+  other defects, accuracy, or the present or absence of errors, whether or not
+  discoverable, all to the greatest extent permissible under applicable law.
+
+  c. Affirmer disclaims responsibility for clearing rights of other persons
+  that may apply to the Work or any use thereof, including without limitation
+  any person's Copyright and Related Rights in the Work. Further, Affirmer
+  disclaims responsibility for obtaining any necessary consents, permissions
+  or other rights required for any use of the Work.
+
+  d. Affirmer understands and acknowledges that Creative Commons is not a
+  party to this document and has no duty or obligation with respect to this
+  CC0 or use of the Work.
+
+For more information, please see
+<http://creativecommons.org/publicdomain/zero/1.0/>
 ```
 
 ### text-3706296ed611888111ceccc1dff4712844dea4bde0b185c82d718c3b69895abe
@@ -5845,6 +6020,7 @@ SHA-256 `6cb0631f71c7749763fd3dd1d5bee52dd1070ec17f2edc1710079ad070bd2fbd` · 15
 
 Sources:
 
+- `node_modules/css-tree/node_modules/source-map/LICENSE`
 - `node_modules/istanbul-lib-source-maps/node_modules/source-map/LICENSE`
 - `node_modules/jest-runner/node_modules/source-map/LICENSE`
 - `node_modules/source-map-js/LICENSE`
@@ -7420,6 +7596,28 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
+### text-94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff
+
+SHA-256 `94cfe87de9b178e8fee313a19178e625129e2ce559db32e772e7bd95114ee6ff` · 1098 original bytes.
+
+Sources:
+
+- `node_modules/dom-serializer/LICENSE`
+
+```text
+License
+
+(The MIT License)
+
+Copyright (c) 2014 The cheeriojs contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 ### text-95b52e497653b738fd50e4bd3a8197dc41593c63129acb4f8069dbf49530ef82
@@ -9805,6 +10003,34 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
+### text-cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164
+
+SHA-256 `cb992345949ccd6e8394b2cd6c465f7b897c864f845937dbf64e8997f389e164` · 1260 original bytes.
+
+Sources:
+
+- `node_modules/css-select/LICENSE`
+- `node_modules/css-what/LICENSE`
+- `node_modules/domelementtype/LICENSE`
+- `node_modules/domhandler/LICENSE`
+- `node_modules/domutils/LICENSE`
+- `node_modules/entities/LICENSE`
+- `node_modules/nth-check/LICENSE`
+
+```text
+Copyright (c) Felix Böhm
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
 ### text-cc06054a391f6b5dbcf6f142d2bb9d637db897746b0e6c58ed913834b581cae4
 
 SHA-256 `cc06054a391f6b5dbcf6f142d2bb9d637db897746b0e6c58ed913834b581cae4` · 1070 original bytes.
@@ -10099,6 +10325,36 @@ Sources:
 The MIT License (MIT)
 
 Copyright (c) 2017-present, Jon Schlinkert.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+
+### text-d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899
+
+SHA-256 `d34ff47ca7a39e9ee3987a03a42cce0af4f77ec280f06f3969e2c33ca350a899` · 1065 original bytes.
+
+Sources:
+
+- `node_modules/css-tree/LICENSE`
+
+```text
+Copyright (C) 2016-2019 by Roman Dvornov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -12471,6 +12727,7 @@ Sources:
 - `node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE`
 - `node_modules/expo-server/LICENSE`
 - `node_modules/expo-sharing/LICENSE`
+- `node_modules/expo-splash-screen/LICENSE`
 - `node_modules/expo-sqlite/LICENSE`
 - `node_modules/expo-status-bar/LICENSE`
 - `node_modules/expo-symbols/LICENSE`

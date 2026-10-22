@@ -7,6 +7,7 @@ import { BottomNavigation, TabKey } from '../../src/ui/GameShell';
 import { ThemedStatusBar, useColors } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 import { useFeedback } from '../../src/ui/feedback';
+import { useCinematicTransition } from '../../src/ui/cinematic/CinematicContext';
 
 const icons = { life: 'home', assets: 'wallet', relationships: 'heart', activities: 'ellipsis-horizontal' } as const;
 export const unstable_settings = { initialRouteName: '(tabs)' };
@@ -17,9 +18,11 @@ export default function GameLayout() {
   const params = useGlobalSearchParams<{ tab?: string }>();
   const c = useColors();
   const { reducedMotion } = useFeedback();
+  const { activeKind } = useCinematicTransition();
   if (!world) return <Redirect href="/" />;
   if (!world.birthAcknowledged) return <Redirect href="/birth" />;
-  if (world.people[world.activePersonId].died) return <Redirect href="/death" />;
+  // Keep this route mounted while ink spreads; the root navigates under cover.
+  if (world.people[world.activePersonId].died && activeKind !== 'death') return <Redirect href="/death" />;
   const tab: TabKey = params.tab === 'life' || params.tab === 'assets' || params.tab === 'relationships' || params.tab === 'activities' ? params.tab
     : ['/assets', '/asset/', '/shopping/', '/offer/', '/investment', '/bank', '/finances'].some(prefix => path.startsWith(prefix)) ? 'assets' : ['/relationships', '/person', '/household', '/meet-people', '/family', '/divorce', '/will'].some(prefix => path.startsWith(prefix)) ? 'relationships'
     : ['/extras', '/achievements', '/challenges', '/challenge/', '/heirlooms', '/hobbies', '/hobby/', '/hobby-event/', '/entertainment', '/pets', '/pet/', '/activities', '/health', '/doctor', '/condition', '/lifestyle', '/exercise', '/education', '/scholarships', '/campus', '/school', '/work', '/coworkers', '/jobs', '/crime', '/case', '/criminal-record', '/prison', '/underground', '/black-market', '/social', '/create-post', '/creators', '/sponsorship', '/fame', '/business', '/manage-business', '/special-careers', '/career', '/music-studio', '/politics', '/creator-studio', '/service/', '/royalty', '/travel', '/emigrate', '/destinations', '/destination/'].some(prefix => path.startsWith(prefix)) ? 'activities' : 'life';

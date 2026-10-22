@@ -26,4 +26,6 @@ Tests include native component interactions, deterministic domain checks and rea
 
 The optional `node tools/benchmark-history.cjs` diagnostic measures the current engine/checkpoint workload in this cloud runtime. Its [results and limits](docs/PERFORMANCE.md) do not establish native-device performance.
 
+Full-screen welcome, birth and death ink transitions use local SVG/Reanimated choreography. See [implementation, playback and verification](docs/CINEMATIC_TRANSITIONS.md).
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.

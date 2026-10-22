@@ -21,6 +21,9 @@ import { ThemeProvider } from '../../src/ui/theme';
 let mockPreferences: ReturnType<typeof createPreferencesStore>, mockGame: ReturnType<typeof createGameStore>;
 const mockImpact = jest.fn(), mockAndroidHaptic = jest.fn(), mockAudioMode = jest.fn(), mockAudioCreate = jest.fn();
 const mockPlayer = { isLoaded: true, volume: 1, seekTo: jest.fn(), play: jest.fn(), pause: jest.fn(), remove: jest.fn() };
+// The overlay's native/UI runtime is exercised in cinematic-transition.test;
+// this journey keeps the persisted feedback settings and both navigators live.
+jest.mock('../../src/ui/cinematic/CinematicTransition', () => ({ CinematicTransitionProvider: ({ children }: React.PropsWithChildren) => children }));
 jest.mock('expo-haptics', () => ({ impactAsync: (...args: unknown[]) => mockImpact(...args), performAndroidHapticsAsync: (...args: unknown[]) => mockAndroidHaptic(...args),
   ImpactFeedbackStyle: { Light: 'light' }, AndroidHaptics: { Virtual_Key: 'virtual-key' } }));
 jest.mock('expo-audio', () => ({ setAudioModeAsync: (...args: unknown[]) => mockAudioMode(...args), createAudioPlayer: (...args: unknown[]) => mockAudioCreate(...args) }));

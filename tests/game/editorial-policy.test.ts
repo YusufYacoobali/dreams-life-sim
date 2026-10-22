@@ -100,7 +100,8 @@ test('the historical C35 registration stays exact and rejects newer source befor
   // The starting work branch already includes state changes after frozen C35.
   // Pin that unchanged work state without rewriting the historical registration.
   expect(pins.state).toBe('c2c92e871746c8fac27345021bd1f253127abdbb627c650db03f7da7cb2dae77');
-  expect(pins.lockfile).toBe('23101149e3b2f08ba44c2f0f9fb5318c01426525b80078854b493c0449b06501');
+  // Current UI dependencies include SDK 57 SVG/splash support; frozen C35 stays exact above.
+  expect(pins.lockfile).toBe('af9fa547fb9616b5b98ed318a962de26a4165bbd5b1d533ad8524feb83622c47');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');
   expect(pins.policy).toBe('0e2bf26c25d28c24d8ac9111fe2f3de704a1cadb0e8e98df82b4dbf93bcf3c72');
   for (const key of ['game', 'gameAndPersistence']) expect(pins[key]).not.toBe(driver.expectedC35[key]);
