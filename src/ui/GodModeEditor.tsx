@@ -61,6 +61,7 @@ function Editor({ world }: { world: World }) {
     <Button label="Save Changes" busy={busy} disabled={disabled || !dirty} onPress={requestSave} />
     <Button label="Cancel" tone="secondary" disabled={busy} onPress={close} />
   </>}><Header title="God Mode Editor" onBack={busy ? undefined : close} />
+    <Card><ActionRow title="Mini-Game Playground" subtitle="Practice all three challenges without changing this life" onPress={() => router.push('/mini-game-playground')} /></Card>
     <Card><Heading size={20}>{fullName(person)}</Heading><Body muted>Changes apply together when saved. A checkpoint is kept before each edit.</Body>
       <Body muted>Normal gameplay continues to change these values. Fame can rise to the level supported by an existing audience. Health at 0 can cause death on the next Age Up.</Body>
       <Button label="Reset Changes" tone="secondary" disabled={disabled || !dirty} onPress={reset} />

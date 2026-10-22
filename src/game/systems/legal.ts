@@ -1,3 +1,4 @@
+import { burglaryModifiers } from '../../minigames/core/scoring';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
@@ -161,18 +162,20 @@ export function hearCase(world: World, caseId: string, plea: 'guilty' | 'not-gui
   else if (person.id === world.activePersonId) ensurePrisonContacts(world, sentence);
   return [row('verdict', 'Verdict', 'Guilty', 'negative'), row('sentence', 'Sentence', item.sentenceMonths + ' months', 'negative'), row('credit', 'Remand credit', credit + ' months'), row('fine', 'Fine', formatMoney(item.fine), 'negative')];
 }
-function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime' }>, death: Death) {
-  const reason = crimeReason(world, command.offence); if (reason) throw new IneligibleAction(reason);
-  const person = active(world), definition = offences[command.offence]; limit(world, 'crime:' + command.offence);
+function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime' }>, death: Death, modifier?: { lootBps: number; riskBps: number }) {
+  const reason = modifier ? undefined : crimeReason(world, command.offence); if (reason) throw new IneligibleAction(reason);
+  const person = active(world), definition = offences[command.offence]; if (!modifier) limit(world, 'crime:' + command.offence);
   let victim: Person | null = null;
   if (['pickpocket', 'robbery', 'assault'].includes(command.offence)) {
     victim = command.victimId ? world.people[command.victimId] : Object.values(world.people).find(candidate => candidate.id !== person.id && !candidate.died && !isConfined(world, candidate) && candidate.country === person.country && candidate.city === person.city && ageOn(candidate, world.date) >= 18) ?? createContact(world, { age: draw(world, 'npcs', 20, 60) });
     if (!victim || victim.id === person.id || victim.died || isConfined(world, victim) || victim.country !== person.country || victim.city !== person.city || ageOn(victim, world.date) < 18) throw new IneligibleAction('Choose a living adult in your city');
   }
   let gain = amount(world, definition.gainBps);
+  if (modifier) gain = roundRatio(gain * BigInt(modifier.lootBps), 10000n);
   if (victim) { const cash = availableCash(accountFor(world, victim)); gain = gain < cash ? gain : cash; if (gain) post(world, -gain, 0n, 'crime-loss', 'Money lost in a theft', null, victim); }
   if (gain) post(world, gain, 0n, 'crime-proceeds', definition.title + ' proceeds');
   const source = incident(world, person, command.offence, gain, victim?.id ?? null, gain + (definition.violent ? amount(world, 200) : 0n));
+  if (modifier) source.riskBps = Math.max(1000, Math.min(9500, source.riskBps + modifier.riskBps));
   person.stats.energy = bounded(person.stats.energy - 10); person.stats.stress = bounded(person.stats.stress + 7); person.stats.respect = bounded(person.stats.respect - (definition.violent ? 8 : 3)); person.legal.crimeSkill = bounded(person.legal.crimeSkill + 5);
   if (command.offence === 'organized-job') { const gang = world.gangs.find(item => item.id === person.legal.gangId)!; gang.standing = bounded(gang.standing + 10); gang.rank = Math.min(3, Math.floor(gang.standing / 25)); gang.lastIncomeMonth = absolute(world); }
   if (victim && definition.violent) {
@@ -182,6 +185,12 @@ function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime
   fact(world, 'I committed ' + definition.title.toLowerCase() + (victim ? ' against ' + fullName(victim) : '') + '. The consequences became part of my history.', 'crime');
   if (source.detectionRoll <= source.riskBps) arrest(world, source);
   else if (source.offence !== 'robbery' || !offerDramaticEvent(world, 'dramatic-accomplice-wire', 60, 'wire_' + source.id, source.id)) result(world, 'An unresolved risk', 'You leave without handcuffs. That is a head start, not an acquittal: the evidence can still lead to an investigation.', 'handcuffs', [row('gain', 'Proceeds', formatMoney(source.gain), gain ? 'positive' : 'neutral')]);
+}
+export function resolveReservedBurglary(world: World, sessionId: string, death: Death) {
+  const session = world.miniGames.find(row => row.id === sessionId && row.personId === world.activePersonId && row.kind === 'crime' && row.status !== 'active');
+  if (!session || session.appliedMonth !== null || session.score === null || world.actionCounts[session.personId + ':legal:' + session.started.year + ':crime:burglary'] !== 1) throw new IneligibleAction('This burglary has already resolved');
+  session.appliedMonth = absolute(world);
+  commitCrime(world, { type: 'crime', offence: 'burglary' }, death, burglaryModifiers(session.score));
 }
 export function resolveLegal(world: World, command: LegalCommand, death: Death) {
   const person = active(world), sentence = activeSentence(world);

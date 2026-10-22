@@ -1,0 +1,346 @@
+{
+  "recordedAt": "2026-10-22T20:00:35.700435+00:00",
+  "branch": "work",
+  "integratedUpstream": "8891d4df749d1d0fc65048c019860e42537fea33",
+  "scope": "Three integrated mini-games; no physical-device frame-rate or touch-latency claim.",
+  "checks": {
+    "typecheck": {
+      "status": "passed",
+      "command": "npm run typecheck"
+    },
+    "runtimeImports": {
+      "status": "passed",
+      "modules": 425,
+      "cycles": []
+    },
+    "featureTests": {
+      "status": "passed",
+      "suites": 4,
+      "tests": 34,
+      "layers": [
+        "pure engine",
+        "real SQLite/Zustand",
+        "native component interaction",
+        "native Babel/VM worklet reconstruction"
+      ],
+      "note": "Final 10-case UI rerun covers legal-event deferral and backgrounding during start. The added perfect-score arrest/fines/prison case also passes; the other passing core/SQLite/worklet cases are unchanged.",
+      "difficultyReachability": {
+        "levels": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "seedsPerLevel": 21,
+        "combinationsPerGame": 105
+      }
+    },
+    "upstreamBirthJournal": {
+      "status": "passed",
+      "suites": 4,
+      "tests": 32,
+      "note": "Three passing scopes plus the corrected frozen-shape creation fingerprint rerun; original expected fingerprint retained."
+    },
+    "fullRegression": {
+      "status": "passed_after_targeted_timeout_recheck",
+      "command": "npm test",
+      "rechecks": [
+        {
+          "suite": "tests/ui/lifetime-statistics-flow.test.tsx",
+          "test": "actual heir and ancestor views remain isolated across route changes and a closed-connection cold resume",
+          "initialFailure": "30-second timeout under concurrent CPU load",
+          "retryStatus": "passed",
+          "retryTestMs": 19799,
+          "productChangeRequired": false
+        }
+      ],
+      "initialExitCode": 1,
+      "initialSuitesPassed": 246,
+      "initialSuitesFailed": 1,
+      "initialSuitesTotal": 247,
+      "initialTestsPassed": 3268,
+      "initialTestsFailed": 1,
+      "initialTestsTotal": 3269,
+      "seconds": 3142.223,
+      "remainingFailingTests": 0,
+      "note": "The single failure was a 30-second timeout under concurrent CPU load; its targeted rerun passed in 19.799 seconds without a product/test change. All four mini-game suites passed in the full run."
+    },
+    "lifeSoak": {
+      "status": "passed",
+      "command": "DREAMS_SOAK_WORKERS=4 npm run test:soak",
+      "requestedLives": 120,
+      "seedRange": [
+        0,
+        119
+      ],
+      "workers": 4,
+      "checks": "Existing complete-life invariants and factual death assertions; same seeded range partitioned into disjoint shards.",
+      "exitCode": 0,
+      "completedLives": 120,
+      "uniqueSeeds": 120,
+      "shardLives": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "workerTestsPassed": 28,
+      "ageAtDeathRange": [
+        37,
+        97
+      ],
+      "maxWorkerSeconds": 3209.798,
+      "observations": "soak-lives.json"
+    },
+    "hermesExports": {
+      "status": "passed",
+      "command": "npx expo export --platform all --max-workers 1",
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "bundles": [
+        {
+          "path": "_expo/static/js/android/entry-d31c70c271243138046ca093604e2f7c.hbc",
+          "bytes": 8344430,
+          "sha256": "c119e5470fc656e9b1ecf00b59d391cd9b8c934804ed1cbc14f5fe8612d9c1d1"
+        },
+        {
+          "path": "_expo/static/js/ios/entry-9ac611d166fa7fc34b6e7f1535afd44b.hbc",
+          "bytes": 8141420,
+          "sha256": "b31fd697b5bfa8776d76e65e08af372440880b5a30f3fdbae7900dbe96534d64"
+        }
+      ],
+      "note": "Production Hermes bundles, not installed APK/IPA or device tests."
+    },
+    "dependencyCompatibility": {
+      "offlineStatus": "passed",
+      "onlineStatus": "blocked",
+      "reason": "Expo metadata endpoint returned HTTP Proxy Network Error: Forbidden; offline SDK 57 compatibility check reports dependencies up to date."
+    },
+    "generatedEffects": {
+      "status": "passed",
+      "bytes": 38636
+    },
+    "thirdPartyNotices": {
+      "status": "passed",
+      "newRuntimeDependencies": []
+    },
+    "browserInteraction": {
+      "status": "passed",
+      "viewports": [
+        "400x900",
+        "320x568",
+        "768x1024"
+      ],
+      "gamesPerViewport": 3,
+      "javascriptErrors": 0,
+      "reducedMotionAssistedDefault": true,
+      "nativeDevice": false
+    }
+  },
+  "runtimeSourceFiles": [
+    {
+      "path": "app/(game)/_layout.tsx",
+      "sha256": "56eea45a03496096facf14c84c28d5547f8cd66f61eead9c01d1e0d12d900e64"
+    },
+    {
+      "path": "app/(game)/career/[kind].tsx",
+      "sha256": "033187f928b3eb86e6db731e302573d87dc700eaf9649ea420edc21ad92cd685"
+    },
+    {
+      "path": "app/(game)/crime.tsx",
+      "sha256": "a07a0db988e606e1c64f609a8d49a03ce3c056c236af07fd68a872a12c1e8a4d"
+    },
+    {
+      "path": "app/(game)/service/[kind].tsx",
+      "sha256": "1fae4c7b42e76656ff75dc77d903399e09c30c165f9af14b003556cd4e7f37f2"
+    },
+    {
+      "path": "app/_layout.tsx",
+      "sha256": "c1e13efe3cb8308b91a549285a487c64da729588de5812fc843303c5c2409063"
+    },
+    {
+      "path": "app/mini-game-playground.tsx",
+      "sha256": "ed9c14c8bce517226148857a36acedd9dee7cd254bb4cbbb5bbe9b68adfc269f"
+    },
+    {
+      "path": "app/mini-game.tsx",
+      "sha256": "d91d4fe5e1263002a7c9224bc23c9c5bef20adec70bfa0aa30ce27ff53eeb8c9"
+    },
+    {
+      "path": "src/game/createLife.ts",
+      "sha256": "4a4c0a0a93ff3d47b5d7de702f5415f637bbaf109748e282c922b42bd5d4e283"
+    },
+    {
+      "path": "src/game/engine.ts",
+      "sha256": "d33c68432755869f7f28c4f1782ac1b7c4297547ac7f28deccd6068588a33f5e"
+    },
+    {
+      "path": "src/game/godMode.ts",
+      "sha256": "eb637551d9cac74ffa56d0aa8bf95aa8107700ca385ac5471ab6f895d9b0afe6"
+    },
+    {
+      "path": "src/game/model.ts",
+      "sha256": "0548a42e9d83a4d40f8ab908c44f91bd5ce9ade5ef7b57542b5776da80fc6f75"
+    },
+    {
+      "path": "src/game/systems/careers.ts",
+      "sha256": "9859e810c335602969f757e006fba3695e4ef7f792a030df98bd6ee7e89442ba"
+    },
+    {
+      "path": "src/game/systems/legal.ts",
+      "sha256": "45af5ba18a30a82770957006d7128dcafc703573b78e5d807e99d9cb1cd33273"
+    },
+    {
+      "path": "src/game/systems/services.ts",
+      "sha256": "9892dc3c37c61fc102daef0317d79cd6a7f3a57ef67e3b055a265c9d8803b281"
+    },
+    {
+      "path": "src/minigames/LiveMiniGame.tsx",
+      "sha256": "fe886f5c9c13c29561b07ef98257c471cb1934806ab57602f12e77ea1f83edd6"
+    },
+    {
+      "path": "src/minigames/MiniGamePlayground.tsx",
+      "sha256": "a1e9c585fe4ab755bf783389e4ca257d726823202f2c2565f434848846e4fd0e"
+    },
+    {
+      "path": "src/minigames/astronaut/DockingGame.tsx",
+      "sha256": "93edcb2682c05f5152dcbe269b4558b6fd89bdabbfc267573e931d54c2f53d92"
+    },
+    {
+      "path": "src/minigames/astronaut/dockingPhysics.ts",
+      "sha256": "5b6c25a5f0747ac97e6ad54c018978f209d402e19f2074bf5683a371d9847723"
+    },
+    {
+      "path": "src/minigames/components/GameButton.tsx",
+      "sha256": "a7673a300f1ec7146694501f739af9e6e7d21d7741b2ac6b65ac18475d239750"
+    },
+    {
+      "path": "src/minigames/components/MiniGameEntry.tsx",
+      "sha256": "242633d5de8f64674cdc33afd01269bd8bb7cb3582abf64075f6dcbfcf3edae4"
+    },
+    {
+      "path": "src/minigames/components/MiniGameHUD.tsx",
+      "sha256": "88cfc1e4c298d211b2c2b20a9bbf59e1e4cf14ccda35695add0439ca43dedfe3"
+    },
+    {
+      "path": "src/minigames/components/MiniGameResult.tsx",
+      "sha256": "812a6441776d212e5d765db14ee7ee3fc6d2e45f4e9cf04c8e6589dff0f3a8ea"
+    },
+    {
+      "path": "src/minigames/components/MiniGameScreen.tsx",
+      "sha256": "992ad27c7f9c69faa39d5f9137d9f77f74ba7e43e38e1c0fe056840189468920"
+    },
+    {
+      "path": "src/minigames/components/gameStyles.ts",
+      "sha256": "fcdce48978d8afe921cac69cd332f12525d6114cc52f7933a30e48a8f9beb1ec"
+    },
+    {
+      "path": "src/minigames/core/difficulty.ts",
+      "sha256": "c2387b242c468b1a38e52893b71c6035bffd285637f7df8ad6d8843f5863d936"
+    },
+    {
+      "path": "src/minigames/core/eligibility.ts",
+      "sha256": "e7c44ed1be2d0fd9a35ceb8739a54a698a7a6b4f13b0ef824cba6a230c90a3b3"
+    },
+    {
+      "path": "src/minigames/core/evaluation.ts",
+      "sha256": "b66504d9ca14fc3f06bfc11d19db23b37ca2da24542fcd183ff16ebbfc24eac6"
+    },
+    {
+      "path": "src/minigames/core/modifiers.ts",
+      "sha256": "1213b21f99a501feb0881c4d2d8a2d00f675ed4c8fa4cb2054e9f94a27e3f772"
+    },
+    {
+      "path": "src/minigames/core/scoring.ts",
+      "sha256": "fc962b56552955802b19385752643d8d5f9e2ba9e1738f9ca0d9cab73adc43e2"
+    },
+    {
+      "path": "src/minigames/core/session.ts",
+      "sha256": "bb6cf00b4f6d0eb7d6a623a780aad244092ee18ff02cfd19ec9b45b6379d0360"
+    },
+    {
+      "path": "src/minigames/core/svgMotion.ts",
+      "sha256": "a966153bf3e585d8e354fdbc8741e6344406e39ab546ddcebc8805bb5176d381"
+    },
+    {
+      "path": "src/minigames/core/types.ts",
+      "sha256": "2b3b548184457347a8944c2c224116de22c0d6e649b8920133e01a85fd64cdd7"
+    },
+    {
+      "path": "src/minigames/core/useMiniGameAudio.ts",
+      "sha256": "5feedf1aea905d223f2a9db6efa18bc7c4b517c68883a344dedf0083b9383d9e"
+    },
+    {
+      "path": "src/minigames/core/validation.ts",
+      "sha256": "9a3a691ee96096a2f836ef06b0706eade110cd4903b551d39166f226c8be3a5b"
+    },
+    {
+      "path": "src/minigames/crime/CrimeGame.tsx",
+      "sha256": "f42fc37d089f0b595a01d9eabdc7cebadf230c80cbdf5f26145bce876d0470dd"
+    },
+    {
+      "path": "src/minigames/crime/crimeLogic.ts",
+      "sha256": "cb68ba82843a096b8584950fd78503607358d3e7c14036a39d28a59ca3d35161"
+    },
+    {
+      "path": "src/minigames/sports/SportsGame.tsx",
+      "sha256": "7f2867707bff108452e4c1dcc1ef04ff91b780b8ddafca5c6bbbda36ef090588"
+    },
+    {
+      "path": "src/minigames/sports/sportsLogic.ts",
+      "sha256": "98c16331cd72eb366214bc58d28022da14c1ca002c50ba60d15b8e8dc3a08d77"
+    },
+    {
+      "path": "src/persistence/repository.ts",
+      "sha256": "26b2d9334da60d4147beeb855e9906fcee5dac3aa2929b7b156d8b62ccc26c23"
+    },
+    {
+      "path": "src/ui/GodModeAccess.tsx",
+      "sha256": "ddc99b29111fcd4b847403fb118e2197d4603250ba7917bb5b2c528f48d7452f"
+    },
+    {
+      "path": "src/ui/GodModeEditor.tsx",
+      "sha256": "0a798ed27480d25b85b41a4ce91ec62d2f5aaa5a02ba145b7f8b104309585edb"
+    },
+    {
+      "path": "src/ui/useActionSound.ts",
+      "sha256": "8da5000e6b9cd64bc4e1b5ebad243c2a66ee781e7f74cd3c64b4154492c8d786"
+    }
+  ],
+  "remainingAcceptance": [
+    "Release-build interaction and sustained frame rate on physical Android/iOS phones.",
+    "Spoken VoiceOver/TalkBack, large system text and physical audio/haptic review.",
+    "Balance tuning from actual phone play."
+  ],
+  "sourceBoundaries": [
+    "The long regression and 120-life jobs started before the later upstream birth-journal-only change was integrated; its creation, UI, persistence and RNG-preservation checks were run separately afterward. Final mini-game modal/background fixes are covered by the 10-case UI rerun; ordinary monthly simulation did not change.",
+    "Runtime exports include the integrated birth-journal update and the final mini-game source listed here.",
+    "Earlier serial soak stopped after 51 completed lives to restart the full 120-seed range across four workers; partial run is not counted as the final soak."
+  ],
+  "runtimeAssets": [
+    {
+      "path": "assets/minigames/astronaut.wav",
+      "bytes": 11510,
+      "sha256": "cfbb6f3d72b95de92d93cda4a5a65966b7f61eca162d2f6930b974eca16fed43"
+    },
+    {
+      "path": "assets/minigames/crime.wav",
+      "bytes": 8864,
+      "sha256": "20dc7f00352566e88ca18735258f69539992210294a53fee6c491a6b20a7f50f"
+    },
+    {
+      "path": "assets/minigames/sports.wav",
+      "bytes": 8864,
+      "sha256": "c6e5786cca0c5c7c7a93cdaf2fea11f40176116218fd51c7d5fda518a3c552df"
+    },
+    {
+      "path": "assets/minigames/success.json",
+      "bytes": 9398,
+      "sha256": "7c23cce0c9728e3809cff219ec6ffa9644d8f1181bf2b60f5b808d040337f394"
+    }
+  ],
+  "updatedAt": "2026-10-22T20:40:30.178755+00:00"
+}

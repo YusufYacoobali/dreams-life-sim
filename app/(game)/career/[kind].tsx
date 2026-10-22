@@ -1,3 +1,4 @@
+import { MiniGameEntry } from '../../../src/minigames/components/MiniGameEntry';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -26,7 +27,7 @@ export default function CareerDashboard() {
         ...(['health', 'fitness', 'looks', 'smarts'] as const).filter(stat => definition[stat] > 0).map(stat => ({ label: stat[0].toUpperCase() + stat.slice(1), value: person.stats[stat] + '%', note: 'Required: ' + definition[stat] + '%' })),
     ];
     return <Page>
-        <Header title={definition.title} onBack={() => router.back()} />
+        <Header title={definition.title} onBack={() => router.back()} />{kind==='athlete'&&career?.status==='active'&&career.projects.find(item=>item.status==='active')&&<Card><MiniGameEntry world={world} kind="sports" ownerId={career.id} contextId={career.projects.find(item=>item.status==='active')!.id} busy={busy}/></Card>}
         {error && !review.reviewing && !world.pending && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
         <Card>
             <SocialBusinessIntro art={<CareerArt id={definition.art} size={72} />} title={definition.title} eyebrow={status} body={active ? career.employer : 'Build your skill, review the requirements and choose your next step.'} />

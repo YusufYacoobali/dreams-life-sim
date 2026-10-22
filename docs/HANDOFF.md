@@ -4,7 +4,17 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Current app icon selection — 22 October
+## Current mini-games — 22 October
+
+Clutch Shot, Safe Cracker and Orbital Docking are playable full-screen challenges connected to actual athlete seasons, the existing burglary/legal pipeline and orbital/habitat astronaut assignments. Typed saved transcripts, deterministic scoring, pause/background recovery, one-time bounded modifiers, explicit forfeits and transaction/idempotency protections are implemented. Internal God Mode adds a practice-only playground at difficulty 1–5. Existing cinematics and the subsequent avatar, End This Life and birth-journal work are retained.
+
+Current markers are **World42 / engine44 / content20 / SQLite reader22 / checkpointv4**. Migration adds empty mini-game history to preceding saves without changing their archived payload bytes or RNG; snapshot branches retain attempts under their new life identity. The current-version test expectation updates do not change genuine fixtures or frozen historical fingerprints.
+
+See [MINIGAMES.md](MINIGAMES.md) for controls, exact caps, persistence, artwork/audio and the implementation report, and [verification results](verification/minigames-20261022/results.json) for command outcomes and source boundaries. Browser screenshots and native Babel/VM checks are explicitly separated from native-device acceptance. There is no Android/iOS SDK or physical device in this environment; no installed release, spoken-reader, hardware-feedback or 60 FPS acceptance is claimed. A fresh internal native build can review all three games through Settings → God Mode → Mini-Game Playground.
+
+The soak runner optionally supports `DREAMS_SOAK_WORKERS=1..4`, partitioning the same seeded-life range across independent Jest processes. Default execution remains serial. Do not launch duplicate unchanged soak/regression work after the recorded runs pass.
+
+## Prior app icon selection — 22 October
 
 The user now explicitly selected `assets/app_icon.png`. `app.json` uses that exact unchanged1254×1254opaque PNG for the main Android/iOS icon and Android adaptive foreground. The existing package `com.yacoobali.lifesim` is retained. Offline resolved prebuild configuration confirms both icon references and identifiers; Expo image utilities successfully generate1024px iOS,432px Android adaptive and48px legacy PNGs in `/tmp/dreams-user-icon-sizes`. Current notices/inventory were refreshed and their check passes. This asset/config-only change reruns no gameplay regression or Hermes export. It requires fresh native generation/build to appear on an installed launcher; existing native candidates remain stale. See [APP_IDENTITY_AND_BRANDING.md](APP_IDENTITY_AND_BRANDING.md).
 

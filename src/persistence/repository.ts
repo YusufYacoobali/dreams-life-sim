@@ -37,14 +37,14 @@ export class SaveRepository {
 
   async initialise(): Promise<void> {
     const version = await this.db.get<{ user_version: number }>('PRAGMA user_version');
-    // Reader twenty protects future campus records. Existing histories and
-    // payloads need no eager rewrite or invented campus people or attendance.
-    if (!version || version.user_version > 21) throw new Error('This save database requires a newer version of Dreams');
-    if (version.user_version === 21) return;
-    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20) {
-      // Complete reader-13 through reader-20 databases already have every table
+    // Reader 22 protects persisted mini-game attempts from older applications.
+    // Existing game payloads migrate only when read; no eager rewrite is needed.
+    if (!version || version.user_version > 22) throw new Error('This save database requires a newer version of Dreams');
+    if (version.user_version === 22) return;
+    if (version.user_version === 13 || version.user_version === 14 || version.user_version === 15 || version.user_version === 16 || version.user_version === 17 || version.user_version === 18 || version.user_version === 19 || version.user_version === 20 || version.user_version === 21) {
+      // Complete reader-13 through reader-21 databases already have every table
       // and metadata row. Upgrade only the marker, not stored game payloads.
-      await this.db.transaction(tx => tx.run('PRAGMA user_version = 21'));
+      await this.db.transaction(tx => tx.run('PRAGMA user_version = 22'));
       return;
     }
     const statements = [
@@ -86,7 +86,7 @@ export class SaveRepository {
         await tx.run('DELETE FROM snapshots WHERE life_id=? AND snapshot_id=?', [row.life_id, row.snapshot_id]);
         await this.writeSnapshot(tx, row.life_id, record);
       }
-      await tx.run('PRAGMA user_version = 21');
+      await tx.run('PRAGMA user_version = 22');
     });
   }
 
@@ -232,7 +232,7 @@ export class SaveRepository {
         const row = await tx.get<{ payload: string; metadata: string }>('SELECT s.payload,m.metadata FROM snapshots s JOIN snapshot_metadata m ON m.life_id=s.life_id AND m.snapshot_id=s.snapshot_id WHERE s.life_id=? AND s.snapshot_id=?', [sourceId, snapshotId]);
         if (!row) throw new Error('Historical checkpoint not found');
         const summary = snapshotSummarySchema.parse(JSON.parse(row.metadata)), before = validateSnapshot({ summary, payload: row.payload });
-        restored = immutableWorld({ ...before, id: newId }); const payload = packCheckpoint(restored), now = this.now(); restoredPayload = payload;
+        restored = immutableWorld({ ...before, id: newId, miniGames: before.miniGames.map(session => ({ ...session, lifeId: newId })) }); const payload = packCheckpoint(restored), now = this.now(); restoredPayload = payload;
         await tx.run('INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)', [newId, fullName(restored.people[restored.activePersonId]), restored.revision, now, payload]);
         await tx.run('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)', [newId, restored.revision, payload]);
         const branch: BranchInfo = { sourceLifeId: sourceId, snapshotId, personId: summary.personId, name: summary.name, date: summary.date, age: summary.age };

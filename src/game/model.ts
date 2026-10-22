@@ -1,3 +1,5 @@
+import { miniGameSessionSchema } from '../minigames/core/types';
+import { validateMiniGames } from '../minigames/core/validation';
 import { validateAnnualPacing } from './annualPacing';
 import { validateCampusCommunities } from './systems/campusValidation';
 import { npcMoveSchema } from './systems/npcMoveSchemas';
@@ -108,7 +110,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(41), engineVersion: z.literal(43), contentVersion: z.literal(20),
+  schemaVersion: z.literal(42), engineVersion: z.literal(44), contentVersion: z.literal(20),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -135,7 +137,7 @@ export const worldSchema = z.object({
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
   businesses: z.array(businessSchema), businessLedger: z.array(businessTransactionSchema), businessPayables: z.array(businessPayableSchema),
-  careers: z.array(careerSchema),
+  careers: z.array(careerSchema), miniGames: z.array(miniGameSessionSchema),
   musicReleases: z.array(musicReleaseSchema),
   elections: z.array(electionSchema),
   creatorStudios:z.array(creatorStudioSchema),creatorInvoices:z.array(creatorInvoiceSchema),serviceCareers:z.array(serviceCareerSchema),royalHouses:z.array(royalHouseSchema),
@@ -353,6 +355,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateHobbyEvents(world, ledger);
   validateStoryThreads(world, ledger);
   validateRelocations(world, ledger);
+  validateMiniGames(world);
   validateCareers(world);
   validateMusic(world, ledger);
   validatePolitics(world, ledger);
@@ -640,5 +643,6 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Versioned scene resolutions and optional athlete checks start prospectively.
   // Existing bound choices, career records and RNG are preserved verbatim.
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 19) { parsed.engineVersion = 43; parsed.contentVersion = 20; }
+  if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 43 && parsed.contentVersion === 20) { parsed.schemaVersion = 42; parsed.engineVersion = 44; parsed.miniGames = []; }
   return validateWorld(parsed, immutable);
 }

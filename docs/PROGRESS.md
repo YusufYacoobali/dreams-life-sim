@@ -1,5 +1,13 @@
 # Dreams: Life Simulator — progress and verification
 
+## Interactive mini-games — 22 October
+
+All three games are implemented with real input, local SVG/Reanimated presentation, preference-aware feedback and accessible assisted controls. Athlete challenges modify one actual match period; Safe Cracker reserves and resolves the ordinary yearly burglary attempt through existing legal consequences; docking modifies one eligible orbital/habitat mission period while preserving six-month assignments, pay and accident risks. Saved transcripts, pause/background recovery, forfeit, completion receipts and Time Machine branches prevent replay farming. Internal God Mode offers an isolated level 1–5 playground.
+
+Current save markers are **World42 / engine44 / content20 / reader22 / checkpointv4**. Old payloads migrate prospectively; genuine fixtures and historical fingerprints remain intact. The [implementation report](MINIGAMES.md) and [verification record](verification/minigames-20261022/results.json) give exact test/export results and limits. Actual native release interaction, spoken accessibility, hardware feedback and sustained device frame rate remain unverified in this environment. Earlier checkpoint claims below retain their original source scope.
+
+## Earlier checkpoints
+
 The user subsequently selected `assets/app_icon.png`. Both the main Android/iOS icon and Android adaptive foreground now use that exact original file. Offline resolved config,1024/432/48px Expo icon generation and refreshed notices checks pass. Native launcher acceptance awaits a new build; no gameplay regression/export was repeated for this asset/config-only change. [Current branding](APP_IDENTITY_AND_BRANDING.md).
 
 The latest22October batch adds preference-aware haptics throughout welcome, creation and appearance choices, navigation and Age Up/Continue This Year. Hardware requests never delay commands; duplicate held-save taps are blocked and failed saves remain retryable. The original saved off preference is preserved. Opening gains a sunrise/light reveal, birth gains halos/stars and life's end gains a quiet memorial. All are one-shot decorative native-driver effects, at most1.8seconds, with immediately available controls and a reduced-motion still frame. [Feedback/motion design](FEEDBACK_SETTINGS.md) records the placement analysis.

@@ -47,7 +47,11 @@ test('all 512 sample generations retain the exact pre-feature family, stats, mon
   for (let seed = 0; seed < 512; seed++) {
     const input = randomCreation(seed); input.background = seed % 4 === 0 && ['GB', 'ES', 'JP'].includes(input.country) ? 'royal' : 'ordinary';
     const world = newborn(seed, input), family = birthFamily(world), story = selectBirthStory(seed, family.context);
-    hash.update(encodeWorld({ ...world, journal: [] }) + '\n');
+    // Compare the frozen pre-mini-game shape; the new empty history and version
+    // markers must not hide changes to creation, family, finance or RNG.
+    const previous = JSON.parse(encodeWorld({ ...world, journal: [] }));
+    previous.schemaVersion = 41; previous.engineVersion = 43; delete previous.miniGames;
+    hash.update(JSON.stringify(previous) + '\n');
     expect(newborn(seed, input)).toEqual(world); expect(validateWorld(world)).toEqual(world);
     expect(world.journal.length).toBeGreaterThanOrEqual(3); expect(world.journal.length).toBeLessThanOrEqual(5);
     expect(world.journal.every(entry => entry.text.length <= 1200 && !/undefined|\bnull\b|\{[^}]+\}|\.\./.test(entry.text))).toBe(true);
