@@ -1,7 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { copyWorld, decodeWorld, encodeWorld, type World } from '../../src/game/model';
-import { recordDeath } from '../../src/game/engine';
+import { recordDeath, resolveCommand } from '../../src/game/engine';
+import { monthFrom } from '../../src/game/calendar';
+import { addChild } from '../../src/game/systems/family';
+import { activeSentence, hearCase, legalMonth } from '../../src/game/systems/legal';
 import { ageOn } from '../../src/game/personHelpers';
 import { countries } from '../../src/game/countries';
 import { formatMoney } from '../../src/game/money';
@@ -70,15 +73,39 @@ test('sparse newborn records stay respectful and unknown frozen wealth is not re
   expect(summary.summary + summary.epitaph).not.toMatch(/job|unemployed|never worked|wedding|offence|glue|millionaire/i);
 });
 
-test('adoptions after death do not change an earlier memorial and sentence credit is never called served prison time', () => {
-  const world = deceased(), person = world.people[world.activePersonId], parent = world.relationships.find(edge => edge.to === person.id && edge.roles.includes('parent'))!;
+test('a later child record does not rewrite an earlier memorial', () => {
+  const world = deceased(), person = world.people[world.activePersonId];
   const before = deathSummary(world);
-  // These projection traps deliberately are not imported as playable records.
-  world.relationships.push({ ...parent, id: 'future_child', from: person.id, to: parent.from, since: { ...person.died!, year: person.died!.year + 1 } });
+  // Declared historical-record projection boundary, not a playable adoption by
+  // a deceased person. Use the constructor so the new identity/edge is coherent.
+  world.date = monthFrom(world.date, 12);
+  addChild(world, [person], 'adoptive', 0);
   expect(deathSummary(world)).toEqual(before);
-  world.sentences.push({ id: 'projection_sentence', personId: person.id, caseIds: ['projection_case'], country: person.country, city: person.city, facility: 'Projection only', started: person.born,
-    totalMonths: 240, servedMonths: 14, creditedMonths: 120, lastServedMonth: 0, state: 'death', ended: person.died, behavior: 50, routine: { work: false, study: false, exercise: false, conduct: 'quiet' }, studyMonths: 0, appealRoll: 50, appealed: false, releaseReason: 'death' });
-  expect(row(world, 'legal')?.value).toBe('1 year, 2 months served');
-  expect(row(world, 'legal')?.value).not.toMatch(/120|240|10 years|20 years/);
+  const copy = copyWorld(world); expect(deathSummary(copy)).toEqual(deathSummary(world));
+});
+
+test('actual sentence credit and unserved months are never called served prison time', () => {
+  const initial = decodeWorld(JSON.stringify(graduate));
+  let world: World | undefined;
+  // Declared legal boundary: choose an arrest stream, then let the real legal
+  // helpers create the incident, case, remand credit, sentence and prison month.
+  for (let seed = 1; seed < 100; seed++) {
+    const candidate = copyWorld(initial); candidate.random.outcomes = seed;
+    const offered = resolveCommand(candidate, { type: 'crime', offence: 'vandalism' });
+    if (offered.pending?.kind === 'decision' && offered.pending.templateId === 'arrest') { world = offered; break; }
+  }
+  if (!world || world.pending?.kind !== 'decision') throw Error('No configured arrest boundary');
+  world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: 'remand' });
+  world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id });
+  const court = world.cases.find(item => item.personId === world!.activePersonId)!;
+  court.hearing = monthFrom(world.date, 2);
+  world.date = monthFrom(world.date, 1); legalMonth(world);
+  hearCase(world, court.id, 'guilty');
+  world.date = monthFrom(world.date, 1); legalMonth(world);
+  recordDeath(world, world.activePersonId, 'Declared custody memorial boundary');
+  expect(world.sentences.find(item => item.personId === world!.activePersonId)).toMatchObject({ servedMonths: 1, creditedMonths: 1, totalMonths: 4, state: 'death' });
+  expect(activeSentence(world)).toBeUndefined();
+  expect(row(world, 'legal')?.value).toBe('1 recorded offence · 1 month served');
+  expect(row(world, 'legal')?.value).not.toMatch(/2 months|4 months/);
   const copy = copyWorld(world); expect(deathSummary(copy)).toEqual(deathSummary(world));
 });
