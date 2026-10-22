@@ -8,6 +8,7 @@ import { teenRelationshipSchema } from './systems/teenRelationshipSchemas';
 import { validateTeenRelationships } from './systems/teenRelationshipValidation';
 import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
+import { validateDramaticEvent } from './systems/dramaticValidation';
 import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
 import { dateSchema, monthFrom } from './calendar';
@@ -107,7 +108,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(18),
+  schemaVersion: z.literal(41), engineVersion: z.literal(42), contentVersion: z.literal(19),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -361,6 +362,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   const pendingEvents = [...(world.pending ? [world.pending] : []), ...world.deferred.map(item => item.event)];
   if ((!world.pending && (world.pendingPriority || world.deferred.length)) || world.people[world.activePersonId].died && pendingEvents.length || new Set(pendingEvents.map(item => item.id)).size !== pendingEvents.length || world.deferred.some((item, index) => index > 0 && world.deferred[index - 1].priority < item.priority)) throw new Error('Invalid pending event queue');
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
+    validateDramaticEvent(world, pending);
     validateJobInterview(world, pending);
     if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
@@ -633,5 +635,7 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Entertainment refresh changes future authored scenes only. Saved choices,
   // results, effects, history, identities, money and random streams stay literal.
   if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 17) parsed.contentVersion = 18;
+  // Prospective content only: preserve all saved choices, results and RNG states.
+  if (parsed && parsed.schemaVersion === 41 && parsed.engineVersion === 42 && parsed.contentVersion === 18) parsed.contentVersion = 19;
   return validateWorld(parsed, immutable);
 }

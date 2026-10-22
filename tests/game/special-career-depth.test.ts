@@ -27,8 +27,8 @@ const sha = (value: string | Buffer) => createHash('sha256').update(value).diges
 
 test('fourteen original depth situations retain each actual path and original identities through the refresh', () => {
   expect(scenes).toHaveLength(14); expect(scenes.flatMap(row => row.choices)).toHaveLength(42);
-  expect(eventTemplates).toHaveLength(304); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(912);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(304);
+  expect(eventTemplates).toHaveLength(319); expect(eventTemplates.flatMap(row => row.choices)).toHaveLength(957);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(319);
   for (const kind of namedPaths) expect([...specialCareerTemplates, ...scenes].filter(row => originalCatalogue(eventTemplates).some(original => original.id === row.id) && row.specialCareer === kind)).toHaveLength(2);
   expect(specialCareerTemplates.filter(row => row.specialCareer === 'creator')).toHaveLength(1);
   expect(scenes.filter(row => row.rarity === 'common')).toHaveLength(8); expect(scenes.filter(row => row.rarity === 'uncommon')).toHaveLength(6);

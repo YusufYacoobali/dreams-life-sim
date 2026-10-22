@@ -18,6 +18,7 @@ import { placeDependentChildren, oweFamily } from './family';
 import { createContact } from './npcs';
 import { connectPerson, relationFor } from './relationships';
 import { publicConviction } from './social';
+import { offerDramaticEvent } from './dramaticEvents';
 export { activeSentence, isConfined } from './legalSchemas';
 import { visibleConvictions } from './legalRecords';
 export { visibleConvictions } from './legalRecords';
@@ -69,6 +70,12 @@ function incident(world: World, person: Person, offence: OffenceId, gain = 0n, v
   const currency = countries[person.country].currency, definition = offences[offence];
   const item: Incident = { id: 'incident_' + person.id + '_' + world.revision + '_' + world.incidents.length, personId: person.id, offence, date: { ...world.date }, country: person.country, city: person.city, victimId, victimKilled: false, gain: { minor: gain, currency }, restitution: { minor: restitution, currency }, evidence: draw(world, 'outcomes', 25, 95), detectionRoll: draw(world, 'outcomes', 1, 10000), followupRoll: draw(world, 'outcomes', 1, 100), trialRoll: draw(world, 'outcomes', 1, 100), riskBps: Math.max(1000, definition.riskBps - person.legal.crimeSkill * 20), investigateMonth: absolute(world) + draw(world, 'outcomes', 1, 6), stage: 'hidden', caseId: null };
   world.incidents.push(item); return item;
+}
+/** A scene may record corruption only after its concrete payment or report. */
+export function recordDramaticCorruption(world: World, personId: string, gain: bigint, reported: boolean, victimId: string | null = null) {
+  const source = incident(world, world.people[personId], 'bribery', gain, victimId, gain);
+  if (reported) { source.evidence = 90; arrest(world, source); }
+  return source;
 }
 function planningPause(world: World, personId = world.activePersonId) { if (personId === world.activePersonId && world.annual?.stage === 'months') world.annual.pausedForPlanning = true; }
 function bailReturn(world: World, item: Case) {
@@ -174,7 +181,7 @@ function commitCrime(world: World, command: Extract<LegalCommand, { type: 'crime
   }
   fact(world, 'I committed ' + definition.title.toLowerCase() + (victim ? ' against ' + fullName(victim) : '') + '. The consequences became part of my history.', 'crime');
   if (source.detectionRoll <= source.riskBps) arrest(world, source);
-  else result(world, 'An unresolved risk', 'You leave without handcuffs. That is a head start, not an acquittal: the evidence can still lead to an investigation.', 'handcuffs', [row('gain', 'Proceeds', formatMoney(source.gain), gain ? 'positive' : 'neutral')]);
+  else if (source.offence !== 'robbery' || !offerDramaticEvent(world, 'dramatic-accomplice-wire', 60, 'wire_' + source.id, source.id)) result(world, 'An unresolved risk', 'You leave without handcuffs. That is a head start, not an acquittal: the evidence can still lead to an investigation.', 'handcuffs', [row('gain', 'Proceeds', formatMoney(source.gain), gain ? 'positive' : 'neutral')]);
 }
 export function resolveLegal(world: World, command: LegalCommand, death: Death) {
   const person = active(world), sentence = activeSentence(world);
@@ -302,6 +309,7 @@ export function legalMonth(world: World, dischargedFromHospital?: ReadonlySet<st
     if (item.personId !== world.activePersonId) { hearCase(world, item.id, 'not-guilty'); continue; }
     const id = 'hearing_' + item.id;
     if (world.pending?.id === id || world.deferred.some(entry => entry.event.id === id)) continue;
+    if (offerDramaticEvent(world, 'dramatic-courtroom-defence', 110, id, item.id)) continue;
     const person = world.people[item.personId]; offerPending(world, { kind: 'decision', id, templateId: 'court-hearing', title: 'Your day in court', body: 'The court in ' + item.city + ' calls your ' + offences[item.offence].title.toLowerCase() + ' case. This is a bad time to discover that confidence is not evidence. Evidence strength: ' + item.evidence + '%. Counsel: ' + item.counsel + '. Baseline sentence: ' + item.baseMonths + ' months. A guilty plea cuts the term; seeking leniency cuts the fine further. Contesting the charge risks the full penalty.', illustration: 'court', personIds: [person.id], choices: (['not-guilty', 'guilty', 'leniency'] as const).map(plea => ({ id: plea, label: plea === 'not-guilty' ? 'Plead not guilty: fight the charge' : plea === 'guilty' ? 'Plead guilty: take the shorter term' : 'Accept responsibility and seek leniency', effects: [{ kind: 'legal-plea' as const, caseId: item.id, plea }], resultTitle: 'The court has decided', resultBody: plea === 'not-guilty' ? 'You fight the charge. The court gives its verdict below; any fine, remand credit and sentence are real.' : plea === 'guilty' ? 'You plead guilty for a shorter term. The conviction, reduced sentence and fine are below; any unpaid fine becomes debt.' : 'You accept responsibility and ask for mercy. The reduced fine and sentence are below; a lighter penalty still leaves a conviction.', journal: 'I entered a ' + plea + ' plea at my hearing.' })) }); planningPause(world);
   }
 }

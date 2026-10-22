@@ -12,6 +12,7 @@ export type StoryOption = {
   title: string; result: string; journal: string;
 };
 export type EventTemplate = {
+  dramatic?: true;
   id: string; min: number; max: number; rarity?: EventRarity; parent?: boolean; parentContact?: boolean;
   school?: 'primary' | 'secondary' | 'any'; classmate?: boolean; teacher?: boolean;
   study?: 'active' | 'paused';

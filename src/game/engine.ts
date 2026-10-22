@@ -43,6 +43,7 @@ import { nextPending, offerPending, priorityOf } from './pendingQueue';
 import { custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
 import { isConfined } from './systems/legalSchemas';
 import { choiceUnavailable } from './choiceAvailability';
+import { resolveDramaticChoice } from './systems/dramaticEvents';
 import { brandDecision, respondPublicly, resolveSocialMedia, socialDeath, socialMediaCommandSchema, SocialMediaCommand, socialMonth } from './systems/social';
 import { businessCommandSchema, BusinessCommand, resolveBusiness } from './systems/businesses';
 import { businessMonth } from './systems/businessMonth';
@@ -231,6 +232,7 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels']): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
     if (effect.kind === 'resolve-story') return resolveStory(world, effect.threadId, effect.resolution);
@@ -328,7 +330,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const decisionFrame = world.annual;
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
-    const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : null;
+    const dramaticEffect = choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice' ? choice.effects[0] : null;
+    const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null;
     const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);

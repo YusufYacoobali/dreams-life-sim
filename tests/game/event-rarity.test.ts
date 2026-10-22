@@ -21,14 +21,14 @@ test('version one retains original rarity tiers and all original identities thro
   const legacyCatalogue = originalCatalogue(events.eventTemplates, 251);
   expect(EVENT_RARITY_VERSION).toBe(1);
   expect(EVENT_RARITY_WEIGHTS).toEqual({ common: 100, uncommon: 25, rare: 5, 'extremely-rare': 1 });
-  expect(events.eventTemplates).toHaveLength(304);
+  expect(events.eventTemplates).toHaveLength(319);
   expect(legacyCatalogue.filter(row => row.rarity === 'uncommon').map(row => row.id).sort()).toEqual([
     'adult-uncertain-memory', 'adult-wrong-name-badge', 'later-old-competition', 'pet-parrot-perfect-timing', 'school-label-swap', 'school-mascot-petition', 'school-secret-language', 'school-tree-audition', 'school-volcano-breach', 'small-mistake', 'teen-family-interview', 'teen-yearbook-proof',
   ]);
   expect(legacyCatalogue.filter(row => row.rarity === 'rare').map(row => row.id)).toEqual(['child-shop-separation']);
   expect(legacyCatalogue.filter(row => row.rarity === 'extremely-rare').map(row => row.id)).toEqual(['adult-accidental-living-exhibit']);
   expect(legacyCatalogue.filter(row => !row.rarity || row.rarity === 'common')).toHaveLength(237);
-  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([254, 34, 15, 1]);
+  expect(['common', 'uncommon', 'rare', 'extremely-rare'].map(tier => events.eventTemplates.filter(row => (row.rarity ?? 'common') === tier).length)).toEqual([254, 37, 27, 1]);
   const copy = originalCatalogue(events.eventTemplates, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   // Content 18 revises narrative text; original event/choice identities stay fixed.
   const identities = copy.map(row => ({ id: row.id, choices: row.choices.map(choice => choice.id) }));

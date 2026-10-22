@@ -7,6 +7,7 @@ import { rules, monthlyAmount } from '../rules';
 import { roundRatio } from '../money';
 import { offerPending } from '../pendingQueue';
 import { bounded, draw, fact } from './common';
+import { offerDramaticEvent } from './dramaticEvents';
 import { activeBusinessStaff, availableBusinessProfit, businessManager, businessReserve, improvementQuote, payBusinessDividend } from './businesses';
 import { businessBook, businessCost, settleBusinessPayables } from './businessCore';
 import { employmentMonth } from './work';
@@ -74,6 +75,7 @@ export function businessMonth(world: World) {
       exitBusiness(world, company, 'failure');
       if (owner.id === world.activePersonId) { offerPending(world, { kind: 'result', id: 'business_failure_' + company.id, title: 'The business has closed', body: company.name + ' has run out of time after three consecutive periods of unpaid bills. Its assets have been liquidated, creditors paid where possible and unpaid claims recorded as losses. The company has failed.', illustration: 'business', effects: [] }, 80); if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true; }
     } else if (company.distressMonths === 1 && owner.id === world.activePersonId) {
+      if (offerDramaticEvent(world, 'dramatic-unpaid-employees', 75, 'business_warning_' + company.id + '_' + month, company.id)) continue;
       fact(world, company.name + ' developed unpaid operating obligations.', 'business'); offerPending(world, { kind: 'result', id: 'business_warning_' + company.id + '_' + month, title: 'Cash flow under pressure', body: company.name + ' cannot cover all its bills. Being the boss has become a funding problem. Review cash, staff and prices before continuing; three consecutive periods of unpaid obligations trigger liquidation.', illustration: 'business', effects: [] }, 75); if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
     }
   }

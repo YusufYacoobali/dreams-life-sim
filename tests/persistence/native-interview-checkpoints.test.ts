@@ -16,7 +16,7 @@ test('the exact pushed2f8ad13 Android92/93 checkpoints remain pinned and tag-onl
   const { gunzipSync, strFromU8 } = require('fflate') as typeof import('fflate');
   for (const payload of [pinned.interview, pinned.result]) {
     const frame = JSON.parse(payload), root = JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.main.data, 'base64')))); expect(root).toMatchObject({ schemaVersion: 30, engineVersion: 30, contentVersion: 7 });
-    const current = unpackCheckpoint(payload), encoded = JSON.parse(encodeWorld(current)); expect(current.engineVersion).toBe(42); expect(current.contentVersion).toBe(18);
+    const current = unpackCheckpoint(payload), encoded = JSON.parse(encodeWorld(current)); expect(current.engineVersion).toBe(42); expect(current.contentVersion).toBe(19);
     for (const key of Object.keys(root).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion', 'people', 'ledger'].includes(key))) expect(encoded[key]).toEqual(root[key]);
   }
   const before = unpackCheckpoint(pinned.interview), after = resolveCommand(before, { type: 'choose', eventId: before.pending!.id, choiceId: 'careful' }, true);

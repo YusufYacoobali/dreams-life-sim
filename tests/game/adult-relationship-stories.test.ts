@@ -11,7 +11,7 @@ import { employee } from '../support/employee';
 
 test.each(countryCodes)('%s resolves all45 adult friendship/partner choices with exact existing people and no money, service, qualification or random awards', country => {
   const { world, friendId, partnerId } = adultSocial(country), before = encodeWorld(world);
-  expect(adultRelationshipTemplates).toHaveLength(17); expect(eventTemplates).toHaveLength(304);
+  expect(adultRelationshipTemplates).toHaveLength(17); expect(eventTemplates).toHaveLength(319);
   for (const template of adultRelationshipTemplates) {
     expect(eligibleTemplates(world)).toContainEqual(template); const event = bindEvent(world, template), otherId = template.friend ? friendId : partnerId;
     expect(encodeWorld(world)).toBe(before); expect(event.personIds).toEqual([world.activePersonId, otherId]); expect(event.body).toContain(fullName(world.people[otherId])); expect(JSON.stringify(event)).not.toMatch(/\{(?:friend|partner)\}/);
@@ -82,8 +82,8 @@ test('adult availability, age endpoints, active-romance separation and five-year
   expect(eligibleTemplates(world).some(item => item.friend)).toBe(false); friend.roles.push('friend'); friend.kind = 'friend';
   world.people[world.activePersonId].health.hospitalizedUntil = world.date.year * 12 + world.date.month + 2; expect(eligibleTemplates(world).some(item => item.friend || item.partner)).toBe(false); world.people[world.activePersonId].health.hospitalizedUntil = 0;
   world.people[world.activePersonId].born.year = world.date.year - 17; expect(eligibleTemplates(world).some(item => item.friend || item.partner)).toBe(false);
-  world.people[world.activePersonId].born.year = world.date.year - 18; expect(eligibleTemplates(world).filter(item => item.friend || item.partner)).toHaveLength(17);
-  world.people[world.activePersonId].born.year = world.date.year - 120; expect(eligibleTemplates(world).filter(item => item.friend || item.partner)).toHaveLength(17);
+  world.people[world.activePersonId].born.year = world.date.year - 18; expect(eligibleTemplates(world).filter(item => !item.dramatic && (item.friend || item.partner))).toHaveLength(17);
+  world.people[world.activePersonId].born.year = world.date.year - 120; expect(eligibleTemplates(world).filter(item => !item.dramatic && (item.friend || item.partner))).toHaveLength(17);
   world.people[world.activePersonId].born.year--; expect(eligibleTemplates(world).some(item => item.friend || item.partner)).toBe(false); world.people[world.activePersonId].born.year = world.date.year - 22;
   for (const template of adultRelationshipTemplates) { world.eventHistory = [{ templateId: template.id, year: world.date.year - 4 }]; expect(eligibleTemplates(world)).not.toContainEqual(template); world.eventHistory[0].year--; expect(eligibleTemplates(world)).toContainEqual(template); }
 });

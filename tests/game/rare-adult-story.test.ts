@@ -16,8 +16,8 @@ const scene = rareAdultTemplates[0];
 test('the original extremely rare adult scene retains its identity, context and relative rarity', () => {
   expect(rareAdultTemplates).toHaveLength(1); expect(scene.id).toBe('adult-accidental-living-exhibit');
   expect(scene).toMatchObject({ min: 18, max: 120, local: true, rarity: 'extremely-rare' }); expect(eventWeight(scene)).toBe(1);
-  expect(eventTemplates).toHaveLength(304); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(912);
-  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(304);
+  expect(eventTemplates).toHaveLength(319); expect(eventTemplates.reduce((sum, row) => sum + row.choices.length, 0)).toBe(957);
+  for (const field of ['id', 'title', 'body'] as const) expect(new Set(eventTemplates.map(row => row[field])).size).toBe(319);
   const original = originalCatalogue(eventTemplates, 250).map(({ id, title, body, choices }) => ({ id, title, body, choices: choices.map(({ id, label, title, result, journal }) => ({ id, label, title, result, journal })) }));
   // Content 18 revises narrative text; original event/choice identities stay fixed.
   const identities = original.map(row => ({ id: row.id, choices: row.choices.map(choice => choice.id) }));

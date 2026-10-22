@@ -1,5 +1,6 @@
 import { qualifyingAnnualIncome } from './credit';
 import { z } from 'zod';
+import { offerDramaticEvent } from './dramaticEvents';
 import { ageOn, fullName } from '../personHelpers';
 import type { World } from '../model';
 import { assetCatalog, AssetOffer } from '../content/assets';
@@ -233,6 +234,12 @@ export function assetsMonth(world: World, person = active(world), movement = upd
       if (offer > 0n && offer >= listing.askingPrice * 85n / 100n && account.cash + saleQuote(world, asset, offer).proceeds >= 0n) {
         if (person.id !== world.activePersonId) { completeAssetSale(world, asset.id, offer, false, person); continue; }
         listing.offer = offer;
+        const dramaticQuote = listing.askingPrice * 2n;
+        if (account.cash - account.lockedCash + saleQuote(world, asset, dramaticQuote).proceeds >= 0n) {
+          listing.offer = dramaticQuote;
+          if (offerDramaticEvent(world, 'dramatic-suspicious-property', 40, 'property_offer_' + asset.id + '_' + listing.offersMade, asset.id)) continue;
+          listing.offer = offer;
+        }
         offerPending(world, { kind: 'decision', id: 'property_offer_' + asset.id + '_' + listing.offersMade, templateId: 'property-sale-offer', title: 'An offer for ' + asset.name, body: 'A buyer offers ' + formatMoney({ minor: offer, currency: asset.currency }) + ' for ' + asset.name + '. You can take the money or keep waiting for someone with more enthusiasm. You still own it until the sale settles.', illustration: 'property', personIds: [person.id], choices: [
           { id: 'accept', label: 'Accept the offer', effects: [{ kind: 'asset-sale', assetId: asset.id, minor: offer }], resultTitle: 'Sale completed', resultBody: 'The property is sold. The mortgage and fees take their share before the net proceeds reach you; the sale price was never all spending money.', journal: 'I accepted an offer for ' + asset.name + '.' },
           { id: 'decline', label: 'Wait for another buyer', effects: [{ kind: 'decline-sale', assetId: asset.id }], resultTitle: 'You kept the listing', resultBody: 'You hold out for another buyer. The property stays yours, and so do its running costs.', journal: 'I declined an offer for ' + asset.name + '.' },

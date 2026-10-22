@@ -3,6 +3,9 @@ import { BoundChoice, Pending } from '../runtime';
 
 import { EventTemplate, StoryStat, storyOption as option } from './eventTypes';
 import { childhoodTemplates } from './childhood';
+import { dramaticTemplates } from './dramaticEvents';
+import { dramaticContext } from '../systems/dramaticContext';
+import { bindDramaticEvent } from '../systems/dramaticEvents';
 import { workplaceTemplates } from './workplaceStories';
 import { adultRelationshipTemplates } from './adultRelationshipStories';
 import { currentWorkplace } from '../systems/workplaceSchemas';
@@ -243,6 +246,7 @@ export const eventTemplates: readonly EventTemplate[] = [
   ...laterLifeFamilyTemplates,
   ...studyLifeTemplates,
   ...laterLifeRecordTemplates,
+  ...dramaticTemplates,
 ];
 const hasStudyTemplates = eventTemplates.some(template => template.study !== undefined);
 const hasLaterLifeTemplates = eventTemplates.some(template => template.retired || template.widowed);
@@ -298,10 +302,11 @@ export function eligibleTemplates(world: World): readonly EventTemplate[] {
   // Callback records remain authoritative even when an older history is sparse.
   // Never offer an origin ID that scheduleStory already considers recorded.
   const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));
-  return eventTemplates.filter(template => (!template.retired || later?.retired) && (!template.widowed || later?.lateSpouse) && (!template.study || template.study === study?.state) && lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => (!template.dramatic || !!dramaticContext(world, template.id)) && (!template.retired || later?.retired) && (!template.widowed || later?.lateSpouse) && (!template.study || template.study === study?.state) && lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
+  if (template.dramatic) return bindDramaticEvent(world, template);
   const player = world.people[world.activePersonId];
   const parent = templateParent(world, template);
   if (template.parent && !parent) throw new Error(template.parentContact ? 'This event needs a living parent who can be contacted' : 'This event needs a living parent at home');

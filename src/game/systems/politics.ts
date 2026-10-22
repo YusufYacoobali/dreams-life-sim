@@ -2,6 +2,7 @@ import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
+import { offerDramaticEvent } from './dramaticEvents';
 import { ageOn, fullName, Person, World } from '../model';
 import { countries } from '../countries';
 import { rules } from '../rules';
@@ -173,6 +174,7 @@ export function politicsMonth(world: World) {
             if (month < election.electionMonth && !funded && candidate.periods.every((item, index) => index === candidate.periods.length - 1 || item.funded) && person.id === world.activePersonId)
                 notice(world, election, 'Campaign funds are short', 'This campaign period could not be funded or attended. The fixed election date remains; you can review your plan before continuing.');
         }
+        if (month === election.electionMonth - 1) offerDramaticEvent(world, 'dramatic-election-scandal', 70, 'campaign_scandal_' + election.id, election.id);
         if (month < election.electionMonth)
             continue;
         election.status = 'completed';

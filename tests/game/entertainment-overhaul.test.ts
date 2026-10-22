@@ -20,7 +20,7 @@ import { decodeSave } from '../../src/persistence/archive';
 
 import { originalChoices } from '../support/entertainmentBaseline';
 
-const newScenes = eventTemplates.filter(scene => !originalChoices.has(scene.id));
+const newScenes = eventTemplates.filter(scene => !originalChoices.has(scene.id) && !scene.dramatic);
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
@@ -181,8 +181,8 @@ test('a declared current-schema content-17 envelope migrates only its content ta
   const current = unpackCheckpoint(nativeChoice.checkpoint);
   const prior = { ...JSON.parse(encodeWorld(current)), contentVersion: 17 };
   const migrated = decodeWorld(JSON.stringify(prior));
-  expect(migrated.contentVersion).toBe(18);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, contentVersion: 18 });
+  expect(migrated.contentVersion).toBe(19);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, contentVersion: 19 });
   expect(migrated.pending).toEqual(current.pending); expect(migrated.random).toEqual(current.random);
   expect(migrated.journal).toEqual(current.journal); expect(migrated.ledger).toEqual(current.ledger);
 });

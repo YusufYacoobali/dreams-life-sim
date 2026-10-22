@@ -35,7 +35,7 @@ export function bestFriendshipReason(world: World, personId: string): string | u
   if (world.actionCounts[bestFriendshipAttemptKey(person.id, friend.id, world.date.year)]) return 'You already asked this friend this year';
 }
 
-function endFriendship(world: World, row: BestFriendship, reason: NonNullable<BestFriendship['endReason']>, personId: string | null) {
+export function endFriendship(world: World, row: BestFriendship, reason: NonNullable<BestFriendship['endReason']>, personId: string | null) {
   row.status = 'ended'; row.ended = { ...world.date }; row.endReason = reason; row.endedById = personId;
 }
 export function resolveFriendship(world: World, command: FriendshipCommand) {
