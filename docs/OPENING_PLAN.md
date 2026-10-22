@@ -2,7 +2,11 @@
 
 Current product runtime `80a10b5` continues without blocked packaging/device prerequisites. Page and long Summary/Statistics views keep Back reachable; inline forms share stable keyboard avoidance. Local buttons avoid save-tracking renders, and pending choices avoid repeated eligibility checks during save feedback. Help now explains automatic continuation and campus planning correctly. No game/save/schema/RNG changes.
 
-Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. No full local regression or unchanged cohort was rerun. Final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) is pending/running; no full pass is claimed for this source yet. The earlier b75gate remains separately passing. The emulator stopped at its disk-space guard, so new native geometry/physical-device acceptance is unclaimed. [HANDOFF](HANDOFF.md) records exact results and temporary-artifact/process limitations.
+Nine focused cases pass across their affected scopes, including actual rollback/retry/cold persistence and read-only historical views. Final app/all-test strict types close0. Final checkpointa022467 [Quality39737962016](https://github.com/YusufYacoobali/dreams-life-sim/actions/runs/39737962016) **passed at07:36:58UTC on22October**, including locked install, both strict typechecks and **2,824tests/222suites in1851.444s**. No full local regression or unchanged cohort was rerun.
+
+Current-source API24/Expo Go checks confirm Bank's retained local amount/visible review/Back with the keyboard open, and fixed Statistics Back during normal/150% scrolling and return to Extras. A native JNI abort occurred when resetting150%→100% text and immediately reloading the Expo URI; its cause remains unisolated. Normal-text force-stop/reopen/Continue succeeds, with ALL8saved-data tables exactly unchanged before UI, after the crash and after recovery. System font is1.0; owned native processes are closed and the temporarily moved NDK is restored. Physical/standalone/spoken-accessibility acceptance remains open. [HANDOFF](HANDOFF.md) records exact scope, crash logs and artifacts.
+
+The final80a10b5 Android/iOS production Hermes export actually exits0; both HBC headers and the four changed UI source-map contents pass. It establishes current bundle generation, not standalone or crash acceptance.
 
 All confirmed approved-feature audit gaps are implemented and pushed, including four business categories, Products & Services, name/logo Settings, final Statistics and campus social life. Runtime `b75e617` also fixes the first-month campus planning opportunity found in actual play. World41/engine42/content17/reader21/v4;274situations/822choices.
 
@@ -41,9 +45,9 @@ Track three separate states from here: implemented scope, known defects, and rel
 
 ## Current order of work
 
-1. Continue unblocked product work as requested. The latest80a10b5navigation/keyboard/button/Help fixes pass their focused checks and strict types; inspect their final automatic gate without repeating the old full local regressions or cohorts. Standalone/device prerequisites remain parked.
+1. The latest80a10b5navigation/keyboard/button/Help fixes pass focused checks, strict types and the complete automatic gate. Scoped Android keyboard/normal/large-text layout checks pass. Address concrete defects or missing approved behaviour; do not repeat unchanged regressions/cohorts or invent mechanics to fill estimated percentages.
 2. Address additional concrete approved-feature gaps only if the bounded audit finds them; ordinary-life/family/travel/leisure audit found none beyond the already implemented campus feature. The genuine first-year campus native journey is complete; do not repeat it. Preserve every original situation and historical save.
-3. Continue useful source-scoped native play and cold-resume checks alongside implementation. After the merged game is stable, complete standalone, actual iOS/physical, accessibility/audio and release acceptance. Do not count a Hermes export or Expo Go session as a standalone build.
+3. Isolate the observed text-reset/immediate-reload native JNI crash on the eventual standalone build; recovered exact saves do not close crash acceptance. Complete standalone, actual iOS/physical, accessibility/audio and release acceptance when their prerequisites are available. Keep the blocked download/build parked as requested; do not count Hermes exports or Expo Go as standalone builds.
 
 ## Prior checkpoint: World38/engine39 gameplay and acceptance
 
