@@ -1,3 +1,4 @@
+import { monthFrom } from '../../src/game/calendar';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { copyWorld, type World } from '../../src/game/model';
 import { answerReview, decodeReviewTracker, negativeReviewMoment, newReviewTracker, observeReviewCommit, offerReview, reviewCandidateEligible, type ReviewTracker } from '../../src/reviews/tracker';
@@ -6,7 +7,7 @@ function clean(id='life_review_unit') {
   const world=createLife(id,42,{...randomCreation(42),country:'US',city:'New York',background:'ordinary'},date);
   world.birthAcknowledged=true;Object.assign(world.people[world.activePersonId].stats,{health:90,happiness:90,respect:70,stress:0});return world;
 }
-function start(world:World) {const next=copyWorld(world);next.revision++;next.annual={id:'year_'+world.revision,startDate:{...world.date},targetDate:{...world.date,year:world.date.year+1},monthsProcessed:1,stage:'months',pausedForPlanning:true};return next;}
+function start(world:World) {const next=copyWorld(world);next.revision++;next.annual={id:'year_'+world.revision,startDate:{...world.date},targetDate:monthFrom(world.date,12,world.calendarAnchorDay),monthsProcessed:1,stage:'months',pausedForPlanning:true};next.date=monthFrom(world.date,1,world.calendarAnchorDay);return next;}
 function finish(world:World) {const next=copyWorld(world);next.revision++;next.date={...world.annual!.targetDate};next.annual!.monthsProcessed=12;next.annual!.stage='complete';next.annual!.pausedForPlanning=false;return next;}
 function acknowledge(world:World) {const next=copyWorld(world);next.revision++;next.annual=null;return next;}
 function year(world:World,tracker:ReviewTracker) {
