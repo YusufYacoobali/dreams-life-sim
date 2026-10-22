@@ -6,10 +6,9 @@ import { serviceCatalog } from '../../../src/game/content/services';
 import { fullTimeCreator } from '../../../src/game/systems/creatorSchemas';
 import { creatorCatalog } from '../../../src/game/content/creators';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, Text, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { EventModal } from '../../../src/ui/EventModal';
 import { countryFlags } from '../../../src/ui/CreationElements';
 import { router } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
@@ -24,6 +23,11 @@ import { activeSentence, isConfined } from '../../../src/game/systems/legalSchem
 import { useDelayedBusy } from '../../../src/ui/useDelayedBusy';
 import { useFeedbackPress } from '../../../src/ui/feedback';
 import { rentalResidence } from '../../../src/game/systems/rentalSchemas';
+import { resolveLifeContext, type LifeContext } from '../../../src/ui/lifeContext';
+import { CareerArt } from '../../../src/assets/CareerArt';
+import { Illustration } from '../../../src/assets/Illustration';
+import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
+import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 
 // Derive only displayed facts and the identity/date scope, never a cached World.
 function identityPresentation(world: World) {
@@ -73,7 +77,7 @@ const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: Identity
 
 type JournalRow = { entry: World['journal'][number]; age: number; startsYear: boolean };
 
-// Keep FlatList's render props stable while only save status or menus change.
+// Keep FlatList's render props stable while only save status changes.
 const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJournal, stopFollowing, firstYearHint }: {
   rows: JournalRow[]; listRef: React.RefObject<FlatList<JournalRow> | null>;
   followJournal: () => void; stopFollowing: () => void; firstYearHint: string | null;
@@ -92,12 +96,24 @@ const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJourn
     />;
 });
 
+function LifeContextIcon({ icon }: { icon:LifeContext['icon'] }) {
+  const c = useColors();
+  if (icon.kind === 'career') return <CareerArt id={icon.id} size={30} />;
+  if (icon.kind === 'illustration') return <Illustration id={icon.id} size={30} />;
+  if (icon.kind === 'legal') return <HealthLegalArt id={icon.id} size={30} />;
+  if (icon.kind === 'business') return <FameBusinessArt id={icon.id} size={30} />;
+  return <Ionicons name="person-circle-outline" size={30} color={c.link} />;
+}
+
 export default function Life() {
   const world = useGame(s => s.world)!;
   const c = useColors();
   const dispatch = useGame(s => s.dispatch);
   const busy = useGame(s => s.busy);
   const error = useGame(s => s.error);
+  const { width,fontScale } = useWindowDimensions();
+  const context = useMemo(() => resolveLifeContext(world),[world]);
+  const showContextLabel = width / fontScale >= 300;
   const [advancing, setAdvancing] = useState(false);
   const showYearProgress = useDelayedBusy(busy && advancing);
   const player = world.people[world.activePersonId];
@@ -127,7 +143,7 @@ export default function Life() {
   // keep the existing follow-to-end behavior without changing the journal UI.
   const showingBirthIntroduction = world.date.year === player.born.year && world.date.month === player.born.month && world.date.day === player.born.day
     && entries.some(entry => entry.id === 'journal_birth_identity') && entries.every(entry => entry.category === 'birth');
-  const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
+  const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null);
   const openingJournal = useRef(showingBirthIntroduction); openingJournal.current = showingBirthIntroduction;
   const cancelJournalScroll = useCallback(() => {
     if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
@@ -161,17 +177,24 @@ export default function Life() {
   }, [pendingKind, followJournal]);
   const firstYearHint = ageOn(player, world.date) === 0 ? world.annual ? 'Your first year is in progress. Continue when you are ready.' : 'Tap Age Up to live your first year.' : null;
   const advanceYear = useFeedbackPress(async () => { setAdvancing(true); try { return await dispatch({ type: world.annual ? 'resume' : 'advance' }); } finally { setAdvancing(false); } }, busy || !!world.pending);
-  const openMenu = useFeedbackPress(() => { if (menu) return false; setMenu(true); });
+  const contextScope = JSON.stringify([world.id,player.id,context.href]), currentContext = useRef(contextScope);
+  currentContext.current = contextScope;
+  const openContext = useFeedbackPress(() => {
+    if (currentContext.current !== contextScope) return false;
+    router.push(context.href);
+  },busy || !!world.pending);
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: c.background }}>
     <LifeIdentity data={identity} />
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
     <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minHeight: 62, borderRadius: 15, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
-        {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
+      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minWidth: 0, minHeight: 62, paddingHorizontal: 12, paddingVertical: 10, borderRadius: 15, flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
+        {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700',flexShrink:1,minWidth:0,textAlign:'center' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
       </Pressable>
-      <Pressable accessibilityRole="button" accessibilityLabel="More Life Options" onPress={openMenu} style={{ minWidth: 54, minHeight: 62, borderRadius: 15, backgroundColor: '#8795A4', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="ellipsis-horizontal" size={27} color="#FFFFFF" /></Pressable>
+      <Pressable accessibilityRole="button" accessibilityLabel={context.label} accessibilityState={{ disabled:busy || !!world.pending }} disabled={busy || !!world.pending} onPress={openContext} style={({ pressed }) => ({ width:showContextLabel ? 88 : 54,flexShrink:0,minHeight:62,paddingHorizontal:6,paddingVertical:8,gap:3,borderRadius:15,borderWidth:1,borderColor:c.line,backgroundColor:pressed ? c.inset : c.selected,alignItems:'center',justifyContent:'center',opacity:busy || world.pending ? 0.5 : 1 })}>
+        <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><LifeContextIcon icon={context.icon} /></View>
+        {showContextLabel && <Text style={{ color:c.link,fontSize:12,fontWeight:'700',textAlign:'center' }}>{context.label}</Text>}
+      </Pressable>
     </View>
-    <EventModal event={menu ? { id: 'life-menu', kind: 'selection', title: 'Your Life', body: 'Where would you like to go?', choices: [{ id: 'profile', label: 'My Life' }, { id: 'extras', label: 'Extras' }, { id: 'saves', label: 'Saved Lives' }, { id: 'time', label: 'Time Machine' }, { id: 'settings', label: 'Settings' }], confirmLabel: 'Open' } : null} onCancel={() => setMenu(false)} onChoose={id => { setMenu(false); router.push(id === 'profile' ? '/profile' : id === 'extras' ? '/extras' : id === 'saves' ? '/saved-lives' : id === 'settings' ? '/settings' : '/time-machine'); }} />
   </SafeAreaView>;
 }
