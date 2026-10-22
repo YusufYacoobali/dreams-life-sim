@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal } from 'react-native';
-import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { FlatList, Modal } from 'react-native';
+import { act, fireEvent, render, screen, within } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
@@ -91,6 +91,8 @@ test('actual heir and ancestor views remain isolated across route changes and a 
     view.unmount(); await context.cold(); let reopened = render(frame()); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(world().activePersonId).toBe('person_npc_246_24'); expect(screen.getByText('Age at death 86')).toBeOnTheScreen();
     const ancestor = original.people.person_player, projection = jest.spyOn(statisticsData, 'lifetimeStatistics'), dispatch = jest.spyOn(mockStore.getState(), 'dispatch'), save = jest.spyOn(context.repository, 'commit');
     const assertFinalStatistics = () => {
+      expect(within(screen.UNSAFE_getByType(FlatList)).queryByRole('button', { name: 'Back' })).toBeNull();
+      expect(screen.getByRole('button', { name: 'Back' })).toBeEnabled();
       expect(screen.getByText(ancestor.firstName + ' ' + ancestor.lastName)).toBeOnTheScreen();
       expect(screen.getByText('Last Recorded Stats')).toBeOnTheScreen(); expect(screen.getByText('Age at death 86')).toBeOnTheScreen();
       expect(screen.getByLabelText('Recorded employment-months: 588')).toBeOnTheScreen();
@@ -100,8 +102,11 @@ test('actual heir and ancestor views remain isolated across route changes and a 
       }
     };
     reopened.rerender(frame(<LifeSummary />)); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(projection).not.toHaveBeenCalled();
+    expect(within(screen.UNSAFE_getByType(FlatList)).queryByRole('button', { name: 'Back' })).toBeNull();
     fireEvent.press(screen.getByRole('button', { name: 'View Statistics' })); assertFinalStatistics();
     expect(projection).toHaveBeenLastCalledWith(world(), ancestor.id);
+    fireEvent.scroll(screen.UNSAFE_getByType(FlatList), { nativeEvent: { contentOffset: { x: 0, y: 2000 }, contentSize: { width: 390, height: 4000 }, layoutMeasurement: { width: 390, height: 500 } } });
+    expect(screen.getByRole('button', { name: 'Back' })).toBeEnabled();
     fireEvent.press(screen.getByRole('button', { name: 'Back' }));
     expect(screen.getByText('Life Summary')).toBeOnTheScreen(); expect(screen.getByText('Recorded Journal')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'View Statistics' })).toBeOnTheScreen();
     fireEvent.press(screen.getByRole('button', { name: 'View Statistics' }));
