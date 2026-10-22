@@ -6,13 +6,13 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `ff79cac06b4988be347ea0cde822009862c7f46a68e4ce102d4c56930c1f8d09`
-- `package-lock.json` SHA-256 `0540a10c2117503815f9407ee4271fd2ee8fb9c819d6717d0e90c5f9665a6d20`
+- `package.json` SHA-256 `1639accbbe2deda438f70ba8b2499ad8d2df8be8dd23f6a2cee37e3a5b6c4cfe`
+- `package-lock.json` SHA-256 `57e36de7942b0fddac071842fdbf3570664c753914e040b6b919a9e6ab8deb16`
 - `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
 
-**28 direct dependencies; 784 candidate non-dev lock entries; 773 installed version matches; 11 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**29 direct dependencies; 784 candidate non-dev lock entries; 774 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-733 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+734 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 56 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
@@ -22,6 +22,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | expo | ~57.0.31 | 57.0.31 | node_modules/expo |
 | expo-asset | ~57.0.20 | 57.0.20 | node_modules/expo-asset |
 | expo-audio | ~57.0.5 | 57.0.5 | node_modules/expo-audio |
+| expo-constants | ~57.0.22 | 57.0.22 | node_modules/expo-constants |
 | expo-document-picker | ~57.0.3 | 57.0.3 | node_modules/expo-document-picker |
 | expo-file-system | ~57.0.7 | 57.0.7 | node_modules/expo-file-system |
 | expo-font | ~57.0.4 | 57.0.4 | node_modules/expo-font |
@@ -580,7 +581,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | lightningcss-linux-arm64-gnu@1.33.0 (node_modules/lightningcss-linux-arm64-gnu) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-linux-arm64-musl@1.33.0 (node_modules/lightningcss-linux-arm64-musl) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-linux-x64-gnu@1.33.0 (node_modules/lightningcss-linux-x64-gnu) | MPL-2.0 | version-matched · optional | node_modules/lightningcss-linux-x64-gnu/LICENSE [text-5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e] |
-| lightningcss-linux-x64-musl@1.33.0 (node_modules/lightningcss-linux-x64-musl) | MPL-2.0 | not-installed · optional | (none found) |
+| lightningcss-linux-x64-musl@1.33.0 (node_modules/lightningcss-linux-x64-musl) | MPL-2.0 | version-matched · optional | node_modules/lightningcss-linux-x64-musl/LICENSE [text-5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e] |
 | lightningcss-win32-arm64-msvc@1.33.0 (node_modules/lightningcss-win32-arm64-msvc) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-win32-x64-msvc@1.33.0 (node_modules/lightningcss-win32-x64-msvc) | MPL-2.0 | not-installed · optional | (none found) |
 | lines-and-columns@1.2.4 (node_modules/lines-and-columns) | MIT | version-matched | node_modules/lines-and-columns/LICENSE [text-456fe85ad3e71db9523313cf7437b0f90c392d8a48c869908e46716b26d2cf53] |
@@ -5108,6 +5109,7 @@ SHA-256 `5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e` · 15
 Sources:
 
 - `node_modules/lightningcss-linux-x64-gnu/LICENSE`
+- `node_modules/lightningcss-linux-x64-musl/LICENSE`
 - `node_modules/lightningcss/LICENSE`
 
 ```text

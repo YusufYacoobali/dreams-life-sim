@@ -14,6 +14,7 @@ import { Illustration } from '../../../src/assets/Illustration';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { businessValue } from '../../../src/game/businessValuation';
 import { useColors } from '../../../src/ui/theme';
+import { GodModeShortcut } from '../../../src/ui/GodModeAccess';
 
 export default function Assets() {
   const world = useGame(s => s.world)!;
@@ -25,6 +26,7 @@ export default function Assets() {
   const holdings = world.holdings.filter(holding => holding.ownerId === player.id && holding.quantity > 0n);
   return <Page>
     <Header title="Assets" />
+    <GodModeShortcut />
     <Card>
       <View style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'flex-start' : 'center', gap: 14 }}>
         <View style={{ padding: 10, borderRadius: 16, backgroundColor: c.inset }}><Illustration id="money" size={48} /></View>

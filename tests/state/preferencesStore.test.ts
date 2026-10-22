@@ -79,7 +79,7 @@ test.each(['{"version":1,"appearance":"dark"}', '{"version":1,"appearance":"syst
     await repository.saveAppSettings(raw);
     expect(await store.getState().setDailyReminder(true)).toBe(false); expect(await store.getState().setReminderTime(8, 30)).toBe(false);
     expect(await store.getState().bootstrap()).toBe(true);
-    expect(store.getState().settings).toEqual({ reducedMotion: false, haptics: false, soundEffects: false, ...JSON.parse(raw), dailyReminder: false, reminderHour: 19, reminderMinute: 0 });
+    expect(store.getState().settings).toEqual({ reducedMotion: false, haptics: false, soundEffects: false, ...JSON.parse(raw), dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false });
     const write = jest.spyOn(repository, 'saveAppSettings');
     expect(await store.getState().setDailyReminder(false)).toBe(true); expect(await store.getState().setReminderTime(19, 0)).toBe(true);
     expect(write).not.toHaveBeenCalled(); expect(await repository.loadAppSettings()).toBe(raw);
@@ -119,7 +119,7 @@ test('reminder enable and time writes retain exact prior settings on SQLite fail
     expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true }); expect(lifeRows()).toEqual(originalLifeRows);
     expect(await cold.getState().setDailyReminder(true)).toBe(true); await coldRepository.saveAppSettings('unreadable settings');
     expect(await cold.getState().bootstrap()).toBe(false); expect(cold.getState().settings.dailyReminder).toBe(true);
-    expect(await cold.getState().reset()).toBe(true); expect(cold.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false, dailyReminder: false, reminderHour: 19, reminderMinute: 0 });
+    expect(await cold.getState().reset()).toBe(true); expect(cold.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false, dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false });
     expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light' }); expect(lifeRows()).toEqual(originalLifeRows);
   } finally { sqlite?.close(); rmSync(directory, { recursive: true, force: true }); }
 });

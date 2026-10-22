@@ -8,7 +8,7 @@ export const financeSections = {
   investments: 'Investment purchases & sales', assets: 'Owned goods purchases & sales',
   company: 'Company capital', transfers: 'Transfers & currency exchange',
   family: 'Gifts, inheritance & family payments', refunds: 'Refunds & claims',
-  estate: 'Estate settlement', other: 'Other recorded activity',
+  estate: 'Estate settlement', testing: 'God Mode adjustments', other: 'Other recorded activity',
 } as const;
 export type FinanceSection = keyof typeof financeSections;
 const groups = Object.create(null) as Record<string, FinanceSection>;
@@ -24,7 +24,9 @@ assign('transfers', ['transfer', 'exchange', 'relocation-exchange', 'relocation-
 assign('family', ['gift', 'inheritance', 'settlement', 'child-support', 'restitution', 'family-collection', 'restitution-collection', 'repayment-received', 'estate-creditor-payment']);
 assign('refunds', ['fine-refund', 'travel-refund', 'insurance-claim']);
 assign('estate', ['estate-fx', 'estate-investment', 'estate-receivable', 'estate-asset-sale', 'estate-debt', 'estate-debt-close', 'estate-distribution', 'estate-charity']);
+assign('testing', ['god-mode-adjustment']);
 const labels: Record<string, string> = {
+  'god-mode-adjustment': 'God Mode testing adjustment',
   income: 'Employment pay / pensions', 'background-income': 'Recorded background pay / pensions',
   rent: 'Rental receipts', dividend: 'Investment dividends', 'business-owner-income': 'Company profit payouts received',
   borrowing: 'Loan proceeds', repayment: 'Debt repayments', interest: 'Interest added to debt',

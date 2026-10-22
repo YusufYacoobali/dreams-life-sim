@@ -29,4 +29,6 @@ The optional `node tools/benchmark-history.cjs` diagnostic measures the current 
 
 Full-screen welcome, birth and death ink transitions use local SVG/Reanimated choreography. See [implementation, playback and verification](docs/CINEMATIC_TRANSITIONS.md).
 
+Development and configured internal preview builds include **Settings → God Mode** for testing money, stats, skills and relationships. Public production builds disable access. See [God Mode setup and save behavior](docs/GOD_MODE.md).
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.

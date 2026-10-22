@@ -4,9 +4,10 @@ import { fullName, GameDate, immutableWorld, World } from '../game/model';
 import { SaveCorrupt, SaveConflict, type LifeSummary, type SavedLifeUpdate, type SaveRepository } from '../persistence/repository';
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
+import { applyGodModeEdits, type GodModeEdit } from '../game/godMode';
 
 type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
-type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void> };
+type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
   snapshots: SnapshotSummary[];
@@ -15,6 +16,7 @@ export type GameState = {
   acknowledgeBirth: () => Promise<boolean>;
   selectLife: (id: string) => Promise<boolean>;
   dispatch: (command: GameCommand) => Promise<boolean>;
+  editGodMode: (edit: GodModeEdit) => Promise<boolean>;
   importLife: (text: string, replace: boolean) => Promise<boolean>;
   recoverLife: (id: string) => Promise<boolean>;
   loadSnapshots: () => Promise<boolean>;
@@ -26,6 +28,7 @@ export type GameState = {
 export function createGameStore(deps: Dependencies) {
   return createStore<GameState>((set, get) => {
     let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
+    let godModeAttempt: { before: World; signature: string; commandId: string } | null = null;
     const publish = ({ world, summary }: SavedLifeUpdate) => set({ world, snapshots: [], lives: [
       summary,
       ...get().lives.filter(life => life.id !== world.id),
@@ -95,6 +98,19 @@ export function createGameStore(deps: Dependencies) {
         const lives = await repository.list();
         set({ world: next, lives, snapshots: [] }); restoreAttempt = null;
       }, 'Could not restore this checkpoint. Your current life was kept.'),
+      editGodMode: edit => run(async () => {
+        if (!deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        const world = get().world;
+        if (!world) throw new IneligibleAction('Open a life first');
+        const next = applyGodModeEdits(world, edit);
+        const signature = JSON.stringify(edit);
+        if (godModeAttempt?.before !== world || godModeAttempt.signature !== signature) godModeAttempt = { before: world, signature, commandId: 'god-mode:' + deps.id() };
+        const repository = await deps.repository();
+        if (!deps.godModeAccess?.()) throw new IneligibleAction('God Mode is unavailable or switched off.');
+        const committed = await repository.commit(next, world.revision, godModeAttempt.commandId, 'Before God Mode');
+        set({ world: committed, snapshots: [], lives: get().lives.map(life => life.id === committed.id ? { ...life, revision: committed.revision } : life) });
+        godModeAttempt = null;
+      }, 'God Mode changes could not be saved. Your previous save was kept. Try again.'),
       dispatch: command => run(async () => {
         const world = get().world;
         if (!world) throw new IneligibleAction('Open a life first');

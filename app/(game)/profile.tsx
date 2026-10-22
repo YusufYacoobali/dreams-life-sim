@@ -25,6 +25,7 @@ import { useColors } from '../../src/ui/theme';
 import { Illustration } from '../../src/assets/Illustration';
 import { FamilyArt } from '../../src/assets/FamilyArt';
 import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
+import { GodModeShortcut } from '../../src/ui/GodModeAccess';
 
 function occupation(world: World): { label: string; href: Href } {
   const person = world.people[world.activePersonId];
@@ -68,7 +69,7 @@ function ProfileDetails() {
   const work = occupation(world), education = player.education, qualification = education.qualifications.at(-1), children = childrenOf(world), partner = partnerRelation(world), lastMarriage = world.marriages.filter(item => item.a === player.id || item.b === player.id).at(-1);
   const maritalStatus = partner ? partner.romance === 'married' ? 'Married' : partner.romance === 'engaged' ? 'Engaged' : 'In a relationship' : lastMarriage?.endReason === 'death' ? 'Widowed' : lastMarriage?.endReason === 'divorce' ? 'Divorced' : 'Single';
   const schoolRoute = ['primary', 'secondary'].includes(education.stage) ? '/school' : '/education';
-  return <Page><Header title="My Life" onBack={() => router.back()} />
+  return <Page><Header title="My Life" onBack={() => router.back()} /><GodModeShortcut />
     <Card><View style={{ flexDirection: 'row', gap: 14, alignItems: 'center' }}><Portrait decorative name={fullName(player)} appearance={player.appearance} age={ageOn(player, world.date)} size={88} /><View style={{ flex: 1, minWidth: 0, gap: 4 }}><Heading size={21}>{fullName(player)}</Heading><Body muted>{countryFlags[player.nationality]} {nationalityLabels[player.nationality]}</Body><Body>Age {ageOn(player, world.date)}</Body><Body muted>Born {player.born.year}-{String(player.born.month).padStart(2, '0')}-{String(player.born.day).padStart(2, '0')}</Body></View></View>
       <Body muted>{player.gender === 'nonbinary' ? 'Non-binary' : player.gender === 'male' ? 'Male' : 'Female'} · {player.traits.join(', ')}</Body>
     </Card>

@@ -53,9 +53,12 @@ export const socialAccount = (world: World, accountId: string) => {
   if (!account) throw new IneligibleAction('Choose one of your profiles'); return account;
 };
 export function fameLevel(value: number) { return value >= 90 ? 'Global Icon' : value >= 75 ? 'Household Name' : value >= 50 ? 'Famous' : value >= 25 ? 'Well Known' : value >= 10 ? 'Locally Known' : value > 0 ? 'Getting Noticed' : 'Private Life'; }
-export function updateFame(world: World, person: Person) {
+export function audienceFame(world: World, person: Person) {
   const followers = world.socialAccounts.filter(item => item.ownerId === person.id && (item.status === 'active' || item.status === 'suspended')).reduce((sum, item) => sum + item.followers, 0);
-  const audience = Math.max(0, Math.round(Math.log10(followers + 1) * 22 - 60)); person.stats.fame = bounded(audience + person.publicLife.earnedFame);
+  return Math.max(0, Math.round(Math.log10(followers + 1) * 22 - 60));
+}
+export function updateFame(world: World, person: Person) {
+  person.stats.fame = bounded(audienceFame(world, person) + person.publicLife.earnedFame);
   person.publicLife.peakFame = Math.max(person.publicLife.peakFame, person.stats.fame);
   person.publicLife.attention = bounded(person.stats.fame + (world.controversies.some(item => item.personId === person.id && !item.resolved) ? 15 : 0));
 }

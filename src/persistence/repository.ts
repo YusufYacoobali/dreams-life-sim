@@ -141,7 +141,7 @@ export class SaveRepository {
   }
 
   /** Checkpoint and idempotency receipt always commit or roll back together. */
-  async commit(world: World, expectedRevision: number, commandId: string, captureBefore = false): Promise<World> {
+  async commit(world: World, expectedRevision: number, commandId: string, captureBefore: boolean | string = false): Promise<World> {
     if (world.revision !== expectedRevision + 1) throw new SaveConflict();
     world = immutableWorld(world);
     const payload = packCheckpoint(world);
@@ -165,7 +165,7 @@ export class SaveRepository {
       if (previous.id !== world.id || previous.revision !== current.revision) throw new SaveCorrupt(world.id);
       if (captureBefore) {
         const packed = currentPayload.startsWith('{"format":"dreams-checkpoint-v') ? currentPayload : undefined;
-        await this.writeSnapshot(tx, world.id, snapshotRecord(previous, this.now(), 'Before Age Up', packed));
+        await this.writeSnapshot(tx, world.id, snapshotRecord(previous, this.now(), typeof captureBefore === 'string' ? captureBefore : 'Before Age Up', packed));
       }
       // Copy within SQLite instead of sending the unchanged payload back over the native bridge.
       await tx.run('UPDATE backups SET revision=?,payload=(SELECT payload FROM lives WHERE id=?) WHERE life_id=?', [current.revision, world.id, world.id]);
