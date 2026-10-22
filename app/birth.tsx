@@ -10,6 +10,7 @@ import { ageOn, fullName } from '../src/game/model';
 import { Body, Button, Card, Heading, Page, Portrait } from '../src/ui/components';
 import { countryFlags, nationalityLabels } from '../src/ui/CreationElements';
 import { useColors } from '../src/ui/theme';
+import { LifeMilestoneArt } from '../src/ui/LifeMilestoneArt';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export default function Birth() {
@@ -24,10 +25,9 @@ export default function Birth() {
     <Button label="Begin Life!" busy={busy} onPress={async () => { if (await acknowledge()) router.replace('/life'); }} />
   </>}>
     <View style={{ alignItems: 'center', paddingTop: 12, gap: 14 }}>
-      <View style={{ width: 230, height: 164, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ backgroundColor: '#D9F2FE', width: 158, height: 158, borderRadius: 79, alignItems: 'center', justifyContent: 'center' }}><Portrait name={fullName(player)} appearance={player.appearance} age={0} size={145} /></View>
-        <Ionicons name="heart" color="#FF8E8A" size={24} style={{ position: 'absolute', left: 10, top: 20 }} /><Ionicons name="star" color="#FFD060" size={28} style={{ position: 'absolute', right: 0, top: 65 }} /><View style={{ position: 'absolute', left: 0, top: 110, width: 11, height: 11, borderRadius: 6, backgroundColor: '#8BDCF1' }} />
-      </View>
+      <LifeMilestoneArt kind="birth" identity={JSON.stringify([world.id, player.id, player.born])}>
+        <Portrait decorative name={fullName(player)} appearance={player.appearance} age={0} size={145} />
+      </LifeMilestoneArt>
       <Heading centered size={28}>Welcome to the World!</Heading><Body muted centered>You were born on {born}{"\n"}in {player.city}, {countries[player.country].name}.</Body>
     </View>
     <Card style={{ gap: 0 }}>

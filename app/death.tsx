@@ -12,6 +12,8 @@ import { netWorth } from '../src/game/systems/markets';
 import { terminalBiography } from '../src/ui/terminalBiography';
 import { Illustration, type IllustrationId } from '../src/assets/Illustration';
 import { FamilyArt } from '../src/assets/FamilyArt';
+import { LifeMilestoneArt } from '../src/ui/LifeMilestoneArt';
+import { useFeedbackPress } from '../src/ui/feedback';
 
 export default function Death() {
   const world = useGame(s => s.world);
@@ -31,7 +33,7 @@ export default function Death() {
     { label: 'Properties', value: (estate?.propertiesAtDeath ?? world.assets.filter(asset => asset.ownerId === player.id && asset.kind === 'property').length).toString(), icon: 'property' },
   ];
   return <SafeAreaView style={{ flex: 1, backgroundColor: '#1B2433' }}><StatusBar style="light" /><ScrollView contentContainerStyle={{ padding: 26, gap: 18, alignItems: 'center' }}>
-    <Image source={require('../assets/generated/death-memorial.png')} accessibilityLabel="A stone memorial with a pink heart" style={{ width: 170, height: 170, marginTop: 18 }} resizeMode="contain" />
+    <LifeMilestoneArt kind="death" identity={JSON.stringify([world.id, player.id, player.died])}><Image source={require('../assets/generated/death-memorial.png')} accessible={false} style={{ width: 170, height: 170 }} resizeMode="contain" /></LifeMilestoneArt>
     <Text accessibilityRole="header" style={{ color: 'white', fontWeight: '700', fontSize: 36 }}>You Died</Text>
     <Text style={{ color: 'white', fontSize: 22, fontWeight: '600', textAlign: 'center' }}>{fullName(player)}</Text>
     <Text style={{ color: '#C3CEDB', fontSize: 17 }}>Age {ageOn(player, world.date)} · {player.born.year}–{player.died.year}</Text>
@@ -58,8 +60,8 @@ export default function Death() {
   </ScrollView></SafeAreaView>;
 }
 function DeathButton({ label, onPress, icon, primary = false }: { label: string; onPress: () => void; icon: 'chevron-forward' | 'refresh' | 'people'; primary?: boolean }) {
-  const color = primary ? '#FFFFFF' : '#0B1545';
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? pressed ? '#0063DC' : '#006DE5' : pressed ? '#E5EAF0' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center' })}>
+  const color = primary ? '#FFFFFF' : '#0B1545', press = useFeedbackPress(onPress);
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={press} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? pressed ? '#0063DC' : '#006DE5' : pressed ? '#E5EAF0' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center' })}>
     {!primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color="#61718B" size={24} /></View>}
     <Text style={{ color, fontSize: 16, fontWeight: '600', flexShrink: 1, textAlign: 'center' }}>{label}</Text>
     {primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color={color} size={24} /></View>}
