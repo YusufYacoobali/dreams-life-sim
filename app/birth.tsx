@@ -26,12 +26,12 @@ export default function Birth() {
   </>}>
     <View style={{ alignItems: 'center', paddingTop: 12, gap: 14 }}>
       <LifeMilestoneArt kind="birth" identity={JSON.stringify([world.id, player.id, player.born])}>
-        <Portrait decorative name={fullName(player)} appearance={player.appearance} age={0} size={145} />
+        <Portrait decorative name={fullName(player)} personId={player.id} appearance={player.appearance} age={0} size={145} />
       </LifeMilestoneArt>
       <Heading centered size={28}>Welcome to the World!</Heading><Body muted centered>You were born on {born}{"\n"}in {player.city}, {countries[player.country].name}.</Body>
     </View>
     <Card style={{ gap: 0 }}>
-      <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingBottom: 14 }}><Portrait name={fullName(player)} appearance={player.appearance} age={0} size={48} /><View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{countryFlags[player.nationality]} {nationalityLabels[player.nationality]}</Body></View></View>
+      <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center', paddingBottom: 14 }}><Portrait name={fullName(player)} personId={player.id} appearance={player.appearance} age={0} size={48} /><View style={{ flex: 1 }}><Heading size={20}>{fullName(player)}</Heading><Body muted>{countryFlags[player.nationality]} {nationalityLabels[player.nationality]}</Body></View></View>
       {membership && <View style={{ paddingVertical: 12, borderTopWidth: 1, borderTopColor: c.line }}><Body>{royalTitle(world, membership.house, player.id)} · {membership.house.name}</Body></View>}
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, paddingVertical: 12, borderTopWidth: 1, borderTopColor: c.line }}><Ionicons name={player.gender === 'male' ? 'male' : player.gender === 'female' ? 'female' : 'person'} size={28} color={c.blue} /><Body>{player.gender === 'nonbinary' ? 'Non-binary' : player.gender === 'male' ? 'Male' : 'Female'}</Body></View>
       <View style={{ flexDirection: 'row', gap: 15, paddingVertical: 12, borderTopWidth: 1, borderTopColor: c.line }}><Ionicons name="people" size={28} color={c.purple} /><View style={{ flex: 1 }}><Heading size={16}>{parents.length === 1 ? 'Parent' : 'Parents'}</Heading>{parents.map(parent => <Body key={parent.id} muted>{fullName(parent)} · {parent.gender === 'female' ? 'Mother' : parent.gender === 'male' ? 'Father' : 'Parent'}, {ageOn(parent, world.date)}</Body>)}</View></View>

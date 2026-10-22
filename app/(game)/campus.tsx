@@ -108,7 +108,7 @@ function CampusDetails() {
         <Body muted>Introduced {dateLabel(community.started)}. Open a person to view your connection and their profile.</Body>
         {community.students.map(student => {
           const contact = world.people[student.personId];
-          return <ActionRow key={contact.id} title={fullName(contact)} subtitle={contact.died ? 'Died in ' + contact.died.year : 'Age ' + ageOn(contact, world.date) + ' · Campus introduction'} icon={<Portrait appearance={contact.appearance} age={ageOn(contact, world.date)} name={fullName(contact)} size={48} />} disabled={busy} onPress={() => openPerson(contact.id)} />;
+          return <ActionRow key={contact.id} title={fullName(contact)} subtitle={contact.died ? 'Died in ' + contact.died.year : 'Age ' + ageOn(contact, world.date) + ' · Campus introduction'} icon={<Portrait personId={contact.id} appearance={contact.appearance} age={ageOn(contact, world.date)} name={fullName(contact)} size={48} />} disabled={busy} onPress={() => openPerson(contact.id)} />;
         })}
       </Card>
       <Card>

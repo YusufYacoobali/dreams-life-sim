@@ -1,4 +1,5 @@
 import { royalCountries } from './content/royalty';
+import { facialIdentity } from './appearance';
 import { createRoyalBackground } from './systems/royalty';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
@@ -33,7 +34,7 @@ export function randomCreation(seed: number): Creation {
   };
   const country = pick(countryCodes);
   const data = countries[country];
-  return { firstName: pick(data.firstNames), lastName: pick(data.lastNames), gender: pick(['male', 'female', 'nonbinary'] as const), country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]) }, background:(royalCountries as readonly string[]).includes(country)&&randomInteger(state,1,500).value===1?'royal':'ordinary' };
+  return { firstName: pick(data.firstNames), lastName: pick(data.lastNames), gender: pick(['male', 'female', 'nonbinary'] as const), country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]), identity: facialIdentity('creation:' + seed) }, background:(royalCountries as readonly string[]).includes(country)&&randomInteger(state,1,500).value===1?'royal':'ordinary' };
 }
 
 export function createLife(id: string, seed: number, raw: Creation, date: GameDate): World {

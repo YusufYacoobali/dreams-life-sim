@@ -53,7 +53,7 @@ export default function Coworkers() {
         const member = item.member, person = world.people[member.personId], relation = relationFor(world, world.activePersonId, person.id)!;
         const former = !!place?.ended || !!member.left, role = member.role === 'supervisor' ? 'Supervisor' : 'Coworker';
         const subtitle = person.died ? role + ' · Died in ' + person.died.year : former ? 'Former ' + role.toLowerCase() : role + (colleagueAway(world, person) ? ' · Currently away' : '');
-        return <Card style={{ marginBottom: 12 }}><ActionRow title={fullName(person)} subtitle={subtitle} icon={<Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={48} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id, tab: 'activities' } }); }} /><StatBar label="Relationship" value={relation.strength} color={c.green} /></Card>;
+        return <Card style={{ marginBottom: 12 }}><ActionRow title={fullName(person)} subtitle={subtitle} icon={<Portrait name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={48} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id, tab: 'activities' } }); }} /><StatBar label="Relationship" value={relation.strength} color={c.green} /></Card>;
       }} />
   </SafeAreaView>;
 }

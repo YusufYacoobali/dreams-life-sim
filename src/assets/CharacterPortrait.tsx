@@ -7,14 +7,15 @@ import { portraitCanvasSize, portraitLayers, portraitTraits, type PortraitTraits
 type PortraitProps = {
   appearance: Person['appearance']; age: number; name: string;
   size?: number; decorative?: boolean;
+  personId?: string;
 };
 
-export function CharacterPortrait({ appearance, age, name, size = 56, decorative = false }: PortraitProps) {
+export function CharacterPortrait({ appearance, age, name, size = 56, decorative = false, personId }: PortraitProps) {
   return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'image'}
     accessibilityLabel={decorative ? undefined : name} accessibilityElementsHidden={decorative}
     importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'}
     style={{ width: size, height: size, borderRadius: size / 2, overflow: 'hidden' }}>
-    <PortraitDrawing {...portraitTraits(appearance, age)} size={size} />
+    <PortraitDrawing {...portraitTraits(appearance, age, personId)} size={size} />
   </View>;
 }
 
@@ -23,10 +24,15 @@ export function CharacterPortrait({ appearance, age, name, size = 56, decorative
 const PortraitDrawing = React.memo(function PortraitDrawing({ size, ...traits }: PortraitTraits & { size: number }) {
   const scale = size / portraitCanvasSize;
   return <>
-    {portraitLayers(traits).map(layer => <Image key={layer.asset} source={portraitImages[layer.asset]}
+    {portraitLayers(traits).map(layer => <View key={layer.asset} pointerEvents="none"
       accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants"
-      resizeMode="stretch" fadeDuration={0}
       style={{ position: 'absolute', width: layer.width * scale, height: layer.height * scale,
-        left: layer.left * scale, top: layer.top * scale, tintColor: layer.color }} />)}
+        left: layer.left * scale, top: layer.top * scale, opacity: layer.opacity ?? 1, overflow: 'hidden' }}>
+      <Image source={portraitImages[layer.asset]} accessible={false} accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants" resizeMode="stretch" fadeDuration={0}
+        style={{ position: 'absolute', width: (layer.crop?.width ?? layer.width) * scale,
+          height: (layer.crop?.height ?? layer.height) * scale,
+          left: (layer.crop?.left ?? 0) * scale, top: (layer.crop?.top ?? 0) * scale }} />
+    </View>)}
   </>;
 });

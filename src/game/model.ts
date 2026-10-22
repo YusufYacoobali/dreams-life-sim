@@ -91,7 +91,7 @@ export const personSchema = z.object({
   nationality: z.enum(countryCodes), country: z.enum(countryCodes), city: z.string().min(1).max(80),
   born: dateSchema, died: dateSchema.nullable(), causeOfDeath: z.string().max(300).nullable(),
   stats: statsSchema,
-  appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4) }),
+  appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4), identity: z.number().int().min(0).max(15).optional(), outfit: z.number().int().min(0).max(15).optional() }),
   traits: z.array(z.enum(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'])).max(3),
   education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
   biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),

@@ -33,7 +33,7 @@ function identityPresentation(world: World) {
   const membership = royalMembership(world), assignment = serviceAway(world);
   return {
     scope: [world.id, player.id, account.currency, world.date.year, world.date.month, world.date.day, player.born.year, player.born.month, player.born.day],
-    name: fullName(player), age: ageOn(player, world.date), appearance: player.appearance,
+    personId: player.id, name: fullName(player), age: ageOn(player, world.date), appearance: player.appearance,
     country: player.country, bankBalance, occupation,
     royalLabel: membership ? royalTitle(world, membership.house, player.id) : null,
     serviceLocation: assignment ? assignment.location : null,
@@ -49,7 +49,7 @@ const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: Identity
   const openProfile = useFeedbackPress(() => router.push('/profile'));
   return <>
     <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance} onPress={openProfile} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
-      <Portrait decorative name={data.name} appearance={data.appearance} age={data.age} size={52} />
+      <Portrait decorative name={data.name} personId={data.personId} appearance={data.appearance} age={data.age} size={52} />
       <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{data.name}</Text>
         {data.royalLabel !== null && <Text style={{ color: c.muted, fontSize: 11 }}>{data.royalLabel}</Text>}
         <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{countryFlags[data.country]} {data.occupation} · {'Age\u00a0' + data.age}</Text>

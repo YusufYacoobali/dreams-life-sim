@@ -53,7 +53,7 @@ export default function FamilyTree() {
       onPress={() => router.push(id === world.activePersonId ? '/profile' : { pathname: '/person/[id]', params: { id } })}
       style={({ pressed }) => ({ width: singleColumn ? '100%' : '48%', flexGrow: 1, minWidth: 0, padding: 16, borderRadius: 18, borderWidth: 1, borderColor: id === world.activePersonId ? c.link : c.line, backgroundColor: pressed || id === world.activePersonId ? c.selected : c.surface })}>
       <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ alignItems: 'center', gap: 8 }}>
-        <Portrait decorative name={name} appearance={person.appearance} age={ageOn(person, world.date)} size={72} />
+        <Portrait decorative name={name} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={72} />
         <Heading size={18} centered>{name}</Heading><Body centered muted>{subtitle}</Body>
         {!!ownParents.length && <View style={{ alignSelf: 'stretch', gap: 4, borderTopWidth: 1, borderTopColor: c.line, paddingTop: 10 }}>
           <Body muted>Parents & guardians</Body>{ownParents.map(edge => <Body key={edge.id}>{fullName(world.people[edge.from])} · {edge.parentType === 'adoptive' ? 'Adoptive parent' : edge.kind === 'guardian' ? 'Guardian' : 'Parent'}</Body>)}

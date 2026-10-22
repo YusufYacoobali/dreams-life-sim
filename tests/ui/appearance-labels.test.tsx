@@ -30,8 +30,8 @@ test('real presets describe distinct actual traits and retain the same selection
   const original = structuredClone(useCreationDraft.getState().draft!.input);
   render(frame(<Appearance />));
   expect(screen.getAllByRole('radio', { name: /^Avatar \d+, / })).toHaveLength(16);
-  expect(screen.getByRole('radio', { name: 'Avatar 1, oval face, light skin tone, bald', checked: true })).toBeOnTheScreen();
-  const seventh = 'Avatar 7, round face, very light skin tone, black long curls';
+  expect(screen.getByRole('radio', { name: 'Avatar 1, oval face, medium skin tone, black side swept hair', checked: true })).toBeOnTheScreen();
+  const seventh = 'Avatar 7, long face, very light skin tone, black shoulder length hair';
   expect(screen.getByRole('radio', { name: seventh, checked: false })).toBeOnTheScreen();
   expect(screen.queryAllByRole('image')).toHaveLength(0);
   await press('radio', seventh);

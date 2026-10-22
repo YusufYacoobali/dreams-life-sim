@@ -40,7 +40,7 @@ export default function NewLife() {
   };
   const chooseLocation = (next: 'country' | 'city') => { Keyboard.dismiss(); setField(next); };
   const reroll = () => { const candidate = freshSeed(), next = candidate === draft.seed ? (candidate + 0x9e3779b9) >>> 0 : candidate; randomise(next); router.setParams?.({ seed: String(next), mode: 'random' }); };
-  const cycleAvatar = (direction: number) => { const current = avatarPresets.findIndex(item => JSON.stringify(item) === JSON.stringify(input.appearance)), index = (Math.max(0, current) + direction + avatarPresets.length) % avatarPresets.length; return edit({ appearance: { ...avatarPresets[index] } }); };
+  const cycleAvatar = (direction: number) => { const current = input.appearance.identity ?? 0, index = (current + direction + avatarPresets.length) % avatarPresets.length; return edit({ appearance: { ...avatarPresets[index] } }); };
   const validated = () => {
     const parsed = creationSchema.safeParse(input);
     if (parsed.success) return parsed.data;

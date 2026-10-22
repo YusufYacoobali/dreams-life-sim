@@ -1,8 +1,9 @@
 /** Stable saved option indices; artwork and colour palettes may evolve. */
-export const skinTones = ['#FFD4B4', '#F0B98F', '#D99560', '#BC7749', '#985B36', '#75432E'] as const;
-export const hairColors = ['#24211F', '#704329', '#B2783D', '#E5B861', '#BC5C37'] as const;
+export const skinTones = ['#FFCAAB', '#F4B387', '#E79B63', '#C5824E', '#A5673E', '#874827'] as const;
+export const hairColors = ['#29282E', '#67412C', '#A36B3B', '#D9AE69', '#B15331'] as const;
 export const hairLabels = ['Bald', 'Short straight', 'Cropped curls', 'Side swept', 'Shoulder length', 'Long curls', 'Bun', 'Coily afro'] as const;
 export const faceLabels = ['Oval', 'Round', 'Long', 'Broad'] as const;
+export const outfitLabels = ['Burgundy overshirt', 'Lilac blouse', 'Teal polo', 'Cobalt crewneck', 'Rose V-neck', 'Navy tee', 'Turquoise blouse', 'Blue collared shirt', 'Pink blouse', 'Navy polo', 'Burgundy top', 'Lavender cardigan', 'Blue henley', 'Turquoise notch top', 'Dark teal tee', 'Aqua top'] as const;
 export type PortraitAgeStage = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export function portraitAgeStage(age: number): PortraitAgeStage {
   return age < 3 ? 0 : age < 12 ? 1 : age < 19 ? 2 : age < 40 ? 3 : age < 60 ? 4 : age < 80 ? 5 : age < 95 ? 6 : 7;

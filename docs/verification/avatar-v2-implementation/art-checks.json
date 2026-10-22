@@ -1,0 +1,21 @@
+{
+  "assetCount": 1084,
+  "independentlyIllustratedIdentityAgeHeads": 128,
+  "skinGradeHeadAtlases": 768,
+  "faceContoursPerAtlas": 4,
+  "fullColourShoulderLayers": 96,
+  "independentClothingLayers": 16,
+  "pngBytes": 110119588,
+  "sourceHeadDefaultsVerified": 128,
+  "sourcePixelsPreservedBeforeConcealedNeckFade": true,
+  "centralEyeAndNosePixelsIdenticalAcrossFaceShapeChoices": true,
+  "allFourContoursVisiblyDistinct": true,
+  "noHeadPixelsTouchTileSideBorders": true,
+  "allHashesMatch": true,
+  "allSixSkinTonesOrderedForEveryIdentityAndAge": true,
+  "transparentPixelsHaveZeroRGB": true,
+  "headAtlasDecodedBytes": 1079296,
+  "runtimeNetworkRequired": false,
+  "runtimeTintOrColourFilters": false,
+  "nativeDeviceRenderingTested": false
+}

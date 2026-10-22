@@ -1,0 +1,14 @@
+{
+  "combinations": 1966080,
+  "completeLocalAssets": true,
+  "cropsWithinActualSourceDimensions": true,
+  "maxImageLayers": 7,
+  "jsPlanElapsedMs": 4217.45,
+  "jsPlanMicrosecondsPerPortrait": 2.15,
+  "maxTheoreticalDecodedBytesPerPortrait": 3536896,
+  "adultSixteenPresetGridUniqueTextures": 72,
+  "adultSixteenPresetGridDecodedBytes": 40206336,
+  "personPortraitConsumers": 29,
+  "missingPersonIds": [],
+  "scope": "Node layer-plan and static-image budget checks, not native GPU/frame-time measurements"
+}

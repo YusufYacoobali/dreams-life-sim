@@ -1,62 +1,76 @@
 import { portraitImages } from '../../src/assets/portraitImages';
-import { portraitCanvasSize, portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
-import { ageingHairColor, hairColors, portraitAgeStage, skinTones } from '../../src/assets/portraitLayout';
+import { portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
+import { ageingHairColor, hairColors, portraitAgeStage } from '../../src/assets/portraitLayout';
+import { avatarPresets } from '../../src/ui/CreationElements';
 
-test('all saved trait combinations have complete local artwork at every age stage', () => {
-  const ages = [0, 7, 16, 25, 48, 68, 86, 100];
-  for (let face = 0; face < 4; face++) for (let skin = 0; skin < 6; skin++) {
-    for (let hair = 0; hair < 8; hair++) for (let hairColor = 0; hairColor < 5; hairColor++) {
-      const appearance = { face, skin, hair, hairColor }, before = { ...appearance };
-      for (const age of ages) {
-        const traits = portraitTraits(appearance, age), layers = portraitLayers(traits);
-        expect(layers.length).toBeLessThanOrEqual(7);
-        expect(layers.every(layer => Object.hasOwn(portraitImages, layer.asset))).toBe(true);
-        expect(layers.every(layer => [layer.width, layer.height, layer.left, layer.top].every(Number.isFinite))).toBe(true);
-        expect(new Set(layers.map(layer => layer.asset)).size).toBe(layers.length);
-        const head = layers.filter(layer => layer.asset.startsWith('head-'));
-        expect(head.every(layer => layer.width === portraitCanvasSize && layer.height === portraitCanvasSize && layer.left === 0 && layer.top === 0)).toBe(true);
-        expect(head.find(layer => layer.color)?.color).toBe(skinTones[skin]);
-        expect(layers.filter(layer => layer.color).every(layer => layer.asset.endsWith('-mask'))).toBe(true);
-        expect(layers.filter(layer => layer.asset.startsWith('hair-')).length > 0).toBe(age >= 3 && hair !== 0);
-        expect(layers.some(layer => layer.asset.startsWith('clothing-'))).toBe(true);
-      }
-      expect(appearance).toEqual(before);
+const ages = [0, 7, 16, 25, 48, 68, 86, 100];
+
+test('all 1,966,080 identity/customisation/outfit/age combinations have complete bounded offline layers', () => {
+  const failures: string[] = [];
+  let count = 0;
+  for (let identity = 0; identity < 16; identity++) for (let face = 0; face < 4; face++) for (let skin = 0; skin < 6; skin++) {
+    for (let hair = 0; hair < 8; hair++) for (let hairColor = 0; hairColor < 5; hairColor++) for (const age of ages) for (let outfit = 0; outfit < 16; outfit++) {
+      const layers = portraitLayers(portraitTraits({ identity, face, skin, hair, hairColor, outfit }, age)); count++;
+      const valid = layers.length <= 7 && layers.length >= 3 &&
+        layers.every(layer => Object.hasOwn(portraitImages, layer.asset) &&
+          [layer.width, layer.height, layer.left, layer.top, layer.opacity ?? 1].every(Number.isFinite)) &&
+        layers.some(layer => layer.asset.startsWith('head-')) && layers.some(layer => layer.asset.startsWith('body-')) && layers.some(layer => layer.asset === `clothing-${outfit}`) &&
+        layers.some(layer => layer.asset.endsWith('-front')) === (age >= 3 && hair !== 0);
+      if (!valid) failures.push(JSON.stringify({ identity, face, skin, hair, hairColor, age }));
+    }
+  }
+  expect(count).toBe(1966080); expect(failures).toEqual([]);
+});
+
+test('the sixteen presets have distinct facial identities and independently selectable outfits', () => {
+  expect(new Set(avatarPresets.map(preset => preset.identity)).size).toBe(16);
+  for (const preset of avatarPresets) {
+    const original = portraitTraits(preset,25), layers = portraitLayers(original);
+    const head = layers.find(layer => layer.asset.startsWith('head-'));
+    const body = layers.find(layer => layer.asset.startsWith('body-'));
+    for (let hairColor = 0; hairColor < 5; hairColor++) for (let hair = 0; hair < 8; hair++) {
+      const changed = portraitTraits({ ...preset, hair, hairColor },25), next = portraitLayers(changed);
+      expect(changed.identity).toBe(original.identity); expect(changed.clothing).toBe(original.clothing);
+      expect(next.find(layer => layer.asset.startsWith('head-'))).toEqual(head);
+      expect(next.find(layer => layer.asset.startsWith('body-'))).toEqual(body);
+    }
+    for (let skin = 0; skin < 6; skin++) for (let face = 0; face < 4; face++) {
+      const changed = portraitTraits({ ...preset, skin, face },25);
+      expect(changed.identity).toBe(original.identity); expect(changed.clothing).toBe(original.clothing);
+      expect(changed.hair).toBe(original.hair);
+    }
+    expect(portraitLayers(portraitTraits(JSON.parse(JSON.stringify(preset)),25))).toEqual(layers);
+    expect(portraitTraits(preset,25)).toEqual(portraitTraits(preset,26));
+    for (let outfit = 0; outfit < 16; outfit++) {
+      const changed = portraitTraits({ ...preset, outfit },25), next = portraitLayers(changed);
+      expect({ ...changed, clothing: original.clothing }).toEqual(original);
+      expect(next.filter(layer => !layer.asset.startsWith('clothing-'))).toEqual(layers.filter(layer => !layer.asset.startsWith('clothing-')));
+      expect(next.find(layer => layer.asset.startsWith('clothing-'))?.asset).toBe(`clothing-${outfit}`);
     }
   }
 });
 
-test('appearance is deterministic across save copies and does not reroll clothes or layers', () => {
-  const appearance = { face: 3, skin: 5, hair: 5, hairColor: 3 };
-  const original = portraitLayers(portraitTraits(appearance, 68));
-  const savedCopy = JSON.parse(JSON.stringify(appearance));
-  expect(portraitLayers(portraitTraits(savedCopy, 68))).toEqual(original);
-  expect(portraitTraits(appearance, 25)).toEqual(portraitTraits(appearance, 26));
-  expect(portraitTraits(appearance, 0).clothing).toBe(portraitTraits(appearance, 100).clothing);
+test('all eight independently illustrated age stages retain identity and latent hair preferences', () => {
+  for (const [age, stage] of [[0,0],[2,0],[3,1],[11,1],[12,2],[18,2],[19,3],[39,3],[40,4],[59,4],[60,5],[79,5],[80,6],[94,6],[95,7],[105,7]]) expect(portraitAgeStage(age)).toBe(stage);
+  const appearance = { ...avatarPresets[0] };
+  const stages = ages.map(age => portraitTraits(appearance, age));
+  expect(stages.map(stage => stage.stage)).toEqual([0,1,2,3,4,5,6,7]);
+  expect(new Set(stages.map(stage => portraitLayers(stage).find(layer => layer.asset.startsWith('head-'))!.asset)).size).toBe(8);
+  expect(new Set(stages.map(stage => stage.identity)).size).toBe(1);
+  expect(new Set(stages.map(stage => stage.clothing)).size).toBe(1);
+  expect(stages[0].hair).toBe(0); expect(stages[1].hair).toBe(appearance.hair);
+  expect(portraitTraits({ ...appearance, hair:7, hairColor:3 },0)).toEqual(stages[0]);
+  expect(appearance).toEqual(avatarPresets[0]);
+  expect(stages[4].grey).toBeLessThan(stages[5].grey); expect(stages[5].grey).toBeLessThan(stages[6].grey);
+  expect(ageingHairColor(hairColors[0],45)).toBe(hairColors[0].toLowerCase());
 });
 
-test('all age boundaries and gradual greying preserve latent saved appearance', () => {
-  for (const [age, stage] of [[0,0],[2,0],[3,1],[11,1],[12,2],[18,2],[19,3],[39,3],[40,4],[59,4],[60,5],[79,5],[80,6],[94,6],[95,7],[105,7]]) {
-    expect(portraitAgeStage(age)).toBe(stage);
-  }
-  const appearance = { face: 0, skin: 2, hair: 4, hairColor: 0 };
-  expect(portraitTraits(appearance, 2).hair).toBe(0);
-  expect(portraitTraits(appearance, 3).hair).toBe(4);
-  expect(appearance.hair).toBe(4);
-  expect(ageingHairColor(hairColors[0], 45)).toBe(hairColors[0].toLowerCase());
-  const tones = [45, 60, 80, 100].map(age => ageingHairColor(hairColors[0], age));
-  expect(new Set(tones).size).toBe(4);
-  for (let i = 1; i < tones.length; i++) {
-    expect(parseInt(tones[i].slice(1,3),16)).toBeGreaterThan(parseInt(tones[i-1].slice(1,3),16));
-  }
-});
-
-test('rear hair sits behind shoulders and the facial features retain their own colours', () => {
-  for (const hair of [4, 5, 7]) {
-    const layers = portraitLayers(portraitTraits({ face: 0, skin: 5, hair, hairColor: 3 }, 25));
-    const index = (fragment: string) => layers.findIndex(layer => layer.asset.includes(fragment));
-    expect(index('-back-mask')).toBeLessThan(index('head-'));
-    expect(index('head-')).toBeLessThan(index('clothing-'));
-    expect(index('clothing-')).toBeLessThan(index('-front-mask'));
-    expect(layers.filter(layer => layer.asset.endsWith('-detail')).every(layer => layer.color === undefined)).toBe(true);
-  }
+test('rear locks sit behind shoulders and full-colour foreground hair sits above the facial base', () => {
+  const layers = portraitLayers(portraitTraits(avatarPresets[1],68));
+  const index = (fragment: string) => layers.findIndex(layer => layer.asset.includes(fragment));
+  expect(index('-back')).toBeLessThan(index('body-'));
+  expect(index('body-')).toBeLessThan(index('head-'));
+  expect(index('head-')).toBeLessThan(index('clothing-'));
+  expect(index('clothing-')).toBeLessThan(index('-front'));
+  expect(layers.every(layer => !('color' in layer))).toBe(true);
 });

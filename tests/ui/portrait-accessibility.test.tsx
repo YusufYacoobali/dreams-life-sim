@@ -3,7 +3,6 @@ import { Image, Pressable, Text } from 'react-native';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { CharacterPortrait } from '../../src/assets/CharacterPortrait';
 import { avatarPresets } from '../../src/ui/CreationElements';
-import { skinTones } from '../../src/assets/portraitLayout';
 
 test('standalone portraits keep their image role and person label by default', () => {
   let props = { name: 'Alex Martín', age: 25, appearance: { ...avatarPresets[6] }, size: 56, decorative: false };
@@ -31,7 +30,8 @@ test('standalone portraits keep their image role and person label by default', (
   const adultLayers = layers(); view.rerender(<CharacterPortrait {...props} age={1} />);
   expect(layers().length).toBeLessThan(adultLayers.length);
   // A newborn retains its saved hair preference without rendering an adult wig.
-  expect(layers().filter(layer => layer.style.tintColor).map(layer => layer.style.tintColor)).toEqual([skinTones[props.appearance.skin]]);
+  expect(layers().every(layer => !layer.style.tintColor)).toBe(true);
+  expect(layers().some(layer => String(layer.source.testUri).includes('hair-'))).toBe(false);
 });
 
 test('a decorative portrait leaves the named selectable parent as the only accessibility target', () => {

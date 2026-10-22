@@ -51,7 +51,7 @@ export default function Relationships() {
       renderItem={({ item: edge, index }) => {
         const person = world.people[edge.from === world.activePersonId ? edge.to : edge.from], name = fullName(person);
         return <View style={{ backgroundColor: c.surface, paddingHorizontal: 16, paddingBottom: 12, borderTopLeftRadius: index === 0 ? 18 : 0, borderTopRightRadius: index === 0 ? 18 : 0, borderBottomLeftRadius: index === contacts.length - 1 ? 18 : 0, borderBottomRightRadius: index === contacts.length - 1 ? 18 : 0 }}>
-          <ActionRow title={name} subtitle={relationLabel(world, edge) + (person.died ? ' · Deceased' : ' · Age ' + ageOn(person, world.date))} value={'Bond ' + edge.strength + '%'} icon={<Portrait decorative name={name} appearance={person.appearance} age={ageOn(person, world.date)} size={44} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id } }); }} />
+          <ActionRow title={name} subtitle={relationLabel(world, edge) + (person.died ? ' · Deceased' : ' · Age ' + ageOn(person, world.date))} value={'Bond ' + edge.strength + '%'} icon={<Portrait decorative name={name} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={44} />} onPress={() => { Keyboard.dismiss(); router.push({ pathname: '/person/[id]', params: { id: person.id } }); }} />
           <StatBar label="Relationship" value={edge.strength} color={c.green} />
         </View>;
       }}

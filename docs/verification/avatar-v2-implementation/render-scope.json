@@ -1,0 +1,28 @@
+{
+  "source": "Production React Native screen component trees, from tests/ui/avatar-v2-integration.test.tsx",
+  "renderer": "Browser CSS adapter; NOT native captures",
+  "iconsAndHardware": "mocked",
+  "screens": [
+    "creation",
+    "clothing-screen",
+    "life",
+    "profile",
+    "npc",
+    "family-profile",
+    "family-tree"
+  ],
+  "panels": [
+    "all-presets",
+    "four-140",
+    "skin",
+    "skin-dark-base",
+    "hair-colours",
+    "hairstyles",
+    "face-shapes",
+    "ages",
+    "sizes-light",
+    "sizes-dark",
+    "clothing"
+  ],
+  "uniqueAssets": 124
+}

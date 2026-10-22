@@ -1,10 +1,10 @@
 // Offline visual inspection of the production illustration plan.
 // Run: node tools/preview-portraits.cjs
-require('./build-portrait-review.cjs');
+require('./build-avatar-v2-review.cjs');
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
-const directory = path.resolve(__dirname,'../docs/verification/avatar-checkpoint-b');
+const directory = path.resolve(__dirname,'../docs/verification/avatar-v2-implementation');
 http.createServer((request,response)=>{
   const name = request.url === '/' ? 'index.html' : request.url.slice(1);
   // Only report files directly inside the review directory are served.

@@ -1,5 +1,5 @@
 {
-  "status": "Phase 1 and Phase 2 complete; awaiting user visual approval before Phases 3\u20137",
+  "status": "Approved by the user; integrated into the shared portrait renderer",
   "baseCommit": "cd122b2d69dc424d82c0d9bb266ae39a8042481e",
   "reference": "design/01-character-appearance.png",
   "referenceUsedForGeneration": "Original reference only; rejected production artwork was not used as a style reference",
@@ -136,5 +136,6 @@
   ],
   "preparation": "Generated complete full-colour portraits. Candidate sheet is unmodified. Four detail views are lossless rectangular crops; no skin or hair masks, RGB classification, recolouring, feature reconstruction or resampling.",
   "productionRendererChanged": false,
-  "approvalRequirement": "Complete Phase 1 and Phase 2 first, then stop for my visual approval. Once approved, implement Phases 3\u20137."
+  "approvalRequirement": "Complete Phase 1 and Phase 2 first, then stop for my visual approval. Once approved, implement Phases 3\u20137.",
+  "implementationManifest": "../../assets/generated/avatars-v2/manifest.json"
 }

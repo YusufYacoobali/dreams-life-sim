@@ -68,7 +68,7 @@ function PersonDetails({ id }: { id: string }) {
   const used = (action: string) => socialActionUsed(world, id, action) ? 'Already tried this year' : undefined;
   return <Page><Header title="Person Profile" backDisabled={(!!conversation || !!date) && busy} onBack={() => { if (!conversationSubmitting.current && !dateSubmitting.current) router.back(); }} />
     {person ? <Card>
-      <Portrait name={fullName(person)} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
+      <Portrait name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person, world.date)} size={88} /><Heading>{fullName(person)}</Heading>
       <Body>Age {ageOn(person, world.date)}</Body><Body>{person.city}</Body>
       <Body>{person.traits.join(', ')}</Body>
       <StatBar label="Health" value={person.stats.health} color={c.teal} />
