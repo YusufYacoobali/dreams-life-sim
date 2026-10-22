@@ -40,11 +40,13 @@ export function useFeedback() { return useContext(FeedbackContext); }
 /** Accept the action first. Hardware promises never hold a tap or save open. */
 export function useFeedbackPress<Args extends unknown[]>(onPress: (...args: Args) => unknown, disabled = false, includeSound = false) {
   const { hapticFeedback, buttonFeedback } = useFeedback();
-  const mounted = useRef(true), pressing = useRef(false), current = useRef({ onPress, disabled, feedback: includeSound ? buttonFeedback : hapticFeedback });
-  current.current = { onPress, disabled, feedback: includeSound ? buttonFeedback : hapticFeedback };
+  const mounted = useRef(true), pressing = useRef(false), current = useRef({ disabled, feedback: includeSound ? buttonFeedback : hapticFeedback });
+  current.current = { disabled, feedback: includeSound ? buttonFeedback : hapticFeedback };
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   return useCallback((...args: Args) => {
-    if (!mounted.current || current.current.onPress !== onPress || current.current.disabled || pressing.current) return false;
+    // React may render and bail out with a new inline callback. Its identity
+    // cannot invalidate the already committed native press handler.
+    if (!mounted.current || current.current.disabled || pressing.current) return false;
     pressing.current = true;
     let action: unknown;
     try { action = onPress(...args); }

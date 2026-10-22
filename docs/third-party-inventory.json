@@ -17542,6 +17542,7 @@
         "app/saved-lives.tsx",
         "app/settings.tsx",
         "app/time-machine.tsx",
+        "src/ui/LifeMilestoneArt.tsx",
         "src/ui/ProgressElements.tsx"
       ],
       "path": "node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf",
@@ -17674,7 +17675,7 @@
       "bytes": 1993348,
       "sha256": "8973d44ad6d8a2c7c4e00e32f5e7b794e6efea1668e836e25b74c6bd304c5459",
       "referencedBy": [
-        "app/index.tsx"
+        "src/ui/OpeningScene.tsx"
       ]
     }
   ],

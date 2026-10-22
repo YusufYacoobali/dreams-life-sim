@@ -4,10 +4,39 @@ This implements the bounded Settings X31 feedback options in `docs/planning/scre
 
 ## Behaviour
 
+### Opening and life milestones
+
+The22October motion pass concentrates its larger effects on three rare moments:
+
+| Moment | Treatment | Interaction boundary |
+| --- | --- | --- |
+| Opening the game | Existing sunset artwork gently settles; a warm sunrise glow, eight drifting lights and a short wordmark accent introduce Dreams. | Continue, creation and other available controls remain visible and actionable throughout. |
+| A newly created life | A soft portrait reveal, expanding blue halos and a small heart/star constellation. | Birth facts and Begin Life remain immediately available; save failures do not restart the scene. |
+| Life's end | The existing memorial settles into a warm glow with a few upward lights. | Biography, actual statistics and summary/new-life/child controls remain immediately available. |
+
+The native driver animates only opacity/transforms on decorative artwork, for at
+most1.8seconds. Effects have fixed positions, ignore touches and are hidden from
+assistive technology. They consume no game randomness, run no per-frame React
+state updates, add no artificial loading delay and never dispatch a game action.
+An unchanged scene identity does not replay on busy/error/result rerenders.
+Backgrounding or enabling reduced motion settles the scene and stops its native
+animation. Unknown/reduced-motion preferences use an attractive static frame;
+a late device preference answer does not make already-visible artwork jump.
+
+The highest-value smaller placements are accepted option changes, a newly
+committed year marker, and a newly earned milestone. Keep their feedback brief
+and factual. Existing pressed colours/checkmarks already communicate selection;
+large entrance effects belong to the three moments above. Animating every
+journal row, keyboard field or save status would add distraction and make the
+game feel slower. No such effects or new year/milestone animation are claimed
+by this batch.
+
+### Tap feedback
+
 - **Reduce Motion** disables the shared event dialog fade and both root/game native stack transitions. The actual OS reduced-motion preference always wins, including later device changes. While the initial device query or app preferences are unresolved, motion stays reduced. A later OS event cannot be overwritten by a stale initial query. Existing bottom tabs already default to no transition, and journal/list scroll resets already use `animated: false`.
-- **Haptic Feedback** defaults off. An accepted shared `Button` starts its action, then requests a light iOS impact or Android native virtual-key haptic. This is tap acknowledgement, not an assertion that the game action succeeded. Device support and system restrictions still apply.
+- **Haptic Feedback** defaults off and retains each player's saved choice. An accepted tap requests a light iOS impact or Android native virtual-key haptic. Onboarding/creation selections, navigation and Age Up use this same setting; keyboard keystrokes remain the operating system's responsibility. This is tap acknowledgement, not an assertion that a game action succeeded. Device support and system restrictions still apply.
 - **Sound Effects** defaults off. Enabling it prepares one original, local, 45 ms tap. Shared buttons can play it after starting their action. Expo Audio mixes with other audio, obeys silent mode and media volume, disables recording and background playback, and releases its player when disabled or unmounted. Backgrounding pauses sound and invalidates any pending seek. A late seek cannot play after disable/background/unmount.
-- Haptic and sound promises are never awaited by a game action. Missing native modules, failed audio initialization, failed playback and rejected haptics leave the text, pressed state, delayed busy state and game action operational. Disabled and busy buttons produce neither actions nor feedback. Raw navigation rows, radio choices and switches do not gain additional feedback or gameplay work.
+- Haptic and sound promises are never awaited by a game action. Missing native modules, failed audio initialization, failed playback and rejected haptics leave the text, pressed state, delayed busy state and game action operational. Disabled, unchanged or blocked selections produce no extra feedback. Haptic-only selection feedback preserves the existing sound behaviour; selecting an appearance or navigating Back does not add a sound or gameplay work.
 - No music, soundtrack, streaming, recording, sound-based gameplay, or fabricated connection status is exposed.
 
 ## Preference durability

@@ -57,7 +57,9 @@ test('the genuine deceased ancestor keeps factual text and navigation outside th
   const recorded = unpackCheckpoint(readFileSync(join(__dirname, '../fixtures/v30-family-year91-checkpoint.json'), 'utf8'), true);
   // Select the already deceased ancestor for this read-only UI scenario; no
   // death, legacy handover, earned history or game command is manufactured.
-  const world = { ...recorded, activePersonId: 'person_player' }, before = encodeWorld(world), person = world.people.person_player;
+  const before = encodeWorld(recorded), world = { ...recorded, activePersonId: 'person_player' }, person = world.people.person_player;
+  // This selected-person UI projection is not a writable legacy World. Keep
+  // the genuine original checkpoint valid and assert its complete bytes below.
   expect(person.died).toBeTruthy(); mockState = { world, busy: false, error: null, acknowledgeBirth: jest.fn() };
   const view = render(frame(<Death />));
   expect(Animated.timing).toHaveBeenCalledTimes(1); expect(Animated.timing).toHaveBeenLastCalledWith(expect.anything(), expect.objectContaining({ duration: 1800, useNativeDriver: true }));
@@ -67,5 +69,5 @@ test('the genuine deceased ancestor keeps factual text and navigation outside th
   mockState.busy = true; mockState.error = 'Unrelated local feedback'; view.rerender(frame(<Death />)); expect(Animated.timing).toHaveBeenCalledTimes(1);
   mockReducedMotion = true; view.rerender(frame(<Death />)); expect(Animated.timing).toHaveBeenCalledTimes(1); expectDecorativeOnly();
   fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenLastCalledWith('/life-summary');
-  expect(encodeWorld(world)).toBe(before); expect(mockState.acknowledgeBirth).not.toHaveBeenCalled(); view.unmount();
+  expect(encodeWorld(recorded)).toBe(before); expect(mockState.acknowledgeBirth).not.toHaveBeenCalled(); view.unmount();
 });

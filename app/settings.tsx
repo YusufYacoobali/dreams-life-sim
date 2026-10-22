@@ -25,9 +25,9 @@ export default function Settings() {
       <Button label="Restore Default Appearance" tone="secondary" disabled={busy || !ready} onPress={() => setConfirm(true)} />
     </Card>
     <Card><Heading size={19}>Motion and feedback</Heading>
-      <FeedbackSetting label="Reduce Motion" description="Turn off page and dialog animations. Your device’s reduced-motion setting is always honoured." checked={settings.reducedMotion} disabled={unavailable} stacked={stacked} onChange={enabled => { void setReducedMotion(enabled); }} />
+      <FeedbackSetting label="Reduce Motion" description="Use still artwork and turn off page and dialog animations. Your device’s reduced-motion setting is always honoured." checked={settings.reducedMotion} disabled={unavailable} stacked={stacked} onChange={enabled => { void setReducedMotion(enabled); }} />
       {deviceReducedMotion && <Body muted>Your device requests reduced motion, so animations stay off.</Body>}
-      <FeedbackSetting label="Haptic Feedback" description={hapticsSupported ? 'A light tap when you press an action button, on supported devices.' : 'Haptics are available on supported iOS and Android devices.'} checked={settings.haptics} disabled={unavailable || !hapticsSupported} stacked={stacked} onChange={enabled => { void setHaptics(enabled); }} />
+      <FeedbackSetting label="Haptic Feedback" description={hapticsSupported ? 'A light tap for buttons, choices and Age Up, on supported devices.' : 'Haptics are available on supported iOS and Android devices.'} checked={settings.haptics} disabled={unavailable || !hapticsSupported} stacked={stacked} onChange={enabled => { void setHaptics(enabled); }} />
       <FeedbackSetting label="Sound Effects" description={soundSupported ? 'A quiet button tap. Respects silent mode and media volume.' : 'Button sounds are available on iOS and Android devices.'} checked={settings.soundEffects} disabled={unavailable || !soundSupported} stacked={stacked} onChange={enabled => { void setSoundEffects(enabled); }} />
       {busy && <ActivityIndicator accessibilityLabel="Saving app settings" />}
     </Card>

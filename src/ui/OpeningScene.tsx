@@ -12,7 +12,8 @@ const lights = [
   { left: '23%', top: '49%', size: 2, drift: -8 }, { left: '54%', top: '42%', size: 3, drift: 5 },
 ] as const;
 
-export function OpeningScene() {
+// Save/startup feedback must not rebuild the decorative animation graph.
+export const OpeningScene = React.memo(function OpeningScene() {
   return <SceneMotion identity="welcome-opening" duration={1800} style={styles.scene}>{({ progress }) => <>
     <Animated.Image source={hero} accessible={false} resizeMode="cover" style={[styles.hero, { transform: [
       { scale: progress.interpolate({ inputRange: [0, 1], outputRange: [1.045, 1] }) },
@@ -30,19 +31,19 @@ export function OpeningScene() {
     }]} />)}
     <LinearGradient colors={['rgba(3,18,54,0.15)', 'transparent', 'rgba(2,12,31,0.96)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
   </>}</SceneMotion>;
-}
+});
 
 /** A small light stroke reveals beneath the wordmark; the actual brand text is always visible. */
-export function OpeningBrandAccent() {
+export const OpeningBrandAccent = React.memo(function OpeningBrandAccent() {
   return <SceneMotion identity="welcome-brand" duration={1500} style={styles.accentSpace}>{({ progress }) => <Animated.View style={{
     opacity: progress.interpolate({ inputRange: [0, 0.45, 1], outputRange: [0.2, 0.9, 0.65] }),
     transform: [{ scaleX: progress.interpolate({ inputRange: [0, 1], outputRange: [0.2, 1] }) }],
   }}><LinearGradient colors={['#FFE6B000', '#FFE6B0', '#FFE6B000']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.accent} /></Animated.View>}</SceneMotion>;
-}
+});
 
 const styles = StyleSheet.create({
-  scene: { ...StyleSheet.absoluteFillObject, overflow: 'hidden' },
-  hero: { ...StyleSheet.absoluteFillObject, width: '100%', height: '100%' },
+  scene: { ...StyleSheet.absoluteFill, overflow: 'hidden' },
+  hero: { ...StyleSheet.absoluteFill, width: '100%', height: '100%' },
   sunlight: { position: 'absolute', top: '31%', left: '29%', width: 320, height: 320, borderRadius: 160, overflow: 'hidden' },
   glow: { flex: 1, borderRadius: 160 },
   light: { position: 'absolute', borderRadius: 3, backgroundColor: '#FFF0BE' },
