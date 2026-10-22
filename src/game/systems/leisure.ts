@@ -103,7 +103,7 @@ function introduceHobbyPeer(world: World, hobby: Hobby, plan: HobbyPlan) {
   edge.memories.push(introductionMemory(hobby) + world.date.year);
   world.actionCounts[introductionKey(world, hobby)] = 1;
   fact(world, 'I met ' + fullName(peer) + ' through local ' + hobbyContent[hobby.kind].name.toLowerCase() + ' practice.', 'hobby');
-  result(world, 'An introduction at practice', 'You introduced yourself to ' + fullName(peer) + ' after local ' + hobbyContent[hobby.kind].name.toLowerCase() + ' practice.' + (plan.payerId !== person.id ? ' Your ' + (storyParticipants(world, [plan.payerId])[0]?.role ?? 'responsible adult') + ', ' + fullName(world.people[plan.payerId]) + ', accompanied you.' : '') + ' Your attended access already covers this visit. An introduction is a beginning; you can get to know each other through Relationships.', 'leisure-' + hobby.kind, effects);
+  result(world, 'An introduction at practice', 'You introduced yourself to ' + fullName(peer) + ' after local ' + hobbyContent[hobby.kind].name.toLowerCase() + ' practice.' + (plan.payerId !== person.id ? ' Your ' + (storyParticipants(world, [plan.payerId])[0]?.role ?? 'responsible adult') + ', ' + fullName(world.people[plan.payerId]) + ', came with you.' : '') + ' No extra fee. Get to know them in Relationships.', 'leisure-' + hobby.kind, effects);
 }
 function change(world: World, person: Person, stat: LeisureEffect['stat'], delta: number): LeisureEffect {
   const before = stat === 'music' ? person.skills.music : person.stats[stat], after = bounded(before + delta);
