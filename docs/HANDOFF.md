@@ -4,13 +4,35 @@ Read this first, then [PROGRESS.md](PROGRESS.md) and [OPENING_PLAN.md](OPENING_P
 Repository: `YusufYacoobali/dreams-life-sim`; coordinating branch `work`.
 This is the current handoff. Detailed earlier checkpoints remain in PROGRESS and Git history; they are not additional unfinished gates.
 
-## Current reference polish and rental leases —22October
+## Current Life and relationship polish —22October
+
+The second user brief is implemented after the reference-art/rental batch.
+See [the new review](verification/next-polish/README.md) for behavior, save
+contracts, captures and verification. Life has a central current-context
+shortcut; homes and cars have shared feature boxes; person pages have grouped
+role actions, real money requests and explicitly accepted personal loans.
+Reviews use app-wide preferences and committed completed-year counts, with
+negative-year/modal guards. Death has a factual compact memorial and safe
+read-only family history. Existing appearance and earlier artwork are retained.
+
+Current markers are **World43/engine45/content22/SQLite reader23/v4**. Migration
+adds only prospective empty support/action histories. Reader13–22 upgrades are
+metadata-only; old payload bytes and original fixture hashes remain intact.
+The native review dependency needs a fresh native build; a store sheet remains
+subject to OS availability. No simulator/device execution is claimed.
+
+Focused checks, strict types, import graph and both offline Hermes exports pass.
+The final full regression is running; finish it and record its result before
+pushing this completed batch. The user's requested ordering was respected:
+all new features were integrated before testing began.
+
+## Prior reference polish and rental leases —22October
 
 The user's six-phase polish brief is implemented on top of8891d4d, preserving
 its birth journals and the existing avatar overhaul. See the
 [integrated review](verification/product-polish/README.md) for source scope,
 reference panels, before/after captures, save compatibility and verification.
-World42/engine44/content21/SQLite reader22/v4 are the current markers; earlier
+World42/engine44/content21/SQLite reader22/v4 were this batch’s markers; earlier
 sections below retain their historical marker values.
 
 The batch adds contextual event art/colours and frozen participant labels,

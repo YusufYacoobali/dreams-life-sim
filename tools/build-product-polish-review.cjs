@@ -35,7 +35,7 @@ for (const file of files) {
   for (const version of versions) {
     const tree = portableSources(JSON.parse(fs.readFileSync(path.join(base + '-' + version, file), 'utf8')));
     if (process.env.DREAMS_POLISH_ARCHIVE_TREES) {
-      const archive = path.join(root, 'docs/verification/product-polish/trees-' + version);
+      const archive = path.join(process.env.DREAMS_POLISH_ARCHIVE_ROOT || path.join(root, 'docs/verification/product-polish'), 'trees-' + version);
       fs.mkdirSync(archive, { recursive: true }); fs.writeFileSync(path.join(archive, file), JSON.stringify(tree) + '\n');
     }
     trees[name + '-' + version] = prepare(tree);
