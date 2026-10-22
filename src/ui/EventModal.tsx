@@ -5,11 +5,14 @@ import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
 import { useDelayedBusy } from './useDelayedBusy';
 import { useFeedback } from './feedback';
+import type { StoryParticipant } from '../game/runtime';
+import { eventBadgeColor, presentationArtwork, type EventCategory } from './eventArtwork';
 
 export type EffectRow = { id: string; label: string; value: string; tone: 'positive' | 'negative' | 'neutral' };
 type Choice = { id: string; label: string; disabledReason?: string };
 export type EventPresentation = {
   id: string; title: string; body: string; illustration?: React.ReactNode;
+  category?: EventCategory; participants?: readonly StoryParticipant[];
 } & (
   | { kind: 'decision'; choices: readonly Choice[] }
   | { kind: 'selection'; choices: readonly Choice[]; confirmLabel: string }
@@ -28,6 +31,7 @@ function EventCard({
   event, busy, error, onChoose, onCancel, onClose,
 }: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
   const c = useColors();
+  const artwork = presentationArtwork(event.illustration,event.category);
   const { reducedMotion, hapticFeedback } = useFeedback();
   const insets = useSafeAreaInsets();
   const { width, fontScale } = useWindowDimensions();
@@ -61,9 +65,10 @@ function EventCard({
     <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => dismiss(onCancel ?? onClose)}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, event.kind === 'selection' && styles.selectionCard, { backgroundColor: c.surface }]}>
-          {event.illustration && <View style={[styles.illustration, { backgroundColor: c.selected, borderColor: c.surface }]}>{event.illustration}</View>}
+          {artwork.illustration && <View testID="event-artwork-badge" style={[styles.illustration, { backgroundColor: eventBadgeColor(artwork.category,c), borderColor: c.surface }]}>{artwork.illustration}</View>}
           <ScrollView style={event.kind === 'selection' && styles.selectionScroll} contentContainerStyle={[styles.contents, event.kind === 'selection' && styles.selectionContents]} keyboardShouldPersistTaps="handled" bounces={false}>
             <View style={styles.title}><Heading size={24} centered>{event.title}</Heading></View>
+            {!!event.participants?.length && <View style={styles.participants}>{event.participants.map(person => <Text key={person.personId} style={{ color:c.muted,fontSize:13,lineHeight:18,textAlign:'center' }}>{person.role.charAt(0).toUpperCase() + person.role.slice(1)} · {person.name}</Text>)}</View>}
             <Body centered>{event.body}</Body>
             {error && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, textAlign: 'center', fontSize: 14 }}>{error}</Text>}
             {effects.length > 0 && <View style={[styles.effects, { backgroundColor: c.inset }]}>
@@ -111,6 +116,7 @@ const styles = StyleSheet.create({
   illustration: { width: 88, height: 88, borderRadius: 44, borderWidth: 4, position: 'absolute', alignSelf: 'center', top: -44, alignItems: 'center', justifyContent: 'center' },
   contents: { paddingHorizontal: 22, paddingTop: 18, paddingBottom: 24, gap: 12 },
   title: { alignItems: 'center', marginTop: 6, minWidth: 0 },
+  participants: { gap: 4, minWidth: 0 },
   effects: { borderRadius: 12, padding: 12, gap: 14 },
   effectRow: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   effectRowStacked: { flexDirection: 'column', alignItems: 'stretch', gap: 4 },

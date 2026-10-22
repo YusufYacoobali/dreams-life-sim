@@ -74,7 +74,7 @@ function EmigrationPlan({ routeHint }: { routeHint?: string }) {
   const reviewApplication = () => { if (busy || reason) return; setReview({ command: { type: 'apply-relocation', ...selected, quotedFee: fee }, event: {
     id: 'apply-relocation', kind: 'confirmation', title: 'Apply to ' + destinations[destinationId].city + '?',
     body: 'The fee is non-refundable. If approved, you have twelve months to move. Your current home and job stay put until then.',
-    illustration: <TravelArt id="abroad" width={110} />, terms: [{ id: 'fee', label: 'Application fee', value: money(fee), tone: 'neutral' }, { id: 'route', label: routeLabels[route], value: route === 'work' ? 'Job application included; pay starts after moving' : route === 'study' ? 'Admission included; first annual tuition due when you move' : 'Residence only; no job or course included', tone: 'neutral' }], confirmLabel: 'Submit Application',
+    illustration: <TravelArt id="abroad" width={64} />, terms: [{ id: 'fee', label: 'Application fee', value: money(fee), tone: 'neutral' }, { id: 'route', label: routeLabels[route], value: route === 'work' ? 'Job application included; pay starts after moving' : route === 'study' ? 'Admission included; first annual tuition due when you move' : 'Residence only; no job or course included', tone: 'neutral' }], confirmLabel: 'Submit Application',
   } }); };
   const reviewDeparture = () => {
     if (busy || departureReason || !offer || !quote) return;
@@ -82,7 +82,7 @@ function EmigrationPlan({ routeHint }: { routeHint?: string }) {
     setReview({ command: { type: 'relocate', applicationId: offer.id, companionIds, reserveMonths, reviewedQuote: quote }, event: {
       id: 'relocate', kind: 'confirmation', title: 'Move to ' + destinations[offer.destinationId].city + '?',
       body: (names ? 'Jobs end for ' + names + '. ' : '') + 'Income tax is settled before departure. Adults and other guardians must agree. Your reserve stays yours for local bills.',
-      illustration: <TravelArt id="flight" width={110} />, terms: [
+      illustration: <TravelArt id="flight" width={64} />, terms: [
         { id: 'transport', label: 'Transport', value: money(quote.transport, quote.currency), tone: 'neutral' },
         ...(movingPets.length ? [{ id: 'pets', label: 'Pets moving with their adult', value: movingPets.map(pet => pet.name).join(', '), tone: 'neutral' as const }, { id: 'pet-transport', label: 'Pet transport included above', value: money(petMoveCost(world, [person.id, ...companionIds]), quote.currency), tone: 'neutral' as const }] : []),
         ...quote.taxes.filter(item => item.adjustment !== 0n).map(item => ({ id: 'tax-' + item.personId, label: world.people[item.personId].firstName + ': tax adjustment', value: money(item.adjustment, item.currency), tone: 'neutral' as const })),

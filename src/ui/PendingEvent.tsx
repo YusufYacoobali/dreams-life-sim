@@ -1,17 +1,9 @@
-import { PetsLeisureArt, petIllustrations } from '../assets/PetsLeisureArt';
-import { OrdinaryHobbyArt, ordinaryHobbyIllustrations } from '../assets/HobbyArt';
 import React, { useMemo } from 'react';
-import { Illustration, illustrationCells, IllustrationId } from '../assets/Illustration';
 import { useGame } from '../state/useGame';
 import { EventModal, EventPresentation } from './EventModal';
-import { FamilyArt, familyCells, FamilyArtId } from '../assets/FamilyArt';
-import { HealthLegalArt, HealthLegalArtId } from '../assets/HealthLegalArt';
-import { healthLegalRects } from '../assets/healthLegalLayout';
 import { choiceUnavailable } from '../game/choiceAvailability';
-import { FameBusinessArt, FameBusinessArtId } from '../assets/FameBusinessArt';
-import { fameBusinessRects } from '../assets/fameBusinessLayout';
-import { careerRects } from '../assets/careerLayout';
-import { CareerArt, CareerArtId } from '../assets/CareerArt';
+import { storyParticipants } from '../game/storyNames';
+import { resolveEventArtwork } from './eventArtwork';
 
 /** Render persisted decisions/results; opening or closing a view never resolves an outcome. */
 export function PendingEvent() {
@@ -24,11 +16,12 @@ export function PendingEvent() {
   const choices = useMemo(() => pending?.kind === 'decision'
     ? pending.choices.map(choice => ({ id: choice.id, label: choice.label, disabledReason: world ? choiceUnavailable(world, choice) : choice.disabledReason }))
     : [], [world, pending]);
-  if (!pending) return null;
-  const illustration = pending.illustration in illustrationCells ? <Illustration id={pending.illustration as IllustrationId} size={64} /> : pending.illustration in familyCells ? <FamilyArt id={pending.illustration as FamilyArtId} size={64} /> : pending.illustration in healthLegalRects ? <HealthLegalArt id={pending.illustration as HealthLegalArtId} size={64} /> : pending.illustration in fameBusinessRects ? <FameBusinessArt id={pending.illustration as FameBusinessArtId} size={64} /> : pending.illustration in careerRects ? <CareerArt id={pending.illustration as CareerArtId} size={64} /> : pending.illustration in petIllustrations ? <PetsLeisureArt id={petIllustrations[pending.illustration as keyof typeof petIllustrations]} size={64} /> : pending.illustration in ordinaryHobbyIllustrations ? <OrdinaryHobbyArt id={ordinaryHobbyIllustrations[pending.illustration as keyof typeof ordinaryHobbyIllustrations]} size={64} /> : undefined;
+  const artwork = useMemo(() => pending && world ? resolveEventArtwork(pending,world) : undefined,[pending,world]);
+  const participants = useMemo(() => pending?.participants ?? (pending?.kind === 'decision' && world ? storyParticipants(world,pending.personIds) : undefined),[pending,world]);
+  if (!pending || !artwork) return null;
   const event: EventPresentation = pending.kind === 'decision'
-    ? { ...pending, illustration, choices }
-    : { ...pending, illustration };
+    ? { ...pending, ...artwork, participants, choices }
+    : { ...pending, ...artwork, participants };
   return <EventModal event={event} busy={busy} error={error} onChoose={choiceId => {
     void dispatch(pending.kind === 'decision' ? { type: 'choose', eventId: pending.id, choiceId } : { type: 'acknowledge', resultId: pending.id });
   }} />;
