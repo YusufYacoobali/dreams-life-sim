@@ -17,6 +17,7 @@ import { newHealth } from './systems/healthSchemas';
 import { newLegal } from './systems/legalSchemas';
 import { newPublicLife } from './systems/socialSchemas';
 import { newSkills } from './systems/careerSchemas';
+import { composeBirthJournal } from './birthJournal';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -95,7 +96,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     }),
     liabilities: [], ledger: [], workHistory: [], actionCounts: {},
     assets: [], holdings: [], market: initialMarket(date),
-    journal: [{ id: 'journal_birth', date: { ...date }, personId: player.id, category: 'birth', text: 'I was born in ' + input.city + ', ' + country.name + '.' }],
+    journal: [],
   });
   for (const parent of guardians) backgroundOccupation(world, world.people[parent.id]);
   if (guardians.length === 2) {
@@ -103,6 +104,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     world.relationships.push({ id: 'relation_parents_couple', from: parent1.id, to: parent2.id, kind: 'spouse', roles: ['spouse'], romance: 'married', since: started, parentType: null, strength: roll(55, 90), trust: roll(55, 90), memories: ['married-before-birth'], lastInteractionYear: date.year });
     world.marriages.push({ id: 'marriage_parents', a: parent1.id, b: parent2.id, started, ended: null, endReason: null, baselineA: netWorth(world, parent1.id), baselineB: netWorth(world, parent2.id), excludedA: 0n, excludedB: 0n, ledgerStart: 0, weddingCost: null });
   }
-  if(input.background==='royal')createRoyalBackground(world);
+  if(input.background==='royal')createRoyalBackground(world,false);
+  world.journal = composeBirthJournal(world, seed);
   return validateWorld(world);
 }

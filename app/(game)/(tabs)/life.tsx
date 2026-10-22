@@ -120,7 +120,12 @@ export default function Life() {
     });
     rowCache.current = { scope: journalScope, rows }; return rows;
   }, [entries, journalScope]);
+  // New openings begin at their first fact; retained saves and later entries
+  // keep the existing follow-to-end behavior without changing the journal UI.
+  const showingBirthIntroduction = world.date.year === player.born.year && world.date.month === player.born.month && world.date.day === player.born.day
+    && entries.some(entry => entry.id === 'journal_birth_identity') && entries.every(entry => entry.category === 'birth');
   const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null), [menu, setMenu] = useState(false);
+  const openingJournal = useRef(showingBirthIntroduction); openingJournal.current = showingBirthIntroduction;
   const cancelJournalScroll = useCallback(() => {
     if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current);
     scrollFrame.current = null;
@@ -129,6 +134,7 @@ export default function Life() {
     if (!shouldScroll.current || scrollFrame.current !== null) return;
     scrollFrame.current = requestAnimationFrame(() => {
       scrollFrame.current = null;
+      if (shouldScroll.current && openingJournal.current) { journal.current?.scrollToOffset({ offset: 0, animated: false }); return; }
       // FlatList.scrollToEnd estimates the last row from cell metrics, which
       // can lag new journal facts. Use the native ScrollView's actual end.
       const scroll = shouldScroll.current ? journal.current?.getScrollResponder() : null;
@@ -142,7 +148,7 @@ export default function Life() {
     shouldScroll.current = true;
     followJournal();
     return cancelJournalScroll;
-  }, [world.id, player.id, entries.length, followJournal, cancelJournalScroll]);
+  }, [world.id, player.id, entries.length, showingBirthIntroduction, followJournal, cancelJournalScroll]);
   const pendingKind = world.pending?.kind, previousPendingKind = useRef(pendingKind);
   useEffect(() => {
     // A new entry may have laid out behind its result modal. Retry once it

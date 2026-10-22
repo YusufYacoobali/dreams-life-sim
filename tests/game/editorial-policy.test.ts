@@ -97,10 +97,10 @@ test('the historical C35 registration stays exact and rejects newer source befor
   });
   const pins = driver.sourcePins(sourceRoot);
   expect(pins.birthDriver).toBe(driver.expectedC35.birthDriver);
-  expect(pins.store).toBe('03ae91af16945a8e94f5c247bd74c763876625a22e27a26477b3dd457c2b10a4');
-  // The work branch includes God Mode and appearance state changes after frozen C35.
+  expect(pins.store).toBe('ad7a6e1da6cbe8406bd094131733ecdac62c00168c645430011396bd4b58a237');
+  // The work branch includes God Mode, appearance and End This Life state changes after frozen C35.
   // Pin that unchanged work state without rewriting the historical registration.
-  expect(pins.state).toBe('2cf4283a80c014c267139aa78116fb12294c27477937c10d23e075e6d26ae530');
+  expect(pins.state).toBe('f5bb057081addf04972681db4f720482ec947757be62fbf66a8a2fdd549d5e0d');
   // Current UI dependencies include SDK 57 native cinematic playback; frozen C35 stays exact above.
   expect(pins.lockfile).toBe('fa2f8333ab7044da4043a8c839ddac7ffd57d1b654466de93421ecaa250e6138');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');

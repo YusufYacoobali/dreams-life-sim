@@ -33,4 +33,6 @@ Development and configured internal preview builds include **Settings → God Mo
 
 **Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
 
+New lives begin with a short [birth journal](docs/BIRTH_JOURNAL.md): actual family names, ages and occupations, with occasional original birth anecdotes. The existing Life journal opens at the beginning of this introduction without an additional screen.
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.
