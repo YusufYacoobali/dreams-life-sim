@@ -5,7 +5,7 @@ import { EventTemplate, StoryStat, storyOption as option } from './eventTypes';
 import { childhoodTemplates } from './childhood';
 import { dramaticTemplates } from './dramaticEvents';
 import { dramaticContext } from '../systems/dramaticContext';
-import { bindDramaticEvent } from '../systems/dramaticEvents';
+import { bindDramaticEvent } from '../systems/dramaticOffers';
 import { workplaceTemplates } from './workplaceStories';
 import { adultRelationshipTemplates } from './adultRelationshipStories';
 import { currentWorkplace } from '../systems/workplaceSchemas';

@@ -2,7 +2,7 @@ import type { World } from './model';
 import type { BoundChoice } from './runtime';
 import { storyContextReason } from './systems/storyContext';
 import { storyChoiceReason } from './systems/stories';
-import { dramaticChoiceReason } from './systems/dramaticEvents';
+import { dramaticChoiceReason } from './systems/dramaticOffers';
 /** Funds can change while a higher-priority decision is resolved; no fake reservation is made. */
 export function choiceUnavailable(world: World, choice: BoundChoice): string | undefined {
   if (choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice') return dramaticChoiceReason(world, choice.effects[0]);

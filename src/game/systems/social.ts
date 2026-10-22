@@ -1,7 +1,7 @@
 import { serviceAway } from './serviceSchemas';
 import { publicCriticismCopy } from '../content/socialCriticism';
 import { z } from 'zod';
-import { offerDramaticEvent } from './dramaticEvents';
+import { offerDramaticEvent } from './dramaticOffers';
 import { ageOn, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
 import { platforms, PlatformId, platformContent, postContent, postKinds, PostKind, sponsorBrands } from '../content/social';

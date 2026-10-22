@@ -2,7 +2,7 @@ import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { fullTimeCreator } from './creatorSchemas';
 import { z } from 'zod';
-import { offerDramaticEvent } from './dramaticEvents';
+import { offerDramaticEvent } from './dramaticOffers';
 import { ageOn, fullName, Person, World } from '../model';
 import { countries } from '../countries';
 import { rules } from '../rules';

@@ -7,7 +7,7 @@ import { rules, monthlyAmount } from '../rules';
 import { roundRatio } from '../money';
 import { offerPending } from '../pendingQueue';
 import { bounded, draw, fact } from './common';
-import { offerDramaticEvent } from './dramaticEvents';
+import { offerDramaticEvent } from './dramaticOffers';
 import { activeBusinessStaff, availableBusinessProfit, businessManager, businessReserve, improvementQuote, payBusinessDividend } from './businesses';
 import { businessBook, businessCost, settleBusinessPayables } from './businessCore';
 import { employmentMonth } from './work';

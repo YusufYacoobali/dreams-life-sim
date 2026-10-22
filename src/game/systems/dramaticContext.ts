@@ -1,4 +1,5 @@
-import { ageOn, compareDates, fullName, type World } from '../model';
+import type { World } from '../model';
+import { ageOn, compareDates, fullName } from '../personHelpers';
 import { countries } from '../countries';
 import { currencyDigits, formatMoney } from '../money';
 import { jobs } from '../content/jobs';

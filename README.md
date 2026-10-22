@@ -17,6 +17,7 @@ Use Node 24 for the test suite and an Expo SDK 57-compatible device or developme
 
 ```sh
 npm run typecheck
+npm run check:imports
 npm test
 npm run test:soak
 npx expo export --platform all

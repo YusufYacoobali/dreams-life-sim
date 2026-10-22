@@ -6,7 +6,7 @@ import { destinations } from '../content/travel';
 import { jobs } from '../content/jobs';
 import { monthFrom } from '../calendar';
 import { convertMoney, roundRatio } from '../money';
-import { courseMonths } from './education';
+import { courseMonths } from './educationPrograms';
 import { incomeTax, rules } from '../rules';
 
 export function validateRelocations(world: World, ledger = indexLedger(world.ledger)) {

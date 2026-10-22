@@ -6,20 +6,20 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 ## Inputs and scope
 
-- `package.json` SHA-256 `fee3de95aef6ed862c317d351129e904d55c00fa35ae54d999488362f2743de2`
-- `package-lock.json` SHA-256 `af9fa547fb9616b5b98ed318a962de26a4165bbd5b1d533ad8524feb83622c47`
+- `package.json` SHA-256 `ff79cac06b4988be347ea0cde822009862c7f46a68e4ce102d4c56930c1f8d09`
+- `package-lock.json` SHA-256 `0540a10c2117503815f9407ee4271fd2ee8fb9c819d6717d0e90c5f9665a6d20`
 - `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
 
-**28 direct dependencies; 783 candidate non-dev lock entries; 773 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
+**28 direct dependencies; 784 candidate non-dev lock entries; 773 installed version matches; 11 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 
-733 readable notice files are preserved as 281 exact text blocks. 1 entries lack lock license metadata; 56 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
+733 readable notice files are preserved as 280 exact text blocks. 1 entries lack lock license metadata; 57 have no readable matching notice file in this installation. Neither condition establishes permission or prohibition. See JSON for exact missing/optional/error evidence.
 
 ## Direct dependencies
 
 | Dependency | Requested | Locked version | Lock path |
 | --- | --- | --- | --- |
 | @expo/vector-icons | ^15.1.1 | 15.1.1 | node_modules/@expo/vector-icons |
-| expo | ~57.0.30 | 57.0.30 | node_modules/expo |
+| expo | ~57.0.31 | 57.0.31 | node_modules/expo |
 | expo-asset | ~57.0.20 | 57.0.20 | node_modules/expo-asset |
 | expo-audio | ~57.0.5 | 57.0.5 | node_modules/expo-audio |
 | expo-document-picker | ~57.0.3 | 57.0.3 | node_modules/expo-document-picker |
@@ -29,8 +29,8 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 | expo-linear-gradient | ~57.0.2 | 57.0.2 | node_modules/expo-linear-gradient |
 | expo-linking | ~57.0.13 | 57.0.13 | node_modules/expo-linking |
 | expo-notifications | ~57.0.23 | 57.0.23 | node_modules/expo-notifications |
-| expo-router | ~57.0.28 | 57.0.28 | node_modules/expo-router |
-| expo-sharing | ~57.0.23 | 57.0.23 | node_modules/expo-sharing |
+| expo-router | ~57.0.29 | 57.0.29 | node_modules/expo-router |
+| expo-sharing | ~57.0.24 | 57.0.24 | node_modules/expo-sharing |
 | expo-splash-screen | ~57.0.10 | 57.0.10 | node_modules/expo-splash-screen |
 | expo-sqlite | ~57.0.4 | 57.0.4 | node_modules/expo-sqlite |
 | expo-status-bar | ~57.0.1 | 57.0.1 | node_modules/expo-status-bar |
@@ -144,10 +144,10 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @babel/traverse@7.29.10 (node_modules/@babel/traverse) | MIT | version-matched | node_modules/@babel/traverse/LICENSE [text-117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76] |
 | @babel/types@7.29.8 (node_modules/@babel/types) | MIT | version-matched | node_modules/@babel/types/LICENSE [text-117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76] |
 | @bcoe/v8-coverage@0.2.3 (node_modules/@bcoe/v8-coverage) | MIT | version-matched | node_modules/@bcoe/v8-coverage/LICENSE.md [text-98d226d560dfbb0a07a77c3654acc18ba6c87589c48cf00cb2a9855ad50fcd07]; node_modules/@bcoe/v8-coverage/LICENSE.txt [text-1a9c55b2961f5e3062e181fa55666c44d011fc3cc03ed6d4fa4321c51f2a5ec5]; node_modules/@bcoe/v8-coverage/dist/lib/LICENSE.md [text-98d226d560dfbb0a07a77c3654acc18ba6c87589c48cf00cb2a9855ad50fcd07] |
-| @expo-google-fonts/material-symbols@0.4.50 (node_modules/@expo-google-fonts/material-symbols) | MIT AND Apache-2.0 | version-matched | node_modules/@expo-google-fonts/material-symbols/LICENSE [text-f81a99a72ec5e64e3f74fad0db3df27ab69ab0edd4878368f83379d3e4fc9313]; node_modules/@expo-google-fonts/material-symbols/LICENSE_FONT [text-58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd] |
+| @expo-google-fonts/material-symbols@0.4.51 (node_modules/@expo-google-fonts/material-symbols) | MIT AND Apache-2.0 | version-matched | node_modules/@expo-google-fonts/material-symbols/LICENSE [text-f81a99a72ec5e64e3f74fad0db3df27ab69ab0edd4878368f83379d3e4fc9313]; node_modules/@expo-google-fonts/material-symbols/LICENSE_FONT [text-58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd] |
 | @expo/code-signing-certificates@0.0.6 (node_modules/@expo/code-signing-certificates) | MIT | version-matched | node_modules/@expo/code-signing-certificates/LICENSE [text-41f2eef190265a6ea435951170947e35461707f91631821b3a67421bea5b2a7c] |
 | @expo/config@57.0.10 (node_modules/@expo/config) | MIT | version-matched | node_modules/@expo/config/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
-| @expo/config-plugins@57.0.10 (node_modules/@expo/config-plugins) | MIT | version-matched | node_modules/@expo/config-plugins/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
+| @expo/config-plugins@57.0.11 (node_modules/@expo/config-plugins) | MIT | version-matched | node_modules/@expo/config-plugins/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
 | @expo/json-file@11.0.1 (node_modules/@expo/config-plugins/node_modules/@expo/json-file) | MIT | version-matched | node_modules/@expo/config-plugins/node_modules/@expo/json-file/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
 | @expo/config-types@57.0.2 (node_modules/@expo/config-types) | MIT | version-matched | node_modules/@expo/config-types/LICENSE [text-8dacb1e00ec1cf679e7987c87c9953ce6a4d96e7ef361dd04cd453643e9b3351] |
 | @expo/devcert@1.2.2 (node_modules/@expo/devcert) | MIT | version-matched | node_modules/@expo/devcert/LICENSE [text-ddd64c9417c74998fe7d0bed6faaf7466bcbe4772bb2b52e7fc9815e33455921] |
@@ -163,7 +163,14 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @expo/local-build-cache-provider@57.0.9 (node_modules/@expo/local-build-cache-provider) | MIT | version-matched | node_modules/@expo/local-build-cache-provider/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
 | @expo/log-box@57.0.4 (node_modules/@expo/log-box) | MIT | version-matched | node_modules/@expo/log-box/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/metro@56.0.2 (node_modules/@expo/metro) | MIT | version-matched | node_modules/@expo/metro/LICENSE [text-0c0fc06d178272faaf09281aff0cb014d52c56fb0d9516b964808d4cccb65c93] |
+| @expo/metro-config@57.0.13 (node_modules/@expo/metro-config) | MIT | version-matched | node_modules/@expo/metro-config/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
+| @expo/env@2.4.3 (node_modules/@expo/metro-config/node_modules/@expo/env) | MIT | version-matched | node_modules/@expo/metro-config/node_modules/@expo/env/LICENSE [text-9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a] |
+| @expo/json-file@11.0.1 (node_modules/@expo/metro-config/node_modules/@expo/json-file) | MIT | version-matched | node_modules/@expo/metro-config/node_modules/@expo/json-file/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
+| hermes-estree@0.36.1 (node_modules/@expo/metro-config/node_modules/hermes-estree) | MIT | version-matched | node_modules/@expo/metro-config/node_modules/hermes-estree/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
+| hermes-parser@0.36.1 (node_modules/@expo/metro-config/node_modules/hermes-parser) | MIT | version-matched | node_modules/@expo/metro-config/node_modules/hermes-parser/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
+| picomatch@4.0.7 (node_modules/@expo/metro-config/node_modules/picomatch) | MIT | version-matched | node_modules/@expo/metro-config/node_modules/picomatch/LICENSE [text-d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9] |
 | @expo/metro-file-map@57.0.4 (node_modules/@expo/metro-file-map) | MIT | version-matched | node_modules/@expo/metro-file-map/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| @expo/metro-runtime@57.0.17 (node_modules/@expo/metro-runtime) | MIT | version-matched | node_modules/@expo/metro-runtime/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/osascript@2.8.1 (node_modules/@expo/osascript) | MIT | version-matched | node_modules/@expo/osascript/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/package-manager@1.14.2 (node_modules/@expo/package-manager) | MIT | version-matched | node_modules/@expo/package-manager/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
 | @expo/plist@0.8.1 (node_modules/@expo/plist) | MIT | version-matched | node_modules/@expo/plist/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
@@ -173,6 +180,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @expo/sdk-runtime-versions@1.0.1 (node_modules/@expo/sdk-runtime-versions) | MIT | version-matched | node_modules/@expo/sdk-runtime-versions/LICENSE [text-49c5f9c7097c9a940ff663a54c27a4c60e379df6cc2b3052df0d37a09a85df93] |
 | @expo/spawn-async@1.8.0 (node_modules/@expo/spawn-async) | MIT | version-matched | node_modules/@expo/spawn-async/LICENSE [text-736835b6c374cbfb66ccfbfc4f8819bcbeae3cfd5f5e5507f25f4caeabf9540e] |
 | @expo/sudo-prompt@9.3.2 (node_modules/@expo/sudo-prompt) | MIT | version-matched | node_modules/@expo/sudo-prompt/LICENSE [text-1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0] |
+| @expo/ui@57.0.26 (node_modules/@expo/ui) | MIT | version-matched | node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE [text-22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb] |
 | @expo/vector-icons@15.1.1 (node_modules/@expo/vector-icons) | MIT | version-matched | node_modules/@expo/vector-icons/LICENSE [text-a5416f6b586be51823285bc9a389bfd756eef80cfb7616ea90aaa11bae6189e1]; node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/LICENSE [text-000a66d1bc9e206b5963ba9370cd03350a4b26e205b5880e8e0f882a51951178] |
 | @expo/xcpretty@4.4.7 (node_modules/@expo/xcpretty) | MIT | version-matched | node_modules/@expo/xcpretty/LICENSE [text-051e2d2738b442a8a8403194f485deeacd9a7e895c08ffbf9e600a9dae858dcc] |
 | @isaacs/ttlcache@1.4.1 (node_modules/@isaacs/ttlcache) | ISC | version-matched | node_modules/@isaacs/ttlcache/LICENSE [text-049dff02fd6730c5960862ccca921d05541a7788ad0d76e25cc56dc9541bbf4b] |
@@ -393,7 +401,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | expect@29.7.0 (node_modules/expect) | MIT | version-matched | node_modules/expect/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | jest-diff@29.7.0 (node_modules/expect/node_modules/jest-diff) | MIT | version-matched | node_modules/expect/node_modules/jest-diff/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | jest-matcher-utils@29.7.0 (node_modules/expect/node_modules/jest-matcher-utils) | MIT | version-matched | node_modules/expect/node_modules/jest-matcher-utils/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
-| expo@57.0.30 (node_modules/expo) | MIT | version-matched | node_modules/expo/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo@57.0.31 (node_modules/expo) | MIT | version-matched | node_modules/expo/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-application@57.0.3 (node_modules/expo-application) | MIT | version-matched | node_modules/expo-application/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-asset@57.0.20 (node_modules/expo-asset) | MIT | version-matched | node_modules/expo-asset/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-audio@57.0.5 (node_modules/expo-audio) | MIT | version-matched | node_modules/expo-audio/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
@@ -407,12 +415,10 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | expo-linear-gradient@57.0.2 (node_modules/expo-linear-gradient) | MIT | version-matched | node_modules/expo-linear-gradient/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-linking@57.0.13 (node_modules/expo-linking) | MIT | version-matched | node_modules/expo-linking/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-modules-autolinking@57.0.16 (node_modules/expo-modules-autolinking) | MIT | version-matched | node_modules/expo-modules-autolinking/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| expo-modules-core@57.0.23 (node_modules/expo-modules-core) | MIT | version-matched | node_modules/expo-modules-core/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| expo-modules-jsi@57.1.2 (node_modules/expo-modules-jsi) | MIT | version-matched | node_modules/expo-modules-jsi/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-modules-core@57.0.24 (node_modules/expo-modules-core) | MIT | version-matched | node_modules/expo-modules-core/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-modules-jsi@57.1.3 (node_modules/expo-modules-jsi) | MIT | version-matched | node_modules/expo-modules-jsi/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-notifications@57.0.23 (node_modules/expo-notifications) | MIT | version-matched | node_modules/expo-notifications/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| expo-router@57.0.28 (node_modules/expo-router) | MIT | version-matched | node_modules/expo-router/vendor/react-helmet-async/LICENSE [text-c358ea82eed53098b2ee0913e1de8243c69d45862e11c48614db47fd5889d947] |
-| @expo/metro-runtime@57.0.17 (node_modules/expo-router/node_modules/@expo/metro-runtime) | MIT | version-matched | node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| @expo/ui@57.0.25 (node_modules/expo-router/node_modules/@expo/ui) | MIT | version-matched | node_modules/expo-router/node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE [text-22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb] |
+| expo-router@57.0.29 (node_modules/expo-router) | MIT | version-matched | node_modules/expo-router/vendor/react-helmet-async/LICENSE [text-c358ea82eed53098b2ee0913e1de8243c69d45862e11c48614db47fd5889d947] |
 | @radix-ui/react-collection@1.2.0 (node_modules/expo-router/node_modules/@radix-ui/react-collection) | MIT | version-matched | node_modules/expo-router/node_modules/@radix-ui/react-collection/LICENSE [text-0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138] |
 | @radix-ui/react-presence@1.1.11 (node_modules/expo-router/node_modules/@radix-ui/react-presence) | MIT | version-matched | node_modules/expo-router/node_modules/@radix-ui/react-presence/LICENSE [text-0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138] |
 | @radix-ui/react-primitive@2.2.0 (node_modules/expo-router/node_modules/@radix-ui/react-primitive) | MIT | version-matched | node_modules/expo-router/node_modules/@radix-ui/react-primitive/LICENSE [text-0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138] |
@@ -420,23 +426,19 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | @radix-ui/react-tabs@1.2.1 (node_modules/expo-router/node_modules/@radix-ui/react-tabs) | MIT | version-matched | node_modules/expo-router/node_modules/@radix-ui/react-tabs/LICENSE [text-0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138] |
 | react-is@19.3.1 (node_modules/expo-router/node_modules/react-is) | MIT | version-matched | node_modules/expo-router/node_modules/react-is/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | expo-server@57.0.3 (node_modules/expo-server) | MIT | version-matched | node_modules/expo-server/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| expo-sharing@57.0.23 (node_modules/expo-sharing) | MIT | version-matched | node_modules/expo-sharing/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| expo-sharing@57.0.24 (node_modules/expo-sharing) | MIT | version-matched | node_modules/expo-sharing/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-splash-screen@57.0.10 (node_modules/expo-splash-screen) | MIT | version-matched | node_modules/expo-splash-screen/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-sqlite@57.0.4 (node_modules/expo-sqlite) | MIT | version-matched | node_modules/expo-sqlite/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-status-bar@57.0.1 (node_modules/expo-status-bar) | MIT | version-matched | node_modules/expo-status-bar/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-symbols@57.0.3 (node_modules/expo-symbols) | MIT | version-matched | node_modules/expo-symbols/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | expo-system-ui@57.0.4 (node_modules/expo-system-ui) | MIT | version-matched | node_modules/expo-system-ui/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| @expo/cli@57.0.31 (node_modules/expo/node_modules/@expo/cli) | MIT | version-matched | node_modules/expo/node_modules/@expo/cli/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| @expo/router-server@57.0.13 (node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server) | MIT | version-matched | node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| @expo/cli@57.0.32 (node_modules/expo/node_modules/@expo/cli) | MIT | version-matched | node_modules/expo/node_modules/@expo/cli/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
+| @expo/router-server@57.0.14 (node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server) | MIT | version-matched | node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
 | @expo/env@2.4.3 (node_modules/expo/node_modules/@expo/env) | MIT | version-matched | node_modules/expo/node_modules/@expo/env/LICENSE [text-9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a] |
-| @expo/json-file@11.0.1 (node_modules/expo/node_modules/@expo/json-file) | MIT | version-matched | node_modules/expo/node_modules/@expo/json-file/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
-| @expo/metro-config@57.0.13 (node_modules/expo/node_modules/@expo/metro-config) | MIT | version-matched | node_modules/expo/node_modules/@expo/metro-config/LICENSE [text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4] |
 | @expo/ws-tunnel@2.0.1 (node_modules/expo/node_modules/@expo/ws-tunnel) | MIT | version-matched | node_modules/expo/node_modules/@expo/ws-tunnel/LICENSE [text-49c5f9c7097c9a940ff663a54c27a4c60e379df6cc2b3052df0d37a09a85df93] |
 | accepts@1.3.8 (node_modules/expo/node_modules/accepts) | MIT | version-matched | node_modules/expo/node_modules/accepts/LICENSE [text-71f83c4c0621102a56d9853812777b85751bce7e9726f686f5b056c1f8a4b0e6] |
 | ci-info@3.9.0 (node_modules/expo/node_modules/ci-info) | MIT | version-matched | node_modules/expo/node_modules/ci-info/LICENSE [text-f58943cb354fb2707fea2f7b26b04e6014ddb56835cdfd414c9d2c6c59165b64] |
 | expo-keep-awake@57.0.2 (node_modules/expo/node_modules/expo-keep-awake) | MIT | version-matched | node_modules/expo/node_modules/expo-keep-awake/LICENSE [text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4] |
-| hermes-estree@0.36.1 (node_modules/expo/node_modules/hermes-estree) | MIT | version-matched | node_modules/expo/node_modules/hermes-estree/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
-| hermes-parser@0.36.1 (node_modules/expo/node_modules/hermes-parser) | MIT | version-matched | node_modules/expo/node_modules/hermes-parser/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | mime-db@1.52.0 (node_modules/expo/node_modules/mime-db) | MIT | version-matched | node_modules/expo/node_modules/mime-db/LICENSE [text-cc1dfd4dafa27271e8212cd3b274eeb3f262e40a6fdab36ddc3f9696f706f58b] |
 | mime-types@2.1.35 (node_modules/expo/node_modules/mime-types) | MIT | version-matched | node_modules/expo/node_modules/mime-types/LICENSE [text-71f83c4c0621102a56d9853812777b85751bce7e9726f686f5b056c1f8a4b0e6] |
 | negotiator@0.6.3 (node_modules/expo/node_modules/negotiator) | MIT | version-matched | node_modules/expo/node_modules/negotiator/LICENSE [text-553d4d20029a24e315b428a1a54a9e109eaa340f2e958a4f50a92362c2c4070b] |
@@ -578,7 +580,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | lightningcss-linux-arm64-gnu@1.33.0 (node_modules/lightningcss-linux-arm64-gnu) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-linux-arm64-musl@1.33.0 (node_modules/lightningcss-linux-arm64-musl) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-linux-x64-gnu@1.33.0 (node_modules/lightningcss-linux-x64-gnu) | MPL-2.0 | version-matched · optional | node_modules/lightningcss-linux-x64-gnu/LICENSE [text-5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e] |
-| lightningcss-linux-x64-musl@1.33.0 (node_modules/lightningcss-linux-x64-musl) | MPL-2.0 | version-matched · optional | node_modules/lightningcss-linux-x64-musl/LICENSE [text-5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e] |
+| lightningcss-linux-x64-musl@1.33.0 (node_modules/lightningcss-linux-x64-musl) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-win32-arm64-msvc@1.33.0 (node_modules/lightningcss-win32-arm64-msvc) | MPL-2.0 | not-installed · optional | (none found) |
 | lightningcss-win32-x64-msvc@1.33.0 (node_modules/lightningcss-win32-x64-msvc) | MPL-2.0 | not-installed · optional | (none found) |
 | lines-and-columns@1.2.4 (node_modules/lines-and-columns) | MIT | version-matched | node_modules/lines-and-columns/LICENSE [text-456fe85ad3e71db9523313cf7437b0f90c392d8a48c869908e46716b26d2cf53] |
@@ -673,7 +675,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | plist@3.1.1 (node_modules/plist) | MIT | version-matched | node_modules/plist/LICENSE [text-3677dc86e6e5f119b500c308cc24cf533e2eb44c41050ea64584e049e5b70161] |
 | @xmldom/xmldom@0.9.12 (node_modules/plist/node_modules/@xmldom/xmldom) | MIT | version-matched | node_modules/plist/node_modules/@xmldom/xmldom/LICENSE [text-4da724fc305d81606b245b324d4d2586916b9d248b23d82183df753ace0fdf71] |
 | pngjs@3.4.0 (node_modules/pngjs) | MIT | version-matched | node_modules/pngjs/LICENSE [text-176b07a18c0bb3836aaeb61088fd0bf11a38f66e6f15e3fbda85faa225250d6e] |
-| postcss@8.5.30 (node_modules/postcss) | MIT | version-matched | node_modules/postcss/LICENSE [text-5be1f3465bba68a626777f984878814aaf35e7ef8e9fd314d469bcf887050fb8] |
+| postcss@8.5.31 (node_modules/postcss) | MIT | version-matched | node_modules/postcss/LICENSE [text-5be1f3465bba68a626777f984878814aaf35e7ef8e9fd314d469bcf887050fb8] |
 | pretty-format@29.7.0 (node_modules/pretty-format) | MIT | version-matched | node_modules/pretty-format/LICENSE [text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93] |
 | ansi-styles@5.2.0 (node_modules/pretty-format/node_modules/ansi-styles) | MIT | version-matched | node_modules/pretty-format/node_modules/ansi-styles/license [text-48da2f39e100d4085767e94966b43f4fa95ff6a0698fba57ed460914e35f94a0] |
 | proc-log@4.2.0 (node_modules/proc-log) | ISC | version-matched | node_modules/proc-log/LICENSE [text-dc32a0dee275e0a9aeffbc974dbf4899a30dcdc2e5ffa8934aecb69261065864] |
@@ -802,7 +804,6 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | use-latest-callback@0.2.6 (node_modules/use-latest-callback) | MIT | version-matched | node_modules/use-latest-callback/LICENSE [text-29de249ac0cee0d56924ff07bdabc8f708ad58432c7a357f6065000c49b12e11] |
 | use-sidecar@1.1.3 (node_modules/use-sidecar) | MIT | version-matched | node_modules/use-sidecar/LICENSE [text-30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9] |
 | utils-merge@1.0.1 (node_modules/utils-merge) | MIT | version-matched | node_modules/utils-merge/LICENSE [text-6e7d699cdd1e4fa837ba7718ea49841aa67201b449ea8b3f9cf274be15974a64] |
-| uuid@7.0.3 (node_modules/uuid) | MIT | version-matched | node_modules/uuid/LICENSE.md [text-3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39] |
 | v8-to-istanbul@9.3.0 (node_modules/v8-to-istanbul) | ISC | version-matched | node_modules/v8-to-istanbul/LICENSE.txt [text-1a9c55b2961f5e3062e181fa55666c44d011fc3cc03ed6d4fa4321c51f2a5ec5] |
 | validate-npm-package-name@5.0.1 (node_modules/validate-npm-package-name) | ISC | version-matched | node_modules/validate-npm-package-name/LICENSE [text-f3e1645267f7dd77ee6545283cc1766e5883e8fb3b5088fe2cfb995defbb3dde] |
 | vary@1.1.2 (node_modules/vary) | MIT | version-matched | node_modules/vary/LICENSE [text-bd47ce7b88c7759630d1e2b9fcfa170a0f1fde522be09e13fb1581a79d090400] |
@@ -824,7 +825,7 @@ SPDX/license values below are copied metadata, not inferred or verified legal co
 | wrappy@1.0.2 (node_modules/wrappy) | ISC | version-matched | node_modules/wrappy/LICENSE [text-4ec3d4c66cd87f5c8d8ad911b10f99bf27cb00cdfcff82621956e379186b016b] |
 | write-file-atomic@4.0.2 (node_modules/write-file-atomic) | ISC | version-matched | node_modules/write-file-atomic/LICENSE.md [text-ea7f376fe7a1fc28572b83ac8f806d92effb31852b9981bc9ba9d5266caa6b28] |
 | ws@7.5.13 (node_modules/ws) | MIT | version-matched | node_modules/ws/LICENSE [text-3de284c8e6fa7e8437eff6f53695471e0332129a5b42a79361e17b7637de94b3] |
-| xcode@3.0.1 (node_modules/xcode) | Apache-2.0 | version-matched | node_modules/xcode/LICENSE [text-cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30]; node_modules/xcode/NOTICE [text-0e5b0fe8d11e1627336bc6361de610ba8acf9a035fd73e07b5b4a0909a48371f] |
+| xcode@4.0.0 (node_modules/xcode) | Apache-2.0 | version-matched | node_modules/xcode/LICENSE [text-cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30]; node_modules/xcode/NOTICE [text-0e5b0fe8d11e1627336bc6361de610ba8acf9a035fd73e07b5b4a0909a48371f] |
 | xml2js@0.6.0 (node_modules/xml2js) | MIT | version-matched | node_modules/xml2js/LICENSE [text-c51452ef1dfd5606c9fe266930fa6bf7e8a534d52973b6475df5bf212cad5b0a] |
 | xmlbuilder@11.0.1 (node_modules/xml2js/node_modules/xmlbuilder) | MIT | version-matched | node_modules/xml2js/node_modules/xmlbuilder/LICENSE [text-e368bc4263b466cf98c225af15e300549e00da8859416a4536109e9654d434a8] |
 | xmlbuilder@15.1.1 (node_modules/xmlbuilder) | MIT | version-matched | node_modules/xmlbuilder/LICENSE [text-e368bc4263b466cf98c225af15e300549e00da8859416a4536109e9654d434a8] |
@@ -1721,10 +1722,10 @@ Sources:
 - `node_modules/@expo/fingerprint/LICENSE`
 - `node_modules/@expo/json-file/LICENSE`
 - `node_modules/@expo/local-build-cache-provider/LICENSE`
+- `node_modules/@expo/metro-config/LICENSE`
+- `node_modules/@expo/metro-config/node_modules/@expo/json-file/LICENSE`
 - `node_modules/@expo/package-manager/LICENSE`
 - `node_modules/@expo/prebuild-config/LICENSE`
-- `node_modules/expo/node_modules/@expo/json-file/LICENSE`
-- `node_modules/expo/node_modules/@expo/metro-config/LICENSE`
 
 ```text
 The MIT License (MIT)
@@ -2355,8 +2356,8 @@ SHA-256 `22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb` · 10
 
 Sources:
 
+- `node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE`
 - `node_modules/@react-native-masked-view/masked-view/LICENSE`
-- `node_modules/expo-router/node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE`
 
 ```text
 MIT License
@@ -3536,38 +3537,6 @@ Sources:
 The MIT License (MIT)
 
 Copyright (c) 2011 Einar Otto Stangvik <einaros@gmail.com>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### text-3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39
-
-SHA-256 `3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39` · 1109 original bytes.
-
-Sources:
-
-- `node_modules/uuid/LICENSE.md`
-
-```text
-The MIT License (MIT)
-
-Copyright (c) 2010-2016 Robert Kieffer and other contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -5139,7 +5108,6 @@ SHA-256 `5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e` · 15
 Sources:
 
 - `node_modules/lightningcss-linux-x64-gnu/LICENSE`
-- `node_modules/lightningcss-linux-x64-musl/LICENSE`
 - `node_modules/lightningcss/LICENSE`
 
 ```text
@@ -8100,6 +8068,7 @@ SHA-256 `9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a` · 11
 Sources:
 
 - `node_modules/@expo/env/LICENSE`
+- `node_modules/@expo/metro-config/node_modules/@expo/env/LICENSE`
 - `node_modules/expo-constants/node_modules/@expo/env/LICENSE`
 - `node_modules/expo/node_modules/@expo/env/LICENSE`
 
@@ -10317,6 +10286,7 @@ SHA-256 `d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9` · 10
 
 Sources:
 
+- `node_modules/@expo/metro-config/node_modules/picomatch/LICENSE`
 - `node_modules/expo/node_modules/picomatch/LICENSE`
 - `node_modules/picomatch/LICENSE`
 - `node_modules/tinyglobby/node_modules/picomatch/LICENSE`
@@ -10508,6 +10478,8 @@ SHA-256 `da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93` · 10
 
 Sources:
 
+- `node_modules/@expo/metro-config/node_modules/hermes-estree/LICENSE`
+- `node_modules/@expo/metro-config/node_modules/hermes-parser/LICENSE`
 - `node_modules/@jest/console/LICENSE`
 - `node_modules/@jest/core/LICENSE`
 - `node_modules/@jest/create-cache-key-function/LICENSE`
@@ -10540,8 +10512,6 @@ Sources:
 - `node_modules/expect/node_modules/jest-diff/LICENSE`
 - `node_modules/expect/node_modules/jest-matcher-utils/LICENSE`
 - `node_modules/expo-router/node_modules/react-is/LICENSE`
-- `node_modules/expo/node_modules/hermes-estree/LICENSE`
-- `node_modules/expo/node_modules/hermes-parser/LICENSE`
 - `node_modules/hermes-estree/LICENSE`
 - `node_modules/hermes-parser/LICENSE`
 - `node_modules/jest-changed-files/LICENSE`
@@ -12706,6 +12676,7 @@ Sources:
 - `node_modules/@expo/inline-modules/LICENSE`
 - `node_modules/@expo/log-box/LICENSE`
 - `node_modules/@expo/metro-file-map/LICENSE`
+- `node_modules/@expo/metro-runtime/LICENSE`
 - `node_modules/@expo/osascript/LICENSE`
 - `node_modules/@expo/plist/LICENSE`
 - `node_modules/babel-preset-expo/LICENSE`
@@ -12724,7 +12695,6 @@ Sources:
 - `node_modules/expo-modules-core/LICENSE`
 - `node_modules/expo-modules-jsi/LICENSE`
 - `node_modules/expo-notifications/LICENSE`
-- `node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE`
 - `node_modules/expo-server/LICENSE`
 - `node_modules/expo-sharing/LICENSE`
 - `node_modules/expo-splash-screen/LICENSE`

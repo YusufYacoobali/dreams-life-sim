@@ -18,7 +18,7 @@ import { placeDependentChildren, oweFamily } from './family';
 import { createContact } from './npcs';
 import { connectPerson, relationFor } from './relationships';
 import { publicConviction } from './social';
-import { offerDramaticEvent } from './dramaticEvents';
+import { offerDramaticEvent } from './dramaticOffers';
 export { activeSentence, isConfined } from './legalSchemas';
 import { visibleConvictions } from './legalRecords';
 export { visibleConvictions } from './legalRecords';

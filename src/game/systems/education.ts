@@ -1,3 +1,5 @@
+import { courseMonths } from './educationPrograms';
+export { courseMonths } from './educationPrograms';
 import { tuitionFor, enrollmentReason } from './educationEligibility';
 export { tuitionFor, coursePrerequisiteReason, enrollmentReason } from './educationEligibility';
 import { activeTrip } from './travelSchemas';
@@ -28,7 +30,6 @@ export const educationCommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('fund-studies'), funding: z.enum(['cash', 'loan']) }),
 ]);
 export type EducationCommand = z.infer<typeof educationCommandSchema>;
-export const courseMonths = (program: 'university' | 'trade' | 'graduate', field: string) => program === 'trade' ? 24 : program === 'graduate' && field === 'law' ? 36 : 48;
 /** Shared existing command gates; previewing a refusal never changes the course. */
 export function educationActionReason(world: World, command: Exclude<EducationCommand['type'], 'enroll'>): string | undefined {
   const custody = custodyReason(world, command); if (custody) return custody;

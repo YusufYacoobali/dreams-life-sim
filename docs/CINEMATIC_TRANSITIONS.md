@@ -64,7 +64,45 @@ ring and particle entrances were replaced with their settled artwork. The
 independent `SceneMotion` implementation and its 1.8-second cap are unchanged.
 Game state, persistence, save schemas, engine, RNG and outcomes are unchanged.
 
-## Verification on 22 October 2026
+## Native startup corrections on 22 October 2026
+
+A device launch exposed a worklet serialization error that the browser preview
+could not reproduce: `inkRibbon` captured `curl` and `roundedContour` while those
+bindings were still undefined. Leaf worklets now initialize before their
+callers. `cinematic-native-worklets.test.ts` compiles the actual Expo/Metro native
+Babel output for iOS/Android, in development/production modes, reconstructs its
+serialized closures, and exercises the animation frames. It catches an undefined
+capture even when ordinary JavaScript rendering succeeds.
+
+The reported require cycles were removed by separating dramatic-event offering
+from resolution, moving sale-quote arithmetic and course durations into shared
+leaf modules, and importing person helpers directly. The existing event/asset/
+education exports remain available. Draws, rule calculations, command results
+and save schemas are unchanged. `npm run check:imports` checks all runtime
+imports, including re-exports, and reports **386 modules, zero cycles**. Metro's
+require-cycle warnings remain enabled.
+
+SDK 57 patch dependencies are aligned to Expo **57.0.31**, Router **57.0.29**,
+and Sharing **57.0.24**; the packaged SDK compatibility check finds no mismatches.
+The online Expo metadata endpoint is blocked in this environment, so verification
+uses the current official Expo package's bundled metadata and registry patches.
+
+The corrected source passes 377 checks across the 20 affected suites, strict
+app/test typing, the import-graph check, SDK compatibility, and fresh Android/iOS
+Hermes exports. Device playback still needs confirmation. Detailed evidence is in
+[the startup correction record](verification/cinematics-20261022/startup-fixes.json).
+
+After updating a checkout:
+
+```sh
+npm ci
+npx expo start --clear
+```
+
+Rebuild a custom development client after native package updates. Expo Go users
+should use a client supporting SDK 57.
+
+## Initial implementation verification on 22 October 2026
 
 - Strict app/test TypeScript checks pass.
 - All 233 regression suites outside `tests/game/engine.test.ts` pass across

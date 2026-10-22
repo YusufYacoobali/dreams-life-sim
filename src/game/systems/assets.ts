@@ -1,6 +1,8 @@
+import { saleQuote } from './assetQuotes';
+export { saleQuote } from './assetQuotes';
 import { qualifyingAnnualIncome } from './credit';
 import { z } from 'zod';
-import { offerDramaticEvent } from './dramaticEvents';
+import { offerDramaticEvent } from './dramaticOffers';
 import { ageOn, fullName } from '../personHelpers';
 import type { World } from '../model';
 import { assetCatalog, AssetOffer } from '../content/assets';
@@ -71,12 +73,6 @@ export function ownedAsset(world: World, id: string): OwnedAsset {
   const asset = world.assets.find(candidate => candidate.id === id && candidate.ownerId === world.activePersonId);
   if (!asset) throw new IneligibleAction('You do not own this asset');
   return asset;
-}
-export function saleQuote(world: World, asset: OwnedAsset, gross?: bigint) {
-  const price = gross ?? roundRatio(asset.value * BigInt(asset.kind === 'vehicle' ? 8500 : 9500), 10000n);
-  const fee = roundRatio(price * BigInt(asset.kind === 'property' ? 300 : 100), 10000n);
-  const debt = world.liabilities.find(item => item.id === asset.mortgageId)?.principal ?? 0n;
-  return { price, fee, debt, proceeds: price - fee - debt };
 }
 export function completeAssetSale(world: World, assetId: string, price: bigint, foreclosure = false, person = active(world)): RuntimeEffectRow[] {
   const asset = world.assets.find(item => item.id === assetId && item.ownerId === person.id);

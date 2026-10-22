@@ -2,8 +2,8 @@
   "formatVersion": 1,
   "scope": "Candidate lock/install/source inventory; includes build tooling and optional packages. Not a shipped-library count, legal clearance, complete font-rights determination, or final native/Metro artifact inventory.",
   "inputs": {
-    "package.json": "fee3de95aef6ed862c317d351129e904d55c00fa35ae54d999488362f2743de2",
-    "package-lock.json": "af9fa547fb9616b5b98ed318a962de26a4165bbd5b1d533ad8524feb83622c47",
+    "package.json": "ff79cac06b4988be347ea0cde822009862c7f46a68e4ce102d4c56930c1f8d09",
+    "package-lock.json": "0540a10c2117503815f9407ee4271fd2ee8fb9c819d6717d0e90c5f9665a6d20",
     "app.json": "eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8"
   },
   "installationPlatform": {
@@ -14,14 +14,14 @@
   "evidenceLimits": "Missing metadata is not a licensing conclusion. Installed version mismatches must be reconciled. Optional/absent files and source-only art/font references remain explicit. SDK, native Pods/AARs, OS resources, dynamic imports and the final shipped graph need artifact-level review.",
   "summary": {
     "directDependencies": 28,
-    "candidateNonDevLockEntries": 783,
+    "candidateNonDevLockEntries": 784,
     "versionMatched": 773,
     "versionMismatches": 0,
-    "notInstalled": 10,
+    "notInstalled": 11,
     "missingLockLicenseMetadata": 1,
-    "withoutReadableNoticeFile": 56,
+    "withoutReadableNoticeFile": 57,
     "readableNoticeFiles": 733,
-    "uniqueExactNoticeTexts": 281,
+    "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
     "projectArtFiles": 101
   },
@@ -34,9 +34,9 @@
     },
     {
       "name": "expo",
-      "requested": "~57.0.30",
+      "requested": "~57.0.31",
       "lockPath": "node_modules/expo",
-      "lockedVersion": "57.0.30"
+      "lockedVersion": "57.0.31"
     },
     {
       "name": "expo-asset",
@@ -94,15 +94,15 @@
     },
     {
       "name": "expo-router",
-      "requested": "~57.0.28",
+      "requested": "~57.0.29",
       "lockPath": "node_modules/expo-router",
-      "lockedVersion": "57.0.28"
+      "lockedVersion": "57.0.29"
     },
     {
       "name": "expo-sharing",
-      "requested": "~57.0.23",
+      "requested": "~57.0.24",
       "lockPath": "node_modules/expo-sharing",
-      "lockedVersion": "57.0.23"
+      "lockedVersion": "57.0.24"
     },
     {
       "name": "expo-splash-screen",
@@ -2306,7 +2306,7 @@
     {
       "name": "@expo-google-fonts/material-symbols",
       "lockPath": "node_modules/@expo-google-fonts/material-symbols",
-      "version": "0.4.50",
+      "version": "0.4.51",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -2314,7 +2314,7 @@
       "lockLicense": "MIT AND Apache-2.0",
       "installStatus": "version-matched",
       "installedName": "@expo-google-fonts/material-symbols",
-      "installedVersion": "0.4.50",
+      "installedVersion": "0.4.51",
       "installedLicense": "MIT AND Apache-2.0",
       "noticeFiles": [
         {
@@ -2382,7 +2382,7 @@
     {
       "name": "@expo/config-plugins",
       "lockPath": "node_modules/@expo/config-plugins",
-      "version": "57.0.10",
+      "version": "57.0.11",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -2390,7 +2390,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "@expo/config-plugins",
-      "installedVersion": "57.0.10",
+      "installedVersion": "57.0.11",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -2748,6 +2748,144 @@
       ]
     },
     {
+      "name": "@expo/metro-config",
+      "lockPath": "node_modules/@expo/metro-config",
+      "version": "57.0.13",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@expo/metro-config",
+      "installedVersion": "57.0.13",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/LICENSE",
+          "status": "text",
+          "bytes": 1107,
+          "sha256": "16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4",
+          "documentId": "text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4"
+        }
+      ]
+    },
+    {
+      "name": "@expo/env",
+      "lockPath": "node_modules/@expo/metro-config/node_modules/@expo/env",
+      "version": "2.4.3",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@expo/env",
+      "installedVersion": "2.4.3",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/node_modules/@expo/env/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a",
+          "documentId": "text-9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a"
+        }
+      ]
+    },
+    {
+      "name": "@expo/json-file",
+      "lockPath": "node_modules/@expo/metro-config/node_modules/@expo/json-file",
+      "version": "11.0.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@expo/json-file",
+      "installedVersion": "11.0.1",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/node_modules/@expo/json-file/LICENSE",
+          "status": "text",
+          "bytes": 1107,
+          "sha256": "16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4",
+          "documentId": "text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4"
+        }
+      ]
+    },
+    {
+      "name": "hermes-estree",
+      "lockPath": "node_modules/@expo/metro-config/node_modules/hermes-estree",
+      "version": "0.36.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "hermes-estree",
+      "installedVersion": "0.36.1",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/node_modules/hermes-estree/LICENSE",
+          "status": "text",
+          "bytes": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+          "documentId": "text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "hermes-parser",
+      "lockPath": "node_modules/@expo/metro-config/node_modules/hermes-parser",
+      "version": "0.36.1",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "hermes-parser",
+      "installedVersion": "0.36.1",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/node_modules/hermes-parser/LICENSE",
+          "status": "text",
+          "bytes": 1088,
+          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+          "documentId": "text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+        }
+      ]
+    },
+    {
+      "name": "picomatch",
+      "lockPath": "node_modules/@expo/metro-config/node_modules/picomatch",
+      "version": "4.0.7",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "picomatch",
+      "installedVersion": "4.0.7",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-config/node_modules/picomatch/LICENSE",
+          "status": "text",
+          "bytes": 1091,
+          "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9",
+          "documentId": "text-d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+        }
+      ]
+    },
+    {
       "name": "@expo/metro-file-map",
       "lockPath": "node_modules/@expo/metro-file-map",
       "version": "57.0.4",
@@ -2763,6 +2901,29 @@
       "noticeFiles": [
         {
           "path": "node_modules/@expo/metro-file-map/LICENSE",
+          "status": "text",
+          "bytes": 1106,
+          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
+          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
+        }
+      ]
+    },
+    {
+      "name": "@expo/metro-runtime",
+      "lockPath": "node_modules/@expo/metro-runtime",
+      "version": "57.0.17",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@expo/metro-runtime",
+      "installedVersion": "57.0.17",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/metro-runtime/LICENSE",
           "status": "text",
           "bytes": 1106,
           "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
@@ -2974,6 +3135,29 @@
           "bytes": 1084,
           "sha256": "1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0",
           "documentId": "text-1c0d7e365e7c3dcfc1c30b6913d8a61a2741a4702b7ae727093c5610b47dbfa0"
+        }
+      ]
+    },
+    {
+      "name": "@expo/ui",
+      "lockPath": "node_modules/@expo/ui",
+      "version": "57.0.26",
+      "rootDirectDependency": false,
+      "optional": false,
+      "os": null,
+      "cpu": null,
+      "lockLicense": "MIT",
+      "installStatus": "version-matched",
+      "installedName": "@expo/ui",
+      "installedVersion": "57.0.26",
+      "installedLicense": "MIT",
+      "noticeFiles": [
+        {
+          "path": "node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE",
+          "status": "text",
+          "bytes": 1080,
+          "sha256": "22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb",
+          "documentId": "text-22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb"
         }
       ]
     },
@@ -7895,7 +8079,7 @@
     {
       "name": "expo",
       "lockPath": "node_modules/expo",
-      "version": "57.0.30",
+      "version": "57.0.31",
       "rootDirectDependency": true,
       "optional": false,
       "os": null,
@@ -7903,7 +8087,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "expo",
-      "installedVersion": "57.0.30",
+      "installedVersion": "57.0.31",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8217,7 +8401,7 @@
     {
       "name": "expo-modules-core",
       "lockPath": "node_modules/expo-modules-core",
-      "version": "57.0.23",
+      "version": "57.0.24",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -8225,7 +8409,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "expo-modules-core",
-      "installedVersion": "57.0.23",
+      "installedVersion": "57.0.24",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8240,7 +8424,7 @@
     {
       "name": "expo-modules-jsi",
       "lockPath": "node_modules/expo-modules-jsi",
-      "version": "57.1.2",
+      "version": "57.1.3",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -8248,7 +8432,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "expo-modules-jsi",
-      "installedVersion": "57.1.2",
+      "installedVersion": "57.1.3",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8286,7 +8470,7 @@
     {
       "name": "expo-router",
       "lockPath": "node_modules/expo-router",
-      "version": "57.0.28",
+      "version": "57.0.29",
       "rootDirectDependency": true,
       "optional": false,
       "os": null,
@@ -8294,7 +8478,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "expo-router",
-      "installedVersion": "57.0.28",
+      "installedVersion": "57.0.29",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8303,52 +8487,6 @@
           "bytes": 11356,
           "sha256": "c358ea82eed53098b2ee0913e1de8243c69d45862e11c48614db47fd5889d947",
           "documentId": "text-c358ea82eed53098b2ee0913e1de8243c69d45862e11c48614db47fd5889d947"
-        }
-      ]
-    },
-    {
-      "name": "@expo/metro-runtime",
-      "lockPath": "node_modules/expo-router/node_modules/@expo/metro-runtime",
-      "version": "57.0.17",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "@expo/metro-runtime",
-      "installedVersion": "57.0.17",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE",
-          "status": "text",
-          "bytes": 1106,
-          "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
-          "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
-        }
-      ]
-    },
-    {
-      "name": "@expo/ui",
-      "lockPath": "node_modules/expo-router/node_modules/@expo/ui",
-      "version": "57.0.25",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "@expo/ui",
-      "installedVersion": "57.0.25",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo-router/node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE",
-          "status": "text",
-          "bytes": 1080,
-          "sha256": "22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb",
-          "documentId": "text-22a28f29cff8f5ecf9f463301d9c03b8245a2952ebae0bcab633fd654c0792fb"
         }
       ]
     },
@@ -8516,7 +8654,7 @@
     {
       "name": "expo-sharing",
       "lockPath": "node_modules/expo-sharing",
-      "version": "57.0.23",
+      "version": "57.0.24",
       "rootDirectDependency": true,
       "optional": false,
       "os": null,
@@ -8524,7 +8662,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "expo-sharing",
-      "installedVersion": "57.0.23",
+      "installedVersion": "57.0.24",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8654,7 +8792,7 @@
     {
       "name": "@expo/cli",
       "lockPath": "node_modules/expo/node_modules/@expo/cli",
-      "version": "57.0.31",
+      "version": "57.0.32",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -8662,7 +8800,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "@expo/cli",
-      "installedVersion": "57.0.31",
+      "installedVersion": "57.0.32",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8677,7 +8815,7 @@
     {
       "name": "@expo/router-server",
       "lockPath": "node_modules/expo/node_modules/@expo/cli/node_modules/@expo/router-server",
-      "version": "57.0.13",
+      "version": "57.0.14",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -8685,7 +8823,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "@expo/router-server",
-      "installedVersion": "57.0.13",
+      "installedVersion": "57.0.14",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -8717,52 +8855,6 @@
           "bytes": 1106,
           "sha256": "9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a",
           "documentId": "text-9d9cf7980a46628abcbcf88577ecaed2968b69f9123d6aaba6f9496ed3648c1a"
-        }
-      ]
-    },
-    {
-      "name": "@expo/json-file",
-      "lockPath": "node_modules/expo/node_modules/@expo/json-file",
-      "version": "11.0.1",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "@expo/json-file",
-      "installedVersion": "11.0.1",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo/node_modules/@expo/json-file/LICENSE",
-          "status": "text",
-          "bytes": 1107,
-          "sha256": "16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4",
-          "documentId": "text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4"
-        }
-      ]
-    },
-    {
-      "name": "@expo/metro-config",
-      "lockPath": "node_modules/expo/node_modules/@expo/metro-config",
-      "version": "57.0.13",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "@expo/metro-config",
-      "installedVersion": "57.0.13",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo/node_modules/@expo/metro-config/LICENSE",
-          "status": "text",
-          "bytes": 1107,
-          "sha256": "16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4",
-          "documentId": "text-16feb932ce2ba7bc7712657bb28afe409eaa4334f9f05d0e1b7a5f12bf6132f4"
         }
       ]
     },
@@ -8855,52 +8947,6 @@
           "bytes": 1106,
           "sha256": "fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4",
           "documentId": "text-fb3ca4a837f5779e83cef89b78253a8949cfb9429c340309f62d0465ec6610b4"
-        }
-      ]
-    },
-    {
-      "name": "hermes-estree",
-      "lockPath": "node_modules/expo/node_modules/hermes-estree",
-      "version": "0.36.1",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "hermes-estree",
-      "installedVersion": "0.36.1",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo/node_modules/hermes-estree/LICENSE",
-          "status": "text",
-          "bytes": 1088,
-          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
-          "documentId": "text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
-        }
-      ]
-    },
-    {
-      "name": "hermes-parser",
-      "lockPath": "node_modules/expo/node_modules/hermes-parser",
-      "version": "0.36.1",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "hermes-parser",
-      "installedVersion": "0.36.1",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/expo/node_modules/hermes-parser/LICENSE",
-          "status": "text",
-          "bytes": 1088,
-          "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
-          "documentId": "text-da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
         }
       ]
     },
@@ -12090,19 +12136,11 @@
         "x64"
       ],
       "lockLicense": "MPL-2.0",
-      "installStatus": "version-matched",
-      "installedName": "lightningcss-linux-x64-musl",
-      "installedVersion": "1.33.0",
-      "installedLicense": "MPL-2.0",
-      "noticeFiles": [
-        {
-          "path": "node_modules/lightningcss-linux-x64-musl/LICENSE",
-          "status": "text",
-          "bytes": 15648,
-          "sha256": "5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e",
-          "documentId": "text-5eba353fe5076ac3432177f8ab1cf75e3afcd0584251e37c3bfead5f447d040e"
-        }
-      ]
+      "installStatus": "not-installed",
+      "installedName": null,
+      "installedVersion": null,
+      "installedLicense": null,
+      "noticeFiles": []
     },
     {
       "name": "lightningcss-win32-arm64-msvc",
@@ -14133,7 +14171,7 @@
     {
       "name": "postcss",
       "lockPath": "node_modules/postcss",
-      "version": "8.5.30",
+      "version": "8.5.31",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -14141,7 +14179,7 @@
       "lockLicense": "MIT",
       "installStatus": "version-matched",
       "installedName": "postcss",
-      "installedVersion": "8.5.30",
+      "installedVersion": "8.5.31",
       "installedLicense": "MIT",
       "noticeFiles": [
         {
@@ -17057,29 +17095,6 @@
       ]
     },
     {
-      "name": "uuid",
-      "lockPath": "node_modules/uuid",
-      "version": "7.0.3",
-      "rootDirectDependency": false,
-      "optional": false,
-      "os": null,
-      "cpu": null,
-      "lockLicense": "MIT",
-      "installStatus": "version-matched",
-      "installedName": "uuid",
-      "installedVersion": "7.0.3",
-      "installedLicense": "MIT",
-      "noticeFiles": [
-        {
-          "path": "node_modules/uuid/LICENSE.md",
-          "status": "text",
-          "bytes": 1109,
-          "sha256": "3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39",
-          "documentId": "text-3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39"
-        }
-      ]
-    },
-    {
       "name": "v8-to-istanbul",
       "lockPath": "node_modules/v8-to-istanbul",
       "version": "9.3.0",
@@ -17565,7 +17580,7 @@
     {
       "name": "xcode",
       "lockPath": "node_modules/xcode",
-      "version": "3.0.1",
+      "version": "4.0.0",
       "rootDirectDependency": false,
       "optional": false,
       "os": null,
@@ -17573,7 +17588,7 @@
       "lockLicense": "Apache-2.0",
       "installStatus": "version-matched",
       "installedName": "xcode",
-      "installedVersion": "3.0.1",
+      "installedVersion": "4.0.0",
       "installedLicense": "Apache-2.0",
       "noticeFiles": [
         {
@@ -19077,10 +19092,10 @@
         "node_modules/@expo/fingerprint/LICENSE",
         "node_modules/@expo/json-file/LICENSE",
         "node_modules/@expo/local-build-cache-provider/LICENSE",
+        "node_modules/@expo/metro-config/LICENSE",
+        "node_modules/@expo/metro-config/node_modules/@expo/json-file/LICENSE",
         "node_modules/@expo/package-manager/LICENSE",
-        "node_modules/@expo/prebuild-config/LICENSE",
-        "node_modules/expo/node_modules/@expo/json-file/LICENSE",
-        "node_modules/expo/node_modules/@expo/metro-config/LICENSE"
+        "node_modules/@expo/prebuild-config/LICENSE"
       ]
     },
     {
@@ -19216,8 +19231,8 @@
       "bytes": 1080,
       "text": "MIT License\n\nCopyright (c) 2015-present, Facebook, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
       "sources": [
-        "node_modules/@react-native-masked-view/masked-view/LICENSE",
-        "node_modules/expo-router/node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE"
+        "node_modules/@expo/ui/src/community/segmented-control/vendor/LICENSE",
+        "node_modules/@react-native-masked-view/masked-view/LICENSE"
       ]
     },
     {
@@ -19526,15 +19541,6 @@
       "text": "The MIT License (MIT)\n\nCopyright (c) 2011 Einar Otto Stangvik <einaros@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
       "sources": [
         "node_modules/ws/LICENSE"
-      ]
-    },
-    {
-      "id": "text-3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39",
-      "sha256": "3df5f9a382da026c813ce3fc95c6c07815eb3ba39f009f482df64eb6af1a3b39",
-      "bytes": 1109,
-      "text": "The MIT License (MIT)\n\nCopyright (c) 2010-2016 Robert Kieffer and other contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
-      "sources": [
-        "node_modules/uuid/LICENSE.md"
       ]
     },
     {
@@ -20028,7 +20034,6 @@
       "text": " Mozilla Public License Version 2.0\n==================================\n\n1. Definitions\n--------------\n\n1.1. \"Contributor\"\nmeans each individual or legal entity that creates, contributes to\nthe creation of, or owns Covered Software.\n\n1.2. \"Contributor Version\"\nmeans the combination of the Contributions of others (if any) used\nby a Contributor and that particular Contributor's Contribution.\n\n1.3. \"Contribution\"\nmeans Covered Software of a particular Contributor.\n\n1.4. \"Covered Software\"\nmeans Source Code Form to which the initial Contributor has attached\nthe notice in Exhibit A, the Executable Form of such Source Code\nForm, and Modifications of such Source Code Form, in each case\nincluding portions thereof.\n\n1.5. \"Incompatible With Secondary Licenses\"\nmeans\n\n(a) that the initial Contributor has attached the notice described\nin Exhibit B to the Covered Software; or\n\n(b) that the Covered Software was made available under the terms of\nversion 1.1 or earlier of the License, but not also under the\nterms of a Secondary License.\n\n1.6. \"Executable Form\"\nmeans any form of the work other than Source Code Form.\n\n1.7. \"Larger Work\"\nmeans a work that combines Covered Software with other material, in\na separate file or files, that is not Covered Software.\n\n1.8. \"License\"\nmeans this document.\n\n1.9. \"Licensable\"\nmeans having the right to grant, to the maximum extent possible,\nwhether at the time of the initial grant or subsequently, any and\nall of the rights conveyed by this License.\n\n1.10. \"Modifications\"\nmeans any of the following:\n\n(a) any file in Source Code Form that results from an addition to,\ndeletion from, or modification of the contents of Covered\nSoftware; or\n\n(b) any new file in Source Code Form that contains any Covered\nSoftware.\n\n1.11. \"Patent Claims\" of a Contributor\nmeans any patent claim(s), including without limitation, method,\nprocess, and apparatus claims, in any patent Licensable by such\nContributor that would be infringed, but for the grant of the\nLicense, by the making, using, selling, offering for sale, having\nmade, import, or transfer of either its Contributions or its\nContributor Version.\n\n1.12. \"Secondary License\"\nmeans either the GNU General Public License, Version 2.0, the GNU\nLesser General Public License, Version 2.1, the GNU Affero General\nPublic License, Version 3.0, or any later versions of those\nlicenses.\n\n1.13. \"Source Code Form\"\nmeans the form of the work preferred for making modifications.\n\n1.14. \"You\" (or \"Your\")\nmeans an individual or a legal entity exercising rights under this\nLicense. For legal entities, \"You\" includes any entity that\ncontrols, is controlled by, or is under common control with You. For\npurposes of this definition, \"control\" means (a) the power, direct\nor indirect, to cause the direction or management of such entity,\nwhether by contract or otherwise, or (b) ownership of more than\nfifty percent (50%) of the outstanding shares or beneficial\nownership of such entity.\n\n2. License Grants and Conditions\n--------------------------------\n\n2.1. Grants\n\nEach Contributor hereby grants You a world-wide, royalty-free,\nnon-exclusive license:\n\n(a) under intellectual property rights (other than patent or trademark)\nLicensable by such Contributor to use, reproduce, make available,\nmodify, display, perform, distribute, and otherwise exploit its\nContributions, either on an unmodified basis, with Modifications, or\nas part of a Larger Work; and\n\n(b) under Patent Claims of such Contributor to make, use, sell, offer\nfor sale, have made, import, and otherwise transfer either its\nContributions or its Contributor Version.\n\n2.2. Effective Date\n\nThe licenses granted in Section 2.1 with respect to any Contribution\nbecome effective for each Contribution on the date the Contributor first\ndistributes such Contribution.\n\n2.3. Limitations on Grant Scope\n\nThe licenses granted in this Section 2 are the only rights granted under\nthis License. No additional rights or licenses will be implied from the\ndistribution or licensing of Covered Software under this License.\nNotwithstanding Section 2.1(b) above, no patent license is granted by a\nContributor:\n\n(a) for any code that a Contributor has removed from Covered Software;\nor\n\n(b) for infringements caused by: (i) Your and any other third party's\nmodifications of Covered Software, or (ii) the combination of its\nContributions with other software (except as part of its Contributor\nVersion); or\n\n(c) under Patent Claims infringed by Covered Software in the absence of\nits Contributions.\n\nThis License does not grant any rights in the trademarks, service marks,\nor logos of any Contributor (except as may be necessary to comply with\nthe notice requirements in Section 3.4).\n\n2.4. Subsequent Licenses\n\nNo Contributor makes additional grants as a result of Your choice to\ndistribute the Covered Software under a subsequent version of this\nLicense (see Section 10.2) or under the terms of a Secondary License (if\npermitted under the terms of Section 3.3).\n\n2.5. Representation\n\nEach Contributor represents that the Contributor believes its\nContributions are its original creation(s) or it has sufficient rights\nto grant the rights to its Contributions conveyed by this License.\n\n2.6. Fair Use\n\nThis License is not intended to limit any rights You have under\napplicable copyright doctrines of fair use, fair dealing, or other\nequivalents.\n\n2.7. Conditions\n\nSections 3.1, 3.2, 3.3, and 3.4 are conditions of the licenses granted\nin Section 2.1.\n\n3. Responsibilities\n-------------------\n\n3.1. Distribution of Source Form\n\nAll distribution of Covered Software in Source Code Form, including any\nModifications that You create or to which You contribute, must be under\nthe terms of this License. You must inform recipients that the Source\nCode Form of the Covered Software is governed by the terms of this\nLicense, and how they can obtain a copy of this License. You may not\nattempt to alter or restrict the recipients' rights in the Source Code\nForm.\n\n3.2. Distribution of Executable Form\n\nIf You distribute Covered Software in Executable Form then:\n\n(a) such Covered Software must also be made available in Source Code\nForm, as described in Section 3.1, and You must inform recipients of\nthe Executable Form how they can obtain a copy of such Source Code\nForm by reasonable means in a timely manner, at a charge no more\nthan the cost of distribution to the recipient; and\n\n(b) You may distribute such Executable Form under the terms of this\nLicense, or sublicense it under different terms, provided that the\nlicense for the Executable Form does not attempt to limit or alter\nthe recipients' rights in the Source Code Form under this License.\n\n3.3. Distribution of a Larger Work\n\nYou may create and distribute a Larger Work under terms of Your choice,\nprovided that You also comply with the requirements of this License for\nthe Covered Software. If the Larger Work is a combination of Covered\nSoftware with a work governed by one or more Secondary Licenses, and the\nCovered Software is not Incompatible With Secondary Licenses, this\nLicense permits You to additionally distribute such Covered Software\nunder the terms of such Secondary License(s), so that the recipient of\nthe Larger Work may, at their option, further distribute the Covered\nSoftware under the terms of either this License or such Secondary\nLicense(s).\n\n3.4. Notices\n\nYou may not remove or alter the substance of any license notices\n(including copyright notices, patent notices, disclaimers of warranty,\nor limitations of liability) contained within the Source Code Form of\nthe Covered Software, except that You may alter any license notices to\nthe extent required to remedy known factual inaccuracies.\n\n3.5. Application of Additional Terms\n\nYou may choose to offer, and to charge a fee for, warranty, support,\nindemnity or liability obligations to one or more recipients of Covered\nSoftware. However, You may do so only on Your own behalf, and not on\nbehalf of any Contributor. You must make it absolutely clear that any\nsuch warranty, support, indemnity, or liability obligation is offered by\nYou alone, and You hereby agree to indemnify every Contributor for any\nliability incurred by such Contributor as a result of warranty, support,\nindemnity or liability terms You offer. You may include additional\ndisclaimers of warranty and limitations of liability specific to any\njurisdiction.\n\n4. Inability to Comply Due to Statute or Regulation\n---------------------------------------------------\n\nIf it is impossible for You to comply with any of the terms of this\nLicense with respect to some or all of the Covered Software due to\nstatute, judicial order, or regulation then You must: (a) comply with\nthe terms of this License to the maximum extent possible; and (b)\ndescribe the limitations and the code they affect. Such description must\nbe placed in a text file included with all distributions of the Covered\nSoftware under this License. Except to the extent prohibited by statute\nor regulation, such description must be sufficiently detailed for a\nrecipient of ordinary skill to be able to understand it.\n\n5. Termination\n--------------\n\n5.1. The rights granted under this License will terminate automatically\nif You fail to comply with any of its terms. However, if You become\ncompliant, then the rights granted under this License from a particular\nContributor are reinstated (a) provisionally, unless and until such\nContributor explicitly and finally terminates Your grants, and (b) on an\nongoing basis, if such Contributor fails to notify You of the\nnon-compliance by some reasonable means prior to 60 days after You have\ncome back into compliance. Moreover, Your grants from a particular\nContributor are reinstated on an ongoing basis if such Contributor\nnotifies You of the non-compliance by some reasonable means, this is the\nfirst time You have received notice of non-compliance with this License\nfrom such Contributor, and You become compliant prior to 30 days after\nYour receipt of the notice.\n\n5.2. If You initiate litigation against any entity by asserting a patent\ninfringement claim (excluding declaratory judgment actions,\ncounter-claims, and cross-claims) alleging that a Contributor Version\ndirectly or indirectly infringes any patent, then the rights granted to\nYou by any and all Contributors for the Covered Software under Section\n2.1 of this License shall terminate.\n\n5.3. In the event of termination under Sections 5.1 or 5.2 above, all\nend user license agreements (excluding distributors and resellers) which\nhave been validly granted by You or Your distributors under this License\nprior to termination shall survive termination.\n\n************************************************************************\n* *\n* 6. Disclaimer of Warranty *\n* ------------------------- *\n* *\n* Covered Software is provided under this License on an \"as is\" *\n* basis, without warranty of any kind, either expressed, implied, or *\n* statutory, including, without limitation, warranties that the *\n* Covered Software is free of defects, merchantable, fit for a *\n* particular purpose or non-infringing. The entire risk as to the *\n* quality and performance of the Covered Software is with You. *\n* Should any Covered Software prove defective in any respect, You *\n* (not any Contributor) assume the cost of any necessary servicing, *\n* repair, or correction. This disclaimer of warranty constitutes an *\n* essential part of this License. No use of any Covered Software is *\n* authorized under this License except under this disclaimer. *\n* *\n************************************************************************\n\n************************************************************************\n* *\n* 7. Limitation of Liability *\n* -------------------------- *\n* *\n* Under no circumstances and under no legal theory, whether tort *\n* (including negligence), contract, or otherwise, shall any *\n* Contributor, or anyone who distributes Covered Software as *\n* permitted above, be liable to You for any direct, indirect, *\n* special, incidental, or consequential damages of any character *\n* including, without limitation, damages for lost profits, loss of *\n* goodwill, work stoppage, computer failure or malfunction, or any *\n* and all other commercial damages or losses, even if such party *\n* shall have been informed of the possibility of such damages. This *\n* limitation of liability shall not apply to liability for death or *\n* personal injury resulting from such party's negligence to the *\n* extent applicable law prohibits such limitation. Some *\n* jurisdictions do not allow the exclusion or limitation of *\n* incidental or consequential damages, so this exclusion and *\n* limitation may not apply to You. *\n* *\n************************************************************************\n\n8. Litigation\n-------------\n\nAny litigation relating to this License may be brought only in the\ncourts of a jurisdiction where the defendant maintains its principal\nplace of business and such litigation shall be governed by laws of that\njurisdiction, without reference to its conflict-of-law provisions.\nNothing in this Section shall prevent a party's ability to bring\ncross-claims or counter-claims.\n\n9. Miscellaneous\n----------------\n\nThis License represents the complete agreement concerning the subject\nmatter hereof. If any provision of this License is held to be\nunenforceable, such provision shall be reformed only to the extent\nnecessary to make it enforceable. Any law or regulation which provides\nthat the language of a contract shall be construed against the drafter\nshall not be used to construe this License against a Contributor.\n\n10. Versions of the License\n---------------------------\n\n10.1. New Versions\n\nMozilla Foundation is the license steward. Except as provided in Section\n10.3, no one other than the license steward has the right to modify or\npublish new versions of this License. Each version will be given a\ndistinguishing version number.\n\n10.2. Effect of New Versions\n\nYou may distribute the Covered Software under the terms of the version\nof the License under which You originally received the Covered Software,\nor under the terms of any subsequent version published by the license\nsteward.\n\n10.3. Modified Versions\n\nIf you create software not governed by this License, and you want to\ncreate a new license for such software, you may create and use a\nmodified version of this License if you rename the license and remove\nany references to the name of the license steward (except to note that\nsuch modified license differs from this License).\n\n10.4. Distributing Source Code Form that is Incompatible With Secondary\nLicenses\n\nIf You choose to distribute Source Code Form that is Incompatible With\nSecondary Licenses under the terms of this version of the License, the\nnotice described in Exhibit B of this License must be attached.\n\nExhibit A - Source Code Form License Notice\n-------------------------------------------\n\nThis Source Code Form is subject to the terms of the Mozilla Public\nLicense, v. 2.0. If a copy of the MPL was not distributed with this\nfile, You can obtain one at https://mozilla.org/MPL/2.0/.\n\nIf it is not possible or desirable to put the notice in a particular\nfile, then You may include the notice in a location (such as a LICENSE\nfile in a relevant directory) where a recipient would be likely to look\nfor such a notice.\n\nYou may add additional accurate notices of copyright ownership.\n\nExhibit B - \"Incompatible With Secondary Licenses\" Notice\n---------------------------------------------------------\n\nThis Source Code Form is \"Incompatible With Secondary Licenses\", as\ndefined by the Mozilla Public License, v. 2.0.\n",
       "sources": [
         "node_modules/lightningcss-linux-x64-gnu/LICENSE",
-        "node_modules/lightningcss-linux-x64-musl/LICENSE",
         "node_modules/lightningcss/LICENSE"
       ]
     },
@@ -20773,6 +20778,7 @@
       "text": "The MIT License (MIT)\n\nCopyright (c) 2023-present 650 Industries, Inc. (aka Expo)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
       "sources": [
         "node_modules/@expo/env/LICENSE",
+        "node_modules/@expo/metro-config/node_modules/@expo/env/LICENSE",
         "node_modules/expo-constants/node_modules/@expo/env/LICENSE",
         "node_modules/expo/node_modules/@expo/env/LICENSE"
       ]
@@ -21199,6 +21205,7 @@
       "bytes": 1091,
       "text": "The MIT License (MIT)\n\nCopyright (c) 2017-present, Jon Schlinkert.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
       "sources": [
+        "node_modules/@expo/metro-config/node_modules/picomatch/LICENSE",
         "node_modules/expo/node_modules/picomatch/LICENSE",
         "node_modules/picomatch/LICENSE",
         "node_modules/tinyglobby/node_modules/picomatch/LICENSE"
@@ -21255,6 +21262,8 @@
       "bytes": 1088,
       "text": "MIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
       "sources": [
+        "node_modules/@expo/metro-config/node_modules/hermes-estree/LICENSE",
+        "node_modules/@expo/metro-config/node_modules/hermes-parser/LICENSE",
         "node_modules/@jest/console/LICENSE",
         "node_modules/@jest/core/LICENSE",
         "node_modules/@jest/create-cache-key-function/LICENSE",
@@ -21287,8 +21296,6 @@
         "node_modules/expect/node_modules/jest-diff/LICENSE",
         "node_modules/expect/node_modules/jest-matcher-utils/LICENSE",
         "node_modules/expo-router/node_modules/react-is/LICENSE",
-        "node_modules/expo/node_modules/hermes-estree/LICENSE",
-        "node_modules/expo/node_modules/hermes-parser/LICENSE",
         "node_modules/hermes-estree/LICENSE",
         "node_modules/hermes-parser/LICENSE",
         "node_modules/jest-changed-files/LICENSE",
@@ -21701,6 +21708,7 @@
         "node_modules/@expo/inline-modules/LICENSE",
         "node_modules/@expo/log-box/LICENSE",
         "node_modules/@expo/metro-file-map/LICENSE",
+        "node_modules/@expo/metro-runtime/LICENSE",
         "node_modules/@expo/osascript/LICENSE",
         "node_modules/@expo/plist/LICENSE",
         "node_modules/babel-preset-expo/LICENSE",
@@ -21719,7 +21727,6 @@
         "node_modules/expo-modules-core/LICENSE",
         "node_modules/expo-modules-jsi/LICENSE",
         "node_modules/expo-notifications/LICENSE",
-        "node_modules/expo-router/node_modules/@expo/metro-runtime/LICENSE",
         "node_modules/expo-server/LICENSE",
         "node_modules/expo-sharing/LICENSE",
         "node_modules/expo-splash-screen/LICENSE",

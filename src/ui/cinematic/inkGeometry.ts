@@ -45,6 +45,34 @@ export const streams: Point[][] = controlPoints.map((points, strand) => Array.fr
   return { x, y, nx: -dy / length, ny: dx / length, width: (strand ? 55 : 79) * (1 + 0.36 * Math.sin(i * 0.21) + 0.15 * Math.sin(i * 0.73)) };
 }));
 
+// Worklet closures capture their dependencies during module initialization.
+// Declare leaf worklets before the worklets that call them.
+// Curl-field advection folds both sides of the wet contour around local eddies.
+// The radius falls off smoothly so the pours stretch into fine, connected wisps.
+function curl(x: number, y: number, time: number, strand: number) {
+  'worklet';
+  const vortices = strand ? [[170, 340, 165, -2.1], [270, 590, 155, 2.5]] : [[145, 585, 175, 2.4], [240, 320, 165, -2.6]];
+  for (const [cx, cy, radius, spin] of vortices) {
+    const dx = x - cx, dy = y - cy;
+    const angle = spin * Math.exp(-(dx * dx + dy * dy) / (radius * radius)) * (0.8 + time * 0.14);
+    const cos = Math.cos(angle), sin = Math.sin(angle);
+    x = cx + dx * cos - dy * sin;
+    y = cy + dx * sin + dy * cos;
+  }
+  return [x, y];
+}
+
+function roundedContour(points: number[][]) {
+  'worklet';
+  const last = points[points.length - 1], first = points[0];
+  let path = `M${((last[0] + first[0]) / 2).toFixed(2)} ${((last[1] + first[1]) / 2).toFixed(2)} `;
+  for (let i = 0; i < points.length; i++) {
+    const p = points[i], next = points[(i + 1) % points.length];
+    path += `Q${p[0].toFixed(2)} ${p[1].toFixed(2)} ${((p[0] + next[0]) / 2).toFixed(2)} ${((p[1] + next[1]) / 2).toFixed(2)} `;
+  }
+  return path + 'Z';
+}
+
 /** Advected ribbons, tapered at the wet tip. Multiple narrow offset ribbons
  * form veins inside each pour; the contour keeps folding as the ink advances.
  */
@@ -70,30 +98,4 @@ export function coverageAt(kind: CinematicKind, milliseconds: number) {
   if (kind === 'welcome') return 1 - smooth(2100, 2600, milliseconds);
   const cover = COVER_TIME[kind], reveal = kind === 'birth' ? 820 : 1120;
   return smooth(0, cover - 50, milliseconds) * (1 - smooth(reveal, DURATION[kind], milliseconds));
-}
-
-// Curl-field advection folds both sides of the wet contour around local eddies.
-// The radius falls off smoothly so the pours stretch into fine, connected wisps.
-function curl(x: number, y: number, time: number, strand: number) {
-  'worklet';
-  const vortices = strand ? [[170, 340, 165, -2.1], [270, 590, 155, 2.5]] : [[145, 585, 175, 2.4], [240, 320, 165, -2.6]];
-  for (const [cx, cy, radius, spin] of vortices) {
-    const dx = x - cx, dy = y - cy;
-    const angle = spin * Math.exp(-(dx * dx + dy * dy) / (radius * radius)) * (0.8 + time * 0.14);
-    const cos = Math.cos(angle), sin = Math.sin(angle);
-    x = cx + dx * cos - dy * sin;
-    y = cy + dx * sin + dy * cos;
-  }
-  return [x, y];
-}
-
-function roundedContour(points: number[][]) {
-  'worklet';
-  const last = points[points.length - 1], first = points[0];
-  let path = `M${((last[0] + first[0]) / 2).toFixed(2)} ${((last[1] + first[1]) / 2).toFixed(2)} `;
-  for (let i = 0; i < points.length; i++) {
-    const p = points[i], next = points[(i + 1) % points.length];
-    path += `Q${p[0].toFixed(2)} ${p[1].toFixed(2)} ${((p[0] + next[0]) / 2).toFixed(2)} ${((p[1] + next[1]) / 2).toFixed(2)} `;
-  }
-  return path + 'Z';
 }
