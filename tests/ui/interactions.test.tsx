@@ -20,6 +20,15 @@ test('a busy action cannot be submitted again', () => {
   expect(screen.getByRole('button', { name: 'Buy property' })).toBeDisabled();
 });
 
+test('a local action invokes its callback without entering and resetting save tracking', () => {
+  const press = jest.fn(), commits = jest.fn();
+  frame(<React.Profiler id="local-action" onRender={commits}><Button label="Show All Jobs" onPress={press} /></React.Profiler>);
+  expect(commits).toHaveBeenCalled(); commits.mockClear();
+  fireEvent.press(screen.getByRole('button', { name: 'Show All Jobs' }));
+  expect(press).toHaveBeenCalledTimes(1); expect(commits).not.toHaveBeenCalled();
+  expect(screen.getByRole('button', { name: 'Show All Jobs' })).toBeEnabled(); expect(screen.queryByLabelText('Saving')).toBeNull();
+});
+
 test('only the submitted button shows progress while other controls keep their useful text', () => {
   jest.useFakeTimers();
   let finish!: () => void;

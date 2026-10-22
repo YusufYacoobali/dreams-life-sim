@@ -45,7 +45,7 @@ export function Card({ children, style }: React.PropsWithChildren<{ style?: Styl
 }
 
 export function Button({
-  label, onPress, tone = 'primary', disabled = false, busy = false, accessibilityLabel,
+  label, onPress, tone = 'primary', disabled = false, busy, accessibilityLabel,
   accessibilityRole = 'button', accessibilityState,
 }: {
   label: string; onPress: () => void; tone?: 'primary' | 'secondary' | 'positive' | 'danger';
@@ -57,15 +57,16 @@ export function Button({
   const background = tone === 'secondary' ? c.inset : tone === 'positive' ? c.actionGreen : tone === 'danger' ? c.actionRed : c.actionBlue;
   const pressedBackground = tone === 'secondary' ? c.selected : tone === 'positive' ? c.actionGreenPressed : tone === 'danger' ? c.actionRedPressed : c.actionBluePressed;
   const color = tone === 'secondary' ? c.ink : '#FFFFFF';
+  // A supplied false tracks a later save; local controls omit busy entirely.
   const [submitted, setSubmitted] = useState(false);
   useEffect(() => { if (!busy) setSubmitted(false); }, [busy, submitted]);
-  const saving = busy && submitted;
+  const saving = !!busy && submitted;
   const showProgress = useDelayedBusy(saving);
   return (
     <Pressable
       accessibilityRole={accessibilityRole} accessibilityLabel={accessibilityLabel ?? label}
-      accessibilityState={{ ...accessibilityState, disabled: disabled || busy, busy: saving }}
-      disabled={disabled || busy} onPress={() => { setSubmitted(true); onPress(); buttonFeedback(); }}
+      accessibilityState={{ ...accessibilityState, disabled: disabled || !!busy, busy: saving }}
+      disabled={disabled || busy} onPress={() => { if (busy !== undefined) setSubmitted(true); onPress(); buttonFeedback(); }}
       style={({ pressed }) => [styles.button, { backgroundColor: pressed ? pressedBackground : background, opacity: disabled || busy ? 0.5 : 1 }]}
     >
       {showProgress && <ActivityIndicator color={color} accessibilityLabel="Saving" style={{ flexShrink: 0 }} />}
