@@ -21,8 +21,3 @@ export function fitPortraitHair(wig: number, identity: number, stage: number, fa
   return { left:target[0]-160*scaleX, top:target[2]-reference[2]*scaleY,
     width:320*scaleX, height:320*scaleY };
 }
-
-export function longHairFaceBounds(identity: number, stage: number, face: number) {
-  const head = headFits[identity][stage][face];
-  return { left:head[3], right:head[4] };
-}

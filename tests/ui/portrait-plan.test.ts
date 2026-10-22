@@ -3,8 +3,16 @@ import { portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
 import { ageingHairColor, hairColors, portraitAgeStage } from '../../src/assets/portraitLayout';
 import { avatarPresets } from '../../src/ui/CreationElements';
 import { fitPortraitHair } from '../../src/assets/portraitFitting';
+import approvedMen from '../../tools/fixtures/avatar-v2-approved-men.json';
 
 const ages = [0, 7, 16, 25, 48, 68, 86, 100];
+
+test('the eight approved men keep their existing portrait geometry', () => {
+  for (const [identity,layers] of Object.entries(approvedMen.plans)) {
+    // JSON fixtures normalise -0; native positions treat both zeros identically.
+    expect(JSON.stringify(portraitLayers(portraitTraits(avatarPresets[Number(identity)],25)))).toBe(JSON.stringify(layers));
+  }
+});
 
 test('all 1,966,080 identity/customisation/outfit/age combinations have complete bounded offline layers', () => {
   const failures: string[] = [];
@@ -82,9 +90,9 @@ test('continuous long hair sits in front of the face, ears and clothes, without 
   expect(layers.every(layer => !('color' in layer))).toBe(true);
   const head = layers.find(layer => layer.asset.startsWith('head-'))!;
   const shortHead = portraitLayers(portraitTraits({ ...avatarPresets[1],hair:1 },68)).find(layer => layer.asset.startsWith('head-'))!;
-  expect(head.width).toBeLessThan(shortHead.width);
-  expect(head.crop?.height).toBe(shortHead.crop?.height);
-  expect(head.crop?.width).toBe(shortHead.crop?.width);
+  // Hair openings reveal the complete underlying head; opaque locks cover
+  // the ears. Cropping the temples leaves transparent holes and cut cheeks.
+  expect(head).toEqual(shortHead);
 });
 
 test('hair is fitted to each measured face, contour and age rather than using one fixed-size wig', () => {

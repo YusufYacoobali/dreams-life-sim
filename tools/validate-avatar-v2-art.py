@@ -31,6 +31,14 @@ for outfit in [2,7,9]:
     alpha = np.array(Image.open(OUT/f'clothing-{outfit}.png'))[:,:,3]
     # An open neckline through the neck attachment; no rear collar can cross it.
     assert not np.any(alpha[210:245,158:162] > 16), outfit
+for outfit in [3,5,14]:
+    alpha = np.array(Image.open(OUT/f'clothing-{outfit}.png'))[:,:,3]
+    # These crewnecks used to have a raised rear band across the base of the
+    # neck. Only the lower, concave front neckline belongs in this overlay.
+    assert not np.any(alpha[219:258,158:162] > 16), outfit
+approved_men = json.loads((ROOT/'tools/fixtures/avatar-v2-approved-men.json').read_text())
+for key, expected in approved_men['hairHashes'].items():
+    assert layers[key]['sha256'] == expected, (key,'approved male hair changed')
 for identity in range(16):
     for skin in range(6):
         for stage in range(8):
@@ -78,7 +86,9 @@ result = {'assetCount':len(checks),'independentlyIllustratedIdentityAgeHeads':12
           'allHashesMatch':True,'allSixSkinTonesOrderedForEveryIdentityAndAge':True,'transparentPixelsHaveZeroRGB':True,'headAtlasDecodedBytes':1088*248*4,
           'runtimeNetworkRequired':False,'runtimeTintOrColourFilters':False,'nativeDeviceRenderingTested':False}
 result.update({'continuousForegroundHairstyles':23,'hairColourLayers':138,
-               'rearHairTextures':0,'frontOnlyCollarNecklinesVerified':[2,7,9]})
+               'rearHairTextures':0,'frontOnlyCollarNecklinesVerified':[2,7,9],
+               'frontOnlyCrewneckNecklinesVerified':[3,5,14],
+               'approvedMaleHairLayersUnchanged':len(approved_men['hairHashes'])})
 directory = ROOT/'docs/verification/avatar-v2-implementation';directory.mkdir(parents=True,exist_ok=True)
 (directory/'art-checks.json').write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result,indent=2))

@@ -5,7 +5,7 @@
   "faceContoursPerAtlas": 4,
   "fullColourShoulderLayers": 96,
   "independentClothingLayers": 16,
-  "pngBytes": 111527034,
+  "pngBytes": 109999619,
   "sourceHeadDefaultsVerified": 128,
   "sourcePixelsPreservedBeforeConcealedNeckFade": true,
   "centralEyeAndNosePixelsIdenticalAcrossFaceShapeChoices": true,
@@ -25,5 +25,11 @@
     2,
     7,
     9
-  ]
+  ],
+  "frontOnlyCrewneckNecklinesVerified": [
+    3,
+    5,
+    14
+  ],
+  "approvedMaleHairLayersUnchanged": 48
 }

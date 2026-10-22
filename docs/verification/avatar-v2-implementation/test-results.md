@@ -1,5 +1,15 @@
 # Validation results
 
+Latest women's hair/crewneck pass is integrated on remote `work` base `e112b7c`, preserving the cinematic Skip-button removal and End This Life action. Eight individual women's hair illustrations replace four shared styles, and the head no longer has a rectangular temple crop. The cobalt crewneck, navy tee and dark teal tee use front-only replacement artwork. The only changed runtime PNGs are 66 women's/shared long-hair colour layers and these three garments; all head/shoulder artwork is unchanged. All 48 male hair colour assets retain their previous hashes; the eight men's adult layer geometry matches the committed `c9cfd28` fixture.
+
+- Final targeted run: **13 suites, 58 tests passed** in 63.057s. Covers avatar/onboarding controls, independent clothing and SQLite reload, stable identity, accessibility/memoization, all 1,966,080 appearance combinations, runtime architecture, cinematic assets/transitions and the upstream End This Life game/UI flows.
+- Application/test TypeScript projects pass; runtime import check passes with 397 modules and no cycles.
+- Art validator and exhaustive local-layer/crop audit pass. All 128 natural head sources retain their original pixels before the concealed neck fade.
+- Android and iOS offline Expo exports pass. Both platforms bundle all 1,018 PNG layers with matching hashes/dimensions and no obsolete portrait assets. These validate JavaScript/assets, not native builds.
+- The visual review has 33 captures, including every woman, ages, short styles/buns, colours, small sizes on both backgrounds and the three crewneck fronts. Browser checks report decoded images, unique SVG clips, no overflow/errors/HTTP image requests. These are browser component-tree previews; no native device was available.
+
+Previous framing polish results (historical):
+
 Current polish preserves the newer `e460be8` cinematic-playback update from remote `work` and builds on the `016cbbf` avatar overhaul. TypeScript and the final targeted run pass: **11 suites, 46 tests**, covering actual appearance controls, absent face-shape UI, independent clothing, SQLite reload, immutable facial identity, per-face/age hair fits, accessibility/memoization all onboarding journeys, runtime import architecture and the updated cinematic assets/transitions. The complete 1,966,080-combination local-layer/crop audit passes with a maximum of five image layers. The browser review includes 25 captures, a 184px clothing preview, all sixteen faces with each long-hair style and age comparisons. SVG clip IDs are namespaced per capture instance and their references are checked. Android/iOS exports audit all 1,018 current PNG layers. The final neckline fitting data was followed by another passing appearance integration run (5 tests) and refreshed captures/exports. Native device rendering remains untested.
 
 The earlier integration validation below is retained as historical coverage, not a claim that those broad suites were rerun for this polish.

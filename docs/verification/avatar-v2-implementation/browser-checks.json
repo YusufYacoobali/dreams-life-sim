@@ -33,7 +33,15 @@
     "22-shoulder-hair-face-fits.png",
     "23-long-curls-face-fits.png",
     "24-coily-hair-face-fits.png",
-    "25-long-hair-age-fits.png"
+    "25-long-hair-age-fits.png",
+    "26-women-hair-before-after.png",
+    "27-eight-women-hairstyles.png",
+    "28-women-age-fits.png",
+    "29-women-short-hair-and-buns.png",
+    "30-women-hair-colours.png",
+    "31-women-sizes-light.png",
+    "32-women-sizes-dark.png",
+    "33-front-only-crewnecks.png"
   ],
   "creationGrid": {
     "cells": 16,
@@ -44,8 +52,8 @@
       4
     ]
   },
-  "images": 709,
-  "svgImages": 229,
+  "images": 1151,
+  "svgImages": 373,
   "allDecoded": true,
   "uniqueSvgClipIds": true,
   "allSvgClipReferencesResolve": true,

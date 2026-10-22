@@ -26,7 +26,14 @@
     "hair-fit-4",
     "hair-fit-5",
     "hair-fit-7",
-    "long-hair-ages"
+    "long-hair-ages",
+    "women-defaults",
+    "women-ages",
+    "women-hair-options",
+    "women-colours",
+    "women-sizes-light",
+    "women-sizes-dark",
+    "crewnecks"
   ],
-  "uniqueAssets": 134
+  "uniqueAssets": 180
 }

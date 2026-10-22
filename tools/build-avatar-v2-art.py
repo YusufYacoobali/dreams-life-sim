@@ -38,9 +38,9 @@ hair_only = '--hair-only' in sys.argv or rig_only
 if hair_only:
     previous = json.loads((OUT/'manifest.json').read_text())
     entries = {k:v for k,v in previous['layers'].items() if not k.startswith('hair-')}
-    sources = [v for v in previous['sources'] if v['file'] not in ['identity-hair.png','hairstyles.png','clean-waves.png','extra-hairstyles.png','hair-fronts.png']]
+    sources = [v for v in previous['sources'] if v['file'] not in ['identity-hair.png','hairstyles.png','clean-waves.png','extra-hairstyles.png','hair-fronts.png','women-hair.png']]
     if rig_only:
-        sources = [v for v in sources if v['file'] not in ['outfits.png','outfits-front.png']]
+        sources = [v for v in sources if v['file'] not in ['outfits.png','outfits-front.png','crewneck-fronts.png']]
 
 
 def extract(file, count, columns=4, barrier=None):
@@ -220,30 +220,30 @@ if not hair_only or rig_only:
     fronts = extract('outfits-front.png',3,columns=3)
     for index, replacement in zip([2,7,9],fronts):
         outfits[index] = replacement
+    crewnecks = extract('crewneck-fronts.png',3,columns=3)
+    for index, replacement in zip([3,5,14],crewnecks):
+        outfits[index] = replacement
     for identity, outfit in enumerate(outfits):
         # Keep enough of the actual shirt/chest in the texture to show an outfit,
         # rather than baking only its collar into the bottom of a head crop.
         save(f'clothing-{identity}',register(outfit,width=304,top=210 if identity in [0,2,7,8,9,12] else 219))
 
 wigs = extract('identity-hair.png',16,barrier=(946,600,940))+extract('hairstyles.png',7)
-waves = extract('clean-waves.png',2,columns=2)
-wigs[10], wigs[11] = waves
-# Reuse the clean long-curl illustration for the generic choice too. Its open
-# cheek/chin silhouette fits all contours without covering the mouth corners.
-wigs[20] = waves[0]
 extra = extract('extra-hairstyles.png',2,columns=2)
 wigs[16], wigs[21] = extra
-foreground = extract('hair-fronts.png',4,columns=2)
-foreground_styles = {1:0,4:1,6:0,8:2,10:2,11:2,13:3,15:1,19:1,20:2,22:3}
-foreground_colors = [1,0,3,0]
-for wig, style in foreground_styles.items():
-    wigs[wig] = foreground[style]
+women = extract('women-hair.png',8)
+# Preserve each approved woman's silhouette instead of substituting four
+# highly textured wigs. The three shared long-hair choices reuse these layers.
+women_styles = {1:0,4:1,6:2,8:3,10:4,11:5,13:6,15:7,19:1,20:4,22:6}
+women_colors = [1,0,1,4,1,3,1,0]
+for wig, style in women_styles.items():
+    wigs[wig] = women[style]
 for wig, illustration in enumerate(wigs):
     registered = register(illustration,width=HAIR_WIDTH[wig],top=HAIR_TOP[wig])
     p = np.array(registered)
     reference = np.median(p[p[:,:,3]>230,:3],axis=0)
     for color in range(6):
-        natural_color = foreground_colors[foreground_styles[wig]] if wig in foreground_styles else DEFAULT_COLOR[wig] if wig < 16 else -1
+        natural_color = women_colors[women_styles[wig]] if wig in women_styles else DEFAULT_COLOR[wig] if wig < 16 else -1
         colored = registered if color == natural_color else grade(registered,reference,hex_rgb(HAIRS[color]),skin_grade=False)
         if wig in [1,4,6,8,10,11,13,15,19,20,22]:
             # Continuous foreground locks cover the ears, cheeks and clothing.

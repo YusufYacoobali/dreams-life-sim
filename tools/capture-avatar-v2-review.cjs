@@ -19,13 +19,15 @@ async function main(){
       ['ages','09-eight-age-stages.png'],['sizes-light','10-sizes-light.png'],['sizes-dark','11-sizes-dark.png'],
       ['screen-creation','12-creation-screen.png'],['screen-life','13-life-screen.png'],['screen-profile','14-player-profile.png'],
       ['screen-npc','15-npc-profile.png'],['screen-family-profile','16-family-profile.png'],['screen-family-tree','17-family-tree.png'],['skin-dark-base','18-skin-tones-dark-source.png'],['clothing','19-sixteen-clothing-choices.png'],['screen-clothing-screen','20-clothing-screen.png'],['polish-comparison','21-framing-before-after.png'],['hair-fit-4','22-shoulder-hair-face-fits.png'],['hair-fit-5','23-long-curls-face-fits.png'],['hair-fit-7','24-coily-hair-face-fits.png'],['long-hair-ages','25-long-hair-age-fits.png']];
+    captures.push(['women-comparison','26-women-hair-before-after.png'],['women-defaults','27-eight-women-hairstyles.png'],['women-ages','28-women-age-fits.png'],['women-hair-options','29-women-short-hair-and-buns.png'],['women-colours','30-women-hair-colours.png'],['women-sizes-light','31-women-sizes-light.png'],['women-sizes-dark','32-women-sizes-dark.png'],['crewnecks','33-front-only-crewnecks.png']);
     for(const[id,file]of captures){
       await page.locator('#'+id).screenshot({path:path.join(directory,file),animations:'disabled'});
-      if(file==='04-four-at-140px.png'){
+      if(file==='04-four-at-140px.png'||file==='03-sixteen-rendered-identities.png'){
         // Keep both sides of the framing comparison at the same screenshot
         // scale, and refresh its embedded "after" image in this capture run.
         const png=fs.readFileSync(path.join(directory,file)).toString('base64');
-        await page.locator('#polish-comparison img[alt^="Current portraits"]').evaluate((el,data)=>{el.src='data:image/png;base64,'+data;return el.decode();},png);
+        const target=file==='04-four-at-140px.png'?'#polish-comparison img[alt^="Current portraits"]':'#women-comparison img[alt^="Current assembled"]';
+        await page.locator(target).evaluate((el,data)=>{el.src='data:image/png;base64,'+data;return el.decode();},png);
         const htmlFile=path.join(directory,'index.html'),key='docs/verification/avatar-v2-implementation/'+file;
         const html=fs.readFileSync(htmlFile,'utf8'),marker=JSON.stringify(key)+':"',start=html.indexOf(marker)+marker.length,end=html.indexOf('"',start);
         if(start<marker.length||end<start)throw new Error('Missing current framing comparison asset');

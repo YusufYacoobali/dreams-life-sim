@@ -1091,6 +1091,31 @@
       ]
     },
     {
+      "file": "crewneck-fronts.png",
+      "sha256": "69d3205fbff957cc249c811e3b6f18253a9220774b9adc424ed2365d40a240df",
+      "sprites": 3,
+      "rects": [
+        [
+          21,
+          256,
+          695,
+          281
+        ],
+        [
+          739,
+          256,
+          695,
+          281
+        ],
+        [
+          1451,
+          257,
+          702,
+          280
+        ]
+      ]
+    },
+    {
       "file": "identity-hair.png",
       "sha256": "8fc06103accab78c4b40d6c113f427236cf0c824a4d4a9f0a6da7921747cbb1e",
       "sprites": 16,
@@ -1243,25 +1268,6 @@
       ]
     },
     {
-      "file": "clean-waves.png",
-      "sha256": "43483638195ab46bf489a53453c0ee8341f0dd37ba20b903ab272302ae8defd9",
-      "sprites": 2,
-      "rects": [
-        [
-          67,
-          39,
-          818,
-          745
-        ],
-        [
-          1038,
-          56,
-          802,
-          721
-        ]
-      ]
-    },
-    {
       "file": "extra-hairstyles.png",
       "sha256": "793995d149df9b024047936a80eb9f1a210cab7d173c6455efe5ee16421892c1",
       "sprites": 2,
@@ -1281,33 +1287,57 @@
       ]
     },
     {
-      "file": "hair-fronts.png",
-      "sha256": "e23a78278e7421ec316816a3b4a12743dedbfff1002f4ccbd3e1ebe95735f149",
-      "sprites": 4,
+      "file": "women-hair.png",
+      "sha256": "e6e3d4dc6b13f07b0aecb6715b7b2227f23b7b21a94b7417e662faf2cda62728",
+      "sprites": 8,
       "rects": [
         [
-          32,
-          28,
-          615,
-          550
+          9,
+          22,
+          449,
+          403
         ],
         [
-          643,
-          44,
-          594,
-          532
+          461,
+          34,
+          424,
+          374
         ],
         [
+          889,
+          27,
+          448,
+          398
+        ],
+        [
+          1336,
           17,
-          592,
-          616,
-          638
+          438,
+          441
         ],
         [
-          639,
-          622,
-          616,
-          577
+          4,
+          442,
+          445,
+          423
+        ],
+        [
+          451,
+          446,
+          430,
+          418
+        ],
+        [
+          888,
+          461,
+          449,
+          399
+        ],
+        [
+          1351,
+          468,
+          419,
+          372
         ]
       ]
     }
@@ -8420,8 +8450,8 @@
         320,
         320
       ],
-      "bytes": 34549,
-      "sha256": "fba6a6d39caa4dbe5c630fa1109731aaac510fd71b0de5b088ff6f9103f31484"
+      "bytes": 30945,
+      "sha256": "de1731be991a0533847029eabd53059c7ff610ccf310b792ee5013634a9f1873"
     },
     "body-3-0": {
       "file": "body-3-0.png",
@@ -8546,8 +8576,8 @@
         320,
         320
       ],
-      "bytes": 32824,
-      "sha256": "5aa4aee45e92980ba589f2a929bf5638b6ab9cf9e29c6a3dc8ba8af68f70f14c"
+      "bytes": 30141,
+      "sha256": "0f2ea3579f24b3cb02e6e9acdeda5e372d729c41163cebfe998bef6715950952"
     },
     "body-5-0": {
       "file": "body-5-0.png",
@@ -9113,8 +9143,8 @@
         320,
         320
       ],
-      "bytes": 33480,
-      "sha256": "155eb73227a1666c76960a0586cf7e8cf0b08e8151dc52262d1be6a456d16d64"
+      "bytes": 29898,
+      "sha256": "024625092d0a41364b77f211177df7e358f7567ed027ab90eae61c0ae7cd0b01"
     },
     "body-14-0": {
       "file": "body-14-0.png",
@@ -9293,8 +9323,8 @@
         320,
         320
       ],
-      "bytes": 78219,
-      "sha256": "22f36022a250ab0dc254d3706e23f1d6e939361c905f6ca0a64945df31f47e03"
+      "bytes": 65189,
+      "sha256": "b3f0432cbbb223ca0dc6dfb1bff50fc2f933f004722b031a364724ee50855093"
     },
     "hair-1-1-front": {
       "file": "hair-1-1-front.png",
@@ -9302,8 +9332,8 @@
         320,
         320
       ],
-      "bytes": 86138,
-      "sha256": "ebaf4739b2a88052b7c43b757d5dac14fede02805f23177f8f41a2b52258ef88"
+      "bytes": 72403,
+      "sha256": "d503c04f028dc9706f3273817f971f82672501bcf29710f24c4ee3e9b425156f"
     },
     "hair-1-2-front": {
       "file": "hair-1-2-front.png",
@@ -9311,8 +9341,8 @@
         320,
         320
       ],
-      "bytes": 87521,
-      "sha256": "1d623a38177a30daf27e31c62fcf7e3aed9cada7b4facd30fb5c82b2f71efd73"
+      "bytes": 73206,
+      "sha256": "149b54aee74eb67a3e8453df42a981b334ff7cdb1df44e9ea37f99728955ad35"
     },
     "hair-1-3-front": {
       "file": "hair-1-3-front.png",
@@ -9320,8 +9350,8 @@
         320,
         320
       ],
-      "bytes": 88619,
-      "sha256": "1c96f8a6e7f27ebaed838a7903da39c8c270242e9b090f8de8b5de26d35b56da"
+      "bytes": 74715,
+      "sha256": "669e355971ca3d8859ea6c04b3b9213c564b8d5b12208446828235f90a7a9c9c"
     },
     "hair-1-4-front": {
       "file": "hair-1-4-front.png",
@@ -9329,8 +9359,8 @@
         320,
         320
       ],
-      "bytes": 87413,
-      "sha256": "20353def35fc6b9860387609f4351b41d86b0cc8a62d276eb01c842570a8127d"
+      "bytes": 73043,
+      "sha256": "29eff931b50f4ca53d6fb4bb15c12beb8e90aa2a0bc34a9ac1ec1e0b408ab5e6"
     },
     "hair-1-5-front": {
       "file": "hair-1-5-front.png",
@@ -9338,8 +9368,8 @@
         320,
         320
       ],
-      "bytes": 90719,
-      "sha256": "acfe4990048ba13e42e4590dfb8b97f8051c983cda4dd59673257bebc6084623"
+      "bytes": 76937,
+      "sha256": "94f7a5aa554e6adac6e3f223c7f3ea32580f20c4324159b214c0087cdb8fe313"
     },
     "hair-2-0-front": {
       "file": "hair-2-0-front.png",
@@ -9455,8 +9485,8 @@
         320,
         320
       ],
-      "bytes": 74790,
-      "sha256": "0882654652d349fcc820b11b3f7702f40dcbb8ed51cdee9374cfb020c45a4d05"
+      "bytes": 66783,
+      "sha256": "d543f930ed1b3ed434d18d6b9843b444abd2b9fdc05d08bf9cd31e3096379ae0"
     },
     "hair-4-1-front": {
       "file": "hair-4-1-front.png",
@@ -9464,8 +9494,8 @@
         320,
         320
       ],
-      "bytes": 81039,
-      "sha256": "1f002231869b02472fdc455c7e6b3653414bec704bbbe7a181bb09f35c1dc7be"
+      "bytes": 70530,
+      "sha256": "c0573a6433fe53f36b689863f76229ec24b71aeb0862fd88827a4736f3a6e422"
     },
     "hair-4-2-front": {
       "file": "hair-4-2-front.png",
@@ -9473,8 +9503,8 @@
         320,
         320
       ],
-      "bytes": 85314,
-      "sha256": "11b69cb47dc92d35b3dc02b9af82b76e6f35d1dc38b62dffdb899e6e4338c064"
+      "bytes": 74517,
+      "sha256": "87c77550a6230ee3e62ed622064f057d5e7d65fddbe3d458c70246adda219d02"
     },
     "hair-4-3-front": {
       "file": "hair-4-3-front.png",
@@ -9482,8 +9512,8 @@
         320,
         320
       ],
-      "bytes": 87768,
-      "sha256": "2b358cc2767a8cc532a9940cf63104ee88d7985b8cd527637f16f166750a4e6a"
+      "bytes": 76824,
+      "sha256": "e3abe73c0f0bcbffc2ca1e6272d0f55ff728f025b85c8e7a47f2e8702055102b"
     },
     "hair-4-4-front": {
       "file": "hair-4-4-front.png",
@@ -9491,8 +9521,8 @@
         320,
         320
       ],
-      "bytes": 85310,
-      "sha256": "d426a1f2f9e5cb6cf1922c0f9babcb08bd1451c8add5fb81c0ab5b10cb53c705"
+      "bytes": 74297,
+      "sha256": "ddc119f5d3296fb5726366a86bcbb66dcf94d2c359739362eb3829238353ce90"
     },
     "hair-4-5-front": {
       "file": "hair-4-5-front.png",
@@ -9500,8 +9530,8 @@
         320,
         320
       ],
-      "bytes": 88269,
-      "sha256": "e645fdd597e63a3b32345a7bdf6b6b4ebff40bb9c6ce7346263b1387a9fc8342"
+      "bytes": 78163,
+      "sha256": "e386f52d0e2ab6c96f9b48cb1b687fed2afa45ff8219e00f6e34c47044b24d8b"
     },
     "hair-5-0-front": {
       "file": "hair-5-0-front.png",
@@ -9563,8 +9593,8 @@
         320,
         320
       ],
-      "bytes": 78219,
-      "sha256": "22f36022a250ab0dc254d3706e23f1d6e939361c905f6ca0a64945df31f47e03"
+      "bytes": 61425,
+      "sha256": "740eb70bf08473bd6e6cda99c779ecfd4163e135eef08008a970dc72e219eb52"
     },
     "hair-6-1-front": {
       "file": "hair-6-1-front.png",
@@ -9572,8 +9602,8 @@
         320,
         320
       ],
-      "bytes": 86138,
-      "sha256": "ebaf4739b2a88052b7c43b757d5dac14fede02805f23177f8f41a2b52258ef88"
+      "bytes": 66359,
+      "sha256": "0af6fb075911d83ec29a8308d7b0029100b4dc0436a00216d962dd0ad9a19860"
     },
     "hair-6-2-front": {
       "file": "hair-6-2-front.png",
@@ -9581,8 +9611,8 @@
         320,
         320
       ],
-      "bytes": 87521,
-      "sha256": "1d623a38177a30daf27e31c62fcf7e3aed9cada7b4facd30fb5c82b2f71efd73"
+      "bytes": 71370,
+      "sha256": "90b35fe5763032a3b08191a53505120d0d233c464f9d382dcc37546f46300c4a"
     },
     "hair-6-3-front": {
       "file": "hair-6-3-front.png",
@@ -9590,8 +9620,8 @@
         320,
         320
       ],
-      "bytes": 88619,
-      "sha256": "1c96f8a6e7f27ebaed838a7903da39c8c270242e9b090f8de8b5de26d35b56da"
+      "bytes": 73257,
+      "sha256": "0074bfa03002947db581ce6e5dd3cfef3617ee211ba4395f39392024a7b9903d"
     },
     "hair-6-4-front": {
       "file": "hair-6-4-front.png",
@@ -9599,8 +9629,8 @@
         320,
         320
       ],
-      "bytes": 87413,
-      "sha256": "20353def35fc6b9860387609f4351b41d86b0cc8a62d276eb01c842570a8127d"
+      "bytes": 71017,
+      "sha256": "1499cdb4df5c95453bd1a87cda77219e8200d7bdbb47f570f70cdd6ee47057ca"
     },
     "hair-6-5-front": {
       "file": "hair-6-5-front.png",
@@ -9608,8 +9638,8 @@
         320,
         320
       ],
-      "bytes": 90719,
-      "sha256": "acfe4990048ba13e42e4590dfb8b97f8051c983cda4dd59673257bebc6084623"
+      "bytes": 74841,
+      "sha256": "088abd6dd968cbec3356438db898a7133a0011e1726da5095eb9a6f9b47584fe"
     },
     "hair-7-0-front": {
       "file": "hair-7-0-front.png",
@@ -9671,8 +9701,8 @@
         320,
         320
       ],
-      "bytes": 107604,
-      "sha256": "0095e603f0647a28cb98201b5f32b69df210aa936d216413fcaac67ad754cd9f"
+      "bytes": 75432,
+      "sha256": "e82d55ee040a649826ab05cda46fddbc0123a420a9a826c17d66224991028fd8"
     },
     "hair-8-1-front": {
       "file": "hair-8-1-front.png",
@@ -9680,8 +9710,8 @@
         320,
         320
       ],
-      "bytes": 112829,
-      "sha256": "5de0090e399bae9e6d77baf9e9f9ed08225b08fc42c1d712e67890da0e45c3a6"
+      "bytes": 80007,
+      "sha256": "812ec1e6cbd635c87cf01ea1717ae285e3ca159a63e8968b6e239585c33b90d5"
     },
     "hair-8-2-front": {
       "file": "hair-8-2-front.png",
@@ -9689,8 +9719,8 @@
         320,
         320
       ],
-      "bytes": 115113,
-      "sha256": "374fa9957c275067cf1a61a6489700e6b232e9d8be3bea60ca1bda28495ed0cd"
+      "bytes": 83249,
+      "sha256": "e9d00afd15de669d04aa4593e0d90cee4c7c24a6c66b4f78d2fb97ffbfa16e44"
     },
     "hair-8-3-front": {
       "file": "hair-8-3-front.png",
@@ -9698,8 +9728,8 @@
         320,
         320
       ],
-      "bytes": 120825,
-      "sha256": "79a645b54a6fae1c6c14a84bc568c655d0e7bf141f99c1e5a9a5a08ddc43d3c2"
+      "bytes": 84458,
+      "sha256": "c88a051d349f83cce06334c45701d1580d09290e59e7bc9b169688c7447c07e8"
     },
     "hair-8-4-front": {
       "file": "hair-8-4-front.png",
@@ -9707,8 +9737,8 @@
         320,
         320
       ],
-      "bytes": 115636,
-      "sha256": "f1decc20139ffd46dbc95646d3308602363e697a6bcf7c9dc8ce90a05b7a0397"
+      "bytes": 88080,
+      "sha256": "f0fd7387e43d0e5963d40cd6678146395fd1a01899c1a1fb6090cd6af88af672"
     },
     "hair-8-5-front": {
       "file": "hair-8-5-front.png",
@@ -9716,8 +9746,8 @@
         320,
         320
       ],
-      "bytes": 114347,
-      "sha256": "ca9d065f35ce32426f54d9f6b44ff3474e503d9a69daaa6b77fbda1996eaf082"
+      "bytes": 86386,
+      "sha256": "7ab8221c587dafa2e04dc787f6585c9226581f1523285dd4235635abc707ebde"
     },
     "hair-9-0-front": {
       "file": "hair-9-0-front.png",
@@ -9779,8 +9809,8 @@
         320,
         320
       ],
-      "bytes": 108758,
-      "sha256": "6762dcfce25809dbe2f5a48cc5ae91ecff683085a014f73741b17c3b47f22ab5"
+      "bytes": 71842,
+      "sha256": "c1c529e37774f87ed32fcad129997fd3de8bacebe2f62fee919baf826da4e745"
     },
     "hair-10-1-front": {
       "file": "hair-10-1-front.png",
@@ -9788,8 +9818,8 @@
         320,
         320
       ],
-      "bytes": 114013,
-      "sha256": "5c79aa9b05133603288e18d0a8563f9f24fbd71346dfba9ceed3e095ec322729"
+      "bytes": 77202,
+      "sha256": "6347c13360241d3fe321f93ad5c5b62c735d679c66c4d8e94e9f9f658f18e922"
     },
     "hair-10-2-front": {
       "file": "hair-10-2-front.png",
@@ -9797,8 +9827,8 @@
         320,
         320
       ],
-      "bytes": 116719,
-      "sha256": "a762667680eafb37feb815952d5a468f2b045d89d09631eda58f191b84b16606"
+      "bytes": 82591,
+      "sha256": "d2df16399eb4ad1ba47fee069b3629d1f394750f21e1d67ea24d07c7010e082c"
     },
     "hair-10-3-front": {
       "file": "hair-10-3-front.png",
@@ -9806,8 +9836,8 @@
         320,
         320
       ],
-      "bytes": 122426,
-      "sha256": "04eb296bbda97def7c821433b490276e0dc9f8d419911ae4429df4d6b76153e4"
+      "bytes": 85751,
+      "sha256": "061bb731296fffa09208b32663fe4bc18d0e5bc1f7c115cc624883ce67c7f7db"
     },
     "hair-10-4-front": {
       "file": "hair-10-4-front.png",
@@ -9815,8 +9845,8 @@
         320,
         320
       ],
-      "bytes": 117229,
-      "sha256": "a8cb54c1d4d91b36c47b117c9067e8dfd02e7cea052085ef6ff074becd6b4a6b"
+      "bytes": 83455,
+      "sha256": "c56f53d649e17b8561d36a80e918bdb555219ef57491560821e6a545be6cdc06"
     },
     "hair-10-5-front": {
       "file": "hair-10-5-front.png",
@@ -9824,8 +9854,8 @@
         320,
         320
       ],
-      "bytes": 115683,
-      "sha256": "f09ed350ad0aed4141715249cfa9430bbf6da12ea6920ee0b9d1adeeb247379b"
+      "bytes": 86986,
+      "sha256": "e522440b99ea4f52a652bf8890cc5f63d77a514879af6bdf550e16fb32deaaf0"
     },
     "hair-11-0-front": {
       "file": "hair-11-0-front.png",
@@ -9833,8 +9863,8 @@
         320,
         320
       ],
-      "bytes": 107604,
-      "sha256": "0095e603f0647a28cb98201b5f32b69df210aa936d216413fcaac67ad754cd9f"
+      "bytes": 83824,
+      "sha256": "facf1edf4d645bbf97c974d062fe6cfe125c1ab353cc04e4948fc76c6b39bea9"
     },
     "hair-11-1-front": {
       "file": "hair-11-1-front.png",
@@ -9842,8 +9872,8 @@
         320,
         320
       ],
-      "bytes": 112829,
-      "sha256": "5de0090e399bae9e6d77baf9e9f9ed08225b08fc42c1d712e67890da0e45c3a6"
+      "bytes": 87801,
+      "sha256": "56c225b1f83310ce6b0b25bf13c1b709fd604eb2441ce2e8c0031370a5ac45e7"
     },
     "hair-11-2-front": {
       "file": "hair-11-2-front.png",
@@ -9851,8 +9881,8 @@
         320,
         320
       ],
-      "bytes": 115113,
-      "sha256": "374fa9957c275067cf1a61a6489700e6b232e9d8be3bea60ca1bda28495ed0cd"
+      "bytes": 89819,
+      "sha256": "81f3963acdb21ee231f92349cb0a9bf64aa363117055a938e1e11d63a585963b"
     },
     "hair-11-3-front": {
       "file": "hair-11-3-front.png",
@@ -9860,8 +9890,8 @@
         320,
         320
       ],
-      "bytes": 120825,
-      "sha256": "79a645b54a6fae1c6c14a84bc568c655d0e7bf141f99c1e5a9a5a08ddc43d3c2"
+      "bytes": 94990,
+      "sha256": "0c246ddad664d7f78b8ed2fa2d1c88f5aeb5716e535bf4eadb956fa78a3ae859"
     },
     "hair-11-4-front": {
       "file": "hair-11-4-front.png",
@@ -9869,8 +9899,8 @@
         320,
         320
       ],
-      "bytes": 115636,
-      "sha256": "f1decc20139ffd46dbc95646d3308602363e697a6bcf7c9dc8ce90a05b7a0397"
+      "bytes": 90376,
+      "sha256": "82318f204734572ab6ecbaae2a9cf5689cd7d311624ea6616e62b14408e3f95f"
     },
     "hair-11-5-front": {
       "file": "hair-11-5-front.png",
@@ -9878,8 +9908,8 @@
         320,
         320
       ],
-      "bytes": 114347,
-      "sha256": "ca9d065f35ce32426f54d9f6b44ff3474e503d9a69daaa6b77fbda1996eaf082"
+      "bytes": 88497,
+      "sha256": "dc9ee8fc1d5eda9c0e6b7330b6cbde59e4e7d8306a3df71fde995570481f39ca"
     },
     "hair-12-0-front": {
       "file": "hair-12-0-front.png",
@@ -9941,8 +9971,8 @@
         320,
         320
       ],
-      "bytes": 103945,
-      "sha256": "f60ef72d32b191d02c6195e4ddb5cde4892166782cb4ad0c35ac85611a20c8dd"
+      "bytes": 78668,
+      "sha256": "838ef216db3fa3c6e21510c7d796e589041ffe7f8124d992a9f2b28305985ad5"
     },
     "hair-13-1-front": {
       "file": "hair-13-1-front.png",
@@ -9950,8 +9980,8 @@
         320,
         320
       ],
-      "bytes": 118955,
-      "sha256": "26250f438e9f177b1d0c69fa7a88c5582378048010dd53730e31a3e626bac1bd"
+      "bytes": 84710,
+      "sha256": "4de0d245e9b3c90cd8feb6cc67f8d7c0fa1f973b6db04f1a567a2d8d117408b7"
     },
     "hair-13-2-front": {
       "file": "hair-13-2-front.png",
@@ -9959,8 +9989,8 @@
         320,
         320
       ],
-      "bytes": 126862,
-      "sha256": "cb7b748932a737bbf204950cc775a558791a55aea3417f1c3f3419e130149527"
+      "bytes": 91997,
+      "sha256": "d5b329d2d1b2dd8842c66a85861796e49137c8ec70b770707201779612235121"
     },
     "hair-13-3-front": {
       "file": "hair-13-3-front.png",
@@ -9968,8 +9998,8 @@
         320,
         320
       ],
-      "bytes": 131766,
-      "sha256": "2d1944b942bf4eae99a6fb033fe00fe1b9fcf2318585eb969ecdde18a4742b13"
+      "bytes": 95752,
+      "sha256": "5f81aff9505354959f403ea1caf48c3eb39cf7fe4f95c9165c546efea04cc5c5"
     },
     "hair-13-4-front": {
       "file": "hair-13-4-front.png",
@@ -9977,8 +10007,8 @@
         320,
         320
       ],
-      "bytes": 126165,
-      "sha256": "3fcbf580d4437bae433becb00c31e3f653e2fa40037e06c1c0b9552695cc34cf"
+      "bytes": 92174,
+      "sha256": "63842166c4f4d0b2f3ee0a4c52321ed18ea3a9fc74bb597e4e5bf0aebb69b15c"
     },
     "hair-13-5-front": {
       "file": "hair-13-5-front.png",
@@ -9986,8 +10016,8 @@
         320,
         320
       ],
-      "bytes": 133396,
-      "sha256": "0b5c6d851471df60807d57dc9c3f02be58128e3fef3a7dd318c460e27f1e1aa8"
+      "bytes": 98216,
+      "sha256": "1f095c71e7882517dfb761e469426d9f22fcecf7782704a1da847b496e423fa0"
     },
     "hair-14-0-front": {
       "file": "hair-14-0-front.png",
@@ -10049,8 +10079,8 @@
         320,
         320
       ],
-      "bytes": 75303,
-      "sha256": "302b5796802ce655d3b8c0050b30d386cd05e111a577bdd760ca0145c56dde1e"
+      "bytes": 65406,
+      "sha256": "dc1af74020a8c8d90f3979179d28abe6e1c26e3cdbe40830c91092d5e1d6b290"
     },
     "hair-15-1-front": {
       "file": "hair-15-1-front.png",
@@ -10058,8 +10088,8 @@
         320,
         320
       ],
-      "bytes": 81629,
-      "sha256": "2d64c337be1302b79fba215afc1dfb5f8e43c0e4d0689d96970c2c6054926e0b"
+      "bytes": 69465,
+      "sha256": "92435a734aded923fe5176ef19c0a7d7368fb06b525d0cd62c6abe4171f691ab"
     },
     "hair-15-2-front": {
       "file": "hair-15-2-front.png",
@@ -10067,8 +10097,8 @@
         320,
         320
       ],
-      "bytes": 86141,
-      "sha256": "83feb45abab750e7db9f05c63000ec0ec9275f6721bc1380b46d3ce54f68f173"
+      "bytes": 73001,
+      "sha256": "d236a54b5250e9e5e5458ff72fca8289e6300008b5af98b9119afee938d80972"
     },
     "hair-15-3-front": {
       "file": "hair-15-3-front.png",
@@ -10076,8 +10106,8 @@
         320,
         320
       ],
-      "bytes": 88390,
-      "sha256": "ac971a766a41046772a45b316e9a1d6816168eaaf2a9f0558732597c33e8b269"
+      "bytes": 75400,
+      "sha256": "f0bcc3ec2eb6e83f75044741c73948ebd032ae0ed9784107dd163d06a7d1615d"
     },
     "hair-15-4-front": {
       "file": "hair-15-4-front.png",
@@ -10085,8 +10115,8 @@
         320,
         320
       ],
-      "bytes": 85958,
-      "sha256": "bbed7a5fdcff1a768356977e56a0d19c3ab80224953a761fe0fc9e94ef391799"
+      "bytes": 73089,
+      "sha256": "0e7839cc706925bfcd01dfd3a8f4dd57f27f95332b7c21514d69aa3112aba1aa"
     },
     "hair-15-5-front": {
       "file": "hair-15-5-front.png",
@@ -10094,8 +10124,8 @@
         320,
         320
       ],
-      "bytes": 89102,
-      "sha256": "8cc18c3fc31f3a52bc3d2dfa6b75ed562a0257c77411693ad721a438f8f2365a"
+      "bytes": 76588,
+      "sha256": "f4fff010bd5b87f74b79b0c8ed7f555a78557806a7be10fee19a012c90f945f5"
     },
     "hair-16-0-front": {
       "file": "hair-16-0-front.png",
@@ -10265,8 +10295,8 @@
         320,
         320
       ],
-      "bytes": 75303,
-      "sha256": "302b5796802ce655d3b8c0050b30d386cd05e111a577bdd760ca0145c56dde1e"
+      "bytes": 67473,
+      "sha256": "56e39f50af42bdcb2aa3226b01d1cd8d59cb296d9630477f91692f7c19b4e8f9"
     },
     "hair-19-1-front": {
       "file": "hair-19-1-front.png",
@@ -10274,8 +10304,8 @@
         320,
         320
       ],
-      "bytes": 81629,
-      "sha256": "2d64c337be1302b79fba215afc1dfb5f8e43c0e4d0689d96970c2c6054926e0b"
+      "bytes": 71729,
+      "sha256": "78169fcc1faad14752de6379968b62f7a1272e0b4c975948bee839d7c68aedf9"
     },
     "hair-19-2-front": {
       "file": "hair-19-2-front.png",
@@ -10283,8 +10313,8 @@
         320,
         320
       ],
-      "bytes": 86141,
-      "sha256": "83feb45abab750e7db9f05c63000ec0ec9275f6721bc1380b46d3ce54f68f173"
+      "bytes": 75498,
+      "sha256": "e23bd8825fd652ca77c12918033045884b2fc6fbac695d1fe67ea27bbc718d92"
     },
     "hair-19-3-front": {
       "file": "hair-19-3-front.png",
@@ -10292,8 +10322,8 @@
         320,
         320
       ],
-      "bytes": 88390,
-      "sha256": "ac971a766a41046772a45b316e9a1d6816168eaaf2a9f0558732597c33e8b269"
+      "bytes": 78173,
+      "sha256": "3a48602662703e2b47d46992de2ff07b4653e948e3ae427c630b81f5f44020f1"
     },
     "hair-19-4-front": {
       "file": "hair-19-4-front.png",
@@ -10301,8 +10331,8 @@
         320,
         320
       ],
-      "bytes": 85958,
-      "sha256": "bbed7a5fdcff1a768356977e56a0d19c3ab80224953a761fe0fc9e94ef391799"
+      "bytes": 75426,
+      "sha256": "cc45f1c501c6594041fd934da288c133935e5c8ce2f25313ec3a179040a3ca99"
     },
     "hair-19-5-front": {
       "file": "hair-19-5-front.png",
@@ -10310,8 +10340,8 @@
         320,
         320
       ],
-      "bytes": 89102,
-      "sha256": "8cc18c3fc31f3a52bc3d2dfa6b75ed562a0257c77411693ad721a438f8f2365a"
+      "bytes": 79539,
+      "sha256": "df73a0e5f08248e13ddc98d83a67111b020d8b10930e24a5aac92993ca45a655"
     },
     "hair-20-0-front": {
       "file": "hair-20-0-front.png",
@@ -10319,8 +10349,8 @@
         320,
         320
       ],
-      "bytes": 110944,
-      "sha256": "e0e36bad600ef5ebec81694c8e5690a3cb88e0adb881446fb73e0afebbe64759"
+      "bytes": 74617,
+      "sha256": "6672570239f27863570f6789682f68286f888821e14d2a21eefcd2e3c92cfbcf"
     },
     "hair-20-1-front": {
       "file": "hair-20-1-front.png",
@@ -10328,8 +10358,8 @@
         320,
         320
       ],
-      "bytes": 116007,
-      "sha256": "4dbf5543bc6445b3526ecd5d4605ed6f34a2e6d400d77030afeab42ec3be51e9"
+      "bytes": 79937,
+      "sha256": "cf95eb5fb730cf7a5961ff4f5116ae9537f7da4bf5959c5ed030b1b93e88f5a3"
     },
     "hair-20-2-front": {
       "file": "hair-20-2-front.png",
@@ -10337,8 +10367,8 @@
         320,
         320
       ],
-      "bytes": 118412,
-      "sha256": "65203195bc3c1ec1e80788e6745113b6d01eb61bd89c7fb8471775a7520bf8b0"
+      "bytes": 85764,
+      "sha256": "2ec761ca834ca644f65117b6473050d9d637366c4a8194fbfa88f9b544831941"
     },
     "hair-20-3-front": {
       "file": "hair-20-3-front.png",
@@ -10346,8 +10376,8 @@
         320,
         320
       ],
-      "bytes": 124341,
-      "sha256": "4c7eee027e02887d446e9366269bb0ea7ab005da90368166a9abba16dbbffe5e"
+      "bytes": 88813,
+      "sha256": "0da20fecc20f930545a800286c8e2b7967c23ec2fafde81758519ea266a9a2b3"
     },
     "hair-20-4-front": {
       "file": "hair-20-4-front.png",
@@ -10355,8 +10385,8 @@
         320,
         320
       ],
-      "bytes": 119065,
-      "sha256": "9580866dc91e7089eb8d308628111c4f1c34adbb3aba8097d4a662fd58203578"
+      "bytes": 86344,
+      "sha256": "5d8e607f31cc4e47efafa492c5aa09bbe8fabc92958f583de0c754ebee0ed0d6"
     },
     "hair-20-5-front": {
       "file": "hair-20-5-front.png",
@@ -10364,8 +10394,8 @@
         320,
         320
       ],
-      "bytes": 117424,
-      "sha256": "6227eb1d57d851e3e2de75d7b2bd2da1f74e770f82ed0da27c573ad7ea9d03ff"
+      "bytes": 90078,
+      "sha256": "662b8ffd1aecc8a3e19b6dcc0abc99cc4cb155f7642deb37a7ef3cb79e261002"
     },
     "hair-21-0-front": {
       "file": "hair-21-0-front.png",
@@ -10427,8 +10457,8 @@
         320,
         320
       ],
-      "bytes": 100340,
-      "sha256": "41fc08155684c47535ecae76ef8c15e2163c8b87ede48c54b3d94c378889dde7"
+      "bytes": 75952,
+      "sha256": "aafdb55bf09b27ae547d6efc77bf475dcecfe52576c5e81fb8a5debe740a603d"
     },
     "hair-22-1-front": {
       "file": "hair-22-1-front.png",
@@ -10436,8 +10466,8 @@
         320,
         320
       ],
-      "bytes": 114897,
-      "sha256": "216e66b9422463d6a5eb82bd97f25980b81ec48c52d1e7f3ce5afda8cdfc7d74"
+      "bytes": 81704,
+      "sha256": "b6b34ccad98a7926be4a4fa9b47f32a74573b1559747c0fe35e88ba78706a585"
     },
     "hair-22-2-front": {
       "file": "hair-22-2-front.png",
@@ -10445,8 +10475,8 @@
         320,
         320
       ],
-      "bytes": 122954,
-      "sha256": "778873235c734d6d3d5d7d1de7a40f941a8de2c4eff804c3539d2bff7eb4b06d"
+      "bytes": 88978,
+      "sha256": "b9372b9ca37bd21ef2845f942766ab25399c94721e4d8ba96875c1d8ae68a51a"
     },
     "hair-22-3-front": {
       "file": "hair-22-3-front.png",
@@ -10454,8 +10484,8 @@
         320,
         320
       ],
-      "bytes": 127528,
-      "sha256": "e5abc7f37422e1805c0828f2476b46681bb8a0152a5ee847d988e484fc05454d"
+      "bytes": 92594,
+      "sha256": "2e5f8df3c56977122009800688ca21582460cc5eb131bba2c11bd32f1904fcb8"
     },
     "hair-22-4-front": {
       "file": "hair-22-4-front.png",
@@ -10463,8 +10493,8 @@
         320,
         320
       ],
-      "bytes": 122103,
-      "sha256": "97a338308de941a2bdd39f6c14a1eef1b0ca952f6f003f254492807ff039be73"
+      "bytes": 89094,
+      "sha256": "06e97d4afda53fd474602de7273cc5ff87892b7e8416731b0866e88acc03b9a1"
     },
     "hair-22-5-front": {
       "file": "hair-22-5-front.png",
@@ -10472,8 +10502,8 @@
         320,
         320
       ],
-      "bytes": 128865,
-      "sha256": "622943b978a52118d497d4a7f9e2003c7bd95381c99ac5e08482712b7a6faeee"
+      "bytes": 94952,
+      "sha256": "815bfbd1a9ed43a33e24b32395a7fadf96cfd7c419f6d8c6380774864beb1bc8"
     }
   },
   "notes": [

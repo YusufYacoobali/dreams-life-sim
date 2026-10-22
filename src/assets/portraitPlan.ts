@@ -2,7 +2,7 @@ import type { Person } from '../game/model';
 import { facialIdentity } from '../game/appearance';
 import { portraitImages, type PortraitAsset } from './portraitImages';
 import { portraitAgeStage, type PortraitAgeStage } from './portraitLayout';
-import { fitPortraitHair, longHairFaceBounds } from './portraitFitting';
+import { fitPortraitHair } from './portraitFitting';
 
 export const portraitCanvasSize = 320;
 export const identityHair = [3,4,3,2,4,2,4,3,4,1,5,4,3,5,3,4] as const;
@@ -41,11 +41,10 @@ export function portraitLayers({ identity, face, skin, hair, stage, hairColor, g
   const body = `body-${identity}-${skin}` as PortraitAsset;
   layers.push({ asset:body,left:160-320*bodyScale,top:320-422*bodyScale,
     width:640*bodyScale,height:422*bodyScale,skinClip:{outfit:clothing,scale:bodyScale} });
-  // Long locks are a continuous foreground illustration. Crop covered ears
-  // out of the head's viewport so they cannot peek through an old ear opening.
-  // This clips existing pixels; it never stretches or repaints facial features.
-  const longHair = [4,5,7].includes(hair);
-  const bounds = longHair ? longHairFaceBounds(identity,stage,face) : { left:24,right:296 };
+  // Keep the complete head under the foreground hair. A rectangular temple
+  // crop leaves holes inside authored hair openings and clips natural cheeks.
+  // Opaque locks cover ears because hair is always drawn after the head.
+  const bounds = { left:24,right:296 };
   // Child/teen source necks flare at their bottom edge. Keep that concealed
   // under the fitted anatomical neck rather than showing a skin-coloured rim.
   const headHeight = stage === 1 || stage === 2 ? 216 : 248;
