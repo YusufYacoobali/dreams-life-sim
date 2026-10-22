@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
 import { BottomNavigation, TabKey } from '../../src/ui/GameShell';
 import { ThemedStatusBar, useColors } from '../../src/ui/theme';
+import { ReviewPromptHost } from '../../src/ui/ReviewPromptHost';
 import { PendingEvent } from '../../src/ui/PendingEvent';
 import { useFeedback } from '../../src/ui/feedback';
 import { useCinematicTransition } from '../../src/ui/cinematic/CinematicContext';
@@ -29,5 +30,6 @@ export default function GameLayout() {
   return <View style={{ flex: 1, backgroundColor: c.background }}><ThemedStatusBar /><View style={{ flex: 1 }}><Stack key={world.id + ':' + world.activePersonId} screenOptions={{ headerShown: false, freezeOnBlur: true, animation: reducedMotion ? 'none' : 'default' }}><Stack.Screen name="(tabs)" /></Stack></View>
     <BottomNavigation activeTab={tab} onSelectTab={id => router.navigate('/' + id)} onReselectTab={id => { const root = '/' + id; if (path !== root) router.navigate(root); }} renderIcon={(id, color) => <Ionicons name={icons[id]} color={color} size={26} />} />
     <PendingEvent />
+    <ReviewPromptHost visible={path === '/life' && !activeKind} />
   </View>;
 }

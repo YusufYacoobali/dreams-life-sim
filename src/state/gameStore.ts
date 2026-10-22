@@ -1,3 +1,4 @@
+import type { ReviewOffer, ReviewResponse, ReviewTracker } from '../reviews/tracker';
 import { createStore } from 'zustand/vanilla';
 import { Creation, createLife } from '../game/createLife';
 import { fullName, GameDate, immutableWorld, World } from '../game/model';
@@ -6,11 +7,14 @@ import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
 import { applyGodModeEdits, type GodModeEdit } from '../game/godMode';
 
-type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'>;
-type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean };
+type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'> & Partial<Pick<SaveRepository, 'loadReviewTracker' | 'claimReview' | 'respondToReview'>>;
+type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean; reviewDelay?: () => number };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
   snapshots: SnapshotSummary[];
+  reviewTracker: ReviewTracker | null; reviewOffer: ReviewOffer | null; reviewBusy: boolean; reviewError: string | null;
+  claimReview: () => Promise<boolean>;
+  respondReview: (response: ReviewResponse) => Promise<boolean>;
   bootstrap: () => Promise<boolean>;
   startLife: (input: Creation, seed: number) => Promise<boolean>;
   acknowledgeBirth: () => Promise<boolean>;
@@ -29,28 +33,56 @@ export function createGameStore(deps: Dependencies) {
   return createStore<GameState>((set, get) => {
     let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
     let godModeAttempt: { before: World; signature: string; commandId: string } | null = null;
+    let reviewAttempt: {offerId:string;response:ReviewResponse;delay:number} | null = null;
+    const readReview = async (repository:Persistence) => repository.loadReviewTracker ? repository.loadReviewTracker().catch(() => null) : null;
     const publish = ({ world, summary }: SavedLifeUpdate) => set({ world, snapshots: [], lives: [
       summary,
       ...get().lives.filter(life => life.id !== world.id),
     ] });
     const run = async (action: () => Promise<void>, failure: string) => {
-      if (get().busy) return false;
-      set({ busy: true, error: null });
+      if (get().busy || get().reviewBusy) return false;
+      set({ busy: true, error: null, reviewOffer: null });
       try { if (deps.yieldToUI) await deps.yieldToUI(); await action(); return true; }
       catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure }); return false; }
       finally { set({ busy: false }); }
     };
     return {
       world: null, lives: [], snapshots: [], ready: false, busy: false, error: null,
+      reviewTracker: null, reviewOffer: null, reviewBusy: false, reviewError: null,
+      claimReview: async () => {
+        const world = get().world;
+        if (!world || get().busy || get().reviewBusy || get().reviewOffer) return false;
+        set({reviewBusy:true,reviewError:null});
+        try {
+          const repository = await deps.repository(), offered = await repository.claimReview?.(world.id,world.activePersonId,world.revision);
+          if (!offered || get().world?.id!==world.id || get().world?.activePersonId!==world.activePersonId || get().world?.revision!==world.revision) return false;
+          set({reviewTracker:offered.tracker,reviewOffer:offered.offer});
+          return true;
+        } catch { return false; }
+        finally {set({reviewBusy:false});}
+      },
+      respondReview: async response => {
+        const offer = get().reviewOffer;
+        if (!offer || get().busy || get().reviewBusy || get().world?.id!==offer.lifeId || get().world?.activePersonId!==offer.personId || get().world?.revision!==offer.revision) return false;
+        set({reviewBusy:true,reviewError:null});
+        if (reviewAttempt?.offerId!==offer.id || reviewAttempt.response!==response) reviewAttempt={offerId:offer.id,response,delay:response==='later'?10:(deps.reviewDelay?.() ?? 10+Math.floor(Math.random()*11))};
+        try {
+          const repository=await deps.repository(), answered=await repository.respondToReview?.(offer.id,response,reviewAttempt.delay);
+          if (!answered) throw new Error('Review preferences unavailable');
+          set({reviewTracker:answered.tracker,reviewOffer:null});reviewAttempt=null;
+          return answered.accepted;
+        } catch {set({reviewError:'Could not save that. Please try again.'});return false;}
+        finally {set({reviewBusy:false});}
+      },
       clearError: () => set({ error: null }),
       bootstrap: async () => {
-        if (get().busy) return false;
+        if (get().busy || get().reviewBusy) return false;
         const success = await run(async () => {
           const repository = await deps.repository();
           const lives = await repository.list();
           set({ lives });
           const world = await repository.active();
-          set({ world, snapshots: [] });
+          set({ world, snapshots: [], reviewTracker:await readReview(repository),reviewOffer:null });
         }, 'Could not open saved lives. Please try again.');
         set({ ready: true });
         return success;
@@ -118,7 +150,7 @@ export function createGameStore(deps: Dependencies) {
         const repository = await deps.repository();
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId, command.type === 'end-life' ? 'Before End This Life' : command.type === 'advance');
-        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life) });
+        set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker:await readReview(repository),reviewOffer:null });
       }, "Your progress couldn't be saved. Please try again."),
     };
   });

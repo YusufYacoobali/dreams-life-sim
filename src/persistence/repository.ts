@@ -1,3 +1,4 @@
+import { answerReview, decodeReviewTracker, observeReviewCommit, offerReview, reviewCandidateEligible, type ReviewResponse, type ReviewTracker } from '../reviews/tracker';
 import { fullName, immutableWorld, World } from '../game/model';
 import { packCheckpoint, unpackCheckpoint } from './checkpoints';
 import { BranchInfo, branchInfoSchema, decodeSave, encodeSave, SnapshotRecord, snapshotRecord, SnapshotSummary, snapshotSummarySchema, validateSnapshot } from './archive';
@@ -33,6 +34,38 @@ export class SaveRepository {
   async saveAppSettings(value: string): Promise<void> {
     if (value.length > 1024) throw new Error('App settings are too large');
     await this.db.run("INSERT INTO preferences(key,value) VALUES('app_settings',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [value]);
+  }
+
+  async loadReviewTracker(): Promise<ReviewTracker | null> {
+    const row = await this.db.get<{ value: string }>("SELECT value FROM preferences WHERE key='app_review'");
+    return decodeReviewTracker(row?.value ?? null);
+  }
+
+  async claimReview(lifeId: string, personId: string, revision: number) {
+    return this.db.transaction(async tx => {
+      const row = await tx.get<{ value: string }>("SELECT value FROM preferences WHERE key='app_review'");
+      const tracker = decodeReviewTracker(row?.value ?? null);
+      const active = await tx.get<{ value: string }>("SELECT value FROM preferences WHERE key='active_life'");
+      if (!tracker || active?.value !== lifeId) return null;
+      const life = await tx.get<{ revision: number; payload: string }>('SELECT revision,payload FROM lives WHERE id=?', [lifeId]);
+      if (!life || life.revision !== revision) return null;
+      const world = this.current?.world.id === lifeId && this.current.world.revision === revision && this.current.payload === life.payload ? this.current.world : unpackCheckpoint(life.payload, true);
+      if (world.activePersonId !== personId || !reviewCandidateEligible(tracker, world)) return null;
+      const offered = offerReview(tracker);
+      await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(offered.tracker)]);
+      return offered;
+    });
+  }
+
+  async respondToReview(offerId: string, response: ReviewResponse, delay: number) {
+    return this.db.transaction(async tx => {
+      const row = await tx.get<{ value: string }>("SELECT value FROM preferences WHERE key='app_review'");
+      const tracker = decodeReviewTracker(row?.value ?? null);
+      if (!tracker) throw new Error('Review tracker unavailable');
+      const answered = answerReview(tracker, offerId, response, delay);
+      if (answered.accepted) await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(answered.tracker)]);
+      return answered;
+    });
   }
 
   async initialise(): Promise<void> {
@@ -171,6 +204,14 @@ export class SaveRepository {
       await tx.run('UPDATE backups SET revision=?,payload=(SELECT payload FROM lives WHERE id=?) WHERE life_id=?', [current.revision, world.id, world.id]);
       await tx.run('UPDATE lives SET name=?,revision=?,updated_at=?,payload=? WHERE id=?', [fullName(world.people[world.activePersonId]), world.revision, this.now(), payload, world.id]);
       await tx.run('INSERT INTO receipts(life_id,command_id,revision) VALUES(?,?,?)', [world.id, commandId, world.revision]);
+      // Review progress commits atomically with the year and its idempotency receipt.
+      // Missing metadata is read lazily; opening old databases never inserts rows.
+      const reviewRow = await tx.get<{ value: string }>("SELECT value FROM preferences WHERE key='app_review'");
+      const review = decodeReviewTracker(reviewRow?.value ?? null);
+      if (review) {
+        const observed = observeReviewCommit(review, previous, world, commandId);
+        if (observed !== review) await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(observed)]);
+      }
     });
     if (duplicate) return this.load(world.id);
     this.current = { world, payload };

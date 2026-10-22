@@ -5,6 +5,7 @@ import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
 import { useDelayedBusy } from './useDelayedBusy';
 import { useFeedback } from './feedback';
+import { useModalPresence } from './modalPresence';
 import type { StoryParticipant } from '../game/runtime';
 import { eventBadgeColor, presentationArtwork, type EventCategory } from './eventArtwork';
 
@@ -22,14 +23,15 @@ export type EventPresentation = {
 );
 
 export function EventModal({
-  event, busy = false, error, onChoose, onCancel, onClose,
-}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
-  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} onClose={onClose} /> : null;
+  event, busy = false, error, onChoose, onCancel, onClose, modalOwner = 'app',
+}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review' }) {
+  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} onClose={onClose} modalOwner={modalOwner} /> : null;
 }
 
 function EventCard({
-  event, busy, error, onChoose, onCancel, onClose,
-}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void }) {
+  event, busy, error, onChoose, onCancel, onClose, modalOwner,
+}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review' }) {
+  useModalPresence(modalOwner);
   const c = useColors();
   const artwork = presentationArtwork(event.illustration,event.category);
   const { reducedMotion, hapticFeedback } = useFeedback();
