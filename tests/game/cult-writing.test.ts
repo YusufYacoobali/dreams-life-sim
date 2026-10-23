@@ -75,6 +75,7 @@ test.each(before.runtimeCases)('routine writing $item stays prose-only for its o
   if (result.pending?.kind === 'result') {
     expect(result.pending.body).not.toMatch(/\{\w+\}/);
     expect(result.pending.body).not.toMatch(/organisation remembers|situation remains on record|actually paid|The group feels|Nobody needs to/i);
+    if (item.kind === 'preach') expect(result.pending.body).not.toMatch(/Loyalty is now|satisfaction is/i);
   }
 });
 

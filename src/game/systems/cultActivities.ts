@@ -472,13 +472,7 @@ export function runCultPreaching(world: World, cult: Cult) {
       : deputy && (deputy.ambition >= 60 || cult.rules.includes('leader-first'))
         ? 'activity-sermon-crown'
         : 'activity-sermon-question';
-  const body =
-    narrative +
-    '\n\nLoyalty is now ' +
-    cult.loyalty +
-    '%; satisfaction is ' +
-    cult.satisfaction +
-    '%.';
+  const body = narrative;
   if (
     !offerCultActivity(world, cult, story, body, tone === 'pushback' ? 42 : 18)
   )
