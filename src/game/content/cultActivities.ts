@@ -638,7 +638,7 @@ export const cultActivityStories: readonly CultStoryDefinition[] = [
         id: 'remove',
         label: 'Expel them',
         result:
-          'You expel {member}. Followers leave with them. You can move the other chair now, if you still want to.',
+          'You expel {member} and move their chair off the stage. The remaining audience watches you do it.',
         journal: 'I expelled {member} after their public leadership challenge.',
         loyalty: 3,
         heat: 10,
@@ -682,7 +682,7 @@ export const cultActivityStories: readonly CultStoryDefinition[] = [
         id: 'leave',
         label: 'Expel them now',
         result:
-          'You expel {member} before they can decide to leave. Followers leave with them. You have answered the complaint with the door.',
+          'You expel {member} before they can decide to leave. They walk out without another word. You have answered the complaint with the door.',
         journal:
           'I expelled {member} after they privately warned they might leave.',
         loyalty: 2,

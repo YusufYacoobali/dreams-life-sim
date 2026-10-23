@@ -497,7 +497,7 @@ export const cultStories: readonly CultStoryDefinition[] = [
       {
         id: 'expel',
         label: 'Expel them',
-        result: 'You expel {member}. Followers leave with them. You have the stage to yourself and fewer people looking at it.',
+        result: 'You expel {member}. They push back their chair and leave you beside the empty seat. You wait for someone else to speak.',
         journal: 'I expelled {member} after their leadership challenge.',
         heat: 4,
         action: 'expel',
@@ -1031,7 +1031,7 @@ export const cultStories: readonly CultStoryDefinition[] = [
         id: 'modest',
         label: 'Pay for a small mug run',
         result:
-          'You fund a small batch of misspelt mugs. Customers pay for the mistake you are now carefully refusing to correct.',
+          'You approve a small batch of misspelt mugs. Customers pay for the mistake you are now carefully refusing to correct.',
         journal: 'I approved a modest run of our accidentally popular mugs.',
         incomeBps: 65,
         reputation: 3,

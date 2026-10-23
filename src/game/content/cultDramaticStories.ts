@@ -409,7 +409,7 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         reputation: -7,
         heat: 12,
         result:
-          'You expel {member} for bringing evidence. Followers leave with them. The kettles are still sitting there, equally unable to explain you.',
+          'You expel {member} for bringing evidence. They take the receipts with them. The kettles are still sitting there, equally unable to explain you.',
         journal:
           'I expelled {member} for bringing receipts to the sacred-kettle dispute.',
         resultTitle: 'The receipts leave with them',
@@ -568,7 +568,7 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         reputation: -9,
         memberLoyalty: 12,
         result:
-          'You back the list. Devotees applaud while accused members leave. The story of your blacklist spreads outside the room.',
+          'You back the list. Devotees applaud while the accused stand facing you. The story of your blacklist spreads outside the room.',
         journal:
           'I backed {member}’s accusations against followers who questioned us.',
         resultTitle: 'Your congregation splits',
@@ -594,7 +594,7 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         growth: 18,
         reputation: 5,
         result:
-          'You pay the suppliers and hold the celebration. New followers join. You let the food carry the part of the evening that promised a revelation.',
+          'You pay the suppliers and hold the celebration. When the revelation slot arrives, you direct everyone towards the food.',
         journal:
           'I funded the large headquarters celebration after {member} advertised more than the budget covered.',
         resultTitle: 'At least the food arrives',

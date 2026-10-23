@@ -7,6 +7,7 @@ import * as beliefs from '../../src/game/content/cults';
 import { cultStories } from '../../src/game/content/cultStories';
 import { cultClaims, cultClaimRemedies } from '../../src/game/content/cultClaims';
 import { cultClaimAdmissions, cultClaimFailureJournals } from '../../src/game/content/cultClaimWriting';
+import { cultCapacity, cultChangeFollowers } from '../../src/game/systems/cultCore';
 import { arrangeCultWritingCase, cultWritingMechanics, refreshCultWritingOffer, type CultWritingCase } from '../support/cultWriting';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
@@ -99,4 +100,34 @@ test('every authored payoff has a specific title, readable choices, first-person
     if (claim.test !== 'impossible') expect(claim.successText).toMatch(/^I /);
     expect(cultClaimRemedies[claim.id].journal).toMatch(/^I /);
   }
+});
+
+test('the mug run brings in its real proceeds without inventing a treasury payment', () => {
+  const context = before.contexts.find(row => row.id === 'merchandise-star')!;
+  const world = refreshCultWritingOffer(load(context.world), context.id), cult = world.cults[0], event = world.pending!;
+  const result = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: 'modest' });
+  expect(result.cults[0].cash).toBeGreaterThan(cult.cash);
+  expect(result.cults[0].expenses).toBe(cult.expenses);
+  expect(resultFor(result, event.id + '_result')?.body).not.toMatch(/\bYou (?:fund|pay for|paid for)\b/i);
+});
+
+test('a celebration at full capacity pays its bill without claiming an impossible new follower', () => {
+  const context = before.contexts.find(row => row.id === 'opening-deposit')!;
+  const input = load(context.world), cult = input.cults[0];
+  cultChangeFollowers(cult, cultCapacity(cult) - cult.followers);
+  const world = refreshCultWritingOffer(input, context.id), event = world.pending!;
+  const result = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: 'fund' });
+  expect(result.cults[0].followers).toBe(cult.followers);
+  expect(result.cults[0].expenses).toBeGreaterThan(cult.expenses);
+  expect(resultFor(result, event.id + '_result')?.body).not.toMatch(/new followers join|recruits join/i);
+});
+
+test('expelling someone from a three-person group does not invent extra supporters walking out', () => {
+  const context = before.contexts.find(row => row.id === 'second-chair')!;
+  const input = load(context.world), cult = input.cults[0];
+  cultChangeFollowers(cult, 3 - cult.followers);
+  const world = refreshCultWritingOffer(input, context.id), event = world.pending!;
+  const result = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: 'expel' });
+  expect(result.cults[0].followers).toBe(cult.followers - 1);
+  expect(resultFor(result, event.id + '_result')?.body).not.toMatch(/followers leave|supporters leave/i);
 });
