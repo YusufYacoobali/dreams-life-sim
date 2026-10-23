@@ -143,6 +143,12 @@ test('legacy generic hearts use only bound people and saved roles, without rewri
 test('frozen participant names and school roles survive render, result acknowledgement and checkpoint reload without rebinding', () => {
   const record = cohort.records.find(row=>row.decisionPointer==='IT/result.json#/decisions/9')!, source = copyWorld(unpackCheckpoint(record.checkpoint));
   const scene = bindEvent(source,eventTemplates.find(row=>row.id==='teen-group-project-credit')!);
+  const interrupt = scene.choices.find(choice=>choice.id==='interrupt')!;
+  expect(interrupt).toMatchObject({ label:'Delete the pitch while they are presenting it',resultTitle:'The company has ceased trading',
+    resultBody:'Leonardo Ferrari (classmate) faces a blank screen and shouts at you. Leonardo Ferrari (teacher) gives the incomplete presentation a poor mark. You spend the rest of the lesson arguing over who ruined it first.',
+    journal:'I deleted Leonardo Ferrari (classmate)’s presentation mid-speech and damaged both our grade and our relationship.' });
+  expect(new Set(scene.choices.map(choice=>choice.resultBody)).size).toBe(scene.choices.length);
+  expect(new Set(scene.choices.map(choice=>choice.journal)).size).toBe(scene.choices.length);
   source.pending = scene;
   source.people[scene.participants![0].personId].firstName = 'Renamed after binding';
   mockWorld = unpackCheckpoint(packCheckpoint(source)); const before = encodeWorld(mockWorld), pending = mockWorld.pending!;
@@ -151,13 +157,16 @@ test('frozen participant names and school roles survive render, result acknowled
   expect(screen.getByText('Teacher · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText(pending.body)).toBeOnTheScreen(); expect(encodeWorld(mockWorld)).toBe(before);
   expect(mockDispatch).not.toHaveBeenCalled();
-  fireEvent.press(screen.getByRole('button',{ name:'Interrupt with “You’re welcome!”' }));
+  fireEvent.press(screen.getByRole('button',{ name:'Delete the pitch while they are presenting it' }));
   expect(mockDispatch).toHaveBeenCalledWith({ type:'choose',eventId:pending.id,choiceId:'interrupt' });
   const chosen = resolveCommand(mockWorld,{ type:'choose',eventId:pending.id,choiceId:'interrupt' });
+  expect(chosen.pending).toMatchObject({kind:'result',title:interrupt.resultTitle,body:interrupt.resultBody,participants:scene.participants});
+  expect(chosen.journal.at(-1)?.text).toBe(interrupt.journal);
   mockWorld = unpackCheckpoint(packCheckpoint(chosen)); view.rerender(frame(<PendingEvent />,true));
   expect(screen.getByText('Classmate · Leonardo Ferrari')).toBeOnTheScreen();
   expect(screen.getByText('Teacher · Leonardo Ferrari')).toBeOnTheScreen();
-  expect(screen.getByText(chosen.pending!.body)).toBeOnTheScreen();
+  expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen();
+  expect(mockWorld.pending).toEqual(chosen.pending); expect(mockWorld.journal.at(-1)?.text).toBe(interrupt.journal);
   const cold = encodeWorld(mockWorld); fireEvent.press(screen.getByRole('button',{ name:'Continue' }));
   expect(mockDispatch).toHaveBeenLastCalledWith({ type:'acknowledge',resultId:chosen.pending!.id });
   expect(encodeWorld(mockWorld)).toBe(cold);

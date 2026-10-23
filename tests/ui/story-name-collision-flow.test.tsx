@@ -25,7 +25,14 @@ test('new identical-name story and both role-labelled consequences survive an ac
   const row = cohort.records.find(item => item.decisionPointer === 'IT/result.json#/decisions/9')!, source = checkpoints.unpackCheckpoint(row.checkpoint), initial = copyWorld(source);
   // Test a newly created binding against the genuine context; old saved pending
   // scenes are never rebound by the production loader or resolver.
-  initial.pending = bindEvent(initial, eventTemplates.find(item => item.id === 'teen-group-project-credit')!); validateWorld(initial);
+  const scene = bindEvent(initial, eventTemplates.find(item => item.id === 'teen-group-project-credit')!);
+  const interrupt = scene.choices.find(choice => choice.id === 'interrupt')!;
+  expect(interrupt).toMatchObject({ label:'Delete the pitch while they are presenting it',resultTitle:'The company has ceased trading',
+    resultBody:'Leonardo Ferrari (classmate) faces a blank screen and shouts at you. Leonardo Ferrari (teacher) gives the incomplete presentation a poor mark. You spend the rest of the lesson arguing over who ruined it first.',
+    journal:'I deleted Leonardo Ferrari (classmate)’s presentation mid-speech and damaged both our grade and our relationship.' });
+  expect(new Set(scene.choices.map(choice => choice.resultBody)).size).toBe(scene.choices.length);
+  expect(new Set(scene.choices.map(choice => choice.journal)).size).toBe(scene.choices.length);
+  initial.pending = scene; validateWorld(initial);
   const directory = mkdtempSync(join(tmpdir(), 'dreams-colliding-story-')), path = join(directory, 'dreams.db'); let sqlite!: DatabaseSync;
   const connect = (): SqlDatabase => {
     const connection = sqlite = new DatabaseSync(path); connection.exec('PRAGMA foreign_keys=ON');
@@ -40,13 +47,16 @@ test('new identical-name story and both role-labelled consequences survive an ac
     await bootstrap(); const offered = mockStore.getState().world!, original = encodeWorld(offered), before = rows(); view = render(frame());
     expect(screen.getByText(initial.pending.body)).toBeOnTheScreen(); expect(initial.pending.body).toContain('Leonardo Ferrari (classmate)'); expect(rows()).toEqual(before);
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); sqlite.exec("CREATE TRIGGER fail_collision_result BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-    await press('Interrupt with “You’re welcome!”'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(screen.getByText(initial.pending.body)).toBeOnTheScreen();
-    sqlite.exec('DROP TRIGGER fail_collision_result'); await press('Interrupt with “You’re welcome!”'); const result = mockStore.getState().world!;
+    await press('Delete the pitch while they are presenting it'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(rows()).toEqual(before); expect(encodeWorld(mockStore.getState().world!)).toBe(original); expect(screen.getByText(initial.pending.body)).toBeOnTheScreen();
+    sqlite.exec('DROP TRIGGER fail_collision_result'); await press('Delete the pitch while they are presenting it'); const result = mockStore.getState().world!;
     expect(result).toEqual(resolveCommand(offered, { type: 'choose', eventId: offered.pending!.id, choiceId: 'interrupt' }, true));
+    expect(result.pending).toMatchObject({ kind:'result',title:interrupt.resultTitle,body:interrupt.resultBody,participants:scene.participants });
+    expect(result.journal.at(-1)?.text).toBe(interrupt.journal); expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen();
     for (const role of ['classmate', 'teacher']) expect(screen.getByText('Leonardo Ferrari (' + role + ') · relationship')).toBeOnTheScreen();
     expect(result.random).toEqual(offered.random); expect(result.accounts).toEqual(offered.accounts); expect(result.ledger).toEqual(offered.ledger); expect(Object.keys(result.people)).toEqual(Object.keys(offered.people)); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const saved = rows(); view.unmount(); sqlite.close(); repository = new SaveRepository(connect()); await bootstrap(); view = render(frame()); expect(rows()).toEqual(saved); expect(mockStore.getState().world).toEqual(result);
     for (const role of ['classmate', 'teacher']) expect(screen.getByText('Leonardo Ferrari (' + role + ') · relationship')).toBeOnTheScreen();
+    expect(screen.getByText(interrupt.resultBody)).toBeOnTheScreen(); expect(mockStore.getState().world!.journal.at(-1)?.text).toBe(interrupt.journal);
     await press('Continue'); const done = mockStore.getState().world!; expect(done.relationships).toEqual(result.relationships); expect(done.people).toEqual(result.people); expect(done.random).toEqual(result.random);
     const acknowledged = rows(); await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: result.pending!.id })).toBe(false); }); expect(rows()).toEqual(acknowledged);
   } finally { view?.unmount(); jest.restoreAllMocks(); sqlite.close(); rmSync(directory, { recursive: true, force: true }); }

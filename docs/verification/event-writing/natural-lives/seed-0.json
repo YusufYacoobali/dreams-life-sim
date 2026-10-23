@@ -1,0 +1,4553 @@
+{
+  "seed": 0,
+  "country": "AU",
+  "gender": "male",
+  "ageAtDeath": 41,
+  "causeOfDeath": "Asthma",
+  "completed": true,
+  "ledgerRows": 14978,
+  "decisions": [
+    {
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "age": 1,
+      "eventId": "event_2025_first-bubble-catch",
+      "templateId": "first-bubble-catch",
+      "title": "A very brief possession",
+      "situation": "A soap bubble floats past your nose. You reach for it. Your new favourite thing has already resigned.",
+      "choices": [
+        {
+          "id": "chase",
+          "label": "Go after the next one"
+        },
+        {
+          "id": "watch",
+          "label": "Watch where it goes"
+        },
+        {
+          "id": "complain",
+          "label": "Complain about the disappearing bubble"
+        }
+      ],
+      "selected": "chase",
+      "result": {
+        "title": "Plenty of vacancies",
+        "body": "There are more bubbles. You spend several happy minutes failing to keep any of them.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-2%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2025_first-bubble-catch_choice",
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chased soap bubbles and caught absolutely nothing.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "age": 3,
+      "eventId": "event_2027_shoe-principle",
+      "templateId": "shoe-principle",
+      "title": "A principled disagreement",
+      "situation": "Ruby says shoes are necessary for going outside. You were not consulted during the drafting of this policy.",
+      "choices": [
+        {
+          "id": "cooperate",
+          "label": "Let Ruby help"
+        },
+        {
+          "id": "alone",
+          "label": "Insist on doing it yourself"
+        },
+        {
+          "id": "protest",
+          "label": "Present a floor-based protest"
+        }
+      ],
+      "selected": "cooperate",
+      "result": {
+        "title": "Terms accepted",
+        "body": "Both shoes make it onto the correct feet. A surprisingly productive morning.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Ruby Kelly · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2027_shoe-principle_choice",
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I let Ruby help with my shoes.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2028,
+        "month": 2,
+        "day": 29
+      },
+      "age": 4,
+      "eventId": "event_2028_toddler-ice-cube",
+      "templateId": "toddler-ice-cube",
+      "title": "Something in your sock",
+      "situation": "You hide an ice cube in your sock. Ruby asks why your foot is leaking. You had not planned for questions.",
+      "choices": [
+        {
+          "id": "watch",
+          "label": "Show Ruby your disappearing treasure"
+        },
+        {
+          "id": "touch",
+          "label": "Try the other sock"
+        },
+        {
+          "id": "save",
+          "label": "Ask to put your sock in the freezer"
+        }
+      ],
+      "selected": "watch",
+      "result": {
+        "title": "One wet sock",
+        "body": "You turn the sock out over a bowl. A tiny cube slides out. Ruby supplies a dry sock; you inspect the bowl for the rest of your treasure.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Ruby Kelly · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2028_toddler-ice-cube_choice",
+          "date": {
+            "year": 2028,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I showed Ruby the ice cube I had hidden in my sock.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "age": 5,
+      "eventId": "event_2029_toddler-zipper-puzzle",
+      "templateId": "toddler-zipper-puzzle",
+      "title": "The two-headed jacket",
+      "situation": "You manage to zip two jackets together. They are now one enormous jacket with four sleeves. This may be your greatest invention.",
+      "choices": [
+        {
+          "id": "align",
+          "label": "Carefully separate the creature"
+        },
+        {
+          "id": "inspect",
+          "label": "Investigate whether a third one would fit"
+        },
+        {
+          "id": "break",
+          "label": "Leave your invention on the floor"
+        }
+      ],
+      "selected": "align",
+      "result": {
+        "title": "Back to two jackets",
+        "body": "You work out which zip goes where. Both jackets survive the experiment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2029_toddler-zipper-puzzle_choice",
+          "date": {
+            "year": 2029,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I worked out how to separate two jackets I had zipped together.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "age": 6,
+      "eventId": "event_2030_school-answer-blurt",
+      "templateId": "school-answer-blurt",
+      "title": "Forty-two. Definitely forty-two.",
+      "situation": "Harper starts a question and your hand shoots up. You have an excellent answer. You are still waiting to hear what the question is.",
+      "choices": [
+        {
+          "id": "wait",
+          "label": "Hear the rest before committing"
+        },
+        {
+          "id": "blurt",
+          "label": "Shout “forty-two” with total confidence"
+        },
+        {
+          "id": "listen",
+          "label": "Let someone else risk it first"
+        }
+      ],
+      "selected": "wait",
+      "result": {
+        "title": "A useful last-minute adjustment",
+        "body": "The question is about the number of sides on a triangle. You quietly retire forty-two and give the correct answer.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Harper Walker · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Grades",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2030_school-answer-blurt_choice",
+          "date": {
+            "year": 2030,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I waited to hear a whole classroom question before answering.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "age": 7,
+      "eventId": "event_2031_school-arcade-invitation",
+      "templateId": "school-arcade-invitation",
+      "title": "Birthday invitation",
+      "situation": "Riley invites you to a birthday party at an arcade. The invitation has more glitter than useful information.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask Ruby for permission"
+        },
+        {
+          "id": "details",
+          "label": "Ask Riley for more details"
+        },
+        {
+          "id": "decline",
+          "label": "Politely decline"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "Adults need an address",
+        "body": "Ruby checks the time and supervision. Their answer and any plan are recorded below. Nothing is paid just for asking.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Ruby Kelly · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Riley Walker · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "plan",
+            "label": "Permission",
+            "value": "Ruby agreed · 2031-03",
+            "tone": "neutral"
+          },
+          {
+            "id": "quote",
+            "label": "Ruby’s outing cost",
+            "value": "$29.00 if you attend",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2031_school-arcade-invitation_choice",
+          "date": {
+            "year": 2031,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked Ruby for permission to go to Riley’s arcade birthday.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2031,
+        "month": 3,
+        "day": 29
+      },
+      "age": 7,
+      "eventId": "story_19_0_due",
+      "templateId": "story-arcade-invitation",
+      "title": "Party day",
+      "situation": "Riley’s arcade birthday is here. Ruby agreed to take you. The quoted outing costs $29.00, paid by Ruby only if you go.",
+      "choices": [
+        {
+          "id": "attend",
+          "label": "Go with Ruby · $29.00"
+        },
+        {
+          "id": "decline",
+          "label": "Stay home · no charge"
+        }
+      ],
+      "selected": "attend",
+      "result": {
+        "title": "High score, low dignity",
+        "body": "You and Riley take turns at the machines. Ruby pays the quoted outing cost. Nobody wins enough tickets to retire.",
+        "effects": [
+          {
+            "id": "payment",
+            "label": "Ruby paid",
+            "value": "$29.00",
+            "tone": "neutral"
+          },
+          {
+            "id": "story_1",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "story_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          },
+          {
+            "id": "story_3",
+            "label": "Riley · relationship",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "story_4",
+            "label": "Ruby · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "story_19_0_due_choice",
+          "date": {
+            "year": 2031,
+            "month": 3,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I went to Riley’s arcade birthday with Ruby.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "age": 8,
+      "eventId": "event_2032_school-empty-lunchbox",
+      "templateId": "school-empty-lunchbox",
+      "title": "A disappointing lunch",
+      "situation": "Riley opens a lunchbox with nothing in it. They look embarrassed. Harper is nearby.",
+      "choices": [
+        {
+          "id": "quiet",
+          "label": "Quietly ask Harper for help"
+        },
+        {
+          "id": "ask",
+          "label": "Ask Riley what would help"
+        },
+        {
+          "id": "announce",
+          "label": "Announce it across the table"
+        }
+      ],
+      "selected": "quiet",
+      "result": {
+        "title": "Lunch gets sorted",
+        "body": "Harper helps without making an announcement. Riley looks relieved.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Riley Walker · relationship",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Harper Walker · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2032_school-empty-lunchbox_choice",
+          "date": {
+            "year": 2032,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I quietly got Harper’s help when Riley had no lunch.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2033,
+        "month": 2,
+        "day": 28
+      },
+      "age": 9,
+      "eventId": "event_2033_rainy-fort",
+      "templateId": "rainy-fort",
+      "title": "Indoor architecture",
+      "situation": "Rain cancels your afternoon plans. Two chairs and a blanket suggest a career in questionable structural engineering.",
+      "choices": [
+        {
+          "id": "build",
+          "label": "Build an elaborate fort"
+        },
+        {
+          "id": "read",
+          "label": "Read by the window"
+        },
+        {
+          "id": "sulk",
+          "label": "Declare the whole day ruined"
+        }
+      ],
+      "selected": "build",
+      "result": {
+        "title": "Approved for immediate occupancy",
+        "body": "It collapses twice. The third version has a reading corner.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2033_rainy-fort_choice",
+          "date": {
+            "year": 2033,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I built a blanket fort that almost met building regulations.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "age": 12,
+      "eventId": "event_2036_teen-unit-confusion",
+      "templateId": "teen-unit-confusion",
+      "title": "Fastest toy car alive",
+      "situation": "You invented the numbers for a marked science report. Your toy car apparently reached 90,000 kilometres an hour. Isla asks to see the original measurements.",
+      "choices": [
+        {
+          "id": "redo",
+          "label": "Admit it and take the report back"
+        },
+        {
+          "id": "help",
+          "label": "Offer a live demonstration instead"
+        },
+        {
+          "id": "defend",
+          "label": "Invent a second sheet of measurements"
+        }
+      ],
+      "selected": "redo",
+      "result": {
+        "title": "The car has been recalled",
+        "body": "Isla lets you submit a properly measured replacement with a reduced mark. The real car rolls under a cupboard. You record that too.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_2",
+            "label": "Isla Brown · relationship",
+            "value": "-4%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Grades",
+            "value": "-5%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_4",
+            "label": "Space Science",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2036_teen-unit-confusion_choice",
+          "date": {
+            "year": 2036,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I admitted inventing science data and replaced my report with real measurements.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2037,
+        "month": 2,
+        "day": 28
+      },
+      "age": 13,
+      "eventId": "event_2037_teen-family-game-timer",
+      "templateId": "teen-family-game-timer",
+      "title": "Your parent knows this level",
+      "situation": "You promise Ruby one last round. They sit down, watch your first attempt and say, “I used to beat this blindfolded.” This is an outrageous development.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Stop before they can demonstrate"
+        },
+        {
+          "id": "agree",
+          "label": "Agree on one round each, then stop"
+        },
+        {
+          "id": "extend",
+          "label": "Demand rematches until you win"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "Dignity preserved",
+        "body": "You keep your promise and turn it off. Ruby seems more pleased about that than any old high score.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_2",
+            "label": "Ruby Kelly · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2037_teen-family-game-timer_choice",
+          "date": {
+            "year": 2037,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I stopped a game when I had promised Ruby I would.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "age": 15,
+      "eventId": "event_2039_teen-solo-rehearsal",
+      "templateId": "teen-solo-rehearsal",
+      "title": "You are in verse two",
+      "situation": "Riley asks you to help rehearse a song about everyone who has annoyed them. Your name appears in verse two. The rhyme is frankly weak.",
+      "choices": [
+        {
+          "id": "stay",
+          "label": "Suggest a better rhyme for your insult"
+        },
+        {
+          "id": "talk",
+          "label": "Ask why you made the track list"
+        },
+        {
+          "id": "leave",
+          "label": "Walk out before verse three"
+        }
+      ],
+      "selected": "stay",
+      "result": {
+        "title": "An unwilling co-writer",
+        "body": "You improve the line and rehearse the chorus. Riley laughs, then admits that your original offence was borrowing a pencil.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Riley Walker · relationship",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_4",
+            "label": "Music",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2039_teen-solo-rehearsal_choice",
+          "date": {
+            "year": 2039,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I helped Riley rehearse a song that included an insult about me.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2039,
+        "month": 11,
+        "day": 29
+      },
+      "age": 15,
+      "eventId": "emergency_condition_person_player_43_0_2039",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2039_choice",
+          "date": {
+            "year": 2039,
+            "month": 11,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2041,
+        "month": 2,
+        "day": 28
+      },
+      "age": 17,
+      "eventId": "event_2041_teen-canteen-review",
+      "templateId": "teen-canteen-review",
+      "title": "One star. Still hungry.",
+      "situation": "Riley drafts a fake restaurant review of the school canteen. It includes the phrase “structural pasta”.",
+      "choices": [
+        {
+          "id": "feedback",
+          "label": "Turn it into useful feedback"
+        },
+        {
+          "id": "private",
+          "label": "Keep the joke between you"
+        },
+        {
+          "id": "read",
+          "label": "Read it aloud in class"
+        }
+      ],
+      "selected": "feedback",
+      "result": {
+        "title": "Less funny, more useful",
+        "body": "You keep the specific complaints and remove the insults. Isla helps pass it on.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Riley Walker · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_3",
+            "label": "Isla Brown · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2041_teen-canteen-review_choice",
+          "date": {
+            "year": 2041,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I helped Riley turn a canteen rant into useful feedback.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "age": 18,
+      "eventId": "event_2042_adult-free-lecture-question",
+      "templateId": "adult-free-lecture-question",
+      "title": "Any difficult questions?",
+      "situation": "At a free talk, a speaker claims nobody has ever disproved their theory. The theory is that pigeons remember your face and discuss you at night.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask how they interviewed the pigeons"
+        },
+        {
+          "id": "listen",
+          "label": "Let another questioner take this one"
+        },
+        {
+          "id": "announce",
+          "label": "Announce that the pigeons work for you"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "The method needs work",
+        "body": "They admit they inferred the conversations. You learn the difference between a suspicious bird and actual evidence.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2042_adult-free-lecture-question_choice",
+          "date": {
+            "year": 2042,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2043,
+        "month": 2,
+        "day": 28
+      },
+      "age": 19,
+      "eventId": "event_2043_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+6%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2043_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2043,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "age": 20,
+      "eventId": "event_2044_adult-instruction-last-page",
+      "templateId": "adult-instruction-last-page",
+      "title": "Not the tabletop version",
+      "situation": "At a craft workshop, you pull the tab on a kit labelled “decorative boat”. A full-size inflatable canoe starts filling the room. The tiny instruction sheet says to inflate outdoors.",
+      "choices": [
+        {
+          "id": "restart",
+          "label": "Deflate it before it reaches the doorway"
+        },
+        {
+          "id": "adapt",
+          "label": "Climb in and ask for paddles"
+        },
+        {
+          "id": "blame",
+          "label": "Insist the picture on the box was misleading"
+        }
+      ],
+      "selected": "restart",
+      "result": {
+        "title": "A long public fart",
+        "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2044_adult-instruction-last-page_choice",
+          "date": {
+            "year": 2044,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I deflated a full-size canoe during a crowded craft workshop.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2045,
+        "month": 1,
+        "day": 29
+      },
+      "age": 20,
+      "eventId": "emergency_condition_person_player_43_0_2045",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2045_choice",
+          "date": {
+            "year": 2045,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "age": 21,
+      "eventId": "event_2045_bad-review",
+      "templateId": "bad-review",
+      "title": "The soup tribunal",
+      "situation": "You describe a bowl of soup online as “fine”. A stranger accuses you of destroying local culture. They have posted eleven replies and a diagram.",
+      "choices": [
+        {
+          "id": "clarify",
+          "label": "Explain that you meant the soup"
+        },
+        {
+          "id": "leave",
+          "label": "Leave the soup to its lawyers"
+        },
+        {
+          "id": "essay",
+          "label": "Publish a detailed attack on their diagram"
+        }
+      ],
+      "selected": "clarify",
+      "result": {
+        "title": "A narrow defence",
+        "body": "You clarify that your review concerns lunch rather than civilisation. The diagram receives no further comment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2045_bad-review_choice",
+          "date": {
+            "year": 2045,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I clarified a soup review after a stranger took it personally.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2046,
+        "month": 1,
+        "day": 29
+      },
+      "age": 21,
+      "eventId": "emergency_condition_person_player_43_0_2046",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2046_choice",
+          "date": {
+            "year": 2046,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "age": 22,
+      "eventId": "emergency_condition_person_player_43_0_2047",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2047_choice",
+          "date": {
+            "year": 2047,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "age": 23,
+      "eventId": "event_2047_comparison-scroll",
+      "templateId": "comparison-scroll",
+      "title": "Everyone else appears to be thriving",
+      "situation": "Your feed contains a promotion, a beach, and a suspiciously tidy kitchen. Your own evening contains laundry.",
+      "choices": [
+        {
+          "id": "close",
+          "label": "Close the app and finish one thing"
+        },
+        {
+          "id": "message",
+          "label": "Send someone a proper message"
+        },
+        {
+          "id": "scroll",
+          "label": "Investigate another hour of success"
+        }
+      ],
+      "selected": "close",
+      "result": {
+        "title": "One less pile",
+        "body": "The laundry is still laundry. At least it is now folded.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2047_comparison-scroll_choice",
+          "date": {
+            "year": 2047,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I stopped comparing my evening to everyone else’s highlights.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2048,
+        "month": 1,
+        "day": 29
+      },
+      "age": 23,
+      "eventId": "emergency_condition_person_player_43_0_2048",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2048_choice",
+          "date": {
+            "year": 2048,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "age": 24,
+      "eventId": "event_2048_old-photo",
+      "templateId": "old-photo",
+      "title": "Evidence from a previous haircut",
+      "situation": "Ruby sends you an old photograph. The haircut is difficult to defend. The memory attached to it is much better.",
+      "choices": [
+        {
+          "id": "story",
+          "label": "Ask for the whole story"
+        },
+        {
+          "id": "scan",
+          "label": "Save a copy and label it"
+        },
+        {
+          "id": "joke",
+          "label": "Focus entirely on the haircut"
+        }
+      ],
+      "selected": "story",
+      "result": {
+        "title": "An unreliable defence witness",
+        "body": "Ruby remembers the day fondly, then admits thinking the haircut was a good idea. You forgive the first part.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Ruby Kelly · relationship",
+            "value": "+6%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2048_old-photo_choice",
+          "date": {
+            "year": 2048,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I heard the story behind an old photo. Ruby also confessed to approving the haircut.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2049,
+        "month": 1,
+        "day": 29
+      },
+      "age": 24,
+      "eventId": "emergency_condition_person_player_43_0_2049",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2049_choice",
+          "date": {
+            "year": 2049,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2050,
+        "month": 1,
+        "day": 29
+      },
+      "age": 25,
+      "eventId": "emergency_condition_person_player_43_0_2050",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2050_choice",
+          "date": {
+            "year": 2050,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "age": 26,
+      "eventId": "event_2050_small-mistake",
+      "templateId": "small-mistake",
+      "title": "Reply all",
+      "situation": "You meant to send “Is that wig on backwards?” to one person. It lands in the whole public-meeting chat. The wig’s owner is typing.",
+      "choices": [
+        {
+          "id": "own",
+          "label": "Apologise before the typing stops"
+        },
+        {
+          "id": "laugh",
+          "label": "Claim you meant your own wig"
+        },
+        {
+          "id": "reread",
+          "label": "Keep reopening the chat in horror"
+        }
+      ],
+      "selected": "own",
+      "result": {
+        "title": "An honest public disaster",
+        "body": "You admit it was rude. The owner replies, “It is on correctly.” Nobody asks which part you meant to apologise for.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2050_small-mistake_choice",
+          "date": {
+            "year": 2050,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I apologised after sending a rude wig comment to a group chat.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2051,
+        "month": 1,
+        "day": 29
+      },
+      "age": 26,
+      "eventId": "emergency_condition_person_player_43_0_2051",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2051_choice",
+          "date": {
+            "year": 2051,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2052,
+        "month": 1,
+        "day": 29
+      },
+      "age": 27,
+      "eventId": "emergency_condition_person_player_43_0_2052",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2052_choice",
+          "date": {
+            "year": 2052,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2053,
+        "month": 1,
+        "day": 29
+      },
+      "age": 28,
+      "eventId": "emergency_condition_person_player_43_0_2053",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2053_choice",
+          "date": {
+            "year": 2053,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2054,
+        "month": 1,
+        "day": 29
+      },
+      "age": 29,
+      "eventId": "emergency_condition_person_player_43_0_2054",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2054_choice",
+          "date": {
+            "year": 2054,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2055,
+        "month": 1,
+        "day": 29
+      },
+      "age": 30,
+      "eventId": "emergency_condition_person_player_43_0_2055",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2055_choice",
+          "date": {
+            "year": 2055,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2056,
+        "month": 1,
+        "day": 29
+      },
+      "age": 31,
+      "eventId": "emergency_condition_person_player_43_0_2056",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2056_choice",
+          "date": {
+            "year": 2056,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "age": 32,
+      "eventId": "event_2056_comparison-scroll",
+      "templateId": "comparison-scroll",
+      "title": "Everyone else appears to be thriving",
+      "situation": "Your feed contains a promotion, a beach, and a suspiciously tidy kitchen. Your own evening contains laundry.",
+      "choices": [
+        {
+          "id": "close",
+          "label": "Close the app and finish one thing"
+        },
+        {
+          "id": "message",
+          "label": "Send someone a proper message"
+        },
+        {
+          "id": "scroll",
+          "label": "Investigate another hour of success"
+        }
+      ],
+      "selected": "close",
+      "result": {
+        "title": "One less pile",
+        "body": "The laundry is still laundry. At least it is now folded.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2056_comparison-scroll_choice",
+          "date": {
+            "year": 2056,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I stopped comparing my evening to everyone else’s highlights.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2057,
+        "month": 1,
+        "day": 29
+      },
+      "age": 32,
+      "eventId": "emergency_condition_person_player_43_0_2057",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2057_choice",
+          "date": {
+            "year": 2057,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2058,
+        "month": 1,
+        "day": 29
+      },
+      "age": 33,
+      "eventId": "emergency_condition_person_player_43_0_2058",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2058_choice",
+          "date": {
+            "year": 2058,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2059,
+        "month": 1,
+        "day": 29
+      },
+      "age": 34,
+      "eventId": "emergency_condition_person_player_43_0_2059",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2059_choice",
+          "date": {
+            "year": 2059,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "age": 35,
+      "eventId": "event_2059_bad-review",
+      "templateId": "bad-review",
+      "title": "The soup tribunal",
+      "situation": "You describe a bowl of soup online as “fine”. A stranger accuses you of destroying local culture. They have posted eleven replies and a diagram.",
+      "choices": [
+        {
+          "id": "clarify",
+          "label": "Explain that you meant the soup"
+        },
+        {
+          "id": "leave",
+          "label": "Leave the soup to its lawyers"
+        },
+        {
+          "id": "essay",
+          "label": "Publish a detailed attack on their diagram"
+        }
+      ],
+      "selected": "clarify",
+      "result": {
+        "title": "A narrow defence",
+        "body": "You clarify that your review concerns lunch rather than civilisation. The diagram receives no further comment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2059_bad-review_choice",
+          "date": {
+            "year": 2059,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I clarified a soup review after a stranger took it personally.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2060,
+        "month": 1,
+        "day": 29
+      },
+      "age": 35,
+      "eventId": "emergency_condition_person_player_43_0_2060",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2060_choice",
+          "date": {
+            "year": 2060,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "age": 36,
+      "eventId": "event_2060_birthday-number",
+      "templateId": "birthday-number",
+      "title": "Happy statistical decline",
+      "situation": "For your birthday, someone sends a list of famous people who had achieved more by your age. They finish with “Hope this inspires you!”",
+      "choices": [
+        {
+          "id": "notice",
+          "label": "Celebrate without the comparison chart"
+        },
+        {
+          "id": "plan",
+          "label": "Choose one goal that is actually yours"
+        },
+        {
+          "id": "compare",
+          "label": "Read every biography before bed"
+        }
+      ],
+      "selected": "notice",
+      "result": {
+        "title": "Cake remains an achievement",
+        "body": "You put the list aside. Your day improves immediately when it stops competing with a dead inventor.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2060_birthday-number_choice",
+          "date": {
+            "year": 2060,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I ignored an unhelpful achievement list on my birthday.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2061,
+        "month": 1,
+        "day": 29
+      },
+      "age": 36,
+      "eventId": "emergency_condition_person_player_43_0_2061",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2061_choice",
+          "date": {
+            "year": 2061,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2062,
+        "month": 1,
+        "day": 29
+      },
+      "age": 37,
+      "eventId": "emergency_condition_person_player_43_0_2062",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2062_choice",
+          "date": {
+            "year": 2062,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "age": 38,
+      "eventId": "event_2062_small-mistake",
+      "templateId": "small-mistake",
+      "title": "Reply all",
+      "situation": "You meant to send “Is that wig on backwards?” to one person. It lands in the whole public-meeting chat. The wig’s owner is typing.",
+      "choices": [
+        {
+          "id": "own",
+          "label": "Apologise before the typing stops"
+        },
+        {
+          "id": "laugh",
+          "label": "Claim you meant your own wig"
+        },
+        {
+          "id": "reread",
+          "label": "Keep reopening the chat in horror"
+        }
+      ],
+      "selected": "own",
+      "result": {
+        "title": "An honest public disaster",
+        "body": "You admit it was rude. The owner replies, “It is on correctly.” Nobody asks which part you meant to apologise for.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2062_small-mistake_choice",
+          "date": {
+            "year": 2062,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I apologised after sending a rude wig comment to a group chat.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2063,
+        "month": 1,
+        "day": 29
+      },
+      "age": 38,
+      "eventId": "emergency_condition_person_player_43_0_2063",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2063_choice",
+          "date": {
+            "year": 2063,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2064,
+        "month": 1,
+        "day": 29
+      },
+      "age": 39,
+      "eventId": "emergency_condition_person_player_43_0_2064",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2064_choice",
+          "date": {
+            "year": 2064,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "age": 40,
+      "eventId": "event_2064_comparison-scroll",
+      "templateId": "comparison-scroll",
+      "title": "Everyone else appears to be thriving",
+      "situation": "Your feed contains a promotion, a beach, and a suspiciously tidy kitchen. Your own evening contains laundry.",
+      "choices": [
+        {
+          "id": "close",
+          "label": "Close the app and finish one thing"
+        },
+        {
+          "id": "message",
+          "label": "Send someone a proper message"
+        },
+        {
+          "id": "scroll",
+          "label": "Investigate another hour of success"
+        }
+      ],
+      "selected": "close",
+      "result": {
+        "title": "One less pile",
+        "body": "The laundry is still laundry. At least it is now folded.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2064_comparison-scroll_choice",
+          "date": {
+            "year": 2064,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I stopped comparing my evening to everyone else’s highlights.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2065,
+        "month": 1,
+        "day": 29
+      },
+      "age": 40,
+      "eventId": "emergency_condition_person_player_43_0_2065",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: recurring wheezing and shortness of breath. You have been diagnosed with Asthma. A hospital assessment can begin treatment and may require a short stay. The quoted care costs A$70.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_43_0_2065_choice",
+          "date": {
+            "year": 2065,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    }
+  ],
+  "journal": [
+    {
+      "id": "journal_birth",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I was born on 29 February 2024 in Melbourne, Australia.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_identity",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My name is Riley Kelly. I’m a boy.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent1",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My mother is Ruby Kelly, 32. She works as a warehouse assistant.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent2",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My father is Jack Kelly, 33. He works as a cleaner.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_family",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My parents are married, and we all live together. My father sent out my birth weight using the wrong units. There were several worried replies.",
+      "category": "birth"
+    },
+    {
+      "id": "event_2025_first-bubble-catch_choice",
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chased soap bubbles and caught absolutely nothing.",
+      "category": "event"
+    },
+    {
+      "id": "year_3_quiet",
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I grew a little more confident in a world full of things to investigate.",
+      "category": "year"
+    },
+    {
+      "id": "event_2027_shoe-principle_choice",
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I let Ruby help with my shoes.",
+      "category": "event"
+    },
+    {
+      "id": "event_2028_toddler-ice-cube_choice",
+      "date": {
+        "year": 2028,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I showed Ruby the ice cube I had hidden in my sock.",
+      "category": "event"
+    },
+    {
+      "id": "fact_11_18",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I started at Melbourne Primary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_11_19",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Harper Walker became my class teacher at Melbourne Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_11_20",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I got to know Riley Walker (classmate), Ruby, Riley Brown (classmate) in my class at Melbourne Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "event_2029_toddler-zipper-puzzle_choice",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I worked out how to separate two jackets I had zipped together.",
+      "category": "event"
+    },
+    {
+      "id": "fact_15_29",
+      "date": {
+        "year": 2030,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 67%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2030_school-answer-blurt_choice",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I waited to hear a whole classroom question before answering.",
+      "category": "event"
+    },
+    {
+      "id": "fact_18_39",
+      "date": {
+        "year": 2031,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 71%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_19_47",
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Ruby agreed to Riley’s arcade party in 2031-03. Nothing has been paid yet.",
+      "category": "school"
+    },
+    {
+      "id": "event_2031_school-arcade-invitation_choice",
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked Ruby for permission to go to Riley’s arcade birthday.",
+      "category": "event"
+    },
+    {
+      "id": "story_19_0_due_choice",
+      "date": {
+        "year": 2031,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I went to Riley’s arcade birthday with Ruby.",
+      "category": "event"
+    },
+    {
+      "id": "fact_23_53",
+      "date": {
+        "year": 2032,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 74%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2032_school-empty-lunchbox_choice",
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I quietly got Harper’s help when Riley had no lunch.",
+      "category": "event"
+    },
+    {
+      "id": "fact_26_62",
+      "date": {
+        "year": 2033,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 77%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2033_rainy-fort_choice",
+      "date": {
+        "year": 2033,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I built a blanket fort that almost met building regulations.",
+      "category": "event"
+    },
+    {
+      "id": "fact_29_70",
+      "date": {
+        "year": 2034,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 78%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_29_quiet",
+      "date": {
+        "year": 2034,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_31_79",
+      "date": {
+        "year": 2035,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 81%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_31_quiet",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_33_89",
+      "date": {
+        "year": 2036,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 83%. I completed twelve attended months at Melbourne Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_33_92",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I moved on to Melbourne Secondary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_33_93",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Isla Brown became my class teacher at Melbourne Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_33_94",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I got to know Riley Walker (classmate), Ruby, Riley Brown (classmate), Kai in my class at Melbourne Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "event_2036_teen-unit-confusion_choice",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I admitted inventing science data and replaced my report with real measurements.",
+      "category": "event"
+    },
+    {
+      "id": "fact_38_106",
+      "date": {
+        "year": 2037,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 78%. I completed twelve attended months at Melbourne Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2037_teen-family-game-timer_choice",
+      "date": {
+        "year": 2037,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I stopped a game when I had promised Ruby I would.",
+      "category": "event"
+    },
+    {
+      "id": "fact_41_120",
+      "date": {
+        "year": 2038,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 81%. I completed twelve attended months at Melbourne Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_41_quiet",
+      "date": {
+        "year": 2038,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_43_141",
+      "date": {
+        "year": 2039,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 84%. I completed twelve attended months at Melbourne Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_43_144",
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: recurring wheezing and shortness of breath.",
+      "category": "health"
+    },
+    {
+      "id": "event_2039_teen-solo-rehearsal_choice",
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I helped Riley rehearse a song that included an insult about me.",
+      "category": "event"
+    },
+    {
+      "id": "fact_47_154",
+      "date": {
+        "year": 2039,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2039_choice",
+      "date": {
+        "year": 2039,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_48_156",
+      "date": {
+        "year": 2040,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "year_46_quiet",
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_50_168",
+      "date": {
+        "year": 2040,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 87%. I completed twelve attended months at Melbourne Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_50_172",
+      "date": {
+        "year": 2040,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: pain and swelling around an ankle.",
+      "category": "health"
+    },
+    {
+      "id": "fact_50_173",
+      "date": {
+        "year": 2040,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "event_2041_teen-canteen-review_choice",
+      "date": {
+        "year": 2041,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I helped Riley turn a canteen rant into useful feedback.",
+      "category": "event"
+    },
+    {
+      "id": "fact_53_184",
+      "date": {
+        "year": 2041,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 91%. I completed twelve attended months at Melbourne Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_53_192",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I completed secondary education with grades of 91%.",
+      "category": "education"
+    },
+    {
+      "id": "fact_53_193",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I began covering the costs of an independent household.",
+      "category": "family"
+    },
+    {
+      "id": "fact_53_194",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "fact_54_203",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Ruby Singh and Riley Brown started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2042_adult-free-lecture-question_choice",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+      "category": "event"
+    },
+    {
+      "id": "event_2043_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2043,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "fact_60_225",
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Harper Walker and Isla Brown started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2044_adult-instruction-last-page_choice",
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I deflated a full-size canoe during a crowded craft workshop.",
+      "category": "event"
+    },
+    {
+      "id": "fact_64_230",
+      "date": {
+        "year": 2045,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2045_choice",
+      "date": {
+        "year": 2045,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_65_232",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "fact_65_237",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Ruby Singh and Riley Brown married after paying for their ceremony together.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2045_bad-review_choice",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I clarified a soup review after a stranger took it personally.",
+      "category": "event"
+    },
+    {
+      "id": "fact_68_239",
+      "date": {
+        "year": 2045,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_69_240",
+      "date": {
+        "year": 2046,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2046_choice",
+      "date": {
+        "year": 2046,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_70_242",
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_68_quiet",
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_72_248",
+      "date": {
+        "year": 2046,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_73_250",
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2047_choice",
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_74_252",
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "fact_74_257",
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Kai Kelly and Riley Walker started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2047_comparison-scroll_choice",
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing my evening to everyone else’s highlights.",
+      "category": "event"
+    },
+    {
+      "id": "fact_77_259",
+      "date": {
+        "year": 2047,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_78_262",
+      "date": {
+        "year": 2048,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2048_choice",
+      "date": {
+        "year": 2048,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_79_264",
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "fact_79_269",
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Harper Walker and Isla Brown married after paying for their ceremony together.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2048_old-photo_choice",
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I heard the story behind an old photo. Ruby also confessed to approving the haircut.",
+      "category": "event"
+    },
+    {
+      "id": "fact_82_271",
+      "date": {
+        "year": 2048,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_83_272",
+      "date": {
+        "year": 2049,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2049_choice",
+      "date": {
+        "year": 2049,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_84_274",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "fact_84_279",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Kai Kelly and Riley Walker stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_82_quiet",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_86_281",
+      "date": {
+        "year": 2049,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_87_282",
+      "date": {
+        "year": 2050,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2050_choice",
+      "date": {
+        "year": 2050,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_88_284",
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2050_small-mistake_choice",
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I apologised after sending a rude wig comment to a group chat.",
+      "category": "event"
+    },
+    {
+      "id": "fact_91_290",
+      "date": {
+        "year": 2050,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_92_292",
+      "date": {
+        "year": 2051,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2051_choice",
+      "date": {
+        "year": 2051,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_93_294",
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_91_quiet",
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_95_302",
+      "date": {
+        "year": 2051,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_96_306",
+      "date": {
+        "year": 2052,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2052_choice",
+      "date": {
+        "year": 2052,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_97_310",
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_95_quiet",
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_99_321",
+      "date": {
+        "year": 2052,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_100_326",
+      "date": {
+        "year": 2053,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2053_choice",
+      "date": {
+        "year": 2053,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_101_328",
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_99_quiet",
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_103_339",
+      "date": {
+        "year": 2053,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_104_340",
+      "date": {
+        "year": 2054,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2054_choice",
+      "date": {
+        "year": 2054,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_105_343",
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_103_quiet",
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_107_350",
+      "date": {
+        "year": 2054,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_108_351",
+      "date": {
+        "year": 2055,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2055_choice",
+      "date": {
+        "year": 2055,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_109_353",
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_107_quiet",
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_111_359",
+      "date": {
+        "year": 2055,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_112_363",
+      "date": {
+        "year": 2056,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2056_choice",
+      "date": {
+        "year": 2056,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_113_366",
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2056_comparison-scroll_choice",
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing my evening to everyone else’s highlights.",
+      "category": "event"
+    },
+    {
+      "id": "fact_116_375",
+      "date": {
+        "year": 2056,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_117_380",
+      "date": {
+        "year": 2057,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2057_choice",
+      "date": {
+        "year": 2057,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_118_383",
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_116_quiet",
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_120_391",
+      "date": {
+        "year": 2057,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_121_398",
+      "date": {
+        "year": 2058,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2058_choice",
+      "date": {
+        "year": 2058,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_122_400",
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_120_quiet",
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_124_409",
+      "date": {
+        "year": 2058,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_125_413",
+      "date": {
+        "year": 2059,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2059_choice",
+      "date": {
+        "year": 2059,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_126_415",
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2059_bad-review_choice",
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I clarified a soup review after a stranger took it personally.",
+      "category": "event"
+    },
+    {
+      "id": "fact_129_422",
+      "date": {
+        "year": 2059,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_130_425",
+      "date": {
+        "year": 2060,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2060_choice",
+      "date": {
+        "year": 2060,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_131_427",
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2060_birthday-number_choice",
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I ignored an unhelpful achievement list on my birthday.",
+      "category": "event"
+    },
+    {
+      "id": "fact_134_437",
+      "date": {
+        "year": 2060,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_135_442",
+      "date": {
+        "year": 2061,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2061_choice",
+      "date": {
+        "year": 2061,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_136_445",
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "death_person_npc_11_3",
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Harper Walker died at age 68.",
+      "category": "family"
+    },
+    {
+      "id": "year_134_quiet",
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_138_461",
+      "date": {
+        "year": 2061,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_139_463",
+      "date": {
+        "year": 2062,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2062_choice",
+      "date": {
+        "year": 2062,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_140_465",
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2062_small-mistake_choice",
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I apologised after sending a rude wig comment to a group chat.",
+      "category": "event"
+    },
+    {
+      "id": "fact_143_474",
+      "date": {
+        "year": 2062,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_144_478",
+      "date": {
+        "year": 2063,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2063_choice",
+      "date": {
+        "year": 2063,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_145_480",
+      "date": {
+        "year": 2063,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_143_quiet",
+      "date": {
+        "year": 2063,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_147_491",
+      "date": {
+        "year": 2063,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_148_493",
+      "date": {
+        "year": 2064,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2064_choice",
+      "date": {
+        "year": 2064,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_149_495",
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "event_2064_comparison-scroll_choice",
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I stopped comparing my evening to everyone else’s highlights.",
+      "category": "event"
+    },
+    {
+      "id": "fact_152_505",
+      "date": {
+        "year": 2064,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_153_511",
+      "date": {
+        "year": 2065,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Asthma.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_43_0_2065_choice",
+      "date": {
+        "year": 2065,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_154_513",
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "My ongoing treatment paused because I could not fund it.",
+      "category": "health"
+    },
+    {
+      "id": "year_152_quiet",
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_156_524",
+      "date": {
+        "year": 2065,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_156_526",
+      "date": {
+        "year": 2065,
+        "month": 9,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: fever, a rash and a persistent cough.",
+      "category": "health"
+    },
+    {
+      "id": "fact_156_530",
+      "date": {
+        "year": 2065,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "death_person_player",
+      "date": {
+        "year": 2065,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I died at age 41. Cause: Asthma.",
+      "category": "death"
+    }
+  ]
+}

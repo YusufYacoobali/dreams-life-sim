@@ -169,7 +169,7 @@ export const eventTemplates: readonly EventTemplate[] = [
     id: 'old-photo', min: 22, max: 70, parent: true, parentContact: true, illustration: 'relationship', title: 'Evidence from a previous haircut',
     body: '{parent} sends you an old photograph. The haircut is difficult to defend. The memory attached to it is much better.',
     choices: [
-      option('story', 'Ask for the whole story', { happiness: 5, stress: -2 }, 'An unreliable defence witness', '{parent} remembers the day fondly, then admits thinking the haircut was a good idea. You forgive the first part.', 'I heard the story behind an old photo. {parent} also confessed to approving the haircut.', 6),
+      option('story', 'Ask for the whole story', { happiness: 5, stress: -2 }, 'An unreliable defence witness', '{parent} remembers the day fondly, then admits thinking the haircut was a good idea. You agree to preserve the memory and deny the hairstyle.', 'I heard the story behind an old photo. {parent} also confessed to approving the haircut.', 6),
       option('scan', 'Save a copy and label it', { discipline: 3, happiness: 2 }, 'For the historical record', 'You save the names and date. {parent} asks if the haircut needs its own warning label.', 'I saved an old family photograph, including its indefensible haircut.', 4),
       option('joke', 'Focus entirely on the haircut', { happiness: 3 }, 'The stylist pleads ignorance', '{parent} blames fashion. You point out that other people existed that year and had normal hair.', 'I teased {parent} about the haircut in an old photo.', 2),
     ],

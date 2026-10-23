@@ -1,0 +1,5792 @@
+{
+  "seed": 11,
+  "country": "ES",
+  "gender": "female",
+  "ageAtDeath": 87,
+  "causeOfDeath": "natural causes",
+  "completed": true,
+  "ledgerRows": 24580,
+  "decisions": [
+    {
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "age": 1,
+      "eventId": "event_2025_first-echo",
+      "templateId": "first-echo",
+      "title": "Encore! Encore!",
+      "situation": "You bang a spoon on a bowl. It makes a brilliant noise. You would like to check that result another twenty times.",
+      "choices": [
+        {
+          "id": "concert",
+          "label": "Give the full concert"
+        },
+        {
+          "id": "rhythm",
+          "label": "Try a different rhythm"
+        },
+        {
+          "id": "inspect",
+          "label": "Look inside the bowl"
+        }
+      ],
+      "selected": "concert",
+      "result": {
+        "title": "A short, loud career",
+        "body": "You keep banging until you drop the spoon. You look very pleased with yourself.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2025_first-echo_choice",
+          "date": {
+            "year": 2025,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I discovered how much noise a spoon and a bowl could make.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 28
+      },
+      "age": 2,
+      "eventId": "event_2026_toddler-parent-name",
+      "templateId": "toddler-parent-name",
+      "title": "Your name is No",
+      "situation": "You decide Hugo is called “No”, because they say it so often. You introduce them to a visitor as No. No looks tired.",
+      "choices": [
+        {
+          "id": "repeat",
+          "label": "Ask No for a biscuit"
+        },
+        {
+          "id": "ask",
+          "label": "Ask whether their middle name is Stop"
+        },
+        {
+          "id": "usual",
+          "label": "Give them their old name back"
+        }
+      ],
+      "selected": "repeat",
+      "result": {
+        "title": "They answer to it",
+        "body": "Hugo says no. You point out that they have just said their own name. The visitor needs a moment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "-1%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_2",
+            "label": "Hugo Sánchez · relationship",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2026_toddler-parent-name_choice",
+          "date": {
+            "year": 2026,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I named Hugo No, then asked No for a biscuit.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "age": 3,
+      "eventId": "event_2027_toddler-ice-cube",
+      "templateId": "toddler-ice-cube",
+      "title": "Something in your sock",
+      "situation": "You hide an ice cube in your sock. Hugo asks why your foot is leaking. You had not planned for questions.",
+      "choices": [
+        {
+          "id": "watch",
+          "label": "Show Hugo your disappearing treasure"
+        },
+        {
+          "id": "touch",
+          "label": "Try the other sock"
+        },
+        {
+          "id": "save",
+          "label": "Ask to put your sock in the freezer"
+        }
+      ],
+      "selected": "watch",
+      "result": {
+        "title": "One wet sock",
+        "body": "You turn the sock out over a bowl. A tiny cube slides out. Hugo supplies a dry sock; you inspect the bowl for the rest of your treasure.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Hugo Sánchez · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2027_toddler-ice-cube_choice",
+          "date": {
+            "year": 2027,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I showed Hugo the ice cube I had hidden in my sock.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "age": 5,
+      "eventId": "event_2029_toddler-caterpillar-crossing",
+      "templateId": "toddler-caterpillar-crossing",
+      "title": "Heavy traffic",
+      "situation": "A caterpillar is crossing a path. It has a lot of feet and very little urgency.",
+      "choices": [
+        {
+          "id": "watch",
+          "label": "Crouch down and watch"
+        },
+        {
+          "id": "space",
+          "label": "Give it plenty of room"
+        },
+        {
+          "id": "race",
+          "label": "Challenge it to a race"
+        }
+      ],
+      "selected": "watch",
+      "result": {
+        "title": "Eventually, the other side",
+        "body": "It reaches the edge and disappears under a leaf. You remain impressed by all the feet.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2029_toddler-caterpillar-crossing_choice",
+          "date": {
+            "year": 2029,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I watched a caterpillar cross a path.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "age": 8,
+      "eventId": "event_2032_school-library-whisper",
+      "templateId": "school-library-whisper",
+      "title": "A very short biography",
+      "situation": "Leo passes you a homemade book called “People Who Smell Weird”. Your name is on page one. Every other page is blank.",
+      "choices": [
+        {
+          "id": "pause",
+          "label": "Give it a terrible review"
+        },
+        {
+          "id": "later",
+          "label": "Ask why they made it about you"
+        },
+        {
+          "id": "reply",
+          "label": "Write their name on every remaining page"
+        }
+      ],
+      "selected": "pause",
+      "result": {
+        "title": "Needs more characters",
+        "body": "You write “repetitive, poorly researched” on the cover. Leo laughs, then admits they could not think of a second chapter.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Leo Sánchez · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2032_school-library-whisper_choice",
+          "date": {
+            "year": 2032,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I reviewed Leo’s insulting homemade book as a disappointed critic.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2033,
+        "month": 2,
+        "day": 28
+      },
+      "age": 9,
+      "eventId": "event_2033_school-tiny-editor",
+      "templateId": "school-tiny-editor",
+      "title": "The headteacher is three mice",
+      "situation": "Leo wants help with a class newsletter. The headline is “Headteacher Replaced by Three Mice”. Their evidence is a chewed worksheet.",
+      "choices": [
+        {
+          "id": "report",
+          "label": "Investigate before printing it"
+        },
+        {
+          "id": "cartoon",
+          "label": "Draw a wanted poster for the mice"
+        },
+        {
+          "id": "decline",
+          "label": "Leave the rodent conspiracy to them"
+        }
+      ],
+      "selected": "report",
+      "result": {
+        "title": "One human, several questions",
+        "body": "The headteacher is visibly one person. Leo reluctantly changes the headline to “Worksheet Damaged”. Your reporting improves; circulation probably will not.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Leo Sánchez · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_3",
+            "label": "Content Production",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2033_school-tiny-editor_choice",
+          "date": {
+            "year": 2033,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I helped Leo check a ridiculous newsletter claim.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2034,
+        "month": 2,
+        "day": 28
+      },
+      "age": 10,
+      "eventId": "event_2034_school-inverted-map",
+      "templateId": "school-inverted-map",
+      "title": "The staffroom boss fight",
+      "situation": "You copied your school map from a video game. Leo wants to know why the staffroom is labelled “FINAL BOSS” and the toilets contain treasure.",
+      "choices": [
+        {
+          "id": "turn",
+          "label": "Replace the monsters with actual rooms"
+        },
+        {
+          "id": "ask",
+          "label": "Ask whether the staffroom really is off limits"
+        },
+        {
+          "id": "submarine",
+          "label": "Insist the treasure is in the toilets"
+        }
+      ],
+      "selected": "turn",
+      "result": {
+        "title": "A less dangerous school",
+        "body": "You redraw the map. The dragon becomes the library. Leo marks the corrected version and circles the one staircase you accidentally kept.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-2%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_2",
+            "label": "Grades",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2034_school-inverted-map_choice",
+          "date": {
+            "year": 2034,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I replaced a video-game map with a real map of my school.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "age": 11,
+      "eventId": "event_2035_school-arcade-invitation",
+      "templateId": "school-arcade-invitation",
+      "title": "Birthday invitation",
+      "situation": "Leo invites you to a birthday party at an arcade. The invitation has more glitter than useful information.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask Hugo for permission"
+        },
+        {
+          "id": "details",
+          "label": "Ask Leo for more details"
+        },
+        {
+          "id": "decline",
+          "label": "Politely decline"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "Adults need an address",
+        "body": "Hugo checks the time and supervision. Their answer and any plan are recorded below. Nothing is paid just for asking.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Hugo Sánchez · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Leo Sánchez · relationship",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "plan",
+            "label": "Permission",
+            "value": "Hugo agreed · 2035-03",
+            "tone": "neutral"
+          },
+          {
+            "id": "quote",
+            "label": "Hugo’s outing cost",
+            "value": "12,50 € if you attend",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2035_school-arcade-invitation_choice",
+          "date": {
+            "year": 2035,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked Hugo for permission to go to Leo’s arcade birthday.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2035,
+        "month": 3,
+        "day": 29
+      },
+      "age": 11,
+      "eventId": "story_29_0_due",
+      "templateId": "story-arcade-invitation",
+      "title": "Party day",
+      "situation": "Leo’s arcade birthday is here. Hugo agreed to take you. The quoted outing costs 12,50 €, paid by Hugo only if you go.",
+      "choices": [
+        {
+          "id": "attend",
+          "label": "Go with Hugo · 12,50 €"
+        },
+        {
+          "id": "decline",
+          "label": "Stay home · no charge"
+        }
+      ],
+      "selected": "attend",
+      "result": {
+        "title": "High score, low dignity",
+        "body": "You and Leo take turns at the machines. Hugo pays the quoted outing cost. Nobody wins enough tickets to retire.",
+        "effects": [
+          {
+            "id": "payment",
+            "label": "Hugo paid",
+            "value": "12,50 €",
+            "tone": "neutral"
+          },
+          {
+            "id": "story_1",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "story_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          },
+          {
+            "id": "story_3",
+            "label": "Leo · relationship",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "story_4",
+            "label": "Hugo · relationship",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "story_29_0_due_choice",
+          "date": {
+            "year": 2035,
+            "month": 3,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I went to Leo’s arcade birthday with Hugo.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "age": 15,
+      "eventId": "event_2039_teen-solo-rehearsal",
+      "templateId": "teen-solo-rehearsal",
+      "title": "You are in verse two",
+      "situation": "Leo asks you to help rehearse a song about everyone who has annoyed them. Your name appears in verse two. The rhyme is frankly weak.",
+      "choices": [
+        {
+          "id": "stay",
+          "label": "Suggest a better rhyme for your insult"
+        },
+        {
+          "id": "talk",
+          "label": "Ask why you made the track list"
+        },
+        {
+          "id": "leave",
+          "label": "Walk out before verse three"
+        }
+      ],
+      "selected": "stay",
+      "result": {
+        "title": "An unwilling co-writer",
+        "body": "You improve the line and rehearse the chorus. Leo laughs, then admits that your original offence was borrowing a pencil.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Leo Sánchez · relationship",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_4",
+            "label": "Music",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2039_teen-solo-rehearsal_choice",
+          "date": {
+            "year": 2039,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I helped Leo rehearse a song that included an insult about me.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "age": 16,
+      "eventId": "event_2040_first-presentation",
+      "templateId": "first-presentation",
+      "title": "Fun fact about yourself",
+      "situation": "You must introduce yourself with one fun fact. The person before you announces they once swallowed a coin. Everyone turns to you expecting escalation.",
+      "choices": [
+        {
+          "id": "breathe",
+          "label": "Give your name and disappoint them"
+        },
+        {
+          "id": "joke",
+          "label": "Claim you only eat paper money"
+        },
+        {
+          "id": "rush",
+          "label": "Recite your entire biography at speed"
+        }
+      ],
+      "selected": "breathe",
+      "result": {
+        "title": "No coins were harmed",
+        "body": "You say you like music. A perfectly ordinary fact survives in a room briefly obsessed with swallowing things.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2040_first-presentation_choice",
+          "date": {
+            "year": 2040,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I gave a simple introduction after someone set an alarming standard.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2041,
+        "month": 2,
+        "day": 28
+      },
+      "age": 17,
+      "eventId": "event_2041_parent-boundary",
+      "templateId": "parent-boundary",
+      "title": "Read at 10:42",
+      "situation": "Hugo sends “Where are you?” You are somewhere perfectly ordinary, but the fourth message arrives before you finish typing.",
+      "choices": [
+        {
+          "id": "explain",
+          "label": "Reply, then talk about check-ins"
+        },
+        {
+          "id": "photo",
+          "label": "Send a spectacularly boring photo"
+        },
+        {
+          "id": "ignore",
+          "label": "Ignore all four"
+        }
+      ],
+      "selected": "explain",
+      "result": {
+        "title": "A workable arrangement",
+        "body": "You agree on a check-in time. Hugo admits the silence worried them.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_2",
+            "label": "Hugo Sánchez · relationship",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2041_parent-boundary_choice",
+          "date": {
+            "year": 2041,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I agreed on clearer check-ins with Hugo.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "age": 18,
+      "eventId": "event_2042_adult-open-mic-list",
+      "templateId": "adult-open-mic-list",
+      "title": "A striking resemblance",
+      "situation": "A caricaturist at a street fair in Valencia offers you a free sample portrait. A small crowd gathers. The artist turns the drawing around. It is you as an enormous angry thumb.",
+      "choices": [
+        {
+          "id": "correct",
+          "label": "Ask whether they could add a jawline"
+        },
+        {
+          "id": "joke",
+          "label": "Ask for a pencil and draw the artist"
+        },
+        {
+          "id": "hide",
+          "label": "Cover the portrait and leave"
+        }
+      ],
+      "selected": "correct",
+      "result": {
+        "title": "The formal thumb",
+        "body": "The artist adds a bow tie. You point out that this is not a jawline. A spectator says the resemblance is uncanny. You leave holding a thumb in evening wear.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2042_adult-open-mic-list_choice",
+          "date": {
+            "year": 2042,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked a caricaturist to correct my portrait and received a thumb in a bow tie.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2043,
+        "month": 2,
+        "day": 28
+      },
+      "age": 19,
+      "eventId": "event_2043_adult-prop-cash-rain",
+      "templateId": "adult-prop-cash-rain",
+      "title": "Money is falling from the sky",
+      "situation": "A gust sends banknotes across a square in Valencia. You grab one before spotting a film crew and the words FOR FILM USE across the back.",
+      "choices": [
+        {
+          "id": "return",
+          "label": "Help return the prop notes"
+        },
+        {
+          "id": "pose",
+          "label": "Pose briefly like a terrible billionaire"
+        },
+        {
+          "id": "pocket",
+          "label": "Insist the prop note is now yours"
+        }
+      ],
+      "selected": "return",
+      "result": {
+        "title": "An honest counterfeit cleanup",
+        "body": "You collect paper money worth precisely nothing. A crew member thanks you while chasing a very wealthy-looking pigeon.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2043_adult-prop-cash-rain_choice",
+          "date": {
+            "year": 2043,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I helped a film crew recover wind-blown prop money in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "age": 20,
+      "eventId": "event_2044_adult-queue-merge",
+      "templateId": "adult-queue-merge",
+      "title": "The accidental millionaire",
+      "situation": "At a charity auction, someone mistakes you for a wealthy donor. The auctioneer hands you the microphone beside a photograph of an elderly donkey. “How much will you give?” The room goes quiet.",
+      "choices": [
+        {
+          "id": "alternate",
+          "label": "Admit your wealth has been exaggerated"
+        },
+        {
+          "id": "wait",
+          "label": "Donate €240.13 to the donkey charity"
+        },
+        {
+          "id": "push",
+          "label": "Claim you are the donkey’s lawyer"
+        }
+      ],
+      "selected": "alternate",
+      "result": {
+        "title": "A donkey-sized misunderstanding",
+        "body": "You explain that you were looking for the toilets. The auctioneer takes back the microphone and points down the corridor. Several people applaud your honesty. One applauds the donkey.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2044_adult-queue-merge_choice",
+          "date": {
+            "year": 2044,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I admitted I was not the wealthy donor a charity auction expected.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "age": 21,
+      "eventId": "event_2045_community-garden",
+      "templateId": "community-garden",
+      "title": "The naked gardener",
+      "situation": "The community garden in Valencia needs volunteers. Its organiser is wearing a novelty apron printed with a naked torso and refuses to explain it.",
+      "choices": [
+        {
+          "id": "join",
+          "label": "Weed beside the alarming apron"
+        },
+        {
+          "id": "learn",
+          "label": "Ask about the plants, very specifically"
+        },
+        {
+          "id": "pass",
+          "label": "Decide you have seen enough nature"
+        }
+      ],
+      "selected": "join",
+      "result": {
+        "title": "A productive misunderstanding",
+        "body": "You clear a whole bed. Three passers-by stop to stare before realising the torso has pockets.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2045_community-garden_choice",
+          "date": {
+            "year": 2045,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I volunteered beside a gardener in an alarming novelty apron in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "age": 22,
+      "eventId": "event_2046_adult-seat-with-a-view",
+      "templateId": "adult-seat-with-a-view",
+      "title": "The important businessman",
+      "situation": "You sit in the last free café chair. A child wearing an enormous tie tells you it is reserved for an important businessman. The businessman, they explain, is them.",
+      "choices": [
+        {
+          "id": "move",
+          "label": "Ask what business they are in"
+        },
+        {
+          "id": "decline",
+          "label": "Offer them the chair after your drink"
+        },
+        {
+          "id": "lecture",
+          "label": "Explain that reserving chairs is bad business"
+        }
+      ],
+      "selected": "move",
+      "result": {
+        "title": "A volatile juice market",
+        "body": "They explain that juice has gone up and crayons are a bad investment. You move to the counter while they hold a meeting with a biscuit.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2046_adult-seat-with-a-view_choice",
+          "date": {
+            "year": 2046,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I gave up a café chair after hearing a child’s business plan.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "age": 22,
+      "eventId": "emergency_condition_person_player_60_0_2047",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: persistent worry and disrupted sleep. A hospital assessment can begin treatment and may require a short stay. The quoted care costs €0.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_60_0_2047_choice",
+          "date": {
+            "year": 2047,
+            "month": 1,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "age": 25,
+      "eventId": "event_2049_adult-free-lecture-question",
+      "templateId": "adult-free-lecture-question",
+      "title": "Any difficult questions?",
+      "situation": "At a free talk, a speaker claims nobody has ever disproved their theory. The theory is that pigeons remember your face and discuss you at night.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask how they interviewed the pigeons"
+        },
+        {
+          "id": "listen",
+          "label": "Let another questioner take this one"
+        },
+        {
+          "id": "announce",
+          "label": "Announce that the pigeons work for you"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "The method needs work",
+        "body": "They admit they inferred the conversations. You learn the difference between a suspicious bird and actual evidence.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2049_adult-free-lecture-question_choice",
+          "date": {
+            "year": 2049,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "age": 26,
+      "eventId": "event_2050_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2050_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2050,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "age": 27,
+      "eventId": "event_2051_adult-weather-expert",
+      "templateId": "adult-weather-expert",
+      "title": "The door does not believe in you",
+      "situation": "An automatic shop door refuses to open for you. It opens for a child, a trolley and a blowing receipt. You step forward. Nothing. The cashier points at the sensor and suggests waving.",
+      "choices": [
+        {
+          "id": "honest",
+          "label": "Ask the cashier to let you out"
+        },
+        {
+          "id": "shelter",
+          "label": "Follow the trolley out"
+        },
+        {
+          "id": "predict",
+          "label": "Perform an increasingly furious dance"
+        }
+      ],
+      "selected": "honest",
+      "result": {
+        "title": "Assisted departure",
+        "body": "The cashier walks over. The doors open immediately for them. They hold the sensor while you leave, like a bouncer escorting out a ghost.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+2%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2051_adult-weather-expert_choice",
+          "date": {
+            "year": 2051,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I had to ask a cashier to release me through an automatic door.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "age": 28,
+      "eventId": "event_2052_adult-community-map",
+      "templateId": "adult-community-map",
+      "title": "Your murderous past",
+      "situation": "A walking-tour guide points straight at you and tells the group you are the ghost of a notorious murderer. You are outside a shop in Valencia, holding a sandwich.",
+      "choices": [
+        {
+          "id": "report",
+          "label": "Explain that you are alive and eating lunch"
+        },
+        {
+          "id": "orient",
+          "label": "Ask what crimes you supposedly committed"
+        },
+        {
+          "id": "follow",
+          "label": "Follow the tour without breaking eye contact"
+        }
+      ],
+      "selected": "report",
+      "result": {
+        "title": "New evidence",
+        "body": "The guide calls your sandwich an unsettling detail. You take a large bite. A tourist asks whether ghosts can eat cheese. The guide moves the group along.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2052_adult-community-map_choice",
+          "date": {
+            "year": 2052,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I corrected a walking tour that mistook me for a murderer’s ghost in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "age": 29,
+      "eventId": "event_2053_wellbeing-quiet-not-silent",
+      "templateId": "wellbeing-quiet-not-silent",
+      "title": "The quiet place has noises",
+      "situation": "You sit somewhere quiet and immediately notice a clock, a distant door and somebody clearing their throat. Apparently quiet did not mean perfectly silent.",
+      "choices": [
+        {
+          "id": "allow",
+          "label": "Let the ordinary sounds be there"
+        },
+        {
+          "id": "focus",
+          "label": "Choose one steady sound to notice"
+        },
+        {
+          "id": "inspect",
+          "label": "Identify every interruption"
+        }
+      ],
+      "selected": "allow",
+      "result": {
+        "title": "Quiet enough is available",
+        "body": "You stop checking each sound for a reason to be irritated. The place becomes restful without becoming silent.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2053_wellbeing-quiet-not-silent_choice",
+          "date": {
+            "year": 2053,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I accepted ordinary background sounds in a quiet moment.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "age": 30,
+      "eventId": "event_2054_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2054_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2054,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "age": 31,
+      "eventId": "event_2055_adult-community-poster",
+      "templateId": "adult-community-poster",
+      "title": "The missing letter",
+      "situation": "A poster for a free public cookery class has dropped the L from “public”. The organiser cannot work out why people keep arriving with suspicious questions.",
+      "choices": [
+        {
+          "id": "check",
+          "label": "Point out the missing letter quietly"
+        },
+        {
+          "id": "note",
+          "label": "Leave the organiser to discover it"
+        },
+        {
+          "id": "announce",
+          "label": "Read the heading aloud to the queue"
+        }
+      ],
+      "selected": "check",
+      "result": {
+        "title": "A little tape saves the afternoon",
+        "body": "The organiser repairs the heading and looks at the queue with fresh concern. The class returns to soup.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2055_adult-community-poster_choice",
+          "date": {
+            "year": 2055,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I pointed out an embarrassing typo on a cookery-class poster.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "age": 32,
+      "eventId": "event_2056_adult-shortcut-stairs",
+      "templateId": "adult-shortcut-stairs",
+      "title": "A shortcut through the execution",
+      "situation": "A museum shortcut in Valencia takes you through a medieval punishment exhibit. A mechanical executioner swings a foam axe across the marked path. The long route has no executioner.",
+      "choices": [
+        {
+          "id": "return",
+          "label": "Take the long route"
+        },
+        {
+          "id": "explore",
+          "label": "Time the swing and walk through slowly"
+        },
+        {
+          "id": "race",
+          "label": "Sprint straight through the swinging axe"
+        }
+      ],
+      "selected": "return",
+      "result": {
+        "title": "A head start",
+        "body": "You turn back. A speaker announces, “The coward flees!” Three visitors turn to look. You continue with your head and your dignity approximately intact.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2056_adult-shortcut-stairs_choice",
+          "date": {
+            "year": 2056,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I took the long route around a museum’s mechanical executioner.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "age": 33,
+      "eventId": "event_2057_adult-community-map",
+      "templateId": "adult-community-map",
+      "title": "Your murderous past",
+      "situation": "A walking-tour guide points straight at you and tells the group you are the ghost of a notorious murderer. You are outside a shop in Valencia, holding a sandwich.",
+      "choices": [
+        {
+          "id": "report",
+          "label": "Explain that you are alive and eating lunch"
+        },
+        {
+          "id": "orient",
+          "label": "Ask what crimes you supposedly committed"
+        },
+        {
+          "id": "follow",
+          "label": "Follow the tour without breaking eye contact"
+        }
+      ],
+      "selected": "report",
+      "result": {
+        "title": "New evidence",
+        "body": "The guide calls your sandwich an unsettling detail. You take a large bite. A tourist asks whether ghosts can eat cheese. The guide moves the group along.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2057_adult-community-map_choice",
+          "date": {
+            "year": 2057,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a walking tour that mistook me for a murderer’s ghost in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "age": 34,
+      "eventId": "event_2058_adult-empty-calendar",
+      "templateId": "adult-empty-calendar",
+      "title": "Doing nothing, attendance required",
+      "situation": "You put “Do absolutely nothing” in your calendar. The app sends invitations to a discussion group. Six people accept and one asks about the dress code.",
+      "choices": [
+        {
+          "id": "keep",
+          "label": "Cancel it and protect your hour"
+        },
+        {
+          "id": "choose",
+          "label": "Host exactly five minutes of nothing"
+        },
+        {
+          "id": "fill",
+          "label": "Send an agenda for competitive relaxing"
+        }
+      ],
+      "selected": "keep",
+      "result": {
+        "title": "A successful cancellation",
+        "body": "You explain that it was private. Someone replies that they were really looking forward to nothing. You enjoy it without them.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2058_adult-empty-calendar_choice",
+          "date": {
+            "year": 2058,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I cancelled accidental invitations to my free hour.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "age": 35,
+      "eventId": "event_2059_adult-instruction-last-page",
+      "templateId": "adult-instruction-last-page",
+      "title": "Not the tabletop version",
+      "situation": "At a craft workshop, you pull the tab on a kit labelled “decorative boat”. A full-size inflatable canoe starts filling the room. The tiny instruction sheet says to inflate outdoors.",
+      "choices": [
+        {
+          "id": "restart",
+          "label": "Deflate it before it reaches the doorway"
+        },
+        {
+          "id": "adapt",
+          "label": "Climb in and ask for paddles"
+        },
+        {
+          "id": "blame",
+          "label": "Insist the picture on the box was misleading"
+        }
+      ],
+      "selected": "restart",
+      "result": {
+        "title": "A long public fart",
+        "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2059_adult-instruction-last-page_choice",
+          "date": {
+            "year": 2059,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I deflated a full-size canoe during a crowded craft workshop.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "age": 36,
+      "eventId": "event_2060_adult-repair-table",
+      "templateId": "adult-repair-table",
+      "title": "Nothing to worry about",
+      "situation": "At a free repair demonstration, a wind-up toy starts smoking. The volunteer explains that it is supposed to do that. The label “DO NOT WIND” drops off its base.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask what the label means"
+        },
+        {
+          "id": "observe",
+          "label": "Step back and let them stop it"
+        },
+        {
+          "id": "heckle",
+          "label": "Ask whether smoke costs extra"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "A useful admission",
+        "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+1%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2060_adult-repair-table_choice",
+          "date": {
+            "year": 2060,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I asked about a warning label during a failed toy-repair demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "age": 37,
+      "eventId": "event_2061_wellbeing-waiting-without-feed",
+      "templateId": "wellbeing-waiting-without-feed",
+      "title": "A minute without filling it",
+      "situation": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+      "choices": [
+        {
+          "id": "observe",
+          "label": "Look around for a minute"
+        },
+        {
+          "id": "rest",
+          "label": "Let your attention rest"
+        },
+        {
+          "id": "refresh",
+          "label": "Check the same screen again"
+        }
+      ],
+      "selected": "observe",
+      "result": {
+        "title": "The world supplies a few details",
+        "body": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2061_wellbeing-waiting-without-feed_choice",
+          "date": {
+            "year": 2061,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I spent a short wait noticing what was around me.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2063,
+        "month": 2,
+        "day": 28
+      },
+      "age": 39,
+      "eventId": "event_2063_bad-review",
+      "templateId": "bad-review",
+      "title": "The soup tribunal",
+      "situation": "You describe a bowl of soup online as “fine”. A stranger accuses you of destroying local culture. They have posted eleven replies and a diagram.",
+      "choices": [
+        {
+          "id": "clarify",
+          "label": "Explain that you meant the soup"
+        },
+        {
+          "id": "leave",
+          "label": "Leave the soup to its lawyers"
+        },
+        {
+          "id": "essay",
+          "label": "Publish a detailed attack on their diagram"
+        }
+      ],
+      "selected": "clarify",
+      "result": {
+        "title": "A narrow defence",
+        "body": "You clarify that your review concerns lunch rather than civilisation. The diagram receives no further comment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2063_bad-review_choice",
+          "date": {
+            "year": 2063,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I clarified a soup review after a stranger took it personally.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "age": 40,
+      "eventId": "event_2064_adult-seat-with-a-view",
+      "templateId": "adult-seat-with-a-view",
+      "title": "The important businessman",
+      "situation": "You sit in the last free café chair. A child wearing an enormous tie tells you it is reserved for an important businessman. The businessman, they explain, is them.",
+      "choices": [
+        {
+          "id": "move",
+          "label": "Ask what business they are in"
+        },
+        {
+          "id": "decline",
+          "label": "Offer them the chair after your drink"
+        },
+        {
+          "id": "lecture",
+          "label": "Explain that reserving chairs is bad business"
+        }
+      ],
+      "selected": "move",
+      "result": {
+        "title": "A volatile juice market",
+        "body": "They explain that juice has gone up and crayons are a bad investment. You move to the counter while they hold a meeting with a biscuit.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2064_adult-seat-with-a-view_choice",
+          "date": {
+            "year": 2064,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I gave up a café chair after hearing a child’s business plan.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "age": 41,
+      "eventId": "event_2065_adult-queue-merge",
+      "templateId": "adult-queue-merge",
+      "title": "The accidental millionaire",
+      "situation": "At a charity auction, someone mistakes you for a wealthy donor. The auctioneer hands you the microphone beside a photograph of an elderly donkey. “How much will you give?” The room goes quiet.",
+      "choices": [
+        {
+          "id": "alternate",
+          "label": "Admit your wealth has been exaggerated"
+        },
+        {
+          "id": "wait",
+          "label": "Donate €246.79 to the donkey charity"
+        },
+        {
+          "id": "push",
+          "label": "Claim you are the donkey’s lawyer"
+        }
+      ],
+      "selected": "alternate",
+      "result": {
+        "title": "A donkey-sized misunderstanding",
+        "body": "You explain that you were looking for the toilets. The auctioneer takes back the microphone and points down the corridor. Several people applaud your honesty. One applauds the donkey.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "-2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2065_adult-queue-merge_choice",
+          "date": {
+            "year": 2065,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I admitted I was not the wealthy donor a charity auction expected.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2067,
+        "month": 2,
+        "day": 28
+      },
+      "age": 43,
+      "eventId": "event_2067_adult-instruction-last-page",
+      "templateId": "adult-instruction-last-page",
+      "title": "Not the tabletop version",
+      "situation": "At a craft workshop, you pull the tab on a kit labelled “decorative boat”. A full-size inflatable canoe starts filling the room. The tiny instruction sheet says to inflate outdoors.",
+      "choices": [
+        {
+          "id": "restart",
+          "label": "Deflate it before it reaches the doorway"
+        },
+        {
+          "id": "adapt",
+          "label": "Climb in and ask for paddles"
+        },
+        {
+          "id": "blame",
+          "label": "Insist the picture on the box was misleading"
+        }
+      ],
+      "selected": "restart",
+      "result": {
+        "title": "A long public fart",
+        "body": "You open the valve. The canoe collapses over eight uninterrupted seconds of rude noise. The instructor waits until everyone has stopped laughing to explain the warning.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2067_adult-instruction-last-page_choice",
+          "date": {
+            "year": 2067,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I deflated a full-size canoe during a crowded craft workshop.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2068,
+        "month": 2,
+        "day": 29
+      },
+      "age": 44,
+      "eventId": "event_2068_adult-free-sample-opinion",
+      "templateId": "adult-free-sample-opinion",
+      "title": "Honest feedback, preferably positive",
+      "situation": "At a free tasting, you try a cracker that tastes strongly of cupboard. The demonstrator asks for a glowing testimonial while holding a camera.",
+      "choices": [
+        {
+          "id": "specific",
+          "label": "Suggest improving the flavour first"
+        },
+        {
+          "id": "kind",
+          "label": "Praise how neatly it broke"
+        },
+        {
+          "id": "essay",
+          "label": "Deliver a dramatic account of the cupboard"
+        }
+      ],
+      "selected": "specific",
+      "result": {
+        "title": "A review they can use",
+        "body": "You mention the texture and the cupboard problem. The camera lowers. They admit this batch has been “challenging”.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Smarts",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2068_adult-free-sample-opinion_choice",
+          "date": {
+            "year": 2068,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I gave specific criticism of a free food sample.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2070,
+        "month": 2,
+        "day": 28
+      },
+      "age": 46,
+      "eventId": "event_2070_adult-unwanted-speech",
+      "templateId": "adult-unwanted-speech",
+      "title": "A few words from our guest",
+      "situation": "At a free local event, the host hands you a microphone and thanks you for “everything you did”. You have no idea what you allegedly did.",
+      "choices": [
+        {
+          "id": "brief",
+          "label": "Ask what you are being thanked for"
+        },
+        {
+          "id": "pass",
+          "label": "Return the microphone immediately"
+        },
+        {
+          "id": "ramble",
+          "label": "Thank everyone who made this possible"
+        }
+      ],
+      "selected": "brief",
+      "result": {
+        "title": "The right person is found",
+        "body": "You were mistaken for the person who fixed a blocked toilet. Their arrival receives the applause they earned.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2070_adult-unwanted-speech_choice",
+          "date": {
+            "year": 2070,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a mistaken public thank-you before giving a speech.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2071,
+        "month": 2,
+        "day": 28
+      },
+      "age": 47,
+      "eventId": "event_2071_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2071_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2071,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2073,
+        "month": 2,
+        "day": 28
+      },
+      "age": 49,
+      "eventId": "event_2073_adult-wrong-name-badge",
+      "templateId": "adult-wrong-name-badge",
+      "title": "Inside the chicken",
+      "situation": "The festival mascot has quit. A volunteer thrusts a chicken suit at you and offers cash for one hour. The head smells of onions. Something inside it is still warm.",
+      "choices": [
+        {
+          "id": "correct",
+          "label": "Tell them you only came for the stalls"
+        },
+        {
+          "id": "help",
+          "label": "Wear the chicken suit for €79.95"
+        },
+        {
+          "id": "invent",
+          "label": "Carry the head around and ask if anyone knows it"
+        }
+      ],
+      "selected": "correct",
+      "result": {
+        "title": "A civilian again",
+        "body": "The volunteer apologises and puts the chicken head on a traffic cone. A child immediately asks the cone for a photo.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2073_adult-wrong-name-badge_choice",
+          "date": {
+            "year": 2073,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I declined an emergency shift inside a festival chicken.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2074,
+        "month": 2,
+        "day": 28
+      },
+      "age": 50,
+      "eventId": "event_2074_adult-empty-calendar",
+      "templateId": "adult-empty-calendar",
+      "title": "Doing nothing, attendance required",
+      "situation": "You put “Do absolutely nothing” in your calendar. The app sends invitations to a discussion group. Six people accept and one asks about the dress code.",
+      "choices": [
+        {
+          "id": "keep",
+          "label": "Cancel it and protect your hour"
+        },
+        {
+          "id": "choose",
+          "label": "Host exactly five minutes of nothing"
+        },
+        {
+          "id": "fill",
+          "label": "Send an agenda for competitive relaxing"
+        }
+      ],
+      "selected": "keep",
+      "result": {
+        "title": "A successful cancellation",
+        "body": "You explain that it was private. Someone replies that they were really looking forward to nothing. You enjoy it without them.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2074_adult-empty-calendar_choice",
+          "date": {
+            "year": 2074,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I cancelled accidental invitations to my free hour.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2075,
+        "month": 2,
+        "day": 28
+      },
+      "age": 51,
+      "eventId": "event_2075_adult-silent-notification",
+      "templateId": "adult-silent-notification",
+      "title": "Discreet volunteers wanted",
+      "situation": "You post a request for cleanup volunteers in a community chat. Your phone attaches an old shopping list: bleach, bin bags and cable ties. Someone replies, “What exactly are we cleaning?”",
+      "choices": [
+        {
+          "id": "send",
+          "label": "Explain that it is a garden cleanup"
+        },
+        {
+          "id": "pause",
+          "label": "Delete the post without explaining"
+        },
+        {
+          "id": "polish",
+          "label": "Add “No questions. Bring gloves.”"
+        }
+      ],
+      "selected": "send",
+      "result": {
+        "title": "The photographs help",
+        "body": "You attach a photo of weeds and broken plant pots. Two people volunteer. A third asks for a picture of you holding today’s newspaper. You decline that part.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2075_adult-silent-notification_choice",
+          "date": {
+            "year": 2075,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I explained a suspicious shopping list attached to my garden-cleanup request.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2077,
+        "month": 2,
+        "day": 28
+      },
+      "age": 53,
+      "eventId": "event_2077_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2077_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2077,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2078,
+        "month": 2,
+        "day": 28
+      },
+      "age": 54,
+      "eventId": "event_2078_new-skill-late",
+      "templateId": "new-skill-late",
+      "title": "Beginners’ self-defence",
+      "situation": "At a free beginner lesson, the instructor asks you to demonstrate a firm “No!” You give one so convincing that a passer-by apologises and leaves.",
+      "choices": [
+        {
+          "id": "try",
+          "label": "Practise the rest of the lesson"
+        },
+        {
+          "id": "watch",
+          "label": "Watch the demonstrations first"
+        },
+        {
+          "id": "leave",
+          "label": "Use your new “No!” on the whole lesson"
+        }
+      ],
+      "selected": "try",
+      "result": {
+        "title": "A useful loud afternoon",
+        "body": "You learn the basics and repeat the shout. The corridor remains unusually clear for the rest of the lesson.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2078_new-skill-late_choice",
+          "date": {
+            "year": 2078,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I practised the basics at a free self-defence lesson.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2079,
+        "month": 2,
+        "day": 28
+      },
+      "age": 55,
+      "eventId": "event_2079_later-retirement-assumption",
+      "templateId": "later-retirement-assumption",
+      "title": "What do you do all day?",
+      "situation": "A stranger assumes you are retired and asks whether you have taken up “something gentle, like birdwatching”. You have not told them anything about your life.",
+      "choices": [
+        {
+          "id": "accurate",
+          "label": "Tell them what your days actually involve"
+        },
+        {
+          "id": "humour",
+          "label": "Say the birds are frightened of you"
+        },
+        {
+          "id": "lecture",
+          "label": "Describe every activity they failed to imagine"
+        }
+      ],
+      "selected": "accurate",
+      "result": {
+        "title": "An overdue factual check",
+        "body": "You give a short answer. They apologise for inventing your schedule before learning your name.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2079_later-retirement-assumption_choice",
+          "date": {
+            "year": 2079,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a stranger’s assumption about my daily life.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2080,
+        "month": 2,
+        "day": 29
+      },
+      "age": 56,
+      "eventId": "event_2080_adult-repair-table",
+      "templateId": "adult-repair-table",
+      "title": "Nothing to worry about",
+      "situation": "At a free repair demonstration, a wind-up toy starts smoking. The volunteer explains that it is supposed to do that. The label “DO NOT WIND” drops off its base.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask what the label means"
+        },
+        {
+          "id": "observe",
+          "label": "Step back and let them stop it"
+        },
+        {
+          "id": "heckle",
+          "label": "Ask whether smoke costs extra"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "A useful admission",
+        "body": "The volunteer stops and explains the failed mechanism. You learn more from the mistake than from the planned demonstration.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2080_adult-repair-table_choice",
+          "date": {
+            "year": 2080,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I asked about a warning label during a failed toy-repair demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2081,
+        "month": 2,
+        "day": 28
+      },
+      "age": 57,
+      "eventId": "event_2081_bad-review",
+      "templateId": "bad-review",
+      "title": "The soup tribunal",
+      "situation": "You describe a bowl of soup online as “fine”. A stranger accuses you of destroying local culture. They have posted eleven replies and a diagram.",
+      "choices": [
+        {
+          "id": "clarify",
+          "label": "Explain that you meant the soup"
+        },
+        {
+          "id": "leave",
+          "label": "Leave the soup to its lawyers"
+        },
+        {
+          "id": "essay",
+          "label": "Publish a detailed attack on their diagram"
+        }
+      ],
+      "selected": "clarify",
+      "result": {
+        "title": "A narrow defence",
+        "body": "You clarify that your review concerns lunch rather than civilisation. The diagram receives no further comment.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2081_bad-review_choice",
+          "date": {
+            "year": 2081,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I clarified a soup review after a stranger took it personally.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2083,
+        "month": 2,
+        "day": 28
+      },
+      "age": 59,
+      "eventId": "event_2083_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+6%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2083_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2083,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2085,
+        "month": 2,
+        "day": 28
+      },
+      "age": 61,
+      "eventId": "event_2085_adult-open-mic-list",
+      "templateId": "adult-open-mic-list",
+      "title": "A striking resemblance",
+      "situation": "A caricaturist at a street fair in Valencia offers you a free sample portrait. A small crowd gathers. The artist turns the drawing around. It is you as an enormous angry thumb.",
+      "choices": [
+        {
+          "id": "correct",
+          "label": "Ask whether they could add a jawline"
+        },
+        {
+          "id": "joke",
+          "label": "Ask for a pencil and draw the artist"
+        },
+        {
+          "id": "hide",
+          "label": "Cover the portrait and leave"
+        }
+      ],
+      "selected": "correct",
+      "result": {
+        "title": "The formal thumb",
+        "body": "The artist adds a bow tie. You point out that this is not a jawline. A spectator says the resemblance is uncanny. You leave holding a thumb in evening wear.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2085_adult-open-mic-list_choice",
+          "date": {
+            "year": 2085,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked a caricaturist to correct my portrait and received a thumb in a bow tie.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2087,
+        "month": 2,
+        "day": 28
+      },
+      "age": 63,
+      "eventId": "event_2087_useful-advice",
+      "templateId": "useful-advice",
+      "title": "Wisdom has been requested",
+      "situation": "A younger person asks whether to get an ex’s name tattooed over another ex’s name. They say your life experience makes you qualified to judge.",
+      "choices": [
+        {
+          "id": "listen",
+          "label": "Ask why this needs to happen today"
+        },
+        {
+          "id": "story",
+          "label": "Describe a bad decision of your own"
+        },
+        {
+          "id": "lecture",
+          "label": "Begin with everything wrong with their generation"
+        }
+      ],
+      "selected": "listen",
+      "result": {
+        "title": "The appointment can wait",
+        "body": "Talking reveals a fresh argument and a powerful urge to make it permanent. You suggest a decision that survives sleeping on it.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2087_useful-advice_choice",
+          "date": {
+            "year": 2087,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I listened before advising someone about an impulsive tattoo.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2088,
+        "month": 2,
+        "day": 29
+      },
+      "age": 64,
+      "eventId": "event_2088_adult-empty-calendar",
+      "templateId": "adult-empty-calendar",
+      "title": "Doing nothing, attendance required",
+      "situation": "You put “Do absolutely nothing” in your calendar. The app sends invitations to a discussion group. Six people accept and one asks about the dress code.",
+      "choices": [
+        {
+          "id": "keep",
+          "label": "Cancel it and protect your hour"
+        },
+        {
+          "id": "choose",
+          "label": "Host exactly five minutes of nothing"
+        },
+        {
+          "id": "fill",
+          "label": "Send an agenda for competitive relaxing"
+        }
+      ],
+      "selected": "keep",
+      "result": {
+        "title": "A successful cancellation",
+        "body": "You explain that it was private. Someone replies that they were really looking forward to nothing. You enjoy it without them.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2088_adult-empty-calendar_choice",
+          "date": {
+            "year": 2088,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I cancelled accidental invitations to my free hour.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2089,
+        "month": 2,
+        "day": 28
+      },
+      "age": 65,
+      "eventId": "event_2089_adult-compliment-practice",
+      "templateId": "adult-compliment-practice",
+      "title": "The compliment has the wrong address",
+      "situation": "Someone praises an anonymous poem you were standing beside at a free exhibition. You did not write it. They are waiting for you to explain its “raw emotional honesty”.",
+      "choices": [
+        {
+          "id": "thanks",
+          "label": "Thank them, then admit it is not yours"
+        },
+        {
+          "id": "share",
+          "label": "Point out the actual poet’s name"
+        },
+        {
+          "id": "reject",
+          "label": "Accept the praise and invent your inspiration"
+        }
+      ],
+      "selected": "thanks",
+      "result": {
+        "title": "A narrow escape from poetry",
+        "body": "They laugh at the mix-up. You both admit you were not entirely sure what the last line meant.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2089_adult-compliment-practice_choice",
+          "date": {
+            "year": 2089,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected a stranger who thought I had written a poem.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2092,
+        "month": 2,
+        "day": 29
+      },
+      "age": 68,
+      "eventId": "event_2092_wellbeing-unhurried-breath",
+      "templateId": "wellbeing-unhurried-breath",
+      "title": "Before answering immediately",
+      "situation": "A mildly irritating question arrives while you are already tired. You notice the sharp reply forming before the other person has finished speaking.",
+      "choices": [
+        {
+          "id": "pause",
+          "label": "Take a moment before answering"
+        },
+        {
+          "id": "name",
+          "label": "Say you need a short break"
+        },
+        {
+          "id": "snap",
+          "label": "Deliver the sharp reply"
+        }
+      ],
+      "selected": "pause",
+      "result": {
+        "title": "A reply with less edge",
+        "body": "The pause gives you time to separate the question from your tiredness. You answer the thing that was actually asked.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2092_wellbeing-unhurried-breath_choice",
+          "date": {
+            "year": 2092,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I paused before answering sharply when I was tired.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2093,
+        "month": 2,
+        "day": 28
+      },
+      "age": 69,
+      "eventId": "event_2093_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+6%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+3%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2093_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2093,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2094,
+        "month": 2,
+        "day": 28
+      },
+      "age": 70,
+      "eventId": "event_2094_later-unfamiliar-word",
+      "templateId": "later-unfamiliar-word",
+      "title": "Apparently you ate",
+      "situation": "A younger person points at your outfit and says, “You ate.” You have no food on you. They add, “No crumbs.” This is getting less clear.",
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Ask whether this is a compliment"
+        },
+        {
+          "id": "context",
+          "label": "Reply, “Thank you. It was delicious.”"
+        },
+        {
+          "id": "condemn",
+          "label": "Announce that you can feed yourself"
+        }
+      ],
+      "selected": "ask",
+      "result": {
+        "title": "Breakfast has nothing to do with it",
+        "body": "It is a compliment. You thank them and ask for a translation before anyone says anything else about your digestion.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2094_later-unfamiliar-word_choice",
+          "date": {
+            "year": 2094,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I asked someone to explain a slang compliment about my outfit.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2095,
+        "month": 2,
+        "day": 28
+      },
+      "age": 71,
+      "eventId": "event_2095_wellbeing-ordinary-water",
+      "templateId": "wellbeing-ordinary-water",
+      "title": "Water with a personal brand",
+      "situation": "At a free tasting, a presenter claims their water has been “emotionally filtered”. The jug beside it is labelled TAP. You are just thirsty.",
+      "choices": [
+        {
+          "id": "simple",
+          "label": "Drink the tap water"
+        },
+        {
+          "id": "pause",
+          "label": "Ask which emotions the filter removes"
+        },
+        {
+          "id": "research",
+          "label": "Debate the emotional lives of liquids"
+        }
+      ],
+      "selected": "simple",
+      "result": {
+        "title": "No emotional processing required",
+        "body": "It tastes like water. The presenter watches you finish a glass with the expression of someone witnessing sabotage.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Energy",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2095_wellbeing-ordinary-water_choice",
+          "date": {
+            "year": 2095,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I chose tap water at a premium-water demonstration.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2095,
+        "month": 6,
+        "day": 29
+      },
+      "age": 71,
+      "eventId": "emergency_condition_person_player_197_2_2095",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: persistent headaches and dizziness. A hospital assessment can begin treatment and may require a short stay. The quoted care costs €0.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_197_2_2095_choice",
+          "date": {
+            "year": 2095,
+            "month": 6,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2096,
+        "month": 2,
+        "day": 29
+      },
+      "age": 72,
+      "eventId": "event_2096_local-meeting",
+      "templateId": "local-meeting",
+      "title": "In loving memory of the wrong man",
+      "situation": "A public meeting in Valencia unveils a proposed memorial bench. Its plaque honours a man who is alive, in the room, and asking whether this affects his parking permit.",
+      "choices": [
+        {
+          "id": "speak",
+          "label": "Suggest checking the plaque first"
+        },
+        {
+          "id": "listen",
+          "label": "Hear the allegedly deceased man out"
+        },
+        {
+          "id": "leave",
+          "label": "Leave before the eulogy"
+        }
+      ],
+      "selected": "speak",
+      "result": {
+        "title": "Death withdrawn from the proposal",
+        "body": "You help redirect the discussion towards correcting the inscription. The man asks to keep “much loved” if possible.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Discipline",
+            "value": "+1%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2096_local-meeting_choice",
+          "date": {
+            "year": 2096,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I suggested correcting a memorial plaque for a living man in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2097,
+        "month": 2,
+        "day": 28
+      },
+      "age": 73,
+      "eventId": "event_2097_later-another-year-question",
+      "templateId": "later-another-year-question",
+      "title": "Older than bread",
+      "situation": "A birthday cake for you arrives with an extra zero among the candles. Someone asks whether you knew the person who invented bread.",
+      "choices": [
+        {
+          "id": "honest",
+          "label": "Ask for the extra candles to be removed"
+        },
+        {
+          "id": "ordinary",
+          "label": "Keep the cake and accept your ancient status"
+        },
+        {
+          "id": "perform",
+          "label": "Deliver a speech about surviving the last ice age"
+        }
+      ],
+      "selected": "honest",
+      "result": {
+        "title": "A breakthrough in reverse ageing",
+        "body": "They remove the extra candles, then stand back as though they have made you younger. You thank the bakery for its medical breakthrough.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Respect",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2097_later-another-year-question_choice",
+          "date": {
+            "year": 2097,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I corrected an extra zero on my birthday cake.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2102,
+        "month": 2,
+        "day": 28
+      },
+      "age": 78,
+      "eventId": "event_2102_birthday-number",
+      "templateId": "birthday-number",
+      "title": "Happy statistical decline",
+      "situation": "For your birthday, someone sends a list of famous people who had achieved more by your age. They finish with “Hope this inspires you!”",
+      "choices": [
+        {
+          "id": "notice",
+          "label": "Celebrate without the comparison chart"
+        },
+        {
+          "id": "plan",
+          "label": "Choose one goal that is actually yours"
+        },
+        {
+          "id": "compare",
+          "label": "Read every biography before bed"
+        }
+      ],
+      "selected": "notice",
+      "result": {
+        "title": "Cake remains an achievement",
+        "body": "You put the list aside. Your day improves immediately when it stops competing with a dead inventor.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2102_birthday-number_choice",
+          "date": {
+            "year": 2102,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I ignored an unhelpful achievement list on my birthday.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2104,
+        "month": 2,
+        "day": 29
+      },
+      "age": 80,
+      "eventId": "event_2104_later-old-handwriting",
+      "templateId": "later-old-handwriting",
+      "title": "A complaint from your younger self",
+      "situation": "You find a note from your younger self: By fifty-five, we will be independently wealthy and know how to fold a fitted sheet. The handwriting is extremely confident.",
+      "choices": [
+        {
+          "id": "kind",
+          "label": "Write back about the sheet"
+        },
+        {
+          "id": "record",
+          "label": "List what you did achieve"
+        },
+        {
+          "id": "judge",
+          "label": "Send your younger self a furious reply"
+        }
+      ],
+      "selected": "kind",
+      "result": {
+        "title": "The corners remain hostile",
+        "body": "You report that the elastic corners remain a problem. You omit finances; you are not being interrogated by a child with a felt-tip pen.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2104_later-old-handwriting_choice",
+          "date": {
+            "year": 2104,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I answered an old note about being wealthy and folding fitted sheets.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2105,
+        "month": 2,
+        "day": 28
+      },
+      "age": 81,
+      "eventId": "event_2105_community-garden",
+      "templateId": "community-garden",
+      "title": "The naked gardener",
+      "situation": "The community garden in Valencia needs volunteers. Its organiser is wearing a novelty apron printed with a naked torso and refuses to explain it.",
+      "choices": [
+        {
+          "id": "join",
+          "label": "Weed beside the alarming apron"
+        },
+        {
+          "id": "learn",
+          "label": "Ask about the plants, very specifically"
+        },
+        {
+          "id": "pass",
+          "label": "Decide you have seen enough nature"
+        }
+      ],
+      "selected": "join",
+      "result": {
+        "title": "A productive misunderstanding",
+        "body": "You clear a whole bed. Three passers-by stop to stare before realising the torso has pockets.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-4%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2105_community-garden_choice",
+          "date": {
+            "year": 2105,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I volunteered beside a gardener in an alarming novelty apron in Valencia.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2106,
+        "month": 2,
+        "day": 28
+      },
+      "age": 82,
+      "eventId": "event_2106_later-photo-at-edge",
+      "templateId": "later-photo-at-edge",
+      "title": "You are almost in the picture",
+      "situation": "An old photograph catches you at the edge of the frame, apparently concentrating on something outside it. You can no longer remember what seemed so important.",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "Enjoy the unfinished little mystery"
+        },
+        {
+          "id": "recall",
+          "label": "Write down what you do remember"
+        },
+        {
+          "id": "invent",
+          "label": "Build a grand explanation around the pose"
+        }
+      ],
+      "selected": "accept",
+      "result": {
+        "title": "A life outside the frame",
+        "body": "You let the unknown detail remain unknown. The photograph still holds an ordinary moment worth keeping.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Happiness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2106_later-photo-at-edge_choice",
+          "date": {
+            "year": 2106,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I enjoyed an old photograph without solving every detail.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2107,
+        "month": 2,
+        "day": 28
+      },
+      "age": 83,
+      "eventId": "event_2107_wellbeing-good-day-pressure",
+      "templateId": "wellbeing-good-day-pressure",
+      "title": "You must make the most of it",
+      "situation": "You feel better rested than usual and immediately begin planning enough tasks to use every available bit of energy.",
+      "choices": [
+        {
+          "id": "pace",
+          "label": "Choose a few priorities and leave room"
+        },
+        {
+          "id": "enjoy",
+          "label": "Enjoy feeling well without a quota"
+        },
+        {
+          "id": "spend",
+          "label": "Fill every bit of the day"
+        }
+      ],
+      "selected": "pace",
+      "result": {
+        "title": "A useful day with an ending",
+        "body": "You use some energy without treating all of it as a resource that must be exhausted.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Discipline",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_1",
+            "label": "Stress",
+            "value": "+0%",
+            "tone": "neutral"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-1%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2107_wellbeing-good-day-pressure_choice",
+          "date": {
+            "year": 2107,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I paced a good day instead of filling every available moment.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2108,
+        "month": 2,
+        "day": 29
+      },
+      "age": 84,
+      "eventId": "event_2108_new-skill-late",
+      "templateId": "new-skill-late",
+      "title": "Beginners’ self-defence",
+      "situation": "At a free beginner lesson, the instructor asks you to demonstrate a firm “No!” You give one so convincing that a passer-by apologises and leaves.",
+      "choices": [
+        {
+          "id": "try",
+          "label": "Practise the rest of the lesson"
+        },
+        {
+          "id": "watch",
+          "label": "Watch the demonstrations first"
+        },
+        {
+          "id": "leave",
+          "label": "Use your new “No!” on the whole lesson"
+        }
+      ],
+      "selected": "try",
+      "result": {
+        "title": "A useful loud afternoon",
+        "body": "You learn the basics and repeat the shout. The corridor remains unusually clear for the rest of the lesson.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Smarts",
+            "value": "+5%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Happiness",
+            "value": "+3%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-3%",
+            "tone": "negative"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2108_new-skill-late_choice",
+          "date": {
+            "year": 2108,
+            "month": 2,
+            "day": 29
+          },
+          "personId": "person_player",
+          "text": "I practised the basics at a free self-defence lesson.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2109,
+        "month": 2,
+        "day": 28
+      },
+      "age": 85,
+      "eventId": "emergency_condition_person_player_236_6_2109",
+      "templateId": "medical-emergency",
+      "title": "You need medical attention",
+      "situation": "Your symptoms have become serious: unusual thirst and persistent fatigue. A hospital assessment can begin treatment and may require a short stay. The quoted care costs €0.00; an unpaid emergency bill remains a real obligation.",
+      "choices": [
+        {
+          "id": "care",
+          "label": "Accept hospital assessment"
+        },
+        {
+          "id": "decline",
+          "label": "Decline assessment"
+        }
+      ],
+      "selected": "care",
+      "result": {
+        "title": "Medical care arranged",
+        "body": "The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.",
+        "effects": [
+          {
+            "id": "care",
+            "label": "Medical care",
+            "value": "Admitted to hospital",
+            "tone": "positive"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "emergency_condition_person_player_236_6_2109_choice",
+          "date": {
+            "year": 2109,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I accepted urgent medical care.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    },
+    {
+      "date": {
+        "year": 2110,
+        "month": 2,
+        "day": 28
+      },
+      "age": 86,
+      "eventId": "event_2110_wellbeing-one-more-episode",
+      "templateId": "wellbeing-one-more-episode",
+      "title": "The sofa is judging you",
+      "situation": "Autoplay follows your programme with a competitive fitness class. A man who appears to have been assembled entirely from elbows challenges you to beat your personal best.",
+      "choices": [
+        {
+          "id": "stop",
+          "label": "Switch to the beginner version and try it"
+        },
+        {
+          "id": "choose",
+          "label": "Invent a chair-based version"
+        },
+        {
+          "id": "drift",
+          "label": "Keep up with him at full speed"
+        }
+      ],
+      "selected": "stop",
+      "result": {
+        "title": "An achievable number of elbows",
+        "body": "You complete the gentler routine. The instructor says anyone can do it, then folds himself into a shape you decline to investigate.",
+        "effects": [
+          {
+            "id": "effect_0",
+            "label": "Health",
+            "value": "+6%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_1",
+            "label": "Fitness",
+            "value": "+4%",
+            "tone": "positive"
+          },
+          {
+            "id": "effect_2",
+            "label": "Energy",
+            "value": "-8%",
+            "tone": "negative"
+          },
+          {
+            "id": "effect_3",
+            "label": "Discipline",
+            "value": "+0%",
+            "tone": "neutral"
+          }
+        ]
+      },
+      "journal": [
+        {
+          "id": "event_2110_wellbeing-one-more-episode_choice",
+          "date": {
+            "year": 2110,
+            "month": 2,
+            "day": 28
+          },
+          "personId": "person_player",
+          "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+          "category": "event"
+        }
+      ],
+      "died": false
+    }
+  ],
+  "journal": [
+    {
+      "id": "journal_birth",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I was born on 29 February 2024 in Valencia, Spain.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_identity",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My name is Sofía Sánchez. I’m a girl.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent1",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My mother is Hugo Sánchez, 36. She works as a cleaner.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_parent_person_parent2",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My father is Lucía Sánchez, 35. He works as a cleaner.",
+      "category": "birth"
+    },
+    {
+      "id": "journal_birth_family",
+      "date": {
+        "year": 2024,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My parents are married, and we all live together. The printer jammed on my paperwork. I held up a queue before I could hold up my head.",
+      "category": "birth"
+    },
+    {
+      "id": "event_2025_first-echo_choice",
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I discovered how much noise a spoon and a bowl could make.",
+      "category": "event"
+    },
+    {
+      "id": "event_2026_toddler-parent-name_choice",
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I named Hugo No, then asked No for a biscuit.",
+      "category": "event"
+    },
+    {
+      "id": "event_2027_toddler-ice-cube_choice",
+      "date": {
+        "year": 2027,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I showed Hugo the ice cube I had hidden in my sock.",
+      "category": "event"
+    },
+    {
+      "id": "year_9_quiet",
+      "date": {
+        "year": 2028,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "event_2029_toddler-caterpillar-crossing_choice",
+      "date": {
+        "year": 2029,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I watched a caterpillar cross a path.",
+      "category": "event"
+    },
+    {
+      "id": "fact_14_25",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I started at Valencia Primary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_14_26",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez became my class teacher at Valencia Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_14_27",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I got to know Leo, Valeria Romero (classmate), Valeria Sánchez (classmate) in my class at Valencia Primary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "year_14_quiet",
+      "date": {
+        "year": 2030,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_17_37",
+      "date": {
+        "year": 2031,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 55%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_17_quiet",
+      "date": {
+        "year": 2031,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_19_49",
+      "date": {
+        "year": 2032,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 53%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2032_school-library-whisper_choice",
+      "date": {
+        "year": 2032,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I reviewed Leo’s insulting homemade book as a disappointed critic.",
+      "category": "event"
+    },
+    {
+      "id": "fact_22_60",
+      "date": {
+        "year": 2033,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 51%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2033_school-tiny-editor_choice",
+      "date": {
+        "year": 2033,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I helped Leo check a ridiculous newsletter claim.",
+      "category": "event"
+    },
+    {
+      "id": "fact_25_71",
+      "date": {
+        "year": 2034,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 51%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2034_school-inverted-map_choice",
+      "date": {
+        "year": 2034,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I replaced a video-game map with a real map of my school.",
+      "category": "event"
+    },
+    {
+      "id": "fact_28_81",
+      "date": {
+        "year": 2035,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 56%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_29_89",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Hugo agreed to Leo’s arcade party in 2035-03. Nothing has been paid yet.",
+      "category": "school"
+    },
+    {
+      "id": "event_2035_school-arcade-invitation_choice",
+      "date": {
+        "year": 2035,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked Hugo for permission to go to Leo’s arcade birthday.",
+      "category": "event"
+    },
+    {
+      "id": "story_29_0_due_choice",
+      "date": {
+        "year": 2035,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I went to Leo’s arcade birthday with Hugo.",
+      "category": "event"
+    },
+    {
+      "id": "fact_33_96",
+      "date": {
+        "year": 2036,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My primary school-year report recorded grades of 59%. I completed twelve attended months at Valencia Primary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_33_97",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I moved on to Valencia Secondary School.",
+      "category": "education"
+    },
+    {
+      "id": "fact_33_98",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez became my class teacher at Valencia Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "fact_33_99",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I got to know Leo, Valeria Romero (classmate), Valeria Sánchez (classmate), Hugo in my class at Valencia Secondary School.",
+      "category": "school-contact"
+    },
+    {
+      "id": "year_31_quiet",
+      "date": {
+        "year": 2036,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_37_112",
+      "date": {
+        "year": 2037,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 60%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "year_37_quiet",
+      "date": {
+        "year": 2037,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_39_129",
+      "date": {
+        "year": 2038,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 58%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_39_139",
+      "date": {
+        "year": 2038,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez and Leo Sánchez started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_39_quiet",
+      "date": {
+        "year": 2038,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another birthday arrived. Some days felt much bigger than others.",
+      "category": "year"
+    },
+    {
+      "id": "fact_41_143",
+      "date": {
+        "year": 2039,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 62%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2039_teen-solo-rehearsal_choice",
+      "date": {
+        "year": 2039,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I helped Leo rehearse a song that included an insult about me.",
+      "category": "event"
+    },
+    {
+      "id": "fact_44_155",
+      "date": {
+        "year": 2040,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 64%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_44_165",
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez and Leo Sánchez stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2040_first-presentation_choice",
+      "date": {
+        "year": 2040,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I gave a simple introduction after someone set an alarming standard.",
+      "category": "event"
+    },
+    {
+      "id": "fact_47_169",
+      "date": {
+        "year": 2041,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 65%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "event_2041_parent-boundary_choice",
+      "date": {
+        "year": 2041,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I agreed on clearer check-ins with Hugo.",
+      "category": "event"
+    },
+    {
+      "id": "fact_50_191",
+      "date": {
+        "year": 2042,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My secondary school-year report recorded grades of 63%. I completed twelve attended months at Valencia Secondary School.",
+      "category": "school-report"
+    },
+    {
+      "id": "fact_50_192",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I completed secondary education with grades of 63%.",
+      "category": "education"
+    },
+    {
+      "id": "fact_50_194",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I began covering the costs of an independent household.",
+      "category": "family"
+    },
+    {
+      "id": "fact_51_204",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez and Hugo Sánchez started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "fact_51_205",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Valeria Romero and Valeria Sánchez started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2042_adult-open-mic-list_choice",
+      "date": {
+        "year": 2042,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked a caricaturist to correct my portrait and received a thumb in a bow tie.",
+      "category": "event"
+    },
+    {
+      "id": "event_2043_adult-prop-cash-rain_choice",
+      "date": {
+        "year": 2043,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I helped a film crew recover wind-blown prop money in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "event_2044_adult-queue-merge_choice",
+      "date": {
+        "year": 2044,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I admitted I was not the wealthy donor a charity auction expected.",
+      "category": "event"
+    },
+    {
+      "id": "fact_60_220",
+      "date": {
+        "year": 2044,
+        "month": 7,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: persistent worry and disrupted sleep.",
+      "category": "health"
+    },
+    {
+      "id": "event_2045_community-garden_choice",
+      "date": {
+        "year": 2045,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I volunteered beside a gardener in an alarming novelty apron in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "event_2046_adult-seat-with-a-view_choice",
+      "date": {
+        "year": 2046,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I gave up a café chair after hearing a child’s business plan.",
+      "category": "event"
+    },
+    {
+      "id": "fact_67_240",
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began therapy care for Anxiety disorder.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_60_0_2047_choice",
+      "date": {
+        "year": 2047,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "year_66_quiet",
+      "date": {
+        "year": 2047,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_70_247",
+      "date": {
+        "year": 2047,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_70_248",
+      "date": {
+        "year": 2047,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Anxiety disorder went into remission.",
+      "category": "health"
+    },
+    {
+      "id": "year_70_quiet",
+      "date": {
+        "year": 2048,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2049_adult-free-lecture-question_choice",
+      "date": {
+        "year": 2049,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I questioned the evidence behind a speaker’s theory about pigeons.",
+      "category": "event"
+    },
+    {
+      "id": "event_2050_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2050,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "fact_78_282",
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Valeria Romero and Valeria Sánchez married after paying for their ceremony together.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2051_adult-weather-expert_choice",
+      "date": {
+        "year": 2051,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I had to ask a cashier to release me through an automatic door.",
+      "category": "event"
+    },
+    {
+      "id": "event_2052_adult-community-map_choice",
+      "date": {
+        "year": 2052,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I corrected a walking tour that mistook me for a murderer’s ghost in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "event_2053_wellbeing-quiet-not-silent_choice",
+      "date": {
+        "year": 2053,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I accepted ordinary background sounds in a quiet moment.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_33_12",
+      "date": {
+        "year": 2053,
+        "month": 3,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez died at age 65.",
+      "category": "family"
+    },
+    {
+      "id": "event_2054_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2054,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "event_2055_adult-community-poster_choice",
+      "date": {
+        "year": 2055,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I pointed out an embarrassing typo on a cookery-class poster.",
+      "category": "event"
+    },
+    {
+      "id": "event_2056_adult-shortcut-stairs_choice",
+      "date": {
+        "year": 2056,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I took the long route around a museum’s mechanical executioner.",
+      "category": "event"
+    },
+    {
+      "id": "event_2057_adult-community-map_choice",
+      "date": {
+        "year": 2057,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a walking tour that mistook me for a murderer’s ghost in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "fact_99_361",
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez and Hugo Sánchez stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2058_adult-empty-calendar_choice",
+      "date": {
+        "year": 2058,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I cancelled accidental invitations to my free hour.",
+      "category": "event"
+    },
+    {
+      "id": "event_2059_adult-instruction-last-page_choice",
+      "date": {
+        "year": 2059,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I deflated a full-size canoe during a crowded craft workshop.",
+      "category": "event"
+    },
+    {
+      "id": "event_2060_adult-repair-table_choice",
+      "date": {
+        "year": 2060,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I asked about a warning label during a failed toy-repair demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "event_2061_wellbeing-waiting-without-feed_choice",
+      "date": {
+        "year": 2061,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I spent a short wait noticing what was around me.",
+      "category": "event"
+    },
+    {
+      "id": "year_111_quiet",
+      "date": {
+        "year": 2062,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2063_bad-review_choice",
+      "date": {
+        "year": 2063,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I clarified a soup review after a stranger took it personally.",
+      "category": "event"
+    },
+    {
+      "id": "event_2064_adult-seat-with-a-view_choice",
+      "date": {
+        "year": 2064,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I gave up a café chair after hearing a child’s business plan.",
+      "category": "event"
+    },
+    {
+      "id": "fact_119_442",
+      "date": {
+        "year": 2064,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: a runny nose, sore throat and tiredness.",
+      "category": "health"
+    },
+    {
+      "id": "fact_119_443",
+      "date": {
+        "year": 2064,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "death_person_parent1",
+      "date": {
+        "year": 2064,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Hugo Sánchez died at age 76.",
+      "category": "family"
+    },
+    {
+      "id": "fact_119_447",
+      "date": {
+        "year": 2064,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I inherited €91,684.67 in cash and property from Hugo Sánchez.",
+      "category": "family"
+    },
+    {
+      "id": "fact_119_454",
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Lucía Sánchez and Leo Sánchez started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2065_adult-queue-merge_choice",
+      "date": {
+        "year": 2065,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I admitted I was not the wealthy donor a charity auction expected.",
+      "category": "event"
+    },
+    {
+      "id": "fact_122_465",
+      "date": {
+        "year": 2066,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Lucía Sánchez and Leo Sánchez stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_122_quiet",
+      "date": {
+        "year": 2066,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2067_adult-instruction-last-page_choice",
+      "date": {
+        "year": 2067,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I deflated a full-size canoe during a crowded craft workshop.",
+      "category": "event"
+    },
+    {
+      "id": "event_2068_adult-free-sample-opinion_choice",
+      "date": {
+        "year": 2068,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I gave specific criticism of a free food sample.",
+      "category": "event"
+    },
+    {
+      "id": "year_130_quiet",
+      "date": {
+        "year": 2069,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2070_adult-unwanted-speech_choice",
+      "date": {
+        "year": 2070,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a mistaken public thank-you before giving a speech.",
+      "category": "event"
+    },
+    {
+      "id": "event_2071_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2071,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "year_138_quiet",
+      "date": {
+        "year": 2072,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2073_adult-wrong-name-badge_choice",
+      "date": {
+        "year": 2073,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I declined an emergency shift inside a festival chicken.",
+      "category": "event"
+    },
+    {
+      "id": "event_2074_adult-empty-calendar_choice",
+      "date": {
+        "year": 2074,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I cancelled accidental invitations to my free hour.",
+      "category": "event"
+    },
+    {
+      "id": "event_2075_adult-silent-notification_choice",
+      "date": {
+        "year": 2075,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I explained a suspicious shopping list attached to my garden-cleanup request.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_14_6",
+      "date": {
+        "year": 2075,
+        "month": 4,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez died at age 52.",
+      "category": "family"
+    },
+    {
+      "id": "death_person_npc_14_4",
+      "date": {
+        "year": 2076,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Leo Sánchez died at age 80.",
+      "category": "family"
+    },
+    {
+      "id": "year_149_quiet",
+      "date": {
+        "year": 2076,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2077_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2077,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_parent2",
+      "date": {
+        "year": 2077,
+        "month": 4,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Lucía Sánchez died at age 88.",
+      "category": "family"
+    },
+    {
+      "id": "fact_154_612",
+      "date": {
+        "year": 2077,
+        "month": 4,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I inherited €390,356.40 in cash and property from Lucía Sánchez.",
+      "category": "family"
+    },
+    {
+      "id": "event_2078_new-skill-late_choice",
+      "date": {
+        "year": 2078,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I practised the basics at a free self-defence lesson.",
+      "category": "event"
+    },
+    {
+      "id": "event_2079_later-retirement-assumption_choice",
+      "date": {
+        "year": 2079,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a stranger’s assumption about my daily life.",
+      "category": "event"
+    },
+    {
+      "id": "event_2080_adult-repair-table_choice",
+      "date": {
+        "year": 2080,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I asked about a warning label during a failed toy-repair demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "event_2081_bad-review_choice",
+      "date": {
+        "year": 2081,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I clarified a soup review after a stranger took it personally.",
+      "category": "event"
+    },
+    {
+      "id": "year_166_quiet",
+      "date": {
+        "year": 2082,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2083_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2083,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "year_171_quiet",
+      "date": {
+        "year": 2084,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2085_adult-open-mic-list_choice",
+      "date": {
+        "year": 2085,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked a caricaturist to correct my portrait and received a thumb in a bow tie.",
+      "category": "event"
+    },
+    {
+      "id": "year_176_quiet",
+      "date": {
+        "year": 2086,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2087_useful-advice_choice",
+      "date": {
+        "year": 2087,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I listened before advising someone about an impulsive tattoo.",
+      "category": "event"
+    },
+    {
+      "id": "event_2088_adult-empty-calendar_choice",
+      "date": {
+        "year": 2088,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I cancelled accidental invitations to my free hour.",
+      "category": "event"
+    },
+    {
+      "id": "event_2089_adult-compliment-practice_choice",
+      "date": {
+        "year": 2089,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected a stranger who thought I had written a poem.",
+      "category": "event"
+    },
+    {
+      "id": "year_187_quiet",
+      "date": {
+        "year": 2090,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "year_189_quiet",
+      "date": {
+        "year": 2091,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2092_wellbeing-unhurried-breath_choice",
+      "date": {
+        "year": 2092,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I paused before answering sharply when I was tired.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_14_8",
+      "date": {
+        "year": 2092,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Valeria Romero died at age 68.",
+      "category": "family"
+    },
+    {
+      "id": "event_2093_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2093,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "fact_197_763",
+      "date": {
+        "year": 2093,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: persistent headaches and dizziness.",
+      "category": "health"
+    },
+    {
+      "id": "event_2094_later-unfamiliar-word_choice",
+      "date": {
+        "year": 2094,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I asked someone to explain a slang compliment about my outfit.",
+      "category": "event"
+    },
+    {
+      "id": "fact_200_773",
+      "date": {
+        "year": 2095,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Hugo Sánchez and Valeria Sánchez started dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "event_2095_wellbeing-ordinary-water_choice",
+      "date": {
+        "year": 2095,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I chose tap water at a premium-water demonstration.",
+      "category": "event"
+    },
+    {
+      "id": "fact_204_775",
+      "date": {
+        "year": 2095,
+        "month": 6,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Hypertension.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_197_2_2095_choice",
+      "date": {
+        "year": 2095,
+        "month": 6,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "fact_205_777",
+      "date": {
+        "year": 2095,
+        "month": 8,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "event_2096_local-meeting_choice",
+      "date": {
+        "year": 2096,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I suggested correcting a memorial plaque for a living man in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "event_2097_later-another-year-question_choice",
+      "date": {
+        "year": 2097,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I corrected an extra zero on my birthday cake.",
+      "category": "event"
+    },
+    {
+      "id": "fact_211_804",
+      "date": {
+        "year": 2098,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Hugo Sánchez and Valeria Sánchez stopped dating.",
+      "category": "relationships"
+    },
+    {
+      "id": "year_211_quiet",
+      "date": {
+        "year": 2098,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_213_809",
+      "date": {
+        "year": 2098,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: a runny nose, sore throat and tiredness.",
+      "category": "health"
+    },
+    {
+      "id": "fact_213_811",
+      "date": {
+        "year": 2099,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "year_213_quiet",
+      "date": {
+        "year": 2099,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "year_215_quiet",
+      "date": {
+        "year": 2100,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "year_217_quiet",
+      "date": {
+        "year": 2101,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2102_birthday-number_choice",
+      "date": {
+        "year": 2102,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I ignored an unhelpful achievement list on my birthday.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_33_14",
+      "date": {
+        "year": 2102,
+        "month": 8,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Hugo Sánchez died at age 79.",
+      "category": "family"
+    },
+    {
+      "id": "year_222_quiet",
+      "date": {
+        "year": 2103,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "event_2104_later-old-handwriting_choice",
+      "date": {
+        "year": 2104,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I answered an old note about being wealthy and folding fitted sheets.",
+      "category": "event"
+    },
+    {
+      "id": "fact_227_838",
+      "date": {
+        "year": 2104,
+        "month": 12,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: a runny nose, sore throat and tiredness.",
+      "category": "health"
+    },
+    {
+      "id": "fact_227_841",
+      "date": {
+        "year": 2105,
+        "month": 1,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "event_2105_community-garden_choice",
+      "date": {
+        "year": 2105,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I volunteered beside a gardener in an alarming novelty apron in Valencia.",
+      "category": "event"
+    },
+    {
+      "id": "fact_230_847",
+      "date": {
+        "year": 2105,
+        "month": 9,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: fever, a rash and a persistent cough.",
+      "category": "health"
+    },
+    {
+      "id": "fact_230_848",
+      "date": {
+        "year": 2105,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "My symptoms resolved.",
+      "category": "health"
+    },
+    {
+      "id": "event_2106_later-photo-at-edge_choice",
+      "date": {
+        "year": 2106,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I enjoyed an old photograph without solving every detail.",
+      "category": "event"
+    },
+    {
+      "id": "event_2107_wellbeing-good-day-pressure_choice",
+      "date": {
+        "year": 2107,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I paced a good day instead of filling every available moment.",
+      "category": "event"
+    },
+    {
+      "id": "fact_236_860",
+      "date": {
+        "year": 2107,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: unusual thirst and persistent fatigue.",
+      "category": "health"
+    },
+    {
+      "id": "event_2108_new-skill-late_choice",
+      "date": {
+        "year": 2108,
+        "month": 2,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I practised the basics at a free self-defence lesson.",
+      "category": "event"
+    },
+    {
+      "id": "fact_240_869",
+      "date": {
+        "year": 2109,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I began medication care for Diabetes.",
+      "category": "health"
+    },
+    {
+      "id": "emergency_condition_person_player_236_6_2109_choice",
+      "date": {
+        "year": 2109,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I accepted urgent medical care.",
+      "category": "event"
+    },
+    {
+      "id": "year_239_quiet",
+      "date": {
+        "year": 2109,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "fact_243_874",
+      "date": {
+        "year": 2109,
+        "month": 4,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I left hospital and continued my recovery.",
+      "category": "health"
+    },
+    {
+      "id": "fact_243_879",
+      "date": {
+        "year": 2110,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I developed symptoms: a prolonged low mood and loss of interest.",
+      "category": "health"
+    },
+    {
+      "id": "event_2110_wellbeing-one-more-episode_choice",
+      "date": {
+        "year": 2110,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "I followed a beginner workout after a fitness video appeared on autoplay.",
+      "category": "event"
+    },
+    {
+      "id": "death_person_npc_14_10",
+      "date": {
+        "year": 2110,
+        "month": 10,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "Valeria Sánchez died at age 87.",
+      "category": "family"
+    },
+    {
+      "id": "year_246_quiet",
+      "date": {
+        "year": 2111,
+        "month": 2,
+        "day": 28
+      },
+      "personId": "person_player",
+      "text": "Another year passed. The ordinary days were part of my life too.",
+      "category": "year"
+    },
+    {
+      "id": "death_person_player",
+      "date": {
+        "year": 2111,
+        "month": 11,
+        "day": 29
+      },
+      "personId": "person_player",
+      "text": "I died at age 87. Cause: natural causes.",
+      "category": "death"
+    }
+  ]
+}

@@ -952,7 +952,7 @@
             "id": "story",
             "label": "Ask for the whole story",
             "title": "An unreliable defence witness",
-            "result": "{parent} remembers the day fondly, then admits thinking the haircut was a good idea. You forgive the first part.",
+            "result": "{parent} remembers the day fondly, then admits thinking the haircut was a good idea. You agree to preserve the memory and deny the hairstyle.",
             "journal": "I heard the story behind an old photo. {parent} also confessed to approving the haircut."
           },
           {
