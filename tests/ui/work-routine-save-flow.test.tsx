@@ -15,9 +15,10 @@ import { PendingEvent } from '../../src/ui/PendingEvent';
 import pinned from '../fixtures/v30-native-interview-checkpoints.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
-jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
+jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn(), navigate: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Work from '../../app/(game)/work';
+import { router } from 'expo-router';
 
 const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Work /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
@@ -91,9 +92,10 @@ test.each([
     await press('Set Routine'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getByRole('radio', { name: label, checked: true })).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Set Routine' })).toBeEnabled();
+    expect(router.navigate).not.toHaveBeenCalled();
     expect(encodeWorld(world())).toBe(before); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_work_routine'); await press('Set Routine');
-    expect(world()).toEqual(predicted); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
+    expect(world()).toEqual(predicted); expect(router.navigate).toHaveBeenCalledWith('/life'); expect(screen.queryByRole('button', { name: 'Set Routine' })).toBeNull();
     expect(screen.getByText('Work routine updated')).toBeOnTheScreen(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = rows(); view.unmount(); await cold(); view = render(frame());
     expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); expect(screen.getByText('Work routine updated')).toBeOnTheScreen();
@@ -116,7 +118,7 @@ test.each(['quit-job', 'retire'] as const)('%s confirmation stays open on save f
     await confirm(label); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(screen.getByText(title)).toBeOnTheScreen(); expect(modal().getByRole('button', { name: label })).toBeEnabled(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_work_confirmation'); await confirm(label);
-    expect(world()).toEqual(predicted); expect(screen.queryByText(title)).toBeNull(); expect(world().people[world().activePersonId].employment).toBeNull(); expect(world().accounts).toEqual(initial.accounts); expect(world().ledger).toEqual(initial.ledger); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+    expect(world()).toEqual(predicted); expect(router.navigate).not.toHaveBeenCalled(); expect(screen.queryByText(title)).toBeNull(); expect(world().people[world().activePersonId].employment).toBeNull(); expect(world().accounts).toEqual(initial.accounts); expect(world().ledger).toEqual(initial.ledger); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = rows(); view.unmount(); await cold(); view = render(frame()); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows);
     await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().random).toEqual(predicted.random); expect(world().workHistory).toEqual(predicted.workHistory);
     const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); view.unmount();

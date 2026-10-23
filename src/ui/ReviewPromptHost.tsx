@@ -32,5 +32,5 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
     finally{submitting.current=false;}
   };
   const show=scoped&&!!offer&&clean&&!busy&&!!world&&!world.pending&&!world.annual&&!world.deferred.length;
-  return <EventModal modalOwner="review" event={show?{id:offer.id,kind:'decision',title:'Enjoying Dreams?',body:'I’m building this game solo, and a quick store review would really help. Thanks for being part of Dreams! ❤️',choices:[{id:'sure',label:'Sure'},{id:'later',label:'Maybe later'}]}:null} busy={reviewBusy} error={error} onChoose={id=>{if(id==='sure'||id==='later')void answer(id);}} onClose={()=>{void answer('later');}} />;
+  return <EventModal scope="stack" modalOwner="review" event={show?{id:offer.id,kind:'decision',title:'Enjoying Dreams?',body:'I’m building this game solo, and a quick store review would really help. Thanks for being part of Dreams! ❤️',choices:[{id:'sure',label:'Sure'},{id:'later',label:'Maybe later'}]}:null} busy={reviewBusy} error={error} onChoose={id=>{if(id==='sure'||id==='later')void answer(id);}} onClose={()=>{void answer('later');}} />;
 }

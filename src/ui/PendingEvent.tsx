@@ -19,10 +19,17 @@ export function PendingEvent() {
   const artwork = useMemo(() => pending && world ? resolveEventArtwork(pending,world) : undefined,[pending,world]);
   const participants = useMemo(() => pending?.participants ?? (pending?.kind === 'decision' && world ? storyParticipants(world,pending.personIds) : undefined),[pending,world]);
   if (!pending || !artwork) return null;
+  // Keep saved hiring quotes intact, including interviews resumed from disk.
+  // Contract terms and experience belong in job details; the popup asks the question.
+  const interview = pending.kind === 'decision' && pending.templateId === 'job-interview'
+    ? pending.choices.flatMap(choice => choice.effects).find(effect => effect.kind === 'job-interview')
+    : undefined;
+  const questionStart = interview?.kind === 'job-interview' ? pending.body.indexOf(interview.employer + ' asks: ') : -1;
+  const body = questionStart >= 0 ? pending.body.slice(questionStart) : pending.body;
   const event: EventPresentation = pending.kind === 'decision'
-    ? { ...pending, ...artwork, participants, choices }
+    ? { ...pending, body, ...artwork, participants, choices }
     : { ...pending, ...artwork, participants };
-  return <EventModal event={event} busy={busy} error={error} onChoose={choiceId => {
+  return <EventModal scope="stack" event={event} busy={busy} error={error} onChoose={choiceId => {
     void dispatch(pending.kind === 'decision' ? { type: 'choose', eventId: pending.id, choiceId } : { type: 'acknowledge', resultId: pending.id });
   }} />;
 }

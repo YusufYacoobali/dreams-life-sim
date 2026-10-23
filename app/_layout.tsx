@@ -9,6 +9,7 @@ import { useFeedback } from '../src/ui/feedback';
 import { AppReminders } from '../src/ui/AppReminders';
 import * as SplashScreen from 'expo-splash-screen';
 import { CinematicTransitionProvider } from '../src/ui/cinematic/CinematicTransition';
+import { AppEventModals } from '../src/ui/AppEventModals';
 
 // Retain the navy native launch surface until the root overlay has painted.
 void SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -16,7 +17,7 @@ void SplashScreen.preventAutoHideAsync().catch(() => {});
 export default function RootLayout() {
   const appearance = usePreferences(s => s.settings.appearance);
   useEffect(() => { void gameStore.getState().bootstrap(); void preferencesStore.getState().bootstrap(); }, []);
-  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><CinematicTransitionProvider><RootNavigator /><AppReminders /></CinematicTransitionProvider></AppFeedback></ThemeProvider></SafeAreaProvider>;
+  return <SafeAreaProvider><ThemeProvider appearance={appearance}><AppFeedback><CinematicTransitionProvider><AppEventModals><RootNavigator /><AppReminders /></AppEventModals></CinematicTransitionProvider></AppFeedback></ThemeProvider></SafeAreaProvider>;
 }
 
 function RootNavigator() {

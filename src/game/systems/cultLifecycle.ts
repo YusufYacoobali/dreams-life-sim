@@ -1,5 +1,5 @@
 import type { World } from '../model';
-import { nextPending } from '../pendingQueue';
+import { nextPending, offerPending } from '../pendingQueue';
 import { fullName } from '../personHelpers';
 import { cultMonthNumber, type Cult } from './cultSchemas';
 import {
@@ -37,6 +37,14 @@ export function closeCult(
   status: Exclude<Cult['status'], 'active'>,
 ) {
   if (cult.status !== 'active') return;
+  const notifyCollapse =
+    status === 'collapsed' &&
+    cult.leaderId === world.activePersonId &&
+    !world.people[world.activePersonId].died;
+  const collapseReason =
+    cult.distressMonths >= 4
+      ? 'could not cover its bills for four consecutive months'
+      : 'lost the loyalty of its followers over six consecutive months';
   const debtPayment = cult.arrears < cult.cash ? cult.arrears : cult.cash;
   if (debtPayment) {
     cultBook(
@@ -93,6 +101,25 @@ export function closeCult(
       cult.name +
       '. Communal funds were settled outside my personal estate.',
   );
+  if (notifyCollapse) {
+    offerPending(
+      world,
+      {
+        kind: 'result',
+        id: 'cult_collapse_' + cult.id,
+        title: 'Your organisation has collapsed',
+        body:
+          cult.name +
+          ' ' +
+          collapseReason +
+          '. Your leadership has ended and the inner circle has left. Communal funds were used to settle outstanding bills where possible, unpaid bills were written off and any remaining funds were distributed to the community. Your personal funds were kept separate.',
+        illustration: 'cult',
+        effects: [],
+      },
+      80,
+    );
+    if (world.annual?.stage === 'months') world.annual.pausedForPlanning = true;
+  }
 }
 export function cultPersonDied(world: World, personId: string) {
   for (const cult of world.cults) {

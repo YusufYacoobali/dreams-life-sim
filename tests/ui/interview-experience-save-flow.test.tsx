@@ -1,4 +1,3 @@
-import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,6 +12,7 @@ import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/per
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
+import { jobInterviews } from '../../src/game/content/jobInterviews';
 import native from '../fixtures/v32-native-hourly-checkpoints.json';
 import history from '../fixtures/v7-history-archive.json';
 
@@ -80,8 +80,13 @@ test('genuine paid history binds once through application/answer rollback, held 
     expect(screen.getByRole('button', { name: 'Apply for this Job' })).toBeDisabled();
     await act(async () => { context.release(); }); await waitFor(() => expect(screen.getByText('Retail Assistant interview')).toBeOnTheScreen());
     expect(mockStore.getState().world).toEqual(predicted); expect(predicted.pending?.body).toContain('12 recorded paid months in Retail. Experience can add up to 2 percentage points'); expect(predicted.random).toEqual(context.initial.random); expect(context.backup()).toBe(context.payload); expect(context.oldRows()).toEqual(context.original); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+    const question = 'New York Retail asks: “' + jobInterviews.retail.question + '”';
+    expect(screen.getByText(question)).toBeOnTheScreen();
+    expect(screen.queryByText(/Your application includes|Experience can add|No experience bonus/)).toBeNull();
     const decisionRows = context.rows(); view.unmount(); await act(async () => { await context.cold(); }); view = render(frame());
     expect(context.rows()).toEqual(decisionRows); expect(mockStore.getState().world).toEqual(predicted);
+    expect(screen.getByText(question)).toBeOnTheScreen();
+    expect(screen.queryByText(/Your application includes|Experience can add|No experience bonus/)).toBeNull();
     if (predicted.pending?.kind !== 'decision') throw new Error('Expected saved interview');
     const choice = predicted.pending.choices[0], answer = { type: 'choose' as const, eventId: predicted.pending.id, choiceId: choice.id }, expected = resolveCommand(predicted, answer, true), warmUnpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     context.sql("CREATE TRIGGER fail_experience_answer BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(choice.label);
@@ -101,7 +106,11 @@ test('actual old native unanswered interview keeps exact old copy, absent metada
   try {
     const initial = context.initial, before = context.rows(), pending = initial.pending;
     if (pending?.kind !== 'decision') throw new Error('Expected old actual interview');
-    expect(pending.body).not.toContain('recorded paid months'); expect(pending.choices.every(choice => !('experience' in choice.effects[0]))).toBe(true); expect(screen.getByText(displayText(pending.body))).toBeOnTheScreen();
+    expect(pending.body).not.toContain('recorded paid months'); expect(pending.choices.every(choice => !('experience' in choice.effects[0]))).toBe(true);
+    const effect = pending.choices[0].effects[0];
+    if (effect.kind !== 'job-interview') throw new Error('Expected saved hiring terms');
+    expect(screen.getByText(effect.employer + ' asks: “' + jobInterviews[effect.roleId].question + '”')).toBeOnTheScreen();
+    expect(screen.queryByText(/Reviewed contract:|Your application includes/)).toBeNull();
     context.sql("CREATE TRIGGER fail_legacy_experience BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(pending.choices[0].label); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(context.rows()).toEqual(before); expect(mockStore.getState().world).toEqual(initial);
     context.sql('DROP TRIGGER fail_legacy_experience'); await press(pending.choices[0].label);
     const actualHired = checkpoints.unpackCheckpoint(native.checkpoints.hired.payload); await waitFor(() => expect(mockStore.getState().world).toEqual(actualHired)); expect(context.backup()).toBe(context.payload);

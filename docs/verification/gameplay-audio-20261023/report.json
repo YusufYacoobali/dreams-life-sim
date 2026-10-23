@@ -1,0 +1,294 @@
+{
+  "date": "2026-10-23",
+  "scope": "Gameplay audio implementation and adapter/save regression; no physical device playback",
+  "sourceHashes": {
+    "src/feedback/gameplayFeedback.ts": "4c73c809cb6649f6338670d5dd1e31fc9b36acb35ae80ba1637607306b343b34",
+    "src/feedback/committedCue.ts": "c0be9b61e10ee9bd0464e135f70ae5466a1629dbe23a74a725ce5d06a5e42348",
+    "src/state/gameStore.ts": "64dc5ac1daef59c9859e08f467cb4cec26a6d20f0e6cb683ff2b8b5e49dd17cd",
+    "src/state/preferencesStore.ts": "5c9d6dacf0851ba274ddf4f2740ac725ec3cbae46da849385168ea5e8db3b3d2",
+    "src/ui/audioController.ts": "8fbb81f30c15142c36ba666ba419e9642da5cf1904ae9c7edde2cd575a1bb85f",
+    "src/ui/useActionSound.ts": "cc341233265b243238bc33be72146318f7688adc0a6e98dda9f1e775eebffd41",
+    "src/ui/AppFeedback.tsx": "5233291c8d43f6748a4df433e4b2dc053c9ab5d687196f42cd0c7a8f9db4dcd8",
+    "src/ui/feedback.tsx": "af8d393ff7a1001ebad12c86a9efedad2fc06581c4a1881a68517a1f3f660301",
+    "src/ui/modalFocus.ts": "03cc14ccefab8290ed29aec62b41a1b085dc5211e4fb3e40ce0b2bf320620d38",
+    "src/minigames/core/useMiniGameAudio.ts": "5feedf1aea905d223f2a9db6efa18bc7c4b517c68883a344dedf0083b9383d9e",
+    "app/settings.tsx": "ba37287c9014ffed92fba0d197a472e1ab00bcb4c609ac263adfa573663157bd",
+    "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb"
+  },
+  "checks": {
+    "typecheck": "passed",
+    "runtimeImports": "passed; no cycles",
+    "thirdPartyInventory": "passed",
+    "whitespace": "passed"
+  },
+  "tests": {
+    "suites": 26,
+    "passed": 293,
+    "failed": 0,
+    "files": [
+      "tests/ui/modal-window-layout.test.tsx",
+      "tests/ui/collapse-age-up-flow.test.tsx",
+      "tests/ui/event-modal-host.test.tsx",
+      "tests/ui/asset-bank-save-flow.test.tsx",
+      "tests/ui/business-review-save-flow.test.tsx",
+      "tests/ui/onboarding-flow.test.tsx",
+      "tests/ui/cult-flow.test.tsx",
+      "tests/ui/family-dialog-save-flow.test.tsx",
+      "tests/ui/life-milestone-motion.test.tsx",
+      "tests/ui/minigame-flow.test.tsx",
+      "tests/ui/life-context.test.tsx",
+      "tests/ui/feedback-settings-flow.test.tsx",
+      "tests/game/education-work-finance.test.ts",
+      "tests/ui/review-prompt.test.tsx",
+      "tests/ui/onboarding-haptics-flow.test.tsx",
+      "tests/ui/settings-flow.test.tsx",
+      "tests/ui/onboarding-accessibility-flow.test.tsx",
+      "tests/state/gameplay-feedback.test.ts",
+      "tests/game/cults.test.ts",
+      "tests/game/minigames.test.ts",
+      "tests/state/minigame-save.test.ts",
+      "tests/state/preferencesStore.test.ts",
+      "tests/game/family.test.ts",
+      "tests/state/education-milestone-save.test.ts",
+      "tests/ui/audio-controller.test.ts",
+      "tests/state/gameStore.test.ts"
+    ]
+  },
+  "analysis": [
+    {
+      "cue": "tap",
+      "file": "assets/audio/action-tap.wav",
+      "bytes": 2028,
+      "sha256": "8294c5847aa546852faa89108656fd74091210dfafbb921615fb4f382070bf6e",
+      "durationSeconds": 0.044989,
+      "streams": [
+        {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "22050",
+          "channels": 1
+        }
+      ],
+      "startSeconds": 0,
+      "durationMs": 45,
+      "volume": 0.35,
+      "measurements": [
+        "mean_volume: -34.7 dB",
+        "max_volume: -22.5 dB"
+      ]
+    },
+    {
+      "cue": "age-up",
+      "file": "assets/audio/age-up.mp3",
+      "bytes": 4608,
+      "sha256": "dbf0297a3ddf61bceec7f6f035168446d016bb4a340ac7d81c958b3538d5276e",
+      "durationSeconds": 0.144,
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "32000",
+          "channels": 2
+        }
+      ],
+      "startSeconds": 0,
+      "durationMs": 144,
+      "volume": 0.65,
+      "measurements": [
+        "mean_volume: -24.4 dB",
+        "max_volume: -9.5 dB"
+      ]
+    },
+    {
+      "cue": "big-success",
+      "file": "assets/audio/big-success.mp3",
+      "bytes": 105325,
+      "sha256": "dbc791784f00695bafa7e1c73eb76f5794144f4ae2bdf40c4309f76c678b212d",
+      "durationSeconds": 3.291406,
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "startSeconds": 0.14,
+      "durationMs": 2420,
+      "volume": 0.45,
+      "measurements": [
+        "silence_start: 0",
+        "silence_end: 0.167959 | silence_duration: 0.167959",
+        "silence_start: 2.502222",
+        "silence_end: 2.60424 | silence_duration: 0.102018",
+        "silence_start: 2.604286",
+        "silence_end: 3.291429 | silence_duration: 0.687143",
+        "mean_volume: -26.1 dB",
+        "max_volume: -6.5 dB"
+      ]
+    },
+    {
+      "cue": "purchase",
+      "file": "assets/audio/freesound_gamestudio-purchase-success-384963.mp3",
+      "bytes": 45139,
+      "sha256": "560d75f6eff0fe2f9b9837edf472332dbc14a9e02c8b4048248caf862f8404f5",
+      "durationSeconds": 1.410594,
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "startSeconds": 0,
+      "durationMs": 1220,
+      "volume": 0.22,
+      "measurements": [
+        "silence_start: 1.116916",
+        "silence_end: 1.214059 | silence_duration: 0.0971429",
+        "silence_start: 1.21941",
+        "silence_end: 1.410612 | silence_duration: 0.191202",
+        "mean_volume: -19.3 dB",
+        "max_volume: 0.0 dB"
+      ]
+    },
+    {
+      "cue": "error",
+      "file": "assets/audio/universfield-error-notification-08-206492.mp3",
+      "bytes": 32600,
+      "sha256": "3ec21ad945f8496b48d287eb8a4b5291e9f76f08061f3096c178f932eca37195",
+      "durationSeconds": 1.01875,
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "startSeconds": 0,
+      "durationMs": 740,
+      "volume": 0.32,
+      "measurements": [
+        "silence_start: 0.686871",
+        "silence_end: 1.018776 | silence_duration: 0.331905",
+        "mean_volume: -22.1 dB",
+        "max_volume: -6.2 dB"
+      ]
+    }
+  ],
+  "bundles": [
+    {
+      "platform": "android",
+      "passed": true,
+      "bundle": "_expo/static/js/android/entry-6b4c01bc5040e936e3a470f6dc41799e.hbc",
+      "bundleSha256": "8d9527f1b56f05265732ce0730d11cf521fc4bdcfee83c815768f8224dde7deb",
+      "assets": [
+        {
+          "file": "assets/audio/action-tap.wav",
+          "exportedAsset": "assets/ff707405fb20b2269459a5c863cc412a",
+          "bytes": 2028,
+          "sha256": "8294c5847aa546852faa89108656fd74091210dfafbb921615fb4f382070bf6e"
+        },
+        {
+          "file": "assets/audio/age-up.mp3",
+          "exportedAsset": "assets/193d592abbfbbf62a2e4c9471fe8df38",
+          "bytes": 4608,
+          "sha256": "dbf0297a3ddf61bceec7f6f035168446d016bb4a340ac7d81c958b3538d5276e"
+        },
+        {
+          "file": "assets/audio/big-success.mp3",
+          "exportedAsset": "assets/604373c9fe8af4fa0ca994d7dd00e159",
+          "bytes": 105325,
+          "sha256": "dbc791784f00695bafa7e1c73eb76f5794144f4ae2bdf40c4309f76c678b212d"
+        },
+        {
+          "file": "assets/audio/freesound_gamestudio-purchase-success-384963.mp3",
+          "exportedAsset": "assets/0b6fff3fb38d18bbeea7e7279a85eeaa",
+          "bytes": 45139,
+          "sha256": "560d75f6eff0fe2f9b9837edf472332dbc14a9e02c8b4048248caf862f8404f5"
+        },
+        {
+          "file": "assets/audio/universfield-error-notification-08-206492.mp3",
+          "exportedAsset": "assets/ad25bf8234af9536ac81fa66f8db8953",
+          "bytes": 32600,
+          "sha256": "3ec21ad945f8496b48d287eb8a4b5291e9f76f08061f3096c178f932eca37195"
+        },
+        {
+          "file": "assets/minigames/sports.wav",
+          "exportedAsset": "assets/82b1e72515b57534409157f97488191e",
+          "bytes": 8864,
+          "sha256": "c6e5786cca0c5c7c7a93cdaf2fea11f40176116218fd51c7d5fda518a3c552df"
+        },
+        {
+          "file": "assets/minigames/crime.wav",
+          "exportedAsset": "assets/0087d91d0aedeba8eae24dd256973749",
+          "bytes": 8864,
+          "sha256": "20dc7f00352566e88ca18735258f69539992210294a53fee6c491a6b20a7f50f"
+        },
+        {
+          "file": "assets/minigames/astronaut.wav",
+          "exportedAsset": "assets/2007828acf6a637cdaf02b2b467767de",
+          "bytes": 11510,
+          "sha256": "cfbb6f3d72b95de92d93cda4a5a65966b7f61eca162d2f6930b974eca16fed43"
+        }
+      ]
+    },
+    {
+      "platform": "ios",
+      "passed": true,
+      "bundle": "_expo/static/js/ios/entry-9a6702e1b3beb8e4ef209f2774e03410.hbc",
+      "bundleSha256": "68e2772fd28ea6b6609a2b450cc3c7a13e0d4aaf3abf0a5c9316fe282ed18502",
+      "assets": [
+        {
+          "file": "assets/audio/action-tap.wav",
+          "exportedAsset": "assets/ff707405fb20b2269459a5c863cc412a",
+          "bytes": 2028,
+          "sha256": "8294c5847aa546852faa89108656fd74091210dfafbb921615fb4f382070bf6e"
+        },
+        {
+          "file": "assets/audio/age-up.mp3",
+          "exportedAsset": "assets/193d592abbfbbf62a2e4c9471fe8df38",
+          "bytes": 4608,
+          "sha256": "dbf0297a3ddf61bceec7f6f035168446d016bb4a340ac7d81c958b3538d5276e"
+        },
+        {
+          "file": "assets/audio/big-success.mp3",
+          "exportedAsset": "assets/604373c9fe8af4fa0ca994d7dd00e159",
+          "bytes": 105325,
+          "sha256": "dbc791784f00695bafa7e1c73eb76f5794144f4ae2bdf40c4309f76c678b212d"
+        },
+        {
+          "file": "assets/audio/freesound_gamestudio-purchase-success-384963.mp3",
+          "exportedAsset": "assets/0b6fff3fb38d18bbeea7e7279a85eeaa",
+          "bytes": 45139,
+          "sha256": "560d75f6eff0fe2f9b9837edf472332dbc14a9e02c8b4048248caf862f8404f5"
+        },
+        {
+          "file": "assets/audio/universfield-error-notification-08-206492.mp3",
+          "exportedAsset": "assets/ad25bf8234af9536ac81fa66f8db8953",
+          "bytes": 32600,
+          "sha256": "3ec21ad945f8496b48d287eb8a4b5291e9f76f08061f3096c178f932eca37195"
+        },
+        {
+          "file": "assets/minigames/sports.wav",
+          "exportedAsset": "assets/82b1e72515b57534409157f97488191e",
+          "bytes": 8864,
+          "sha256": "c6e5786cca0c5c7c7a93cdaf2fea11f40176116218fd51c7d5fda518a3c552df"
+        },
+        {
+          "file": "assets/minigames/crime.wav",
+          "exportedAsset": "assets/0087d91d0aedeba8eae24dd256973749",
+          "bytes": 8864,
+          "sha256": "20dc7f00352566e88ca18735258f69539992210294a53fee6c491a6b20a7f50f"
+        },
+        {
+          "file": "assets/minigames/astronaut.wav",
+          "exportedAsset": "assets/2007828acf6a637cdaf02b2b467767de",
+          "bytes": 11510,
+          "sha256": "cfbb6f3d72b95de92d93cda4a5a65966b7f61eca162d2f6930b974eca16fed43"
+        }
+      ]
+    }
+  ],
+  "nativeListening": {
+    "status": "pending",
+    "reason": "No supported iOS/Android runtime attached; native APIs are mocked in adapter tests. Production exports are bundle evidence only."
+  }
+}

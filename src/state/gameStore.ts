@@ -6,9 +6,11 @@ import { SaveCorrupt, SaveConflict, type LifeSummary, type SavedLifeUpdate, type
 import { GameCommand, IneligibleAction, resolveCommand } from '../game/engine';
 import { SnapshotSummary } from '../persistence/archive';
 import { applyGodModeEdits, type GodModeEdit } from '../game/godMode';
+import { committedCues, seriousTransition } from '../feedback/committedCue';
+import { emitGameplayFeedback, type GameplayFeedback } from '../feedback/gameplayFeedback';
 
 type Persistence = Pick<SaveRepository, 'active' | 'list' | 'create' | 'commit' | 'select' | 'importWithSummary' | 'recoverWithSummary' | 'snapshots' | 'snapshot' | 'restoreBranch'> & Partial<Pick<SaveRepository, 'loadReviewTracker' | 'claimReview' | 'respondToReview'>>;
-type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean; reviewDelay?: () => number };
+type Dependencies = { repository: () => Promise<Persistence>; date: () => GameDate; id: () => string; yieldToUI?: () => Promise<void>; godModeAccess?: () => boolean; reviewDelay?: () => number; onFeedback?: (event: GameplayFeedback) => void };
 export type GameState = {
   world: World | null; lives: LifeSummary[]; ready: boolean; busy: boolean; error: string | null;
   snapshots: SnapshotSummary[];
@@ -34,16 +36,21 @@ export function createGameStore(deps: Dependencies) {
     let restoreAttempt: { before: World; snapshotId: string; branchId: string } | null = null;
     let godModeAttempt: { before: World; signature: string; commandId: string } | null = null;
     let reviewAttempt: {offerId:string;response:ReviewResponse;delay:number} | null = null;
+    let failureSequence = 0;
+    const feedback = (event: GameplayFeedback) => { try { (deps.onFeedback ?? emitGameplayFeedback)(event); } catch { /* Optional sound cannot fail a committed action. */ } };
     const readReview = async (repository:Persistence) => repository.loadReviewTracker ? repository.loadReviewTracker().catch(() => null) : null;
     const publish = ({ world, summary }: SavedLifeUpdate) => set({ world, snapshots: [], lives: [
       summary,
       ...get().lives.filter(life => life.id !== world.id),
     ] });
-    const run = async (action: () => Promise<void>, failure: string) => {
+    const run = async (action: () => Promise<void>, failure: string, quietFailure = false) => {
       if (get().busy || get().reviewBusy) return false;
       set({ busy: true, error: null, reviewOffer: null });
       try { if (deps.yieldToUI) await deps.yieldToUI(); await action(); return true; }
-      catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure }); return false; }
+      catch (error) { set({ error: error instanceof IneligibleAction || error instanceof SaveCorrupt || error instanceof SaveConflict ? error.message : failure });
+        const world = get().world;
+        if (!quietFailure && !world?.people[world.activePersonId]?.died) feedback({ id: 'failure:' + ++failureSequence, cues: ['error'] });
+        return false; }
       finally { set({ busy: false }); }
     };
     return {
@@ -71,7 +78,7 @@ export function createGameStore(deps: Dependencies) {
           if (!answered) throw new Error('Review preferences unavailable');
           set({reviewTracker:answered.tracker,reviewOffer:null});reviewAttempt=null;
           return answered.accepted;
-        } catch {set({reviewError:'Could not save that. Please try again.'});return false;}
+        } catch {set({reviewError:'Could not save that. Please try again.'});feedback({ id: 'failure:' + ++failureSequence, cues: ['error'] });return false;}
         finally {set({reviewBusy:false});}
       },
       clearError: () => set({ error: null }),
@@ -150,8 +157,13 @@ export function createGameStore(deps: Dependencies) {
         const repository = await deps.repository();
         const commandId = 'revision:' + world.revision + ':' + command.type;
         const committed = await repository.commit(next, world.revision, commandId, command.type === 'end-life' ? 'Before End This Life' : command.type === 'advance');
+        // The durable, returned result determines feedback, before optional review reads.
+        try {
+          const cues = committedCues(world, committed, command), silence = seriousTransition(world, committed);
+          if (cues.length || silence) feedback({ id: world.id + ':' + committed.revision + ':' + command.type, cues, ...(silence ? { silence: true } : {}) });
+        } catch { /* Feedback cannot change a successful save. */ }
         set({ world: committed, lives: get().lives.map(life => life.id === committed.id ? { ...life, name: fullName(committed.people[committed.activePersonId]), revision: committed.revision } : life), reviewTracker:await readReview(repository),reviewOffer:null });
-      }, "Your progress couldn't be saved. Please try again."),
+      }, "Your progress couldn't be saved. Please try again.", command.type === 'end-life'),
     };
   });
 }

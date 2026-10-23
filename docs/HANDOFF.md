@@ -1,5 +1,21 @@
 # Continue Dreams: Life Simulator
 
+## Popup reliability and Age Up notices — 23 October 2026
+
+Job interview popups display the employer's question and answers, including
+previously saved interviews; stored hiring terms and experience remain exact.
+Ordinary popups share one root surface, with route/life ownership and stale
+callback guards. Successful work-routine saves return to Home; failed saves
+retain their selection for retry. Cult collapse now queues a durable information
+popup and pauses Age Up for planning, matching the existing business-failure
+notice. Current save/schema markers are unchanged.
+
+The full UI run and affected reruns cover **138 suites / 708 tests**; **322**
+related game/persistence cases also pass. Strict types, the 499-module import
+graph and Android/iOS production exports pass; all 10 changed runtime sources
+match both bundle maps. See [the popup report](verification/popups-20261023.json).
+Native-device validation remains outstanding.
+
 ## Whole-number presentation — 23 October 2026
 
 Read-only prices, balances, net worth, rates, holdings and old journal/event text

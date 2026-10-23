@@ -30,7 +30,7 @@ export default function Settings() {
       <FeedbackSetting label="Reduce Motion" description="Use still artwork and turn off page and dialog animations. Your device’s reduced-motion setting is always honoured." checked={settings.reducedMotion} disabled={unavailable} stacked={stacked} onChange={enabled => { void setReducedMotion(enabled); }} />
       {deviceReducedMotion && <Body muted>Your device requests reduced motion, so animations stay off.</Body>}
       <FeedbackSetting label="Haptic Feedback" description={hapticsSupported ? 'A light tap for buttons, choices and Age Up, on supported devices.' : 'Haptics are available on supported iOS and Android devices.'} checked={settings.haptics} disabled={unavailable || !hapticsSupported} stacked={stacked} onChange={enabled => { void setHaptics(enabled); }} />
-      <FeedbackSetting label="Sound Effects" description={soundSupported ? 'A quiet button tap. Respects silent mode and media volume.' : 'Button sounds are available on iOS and Android devices.'} checked={settings.soundEffects} disabled={unavailable || !soundSupported} stacked={stacked} onChange={enabled => { void setSoundEffects(enabled); }} />
+      <FeedbackSetting label="Sound Effects" description={soundSupported ? 'Subtle taps, year changes, milestones, purchases and action feedback. Respects silent mode and media volume.' : 'Gameplay sounds are available on iOS and Android devices.'} checked={settings.soundEffects} disabled={unavailable || !soundSupported} stacked={stacked} onChange={enabled => { void setSoundEffects(enabled); }} />
       {busy && <ActivityIndicator accessibilityLabel="Saving app settings" />}
     </Card>
     <DailyReminderSettings stacked={stacked} />
