@@ -1,10 +1,16 @@
 # Event and payoff writing overhaul
 
 The full catalogue was audited against `da0b0e5`: **319 events and 957 choices**.
-This batch revises **114 events / 342 result branches**. It keeps 186 events,
-replaces 88 weak premises, and improves 26 existing events. Another 19 Improve
-classifications identify candidates outside this initial batch; their text is
-unchanged. All existing event and choice IDs remain.
+The initial batch revised 114 events / 342 result branches. The follow-up
+completes all 19 deferred candidates and their 57 payoffs, bringing the total to
+**133 revised events / 399 result branches**. The audit keeps 186 events,
+replaces 88 weak premises and improves 45 existing events. No Improve candidates
+remain deferred. All existing event and choice IDs remain.
+
+[Read the 19 follow-up situations and every new payoff](deferred-followup.md).
+Their eligibility and effects are unchanged, so the existing save markers remain
+valid; all already-bound original outcomes are checked against genuine pre-edit
+captures.
 
 [Search the complete before/after editorial review](index.html), including each
 situation, choice, result and journal entry. [The audit data](catalogue-review.json)
@@ -84,13 +90,23 @@ strategy: 641 of 2,094 adult decisions. They reflect the existing health rules,
 not new authored event chains. This writing batch does not change disease
 progression or suppress genuine health decisions.
 
-## Verification
+## Follow-up verification
+
+At source `d861b33`, **303 suites / 4,275 tests** pass in one full invocation. Strict app/test types and the 488-module import check pass. The 234 focused checks include every old and new branch, unchanged eligibility/effects and the real save failure/retry UI flow.
+
+All 12 natural lives completed: 779 decisions and 78 encounters with 11 different follow-up scenes. Choice IDs, consequence rows, death ages and ledger-row counts match the previous run; other scenes and journal entries remain exact. No unresolved bindings, missing nonfatal payoffs or five-year cooldown violations were found. This first-available-choice strategy does not create pets, hobbies or trips; genuine domain fixtures cover those contexts and all 57 alternatives.
+
+After retaining the newer welcome-screen commits, all four affected suites (20 tests), types and imports also pass at `a3b69bf`. Game, persistence and state files are identical to the full-regression source. Current coverage is **304 suites / 4,285 tests** across the full run and these latest welcome checks; duplicate test files are counted once.
+
+[Commands, source pins, natural examples and log hashes](deferred-followup-tests.json). These are engine/test and writing checks; no new native-device visual acceptance is claimed.
+
+## Initial batch verification
 
 The final combined source `98e34b0` passed **302 suites / 4,236 tests in one complete invocation**, including 12 complete seeded lives. Strict app/test types and the **488-module import graph** pass. [Exact commands, counts, source pins and log hashes](test-summary.json) are recorded separately from the earlier writing-only run.
 
 Genuine captures from both independent World46 producers preserve all ten original whole-world choice outcomes after migration. Reader26 row preservation, transaction rollback, retry and duplicate protection pass. The 12 combined-source lifetime replays retain the original actual choices, consequence rows, death ages and ledger-row counts; only the intended prospective copy changes differ. These replay seeds overlap the original 36-life review and are not counted as new distinct lives.
 
 The searchable editorial report was rendered and checked at 390px and 1440px,
-including all 114 stories and search filtering. These are report checks, not
+including all 114 original revised stories and search filtering. The follow-up adds 19 more stories to the same report. These are report checks, not
 native game screenshots. No native-device or new visual-layout acceptance is
 claimed for this writing and domain-effect batch.

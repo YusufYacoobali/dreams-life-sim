@@ -11,18 +11,29 @@ is compact, belief lists are searchable, and the existing two routes and
 12 illustrations are retained. See [the current guide](CULT_LEADER.md) and
 [the polish report](verification/cult-polish/README.md).
 
-Verification covers **307 suites / 4,421 tests** across the full regression
-and affected test-only/welcome reruns, plus a passing **120-life soak**. Strict
-app/test types, the 493-module import graph, browser layouts and both final
-Android/iOS exports pass. Native-device validation remains pending. Game-core
-source is `d1df219`; final app presentation is `51c7a83`, retaining the concurrent
-welcome redesign as well as event writing and size cleanup.
+At game-core source `d1df219` and app presentation `51c7a83`, verification covered
+**307 suites / 4,421 tests** across the full regression and affected
+test-only/welcome reruns, plus a passing **120-life soak**. Strict app/test types,
+the 493-module import graph, browser layouts and both Android/iOS exports passed.
+Native-device validation remains pending. The later 19-event writing merge below
+changes prose only; final affected integration checks are recorded in the polish
+report. The concurrent welcome redesign, event writing and size cleanup remain.
 
 Current markers are **World 48 / engine 50 / content 27 / reader 28 / database v4**.
 The concurrent event-writing and size-cleanup changes are retained. Genuine
 World 46 cult saves, both independently produced World 46 formats, integrated
 World 47 saves and their original pending outcomes remain supported. Earlier
 sections describe their historical source snapshots.
+
+## Remaining 19 event rewrites — 23 October 2026
+
+Completed all 19 deferred Improve candidates, including 57 distinct choice
+payoffs and journal entries. The full audit now has 133 revised events and
+399 result branches, with no deferred candidates. This is writing only: IDs,
+eligibility, effects, RNG and existing saved words remain. All 57 original saved
+outcomes are byte-pinned through full-world hashes. That writing source used
+World47 / engine49 / content26 / reader27 / SQLite v4. The upstream asset cleanup
+is retained. At source `d861b33`, all **303 suites / 4,275 tests**, types and imports pass. Twelve complete natural lives include 78 follow-up encounters with no unintended gameplay changes. The newer welcome commits are also retained and their four affected suites pass; that checkpoint covered 304 suites / 4,285 tests across the full run and latest affected checks. See [the follow-up writing and verification](verification/event-writing/deferred-followup.md).
 
 ## Event and payoff writing — 23 October 2026
 

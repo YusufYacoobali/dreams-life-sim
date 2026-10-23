@@ -46,6 +46,7 @@ test.each(['light', 'dark'] as const)('%s welcome shows the brand and creation a
     expect(screen.queryByText(/Make choices|Free to play|Your story stays with you/)).toBeNull();
     expect(screen.queryByRole('button', { name: 'Saved Lives' })).toBeNull();
     expect(screen.queryByRole('button', { name: /^Continue Life/ })).toBeNull();
+    expect(screen.queryByText(/^Continue as /)).toBeNull();
     expect(screen.getAllByRole('button')).toHaveLength(3);
     expect(screen.getByRole('button', { name: 'Start New Life' })).toHaveStyle({ backgroundColor: lightColors.actionBlue });
     expect(screen.UNSAFE_queryAllByType(Image)).toHaveLength(0);
@@ -68,6 +69,7 @@ test.each(['birth', 'alive', 'dead'] as const)('Continue is primary and opens th
     const world = mockStore.getState().world!, encoded = encodeWorld(world), rows = await context.repository.list();
     const view = render(frame(<Welcome />));
     const label = 'Continue Life as ' + fullName(world.people[world.activePersonId]);
+    expect(screen.getByText('Continue as ' + fullName(world.people[world.activePersonId]))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: label })).toHaveStyle({ backgroundColor: lightColors.actionGreen });
     expect(screen.getByRole('button', { name: 'Start New Life' })).toHaveStyle({ borderWidth: 1 });
     await press(label); expect(router.push).toHaveBeenLastCalledWith(saved === 'birth' ? '/birth' : saved === 'dead' ? '/death' : '/life');
@@ -122,6 +124,9 @@ test.each([{ width: 320, height: 568, fontScale: 1 }, { width: 320, height: 568,
     expect(screen.getByText('Start New Life').props.allowFontScaling).not.toBe(false);
     expect(screen.getByText('Random Life').props.numberOfLines).toBeUndefined();
     expect(screen.getByText('Continue Life').props.numberOfLines).toBeUndefined();
+    const caption = screen.getByText(/^Continue as /);
+    expect(caption.props.numberOfLines).toBeUndefined();
+    expect(caption.props.allowFontScaling).not.toBe(false);
     expect(screen.UNSAFE_getByType(Svg).props.width).toBe(dimensions.width < 360 ? 140 : 184);
     expect(openingBackground).toBe('#0D1729');
     await press('Random Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'random' } });
