@@ -153,7 +153,7 @@ const recruitmentWriting: Record<
     strong:
       "You get people to stop and listen. One wants to know about dental care. You steer the conversation back to your beliefs.",
     modest:
-      'You collect a few recruits between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.',
+      'You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.',
     empty:
       'You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.',
     incident: 'activity-street-question',
@@ -162,7 +162,7 @@ const recruitmentWriting: Record<
     strong:
       'Your clip brings in recruits. The comments demand a longer explanation of your beliefs and a shorter explanation of your hair.',
     modest:
-      'A few viewers join. The rest seem more invested in arguing with one another under your invitation.',
+      'Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.',
     empty:
       'Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.',
     incident: 'activity-comments-escape',
@@ -171,7 +171,7 @@ const recruitmentWriting: Record<
     strong:
       "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.",
     modest:
-      'A few visitors sign up. The others thank you for the refreshments with the firm politeness of people refusing a second date.',
+      'You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.',
     empty:
       'Visitors eat the refreshments and leave. You have persuaded them to accept snacks.',
     incident: 'activity-open-door',
@@ -180,7 +180,7 @@ const recruitmentWriting: Record<
     strong:
       'Your followers’ friends join. You deliver the welcome while the people who invited them look relieved that you are behaving yourself.',
     modest:
-      'A few friends sign up. The others spend the gathering trying to catch their hosts’ eyes without looking interested in the forms.',
+      'A guest fills in a form. Conversations at the table become much more careful once the membership pitch starts.',
     empty:
       'Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.',
     incident: 'activity-referral-table',
@@ -189,7 +189,7 @@ const recruitmentWriting: Record<
     strong:
       "Your stunt turns spectators into recruits. A bystander declines to stand any closer while taking a form.",
     modest:
-      'A few spectators join. Most leave with a photograph and a story they clearly intend to tell at your expense.',
+      'Your stunt interests would-be recruits. Most spectators leave with a photograph and a story they intend to tell at your expense.',
     empty:
       'You attract cameras, spectators and no recruits. People enjoy watching you without wanting to become your responsibility.',
     incident: 'activity-stunt-sponsor',
@@ -277,7 +277,7 @@ export function runCultRecruitment(
     narrative +
     '\n\n' +
     joined +
-    ' new followers joined; ' +
+    (joined === 1 ? ' new follower joined; ' : ' new followers joined; ') +
     cultMoney(cult, cult.joiningFee * BigInt(joined)) +
     ' in joining fees reached the treasury.' +
     (cult.followers >= cultCapacity(cult)
@@ -290,7 +290,7 @@ export function runCultRecruitment(
       definition.title.toLowerCase() +
       '. ' +
       joined +
-      ' new followers joined ' +
+      (joined === 1 ? ' new follower joined ' : ' new followers joined ') +
       cult.name +
       '.',
   );

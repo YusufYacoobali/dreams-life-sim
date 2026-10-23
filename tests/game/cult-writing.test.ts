@@ -131,3 +131,13 @@ test('expelling someone from a three-person group does not invent extra supporte
   expect(result.cults[0].followers).toBe(cult.followers - 1);
   expect(resultFor(result, event.id + '_result')?.body).not.toMatch(/followers leave|supporters leave/i);
 });
+
+test('a recruitment drive with one place left reports one follower in both the payoff and journal', () => {
+  const world = load(before.baseWorld), cult = world.cults[0];
+  cultChangeFollowers(cult, cultCapacity(cult) - cult.followers - 1);
+  const command = arrangeCultWritingCase(world, { kind: 'recruit', method: 'social', seed: 1 });
+  const result = resolveCommand(world, command);
+  expect(result.cults[0].followers - cult.followers).toBe(1);
+  expect(result.pending?.body).toContain('1 new follower joined;');
+  expect(result.journal.at(-1)!.text).toContain('1 new follower joined ');
+});
