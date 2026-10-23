@@ -9,6 +9,9 @@ import { join } from 'node:path';
 import { createGameStore } from '../../src/state/gameStore';
 import { useCreationDraft } from '../../src/state/creationDraft';
 import { createLife, randomCreation } from '../../src/game/createLife';
+import { countries } from '../../src/game/countries';
+import { creationNamePools } from '../../src/game/content/creationNames';
+import { automaticArtworkPools } from '../../src/game/appearanceArtwork';
 import { encodeWorld } from '../../src/game/model';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/persistence/repository';
@@ -121,7 +124,7 @@ test('reviewed new-life creation retains terms and error through rollback, retri
   } finally { context.close(); }
 });
 
-test('reselecting Japan retains Osaka and the creation draft across cancelled pickers and appearance navigation into the actual saved birth', async () => {
+test('manual names and avatar survive gender edits, cancelled pickers and appearance navigation into the actual saved birth', async () => {
   const context = await setup(false);
   try {
     const beforeRows = context.rows(), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame(<NewLife />)); await setJapaneseIdentity();
@@ -142,11 +145,55 @@ test('reselecting Japan retains Osaka and the creation draft across cancelled pi
     // Preset identity survives the editor's different object-key order.
     await press('Next avatar'); expect(useCreationDraft.getState().draft!.input.appearance).toEqual(avatarPresets[7]);
     await press('Previous avatar'); expect(useCreationDraft.getState().draft!.input.appearance).toEqual(avatarPresets[6]);
+    await choose(useCreationDraft.getState().draft!.input.gender === 'male' ? 'Female' : 'Male');
+    expect(useCreationDraft.getState().draft!.input.appearance).toEqual(avatarPresets[6]);
     expect(screen.getByLabelText('First name')).toHaveProp('value', 'Alex'); expect(screen.getByLabelText('Last name')).toHaveProp('value', 'Carter');
     expect(useCreationDraft.getState().draft!.input).toMatchObject({ country: 'JP', city: 'Osaka', appearance: avatarPresets[6] });
     const edited = structuredClone(useCreationDraft.getState().draft!); await press(/^Country\./); await choose('Japan'); await press('Choose'); expect(useCreationDraft.getState().draft).toEqual(edited);
     expect(context.rows()).toEqual(beforeRows); await press('Start My Life'); const expected = createLife(newId, edited.seed, edited.input, date); expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(<Birth />)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); view.unmount();
+  } finally { context.close(); }
+});
+
+test('country and gender selections update suggested names and artwork in the real form, then save and cold-resume that exact newborn', async () => {
+  const context = await setup(false);
+  try {
+    let view = render(frame(<NewLife />)); const beforeRows = context.rows();
+    await press(/^Country\./); await choose('Japan'); await press('Choose'); await choose('Male');
+    await press(/^Country\./); await choose('Italy'); await press('Choose');
+    const male = structuredClone(useCreationDraft.getState().draft!.input);
+    expect(creationNamePools.IT.male).toContain(male.firstName);
+    expect(automaticArtworkPools.masculine.identities as readonly number[]).toContain(male.appearance.identity);
+    await choose('Female');
+    const female = structuredClone(useCreationDraft.getState().draft!.input);
+    expect(creationNamePools.IT.female).toContain(female.firstName); expect(female.firstName).not.toBe(male.firstName);
+    expect(automaticArtworkPools.feminine.identities as readonly number[]).toContain(female.appearance.identity);
+    expect(screen.getByLabelText('First name')).toHaveProp('value', female.firstName);
+    expect(female.lastName).toBe(male.lastName);
+    await press(/^Country\./); await choose('Japan'); await press('Choose');
+    const japanese = structuredClone(useCreationDraft.getState().draft!.input);
+    expect(creationNamePools.JP.female).toContain(japanese.firstName); expect(countries.JP.lastNames).toContain(japanese.lastName);
+    expect(screen.getByLabelText('First name')).toHaveProp('value', japanese.firstName);
+    expect(screen.getByLabelText('Last name')).toHaveProp('value', japanese.lastName);
+    expect(screen.getByRole('button', { name: 'City. Tokyo' })).toBeOnTheScreen();
+    expect(japanese.appearance).toEqual(female.appearance);
+    await press('Choose Appearance'); view.rerender(frame(<Appearance />));
+    await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Skin Tone' })); }); await choose('Skin tone 4, tan');
+    await act(async () => { fireEvent.press(screen.getByRole('tab', { name: 'Hair Color' })); }); await choose('Chestnut');
+    await press('Continue'); view.rerender(frame(<NewLife />)); await choose('Male');
+    await press(/^City\./); await choose('Osaka'); await press('Choose');
+    const selected = structuredClone(useCreationDraft.getState().draft!);
+    expect(creationNamePools.JP.male).toContain(selected.input.firstName);
+    expect(automaticArtworkPools.masculine.identities as readonly number[]).toContain(selected.input.appearance.identity);
+    expect(selected.input.appearance).toMatchObject({ skin: 3, hairColor: 2 });
+    expect(mockStore.getState().world).toBeNull(); expect(context.rows()).toEqual(beforeRows);
+    await press('Start My Life'); await waitFor(() => expect(mockStore.getState().world).not.toBeNull());
+    const expected = createLife(newId, selected.seed, selected.input, date);
+    expect(world()).toEqual(expected); const savedRows = context.rows(); view.unmount();
+    await context.cold(); view = render(frame(<Birth />));
+    expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    expect(world().people[world().activePersonId]).toMatchObject({ firstName: selected.input.firstName, lastName: selected.input.lastName, gender: 'male', country: 'JP', city: 'Osaka', appearance: selected.input.appearance });
+    expect(screen.getByText(/in Osaka, Japan/)).toBeOnTheScreen(); view.unmount();
   } finally { context.close(); }
 });
 
