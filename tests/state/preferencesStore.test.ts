@@ -51,7 +51,7 @@ test.each([['malformed JSON', 'broken JSON'], ['unsupported version', '{"version
   expect(await store.getState().bootstrap()).toBe(false); expect(store.getState().loadFailed).toBe(true); expect(store.getState().settings.appearance).toBe('light');
   expect(await store.getState().setAppearance('dark')).toBe(false); expect(await store.getState().setDailyReminder(true)).toBe(false); expect(await store.getState().setReminderTime(8, 30)).toBe(false); expect(await repository.loadAppSettings()).toBe(raw);
   const game = createGameStore({ repository: async () => repository, date: () => world.date, id: () => 'unused' }); expect(await game.getState().bootstrap()).toBe(true); expect(game.getState().world).toEqual(world);
-  expect(await store.getState().reset()).toBe(true); expect(store.getState().loadFailed).toBe(false); expect(store.getState().settings).toMatchObject({ dailyReminder: false, reminderHour: 19, reminderMinute: 0 }); expect(JSON.parse((await repository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light' }); expect(await repository.export(world.id)).toBe(archive); sqlite.close();
+  expect(await store.getState().reset()).toBe(true); expect(store.getState().loadFailed).toBe(false); expect(store.getState().settings).toMatchObject({ dailyReminder: false, reminderHour: 19, reminderMinute: 0 }); expect(JSON.parse((await repository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light', haptics: false, soundEffects: false, dailyReminder: false }); expect(await repository.export(world.id)).toBe(archive); sqlite.close();
 });
 test('a corrected raw preference can be read on retry without rewriting it', async () => {
   const { sqlite, repository, store } = await fixture(); await repository.saveAppSettings('invalid'); await store.getState().bootstrap();
@@ -114,13 +114,13 @@ test('reminder enable and time writes retain exact prior settings on SQLite fail
     expect(await coldRepository.active()).toEqual(world); expect(await coldRepository.export(world.id)).toBe(archive);
     expect(await cold.getState().reset()).toBe(true); expect(cold.getState().settings).toEqual({ ...savedSettings, appearance: 'light' });
     expect(await cold.getState().setDailyReminder(false)).toBe(true); expect(cold.getState().settings).toMatchObject({ reminderHour: 7, reminderMinute: 30 });
-    expect(JSON.parse((await coldRepository.loadAppSettings())!)).not.toHaveProperty('dailyReminder');
+    expect(JSON.parse((await coldRepository.loadAppSettings())!).dailyReminder).toBe(false);
     expect(await cold.getState().setReminderTime(19, 0)).toBe(true);
-    expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true }); expect(lifeRows()).toEqual(originalLifeRows);
+    expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light', reducedMotion: true, haptics: true, soundEffects: true, dailyReminder: false }); expect(lifeRows()).toEqual(originalLifeRows);
     expect(await cold.getState().setDailyReminder(true)).toBe(true); await coldRepository.saveAppSettings('unreadable settings');
     expect(await cold.getState().bootstrap()).toBe(false); expect(cold.getState().settings.dailyReminder).toBe(true);
     expect(await cold.getState().reset()).toBe(true); expect(cold.getState().settings).toEqual({ version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false, dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false });
-    expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light' }); expect(lifeRows()).toEqual(originalLifeRows);
+    expect(JSON.parse((await coldRepository.loadAppSettings())!)).toEqual({ version: 1, appearance: 'light', haptics: false, soundEffects: false, dailyReminder: false }); expect(lifeRows()).toEqual(originalLifeRows);
   } finally { sqlite?.close(); rmSync(directory, { recursive: true, force: true }); }
 });
 
@@ -132,7 +132,40 @@ test('reminder time rejects non-integer and out-of-range values without writing 
     for (const [hour, minute] of [[-1, 0], [24, 0], [19, -1], [19, 60], [19.5, 0], [19, 0.5], [NaN, 0], [19, Infinity]]) {
       expect(await store.getState().setReminderTime(hour, minute)).toBe(false); expect(store.getState().settings).toEqual(settings); expect(await repository.loadAppSettings()).toBe(saved);
     }
-    expect(write).not.toHaveBeenCalled(); expect(await store.getState().setReminderTime(0, 0)).toBe(true); expect(store.getState().settings).toMatchObject({ dailyReminder: false, reminderHour: 0, reminderMinute: 0 });
+    expect(write).not.toHaveBeenCalled(); expect(await store.getState().setReminderTime(0, 0)).toBe(true); expect(store.getState().settings).toMatchObject({ dailyReminder: true, reminderHour: 0, reminderMinute: 0 });
     expect(await repository.export(world.id)).toBe(archive); expect(await repository.active()).toEqual(world);
+  } finally { sqlite.close(); }
+});
+
+
+test('fresh feedback and reminder defaults are on, while explicit opt-outs survive unrelated changes and a cold store', async () => {
+  const { sqlite, repository, store, world, archive } = await fixture();
+  try {
+    await store.getState().bootstrap();
+    expect(store.getState().settings).toMatchObject({ haptics: true, soundEffects: true, dailyReminder: true });
+    expect(await repository.loadAppSettings()).toBeNull();
+    const unsavedCold = createPreferencesStore({ repository: async () => repository }); await unsavedCold.getState().bootstrap();
+    expect(unsavedCold.getState().settings).toEqual(store.getState().settings);
+    expect(await store.getState().setHaptics(false)).toBe(true);
+    expect(await store.getState().setSoundEffects(false)).toBe(true);
+    expect(await store.getState().setDailyReminder(false)).toBe(true);
+    await store.getState().setAppearance('dark'); await store.getState().setReminderTime(8, 15);
+    expect(JSON.parse((await repository.loadAppSettings())!)).toMatchObject({ haptics: false, soundEffects: false, dailyReminder: false });
+    const cold = createPreferencesStore({ repository: async () => repository }); await cold.getState().bootstrap();
+    expect(cold.getState().settings).toEqual(store.getState().settings);
+    expect(await repository.export(world.id)).toBe(archive);
+  } finally { sqlite.close(); }
+});
+
+test('a failed opt-out keeps the enabled default until its retry actually saves', async () => {
+  const { sqlite, repository, store } = await fixture();
+  try {
+    await store.getState().bootstrap();
+    sqlite.exec("CREATE TRIGGER fail_optout BEFORE INSERT ON preferences WHEN NEW.key='app_settings' BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    expect(await store.getState().setSoundEffects(false)).toBe(false);
+    expect(store.getState().settings.soundEffects).toBe(true); expect(await repository.loadAppSettings()).toBeNull();
+    sqlite.exec('DROP TRIGGER fail_optout'); expect(await store.getState().retry()).toBe(true);
+    const cold = createPreferencesStore({ repository: async () => repository }); await cold.getState().bootstrap();
+    expect(cold.getState().settings).toMatchObject({ haptics: true, soundEffects: false, dailyReminder: true });
   } finally { sqlite.close(); }
 });

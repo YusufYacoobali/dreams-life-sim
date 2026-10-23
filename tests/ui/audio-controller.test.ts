@@ -4,7 +4,21 @@ import { AudioController, audioMode } from '../../src/ui/audioController';
 const flush = async () => { for (let i = 0; i < 12; i++) await Promise.resolve(); };
 function setup() {
   const players = new Map<number, ReturnType<typeof player>>();
-  function player() { return { isLoaded: true, volume: 1, duration: 0.1, seekTo: jest.fn(async (_at: number) => {}), play: jest.fn(), pause: jest.fn(), remove: jest.fn() }; }
+  function player() {
+    type Status = { isLoaded: boolean; currentTime?: number; playing?: boolean; didJustFinish?: boolean };
+    const listeners = new Set<(status: Status) => void>();
+    const next = {
+      isLoaded: true, currentTime: 0, playing: false, volume: 1, duration: 0.1,
+      seekTo: jest.fn(async (at: number) => { next.currentTime = at; next.isLoaded = true; }),
+      play: jest.fn(), pause: jest.fn(), remove: jest.fn(),
+      addListener: jest.fn((_event: string, listener: (status: Status) => void) => { listeners.add(listener); return { remove: () => listeners.delete(listener) }; }),
+      emit: (status: Status) => {
+        Object.assign(next, status);
+        for (const listener of [...listeners]) listener(status);
+      },
+    };
+    return next;
+  }
   const createAudioPlayer = jest.fn((source: number) => { const next = player(); players.set(source, next); return next; });
   const setAudioModeAsync = jest.fn(async () => {});
   const controller = new AudioController(() => ({ createAudioPlayer, setAudioModeAsync }));
@@ -23,6 +37,7 @@ test('two screens share five warm players and one audio session, retaining custo
   expect(context.createAudioPlayer).toHaveBeenCalledTimes(5);
   expect(context.setAudioModeAsync).toHaveBeenCalledTimes(1);
   expect(context.setAudioModeAsync).toHaveBeenCalledWith(audioMode);
+  expect(context.createAudioPlayer).toHaveBeenCalledWith(43, { keepAudioSessionActive: false, updateInterval: 50, downloadFirst: true });
   context.controller.warmSource(90); context.controller.warmSource(90); await flush();
   expect(context.createAudioPlayer).toHaveBeenCalledTimes(6);
   context.release(); expect(context.players.get(42)!.remove).not.toHaveBeenCalled();
@@ -47,8 +62,11 @@ test('Age Up followed by an automatic milestone uses one sequential lane, once e
   const { controller, release, players } = setup(); await flush();
   controller.gameplay({ id: 'life:year', cues: ['age-up', 'big-success'] }); await flush();
   expect(players.get(43)!.play).toHaveBeenCalledTimes(1); expect(players.get(44)!.play).not.toHaveBeenCalled();
-  await jest.advanceTimersByTimeAsync(144);
-  expect(players.get(43)!.pause).toHaveBeenCalledTimes(1);
+  // Native startup can exceed the entire 144 ms clip. Wall time must not cut it off.
+  await jest.advanceTimersByTimeAsync(400);
+  expect(players.get(43)!.pause).not.toHaveBeenCalled(); expect(players.get(44)!.play).not.toHaveBeenCalled();
+  players.get(43)!.emit({ isLoaded: true, currentTime: 0.144, playing: false, didJustFinish: true }); await flush();
+  expect(players.get(43)!.pause).not.toHaveBeenCalled();
   expect(players.get(44)!.seekTo).toHaveBeenCalledWith(0.14);
   expect(players.get(44)!.play).toHaveBeenCalledTimes(1);
   void controller.play('tap'); await flush(); expect(players.get(42)!.play).not.toHaveBeenCalled();
@@ -103,7 +121,45 @@ test('a stalled native seek expires instead of playing a stale cue or permanentl
   let finish!: () => void;
   players.get(45)!.seekTo.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
   controller.gameplay({ id: 'purchase', cues: ['purchase'] }); await flush();
-  await jest.advanceTimersByTimeAsync(300); finish(); await flush();
+  await jest.advanceTimersByTimeAsync(1100); finish(); await flush();
   expect(players.get(45)!.play).not.toHaveBeenCalled();
   void controller.play('tap'); await flush(); expect(players.get(42)!.play).toHaveBeenCalledTimes(1); release();
+});
+
+test('short taps finish naturally and the same cached Android player rewinds after STATE_ENDED', async () => {
+  const { controller, release, players, createAudioPlayer } = setup(); await flush();
+  void controller.play('tap'); await flush(); const tap = players.get(42)!;
+  await jest.advanceTimersByTimeAsync(200);
+  expect(tap.pause).not.toHaveBeenCalled();
+  tap.emit({ isLoaded: true, currentTime: 0.045, didJustFinish: true, playing: false }); await flush();
+  // Expo Android's getter is false at STATE_ENDED even though the status event isLoaded was true.
+  tap.isLoaded = false;
+  void controller.play('tap'); await flush();
+  expect(tap.seekTo).toHaveBeenCalledTimes(3); expect(tap.seekTo).toHaveBeenLastCalledWith(0);
+  expect(tap.play).toHaveBeenCalledTimes(2); expect(createAudioPlayer).toHaveBeenCalledTimes(5); release();
+});
+
+test('trimmed effects stop at the native playback position, independent of startup latency', async () => {
+  const { controller, release, players } = setup(); await flush();
+  controller.gameplay({ id: 'purchase', cues: ['purchase'] }); await flush(); const purchase = players.get(45)!;
+  await jest.advanceTimersByTimeAsync(1400); expect(purchase.pause).not.toHaveBeenCalled();
+  purchase.emit({ isLoaded: true, currentTime: 0.1, playing: true }); await flush(); expect(purchase.pause).not.toHaveBeenCalled();
+  purchase.emit({ isLoaded: true, currentTime: 1.23, playing: true }); await flush(); expect(purchase.pause).toHaveBeenCalledTimes(1);
+  release(); expect(purchase.pause).toHaveBeenCalledTimes(1);
+});
+
+test('a cold bundled asset can take longer than 250 ms to load without losing its cue', async () => {
+  const { controller, release, players } = setup(); await flush(); const age = players.get(43)!;
+  age.isLoaded = false;
+  controller.gameplay({ id: 'cold-year', cues: ['age-up'] }); await flush();
+  await jest.advanceTimersByTimeAsync(500); expect(age.seekTo).not.toHaveBeenCalled(); expect(age.play).not.toHaveBeenCalled();
+  age.emit({ isLoaded: true, currentTime: 0 }); await flush();
+  expect(age.seekTo).toHaveBeenCalledWith(0); expect(age.play).toHaveBeenCalledTimes(1); release();
+});
+
+test('disabling sound during a cold load never starts playback when readiness arrives later', async () => {
+  const { controller, release, players } = setup(); await flush(); const age = players.get(43)!;
+  age.isLoaded = false; controller.gameplay({ id: 'cold-year', cues: ['age-up'] }); await flush();
+  release(); age.emit({ isLoaded: true, currentTime: 0 }); await flush();
+  expect(age.seekTo).not.toHaveBeenCalled(); expect(age.play).not.toHaveBeenCalled(); expect(age.remove).toHaveBeenCalledTimes(1);
 });

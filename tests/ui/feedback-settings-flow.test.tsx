@@ -32,6 +32,7 @@ jest.mock('expo-audio', () => ({ setAudioModeAsync: (...args: unknown[]) => mock
 jest.mock('../../assets/audio/action-tap.wav', () => 42);
 jest.mock('../../src/notifications/dailyReminders', () => ({
   reconcileDailyReminders: async (config: { enabled: boolean }) => ({ status: config.enabled ? 'scheduled' : 'off' }),
+  getDailyReminderPermission: async () => ({ status: 'granted', canAskAgain: true }),
   requestDailyReminderPermission: async () => ({ status: 'granted', canAskAgain: true }),
   subscribeToDailyReminderResponses: () => () => {},
 }));
@@ -111,7 +112,7 @@ test.each(flags)('$name commits only its independent preference, keeps failure e
 });
 
 test('pending preference writes publish nothing early, block conflicting switches and duplicate retries, and repeated current choices never write', async () => {
-  const context = await setup();
+  const context = await setup(true, '{"version":1,"appearance":"light"}');
   try {
     const before = context.rows(), view = await renderFrame(); let release!: () => void;
     const gate = new Promise<void>(resolve => { release = resolve; }), save = context.repository.saveAppSettings.bind(context.repository);
@@ -165,7 +166,7 @@ test.each(['ios', 'android'] as const)('%s native haptic and local sound never b
     mockImpact.mockImplementation(() => new Promise(() => {})); mockAndroidHaptic.mockImplementation(() => new Promise(() => {}));
     let releaseSound!: () => void; mockPlayer.seekTo.mockImplementation(() => new Promise<void>(resolve => { releaseSound = resolve; }));
     const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); expect(mockAudioMode).toHaveBeenCalledWith({ playsInSilentMode: false, interruptionMode: 'mixWithOthers', allowsRecording: false, shouldPlayInBackground: false, shouldRouteThroughEarpiece: false });
-    expect(mockAudioCreate).toHaveBeenCalledWith(42, { keepAudioSessionActive: false, updateInterval: 1000 });
+    expect(mockAudioCreate).toHaveBeenCalledWith(42, { keepAudioSessionActive: false, updateInterval: 50, downloadFirst: true });
     await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); const expected = { ...initial, birthAcknowledged: true, revision: initial.revision + 1 }; expect(mockGame.getState().world).toEqual(expected);
     expect(platform === 'ios' ? mockImpact : mockAndroidHaptic).toHaveBeenCalledWith(platform === 'ios' ? 'light' : 'virtual-key'); expect(platform === 'ios' ? mockAndroidHaptic : mockImpact).not.toHaveBeenCalled(); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     await act(async () => { releaseSound(); }); expect(mockPlayer.play).toHaveBeenCalledTimes(1); const savedRows = context.rows(); view.unmount(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await context.cold(); expect(mockGame.getState().world).toEqual(expected); expect(context.rows()).toEqual(savedRows);
@@ -241,4 +242,17 @@ test('disabled or busy central buttons do not act or produce feedback; unsupport
   const view = render(<FeedbackProvider reducedMotion={false} haptics onButtonFeedback={haptic} soundEffects onButtonSound={sound}><Button label="Disabled" disabled onPress={action} /><Button label="Busy" busy onPress={action} /><Button label="Ready" onPress={action} /></FeedbackProvider>);
   await press('Disabled'); await press('Busy'); expect(action).not.toHaveBeenCalled(); expect(haptic).not.toHaveBeenCalled(); expect(sound).not.toHaveBeenCalled(); await press('Ready'); expect(action).toHaveBeenCalledTimes(1); expect(haptic).toHaveBeenCalledTimes(1); expect(sound).toHaveBeenCalledTimes(1); view.unmount();
   const context = await setup(); try { jest.replaceProperty(Platform, 'OS', 'web'); const unsupported = await renderFrame(); expect(screen.getByRole('switch', { name: 'Haptic Feedback' })).toBeDisabled(); expect(screen.getByRole('switch', { name: 'Sound Effects' })).toBeDisabled(); expect(screen.getByText('Haptics are available on supported iOS and Android devices.')).toBeOnTheScreen(); unsupported.unmount(); } finally { context.close(); }
+});
+
+
+test('fresh settings enable all three switches and real native feedback without a preference write', async () => {
+  jest.replaceProperty(Platform, 'OS', 'android'); const context = await setup(false);
+  try {
+    const view = await renderFrame();
+    for (const name of ['Haptic Feedback', 'Sound Effects', 'Daily Reminders']) expect(screen.getByLabelText(name).props.accessibilityState.checked).toBe(true);
+    expect(await context.repository.loadAppSettings()).toBeNull();
+    await press('Begin Test Life');
+    expect(mockAndroidHaptic).toHaveBeenCalledTimes(1); expect(mockPlayer.play).toHaveBeenCalledTimes(1);
+    expect(await context.repository.loadAppSettings()).toBeNull(); view.unmount();
+  } finally { context.close(); }
 });

@@ -6,11 +6,11 @@ This implements the bounded Settings X31 feedback options in `docs/planning/scre
 
 ### Opening and life milestones
 
-The22October motion pass concentrates its larger effects on three rare moments:
+Motion effects concentrate on three rare moments:
 
 | Moment | Treatment | Interaction boundary |
 | --- | --- | --- |
-| Opening the game | Existing sunset artwork gently settles; a warm sunrise glow, eight drifting lights and a short wordmark accent introduce Dreams. | Continue, creation and other available controls remain visible and actionable throughout. |
+| Opening the game | The navy welcome screen introduces the Dreams wordmark and branching path motif with the existing opening ink animation. | Continue, creation and other available controls remain visible and actionable throughout. |
 | A newly created life | A soft portrait reveal, expanding blue halos and a small heart/star constellation. | Birth facts and Begin Life remain immediately available; save failures do not restart the scene. |
 | Life's end | The existing memorial settles into a warm glow with a few upward lights. | Biography, actual statistics and summary/new-life/child controls remain immediately available. |
 
@@ -34,14 +34,16 @@ by this batch.
 ### Tap feedback
 
 - **Reduce Motion** disables the shared event dialog fade and both root/game native stack transitions. The actual OS reduced-motion preference always wins, including later device changes. While the initial device query or app preferences are unresolved, motion stays reduced. A later OS event cannot be overwritten by a stale initial query. Existing bottom tabs already default to no transition, and journal/list scroll resets already use `animated: false`.
-- **Haptic Feedback** defaults off and retains each player's saved choice. An accepted tap requests a light iOS impact or Android native virtual-key haptic. Onboarding/creation selections, navigation and Age Up use this same setting; keyboard keystrokes remain the operating system's responsibility. This is tap acknowledgement, not an assertion that a game action succeeded. Device support and system restrictions still apply.
-- **Sound Effects** defaults off. Enabling it prepares one original, local, 45 ms tap. Shared buttons can play it after starting their action. Expo Audio mixes with other audio, obeys silent mode and media volume, disables recording and background playback, and releases its player when disabled or unmounted. Backgrounding pauses sound and invalidates any pending seek. A late seek cannot play after disable/background/unmount.
+- **Haptic Feedback** defaults on for fresh settings and retains each player's saved choice. An accepted tap requests a light iOS impact or Android native virtual-key haptic. Onboarding/creation selections, navigation and Age Up use this same setting; keyboard keystrokes remain the operating system's responsibility. This is tap acknowledgement, not an assertion that a game action succeeded. Device support and system restrictions still apply.
+- **Sound Effects** defaults on for fresh settings. One shared cache prepares the local tap and four gameplay cues. Generic confirmations follow accepted actions; year changes, major milestones, purchases and genuine failures follow committed outcomes. Full mapping: [gameplay audio](verification/gameplay-audio-20261023/README.md). Expo Audio mixes with other audio, obeys silent mode and media volume, disables recording and background playback, and releases its player when disabled or unmounted. Backgrounding pauses sound and invalidates any pending seek. A late seek cannot play after disable/background/unmount.
 - Haptic and sound promises are never awaited by a game action. Missing native modules, failed audio initialization, failed playback and rejected haptics leave the text, pressed state, delayed busy state and game action operational. Disabled, unchanged or blocked selections produce no extra feedback. Haptic-only selection feedback preserves the existing sound behaviour; selecting an appearance or navigating Back does not add a sound or gameplay work.
+- **Daily Reminders** defaults on for fresh settings at 19:00 local time. The root requests OS permission once, after a life begins, only when permission is undetermined and the app is active. A denial is never automatically re-prompted. Settings offers an explicit permission retry for an already-on preference. Saved off preferences stay off.
+- Short sounds finish on native completion, rather than a JavaScript timer started before audible playback. Longer playback windows use actual native position updates. A completed cached Android player is rewound before waiting for readiness. Bundled assets resolve to local files before playback; load/seek waits remain bounded and cancellable through the existing action generation.
 - No music, soundtrack, streaming, recording, sound-based gameplay, or fabricated connection status is exposed.
 
 ## Preference durability
 
-The existing independent `preferences.app_settings` record remains version 1 and limited to 1,024 characters. Older version-1 appearance-only records gain in-memory `false` defaults for `reducedMotion`, `haptics` and `soundEffects`, without a write on opening. Only enabled optional flags are serialized. Appearance defaults to Light as before. Nothing changes the database reader version, world model, life archives, gameplay RNG or simulation rules.
+The existing independent `preferences.app_settings` record remains version 1 and limited to 1,024 characters. Older version-1 appearance-only records gain in-memory `false` defaults for `reducedMotion`, `haptics` and `soundEffects`, without a write on opening. Fresh installations with no app-settings record start with haptics, sound effects and daily reminders on. Existing records retain their saved choices and historical omitted-field defaults. All three flags are now serialized explicitly, including false opt-outs; bootstrap does not rewrite old records. Appearance defaults to Light as before. Nothing changes the database reader version, world model, life archives, gameplay RNG or simulation rules.
 
 All preferences publish only after the real settings write succeeds. A failure keeps the prior choice and the exact failed choice for Try Again. A pending write blocks conflicting writes; selecting an already-current choice writes nothing. Invalid/future/oversized records remain untouched until explicit recovery.
 
@@ -61,4 +63,4 @@ The new connected UI suite uses a temporary **on-disk SQLite database** and real
 
 Native APIs are mocked at the device boundary. Both iOS and Android cases execute a real durable birth acknowledgement while haptic and sound-seek promises remain unresolved, then cold-open the exact result. Additional checks cover disabled/busy controls, unsupported platforms, sound disable/background cleanup, unavailable native feedback and unreadable app preferences.
 
-Focused verification also includes the existing Appearance/preferences and shared-button contrast suites, strict application/test TypeScript checks, SDK dependency resolution, and actual Expo config introspection. No full engine suite, export build, Android automation or native sound/haptic check was run in this branch. Native acceptance must still check audible volume/silent-mode behaviour, physical haptics, OS reduced motion and navigation on the rebuilt app; mocked APIs do not prove those hardware outcomes.
+Current verification, including native exports and Android playback regression cases, is recorded in [Android feedback fixes](verification/android-feedback-fix-20261023/README.md). Native acceptance must still check audible volume/silent-mode behaviour, physical haptics, OS reduced motion and navigation on the rebuilt app; mocked APIs and exports do not prove hardware outcomes.

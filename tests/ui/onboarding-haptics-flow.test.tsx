@@ -38,13 +38,14 @@ function pressHandler(name: string) {
   while (typeof control.props.onPress !== 'function') { if (!control.parent) throw new Error('Missing native press handler'); control = control.parent; }
   return control.props.onPress as () => unknown;
 }
-async function setup(bootstrap = true) {
+async function setup(bootstrap = true, hapticOnly = true) {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   let nextYield: Promise<void> | undefined;
   mockStore = createGameStore({ repository: async () => repository, date: () => ({ year: 2026, month: 10, day: 22 }), id: () => 'life_haptic_opening',
     yieldToUI: async () => { const held = nextYield; nextYield = undefined; if (held) await held; } });
   if (bootstrap) expect(await mockStore.getState().bootstrap()).toBe(true);
-  mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap(); await mockPreferences.getState().setHaptics(true);
+  mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
+  if (hapticOnly) await mockPreferences.getState().setSoundEffects(false);
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   const hold = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
   return { sqlite, repository, rows, hold };
@@ -134,5 +135,23 @@ test('real new-life and Age Up saves never wait for hardware, reject held duplic
     await press('button', /^My Life profile\./); expect(router.push).toHaveBeenLastCalledWith('/profile'); expect(mockHaptic).toHaveBeenCalledTimes(2);
     view.unmount(); await act(async () => { advance(); start(); });
     expect(mockHaptic).toHaveBeenCalledTimes(2); expect(encodeWorld(mockStore.getState().world!)).toBe(exactWorld); expect(context.rows()).toEqual(settled); expect(mockSound).not.toHaveBeenCalled();
+  } finally { context.sqlite.close(); }
+});
+
+
+test('fresh Android defaults pulse on Start New Life, setup selections, Start My Life and Age Up', async () => {
+  jest.replaceProperty(Platform, 'OS', 'android'); const context = await setup(true, false);
+  try {
+    expect(mockPreferences.getState().settings).toMatchObject({ haptics: true, soundEffects: true, dailyReminder: true });
+    expect(await context.repository.loadAppSettings()).toBeNull();
+    const view = render(frame(<Welcome />)); await press('button', 'Start New Life');
+    expect(mockAndroidHaptic).toHaveBeenCalledTimes(1);
+    view.rerender(frame(<NewLife />)); await press('button', 'Next avatar');
+    expect(mockAndroidHaptic).toHaveBeenCalledTimes(2);
+    await press('button', 'Start My Life'); expect(mockAndroidHaptic).toHaveBeenCalledTimes(3);
+    await act(async () => { await mockStore.getState().acknowledgeBirth(); });
+    view.rerender(frame(<Life />)); await press('button', 'Age Up');
+    expect(mockAndroidHaptic).toHaveBeenCalledTimes(4); expect(mockStore.getState().world!.revision).toBeGreaterThan(1);
+    expect(await context.repository.loadAppSettings()).toBeNull(); view.unmount();
   } finally { context.sqlite.close(); }
 });

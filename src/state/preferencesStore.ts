@@ -10,7 +10,9 @@ export const appSettingsSchema = z.object({
   godModeEnabled: z.boolean().default(false),
 }).strict();
 export type AppSettings = z.infer<typeof appSettingsSchema>;
-export const defaultAppSettings: AppSettings = { version: 1, appearance: 'light', reducedMotion: false, haptics: false, soundEffects: false, dailyReminder: false, reminderHour: 19, reminderMinute: 0, godModeEnabled: false };
+// Stored version-1 records keep their historical omitted-field defaults above.
+// Only a genuinely new settings record uses the new enabled defaults.
+export const defaultAppSettings: AppSettings = { version: 1, appearance: 'light', reducedMotion: false, haptics: true, soundEffects: true, dailyReminder: true, reminderHour: 19, reminderMinute: 0, godModeEnabled: false };
 export type PreferencesState = {
   settings: AppSettings; ready: boolean; busy: boolean; error: string | null; loadFailed: boolean;
   bootstrap: () => Promise<boolean>; setAppearance: (appearance: AppSettings['appearance']) => Promise<boolean>;
@@ -35,10 +37,11 @@ export function createPreferencesStore(deps: Dependencies) {
       set({ busy: true, error: null });
       try {
         const settings = appSettingsSchema.parse(input);
-        // Optional fields keep existing version-1 appearance records readable without an eager rewrite.
+        // Feedback/reminder flags must be explicit, including opt-outs: otherwise
+        // changing a default could silently turn a saved choice back on.
         await (await deps.repository()).saveAppSettings(JSON.stringify({ version: settings.version, appearance: settings.appearance,
-          ...(settings.reducedMotion ? { reducedMotion: true } : {}), ...(settings.haptics ? { haptics: true } : {}), ...(settings.soundEffects ? { soundEffects: true } : {}),
-          ...(settings.dailyReminder ? { dailyReminder: true } : {}), ...(settings.reminderHour !== defaultAppSettings.reminderHour ? { reminderHour: settings.reminderHour } : {}),
+          ...(settings.reducedMotion ? { reducedMotion: true } : {}), haptics: settings.haptics, soundEffects: settings.soundEffects,
+          dailyReminder: settings.dailyReminder, ...(settings.reminderHour !== defaultAppSettings.reminderHour ? { reminderHour: settings.reminderHour } : {}),
           ...(settings.reminderMinute !== defaultAppSettings.reminderMinute ? { reminderMinute: settings.reminderMinute } : {}), ...(settings.godModeEnabled ? { godModeEnabled: true } : {}) }));
         failedWrite = null; set({ settings, ready: true, loadFailed: false }); return true;
       } catch {
@@ -69,7 +72,7 @@ export function createPreferencesStore(deps: Dependencies) {
       setDailyReminder: dailyReminder => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, dailyReminder }),
       setReminderTime: (reminderHour, reminderMinute) => !get().ready || get().loadFailed ? Promise.resolve(false) : write({ ...get().settings, reminderHour, reminderMinute }),
       retry: () => failedWrite ? write(failedWrite) : get().bootstrap(),
-      reset: () => get().ready ? write(get().loadFailed ? { ...defaultAppSettings } : { ...get().settings, appearance: 'light' }) : Promise.resolve(false),
+      reset: () => get().ready ? write(get().loadFailed ? { ...defaultAppSettings, haptics: false, soundEffects: false, dailyReminder: false } : { ...get().settings, appearance: 'light' }) : Promise.resolve(false),
     };
   });
 }
