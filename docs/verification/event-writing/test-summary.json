@@ -1,0 +1,291 @@
+{
+  "runtimeCommit": "98e34b0f022208bdad39ce0736121696c3667f13",
+  "writingRuntimeBeforeIntegration": "42edd005b4429efa976e22e7b84a9bf4fe785858",
+  "retainedRemoteHead": "9101307",
+  "versions": {
+    "world": 47,
+    "engine": 49,
+    "content": 26,
+    "reader": 27,
+    "database": 4
+  },
+  "catalogue": {
+    "audited": 319,
+    "revised": 114,
+    "revisedResults": 342,
+    "stronger": 27,
+    "immediateEffectEvents": 37,
+    "classifications": {
+      "Keep": 186,
+      "Improve": 45,
+      "Replace": 88
+    }
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit": 0,
+    "includesAppAndTestTypes": true
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "exit": 0,
+    "modules": 488,
+    "cycles": []
+  },
+  "fullRegression": {
+    "command": "DREAMS_LIFE_SWEEP=12 DREAMS_LIFE_SWEEP_SHARDS=1 DREAMS_LIFE_SWEEP_SHARD=0 DREAMS_WRITING_REVIEW_DIR=/tmp/dreams-writing-merged-lives npm test -- --runInBand=false --maxWorkers=3 --json --outputFile=/tmp/dreams-writing-merged-full.json",
+    "exit": 0,
+    "suitesPassed": 302,
+    "suitesTotal": 302,
+    "testsPassed": 4236,
+    "testsTotal": 4236,
+    "singleCompleteInvocation": true
+  },
+  "earlierWritingRegression": {
+    "runtimeCommit": "42edd00",
+    "suitesTotal": 294,
+    "testsTotal": 4013,
+    "testsPassed": 4010,
+    "staleUIExpectations": 3,
+    "correctedWithoutReducingRollbackRetryAndColdSaveAssertions": true,
+    "affectedRerun": {
+      "suitesPassed": 6,
+      "testsPassed": 80
+    }
+  },
+  "focusedIntegration": {
+    "genuineVersion46CompatibilityTests": 13,
+    "capturedWholeChoiceOutcomes": 10,
+    "cultCallbackCopyTests": 6,
+    "allIncludedInFinalFullRegression": true
+  },
+  "naturalJournalReview": {
+    "runtimeRevision": "42edd00",
+    "distinctLives": 36,
+    "countries": [
+      "AU",
+      "BR",
+      "CA",
+      "DE",
+      "ES",
+      "FR",
+      "GB",
+      "IN",
+      "IT",
+      "JP",
+      "US",
+      "ZA"
+    ],
+    "genders": [
+      "female",
+      "male",
+      "nonbinary"
+    ],
+    "ageAtDeathRange": [
+      40,
+      95
+    ],
+    "decisions": 2581,
+    "revisedEncounters": 596,
+    "distinctRevisedSituations": 40,
+    "cooldownViolations": 0,
+    "unresolvedTokens": 0,
+    "missingNonfatalResults": 0,
+    "rawEvidence": "natural-lives/index.html",
+    "strategy": "Existing engine lifetime test: first currently available choice, no manually configured employment or relationships. Other branch/domain paths use focused fixtures.",
+    "limitation": "Passive first-available choice does not establish active career/relationship alternative coverage. Focused fixtures cover those branches. Existing chronic-condition medical frequency is retained."
+  },
+  "additionalCombinedLifetimeCheck": {
+    "runtimeCommit": "98e34b0f022208bdad39ce0736121696c3667f13",
+    "completedLives": 12,
+    "seeds": [
+      0,
+      11
+    ],
+    "distinctNewSeedsBeyondOriginalReview": 0,
+    "comparison": [
+      {
+        "seed": 0,
+        "country": "AU",
+        "gender": "male",
+        "ageAtDeath": 41,
+        "decisions": 47,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "old-photo"
+        ]
+      },
+      {
+        "seed": 1,
+        "country": "IT",
+        "gender": "nonbinary",
+        "ageAtDeath": 77,
+        "decisions": 82,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "old-photo"
+        ]
+      },
+      {
+        "seed": 2,
+        "country": "BR",
+        "gender": "female",
+        "ageAtDeath": 82,
+        "decisions": 58,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 3,
+        "country": "BR",
+        "gender": "male",
+        "ageAtDeath": 56,
+        "decisions": 45,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency",
+          "medical-emergency",
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 4,
+        "country": "ZA",
+        "gender": "male",
+        "ageAtDeath": 80,
+        "decisions": 80,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "old-photo"
+        ]
+      },
+      {
+        "seed": 5,
+        "country": "BR",
+        "gender": "female",
+        "ageAtDeath": 92,
+        "decisions": 75,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency",
+          "medical-emergency",
+          "medical-emergency",
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 6,
+        "country": "ES",
+        "gender": "male",
+        "ageAtDeath": 71,
+        "decisions": 54,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "old-photo",
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 7,
+        "country": "US",
+        "gender": "nonbinary",
+        "ageAtDeath": 74,
+        "decisions": 101,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": []
+      },
+      {
+        "seed": 8,
+        "country": "CA",
+        "gender": "nonbinary",
+        "ageAtDeath": 78,
+        "decisions": 64,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency",
+          "medical-emergency",
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 9,
+        "country": "GB",
+        "gender": "nonbinary",
+        "ageAtDeath": 66,
+        "decisions": 47,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": []
+      },
+      {
+        "seed": 10,
+        "country": "ES",
+        "gender": "nonbinary",
+        "ageAtDeath": 72,
+        "decisions": 60,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency",
+          "medical-emergency",
+          "old-photo",
+          "medical-emergency"
+        ]
+      },
+      {
+        "seed": 11,
+        "country": "ES",
+        "gender": "female",
+        "ageAtDeath": 87,
+        "decisions": 66,
+        "actualChoicesAndConsequenceRowsPreserved": true,
+        "prospectiveCopyChanges": [
+          "medical-emergency",
+          "medical-emergency",
+          "medical-emergency"
+        ]
+      }
+    ]
+  },
+  "editorialReport": {
+    "renderer": "Chromium, local HTTP, editorial report only",
+    "viewports": [
+      390,
+      1440
+    ],
+    "visibleRevisedEvents": 114,
+    "searchChecked": true,
+    "pageErrors": [],
+    "gameOrNativeScreenshots": false
+  },
+  "logs": {
+    "full": {
+      "path": "/tmp/dreams-writing-merged-full.log",
+      "sha256": "9e9d7567e13d3e1efa9d3d826c119e35a601080299e09ba1988ae4d375135899"
+    },
+    "types": {
+      "path": "/tmp/dreams-writing-merged-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "imports": {
+      "path": "/tmp/dreams-writing-merged-imports.log",
+      "sha256": "b823845ceb79cb1d15a269befd23a68934e3b57b12c64eb1e172c1086c7a4c56"
+    },
+    "writingBeforeMerge": {
+      "path": "/tmp/dreams-writing-full.log",
+      "sha256": "b0cb374bb717cb365ce7a7b1e029ac6e40e8a8d170776a4d5c3636fec83df371"
+    },
+    "clarityAndUI": {
+      "path": "/tmp/dreams-writing-clarity-ui.log",
+      "sha256": "7cfcf4aae167bc91158177f8abab805f615bf333cbdcc7ddbf470bb98d9200e3"
+    },
+    "versionCompatibility": {
+      "path": "/tmp/dreams-version-integration/compatibility.log",
+      "sha256": "a46c928de2de84feded0541f5c4211fec5b9b0df4888891707f833b28ca44971"
+    },
+    "cultCallback": {
+      "path": "/tmp/dreams-writing-cult-copy.log",
+      "sha256": "0f007c6d86044f421401de9e33c81d09be98567d72423b0f7b98d9aa49f8358e"
+    }
+  }
+}

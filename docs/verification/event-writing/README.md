@@ -86,11 +86,9 @@ progression or suppress genuine health decisions.
 
 ## Verification
 
-The writing-only full regression at `42edd00` covered all 294 suites / 4,013 tests;
-three UI cases expected old labels. Those expectations were corrected while
-retaining their rollback, retry and cold-save assertions, and all 80 affected
-checks passed. The final combined regression and strict types/import checks are
-recorded after integration with the concurrent career.
+The final combined source `98e34b0` passed **302 suites / 4,236 tests in one complete invocation**, including 12 complete seeded lives. Strict app/test types and the **488-module import graph** pass. [Exact commands, counts, source pins and log hashes](test-summary.json) are recorded separately from the earlier writing-only run.
+
+Genuine captures from both independent World46 producers preserve all ten original whole-world choice outcomes after migration. Reader26 row preservation, transaction rollback, retry and duplicate protection pass. The 12 combined-source lifetime replays retain the original actual choices, consequence rows, death ages and ledger-row counts; only the intended prospective copy changes differ. These replay seeds overlap the original 36-life review and are not counted as new distinct lives.
 
 The searchable editorial report was rendered and checked at 390px and 1440px,
 including all 114 stories and search filtering. These are report checks, not

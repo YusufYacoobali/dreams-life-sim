@@ -2,7 +2,9 @@
 
 ## Event and payoff writing — 23 October 2026
 
-Audited all 319 events; revised 114 situations/payoffs (342 result branches), including 27 priority consequence upgrades. Original IDs, saved text, UI, avatar V2 and mini-games remain. New immediate effects quote real local payments and apply actual trust, job, friendship and public-image changes without new arcs or writing RNG. Combined markers are **World47 / engine49 / content26 / reader27 / v4**, preserving both published Cult Leader saves and the writing branch. See [the editorial review and verification](verification/event-writing/README.md). Focused checks and types/imports pass; final full regression and natural-life journal review follow the source freeze.
+Audited all 319 events; revised **114 situations and 342 choice payoffs**, including 27 priority consequence upgrades. The writing batch preserves existing IDs, saved words, UI, avatar V2 artwork and mini-games. Real local payments, bound trust, employment/friendship endings and public-image changes use validated immediate effects without new story arcs or writing RNG.
+
+The concurrent Cult Leader career is retained. Combined markers are **World47 / engine49 / content26 / reader27 / SQLite v4**; both independently produced World46 formats retain their records and original outcomes. At source `98e34b0`, the complete regression passed **302 suites / 4,236 tests**, plus strict app/test types and the 488-module import check. The review contains **36 complete natural journals**, 596 rewritten-story encounters, and 12 additional combined-source replays of overlapping seeds. See [the editorial review and verification](verification/event-writing/README.md). Earlier sections describe their own historical source snapshots.
 
 ## Cult Leader — 23 October 2026
 
