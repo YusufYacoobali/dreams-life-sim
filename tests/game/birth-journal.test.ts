@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
 import { createLife, randomCreation, type Creation } from '../../src/game/createLife';
 import { birthFamily, composeBirthJournal, selectBirthStory } from '../../src/game/birthJournal';
 import { birthStories, eligibleBirthStories, type BirthStoryContext } from '../../src/game/content/birthStories';
@@ -7,6 +8,7 @@ import { jobs } from '../../src/game/content/jobs';
 import { copyWorld, encodeWorld, immutableWorld, validateWorld, type Person } from '../../src/game/model';
 import { isAutomaticAppearance } from '../../src/game/appearance';
 import appearanceBeforePolish3 from '../fixtures/birth-appearance-before-polish3.json';
+import namesBeforeExpansion from '../fixtures/birth-names-before-expansion.json';
 import { ageOn, fullName } from '../../src/game/personHelpers';
 import { endEmployment } from '../../src/game/systems/work';
 import { royalTitle } from '../../src/game/systems/royaltyMath';
@@ -15,6 +17,8 @@ const date = { year: 2026, month: 10, day: 22 };
 // Actual constructor output captured from unchanged 25a8faa, before automatic
 // casting was added. Only the permitted artwork fields are normalized below.
 const recordedAppearances:Record<string,Record<string,Person['appearance']>>=appearanceBeforePolish3.samples;
+const nameSamples = gunzipSync(Buffer.from(namesBeforeExpansion.data, 'base64')).toString('utf8');
+const recordedNames: Record<string, { people: Record<string, Pick<Person, 'firstName' | 'lastName'>>; households: Record<string, string>; royalHouses: Record<string, string> }> = JSON.parse(nameSamples);
 function newborn(seed: number, patch: Partial<Creation> = {}) { return createLife('life_birth_sample_' + seed, seed, { ...randomCreation(seed), ...patch }, date); }
 
 test.each([
@@ -45,8 +49,10 @@ test.each(countryCodes)('%s introduces actual birthplace, identity, parent ages 
   }
 });
 
-test('all 512 sample generations retain the exact pre-feature family, stats, money, RNG and non-journal world', () => {
+test('all 512 sample generations retain exact pre-feature gameplay, allowing only prospective names and automatic artwork', () => {
   // Captured from d253718 before implementation; no historical fixtures are rewritten.
+  expect(namesBeforeExpansion.sourceCommit).toBe('2bb7ce9b3c301de9a286d2cb90d88fe6a1670c4b');
+  expect(createHash('sha256').update(nameSamples).digest('hex')).toBe(namesBeforeExpansion.sha256);
   const hash = createHash('sha256'), seenCountries = new Set<string>(), seenGenders = new Set<string>(), seenStories = new Set<string>(), counts = { ordinary: 0, funny: 0, unusual: 0, bizarre: 0 };
   let single = 0, two = 0, royal = 0;
   for (let seed = 0; seed < 512; seed++) {
@@ -69,7 +75,12 @@ test('all 512 sample generations retain the exact pre-feature family, stats, mon
         expect(person.appearance).toEqual({...old,hair:person.appearance.hair,identity:person.appearance.identity,outfit:person.appearance.outfit,provenance:person.appearance.provenance});
       }
       original.people[person.id].appearance=old;
+      // Restore independently captured pre-expansion names solely for this old
+      // whole-world digest. Family structure, jobs, money, stats and draws stay exact.
+      Object.assign(original.people[person.id], recordedNames[seed].people[person.id]);
     }
+    for (const home of original.households) home.name = recordedNames[seed].households[home.id];
+    for (const house of original.royalHouses) house.name = recordedNames[seed].royalHouses[house.id];
     hash.update(JSON.stringify(original) + '\n');
     expect(newborn(seed, input)).toEqual(world); expect(validateWorld(world)).toEqual(world);
     expect(world.journal.length).toBeGreaterThanOrEqual(3); expect(world.journal.length).toBeLessThanOrEqual(5);

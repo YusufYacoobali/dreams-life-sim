@@ -3,6 +3,7 @@ import { automaticArtworkPools, clothingArtworkTags, faceArtworkTags, hairArtwor
 import { portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { countries } from '../../src/game/countries';
+import { creationNamePools } from '../../src/game/content/creationNames';
 import { decodeWorld, encodeWorld, personSchema, type Person, type World } from '../../src/game/model';
 import { nextRandom, randomInteger } from '../../src/game/random';
 import { createContact, hireNpc } from '../../src/game/systems/npcs';
@@ -54,12 +55,14 @@ test.each(['male','female','nonbinary'] as const)('%s automatic artwork is diver
 
 test.each(['male','female','nonbinary'] as const)('%s contacts retain the original constructor draws, inherited colour draws and game facts', gender => {
   const world = fresh(), before = { ...world.random }, country = countries.US;
-  const bounds = [[1,12],[1,28],[0,country.firstNames.length-1],[0,country.lastNames.length-1],[40,90],[65,100],[25,90],[25,95],[25,85],[30,85],[5,50],[30,90],[0,3],[0,5],[0,7],[0,4],[0,5],...(gender==='nonbinary'?[[0,1]]:[]),[1,100]];
+  const pool = creationNamePools.US[gender], existingNames = Object.values(world.people).map(person => person.firstName);
+  const bounds = [[1,12],[1,28],[0,pool.length-1],[0,country.lastNames.length-1],[40,90],[65,100],[25,90],[25,95],[25,85],[30,85],[5,50],[30,90],[0,3],[0,5],[0,7],[0,4],[0,5],...(gender==='nonbinary'?[[0,1]]:[]),[1,100]];
   let state = before.npcs; const original:number[]=[];
   for (const [minimum,maximum] of bounds) { const draw=randomInteger(state,minimum,maximum); state=draw.state; original.push(draw.value); }
   const person = createContact(world,{ age:8,gender,schoolStudent:true });
   expect(world.random).toEqual({ ...before,npcs:state });
-  expect(person.firstName).toBe(country.firstNames[original[2]]); expect(person.lastName).toBe(country.lastNames[original[3]]);
+  expect(pool).toContain(person.firstName); expect(existingNames).not.toContain(person.firstName);
+  expect(person.lastName).toBe(country.lastNames[original[3]]);
   expect(person.stats.smarts).toBe(original[6]); expect(person.appearance.face).toBe(original[12]);
   expect(person.appearance.skin).toBe(original[13]); expect(person.appearance.hairColor).toBe(original[15]);
   expect(person.gender).toBe(gender); expect(person.education.stage).toBe('primary'); expect(isAutomaticAppearance(person.appearance)).toBe(true);

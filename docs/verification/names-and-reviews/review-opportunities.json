@@ -1,0 +1,765 @@
+{
+  "scope": "36 deterministic, unedited childhoods through age ten or death; first eligible choice; actual engine commands. Both tracker versions observe the identical current game worlds. Birth acknowledgement matches the production transition; no stats or outcomes are edited. No native sheet visibility is claimed.",
+  "baseline": "2bb7ce9",
+  "totals": {
+    "lives": 36,
+    "beforeWithOpportunity": 36,
+    "afterWithOpportunity": 36
+  },
+  "pools": {
+    "US": {
+      "male": 51,
+      "female": 51,
+      "nonbinary": 24,
+      "surnames": 60
+    },
+    "CA": {
+      "male": 67,
+      "female": 73,
+      "nonbinary": 25,
+      "surnames": 60
+    },
+    "GB": {
+      "male": 66,
+      "female": 70,
+      "nonbinary": 28,
+      "surnames": 60
+    },
+    "AU": {
+      "male": 62,
+      "female": 64,
+      "nonbinary": 33,
+      "surnames": 60
+    },
+    "FR": {
+      "male": 49,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "DE": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "ES": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "IT": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "BR": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "IN": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 16,
+      "surnames": 60
+    },
+    "JP": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 20,
+      "surnames": 60
+    },
+    "ZA": {
+      "male": 48,
+      "female": 48,
+      "nonbinary": 24,
+      "surnames": 60
+    }
+  },
+  "results": [
+    {
+      "country": "US",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "US",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "US",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "CA",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "CA",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "CA",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "GB",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "GB",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "country": "GB",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "AU",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "AU",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "country": "AU",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "FR",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "FR",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "FR",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "DE",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 9,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "DE",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 9,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "DE",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 9,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "ES",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "ES",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "ES",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IT",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IT",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IT",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "BR",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "BR",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "BR",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IN",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IN",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "IN",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "JP",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "JP",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "JP",
+      "seed": 900,
+      "commands": 29,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "ZA",
+      "seed": 0,
+      "commands": 30,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "country": "ZA",
+      "seed": 42,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ],
+      "afterEligibleAges": [
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "country": "ZA",
+      "seed": 900,
+      "commands": 27,
+      "completedYears": 10,
+      "beforeEligibleAges": [
+        5,
+        6
+      ],
+      "afterEligibleAges": [
+        5,
+        6
+      ]
+    }
+  ]
+}

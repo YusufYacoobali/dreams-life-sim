@@ -77,15 +77,17 @@ function replaceProjectCopy(world: World, peerName: string, teacherName: string)
   return validateWorld(legacy);
 }
 
-test('natural seed12 age15 distinguishes actual Harper Brown/classmate and Harper Kelly/teacher in the new project follow-up', () => {
+test('natural seed12 age15 binds its actual classmate and teacher throughout the project follow-up', () => {
   const world = naturalDecision(12, 'story-project-promise', 15), event = decision(world), thread = world.storyThreads.find(row => row.offeredEventId === event.id)!;
+  const peer = world.people[thread.peerId], teacher = world.people[thread.teacherId!];
   expect(world.people[world.activePersonId].country).toBe('AU');
-  expect(world.people[thread.peerId]).toMatchObject({ firstName: 'Harper', lastName: 'Brown' });
-  expect(world.people[thread.teacherId!]).toMatchObject({ firstName: 'Harper', lastName: 'Kelly' });
-  expect(event.body).toContain('Harper Brown (classmate) is putting the class project together. Harper Kelly (teacher) wants your section today.');
-  expect(event.choices.find(row => row.id === 'ask-help')!.label).toBe('Ask Harper Kelly (teacher) for help');
-  expect(event.choices.find(row => row.id === 'complete')!.resultBody).toContain('Harper Brown (classmate). Harper Kelly (teacher) records');
-  expect(event.choices.find(row => row.id === 'ask-help')!.journal).toContain('Harper Kelly (teacher)');
+  // The expanded catalogue avoids this seed's former accidental Harper/Harper
+  // collision. Explicit same-first/full-name cases below retain that coverage.
+  expect(peer.id).not.toBe(teacher.id); expect(peer.firstName).not.toBe(teacher.firstName);
+  expect(event.body).toContain(peer.firstName + ' is putting the class project together. ' + teacher.firstName + ' wants your section today.');
+  expect(event.choices.find(row => row.id === 'ask-help')!.label).toBe('Ask ' + teacher.firstName + ' for help');
+  expect(event.choices.find(row => row.id === 'complete')!.resultBody).toContain(peer.firstName + '. ' + teacher.firstName + ' records');
+  expect(event.choices.find(row => row.id === 'ask-help')!.journal).toContain(teacher.firstName);
   expect(cold(world).pending).toEqual(event); expect(currentSchool(world)!.currentTeacherId).toBe(thread.teacherId);
 }, 120000);
 
