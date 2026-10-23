@@ -18,6 +18,7 @@ import {
   type CultStoryDefinition,
 } from '../content/cultStories';
 import { cultPhilosophies, cultRoleTitles } from '../content/cults';
+import { cultClaimAdmissions, cultClaimFailureJournals } from '../content/cultClaimWriting';
 import type { BoundChoice, RuntimeEffectRow } from '../runtime';
 import { offerPending } from '../pendingQueue';
 import { storyParticipants } from '../storyNames';
@@ -139,6 +140,7 @@ function boundCultChoice(
   label: string,
   body: string,
   journal: string,
+  resultTitle = 'You leave it unanswered',
 ): BoundChoice {
   return {
     id,
@@ -153,7 +155,7 @@ function boundCultChoice(
         ...(thread.kind === 'claim' ? { claimRevision: 2 as const } : {}),
       },
     ],
-    resultTitle: 'Your organisation remembers',
+    resultTitle,
     resultBody: bind(body, world, cult, thread),
     journal: bind(journal, world, cult, thread),
   };
@@ -176,22 +178,20 @@ export function offerCultThread(world: World, cult: Cult, thread: CultThread) {
             cult,
             thread,
             'admit',
-            'Admit I was wrong',
-            'You gave a plain answer. The failed promise remains on record.',
-            'I admitted that my promised ' +
-              thread.title.toLowerCase() +
-              ' had not happened.',
+            'Admit you were wrong',
+            cultClaimAdmissions[thread.templateId as CultClaimId],
+            'I admitted that my claim, “' + thread.title + '”, had failed.',
+            'You take it back',
           ),
           boundCultChoice(
             world,
             cult,
             thread,
             'postpone',
-            'Say the date was wrong',
-            'The promise is postponed for twelve months. It cannot be postponed again.',
-            'I postponed my ' +
-              thread.title.toLowerCase() +
-              ' promise by twelve months.',
+            'Give it twelve more months',
+            'You give the promise another twelve months. A follower asks whether this date is more reliable than the last one. You cannot postpone it again.',
+            'I postponed “' + thread.title + '” by twelve months.',
+            'One last deadline',
           ),
           boundCultChoice(
             world,
@@ -204,6 +204,7 @@ export function offerCultThread(world: World, cult: Cult, thread: CultThread) {
                 : ''),
             cultClaimRemedies[thread.templateId as CultClaimId].result,
             cultClaimRemedies[thread.templateId as CultClaimId].journal,
+            cultClaimRemedies[thread.templateId as CultClaimId].resultTitle,
           ),
         ]
       : cultStories
@@ -217,6 +218,7 @@ export function offerCultThread(world: World, cult: Cult, thread: CultThread) {
               choice.label,
               choice.result,
               choice.journal,
+              choice.resultTitle,
             ),
           );
   choices.push(
@@ -225,9 +227,9 @@ export function offerCultThread(world: World, cult: Cult, thread: CultThread) {
       cult,
       thread,
       'withdraw',
-      'Leave it to the group',
-      'The group carries on without an answer from you.',
-      'I left ' + thread.title.toLowerCase() + ' for the group to handle.',
+      'Leave it unanswered',
+      'You leave without answering. Your followers continue the conversation after you go.',
+      'I left my followers to deal with “' + thread.title + '” without me.',
     ),
   );
   const roleOverrides = Object.fromEntries(
@@ -316,6 +318,7 @@ export function cultChoiceReason(
 export function resolveCultChoice(
   world: World,
   effect: CultChoiceEffect,
+  boundChoice?: Pick<BoundChoice, 'label' | 'journal'>,
 ): RuntimeEffectRow[] {
   const reason = cultChoiceReason(world, effect);
   if (reason) throw new IneligibleAction(reason);
@@ -349,7 +352,7 @@ export function resolveCultChoice(
         effect.choiceId ===
           cultClaimRemedies[thread.templateId as CultClaimId].id
       ) {
-        applyCultClaimRemedy(world, cult, thread);
+        applyCultClaimRemedy(world, cult, thread, boundChoice?.label);
       } else if (effect.claimRevision === 2 && effect.choiceId === 'admit') {
         const impact = cultClaimOutcome(
           thread.templateId as CultClaimId,
@@ -430,7 +433,7 @@ export function resolveCultChoice(
       cultScandal(
         world,
         cult,
-        bind(choice.journal, world, cult, thread),
+        boundChoice?.journal ?? bind(choice.journal, world, cult, thread),
         choice.heat!,
       );
     else cult.heat = bounded(cult.heat + (choice.heat ?? 0));
@@ -454,7 +457,7 @@ export function resolveCultChoice(
         cult,
         member,
         'story',
-        bind(choice.journal, world, cult, thread),
+        boundChoice?.journal ?? bind(choice.journal, world, cult, thread),
       );
     }
     if (choice.action === 'relax') {
@@ -659,9 +662,9 @@ export function cultStoryMonth(world: World, cult: Cult) {
         cultRecord(
           world,
           cult,
-          'My repaired relationship with ' +
+          'I repaired my relationship with ' +
             fullName(world.people[member.personId]) +
-            ' kept an old public argument from becoming a scandal.',
+            ' before an old public argument could become a scandal.',
         );
       } else {
         thread.outcome = 'failure';
@@ -700,9 +703,7 @@ export function cultStoryMonth(world: World, cult: Cult) {
         cultRecord(
           world,
           cult,
-          'My ' +
-            thread.title.toLowerCase() +
-            ' promise came due. ' +
+          'I reached the deadline for “' + thread.title + '”. ' +
             definition.successText,
         );
       } else if (
@@ -723,10 +724,7 @@ export function cultStoryMonth(world: World, cult: Cult) {
         cultRecord(
           world,
           cult,
-          'My ' +
-            thread.title.toLowerCase() +
-            ' promise failed. ' +
-            definition.followup,
+          cultClaimFailureJournals[definition.id],
         );
       } else {
         thread.body =

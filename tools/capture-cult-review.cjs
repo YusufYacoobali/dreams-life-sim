@@ -50,11 +50,16 @@ async function main() {
             const last = [...scroll.querySelectorAll('[role="button"]')].at(-1);
             const frame = scroll.getBoundingClientRect(),
               button = last?.getBoundingClientRect();
+            // Selection actions live in a fixed footer outside the scroller.
+            // A scrolled-away Clear Search button is not the final action.
+            const modal = phone.querySelector('.rn-modal');
+            const footerAction = modal && [...modal.querySelectorAll('[role="button"]')].filter(node => !scroll.contains(node)).at(-1);
+            const action = footerAction?.getBoundingClientRect(), phoneFrame = phone.getBoundingClientRect();
             return {
               tree: phone.dataset.tree,
               scroll: true,
               lastActionVisible:
-                !button ||
+                action ? action.top >= phoneFrame.top - 1 && action.bottom <= phoneFrame.bottom + 1 : !button ||
                 (button.top >= frame.top - 1 &&
                   button.bottom <= frame.bottom + 1),
             };

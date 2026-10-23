@@ -310,8 +310,8 @@ export function resolveCult(world: World, command: CultCommand) {
     );
     result(
       world,
-      'Your organisation is founded',
-      cult.name + ' has ' + followers + ' followers and a small inner circle.',
+      "You have a following",
+      cult.name + ' has ' + followers + " followers. Your new inner circle is waiting for you to tell them what happens next.",
       'cult',
       [
         {
@@ -339,8 +339,8 @@ export function resolveCult(world: World, command: CultCommand) {
     closeCult(world, cult, 'disbanded');
     result(
       world,
-      'Organisation disbanded',
-      'Communal funds were settled. Your history and former followers remain.',
+      "The doors close",
+      "You close the organisation and settle its communal funds. There is no personal payout from the closure.",
       'cult',
     );
     return;
@@ -359,8 +359,8 @@ export function resolveCult(world: World, command: CultCommand) {
     );
     result(
       world,
-      'Contribution recorded',
-      'The money is now communal, not personal.',
+      "Your money goes in",
+      "You put the money into the communal treasury. It now belongs to the organisation.",
       'cult-treasury',
     );
     return;
@@ -411,8 +411,8 @@ export function resolveCult(world: World, command: CultCommand) {
     );
     result(
       world,
-      'Leader payout recorded',
-      'The payment is personal taxable income. The communal treasury fell by the same amount.',
+      "Your payout arrives",
+      "You receive the permitted payout from the treasury. It counts as taxable personal income.",
       'cult-treasury',
       [
         {
@@ -451,7 +451,7 @@ export function resolveCult(world: World, command: CultCommand) {
     result(
       world,
       'Membership fees updated',
-      'New fees apply to later joins and actual monthly dues.',
+      "Your new joining fee applies to future recruits. The monthly rate applies to later dues.",
       'cult-treasury',
     );
     return;
@@ -501,7 +501,7 @@ export function resolveCult(world: World, command: CultCommand) {
     result(
       world,
       'Beliefs updated',
-      'The new beliefs affect future months. Members will need time to adjust.',
+      "You announce the new beliefs. Members start asking how they fit with what you told them before.",
       'cult-doctrines',
     );
     return;
@@ -564,8 +564,8 @@ export function resolveCult(world: World, command: CultCommand) {
     cultRecord(
       world,
       cult,
-      'I announced ' +
-        definition.title.toLowerCase() +
+      'I announced “' +
+        definition.title + '”' +
         ' to ' +
         cult.name +
         '. I gave it ' +
@@ -574,9 +574,9 @@ export function resolveCult(world: World, command: CultCommand) {
     );
     result(
       world,
-      'The promise is on record',
+      "You have made a promise",
       definition.announcement +
-        ' It comes due in ' +
+        " Your deadline is " +
         definition.months +
         ' months.',
       'cult-claim',
@@ -616,7 +616,7 @@ export function resolveCult(world: World, command: CultCommand) {
     result(
       world,
       'A larger headquarters',
-      'The new capacity and running costs apply to future months.',
+      "You move into the larger headquarters. There is room for more followers and a larger monthly bill.",
       'cult-headquarters',
     );
     return;
@@ -772,7 +772,7 @@ export function resolveCult(world: World, command: CultCommand) {
     if (!offerCultMemberActivity(world, cult, member, command.action, response))
       result(
         world,
-        'A conversation with ' + target.firstName,
+        "Your meeting with " + target.firstName,
         response,
         'cult-followers',
       );
@@ -791,7 +791,7 @@ export function resolveCult(world: World, command: CultCommand) {
       throw new IneligibleAction('The rival-action quote changed');
     cultSpend(world, cult, quote, 'rivalry', 'Rival action: ' + command.action);
     const roll = draw(world, 'events', 1, 100);
-    let outcome = 'You let the rivalry cool.';
+    let outcome = "You leave the rival alone. Neither of you has to invent a fresh insult today.";
     if (command.action === 'challenge') {
       const win = roll <= 50 + (cult.reputation - rival.reputation) / 2;
       cult.reputation = bounded(cult.reputation + (win ? 5 : -4));
@@ -799,8 +799,8 @@ export function resolveCult(world: World, command: CultCommand) {
       rival.relationship = bounded(rival.relationship - 10);
       cult.heat = bounded(cult.heat + 5);
       outcome = win
-        ? 'Your public challenge went well.'
-        : 'The rival got the better response.';
+        ? "You challenge the rival in public and win the crowd. Their leader keeps speaking after the applause has moved to you."
+        : "You challenge the rival in public. Their reply gets the applause you were waiting for.";
     }
     if (command.action === 'publicity') {
       const joined = cultChangeFollowers(
@@ -817,17 +817,17 @@ export function resolveCult(world: World, command: CultCommand) {
       );
       cult.heat = bounded(cult.heat + 6);
       rival.relationship = bounded(rival.relationship - 8);
-      outcome = 'Your publicity brought attention and irritated the rival.';
+      outcome = "You put your name in front of the rival’s audience. People notice. Their leader makes it clear they noticed too.";
     }
     if (command.action === 'alliance') {
       if (roll <= 30 + rival.relationship / 2 + cult.reputation / 5) {
         rival.status = 'allied';
         rival.relationship = bounded(rival.relationship + 20);
         cult.reputation = bounded(cult.reputation + 4);
-        outcome = 'The rival accepted an alliance.';
+        outcome = "The rival agrees to an alliance. You both make a careful effort to sound pleased about sharing the attention.";
       } else {
         rival.relationship = bounded(rival.relationship + 4);
-        outcome = 'The rival declined for now.';
+        outcome = "The rival declines your alliance. They say it pleasantly enough to make you wish they had simply said no.";
       }
     }
     if (command.action === 'reconcile') {
@@ -840,8 +840,8 @@ export function resolveCult(world: World, command: CultCommand) {
       cult.heat = bounded(cult.heat - 3);
       outcome =
         rival.status === 'reconciled'
-          ? 'You settled the old dispute.'
-          : 'The conversation eased the dispute.';
+          ? "You settle the dispute. Both sides can finally stop opening every conversation with what happened last time."
+          : "You talk through the dispute. It is still unresolved, but you both get further than repeating your favourite accusation.";
     }
     if (command.action === 'ignore') {
       cult.heat = bounded(cult.heat - 2);
@@ -849,8 +849,12 @@ export function resolveCult(world: World, command: CultCommand) {
     }
     rival.history.push(outcome);
     if (rival.history.length > 12) rival.history.shift();
-    cultRecord(world, cult, 'I approached ' + rival.name + ': ' + outcome);
-    result(world, 'A response from your rival', outcome, 'cult-rivalry');
+    cultRecord(world, cult, 'I ' + ({
+      challenge: 'challenged ', publicity: 'publicised our group against ',
+      alliance: 'offered an alliance to ', reconcile: 'opened reconciliation with ',
+      ignore: 'ignored ',
+    } as const)[command.action] + rival.name + '.');
+    result(world, "Your rival answers", outcome, 'cult-rivalry');
     return;
   }
   if (command.type === 'cult-recovery') {
@@ -923,14 +927,19 @@ export function resolveCult(world: World, command: CultCommand) {
         cult.name +
         ' by ' +
         command.action.replace(/-/g, ' ') +
-        '. The old incidents stayed on record.',
+        ".",
     );
     result(
       world,
-      'Your response is on record',
-      command.action === 'ignore'
-        ? 'You left the criticism unanswered.'
-        : 'Recovery takes several months. Earlier claims, scandals and legal cases remain.',
+      "Your next public move",
+      ({
+        apologise: 'You apologise publicly. People want to see what you do next. Recovery takes six months; the earlier scandals and legal cases still stand.',
+        transparent: 'You open the accounts. People start checking the figures behind your speeches. Recovery takes six months, and the earlier cases still stand.',
+        'open-gathering': 'You pay for an open gathering. Visitors bring the questions that started this. Recovery takes six months; earlier cases are not erased.',
+        'replace-deputy': 'You replace your deputy. The old deputy does not look grateful for your response to public criticism. Recovery takes six months; earlier cases still stand.',
+        rebrand: 'You change the name. People still recognise the leader. Recovery takes six months; the old promises, scandals and legal cases follow you.',
+        ignore: 'You say nothing. Devotees stand by you while the people asking questions keep asking.',
+      } as const)[command.action],
       'cult-scandal',
     );
     return;

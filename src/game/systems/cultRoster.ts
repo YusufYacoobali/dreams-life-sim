@@ -270,7 +270,7 @@ export function resolveCultReplacement(
         String(priorExit.month).padStart(2, '0') +
         '-' +
         String(priorExit.day).padStart(2, '0') +
-        '. My earlier history remains.',
+        ".",
     );
     for (const thread of cult.threads)
       if (
@@ -312,9 +312,9 @@ export function resolveCultReplacement(
   cultRecord(world, cult, text);
   result(
     world,
-    'A seat is filled',
+    "Welcome to the inner circle",
     fullName(person) +
-      ' accepted the responsibility in your existing community. Former members remain in your history.',
+      " accepts the responsibility and asks when you want them to start.",
     'cult-followers',
     [
       {

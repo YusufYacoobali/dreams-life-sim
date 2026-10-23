@@ -251,10 +251,10 @@ function continueYear(world: World) {
   if (world.annual?.stage === 'months' && world.annual.monthsProcessed === 12 && !world.pending && !world.annual.pausedForPlanning) finishYear(world);
 }
 
-function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels']): z.infer<typeof effectRowSchema>[] {
+function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels'], boundChoice?: BoundChoice): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
     if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
-    if (effect.kind === 'cult-choice') return resolveCultChoice(world, effect);
+    if (effect.kind === 'cult-choice') return resolveCultChoice(world, effect, boundChoice);
     if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
@@ -366,7 +366,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
     const dramaticEffect = choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice' ? choice.effects[0] : null;
     const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null;
-    const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels);
+    const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels, choice);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');

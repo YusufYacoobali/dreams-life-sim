@@ -211,7 +211,7 @@ export function cultRivalArrives(world: World, cult: Cult, thread: CultThread) {
       fullName(person) +
       ' founded ' +
       name +
-      '. It is the same person, with a different sign outside.',
+      '. They already knew my followers by name.',
   );
 }
 

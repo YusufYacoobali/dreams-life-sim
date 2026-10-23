@@ -87,7 +87,7 @@ export default function CultHeadquarters() {
         </Body>
         <Body muted>
           Current monthly running costs: {cultMoney(cult, cultBill(cult))}.
-          Communal funds pay for headquarters and upgrades.
+          The treasury pays for the premises and upgrades.
         </Body>
       </Card>
       <Card>
@@ -238,7 +238,7 @@ export default function CultHeadquarters() {
             );
           })}
         <Body muted>
-          Manage responsibilities and relationships from the Cult dashboard.
+          Manage your inner circle from the Cult dashboard.
         </Body>
       </Card>
       {dialog.modal}

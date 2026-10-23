@@ -5,16 +5,16 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
   {
     id: 'red-tagged-exit',
     source: 'dramatic',
-    title: 'The Throne in the Fire Exit',
+    title: 'Your throne blocks the exit',
     role: 'organiser',
     need: 'headquarters',
     minFollowers: 80,
     rarity: 'uncommon',
-    body: 'A venue inspector finds the emergency exit blocked by your ceremonial chair. {member} says moving the chair has become a theological issue. The inspector is not interested in theology.',
+    body: 'An inspector finds your ceremonial chair blocking the fire exit. {member} calls moving it a theological problem. The inspector asks whether theology is flammable.',
     choices: [
       {
         id: 'make-safe',
-        label: 'Move it and pay for the safety work',
+        label: 'Move it and pay for repairs',
         costBps: 120,
         loyalty: -2,
         satisfaction: 7,
@@ -22,44 +22,47 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         heat: -4,
         memberLoyalty: 5,
         result:
-          'The chair moves. The safety contractor is actually paid. Members can leave by a route that does not require enlightenment.',
+          'You drag your chair away and pay for the safety work. {member} has to find a new place for you to look important.',
         journal:
           'I paid for safety work after our ceremonial chair blocked the emergency exit.',
+        resultTitle: 'A less fatal throne',
       },
       {
         id: 'cancel',
-        label: 'Cancel the gathering and explain why',
+        label: 'Cancel the gathering',
         growth: -15,
         satisfaction: -4,
         reputation: 3,
         heat: 3,
         result:
-          'The event is cancelled. Some followers leave, but nobody has to squeeze past the throne in an emergency.',
+          'You cancel the gathering. Followers leave, several for good. Your empty throne gets the whole unsafe room to itself.',
         journal:
           'I cancelled a gathering because our emergency exit was blocked.',
+        resultTitle: 'No one takes a seat',
       },
       {
         id: 'blame',
-        label: 'Make the organiser take the blame',
+        label: 'Blame the organiser',
         loyalty: 2,
         heat: 12,
         memberLoyalty: -25,
         action: 'humiliate',
         result:
-          '{member} is publicly blamed for a chair everybody knew was yours. The grievance has a long memory.',
+          'You blame {member}. They look at your chair, then at you, while you explain how little this has to do with you.',
         journal:
           'I publicly blamed {member} for the chair blocking our emergency exit.',
+        resultTitle: 'Your chair, their fault',
       },
     ],
   },
   {
     id: 'payout-on-projector',
     source: 'dramatic',
-    title: 'Your Payout, Forty Feet High',
+    title: 'Your payout on the wall',
     role: 'treasurer',
     need: 'payout',
     rarity: 'rare',
-    body: '{member} projects your recorded leader payouts onto the wall during a ceremony. The numbers are real. The projector is so large that people outside can read them.',
+    body: '{member} projects your leader payouts onto the wall during a ceremony. People outside can read the amounts. You had planned to discuss sacrifice.',
     choices: [
       {
         id: 'answer',
@@ -70,40 +73,43 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         heat: -5,
         memberLoyalty: 8,
         result:
-          'An independent review is funded from the treasury. Your past payouts remain in the accounts, exactly where the members can find them.',
+          'You fund an independent review. Members ask the reviewer to start with the figures currently illuminating the wall.',
         journal:
           'I funded an independent review after {member} projected my actual payouts during a ceremony.',
+        resultTitle: 'Now show your working',
       },
       {
         id: 'punish',
-        label: 'Expel the treasurer for making a scene',
+        label: 'Expel the treasurer',
         loyalty: -6,
         reputation: -8,
         heat: 16,
         action: 'expel',
         result:
-          '{member} leaves with their records and some followers. Throwing out the treasurer does not delete your payout history.',
+          'You expel {member}. They leave with the records and followers who have just read them. Your payouts are still on the wall.',
         journal:
           'I expelled {member} after they displayed my recorded leader payouts.',
+        resultTitle: 'They take the evidence',
       },
       {
         id: 'envelope',
-        label: 'Quietly move more money before the meeting ends',
+        label: 'Move more funds to your account',
         loyalty: -5,
         heat: 18,
         memberLoyalty: -20,
         action: 'misuse',
         result:
-          'You move communal money into your own account. The bank trail gives investigators something solid to follow.',
+          'You transfer more communal money to yourself during the argument about your payouts. Investigators now have another transfer to follow.',
         journal:
           'I diverted real communal funds while members were questioning my leader payouts.',
+        resultTitle: 'One more transfer',
       },
     ],
   },
   {
     id: 'second-microphone',
     source: 'dramatic',
-    title: 'Two Microphones, One Leader',
+    title: 'They rehearsed the coup',
     role: 'deputy',
     need: 'ambition',
     minFollowers: 60,
@@ -112,16 +118,17 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'listen',
-        label: 'Let the challenge be heard',
+        label: 'Let them make their case',
         loyalty: -4,
         satisfaction: 7,
         reputation: 4,
         memberLoyalty: 10,
         ambition: 12,
         result:
-          'You remain in charge, but the challenger now has a louder voice and greater ambition. The room sees that disagreement is possible.',
+          'You let {member} finish. They get applause and look at you while accepting it. You are still the leader when the room empties.',
         journal:
           'I let {member} publicly challenge my leadership instead of silencing them.',
+        resultTitle: 'Still your stage. For now.',
       },
       {
         id: 'expel',
@@ -130,33 +137,35 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         heat: 12,
         action: 'expel',
         result:
-          '{member} is expelled and followers leave with them. The challenger is still the same person, with the same contacts and a fresh reason to remember this.',
+          'You expel {member}. Followers get up and leave with them. You keep talking into the microphone until the door closes.',
         journal: 'I expelled {member} after their public leadership challenge.',
+        resultTitle: 'A following walks out',
       },
       {
         id: 'ridicule',
-        label: 'Make a joke of them in front of everyone',
+        label: 'Make the room laugh at them',
         loyalty: 4,
         heat: 9,
         memberLoyalty: -30,
         ambition: 8,
         action: 'humiliate',
         result:
-          'You get a laugh. {member} gets a grievance and a reason to tell this story later.',
+          'You turn {member}’s challenge into a joke. They wait through the laughter without smiling. Then they put down the microphone.',
         journal:
           'I humiliated {member} during their public leadership challenge.',
+        resultTitle: 'A laugh they will remember',
       },
     ],
   },
   {
     id: 'last-bus-out',
     source: 'dramatic',
-    title: 'The Last Bus Is Leaving',
+    title: 'Your followers packed bags',
     rule: 'monthly-attendance',
     role: 'organiser',
     minFollowers: 40,
     rarity: 'uncommon',
-    body: 'Members have packed their bags after another compulsory late meeting. {member} is standing beside the last bus. This time the complaints are turning into departures.',
+    body: 'Your compulsory late meeting is still going. {member} is waiting beside the last bus with members carrying packed bags. They are leaving more than the meeting.',
     choices: [
       {
         id: 'release',
@@ -167,40 +176,43 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         reputation: 5,
         memberLoyalty: 8,
         result:
-          'The compulsory-attendance rule is removed. Members can catch the bus without being asked to prove their loyalty.',
+          "You drop compulsory attendance. Members wait for you to say it again before picking up their bags.",
         journal:
           'I dropped compulsory attendance when members started leaving the late meeting with packed bags.',
+        resultTitle: 'They can catch the bus',
       },
       {
         id: 'transport',
-        label: 'Pay for transport and a shorter programme',
+        label: 'Pay to get everyone home',
         costBps: 140,
         loyalty: 4,
         satisfaction: 8,
         memberLoyalty: 6,
         result:
-          'The treasury pays a real transport bill. People get home, although the attendance rule still exists and may cause another argument.',
+          "You pay for transport and shorten the programme. {member} checks next month’s attendance rule. It is still compulsory.",
         journal:
           'I paid for transport after compulsory meetings left members stranded.',
+        resultTitle: 'A lift without a pardon',
       },
       {
         id: 'loyal',
-        label: 'Say the bus is a test of devotion',
+        label: 'Call the bus a loyalty test',
         loyalty: 5,
         satisfaction: -12,
         growth: -28,
         heat: 10,
         result:
-          'Several members decide they have passed enough tests. They leave, and the follower count falls.',
+          'You call it a test of devotion. Members board the bus and leave the organisation. You finish the test with a smaller congregation.',
         journal:
           'I called the last bus a test of devotion and lost followers over it.',
+        resultTitle: 'The bus wins',
       },
     ],
   },
   {
     id: 'donor-wants-the-altar',
     source: 'dramatic',
-    title: 'Sponsored Enlightenment',
+    title: 'Your revelation has a sponsor',
     doctrine: 'wealth-receipts',
     role: 'treasurer',
     minFollowers: 80,
@@ -209,47 +221,50 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'accept',
-        label: 'Accept the sponsored future',
+        label: 'Take the donation',
         incomeBps: 900,
         loyalty: -8,
         reputation: -6,
         heat: 12,
         ambition: 5,
         result:
-          'The donation enters the communal treasury. Members notice how quickly your sacred principles acquired a sponsor.',
+          'You take the donation. {member} holds up the banner while you explain why the sponsor’s name now belongs in every gathering.',
         journal:
           'I accepted a large conditional donation and the sponsor’s oversized ceremony banner.',
+        resultTitle: 'Please thank your sponsor',
       },
       {
         id: 'small',
-        label: 'Offer a smaller, ordinary fundraiser',
+        label: 'Pay for a smaller fundraiser',
         costBps: 70,
         incomeBps: 180,
         loyalty: 4,
         reputation: 5,
         memberLoyalty: 6,
         result:
-          'The fundraiser has an actual bill and actual proceeds. It raises less than the donor offered, but nobody buys the altar.',
+          'You pay for a fundraiser and collect its proceeds. It raises less than the offer. {member} can put down the banner.',
         journal:
-          'I held a smaller ordinary fundraiser instead of selling control of our ceremonies.',
+          'I held a smaller fundraiser after refusing to sell control of our ceremonies.',
+        resultTitle: 'A smaller cheque',
       },
       {
         id: 'refuse',
-        label: 'Refuse the donation',
+        label: 'Refuse the deal',
         loyalty: 6,
         reputation: 4,
         satisfaction: -2,
         result:
-          'The money never enters the treasury. Some members respect the decision; the treasurer still has bills to pay.',
+          'You refuse. The visitor takes back the donation offer. {member} looks relieved; your treasurer looks at the bills.',
         journal:
           'I refused a donation that would have turned our gatherings into advertising.',
+        resultTitle: 'The donor keeps the money',
       },
     ],
   },
   {
     id: 'rival-buys-the-breakfast',
     source: 'dramatic',
-    title: 'Breakfast With Your Organiser',
+    title: 'Your rival offers breakfast',
     need: 'rival',
     role: 'organiser',
     minFollowers: 60,
@@ -258,29 +273,31 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'support',
-        label: 'Pay practical support and thank them',
+        label: 'Pay them support and thank them',
         costBps: 100,
         memberLoyalty: 16,
         ambition: 5,
         loyalty: 3,
         action: 'aid',
         result:
-          '{member} receives a real support payment. They also remember that bringing you an awkward truth did not get them punished.',
+          'You pay {member} support and thank them for showing you the offer. They look relieved that breakfast has not become a loyalty hearing.',
         journal:
           'I paid {member} practical support after they showed me the rival’s recruitment offer.',
+        resultTitle: 'Thanks with a payment',
       },
       {
         id: 'reconcile',
-        label: 'Use the invitation to reopen talks',
+        label: 'Ask the rival to talk',
         action: 'reconcile',
         loyalty: -2,
         reputation: 5,
         heat: -3,
         memberLoyalty: 8,
         result:
-          'Relations with the active rival improve. The offer remains part of your shared history instead of becoming an immediate feud.',
+          'You use the invitation to reopen talks with {rival}. Neither leader wants to admit how much of this argument concerns a chair.',
         journal:
           'I used the rival’s offer to {member} as a reason to reopen reconciliation.',
+        resultTitle: 'An opening over breakfast',
       },
       {
         id: 'traitor',
@@ -289,64 +306,68 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         loyalty: -5,
         heat: 11,
         result:
-          'You expel the organiser who actually warned you. Some followers leave too. Your rival barely had to finish breakfast.',
+          'You expel the person who warned you. Followers leave with {member}. Your rival has barely had to butter the toast.',
         journal: 'I expelled {member} for bringing me a rival’s offer.',
+        resultTitle: 'You finish the recruitment',
       },
     ],
   },
   {
     id: 'parents-at-the-gates',
     source: 'dramatic',
-    title: 'The Family Meeting You Did Not Arrange',
+    title: 'Families at your locked gate',
     need: 'family',
     rule: 'private-rituals',
     minFollowers: 40,
     rarity: 'rare',
-    body: '{relative} arrives with other worried families. {member} is trying to guard the entrance. The families want to see the ordinary meetings behind your private-ritual rule, and someone is filming the gate.',
+    body: '{relative} arrives with worried families. Your private-ceremony rule keeps them outside. {member} guards the entrance while someone films you refusing to let them see in.',
     choices: [
       {
         id: 'open',
-        label: 'Drop the secrecy and open the meeting',
+        label: 'End the private-ceremony rule',
         action: 'relax',
         loyalty: -6,
         satisfaction: 8,
         reputation: 8,
         heat: -6,
         result:
-          'The private-ritual rule is removed. Families can see a meeting instead of a guarded door. Some devoted members dislike the loss of secrecy.',
+          'You open the meeting to the families. Devoted members object to losing the secrecy while {relative} looks around the room.',
         journal:
           'I opened our meetings after {relative} arrived with worried families.',
+        resultTitle: 'The families come inside',
       },
       {
         id: 'host',
-        label: 'Pay for a separate family gathering',
+        label: 'Pay for a family gathering',
         costBps: 110,
         reputation: 5,
         satisfaction: 5,
         heat: -2,
         result:
-          'A real family gathering is funded. The secrecy rule stays in place, so the underlying argument is not magically settled.',
+          'You fund a separate gathering. {relative} asks why a special invitation is needed to see what the usual meetings are like.',
         journal:
           'I funded a family gathering after {relative} challenged our guarded entrance.',
+        resultTitle: 'Visitors on your terms',
       },
       {
         id: 'guard',
-        label: 'Make the follower publicly defend the gate',
+        label: 'Make the member defend the gate',
         memberLoyalty: -24,
         heat: 15,
         reputation: -9,
         action: 'humiliate',
         result:
-          '{member} takes the public humiliation while the recording keeps running. You have given both the families and your follower a lasting grievance.',
+          'You make {member} explain the locked gate to {relative}. The camera stays on them while you stay behind it.',
         journal:
           'I made {member} publicly defend our closed gate against {relative} and the other families.',
+        resultTitle: 'Your follower takes the heat',
       },
     ],
   },
   {
     id: 'kettle-ownership-war',
     source: 'dramatic',
-    title: 'The Kettle Has Lawyers Now',
+    title: 'Two kettles. One true faith.',
     doctrine: 'sacred-kettle',
     role: 'treasurer',
     rarity: 'uncommon',
@@ -354,48 +375,51 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'settle',
-        label: 'Pay for mediation and keep the receipts public',
+        label: 'Pay for mediation',
         costBps: 130,
         satisfaction: 7,
         reputation: 4,
         loyalty: -2,
         memberLoyalty: 8,
         result:
-          'The treasury pays for actual mediation. The ownership argument is settled without pretending that a whistle can identify a rightful prophet.',
+          'You pay for mediation and show the receipts. Both sides accept the settlement while insisting their kettle boils with greater authority.',
         journal:
           'I paid for mediation when competing sacred kettles divided the members.',
+        resultTitle: 'The kettles keep their counsel',
       },
       {
         id: 'broadcast',
-        label: 'Let the treasurer explain the receipts on camera',
+        label: 'Let the treasurer explain on camera',
         action: 'recruiter',
         memberLoyalty: 9,
         ambition: 8,
         growth: 8,
         heat: 3,
         result:
-          '{member} gets a public voice and a chance to build a future audience. You may not control what that audience learns to admire.',
+          'You give {member} the camera and the receipts. They begin explaining the evidence. The room watches them instead of you.',
         journal:
           'I gave {member} a public platform to explain the sacred-kettle receipts.',
+        resultTitle: 'A new voice in the dispute',
       },
       {
         id: 'purge',
-        label: 'Expel the treasurer for bringing evidence',
+        label: 'Expel the treasurer',
         action: 'expel',
         loyalty: 3,
         reputation: -7,
         heat: 12,
         result:
-          '{member} leaves with the receipts and some followers. The remaining kettle does not become more convincing.',
+          'You expel {member} for bringing evidence. Followers leave with them. The kettles are still sitting there, equally unable to explain you.',
         journal:
           'I expelled {member} for bringing receipts to the sacred-kettle dispute.',
+        resultTitle: 'The receipts leave with them',
       },
     ],
   },
   {
     id: 'blackout-countdown',
     source: 'dramatic',
-    title: 'The Countdown Goes Dark',
+    title: 'Your apocalypse blew a fuse',
     doctrine: 'reality-stutters',
     role: 'organiser',
     minFollowers: 80,
@@ -404,16 +428,17 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'explain',
-        label: 'Stop the countdown and fund a safe exit',
+        label: 'Stop it and pay for safety work',
         costBps: 160,
         loyalty: -5,
         satisfaction: 7,
         reputation: 6,
         heat: -4,
         result:
-          'The safe exit and electrical work are paid for. You tell members it was a fault, which is less thrilling and much more useful.',
+          'You stop the countdown, pay for safe exits and electrical work, and explain the fault. Someone asks if the electrician outranks you now.',
         journal:
           'I stopped a reboot countdown and funded a safe exit after an electrical fault frightened the members.',
+        resultTitle: 'An electrician ends the world',
       },
       {
         id: 'cancel',
@@ -423,27 +448,29 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         reputation: 2,
         heat: 4,
         result:
-          'The gathering ends and some followers do not return. You resist the temptation to call an electrical fault cosmic evidence.',
+          'You cancel and send everyone home. Followers leave for good after spending the countdown frightened in the dark.',
         journal:
           'I cancelled the countdown after a blackout and sent the members home.',
+        resultTitle: 'The end is postponed',
       },
       {
         id: 'miracle',
-        label: 'Declare the fault proof of the reboot',
+        label: 'Call it proof of the reboot',
         loyalty: 6,
         heat: 17,
         reputation: -10,
         satisfaction: -5,
         result:
-          'The claim excites devoted members and makes the wider scrutiny worse. The actual fault remains an ordinary fault.',
+          'You announce that the fault proves your prophecy. Devoted followers cheer. People outside ask why a reboot of reality needs an electrician.',
         journal: 'I called an electrical blackout proof of a reality reboot.',
+        resultTitle: 'A very public power cut',
       },
     ],
   },
   {
     id: 'treasurer-last-warning',
     source: 'dramatic',
-    title: 'The Treasurer’s Last Warning',
+    title: 'Your treasurer has had enough',
     role: 'treasurer',
     rule: 'no-luxury',
     minFollowers: 60,
@@ -452,29 +479,31 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'pay',
-        label: 'Pay recorded member support',
+        label: 'Pay the member support',
         costBps: 160,
         action: 'aid',
         memberLoyalty: 18,
         loyalty: 3,
         satisfaction: 5,
         result:
-          'Actual support reaches {member}’s account. They keep their responsibility, and the payment remains visible in both sides of the records.',
+          'You pay {member} support. They put the key envelope down but leave the list of unpaid hours in front of you.',
         journal:
           'I paid {member} recorded support after their final warning about unpaid work.',
+        resultTitle: 'They keep the keys',
       },
       {
         id: 'change',
-        label: 'Relax the rule and acknowledge the work',
+        label: 'Drop the plain-living rule',
         action: 'relax',
         loyalty: -3,
         satisfaction: 8,
         memberLoyalty: 10,
         reputation: 3,
         result:
-          'The plain-living rule is removed. You acknowledge that financial hardship is not a qualification for doing the accounts.',
+          'You drop the rule and acknowledge the work. {member} asks you to remember this conversation before volunteering their evenings again.',
         journal:
           'I relaxed the plain-living rule after {member} challenged our expectation of unpaid work.',
+        resultTitle: 'Poverty is not the job',
       },
       {
         id: 'expel',
@@ -484,16 +513,17 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         satisfaction: -6,
         heat: 10,
         result:
-          'The treasurer is expelled. Their history, memories and possible future grievances remain, and followers leave with them.',
+          'You take the keys and expel {member}. Followers walk out with them. The accounts are now your problem.',
         journal:
           'I expelled {member} after their warning about unpaid treasury work.',
+        resultTitle: 'Find your own treasurer',
       },
     ],
   },
   {
     id: 'list-of-doubters',
     source: 'dramatic',
-    title: 'The List of Doubters',
+    title: 'They made a list',
     doctrine: 'outsider-tests',
     role: 'deputy',
     rarity: 'rare',
@@ -501,7 +531,7 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'destroy',
-        label: 'Reject the list and fund an open discussion',
+        label: 'Reject it and fund open questions',
         costBps: 60,
         loyalty: -4,
         satisfaction: 9,
@@ -509,26 +539,28 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         heat: -4,
         memberLoyalty: -5,
         result:
-          'The public accusation is stopped and an open discussion is actually funded. Your deputy dislikes losing that authority; ordinary members can ask a question without joining a list.',
+          "You reject the list and pay for an open discussion. {member} objects so fiercely that a follower points out they now qualify for their own list.",
         journal:
           'I rejected {member}’s list of doubters and funded an open discussion.',
+        resultTitle: 'Questions without a blacklist',
       },
       {
         id: 'challenge',
-        label: 'Make the deputy defend the list publicly',
+        label: 'Make them defend the list',
         action: 'humiliate',
         loyalty: 2,
         memberLoyalty: -25,
         ambition: 6,
         heat: 8,
         result:
-          'The list falls apart under questions. Your deputy remembers being made the public example and may tell their own version later.',
+          'You ask {member} to explain each name aloud. The accusations collapse. They have to stand there while the room hears it happen.',
         journal:
           'I publicly challenged {member} over their list of supposed doubters.',
+        resultTitle: 'Read the names back',
       },
       {
         id: 'back',
-        label: 'Back the deputy’s accusations',
+        label: 'Back the accusations',
         loyalty: 6,
         satisfaction: -12,
         growth: -24,
@@ -536,16 +568,17 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
         reputation: -9,
         memberLoyalty: 12,
         result:
-          'Devoted members applaud. Others leave the organisation, and the accusations create a public scandal.',
+          'You back the list. Devotees applaud while accused members leave. The story of your blacklist spreads outside the room.',
         journal:
           'I backed {member}’s accusations against followers who questioned us.',
+        resultTitle: 'Your congregation splits',
       },
     ],
   },
   {
     id: 'opening-deposit',
     source: 'dramatic',
-    title: 'The Deposit Has Cleared',
+    title: 'You promised food and revelation',
     need: 'headquarters',
     role: 'organiser',
     minFollowers: 100,
@@ -554,42 +587,45 @@ export const cultDramaticStories: readonly CultStoryDefinition[] = [
     choices: [
       {
         id: 'fund',
-        label: 'Fund a proper community celebration',
+        label: 'Pay for the full celebration',
         costBps: 700,
         loyalty: 5,
         satisfaction: 10,
         growth: 18,
         reputation: 5,
         result:
-          'The suppliers are actually paid from the communal treasury. A well-funded celebration brings new followers who pay their joining fees. There is no invented revelation.',
+          'You pay the suppliers and hold the celebration. New followers join. You let the food carry the part of the evening that promised a revelation.',
         journal:
           'I funded the large headquarters celebration after {member} advertised more than the budget covered.',
+        resultTitle: 'At least the food arrives',
       },
       {
         id: 'scale',
-        label: 'Scale it down and publish the budget',
+        label: 'Pay for a smaller event',
         costBps: 100,
         loyalty: -3,
         satisfaction: 4,
         reputation: 6,
         memberLoyalty: 4,
         result:
-          'A smaller real event is funded. Some guests are disappointed, but the budget can support what you actually offer.',
+          'You fund a smaller event and publish the budget. Guests grumble about the invitation, then ask what is still being served.',
         journal:
           'I scaled back the headquarters celebration and published what we could really afford.',
+        resultTitle: 'A smaller serving of destiny',
       },
       {
         id: 'blame',
-        label: 'Blame the organiser in the invitation update',
+        label: 'Blame the organiser in the update',
         action: 'humiliate',
         loyalty: -4,
         memberLoyalty: -24,
         heat: 12,
         reputation: -5,
         result:
-          'The promises are cancelled and your organiser gets the public blame. The people who received your invitations are not impressed by the distinction.',
+          'You cancel the promises and blame {member}. Guests ask why the invitation carried your name if none of it was your responsibility.',
         journal:
           'I publicly blamed {member} for the overpromised headquarters celebration.',
+        resultTitle: 'Your apology names someone else',
       },
     ],
   },

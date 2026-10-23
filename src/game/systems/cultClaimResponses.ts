@@ -202,12 +202,14 @@ export function applyCultClaimRemedy(
   world: World,
   cult: Cult,
   thread: CultThread,
+  boundLabel?: string,
 ) {
   const reason = cultClaimRemedyReason(world, cult, thread);
   if (reason) throw new IneligibleAction(reason);
   const remedy = cultClaimRemedies[thread.templateId as CultClaimId],
     member = witness(cult, thread),
-    cost = cultClaimRemedyCost(cult, thread);
+    cost = cultClaimRemedyCost(cult, thread),
+    label = boundLabel?.split(' · ')[0] ?? remedy.label;
   if (remedy.action === 'reimburse-witness')
     cultMemberPayment(
       world,
@@ -237,7 +239,7 @@ export function applyCultClaimRemedy(
       cult,
       cost,
       remedy.action === 'refund-dues' ? 'claim-refunds' : 'claim-remedy',
-      thread.title + ': ' + remedy.label,
+      thread.title + ': ' + label,
     );
   if (remedy.action === 'science-night')
     replaceDoctrine(cult, 'moon-lessons', 'leader-fallible');
@@ -307,7 +309,7 @@ export function applyCultClaimRemedy(
       'After the failed ' +
         thread.title.toLowerCase() +
         ' promise, the leader chose: ' +
-        remedy.label.toLowerCase() +
+        label.toLowerCase() +
         '.',
     );
 }

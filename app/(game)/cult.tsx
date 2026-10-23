@@ -135,7 +135,7 @@ function CultDashboard() {
   function choosePhilosophy() {
     dialog.select(
       'Choose a philosophy',
-      'Your philosophy affects recruitment, loyalty, donations and eligible stories.',
+      "Choose what you will preach. Your followers will expect you to mean it.",
       options(cultPhilosophies),
       (id) =>
         setConfig((value) => ({
@@ -150,7 +150,7 @@ function CultDashboard() {
       selected = config[kind];
     dialog.select(
       kind === 'doctrines' ? 'Choose a doctrine' : 'Choose a rule',
-      'Every selection changes how the organisation behaves.',
+      "Choose beliefs your followers will have to live with.",
       catalog
         .filter(
           (row) =>
@@ -201,7 +201,7 @@ function CultDashboard() {
   function titleOptions() {
     dialog.select(
       'Leader title',
-      'Use a title here, or type a custom title below.',
+      "Pick a title, or give yourself a better one.",
       cultLeaderTitles.map((label, i) => ({ id: String(i), label })),
       (id) =>
         setConfig((value) => ({
@@ -255,7 +255,7 @@ function CultDashboard() {
     if (!cult) return;
     dialog.select(
       'Recruit followers',
-      'Beliefs, fees, public image and heat affect who stays.',
+      "Give people a reason to join. Your fees and reputation may give them reasons not to.",
       cultRecruitment.map((row) => ({
         id: row.id,
         label:
@@ -288,7 +288,7 @@ function CultDashboard() {
     if (!cult) return;
     dialog.select(
       'Hold a ceremony',
-      'Costs, member satisfaction and public heat affect the gathering.',
+      "Choose a gathering. The treasury covers the cost.",
       cultCeremonies.map((row) => ({
         id: row.id,
         label:
@@ -321,7 +321,7 @@ function CultDashboard() {
     if (!cult) return;
     dialog.select(
       'Make a wild claim',
-      'One new claim each year. Promises return at their recorded deadlines.',
+      "Make one new claim each year. Your followers will remember the deadline.",
       cultClaims.map((row) => ({
         id: row.id,
         label: row.title + ' · due in ' + row.months + ' months',
@@ -336,11 +336,11 @@ function CultDashboard() {
             {
               id: 'double-down',
               label:
-                'Double down · stronger initial devotion, more public attention',
+                "Swear it will happen · more devotion and scrutiny",
             },
             {
               id: 'explain',
-              label: 'Explain cautiously · a smaller initial response',
+              label: "Leave room for doubt · a smaller initial response",
             },
             {
               id: 'viewing',
@@ -436,7 +436,7 @@ function CultDashboard() {
         if (action === 'assign') {
           dialog.select(
             'Assign responsibility',
-            'Replacing someone changes their loyalty and leaves a memory.',
+            "Choose who takes the job. Replacing someone can hurt their loyalty.",
             Object.entries(cultRoleTitles).map(([id, label]) => ({
               id,
               label,
@@ -490,7 +490,7 @@ function CultDashboard() {
             ? 'They may leave with supporters. Past grievances can return later.'
             : action === 'confront'
               ? 'Public humiliation can damage your relationship and return as an accusation.'
-              : 'This affects the real person and their memory of your leadership.',
+              : "They will remember how you treat them.",
           'followers',
           action === 'reward' ? [costRow(cult, cultRewardQuote(cult))] : [],
         );
@@ -539,7 +539,7 @@ function CultDashboard() {
         if (id === 'former') {
           dialog.select(
             'Former inner-circle members',
-            'Earlier roles, disputes and memories stay on record.',
+            "People who left, and how you parted.",
             former.map((row) => ({
               id: row.personId,
               label:
@@ -567,7 +567,7 @@ function CultDashboard() {
       quote = cultReplacementQuote(cult);
     dialog.select(
       'Fill an inner-circle vacancy',
-      'Offer a real local contact a responsibility. Up to two invitations each year.',
+      "Invite someone you know locally. You can make two invitations a year.",
       roles.map((role) => ({ id: role, label: cultRoleTitles[role] })),
       (id) => {
         const role = id as Cult['members'][number]['role'],
@@ -583,7 +583,7 @@ function CultDashboard() {
         }
         dialog.select(
           'Choose your ' + cultRoleTitles[role].toLowerCase(),
-          'Choose someone you already know. Their existing identity and memories stay with them.',
+          "Choose someone you know well enough to trust with the job.",
           candidates.map((person) => ({
             id: person.id,
             label:
@@ -806,7 +806,7 @@ function CultDashboard() {
     }
     dialog.select(
       'Rival organisations',
-      'Rivals retain their actual leaders and shared history.',
+      "Choose a rival to challenge, court or leave alone.",
       rivals.map((row) => ({
         id: row.id,
         label: row.name + ' · ' + row.followers + ' followers',
@@ -1093,9 +1093,9 @@ function CultDashboard() {
         ) : (
           <SocialBusinessIntro
             art={<CultArt size={78} />}
-            title="Start something people will remember"
+            title="Give them something to believe"
             eyebrow="Independent career"
-            body="Choose what you believe, find your people and remember what you promised."
+            body="Choose your beliefs, gather followers and try to stay ahead of your promises."
           />
         )}
         {cult && (
@@ -1272,7 +1272,7 @@ function CultDashboard() {
           <Card>
             <ActionRow
               title="Recruit Followers"
-              subtitle="Choose a method and pay its actual cost"
+              subtitle="Find your next converts"
               icon={<CultArt id="recruitment" />}
               disabled={busy}
               onPress={recruit}
@@ -1289,14 +1289,14 @@ function CultDashboard() {
                 review(
                   { type: 'cult-preach', cultId: cult.id },
                   'Address your followers?',
-                  'Speak about the group’s actual philosophy.',
+                  "Your followers are waiting to hear what you have to say.",
                   'philosophy',
                 )
               }
             />
             <ActionRow
               title="Hold Ceremony"
-              subtitle="Gatherings with real costs and outcomes"
+              subtitle="Give your followers a night to remember"
               icon={<CultArt id="ceremony" />}
               disabled={busy}
               onPress={ceremony}
@@ -1325,7 +1325,7 @@ function CultDashboard() {
             />
             <ActionRow
               title="Manage Followers"
-              subtitle="Your inner circle remembers your decisions"
+              subtitle="Meet the people closest to you"
               icon={<CultArt id="followers" />}
               disabled={busy}
               onPress={followers}
@@ -1356,7 +1356,7 @@ function CultDashboard() {
             />
             <ActionRow
               title="Public Criticism"
-              subtitle="Respond without erasing history"
+              subtitle="Face the questions people are asking"
               icon={<CultArt id="scandal" />}
               disabled={busy}
               onPress={recovery}
@@ -1403,7 +1403,7 @@ function CultDashboard() {
           <Card>
             <ActionRow
               title="Disband Cult"
-              subtitle="Settle communal funds and preserve the history"
+              subtitle="Close the doors and settle the treasury"
               disabled={busy}
               onPress={() =>
                 review(

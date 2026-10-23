@@ -14,8 +14,11 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { inflateSync } from 'node:zlib';
+import writingFixture from '../fixtures/v48-cult-writing-before.json';
+import { refreshCultWritingOffer } from '../support/cultWriting';
 import { createGameStore } from '../../src/state/gameStore';
-import { encodeWorld, validateWorld, type World } from '../../src/game/model';
+import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { fullName } from '../../src/game/personHelpers';
 import { accountFor } from '../../src/game/systems/common';
@@ -270,7 +273,7 @@ async function review(
   if (action === 'claim') {
     await press(/^Make a Wild Claim\./);
     await select(/^A Green Moon/);
-    await select(/^Explain cautiously/);
+    await select(/^Leave room for doubt/);
     return {
       title: 'Make this promise?',
       command: {
@@ -861,4 +864,34 @@ test('stored annual reports show recorded loyalty and reputation changes with le
   } finally {
     context.close();
   }
+});
+
+test.each([
+  ['second-microphone', 'expel', false], ['second-microphone', 'expel', true],
+  ['activity-street-question', 'answer', false], ['activity-street-question', 'answer', true],
+  ['green-moon', 'admit', false], ['green-moon', 'admit', true],
+] as const)('%s / %s reads in the real popup and cold-resumes its exact payoff (dark=%s)', async (id, choiceId, dark) => {
+  const data = JSON.parse(inflateSync(Buffer.from(writingFixture.data, 'base64')).toString()) as { contexts: { id: string; world: unknown }[] };
+  const initial = refreshCultWritingOffer(decodeWorld(JSON.stringify(data.contexts.find(row => row.id === id)!.world)), id);
+  const context = await setup(initial);
+  try {
+    jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: dark ? 320 : 390, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
+    const event = initial.pending;
+    if (event?.kind !== 'decision') throw Error('Expected new cult writing');
+    const choice = event.choices.find(row => row.id === choiceId)!;
+    const suffix = dark ? 'dark-large' : 'light';
+    let view = render(frame(false, dark));
+    expect(screen.getByText(displayText(event.body))).toBeOnTheScreen();
+    capture('cult-writing-' + id + '-decision-' + suffix, view.toJSON());
+    await press(displayText(choice.label));
+    expect(world()).toEqual(resolveCommand(initial, { type: 'choose', eventId: event.id, choiceId }, true));
+    expect(screen.getByText(displayText(choice.resultBody))).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeOnTheScreen();
+    capture('cult-writing-' + id + '-result-' + suffix, view.toJSON());
+    const saved = encodeWorld(world()), rows = context.rows(); view.unmount();
+    await context.cold(); view = render(frame(false, dark));
+    expect(encodeWorld(world())).toBe(saved); expect(context.rows()).toEqual(rows);
+    expect(screen.getByText(displayText(choice.resultBody))).toBeOnTheScreen();
+    await press('Continue'); expect(world().pending).toBeNull(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
 });
