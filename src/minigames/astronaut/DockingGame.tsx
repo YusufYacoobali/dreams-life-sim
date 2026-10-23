@@ -1,5 +1,5 @@
-import React, { useEffect, useId, useState } from 'react';
-import { Platform, Text, View } from 'react-native';
+import React, { useEffect, useId, useRef, useState } from 'react';
+import { Platform, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Svg, {
   Circle,
   G,
@@ -35,6 +35,7 @@ export function DockingGame({
   clock,
   enabled,
   reducedMotion,
+  controlsVisible = true,
   onInput,
   onFinished,
 }: {
@@ -42,10 +43,13 @@ export function DockingGame({
   clock: SharedValue<number>;
   enabled: boolean;
   reducedMotion: boolean;
-  onInput: (action: MiniGameAction, at: number) => void;
+  controlsVisible?: boolean;
+  onInput: (action: MiniGameAction, at: number) => boolean | void;
   onFinished: (at: number) => void;
 }) {
-  const id = useId().replace(/:/g, ''),
+  const { fontScale } = useWindowDimensions(),
+    interaction = useRef({ enabled, onInput, sessionId: session.id }),
+    id = useId().replace(/:/g, ''),
     base = useSharedValue(initialDocking(session.seed, session.difficulty)),
     fired = useSharedValue(false),
     flare = useSharedValue(-1000),
@@ -59,6 +63,11 @@ export function DockingGame({
       range: 58,
       drift: 'steady',
     });
+  interaction.current = { enabled, onInput, sessionId: session.id };
+  useEffect(() => {
+    interaction.current.enabled = enabled;
+    return () => { interaction.current.enabled = false; };
+  }, []);
   useEffect(() => {
     const state = dockingState(session, session.inputs, session.elapsedMs);
     if (state.at >= base.value.at) base.value = state;
@@ -141,6 +150,7 @@ export function DockingGame({
     [current, fired, clock, onFinished, capture, reducedMotion],
   );
   const pulse = (direction: 'left' | 'right' | 'up' | 'down' | 'coast') => {
+    if (!interaction.current.enabled || interaction.current.sessionId !== session.id) return;
     const at = Math.round(
         session.assisted
           ? Math.min(14000, session.elapsedMs + 400)
@@ -151,6 +161,9 @@ export function DockingGame({
       onFinished(at);
       return;
     }
+    // The screen accepts one durable input at a time, before optimistic visuals.
+    // A rapid/stale native callback must not spend fuel without a saved input.
+    if (interaction.current.onInput({ type: 'thrust', direction }, at) === false) return;
     base.value = thrustDocking(state, direction);
     flare.value = direction === 'coast' ? -1000 : at;
     flareAngle.value =
@@ -161,11 +174,10 @@ export function DockingGame({
           : direction === 'down'
             ? 180
             : 0;
-    onInput({ type: 'thrust', direction }, at);
   };
   return (
     <>
-      <SceneCanvas controlsHeight={220}>
+      <SceneCanvas controlsHeight={376}>
         <Svg
           width="100%"
           height="100%"
@@ -227,72 +239,114 @@ export function DockingGame({
           </MovingGroup>
         </Svg>
       </SceneCanvas>
-      <View style={s.controls}>
-        <Text style={s.controlTitle}>
-          Align with the port. Brake before contact.
-        </Text>
-        <View style={[s.row, { justifyContent: 'space-between' }]}>
-          <Text style={s.muted}>Fuel {telemetry.fuel}%</Text>
-          <Text style={s.muted}>Speed {telemetry.speed} · safe ≤10</Text>
-          <Text style={s.muted}>
+      <View style={[styles.telemetry, !controlsVisible && { opacity: 0 }]}>
+          <Text style={styles.readout}>Fuel {telemetry.fuel}%</Text>
+          <Text style={styles.readout}>Speed {telemetry.speed} · safe ≤10</Text>
+          <Text style={styles.readout}>
             {telemetry.side} {telemetry.alignment}%
           </Text>
-        </View>
-        <View
-          style={{ height: 3, backgroundColor: '#20374C', borderRadius: 3 }}
-        >
-          <View
-            style={{
-              width: `${telemetry.fuel}%`,
-              height: 3,
-              backgroundColor: telemetry.fuel > 20 ? c.blue : c.red,
-            }}
-          />
-        </View>
-        <View style={s.row}>
+      </View>
+      <View style={[s.controls, { gap: 8, paddingTop: 12 }, !controlsVisible && { opacity: 0 }]}>
+        <View accessible={false} style={styles.handle} />
+        <Text style={s.controlTitle}>Line up. Tap down to brake.</Text>
+        <View style={styles.disc} testID="docking-control-disc">
           <GameButton
             label="←"
+            icon="left"
             accessibilityLabel="Thrust left"
             secondary
+            round
+            size={64}
+            style={[styles.direction, styles.left]}
+            textStyle={styles.arrow}
             disabled={!enabled}
             onPress={() => pulse('left')}
           />
           <GameButton
             label="↑"
+            icon="up"
             accessibilityLabel="Thrust up"
             secondary
+            round
+            size={64}
+            style={[styles.direction, styles.up]}
+            textStyle={styles.arrow}
             disabled={!enabled}
             onPress={() => pulse('up')}
           />
           <GameButton
-            label="↓ Brake"
+            label="↓"
+            icon="down"
             accessibilityLabel="Thrust down to brake"
+            secondary
+            round
+            size={64}
+            style={[styles.direction, styles.down]}
+            textStyle={styles.arrow}
             disabled={!enabled}
             onPress={() => pulse('down')}
           />
           <GameButton
             label="→"
+            icon="right"
             accessibilityLabel="Thrust right"
             secondary
+            round
+            size={64}
+            style={[styles.direction, styles.right]}
+            textStyle={styles.arrow}
             disabled={!enabled}
             onPress={() => pulse('right')}
           />
-          {session.assisted && (
             <GameButton
               label="Coast"
-              secondary
+              accessibilityHint={session.assisted ? 'Advance 0.4 seconds without thrust' : 'Keep drifting without thrust'}
+              round
+              size={fontScale > 1.3 ? 88 : 80}
+              style={{ position: 'absolute', left: fontScale > 1.3 ? 76 : 80, top: fontScale > 1.3 ? 76 : 80 }}
               disabled={!enabled}
               onPress={() => pulse('coast')}
             />
-          )}
         </View>
-        <Text style={s.muted}>
+        <Text style={[s.muted, { textAlign: 'center' }]}>
           Range {telemetry.range}% · Drift {telemetry.drift}
           {session.assisted
             ? ' · Each tap advances 0.4 seconds'
-            : ' · Tap for short thruster bursts'}
+            : ''}
         </Text>
       </View>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  telemetry: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    columnGap: 16,
+    rowGap: 4,
+    paddingHorizontal: 18,
+    paddingBottom: 12,
+  },
+  readout: { color: '#F4F8FF', fontSize: 12, fontVariant: ['tabular-nums'] },
+  handle: { width: 40, height: 4, borderRadius: 2, backgroundColor: '#C9CDD4', alignSelf: 'center', marginBottom: 4 },
+  disc: { width: 240, height: 240, borderRadius: 120, alignSelf: 'center', backgroundColor: '#EAF0F766' },
+  direction: {
+    position: 'absolute',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#D6E3F3',
+    shadowColor: '#183B63',
+    shadowOpacity: 0.12,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 2,
+  },
+  arrow: { color: '#101B43' },
+  up: { left: 88, top: 8 },
+  left: { left: 8, top: 88 },
+  right: { right: 8, top: 88 },
+  down: { left: 88, bottom: 8 },
+});

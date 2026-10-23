@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Svg, { Path } from 'react-native-svg';
 import { evaluateSession } from '../core/evaluation';
 import { consequenceText } from '../core/scoring';
 import type { MiniGameSession } from '../core/types';
@@ -43,13 +44,23 @@ export function MiniGameResult({
       accessibilityViewIsModal
     >
       <ScrollView
-        style={{ width: '100%', maxWidth: 460, maxHeight: '75%', flexGrow: 0 }}
+        style={{ width: '100%', maxWidth: 460, maxHeight: '90%', flexGrow: 0 }}
         contentContainerStyle={[
           s.card,
-          { gap: 10, backgroundColor: '#091829F5' },
+          { gap: 14 },
         ]}
       >
-        <Text style={s.eyebrow}>
+        <View accessible={false} style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: '#C9CDD4', alignSelf: 'center' }} />
+        {saved && score >= 60 && (
+          <View style={[s.row, { gap: 18 }]} accessible={false}>
+            {[24, 32, 24].map((size, index) => (
+              <Svg key={index} width={size} height={size} viewBox="0 0 24 24" accessible={false}>
+                <Path d="m12 1 3.2 6.5 7.2 1-5.2 5.1 1.2 7.2L12 17.4l-6.4 3.4 1.2-7.2-5.2-5.1 7.2-1Z" fill="#E6AF35" />
+              </Svg>
+            ))}
+          </View>
+        )}
+        <Text style={[s.eyebrow, { textAlign: 'center' }]}>
           {practice
             ? 'PRACTICE RESULT'
             : saved
@@ -61,7 +72,7 @@ export function MiniGameResult({
         <Text
           accessibilityRole="header"
           accessibilityLiveRegion="polite"
-          style={[s.title, { fontSize: 28 }]}
+          style={[s.title, { fontSize: 30, textAlign: 'center' }]}
         >
           {session.status === 'forfeited'
             ? 'Forfeited'
@@ -77,7 +88,7 @@ export function MiniGameResult({
                       : 'Missed!'
                 : session.kind === 'crime'
                   ? score >= 30
-                    ? 'Safe opened'
+                    ? 'Cracked it!'
                     : 'Safe locked'
                   : score >= 60
                     ? 'Docked!'
@@ -85,22 +96,22 @@ export function MiniGameResult({
                       ? 'Rough docking'
                       : 'Approach aborted'}
         </Text>
-        <Text style={{ color: c.blue, fontSize: 30, fontWeight: '800' }}>
+        <Text accessibilityLabel={'Score ' + score + ' out of 100'} style={{ color: c.action, fontSize: 44, fontWeight: '800', textAlign: 'center' }}>
           {score}
-          <Text style={{ fontSize: 15 }}> / 100</Text>
+          <Text style={{ color: c.ink, fontSize: 20 }}> / 100</Text>
         </Text>
-        <Text style={s.text}>
+        <Text style={[s.text, { textAlign: 'center' }]}>
           {session.status === 'forfeited'
             ? 'This attempt has been used.'
             : result.detail}
         </Text>
-        <Text style={s.muted}>
+        <Text style={[s.muted, { textAlign: 'center' }]}>
           {practice
-            ? 'Practice only. No saved life, money, skills or records are changed.'
+            ? 'Practice round. Your saved life stays unchanged.'
             : consequenceText(session.kind, score)}
         </Text>
         {error && (
-          <Text accessibilityRole="alert" style={[s.text, { color: c.red }]}>
+          <Text accessibilityRole="alert" style={[s.text, { color: '#B12E43' }]}>
             {error}
           </Text>
         )}
@@ -119,6 +130,7 @@ export function MiniGameResult({
         {practice && onRestart && (
           <GameButton
             label="Play again"
+            secondary
             disabled={saving}
             onPress={onRestart}
           />

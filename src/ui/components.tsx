@@ -9,8 +9,10 @@ import { radii, spacing, ThemedStatusBar, useColors } from './theme';
 import { CharacterPortrait } from '../assets/CharacterPortrait';
 import { useDelayedBusy } from './useDelayedBusy';
 import { useFeedbackPress } from './feedback';
+import { useGame } from '../state/useGame';
+import { hasLegacyAutomaticAppearance, legacyNPCDefaultGender } from '../game/appearance';
 
-export function Page({ children, scroll = true, bottomSafeArea = false, footer }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode }>) {
+export function Page({ children, scroll = true, bottomSafeArea = false, footer, fillBody = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode; fillBody?: boolean }>) {
   const c = useColors();
   // Inspect only the direct first child; leave nested lists and their keys intact.
   const first = Array.isArray(children) ? children[0] : children;
@@ -22,7 +24,7 @@ export function Page({ children, scroll = true, bottomSafeArea = false, footer }
       {header && <View style={[styles.pageHeader, { backgroundColor: c.background }]}>{header}</View>}
       <KeyboardAvoidingView style={styles.pageBody} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         {scroll ? <ScrollView style={styles.pageBody} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">{body}</ScrollView>
-          : <View style={[styles.content, footer ? styles.pageBody : undefined]}>{body}</View>}
+          : <View style={[styles.content, fillBody || footer ? styles.pageBody : undefined]}>{body}</View>}
         {footer && <View style={[styles.footer, { backgroundColor: c.background, borderTopColor: c.line }]}>{footer}</View>}
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -159,7 +161,17 @@ export function StatBar({ label, value, color, icon }: { label: string; value: n
   );
 }
 
-export const Portrait = CharacterPortrait;
+export function Portrait(props: React.ComponentProps<typeof CharacterPortrait>) {
+  // Manual previews and explicit saved artwork need no game-store subscription.
+  if (!props.personId || !hasLegacyAutomaticAppearance(props.appearance,props.personId)) return <CharacterPortrait {...props} />;
+  return <LegacyNPCPortrait {...props} />;
+}
+function LegacyNPCPortrait(props: React.ComponentProps<typeof CharacterPortrait>) {
+  // Select a stable scalar. Unchanged save copies do not re-render a portrait
+  // merely because the World/Person objects acquired new references.
+  const legacyDefaultGender = useGame(state => legacyNPCDefaultGender(state.world,props.personId,props.appearance));
+  return <CharacterPortrait {...props} legacyDefaultGender={props.legacyDefaultGender ?? legacyDefaultGender} />;
+}
 
 const styles = StyleSheet.create({
   page: { flex: 1 },

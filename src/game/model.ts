@@ -98,7 +98,12 @@ export const personSchema = z.object({
   nationality: z.enum(countryCodes), country: z.enum(countryCodes), city: z.string().min(1).max(80),
   born: dateSchema, died: dateSchema.nullable(), causeOfDeath: z.string().max(300).nullable(),
   stats: statsSchema,
-  appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4), identity: z.number().int().min(0).max(15).optional(), outfit: z.number().int().min(0).max(15).optional() }),
+  appearance: z.object({ face: z.number().int().min(0).max(3), skin: z.number().int().min(0).max(5), hair: z.number().int().min(0).max(7), hairColor: z.number().int().min(0).max(4), identity: z.number().int().min(0).max(15).optional(), outfit: z.number().int().min(0).max(15).optional(),
+    provenance: z.discriminatedUnion('kind', [
+      z.object({ kind:z.literal('automatic'),version:z.literal(1),presentation:z.enum(['masculine','feminine','neutral']),fingerprint:z.string().min(1).max(96) }),
+      z.object({ kind:z.literal('custom') }),
+    ]).optional(),
+  }),
   traits: z.array(z.enum(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'])).max(3),
   education: educationSchema, employment: employmentSchema.nullable(), finance: financeSchema,
   biology: biologySchema, attractedTo: z.array(z.enum(genders)).min(1).max(3), wantsChildren: z.boolean(), householdId: z.string().nullable(), lastEconomicMonth: z.number().int(),
@@ -115,7 +120,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(44), engineVersion: z.literal(46), contentVersion: z.literal(23),
+  schemaVersion: z.literal(45), engineVersion: z.literal(47), contentVersion: z.literal(24),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -668,6 +673,11 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
     if (!Array.isArray(parsed.miniGames)) throw new Error('Mini-game save is missing its session history');
     parsed.schemaVersion = 44; parsed.engineVersion = 46; parsed.contentVersion = 23;
     parsed.rentalLeases = []; parsed.personSupportRequests = []; parsed.personActionHistory = [];
+  }
+  // Expanded ordinary jobs and suitable generated artwork start prospectively.
+  // Never rewrite existing employment, artwork choices or mini-game difficulty.
+  if (parsed && parsed.schemaVersion === 44 && parsed.engineVersion === 46 && parsed.contentVersion === 23) {
+    parsed.schemaVersion = 45; parsed.engineVersion = 47; parsed.contentVersion = 24;
   }
   return validateWorld(parsed, immutable);
 }

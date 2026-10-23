@@ -9,7 +9,9 @@ const root = path.resolve(__dirname, '..'),
   tool = createRequire(path.join(toolRoot, 'package.json'));
 const esbuild = tool('esbuild'),
   { chromium } = tool('playwright'),
-  output = path.resolve(process.argv[2] || '/tmp/dreams-minigame-review');
+  output = path.resolve(process.argv[2] || '/tmp/dreams-minigame-review'),
+  appearance = process.env.DREAMS_REVIEW_APPEARANCE === 'light' ? 'light' : 'dark',
+  fontScale = Math.max(1, Number(process.env.DREAMS_REVIEW_FONT_SCALE) || 1);
 fs.mkdirSync(output, { recursive: true });
 (async () => {
   await esbuild.build({
@@ -25,6 +27,7 @@ fs.mkdirSync(output, { recursive: true });
       'process.env.NODE_ENV': '"development"',
       __DEV__: 'true',
       'process.env.EXPO_OS': '"web"',
+      'process.env.DREAMS_REVIEW_APPEARANCE': JSON.stringify(appearance),
     },
     resolveExtensions: [
       '.web.tsx',
@@ -38,7 +41,6 @@ fs.mkdirSync(output, { recursive: true });
       '.json',
     ],
     alias: {
-      'react-native': path.join(toolRoot, 'node_modules/react-native-web'),
       react: path.join(root, 'node_modules/react'),
       'react-dom': path.join(root, 'node_modules/react-dom'),
       'lottie-web': tool.resolve('lottie-web'),
@@ -51,6 +53,8 @@ fs.mkdirSync(output, { recursive: true });
       {
         name: 'isolated-internal-playground',
         setup(build) {
+          build.onResolve({ filter: /^react-native$/ }, () => ({ path: 'native', namespace: 'review' }));
+          build.onResolve({ filter: /components\/MiniGameScreen$/ }, () => ({ path: 'game-screen', namespace: 'review' }));
           build.onResolve({ filter: /ui\/GodModeAccess$/ }, () => ({
             path: 'access',
             namespace: 'review',
@@ -71,13 +75,31 @@ fs.mkdirSync(output, { recursive: true });
             { filter: /.*/, namespace: 'review' },
             ({ path: name }) => ({
               contents:
-                name === 'access'
+                name === 'native'
+                  ? `import React from ${JSON.stringify(path.join(root, 'node_modules/react'))};
+                     import * as Native from ${JSON.stringify(tool.resolve('react-native-web'))};
+                     export * from ${JSON.stringify(tool.resolve('react-native-web'))};
+                     export const useWindowDimensions=()=>({...Native.useWindowDimensions(),fontScale:${fontScale}});
+                     export const Text=React.forwardRef((props,ref)=>{
+                       const style=Native.StyleSheet.flatten(props.style)||{};
+                       const scale=props.allowFontScaling===false?1:${fontScale};
+                       return React.createElement(Native.Text,{...props,ref,style:[props.style,{
+                         ...(typeof style.fontSize==='number'?{fontSize:style.fontSize*scale}:{}),
+                         ...(typeof style.lineHeight==='number'?{lineHeight:style.lineHeight*scale}:{})
+                       }]});
+                     });`
+                  : name === 'game-screen'
+                    ? `import React,{useEffect} from ${JSON.stringify(path.join(root, 'node_modules/react'))};
+                       import {MiniGameScreen as Actual} from ${JSON.stringify(path.join(root,'src/minigames/components/MiniGameScreen.tsx'))};
+                       export function MiniGameScreen(props){useEffect(()=>{globalThis.__dreamsReviewSession=props.session;},[props.session]);return React.createElement(Actual,props);}`
+                  : name === 'access'
                   ? 'export const useGodModeAccess=()=>true;'
                   : name === 'preferences'
                     ? 'export const usePreferences=select=>select({ready:true,loadFailed:false,settings:{soundEffects:false,reducedMotion:false}});'
                     : name === 'router'
                       ? 'import {useEffect} from "react";export const useFocusEffect=callback=>useEffect(callback,[callback]);export const router={back(){},push(){},replace(){},navigate(){}};'
                       : 'export class AsyncLocalStorage { constructor(){throw Error("Server context is unavailable in browser review")} }',
+              resolveDir: root,
             }),
           );
         },
@@ -123,6 +145,9 @@ fs.mkdirSync(output, { recursive: true });
         'Chromium/react-native-web; real gameplay components, practice state only',
       nativeDevice: false,
       viewport: process.env.DREAMS_REVIEW_VIEWPORT || '400x900',
+      appearance,
+      fontScale,
+      fontScaleModel: 'Native Text size/line-height and useWindowDimensions modeled for browser review; not a native-device accessibility claim',
       scenarios: [],
     };
   try {
@@ -133,12 +158,14 @@ fs.mkdirSync(output, { recursive: true });
       });
     page.on('pageerror', (error) => errors.push(String(error)));
     const url = 'http://127.0.0.1:' + server.address().port;
+    const session = () => page.evaluate(() => globalThis.__dreamsReviewSession);
     for (const [kind, title] of Object.entries({
       sports: 'Clutch Shot',
       crime: 'Safe Cracker',
       astronaut: 'Orbital Docking',
     })) {
       await page.goto(url);
+      if (await page.getByRole('radio').count()) throw Error('The playground must not expose a difficulty selector');
       await page.getByText(title, { exact: true }).click();
       await page.getByRole('button', { name: 'Play', exact: true }).waitFor();
       const toggle = page.getByRole('switch', { name: 'Assisted controls' });
@@ -148,6 +175,7 @@ fs.mkdirSync(output, { recursive: true });
       });
       await page.getByRole('button', { name: 'Play', exact: true }).click();
       await page.waitForTimeout(1100);
+      if (await page.getByText(/LEVEL \d|Difficulty \d/).count()) throw Error('Gameplay must not show a difficulty level');
       if (kind === 'sports') {
         const box = await page.locator('svg[viewBox="0 0 400 560"]').boundingBox();
         const scale = Math.min(box.width / 400, box.height / 560),
@@ -159,6 +187,17 @@ fs.mkdirSync(output, { recursive: true });
         await page.mouse.up();
       }
       await page.screenshot({ path: path.join(output, kind + '-playing.png') });
+      let dockingGeometry;
+      if (kind === 'astronaut') {
+        dockingGeometry = await page.getByTestId('docking-control-disc').evaluate(el => {
+          const disc=el.getBoundingClientRect();
+          return {disc:{x:disc.x,y:disc.y,width:disc.width,height:disc.height},buttons:Array.from(el.querySelectorAll('[role="button"]')).map(button=>{
+            const box=button.getBoundingClientRect();return {label:button.getAttribute('aria-label'),x:box.x,y:box.y,width:box.width,height:box.height,radius:getComputedStyle(button).borderRadius};
+          })};
+        });
+        if (dockingGeometry.buttons.length!==5 || dockingGeometry.buttons.some(button=>button.width<48 || button.height<48 || button.width!==button.height || parseFloat(button.radius)!==button.width/2)) throw Error('Docking requires five circular 48dp+ controls');
+        await page.getByRole('button',{name:'Coast',exact:true}).click();
+      }
       if (kind === 'sports') {
         await page.getByRole('button', { name: 'Set aim', exact: true }).click();
         await page.waitForFunction(
@@ -238,8 +277,49 @@ fs.mkdirSync(output, { recursive: true });
         result: (await page.locator('body').innerText())
           .split('PRACTICE RESULT')[1]
           ?.slice(0, 240),
+        session: await session(),
+        ...(dockingGeometry?{dockingGeometry}:{}),
       });
+      const finished = await session();
+      if (finished?.status!=='completed' || finished.difficulty!==3 || !finished.inputs.length) throw Error('An actual fixed-difficulty typed-input result was not completed: '+kind);
+      if (kind === 'astronaut' && (!finished.inputs.some(input=>input.action.direction==='coast') || !finished.inputs.some(input=>['left','right'].includes(input.action.direction)))) throw Error('Circular docking controls did not produce both coast and directional inputs');
     }
+    await page.goto(url);
+    await page.getByText('Safe Cracker', { exact: true }).click();
+    const assisted = page.getByRole('switch', { name: 'Assisted controls' });
+    if (!(await assisted.isChecked())) await assisted.check();
+    await page.getByRole('button', { name: 'Play', exact: true }).click();
+    await page.waitForTimeout(1100);
+    const firstAttempt = await session(),
+      target = +((await page.getByText(/^Target \d+°/).textContent()).match(/Target (\d+)/)[1]),
+      wrongAngle = Math.round(((target + 180) % 360) / 10) * 10 % 360;
+    for (let turn = 0; turn < wrongAngle / 10; turn++)
+      await page.getByRole('button', { name: 'Turn dial right ten degrees', exact: true }).click();
+    for (let mistake = 0; mistake < 3; mistake++) {
+      await page.getByRole('button', { name: 'Lock alignment', exact: true }).click();
+      await page.waitForTimeout(80);
+    }
+    await page.getByText('PRACTICE RESULT', { exact: true }).waitFor({ timeout: 10000 });
+    const failed = await session();
+    if (failed.status!=='completed' || failed.score!==0 || failed.inputs.length!==3) throw Error('Three actual incorrect inputs must trigger the alarm');
+    await page.screenshot({ path: path.join(output, 'crime-failure.png') });
+    await page.getByRole('button', { name: 'Play again', exact: true }).click();
+    await page.waitForTimeout(1100);
+    const replay = await session();
+    if (replay.id===firstAttempt.id || replay.seed===firstAttempt.seed || replay.difficulty!==3 || replay.inputs.length) throw Error('Practice replay must start a distinct clean level-3 attempt');
+    await page.getByRole('button', { name: 'Pause', exact: true }).click();
+    await page.getByRole('button', { name: 'Resume', exact: true }).waitFor();
+    await page.screenshot({ path: path.join(output, 'crime-paused.png') });
+    await page.getByRole('button', { name: 'Resume', exact: true }).click();
+    await page.getByRole('button', { name: 'Lock alignment', exact: true }).click();
+    await page.getByRole('button', { name: 'Pause', exact: true }).click();
+    await page.getByRole('button', { name: 'Forfeit attempt', exact: true }).click();
+    await page.getByRole('button', { name: 'Confirm forfeit', exact: true }).click();
+    await page.getByText('Forfeited', { exact: true }).waitFor();
+    const forfeited = await session();
+    if (forfeited.status!=='forfeited' || forfeited.score!==0 || forfeited.inputs.length!==1) throw Error('Forfeit must retain the actual practice transcript');
+    await page.screenshot({ path: path.join(output, 'crime-forfeited.png') });
+    report.failureAndReplay = { failed, replay, forfeited, pausedAndResumed: true, scope: 'Actual isolated practice state. Durable save/retry behavior is covered separately by SQLite/UI regression suites.' };
     await page.goto(url + '/?motion=reduce');
     await page.getByText('Clutch Shot', { exact: true }).click();
     report.reducedMotion = {

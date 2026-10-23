@@ -8,9 +8,7 @@ import { loanOfferReason, pendingPersonLoanOffers, supportAmountOptions, support
 import { relationFor } from '../game/systems/relationships';
 import { formatMoney } from '../game/money';
 import { useGame } from '../state/useGame';
-import { FamilyArt } from '../assets/FamilyArt';
-import { Illustration } from '../assets/Illustration';
-import { PolishArt } from '../assets/PolishArt';
+import { PersonActionArt } from '../assets/PersonActionArt';
 import { ActionRow, Body, Button, Heading } from './components';
 import { EventModal, type EventPresentation } from './EventModal';
 import { useColors } from './theme';
@@ -46,7 +44,7 @@ export function usePersonInteractions(world: World, personId: string, blocked = 
     } finally { submitting.current = false; }
   };
   const actionRow = (option: typeof options[number]) => <ActionRow key={option.id} title={option.label} subtitle={option.subtitle}
-    icon={option.id === 'request-gift' ? <FamilyArt id="gift" size={40} /> : option.id === 'praise' ? <PolishArt id="life-star" size={40} /> : <FamilyArt id="conversation" size={40} />}
+    icon={<PersonActionArt id={option.id} size={40} />}
     disabled={disabled} disabledReason={option.disabledReason} onPress={() => {
       if (disabled || submitting.current || personActionReason(worldRef.current, personId, option.id)) return;
       if (option.id === 'insult' || option.id === 'distance' || option.id === 'scold') setReview({ kind: 'action', action: option.id, context });
@@ -61,7 +59,7 @@ export function usePersonInteractions(world: World, personId: string, blocked = 
       if (!amounts.length) continue;
       moneyRows.push(<ActionRow key={'request-' + request} title={request === 'money' ? 'Ask for Money' : 'Ask for a Loan'}
         subtitle={request === 'money' ? 'Choose an amount and ask for help' : 'Interest-free · Repay when you can'}
-        icon={<Illustration id="money" size={40} />} disabled={disabled} disabledReason={supportRequestReason(world, personId, request)}
+        icon={<PersonActionArt id={request==='money'?'ask-money':'ask-loan'} size={40} />} disabled={disabled} disabledReason={supportRequestReason(world, personId, request)}
         onPress={() => { if (!disabled && !submitting.current && !supportRequestReason(worldRef.current, personId, request)) setReview({ kind: 'support', request, options: amounts, context }); }} />);
     }
     for (const offer of pendingPersonLoanOffers(world, personId)) {
@@ -69,27 +67,27 @@ export function usePersonInteractions(world: World, personId: string, blocked = 
       moneyRows.push(<View key={offer.id} style={{ borderColor: c.line, borderWidth: 1, borderRadius: 12, padding: 14, gap: 10 }}>
         <Heading size={17}>Loan offer from {target.firstName}</Heading>
         <Body>{formatMoney({ minor: offer.offered, currency: offer.currency })} · Interest-free · Repay when you can</Body>
-        <Body muted>Accepting creates a debt to {target.firstName}.</Body>
+        <Body muted>You owe this money back only if you accept.</Body>
         {reason && <Body muted>{reason}</Body>}
-        <Button label="Accept Loan" disabled={disabled || !!reason} onPress={() => void run({ type: 'respond-person-loan', lifeId: world.id, actorId: world.activePersonId, requestId: offer.id, accept: true })} />
-        <Button label="Decline Loan" tone="secondary" disabled={disabled} onPress={() => void run({ type: 'respond-person-loan', lifeId: world.id, actorId: world.activePersonId, requestId: offer.id, accept: false })} />
+        <View style={{flexDirection:'row',alignItems:'center',gap:10}}><PersonActionArt id="accept-loan" size={32} /><View style={{flex:1,minWidth:0}}><Button label="Accept Loan" disabled={disabled || !!reason} onPress={() => void run({ type: 'respond-person-loan', lifeId: world.id, actorId: world.activePersonId, requestId: offer.id, accept: true })} /></View></View>
+        <View style={{flexDirection:'row',alignItems:'center',gap:10}}><PersonActionArt id="decline-loan" size={32} /><View style={{flex:1,minWidth:0}}><Button label="Decline Loan" tone="secondary" disabled={disabled} onPress={() => void run({ type: 'respond-person-loan', lifeId: world.id, actorId: world.activePersonId, requestId: offer.id, accept: false })} /></View></View>
       </View>);
     }
     const debts = world.liabilities.filter(debt => debt.ownerId === world.activePersonId && debt.kind === 'personal' && debt.creditorId === personId && debt.principal > 0n);
     for (const debt of debts) moneyRows.push(<ActionRow key={debt.id} title={'Loan from ' + target.firstName}
       subtitle={formatMoney({ minor: debt.principal, currency: debt.currency }) + ' left to repay · ' + (debt.interestBps ? debt.interestBps / 100 + '% annual interest' : 'Interest-free')}
-      value="Repay" icon={<Illustration id="money" size={40} />} onPress={() => router.push('/bank')} />);
+      value="Repay" icon={<PersonActionArt id="repay-loan" size={40} />} onPress={() => router.push('/bank')} />);
   }
   let event: EventPresentation | null = null;
   if (shown?.kind === 'support' && target) event = {
-    id: 'person-support:' + shown.request + ':' + context, kind: 'selection',
+    id: 'person-support:' + shown.request + ':' + context, kind: 'selection', illustration:'person-action:'+(shown.request==='money'?'ask-money':'ask-loan'),
     title: (shown.request === 'money' ? 'Ask ' : 'Borrow from ') + target.firstName + (shown.request === 'money' ? ' for money' : ''),
     body: shown.request === 'money' ? 'They can give, offer less, offer a loan or say no.' : 'Ask for an interest-free loan. You choose whether to accept any offer.',
     confirmLabel: shown.request === 'money' ? 'Ask for Money' : 'Ask for a Loan',
     choices: shown.options.map(option => ({ id: option.id, label: option.label, disabledReason: supportRequestReason(world, personId, shown.request, option.amount) ?? option.disabledReason })),
   };
   else if (shown?.kind === 'action' && target) event = {
-    id: 'person-action:' + shown.action + ':' + context, kind: 'confirmation',
+    id: 'person-action:' + shown.action + ':' + context, kind: 'confirmation', illustration:'person-action:'+shown.action,
     title: shown.action === 'distance' ? 'Distance yourself from ' + target.firstName + '?' : (shown.action === 'insult' ? 'Insult ' : 'Scold ') + target.firstName + '?',
     body: shown.action === 'distance' ? 'Take a step back from this relationship.' : shown.action === 'insult' ? 'Say something unkind. They may take it personally.' : 'Let them know you disapprove.',
     terms: [], confirmLabel: shown.action === 'distance' ? 'Distance Yourself' : shown.action === 'insult' ? 'Insult' : 'Scold',

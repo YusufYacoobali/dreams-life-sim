@@ -22,6 +22,10 @@ import { schoolRects } from '../assets/schoolLayout';
 import { CatalogArt } from '../assets/CatalogArt';
 import { PolishArt, polishImages, type PolishArtId } from '../assets/PolishArt';
 import { lightColors, type Colors } from './theme';
+import { JobArt, jobArtIds } from '../assets/JobArt';
+import { EmploymentArt } from '../assets/EmploymentArt';
+import { PersonActionArt, personActionArtIds } from '../assets/PersonActionArt';
+import { FinanceArt } from '../assets/FinanceArt';
 
 export type EventCategory = 'romance' | 'family' | 'friendship' | 'childhood' | 'school' | 'surprise' | 'everyday'
   | 'health' | 'legal' | 'travel' | 'pets' | 'hobby' | 'career' | 'business' | 'assets' | 'money' | 'milestone';
@@ -67,6 +71,14 @@ for (const id of Object.keys(familyCells) as FamilyArtId[]) register(id,<FamilyA
 for (const id of Object.keys(healthLegalRects) as HealthLegalArtId[]) register(id,<HealthLegalArt id={id} size={64} />,legalArt.has(id) ? 'legal' : 'health');
 for (const id of Object.keys(fameBusinessRects) as FameBusinessArtId[]) register(id,<FameBusinessArt id={id} size={64} />,businessArt.has(id) ? 'business' : 'career');
 for (const id of Object.keys(careerRects) as CareerArtId[]) register(id,<CareerArt id={id} size={64} />,'career');
+for (const id of jobArtIds) register('job:'+id,<JobArt id={id} size={64} />,'career');
+const moneyActions = new Set(['ask-money','ask-loan','give-money','request-gift','accept-loan','decline-loan','repay-loan','request-raise']);
+const romanceActions = new Set(['ask-date','propose','plan-wedding','divorce','breakup','ask-teen-date','end-teen-relationship']);
+const familyActions = new Set(['ask-advice','ask-permission','ask-activity','praise','scold','ask-help','review-custody','move-in','family-planning']);
+const actionCategory = (id:string):EventCategory => moneyActions.has(id) ? 'money' : romanceActions.has(id) ? 'romance' : familyActions.has(id) ? 'family' : id==='academic-help' ? 'school' : id==='work-feedback' ? 'career' : 'friendship';
+for (const id of personActionArtIds) register('person-action:'+id,<PersonActionArt id={id} size={64} />,actionCategory(id));
+register('finance:net-worth',<FinanceArt id="net-worth" size={64} />,'assets');
+register('finance:finances',<FinanceArt id="finances" size={64} />,'money');
 // Authored music scenes saved this older ID before the career atlas named its
 // guitar/microphone illustration "musician". Keep the saved ID compatible.
 register('music',<CareerArt id="musician" size={64} />,'hobby');
@@ -148,7 +160,9 @@ export function presentationArtwork(illustration: React.ReactNode, category?: Ev
     else if (illustration.type === FamilyArt) inferred = romanticArt.has(id ?? '') ? 'romance' : 'family';
     else if (illustration.type === HealthLegalArt) inferred = legalArt.has(id ?? '') ? 'legal' : 'health';
     else if (illustration.type === FameBusinessArt) inferred = businessArt.has(id ?? '') ? 'business' : 'career';
-    else if (illustration.type === CareerArt) inferred = 'career';
+    else if (illustration.type === CareerArt || illustration.type === JobArt || illustration.type === EmploymentArt) inferred = 'career';
+    else if (illustration.type === PersonActionArt) inferred = actionCategory(id ?? '');
+    else if (illustration.type === FinanceArt) inferred = id === 'net-worth' ? 'assets' : 'money';
     else if (illustration.type === TravelArt) inferred = 'travel';
     else if (illustration.type === SchoolArt) inferred = 'school';
     else if (illustration.type === CatalogArt) inferred = id === 'engagement-ring' ? 'romance' : catalogueKinds.has(id ?? '') ? 'assets' : undefined;

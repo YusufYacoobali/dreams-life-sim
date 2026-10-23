@@ -55,13 +55,14 @@ export function jobReason(world: World, role: JobRole, interview = false, weekly
   if (!role.partTime && recordingCommitment(world)) return 'Finish or cancel your recording before starting full-time work';
   if (isConfined(world, person)) return 'You cannot start ordinary work in custody';
   if (person.legal.wanted) return 'Resolve your outstanding arrest first';
-  if (['doctor', 'lawyer', 'teacher', 'police'].includes(role.id) && visibleConvictions(world, person).length) return 'This role requires a clear current background check';
+  if ((role.clearBackground || ['doctor', 'lawyer', 'teacher', 'police'].includes(role.id)) && visibleConvictions(world, person).length) return 'This role requires a clear current background check';
   if (age < (role.partTime ? rule.partTimeAge : rule.adultAge)) return 'Available from age ' + (role.partTime ? rule.partTimeAge : rule.adultAge);
   if (!role.partTime && person.education.stage !== 'none') return 'Full-time work is unavailable while you are studying';
   if (role.partTime) { const workload = hourlyStudentReason(world, weeklyHours); if (workload) return workload; }
   if (person.stats.health < 20) return 'Your health needs attention before starting work';
   if (person.stats.smarts < role.smarts) return 'Smarts of at least ' + role.smarts + '% are required';
   if (role.qualification && !person.education.qualifications.some(q => q.level === role.qualification && (!role.field || q.field === role.field))) return 'Requires ' + role.qualification + (role.field ? ' in ' + role.field : ' qualification');
+  if (role.experienceMonths && paidInterviewExperience(world, role).paidMonths < role.experienceMonths) return 'Requires ' + role.experienceMonths + ' recorded paid months in ' + role.sector;
   if (person.employment?.roleId === role.id) return 'You already have this job';
   if (!interview && world.actionCounts[person.id + ':job:' + world.date.year + ':' + role.id]) return 'You already applied for this role this year';
 }
@@ -91,7 +92,7 @@ export function resolveWork(world: World, command: WorkCommand) {
     world.pending = {
       kind: 'decision', id: 'interview_' + world.revision, templateId: 'job-interview',
       title: role.title + ' interview', body: (hourly ? 'Reviewed contract: ' + formatMoney({ minor: hourly.hourlyRate, currency: countries[person.country].currency }) + ' per hour, ' + hourly.weeklyHours + ' hours per week and ' + hourly.paidWeeks + ' paid weeks per year. ' : '') + interviewExperienceCopy(role.sector, experience) + employer + ' asks: “' + interview.question + '”',
-      illustration: 'career', personIds: [person.id],
+      illustration: 'job:' + role.id, personIds: [person.id],
       choices: answers.map(answer => ({ id: answer.id, label: answer.label,
         effects: [{ kind: 'job-interview', personId: person.id, roleId: role.id, employer, annualPay, ...(hourly ? { hourly } : {}), experience: { policyVersion: 1, ...experience, chance: answer.id === 'withdraw' ? null : jobInterviewChance(world, answer.chance, experience.bonus) }, copyVersion: 18, answerId: answer.id }],
         resultTitle: 'Interview complete', resultBody: 'Your application has been considered.',
@@ -134,7 +135,7 @@ export function resolveJobInterview(world: World, effect: JobInterviewEffect): {
   if (draw(world, 'outcomes', 1, 100) > chance) return { title: 'They chose another applicant', body: answer!.feedback + (effect.copyVersion === 18 ? ' They give the job to someone else. You leave with your current work intact and a year to think of a better answer.' : ' The application was unsuccessful. Your current work is unchanged. You can try this role again next year.'), journal: 'I interviewed for a ' + role.title.toLowerCase() + ' role and was turned down.', effects: [] };
   if (person.employment) endEmployment(world);
   person.employment = { id: 'employment_' + world.revision, ...(effect.hourly ? { hourlyContractId: 'employment_' + world.revision } : {}), roleId: role.id, employer: effect.employer, companyId: null, currency: countries[person.country].currency, rank: 0, annualPay: effect.annualPay, paidMonths: 0, performance: 55, effort: 'balanced' };
-  if (effect.hourly) world.hourlyContracts.push({ employmentId: person.employment.id, personId: person.id, roleId: role.id as 'shop-assistant-part' | 'cafe-part', country: person.country, currency: person.employment.currency, started: { ...world.date }, terms: { ...effect.hourly }, rates: [], periods: [] });
+  if (effect.hourly) world.hourlyContracts.push({ employmentId: person.employment.id, personId: person.id, roleId: role.id, country: person.country, currency: person.employment.currency, started: { ...world.date }, terms: { ...effect.hourly }, rates: [], periods: [] });
   world.workHistory.push({ id: person.employment.id, ...(effect.hourly ? { hourlyContractId: person.employment.id } : {}), personId: person.id, roleId: role.id, employer: effect.employer, companyId: null, started: { ...world.date }, ended: null, monthsWorked: 0, grossEarned: 0n, ...newWorkEarnings(person.employment.currency) });
   return { title: 'You got the job', body: answer!.feedback + ' Your contract is active. ' + (effect.hourly ? 'Your reviewed ' + effect.hourly.weeklyHours + '-hour week pays ' + formatMoney({ minor: effect.hourly.hourlyRate, currency: person.employment.currency }) + ' per hour. ' : '') + (effect.copyVersion === 18 ? 'You have a job and a new reason to set an alarm. Pay arrives as months pass, with income tax withheld; signing pays nothing upfront.' : 'Pay starts as months pass, with income tax withheld. There is no salary payment upfront.'), journal: 'I started work as a ' + role.title.toLowerCase() + ' at ' + effect.employer + '.', effects: [{ id: 'salary', label: 'Annual gross pay', value: formatMoney({ minor: effect.annualPay, currency: person.employment.currency }), tone: 'positive' }] };
 }

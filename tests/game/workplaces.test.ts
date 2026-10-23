@@ -58,6 +58,8 @@ test.each([true, false])('feedback records its real %s outcome after three paid 
   world.random.outcomes = Array.from({ length: 10000 }, (_, i) => i + 1).find(seed => (randomInteger(seed, 1, 100).value <= chance) === accepted)!;
   const expectedDraw = randomInteger(world.random.outcomes, 1, 100), player = world.people[world.activePersonId], performance = player.employment!.performance, energy = player.stats.energy;
   const next = resolveCommand(world, { type: 'work-feedback', workplaceId: place.id, supervisorId }, true), review = currentWorkplace(next)!.feedback[0];
+  expect(next.pending!.illustration).toBe('person-action:work-feedback');expect(next.pending!.body).toContain(world.people[supervisorId].firstName);
+  expect(next.pending!.body.match(/[.!?](?=\s|$)/g)).toHaveLength(2);
   expect(review).toMatchObject({ supervisorId, paidMonths: 3, chance, roll: expectedDraw.value, accepted, performanceBefore: performance, performanceGain: accepted ? Math.min(3, 100 - performance) : 0 });
   expect(next.people[player.id].employment!.performance).toBe(performance + review.performanceGain); expect(next.people[player.id].stats.energy).toBe(energy - 4);
   expect(next.accounts).toEqual(world.accounts); expect(next.ledger).toEqual(world.ledger); expect(next.people[player.id].employment!.annualPay).toBe(player.employment!.annualPay); expect(next.people[player.id].finance.serviceMonths).toBe(player.finance.serviceMonths);

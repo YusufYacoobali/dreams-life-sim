@@ -9,7 +9,7 @@ import { formatMoney, type Currency } from '../../src/game/money';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../../src/ui/components';
 import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { annualFinanceSummary, financeCategoryLabel, financeSections, indexPersonalFinances, type FinanceSection } from '../../src/ui/annualFinances';
-import { Illustration } from '../../src/assets/Illustration';
+import { FinanceArt } from '../../src/assets/FinanceArt';
 import { useColors } from '../../src/ui/theme';
 
 export default function Finances() {
@@ -33,7 +33,7 @@ function PersonalFinances() {
     choices: (choosing === 'year' ? index.years.map(String) : index.currencies).map(id => ({ id, label: id, disabledReason: id === String(choosing === 'year' ? year : currency) ? 'This is your current view' : undefined })), confirmLabel: 'View Breakdown',
   } : null;
   return <Page><Header title="Finances" onBack={() => router.back()} />
-    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><Illustration id="money" size={48} /><View style={{ flex: 1, minWidth: 0 }}><Heading size={20}>{fullName(person)}</Heading><Body>Personal finances · {year} · {currency}</Body></View></View>
+    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><FinanceArt id="finances" size={48} /><View style={{ flex: 1, minWidth: 0 }}><Heading size={20}>{fullName(person)}</Heading><Body>Personal finances · {year} · {currency}</Body></View></View>
       <ActionRow title="Financial Year" value={String(year)} onPress={() => setChoosing('year')} />
       <ActionRow title="Finance Currency" value={currency} onPress={() => setChoosing('currency')} />
       <View style={{ padding: 14, backgroundColor: c.inset, borderRadius: 12, gap: 5 }}><Body muted>Current balance · {world.date.year}-{String(world.date.month).padStart(2, '0')}-{String(world.date.day).padStart(2, '0')}</Body><Text accessibilityRole="header" style={{ color: summary.current.cash < 0n ? c.red : c.positiveText, fontSize: 28, lineHeight: 37, fontWeight: '700' }}>{money(summary.current.cash)}</Text></View>

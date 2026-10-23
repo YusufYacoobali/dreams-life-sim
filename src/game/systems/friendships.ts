@@ -49,14 +49,14 @@ export function resolveFriendship(world: World, command: FriendshipCommand) {
     const row: BestFriendship = { id: 'best_friendship_' + world.revision, ruleVersion: 1, relationshipId: relation.id, proposerId: person.id, friendId: friend.id, proposed: { ...world.date }, country: person.country, city: person.city, strength: relation.strength, trust: relation.trust, chance, roll, status: accepted ? 'active' : 'declined', ended: null, endReason: null, endedById: null };
     world.bestFriendships.push(row); world.actionCounts[bestFriendshipAttemptKey(person.id, friend.id, world.date.year)] = 1;
     fact(world, accepted ? fullName(friend) + ' and I agreed to be best friends.' : 'I asked ' + fullName(friend) + ' about being best friends. They wanted to keep things as they were.', 'relationships');
-    result(world, accepted ? 'Your best friend' : 'Still friends', accepted ? friend.firstName + ' agreed to be your best friend. Nobody had a certificate ready.' : friend.firstName + ' would rather leave things as they are. You accepted the answer.', 'conversation', [{ id: row.id, label: fullName(friend), value: accepted ? 'Best friends' : 'Proposal declined', tone: accepted ? 'positive' : 'neutral' }]);
+    result(world, accepted ? 'Your best friend' : 'Still friends', accepted ? friend.firstName + ' agreed to be your best friend. Nobody had a certificate ready.' : friend.firstName + ' would rather leave things as they are. You accepted the answer.', 'person-action:become-best-friends', [{ id: row.id, label: fullName(friend), value: accepted ? 'Best friends' : 'Proposal declined', tone: accepted ? 'positive' : 'neutral' }]);
     return;
   }
   const row = bestFriendshipIndex(world).byId.get(command.friendshipId);
   if (!row || row.status !== 'active' || row.relationshipId !== relation.id || ![row.proposerId, row.friendId].includes(person.id) || ![row.proposerId, row.friendId].includes(friend.id)) throw new IneligibleAction('This is not your current best friendship');
   endFriendship(world, row, 'choice', person.id);
   fact(world, 'I stopped calling ' + fullName(friend) + ' my best friend. Our ordinary friendship and history remain.', 'relationships');
-  result(world, 'Back to being friends', 'Your best-friend agreement with ' + friend.firstName + ' has ended. Your bond, trust and shared history remain.', 'conversation', [{ id: row.id, label: fullName(friend), value: 'Best friendship ended', tone: 'neutral' }]);
+  result(world, 'Back to being friends', 'You and '+friend.firstName+' are back to being ordinary friends. Your bond and trust stay the same.', 'person-action:end-best-friendship', [{ id: row.id, label: fullName(friend), value: 'Best friendship ended', tone: 'neutral' }]);
 }
 
 /** Actual death and a new romance close the agreement without changing its original consent. */

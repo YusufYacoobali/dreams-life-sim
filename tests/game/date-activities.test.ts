@@ -1,3 +1,4 @@
+import { formatMoney } from '../../src/game/money';
 import { countries, countryCodes } from '../../src/game/countries';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { resolveCommand } from '../../src/game/engine';
@@ -62,7 +63,7 @@ test('actual new acquaintances enter dating only on consent; declined activities
     const after = resolveCommand(input, { type: 'ask-date', personId, activity });
     expect(accountFor(after).cash).toBe(accountFor(input).cash); expect(after.ledger.filter(row => row.category === 'dating')).toEqual(input.ledger.filter(row => row.category === 'dating'));
     expect(relationFor(after, after.activePersonId, personId)).toMatchObject({ romance: 'none', strength: relation.strength, trust: relation.trust });
-    expect(after.pending!.body).toContain('no date costs were charged'); expect(after.random).toEqual({ ...input.random, outcomes: randomInteger(4, 1, 100).state });
+    expect(after.pending!.body).toMatch(/no date costs were charged/i); expect(after.random).toEqual({ ...input.random, outcomes: randomInteger(4, 1, 100).state });
     const done = ack(after); expect(dateActivities(done, personId).every(row => /already tried/.test(row.disabledReason ?? ''))).toBe(true);
     expect(() => resolveCommand(done, { type: 'ask-date', personId, activity: 'walk' })).toThrow(/already tried/);
   }
@@ -71,18 +72,18 @@ test('actual new acquaintances enter dating only on consent; declined activities
   expect(relationFor(accepted, accepted.activePersonId, personId)!.romance).toBe('dating'); expect(accepted.marriages).toEqual(world.marriages); expect(accepted.pregnancies).toEqual(world.pregnancies);
 });
 
-test('omitted activity retains the original date copy, price, effects and one original consent draw', () => {
+test('omitted activity keeps its price, effects and original consent draw with concise role-aware copy', () => {
   const { world, personId } = spouses(), player = world.people[world.activePersonId], relation = relationFor(world, player.id, personId)!, draw = randomInteger(world.random.outcomes, 1, 100);
   const after = resolveCommand(world, { type: 'ask-date', personId }), chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));
   expect(resolveCommand(world, { type: 'ask-date', personId, activity: undefined })).toEqual(after);
   expect(after.random).toEqual({ ...world.random, outcomes: draw.state });
   if (draw.value <= chance) {
-    expect(after.pending).toMatchObject({ title: 'You made an evening of it', body: 'The conversation with Morgan outlasted the meal.' });
+    expect(after.pending).toMatchObject({ title: 'You made an evening of it', body: 'You went on a date with your spouse, Morgan. You spent '+formatMoney({minor:dateBudget(world),currency:accountFor(world).currency})+'.' });
     expect(accountFor(after).cash).toBe(accountFor(world).cash - dateBudget(world));
     expect(after.pending?.kind === 'result' && after.pending.effects).toEqual([{ id: 'bond', label: 'Relationship', value: '+0%', tone: 'positive' }, { id: 'happiness', label: 'Happiness', value: '+0%', tone: 'neutral' }, { id: 'energy', label: 'Energy', value: '-4%', tone: 'negative' }]);
     expect(after.journal.at(-1)!.text).toBe('I went on a date with Morgan.');
   } else {
-    expect(after.pending).toMatchObject({ title: 'Not this time', body: 'Morgan declined. You respected the answer, and your date budget remains unspent.' });
+    expect(after.pending).toMatchObject({ title: 'Not this time', body: 'Your spouse, Morgan, declined your invitation. No date costs were charged.' });
     expect(accountFor(after).cash).toBe(accountFor(world).cash);
   }
 });

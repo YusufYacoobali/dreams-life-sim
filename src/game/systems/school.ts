@@ -108,7 +108,7 @@ export function resolveSchool(world: World, command: SchoolCommand) {
   person.stats.energy = bounded(person.stats.energy - 4); person.education.grades += gradeGain;
   if (accepted) { relation.strength = bounded(relation.strength + 3); relation.trust = bounded(relation.trust + 2); }
   fact(world, 'I asked ' + world.people[command.teacherId].firstName + ' for extra help. ' + (accepted ? 'We worked through the parts I found difficult.' : 'They could not fit in the extra session this school year.'), 'school-help');
-  result(world, accepted ? 'Some things click into place' : 'No extra session this time', accepted ? 'You worked through the material together. Your actual grades improved by ' + gradeGain + ' percentage points.' : 'You can keep studying and ask again next school year. Your current progress is preserved.', 'education');
+  result(world, accepted ? 'Some things click into place' : 'No extra session this time', accepted ? 'You worked through the material with your teacher, '+world.people[command.teacherId].firstName+'. '+(gradeGain?'Your grades rose by '+gradeGain+' percentage points.':'Your grades stayed at '+person.education.grades+'%.') : 'Your teacher, '+world.people[command.teacherId].firstName+', could not fit in another session. You can ask again next school year.', 'person-action:academic-help');
 }
 /** One actual in-person school period; browsing never generates a class or progress. */
 export function schoolMonth(world: World) {

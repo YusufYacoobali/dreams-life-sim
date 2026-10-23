@@ -27,6 +27,8 @@ import { Illustration } from '../../src/assets/Illustration';
 import { FamilyArt } from '../../src/assets/FamilyArt';
 import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { GodModeShortcut } from '../../src/ui/GodModeAccess';
+import { FinanceArt } from '../../src/assets/FinanceArt';
+import { EmploymentArt } from '../../src/assets/EmploymentArt';
 
 function occupation(world: World): { label: string; href: Href } {
   const person = world.people[world.activePersonId];
@@ -76,8 +78,8 @@ function ProfileDetails() {
     </Card>
     <Card style={{ gap: 0 }}>
       <ActionRow title="Education" value={educationLabel(world)} subtitle={education.stage !== 'none' ? education.school ?? undefined : qualification ? 'Latest qualification · ' + qualification.field : undefined} icon={<Illustration id="education" />} onPress={() => router.push(schoolRoute)} />
-      <ActionRow title="Occupation" value={work.label} subtitle={player.employment?.employer} icon={<Illustration id="career" />} onPress={() => router.push(work.href)} />
-      <ActionRow title="Net Worth" value={formatMoney(netWorth(world), countries[player.country].locale)} icon={<Illustration id="money" />} onPress={() => router.push('/assets')} />
+      <ActionRow title="Occupation" value={work.label} subtitle={player.employment?.employer} icon={<EmploymentArt roleId={player.employment?.roleId} />} onPress={() => router.push(work.href)} />
+      <ActionRow title="Net Worth" value={formatMoney(netWorth(world), countries[player.country].locale)} icon={<FinanceArt id="net-worth" />} onPress={() => router.push('/assets')} />
       <ActionRow title="Residence" value={residence ? residence.name + ' (rented)' : player.city + ', ' + countries[player.country].name} icon={<Illustration id="property" />} onPress={() => router.push('/household')} />
       <ActionRow title="Marital Status" value={maritalStatus} subtitle={partner ? fullName(otherPerson(world, partner)) : undefined} icon={<FamilyArt id="hearts" size={40} />} onPress={() => router.push(partner ? { pathname: '/person/[id]', params: { id: otherPerson(world, partner).id } } : '/relationships')} />
       <ActionRow title="Children" value={children.length ? String(children.length) : 'None'} subtitle={children.some(child => child.died) ? children.filter(child => !child.died).length + ' living' : undefined} icon={<FamilyArt id="carriage" size={40} />} onPress={() => router.push('/family')} />

@@ -10,6 +10,7 @@ export type ConversationContext = {
   readonly trust: number;
   readonly setting: 'ordinary' | 'hospital' | 'custody' | 'apart';
   readonly familyRole?: string;
+  readonly relationshipRole?: string;
   readonly interest?: { readonly person: 'you' | 'them' | 'both'; readonly label: string };
   readonly school?: { readonly person: 'you' | 'them'; readonly name: string; readonly field: string; readonly status: 'current' | 'paused' | 'completed' };
   readonly work?: { readonly person: 'you' | 'them'; readonly title: string; readonly employer: string; readonly status: 'current' | 'past' };
@@ -24,18 +25,18 @@ export function writeConversation(context: ConversationContext, topic: Conversat
   const youngActor = context.actorAge < 12;
   const open = outcome === 'open';
   const scene = (title: string, body: string, journal: string): ConversationWriting => {
-    const setting = context.setting === 'apart' ? 'You catch up from different places.'
-      : context.setting === 'hospital' ? 'You make room for a chat around the hospital routine.'
-      : context.setting === 'custody' ? 'You keep in touch while custody shapes the day.' : '';
-    return { title, body: setting ? body + ' ' + setting : body, journal };
+    const setting = context.setting === 'apart' ? 'You catch up from different places'
+      : context.setting === 'hospital' ? 'You make room for a chat around the hospital routine'
+      : context.setting === 'custody' ? 'You keep in touch while custody shapes the day' : '';
+    return { title, body: setting ? setting+'; '+(body.startsWith('You ')?'you '+body.slice(4):body) : body, journal };
   };
 
   switch (topic) {
     case 'everyday': {
       if (!open) return scene('Just a quick catch-up', `${name} gives you the short version of the day. You let a small conversation stay small.`, `I had a brief catch-up with ${fullName}.`);
       const body = child
-        ? youngActor ? `You tell ${name} about one tiny thing from your day. Somehow it needs three explanations and a sound effect.`
-          : `${name} tells you about one tiny thing from the day. You ask a question and get the extended version, complete with sound effects.`
+        ? youngActor ? `You tell ${name} about one tiny thing from your day. It takes more explaining than expected.`
+          : `${name} tells you about one tiny thing from the day. You ask a question and get the extended version.`
         : Math.min(context.actorAge, context.targetAge) < 18 ? `You and ${name} compare the little things that made today longer than necessary. The conversation acquires an unofficial ranking system.`
           : `You and ${name} compare the day's tiny annoyances. One of them gets a much longer hearing than it deserves.`;
       return scene('The important little things', body, `I swapped little stories about the day with ${fullName}.`);
@@ -47,7 +48,7 @@ export function writeConversation(context: ConversationContext, topic: Conversat
       const journalSubject = interest ? interest.person === 'both' ? `our shared interest in ${interest.label}`
         : interest.person === 'you' ? `my interest in ${interest.label}` : `${fullName}'s interest in ${interest.label}` : 'our interests';
       if (!open) return scene('Another time for that', `You bring up ${subject}, but ${name} keeps the answer brief. You leave the subject there.`, `I briefly talked with ${fullName} about ${journalSubject}.`);
-      const body = child ? `You and ${name} talk about ${subject}. One question turns into several more. Nobody has run out of questions yet.`
+      const body = child ? `You and ${name} talk about ${subject}. One question turns into several more.`
         : interest?.person === 'both' ? `You and ${name} get into ${subject}. Agreement lasts right up to the part where each of you has a favourite.`
           : `You and ${name} get into ${subject}. The explanation becomes a surprisingly good conversation, even at the bit that needs explaining twice.`;
       return scene('You can talk about that', body, `I talked with ${fullName} about ${journalSubject}.`);
@@ -56,7 +57,7 @@ export function writeConversation(context: ConversationContext, topic: Conversat
       if (!context.familyRole) return scene(open ? 'Talking about family' : 'A private subject', open
         ? `You and ${name} talk about what family means to different people. You leave other people's private business out of it.`
         : `${name} keeps the family conversation brief. You respect the limit.`, `I ${open ? 'talked about family' : 'kept a family conversation brief'} with ${fullName}.`);
-      const relative = `your ${context.familyRole.toLowerCase()}, ${name},`;
+      const relative = `your ${(context.relationshipRole??context.familyRole).toLowerCase()}, ${name},`;
       if (!open) return scene('A private subject', `You try talking with ${relative} about family. The answer is brief, and you respect the limit.`, `I brought up family with ${fullName} without pressing for more.`);
       const body = child ? `You and ${relative} talk about what makes a fair family rule. The smallest rules get the biggest opinions.`
         : `You and ${relative} talk about what being family asks of you. It turns out you have different ideas about which advice was actually requested.`;

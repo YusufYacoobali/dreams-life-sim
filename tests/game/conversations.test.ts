@@ -25,10 +25,10 @@ function withoutTalkFields(world: World) {
   return result;
 }
 
-test('omitting topic retains the original exact food conversation, bounded rewards and single original draw', () => {
+test('omitting topic uses concise role-aware copy with the original bounded rewards and single draw', () => {
   const before = fixture(), relation = relationFor(before, before.activePersonId, targetId)!, draw = randomInteger(before.random.outcomes, 3, 6);
   const after = resolveCommand(before, talk());
-  expect(after.pending).toEqual({ kind: 'result', id: 'action_67', title: 'Time together', body: 'Avery put their phone away. What started as a quick chat turned into a discussion about food.', illustration: 'conversation', participants: [{ personId:targetId, name:'Avery Ricci', role:'father' }], effects: [
+  expect(after.pending).toEqual({ kind: 'result', id: 'action_67', title: 'Time together', body: 'You had a proper chat with your father, Avery. A simple conversation did the job.', illustration: 'person-action:talk', participants: [{ personId:targetId, name:'Avery Ricci', role:'father' }], effects: [
     { id: 'bond', label: 'Relationship', value: '+' + draw.value + '%', tone: 'positive' },
     { id: 'happiness', label: 'Happiness', value: '+0%', tone: 'neutral' },
   ] });
@@ -158,7 +158,12 @@ test('an actual introduced acquaintance cannot be silently treated as family', (
 });
 
 test('the prospective migration changes only three root tags and preserves old bound results and optional-absent metadata', () => {
-  const bound = resolveCommand(fixture(), talk()), legacy = copyWorld(bound) as unknown as Record<string, unknown>;
+  const presentation=copyWorld(resolveCommand(fixture(),talk()));
+  // This arranged historical presentation keeps the old literal wording even
+  // when future conversations use different writing and artwork.
+  presentation.pending!.body='Avery put their phone away. What started as a quick chat turned into a discussion about food.';
+  presentation.pending!.illustration='conversation';
+  const bound=validateWorld(presentation),legacy=copyWorld(bound) as unknown as Record<string,unknown>;
   legacy.schemaVersion = 38; legacy.engineVersion = 39; legacy.contentVersion = 13;
   const migrated = decodeWorld(JSON.stringify(legacy, moneyJSON));
   expect(migrated).toEqual(bound); expect(migrated.pending!.body).toContain('discussion about food');

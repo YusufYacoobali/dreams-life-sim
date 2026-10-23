@@ -21,7 +21,8 @@ function applicant(country: CountryCode = 'US') {
 const apply = (world: World, roleId = 'retail') => resolveCommand(world, { type: 'apply-job', roleId }, true);
 const ack = (world: World) => resolveCommand(world, { type: 'acknowledge', resultId: world.pending!.id });
 
-test.each(jobs.filter(role => !role.specialCareer))('$id binds its actual duties, question, employer and exact pay without drawing, hiring or paying', role => {
+// Experience-gated senior roles have their receipt-backed fixture in ordinary-jobs.test.ts.
+test.each(jobs.filter(role => !role.specialCareer && !role.experienceMonths))('$id binds its actual duties, question, employer and exact pay without drawing, hiring or paying', role => {
   const world = applicant(), original = encodeWorld(world), next = apply(world, role.id);
   expect(next.pending).toMatchObject({ kind: 'decision', templateId: 'job-interview', title: role.title + ' interview', personIds: [world.activePersonId] });
   if (next.pending?.kind !== 'decision') throw new Error('Missing interview');
@@ -80,7 +81,7 @@ test('country part-time ages still gate interviews and full-time work still requ
 
 test('an arranged engine-29/content-6 envelope upgrades its versions, preserving employment, people, money and RNG', () => {
   const world = employee(), encoded = JSON.parse(encodeWorld(world)); encoded.schemaVersion = 30; encoded.engineVersion = 29; encoded.contentVersion = 6; delete encoded.hobbyEvents; const restored = decodeWorld(JSON.stringify(encoded));
-  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 44, engineVersion: 46, contentVersion: 23, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
+  expect(JSON.parse(encodeWorld(restored))).toEqual({ ...encoded, schemaVersion: 45, engineVersion: 47, contentVersion: 24, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [], bestFriendships: [], teenRelationships: [], universityApplications: [], studyCourses: [], npcSeparations: [], npcMoves: [], hobbyEvents: [], hourlyContracts: [] });
 });
 
 

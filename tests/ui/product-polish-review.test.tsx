@@ -120,11 +120,11 @@ test.each(['android', 'ios'] as const)('a leased residence is visible without jo
     expect(screen.getByText(/Rented home ·/)).toBeOnTheScreen();
     expect(screen.getByText('No property owned.')).toBeOnTheScreen();
     expect(screen.UNSAFE_getByType(KeyboardAvoidingView).props.behavior).toBe(platform === 'ios' ? 'padding' : 'height');
-    fireEvent.press(screen.getByRole('button', { name: /Rent a Home/ }));
-    expect(mockPush).toHaveBeenLastCalledWith('/rentals');
+    fireEvent.press(screen.getByRole('button', { name: /Real Estate/ }));
+    expect(mockPush).toHaveBeenLastCalledWith({pathname:'/shopping/[kind]',params:{kind:'property'}});
     capture('rented-assets-' + platform + '-' + (dark ? 'dark-large' : 'light'), view.toJSON());
     view.rerender(frame(<Rentals />));
-    expect(screen.getByRole('header', { name: 'Rent a Home' })).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Real Estate' })).toBeOnTheScreen();
     capture('rentals-' + platform + '-' + (dark ? 'dark-large' : 'light'), view.toJSON());
     view.rerender(frame(<Life />));
     expect(screen.getByText('Home: ' + offer.name)).toBeOnTheScreen();

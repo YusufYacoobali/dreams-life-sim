@@ -4,6 +4,7 @@ import { serviceAway } from './serviceSchemas';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName } from '../personHelpers';
 import type { Person, World } from '../model';
+import { automaticAppearance, automaticAppearanceKey } from '../appearance';
 import { monthFrom } from '../calendar';
 import { IneligibleAction } from '../errors';
 import { rules } from '../rules';
@@ -64,7 +65,7 @@ export function addChild(world: World, parents: Person[], type: 'biological' | '
     child.born = { ...world.date }; child.lastName = parents[0].lastName;
     const pick = <T,>(values: T[]) => values[draw(world, 'npcs', 0, values.length - 1)];
     const first = parents[0], second = parents[1] ?? first;
-    child.appearance = { face: pick(parents.map(parent => parent.appearance.face)), skin: Math.round((first.appearance.skin + second.appearance.skin) / 2), hair: pick(parents.map(parent => parent.appearance.hair)), hairColor: pick(parents.map(parent => parent.appearance.hairColor)) };
+    child.appearance = automaticAppearance({ face: pick(parents.map(parent => parent.appearance.face)), skin: Math.round((first.appearance.skin + second.appearance.skin) / 2), hair: pick(parents.map(parent => parent.appearance.hair)), hairColor: pick(parents.map(parent => parent.appearance.hairColor)) }, child.gender, automaticAppearanceKey(world.id,child.id));
     child.traits = [pick(parents.flatMap(parent => parent.traits))];
     child.stats.smarts = bounded((first.stats.smarts + second.stats.smarts) / 2 + draw(world, 'npcs', -12, 12)); child.stats.looks = bounded((first.stats.looks + second.stats.looks) / 2 + draw(world, 'npcs', -12, 12));
     child.health.familyRisks = [...new Set(parents.flatMap(parent => [...parent.health.familyRisks, ...parent.health.conditions.filter(item => ['asthma', 'diabetes', 'hypertension', 'heart-disease', 'depression'].includes(item.type)).map(item => item.type)]))];
@@ -136,9 +137,9 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     const carrier = player.biology.role === 'carry' ? player : partner!; const carrierAge = ageOn(carrier, world.date);
     const ageFactor = carrierAge >= 45 ? 8 : carrierAge >= 40 ? 30 : carrierAge >= 35 ? 60 : 90;
     const chance = Math.max(1, Math.round(ageFactor * Math.min(player.biology.fertility, partner!.biology.fertility) / 100 * Math.min(player.stats.health, partner!.stats.health) / 100));
-    if (draw(world, 'outcomes', 1, 100) > chance) { fact(world, 'We tried for a child, but no pregnancy began this year.', 'family'); result(world, 'No pregnancy this year', 'You can try again next year. Age, health and fertility affect the chance.', 'hearts'); return; }
+    if (draw(world, 'outcomes', 1, 100) > chance) { fact(world, 'We tried for a child, but no pregnancy began this year.', 'family'); result(world, 'No pregnancy this year', 'No pregnancy began this year. You can try again next year.', 'person-action:family-planning'); return; }
     startPregnancy(world, player, partner!); const due = world.pregnancies.at(-1)!.due;
-    result(world, 'A baby on the way', (carrier.id === player.id ? 'You are pregnant.' : 'Your partner, ' + fullName(carrier) + ', is pregnant.') + ' The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '. Time, care and health will matter in the coming months.', 'carriage'); return;
+    result(world, 'A baby on the way', (carrier.id === player.id ? 'You are pregnant.' : 'Your partner, ' + fullName(carrier) + ', is pregnant.') + ' The due date is ' + due.year + '-' + String(due.month).padStart(2, '0') + '.', 'person-action:family-planning'); return;
   }
   if (command.type === 'adopt') {
     if(serviceAway(world)||partner&&serviceAway(world,partner.id))throw new IneligibleAction('Return from your assignment before adoption placement');
@@ -147,18 +148,21 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     if (partner && (!partner.wantsChildren || partner.stats.health < 40)) throw new IneligibleAction('Your partner is not ready for adoption');
     yearLimit(world, 'adopt'); charge(world, adoptionFee(world), 'adoption', 'Adoption assessment and placement');
     const parents = partner && (relation!.romance === 'married' || partner.householdId === player.householdId) ? [player, partner] : [player];
-    const child = addChild(world, parents, 'adoptive', command.age); result(world, 'Welcome to the family', 'Your adopted child, ' + fullName(child) + ', has joined your family.', 'adoption'); return;
+    const child = addChild(world, parents, 'adoptive', command.age); result(world, 'Welcome to the family', 'Your adopted child, '+fullName(child)+', has joined your family. The placement cost '+formatMoney({minor:adoptionFee(world),currency:accountFor(world).currency})+'.', 'person-action:family-planning'); return;
   }
   if (command.type === 'review-custody') {
     const existing = world.custody.find(item => item.childId === command.childId && !item.ended && (item.a === player.id || item.b === player.id));
     if (!existing || existing.lastReviewYear === world.date.year) throw new IneligibleAction('Custody can be reviewed once a year for an existing arrangement');
     const child = world.people[existing.childId], other = world.people[existing.a === player.id ? existing.b : existing.a];
     if (ageOn(child, world.date) >= rules[child.country].adultAge || child.died || other.died) throw new IneligibleAction('This arrangement no longer needs a review');
-    setCustody(world, child, player, other, command.preference); fact(world, 'We reviewed the living arrangements for ' + child.firstName + '.', 'family'); result(world, 'Custody reviewed', 'The recorded arrangement follows the child’s care needs and your stated preference.', 'family-tree'); return;
+    setCustody(world, child, player, other, command.preference); fact(world, 'We reviewed the living arrangements for ' + child.firstName + '.', 'family');
+    const arrangement=world.custody.at(-1)!;
+    result(world, 'Custody reviewed', child.firstName+' will live mainly with '+(arrangement.primaryId===player.id?'you':world.people[arrangement.primaryId].firstName)+' under '+(arrangement.arrangement==='shared'?'shared':'sole')+' care. You can review the arrangement next year.', 'person-action:review-custody'); return;
   }
   const quote = divorceQuote(world, command.personId);
   if (quote.signed !== command.quotedPayment) throw new IneligibleAction('The settlement changed; review it again');
   const spouse = world.people[command.personId], marriage = world.marriages.find(item => !item.ended && (item.a === player.id && item.b === spouse.id || item.b === player.id && item.a === spouse.id))!;
+  const settlementLedgerStart=world.ledger.length;
   oweFamily(world, quote.payerId, quote.receiverId, quote.amount, quote.currency, 'settlement');
   marriage.ended = { ...world.date }; marriage.endReason = 'divorce';
   royalDivorce(world,player.id,spouse.id);
@@ -168,7 +172,9 @@ export function resolveFamily(world: World, command: FamilyCommand) {
   for (const child of shared) setCustody(world, child, player, spouse, command.custody);
   player.stats.happiness = bounded(player.stats.happiness - 8); spouse.stats.happiness = bounded(spouse.stats.happiness - 8);
   fact(world, 'I divorced ' + fullName(spouse) + '. The marital gain settlement was ' + formatMoney({ minor: quote.amount, currency: quote.currency }) + '.', 'family');
-  result(world, 'Separate lives', 'Your marriage has ended. The settlement reflects starting wealth and marital gains. Payments use available funds; any unpaid amount stays owed to your former spouse. Children’s living arrangements and support are set.', 'breakup');
+  const paid=world.ledger.slice(settlementLedgerStart).filter(row=>row.category==='settlement'&&row.personId===quote.receiverId&&row.cashDelta>0n).reduce((sum,row)=>sum+row.cashDelta,0n),remaining=quote.amount-paid;
+  const payment=(minor:bigint)=>formatMoney({minor,currency:quote.currency}),payer=quote.payerId===player.id?'you':spouse.firstName;
+  result(world, 'Separate lives', quote.amount?'You and '+spouse.firstName+' divorced; the settlement is '+payment(quote.amount)+' payable by '+payer+'. '+(remaining?payment(paid)+' was paid; '+payment(remaining)+' remains owed by '+payer+'.':payment(paid)+' was paid in full.'):'You and '+spouse.firstName+' divorced. No settlement payment was due.', 'person-action:divorce');
 }
 export function careAfterDeath(world: World, personId: string) {
   for (const pregnancy of world.pregnancies.filter(item => item.status === 'pregnant' && item.carrierId === personId)) { pregnancy.status = 'ended-death'; pregnancy.ended = { ...world.date }; }

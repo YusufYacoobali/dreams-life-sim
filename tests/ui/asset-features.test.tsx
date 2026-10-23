@@ -74,7 +74,7 @@ test('all forty listings have varied, plausible specifications without changing 
   const world = purchase(funded(), 'used-compact'), cold = decodeWorld(encodeWorld(world));
   expect(cold.assets).toEqual(world.assets);
   for (const field of ['bathrooms', 'squareFeet', 'fuelEconomyMpg', 'rangeMiles', 'topSpeedMph', 'listingMileage']) expect(cold.assets[0]).not.toHaveProperty(field);
-  expect(assetFeatures(assetCatalog.find(offer => offer.id === 'electric-car')!).map(feature => feature.label)).toContain('EV range');
+  expect(assetFeatures(assetCatalog.find(offer => offer.id === 'electric-car')!).map(feature => feature.label)).toEqual(['Top Speed', 'Mileage', 'Condition']);
   expect(assetFeatures(assetCatalog.find(offer => offer.id === 'electric-car')!).map(feature => feature.label)).not.toContain('MPG (US)');
 });
 
@@ -85,7 +85,7 @@ test.each([false, true])('browse, offer and lease screens share feature values w
   const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}>{child}</ThemeProvider></SafeAreaProvider>;
   const suffix = dark ? 'dark-large' : 'light', view = render(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
-  const home = screen.getByRole('button', { name: /City Studio.*Beds: 1.*Baths: 1.*Sq ft: 420/ });
+  const home = screen.getByRole('button', { name: /City Studio.*Buy .*Rent .*month.*Beds: 1.*Baths: 1.*Sq ft: 420/ });
   capture('asset-property-list-' + suffix, view.toJSON());
   fireEvent.press(home); expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio' } });
   view.rerender(frame(<Offer />));
@@ -94,15 +94,15 @@ test.each([false, true])('browse, offer and lease screens share feature values w
   capture('asset-property-offer-' + suffix, view.toJSON());
   mockRoute = { id: 'used-compact', kind: 'vehicle' }; view.rerender(frame(<Shopping />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
-  expect(screen.getByRole('button', { name: /Electric Sedan.*EV range: 310 mi.*Condition: 100%/ })).toBeOnTheScreen();
+  expect(screen.getByRole('button', { name: /Electric Sedan.*Top Speed: .*Mileage: .*Condition: 100%/ })).toBeOnTheScreen();
   capture('asset-vehicle-list-' + suffix, view.toJSON());
   view.rerender(frame(<Offer />));
-  for (const label of ['MPG (US): 34', 'Top speed: 102 mph', 'Listing mileage: 68,000 mi', 'Condition: 65%']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
+  for (const label of ['Top Speed: 102 mph', 'Mileage: 68,000 mi. Listing reading', 'Condition: 65%']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   capture('asset-vehicle-offer-' + suffix, view.toJSON());
   mockRoute = { id: 'studio', kind: 'property' }; view.rerender(frame(<Rentals />));
   expect(screen.UNSAFE_getAllByType(AssetListing)).toHaveLength(20);
-  fireEvent.press(screen.getByRole('button', { name: /City Studio.*Beds: 1.*Baths: 1.*Sq ft: 420/ }));
-  expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/rental/[id]', params: { id: 'studio' } });
+  fireEvent.press(screen.getByRole('button', { name: /City Studio.*Buy .*Rent .*month.*Beds: 1.*Baths: 1.*Sq ft: 420/ }));
+  expect(mockPush).toHaveBeenLastCalledWith({ pathname: '/offer/[id]', params: { id: 'studio', method: 'rent' } });
   capture('asset-rental-list-' + suffix, view.toJSON());
   view.rerender(frame(<Rental />));
   for (const label of ['Beds: 1', 'Baths: 1', 'Sq ft: 420']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
@@ -126,7 +126,7 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   const suffix = dark ? 'dark-large' : 'light', view = render(frame(<OwnedAsset />));
   expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
   expect(screen.queryByLabelText('Condition: 65%')).toBeNull();
-  expect(screen.getByLabelText('Listing mileage: 68,000 mi')).toBeOnTheScreen();
+  expect(screen.getByLabelText('Mileage: 68,000 mi. Listing reading')).toBeOnTheScreen();
   capture('asset-owned-vehicle-' + suffix, view.toJSON());
   mockRoute = { id: mockWorld.assets.find(asset => asset.catalogId === 'family-house')!.id, kind: 'property' };
   view.rerender(frame(<OwnedAsset />));
@@ -136,4 +136,21 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   view.rerender(frame(<AssetFeatures offer={assetCatalog.find(offer => offer.id === 'used-compact')} condition={0} />));
   expect(screen.getByLabelText('Condition: 0%')).toBeOnTheScreen();
   view.unmount();
+});
+
+
+test.each([{width:390,fontScale:1},{width:320,fontScale:1},{width:320,fontScale:1.4},{width:320,fontScale:2}])('cars keep exactly three equal chips without truncation at $width/$fontScale',({width,fontScale})=>{
+  jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale});
+  const offer=assetCatalog.find(item=>item.id==='used-compact')!;
+  const view=render(<ThemeProvider appearance={fontScale>1?'dark':'light'}><AssetFeatures offer={offer} condition={37} /></ThemeProvider>);
+  try{
+    expect(assetFeatures(offer,37).map(feature=>feature.id)).toEqual(['speed','mileage','condition']);
+    const row=screen.getByTestId('asset-feature-row'),stacked=fontScale>=1.6;
+    expect(Native.StyleSheet.flatten(row.props.style)).toMatchObject({flexDirection:stacked?'column':'row',alignItems:'stretch'});
+    for(const id of ['speed','mileage','condition']){const style=Native.StyleSheet.flatten(screen.getByTestId('asset-feature-'+id).props.style);expect(style.minWidth).toBe(0);if(!stacked)expect(style.flex).toBe(1);expect(style.height).toBeUndefined();expect(style.maxHeight).toBeUndefined();}
+    expect(screen.getByLabelText('Top Speed: 102 mph')).toBeOnTheScreen();expect(screen.getByLabelText('Mileage: 68,000 mi. Listing reading')).toBeOnTheScreen();expect(screen.getByLabelText('Condition: 37%')).toBeOnTheScreen();
+    expect(screen.queryByText('MPG (US)')).toBeNull();expect(screen.queryByText('EV range')).toBeNull();
+    for(const label of ['Top Speed','Mileage','Condition'])expect(screen.getByText(label).props.numberOfLines).toBeUndefined();
+    capture('polish3-vehicle-chips-'+width+'-'+fontScale,view.toJSON());
+  }finally{view.unmount();}
 });

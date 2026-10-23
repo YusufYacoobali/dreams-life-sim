@@ -32,12 +32,14 @@ export function SportsGame({
   clock,
   enabled,
   reducedMotion,
+  controlsVisible = true,
   onInput,
 }: {
   session: MiniGameSession;
   clock: SharedValue<number>;
   enabled: boolean;
   reducedMotion: boolean;
+  controlsVisible?: boolean;
   onInput: (action: MiniGameAction, at: number) => void;
 }) {
   const id = useId().replace(/:/g, ''),
@@ -315,7 +317,7 @@ export function SportsGame({
           </MovingGroup>
         </Svg>
       </SceneCanvas>
-      <View style={s.controls}>
+      <View style={[s.controls, !controlsVisible && { opacity: 0 }]}>
         <Text style={s.controlTitle}>
           {shot
             ? goal

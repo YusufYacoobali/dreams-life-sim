@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { router } from 'expo-router';
+import { Image } from 'react-native';
 import { useGodModeAccess } from '../ui/GodModeAccess';
 import {
   ActionRow,
   Body,
-  Button,
   Card,
   Header,
   Heading,
@@ -17,15 +17,15 @@ import {
   type MiniGameKind,
   type MiniGameSession,
 } from './core/types';
-import { challengeSeed } from './core/difficulty';
+import { challengeSeed, newChallengeDifficulty } from './core/difficulty';
 import { evaluateSession } from './core/evaluation';
 import { ratingFor } from './core/scoring';
+import { sceneArt } from './components/sceneArtwork';
 
 /** Deliberately has no store, repository, command-dispatch or native-save import. */
 export function MiniGamePlayground() {
   const allowed = useGodModeAccess(),
     [kind, setKind] = useState<MiniGameKind | null>(null),
-    [difficulty, setDifficulty] = useState(3),
     [session, setSession] = useState<MiniGameSession | null>(null),
     sequence = useRef(0),
     ref = useRef(session);
@@ -51,7 +51,7 @@ export function MiniGamePlayground() {
       contextId: 'practice',
       started: { year: 2026, month: 1, day: 1 },
       startedRevision: 0,
-      difficulty,
+      difficulty: newChallengeDifficulty,
       seed: challengeSeed(id),
       assisted,
       status: 'active',
@@ -76,7 +76,7 @@ export function MiniGamePlayground() {
         key={kind + ':' + sequence.current}
         kind={kind}
         session={session}
-        difficulty={difficulty}
+        difficulty={session?.difficulty ?? newChallengeDifficulty}
         practice
         error={null}
         busy={false}
@@ -141,28 +141,15 @@ export function MiniGamePlayground() {
     <Page bottomSafeArea>
       <Header title="Mini-Game Playground" onBack={() => router.back()} />
       <Card>
-        <Heading size={22}>Play, test, repeat</Heading>
-        <Body>
-          Practice freely. Saved lives and career records stay unchanged, and no
-          qualifications are required.
-        </Body>
-        <Heading size={18}>Difficulty {difficulty} of 5</Heading>
-        {[1, 2, 3, 4, 5].map((level) => (
-          <Button
-            key={level}
-            label={'Level ' + level}
-            tone={difficulty === level ? 'primary' : 'secondary'}
-            accessibilityRole="radio"
-            accessibilityState={{ checked: difficulty === level }}
-            onPress={() => setDifficulty(level)}
-          />
-        ))}
+        <Heading size={22}>Just one more go</Heading>
+        <Body>Pick a game. Practice freely without changing your saved life.</Body>
       </Card>
       <Card>
         {gameKinds.map((game) => (
           <ActionRow
             key={game}
             title={titles[game]}
+            icon={<Image source={game === 'sports' ? sceneArt.ball : game === 'crime' ? sceneArt.dial : sceneArt.ship} resizeMode="contain" style={{ width: 40, height: 44 }} accessible={false} />}
             subtitle={
               game === 'sports'
                 ? 'A penalty under stadium lights'

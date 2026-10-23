@@ -14,12 +14,10 @@ export function MiniGameHUD({
   kind,
   clock,
   assisted,
-  difficulty,
 }: {
   kind: MiniGameKind;
   clock: SharedValue<number>;
   assisted: boolean;
-  difficulty: number;
 }) {
   const total = durationMs[kind],
     [remaining, setRemaining] = useState(Math.ceil(total / 1000));
@@ -35,9 +33,9 @@ export function MiniGameHUD({
     [clock, total],
   );
   return (
-    <View style={{ paddingHorizontal: 20, gap: 4, paddingBottom: 6 }}>
+    <View style={{ paddingHorizontal: 22, gap: 7, paddingBottom: 9 }}>
       <View style={[s.row, { justifyContent: 'space-between' }]}>
-        <Text style={s.eyebrow}>LEVEL {difficulty}</Text>
+        <Text style={[s.muted, { color: c.white }]}>{assisted ? 'Your pace' : 'Time left'}</Text>
         <Text
           accessibilityLabel={
             assisted
@@ -46,18 +44,18 @@ export function MiniGameHUD({
           }
           style={[s.muted, { fontVariant: ['tabular-nums'], color: c.white }]}
         >
-          {assisted ? 'ASSISTED' : remaining + 's'}
+          {assisted ? 'Assisted' : remaining + 's'}
         </Text>
       </View>
       <Svg
-        height="2"
+        height="4"
         width="100%"
-        viewBox="0 0 100 2"
+        viewBox="0 0 100 4"
         preserveAspectRatio="none"
         accessible={false}
       >
-        <Rect width="100" height="2" rx="2" fill={c.panel} />
-        <MovingRect animatedProps={props} height="2" rx="2" fill={c.blue} />
+        <Rect width="100" height="4" rx="2" fill="#FFFFFF26" />
+        <MovingRect animatedProps={props} height="4" rx="2" fill={c.blue} />
       </Svg>
     </View>
   );

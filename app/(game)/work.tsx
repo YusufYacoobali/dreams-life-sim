@@ -12,6 +12,7 @@ import { monthlyAmount, rules } from '../../src/game/rules';
 import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { Illustration } from '../../src/assets/Illustration';
+import { EmploymentArt } from '../../src/assets/EmploymentArt';
 import { useColors } from '../../src/ui/theme';
 import { currentWorkplace } from '../../src/game/systems/workplaceSchemas';
 import { workRaiseReason } from '../../src/game/systems/workplaces';
@@ -27,7 +28,7 @@ export default function Work() {
   const event: EventPresentation | null = dialog === 'routine' ? { id: 'work-effort', kind: 'selection', title: 'Work routine', body: 'Taking it easy lowers stress and performance. Working hard can raise both. Balanced keeps effort steady; health and discipline also matter.', choices: [{ id: 'relaxed', label: 'Take it easy' }, { id: 'balanced', label: 'Balanced' }, { id: 'hard', label: 'Work hard' }].map(choice => ({ ...choice, disabledReason: choice.id === job?.effort ? 'This is your current routine' : undefined })), confirmLabel: 'Set Routine' } : dialog ? { id: dialog, kind: 'confirmation', title: dialog === 'quit' ? 'Resign from this job?' : 'Retire from work?', body: dialog === 'quit' ? 'Your pay will stop. You keep money already earned.' : 'Your job will end and an earned pension will start as time passes.', terms: [], confirmLabel: dialog === 'quit' ? 'Resign' : 'Retire' } : null;
   const retirementReason = ageOn(player, world.date) < rule.retirementAge ? 'Available from age ' + rule.retirementAge : player.finance.pensionAnnual > 0n ? 'You already receive a pension' : player.finance.serviceMonths < 120 ? 'Ten years of recorded work are required' : undefined;
   return <Page><Header title="Occupation" onBack={() => router.back()} />
-    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><Illustration id="career" size={56} /><View style={{ flex: 1, gap: 4 }}><Heading size={20}>{job && role ? jobRanks[job.rank] + ' ' + role.title : 'No current job'}</Heading>{job && <Body muted>{job.employer}</Body>}</View></View>
+    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><EmploymentArt roleId={job?.roleId} size={64} /><View style={{ flex: 1, gap: 4 }}><Heading size={20}>{job && role ? jobRanks[job.rank] + ' ' + role.title : 'No current job'}</Heading>{job && <Body muted>{job.employer}</Body>}</View></View>
       {job ? <>{hourly && <Body>{formatMoney({ minor: currentHourlyRate(hourly), currency: job.currency })} per hour · {hourly.terms.weeklyHours} contracted hours/week</Body>}<Text style={{ color: c.positiveText, fontSize: 19, lineHeight: 27, fontWeight: '700' }}>{formatMoney({ minor: job.annualPay, currency: job.currency })} annual gross pay</Text><StatBar label="Performance" value={job.performance} color={c.blue} /><Body muted>{job.paidMonths} paid months · {job.effort} routine</Body></> : <Body muted>Find work that fits your qualifications, or explore a special career.</Body>}
     </Card>
     {error && !dialog && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}

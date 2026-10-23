@@ -22,6 +22,16 @@ export const workplaceCommandSchema = z.discriminatedUnion('type', [
 export type WorkplaceCommand = z.infer<typeof workplaceCommandSchema>;
 const supervisorRoles: Record<string, string> = { 'shop-assistant-part': 'retail', 'cafe-part': 'barista' };
 
+function colleagueRole(roleId: string, supervisor: boolean): string {
+  const owner = jobs.find(item => item.id === roleId)!;
+  const accessiblePeer = () => jobs.find(item => item.sector === owner.sector && !item.partTime && !item.specialCareer && !item.experienceMonths)?.id;
+  // Existing jobs keep their exact roster generation. New senior jobs can have
+  // colleagues in another role without inventing receipt-backed NPC experience.
+  if (owner.experienceMonths) return accessiblePeer() ?? roleId;
+  if (supervisor && owner.partTime) return supervisorRoles[roleId] ?? accessiblePeer() ?? roleId;
+  return roleId;
+}
+
 export function workplaceReason(world: World): string | undefined {
   const person = active(world), job = person.employment, role = jobs.find(item => item.id === job?.roleId);
   if (!job || !role) return 'Start a job before meeting colleagues';
@@ -55,7 +65,7 @@ function addColleague(world: World, place: Workplace, role: WorkplaceMember['rol
   const known = world.workplaces.filter(item => item.personId === place.personId && item.employer === place.employer && item.country === place.country && item.city === place.city).flatMap(item => item.members).find(member => member.role === role && !presentIds.has(member.personId) && member.personId !== place.personId && stillEmployedHere(world, place, member));
   let person = known && world.people[known.personId];
   if (!person) {
-    const job = world.people[place.personId].employment!, staffRole = role === 'supervisor' ? (supervisorRoles[job.roleId] ?? job.roleId) : job.roleId;
+    const job = world.people[place.personId].employment!, staffRole = colleagueRole(job.roleId, role === 'supervisor');
     person = createContact(world, { age: draw(world, 'npcs', role === 'supervisor' ? 35 : 28, role === 'supervisor' ? 58 : 50), country: place.country, city: place.city, qualifiedRole: staffRole });
     // This is a generated adult professional's background at the named employer,
     // not backdated player attendance or a new salary payment.
@@ -130,7 +140,7 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
     person.stats.energy -= 6; if (accepted && hourly) updateHourlyRate(world, person, 'raise', job.rank, world.workRaises.at(-1)!.id); else job.annualPay = annualPayAfter;
     const salary = formatMoney({ minor: annualPayAfter, currency: job.currency });
     fact(world, 'I asked ' + supervisor.firstName + ' for a raise. ' + (accepted ? 'My annual gross pay rose to ' + salary + '.' : 'The answer was no.'), 'work-raise');
-    result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? 'Your supervisor, ' + fullName(supervisor) + ', agrees to a 5% raise. Your higher rate starts with your next paid period.' : 'Your supervisor, ' + fullName(supervisor) + ', says the budget will not stretch. Your current pay stays the same; you can ask again next year.', 'career', [
+    result(world, accepted ? 'Worth the awkward conversation' : 'Not this year', accepted ? 'Your supervisor, '+supervisor.firstName+', agreed to a 5% raise. Your annual gross pay is now '+salary+', starting with your next paid period.' : 'Your supervisor, '+supervisor.firstName+', declined your raise request. Your pay stays at '+salary+' a year; try again next year.', 'person-action:request-raise', [
       { id: 'salary', label: 'Annual gross pay', value: salary, tone: accepted ? 'positive' : 'neutral' },
       { id: 'energy', label: 'Energy', value: '−6%', tone: 'negative' },
     ]); return;
@@ -142,7 +152,7 @@ export function resolveWorkplace(world: World, command: WorkplaceCommand) {
   person.stats.energy -= 4; job.performance += performanceGain; const bondBefore = relation.strength;
   if (accepted) { relation.strength = bounded(relation.strength + 2); relation.trust = bounded(relation.trust + 1); }
   fact(world, 'I asked ' + supervisor.firstName + ' for work feedback. ' + (accepted ? 'We found a useful change to make.' : 'They could not fit in the discussion this year.'), 'work-feedback');
-  result(world, accepted ? 'A clearer target' : 'Not a good time', accepted ? 'Your supervisor, ' + fullName(supervisor) + ', gives you one useful thing to change. It is considerably more helpful than “be more proactive”.' : 'Your supervisor, ' + fullName(supervisor) + ', is too busy to talk. You leave the discussion for another year.', 'career', [
+  result(world, accepted ? 'A clearer target' : 'Not a good time', accepted ? 'Your supervisor, '+supervisor.firstName+', helped you find a useful change. '+(performanceGain?'Your performance rose by '+performanceGain+' percentage points.':'Your performance stayed at '+job.performance+'%.') : 'Your supervisor, '+supervisor.firstName+', could not talk this time. You can ask again next year.', 'person-action:work-feedback', [
     { id: 'performance', label: 'Performance', value: '+' + performanceGain + '%', tone: performanceGain ? 'positive' : 'neutral' },
     { id: 'energy', label: 'Energy', value: '−4%', tone: 'negative' },
     ...(accepted ? [{ id: 'bond', label: 'Relationship', value: '+' + (relation.strength - bondBefore) + '%', tone: relation.strength > bondBefore ? 'positive' as const : 'neutral' as const }] : []),

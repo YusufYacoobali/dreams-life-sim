@@ -10,14 +10,16 @@ type PortraitProps = {
   appearance: Person['appearance']; age: number; name: string;
   size?: number; decorative?: boolean;
   personId?: string;
+  /** The shared Portrait wrapper supplies this only for proven legacy NPCs. */
+  legacyDefaultGender?: Person['gender'];
 };
 
-export function CharacterPortrait({ appearance, age, name, size = 56, decorative = false, personId }: PortraitProps) {
+export function CharacterPortrait({ appearance, age, name, size = 56, decorative = false, personId, legacyDefaultGender }: PortraitProps) {
   return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'image'}
     accessibilityLabel={decorative ? undefined : name} accessibilityElementsHidden={decorative}
     importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'}
     style={{ width: size, height: size, borderRadius: size / 2, overflow: 'hidden' }}>
-    <PortraitDrawing {...portraitTraits(appearance, age, personId)} size={size} />
+    <PortraitDrawing {...portraitTraits(appearance, age, personId, legacyDefaultGender)} size={size} />
   </View>;
 }
 

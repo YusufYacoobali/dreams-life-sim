@@ -7,6 +7,7 @@ import {
   waitFor,
 } from '@testing-library/react-native';
 import { AccessibilityInfo, AppState } from 'react-native';
+import * as Native from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useStore } from 'zustand';
 import { createGameStore } from '../../src/state/gameStore';
@@ -115,9 +116,12 @@ jest.mock('react-native-worklets', () => ({
 }));
 import { LiveMiniGame } from '../../src/minigames/LiveMiniGame';
 import { MiniGamePlayground } from '../../src/minigames/MiniGamePlayground';
+import { MiniGameScreen } from '../../src/minigames/components/MiniGameScreen';
+import { GameButton } from '../../src/minigames/components/GameButton';
+import type { MiniGameAction, MiniGameSession } from '../../src/minigames/core/types';
 import GameLayout from '../../app/(game)/_layout';
 
-const frame = (children: React.ReactNode) => (
+const frame = (children: React.ReactNode, haptics = false) => (
   <SafeAreaProvider
     initialMetrics={{
       frame: { x: 0, y: 0, width: 400, height: 900 },
@@ -127,7 +131,7 @@ const frame = (children: React.ReactNode) => (
     <ThemeProvider appearance="dark">
       <FeedbackProvider
         reducedMotion
-        haptics={false}
+        haptics={haptics}
         onButtonFeedback={mockHaptic}
         soundEffects={false}
         onButtonSound={mockSound}
@@ -183,7 +187,7 @@ beforeEach(() => {
 afterEach(() => {
   jest.useRealTimers();
   jest.restoreAllMocks();
-  sqlite?.close();
+  if (sqlite?.isOpen) sqlite.close();
 });
 const play = async () => {
   fireEvent.press(screen.getByRole('button', { name: 'Play' }));
@@ -192,6 +196,107 @@ const play = async () => {
   );
   act(() => jest.advanceTimersByTime(1100));
 };
+
+function practiceFlight(assisted = true): MiniGameSession {
+  return {
+    id: 'practice_controls', lifeId: 'practice', personId: 'practice',
+    kind: 'astronaut', ownerId: 'practice', contextId: 'practice',
+    started: { year: 2026, month: 1, day: 1 }, startedRevision: 0,
+    difficulty: 5, seed: 42, assisted, status: 'active', paused: false,
+    elapsedMs: 0, inputs: [], score: null, rating: null, settled: null, appliedMonth: null,
+  };
+}
+const flightProps = (session: MiniGameSession) => ({
+  kind: 'astronaut' as const, session, difficulty: session.difficulty,
+  practice: true, error: null as string | null, busy: false,
+  onStart: jest.fn(async () => true), onInput: jest.fn(async (_action: MiniGameAction, _at: number) => true),
+  onPause: jest.fn(async () => true), onResume: jest.fn(async () => true),
+  onComplete: jest.fn(async () => true), onForfeit: jest.fn(async () => true),
+  onExit: jest.fn(), onSkip: jest.fn(async () => true),
+});
+
+test('docking uses four circular 48dp+ directions around Coast at large text, including unassisted play', async () => {
+  jest.spyOn(require('react-native'), 'useWindowDimensions').mockReturnValue({ width: 320, height: 568, scale: 2, fontScale: 1.6 });
+  const props = flightProps(practiceFlight(false));
+  await show(<MiniGameScreen {...props} />);
+  act(() => jest.advanceTimersByTime(1100));
+  expect(screen.queryByText(/LEVEL|Difficulty/)).toBeNull();
+  const disc = Native.StyleSheet.flatten(screen.getByTestId('docking-control-disc').props.style);
+  expect(disc.width).toBe(disc.height);
+  expect(disc.borderRadius).toBe(disc.width / 2);
+  for (const name of ['Thrust left', 'Thrust up', 'Thrust right', 'Thrust down to brake', 'Coast']) {
+    const button = screen.getByRole('button', { name });
+    const style = Native.StyleSheet.flatten(button.props.style);
+    expect(style.width).toBeGreaterThanOrEqual(48);
+    expect(style.height).toBeGreaterThanOrEqual(48);
+    expect(style.width).toBe(style.height);
+    expect(style.borderRadius).toBe(style.width / 2);
+    expect(button).toBeEnabled();
+  }
+  expect(screen.getByRole('button', { name: 'Coast' })).toHaveProp('accessibilityHint', 'Keep drifting without thrust');
+  expect(Native.StyleSheet.flatten(screen.getByRole('button', { name: 'Coast' }).props.style).width).toBe(88);
+  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen());
+  expect(props.onPause).toHaveBeenCalledTimes(1);
+});
+
+test('rapid docking callbacks persist one typed input and paused or unmounted controls cannot send or buzz', async () => {
+  let release!: (accepted: boolean) => void;
+  const props = flightProps(practiceFlight());
+  props.onInput = jest.fn((_action: MiniGameAction, _at: number) => new Promise<boolean>(resolve => { release = resolve; }));
+  const view = render(frame(<MiniGameScreen {...props} />, true));
+  await act(async () => {});
+  act(() => jest.advanceTimersByTime(1100));
+  const left = screen.UNSAFE_getAllByType(GameButton).find(node => node.props.accessibilityLabel === 'Thrust left')!.props.onPress;
+  const right = screen.UNSAFE_getAllByType(GameButton).find(node => node.props.accessibilityLabel === 'Thrust right')!.props.onPress;
+  act(() => { left(); right(); left(); });
+  expect(props.onInput).toHaveBeenCalledTimes(1);
+  expect(props.onInput).toHaveBeenCalledWith({ type: 'thrust', direction: 'left' }, 400);
+  expect(mockHaptic).toHaveBeenCalledTimes(1);
+  await act(async () => release(true));
+  fireEvent.press(screen.getByRole('button', { name: 'Pause' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Resume' })).toBeOnTheScreen());
+  act(() => { right(); left(); });
+  expect(props.onInput).toHaveBeenCalledTimes(1);
+  expect(mockHaptic).toHaveBeenCalledTimes(1);
+  view.unmount();
+  act(() => right());
+  expect(props.onInput).toHaveBeenCalledTimes(1);
+  expect(mockHaptic).toHaveBeenCalledTimes(1);
+});
+
+test('a failed docking move retries its exact original input without changing the saved level', async () => {
+  const props = flightProps(practiceFlight());
+  props.error = 'The move could not be saved.';
+  props.onInput.mockResolvedValueOnce(false).mockResolvedValue(true);
+  await show(<MiniGameScreen {...props} />);
+  act(() => jest.advanceTimersByTime(1100));
+  fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Retry save & resume' })).toBeEnabled());
+  fireEvent.press(screen.getByRole('button', { name: 'Retry save & resume' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: 'Thrust right' })).toBeEnabled());
+  expect(props.onInput.mock.calls).toEqual([
+    [{ type: 'thrust', direction: 'left' }, 400],
+    [{ type: 'thrust', direction: 'left' }, 400],
+  ]);
+  expect(screen.UNSAFE_getByType(MiniGameScreen).props.session.difficulty).toBe(5);
+  expect(mockHaptic).not.toHaveBeenCalled();
+});
+
+test('screen-reader detection enables assisted controls before Play and keeps the choice adjustable', async () => {
+  let announce!: (enabled: boolean) => void;
+  jest.spyOn(AccessibilityInfo, 'isScreenReaderEnabled').mockReturnValue(new Promise<boolean>(resolve => { announce = resolve; }));
+  await setup();
+  await show(<LiveMiniGame />);
+  const toggle = screen.getByRole('switch', { name: 'Assisted controls' });
+  fireEvent(toggle, 'valueChange', false);
+  expect(toggle).toHaveProp('value', false);
+  await act(async () => announce(true));
+  expect(screen.getByRole('switch', { name: 'Assisted controls' })).toHaveProp('value', true);
+  fireEvent(screen.getByRole('switch', { name: 'Assisted controls' }), 'valueChange', false);
+  expect(screen.getByRole('switch', { name: 'Assisted controls' })).toHaveProp('value', false);
+  expect(mockStore.getState().world!.miniGames).toHaveLength(0);
+});
 
 test('assisted football uses real controls, commits a derived result and honours disabled audio/haptic preferences', async () => {
   const original = await setup();
@@ -261,16 +366,19 @@ test('exit and reopen preserve a paused burglary; explicit forfeit resolves its 
   expect(screen.getByText('Forfeited')).toBeOnTheScreen();
 });
 
-test('playground difficulty, input, forfeit and replay never dispatch a live command or modify SQLite', async () => {
+test('fixed playground controls, forfeit and replay never dispatch a live command or modify SQLite', async () => {
   const initial = await setup(),
     before = encodeWorld(initial),
     dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
   await show(<MiniGamePlayground />);
-  fireEvent.press(screen.getByRole('radio', { name: 'Level 5' }));
+  expect(screen.queryAllByRole('radio')).toHaveLength(0);
+  expect(screen.queryByText(/Difficulty|Level \d|LEVEL \d/)).toBeNull();
   fireEvent.press(screen.getByText('Orbital Docking', { exact: true }));
   fireEvent.press(await screen.findByRole('button', { name: 'Play' }));
   await act(async () => {});
   act(() => jest.advanceTimersByTime(1100));
+  expect(screen.queryByText(/LEVEL \d/)).toBeNull();
+  expect(screen.getByRole('button', { name: 'Coast' })).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: 'Thrust left' }));
   await act(async () => {});
   fireEvent.press(screen.getByRole('button', { name: 'Pause' }));

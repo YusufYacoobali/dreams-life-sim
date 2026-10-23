@@ -10,7 +10,7 @@ import { hasWithdrawnFromSchool } from './schoolSchemas';
 export const hourlyAnnual = (terms: HourlyTerms) => terms.hourlyRate * BigInt(terms.weeklyHours * terms.paidWeeks);
 /** Authored 12-hour baseline, not a claim about national minimum wages. */
 export function hourlyQuote(country: CountryCode, role: JobRole, weeklyHours: HourlyTerms['weeklyHours'] = 12): HourlyTerms {
-  if (!role.partTime || !['shop-assistant-part', 'cafe-part'].includes(role.id)) throw new Error('This role uses an annual salary');
+  if (!role.partTime || role.specialCareer || !jobs.some(item => item.id === role.id && item.partTime && !item.specialCareer)) throw new Error('This role uses an annual salary');
   const rate = roundRatio(rules[country].baseWage * BigInt(role.wageBps), 10000n * 12n * 52n);
   return { hourlyRate: rate > 0n ? rate : 1n, weeklyHours, paidWeeks: 52 };
 }

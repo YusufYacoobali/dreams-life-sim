@@ -15,6 +15,8 @@ import { isConfined } from './legalSchemas';
 import { settleBackground } from './npcBudget';
 import { supportGenerosity } from './personSupport';
 import { personActionKey, type PersonAction, type PersonActionCommand } from './personActionSchemas';
+import { personActionBody, personReference } from '../content/personInteractionWriting';
+import { relationLabel } from './relationships';
 export { personActionIds, personActionCommandSchema, type PersonAction, type PersonActionCommand } from './personActionSchemas';
 const titles:Record<PersonAction,string>={insult:'Insult',distance:'Distance Yourself','ask-advice':'Ask for Advice','ask-permission':'Ask for Permission','ask-activity':'Ask to Go Out Together','request-gift':'Ask for a Gift',praise:'Praise Your Child',scold:'Scold Your Child','ask-help':'Ask Your Child for Help'};
 function roles(world:World,personId:string) {
@@ -56,20 +58,21 @@ export function resolvePersonAction(world:World,command:PersonActionCommand) {
   const actor=active(world),target=world.people[command.personId],relation=relationFor(world,actor.id,target.id)!,action=command.action;
   const roll=draw(world,'outcomes',1,100),chance=Math.max(10,Math.min(95,Math.round(20+relation.strength*.5+relation.trust*.25+supportGenerosity(target.traits))));
   const row:World['personActionHistory'][number]={id:'person_action_'+world.revision,actorId:actor.id,targetId:target.id,relationshipId:relation.id,action,date:{...world.date},outcome:'completed',chance,roll,assetId:null,transactionId:null,permissionId:null};
-  let body='',title=titles[action],delta=0;const effects:RuntimeEffectRow[]=[];
-  if(action==='insult') {delta=-10;relation.trust=bounded(relation.trust-6);relation.memories.push('argument:'+world.date.year);stats(target,{happiness:-3});body='You found the exact wrong thing to say. '+target.firstName+' noticed.';}
-  else if(action==='distance'){delta=-15;relation.trust=bounded(relation.trust-4);effects.push(...stats(actor,{stress:-4}));body='You asked for some space. Your bond weakened; your shared history stayed.';}
-  else if(action==='praise'){delta=4;stats(target,{happiness:3,discipline:1});body=target.firstName+' stood a little taller. You may have to hear about this achievement again.';}
-  else if(action==='scold'){delta=-3;stats(target,{discipline:3,happiness:-2});body='You set a firm boundary. '+target.firstName+' learned something, possibly about your serious voice.';}
+  const reference=personReference(target.firstName,relationLabel(world,relation));
+  let giftDetails:{name:string;price:string}|undefined;
+  let delta=0;const effects:RuntimeEffectRow[]=[];
+  if(action==='insult') {delta=-10;relation.trust=bounded(relation.trust-6);relation.memories.push('argument:'+world.date.year);stats(target,{happiness:-3});}
+  else if(action==='distance'){delta=-15;relation.trust=bounded(relation.trust-4);effects.push(...stats(actor,{stress:-4}));}
+  else if(action==='praise'){delta=4;stats(target,{happiness:3,discipline:1});}
+  else if(action==='scold'){delta=-3;stats(target,{discipline:3,happiness:-2});}
   else if(action==='ask-permission') {
     row.outcome=roll<=chance?'approved':'declined';delta=row.outcome==='approved'?1:0;
-    body=row.outcome==='approved'?target.firstName+' agreed to one free local outing together this year. Ask to go out when you are both ready.':target.firstName+' said no to the outing. An extremely traditional answer.';
   } else if(action==='ask-activity') {
-    row.permissionId=permission(world,target.id)!.id;delta=5;relation.trust=bounded(relation.trust+2);stats(target,{energy:-4,happiness:2});effects.push(...stats(actor,{energy:-4,happiness:5,stress:-3}));body='You and '+target.firstName+' went for a free local outing. Even the weather mostly cooperated.';
+    row.permissionId=permission(world,target.id)!.id;delta=5;relation.trust=bounded(relation.trust+2);stats(target,{energy:-4,happiness:2});effects.push(...stats(actor,{energy:-4,happiness:5,stress:-3}));
   } else if(action==='ask-advice') {
-    row.outcome=roll<=chance?'approved':'declined';if(row.outcome==='approved'){delta=3;effects.push(...stats(actor,{smarts:target.stats.smarts>=50?2:1,stress:-3}));body=target.firstName+' helped you think it through. Annoyingly, they had a point.';}else body=target.firstName+' was not ready to talk. You gave them some space.';
+    row.outcome=roll<=chance?'approved':'declined';if(row.outcome==='approved'){delta=3;effects.push(...stats(actor,{smarts:target.stats.smarts>=50?2:1,stress:-3}));}
   } else if(action==='ask-help') {
-    row.outcome=roll<=chance?'approved':'declined';if(row.outcome==='approved'){delta=3;stats(target,{energy:-4});effects.push(...stats(actor,{energy:5,stress:-8,health:2}));body=target.firstName+' helped with the day-to-day chores. Your to-do list finally blinked first.';}else body=target.firstName+' could not help today. No guilt trip was booked.';
+    row.outcome=roll<=chance?'approved':'declined';if(row.outcome==='approved'){delta=3;stats(target,{energy:-4});effects.push(...stats(actor,{energy:5,stress:-8,health:2}));}
   } else {
     settleBackground(world,target,world.date.year*12+world.date.month-1);
     const offer=assetCatalog.find(item=>item.id==='watch')!,price=roundRatio(rules[target.country].baseWage*BigInt(offer.priceBps),10000n),account=accountFor(world,target);
@@ -78,12 +81,12 @@ export function resolvePersonAction(world:World,command:PersonActionCommand) {
       const id='asset_present_'+world.revision;post(world,-price,0n,'person-present','Gift for '+fullName(actor),null,target,account.currency);row.transactionId=world.ledger.at(-1)!.id;row.assetId=id;
       world.assets.push({id,ownerId:actor.id,catalogId:offer.id,kind:offer.kind,name:offer.name,country:target.country,city:target.city,currency:account.currency,pricePaid:price,costBasis:price,value:price,condition:offer.condition,ageMonths:0,acquired:{...world.date},mortgageId:null,primaryHome:false,rental:'none',rentPerMonth:0n,upkeepBps:offer.upkeepBps,insured:false,listing:null,provenance:['Gift from '+fullName(target)+' to '+fullName(actor)+' in '+world.date.year],ownershipSource:'gift',titleSince:{...world.date}});
       if(!world.accounts.some(item=>item.ownerId===actor.id&&item.currency===account.currency))world.accounts.push({id:'account_'+actor.id+'_'+account.currency,ownerId:actor.id,currency:account.currency,cash:0n,openingCash:0n,lockedCash:0n});
-      protectSeparateProperty(world,actor.id,{minor:price,currency:account.currency},target.id);delta=3;effects.push(...stats(actor,{happiness:4}));body=target.firstName+' bought you a '+offer.name.toLowerCase()+' for '+formatMoney({minor:price,currency:account.currency})+'. It is yours, and their money paid for it.';
-    } else body=target.firstName+' passed on buying a gift. Apparently your presence will have to do.';
+      protectSeparateProperty(world,actor.id,{minor:price,currency:account.currency},target.id);delta=3;effects.push(...stats(actor,{happiness:4}));giftDetails={name:offer.name,price:formatMoney({minor:price,currency:account.currency})};
+    }
   }
   world.personActionHistory.push(row);world.actionCounts[personActionKey(actor.id,target.id,action,world.date.year)]=1;relation.lastInteractionYear=world.date.year;relation.memories.push(action+':'+world.date.year);
   const before=relation.strength;relation.strength=bounded(before+delta);const actual=relation.strength-before;
   if(actual)effects.unshift({id:'bond',label:'Relationship',value:(actual>=0?'+':'')+actual+'%',tone:actual>0?'positive':'negative'});
   fact(world,'I '+({insult:'insulted',distance:'distanced myself from','ask-advice':'asked for advice from','ask-permission':'asked permission from','ask-activity':'went out with','request-gift':'asked for a gift from',praise:'praised',scold:'scolded','ask-help':'asked for help from'}[action])+' '+fullName(target)+'.','relationships');
-  result(world,title,body,action==='request-gift'?'gift':action==='ask-activity'?'family-life':'conversation',effects);
+  result(world,titles[action],personActionBody(action,reference,row.outcome==='approved',giftDetails),'person-action:'+action,effects);
 }

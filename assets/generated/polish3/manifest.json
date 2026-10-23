@@ -1,0 +1,3186 @@
+{
+  "generator": "Built-in image_gen.imagegen only; Krea not used",
+  "style_reference": "assets/generated/activity-atlas.png and design/polish/event-icons.png inspected visually",
+  "registration": "Alpha component ownership; authored pixels cropped and scaled proportionally, never redrawn.",
+  "sources": [
+    {
+      "file": "design/polish3/art/actions-a.png",
+      "generated_path": "/workspace/generated_images/exec-ce67db44-dfd9-4e5d-8ac8-11882f9bf295.png",
+      "sha256": "a9352253aad0100b582e2da03d5354f63b0d2a8336e64312505375c32a5654dd",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "talk",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            0,
+            57,
+            338,
+            280
+          ]
+        },
+        {
+          "id": "compliment",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            322,
+            17,
+            609,
+            283
+          ]
+        },
+        {
+          "id": "spend-time",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            608,
+            29,
+            943,
+            326
+          ]
+        },
+        {
+          "id": "argue",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            929,
+            46,
+            1242,
+            295
+          ]
+        },
+        {
+          "id": "apologise",
+          "kind": "actions",
+          "cell": 4,
+          "rect": [
+            0,
+            321,
+            311,
+            647
+          ]
+        },
+        {
+          "id": "insult",
+          "kind": "actions",
+          "cell": 5,
+          "rect": [
+            303,
+            314,
+            629,
+            601
+          ]
+        },
+        {
+          "id": "distance",
+          "kind": "actions",
+          "cell": 6,
+          "rect": [
+            606,
+            335,
+            951,
+            656
+          ]
+        },
+        {
+          "id": "ask-advice",
+          "kind": "actions",
+          "cell": 7,
+          "rect": [
+            958,
+            318,
+            1240,
+            649
+          ]
+        },
+        {
+          "id": "ask-permission",
+          "kind": "actions",
+          "cell": 8,
+          "rect": [
+            0,
+            582,
+            337,
+            952
+          ]
+        },
+        {
+          "id": "ask-activity",
+          "kind": "actions",
+          "cell": 9,
+          "rect": [
+            305,
+            572,
+            647,
+            942
+          ]
+        },
+        {
+          "id": "request-gift",
+          "kind": "actions",
+          "cell": 10,
+          "rect": [
+            612,
+            605,
+            939,
+            929
+          ]
+        },
+        {
+          "id": "praise",
+          "kind": "actions",
+          "cell": 11,
+          "rect": [
+            925,
+            618,
+            1254,
+            961
+          ]
+        },
+        {
+          "id": "scold",
+          "kind": "actions",
+          "cell": 12,
+          "rect": [
+            11,
+            914,
+            328,
+            1226
+          ]
+        },
+        {
+          "id": "ask-help",
+          "kind": "actions",
+          "cell": 13,
+          "rect": [
+            326,
+            909,
+            643,
+            1230
+          ]
+        },
+        {
+          "id": "give-money",
+          "kind": "actions",
+          "cell": 14,
+          "rect": [
+            626,
+            935,
+            948,
+            1230
+          ]
+        },
+        {
+          "id": "ask-money",
+          "kind": "actions",
+          "cell": 15,
+          "rect": [
+            942,
+            915,
+            1229,
+            1223
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/actions-b.png",
+      "generated_path": "/workspace/generated_images/exec-21041bce-caa8-4b36-b8fd-020b6bfa2e6e.png",
+      "sha256": "30d43dce7d021615d5d98b0433193f9dfb74c9d414511710543ad0f2fae38086",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "ask-loan",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            25,
+            66,
+            316,
+            335
+          ]
+        },
+        {
+          "id": "accept-loan",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            335,
+            49,
+            635,
+            310
+          ]
+        },
+        {
+          "id": "decline-loan",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            628,
+            41,
+            956,
+            332
+          ]
+        },
+        {
+          "id": "repay-loan",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            948,
+            17,
+            1245,
+            320
+          ]
+        },
+        {
+          "id": "academic-help",
+          "kind": "actions",
+          "cell": 4,
+          "rect": [
+            0,
+            323,
+            324,
+            605
+          ]
+        },
+        {
+          "id": "work-feedback",
+          "kind": "actions",
+          "cell": 5,
+          "rect": [
+            328,
+            349,
+            635,
+            659
+          ]
+        },
+        {
+          "id": "request-raise",
+          "kind": "actions",
+          "cell": 6,
+          "rect": [
+            622,
+            306,
+            929,
+            652
+          ]
+        },
+        {
+          "id": "review-custody",
+          "kind": "actions",
+          "cell": 7,
+          "rect": [
+            925,
+            328,
+            1254,
+            633
+          ]
+        },
+        {
+          "id": "move-in",
+          "kind": "actions",
+          "cell": 8,
+          "rect": [
+            0,
+            631,
+            326,
+            918
+          ]
+        },
+        {
+          "id": "ask-date",
+          "kind": "actions",
+          "cell": 9,
+          "rect": [
+            317,
+            639,
+            647,
+            906
+          ]
+        },
+        {
+          "id": "propose",
+          "kind": "actions",
+          "cell": 10,
+          "rect": [
+            625,
+            633,
+            934,
+            916
+          ]
+        },
+        {
+          "id": "plan-wedding",
+          "kind": "actions",
+          "cell": 11,
+          "rect": [
+            923,
+            624,
+            1246,
+            947
+          ]
+        },
+        {
+          "id": "family-planning",
+          "kind": "actions",
+          "cell": 12,
+          "rect": [
+            11,
+            934,
+            325,
+            1226
+          ]
+        },
+        {
+          "id": "divorce",
+          "kind": "actions",
+          "cell": 13,
+          "rect": [
+            320,
+            934,
+            635,
+            1254
+          ]
+        },
+        {
+          "id": "breakup",
+          "kind": "actions",
+          "cell": 14,
+          "rect": [
+            656,
+            962,
+            932,
+            1208
+          ]
+        },
+        {
+          "id": "social-profile",
+          "kind": "actions",
+          "cell": 15,
+          "rect": [
+            947,
+            933,
+            1229,
+            1220
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/mixed.png",
+      "generated_path": "/workspace/generated_images/exec-20979d8a-4732-4729-93c8-8eb8f7ccc230.png",
+      "sha256": "ee15d5a4fbfad3b7f0f937a415fb8a1812278d71b888aaaf873df6216a5fe0e3",
+      "size": [
+        1355,
+        1160
+      ],
+      "sprites": [
+        {
+          "id": "become-best-friends",
+          "kind": "actions",
+          "cell": 0,
+          "rect": [
+            12,
+            23,
+            347,
+            352
+          ]
+        },
+        {
+          "id": "end-best-friendship",
+          "kind": "actions",
+          "cell": 1,
+          "rect": [
+            352,
+            55,
+            682,
+            294
+          ]
+        },
+        {
+          "id": "ask-teen-date",
+          "kind": "actions",
+          "cell": 2,
+          "rect": [
+            686,
+            19,
+            1005,
+            326
+          ]
+        },
+        {
+          "id": "end-teen-relationship",
+          "kind": "actions",
+          "cell": 3,
+          "rect": [
+            1007,
+            46,
+            1347,
+            350
+          ]
+        },
+        {
+          "id": "net-worth",
+          "kind": "finance",
+          "cell": 4,
+          "rect": [
+            0,
+            298,
+            341,
+            599
+          ]
+        },
+        {
+          "id": "finances",
+          "kind": "finance",
+          "cell": 5,
+          "rect": [
+            340,
+            327,
+            710,
+            572
+          ]
+        },
+        {
+          "id": "shop-assistant-part",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            687,
+            337,
+            1007,
+            585
+          ]
+        },
+        {
+          "id": "cafe-part",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            1015,
+            345,
+            1355,
+            584
+          ]
+        },
+        {
+          "id": "cleaner",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            31,
+            592,
+            355,
+            880
+          ]
+        },
+        {
+          "id": "retail",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            348,
+            620,
+            679,
+            874
+          ]
+        },
+        {
+          "id": "barista",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            692,
+            575,
+            1007,
+            888
+          ]
+        },
+        {
+          "id": "warehouse",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            1035,
+            597,
+            1341,
+            873
+          ]
+        },
+        {
+          "id": "administrator",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            868,
+            355,
+            1160
+          ]
+        },
+        {
+          "id": "support",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            337,
+            901,
+            678,
+            1140
+          ]
+        },
+        {
+          "id": "plumber",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            693,
+            876,
+            1016,
+            1143
+          ]
+        },
+        {
+          "id": "technician",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            1017,
+            871,
+            1339,
+            1144
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-1.png",
+      "generated_path": "/workspace/generated_images/exec-f08b98c5-d928-48a0-ab28-4e115e40044f.png",
+      "sha256": "6c0c07c8be167bebe745ba52f930624dc028ca6e7c4fb514ff87492e8ca9c727",
+      "size": [
+        1367,
+        1151
+      ],
+      "sprites": [
+        {
+          "id": "designer",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            34,
+            353,
+            304
+          ]
+        },
+        {
+          "id": "teacher",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            349,
+            14,
+            682,
+            302
+          ]
+        },
+        {
+          "id": "developer",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            684,
+            20,
+            1004,
+            294
+          ]
+        },
+        {
+          "id": "accountant",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            1038,
+            17,
+            1367,
+            310
+          ]
+        },
+        {
+          "id": "researcher",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            25,
+            304,
+            310,
+            589
+          ]
+        },
+        {
+          "id": "journalist",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            351,
+            316,
+            684,
+            574
+          ]
+        },
+        {
+          "id": "lawyer",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            694,
+            304,
+            1017,
+            588
+          ]
+        },
+        {
+          "id": "doctor",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            1033,
+            300,
+            1357,
+            585
+          ]
+        },
+        {
+          "id": "receptionist",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            0,
+            571,
+            342,
+            849
+          ]
+        },
+        {
+          "id": "postal-worker",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            348,
+            580,
+            666,
+            867
+          ]
+        },
+        {
+          "id": "delivery-driver",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            687,
+            612,
+            1030,
+            864
+          ]
+        },
+        {
+          "id": "bus-driver",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            1020,
+            580,
+            1358,
+            845
+          ]
+        },
+        {
+          "id": "gardener",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            857,
+            341,
+            1151
+          ]
+        },
+        {
+          "id": "kitchen-assistant",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            350,
+            887,
+            692,
+            1137
+          ]
+        },
+        {
+          "id": "cook",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            685,
+            873,
+            1021,
+            1138
+          ]
+        },
+        {
+          "id": "baker",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            1028,
+            867,
+            1356,
+            1142
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-2.png",
+      "generated_path": "/workspace/generated_images/exec-d30bbd52-4b38-488f-952c-24f217cf37a3.png",
+      "sha256": "41076ab03864ba7c560a8fb7cb2c3e675fcb132237933e6fdda942d0670c6a71",
+      "size": [
+        1308,
+        1203
+      ],
+      "sprites": [
+        {
+          "id": "chef",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            15,
+            327,
+            293
+          ]
+        },
+        {
+          "id": "electrician",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            349,
+            29,
+            649,
+            294
+          ]
+        },
+        {
+          "id": "carpenter",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            659,
+            22,
+            958,
+            296
+          ]
+        },
+        {
+          "id": "mechanic",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            990,
+            25,
+            1292,
+            293
+          ]
+        },
+        {
+          "id": "welder",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            16,
+            304,
+            331,
+            636
+          ]
+        },
+        {
+          "id": "care-worker",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            335,
+            308,
+            660,
+            594
+          ]
+        },
+        {
+          "id": "nurse",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            659,
+            314,
+            971,
+            586
+          ]
+        },
+        {
+          "id": "physiotherapist",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            976,
+            309,
+            1291,
+            601
+          ]
+        },
+        {
+          "id": "engineer",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            11,
+            605,
+            331,
+            884
+          ]
+        },
+        {
+          "id": "architect",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            337,
+            607,
+            658,
+            888
+          ]
+        },
+        {
+          "id": "data-analyst",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            655,
+            606,
+            983,
+            883
+          ]
+        },
+        {
+          "id": "it-technician",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            978,
+            595,
+            1284,
+            886
+          ]
+        },
+        {
+          "id": "librarian",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            0,
+            873,
+            345,
+            1203
+          ]
+        },
+        {
+          "id": "social-worker",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            348,
+            880,
+            652,
+            1183
+          ]
+        },
+        {
+          "id": "marketing-executive",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            657,
+            877,
+            984,
+            1185
+          ]
+        },
+        {
+          "id": "human-resources",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            978,
+            892,
+            1298,
+            1183
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-3.png",
+      "generated_path": "/workspace/generated_images/exec-e310c925-99e9-4ff4-9da0-9ed466f2743a.png",
+      "sha256": "de0089ff296e4ba4610ffb86d6028602b457fde2f6e0262ae6d54e91c3a6871e",
+      "size": [
+        1254,
+        1254
+      ],
+      "sprites": [
+        {
+          "id": "project-manager",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            54,
+            310,
+            324
+          ]
+        },
+        {
+          "id": "operations-manager",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            312,
+            36,
+            633,
+            316
+          ]
+        },
+        {
+          "id": "sales-representative",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            608,
+            60,
+            954,
+            325
+          ]
+        },
+        {
+          "id": "estate-agent",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            947,
+            59,
+            1244,
+            276
+          ]
+        },
+        {
+          "id": "insurance-adviser",
+          "kind": "jobs",
+          "cell": 4,
+          "rect": [
+            0,
+            337,
+            321,
+            617
+          ]
+        },
+        {
+          "id": "bank-clerk",
+          "kind": "jobs",
+          "cell": 5,
+          "rect": [
+            304,
+            312,
+            630,
+            613
+          ]
+        },
+        {
+          "id": "procurement-officer",
+          "kind": "jobs",
+          "cell": 6,
+          "rect": [
+            618,
+            320,
+            937,
+            622
+          ]
+        },
+        {
+          "id": "logistics-coordinator",
+          "kind": "jobs",
+          "cell": 7,
+          "rect": [
+            945,
+            314,
+            1254,
+            613
+          ]
+        },
+        {
+          "id": "software-tester",
+          "kind": "jobs",
+          "cell": 8,
+          "rect": [
+            0,
+            614,
+            312,
+            939
+          ]
+        },
+        {
+          "id": "cybersecurity-analyst",
+          "kind": "jobs",
+          "cell": 9,
+          "rect": [
+            320,
+            630,
+            634,
+            922
+          ]
+        },
+        {
+          "id": "library-part",
+          "kind": "jobs",
+          "cell": 10,
+          "rect": [
+            637,
+            618,
+            955,
+            933
+          ]
+        },
+        {
+          "id": "cinema-part",
+          "kind": "jobs",
+          "cell": 11,
+          "rect": [
+            939,
+            649,
+            1240,
+            918
+          ]
+        },
+        {
+          "id": "grocery-part",
+          "kind": "jobs",
+          "cell": 12,
+          "rect": [
+            24,
+            935,
+            342,
+            1222
+          ]
+        },
+        {
+          "id": "pet-care-part",
+          "kind": "jobs",
+          "cell": 13,
+          "rect": [
+            318,
+            992,
+            633,
+            1226
+          ]
+        },
+        {
+          "id": "tutor-part",
+          "kind": "jobs",
+          "cell": 14,
+          "rect": [
+            638,
+            945,
+            951,
+            1226
+          ]
+        },
+        {
+          "id": "market-stall-part",
+          "kind": "jobs",
+          "cell": 15,
+          "rect": [
+            945,
+            935,
+            1239,
+            1222
+          ]
+        }
+      ]
+    },
+    {
+      "file": "design/polish3/art/jobs-emergency.png",
+      "generated_path": "/workspace/generated_images/exec-93cae634-b023-4d52-ac24-2ea5d2cfe771.png",
+      "sha256": "f30fc1d43c828543bf875e6275ad8819c29691d698db8c3c1f7ae75fc79e0708",
+      "size": [
+        1308,
+        1202
+      ],
+      "sprites": [
+        {
+          "id": "firefighter",
+          "kind": "jobs",
+          "cell": 0,
+          "rect": [
+            0,
+            2,
+            662,
+            589
+          ]
+        },
+        {
+          "id": "paramedic",
+          "kind": "jobs",
+          "cell": 1,
+          "rect": [
+            664,
+            30,
+            1294,
+            603
+          ]
+        },
+        {
+          "id": "police-officer",
+          "kind": "jobs",
+          "cell": 2,
+          "rect": [
+            15,
+            622,
+            684,
+            1188
+          ]
+        },
+        {
+          "id": "construction-worker",
+          "kind": "jobs",
+          "cell": 3,
+          "rect": [
+            673,
+            620,
+            1302,
+            1187
+          ]
+        }
+      ]
+    }
+  ],
+  "icons": {
+    "actions:talk": {
+      "id": "talk",
+      "kind": "actions",
+      "file": "actions/talk.png",
+      "source": "actions-a.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        57,
+        338,
+        280
+      ],
+      "subject": "talk",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 49271,
+      "sha256": "21257377066822643bc9108f3536d6916b0e71f17c91827d1e0456b5add63c7e"
+    },
+    "actions:compliment": {
+      "id": "compliment",
+      "kind": "actions",
+      "file": "actions/compliment.png",
+      "source": "actions-a.png",
+      "cell": 1,
+      "source_rect": [
+        322,
+        17,
+        609,
+        283
+      ],
+      "subject": "compliment",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 64343,
+      "sha256": "e754ec4e9f817d8696e5468c258854128b894fe52e75d5219b3e8dabc4ec1496"
+    },
+    "actions:spend-time": {
+      "id": "spend-time",
+      "kind": "actions",
+      "file": "actions/spend-time.png",
+      "source": "actions-a.png",
+      "cell": 2,
+      "source_rect": [
+        608,
+        29,
+        943,
+        326
+      ],
+      "subject": "spend time",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 98049,
+      "sha256": "24f4851bc8c4f9b9ce73aecb89625a532e54195467f3ee8626ff76eded78e840"
+    },
+    "actions:argue": {
+      "id": "argue",
+      "kind": "actions",
+      "file": "actions/argue.png",
+      "source": "actions-a.png",
+      "cell": 3,
+      "source_rect": [
+        929,
+        46,
+        1242,
+        295
+      ],
+      "subject": "argue",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65867,
+      "sha256": "c1c6a4ed013263329ed3153ab08fd0829092c6c8a8986e9072076cd976627b1d"
+    },
+    "actions:apologise": {
+      "id": "apologise",
+      "kind": "actions",
+      "file": "actions/apologise.png",
+      "source": "actions-a.png",
+      "cell": 4,
+      "source_rect": [
+        0,
+        321,
+        311,
+        647
+      ],
+      "subject": "apologise",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59672,
+      "sha256": "19b06353d3bff266eb2f0ff52019b2aebff70f296e02ce5ed781aafaed5ec666"
+    },
+    "actions:insult": {
+      "id": "insult",
+      "kind": "actions",
+      "file": "actions/insult.png",
+      "source": "actions-a.png",
+      "cell": 5,
+      "source_rect": [
+        303,
+        314,
+        629,
+        601
+      ],
+      "subject": "insult",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 66692,
+      "sha256": "5a4c4de6bdabc56dd85ab1f81fe081882de02f834fa0bfde3693de79b6b79391"
+    },
+    "actions:distance": {
+      "id": "distance",
+      "kind": "actions",
+      "file": "actions/distance.png",
+      "source": "actions-a.png",
+      "cell": 6,
+      "source_rect": [
+        606,
+        335,
+        951,
+        656
+      ],
+      "subject": "distance",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 67371,
+      "sha256": "3df73f6dc2919d8add5624687faf7aa086d03d4ff41703342afacedb04a55673"
+    },
+    "actions:ask-advice": {
+      "id": "ask-advice",
+      "kind": "actions",
+      "file": "actions/ask-advice.png",
+      "source": "actions-a.png",
+      "cell": 7,
+      "source_rect": [
+        958,
+        318,
+        1240,
+        649
+      ],
+      "subject": "ask advice",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81739,
+      "sha256": "59d52545ca07a2c94e12d3e661e586ab23cd34f6fccd138244d8cbfb67886f67"
+    },
+    "actions:ask-permission": {
+      "id": "ask-permission",
+      "kind": "actions",
+      "file": "actions/ask-permission.png",
+      "source": "actions-a.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        582,
+        337,
+        952
+      ],
+      "subject": "ask permission",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 69578,
+      "sha256": "9d9aca75d8014ac2b4d6ff7465208386efbd3c0caff4bf4c0102a7e7f10d4eb0"
+    },
+    "actions:ask-activity": {
+      "id": "ask-activity",
+      "kind": "actions",
+      "file": "actions/ask-activity.png",
+      "source": "actions-a.png",
+      "cell": 9,
+      "source_rect": [
+        305,
+        572,
+        647,
+        942
+      ],
+      "subject": "ask activity",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78584,
+      "sha256": "226ba7059cf983a172bdfe268c54277ee85d7fc33dc33e3f83d043e23708439a"
+    },
+    "actions:request-gift": {
+      "id": "request-gift",
+      "kind": "actions",
+      "file": "actions/request-gift.png",
+      "source": "actions-a.png",
+      "cell": 10,
+      "source_rect": [
+        612,
+        605,
+        939,
+        929
+      ],
+      "subject": "request gift",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78236,
+      "sha256": "a10e45de8ca18bd396a6d15c97fd7dc96410447939d0630dc226bcc0f7214c8b"
+    },
+    "actions:praise": {
+      "id": "praise",
+      "kind": "actions",
+      "file": "actions/praise.png",
+      "source": "actions-a.png",
+      "cell": 11,
+      "source_rect": [
+        925,
+        618,
+        1254,
+        961
+      ],
+      "subject": "praise",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78461,
+      "sha256": "ec1d944a89f8be95990bc1c80f324d1811fe09c4d3e25201b37c04f07dea8f09"
+    },
+    "actions:scold": {
+      "id": "scold",
+      "kind": "actions",
+      "file": "actions/scold.png",
+      "source": "actions-a.png",
+      "cell": 12,
+      "source_rect": [
+        11,
+        914,
+        328,
+        1226
+      ],
+      "subject": "scold",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 89393,
+      "sha256": "f1447e287b27d9dfbecd251a61ccedb039a299282da85293d328a60d1cc18b8b"
+    },
+    "actions:ask-help": {
+      "id": "ask-help",
+      "kind": "actions",
+      "file": "actions/ask-help.png",
+      "source": "actions-a.png",
+      "cell": 13,
+      "source_rect": [
+        326,
+        909,
+        643,
+        1230
+      ],
+      "subject": "ask help",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85621,
+      "sha256": "7ef20d4aba756faf538ca9d85321bfcd92711c24de11a0dfd39a7463c08cfd19"
+    },
+    "actions:give-money": {
+      "id": "give-money",
+      "kind": "actions",
+      "file": "actions/give-money.png",
+      "source": "actions-a.png",
+      "cell": 14,
+      "source_rect": [
+        626,
+        935,
+        948,
+        1230
+      ],
+      "subject": "give money",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 68044,
+      "sha256": "d7dccd875f4759cbe4a83ce8dcfa6f70cfe595b638a11ef91f893b103e243b51"
+    },
+    "actions:ask-money": {
+      "id": "ask-money",
+      "kind": "actions",
+      "file": "actions/ask-money.png",
+      "source": "actions-a.png",
+      "cell": 15,
+      "source_rect": [
+        942,
+        915,
+        1229,
+        1223
+      ],
+      "subject": "ask money",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65158,
+      "sha256": "724c8a8d426d5a9058180fc52cc8ddc743182060292f505378b7dc71a1deaa9b"
+    },
+    "actions:ask-loan": {
+      "id": "ask-loan",
+      "kind": "actions",
+      "file": "actions/ask-loan.png",
+      "source": "actions-b.png",
+      "cell": 0,
+      "source_rect": [
+        25,
+        66,
+        316,
+        335
+      ],
+      "subject": "ask loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99818,
+      "sha256": "d4b4a5b1c1c098cbc1828c38bb22a476919fe5a9cb2e6ad40649d539847a0afc"
+    },
+    "actions:accept-loan": {
+      "id": "accept-loan",
+      "kind": "actions",
+      "file": "actions/accept-loan.png",
+      "source": "actions-b.png",
+      "cell": 1,
+      "source_rect": [
+        335,
+        49,
+        635,
+        310
+      ],
+      "subject": "accept loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 63740,
+      "sha256": "4ff8581bfd12e4926f3f7f137e86a73211ac58b739edc259e8f20331d6a48a6c"
+    },
+    "actions:decline-loan": {
+      "id": "decline-loan",
+      "kind": "actions",
+      "file": "actions/decline-loan.png",
+      "source": "actions-b.png",
+      "cell": 2,
+      "source_rect": [
+        628,
+        41,
+        956,
+        332
+      ],
+      "subject": "decline loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 61085,
+      "sha256": "3fa96e41e051c889f7f30a23b25361fc0d219744e53cdbbe440341d3e682b565"
+    },
+    "actions:repay-loan": {
+      "id": "repay-loan",
+      "kind": "actions",
+      "file": "actions/repay-loan.png",
+      "source": "actions-b.png",
+      "cell": 3,
+      "source_rect": [
+        948,
+        17,
+        1245,
+        320
+      ],
+      "subject": "repay loan",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71245,
+      "sha256": "5669b82fe4463e8aff5d7f76da00719fa05a79613769b44567db2a12620b90a1"
+    },
+    "actions:academic-help": {
+      "id": "academic-help",
+      "kind": "actions",
+      "file": "actions/academic-help.png",
+      "source": "actions-b.png",
+      "cell": 4,
+      "source_rect": [
+        0,
+        323,
+        324,
+        605
+      ],
+      "subject": "academic help",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84026,
+      "sha256": "bda498e95b58757a3e1642afc1366449109ff0f23c03f51ecb679b0d0a97f9d9"
+    },
+    "actions:work-feedback": {
+      "id": "work-feedback",
+      "kind": "actions",
+      "file": "actions/work-feedback.png",
+      "source": "actions-b.png",
+      "cell": 5,
+      "source_rect": [
+        328,
+        349,
+        635,
+        659
+      ],
+      "subject": "work feedback",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73029,
+      "sha256": "99e5f7bf09d28aa4bed4d3cc13f6db1ab5273d533648e16134f8505e9a285998"
+    },
+    "actions:request-raise": {
+      "id": "request-raise",
+      "kind": "actions",
+      "file": "actions/request-raise.png",
+      "source": "actions-b.png",
+      "cell": 6,
+      "source_rect": [
+        622,
+        306,
+        929,
+        652
+      ],
+      "subject": "request raise",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 56816,
+      "sha256": "ade75b96d70afd989a3dbc2b715b6b0e59fe4ab7b1f97426840ed7d8298877fc"
+    },
+    "actions:review-custody": {
+      "id": "review-custody",
+      "kind": "actions",
+      "file": "actions/review-custody.png",
+      "source": "actions-b.png",
+      "cell": 7,
+      "source_rect": [
+        925,
+        328,
+        1254,
+        633
+      ],
+      "subject": "review custody",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85358,
+      "sha256": "8504855159d98e4b631c9e3a884d68084e06c4b1120a9a09db8e6e322ff23e59"
+    },
+    "actions:move-in": {
+      "id": "move-in",
+      "kind": "actions",
+      "file": "actions/move-in.png",
+      "source": "actions-b.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        631,
+        326,
+        918
+      ],
+      "subject": "move in",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87461,
+      "sha256": "02bb4f2c61f359280ec9684890a83440817f2f96aeda0b96c6b9df38a9d363f3"
+    },
+    "actions:ask-date": {
+      "id": "ask-date",
+      "kind": "actions",
+      "file": "actions/ask-date.png",
+      "source": "actions-b.png",
+      "cell": 9,
+      "source_rect": [
+        317,
+        639,
+        647,
+        906
+      ],
+      "subject": "ask date",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78074,
+      "sha256": "e809d62c9fb63d0e855cabfcb4761842bb0ea6142e13993fad9792b144690325"
+    },
+    "actions:propose": {
+      "id": "propose",
+      "kind": "actions",
+      "file": "actions/propose.png",
+      "source": "actions-b.png",
+      "cell": 10,
+      "source_rect": [
+        625,
+        633,
+        934,
+        916
+      ],
+      "subject": "propose",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81348,
+      "sha256": "ec358b99888d6e2ddbdc4476a364e0ffccd23e084c436a9dd26946f25e293de3"
+    },
+    "actions:plan-wedding": {
+      "id": "plan-wedding",
+      "kind": "actions",
+      "file": "actions/plan-wedding.png",
+      "source": "actions-b.png",
+      "cell": 11,
+      "source_rect": [
+        923,
+        624,
+        1246,
+        947
+      ],
+      "subject": "plan wedding",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 118089,
+      "sha256": "773c674383bc43f1085543e13b3ff2f769856797a5a14021963137320b79c3ab"
+    },
+    "actions:family-planning": {
+      "id": "family-planning",
+      "kind": "actions",
+      "file": "actions/family-planning.png",
+      "source": "actions-b.png",
+      "cell": 12,
+      "source_rect": [
+        11,
+        934,
+        325,
+        1226
+      ],
+      "subject": "family planning",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 100700,
+      "sha256": "bde8cef339af6f6004f9a9c56f2160c906018685c68eb51d27420bd402ee2140"
+    },
+    "actions:divorce": {
+      "id": "divorce",
+      "kind": "actions",
+      "file": "actions/divorce.png",
+      "source": "actions-b.png",
+      "cell": 13,
+      "source_rect": [
+        320,
+        934,
+        635,
+        1254
+      ],
+      "subject": "divorce",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80692,
+      "sha256": "f3ad90069c4267929ed5736d230be6e4f8ca48c7dd82e904e09fe7e72cc74474"
+    },
+    "actions:breakup": {
+      "id": "breakup",
+      "kind": "actions",
+      "file": "actions/breakup.png",
+      "source": "actions-b.png",
+      "cell": 14,
+      "source_rect": [
+        656,
+        962,
+        932,
+        1208
+      ],
+      "subject": "breakup",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87459,
+      "sha256": "52d6a7e3c6eea5c4b9f5d76ecd7074896127f28aa5c565f7e59cc026e48e6c60"
+    },
+    "actions:social-profile": {
+      "id": "social-profile",
+      "kind": "actions",
+      "file": "actions/social-profile.png",
+      "source": "actions-b.png",
+      "cell": 15,
+      "source_rect": [
+        947,
+        933,
+        1229,
+        1220
+      ],
+      "subject": "social profile",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 93855,
+      "sha256": "1cf829741e4a0de944535bc16626ed8d06f39f4f881226c5829a913bc263bae5"
+    },
+    "actions:become-best-friends": {
+      "id": "become-best-friends",
+      "kind": "actions",
+      "file": "actions/become-best-friends.png",
+      "source": "mixed.png",
+      "cell": 0,
+      "source_rect": [
+        12,
+        23,
+        347,
+        352
+      ],
+      "subject": "Two cheerful young adult friends exchanging a bright woven friendship bracelet with a little golden star, teal and orange clothing, warm close friendship.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99197,
+      "sha256": "bea5a7962d326ef71d19268643648ec23205c3754d1e94e2fbcf5f2591865af4"
+    },
+    "actions:end-best-friendship": {
+      "id": "end-best-friendship",
+      "kind": "actions",
+      "file": "actions/end-best-friendship.png",
+      "source": "mixed.png",
+      "cell": 1,
+      "source_rect": [
+        352,
+        55,
+        682,
+        294
+      ],
+      "subject": "Two distinct matching woven friendship bracelets now visibly untied and resting apart, purple and turquoise threads, no broken romantic heart.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 59997,
+      "sha256": "217d15f74007a89cea2eaac6aefac1f07a42f8b57b6dfe89d4e01c9e48a1539c"
+    },
+    "actions:ask-teen-date": {
+      "id": "ask-teen-date",
+      "kind": "actions",
+      "file": "actions/ask-teen-date.png",
+      "source": "mixed.png",
+      "cell": 2,
+      "source_rect": [
+        686,
+        19,
+        1005,
+        326
+      ],
+      "subject": "Two friendly fully clothed teen students taking a shy afternoon walk together with ice cream cones and backpacks, a little park shrub; innocent first date.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 104487,
+      "sha256": "37909470df92e5bf1a85048f78938016a6711f9499a565d1dec70daef9b78a04"
+    },
+    "actions:end-teen-relationship": {
+      "id": "end-teen-relationship",
+      "kind": "actions",
+      "file": "actions/end-teen-relationship.png",
+      "source": "mixed.png",
+      "cell": 3,
+      "source_rect": [
+        1007,
+        46,
+        1347,
+        350
+      ],
+      "subject": "Two fully clothed teen students gently going separate ways on a tiny forked park path, contrasting backpacks, no threat or violence.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81682,
+      "sha256": "a20317a8e96c7f38cb5bf91abedbf9806fe9168a093ba5754ea201f76b51e385"
+    },
+    "finance:net-worth": {
+      "id": "net-worth",
+      "kind": "finance",
+      "file": "finance/net-worth.png",
+      "source": "mixed.png",
+      "cell": 4,
+      "source_rect": [
+        0,
+        298,
+        341,
+        599
+      ],
+      "subject": "A beautiful open treasure chest full of gold coins, with a tiny red-roof house and turquoise car among the wealth, clearly personal total assets. No bank building, no ledger.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 86171,
+      "sha256": "f0be526ff9379eb6f48e370b980b2b0914bd271bb106887692c6637cd544cb41"
+    },
+    "finance:finances": {
+      "id": "finances",
+      "kind": "finance",
+      "file": "finance/finances.png",
+      "source": "mixed.png",
+      "cell": 5,
+      "source_rect": [
+        340,
+        327,
+        710,
+        572
+      ],
+      "subject": "An open orange financial ledger with a blue cash-flow chart card, green notes and small gold coins moving along a curved teal arrow, a tidy pen. Financial records and spending, no bank building or treasure chest.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74715,
+      "sha256": "f9a1e243900b3db8b4968176d9680711e8f26f133c08d238bbbb0c25cf9480e2"
+    },
+    "jobs:shop-assistant-part": {
+      "id": "shop-assistant-part",
+      "kind": "jobs",
+      "file": "jobs/shop-assistant-part.png",
+      "source": "mixed.png",
+      "cell": 6,
+      "source_rect": [
+        687,
+        337,
+        1007,
+        585
+      ],
+      "subject": "A paper shopping bag with neatly folded shirt and handheld barcode scanner; weekend retail helper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 69670,
+      "sha256": "07dd7430947623a037024004e2e9818a8192253e23874541e931f0bf55500bfd"
+    },
+    "jobs:cafe-part": {
+      "id": "cafe-part",
+      "kind": "jobs",
+      "file": "jobs/cafe-part.png",
+      "source": "mixed.png",
+      "cell": 7,
+      "source_rect": [
+        1015,
+        345,
+        1355,
+        584
+      ],
+      "subject": "A caf\u00e9 clearing tray with two mugs, folded cloth and small order pad; table-service helper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 69385,
+      "sha256": "4da971d08bf017dced18f9c3a6fc3454b1f984b5e245217a62bf87df5efb50d7"
+    },
+    "jobs:cleaner": {
+      "id": "cleaner",
+      "kind": "jobs",
+      "file": "jobs/cleaner.png",
+      "source": "mixed.png",
+      "cell": 8,
+      "source_rect": [
+        31,
+        592,
+        355,
+        880
+      ],
+      "subject": "A bright mop bucket, upright mop and spray bottle with a floor-warning sign.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72826,
+      "sha256": "02301f078bf3cbfdf0d302beb9e60a300283ac181ede68abac6e8e0d26835224"
+    },
+    "jobs:retail": {
+      "id": "retail",
+      "kind": "jobs",
+      "file": "jobs/retail.png",
+      "source": "mixed.png",
+      "cell": 9,
+      "source_rect": [
+        348,
+        620,
+        679,
+        874
+      ],
+      "subject": "A friendly shop checkout with cash register, receipt and colourful clothes on a rack.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82844,
+      "sha256": "63092504a2e736f5f6c6fa4ca6d962a4d1538e5112afe28f47ce129bfac90ef5"
+    },
+    "jobs:barista": {
+      "id": "barista",
+      "kind": "jobs",
+      "file": "jobs/barista.png",
+      "source": "mixed.png",
+      "cell": 10,
+      "source_rect": [
+        692,
+        575,
+        1007,
+        888
+      ],
+      "subject": "A polished espresso machine pouring into a cup with latte art, coffee beans beside it.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 101783,
+      "sha256": "098b82c1bc120ec06903f03a4612a538917fc46560e6e5ffa68ea1fc6a3a35f7"
+    },
+    "jobs:warehouse": {
+      "id": "warehouse",
+      "kind": "jobs",
+      "file": "jobs/warehouse.png",
+      "source": "mixed.png",
+      "cell": 11,
+      "source_rect": [
+        1035,
+        597,
+        1341,
+        873
+      ],
+      "subject": "A warehouse hand pallet jack carrying neatly strapped cardboard boxes, scanner attached.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 84926,
+      "sha256": "a35adb65768e1314811f114b8dd197856339e4e421650cd5e5ca23dbf433feb9"
+    },
+    "jobs:administrator": {
+      "id": "administrator",
+      "kind": "jobs",
+      "file": "jobs/administrator.png",
+      "source": "mixed.png",
+      "cell": 12,
+      "source_rect": [
+        0,
+        868,
+        355,
+        1160
+      ],
+      "subject": "A desktop appointment calendar, file folders, pen pot and tidy office telephone.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 75081,
+      "sha256": "7a55ff120a30d666d16eca0787de2b730cfa8945268a712f3ad5f3a64d0e0452"
+    },
+    "jobs:support": {
+      "id": "support",
+      "kind": "jobs",
+      "file": "jobs/support.png",
+      "source": "mixed.png",
+      "cell": 13,
+      "source_rect": [
+        337,
+        901,
+        678,
+        1140
+      ],
+      "subject": "A customer-support headset beside a laptop showing two chat bubbles, no words.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 60839,
+      "sha256": "55ca5896c321c0290aed7611e8fe5aab5e1de76eefc4b932e5ce06f8e288b735"
+    },
+    "jobs:plumber": {
+      "id": "plumber",
+      "kind": "jobs",
+      "file": "jobs/plumber.png",
+      "source": "mixed.png",
+      "cell": 14,
+      "source_rect": [
+        693,
+        876,
+        1016,
+        1143
+      ],
+      "subject": "A red pipe wrench beside a curved water pipe, valve and plumber tool bag.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87201,
+      "sha256": "4f1dbcb7d8460c7d9ab340efd532da5c36aa98f6b463c31a9d33aeb883e7810a"
+    },
+    "jobs:technician": {
+      "id": "technician",
+      "kind": "jobs",
+      "file": "jobs/technician.png",
+      "source": "mixed.png",
+      "cell": 15,
+      "source_rect": [
+        1017,
+        871,
+        1339,
+        1144
+      ],
+      "subject": "A laboratory sample rack, microscope, pipette and labelled-looking colour-coded test tubes without words.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81129,
+      "sha256": "c8c49545a348fedf36b7174fd4b4337ab5cd7f42e636c3ca071282970009d537"
+    },
+    "jobs:designer": {
+      "id": "designer",
+      "kind": "jobs",
+      "file": "jobs/designer.png",
+      "source": "jobs-1.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        34,
+        353,
+        304
+      ],
+      "subject": "A graphics tablet and stylus displaying colourful vector shapes, colour swatches nearby.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 65819,
+      "sha256": "72fd6d47fbc8cb59289de79f591d8719f866f3e231e98ae42f1cec40c453c4db"
+    },
+    "jobs:teacher": {
+      "id": "teacher",
+      "kind": "jobs",
+      "file": "jobs/teacher.png",
+      "source": "jobs-1.png",
+      "cell": 1,
+      "source_rect": [
+        349,
+        14,
+        682,
+        302
+      ],
+      "subject": "A small classroom chalkboard, apple and stack of exercise books with pencil.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82640,
+      "sha256": "9b2e78f5214dff8912b0a4ad9e0ed351d0fd4423780bc7eb0a8dae2faa995cca"
+    },
+    "jobs:developer": {
+      "id": "developer",
+      "kind": "jobs",
+      "file": "jobs/developer.png",
+      "source": "jobs-1.png",
+      "cell": 2,
+      "source_rect": [
+        684,
+        20,
+        1004,
+        294
+      ],
+      "subject": "A laptop displaying simple code-like brackets with an external keyboard and small desktop monitor.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 88748,
+      "sha256": "73dafb204dcc54b2791254c7b9132affe3fd59b9aeecf68516ce822cd0d3395f"
+    },
+    "jobs:accountant": {
+      "id": "accountant",
+      "kind": "jobs",
+      "file": "jobs/accountant.png",
+      "source": "jobs-1.png",
+      "cell": 3,
+      "source_rect": [
+        1038,
+        17,
+        1367,
+        310
+      ],
+      "subject": "A desktop calculator with ledger book, receipt stack and pencil, no currency text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 88358,
+      "sha256": "8a0bc9f7d807e21a046e90a866f4ad83440a1b9ffcb0a84cf3f8358a8ed4808d"
+    },
+    "jobs:researcher": {
+      "id": "researcher",
+      "kind": "jobs",
+      "file": "jobs/researcher.png",
+      "source": "jobs-1.png",
+      "cell": 4,
+      "source_rect": [
+        25,
+        304,
+        310,
+        589
+      ],
+      "subject": "A molecular model, conical flask and research notebook under a magnifying glass.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 105143,
+      "sha256": "2d181c2f4d2661e8fb751abbea31753e7756f6a1cd6546e83d326afd0ebffcea"
+    },
+    "jobs:journalist": {
+      "id": "journalist",
+      "kind": "jobs",
+      "file": "jobs/journalist.png",
+      "source": "jobs-1.png",
+      "cell": 5,
+      "source_rect": [
+        351,
+        316,
+        684,
+        574
+      ],
+      "subject": "A reporter microphone, press notebook and compact voice recorder beside a folded newspaper.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 83288,
+      "sha256": "0e89db3e7b8a1731b22b3a975091e564f8ce30390964d23e45cb495a27aa8334"
+    },
+    "jobs:lawyer": {
+      "id": "lawyer",
+      "kind": "jobs",
+      "file": "jobs/lawyer.png",
+      "source": "jobs-1.png",
+      "cell": 6,
+      "source_rect": [
+        694,
+        304,
+        1017,
+        588
+      ],
+      "subject": "A brass balance scale, bound legal volumes and a closed document folder.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82354,
+      "sha256": "9a4dd7be206ed9ddc23b6545e58dc7bea73d6a0560d04bc3c645d8b609a3073c"
+    },
+    "jobs:doctor": {
+      "id": "doctor",
+      "kind": "jobs",
+      "file": "jobs/doctor.png",
+      "source": "jobs-1.png",
+      "cell": 7,
+      "source_rect": [
+        1033,
+        300,
+        1357,
+        585
+      ],
+      "subject": "A stethoscope around a white doctor coat collar with medical examination clipboard.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 90009,
+      "sha256": "f7767e1b31a14b103c74a458ebd234ee637ecbcff67a94b677b8a561dbeef4b0"
+    },
+    "jobs:receptionist": {
+      "id": "receptionist",
+      "kind": "jobs",
+      "file": "jobs/receptionist.png",
+      "source": "jobs-1.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        571,
+        342,
+        849
+      ],
+      "subject": "A hotel reception desk bell, key rack and reservation book, inviting luggage beside desk.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81274,
+      "sha256": "408d1f5c3dc54e972a6190d1a17a758eaef929326e8e6a8f933829a59103f54f"
+    },
+    "jobs:postal-worker": {
+      "id": "postal-worker",
+      "kind": "jobs",
+      "file": "jobs/postal-worker.png",
+      "source": "jobs-1.png",
+      "cell": 9,
+      "source_rect": [
+        348,
+        580,
+        666,
+        867
+      ],
+      "subject": "A blue postal satchel with colourful envelopes and a small mailbox.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 88743,
+      "sha256": "5d08a07f392d3b02fa369cfe26ca43491656f800c2f33bc62f96a63d11cd6d20"
+    },
+    "jobs:delivery-driver": {
+      "id": "delivery-driver",
+      "kind": "jobs",
+      "file": "jobs/delivery-driver.png",
+      "source": "jobs-1.png",
+      "cell": 10,
+      "source_rect": [
+        687,
+        612,
+        1030,
+        864
+      ],
+      "subject": "A compact delivery van beside a parcel and handheld route device.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73456,
+      "sha256": "adc088f1d7a70a7851e2654f9ba566749f869a34e324526c62d52d06f3721ad3"
+    },
+    "jobs:bus-driver": {
+      "id": "bus-driver",
+      "kind": "jobs",
+      "file": "jobs/bus-driver.png",
+      "source": "jobs-1.png",
+      "cell": 11,
+      "source_rect": [
+        1020,
+        580,
+        1358,
+        845
+      ],
+      "subject": "A cheerful city bus front three-quarter view with steering wheel detail and destination display without text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82451,
+      "sha256": "bf093b951c2213154cc53e3a8fd9945d4d94798ef998500f3fe5c283067fa556"
+    },
+    "jobs:gardener": {
+      "id": "gardener",
+      "kind": "jobs",
+      "file": "jobs/gardener.png",
+      "source": "jobs-1.png",
+      "cell": 12,
+      "source_rect": [
+        0,
+        857,
+        341,
+        1151
+      ],
+      "subject": "A watering can, hand trowel, pruning shears and pot of colourful flowering plants.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 92267,
+      "sha256": "d4ccc97a488a30a5278e30f13e9ddc51a9baa6db592e5e6d0918d8b69b59ac59"
+    },
+    "jobs:kitchen-assistant": {
+      "id": "kitchen-assistant",
+      "kind": "jobs",
+      "file": "jobs/kitchen-assistant.png",
+      "source": "jobs-1.png",
+      "cell": 13,
+      "source_rect": [
+        350,
+        887,
+        692,
+        1137
+      ],
+      "subject": "A dish rack, washing-up gloves, pot and neatly stacked clean dinner plates.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78358,
+      "sha256": "d770f4c3e2ef4c44577f95280e11c6d362a1c7197b8b53fc54b272a93bf8b464"
+    },
+    "jobs:cook": {
+      "id": "cook",
+      "kind": "jobs",
+      "file": "jobs/cook.png",
+      "source": "jobs-1.png",
+      "cell": 14,
+      "source_rect": [
+        685,
+        873,
+        1021,
+        1138
+      ],
+      "subject": "A frying pan with fresh vegetables, chopping board and kitchen spatula.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 86590,
+      "sha256": "d9926b71916b8079d0634ed67b3d2d5fd0bddac0758e6c99a763a233223a640a"
+    },
+    "jobs:baker": {
+      "id": "baker",
+      "kind": "jobs",
+      "file": "jobs/baker.png",
+      "source": "jobs-1.png",
+      "cell": 15,
+      "source_rect": [
+        1028,
+        867,
+        1356,
+        1142
+      ],
+      "subject": "A flour-dusted rolling pin, golden bread loaves and a tray of croissants.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 100419,
+      "sha256": "ad6418658820256e7a7aa8d7b00ecaa84dd3e0b36bbfb66375dbf0d994d7ff85"
+    },
+    "jobs:chef": {
+      "id": "chef",
+      "kind": "jobs",
+      "file": "jobs/chef.png",
+      "source": "jobs-2.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        15,
+        327,
+        293
+      ],
+      "subject": "A tall chef toque above a plated restaurant meal with chef knife and tasting spoon.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 75924,
+      "sha256": "6806bc4fcf94d47e36c4ce66dc17efa4d965c087e4982cc93c118ce967d2345c"
+    },
+    "jobs:electrician": {
+      "id": "electrician",
+      "kind": "jobs",
+      "file": "jobs/electrician.png",
+      "source": "jobs-2.png",
+      "cell": 1,
+      "source_rect": [
+        349,
+        29,
+        649,
+        294
+      ],
+      "subject": "An electrician multimeter, insulated pliers, neatly coiled wire and safety gloves.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 102839,
+      "sha256": "d2f84f0955be86916b0bbf9a19006e941030790647080c2b011bf1fb26967292"
+    },
+    "jobs:carpenter": {
+      "id": "carpenter",
+      "kind": "jobs",
+      "file": "jobs/carpenter.png",
+      "source": "jobs-2.png",
+      "cell": 2,
+      "source_rect": [
+        659,
+        22,
+        958,
+        296
+      ],
+      "subject": "A wooden workbench corner with hand saw, carpenter square, wood shavings and mallet.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 108131,
+      "sha256": "f9a23127bd01af011166caa66c4c3e488fbf22ff809d76e96485997dcf8fbd4d"
+    },
+    "jobs:mechanic": {
+      "id": "mechanic",
+      "kind": "jobs",
+      "file": "jobs/mechanic.png",
+      "source": "jobs-2.png",
+      "cell": 3,
+      "source_rect": [
+        990,
+        25,
+        1292,
+        293
+      ],
+      "subject": "An open car engine block with socket wrench, oil can and mechanic work gloves.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 115906,
+      "sha256": "5dd0e5045827fb7ddc4b7f3d7f69060fe5a45ac5a36bec541db0fc1ed03955ec"
+    },
+    "jobs:welder": {
+      "id": "welder",
+      "kind": "jobs",
+      "file": "jobs/welder.png",
+      "source": "jobs-2.png",
+      "cell": 4,
+      "source_rect": [
+        16,
+        304,
+        331,
+        636
+      ],
+      "subject": "A protective welding helmet, welding torch and steel joint with a small controlled spark.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 83434,
+      "sha256": "da22a2dfe27e5c61acb2f1613b136b19c651ccf0a1d341dd483efcd5d60d369b"
+    },
+    "jobs:care-worker": {
+      "id": "care-worker",
+      "kind": "jobs",
+      "file": "jobs/care-worker.png",
+      "source": "jobs-2.png",
+      "cell": 5,
+      "source_rect": [
+        335,
+        308,
+        660,
+        594
+      ],
+      "subject": "A warm folded care blanket, supported hand motif and small medicine organiser, no medical cross emphasis.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 101543,
+      "sha256": "eda73bab3854500cf83decc9f621a2d00aff0799e8fe8f70d99ac3590706abe5"
+    },
+    "jobs:nurse": {
+      "id": "nurse",
+      "kind": "jobs",
+      "file": "jobs/nurse.png",
+      "source": "jobs-2.png",
+      "cell": 6,
+      "source_rect": [
+        659,
+        314,
+        971,
+        586
+      ],
+      "subject": "A nurse scrub top, blood-pressure cuff, thermometer and hospital identification badge without text.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 94298,
+      "sha256": "93651f729821604a534aa14a93c940d848936e7231344be7339d2e0bded2f02d"
+    },
+    "jobs:physiotherapist": {
+      "id": "physiotherapist",
+      "kind": "jobs",
+      "file": "jobs/physiotherapist.png",
+      "source": "jobs-2.png",
+      "cell": 7,
+      "source_rect": [
+        976,
+        309,
+        1291,
+        601
+      ],
+      "subject": "A resistance exercise band, therapy roller and joint model on a treatment bench.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 97237,
+      "sha256": "c07c39852ca11a4d6bdd8bf37d80eef22af450b0c085d6dec9ada6aa945398d9"
+    },
+    "jobs:engineer": {
+      "id": "engineer",
+      "kind": "jobs",
+      "file": "jobs/engineer.png",
+      "source": "jobs-2.png",
+      "cell": 8,
+      "source_rect": [
+        11,
+        605,
+        331,
+        884
+      ],
+      "subject": "A yellow hard hat, rolled bridge blueprint and model steel bridge support.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 93466,
+      "sha256": "c56979a70cdeccd7ac04d44f2976ab5cb6997648089f8a7f19e21cf8a2e86c9f"
+    },
+    "jobs:architect": {
+      "id": "architect",
+      "kind": "jobs",
+      "file": "jobs/architect.png",
+      "source": "jobs-2.png",
+      "cell": 9,
+      "source_rect": [
+        337,
+        607,
+        658,
+        888
+      ],
+      "subject": "An architectural house model, rolled drawing, triangular scale ruler and drawing compass.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 98528,
+      "sha256": "f7dff56b1496f958b91babdec211f15fb1eeb1bf1647282ed661b72c56ba8f71"
+    },
+    "jobs:data-analyst": {
+      "id": "data-analyst",
+      "kind": "jobs",
+      "file": "jobs/data-analyst.png",
+      "source": "jobs-2.png",
+      "cell": 10,
+      "source_rect": [
+        655,
+        606,
+        983,
+        883
+      ],
+      "subject": "A desktop monitor showing distinct colourful chart panels with magnifier and spreadsheet sheet.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 80735,
+      "sha256": "e240de48206ae82c41dbdc85c29dd3fb96a43116df66cf14623cf87042d57935"
+    },
+    "jobs:it-technician": {
+      "id": "it-technician",
+      "kind": "jobs",
+      "file": "jobs/it-technician.png",
+      "source": "jobs-2.png",
+      "cell": 11,
+      "source_rect": [
+        978,
+        595,
+        1284,
+        886
+      ],
+      "subject": "An open desktop computer tower with screwdriver, router and neatly coiled network cable.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 107804,
+      "sha256": "28d5c3765b03a7ad9335d86ce84abdbf8c15188466cba7de944bc1d71af161c6"
+    },
+    "jobs:librarian": {
+      "id": "librarian",
+      "kind": "jobs",
+      "file": "jobs/librarian.png",
+      "source": "jobs-2.png",
+      "cell": 12,
+      "source_rect": [
+        0,
+        873,
+        345,
+        1203
+      ],
+      "subject": "A tall library book trolley with neatly sorted books and a small catalogue drawer.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81085,
+      "sha256": "ea5d6b2c3b314c286dc0726d60d5a35e3e015bb33bb309ddd66879a7723df596"
+    },
+    "jobs:social-worker": {
+      "id": "social-worker",
+      "kind": "jobs",
+      "file": "jobs/social-worker.png",
+      "source": "jobs-2.png",
+      "cell": 13,
+      "source_rect": [
+        348,
+        880,
+        652,
+        1183
+      ],
+      "subject": "A supportive family figurine beside a folder, home-visit notebook and warm helping-hands motif.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99207,
+      "sha256": "ab070f720154c8320f8b214da62038be2677e4a4dc6999113aa19b80d7a013c7"
+    },
+    "jobs:marketing-executive": {
+      "id": "marketing-executive",
+      "kind": "jobs",
+      "file": "jobs/marketing-executive.png",
+      "source": "jobs-2.png",
+      "cell": 14,
+      "source_rect": [
+        657,
+        877,
+        984,
+        1185
+      ],
+      "subject": "A campaign planning board with colourful audience cards, small megaphone and idea bulb.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 89454,
+      "sha256": "0acd68e8c71be3f5e6ae2176c1e0f21155d68896cbb92ac11b129c0c4572c578"
+    },
+    "jobs:human-resources": {
+      "id": "human-resources",
+      "kind": "jobs",
+      "file": "jobs/human-resources.png",
+      "source": "jobs-2.png",
+      "cell": 15,
+      "source_rect": [
+        978,
+        892,
+        1298,
+        1183
+      ],
+      "subject": "A desk with staff identification cards, interview appointment notebook and two-person icon card.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 100228,
+      "sha256": "16bbdafabeddffab3c59eb4c5969251934726afa240a58e8e84c9baa01dd6834"
+    },
+    "jobs:project-manager": {
+      "id": "project-manager",
+      "kind": "jobs",
+      "file": "jobs/project-manager.png",
+      "source": "jobs-3.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        54,
+        310,
+        324
+      ],
+      "subject": "A project planning board with task cards, milestone flags and a small clock.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73325,
+      "sha256": "106c4eba92d5a67e9ec1e977bb76a5d26384317365445963173149ab12122305"
+    },
+    "jobs:operations-manager": {
+      "id": "operations-manager",
+      "kind": "jobs",
+      "file": "jobs/operations-manager.png",
+      "source": "jobs-3.png",
+      "cell": 1,
+      "source_rect": [
+        312,
+        36,
+        633,
+        316
+      ],
+      "subject": "A distribution floor plan clipboard, warehouse gear symbol and stock-flow arrows with small boxes.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 77482,
+      "sha256": "ae6af90e25cb38767f657fa75133eec9c065208b34c5e2918f132323a3e221fd"
+    },
+    "jobs:sales-representative": {
+      "id": "sales-representative",
+      "kind": "jobs",
+      "file": "jobs/sales-representative.png",
+      "source": "jobs-3.png",
+      "cell": 2,
+      "source_rect": [
+        608,
+        60,
+        954,
+        325
+      ],
+      "subject": "A sample presentation case, sales folder and small handshake emblem.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74322,
+      "sha256": "65d8dce219f5e6c275f53e911691f3df1016dc3cd4a263f31948703a5a50b2b8"
+    },
+    "jobs:estate-agent": {
+      "id": "estate-agent",
+      "kind": "jobs",
+      "file": "jobs/estate-agent.png",
+      "source": "jobs-3.png",
+      "cell": 3,
+      "source_rect": [
+        947,
+        59,
+        1244,
+        276
+      ],
+      "subject": "A house keyring, miniature for-sale house and property brochure without writing.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 82953,
+      "sha256": "ec63b932dadf141f6528ac5e8299d51dafcdbed361252464cb1f9b686db21dd2"
+    },
+    "jobs:insurance-adviser": {
+      "id": "insurance-adviser",
+      "kind": "jobs",
+      "file": "jobs/insurance-adviser.png",
+      "source": "jobs-3.png",
+      "cell": 4,
+      "source_rect": [
+        0,
+        337,
+        321,
+        617
+      ],
+      "subject": "A shield protecting a miniature house and car beside policy documents and reading glasses.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 79151,
+      "sha256": "9fddbe7fec9dcc0e4d5c14991be7a8af6779c2e87a89ca3cdf3ff1b5f02011bc"
+    },
+    "jobs:bank-clerk": {
+      "id": "bank-clerk",
+      "kind": "jobs",
+      "file": "jobs/bank-clerk.png",
+      "source": "jobs-3.png",
+      "cell": 5,
+      "source_rect": [
+        304,
+        312,
+        630,
+        613
+      ],
+      "subject": "A bank service counter with cash tray, banknotes and transaction stamp.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 85542,
+      "sha256": "c668fce171e1a8ef807b227134447f7f039180ba927bd1f2d1943a31736ddd86"
+    },
+    "jobs:procurement-officer": {
+      "id": "procurement-officer",
+      "kind": "jobs",
+      "file": "jobs/procurement-officer.png",
+      "source": "jobs-3.png",
+      "cell": 6,
+      "source_rect": [
+        618,
+        320,
+        937,
+        622
+      ],
+      "subject": "A supplier catalogue with three sample boxes, purchase order clipboard and comparison tags without writing.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 77923,
+      "sha256": "e513aa27671ca81b2c916c269bba93a54fcd51e4afe0c6447b4b1849e79f46a4"
+    },
+    "jobs:logistics-coordinator": {
+      "id": "logistics-coordinator",
+      "kind": "jobs",
+      "file": "jobs/logistics-coordinator.png",
+      "source": "jobs-3.png",
+      "cell": 7,
+      "source_rect": [
+        945,
+        314,
+        1254,
+        613
+      ],
+      "subject": "A colourful route map, parcel tracking scanner and delivery schedule clipboard.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 88850,
+      "sha256": "b259de2d1df26922556ea6324dea8f3ea75f1766a3336f3b7e630a0a23dddf09"
+    },
+    "jobs:software-tester": {
+      "id": "software-tester",
+      "kind": "jobs",
+      "file": "jobs/software-tester.png",
+      "source": "jobs-3.png",
+      "cell": 8,
+      "source_rect": [
+        0,
+        614,
+        312,
+        939
+      ],
+      "subject": "A tablet showing checkmarks and bug icon, test checklist and magnifying glass.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 71480,
+      "sha256": "e6cf3f45568d427723b7b62e0d71369e8fc07c8dcde9024426076e8892b318f3"
+    },
+    "jobs:cybersecurity-analyst": {
+      "id": "cybersecurity-analyst",
+      "kind": "jobs",
+      "file": "jobs/cybersecurity-analyst.png",
+      "source": "jobs-3.png",
+      "cell": 9,
+      "source_rect": [
+        320,
+        630,
+        634,
+        922
+      ],
+      "subject": "A computer monitor with protected padlock, shield, network nodes and security token.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73264,
+      "sha256": "f0971044c2ee67d14057fb61b263012d32f1912ec1dd8fe47c48b8038315b0d1"
+    },
+    "jobs:library-part": {
+      "id": "library-part",
+      "kind": "jobs",
+      "file": "jobs/library-part.png",
+      "source": "jobs-3.png",
+      "cell": 10,
+      "source_rect": [
+        637,
+        618,
+        955,
+        933
+      ],
+      "subject": "A returned-books drop box with three books and handheld book scanner; distinct from librarian trolley.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 74724,
+      "sha256": "0a4effa74d2a670d178c34172bb49cce91e206439c791c10a6e8fc8e456328a1"
+    },
+    "jobs:cinema-part": {
+      "id": "cinema-part",
+      "kind": "jobs",
+      "file": "jobs/cinema-part.png",
+      "source": "jobs-3.png",
+      "cell": 11,
+      "source_rect": [
+        939,
+        649,
+        1240,
+        918
+      ],
+      "subject": "A cinema ticket roll, torch, folded usher jacket and red cinema seat.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 78007,
+      "sha256": "287084957477dbb80f63a8d356a50bb0da1343269a8ae20c200408254124cb7a"
+    },
+    "jobs:grocery-part": {
+      "id": "grocery-part",
+      "kind": "jobs",
+      "file": "jobs/grocery-part.png",
+      "source": "jobs-3.png",
+      "cell": 12,
+      "source_rect": [
+        24,
+        935,
+        342,
+        1222
+      ],
+      "subject": "A grocery picking basket with milk, vegetables, packaged loaf and handheld scanner.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87610,
+      "sha256": "ec4465cb76050295f1e04b0e32197cdcc55766fb05765327a98be5ed53fa1560"
+    },
+    "jobs:pet-care-part": {
+      "id": "pet-care-part",
+      "kind": "jobs",
+      "file": "jobs/pet-care-part.png",
+      "source": "jobs-3.png",
+      "cell": 13,
+      "source_rect": [
+        318,
+        992,
+        633,
+        1226
+      ],
+      "subject": "A pet lead, feeding bowl, brush and folded towel with a small friendly paw motif.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87292,
+      "sha256": "90948067e54b43d575777435b9b645e275337f7811b9823fa9314c4dfb1b3f88"
+    },
+    "jobs:tutor-part": {
+      "id": "tutor-part",
+      "kind": "jobs",
+      "file": "jobs/tutor-part.png",
+      "source": "jobs-3.png",
+      "cell": 14,
+      "source_rect": [
+        638,
+        945,
+        951,
+        1226
+      ],
+      "subject": "An open maths exercise book, pencil, small whiteboard and helpful desk lamp.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 81328,
+      "sha256": "80e42de0a8d5feca4000b1fc2b22b6618c4ec7c186c96c99d595fe570c49d729"
+    },
+    "jobs:market-stall-part": {
+      "id": "market-stall-part",
+      "kind": "jobs",
+      "file": "jobs/market-stall-part.png",
+      "source": "jobs-3.png",
+      "cell": 15,
+      "source_rect": [
+        945,
+        935,
+        1239,
+        1222
+      ],
+      "subject": "A colourful striped market stall canopy with crates of fresh fruit and mechanical produce scales.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 107449,
+      "sha256": "6ce0edfb2d9acb628f54274cac70810ab2dd14f24b54ce24f8ab6dbd62617463"
+    },
+    "jobs:firefighter": {
+      "id": "firefighter",
+      "kind": "jobs",
+      "file": "jobs/firefighter.png",
+      "source": "jobs-emergency.png",
+      "cell": 0,
+      "source_rect": [
+        0,
+        2,
+        662,
+        589
+      ],
+      "subject": "A red firefighter helmet and yellow visor, coiled fire hose with silver nozzle and red fire axe.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 87140,
+      "sha256": "ca4d51a15067320c9d7e64bf57abab5599f53339a72ca6961096bf0bd869d892"
+    },
+    "jobs:paramedic": {
+      "id": "paramedic",
+      "kind": "jobs",
+      "file": "jobs/paramedic.png",
+      "source": "jobs-emergency.png",
+      "cell": 1,
+      "source_rect": [
+        664,
+        30,
+        1294,
+        603
+      ],
+      "subject": "An open green emergency response bag with defibrillator, bandages and medical shears.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 105338,
+      "sha256": "b35865e64d6b05ac305c62369eb25ded8a5d15ec7467c97a43b326f816b18c22"
+    },
+    "jobs:police-officer": {
+      "id": "police-officer",
+      "kind": "jobs",
+      "file": "jobs/police-officer.png",
+      "source": "jobs-emergency.png",
+      "cell": 2,
+      "source_rect": [
+        15,
+        622,
+        684,
+        1188
+      ],
+      "subject": "A navy police cap, generic gold shield badge, radio and incident notebook, without weapons.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 93623,
+      "sha256": "5b52f5785fec731bd5c041560afc5999034cb1c19562aa5da64a7b7f384127f6"
+    },
+    "jobs:construction-worker": {
+      "id": "construction-worker",
+      "kind": "jobs",
+      "file": "jobs/construction-worker.png",
+      "source": "jobs-emergency.png",
+      "cell": 3,
+      "source_rect": [
+        673,
+        620,
+        1302,
+        1187
+      ],
+      "subject": "A yellow hardhat, orange reflective safety vest, red bricks and bricklaying trowel with mortar.",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 99826,
+      "sha256": "abcf1d2d90ad0788715004adc7f10470cd1e8a0beaacf195ece31637b05e7b77"
+    }
+  }
+}

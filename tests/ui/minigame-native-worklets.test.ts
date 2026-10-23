@@ -130,6 +130,7 @@ test.each(
           ...React,
           useEffect: () => {},
           useId: () => 'native_scene',
+          useRef: (value: any) => ({ current: value }),
           useState: (value: any) => [value, () => {}],
           useMemo: (fn: Function) => fn(),
         },
@@ -138,6 +139,7 @@ test.each(
           Platform: { OS: platform },
           Text: 'Text',
           View: 'View',
+          StyleSheet: { create: (styles: any) => styles },
           useWindowDimensions: () => ({
             width: 400,
             height: 900,

@@ -1,5 +1,10 @@
 # Continue Dreams: Life Simulator
 
+## Dreams Polish 3 — 23 October 2026
+
+All nine requested phases are implemented: suitable stable NPC defaults, cleaner profiles, original interaction/finance/job artwork, concise outcomes, unified Real Estate, three car chips, 54 full-time plus 8 part-time jobs, and consistent mini-game presentation with circular flight controls. Existing manual avatars, saves and recorded difficulty values are preserved. Current markers are **World45 / engine47 / content24 / reader25 / v4**. See [the integrated review](verification/polish3/README.md) for behavior, real before/after browser captures and verification; full regression and final exports follow the source freeze.
+
+
 ## Integrated polish and mini-games — 22 October 2026
 
 Both feature batches are retained. Current saves use **World44 / engine46 / content23 / reader24 / database v4**. Migration distinguishes published mini-game saves (42/44/20) from rental saves (42/44/21) and personal-support saves (43/45/22); existing sessions and histories are preserved. The verification reports below describe their respective pre-merge source snapshots. Combined verification passed in one full invocation: **275 suites / 3,527 tests**, plus strict app/test types, the 456-module import graph and both offline Android/iOS Hermes exports. See [the combined verification report](verification/combined-polish/README.md).

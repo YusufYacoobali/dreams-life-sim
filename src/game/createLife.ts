@@ -1,5 +1,5 @@
 import { royalCountries } from './content/royalty';
-import { facialIdentity } from './appearance';
+import { automaticAppearance, automaticAppearanceKey, facialIdentity } from './appearance';
 import { createRoyalBackground } from './systems/royalty';
 import { z } from 'zod';
 import { countries, countryCodes } from './countries';
@@ -53,7 +53,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
     id: personId, firstName, lastName: input.lastName, gender, nationality: input.country, country: input.country, city: input.city,
     born, died: null, causeOfDeath: null,
     stats: { happiness: roll(65, 95), health: roll(80, 100), smarts: roll(25, 90), looks: roll(30, 90), respect: roll(30, 65), energy: 100, fitness: roll(35, 70), stress: age ? roll(10, 40) : 0, discipline: roll(30, 80), fame: 0 },
-    appearance: { face: roll(0, 3), skin: roll(0, 5), hair: roll(0, 7), hairColor: roll(0, 4) },
+    appearance: automaticAppearance({ face: roll(0, 3), skin: roll(0, 5), hair: roll(0, 7), hairColor: roll(0, 4) }, gender, automaticAppearanceKey(id,personId)),
     traits: [(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'] as const)[roll(0, 5)]],
     education: newEducation(), employment: null, finance: newFinance(country.currency),
     ...newFamilyPerson(gender), householdId: 'household_birth', lastEconomicMonth: date.year * 12 + date.month - 1,
@@ -73,7 +73,7 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({
-    schemaVersion: 44, engineVersion: 46, contentVersion: 23, id, revision: 0, date: { ...date },
+    schemaVersion: 45, engineVersion: 47, contentVersion: 24, id, revision: 0, date: { ...date },
     calendarAnchorDay: date.day, annual: null, pending: null, eventHistory: [],
     activePersonId: player.id, birthAcknowledged: false,
     random: { events: forkRandom(seed, 'events'), npcs: forkRandom(seed, 'npcs'), economy: forkRandom(seed, 'economy'), outcomes: forkRandom(seed, 'outcomes') },

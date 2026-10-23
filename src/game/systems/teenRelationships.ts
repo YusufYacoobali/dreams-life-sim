@@ -58,7 +58,7 @@ export function resolveTeenRelationship(world: World, command: TeenRelationshipC
     }
     const again = relation.memories.some(memory => memory.startsWith('teen-breakup:'));
     fact(world, accepted ? fullName(peer) + ' and I agreed to ' + (again ? 'see each other again' : 'go on a first date') + '. We spent a local afternoon together.' : 'I asked ' + fullName(peer) + ' on a date. They declined, and I respected their answer.', 'relationships');
-    result(world, accepted ? again ? 'Seeing each other again' : 'Your first date' : 'They declined the date', accepted ? 'You and ' + peer.firstName + ' spent an afternoon walking and talking. You agreed that you are seeing each other' + (again ? ' again' : '') + '. Nobody needed to buy a meal.' : peer.firstName + ' did not want to go on a date. Your existing connection and trust remain as they were.', 'conversation', [{ id: row.id, label: fullName(peer), value: accepted ? 'Seeing each other' : 'Invitation declined', tone: accepted ? 'positive' : 'neutral' }, ...(accepted ? [{ id: 'energy', label: 'Energy', value: '-4%', tone: 'negative' as const }] : [])]);
+    result(world, accepted ? again ? 'Seeing each other again' : 'Your first date' : 'They declined the date', accepted ? 'You and '+peer.firstName+' agreed to see each other'+(again?' again':'')+' after a free afternoon together. It used four energy.' : peer.firstName + ' did not want to go on a date. Your existing connection and trust remain as they were.', 'person-action:ask-teen-date', [{ id: row.id, label: fullName(peer), value: accepted ? 'Seeing each other' : 'Invitation declined', tone: accepted ? 'positive' : 'neutral' }, ...(accepted ? [{ id: 'energy', label: 'Energy', value: '-4%', tone: 'negative' as const }] : [])]);
     return;
   }
   const row = teenRelationshipIndex(world).byId.get(command.teenRelationshipId);
@@ -66,7 +66,7 @@ export function resolveTeenRelationship(world: World, command: TeenRelationshipC
   closeTeenRelationship(world, row, 'choice', person.id);
   relation.romance = 'ex'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.length) relation.roles.push('acquaintance'); relation.kind = relation.roles.includes('friend') ? 'friend' : relation.roles.includes('coworker') ? 'coworker' : relation.roles.includes('classmate') ? 'classmate' : 'acquaintance'; relation.memories.push('teen-breakup:' + world.date.year);
   fact(world, 'I ended my first relationship with ' + fullName(peer) + '. Our shared history remains.', 'relationships');
-  result(world, 'Going separate ways', 'Your relationship with ' + peer.firstName + ' has ended. Your existing bond, trust and ordinary connection remain recorded.', 'conversation', [{ id: row.id, label: fullName(peer), value: 'Relationship ended', tone: 'neutral' }]);
+  result(world, 'Going separate ways', 'You ended your relationship with '+peer.firstName+'. Your bond and trust stay where they were.', 'person-action:end-teen-relationship', [{ id: row.id, label: fullName(peer), value: 'Relationship ended', tone: 'neutral' }]);
 }
 /** Birthdays and actual death close only an already recorded teen phase. */
 export function refreshTeenRelationships(world: World) {

@@ -28,12 +28,14 @@ export function CrimeGame({
   clock,
   enabled,
   reducedMotion,
+  controlsVisible = true,
   onInput,
 }: {
   session: MiniGameSession;
   clock: SharedValue<number>;
   enabled: boolean;
   reducedMotion: boolean;
+  controlsVisible?: boolean;
   onInput: (action: MiniGameAction, at: number) => void;
 }) {
   const id = useId().replace(/:/g, ''),
@@ -175,14 +177,14 @@ export function CrimeGame({
           </MovingGroup>
         </Svg>
       </SceneCanvas>
-      <View style={s.controls}>
+      <View style={[s.controls, !controlsVisible && { opacity: 0 }]}>
         <View style={s.row}>
           {[0, 1, 2].map((i) => (
             <Text
               key={i}
               style={[
                 s.eyebrow,
-                { color: state.stage > i ? c.green : c.muted },
+                { color: state.stage > i ? '#16754E' : '#596780' },
               ]}
             >
               {state.stage > i ? '●' : '○'} BOLT {i + 1}

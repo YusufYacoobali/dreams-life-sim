@@ -22,6 +22,7 @@ import { hospitalized } from './healthSchemas';
 import { isConfined } from './legalSchemas';
 import { conversationContext, conversationTopicIds, conversationTopics } from './conversations';
 import { writeConversation } from '../content/conversationWriting';
+import { personReference, sentenceSubject } from '../content/personInteractionWriting';
 import { dateActivities, dateActivityOutcome } from './dateActivities';
 import { dateActivityIds } from './dateActivitySchemas';
 import { activeRomance, dateBudget, otherPerson, relationFor, romanceReason, type Relationship } from './relationshipQueries';
@@ -107,21 +108,23 @@ export function resolveSocial(world: World, command: SocialCommand) {
     if (age < rules[player.country].adultAge) throw new IneligibleAction('Independent housing is available to adults');
     const household = world.households.find(item => item.id === player.householdId);
     if (household?.members.filter(id => !world.people[id].died).length === 1) throw new IneligibleAction('You already live independently');
-    ownHousehold(world, player); world.actionCounts[player.id + ':independent-home'] = 1; fact(world, 'I moved into an independent household.', 'family'); result(world, 'A place of your own', 'You now cover your own household costs. Your property ownership is unchanged.', 'property'); return;
+    ownHousehold(world, player); world.actionCounts[player.id + ':independent-home'] = 1; fact(world, 'I moved into an independent household.', 'family'); result(world, 'A place of your own', 'You moved into your own household. The bills are yours now.', 'property'); return;
   }
   const target = world.people[command.personId];
   const relation = target ? relationFor(world, player.id, target.id) : undefined;
   if (!target || target.died || !relation) throw new IneligibleAction('Choose a living person you know');
+  const reference=personReference(target.firstName,relationLabel(world,relation)),who=sentenceSubject(reference);
+  const money=(minor:bigint,currency=accountFor(world).currency)=>formatMoney({minor,currency});
   if (command.type === 'ask-to-move-in') {
     if(serviceAway(world)||serviceAway(world,target.id)||activeTrip(world)||activeTrip(world,target.id))throw new IneligibleAction('Return from your trip or assignment before moving home');
     if (isConfined(world, target)) throw new IneligibleAction('They are currently in custody');
     if (age < 18 || target.country !== player.country || !relation.roles.some(role => role === 'parent' || role === 'guardian')) throw new IneligibleAction('Choose a living parent or guardian in your country');
     if (!target.householdId || target.householdId === player.householdId) throw new IneligibleAction('You already share this household');
     counter(world, target.id, 'move-in');
-    if (relation.strength < 50 || draw(world, 'outcomes', 1, 100) > relation.strength) { result(world, 'They need their space', target.firstName + ' declined the arrangement. Your housing is unchanged.', 'property'); return; }
+    if (relation.strength < 50 || draw(world, 'outcomes', 1, 100) > relation.strength) { result(world, 'They need their space', who + ' declined your request to move in. Your housing stays as it is.', 'person-action:move-in'); return; }
     moveHousehold(world, [player.id], target.householdId); player.city = target.city;
     world.actionCounts[player.id + ':independent-home'] = 1;
-    fact(world, 'I moved in with ' + target.firstName + '.', 'family'); result(world, 'You moved in', 'You share this household’s costs. Your own property, if any, remains yours.', 'property'); return;
+    fact(world, 'I moved in with ' + target.firstName + '.', 'family'); result(world, 'You moved in', 'You moved in with '+reference+'. You now share living costs.', 'person-action:move-in'); return;
   }
   if (command.type === 'interact') {
     if(command.action==='spend-time'&&!samePhysicalPlace(world,player.id,target.id))throw new IneligibleAction('Meet in the same place for in-person time');
@@ -135,34 +138,34 @@ export function resolveSocial(world: World, command: SocialCommand) {
       counter(world, target.id, 'talk'); relation.lastInteractionYear = world.date.year;
       const chance = Math.min(90, command.topic === 'feelings' ? 45 + Math.floor(relation.trust / 2) : 70 + Math.floor(relation.trust / 5));
       const open = draw(world, 'outcomes', 1, 100) <= chance;
-      const writing = writeConversation(context, command.topic, open ? 'open' : 'reserved');
+      const writing = writeConversation({...context,relationshipRole:relationLabel(world,relation)}, command.topic, open ? 'open' : 'reserved');
       const beforeTrust = relation.trust;
       relation.trust = bounded(relation.trust + (open ? command.topic === 'family' || command.topic === 'feelings' ? 3 : 2 : 0));
       const effects: RuntimeEffectRow[] = [bond(relation, open ? command.topic === 'interests' ? 6 : 4 : 1)];
       effects.push({ id: 'trust', label: 'Trust', value: '+' + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : 'neutral' });
       if (open) effects.push(...statChanges(player, command.topic === 'school' ? { smarts: 1, happiness: 1 } : command.topic === 'work' ? { stress: -2 } : command.topic === 'feelings' ? { stress: -3 } : { happiness: command.topic === 'interests' ? 3 : 2 }));
       relation.memories.push('talk:' + world.date.year);
-      fact(world, writing.journal, 'relationships'); result(world, writing.title, writing.body, 'conversation', effects); return;
+      fact(world, writing.journal, 'relationships'); result(world, writing.title, writing.body, 'person-action:talk', effects); return;
     }
     counter(world, target.id, command.action); relation.lastInteractionYear = world.date.year;
     let body: string, journal: string, delta: number; const effects: RuntimeEffectRow[] = [];
-    if (command.action === 'talk') { delta = draw(world, 'outcomes', 3, 6); relation.trust = bounded(relation.trust + 2); body = target.firstName + ' put their phone away. What started as a quick chat turned into a discussion about food.'; journal = 'I had a proper conversation with ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 2 })); }
+    if (command.action === 'talk') { delta = draw(world, 'outcomes', 3, 6); relation.trust = bounded(relation.trust + 2); body = 'You had a proper chat with '+reference+'. A simple conversation did the job.'; journal = 'I had a proper conversation with ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 2 })); }
     else if (command.action === 'compliment') {
       const accepted = draw(world, 'outcomes', 1, 100) <= 70 + Math.floor(relation.trust / 5); delta = accepted ? 5 : -2;
       if (accepted) relation.trust = bounded(relation.trust + 1);
-      body = accepted ? target.firstName + ' seemed pleased that you noticed.' : target.firstName + ' wondered what you wanted. You did not push it.'; journal = accepted ? 'I told ' + target.firstName + ' something I appreciate about them.' : 'My compliment to ' + target.firstName + ' did not land as intended.';
+      body = accepted ? who+' appreciated the compliment. Nicely done.' : who+' was not convinced by the compliment. Subtlety remains a work in progress.'; journal = accepted ? 'I told ' + target.firstName + ' something I appreciate about them.' : 'My compliment to ' + target.firstName + ' did not land as intended.';
     } else if (command.action === 'spend-time') {
       if (age >= 18) charge(world, dateBudget(world) / 2n, 'social', 'An afternoon with ' + target.firstName);
-      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = isConfined(world, player) || isConfined(world, target) ? 'You spent visiting time together at the correctional centre. The visit helped you feel connected beyond the walls.' : hospitalized(world, player) || hospitalized(world, target) ? 'You spent time together at the hospital. An ordinary conversation made the day feel less clinical.' : age < 12 ? 'You and ' + target.firstName + ' made a small adventure out of an ordinary afternoon.' : 'You and ' + target.firstName + ' spent an unhurried afternoon away from your phones.'; journal = isConfined(world, player) || isConfined(world, target) ? 'I shared a prison visit with ' + target.firstName + '.' : 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
+      relation.trust = bounded(relation.trust + 3); delta = draw(world, 'outcomes', 6, 10); body = (isConfined(world,player)?who+' spent visiting time with you in custody.':isConfined(world,target)?'During their time in custody, you spent visiting time with '+reference+'.':hospitalized(world,player)?who+' spent time with you in hospital.':hospitalized(world,target)?'During their hospital stay, you spent time with '+reference+'.':'You spent an afternoon with '+reference+'.')+(age>=18?' You spent '+money(dateBudget(world)/2n)+'.':' A good afternoon does not need a price tag.'); journal = isConfined(world, player) || isConfined(world, target) ? 'I shared a prison visit with ' + target.firstName + '.' : 'I made time for ' + target.firstName + '.'; effects.push(...statChanges(player, { happiness: 4, stress: -3, energy: -5 }));
     } else if (command.action === 'argue') {
       delta = -draw(world, 'outcomes', 8, 14); relation.trust = bounded(relation.trust - 5); relation.memories.push('argument:' + world.date.year);
-      body = 'Both of you thought of better things to say after the conversation ended.'; journal = 'I argued with ' + target.firstName + ' and left things unsettled.'; effects.push(...statChanges(player, { happiness: -3, stress: 3 }));
+      body = 'You argued with '+reference+'. Neither of you improved the situation.'; journal = 'I argued with ' + target.firstName + ' and left things unsettled.'; effects.push(...statChanges(player, { happiness: -3, stress: 3 }));
     } else {
       const accepted = draw(world, 'outcomes', 1, 100) <= 35 + Math.floor(relation.trust / 2); delta = accepted ? 7 : 1;
       if (accepted) { relation.memories = relation.memories.filter(memory => !memory.startsWith('argument:')); relation.trust = bounded(relation.trust + 4); }
-      body = accepted ? target.firstName + ' accepted your apology. You left the excuse out of it.' : target.firstName + ' heard you, but needs more time.'; journal = 'I apologised to ' + target.firstName + '.';
+      body = accepted ? who+' accepted your apology. Less excuse, more peace.' : who+' heard your apology but needs more time.'; journal = 'I apologised to ' + target.firstName + '.';
     }
-    relation.memories.push(command.action + ':' + world.date.year); effects.unshift(bond(relation, delta)); fact(world, journal, 'relationships'); result(world, command.action === 'argue' ? 'That could have gone better' : command.action === 'apologise' ? 'You said it properly' : 'Time together', body, 'conversation', effects); return;
+    relation.memories.push(command.action + ':' + world.date.year); effects.unshift(bond(relation, delta)); fact(world, journal, 'relationships'); result(world, command.action === 'argue' ? 'That could have gone better' : command.action === 'apologise' ? 'You said it properly' : 'Time together', body, 'person-action:'+command.action, effects); return;
   }
   if (command.type === 'gift-money') {
     if (age < 8) throw new IneligibleAction('Money gifts unlock from age eight');
@@ -173,13 +176,13 @@ export function resolveSocial(world: World, command: SocialCommand) {
     post(world, -command.amount, 0n, 'gift', 'Gift to ' + target.firstName); post(world, received, 0n, 'gift', 'Gift from ' + player.firstName, null, target);
     protectSeparateProperty(world, target.id, { minor: received, currency: destination.currency }, player.id);
     target.stats.happiness = bounded(target.stats.happiness + 3); relation.lastInteractionYear = world.date.year;
-    const effect = bond(relation, 5); fact(world, 'I gave ' + target.firstName + ' ' + formatMoney({ minor: received, currency: destination.currency }) + '.', 'relationships'); result(world, 'Gift received', target.firstName + ' thanked you. The money came from your actual balance.', 'gift', [effect]); return;
+    const effect = bond(relation, 5); fact(world, 'I gave ' + target.firstName + ' ' + formatMoney({ minor: received, currency: destination.currency }) + '.', 'relationships'); result(world, 'Gift received', 'You sent '+money(command.amount,source.currency)+' to '+reference+'. '+(source.currency===destination.currency?'No repayment required.':'They received '+money(received,destination.currency)+' after exchange fees.'), 'person-action:give-money', [effect]); return;
   }
   if (command.type === 'breakup') {
     if (relation.romance !== 'dating' && relation.romance !== 'engaged') throw new IneligibleAction(relation.romance === 'married' ? 'A marriage requires a divorce settlement' : 'You are not in a relationship with this person');
     relation.romance = 'ex'; relation.roles = relation.roles.filter(role => role !== 'partner'); if (!relation.roles.length) relation.roles.push('acquaintance'); syncKind(relation); relation.memories.push('breakup:' + world.date.year);
     relation.trust = bounded(relation.trust - 10); target.stats.happiness = bounded(target.stats.happiness - 8);
-    fact(world, 'I ended my relationship with ' + target.firstName + '.', 'relationships'); result(world, 'You went separate ways', 'You end the relationship. There is no undo button in the conversation, and the gifts you gave are still theirs.', 'breakup', [bond(relation, -25), ...statChanges(player, { happiness: -5, stress: 3 })]); return;
+    fact(world, 'I ended my relationship with ' + target.firstName + '.', 'relationships'); result(world, 'You went separate ways', 'You ended your relationship with '+target.firstName+'. The gifts stay with them.', 'person-action:breakup', [bond(relation, -25), ...statChanges(player, { happiness: -5, stress: 3 })]); return;
   }
   const reason = romanceReason(world, target); if (reason) throw new IneligibleAction(reason);
   if (command.type === 'ask-date') {
@@ -189,42 +192,43 @@ export function resolveSocial(world: World, command: SocialCommand) {
       settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
       counter(world, target.id, 'date');
       const chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));
-      const accepted = draw(world, 'outcomes', 1, 100) <= chance, outcome = dateActivityOutcome(activity.id, fullName(target), accepted);
-      if (!accepted) { fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'rose', statChanges(player, { happiness: -2 })); return; }
+      const accepted = draw(world, 'outcomes', 1, 100) <= chance, outcome = dateActivityOutcome(activity.id, fullName(target), accepted, {minor:activity.cost,currency:activity.currency});
+      if (!accepted) { fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'person-action:ask-date', statChanges(player, { happiness: -2 })); return; }
       if (activity.cost > 0n) charge(world, activity.cost, 'dating', activity.label + ' with ' + fullName(target));
       if (!activeRomance(relation)) relation.romance = 'dating'; if (!relation.roles.includes('partner') && relation.romance !== 'married') relation.roles.push('partner'); syncKind(relation);
       const beforeTrust = relation.trust;
       relation.trust = bounded(relation.trust + 5); relation.lastInteractionYear = world.date.year; relation.memories.push('date:' + world.date.year);
       const trust: RuntimeEffectRow = { id: 'trust', label: 'Trust', value: '+' + (relation.trust - beforeTrust) + '%', tone: relation.trust > beforeTrust ? 'positive' : 'neutral' };
-      fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'hearts', [bond(relation, outcome.bond), trust, ...statChanges(player, { happiness: outcome.happiness, energy: outcome.energy })]); return;
+      fact(world, outcome.journal, 'relationships'); result(world, outcome.title, outcome.body, 'person-action:ask-date', [bond(relation, outcome.bond), trust, ...statChanges(player, { happiness: outcome.happiness, energy: outcome.energy })]); return;
     }
     if (hospitalized(world, player) || hospitalized(world, target)) throw new IneligibleAction('Arrange a date after the hospital stay');
     settleBackground(world, target, world.date.year * 12 + world.date.month - 1);
     counter(world, target.id, 'date'); const cost = dateBudget(world); if (accountFor(world).cash < cost) throw new IneligibleAction('Your balance cannot cover the date');
     const chance = Math.min(95, 20 + Math.round(relation.strength * 0.6 + player.stats.looks * 0.15));
-    if (draw(world, 'outcomes', 1, 100) > chance) { fact(world, target.firstName + ' declined my invitation to a date.', 'relationships'); result(world, 'Not this time', target.firstName + ' declined. You respected the answer, and your date budget remains unspent.', 'rose', statChanges(player, { happiness: -2 })); return; }
+    if (draw(world, 'outcomes', 1, 100) > chance) { fact(world, target.firstName + ' declined my invitation to a date.', 'relationships'); result(world, 'Not this time', who+' declined your invitation. No date costs were charged.', 'person-action:ask-date', statChanges(player, { happiness: -2 })); return; }
     charge(world, cost, 'dating', 'Date with ' + target.firstName);
     if (!activeRomance(relation)) relation.romance = 'dating'; if (!relation.roles.includes('partner') && relation.romance !== 'married') relation.roles.push('partner'); syncKind(relation);
     relation.trust = bounded(relation.trust + 5); relation.lastInteractionYear = world.date.year; relation.memories.push('date:' + world.date.year);
-    fact(world, 'I went on a date with ' + target.firstName + '.', 'relationships'); result(world, 'You made an evening of it', 'The conversation with ' + target.firstName + ' outlasted the meal.', 'hearts', [bond(relation, 7), ...statChanges(player, { happiness: 6, energy: -4 })]); return;
+    fact(world, 'I went on a date with ' + target.firstName + '.', 'relationships'); result(world, 'You made an evening of it', 'You went on a date with '+reference+'. You spent '+money(cost)+'.', 'person-action:ask-date', [bond(relation, 7), ...statChanges(player, { happiness: 6, energy: -4 })]); return;
   }
   if (command.type === 'propose') {
     if (relation.romance !== 'dating' || relation.strength < 75 || relation.trust < 60) throw new IneligibleAction('Build a committed relationship with at least 75% strength and 60% trust first');
     counter(world, target.id, 'propose');
     let ring = command.ringId ? world.assets.find(asset => asset.id === command.ringId && asset.ownerId === player.id && asset.catalogId === 'engagement-ring') : world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring');
     if (command.ringId && !ring) throw new IneligibleAction('Choose an engagement ring you own');
+    const boughtRing=!ring;
     if (!ring) { const offer = assetCatalog.find(asset => asset.id === 'engagement-ring')!; resolveAssets(world, { type: 'buy-asset', catalogId: offer.id, financing: 'cash', depositBps: 10000, termMonths: 360, quotedPrice: assetPrice(world, offer) }, false); ring = world.assets.find(asset => asset.ownerId === player.id && asset.catalogId === 'engagement-ring')!; }
-    if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', target.firstName + ' is not ready. You are still together, and the ring makes the journey home with you.', 'rings', statChanges(player, { happiness: -4 })); return; }
+    if (draw(world, 'outcomes', 1, 100) > Math.min(95, relation.strength - 10)) { fact(world, target.firstName + ' was not ready to accept my proposal.', 'relationships'); result(world, 'They aren’t ready', target.firstName+' declined your proposal; you are still together. '+(boughtRing?'You keep the ring you bought for '+money(ring.pricePaid,ring.currency)+'.':'You keep your ring.'), 'person-action:propose', statChanges(player, { happiness: -4 })); return; }
     ring.ownerId = target.id; ring.ownershipSource = 'gift'; ring.titleSince = { ...world.date }; ring.provenance.push('Given to ' + fullName(target) + ' by ' + fullName(player) + ' in ' + world.date.year);
     if (!world.accounts.some(account => account.ownerId === target.id && account.currency === ring!.currency)) world.accounts.push({ id: 'account_' + target.id + '_' + ring.currency, ownerId: target.id, currency: ring.currency, cash: 0n, openingCash: 0n, lockedCash: 0n });
     relation.romance = 'engaged'; relation.memories.push('engagement:' + world.date.year); syncKind(relation);
-    fact(world, target.firstName + ' accepted my proposal.', 'relationships'); result(world, 'They said yes', 'You are engaged to ' + target.firstName + '. The ring is now theirs.', 'rings', statChanges(player, { happiness: 10 })); return;
+    fact(world, target.firstName + ' accepted my proposal.', 'relationships'); result(world, 'They said yes', 'You are engaged to '+target.firstName+'. '+(boughtRing?'The ring cost '+money(ring.pricePaid,ring.currency)+' and is now theirs.':'The ring is now theirs.'), 'person-action:propose', statChanges(player, { happiness: 10 })); return;
   }
   if (relation.romance !== 'engaged') throw new IneligibleAction('Get engaged before planning the wedding');
   if (command.budget < weddingBudgets(world)[0].amount) throw new IneligibleAction('The budget does not cover the minimum ceremony cost');
   charge(world, command.budget, 'wedding', 'Wedding with ' + target.firstName);
   recordMarriage(world, player, target, relation, 'marriage_' + world.revision, command.budget);
-  fact(world, 'I married ' + fullName(target) + '.', 'relationships'); result(world, 'You’re married', 'Your marriage and ceremony payment are recorded. You now share a household while retaining your own accounts and legal ownership.', 'rings', statChanges(player, { happiness: 10, respect: 2 }));
+  fact(world, 'I married ' + fullName(target) + '.', 'relationships'); result(world, 'You’re married', 'You married '+target.firstName+' with a '+money(command.budget)+' ceremony. You share a household and keep your own accounts and property.', 'person-action:plan-wedding', statChanges(player, { happiness: 10, respect: 2 }));
 }
 export function recordFamilyDeath(world: World, personId: string) {
   for (const relation of world.relationships.filter(item => item.from === personId || item.to === personId)) {

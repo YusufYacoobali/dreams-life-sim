@@ -6,7 +6,7 @@ import { resolveCommand } from '../../src/game/engine';
 import { monthFrom } from '../../src/game/calendar';
 import { jobs } from '../../src/game/content/jobs';
 import { randomInteger } from '../../src/game/random';
-import { roundRatio } from '../../src/game/money';
+import { formatMoney, roundRatio } from '../../src/game/money';
 import { monthlyAmount } from '../../src/game/rules';
 import { employmentMonth, endEmployment, promotedAnnualPay, salaryForPerson } from '../../src/game/systems/work';
 import { currentWorkplace } from '../../src/game/systems/workplaceSchemas';
@@ -37,6 +37,8 @@ function request(world: World, accepted: boolean) {
 test.each(countryCodes)('%s accepts a real salary change with no upfront cash or service, and pays the new rate only in the next period', country => {
   const before = employee(country), person = before.people[before.activePersonId], oldPay = person.employment!.annualPay;
   const { next, command, expected, chance, original } = request(before, true), changed = next.people[next.activePersonId];
+  expect(next.pending!.illustration).toBe('person-action:request-raise');expect(next.pending!.body).toContain(formatMoney({minor:changed.employment!.annualPay,currency:changed.employment!.currency}));
+  expect(next.pending!.body.match(/[.!?](?=\s|$)/g)).toHaveLength(2);expect(next.pending!.body).toContain('next paid period');
   expect(next.workRaises).toEqual([expect.objectContaining({ workplaceId: command.workplaceId, supervisorId: command.supervisorId, paidMonths: 12, performance: 80, chance, roll: expected.value, accepted: true, annualPayBefore: oldPay, annualPayAfter: roundRatio(oldPay * 105n, 100n), currency: person.employment!.currency })]);
   expect(next.accounts).toEqual(before.accounts); expect(next.ledger).toEqual(before.ledger); expect(changed.finance).toEqual(person.finance); expect(changed.education).toEqual(person.education);
   expect(changed.employment).toEqual({ ...person.employment, annualPay: roundRatio(oldPay * 105n, 100n) }); expect(changed.stats).toEqual({ ...person.stats, energy: person.stats.energy - 6 });
@@ -50,6 +52,8 @@ test.each(countryCodes)('%s accepts a real salary change with no upfront cash or
 
 test('a declined request costs energy and one draw, retains all pay/history, and remains annual after changing supervisors', () => {
   const world = employee(), { next, command, expected } = request(world, false), person = world.people[world.activePersonId];
+  expect(next.pending!.illustration).toBe('person-action:request-raise');expect(next.pending!.body).toContain(formatMoney({minor:person.employment!.annualPay,currency:person.employment!.currency}));
+  expect(next.pending!.body).not.toMatch(/budget will not stretch/);expect(next.pending!.body.match(/[.!?](?=\s|$)/g)).toHaveLength(2);
   expect(next.workRaises[0]).toMatchObject({ accepted: false, annualPayBefore: person.employment!.annualPay, annualPayAfter: person.employment!.annualPay });
   expect(next.accounts).toEqual(world.accounts); expect(next.ledger).toEqual(world.ledger); expect(next.workHistory).toEqual(world.workHistory); expect(next.people[next.activePersonId].employment).toEqual(person.employment);
   expect(next.random).toEqual({ ...world.random, outcomes: expected.state }); const ready = decodeWorld(encodeWorld(ack(next)));

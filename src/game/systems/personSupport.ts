@@ -11,6 +11,8 @@ import { relationFor, activeRomance } from './relationshipQueries';
 import { settleBackground } from './npcBudget';
 import { isConfined } from './legalSchemas';
 import { supportAttemptKey, supportChanceV1, type PersonSupportCommand, type PersonSupportRequest } from './personSupportSchemas';
+import { moneySupportBody, personReference, sentenceSubject } from '../content/personInteractionWriting';
+import { relationLabel } from './relationships';
 export { personSupportCommandSchema, type PersonSupportCommand } from './personSupportSchemas';
 
 type SupportKind = 'money'|'loan';
@@ -85,18 +87,22 @@ export function resolvePersonSupport(world:World,command:PersonSupportCommand) {
   if (command.type==='respond-person-loan') {
     const row=world.personSupportRequests.find(item=>item.id===command.requestId);
     if (!row||row.actorId!==player.id||row.status!=='offered') throw new IneligibleAction('This loan offer is no longer open');
-    if (!command.accept) { row.status='declined';row.resolved={...world.date};result(world,'No strings attached','You declined the loan. Your wallet remains dramatically unchanged.','loan');return; }
+    const provider=world.people[row.targetId],edge=relationFor(world,player.id,row.targetId);
+    const reference=edge?personReference(provider.firstName,relationLabel(world,edge)):provider.firstName;
+    const amount=formatMoney({minor:row.offered,currency:row.currency});
+    if (!command.accept) { row.status='declined';row.resolved={...world.date};result(world,'No loan taken','You declined the '+amount+' loan from '+reference+'. No new debt.','person-action:decline-loan');return; }
     const lender=world.people[row.targetId];if (lender&&!lender.died) settleBackground(world,lender,world.date.year*12+world.date.month-1);
     const reason=loanOfferReason(world,row.id);if(reason)throw new IneligibleAction(reason);
     fund(world,row,true);row.status='accepted';row.resolved={...world.date};
     fact(world,'I borrowed '+formatMoney({minor:row.offered,currency:row.currency})+' from '+fullName(lender)+'.','relationships');
-    result(world,'A loan between people',lender.firstName+' lent you '+formatMoney({minor:row.offered,currency:row.currency})+'. Interest-free. Repay them through Finances when you can.','loan');return;
+    result(world,'A loan between people','You borrowed '+amount+' from '+reference+'. It is interest-free, but you do owe it back.','person-action:accept-loan');return;
   }
   const reason=supportRequestReason(world,command.personId,command.kind,command.amount);if(reason)throw new IneligibleAction(reason);
   const target=world.people[command.personId],relation=relationFor(world,player.id,target.id)!;
   if(command.currency!==countries[target.country].currency)throw new IneligibleAction('Their currency changed. Review the amount again.');
   settleBackground(world,target,world.date.year*12+world.date.month-1);
   const source=accountFor(world,target),available=max0(availableCash(source));
+  const role=relationLabel(world,relation),reference=personReference(target.firstName,role),who=sentenceSubject(reference),requested=formatMoney({minor:command.amount,currency:source.currency});
   const owed=world.liabilities.filter(debt=>debt.ownerId===player.id&&debt.creditorId===target.id).reduce((sum,debt)=>sum+fxMoney(world,{minor:debt.principal,currency:debt.currency},source.currency).minor,0n);
   const row:PersonSupportRequest={id:'person_support_'+world.revision,ruleVersion:1,actorId:player.id,targetId:target.id,relationshipId:relation.id,kind:command.kind,requested:command.amount,offered:0n,currency:source.currency,proposed:{...world.date},expires:monthFrom(world.date,12,world.date.day),strength:relation.strength,trust:relation.trust,actorAge:ageOn(player,world.date),targetAge:ageOn(target,world.date),generosity:supportGenerosity(target.traits),parent:relation.to===player.id&&relation.roles.some(role=>role==='parent'||role==='guardian'),available,owed,chance:5,roll:draw(world,'outcomes',1,100),outcome:'refused',status:'completed',interestBps:0,resolved:{...world.date},liabilityId:null,debitId:null,creditId:null};
   row.chance=supportChanceV1(row);world.personSupportRequests.push(row);world.actionCounts[supportAttemptKey(player.id,target.id,world.date.year)]=1;relation.lastInteractionYear=world.date.year;
@@ -104,14 +110,14 @@ export function resolvePersonSupport(world:World,command:PersonSupportCommand) {
     const annoyed=owed>0n||relation.strength<35||row.roll>=96;
     const before=relation.strength;
     row.outcome=annoyed?'annoyed':'refused';if(annoyed){relation.strength=bounded(relation.strength-5);relation.trust=bounded(relation.trust-2);}
-    fact(world,'I asked '+fullName(target)+' for money. They said no.','relationships');
-    result(world,annoyed?'The Bank of '+target.firstName+' is closed':'Not this time',annoyed?target.firstName+' did not appreciate the request. The silence was free.':target.firstName+' declined. No money changed hands.','money',annoyed?[{id:'bond',label:'Relationship',value:(relation.strength-before)+'%',tone:relation.strength<before?'negative':'neutral'}]:[]);return;
+    fact(world,'I asked '+fullName(target)+(command.kind==='loan'?' for a loan of ':' for ')+requested+'. They said no.','relationships');
+    result(world,annoyed?'The Bank of '+target.firstName+' is closed':'Not this time',moneySupportBody(target.firstName,role,annoyed?'annoyed':'refused',requested,undefined,available>0n),'person-action:'+(command.kind==='loan'?'ask-loan':'ask-money'),annoyed?[{id:'bond',label:'Relationship',value:(relation.strength-before)+'%',tone:relation.strength<before?'negative':'neutral'}]:[]);return;
   }
   const capacity=available/(command.kind==='loan'?2n:row.generosity>0?4n:8n);
   row.offered=command.amount<(capacity||1n)?command.amount:(capacity||1n);
   const loan=command.kind==='loan'||row.actorAge>=rules[player.country].adultAge&&owed===0n&&row.roll%3===0;
-  if (loan) { row.outcome='loan-offered';row.status='offered';row.resolved=null;result(world,'An offer with a small catch',target.firstName+' offered to lend you '+formatMoney({minor:row.offered,currency:row.currency})+', interest-free. Review it on their profile. Nothing is borrowed until you accept.','loan');return; }
+  if (loan) { row.outcome='loan-offered';row.status='offered';row.resolved=null;result(world,'An offer with a small catch',who+' offered an interest-free loan of '+formatMoney({minor:row.offered,currency:row.currency})+'. Review it on their profile; accepting means you owe '+formatMoney({minor:row.offered,currency:row.currency})+' back.','person-action:ask-loan');return; }
   row.outcome=row.offered<row.requested?'partial':'gift';fund(world,row,false);relation.strength=bounded(relation.strength+2);player.stats.happiness=bounded(player.stats.happiness+2);
   fact(world,fullName(target)+' gave me '+formatMoney({minor:row.offered,currency:row.currency})+'.','relationships');
-  result(world,row.outcome==='partial'?'A little help':'They came through',target.firstName+' gave you '+formatMoney({minor:row.offered,currency:row.currency})+(row.outcome==='partial'?'. Less than you asked for. Still more than zero.':'. No repayment required.'),'gift');
+  result(world,row.outcome==='partial'?'A little help':'They came through',moneySupportBody(target.firstName,role,row.outcome,requested,formatMoney({minor:row.offered,currency:row.currency})),'person-action:ask-money');
 }

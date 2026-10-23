@@ -1,5 +1,5 @@
 import type { Person } from '../game/model';
-import { facialIdentity } from '../game/appearance';
+import { facialIdentity, legacyNPCPortraitAppearance } from '../game/appearance';
 import { portraitImages, type PortraitAsset } from './portraitImages';
 import { portraitAgeStage, type PortraitAgeStage } from './portraitLayout';
 import { fitPortraitHair } from './portraitFitting';
@@ -20,7 +20,8 @@ export type PortraitLayer = {
 };
 
 /** Scalars keep unchanged drawings memoized across save copies and renames. */
-export function portraitTraits(appearance: Person['appearance'], age: number, personId?: string): PortraitTraits {
+export function portraitTraits(savedAppearance: Person['appearance'], age: number, personId?: string, legacyDefaultGender?: Person['gender']): PortraitTraits {
+  const appearance = personId && legacyDefaultGender ? legacyNPCPortraitAppearance(savedAppearance,personId,legacyDefaultGender) : savedAppearance;
   const identity = appearance.identity ?? (personId ? facialIdentity(personId) : 0), stage = portraitAgeStage(age);
   return { identity, face: appearance.face, skin: appearance.skin,
     hair: stage === 0 ? 0 : appearance.hair, stage, hairColor: stage === 0 || appearance.hair === 0 ? 0 : appearance.hairColor,

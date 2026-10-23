@@ -2,10 +2,12 @@ import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
 import { encodeWorld } from '../../src/game/model';
 import { database } from '../support/sqlite';
-import { athleteFixture, miniGameFixture } from '../support/miniGames';
+import { athleteFixture, miniGameFixture, startMiniGame } from '../support/miniGames';
 import { burglaryContext } from '../../src/minigames/core/eligibility';
 import { keeperPosition } from '../../src/minigames/sports/sportsLogic';
 import { targetAngle } from '../../src/minigames/crime/crimeLogic';
+import { resolveCommand } from '../../src/game/engine';
+import { evaluateSession } from '../../src/minigames/core/evaluation';
 
 async function setup(crime = false) {
   const { sqlite, driver } = database(),
@@ -29,6 +31,45 @@ async function setup(crime = false) {
   };
   return { sqlite, repository, world, deps, store, start };
 }
+
+test('a legacy level-5 save retains its replay and outcome through a failed move, exact retry and cold completion', async () => {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver);
+  try {
+    await repository.initialise();
+    let legacy = startMiniGame(miniGameFixture(), 'crime');
+    legacy.miniGames[0].difficulty = 5;
+    const id = legacy.miniGames[0].id, seed = legacy.miniGames[0].seed;
+    const input = (stage: number) => ({ at: (stage + 1) * 400, action: { type: 'lock' as const, angle: (targetAngle(seed, stage) + 8) % 360 } });
+    legacy = resolveCommand(legacy, { type: 'mini-game-input', sessionId: id, index: 0, input: input(0) });
+    legacy = resolveCommand(legacy, { type: 'mini-game-pause', sessionId: id, elapsedMs: 400 });
+    await repository.create(legacy);
+    const deps = { repository: async () => repository, date: () => legacy.date, id: () => 'unused' }, store = createGameStore(deps);
+    expect(await store.getState().bootstrap()).toBe(true);
+    expect(store.getState().world!.miniGames[0]).toEqual(legacy.miniGames[0]);
+    expect(await store.getState().dispatch({ type: 'mini-game-resume', sessionId: id })).toBe(true);
+    const before = encodeWorld(store.getState().world!);
+    sqlite.exec("CREATE TRIGGER fail_legacy_move BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    const command = { type: 'mini-game-input' as const, sessionId: id, index: 1, input: input(1) };
+    expect(await store.getState().dispatch(command)).toBe(false);
+    expect(encodeWorld(store.getState().world!)).toBe(before);
+    sqlite.exec('DROP TRIGGER fail_legacy_move');
+    expect(await store.getState().dispatch(command)).toBe(true);
+    expect(await store.getState().dispatch({ type: 'mini-game-input', sessionId: id, index: 2, input: input(2) })).toBe(true);
+    const session = store.getState().world!.miniGames[0], outcome = evaluateSession(session);
+    const expected = resolveCommand(store.getState().world!, { type: 'mini-game-complete', sessionId: id });
+    expect(outcome.finished).toBe(true);
+    expect(evaluateSession({ ...session, difficulty: 3 }).score).not.toBe(outcome.score);
+    const cold = createGameStore(deps);
+    expect(await cold.getState().bootstrap()).toBe(true);
+    expect(cold.getState().world!.miniGames[0]).toEqual(session);
+    expect(await cold.getState().dispatch({ type: 'mini-game-complete', sessionId: id })).toBe(true);
+    expect(cold.getState().world!.miniGames[0]).toMatchObject({ difficulty: 5, inputs: [input(0), input(1), input(2)], score: outcome.score });
+    expect(cold.getState().world!.incidents).toHaveLength(1);
+    expect(cold.getState().world!.random).toEqual(expected.random);
+  } finally {
+    sqlite.close();
+  }
+});
 
 test('a failed start never publishes or consumes an attempt; a cold reopen resumes the same saved inputs and parameters', async () => {
   const { sqlite, repository, world, deps, store, start } = await setup();

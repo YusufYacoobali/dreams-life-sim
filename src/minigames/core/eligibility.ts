@@ -1,7 +1,7 @@
 import type { World } from '../../game/model';
 import { crimeReason } from '../../game/systems/legal';
 import { isConfined } from '../../game/systems/legalSchemas';
-import { difficultyFor } from './difficulty';
+import { newChallengeDifficulty } from './difficulty';
 import type { MiniGameKind } from './types';
 
 export const activeMiniGame = (world: World) =>
@@ -29,10 +29,7 @@ export function challengeContext(
     );
     return project && career?.employmentId === project.employmentId
       ? {
-          difficulty: difficultyFor(
-            person.skills.sport,
-            career.projects.reduce((sum, row) => sum + row.periods.length, 0),
-          ),
+          difficulty: newChallengeDifficulty,
         }
       : null;
   }
@@ -52,19 +49,13 @@ export function challengeContext(
     );
     return assignment && assignment.periods.length < 6
       ? {
-          difficulty: difficultyFor(
-            person.skills.science,
-            career!.periods.length,
-          ),
+          difficulty: newChallengeDifficulty,
         }
       : null;
   }
   return ownerId === person.id && contextId === burglaryContext(world)
     ? {
-        difficulty: difficultyFor(
-          person.legal.crimeSkill,
-          world.incidents.filter((row) => row.personId === person.id).length,
-        ),
+        difficulty: newChallengeDifficulty,
       }
     : null;
 }

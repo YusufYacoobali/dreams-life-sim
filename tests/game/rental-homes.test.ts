@@ -89,5 +89,5 @@ test.each(['missing-payment','amount','duplicate','residence'] as const)('saved 
 
 test('World41 migration adds only empty leases and current markers, preserving old bound data exactly',()=>{
   const current=JSON.parse(encodeWorld(fixture())),old={...current,schemaVersion:41,engineVersion:43,contentVersion:20};delete old.rentalLeases;
-  const before=JSON.stringify(old),migrated=decodeWorld(before);expect(JSON.parse(encodeWorld(migrated))).toEqual({...old,schemaVersion:44,engineVersion:46,contentVersion:23,miniGames:[], personSupportRequests: [], personActionHistory: [],rentalLeases:[]});expect(JSON.stringify(old)).toBe(before);
+  const before=JSON.stringify(old),migrated=decodeWorld(before);expect(JSON.parse(encodeWorld(migrated))).toEqual({...old,schemaVersion:45,engineVersion:47,contentVersion:24,miniGames:[], personSupportRequests: [], personActionHistory: [],rentalLeases:[]});expect(JSON.stringify(old)).toBe(before);
 });

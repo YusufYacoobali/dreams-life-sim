@@ -1,3 +1,6 @@
+// Only new attempts use this setting. Saved attempts replay their own difficulty.
+export const newChallengeDifficulty = 3;
+
 /** Decorative/challenge entropy is independent of every life-simulation RNG. */
 export function challengeSeed(text: string) {
   let hash = 2166136261;

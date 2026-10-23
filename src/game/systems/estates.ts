@@ -3,6 +3,7 @@ import { ageOn, compareDates, fullName, Person, World } from '../model';
 import { Currency, currencyDigits, formatMoney, Money, roundRatio } from '../money';
 import { rules } from '../rules';
 import { IneligibleAction } from '../errors';
+import { legacyNPCDefaultGender, legacyNPCPortraitAppearance } from '../appearance';
 import { fxMoney, investmentValue, netWorth, protectSeparateProperty } from '../valuation';
 import { accountFor, active, fact, post, result } from './common';
 import { childrenOf } from './family';
@@ -154,6 +155,10 @@ export function resolveEstate(world: World, command: EstateCommand) {
   if (command.type === 'continue-child') {
     if (!person.died) throw new IneligibleAction('This life has not ended');
     const child = childrenOf(world, person.id).find(item => item.id === command.personId && !item.died); if (!child) throw new IneligibleAction('Choose an existing living child');
+    // Freeze this existing NPC's displayed artwork before it becomes a player.
+    // Old save loads remain untouched; deliberate and former-player looks stay exact.
+    const legacyGender = legacyNPCDefaultGender(world, child.id, child.appearance);
+    if (legacyGender) child.appearance = legacyNPCPortraitAppearance(child.appearance, child.id, legacyGender);
     settleEstate(world, person.id); world.legacies.push({ fromId: person.id, toId: child.id, date: { ...world.date } }); world.generation++;
     world.activePersonId = child.id; world.birthAcknowledged = true; world.pending = null; world.pendingPriority = 0; world.deferred = [];
     world.annual = world.legacyAnnual?.stage === 'months' ? { ...world.legacyAnnual, pausedForPlanning: true } : null; world.legacyAnnual = null;

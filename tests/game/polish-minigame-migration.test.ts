@@ -11,7 +11,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import { athleteFixture, miniGameFixture, nextMatchPeriod, startMiniGame } from '../support/miniGames';
 import graduate from '../fixtures/v3-employed-graduate.json';
 
-const markers = { schemaVersion:44, engineVersion:46, contentVersion:23 };
+const markers = { schemaVersion:45, engineVersion:47, contentVersion:24 };
 const rawWorld = (world:World):Record<string,any> => JSON.parse(encodeWorld(world));
 const acknowledge = (world:World) => world.pending?.kind==='result'
   ? resolveCommand(world,{type:'acknowledge',resultId:world.pending.id}) : world;
@@ -135,7 +135,22 @@ test('own 43/45/content22 preserves saved loan offers, actions and lease payment
   expect(accepted.liabilities.find(row=>row.id===accepted.personSupportRequests[0].liabilityId)).toMatchObject({creditorId:request.targetId,principal:request.offered});
 });
 
-test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 44/46/content23 rejects a missing required %s history',key=>{
+test.each(['empty','active','completed','applied'] as const)('own 44/46/content23 gains only current markers and preserves its %s session',state=>{
+  const raw=rawWorld(gameWorld(state));Object.assign(raw,{schemaVersion:44,engineVersion:46,contentVersion:23});
+  const before=JSON.stringify(raw),restored=decodeWorld(before,true);
+  expect(rawWorld(restored)).toEqual({...raw,...markers});
+  expect(JSON.stringify(raw)).toBe(before);
+  expect(unpackCheckpoint(packCheckpoint(restored),true)).toEqual(restored);
+});
+
+test('own 44/46/content23 retains nonempty support, action and lease histories without rebinding them',()=>{
+  const raw=rawWorld(supportAndLeaseWorld());Object.assign(raw,{schemaVersion:44,engineVersion:46,contentVersion:23});
+  const before=JSON.stringify(raw),restored=decodeWorld(before,true);
+  expect(raw.personSupportRequests).toHaveLength(1);expect(raw.personActionHistory).toHaveLength(1);expect(raw.rentalLeases).toHaveLength(1);
+  expect(rawWorld(restored)).toEqual({...raw,...markers});expect(JSON.stringify(raw)).toBe(before);
+});
+
+test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 45/47/content24 rejects a missing required %s history',key=>{
   const raw=rawWorld(decodeWorld(JSON.stringify(graduate)));delete raw[key];
   expect(()=>decodeWorld(JSON.stringify(raw))).toThrow();
 });

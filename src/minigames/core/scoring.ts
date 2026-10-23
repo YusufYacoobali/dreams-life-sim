@@ -29,8 +29,8 @@ export function burglaryModifiers(score: number) {
 export function consequenceText(kind: MiniGameKind, score: number) {
   if (kind === 'crime')
     return score >= 60
-      ? 'A modest burglary advantage. Evidence, investigations and arrest still apply.'
-      : 'The burglary still counts. Detection risk rises; the ordinary legal system resolves what follows.';
+      ? 'Better loot, less risk. You can still be arrested.'
+      : 'Less loot, more risk. This burglary still counts.';
   const modifier = performanceModifier(score);
-  return `${modifier >= 0 ? '+' : ''}${modifier} performance on the next eligible ${kind === 'sports' ? 'match' : 'mission'} period. Attendance, pay, risks and awards follow the normal simulation.`;
+  return `${modifier >= 0 ? '+' : ''}${modifier} performance on your next ${kind === 'sports' ? 'match' : 'mission'} period.`;
 }

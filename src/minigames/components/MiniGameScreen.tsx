@@ -69,12 +69,9 @@ type Props = {
   onReload?: () => Promise<MiniGameSession | null>;
 };
 const instructions = {
-  sports:
-    'Drag the green target into a corner, then set your aim. Stop the power indicator in the green zone to shoot. The goalkeeper is moving — aim away from them.',
-  crime:
-    'Tap Lock alignment as the pointer meets the green marker. Release three bolts before time runs out. Three mistakes trigger the alarm.',
-  astronaut:
-    'Tap directional thrusters to change velocity. Line up with the green port, then use downward thrust to brake. You keep drifting between taps.',
+  sports: 'Aim for a corner, then stop the power in the green zone.',
+  crime: 'Match the green marker to unlock all three bolts.',
+  astronaut: 'Line up with the green port. Tap down to brake.',
 };
 
 export function MiniGameScreen(props: Props) {
@@ -90,7 +87,8 @@ export function MiniGameScreen(props: Props) {
     [confirmForfeit, setConfirmForfeit] = useState(false),
     [artReady, setArtReady] = useState(false),
     [artError, setArtError] = useState(false),
-    [artRetry, setArtRetry] = useState(0);
+    [artRetry, setArtRetry] = useState(0),
+    [sceneRevision, setSceneRevision] = useState(0);
   useEffect(() => {
     let live = true;
     setArtReady(false);
@@ -115,6 +113,7 @@ export function MiniGameScreen(props: Props) {
     sessionId = useRef<string | null>(null),
     finishing = useRef(false),
     pendingInput = useRef<Promise<boolean>>(Promise.resolve(true)),
+    inputInFlight = useRef(false),
     failedInput = useRef<{ action: MiniGameAction; at: number } | null>(null),
     finishTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   current.current = props;
@@ -287,17 +286,26 @@ export function MiniGameScreen(props: Props) {
   }, [clock]);
   const input = (action: MiniGameAction, at: number) => {
     if (
+      inputInFlight.current ||
+      finishing.current ||
+      !mounted.current ||
       writing ||
       busy ||
       phaseRef.current !== 'playing' ||
       failedInput.current
     )
-      return;
+      return false;
+    inputInFlight.current = true;
     setWriting(true);
     feedback.hapticFeedback();
     void playSound();
     const entry = { action, at: Math.round(at) };
-    const promise = current.current.onInput(entry.action, entry.at);
+    let promise: Promise<boolean>;
+    try {
+      promise = Promise.resolve(current.current.onInput(entry.action, entry.at)).catch(() => false);
+    } catch {
+      promise = Promise.resolve(false);
+    }
     pendingInput.current = promise;
     void promise
       .then(
@@ -320,8 +328,10 @@ export function MiniGameScreen(props: Props) {
         },
       )
       .finally(() => {
+        inputInFlight.current = false;
         if (mounted.current) setWriting(false);
       });
+    return true;
   };
   const resume = async () => {
     setWriting(true);
@@ -359,9 +369,15 @@ export function MiniGameScreen(props: Props) {
       <StatusBar style="light" />
       <View style={s.header}>
         <GameButton
-          label="‹"
+          label={session?.status === 'active' ? 'Pause' : 'Back'}
+          icon={session?.status === 'active' ? 'pause' : 'back'}
+          iconColor={c.white}
           accessibilityLabel={session?.status === 'active' ? 'Pause' : 'Back'}
           secondary
+          round
+          size={48}
+          style={{ backgroundColor: '#FFFFFF1C' }}
+          textStyle={{ color: c.white }}
           disabled={
             writing ||
             busy ||
@@ -374,10 +390,10 @@ export function MiniGameScreen(props: Props) {
           }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={s.eyebrow}>
-            {practice ? 'DREAMS · PLAYGROUND' : 'DREAMS · CHALLENGE'}
+          <Text style={[s.eyebrow, { color: '#DCE6F2' }]}>
+            {practice ? 'PRACTICE' : 'CHALLENGE'}
           </Text>
-          <Text accessibilityRole="header" style={[s.title, { fontSize: 17 }]}>
+          <Text accessibilityRole="header" style={[s.title, { fontSize: 18, color: c.white }]}>
             {titles[kind]}
           </Text>
         </View>
@@ -387,7 +403,6 @@ export function MiniGameScreen(props: Props) {
           kind={kind}
           clock={clock}
           assisted={session.assisted}
-          difficulty={session.difficulty}
         />
       )}
       <ScrollView
@@ -409,6 +424,7 @@ export function MiniGameScreen(props: Props) {
               clock={clock}
               enabled={enabled}
               reducedMotion={feedback.reducedMotion}
+              controlsVisible={phase === 'playing' || phase === 'finishing'}
               onInput={input}
             />
           ) : kind === 'crime' ? (
@@ -417,14 +433,17 @@ export function MiniGameScreen(props: Props) {
               clock={clock}
               enabled={enabled}
               reducedMotion={feedback.reducedMotion}
+              controlsVisible={phase === 'playing' || phase === 'finishing'}
               onInput={input}
             />
           ) : (
             <DockingGame
+              key={session.id + ':' + sceneRevision}
               session={session}
               clock={clock}
               enabled={enabled}
               reducedMotion={feedback.reducedMotion}
+              controlsVisible={phase === 'playing' || phase === 'finishing'}
               onInput={input}
               onFinished={finish}
             />
@@ -434,7 +453,7 @@ export function MiniGameScreen(props: Props) {
         )}
       </ScrollView>
       {phase === 'intro' && (
-        <View style={overlay} accessibilityViewIsModal>
+        <View style={[overlay, { justifyContent: 'flex-end' }]} accessibilityViewIsModal>
           <ScrollView
             style={{
               maxHeight: '95%',
@@ -444,40 +463,42 @@ export function MiniGameScreen(props: Props) {
             }}
             contentContainerStyle={s.card}
           >
+            <View accessible={false} style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: '#C9CDD4', alignSelf: 'center' }} />
             <Text style={s.eyebrow}>
-              {practice ? 'PRACTICE · NO SAVE CHANGES' : 'ONE SAVED ATTEMPT'}
+              {practice ? 'PRACTICE' : 'ONE ATTEMPT'}
             </Text>
-            <Text accessibilityRole="header" style={s.title}>
+            <Text accessibilityRole="header" style={[s.title, { textAlign: 'center' }]}>
               {titles[kind]}
             </Text>
-            <Text style={s.text}>{instructions[kind]}</Text>
-            <Text style={s.muted}>
+            <Text style={[s.text, { textAlign: 'center' }]}>{instructions[kind]}</Text>
+            <Text style={[s.muted, { textAlign: 'center' }]}>
               {practice
-                ? 'Restart freely at any difficulty.'
+                ? 'Play again whenever you like. Your saved life stays unchanged.'
                 : kind === 'crime'
-                  ? 'Playing or choosing normal burglary uses this year’s attempt. Forfeiting still resolves the crime, including possible arrest.'
-                  : 'One challenge per ' +
-                    (kind === 'sports'
-                      ? 'active season. Your score affects the next eligible match period.'
-                      : 'assignment. Your score affects the next eligible mission period.')}
+                  ? 'Uses this year’s burglary. Arrest is possible, even if you forfeit.'
+                  : kind === 'sports'
+                    ? 'One shot this season. Your result affects the next match.'
+                    : 'One attempt this assignment. Your result affects the next mission.'}
             </Text>
-            <View style={[s.row, { justifyContent: 'space-between' }]}>
+            <View style={[s.row, { justifyContent: 'space-between', backgroundColor: '#EFF3FA', borderRadius: 18, padding: 12 }]}>
               <View style={{ flex: 1 }}>
                 <Text style={s.text}>Assisted controls</Text>
                 <Text style={s.muted}>
-                  Buttons and deliberate turns. No fast timing required.
+                  Take your time. No fast timing.
                 </Text>
               </View>
               <Switch
                 accessibilityLabel="Assisted controls"
                 value={assisted}
                 onValueChange={setAssisted}
+                trackColor={{ false: '#7B84935C', true: c.action }}
+                thumbColor="#FFFFFF"
               />
             </View>
             {(error || props.unavailable) && (
               <Text
                 accessibilityRole="alert"
-                style={[s.text, { color: c.red }]}
+                style={[s.text, { color: '#B12E43' }]}
               >
                 {error ?? props.unavailable}
               </Text>
@@ -532,7 +553,7 @@ export function MiniGameScreen(props: Props) {
           >
             {countdown}
           </Text>
-          <Text style={s.text}>Get ready</Text>
+          <Text style={[s.text, { color: c.white }]}>Get ready</Text>
         </View>
       )}
       {phase === 'paused' && !artError && (
@@ -566,7 +587,7 @@ export function MiniGameScreen(props: Props) {
             {error && (
               <Text
                 accessibilityRole="alert"
-                style={[s.text, { color: c.red }]}
+                style={[s.text, { color: '#B12E43' }]}
               >
                 {error}
               </Text>
@@ -608,6 +629,7 @@ export function MiniGameScreen(props: Props) {
                         failedInput.current = null;
                         finishing.current = false;
                         clock.value = saved.elapsedMs;
+                        setSceneRevision((revision) => revision + 1);
                         setPhase(
                           saved.status !== 'active' ||
                             evaluateSession(saved).finished

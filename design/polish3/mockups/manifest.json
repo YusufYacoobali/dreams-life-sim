@@ -1,0 +1,14 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "usage": "Design reference only; all production text and controls are native React Native components.",
+  "file": "minigame-reference.png",
+  "sha256": "6571a7c12a7d0bc8641b945d3075cf9db47a228b0eaf8012ae87ce5e38727248",
+  "generatedPath": "/workspace/generated_images/exec-0b3c3728-ff34-4e3a-bbbb-d5e0f5f1244f.png",
+  "references": [
+    "design/01-character-appearance.png",
+    "docs/verification/minigame-overhaul-20261022/phone-astronaut-playing.png",
+    "docs/verification/minigame-overhaul-20261022/phone-sports-result.png",
+    "docs/verification/minigame-overhaul-20261022/phone-crime-playing.png"
+  ],
+  "brief": "Three coherent phone mockups: stadium start with concise instructions, circular four-direction docking pad with central Coast, and rewarding safe-cracker result. Off-white sheets, navy text, Dreams-blue actions; retain existing illustrated scenes. No dashboard cards, neon or player-facing levels."
+}

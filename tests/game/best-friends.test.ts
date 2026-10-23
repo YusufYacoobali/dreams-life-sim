@@ -123,6 +123,9 @@ test('an actual adult date closes its prior best-friend agreement and otherwise 
   const prior = validateWorld(dateSetup, true), baselineSetup = copyWorld(prior); baselineSetup.bestFriendships = [];
   const baseline = resolveCommand(validateWorld(baselineSetup, true), { type: 'ask-date', personId: friendId }, true), next = resolveCommand(prior, { type: 'ask-date', personId: friendId }, true);
   expect(relationFor(next, next.activePersonId, friendId)!.romance).toBe('dating'); expect(next.bestFriendships[0]).toEqual({ ...prior.bestFriendships[0], status: 'ended', ended: prior.date, endReason: 'romance', endedById: null });
-  expect(next.journal).toHaveLength(baseline.journal.length + 1); expect(next.journal.slice(0, -1)).toEqual(baseline.journal); expect({ ...next, bestFriendships: [], journal: baseline.journal }).toEqual(baseline);
+  expect(next.pending!.body).toBe(baseline.pending!.body.replace('your friend,','your best friend,'));
+  expect(next.journal).toHaveLength(baseline.journal.length + 1); expect(next.journal.slice(0, -1)).toEqual(baseline.journal);
+  // Only the truthful pre-date role in the newly written presentation differs.
+  expect({ ...next, bestFriendships: [], journal: baseline.journal,pending:{...next.pending!,body:baseline.pending!.body} }).toEqual(baseline);
   expect(unpackCheckpoint(packCheckpoint(next), true)).toEqual(next);
 });

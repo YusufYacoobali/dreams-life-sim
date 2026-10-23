@@ -3,6 +3,7 @@ import type { World } from '../model';
 import { countries } from '../countries';
 import { indexLedger } from '../ledgerIndex';
 import { roundRatio } from '../money';
+import { rules } from '../rules';
 import { currentHourlyTerms, hourlyAnnual, hourlyPeriodGross, hourlyQuote, hourlyStudentReason, ordinaryHourlyRole } from './hourlyWork';
 
 export function validateHourlyWork(world: World, ledger = indexLedger(world.ledger)) {
@@ -13,7 +14,7 @@ export function validateHourlyWork(world: World, ledger = indexLedger(world.ledg
   for (const person of Object.values(world.people)) for (const receipt of person.finance.pensionReceipts) if (receipt.grossTransactionId) pensionPayments.add(receipt.grossTransactionId);
   for (const contract of world.hourlyContracts) {
     const person = world.people[contract.personId], history = histories.get(contract.employmentId), role = ordinaryHourlyRole(contract.roleId), terms = contract.terms;
-    if (contracts.has(contract.employmentId) || !person || !history || !role || history.personId !== person.id || history.hourlyContractId !== contract.employmentId || history.roleId !== role.id || history.companyId || history.currency !== contract.currency || contract.currency !== countries[contract.country].currency || compareDates(contract.started, history.started) !== 0 || terms.hourlyRate !== hourlyQuote(contract.country, role, terms.weeklyHours).hourlyRate || ageOn({ ...person, died: null }, contract.started) < 16) throw new Error('Invalid hourly contract identity or reviewed terms');
+    if (contracts.has(contract.employmentId) || !person || !history || !role || history.personId !== person.id || history.hourlyContractId !== contract.employmentId || history.roleId !== role.id || history.companyId || history.currency !== contract.currency || contract.currency !== countries[contract.country].currency || compareDates(contract.started, history.started) !== 0 || terms.hourlyRate !== hourlyQuote(contract.country, role, terms.weeklyHours).hourlyRate || ageOn({ ...person, died: null }, contract.started) < rules[contract.country].partTimeAge) throw new Error('Invalid hourly contract identity or reviewed terms');
     contracts.add(contract.employmentId);
     let rate = terms.hourlyRate, rank = 0, lastPeriod = 0, lastDate = contract.started;
     for (const change of contract.rates) {

@@ -2,6 +2,9 @@ export type JobRole = {
   id: string; title: string; sector: string; wageBps: number; partTime?: boolean;
   qualification?: 'secondary' | 'trade' | 'degree' | 'medicine' | 'law'; field?: string; smarts: number;
   specialCareer?: boolean;
+  /** New listings may require evidenced paid months in their own sector. */
+  experienceMonths?: number;
+  clearBackground?: boolean;
 };
 export const jobs: readonly JobRole[] = [
   { id: 'shop-assistant-part', title: 'Weekend Shop Assistant', sector: 'Retail', wageBps: 2500, partTime: true, smarts: 0 },
@@ -29,5 +32,54 @@ export const jobs: readonly JobRole[] = [
   { id:'space-program',title:'Space Programme Specialist',sector:'Space Research',wageBps:12000,qualification:'degree',smarts:70,specialCareer:true },
   { id:'military-service',title:'Service Specialist',sector:'Military Service',wageBps:8000,qualification:'secondary',smarts:35,specialCareer:true },
   { id:'elected-councillor', title:'Local Councillor', sector:'Council', wageBps:15000, qualification:'secondary', smarts:45, specialCareer:true },
+  { id: 'receptionist', title: 'Hotel Receptionist', sector: 'Hospitality', wageBps: 9000, qualification: 'secondary', smarts: 30 },
+  { id: 'postal-worker', title: 'Postal Worker', sector: 'Logistics', wageBps: 8200, smarts: 10 },
+  { id: 'delivery-driver', title: 'Delivery Driver', sector: 'Logistics', wageBps: 9000, qualification: 'secondary', smarts: 20 },
+  { id: 'bus-driver', title: 'Bus Driver', sector: 'Transport', wageBps: 10500, qualification: 'trade', smarts: 25 },
+  { id: 'gardener', title: 'Gardener', sector: 'Groundskeeping', wageBps: 7800, smarts: 10 },
+  { id: 'kitchen-assistant', title: 'Kitchen Assistant', sector: 'Hospitality', wageBps: 7600, smarts: 5 },
+  { id: 'cook', title: 'Cook', sector: 'Hospitality', wageBps: 10000, qualification: 'trade', smarts: 25 },
+  { id: 'baker', title: 'Baker', sector: 'Food Production', wageBps: 9800, qualification: 'trade', smarts: 25 },
+  { id: 'chef', title: 'Head Chef', sector: 'Hospitality', wageBps: 14500, qualification: 'trade', smarts: 40, experienceMonths: 24 },
+  { id: 'electrician', title: 'Electrician', sector: 'Trades', wageBps: 14500, qualification: 'trade', smarts: 35 },
+  { id: 'carpenter', title: 'Carpenter', sector: 'Trades', wageBps: 12500, qualification: 'trade', smarts: 30 },
+  { id: 'mechanic', title: 'Vehicle Mechanic', sector: 'Trades', wageBps: 13500, qualification: 'trade', smarts: 35 },
+  { id: 'welder', title: 'Welder', sector: 'Trades', wageBps: 12000, qualification: 'trade', smarts: 30 },
+  { id: 'care-worker', title: 'Care Worker', sector: 'Social Care', wageBps: 9000, qualification: 'secondary', smarts: 30, clearBackground: true },
+  { id: 'nurse', title: 'Nurse', sector: 'Medicine', wageBps: 15000, qualification: 'degree', field: 'science', smarts: 55, clearBackground: true },
+  { id: 'physiotherapist', title: 'Physiotherapist', sector: 'Medicine', wageBps: 16500, qualification: 'degree', field: 'science', smarts: 60, clearBackground: true },
+  { id: 'engineer', title: 'Civil Engineer', sector: 'Engineering', wageBps: 17500, qualification: 'degree', field: 'science', smarts: 60 },
+  { id: 'architect', title: 'Architect', sector: 'Architecture', wageBps: 17000, qualification: 'degree', field: 'arts', smarts: 60 },
+  { id: 'data-analyst', title: 'Data Analyst', sector: 'Technology', wageBps: 15500, qualification: 'degree', field: 'computing', smarts: 55 },
+  { id: 'it-technician', title: 'IT Support Technician', sector: 'Technology', wageBps: 11500, qualification: 'trade', smarts: 45 },
+  { id: 'librarian', title: 'Librarian', sector: 'Education', wageBps: 11000, qualification: 'degree', smarts: 45 },
+  { id: 'social-worker', title: 'Social Worker', sector: 'Social Care', wageBps: 12000, qualification: 'degree', smarts: 50, clearBackground: true },
+  { id: 'marketing-executive', title: 'Marketing Executive', sector: 'Marketing', wageBps: 13000, qualification: 'degree', field: 'business', smarts: 45 },
+  { id: 'human-resources', title: 'Human Resources Officer', sector: 'Services', wageBps: 12500, qualification: 'degree', field: 'business', smarts: 45 },
+  { id: 'project-manager', title: 'Project Manager', sector: 'Services', wageBps: 18500, qualification: 'degree', field: 'business', smarts: 55, experienceMonths: 24 },
+  { id: 'operations-manager', title: 'Operations Manager', sector: 'Logistics', wageBps: 16500, qualification: 'secondary', smarts: 45, experienceMonths: 24 },
+  { id: 'sales-representative', title: 'Sales Representative', sector: 'Sales', wageBps: 10500, qualification: 'secondary', smarts: 25 },
+  { id: 'estate-agent', title: 'Estate Agent', sector: 'Property', wageBps: 11500, qualification: 'secondary', smarts: 35 },
+  { id: 'insurance-adviser', title: 'Insurance Adviser', sector: 'Finance', wageBps: 12500, qualification: 'secondary', smarts: 40 },
+  { id: 'bank-clerk', title: 'Bank Clerk', sector: 'Finance', wageBps: 10000, qualification: 'secondary', smarts: 40 },
+  { id: 'procurement-officer', title: 'Procurement Officer', sector: 'Logistics', wageBps: 13000, qualification: 'degree', field: 'business', smarts: 45 },
+  { id: 'logistics-coordinator', title: 'Logistics Coordinator', sector: 'Logistics', wageBps: 11500, qualification: 'secondary', smarts: 40 },
+  { id: 'software-tester', title: 'Software Tester', sector: 'Technology', wageBps: 14000, qualification: 'degree', field: 'computing', smarts: 45 },
+  { id: 'cybersecurity-analyst', title: 'Cybersecurity Analyst', sector: 'Technology', wageBps: 19000, qualification: 'degree', field: 'computing', smarts: 65 },
+  { id: 'library-part', title: 'Part-time Library Assistant', sector: 'Education', wageBps: 2600, partTime: true, smarts: 20 },
+  { id: 'cinema-part', title: 'Part-time Cinema Usher', sector: 'Entertainment', wageBps: 2500, partTime: true, smarts: 0 },
+  { id: 'grocery-part', title: 'Part-time Grocery Picker', sector: 'Retail', wageBps: 2700, partTime: true, smarts: 0 },
+  { id: 'pet-care-part', title: 'Part-time Pet Care Assistant', sector: 'Animal Care', wageBps: 2900, partTime: true, smarts: 10 },
+  { id: 'tutor-part', title: 'Part-time Homework Tutor', sector: 'Education', wageBps: 3500, partTime: true, qualification: 'secondary', smarts: 55, clearBackground: true },
+  { id: 'market-stall-part', title: 'Part-time Market Stall Assistant', sector: 'Retail', wageBps: 2600, partTime: true, smarts: 0 },
+  { id: 'firefighter', title: 'Firefighter', sector: 'Emergency Services', wageBps: 11500, qualification: 'secondary', smarts: 35 },
+  { id: 'paramedic', title: 'Paramedic', sector: 'Emergency Services', wageBps: 13500, qualification: 'trade', field: 'science', smarts: 50, clearBackground: true },
+  { id: 'police-officer', title: 'Police Officer', sector: 'Public Safety', wageBps: 12500, qualification: 'secondary', smarts: 45, clearBackground: true },
+  { id: 'construction-worker', title: 'Construction Worker', sector: 'Construction', wageBps: 8500, smarts: 10 },
+];
+/** Keep seeded background/NPC generation stable as the player catalogue grows. */
+export const npcBackgroundRoleIds: readonly string[] = [
+  'cleaner', 'retail', 'barista', 'warehouse', 'administrator', 'support', 'plumber', 'technician',
+  'designer', 'teacher', 'developer', 'accountant', 'researcher', 'journalist', 'lawyer', 'doctor',
 ];
 export const jobRanks = ['Junior', 'Experienced', 'Senior', 'Lead'] as const;
