@@ -1,0 +1,89 @@
+{
+  "runtimeCommit": "4b65c3a7ea4c97af589ca84bfedfc3d3869e19af",
+  "integratedBaseline": "da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af",
+  "versions": {
+    "world": 46,
+    "engine": 48,
+    "content": 25,
+    "reader": 26,
+    "database": 4
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit": 0
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "exit": 0,
+    "modules": 484,
+    "cycles": []
+  },
+  "fullRegression": {
+    "command": "npm test",
+    "exit": 0,
+    "suitesPassed": 291,
+    "suitesTotal": 291,
+    "testsPassed": 3919,
+    "testsTotal": 3919,
+    "singleCompleteInvocation": true
+  },
+  "cultCases": {
+    "gameplayAndIntegration": 160,
+    "connectedUI": 12,
+    "persistence": 12,
+    "allIncludedInFullRegression": true
+  },
+  "soak": {
+    "command": "DREAMS_SOAK_WORKERS=3 npm run test:soak",
+    "exit": 0,
+    "sweep": "complete",
+    "lives": 120,
+    "workers": 3,
+    "passed": true,
+    "uniqueSeeds": 120,
+    "seedRange": [
+      0,
+      119
+    ],
+    "ageAtDeathRange": [
+      37,
+      97
+    ],
+    "maximumPeople": 28,
+    "maximumLedgerRows": 67065,
+    "allThreeShardSuitesPassed": true
+  },
+  "exports": {
+    "command": "npx expo export --platform all --max-workers 1 --source-maps",
+    "exit": 0,
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "sourceAndImageHashes": "platform-checks.json"
+  },
+  "browserReview": "browser-checks.json",
+  "nativeDeviceValidation": "Not performed: no Android/iOS emulator or physical device available",
+  "logs": {
+    "full": {
+      "path": "/tmp/dreams-cult-full.log",
+      "sha256": "f9ed5900dd7f3fb769ce887eca51b512fcde6f780c0c386157f52609384a8512"
+    },
+    "soak": {
+      "path": "/tmp/dreams-cult-soak.log",
+      "sha256": "d35c39439fc22b9efaefb337865ecdbd098489913b5602f8e885a842ec0c8371"
+    },
+    "final-types": {
+      "path": "/tmp/dreams-cult-final-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "imports": {
+      "path": "/tmp/dreams-cult-imports.log",
+      "sha256": "3f7f2496c280ee1cab772af0f4b023acc088a309c3ed02335eaeb27c811699ec"
+    },
+    "export": {
+      "path": "/tmp/dreams-cult-export.log",
+      "sha256": "b526b6bef18fc4197393588d206718f5f899485eb03bb4c5a71448d0c7dcdb7d"
+    }
+  }
+}

@@ -7,28 +7,31 @@ consequences. No runtime dependency was added.
 
 ## Automated checks
 
-Focused domain checks pass155cases, including all84story choices and all18
+Focused domain checks pass 155 cases, including all 84 story choices and all 18
 claim deadlines, real member/payout transfers, actual prosecution across a
-rebrand, relationship repair, arrears collapse,15years of accounting and
-natural growth beyond1,200followers. Integration adds five checks for career
-conflicts, custody, closure and the engine's monthly hook. Nine persistence
-checks cover oldWorld44lives, archives, checkpoints, Time Machine and an
+rebrand, relationship repair, arrears collapse, 15 years of accounting and
+natural growth beyond 1,200 followers. Integration adds five checks for career
+conflicts, custody, closure and the engine's monthly hook. Twelve persistence
+checks cover old World 44 and genuine Polish 3 World 45 lives, archives, checkpoints, Time Machine and an
 interrupted Age Up with write rollback, lost commit acknowledgement, retry and
 cold reopening. Twelve connected SQLite/store UI cases cover actual commands,
 review cancellation, save failure, retry, duplicate taps and stale identity.
 
-The 484-module runtime import graph passes
-without cycles. Full regression and120-life soak results are being collected;
-the final recorded invocation counts belong in `test-summary.json`.
+Strict application/test types and the 484-module runtime import graph pass
+without cycles. The complete `npm test` invocation passed **291 suites and
+3,919 tests**. The **120-life soak** passed all three shards with each seed
+0–119 completed once. Exact commands, counts and log hashes are recorded in
+[test-summary.json](test-summary.json); [soak-results.json](soak-results.json)
+contains every life result. Runtime stayed frozen at `4b65c3a`.
 
 ## Browser layout review
 
-The32PNG captures show16production React Native component trees at the top and
-at their last actions. Light uses390×844; dark uses320×844with1.4×text. The
+The 32 PNG captures show 16 production React Native component trees at the top and
+at their last actions. Light uses 390×844; dark uses 320×844 with 1.4× text. The
 adapter reproduces the native Modal portal and Yoga's intrinsic `flex:0` text
 height. These are browser CSS/SVG captures, not Android/iOS screenshots.
 
-All192rendered images decode, no phone overflows horizontally, the final
+All 192 rendered images decode, no phone overflows horizontally, the final
 actions remain reachable in every capture, no browser error occurs and no
 external image request is made. See [browser-checks.json](browser-checks.json).
 Source/derivative inspection removed neighbouring atlas fragments before
@@ -48,10 +51,10 @@ Playwright install and Chromium. Browser tooling is not an app dependency.
 
 ## Production exports
 
-`npx expo export --platform all --max-workers 1 --source-maps` exits0 for the
+`npx expo export --platform all --max-workers 1 --source-maps` exits 0 for the
 configured Android and iOS platforms. Both outputs have the Hermes magic
-header, all41changed runtime source files match their source maps exactly,
-and all12new runtime images match their manifest hashes in the exported assets.
+header, all 41 changed runtime source files match their source maps exactly,
+and all 12 new runtime images match their manifest hashes in the exported assets.
 Bundle sizes and hashes are in [platform-checks.json](platform-checks.json);
 source hashes are in [runtime-source-hashes.json](runtime-source-hashes.json).
 

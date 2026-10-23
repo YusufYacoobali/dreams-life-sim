@@ -18,20 +18,20 @@ disbanding. Passive business interests are not a second full-time commitment.
 
 The founder chooses a name, title, one of eight philosophies, two doctrines,
 two rules, premises, fees and launch method. Later belief changes allow two to
-six distinct doctrines and rules from28of each. Every definition contributes
+six distinct doctrines and rules from 28 of each. Every definition contributes
 to bounded growth, loyalty, satisfaction, costs, donations or heat modifiers.
 Changes have action limits and affect actual loyalty and member memories.
 
 Ordinary followers are an aggregate. Three real named people form the initial
-inner circle; deliberate recruitment can add two more at80followers. Each
+inner circle; deliberate recruitment can add two more at 80 followers. Each
 retains their existing person ID, relationship, portrait, loyalty, ambition,
 responsibility and bounded memories. Talking, praise, responsibilities, rewards,
 confrontation and expulsion use actual people. Expelling an ambitious,
-resentful member can schedule that same person to return24months later as a
+resentful member can schedule that same person to return 24 months later as a
 rival leader. Repairing the real relationship can prevent the rival's return.
 The feature creates at most five inner-circle NPCs per organisation.
 
-There are28authored situations with84distinct choices, gated on actual rules,
+There are 28 authored situations with 84 distinct choices, gated on actual rules,
 doctrines, responsibilities, family, finances, rivals or headquarters. Follow-up
 threads can turn a hidden livestream into later recruitment, an accusation
 into publicity, or a humiliation into a departure. Stories share the existing
@@ -87,9 +87,9 @@ receipts or checkpoints.
 Commands are strict typed unions. Validation reconciles archived and recent
 treasury books, personal transfer receipts, headquarters purchase history,
 legal incidents, named identities and pending thread offers. Bounds include
-50,000followers, five named members, six lifetime rivals,72threads,512recent
-book rows with archived totals,60monthly reports,120annual reports and
-18lifetime claim IDs. No-cult months are a no-op with no new RNG consumption.
+50,000 followers, five named members, six lifetime rivals, 72 threads, 512 recent
+book rows with archived totals, 60 monthly reports, 120 annual reports and
+18 lifetime claim IDs. No-cult months are a no-op with no new RNG consumption.
 
 All content and Image Gen artwork are bundled locally. See
 [verification](verification/cult-career/README.md) and

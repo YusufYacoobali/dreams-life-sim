@@ -1,5 +1,24 @@
 # Continue Dreams: Life Simulator
 
+## Cult Leader — 23 October 2026
+
+Cult Leader is implemented as an independent special career over the integrated
+Polish 3 source `da0b0e5`. It includes eight philosophies, 28 doctrines, 28 rules,
+18 delayed claims, 28 authored situations, actual inner-circle people, rivalries,
+public scandals, five headquarters tiers, six upgrades and a separate communal
+treasury. Only the dashboard and headquarters are management routes; other
+actions use Dreams' normal popups. See [the feature guide](CULT_LEADER.md) and
+[verification](verification/cult-career/README.md).
+
+Current markers are **World 46 / engine 48 / content 25 / reader 26 / database v4**.
+The genuine Polish 3 World 45 migration, prior saves, recorded appearances and
+mini-games remain supported. Runtime is frozen at `4b65c3a`; focused gameplay,
+UI and migration checks, strict types, the 484-module import graph and Android/iOS
+exports pass. The complete regression passed **291 suites / 3,919 tests**;
+the **120-life soak** also passed. Browser review is recorded separately from native-device acceptance, which remains pending.
+Earlier sections below describe their historical source snapshots.
+
+
 ## Dreams Polish 3 — 23 October 2026
 
 All nine requested phases are implemented: suitable stable NPC defaults, cleaner profiles, original interaction/finance/job artwork, concise outcomes, unified Real Estate, three car chips, 54 full-time plus 8 part-time jobs, and consistent mini-game presentation with circular flight controls. Existing manual avatars, saves and recorded difficulty values are preserved. Current markers are **World45 / engine47 / content24 / reader25 / v4**. See [the integrated review](verification/polish3/README.md) for behavior, real before/after browser captures and verification. Final coverage is **286 suites / 3,735 tests**, passing across the complete regression and affected test-only reruns, plus **36 complete seeded lives** across all countries/genders. Strict app/test types, the 469-module import graph and both offline Android/iOS Hermes exports pass. Runtime stayed frozen at `4698d79`; the review explicitly distinguishes browser captures from native-device acceptance.
