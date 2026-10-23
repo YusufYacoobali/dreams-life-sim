@@ -19,21 +19,44 @@ import oldResult from '../fixtures/v30-native-workplace-story-archive.json';
 import { decodeSave } from '../../src/persistence/archive';
 
 import { originalChoices } from '../support/entertainmentBaseline';
+import beforeContexts from '../fixtures/v45-content24-story-contexts.json';
+import { post } from '../../src/game/systems/common';
+import { choiceUnavailable } from '../../src/game/choiceAvailability';
 
 const newScenes = eventTemplates.filter(scene => !originalChoices.has(scene.id) && !scene.dramatic);
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
-test('the overhaul keeps all 274 original event identities, their 822 choice identities and original eligibility/illustrations', () => {
+test('the overhaul keeps all 274 original event identities and 822 choices; context changes explicitly bind the rewritten scene’s actual people', () => {
   expect(originalChoices.size).toBe(274);
   expect([...originalChoices.values()].flat()).toHaveLength(822);
   const originals = eventTemplates.filter(scene => originalChoices.has(scene.id));
   expect(originals).toHaveLength(originalChoices.size);
   for (const [id, choices] of originalChoices) expect(originals.find(scene => scene.id === id)?.choices.map(choice => choice.id)).toEqual(choices);
-  const contexts = originals.map(({ id, title: _title, body: _body, choices: _choices, ...context }) => ({
+  const canonical = (rows: readonly Record<string, unknown>[]) => rows.map(({ id, ...context }) => ({
     id, ...Object.fromEntries(Object.entries(context).sort(([left], [right]) => left.localeCompare(right))),
-  })).sort((left, right) => left.id.localeCompare(right.id));
-  expect(sha(JSON.stringify(contexts))).toBe('ac884f0cb5c2b48bef3a9d5446cd2a498497e4ac4956642f30d3fb4d5644e1d0');
+  })).sort((left, right) => String(left.id).localeCompare(String(right.id)));
+  const baseline = beforeContexts.filter(scene => originalChoices.has(scene.id));
+  // Preserve the original pinned digest. Explicit prospective context changes
+  // support real named people/school context; no historical save is rewritten.
+  expect(sha(JSON.stringify(canonical(baseline)))).toBe('ac884f0cb5c2b48bef3a9d5446cd2a498497e4ac4956642f30d3fb4d5644e1d0');
+  const contextChanges: Record<string, Record<string, unknown>> = {
+    'child-pocket-museum': { parent: true },
+    'teen-shrinking-sleeves': { school: 'any' },
+    'teen-sunday-list': { parent: true, illustration: 'relationship' },
+    'work-unfamiliar-process': { supervisor: true },
+    'adult-wave-behind': { friend: true },
+    'adult-borrowed-pen': { friend: true },
+    'work-shared-note-riddle': { supervisor: true },
+  };
+  for (const { id, title: _title, body: _body, choices: _choices, ...context } of originals) {
+    const previous = baseline.find(row => row.id === id)!;
+    expect(canonical([{ id, ...context }])).toEqual(canonical([{ ...previous, ...contextChanges[id] }]));
+    if (contextChanges[id]?.parent) expect(JSON.stringify({ body: _body, choices: _choices })).toContain('{parent}');
+    if (contextChanges[id]?.friend) expect(JSON.stringify({ body: _body, choices: _choices })).toContain('{friend}');
+    if (contextChanges[id]?.supervisor) expect(JSON.stringify({ body: _body, choices: _choices })).toContain('{supervisor}');
+    if (contextChanges[id]?.school) expect(_body).toMatch(/school.photo/i);
+  }
   expect(newScenes.length).toBeGreaterThanOrEqual(25);
   expect(newScenes.length).toBeLessThanOrEqual(35);
   expect(new Set(eventTemplates.map(scene => scene.id)).size).toBe(eventTemplates.length);
@@ -107,11 +130,13 @@ describe.each([0, 100])('real effects at the %i boundary', boundary => {
     if (scene.choices.some(choice => choice.grades !== undefined)) player.education.grades = boundary;
     for (const edge of initial.relationships) edge.strength = boundary;
     for (const pet of initial.pets) if (pet.bonds[player.id] !== undefined) pet.bonds[player.id] = boundary;
+    if (scene.choices.some(choice => choice.cash !== undefined && choice.cash < 0)) post(initial, 100_000_000n, 0n, 'fixture-funding', 'Explicit story choice unit funds');
     const before = encodeWorld(initial), event = bindEvent(initial, scene);
     for (const choice of event.choices) {
       const input = decodeWorld(before); offerPending(input, event);
       const cold = unpackCheckpoint(packCheckpoint(input), true);
       expect(cold.pending).toEqual(event);
+      expect(choiceUnavailable(cold, choice)).toBeUndefined();
       const command = { type: 'choose' as const, eventId: event.id, choiceId: choice.id };
       const selected = resolveCommand(cold, command, true);
       expect(encodeWorld(selected)).toBe(encodeWorld(resolveCommand(input, command, true)));
@@ -124,18 +149,37 @@ describe.each([0, 100])('real effects at the %i boundary', boundary => {
       expect(selected.journal.slice(input.journal.length).some(entry => entry.text === choice.journal)).toBe(true);
       expect(selected.journal.slice(0, input.journal.length)).toEqual(input.journal);
       for (const effect of choice.effects) {
-        expect(['stat', 'relationship', 'pet-bond', 'skill', 'school-grade']).toContain(effect.kind);
+        expect(['stat', 'relationship', 'pet-bond', 'skill', 'school-grade', 'story-immediate']).toContain(effect.kind);
         if (effect.kind === 'stat') expect(selected.people[effect.personId].stats[effect.stat]).toBe(clamp(input.people[effect.personId].stats[effect.stat] + effect.delta));
         if (effect.kind === 'relationship') expect(selected.relationships.find(edge => edge.id === effect.relationshipId)!.strength).toBe(clamp(input.relationships.find(edge => edge.id === effect.relationshipId)!.strength + effect.delta));
         if (effect.kind === 'pet-bond') expect(selected.pets.find(pet => pet.id === effect.petId)!.bonds[effect.personId]).toBe(clamp((input.pets.find(pet => pet.id === effect.petId)!.bonds[effect.personId] ?? 0) + effect.delta));
         if (effect.kind === 'skill') expect(selected.people[effect.personId].skills[effect.skill]).toBe(clamp(input.people[effect.personId].skills[effect.skill] + effect.delta));
         if (effect.kind === 'school-grade') expect(selected.people[effect.personId].education.grades).toBe(clamp(input.people[effect.personId].education.grades + effect.delta));
+        if (effect.kind === 'story-immediate') {
+          if (effect.cash) {
+            const cash = effect.cash;
+            expect(selected.accounts.find(row => row.id === cash.accountId)!.cash).toBe(input.accounts.find(row => row.id === cash.accountId)!.cash + cash.minor);
+            expect(selected.ledger.slice(input.ledger.length)).toEqual([expect.objectContaining({ accountId: cash.accountId, cashDelta: cash.minor, debtDelta: 0n, category: cash.minor > 0n ? 'story-income' : 'story-expense' })]);
+          }
+          for (const target of effect.trust ?? []) expect(selected.relationships.find(row => row.id === target.relationshipId)!.trust).toBe(clamp(input.relationships.find(row => row.id === target.relationshipId)!.trust + target.delta));
+          if (effect.endFriendship) expect(selected.relationships.find(row => row.id === effect.endFriendship!.relationshipId)!.roles).not.toContain('friend');
+          if (effect.work?.loseJob) {
+            expect(selected.people[effect.personId].employment).toBeNull();
+            expect(selected.workHistory.find(row => row.id === effect.work!.employmentId)).toEqual({ ...input.workHistory.find(row => row.id === effect.work!.employmentId), ended: input.date });
+          } else if (effect.work?.performance !== undefined) expect(selected.people[effect.personId].employment!.performance).toBe(clamp(input.people[effect.personId].employment!.performance + effect.work.performance));
+          if (effect.publicImage !== undefined) expect(selected.people[effect.personId].publicLife.image).toBe(clamp(input.people[effect.personId].publicLife.image + effect.publicImage));
+        }
       }
       if (!died) {
-        for (const field of ['random', 'accounts', 'ledger', 'liabilities', 'assets', 'businesses', 'cases', 'sentences', 'marriages', 'households', 'workHistory', 'careers', 'creatorStudios', 'trips', 'storyThreads'] as const) expect(selected[field]).toEqual(input[field]);
+        const immediate = choice.effects.find(effect => effect.kind === 'story-immediate');
+        for (const field of ['random', 'liabilities', 'assets', 'businesses', 'cases', 'sentences', 'marriages', 'households', 'careers', 'creatorStudios', 'trips', 'storyThreads'] as const) expect(selected[field]).toEqual(input[field]);
+        if (!immediate?.cash) { expect(selected.accounts).toEqual(input.accounts); expect(selected.ledger).toEqual(input.ledger); }
+        else for (const account of input.accounts.filter(row => row.id !== immediate.cash!.accountId)) expect(selected.accounts.find(row => row.id === account.id)).toEqual(account);
+        if (!immediate?.work?.loseJob) expect(selected.workHistory).toEqual(input.workHistory);
         expect(Object.keys(selected.people)).toEqual(Object.keys(input.people));
         for (const [id, person] of Object.entries(input.people)) {
-          expect(selected.people[id].employment).toEqual(person.employment);
+          if (immediate?.personId === id && immediate.work) expect(selected.people[id].employment).toEqual(immediate.work.loseJob ? null : { ...person.employment, performance: clamp(person.employment!.performance + (immediate.work.performance ?? 0)) });
+          else expect(selected.people[id].employment).toEqual(person.employment);
           expect(selected.people[id].education.qualifications).toEqual(person.education.qualifications);
           expect(selected.people[id].legal).toEqual(person.legal);
         }
@@ -181,8 +225,8 @@ test('a declared current-schema content-17 envelope migrates only its version ta
   const current = unpackCheckpoint(nativeChoice.checkpoint);
   const prior = { ...JSON.parse(encodeWorld(current)), schemaVersion: 41, engineVersion: 42, contentVersion: 17 };
   const migrated = decodeWorld(JSON.stringify(prior));
-  expect(migrated.contentVersion).toBe(24);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, schemaVersion: 45, engineVersion: 47, contentVersion: 24, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
+  expect(migrated.contentVersion).toBe(25);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, schemaVersion: 46, engineVersion: 48, contentVersion: 25, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
   expect(migrated.pending).toEqual(current.pending); expect(migrated.random).toEqual(current.random);
   expect(migrated.journal).toEqual(current.journal); expect(migrated.ledger).toEqual(current.ledger);
 });

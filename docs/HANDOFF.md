@@ -1,5 +1,9 @@
 # Continue Dreams: Life Simulator
 
+## Event and payoff writing — 23 October 2026
+
+Audited all319 events; revised114 situations/payoffs (342 result branches), including27 priority consequence upgrades. Original IDs, saved text, UI, avatar V2 and mini-games remain. New immediate effects quote real local payments and apply actual trust, job, friendship and public-image changes without new arcs or writing RNG. Current markers are **World46 / engine48 / content25 / reader26 / v4**. See [the editorial review and verification](verification/event-writing/README.md). Focused checks and types/imports pass; final full regression and natural-life journal review follow the source freeze.
+
 ## Dreams Polish 3 — 23 October 2026
 
 All nine requested phases are implemented: suitable stable NPC defaults, cleaner profiles, original interaction/finance/job artwork, concise outcomes, unified Real Estate, three car chips, 54 full-time plus 8 part-time jobs, and consistent mini-game presentation with circular flight controls. Existing manual avatars, saves and recorded difficulty values are preserved. Current markers are **World45 / engine47 / content24 / reader25 / v4**. See [the integrated review](verification/polish3/README.md) for behavior, real before/after browser captures and verification. Final coverage is **286 suites / 3,735 tests**, passing across the complete regression and affected test-only reruns, plus **36 complete seeded lives** across all countries/genders. Strict app/test types, the 469-module import graph and both offline Android/iOS Hermes exports pass. Runtime stayed frozen at `4698d79`; the review explicitly distinguishes browser captures from native-device acceptance.

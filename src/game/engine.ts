@@ -18,6 +18,7 @@ import { ageOn, copyWorld, fullName, validateWorld, World } from './model';
 import { monthFrom } from './calendar';
 import { refreshTeenRelationships, resolveTeenRelationship, teenRelationshipCommandSchema, type TeenRelationshipCommand } from './systems/teenRelationships';
 import { bindEvent, eligibleTemplates } from './content/events';
+import { resolveStoryImmediate } from './systems/storyImmediateResolution';
 import { storyParticipants } from './storyNames';
 import { weightedEvent } from './content/eventRarity';
 import { randomInteger } from './random';
@@ -245,6 +246,7 @@ function continueYear(world: World) {
 
 function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels']): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
+    if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
     if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);

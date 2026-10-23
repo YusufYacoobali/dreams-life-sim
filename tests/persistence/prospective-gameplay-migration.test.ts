@@ -30,7 +30,7 @@ test('the actual Android C15 pending choice migrates only its root versions and 
   expect(raw).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15, revision: 83, date: { year: 2044, month: 10, day: 21 }, pending: { kind: 'decision', id: 'event_2044_adult-unwanted-speech', templateId: 'adult-unwanted-speech' } });
   expect(raw.pending.choices.map((choice: { id: string }) => choice.id)).toEqual(['brief', 'pass', 'ramble']);
   const migrated = unpackCheckpoint(payload, true), encoded = encodeWorld(migrated);
-  expect(JSON.parse(encoded)).toEqual({ ...raw, schemaVersion: 45, engineVersion: 47, contentVersion: 24, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [] });
+  expect(JSON.parse(encoded)).toEqual({ ...raw, schemaVersion: 46, engineVersion: 48, contentVersion: 25, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [] });
   expect(migrated.pending).toEqual(raw.pending); expect(migrated.random).toEqual(raw.random);
   expect(encodeWorld(unpackCheckpoint(packCheckpoint(migrated), true))).toBe(encoded);
   expect(readFileSync(join(__dirname, '../fixtures/v39-content15-native-choice.json'))).toEqual(originalBytes);
@@ -48,12 +48,12 @@ test.each(observations)('$name: an explicitly arranged C38 envelope changes only
   // unchanged producer. The 37/38/content12 envelope below is declared setup,
   // not a newly claimed genuine C38 save or an earned gameplay continuation.
   const original = unpackCheckpoint(observation.payload, true), encoded = encodeWorld(original), current = JSON.parse(encoded);
-  expect(current).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
+  expect(current).toMatchObject({ schemaVersion: 46, engineVersion: 48, contentVersion: 25 });
   expect(current.pending).toEqual(raw.pending); expect(current.annual).toEqual(raw.annual);
   for (const key of histories) expect(current[key]).toEqual([]);
   const legacy = { ...current, schemaVersion: 37, engineVersion: 38, contentVersion: 12 }, before = JSON.stringify(legacy);
   const migrated = decodeWorld(before, true);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 45, engineVersion: 47, contentVersion: 24, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 46, engineVersion: 48, contentVersion: 25, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
   expect(JSON.stringify(legacy)).toBe(before);
   expect(encodeWorld(original)).toBe(encoded);
 
@@ -71,4 +71,18 @@ test.each(observations)('$name: an explicitly arranged C38 envelope changes only
   const cold = unpackCheckpoint(packCheckpoint(migrated), true);
   expect(encodeWorld(cold)).toBe(encodeWorld(migrated)); expect(cold).toEqual(migrated);
   expect(sha(observation.payload)).toBe(observation.payloadSha);
+});
+
+test('an explicitly arranged World45 boundary changes only root markers and keeps every already-bound scene and historical field', () => {
+  // The content below is an unmodified genuine stored decision projected through
+  // supported older migrations. Only its45/47/24 envelope is arranged to isolate
+  // the marker-only writing update; this is not claimed as a new native fixture.
+  const projected = unpackCheckpoint(c15.checkpoint, true);
+  const previous = { ...JSON.parse(encodeWorld(projected)), schemaVersion: 45, engineVersion: 47, contentVersion: 24 };
+  const original = JSON.stringify(previous), migrated = decodeWorld(original, true);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...previous, schemaVersion: 46, engineVersion: 48, contentVersion: 25 });
+  expect(migrated.pending).toEqual(previous.pending); expect(migrated.deferred).toEqual(previous.deferred);
+  expect(migrated.journal).toEqual(previous.journal); expect(migrated.random).toEqual(previous.random);
+  expect(JSON.stringify(previous)).toBe(original);
+  expect(encodeWorld(unpackCheckpoint(packCheckpoint(migrated), true))).toBe(encodeWorld(migrated));
 });

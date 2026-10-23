@@ -11,7 +11,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import { athleteFixture, miniGameFixture, nextMatchPeriod, startMiniGame } from '../support/miniGames';
 import graduate from '../fixtures/v3-employed-graduate.json';
 
-const markers = { schemaVersion:45, engineVersion:47, contentVersion:24 };
+const markers = { schemaVersion:46, engineVersion:48, contentVersion:25 };
 const rawWorld = (world:World):Record<string,any> => JSON.parse(encodeWorld(world));
 const acknowledge = (world:World) => world.pending?.kind==='result'
   ? resolveCommand(world,{type:'acknowledge',resultId:world.pending.id}) : world;
@@ -150,7 +150,7 @@ test('own 44/46/content23 retains nonempty support, action and lease histories w
   expect(rawWorld(restored)).toEqual({...raw,...markers});expect(JSON.stringify(raw)).toBe(before);
 });
 
-test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 45/47/content24 rejects a missing required %s history',key=>{
+test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 46/48/content25 rejects a missing required %s history',key=>{
   const raw=rawWorld(decodeWorld(JSON.stringify(graduate)));delete raw[key];
   expect(()=>decodeWorld(JSON.stringify(raw))).toThrow();
 });

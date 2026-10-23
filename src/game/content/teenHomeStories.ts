@@ -12,12 +12,12 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-shrinking-sleeves', min: 11, max: 16, illustration: 'wellbeing', title: 'Your top has become a crop top',
-    body: 'You stretch in a familiar top and discover an alarming amount of midriff. Your sleeves have also retreated. Apparently, your body has been making decisions without consulting your wardrobe.',
+    id: 'teen-shrinking-sleeves', min: 11, max: 16, school: 'any', illustration: 'wellbeing', title: 'Little Star, big photograph',
+    body: 'Your school-photo proof arrives. You wore an old top that barely fits. Across your chest, in extremely clear letters, it says “LITTLE STAR”.',
     choices: [
-      o('compare', 'Check an old photo for evidence', { smarts: 2, stress: -1 }, 'The sleeves were innocent', 'The photo confirms it: you have grown. The top has been doing the same job with less and less material to work with.', 'I realised how much I had grown after comparing an old photo with my clothes.'),
-      o('roll', 'Roll the sleeves and call it fashion', { happiness: 2, discipline: 1 }, 'Extremely limited edition', 'You commit to the look. It remains a short top, but you stop tugging at it every few seconds.', 'I rolled up short sleeves and wore the top as it was.'),
-      o('compare-others', 'Check everyone else’s growth rate', { stress: 3, happiness: -2 }, 'An unwinnable investigation', 'Some people are taller. Some are shorter. None of your checking gives your top another centimetre of fabric.', 'I worried about how my growth compared with other people’s.'),
+      o('compare', 'Ask for a crop above the lettering', { smarts: 2, stress: -1 }, 'Now a very large head', 'The cropped proof removes the slogan and most of your shoulders. You approve it before anyone suggests keeping the original as a wallet photo.', 'I cropped an embarrassing slogan out of my school photograph.'),
+      o('roll', 'Sign the proof like a celebrity', { happiness: 3, respect: 1 }, 'Little Star goes professional', 'You add a sweeping signature and “no interviews”. The joke gets a laugh. You still choose the smallest print size.', 'I signed my embarrassing Little Star photograph as though I were famous.'),
+      o('compare-others', 'Inspect everyone else’s proof for worse outfits', { stress: 3, happiness: -2 }, 'A thorough investigation', 'You find a blinking face and one unfortunate collar. You spend so long arguing that the photo is “not that bad” that everyone asks to see it.', 'I drew more attention to my school photograph while hunting for worse ones.'),
     ],
   },
   {
@@ -30,12 +30,12 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-phone-at-dinner', min: 12, max: 17, parent: true, illustration: 'relationship', title: 'A conversation with a screen in it',
-    body: '{parent} is halfway through a story when you notice their phone in their hand. You may have found a witness for your next argument about phones.',
+    id: 'teen-phone-at-dinner', min: 12, max: 17, parent: true, illustration: 'relationship', title: 'Do teenagers smell fear?',
+    body: '{parent} asks you to fix their phone. An open draft says, “Do teenagers smell fear? Mine only appears when the fridge opens.” They suddenly offer to fix it themselves.',
     choices: [
-      o('ask', 'Ask for a few minutes without phones', { respect: 3, happiness: 1 }, 'A mutual arrangement', '{parent} puts the phone away. You agree to do the same when you are talking together.', 'I asked {parent} for a conversation without phones.', 3),
-      o('wait', 'Wait, then ask about the story', { discipline: 2, stress: -1 }, 'Back to the interesting part', '{parent} finishes checking the message and returns to the story. You ask what happened next.', 'I brought {parent} back to a story after a phone interruption.', 2),
-      o('score', 'Recite every time they mentioned your screen use', { respect: -2, stress: 3 }, 'An extensive case file', 'You remember more examples than the conversation needs. The original story goes unfinished.', 'I turned a phone interruption into an argument with {parent}.', -3),
+      o('ask', 'Offer an answer from a qualified teenager', { respect: 2, happiness: 2 }, 'Mostly, we smell cheese', '{parent} laughs and admits they were having a moan. You fix the phone, then both turn towards the sound of the fridge opening.', 'I caught {parent} complaining about me and answered their question about teenagers.', 4, {trust:{parent:3}}),
+      o('wait', 'Fix it without mentioning the draft', { discipline: 2, stress: -1 }, 'A delicate repair', 'You close the draft and fix the setting. {parent} thanks you three times. You ask whether the fridge requires technical support too.', 'I fixed {parent}’s phone without making an issue of a private complaint about me.', 2),
+      o('score', 'Send their contacts a mocking reading of it', { respect: -6, stress: 4 }, 'Technical support terminated', '{parent} hears their own message in your worst impression of them. They take the phone back and tell you exactly what they think of sharing private messages. Neither of you is laughing.', 'I sent {parent}’s private complaint to their contacts to humiliate them.', -16, {trust:{parent:-18}}),
     ],
   },
   {
@@ -57,12 +57,12 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-old-interest-box', min: 12, max: 17, illustration: 'journal', title: 'Your former favourite thing',
-    body: 'You find an old drawing of the thing you once intended to do every day forever. Forever appears to have ended quite a while ago.',
+    id: 'teen-old-interest-box', min: 12, max: 17, illustration: 'journal', title: 'A complaint from past you',
+    body: 'You find a childhood letter addressed to yourself. It says, “If you are not a dinosaur by thirteen, you have ruined everything.” There is a drawing of the expected dinosaur.',
     choices: [
-      o('try', 'Spend a little time drawing it again', { happiness: 3, energy: -2 }, 'Still available', 'You remember why you enjoyed it. You do not need to decide what the rest of forever looks like.', 'I revisited a subject I used to love drawing.'),
-      o('keep', 'Keep the drawing as a good memory', { happiness: 2, stress: -2 }, 'A previous interest can stay previous', 'You put the drawing somewhere safe. Enjoying it then does not require enjoying it every day now.', 'I kept an old drawing without making myself restart the interest.'),
-      o('judge', 'Decide you were foolish to like it', { happiness: -2, stress: 2 }, 'A rather harsh reviewer', 'The drawing has done nothing new to deserve the review. It was made by a younger you having a good time.', 'I judged an old interest more harshly than it deserved.'),
+      o('try', 'Make a tail out of socks and deliver a roar', { happiness: 4, energy: -2 }, 'Partial compliance', 'The tail falls off during your first turn. You add “technical difficulties” beneath the original demand and draw yourself with better knees.', 'I answered a childhood demand to become a dinosaur by making a sock tail.'),
+      o('keep', 'Write a formal rejection on the back', { happiness: 2, stress: -2 }, 'Your application was unsuccessful', 'You explain that the teeth would be expensive and doorways remain a concern. You sign it with a very serious claw print.', 'I wrote a rejection letter to my childhood plan to become a dinosaur.'),
+      o('judge', 'Destroy the evidence', { discipline: -1, stress: -2 }, 'The dinosaur cannot prove anything', 'You tear the letter up, then notice you kept the drawing. It is an excellent dinosaur. You hide it somewhere nobody can ask questions.', 'I destroyed an unreasonable childhood demand and secretly kept its dinosaur drawing.'),
     ],
   },
   {
@@ -75,21 +75,21 @@ export const teenHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-parent-voice-note', min: 13, max: 17, parent: true, parentContact: true, illustration: 'relationship', title: 'Sent from a windy place',
-    body: '{parent} sends a voice message. The wind gets most of the speaking time. You can make out your name and something about later.',
+    id: 'teen-parent-voice-note', min: 13, max: 17, parent: true, parentContact: true, illustration: 'relationship', title: 'That is definitely your voice',
+    body: '{parent} sends a voice note pretending to be you: “I would love to do all the washing-up forever.” Their impression makes you sound like a distressed goose.',
     choices: [
-      o('clarify', 'Ask for the details as text', { discipline: 2, respect: 1 }, 'The wind leaves the conversation', '{parent} sends a short message you can read. It answers the question the recording had been trying to ask.', 'I asked {parent} to resend a windy voice message as text.', 3),
-      o('later', 'Arrange a time to talk properly', { happiness: 2, stress: -1 }, 'A clearer conversation', 'You speak when you can both hear each other. The original message was mostly a question about your day.', 'I arranged a proper conversation with {parent} after a windy voice message.', 4),
-      o('guess', 'Reply as though you understood', { discipline: -2, stress: 2 }, 'An unlikely answer', '{parent} asks what your reply means. You still need to ask what the recording said.', 'I guessed at a voice message from {parent} instead of asking.', -2),
+      o('clarify', 'Request a less insulting goose', { respect: 1, happiness: 3 }, 'A second audition', '{parent} sends a deeper version. Now you sound like a goose with a cold. You both give up trying to discuss the dishes.', 'I demanded a better impression after {parent} impersonated me in a voice note.', 3),
+      o('later', 'Offer one actual round of washing-up', { discipline: 2, energy: -2 }, 'Forever has been renegotiated', '{parent} accepts one evening. You wash up later, with the original recording playing beside the sink. The goose does not offer to dry.', 'I negotiated one evening of washing-up after {parent} sent a fake promise in my voice.', 4),
+      o('guess', 'Send an impression of them volunteering instead', { happiness: 3, energy: -1 }, 'A household of terrible actors', '{parent} replies, “I sound nothing like that.” You send their goose back. The exchange ends with two laughing voice notes and no volunteers.', 'I answered {parent}’s fake voice note with an equally bad impression of them.', 2),
     ],
   },
   {
-    id: 'teen-sunday-list', min: 13, max: 17, illustration: 'education', title: 'The plan needs another colour',
-    body: 'You promised to finish everything by Sunday. Sunday is nearly over. You have completed six versions of the to-do list, including a colour key.',
+    id: 'teen-sunday-list', min: 13, max: 17, parent: true, illustration: 'relationship', title: 'Your stand-in has a meeting',
+    body: 'To dodge chores, you left a dummy in your dressing gown at your desk. {parent} is now giving it a serious talk about responsibility. The dummy is handling it well.',
     choices: [
-      o('choose', 'Finish one task without making a new list', { discipline: 3, stress: -2 }, 'An unexpected practical development', 'One thing actually gets done. You resist the urge to redesign the tick beside it.', 'I stopped revising a to-do list and completed one task.'),
-      o('break', 'Cross out half the tasks without remorse', { energy: 2, stress: -2 }, 'The list finally fits', 'Some plans are simply not happening tonight. Admitting it gives you room to stop; it does not complete the crossed-out tasks.', 'I cut an unrealistic evening plan instead of trying to finish everything.'),
-      o('all', 'Declare an all-nighter. Design a new schedule.', { energy: -4, stress: 4, discipline: -1 }, 'Version seven is beautiful', 'You move between tasks, headings and snacks. Very little gets finished, but the colour key has become exceptional.', 'I exhausted myself planning too much and finishing very little.'),
+      o('choose', 'Step out and take over the discussion', { discipline: 3, energy: -2 }, 'A noticeable improvement in posture', '{parent} says the dummy already agreed to take the rubbish out. You do it while the dummy remains at the desk, apparently thinking about its future.', 'I replaced a dummy during {parent}’s lecture and did the chore it had agreed to.', 2),
+      o('break', 'Leave a second dummy to play {parent}', { happiness: 4, energy: -2 }, 'A surprisingly peaceful household', '{parent} watches you arrange both dummies, then hands the real you a rubbish bag. The two stand-ins remain deep in discussion.', 'I made a second dummy to answer the first one and still had to do my chores.', 1),
+      o('all', 'Stay hidden and let the dummy handle it', { discipline: -3, stress: 4, energy: -3 }, 'The witness is uncooperative', '{parent} removes the dressing gown, finds a cushion, and addresses the rest of the lecture to your hiding place. You have to wait for it to finish before coming out.', 'I hid while {parent} discovered my chore-dodging dummy.', -4),
     ],
   },
 ];

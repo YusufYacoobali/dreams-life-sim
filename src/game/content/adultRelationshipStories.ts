@@ -1,6 +1,6 @@
 import { EventTemplate, storyOption as option } from './eventTypes';
 
-/** Free ordinary moments with an actual adult friend or current partner. */
+/** Standalone situations with an actual adult friend or current partner. */
 export const adultRelationshipTemplates: readonly EventTemplate[] = [
   {
     id: 'friend-long-voice-note', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'You were at that table',
@@ -12,12 +12,12 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'friend-different-budget', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'The inexpensive version',
-    body: 'You and {friend} are discussing things to do in {city}. A paid outing comes up. {friend} quietly says it is outside their budget.',
+    id: 'friend-different-budget', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'A cake with your personality',
+    body: 'A bakery calls about a cake shaped like your head. {friend} ordered it in your name and left you the bill. The icing mouth is enormous, apparently “to capture the essence”.',
     choices: [
-      option('walk', 'Suggest a free walk together', { happiness: 3, energy: -2 }, 'Company was the point', 'You take a short walk without buying anything. The conversation is no less enjoyable.', 'I enjoyed a free walk with {friend}.', undefined, { friendBond: 4 }),
-      option('ask', 'Ask what would feel comfortable', { respect: 3, stress: -1 }, 'No financial performance required', '{friend} suggests sitting and talking instead. You do exactly that.', 'I asked {friend} what suited their budget and kept things simple.', undefined, { friendBond: 5 }),
-      option('insist', 'Say it cannot cost that much', { respect: -3, stress: 2 }, 'That is not your number to choose', '{friend} repeats the boundary. You spend the conversation defending a price rather than enjoying the company.', 'I dismissed {friend}’s budget instead of listening.', undefined, { friendBond: -5 }),
+      option('walk', 'Tell the bakery who actually ordered the head', { respect: 3, stress: 2 }, 'Collection declined', 'You decline the order and give the bakery {friend}’s number. {friend} suddenly stops finding the surprise quite so delicious.', 'I refused to pay for a cake {friend} ordered in my name.', undefined, { friendBond: -5 }),
+      option('ask', 'Pay {money}. Eat your words.', { happiness: 4, respect: 2 }, 'A generous slice of forehead', 'You pay {money} for the cake. {friend} cuts you a slice of your own forehead and calls it a character study.', 'I paid {money} for a cake shaped like my head that {friend} ordered.', undefined, { friendBond: 5, cash: -120 }),
+      option('insist', 'Refuse it and request less mouth in future', { happiness: 4, respect: -2 }, 'The likeness was too expensive', 'You decline the order and tell {friend} the cake should have their face instead. The baker offers to close its mouth; you ask whether they can do the same for {friend}.', 'I refused an unsolicited cake and argued with {friend} about its enormous icing mouth.', undefined, { friendBond: -3 }),
     ],
   },
   {
@@ -39,39 +39,39 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'friend-interrupted-thought', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'The rest of your sentence',
-    body: 'Every time you start an explanation, {friend} jumps in with a related story. Yours has been an opening sentence for several minutes.',
+    id: 'friend-interrupted-thought', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'People I can fix',
+    body: 'During a video call, {friend} introduces you as the guest on their new podcast. Then you notice the LIVE badge. The episode is called “People I Can Fix”.',
     choices: [
-      option('finish', 'Say you would like to finish the thought', { respect: 3, stress: -2 }, 'A sentence with an ending', '{friend} apologises and waits. You finally reach the part you wanted to say.', 'I asked {friend} to let me finish speaking.', undefined, { friendBond: 2 }),
-      option('return', 'Listen, then return to your point', { discipline: 3, energy: -2 }, 'A patient detour', 'You acknowledge the connection and bring the conversation back. Both stories get an ending.', 'I brought a wandering conversation with {friend} back to my point.', undefined, { friendBond: 3 }),
-      option('compete', 'Interrupt louder', { stress: 4, respect: -2 }, 'Two opening sentences', 'For a moment you are both talking. Neither explanation becomes clearer.', 'I tried to out-interrupt {friend}.', undefined, { friendBond: -3 }),
+      option('finish', 'Announce that the guest did not consent', { respect: 4, stress: 2 }, 'A very short first episode', '{friend} ends the stream and apologises. You suggest fixing the part where they ask before broadcasting people.', 'I made {friend} stop broadcasting our call without permission.', undefined, { friendBond: -4 }),
+      option('return', 'Introduce the host as your first repair project', { happiness: 5, energy: -2 }, 'The host requires parts', 'You diagnose {friend} with an advanced need to hear their own voice. They laugh, end the stream and agree the title needs work.', 'I turned {friend}’s surprise podcast interview back on its host.', undefined, { friendBond: 3 }),
+      option('compete', 'Pretend to be an extremely boring sponsor', { happiness: 4, respect: -2 }, 'This episode was brought to you by grout', 'You deliver a detailed advert for imaginary bathroom grout until {friend} cuts the stream. They wanted a guest, not thirty-seven tile specifications.', 'I sabotaged {friend}’s unannounced live interview with a fake grout advert.', undefined, { friendBond: -6 }),
     ],
   },
   {
-    id: 'friend-unwanted-nickname', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'Please do not let that catch on',
-    body: '{friend} tries out a new nickname for you. You would prefer it did not survive this conversation.',
+    id: 'friend-unwanted-nickname', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'The human kettle',
+    body: '{friend} enters you in a local talent contest as “The Human Kettle”. Your talent is apparently the noise you make when annoyed. They send you the confirmation email.',
     choices: [
-      option('plain', 'Say you prefer your actual name', { respect: 3, stress: -2 }, 'A small, clear boundary', '{friend} drops the nickname. The conversation continues without a naming ceremony.', 'I told {friend} I preferred my own name.', undefined, { friendBond: 2 }),
-      option('light', 'Make the request with a light joke', { happiness: 3, stress: -1 }, 'Retired after one appearance', '{friend} laughs and agrees. The nickname has an admirably short career.', 'I gently retired a nickname {friend} had invented.', undefined, { friendBond: 3 }),
-      option('pretend', 'Laugh along despite disliking it', { stress: 4 }, 'Now apparently approved', '{friend} uses it again. Your laugh did not communicate the objection you were having internally.', 'I pretended to like a nickname from {friend}.'),
+      option('plain', 'Make them withdraw the entry', { respect: 3, stress: -2 }, 'No boiling tonight', '{friend} cancels the entry while you watch. Your only public performance is an extremely convincing disappointed stare.', 'I made {friend} withdraw a talent-show entry they submitted for me.', undefined, { friendBond: -3 }),
+      option('light', 'Send {friend} a full kettle audition', { happiness: 5, energy: -3 }, 'A rising whistle', 'Your performance starts with a simmer and ends with a scream. {friend} laughs so hard they forget to forward it; you cancel the entry yourself.', 'I sent {friend} a ridiculous kettle impression before cancelling the contest entry.', undefined, { friendBond: 4 }),
+      option('pretend', 'Draft their entry as “The Human Toilet”', { happiness: 3, respect: -3, stress: 2 }, 'The double act breaks up', 'You send {friend} your proposed introduction, complete with sound effects. They cancel your entry and ask you never to perform theirs.', 'I answered {friend}’s kettle prank with a proposed toilet performance.', undefined, { friendBond: -5 }),
     ],
   },
   {
-    id: 'friend-quiet-company', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'Nothing needs saying',
-    body: 'You are sitting with {friend}. For once the silence seems comfortable. Part of you still wants to fill it with a review of the weather.',
+    id: 'friend-quiet-company', min: 18, max: 120, friend: true, illustration: 'relationship', title: 'The wedding website',
+    body: '{friend} made a prank wedding website naming you as their future spouse. Someone asks what you want as a present. The site describes your love as “unexpected, especially to them”.',
     choices: [
-      option('quiet', 'Enjoy a little quiet together', { stress: -4, energy: 2 }, 'Company without commentary', '{friend} settles back too. Neither of you has to earn the other person’s company by talking.', 'I enjoyed some quiet company with {friend}.', undefined, { friendBond: 3 }),
-      option('check', 'Ask if the quiet is comfortable', { respect: 2, stress: -2 }, 'A short answer, then quiet', '{friend} says it is. You stop treating the pause as a problem.', 'I checked that {friend} was comfortable with a quiet moment.', undefined, { friendBond: 2 }),
-      option('fill', 'Keep talking to cover every pause', { energy: -3, stress: 2 }, 'An exhausting weather report', 'You find several things to say about the same cloud. {friend} does not seem to have needed the update.', 'I talked through a comfortable silence with {friend}.'),
+      option('quiet', 'Make them delete it and correct the announcement', { respect: 4, stress: 3 }, 'Cancelled before the imaginary cake', '{friend} deletes the site and posts a correction. You are not engaged by prank, but trusting them with a joke will take longer.', 'I made {friend} delete a fake wedding website and correct the claim.', undefined, { friendBond: -20, trust: { friend: -20 } }),
+      option('check', 'Request a divorce from the website', { happiness: 5, stress: 2 }, 'Irreconcilable font choices', 'You send {friend} a mock breakup statement citing the site’s terrible font. They delete it and apologise for skipping the part where you agree to things.', 'I answered {friend}’s fake wedding website with a mock breakup statement.', undefined, { friendBond: -5, trust: { friend: -5 } }),
+      option('fill', 'End the friendship. They can keep the website.', { respect: 2, happiness: -6, stress: 5 }, 'One real ending', 'You tell {friend} the joke crossed a line and end the friendship. Their imaginary wedding has cost them an actual friend.', 'I ended my friendship with {friend} over a fake wedding website.', undefined, { friendBond: -30, trust: { friend: -25 }, endFriendship: true }),
     ],
   },
   {
-    id: 'friend-changed-opinion', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'I used to think that too',
-    body: '{friend} mentions an opinion you once shared. You have changed your mind, but saying so feels oddly like correcting an earlier version of yourself in public.',
+    id: 'friend-changed-opinion', min: 18, max: 120, friend: true, illustration: 'conversation', title: 'Sitting is surrender',
+    body: '{friend} announces that they are morally opposed to chairs. Sitting is “giving up vertically”. They explain this while standing over a perfectly good sofa.',
     choices: [
-      option('explain', 'Explain what changed your mind', { smarts: 3, respect: 2 }, 'An update rather than a victory', '{friend} asks a question. You have a conversation instead of defending your old position out of habit.', 'I explained a change of mind to {friend}.', undefined, { friendBond: 3 }),
-      option('curious', 'Ask how they see it now', { smarts: 2, discipline: 2 }, 'Room for two unfinished thoughts', 'You discover that {friend} has doubts too. Neither of you needs a final answer immediately.', 'I compared a changing opinion with {friend}.', undefined, { friendBond: 4 }),
-      option('dismiss', 'Say only an idiot would still think that', { respect: -4, stress: 3 }, 'Including a recent version of you', '{friend} goes quiet. Your new opinion has acquired an unnecessary insult.', 'I dismissed {friend} for an opinion I used to share.', undefined, { friendBond: -5 }),
+      option('explain', 'Ask whether toilets count as chairs', { smarts: 3, respect: 2 }, 'An emergency exemption', '{friend} grants toilets an exemption, then invents several more. By the time they sit on the sofa, they are calling it “strategic squatting”.', 'I questioned {friend}’s anti-chair principles until the sofa qualified for an exemption.', undefined, { friendBond: 3 }),
+      option('curious', 'Join the movement lying down', { happiness: 5, energy: -2 }, 'Beyond furniture', 'You lie on the floor and announce that you have transcended chairs. {friend} joins you, making the movement look suspiciously like a nap.', 'I joined {friend}’s anti-chair movement by lying on the floor.', undefined, { friendBond: 4 }),
+      option('dismiss', 'Narrate their eventual sit like a sporting defeat', { happiness: 3, respect: -4, stress: 3 }, 'Down goes the champion', 'When {friend} finally sits, you deliver a full commentary on the collapse of their principles. They get up and choose a seat farther away from you.', 'I mocked {friend}’s anti-chair principles with sports commentary when they sat down.', undefined, { friendBond: -8 }),
     ],
   },
   {
@@ -111,21 +111,21 @@ export const adultRelationshipTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'partner-disagreement-loop', min: 18, max: 120, partner: true, illustration: 'conversation', title: 'The same point, slightly louder',
-    body: 'You and {partner} have each explained your side of a disagreement twice. The third version appears to be the second version with more volume.',
+    id: 'partner-disagreement-loop', min: 18, max: 120, partner: true, illustration: 'conversation', title: 'Two points for logic',
+    body: '{partner} has started scoring your argument on paper. You have two points for logic and nine for volume. They want to replay round three.',
     choices: [
-      option('reflect', 'Say what you understand of their point', { smarts: 2, stress: -3 }, 'Finally discussing the same thing', '{partner} corrects one detail. You discover that part of the disagreement was about what each of you thought the other meant.', 'I checked that I understood {partner} during a disagreement.', undefined, { partnerBond: 4 }),
-      option('pause', 'Ask for a calm pause in the conversation', { discipline: 3, energy: 1 }, 'No final word required', 'You both stop repeating yourselves. The question remains open, but the temperature comes down.', 'I took a calm pause in a difficult conversation with {partner}.', undefined, { partnerBond: 1 }),
-      option('score', 'Bring up every unrelated grievance', { stress: 5, respect: -3 }, 'A much larger subject', 'The original issue disappears under several others. {partner} looks more tired than persuaded.', 'I dragged unrelated complaints into a disagreement with {partner}.', undefined, { partnerBond: -5 }),
+      option('reflect', 'Appoint yourself the neutral referee', { smarts: 2, stress: -3 }, 'Both sides lose a point', 'You penalise both of you for repetition. {partner} accepts the draw, bins the scorecard and starts explaining what actually bothered them.', 'I defused an argument with {partner} by giving us both penalties.', undefined, { partnerBond: 4 }),
+      option('pause', 'Demand a video review of the previous sentence', { happiness: 3, energy: 1 }, 'No footage available', 'Neither of you can agree what was said. You declare the footage unavailable and take a breather before either side files an appeal.', 'I used an imaginary video review to pause an argument with {partner}.', undefined, { partnerBond: 2 }),
+      option('score', 'Award yourself the lifetime championship', { happiness: 2, stress: 5, respect: -3 }, 'A champion without a fan', '{partner} tears up the scorecard while you describe your acceptance speech. You have won an argument that only you enjoyed.', 'I crowned myself the winner of an argument with {partner}.', undefined, { partnerBond: -9 }),
     ],
   },
   {
-    id: 'partner-public-affection', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'Comfort has a location',
-    body: 'While you are out together, {partner} reaches for your hand. You feel awkward about public affection today and are unsure how to say it kindly.',
+    id: 'partner-public-affection', min: 18, max: 120, partner: true, illustration: 'relationship', title: 'A love song with toilet details',
+    body: '{partner} sends you a private rehearsal of a love song about you. It includes three lines about your toilet habits. They want permission to perform it for their family.',
     choices: [
-      option('explain', 'Explain your comfort without blaming them', { respect: 3, stress: -2 }, 'A boundary with context', '{partner} understands that the request is about how you feel here. Neither of you has to guess what the hesitation means.', 'I explained a boundary around public affection to {partner}.', undefined, { partnerBond: 3 }),
-      option('ask', 'Talk about what feels comfortable for both of you', { smarts: 2, respect: 2 }, 'Two preferences can fit', 'You find a way to walk together that suits you both. No one has to prove affection through discomfort.', 'I talked about shared comfort with {partner}.', undefined, { partnerBond: 4 }),
-      option('snap', 'Pull away and snap without explaining', { stress: 3, respect: -3 }, 'The missing explanation', '{partner} does not know what went wrong. Your discomfort has become an unnecessary hurt.', 'I reacted sharply instead of explaining a boundary to {partner}.', undefined, { partnerBond: -4 }),
+      option('explain', 'Approve everything except the toilet verse', { respect: 3, stress: -2 }, 'The twelve-second version', '{partner} cuts the verse and sends the revision. Your love song is now twelve seconds long, but you approve all twelve.', 'I asked {partner} to remove a very personal verse from a love song.', undefined, { partnerBond: 4 }),
+      option('ask', 'Offer an equally honest duet', { happiness: 5, respect: 1 }, 'Instrumentals might be safer', 'You send a verse about their worst habit. {partner} laughs, withdraws the performance plan and suggests you both learn the triangle.', 'I answered {partner}’s revealing love song with a proposed duet.', undefined, { partnerBond: 5 }),
+      option('snap', 'Say yes, then heckle the performance', { happiness: 2, stress: 5, respect: -6 }, 'An unwanted second act', 'You encourage {partner} to perform, then heckle every verse in front of the family. They stop singing, fold the lyrics and tell you to leave.', 'I encouraged {partner} to perform a love song, then humiliated them by heckling it.', undefined, { partnerBond: -25, trust: { partner: -20 } }),
     ],
   },
   {

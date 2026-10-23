@@ -11,6 +11,7 @@ import { validateTeenRelationships } from './systems/teenRelationshipValidation'
 import { indexLedger, rememberLedgerIndex } from './ledgerIndex';
 import { z } from 'zod';
 import { validateDramaticEvent } from './systems/dramaticValidation';
+import { validateStoryImmediate } from './systems/storyImmediateContext';
 import { countries, countryCodes } from './countries';
 import { pendingSchema } from './runtime';
 import { dateSchema, monthFrom } from './calendar';
@@ -120,7 +121,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(45), engineVersion: z.literal(47), contentVersion: z.literal(24),
+  schemaVersion: z.literal(46), engineVersion: z.literal(48), contentVersion: z.literal(25),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -381,6 +382,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   for (const pending of pendingEvents) if (pending.kind === 'decision') {
     validateDramaticEvent(world, pending);
     validateJobInterview(world, pending);
+    validateStoryImmediate(world, pending);
     if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
     for (const choice of pending.choices) for (const effect of choice.effects) {
@@ -678,6 +680,11 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Never rewrite existing employment, artwork choices or mini-game difficulty.
   if (parsed && parsed.schemaVersion === 44 && parsed.engineVersion === 46 && parsed.contentVersion === 23) {
     parsed.schemaVersion = 45; parsed.engineVersion = 47; parsed.contentVersion = 24;
+  }
+  // Revised story writing and immediate consequences apply only to newly bound
+  // choices. Stored words, effects, history, identities and RNG stay literal.
+  if (parsed && parsed.schemaVersion === 45 && parsed.engineVersion === 47 && parsed.contentVersion === 24) {
+    parsed.schemaVersion = 46; parsed.engineVersion = 48; parsed.contentVersion = 25;
   }
   return validateWorld(parsed, immutable);
 }

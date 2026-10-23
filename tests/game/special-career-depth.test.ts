@@ -6,7 +6,7 @@ import { gunzipSync, strFromU8 } from 'fflate';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { specialCareerTemplates } from '../../src/game/content/specialCareerStories';
 import { specialCareerDepthTemplates } from '../../src/game/content/specialCareerDepthStories';
-import { careerKinds } from '../../src/game/content/careers';
+import { careerKinds, skillContent } from '../../src/game/content/careers';
 import type { EventTemplate } from '../../src/game/content/eventTypes';
 import { resolveCommand } from '../../src/game/engine';
 import { decodeWorld, encodeWorld, type World } from '../../src/game/model';
@@ -58,7 +58,7 @@ describe.each(['upper', 'lower'] as const)('%s explicitly arranged stat boundary
     expect(eligibleTemplates(initial)).toContain(scene);
     const before = encodeWorld(initial), event = bindEvent(initial, scene);
     expect(event.personIds).toEqual([person.id]); expect(encodeWorld(initial)).toBe(before);
-    expect(event.choices.every(choice => choice.effects.every(effect => effect.kind === 'stat'))).toBe(true);
+    expect(event.choices.every(choice => choice.effects.every(effect => effect.kind === 'stat' || effect.kind === 'skill' || effect.kind === 'story-immediate' && effect.publicImage !== undefined && !effect.cash && !effect.work && !effect.trust && !effect.endFriendship))).toBe(true);
     for (const authored of scene.choices) {
       const input = decodeWorld(before); offerPending(input, event);
       const cold = unpackCheckpoint(packCheckpoint(input), true); expect(encodeWorld(cold)).toBe(encodeWorld(input));
@@ -66,18 +66,36 @@ describe.each(['upper', 'lower'] as const)('%s explicitly arranged stat boundary
       expect(encodeWorld(selected)).toBe(encodeWorld(resolveCommand(input, command, true)));
       expect(selected.pending).toMatchObject({ kind: 'result', title: authored.title, body: authored.result });
       if (selected.pending?.kind !== 'result') throw new Error('Expected saved consequence');
-      expect(selected.pending.effects).toEqual(Object.entries(authored.changes).map(([key, requested], index) => {
+      const statRows = Object.entries(authored.changes).map(([key, requested], index) => {
         const stat = key as keyof typeof person.stats, from = person.stats[stat], to = Math.max(0, Math.min(100, from + requested!)), delta = to - from;
         expect(selected.people[person.id].stats[stat]).toBe(to);
         const benefit = stat === 'stress' ? -delta : delta;
         return { id: 'effect_' + index, label: stat[0].toUpperCase() + stat.slice(1), value: (delta >= 0 ? '+' : '') + delta + '%', tone: benefit > 0 ? 'positive' : benefit < 0 ? 'negative' : 'neutral' };
-      }));
-      // Only the selected person's actual capped stats, journal/result and normal
+      });
+      expect(selected.pending.effects.slice(0, statRows.length)).toEqual(statRows);
+      let additionalRows = 0;
+      if (authored.skill) {
+        const skill = authored.skill, delta = Math.max(0, Math.min(100, person.skills[skill.id] + skill.delta)) - person.skills[skill.id];
+        expect(selected.people[person.id].skills[skill.id]).toBe(person.skills[skill.id] + delta);
+        expect(selected.pending.effects).toContainEqual(expect.objectContaining({ label: skillContent[skill.id].title, value: (delta >= 0 ? '+' : '') + delta + '%' })); additionalRows++;
+      }
+      if (authored.publicImage !== undefined) {
+        const delta = Math.max(0, Math.min(100, person.publicLife.image + authored.publicImage)) - person.publicLife.image;
+        expect(selected.people[person.id].publicLife.image).toBe(person.publicLife.image + delta);
+        expect(selected.pending.effects).toContainEqual(expect.objectContaining({ label: 'Public image', value: (delta >= 0 ? '+' : '') + delta + '%' })); additionalRows++;
+      }
+      expect(selected.pending.effects).toHaveLength(statRows.length + additionalRows);
+      // Only declared capped stats/skills/public image, journal/result and normal
       // command revision differ. No career/media/company progress or money grant.
       for (const key of Object.keys(input) as (keyof World)[]) if (!['people', 'pending', 'journal', 'revision', 'pendingPriority'].includes(key)) expect(selected[key]).toEqual(input[key]);
       for (const [id, oldPerson] of Object.entries(input.people)) {
         if (id !== person.id) expect(selected.people[id]).toEqual(oldPerson);
-        else { const { stats: _old, ...oldRest } = oldPerson, { stats: _next, ...nextRest } = selected.people[id]; expect(nextRest).toEqual(oldRest); }
+        else {
+          const expected = { ...oldPerson, stats: selected.people[id].stats };
+          if (authored.skill) expected.skills = { ...oldPerson.skills, [authored.skill.id]: Math.max(0, Math.min(100, oldPerson.skills[authored.skill.id] + authored.skill.delta)) };
+          if (authored.publicImage !== undefined) expected.publicLife = { ...oldPerson.publicLife, image: Math.max(0, Math.min(100, oldPerson.publicLife.image + authored.publicImage)) };
+          expect(selected.people[id]).toEqual(expected);
+        }
       }
       expect(selected.journal.slice(0, input.journal.length)).toEqual(input.journal); expect(selected.journal.at(-1)?.text).toBe(authored.journal);
       const saved = unpackCheckpoint(packCheckpoint(selected), true); expect(encodeWorld(saved)).toBe(encodeWorld(selected));

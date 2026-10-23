@@ -39,21 +39,21 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'toddler-parent-name', min: 2, max: 4, parent: true, illustration: 'relationship', title: 'Management has a name',
-    body: 'You hear someone call {parent} by their first name. You try it out. The reaction suggests you have discovered a shortcut.',
+    id: 'toddler-parent-name', min: 2, max: 4, parent: true, illustration: 'relationship', title: 'Your name is No',
+    body: 'You decide {parent} is called “No”, because they say it so often. You introduce them to a visitor as No. No looks tired.',
     choices: [
-      o('repeat', 'Use it for every request', { happiness: 3, discipline: -1 }, 'A very familiar caller', '{parent} explains what you usually call them. You test the shortcut once more.', 'I tried calling {parent} by their first name.', 1),
-      o('ask', 'Ask why people have different names', { smarts: 3, respect: 1 }, 'A reasonable question', '{parent} explains names and family words. You have several follow-up questions.', 'I asked {parent} about names and family words.', 3),
-      o('usual', 'Go back to your usual name for them', { discipline: 2, happiness: 1 }, 'Still gets an answer', 'The old method works. You use it to ask for a drink.', 'I went back to my usual name for {parent}.', 2),
+      o('repeat', 'Ask No for a biscuit', { happiness: 3, discipline: -1 }, 'They answer to it', '{parent} says no. You point out that they have just said their own name. The visitor needs a moment.', 'I named {parent} No, then asked No for a biscuit.', 1),
+      o('ask', 'Ask whether their middle name is Stop', { smarts: 3, happiness: 2 }, 'A full legal name', '{parent} laughs before they can stop themselves. You introduce them again, with the extra name.', 'I asked whether {parent}’s full name was No Stop.', 3),
+      o('usual', 'Give them their old name back', { discipline: 2, happiness: 1 }, 'Temporary reprieve', '{parent} thanks you. You explain that they can earn No back if they keep saying it.', 'I restored {parent}’s usual name, subject to review.', 2),
     ],
   },
   {
-    id: 'toddler-ice-cube', min: 2, max: 4, parent: true, illustration: 'wellbeing', title: 'The evidence is melting',
-    body: '{parent} puts an ice cube in a bowl for you to inspect. It is cold, slippery and getting smaller without permission.',
+    id: 'toddler-ice-cube', min: 2, max: 4, parent: true, illustration: 'wellbeing', title: 'Something in your sock',
+    body: 'You hide an ice cube in your sock. {parent} asks why your foot is leaking. You had not planned for questions.',
     choices: [
-      o('watch', 'Watch what happens to it', { smarts: 3, discipline: 1 }, 'A shallow answer', 'The bowl slowly fills with water. {parent} explains where the cube went.', 'I watched an ice cube turn into water.', 2),
-      o('touch', 'Touch it, then remove your hand very quickly', { smarts: 2, happiness: 2 }, 'Still cold', 'You repeat the experiment. The result is impressively consistent.', 'I checked how cold an ice cube was, several times.'),
-      o('save', 'Ask {parent} to save it', { happiness: 2 }, 'Back to the freezer', '{parent} puts the bowl somewhere colder. You check on it later.', 'I asked {parent} to rescue a melting ice cube.', 3),
+      o('watch', 'Show {parent} your disappearing treasure', { smarts: 3, discipline: 1 }, 'One wet sock', 'You turn the sock out over a bowl. A tiny cube slides out. {parent} supplies a dry sock; you inspect the bowl for the rest of your treasure.', 'I showed {parent} the ice cube I had hidden in my sock.', 2),
+      o('touch', 'Try the other sock', { happiness: 3, energy: -1 }, 'Two wet socks', 'You transfer the cube. The other foot starts leaking too. {parent} takes the cube before you run out of feet.', 'I tested whether an ice cube would melt in both my socks.'),
+      o('save', 'Ask to put your sock in the freezer', { happiness: 2 }, 'Foot not included', '{parent} takes the sock off first. You watch it go into the freezer and demand a visiting time.', 'I asked {parent} to freeze my sock to save an ice cube.', 3),
     ],
   },
   {
@@ -93,12 +93,12 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'child-pocket-museum', min: 4, max: 7, illustration: 'journal', title: 'Admission is free',
-    body: 'Your pocket contains three stones, a leaf and something that used to be a leaf. You are considering opening a museum.',
+    id: 'child-pocket-museum', min: 4, max: 7, parent: true, illustration: 'journal', title: 'The museum has escaped',
+    body: 'You empty your pocket collection onto the table for {parent}. Three stones. A leaf. A slug you thought was another leaf. The slug makes for the edge.',
     choices: [
-      o('sort', 'Sort the collection by shape', { smarts: 3, discipline: 1 }, 'A respectable exhibition', 'The smallest stone gets its own section. The crumbled leaf needs a larger display area.', 'I sorted a pocketful of stones and leaves.'),
-      o('return', 'Put the collection back outside', { discipline: 2, stress: -2 }, 'Open-air museum', 'The stones return to the path. You can still visit them.', 'I returned my pocket collection to the outdoors.'),
-      o('names', 'Give every stone a dramatic name', { happiness: 3, smarts: 1 }, 'Lord Pebble joins the collection', 'The leaf receives a title too, despite its condition.', 'I gave the stones in my pocket elaborate names.'),
+      o('sort', 'Give {parent} the guided tour', { smarts: 2, happiness: 3 }, 'Please follow the shiny line', 'You describe the stones while {parent} catches the slug on a leaf. Your only moving exhibit is removed halfway through the tour.', 'I gave {parent} a museum tour while a slug escaped from my pocket collection.', 3),
+      o('return', 'Return the slug before it reaches the floor', { discipline: 2, stress: -2 }, 'Exhibit returned to supplier', 'You carry it outside on the leaf. {parent} checks both your pockets. The second one is thankfully all stones.', 'I returned an accidental pocket slug to the garden.', 2),
+      o('names', 'Claim the slug lives here now', { happiness: 3, discipline: -1 }, 'Application declined', '{parent} says it can live outside. You name it Table Slug anyway and escort it to its new address under a plant pot.', 'I tried to move a pocket slug into the house and named it Table Slug.', 1),
     ],
   },
   {
@@ -129,12 +129,12 @@ export const earlyHomeTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-slide-queue', min: 6, max: 10, school: 'primary', classmate: true, illustration: 'relationship', title: 'Express lane',
-    body: '{classmate} slips in front of you in the queue for the slide. Apparently knowing you is a transport policy.',
+    id: 'school-slide-queue', min: 6, max: 10, school: 'primary', classmate: true, illustration: 'relationship', title: 'Supreme Slide Commander',
+    body: '{classmate} has ranked everyone in the slide queue. They are “Supreme Commander”. You are “Basic Passenger”. They say commanders get two turns.',
     choices: [
-      o('ask', 'Ask them to join the back', { respect: 3, stress: 1 }, 'A short negotiation', '{classmate} grumbles, then moves back. Your turn arrives without a special permit.', 'I asked {classmate} not to cut in front of me.', undefined, { peerBond: -1 }),
-      o('let', 'Let it go this time', { stress: -2, happiness: 1 }, 'One extra wait', 'You get a turn soon enough. You make a note to speak up if it happens again.', 'I let {classmate} go ahead of me on the slide.'),
-      o('push', 'Push past them in return', { respect: -4, discipline: -2 }, 'Two people out of line', 'The argument holds up the whole queue. Neither of you gets the next turn.', 'I started an argument after {classmate} cut into a queue.', undefined, { peerBond: -5 }),
+      o('ask', 'Apply to be Deputy Slide Commander', { smarts: 2, respect: -1 }, 'A top-heavy administration', '{classmate} agrees, then everyone else demands a promotion. You end up with nine commanders taking one turn each.', 'I helped dismantle {classmate}’s slide hierarchy by getting everyone promoted.', undefined, { peerBond: 2 }),
+      o('let', 'Take your basic turn', { discipline: 2, stress: -2 }, 'Excellent basic sliding', 'You slide while {classmate} is still explaining the ranks. By the time they finish, the queue has moved past their speech.', 'I ignored {classmate}’s playground rankings and took my turn on the slide.'),
+      o('push', 'Publish a ranking with them at the bottom', { respect: -5, happiness: 3 }, 'Commander demoted', 'You announce that {classmate} is “Captain Wet Bottom”. Everyone repeats it. {classmate} tears up your list and says they cannot stand you.', 'I humiliated {classmate} with a rival playground ranking.', undefined, { peerBond: -18, trust:{peer:-12} }),
     ],
   },
   {

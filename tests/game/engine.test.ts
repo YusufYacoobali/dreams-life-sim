@@ -3,17 +3,20 @@ import { IneligibleAction, resolveCommand } from '../../src/game/engine';
 import { ageOn, decodeWorld, encodeWorld, validateWorld, World } from '../../src/game/model';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
+import { writingLifeReview } from '../support/writingLifeReview';
 
 function born(seed = 42): World {
   return { ...createLife('life_engine', seed, randomCreation(seed), { year: 2024, month: 2, day: 29 }), birthAcknowledged: true };
 }
-function finishPending(world: World): World {
+function finishPending(world: World, review?: ReturnType<typeof writingLifeReview>): World {
   let guard = 0;
   while ((world.pending || world.annual) && guard++ < 100) {
     if (world.pending?.kind === 'decision') {
       const choice = world.pending.choices.find(item => !choiceUnavailable(world, item));
       if (!choice) throw new Error('No available choice in ' + world.pending.templateId);
-      world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: choice.id });
+      const command = { type: 'choose' as const, eventId: world.pending.id, choiceId: choice.id }, before = world;
+      world = resolveCommand(world, command);
+      review?.choice(before, command, world);
     }
     else if (world.pending) world = resolveCommand(world, { type: 'acknowledge', resultId: world.pending.id });
     else world = resolveCommand(world, { type: 'resume' });
@@ -109,9 +112,10 @@ test(`${sweepCount} complete seeded lives preserve invariants and terminate with
   for (let seed = sweepShard; seed < sweepCount; seed += sweepShards) {
     const lifeStarted = Date.now();
     let world = born(seed);
+    const review = writingLifeReview(seed, world);
     let turns = 0;
     while (!world.people[world.activePersonId].died && turns++ < 150) {
-      world = finishPending(resolveCommand(world, { type: 'advance' }));
+      world = finishPending(resolveCommand(world, { type: 'advance' }), review);
       validateWorld(world);
     }
     const player = world.people[world.activePersonId];
@@ -120,6 +124,7 @@ test(`${sweepCount} complete seeded lives preserve invariants and terminate with
     expect(world.pending).toBeNull();
     expect(world.annual).toBeNull();
     ages.push(ageOn(player, world.date));
+    review?.finish(world);
     if (sweepCount > 12) process.stdout.write(JSON.stringify({ sweep: 'core-life', seed, shard: sweepShard, shards: sweepShards, completed: ages.length, requested: sweepCount, ageAtDeath: ages.at(-1), people: Object.keys(world.people).length, ledgerRows: world.ledger.length, lifeMs: Date.now() - lifeStarted, elapsedMs: Date.now() - started }) + '\n');
   }
   if (ages.length > 1) expect(Math.min(...ages)).toBeLessThan(Math.max(...ages));

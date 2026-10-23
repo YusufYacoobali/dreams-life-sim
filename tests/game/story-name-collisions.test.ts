@@ -5,6 +5,8 @@ import { copyWorld, encodeWorld, validateWorld, type World } from '../../src/gam
 import { choiceSchema } from '../../src/game/runtime';
 import { storyContactNames } from '../../src/game/storyNames';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
+import { currentSchool } from '../../src/game/systems/schoolSchemas';
+import { relationFor } from '../../src/game/systems/relationshipQueries';
 import cohort from '../fixtures/story-name-collision-cohort.json';
 
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
@@ -12,7 +14,7 @@ const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 // and bound choice/result remains part of its immutable canonical proof.
 function originalC35Canonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
+  expect(original).toMatchObject({ schemaVersion: 46, engineVersion: 48, contentVersion: 25 });
   // These captured World34 scenes predate best-friend and World36 histories.
   // Assert emptiness before removing only those new defaults, never old data.
   for (const key of ['miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(original[key]).toEqual([]); delete original[key]; }
@@ -75,19 +77,44 @@ test('the unchanged project scene retains its original copy/mechanics apart from
   expect(next.choices.every(choice => !Object.hasOwn(choice, 'relationshipLabels'))).toBe(true);
 });
 
-test('identical full names retain both explicit roles in every actual project branch, with exactly unchanged gameplay and RNG', () => {
-  const { world, pending, next } = bound(record('IT', 9));
-  expect(next.body).toContain('Leonardo Ferrari (classmate) presents'); expect(next.choices[0].resultBody).toContain('Leonardo Ferrari (teacher) asks');
+test('identical full names retain both roles in every rewritten project branch; display labels preserve its precise current effects and RNG', () => {
+  const { world, next } = bound(record('IT', 9)), original = encodeWorld(world), school = currentSchool(world)!;
+  const peer = next.participants!.find(person => person.role === 'classmate')!.personId, teacher = next.participants!.find(person => person.role === 'teacher')!.personId;
+  const peerEdge = relationFor(world, world.activePersonId, peer)!, teacherEdge = relationFor(world, world.activePersonId, teacher)!;
+  expect(next.body).toContain('Leonardo Ferrari (classmate) turns your group presentation'); expect(next.body).toContain('Leonardo Ferrari (teacher) asks where the actual research is');
+  expect(next.choices[0].resultBody).toContain('Leonardo Ferrari (teacher) marks it');
+  const expected: Record<string, { stats: Record<string, number>; peer: number; teacher: number; grades: number }> = {
+    clarify: { stats: { respect:3, stress:1 }, peer:-3, teacher:3, grades:4 },
+    private: { stats: { happiness:3, discipline:-2 }, peer:4, teacher:0, grades:-5 },
+    interrupt: { stats: { happiness:2, respect:-5, stress:4 }, peer:-20, teacher:-10, grades:-16 },
+  };
   for (const choice of next.choices) {
+    const branch = expected[choice.id];
+    expect(choice.effects.filter(effect => effect.kind !== 'story-immediate')).toEqual([
+      ...Object.entries(branch.stats).map(([stat, delta]) => ({ kind:'stat', personId:world.activePersonId, stat, delta })),
+      { kind:'relationship', relationshipId:peerEdge.id, delta:branch.peer },
+      ...(branch.teacher ? [{ kind:'relationship', relationshipId:teacherEdge.id, delta:branch.teacher }] : []),
+      { kind:'school-grade', personId:world.activePersonId, communityId:school.id, delta:branch.grades },
+    ]);
+    expect(choice.effects.filter(effect => effect.kind === 'story-immediate')).toEqual(choice.id === 'interrupt' ? [{
+      kind:'story-immediate', ruleVersion:1, personId:world.activePersonId,
+      trust:[{ role:'peer', otherId:peer, relationshipId:peerEdge.id, contextId:school.id, label:'Leonardo Ferrari (classmate)', delta:-15 }],
+    }] : []);
     const offered = copyWorld(world); offered.pending = next; const cold = unpackCheckpoint(packCheckpoint(validateWorld(offered, true)));
     expect(cold.pending).toEqual(next); const command: GameCommand = { type: 'choose', eventId: next.id, choiceId: choice.id };
-    const previous = resolveCommand(world, command, true), current = resolveCommand(cold, command, true);
+    // Compare the same current story with and without optional presentation
+    // labels. The archived story's different old effects remain source-pinned above.
+    const unlabelled = copyWorld(offered);
+    if (unlabelled.pending?.kind !== 'decision') throw Error('Expected current decision');
+    delete unlabelled.pending.participants;
+    for (const option of unlabelled.pending.choices) delete option.relationshipLabels;
+    const previous = resolveCommand(unlabelled, command, true), current = resolveCommand(cold, command, true);
     expect({ ...current, pending: previous.pending, journal: previous.journal }).toEqual(previous);
     expect(current.journal.slice(0, -1)).toEqual(previous.journal.slice(0, -1)); expect(current.journal.at(-1)).toEqual({ ...previous.journal.at(-1), text: choice.journal });
     if (current.pending?.kind !== 'result' || previous.pending?.kind !== 'result') throw Error('Expected actual results');
     expect(current.pending.effects.map(({ label, ...mechanics }) => mechanics)).toEqual(previous.pending.effects.map(({ label, ...mechanics }) => mechanics));
     expect(current.pending.effects.filter(row => row.label.endsWith(' · relationship')).map(row => row.label)).toEqual((choice.relationshipLabels ?? []).map(row => row.label + ' · relationship'));
-    expect(current.random).toEqual(world.random); expect(choice.effects).toEqual(pending.choices.find(row => row.id === choice.id)!.effects);
+    expect(current.random).toEqual(world.random); expect(encodeWorld(world)).toBe(original);
   }
 });
 
