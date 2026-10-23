@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import type { Person, World } from '../model';
 import { ageOn } from '../personHelpers';
 import { rules } from '../rules';
@@ -18,6 +19,7 @@ export function tuitionFor(person: Person, program: 'university' | 'trade' | 'gr
 }
 /** Current course requirements, without consuming or testing an application attempt. */
 export function coursePrerequisiteReason(world: World, program: 'university' | 'trade' | 'graduate', field: string): string | undefined {
+  if (activeCult(world)) return 'Disband your cult before taking another full-time commitment';
   if (activeTrip(world)) return 'Return from your trip before enrolling';
   const person = active(world); const education = person.education;
   if (isConfined(world)) return 'Courses outside custody are unavailable';

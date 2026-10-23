@@ -1,9 +1,10 @@
-export const offenceIds = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'bribery', 'escape', 'homicide', 'contraband'] as const;
+export const offenceIds = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job', 'bribery', 'escape', 'homicide', 'contraband', 'cult-fraud'] as const;
 export type OffenceId = typeof offenceIds[number];
 export const actionableCrimes = ['shoplift', 'pickpocket', 'vandalism', 'burglary', 'robbery', 'assault', 'cyber-fraud', 'organized-job'] as const;
 export type CrimeDefinition = { title: string; category: 'petty' | 'major' | 'cyber' | 'organized'; minAge: number; smarts: number; skill: number; riskBps: number; gainBps: number; fineBps: number; months: number; violent: boolean; description: string };
 /** High-level fictional actions. All money scales from the local authored pay profile. */
 export const offences: Record<OffenceId, CrimeDefinition> = {
+  'cult-fraud': { title: 'Misappropriation of Communal Funds', category: 'major', minAge: 18, smarts: 0, skill: 0, riskBps: 5500, gainBps: 0, fineBps: 1400, months: 36, violent: false, description: 'Diverting communal funds for personal use leaves evidence and restitution obligations.' },
   shoplift: { title: 'Shoplifting', category: 'petty', minAge: 14, smarts: 0, skill: 0, riskBps: 3500, gainBps: 100, fineBps: 200, months: 6, violent: false, description: 'Attempt a petty theft from a local retailer.' },
   pickpocket: { title: 'Pickpocketing', category: 'petty', minAge: 14, smarts: 0, skill: 5, riskBps: 4000, gainBps: 150, fineBps: 250, months: 8, violent: false, description: 'A risky attempt to steal from another person.' },
   vandalism: { title: 'Vandalism', category: 'petty', minAge: 14, smarts: 0, skill: 0, riskBps: 4500, gainBps: 0, fineBps: 300, months: 6, violent: false, description: 'Damage public property, with no financial reward.' },

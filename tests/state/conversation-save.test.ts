@@ -64,15 +64,15 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])('complete reader%i u
     // A declared previous-reader frame uses the exact previous tuple; no new
     // conversation/history fields exist or are retroactively added.
     const legacy = JSON.parse(encodeWorld(before)); legacy.schemaVersion = 38; legacy.engineVersion = 39; legacy.contentVersion = 13;
-    expect(legacy.miniGames).toEqual([]); delete legacy.miniGames;
+    expect(legacy.cults).toEqual([]); delete legacy.cults; expect(legacy.miniGames).toEqual([]); delete legacy.miniGames;
     const payload = JSON.stringify(legacy); sqlite.prepare('UPDATE lives SET payload=? WHERE id=?').run(payload, before.id); sqlite.prepare('UPDATE backups SET payload=? WHERE life_id=?').run(payload, before.id);
     const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
     const baseline = rows(); expect(Object.keys(baseline)).toHaveLength(8);
     for (const table of Object.keys(baseline)) for (const action of ['INSERT', 'UPDATE', 'DELETE']) sqlite.exec('CREATE TRIGGER no_' + table + '_' + action + ' BEFORE ' + action + ' ON ' + table + " BEGIN SELECT RAISE(ABORT,'must not rewrite rows'); END");
     sqlite.exec('PRAGMA user_version=' + marker); const migrated = new SaveRepository(driver); await migrated.initialise();
-    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(25); expect(rows()).toEqual(baseline);
+    expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(26); expect(rows()).toEqual(baseline);
     expect(await migrated.active()).toEqual(before); expect(rows()).toEqual(baseline); await migrated.initialise(); expect(rows()).toEqual(baseline);
-    sqlite.exec('PRAGMA user_version=26'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(26);
+    sqlite.exec('PRAGMA user_version=27'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(27);
   } finally { sqlite.close(); }
 });
 
@@ -81,8 +81,8 @@ test('a failed reader18 marker transaction rolls back and retries without rewrit
   try {
     await new SaveRepository(driver).initialise(); await new SaveRepository(driver).create(decodeWorld(JSON.stringify(graduate)));
     const payloads = () => sqlite.prepare('SELECT payload FROM lives UNION ALL SELECT payload FROM backups').all(); const before = payloads(); sqlite.exec('PRAGMA user_version=18');
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 25') throw new Error('Interrupted marker write'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 26') throw new Error('Interrupted marker write'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow(/Interrupted marker/); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(18); expect(payloads()).toEqual(before);
-    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(25); expect(payloads()).toEqual(before);
+    await new SaveRepository(driver).initialise(); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(26); expect(payloads()).toEqual(before);
   } finally { sqlite.close(); }
 });

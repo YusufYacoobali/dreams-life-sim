@@ -181,8 +181,8 @@ test('a declared current-schema content-17 envelope migrates only its version ta
   const current = unpackCheckpoint(nativeChoice.checkpoint);
   const prior = { ...JSON.parse(encodeWorld(current)), schemaVersion: 41, engineVersion: 42, contentVersion: 17 };
   const migrated = decodeWorld(JSON.stringify(prior));
-  expect(migrated.contentVersion).toBe(24);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, schemaVersion: 45, engineVersion: 47, contentVersion: 24, miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
+  expect(migrated.contentVersion).toBe(25);
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...prior, schemaVersion: 46, engineVersion: 48, contentVersion: 25, cults: [], miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [] });
   expect(migrated.pending).toEqual(current.pending); expect(migrated.random).toEqual(current.random);
   expect(migrated.journal).toEqual(current.journal); expect(migrated.ledger).toEqual(current.ledger);
 });

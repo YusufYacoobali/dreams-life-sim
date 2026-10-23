@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { consumeMiniGameModifier } from '../../minigames/core/modifiers';
 import { activeTrip } from './travelSchemas';
 import { newWorkEarnings } from './earningsSchemas';
@@ -44,6 +45,7 @@ export function trainingReason(world: World, skill: typeof skillIds[number], per
 }
 export function careerPayQuote(world: World, kind: CareerKind, person = active(world)) { const career = world.careers.find(item => item.personId === person.id && item.kind === kind), role = jobs.find(item => item.id === careerCatalog[kind].roleId)!; return roundRatio(rules[person.country].baseWage * BigInt(role.wageBps) * BigInt(100 + (career?.rank ?? 0) * 40 + Math.floor(person.stats.fame / 2)), 1000000n); }
 export function selectionReason(world: World, kind: CareerKind): string | undefined {
+    if (activeCult(world)) return 'Disband your cult before taking another full-time commitment';
     const person = active(world), definition = careerCatalog[kind], age = ageOn(person, world.date);
     if (kind === 'athlete') { const suspension = athleteSuspensionReason(world); if (suspension) return suspension; }
     if (activeTrip(world)) return 'Return from your trip before a new career contract';
@@ -100,6 +102,7 @@ function colleagues(world: World, career: Career) {
     }
 }
 export function startCareerContract(world: World, kind: CareerKind, annualPay: bigint, person: Person = active(world), announce = true): Career {
+    if (activeCult(world, person.id)) throw new IneligibleAction('Disband your cult before taking a full-time contract');
     if (kind === 'athlete') { const suspension = athleteSuspensionReason(world, person.id); if (suspension) throw new IneligibleAction(suspension); }
     const definition = careerCatalog[kind], prior = world.careers.find(item => item.personId === person.id && item.kind === kind);
     if (person.employment || world.careers.some(item => item.personId === person.id && item.status === 'active'))

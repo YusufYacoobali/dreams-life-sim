@@ -1,3 +1,4 @@
+import { activeCult } from '../game/systems/cultSchemas';
 import type { Href } from 'expo-router';
 import type { World } from '../game/model';
 import { ageOn } from '../game/personHelpers';
@@ -16,7 +17,7 @@ import type { FameBusinessArtId } from '../assets/FameBusinessArt';
 export type LifeContext = {
   key: string; label: string; href: Href;
   icon: { kind:'career'; id:CareerArtId } | { kind:'illustration'; id:IllustrationId }
-    | { kind:'legal'; id:HealthLegalArtId } | { kind:'business'; id:FameBusinessArtId } | { kind:'profile' };
+    | { kind:'legal'; id:HealthLegalArtId } | { kind:'business'; id:FameBusinessArtId } | { kind:'cult' } | { kind:'profile' };
 };
 const profile: LifeContext = { key:'profile',label:'Profile',href:'/profile',icon:{ kind:'profile' } };
 const careerLabels = { actor:'Acting',model:'Model',athlete:'Sports',musician:'Music',politician:'Politics' } as const;
@@ -27,6 +28,7 @@ export function resolveLifeContext(world: World): LifeContext {
   if (!person || person.died) return profile;
   if (isConfined(world)) return { key:'prison',label:'Prison',href:'/prison',icon:{ kind:'legal',id:'prison' } };
 
+  if (activeCult(world)) return { key:'cult',label:'Cult',href:'/cult',icon:{kind:'cult'} };
   if (recordingCommitment(world)) return { key:'recording',label:'Music',href:'/music-studio',icon:{ kind:'career',id:'musician' } };
   if (campaignCommitment(world)) return { key:'campaign',label:'Politics',href:'/politics',icon:{ kind:'career',id:'politician' } };
   const service = serviceCareer(world);

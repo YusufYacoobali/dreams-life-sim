@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { activeTrip, physicalLocation, samePhysicalPlace } from './travelSchemas';
 import { z } from 'zod';
 import { ageOn, fullName } from '../personHelpers';
@@ -35,6 +36,7 @@ export function royalAllowanceQuote(world:World,house:RoyalHouse,personId=world.
 export function royalReceptionQuote(world:World){const location=physicalLocation(world),currency=countries[active(world).country].currency,localCurrency=countries[location.country].currency,local=roundRatio(rules[location.country].baseWage,200n),gross=fxMoney(world,{minor:local,currency:localCurrency},currency).minor,fee=localCurrency===currency?0n:(gross+99n)/100n;return {minor:gross+fee,currency,local,localCurrency,fee};}
 export const royalOccasionQuote=(world:World)=>({minor:roundRatio(rules[active(world).country].baseWage,100n),currency:countries[active(world).country].currency});
 export function royalDutyReason(world:World,personId=world.activePersonId,membership=royalMembership(world,personId)):string|undefined{
+  if (activeCult(world, personId)) return 'Disband your cult before taking another full-time commitment';
  const person=world.people[personId];if(!membership)return 'An active title in an actual royal family is required';
  if(ageOn(person,world.date)<18)return 'Public duties are available from age eighteen';
  if(!membership.house.headId)return 'This house currently has no eligible sovereign';

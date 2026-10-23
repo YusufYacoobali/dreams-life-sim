@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { currentHourlyRate, hourlyAnnual, hourlyContract, hourlyQuote, hourlyStudentReason, recordHourlyPeriod, updateHourlyRate } from './hourlyWork';
 import { hourlyTermsSchema } from './hourlyWorkSchemas';
 import { activeTrip } from './travelSchemas';
@@ -46,6 +47,7 @@ export function endEmployment(world: World, personId = world.activePersonId) {
   person.employment = null;
 }
 export function jobReason(world: World, role: JobRole, interview = false, weeklyHours = 12): string | undefined {
+  if (!role.partTime && activeCult(world)) return 'Disband your cult before taking another full-time commitment';
   const person = active(world); const rule = rules[person.country]; const age = ageOn(person, world.date);
   if (activeTrip(world)) return 'Return from your trip before starting a job';
   if (role.specialCareer) return 'Use this special career’s selection process';

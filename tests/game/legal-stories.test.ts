@@ -121,10 +121,10 @@ test('an explicitly arranged C14 envelope preserves the genuine saved medical/co
   const world = decodeSave(JSON.stringify(archive)).world, value = JSON.parse(encodeWorld(world));
   // The medical/court records are genuine. Only this old-version envelope is
   // arranged; it is not a newly claimed C14 producer or gameplay continuation.
-  expect(value.campusCommunities).toEqual([]); delete value.campusCommunities; expect(value.miniGames).toEqual([]); delete value.miniGames;
+  expect(value.campusCommunities).toEqual([]); delete value.campusCommunities; expect(value.cults).toEqual([]); delete value.cults; expect(value.miniGames).toEqual([]); delete value.miniGames;
   value.schemaVersion = 39; value.engineVersion = 40; value.contentVersion = 14;
   const migrated = decodeWorld(JSON.stringify(value));
-  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(24);
+  expect(migrated).toEqual(world); expect(migrated.contentVersion).toBe(25);
   expect(migrated.pending).toEqual(world.pending); expect(migrated.deferred).toEqual(world.deferred); expect(migrated.random).toEqual(world.random);
   const bound = events.bindEvent(pendingCaseStoryWorld(), scene('awaiting-trial'));
   offerPending(world, bound); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');

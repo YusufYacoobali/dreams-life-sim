@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import type { World } from '../model';
 import { compareDates } from '../personHelpers';
 import { storyPersonPresent } from './storyContext';
@@ -14,7 +15,7 @@ export function laterLifeStoryContext(world: World) {
   const person = world.people[world.activePersonId];
   if (!storyPersonPresent(world, person)) return;
   // These actual main occupations take precedence over Retired on Profile.
-  const occupied = person.employment || person.education.stage !== 'none' ||
+  const occupied = activeCult(world, person.id) || person.employment || person.education.stage !== 'none' ||
     world.businesses.some(item => item.ownerId === person.id && item.status === 'active') ||
     world.careers.some(item => item.personId === person.id && item.status === 'active') ||
     serviceCareer(world) || fullTimeCreator(world) || publicRoyalDuty(world) || recordingCommitment(world) || campaignCommitment(world);

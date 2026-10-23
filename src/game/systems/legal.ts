@@ -78,6 +78,15 @@ export function recordDramaticCorruption(world: World, personId: string, gain: b
   if (reported) { source.evidence = 90; arrest(world, source); }
   return source;
 }
+/** Called only after a real, two-sided diversion from a communal treasury. */
+export function recordCultMisappropriation(world: World, personId: string, gain: bigint, reported: boolean) {
+  const person = world.people[personId];
+  if (person.died || gain <= 0n) throw new IneligibleAction('A financial offence needs actual diverted funds');
+  const source = incident(world, person, 'cult-fraud', gain, null, gain);
+  if (reported) source.evidence = Math.max(85, source.evidence);
+  if (reported || source.detectionRoll <= source.riskBps) arrest(world, source);
+  return source;
+}
 function planningPause(world: World, personId = world.activePersonId) { if (personId === world.activePersonId && world.annual?.stage === 'months') world.annual.pausedForPlanning = true; }
 function bailReturn(world: World, item: Case) {
   if (item.bailState !== 'held') return;
@@ -331,6 +340,6 @@ export function legalDeath(world: World, person: Person) {
 /** Shared gate prevents a deep link or direct command from bypassing custody. */
 export function custodyReason(world: World, commandType: string): string | undefined {
   if (!isConfined(world)) return;
-  const permitted = ['advance', 'resume', 'choose', 'acknowledge', 'leave-recovery', 'recovery-effort', 'stop-career-training', 'royal-duties', 'renounce-title', 'leave-service', 'return-assignment', 'service-focus', 'leave-career', 'career-focus', 'cancel-recording', 'withdraw-campaign', 'campaign-plan', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'edit-social', 'social-routine', 'delete-social', 'reopen-social', 'cancel-sponsor', 'business-prices', 'business-marketing', 'business-payout-policy', 'hire-business-staff', 'dismiss-business-staff', 'fund-business', 'improve-business', 'expand-business', 'withdraw-business-profit', 'sell-business', 'breakup', 'end-best-friendship', 'end-teen-relationship', 'gift-money', 'person-action', 'ask-person-support', 'respond-person-loan', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
+  const permitted = ['advance', 'resume', 'choose', 'acknowledge', 'cult-disband', 'leave-recovery', 'recovery-effort', 'stop-career-training', 'royal-duties', 'renounce-title', 'leave-service', 'return-assignment', 'service-focus', 'leave-career', 'career-focus', 'cancel-recording', 'withdraw-campaign', 'campaign-plan', 'pay-bail', 'retain-counsel', 'prison-routine', 'prison-interact', 'appeal', 'parole', 'escape', 'bribe', 'join-gang', 'leave-gang', 'consult', 'treat', 'stop-treatment', 'vaccinate', 'meditate', 'self-improvement', 'repay', 'exchange', 'save-will', 'revoke-will', 'name-child', 'interact', 'relationship-preferences', 'edit-social', 'social-routine', 'delete-social', 'reopen-social', 'cancel-sponsor', 'business-prices', 'business-marketing', 'business-payout-policy', 'hire-business-staff', 'dismiss-business-staff', 'fund-business', 'improve-business', 'expand-business', 'withdraw-business-profit', 'sell-business', 'breakup', 'end-best-friendship', 'end-teen-relationship', 'gift-money', 'person-action', 'ask-person-support', 'respond-person-loan', 'sell-asset', 'insure', 'rent-property', 'stop-renting', 'list-property', 'cancel-listing', 'sell-investment', 'buy-investment', 'divorce'];
   return permitted.includes(commandType) ? undefined : 'This activity is unavailable while you are in custody';
 }

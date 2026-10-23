@@ -1,3 +1,5 @@
+import { CultArt } from '../../src/assets/CultArt';
+import { activeCult } from '../../src/game/systems/cultSchemas';
 import React from 'react';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -26,6 +28,7 @@ export default function SpecialCareers() {
     <Card><Heading size={18}>Independent Careers</Heading>
       {creatorKinds.map(kind => <ActionRow key={kind} title={creatorCatalog[kind].title} subtitle={creatorCatalog[kind].description} icon={<CareerArt id={creatorCatalog[kind].art} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind } })} />)}
       <ActionRow title="Business Owner" subtitle="Your real companies, employees and operating history" icon={<FameBusinessArt id="business" />} onPress={() => router.push('/business')} />
+      <ActionRow title="Cult Leader" subtitle={activeCult(world)?.name ?? 'Found a movement, keep your promises and face the consequences'} icon={<CultArt />} onPress={() => router.push('/cult')} />
     </Card>
     <Card><Heading size={18}>Qualifications & Training</Heading>
       <ActionRow title="Doctor & Lawyer" subtitle="Professional qualifications and the ordinary job board" icon={<Illustration id="education" />} onPress={() => router.push('/education')} />

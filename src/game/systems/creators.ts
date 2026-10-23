@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { activeTrip } from './travelSchemas';
 import { publicRoyalDuty } from './royaltySchemas';
 import { z } from 'zod';
@@ -35,6 +36,7 @@ export const creatorCommandSchema=z.discriminatedUnion('type',[
 export type CreatorCommand=z.infer<typeof creatorCommandSchema>;
 const ownedGear=(world:World,studio:Studio,id:string|null,catalogId:'laptop'|'camera')=>id?world.assets.find(item=>item.id===id&&item.ownerId===studio.personId&&item.catalogId===catalogId&&item.condition>0):undefined;
 export function creatorFocusReason(world:World,studio:Studio):string|undefined {
+  if (activeCult(world, studio.personId)) return 'Disband your cult before taking another full-time commitment';
   if(activeTrip(world,studio.personId))return 'Return from your trip before full-time production';
   const person=world.people[studio.personId],account=world.socialAccounts.find(item=>item.id===studio.accountId);
   if(ageOn(person,world.date)<18)return 'Full-time production is available from age eighteen';
