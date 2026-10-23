@@ -38,7 +38,7 @@ jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => re
 jest.mock('expo-router', () => {
   const Stack = ({ screenOptions, children }: { screenOptions: unknown; children: React.ReactNode }) => require('react').createElement(require('react-native').View, { testID: 'navigator', screenOptions }, children);
   Stack.Screen = () => null;
-  return { Stack, Redirect: () => null, usePathname: () => '/life', useGlobalSearchParams: () => ({}), router: { back: jest.fn(), push: jest.fn(), navigate: jest.fn() } };
+  return { Stack, Redirect: () => null, usePathname: () => '/life', useRootNavigationState: () => ({ index: 0, routes: [{ key: 'game', name: '(game)', state: { index: 0, routes: [{ key: 'life', name: 'life' }] } }] }), useGlobalSearchParams: () => ({}), router: { back: jest.fn(), push: jest.fn(), navigate: jest.fn() } };
 });
 import Settings from '../../app/settings';
 import GameLayout from '../../app/(game)/_layout';

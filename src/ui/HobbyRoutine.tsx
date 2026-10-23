@@ -49,7 +49,7 @@ export function HobbyRoutine({ kind }: { kind: HobbyKind }) {
     {error && !review && <Body>{error}</Body>}<EventModal event={review?.event ?? null} busy={busy} error={error} onCancel={() => { if (!busy && !submitting.current) setReview(null); }} onChoose={() => {
       if (!review || busy || submitting.current) return;
       submitting.current = true;
-      void dispatch(review.command).then(ok => { if (ok) setReview(null); }).finally(() => { submitting.current = false; });
+      return dispatch(review.command).then(ok => { if (ok) setReview(null); }).finally(() => { submitting.current = false; });
     }} />
   </Page>;
 }

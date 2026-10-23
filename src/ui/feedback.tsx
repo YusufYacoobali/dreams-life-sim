@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AccessibilityInfo, Platform } from 'react-native';
+import { rememberModalReturnTarget } from './modalFocus';
 
 type Feedback = { reducedMotion: boolean; deviceReducedMotion: boolean | null; hapticsSupported: boolean; soundSupported: boolean; hapticFeedback: () => void; buttonFeedback: () => void };
 const FeedbackContext = createContext<Feedback>({ reducedMotion: false, deviceReducedMotion: null,
@@ -47,6 +48,7 @@ export function useFeedbackPress<Args extends unknown[]>(onPress: (...args: Args
     // React may render and bail out with a new inline callback. Its identity
     // cannot invalidate the already committed native press handler.
     if (!mounted.current || current.current.disabled || pressing.current) return false;
+    rememberModalReturnTarget(args[0]);
     pressing.current = true;
     let action: unknown;
     try { action = onPress(...args); }
