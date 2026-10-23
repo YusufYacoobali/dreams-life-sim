@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+
 import { router } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import {
@@ -30,6 +30,8 @@ import {
   cultMoney,
   cultUpgradeQuote,
 } from '../../../src/game/systems/cultCore';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
+
 export default function CultHeadquarters() {
   const world = useGame((state) => state.world)!,
     busy = useGame((state) => state.busy),

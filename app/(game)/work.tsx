@@ -1,6 +1,6 @@
 import { currentHourlyRate, hourlyContract } from '../../src/game/systems/hourlyWork';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
@@ -16,6 +16,7 @@ import { EmploymentArt } from '../../src/assets/EmploymentArt';
 import { useColors } from '../../src/ui/theme';
 import { currentWorkplace } from '../../src/game/systems/workplaceSchemas';
 import { workRaiseReason } from '../../src/game/systems/workplaces';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function Work() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error); const c = useColors();

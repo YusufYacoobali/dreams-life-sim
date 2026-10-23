@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { ageOn, fullName } from '../../../src/game/model';
@@ -14,6 +14,8 @@ import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { useBusinessReview } from '../../../src/ui/BusinessReview';
 import { useColors } from '../../../src/ui/theme';
 import { SocialBusinessChoice, SocialBusinessFacts, SocialBusinessIntro } from '../../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
+
 export default function ManageBusiness() {
   const { id } = useLocalSearchParams<{ id: string }>(), identity = useGame(state => state.world ? state.world.id + ':' + state.world.activePersonId : 'none');
   return <BusinessManagement key={identity + ':' + id} id={id} />;

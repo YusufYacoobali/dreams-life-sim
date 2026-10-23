@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { ageOn, fullName } from '../../../src/game/model';
@@ -13,9 +13,11 @@ import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { useSocialReview } from '../../../src/ui/SocialReview';
 import { EventModal, EventPresentation } from '../../../src/ui/EventModal';
 import { SocialBusinessFacts } from '../../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
+
 const cadences = ['off', 'monthly', 'twice-monthly', 'weekly', 'twice-weekly'] as const, intents = ['authentic', 'polished', 'provocative'] as const;
 const cadenceLabels = { off: 'Manual posts only', monthly: 'One post each month', 'twice-monthly': 'Two posts each month', weekly: 'Four posts each month', 'twice-weekly':'Eight posts each month (full-time studio)' };
-const compact = (value: number) => value >= 1000000 ? (value / 1000000).toFixed(1) + 'M' : value >= 1000 ? (value / 1000).toFixed(1) + 'K' : String(value);
+const compact = (value: number) => value.toLocaleString('en-US', { maximumFractionDigits: 0 });
 export default function SocialProfile() {
   const params = useLocalSearchParams<{ id: string }>(), identity = useGame(s => s.world ? s.world.id + ':' + s.world.activePersonId : 'none');
   return <SocialProfileForm key={identity + ':' + (params.id)} />;

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { FlatList, Keyboard, Text, TextInput, View } from 'react-native';
+import { FlatList, Keyboard, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -10,6 +10,7 @@ import { relationFor } from '../../src/game/systems/relationships';
 import { ActionRow, Body, Button, Card, Header, Heading, Portrait, StatBar } from '../../src/ui/components';
 import { ThemedStatusBar, useColors } from '../../src/ui/theme';
 import { Illustration } from '../../src/assets/Illustration';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 type Row = { key: string; kind: 'person'; member: WorkplaceMember } | { key: string; kind: 'history'; place: Workplace } | { key: string; kind: 'history-heading' };
 export default function Coworkers() {

@@ -40,7 +40,7 @@ test('a genuine historical pupil earns an offer, retries application/enrolment/r
   await press('Age Up'); await finishYear();
   expect(world().schoolCompletions.find(item => item.personId === world().activePersonId)?.passed).toBe(true);
   const beforeBrowse = encodeWorld(world()); view.rerender(frame(<Education />)); await press(/^Scholarships\./); expect(router.push).toHaveBeenCalledWith('/scholarships'); view.rerender(frame(<ScholarshipApplications />)); expect(encodeWorld(world())).toBe(beforeBrowse);
-  await press('Apply · Academic Scholarship'); expect(screen.getByText('Annual tuition remaining')).toBeOnTheScreen(); expect(screen.getByText('$3,500.00')).toBeOnTheScreen();
+  await press('Apply · Academic Scholarship'); expect(screen.getByText('Annual tuition remaining')).toBeOnTheScreen(); expect(screen.getByText('$3,500')).toBeOnTheScreen();
   sqlite.exec("CREATE TRIGGER fail_aid_application BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Apply For Scholarship'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
   expect(encodeWorld(world())).toBe(beforeBrowse); expect(encodeWorld(await repository.load(world().id))).toBe(beforeBrowse);
@@ -54,7 +54,7 @@ test('a genuine historical pupil earns an offer, retries application/enrolment/r
   sqlite.exec("CREATE TRIGGER fail_university_application BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Submit University Application'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(encodeWorld(world())).toBe(beforeApplication); expect(screen.getByText('Apply to study computing?')).toBeOnTheScreen();
   sqlite.exec('DROP TRIGGER fail_university_application'); await press('Submit University Application'); expect(world().universityApplications[0].status).toBe('accepted'); expect(world().scholarships[0].status).toBe('offered'); expect(world().ledger.filter(item => item.category === 'tuition')).toEqual([]); await press('Continue');
-  await press('Review Course With This Offer'); fireEvent.press(screen.getByRole('radio', { name: /Student loan/ })); await press('Review Enrolment'); expect(screen.getByText('First-year tuition billed')).toBeOnTheScreen(); expect(screen.getByText('$3,500.00')).toBeOnTheScreen();
+  await press('Review Course With This Offer'); fireEvent.press(screen.getByRole('radio', { name: /Student loan/ })); await press('Review Enrolment'); expect(screen.getByText('First-year tuition billed')).toBeOnTheScreen(); expect(screen.getByText('$3,500')).toBeOnTheScreen();
   const beforeEnrol = encodeWorld(world());
   sqlite.exec("CREATE TRIGGER fail_aid_tuition BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
   await press('Accept Place And Enrol'); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/));
@@ -86,7 +86,7 @@ test('a genuine historical pupil earns an offer, retries application/enrolment/r
   }
   expect(failedRenewal).toBe(true); expect(world().scholarships[0].periods.map(item => item.waived)).toEqual([1050000n, 1050000n]);
   expect(world().ledger.filter(item => item.category === 'tuition').map(item => item.cashDelta)).toEqual([-350000n, -350000n]);
-  view.rerender(frame(<Education />)); expect(screen.getByText('Total tuition waived: $21,000.00')).toBeOnTheScreen();
+  view.rerender(frame(<Education />)); expect(screen.getByText('Total tuition waived: $21,000')).toBeOnTheScreen();
   const original = await repository.load(save.world.id); expect(original.scholarships).toEqual([]); expect(original.people[original.activePersonId].education.months).toBe(12); expect(original.ledger.filter(item => item.category === 'tuition').map(item => item.cashDelta)).toEqual([-1400000n]);
   view.unmount(); sqlite.close();
 }, 60000);

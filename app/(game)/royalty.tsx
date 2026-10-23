@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { royalMembership } from '../../src/game/systems/royaltySchemas';
@@ -14,6 +14,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../../src/
 import { useCareerReview } from '../../src/ui/CareerReview';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 const pageSize = 12;
 const pageFor = (page: number, count: number) => Math.min(page, Math.max(0, Math.ceil(count / pageSize) - 1));
@@ -105,7 +106,7 @@ export default function Royalty() {
         <Heading size={20}>Your Allowances</Heading>
         <Body muted>Allowances already received for attended duties.</Body>
         {!payments.length && <Body muted>No monthly allowance records yet.</Body>}
-        {payments.slice(paymentIndex * pageSize, (paymentIndex + 1) * pageSize).map(item => <View key={item.key} accessible accessibilityLabel={item.period + '. ' + item.detail + '. ' + money(item.allowance)} style={{ gap: 4, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
+        {payments.slice(paymentIndex * pageSize, (paymentIndex + 1) * pageSize).map(item => <View key={item.key} accessible accessibilityLabel={displayText(item.period + '. ' + item.detail + '. ' + money(item.allowance))} style={{ gap: 4, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
           <Body muted>{item.period} · {item.detail}</Body>
           <Text style={{ color: c.ink, fontSize: 19, fontWeight: '700' }}>{money(item.allowance)}</Text>
         </View>)}

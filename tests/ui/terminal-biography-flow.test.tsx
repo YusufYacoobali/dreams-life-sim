@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -44,7 +45,7 @@ test.each(['hourly', 'family'] as const)('%s terminal detail is factual, read-on
   try {
     const initial = context.initial, expected = summaries.deathSummary(initial)!, before = encodeWorld(initial), beforeRows = context.rows(), selector = jest.spyOn(summaries, 'deathSummary'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); let view = render(frame());
     expect(screen.getByText('You Died')).toBeOnTheScreen(); expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen(); expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen();
-    for (const row of expected.rows) expect(screen.getByLabelText(row.label + ': ' + row.value)).toBeOnTheScreen();
+    for (const row of expected.rows) expect(screen.getByLabelText(displayText(row.label + ': ' + row.value))).toBeOnTheScreen();
     expect(screen.getByRole('progressbar', { name: 'Final happiness' })).toHaveAccessibilityValue({ min: 0, max: 100, now: initial.people[initial.activePersonId].stats.happiness }); expect(selector).toHaveBeenCalledTimes(1);
     view.rerender(frame()); expect(selector).toHaveBeenCalledTimes(1); expect(unpack).not.toHaveBeenCalled(); expect(Object.keys(beforeRows)).toHaveLength(8); expect(context.rows()).toEqual(beforeRows); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
     fireEvent.press(screen.getByRole('button', { name: 'View Life Summary' })); expect(router.push).toHaveBeenCalledWith('/life-summary'); fireEvent.press(screen.getByRole('button', { name: 'Start a New Life' })); expect(router.push).toHaveBeenCalledWith({ pathname: '/new-life', params: { seed: '12345' } });

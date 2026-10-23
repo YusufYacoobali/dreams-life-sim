@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import type { World } from '../../src/game/model';
 import { openRepository } from '../../src/persistence/native';
@@ -7,6 +7,7 @@ import { SaveCorrupt } from '../../src/persistence/repository';
 import { Body, Button, Card, Header, Page } from '../../src/ui/components';
 import { LifeSummaryContent } from '../../src/ui/LifeSummaryContent';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 type Load = { id: string; status: 'loading' } | { id: string; status: 'ready'; world: World } | { id: string; status: 'error'; message: string };
 export default function SavedLife() {

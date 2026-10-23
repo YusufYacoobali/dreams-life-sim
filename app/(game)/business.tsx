@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { businessKinds, businessCatalog, BusinessKind } from '../../src/game/content/businesses';
@@ -11,6 +11,8 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { useBusinessReview } from '../../src/ui/BusinessReview';
 import { useColors } from '../../src/ui/theme';
 import { SocialBusinessChoice, SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function Businesses() {
   const identity = useGame(state => state.world ? state.world.id + ':' + state.world.activePersonId : 'none');
   return <BusinessSetup key={identity} />;

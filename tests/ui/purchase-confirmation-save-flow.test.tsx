@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -77,7 +78,7 @@ function expectReviewedTerms() {
   const quote = purchaseQuote(world(), assetCatalog.find(item => item.id === 'studio')!, 'mortgage', 4000, 240), money = (minor: bigint) => formatMoney({ minor, currency: accountFor(world()).currency });
   expect(modal().getByText('Buy City Studio?')).toBeOnTheScreen();
   for (const [label, value] of [['Price', quote.price], ['Purchase fees', quote.fee], ['Cash paid upfront', quote.cashRequired], ['Mortgage principal', quote.principal], ['Monthly payment', quote.payment]] as const) {
-    expect(modal().getByText(label)).toBeOnTheScreen(); expect(modal().getAllByText(money(value)).length).toBeGreaterThan(0);
+    expect(modal().getByText(label)).toBeOnTheScreen(); expect(modal().getAllByText(displayText(money(value))).length).toBeGreaterThan(0);
   }
   return quote;
 }
@@ -92,9 +93,9 @@ test('local financing, deposit and term choices close immediately; review and ca
     await press(/^Term\./); await choose('20 years'); await press('Choose'); expect(screen.queryByRole('button', { name: 'Choose' })).toBeNull();
     expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
     const quote = purchaseQuote(world(), assetCatalog.find(item => item.id === 'studio')!, 'mortgage', 4000, 240), money = (minor: bigint) => formatMoney({ minor, currency: accountFor(world()).currency });
-    expect(screen.getByLabelText('Cash paid upfront: ' + money(quote.cashRequired) + '. Deposit plus purchase fees')).toBeOnTheScreen();
-    expect(screen.getByLabelText('Purchase fees: ' + money(quote.fee))).toBeOnTheScreen();
-    expect(screen.getByLabelText('Monthly payment: ' + money(quote.payment))).toBeOnTheScreen();
+    expect(screen.getByLabelText(displayText('Cash paid upfront: ' + money(quote.cashRequired) + '. Deposit plus purchase fees'))).toBeOnTheScreen();
+    expect(screen.getByLabelText(displayText('Purchase fees: ' + money(quote.fee)))).toBeOnTheScreen();
+    expect(screen.getByLabelText(displayText('Monthly payment: ' + money(quote.payment)))).toBeOnTheScreen();
     await press('Review Purchase'); expectReviewedTerms(); await press('Never mind');
     expect(screen.queryByText('Buy City Studio?')).toBeNull(); await choose('Buy Outright'); await choose('Mortgage');
     expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();

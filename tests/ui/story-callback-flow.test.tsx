@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -39,9 +40,9 @@ test('permission and actual Age Up→party→remaining year survive independent 
   await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue' }))); await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Age Up' })));
   await waitFor(() => expect(screen.getByText('Party day')).toBeOnTheScreen()); const offered = mockStore.getState().world!, pending = offered.pending; if (pending?.kind !== 'decision') throw new Error('No party choice');
   expect(offered.annual?.monthsProcessed).toBe(1); expect(offered.storyThreads[0].peerId).toBe(expected.storyThreads[0].peerId); const attend = pending.choices.find(item => item.id === 'attend')!.label, cash = accountFor(offered, offered.people[parentEdge.from]).cash;
-  sqlite.exec("CREATE TRIGGER fail_story_payment BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => fireEvent.press(screen.getByRole('button', { name: attend })));
+  sqlite.exec("CREATE TRIGGER fail_story_payment BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await act(async () => fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
   await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0)); expect(mockStore.getState().world).toEqual(offered); expect(await repository.load(initial.id)).toEqual(offered);
-  sqlite.exec('DROP TRIGGER fail_story_payment'); await act(async () => fireEvent.press(screen.getByRole('button', { name: attend })));
+  sqlite.exec('DROP TRIGGER fail_story_payment'); await act(async () => fireEvent.press(screen.getByRole('button', { name: displayText(attend) })));
   await waitFor(() => expect(screen.getByText('High score, low dignity')).toBeOnTheScreen()); const paid = mockStore.getState().world!;
   expect(accountFor(paid, paid.people[parentEdge.from]).cash).toBe(cash - paid.storyThreads[0].quote.amount); expect(paid.random).toEqual(offered.random); expect(paid.storyThreads[0].permission).toEqual(expected.storyThreads[0].permission); expect(paid.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1);
   view.unmount(); await cold(); view = render(frame()); expect(screen.getByText('High score, low dignity')).toBeOnTheScreen(); expect(mockStore.getState().world).toEqual(paid);

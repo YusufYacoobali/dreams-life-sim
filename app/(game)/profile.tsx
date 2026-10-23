@@ -1,6 +1,6 @@
 import { activeCult } from '../../src/game/systems/cultSchemas';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Redirect, router, type Href } from 'expo-router';
 import { rentalResidence } from '../../src/game/systems/rentalSchemas';
 import { useGame } from '../../src/state/useGame';
@@ -30,6 +30,7 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { GodModeShortcut } from '../../src/ui/GodModeAccess';
 import { FinanceArt } from '../../src/assets/FinanceArt';
 import { EmploymentArt } from '../../src/assets/EmploymentArt';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 function occupation(world: World): { label: string; href: Href } {
   const person = world.people[world.activePersonId];

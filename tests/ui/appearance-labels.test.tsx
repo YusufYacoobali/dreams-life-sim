@@ -64,9 +64,9 @@ test('the custom first slot describes its actual face and hair; a bald preview n
 test('the genuine employed Life header exposes its actual visible identity, role, age and cash without duplicate portrait focus or a save', async () => {
   const world = decodeWorld(JSON.stringify(graduate)), original = encodeWorld(world);
   mockStore.setState({ world }); render(frame(<Life />));
-  const label = 'My Life profile. Leonardo Ricci. Age 23. Software Developer. Bank balance $45,660.00';
+  const label = 'My Life profile. Leonardo Ricci. Age 23. Software Developer. Bank balance $45,660';
   expect(screen.getByRole('button', { name: label })).toBeOnTheScreen();
-  expect(screen.getByText('$45,660.00')).toBeOnTheScreen();
+  expect(screen.getByText('$45,660')).toBeOnTheScreen();
   expect(screen.queryByRole('image', { name: 'Leonardo Ricci' })).toBeNull();
   await press('button', label); expect(router.push).toHaveBeenCalledWith('/profile');
   expect(encodeWorld(mockStore.getState().world!)).toBe(original);

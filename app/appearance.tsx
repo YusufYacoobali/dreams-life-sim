@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, Text, View, useWindowDimensions } from 'react-native';
+import { Pressable, View, useWindowDimensions } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCreationDraft } from '../src/state/creationDraft';
@@ -10,6 +10,7 @@ import { useColors } from '../src/ui/theme';
 import { FilterTabs } from '../src/ui/FilterTabs';
 import { avatarLabel, hairColorLabels, skinToneLabel } from '../src/ui/appearanceLabels';
 import { useFeedbackPress } from '../src/ui/feedback';
+import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 const tabs = ['Avatars', 'Skin Tone', 'Hair Style', 'Hair Color', 'Clothing'] as const;
 const appearanceTabs = tabs.map(id => ({ id, label: id }));
@@ -27,14 +28,14 @@ export default function Appearance() {
   const presets = avatarPresets.map(preset => preset.identity === (appearance.identity ?? 0) ? appearance : preset), cell = Math.min(88, Math.floor((width - 68) / 4));
   return <Page bottomSafeArea footer={<Button label="Continue" onPress={() => router.back()} />}><Header title="Choose Appearance" onBack={() => router.back()} /><CreationProgress step={2} />
     <FilterTabs values={appearanceTabs} selected={tab} onSelect={next => { tap(() => setTab(next)); }} />
-    {tab === 'Avatars' ? <><View accessibilityRole="radiogroup" accessibilityLabel="Avatar" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>{presets.map((preset, index) => { const checked = Object.keys(preset).every(key => preset[key as keyof typeof preset] === appearance[key as keyof typeof preset]); return <Pressable key={index} accessibilityRole="radio" accessibilityLabel={avatarLabel(preset, index)} accessibilityState={{ checked }} onPress={() => tap(() => edit(preset))} style={{ width: cell, height: cell + 5, borderRadius: 12, borderWidth: 2, borderColor: checked ? c.blue : 'transparent', backgroundColor: c.inset, alignItems: 'center', justifyContent: 'center' }}><Portrait decorative name={'Avatar ' + (index + 1)} appearance={preset} age={25} size={cell - 6} />{checked && <SelectionMark />}</Pressable>; })}</View></> : <>
+    {tab === 'Avatars' ? <><View accessibilityRole="radiogroup" accessibilityLabel="Avatar" style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>{presets.map((preset, index) => { const checked = Object.keys(preset).every(key => preset[key as keyof typeof preset] === appearance[key as keyof typeof preset]); return <Pressable key={index} accessibilityRole="radio" accessibilityLabel={displayText(avatarLabel(preset, index))} accessibilityState={{ checked }} onPress={() => tap(() => edit(preset))} style={{ width: cell, height: cell + 5, borderRadius: 12, borderWidth: 2, borderColor: checked ? c.blue : 'transparent', backgroundColor: c.inset, alignItems: 'center', justifyContent: 'center' }}><Portrait decorative name={'Avatar ' + (index + 1)} appearance={preset} age={25} size={cell - 6} />{checked && <SelectionMark />}</Pressable>; })}</View></> : <>
       <View style={{ alignItems: 'center' }}><Portrait name="Your adult appearance" appearance={appearance} age={25} size={tab === 'Clothing' ? 184 : 140} /></View>
-      <View accessibilityRole="radiogroup" accessibilityLabel={tab} style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
+      <View accessibilityRole="radiogroup" accessibilityLabel={displayText(tab)} style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
         {tab === 'Hair Style' || tab === 'Clothing' ? (tab === 'Hair Style' ? hairLabels : outfitLabels).map((label, index) => {
           const change = tab === 'Hair Style' ? { hair: index } : { outfit: index };
           const selected = (tab === 'Hair Style' ? appearance.hair : appearance.outfit ?? appearance.identity ?? 0) === index;
-          return <Pressable key={label} accessibilityRole="radio" accessibilityLabel={label} accessibilityState={{ checked: selected }} onPress={() => tap(() => edit(change))} style={{ width: cell, minHeight: cell + 42, alignItems: 'center', paddingVertical: 6, borderRadius: 12, borderWidth: 2, borderColor: selected ? c.blue : 'transparent', backgroundColor: c.inset }}><Portrait decorative name={label} appearance={{ ...appearance, ...change }} age={25} size={cell - 8} /><Text style={{ color: c.ink, fontSize: 11, textAlign: 'center', marginTop: 5 }}>{label}</Text></Pressable>;
-        }) : (tab === 'Skin Tone' ? skinTones : hairColors).map((tone, index) => { const selected = (tab === 'Skin Tone' ? appearance.skin : appearance.hairColor) === index, label = tab === 'Skin Tone' ? skinToneLabel(index) : hairColorLabels[index]; return <Pressable key={tone} accessibilityRole="radio" accessibilityLabel={label} accessibilityState={{ checked: selected }} onPress={() => tap(() => edit(tab === 'Skin Tone' ? { skin: index } : { hairColor: index }))} style={{ width: 72, height: 72, padding: 6, borderRadius: 36, borderWidth: 3, borderColor: selected ? c.blue : c.line }}><View style={{ flex: 1, backgroundColor: tone, borderRadius: 30 }} />{selected && <SelectionMark />}</Pressable>; })}
+          return <Pressable key={label} accessibilityRole="radio" accessibilityLabel={displayText(label)} accessibilityState={{ checked: selected }} onPress={() => tap(() => edit(change))} style={{ width: cell, minHeight: cell + 42, alignItems: 'center', paddingVertical: 6, borderRadius: 12, borderWidth: 2, borderColor: selected ? c.blue : 'transparent', backgroundColor: c.inset }}><Portrait decorative name={label} appearance={{ ...appearance, ...change }} age={25} size={cell - 8} /><Text style={{ color: c.ink, fontSize: 11, textAlign: 'center', marginTop: 5 }}>{label}</Text></Pressable>;
+        }) : (tab === 'Skin Tone' ? skinTones : hairColors).map((tone, index) => { const selected = (tab === 'Skin Tone' ? appearance.skin : appearance.hairColor) === index, label = tab === 'Skin Tone' ? skinToneLabel(index) : hairColorLabels[index]; return <Pressable key={tone} accessibilityRole="radio" accessibilityLabel={displayText(label)} accessibilityState={{ checked: selected }} onPress={() => tap(() => edit(tab === 'Skin Tone' ? { skin: index } : { hairColor: index }))} style={{ width: 72, height: 72, padding: 6, borderRadius: 36, borderWidth: 3, borderColor: selected ? c.blue : c.line }}><View style={{ flex: 1, backgroundColor: tone, borderRadius: 30 }} />{selected && <SelectionMark />}</Pressable>; })}
       </View>
     </>}
     <Body muted centered>Your appearance stays with you as you grow. Identity and gender are separate choices.</Body>

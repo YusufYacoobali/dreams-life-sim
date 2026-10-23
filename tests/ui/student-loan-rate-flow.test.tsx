@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -119,11 +120,11 @@ async function requestUniversityPlace(context: Context, field: string) {
 async function admission(program: 'university' | 'trade' | 'graduate', field: string, rate: number, existing = true) {
   if (program === 'university') await press('Review Offered Place');
   else { await press(program === 'graduate' ? /^Professional Study\./ : /^Trade School\./); await choose(field); await press('Next'); }
-  expect(screen.getByRole('radio', { name: 'Student loan · ' + rate + '% annual interest' })).toBeOnTheScreen();
+  expect(screen.getByRole('radio', { name: displayText('Student loan · ' + rate + '% annual interest') })).toBeOnTheScreen();
   if (existing) expect(screen.getByText(program === 'university' ? /joins your existing EUR student loan/ : /added to your existing EUR student loan at 2%/)).toBeOnTheScreen();
   else expect(screen.queryByText(/(?:added to|joins) your existing/)).toBeNull();
   await choose(/Student loan/); await press(program === 'university' ? 'Review Enrolment' : 'Review Application');
-  expect(screen.getByText('Student loan annual interest')).toBeOnTheScreen(); expect(screen.getByText(rate + '%')).toBeOnTheScreen();
+  expect(screen.getByText('Student loan annual interest')).toBeOnTheScreen(); expect(screen.getByText(displayText(rate + '%'))).toBeOnTheScreen();
 }
 
 async function retryEducation(context: Context, command: GameCommand, confirm: string, checkDraft: () => void) {
@@ -200,7 +201,7 @@ test.each(['DE', 'GB'] as const)('Bank personal borrowing in %s reviews the exac
   try {
     const rate = country === 'DE' ? 6.5 : 8, oldEUR = debt(initial, 'personal', 'EUR'), beforeRows = context.rows(), before = encodeWorld(world()), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const view = render(frame(true)); await act(async () => fireEvent.changeText(screen.getByLabelText('Amount in ' + accountFor(initial).currency), '100'));
-    await press('Review Personal Loan'); expect(screen.getByText('Annual interest')).toBeOnTheScreen(); expect(screen.getByText(rate + '%')).toBeOnTheScreen(); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
+    await press('Review Personal Loan'); expect(screen.getByText('Annual interest')).toBeOnTheScreen(); expect(screen.getByText(displayText(rate + '%'))).toBeOnTheScreen(); await press('Never mind'); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled();
     await press('Review Personal Loan'); const predicted = resolveCommand(initial, { type: 'borrow', amount: 10000n }, true); await press('Accept Loan'); expect(world()).toEqual(predicted); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     expect(debt(world(), 'personal')).toMatchObject({ interestBps: rate * 100, principal: (country === 'DE' ? oldEUR.principal : 0n) + 10000n }); if (country === 'GB') expect(debt(world(), 'personal', 'EUR')).toEqual(oldEUR);
     const savedRows = context.rows(); view.unmount(); await coldAndAcknowledge(context, predicted, savedRows, true);

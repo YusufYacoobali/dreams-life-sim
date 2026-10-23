@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Body, Heading } from './components';
 import { useColors } from './theme';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 /** Presentation used by the profile, creator and small-business screens. */
 export function SocialBusinessIntro({ art, title, body, eyebrow }: { art: React.ReactNode; title: string; body: string; eyebrow?: string }) {
@@ -14,7 +15,7 @@ export function SocialBusinessIntro({ art, title, body, eyebrow }: { art: React.
 export function SocialBusinessFacts({ items }: { items: readonly { label: string; value: string; note?: string }[] }) {
   const c = useColors(), { width, fontScale } = useWindowDimensions();
   const stacked = width < 340 || fontScale >= 1.3;
-  return <View style={styles.facts}>{items.map(item => <View key={item.label} accessible accessibilityLabel={item.label + ': ' + item.value + (item.note ? '. ' + item.note : '')} style={[styles.fact, { backgroundColor: c.inset }, stacked && { flexBasis: '100%' }]}>
+  return <View style={styles.facts}>{items.map(item => <View key={item.label} accessible accessibilityLabel={displayText(item.label + ': ' + item.value + (item.note ? '. ' + item.note : ''))} style={[styles.fact, { backgroundColor: c.inset }, stacked && { flexBasis: '100%' }]}>
     <Body muted>{item.label}</Body><Text style={{ color: c.ink, fontSize: 19, fontWeight: '700' }}>{item.value}</Text>{item.note && <Body muted>{item.note}</Body>}
   </View>)}</View>;
 }
@@ -24,7 +25,7 @@ export function SocialBusinessChoice({ title, subtitle, selected, onPress, disab
 }) {
   const c = useColors(), unavailable = disabled || !!disabledReason;
   return <Pressable accessibilityRole="radio" accessibilityState={{ checked: selected, disabled: unavailable }}
-    accessibilityLabel={[title, subtitle, selected ? 'Selected' : undefined, disabledReason].filter(Boolean).join('. ')}
+    accessibilityLabel={displayText([title, subtitle, selected ? 'Selected' : undefined, disabledReason].filter(Boolean).join('. '))}
     disabled={unavailable} onPress={() => { if (!selected) onPress(); }}
     style={({ pressed }) => [styles.choice, { borderColor: selected ? c.actionBlue : c.line, backgroundColor: pressed ? c.selected : selected ? c.inset : 'transparent', opacity: unavailable ? 0.55 : 1 }]}>
     {icon && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.art}>{icon}</View>}

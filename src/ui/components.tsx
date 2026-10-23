@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   type AccessibilityRole, type AccessibilityState,
   ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, ScrollView,
-  StyleProp, StyleSheet, Text, useWindowDimensions, View, ViewStyle,
+  StyleProp, StyleSheet, useWindowDimensions, View, ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { radii, spacing, ThemedStatusBar, useColors } from './theme';
@@ -11,6 +11,7 @@ import { useDelayedBusy } from './useDelayedBusy';
 import { useFeedbackPress } from './feedback';
 import { useGame } from '../state/useGame';
 import { hasLegacyAutomaticAppearance, legacyNPCDefaultGender } from '../game/appearance';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 export function Page({ children, scroll = true, bottomSafeArea = false, footer, fillBody = false }: React.PropsWithChildren<{ scroll?: boolean; bottomSafeArea?: boolean; footer?: React.ReactNode; fillBody?: boolean }>) {
   const c = useColors();
@@ -66,7 +67,7 @@ export function Button({
   const press = useFeedbackPress(() => { if (busy !== undefined) setSubmitted(true); return onPress(); }, disabled || !!busy, true);
   return (
     <Pressable
-      accessibilityRole={accessibilityRole} accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityRole={accessibilityRole} accessibilityLabel={displayText(accessibilityLabel ?? label)}
       accessibilityState={{ ...accessibilityState, disabled: disabled || !!busy, busy: saving }}
       disabled={disabled || busy} onPress={press}
       style={({ pressed }) => [styles.button, { backgroundColor: pressed ? pressedBackground : background, opacity: disabled || busy ? 0.5 : 1 }]}
@@ -107,7 +108,7 @@ export function ActionRow({
   const stackValue = !!value && (fontScale >= 1.2 || width < 360);
   return (
     <Pressable
-      accessibilityRole={accessibilityRole} accessibilityLabel={[title, subtitle, value, disabledReason].filter(Boolean).join('. ')}
+      accessibilityRole={accessibilityRole} accessibilityLabel={displayText([title, subtitle, value, disabledReason].filter(Boolean).join('. '))}
       accessibilityState={{ ...accessibilityState, disabled: disabled || !!disabledReason }} disabled={disabled || !!disabledReason} onPress={press}
       style={({ pressed }) => [styles.row, { borderBottomColor: c.line, backgroundColor: pressed || accessibilityState?.checked ? c.selected : 'transparent', opacity: disabled || disabledReason ? 0.55 : 1 }]}
     >
@@ -129,7 +130,7 @@ export const statTrackHeight = 14;
 export function StatTrack({ value, color, label, decorative = false }: { value: number; color: string; label?: string; decorative?: boolean }) {
   const c = useColors();
   const bounded = Number.isFinite(value) ? Math.round(Math.max(0,Math.min(100,value))) : 0;
-  return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'progressbar'} accessibilityLabel={label}
+  return <View accessible={!decorative} accessibilityRole={decorative ? undefined : 'progressbar'} accessibilityLabel={displayText(label)}
     accessibilityValue={decorative ? undefined : {min:0,max:100,now:bounded}}
     accessibilityElementsHidden={decorative} importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'}
     style={{width:'100%',height:statTrackHeight,borderRadius:statTrackHeight/2,overflow:'hidden',backgroundColor:c.track}}>
@@ -148,7 +149,7 @@ export function StatBar({ label, value, color, icon }: { label: string; value: n
   const percentage = <Text numberOfLines={1} style={{ minWidth: valueWidth, flexShrink: 0, textAlign: 'right', color: c.muted, fontSize: 13 }}>{bounded}%</Text>;
   const track = <View style={[styles.track, stacked && styles.trackStacked]}><StatTrack value={bounded} color={color} decorative /></View>;
   return (
-    <View accessible accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: bounded }}
+    <View accessible accessibilityRole="progressbar" accessibilityLabel={displayText(label)} accessibilityValue={{ min: 0, max: 100, now: bounded }}
       onLayout={({ nativeEvent }) => { const next = Math.round(nativeEvent.layout.width); setAvailableWidth(current => current === next ? current : next); }}
       style={[styles.stat, stacked && styles.statStacked]}>
       {stacked ? <View style={styles.statSummary}>

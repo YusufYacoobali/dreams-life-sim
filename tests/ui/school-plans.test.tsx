@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -29,7 +30,7 @@ test('School shows a scheduled project and actual paid outing from a genuine col
   expect(screen.getByText(project.city + ', United States · March 2008')).toBeOnTheScreen();
   expect(screen.getByText('Scheduled')).toBeOnTheScreen(); expect(screen.getByText('Attended')).toBeOnTheScreen();
   const amount = formatMoney({ minor: outing.quote.amount, currency: outing.quote.currency }, countries[outing.country].locale);
-  expect(screen.getByText('Paid by ' + fullName(world.people[outing.parentId!]) + ' · ' + amount)).toBeOnTheScreen();
+  expect(screen.getByText(displayText('Paid by ' + fullName(world.people[outing.parentId!]) + ' · ' + amount))).toBeOnTheScreen();
   view.rerender(frame()); expect(encodeWorld(mockStore.getState().world!)).toBe(before); expect(await repository.load(world.id)).toEqual(world);
   view.unmount(); sqlite.close();
 });

@@ -1,6 +1,6 @@
 import { personalBorrowReason,personalLoanCapacity } from '../../src/game/systems/credit';
 import React, { useEffect, useRef, useState } from 'react';
-import { Keyboard, Text, TextInput } from 'react-native';
+import { Keyboard, TextInput } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { Currency, currencyDigits, formatMoney, parseMoney } from '../../src/game/money';
@@ -16,6 +16,8 @@ import { useColors } from '../../src/ui/theme';
 type Quote = FinanceCommand;
 import { isConfined } from '../../src/game/systems/legalSchemas';
 import { FinanceArt } from '../../src/assets/FinanceArt';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
+
 export default function Bank() {
   const identity = useGame(state => state.world ? state.world.id + ':' + state.world.activePersonId : 'none');
   return <BankDetails key={identity} />;
@@ -38,7 +40,7 @@ function BankDetails() {
   if (repaymentDebt) return <DebtRepayment key={JSON.stringify([world.id, person.id, repaymentDebt.id])} debtId={repaymentDebt.id} onClose={() => setRepaying(null)} />;
   return <Page><Header title="Bank & Loans" onBack={() => router.back()} /><Card><ActionRow disabled={busy} title="Currency Account" value={account.currency} onPress={() => { Keyboard.dismiss(); setChoosing('source'); }} /><Body muted>Available balance</Body><Heading size={30}>{money(availableCash(account))}</Heading>{account.lockedCash > 0n && <Body>Inheritance held in trust: {money(account.lockedCash)}. It becomes available at age {rule.adultAge}; necessary inherited-property costs may use it.</Body>}<Body>Cash less debt: {money(cashNetWorth(world, account.currency))}</Body></Card>
     {(message || error) && !quote && !choosing && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{message ?? error}</Text>}
-    <Card><Heading size={18}>Personal loans</Heading><Body>Loan or exchange amount ({account.currency})</Body><TextInput accessibilityLabel={'Amount in ' + account.currency} editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { setInput(value); setMessage(null); }} keyboardType="decimal-pad" placeholder={'Amount in ' + account.currency} placeholderTextColor={c.muted} style={{ color: c.ink, fontSize: 19, padding: 12, borderRadius: 10, backgroundColor: c.inset }} />
+    <Card><Heading size={18}>Personal loans</Heading><Body>Loan or exchange amount ({account.currency})</Body><TextInput accessibilityLabel={displayText('Amount in ' + account.currency)} editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { setInput(value); setMessage(null); }} keyboardType="decimal-pad" placeholder={'Amount in ' + account.currency} placeholderTextColor={c.muted} style={{ color: c.ink, fontSize: 19, padding: 12, borderRadius: 10, backgroundColor: c.inset }} />
       <Button label="Review Personal Loan" disabled={isConfined(world) || ageOn(person, world.date) < rule.adultAge ||person.legal.wanted||credit.available<=0n || busy || account.currency !== home.currency} onPress={() => { const value = amount(); if(value){const reason=personalBorrowReason(world,value);if(reason)setMessage(reason);else {Keyboard.dismiss();setQuote({type:'borrow',amount:value});}} }} />
       <Body muted>{account.currency !== home.currency ? 'Personal loans are paid in your home currency.' : ageOn(person,world.date)<rule.adultAge?'Personal borrowing is available from age '+rule.adultAge+'.':person.legal.wanted||isConfined(world)?'Resolve custody or pursuit before new borrowing.':!credit.annual?'You need outside employment, an earned pension or established regular income.':'The total personal-loan limit is half your qualifying annual income.'}</Body>
       <Body>Qualifying annual income: {formatMoney({minor:credit.annual,currency:home.currency})}</Body><Body>Available personal credit: {formatMoney({minor:credit.available,currency:home.currency})}</Body>{credit.parts.map(part=><Body key={part.id} muted>{part.label}: {formatMoney({minor:part.annual,currency:home.currency})}</Body>)}<Body muted>Regular income needs three paid months in the last twelve, including one in the last three. Capital, gifts and asset sales do not qualify. Income from your company is capped by its operating earnings.</Body>
@@ -81,7 +83,7 @@ function DebtRepayment({ debtId, onClose }: { debtId: string; onClose: () => voi
   </>}>
     <Header title={'Repay ' + debt.kind + ' debt'} onBack={close} backDisabled={busy} />
     <Card><Heading size={20}>Outstanding principal</Heading><Heading size={28}>{money(debt.principal)}</Heading><Body>{debt.interestBps / 100}% annual interest</Body><Body>Available to repay: {money(availableCash(account))}</Body>{account.lockedCash > 0n && <Body muted>Held in trust: {money(account.lockedCash)}</Body>}</Card>
-    <Card><Heading size={18}>Repayment amount ({debt.currency})</Heading><TextInput accessibilityLabel={'Repayment amount in ' + debt.currency} autoFocus editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { if (mounted.current && !busy && !submitting.current) { setInput(value); setMessage(null); } }} keyboardType="decimal-pad" returnKeyType="done" onSubmitEditing={Keyboard.dismiss} placeholder={'Amount in ' + debt.currency} placeholderTextColor={c.muted} style={{ color: c.ink, fontSize: 19, padding: 12, minHeight: 48, borderRadius: 10, backgroundColor: c.inset }} /><Body muted>Enter an amount, then review your repayment.</Body></Card>
+    <Card><Heading size={18}>Repayment amount ({debt.currency})</Heading><TextInput accessibilityLabel={displayText('Repayment amount in ' + debt.currency)} autoFocus editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { if (mounted.current && !busy && !submitting.current) { setInput(value); setMessage(null); } }} keyboardType="decimal-pad" returnKeyType="done" onSubmitEditing={Keyboard.dismiss} placeholder={'Amount in ' + debt.currency} placeholderTextColor={c.muted} style={{ color: c.ink, fontSize: 19, padding: 12, minHeight: 48, borderRadius: 10, backgroundColor: c.inset }} /><Body muted>Enter an amount, then review your repayment.</Body></Card>
     <EventModal event={event} busy={busy} error={quote ? error : undefined} onCancel={() => { if (mounted.current && !busy && !submitting.current && currentQuote.current === quote) { currentQuote.current = null; setQuote(null); } }} onChoose={async () => {
       if (!mounted.current || busy || submitting.current || !quote || currentQuote.current !== quote) return;
       submitting.current = true;

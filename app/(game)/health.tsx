@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ActionRow, Body, Card, Header, Heading, Page, StatBar } from '../../src/ui/components';
@@ -13,6 +13,7 @@ import { hospitalized, medicalQuote } from '../../src/game/systems/health';
 import { isConfined } from '../../src/game/systems/legalSchemas';
 import { HealthReviewError, healthReviewReason, useHealthReview } from '../../src/ui/HealthReview';
 import type { World } from '../../src/game/model';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function Health() {
   const world = useGame(s => s.world)!;

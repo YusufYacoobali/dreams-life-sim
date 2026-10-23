@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { skillIds, skillContent, SkillId } from '../../src/game/content/careers';
@@ -10,6 +10,8 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '.
 import { CareerArt } from '../../src/assets/CareerArt';
 import { useColors } from '../../src/ui/theme';
 import { useCareerReview } from '../../src/ui/CareerReview';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function CareerTraining() {
     const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), person = world.people[world.activePersonId], c = useColors(), review = useCareerReview(), [skill, setSkill] = useState<SkillId>('acting'), [mode, setMode] = useState<'self' | 'coached'>('self'), reason = trainingReason(world, skill), cost = mode === 'coached' ? coachingCost(world) : 0n, money = formatMoney({ minor: cost, currency: countries[person.country].currency });
     return <Page footer={!review.reviewing && !world.pending ? <>

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, useWindowDimensions, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import type { AssetOffer } from '../game/content/assets';
 import { CatalogArt } from '../assets/CatalogArt';
 import { assetFeatureLabel, assetFeatures, type AssetFeature } from './assetFeatureData';
 import { useFeedbackPress } from './feedback';
 import { useColors } from './theme';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 const icons: Record<AssetFeature['id'], React.ComponentProps<typeof Ionicons>['name']> = {
   beds: 'bed-outline', baths: 'water-outline', area: 'resize-outline',
@@ -21,7 +22,7 @@ export function AssetFeatures({ offer, condition, decorative = false }: { offer?
   const vehicle = offer.kind === 'vehicle', stacked = fontScale >= (vehicle ? 1.6 : 2);
   const propertyColumns = fontScale >= 1.4 ? 2 : 3;
   return <View testID="asset-feature-row" accessibilityElementsHidden={decorative} importantForAccessibility={decorative ? 'no-hide-descendants' : 'auto'} style={{ flexDirection: stacked ? 'column' : 'row', flexWrap: vehicle ? 'nowrap' : 'wrap', gap: 6, alignItems: 'stretch' }}>
-    {features.map(feature => <View key={feature.id} testID={'asset-feature-' + feature.id} accessible={!decorative} accessibilityLabel={assetFeatureLabel([feature])}
+    {features.map(feature => <View key={feature.id} testID={'asset-feature-' + feature.id} accessible={!decorative} accessibilityLabel={displayText(assetFeatureLabel([feature]))}
       style={{ flex: vehicle && !stacked ? 1 : undefined, flexBasis: vehicle ? undefined : stacked ? '100%' : propertyColumns === 2 ? '46%' : '30%', flexGrow: vehicle ? undefined : 1, minWidth: 0, borderRadius: 8, paddingVertical: 9, paddingHorizontal: vehicle ? 5 : 8, gap: 3, backgroundColor: c.inset, alignItems: 'center', justifyContent: 'center' }}>
       <View style={{ flexDirection: vehicle ? 'column' : 'row', alignItems: 'center', justifyContent: 'center', flexWrap: vehicle ? 'nowrap' : 'wrap', gap: 5, maxWidth: '100%' }}>
         <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icons[feature.id]} size={16} color={c.muted} /></View>
@@ -36,7 +37,7 @@ export function AssetFeatures({ offer, condition, decorative = false }: { offer?
 /** Artwork, prices and specifications remain one accessible catalogue entry. */
 export function AssetListing({ offer, value, secondaryValue, subtitle = offer.description, onPress }: { offer: AssetOffer; value: string; secondaryValue?: string; subtitle?: string; onPress: () => void }) {
   const c = useColors(), press = useFeedbackPress(onPress);
-  return <Pressable accessibilityRole="button" accessibilityLabel={[offer.name, subtitle, value, secondaryValue, assetFeatureLabel(assetFeatures(offer))].filter(Boolean).join('. ')} onPress={press}
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText([offer.name, subtitle, value, secondaryValue, assetFeatureLabel(assetFeatures(offer))].filter(Boolean).join('. '))} onPress={press}
     style={({ pressed }) => ({ paddingVertical: 14, gap: 10, borderBottomWidth: 1, borderBottomColor: c.line, backgroundColor: pressed ? c.selected : 'transparent' })}>
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
       <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><CatalogArt id={offer.id} size={56} /></View>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useColors } from './theme';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 export const tabs = [
   { id: 'life', label: 'Life' },
@@ -43,7 +44,7 @@ export function BottomNavigation({
         {tabs.map(tab => {
           const color = activeTab === tab.id ? c.link : c.muted;
           return <Pressable
-            key={tab.id} accessibilityRole="tab" accessibilityLabel={tab.label}
+            key={tab.id} accessibilityRole="tab" accessibilityLabel={displayText(tab.label)}
             accessibilityState={{ selected: activeTab === tab.id }}
             onPress={() => { if (activeTab !== tab.id) onSelectTab(tab.id); else onReselectTab?.(tab.id); }}
             style={[styles.tab, { width: columns === 4 ? '25%' : columns === 2 ? '50%' : '100%' }, columns === 1 && styles.tabWide]}

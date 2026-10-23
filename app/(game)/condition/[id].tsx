@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { conditions } from '../../../src/game/content/health';
@@ -14,6 +14,7 @@ import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
 import { useColors } from '../../../src/ui/theme';
 import type { GameDate } from '../../../src/game/calendar';
 import { fullName } from '../../../src/game/model';
+import { DisplayText as Text, displayText } from '../../../src/ui/DisplayText';
 
 const dateLabel = (date: GameDate) => date.year + '-' + String(date.month).padStart(2, '0') + '-' + String(date.day).padStart(2, '0');
 const careLabels = { support: 'Supportive care', rehabilitation: 'Rehabilitation', medication: 'Medication', therapy: 'Therapy', specialist: 'Specialist care', rehab: 'Recovery support' } as const;
@@ -69,7 +70,7 @@ export default function ConditionDetail() {
           <Body muted>Initial payer: {fullName(quote.payer)}</Body>
         </View>
         <Body muted>Pay monthly while care continues. Unpaid fees pause treatment; recovery takes time.</Body>
-        <Button label="Review Treatment" disabled={busy || !!startReason} accessibilityLabel={['Review Treatment', startReason].filter(Boolean).join('. ')} onPress={() => confirm(true)} />
+        <Button label="Review Treatment" disabled={busy || !!startReason} accessibilityLabel={displayText(['Review Treatment', startReason].filter(Boolean).join('. '))} onPress={() => confirm(true)} />
         {startReason && <Body muted>{startReason}</Body>}
       </>}
     </> : <>

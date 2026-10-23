@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { formatMoney } from '../../src/game/money';
@@ -13,6 +13,7 @@ import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { Scholarships } from '../../src/ui/Scholarships';
 import { Illustration } from '../../src/assets/Illustration';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function ScholarshipApplications() {
   const world = useGame(s => s.world)!;

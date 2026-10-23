@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -37,7 +38,7 @@ const press = async (name: string | RegExp) => { await act(async () => { fireEve
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const choose = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const edit = (name: string, value: string) => fireEvent.changeText(screen.getByLabelText(name), value);
-const money = (value: bigint, currency = accountFor(world()).currency) => formatMoney({ minor: value, currency });
+const money = (value: bigint, currency = accountFor(world()).currency) => displayText(formatMoney({ minor: value, currency }));
 const decimal = (value: bigint, currency: Currency) => { const digits = currencyDigits[currency], scale = 10n ** BigInt(digits); return (value / scale).toString() + (digits ? '.' + (value % scale).toString().padStart(digits, '0') : ''); };
 const acknowledge = (initial: World) => resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending!.id }, true);
 const apply = (initial: World, command: GameCommand) => acknowledge(resolveCommand(initial, command, true));
@@ -261,7 +262,7 @@ test('investment review uses spendable cash including the fee and keeps inherite
     edit('Trade quantity', entered); await press('Review Trade');
     expect(screen.getByRole('alert')).toHaveTextContent('Your available balance cannot cover this order and its fee.'); expect(screen.queryByText('Buy ORBIT?')).toBeNull(); expect(screen.getByLabelText('Trade quantity')).toHaveProp('value', entered);
     const affordable = quantity / 2n, affordableQuote = investmentQuote(world(), 'ORBIT', affordable); expect(affordableQuote.buyCost).toBeLessThanOrEqual(spendable);
-    edit('Trade quantity', formatQuantity(affordable, 'ORBIT')); await press('Review Trade'); expect(modal().getByText('Buy ORBIT?')).toBeOnTheScreen(); expect(modal().getByText(money(affordableQuote.buyCost))).toBeOnTheScreen(); await press('Never mind');
+    edit('Trade quantity', formatQuantity(affordable, 'ORBIT')); await press('Review Trade'); expect(modal().getByText('Buy ORBIT?')).toBeOnTheScreen(); expect(modal().getAllByText(money(affordableQuote.buyCost)).length).toBeGreaterThan(0); await press('Never mind');
     expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });

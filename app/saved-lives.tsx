@@ -11,6 +11,7 @@ import { useGame } from '../src/state/useGame';
 import { openRepository } from '../src/persistence/native';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../src/ui/components';
 import { EventModal, EventPresentation } from '../src/ui/EventModal';
+import { displayText } from '../src/ui/DisplayText';
 
 type Preview = { kind: 'import'; text: string; world: World; replace: boolean } | { kind: 'recover'; world: World };
 class SaveFileError extends Error {}
@@ -62,8 +63,8 @@ export default function SavedLives() {
     <Button label="Import a Save" onPress={() => { void importFile(); }} disabled={busy || working} />
     {lives.length === 0 && <Card><Body>No lives saved yet.</Body></Card>}
     {lives.map(life => <Card key={life.id}><Heading size={18}>{life.name}</Heading>{life.branch && <Body muted>Time Machine branch · {life.branch.name}, age {life.branch.age} in {life.branch.date.year}</Body>}
-      <Button label="View Life Summary" accessibilityLabel={'View ' + life.name + ' life summary'} tone="secondary" disabled={busy || working} onPress={() => router.push({ pathname: '/saved-life/[id]', params: { id: life.id } })} />
-      <Button label="Continue" accessibilityLabel={'Continue as ' + life.name} disabled={working} busy={busy} onPress={async () => { if (await select(life.id)) router.replace('/life'); }} />
+      <Button label="View Life Summary" accessibilityLabel={displayText('View ' + life.name + ' life summary')} tone="secondary" disabled={busy || working} onPress={() => router.push({ pathname: '/saved-life/[id]', params: { id: life.id } })} />
+      <Button label="Continue" accessibilityLabel={displayText('Continue as ' + life.name)} disabled={working} busy={busy} onPress={async () => { if (await select(life.id)) router.replace('/life'); }} />
       <ActionRow title="Export save file" subtitle="Save a copy to a folder you choose" disabled={busy || working} onPress={() => { void run(async () => {
         const folder = await Directory.pickDirectoryAsync();
         const text = await (await openRepository()).export(life.id), name = exportFileName();

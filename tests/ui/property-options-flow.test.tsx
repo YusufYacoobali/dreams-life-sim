@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
@@ -65,8 +66,8 @@ test.each(['cash','mortgage','rent'] as const)('%s is reviewed and committed fro
       await method('Mortgage');await press(/^Deposit/);await method('40%');await press('Choose');await press(/^Term/);await method('20 years');await press('Choose');
     }else if(selected==='rent')await method('Rent');
     const quote=purchaseQuote(context.initial,studio,selected==='mortgage'?'mortgage':'cash',selected==='mortgage'?4000:2000,selected==='mortgage'?240:360),rent=rentalQuote(context.initial,studio).monthlyRent;
-    if(selected==='rent'){expect(screen.getByLabelText('Monthly rent: '+money(rent))).toBeOnTheScreen();expect(screen.queryByText('Purchase fees')).toBeNull();}
-    else{expect(screen.getByLabelText('Purchase fees: '+money(quote.fee))).toBeOnTheScreen();expect(screen.getByLabelText('Cash paid upfront: '+money(quote.cashRequired)+'. '+(selected==='mortgage'?'Deposit plus purchase fees':'Price plus purchase fees'))).toBeOnTheScreen();if(selected==='mortgage')expect(screen.getByLabelText('Monthly payment: '+money(quote.payment))).toBeOnTheScreen();}
+    if(selected==='rent'){expect(screen.getByLabelText(displayText('Monthly rent: '+money(rent)))).toBeOnTheScreen();expect(screen.queryByText('Purchase fees')).toBeNull();}
+    else{expect(screen.getByLabelText(displayText('Purchase fees: '+money(quote.fee)))).toBeOnTheScreen();expect(screen.getByLabelText(displayText('Cash paid upfront: '+money(quote.cashRequired)+'. '+(selected==='mortgage'?'Deposit plus purchase fees':'Price plus purchase fees')))).toBeOnTheScreen();if(selected==='mortgage')expect(screen.getByLabelText(displayText('Monthly payment: '+money(quote.payment)))).toBeOnTheScreen();}
     expect(mockPush).not.toHaveBeenCalled();expect(encodeWorld(world())).toBe(original);
     await press(selected==='rent'?'Review Lease':'Review Purchase');await press('Never mind');expect(encodeWorld(world())).toBe(original);expect(context.rows()).toEqual(beforeRows);
     await press(selected==='rent'?'Review Lease':'Review Purchase');const confirm=selected==='rent'?'Sign Lease':'Confirm Purchase';
@@ -83,7 +84,7 @@ test.each(['cash','mortgage','rent'] as const)('%s is reviewed and committed fro
 
 test('switching methods only updates the quote, and a busy/stale confirmation cannot buy twice or act after a life switch',async()=>{
   const context=await setup(),view=render(frame());try{
-    const original=encodeWorld(world()),quote=purchaseQuote(world(),studio,'cash');await method('Mortgage');await method('Rent');await method('Buy Outright');expect(screen.getByLabelText('Cash paid upfront: '+money(quote.cashRequired)+'. Price plus purchase fees')).toBeOnTheScreen();expect(encodeWorld(world())).toBe(original);
+    const original=encodeWorld(world()),quote=purchaseQuote(world(),studio,'cash');await method('Mortgage');await method('Rent');await method('Buy Outright');expect(screen.getByLabelText(displayText('Cash paid upfront: '+money(quote.cashRequired)+'. Price plus purchase fees'))).toBeOnTheScreen();expect(encodeWorld(world())).toBe(original);
     await press('Review Purchase');const stale=screen.UNSAFE_getAllByType(EventModal).find(item=>item.props.event?.kind==='confirmation')!.props.onChoose,release=context.pauseNext();await act(async()=>{fireEvent.press(screen.getByRole('button',{name:'Confirm Purchase'}));stale('confirm');fireEvent.press(screen.getByRole('button',{name:'Never mind'}));});expect(mockStore.getState().busy).toBe(true);expect(world().assets).toHaveLength(0);await act(async()=>{release();});expect(world().assets).toHaveLength(1);
     await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});const before=encodeWorld(world());await act(async()=>{await stale('confirm');});expect(encodeWorld(world())).toBe(before);expect(world().assets).toHaveLength(0);
   }finally{view.unmount();context.close();}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn } from '../../src/game/model';
@@ -10,6 +10,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../../src/
 import { genderLabel } from '../../src/ui/FamilyPreferences';
 import { FamilyArt } from '../../src/assets/FamilyArt';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function MeetPeople() {
   const world = useGame(s => s.world)!; const dispatch = useGame(s => s.dispatch); const busy = useGame(s => s.busy); const error = useGame(s => s.error);

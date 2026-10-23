@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -117,7 +118,7 @@ test('an actual Japan-to-France move reinitialises this actor’s foreign destin
     await press('Review Move'); await press('Move Household'); expect(world()).toEqual(moved); await press('Continue'); const french = ack(moved); expect(world()).toEqual(french);
     expect(french.people[french.activePersonId]).toMatchObject({ country: 'FR', city: 'Paris', nationality: 'US' }); expect(french.relocations[0]).toEqual(oldMove);
     await press('Plan Another Move'); selectedLondon(); expect(screen.getByRole('button', { name: 'Review Application' })).toBeEnabled();
-    const beforeRows = db.rows(), before = encodeWorld(french), fee = relocationFee(french), money = formatMoney({ minor: fee, currency: 'EUR' }); expect(accountFor(french).currency).toBe('EUR');
+    const beforeRows = db.rows(), before = encodeWorld(french), fee = relocationFee(french), money = displayText(formatMoney({ minor: fee, currency: 'EUR' })); expect(accountFor(french).currency).toBe('EUR');
     await press('Review Application'); expect(modal().getByText('Apply to London?')).toBeOnTheScreen(); expect(modal().getByText(money)).toBeOnTheScreen(); await press('Never mind'); selectedLondon(); expect(db.rows()).toEqual(beforeRows); expect(encodeWorld(world())).toBe(before);
     await press('Review Application'); db.sqlite.exec("CREATE TRIGGER fail_country_application BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Submit Application');
     await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByRole('alert')).toHaveLength(1); expect(modal().getByText('Apply to London?')).toBeOnTheScreen(); expect(modal().getByText(money)).toBeOnTheScreen(); expect(world()).toEqual(french); expect(db.rows()).toEqual(beforeRows);

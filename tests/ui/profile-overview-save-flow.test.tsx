@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Image, Switch } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
@@ -111,7 +112,7 @@ test('the adult overview shows the actual degree, employer, spouse, child, reput
     const initial = world(), player = initial.people[initial.activePersonId], partner = otherPerson(initial, partnerRelation(initial)!), before = encodeWorld(initial), rows = context.rows(); const view = render(frame());
     expect(screen.getByRole('button', { name: 'Education. Latest qualification · computing. Degree' })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Occupation. New York Technology. Software Developer' })).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Marital Status. ' + fullName(partner) + '. Married' })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Children. ' + childrenOf(initial).length })).toBeOnTheScreen();
-    expect(screen.getByRole('button', { name: 'Net Worth. ' + formatMoney(netWorth(initial), countries[player.country].locale) })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: new RegExp('^Reputation\\. Private Life · Public image ' + player.publicLife.image + '%\\. Respect ' + player.stats.respect + '%$') })).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: displayText('Net Worth. ' + formatMoney(netWorth(initial), countries[player.country].locale)) })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: new RegExp('^Reputation\\. Private Life · Public image ' + player.publicLife.image + '%\\. Respect ' + player.stats.respect + '%$') })).toBeOnTheScreen();
     for (const [name, href] of [[/^Education\./, '/education'], [/^Occupation\./, '/work'], [/^Residence\./, '/household'], [/^Children\./, '/family'], [/^Reputation\./, '/fame']] as const) { await press(name); expect(router.push).toHaveBeenLastCalledWith(href); }
     await press(/^Marital Status\./); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/person/[id]', params: { id: partner.id } }); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(rows); context.original(); view.unmount();
   } finally { context.close(); }

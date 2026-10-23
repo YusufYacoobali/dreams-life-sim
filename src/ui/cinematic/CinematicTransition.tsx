@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { AppState, BackHandler, Modal, Platform, StyleSheet, Text, View } from 'react-native';
+import { AppState, BackHandler, Modal, Platform, StyleSheet, View } from 'react-native';
 import { FullWindowOverlay } from 'react-native-screens';
 import { StatusBar } from 'expo-status-bar';
 import { router, usePathname } from 'expo-router';
@@ -12,6 +12,7 @@ import { CinematicInk } from './CinematicInk';
 import { COVER_TIME, DURATION, FPS, NAVY, type CinematicKind } from './cinematicTiming';
 import { isNewDeath } from './committedDeath';
 import { CinematicContext, type PlayCinematic } from './CinematicContext';
+import { DisplayText as Text } from '../DisplayText';
 
 type Request = { id: number; kind: CinematicKind; destination?: string; navigate?: () => void; covered: boolean };
 let welcomeClaimed = false;

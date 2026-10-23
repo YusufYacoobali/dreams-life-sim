@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { countries } from '../../src/game/countries';
@@ -12,6 +12,8 @@ import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { PetsLeisureArt } from '../../src/assets/PetsLeisureArt';
 import { CareerArt } from '../../src/assets/CareerArt';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function Entertainment() {
   const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), person = world.people[world.activePersonId], payer = leisurePayer(world), c = useColors();
   const [review, setReview] = useState<{ command: LeisureCommand; event: EventPresentation } | null>(null), [historyLimit, setHistoryLimit] = useState(6), history = world.leisureOutings.filter(item => item.personId === person.id).slice().reverse();

@@ -1,5 +1,6 @@
+import { displayQuantity } from "../../src/ui/displayNumbers";
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { instruments, instrumentIds } from '../../src/game/content/markets';
@@ -9,6 +10,7 @@ import { formatMoney } from '../../src/game/money';
 import { CatalogArt } from '../../src/assets/CatalogArt';
 import { ActionRow, Body, Card, Header, Heading, Page } from '../../src/ui/components';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function Investments() {
   const world = useGame(s => s.world)!, c = useColors(), currency = accountFor(world).currency;
@@ -33,7 +35,7 @@ export default function Investments() {
         const quantity = held.filter(item => item.instrumentId === id).reduce((sum, item) => sum + item.quantity, 0n);
         const unitPrice = formatMoney({ minor: investmentValue(world, id, instruments[id].unitScale, currency), currency });
         return <ActionRow key={id} title={instruments[id].name}
-          subtitle={id + ' · ' + (quantity ? formatQuantity(quantity, id) + ' units held · Current value ' + formatMoney({ minor: investmentValue(world, id, quantity, currency), currency }) : 'Not currently held')}
+          subtitle={id + ' · ' + (quantity ? displayQuantity(formatQuantity(quantity, id)) + ' units held · Current value ' + formatMoney({ minor: investmentValue(world, id, quantity, currency), currency }) : 'Not currently held')}
           value={unitPrice + ' per unit'} onPress={() => router.push({ pathname: '/investment/[id]', params: { id } })} />;
       })}
     </Card>)}

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { BackHandler, Image, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
+import { BackHandler, Image, Pressable, ScrollView, useWindowDimensions, View } from 'react-native';
 import { Redirect, router, useFocusEffect } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -12,6 +12,7 @@ import { FamilyArt } from '../src/assets/FamilyArt';
 import { LifeMilestoneArt } from '../src/ui/LifeMilestoneArt';
 import { useFeedbackPress } from '../src/ui/feedback';
 import { statTrackHeight } from '../src/ui/components';
+import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 export default function Death() {
   const world = useGame(s => s.world);
@@ -34,7 +35,7 @@ export default function Death() {
         <Text accessibilityRole="header" style={{ color: '#0B1545', fontSize: 22, fontWeight: '700' }}>Life at a Glance</Text>
         <Text style={{ color: '#40516C', fontSize: 16, lineHeight: 24 }}>{summary?.summary}</Text>
       </View>
-      {summary?.rows.map(({ id, label, value, icon, tone }) => <View key={id} accessible accessibilityLabel={label + ': ' + value} style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#E5EAF0' }}>
+      {summary?.rows.map(({ id, label, value, icon, tone }) => <View key={id} accessible accessibilityLabel={displayText(label + ': ' + value)} style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#E5EAF0' }}>
         {icon === 'family' ? <FamilyArt id="family-tree" size={30} /> : <Illustration id={icon} size={30} />}
         <View style={{ flex: 1, minWidth: 0, flexDirection: stacked ? 'column' : 'row', gap: stacked ? 5 : 12 }}>
           <Text style={{ color: '#40516C', fontSize: 15, flex: stacked ? undefined : 1 }}>{label}</Text>
@@ -61,13 +62,13 @@ export default function Death() {
 }
 function HistoryLink({ label, icon, onPress }: { label: string; icon: 'book-outline' | 'git-network-outline'; onPress: () => void }) {
   const press = useFeedbackPress(onPress);
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={press} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 12, paddingVertical: 10, opacity: pressed ? 0.7 : 1, flexDirection: 'row', alignItems: 'center', gap: 8 })}>
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText(label)} onPress={press} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 12, paddingVertical: 10, opacity: pressed ? 0.7 : 1, flexDirection: 'row', alignItems: 'center', gap: 8 })}>
     <Ionicons name={icon} size={20} color="#C3CEDB" accessible={false} /><Text style={{ color: '#E5EAF0', fontSize: 15, fontWeight: '600' }}>{label}</Text>
   </Pressable>;
 }
 function DeathButton({ label, onPress, icon, primary = false }: { label: string; onPress: () => void; icon: 'chevron-forward' | 'refresh' | 'people'; primary?: boolean }) {
   const color = primary ? '#FFFFFF' : '#0B1545', press = useFeedbackPress(onPress);
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={press} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? pressed ? '#0063DC' : '#006DE5' : pressed ? '#E5EAF0' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center' })}>
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText(label)} onPress={press} style={({ pressed }) => ({ width: '100%', minHeight: 56, backgroundColor: primary ? pressed ? '#0063DC' : '#006DE5' : pressed ? '#E5EAF0' : '#FFFFFF', padding: 14, borderRadius: 12, flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'center' })}>
     {!primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color="#61718B" size={24} /></View>}
     <Text style={{ color, fontSize: 16, fontWeight: '600', flexShrink: 1, textAlign: 'center' }}>{label}</Text>
     {primary && <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={icon} color={color} size={24} /></View>}

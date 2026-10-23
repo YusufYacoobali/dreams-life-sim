@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Pressable, Switch, Text, View, useWindowDimensions } from 'react-native';
+import { ActivityIndicator, Pressable, Switch, View, useWindowDimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { usePreferences } from '../src/state/usePreferences';
@@ -9,6 +9,7 @@ import { useColors } from '../src/ui/theme';
 import { useFeedback } from '../src/ui/feedback';
 import { DailyReminderSettings } from '../src/ui/DailyReminderSettings';
 import { GodModeSettings } from '../src/ui/GodModeAccess';
+import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 const choices = [{ id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }, { id: 'system', label: 'Use Device Appearance' }] as const;
 export default function Settings() {
@@ -22,7 +23,7 @@ export default function Settings() {
   return <Page bottomSafeArea footer={error && !confirm ? <><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 23 }}>{error}</Text><Button label="Try Again" disabled={busy} onPress={() => { void retry(); }} /></> : <Body muted>These settings apply to all your lives on this device.</Body>}><Header title="Settings" onBack={() => router.back()} />
     <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ padding: 12, borderRadius: 16, backgroundColor: c.inset }}><Ionicons name="settings-outline" size={32} color={c.link} /></View><View style={{ flex: 1, minWidth: 0 }}><Heading size={21}>App Preferences</Heading><Body muted>Choose your appearance, feedback and daily reminders.</Body></View></View></Card>
     <Card><Heading size={19}>Appearance</Heading><Body muted>Choose a look, or follow your device’s light and dark appearance.</Body>
-      {!ready ? <ActivityIndicator accessibilityLabel="Opening display settings" /> : <View accessibilityRole="radiogroup" accessibilityLabel="Appearance">{choices.map(choice => <Pressable key={choice.id} accessibilityRole="radio" accessibilityLabel={choice.label} accessibilityState={{ checked: settings.appearance === choice.id, disabled: busy || loadFailed }} disabled={busy || loadFailed} onPress={() => { void change(choice.id); }} style={({ pressed }) => ({ minHeight: 56, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 12, marginTop: 8, backgroundColor: pressed || settings.appearance === choice.id ? c.selected : c.surface, borderWidth: 1, borderColor: settings.appearance === choice.id ? c.link : c.line, flexDirection: 'row', alignItems: 'center', gap: 12, opacity: busy || loadFailed ? 0.5 : 1 })}><Text style={{ flex: 1, minWidth: 0, color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: settings.appearance === choice.id ? '700' : '400' }}>{choice.label}</Text><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={settings.appearance === choice.id ? 'checkmark-circle' : 'ellipse-outline'} size={24} color={settings.appearance === choice.id ? c.link : c.muted} /></View></Pressable>)}</View>}
+      {!ready ? <ActivityIndicator accessibilityLabel="Opening display settings" /> : <View accessibilityRole="radiogroup" accessibilityLabel="Appearance">{choices.map(choice => <Pressable key={choice.id} accessibilityRole="radio" accessibilityLabel={displayText(choice.label)} accessibilityState={{ checked: settings.appearance === choice.id, disabled: busy || loadFailed }} disabled={busy || loadFailed} onPress={() => { void change(choice.id); }} style={({ pressed }) => ({ minHeight: 56, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 12, marginTop: 8, backgroundColor: pressed || settings.appearance === choice.id ? c.selected : c.surface, borderWidth: 1, borderColor: settings.appearance === choice.id ? c.link : c.line, flexDirection: 'row', alignItems: 'center', gap: 12, opacity: busy || loadFailed ? 0.5 : 1 })}><Text style={{ flex: 1, minWidth: 0, color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: settings.appearance === choice.id ? '700' : '400' }}>{choice.label}</Text><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={settings.appearance === choice.id ? 'checkmark-circle' : 'ellipse-outline'} size={24} color={settings.appearance === choice.id ? c.link : c.muted} /></View></Pressable>)}</View>}
       <Button label="Restore Default Appearance" tone="secondary" disabled={busy || !ready} onPress={() => setConfirm(true)} />
     </Card>
     <Card><Heading size={19}>Motion and feedback</Heading>
@@ -44,6 +45,6 @@ function FeedbackSetting({ label, description, checked, disabled, stacked, onCha
   const c = useColors();
   return <View style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'stretch' : 'center', gap: 10, minHeight: 56, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
     <View style={{ flex: stacked ? undefined : 1, minWidth: 0, gap: 4 }}><Text style={{ color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: '600' }}>{label}</Text><Body muted>{description}</Body></View>
-    <View style={{ minHeight: 48, justifyContent: 'center', alignSelf: stacked ? 'flex-start' : 'center' }}><Switch accessibilityRole="switch" accessibilityLabel={label} accessibilityHint={description} accessibilityState={{ disabled, checked }} value={checked} disabled={disabled} onValueChange={onChange} hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }} trackColor={{ false: c.track, true: c.actionBlue }} /></View>
+    <View style={{ minHeight: 48, justifyContent: 'center', alignSelf: stacked ? 'flex-start' : 'center' }}><Switch accessibilityRole="switch" accessibilityLabel={displayText(label)} accessibilityHint={displayText(description)} accessibilityState={{ disabled, checked }} value={checked} disabled={disabled} onValueChange={onChange} hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }} trackColor={{ false: c.track, true: c.actionBlue }} /></View>
   </View>;
 }

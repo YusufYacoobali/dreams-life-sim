@@ -1,6 +1,6 @@
 import { MiniGameEntry } from '../../../src/minigames/components/MiniGameEntry';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { careerKinds, careerCatalog, CareerKind, skillContent } from '../../../src/game/content/careers';
@@ -13,6 +13,7 @@ import { CareerArt } from '../../../src/assets/CareerArt';
 import { useCareerReview } from '../../../src/ui/CareerReview';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../../src/ui/SocialBusinessPresentation';
 import { useColors } from '../../../src/ui/theme';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
 
 export default function CareerDashboard() {
     const { kind: raw } = useLocalSearchParams<{ kind: string }>(), world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useCareerReview(raw), c = useColors();

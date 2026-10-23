@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
@@ -14,6 +14,7 @@ import { useColors } from '../../src/ui/theme';
 import { SchoolPlans } from '../../src/ui/SchoolPlans';
 import { ageOn, fullName } from '../../src/game/model';
 import { minimumSchoolLeavingAge, rules } from '../../src/game/rules';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 export default function School() {
   const world = useGame(s => s.world)!, player = world.people[world.activePersonId], school = currentSchool(world);

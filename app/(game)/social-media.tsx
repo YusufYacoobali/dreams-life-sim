@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn } from '../../src/game/model';
@@ -10,6 +10,8 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { useColors } from '../../src/ui/theme';
 import { useSocialReview } from '../../src/ui/SocialReview';
 import { SocialBusinessChoice, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function SocialMedia() {
   const params = useLocalSearchParams<{ platform?: string }>(), identity = useGame(s => s.world ? s.world.id + ':' + s.world.activePersonId : 'none');
   return <SocialMediaForm key={identity + ':' + (params.platform ?? '')} />;

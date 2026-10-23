@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn } from '../../src/game/model';
@@ -11,6 +11,8 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { useSocialReview } from '../../src/ui/SocialReview';
 import { useColors } from '../../src/ui/theme';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function Fame() {
   const world = useGame(s => s.world)!, person = world.people[world.activePersonId], c = useColors(), busy = useGame(s => s.busy), error = useGame(s => s.error), review = useSocialReview();
   const accounts = world.socialAccounts.filter(item => item.ownerId === person.id), followers = accounts.filter(item => item.status === 'active' || item.status === 'suspended').reduce((sum, item) => sum + item.followers, 0), viral = accounts.reduce((sum, item) => sum + item.posts.filter(post => post.response === 'viral').length + item.archived.reduce((total, row) => total + row.virals, 0), 0), completed = world.sponsorships.filter(item => item.ownerId === person.id && item.status === 'completed').length;

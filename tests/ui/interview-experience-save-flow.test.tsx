@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -100,7 +101,7 @@ test('actual old native unanswered interview keeps exact old copy, absent metada
   try {
     const initial = context.initial, before = context.rows(), pending = initial.pending;
     if (pending?.kind !== 'decision') throw new Error('Expected old actual interview');
-    expect(pending.body).not.toContain('recorded paid months'); expect(pending.choices.every(choice => !('experience' in choice.effects[0]))).toBe(true); expect(screen.getByText(pending.body)).toBeOnTheScreen();
+    expect(pending.body).not.toContain('recorded paid months'); expect(pending.choices.every(choice => !('experience' in choice.effects[0]))).toBe(true); expect(screen.getByText(displayText(pending.body))).toBeOnTheScreen();
     context.sql("CREATE TRIGGER fail_legacy_experience BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(pending.choices[0].label); await waitFor(() => expect(mockStore.getState().error).toMatch(/couldn't be saved/)); expect(context.rows()).toEqual(before); expect(mockStore.getState().world).toEqual(initial);
     context.sql('DROP TRIGGER fail_legacy_experience'); await press(pending.choices[0].label);
     const actualHired = checkpoints.unpackCheckpoint(native.checkpoints.hired.payload); await waitFor(() => expect(mockStore.getState().world).toEqual(actualHired)); expect(context.backup()).toBe(context.payload);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useGame } from '../../src/state/useGame';
@@ -20,6 +20,7 @@ import { scholarshipWaiver, tuitionDue } from '../../src/game/systems/scholarshi
 import { UniversityAdmissions, type AdmissionReviewRequest } from '../../src/ui/UniversityAdmissions';
 import { activeUniversityApplication } from '../../src/game/systems/universityAdmissionSchemas';
 import { StudyCourseHistory } from '../../src/ui/StudyCourseHistory';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 type Application = { program: 'university' | 'trade' | 'graduate'; field: typeof fields[number]; funding: 'cash' | 'loan'; scholarshipId?: string };
 type Dialog = { kind: 'program-field'; program: Application['program'] } | { kind: 'funding'; application: Application } | { kind: 'confirm'; application: Application } | { kind: 'effort' } | { kind: 'leave' } | { kind: 'resume' };
@@ -52,7 +53,7 @@ function EducationContext() {
     {education.stage === 'none' && (world.schoolCommunities.some(item => item.personId === player.id) || world.schoolCompletions.some(item => item.personId === player.id)) && <Card><ActionRow title="School Years" subtitle="Reports, plans and completion" onPress={() => router.push('/school')} /></Card>}
     {error && !world.pending && !dialog && !admissionReviewOpen && !recoveryReviewOpen && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text>}
     {education.stage !== 'none' && <Card><Heading size={18}>Current Studies</Heading>
-      {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={fundingReason ? 'Fund Next Year. ' + fundingReason : undefined} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" icon={<SchoolArt id="study" size={38} />} disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} icon={<Ionicons name="book" size={32} color={c.blue} />} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
+      {education.paused ? <><Button label="Fund Next Year" accessibilityLabel={displayText(fundingReason ? 'Fund Next Year. ' + fundingReason : undefined)} disabled={busy || !!fundingReason} onPress={() => setDialog({ kind: 'resume' })} />{fundingReason && <Body muted>{fundingReason}</Body>}</> : <><ActionRow title="Study harder" subtitle="Extra study once this year" icon={<SchoolArt id="study" size={38} />} disabled={busy} disabledReason={educationActionReason(world, 'study')} onPress={() => { void dispatch({ type: 'study' }); }} /><ActionRow title="Study routine" value={education.effort} icon={<Ionicons name="book" size={32} color={c.blue} />} disabled={busy} disabledReason={educationActionReason(world, 'study-effort')} onPress={() => setDialog({ kind: 'effort' })} /></>}
       {education.stage !== 'primary' && education.stage !== 'secondary' && <ActionRow title="Leave course" icon={<Ionicons name="exit-outline" size={32} color={c.red} />} disabled={busy} disabledReason={educationActionReason(world, 'leave-school')} onPress={() => setDialog({ kind: 'leave' })} />}
     </Card>}
     {(['university', 'trade', 'graduate'].includes(education.stage) || world.campusCommunities.some(item => item.personId === player.id)) && <Card><ActionRow title="Campus Life" subtitle="Meet fellow students, choose a club and revisit your connections" icon={<SchoolArt id="project" size={38} />} onPress={() => router.push('/campus')} /></Card>}

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text } from 'react-native';
+
 import { LegalCommand } from '../game/systems/legal';
 import { useGame } from '../state/useGame';
 import { HealthLegalArt, HealthLegalArtId } from '../assets/HealthLegalArt';
 import { EffectRow, EventModal, EventPresentation } from './EventModal';
 import { useColors } from './theme';
+import { DisplayText as Text } from './DisplayText';
 
 export function LegalReviewError({ error }: { error: string | null }) {
   const colors = useColors();

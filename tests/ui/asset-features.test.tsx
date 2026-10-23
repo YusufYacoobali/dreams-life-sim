@@ -130,7 +130,7 @@ test.each([false, true])('owned assets retain listing specs, use actual conditio
   capture('asset-owned-vehicle-' + suffix, view.toJSON());
   mockRoute = { id: mockWorld.assets.find(asset => asset.catalogId === 'family-house')!.id, kind: 'property' };
   view.rerender(frame(<OwnedAsset />));
-  for (const label of ['Beds: 4', 'Baths: 2.5', 'Sq ft: 2,250']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
+  for (const label of ['Beds: 4', 'Baths: 3', 'Sq ft: 2,250']) expect(screen.getByLabelText(label)).toBeOnTheScreen();
   capture('asset-owned-property-' + suffix, view.toJSON());
   expect(encodeWorld(mockWorld)).toBe(original); expect(mockDispatch).not.toHaveBeenCalled();
   view.rerender(frame(<AssetFeatures offer={assetCatalog.find(offer => offer.id === 'used-compact')} condition={0} />));

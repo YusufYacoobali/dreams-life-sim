@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -76,7 +77,7 @@ async function openReview(kind: Kind): Promise<Review> {
   await press(/^Japan\./); await press('Review Application');
   return { command: { type: 'apply-relocation', destinationId: 'tokyo', route: kind === 'application-work' ? 'work' : 'study', roleId: kind === 'application-work' ? 'administrator' : null, program: kind === 'application-study' ? 'university' : null, field: kind === 'application-study' ? 'arts' : null, quotedFee: relocationFee(current) }, title: 'Apply to Tokyo?', confirm: 'Submit Application', amounts: [formatMoney({ minor: relocationFee(current), currency: accountFor(current).currency })] };
 }
-const expectReview = (review: Review) => { expect(modal().getByText(review.title)).toBeOnTheScreen(); for (const amount of review.amounts) expect(modal().getAllByText(amount).length).toBeGreaterThan(0); };
+const expectReview = (review: Review) => { expect(modal().getByText(review.title)).toBeOnTheScreen(); for (const amount of review.amounts) expect(modal().getAllByText(displayText(amount)).length).toBeGreaterThan(0); };
 
 test.each(['booking', 'return', 'application-work', 'application-study', 'departure'] as Kind[])('%s keeps its reviewed terms after rollback, retries warm and cold-resumes the exact result once', async kind => {
   const context = await setup(prepare(kind), kind);

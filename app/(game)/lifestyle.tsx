@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { World } from '../../src/game/model';
-import { Switch, Text, View } from 'react-native';
+import { Switch, View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn } from '../../src/game/model';
@@ -11,6 +11,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '.
 import { useColors } from '../../src/ui/theme';
 import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
 import { FilterTabs } from '../../src/ui/FilterTabs';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 const sections = [{ id: 'diet', label: 'Diet' }, { id: 'sleep', label: 'Sleep' }, { id: 'mind', label: 'Meditation' }] as const;
 export default function Lifestyle() {

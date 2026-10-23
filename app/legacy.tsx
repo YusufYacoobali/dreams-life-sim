@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, useWindowDimensions, View } from 'react-native';
+import { useWindowDimensions, View } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import { useGame } from '../src/state/useGame';
 import { ageOn, fullName } from '../src/game/model';
@@ -11,6 +11,8 @@ import { FamilyArt } from '../src/assets/FamilyArt';
 import { countries } from '../src/game/countries';
 import { formatMoney } from '../src/game/money';
 import { useColors } from '../src/ui/theme';
+import { DisplayText as Text } from '../src/ui/DisplayText';
+
 export default function Legacy() {
   const world = useGame(s => s.world), dispatch = useGame(s => s.dispatch), busy = useGame(s => s.busy), error = useGame(s => s.error);
   const c = useColors(), { width, fontScale } = useWindowDimensions(), stacked = width < 360 || fontScale >= 1.2;

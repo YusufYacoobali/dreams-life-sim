@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
 import {
@@ -283,7 +284,7 @@ async function review(
   if (action === 'contribute') {
     await press(/^Treasury\./);
     await select('Contribute personal funds');
-    await select(cultMoney(cult, rules[cult.country].baseWage / 100n));
+    await select(displayText(cultMoney(cult, rules[cult.country].baseWage / 100n)));
     return {
       title: 'Contribute these funds?',
       command: {
@@ -721,7 +722,7 @@ test.each([false, true])(
       ).toBeOnTheScreen();
       expect(
         screen.getByLabelText(
-          'Treasury: ' + cultMoney(initial.cults[0], initial.cults[0].cash),
+          'Treasury: ' + displayText(cultMoney(initial.cults[0], initial.cults[0].cash)),
         ),
       ).toBeOnTheScreen();
       expect(screen.getByRole('progressbar', { name: 'Loyalty' })).toHaveProp(

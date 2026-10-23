@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, useWindowDimensions, View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName } from '../../src/game/model';
@@ -13,6 +13,7 @@ import { Body, Button, Card, Header, Heading, Page } from '../../src/ui/componen
 import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
 import { FamilyArt } from '../../src/assets/FamilyArt';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 type Custody = 'shared' | 'me' | 'them';
 type Review = { identity: string; command: Extract<FamilyCommand, { type: 'divorce' }>; event: EventPresentation };
@@ -99,7 +100,7 @@ function DivorceDetails() {
       <Body muted>Choose a care preference for your shared dependent children. The recorded primary home also considers each parent’s health, availability and ability to care.</Body>
       <View accessibilityRole="radiogroup" accessibilityLabel="Children’s care preference" style={{ gap: 10 }}>{careChoices.map(choice => <Pressable
         key={choice.value} accessibilityRole="radio" accessibilityState={{ checked: custody === choice.value, disabled: busy }}
-        accessibilityLabel={choice.label + '. ' + choice.detail} disabled={busy} onPress={() => chooseCare(choice.value)}
+        accessibilityLabel={displayText(choice.label + '. ' + choice.detail)} disabled={busy} onPress={() => chooseCare(choice.value)}
         style={({ pressed }) => ({ minHeight: 72, padding: 14, borderRadius: 12, borderWidth: 1, borderColor: custody === choice.value ? c.link : c.line, backgroundColor: custody === choice.value || pressed ? c.selected : c.surface, opacity: busy ? 0.5 : 1, flexDirection: 'row', gap: 12, alignItems: 'flex-start' })}
       >
         <View accessible={false} style={{ width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: custody === choice.value ? c.link : c.muted, marginTop: 2, alignItems: 'center', justifyContent: 'center' }}>{custody === choice.value && <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: c.link }} />}</View>

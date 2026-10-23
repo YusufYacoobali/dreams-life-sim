@@ -1,6 +1,6 @@
 import { petMoveCost } from '../../src/game/systems/pets';
 import React, { useEffect, useRef, useState } from 'react';
-import { Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { Pressable, useWindowDimensions, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -16,6 +16,7 @@ import { TravelArt } from '../../src/assets/TravelArt';
 import { ActionRow, Body, Button, Card, Header, Heading, Page, Portrait } from '../../src/ui/components';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 const routeLabels = { settlement: 'Emigration', work: 'Work Abroad', study: 'Study Abroad' };
 const programLabels = { trade: 'Technical College', university: 'University', graduate: 'Professional Study' };
@@ -23,7 +24,7 @@ const titleCase = (text: string) => text[0].toUpperCase() + text.slice(1);
 
 function PlanChoice({ title, subtitle, icon, selected, disabled, onPress }: { title: string; subtitle?: string; icon?: React.ReactNode; selected: boolean; disabled: boolean; onPress: () => void }) {
   const colors = useColors();
-  return <Pressable accessibilityRole="button" accessibilityLabel={[title, subtitle, selected ? 'Selected' : undefined].filter(Boolean).join('. ')} accessibilityState={{ selected, disabled }} disabled={disabled} onPress={onPress}
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText([title, subtitle, selected ? 'Selected' : undefined].filter(Boolean).join('. '))} accessibilityState={{ selected, disabled }} disabled={disabled} onPress={onPress}
     style={({ pressed }) => ({ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, borderRadius: 12, borderWidth: 1, borderColor: selected ? colors.link : colors.line, backgroundColor: selected || pressed ? colors.selected : colors.surface })}>
     {icon}<View style={{ flex: 1, minWidth: 0, gap: 3 }}><Text style={{ color: colors.ink, fontSize: 16, fontWeight: '600' }}>{title}</Text>{subtitle && <Body muted>{subtitle}</Body>}</View>
     <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={selected ? 'checkmark-circle' : 'ellipse-outline'} size={24} color={selected ? colors.link : colors.muted} /></View>
@@ -32,7 +33,7 @@ function PlanChoice({ title, subtitle, icon, selected, disabled, onPress }: { ti
 
 function MoveFact({ label, value }: { label: string; value: string }) {
   const colors = useColors();
-  return <View accessible accessibilityLabel={label + ': ' + value} style={{ minWidth: 0, gap: 4 }}><Body muted>{label}</Body><Text style={{ fontSize: 19, lineHeight: 26, fontWeight: '600', color: colors.ink }}>{value}</Text></View>;
+  return <View accessible accessibilityLabel={displayText(label + ': ' + value)} style={{ minWidth: 0, gap: 4 }}><Body muted>{label}</Body><Text style={{ fontSize: 19, lineHeight: 26, fontWeight: '600', color: colors.ink }}>{value}</Text></View>;
 }
 
 export default function Emigrate() {
@@ -112,7 +113,7 @@ function EmigrationPlan({ routeHint }: { routeHint?: string }) {
       </Card>
       {offer.status === 'approved' && quote && <>
         <Card><Heading size={20}>Move With</Heading><Body muted>Invite current household members. Adults and other guardians can decline.</Body>
-          {companions.map(member => <Pressable key={member.id} accessibilityRole="checkbox" accessibilityLabel={fullName(member)} accessibilityHint="Choose who to invite. Consent is checked when you confirm the move." accessibilityState={{ checked: companionIds.includes(member.id), disabled: busy }} disabled={busy} onPress={() => setCompanions(companionIds.includes(member.id) ? companionIds.filter(id => id !== member.id) : [...companionIds, member.id])} style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, borderRadius: 12, borderWidth: 1, borderColor: companionIds.includes(member.id) ? colors.link : colors.line, backgroundColor: companionIds.includes(member.id) ? colors.selected : colors.surface }}><Portrait name={fullName(member)} personId={member.id} appearance={member.appearance} age={ageOn(member, world.date)} size={38} /><View style={{ flex: 1, minWidth: 0 }}><Body>{fullName(member)}</Body><Body muted>Age {ageOn(member, world.date)} · {companionIds.includes(member.id) ? 'Selected' : 'Invite'}</Body></View><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={companionIds.includes(member.id) ? 'checkbox' : 'square-outline'} size={24} color={companionIds.includes(member.id) ? colors.link : colors.muted} /></View></Pressable>)}
+          {companions.map(member => <Pressable key={member.id} accessibilityRole="checkbox" accessibilityLabel={displayText(fullName(member))} accessibilityHint="Choose who to invite. Consent is checked when you confirm the move." accessibilityState={{ checked: companionIds.includes(member.id), disabled: busy }} disabled={busy} onPress={() => setCompanions(companionIds.includes(member.id) ? companionIds.filter(id => id !== member.id) : [...companionIds, member.id])} style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, borderRadius: 12, borderWidth: 1, borderColor: companionIds.includes(member.id) ? colors.link : colors.line, backgroundColor: companionIds.includes(member.id) ? colors.selected : colors.surface }}><Portrait name={fullName(member)} personId={member.id} appearance={member.appearance} age={ageOn(member, world.date)} size={38} /><View style={{ flex: 1, minWidth: 0 }}><Body>{fullName(member)}</Body><Body muted>Age {ageOn(member, world.date)} · {companionIds.includes(member.id) ? 'Selected' : 'Invite'}</Body></View><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={companionIds.includes(member.id) ? 'checkbox' : 'square-outline'} size={24} color={companionIds.includes(member.id) ? colors.link : colors.muted} /></View></Pressable>)}
           {!companions.length && <Body muted>You have no other household members to invite.</Body>}
         </Card>
         <Card><Heading size={20}>Settle In</Heading>{([3, 6] as const).map(months => <PlanChoice disabled={busy} key={months} title={months + '-Month Living Reserve'} selected={reserveMonths === months} onPress={() => setReserve(months)} />)}

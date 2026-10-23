@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -34,11 +35,11 @@ test('native package booking and the actual holiday month preserve money, locati
   expect(screen.queryByRole('button', { name: /^Paris, France\./ })).toBeNull();
   fireEvent.press(screen.getByRole('tab', { name: 'City' }));
   const longQuote = tripQuote(initial, 'paris', 12);
-  fireEvent.press(screen.getByRole('button', { name: 'Paris, France. Culture · Sightseeing. ' + formatMoney({ minor: longQuote.total, currency: longQuote.currency }) }));
+  fireEvent.press(screen.getByRole('button', { name: displayText('Paris, France. Culture · Sightseeing. ' + formatMoney({ minor: longQuote.total, currency: longQuote.currency })) }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/destination/[id]', params: { id: 'paris', duration: '12' } });
   mockDuration = undefined; view.rerender(frame(<Destinations />));
   expect(screen.getByRole('header', { name: '1-month packages' })).toBeOnTheScreen();
-  fireEvent.press(screen.getByRole('button', { name: 'Paris, France. Culture · Sightseeing. ' + formatMoney({ minor: quote.total, currency: quote.currency }) }));
+  fireEvent.press(screen.getByRole('button', { name: displayText('Paris, France. Culture · Sightseeing. ' + formatMoney({ minor: quote.total, currency: quote.currency })) }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/destination/[id]', params: { id: 'paris', duration: '1' } });
   expect(await repository.load(initial.id)).toEqual(initial);
   view.rerender(frame(<Destination />));

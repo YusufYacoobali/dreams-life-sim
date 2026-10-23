@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Keyboard, Text, TextInput, View, useWindowDimensions } from 'react-native';
+import { Keyboard, TextInput, View, useWindowDimensions } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { GameCommand } from '../../../src/game/engine';
@@ -11,6 +11,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, StatBar } from '.
 import { EventModal, EventPresentation, EffectRow } from '../../../src/ui/EventModal';
 import { useColors } from '../../../src/ui/theme';
 import { AssetFeatures } from '../../../src/ui/AssetFeatures';
+import { DisplayText as Text, displayText } from '../../../src/ui/DisplayText';
 
 export default function AssetDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -57,7 +58,7 @@ function OwnedAsset({ id }: { id: string }) {
       <ActionRow disabled={busy} title={asset.kind === 'vehicle' ? 'Repair & Improve' : 'Renovate / Restore'} disabledReason={asset.condition >= 95 ? 'Already in excellent condition' : undefined} onPress={() => { const quote = renovationQuote(asset); ask({ type: 'renovate', assetId: asset.id }, 'Improve this asset?', 'Paid work improves condition by up to 20 points and changes its estimated value.', [{ id: 'cost', label: 'Cost', value: money(quote.cost), tone: 'negative' }, { id: 'value', label: 'Estimated added value', value: money(quote.addedValue), tone: 'positive' }]); }} />
       {asset.kind !== 'possession' && <ActionRow disabled={busy} title={asset.insured ? 'End Insurance' : 'Insure This Asset'} onPress={() => ask({ type: 'insure', assetId: asset.id, enabled: !asset.insured }, asset.insured ? 'End this cover?' : 'Activate this cover?', asset.insured ? 'Premiums stop. Future asset damage will be uninsured.' : 'Cover pays 80% of the recorded value lost in an asset incident. Premiums are charged monthly.', [{ id: 'premium', label: 'Current monthly premium', value: money(monthlyInsurance(asset)), tone: 'neutral' }])} />}
     </Card>
-    {form && <Card><Heading size={18}>{form === 'listing' ? 'Asking Price' : 'New Mortgage Principal'}</Heading><TextInput accessibilityLabel={form === 'listing' ? 'Asking price' : 'New mortgage principal'} keyboardType="decimal-pad" editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { setInput(value); setMessage(null); }} placeholder={money(form === 'listing' ? asset.value : loan?.principal ?? 0n)} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 14, borderRadius: 10, fontSize: 18 }} />
+    {form && <Card><Heading size={18}>{form === 'listing' ? 'Asking Price' : 'New Mortgage Principal'}</Heading><TextInput accessibilityLabel={displayText(form === 'listing' ? 'Asking price' : 'New mortgage principal')} keyboardType="decimal-pad" editable={!busy} accessibilityState={{ disabled: busy }} value={input} onChangeText={value => { setInput(value); setMessage(null); }} placeholder={money(form === 'listing' ? asset.value : loan?.principal ?? 0n)} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 14, borderRadius: 10, fontSize: 18 }} />
       {form === 'refinance' && <ActionRow disabled={busy} title="New term" value={term / 12 + ' years'} onPress={() => setPickTerm(true)} />}
       <Button label={form === 'listing' ? 'Review Listing' : 'Review Refinancing'} disabled={busy} onPress={() => {
         const value = fieldAmount(form === 'listing' ? asset.value : loan?.principal ?? 0n); if (!value) return;
@@ -77,7 +78,7 @@ function OwnedAsset({ id }: { id: string }) {
 
 function OwnershipFact({ label, value, stacked, debt = false }: { label: string; value: string; stacked: boolean; debt?: boolean }) {
   const c = useColors();
-  return <View accessible accessibilityLabel={label + ': ' + value} style={{ flexDirection: stacked ? 'column' : 'row', gap: 6, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
+  return <View accessible accessibilityLabel={displayText(label + ': ' + value)} style={{ flexDirection: stacked ? 'column' : 'row', gap: 6, borderBottomWidth: 1, borderBottomColor: c.line, paddingBottom: 12 }}>
     <View style={stacked ? undefined : { flex: 1, minWidth: 0 }}><Body muted>{label}</Body></View>
     <Text style={{ flex: stacked ? undefined : 1, minWidth: 0, color: debt ? c.red : c.ink, fontSize: 16, lineHeight: 23, fontWeight: '600', textAlign: stacked ? 'left' : 'right' }}>{value}</Text>
   </View>;

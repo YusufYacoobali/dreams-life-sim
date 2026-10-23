@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import {
@@ -67,6 +67,7 @@ import {
   cultRoleChangeReason,
 } from '../../src/game/systems/cultRoster';
 import type { EffectRow } from '../../src/ui/EventModal';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 type Config = {
   title: string;
@@ -1110,7 +1111,7 @@ function CultDashboard() {
                 <View
                   key={item.label}
                   accessible
-                  accessibilityLabel={item.label + ': ' + item.value}
+                  accessibilityLabel={displayText(item.label + ': ' + item.value)}
                   style={{ flexGrow: 1, flexBasis: 100, minWidth: 0, gap: 2 }}
                 >
                   <Text

@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -52,7 +53,7 @@ test('Settings enable opens the editor; bulk edits update Assets immediately and
   await press('Save Changes'); await waitFor(() => expect(router.back).toHaveBeenCalled());
   const saved = mockStore.getState().world!; expect(saved.people[saved.activePersonId].stats.smarts).toBe(100); expect(saved.people[saved.activePersonId].skills.science).toBe(47);
   expect(saved.relationships.find(item => item.id === relationship.id)?.trust).toBe(100); expect(saved.revision).toBe(before.revision + 1);
-  view.rerender(frame(<Assets />)); expect(screen.getByText('Bank: ' + formatMoney({ minor: saved.accounts.find(item => item.id === account.id)!.cash, currency: account.currency }, countries[before.people[before.activePersonId].country].locale))).toBeTruthy();
+  view.rerender(frame(<Assets />)); expect(screen.getByText('Bank: ' + displayText(formatMoney({ minor: saved.accounts.find(item => item.id === account.id)!.cash, currency: account.currency }, countries[before.people[before.activePersonId].country].locale)))).toBeTruthy();
   expect(screen.getByRole('button', { name: /God Mode Editor/ })).toBeTruthy();
   await act(async () => { mockStore = createGameStore(deps); await mockStore.getState().bootstrap(); }); expect(mockStore.getState().world).toEqual(saved); expect(await repository.load(before.id)).toEqual(saved);
   view.unmount(); sqlite.close();

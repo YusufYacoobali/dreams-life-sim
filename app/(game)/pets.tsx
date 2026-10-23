@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { BackHandler, Keyboard, Text, TextInput, View } from 'react-native';
+import { BackHandler, Keyboard, TextInput, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { fullName } from '../../src/game/model';
@@ -13,6 +13,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../../src/
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
 import { FilterTabs } from '../../src/ui/FilterTabs';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 const petTabs = [{ id: 'owned', label: 'My Pets' }, { id: 'adopt', label: 'Adopt' }] as const;
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, TextInput, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
@@ -8,6 +8,7 @@ import { useFeedback } from './feedback';
 import { useModalPresence } from './modalPresence';
 import type { StoryParticipant } from '../game/runtime';
 import { eventBadgeColor, presentationArtwork, type EventCategory } from './eventArtwork';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 export type EffectRow = { id: string; label: string; value: string; tone: 'positive' | 'negative' | 'neutral' };
 type Choice = { id: string; label: string; disabledReason?: string };
@@ -89,18 +90,18 @@ function EventCard({
             {event.kind === 'decision' && showProgress && <ActivityIndicator color={c.blue} accessibilityLabel="Saving your decision" />}
             {event.kind === 'decision' && event.choices.map(choice => <Button
               key={choice.id} label={choice.label} disabled={busy || !!choice.disabledReason}
-              accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
+              accessibilityLabel={displayText([choice.label, choice.disabledReason].filter(Boolean).join('. '))}
               onPress={() => choose(choice.id)}
             />)}
             {event.kind === 'selection' && <>
               {selectionSearch && <View style={{gap:8}}>
-                <TextInput accessibilityLabel={selectionSearch.label} placeholder={selectionSearch.placeholder ?? 'Search by name or description'} placeholderTextColor={c.muted} value={query} editable={!busy} autoCapitalize="none" autoCorrect={false} onChangeText={value => { if (canAct()) setQuery(value); }} style={{color:c.ink,backgroundColor:c.inset,borderColor:c.line,borderWidth:1,borderRadius:12,padding:12,minHeight:48,fontSize:15}} />
+                <TextInput accessibilityLabel={displayText(selectionSearch.label)} placeholder={selectionSearch.placeholder ?? 'Search by name or description'} placeholderTextColor={c.muted} value={query} editable={!busy} autoCapitalize="none" autoCorrect={false} onChangeText={value => { if (canAct()) setQuery(value); }} style={{color:c.ink,backgroundColor:c.inset,borderColor:c.line,borderWidth:1,borderRadius:12,padding:12,minHeight:48,fontSize:15}} />
                 {!!query && <Button label="Clear Search" tone="secondary" disabled={busy} onPress={() => { if (canAct()) setQuery(''); }} />}
                 {!!query && <Text accessibilityLiveRegion="polite" style={{color:c.muted,fontSize:13,lineHeight:18}}>{matches.length ? matches.length + ' matching ' + (matches.length === 1 ? 'option' : 'options') : 'No matching options'}{hiddenSelection ? '. Your selected option is kept below.' : ''}</Text>}
               </View>}
               {visibleChoices.map(choice => <Pressable
                 key={choice.id} accessibilityRole="radio" accessibilityState={{ checked: selected === choice.id, disabled: busy || !!choice.disabledReason }}
-                accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
+                accessibilityLabel={displayText([choice.label, choice.disabledReason].filter(Boolean).join('. '))}
                 disabled={busy || !!choice.disabledReason} onPress={() => { if (canAct() && !choice.disabledReason && selectedRef.current !== choice.id) { selectedRef.current = choice.id; setSelected(choice.id); hapticFeedback(); } }}
                 style={[styles.option, { borderColor: selected === choice.id ? c.blue : c.line, backgroundColor: selected === choice.id ? c.selected : c.surface }]}
               ><Body>{choice.label}</Body>{choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}</Pressable>)}

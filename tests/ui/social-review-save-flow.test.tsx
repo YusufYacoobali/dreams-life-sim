@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -76,13 +77,13 @@ test.each(['post', 'profile', 'fame'] as const)('%s retains an exact reviewed dr
   try {
     const initial = world(), before = encodeWorld(initial), beforeRows = context.rows(), expected = resolveCommand(initial, commandFor(domain), true), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     expect(Object.keys(beforeRows)).toHaveLength(8); let view = render(frame(domain)); await prepare(domain); const originalReview = modal().getByText(reviewTitle(domain)); expect(originalReview).toBeOnTheScreen();
-    if (domain !== 'profile') expect(modal().getByText(domain === 'post' ? formatMoney(postCost(initial, 'polished')) : formatMoney(publicActionQuote(initial, 'event')))).toBeOnTheScreen();
+    if (domain !== 'profile') expect(modal().getByText(displayText(domain === 'post' ? formatMoney(postCost(initial, 'polished')) : formatMoney(publicActionQuote(initial, 'event'))))).toBeOnTheScreen();
     const discarded = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     await press('Never mind'); await act(async () => { await discarded('confirm'); }); draftRetained(domain); expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
     if (domain === 'profile') await press('Review Profile Changes'); else if (domain === 'post') await press('Review Post'); else await prepare(domain);
     context.sqlite.exec("CREATE TRIGGER fail_social_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press(confirmLabel(domain));
     await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getAllByText(/couldn't be saved/)).toHaveLength(1); expect(modal().getByText(reviewTitle(domain))).toBeOnTheScreen(); draftRetained(domain); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows); expect(router.back).not.toHaveBeenCalled(); expect(router.push).not.toHaveBeenCalled();
-    if (domain !== 'profile') expect(modal().getByText(domain === 'post' ? formatMoney(postCost(initial, 'polished')) : formatMoney(publicActionQuote(initial, 'event')))).toBeOnTheScreen();
+    if (domain !== 'profile') expect(modal().getByText(displayText(domain === 'post' ? formatMoney(postCost(initial, 'polished')) : formatMoney(publicActionQuote(initial, 'event'))))).toBeOnTheScreen();
     context.sqlite.exec('DROP TRIGGER fail_social_review'); await press(confirmLabel(domain)); expect(world()).toEqual(expected); expect(screen.queryByText(reviewTitle(domain))).toBeNull(); if (domain === 'profile') expect(screen.queryByLabelText('Edit social handle')).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame(domain)); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.title)).toBeOnTheScreen();
     await press('Continue'); const done = acknowledge(expected); expect(world()).toEqual(done); expect(world().workHistory).toEqual(initial.workHistory); expect(world().date).toEqual(initial.date);

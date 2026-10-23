@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import * as Native from 'react-native';
@@ -125,7 +126,7 @@ test('guitar review is short and retains the real fee, responsible payer and pau
   expect(modal.getByText('Responsible payer')).toBeOnTheScreen();
   expect(modal.getByText(fullName(payer))).toBeOnTheScreen();
   const fee = formatMoney({ minor:hobbyFee(person.country,'guitar','lessons'),currency:countries[person.country].currency },countries[person.country].locale);
-  expect(modal.getByText(fee)).toBeOnTheScreen();
+  expect(modal.getByText(displayText(fee))).toBeOnTheScreen();
   expect(modal.getByText('When you cannot attend or afford it')).toBeOnTheScreen();
   expect(modal.getByText('Shared equipment and materials')).toBeOnTheScreen();
   expect(modal.queryByText(/Actual attended months offer/)).toBeNull();

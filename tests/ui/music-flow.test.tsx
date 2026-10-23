@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -46,8 +47,8 @@ test('a native recording failure rolls back the production start and saved respo
     expect(screen.getByRole('radio', { name: /^Single\./, checked: true })).toBeOnTheScreen();
     expect(screen.getByRole('radio', { name: /^Folk\./, checked: true })).toBeOnTheScreen();
     const quote = recordingQuote(initial, 'single');
-    expect(screen.getByLabelText('Total production budget: ' + formatMoney({ minor: quote.cost, currency: quote.currency }))).toBeOnTheScreen();
-    expect(screen.getByLabelText('First monthly payment: ' + formatMoney({ minor: quote.firstPayment, currency: quote.currency }))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Total production budget: ' + displayText(formatMoney({ minor: quote.cost, currency: quote.currency })))).toBeOnTheScreen();
+    expect(screen.getByLabelText('First monthly payment: ' + displayText(formatMoney({ minor: quote.firstPayment, currency: quote.currency })))).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: /Review Recording\. Give your recording a title/ })).toBeDisabled();
     fireEvent.changeText(screen.getByLabelText('Music release title'), 'Native Sessions');
     fireEvent.press(screen.getByRole('button', { name: 'Review Recording' }));

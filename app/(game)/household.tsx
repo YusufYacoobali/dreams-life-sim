@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text } from 'react-native';
+
 import { router } from 'expo-router';
 import { rentalResidence } from '../../src/game/systems/rentalSchemas';
 import { CatalogArt } from '../../src/assets/CatalogArt';
@@ -13,6 +13,7 @@ import { rules } from '../../src/game/rules';
 import { ActionRow, Body, Button, Card, Header, Heading, Page, Portrait } from '../../src/ui/components';
 import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 type Review = { identity: string; event: EventPresentation };
 

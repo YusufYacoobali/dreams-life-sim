@@ -6,6 +6,7 @@ import { Body, Header, Heading, Page, Portrait } from './components';
 import { useColors } from './theme';
 import { FamilyArt } from '../assets/FamilyArt';
 import { otherPerson, partnerRelation, relationLabel } from '../game/systems/relationships';
+import { displayText } from './DisplayText';
 
 export function FamilyTreeContent({ world, personId = world.activePersonId, readOnly = false }: { world: World; personId?: string; readOnly?: boolean }) {
   const c = useColors(), { width, fontScale } = useWindowDimensions();
@@ -48,8 +49,8 @@ export function FamilyTreeContent({ world, personId = world.activePersonId, read
     const role = id === personId ? 'You' : id === partner?.id && relationship ? relationLabel(world, relationship, personId) : spousesAtDeath.has(id) ? 'Spouse at death' : lateSpouses.has(id) ? 'Late spouse' : parentEdge ? parentEdge.parentType === 'adoptive' ? 'Adoptive parent' : parentEdge.kind === 'guardian' || parentEdge.parentType === 'guardian' ? 'Guardian' : 'Parent' : childEdge ? childEdge.kind === 'guardian' || childEdge.parentType === 'guardian' ? 'In your care' : childEdge.parentType === 'adoptive' ? 'Adopted child' : 'Child' : undefined;
     const subtitle = (role ? role + ' · ' : '') + 'Age ' + ageOn(person, world.date) + (person.died ? ' · Died ' + person.died.year : '');
     const parentsText = ownParents.map(edge => fullName(world.people[edge.from])).join(', '), childrenText = ownChildren.map(edge => fullName(world.people[edge.to])).join(', ');
-    return <Pressable key={id} accessible accessibilityRole="button" accessibilityLabel={name + '. ' + subtitle}
-      accessibilityHint={['View ' + (id === personId ? 'your' : 'this person’s') + (readOnly ? ' life summary' : ' profile'), parentsText && 'Parents and guardians: ' + parentsText, childrenText && 'Children and dependants: ' + childrenText].filter(Boolean).join('. ')}
+    return <Pressable key={id} accessible accessibilityRole="button" accessibilityLabel={displayText(name + '. ' + subtitle)}
+      accessibilityHint={displayText(['View ' + (id === personId ? 'your' : 'this person’s') + (readOnly ? ' life summary' : ' profile'), parentsText && 'Parents and guardians: ' + parentsText, childrenText && 'Children and dependants: ' + childrenText].filter(Boolean).join('. '))}
       onPress={() => router.push(readOnly ? { pathname: '/life-summary', params: { id, readOnly: '1' } } : id === personId ? '/profile' : { pathname: '/person/[id]', params: { id } })}
       style={({ pressed }) => ({ width: singleColumn ? '100%' : '48%', flexGrow: 1, minWidth: 0, padding: 16, borderRadius: 18, borderWidth: 1, borderColor: id === personId ? c.link : c.line, backgroundColor: pressed || id === personId ? c.selected : c.surface })}>
       <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ alignItems: 'center', gap: 8 }}>

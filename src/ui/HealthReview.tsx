@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text } from 'react-native';
+
 import { ageOn, type World } from '../game/model';
 import type { HealthCommand } from '../game/systems/health';
 import { hospitalized } from '../game/systems/healthSchemas';
@@ -10,6 +10,7 @@ import { useGame } from '../state/useGame';
 import { HealthLegalArt, type HealthLegalArtId } from '../assets/HealthLegalArt';
 import { EventModal, type EffectRow, type EventPresentation } from './EventModal';
 import { useColors } from './theme';
+import { DisplayText as Text } from './DisplayText';
 
 type ReviewedHealthCommand = Extract<HealthCommand, { type: 'consult' | 'vaccinate' | 'treat' | 'stop-treatment' | 'fertility-care' | 'cosmetic-care' }>;
 type HealthReviewCommand = ReviewedHealthCommand | Extract<HealthCommand, { type: 'exercise' }>;

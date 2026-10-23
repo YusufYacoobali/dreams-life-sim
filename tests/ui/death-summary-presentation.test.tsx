@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import * as Native from 'react-native';
 import { fireEvent, render, screen } from '@testing-library/react-native';
@@ -51,7 +52,7 @@ test.each([false, true])('memorial summary, child continuation and read-only fam
   expect(screen.getByRole('header', { name: 'Life at a Glance' })).toBeOnTheScreen();
   expect(screen.getByText(expected.summary)).toBeOnTheScreen(); expect(screen.getByText(expected.epitaph)).toBeOnTheScreen();
   expect(screen.getByText('Cause of death: ' + person.causeOfDeath)).toBeOnTheScreen();
-  for (const row of expected.rows) expect(screen.getByLabelText(row.label + ': ' + row.value)).toBeOnTheScreen();
+  for (const row of expected.rows) expect(screen.getByLabelText(displayText(row.label + ': ' + row.value))).toBeOnTheScreen();
   expect(screen.getByRole('progressbar', { name: 'Final happiness' })).toHaveAccessibilityValue({ min: 0, max: 100, now: person.stats.happiness });
   capture('death-summary-' + suffix, view.toJSON());
   fireEvent.press(screen.getByRole('button', { name: 'Continue as Child' })); expect(router.push).toHaveBeenLastCalledWith('/legacy');

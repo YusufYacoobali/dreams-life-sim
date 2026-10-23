@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName } from '../../src/game/personHelpers';
@@ -11,6 +11,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page, Portrait } from '
 import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
 
 const clubs = {
   none: { label: 'No Club', body: 'Keep your timetable free of campus club practice.', skill: null },

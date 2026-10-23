@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../state/useGame';
 import type { GameCommand } from '../game/engine';
@@ -18,6 +18,7 @@ import { SocialBusinessFacts as Facts } from './SocialBusinessPresentation';
 import { AssetFeatures } from './AssetFeatures';
 import { PropertyMethodSelector, type PropertyMethod } from './PropertyMethodSelector';
 import { useColors } from './theme';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 type Review = { identity: string; kind: 'deposit' | 'term' | 'transaction'; event: EventPresentation; command?: GameCommand };
 const deposits = [2000, 4000, 6000, 8000], terms = [120, 240, 360] as const;
@@ -72,7 +73,7 @@ function OfferDetails({ id, initialMethod, propertyOnly }: { id: string; initial
       {method !== 'rent' && residence && <Body muted>Your current rental continues until you move out.</Body>}
       {reason && <Body>{reason}</Body>}
       {method === 'rent' && residence && <ActionRow title="Manage Your Rental" value={residence.name} onPress={() => router.push({ pathname: '/offer/[id]', params: { id: residence.catalogId, method: 'rent' } })} />}
-      <Button label={method === 'rent' ? 'Review Lease' : 'Review Purchase'} disabled={busy || !!current || !!reason} accessibilityLabel={[method === 'rent' ? 'Review Lease' : 'Review Purchase', reason].filter(Boolean).join('. ')} onPress={reviewTransaction} />
+      <Button label={method === 'rent' ? 'Review Lease' : 'Review Purchase'} disabled={busy || !!current || !!reason} accessibilityLabel={displayText([method === 'rent' ? 'Review Lease' : 'Review Purchase', reason].filter(Boolean).join('. '))} onPress={reviewTransaction} />
     </Card>}
     {error && !current && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 16 }}>{error}</Text>}
     <EventModal event={current?.event ?? null} busy={busy} error={current?.kind === 'transaction' ? error : undefined} onCancel={() => { if (canAct() && current && reviewRef.current === current) close(); }} onChoose={async value => {

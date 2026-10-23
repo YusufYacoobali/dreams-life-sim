@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -124,7 +125,7 @@ test('the unchanged actor archive earns modelling training, signs and completes 
     view.unmount(); view = undefined; await year();
     expect(model().status).toBe('between'); expect(model().projects[0].status).toBe('completed'); expect(model().projects[0].months).toBe(3); expect(model().projects[0].periods).toHaveLength(3); expect(model().projects[0].periods.every(item => item.attended)).toBe(true); expect(model().projects[0].grossEarned).toBe(quote / 4n); expect(actor().employment).toBeNull();
     const completed = model(), employment = world().workHistory.find(item => item.id === completed.projects[0].employmentId)!; expect(employment.monthsWorked).toBe(3); expect(employment.grossEarned).toBe(completed.projects[0].grossEarned);
-    view = render(frame()); expect(screen.getByText('completed · ' + completed.projects[0].ended!.year + ' · 3 recorded periods')).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency }) + '. Before tax. Quality ' + completed.projects[0].quality + '%')).toBeOnTheScreen();
+    view = render(frame()); expect(screen.getByText('completed · ' + completed.projects[0].ended!.year + ' · 3 recorded periods')).toBeOnTheScreen(); expect(screen.getByLabelText('Recorded gross earnings: ' + displayText(formatMoney({ minor: completed.projects[0].grossEarned, currency: completed.projects[0].currency })) + '. Before tax. Quality ' + completed.projects[0].quality + '%')).toBeOnTheScreen();
     const beforeLeave = world(); await durableReview(/^Leave This Career\./, 'Leave Career', { type: 'leave-career', careerId: completed.id });
     const left = world(); expect(model().status).toBe('left'); expect(model().projects).toEqual(completed.projects); expect(model().contacts).toEqual(completed.contacts); expect(left.accounts).toEqual(beforeLeave.accounts); expect(left.ledger).toEqual(beforeLeave.ledger); expect(left.random).toEqual(beforeLeave.random); expect(left.workHistory).toEqual(beforeLeave.workHistory);
     view.unmount(); view = undefined; await year(); expect(model()).toEqual(model(left)); expect(world().workHistory.filter(item => item.personId === world().activePersonId)).toEqual(left.workHistory.filter(item => item.personId === left.activePersonId)); expect(actor().finance.lifetimeGross).toBe(actor(left).finance.lifetimeGross); expect(world().careers.find(item => item.id === actorCareer.id)).toEqual(actorCareer);

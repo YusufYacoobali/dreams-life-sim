@@ -8,7 +8,7 @@ import { serviceCatalog } from '../../../src/game/content/services';
 import { fullTimeCreator } from '../../../src/game/systems/creatorSchemas';
 import { creatorCatalog } from '../../../src/game/content/creators';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, Pressable, Text, View, useWindowDimensions } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { countryFlags } from '../../../src/ui/CreationElements';
@@ -30,6 +30,7 @@ import { CareerArt } from '../../../src/assets/CareerArt';
 import { Illustration } from '../../../src/assets/Illustration';
 import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
+import { DisplayText as Text, displayText } from '../../../src/ui/DisplayText';
 
 // Derive only displayed facts and the identity/date scope, never a cached World.
 function identityPresentation(world: World) {
@@ -56,7 +57,7 @@ const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: Identity
   const c = useColors();
   const openProfile = useFeedbackPress(() => router.push('/profile'));
   return <>
-    <Pressable accessibilityRole="button" accessibilityLabel={'My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance} onPress={openProfile} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
+    <Pressable accessibilityRole="button" accessibilityLabel={displayText('My Life profile. ' + data.name + '. Age ' + data.age + '. ' + data.occupation + '. Bank balance ' + data.bankBalance)} onPress={openProfile} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', paddingHorizontal: 16, paddingVertical: 13 }}>
       <Portrait decorative name={data.name} personId={data.personId} appearance={data.appearance} age={data.age} size={52} />
       <View style={{ flex: 1 }}><Text style={{ color: c.ink, fontSize: 18, fontWeight: '700' }} numberOfLines={2}>{data.name}</Text>
         {data.royalLabel !== null && <Text style={{ color: c.muted, fontSize: 11 }}>{data.royalLabel}</Text>}
@@ -191,10 +192,10 @@ export default function Life() {
     {error && <Text accessibilityRole="alert" style={{ color: c.red, paddingHorizontal: 16, marginBottom: 10 }}>{error}</Text>}
     <LifeJournal rows={journalRows} listRef={journal} followJournal={followJournal} stopFollowing={stopFollowing} firstYearHint={firstYearHint} />
     <View style={{ flexDirection: 'row', gap: 10, paddingHorizontal: 16, paddingTop: 14, paddingBottom: 12 }}>
-      <Pressable accessibilityRole="button" accessibilityLabel={world.annual ? 'Continue This Year' : 'Age Up'} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minWidth: 0, minHeight: 62, paddingHorizontal: 12, paddingVertical: 10, borderRadius: 15, flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
+      <Pressable accessibilityRole="button" accessibilityLabel={displayText(world.annual ? 'Continue This Year' : 'Age Up')} accessibilityState={{ disabled: busy || !!world.pending, busy: busy && advancing }} disabled={busy || !!world.pending} onPress={advanceYear} style={({ pressed }) => ({ flex: 1, minWidth: 0, minHeight: 62, paddingHorizontal: 12, paddingVertical: 10, borderRadius: 15, flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy || world.pending ? 0.5 : 1 })}>
         {showYearProgress ? <ActivityIndicator color="#FFFFFF" accessibilityLabel="Saving your year" /> : <Ionicons name="add-circle" size={32} color="#FFFFFF" />}<Text style={{ color: '#FFFFFF', fontSize: world.annual ? 19 : 25, fontWeight: '700',flexShrink:1,minWidth:0,textAlign:'center' }}>{world.annual ? 'Continue This Year' : 'Age Up'}</Text>
       </Pressable>
-      <Pressable accessibilityRole="button" accessibilityLabel={context.label} accessibilityState={{ disabled:busy || !!world.pending }} disabled={busy || !!world.pending} onPress={openContext} style={({ pressed }) => ({ width:showContextLabel ? 88 : 54,flexShrink:0,minHeight:62,paddingHorizontal:6,paddingVertical:8,gap:3,borderRadius:15,borderWidth:1,borderColor:c.line,backgroundColor:pressed ? c.inset : c.selected,alignItems:'center',justifyContent:'center',opacity:busy || world.pending ? 0.5 : 1 })}>
+      <Pressable accessibilityRole="button" accessibilityLabel={displayText(context.label)} accessibilityState={{ disabled:busy || !!world.pending }} disabled={busy || !!world.pending} onPress={openContext} style={({ pressed }) => ({ width:showContextLabel ? 88 : 54,flexShrink:0,minHeight:62,paddingHorizontal:6,paddingVertical:8,gap:3,borderRadius:15,borderWidth:1,borderColor:c.line,backgroundColor:pressed ? c.inset : c.selected,alignItems:'center',justifyContent:'center',opacity:busy || world.pending ? 0.5 : 1 })}>
         <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><LifeContextIcon icon={context.icon} /></View>
         {showContextLabel && <Text style={{ color:c.link,fontSize:12,fontWeight:'700',textAlign:'center' }}>{context.label}</Text>}
       </Pressable>

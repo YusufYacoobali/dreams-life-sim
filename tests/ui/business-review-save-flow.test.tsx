@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react-native';
@@ -69,7 +70,7 @@ test.each(['startup', 'funding', 'custom-startup'] as const)('%s review survives
   const context = await setup(), startup = kind !== 'funding', custom = kind === 'custom-startup';
   try {
     const initial = world(), company = initial.businesses.find(item => item.id === mockCompanyId)!, beforeRows = context.rows(); expect(Object.keys(beforeRows)).toHaveLength(8);
-    const quote = businessStartupQuote(initial, 'retail'), money = (minor: bigint) => formatMoney({ minor, currency: company.currency });
+    const quote = businessStartupQuote(initial, 'retail'), money = (minor: bigint) => displayText(formatMoney({ minor, currency: company.currency }));
     const brand = custom ? 'My Custom Brand' : 'Reviewed Retail', draftName = '  ' + brand + '  ';
     const command: GameCommand = startup ? { type: 'start-business', kind: 'retail', name: brand, operation: 'manager', quotedCapital: quote.capital } : { type: 'fund-business', businessId: company.id, amount: 12345n };
     const expected = resolveCommand(initial, command, true), confirm = startup ? 'Start Business' : 'Fund Business', title = startup ? 'Start ' + brand + '?' : 'Invest more capital?';
@@ -179,7 +180,7 @@ test('switching between two actual owned company routes clears the old amounts a
     await edit('Additional business capital', '456.78'); await press('Review Funding');
     const oldConfirm = screen.UNSAFE_getAllByType(EventModal).find(item => item.props.event?.kind === 'confirmation')!.props.onChoose;
     await act(async () => { cancelledCancel(); await cancelledConfirm('confirm'); });
-    expect(world()).toEqual(initial); expect(modal().getByText(formatMoney({ minor: 45678n, currency: initial.businesses.find(item => item.id === firstId)!.currency }))).toBeOnTheScreen();
+    expect(world()).toEqual(initial); expect(modal().getByText(displayText(formatMoney({ minor: 45678n, currency: initial.businesses.find(item => item.id === firstId)!.currency })))).toBeOnTheScreen();
     mockCompanyId = secondId; view.rerender(frame());
     await act(async () => { await oldConfirm('confirm'); });
     expect(screen.queryByText('Invest more capital?')).toBeNull(); expect(screen.getByText('Second Actual Company')).toBeOnTheScreen(); expect(screen.getByLabelText('Additional business capital')).toHaveProp('value', ''); expect(screen.getByLabelText('Business profit withdrawal')).toHaveProp('value', '');
@@ -229,8 +230,8 @@ test('an ordinary approved relocation invalidates the old startup quote while an
     await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId: world().pending!.id })).toBe(true); });
     const settled = world(), settledRows = context.rows(), newQuote = businessStartupQuote(settled, 'cafe');
     expect(newQuote.currency).toBe('JPY');
-    expect(screen.getByLabelText('Company capital: ' + formatMoney({ minor: newQuote.capital, currency: newQuote.currency }))).toBeOnTheScreen();
-    expect(screen.getByLabelText('Registration fee: ' + formatMoney({ minor: newQuote.registration, currency: newQuote.currency }))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Company capital: ' + displayText(formatMoney({ minor: newQuote.capital, currency: newQuote.currency })))).toBeOnTheScreen();
+    expect(screen.getByLabelText('Registration fee: ' + displayText(formatMoney({ minor: newQuote.registration, currency: newQuote.currency })))).toBeOnTheScreen();
     // This real move leaves insufficient cash for the Japanese startup. Keep
     // that refusal rather than arranging funds just to open another review.
     expect(screen.getByText('Your available balance cannot fund this startup')).toBeOnTheScreen();

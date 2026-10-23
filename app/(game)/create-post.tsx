@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, Text, TextInput, View } from 'react-native';
+import { Switch, TextInput, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { platformContent, postContent, postKinds, PostKind } from '../../src/game/content/social';
@@ -12,6 +12,8 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { useSocialReview } from '../../src/ui/SocialReview';
 import { useColors } from '../../src/ui/theme';
 import { SocialBusinessChoice, SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function CreatePost() {
   const params = useLocalSearchParams<{ accountId: string; live?: string }>(), identity = useGame(s => s.world ? s.world.id + ':' + s.world.activePersonId : 'none');
   return <CreatePostForm key={identity + ':' + (params.accountId + ':' + (params.live ?? ''))} />;

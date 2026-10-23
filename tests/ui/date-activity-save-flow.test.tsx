@@ -1,3 +1,4 @@
+import { displayText } from '../../src/ui/displayNumbers';
 import React from 'react';
 import { Modal } from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
@@ -42,7 +43,7 @@ test('a real spouse date offers four exact prices locally, retains a failed chos
   try {
     await press(/^Go on a Date\b/); expect(screen.getByText('A date with ' + fullName(before.people[mockPersonId]))).toBeOnTheScreen();
     expect(screen.getAllByRole('radio')).toHaveLength(4);
-    for (const price of [/^Go for a Walk · \$0\.00/, /^Go for Coffee · \$10\.00/, /^Share a Meal · \$40\.00/, /^Watch a Movie · \$30\.00/]) expect(screen.getByRole('radio', { name: price })).toBeEnabled();
+    for (const price of [/^Go for a Walk · \$0(?:\s|$)/, /^Go for Coffee · \$10(?:\s|$)/, /^Share a Meal · \$40(?:\s|$)/, /^Watch a Movie · \$30(?:\s|$)/]) expect(screen.getByRole('radio', { name: price })).toBeEnabled();
     expect(screen.getByText(/They can decline; you pay only if they accept/)).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: invite })).toBeDisabled();
     await choose(/^Watch a Movie\b/); const cancelled = selection().props.onChoose; await press('Never mind');
@@ -69,7 +70,7 @@ test('a real spouse date offers four exact prices locally, retains a failed chos
     expect(world().revision).toBe(before.revision + 1); expect(receipts()).toBe(count + 1);
     expect(screen.queryByRole('button', { name: invite })).toBeNull();
     const result = world().pending; if (result?.kind !== 'result') throw new Error('Expected the actual date outcome');
-    expect(screen.getByText(result.body)).toBeOnTheScreen();
+    expect(screen.getByText(displayText(result.body))).toBeOnTheScreen();
     await press('Continue'); expect(screen.getByRole('button', { name: /^Go on a Date\b/ })).toBeDisabled();
   } finally { view.unmount(); jest.restoreAllMocks(); db.sqlite.close(); }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { ageOn, fullName } from '../../src/game/model';
@@ -12,6 +12,8 @@ import { HealthLegalArt } from '../../src/assets/HealthLegalArt';
 import { HealthReviewError, healthReviewReason, useHealthReview } from '../../src/ui/HealthReview';
 import { isConfined } from '../../src/game/systems/legalSchemas';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function Doctor() {
   const world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), review = useHealthReview(), c = useColors();
   const person = world.people[world.activePersonId], provider = person.health.providerId && world.people[person.health.providerId], currency = countries[person.country].currency;

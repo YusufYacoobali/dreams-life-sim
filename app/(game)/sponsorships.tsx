@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import { platformContent, postContent } from '../../src/game/content/social';
@@ -11,6 +11,8 @@ import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { useSocialReview } from '../../src/ui/SocialReview';
 import { useColors } from '../../src/ui/theme';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../src/ui/DisplayText';
+
 export default function Sponsorships() {
   const { accountId } = useLocalSearchParams<{ accountId?: string }>(), world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), review = useSocialReview(accountId ?? ''), c = useColors();
   const accounts = world.socialAccounts.filter(item => item.ownerId === world.activePersonId && (!accountId || item.id === accountId)), deals = world.sponsorships.filter(item => item.ownerId === world.activePersonId && (!accountId || item.accountId === accountId));

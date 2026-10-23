@@ -1,7 +1,7 @@
 import { royalMembership } from '../src/game/systems/royaltySchemas';
 import { royalTitle } from '../src/game/systems/royaltyMath';
 import React, { useCallback } from 'react';
-import { BackHandler, Text, View } from 'react-native';
+import { BackHandler, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Redirect, router, useFocusEffect } from 'expo-router';
 import { useGame } from '../src/state/useGame';
@@ -11,6 +11,7 @@ import { Body, Button, Card, Heading, Page, Portrait } from '../src/ui/component
 import { countryFlags, nationalityLabels } from '../src/ui/CreationElements';
 import { useColors } from '../src/ui/theme';
 import { LifeMilestoneArt } from '../src/ui/LifeMilestoneArt';
+import { DisplayText as Text } from '../src/ui/DisplayText';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export default function Birth() {

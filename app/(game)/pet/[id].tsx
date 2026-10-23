@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { countries } from '../../../src/game/countries';
@@ -10,6 +10,7 @@ import { PolishArt } from '../../../src/assets/PolishArt';
 import { ActionRow, Body, Card, Header, Heading, Page, StatBar } from '../../../src/ui/components';
 import { EventModal, EventPresentation } from '../../../src/ui/EventModal';
 import { useColors } from '../../../src/ui/theme';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
 
 export default function PetProfile() {
   const { id } = useLocalSearchParams<{ id: string }>(), world = useGame(s => s.world)!, busy = useGame(s => s.busy), error = useGame(s => s.error), dispatch = useGame(s => s.dispatch), c = useColors();

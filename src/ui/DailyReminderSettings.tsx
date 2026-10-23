@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Linking, Platform, Switch, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Linking, Platform, Switch, TextInput, View } from 'react-native';
 import { usePreferences } from '../state/usePreferences';
 import { refreshDailyReminders, useReminderStatus } from '../state/reminderStatus';
 import { requestDailyReminderPermission } from '../notifications/dailyReminders';
 import { Body, Button, Card, Heading } from './components';
 import { useColors } from './theme';
+import { DisplayText as Text } from './DisplayText';
 
 const pad = (value: number) => String(value).padStart(2, '0');
 

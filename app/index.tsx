@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,6 +11,7 @@ import { fullName } from '../src/game/model';
 import { useColors } from '../src/ui/theme';
 import { openingBackground, OpeningBrandAccent, OpeningScene } from '../src/ui/OpeningScene';
 import { useFeedbackPress } from '../src/ui/feedback';
+import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 export default function Welcome() {
   const c = useColors();
@@ -35,7 +36,7 @@ export default function Welcome() {
           </View>
           <View style={[styles.actions, compact && styles.compactActions]}>{!ready ? <View style={styles.loading}><ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /><Text accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.loadingText}>Opening your story…</Text></View> : <>
             {error && <View style={styles.error}><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={styles.errorText}>{error}</Text><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></View>}
-            {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue Life as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><View style={styles.continueCopy}><Text style={styles.actionText}>Continue Life</Text><Text style={styles.continueName}>Continue as {fullName(world.people[world.activePersonId])}</Text></View></Pressable>}
+            {world && <Pressable accessibilityRole="button" accessibilityLabel={displayText('Continue Life as ' + fullName(world.people[world.activePersonId]))} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><View style={styles.continueCopy}><Text style={styles.actionText}>Continue Life</Text><Text style={styles.continueName}>Continue as {fullName(world.people[world.activePersonId])}</Text></View></Pressable>}
             <Pressable accessibilityRole="button" accessibilityLabel="Start New Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, world && styles.secondary, { backgroundColor: world ? pressed ? '#263E60' : '#1A2D49' : pressed ? c.actionBluePressed : c.actionBlue, opacity: busy ? 0.5 : 1 }]}>{world && <Ionicons name="add-circle-outline" size={21} color="#B9D1FA" />}<Text style={[styles.actionText, world && styles.secondaryText]}>Start New Life</Text></Pressable>
             <Pressable accessibilityRole="button" accessibilityLabel="Random Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.random, { backgroundColor: pressed ? '#162238' : 'transparent', opacity: busy ? 0.5 : 1 }]}><Ionicons name="dice-outline" size={21} color="#B5C1D7" /><Text style={styles.randomText}>Random Life</Text></Pressable>
           </>}</View>

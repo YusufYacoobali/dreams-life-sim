@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
@@ -11,6 +11,7 @@ import { EventModal, type EventPresentation } from '../../src/ui/EventModal';
 import { annualFinanceSummary, financeCategoryLabel, financeSections, indexPersonalFinances, type FinanceSection } from '../../src/ui/annualFinances';
 import { FinanceArt } from '../../src/assets/FinanceArt';
 import { useColors } from '../../src/ui/theme';
+import { DisplayText as Text, displayText } from '../../src/ui/DisplayText';
 
 export default function Finances() {
   const identity = useGame(s => s.world ? s.world.id + ':' + s.world.activePersonId : 'none');
@@ -80,7 +81,7 @@ function FinanceFact({ label, value, positive = false, debt = false }: { label: 
 
 function FinanceFilter({ title, subtitle, count, selected, onPress }: { title: string; subtitle?: string; count: number; selected: boolean; onPress: () => void }) {
   const c = useColors();
-  return <Pressable accessibilityRole="button" accessibilityLabel={[title, subtitle, String(count)].filter(Boolean).join('. ')} accessibilityState={{ selected }} onPress={onPress} style={({ pressed }) => ({ minHeight: 66, padding: 12, borderRadius: 12, borderWidth: 1, borderColor: selected ? c.link : c.line, backgroundColor: pressed || selected ? c.selected : c.surface, flexDirection: 'row', alignItems: 'center', gap: 10 })}>
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText([title, subtitle, String(count)].filter(Boolean).join('. '))} accessibilityState={{ selected }} onPress={onPress} style={({ pressed }) => ({ minHeight: 66, padding: 12, borderRadius: 12, borderWidth: 1, borderColor: selected ? c.link : c.line, backgroundColor: pressed || selected ? c.selected : c.surface, flexDirection: 'row', alignItems: 'center', gap: 10 })}>
     <View style={{ flex: 1, minWidth: 0, gap: 5 }}><Text style={{ color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: '600' }}>{title}</Text>{subtitle && <Body muted>{subtitle}</Body>}</View>
     <Text style={{ color: c.muted, fontSize: 14, flexShrink: 1 }}>{count}</Text><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={selected ? 'checkmark-circle' : 'chevron-forward'} size={22} color={selected ? c.link : c.muted} /></View>
   </Pressable>;

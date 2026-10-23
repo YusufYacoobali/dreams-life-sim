@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { fullName, type World } from '../game/model';
 import { countries } from '../game/countries';
@@ -12,6 +12,7 @@ import { ActionRow, Body, Button, Card, Header, Heading, Page } from './componen
 import { FilterTabs } from './FilterTabs';
 import { EventModal } from './EventModal';
 import { useColors } from './theme';
+import { DisplayText as Text, displayText } from './DisplayText';
 
 const tabs = [{ id: 'money', label: 'Money' }, { id: 'stats', label: 'Stats' }, { id: 'skills', label: 'Skills & Attributes' }, { id: 'relationships', label: 'Relationships' }] as const;
 const title = (key: string) => key === 'publicImage' ? 'Public image' : key.charAt(0).toUpperCase() + key.slice(1);
@@ -79,8 +80,8 @@ function Editor({ world }: { world: World }) {
       const moneyChange = (value: Partial<typeof edit>) => { setError(null); setDraft(previous => ({ ...previous, money: { ...previous.money, [account.id]: { ...previous.money[account.id], ...value } } })); };
       return <Card key={account.id}><Heading size={19}>{account.currency} account</Heading><Body>Current balance: {formatMoney({ minor: account.cash, currency: account.currency }, locale)}</Body>
         {account.lockedCash > 0n && <Body muted>Held in trust: {formatMoney({ minor: account.lockedCash, currency: account.currency }, locale)}. These funds remain locked.</Body>}
-        {(['set', 'add', 'subtract'] as const).map(operation => <Button key={operation} label={operation === 'set' ? 'Set exact balance' : operation === 'add' ? 'Add money' : 'Subtract money'} accessibilityLabel={title(operation) + ' ' + account.currency + ' money'} accessibilityRole="radio" accessibilityState={{ checked: edit.operation === operation }} tone={edit.operation === operation ? 'primary' : 'secondary'} disabled={disabled} onPress={() => moneyChange({ operation })} />)}
-        <TextInput accessibilityLabel={account.currency + ' amount'} editable={!disabled} value={edit.amount} onChangeText={amount => moneyChange({ amount })} keyboardType="decimal-pad" placeholder={currencyDigits[account.currency] ? '0.00' : '0'} placeholderTextColor={c.muted} maxLength={40} style={{ color: c.ink, borderColor: c.line, borderWidth: 1, borderRadius: 10, minHeight: 48, padding: 12, fontSize: 16 }} />
+        {(['set', 'add', 'subtract'] as const).map(operation => <Button key={operation} label={operation === 'set' ? 'Set exact balance' : operation === 'add' ? 'Add money' : 'Subtract money'} accessibilityLabel={displayText(title(operation) + ' ' + account.currency + ' money')} accessibilityRole="radio" accessibilityState={{ checked: edit.operation === operation }} tone={edit.operation === operation ? 'primary' : 'secondary'} disabled={disabled} onPress={() => moneyChange({ operation })} />)}
+        <TextInput accessibilityLabel={displayText(account.currency + ' amount')} editable={!disabled} value={edit.amount} onChangeText={amount => moneyChange({ amount })} keyboardType="decimal-pad" placeholder="0" placeholderTextColor={c.muted} maxLength={40} style={{ color: c.ink, borderColor: c.line, borderWidth: 1, borderRadius: 10, minHeight: 48, padding: 12, fontSize: 16 }} />
         <Body muted>Presets use the selected operation.</Body><View style={{ gap: 8 }}>{[10000, 100000, 1000000, 10000000, 1000000000].map(amount => <Button key={amount} label={formatMoney({ minor: BigInt(amount) * 10n ** BigInt(currencyDigits[account.currency]), currency: account.currency }, locale)} tone="secondary" disabled={disabled} onPress={() => moneyChange({ amount: String(amount) })} />)}</View>
         {!!preview && <Body>After saving: {preview}</Body>}{!!invalid && <Text accessibilityRole="alert" style={{ color: c.red }}>{invalid}</Text>}
       </Card>;
@@ -98,11 +99,11 @@ function Percentage({ label, value, disabled, onChange }: { label: string; value
   const c = useColors(), [width, setWidth] = useState(1), numeric = Number(value), valid = /^\d{1,3}$/.test(value.trim()) && numeric <= 100, current = valid ? numeric : 0;
   const slide = (x: number) => { if (!disabled) onChange(String(Math.round(Math.max(0, Math.min(1, (x - 12) / Math.max(1, width - 24))) * 100))); };
   return <View style={{ gap: 6, paddingVertical: 10 }}><Body>{label}: {valid ? numeric : '—'}/100</Body>
-    <View accessible accessibilityRole="adjustable" accessibilityLabel={label + ' slider'} accessibilityValue={{ min: 0, max: 100, now: current }} accessibilityState={{ disabled }} accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]} onAccessibilityAction={event => { if (!disabled && ['increment', 'decrement'].includes(event.nativeEvent.actionName)) onChange(String(Math.max(0, Math.min(100, current + (event.nativeEvent.actionName === 'increment' ? 1 : -1))))); }}
+    <View accessible accessibilityRole="adjustable" accessibilityLabel={displayText(label + ' slider')} accessibilityValue={{ min: 0, max: 100, now: current }} accessibilityState={{ disabled }} accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]} onAccessibilityAction={event => { if (!disabled && ['increment', 'decrement'].includes(event.nativeEvent.actionName)) onChange(String(Math.max(0, Math.min(100, current + (event.nativeEvent.actionName === 'increment' ? 1 : -1))))); }}
       onLayout={event => setWidth(event.nativeEvent.layout.width)} onStartShouldSetResponder={() => !disabled} onMoveShouldSetResponder={() => !disabled} onResponderGrant={event => slide(event.nativeEvent.locationX)} onResponderMove={event => slide(event.nativeEvent.locationX)} style={{ minHeight: 48, justifyContent: 'center', paddingHorizontal: 12, opacity: disabled ? 0.5 : 1 }}>
       <View pointerEvents="none" style={{ height: 6, borderRadius: 4, backgroundColor: c.track }}><View style={{ width: current + '%' as `${number}%`, height: 6, backgroundColor: c.actionBlue, borderRadius: 4 }} /><View style={{ position: 'absolute', left: current + '%' as `${number}%`, marginLeft: -10, top: -7, height: 20, width: 20, borderRadius: 10, backgroundColor: c.actionBlue }} /></View>
     </View>
-    <TextInput accessibilityLabel={label + ' value'} value={value} editable={!disabled} onChangeText={onChange} keyboardType="number-pad" maxLength={4} style={{ minHeight: 48, padding: 12, borderRadius: 10, borderWidth: 1, borderColor: valid ? c.line : c.red, color: c.ink, fontSize: 16 }} />
+    <TextInput accessibilityLabel={displayText(label + ' value')} value={value} editable={!disabled} onChangeText={onChange} keyboardType="number-pad" maxLength={4} style={{ minHeight: 48, padding: 12, borderRadius: 10, borderWidth: 1, borderColor: valid ? c.line : c.red, color: c.ink, fontSize: 16 }} />
     {!valid && <Text accessibilityRole="alert" style={{ color: c.red }}>Enter a whole number from 0 to 100.</Text>}
   </View>;
 }

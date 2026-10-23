@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
+
 import { router, useLocalSearchParams } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { creatorCatalog } from '../../../src/game/content/creators';
@@ -13,6 +13,8 @@ import { CareerArt } from '../../../src/assets/CareerArt';
 import { useCareerReview } from '../../../src/ui/CareerReview';
 import { useColors } from '../../../src/ui/theme';
 import { SocialBusinessFacts, SocialBusinessIntro } from '../../../src/ui/SocialBusinessPresentation';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
+
 export default function CreatorStudio(){
   const params=useLocalSearchParams<{kind:string}>(),kind=creatorKinds.find(item=>item===params.kind)??'youtuber';
   const identity=useGame(s=>{const world=s.world;if(!world)return 'none';const studio=world.creatorStudios.find(item=>item.personId===world.activePersonId&&item.kind===kind);return world.id+':'+world.activePersonId+':'+kind+':'+(studio?.id??'new');});

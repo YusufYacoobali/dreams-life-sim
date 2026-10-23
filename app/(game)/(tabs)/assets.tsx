@@ -1,5 +1,6 @@
+import { displayQuantity } from "../../../src/ui/displayNumbers";
 import React from 'react';
-import { Text, View, useWindowDimensions } from 'react-native';
+import { View, useWindowDimensions } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../../src/state/useGame';
 import { countries } from '../../../src/game/countries';
@@ -18,6 +19,7 @@ import { GodModeShortcut } from '../../../src/ui/GodModeAccess';
 import { PolishArt } from '../../../src/assets/PolishArt';
 import { rentalResidence } from '../../../src/game/systems/rentalSchemas';
 import { FinanceArt } from '../../../src/assets/FinanceArt';
+import { DisplayText as Text } from '../../../src/ui/DisplayText';
 
 export default function Assets() {
   const world = useGame(s => s.world)!;
@@ -48,7 +50,7 @@ export default function Assets() {
       <ActionRow title={kind === 'property' ? 'Real Estate' : kind === 'vehicle' ? 'Buy a Vehicle' : 'Shop Possessions'} subtitle={kind === 'property' ? 'Buy, mortgage or rent a home' : undefined} onPress={() => router.push({ pathname: '/shopping/[kind]', params: { kind } })} />
     </Card>; })}
     <Card><Heading size={20}>Businesses</Heading>{world.businesses.filter(item => item.ownerId === player.id && item.status === 'active').map(company => <ActionRow key={company.id} title={company.name} subtitle="Estimated company equity" value={formatMoney({ minor: businessValue(world, company), currency: company.currency })} onPress={() => router.push({ pathname: '/business/[id]', params: { id: company.id, tab: 'assets' } })} />)}<ActionRow title="Business Portfolio" icon={<FameBusinessArt id="business" size={44} />} onPress={() => router.push({ pathname: '/business', params: { tab: 'assets' } })} /></Card>
-    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><CatalogArt id="portfolio" size={40} /><Heading size={20}>Investments</Heading></View>{holdings.map(holding => <ActionRow key={holding.id} title={instruments[holding.instrumentId].name} subtitle={formatQuantity(holding.quantity, holding.instrumentId) + ' units'} value={formatMoney({ minor: investmentValue(world, holding.instrumentId, holding.quantity, accountFor(world).currency), currency: accountFor(world).currency })} onPress={() => router.push({ pathname: '/investment/[id]', params: { id: holding.instrumentId } })} />)}
+    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><CatalogArt id="portfolio" size={40} /><Heading size={20}>Investments</Heading></View>{holdings.map(holding => <ActionRow key={holding.id} title={instruments[holding.instrumentId].name} subtitle={displayQuantity(formatQuantity(holding.quantity, holding.instrumentId)) + ' units'} value={formatMoney({ minor: investmentValue(world, holding.instrumentId, holding.quantity, accountFor(world).currency), currency: accountFor(world).currency })} onPress={() => router.push({ pathname: '/investment/[id]', params: { id: holding.instrumentId } })} />)}
       <ActionRow title="Stocks, Funds & Crypto" icon={<CatalogArt id="portfolio" size={44} />} onPress={() => router.push('/investments')} />
     </Card>
   </Page>;
