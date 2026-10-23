@@ -2,7 +2,8 @@
 
 This focused pass extends the Cult Leader implementation at `9101307c` on
 `work` and integrates the later event-writing and asset-cleanup source at
-`5a5902f`. The career, artwork and two management routes are retained. See the
+`5a5902f`, plus the subsequent welcome presentation at `2ef980c`. The career,
+artwork and two management routes are retained. See the
 [feature guide](../../CULT_LEADER.md) and the
 [original implementation report](../cult-career/README.md).
 
@@ -59,10 +60,22 @@ account reconciliation and retained former identities. Connected UI checks
 cover actual SQLite saves, held commits, retries, stale candidates, replacement
 reviews, search and unchanged default dialogs.
 
-Runtime is frozen at `d1df219`. Final command results are recorded in
-[test-summary.json](test-summary.json). The full invocation and any affected
-test-only rerun are listed separately; their counts are not added together as
-duplicate coverage.
+Game-core runtime is frozen at `d1df219`; final app presentation is at `51c7a83`. Final command results are recorded in
+[test-summary.json](test-summary.json). Final verified coverage is **307 suites
+and 4,421 tests**, across the complete regression and affected reruns. The full
+invocation finished with 305/306 suites and 4,398/4,399 tests passing; its sole
+failure was an old assertion expecting two recruiter choices. That test was
+expanded to cover all eight actual choices, including 12 additional success/
+failure cases, and all 18 cases in that file pass. The later welcome-only merge
+adds one suite with ten new cases; all ten affected welcome/cinematic/startup
+suites pass 47 cases. These overlapping runs are listed separately and are not
+summed as duplicate coverage.
+
+The **120-life soak** passes all three shards, completing each seed 0–119 once.
+All life results are retained in [soak-results.json](soak-results.json). Strict
+app/test types, the 493-module import graph, notices check and both production
+exports pass. The game-core source did not change during the full regression
+or soak; final presentation changes have their affected checks and new exports.
 
 ## Browser layout evidence
 
@@ -91,8 +104,9 @@ review tooling, not app dependencies.
 
 ## Production boundary
 
-The export verifier compares all 18 changed runtime source files against both
-platform source maps, checks the Hermes headers and confirms all 12 original
+The export verifier compares all 20 changed runtime source files (18 for cult
+polish and two for welcome) against both platform source maps, checks the
+Hermes headers and confirms all 12 original
 cult illustrations match their asset hashes. Source hashes are in
 [runtime-source-hashes.json](runtime-source-hashes.json), and final bundle
 results are in [platform-checks.json](platform-checks.json).

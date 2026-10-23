@@ -1,0 +1,154 @@
+{
+  "runtimeCommit": "51c7a83ded581633edeb538e3aa09315bcf63c78",
+  "gameCoreCommit": "d1df219513090ad9b6c69fc30bf17c3ec1956270",
+  "welcomeBaseline": "2ef980cf4fc30ceeac77a9c9406ed74e90098fcd",
+  "reviewedCultBaseline": "9101307c89f4c05453322e78b6d7f0fcca40a403",
+  "integratedBaseline": "5a5902f383be2016f4b911bc0cff36b39511d409",
+  "versions": {
+    "world": 48,
+    "engine": 50,
+    "content": 27,
+    "reader": 28,
+    "database": 4
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit": 0
+  },
+  "criticalCompatibility": {
+    "exit": 0,
+    "suitesPassed": 4,
+    "testsPassed": 42,
+    "includedInFullRegression": true
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "exit": 0,
+    "modules": 493,
+    "cycles": []
+  },
+  "fullRegression": {
+    "command": "npm test",
+    "exit": 1,
+    "suitesPassed": 305,
+    "suitesTotal": 306,
+    "testsPassed": 4398,
+    "testsTotal": 4399,
+    "singleCompleteInvocation": true,
+    "failedSuites": [
+      "tests/game/cult-recruiter-writing.test.ts"
+    ],
+    "failure": "Preexisting catalogue assertion expected two recruiter choices; expanded catalogue contains eight. Runtime callback outcomes passed."
+  },
+  "affectedTestOnlyRerun": {
+    "command": "npx jest --runInBand tests/game/cult-recruiter-writing.test.ts",
+    "exit": 0,
+    "suitesPassed": 1,
+    "testsPassed": 18,
+    "originalFileTests": 6,
+    "addedCases": 12,
+    "runtimeChanged": false
+  },
+  "welcomeIntegrationRerun": {
+    "command": "npx jest --runInBand tests/ui/welcome-screen.test.tsx tests/ui/onboarding-flow.test.tsx tests/ui/onboarding-accessibility-flow.test.tsx tests/ui/onboarding-haptics-flow.test.tsx tests/ui/scene-motion.test.tsx tests/ui/settings-flow.test.tsx tests/persistence/opening-migration.test.ts tests/ui/cinematic-assets.test.ts tests/ui/cinematic-transition.test.tsx tests/ui/startup-flow.test.tsx",
+    "exit": 0,
+    "suitesPassed": 10,
+    "testsPassed": 47,
+    "newSuiteTests": 10,
+    "gameCoreChanged": false
+  },
+  "verifiedCoverage": {
+    "suites": 307,
+    "tests": 4421,
+    "allPassingAcrossFullAndAffectedReruns": true
+  },
+  "cultCases": {
+    "gameplayAndIntegration": 310,
+    "connectedUI": 16,
+    "persistence": 22,
+    "recruiterCallbacksInAffectedRerun": 18,
+    "coreUIAndPersistenceIncludedInFullRegression": true
+  },
+  "soak": {
+    "command": "DREAMS_SOAK_WORKERS=3 npm run test:soak -- 120",
+    "exit": 0,
+    "sweep": "complete",
+    "lives": 120,
+    "workers": 3,
+    "passed": true,
+    "uniqueSeeds": 120,
+    "seedRange": [
+      0,
+      119
+    ],
+    "ageAtDeathRange": [
+      37,
+      97
+    ],
+    "maximumPeople": 28,
+    "maximumLedgerRows": 67065,
+    "allThreeShardSuitesPassed": true
+  },
+  "exports": {
+    "command": "npx expo export --platform all --max-workers 1 --source-maps --output-dir /tmp/dreams-cult-polish-final-source-export",
+    "exit": 0,
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "sourceAndImageHashes": "platform-checks.json"
+  },
+  "browserReview": "browser-checks.json",
+  "nativeDeviceValidation": "Not performed: no Android/iOS simulator or physical device available",
+  "sourceBoundary": "Game-core source remains frozen at gameCoreCommit for the full regression and 120-life soak. A concurrent welcome-only update was merged later; affected onboarding/cinematic/startup suites, final strict types, imports and both platform exports cover runtimeCommit. One test-only pending-money encoding assertion was corrected before the full invocation reached that suite. The old two-choice recruiter catalogue assertion failed in the full run; after test-only expansion, all 18 recruiter cases pass in the affected rerun. Initial pre-merge checks were superseded and are not counted as final passes.",
+  "logs": {
+    "full": {
+      "path": "/tmp/dreams-cult-polish-integrated-full.log",
+      "sha256": "ec94579a5e4931ec79dec5753707dba8da99a48c6cec8f4746eda563aed6d877"
+    },
+    "soak": {
+      "path": "/tmp/dreams-cult-polish-integrated-soak.log",
+      "sha256": "12fb036702b3a8f1ddcdc4593bb81eccef2d6a79bfaa8c7595e5c864b85b5263"
+    },
+    "types": {
+      "path": "/tmp/dreams-cult-polish-final-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "imports": {
+      "path": "/tmp/dreams-cult-polish-final-imports.log",
+      "sha256": "e8e7069b7ab77617f2f03b63069caf9a3ce9379cdc62f08103d791f5315688ff"
+    },
+    "notices": {
+      "path": "/tmp/dreams-cult-polish-final-notices.log",
+      "sha256": "2b2786e490d97ef57fd4622e0ef10fb6d3d942cd8c16bea5f16f94f583c02863"
+    },
+    "export": {
+      "path": "/tmp/dreams-cult-polish-final-export.log",
+      "sha256": "9b85b6cf35a49871131a70d47068819a76dcb86871ee53ec8221b6b1911e7e0b"
+    },
+    "platforms": {
+      "path": "/tmp/dreams-cult-polish-final-platforms.log",
+      "sha256": "12204d767052562837e04fbf9f5ba43ce5d3939cb2d4ae4beafbba92f7591a1f"
+    },
+    "browser": {
+      "path": "/tmp/dreams-cult-polish-integrated-browser.log",
+      "sha256": "df3bc0c3142c5f03a8dbfd03e7bc5818a95d729b27ad36468b351d7f120cfe0b"
+    },
+    "ui": {
+      "path": "/tmp/dreams-cult-polish-integrated-ui.log",
+      "sha256": "83d9f95886e426a52ab510ea0f0813020de8da65711a25e0fbb3861be2ebf4fb"
+    },
+    "recruiter": {
+      "path": "/tmp/dreams-cult-polish-integrated-recruiter.log",
+      "sha256": "e0b26ac0b783fb6eabc3f583b5a4c3038e7622beffaf7efc6fb40f9e3263b1cf"
+    },
+    "welcome": {
+      "path": "/tmp/dreams-cult-polish-integrated-welcome.log",
+      "sha256": "352deb615cf267bd46a108f5818ae5ddb97778fe21748028267074a572c58af3"
+    },
+    "critical-compatibility": {
+      "path": "/tmp/cult48-critical-corrected.log",
+      "sha256": "4840bf37a88a1e73693b95ce57d1f945ee2320e15e5c340cf62ab2e307c7f6d4"
+    }
+  }
+}

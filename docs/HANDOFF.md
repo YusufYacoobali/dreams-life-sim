@@ -11,6 +11,13 @@ is compact, belief lists are searchable, and the existing two routes and
 12 illustrations are retained. See [the current guide](CULT_LEADER.md) and
 [the polish report](verification/cult-polish/README.md).
 
+Verification covers **307 suites / 4,421 tests** across the full regression
+and affected test-only/welcome reruns, plus a passing **120-life soak**. Strict
+app/test types, the 493-module import graph, browser layouts and both final
+Android/iOS exports pass. Native-device validation remains pending. Game-core
+source is `d1df219`; final app presentation is `51c7a83`, retaining the concurrent
+welcome redesign as well as event writing and size cleanup.
+
 Current markers are **World 48 / engine 50 / content 27 / reader 28 / database v4**.
 The concurrent event-writing and size-cleanup changes are retained. Genuine
 World 46 cult saves, both independently produced World 46 formats, integrated

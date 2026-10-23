@@ -1,5 +1,6 @@
 {
   "app/(game)/cult.tsx": "6e24b56802cef07fd24a2afe486d914a4966386c7f446202c0078fd7314ea663",
+  "app/index.tsx": "152dfeb2ad045e264c405bdcd98b02d823aab9f7bf999aceef5f52e36211e832",
   "src/game/content/cultActivities.ts": "9d71e7eb826e46ab8b376ec923ee57722ac004b986b39ecf5b9869607fc49765",
   "src/game/content/cultClaims.ts": "6bd63fd8684cd5c8a317aedf999e57f42b1cd82e96f5012bd5d86b08e6de638c",
   "src/game/content/cultDramaticStories.ts": "5b3468548b930b8d297001e4e78bb81a4bde82ee6d129e1ee7e55b052eba8fca",
@@ -16,5 +17,6 @@
   "src/game/systems/cults.ts": "50177ad389717a9c3ffa42d2c42bba439a50cdf7e84afced67b4c377d2634f9e",
   "src/persistence/repository.ts": "bf01e9c962c5d831447f67fe8fc526353596b891dd64a43beff1a0d4bc130711",
   "src/ui/CultDialog.tsx": "33b315ba17d615c5226a1d455cf9668122ddf71396a296be9eee66df4fd4e9c2",
-  "src/ui/EventModal.tsx": "83c9c082b5c55ffe097df416d20797a393586c5550d5fe81a72f3757d66c0248"
+  "src/ui/EventModal.tsx": "83c9c082b5c55ffe097df416d20797a393586c5550d5fe81a72f3757d66c0248",
+  "src/ui/OpeningScene.tsx": "8b45961ddfdb17b91dadda537dada0116b2d5334b2e595c39a5bf4639c58ef6e"
 }
