@@ -10,7 +10,10 @@ import {
 } from '../../src/game/model';
 import { fullName } from '../../src/game/personHelpers';
 import { randomInteger } from '../../src/game/random';
-import { cultChangeFollowers, cultRecord } from '../../src/game/systems/cultCore';
+import {
+  cultChangeFollowers,
+  cultRecord,
+} from '../../src/game/systems/cultCore';
 import {
   cultStoryContext,
   cultStoryMonth,
@@ -27,18 +30,37 @@ import { drainCult, foundCult } from '../support/cults';
 const recruiterChoices = [
   ['phone-in-the-bell', 'broadcast'],
   ['merchandise-star', 'credit'],
+  ['kettle-ownership-war', 'broadcast'],
+  ['activity-comments-escape', 'reply'],
+  ['activity-sermon-crown', 'share'],
+  ['activity-open-house-visitor', 'host'],
+  ['activity-grand-chair', 'platform'],
+  ['activity-member-credit', 'credit'],
 ] as const;
 
 function entrustRole(templateId: string, choiceId: string) {
+  const definition = cultStories.find((row) => row.id === templateId)!;
   let world = foundCult(undefined, {
     headquarters: 'farmhouse',
-    rules: ['no-phones', 'open-books'],
+    rules: [definition.rule ?? 'no-phones', 'open-books'],
+    doctrines: [definition.doctrine ?? 'borrowed-dreams', 'public-answers'],
   });
   const cult = world.cults[0];
-  // This explicit population boundary makes both authored contexts eligible.
-  // As in cults-depth, use the real membership helper so reports reconcile.
-  cultChangeFollowers(cult, 80 - cult.followers);
-  const definition = cultStories.find((row) => row.id === templateId)!;
+  // Keep all eight actual responsibility contexts eligible, including the
+  // treasurer's sacred-kettle receipts and the deputy's public platform.
+  // Use the membership helper so the existing report totals still reconcile.
+  cultChangeFollowers(
+    cult,
+    Math.max(80, definition.minFollowers ?? 0) - cult.followers,
+  );
+  expect(definition.need).toBeUndefined();
+  if (definition.role)
+    expect(
+      cult.members.some(
+        (member) =>
+          member.status === 'active' && member.role === definition.role,
+      ),
+    ).toBe(true);
   const context = cultStoryContext(world, cult, definition)!;
   expect(context).toBeDefined();
   const thread = newCultThread(
@@ -107,7 +129,7 @@ function beforeDeadline(world: World) {
   world.cults[0].lastSceneMonth = cultMonthNumber(world);
 }
 
-test('the shared recruiter callback covers both real responsibility choices', () => {
+test('the shared recruiter callback covers all eight real responsibility choices', () => {
   expect(
     cultStories.flatMap((story) =>
       story.choices
@@ -159,7 +181,9 @@ describe.each(recruiterChoices)('%s / %s', (templateId, choiceId) => {
       if (outcome === 'success') {
         expect(cult.followers - followers).toBe(25);
         expect(cult.cash - before.cults[0].cash).toBe(cult.joiningFee * 25n);
-        expect(cult.income - before.cults[0].income).toBe(cult.joiningFee * 25n);
+        expect(cult.income - before.cults[0].income).toBe(
+          cult.joiningFee * 25n,
+        );
         expect(cult.book.at(-1)).toMatchObject({
           delta: cult.joiningFee * 25n,
           kind: 'income',
@@ -168,7 +192,8 @@ describe.each(recruiterChoices)('%s / %s', (templateId, choiceId) => {
         });
         expect(cult.scandals).toEqual(before.cults[0].scandals);
         expect(world.journal.at(-1)!.text).toBe(
-          name + ' brought 25 new followers through the work I entrusted to them.',
+          name +
+            ' brought 25 new followers through the work I entrusted to them.',
         );
       } else {
         expect(cult.followers).toBe(followers);

@@ -421,7 +421,7 @@ test.each([
       engineVersion: 50,
       contentVersion: 27,
     });
-    expect(migrated.pending).toEqual(raw.pending);
+    expect(JSON.parse(encodeWorld(migrated)).pending).toEqual(raw.pending);
     expect(migrated.random).toEqual(raw.random);
     expect(unpackCheckpoint(packCheckpoint(migrated), true)).toEqual(migrated);
     const { sqlite, driver } = database();

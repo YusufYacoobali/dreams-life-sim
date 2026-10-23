@@ -37,16 +37,18 @@ This focused pass extends the Cult Leader implementation at `9101307c` on
 ## Saves and focused verification
 
 Current markers are **World 48 / engine 50 / content 27 / SQLite reader 28 /
- database v4**. Published World 46 and integrated World 47 saves upgrade without rewriting
-cult people, offers, threads, random state or financial history. Reader 13–27
-upgrades remain metadata-only.
+database v4**. Published World 46 and integrated World 47 saves upgrade without
+rewriting cult people, offers, threads, random state or financial history.
+Reader 13–27 upgrades remain metadata-only.
 
 The genuine pre-polish fixture was captured by the original `9101307c` engine,
 including an expelled treasurer, scheduled rival return, resolved accusation,
 failed claim, active witnesses, interrupted annual cursor and communal accounts.
 Legacy admission/postponement/blame produce the exact original full-world
 fingerprints after migration. Existing fixture bytes and historical hashes are
-unchanged.
+unchanged. A second fixture comes from the published integrated `5a5902f`
+engine and proves World 47 cult and immediate-writing payloads also upgrade
+without rebinding words or quotes.
 
 Focused checks exercise vacancy replacement across 12 years, former-member
 rejoining, simultaneous organisations, shared advisers, all activity methods and
@@ -57,7 +59,10 @@ account reconciliation and retained former identities. Connected UI checks
 cover actual SQLite saves, held commits, retries, stale candidates, replacement
 reviews, search and unchanged default dialogs.
 
-Final command results are recorded in [test-summary.json](test-summary.json).
+Runtime is frozen at `d1df219`. Final command results are recorded in
+[test-summary.json](test-summary.json). The full invocation and any affected
+test-only rerun are listed separately; their counts are not added together as
+duplicate coverage.
 
 ## Browser layout evidence
 
