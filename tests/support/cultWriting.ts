@@ -27,7 +27,7 @@ export function refreshCultWritingOffer(world: World, id: string) {
  * people, relations and every other saved scalar remain in the comparison.
  */
 export function cultWritingMechanics(value: unknown, path = ''): unknown {
-  if (Array.isArray(value)) return path.endsWith('.report.events') ? value.map(() => '<copy>') : value.map((item, i) => cultWritingMechanics(item, path + '.' + i));
+  if (Array.isArray(value)) return path.endsWith('.report.events') || /^\.cults\.\d+\.years\.\d+\.events$/.test(path) ? value.map(() => '<copy>') : value.map((item, i) => cultWritingMechanics(item, path + '.' + i));
   if (!value || typeof value !== 'object') return value;
   return Object.fromEntries(Object.entries(value).map(([key, item]) => [key,
     ['title', 'body', 'resultTitle', 'resultBody', 'journal', 'label', 'description', 'text', 'reason'].includes(key) && typeof item === 'string'
