@@ -8,7 +8,7 @@ payoffs and journal entries. The full audit now has 133 revised events and
 eligibility, effects, RNG and existing saved words remain. All 57 original saved
 outcomes are byte-pinned through full-world hashes. Current markers remain
 World47 / engine49 / content26 / reader27 / SQLite v4. The upstream asset cleanup
-is retained. At source `d861b33`, all **303 suites / 4,275 tests**, types and imports pass. Twelve complete natural lives include 78 follow-up encounters with no unintended gameplay changes. See [the follow-up writing and verification](verification/event-writing/deferred-followup.md).
+is retained. At source `d861b33`, all **303 suites / 4,275 tests**, types and imports pass. Twelve complete natural lives include 78 follow-up encounters with no unintended gameplay changes. The newer welcome commits are also retained and their four affected suites pass; current coverage is 304 suites / 4,285 tests across the full run and latest affected checks. See [the follow-up writing and verification](verification/event-writing/deferred-followup.md).
 
 
 ## Size cleanup — 23 October 2026

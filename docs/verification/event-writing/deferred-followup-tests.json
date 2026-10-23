@@ -634,6 +634,43 @@
     "imports": {
       "path": "/tmp/dreams-deferred-imports.log",
       "sha256": "b823845ceb79cb1d15a269befd23a68934e3b57b12c64eb1e172c1086c7a4c56"
+    },
+    "finalTypes": {
+      "path": "/tmp/dreams-deferred-final-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "finalImports": {
+      "path": "/tmp/dreams-deferred-final-imports.log",
+      "sha256": "b823845ceb79cb1d15a269befd23a68934e3b57b12c64eb1e172c1086c7a4c56"
+    },
+    "welcomeIntegration": {
+      "path": "/tmp/dreams-deferred-welcome-integration.log",
+      "sha256": "ddf982dde74c2197b843db59d80d69349d13e7f32e40b1c9d9adb5390f3facff"
+    }
+  },
+  "finalIntegration": {
+    "sourceCommit": "a3b69bf6a2491d228ac61ef8b51558bbf680da55",
+    "retainedRemoteHead": "5a1f582fe637beb6d1445a365b833ca16e402de6",
+    "gamePersistenceAndStateIdenticalToFullSource": true,
+    "welcomeChecks": {
+      "suitesPassed": 4,
+      "testsPassed": 20,
+      "exit": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exit": 0
+    },
+    "imports": {
+      "command": "npm run check:imports",
+      "exit": 0,
+      "modules": 488,
+      "cycles": []
+    },
+    "currentCoverage": {
+      "suites": 304,
+      "tests": 4285,
+      "method": "Complete303-suite regression plus latest results for all4 changed/new welcome suites; older results for the same test files are replaced, not counted twice."
     }
   }
 }

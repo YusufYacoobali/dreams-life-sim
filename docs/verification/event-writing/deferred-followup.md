@@ -14,6 +14,8 @@ At source `d861b33`, **303 suites / 4,275 tests** pass in one full invocation. S
 
 All 12 natural lives completed: 779 decisions and 78 encounters with 11 different follow-up scenes. Choice IDs, consequence rows, death ages and ledger-row counts match the previous run; other scenes and journal entries remain exact. No unresolved bindings, missing nonfatal payoffs or five-year cooldown violations were found. This first-available-choice strategy does not create pets, hobbies or trips; genuine domain fixtures cover those contexts and all 57 alternatives.
 
+After retaining the newer welcome-screen commits, all four affected suites (20 tests), types and imports also pass at `a3b69bf`. Game, persistence and state files are identical to the full-regression source. Current coverage is **304 suites / 4,285 tests** across the full run and these latest welcome checks; duplicate test files are counted once.
+
 [Commands, source pins, natural examples and log hashes](deferred-followup-tests.json). These are engine/test and writing checks; no new native-device visual acceptance is claimed.
 
 ## Before we can worry you
