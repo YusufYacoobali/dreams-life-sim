@@ -98,6 +98,9 @@ async function main() {
       assert.equal(await page.getByText('Make choices.', { exact: false }).count(), 0);
       const bounds = await page.getByRole('button').evaluateAll(nodes => nodes.map(node => {const r=node.getBoundingClientRect();return {label:node.getAttribute('aria-label'),x:r.x,y:r.y,width:r.width,height:r.height};}));
       for (const rect of bounds) { assert(rect.height >= 44, scenario.id + ': minimum tap height'); assert(rect.x >= -1 && rect.x + rect.width <= scenario.width + 1, scenario.id + ': horizontal button bounds'); }
+      if (!scenario.fontScale && ['new', 'returning'].includes(scenario.state)) {
+        for (const rect of bounds) assert(rect.y >= 0 && rect.y + rect.height <= scenario.height - 24, scenario.id + ': actions visible above bottom safe area');
+      }
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, scenario.id + ': horizontal overflow');
       await page.screenshot({ path: path.join(output, scenario.id + '.png') });
       const interactions = [];

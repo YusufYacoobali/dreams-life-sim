@@ -10,20 +10,20 @@ export const openingBackground = '#0D1729';
 export const OpeningScene = React.memo(function OpeningScene({ width = 184 }: { width?: number }) {
   return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ width, height: width * 200 / 240 }}>
       <Svg width={width} height={width * 200 / 240} viewBox="0 0 240 200" accessible={false}>
-        <Path d="M120 181V49" stroke="#A5ADE8" strokeWidth={3} strokeLinecap="round" />
-        <Path d="M120 151C120 106 76 99 43 75" fill="none" stroke="#D8BE83" strokeWidth={3} strokeLinecap="round" />
-        <Path d="M120 151C120 106 164 99 197 75" fill="none" stroke="#88C9B6" strokeWidth={3} strokeLinecap="round" />
-        <Path d="M120 176C103 144 73 155 62 130M120 176C137 144 167 155 178 130" fill="none" stroke="#7F83BC" strokeWidth={2.5} strokeLinecap="round" />
-        <Circle cx={120} cy={184} r={5} fill="#A5ADE8" />
-        <Circle cx={62} cy={127} r={4.5} fill="#8C91CD" />
-        <Circle cx={178} cy={127} r={4.5} fill="#8C91CD" />
-        <Circle cx={43} cy={58} r={19} fill="#302D32" />
-        <Path d="m43 47 3.3 6.8 7.5 1.1-5.4 5.3 1.3 7.5-6.7-3.6-6.7 3.6 1.3-7.5-5.4-5.3 7.5-1.1Z" fill="#E6C98D" />
-        <Circle cx={120} cy={30} r={20} fill="#352B38" />
-        <Path d="M120 40s-11-6.8-11-13a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 6.2-11 13-11 13Z" fill="#E5A19F" />
-        <Circle cx={197} cy={58} r={19} fill="#20353A" />
-        <Path d="M189 67c-5-14 5-21 16-19 2 12-3 21-13 20l10-14" fill="#90D2BA" />
-        <Path d="m188 70 13-15" stroke="#20353A" strokeWidth={2} strokeLinecap="round" />
+        <Path d="M120 181V49" stroke="#ACADF0" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 151C120 106 76 99 43 75" fill="none" stroke="#E8BE6F" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 151C120 106 164 99 197 75" fill="none" stroke="#80C5AD" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 176C103 144 73 155 62 130M120 176C137 144 167 155 178 130" fill="none" stroke="#9695DB" strokeWidth={5.5} strokeLinecap="round" />
+        <Circle cx={120} cy={184} r={7} fill="#ACADF0" />
+        <Circle cx={62} cy={127} r={6.5} fill="#9695DB" />
+        <Circle cx={178} cy={127} r={6.5} fill="#9695DB" />
+        <Circle cx={43} cy={58} r={26} fill="#E8BE6F" />
+        <Path d="m43 42 4.8 9.8 10.8 1.6-7.8 7.6 1.8 10.8L43 66.7 33.4 71.8l1.8-10.8-7.8-7.6 10.8-1.6Z" fill="#FFFBF2" />
+        <Circle cx={120} cy={30} r={27} fill="#DE929A" />
+        <Path d="M120 44s-15-9.3-15-17.7a8.2 8.2 0 0 1 15-4.1 8.2 8.2 0 0 1 15 4.1c0 8.4-15 17.7-15 17.7Z" fill="#FFFBF2" />
+        <Circle cx={197} cy={58} r={26} fill="#80C5AD" />
+        <Path d="M186 70c-7-19 6-29 22-26 3 16-4 29-18 27l14-20" fill="#FFFBF2" />
+        <Path d="m185 74 18-22" stroke="#80C5AD" strokeWidth={3} strokeLinecap="round" />
       </Svg>
   </View>;
 });
