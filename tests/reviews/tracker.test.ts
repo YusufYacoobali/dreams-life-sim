@@ -55,6 +55,17 @@ test('a negative choice stays latched through a positive ending, pauses and cold
   const recovered=finish(bad);recovered.people[recovered.activePersonId].stats.happiness=100;tracker=observeReviewCommit(tracker,bad,recovered,'revision:'+bad.revision+':resume');expect(tracker.globalYearsPlayed).toBe(1);expect(tracker.candidate?.negative).toBe(true);
 });
 
+test('routine passive stat drift no longer disqualifies an otherwise healthy completed year',()=>{
+  const {world,tracker:previous}=eligible(),started=start(world);
+  let tracker=observeReviewCommit(previous,world,started,'revision:'+world.revision+':advance');
+  const finished=finish(started),player=finished.people[finished.activePersonId];
+  player.stats.health--;player.stats.happiness--;player.stats.respect--;player.stats.stress++;
+  tracker=observeReviewCommit(tracker,started,finished,'revision:'+started.revision+':resume');
+  const cleared=acknowledge(finished);
+  tracker=observeReviewCommit(tracker,finished,cleared,'revision:'+finished.revision+':acknowledge');
+  expect(tracker.candidate?.negative).toBe(false);expect(reviewCandidateEligible(tracker,cleared)).toBe(true);
+});
+
 test.each(['death','illness','prison','breakup','bankruptcy','pet-death','negative-result'] as const)('structured %s blocks an otherwise eligible moment',kind=>{
   const {world,tracker}=eligible(),player=world.people[world.activePersonId];
   if(kind==='death')Object.values(world.people).find(person=>person.id!==player.id)!.died={...world.date};

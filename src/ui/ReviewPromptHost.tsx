@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import { useGame } from '../state/useGame';
-import { reviewCandidateEligible, type ReviewResponse } from '../reviews/tracker';
+import { reviewCandidateEligible, type ReviewOffer, type ReviewResponse } from '../reviews/tracker';
 import { nativeReviewAvailable, requestNativeReview } from '../reviews/nativeReview';
 import { EventModal } from './EventModal';
-import { hasAppModal, useHasAppModal } from './modalPresence';
+import { hasAppModal, modalPresenceStore, useHasAppModal } from './modalPresence';
 
 /** Mounted once outside frozen screens. The review's own modal never blocks itself. */
 export function ReviewPromptHost({visible}:{visible:boolean}) {
@@ -12,12 +12,40 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
   const busy=useGame(s=>s.busy), reviewBusy=useGame(s=>s.reviewBusy), error=useGame(s=>s.reviewError);
   const claim=useGame(s=>s.claimReview), respond=useGame(s=>s.respondReview), appModal=useHasAppModal();
   const [available,setAvailable]=useState(false), [active,setActive]=useState(!AppState.currentState||AppState.currentState==='active');
+  const [nativeRequest,setNativeRequest]=useState<ReviewOffer|null>(null);
+  const anyModal=modalPresenceStore(state=>state.owners.size>0);
   const attempted=useRef<string|null>(null), submitting=useRef(false), mounted=useRef(true), liveOffer=useRef(offer?.id);
+  const nativeInFlight=useRef(false);
   liveOffer.current=offer?.id;
-  useEffect(()=>{mounted.current=true;let live=true;void nativeReviewAvailable().then(value=>{if(live)setAvailable(value);});return()=>{live=false;mounted.current=false;};},[]);
-  useEffect(()=>{const subscription=AppState.addEventListener('change',state=>setActive(state==='active'));return()=>subscription.remove();},[]);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
+  useEffect(()=>{let live=true;setAvailable(false);if(active)void nativeReviewAvailable().then(value=>{if(live)setAvailable(value);});return()=>{live=false;};},[active]);
+  useEffect(()=>{const subscription=AppState.addEventListener('change',state=>{if(state==='active')attempted.current=null;setActive(state==='active');});return()=>subscription.remove();},[]);
   const scoped=!!offer&&world?.id===offer.lifeId&&world.activePersonId===offer.personId&&world.revision===offer.revision;
   const clean=visible&&active&&available&&!appModal;
+  const latest=useRef({world,clean,busy,reviewBusy,offer});
+  latest.current={world,clean,busy,reviewBusy,offer};
+  const canPresent=(request:ReviewOffer)=>{
+    const state=latest.current,w=state.world;
+    return mounted.current&&state.clean&&!state.busy&&!state.reviewBusy&&!state.offer&&
+      w?.id===request.lifeId&&w.activePersonId===request.personId&&w.revision===request.revision&&
+      !w.pending&&!w.annual&&!w.deferred.length&&modalPresenceStore.getState().owners.size===0;
+  };
+  useEffect(()=>{
+    if(!nativeRequest)return;
+    if(!world||world.id!==nativeRequest.lifeId||world.activePersonId!==nativeRequest.personId||world.revision!==nativeRequest.revision){setNativeRequest(null);return;}
+    if(anyModal||!canPresent(nativeRequest))return;
+    let second:number|undefined;
+    // Let the review card unmount and its native overlay disappear before
+    // asking StoreKit/Play to present another surface.
+    const first=requestAnimationFrame(()=>{second=requestAnimationFrame(()=>{
+      if(nativeInFlight.current||!canPresent(nativeRequest))return;
+      nativeInFlight.current=true;
+      void requestNativeReview(()=>canPresent(nativeRequest)).then(requested=>{
+        if(requested&&mounted.current)setNativeRequest(current=>current?.id===nativeRequest.id?null:current);
+      }).finally(()=>{nativeInFlight.current=false;});
+    });});
+    return()=>{cancelAnimationFrame(first);if(second!==undefined)cancelAnimationFrame(second);};
+  },[nativeRequest,world,clean,busy,reviewBusy,offer,anyModal]);
   useEffect(()=>{
     if(!clean||busy||reviewBusy||offer||!world||!tracker||!reviewCandidateEligible(tracker,world)||hasAppModal())return;
     const token=world.id+':'+world.activePersonId+':'+world.revision;
@@ -28,7 +56,7 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
   const answer=async(response:ReviewResponse)=>{
     if(!mounted.current||!scoped||!offer||liveOffer.current!==offer.id||!clean||busy||reviewBusy||submitting.current||hasAppModal())return;
     submitting.current=true;
-    try {if(await respond(response)&&response==='sure')await requestNativeReview();}
+    try {if(await respond(response)&&response==='sure'&&mounted.current)setNativeRequest(offer);}
     finally{submitting.current=false;}
   };
   const show=scoped&&!!offer&&clean&&!busy&&!!world&&!world.pending&&!world.annual&&!world.deferred.length;

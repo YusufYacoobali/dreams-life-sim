@@ -44,10 +44,12 @@ export function negativeReviewMoment(world:World, since:World['date']):boolean {
   const events=[world.pending,...world.deferred.map(item=>item.event)];
   return events.some(event=>event?.kind==='result'&&event.effects.some(effect=>effect.tone==='negative'&&(/^(?:happiness|health|respect|stress|bond|relationship|trust)$/i.test(effect.id)||/^(?:happiness|health|respect|stress|relationship|trust)$/i.test(effect.label))));
 }
-function negativeTransition(before:World, after:World) {
+function negativeTransition(before:World, after:World, explicitChoice:boolean) {
   const old=before.people[before.activePersonId], player=after.people[after.activePersonId];
   if(old.id!==player.id)return true;
-  if(player.stats.happiness<old.stats.happiness||player.stats.health<old.stats.health||player.stats.respect<old.stats.respect||player.stats.stress>old.stats.stress)return true;
+  // Passive monthly drift is not a negative event. Otherwise one routine point
+  // of stress can suppress every completed school/work year indefinitely.
+  if(explicitChoice&&(player.stats.happiness<old.stats.happiness||player.stats.health<old.stats.health||player.stats.respect<old.stats.respect||player.stats.stress>old.stats.stress))return true;
   return before.relationships.some(relation=>romantic.has(relation.romance)&&after.relationships.some(next=>next.id===relation.id&&!romantic.has(next.romance)));
 }
 
@@ -57,7 +59,7 @@ export function observeReviewCommit(tracker:ReviewTracker, before:World, after:W
   const frame=after.annual??before.annual;
   if(!frame||before.activePersonId!==after.activePersonId)return tracker.candidate?{...tracker,candidate:null}:tracker;
   const key=(item:ReviewTracker['observations'][number])=>item.lifeId===after.id&&item.personId===after.activePersonId&&item.frameId===frame.id;
-  const old=tracker.observations.find(key), observation={lifeId:after.id,personId:after.activePersonId,frameId:frame.id,startDate:{...frame.startDate},negative:!!old?.negative||negativeReviewMoment(before,frame.startDate)||negativeReviewMoment(after,frame.startDate)||negativeTransition(before,after)};
+  const old=tracker.observations.find(key), observation={lifeId:after.id,personId:after.activePersonId,frameId:frame.id,startDate:{...frame.startDate},negative:!!old?.negative||negativeReviewMoment(before,frame.startDate)||negativeReviewMoment(after,frame.startDate)||negativeTransition(before,after,commandId==='revision:'+before.revision+':choose')};
   const justCompleted=!!after.annual&&after.annual.stage==='complete'&&after.annual.monthsProcessed===12&&(before.annual?.id!==after.annual.id||before.annual.stage!=='complete');
   // Also covers a future quiet-year path that clears its frame without a modal.
   const completedWithoutModal=!after.annual&&before.annual?.stage==='months'&&compareDates(after.date,before.annual.targetDate)>=0;

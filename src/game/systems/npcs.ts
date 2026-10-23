@@ -4,6 +4,8 @@ import { countries, CountryCode } from '../countries';
 import { daysInMonth } from '../calendar';
 import { jobs, npcBackgroundRoleIds } from '../content/jobs';
 import { automaticAppearance, automaticAppearanceKey } from '../appearance';
+import { creationNamePools } from '../content/creationNames';
+import { generatedPersonName } from '../names';
 import { rules } from '../rules';
 import { fields, newEducation, newFinance } from './schemas';
 import { genders, newFamilyPerson } from './familySchemas';
@@ -80,15 +82,19 @@ function birthday(date: GameDate, age: number, month: number, day: number): Game
   if (month > date.month || (month === date.month && day > date.day)) year--;
   return { year, month, day: Math.min(day, daysInMonth(year, month)) };
 }
-export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; qualifiedRole?: string; schoolStudent?: boolean; postsecondaryStudent?: { program: 'trade' | 'university' | 'graduate'; annualTuition: bigint } }): Person {
+export function createContact(world: World, options: { age: number; gender?: Person['gender']; compatibleWith?: Person['gender']; country?: CountryCode; city?: string; familyName?: string; qualifiedRole?: string; schoolStudent?: boolean; postsecondaryStudent?: { program: 'trade' | 'university' | 'graduate'; annualTuition: bigint } }): Person {
   const player = world.people[world.activePersonId], code = options.country ?? player.country, country = countries[code], city = options.city ?? (code === player.country ? player.city : country.cities[0]);
   const student = options.postsecondaryStudent;
   if (student && (options.schoolStudent || options.qualifiedRole || student.annualTuition <= 0n || options.age < Math.max(18, rules[code].adultAge, rules[code].schoolEnd + (student.program === 'graduate' ? 4 : 0)))) throw new Error('Invalid new postsecondary student background');
   const gender = options.gender ?? genders[draw(world, 'npcs', 0, genders.length - 1)];
   const month = draw(world, 'npcs', 1, 12), day = draw(world, 'npcs', 1, 28);
   const id = 'person_npc_' + world.revision + '_' + Object.keys(world.people).length;
+  const name = generatedPersonName(code, gender,
+    draw(world, 'npcs', 0, creationNamePools[code][gender].length - 1),
+    draw(world, 'npcs', 0, country.lastNames.length - 1),
+    Object.values(world.people), city, options.familyName);
   const person: Person = {
-    id, firstName: country.firstNames[draw(world, 'npcs', 0, country.firstNames.length - 1)], lastName: country.lastNames[draw(world, 'npcs', 0, country.lastNames.length - 1)],
+    id, ...name,
     gender, nationality: code, country: code, city, born: birthday(world.date, options.age, month, day), died: null, causeOfDeath: null,
     stats: { happiness: draw(world, 'npcs', 40, 90), health: draw(world, 'npcs', 65, 100), smarts: draw(world, 'npcs', 25, 90), looks: draw(world, 'npcs', 25, 95), respect: draw(world, 'npcs', 25, 85), energy: 100, fitness: draw(world, 'npcs', 30, 85), stress: draw(world, 'npcs', 5, 50), discipline: draw(world, 'npcs', 30, 90), fame: 0 },
     appearance: automaticAppearance({ face: draw(world, 'npcs', 0, 3), skin: draw(world, 'npcs', 0, 5), hair: draw(world, 'npcs', 0, 7), hairColor: draw(world, 'npcs', 0, 4) }, gender, automaticAppearanceKey(world.id,id)), traits: [(['kind', 'ambitious', 'impulsive', 'reserved', 'creative', 'practical'] as const)[draw(world, 'npcs', 0, 5)]],

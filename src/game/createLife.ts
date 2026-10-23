@@ -18,6 +18,8 @@ import { newLegal } from './systems/legalSchemas';
 import { newPublicLife } from './systems/socialSchemas';
 import { newSkills } from './systems/careerSchemas';
 import { composeBirthJournal } from './birthJournal';
+import { creationNamePools } from './content/creationNames';
+import { generatedPersonName } from './names';
 
 export const creationSchema = z.object({
   firstName: personSchema.shape.firstName, lastName: personSchema.shape.lastName,
@@ -35,7 +37,11 @@ export function randomCreation(seed: number): Creation {
   };
   const country = pick(countryCodes);
   const data = countries[country];
-  return { firstName: pick(data.firstNames), lastName: pick(data.lastNames), gender: pick(['male', 'female', 'nonbinary'] as const), country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]), identity: facialIdentity('creation:' + seed) }, background:(royalCountries as readonly string[]).includes(country)&&randomInteger(state,1,500).value===1?'royal':'ordinary' };
+  const firstDraw = randomInteger(state, 0, 0xFFFFFFFF); state = firstDraw.state;
+  const lastName = pick(data.lastNames), gender = pick(['male', 'female', 'nonbinary'] as const);
+  const pool = creationNamePools[country][gender];
+  const firstName = pool[Math.floor(firstDraw.value / 0x100000000 * pool.length)];
+  return { firstName, lastName, gender, country, city: pick(data.cities), appearance: { face: pick([0, 1, 2, 3]), skin: pick([0, 1, 2, 3, 4, 5]), hair: pick([0, 1, 2, 3, 4, 5, 6, 7]), hairColor: pick([0, 1, 2, 3, 4]), identity: facialIdentity('creation:' + seed) }, background:(royalCountries as readonly string[]).includes(country)&&randomInteger(state,1,500).value===1?'royal':'ordinary' };
 }
 
 export function createLife(id: string, seed: number, raw: Creation, date: GameDate): World {
@@ -68,8 +74,8 @@ export function createLife(id: string, seed: number, raw: Creation, date: GameDa
   if (input.reproductiveRole) player.biology.role = input.reproductiveRole;
   if (input.attractedTo) player.attractedTo = [...new Set(input.attractedTo)];
   if (input.wantsChildren !== undefined) player.wantsChildren = input.wantsChildren;
-  const parent1 = person('person_parent1', country.firstNames[roll(0, country.firstNames.length - 1)], 'female', roll(24, 42));
-  const parent2 = person('person_parent2', country.firstNames[roll(0, country.firstNames.length - 1)], 'male', roll(25, 45));
+  const parent1 = person('person_parent1', generatedPersonName(input.country, 'female', roll(0, creationNamePools[input.country].female.length - 1), 0, [player], input.city, input.lastName).firstName, 'female', roll(24, 42));
+  const parent2 = person('person_parent2', generatedPersonName(input.country, 'male', roll(0, creationNamePools[input.country].male.length - 1), 0, [player, parent1], input.city, input.lastName).firstName, 'male', roll(25, 45));
   const guardians = roll(0, 4) === 0 ? [parent1] : [parent1, parent2];
   const people = Object.fromEntries([player, ...guardians].map(p => [p.id, p]));
   const world = validateWorld({

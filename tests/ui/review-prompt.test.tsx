@@ -12,7 +12,7 @@ import { ThemeProvider } from '../../src/ui/theme';
 import { database } from '../support/sqlite';
 let mockStore:ReturnType<typeof createGameStore>;
 jest.mock('../../src/state/useGame',()=>({useGame:(selector:unknown)=>require('zustand').useStore(mockStore,selector)}));
-jest.mock('../../src/reviews/nativeReview',()=>({nativeReviewAvailable:jest.fn(async()=>true),requestNativeReview:jest.fn(async()=>{})}));
+jest.mock('../../src/reviews/nativeReview',()=>({nativeReviewAvailable:jest.fn(async()=>true),requestNativeReview:jest.fn(async()=>true)}));
 import { nativeReviewAvailable, requestNativeReview } from '../../src/reviews/nativeReview';
 import { ReviewPromptHost } from '../../src/ui/ReviewPromptHost';
 import { EventModal } from '../../src/ui/EventModal';
@@ -38,14 +38,14 @@ function capture(name:string,tree:unknown) {
   mkdirSync(directory,{recursive:true});writeFileSync(join(directory,name+'.json'),JSON.stringify(clean(tree)));
 }
 const press=async(name:string)=>{await act(async()=>{fireEvent.press(screen.getByRole('button',{name}));});};
-afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks();request.mockClear();available.mockResolvedValue(true);expect(modalPresenceStore.getState().owners.size).toBe(0);});
+afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks();request.mockClear();request.mockResolvedValue(true);available.mockResolvedValue(true);expect(modalPresenceStore.getState().owners.size).toBe(0);});
 
 test.each([false,true])('warm pre-prompt stays visible through its own registration; Sure persists before native request (dark=%s)',async dark=>{
   const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame({dark}));
   try {
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());expect(screen.getByRole('button',{name:'Maybe later'})).toBeOnTheScreen();expect(hasAppModal()).toBe(false);expect(modalPresenceStore.getState().owners.size).toBe(1);capture('review-preprompt-'+(dark?'dark-large':'light'),view.toJSON());
     const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;context.sqlite.exec("CREATE TRIGGER fail_ui_review BEFORE INSERT ON preferences WHEN NEW.key='app_review' BEGIN SELECT RAISE(ABORT,'review save failure'); END");await press('Sure');expect(request).not.toHaveBeenCalled();expect(screen.getByRole('button',{name:'Sure'})).toBeOnTheScreen();expect(screen.getByText('Could not save that. Please try again.')).toBeOnTheScreen();
-    context.sqlite.exec('DROP TRIGGER fail_ui_review');await press('Sure');expect(request).toHaveBeenCalledTimes(1);expect(screen.queryByText('Enjoying Dreams?')).toBeNull();const tracker=await context.repository.loadReviewTracker();expect(tracker?.reviewCompletedOrDismissedCount).toBe(1);expect(tracker?.nextReviewPromptAtGlobalYear).toBe(22);await act(async()=>{stale('sure');});expect(request).toHaveBeenCalledTimes(1);
+    context.sqlite.exec('DROP TRIGGER fail_ui_review');request.mockImplementation(async canPresent=>{expect(modalPresenceStore.getState().owners.size).toBe(0);expect(screen.queryByText('Enjoying Dreams?')).toBeNull();expect(canPresent?.()).toBe(true);return true;});await press('Sure');await waitFor(()=>expect(request).toHaveBeenCalledTimes(1));expect(screen.queryByText('Enjoying Dreams?')).toBeNull();const tracker=await context.repository.loadReviewTracker();expect(tracker?.reviewCompletedOrDismissedCount).toBe(1);expect(tracker?.nextReviewPromptAtGlobalYear).toBe(22);await act(async()=>{stale('sure');});expect(request).toHaveBeenCalledTimes(1);
   }finally{view.unmount();context.sqlite.close();}
 });
 
@@ -59,4 +59,53 @@ test('another EventModal blocks claiming; closing it permits one offer without a
 
 test('hidden Life, unavailable native APIs and a changed life never show or act on a stale offer',async()=>{
   const context=await setup(),claim=jest.spyOn(context.repository,'claimReview');available.mockResolvedValue(false);let view=render(frame());try{await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.unmount();available.mockResolvedValue(true);view=render(frame({visible:false}));await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.rerender(frame());await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});expect(mockStore.getState().reviewOffer).toBeNull();await act(async()=>{stale('sure');});expect(request).not.toHaveBeenCalled();expect((await context.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(15);}finally{view.unmount();context.sqlite.close();}
+});
+
+test('returning to the foreground rechecks native availability instead of caching one unavailable result forever',async()=>{
+  let change!:(state:Native.AppStateStatus)=>void;
+  jest.spyOn(Native.AppState,'addEventListener').mockImplementation((_type,listener)=>{change=listener as typeof change;return {remove:jest.fn()};});
+  const context=await setup();available.mockResolvedValue(false);const view=render(frame());
+  try {
+    await waitFor(()=>expect(available).toHaveBeenCalled());expect(screen.queryByText('Enjoying Dreams?')).toBeNull();
+    await act(async()=>{Native.AppState.currentState='background';change('background');});
+    available.mockResolvedValue(true);
+    await act(async()=>{Native.AppState.currentState='active';change('active');});
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    expect(request).not.toHaveBeenCalled();
+  }finally{view.unmount();context.sqlite.close();}
+});
+
+test('a hidden Life screen holds the native request until its own prompt is gone and Life is visible again',async()=>{
+  const context=await setup(),view=render(frame());
+  try {
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    const frames=new Map<number,FrameRequestCallback>();let sequence=0;
+    jest.spyOn(global,'requestAnimationFrame').mockImplementation(callback=>{frames.set(++sequence,callback);return sequence;});
+    jest.spyOn(global,'cancelAnimationFrame').mockImplementation(id=>{if(id!=null)frames.delete(id);});
+    await press('Sure');expect(request).not.toHaveBeenCalled();
+    view.rerender(frame({visible:false}));
+    await act(async()=>{for(const [id,callback]of [...frames]){frames.delete(id);callback(0);}});
+    expect(request).not.toHaveBeenCalled();
+    view.rerender(frame());
+    for(let i=0;i<3;i++)await act(async()=>{for(const [id,callback]of [...frames]){frames.delete(id);callback(i*16);}});
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(modalPresenceStore.getState().owners.size).toBe(0);
+  }finally{view.unmount();context.sqlite.close();}
+});
+
+test('a temporary claim write failure retries on the next foreground without a render-time retry loop',async()=>{
+  let change!:(state:Native.AppStateStatus)=>void;
+  jest.spyOn(Native.AppState,'addEventListener').mockImplementation((_type,listener)=>{change=listener as typeof change;return {remove:jest.fn()};});
+  const context=await setup(),claim=jest.spyOn(context.repository,'claimReview');
+  context.sqlite.exec("CREATE TRIGGER fail_claim_review BEFORE INSERT ON preferences WHEN NEW.key='app_review' BEGIN SELECT RAISE(ABORT,'temporary claim error'); END");
+  const view=render(frame());
+  try {
+    await waitFor(()=>expect(claim).toHaveBeenCalledTimes(1));await act(async()=>{});
+    expect(screen.queryByText('Enjoying Dreams?')).toBeNull();expect(claim).toHaveBeenCalledTimes(1);
+    context.sqlite.exec('DROP TRIGGER fail_claim_review');
+    await act(async()=>{Native.AppState.currentState='background';change('background');});
+    await act(async()=>{Native.AppState.currentState='active';change('active');});
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    expect(claim).toHaveBeenCalledTimes(2);expect(request).not.toHaveBeenCalled();
+  }finally{view.unmount();context.sqlite.close();}
 });

@@ -60,7 +60,7 @@ function linkParent(world: World, parent: Person, child: Person, type: 'biologic
   world.relationships.push({ id: 'relation_' + parent.id + '_' + child.id, from: parent.id, to: child.id, kind: role, roles: [role], romance: 'none', parentType: type, since: { ...world.date }, strength: 80, trust: 80, memories: [type === 'biological' ? 'birth' : type === 'adoptive' ? 'adoption' : 'guardianship'], lastInteractionYear: world.date.year });
 }
 export function addChild(world: World, parents: Person[], type: 'biological' | 'adoptive', age = 0): Person {
-  const child = createContact(world, { age, country: parents[0].country, city: parents[0].city });
+  const child = createContact(world, { age, country: parents[0].country, city: parents[0].city, ...(type === 'biological' ? { familyName: parents[0].lastName } : {}) });
   if (type === 'biological') {
     child.born = { ...world.date }; child.lastName = parents[0].lastName;
     const pick = <T,>(values: T[]) => values[draw(world, 'npcs', 0, values.length - 1)];
