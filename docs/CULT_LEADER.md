@@ -141,3 +141,7 @@ claims, plus beliefs, routine activities, follower reactions and screen text.
 Existing saved offers retain their original wording and resolution. New offers
 use the revised copy without changing gameplay. See the
 [43 before/after examples and verification](verification/cult-writing/README.md).
+
+The follow-up [voice refinement](verification/cult-writing-refinement/README.md)
+varies claim admissions, sharpens the humour, removes duplicate routine summaries
+and casts present named members with personality-specific ordinary reactions.

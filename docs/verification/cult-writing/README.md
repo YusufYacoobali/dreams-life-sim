@@ -1,5 +1,7 @@
 # Cult Leader editorial review
 
+This records the original editorial pass at 94c5020. See the later [voice refinement](../cult-writing-refinement/README.md) for varied claim openings, sharper routine scenes and personality-specific named reactions. The original examples and verification below retain their source boundaries.
+
 All 56 situations and 168 choice payoffs were reviewed. The rewrite covers the eight philosophies, 28 doctrines, 28 rules, 18 claims, five recruitment methods, eight sermon themes, six ceremonies, inner-circle reactions, rival/recovery results and cult-screen microcopy.
 
 The benchmark was the current original writing in ordinaryAdultStories, workingLifeStories, adultRelationshipStories, specialCareerDepthStories and dramaticEvents, with the voice rules in docs/planning/writing-and-events.md. The common thread is a concrete problem, a direct choice and a consequence worth reading.

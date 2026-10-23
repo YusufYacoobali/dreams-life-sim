@@ -1,0 +1,177 @@
+{
+  "sourceCommit": "6502a6b809c0f40f99044d96d4f4b9df2548e7fe",
+  "baseline": "94c50202180a765cbe6a5b0d5eef3cc2778809de",
+  "scope": "Two runtime files: prospective claim admissions and routine presentation. No schema, gameplay, probabilities, random draws, costs, illustration, layout or navigation changes.",
+  "claims": {
+    "reviewed": 18,
+    "openingsStartingYouAdmitBefore": 17,
+    "openingsStartingYouAdmitAfter": 0
+  },
+  "routines": {
+    "branches": 57,
+    "ordinaryFamilies": 19,
+    "personalitiesPerOrdinaryCase": 5,
+    "ordinaryPersonalityContexts": 95,
+    "minimumDistinctReadingsPerOrdinaryFamily": 3,
+    "completeOriginalCommandContextsWithMatchingNonProseWorldHashes": 358,
+    "extraRandomDraws": 0,
+    "cast": "Existing present member in the relevant role, then first present member, then anonymous follower. No generated character."
+  },
+  "preservedSaves": {
+    "originalOffers": 74,
+    "originalBoundChoicesWithExactWholeWorldHashes": 296,
+    "releasedPendingClaimOffers": 18,
+    "releasedBoundChoicesWithExactWholeWorldHashes": 72,
+    "releasedSavedRoutineResults": 3,
+    "literalSavedTextPreserved": true
+  },
+  "tests": {
+    "command": "DREAMS_CULT_REVIEW_TREES=/tmp/dreams-cult-voice-final-trees npm test -- --testPathPattern=cult --silent --json --outputFile=/tmp/dreams-cult-voice-final-integrated.json",
+    "passed": true,
+    "suites": 13,
+    "tests": 947,
+    "failed": 0,
+    "writingCases": 512,
+    "voiceCases": 44,
+    "connectedSqliteUiCases": 28,
+    "suiteResults": [
+      {
+        "file": "tests/game/cult-polish-journeys.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-writing.test.ts",
+        "passed": 512,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults-depth.test.ts",
+        "passed": 232,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/cult-flow.test.tsx",
+        "passed": 28,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/cults-migration.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-voice.test.ts",
+        "passed": 44,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-claims-polish.test.ts",
+        "passed": 26,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults.test.ts",
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/writing-cult-compatibility.test.ts",
+        "passed": 13,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-roster-polish.test.ts",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-recruiter-writing.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-activities-polish.test.ts",
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults-integration.test.ts",
+        "passed": 5,
+        "failed": 0
+      }
+    ]
+  },
+  "checks": {
+    "typecheck": {
+      "command": "npm run typecheck",
+      "passed": true
+    },
+    "imports": {
+      "command": "npm run check:imports",
+      "passed": true,
+      "modules": 503,
+      "cycles": 0
+    },
+    "androidExport": true,
+    "iosExport": true,
+    "bundledCultIllustrations": 12,
+    "verifiedRuntimeFiles": 2,
+    "browserScreens": 40,
+    "browserErrors": 0,
+    "browserOverflow": 0,
+    "allImagesDecoded": true,
+    "allFinalActionsReachable": true,
+    "retainedCaptures": 8,
+    "nativeDeviceCaptureClaim": false
+  },
+  "careers": {
+    "completeScenarios": 9,
+    "countries": [
+      "US",
+      "GB",
+      "JP"
+    ],
+    "matchedCommandTracesNonProseWorldsAndRandom": true,
+    "scope": "Declared funded adult starts; nine complete cult careers, ordinary engine actions and annual advancement, then collapse or disbandment. The struggling cohort starts with declared low public standing, stress and high-heat beliefs; outcomes are not edited. Before/after command traces and non-prose final worlds match. Not natural-birth encounter claims."
+  },
+  "previousWholeGameChecks": {
+    "report": "../cult-writing/verification.json",
+    "rerunInThisFollowup": false,
+    "scope": "The preceding full-game regression and 120-life soak retain their original source boundaries. This follow-up ran the final 13-suite cult regression and nine fresh complete cult careers, not another general life soak."
+  },
+  "review": {
+    "representativeBeforeAfterPairs": 30,
+    "allClaimAdmissionsIncluded": true,
+    "allRoutineBranchesIncluded": true,
+    "retainedSeriousScenes": [
+      "memorial-garden apology",
+      "unmet food and support",
+      "listening and grief"
+    ],
+    "romanticHistoryAssumptionsRemoved": true
+  },
+  "logs": {
+    "/tmp/dreams-cult-voice-final-integrated.json": {
+      "sha256": "7540897a78121944c3918356a872e226cba9f46147ce61282ee224d69dd47753"
+    },
+    "/tmp/dreams-cult-voice-final-types.log": {
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-cult-voice-imports.log": {
+      "sha256": "f10b547f33d3e424b493739e2637103f7b0796ba76648a1550e25a0c17134741"
+    },
+    "/tmp/dreams-cult-voice-careers-final.log": {
+      "sha256": "d27ea2beff1e26663dac08576f83033c880e5269a13ab39f858a30aa69644b88"
+    },
+    "/tmp/dreams-cult-voice-final-export.log": {
+      "sha256": "07d81df6d453d7218bbcae578fc0d42a61852076d664818333f3f615b3f19fad"
+    },
+    "/tmp/dreams-cult-voice-final-platforms.log": {
+      "sha256": "f6985c4e31c87cb7176ff9d14ce70ca32f9f39d803e36fcd37e232f61e0de37c"
+    },
+    "/tmp/dreams-cult-voice-final-browser.log": {
+      "sha256": "f84fdb0f84f8baa22ed447b772b8cc05fdae0c15e4573d1ddc63123d2621e142"
+    }
+  }
+}
