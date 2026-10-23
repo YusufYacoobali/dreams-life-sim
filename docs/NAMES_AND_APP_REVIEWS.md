@@ -72,4 +72,13 @@ The full regression, platform exports and exact source boundaries are recorded
 in [verification results](verification/names-and-reviews/verification.json).
 The original full-run failures and successful affected-suite reruns are recorded
 separately; the original run is not represented as having passed cleanly.
+That run covered 318 suites and 5,187 tests, including twelve complete seeded
+lives. Four affected suites passed their 150-test rerun after updating assumptions
+about generated names.
+
+Before pushing, the incoming Android audio/reminder/settings commit `c9d2d0e`
+was merged without conflict. The merged source passed another ten suites and
+105 tests covering those changes and the review flow, plus typecheck, import
+checks and fresh Android/iOS Hermes exports. The full regression was performed
+before that independent merge; the report distinguishes both source boundaries.
 See the [per-country pools and natural review opportunities](verification/names-and-reviews/review-opportunities.json).

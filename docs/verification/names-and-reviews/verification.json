@@ -1816,5 +1816,80 @@
     "/tmp/dreams-names-review-opportunities.log": {
       "sha256": "612de12fe2dd093196ea3689e917bf7e3373b870e1f658c9167312f833cf71bb"
     }
+  },
+  "finalIntegration": {
+    "sourceCommit": "7664986ceff7b97932d0510d4ac7f8d8b1f4c6ce",
+    "mergedRemoteCommit": "c9d2d0e2929ba7ef800eaaf0c85506d9ef6f98af",
+    "scope": "Preserve the incoming Android effect playback/reminder/default settings fix. No conflict; name and review runtime sources remain aab91b9.",
+    "command": "npm test -- --silent --runTestsByPath tests/state/preferencesStore.test.ts tests/ui/audio-controller.test.ts tests/ui/daily-reminder-settings.test.tsx tests/ui/feedback-settings-flow.test.tsx tests/ui/onboarding-haptics-flow.test.tsx tests/ui/review-prompt.test.tsx tests/reviews/native-review.test.ts tests/reviews/tracker.test.ts tests/persistence/reviews.test.ts tests/ui/new-life-review-flow.test.tsx",
+    "suites": 10,
+    "tests": 105,
+    "failedTests": 0,
+    "typecheckPassed": true,
+    "importCheckPassed": true,
+    "modules": 505,
+    "cycles": 0,
+    "androidExportPassed": true,
+    "iosExportPassed": true,
+    "verifiedSourceFiles": 14,
+    "sourceHashes": "integration-runtime-source-hashes.json",
+    "platforms": "integration-platform-checks.json",
+    "suiteResults": [
+      {
+        "file": "tests/ui/feedback-settings-flow.test.tsx",
+        "tests": 19
+      },
+      {
+        "file": "tests/ui/onboarding-haptics-flow.test.tsx",
+        "tests": 3
+      },
+      {
+        "file": "tests/ui/new-life-review-flow.test.tsx",
+        "tests": 4
+      },
+      {
+        "file": "tests/ui/review-prompt.test.tsx",
+        "tests": 9
+      },
+      {
+        "file": "tests/ui/daily-reminder-settings.test.tsx",
+        "tests": 8
+      },
+      {
+        "file": "tests/reviews/tracker.test.ts",
+        "tests": 17
+      },
+      {
+        "file": "tests/state/preferencesStore.test.ts",
+        "tests": 17
+      },
+      {
+        "file": "tests/persistence/reviews.test.ts",
+        "tests": 4
+      },
+      {
+        "file": "tests/ui/audio-controller.test.ts",
+        "tests": 14
+      },
+      {
+        "file": "tests/reviews/native-review.test.ts",
+        "tests": 10
+      }
+    ],
+    "limit": "The full 318-suite regression was completed before this independent remote commit was merged. The final merged code has the additional targeted 10-suite/105-test run, type/import checks and both source-verified mobile exports. No full-suite rerun or physical device review-sheet verification is claimed for the merge.",
+    "logs": {
+      "/tmp/dreams-names-reviews-merged.json": {
+        "sha256": "a0544826a1b592992cf25d67413e2bb95fb5b0d7202ab88fa9743cebf26e1884"
+      },
+      "/tmp/dreams-names-reviews-merged-types.log": {
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      },
+      "/tmp/dreams-names-reviews-merged-imports.log": {
+        "sha256": "0cd5fb1a4734e98a2b294da8c79c8a7e8af5dd0d1ba352d88604a7064c3f0bb4"
+      },
+      "/tmp/dreams-names-reviews-merged-export.log": {
+        "sha256": "0b204de38cab78b29dfbab7a793132462c8b3f7ef357b92c23ee522988b711c7"
+      }
+    }
   }
 }
