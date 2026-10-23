@@ -1,4 +1,6 @@
 import React from 'react';
+// Keep the real in-memory settings repository; shared portraits need no device database.
+jest.mock('../../src/persistence/native', () => ({ openRepository: async () => { throw new Error('Unexpected device database access in UI fixture'); } }));
 import * as ReactNative from 'react-native';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { useStore } from 'zustand';

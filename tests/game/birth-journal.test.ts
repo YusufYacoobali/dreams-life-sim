@@ -4,12 +4,17 @@ import { birthFamily, composeBirthJournal, selectBirthStory } from '../../src/ga
 import { birthStories, eligibleBirthStories, type BirthStoryContext } from '../../src/game/content/birthStories';
 import { countries, countryCodes } from '../../src/game/countries';
 import { jobs } from '../../src/game/content/jobs';
-import { copyWorld, encodeWorld, immutableWorld, validateWorld } from '../../src/game/model';
+import { copyWorld, encodeWorld, immutableWorld, validateWorld, type Person } from '../../src/game/model';
+import { isAutomaticAppearance } from '../../src/game/appearance';
+import appearanceBeforePolish3 from '../fixtures/birth-appearance-before-polish3.json';
 import { ageOn, fullName } from '../../src/game/personHelpers';
 import { endEmployment } from '../../src/game/systems/work';
 import { royalTitle } from '../../src/game/systems/royaltyMath';
 
 const date = { year: 2026, month: 10, day: 22 };
+// Actual constructor output captured from unchanged 25a8faa, before automatic
+// casting was added. Only the permitted artwork fields are normalized below.
+const recordedAppearances:Record<string,Record<string,Person['appearance']>>=appearanceBeforePolish3.samples;
 function newborn(seed: number, patch: Partial<Creation> = {}) { return createLife('life_birth_sample_' + seed, seed, { ...randomCreation(seed), ...patch }, date); }
 
 test.each([
@@ -53,6 +58,18 @@ test('all 512 sample generations retain the exact pre-feature family, stats, mon
     expect(original).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24, rentalLeases: [] });
     for (const key of ['miniGames', 'rentalLeases', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; }
     original.schemaVersion = 41; original.engineVersion = 43; original.contentVersion = 20;
+    const oldAppearances=recordedAppearances[seed];expect(Object.keys(world.people)).toEqual(Object.keys(oldAppearances));
+    for(const person of Object.values(world.people)){
+      const old=oldAppearances[person.id];
+      if(person.id===world.activePersonId)expect(person.appearance).toEqual(old);
+      else {
+        expect(isAutomaticAppearance(person.appearance)).toBe(true);
+        // Face, skin and hair-colour draws remain exact; only deterministic
+        // automatic hair/identity/outfit/provenance are deliberately new.
+        expect(person.appearance).toEqual({...old,hair:person.appearance.hair,identity:person.appearance.identity,outfit:person.appearance.outfit,provenance:person.appearance.provenance});
+      }
+      original.people[person.id].appearance=old;
+    }
     hash.update(JSON.stringify(original) + '\n');
     expect(newborn(seed, input)).toEqual(world); expect(validateWorld(world)).toEqual(world);
     expect(world.journal.length).toBeGreaterThanOrEqual(3); expect(world.journal.length).toBeLessThanOrEqual(5);

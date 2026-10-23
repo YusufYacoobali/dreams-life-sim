@@ -1,4 +1,6 @@
 import React from 'react';
+// Shared portraits can import the game store; device persistence is outside this UI fixture.
+jest.mock('../../src/persistence/native', () => ({ openRepository: async () => { throw new Error('Unexpected device database access in UI fixture'); } }));
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Modal } from 'react-native';

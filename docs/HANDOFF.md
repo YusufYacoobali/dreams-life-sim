@@ -2,7 +2,7 @@
 
 ## Dreams Polish 3 — 23 October 2026
 
-All nine requested phases are implemented: suitable stable NPC defaults, cleaner profiles, original interaction/finance/job artwork, concise outcomes, unified Real Estate, three car chips, 54 full-time plus 8 part-time jobs, and consistent mini-game presentation with circular flight controls. Existing manual avatars, saves and recorded difficulty values are preserved. Current markers are **World45 / engine47 / content24 / reader25 / v4**. See [the integrated review](verification/polish3/README.md) for behavior, real before/after browser captures and verification; full regression and final exports follow the source freeze.
+All nine requested phases are implemented: suitable stable NPC defaults, cleaner profiles, original interaction/finance/job artwork, concise outcomes, unified Real Estate, three car chips, 54 full-time plus 8 part-time jobs, and consistent mini-game presentation with circular flight controls. Existing manual avatars, saves and recorded difficulty values are preserved. Current markers are **World45 / engine47 / content24 / reader25 / v4**. See [the integrated review](verification/polish3/README.md) for behavior, real before/after browser captures and verification. Final coverage is **286 suites / 3,735 tests**, passing across the complete regression and affected test-only reruns, plus **36 complete seeded lives** across all countries/genders. Strict app/test types, the 469-module import graph and both offline Android/iOS Hermes exports pass. Runtime stayed frozen at `4698d79`; the review explicitly distinguishes browser captures from native-device acceptance.
 
 
 ## Integrated polish and mini-games — 22 October 2026

@@ -1,0 +1,111 @@
+{
+  "runtimeRevision": "4698d79",
+  "versions": {
+    "world": 45,
+    "engine": 47,
+    "content": 24,
+    "reader": 25,
+    "database": 4
+  },
+  "command": "npm test -- --runInBand=false --maxWorkers=3 --json --outputFile=/tmp/dreams-polish3-full-results.json",
+  "initialFullRun": {
+    "exitCode": 1,
+    "suites": {
+      "total": 286,
+      "passed": 273,
+      "failed": 13
+    },
+    "tests": {
+      "total": 3688,
+      "passed": 3668,
+      "failed": 20
+    },
+    "seconds": 1018.178
+  },
+  "followupRuns": [
+    {
+      "report": "family-wedding-retry",
+      "suites": 2,
+      "tests": 41,
+      "files": [
+        "tests/game/npc-courtships.test.ts",
+        "tests/ui/family-dialog-save-flow.test.tsx"
+      ]
+    },
+    {
+      "report": "purchase-confirmation",
+      "suites": 1,
+      "tests": 5,
+      "files": [
+        "tests/ui/purchase-confirmation-save-flow.test.tsx"
+      ]
+    },
+    {
+      "report": "pure-ui-retry",
+      "suites": 6,
+      "tests": 35,
+      "files": [
+        "tests/ui/modal-window-layout.test.tsx",
+        "tests/ui/interactions.test.tsx",
+        "tests/ui/daily-reminder-settings.test.tsx",
+        "tests/ui/settings-flow.test.tsx",
+        "tests/ui/theme-contrast.test.tsx",
+        "tests/ui/page-layout.test.tsx"
+      ]
+    },
+    {
+      "report": "followup-retry",
+      "suites": 4,
+      "tests": 37,
+      "files": [
+        "tests/ui/best-friends-flow.test.tsx",
+        "tests/game/birth-journal.test.ts",
+        "tests/ui/legacy-flow.test.tsx",
+        "tests/state/conversation-save.test.ts"
+      ]
+    }
+  ],
+  "finalVerifiedCoverage": {
+    "suites": 286,
+    "passedTests": 3735,
+    "failedTests": 0,
+    "pendingTests": 0
+  },
+  "notes": [
+    "All runtime changes were complete before the full invocation; runtime bytes stayed at4698d79 throughout.",
+    "Initial failures were stale copy/selector expectations, suite-local native module setup, intentional automatic artwork materialization and future-marker test expectations.",
+    "Only tests and new baseline appearance fixture changed afterward; original historical fixture bytes and aggregate birth SHA were retained.",
+    "Final verified coverage replaces each failed suite with its passing focused rerun; it is not a claim of one clean full invocation."
+  ],
+  "success": true,
+  "checks": {
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    "imports": {
+      "command": "npm run check:imports",
+      "exitCode": 0,
+      "modules": 469,
+      "cycles": 0
+    },
+    "notices": {
+      "exitCode": 0,
+      "projectArtFiles": 1169
+    },
+    "offlineExports": {
+      "android": 0,
+      "ios": 0,
+      "report": "offline-bundles.json"
+    },
+    "soak": {
+      "command": "DREAMS_SOAK_WORKERS=3 npm run test:soak -- 36",
+      "exitCode": 0,
+      "lives": 36,
+      "workers": 3,
+      "countries": 12,
+      "genders": 3,
+      "report": "soak-summary.json"
+    }
+  }
+}

@@ -12,6 +12,7 @@ import { settleEstate } from '../../src/game/systems/estates';
 import { npcYearDecisions, settleBackground } from '../../src/game/systems/npcBudget';
 import { netWorth } from '../../src/game/valuation';
 import { randomInteger } from '../../src/game/random';
+import { formatMoney } from '../../src/game/money';
 import { createContact } from '../../src/game/systems/npcs';
 import { annualCommand } from '../support/npcRelationships';
 import { npcFamilyCircle, npcWeddingJourney } from '../support/npcCourtships';
@@ -197,5 +198,5 @@ test('the existing player wedding command still charges only its reviewed budget
   expect(accountFor(result).cash).toBe(balance - budget); expect(accountFor(result, result.people[target.id]).cash).toBe(otherBalance);
   expect(marriage.id).toBe('marriage_' + revision); expect(marriage.baselineA.minor).toBe(worthA - budget); expect(marriage.baselineB.minor).toBe(worthB); expect(marriage.ledgerStart).toBe(cursor + 1);
   expect(result.ledger.at(-1)).toMatchObject({ category: 'wedding', personId: player.id, cashDelta: -budget }); expect(result.npcCourtships).toEqual([]);
-  expect(result.pending).toMatchObject({ kind: 'result', title: 'You’re married', illustration: 'rings', body: 'Your marriage and ceremony payment are recorded. You now share a household while retaining your own accounts and legal ownership.' }); validateWorld(result);
+  expect(result.pending).toMatchObject({ kind: 'result', title: 'You’re married', illustration: 'person-action:plan-wedding', body: 'You married '+target.firstName+' with a '+formatMoney({minor:budget,currency:accountFor(world).currency})+' ceremony. You share a household and keep your own accounts and property.' }); validateWorld(result);
 });

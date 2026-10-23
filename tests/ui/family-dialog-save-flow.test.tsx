@@ -8,6 +8,8 @@ import { copyWorld, decodeWorld, encodeWorld, fullName, validateWorld, type Worl
 import { recordDeath, resolveCommand, type GameCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { childrenOf } from '../../src/game/systems/family';
+import { legacyNPCDefaultGender } from '../../src/game/appearance';
+import { portraitLayers, portraitTraits } from '../../src/assets/portraitPlan';
 import { otherPerson, partnerRelation } from '../../src/game/systems/relationships';
 import { SaveRepository } from '../../src/persistence/repository';
 import * as checkpoints from '../../src/persistence/checkpoints';
@@ -184,7 +186,13 @@ test('heir confirmation keeps the real child after rollback and navigates only a
     let view = render(frame(<Legacy />, false)); expect(screen.getByText('Estate settlement')).toBeOnTheScreen(); await press('Continue as ' + child.firstName); await press('Never mind'); expect(rows()).toEqual(beforeRows); await press('Continue as ' + child.firstName); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_family BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await press('Continue Their Life'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/)); expect(screen.getByText('Continue as ' + child.firstName + '?')).toBeOnTheScreen(); expect(router.replace).not.toHaveBeenCalled(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_family'); const release = pauseNextSave(); await press('Continue Their Life'); expect(screen.getByRole('button', { name: 'Continue as ' + child.firstName })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); expect(router.replace).not.toHaveBeenCalled(); expect(rows()).toEqual(beforeRows); await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(router.replace).toHaveBeenCalledTimes(1); expect(router.replace).toHaveBeenCalledWith('/life'); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(world().people[child.id]).toEqual(child); expect(world().estates).toEqual(initial.estates); expect(world().accounts).toEqual(initial.accounts); expect(world().annual).toMatchObject({ monthsProcessed: 9, pausedForPlanning: true }); const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Family />)); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().accounts).toEqual(predicted.accounts); expect(world().estates).toEqual(initial.estates);
+    const inherited=world().people[child.id];
+    expect({...inherited,appearance:child.appearance}).toEqual(child);expect(inherited.appearance).toEqual(predicted.people[child.id].appearance);
+    // The legacy default is materialized at handover so the displayed likeness
+    // stays the same when this NPC becomes the active person.
+    const likeness=(state:World,person:World['people'][string])=>portraitLayers(portraitTraits(person.appearance,25,person.id,legacyNPCDefaultGender(state,person.id,person.appearance)));
+    expect(likeness(world(),inherited)).toEqual(likeness(initial,child));
+    expect(world().estates).toEqual(initial.estates); expect(world().accounts).toEqual(initial.accounts); expect(world().annual).toMatchObject({ monthsProcessed: 9, pausedForPlanning: true }); const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Family />)); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().accounts).toEqual(predicted.accounts); expect(world().estates).toEqual(initial.estates);
     const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
 });

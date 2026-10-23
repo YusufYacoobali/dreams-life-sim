@@ -58,7 +58,7 @@ test('opening/cancelling is read-only; held failed consent preserves one exact r
   try {
     const before = mockStore.getState().world!, original = encodeWorld(before), rows = context.rows(), command = friendshipProposal(before, context.friendId), predicted = resolveCommand(before, command, true);
     const commit = jest.spyOn(context.repository, 'commit'), unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'); view = render(frame());
-    expect(screen.queryByText('You are best friends.')).toBeNull(); await press(/^Become Best Friends/); expect(screen.getByText(/They can decline/)).toBeOnTheScreen(); await press('Never mind');
+    expect(screen.queryByText('You are best friends.')).toBeNull(); await press(/^Become Best Friends/); expect(screen.getByText(/They can say no/)).toBeOnTheScreen(); await press('Never mind');
     expect(commit).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); expect(context.rows()).toEqual(rows); expect(mockStore.getState().world).toBe(before);
     await press(/^Become Best Friends/); context.sqlite.exec("CREATE TRIGGER fail_friendship BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     let release!: () => void; context.gate(new Promise(resolve => { release = resolve; })); act(() => { fireEvent.press(screen.getByRole('button', { name: 'Ask to Be Best Friends' })); });

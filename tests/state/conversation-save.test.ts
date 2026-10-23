@@ -72,7 +72,7 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24])('complete reader%i u
     sqlite.exec('PRAGMA user_version=' + marker); const migrated = new SaveRepository(driver); await migrated.initialise();
     expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(25); expect(rows()).toEqual(baseline);
     expect(await migrated.active()).toEqual(before); expect(rows()).toEqual(baseline); await migrated.initialise(); expect(rows()).toEqual(baseline);
-    sqlite.exec('PRAGMA user_version=26'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(25);
+    sqlite.exec('PRAGMA user_version=26'); await expect(new SaveRepository(driver).initialise()).rejects.toThrow(/newer version/); expect(rows()).toEqual(baseline); expect(sqlite.prepare('PRAGMA user_version').get()!.user_version).toBe(26);
   } finally { sqlite.close(); }
 });
 
