@@ -1,0 +1,1729 @@
+{
+  "scope": "Cult editorial changes only; independent popup/collapse notification and committed-audio changes retained from upstream 5e25344.",
+  "sourceCommit": "b45d139",
+  "currentSourceObservationTestFix": "8c13e73",
+  "originalEditorialBaseline": "512d3ac",
+  "integratedGameplayBaseline": "5e25344",
+  "preservation": {
+    "worldSchema": 48,
+    "engine": 50,
+    "content": 27,
+    "sqliteReader": 28,
+    "oldPendingContexts": 74,
+    "oldChoicesWithExactResolvedWholeWorldHashes": 296,
+    "routineCasesWithIdenticalNonProseWholeWorldHashes": 358,
+    "routineBranches": 57,
+    "authoredStories": 56,
+    "authoredChoices": 168,
+    "claims": 18,
+    "financialAndPopulationBoundaries": 3,
+    "fixtureRawJsonSha256": "6dce5ee84625f29371459fcf6f88d040c9f81dd35f2bd6115cc5e5e01234e3f5"
+  },
+  "fullRegression": {
+    "command": "npm test -- --silent --json --outputFile=/tmp/dreams-cult-writing-integrated-full.json",
+    "passedAfterAffectedRerun": true,
+    "suites": 316,
+    "tests": 5091,
+    "failedSuites": 0,
+    "failedTests": 0,
+    "initialRun": {
+      "passed": false,
+      "suitesPassed": 315,
+      "suitesFailed": 1,
+      "testsPassed": 5089,
+      "testsFailed": 1
+    },
+    "affectedSuiteRerun": {
+      "command": "npm test -- --runTestsByPath tests/game/editorial-policy.test.ts --silent --json --outputFile=/tmp/dreams-cult-writing-editorial-policy-rerun.json",
+      "passed": true,
+      "tests": 5,
+      "reason": "The upstream committed-gameplay-feedback changes at 5e25344 changed the current store/state hashes. Both hashes were independently matched to that untouched upstream checkout. Only the current-source observations were refreshed; the frozen historical C35 registration, source rejection, fixtures and producers were unchanged."
+    },
+    "writingCases": 511,
+    "finalFocusedWritingCases": 512,
+    "cultUiCases": 22,
+    "sourceBoundary": "The run began at 4943f11. Final narrative and boundary corrections were committed as 358cdba before the cult suites loaded. The subsequent singular-recruitment wording and removal of duplicate sermon-stat narration have a final focused run of all 512 writing cases, including one additional grammar case. Both changes are prose-only; no gameplay or random draws changed. All 22 cult UI cases passed in the integrated full run. Totals above deduplicate the full run and passing affected/final-focused suites rather than adding reruns twice.",
+    "suiteResults": [
+      {
+        "file": "tests/ui/event-modal-host.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/gameplay-feedback.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/collapse-notifications.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/collapse-age-up-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/audio-controller.test.ts",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/display-numbers.test.tsx",
+        "passed": 40,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/engine.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/npc-moves-migration.test.ts",
+        "passed": 23,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/best-friends-migration.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/university-admissions-save-flow.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/tuple-checkpoints.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/health-review-save-flow.test.tsx",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/education-choice-save-flow.test.tsx",
+        "passed": 21,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/editorial-context-acceptance.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/everyday-life-stories.test.ts",
+        "passed": 167,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/recovery-routine-save-flow.test.tsx",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/entertainment-overhaul.test.ts",
+        "passed": 93,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-polish-journeys.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/special-career-exits-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/saved-files-flow.test.tsx",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/royalty.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/people-blocks.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/opening-migration.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/special-career-depth.test.ts",
+        "passed": 50,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/criminal-policy.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/copy-world.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/lifetime-statistics-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/exercise-review-save-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/interview-experience.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/hobby-introductions.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/adult-relationship-stories.test.ts",
+        "passed": 24,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/scholarship-durable-save-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/student-loan-rate-flow.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/early-home-stories.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-people-block-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-workplace-story-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/domain-copy-clarity.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/teen-home-stories.test.ts",
+        "passed": 16,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-workplace-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-writing.test.ts",
+        "passed": 512,
+        "failed": 0
+      },
+      {
+        "file": "tests/progression/expanded-progress.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/workplace-stories.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-raise-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/professional-policy.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults-depth.test.ts",
+        "passed": 232,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/onboarding-flow.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/hobby-introduction-save-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/project-years-callback.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/astronaut-career-acceptance-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/progression-continuation-flow.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/work-routine-save-flow.test.tsx",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/interview-experience-save-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/work-writing-overhaul.test.ts",
+        "passed": 24,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/social-criticism-persistence-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/athlete-career-acceptance.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/restored-action-cache.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/portrait-plan.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/workplace-story-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/business-review-save-flow.test.tsx",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/dramatic-events.test.ts",
+        "passed": 112,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/deferred-writing.test.ts",
+        "passed": 39,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-name-collisions.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/childhood-stories.test.ts",
+        "passed": 100,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/school-routine-save-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/royalty-review-save-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/life-milestone-motion.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/cult-flow.test.tsx",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/scholarship-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/npc-separations-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/production-gaps-migration.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-teen-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/career-plan-context-flow.test.tsx",
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/npc-separations.test.ts",
+        "passed": 59,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/model-career-acceptance-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/education-recovery-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-hourly-checkpoints.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/campus-save-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/education-recovery.test.ts",
+        "passed": 32,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/adult-work-school-entry.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/asset-bank-save-flow.test.tsx",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/health-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/welcome-screen.test.tsx",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-consequence-labels.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/minigame-flow.test.tsx",
+        "passed": 17,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/royalty-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/family-dialog-save-flow.test.tsx",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/lifetime-statistics-data.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/music-career-exit-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/profile-will-save-flow.test.tsx",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/death-summary-data.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/project-years-callback-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/ordinary-hobby-archive.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/hobby-event-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/dramatic-writing.test.ts",
+        "passed": 106,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/npc-relationships-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/birth-journal.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/new-life-review-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/writing-life-stories.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/architecture/runtime-imports.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/cinematic-assets.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/saved-life-preview.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/action-checkpoints.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/services.test.ts",
+        "passed": 38,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/life-context.test.tsx",
+        "passed": 33,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/pets-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/teen-relationship-compatibility.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/contacts-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/ordinary-jobs.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/travel-review-save-flow.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/life-preview.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/profile-overview-save-flow.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/businesses.test.ts",
+        "passed": 48,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/relationship-writing-overhaul.test.ts",
+        "passed": 36,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/social-review-save-flow.test.tsx",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/ordinary-hobby-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-school-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/relationship-polish.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/career-review-save-flow.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/annual-pacing-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/estates.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/cults-migration.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/education-work-finance.test.ts",
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/npc-courtships-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/terminal-biography-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/save-summaries.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/hobby-events.test.ts",
+        "passed": 114,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/relocation-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/leisure-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/event-artwork.test.tsx",
+        "passed": 35,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/person-interactions-flow.test.tsx",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/editorial-policy.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/service-context-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/prospective-gameplay-migration.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/legal-review-save-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/creators.test.ts",
+        "passed": 38,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/music.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/emigration-country-default.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/university-admissions.test.ts",
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/politics.test.ts",
+        "passed": 28,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-interview-checkpoints.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/native-arcade-archive.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/hourly-work-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/life-context-story-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/property-options-flow.test.tsx",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/extras-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/scholarships.test.ts",
+        "passed": 45,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/social.test.ts",
+        "passed": 31,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/adult-writing-overhaul.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/npc-moves-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/teen-relationship-save-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/study-course-records.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/feedback-settings-flow.test.tsx",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/best-friends-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/purchase-confirmation-save-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/annual-finances-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/school-withdrawal-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/creator-studio-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/story-callback-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/entertainment-system-writing.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/workplace-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/adult-relationship-story-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/npc-courtships.test.ts",
+        "passed": 30,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/business-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/avatar-v2-integration.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/credit-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/story-name-collision-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/end-life-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/travel-planning-polish.test.tsx",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/service-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/travel-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/minigame-native-worklets.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/social-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/product-polish-review.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/asset-features.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/leisure.test.ts",
+        "passed": 52,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/relationship-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/special-career-depth-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/annual-pacing.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/school-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/job-interview-flow.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/legal.test.ts",
+        "passed": 46,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/politics-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/god-mode-flow.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/startup-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/conversation-topic-save-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/social-criticism-copy.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/onboarding-haptics-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/career-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/legal-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/family-tree-late-spouse.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/family-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/legacy-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/daily-reminder-settings.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/music-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/ordinary-jobs.test.ts",
+        "passed": 87,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/event-rarity.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/review-prompt.test.tsx",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/date-activity-save-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/childhood-story-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-roster-polish.test.ts",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/onboarding-accessibility-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/will-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/story-consequence-labels-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/progression/progress.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/time-machine-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/rental-save-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/school-plans.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/purchase-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/settings-flow.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/person-profile-polish3.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/automatic-appearance.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/early-home-story-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/modal-window-layout.test.tsx",
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/pension-flow.test.tsx",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/responsive-archive.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/progression/connections.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/person-profile-polish3-capture.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/minigames.test.ts",
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/school-writing-overhaul.test.ts",
+        "passed": 24,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/theme-contrast.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/interactions.test.tsx",
+        "passed": 11,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/assets-markets.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/polish3-art.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/careers.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/ordinary-hobbies.test.ts",
+        "passed": 60,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/pets.test.ts",
+        "passed": 52,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/birth-journal-flow.test.tsx",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/automatic-avatar-gallery.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/death-summary-presentation.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/foreign-earnings.test.ts",
+        "passed": 91,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/best-friends.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/rare-adult-story.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/appearance-labels.test.tsx",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/automatic-appearance-save.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-lifecycle.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-callbacks.test.ts",
+        "passed": 27,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/page-layout.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/polish3-minigames.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/portrait-accessibility.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/conversation-save.test.ts",
+        "passed": 16,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/hourly-work.test.ts",
+        "passed": 69,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/relocation.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-claims-polish.test.ts",
+        "passed": 26,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/conversations.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/leisure-archive.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/campus.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-editorial-context.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/npc-moves.test.ts",
+        "passed": 60,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-participants.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/credit.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/minigame-save.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/birth-journal.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/terminal-biography-data.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/polish-minigame-migration.test.ts",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/school-withdrawal.test.ts",
+        "passed": 17,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/work-raises.test.ts",
+        "passed": 34,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/job-interviews.test.ts",
+        "passed": 85,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/health-legal-availability.test.ts",
+        "passed": 10,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/workplaces.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/health-emergency-context.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults.test.ts",
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/content-refresh.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/education-milestones.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/travel.test.ts",
+        "passed": 29,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/school.test.ts",
+        "passed": 21,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/time-machine.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/story-immediate.test.ts",
+        "passed": 27,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/dramatic-consequences.test.ts",
+        "passed": 16,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/compressed-lives.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/pet-archive.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/writing-cult-compatibility.test.ts",
+        "passed": 13,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/npc-relationships.test.ts",
+        "passed": 19,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/god-mode.test.ts",
+        "passed": 77,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-recruiter-writing.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cult-activities-polish.test.ts",
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/family.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/relationships.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/person-support.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/end-life.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/asset-catalogue.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/annual-finances-projection.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/rental-homes.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/story-immediate-save.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/legal-stories.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/preferencesStore.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/teen-relationships.test.ts",
+        "passed": 37,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/repository.test.ts",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/progression/financial-progress.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/date-activities.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/health.test.ts",
+        "passed": 22,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/reviews.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/legal-story-flow.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/god-mode-save.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/person-polish3-writing.test.ts",
+        "passed": 15,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/save-json.test.ts",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "file": "tests/reviews/tracker.test.ts",
+        "passed": 16,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/cinematic-death-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/cults-integration.test.ts",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/person-actions.test.ts",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/person-support-migration.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/cinematic-transition.test.tsx",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/education-milestone-save.test.ts",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/catalogue-art.test.tsx",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/creation.test.ts",
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/entrepreneur-policy.test.ts",
+        "passed": 18,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/creationDraft.test.ts",
+        "passed": 25,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/gameStore.test.ts",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "file": "tests/persistence/base64.test.ts",
+        "passed": 24,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/relationship-labels.test.ts",
+        "passed": 2,
+        "failed": 0
+      },
+      {
+        "file": "tests/ui/scene-motion.test.tsx",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/money-format.test.ts",
+        "passed": 31,
+        "failed": 0
+      },
+      {
+        "file": "tests/notifications/daily-reminders.test.ts",
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/conversation-writing.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/game/primitives.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "file": "tests/reviews/native-review.test.ts",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "file": "tests/state/god-mode-access.test.ts",
+        "passed": 2,
+        "failed": 0
+      }
+    ]
+  },
+  "soak": {
+    "command": "DREAMS_SOAK_WORKERS=3 npm run test:soak -- 120",
+    "passed": true,
+    "uniqueCompletedLives": 120,
+    "seedRange": [
+      0,
+      119
+    ],
+    "ageAtDeath": [
+      37,
+      97
+    ],
+    "sourceBoundary": "The 120-life run used the editorial runtime subsequently committed as 698c4f1, before the independent popup/audio merge and final prose corrections. Its core-life policy never founds a cult. Later game changes only concern active cult collapse notifications and presentation; the no-cult simulation path is unchanged. The full integrated regression additionally passed its 12 complete seeded lives at the merged gameplay runtime."
+  },
+  "careers": {
+    "completeCultCareers": 9,
+    "countries": [
+      "US",
+      "GB",
+      "JP"
+    ],
+    "scenarios": [
+      "short free-fee organisation",
+      "stressed low-standing leader with high-heat beliefs",
+      "growing organisation reaching 799 followers"
+    ],
+    "matchedCommandTracesAndNonProseWorlds": true,
+    "scope": "Declared funded adult starts; nine complete cult careers, ordinary engine actions and annual advancement, then collapse or disbandment. The struggling cohort starts with declared low public standing, stress and high-heat beliefs; outcomes are not edited. Before/after command traces and non-prose final worlds match. Not natural-birth encounter claims."
+  },
+  "checks": {
+    "typecheck": {
+      "command": "npm run typecheck",
+      "passed": true
+    },
+    "imports": {
+      "command": "npm run check:imports",
+      "passed": true,
+      "modules": 503,
+      "cycles": 0
+    },
+    "androidExport": true,
+    "iosExport": true,
+    "verifiedRuntimeFiles": 22,
+    "bundledCultIllustrations": 12,
+    "browserScreens": 34,
+    "decodedBrowserImages": 418,
+    "browserOverflow": 0,
+    "browserErrors": 0,
+    "allActionsReachable": true,
+    "nativeDeviceCaptureClaim": false
+  },
+  "editorialReport": {
+    "representativeBeforeAfterPairs": 43,
+    "claimSpecificAdmissions": 18,
+    "reviewedStories": 56,
+    "remainingManualEditorialFlags": [],
+    "intentionallyRetained": [
+      "literal old save bindings and histories",
+      "factual eligibility and financial messages",
+      "four unreachable success strings for impossible claims"
+    ]
+  },
+  "logs": {
+    "/tmp/dreams-cult-writing-integrated-full.json": {
+      "sha256": "d3b5e08261b4486c7be91ea272bc0a3b40c7ec2bca611c9022206973fae38b0b"
+    },
+    "/tmp/dreams-cult-writing-editorial-policy-rerun.json": {
+      "sha256": "0cf05b5d3cccf34999144f5c78da092f41f23a45c9e861496f4eb497d97edba6"
+    },
+    "/tmp/dreams-cult-writing-editorial-policy-rerun.log": {
+      "sha256": "6bd070b43132f257fa50d36c9565524999beb101b1d6e91ccf9f35509c145129"
+    },
+    "/tmp/dreams-cult-writing-soak-final.log": {
+      "sha256": "af29de28e857dc9ea34806605f248e8b9c9e8e0df4a3c31efe2a2776d94f6bd8"
+    },
+    "/tmp/dreams-cult-writing-final-types.log": {
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "/tmp/dreams-cult-writing-final-imports.log": {
+      "sha256": "f10b547f33d3e424b493739e2637103f7b0796ba76648a1550e25a0c17134741"
+    },
+    "/tmp/dreams-cult-writing-complete-export.log": {
+      "sha256": "70c674d1a74c679def26acaba98ce964c13198fd952209d3c28436fe147c608c"
+    },
+    "/tmp/dreams-cult-writing-final-platforms.log": {
+      "sha256": "a2cb57b6bdfc1eb4619463d2c0b00bff87c01e2e3f5e223601db5ab8e63e5e52"
+    },
+    "/tmp/dreams-cult-writing-browser-final.log": {
+      "sha256": "82e2f0c0b9735fc7d1f918a707278c3b8d4050c334ba31edadf38ebf2569acba"
+    },
+    "/tmp/dreams-cult-writing-final-focused.json": {
+      "sha256": "bb5e694de39a27ba39506f9bf76715ff90ac6978f83b34ee504f6cc32023bb37"
+    },
+    "/tmp/dreams-cult-writing-integrated-captures.log": {
+      "sha256": "a28306d39ec307525dd77e7812417f5e6325720a1673a33115cfdced9c0cf097"
+    },
+    "/tmp/dreams-cult-writing-careers-final.log": {
+      "sha256": "d27ea2beff1e26663dac08576f83033c880e5269a13ab39f858a30aa69644b88"
+    }
+  }
+}

@@ -133,3 +133,11 @@ No runtime dependency or artwork was added in this polish phase. See
 [current verification](verification/cult-polish/README.md),
 [original implementation verification](verification/cult-career/README.md) and
 [art provenance](../assets/generated/cult/README.md).
+
+## Writing
+
+The cult editorial pass covers all 56 situations, 168 choice payoffs and 18
+claims, plus beliefs, routine activities, follower reactions and screen text.
+Existing saved offers retain their original wording and resolution. New offers
+use the revised copy without changing gameplay. See the
+[43 before/after examples and verification](verification/cult-writing/README.md).
