@@ -1,0 +1,639 @@
+{
+  "runtimeCommit": "d861b33a9323bdafc10cb8c74191afac6d756cb4",
+  "baseline": "73e9f48b7acc2d19485f0934916b152b3f7cfb9f",
+  "retainedUpstream": "5a5902f383be2016f4b911bc0cff36b39511d409",
+  "scope": {
+    "rewrittenEvents": 19,
+    "rewrittenPayoffs": 57,
+    "rewrittenJournals": 57,
+    "cumulativeRewrittenEvents": 133,
+    "cumulativeRewrittenPayoffs": 399,
+    "deferredImproveCandidates": 0,
+    "changedGameFiles": 5,
+    "gameplayOrUIChanges": false,
+    "versionsUnchanged": {
+      "world": 47,
+      "engine": 49,
+      "content": 26,
+      "reader": 27,
+      "database": 4
+    }
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "exit": 0
+  },
+  "imports": {
+    "command": "npm run check:imports",
+    "exit": 0,
+    "modules": 488,
+    "cycles": []
+  },
+  "focused": {
+    "suites": 4,
+    "tests": 234,
+    "originalSavedWholeWorldOutcomeHashes": 57,
+    "newlyWordedWholeWorldOutcomeHashes": 57,
+    "producerFixture": "../../../tests/fixtures/v47-deferred-writing-before.json"
+  },
+  "fullRegression": {
+    "command": "DREAMS_LIFE_SWEEP=12 DREAMS_LIFE_SWEEP_SHARDS=1 DREAMS_LIFE_SWEEP_SHARD=0 DREAMS_WRITING_REVIEW_DIR=/tmp/dreams-deferred-lives npm test -- --runInBand=false --maxWorkers=3 --json --outputFile=/tmp/dreams-deferred-full.json",
+    "exit": 0,
+    "suitesPassed": 303,
+    "suitesTotal": 303,
+    "testsPassed": 4275,
+    "testsTotal": 4275,
+    "singleCompleteInvocation": true
+  },
+  "naturalJournalReview": {
+    "runtimeCommit": "d861b33a9323bdafc10cb8c74191afac6d756cb4",
+    "comparisonRuntime": "98e34b0f022208bdad39ce0736121696c3667f13",
+    "strategy": "Existing natural engine life test; first available choice, no configured career, pet, hobby or travel. All57 contextual alternatives use pinned fixtures.",
+    "completedLives": 12,
+    "decisions": 779,
+    "revisedEncounters": 78,
+    "distinctRevisedScenes": 11,
+    "sameChoicesAndCompleteEffectRows": true,
+    "sameDeathAgesAndLedgerCounts": true,
+    "unchangedScenesAndOtherJournalEntriesExact": true,
+    "cooldownViolations": 0,
+    "unresolvedBindings": 0,
+    "missingNonfatalResults": 0,
+    "perLife": [
+      {
+        "seed": 0,
+        "country": "AU",
+        "gender": "male",
+        "ageAtDeath": 41,
+        "decisions": 47,
+        "revisedEncounters": 0
+      },
+      {
+        "seed": 1,
+        "country": "IT",
+        "gender": "nonbinary",
+        "ageAtDeath": 77,
+        "decisions": 82,
+        "revisedEncounters": 7
+      },
+      {
+        "seed": 2,
+        "country": "BR",
+        "gender": "female",
+        "ageAtDeath": 82,
+        "decisions": 58,
+        "revisedEncounters": 11
+      },
+      {
+        "seed": 3,
+        "country": "BR",
+        "gender": "male",
+        "ageAtDeath": 56,
+        "decisions": 45,
+        "revisedEncounters": 6
+      },
+      {
+        "seed": 4,
+        "country": "ZA",
+        "gender": "male",
+        "ageAtDeath": 80,
+        "decisions": 80,
+        "revisedEncounters": 3
+      },
+      {
+        "seed": 5,
+        "country": "BR",
+        "gender": "female",
+        "ageAtDeath": 92,
+        "decisions": 75,
+        "revisedEncounters": 13
+      },
+      {
+        "seed": 6,
+        "country": "ES",
+        "gender": "male",
+        "ageAtDeath": 71,
+        "decisions": 54,
+        "revisedEncounters": 5
+      },
+      {
+        "seed": 7,
+        "country": "US",
+        "gender": "nonbinary",
+        "ageAtDeath": 74,
+        "decisions": 101,
+        "revisedEncounters": 2
+      },
+      {
+        "seed": 8,
+        "country": "CA",
+        "gender": "nonbinary",
+        "ageAtDeath": 78,
+        "decisions": 64,
+        "revisedEncounters": 7
+      },
+      {
+        "seed": 9,
+        "country": "GB",
+        "gender": "nonbinary",
+        "ageAtDeath": 66,
+        "decisions": 47,
+        "revisedEncounters": 9
+      },
+      {
+        "seed": 10,
+        "country": "ES",
+        "gender": "nonbinary",
+        "ageAtDeath": 72,
+        "decisions": 60,
+        "revisedEncounters": 10
+      },
+      {
+        "seed": 11,
+        "country": "ES",
+        "gender": "female",
+        "ageAtDeath": 87,
+        "decisions": 66,
+        "revisedEncounters": 5
+      }
+    ],
+    "encounters": {
+      "wellbeing-quiet-not-silent": 12,
+      "wellbeing-habit-one-miss": 9,
+      "wellbeing-search-results": 1,
+      "wellbeing-good-day-pressure": 9,
+      "wellbeing-waiting-without-feed": 11,
+      "wellbeing-stretch-after-sitting": 13,
+      "wellbeing-unhurried-breath": 9,
+      "later-recording-labelled-retro": 3,
+      "later-photo-at-edge": 6,
+      "later-offered-a-hand": 2,
+      "later-forgotten-telephone-number": 3
+    },
+    "unseenFollowupIds": [
+      "wellbeing-other-peoples-progress",
+      "pet-cat-slow-blink",
+      "pet-rabbit-floor-level",
+      "pet-familiar-presence",
+      "hobby-gardening-labels",
+      "travel-memory-one-good-habit",
+      "travel-memory-imperfect-weather",
+      "travel-memory-short-version"
+    ],
+    "examples": [
+      {
+        "templateId": "wellbeing-quiet-not-silent",
+        "seed": 1,
+        "age": 19,
+        "selected": "allow",
+        "title": "The silence committee",
+        "situation": "In a library’s quiet corner, someone whispers “Shh.” Another person shushes them for shushing too loudly. A third has taken a preparatory breath.",
+        "result": {
+          "title": "The dispute has excellent acoustics",
+          "body": "You settle into your book. Behind you, two people attempt to win an argument entirely through the letter S.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_1",
+              "label": "Energy",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2043_wellbeing-quiet-not-silent_choice",
+            "date": {
+              "year": 2043,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I relaxed with a book while other readers argued about making less noise.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-habit-one-miss",
+        "seed": 1,
+        "age": 23,
+        "selected": "resume",
+        "title": "The blank page",
+        "situation": "You miss a day in your one-sentence journal and consider abandoning the whole thing. Yesterday’s entry was “Saw a very round dog.” This is apparently the standard you have failed.",
+        "result": {
+          "title": "The dog retains top billing",
+          "body": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Discipline",
+              "value": "+4%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2047_wellbeing-habit-one-miss_choice",
+            "date": {
+              "year": 2047,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I resumed a one-sentence journal after missing a day.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-search-results",
+        "seed": 1,
+        "age": 32,
+        "selected": "questions",
+        "title": "Before we can worry you",
+        "situation": "You search for information about Diabetes. Before showing you a single sentence, the first website asks you to accept cookies, enable notifications and rate your experience.",
+        "result": {
+          "title": "A consultation with fewer buttons",
+          "body": "You save one clear question for a clinician. The website asks whether you are sure you want to leave. For once, you are.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Discipline",
+              "value": "+3%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "-3%",
+              "tone": "positive"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2056_wellbeing-search-results_choice",
+            "date": {
+              "year": 2056,
+              "month": 2,
+              "day": 29
+            },
+            "personId": "person_player",
+            "text": "I wrote down a question about Diabetes and escaped a very demanding website.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-good-day-pressure",
+        "seed": 1,
+        "age": 54,
+        "selected": "pace",
+        "title": "Fix your life before lunch",
+        "situation": "You wake up feeling rested. Your planner suggests clearing your inbox, learning a language and becoming an entirely new person. It has left twenty minutes for lunch.",
+        "result": {
+          "title": "Personal transformation postponed",
+          "body": "You finish your three tasks and stop. The planner suggests setting an ambitious new target. You suggest it enjoys the silence.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Discipline",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_2",
+              "label": "Energy",
+              "value": "-1%",
+              "tone": "negative"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2078_wellbeing-good-day-pressure_choice",
+            "date": {
+              "year": 2078,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I finished three manageable tasks and muted an overambitious planner.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-waiting-without-feed",
+        "seed": 1,
+        "age": 55,
+        "selected": "observe",
+        "title": "Assistance is a trap",
+        "situation": "In a waiting area, a bell sits between two signs: RING FOR ASSISTANCE and PLEASE DO NOT RING. You have already checked your phone three times.",
+        "result": {
+          "title": "Help is apparently nearby",
+          "body": "You spot WE ARE HERE TO HELP above a firmly closed hatch. Studying the signs turns out to be more interesting than your phone.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_1",
+              "label": "Smarts",
+              "value": "+2%",
+              "tone": "positive"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2079_wellbeing-waiting-without-feed_choice",
+            "date": {
+              "year": 2079,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I passed a wait investigating contradictory reception signs.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-stretch-after-sitting",
+        "seed": 10,
+        "age": 20,
+        "selected": "move",
+        "title": "The chair denies everything",
+        "situation": "After sitting still for ages, you stand halfway up and hear a tremendous creak. You and the chair are the only suspects.",
+        "result": {
+          "title": "The investigation gets some air",
+          "body": "You walk around until you feel less stiff. On your return, you give the chair a suspicious look. It refuses to demonstrate the noise.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Energy",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2044_wellbeing-stretch-after-sitting_choice",
+            "date": {
+              "year": 2044,
+              "month": 2,
+              "day": 29
+            },
+            "personId": "person_player",
+            "text": "I loosened up with a short walk after a creak of uncertain origin.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "wellbeing-unhurried-breath",
+        "seed": 10,
+        "age": 33,
+        "selected": "pause",
+        "title": "Customer support is unavailable",
+        "situation": "You are tired when someone asks, “Why do you look so tired?” They wait as though you have been withholding an exciting explanation.",
+        "result": {
+          "title": "A limited questionnaire",
+          "body": "They ask whether you have been sleeping enough. You request an unsubscribe button. They laugh and change the subject.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Discipline",
+              "value": "+3%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2057_wellbeing-unhurried-breath_choice",
+            "date": {
+              "year": 2057,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I joked my way out of questions about looking tired.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "later-recording-labelled-retro",
+        "seed": 10,
+        "age": 61,
+        "selected": "enjoy",
+        "title": "The domestic command device",
+        "situation": "A documentary uses a programme you remember watching as “historical footage”. The narrator earnestly introduces its remote control as an early domestic command device.",
+        "result": {
+          "title": "An important era for channel changing",
+          "body": "You enjoy spotting details the narrator misses. Apparently the little lid that always fell off the remote was not important enough for the archives.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Happiness",
+              "value": "+0%",
+              "tone": "neutral"
+            },
+            {
+              "id": "effect_1",
+              "label": "Smarts",
+              "value": "+2%",
+              "tone": "positive"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2085_later-recording-labelled-retro_choice",
+            "date": {
+              "year": 2085,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I enjoyed a documentary treating a familiar old programme as historical footage.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "later-photo-at-edge",
+        "seed": 11,
+        "age": 82,
+        "selected": "accept",
+        "title": "A significant gesture",
+        "situation": "An old group photo catches you leaning out of frame and pointing urgently at something. Everyone is wearing paper party hats. You look as though you are trying to alter the course of history.",
+        "result": {
+          "title": "An accurate historical record",
+          "body": "You caption it “Present, with reservations.” It becomes your favourite description of a party you can barely remember.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Happiness",
+              "value": "+4%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2106_later-photo-at-edge_choice",
+            "date": {
+              "year": 2106,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I gave an old party photo an honest caption instead of solving its mystery.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "later-offered-a-hand",
+        "seed": 2,
+        "age": 75,
+        "selected": "accept",
+        "title": "The lid is winning",
+        "situation": "You are struggling with a stubborn jar when someone offers to help. The lid has already survived your polite request and your less polite one.",
+        "result": {
+          "title": "A shared enemy",
+          "body": "They give it a confident twist. Nothing. You both agree the lid is unreasonable and keep trying together.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Respect",
+              "value": "+3%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Energy",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2099_later-offered-a-hand_choice",
+            "date": {
+              "year": 2099,
+              "month": 2,
+              "day": 28
+            },
+            "personId": "person_player",
+            "text": "I accepted help with a stubborn jar and gained an ally against the lid.",
+            "category": "event"
+          }
+        ]
+      },
+      {
+        "templateId": "later-forgotten-telephone-number",
+        "seed": 5,
+        "age": 80,
+        "selected": "laugh",
+        "title": "The number will not leave",
+        "situation": "You are looking for scissors when an old television jingle pops into your head, complete with its telephone number. Your memory has supplied a service nobody requested.",
+        "result": {
+          "title": "An impressive advertising legacy",
+          "body": "You find the scissors halfway through the second chorus. You have never been less grateful to a catchy tune.",
+          "effects": [
+            {
+              "id": "effect_0",
+              "label": "Happiness",
+              "value": "+4%",
+              "tone": "positive"
+            },
+            {
+              "id": "effect_1",
+              "label": "Stress",
+              "value": "+0%",
+              "tone": "neutral"
+            }
+          ]
+        },
+        "journal": [
+          {
+            "id": "event_2104_later-forgotten-telephone-number_choice",
+            "date": {
+              "year": 2104,
+              "month": 2,
+              "day": 29
+            },
+            "personId": "person_player",
+            "text": "I found the scissors while singing an old advertising jingle I still remembered perfectly.",
+            "category": "event"
+          }
+        ]
+      }
+    ]
+  },
+  "logs": {
+    "full": {
+      "path": "/tmp/dreams-deferred-full.log",
+      "sha256": "dfa8ba976ae9a64486ea1c960b2c9effdff2948145e18cbdda4ece4390016cd9"
+    },
+    "focused": {
+      "path": "/tmp/dreams-deferred-focused.log",
+      "sha256": "6dee725c22aca53814b36eb46c01a943a3ffd6c0fd59a719604decf0da9459f4"
+    },
+    "typecheck": {
+      "path": "/tmp/dreams-deferred-types.log",
+      "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+    },
+    "imports": {
+      "path": "/tmp/dreams-deferred-imports.log",
+      "sha256": "b823845ceb79cb1d15a269befd23a68934e3b57b12c64eb1e172c1086c7a4c56"
+    }
+  }
+}

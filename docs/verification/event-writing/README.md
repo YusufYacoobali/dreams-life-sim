@@ -90,6 +90,14 @@ strategy: 641 of 2,094 adult decisions. They reflect the existing health rules,
 not new authored event chains. This writing batch does not change disease
 progression or suppress genuine health decisions.
 
+## Follow-up verification
+
+At source `d861b33`, **303 suites / 4,275 tests** pass in one full invocation. Strict app/test types and the 488-module import check pass. The 234 focused checks include every old and new branch, unchanged eligibility/effects and the real save failure/retry UI flow.
+
+All 12 natural lives completed: 779 decisions and 78 encounters with 11 different follow-up scenes. Choice IDs, consequence rows, death ages and ledger-row counts match the previous run; other scenes and journal entries remain exact. No unresolved bindings, missing nonfatal payoffs or five-year cooldown violations were found. This first-available-choice strategy does not create pets, hobbies or trips; genuine domain fixtures cover those contexts and all 57 alternatives.
+
+[Commands, source pins, natural examples and log hashes](deferred-followup-tests.json). These are engine/test and writing checks; no new native-device visual acceptance is claimed.
+
 ## Initial batch verification
 
 The final combined source `98e34b0` passed **302 suites / 4,236 tests in one complete invocation**, including 12 complete seeded lives. Strict app/test types and the **488-module import graph** pass. [Exact commands, counts, source pins and log hashes](test-summary.json) are recorded separately from the earlier writing-only run.
