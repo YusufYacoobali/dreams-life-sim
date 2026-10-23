@@ -1,4 +1,5 @@
 import { createStore } from 'zustand/vanilla';
+import { emitGameplayFeedback } from '../feedback/gameplayFeedback';
 import { z } from 'zod';
 import type { SaveRepository } from '../persistence/repository';
 
@@ -20,6 +21,7 @@ export type PreferencesState = {
   retry: () => Promise<boolean>; reset: () => Promise<boolean>;
 };
 type Dependencies = { repository: () => Promise<Pick<SaveRepository, 'loadAppSettings' | 'saveAppSettings'>> };
+let failedPreferenceSequence = 0;
 export function createPreferencesStore(deps: Dependencies) {
   return createStore<PreferencesState>((set, get) => {
     let failedWrite: AppSettings | null = null;
@@ -40,7 +42,9 @@ export function createPreferencesStore(deps: Dependencies) {
           ...(settings.reminderMinute !== defaultAppSettings.reminderMinute ? { reminderMinute: settings.reminderMinute } : {}), ...(settings.godModeEnabled ? { godModeEnabled: true } : {}) }));
         failedWrite = null; set({ settings, ready: true, loadFailed: false }); return true;
       } catch {
-        failedWrite = { ...input }; set({ error: 'Your app setting could not be saved. Try again.' }); return false;
+        failedWrite = { ...input }; set({ error: 'Your app setting could not be saved. Try again.' });
+        emitGameplayFeedback({ id: 'preferences-failure:' + ++failedPreferenceSequence, cues: ['error'] });
+        return false;
       } finally { set({ busy: false }); }
     };
     return {

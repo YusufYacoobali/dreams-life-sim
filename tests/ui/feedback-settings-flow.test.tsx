@@ -17,10 +17,12 @@ import { AppFeedback } from '../../src/ui/AppFeedback';
 import { FeedbackProvider } from '../../src/ui/feedback';
 import { Button } from '../../src/ui/components';
 import { ThemeProvider } from '../../src/ui/theme';
+import { emitGameplayFeedback } from '../../src/feedback/gameplayFeedback';
 
 let mockPreferences: ReturnType<typeof createPreferencesStore>, mockGame: ReturnType<typeof createGameStore>;
 const mockImpact = jest.fn(), mockAndroidHaptic = jest.fn(), mockAudioMode = jest.fn(), mockAudioCreate = jest.fn();
 const mockPlayer = { isLoaded: true, volume: 1, seekTo: jest.fn(), play: jest.fn(), pause: jest.fn(), remove: jest.fn() };
+const mockGameplayPlayers = new Map<number, typeof mockPlayer>();
 // The overlay's native/UI runtime is exercised in cinematic-transition.test;
 // this journey keeps the persisted feedback settings and both navigators live.
 jest.mock('../../src/ui/cinematic/CinematicTransition', () => ({ CinematicTransitionProvider: ({ children }: React.PropsWithChildren) => children }));
@@ -47,13 +49,19 @@ import RootLayout from '../../app/_layout';
 let motionChanged: (enabled: boolean) => void, appStateChanged: (state: AppStateStatus) => void, previousAppState: AppStateStatus;
 const removedMotion = jest.fn(), appStateRemovals: jest.Mock[] = [];
 beforeEach(() => {
+  mockGameplayPlayers.clear();
   appStateRemovals.length = 0;
   jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
   const subscribe = jest.fn(); subscribe.mockImplementation((_event: string, listener: (enabled: boolean) => void) => { motionChanged = listener; return { remove: removedMotion }; });
   jest.spyOn(AccessibilityInfo, 'addEventListener').mockImplementation(subscribe);
   jest.spyOn(AppState, 'addEventListener').mockImplementation((_event, listener) => { appStateChanged = listener; const remove = jest.fn(); appStateRemovals.push(remove); return { remove }; });
   previousAppState = AppState.currentState; AppState.currentState = 'active';
-  mockImpact.mockResolvedValue(undefined); mockAndroidHaptic.mockResolvedValue(undefined); mockAudioMode.mockResolvedValue(undefined); mockAudioCreate.mockReturnValue(mockPlayer); mockPlayer.seekTo.mockResolvedValue(undefined);
+  mockImpact.mockResolvedValue(undefined); mockAndroidHaptic.mockResolvedValue(undefined); mockAudioMode.mockResolvedValue(undefined);
+  mockAudioCreate.mockImplementation((source: number) => {
+    const player = source === 42 ? mockPlayer : { isLoaded: true, volume: 1, seekTo: jest.fn(async () => {}), play: jest.fn(), pause: jest.fn(), remove: jest.fn() };
+    mockGameplayPlayers.set(source, player); return player;
+  });
+  mockPlayer.seekTo.mockResolvedValue(undefined);
 });
 afterEach(() => { AppState.currentState = previousAppState; jest.restoreAllMocks(); });
 
@@ -156,7 +164,7 @@ test.each(['ios', 'android'] as const)('%s native haptic and local sound never b
     const initial = mockGame.getState().world!, unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     mockImpact.mockImplementation(() => new Promise(() => {})); mockAndroidHaptic.mockImplementation(() => new Promise(() => {}));
     let releaseSound!: () => void; mockPlayer.seekTo.mockImplementation(() => new Promise<void>(resolve => { releaseSound = resolve; }));
-    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); expect(mockAudioMode).toHaveBeenCalledWith({ playsInSilentMode: false, interruptionMode: 'mixWithOthers', allowsRecording: false, shouldPlayInBackground: false, shouldRouteThroughEarpiece: false });
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); expect(mockAudioMode).toHaveBeenCalledWith({ playsInSilentMode: false, interruptionMode: 'mixWithOthers', allowsRecording: false, shouldPlayInBackground: false, shouldRouteThroughEarpiece: false });
     expect(mockAudioCreate).toHaveBeenCalledWith(42, { keepAudioSessionActive: false, updateInterval: 1000 });
     await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); const expected = { ...initial, birthAcknowledged: true, revision: initial.revision + 1 }; expect(mockGame.getState().world).toEqual(expected);
     expect(platform === 'ios' ? mockImpact : mockAndroidHaptic).toHaveBeenCalledWith(platform === 'ios' ? 'light' : 'virtual-key'); expect(platform === 'ios' ? mockAndroidHaptic : mockImpact).not.toHaveBeenCalled(); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
@@ -168,10 +176,34 @@ test('turning feedback off stops pending sound, releases the player, and leaves 
   const context = await setup(false, '{"version":1,"appearance":"light","haptics":true,"soundEffects":true}');
   try {
     let releaseSound!: () => void; mockPlayer.seekTo.mockImplementation(() => new Promise<void>(resolve => { releaseSound = resolve; }));
-    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); await press('How to Play. Years, routines, milestones and local progress'); // Navigation rows use haptics without adding button sounds.
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); await press('How to Play. Years, routines, milestones and local progress'); // Navigation rows use haptics without adding button sounds.
     expect(mockImpact).toHaveBeenCalledTimes(1); expect(mockPlayer.seekTo).not.toHaveBeenCalled(); await press('Restore Default Appearance'); expect(mockPlayer.seekTo).toHaveBeenCalledTimes(1); await press('Never mind');
     await toggle('Sound Effects', false); await toggle('Haptic Feedback', false); const writes = context.rows(), count = mockImpact.mock.calls.length;
     await act(async () => { releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); expect(mockPlayer.remove).toHaveBeenCalledTimes(1); await press('Restore Default Appearance'); await press('Never mind'); expect(mockImpact).toHaveBeenCalledTimes(count); expect(context.rows()).toEqual(writes); view.unmount();
+  } finally { context.close(); }
+});
+
+test.each(['ios', 'android'] as const)('%s adapter plays live gameplay cues once and saved-off preferences suppress them without replay', async platform => {
+  jest.replaceProperty(Platform, 'OS', platform);
+  const context = await setup(false, '{"version":1,"appearance":"light","soundEffects":true}');
+  try {
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5));
+    const cues = [{ cue: 'age-up', source: 43 }, { cue: 'big-success', source: 44 }, { cue: 'purchase', source: 45 }, { cue: 'error', source: 46 }] as const;
+    for (const { cue, source } of cues) {
+      await act(async () => { emitGameplayFeedback({ id: platform + ':' + cue, cues: [cue] }); });
+      await waitFor(() => expect(mockGameplayPlayers.get(source)!.play).toHaveBeenCalledTimes(1));
+      await act(async () => { emitGameplayFeedback({ id: platform + ':' + cue, cues: [cue] }); });
+      expect(mockGameplayPlayers.get(source)!.play).toHaveBeenCalledTimes(1);
+    }
+    const previous = [...mockGameplayPlayers.values()];
+    await act(async () => { fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', false); });
+    for (const player of previous) expect(player.remove).toHaveBeenCalledTimes(1);
+    await act(async () => { emitGameplayFeedback({ id: 'saved-while-off', cues: ['big-success'] }); });
+    expect(previous[2].play).toHaveBeenCalledTimes(1);
+    await act(async () => { fireEvent(screen.getByLabelText('Sound Effects'), 'valueChange', true); });
+    await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(10));
+    for (const player of mockGameplayPlayers.values()) expect(player.play).not.toHaveBeenCalled();
+    view.unmount();
   } finally { context.close(); }
 });
 
@@ -179,8 +211,8 @@ test('backgrounding suppresses a pending sound and unavailable native feedback c
   const context = await setup(false, '{"version":1,"appearance":"light","haptics":true,"soundEffects":true}');
   try {
     let releaseSound!: () => void; mockPlayer.seekTo.mockImplementation(() => new Promise<void>(resolve => { releaseSound = resolve; }));
-    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(1)); mockImpact.mockRejectedValue(new Error('hardware unavailable')); await press('Restore Default Appearance');
-    await act(async () => { AppState.currentState = 'background'; appStateChanged('background'); releaseSound(); }); expect(mockPlayer.pause).toHaveBeenCalledTimes(1); expect(mockPlayer.play).not.toHaveBeenCalled(); await press('Never mind');
+    const view = await renderFrame(); await waitFor(() => expect(mockAudioCreate).toHaveBeenCalledTimes(5)); mockImpact.mockRejectedValue(new Error('hardware unavailable')); await press('Restore Default Appearance');
+    await act(async () => { AppState.currentState = 'background'; appStateChanged('background'); releaseSound(); }); expect(mockPlayer.play).not.toHaveBeenCalled(); await press('Never mind');
     await act(async () => { AppState.currentState = 'active'; appStateChanged('active'); }); mockImpact.mockImplementation(() => { throw new Error('native module missing'); }); mockPlayer.seekTo.mockRejectedValue(new Error('audio session unavailable'));
     await press('Begin Test Life'); await waitFor(() => expect(mockGame.getState().world!.birthAcknowledged).toBe(true)); expect(mockGame.getState().error).toBeNull(); expect(mockPreferences.getState().error).toBeNull(); expect(screen.getByRole('button', { name: 'Begin Test Life' })).toBeOnTheScreen(); view.unmount();
     // Feedback and the new review host each own a foreground subscription.

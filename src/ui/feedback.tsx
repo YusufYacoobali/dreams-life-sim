@@ -2,9 +2,9 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import { AccessibilityInfo, Platform } from 'react-native';
 import { rememberModalReturnTarget } from './modalFocus';
 
-type Feedback = { reducedMotion: boolean; deviceReducedMotion: boolean | null; hapticsSupported: boolean; soundSupported: boolean; hapticFeedback: () => void; buttonFeedback: () => void };
+type Feedback = { reducedMotion: boolean; deviceReducedMotion: boolean | null; hapticsSupported: boolean; soundSupported: boolean; hapticFeedback: () => void; soundFeedback: () => void; buttonFeedback: () => void };
 const FeedbackContext = createContext<Feedback>({ reducedMotion: false, deviceReducedMotion: null,
-  hapticsSupported: Platform.OS === 'ios' || Platform.OS === 'android', soundSupported: Platform.OS === 'ios' || Platform.OS === 'android', hapticFeedback: () => {}, buttonFeedback: () => {} });
+  hapticsSupported: Platform.OS === 'ios' || Platform.OS === 'android', soundSupported: Platform.OS === 'ios' || Platform.OS === 'android', hapticFeedback: () => {}, soundFeedback: () => {}, buttonFeedback: () => {} });
 
 export function FeedbackProvider({ children, reducedMotion, haptics, onButtonFeedback, hapticsSupported = true, soundEffects = false, onButtonSound, soundSupported = true }:
   React.PropsWithChildren<{ reducedMotion: boolean; haptics: boolean; onButtonFeedback: () => Promise<void>; hapticsSupported?: boolean; soundEffects?: boolean; onButtonSound?: () => Promise<void>; soundSupported?: boolean }>) {
@@ -28,21 +28,21 @@ export function FeedbackProvider({ children, reducedMotion, haptics, onButtonFee
     const latest = current.current;
     if (mounted.current && latest.haptics && latest.hapticsSupported) { try { void latest.onButtonFeedback().catch(() => {}); } catch { /* Native feedback may be unavailable. */ } }
   }, []);
-  const buttonFeedback = useCallback(() => {
-    hapticFeedback();
+  const soundFeedback = useCallback(() => {
     const latest = current.current;
     if (mounted.current && latest.soundEffects && latest.soundSupported && latest.onButtonSound) { try { void latest.onButtonSound().catch(() => {}); } catch { /* Native audio may be unavailable. */ } }
-  }, [hapticFeedback]);
-  return <FeedbackContext.Provider value={{ reducedMotion: reducedMotion || deviceReducedMotion !== false, deviceReducedMotion, hapticsSupported, soundSupported, hapticFeedback, buttonFeedback }}>{children}</FeedbackContext.Provider>;
+  }, []);
+  const buttonFeedback = useCallback(() => { hapticFeedback(); soundFeedback(); }, [hapticFeedback, soundFeedback]);
+  return <FeedbackContext.Provider value={{ reducedMotion: reducedMotion || deviceReducedMotion !== false, deviceReducedMotion, hapticsSupported, soundSupported, hapticFeedback, soundFeedback, buttonFeedback }}>{children}</FeedbackContext.Provider>;
 }
 
 export function useFeedback() { return useContext(FeedbackContext); }
 
 /** Accept the action first. Hardware promises never hold a tap or save open. */
 export function useFeedbackPress<Args extends unknown[]>(onPress: (...args: Args) => unknown, disabled = false, includeSound = false) {
-  const { hapticFeedback, buttonFeedback } = useFeedback();
-  const mounted = useRef(true), pressing = useRef(false), current = useRef({ disabled, feedback: includeSound ? buttonFeedback : hapticFeedback });
-  current.current = { disabled, feedback: includeSound ? buttonFeedback : hapticFeedback };
+  const { hapticFeedback, soundFeedback } = useFeedback();
+  const mounted = useRef(true), pressing = useRef(false), current = useRef({ disabled, hapticFeedback, soundFeedback, includeSound });
+  current.current = { disabled, hapticFeedback, soundFeedback, includeSound };
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   return useCallback((...args: Args) => {
     // React may render and bail out with a new inline callback. Its identity
@@ -53,11 +53,12 @@ export function useFeedbackPress<Args extends unknown[]>(onPress: (...args: Args
     let action: unknown;
     try { action = onPress(...args); }
     catch (error) { pressing.current = false; throw error; }
-    if (action !== false) current.current.feedback();
+    if (action !== false) current.current.hapticFeedback();
+    const confirm = (result: unknown) => { if (mounted.current && result !== false && current.current.includeSound) current.current.soundFeedback(); };
     const release = () => { pressing.current = false; };
     // A returned save promise also rejects duplicate native callbacks before a rerender.
-    if (action && typeof (action as PromiseLike<unknown>).then === 'function') void Promise.resolve(action).then(release, release);
-    else release();
+    if (action && typeof (action as PromiseLike<unknown>).then === 'function') void Promise.resolve(action).then(result => { confirm(result); release(); }, release);
+    else { confirm(action); release(); }
     return action;
   }, [onPress]);
 }
