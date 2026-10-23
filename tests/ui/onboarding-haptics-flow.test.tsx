@@ -64,8 +64,8 @@ test('actual welcome, creation, modal and appearance controls pulse once for acc
     expect(screen.getByLabelText('Opening your saved lives')).toBeOnTheScreen(); expect(mockHaptic).not.toHaveBeenCalled();
     await act(async () => { await mockStore.getState().bootstrap(); });
     await pulse('button', 'Random Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'random' } });
-    await pulse('button', 'Saved Lives'); await pulse('button', 'Help');
-    const oldStart = pressHandler('Start Your Life'); await pulse('button', 'Start Your Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'custom' } });
+    expect(screen.queryByRole('button', { name: 'Saved Lives' })).toBeNull(); await pulse('button', 'Help');
+    const oldStart = pressHandler('Start New Life'); await pulse('button', 'Start New Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'custom' } });
     view.rerender(frame(<NewLife />));
     const calls = mockHaptic.mock.calls.length, navigation = jest.mocked(router.push).mock.calls.length;
     await act(async () => { oldStart(); }); expect(mockHaptic).toHaveBeenCalledTimes(calls); expect(router.push).toHaveBeenCalledTimes(navigation);

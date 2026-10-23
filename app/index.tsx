@@ -1,41 +1,71 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { Button, Card } from '../src/ui/components';
+import { Button } from '../src/ui/components';
 import { freshSeed, useGame } from '../src/state/useGame';
 import { fullName } from '../src/game/model';
 import { useColors } from '../src/ui/theme';
-import { OpeningBrandAccent, OpeningScene } from '../src/ui/OpeningScene';
+import { openingBackground, OpeningBrandAccent, OpeningScene } from '../src/ui/OpeningScene';
 import { useFeedbackPress } from '../src/ui/feedback';
 
 export default function Welcome() {
   const c = useColors();
+  const { width, height, fontScale } = useWindowDimensions();
+  const compact = width < 360 || height < 740 || fontScale > 1.35;
   const ready = useGame(s => s.ready), world = useGame(s => s.world), busy = useGame(s => s.busy), error = useGame(s => s.error), bootstrap = useGame(s => s.bootstrap);
   const open = useFeedbackPress(() => { if (!world) return false; router.push(world.people[world.activePersonId].died ? '/death' : world.birthAcknowledged ? '/life' : '/birth'); }, busy || !ready);
   const create = useFeedbackPress((mode: 'custom' | 'random') => router.push({ pathname: '/new-life', params: { seed: freshSeed().toString(), mode } }), busy || !ready);
-  const savedLives = useFeedbackPress(() => router.push('/saved-lives'), busy || !ready);
   const help = useFeedbackPress(() => router.push('/help'), !ready);
-  return <View style={styles.page}><StatusBar style="light" /><OpeningScene />
-    <SafeAreaView style={styles.safeArea}><ScrollView contentContainerStyle={styles.contents}>
-      <View style={styles.title}><Text accessibilityRole="header" style={styles.wordmark}>Dreams</Text><OpeningBrandAccent /><Text style={styles.subtitle}>Life Simulator</Text><Text style={styles.tagline}>Make choices. Live different lives.{"\n"}See where your story takes you.</Text></View>
-      <View style={styles.actions}>{!ready ? <View style={styles.loading}><ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /><Text accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.loadingText}>Opening your story…</Text></View> : <>
-        {error && <Card><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 22 }}>{error}</Text><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></Card>}
-        {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.continue, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><Text style={styles.actionText}>Continue as {world.people[world.activePersonId].firstName}</Text></Pressable>}
-        <Pressable accessibilityRole="button" accessibilityLabel="Start Your Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? c.actionBluePressed : c.actionBlue, opacity: busy ? 0.5 : 1 }]}><Text style={styles.actionText}>Start Your Life</Text></Pressable>
-        <Pressable accessibilityRole="button" accessibilityLabel="Random Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.secondary, { backgroundColor: pressed ? '#142539' : 'rgba(20,37,57,0.75)', opacity: busy ? 0.5 : 1 }]}><Ionicons name="dice-outline" size={22} color="#FFFFFF" /><Text style={styles.actionText}>Random Life</Text></Pressable>
-        <View style={{ flexDirection: 'row', gap: 12 }}><Pressable accessibilityRole="button" accessibilityLabel="Saved Lives" accessibilityHint="View your previous lives or continue a saved life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={savedLives} style={[styles.saved, { flex: 1 }]}><Ionicons name="folder-open-outline" size={18} color="#D4E1F5" /><Text style={styles.savedText}>Saved Lives</Text></Pressable><Pressable accessibilityRole="button" accessibilityLabel="Help" onPress={help} style={[styles.saved, { flex: 1 }]}><Ionicons name="help-circle-outline" size={20} color="#D4E1F5" /><Text style={styles.savedText}>Help</Text></Pressable></View><Text style={styles.offline}>Free to play · Offline · Your story stays with you</Text>
-      </>}</View>
-    </ScrollView></SafeAreaView>
+  return <View style={styles.page}>
+    <LinearGradient pointerEvents="none" accessible={false} colors={['#15263F', '#101D32', openingBackground]} locations={[0, 0.48, 1]} start={{ x: 0.15, y: 0 }} end={{ x: 0.85, y: 1 }} style={StyleSheet.absoluteFill} />
+    <StatusBar style="light" />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.toolbar}><Pressable accessibilityRole="button" accessibilityLabel="Help" accessibilityHint="Open the game guide" accessibilityState={{ disabled: !ready }} disabled={!ready} onPress={help} style={({ pressed }) => [styles.help, { backgroundColor: pressed ? '#1C2B43' : 'transparent', opacity: ready ? 1 : 0.5 }]}><Ionicons name="help-circle-outline" size={23} color="#A8B6CE" /></Pressable></View>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.contents, { paddingVertical: compact ? 8 : 40 }]}>
+        <View style={[styles.composition, { gap: compact ? 20 : 44 }]}>
+          <View style={styles.title}>
+            <View style={{ marginBottom: compact ? 8 : 24 }}><OpeningScene width={compact ? 140 : 184} /></View>
+            <Text accessibilityRole="header" adjustsFontSizeToFit minimumFontScale={0.6} numberOfLines={1} style={[styles.wordmark, compact && styles.compactWordmark]}>Dreams</Text>
+            <OpeningBrandAccent />
+            <Text style={styles.subtitle}>Life Simulator</Text>
+          </View>
+          <View style={[styles.actions, compact && styles.compactActions]}>{!ready ? <View style={styles.loading}><ActivityIndicator color="#FFFFFF" accessibilityLabel="Opening your saved lives" /><Text accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.loadingText}>Opening your story…</Text></View> : <>
+            {error && <View style={styles.error}><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={styles.errorText}>{error}</Text><Button label="Try Again" busy={busy} onPress={() => { void bootstrap(); }} /></View>}
+            {world && <Pressable accessibilityRole="button" accessibilityLabel={'Continue Life as ' + fullName(world.people[world.activePersonId])} accessibilityState={{ disabled: busy }} disabled={busy} onPress={open} style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? c.actionGreenPressed : c.actionGreen, opacity: busy ? 0.5 : 1 }]}><Ionicons name="play" size={20} color="#FFFFFF" /><View style={styles.continueCopy}><Text style={styles.actionText}>Continue Life</Text><Text style={styles.continueName}>Continue as {fullName(world.people[world.activePersonId])}</Text></View></Pressable>}
+            <Pressable accessibilityRole="button" accessibilityLabel="Start New Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('custom')} style={({ pressed }) => [styles.primary, world && styles.secondary, { backgroundColor: world ? pressed ? '#263E60' : '#1A2D49' : pressed ? c.actionBluePressed : c.actionBlue, opacity: busy ? 0.5 : 1 }]}>{world && <Ionicons name="add-circle-outline" size={21} color="#B9D1FA" />}<Text style={[styles.actionText, world && styles.secondaryText]}>Start New Life</Text></Pressable>
+            <Pressable accessibilityRole="button" accessibilityLabel="Random Life" accessibilityState={{ disabled: busy }} disabled={busy} onPress={() => create('random')} style={({ pressed }) => [styles.random, { backgroundColor: pressed ? '#162238' : 'transparent', opacity: busy ? 0.5 : 1 }]}><Ionicons name="dice-outline" size={21} color="#B5C1D7" /><Text style={styles.randomText}>Random Life</Text></Pressable>
+          </>}</View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   </View>;
 }
 const styles = StyleSheet.create({
-  page: { flex: 1, backgroundColor: '#061633' }, safeArea: { flex: 1 }, contents: { flexGrow: 1, justifyContent: 'space-between', paddingHorizontal: 24, gap: 32 },
-  title: { alignItems: 'center', paddingTop: 32, gap: 5 }, wordmark: { color: '#FFFFFF', fontSize: 48, fontWeight: '800', letterSpacing: -1.5 }, subtitle: { color: '#FFFFFF', fontSize: 24, fontWeight: '500' }, tagline: { color: '#ECF1FC', fontSize: 16, lineHeight: 23, textAlign: 'center', marginTop: 13 },
-  actions: { gap: 12, paddingBottom: 12 }, loading: { alignItems: 'center', gap: 10, paddingVertical: 12 }, loadingText: { color: '#ECF1FC', fontSize: 16, lineHeight: 23, textAlign: 'center' }, primary: { minHeight: 56, paddingHorizontal: 18, paddingVertical: 16, alignItems: 'center', justifyContent: 'center', borderRadius: 13 },
-  secondary: { minHeight: 54, paddingVertical: 14, paddingHorizontal: 18, flexDirection: 'row', gap: 9, alignItems: 'center', justifyContent: 'center', borderRadius: 13, borderWidth: 1, borderColor: '#8FABC9', backgroundColor: 'rgba(20,37,57,0.75)' },
-  continue: { minHeight: 52, flexDirection: 'row', gap: 8, alignItems: 'center', justifyContent: 'center', borderRadius: 13, padding: 14 }, actionText: { color: '#FFFFFF', fontSize: 17, fontWeight: '700', textAlign: 'center', flexShrink: 1 },
-  saved: { flexDirection: 'row', minHeight: 48, alignItems: 'center', justifyContent: 'center', gap: 8 }, savedText: { color: '#D4E1F5', fontSize: 14, flexShrink: 1, textAlign: 'center' }, offline: { color: '#A6B8CE', fontSize: 11, textAlign: 'center', paddingBottom: 2 },
+  page: { flex: 1, backgroundColor: openingBackground }, safeArea: { flex: 1 },
+  toolbar: { minHeight: 52, paddingHorizontal: 16, paddingVertical: 4, alignItems: 'flex-end' },
+  help: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center', borderRadius: 22 },
+  contents: { flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24 },
+  composition: { width: '100%', maxWidth: 440, alignSelf: 'center' },
+  title: { alignItems: 'center' },
+  wordmark: { maxWidth: '100%', color: '#F6F8FF', fontSize: 56, lineHeight: 68, fontWeight: '800', letterSpacing: -1.8, textAlign: 'center' },
+  compactWordmark: { fontSize: 48, lineHeight: 60 },
+  subtitle: { color: '#AFBCD2', fontSize: 17, lineHeight: 26, letterSpacing: 2.2, textAlign: 'center', marginTop: 12 },
+  actions: { width: '100%', maxWidth: 360, alignSelf: 'center', gap: 12 },
+  compactActions: { gap: 8 },
+  loading: { alignItems: 'center', gap: 12, paddingVertical: 12 },
+  loadingText: { color: '#AFBCD2', fontSize: 16, lineHeight: 24, textAlign: 'center' },
+  error: { padding: 16, gap: 12, backgroundColor: '#251F32', borderWidth: 1, borderColor: '#80515F', borderRadius: 14 },
+  errorText: { color: '#FFD1D7', fontSize: 15, lineHeight: 23 },
+  primary: { minHeight: 56, paddingHorizontal: 20, paddingVertical: 16, flexDirection: 'row', gap: 10, alignItems: 'center', justifyContent: 'center', borderRadius: 14 },
+  continueCopy: { flexShrink: 1, alignItems: 'center', gap: 2 },
+  continueName: { color: '#E4F5ED', fontSize: 14, lineHeight: 20, fontWeight: '500', textAlign: 'center' },
+  secondary: { borderWidth: 1, borderColor: '#5473A1' },
+  secondaryText: { color: '#DCE9FF' },
+  actionText: { color: '#FFFFFF', fontSize: 17, lineHeight: 24, fontWeight: '700', textAlign: 'center', flexShrink: 1 },
+  random: { minHeight: 48, paddingHorizontal: 18, paddingVertical: 12, flexDirection: 'row', gap: 9, alignItems: 'center', justifyContent: 'center', borderRadius: 14 },
+  randomText: { color: '#B5C1D7', fontSize: 16, lineHeight: 24, fontWeight: '500', textAlign: 'center', flexShrink: 1 },
 });

@@ -1,15 +1,30 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Svg, { Circle, Path } from 'react-native-svg';
 
-const hero = require('../../assets/generated/welcome-hero.png');
+export const openingBackground = '#0D1729';
 
-// The welcome composition stays still beneath the root cinematic reveal.
-export const OpeningScene = React.memo(function OpeningScene() {
-  return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={styles.scene}>
-    <Image source={hero} accessible={false} resizeMode="cover" style={styles.hero} />
-    <View style={styles.sunlight}><LinearGradient colors={['#FFE7AF99', '#FFCC6733', '#FFCC6700']} style={styles.glow} /></View>
-    <LinearGradient colors={['rgba(3,18,54,0.15)', 'transparent', 'rgba(2,12,31,0.96)']} locations={[0, 0.45, 1]} style={StyleSheet.absoluteFill} />
+/** Small native shapes, interpreted from the image-generation concept.
+ * This stays still beneath the existing root ink cinematic. No bitmap is loaded. */
+export const OpeningScene = React.memo(function OpeningScene({ width = 184 }: { width?: number }) {
+  return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ width, height: width * 200 / 240 }}>
+      <Svg width={width} height={width * 200 / 240} viewBox="0 0 240 200" accessible={false}>
+        <Path d="M120 181V49" stroke="#ACADF0" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 151C120 106 76 99 43 75" fill="none" stroke="#E8BE6F" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 151C120 106 164 99 197 75" fill="none" stroke="#80C5AD" strokeWidth={7} strokeLinecap="round" />
+        <Path d="M120 176C103 144 73 155 62 130M120 176C137 144 167 155 178 130" fill="none" stroke="#9695DB" strokeWidth={5.5} strokeLinecap="round" />
+        <Circle cx={120} cy={184} r={7} fill="#ACADF0" />
+        <Circle cx={62} cy={127} r={6.5} fill="#9695DB" />
+        <Circle cx={178} cy={127} r={6.5} fill="#9695DB" />
+        <Circle cx={43} cy={58} r={26} fill="#E8BE6F" />
+        <Path d="m43 42 4.8 9.8 10.8 1.6-7.8 7.6 1.8 10.8L43 66.7 33.4 71.8l1.8-10.8-7.8-7.6 10.8-1.6Z" fill="#FFFBF2" />
+        <Circle cx={120} cy={30} r={27} fill="#DE929A" />
+        <Path d="M120 44s-15-9.3-15-17.7a8.2 8.2 0 0 1 15-4.1 8.2 8.2 0 0 1 15 4.1c0 8.4-15 17.7-15 17.7Z" fill="#FFFBF2" />
+        <Circle cx={197} cy={58} r={26} fill="#80C5AD" />
+        <Path d="M186 70c-7-19 6-29 22-26 3 16-4 29-18 27l14-20" fill="#FFFBF2" />
+        <Path d="m185 74 18-22" stroke="#80C5AD" strokeWidth={3} strokeLinecap="round" />
+      </Svg>
   </View>;
 });
 
@@ -18,10 +33,6 @@ export const OpeningBrandAccent = React.memo(function OpeningBrandAccent() {
 });
 
 const styles = StyleSheet.create({
-  scene: { ...StyleSheet.absoluteFill, overflow: 'hidden' },
-  hero: { ...StyleSheet.absoluteFill, width: '100%', height: '100%' },
-  sunlight: { position: 'absolute', top: '31%', left: '29%', width: 320, height: 320, borderRadius: 160, overflow: 'hidden', opacity: 0.12 },
-  glow: { flex: 1, borderRadius: 160 },
   accentSpace: { height: 2, width: 88, marginTop: 5, marginBottom: 2, opacity: 0.65 },
   accent: { width: 88, height: 2, borderRadius: 1 },
 });

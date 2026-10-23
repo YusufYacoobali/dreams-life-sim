@@ -23,7 +23,7 @@
     "readableNoticeFiles": 735,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1181
+    "projectArtFiles": 1180
   },
   "directDependencies": [
     {
@@ -28469,15 +28469,6 @@
       "sha256": "ed7af1e9d42d50985f250d066d8fc4f29c54be22b2792356f36aae1250249172",
       "referencedBy": [
         "src/assets/TravelArt.tsx"
-      ]
-    },
-    {
-      "path": "assets/generated/welcome-hero.png",
-      "status": "present",
-      "bytes": 1637768,
-      "sha256": "d2edf13f921f5bf30de154d3480090b980ac1520caa94ab2d188983b055e86b0",
-      "referencedBy": [
-        "src/ui/OpeningScene.tsx"
       ]
     },
     {
