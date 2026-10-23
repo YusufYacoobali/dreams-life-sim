@@ -1,1 +1,0 @@
-tests/ui/ordinary-hobby-flow.test.tsx(33,40): error TS7006: Parameter 'row' implicitly has an 'any' type.

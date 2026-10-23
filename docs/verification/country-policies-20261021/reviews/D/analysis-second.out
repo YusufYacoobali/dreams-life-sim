@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/dreams-c39-editorial-v2-review/analyse.py", line 181, in <module>
-    assert all(pid in event['personIds'] for pid in [thread['personId'], thread['peerId'], thread['teacherId'], thread['parentId']] if pid)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError

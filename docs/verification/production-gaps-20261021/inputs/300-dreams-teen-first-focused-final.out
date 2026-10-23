@@ -1,9 +1,0 @@
-PASS tests/persistence/teen-relationship-compatibility.test.ts (6.599 s)
-PASS tests/ui/teen-relationship-save-flow.test.tsx
-PASS tests/game/teen-relationships.test.ts
-
-Test Suites: 3 passed, 3 total
-Tests:       42 passed, 42 total
-Snapshots:   0 total
-Time:        10.436 s, estimated 11 s
-Ran all test suites matching /tests\/game\/teen-relationships.test.ts|tests\/ui\/teen-relationship-save-flow.test.tsx|tests\/persistence\/teen-relationship-compatibility.test.ts/i.

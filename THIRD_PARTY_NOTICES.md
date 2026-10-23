@@ -8,7 +8,7 @@ Generated deterministically by `node tools/generate-third-party-notices.cjs` fro
 
 - `package.json` SHA-256 `0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673`
 - `package-lock.json` SHA-256 `763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb`
-- `app.json` SHA-256 `eb6d2b57f0d92e33a6b96c79d5bdfe1c749d58cbccdb5ab1fbd7c2061598f4b8`
+- `app.json` SHA-256 `d40adea0b6dc8524efe3a9ea276a26f99eb387d3829dfefec45003a8400ac34c`
 
 **31 direct dependencies; 786 candidate non-dev lock entries; 776 installed version matches; 10 not installed; 0 version mismatches.** These entries include tooling and optional packages, and are not a count of shipped libraries.
 

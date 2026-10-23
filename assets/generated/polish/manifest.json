@@ -238,8 +238,8 @@
         256,
         256
       ],
-      "bytes": 79331,
-      "sha256": "e3372b5e8b7f3babcd35729aaabf6a95b35f5e5bde5cccd93cb9c16ec55cbd13"
+      "bytes": 77871,
+      "sha256": "3f6aad7cca98d7ec731b5fb94ee9a4b82687c97956d1a4ce0f940f01a0aa81fe"
     },
     "mischief": {
       "file": "mischief.png",
@@ -247,8 +247,8 @@
         256,
         256
       ],
-      "bytes": 73958,
-      "sha256": "14fd82c2154bda79dda77162e405560fde61718af7ef2c36e434130929a885a0"
+      "bytes": 71871,
+      "sha256": "2593246c84c268f05039ce04db674d6bc73a30bf538073b7da84b3eafe365811"
     },
     "school-life": {
       "file": "school-life.png",
@@ -256,8 +256,8 @@
         256,
         256
       ],
-      "bytes": 88588,
-      "sha256": "5ef25173a8a36fa4793d1ae5c7c4c5cce3c0a36440d253333e6ee58acf530af0"
+      "bytes": 86520,
+      "sha256": "38026e325eba55ea86de72d3dc2472f7e7ec60af896b54a9174e779552104718"
     },
     "friends": {
       "file": "friends.png",
@@ -265,8 +265,8 @@
         256,
         256
       ],
-      "bytes": 73062,
-      "sha256": "767f336ff287ab064536e038ce954deb89379daf3770d7800504450531c656ed"
+      "bytes": 71353,
+      "sha256": "ead791394a170cfd4996d412e02fea2204b4ad8bc708cf4071880ff2fc6124d2"
     },
     "family-life": {
       "file": "family-life.png",
@@ -274,8 +274,8 @@
         256,
         256
       ],
-      "bytes": 94961,
-      "sha256": "05e558ad87635fa42f4228aaebafac5d5ea0735e5605fd9e71f14db2c2b29cdc"
+      "bytes": 93079,
+      "sha256": "f97dfe4a976964fdf17f1478e972a01a253fc60628e5b871ddd2e6ac74bcc56c"
     },
     "surprise": {
       "file": "surprise.png",
@@ -283,8 +283,8 @@
         256,
         256
       ],
-      "bytes": 78725,
-      "sha256": "3fe4a5e01a712dd86b020f1fb413f0d5379794034a07418e24dca1fcabb10515"
+      "bytes": 76420,
+      "sha256": "75dc0a2bf6ed5e5a413057a4871e15999093696f5a4f17dbe2967685abd83d85"
     },
     "everyday": {
       "file": "everyday.png",
@@ -292,8 +292,8 @@
         256,
         256
       ],
-      "bytes": 74470,
-      "sha256": "18201ded36a57c7a7a9f992496cb2dc047d99e286d7d20c8e47bd0691a1a0661"
+      "bytes": 72775,
+      "sha256": "3829f4123dae98eafff197c8502adbe3ac0bc33e4e877246c435888106cc0a09"
     },
     "health-check": {
       "file": "health-check.png",
@@ -301,8 +301,8 @@
         256,
         256
       ],
-      "bytes": 86818,
-      "sha256": "e0edbf5481d342752c0cf03821692d35d1b124003e10ff35cb807407ca3094b3"
+      "bytes": 84564,
+      "sha256": "89aa48904d4b55ea8f957dc336cd8ac4277065011d56926f3ea3d79fc88d6668"
     },
     "life-star": {
       "file": "life-star.png",
@@ -310,8 +310,8 @@
         256,
         256
       ],
-      "bytes": 69586,
-      "sha256": "93d5ccf5df4c705c30a4296c70d2e8c7726e58dc37ea627aac031f1ff0bc370b"
+      "bytes": 67202,
+      "sha256": "68e2c38b10fc990b60fb98bb77034579317be4324210584a780f625a9a5ce402"
     },
     "archive": {
       "file": "archive.png",
@@ -319,8 +319,8 @@
         256,
         256
       ],
-      "bytes": 79674,
-      "sha256": "4ae6bd6ed80b90d60687d88d48853ab59dea96aa08a4685544c70da84bf214ca"
+      "bytes": 77195,
+      "sha256": "0f67adfb9350cfa5d43eddd486bd4225574c68dfed29c62ab9a4dec711cd2936"
     },
     "settings": {
       "file": "settings.png",
@@ -328,8 +328,8 @@
         256,
         256
       ],
-      "bytes": 78285,
-      "sha256": "bdca7820bda861125ae8f36be91e8faae338cc07f5e4926e10e51dfc055f66eb"
+      "bytes": 75519,
+      "sha256": "1e672ed7a06bde0215513fb492fa93da76bde4f06a987f71456d4f20fb49521a"
     },
     "loan": {
       "file": "loan.png",
@@ -337,8 +337,8 @@
         256,
         256
       ],
-      "bytes": 80974,
-      "sha256": "d477a46328e43009f21badd100fdfb229128060118db2e01cb0b2b7aa5ffb05f"
+      "bytes": 78690,
+      "sha256": "2b5974f029a2250b2a41f2f4c1d77ec461e54c38dcbf0706601fe32ac7685e83"
     },
     "pet-cat": {
       "file": "pet-cat.png",
@@ -346,8 +346,8 @@
         256,
         256
       ],
-      "bytes": 80626,
-      "sha256": "afb41bcb5eeb403c573c51b8970049767c976f99497c77cb487be646ab4d6a24"
+      "bytes": 79224,
+      "sha256": "d86158a55c6f693e8343bd9ba91e07658b7f1653c5e095f7d09936647a82698d"
     },
     "pet-dog": {
       "file": "pet-dog.png",
@@ -355,8 +355,8 @@
         256,
         256
       ],
-      "bytes": 85897,
-      "sha256": "2fe8fca9a72ca5213b68217318439311717ad6415ac8368f5106b034bc22e80a"
+      "bytes": 84694,
+      "sha256": "bc2b8eea9e77c3fd63ab8aa909c2897d174a77de186cf748cafeab5c61887cb8"
     },
     "pet-rabbit": {
       "file": "pet-rabbit.png",
@@ -364,8 +364,8 @@
         256,
         256
       ],
-      "bytes": 56738,
-      "sha256": "3c95f440038a73276cf2a319e5e99f59cfb7f542c7014ee02bda38b67f4a31d3"
+      "bytes": 55111,
+      "sha256": "d34953302808e78fbfe162fc7b13605ea53c2ee60de5d4dd47bf296875c2d4f9"
     },
     "pet-bird": {
       "file": "pet-bird.png",
@@ -373,8 +373,8 @@
         256,
         256
       ],
-      "bytes": 67156,
-      "sha256": "7f2ea7badf8c72cda68102647c13802f9fdc04e983ff69c503c99fd9943f769b"
+      "bytes": 65898,
+      "sha256": "78f43152737398b0b270f6033e208e45f560a1293f553fbaf1f328726f93b7e7"
     },
     "pet-feed": {
       "file": "pet-feed.png",
@@ -382,8 +382,8 @@
         256,
         256
       ],
-      "bytes": 59063,
-      "sha256": "54935500657049406c32db780fd18493714e1e5eba38ab9b69f0d2797dc0a395"
+      "bytes": 57582,
+      "sha256": "9edbe9dc9433e6eb2a22fc73f13095d2e248a6ad6abf08d282a9deb87ff22230"
     },
     "pet-vet": {
       "file": "pet-vet.png",
@@ -391,8 +391,8 @@
         256,
         256
       ],
-      "bytes": 80333,
-      "sha256": "fafe58506d19a92e6cf65344e2e7b30f54dd16f1657556ee8f610e3fd002a9d0"
+      "bytes": 77803,
+      "sha256": "a71024aa8074a2ada1b6c461abde0fa8f85154ab5995b13c87af35c084604f3b"
     },
     "pet-play": {
       "file": "pet-play.png",
@@ -400,8 +400,8 @@
         256,
         256
       ],
-      "bytes": 61248,
-      "sha256": "e40e6a5ef6abfc010d9db8c785adc5b96ea2b4371c7a2bffd35fc6108b74e6a2"
+      "bytes": 59774,
+      "sha256": "3d0407de6424a81aac863f0805153e10c1e8b76d7d3d13a7e2b07b22fceede33"
     },
     "pet-training": {
       "file": "pet-training.png",
@@ -409,8 +409,8 @@
         256,
         256
       ],
-      "bytes": 68159,
-      "sha256": "65bc1b5db98137c6fb617947b13da11cb849afecae84e910fd59e19eb82a4a4c"
+      "bytes": 66513,
+      "sha256": "2b00a23087659ed9fd011f19df9b8db567da5ba162abf965e511359381d1ed22"
     },
     "pet-memorial": {
       "file": "pet-memorial.png",
@@ -418,8 +418,8 @@
         256,
         256
       ],
-      "bytes": 79401,
-      "sha256": "99cbb24e40552d207863889d56a0adf04e81360d4f7fae28f92ff127670cde39"
+      "bytes": 77742,
+      "sha256": "97311758a89001e437f94845caabfea6a173b58039498a0753bcca8b1503df3d"
     },
     "pet-walk": {
       "file": "pet-walk.png",
@@ -427,8 +427,8 @@
         256,
         256
       ],
-      "bytes": 87124,
-      "sha256": "9d57281495a62c3ef3ffeda20fae4b515e78958caf9d1b7e1d75a6c87293701d"
+      "bytes": 85752,
+      "sha256": "3994450e304b75e2bbcc24fd1dc8686db6587d81e098988b5c5e49c2caf40030"
     },
     "pet-bed": {
       "file": "pet-bed.png",
@@ -436,8 +436,8 @@
         256,
         256
       ],
-      "bytes": 66587,
-      "sha256": "f7c7a2a143e3e2615593fc24d657412fbfce16c2654f22180eef4724983092f6"
+      "bytes": 65140,
+      "sha256": "99dd6915fcb80e9cd6ca2d1ae02476df929fdcb203dc0852605b0c94b48a19c6"
     },
     "pet-adoption": {
       "file": "pet-adoption.png",
@@ -445,8 +445,8 @@
         256,
         256
       ],
-      "bytes": 82378,
-      "sha256": "57fa8e0bee521b7aecda5b2cc4d5c80296d7638ab21d0b36be6bac8d646678c0"
+      "bytes": 80804,
+      "sha256": "a4b16091225d96428664f0e6f3e6eccd325807a64e0c01090028721cc1c6c44d"
     }
   }
 }

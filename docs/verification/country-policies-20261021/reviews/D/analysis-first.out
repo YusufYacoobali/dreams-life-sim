@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/dreams-c39-editorial-v2-review/analyse.py", line 178, in <module>
-    assert thread['status'] == 'resolved' and thread['resolution'] == effect['resolution']
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError

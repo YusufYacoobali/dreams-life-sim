@@ -1,5 +1,9 @@
 # Continue Dreams: Life Simulator
 
+## Size cleanup — 23 October 2026
+
+Lossless PNG encoding, shared review snapshots, archived captures, compressed older records and cloud build exclusions reduce the project and app asset payload. Android release minification/resource shrinking are enabled. Current saves, fixtures, active source art, selected launcher icon and all gameplay/version markers remain intact. See [PROJECT_SIZE.md](PROJECT_SIZE.md) for measurements, verification and recovery commands. The latest Cult Leader and event-writing commits are retained.
+
 ## Event and payoff writing — 23 October 2026
 
 Audited all 319 events; revised **114 situations and 342 choice payoffs**, including 27 priority consequence upgrades. The writing batch preserves existing IDs, saved words, UI, avatar V2 artwork and mini-games. Real local payments, bound trust, employment/friendship endings and public-image changes use validated immediate effects without new story arcs or writing RNG.

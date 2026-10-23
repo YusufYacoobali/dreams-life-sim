@@ -54,13 +54,13 @@ All 12 lives died through ordinary engine progression and their reported estate 
 
 ## Reproducible evidence
 
-- Actual output: `/workspace/.cache/dreams-current-c39-policies/editorial-v2` — all **87 raw files** are pinned in [inputs.json](inputs.json).
+- Actual output: `/workspace/.cache/dreams-current-c39-policies/editorial-v2` — all **87 raw files** are pinned in [inputs.json](inputs.json.gz).
 - Raw stdout: `/tmp/dreams-production-finish-accepted-editorial-v2.out`, 834,714 bytes, SHA256 `c1304730115d08b682454a0c6052c9151a67b8e9ebf198b0e469c1a473a8daf5`. Its 12 progress rows and exact aggregate tail reconcile.
 - Closed receipt: `/tmp/dreams-production-finish-accepted-editorial-v2-receipt.json`; source snapshot: `/tmp/dreams-production-finish-accepted-source.json`, SHA256 `2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56`.
 - Game SHA256 `7de215076995f7dbe7c76eceb080ba00b6de6f1783c12340d1e82677c996245b`; combined game/persistence SHA256 `d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0`.
 - All 12 raw command trace hashes independently match their reports; command count equals the exact contiguous revision delta. All birth/final checkpoint file hashes and sizes match the recorded cold endpoints.
 - The **2,448 producer-reported cold comparisons** cover each recorded revision once (187 v1, 2,261 v4). Endpoint compact bounds were checked from envelope metadata without decompression. Full canonical equality and world hashes remain producer assertions. IN and JP already checked the final revision during an annual closure; revision deduplication leaves final cold labels annual-interrupted and year-end rather than adding duplicate natural-death rows.
-- [summary.json](summary.json), [omissions.json](omissions.json), [observed catalogue](observed-catalogue.ndjson), [effect evidence](effect-checks.ndjson), [pacing frames](pacing-frames.ndjson) and [callbacks](callbacks.json) preserve exact pointers and bounded observations. Source, producer and loaded-runtime hash maps are pinned through the complete 688-file source reference.
+- [summary.json](summary.json), [omissions.json](omissions.json.gz), [observed catalogue](observed-catalogue.ndjson.gz), [effect evidence](effect-checks.ndjson.gz), [pacing frames](pacing-frames.ndjson.gz) and [callbacks](callbacks.json) preserve exact pointers and bounded observations. Source, producer and loaded-runtime hash maps are pinned through the complete 688-file source reference.
 - Story separately reviewed the preselected US900 narrative/condition chronology: `/tmp/dreams-c39-sequence-review-us900-20261021/REPORT.md`, SHA256 `8f9ce2716e4738bc3561524282ed728cf013f4ef1d34ac3bc616959897a177a7`. Its summary is pinned in inputs.json; that sequence review is not duplicated here.
 - The three initial analysis diagnostics are preserved: reviewer assumptions about nested recall state/participants and revision-deduplicated final cold labels were corrected against actual source. No producer artifact or gameplay outcome was changed. The final JSON analysis closed with exit 0.
 

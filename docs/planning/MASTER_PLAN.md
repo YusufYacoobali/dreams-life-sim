@@ -23,7 +23,7 @@ C37opening/university acceptance is complete for its declared scope: Maya's cust
 
 Overall production is about **75%**, an effort estimate. Most gameplay is85–90%; automatic save/resume90%; visual/accessibility65%; device/release acceptance20%. Finish remaining C/D outcome review, current native actions/normal-font/cold review, a continuous30-minute UI session, balance and standalone/iOS/physical release checks. Further file/history breadth stays parked. Commit AND push safe checkpoints at least every two hours; keep working after each checkpoint.
 
-[Completed1,000-life annual gate and exact raw evidence](../verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](../verification/ui-save-checkpoint-20261021.json). [Completed current gates and remaining acceptance](../verification/final-regression-20261021.json). [Earlier source checkpoint](../verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](../verification/production-gaps-20261021.json).
+[Completed1,000-life annual gate and exact raw evidence](../verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](../verification/ui-save-checkpoint-20261021.json.gz). [Completed current gates and remaining acceptance](../verification/final-regression-20261021.json). [Earlier source checkpoint](../verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](../verification/production-gaps-20261021.json.gz).
 
 ## Prior source checkpoint: first relationships, education and early stories
 
@@ -58,7 +58,7 @@ portrait polish. The accepted regression passes2,355tests/185suites in1,386.145s
 strict app/all-test types, runtime-equivalent Hermes exports, same120annual seeds
 in651.254s and actual Android24/Expo Go friendship result139/cold/ack140/finalcold
 checks pass. All70 measured warm action samples have zero full checkpoint unpack.
-Original other lives/history remain exact. [Source, raw checks and precise limits](../verification/friends-editorial-20261020.json).
+Original other lives/history remain exact. [Source, raw checks and precise limits](../verification/friends-editorial-20261020.json.gz).
 Overall remains approximately65%; onboarding65%, Life/early gameplay65% and
 family85% are effort estimates. Five next gameplay gaps are being implemented
 and reviewed in parallel; their combined migration and acceptance remain open.

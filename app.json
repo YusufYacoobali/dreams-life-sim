@@ -29,6 +29,7 @@
       ["expo-splash-screen", { "backgroundColor": "#061633", "image": "./assets/cinematic-splash.png", "imageWidth": 1, "dark": { "backgroundColor": "#061633" } }],
       "expo-router",
       "expo-sqlite",
+      "./plugins/withReleaseShrinking.cjs",
       ["./plugins/withLocalNotifications.cjs", { "color": "#1478F8" }],
       ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false, "enableBackgroundPlayback": false, "enableBackgroundRecording": false }]
     ],

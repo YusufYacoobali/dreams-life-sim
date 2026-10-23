@@ -1,7 +1,7 @@
 # Actual Android opening and early school evidence
 
 Runtime5245fbb / World33 /engine34 /content9 /reader13. Source and complete
-verification scope: [C34 record](../autonomy-gameplay-20261020.json).
+verification scope: [C34 record](../autonomy-gameplay-20261020.json.gz).
 
 Reader12→13 startup leaves all eight tables exact. Accepted actual observations:
 

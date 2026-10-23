@@ -69,7 +69,7 @@ Eight subjects from the transparent pet/leisure atlas are used in these flows;
 the remaining hobby/entertainment subjects do not imply working mechanics. The
 PNG is the unmodified image-generation output, SHA-256
 `a4c124c8bca59e84ad175e8eaa136bc15f54291745043bfce845655bbd44be26`.
-The [64-cell gallery](verification/pets-art-candidate-20261019.png) checks sixteen
+The [64-cell gallery](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/pets-art-candidate-20261019.png) checks sixteen
 subjects at 48/128px on light/dark browser cards. It is not native screen evidence.
 
 ## Verification and remaining gates

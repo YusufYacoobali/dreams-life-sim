@@ -1,9 +1,0 @@
-PASS tests/game/adult-work-school-entry.test.ts (7.69 s)
-PASS tests/game/education-recovery.test.ts (7.003 s)
-PASS tests/game/school-withdrawal.test.ts
-
-Test Suites: 3 passed, 3 total
-Tests:       54 passed, 54 total
-Snapshots:   0 total
-Time:        16.029 s
-Ran all test suites matching /tests\/game\/adult-work-school-entry.test.ts|tests\/game\/education-recovery.test.ts|tests\/game\/school-withdrawal.test.ts/i.

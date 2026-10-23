@@ -3,7 +3,7 @@
 The paired measurements below retain their original fixed drivers/commands.
 Current diagnostics toggle a real routine field after the UI began rejecting
 unchanged saves; use the recorded producer/driver for historical reproduction.
-[Current diagnostics](verification/action-latency-adult-relationships-20261020.json).
+[Current diagnostics](verification/action-latency-adult-relationships-20261020.json.gz).
 
 
 Larger saves previously compressed every person's data again for an ordinary

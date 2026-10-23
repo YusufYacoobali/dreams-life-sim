@@ -33,7 +33,7 @@ original Before Age Up payloads remain exact.
 These are five-sample, host/GC-sensitive cloud measurements after test/sweep/export
 and native action processes closed. The software VM/Metro remain idle. Generated
 1000 contacts means 1007 total people and eight financial actors, not a natural
-journey or physical p95. [Complete raw pair](verification/compact-transactions-comparison-20261020.json),
+journey or physical p95. [Complete raw pair](verification/compact-transactions-comparison-20261020.json.gz),
 [source and gates](verification/compact-transactions-20261020.json).
 
 ## Previous content-seven diagnostics
@@ -55,7 +55,7 @@ journey or physical p95. [Complete raw pair](verification/compact-transactions-c
 All 1,437 tests/105 suites, strict types, both exports and 120 immutable lives
 pass before these serial diagnostics. All 55 warm samples avoid full decode;
 every cold current/backup and original Before Age Up payload is exact.
-[Raw](verification/action-latency-adult-relationships-20261020.json).
+[Raw](verification/action-latency-adult-relationships-20261020.json.gz).
 Routine commands now toggle mindfulness, measuring a real edit accepted by the
 UI guard. These are unpaired current timings; older paired records used the
 then-permitted unchanged-routine command and their pinned drivers. No before/
@@ -123,7 +123,7 @@ The complete1,379-test/99-suite regression, strict types, both Hermes exports an
 cloud SQLite cases run one warm-up and five samples each. All50warm samples avoid
 full checkpoint decode; every cold current/backup world is exact. New workplace
 choice failure/retry/cold acceptance separately verifies the warm UI path.
-[Raw](verification/action-latency-workplace-stories-20261020.json) retains combined
+[Raw](verification/action-latency-workplace-stories-20261020.json.gz) retains combined
 source hash`fd200a537f3be144528afd7d5a6beef3150f8f1932d6ed848c7de8b7e5ba785e`.
 
 | Cloud engine + SQLite action | Median |
@@ -148,7 +148,7 @@ SQLite samples. All **50 warm samples avoid full checkpoint decode**; every
 cold current/backup world is exact. Three workplace inputs are normally prepared
 from the genuine teen archive, without stat, money, tenure or RNG edits.
 
-[Raw current measurements](verification/action-latency-raises-20261020.json)
+[Raw current measurements](verification/action-latency-raises-20261020.json.gz)
 record combined source hash
 `ec05ba7ad9a1c3701990c362188c379716ad7052b5944269ff069f84a4bee637`.
 
@@ -178,7 +178,7 @@ teen archive, using no stat, tenure, money or RNG edits. The prepared introducti
 input is exactly the actual native revision-49 world. Feedback preparation
 includes a real engine year; its currency presentation follows cloud Intl.
 
-[Raw current measurements](verification/action-latency-workplaces-20261020.json)
+[Raw current measurements](verification/action-latency-workplaces-20261020.json.gz)
 record combined hash
 `9e00267b94e314af94582fc5656e44a87854cedd346b343d95e1ab1c6bc3d878`.
 
@@ -204,7 +204,7 @@ The final world-28 / engine-27 / content-five source passes **1,285 tests /
 runs after regression/export/lifetime work completes. Each fixed actual input
 has one warm-up and five on-disk SQLite samples; every cold current/backup
 world is exact. All **35 warm samples avoid full checkpoint decode**.
-[Full current measurements](verification/action-latency-content5-20261020.json)
+[Full current measurements](verification/action-latency-content5-20261020.json.gz)
 record combined source hash
 `7f14af7f5adaee371a07820b1180450d40934305760bea49b38cb4d504741ed6`.
 
@@ -249,7 +249,7 @@ current saves are byte-checked rather than decoded on every press. Busy feedback
 belongs to the submitted control, quick actions do not flash a spinner, and
 hidden screens/history reads stay idle.
 
-The [controlled comparison](verification/button-latency-20261019.json) runs the
+The [controlled comparison](verification/button-latency-20261019.json.gz) runs the
 same genuine inputs through unmodified `8886f16` and candidate game/persistence
 hash `57dcf75ae5e75310792c86a5130dea0f6b75f1c35bf1d3338d02d67647e2a631`.
 Each case has one warm-up and five real SQLite/WAL samples; separate processes

@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/dreams-c39-editorial-v2-review/analyse.py", line 89, in <module>
-    assert last['reason'] == 'natural-death' and last['revision'] == result['finalRevision']
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError

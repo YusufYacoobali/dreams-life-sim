@@ -77,7 +77,7 @@ C37opening/university acceptance is complete for its declared scope: Maya's cust
 
 Overall production is about **75%**, an effort estimate. Most gameplay is85–90%; automatic save/resume90%; visual/accessibility65%; device/release acceptance20%. Finish remaining C/D outcome review, current native actions/normal-font/cold review, a continuous30-minute UI session, balance and standalone/iOS/physical release checks. Further file/history breadth stays parked. Commit AND push safe checkpoints at least every two hours; keep working after each checkpoint.
 
-[Completed1,000-life annual gate and exact raw evidence](verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](verification/ui-save-checkpoint-20261021.json). [Completed current gates and remaining acceptance](verification/final-regression-20261021.json). [Earlier source checkpoint](verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](verification/production-gaps-20261021.json).
+[Completed1,000-life annual gate and exact raw evidence](verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](verification/ui-save-checkpoint-20261021.json.gz). [Completed current gates and remaining acceptance](verification/final-regression-20261021.json). [Earlier source checkpoint](verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](verification/production-gaps-20261021.json.gz).
 
 ## Prior source checkpoint: first relationships, education and early stories
 
@@ -98,7 +98,7 @@ portrait polish. The accepted regression passes2,355tests/185suites in1,386.145s
 strict app/all-test types, runtime-equivalent Hermes exports, same120annual seeds
 in651.254s and actual Android24/Expo Go friendship result139/cold/ack140/finalcold
 checks pass. All70 measured warm action samples have zero full checkpoint unpack.
-Original other lives/history remain exact. [Source, raw checks and precise limits](verification/friends-editorial-20261020.json).
+Original other lives/history remain exact. [Source, raw checks and precise limits](verification/friends-editorial-20261020.json.gz).
 Overall remains approximately65%; onboarding65%, Life/early gameplay65% and
 family85% are effort estimates. Five next gameplay gaps are being implemented
 and reviewed in parallel; their combined migration and acceptance remain open.
@@ -118,7 +118,7 @@ opening/school checks have their own precise scopes. B remains incomplete withou
 dropout; C strictly ordered coverage is12/12,
 and every policy retains omissions/refusals. Overall remains approximately60%, with onboarding
 55%, Life/early gameplay60% and family85%.
-[Source, checks and precise scopes](verification/autonomy-gameplay-20261020.json).
+[Source, checks and precise scopes](verification/autonomy-gameplay-20261020.json.gz).
 
 The integrated hourly/financial/editorial milestone passes1,911tests/123suites,
 strict types, fresh Android/iOS exports, the same120annual seeds and12separate
@@ -216,7 +216,7 @@ current/backup and original Before Age Up payload is exact. Age-60 routine
 67.81ms; generated 1000-contact routine
 114.55ms. These unpaired,
 host/GC-sensitive cloud measurements are not physical p95 or comparisons with
-older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json).
+older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json.gz).
 
 Actual Android uses a separate life prepared through 88 normal Start/Begin Life,
 school-year and social steps. Nia Carter naturally reaches the nickname scene at

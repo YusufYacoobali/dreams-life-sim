@@ -1,5 +1,7 @@
 # Original game artwork
 
+Runtime PNGs received lossless encoding optimization on 23 October 2026. Decoded pixels, alpha, dimensions and colour profiles are preserved; current manifests describe the new encoding. The original generated-file hashes below describe provenance, with original encoded bytes retained in Git revision `9101307`. Obsolete V1 portraits and prototypes have been retired; the current V2 source inputs remain in `design/avatar-v2`. See [the size and archive policy](../../docs/PROJECT_SIZE.md).
+
 ## Cult Leader career — 23 October 2026
 
 The twelve transparent illustrations in [cult/](cult/README.md) were generated

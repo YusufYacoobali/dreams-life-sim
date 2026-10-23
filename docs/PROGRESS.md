@@ -184,7 +184,7 @@ C37opening/university acceptance is complete for its declared scope: Maya's cust
 
 Overall production is about **75%**, an effort estimate. Most gameplay is85–90%; automatic save/resume90%; visual/accessibility65%; device/release acceptance20%. Finish remaining C/D outcome review, current native actions/normal-font/cold review, a continuous30-minute UI session, balance and standalone/iOS/physical release checks. Further file/history breadth stays parked. Commit AND push safe checkpoints at least every two hours; keep working after each checkpoint.
 
-[Completed1,000-life annual gate and exact raw evidence](verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](verification/ui-save-checkpoint-20261021.json). [Completed current gates and remaining acceptance](verification/final-regression-20261021.json). [Earlier source checkpoint](verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](verification/production-gaps-20261021.json).
+[Completed1,000-life annual gate and exact raw evidence](verification/annual-1000-20261021.json). [Current UI/save checkpoint and pending device acceptance](verification/ui-save-checkpoint-20261021.json.gz). [Completed current gates and remaining acceptance](verification/final-regression-20261021.json). [Earlier source checkpoint](verification/production-finish-source-checkpoint-20261021.json). [Completed C37opening/native/performance](verification/production-gaps-20261021.json.gz).
 
 ## Prior milestone: first relationships, education and early stories
 
@@ -246,7 +246,7 @@ The age60 routine median is52.11ms; the generated1,000-contact first AgeUp step
 is431.07ms. Whole cold current/backup worlds and original BeforeAgeUp payloads
 remain exact. These are unpaired cloud Node/SQLite diagnostics, not rendered UI
 or physical p95. The app was stopped; the owned Metro/emulator were paused and
-actually resumed. [Complete source, raw checks and precise scopes](verification/friends-editorial-20261020.json).
+actually resumed. [Complete source, raw checks and precise scopes](verification/friends-editorial-20261020.json.gz).
 
 Overall production remains approximately **65%**; this is an effort estimate,
 not an acceptance score. The accepted catalogue remains250 situations/750choices
@@ -285,7 +285,7 @@ Initial5a and final73ced source maps differ only in one reviewed stale-wording t
 The initial run had two known wording failures and was intentionally interrupted
 (exit143); it has no complete full-run summary. The original Expo home-path
 failure (exit7) and successful workspace-home retry are retained separately.
-[Complete source, checks and precise scopes](verification/opening-completion-20261020.json).
+[Complete source, checks and precise scopes](verification/opening-completion-20261020.json.gz).
 
 Criminal policyv2 completes12 reused country seeds900–911 in179.765seconds,
 including actual secondary withdrawal at the first eligible normal window in
@@ -360,7 +360,7 @@ also passed on the exact pushed0ea6177: locked install, strict app/test types an
 2,100tests/147suites in1,237.414seconds. That is hosted Linux evidence, with no
 native-build or device claim. The initial Node-only tools type
 boundary failure is retained as a diagnostic; the final app boundary excludes
-those acceptance tools while their test compilation remains checked. [Source, checks and precise scopes](verification/autonomy-gameplay-20261020.json).
+those acceptance tools while their test compilation remains checked. [Source, checks and precise scopes](verification/autonomy-gameplay-20261020.json.gz).
 
 The same120 immutable annual-policy seeds0–119 pass in 687.245
 seconds across all12 countries. Separate professional Scenario A policy v2
@@ -417,7 +417,7 @@ its own completed evidence. No save limit, game policy or outcome was changed.
 All70 serial fixed-world cloud warm samples avoid full checkpoint unpack;
 cold current/backup and original Before Age Up bytes remain exact. These are
 unpaired host/GC-sensitive measurements, with explicit generated stress cases.
-Physical button p95 remains open. [Action scope](verification/action-latency-autonomy-20261020.json).
+Physical button p95 remains open. [Action scope](verification/action-latency-autonomy-20261020.json.gz).
 
 Actual Android reader12→13 startup retains all eight tables exactly.
 Actual Android24 software emulator/ExpoGo57.0.9,390x844. Normal and130% Welcome, creation,16-avatar Appearance and visible-keyboard footer reviewed. Correct fresh130%draft MiaFischer/HamburgGermany/Avatar7; concrete review cancelled with Nevermind, no life created. All8table rows equal on reader12to13/startup, read-only previews/cancel and restored1.0font host-restart observation. Seven original lives/backups,60moments/metadata and119receipts exact; Nia134 unchanged. No unsaved creation-draft-across-host-recreation or on-screen IME Next/Done claim.
@@ -493,7 +493,7 @@ No funds/stats/age/date/RNG overrides follow creation; the documented initial
 birth-acknowledgement flag exception matches the existing pure-engine runners.
 These are scoped engine journeys, not native, SQLite, extra distinct annual
 seeds, all-choice, physical,120-year or multi-generation acceptance.
-[Raw natural journeys](verification/hourly-natural-journeys-20261020.json).
+[Raw natural journeys](verification/hourly-natural-journeys-20261020.json.gz).
 
 All 70 serial warm fixed-world cloud samples avoid full checkpoint unpack;
 cold current/backup worlds and original Before Age Up bytes remain exact.
@@ -815,7 +815,7 @@ Age-60 routine median changes 64.26→54.83ms; generated 1000-contact routine
 115.23→109.95ms and twelve-month Age Up step 497.46→434.81ms. These five-sample
 host/GC-sensitive medians are not physical p95 or a natural population journey.
 [Source and gates](verification/compact-transactions-20261020.json),
-[raw comparison](verification/compact-transactions-comparison-20261020.json).
+[raw comparison](verification/compact-transactions-comparison-20261020.json.gz).
 
 The real SQLite family journey now completes three natural deaths over 172 years
 8 months. All 43 cold comparisons, 173 original annual checkpoint payloads/metadata
@@ -855,7 +855,7 @@ current/backup and original Before Age Up payload is exact. Age-60 routine
 67.81ms; generated 1000-contact routine
 114.55ms. These unpaired,
 host/GC-sensitive cloud measurements are not physical p95 or comparisons with
-older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json).
+older unchanged-routine records. [Raw](verification/action-latency-adult-relationships-20261020.json.gz).
 
 Actual Android uses a separate life prepared through 88 normal Start/Begin Life,
 school-year and social steps. Nia Carter naturally reaches the nickname scene at
@@ -1023,7 +1023,7 @@ Continue **1.95/1.76 ms**, age-seven choice/resume **5.08/12.21**, age-30/60
 routine **26.69/81.70**, introduction/feedback **12.72/11.73**, raise **21.87**.
 All **50 warm samples avoid full checkpoint decode**; every cold current/backup
 is exact. These are current prepared-input diagnostics, not paired comparisons,
-native startup/navigation or physical p95. [Raw](verification/action-latency-raises-20261020.json).
+native startup/navigation or physical p95. [Raw](verification/action-latency-raises-20261020.json.gz).
 
 Actual Android continues the same teen life through a hard routine, secondary
 completion at82%, twenty-four paid months and performance75. A natural accepted
@@ -1080,7 +1080,7 @@ age-30/60 routine **15.98/93.92**, introduction **10.60**, feedback **11.42**.
 All **45 warm samples avoid full checkpoint decode**; every cold current/backup
 is exact. The introduction input exactly matches native 49; feedback preparation
 uses actual engine progression from the genuine archive. These are diagnostics,
-not paired before/after or physical-device p95. [Raw measurements](verification/action-latency-workplaces-20261020.json).
+not paired before/after or physical-device p95. [Raw measurements](verification/action-latency-workplaces-20261020.json.gz).
 
 Actual Android continuation hires the sixteen-year-old into weekend work with
 zero paid months, introduces the exact three people at revision 50, cold-resumes
@@ -1144,7 +1144,7 @@ Fresh current-source button diagnostics retain the warm path: Begin Life
 1.09 ms, first choice 2.99 ms, Continue 2.46 ms, age-seven choice 6.18 ms,
 resumed Continue 15.24 ms, age-30 routine 28.44 ms and age-60 routine **78.65 ms**,
 including SQLite. All 35 warm samples perform no full checkpoint decode;
-every cold current/backup matches. [Raw cloud measurements](verification/action-latency-content5-20261020.json)
+every cold current/backup matches. [Raw cloud measurements](verification/action-latency-content5-20261020.json.gz)
 are engine/save timings, not native startup/navigation or physical p95. Further
 file-feature breadth stays deferred; the full production estimate remains
 approximately 50% and the remaining content, integration and release gates stay open.
@@ -1244,7 +1244,7 @@ The full **1,000-seed lifetime invariant gate passes** on the production
 validated-immutable world-28 path: every distinct seed 0–999, all twelve countries,
 unchanged game/tool hashes, empty stderr and exit 0 in **5,030.819 seconds**.
 [Completion record](verification/life-sweep-v28-1000-20261020.json) and
-[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson) retain exact
+[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson.gz) retain exact
 terminal-world hashes. This is pure-engine first-eligible-policy scope; the
 range is age 25–102 with at most 26 people / 61,778 ledger rows. SQLite/native,
 120-year, 1,000-person, multiple-generation and broader production gates remain
