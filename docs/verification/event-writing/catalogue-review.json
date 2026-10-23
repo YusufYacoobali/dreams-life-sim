@@ -2,8 +2,8 @@
   "baseline": "da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af",
   "counts": {
     "audited": 319,
-    "revised": 114,
-    "revisedResults": 342,
+    "revised": 133,
+    "revisedResults": 399,
     "stronger": 27,
     "immediateEffectEvents": 37,
     "classifications": {
@@ -11764,8 +11764,8 @@
       "id": "wellbeing-search-results",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Sensitive and correctly condition-bound; could gain a more specific search-result premise without mocking illness. Deferred.",
-      "changed": false,
+      "reason": "Replaces generic research advice with an obstructive medical website; each exit has a concrete payoff without inventing a consultation, diagnosis or treatment.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Every result uses a louder font",
@@ -11795,32 +11795,33 @@
         ]
       },
       "after": {
-        "title": "Every result uses a louder font",
-        "body": "Looking for information about {condition}, you find several pages that sound absolutely certain while disagreeing with one another.",
+        "title": "Before we can worry you",
+        "body": "You search for information about {condition}. Before showing you a single sentence, the first website asks you to accept cookies, enable notifications and rate your experience.",
         "choices": [
           {
             "id": "questions",
-            "label": "Write questions for a future consultation",
-            "title": "Questions instead of another search",
-            "result": "You separate what you know from what you want explained. The questions fit on one page instead of twenty open tabs.",
-            "journal": "I wrote down questions about {condition} instead of continuing an anxious search."
+            "label": "Write the question down and close the page",
+            "title": "A consultation with fewer buttons",
+            "result": "You save one clear question for a clinician. The website asks whether you are sure you want to leave. For once, you are.",
+            "journal": "I wrote down a question about {condition} and escaped a very demanding website."
           },
           {
             "id": "sources",
-            "label": "Check who produced the information",
-            "title": "A more useful reading list",
-            "result": "You check the source and its limits. The loudest headline stops being your main measure of reliability.",
-            "journal": "I checked the sources of information about {condition}."
+            "label": "Find out who wrote the article",
+            "title": "An impressive list of other articles",
+            "result": "The author’s biography lists their expertise as creating engaging content. You find a source with actual medical credentials instead.",
+            "journal": "I checked the author of an article about {condition} and found a more qualified source."
           },
           {
             "id": "refresh",
-            "label": "Keep refreshing the same results",
-            "title": "Nothing new, more tired",
-            "result": "The pages keep their certainty. You finish with the same questions and less energy to sort them out.",
-            "journal": "I kept searching about {condition} after the search stopped helping."
+            "label": "Keep clicking until it tells you something",
+            "title": "You are our ten-thousandth reader",
+            "result": "Three popups later, you have won an imaginary prize and lost track of the original question. You close nothing and open another tab.",
+            "journal": "I wore myself out clicking through popups while searching about {condition}."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-miracle-recommendation",
@@ -12012,8 +12013,8 @@
       "id": "wellbeing-other-peoples-progress",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Valid illness comparison beat, but several results explain the intended lesson. Deferred rather than forcing a cruel joke.",
-      "changed": false,
+      "reason": "Uses a visibly edited influencer week to make the comparison tangible. Humour targets the production, with distinct disengage, question-list and anxious-replay endings.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Their timeline is not yours",
@@ -12043,32 +12044,33 @@
         ]
       },
       "after": {
-        "title": "Their timeline is not yours",
-        "body": "You read someone else’s account of living with {condition}. Their progress sounds tidy enough to have been edited, and you begin comparing every part with your own.",
+        "title": "Recovery, with jump cuts",
+        "body": "An influencer describes life with {condition} in a video called My Perfect Week. Between Monday and Tuesday, they change outfits six times. Your own week has been harder to edit.",
         "choices": [
           {
             "id": "stepback",
-            "label": "Step away from the comparison",
-            "title": "A different person’s account",
-            "result": "You leave the story where it belongs: with the person who wrote it. Your own experience does not need to match its pace.",
-            "journal": "I stepped away from comparing my experience of {condition} with someone else’s."
+            "label": "Close the video before Wednesday",
+            "title": "The week is cancelled",
+            "result": "You put the phone down. Their inspirational sunrise continues without you; you enjoy sitting somewhere that has no soundtrack.",
+            "journal": "I stopped comparing my experience of {condition} with an influencer’s edited week."
           },
           {
             "id": "notes",
-            "label": "Write down what is useful to ask about",
-            "title": "Ideas without a new care plan",
-            "result": "You keep a few questions without assuming that somebody else’s answers will fit your circumstances.",
-            "journal": "I separated useful questions from someone else’s account of {condition}."
+            "label": "List the parts the video skipped",
+            "title": "Several days are missing",
+            "result": "You note what you would actually like to ask about {condition}. Their caption says consistency is everything, which is bold for a week missing Thursday.",
+            "journal": "I turned an edited account of {condition} into a few questions instead of a care plan."
           },
           {
             "id": "compare",
-            "label": "Keep measuring yourself against the account",
-            "title": "An unfair measuring stick",
-            "result": "The account cannot show everything you would need to compare. You still end up feeling behind it.",
-            "journal": "I judged my experience of {condition} against an incomplete comparison."
+            "label": "Compare your whole week with their thirty seconds",
+            "title": "Behind on someone else’s highlight reel",
+            "result": "You replay the video until you feel worse. They appear to have mastered living with {condition}, lighting a room and skipping Thursdays.",
+            "journal": "I stressed myself out comparing life with {condition} to a polished video."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-one-more-episode",
@@ -12136,8 +12138,8 @@
       "id": "wellbeing-stretch-after-sitting",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Appropriate ordinary moment; lacks a surprising or distinct payoff. Deferred.",
-      "changed": false,
+      "reason": "Turns posture advice into a disputed chair creak, with different physical actions and aftermaths rather than a movement lesson.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Your shoulders have a complaint",
@@ -12167,32 +12169,33 @@
         ]
       },
       "after": {
-        "title": "Your shoulders have a complaint",
-        "body": "After sitting in the same position for a while, you notice that your shoulders appear to have crept up towards your ears.",
+        "title": "The chair denies everything",
+        "body": "After sitting still for ages, you stand halfway up and hear a tremendous creak. You and the chair are the only suspects.",
         "choices": [
           {
             "id": "move",
-            "label": "Take a gentle movement break",
-            "title": "A different position helps",
-            "result": "You loosen up at a comfortable pace and return to what you were doing. You had not noticed how stiff you were.",
-            "journal": "I took a gentle movement break after sitting still."
+            "label": "Take a short victory lap",
+            "title": "The investigation gets some air",
+            "result": "You walk around until you feel less stiff. On your return, you give the chair a suspicious look. It refuses to demonstrate the noise.",
+            "journal": "I loosened up with a short walk after a creak of uncertain origin."
           },
           {
             "id": "adjust",
-            "label": "Change your position and relax your shoulders",
-            "title": "Less unnecessary effort",
-            "result": "You notice how tightly you were holding yourself and make a small adjustment.",
-            "journal": "I adjusted my position when I noticed tension in my shoulders."
+            "label": "Rearrange yourself like an expensive display",
+            "title": "A better seating arrangement",
+            "result": "You shift your feet, lower your shoulders and settle back. The chair gives one small squeak. You are delighted to have a witness.",
+            "journal": "I adjusted my sitting position and let the chair take the blame for the noises."
           },
           {
             "id": "ignore",
-            "label": "Stay exactly as you are",
-            "title": "The complaint remains open",
-            "result": "You keep going without changing position. The tension continues asking for your attention.",
-            "journal": "I ignored tension from sitting in the same position."
+            "label": "Remain completely still to protect your alibi",
+            "title": "A difficult position to defend",
+            "result": "Nothing creaks because nothing moves. Unfortunately, your shoulders have begun objecting in ways the chair cannot be blamed for.",
+            "journal": "I stayed stiff rather than investigate a suspicious creak."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-ordinary-water",
@@ -12322,8 +12325,8 @@
       "id": "wellbeing-quiet-not-silent",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Three choices mainly restate an attention lesson. Deferred.",
-      "changed": false,
+      "reason": "Replaces abstract attention practice with a library shushing dispute: read through it, follow the clock, or unite the room against yourself.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "The quiet place has noises",
@@ -12353,32 +12356,33 @@
         ]
       },
       "after": {
-        "title": "The quiet place has noises",
-        "body": "You sit somewhere quiet and immediately notice a clock, a distant door and somebody clearing their throat. Apparently quiet did not mean perfectly silent.",
+        "title": "The silence committee",
+        "body": "In a library’s quiet corner, someone whispers “Shh.” Another person shushes them for shushing too loudly. A third has taken a preparatory breath.",
         "choices": [
           {
             "id": "allow",
-            "label": "Let the ordinary sounds be there",
-            "title": "Quiet enough is available",
-            "result": "You stop checking each sound for a reason to be irritated. The place becomes restful without becoming silent.",
-            "journal": "I accepted ordinary background sounds in a quiet moment."
+            "label": "Read while the committee meets",
+            "title": "The dispute has excellent acoustics",
+            "result": "You settle into your book. Behind you, two people attempt to win an argument entirely through the letter S.",
+            "journal": "I relaxed with a book while other readers argued about making less noise."
           },
           {
             "id": "focus",
-            "label": "Choose one steady sound to notice",
-            "title": "A smaller field of attention",
-            "result": "You listen for a while without judging the whole room. The other noises become less demanding.",
-            "journal": "I focused on one steady sound instead of monitoring every noise."
+            "label": "Listen to the clock instead",
+            "title": "One participant keeps good time",
+            "result": "You follow the steady ticking. When the shushing pauses, you realise you have been tapping along. You very quietly stop.",
+            "journal": "I focused on a clock rather than a dispute in the library’s quiet corner."
           },
           {
             "id": "inspect",
-            "label": "Identify every interruption",
-            "title": "A complete catalogue of noises",
-            "result": "Your list becomes impressively detailed. Rest receives rather less attention than the clock.",
-            "journal": "I spent a quiet moment cataloguing everything that interrupted it."
+            "label": "Ask who started it",
+            "title": "A unanimous decision",
+            "result": "All three turn towards you and say “Shh.” You have united the room and become its newest problem.",
+            "journal": "I interrupted an argument about silence and got shushed by everyone involved."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-meal-comparison",
@@ -12446,8 +12450,8 @@
       "id": "wellbeing-waiting-without-feed",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Screen-checking premise needs a concrete interruption or outcome. Deferred.",
-      "changed": false,
+      "reason": "Gives the wait a concrete contradictory reception bell and hatch. Observing, resting and refreshing each reveal a different small comic ending.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "A minute without filling it",
@@ -12477,39 +12481,40 @@
         ]
       },
       "after": {
-        "title": "A minute without filling it",
-        "body": "You have a short wait with nothing to do. Before reaching for a distraction, you notice you have already checked the same screen three times.",
+        "title": "Assistance is a trap",
+        "body": "In a waiting area, a bell sits between two signs: RING FOR ASSISTANCE and PLEASE DO NOT RING. You have already checked your phone three times.",
         "choices": [
           {
             "id": "observe",
-            "label": "Look around for a minute",
-            "title": "The world supplies a few details",
-            "result": "You notice a small sign and an interesting pattern of light. The wait becomes a moment rather than a gap to erase.",
-            "journal": "I spent a short wait noticing what was around me."
+            "label": "Look for a third opinion",
+            "title": "Help is apparently nearby",
+            "result": "You spot WE ARE HERE TO HELP above a firmly closed hatch. Studying the signs turns out to be more interesting than your phone.",
+            "journal": "I passed a wait investigating contradictory reception signs."
           },
           {
             "id": "rest",
-            "label": "Let your attention rest",
-            "title": "A pause without a job",
-            "result": "You let the minute pass without giving it a task. Waiting remains waiting and feels less demanding.",
-            "journal": "I let a short wait stay unfilled."
+            "label": "Close your eyes and let someone else decide",
+            "title": "A brave volunteer",
+            "result": "You enjoy a quiet pause. Someone eventually rings the bell and immediately whispers “Sorry.” You keep your eyes closed.",
+            "journal": "I rested during a wait and left the reception bell to someone else."
           },
           {
             "id": "refresh",
-            "label": "Check the same screen again",
-            "title": "No new material",
-            "result": "The screen looks much as it did a moment ago. You continue looking for something to make the wait disappear.",
-            "journal": "I refreshed a screen that had nothing new to show me."
+            "label": "Refresh the same screen again",
+            "title": "The instructions have been updated",
+            "result": "You look up just in time to see a hand place BACK IN A MINUTE on the hatch. Your phone still has nothing new either.",
+            "journal": "I kept checking my phone while a waiting-room hatch acquired another unhelpful sign."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-good-day-pressure",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Pacing concern is valid, but results are explanatory rather than dramatic. Deferred.",
-      "changed": false,
+      "reason": "Turns generic productivity pressure into an overambitious planner; finishing three tasks, enjoying a book and exhausting yourself have distinct endings.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "You must make the most of it",
@@ -12539,39 +12544,40 @@
         ]
       },
       "after": {
-        "title": "You must make the most of it",
-        "body": "You feel better rested than usual and immediately begin planning enough tasks to use every available bit of energy.",
+        "title": "Fix your life before lunch",
+        "body": "You wake up feeling rested. Your planner suggests clearing your inbox, learning a language and becoming an entirely new person. It has left twenty minutes for lunch.",
         "choices": [
           {
             "id": "pace",
-            "label": "Choose a few priorities and leave room",
-            "title": "A useful day with an ending",
-            "result": "You use some energy without treating all of it as a resource that must be exhausted.",
-            "journal": "I paced a good day instead of filling every available moment."
+            "label": "Pick three manageable tasks and mute the planner",
+            "title": "Personal transformation postponed",
+            "result": "You finish your three tasks and stop. The planner suggests setting an ambitious new target. You suggest it enjoys the silence.",
+            "journal": "I finished three manageable tasks and muted an overambitious planner."
           },
           {
             "id": "enjoy",
-            "label": "Enjoy feeling well without a quota",
-            "title": "A good moment can simply count",
-            "result": "You allow yourself to notice the easier feeling. It does not have to produce proof that it was deserved.",
-            "journal": "I enjoyed feeling rested without turning it into a productivity target."
+            "label": "Spend some of this energy enjoying yourself",
+            "title": "No measurable improvement",
+            "result": "You read for pleasure without timing it. Nobody becomes their best self, and you have a lovely afternoon.",
+            "journal": "I enjoyed a rested afternoon instead of turning it into a productivity project."
           },
           {
             "id": "spend",
-            "label": "Fill every bit of the day",
-            "title": "The full capacity gets used",
-            "result": "You accomplish several things and finish drained. Feeling rested did not make your energy unlimited.",
-            "journal": "I used up a good day by treating it as an obligation to do everything."
+            "label": "Attempt the entire recommended new personality",
+            "title": "The inbox is a different person",
+            "result": "You clear your inbox and keep adding tasks until you are exhausted. The planner congratulates you and asks what you are doing tomorrow.",
+            "journal": "I wore myself out trying to complete an overambitious day’s plan."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-habit-one-miss",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Generic intention/consistency lesson needs a specific action and aftermath. Deferred.",
-      "changed": false,
+      "reason": "Uses a one-sentence journal and an absurdly dramatic resignation to show three different reactions to a missed day.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "One missed intention",
@@ -12601,39 +12607,40 @@
         ]
       },
       "after": {
-        "title": "One missed intention",
-        "body": "You miss a small personal intention and catch yourself declaring the whole effort ruined. The declaration is much larger than the missed step.",
+        "title": "The blank page",
+        "body": "You miss a day in your one-sentence journal and consider abandoning the whole thing. Yesterday’s entry was “Saw a very round dog.” This is apparently the standard you have failed.",
         "choices": [
           {
             "id": "resume",
-            "label": "Take the next manageable step",
-            "title": "A smaller conclusion",
-            "result": "You treat the missed moment as one moment and carry on with what you can manage now.",
-            "journal": "I avoided turning a small missed intention into a verdict on everything."
+            "label": "Write today’s sentence and carry on",
+            "title": "The dog retains top billing",
+            "result": "You write “Still doing this.” The round dog remains the journal’s most exciting development. You are back on schedule.",
+            "journal": "I resumed a one-sentence journal after missing a day."
           },
           {
             "id": "adjust",
-            "label": "Ask whether the intention needs adjusting",
-            "title": "A useful review",
-            "result": "You look at what got in the way. The question gets a specific answer instead of an insult.",
-            "journal": "I reviewed why a small intention had not worked."
+            "label": "Make the routine easier to remember",
+            "title": "A more convenient literary career",
+            "result": "You put the notebook somewhere you will actually see it and allow short entries. “Dog” would have covered most of yesterday anyway.",
+            "journal": "I simplified my journal routine instead of abandoning it over one missed entry."
           },
           {
             "id": "condemn",
-            "label": "Declare yourself hopeless at consistency",
-            "title": "An unnecessarily broad verdict",
-            "result": "The label explains less than the actual circumstances did. You feel worse without making the next step clearer.",
-            "journal": "I judged myself too harshly over one missed intention."
+            "label": "Write a lengthy resignation from journalling",
+            "title": "An unexpectedly productive failure",
+            "result": "You fill a page explaining why you cannot manage one sentence. It is the most writing you have done all week, and you feel worse.",
+            "journal": "I wrote an angry farewell to a journal because I had missed one short entry."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "wellbeing-unhurried-breath",
       "source": "src/game/content/wellbeingStories.ts",
       "classification": "Improve",
-      "reason": "Recognisable irritation, but generic sensible/neutral/bad structure and moral closure. Deferred.",
-      "changed": false,
+      "reason": "Replaces irritation advice with a nosy question about tiredness. A questionnaire joke, short break and needless insult produce different reactions.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Before answering immediately",
@@ -12663,32 +12670,33 @@
         ]
       },
       "after": {
-        "title": "Before answering immediately",
-        "body": "A mildly irritating question arrives while you are already tired. You notice the sharp reply forming before the other person has finished speaking.",
+        "title": "Customer support is unavailable",
+        "body": "You are tired when someone asks, “Why do you look so tired?” They wait as though you have been withholding an exciting explanation.",
         "choices": [
           {
             "id": "pause",
-            "label": "Take a moment before answering",
-            "title": "A reply with less edge",
-            "result": "The pause gives you time to separate the question from your tiredness. You answer the thing that was actually asked.",
-            "journal": "I paused before answering sharply when I was tired."
+            "label": "Ask whether the survey has a second question",
+            "title": "A limited questionnaire",
+            "result": "They ask whether you have been sleeping enough. You request an unsubscribe button. They laugh and change the subject.",
+            "journal": "I joked my way out of questions about looking tired."
           },
           {
             "id": "name",
-            "label": "Say you need a short break",
-            "title": "A clearer limit",
-            "result": "You explain that your patience is running low and return to the question after a moment.",
-            "journal": "I asked for a short break instead of replying through irritation."
+            "label": "Say you will answer after a short break",
+            "title": "The explanation can wait",
+            "result": "You take a quiet break. When you return, they have forgotten the question. You decide against reopening the investigation.",
+            "journal": "I took a short break instead of answering an irritating question while tired."
           },
           {
             "id": "snap",
-            "label": "Deliver the sharp reply",
-            "title": "Now there are two problems",
-            "result": "The question remains, accompanied by an argument about your tone. Tiredness has not become easier to manage.",
-            "journal": "I snapped at a small question because I was tired."
+            "label": "Ask why their face looks like that",
+            "title": "A follow-up nobody wanted",
+            "result": "They demand to know what is wrong with their face. You are now tired and trying to explain that you did not have a specific objection.",
+            "journal": "I turned a question about looking tired into an argument by insulting someone."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "career-actor-written-pause",
@@ -13562,8 +13570,8 @@
       "id": "pet-cat-slow-blink",
       "source": "src/game/content/petLifeStories.ts",
       "classification": "Improve",
-      "reason": "Calm species-appropriate context is useful, but several results explain a boundary rather than dramatise a reaction. Deferred.",
-      "changed": false,
+      "reason": "Shows species-appropriate blinking, voluntary rubbing and withdrawal through a mock interview, without explaining the correct attitude.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "A very small conversation",
@@ -13593,39 +13601,40 @@
         ]
       },
       "after": {
-        "title": "A very small conversation",
-        "body": "{pet} watches you from a comfortable distance and slowly closes their eyes. You realise how easy it would be to turn a calm moment into an interruption.",
+        "title": "The interview is over",
+        "body": "{pet} sits opposite you, studies your face and slowly closes their eyes. You feel as though you have applied for a position and the panel is still deciding.",
         "choices": [
           {
             "id": "quiet",
-            "label": "Stay quiet and let them approach",
-            "title": "Company on their terms",
-            "result": "You leave the distance for {pet} to choose. The quiet feels companionable without requiring a performance.",
-            "journal": "I enjoyed calm company with {pet} without demanding attention."
+            "label": "Blink back and wait for the decision",
+            "title": "You may remain on the premises",
+            "result": "{pet} stretches out nearby and shuts their eyes again. You stay quietly together. The interview appears to have become a nap.",
+            "journal": "I quietly returned {pet}’s slow blink and kept them company."
           },
           {
             "id": "gentle",
-            "label": "Offer gentle attention if they want it",
-            "title": "An invitation with room to decline",
-            "result": "You keep the invitation small. {pet} can come closer or remain comfortably where they are.",
-            "journal": "I let {pet} choose whether to come closer."
+            "label": "Offer one finger for inspection",
+            "title": "References accepted",
+            "result": "{pet} sniffs your finger, then rubs against your hand. You provide the requested attention without asking about the salary.",
+            "journal": "I let {pet} approach and gave them the attention they asked for."
           },
           {
             "id": "call",
-            "label": "Call repeatedly until they react",
-            "title": "The quiet moment leaves first",
-            "result": "{pet} looks away. You have succeeded in getting a reaction at the expense of the calm you noticed.",
-            "journal": "I interrupted a calm moment by repeatedly calling {pet}."
+            "label": "Keep calling the panel by name",
+            "title": "No further correspondence",
+            "result": "{pet} gets up, turns away and sits facing the wall. You have received a decision in a very clear format.",
+            "journal": "I spoiled a calm moment with {pet} by repeatedly calling for their attention."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "pet-rabbit-floor-level",
       "source": "src/game/content/petLifeStories.ts",
       "classification": "Improve",
-      "reason": "Species-specific distance matters; results could show a more memorable rabbit reaction without treating discomfort as a joke. Deferred.",
-      "changed": false,
+      "reason": "Gives the rabbit an interesting slipper and lets approach, observation and crowding produce concrete, species-appropriate reactions.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "A different height of conversation",
@@ -13655,32 +13664,33 @@
         ]
       },
       "after": {
-        "title": "A different height of conversation",
-        "body": "{pet} watches cautiously while you stand nearby. From down there, you probably look like a very large interruption.",
+        "title": "The ground-floor inspection",
+        "body": "{pet} is investigating a slipper while you try to attract their attention. From floor level, the slipper appears to be the more promising acquaintance.",
         "choices": [
           {
             "id": "sit",
-            "label": "Sit quietly at a comfortable distance",
-            "title": "The room becomes less imposing",
-            "result": "You give {pet} time to decide how close to come. The small approach feels better because it was not forced.",
-            "journal": "I sat quietly and let {pet} choose the distance."
+            "label": "Sit on the floor and await inspection",
+            "title": "Almost as interesting as footwear",
+            "result": "{pet} approaches and nudges your hand. You keep still while they investigate. The slipper has some competition at last.",
+            "journal": "I sat quietly and let {pet} approach me."
           },
           {
             "id": "observe",
-            "label": "Give them space and observe",
-            "title": "Attention without crowding",
-            "result": "You notice what makes {pet} comfortable and leave the space around them calm.",
-            "journal": "I paid attention to {pet}’s comfort without crowding them."
+            "label": "Watch the slipper investigation from a distance",
+            "title": "An extremely thorough tenant",
+            "result": "{pet} checks the opening, circles the heel and checks the opening again. You enjoy the inspection without interrupting it.",
+            "journal": "I gave {pet} space and watched them investigate a slipper."
           },
           {
             "id": "insist",
-            "label": "Keep reaching in for attention",
-            "title": "The invitation feels too large",
-            "result": "{pet} moves away. Wanting a friendly moment did not make it useful to insist on one.",
-            "journal": "I crowded {pet} when they wanted more space."
+            "label": "Keep reaching over to introduce yourself",
+            "title": "The viewing is over",
+            "result": "{pet} moves just beyond your fingertips and returns to the slipper. You have somehow lost a social contest to an empty shoe.",
+            "journal": "I kept reaching towards {pet} when they wanted more space."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "pet-parrot-perfect-timing",
@@ -13748,8 +13758,8 @@
       "id": "pet-familiar-presence",
       "source": "src/game/content/petLifeStories.ts",
       "classification": "Improve",
-      "reason": "Useful quiet counterweight to animal mishaps, though the middle result has an instructional closing. Deferred.",
-      "changed": false,
+      "reason": "Replaces abstract companionship with a confidential briefing to a pet. Results remain suitable for every supported species and preserve the real pet-bond changes.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Someone else is in the room",
@@ -13779,32 +13789,33 @@
         ]
       },
       "after": {
-        "title": "Someone else is in the room",
-        "body": "You have been absorbed in your own thoughts when you notice {pet} nearby. Their ordinary presence makes the room feel less empty.",
+        "title": "A confidential briefing",
+        "body": "You have been telling {pet} about your day. You reach “You had to be there” before remembering who your audience is.",
         "choices": [
           {
             "id": "company",
-            "label": "Spend a quiet moment together",
-            "title": "Ordinary company counts",
-            "result": "You put your attention on {pet} for a while. The moment does not need to become a more elaborate activity.",
-            "journal": "I enjoyed a quiet moment of company with {pet}."
+            "label": "Settle down and tell the short version",
+            "title": "An excellent listener",
+            "result": "You talk quietly for a while and feel less wound up. {pet} offers no unsolicited advice. You thank them for their professionalism.",
+            "journal": "I relaxed while keeping {pet} company and talking about my day."
           },
           {
             "id": "notice",
-            "label": "Notice how they seem to be feeling",
-            "title": "A little more attention",
-            "result": "You watch their behaviour without rushing to interpret every movement. Familiarity still has things to teach you.",
-            "journal": "I paid closer attention to {pet}’s ordinary behaviour."
+            "label": "Pause to see what interests your audience",
+            "title": "The interview turns around",
+            "result": "You stop narrating and watch {pet} go about their usual business. For once, you let someone else provide the entertainment.",
+            "journal": "I stopped talking long enough to pay attention to {pet}."
           },
           {
             "id": "distracted",
-            "label": "Stay too distracted to respond",
-            "title": "The moment passes quietly",
-            "result": "You return to your thoughts. {pet} remains part of the room without receiving much of your attention.",
-            "journal": "I let a chance for quiet company with {pet} pass."
+            "label": "Check your phone halfway through your own story",
+            "title": "The speaker has lost interest",
+            "result": "You disappear into your screen. When you remember {pet}, you cannot even recall the point of the story you abandoned.",
+            "journal": "I missed a chance to spend time with {pet} by getting distracted by my phone."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "pet-care-name-voice",
@@ -14368,8 +14379,8 @@
       "id": "hobby-gardening-labels",
       "source": "src/game/content/hobbyLifeStories.ts",
       "classification": "Improve",
-      "reason": "Good weed-as-star-pupil setup; remaining results still explain the learning lesson. Lower-priority payoff polish deferred.",
-      "changed": false,
+      "reason": "Keeps the strong mistaken-weed premise and gives Gary a label correction, an expanding family and a fictional heritage garden as distinct payoffs.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "The weed got a name",
@@ -14399,32 +14410,33 @@
         ]
       },
       "after": {
-        "title": "The weed got a name",
-        "body": "Looking back at gardening practice, you realise you carefully labelled a weed and ignored the actual plant. You even complimented its progress.",
+        "title": "Gary is thriving",
+        "body": "During gardening practice, you realise the thriving plant you labelled GARY is a weed. The actual plant is much smaller and has received none of your encouraging speeches.",
         "choices": [
           {
             "id": "record",
-            "label": "Check the leaves and correct your notes",
-            "title": "A promising career in weeds",
-            "result": "The difference is obvious once you know what to look for. You record it without the encouraging speech.",
-            "journal": "I corrected a plant identification mistake after gardening practice."
+            "label": "Correct the label and check the actual plant",
+            "title": "A difficult change of management",
+            "result": "You relabel Gary as WEED and tend the neglected plant. Your notes now say “Check the leaves before naming anyone.”",
+            "journal": "I corrected a weed’s label and paid attention to the plant I meant to grow."
           },
           {
             "id": "observe",
-            "label": "Learn to recognise your former star pupil",
-            "title": "Congratulations withdrawn",
-            "result": "You study the leaf shape. At least next time you will know exactly what you are praising.",
-            "journal": "I learned to recognise a weed I had mistaken for a plant."
+            "label": "Study what made Gary so convincing",
+            "title": "There are more of him",
+            "result": "You compare the leaves and spot five more Garys along the path. Your star pupil has been running an expansion programme.",
+            "journal": "I learned to identify a weed I had proudly named Gary."
           },
           {
             "id": "guess",
-            "label": "Decide the weed deserves your loyalty",
-            "title": "It believed in you too",
-            "result": "You defend the label rather than correct it. Your gardening notes are becoming a work of fiction.",
-            "journal": "I refused to correct a wrong plant label in my gardening notes."
+            "label": "Declare the whole patch a Gary heritage garden",
+            "title": "A thriving fictional enterprise",
+            "result": "You add a grand new label rather than admit the mistake. The real plant remains anonymous while your notes praise Gary’s resilience.",
+            "journal": "I defended a mistaken plant label by pretending I meant to grow the weeds."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "hobby-small-improvement",
@@ -14864,8 +14876,8 @@
       "id": "travel-memory-one-good-habit",
       "source": "src/game/content/travelMemoryStories.ts",
       "classification": "Improve",
-      "reason": "Useful destination-based memory, but all branches mainly explain healthy perspective. Deferred behind stronger replacement candidates.",
-      "changed": false,
+      "reason": "Turns an abstract holiday habit into a local walk mistaken for being lost, with useful directions or a self-defeating pavement review.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Something you did differently there",
@@ -14895,32 +14907,33 @@
         ]
       },
       "after": {
-        "title": "Something you did differently there",
-        "body": "You remember a simple habit you enjoyed during your completed visit to {destination}: slowing down long enough to notice where you were.",
+        "title": "The local scenic route",
+        "body": "You try bringing home the slow walks you enjoyed in {destination}. A neighbour spots you looking around and asks whether you are lost.",
         "choices": [
           {
             "id": "small",
-            "label": "Try a brief version close to home",
-            "title": "A little of that pace returns",
-            "result": "You take an unhurried look at an ordinary place nearby. The useful part of the memory fits into a small moment.",
-            "journal": "I brought a little of my slower pace in {destination} into an ordinary day."
+            "label": "Explain that you are walking without a goal",
+            "title": "Directions are supplied anyway",
+            "result": "They point down the road just in case. You thank them and continue enjoying a walk that has apparently become suspicious.",
+            "journal": "I enjoyed a slow walk inspired by {destination}, despite being mistaken for someone lost."
           },
           {
             "id": "reflect",
-            "label": "Think about what made it easier there",
-            "title": "A clearer reason for the memory",
-            "result": "You notice the different expectations you had while away. Understanding them is more useful than demanding that every day feel like a trip.",
-            "journal": "I considered why I had slowed down more easily in {destination}."
+            "label": "Ask where they go for a pleasant walk",
+            "title": "An unexpected local recommendation",
+            "result": "They think hard, then point to a quiet little street you usually hurry past. You make a note of it. Your hometown has acquired a tiny itinerary.",
+            "journal": "I asked for a local walking suggestion after remembering my slower pace in {destination}."
           },
           {
             "id": "demand",
-            "label": "Expect the whole day to feel like a holiday",
-            "title": "An ordinary day receives an unfair brief",
-            "result": "The day continues containing ordinary responsibilities. The memory was offering a small idea, not a complete replacement.",
-            "journal": "I compared an ordinary day unfairly with my time in {destination}."
+            "label": "Explain that the walks were better in {destination}",
+            "title": "A demanding review of a pavement",
+            "result": "They suggest trying the next street. You continue comparing every ordinary corner with your holiday and enjoy none of them.",
+            "journal": "I spoiled a local walk by insisting it should feel like my visit to {destination}."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "travel-memory-worth-the-visit",
@@ -15112,8 +15125,8 @@
       "id": "travel-memory-imperfect-weather",
       "source": "src/game/content/travelMemoryStories.ts",
       "classification": "Improve",
-      "reason": "Mixed memories are a valid quiet beat; current outcomes remain abstract rather than show the disrupted day. Deferred.",
-      "changed": false,
+      "reason": "Makes the changed plans a memorable free button exhibition; enthusiasm, a balanced retelling and an inflated disaster story resolve differently.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "The weather declined the brochure",
@@ -15143,39 +15156,40 @@
         ]
       },
       "after": {
-        "title": "The weather declined the brochure",
-        "body": "You remember a day in {destination} when the weather changed your plans. The part you still talk about was not on the original itinerary.",
+        "title": "An emergency interest in buttons",
+        "body": "Rain in {destination} once drove you into a free exhibition about buttons. Your photo is captioned Highlight of the day. You are not entirely sure you were being sarcastic.",
         "choices": [
           {
             "id": "adaptation",
-            "label": "Remember the alternative you found",
-            "title": "A different good memory",
-            "result": "You recall the decision you made after the plan changed. The detour has become part of why you remember the day.",
-            "journal": "I remembered how I adapted to changed plans in {destination}."
+            "label": "Take another look at the button photos",
+            "title": "The ceremonial one holds up",
+            "result": "You enlarge a photograph of a particularly grand button. It really was impressive. You spend a cheerful minute remembering a day the brochure failed to predict.",
+            "journal": "I enjoyed remembering an unexpected button exhibition during a rainy day in {destination}."
           },
           {
             "id": "both",
-            "label": "Let the disappointment and enjoyment coexist",
-            "title": "The whole day gets to stay",
-            "result": "You keep both parts of the memory. An enjoyable ending does not require pretending the original disappointment never happened.",
-            "journal": "I let a mixed memory of {destination} stay mixed."
+            "label": "Admit the weather was awful and the buttons excellent",
+            "title": "An oddly persuasive travel story",
+            "result": "Your listener starts by laughing, then asks to see the ceremonial button. You explain that it was considerably larger than the everyday ones.",
+            "journal": "I told the whole story of a rainy day and an unexpectedly enjoyable exhibition in {destination}."
           },
           {
             "id": "rewrite",
-            "label": "Retell it as an entirely ruined day",
-            "title": "The story loses its better half",
-            "result": "You leave out the part you ended up enjoying. The stronger complaint makes the memory less true.",
-            "journal": "I exaggerated a weather-disrupted day in {destination} into a complete disaster."
+            "label": "Retell it as a brush with death",
+            "title": "The survivors demand context",
+            "result": "You call the exhibition an emergency shelter. Someone asks why your best photograph from the disaster is a nicely lit button.",
+            "journal": "I exaggerated a wet day in {destination} until my own photographs undermined the story."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "travel-memory-short-version",
       "source": "src/game/content/travelMemoryStories.ts",
       "classification": "Improve",
-      "reason": "Recognisable conversational mistake, but concise-versus-long choices are predictable and the destination has little concrete role. Deferred.",
-      "changed": false,
+      "reason": "Lets the actual friend impose a timer. A trailer, a three-word exchange and an endless suitcase explanation give concrete friendship payoffs.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "The short version of the trip",
@@ -15205,32 +15219,33 @@
         ]
       },
       "after": {
-        "title": "The short version of the trip",
-        "body": "{friend} asks for a quick memory from {destination}. You discover that the trip’s full history is already lining up behind your first sentence.",
+        "title": "The trip has a time limit",
+        "body": "{friend} asks for one highlight from {destination} and starts a sixty-second timer. They say your last quick story began with choosing a suitcase.",
         "choices": [
           {
             "id": "choose",
-            "label": "Choose one story with a clear ending",
-            "title": "A memory that fits the invitation",
-            "result": "{friend} enjoys the story and asks a question. Leaving room works better than compressing the entire trip into one breath.",
-            "journal": "I shared one short memory of {destination} with {friend}."
+            "label": "Give the trip a dramatic film trailer",
+            "title": "A sequel is requested",
+            "result": "“One traveller. One city. Several wrong turns.” {friend} asks what happened next before the timer goes off. You finally have permission to continue.",
+            "journal": "I gave {friend} a short, dramatic trailer for my trip to {destination}."
           },
           {
             "id": "ask",
-            "label": "Ask which part they are curious about",
-            "title": "An interested listener gets a choice",
-            "result": "You find out what they wanted to hear and start there. The rest can wait for another conversation.",
-            "journal": "I asked what {friend} wanted to know about {destination}."
+            "label": "Ask for a three-word challenge instead",
+            "title": "A very compact travel guide",
+            "result": "You offer “Beautiful, confusing, uphill.” {friend} asks whether that describes the trip or you. There is still time on the clock.",
+            "journal": "I traded three-word descriptions of my visit to {destination} with {friend}."
           },
           {
             "id": "complete",
-            "label": "Begin with the full departure chronology",
-            "title": "A quick question receives a documentary",
-            "result": "{friend} is still waiting for the memory by the time you finish describing how you packed.",
-            "journal": "I gave {friend} a much longer account of {destination} than they asked for."
+            "label": "Explain why the suitcase choice matters",
+            "title": "The extended luggage universe",
+            "result": "The timer rings before you reach the airport. {friend} asks whether the suitcase needs its own passport, then changes the subject.",
+            "journal": "I bored {friend} with luggage details instead of getting to my story about {destination}."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "later-retirement-assumption",
@@ -15360,8 +15375,8 @@
       "id": "later-forgotten-telephone-number",
       "source": "src/game/content/laterLifeStories.ts",
       "classification": "Improve",
-      "reason": "Recognisable memory quirk; results could end on a specific action rather than an anxiety lesson. Deferred.",
-      "changed": false,
+      "reason": "Replaces anxiety commentary with scissors, an intrusive advertising jingle and an out-of-service number. No illness or decline is invented.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "A number with nowhere to go",
@@ -15391,32 +15406,33 @@
         ]
       },
       "after": {
-        "title": "A number with nowhere to go",
-        "body": "You suddenly remember a telephone number you have not used for years. You cannot remember what you entered a room to fetch, but the number is perfect.",
+        "title": "The number will not leave",
+        "body": "You are looking for scissors when an old television jingle pops into your head, complete with its telephone number. Your memory has supplied a service nobody requested.",
         "choices": [
           {
             "id": "laugh",
-            "label": "Enjoy the memory’s strange priorities",
-            "title": "An impressive useless recital",
-            "result": "You repeat the number once and laugh at the timing. Memory has supplied an answer to a question nobody asked.",
-            "journal": "I remembered an old telephone number at an unhelpful moment."
+            "label": "Sing the jingle while you search",
+            "title": "An impressive advertising legacy",
+            "result": "You find the scissors halfway through the second chorus. You have never been less grateful to a catchy tune.",
+            "journal": "I found the scissors while singing an old advertising jingle I still remembered perfectly."
           },
           {
             "id": "pause",
-            "label": "Return calmly to the original task",
-            "title": "One thought at a time",
-            "result": "You retrace what you were doing instead of treating the distraction as an emergency.",
-            "journal": "I calmly retraced a small task after an odd memory interrupted it."
+            "label": "Write the number down and retrace your steps",
+            "title": "The notepad had the answer",
+            "result": "You write down the number, then lift the notepad to put it away. The scissors are underneath. Neither service required a telephone call.",
+            "journal": "I found missing scissors under the notepad I used to get an old number out of my head."
           },
           {
             "id": "panic",
-            "label": "Treat the distraction as a personal crisis",
-            "title": "A small lapse gets a large audience",
-            "result": "Worry fills the space where a simple pause might have helped. The old number remains unreasonably easy to remember.",
-            "journal": "I worried too much about a small distraction."
+            "label": "Ring the number and demand answers",
+            "title": "Customer services has left the century",
+            "result": "A recording says the number is out of service. The scissors have still not provided a statement.",
+            "journal": "I wasted time calling an old advertising number instead of finding the scissors."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "later-unfamiliar-word",
@@ -15546,8 +15562,8 @@
       "id": "later-photo-at-edge",
       "source": "src/game/content/laterLifeStories.ts",
       "classification": "Improve",
-      "reason": "Interesting image but little happens in any branch. Deferred.",
-      "changed": false,
+      "reason": "Gives the old photo a paper hat and urgent gesture, with an honest caption, a cake discovery and an implausible spy story as distinct endings.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "You are almost in the picture",
@@ -15577,39 +15593,40 @@
         ]
       },
       "after": {
-        "title": "You are almost in the picture",
-        "body": "An old photograph catches you at the edge of the frame, apparently concentrating on something outside it. You can no longer remember what seemed so important.",
+        "title": "A significant gesture",
+        "body": "An old group photo catches you leaning out of frame and pointing urgently at something. Everyone is wearing paper party hats. You look as though you are trying to alter the course of history.",
         "choices": [
           {
             "id": "accept",
-            "label": "Enjoy the unfinished little mystery",
-            "title": "A life outside the frame",
-            "result": "You let the unknown detail remain unknown. The photograph still holds an ordinary moment worth keeping.",
-            "journal": "I enjoyed an old photograph without solving every detail."
+            "label": "Keep it as proof you were mostly present",
+            "title": "An accurate historical record",
+            "result": "You caption it “Present, with reservations.” It becomes your favourite description of a party you can barely remember.",
+            "journal": "I gave an old party photo an honest caption instead of solving its mystery."
           },
           {
             "id": "recall",
-            "label": "Write down what you do remember",
-            "title": "Some details stay",
-            "result": "You record the clear parts without inventing an explanation for the rest.",
-            "journal": "I preserved the details I actually remembered from an old photograph."
+            "label": "Look through the rest of the photographs",
+            "title": "The urgency returns",
+            "result": "The next shot shows someone carrying away the last slice of cake. Suddenly you remember exactly what mattered that day.",
+            "journal": "I discovered that my urgent gesture in an old photo concerned the last slice of cake."
           },
           {
             "id": "invent",
-            "label": "Build a grand explanation around the pose",
-            "title": "A very ambitious caption",
-            "result": "You produce a story much more dramatic than the picture supports. It is entertaining as long as you remember it is a guess.",
-            "journal": "I invented an elaborate explanation for an old photograph."
+            "label": "Explain that you were giving a secret signal",
+            "title": "The disguise needs work",
+            "result": "Your account reaches “covert operation” before someone asks about the paper hat. You call it undercover attire. They stop asking about the mission.",
+            "journal": "I invented a secret mission to explain an odd pose in an old party photograph."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "later-offered-a-hand",
       "source": "src/game/content/laterLifeStories.ts",
       "classification": "Improve",
-      "reason": "Autonomy is worth retaining; current choices narrate the correct attitude too explicitly. Deferred.",
-      "changed": false,
+      "reason": "Makes the autonomy question a stubborn jar, so accepting, politely trying a cloth and snapping all have tangible reactions without an age-based judgement.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "Help has been offered",
@@ -15639,32 +15656,33 @@
         ]
       },
       "after": {
-        "title": "Help has been offered",
-        "body": "Someone offers a hand with a small practical task. You are not sure you need the help, but you notice yourself preparing a defence before considering the offer.",
+        "title": "The lid is winning",
+        "body": "You are struggling with a stubborn jar when someone offers to help. The lid has already survived your polite request and your less polite one.",
         "choices": [
           {
             "id": "accept",
-            "label": "Accept if the help would be useful",
-            "title": "A task shared",
-            "result": "You take the useful part of the offer without treating it as a judgement on everything you can do.",
-            "journal": "I accepted useful help with a small task."
+            "label": "Let them have a go",
+            "title": "A shared enemy",
+            "result": "They give it a confident twist. Nothing. You both agree the lid is unreasonable and keep trying together.",
+            "journal": "I accepted help with a stubborn jar and gained an ally against the lid."
           },
           {
             "id": "decline",
-            "label": "Politely decline and explain your preference",
-            "title": "A clear answer is enough",
-            "result": "They accept your answer. You keep your independence without having to turn kindness into an argument.",
-            "journal": "I declined an offer of help politely."
+            "label": "Politely try a tea towel first",
+            "title": "There was a system",
+            "result": "The lid finally gives. You explain that you had a system. They ask whether glaring at it for two minutes was part of the system.",
+            "journal": "I politely declined help and got a stubborn jar open with a tea towel."
           },
           {
             "id": "attack",
-            "label": "Treat the offer as an insult",
-            "title": "The task gains an argument",
-            "result": "The person withdraws the offer. You have defended your independence at the expense of an ordinary friendly exchange.",
-            "journal": "I reacted harshly to a well-meant offer of help."
+            "label": "Deliver a speech about unsolicited assistance",
+            "title": "An extremely independent jar",
+            "result": "They leave you to it. You announce “I can open a jar!” to a lid that is currently disproving you.",
+            "journal": "I snapped at someone offering help and stayed stuck with a stubborn jar."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "later-changed-favourite",
@@ -15732,8 +15750,8 @@
       "id": "later-recording-labelled-retro",
       "source": "src/game/content/laterLifeStories.ts",
       "classification": "Improve",
-      "reason": "Relatable ageing premise with one joke, but the first two payoffs are mostly commentary. Deferred.",
-      "changed": false,
+      "reason": "Uses a documentary’s grand description of a remote control to give familiarity, explanation and offended arithmetic their own payoffs.",
+      "changed": true,
       "stronger": false,
       "before": {
         "title": "The programme is now retro",
@@ -15763,32 +15781,33 @@
         ]
       },
       "after": {
-        "title": "The programme is now retro",
-        "body": "A recording you remember as ordinary entertainment is introduced as a fascinating example of a past era. The past era appears to have included your evenings.",
+        "title": "The domestic command device",
+        "body": "A documentary uses a programme you remember watching as “historical footage”. The narrator earnestly introduces its remote control as an early domestic command device.",
         "choices": [
           {
             "id": "enjoy",
-            "label": "Enjoy noticing what has changed",
-            "title": "An accidental historical perspective",
-            "result": "You spot details that once passed unnoticed. Familiarity gives you another way to watch it.",
-            "journal": "I enjoyed seeing an old programme presented as a period piece."
+            "label": "Watch your ordinary evenings become history",
+            "title": "An important era for channel changing",
+            "result": "You enjoy spotting details the narrator misses. Apparently the little lid that always fell off the remote was not important enough for the archives.",
+            "journal": "I enjoyed a documentary treating a familiar old programme as historical footage."
           },
           {
             "id": "share",
-            "label": "Describe one detail you remember clearly",
-            "title": "A small first-hand footnote",
-            "result": "You add a useful detail without trying to speak for everyone who was there.",
-            "journal": "I shared a specific memory of something now described as retro."
+            "label": "Explain what the remote actually did",
+            "title": "An expert is consulted",
+            "result": "You describe changing channels. Someone asks why it needed four buttons marked AV. You had been hoping nobody would ask.",
+            "journal": "I explained an old remote control while avoiding questions about its more mysterious buttons."
           },
           {
             "id": "protest",
-            "label": "Object to the entire concept of retro",
-            "title": "The era continues being earlier than now",
-            "result": "The label remains on the recording. Your objection has not moved the calendar backwards.",
-            "journal": "I took a retro label more personally than it deserved."
+            "label": "Object to calling any of this historical",
+            "title": "The narrator brings dates",
+            "result": "You insist it was not that long ago. The narrator announces the year. You begin an argument with their arithmetic.",
+            "journal": "I argued with a documentary for calling a familiar programme historical footage."
           }
         ]
-      }
+      },
+      "completedIn": "deferred-followup"
     },
     {
       "id": "later-another-year-question",
@@ -19820,5 +19839,33 @@
         ]
       }
     }
-  ]
+  ],
+  "followup": {
+    "baseline": "73e9f48b7acc2d19485f0934916b152b3f7cfb9f",
+    "retainedUpstream": "5a5902f383be2016f4b911bc0cff36b39511d409",
+    "events": 19,
+    "resultBranches": 57,
+    "ids": [
+      "wellbeing-search-results",
+      "wellbeing-other-peoples-progress",
+      "wellbeing-stretch-after-sitting",
+      "wellbeing-quiet-not-silent",
+      "wellbeing-waiting-without-feed",
+      "wellbeing-good-day-pressure",
+      "wellbeing-habit-one-miss",
+      "wellbeing-unhurried-breath",
+      "pet-cat-slow-blink",
+      "pet-rabbit-floor-level",
+      "pet-familiar-presence",
+      "hobby-gardening-labels",
+      "travel-memory-one-good-habit",
+      "travel-memory-imperfect-weather",
+      "travel-memory-short-version",
+      "later-forgotten-telephone-number",
+      "later-photo-at-edge",
+      "later-offered-a-hand",
+      "later-recording-labelled-retro"
+    ],
+    "scope": "Writing only; IDs, contexts, weights, effects and saved binding resolution are unchanged."
+  }
 }

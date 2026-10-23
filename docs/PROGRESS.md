@@ -1,5 +1,16 @@
 # Dreams: Life Simulator — progress and verification
 
+## Remaining 19 event rewrites — 23 October 2026
+
+Completed all 19 deferred Improve candidates, including 57 distinct choice
+payoffs and journal entries. The full audit now has 133 revised events and
+399 result branches, with no deferred candidates. This is writing only: IDs,
+eligibility, effects, RNG and existing saved words remain. All 57 original saved
+outcomes are byte-pinned through full-world hashes. Current markers remain
+World47 / engine49 / content26 / reader27 / SQLite v4. The upstream asset cleanup
+is retained. See [the follow-up writing](verification/event-writing/deferred-followup.md).
+
+
 ## Event and payoff writing — 23 October 2026
 
 Audited all 319 events; revised **114 situations and 342 choice payoffs**, including 27 priority consequence upgrades. The writing batch preserves existing IDs, saved words, UI, avatar V2 artwork and mini-games. Real local payments, bound trust, employment/friendship endings and public-image changes use validated immediate effects without new story arcs or writing RNG.

@@ -1,5 +1,16 @@
 # Continue Dreams: Life Simulator
 
+## Remaining 19 event rewrites — 23 October 2026
+
+Completed all 19 deferred Improve candidates, including 57 distinct choice
+payoffs and journal entries. The full audit now has 133 revised events and
+399 result branches, with no deferred candidates. This is writing only: IDs,
+eligibility, effects, RNG and existing saved words remain. All 57 original saved
+outcomes are byte-pinned through full-world hashes. Current markers remain
+World47 / engine49 / content26 / reader27 / SQLite v4. The upstream asset cleanup
+is retained. See [the follow-up writing](verification/event-writing/deferred-followup.md).
+
+
 ## Size cleanup — 23 October 2026
 
 Lossless PNG encoding, shared review snapshots, archived captures, compressed older records and cloud build exclusions reduce the project and app asset payload. Android release minification/resource shrinking are enabled. Current saves, fixtures, active source art, selected launcher icon and all gameplay/version markers remain intact. See [PROJECT_SIZE.md](PROJECT_SIZE.md) for measurements, verification and recovery commands. The latest Cult Leader and event-writing commits are retained.
