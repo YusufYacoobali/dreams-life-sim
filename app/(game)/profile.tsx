@@ -1,3 +1,4 @@
+import { activeCult } from '../../src/game/systems/cultSchemas';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Redirect, router, type Href } from 'expo-router';
@@ -35,6 +36,7 @@ function occupation(world: World): { label: string; href: Href } {
   if (activeSentence(world)) return { label: 'Prisoner', href: '/prison' };
   if (isConfined(world)) return { label: 'Held on remand', href: '/prison' };
   if (person.legal.wanted) return { label: 'Fugitive', href: '/criminal-record' };
+  if (activeCult(world)) return { label: 'Cult Leader', href: '/cult' };
   if (world.businesses.some(item => item.ownerId === person.id && item.status === 'active') && ageOn(person, world.date) >= 18) return { label: 'Business Owner', href: '/business' };
   if (world.musicReleases.some(item => item.personId === person.id && ['recording', 'paused'].includes(item.status))) return { label: 'Musician', href: '/music-studio' };
   if (world.elections.some(item => item.status === 'campaign' && item.candidates.some(candidate => candidate.personId === person.id && candidate.status === 'active'))) return { label: 'Political Candidate', href: '/politics' };

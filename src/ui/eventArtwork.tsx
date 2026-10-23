@@ -1,3 +1,4 @@
+import { CultArt, cultImages, type CultArtId } from '../assets/CultArt';
 import React from 'react';
 import type { World } from '../game/model';
 import type { Pending, StoryParticipant } from '../game/runtime';
@@ -87,6 +88,8 @@ for (const id of Object.keys(ordinaryHobbyIllustrations) as (keyof typeof ordina
 for (const id of travelArtIds) register(id,<TravelArt id={id} width={64} />,'travel');
 for (const id of Object.keys(schoolRects) as (keyof typeof schoolRects)[]) register(id,<SchoolArt id={id} size={64} />,'school');
 for (const item of assetCatalog) register(item.id,<CatalogArt id={item.id} size={64} />,item.id === 'engagement-ring' ? 'romance' : 'assets');
+
+for (const id of Object.keys(cultImages) as CultArtId[]) register(id === 'cult' ? 'cult' : 'cult-' + id, <CultArt id={id} size={64} />, 'career');
 
 const categoryArt: Record<EventCategory, string> = {
   romance:'hearts', family:'family-life', friendship:'friends', childhood:'toys', school:'school-life', surprise:'surprise', everyday:'everyday',

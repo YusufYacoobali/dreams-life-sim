@@ -1,3 +1,4 @@
+import { cultChoiceEffectSchema } from './systems/cultSchemas';
 import { z } from 'zod';
 import { hourlyTermsSchema } from './systems/hourlyWorkSchemas';
 import { skillIds } from './content/careers';
@@ -8,7 +9,7 @@ import { storyImmediateSchema } from './systems/storyImmediateSchemas';
 
 export const statKeys = ['happiness', 'health', 'smarts', 'looks', 'respect', 'energy', 'fitness', 'stress', 'discipline', 'fame'] as const;
 export const effectSchema = z.discriminatedUnion('kind', [
-  storyScheduleSchema, storyResolveSchema, dramaticEffectSchema, storyImmediateSchema,
+  cultChoiceEffectSchema, storyScheduleSchema, storyResolveSchema, dramaticEffectSchema, storyImmediateSchema,
   z.object({ kind: z.literal('job-interview'), personId: z.string(), roleId: z.string(), employer: z.string().min(1).max(160), annualPay: z.bigint().nonnegative(), hourly: hourlyTermsSchema.optional(), experience: interviewExperienceSchema.optional(), copyVersion: z.literal(18).optional(), answerId: z.enum(['careful', 'rush', 'avoid', 'withdraw']) }),
   z.object({ kind: z.literal('school-grade'), personId: z.string(), communityId: z.string(), delta: z.number().int().min(-100).max(100) }),
   z.object({ kind: z.literal('skill'), personId: z.string(), skill: z.enum(skillIds), delta: z.number().int().min(-100).max(100) }),

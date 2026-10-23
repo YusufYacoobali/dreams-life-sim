@@ -1,3 +1,5 @@
+import { CultArt } from '../../../src/assets/CultArt';
+import { activeCult } from '../../../src/game/systems/cultSchemas';
 import { activeTrip, physicalLocation } from '../../../src/game/systems/travelSchemas';
 import { publicRoyalDuty,royalMembership } from '../../../src/game/systems/royaltySchemas';
 import { royalTitle } from '../../../src/game/systems/royaltyMath';
@@ -34,7 +36,7 @@ function identityPresentation(world: World) {
   const player = world.people[world.activePersonId];
   const account = accountFor(world);
   const bankBalance = formatMoney({ minor: account.cash, currency: account.currency }, countries[player.country].locale);
-  const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
+  const occupation = activeSentence(world) ? 'Prisoner' : isConfined(world) ? 'Held on remand' : player.legal.wanted ? 'Fugitive' : activeCult(world) ? 'Cult Leader' : world.businesses.some(item => item.ownerId === player.id && item.status === 'active') && ageOn(player, world.date) >= 18 ? 'Business Owner' : world.musicReleases.some(item=>item.personId===player.id&&['recording','paused'].includes(item.status)) ? 'Musician' : world.elections.some(item=>item.status==='campaign'&&item.candidates.some(candidate=>candidate.personId===player.id&&candidate.status==='active')) ? 'Political Candidate' : publicRoyalDuty(world) ? royalTitle(world,publicRoyalDuty(world)!.house,player.id) : serviceCareer(world) ? serviceCatalog[serviceCareer(world)!.kind].title+(serviceQualified(serviceCareer(world)!)?'':' Trainee') : fullTimeCreator(world) ? creatorCatalog[fullTimeCreator(world)!.kind].title : player.employment ? jobs.find(role => role.id === player.employment!.roleId)?.title : player.education.stage !== 'none' ? 'Student' : ageOn(player, world.date) === 0 ? 'Newborn' : ageOn(player, world.date) < 18 ? 'Child' : player.finance.pensionAnnual > 0n ? 'Retired' : 'Unemployed';
   const membership = royalMembership(world), assignment = serviceAway(world);
   return {
     scope: [world.id, player.id, account.currency, world.date.year, world.date.month, world.date.day, player.born.year, player.born.month, player.born.day],
@@ -98,6 +100,7 @@ const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJourn
 
 function LifeContextIcon({ icon }: { icon:LifeContext['icon'] }) {
   const c = useColors();
+  if (icon.kind === 'cult') return <CultArt size={30} />;
   if (icon.kind === 'career') return <CareerArt id={icon.id} size={30} />;
   if (icon.kind === 'illustration') return <Illustration id={icon.id} size={30} />;
   if (icon.kind === 'legal') return <HealthLegalArt id={icon.id} size={30} />;

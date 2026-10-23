@@ -1,3 +1,8 @@
+import { cultCommandSchema, type CultCommand } from './systems/cultSchemas';
+import { resolveCult } from './systems/cults';
+import { cultMonth } from './systems/cultMonth';
+import { cultPersonDied } from './systems/cultLifecycle';
+import { resolveCultChoice } from './systems/cultEvents';
 import { miniGameCommandSchema, type MiniGameCommand } from '../minigames/core/types';
 import { resolveMiniGame } from '../minigames/core/session';
 import { activeMiniGame } from '../minigames/core/eligibility';
@@ -72,9 +77,9 @@ export { IneligibleAction } from './errors';
 
 const endLifeCommandSchema = z.object({ type: z.literal('end-life'), lifeId: z.string(), personId: z.string(), expectedRevision: z.number().int().nonnegative() }).strict();
 export type EndLifeCommand = z.infer<typeof endLifeCommandSchema>;
-export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand;
+export type GameCommand = { type: 'advance' } | { type: 'resume' } | { type: 'choose'; eventId: string; choiceId: string } | { type: 'acknowledge'; resultId: string } | EndLifeCommand | HobbyEventCommand | LeisureCommand | PetCommand | EducationCommand | WorkCommand | FinanceCommand | AssetCommand | MarketCommand | SocialCommand | FamilyCommand | EstateCommand | HealthCommand | LegalCommand | SocialMediaCommand | BusinessCommand | CareerCommand | MusicCommand | PoliticsCommand | CreatorCommand | ServiceCommand | RoyaltyCommand | TravelCommand | RelocationCommand | SchoolCommand | RecoveryCommand | ScholarshipCommand | WorkplaceCommand | FriendshipCommand | TeenRelationshipCommand | UniversityAdmissionCommand | CampusCommand | PersonSupportCommand | PersonActionCommand | MiniGameCommand | CultCommand;
 const commandOwners = new Map<string, z.ZodType>();
-for (const schema of [miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
+for (const schema of [cultCommandSchema, miniGameCommandSchema, personSupportCommandSchema, personActionCommandSchema, campusCommandSchema, universityAdmissionCommandSchema, teenRelationshipCommandSchema, friendshipCommandSchema, hobbyEventCommandSchema, workplaceCommandSchema, schoolCommandSchema, educationCommandSchema, recoveryCommandSchema, scholarshipCommandSchema, workCommandSchema, financeCommandSchema, assetCommandSchema, marketCommandSchema, socialCommandSchema, familyCommandSchema, estateCommandSchema, healthCommandSchema, legalCommandSchema, socialMediaCommandSchema, businessCommandSchema, careerCommandSchema, musicCommandSchema, politicsCommandSchema, creatorCommandSchema, serviceCommandSchema, royaltyCommandSchema, travelCommandSchema, leisureCommandSchema, petCommandSchema, relocationCommandSchema]) {
   for (const option of schema.options) {
     const type = option.shape.type.value;
     if (commandOwners.has(type)) throw new Error('Duplicate game command: ' + type);
@@ -110,6 +115,7 @@ export function recordDeath(world: World, personId: string, cause: string) {
   refreshTrips(world);
   refreshSchools(world);
   person.health.hospitalizedUntil = null;
+  cultPersonDied(world, personId);
   legalDeath(world, person);
   socialDeath(world, person);
   recordFamilyDeath(world, personId);
@@ -158,6 +164,7 @@ function processMonth(world: World) {
   const openingCash = new Map<string, bigint>();
   for (const person of actors) { settleBackground(world, person, world.date.year * 12 + world.date.month - 2); openingCash.set(person.id, accountFor(world, person).cash); }
   businessMonth(world);
+  cultMonth(world);
   for (const person of actors) workMonth(world, person);
   careerTrainingMonth(world);
   athleteDopingMonth(world);
@@ -247,6 +254,7 @@ function continueYear(world: World) {
 function applyEffects(world: World, effects: Effect[], relationshipLabels?: BoundChoice['relationshipLabels']): z.infer<typeof effectRowSchema>[] {
   return effects.flatMap((effect, index) => {
     if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
+    if (effect.kind === 'cult-choice') return resolveCultChoice(world, effect);
     if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
@@ -371,6 +379,7 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     else if (world.annual && !world.annual.pausedForPlanning) continueYear(world);
   } else {
     if (world.pending || world.annual && !world.annual.pausedForPlanning) throw new IneligibleAction('Finish the current event first');
+    const cult = parseActivity(cultCommandSchema, command);
     const support = parseActivity(personSupportCommandSchema, command);
     const personAction = parseActivity(personActionCommandSchema, command);
     const campus = parseActivity(campusCommandSchema, command);
@@ -404,7 +413,8 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const leisure = parseActivity(leisureCommandSchema, command);
     const pet = parseActivity(petCommandSchema, command);
     const relocation=parseActivity(relocationCommandSchema, command);
-    if (support.success) resolvePersonSupport(world, support.data);
+    if (cult.success) resolveCult(world, cult.data);
+    else if (support.success) resolvePersonSupport(world, support.data);
     else if (personAction.success) resolvePersonAction(world, personAction.data);
     else if (campus.success) resolveCampus(world, campus.data);
     else if (teenRelationship.success) resolveTeenRelationship(world, teenRelationship.data);

@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { petMoveCost, relocatePets } from './pets';
 import { z } from 'zod';
 import { ageOn, compareDates, fullName, Person, World } from '../model';
@@ -41,6 +42,7 @@ const applicationKey = (world: World, choice: RelocationChoice) => active(world)
 const consentKey = (world: World, personId: string, childId: string) => world.activePersonId + ':move-consent:' + world.date.year + ':' + personId + ':' + childId;
 
 function personalMoveReason(world: World, person: Person): string | undefined {
+  if (activeCult(world, person.id)) return 'Disband your local cult before moving abroad';
   if (person.died || isConfined(world, person) || person.legal.wanted) return 'Moving requires being alive, outside custody and free of active pursuit';
   if (activeTrip(world, person.id) || serviceAway(world, person.id)) return 'Return from the trip or assignment before moving';
   if (hospitalized(world, person) || person.stats.health < 35) return 'Recover your health before moving';

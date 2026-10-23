@@ -1,3 +1,5 @@
+import { cultSchema } from './systems/cultSchemas';
+import { validateCults } from './systems/cultValidation';
 import { miniGameSessionSchema } from '../minigames/core/types';
 import { validateMiniGames } from '../minigames/core/validation';
 import { validateAnnualPacing } from './annualPacing';
@@ -121,7 +123,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(46), engineVersion: z.literal(48), contentVersion: z.literal(25),
+  schemaVersion: z.literal(47), engineVersion: z.literal(49), contentVersion: z.literal(26),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -149,6 +151,7 @@ export const worldSchema = z.object({
   deferred: z.array(z.object({ priority: z.number().int().min(0).max(200), event: pendingSchema })),
   incidents: z.array(incidentSchema), cases: z.array(caseSchema), sentences: z.array(sentenceSchema), remand: z.array(remandSchema), contraband: z.array(contrabandSchema), gangs: z.array(gangSchema),
   socialAccounts: z.array(socialAccountSchema), sponsorships: z.array(sponsorshipSchema), controversies: z.array(controversySchema), collaborations: z.array(collaborationSchema), socialFollows: z.array(followSchema),
+  cults: z.array(cultSchema).max(128),
   businesses: z.array(businessSchema), businessLedger: z.array(businessTransactionSchema), businessPayables: z.array(businessPayableSchema),
   careers: z.array(careerSchema), miniGames: z.array(miniGameSessionSchema),
   musicReleases: z.array(musicReleaseSchema),
@@ -371,6 +374,7 @@ export function validateWorld(value: unknown, immutable = false): World {
   validateStoryThreads(world, ledger);
   validateRelocations(world, ledger);
   validateMiniGames(world);
+  validateCults(world, ledger);
   validateCareers(world);
   validateMusic(world, ledger);
   validatePolitics(world, ledger);
@@ -681,10 +685,17 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   if (parsed && parsed.schemaVersion === 44 && parsed.engineVersion === 46 && parsed.contentVersion === 23) {
     parsed.schemaVersion = 45; parsed.engineVersion = 47; parsed.contentVersion = 24;
   }
-  // Revised story writing and immediate consequences apply only to newly bound
-  // choices. Stored words, effects, history, identities and RNG stay literal.
+  // Revised writing and cult leadership both started independently at this
+  // tuple. Their already-bound words, effects, identities and RNG stay literal.
   if (parsed && parsed.schemaVersion === 45 && parsed.engineVersion === 47 && parsed.contentVersion === 24) {
     parsed.schemaVersion = 46; parsed.engineVersion = 48; parsed.contentVersion = 25;
+  }
+  // Writing46 omitted cults; the independently published Cult46 contains it.
+  // Add only the absent prospective history. Present records (or corruption)
+  // must pass through unchanged for the current validator to assess.
+  if (parsed && parsed.schemaVersion === 46 && parsed.engineVersion === 48 && parsed.contentVersion === 25) {
+    if (!Object.prototype.hasOwnProperty.call(parsed, 'cults')) parsed.cults = [];
+    parsed.schemaVersion = 47; parsed.engineVersion = 49; parsed.contentVersion = 26;
   }
   return validateWorld(parsed, immutable);
 }

@@ -7,11 +7,11 @@ test('an arranged World42 boundary adds only empty future histories and current 
   // Only this explicitly arranged envelope represents the prior World42 reader.
   const raw = JSON.parse(encodeWorld(decodeWorld(JSON.stringify(graduate))));
   raw.schemaVersion = 42; raw.engineVersion = 44; raw.contentVersion = 21;
-  expect(raw.miniGames).toEqual([]); delete raw.miniGames;
+  expect(raw.cults).toEqual([]); delete raw.cults; expect(raw.miniGames).toEqual([]); delete raw.miniGames;
   delete raw.personSupportRequests; delete raw.personActionHistory;
   const original = JSON.stringify(raw), restored = decodeWorld(original, true);
   expect(JSON.parse(encodeWorld(restored))).toEqual({
-    ...raw, schemaVersion: 46, engineVersion: 48, contentVersion: 25,
+    ...raw, schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [],
     personSupportRequests: [], personActionHistory: [], miniGames: [],
   });
   expect(JSON.stringify(raw)).toBe(original);

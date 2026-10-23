@@ -43,8 +43,13 @@ mini-games are unchanged.
 
 ## Saves
 
-Current markers are **World46 / engine48 / content25 / reader26 / SQLite v4**.
-World45 and reader13–25 upgrades change markers only. Existing decisions,
+Combined markers are **World47 / engine49 / content26 / reader27 / SQLite v4**.
+The concurrently published Cult Leader career is retained. Both branches used
+World46 / engine48 / content25 independently; migration preserves existing cult
+records and adds an empty cult collection only when the writing-branch save has
+no such field. Present malformed data is rejected rather than replaced. Earlier
+World45 saves gain the same empty collection. Reader13–26 upgrades change only
+the database marker. Existing decisions,
 results, journal entries, history, quotes, choices and random streams remain
 literal. Earlier migrations retain their established policy.
 
@@ -54,10 +59,40 @@ identical domain state and RNG. Genuine previous-commit fixtures exercise both
 this and the replaced queue-merge story. Existing historical fixture bytes,
 canonical hashes and original eligibility digest are preserved.
 
+## Natural journal review
+
+[Read the 36 complete recorded lives](natural-lives/index.html), or inspect the
+[summary and individual JSON journals](lifetime-summary.json). The existing
+lifetime test always takes the first available choice without manually creating
+employment, relationships or hobbies. Across 12 countries and all three genders,
+these lives contain 2,581 decisions, including 596 revised-story encounters and
+40 different rewritten situations. Every life completed, with no ordinary
+five-year cooldown violation, unresolved binding token or missing nonfatal result.
+Focused context and branch tests cover alternatives and careers/relationships
+that this passive strategy does not create.
+
+The evidence records runtime `42edd00` verbatim. It exposed ambiguous names in
+two existing project callbacks and a debt warning on genuinely free medical
+care. Later prospective copy fixes distinguish the actual teacher/classmate and
+describe zero patient charges accurately. Stored pending text and these original
+captures are preserved. A separate review of the concurrent career's 28 scenes
+and 84 payoffs found an entrusted mug-business role incorrectly called a
+broadcast in a later callback; its new binding copy now fits both roles.
+
+Medical emergencies remain frequent for untreated chronic illness in the passive
+strategy: 641 of 2,094 adult decisions. They reflect the existing health rules,
+not new authored event chains. This writing batch does not change disease
+progression or suppress genuine health decisions.
+
 ## Verification
 
-Focused event, consequence, legacy-copy and SQLite rollback/retry checks pass.
-Strict app/test types and the 473-module import check pass. The full regression
-and natural lifetime journal review will be recorded after the final source
-freeze. No native-device or new visual-layout acceptance is claimed for this
-writing and domain-effect batch.
+The writing-only full regression at `42edd00` covered all 294 suites / 4,013 tests;
+three UI cases expected old labels. Those expectations were corrected while
+retaining their rollback, retry and cold-save assertions, and all 80 affected
+checks passed. The final combined regression and strict types/import checks are
+recorded after integration with the concurrent career.
+
+The searchable editorial report was rendered and checked at 390px and 1440px,
+including all 114 stories and search filtering. These are report checks, not
+native game screenshots. No native-device or new visual-layout acceptance is
+claimed for this writing and domain-effect batch.

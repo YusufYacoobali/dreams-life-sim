@@ -13,10 +13,10 @@ import prior from '../fixtures/v45-content24-immediate-before.json';
 
 const raw = (checkpoint: string) => { const frame = JSON.parse(checkpoint); return JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.data, 'base64')))); };
 
-test('genuine 45/47/content24 pending decision and every old result migrate only markers and keep the literal prior resolver outcome', () => {
+test('genuine 45/47/content24 pending decision and every old result gain only empty cult history and markers and keep the literal prior resolver outcome', () => {
   expect(prior.sourceCommit).toBe('da0b0e5'); const original = raw(prior.checkpoint), migrated = unpackCheckpoint(prior.checkpoint, true), restored = unpackCheckpoint(packCheckpoint(migrated), true);
   expect(original).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
-  const expected = { ...original, schemaVersion: 46, engineVersion: 48, contentVersion: 25 };
+  const expected = { ...original, schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [] };
   expect(JSON.parse(encodeWorld(restored))).toEqual(expected); expect(JSON.parse(encodeWorld(decodeWorld(JSON.stringify(original))))).toEqual(expected);
   expect(restored.pending).toEqual(migrated.pending); expect(restored.random).toEqual(migrated.random);
   if (restored.pending?.kind !== 'decision') throw new Error('Missing old decision');
@@ -25,7 +25,7 @@ test('genuine 45/47/content24 pending decision and every old result migrate only
   for (const outcome of prior.results) {
     const saved = unpackCheckpoint(outcome.checkpoint, true), selected = resolveCommand(restored, { type: 'choose', eventId: restored.pending.id, choiceId: outcome.choiceId }, true);
     expect(encodeWorld(selected)).toBe(encodeWorld(saved)); expect(saved.pending).toEqual(selected.pending); expect(saved.journal).toEqual(selected.journal); expect(saved.random).toEqual(selected.random);
-    expect(JSON.parse(encodeWorld(saved))).toEqual({ ...raw(outcome.checkpoint), schemaVersion: 46, engineVersion: 48, contentVersion: 25 });
+    expect(JSON.parse(encodeWorld(saved))).toEqual({ ...raw(outcome.checkpoint), schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [] });
   }
 });
 
@@ -35,14 +35,14 @@ test('reader25 upgrades only its marker and Age Up archives the exact packed47/c
   sqlite.prepare('UPDATE lives SET payload=? WHERE id=?').run(prior.finishedCheckpoint, world.id); sqlite.prepare('UPDATE backups SET payload=? WHERE life_id=?').run(prior.finishedCheckpoint, world.id); sqlite.exec('PRAGMA user_version=25');
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   const beforeRows = rows(); await new SaveRepository(driver).initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(26); expect(rows()).toEqual(beforeRows);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(27); expect(rows()).toEqual(beforeRows);
   const store = createGameStore({ repository: async () => new SaveRepository(driver), date: () => world.date, id: () => 'unused' }); await store.getState().bootstrap();
   expect(encodeWorld(store.getState().world!)).toBe(encodeWorld(world)); expect(rows()).toEqual(beforeRows);
   expect(await store.getState().dispatch({ type: 'advance' })).toBe(true);
   const archive = JSON.parse(await repository.export(world.id)), snapshot = archive.snapshots[0];
   expect(snapshot.payload).toBe(prior.finishedCheckpoint); expect(raw(snapshot.payload)).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
   expect(decodeSave(JSON.stringify(archive)).snapshots[0]).toEqual(snapshot);
-  expect(store.getState().world).toMatchObject({ schemaVersion: 46, engineVersion: 48, contentVersion: 25 });
+  expect(store.getState().world).toMatchObject({ schemaVersion: 47, engineVersion: 49, contentVersion: 26 });
   sqlite.close();
 });
 

@@ -66,10 +66,10 @@ test('import refuses invalid versions, dangling people, corrupt money and silent
 
 test('newer database versions are refused without resetting their version marker', async () => {
   const { sqlite, driver } = database();
-  sqlite.exec('PRAGMA user_version=27');
+  sqlite.exec('PRAGMA user_version=28');
   const repository = new SaveRepository(driver);
   await expect(repository.initialise()).rejects.toThrow('newer version');
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(27);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(28);
   sqlite.close();
 });
 
@@ -82,11 +82,11 @@ test('a version-one database and actual previous-version save migrate without da
   const repository = new SaveRepository(driver);
   await repository.initialise();
   const restored = (await repository.active())!;
-  expect(restored.schemaVersion).toBe(46);
+  expect(restored.schemaVersion).toBe(47);
   expect(restored.random).toEqual(legacyFixture.random);
   for (const person of Object.values(legacyFixture.people)) expect(restored.people[person.id]).toMatchObject(person);
   expect((await repository.recoveryPreview(restored.id)).accounts).toEqual(restored.accounts);
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(26);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(27);
   sqlite.close();
 });
 
@@ -110,7 +110,7 @@ test('corrupt checkpoints require explicit recovery and never overwrite the prev
 
 test('version-two pending results migrate with their committed effects, identities and random streams intact', () => {
   const world = decodeWorld(JSON.stringify(birthdayFixture));
-  expect(world.schemaVersion).toBe(46);
+  expect(world.schemaVersion).toBe(47);
   expect(world.pending).toEqual(birthdayFixture.pending);
   expect(world.random).toEqual(birthdayFixture.random);
   expect(world.eventHistory).toEqual(birthdayFixture.eventHistory);

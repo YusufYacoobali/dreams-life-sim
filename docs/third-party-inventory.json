@@ -23,7 +23,7 @@
     "readableNoticeFiles": 735,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1169
+    "projectArtFiles": 1181
   },
   "directDependencies": [
     {
@@ -27164,6 +27164,114 @@
       "sha256": "ef218bb0e22cf785de28a550ab5909bba2512082a7b71f3c5aaeb448bda4296c",
       "referencedBy": [
         "src/assets/CatalogArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/ceremony.png",
+      "status": "present",
+      "bytes": 74877,
+      "sha256": "565a0b7871648206d85a8f10570a9bf124d05fa77108ea3d32af581124c1b3a4",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/claim.png",
+      "status": "present",
+      "bytes": 64107,
+      "sha256": "895e91b235aabed016c6bf79363a4c7d4bbdc7fd9fa07b7856cfe088b7d4e4e7",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/cult.png",
+      "status": "present",
+      "bytes": 72135,
+      "sha256": "7b651a8d244b90711af88dabe2afe5538bcca3651c2fdca0a005edce4170b7b8",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/doctrines.png",
+      "status": "present",
+      "bytes": 70361,
+      "sha256": "187999af87aea768e158dc3d54e53c88865f6cc759fd715580c7beef9c683550",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/followers.png",
+      "status": "present",
+      "bytes": 74846,
+      "sha256": "c8727b56b72eb02063d85ed20e1754838418c744f73161464b38455c7a0a8932",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/headquarters.png",
+      "status": "present",
+      "bytes": 75958,
+      "sha256": "9d516f0a0a161803be87d170ce6f11f9cdad9b3bc369062def9b00c90a3c1321",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/philosophy.png",
+      "status": "present",
+      "bytes": 75225,
+      "sha256": "c4e9a1e4497369765ae80d03675d35889bd668d63ff934189708d2196188a71e",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/recruitment.png",
+      "status": "present",
+      "bytes": 70553,
+      "sha256": "c9027bf532332764e237075ae45a8c5bef71e4b68e4e634ba12466e4302f58dc",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/rivalry.png",
+      "status": "present",
+      "bytes": 73598,
+      "sha256": "2fbadd20a9cd9844ed610fa5c97cf8ee99c7c800eb589235d0584272c3c702d0",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/rules.png",
+      "status": "present",
+      "bytes": 56288,
+      "sha256": "fa5fb24d9b3409b142276d01ee487e20d8d67da437d9a4021af9652e2bf8c653",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/scandal.png",
+      "status": "present",
+      "bytes": 72232,
+      "sha256": "ec83a9c9651a39c5e92d475bd8e779ed8d7ecba6c3c0ec5c94fe3db9224e0e2c",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult/treasury.png",
+      "status": "present",
+      "bytes": 76121,
+      "sha256": "255a9a25c84c0572bdff2f5a97ecbac45de9b8074a35bc89659bb8eab554aa8e",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
       ]
     },
     {

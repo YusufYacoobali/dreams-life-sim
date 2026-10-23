@@ -11,7 +11,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import { athleteFixture, miniGameFixture, nextMatchPeriod, startMiniGame } from '../support/miniGames';
 import graduate from '../fixtures/v3-employed-graduate.json';
 
-const markers = { schemaVersion:46, engineVersion:48, contentVersion:25 };
+const markers = { schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [] };
 const rawWorld = (world:World):Record<string,any> => JSON.parse(encodeWorld(world));
 const acknowledge = (world:World) => world.pending?.kind==='result'
   ? resolveCommand(world,{type:'acknowledge',resultId:world.pending.id}) : world;
@@ -53,7 +53,7 @@ test.each(['empty','active','completed','applied'] as const)('published 42/44/co
   const original=gameWorld(state),raw=rawWorld(original);
   // These are arranged published envelopes around normal, validated sessions.
   // The independent mini-game reader had none of the polish histories.
-  Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});
+  Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});delete raw.cults;
   delete raw.rentalLeases;delete raw.personSupportRequests;delete raw.personActionHistory;
   const before=JSON.stringify(raw),restored=decodeWorld(before,true);
   expect(rawWorld(restored)).toEqual({...raw,...markers,rentalLeases:[],personSupportRequests:[],personActionHistory:[]});
@@ -68,7 +68,7 @@ test.each(['empty','active','completed','applied'] as const)('published 42/44/co
 });
 
 function publishedBurglary(world:World) {
-  const raw=rawWorld(world);Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});
+  const raw=rawWorld(world);Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});delete raw.cults;
   delete raw.rentalLeases;delete raw.personSupportRequests;delete raw.personActionHistory;
   return decodeWorld(JSON.stringify(raw),true);
 }
@@ -109,7 +109,7 @@ test('a completed published burglary retains its score, paid proceeds and applie
 
 test('own 42/44/content21 keeps earned leases and adds only empty support/actions and mini-games',()=>{
   const original=leasedWorld(),raw=rawWorld(original);
-  Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:21});
+  Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:21});delete raw.cults;
   delete raw.miniGames;delete raw.personSupportRequests;delete raw.personActionHistory;
   const before=JSON.stringify(raw),restored=decodeWorld(before,true);
   expect(original.rentalLeases).toHaveLength(1);
@@ -120,7 +120,7 @@ test('own 42/44/content21 keeps earned leases and adds only empty support/action
 
 test('own 43/45/content22 preserves saved loan offers, actions and lease payments while adding only empty mini-games',()=>{
   const original=supportAndLeaseWorld(),raw=rawWorld(original);
-  Object.assign(raw,{schemaVersion:43,engineVersion:45,contentVersion:22});delete raw.miniGames;
+  Object.assign(raw,{schemaVersion:43,engineVersion:45,contentVersion:22});delete raw.cults;delete raw.miniGames;
   const before=JSON.stringify(raw),restored=decodeWorld(before,true);
   expect(original.rentalLeases).toHaveLength(1);expect(original.personActionHistory).toHaveLength(1);
   expect(original.personSupportRequests[0]).toMatchObject({outcome:'loan-offered',status:'offered'});
@@ -150,13 +150,13 @@ test('own 44/46/content23 retains nonempty support, action and lease histories w
   expect(rawWorld(restored)).toEqual({...raw,...markers});expect(JSON.stringify(raw)).toBe(before);
 });
 
-test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 46/48/content25 rejects a missing required %s history',key=>{
+test.each(['miniGames','rentalLeases','personSupportRequests','personActionHistory'] as const)('current 47/49/content26 rejects a missing required %s history',key=>{
   const raw=rawWorld(decodeWorld(JSON.stringify(graduate)));delete raw[key];
   expect(()=>decodeWorld(JSON.stringify(raw))).toThrow();
 });
 
 test.each(['missing','null','object'] as const)('published 42/44/content20 rejects %s mini-game history instead of taking the rental migration',kind=>{
-  const raw=rawWorld(gameWorld('empty'));Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});
+  const raw=rawWorld(gameWorld('empty'));Object.assign(raw,{schemaVersion:42,engineVersion:44,contentVersion:20});delete raw.cults;
   delete raw.rentalLeases;delete raw.personSupportRequests;delete raw.personActionHistory;
   if(kind==='missing')delete raw.miniGames;else raw.miniGames=kind==='null'?null:{};
   expect(()=>decodeWorld(JSON.stringify(raw))).toThrow(/Mini-game save is missing its session history/);

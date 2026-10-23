@@ -2,7 +2,26 @@
 
 ## Event and payoff writing — 23 October 2026
 
-Audited all319 events; revised114 situations/payoffs (342 result branches), including27 priority consequence upgrades. Original IDs, saved text, UI, avatar V2 and mini-games remain. New immediate effects quote real local payments and apply actual trust, job, friendship and public-image changes without new arcs or writing RNG. Current markers are **World46 / engine48 / content25 / reader26 / v4**. See [the editorial review and verification](verification/event-writing/README.md). Focused checks and types/imports pass; final full regression and natural-life journal review follow the source freeze.
+Audited all 319 events; revised 114 situations/payoffs (342 result branches), including 27 priority consequence upgrades. Original IDs, saved text, UI, avatar V2 and mini-games remain. New immediate effects quote real local payments and apply actual trust, job, friendship and public-image changes without new arcs or writing RNG. Combined markers are **World47 / engine49 / content26 / reader27 / v4**, preserving both published Cult Leader saves and the writing branch. See [the editorial review and verification](verification/event-writing/README.md). Focused checks and types/imports pass; final full regression and natural-life journal review follow the source freeze.
+
+## Cult Leader — 23 October 2026
+
+Cult Leader is implemented as an independent special career over the integrated
+Polish 3 source `da0b0e5`. It includes eight philosophies, 28 doctrines, 28 rules,
+18 delayed claims, 28 authored situations, actual inner-circle people, rivalries,
+public scandals, five headquarters tiers, six upgrades and a separate communal
+treasury. Only the dashboard and headquarters are management routes; other
+actions use Dreams' normal popups. See [the feature guide](CULT_LEADER.md) and
+[verification](verification/cult-career/README.md).
+
+Current markers are **World 46 / engine 48 / content 25 / reader 26 / database v4**.
+The genuine Polish 3 World 45 migration, prior saves, recorded appearances and
+mini-games remain supported. Runtime is frozen at `4b65c3a`; focused gameplay,
+UI and migration checks, strict types, the 484-module import graph and Android/iOS
+exports pass. The complete regression passed **291 suites / 3,919 tests**;
+the **120-life soak** also passed. Browser review is recorded separately from native-device acceptance, which remains pending.
+Earlier sections below describe their historical source snapshots.
+
 
 ## Dreams Polish 3 — 23 October 2026
 

@@ -1,5 +1,16 @@
 # Original game artwork
 
+## Cult Leader career — 23 October 2026
+
+The twelve transparent illustrations in [cult/](cult/README.md) were generated
+with Image Gen, matching the existing blue/gold career family. The unchanged
+source is retained outside the runtime bundle; the local derivatives total
+less than 850 KB. The source rectangles and hashes are in
+[the manifest](cult/manifest.json). Krea was not used. Cult management and event
+popups use these bundled images; named followers retain real character
+portraits. See [the feature verification](../../docs/verification/cult-career/README.md)
+for browser review and export scope.
+
 school-atlas.png was generated on 19 October 2026 as an original six-subject
 school/evening-study family. The unmodified 1536×1024 RGBA original remains at
 /workspace/generated_images/exec-535e69eb-34ca-4425-b0a2-15d73d4b8cc9.png.

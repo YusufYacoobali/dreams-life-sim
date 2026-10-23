@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-23",
+  "generator": "Image Gen",
+  "source": "exec-0986981b-c4a9-4617-b16a-3e6ace2d6e3c.png",
+  "sourceSha256": "27e716fa2a8709d94982476d980c4e940d19a9756927f10f7f2e2f4d14d70a53",
+  "runtimeBytes": 856301,
+  "files": [
+    {
+      "file": "cult.png",
+      "crop": "355x350+5+10",
+      "bytes": 72135,
+      "sha256": "7b651a8d244b90711af88dabe2afe5538bcca3651c2fdca0a005edce4170b7b8"
+    },
+    {
+      "file": "philosophy.png",
+      "crop": "350x350+375+10",
+      "bytes": 75225,
+      "sha256": "c4e9a1e4497369765ae80d03675d35889bd668d63ff934189708d2196188a71e"
+    },
+    {
+      "file": "doctrines.png",
+      "crop": "350x350+738+10",
+      "bytes": 70361,
+      "sha256": "187999af87aea768e158dc3d54e53c88865f6cc759fd715580c7beef9c683550"
+    },
+    {
+      "file": "rules.png",
+      "crop": "295x350+1130+10",
+      "bytes": 56288,
+      "sha256": "fa5fb24d9b3409b142276d01ee487e20d8d67da437d9a4021af9652e2bf8c653"
+    },
+    {
+      "file": "recruitment.png",
+      "crop": "352x315+5+365",
+      "bytes": 70553,
+      "sha256": "c9027bf532332764e237075ae45a8c5bef71e4b68e4e634ba12466e4302f58dc"
+    },
+    {
+      "file": "followers.png",
+      "crop": "370x308+360+397",
+      "bytes": 74846,
+      "sha256": "c8727b56b72eb02063d85ed20e1754838418c744f73161464b38455c7a0a8932"
+    },
+    {
+      "file": "ceremony.png",
+      "crop": "360x354+733+359",
+      "bytes": 74877,
+      "sha256": "565a0b7871648206d85a8f10570a9bf124d05fa77108ea3d32af581124c1b3a4"
+    },
+    {
+      "file": "treasury.png",
+      "crop": "350x320+1092+378",
+      "bytes": 76121,
+      "sha256": "255a9a25c84c0572bdff2f5a97ecbac45de9b8074a35bc89659bb8eab554aa8e"
+    },
+    {
+      "file": "headquarters.png",
+      "crop": "355x370+0+678",
+      "bytes": 75958,
+      "sha256": "9d516f0a0a161803be87d170ce6f11f9cdad9b3bc369062def9b00c90a3c1321"
+    },
+    {
+      "file": "rivalry.png",
+      "crop": "365x325+364+718",
+      "bytes": 73598,
+      "sha256": "2fbadd20a9cd9844ed610fa5c97cf8ee99c7c800eb589235d0584272c3c702d0"
+    },
+    {
+      "file": "scandal.png",
+      "crop": "365x340+729+715",
+      "bytes": 72232,
+      "sha256": "ec83a9c9651a39c5e92d475bd8e779ed8d7ecba6c3c0ec5c94fe3db9224e0e2c"
+    },
+    {
+      "file": "claim.png",
+      "crop": "350x350+1093+705",
+      "bytes": 64107,
+      "sha256": "895e91b235aabed016c6bf79363a4c7d4bbdc7fd9fa07b7856cfe088b7d4e4e7"
+    }
+  ]
+}

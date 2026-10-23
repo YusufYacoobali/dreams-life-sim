@@ -1,3 +1,4 @@
+import { activeCult } from './cultSchemas';
 import { consumeMiniGameModifier } from '../../minigames/core/modifiers';
 import { activeTrip } from './travelSchemas';
 import { newWorkEarnings } from './earningsSchemas';
@@ -34,6 +35,7 @@ export const serviceCommandSchema=z.discriminatedUnion('type',[
 export type ServiceCommand=z.infer<typeof serviceCommandSchema>;
 export function servicePayQuote(world:World,kind:ServiceKind,rank?:number){const person=active(world),prior=world.serviceCareers.find(item=>item.personId===person.id&&item.kind===kind),definition=serviceCatalog[kind],level=rank??(prior&&serviceQualified(prior)?Math.max(1,prior.rank):0),bps=level?definition.qualifiedBps:definition.traineeBps;return roundRatio(rules[person.country].baseWage*BigInt(bps)*BigInt(100+Math.max(0,level-1)*25),1000000n);}
 export function serviceSelectionReason(world:World,kind:ServiceKind):string|undefined{
+  if (activeCult(world)) return 'Disband your cult before taking another full-time commitment';
  if(activeTrip(world))return 'Return from your trip before applying to a service programme';
  const person=active(world),definition=serviceCatalog[kind],prior=world.serviceCareers.find(item=>item.personId===person.id&&item.kind===kind),age=ageOn(person,world.date),maximum=prior&&serviceQualified(prior)?definition.maxAge:definition.maxEntryAge;
  if(age<definition.minAge||age>maximum)return 'Available at ages '+definition.minAge+'–'+maximum;
