@@ -50,16 +50,16 @@ test('failed startup exposes a live alert; retry disables opening controls and l
     const view = render(frame(<Welcome />)); expectAlert('Could not open saved lives. Please try again.');
     expect(screen.getByRole('button', { name: 'Try Again' })).toBeEnabled();
     const release = context.pauseNextSave(); await press('Try Again'); expect(mockStore.getState().busy).toBe(true);
-    for (const name of ['Start Your Life', 'Random Life', 'Saved Lives']) {
+    for (const name of ['Start New Life', 'Random Life']) {
       const control = screen.getByRole('button', { name }); expect(control).toBeDisabled(); expect(control).toHaveProp('accessibilityState', { disabled: true });
       await press(name);
     }
     expect(router.push).not.toHaveBeenCalled(); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
     expect(screen.queryByRole('alert')).toBeNull(); expect(world()).toEqual(existing); expect(context.rows()).toEqual(beforeRows);
-    const continueButton = screen.getByRole('button', { name: 'Continue as ' + fullName(existing.people[existing.activePersonId]) });
+    const continueButton = screen.getByRole('button', { name: 'Continue Life as ' + fullName(existing.people[existing.activePersonId]) });
     expect(continueButton).toBeEnabled(); expect(continueButton).toHaveProp('accessibilityState', { disabled: false });
-    await press('Continue as ' + fullName(existing.people[existing.activePersonId])); expect(router.push).toHaveBeenLastCalledWith('/life');
+    await press('Continue Life as ' + fullName(existing.people[existing.activePersonId])); expect(router.push).toHaveBeenLastCalledWith('/life');
     expect(context.rows()).toEqual(beforeRows); view.unmount();
   } finally { context.sqlite.close(); }
 });
