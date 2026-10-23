@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-23",
+  "branch": "work",
+  "baseCommit": "512d3ac",
+  "runtimeCommit": "dcc98272f9e3687ccac10af0fe6f363dd24209e6",
+  "changes": [
+    "Present only employer/question copy in job interview popups, including saved interviews; preserve stored terms and hiring experience.",
+    "Use one app-level EventModal surface: stable Android Modal and iOS FullWindowOverlay; preserve modal ownership, focus and cinematic priority.",
+    "Retire route/life-specific reviews and stale native callbacks; respect current busy state; finish guarded cancellation after asynchronous submissions settle, including inline bank reviews.",
+    "Return to Home after successful work-routine saves while retaining failed-save selections for retry.",
+    "Queue one durable cult collapse result during Age Up at priority 80 after settlement; pause for planning like existing business-failure notices."
+  ],
+  "saveVersions": {
+    "world": 48,
+    "engine": 50,
+    "content": 27,
+    "reader": 28,
+    "database": 4,
+    "changed": false
+  },
+  "verification": {
+    "ui": {
+      "passed": true,
+      "distinctSuites": 138,
+      "distinctTests": 708,
+      "method": "Full UI regression plus affected reruns. The initial sole failure was a root navigator test mock missing the new public useRootNavigationState hook; all 16 tests in that suite passed after updating the mock. Subsequent host, banking, friendship and Age Up checks include the final guarded-submit fix.",
+      "runs": [
+        {
+          "report": "/tmp/dreams-popups-ui-results.json",
+          "suites": 138,
+          "tests": 707,
+          "failedTests": 1
+        },
+        {
+          "report": "/tmp/dreams-popups-feedback-results.json",
+          "suites": 1,
+          "tests": 16,
+          "failedTests": 0
+        },
+        {
+          "report": "/tmp/dreams-popups-final-ui-results.json",
+          "suites": 9,
+          "tests": 65,
+          "failedTests": 0
+        },
+        {
+          "report": "/tmp/dreams-popups-verified-ui-results.json",
+          "suites": 4,
+          "tests": 33,
+          "failedTests": 0
+        }
+      ]
+    },
+    "relatedEngineAndPersistence": {
+      "passed": true,
+      "suites": 7,
+      "tests": 322,
+      "files": [
+        "tests/game/cults-depth.test.ts",
+        "tests/game/cults-integration.test.ts",
+        "tests/game/businesses.test.ts",
+        "tests/game/annual-pacing.test.ts",
+        "tests/state/annual-pacing-save.test.ts",
+        "tests/persistence/cults-migration.test.ts",
+        "tests/game/collapse-notifications.test.ts"
+      ],
+      "logs": [
+        "/tmp/dreams-popup-engine-regression.log",
+        "/tmp/dreams-collapse-notifications-game.log"
+      ]
+    },
+    "interviewExperienceEngine": {
+      "passed": true,
+      "file": "tests/game/interview-experience.test.ts",
+      "log": "/tmp/dreams-popup-interview-tests.log",
+      "note": "The engine case passed in the initial interview run; its sole UI legacy-copy query failure was corrected and rerun, and the complete UI run covers both saved-interview cases."
+    },
+    "types": {
+      "passed": true,
+      "command": "npm run typecheck",
+      "log": "/tmp/dreams-popups-verified-types.log"
+    },
+    "runtimeImports": {
+      "passed": true,
+      "modules": 499,
+      "cycles": [],
+      "command": "npm run check:imports"
+    },
+    "productionExports": {
+      "passed": true,
+      "command": "CI=1 EXPO_NO_TELEMETRY=1 __UNSAFE_EXPO_HOME_DIRECTORY=/tmp/dreams-expo npx expo export --platform all --max-workers 1 --source-maps --output-dir /tmp/dreams-popups-verified-native-export",
+      "log": "/tmp/dreams-popups-verified-export.log",
+      "bundles": [
+        {
+          "platform": "android",
+          "sourceMap": "entry-1a4510d72726d1b7032af7934dbe4ff9.hbc.map",
+          "matchedRuntimeSources": 10
+        },
+        {
+          "platform": "ios",
+          "sourceMap": "entry-3dced9b69c44de17617cd0d43b8781fa.hbc.map",
+          "matchedRuntimeSources": 10
+        }
+      ],
+      "allChangedRuntimeSourcesMatchBothBundleMaps": true
+    },
+    "nativeDeviceValidation": "Not run; no native device or emulator was available.",
+    "independentReview": "Shared popup lifecycle and collapse queue reviewed by a separate agent; native surfaces, review ownership, busy/stale callbacks, persistence and priority findings were resolved."
+  },
+  "runtimeSourceSha256": {
+    "app/(game)/work.tsx": "34c9b6789ba5eade295f9b233e58d115ee9c3c8b460996fb826abd48ca8570c9",
+    "app/_layout.tsx": "ecefff72463ecaf6d27bd28f01b98874153abe5cc0ef68893717815c260e489d",
+    "src/game/systems/cultLifecycle.ts": "d2caedd2de264cebbd1e28bca4c9f56d5e8ca3196d76d1be9d8ff3e43a56b4d1",
+    "src/ui/AppEventModals.tsx": "bbf7c6e3728ab426b8ff552555e24da289cd8e30011cfb81b674347efeb17938",
+    "src/ui/EventModal.tsx": "d4187f6160c20731bfc53a10ac1cd2f1ad8a06a062c6dcf5bdf92360076a203d",
+    "src/ui/HobbyRoutine.tsx": "146df2703a09be070560da27b97403859847e828f3374f5c3510840785186b4d",
+    "src/ui/PendingEvent.tsx": "81dd19b30852b449a7e640e2f2ad29afb75ed8dbbdeb366b74b6ccfec993944e",
+    "src/ui/ReviewPromptHost.tsx": "6c6be3270a1f87c8bc04e4705a0ba0baa25057a2a073d19644d5c1938d446a36",
+    "src/ui/feedback.tsx": "9127f61f88cd276c1b2dda30ba81625450a8785f740e19e684f34f47b74405c3",
+    "src/ui/modalFocus.ts": "03cc14ccefab8290ed29aec62b41a1b085dc5211e4fb3e40ce0b2bf320620d38"
+  }
+}
