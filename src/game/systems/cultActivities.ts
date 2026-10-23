@@ -145,53 +145,85 @@ function activityEffects(
   return rows;
 }
 
+type RoutineLine =
+  | string
+  | ({ default: string } & Partial<Record<CultMember['personality'], string>>);
+
+/** Cast an existing, present member without drawing RNG or changing their state. */
+function routineNarrative(
+  world: World,
+  cult: Cult,
+  role: CultMember['role'],
+  line: RoutineLine,
+) {
+  const members = cultLocalMembers(world, cult);
+  const speaker = members.find(member => member.role === role) ?? members[0];
+  const text = typeof line === 'string' ? line : (speaker && line[speaker.personality]) ?? line.default;
+  return text.replaceAll('{member}', speaker ? fullName(world.people[speaker.personId]) : 'A follower');
+}
+
 const recruitmentWriting: Record<
   Recruitment,
-  { strong: string; modest: string; empty: string; incident: string }
+  { strong: RoutineLine; modest: RoutineLine; empty: RoutineLine; incident: string }
 > = {
   street: {
     strong:
-      "You get people to stop and listen. One wants to know about dental care. You steer the conversation back to your beliefs.",
-    modest:
-      'You squeeze a pitch between people dodging your leaflets. One passer-by changes direction twice to avoid your explanation.',
+      'Your pavement sermon draws {recruits}. {member} has to explain that eternal life does not include dental cover.',
+    modest: {
+      default: 'You leave with {recruits}. {member} keeps pitching to a man who is only trying to cross the road.',
+      sceptic: 'You leave with {recruits}. {member} asks why you can reveal the universe’s secrets but cannot get anyone to take a leaflet.',
+      showy: 'You leave with {recruits}. {member} takes a bow as a passer-by asks you both to move.',
+    },
     empty:
-      'You finish your pitch to a bus queue just as the bus arrives. Everyone finds somewhere else to be.',
+      'The bus arrives halfway through your revelation. Everyone boards. {member} keeps preaching to the timetable.',
     incident: 'activity-street-question',
   },
   social: {
     strong:
-      'Your clip brings in recruits. The comments demand a longer explanation of your beliefs and a shorter explanation of your hair.',
-    modest:
-      'Your clip finds an interested audience. Most commenters still prefer arguing with one another under your invitation.',
+      'Your clip brings in {recruits}. {member} wants to know why the comments have declared your hair the real miracle.',
+    modest: {
+      default: 'Your invitation lands {recruits}. {member} is still arguing with an account called ProphetEater.',
+      practical: 'Your invitation lands {recruits}. {member} disables the microphone before you can reply to ProphetEater.',
+      opportunist: 'Your invitation lands {recruits}. {member} asks if the account should start promoting them instead.',
+    },
     empty:
-      'Your clip gets comments, arguments and an unsolicited haircut suggestion. It gets no recruits.',
+      'Nobody signs up. {member} reads you the top comment: “Is this a cult or a hostage video?”',
     incident: 'activity-comments-escape',
   },
   'open-evening': {
     strong:
-      "Visitors sign up after your talk. One tries to finish the refreshments before their enlightenment begins.",
-    modest:
-      'You get a signed form. Other visitors thank you for the refreshments with the firm politeness of people refusing a second date.',
+      'You finish the evening with {recruits}. {member} explains that taking the entire snack tray home is not an initiation rite.',
+    modest: {
+      default: 'Your talk and refreshments bring in {recruits}. {member} catches a departing guest wrapping biscuits in your leaflets.',
+      earnest: 'Your talk and refreshments bring in {recruits}. {member} stays to answer a nervous guest after you have given up on the pitch.',
+      sceptic: 'Your talk and refreshments bring in {recruits}. {member} suggests testing which part works by letting you give the next talk without biscuits.',
+    },
     empty:
-      'Visitors eat the refreshments and leave. You have persuaded them to accept snacks.',
+      'The guests eat and leave without signing. {member} lifts the empty snack tray. “They were very committed to this bit.”',
     incident: 'activity-open-door',
   },
   referral: {
     strong:
-      'Your followers’ friends join. You deliver the welcome while the people who invited them look relieved that you are behaving yourself.',
-    modest:
-      'A guest fills in a form. Conversations at the table become much more careful once the membership pitch starts.',
+      'The introductions bring you {recruits}. {member} interrupts your welcome to promise everyone you are less intense once you have eaten.',
+    modest: {
+      default: 'The invitations bring in {recruits}. {member} has to explain that your followers were real people before they met you.',
+      opportunist: 'The invitations bring in {recruits}. {member} asks for credit in front of the guests before you have learned their names.',
+      practical: 'The invitations bring in {recruits}. {member} writes down the guests’ names while you are still trying to invent titles for them.',
+    },
     empty:
-      'Your followers bring friends. The friends enjoy seeing them and decline to turn the friendship into a membership.',
+      'Nobody joins. {member} gets a hug from a guest and a firm request to keep your pitch out of their friendship.',
     incident: 'activity-referral-table',
   },
   publicity: {
     strong:
-      "Your stunt turns spectators into recruits. A bystander declines to stand any closer while taking a form.",
-    modest:
-      'Your stunt interests would-be recruits. Most spectators leave with a photograph and a story they intend to tell at your expense.',
+      'Your stunt attracts {recruits}. {member} asks which part of the crowd cheering was meant to happen before you lost your dignity.',
+    modest: {
+      default: 'The spectacle wins you {recruits}. {member} finds a photograph of your worst moment already circulating.',
+      showy: 'The spectacle wins you {recruits}. {member} requests a second attempt because they were not visible enough in the first humiliation.',
+      sceptic: 'The spectacle wins you {recruits}. {member} suggests making the next revelation somewhere with fewer witnesses.',
+    },
     empty:
-      'You attract cameras, spectators and no recruits. People enjoy watching you without wanting to become your responsibility.',
+      'The crowd films everything and nobody joins. {member} quietly takes your name off the next sign.',
     incident: 'activity-stunt-sponsor',
   },
 };
@@ -273,13 +305,11 @@ export function runCultRecruitment(
       : joined
         ? words.modest
         : words.empty;
+  const fees = cult.joiningFee * BigInt(joined);
+  const recruits = joined + (joined === 1 ? ' new follower' : ' new followers') +
+    (fees > 0n ? ' and ' + cultMoney(cult, fees) + ' in joining fees' : '');
   const body =
-    narrative +
-    '\n\n' +
-    joined +
-    (joined === 1 ? ' new follower joined; ' : ' new followers joined; ') +
-    cultMoney(cult, cult.joiningFee * BigInt(joined)) +
-    ' in joining fees reached the treasury.' +
+    routineNarrative(world, cult, 'recruiter', narrative).replaceAll('{recruits}', recruits) +
     (cult.followers >= cultCapacity(cult)
       ? ' The headquarters is at capacity.'
       : '');
@@ -319,79 +349,103 @@ export function runCultRecruitment(
 type SermonTone = 'engaged' | 'ordinary' | 'pushback';
 const sermonWriting: Record<
   Cult['philosophy'],
-  { topic: string; engaged: string; ordinary: string; pushback: string }
+  { topic: string; engaged: RoutineLine; ordinary: RoutineLine; pushback: RoutineLine }
 > = {
   'dream-archive': {
     topic: 'the lives hidden in dreams',
     engaged:
-      'You describe a life hidden in a dream. Followers start comparing their own, talking over you to explain which alternate self had the worst marriage.',
-    ordinary:
-      "You explain dream messages. A follower shuts their eyes and calls it research.",
+      'You describe the lives hidden in dreams. {member} starts a furious debate about whether an imaginary spouse can demand an imaginary divorce.',
+    ordinary: {
+      default: 'You explain dream messages. {member} shuts their eyes and calls it research.',
+      showy: 'You explain dream messages. {member} describes a dream in which everyone applauded them, then waits for the room to catch up.',
+      sceptic: 'You explain dream messages. {member} asks why the universe needed them naked at a job interview.',
+    },
     pushback:
-      'You interpret a follower’s dream. They correct you in front of everyone, then correct your interpretation of the correction.',
+      'You interpret a dream. {member} corrects you in front of everyone, then corrects your interpretation of the correction.',
   },
   'final-update': {
     topic: 'the coming update to reality',
     engaged:
-      'You promise that reality can improve. Followers shout suggestions until someone demands a version without your longer speeches.',
-    ordinary:
-      "You describe the next version of reality. A follower makes you promise it will accept their existing membership.",
+      'You promise a better version of reality. {member} demands the removal of back pain, mosquitoes and the need to wear trousers. The room gives you an impossible list.',
+    ordinary: {
+      default: 'You describe the next version of reality. {member} wants to know whether they will still have to know their password.',
+      practical: 'You describe the next version of reality. {member} asks you to fix the microphone in this one first.',
+      opportunist: 'You describe the next version of reality. {member} puts in a request to come back as your boss.',
+    },
     pushback:
-      'You explain how reality will improve. Someone asks why your microphone still sounds like that. The room wants that answered first.',
+      'You announce an upgrade to existence. {member} asks if replacing you would be the free trial. The room laughs before you can answer.',
   },
   'cosmic-accounting': {
     topic: 'what the universe owes us',
     engaged:
-      'You declare that the universe owes everyone. Followers cheer and begin listing what they intend to collect. You struggle to regain the floor.',
-    ordinary:
-      'You explain the universe’s accounts. Your treasurer reminds the room that the rent still requires money from this universe.',
+      'You declare that the universe owes everyone. {member} demands compensation for puberty. The room cheers while you search for a less expensive revelation.',
+    ordinary: {
+      default: 'You explain what the universe owes you. {member} reminds the room that the landlord still wants money from this universe.',
+      opportunist: 'You explain what the universe owes you. {member} wants to know if there is a finder’s fee.',
+      sceptic: 'You explain what the universe owes you. {member} asks if you plan to chase it up or just keep announcing the balance.',
+    },
     pushback:
-      'You discuss what the cosmos owes you. Followers ask what you owe them for sitting through this.',
+      'You discuss what the cosmos owes you. {member} asks what you owe the room for sitting through this.',
   },
   'last-picnic': {
     topic: 'making the most of the time left',
     engaged:
-      'You speak about the time everyone has left. Followers draw closer and start discussing whom they want at the next meal.',
-    ordinary:
-      "You discuss preparing for the end. A follower moves the discussion firmly towards lunch.",
+      'You speak about the time everyone has left. {member} names someone they want at the next meal. Others start adding names.',
+    ordinary: {
+      default: 'You discuss preparing for the end. {member} asks if they should defrost anything.',
+      practical: 'You discuss preparing for the end. {member} asks for a date so they can stop buying the large milk.',
+      earnest: 'You discuss preparing for the end. {member} wants to spend the time feeding people. You let them speak.',
+    },
     pushback:
-      'You say there is no time to waste. Someone points out how long you have been saying it.',
+      'You say there is no time to waste. {member} points out how long you have been saying it.',
   },
   'chosen-lost': {
     topic: 'the truth only the chosen know',
     engaged:
-      'You tell the room it holds knowledge the world lacks. Followers sit straighter and begin offering to explain things to one another.',
-    ordinary:
-      "You hint at a hidden truth. Followers wait through the break for you to reveal it.",
+      'You declare the room chosen. {member} starts coaching everyone on how to walk past the unenlightened without looking smug. Nobody manages it.',
+    ordinary: {
+      default: 'You hint at a hidden truth. {member} stays through the break, determined to catch you eventually saying it.',
+      opportunist: 'You hint at a hidden truth. {member} asks if learning it comes with a more important title.',
+      showy: 'You hint at a hidden truth. {member} nods so vigorously that people start asking them what it is.',
+    },
     pushback:
-      'You promise hidden knowledge. A follower demands one example. The pause grows long enough for others to repeat the question.',
+      'You promise hidden knowledge. {member} demands one example. The pause grows long enough for the room to start chanting the question.',
   },
   'eternal-self': {
     topic: 'the perfect self waiting inside us',
     engaged:
-      'You describe the person each follower could become. People start confiding in one another until you have to ask for their attention back.',
-    ordinary:
-      'You ask everyone to look deep inside themselves. A follower announces that they have found hunger.',
+      'You describe everyone’s perfect inner self. {member} wants theirs to chair the next meeting. People start requesting introductions to their own.',
+    ordinary: {
+      default: 'You ask everyone to look deep inside themselves. {member} announces that they have found hunger.',
+      sceptic: 'You ask everyone to look deep inside themselves. {member} asks whether their perfect self can take over their share of the chores.',
+      showy: 'You ask everyone to look deep inside themselves. {member} claims to be finished before you have closed your eyes.',
+    },
     pushback:
-      'You describe your own journey towards perfection. A follower asks how far you still have to go.',
+      'You describe your own journey towards perfection. {member} asks how far you still have to go.',
   },
   'quiet-orbit': {
     topic: 'hearing what silence has to say',
     engaged:
-      'You stop speaking and let the room listen. A hesitant follower starts talking. This time nobody interrupts them.',
-    ordinary:
-      'You keep the sermon short and leave room for silence. Several followers look pleased by this particular teaching.',
+      'You stop speaking and let the room listen. {member} starts talking about something difficult. This time nobody interrupts.',
+    ordinary: {
+      default: 'You leave room for silence. {member} closes their eyes, and you resist filling it with another explanation.',
+      practical: 'You leave room for silence. {member} turns off the rattling fan. That improves things more than your introduction did.',
+      showy: 'You leave room for silence. {member} mouths “am I doing it right?” loudly enough for everyone to hear.',
+    },
     pushback:
-      'You explain silence for so long that followers begin practising it while looking pointedly at you.',
+      'You explain silence for so long that {member} raises a finger to their lips. The room joins in.',
   },
   'ordinary-miracles': {
     topic: 'miracles hiding in everyday life',
     engaged:
-      'You ask for stories of small miracles. Followers compete to tell theirs until you have a queue of people insisting theirs sounds least believable.',
-    ordinary:
-      'You ask for a small miracle. A follower describes finding a parking space in enough detail to use up the sermon.',
+      'You ask for small miracles. {member} describes a public toilet with paper, soap and a working lock. The room reacts as if the sea has parted.',
+    ordinary: {
+      default: 'You ask for a small miracle. {member} describes finding a parking space in enough detail to use up the sermon.',
+      earnest: 'You ask for a small miracle. {member} talks about a stranger who stayed to help. You put your planned example aside.',
+      sceptic: 'You ask for a small miracle. {member} nominates the fact that this meeting might finish on time.',
+    },
     pushback:
-      'You call everyday struggles blessings in disguise. Someone asks which blessing is meant to cover their bills.',
+      'You call everyday struggles blessings in disguise. {member} asks which blessing is meant to cover their bills.',
   },
 };
 
@@ -449,7 +503,7 @@ export function runCultPreaching(world: World, cult: Cult) {
       tone === 'engaged' ? 2 : tone === 'ordinary' ? 1 : -2,
     );
   const words = sermonWriting[cult.philosophy],
-    narrative = words[tone];
+    narrative = routineNarrative(world, cult, cult.philosophy === 'cosmic-accounting' ? 'treasurer' : 'adviser', words[tone]);
   cultRecord(
     world,
     cult,
@@ -491,62 +545,89 @@ export function runCultPreaching(world: World, cult: Cult) {
 
 const ceremonyWriting: Record<
   Ceremony,
-  { success: string; ordinary: string; failure: string; incident: string }
+  { success: RoutineLine; ordinary: RoutineLine; failure: RoutineLine; incident: string }
 > = {
   'dream-circle': {
     success:
-      "You get the room comparing dreams until a usually silent follower has everyone listening. They start another account before you can close the circle.",
-    ordinary:
-      'You hear everyone’s dream. One is an elaborate account of making a sandwich. You wait for the revelation; it is the sandwich.',
+      'At the {cost} dream circle, {member} reenacts a dream in which you were their pet hamster. Everyone wants the hamster’s side of the story.',
+    ordinary: {
+      default: 'You spend {cost} hearing everyone’s dreams. {member} describes making a sandwich. You wait for the revelation; it is the sandwich.',
+      showy: 'You spend {cost} hearing everyone’s dreams. {member} performs theirs with sound effects and refuses to skip the overture.',
+      opportunist: 'You spend {cost} hearing everyone’s dreams. {member} describes being put in charge and watches you for signs of recognition.',
+    },
     failure:
-      'You keep explaining what followers’ dreams meant. They start explaining why you are wrong. The circle breaks up before you can settle it.',
+      'Your {cost} dream circle turns on you when {member} rejects your interpretation. You are still defending it as people leave.',
     incident: 'activity-dream-copy',
   },
   'quiet-table': {
     success:
-      'You let the silence hold. Shoulders drop around the table. Someone starts to thank you, then thinks better of it.',
-    ordinary:
-      'You sit through a peaceful silence, broken mainly by the chairs. Followers leave looking less exhausted.',
+      'You spend {cost} bringing everyone together and let the silence hold. {member} takes a long breath. For once, you leave the moment alone.',
+    ordinary: {
+      default: 'Your {cost} quiet gathering settles down. {member} loses a battle with a squeaky chair and has to sit very still.',
+      practical: 'Your {cost} quiet gathering settles down. {member} moves the squeaky chair outside without waiting for a revelation.',
+      showy: 'Your {cost} quiet gathering settles down. {member} checks whether anyone is watching them look serene.',
+    },
     failure:
-      'You give so many instructions about silence that the gathering ends with followers rubbing their temples.',
+      'Your {cost} silent gathering is mostly instructions about silence. {member} puts their head in their hands. You explain that too.',
     incident: 'activity-quiet-alarm',
   },
   'community-supper': {
     success:
-      'You get members and neighbours eating together. People linger over empty plates and ask when you are doing this again.',
-    ordinary:
-      'You serve the supper. Everyone eats, and the loudest dispute concerns who gets the last helping.',
+      'You spend {cost} feeding members and neighbours. {member} tries to clear the plates, but people keep pulling out chairs for one more conversation.',
+    ordinary: {
+      default: 'You serve a {cost} supper. {member} referees an argument over the last helping with the serving spoon.',
+      earnest: 'You serve a {cost} supper. {member} gives up their seat to someone arriving late and keeps the conversation going from the doorway.',
+      opportunist: 'You serve a {cost} supper. {member} takes credit for the cooking while conspicuously avoiding the washing-up.',
+    },
     failure:
-      'You run late and short of food. Guests ask for a second helping and receive your increasingly careful apology.',
+      'The {cost} supper runs late and short. {member} has to tell the queue that your apology is the only thing available for seconds.',
     incident: 'activity-supper-seats',
   },
   starlight: {
     success:
-      'You guide followers through a clear sky. People keep pointing things out after the vigil ends and forget to ask you to explain their significance.',
-    ordinary:
-      'You watch the sky with the group. A follower proposes a warm coat as the evening’s most convincing source of protection.',
+      'You bring everyone out for a {cost} vigil. {member} spots something and the group crowds closer, forgetting to ask you what it means.',
+    ordinary: {
+      default: 'You spend {cost} watching the sky together. {member} proposes a warm coat as the evening’s most convincing source of protection.',
+      sceptic: 'You spend {cost} watching the sky together. {member} asks how to distinguish a divine sign from a plane to Malaga.',
+      showy: 'You spend {cost} watching the sky together. {member} keeps trying to stand where the moonlight flatters them.',
+    },
     failure:
-      'You point confidently in the wrong direction. Cold followers turn back and forth until someone asks when you intend to identify the car park.',
+      'You point confidently in the wrong direction during the {cost} vigil. {member} asks whether the car park is also beyond your understanding.',
     incident: 'activity-starlight-camera',
   },
   'open-house': {
     success:
-      'You let visitors look around and answer their questions. Members join in, eager to show off the place even when you are trying to finish the tour.',
-    ordinary:
-      'You show visitors the meetings and expenses. They stay curious after the refreshments run out.',
+      'Visitors fill your {cost} open house with questions. {member} takes over the tour and starts showing off corners you had hoped to skip.',
+    ordinary: {
+      default: 'You host a {cost} open house. {member} answers a visitor asking what happens if enlightenment does not suit them.',
+      practical: 'You host a {cost} open house. {member} gives visitors a straight answer while you are still working on the grand welcome.',
+      sceptic: 'You host a {cost} open house. {member} laughs when a visitor asks whether you came with the building.',
+    },
     failure:
-      'You welcome visitors and dodge their questions. They stop asking you and start exchanging looks with one another.',
+      'You spend {cost} welcoming visitors, then dodge their questions. {member} is left facing a guest who wants to know if you are always like this.',
     incident: 'activity-open-house-visitor',
   },
   'grand-promise': {
     success:
-      'You deliver the big gathering you advertised. Guests find seats, the programme holds together and followers cheer without waiting for your cue.',
-    ordinary:
-      'You get the gathering through its untidy moments. Followers help you finish instead of asking when they can leave.',
+      'Your {cost} gathering ends with {member} leading a conga line chanting your title. You join at the back and lose all control of your own procession.',
+    ordinary: {
+      default: 'Your {cost} gathering survives its untidy moments. {member} ushers you towards the microphone before you can attempt another grand entrance.',
+      practical: 'Your {cost} gathering survives its untidy moments. {member} abandons your entrance cue and gets everyone seated.',
+      showy: 'Your {cost} gathering survives its untidy moments. {member} accepts applause clearly intended for you. You have to keep smiling.',
+    },
     failure:
-      'You lose control of the arrangements. Followers queue for the gathering while being asked to help organise it. Nobody looks grateful for the opportunity.',
+      'A queue forms at the {cost} gathering while you stand without a plan. {member} has to ask the people waiting to come inside and help set it up.',
     incident: 'activity-grand-chair',
   },
+};
+
+const ceremonyContributions: Record<Ceremony, string> = {
+  'dream-circle': 'The collection brings in ',
+  'quiet-table': 'Members leave voluntary contributions of ',
+  'community-supper': 'The supper collection brings in ',
+  starlight: 'Followers contribute ',
+  'open-house': 'Members contribute ',
+  'grand-promise': 'The collection reaches ',
 };
 
 /** Prepared premises and a trusted organiser matter more than a generous hidden roll. */
@@ -690,13 +771,9 @@ export function runCultCeremony(
         ? "I got the gathering through its programme."
         : "I let down the people who came."),
   );
-  const body =
-    narrative +
-    '\n\nThe event cost ' +
-    cultMoney(cult, quote) +
-    '; voluntary contributions were ' +
-    cultMoney(cult, proceeds) +
-    '.';
+  const body = routineNarrative(world, cult, 'organiser', narrative)
+    .replaceAll('{cost}', cultMoney(cult, quote)) +
+    (proceeds > 0n ? ' ' + ceremonyContributions[ceremony] + cultMoney(cult, proceeds) + '.' : '');
   const canDescribeIncident =
     success ||
     ceremony === 'community-supper' ||

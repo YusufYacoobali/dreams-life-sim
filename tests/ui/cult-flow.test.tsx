@@ -16,7 +16,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { inflateSync } from 'node:zlib';
 import writingFixture from '../fixtures/v48-cult-writing-before.json';
-import { refreshCultWritingOffer } from '../support/cultWriting';
+import voiceFixture from '../fixtures/v48-cult-voice-before.json';
+import { arrangeCultWritingCase, refreshCultWritingOffer, type CultWritingCase } from '../support/cultWriting';
 import { createGameStore } from '../../src/state/gameStore';
 import { decodeWorld, encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
@@ -690,6 +691,35 @@ test('current deputy and responsibility remain disabled, while former members st
     jest.restoreAllMocks();
     context.close();
   }
+});
+
+test.each([
+  ['recruit', 'publicity', false], ['recruit', 'publicity', true],
+  ['preach', 'final-update', false], ['preach', 'final-update', true],
+  ['ceremony', 'dream-circle', false], ['ceremony', 'dream-circle', true],
+] as const)('routine %s / %s keeps its named payoff and figures through cold save (dark=%s)', async (kind, key, dark) => {
+  const base = JSON.parse(inflateSync(Buffer.from(writingFixture.data, 'base64')).toString()) as { baseWorld: unknown };
+  const voice = JSON.parse(inflateSync(Buffer.from(voiceFixture.data, 'base64')).toString()) as { ordinaryCases: Exclude<CultWritingCase, { kind: 'member' }>[] };
+  const item = voice.ordinaryCases.find(row => row.kind === kind && (row.kind === 'recruit' ? row.method : row.kind === 'preach' ? row.philosophy : row.ceremony) === key)!;
+  const initial = decodeWorld(JSON.stringify(base.baseWorld)), command = arrangeCultWritingCase(initial, item);
+  const role = kind === 'ceremony' ? 'organiser' : kind === 'recruit' ? 'recruiter' : 'adviser';
+  const speaker = initial.cults[0].members.find(member => member.role === role) ?? initial.cults[0].members[0];
+  speaker.personality = kind === 'preach' ? 'opportunist' : 'showy';
+  const context = await setup(initial);
+  try {
+    jest.spyOn(Native, 'useWindowDimensions').mockReturnValue({ width: dark ? 320 : 390, height: 844, scale: 2, fontScale: dark ? 1.4 : 1 });
+    let view = render(frame(false, dark));
+    await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); });
+    expect(world()).toEqual(resolveCommand(initial, command, true));
+    const body = world().pending!.body;
+    expect(screen.getByText(displayText(body))).toBeOnTheScreen();
+    capture('cult-voice-' + kind + '-result-' + (dark ? 'dark-large' : 'light'), view.toJSON());
+    const saved = encodeWorld(world()), rows = context.rows(); view.unmount();
+    await context.cold(); view = render(frame(false, dark));
+    expect(encodeWorld(world())).toBe(saved); expect(context.rows()).toEqual(rows);
+    expect(screen.getByText(displayText(body))).toBeOnTheScreen();
+    await press('Continue'); expect(world().pending).toBeNull(); view.unmount();
+  } finally { jest.restoreAllMocks(); context.close(); }
 });
 
 test.each([false, true])(

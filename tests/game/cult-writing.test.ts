@@ -96,7 +96,7 @@ test('every authored payoff has a specific title, readable choices, first-person
   }
   expect(new Set(Object.values(cultClaimAdmissions)).size).toBe(18);
   for (const claim of cultClaims) {
-    expect(cultClaimAdmissions[claim.id]).toMatch(/^You /);
+    expect(cultClaimAdmissions[claim.id]).toMatch(/\byou(?:r)?\b/i);
     expect(cultClaimFailureJournals[claim.id]).toMatch(/^I /);
     if (claim.test !== 'impossible') expect(claim.successText).toMatch(/^I /);
     expect(cultClaimRemedies[claim.id].journal).toMatch(/^I /);
@@ -139,6 +139,7 @@ test('a recruitment drive with one place left reports one follower in both the p
   const command = arrangeCultWritingCase(world, { kind: 'recruit', method: 'social', seed: 1 });
   const result = resolveCommand(world, command);
   expect(result.cults[0].followers - cult.followers).toBe(1);
-  expect(result.pending?.body).toContain('1 new follower joined;');
+  expect(result.pending?.body).toContain('1 new follower');
+  expect(result.pending?.body.match(/1 new follower/g)).toHaveLength(1);
   expect(result.journal.at(-1)!.text).toContain('1 new follower joined ');
 });
