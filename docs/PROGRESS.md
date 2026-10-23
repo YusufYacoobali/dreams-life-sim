@@ -12,7 +12,7 @@ is compact, belief lists are searchable, and the existing two routes and
 [the polish report](verification/cult-polish/README.md).
 
 At game-core source `d1df219` and app presentation `51c7a83`, verification covered
-**307 suites / 4,421 tests** across the full regression and affected
+**308 suites / 4,460 tests** across the full regression and affected
 test-only/welcome reruns, plus a passing **120-life soak**. Strict app/test types,
 the 493-module import graph, browser layouts and both Android/iOS exports passed.
 Native-device validation remains pending. The later 19-event writing merge below

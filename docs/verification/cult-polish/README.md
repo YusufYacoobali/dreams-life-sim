@@ -2,7 +2,7 @@
 
 This focused pass extends the Cult Leader implementation at `9101307c` on
 `work` and integrates the later event-writing and asset-cleanup source at
-`5a5902f`, plus the subsequent welcome presentation at `2ef980c`. The career,
+`5a5902f`, plus the subsequent welcome and final editorial source at `aab4f88`. The career,
 artwork and two management routes are retained. See the
 [feature guide](../../CULT_LEADER.md) and the
 [original implementation report](../cult-career/README.md).
@@ -60,22 +60,27 @@ account reconciliation and retained former identities. Connected UI checks
 cover actual SQLite saves, held commits, retries, stale candidates, replacement
 reviews, search and unchanged default dialogs.
 
-Game-core runtime is frozen at `d1df219`; final app presentation is at `51c7a83`. Final command results are recorded in
-[test-summary.json](test-summary.json). Final verified coverage is **307 suites
-and 4,421 tests**, across the complete regression and affected reruns. The full
+Game-core runtime is frozen at `d1df219`; final app source is at `753292d`. Final command results are recorded in
+[test-summary.json](test-summary.json). Final verified coverage is **308 suites
+and 4,460 tests**, across the complete regression and affected reruns. The full
 invocation finished with 305/306 suites and 4,398/4,399 tests passing; its sole
 failure was an old assertion expecting two recruiter choices. That test was
 expanded to cover all eight actual choices, including 12 additional success/
 failure cases, and all 18 cases in that file pass. The later welcome-only merge
 adds one suite with ten new cases; all ten affected welcome/cinematic/startup
 suites pass 47 cases. These overlapping runs are listed separately and are not
-summed as duplicate coverage.
+summed as duplicate coverage. A later prose-only event update adds 39 passing
+cases in one further suite; its three affected workplace cases also pass. The
+[AST comparison](editorial-mechanics-check.json) confirms identical IDs, effects,
+gates, weights and randomness across all 19 scenes.
 
 The **120-life soak** passes all three shards, completing each seed 0–119 once.
 All life results are retained in [soak-results.json](soak-results.json). Strict
 app/test types, the 493-module import graph, notices check and both production
-exports pass. The game-core source did not change during the full regression
-or soak; final presentation changes have their affected checks and new exports.
+exports pass. Game mechanics did not change during the full regression
+or soak. Later presentation and prose changes have their affected checks and
+new exports; this report does not claim another complete regression at that
+later source.
 
 ## Browser layout evidence
 
@@ -104,8 +109,8 @@ review tooling, not app dependencies.
 
 ## Production boundary
 
-The export verifier compares all 20 changed runtime source files (18 for cult
-polish and two for welcome) against both platform source maps, checks the
+The export verifier compares all 25 changed runtime source files (18 for cult
+polish, two for welcome and five editorial content modules) against both platform source maps, checks the
 Hermes headers and confirms all 12 original
 cult illustrations match their asset hashes. Source hashes are in
 [runtime-source-hashes.json](runtime-source-hashes.json), and final bundle

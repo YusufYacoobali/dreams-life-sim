@@ -1,5 +1,5 @@
 {
-  "runtimeCommit": "51c7a83ded581633edeb538e3aa09315bcf63c78",
+  "runtimeCommit": "753292dc9516a8f3ea53eda0dd0c9b39a2bb9480",
   "gameCoreCommit": "d1df219513090ad9b6c69fc30bf17c3ec1956270",
   "welcomeBaseline": "2ef980cf4fc30ceeac77a9c9406ed74e90098fcd",
   "reviewedCultBaseline": "9101307c89f4c05453322e78b6d7f0fcca40a403",
@@ -58,8 +58,8 @@
     "gameCoreChanged": false
   },
   "verifiedCoverage": {
-    "suites": 307,
-    "tests": 4421,
+    "suites": 308,
+    "tests": 4460,
     "allPassingAcrossFullAndAffectedReruns": true
   },
   "cultCases": {
@@ -90,7 +90,7 @@
     "allThreeShardSuitesPassed": true
   },
   "exports": {
-    "command": "npx expo export --platform all --max-workers 1 --source-maps --output-dir /tmp/dreams-cult-polish-final-source-export",
+    "command": "npx expo export --platform all --max-workers 1 --source-maps --output-dir /tmp/dreams-cult-polish-current-export",
     "exit": 0,
     "platforms": [
       "android",
@@ -100,7 +100,7 @@
   },
   "browserReview": "browser-checks.json",
   "nativeDeviceValidation": "Not performed: no Android/iOS simulator or physical device available",
-  "sourceBoundary": "Game-core source remains frozen at gameCoreCommit for the full regression and 120-life soak. A concurrent welcome-only update was merged later; affected onboarding/cinematic/startup suites, final strict types, imports and both platform exports cover runtimeCommit. One test-only pending-money encoding assertion was corrected before the full invocation reached that suite. The old two-choice recruiter catalogue assertion failed in the full run; after test-only expansion, all 18 recruiter cases pass in the affected rerun. Initial pre-merge checks were superseded and are not counted as final passes.",
+  "sourceBoundary": "The full regression and 120-life soak used the recorded gameCoreCommit. Later welcome presentation changes have 47 affected passing tests. The subsequent 19 scene rewrites change prose only: all non-prose AST hashes and original gameplay outcomes match, with 39 additional passing cases. Final strict types, imports and both production exports cover runtimeCommit. One test-only pending-money encoding assertion was corrected before the full invocation reached that suite. The obsolete two-choice recruiter assertion failed in the full run; after test-only expansion, all 18 recruiter cases pass in the affected rerun. Initial superseded checks are not counted as final passes.",
   "logs": {
     "full": {
       "path": "/tmp/dreams-cult-polish-integrated-full.log",
@@ -111,24 +111,24 @@
       "sha256": "12fb036702b3a8f1ddcdc4593bb81eccef2d6a79bfaa8c7595e5c864b85b5263"
     },
     "types": {
-      "path": "/tmp/dreams-cult-polish-final-types.log",
+      "path": "/tmp/dreams-cult-polish-current-types.log",
       "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
     },
     "imports": {
-      "path": "/tmp/dreams-cult-polish-final-imports.log",
+      "path": "/tmp/dreams-cult-polish-current-imports.log",
       "sha256": "e8e7069b7ab77617f2f03b63069caf9a3ce9379cdc62f08103d791f5315688ff"
     },
     "notices": {
-      "path": "/tmp/dreams-cult-polish-final-notices.log",
+      "path": "/tmp/dreams-cult-polish-current-notices.log",
       "sha256": "2b2786e490d97ef57fd4622e0ef10fb6d3d942cd8c16bea5f16f94f583c02863"
     },
     "export": {
-      "path": "/tmp/dreams-cult-polish-final-export.log",
-      "sha256": "9b85b6cf35a49871131a70d47068819a76dcb86871ee53ec8221b6b1911e7e0b"
+      "path": "/tmp/dreams-cult-polish-current-export.log",
+      "sha256": "6c3963eb418b84e2e89dfe76b8c06f2776c0289a13e0cc0b387d669feda73528"
     },
     "platforms": {
-      "path": "/tmp/dreams-cult-polish-final-platforms.log",
-      "sha256": "12204d767052562837e04fbf9f5ba43ce5d3939cb2d4ae4beafbba92f7591a1f"
+      "path": "/tmp/dreams-cult-polish-current-platforms.log",
+      "sha256": "59164127a9618d9226ef71df1c6b2161867fecd49b02e7878986ec68e6281bda"
     },
     "browser": {
       "path": "/tmp/dreams-cult-polish-integrated-browser.log",
@@ -143,12 +143,35 @@
       "sha256": "e0b26ac0b783fb6eabc3f583b5a4c3038e7622beffaf7efc6fb40f9e3263b1cf"
     },
     "welcome": {
-      "path": "/tmp/dreams-cult-polish-integrated-welcome.log",
-      "sha256": "352deb615cf267bd46a108f5818ae5ddb97778fe21748028267074a572c58af3"
+      "path": "/tmp/dreams-cult-polish-final-welcome.log",
+      "sha256": "ec7fd0d69155a067c666e833406d285bc9ec1ce7d494c6152b88a8ac4b3706ef"
     },
     "critical-compatibility": {
       "path": "/tmp/cult48-critical-corrected.log",
       "sha256": "4840bf37a88a1e73693b95ce57d1f945ee2320e15e5c340cf62ab2e307c7f6d4"
+    },
+    "welcome-results": {
+      "path": "/tmp/dreams-cult-polish-final-welcome-results.json",
+      "sha256": "b518a917555a5982fdd62c43a621022586e1d5ee36c310f6cd52cd4fb6a26211"
+    },
+    "deferred": {
+      "path": "/tmp/dreams-cult-polish-final-deferred.log",
+      "sha256": "a5ba28e64f70f84a0bdbbf04ce99bc9a647b1ea90c49d117a663e8e1e81c8d41"
+    },
+    "deferred-results": {
+      "path": "/tmp/dreams-cult-polish-final-deferred-results.json",
+      "sha256": "ad7c80b9ed8c1559646e11973cae86cdc9b1569ae10fd01b10a504d9dfe5dc5a"
     }
+  },
+  "latestIntegratedBaseline": "aab4f88061d6489af542dded061d9b1e7adb44ad",
+  "welcomeRefinementBaseline": "5a1f582fe637beb6d1445a365b833ca16e402de6",
+  "editorialFollowup": {
+    "sourceCommit": "d861b33a9323bdafc10cb8c74191afac6d756cb4",
+    "proseOnly": true,
+    "nonProseASTComparison": "editorial-mechanics-check.json",
+    "affectedSuitesPassed": 2,
+    "affectedTestsPassed": 42,
+    "newSuiteTests": 39,
+    "gameplayEffectsChanged": false
   }
 }
