@@ -6,11 +6,14 @@ Read-only prices, balances, net worth, rates, holdings and old journal/event tex
 now display whole values across the game and accessibility labels. Locale
 currency/grouping is retained; small nonzero values show `<1`. Exact accounting,
 saved prose, input values and fractional sell-order prefills are retained.
-No game-engine, save format, fixture or animation-geometry change was made.
-Verification covers 136 UI suites / 694 cases and 33 exact core money cases
+The numeric formatting changes no game calculations, save formats, fixtures
+or animation geometry. The concurrent country/gender creation defaults are
+retained and pass all 43 affected creation/onboarding checks.
+Verification covers 136 UI suites / 697 cases, 33 exact core money cases and
+23 creation-draft cases
 across the initial run and affected presentation-query reruns. Strict types,
-the 495-module import graph and Android/iOS production exports pass; all 83
-changed runtime sources match both bundle maps. See
+the 497-module import graph and Android/iOS production exports pass; all 86
+integrated runtime sources match both bundle maps. See
 [the source-scoped results](verification/whole-numbers-20261023.json).
 
 ## Cult Leader gameplay polish — 23 October 2026
