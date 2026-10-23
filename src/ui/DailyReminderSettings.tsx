@@ -36,7 +36,12 @@ export function DailyReminderSettings({ stacked }: { stacked: boolean }) {
           return;
         }
       }
-      if (mounted.current) { setDenied(false); await setEnabled(enabled); }
+      if (mounted.current) {
+        setDenied(false);
+        const saved = await setEnabled(enabled);
+        // Defaults may already be on while OS permission is still pending.
+        if (saved && enabled && config.enabled) await refreshDailyReminders(config);
+      }
     } catch {
       if (mounted.current) setNotice('Reminders could not be updated. Please try again. Your game and saves are unaffected.');
     } finally {
@@ -73,6 +78,7 @@ export function DailyReminderSettings({ stacked }: { stacked: boolean }) {
     {notice && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 23 }}>{notice}</Text>}
     {nativeMessage && !notice && <Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 23 }}>{nativeMessage}</Text>}
     {(denied || status.status === 'denied') && <Button label="Open Notification Settings" tone="secondary" disabled={working !== null} onPress={() => { void Linking.openSettings().catch(() => { if (mounted.current) setNotice('Device settings could not be opened. You can change notification permissions in your device settings.'); }); }} />}
+    {settings.dailyReminder && status.status === 'denied' && <Button label="Allow Notifications" tone="secondary" disabled={unavailable} onPress={() => { void changeEnabled(true); }} />}
     {status.status === 'error' && <Button label="Try Reminders Again" tone="secondary" disabled={unavailable} onPress={() => { setNotice(null); void refreshDailyReminders(config); }} />}
     {!supported && <Body muted>Local reminders are available in the Android and iOS apps.</Body>}
   </Card>;
