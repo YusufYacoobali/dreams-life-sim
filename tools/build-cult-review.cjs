@@ -20,6 +20,15 @@ try {
     .readdirSync(input)
     .filter((file) => file.endsWith('.json')))
     fs.copyFileSync(path.join(input, file), path.join(base + '-after', file));
+  if (process.env.DREAMS_CULT_REVIEW_BEFORE) {
+    for (const file of fs
+      .readdirSync(process.env.DREAMS_CULT_REVIEW_BEFORE)
+      .filter((file) => file.endsWith('.json')))
+      fs.copyFileSync(
+        path.join(process.env.DREAMS_CULT_REVIEW_BEFORE, file),
+        path.join(base + '-before', file),
+      );
+  }
   execFileSync(
     process.execPath,
     [path.join(__dirname, 'build-product-polish-review.cjs')],
@@ -46,6 +55,13 @@ try {
     'After · integrated polish',
     'Cult Leader · integrated',
   );
+  if (process.env.DREAMS_CULT_REVIEW_BEFORE) {
+    html = html.replaceAll('Before · work 8891d4d', 'Before · Cult 9101307');
+    html = html.replaceAll(
+      'Cult Leader · integrated',
+      'After · Cult gameplay polish',
+    );
+  }
   // Yoga's flex:0 keeps intrinsic text height; CSS's shorthand would set a
   // zero basis and collapse the stacked money labels at large font sizes.
   html = html.replace(

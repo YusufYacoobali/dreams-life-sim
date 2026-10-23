@@ -86,7 +86,8 @@ function arrangeStory(input: World, definition: CultStoryDefinition) {
     deputy.loyalty = 40;
   }
   if (definition.need === 'rival') {
-    const member = cult.members.find((row) => row.role === 'organiser')!;
+    const member = cult.members.find((row) => row.role === 'organiser' && row.role !== definition.role)
+      ?? cult.members.find(row => row.role !== definition.role)!;
     member.loyalty = 5;
     member.ambition = 90;
     member.grievance = 80;

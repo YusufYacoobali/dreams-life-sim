@@ -1,3 +1,16 @@
+import {
+  runCultRecruitment,
+  runCultPreaching,
+  runCultCeremony,
+  cultMemberResponse,
+  offerCultMemberActivity,
+} from './cultActivities';
+import {
+  addCultMember,
+  cultRoleChangeReason,
+  resolveCultReplacement,
+} from './cultRoster';
+export { addCultMember } from './cultRoster';
 import type { World } from '../model';
 import { fullName } from '../personHelpers';
 import { countries } from '../countries';
@@ -5,11 +18,9 @@ import { rules } from '../rules';
 import { formatMoney } from '../money';
 import { fxMoney } from '../valuation';
 import {
-  cultCeremonies,
   cultHeadquarters,
   cultMemberRoles,
   cultPhilosophies,
-  cultRecruitment,
   cultRoleTitles,
   cultUpgrades,
 } from '../content/cults';
@@ -25,22 +36,13 @@ import {
   post,
   result,
 } from './common';
-import { createContact } from './npcs';
-import { connectPerson } from './relationships';
 import { relationFor } from './relationshipQueries';
-import {
-  cultMonthNumber,
-  type Cult,
-  type CultCommand,
-  type CultMember,
-} from './cultSchemas';
+import { cultMonthNumber, type Cult, type CultCommand } from './cultSchemas';
 import {
   cultActionReason,
   cultAmount,
   cultBill,
   cultBook,
-  cultCapacity,
-  cultCeremonyQuote,
   cultChangeFollowers,
   cultContribute,
   cultFeesReason,
@@ -51,7 +53,6 @@ import {
   cultMemberTrust,
   cultMemory,
   cultMoney,
-  cultModifiers,
   cultPayoutAvailable,
   cultRecord,
   cultRecruitQuote,
@@ -66,7 +67,6 @@ import { closeCult } from './cultLifecycle';
 import {
   cultMemberLeaves,
   newCultThread,
-  recordCultCeremonyPromises,
   scheduleCultCallback,
 } from './cultThreads';
 export { cultCommandSchema, type CultCommand } from './cultSchemas';
@@ -83,49 +83,6 @@ export {
   cultUpgradeQuote,
   cultRewardQuote,
 } from './cultCore';
-export function addCultMember(
-  world: World,
-  cult: Cult,
-  role: CultMember['role'],
-) {
-  if (
-    cult.members.length >= 5 ||
-    cult.members.some((row) => row.status === 'active' && row.role === role)
-  )
-    return;
-  const person = createContact(world, {
-    age: draw(world, 'npcs', 22, 48),
-    country: cult.country,
-    city: cult.city,
-  });
-  connectPerson(world, person.id);
-  const member: CultMember = {
-    personId: person.id,
-    role,
-    joined: { ...world.date },
-    ended: null,
-    status: 'active',
-    personality: (
-      ['earnest', 'practical', 'showy', 'sceptic', 'opportunist'] as const
-    )[draw(world, 'npcs', 0, 4)],
-    loyalty: draw(world, 'events', 50, 75),
-    ambition: draw(world, 'events', 15, 65),
-    grievance: 0,
-    resident: cult.upgrades.includes('residences'),
-    memories: [],
-  };
-  cult.members.push(member);
-  const relation = relationFor(world, cult.founderId, person.id);
-  if (relation) relation.strength = Math.max(45, relation.strength);
-  cultMemory(
-    world,
-    cult,
-    member,
-    'joined',
-    'I joined ' + cult.name + ' as ' + cultRoleTitles[role].toLowerCase() + '.',
-  );
-  return member;
-}
 export function cultClaimReason(
   cult: Cult,
   id: (typeof cultClaims)[number]['id'],
@@ -180,26 +137,12 @@ export const cultRecoveryQuote = (
       rebrand: 100,
     }[action],
   );
-const sermons: Record<Cult['philosophy'], string> = {
-  'dream-archive':
-    'I spoke about our dreams and the lives they might have belonged to.',
-  'final-update':
-    'I discussed the supposed update to reality. We also agreed to update the meeting calendar.',
-  'cosmic-accounting':
-    'I spoke about what we owed one another, rather than what the universe owed me.',
-  'last-picnic':
-    'I spoke about looking after one another before worrying about the end of the world.',
-  'chosen-lost':
-    'I asked what made our hidden knowledge useful to anyone outside the room.',
-  'eternal-self':
-    'I spoke about knowing ourselves without expecting everyone else to do the work.',
-  'quiet-orbit':
-    'I left space for the quiet members to speak about what they had noticed.',
-  'ordinary-miracles':
-    'I asked members to describe an ordinary thing that had mattered to them.',
-};
 export function resolveCult(world: World, command: CultCommand) {
   const person = active(world);
+  if (command.type === 'cult-fill-vacancy') {
+    resolveCultReplacement(world, command);
+    return;
+  }
   if (command.type === 'found-cult') {
     const reason =
       cultFoundingReason(world, command.headquarters) ||
@@ -565,167 +508,23 @@ export function resolveCult(world: World, command: CultCommand) {
   }
   if (command.type === 'cult-recruit') {
     cultLimit(world, cult, 'recruit', 2, 'year');
-    const quote = cultRecruitQuote(cult, command.method);
-    if (quote !== command.quotedCost)
-      throw new IneligibleAction('The recruitment quote changed');
-    cultSpend(
-      world,
-      cult,
-      quote,
-      'recruitment',
-      'Recruitment: ' + command.method,
-    );
-    const definition = cultRecruitment.find(
-        (row) => row.id === command.method,
-      )!,
-      mods = cultModifiers(cult),
-      pressure = Number(
-        (cult.joiningFee * 10000n) / rules[cult.country].baseWage,
-      ),
-      appeal = bounded(
-        (person.stats.respect +
-          person.skills.politics +
-          person.publicLife.image) /
-          3 +
-          mods.growth / 10 +
-          (cult.upgrades.includes('monument') ? 8 : 0) -
-          cult.heat / 2 -
-          pressure / 2,
-      );
-    const joined = cultChangeFollowers(
-      cult,
-      Math.max(
-        0,
-        Math.floor(
-          ((definition.reach + Math.min(50, Math.floor(cult.followers / 100))) *
-            (appeal + draw(world, 'events', 0, 45))) /
-            100,
-        ),
-      ),
-    );
-    cultBook(
-      world,
-      cult,
-      cult.joiningFee * BigInt(joined),
-      'income',
-      'joining',
-      'Joining fees after recruitment',
-    );
-    cult.heat = bounded(cult.heat + definition.heat);
-    cult.reputation = bounded(cult.reputation + (joined > 0 ? 2 : -1));
+    runCultRecruitment(world, cult, command.method, command.quotedCost);
     if (cult.followers >= 80 && cult.members.length < 5)
       addCultMember(
         world,
         cult,
         cult.members.length === 3 ? 'recruiter' : 'adviser',
       );
-    cultRecord(
-      world,
-      cult,
-      'I recruited through ' +
-        definition.title.toLowerCase() +
-        '. ' +
-        joined +
-        ' new followers joined ' +
-        cult.name +
-        '.',
-    );
-    result(
-      world,
-      joined ? 'New followers joined' : 'A quiet recruitment drive',
-      joined +
-        ' joined. ' +
-        (cult.followers >= cultCapacity(cult)
-          ? 'The headquarters is at capacity.'
-          : 'The campaign costs are recorded.'),
-      'cult-recruitment',
-    );
     return;
   }
   if (command.type === 'cult-preach') {
     cultLimit(world, cult, 'preach');
-    cult.sermons++;
-    person.stats.energy = bounded(person.stats.energy - 5);
-    cult.loyalty = bounded(cult.loyalty + 3);
-    cult.satisfaction = bounded(cult.satisfaction + 2);
-    for (const member of cult.members.filter((row) => row.status === 'active'))
-      cultMemberTrust(world, member, 1);
-    cultRecord(world, cult, sermons[cult.philosophy]);
-    result(
-      world,
-      'Your gathering heard you',
-      sermons[cult.philosophy].replace(/^I /, 'You '),
-      'cult-philosophy',
-    );
+    runCultPreaching(world, cult);
     return;
   }
   if (command.type === 'cult-ceremony') {
     cultLimit(world, cult, 'ceremony');
-    const quote = cultCeremonyQuote(cult, command.ceremony);
-    if (quote !== command.quotedCost)
-      throw new IneligibleAction('The ceremony quote changed');
-    cultSpend(world, cult, quote, 'ceremony', 'Ceremony: ' + command.ceremony);
-    const definition = cultCeremonies.find(
-        (row) => row.id === command.ceremony,
-      )!,
-      quality =
-        draw(world, 'events', 20, 90) +
-        Math.floor(cult.satisfaction / 4) +
-        (cult.upgrades.includes('hall') ? 8 : 0) +
-        (cult.upgrades.includes('kitchen') ? 6 : 0) -
-        Math.floor(cult.heat / 3),
-      success = quality >= 45;
-    cult.ceremonies++;
-    cult.lastCeremony = {
-      id: command.ceremony,
-      month: cultMonthNumber(world),
-      success,
-    };
-    recordCultCeremonyPromises(world, cult, command.ceremony, success);
-    cult.loyalty = bounded(cult.loyalty + (success ? definition.loyalty : -5));
-    cult.satisfaction = bounded(
-      cult.satisfaction + (success ? definition.satisfaction : -6),
-    );
-    cult.reputation = bounded(
-      cult.reputation + (success ? definition.reputation : -3),
-    );
-    const proceeds = success
-      ? (rules[cult.country].baseWage *
-          BigInt(
-            Math.max(
-              0,
-              cult.followers -
-                cult.members.filter((row) => row.status === 'active').length,
-            ),
-          )) /
-        50000n
-      : 0n;
-    cultBook(
-      world,
-      cult,
-      proceeds,
-      'income',
-      'ceremony',
-      'Voluntary ceremony contributions',
-    );
-    if (!success)
-      cultScandal(world, cult, definition.title + ' went badly.', 6);
-    cultRecord(
-      world,
-      cult,
-      'I held ' +
-        definition.title.toLowerCase() +
-        '. ' +
-        (success ? 'Members left pleased.' : 'The gathering went badly.'),
-    );
-    result(
-      world,
-      success ? 'A gathering worth attending' : 'The gathering went badly',
-      success
-        ? 'Members enjoyed ' + definition.title.toLowerCase() + '.'
-        : 'The costs are paid. Members will remember the disappointing event.',
-      'cult-ceremony',
-    );
+    runCultCeremony(world, cult, command.ceremony, command.quotedCost);
     return;
   }
   if (command.type === 'cult-claim') {
@@ -872,6 +671,13 @@ export function resolveCult(world: World, command: CultCommand) {
       throw new IneligibleAction(
         'This person no longer belongs to the organisation',
       );
+    if (command.action === 'promote' || command.action === 'assign') {
+      const role = command.action === 'promote' ? 'deputy' : command.role;
+      if (!role) throw new IneligibleAction('Choose a responsibility');
+      const reason = cultRoleChangeReason(cult, member.personId, role);
+      if (reason) throw new IneligibleAction(reason);
+    }
+    const memberResponse = cultMemberResponse(member, command.action);
     cultLimit(
       world,
       cult,
@@ -881,17 +687,27 @@ export function resolveCult(world: World, command: CultCommand) {
     );
     let delta =
       command.action === 'talk'
-        ? 4
+        ? member.grievance >= 30
+          ? 3
+          : member.personality === 'earnest'
+            ? 6
+            : 4
         : command.action === 'praise'
-          ? 7
+          ? member.ambition >= 70
+            ? 5
+            : 7
           : command.action === 'promote'
             ? 10
             : command.action === 'assign'
               ? 5
               : command.action === 'reward'
-                ? 10
+                ? member.personality === 'opportunist'
+                  ? 12
+                  : 10
                 : command.action === 'confront'
-                  ? -20
+                  ? member.loyalty >= 65
+                    ? -14
+                    : -22
                   : -30;
     if (command.action === 'reward') {
       const quote = cultRewardQuote(cult);
@@ -904,7 +720,11 @@ export function resolveCult(world: World, command: CultCommand) {
       if (!role || !cultMemberRoles.includes(role))
         throw new IneligibleAction('Choose a responsibility');
       for (const other of cult.members.filter(
-        (row) => row !== member && row.status === 'active' && row.role === role,
+        (row) =>
+          role !== 'adviser' &&
+          row !== member &&
+          row.status === 'active' &&
+          row.role === role,
       )) {
         other.role = 'adviser';
         cultMemberTrust(world, other, -8);
@@ -948,12 +768,14 @@ export function resolveCult(world: World, command: CultCommand) {
       '.';
     cultMemory(world, cult, member, command.action, text);
     cultRecord(world, cult, text);
-    result(
-      world,
-      'Your follower remembers',
-      text.replace(/^I /, 'You '),
-      'cult-followers',
-    );
+    const response = text.replace(/^I /, 'You ') + '\n\n' + memberResponse;
+    if (!offerCultMemberActivity(world, cult, member, command.action, response))
+      result(
+        world,
+        'A conversation with ' + target.firstName,
+        response,
+        'cult-followers',
+      );
     return;
   }
   if (command.type === 'cult-rival') {

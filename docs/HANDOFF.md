@@ -1,5 +1,20 @@
 # Continue Dreams: Life Simulator
 
+## Cult Leader gameplay polish — 23 October 2026
+
+The review's focused polish is implemented over `9101307c`. Five active seats
+can now be refilled from real known contacts while retaining former NPC history;
+unchanged promotions are rejected. Routine actions have distinct outcomes and
+16 immediate decision incidents, new failed-claim offers have 18 practical
+remedies, and 12 further dramatic stories join the original 28. The dashboard
+is compact, belief lists are searchable, and the existing two routes and
+12 illustrations are retained. See [the current guide](CULT_LEADER.md) and
+[the polish report](verification/cult-polish/README.md).
+
+Current markers are **World 47 / engine 49 / content 26 / reader 27 / database v4**.
+Genuine World 46 cult saves and their original pending claim outcomes remain
+supported. Earlier sections describe their historical source snapshots.
+
 ## Cult Leader — 23 October 2026
 
 Cult Leader is implemented as an independent special career over the integrated

@@ -11,7 +11,7 @@ test('an arranged World42 boundary adds only empty future histories and current 
   delete raw.personSupportRequests; delete raw.personActionHistory;
   const original = JSON.stringify(raw), restored = decodeWorld(original, true);
   expect(JSON.parse(encodeWorld(restored))).toEqual({
-    ...raw, schemaVersion: 46, engineVersion: 48, contentVersion: 25, cults: [],
+    ...raw, schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [],
     personSupportRequests: [], personActionHistory: [], miniGames: [],
   });
   expect(JSON.stringify(raw)).toBe(original);

@@ -56,12 +56,12 @@ test('the genuine natural AU world beyond the plain20M limit retains its origina
   const originalMain = JSON.parse(strFromU8(gunzipSync(Buffer.from(frame.main.data, 'base64'))));
   expect(originalMain).toMatchObject({ schemaVersion: 33, engineVersion: 34, contentVersion: 9 });
   const world = unpackCheckpoint(auCheckpoint.checkpoint, true), encoded = encodeWorld(world);
-  expect(world).toMatchObject({ schemaVersion: 46, engineVersion: 48, contentVersion: 25, cults: [] });
+  expect(world).toMatchObject({ schemaVersion: 47, engineVersion: 49, contentVersion: 26, cults: [] });
   expect(world.revision).toBe(593); expect(Object.keys(world.people)).toHaveLength(34); expect(world.ledger).toHaveLength(69477); expect(encoded.length).toBeGreaterThan(20_000_000); expect(Buffer.byteLength(encoded)).toBeLessThan(80_000_000);
   // Remove only the new, proven-empty histories absent from this actual World33
   // producer, then restore its three original root version tags.
   // The historical SHA is never replaced by a newly generated terminal world.
-  expect(encoded.startsWith('{"schemaVersion":46,"engineVersion":48,')).toBe(true);
+  expect(encoded.startsWith('{"schemaVersion":47,"engineVersion":49,')).toBe(true);
   const originalObject = JSON.parse(encoded);
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'schoolWithdrawals', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(originalObject[key]).toEqual([]); delete originalObject[key]; }
   originalObject.schemaVersion = 33; originalObject.engineVersion = 34; originalObject.contentVersion = 9;

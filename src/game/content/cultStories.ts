@@ -1,3 +1,5 @@
+import { cultActivityStories } from './cultActivities';
+import { cultDramaticStories } from './cultDramaticStories';
 import type { CultDoctrineId, CultRuleId, cultMemberRoles } from './cults';
 export type CultStoryChoice = {
   id: string;
@@ -24,6 +26,7 @@ export type CultStoryChoice = {
     | 'reconcile';
 };
 export type CultStoryDefinition = {
+  source?: 'activity' | 'dramatic';
   id: string;
   title: string;
   body: string;
@@ -1087,4 +1090,6 @@ export const cultStories: readonly CultStoryDefinition[] = [
       },
     ],
   },
+  ...cultDramaticStories,
+  ...cultActivityStories,
 ];

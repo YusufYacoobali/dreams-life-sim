@@ -1,6 +1,17 @@
 import type { World } from '../model';
 import { fullName } from '../personHelpers';
-import { cultClaims } from '../content/cultClaims';
+import {
+  cultClaims,
+  cultClaimRemedies,
+  cultClaimOutcome,
+  type CultClaimId,
+} from '../content/cultClaims';
+import {
+  applyCultClaimImpact,
+  applyCultClaimRemedy,
+  cultClaimRemedyCost,
+  cultClaimRemedyReason,
+} from './cultClaimResponses';
 import {
   cultStories,
   type CultStoryChoice,
@@ -39,7 +50,7 @@ import {
   scheduleCultCallback,
 } from './cultThreads';
 import { relationFor } from './relationshipQueries';
-import { isConfined } from './legalSchemas';
+import { storyPersonPresent } from './storyContext';
 import { recordCultMisappropriation } from './legal';
 const outstanding = (thread: CultThread) =>
   thread.status === 'scheduled' || thread.status === 'offered';
@@ -48,8 +59,7 @@ function localMember(world: World, cult: Cult, role?: CultMember['role']) {
     (member) =>
       member.status === 'active' &&
       (!role || member.role === role) &&
-      !world.people[member.personId].died &&
-      !isConfined(world, world.people[member.personId]) &&
+      storyPersonPresent(world, world.people[member.personId]) &&
       world.people[member.personId].country === cult.country &&
       world.people[member.personId].city === cult.city,
   );
@@ -66,7 +76,7 @@ function relativeFor(world: World, cult: Cult) {
           world.people[row.from === cult.founderId ? row.to : row.from];
         return (
           person &&
-          !person.died &&
+          storyPersonPresent(world, person) &&
           person.country === cult.country &&
           person.city === cult.city
         );
@@ -140,6 +150,7 @@ function boundCultChoice(
         threadId: thread.id,
         offerId: thread.offerId!,
         choiceId: id,
+        ...(thread.kind === 'claim' ? { claimRevision: 2 as const } : {}),
       },
     ],
     resultTitle: 'Your organisation remembers',
@@ -186,12 +197,13 @@ export function offerCultThread(world: World, cult: Cult, thread: CultThread) {
             world,
             cult,
             thread,
-            'blame',
-            'Blame the second-in-command',
-            'You put the blame on {member}. They will remember it.',
-            'I blamed {member} for my failed ' +
-              thread.title.toLowerCase() +
-              ' promise.',
+            cultClaimRemedies[thread.templateId as CultClaimId].id,
+            cultClaimRemedies[thread.templateId as CultClaimId].label +
+              (cultClaimRemedyCost(cult, thread) > 0n
+                ? ' · ' + cultMoney(cult, cultClaimRemedyCost(cult, thread))
+                : ''),
+            cultClaimRemedies[thread.templateId as CultClaimId].result,
+            cultClaimRemedies[thread.templateId as CultClaimId].journal,
           ),
         ]
       : cultStories
@@ -269,7 +281,16 @@ export function cultChoiceReason(
   const unavailable = cultActionReason(world, cult);
   if (unavailable) return unavailable;
   if (thread.kind === 'claim') {
-    if (!['admit', 'postpone', 'blame'].includes(effect.choiceId))
+    const remedy = cultClaimRemedies[thread.templateId as CultClaimId];
+    if (effect.claimRevision === 2 && effect.choiceId === remedy?.id)
+      return cultClaimRemedyReason(world, cult, thread);
+    if (
+      ![
+        'admit',
+        'postpone',
+        ...(effect.claimRevision === 2 ? [] : ['blame']),
+      ].includes(effect.choiceId)
+    )
       return 'Choose an available response';
     if (effect.choiceId === 'postpone' && thread.postponements >= 1)
       return 'This promise has already been postponed';
@@ -323,7 +344,31 @@ export function resolveCultChoice(
       thread.status = 'resolved';
       thread.outcome = 'failure';
       thread.settledMonth = cultMonthNumber(world);
-      if (effect.choiceId === 'admit') {
+      if (
+        effect.claimRevision === 2 &&
+        effect.choiceId ===
+          cultClaimRemedies[thread.templateId as CultClaimId].id
+      ) {
+        applyCultClaimRemedy(world, cult, thread);
+      } else if (effect.claimRevision === 2 && effect.choiceId === 'admit') {
+        const impact = cultClaimOutcome(
+          thread.templateId as CultClaimId,
+          false,
+        );
+        applyCultClaimImpact(
+          world,
+          cult,
+          thread,
+          {
+            ...impact,
+            reputation: (impact.reputation ?? 0) + 3,
+            heat: Math.max(2, (impact.heat ?? 4) - 2),
+          },
+          'I acknowledged the failed ' +
+            thread.title.toLowerCase() +
+            ' promise.',
+        );
+      } else if (effect.choiceId === 'admit') {
         cult.loyalty = bounded(cult.loyalty - 4);
         cult.reputation = bounded(cult.reputation + 2);
         cultScandal(
@@ -645,9 +690,12 @@ export function cultStoryMonth(world: World, cult: Cult) {
         thread.status = 'resolved';
         thread.outcome = 'success';
         thread.settledMonth = now;
-        cult.loyalty = bounded(cult.loyalty + 5);
-        cult.reputation = bounded(cult.reputation + 3);
-        cult.heat = bounded(cult.heat - 2);
+        applyCultClaimImpact(
+          world,
+          cult,
+          thread,
+          cultClaimOutcome(definition.id, true),
+        );
         cultRecord(
           world,
           cult,
@@ -656,16 +704,20 @@ export function cultStoryMonth(world: World, cult: Cult) {
             ' promise came due. ' +
             definition.successText,
         );
-      } else if (definition.quiet) {
+      } else if (
+        definition.quiet &&
+        thread.approach !== 'double-down' &&
+        cult.heat < 60
+      ) {
         thread.status = 'resolved';
         thread.outcome = 'failure';
         thread.settledMonth = now;
-        cult.loyalty = bounded(cult.loyalty - 4);
-        cultScandal(
+        applyCultClaimImpact(
           world,
           cult,
+          thread,
+          cultClaimOutcome(definition.id, false),
           'The ' + thread.title.toLowerCase() + ' promise failed.',
-          thread.approach === 'double-down' ? 9 : 5,
         );
         cultRecord(
           world,
@@ -698,6 +750,7 @@ export function cultStoryMonth(world: World, cult: Cult) {
     return;
   const candidates = cultStories.filter(
     (definition) =>
+      definition.source !== 'activity' &&
       now - (cult.storyLast[definition.id] ?? -1000) >= 36 &&
       cultStoryContext(world, cult, definition),
   );

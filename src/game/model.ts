@@ -122,7 +122,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(46), engineVersion: z.literal(48), contentVersion: z.literal(25),
+  schemaVersion: z.literal(47), engineVersion: z.literal(49), contentVersion: z.literal(26),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -686,6 +686,10 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Cult leadership starts prospectively after the published Polish 3 save.
   if (parsed && parsed.schemaVersion === 45 && parsed.engineVersion === 47 && parsed.contentVersion === 24) {
     parsed.schemaVersion = 46; parsed.engineVersion = 48; parsed.contentVersion = 25; parsed.cults = [];
+  }
+  // Cult polish retains every existing organisation, person and pending offer.
+  if (parsed && parsed.schemaVersion === 46 && parsed.engineVersion === 48 && parsed.contentVersion === 25) {
+    parsed.schemaVersion = 47; parsed.engineVersion = 49; parsed.contentVersion = 26;
   }
   return validateWorld(parsed, immutable);
 }

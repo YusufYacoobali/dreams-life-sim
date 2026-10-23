@@ -4,7 +4,11 @@ import { ageOn, compareDates } from '../personHelpers';
 import { countries } from '../countries';
 import { rules } from '../rules';
 import { jobs } from '../content/jobs';
-import { cultClaims } from '../content/cultClaims';
+import {
+  cultClaims,
+  cultClaimChoiceIds,
+  cultClaimChoiceSetValid,
+} from '../content/cultClaims';
 import { cultStories } from '../content/cultStories';
 import {
   cultHeadquarters,
@@ -35,7 +39,19 @@ export function validateCults(world: World, ledger: LedgerIndex) {
     ids = new Set<string>(),
     leaders = new Set<string>(),
     receiptIds = new Set<string>(),
-    allMembers = new Set<string>();
+    activeMembers = new Set<string>(),
+    activeCultLeaders = new Set(
+      world.cults
+        .filter((cult) => cult.status === 'active')
+        .map((cult) => cult.leaderId),
+    ),
+    rivalLeaders = new Set(
+      world.cults.flatMap((cult) =>
+        cult.rivals
+          .filter((rival) => ['active', 'allied'].includes(rival.status))
+          .map((rival) => rival.leaderId),
+      ),
+    );
   const pending = [
     ...(world.pending ? [world.pending] : []),
     ...world.deferred.map((row) => row.event),
@@ -150,6 +166,10 @@ export function validateCults(world: World, ledger: LedgerIndex) {
       unique(cult.members.map((row) => row.personId)),
       'inner-circle identity',
     );
+    requireCult(
+      cult.members.filter((member) => member.status === 'active').length <= 5,
+      'active inner-circle capacity',
+    );
     const roles = new Set<string>(),
       memoryIds = new Set<string>();
     for (const member of cult.members) {
@@ -157,12 +177,11 @@ export function validateCults(world: World, ledger: LedgerIndex) {
       requireCult(
         person &&
           person.id !== founder.id &&
-          !allMembers.has(person.id) &&
           compareDates(member.joined, cult.started) >= 0 &&
-          compareDates(member.joined, world.date) <= 0,
+          compareDates(member.joined, world.date) <= 0 &&
+          ageOn(person, member.joined) >= rules[cult.country].adultAge,
         'named follower',
       );
-      allMembers.add(person.id);
       requireCult(
         world.relationships.some(
           (row) =>
@@ -173,9 +192,15 @@ export function validateCults(world: World, ledger: LedgerIndex) {
       );
       if (member.status === 'active') {
         requireCult(
-          cult.status === 'active' && !person.died && !member.ended,
+          cult.status === 'active' &&
+            !person.died &&
+            !member.ended &&
+            !activeMembers.has(person.id) &&
+            !activeCultLeaders.has(person.id) &&
+            !rivalLeaders.has(person.id),
           'active follower',
         );
+        activeMembers.add(person.id);
         if (member.role !== 'adviser') {
           requireCult(
             !roles.has(member.role),
@@ -485,15 +510,25 @@ export function validateCults(world: World, ledger: LedgerIndex) {
         );
         const choices =
           thread.kind === 'claim'
-            ? ['admit', 'postpone', 'blame', 'withdraw']
+            ? cultClaimChoiceIds(thread.templateId)
             : [
                 ...cultStories
                   .find((row) => row.id === thread.templateId)!
                   .choices.map((row) => row.id),
                 'withdraw',
               ];
+        const claimRevision =
+          thread.kind === 'claim' &&
+          !event.choices.some((choice) => choice.id === 'blame')
+            ? 2
+            : undefined;
         requireCult(
-          event.choices.length === choices.length &&
+          (thread.kind === 'claim'
+            ? cultClaimChoiceSetValid(
+                thread.templateId,
+                event.choices.map((choice) => choice.id),
+              )
+            : event.choices.length === choices.length) &&
             unique(event.choices.map((row) => row.id)) &&
             event.choices.every(
               (choice) =>
@@ -503,7 +538,8 @@ export function validateCults(world: World, ledger: LedgerIndex) {
                 choice.effects[0].cultId === cult.id &&
                 choice.effects[0].threadId === thread.id &&
                 choice.effects[0].offerId === thread.offerId &&
-                choice.effects[0].choiceId === choice.id,
+                choice.effects[0].choiceId === choice.id &&
+                choice.effects[0].claimRevision === claimRevision,
             ),
           'choice binding',
         );

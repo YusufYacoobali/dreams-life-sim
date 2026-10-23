@@ -45,6 +45,7 @@ export const cultChoiceEffectSchema = z
     threadId: z.string(),
     offerId: z.string(),
     choiceId: z.string().min(1).max(40),
+    claimRevision: z.literal(2).optional(),
   })
   .strict();
 export const cultCommandSchema = z.discriminatedUnion('type', [
@@ -114,6 +115,15 @@ export const cultCommandSchema = z.discriminatedUnion('type', [
       ]),
       role: z.enum(cultMemberRoles).optional(),
       quotedCost: money.optional(),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('cult-fill-vacancy'),
+      cultId: z.string(),
+      personId: z.string(),
+      role: z.enum(cultMemberRoles),
+      quotedCost: money,
     })
     .strict(),
   z
@@ -350,7 +360,9 @@ export const cultSchema = z.object({
   bookBase: bookTotals,
   claimsMade: z.array(z.enum(cultClaimIds)).max(18),
   legalIncidents: z.array(z.string()).max(64),
-  members: z.array(memberSchema).min(3).max(5),
+  // Five active seats; former real people remain in the organisation's history.
+  // Replacement never creates a person, and each identity has only one record.
+  members: z.array(memberSchema).min(3),
   threads: z.array(cultThreadSchema).max(72),
   threadArchive: z.object({
     resolved: z.number().int().nonnegative(),

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Body, Button, Heading } from './components';
 import { useColors } from './theme';
@@ -11,6 +11,7 @@ import { eventBadgeColor, presentationArtwork, type EventCategory } from './even
 
 export type EffectRow = { id: string; label: string; value: string; tone: 'positive' | 'negative' | 'neutral' };
 type Choice = { id: string; label: string; disabledReason?: string };
+export type SelectionSearch = { label: string; placeholder?: string; selectedId?: string };
 export type EventPresentation = {
   id: string; title: string; body: string; illustration?: React.ReactNode;
   category?: EventCategory; participants?: readonly StoryParticipant[];
@@ -23,14 +24,14 @@ export type EventPresentation = {
 );
 
 export function EventModal({
-  event, busy = false, error, onChoose, onCancel, onClose, modalOwner = 'app',
-}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review' }) {
-  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} onClose={onClose} modalOwner={modalOwner} /> : null;
+  event, busy = false, error, onChoose, onCancel, onClose, modalOwner = 'app', selectionSearch,
+}: { event: EventPresentation | null; busy?: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review'; selectionSearch?: SelectionSearch }) {
+  return event ? <EventCard key={event.id} event={event} busy={busy} error={error} onChoose={onChoose} onCancel={onCancel} onClose={onClose} modalOwner={modalOwner} selectionSearch={selectionSearch} /> : null;
 }
 
 function EventCard({
-  event, busy, error, onChoose, onCancel, onClose, modalOwner,
-}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review' }) {
+  event, busy, error, onChoose, onCancel, onClose, modalOwner, selectionSearch,
+}: { event: EventPresentation; busy: boolean; error?: string | null; onChoose: (id: string) => void; onCancel?: () => void; onClose?: () => void; modalOwner?: 'app' | 'review'; selectionSearch?: SelectionSearch }) {
   useModalPresence(modalOwner);
   const c = useColors();
   const artwork = presentationArtwork(event.illustration,event.category);
@@ -38,8 +39,9 @@ function EventCard({
   const insets = useSafeAreaInsets();
   const { width, fontScale } = useWindowDimensions();
   const stackedEffects = width < 360 || fontScale >= 1.3;
-  const [selected, setSelected] = useState<string | null>(null);
-  const selectedRef = useRef<string | null>(null);
+  const initialSelection = event.kind === 'selection' && selectionSearch?.selectedId && event.choices.some(choice => choice.id === selectionSearch.selectedId && !choice.disabledReason) ? selectionSearch.selectedId : null;
+  const [selected, setSelected] = useState<string | null>(initialSelection), [query, setQuery] = useState('');
+  const selectedRef = useRef<string | null>(initialSelection);
   const mounted = useRef(true), closed = useRef(false), current = useRef({ event, busy });
   if (current.current.event !== event) closed.current = false;
   current.current = { event, busy };
@@ -58,6 +60,10 @@ function EventCard({
   };
   const showProgress = useDelayedBusy(busy);
   const selectedEligible = event.kind === 'selection' && event.choices.some(choice => choice.id === selected && !choice.disabledReason);
+  const matches = event.kind === 'selection' ? event.choices.filter(choice => !selectionSearch || query.trim().toLocaleLowerCase().split(/\s+/).every(word => choice.label.toLocaleLowerCase().includes(word))) : [];
+  const hiddenSelection = event.kind === 'selection' && selectionSearch && selectedEligible && !matches.some(choice => choice.id === selected) ? event.choices.find(choice => choice.id === selected) : undefined;
+  const visibleChoices = hiddenSelection ? [hiddenSelection, ...matches] : matches;
+  const SelectionFrame = selectionSearch ? KeyboardAvoidingView : React.Fragment;
   const effects = event.kind === 'result' ? event.effects
     : event.kind === 'confirmation' ? event.terms : event.kind === 'milestone' ? event.facts : [];
   return (
@@ -65,6 +71,7 @@ function EventCard({
     // time, leaving strips of the underlying page outside this backdrop.
     // Keep the navigation bar opaque; card spacing still uses safe-area insets.
     <Modal transparent presentationStyle="overFullScreen" statusBarTranslucent navigationBarTranslucent={false} animationType={reducedMotion ? 'none' : 'fade'} visible onRequestClose={() => dismiss(onCancel ?? onClose)}>
+      <SelectionFrame {...(selectionSearch ? { style:{flex:1}, behavior:Platform.OS==='ios' ? 'padding' as const : 'height' as const } : {})}>
       <View style={[styles.backdrop, { backgroundColor: c.overlay, paddingTop: insets.top + 40, paddingBottom: insets.bottom + 24 }]}>
         <View accessibilityViewIsModal style={[styles.card, event.kind === 'selection' && styles.selectionCard, { backgroundColor: c.surface }]}>
           {artwork.illustration && <View testID="event-artwork-badge" style={[styles.illustration, { backgroundColor: eventBadgeColor(artwork.category,c), borderColor: c.surface }]}>{artwork.illustration}</View>}
@@ -86,7 +93,12 @@ function EventCard({
               onPress={() => choose(choice.id)}
             />)}
             {event.kind === 'selection' && <>
-              {event.choices.map(choice => <Pressable
+              {selectionSearch && <View style={{gap:8}}>
+                <TextInput accessibilityLabel={selectionSearch.label} placeholder={selectionSearch.placeholder ?? 'Search by name or description'} placeholderTextColor={c.muted} value={query} editable={!busy} autoCapitalize="none" autoCorrect={false} onChangeText={value => { if (canAct()) setQuery(value); }} style={{color:c.ink,backgroundColor:c.inset,borderColor:c.line,borderWidth:1,borderRadius:12,padding:12,minHeight:48,fontSize:15}} />
+                {!!query && <Button label="Clear Search" tone="secondary" disabled={busy} onPress={() => { if (canAct()) setQuery(''); }} />}
+                {!!query && <Text accessibilityLiveRegion="polite" style={{color:c.muted,fontSize:13,lineHeight:18}}>{matches.length ? matches.length + ' matching ' + (matches.length === 1 ? 'option' : 'options') : 'No matching options'}{hiddenSelection ? '. Your selected option is kept below.' : ''}</Text>}
+              </View>}
+              {visibleChoices.map(choice => <Pressable
                 key={choice.id} accessibilityRole="radio" accessibilityState={{ checked: selected === choice.id, disabled: busy || !!choice.disabledReason }}
                 accessibilityLabel={[choice.label, choice.disabledReason].filter(Boolean).join('. ')}
                 disabled={busy || !!choice.disabledReason} onPress={() => { if (canAct() && !choice.disabledReason && selectedRef.current !== choice.id) { selectedRef.current = choice.id; setSelected(choice.id); hapticFeedback(); } }}
@@ -104,6 +116,7 @@ function EventCard({
           </View>}
         </View>
       </View>
+      </SelectionFrame>
     </Modal>
   );
 }

@@ -4,7 +4,9 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '..');
 const base =
   process.env.DREAMS_CULT_EXPORT_DIR || '/tmp/dreams-cult-integrated-export';
-const evidence = path.join(root, 'docs/verification/cult-career');
+const evidence =
+  process.env.DREAMS_CULT_REVIEW_DIR ||
+  path.join(root, 'docs/verification/cult-career');
 const sha = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
 const expected = JSON.parse(
   fs.readFileSync(path.join(evidence, 'runtime-source-hashes.json')),

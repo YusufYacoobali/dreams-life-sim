@@ -155,6 +155,17 @@ export function cultFoundingReason(
     return 'Cult leadership is available to adults';
   if (activeCult(world)) return 'You already lead an active cult';
   if (
+    world.cults.some(
+      (other) =>
+        other.status === 'active' &&
+        other.members.some(
+          (member) =>
+            member.personId === person.id && member.status === 'active',
+        ),
+    )
+  )
+    return 'Leave your current inner-circle responsibility before founding an organisation';
+  if (
     world.cults.length >= 128 ||
     world.cults.filter((row) => row.founderId === person.id).length >= 8
   )

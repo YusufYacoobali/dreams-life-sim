@@ -6,12 +6,14 @@ import {
   EventModal,
   type EventPresentation,
   type EffectRow,
+  type SelectionSearch,
 } from './EventModal';
 type Dialog = {
   identity: string;
   event: EventPresentation;
   command?: CultCommand;
   onSelect?: (id: string) => void;
+  search?: SelectionSearch;
 };
 export function useCultDialog(cultId?: string) {
   const dispatch = useGame((state) => state.dispatch),
@@ -66,7 +68,7 @@ export function useCultDialog(cultId?: string) {
   };
   function open(
     event: EventPresentation,
-    extra: Pick<Dialog, 'command' | 'onSelect'> = {},
+    extra: Pick<Dialog, 'command' | 'onSelect' | 'search'> = {},
   ) {
     if (
       !mounted.current ||
@@ -94,6 +96,7 @@ export function useCultDialog(cultId?: string) {
       onSelect: (id: string) => void,
       id: CultArtId = 'cult',
       illustration?: React.ReactNode,
+      search?: SelectionSearch,
     ) {
       open(
         {
@@ -105,7 +108,7 @@ export function useCultDialog(cultId?: string) {
           confirmLabel: 'Choose',
           illustration: illustration ?? art(id),
         },
-        { onSelect },
+        { onSelect, search },
       );
     },
     confirm(
@@ -149,6 +152,7 @@ export function useCultDialog(cultId?: string) {
       <EventModal
         event={shown?.event ?? null}
         busy={busy}
+        selectionSearch={shown?.search}
         error={shown?.command ? error : null}
         onCancel={
           shown?.event.kind === 'result'

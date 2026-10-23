@@ -315,3 +315,301 @@ export const cultClaims: readonly CultClaimDefinition[] = [
     chance: 55,
   },
 ];
+
+export type CultClaimImpact = {
+  loyalty?: number;
+  satisfaction?: number;
+  reputation?: number;
+  heat?: number;
+  growth?: number;
+  memberLoyalty?: number;
+  ambition?: number;
+};
+export type CultClaimRemedy = {
+  id: string;
+  label: string;
+  result: string;
+  journal: string;
+  action:
+    | 'science-night'
+    | 'open-records'
+    | 'retire-reboot'
+    | 'refund-dues'
+    | 'repair-venue'
+    | 'late-picnic'
+    | 'reimburse-witness'
+    | 'independent-study'
+    | 'delegate-answer'
+    | 'animal-shelter'
+    | 'auction-kettle'
+    | 'build-workshop'
+    | 'plant-garden'
+    | 'aid-supper'
+    | 'free-membership'
+    | 'neighbour-gathering'
+    | 'publish-six'
+    | 'covered-hall';
+  impact: CultClaimImpact;
+};
+/** Remedies keep the failed deadline on record and change something tangible. */
+export const cultClaimRemedies: Record<CultClaimId, CultClaimRemedy> = {
+  'green-moon': {
+    id: 'invite-astronomer',
+    label: 'Hire an astronomer and retire the prophecy',
+    result:
+      'The astronomer explains the moon without charging extra for colours. You make fallibility part of the doctrine. Some devotees leave; others finally trust the meeting.',
+    journal:
+      'I paid for an astronomy evening and made fallibility official after the green-moon fiasco.',
+    action: 'science-night',
+    impact: { loyalty: -4, reputation: 7, heat: -7, growth: -2 },
+  },
+  'future-letter': {
+    id: 'unseal-postbag',
+    label: 'Open the records to the members',
+    result:
+      'Members inspect the actual correspondence. There is no message from tomorrow. There is a very overdue electricity reminder. Open books become a rule.',
+    journal: 'I opened our records after the future letter failed to arrive.',
+    action: 'open-records',
+    impact: { loyalty: -2, reputation: 5, heat: -5, memberLoyalty: 8 },
+  },
+  'world-reboot': {
+    id: 'cancel-countdown',
+    label: 'End the countdown and retire the reboot doctrine',
+    result:
+      'You dismantle the countdown display and replace the reboot doctrine with an admission that leaders can be wrong. Members can stop backing up their souls.',
+    journal:
+      'I cancelled the reality countdown and retired our reboot doctrine.',
+    action: 'retire-reboot',
+    impact: { loyalty: -6, satisfaction: 8, reputation: 4, heat: -6 },
+  },
+  'cosmic-refund': {
+    id: 'refund-members',
+    label: 'Refund one month of ordinary members’ fees',
+    result:
+      'An actual month of dues leaves the treasury and goes back to ordinary members. Nobody mistakes it for a message from the universe.',
+    journal:
+      'I refunded a real month of ordinary members’ dues after promising a cosmic refund.',
+    action: 'refund-dues',
+    impact: { loyalty: 4, satisfaction: 10, reputation: 3, heat: -6 },
+  },
+  'rain-receipt': {
+    id: 'pay-roof-bill',
+    label: 'Settle the venue bills instead of blaming the sky',
+    result:
+      'You pay the recorded arrears and a practical maintenance bill. The next committee meeting concerns gutters. This is a measurable improvement.',
+    journal:
+      'I settled the venue arrears and maintenance bill after my rain prediction failed.',
+    action: 'repair-venue',
+    impact: { satisfaction: 7, reputation: 3, heat: -3 },
+  },
+  'last-picnic': {
+    id: 'hold-late-picnic',
+    label: 'Pay for the picnic now, late and ordinary',
+    result:
+      'The promised deadline stays missed. A real community supper finally happens, with enough food and absolutely no apocalypse announcement.',
+    journal:
+      'I paid for a late community picnic instead of inventing another deadline.',
+    action: 'late-picnic',
+    impact: { loyalty: 3, satisfaction: 9, heat: -4 },
+  },
+  'final-monday': {
+    id: 'repay-lost-shift',
+    label: 'Compensate the witness for their wasted time',
+    result:
+      'The named witness receives an actual support payment. Monday remains in circulation. At least someone can afford their groceries.',
+    journal:
+      'I paid {member} compensation for acting on my final-Monday prediction.',
+    action: 'reimburse-witness',
+    impact: { loyalty: -3, reputation: 2, memberLoyalty: 12, heat: -3 },
+  },
+  'hidden-answer': {
+    id: 'commission-study',
+    label: 'Commission an independent investigation',
+    result:
+      'You pay an outside investigator and let members inspect the resulting accounts. Their first useful discovery is that your claims needed checking.',
+    journal:
+      'I funded an independent investigation and opened its accounts after our hidden-answer promise failed.',
+    action: 'independent-study',
+    impact: { loyalty: -3, reputation: 8, heat: -5, ambition: 6 },
+  },
+  'quiet-answer': {
+    id: 'hand-over-lectern',
+    label: 'Give the witness the adviser’s seat',
+    result:
+      '{member} takes the adviser’s seat and a real share of the responsibility. Their first answer is that the leader should listen more often.',
+    journal:
+      'I gave {member} the adviser’s seat after failing to produce our promised answer.',
+    action: 'delegate-answer',
+    impact: { satisfaction: 6, memberLoyalty: 14, ambition: 12, heat: -2 },
+  },
+  'animal-review': {
+    id: 'fund-animal-care',
+    label: 'Fund animal care without claiming endorsement',
+    result:
+      'The treasury pays for practical animal care. The animals still offer no endorsement, but the donation does something more useful than your prediction.',
+    journal:
+      'I funded practical animal care after our supposed animal endorsement failed.',
+    action: 'animal-shelter',
+    impact: { satisfaction: 6, reputation: 6, heat: -3 },
+  },
+  'kettle-oracle': {
+    id: 'auction-kettle',
+    label: 'Auction the kettle and retire its doctrine',
+    result:
+      'The kettle sells as a kettle. The proceeds enter the communal treasury; its doctrine is replaced by an admission of fallibility. Devotees of the whistle are furious.',
+    journal:
+      'I auctioned the silent kettle for the communal treasury and retired its doctrine.',
+    action: 'auction-kettle',
+    impact: { loyalty: -9, reputation: 4, heat: -5, growth: -3 },
+  },
+  'sleeping-talent': {
+    id: 'build-workshop-now',
+    label: 'Buy the promised workshop now',
+    result:
+      'The treasury pays the actual workshop price. Members can finally make things there, and workshop sales can begin. The missed opening date stays in your record.',
+    journal:
+      'I bought the overdue workshop after failing to provide the talent space I promised.',
+    action: 'build-workshop',
+    impact: { loyalty: 2, satisfaction: 8, reputation: 2, heat: -3 },
+  },
+  'memory-garden': {
+    id: 'plant-garden-now',
+    label: 'Fund the memorial garden without another speech',
+    result:
+      'The actual garden upgrade is paid for and installed. Members have a place to remember people. You let them use it without making this about your comeback.',
+    journal:
+      'I funded the overdue memorial garden and left the opening to the members.',
+    action: 'plant-garden',
+    impact: { satisfaction: 9, memberLoyalty: 10, heat: -3 },
+  },
+  'full-table': {
+    id: 'fund-real-support',
+    label: 'Hold the meal and pay real member support',
+    result:
+      'A community supper is funded, the witness receives an actual support payment and mutual aid becomes a rule. This costs considerably more than printing the slogan.',
+    journal:
+      'I funded a late community supper and paid {member} real support after the empty-table promise.',
+    action: 'aid-supper',
+    impact: {
+      loyalty: 6,
+      satisfaction: 9,
+      reputation: 4,
+      heat: -5,
+      memberLoyalty: 10,
+    },
+  },
+  'dream-visitor': {
+    id: 'open-membership',
+    label: 'Drop both fees and let actual guests decide',
+    result:
+      'Joining and monthly fees become zero. Guest night becomes a rule. Future recruitment gets easier; future dues disappear until you change the fees again.',
+    journal:
+      'I opened free membership and guest nights after my dream visitor failed to appear.',
+    action: 'free-membership',
+    impact: { loyalty: -2, satisfaction: 6, reputation: 4, heat: -3 },
+  },
+  'good-neighbour': {
+    id: 'host-neighbours',
+    label: 'Pay for a real open-house gathering',
+    result:
+      'The treasury funds an actual open house. Neighbours get a visit instead of another promise. You also hear a detailed account of your parking arrangements.',
+    journal:
+      'I paid for a late open house and listened to the neighbours’ complaints.',
+    action: 'neighbour-gathering',
+    impact: { loyalty: -2, satisfaction: 4, reputation: 8, heat: -7 },
+  },
+  'seven-signs': {
+    id: 'publish-six',
+    label: 'Publish the six signs and drop the sacred number',
+    result:
+      'The duplicate bus ticket is removed. An admission of fallibility replaces the sacred-number doctrine. Several members dislike the correction; the noticeboard is at least accurate.',
+    journal:
+      'I published the six genuine coincidences and retired the sacred-number doctrine.',
+    action: 'publish-six',
+    impact: { loyalty: -6, reputation: 7, heat: -5, memberLoyalty: 5 },
+  },
+  'perfect-weather': {
+    id: 'buy-covered-hall',
+    label: 'Buy the gathering hall instead of commanding the weather',
+    result:
+      'The gathering hall is actually purchased. It raises capacity and running costs, and the next indoor gathering will not need your cooperation with the clouds.',
+    journal:
+      'I paid for a covered gathering hall after promising perfect weather.',
+    action: 'covered-hall',
+    impact: { satisfaction: 7, reputation: 4, heat: -4 },
+  },
+};
+const claimSuccess: Record<CultClaimId, CultClaimImpact> = {
+  'green-moon': {},
+  'future-letter': { loyalty: 4, reputation: 4, memberLoyalty: 5 },
+  'world-reboot': {},
+  'cosmic-refund': { loyalty: 3, satisfaction: 6, reputation: 2 },
+  'rain-receipt': { loyalty: 3, satisfaction: 2, heat: -1 },
+  'last-picnic': { loyalty: 5, satisfaction: 8, reputation: 2 },
+  'final-monday': {},
+  'hidden-answer': { reputation: 6, memberLoyalty: 7, ambition: 6 },
+  'quiet-answer': { loyalty: 3, memberLoyalty: 8, ambition: 3 },
+  'animal-review': { loyalty: 2, satisfaction: 4, heat: -1 },
+  'kettle-oracle': {},
+  'sleeping-talent': { loyalty: 3, satisfaction: 6, reputation: 3 },
+  'memory-garden': { satisfaction: 9, memberLoyalty: 6, reputation: 2 },
+  'full-table': { loyalty: 8, satisfaction: 8, reputation: 4 },
+  'dream-visitor': { loyalty: 4, reputation: 6 },
+  'good-neighbour': { satisfaction: 3, reputation: 8, heat: -5 },
+  'seven-signs': { loyalty: 4, ambition: 6, heat: 2 },
+  'perfect-weather': { loyalty: 4, satisfaction: 3, heat: -1 },
+};
+const claimFailure: Record<CultClaimId, CultClaimImpact> = {
+  'green-moon': { loyalty: -6, reputation: -3, heat: 9 },
+  'future-letter': { loyalty: -4, reputation: -4, memberLoyalty: -3, heat: 6 },
+  'world-reboot': { loyalty: -8, satisfaction: -5, growth: -3, heat: 10 },
+  'cosmic-refund': { loyalty: -7, satisfaction: -8, heat: 7 },
+  'rain-receipt': { loyalty: -2, satisfaction: -4, heat: 4 },
+  'last-picnic': { loyalty: -4, satisfaction: -7, heat: 5 },
+  'final-monday': { loyalty: -7, satisfaction: -4, memberLoyalty: -8, heat: 8 },
+  'hidden-answer': { loyalty: -5, reputation: -5, ambition: 5, heat: 6 },
+  'quiet-answer': { loyalty: -4, memberLoyalty: -6, ambition: 4, heat: 4 },
+  'animal-review': { reputation: -3, satisfaction: -3, growth: -1, heat: 2 },
+  'kettle-oracle': { loyalty: -6, reputation: -4, heat: 8 },
+  'sleeping-talent': { loyalty: -5, satisfaction: -8, heat: 6 },
+  'memory-garden': {
+    loyalty: -9,
+    satisfaction: -10,
+    memberLoyalty: -12,
+    heat: 5,
+  },
+  'full-table': { loyalty: -8, satisfaction: -9, memberLoyalty: -7, heat: 8 },
+  'dream-visitor': { loyalty: -3, reputation: -3, satisfaction: -1, heat: 4 },
+  'good-neighbour': { reputation: -8, satisfaction: -3, heat: 7 },
+  'seven-signs': { loyalty: -5, ambition: 5, heat: 6 },
+  'perfect-weather': {
+    loyalty: -3,
+    satisfaction: -6,
+    memberLoyalty: -4,
+    heat: 5,
+  },
+};
+export function cultClaimOutcome(
+  id: CultClaimId,
+  success: boolean,
+): CultClaimImpact {
+  return success ? claimSuccess[id] : claimFailure[id];
+}
+export function cultClaimChoiceIds(id: string): string[] {
+  const remedy = cultClaimRemedies[id as CultClaimId];
+  return [
+    'admit',
+    'postpone',
+    'blame',
+    ...(remedy ? [remedy.id] : []),
+    'withdraw',
+  ];
+}
+export function cultClaimChoiceSetValid(id: string, ids: readonly string[]) {
+  if (ids.length !== 4 || new Set(ids).size !== 4) return false;
+  const remedy = cultClaimRemedies[id as CultClaimId];
+  return (
+    ['admit', 'postpone', 'withdraw'].every((choice) => ids.includes(choice)) &&
+    (ids.includes('blame') || (!!remedy && ids.includes(remedy.id)))
+  );
+}

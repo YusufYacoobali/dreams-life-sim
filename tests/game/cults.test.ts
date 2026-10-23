@@ -77,7 +77,9 @@ test('every original philosophy, doctrine and rule has a real bounded modifier',
   expect(cultDoctrines).toHaveLength(28);
   expect(cultRules).toHaveLength(28);
   expect(cultClaims).toHaveLength(18);
-  expect(cultStories).toHaveLength(28);
+  expect(cultStories.filter(story => !story.source)).toHaveLength(28);
+  expect(cultStories.filter(story => story.source === 'dramatic')).toHaveLength(12);
+  expect(cultStories.filter(story => story.source === 'activity')).toHaveLength(16);
   for (const row of [...cultPhilosophies, ...cultDoctrines, ...cultRules])
     expect(Object.values(row.modifiers).some((value) => value !== 0)).toBe(
       true,

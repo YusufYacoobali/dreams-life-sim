@@ -1,0 +1,225 @@
+{
+  "renderer": "Browser CSS/SVG adapter of production React Native trees, not native screenshots",
+  "browser": "154.0.8037.57",
+  "captures": [
+    "cult-belief-search-dark-large",
+    "cult-belief-search-light",
+    "cult-dashboard-dark-large",
+    "cult-dashboard-light",
+    "cult-founding-dark-large",
+    "cult-founding-light",
+    "cult-founding-review-dark-large",
+    "cult-founding-review-light",
+    "cult-headquarters-dark-large",
+    "cult-headquarters-light",
+    "cult-member-dark-large",
+    "cult-member-light",
+    "cult-recruitment-dark-large",
+    "cult-recruitment-light",
+    "cult-replacement-review-dark-large",
+    "cult-replacement-review-light",
+    "cult-treasury-dark-large",
+    "cult-treasury-light",
+    "cult-treasury-records-dark-large",
+    "cult-treasury-records-light",
+    "cult-vacancy-dark-large",
+    "cult-vacancy-light"
+  ],
+  "scrollChecks": [
+    {
+      "tree": "cult-belief-search-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-belief-search-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-dashboard-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-dashboard-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-dashboard-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-dashboard-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-review-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-review-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-review-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-founding-review-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-headquarters-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-headquarters-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-headquarters-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-headquarters-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-member-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-member-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-member-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-member-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-recruitment-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-recruitment-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-recruitment-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-recruitment-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-replacement-review-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-replacement-review-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-records-dark-large-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-records-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-records-light-before",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-treasury-records-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-vacancy-dark-large-after",
+      "scroll": true,
+      "lastActionVisible": true
+    },
+    {
+      "tree": "cult-vacancy-light-after",
+      "scroll": true,
+      "lastActionVisible": true
+    }
+  ],
+  "allImagesDecoded": true,
+  "phoneOverflow": [],
+  "imageCount": 466,
+  "errors": [],
+  "externalRequests": []
+}

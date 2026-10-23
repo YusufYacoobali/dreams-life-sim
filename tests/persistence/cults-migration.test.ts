@@ -24,8 +24,20 @@ import { cultPeriod, foundCult } from '../support/cults';
 import { database } from '../support/sqlite';
 import native from '../fixtures/v39-content15-native-choice.json';
 import polish3 from '../fixtures/v45-polish3-before-cult.json';
+import cult46 from '../fixtures/v46-cult-before-polish.json';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
+const cult46Canonical = (world: World) => {
+  const raw = JSON.parse(encodeWorld(world));
+  // World46 already owned every cult record: retain the complete nonempty
+  // history, pending offer and every other field in its immutable proof.
+  Object.assign(raw, {
+    schemaVersion: 46,
+    engineVersion: 48,
+    contentVersion: 25,
+  });
+  return JSON.stringify(raw);
+};
 
 // These are explicitly arranged World44 envelopes around real saved facts and
 // ordinary commands, not newly claimed captures from a historical producer.
@@ -70,9 +82,9 @@ test.each([
     const migrated = decodeWorld(input, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 46,
-      engineVersion: 48,
-      contentVersion: 25,
+      schemaVersion: 47,
+      engineVersion: 49,
+      contentVersion: 26,
       cults: [],
     });
     expect(migrated).toEqual(prior);
@@ -127,9 +139,9 @@ test.each([
     const migrated = decodeWorld(original, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 46,
-      engineVersion: 48,
-      contentVersion: 25,
+      schemaVersion: 47,
+      engineVersion: 49,
+      contentVersion: 26,
       cults: [],
     });
     expect(migrated.people).toEqual(decodeWorld(original).people);
@@ -155,7 +167,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        26,
+        27,
       );
       expect(await repository.active()).toEqual(migrated);
       expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
@@ -169,6 +181,205 @@ test.each([
     }
   },
 );
+
+test.each([
+  ['birth', '99dff87d31f00531de42265745b6201093607394ae9ed638e412316310a3afec'],
+  [
+    'failedClaim',
+    '5604e0e4b8ab2a750b258fcfabcb698fb2408516bbbb4f3fcc31d5d96693216b',
+  ],
+] as const)(
+  'genuine World46 %s changes only root tags and keeps the reader26 payload literal',
+  async (key, expectedSha) => {
+    expect(cult46.producerCommit).toBe(
+      '9101307c89f4c05453322e78b6d7f0fcca40a403',
+    );
+    expect(cult46.versions).toEqual({ world: 46, engine: 48, content: 25 });
+    const record = cult46.records[key],
+      original = record.payload,
+      raw = JSON.parse(original);
+    expect(record.payloadSha256).toBe(expectedSha);
+    expect(sha(original)).toBe(expectedSha);
+    expect(Buffer.byteLength(original)).toBe(record.payloadBytes);
+    expect(raw).toMatchObject({
+      schemaVersion: 46,
+      engineVersion: 48,
+      contentVersion: 25,
+    });
+    const migrated = decodeWorld(original, true);
+    expect(JSON.parse(encodeWorld(migrated))).toEqual({
+      ...raw,
+      schemaVersion: 47,
+      engineVersion: 49,
+      contentVersion: 26,
+    });
+    expect(sha(cult46Canonical(migrated))).toBe(expectedSha);
+    expect(migrated.pending).toEqual(raw.pending);
+    expect(migrated.random).toEqual(raw.random);
+    expect(unpackCheckpoint(packCheckpoint(migrated), true)).toEqual(migrated);
+    if (key === 'failedClaim') {
+      expect(
+        migrated.pending?.kind === 'decision' &&
+          migrated.pending.choices.map((row) => row.id),
+      ).toEqual(['admit', 'postpone', 'blame', 'withdraw']);
+      const cult = migrated.cults[0],
+        former = cult.members.find(
+          (row) => row.personId === cult46.expelledMemberId,
+        )!;
+      expect(former.status).toBe('expelled');
+      expect(former.memories).toHaveLength(4);
+      expect(
+        cult.threads.find((row) => row.templateId === 'rival-return'),
+      ).toMatchObject({
+        status: 'scheduled',
+        participantIds: [former.personId],
+        dueMonth: 24336,
+      });
+      expect(cult.cash).toBe(452078n);
+      expect(migrated.annual).toMatchObject({
+        monthsProcessed: 12,
+        stage: 'months',
+      });
+    }
+    const { sqlite, driver } = database();
+    try {
+      await new SaveRepository(driver).initialise();
+      sqlite
+        .prepare(
+          'INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)',
+        )
+        .run(raw.id, 'Cult46 source', raw.revision, '2026-10-23', original);
+      sqlite
+        .prepare('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)')
+        .run(raw.id, raw.revision, original);
+      sqlite
+        .prepare('INSERT INTO preferences(key,value) VALUES(?,?)')
+        .run('active_life', raw.id);
+      sqlite.exec('PRAGMA user_version=26');
+      const repository = new SaveRepository(driver);
+      await repository.initialise();
+      expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
+        27,
+      );
+      expect(await repository.active()).toEqual(migrated);
+      expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
+      for (const table of ['lives', 'backups'])
+        expect(
+          sqlite.prepare('SELECT payload FROM ' + table).get()?.payload,
+        ).toBe(original);
+      expect(cult46.records[key].payload).toBe(original);
+    } finally {
+      sqlite.close();
+    }
+  },
+);
+
+test.each([
+  ['admit', '46d1197dbe4cf1fbdb452d2e641f62a682fbce41f0772ad0d40a98d22c5dc09a'],
+  [
+    'postpone',
+    'b8487b603ec437695b4e86ad157203bc6114c13d744d2fce573b4eea5efebd4e',
+  ],
+  ['blame', 'c3605f00f7f36a4220d769e23880662b6a7bdc6e07a9ed80d1fc7889238716f0'],
+] as const)(
+  'the actual saved World46 %s answer retains its complete original outcome without offering new choices',
+  (choiceId, expectedSha) => {
+    const before = unpackCheckpoint(
+        packCheckpoint(decodeWorld(cult46.records.failedClaim.payload, true)),
+        true,
+      ),
+      original = encodeWorld(before);
+    const proof = cult46.legacyResults[choiceId],
+      command = {
+        type: 'choose' as const,
+        eventId: before.pending!.id,
+        choiceId,
+      };
+    expect(command).toEqual(proof.command);
+    const selected = resolveCommand(before, command);
+    expect(proof.resultSha256).toBe(expectedSha);
+    expect(sha(cult46Canonical(selected))).toBe(expectedSha);
+    expect(
+      selected.cults[0].threads.find((row) => row.templateId === 'green-moon'),
+    ).toMatchObject(proof.thread);
+    expect(selected.pending?.kind === 'result' && selected.pending.body).toBe(
+      before.pending?.kind === 'decision' &&
+        before.pending.choices.find((row) => row.id === choiceId)!.resultBody,
+    );
+    expect(encodeWorld(before)).toBe(original);
+    const cold = unpackCheckpoint(packCheckpoint(selected), true),
+      settled = encodeWorld(cold);
+    expect(() => resolveCommand(cold, command)).toThrow();
+    expect(encodeWorld(cold)).toBe(settled);
+  },
+);
+
+test('an actual World46 failed offer retains witnesses, former members, rival callback and treasury through archive transfer and Time Machine', async () => {
+  const source = database(),
+    destination = database(),
+    repository = new SaveRepository(source.driver),
+    imported = new SaveRepository(destination.driver);
+  try {
+    await repository.initialise();
+    await imported.initialise();
+    const before = await repository.import(cult46.records.failedClaim.payload),
+      point = (await repository.snapshot(before.id, before.revision))[0];
+    const future = resolveCommand(before, {
+      type: 'choose',
+      eventId: before.pending!.id,
+      choiceId: 'admit',
+    });
+    await repository.commit(future, before.revision, 'legacy-admit', true);
+    await repository.snapshot(future.id, future.revision);
+    expect(await imported.import(await repository.export(future.id))).toEqual(
+      future,
+    );
+    const branch = await imported.restoreBranch(
+      future.id,
+      point.id,
+      future.revision,
+      'life_cult46_offer_branch',
+      'restore-cult46-offer',
+    );
+    expect(branch).toEqual({ ...before, id: branch.id });
+    expect(branch.cults).toEqual(before.cults);
+    expect(branch.pending).toEqual(
+      JSON.parse(cult46.records.failedClaim.payload).pending,
+    );
+    expect(await imported.load(future.id)).toEqual(future);
+    expect(
+      await imported.restoreBranch(
+        future.id,
+        point.id,
+        future.revision,
+        'unused-cult46-branch',
+        'restore-cult46-offer',
+      ),
+    ).toEqual(branch);
+    const cold = decodeSave(await imported.export(branch.id)).world;
+    expect(cold).toEqual(branch);
+    const blamed = resolveCommand(cold, {
+      type: 'choose',
+      eventId: cold.pending!.id,
+      choiceId: 'blame',
+    });
+    expect(sha(cult46Canonical({ ...blamed, id: before.id }))).toBe(
+      cult46.legacyResults.blame.resultSha256,
+    );
+    expect(
+      (await imported.snapshots(branch.id)).every(
+        (row) => row.revision <= before.revision,
+      ),
+    ).toBe(true);
+    expect(
+      before.cults[0].threads.find((row) => row.templateId === 'rival-return')!
+        .participantIds,
+    ).toEqual([cult46.expelledMemberId]);
+  } finally {
+    source.sqlite.close();
+    destination.sqlite.close();
+  }
+});
 
 test.each(['missing', 'null', 'object', 'corrupt'] as const)(
   'current worlds reject %s cult history rather than repairing it',
@@ -289,8 +500,8 @@ test('live cult finances, witnesses, deadlines and pending results survive snaps
   }
 });
 
-test.each([24, 25])(
-  'reader%s →26 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
+test.each([24, 25, 26])(
+  'reader%s →27 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
   async (reader) => {
     const { sqlite, driver } = database(),
       repository = new SaveRepository(driver);
@@ -386,7 +597,7 @@ test.each([24, 25])(
               ...tx,
               run: async (sql, values) => {
                 await tx.run(sql, values);
-                if (sql === 'PRAGMA user_version = 26')
+                if (sql === 'PRAGMA user_version = 27')
                   throw new Error('interrupted cult reader marker');
               },
             }),
@@ -404,7 +615,7 @@ test.each([24, 25])(
       await cold.initialise();
       expect(unpack).not.toHaveBeenCalled();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        26,
+        27,
       );
       expect(rows()).toEqual(original);
       expect(await cold.active()).toEqual(paused);

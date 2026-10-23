@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { useGame } from '../../src/state/useGame';
 import {
@@ -59,6 +59,13 @@ import {
   cultRules,
 } from '../../src/game/content/cults';
 import { cultClaims } from '../../src/game/content/cultClaims';
+import {
+  cultVacancyRoles,
+  cultReplacementCandidates,
+  cultReplacementQuote,
+  cultReplacementReason,
+  cultRoleChangeReason,
+} from '../../src/game/systems/cultRoster';
 import type { EffectRow } from '../../src/ui/EventModal';
 
 type Config = {
@@ -148,6 +155,10 @@ function CultDashboard() {
           (row) =>
             row.id === selected[index] || !selected.includes(row.id as never),
         )
+        .sort(
+          (a, b) =>
+            Number(b.id === selected[index]) - Number(a.id === selected[index]),
+        )
         .map((row) => ({
           id: row.id,
           label: row.title + ' · ' + row.description,
@@ -158,6 +169,11 @@ function CultDashboard() {
           [kind]: value[kind].map((old, i) => (i === index ? id : old)),
         })) as void,
       kind,
+      undefined,
+      {
+        label: kind === 'doctrines' ? 'Search doctrines' : 'Search rules',
+        selectedId: selected[index],
+      },
     );
   }
   function addBelief(kind: 'doctrines' | 'rules') {
@@ -177,6 +193,8 @@ function CultDashboard() {
           [kind]: [...value[kind], id],
         })) as void,
       kind,
+      undefined,
+      { label: kind === 'doctrines' ? 'Search doctrines' : 'Search rules' },
     );
   }
   function titleOptions() {
@@ -405,7 +423,9 @@ function CultDashboard() {
           ? 'This person has died'
           : member.status !== 'active' && id !== 'talk'
             ? 'They have left the organisation'
-            : undefined,
+            : id === 'promote'
+              ? cultRoleChangeReason(cult, personId, 'deputy')
+              : undefined,
       })),
       (id) => {
         const action = id as Extract<
@@ -419,6 +439,11 @@ function CultDashboard() {
             Object.entries(cultRoleTitles).map(([id, label]) => ({
               id,
               label,
+              disabledReason: cultRoleChangeReason(
+                cult,
+                personId,
+                id as typeof member.role,
+              ),
             })),
             (role) =>
               review(
@@ -475,19 +500,122 @@ function CultDashboard() {
   }
   function followers() {
     if (!cult) return;
+    const current = cult.members.filter((row) => row.status === 'active'),
+      former = cult.members.filter((row) => row.status !== 'active'),
+      vacancies = cultVacancyRoles(cult);
     dialog.select(
       'Your inner circle',
-      'Ordinary followers are counted together. These are persistent people with their own relationships and memories.',
-      cult.members.map((row) => ({
-        id: row.personId,
-        label:
-          fullName(world.people[row.personId]) +
-          ' · ' +
-          cultRoleTitles[row.role] +
-          ' · ' +
-          row.status,
-      })),
-      follower,
+      current.length +
+        ' active members. Ordinary followers are counted together; your inner circle keeps its own memories.',
+      [
+        ...current.map((row) => ({
+          id: row.personId,
+          label:
+            fullName(world.people[row.personId]) +
+            ' · ' +
+            cultRoleTitles[row.role] +
+            ' · ' +
+            row.status,
+        })),
+        {
+          id: 'vacancy',
+          label:
+            'Fill a vacancy · ' +
+            vacancies.length +
+            ' available ' +
+            (vacancies.length === 1 ? 'role' : 'roles'),
+          disabledReason: cultReplacementReason(world, cult),
+        },
+        ...(former.length
+          ? [{ id: 'former', label: 'Former members · ' + former.length }]
+          : []),
+      ],
+      (id) => {
+        if (id === 'vacancy') {
+          fillVacancy();
+          return;
+        }
+        if (id === 'former') {
+          dialog.select(
+            'Former inner-circle members',
+            'Earlier roles, disputes and memories stay on record.',
+            former.map((row) => ({
+              id: row.personId,
+              label:
+                fullName(world.people[row.personId]) +
+                ' · ' +
+                cultRoleTitles[row.role] +
+                ' · ' +
+                row.status,
+            })),
+            follower,
+            'followers',
+            undefined,
+            former.length > 6 ? { label: 'Search former members' } : undefined,
+          );
+          return;
+        }
+        follower(id);
+      },
+      'followers',
+    );
+  }
+  function fillVacancy() {
+    if (!cult) return;
+    const roles = cultVacancyRoles(cult),
+      quote = cultReplacementQuote(cult);
+    dialog.select(
+      'Fill an inner-circle vacancy',
+      'Offer a real local contact a responsibility. Up to two invitations each year.',
+      roles.map((role) => ({ id: role, label: cultRoleTitles[role] })),
+      (id) => {
+        const role = id as Cult['members'][number]['role'],
+          candidates = cultReplacementCandidates(world, cult);
+        if (!candidates.length) {
+          dialog.info(
+            'No eligible local contacts',
+            'Get to know an adult in the headquarters city before inviting them. Former members need a repaired relationship, and active rival leaders must reconcile first.',
+            [],
+            'followers',
+          );
+          return;
+        }
+        dialog.select(
+          'Choose your ' + cultRoleTitles[role].toLowerCase(),
+          'Choose someone you already know. Their existing identity and memories stay with them.',
+          candidates.map((person) => ({
+            id: person.id,
+            label:
+              fullName(person) +
+              (cult.members.some((member) => member.personId === person.id)
+                ? ' · Former inner-circle member'
+                : ''),
+            disabledReason: cultReplacementReason(world, cult, person.id, role),
+          })),
+          (personId) => {
+            const person = world.people[personId];
+            review(
+              {
+                type: 'cult-fill-vacancy',
+                cultId: cult.id,
+                personId,
+                role,
+                quotedCost: quote,
+              },
+              'Invite ' + fullName(person) + '?',
+              cultRoleTitles[role] +
+                ' will become their actual responsibility. Invitation and induction costs come from the communal treasury.',
+              'followers',
+              [costRow(cult, quote)],
+            );
+          },
+          'followers',
+          undefined,
+          candidates.length > 6
+            ? { label: 'Search local contacts' }
+            : undefined,
+        );
+      },
       'followers',
     );
   }
@@ -950,41 +1078,68 @@ function CultDashboard() {
           {error}
         </Text>
       )}
-      <Card>
-        <SocialBusinessIntro
-          art={<CultArt size={78} />}
-          title={cult?.name ?? 'Start something people will remember'}
-          eyebrow={cult ? cult.leaderTitle : 'Independent career'}
-          body={
-            cult
-              ? 'Your followers have opinions. Some of them keep notes.'
-              : 'Choose what you believe, find your people and remember what you promised.'
-          }
-        />
+      <Card style={cult ? { gap: 8 } : undefined}>
+        {cult ? (
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <CultArt size={48} />
+            <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
+              <Heading size={20}>{cult.name}</Heading>
+              <Text style={{ color: c.muted, fontSize: 13, lineHeight: 18 }}>
+                {cult.leaderTitle}
+              </Text>
+            </View>
+          </View>
+        ) : (
+          <SocialBusinessIntro
+            art={<CultArt size={78} />}
+            title="Start something people will remember"
+            eyebrow="Independent career"
+            body="Choose what you believe, find your people and remember what you promised."
+          />
+        )}
         {cult && (
           <>
-            <SocialBusinessFacts
-              items={[
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
+              {[
                 {
                   label: 'Followers',
                   value: cult.followers.toLocaleString('en-US'),
                 },
                 { label: 'Treasury', value: cultMoney(cult, cult.cash) },
-                {
-                  label: 'Headquarters',
-                  value: cultHeadquarters.find(
-                    (row) => row.id === cult.headquarters,
-                  )!.title,
-                },
-              ]}
-            />
+              ].map((item) => (
+                <View
+                  key={item.label}
+                  accessible
+                  accessibilityLabel={item.label + ': ' + item.value}
+                  style={{ flexGrow: 1, flexBasis: 100, minWidth: 0, gap: 2 }}
+                >
+                  <Text
+                    style={{ color: c.muted, fontSize: 13, lineHeight: 18 }}
+                  >
+                    {item.label}
+                  </Text>
+                  <Text
+                    style={{ color: c.ink, fontSize: 18, fontWeight: '700' }}
+                  >
+                    {item.value}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <Text style={{ color: c.muted, fontSize: 13, lineHeight: 18 }}>
+              Headquarters:{' '}
+              {
+                cultHeadquarters.find((row) => row.id === cult.headquarters)!
+                  .title
+              }
+            </Text>
             <StatBar label="Loyalty" value={cult.loyalty} color={c.blue} />
             <StatBar label="Public Heat" value={cult.heat} color={c.red} />
-            <Body muted>
+            <Text style={{ color: c.muted, fontSize: 13, lineHeight: 18 }}>
               Capacity {cult.followers.toLocaleString('en-US')} /{' '}
               {cultCapacity(cult).toLocaleString('en-US')} · Satisfaction{' '}
               {cult.satisfaction}% · Reputation {cult.reputation}%
-            </Body>
+            </Text>
           </>
         )}
       </Card>

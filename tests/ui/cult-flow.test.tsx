@@ -14,7 +14,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createGameStore } from '../../src/state/gameStore';
-import { encodeWorld, type World } from '../../src/game/model';
+import { encodeWorld, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { fullName } from '../../src/game/personHelpers';
 import { accountFor } from '../../src/game/systems/common';
@@ -28,7 +28,13 @@ import {
   cultStartupQuote,
   cultUpgradeQuote,
 } from '../../src/game/systems/cultCore';
-import { cultLeaderTitles } from '../../src/game/content/cults';
+import { cultLeaderTitles, cultRoleTitles } from '../../src/game/content/cults';
+import {
+  cultReplacementCandidates,
+  cultReplacementQuote,
+  cultVacancyRoles,
+} from '../../src/game/systems/cultRoster';
+import { relationFor } from '../../src/game/systems/relationshipQueries';
 import { rules } from '../../src/game/rules';
 import {
   SaveRepository,
@@ -187,6 +193,7 @@ type Action =
   | 'reward'
   | 'claim'
   | 'contribute'
+  | 'replacement'
   | 'upgrade';
 async function review(
   action: Action,
@@ -286,6 +293,30 @@ async function review(
       },
     };
   }
+  if (action === 'replacement') {
+    const candidate =
+        cultReplacementCandidates(current, cult).find((person) =>
+          cult.members.some(
+            (member) =>
+              member.personId === person.id && member.status !== 'active',
+          ),
+        ) ?? cultReplacementCandidates(current, cult)[0],
+      role = cultVacancyRoles(cult)[0];
+    await press(/^Manage Followers\./);
+    await select(/^Fill a vacancy/);
+    await select(cultRoleTitles[role]);
+    await select(new RegExp('^' + fullName(candidate)));
+    return {
+      title: 'Invite ' + fullName(candidate) + '?',
+      command: {
+        type: 'cult-fill-vacancy',
+        cultId: cult.id,
+        personId: candidate.id,
+        role,
+        quotedCost: cultReplacementQuote(cult),
+      },
+    };
+  }
   await press(/^Meditation Garden\./);
   return {
     title: 'Add Meditation Garden?',
@@ -298,6 +329,21 @@ async function review(
   };
 }
 
+function repairedFormerMember() {
+  let initial = foundCult(),
+    member = initial.cults[0].members[0];
+  initial = cultCommand(initial, {
+    type: 'cult-member',
+    cultId: initial.cults[0].id,
+    personId: member.personId,
+    action: 'expel',
+  });
+  // Explicit repaired-relationship scenario; the UI still makes the actual
+  // invitation, retains the same NPC and commits its communal cost.
+  relationFor(initial, initial.activePersonId, member.personId)!.strength = 75;
+  return validateWorld(initial);
+}
+
 test.each([
   'found',
   'recruit',
@@ -305,12 +351,17 @@ test.each([
   'reward',
   'claim',
   'contribute',
+  'replacement',
   'upgrade',
 ] as Action[])(
   '%s review cancels without writes and retains failed save terms, then cold-resumes one result',
   async (action) => {
     const context = await setup(
-      action === 'found' ? cultFixture() : foundCult(),
+      action === 'found'
+        ? cultFixture()
+        : action === 'replacement'
+          ? repairedFormerMember()
+          : foundCult(),
     );
     try {
       const initial = world(),
@@ -329,6 +380,7 @@ test.each([
       expect(context.rows()).toEqual(beforeRows);
       terms = await review(action);
       const expected = resolveCommand(initial, terms.command, true);
+      expect(expected.pending).not.toBeNull();
       context.sqlite.exec(
         "CREATE TRIGGER fail_cult_review BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END",
       );
@@ -363,6 +415,31 @@ test.each([
       expect(world().accounts).toEqual(expected.accounts);
       expect(world().ledger).toEqual(expected.ledger);
       expect(world().cults).toEqual(expected.cults);
+      if (action === 'replacement') {
+        expect(Object.keys(world().people)).toEqual(
+          Object.keys(initial.people),
+        );
+        expect(world().cults[0].members).toHaveLength(
+          initial.cults[0].members.length,
+        );
+        const restored = world().cults[0].members.find(
+          (member) =>
+            member.personId ===
+            (
+              terms.command as Extract<
+                GameCommand,
+                { type: 'cult-fill-vacancy' }
+              >
+            ).personId,
+        )!;
+        expect(restored.status).toBe('active');
+        expect(
+          restored.memories.some((memory) => memory.kind === 'expel'),
+        ).toBe(true);
+        expect(
+          restored.memories.some((memory) => memory.kind === 'rejoined'),
+        ).toBe(true);
+      }
       const doneRows = context.rows();
       await act(async () => {
         expect(
@@ -380,88 +457,111 @@ test.each([
   },
 );
 
-test('a held founding ignores duplicate confirm, cancellation and Android Back until one durable transaction finishes', async () => {
-  const context = await setup(cultFixture());
-  try {
-    const initial = world(),
-      beforeRows = context.rows(),
-      view = render(frame()),
-      terms = await review('found'),
-      expected = resolveCommand(initial, terms.command, true),
-      release = context.pauseNextSave();
-    const retainedConfirm =
-      screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
-    await press('Confirm');
-    expect(mockStore.getState().busy).toBe(true);
-    expect(modal().getByRole('button', { name: 'Confirm' })).toHaveProp(
-      'accessibilityState',
-      { disabled: true, busy: true },
+test.each(['found', 'replacement'] as const)(
+  'a held %s ignores duplicate confirm, cancellation and Android Back until one durable transaction finishes',
+  async (action) => {
+    const context = await setup(
+      action === 'found' ? cultFixture() : repairedFormerMember(),
     );
-    expect(screen.getByLabelText('Cult name')).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled();
-    await press('Confirm');
-    await press('Never mind');
-    await press('Back');
-    await act(async () => {
-      screen.UNSAFE_getByType(Native.Modal).props.onRequestClose();
-      await retainedConfirm('confirm');
-    });
-    expect(modal().getByText(terms.title)).toBeOnTheScreen();
-    expect(world()).toEqual(initial);
-    expect(context.rows()).toEqual(beforeRows);
-    expect(mockBack).not.toHaveBeenCalled();
-    await act(async () => {
-      release();
-    });
-    await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    expect(world()).toEqual(expected);
-    expect(world().cults).toHaveLength(1);
-    await act(async () => {
-      await retainedConfirm('confirm');
-    });
-    expect(world()).toEqual(expected);
-    expect(
-      world().ledger.filter((row) => row.category === 'cult-capital'),
-    ).toHaveLength(1);
-    view.unmount();
-  } finally {
-    context.close();
-  }
-});
+    try {
+      const initial = world(),
+        beforeRows = context.rows(),
+        view = render(frame()),
+        terms = await review(action),
+        expected = resolveCommand(initial, terms.command, true),
+        release = context.pauseNextSave();
+      const retainedConfirm =
+        screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
+      await press('Confirm');
+      expect(mockStore.getState().busy).toBe(true);
+      expect(modal().getByRole('button', { name: 'Confirm' })).toHaveProp(
+        'accessibilityState',
+        { disabled: true, busy: true },
+      );
+      if (action === 'found')
+        expect(screen.getByLabelText('Cult name')).toBeDisabled();
+      else
+        expect(
+          screen.getByRole('button', { name: /^Manage Followers\./ }),
+        ).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled();
+      await press('Confirm');
+      await press('Never mind');
+      await press('Back');
+      await act(async () => {
+        screen.UNSAFE_getByType(Native.Modal).props.onRequestClose();
+        await retainedConfirm('confirm');
+      });
+      expect(modal().getByText(terms.title)).toBeOnTheScreen();
+      expect(world()).toEqual(initial);
+      expect(context.rows()).toEqual(beforeRows);
+      expect(mockBack).not.toHaveBeenCalled();
+      await act(async () => {
+        release();
+      });
+      await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+      expect(world()).toEqual(expected);
+      expect(world().cults).toHaveLength(1);
+      await act(async () => {
+        await retainedConfirm('confirm');
+      });
+      expect(world()).toEqual(expected);
+      if (action === 'found')
+        expect(
+          world().ledger.filter((row) => row.category === 'cult-capital'),
+        ).toHaveLength(1);
+      else {
+        expect(Object.keys(world().people)).toEqual(
+          Object.keys(initial.people),
+        );
+        expect(world().cults[0].members).toHaveLength(
+          initial.cults[0].members.length,
+        );
+      }
+      view.unmount();
+    } finally {
+      context.close();
+    }
+  },
+);
 
-test('a switched life invalidates retained confirmation and selection callbacks without altering either organisation', async () => {
-  const context = await setup(foundCult());
-  try {
-    const view = render(frame());
-    await review('recruit');
-    const old = screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
-    const other = foundCult(cultFixture('GB'));
-    await act(async () => {
-      mockStore.setState({ world: other, error: null });
-    });
-    expect(screen.queryByText('Street Invitations?')).toBeNull();
-    const before = encodeWorld(world()),
-      rows = context.rows();
-    await act(async () => {
-      await old('confirm');
-    });
-    expect(encodeWorld(world())).toBe(before);
-    expect(context.rows()).toEqual(rows);
-    await press(/^Manage Followers\./);
-    const selection = screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
-    await act(async () => {
-      mockStore.setState({ world: foundCult(), error: null });
-    });
-    await act(async () => {
-      await selection(other.cults[0].members[0].personId);
-    });
-    expect(screen.queryByText('Assign responsibility')).toBeNull();
-    expect(context.rows()).toEqual(rows);
-    view.unmount();
-  } finally {
-    context.close();
-  }
-});
+test.each(['recruit', 'replacement'] as const)(
+  'a switched life invalidates retained %s confirmation and selection callbacks without altering either organisation',
+  async (action) => {
+    const context = await setup(foundCult());
+    try {
+      const view = render(frame());
+      await review(action);
+      const old = screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
+      const other = foundCult(cultFixture('GB'));
+      await act(async () => {
+        mockStore.setState({ world: other, error: null });
+      });
+      expect(screen.queryByText('Street Invitations?')).toBeNull();
+      const before = encodeWorld(world()),
+        rows = context.rows();
+      await act(async () => {
+        await old('confirm');
+      });
+      expect(encodeWorld(world())).toBe(before);
+      expect(context.rows()).toEqual(rows);
+      await press(/^Manage Followers\./);
+      const selection =
+        screen.UNSAFE_getAllByType(EventModal)[0].props.onChoose;
+      await act(async () => {
+        mockStore.setState({ world: foundCult(), error: null });
+      });
+      await act(async () => {
+        await selection(other.cults[0].members[0].personId);
+      });
+      expect(screen.queryByText('Assign responsibility')).toBeNull();
+      expect(context.rows()).toEqual(rows);
+      view.unmount();
+    } finally {
+      context.close();
+    }
+  },
+);
 
 function capture(name: string, tree: unknown) {
   const directory = process.env.DREAMS_CULT_REVIEW_TREES;
@@ -515,6 +615,79 @@ function capture(name: string, tree: unknown) {
   writeFileSync(join(directory, name + '.json'), JSON.stringify(clean(tree)));
 }
 
+test('current deputy and responsibility remain disabled, while former members stay accessible through history', async () => {
+  const initial = repairedFormerMember(),
+    context = await setup(initial);
+  try {
+    const view = render(frame()),
+      before = encodeWorld(world()),
+      rows = context.rows(),
+      dispatch = jest.spyOn(mockStore.getState(), 'dispatch'),
+      cult = initial.cults[0],
+      member = cult.members.find((row) => row.status === 'active')!;
+    // The first remaining role is assigned as the actual deputy through the
+    // engine, then the persisted current responsibility is reviewed read-only.
+    await act(async () => {
+      expect(
+        await mockStore
+          .getState()
+          .dispatch({
+            type: 'cult-member',
+            cultId: cult.id,
+            personId: member.personId,
+            action: 'promote',
+          }),
+      ).toBe(true);
+    });
+    await press('Continue');
+    dispatch.mockClear();
+    const current = encodeWorld(world()),
+      currentRows = context.rows();
+    await press(/^Manage Followers\./);
+    await select(new RegExp('^' + fullName(world().people[member.personId])));
+    expect(
+      screen.getByRole('radio', {
+        name: /^Promote to second-in-command.*already holds/,
+      }),
+    ).toBeDisabled();
+    await press(/^Promote to second-in-command/, 'radio');
+    expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
+    await select('Assign responsibility');
+    expect(
+      screen.getByRole('radio', { name: /^Second-in-command.*already holds/ }),
+    ).toBeDisabled();
+    await press(/^Second-in-command/, 'radio');
+    expect(screen.getByRole('button', { name: 'Choose' })).toBeDisabled();
+    await press('Never mind');
+    await press(/^Manage Followers\./);
+    const former = cult.members.find((row) => row.status !== 'active')!,
+      formerName = fullName(initial.people[former.personId]);
+    expect(
+      screen.queryByRole('radio', { name: new RegExp('^' + formerName) }),
+    ).toBeNull();
+    await select(/^Former members/);
+    await select(new RegExp('^' + formerName));
+    expect(
+      modal().getByText(new RegExp('expelled.*Loyalty')),
+    ).toBeOnTheScreen();
+    expect(
+      screen.getByRole('radio', {
+        name: /^Promote to second-in-command.*left the organisation/,
+      }),
+    ).toBeDisabled();
+    await press('Never mind');
+    expect(dispatch).not.toHaveBeenCalled();
+    expect(encodeWorld(world())).toBe(current);
+    expect(context.rows()).toEqual(currentRows);
+    expect(current).not.toBe(before);
+    expect(currentRows).not.toEqual(rows);
+    view.unmount();
+  } finally {
+    jest.restoreAllMocks();
+    context.close();
+  }
+});
+
 test.each([false, true])(
   'founding, dashboard and management use the current Dreams components and remain read-only (dark=%s)',
   async (dark) => {
@@ -541,6 +714,73 @@ test.each([false, true])(
         mockStore.setState({ world: initial, error: null });
       });
       capture('cult-dashboard-' + suffix, view.toJSON());
+      expect(
+        screen.getByLabelText(
+          'Followers: ' + initial.cults[0].followers.toLocaleString('en-US'),
+        ),
+      ).toBeOnTheScreen();
+      expect(
+        screen.getByLabelText(
+          'Treasury: ' + cultMoney(initial.cults[0], initial.cults[0].cash),
+        ),
+      ).toBeOnTheScreen();
+      expect(screen.getByRole('progressbar', { name: 'Loyalty' })).toHaveProp(
+        'accessibilityValue',
+        { min: 0, max: 100, now: initial.cults[0].loyalty },
+      );
+      expect(
+        screen.getByRole('progressbar', { name: 'Public Heat' }),
+      ).toHaveProp('accessibilityValue', {
+        min: 0,
+        max: 100,
+        now: initial.cults[0].heat,
+      });
+      expect(
+        screen.getByText(/Capacity .*Satisfaction .*Reputation/),
+      ).toBeOnTheScreen();
+      await press(/^Manage Beliefs\./);
+      await press('Borrowed Dreams');
+      expect(
+        screen.getByRole('radio', { name: /^Borrowed Dreams/ }),
+      ).toBeChecked();
+      await act(async () => {
+        fireEvent.changeText(screen.getByLabelText('Search doctrines'), 'moon');
+      });
+      expect(screen.getAllByRole('radio')).toHaveLength(2);
+      capture('cult-belief-search-' + suffix, view.toJSON());
+      await press(/^Lunar Intelligence/, 'radio');
+      await act(async () => {
+        fireEvent.changeText(
+          screen.getByLabelText('Search doctrines'),
+          'no such doctrine',
+        );
+      });
+      expect(screen.getAllByRole('radio')).toHaveLength(1);
+      expect(
+        screen.getByRole('radio', { name: /^Lunar Intelligence/ }),
+      ).toBeChecked();
+      expect(
+        screen.getByText(
+          /No matching options. Your selected option is kept below/,
+        ),
+      ).toBeOnTheScreen();
+      await press('Clear Search');
+      expect(
+        screen.getByRole('radio', { name: /^Lunar Intelligence/ }),
+      ).toBeChecked();
+      await press('Never mind');
+      expect(
+        screen.getByRole('button', { name: 'Borrowed Dreams' }),
+      ).toBeOnTheScreen();
+      await press('Close Belief Editor');
+      await press(/^Manage Followers\./);
+      await select(/^Fill a vacancy/);
+      capture('cult-vacancy-' + suffix, view.toJSON());
+      await select(cultRoleTitles[cultVacancyRoles(initial.cults[0])[0]]);
+      const candidate = cultReplacementCandidates(initial, initial.cults[0])[0];
+      await select(new RegExp('^' + fullName(candidate)));
+      capture('cult-replacement-review-' + suffix, view.toJSON());
+      await press('Never mind');
       await press(/^Recruit Followers\./);
       capture('cult-recruitment-' + suffix, view.toJSON());
       await press('Never mind');

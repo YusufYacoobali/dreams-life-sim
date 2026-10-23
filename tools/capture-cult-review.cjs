@@ -2,7 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 async function main() {
-  const out = path.resolve(__dirname, '../docs/verification/cult-career');
+  const out =
+    process.env.DREAMS_CULT_REVIEW_DIR ||
+    path.resolve(__dirname, '../docs/verification/cult-career');
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch({
     executablePath: process.env.CHROMIUM_PATH || undefined,
@@ -39,24 +41,26 @@ async function main() {
         animations: 'disabled',
       });
       {
-        const check = await section.locator('.phone').evaluate((phone) => {
-          const scrolls = [...phone.querySelectorAll('.rn-scroll')];
-          const scroll = scrolls.at(-1);
-          if (!scroll) return { tree: phone.dataset.tree, scroll: false };
-          scroll.scrollTop = scroll.scrollHeight;
-          const last = [...scroll.querySelectorAll('[role="button"]')].at(-1);
-          const frame = scroll.getBoundingClientRect(),
-            button = last?.getBoundingClientRect();
-          return {
-            tree: phone.dataset.tree,
-            scroll: true,
-            lastActionVisible:
-              !button ||
-              (button.top >= frame.top - 1 &&
-                button.bottom <= frame.bottom + 1),
-          };
-        });
-        scrollChecks.push(check);
+        const checks = await section.locator('.phone').evaluateAll((phones) =>
+          phones.map((phone) => {
+            const scrolls = [...phone.querySelectorAll('.rn-scroll')];
+            const scroll = scrolls.at(-1);
+            if (!scroll) return { tree: phone.dataset.tree, scroll: false };
+            scroll.scrollTop = scroll.scrollHeight;
+            const last = [...scroll.querySelectorAll('[role="button"]')].at(-1);
+            const frame = scroll.getBoundingClientRect(),
+              button = last?.getBoundingClientRect();
+            return {
+              tree: phone.dataset.tree,
+              scroll: true,
+              lastActionVisible:
+                !button ||
+                (button.top >= frame.top - 1 &&
+                  button.bottom <= frame.bottom + 1),
+            };
+          }),
+        );
+        scrollChecks.push(...checks);
         await section.screenshot({
           path: path.join(out, id + '-actions.png'),
           animations: 'disabled',
