@@ -15,13 +15,13 @@ import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 const tabs = ['Avatars', 'Skin Tone', 'Hair Style', 'Hair Color', 'Clothing'] as const;
 const appearanceTabs = tabs.map(id => ({ id, label: id }));
 export default function Appearance() {
-  const draft = useCreationDraft(s => s.draft), update = useCreationDraft(s => s.update), [tab, setTab] = useState<typeof tabs[number]>('Avatars'), c = useColors(), width = useWindowDimensions().width;
+  const draft = useCreationDraft(s => s.draft), changeDraft = useCreationDraft(s => s.edit), [tab, setTab] = useState<typeof tabs[number]>('Avatars'), c = useColors(), width = useWindowDimensions().width;
   const tap = useFeedbackPress((action: () => unknown) => action());
   if (!draft) return <Redirect href="/new-life" />;
   const { input } = draft, appearance = input.appearance, edit = (change: Partial<typeof appearance>) => {
     const current = useCreationDraft.getState().draft;
     if (!current || current.seed !== draft.seed || Object.entries(change).every(([key, value]) => current.input.appearance[key as keyof typeof appearance] === value)) return false;
-    update({ ...current.input, appearance: { ...current.input.appearance, ...change } }); return true;
+    changeDraft({ appearance: change }); return true;
   };
   // Keep the edited identity in its own slot, so customisation never replaces
   // another person or duplicates a facial identity in the sixteen-person cast.
