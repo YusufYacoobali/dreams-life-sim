@@ -1,9 +1,0 @@
-PASS tests/game/project-years-callback.test.ts (17.119 s)
-PASS tests/game/annual-pacing.test.ts
-PASS tests/state/annual-pacing-save.test.ts (5.444 s)
-
-Test Suites: 3 passed, 3 total
-Tests:       18 passed, 18 total
-Snapshots:   0 total
-Time:        27.291 s
-Ran all test suites within paths "tests/game/project-years-callback.test.ts", "tests/game/annual-pacing.test.ts", "tests/state/annual-pacing-save.test.ts".

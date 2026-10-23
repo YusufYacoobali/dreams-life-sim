@@ -4,9 +4,9 @@
   "platforms": [
     {
       "platform": "android",
-      "bundle": "_expo/static/js/android/entry-513264a63f720d40080738d2bd0240f5.hbc",
-      "bytes": 7307408,
-      "sha256": "969c667e63c80a96f3b18381cdc689e1cb5a2e9e7dfb550c5cb8ef73245262ff",
+      "bundle": "_expo/static/js/android/entry-9885cb9117483cbce9ab90c0c43b075c.hbc",
+      "bytes": 7372420,
+      "sha256": "0d05fb9c7aec7c8ea09a2365d18f13dfba01c5983f203045a2cba6261e378b4a",
       "hermesMagic": "c61fbc03c103191f",
       "changedSourceFiles": 18,
       "missing": [],
@@ -16,9 +16,9 @@
     },
     {
       "platform": "ios",
-      "bundle": "_expo/static/js/ios/entry-1362a35099172aa9f153878dda81115e.hbc",
-      "bytes": 7126304,
-      "sha256": "45a5a21a614c98562e499d3cdc9321efee425f07d96a03acd7d7253d48ada49e",
+      "bundle": "_expo/static/js/ios/entry-c06b956c49c6d869dffaef53ec7f8714.hbc",
+      "bytes": 7194656,
+      "sha256": "492247bd5a8fe4402de44b8dea962b71c719e6395265b3ca867d0c48e2ba514b",
       "hermesMagic": "c61fbc03c103191f",
       "changedSourceFiles": 18,
       "missing": [],

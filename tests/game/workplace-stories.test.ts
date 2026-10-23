@@ -6,10 +6,9 @@ import { decodeWorld, encodeWorld, fullName } from '../../src/game/model';
 import { offerPending } from '../../src/game/pendingQueue';
 import { currentWorkplace } from '../../src/game/systems/workplaceSchemas';
 import { endEmployment } from '../../src/game/systems/work';
-import { relationFor } from '../../src/game/systems/relationships';
 import { employee } from '../support/employee';
 
-test.each(countryCodes)('%s resolves all workplace choices using existing people and bounded effects without wages, tenure, qualifications or draws', country => {
+test.each(countryCodes)('%s resolves workplace choices on actual people/contracts without wages, tenure, qualifications or draws', country => {
   const initial = employee(country), before = encodeWorld(initial), place = currentWorkplace(initial)!;
   const coworker = initial.people[place.members.find(item => item.role === 'coworker')!.personId], supervisor = initial.people[place.members.find(item => item.role === 'supervisor')!.personId];
   expect(workplaceTemplates).toHaveLength(11); expect(eventTemplates).toHaveLength(319);
@@ -24,11 +23,20 @@ test.each(countryCodes)('%s resolves all workplace choices using existing people
       expect(selected.random).toEqual(initial.random); expect(selected.accounts).toEqual(initial.accounts); expect(selected.ledger).toEqual(initial.ledger);
       expect(selected.workHistory).toEqual(initial.workHistory); expect(selected.workplaces).toEqual(initial.workplaces); expect(selected.workRaises).toEqual(initial.workRaises);
       expect(Object.keys(selected.people)).toEqual(Object.keys(initial.people));
-      for (const person of Object.values(initial.people)) { expect(selected.people[person.id].employment).toEqual(person.employment); expect(selected.people[person.id].education).toEqual(person.education); expect(selected.people[person.id].finance).toEqual(person.finance); }
+      for (const person of Object.values(initial.people)) {
+        const immediate = choice.effects.find(effect => effect.kind === 'story-immediate');
+        const performance = immediate?.personId === person.id ? immediate.work?.performance : undefined;
+        const expectedJob = performance !== undefined && person.employment ? { ...person.employment, performance: Math.max(0, Math.min(100, person.employment.performance + performance)) } : person.employment;
+        expect(selected.people[person.id].employment).toEqual(expectedJob); expect(selected.people[person.id].education).toEqual(person.education); expect(selected.people[person.id].finance).toEqual(person.finance);
+      }
       for (const effect of choice.effects) {
         if (effect.kind === 'stat') expect(selected.people[effect.personId].stats[effect.stat]).toBe(Math.max(0, Math.min(100, initial.people[effect.personId].stats[effect.stat] + effect.delta)));
         else if (effect.kind === 'relationship') expect(selected.relationships.find(edge => edge.id === effect.relationshipId)!.strength).toBe(Math.max(0, Math.min(100, initial.relationships.find(edge => edge.id === effect.relationshipId)!.strength + effect.delta)));
-        else throw new Error('Unexpected work-story reward');
+        else if (effect.kind === 'story-immediate') {
+          expect(effect.cash).toBeUndefined(); expect(effect.endFriendship).toBeUndefined(); expect(effect.publicImage).toBeUndefined(); expect(effect.work?.loseJob).toBeUndefined();
+          for (const target of effect.trust ?? []) expect(selected.relationships.find(edge => edge.id === target.relationshipId)!.trust).toBe(Math.max(0, Math.min(100, initial.relationships.find(edge => edge.id === target.relationshipId)!.trust + target.delta)));
+          if (effect.work) expect(effect.work.employmentId).toBe(initial.people[initial.activePersonId].employment!.id);
+        } else throw new Error('Unexpected work-story reward');
       }
       expect(selected.journal.at(-1)?.text).toBe(choice.journal); expect(decodeWorld(encodeWorld(selected))).toEqual(selected);
       expect(() => resolveCommand(selected, { type: 'choose', eventId: event.id, choiceId: choice.id })).toThrow();
@@ -58,14 +66,15 @@ test('temporary absence selects an actual available colleague, excludes the abse
   expect(eligibleTemplates(world).some(item => !item.dramatic && item.workplace)).toBe(false);
 });
 
-test('an ended colleague contract is excluded while the already-bound name, person and relationship survive saving', () => {
+test('an ended colleague contract is excluded while saved names stay fixed and new role-specific consequences reject substitution', () => {
   const world = employee(), template = workplaceTemplates.find(item => item.id === 'work-shared-credit')!, event = bindEvent(world, template), oldCoworkerId = event.personIds[1];
   offerPending(world, event); endEmployment(world, oldCoworkerId);
   const nextEvent = bindEvent(world, template); expect(nextEvent.personIds[1]).not.toBe(oldCoworkerId);
   const restored = decodeWorld(encodeWorld(world)); expect(restored.pending).toEqual(event);
-  const choice = event.choices.find(item => item.id === 'name')!, oldBond = relationFor(world, world.activePersonId, oldCoworkerId)!.strength;
-  const result = resolveCommand(restored, { type: 'choose', eventId: event.id, choiceId: choice.id });
-  expect(relationFor(result, world.activePersonId, oldCoworkerId)!.strength).toBe(Math.min(100, oldBond + 5)); expect(result.journal.at(-1)?.text).toBe(choice.journal);
+  const choice = event.choices.find(item => item.id === 'name')!, before = encodeWorld(restored);
+  expect(choice.resultBody).toContain(fullName(world.people[oldCoworkerId]));
+  expect(() => resolveCommand(restored, { type: 'choose', eventId: event.id, choiceId: choice.id })).toThrow(/relationship|role|changed/i);
+  expect(encodeWorld(restored)).toBe(before);
 });
 
 test.each([0, 100])('all workplace choices clamp actual stats and named bonds at %i', boundary => {

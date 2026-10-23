@@ -1,8 +1,0 @@
-PASS tests/game/rare-adult-story.test.ts
-PASS tests/game/event-rarity.test.ts
-
-Test Suites: 2 passed, 2 total
-Tests:       15 passed, 15 total
-Snapshots:   0 total
-Time:        6.481 s, estimated 8 s
-Ran all test suites matching /tests\/game\/event-rarity.test.ts|tests\/game\/rare-adult-story.test.ts/i.

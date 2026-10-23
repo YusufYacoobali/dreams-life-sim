@@ -1,8 +1,0 @@
-PASS tests/state/npc-separations-save.test.ts (8.949 s)
-PASS tests/game/npc-separations.test.ts (7.454 s)
-
-Test Suites: 2 passed, 2 total
-Tests:       60 passed, 60 total
-Snapshots:   0 total
-Time:        16.51 s
-Ran all test suites matching /tests\/game\/npc-separations.test.ts|tests\/state\/npc-separations-save.test.ts/i.

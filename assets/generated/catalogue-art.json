@@ -2,7 +2,7 @@
   "generator": "built-in image_gen.imagegen only",
   "reference": "design/07-assets-finances-investing-properties-vehicles.png",
   "style": "Original colourful softly dimensional illustrations, matching the established ownership artwork.",
-  "pngsUnmodified": true,
+  "pngsUnmodified": false,
   "runtimeNetworkRequired": false,
   "atlases": {
     "homes": {
@@ -11,7 +11,7 @@
         1122,
         1402
       ],
-      "sha256": "80a039139c2d9a68ed23294046a375e5a16bdf821da4175333ddcf70005fd80d",
+      "sha256": "02dba508cdd2f8be2676c2f1beb0078a71082e15a83ef5be0dcbfbdbae67a790",
       "subjects": 20
     },
     "vehicles": {
@@ -20,7 +20,7 @@
         1536,
         1024
       ],
-      "sha256": "ef218bb0e22cf785de28a550ab5909bba2512082a7b71f3c5aaeb448bda4296c",
+      "sha256": "a43baa41f635eb7459905a2ec99ebb791c9b8f0362050b465fa392fd495a95e4",
       "subjects": 20
     }
   },
@@ -394,5 +394,6 @@
     "independentSubjects": 40,
     "noOpaqueCropEdges": true,
     "noNeighbouringSubjectInCrop": true
-  }
+  },
+  "encoding": "Lossless PNG recompression; decoded pixels, alpha and dimensions unchanged."
 }

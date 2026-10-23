@@ -48,21 +48,21 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-inverted-map', min: 6, max: 11, school: 'primary', teacher: true, illustration: 'education', title: 'North has moved',
-    body: '{teacher} gives you a classroom map exercise. You have been following it upside down. Your desk is apparently in the sea.',
+    id: 'school-inverted-map', min: 6, max: 11, school: 'primary', teacher: true, illustration: 'education', title: 'The staffroom boss fight',
+    body: 'You copied your school map from a video game. {teacher} wants to know why the staffroom is labelled “FINAL BOSS” and the toilets contain treasure.',
     choices: [
-      o('turn', 'Turn it around and restart', { discipline: 2, energy: -1 }, 'Dry land', 'The room makes more sense now. You correct the route you drew.', 'I corrected a map exercise after reading the map upside down.', undefined, { grades: 2 }),
-      o('ask', 'Ask how to find north', { smarts: 2 }, 'A useful arrow', '{teacher} points out the compass. You practise turning the map without losing your place.', 'I asked {teacher} how to orient a map.', undefined, { teacherBond: 2, skill: { id: 'science', delta: 1 } }),
-      o('submarine', 'Announce that your desk is a submarine', { happiness: 3, respect: -1 }, 'Fleet recalled', '{teacher} allows one submarine noise, then asks you to correct the map.', 'I called my desk a submarine during a map exercise.', undefined, { teacherBond: -1 }),
+      o('turn', 'Replace the monsters with actual rooms', { discipline: 2, energy: -2 }, 'A less dangerous school', 'You redraw the map. The dragon becomes the library. {teacher} marks the corrected version and circles the one staircase you accidentally kept.', 'I replaced a video-game map with a real map of my school.', undefined, { grades: 3 }),
+      o('ask', 'Ask whether the staffroom really is off limits', { smarts: 2 }, 'No equipment required', '{teacher} says pupils should knock. You cross out “requires flaming sword” and draw a doorbell that does not exist. They catch that too.', 'I asked {teacher} about entering the staffroom after labelling it a boss chamber.', undefined, { teacherBond: 2, skill: { id: 'science', delta: 1 } }),
+      o('submarine', 'Insist the treasure is in the toilets', { happiness: 3, respect: -2 }, 'Quest declined', '{teacher} returns the map unmarked. You must redo it, and nobody volunteers to check your treasure claim.', 'I defended a copied fantasy map instead of completing my school-map assignment.', undefined, { teacherBond: -3, grades:-3 }),
     ],
   },
   {
-    id: 'school-library-whisper', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Quiet, please',
-    body: '{classmate} tells you something funny during quiet reading. You try not to laugh. The noise you make is considerably less dignified.',
+    id: 'school-library-whisper', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'A very short biography',
+    body: '{classmate} passes you a homemade book called “People Who Smell Weird”. Your name is on page one. Every other page is blank.',
     choices: [
-      o('pause', 'Take a breath and keep reading', { discipline: 3, stress: -1 }, 'Nearly composed', 'You manage another paragraph. {classmate} makes a heroic effort to look innocent.', 'I recovered from a laughing fit during quiet reading.'),
-      o('later', 'Ask for the rest at break', { respect: 2 }, 'A sensible booking', '{classmate} agrees to save the story. You both get back to your books.', 'I asked {classmate} to finish a funny story at break.', undefined, { peerBond: 3 }),
-      o('reply', 'Whisper an even worse joke', { happiness: 3, discipline: -1 }, 'Sympathy laughter', 'Now neither of you is reading much. The joke was not even particularly good.', 'I made {classmate} laugh during quiet reading.', undefined, { peerBond: 2, grades: -1 }),
+      o('pause', 'Give it a terrible review', { smarts: 2, respect: 1 }, 'Needs more characters', 'You write “repetitive, poorly researched” on the cover. {classmate} laughs, then admits they could not think of a second chapter.', 'I reviewed {classmate}’s insulting homemade book as a disappointed critic.', undefined, { peerBond:2 }),
+      o('later', 'Ask why they made it about you', { respect: 2, stress: 1 }, 'The author retracts', '{classmate} says it was meant to be funny. You ask them to explain the funny part. They cross out your name and use the book for doodles.', 'I made {classmate} explain an insulting book they had written about me.', undefined, { peerBond:-3, trust:{peer:-3} }),
+      o('reply', 'Write their name on every remaining page', { happiness: 3, discipline: -1 }, 'The expanded edition', '{classmate} objects to being most of the book. You point out that they are also the author. Neither of you is reading the assigned book anymore.', 'I filled the rest of {classmate}’s insult book with their own name.', undefined, { peerBond:-5, grades:-1 }),
     ],
   },
   {
@@ -84,12 +84,12 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-secret-language', rarity: 'uncommon', min: 7, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'A private language',
-    body: 'You and {classmate} invent a secret language. By lunchtime, neither of you remembers the word for lunch.',
+    id: 'school-secret-language', rarity: 'uncommon', min: 7, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Nobody told the spy',
+    body: 'You catch {classmate} explaining your secret code to everyone. They claim it is fine because they have invented a second, more secret code. You have not been told it.',
     choices: [
-      o('dictionary', 'Write a tiny dictionary together', { smarts: 2, discipline: 1 }, 'Terms agreed', 'You settle on a few words you can both remember. Lunch gets a very short entry.', 'I wrote a small secret-language dictionary with {classmate}.', undefined, { peerBond: 3 }),
-      o('gestures', 'Try gestures instead', { happiness: 3, energy: -1 }, 'Unexpected pantomime', 'Your gesture for lunch looks like a trapped bird. {classmate} understands eventually.', 'I tried inventing secret gestures with {classmate}.', undefined, { peerBond: 2, skill: { id: 'acting', delta: 1 } }),
-      o('ordinary', 'Switch back to ordinary words', { stress: -2, discipline: 1 }, 'Translation complete', 'The conversation becomes much easier. You keep one secret word for emergencies.', 'I abandoned most of our secret language when we forgot it.'),
+      o('dictionary', 'Demand to inspect the new codebook', { smarts: 2, discipline: 1 }, 'One unhelpful entry', 'The new codebook contains one word: “banana”. {classmate} says its meaning is classified. You add a second word meaning “tell your partner things”.', 'I inspected {classmate}’s replacement secret code and found one word.', undefined, { peerBond:2 }),
+      o('gestures', 'Invent a silent signal for “you are fired”', { happiness: 3, energy: -1 }, 'The message gets through', 'Your signal involves a dramatic bow and pointing away. {classmate} understands immediately and offers to make you head spy again.', 'I used a theatrical gesture to dismiss {classmate} from our imaginary spy team.', undefined, { peerBond:-2, skill:{id:'acting',delta:1} }),
+      o('ordinary', 'Tell everyone the first code means nothing', { stress: -2, respect: -1 }, 'A room full of bananas', 'You claim you made the words up to see who would repeat them. Everyone turns to {classmate}, who is still halfway through a banana demonstration.', 'I disowned a secret code after {classmate} gave it away.', undefined, { peerBond:-6, trust:{peer:-5} }),
     ],
   },
   {
@@ -102,12 +102,12 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-rainy-break', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Indoor championship',
-    body: 'Rain keeps your class inside at break. {classmate} proposes a board game, then explains a rule you are fairly sure they just invented.',
+    id: 'school-rainy-break', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Secrets bingo',
+    body: 'For indoor break, {classmate} makes bingo cards out of everyone’s embarrassing habits. Your square says “cries at cartoons”. They beg you not to add their baby nickname.',
     choices: [
-      o('agree', 'Agree on the rules first', { discipline: 2, respect: 1 }, 'Before the first move', 'You settle the argument before starting. The game is much closer without surprise rules.', 'I agreed on board-game rules with {classmate} before playing.', undefined, { peerBond: 3 }),
-      o('play', 'Try their strange version', { happiness: 3 }, 'House rules', 'The rules are ridiculous in both directions. You finish the game laughing.', 'I tried {classmate}’s unusual board-game rules.', undefined, { peerBond: 2 }),
-      o('quit', 'Accuse them of cheating and quit', { stress: 2, respect: -2 }, 'An empty seat', 'The game stops. {classmate} spends the rest of break playing something else.', 'I accused {classmate} of cheating before our game began.', undefined, { peerBond: -4 }),
+      o('agree', 'Make everyone write their own square', { discipline: 2, respect: 2 }, 'Voluntary humiliation', 'You admit that cartoon dogs get to you. Someone else confesses to eating a paper cupcake case. {classmate} quietly removes half the original cards.', 'I turned {classmate}’s secrets bingo into a game of voluntary confessions.', undefined, { peerBond:3 }),
+      o('play', 'Give a fake sob every time your square comes up', { happiness: 4, energy: -1 }, 'Full house. Very emotional.', 'You sob through three rounds and dedicate the last one to a fictional cartoon potato. {classmate} laughs too hard to call the next number.', 'I played along with {classmate}’s secrets bingo by giving an absurd crying performance.', undefined, { peerBond:3, skill:{id:'acting',delta:1} }),
+      o('quit', 'Announce their baby nickname to the room', { happiness: 2, respect: -6, stress: 3 }, 'Bingo, Baby Stinkbug', 'The room chants the nickname. {classmate} rips up the cards and tells you they will never tell you anything private again.', 'I exposed {classmate}’s private nickname to get back at them during secrets bingo.', undefined, { peerBond:-20, trust:{peer:-18} }),
     ],
   },
   {
@@ -120,12 +120,12 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-unit-confusion', min: 12, max: 17, school: 'secondary', teacher: true, illustration: 'education', title: 'A remarkably large answer',
-    body: 'Your science calculation produces a desk taller than a mountain. {teacher} asks whether you used centimetres or metres. You used whichever fitted.',
+    id: 'teen-unit-confusion', min: 12, max: 17, school: 'secondary', teacher: true, illustration: 'education', title: 'Fastest toy car alive',
+    body: 'You invented the numbers for a marked science report. Your toy car apparently reached 90,000 kilometres an hour. {teacher} asks to see the original measurements.',
     choices: [
-      o('redo', 'Redo it with consistent units', { discipline: 2, energy: -3 }, 'A smaller desk', 'The corrected answer fits in the classroom. You mark the unit beside every step.', 'I corrected inconsistent units in a science calculation.', undefined, { grades: 2, skill: { id: 'science', delta: 2 } }),
-      o('help', 'Ask where the units changed', { smarts: 2 }, 'The missing conversion', '{teacher} helps you find the line where the scale changed. You finish the correction yourself.', 'I asked {teacher} to help find a unit-conversion mistake.', undefined, { teacherBond: 3, grades: 1 }),
-      o('defend', 'Defend your extremely large desk', { happiness: 2, discipline: -1 }, 'Insufficient classroom space', '{teacher} returns the calculation for correction. The original answer does not earn the marks.', 'I defended a science answer with incompatible units.', undefined, { grades: -2, teacherBond: -2 }),
+      o('redo', 'Admit it and take the report back', { respect: 2, energy: -4 }, 'The car has been recalled', '{teacher} lets you submit a properly measured replacement with a reduced mark. The real car rolls under a cupboard. You record that too.', 'I admitted inventing science data and replaced my report with real measurements.', undefined, { grades:-5, teacherBond:-4, skill:{id:'science',delta:2} }),
+      o('help', 'Offer a live demonstration instead', { smarts: 2, energy: -3, stress: 2 }, 'Less speed, more evidence', 'The car travels half a metre and stops. You explain the measurement correctly while {teacher} watches. Your practical work rescues some marks from the fabricated report.', 'I salvaged part of a falsified science assignment with a real practical demonstration.', undefined, { grades:-3, teacherBond:-6, skill:{id:'science',delta:2} }),
+      o('defend', 'Invent a second sheet of measurements', { discipline: -4, stress: 5 }, 'Three times the speed of your credibility', '{teacher} notices your recorded journey takes minus four seconds. The report gets no credit, and your claim that the car travelled backwards in time does not help.', 'I doubled down on fabricated science data and received no credit for the report.', undefined, { grades:-18, teacherBond:-16, trust:{teacher:-14} }),
     ],
   },
   {
@@ -147,12 +147,12 @@ export const schoolDayTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-study-soundtrack', min: 12, max: 17, school: 'secondary', classmate: true, illustration: 'relationship', title: 'Background noise',
-    body: 'You and {classmate} try studying together. Their playlist has a chorus you cannot stop singing. Neither of you has turned the page.',
+    id: 'teen-study-soundtrack', min: 12, max: 17, school: 'secondary', classmate: true, illustration: 'relationship', title: 'Your debut single is chemistry',
+    body: '{classmate} secretly records you singing chemistry definitions and adds a dance beat. The file is called “Desperate for Zinc”. They want to send it to the class.',
     choices: [
-      o('quiet', 'Suggest one quiet study session', { discipline: 3, energy: -2 }, 'An actual page turned', 'You agree to save the playlist for a break. The work finally starts moving.', 'I agreed on a quiet study session with {classmate}.', undefined, { grades: 2, peerBond: 2 }),
-      o('separate', 'Work separately and meet after', { discipline: 2, stress: -1 }, 'Different methods', 'You finish your own section in quiet. {classmate} keeps the music and understands the arrangement.', 'I chose to study separately from {classmate}.'),
-      o('sing', 'Abandon the work for the chorus', { happiness: 3, energy: -1 }, 'Perfectly rehearsed', 'You both learn the chorus. The assignment is less impressed.', 'I sang with {classmate} instead of finishing a study session.', undefined, { grades: -2, peerBond: 3 }),
+      o('quiet', 'Make them delete the recording', { respect: 2, stress: -2 }, 'An extremely limited release', '{classmate} deletes it while you watch. They call you difficult. You call them a record label with no permission forms.', 'I made {classmate} delete a secret recording of my chemistry revision song.', undefined, { peerBond:-3, trust:{peer:-4} }),
+      o('separate', 'Demand credit as the anonymous vocalist', { smarts: 2, happiness: 2 }, 'Featuring Element X', 'The class gets an anonymous revision track. You deny involvement until you accidentally sing the next definition exactly on beat.', 'I let {classmate} share my chemistry song under an anonymous credit.', undefined, { grades:2, peerBond:2 }),
+      o('sing', 'Record a completely unnecessary key change', { happiness: 4, energy: -3 }, 'Too much zinc', 'You belt out the chorus. {classmate} abandons the beat because it no longer fits. The worksheet is still blank, but neither of you can forget what an ion is.', 'I abandoned a chemistry worksheet to record a dramatic revision-song finale with {classmate}.', undefined, { grades:-3, peerBond:4, skill:{id:'music',delta:1} }),
     ],
   },
   {

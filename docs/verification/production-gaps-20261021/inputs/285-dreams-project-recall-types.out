@@ -1,2 +1,0 @@
-tests/game/project-years-callback.test.ts(88,108): error TS2339: Property 'kind' does not exist on type 'never'.
-tests/game/project-years-callback.test.ts(88,145): error TS2339: Property 'personIds' does not exist on type 'never'.

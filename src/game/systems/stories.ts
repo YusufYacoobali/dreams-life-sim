@@ -1,6 +1,7 @@
 import { fullName, type World } from '../model';
 import type { BoundChoice, Pending, RuntimeEffectRow } from '../runtime';
 import { countries } from '../countries';
+import { storyContactNames } from '../storyNames';
 import { rules } from '../rules';
 import { formatMoney, roundRatio } from '../money';
 import { IneligibleAction } from '../errors';
@@ -49,18 +50,23 @@ export function storyChoiceReason(world: World, threadId: string, resolution: st
 
 function callback(world: World, thread: StoryThread): Extract<Pending, { kind: 'decision' }> {
   const peer = world.people[thread.peerId], parent = thread.parentId ? world.people[thread.parentId] : null, teacher = thread.teacherId ? world.people[thread.teacherId] : null;
+  const { names } = storyContactNames([
+    { token: 'peer', role: 'classmate', person: peer, display: peer.firstName },
+    ...(parent ? [{ token: 'parent', role: 'parent', person: parent, display: parent.firstName }] : []),
+    ...(teacher ? [{ token: 'teacher', role: 'teacher', person: teacher, display: teacher.firstName }] : []),
+  ]);
   const option = (id: NonNullable<StoryThread['resolution']>, label: string, title: string, body: string, journal: string): BoundChoice => ({ id, label, effects: [{ kind: 'resolve-story', threadId: thread.id, resolution: id }], resultTitle: title, resultBody: body, journal });
   const amount = formatMoney({ minor: thread.quote.amount, currency: thread.quote.currency }, countries[thread.country].locale);
   return { kind: 'decision', id: thread.id + '_due', templateId: 'story-' + thread.kind, title: parent ? 'Party day' : 'The project is due',
-    body: parent ? peer.firstName + '’s arcade birthday is here. ' + parent.firstName + ' agreed to take you. The quoted outing costs ' + amount + ', paid by ' + parent.firstName + ' only if you go.' : peer.firstName + ' is putting the class project together. ' + teacher!.firstName + ' wants your section today. The blank page has enjoyed two months of peace.',
+    body: parent ? names.peer + '’s arcade birthday is here. ' + names.parent + ' agreed to take you. The quoted outing costs ' + amount + ', paid by ' + names.parent + ' only if you go.' : names.peer + ' is putting the class project together. ' + names.teacher + ' wants your section today. The blank page has enjoyed two months of peace.',
     illustration: parent ? 'birthday' : 'education', personIds: [thread.personId, thread.peerId, ...(parent ? [parent.id] : []), ...(teacher ? [teacher.id] : [])],
     choices: parent ? [
-      option('attend', 'Go with ' + parent.firstName + ' · ' + amount, 'High score, low dignity', 'You and ' + peer.firstName + ' take turns at the machines. ' + parent.firstName + ' pays the quoted outing cost. Nobody wins enough tickets to retire.', 'I went to ' + peer.firstName + '’s arcade birthday with ' + parent.firstName + '.'),
-      option('decline', 'Stay home · no charge', 'No arcade receipts', 'You stay home. The outing is not charged, and the invitation does not become a debt.', 'I stayed home instead of going to ' + peer.firstName + '’s arcade birthday.'),
+      option('attend', 'Go with ' + names.parent + ' · ' + amount, 'High score, low dignity', 'You and ' + names.peer + ' take turns at the machines. ' + names.parent + ' pays the quoted outing cost. Nobody wins enough tickets to retire.', 'I went to ' + names.peer + '’s arcade birthday with ' + names.parent + '.'),
+      option('decline', 'Stay home · no charge', 'No arcade receipts', 'You stay home. The outing is not charged, and the invitation does not become a debt.', 'I stayed home instead of going to ' + names.peer + '’s arcade birthday.'),
     ] : [
-      option('complete', 'Finish your section', 'Your name belongs on it', 'You finish your section and explain it to ' + peer.firstName + '. ' + teacher!.firstName + ' records the work you actually did.', 'I finished my section of the class project with ' + peer.firstName + '.'),
-      option('ask-help', 'Ask ' + teacher!.firstName + ' for help', 'Less staring, more writing', teacher!.firstName + ' helps you break the work into smaller steps. You complete a shorter section yourself.', 'I asked ' + teacher!.firstName + ' for help and completed a shorter project section.'),
-      option('leave-to-peer', 'Leave your section blank', 'A very short contribution', peer.firstName + ' sees your empty section. ' + teacher!.firstName + ' records the missing work. Your name is still extremely visible.', 'I left my promised project section blank. ' + peer.firstName + ' noticed.'),
+      option('complete', 'Finish your section', 'Your name belongs on it', 'You finish your section and explain it to ' + names.peer + '. ' + names.teacher + ' records the work you actually did.', 'I finished my section of the class project with ' + names.peer + '.'),
+      option('ask-help', 'Ask ' + names.teacher + ' for help', 'Less staring, more writing', names.teacher + ' helps you break the work into smaller steps. You complete a shorter section yourself.', 'I asked ' + names.teacher + ' for help and completed a shorter project section.'),
+      option('leave-to-peer', 'Leave your section blank', 'A very short contribution', names.peer + ' sees your empty section. ' + names.teacher + ' records the missing work. Your name is still extremely visible.', 'I left my promised project section blank. ' + names.peer + ' noticed.'),
     ] };
 }
 

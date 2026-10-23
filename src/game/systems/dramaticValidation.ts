@@ -15,7 +15,7 @@ export function validateDramaticEvent(world: World, event: Extract<Pending, { ki
   const job = (id?: string) => world.people[player].employment?.id === id || world.workHistory.some(row => row.id === id && row.personId === player);
   for (const [index, choice] of event.choices.entries()) {
     const effect = actions[index];
-    if (choice.effects.length !== 1 || effect.eventId !== event.templateId || effect.choiceId !== choice.id || !template.choices.some(row => row.id === choice.id) || effect.ruleVersion !== first.ruleVersion || effect.ruleVersion === 2 && !['dramatic-double-fiance', 'dramatic-athlete-doping'].includes(event.templateId) || effect.subjectId !== first.subjectId || effect.contextId !== first.contextId || effect.relatedId !== first.relatedId || effect.otherId !== first.otherId || effect.quote !== first.quote) throw new Error('Invalid dramatic action binding');
+    if (choice.effects.length !== 1 || effect.eventId !== event.templateId || effect.choiceId !== choice.id || !template.choices.some(row => row.id === choice.id) || effect.copyVersion !== first.copyVersion || effect.ruleVersion !== first.ruleVersion || effect.ruleVersion === 2 && !['dramatic-double-fiance', 'dramatic-athlete-doping'].includes(event.templateId) || effect.subjectId !== first.subjectId || effect.contextId !== first.contextId || effect.relatedId !== first.relatedId || effect.otherId !== first.otherId || effect.quote !== first.quote) throw new Error('Invalid dramatic action binding');
   }
   const e = first;
   let valid = false;

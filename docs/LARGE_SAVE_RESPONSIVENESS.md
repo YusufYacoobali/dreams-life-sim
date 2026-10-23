@@ -3,7 +3,7 @@
 The paired measurements below retain their original fixed drivers/commands.
 Current diagnostics toggle a real routine field after the UI began rejecting
 unchanged saves; use the recorded producer/driver for historical reproduction.
-[Current diagnostics](verification/action-latency-adult-relationships-20261020.json).
+[Current diagnostics](verification/action-latency-adult-relationships-20261020.json.gz).
 
 
 The same fixed diagnostic driver now prepares worlds with 100 and 1,000 actual

@@ -3,79 +3,79 @@
   "generator": "Image Gen",
   "source": "exec-0986981b-c4a9-4617-b16a-3e6ace2d6e3c.png",
   "sourceSha256": "27e716fa2a8709d94982476d980c4e940d19a9756927f10f7f2e2f4d14d70a53",
-  "runtimeBytes": 856301,
+  "runtimeBytes": 838247,
   "files": [
     {
       "file": "cult.png",
       "crop": "355x350+5+10",
-      "bytes": 72135,
-      "sha256": "7b651a8d244b90711af88dabe2afe5538bcca3651c2fdca0a005edce4170b7b8"
+      "bytes": 70667,
+      "sha256": "b7ef6f719d5475969c6d9ac0e69fe5f65a909d7f53ef509bcffc008d8cc615c1"
     },
     {
       "file": "philosophy.png",
       "crop": "350x350+375+10",
-      "bytes": 75225,
-      "sha256": "c4e9a1e4497369765ae80d03675d35889bd668d63ff934189708d2196188a71e"
+      "bytes": 74081,
+      "sha256": "dbd37dd788981ac617d316e816487d50db04ff598474a9e87c4068495e2ee60b"
     },
     {
       "file": "doctrines.png",
       "crop": "350x350+738+10",
-      "bytes": 70361,
-      "sha256": "187999af87aea768e158dc3d54e53c88865f6cc759fd715580c7beef9c683550"
+      "bytes": 68657,
+      "sha256": "0b71b488051eadb44e6b18195515041a680fd5d887fec7bbe489b9ed23151f4c"
     },
     {
       "file": "rules.png",
       "crop": "295x350+1130+10",
-      "bytes": 56288,
-      "sha256": "fa5fb24d9b3409b142276d01ee487e20d8d67da437d9a4021af9652e2bf8c653"
+      "bytes": 54546,
+      "sha256": "840ab8c4516dee8ae6017a8fbdd6129c1679d13b4e3249dbd1014786d9ef7394"
     },
     {
       "file": "recruitment.png",
       "crop": "352x315+5+365",
-      "bytes": 70553,
-      "sha256": "c9027bf532332764e237075ae45a8c5bef71e4b68e4e634ba12466e4302f58dc"
+      "bytes": 69296,
+      "sha256": "54cce98310230691102c825381d85522dd33b26f23b476a82404fe499960cfc4"
     },
     {
       "file": "followers.png",
       "crop": "370x308+360+397",
-      "bytes": 74846,
-      "sha256": "c8727b56b72eb02063d85ed20e1754838418c744f73161464b38455c7a0a8932"
+      "bytes": 73531,
+      "sha256": "5e1f79882346f27f26bbd29f4b204363682ff422edf1fc770d4989955993032e"
     },
     {
       "file": "ceremony.png",
       "crop": "360x354+733+359",
-      "bytes": 74877,
-      "sha256": "565a0b7871648206d85a8f10570a9bf124d05fa77108ea3d32af581124c1b3a4"
+      "bytes": 73405,
+      "sha256": "51e593ee139998f2fef54f6f8173b15ea6c8e2d0c9f63cabb962ae8796bf16a9"
     },
     {
       "file": "treasury.png",
       "crop": "350x320+1092+378",
-      "bytes": 76121,
-      "sha256": "255a9a25c84c0572bdff2f5a97ecbac45de9b8074a35bc89659bb8eab554aa8e"
+      "bytes": 74666,
+      "sha256": "fcb6568b1b1dd5dce8c9d9fd501f81ecf9a77eed455396ba2c5719d8b2977fac"
     },
     {
       "file": "headquarters.png",
       "crop": "355x370+0+678",
-      "bytes": 75958,
-      "sha256": "9d516f0a0a161803be87d170ce6f11f9cdad9b3bc369062def9b00c90a3c1321"
+      "bytes": 74773,
+      "sha256": "f189d230fb2994077fa3876c734c58693e95562aa356421b536a704be6c02d99"
     },
     {
       "file": "rivalry.png",
       "crop": "365x325+364+718",
-      "bytes": 73598,
-      "sha256": "2fbadd20a9cd9844ed610fa5c97cf8ee99c7c800eb589235d0584272c3c702d0"
+      "bytes": 72110,
+      "sha256": "5a10bc90bb33376ca8c9f5ec6f80fd2a889e67c6c22e54a13196c030df2aa61e"
     },
     {
       "file": "scandal.png",
       "crop": "365x340+729+715",
-      "bytes": 72232,
-      "sha256": "ec83a9c9651a39c5e92d475bd8e779ed8d7ecba6c3c0ec5c94fe3db9224e0e2c"
+      "bytes": 69701,
+      "sha256": "dda4703215f38e80e1c40261f29e8888eb3e50109d7791cbdbd0d0c55850c80c"
     },
     {
       "file": "claim.png",
       "crop": "350x350+1093+705",
-      "bytes": 64107,
-      "sha256": "895e91b235aabed016c6bf79363a4c7d4bbdc7fd9fa07b7856cfe088b7d4e4e7"
+      "bytes": 62814,
+      "sha256": "ffdabe8b39b50c6d6be8af3ed742c77a59f1eeb6dd48d19ddec49b5be759e5b8"
     }
   ]
 }

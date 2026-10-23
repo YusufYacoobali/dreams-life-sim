@@ -35,6 +35,7 @@ import { laterLifeRecordTemplates } from './laterLifeRecordStories';
 import { legalStoryAvailable, legalStoryContexts } from '../systems/legalStoryContext';
 import { offences } from './crime';
 import { storyContactNames, storyParticipants } from '../storyNames';
+import { bindStoryImmediate, storyImmediateWorkAvailable, storyMoneyText, type StoryImmediateTargets } from '../systems/storyImmediateContext';
 
 /** Original situations, not random names placed in interchangeable success text. */
 export const eventTemplates: readonly EventTemplate[] = [
@@ -156,21 +157,21 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'rest-guilt', min: 20, max: 75, local: true, illustration: 'wellbeing', title: 'An aggressively empty afternoon',
-    body: 'For once, nothing urgently needs you. Your brain suggests inventing a task so you can complain about having no free time.',
+    id: 'rest-guilt', min: 20, max: 75, local: true, illustration: 'wellbeing', title: 'Inner peace is on hold',
+    body: 'At a free relaxation class, the instructor tells you to release your anger. Their phone rings. They spend the next minute shouting at a printer repair company.',
     choices: [
-      option('rest', 'Rest without earning it first', { energy: 8, stress: -5 }, 'Nothing catches fire', 'You take a quiet afternoon. The world manages.', 'I let myself rest without turning it into another task.'),
-      option('walk', 'Take a long, unhurried walk', { fitness: 4, happiness: 3, energy: -2 }, 'A different pace', 'You notice a street you normally hurry past.', 'I spent a free afternoon walking around {city}.'),
-      option('fill', 'Fill every available minute', { discipline: 3, stress: 4, energy: -5 }, 'Productivity wins on points', 'You finish several things and feel strangely annoyed about it.', 'I filled a free afternoon with chores.'),
+      option('rest', 'Close your eyes and let them finish', { energy: 8, stress: -5 }, 'A guided loss of temper', 'You breathe slowly through an argument about toner. By the time they hang up, you are considerably calmer than the professional.', 'I relaxed through my relaxation instructor’s furious printer call.'),
+      option('walk', 'Find peace on a walk outside', { fitness: 4, happiness: 3, energy: -2 }, 'An advanced technique called leaving', 'You stroll through {city}. No one tells you how to breathe, and none of the trees wants a refund.', 'I left a chaotic relaxation class for a walk in {city}.'),
+      option('fill', 'Offer to fix the printer problem', { discipline: 3, stress: 4, energy: -5 }, 'Customer support, spiritual division', 'You spend the class on hold. The instructor meditates while you explain that the paper tray is not the cartridge.', 'I spent a relaxation class sorting out the instructor’s printer complaint.'),
     ],
   },
   {
     id: 'old-photo', min: 22, max: 70, parent: true, parentContact: true, illustration: 'relationship', title: 'Evidence from a previous haircut',
     body: '{parent} sends you an old photograph. The haircut is difficult to defend. The memory attached to it is much better.',
     choices: [
-      option('story', 'Ask for the whole story', { happiness: 5, stress: -2 }, 'A detail you had forgotten', '{parent} remembers something small that makes the photograph matter.', 'I heard the story behind an old photograph with {parent}.', 6),
-      option('scan', 'Save a copy and label it', { discipline: 3, happiness: 2 }, 'Future evidence secured', 'You add names and a date while someone still remembers them.', 'I saved and labelled an old family photograph.', 4),
-      option('joke', 'Focus entirely on the haircut', { happiness: 3 }, 'Fair criticism', '{parent} takes some responsibility. Not all of it.', 'We laughed at an old haircut.', 2),
+      option('story', 'Ask for the whole story', { happiness: 5, stress: -2 }, 'An unreliable defence witness', '{parent} remembers the day fondly, then admits thinking the haircut was a good idea. You agree to preserve the memory and deny the hairstyle.', 'I heard the story behind an old photo. {parent} also confessed to approving the haircut.', 6),
+      option('scan', 'Save a copy and label it', { discipline: 3, happiness: 2 }, 'For the historical record', 'You save the names and date. {parent} asks if the haircut needs its own warning label.', 'I saved an old family photograph, including its indefensible haircut.', 4),
+      option('joke', 'Focus entirely on the haircut', { happiness: 3 }, 'The stylist pleads ignorance', '{parent} blames fashion. You point out that other people existed that year and had normal hair.', 'I teased {parent} about the haircut in an old photo.', 2),
     ],
   },
   {
@@ -201,12 +202,12 @@ export const eventTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'familiar-street', min: 40, max: 100, local: true, illustration: 'travel', title: 'A place that remembers differently',
-    body: 'You return to a familiar part of {city}. A shop has changed, a wall has been painted, and one corner looks exactly as you remember.',
+    id: 'familiar-street', min: 40, max: 100, local: true, illustration: 'travel', title: 'A very local tragedy',
+    body: 'On a free history walk in {city}, the guide points at a laundrette: “A forbidden romance began here.” The owner leans out and asks whether this is about the washing-machine warranty.',
     choices: [
-      option('walk', 'Take the longer way around', { happiness: 4, fitness: 2 }, 'Room for both versions', 'You find a few things you miss and a few things you like better.', 'I walked through a familiar neighbourhood and noticed its changes.'),
-      option('write', 'Write down what you remember', { smarts: 3, happiness: 3 }, 'Before the details blur', 'A small memory becomes a paragraph worth keeping.', 'I wrote down a memory of {city}.'),
-      option('rush', 'Keep going', { energy: 2 }, 'Another day, perhaps', 'The corner stays where it is. You have somewhere else to be.', 'I passed through an old neighbourhood without stopping.'),
+      option('walk', 'Stay for both versions', { happiness: 4, fitness: 2 }, 'Star-crossed and spin-dried', 'The guide describes a doomed affair. The owner describes a parts supplier. You finish the walk unsure which relationship suffered more.', 'I heard two competing tragedies outside a laundrette in {city}.'),
+      option('write', 'Ask the owner for the real story', { smarts: 3, happiness: 3 }, 'The rinse cycle of betrayal', 'It was a faulty pump, six unanswered calls and a replacement that never arrived. You take notes. The guide starts taking them too.', 'I learned that a local romantic legend in {city} was a washing-machine dispute.'),
+      option('rush', 'Leave before the historical reenactment', { energy: 2 }, 'Living history gets loud', 'The owner fetches the warranty. The guide unfolds a map as if it can hide them. You leave these two branches of history to settle it.', 'I left a history walk when the laundrette owner produced evidence.'),
     ],
   },
   {
@@ -229,11 +230,11 @@ export const eventTemplates: readonly EventTemplate[] = [
   },
   {
     id: 'quiet-morning', min: 65, max: 120, illustration: 'wellbeing', title: 'An ordinary morning',
-    body: 'Light comes through the window. For a while, there is no urgent news and nothing you need to prove.',
+    body: 'The morning is quiet. You finish your tea before anyone asks you for anything. This feels suspiciously well organised.',
     choices: [
-      option('savour', 'Enjoy it as it is', { happiness: 5, stress: -4, energy: 3 }, 'Enough for this morning', 'You let a good, ordinary moment be good and ordinary.', 'I enjoyed a quiet morning without wishing it were something else.'),
-      option('reach', 'Get in touch with someone', { happiness: 4, energy: -1 }, 'A small conversation', 'You talk about very little. It still matters.', 'I used a quiet morning to get in touch with someone.'),
-      option('worry', 'Look for something to worry about', { stress: 4, happiness: -2 }, 'Something turns up', 'Worry is rarely short of material. The light was nicer.', 'I found a worry to fill a peaceful morning.'),
+      option('savour', 'Enjoy it as it is', { happiness: 5, stress: -4, energy: 3 }, 'A second cup, still no emergency', 'You make more tea and do absolutely nothing impressive. It is an excellent use of the morning.', 'I enjoyed a quiet morning and a second cup of tea.'),
+      option('reach', 'Get in touch with someone', { happiness: 4, energy: -1 }, 'No news is still news', 'Neither of you has much to report. You manage a surprisingly long conversation about that.', 'I spent a quiet morning having a long conversation about very little.'),
+      option('worry', 'Look for something to worry about', { stress: 4, happiness: -2 }, 'Management finds a problem', 'You inspect a perfectly innocent noise until it becomes a concern. The tea goes cold while you supervise it.', 'I interrupted a peaceful morning by investigating a noise that was not bothering me.'),
     ],
   },
   ...childhoodTemplates,
@@ -302,7 +303,7 @@ export function eligibleTemplates(world: World): readonly EventTemplate[] {
   // Callback records remain authoritative even when an older history is sparse.
   // Never offer an origin ID that scheduleStory already considers recorded.
   const recordedOrigins = new Set(world.storyThreads.map(thread => thread.originEventId));
-  return eventTemplates.filter(template => (!template.dramatic || !!dramaticContext(world, template.id)) && (!template.retired || later?.retired) && (!template.widowed || later?.lateSpouse) && (!template.study || template.study === study?.state) && lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
+  return eventTemplates.filter(template => storyImmediateWorkAvailable(world, template.choices) && (!template.dramatic || !!dramaticContext(world, template.id)) && (!template.retired || later?.retired) && (!template.widowed || later?.lateSpouse) && (!template.study || template.study === study?.state) && lifeStoryAvailable(life, template) && legalStoryAvailable(legal, template) && age >= template.min && age <= template.max && !recordedOrigins.has('event_' + world.date.year + '_' + template.id) && (!template.parent || templateParent(world, template)) && (!template.choices.some(choice => choice.followUp === 'arcade-invitation') || storyParent(world)) && (!template.school || context.school && (template.school === 'any' || template.school === context.school.stage)) && (!template.classmate || context.peer) && (!template.teacher || context.teacher) && (!template.workplace || work.place) && (!template.coworker || work.coworker) && (!template.supervisor || work.supervisor) && (!template.friend || social.friend) && (!template.partner || social.partner) && !world.eventHistory.some(history => history.templateId === template.id && world.date.year - history.year < 5));
 }
 
 export function bindEvent(world: World, template: EventTemplate): Extract<Pending, { kind: 'decision' }> {
@@ -360,14 +361,29 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
     const relation = relationFor(world, player.id, personId);
     return relation ? [{ relationshipId: relation.id, label }] : [];
   });
+  const trustTarget = (otherId?: string, relationshipId?: string, contextId?: string) => otherId && relationshipId
+    ? { otherId, relationshipId, label: contacts.consequenceNames.get(otherId) ?? fullName(world.people[otherId]), ...(contextId ? { contextId } : {}) } : undefined;
+  const immediateTargets: StoryImmediateTargets = {
+    parent: template.parent ? trustTarget(person?.id, parent?.id) : undefined,
+    peer: template.classmate ? trustTarget(context.peer?.id, peerRelation?.id, context.school?.id) : undefined,
+    teacher: template.teacher ? trustTarget(context.teacher?.id, teacherRelation?.id, context.school?.id) : undefined,
+    coworker: template.coworker ? trustTarget(work.coworker?.id, coworkerRelation?.id, work.place?.id) : undefined,
+    supervisor: template.supervisor ? trustTarget(work.supervisor?.id, supervisorRelation?.id, work.place?.id) : undefined,
+    friend: template.friend ? trustTarget(social.friend?.id, friendRelation?.id) : undefined,
+    partner: template.partner ? trustTarget(social.partner?.id, romanticRelation?.id) : undefined,
+    child: trustTarget(binding.child?.person.id, binding.child?.relationshipId),
+  };
   // A name is literal text, including dollar signs or text resembling another token.
   const tokens = template.study || template.widowed ? /\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary|offence|caseCity|facility|prisonPeer|studySchool|studyField|lateSpouse)\}/g : /\{(parent|city|classmate|teacher|school|workplace|coworker|supervisor|friend|partner|child|pet|hobby|destination|condition|salary|offence|caseCity|facility|prisonPeer)\}/g;
   const text = (value: string) => value.replace(tokens, (match, key: keyof typeof names) => {
     if (key === 'lateSpouse' && !template.widowed || (key === 'studySchool' || key === 'studyField') && !template.study) return match;
     return names[key];
   });
-  const choices: BoundChoice[] = template.choices.map(choice => ({
-    id: choice.id, label: text(choice.label),
+  const choices: BoundChoice[] = template.choices.map(choice => {
+    const immediate = bindStoryImmediate(world, choice, immediateTargets), money = storyMoneyText(immediate);
+    const choiceText = (value: string) => text(value.replace(/\{money\}/g, () => money ?? '{money}'));
+    return {
+    id: choice.id, label: choiceText(choice.label),
     effects: [
       ...Object.entries(choice.changes).map(([stat, delta]) => ({ kind: 'stat' as const, personId: player.id, stat: stat as StoryStat, delta: delta! })),
       ...(choice.bond && parent ? [{ kind: 'relationship' as const, relationshipId: parent.id, delta: choice.bond }] : []),
@@ -383,9 +399,10 @@ export function bindEvent(world: World, template: EventTemplate): Extract<Pendin
       ...(choice.grades && context.school ? [{ kind: 'school-grade' as const, personId: player.id, communityId: context.school.id, delta: choice.grades }] : []),
       ...(choice.skill ? [{ kind: 'skill' as const, personId: player.id, skill: choice.skill.id, delta: choice.skill.delta }] : []),
       ...(choice.followUp && context.school && context.peer ? [{ kind: 'schedule-story' as const, storyKind: choice.followUp, personId: player.id, peerId: context.peer.id, communityId: context.school.id, teacherId: choice.followUp === 'project-promise' ? context.teacher!.id : null, parentId: choice.followUp === 'arcade-invitation' ? person!.id : null, originEventId: 'event_' + world.date.year + '_' + template.id, originTemplateId: template.id, originChoiceId: choice.id, ...(choice.followUp === 'project-promise' ? { rememberProject: true as const } : {}) }] : []),
+      ...(immediate ? [immediate] : []),
     ],
-    resultTitle: text(choice.title), resultBody: text(choice.result), journal: text(choice.journal),
-  })).map(choice => {
+    resultTitle: choiceText(choice.title), resultBody: choiceText(choice.result), journal: choiceText(choice.journal),
+  }; }).map(choice => {
     const labels = relationshipLabels.filter(row => choice.effects.some(effect => effect.kind === 'relationship' && effect.relationshipId === row.relationshipId));
     return labels.length ? { ...choice, relationshipLabels: labels } : choice;
   });

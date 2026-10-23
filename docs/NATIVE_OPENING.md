@@ -47,9 +47,9 @@ cropped out the central character and city. Explicit percentage width/height now
 lets `cover` frame the artwork within the actual viewport. Preserve the original
 PNG; this is a layout correction.
 
-The fresh [welcome capture](verification/android24-opening-20261019/welcome-after.png)
+The fresh [welcome capture](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android24-opening-20261019/welcome-after.png)
 shows the corrected central figure and city. The two-parent
-[newborn capture](verification/android24-opening-20261019/newborn-after.png)
+[newborn capture](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android24-opening-20261019/newborn-after.png)
 shows the complete Begin Life control after reducing top whitespace. Random
 Life and Roll Again produce distinct actual previews (Leonardo Russo in Milan,
 then Ren Watanabe in Kyoto). The confirmation is cancelled once, reopened and
@@ -201,7 +201,7 @@ from 1,536 to 2,048 MB. Android reports boot complete after 174.993 seconds.
 
 At 17:25:19 UTC, before Expo Go launched, Android recorded an ANR while executing
 `com.android.systemui/.SystemUIService`.
-[The actual pre-game capture](verification/android29-system-ui-anr-20261019.png)
+[The actual pre-game capture](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android29-system-ui-anr-20261019.png)
 shows its “System UI isn't responding” dialog. Expo Go subsequently installed;
 its package path was confirmed, the local project URI launched, ADB reverse
 mapped port 8081 and ReactHost reported that Metro was running. Metro received a
@@ -211,7 +211,7 @@ package commands also timed out. The streamed install client timed out, while
 the non-streamed upload completed and the package was present; a returned
 installer success line is not claimed.
 
-The [selected native log lines](verification/android29-opening-20261019.log)
+The [selected native log lines](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android29-opening-20261019.log)
 retain the OS failure and launch observations. Expo Go also logged headless-app
 loader reflection errors; the evidence does not establish their effect on this
 project. No game JavaScript crash or successful Begin Life is inferred from the
@@ -240,11 +240,11 @@ The emulator reports the requested display configuration. SurfaceFlinger reports
 its boot-finished milestone after 115,380 ms; Android's `sys.boot_completed`
 property remained empty. At **19:18:55 UTC**, before the game launched, Android
 again reported an ANR in `com.android.systemui`. The actual
-[390×844 capture](verification/android29-lowres-system-ui-anr-20261019.png)
+[390×844 capture](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android29-lowres-system-ui-anr-20261019.png)
 shows that system dialog over the Android wallpaper. Choosing Wait succeeded as
 an injected command; subsequent project launch returned **“Can't find service:
 activity”**, exit 20. No usable opening screen or Begin Life was reached. The
-[selected native lines](verification/android29-lowres-opening-20261019.log)
+[selected native lines](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/android29-lowres-opening-20261019.log)
 retain these observations. The isolated emulator was stopped.
 
 The lower raster load shortened the compositor milestone but did not establish

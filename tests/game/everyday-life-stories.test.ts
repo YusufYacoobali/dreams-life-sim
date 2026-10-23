@@ -7,8 +7,8 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import pensionArchive from '../fixtures/v18-foreign-pension-archive.json';
 import { everydayLifeTemplates } from '../../src/game/content/everydayLifeStories';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
-import { countryCodes } from '../../src/game/countries';
-import { ageOn, decodeWorld, encodeWorld, fullName, validateWorld, type World } from '../../src/game/model';
+import { countries, countryCodes } from '../../src/game/countries';
+import { ageOn, decodeWorld, encodeWorld, fullName, moneyJSON, validateWorld, type World } from '../../src/game/model';
 import { resolveCommand } from '../../src/game/engine';
 import { offerPending } from '../../src/game/pendingQueue';
 import { relationFor } from '../../src/game/systems/relationships';
@@ -168,19 +168,45 @@ test('304 unique situations include136 everyday scenes with explicit context and
 
 test.each([...everydayLifeTemplates, ...laterLifeFamilyTemplates].map(template => [template.id, template] as const))('%s binds its existing context without draws and all three branches apply exact bounded effects once', (_id, template) => {
   const initial = setup(template), before = encodeWorld(initial); expect(eligibleTemplates(initial)).toContainEqual(template);
-  const event = bindEvent(initial, template); expect(encodeWorld(initial)).toBe(before); expect(JSON.stringify(event)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/);
+  const event = bindEvent(initial, template); expect(encodeWorld(initial)).toBe(before); expect(JSON.stringify(event,moneyJSON)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/);
   if (template.child) { const id = event.personIds.find(id => id !== initial.activePersonId)!; const ages = { baby: [0, 2], young: [3, 11], teen: [12, 17], adult: [18, 200] }; expect(ageOn(initial.people[id], initial.date)).toBeGreaterThanOrEqual(ages[template.child][0]); expect(ageOn(initial.people[id], initial.date)).toBeLessThanOrEqual(ages[template.child][1]); expect(event.body).toContain(fullName(initial.people[id])); expect(relationFor(initial, initial.activePersonId, id)?.roles).toContain('parent'); }
   for (const choice of event.choices) {
     const input = decodeWorld(before); offerPending(input, event); const result = resolveCommand(input, { type: 'choose', eventId: event.id, choiceId: choice.id }, true);
-    expect(result.random).toEqual(initial.random); expect(result.date).toEqual(initial.date); expect(result.accounts).toEqual(initial.accounts); expect(result.ledger).toEqual(initial.ledger); expect(result.assets).toEqual(initial.assets); expect(result.hobbies).toEqual(initial.hobbies); expect(result.trips).toEqual(initial.trips); expect(result.workHistory).toEqual(initial.workHistory); expect(result.careers).toEqual(initial.careers); expect(result.serviceCareers).toEqual(initial.serviceCareers); expect(result.creatorStudios).toEqual(initial.creatorStudios); expect(result.royalHouses).toEqual(initial.royalHouses);
+    const immediate=choice.effects.find(effect=>effect.kind==='story-immediate'),cash=immediate?.kind==='story-immediate'?immediate.cash:undefined;
+    const work=immediate?.kind==='story-immediate'?immediate.work:undefined,lostJob=work?.loseJob===true;
+    if(work)expect(work.employmentId).toBe(initial.people[initial.activePersonId].employment!.id);
+    expect(result.random).toEqual(initial.random); expect(result.date).toEqual(initial.date);
+    expect(result.accounts).toEqual(initial.accounts.map(account=>cash?.accountId===account.id?{...account,cash:account.cash+cash.minor}:account));
+    expect(result.ledger.slice(0,initial.ledger.length)).toEqual(initial.ledger);expect(result.ledger).toHaveLength(initial.ledger.length+(cash?1:0));
+    if(cash)expect(result.ledger.at(-1)).toMatchObject({accountId:cash.accountId,personId:initial.activePersonId,currency:cash.currency,cashDelta:cash.minor,debtDelta:0n,liabilityId:null,category:cash.minor>0n?'story-income':'story-expense'});
+    expect(result.assets).toEqual(initial.assets);expect(result.liabilities).toEqual(initial.liabilities);expect(result.businesses).toEqual(initial.businesses);expect(result.storyThreads).toEqual(initial.storyThreads);expect(result.bestFriendships).toEqual(initial.bestFriendships); expect(result.hobbies).toEqual(initial.hobbies); expect(result.trips).toEqual(initial.trips);
+    expect(result.workHistory).toEqual(initial.workHistory.map(row=>lostJob&&row.id===work!.employmentId?{...row,ended:initial.date}:row));
+    if(lostJob)expect(initial.people[initial.activePersonId].employment!.companyId).toBeNull();
+    expect(result.workplaces).toEqual(initial.workplaces.map(place=>{
+      if(!lostJob||place.ended)return place;
+      if(place.personId===initial.activePersonId&&place.employmentId===work!.employmentId)return {...place,ended:initial.date,endReason:'left-job'};
+      return {...place,members:place.members.map(member=>member.personId===initial.activePersonId&&member.employmentId===work!.employmentId&&!member.left?{...member,left:initial.date,endReason:'left-job'}:member)};
+    }));
+    expect(result.careers).toEqual(initial.careers); expect(result.serviceCareers).toEqual(initial.serviceCareers); expect(result.creatorStudios).toEqual(initial.creatorStudios); expect(result.royalHouses).toEqual(initial.royalHouses);
     expect(Object.keys(result.people)).toEqual(Object.keys(initial.people));
     for (const person of Object.values(initial.people)) {
       if (person.id !== initial.activePersonId) expect(result.people[person.id]).toEqual(person);
-      else { const { stats, ...rest } = person, { stats: nextStats, ...nextRest } = result.people[person.id]; expect(nextRest).toEqual(rest); for (const key of Object.keys(stats) as (keyof typeof stats)[]) { const effect = choice.effects.find(e => e.kind === 'stat' && e.personId === person.id && e.stat === key); expect(nextStats[key]).toBe(effect?.kind === 'stat' ? Math.max(0, Math.min(100, stats[key] + effect.delta)) : stats[key]); } }
+      else { const { stats, ...rest } = person, { stats: nextStats, ...nextRest } = result.people[person.id];const expected={...rest,finance:{...rest.finance},publicLife:{...rest.publicLife},skills:{...rest.skills},employment:rest.employment&&{...rest.employment}};
+        if(cash&&cash.minor>0n){expect(cash.currency).toBe(countries[person.country].currency);expected.finance.supportIncomeDue+=cash.minor;}
+        if(immediate?.kind==='story-immediate'&&immediate.publicImage!==undefined)expected.publicLife.image=Math.max(0,Math.min(100,person.publicLife.image+immediate.publicImage));
+        if(work?.performance!==undefined)expected.employment!.performance=Math.max(0,Math.min(100,person.employment!.performance+work.performance));
+        if(lostJob)expected.employment=null;
+        for(const effect of choice.effects)if(effect.kind==='skill'){expect(effect.personId).toBe(person.id);expected.skills[effect.skill]=Math.max(0,Math.min(100,person.skills[effect.skill]+effect.delta));}
+        expect(nextRest).toEqual(expected); for (const key of Object.keys(stats) as (keyof typeof stats)[]) { const effect = choice.effects.find(e => e.kind === 'stat' && e.personId === person.id && e.stat === key); expect(nextStats[key]).toBe(effect?.kind === 'stat' ? Math.max(0, Math.min(100, stats[key] + effect.delta)) : stats[key]); } }
     }
-    for (const edge of initial.relationships) { const effect = choice.effects.find(e => e.kind === 'relationship' && e.relationshipId === edge.id); const expected = effect?.kind === 'relationship' ? { ...edge, strength: Math.max(0, Math.min(100, edge.strength + effect.delta)) } : edge; expect(result.relationships.find(e => e.id === edge.id)).toEqual(expected); }
+    for (const edge of initial.relationships) { const effect = choice.effects.find(e => e.kind === 'relationship' && e.relationshipId === edge.id); const expected = {...edge,roles:[...edge.roles],memories:[...edge.memories],strength:Math.max(0,Math.min(100,edge.strength+(effect?.kind==='relationship'?effect.delta:0)))};
+      if(immediate?.kind==='story-immediate'){
+        const trust=immediate.trust?.find(target=>target.relationshipId===edge.id);if(trust)expected.trust=Math.max(0,Math.min(100,edge.trust+trust.delta));
+        if(immediate.endFriendship?.relationshipId===edge.id){expect(edge.roles).toEqual(expect.arrayContaining(['coworker','friend']));expected.roles=expected.roles.filter(role=>role!=='friend');expected.kind='coworker';expected.memories.push('friendship-ended:'+initial.date.year);}
+      }
+      expect(result.relationships.find(e => e.id === edge.id)).toEqual(expected); }
     for (const pet of initial.pets) { const effect = choice.effects.find(e => e.kind === 'pet-bond' && e.petId === pet.id); const expected = effect?.kind === 'pet-bond' ? { ...pet, bonds: { ...pet.bonds, [effect.personId]: Math.max(0, Math.min(100, (pet.bonds[effect.personId] ?? 0) + effect.delta)) } } : pet; expect(result.pets.find(p => p.id === pet.id)).toEqual(expected); }
-    expect(choice.effects.every(e => ['stat', 'relationship', 'pet-bond'].includes(e.kind))).toBe(true); expect(result.pending).toMatchObject({ kind: 'result', title: choice.resultTitle, body: choice.resultBody }); expect(result.journal.at(-1)?.text).toBe(choice.journal); expect(decodeWorld(encodeWorld(result))).toEqual(result);
+    expect(choice.effects.every(e => ['stat', 'relationship', 'pet-bond','skill','story-immediate'].includes(e.kind))).toBe(true); expect(result.pending).toMatchObject({ kind: 'result', title: choice.resultTitle, body: choice.resultBody }); expect(result.journal.at(-1)?.text).toBe(choice.journal); expect(decodeWorld(encodeWorld(result))).toEqual(result);
     expect(() => resolveCommand(result, { type: 'choose', eventId: event.id, choiceId: choice.id })).toThrow();
     const done = resolveCommand(result, { type: 'acknowledge', resultId: result.pending!.id }, true); expect(done.people).toEqual(result.people); expect(done.pets).toEqual(result.pets); expect(done.random).toEqual(result.random); expect(done.relationships).toEqual(result.relationships);
   }
@@ -188,7 +214,7 @@ test.each([...everydayLifeTemplates, ...laterLifeFamilyTemplates].map(template =
 
 test.each(countryCodes)('%s reads actual family/pet/hobby/home/trip/condition context without generating people, charges or RNG', country => {
   const world = lifeStoryWorld(country), before = encodeWorld(world), available = eligibleTemplates(world).filter(t => everydayLifeTemplates.includes(t)); expect(available).toHaveLength(119);
-  for (const template of available) { const event = bindEvent(world, template); expect(event.personIds.every(id => !!world.people[id])).toBe(true); expect(JSON.stringify(event)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/); }
+  for (const template of available) { const event = bindEvent(world, template); expect(event.personIds.every(id => !!world.people[id])).toBe(true); expect(JSON.stringify(event,moneyJSON)).not.toMatch(/\{(?:child|pet|hobby|destination|condition|coworker|supervisor|friend|salary)\}/); }
   expect(encodeWorld(world)).toBe(before);
 });
 

@@ -2,6 +2,7 @@ import type { World } from '../model';
 import { ageOn, fullName } from '../personHelpers';
 import type { Pending, RuntimeEffectRow } from '../runtime';
 import { dramaticTemplates } from '../content/dramaticEvents';
+import { dramaticPayoff } from '../content/dramaticWriting';
 import { IneligibleAction } from '../errors';
 import { formatMoney } from '../money';
 import { active, accountFor, availableCash, bounded, draw, post } from './common';
@@ -24,7 +25,10 @@ export function resolveDramaticChoice(world: World, effect: DramaticEffect, deat
   const template = dramaticTemplates.find(row => row.id === effect.eventId);
   if (!template?.choices.some(row => row.id === effect.choiceId)) throw new IneligibleAction('Choose an available dramatic event option');
   const effects: RuntimeEffectRow[] = [], player = active(world), choice = effect.choiceId;
-  const finish = (title: string, body: string) => ({ title, body, journal: title + ': ' + body, effects });
+  const finish = (title: string, body: string) => {
+    const original = { title, body, journal: title + ': ' + body };
+    return { ...(effect.copyVersion === 25 && title !== 'The situation has changed' ? dramaticPayoff(world, effect, original) : original), effects };
+  };
   const c = currentContext(world, effect);
   if (!c) return finish('The situation has changed', 'Too much has changed for this decision to go ahead. You make no payment or commitment.');
   const reason = dramaticChoiceReason(world, effect); if (reason) throw new IneligibleAction(reason);

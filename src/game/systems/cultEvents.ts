@@ -635,7 +635,7 @@ export function cultStoryMonth(world: World, cult: Cult) {
             fullName(world.people[member.personId]) +
               ' brought ' +
               joined +
-              ' new followers through the broadcast I entrusted to them eight months ago.',
+              ' new followers through the work I entrusted to them.',
           );
           thread.outcome = 'success';
         } else {
@@ -643,14 +643,15 @@ export function cultStoryMonth(world: World, cult: Cult) {
           cultScandal(
             world,
             cult,
-            'An old official broadcast became a criticism of the leadership.',
+            fullName(world.people[member.personId]) +
+              ' publicly criticised the leadership after being given more responsibility.',
             10,
           );
           cultRecord(
             world,
             cult,
             fullName(world.people[member.personId]) +
-              ' used the platform I gave them to criticise my leadership.',
+              ' publicly criticised my leadership after I entrusted them with a bigger role.',
           );
         }
       } else if (trust >= 65) {

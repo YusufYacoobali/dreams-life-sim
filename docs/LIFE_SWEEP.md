@@ -38,7 +38,7 @@ production validated-immutable API, across all twelve countries, in
 **5,030.819 seconds**. The actual completion record is present, stderr is empty
 and the process exits zero. Game and runner hashes stay unchanged. The
 [completion record](verification/life-sweep-v28-1000-20261020.json) and
-[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson) preserve exact
+[all raw cases](verification/life-sweep-v28-1000-20261020.ndjson.gz) preserve exact
 terminal-world hashes. This closes that scoped content-four engine gate.
 
 `node tools/run-life-sweep.cjs 1000 0 --immutable` exercises seeds 0–999 through

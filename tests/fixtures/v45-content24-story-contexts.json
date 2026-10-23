@@ -1,0 +1,2512 @@
+[
+  {
+    "id": "first-cake",
+    "min": 1,
+    "max": 2,
+    "parent": true,
+    "illustration": "birthday"
+  },
+  {
+    "id": "shoe-principle",
+    "min": 2,
+    "max": 4,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "blanket-dragon",
+    "min": 3,
+    "max": 6,
+    "parent": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "library-card",
+    "min": 5,
+    "max": 10,
+    "local": true,
+    "illustration": "education"
+  },
+  {
+    "id": "broken-mug",
+    "min": 6,
+    "max": 11,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "rainy-fort",
+    "min": 6,
+    "max": 12,
+    "illustration": "property"
+  },
+  {
+    "id": "parent-old-music",
+    "min": 10,
+    "max": 17,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "group-chat-rumour",
+    "min": 12,
+    "max": 18,
+    "illustration": "journal"
+  },
+  {
+    "id": "first-presentation",
+    "min": 12,
+    "max": 19,
+    "illustration": "education"
+  },
+  {
+    "id": "parent-boundary",
+    "min": 14,
+    "max": 20,
+    "parent": true,
+    "parentContact": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "comparison-scroll",
+    "min": 16,
+    "max": 45,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "community-garden",
+    "min": 18,
+    "max": 85,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "bad-review",
+    "min": 18,
+    "max": 85,
+    "illustration": "journal"
+  },
+  {
+    "id": "rest-guilt",
+    "min": 20,
+    "max": 75,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "old-photo",
+    "min": 22,
+    "max": 70,
+    "parent": true,
+    "parentContact": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "local-meeting",
+    "min": 25,
+    "max": 90,
+    "local": true,
+    "illustration": "property"
+  },
+  {
+    "id": "small-mistake",
+    "rarity": "uncommon",
+    "min": 25,
+    "max": 90,
+    "illustration": "journal"
+  },
+  {
+    "id": "birthday-number",
+    "min": 30,
+    "max": 90,
+    "illustration": "birthday"
+  },
+  {
+    "id": "familiar-street",
+    "min": 40,
+    "max": 100,
+    "local": true,
+    "illustration": "travel"
+  },
+  {
+    "id": "new-skill-late",
+    "min": 50,
+    "max": 100,
+    "illustration": "education"
+  },
+  {
+    "id": "useful-advice",
+    "min": 60,
+    "max": 115,
+    "illustration": "relationship"
+  },
+  {
+    "id": "quiet-morning",
+    "min": 65,
+    "max": 120,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "toddler-stairwell-echo",
+    "min": 2,
+    "max": 4,
+    "illustration": "birthday"
+  },
+  {
+    "id": "toddler-zipper-puzzle",
+    "min": 2,
+    "max": 5,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "toddler-shadow-race",
+    "min": 3,
+    "max": 5,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "toddler-cardboard-postbox",
+    "min": 3,
+    "max": 5,
+    "illustration": "journal"
+  },
+  {
+    "id": "toddler-biscuit-halves",
+    "min": 3,
+    "max": 5,
+    "illustration": "birthday"
+  },
+  {
+    "id": "school-inverted-map",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-library-whisper",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-relay-handover",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "school-bean-monitor",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-secret-language",
+    "rarity": "uncommon",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-microphone-rehearsal",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-rainy-break",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-label-swap",
+    "rarity": "uncommon",
+    "min": 8,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-unit-confusion",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-debate-draw",
+    "min": 13,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-yearbook-proof",
+    "rarity": "uncommon",
+    "min": 13,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "teen-study-soundtrack",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-family-interview",
+    "rarity": "uncommon",
+    "min": 14,
+    "max": 17,
+    "parent": true,
+    "parentContact": true,
+    "school": "secondary",
+    "teacher": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-volunteer-roster",
+    "min": 14,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-marking-correction",
+    "min": 14,
+    "max": 17,
+    "school": "secondary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "first-bubble-catch",
+    "min": 1,
+    "max": 2,
+    "illustration": "birthday"
+  },
+  {
+    "id": "first-tower-demolition",
+    "min": 1,
+    "max": 2,
+    "illustration": "property"
+  },
+  {
+    "id": "first-camera-closeup",
+    "min": 1,
+    "max": 3,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "first-nap-negotiation",
+    "min": 1,
+    "max": 3,
+    "parent": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "toddler-parent-name",
+    "min": 2,
+    "max": 4,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "toddler-ice-cube",
+    "min": 2,
+    "max": 4,
+    "parent": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "toddler-lift-button",
+    "min": 3,
+    "max": 5,
+    "parent": true,
+    "illustration": "property"
+  },
+  {
+    "id": "toddler-caterpillar-crossing",
+    "min": 3,
+    "max": 5,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "toddler-why-machine",
+    "min": 3,
+    "max": 5,
+    "parent": true,
+    "illustration": "education"
+  },
+  {
+    "id": "child-first-loose-tooth",
+    "min": 5,
+    "max": 7,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "child-pocket-museum",
+    "min": 4,
+    "max": 7,
+    "illustration": "journal"
+  },
+  {
+    "id": "school-wrong-jacket",
+    "min": 6,
+    "max": 9,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-empty-lunchbox",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-answer-blurt",
+    "min": 6,
+    "max": 10,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-slide-queue",
+    "min": 6,
+    "max": 10,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-show-tell-prop",
+    "min": 6,
+    "max": 9,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "child-boardgame-rules",
+    "min": 5,
+    "max": 9,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "child-shop-separation",
+    "rarity": "rare",
+    "min": 5,
+    "max": 9,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-practice-alarm",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-mysterious-noise",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-old-recording",
+    "min": 11,
+    "max": 16,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-shrinking-sleeves",
+    "min": 11,
+    "max": 16,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "teen-family-game-timer",
+    "min": 11,
+    "max": 17,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-phone-at-dinner",
+    "min": 12,
+    "max": 17,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-notification-loop",
+    "min": 12,
+    "max": 17,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "teen-borrowed-charger",
+    "min": 12,
+    "max": 17,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-old-interest-box",
+    "min": 12,
+    "max": 17,
+    "illustration": "journal"
+  },
+  {
+    "id": "teen-household-small-meal",
+    "min": 13,
+    "max": 17,
+    "parent": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "teen-parent-voice-note",
+    "min": 13,
+    "max": 17,
+    "parent": true,
+    "parentContact": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "teen-sunday-list",
+    "min": 13,
+    "max": 17,
+    "illustration": "education"
+  },
+  {
+    "id": "first-echo",
+    "min": 1,
+    "max": 2,
+    "illustration": "birthday"
+  },
+  {
+    "id": "first-sock-escape",
+    "min": 1,
+    "max": 2,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "first-mirror-guest",
+    "min": 1,
+    "max": 2,
+    "illustration": "relationship"
+  },
+  {
+    "id": "toddler-wall-gallery",
+    "min": 2,
+    "max": 4,
+    "parent": true,
+    "illustration": "property"
+  },
+  {
+    "id": "toddler-grocery-microphone",
+    "min": 2,
+    "max": 5,
+    "parent": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "toddler-cardboard-rocket",
+    "min": 3,
+    "max": 5,
+    "parent": true,
+    "illustration": "travel"
+  },
+  {
+    "id": "toddler-suspicious-haircut",
+    "min": 3,
+    "max": 5,
+    "parent": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "child-lost-button",
+    "min": 4,
+    "max": 7,
+    "parent": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "child-first-sleepover-plan",
+    "min": 4,
+    "max": 8,
+    "parent": true,
+    "illustration": "property"
+  },
+  {
+    "id": "school-arcade-invitation",
+    "min": 6,
+    "max": 11,
+    "parent": true,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "birthday"
+  },
+  {
+    "id": "school-project-promise",
+    "min": 7,
+    "max": 16,
+    "school": "any",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-volcano-breach",
+    "rarity": "uncommon",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-tree-audition",
+    "rarity": "uncommon",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-mascot-petition",
+    "rarity": "uncommon",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "school-recorder-solo",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-lunch-trade",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-name-joke",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-homework-soap",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "school-bench-reserve",
+    "min": 6,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "school-race-false-start",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "school-tiny-editor",
+    "min": 8,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "school-glitter-border",
+    "min": 7,
+    "max": 11,
+    "school": "primary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-homework-leak",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-group-project-credit",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-mic-still-live",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "teen-solo-rehearsal",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-exam-freeze",
+    "min": 13,
+    "max": 17,
+    "school": "secondary",
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-canteen-review",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "school-corpse-stage-notes",
+    "rarity": "uncommon",
+    "min": 8,
+    "max": 11,
+    "school": "primary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-exam-lucky-snail",
+    "rarity": "rare",
+    "min": 12,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-mind-reading-helmet",
+    "rarity": "rare",
+    "min": 13,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "education"
+  },
+  {
+    "id": "teen-insult-cake",
+    "rarity": "uncommon",
+    "min": 13,
+    "max": 17,
+    "school": "secondary",
+    "classmate": true,
+    "teacher": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "work-three-priorities",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "supervisor": true,
+    "illustration": "career"
+  },
+  {
+    "id": "work-unfamiliar-process",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "illustration": "career"
+  },
+  {
+    "id": "work-breakroom-sign",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "work-break-playlist",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "illustration": "music"
+  },
+  {
+    "id": "work-message-love",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "supervisor": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "work-photo-blink",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "work-safety-arrow",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "supervisor": true,
+    "illustration": "career"
+  },
+  {
+    "id": "work-shared-credit",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "supervisor": true,
+    "illustration": "career"
+  },
+  {
+    "id": "work-question-at-door",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "supervisor": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "work-quiet-kindness",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "coworker": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "work-anonymous-survey",
+    "min": 16,
+    "max": 85,
+    "workplace": true,
+    "supervisor": true,
+    "rarity": "uncommon",
+    "illustration": "career"
+  },
+  {
+    "id": "friend-long-voice-note",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "friend-different-budget",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "friend-advice-or-listening",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "friend-creative-feedback",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "friend-interrupted-thought",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "friend-unwanted-nickname",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "friend-quiet-company",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "friend-changed-opinion",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "partner-phone-attention",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "partner-alone-time",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "partner-money-conversation",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "partner-other-couples",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "partner-disagreement-loop",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "partner-public-affection",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "relationship"
+  },
+  {
+    "id": "partner-arrives-late",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "partner-breakup-script",
+    "min": 18,
+    "max": 120,
+    "partner": true,
+    "rarity": "rare",
+    "illustration": "conversation"
+  },
+  {
+    "id": "friend-fake-laugh-rehearsal",
+    "min": 18,
+    "max": 120,
+    "friend": true,
+    "rarity": "uncommon",
+    "illustration": "conversation"
+  },
+  {
+    "id": "adult-wrong-name-badge",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "adult-wave-behind",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-free-lecture-question",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-queue-merge",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-community-map",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-open-mic-list",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-borrowed-pen",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-weather-expert",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-instruction-last-page",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-empty-calendar",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-unwanted-speech",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-compliment-practice",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-repair-table",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-community-poster",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-name-pronunciation",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-shortcut-stairs",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-small-volunteer-task",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-uncertain-memory",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "adult-free-sample-opinion",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-seat-with-a-view",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-password-on-paper",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-lost-glove",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-perfect-introduction",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-silent-notification",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "adult-neighbourhood-song",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "music"
+  },
+  {
+    "id": "adult-jackpot-handler",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "money",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "adult-prop-cash-rain",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "money",
+    "rarity": "rare"
+  },
+  {
+    "id": "adult-inheritance-rehearsal",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "adult-invisible-yacht",
+    "min": 18,
+    "max": 65,
+    "local": true,
+    "illustration": "money",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "family-baby-serious-face",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "carriage",
+    "child": "baby"
+  },
+  {
+    "id": "family-baby-ordinary-song",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "carriage",
+    "child": "baby"
+  },
+  {
+    "id": "family-baby-outfit-debate",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "carriage",
+    "child": "baby"
+  },
+  {
+    "id": "family-drawing-label",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "young"
+  },
+  {
+    "id": "family-helpful-spill",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "young"
+  },
+  {
+    "id": "family-bedtime-detour",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "young"
+  },
+  {
+    "id": "family-private-drawer",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "young"
+  },
+  {
+    "id": "family-game-rules-change",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "young"
+  },
+  {
+    "id": "family-impossible-question",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "child": "young"
+  },
+  {
+    "id": "family-collection-tour",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "young"
+  },
+  {
+    "id": "family-teen-new-opinion",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "child": "teen"
+  },
+  {
+    "id": "family-teen-closed-door",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "teen"
+  },
+  {
+    "id": "family-teen-music-volume",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "music",
+    "child": "teen"
+  },
+  {
+    "id": "family-teen-future-pressure",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "child": "teen"
+  },
+  {
+    "id": "family-teen-reliable-apology",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "child": "teen"
+  },
+  {
+    "id": "family-adult-advice-permission",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "child": "adult"
+  },
+  {
+    "id": "family-adult-inherited-phrase",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "child": "adult"
+  },
+  {
+    "id": "family-adult-family-story",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "adult"
+  },
+  {
+    "id": "family-adult-new-tradition",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "adult"
+  },
+  {
+    "id": "family-adult-parent-question",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "adult"
+  },
+  {
+    "id": "family-young-pretend-funeral",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "young",
+    "rarity": "rare"
+  },
+  {
+    "id": "family-adult-documentary-cushion",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "adult",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "home-key-bowl",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "home-squeak-investigation",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "home-box-worth-keeping",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "home-window-cleaning-discovery",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "home-found-old-list",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "home-unexpected-echo",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "home": true
+  },
+  {
+    "id": "wellbeing-search-results",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing",
+    "chronicCondition": true
+  },
+  {
+    "id": "wellbeing-miracle-recommendation",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing",
+    "chronicCondition": true
+  },
+  {
+    "id": "wellbeing-variable-day",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing",
+    "chronicCondition": true
+  },
+  {
+    "id": "wellbeing-private-information",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "chronicCondition": true
+  },
+  {
+    "id": "wellbeing-other-peoples-progress",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing",
+    "chronicCondition": true
+  },
+  {
+    "id": "wellbeing-one-more-episode",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-stretch-after-sitting",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-ordinary-water",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-rehearsed-argument",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "wellbeing-quiet-not-silent",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-meal-comparison",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-waiting-without-feed",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-good-day-pressure",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-habit-one-miss",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "wellbeing"
+  },
+  {
+    "id": "wellbeing-unhurried-breath",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation"
+  },
+  {
+    "id": "career-actor-written-pause",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "actor"
+  },
+  {
+    "id": "career-model-expression-board",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "model"
+  },
+  {
+    "id": "career-athlete-ritual-discussion",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "athlete"
+  },
+  {
+    "id": "career-musician-setlist-handwriting",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "music",
+    "specialCareer": "musician"
+  },
+  {
+    "id": "career-politician-sentence-length",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "politician"
+  },
+  {
+    "id": "career-creator-fourth-introduction",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "specialCareer": "creator"
+  },
+  {
+    "id": "career-military-checklist-language",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "military"
+  },
+  {
+    "id": "career-astronaut-plain-explanation",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "astronaut"
+  },
+  {
+    "id": "career-royalty-ribbon-end",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "specialCareer": "royalty"
+  },
+  {
+    "id": "pet-dog-important-smell",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-dog",
+    "pet": "dog"
+  },
+  {
+    "id": "pet-dog-invisible-throw",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-dog",
+    "pet": "dog"
+  },
+  {
+    "id": "pet-dog-doorway-greeting",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-dog",
+    "pet": "dog"
+  },
+  {
+    "id": "pet-cat-chosen-paper",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-cat",
+    "pet": "cat"
+  },
+  {
+    "id": "pet-cat-unexpected-box",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-cat",
+    "pet": "cat"
+  },
+  {
+    "id": "pet-cat-slow-blink",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-cat",
+    "pet": "cat"
+  },
+  {
+    "id": "pet-rabbit-floor-level",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-rabbit",
+    "pet": "rabbit"
+  },
+  {
+    "id": "pet-parrot-perfect-timing",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-parrot",
+    "pet": "parrot",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "pet-familiar-presence",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-paw",
+    "pet": "any"
+  },
+  {
+    "id": "pet-care-name-voice",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-paw",
+    "pet": "any"
+  },
+  {
+    "id": "pet-cat-empty-corner",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "pet-cat",
+    "pet": "cat",
+    "rarity": "rare"
+  },
+  {
+    "id": "hobby-guitar-familiar-chord",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-guitar",
+    "hobby": "guitar"
+  },
+  {
+    "id": "hobby-painting-rotation",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-painting",
+    "hobby": "painting"
+  },
+  {
+    "id": "hobby-photo-background",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-photography",
+    "hobby": "photography"
+  },
+  {
+    "id": "hobby-chess-perfect-plan",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-chess",
+    "hobby": "chess"
+  },
+  {
+    "id": "hobby-reading-ending-opinion",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-reading",
+    "hobby": "reading"
+  },
+  {
+    "id": "hobby-gaming-helpful-tip",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-gaming",
+    "hobby": "gaming"
+  },
+  {
+    "id": "hobby-cooking-last-instruction",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-cooking",
+    "hobby": "cooking"
+  },
+  {
+    "id": "hobby-gardening-labels",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-gardening",
+    "hobby": "gardening"
+  },
+  {
+    "id": "hobby-small-improvement",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "hobby": "any"
+  },
+  {
+    "id": "hobby-explain-without-selling",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "hobby": "any"
+  },
+  {
+    "id": "hobby-gaming-villain-speech",
+    "min": 6,
+    "max": 120,
+    "local": true,
+    "illustration": "leisure-gaming",
+    "hobby": "gaming",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "travel-memory-old-ticket",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-forgotten-phrase",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-folded-map",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-food-photos",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-one-good-habit",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-worth-the-visit",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "friend": true,
+    "visited": true
+  },
+  {
+    "id": "travel-memory-unsent-card",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-directions",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-imperfect-weather",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "travel",
+    "visited": true
+  },
+  {
+    "id": "travel-memory-short-version",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "friend": true,
+    "visited": true
+  },
+  {
+    "id": "later-retirement-assumption",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-old-handwriting",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-forgotten-telephone-number",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-unfamiliar-word",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-old-competition",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "later-photo-at-edge",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-offered-a-hand",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-changed-favourite",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-recording-labelled-retro",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-another-year-question",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal"
+  },
+  {
+    "id": "later-unwilling-exhibition",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "rare"
+  },
+  {
+    "id": "later-bingo-rebel",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "work-salary-privacy",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-shared-note-riddle",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-final-file",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "supervisor": true,
+    "workplace": true
+  },
+  {
+    "id": "work-forgotten-lunch",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-room-temperature",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-training-slogan",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-honest-view-invited",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "supervisor": true,
+    "workplace": true
+  },
+  {
+    "id": "work-invitation-outside",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "relationship",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-misnamed-complaint",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-trivia-phone",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "workplace": true
+  },
+  {
+    "id": "work-mutual-embellishment",
+    "min": 16,
+    "max": 85,
+    "local": true,
+    "illustration": "career",
+    "coworker": true,
+    "rarity": "rare",
+    "workplace": true
+  },
+  {
+    "id": "adult-accidental-living-exhibit",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "rarity": "extremely-rare"
+  },
+  {
+    "id": "career-actor-rehearsal-door",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "actor",
+    "rarity": "common"
+  },
+  {
+    "id": "career-model-backdrop-fan",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "model",
+    "rarity": "common"
+  },
+  {
+    "id": "career-athlete-timer-reminder",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "athlete",
+    "rarity": "common"
+  },
+  {
+    "id": "career-musician-count-in",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "music",
+    "specialCareer": "musician",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-politician-moving-lectern",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "politician",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-military-boot-reflection",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "military",
+    "rarity": "common"
+  },
+  {
+    "id": "career-astronaut-loose-snack",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "astronaut",
+    "rarity": "common"
+  },
+  {
+    "id": "career-royalty-temporary-badge",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "specialCareer": "royalty",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-youtuber-thumbnail-face",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "video",
+    "specialCareer": "youtuber",
+    "rarity": "common"
+  },
+  {
+    "id": "career-youtuber-drill-interview",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "video",
+    "specialCareer": "youtuber",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-streamer-chair-soundcheck",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "streamer",
+    "specialCareer": "streamer",
+    "rarity": "common"
+  },
+  {
+    "id": "career-streamer-greeting-loop",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "streamer",
+    "specialCareer": "streamer",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-business-automatic-application",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "business",
+    "specialCareer": "business",
+    "rarity": "common"
+  },
+  {
+    "id": "career-business-breakfast-cards",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "business",
+    "specialCareer": "business",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-actor-perfect-villain",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "actor",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "career-model-natural-edit",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "career",
+    "specialCareer": "model",
+    "rarity": "rare"
+  },
+  {
+    "id": "career-streamer-sponsor-script",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "streamer",
+    "specialCareer": "streamer",
+    "rarity": "rare"
+  },
+  {
+    "id": "career-business-five-star-factory",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "business",
+    "specialCareer": "business",
+    "rarity": "rare"
+  },
+  {
+    "id": "case-question-list",
+    "min": 18,
+    "max": 120,
+    "legal": "awaiting-trial",
+    "illustration": "court"
+  },
+  {
+    "id": "prison-case-boundary",
+    "min": 18,
+    "max": 120,
+    "legal": "prison-peer",
+    "illustration": "prison"
+  },
+  {
+    "id": "release-open-afternoon",
+    "min": 18,
+    "max": 120,
+    "legal": "released",
+    "illustration": "release"
+  },
+  {
+    "id": "case-internet-defence",
+    "min": 18,
+    "max": 120,
+    "legal": "awaiting-trial",
+    "rarity": "uncommon",
+    "illustration": "court"
+  },
+  {
+    "id": "case-heroic-sketch",
+    "min": 18,
+    "max": 120,
+    "legal": "awaiting-trial",
+    "rarity": "rare",
+    "illustration": "court"
+  },
+  {
+    "id": "prison-nickname-audition",
+    "min": 18,
+    "max": 120,
+    "legal": "prison-peer",
+    "rarity": "uncommon",
+    "illustration": "prison"
+  },
+  {
+    "id": "prison-paper-mastermind",
+    "min": 18,
+    "max": 120,
+    "legal": "prison-peer",
+    "rarity": "rare",
+    "illustration": "prison"
+  },
+  {
+    "id": "prison-snoring-review",
+    "min": 18,
+    "max": 120,
+    "legal": "prison-peer",
+    "rarity": "uncommon",
+    "illustration": "prison"
+  },
+  {
+    "id": "release-automatic-permission",
+    "min": 18,
+    "max": 120,
+    "legal": "released",
+    "rarity": "uncommon",
+    "illustration": "release"
+  },
+  {
+    "id": "later-family-next-visit",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "child": "adult"
+  },
+  {
+    "id": "later-family-photo-permission",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "relationship",
+    "child": "adult"
+  },
+  {
+    "id": "later-family-premature-tribute",
+    "min": 55,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "child": "adult",
+    "rarity": "rare"
+  },
+  {
+    "id": "study-timetable-colour-code",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "study": "active"
+  },
+  {
+    "id": "study-paused-unsolicited-tip",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "study": "paused"
+  },
+  {
+    "id": "study-confident-fake-source",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "education",
+    "study": "active",
+    "rarity": "uncommon"
+  },
+  {
+    "id": "retired-employer-box",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "journal",
+    "retired": true
+  },
+  {
+    "id": "widowed-name-in-conversation",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "illustration": "conversation",
+    "widowed": true
+  },
+  {
+    "id": "dramatic-boss-criminal",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "career",
+    "dramatic": true,
+    "workplace": true,
+    "supervisor": true
+  },
+  {
+    "id": "dramatic-double-fiance",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "rings",
+    "dramatic": true,
+    "partner": true
+  },
+  {
+    "id": "dramatic-best-friend-secrets",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "uncommon",
+    "illustration": "conversation",
+    "dramatic": true,
+    "friend": true
+  },
+  {
+    "id": "dramatic-child-exam-scam",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "uncommon",
+    "illustration": "education",
+    "dramatic": true,
+    "child": "teen"
+  },
+  {
+    "id": "dramatic-courtroom-defence",
+    "min": 18,
+    "max": 120,
+    "rarity": "rare",
+    "illustration": "court",
+    "dramatic": true
+  },
+  {
+    "id": "dramatic-cellmate-escape",
+    "min": 18,
+    "max": 120,
+    "rarity": "rare",
+    "illustration": "prison",
+    "dramatic": true,
+    "legal": "prison-peer"
+  },
+  {
+    "id": "dramatic-accomplice-wire",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "handcuffs",
+    "dramatic": true
+  },
+  {
+    "id": "dramatic-unpaid-employees",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "business",
+    "dramatic": true,
+    "specialCareer": "business"
+  },
+  {
+    "id": "dramatic-suspicious-property",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "property",
+    "dramatic": true
+  },
+  {
+    "id": "dramatic-dishonest-sponsor",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "contract",
+    "dramatic": true
+  },
+  {
+    "id": "dramatic-funeral-stream",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "streamer",
+    "dramatic": true,
+    "specialCareer": "streamer"
+  },
+  {
+    "id": "dramatic-dating-profile",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "uncommon",
+    "illustration": "relationship",
+    "dramatic": true,
+    "partner": true
+  },
+  {
+    "id": "dramatic-election-scandal",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "publicity",
+    "dramatic": true
+  },
+  {
+    "id": "dramatic-athlete-doping",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "career",
+    "dramatic": true,
+    "specialCareer": "athlete"
+  },
+  {
+    "id": "dramatic-scandal-movie",
+    "min": 18,
+    "max": 120,
+    "local": true,
+    "rarity": "rare",
+    "illustration": "career",
+    "dramatic": true,
+    "specialCareer": "actor"
+  }
+]

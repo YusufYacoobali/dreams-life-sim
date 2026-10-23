@@ -25,6 +25,7 @@ import { database } from '../support/sqlite';
 import native from '../fixtures/v39-content15-native-choice.json';
 import polish3 from '../fixtures/v45-polish3-before-cult.json';
 import cult46 from '../fixtures/v46-cult-before-polish.json';
+import published47 from '../fixtures/v47-before-cult-polish.json';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const cult46Canonical = (world: World) => {
@@ -82,9 +83,9 @@ test.each([
     const migrated = decodeWorld(input, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 47,
-      engineVersion: 49,
-      contentVersion: 26,
+      schemaVersion: 48,
+      engineVersion: 50,
+      contentVersion: 27,
       cults: [],
     });
     expect(migrated).toEqual(prior);
@@ -139,9 +140,9 @@ test.each([
     const migrated = decodeWorld(original, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 47,
-      engineVersion: 49,
-      contentVersion: 26,
+      schemaVersion: 48,
+      engineVersion: 50,
+      contentVersion: 27,
       cults: [],
     });
     expect(migrated.people).toEqual(decodeWorld(original).people);
@@ -167,7 +168,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        27,
+        28,
       );
       expect(await repository.active()).toEqual(migrated);
       expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
@@ -209,9 +210,9 @@ test.each([
     const migrated = decodeWorld(original, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 47,
-      engineVersion: 49,
-      contentVersion: 26,
+      schemaVersion: 48,
+      engineVersion: 50,
+      contentVersion: 27,
     });
     expect(sha(cult46Canonical(migrated))).toBe(expectedSha);
     expect(migrated.pending).toEqual(raw.pending);
@@ -259,7 +260,7 @@ test.each([
       const repository = new SaveRepository(driver);
       await repository.initialise();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        27,
+        28,
       );
       expect(await repository.active()).toEqual(migrated);
       expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
@@ -381,6 +382,99 @@ test('an actual World46 failed offer retains witnesses, former members, rival ca
   }
 });
 
+test.each([
+  [
+    'failedClaim',
+    '46b2f704f6e3e8656b05e79e0572f699acc49e8a63f91b58da3587a71657157a',
+  ],
+  [
+    'writingImmediate',
+    '230a77736e60c9bbf94754e25fe0a7ff048933df260b25ac3bb92a5bcf0167b9',
+  ],
+] as const)(
+  'published World47 %s advances only its tags and reader27 preserves every stored payload',
+  async (key, expectedSha) => {
+    expect(published47.producerCommit).toBe(
+      '5a5902f383be2016f4b911bc0cff36b39511d409',
+    );
+    expect(published47.versions).toEqual({
+      world: 47,
+      engine: 49,
+      content: 26,
+      reader: 27,
+    });
+    const record = published47.records[key],
+      original = record.payload,
+      raw = JSON.parse(original),
+      migrated = decodeWorld(original, true);
+    expect(record.payloadSha256).toBe(expectedSha);
+    expect(sha(original)).toBe(expectedSha);
+    expect(Buffer.byteLength(original)).toBe(record.payloadBytes);
+    expect(raw).toMatchObject({
+      schemaVersion: 47,
+      engineVersion: 49,
+      contentVersion: 26,
+    });
+    expect(JSON.parse(encodeWorld(migrated))).toEqual({
+      ...raw,
+      schemaVersion: 48,
+      engineVersion: 50,
+      contentVersion: 27,
+    });
+    expect(migrated.pending).toEqual(raw.pending);
+    expect(migrated.random).toEqual(raw.random);
+    expect(unpackCheckpoint(packCheckpoint(migrated), true)).toEqual(migrated);
+    const { sqlite, driver } = database();
+    try {
+      await new SaveRepository(driver).initialise();
+      sqlite
+        .prepare(
+          'INSERT INTO lives(id,name,revision,updated_at,payload) VALUES(?,?,?,?,?)',
+        )
+        .run(
+          raw.id,
+          'Published47 source',
+          raw.revision,
+          '2026-10-23',
+          original,
+        );
+      sqlite
+        .prepare('INSERT INTO backups(life_id,revision,payload) VALUES(?,?,?)')
+        .run(raw.id, raw.revision, original);
+      sqlite
+        .prepare('INSERT INTO preferences(key,value) VALUES(?,?)')
+        .run('active_life', raw.id);
+      sqlite.exec('PRAGMA user_version=27');
+      const rows = () =>
+          Object.fromEntries(
+            sqlite
+              .prepare(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name",
+              )
+              .all()
+              .map((row) => [
+                row.name,
+                sqlite
+                  .prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2')
+                  .all(),
+              ]),
+          ),
+        before = rows();
+      const repository = new SaveRepository(driver);
+      await repository.initialise();
+      expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
+        28,
+      );
+      expect(rows()).toEqual(before);
+      expect(await repository.active()).toEqual(migrated);
+      expect(await repository.recoveryPreview(raw.id)).toEqual(migrated);
+      expect(rows()).toEqual(before);
+    } finally {
+      sqlite.close();
+    }
+  },
+);
+
 test.each(['missing', 'null', 'object', 'corrupt'] as const)(
   'current worlds reject %s cult history rather than repairing it',
   (kind) => {
@@ -500,8 +594,8 @@ test('live cult finances, witnesses, deadlines and pending results survive snaps
   }
 });
 
-test.each([24, 25, 26])(
-  'reader%s →27 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
+test.each([24, 25, 26, 27])(
+  'reader%s →28 is metadata only, rolls back a failed marker and preserves every original payload across all eight populated tables',
   async (reader) => {
     const { sqlite, driver } = database(),
       repository = new SaveRepository(driver);
@@ -597,7 +691,7 @@ test.each([24, 25, 26])(
               ...tx,
               run: async (sql, values) => {
                 await tx.run(sql, values);
-                if (sql === 'PRAGMA user_version = 27')
+                if (sql === 'PRAGMA user_version = 28')
                   throw new Error('interrupted cult reader marker');
               },
             }),
@@ -615,7 +709,7 @@ test.each([24, 25, 26])(
       await cold.initialise();
       expect(unpack).not.toHaveBeenCalled();
       expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(
-        27,
+        28,
       );
       expect(rows()).toEqual(original);
       expect(await cold.active()).toEqual(paused);

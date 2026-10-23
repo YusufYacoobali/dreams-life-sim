@@ -84,7 +84,7 @@ The [follow-up record](verification/restored-save-responsiveness-20261019.json)
 retains source hashes and the genuine v1/v2 archive provenance.
 
 Final controlled results and their complete trial/input/source hashes are in
-[button-latency-20261019.json](verification/button-latency-20261019.json).
+[button-latency-20261019.json](verification/button-latency-20261019.json.gz).
 `node tools/benchmark-actions.cjs` uses real on-disk Node SQLite/WAL, one warm-up
 and five fixed-input samples, and compares the entire current/backup worlds after
 closing and reopening each trial. `--legacy-rows` separately measures the first

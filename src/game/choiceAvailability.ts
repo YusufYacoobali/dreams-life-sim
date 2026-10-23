@@ -4,11 +4,13 @@ import type { BoundChoice } from './runtime';
 import { storyContextReason } from './systems/storyContext';
 import { storyChoiceReason } from './systems/stories';
 import { dramaticChoiceReason } from './systems/dramaticOffers';
+import { storyImmediateReason } from './systems/storyImmediateContext';
 /** Funds can change while a higher-priority decision is resolved; no fake reservation is made. */
 export function choiceUnavailable(world: World, choice: BoundChoice): string | undefined {
   if (choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice') return dramaticChoiceReason(world, choice.effects[0]);
   if (choice.disabledReason) return choice.disabledReason;
   for (const effect of choice.effects) {
+    if (effect.kind === 'story-immediate') { const reason = storyImmediateReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'cult-choice') { const reason = cultChoiceReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'schedule-story') { const reason = storyContextReason(world, effect); if (reason) return reason; }
     if (effect.kind === 'resolve-story') { const reason = storyChoiceReason(world, effect.threadId, effect.resolution); if (reason) return reason; }

@@ -52,7 +52,7 @@ notices/inventory generator check passes; no gameplay regression was repeated.
 
 ## Historical original artwork and provenance
 
-The previous [launcher image](../assets/generated/dreams-app-icon.png) shows a
+The previous [launcher image](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/assets/generated/dreams-app-icon.png) shows a
 golden winding life path toward a sunrise, with coral/cream clouds on a navy
 background. Its rounded dimensional forms follow the game's illustrated style;
 its colours connect to the inspected existing welcome hero. It contains no text,

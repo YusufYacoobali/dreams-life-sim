@@ -1,4 +1,0 @@
-
-> dreams-life-sim@1.0.0 typecheck
-> tsc --noEmit && tsc --noEmit -p tests/tsconfig.json
-

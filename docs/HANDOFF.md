@@ -11,9 +11,21 @@ is compact, belief lists are searchable, and the existing two routes and
 12 illustrations are retained. See [the current guide](CULT_LEADER.md) and
 [the polish report](verification/cult-polish/README.md).
 
-Current markers are **World 47 / engine 49 / content 26 / reader 27 / database v4**.
-Genuine World 46 cult saves and their original pending claim outcomes remain
-supported. Earlier sections describe their historical source snapshots.
+Current markers are **World 48 / engine 50 / content 27 / reader 28 / database v4**.
+The concurrent event-writing and size-cleanup changes are retained. Genuine
+World 46 cult saves, both independently produced World 46 formats, integrated
+World 47 saves and their original pending outcomes remain supported. Earlier
+sections describe their historical source snapshots.
+
+## Size cleanup — 23 October 2026
+
+Lossless PNG encoding, shared review snapshots, archived captures, compressed older records and cloud build exclusions reduce the project and app asset payload. Android release minification/resource shrinking are enabled. Current saves, fixtures, active source art, selected launcher icon and all gameplay/version markers remain intact. See [PROJECT_SIZE.md](PROJECT_SIZE.md) for measurements, verification and recovery commands. The latest Cult Leader and event-writing commits are retained.
+
+## Event and payoff writing — 23 October 2026
+
+Audited all 319 events; revised **114 situations and 342 choice payoffs**, including 27 priority consequence upgrades. The writing batch preserves existing IDs, saved words, UI, avatar V2 artwork and mini-games. Real local payments, bound trust, employment/friendship endings and public-image changes use validated immediate effects without new story arcs or writing RNG.
+
+The concurrent Cult Leader career is retained. That combined source used **World47 / engine49 / content26 / reader27 / SQLite v4**; both independently produced World46 formats retain their records and original outcomes. At source `98e34b0`, the complete regression passed **302 suites / 4,236 tests**, plus strict app/test types and the 488-module import check. The review contains **36 complete natural journals**, 596 rewritten-story encounters, and 12 additional combined-source replays of overlapping seeds. See [the editorial review and verification](verification/event-writing/README.md). Earlier sections describe their own historical source snapshots.
 
 ## Cult Leader — 23 October 2026
 

@@ -37,6 +37,8 @@ Development and configured internal preview builds include **Settings → God Mo
 
 New lives begin with a short [birth journal](docs/BIRTH_JOURNAL.md): actual family names, ages and occupations, with occasional original birth anecdotes. The existing Life journal opens at the beginning of this introduction without an additional screen.
 
+See [project size and asset optimization](docs/PROJECT_SIZE.md) for bundle measurements, cloud build exclusions and archived-review recovery.
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.
 
 The [reference polish review](docs/verification/product-polish/README.md) covers contextual event/pet artwork, relationship rows and profiles, thicker stat bars, saved school milestones, twenty homes and twenty vehicles, household rental leases, and shorter travel/care/business flows. Before/after browser captures, offline bundle checks and compatibility evidence are included; native device visual acceptance remains open.

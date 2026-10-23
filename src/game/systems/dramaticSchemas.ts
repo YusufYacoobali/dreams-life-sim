@@ -12,6 +12,7 @@ export type DramaticEventId = typeof dramaticEventIds[number];
 export const dramaticEffectSchema = z.object({
   kind: z.literal('dramatic-choice'), ruleVersion: z.union([z.literal(1), z.literal(2)]), eventId: z.enum(dramaticEventIds),
   choiceId: z.string(), subjectId: z.string(), contextId: z.string().optional(),
+  copyVersion: z.literal(25).optional(),
   relatedId: z.string().optional(), otherId: z.string().optional(), quote: z.bigint().nonnegative().optional(),
 });
 export type DramaticEffect = z.infer<typeof dramaticEffectSchema>;

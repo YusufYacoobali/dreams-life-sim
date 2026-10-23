@@ -101,14 +101,19 @@ communal balance. People, membership, financial totals and history remain.
 
 ## Persistence
 
-Current saves use World 47 / engine 49 / content 26 / SQLite reader 27, database v4.
+Current saves use World 48 / engine 50 / content 27 / SQLite reader 28, database v4.
+Published Cult Leader World 46 records remain literal. The concurrent writing
+branch used the same World 46 markers without a cult collection; only that absent
+field gains an empty collection during migration. Existing cult records are never
+replaced, and malformed present values are rejected.
 Published Polish 3 World 45 saves gain an empty cult history prospectively,
 without consuming random draws. The World 44 → 45 Polish 3 migration and all
 preceding mini-game, rental and personal-support branches remain supported.
-World 46 cult saves advance their version markers without rewriting members,
-threads, pending offers, random state or financial history. A genuine pre-polish
-fixture proves exact old offer outcomes across the upgrade.
-Reader 13–26 upgrades are metadata-only and do not rewrite stored lives,
+World 46 cult saves and integrated World 47 saves advance their version markers
+without rewriting members, threads, pending offers, random state or financial
+history. Genuine pre-polish fixtures prove exact old offer outcomes across the
+upgrade.
+Reader 13–27 upgrades are metadata-only and do not rewrite stored lives,
 receipts or checkpoints.
 
 Commands are strict typed unions. Validation reconciles archived and recent

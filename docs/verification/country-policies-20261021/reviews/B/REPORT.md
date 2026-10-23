@@ -48,7 +48,7 @@ All 26 milestone objects and every negative observation remain pinned in the ori
 - Combined game/persistence SHA256: `d72d52f3d6a6e312e490a525c0638638af6c5bb27449ffb8a0dd5833e10acbc0`.
 - [Detailed review](report.json) contains all country summaries, unmet objects, negative pointers and reported final hashes.
 - [Artifact manifest](artifact-manifest.json) pins every actual raw file, receipt, registration, Git/provenance artifact, source helper and the producer/loaded-runtime hash maps. These are current C39 artifacts; historical v1/v2 records were not rewritten.
-- [Analysis helper](analyse.py) and [closed analysis stdout](analysis.out) perform JSON/hash arithmetic only.
+- [Analysis helper](analyse.py) and [closed analysis stdout](https://github.com/YusufYacoobali/dreams-life-sim/blob/da0b0e59cc11fc37b81eb0a20bcf5251e6eba5af/docs/verification/country-policies-20261021/reviews/B/analysis.out) perform JSON/hash arithmetic only.
 
 GB902 was selected before review and its actual three files were shared with Story for a separate narrative review. This report does not claim that separate narrative review has completed.
 

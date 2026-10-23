@@ -19,7 +19,7 @@ test('the genuine native v3 result migrates only its content tag and retains all
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ...(part.people ? { people: Object.assign({}, ...part.people.map(inflate)) } : {}), ledger: part.ledger.flatMap(inflate) }; };
   expect(JSON.parse(archive.checkpoint).format).toBe('dreams-checkpoint-v3');
   const contents = decodeSave(JSON.stringify(archive)), originals = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [contents.world, ...contents.snapshots.map(item => unpackCheckpoint(item.payload))];
-  expect(originals[0]).toMatchObject({ schemaVersion: 30, engineVersion: 29, contentVersion: 6, revision: 82 }); expect(worlds[0].contentVersion).toBe(26);
+  expect(originals[0]).toMatchObject({ schemaVersion: 30, engineVersion: 29, contentVersion: 6, revision: 82 }); expect(worlds[0].contentVersion).toBe(27);
   worlds.forEach((world, index) => { const value = JSON.parse(encodeWorld(world)); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(value[key]).toEqual(originals[index][key]); });
   expect(contents.snapshots).toEqual(archive.snapshots); expect(contents.snapshots).toHaveLength(20); for (const point of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === point.summary.id)).toEqual(point);
   expect(contents.world.pending).toMatchObject({ kind: 'result', title: 'Routine saved' }); expect(contents.world.people[contents.world.activePersonId].health.routine.exercise).toBe('none');

@@ -101,7 +101,7 @@ export function scheduleCultCallback(
     kind === 'rival-return'
       ? 'An old follower returns'
       : kind === 'recruiter-return'
-        ? 'The broadcast grows up'
+        ? 'You gave them ideas'
         : 'An accusation returns';
   thread.body =
     fullName(world.people[member.personId]) + ' remembers how this began.';

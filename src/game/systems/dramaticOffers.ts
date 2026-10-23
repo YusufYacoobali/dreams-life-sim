@@ -30,7 +30,7 @@ export function bindDramaticEvent(world: World, template: EventTemplate, subject
   const { names: _names, personIds, ...binding } = c;
   const choices: BoundChoice[] = template.choices.map(choice => {
     const ruleVersion = ['dramatic-double-fiance', 'dramatic-athlete-doping'].includes(template.id) ? 2 : 1;
-    const effect: DramaticEffect = { kind: 'dramatic-choice', ruleVersion, eventId: template.id as DramaticEventId, choiceId: choice.id, ...binding };
+    const effect: DramaticEffect = { kind: 'dramatic-choice', ruleVersion, copyVersion: 25, eventId: template.id as DramaticEventId, choiceId: choice.id, ...binding };
     const disabledReason = dramaticChoiceReason(world, effect);
     return { id: choice.id, label: text(choice.label), effects: [effect], resultTitle: choice.title, resultBody: choice.result, journal: choice.journal, ...(disabledReason ? { disabledReason } : {}) };
   });

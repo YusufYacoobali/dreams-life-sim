@@ -26,6 +26,10 @@ expo-env.d.ts
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.log
+coverage/
+__pycache__/
+*.py[cod]
 
 # macOS
 .DS_Store

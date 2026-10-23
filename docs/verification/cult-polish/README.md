@@ -1,7 +1,8 @@
 # Cult Leader gameplay polish — 23 October 2026
 
 This focused pass extends the Cult Leader implementation at `9101307c` on
-`work`. The career, artwork and two management routes are retained. See the
+`work` and integrates the later event-writing and asset-cleanup source at
+`5a5902f`. The career, artwork and two management routes are retained. See the
 [feature guide](../../CULT_LEADER.md) and the
 [original implementation report](../cult-career/README.md).
 
@@ -35,9 +36,9 @@ This focused pass extends the Cult Leader implementation at `9101307c` on
 
 ## Saves and focused verification
 
-Current markers are **World 47 / engine 49 / content 26 / SQLite reader 27 /
- database v4**. The World 46 upgrade changes version markers without rewriting
-cult people, offers, threads, random state or financial history. Reader 13–26
+Current markers are **World 48 / engine 50 / content 27 / SQLite reader 28 /
+ database v4**. Published World 46 and integrated World 47 saves upgrade without rewriting
+cult people, offers, threads, random state or financial history. Reader 13–27
 upgrades remain metadata-only.
 
 The genuine pre-polish fixture was captured by the original `9101307c` engine,

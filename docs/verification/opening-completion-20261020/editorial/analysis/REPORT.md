@@ -47,7 +47,7 @@ There are14 such actual condition histories across the cohort.
 emergency care; the NPC treatment path at229 does the same. Preserve an existing
 date for future care and keep new admissions/treatments separate. Do not infer or
 rewrite dates already overwritten in old saves. Exact condition IDs, record IDs,
-dates and checkpoints are in [medical-context-evidence.json](medical-context-evidence.json).
+dates and checkpoints are in [medical-context-evidence.json](medical-context-evidence.json.gz).
 
 No additional contradiction was found in the selected catalogue effects,
 reported capped values/tones, authored age ranges, mapped choice IDs, cooldowns

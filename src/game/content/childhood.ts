@@ -135,12 +135,12 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-recorder-solo', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'education', title: 'Volume is not a musical note',
-    body: '{classmate} practises a recorder beside you. The tune sounds like a kettle being threatened.',
+    id: 'school-recorder-solo', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'education', title: 'A nose for music',
+    body: '{classmate} has learned to play the recorder with their nose. They ask you to accompany their debut. The first note makes everyone check for a trapped bird.',
     choices: [
-      o('practice', 'Practise the tricky bit together', { discipline: 2, energy: -2 }, 'Fewer emergency noises', 'You slow the tune down. It improves after several attempts.', 'I practised a difficult recorder tune with {classmate}.', undefined, { peerBond: 3, skill: { id: 'music', delta: 2 } }),
-      o('polite', 'Ask for a short break', { respect: 2, stress: -2 }, 'Temporary silence', '{classmate} takes a break. You can hear your own thoughts again.', 'I politely asked {classmate} for a break from recorder practice.'),
-      o('imitate', 'Imitate it at full volume', { happiness: 2, respect: -3 }, 'Duet cancelled', '{classmate} stops playing and stops talking to you for the afternoon.', 'I mocked {classmate}’s recorder playing.', undefined, { peerBond: -5 }),
+      o('practice', 'Drum on the desk and let them have their moment', { happiness: 3, energy: -2 }, 'A very short tour', 'You find a beat that nearly matches the squeaks. {classmate} attempts an encore, sneezes, and announces an interval.', 'I accompanied {classmate}’s nose-recorder debut by drumming on a desk.', undefined, { peerBond:3, skill:{id:'music',delta:2} }),
+      o('polite', 'Offer to be the audience from further away', { respect: 2, stress: -2 }, 'Excellent seats still available', 'You applaud from across the room. {classmate} bows and asks if you can hear it clearly. Unfortunately, yes.', 'I supported {classmate}’s nose-recorder performance from a comfortable distance.', undefined, { peerBond:1 }),
+      o('imitate', 'Announce that you can play an imaginary one', { happiness: 3, respect: -2 }, 'Critics prefer the silence', 'You mime a full solo without making a sound. The laughter makes {classmate} stop playing. They tell you to find your own audience.', 'I upstaged {classmate}’s nose-recorder solo with a silent imaginary instrument.', undefined, { peerBond:-5 }),
     ],
   },
   {
@@ -171,12 +171,12 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'school-bench-reserve', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Reserved for nobody',
-    body: '{classmate} is sitting alone at break. There is room beside them, but everyone is queuing for a game nearby.',
+    id: 'school-bench-reserve', min: 6, max: 11, school: 'primary', classmate: true, illustration: 'relationship', title: 'Imaginary friend wanted',
+    body: '{classmate} is alone at break. They say their imaginary friend has moved to a better school. They are interviewing replacements on the empty part of the bench.',
     choices: [
-      o('sit', 'Sit down and say hello', { happiness: 2, respect: 2 }, 'Room for two', 'You talk until the bell. The game will still be there tomorrow.', 'I spent break talking with {classmate}.', undefined, { peerBond: 5 }),
-      o('invite', 'Ask if they want to join the game', { respect: 3 }, 'An invitation helps', '{classmate} comes over with you and waits for a turn.', 'I invited {classmate} to join a game at break.', undefined, { peerBond: 4 }),
-      o('queue', 'Go straight to the game', { happiness: 2 }, 'Your turn comes', 'You play before the bell. You do not find out why {classmate} was sitting alone.', 'I joined a game instead of sitting with {classmate}.'),
+      o('sit', 'Help interview the invisible applicants', { happiness: 3, smarts: 1 }, 'A crowded bench', 'You reject the first applicant for imaginary biting. {classmate} rejects the second for actually being a dragon. You run out of break before making an appointment.', 'I helped {classmate} interview replacements for an imaginary friend.', undefined, { peerBond:5 }),
+      o('invite', 'Apply, despite being inconveniently real', { respect: 2, happiness: 2 }, 'You meet most of the requirements', '{classmate} asks whether you can turn invisible. You hide behind the bench. They accept that as a reasonable compromise and come to play with you.', 'I applied to be {classmate}’s imaginary friend and was accepted despite being visible.', undefined, { peerBond:4 }),
+      o('queue', 'Pretend you have accidentally sat on one', { happiness: 2, respect: -2 }, 'A difficult first impression', 'You jump up and apologise to empty air. {classmate} says you have crushed their best candidate and refuses your offer to flatten the others equally.', 'I disrupted {classmate}’s imaginary-friend interviews with a bench prank.', undefined, { peerBond:-4 }),
     ],
   },
   {
@@ -216,12 +216,12 @@ export const childhoodTemplates: readonly EventTemplate[] = [
     ],
   },
   {
-    id: 'teen-group-project-credit', min: 12, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'education', title: 'Featuring everyone except you',
-    body: '{classmate} presents your group project and forgets to mention your work. Your name is still on the slides you made.',
+    id: 'teen-group-project-credit', min: 12, max: 17, school: 'secondary', classmate: true, teacher: true, illustration: 'education', title: 'The unpaid goblin',
+    body: '{classmate} turns your group presentation into a pitch for an imaginary company. You are listed as “unpaid goblin”. Their dog is CEO. {teacher} asks where the actual research is.',
     choices: [
-      o('clarify', 'Calmly explain your contribution', { respect: 3, stress: 1 }, 'Credit added', '{teacher} asks you about your part. You answer without shouting.', 'I explained my contribution after {classmate} left it out of our presentation.', undefined, { teacherBond: 2 }),
-      o('private', 'Talk to {classmate} afterwards', { discipline: 2 }, 'A direct conversation', 'You explain why it mattered. {classmate} agrees to correct the credit.', 'I spoke to {classmate} about leaving my work out of a presentation.', undefined, { peerBond: 2 }),
-      o('interrupt', 'Interrupt with “You’re welcome!”', { happiness: 2, respect: -2 }, 'Everyone heard', 'The room goes quiet. {teacher} tells both of you to sort it out after class.', 'I interrupted {classmate}’s presentation to demand credit.', undefined, { peerBond: -4, teacherBond: -2 }),
+      o('clarify', 'Open the real research before the dog gets a salary', { respect: 3, stress: 1 }, 'Goblin saves the meeting', 'You present your actual work. {teacher} marks it while {classmate} clicks past a slide about office beanbags. The dog receives no academic credit.', 'I rescued our group presentation after {classmate} replaced the research with a fake company pitch.', undefined, { grades:4, teacherBond:3, peerBond:-3 }),
+      o('private', 'Whisper a demand for a better job title', { happiness: 3, discipline: -2 }, 'Assistant to the dog', '{classmate} promotes you on the slide. You finish the ridiculous pitch together, then {teacher} explains that enthusiasm has not answered the assignment.', 'I negotiated an imaginary promotion during {classmate}’s fake company presentation.', undefined, { grades:-5, peerBond:4 }),
+      o('interrupt', 'Delete the pitch while they are presenting it', { happiness: 2, respect: -5, stress: 4 }, 'The company has ceased trading', '{classmate} faces a blank screen and shouts at you. {teacher} gives the incomplete presentation a poor mark. You spend the rest of the lesson arguing over who ruined it first.', 'I deleted {classmate}’s presentation mid-speech and damaged both our grade and our relationship.', undefined, { grades:-16, peerBond:-20, teacherBond:-10, trust:{peer:-15} }),
     ],
   },
   {

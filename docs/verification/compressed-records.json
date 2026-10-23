@@ -1,0 +1,891 @@
+[
+  {
+    "original": "docs/verification/action-latency-adult-relationships-20261020.json",
+    "compressed": "docs/verification/action-latency-adult-relationships-20261020.json.gz",
+    "bytes": 173708,
+    "compressedBytes": 16737,
+    "sha256": "c8703e35821d22209d157ebf7d7e4c3f941dc5ae496ee77b29ff1846d547fc4a"
+  },
+  {
+    "original": "docs/verification/action-latency-autonomy-20261020.json",
+    "compressed": "docs/verification/action-latency-autonomy-20261020.json.gz",
+    "bytes": 248805,
+    "compressedBytes": 23201,
+    "sha256": "f51b53f7222182394b126ec253fedca44a2ee3d9aabee86cb61190225605dfd1"
+  },
+  {
+    "original": "docs/verification/action-latency-content5-20261020.json",
+    "compressed": "docs/verification/action-latency-content5-20261020.json.gz",
+    "bytes": 99646,
+    "compressedBytes": 9474,
+    "sha256": "76392097144b926cf13018327238879b79f3fad3eba879db1d3cbf4fc6f3387b"
+  },
+  {
+    "original": "docs/verification/action-latency-raises-20261020.json",
+    "compressed": "docs/verification/action-latency-raises-20261020.json.gz",
+    "bytes": 148027,
+    "compressedBytes": 13522,
+    "sha256": "896ceec67ab579ea468a764f8eb4a0b5c9a1a383ae98f15443b8a84241515219"
+  },
+  {
+    "original": "docs/verification/action-latency-workplace-stories-20261020.json",
+    "compressed": "docs/verification/action-latency-workplace-stories-20261020.json.gz",
+    "bytes": 148031,
+    "compressedBytes": 13672,
+    "sha256": "cb915b4aa05069df6987c4f5701edbb4f9f6db4a2df94e0555779e29fdf27508"
+  },
+  {
+    "original": "docs/verification/action-latency-workplaces-20261020.json",
+    "compressed": "docs/verification/action-latency-workplaces-20261020.json.gz",
+    "bytes": 133386,
+    "compressedBytes": 12397,
+    "sha256": "b557a858ee6ca8f5882fe7ca737273c342a29c953ff52b36f83cacee0f8408f2"
+  },
+  {
+    "original": "docs/verification/android24-adult-relationships-20261020/natural-adult-friend.dreams.json",
+    "compressed": "docs/verification/android24-adult-relationships-20261020/natural-adult-friend.dreams.json.gz",
+    "bytes": 860811,
+    "compressedBytes": 612463,
+    "sha256": "50218e3e670638ef162bfe2972772544fb3fce3699823f7f6b1df61b038c5610"
+  },
+  {
+    "original": "docs/verification/android24-arcade-20261020/natural-invitation.dreams.json",
+    "compressed": "docs/verification/android24-arcade-20261020/natural-invitation.dreams.json.gz",
+    "bytes": 249097,
+    "compressedBytes": 159197,
+    "sha256": "9f29358a7091140838611ff2a0b2929943f35cb5af9ead6329eaffaa51c8cb05"
+  },
+  {
+    "original": "docs/verification/android24-opening-school-20261020/appearance-normal.xml",
+    "compressed": "docs/verification/android24-opening-school-20261020/appearance-normal.xml.gz",
+    "bytes": 65630,
+    "compressedBytes": 2399,
+    "sha256": "c140f52f7391b11ca9af95330466178674bd33ec04fc4532f5dccd3417c8ee23"
+  },
+  {
+    "original": "docs/verification/annual-1000-20261021/aggregate.json",
+    "compressed": "docs/verification/annual-1000-20261021/aggregate.json.gz",
+    "bytes": 475217,
+    "compressedBytes": 72568,
+    "sha256": "6e88b226ba4aca7d9ed925b6f0ae03b99e0eae1d922f5073a267fb455e7f0c7f"
+  },
+  {
+    "original": "docs/verification/annual-1000-20261021/dreams-production-finish-accepted-source.json",
+    "compressed": "docs/verification/annual-1000-20261021/dreams-production-finish-accepted-source.json.gz",
+    "bytes": 75993,
+    "compressedBytes": 33779,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  {
+    "original": "docs/verification/annual-1000-20261021/rows.ndjson",
+    "compressed": "docs/verification/annual-1000-20261021/rows.ndjson.gz",
+    "bytes": 309306,
+    "compressedBytes": 68317,
+    "sha256": "eb2568d25511fdeebcabf7ff07a606b53443f908dd81e3b83925f365379cacaf"
+  },
+  {
+    "original": "docs/verification/autonomy-e0bf44-git-tree-20261020.bin",
+    "compressed": "docs/verification/autonomy-e0bf44-git-tree-20261020.bin.gz",
+    "bytes": 134269,
+    "compressedBytes": 44159,
+    "sha256": "46758492f8d1cc6d436482d9f3639e16ca3854ebff85ff292749689fe190226a"
+  },
+  {
+    "original": "docs/verification/autonomy-gameplay-20261020.json",
+    "compressed": "docs/verification/autonomy-gameplay-20261020.json.gz",
+    "bytes": 139678,
+    "compressedBytes": 43961,
+    "sha256": "cc5d9d4b3a3f97f9fc5a07b15d976597a7242679e4a02e99ff7fd97eea7a324f"
+  },
+  {
+    "original": "docs/verification/button-latency-20261019.json",
+    "compressed": "docs/verification/button-latency-20261019.json.gz",
+    "bytes": 79289,
+    "compressedBytes": 10556,
+    "sha256": "db2af867cc643a70e96001cdf34a4cf5e2c830751a7a37d67b097bc43d18df53"
+  },
+  {
+    "original": "docs/verification/compact-transactions-comparison-20261020.json",
+    "compressed": "docs/verification/compact-transactions-comparison-20261020.json.gz",
+    "bytes": 470226,
+    "compressedBytes": 42494,
+    "sha256": "b472353084881150bc245e49af1aacb2282017d5a213e52ca920eaf2020e0212"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/reviews/D/effect-checks.ndjson",
+    "compressed": "docs/verification/country-policies-20261021/reviews/D/effect-checks.ndjson.gz",
+    "bytes": 370822,
+    "compressedBytes": 15802,
+    "sha256": "35fc6712a97ac152db1533d12beb0df2f5581e61ac3e3451ebe34599ca8b7110"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/reviews/D/inputs.json",
+    "compressed": "docs/verification/country-policies-20261021/reviews/D/inputs.json.gz",
+    "bytes": 65990,
+    "compressedBytes": 15266,
+    "sha256": "8a7bc8137862bb88c9a9a2ba3665c79ba73751b21dd2ed809c518cf4fc1ac5e1"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/reviews/D/observed-catalogue.ndjson",
+    "compressed": "docs/verification/country-policies-20261021/reviews/D/observed-catalogue.ndjson.gz",
+    "bytes": 234171,
+    "compressedBytes": 29026,
+    "sha256": "8b77b6a60eff80cbee5d7632f15cb6ca6e394b3fe881510c8567ce4b722e22d0"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/reviews/D/omissions.json",
+    "compressed": "docs/verification/country-policies-20261021/reviews/D/omissions.json.gz",
+    "bytes": 86451,
+    "compressedBytes": 9273,
+    "sha256": "b52d21a315adb8bb3915a7433a78f32d4c25000bbe9e9128d33a6a409ff3e82c"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/reviews/D/pacing-frames.ndjson",
+    "compressed": "docs/verification/country-policies-20261021/reviews/D/pacing-frames.ndjson.gz",
+    "bytes": 426799,
+    "compressedBytes": 25332,
+    "sha256": "a02468dde6136a8207fbd5275c3ea2904d6ff3b0c3bbd84037c2612f962686f7"
+  },
+  {
+    "original": "docs/verification/country-policies-20261021/source/accepted-source.json",
+    "compressed": "docs/verification/country-policies-20261021/source/accepted-source.json.gz",
+    "bytes": 75993,
+    "compressedBytes": 33779,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  {
+    "original": "docs/verification/criminal-natural-journeys-20261020.json",
+    "compressed": "docs/verification/criminal-natural-journeys-20261020.json.gz",
+    "bytes": 588226,
+    "compressedBytes": 93157,
+    "sha256": "29d450099ee7ce8635c6661bfebac3334f1ff2c0fc6be2ae8f3663796f4d97a2"
+  },
+  {
+    "original": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020-final-checkpoint.json.gz",
+    "bytes": 1337928,
+    "compressedBytes": 992218,
+    "sha256": "2ab01b4e0be6fad8adc7421ebe1d225c2e33552489204a56dc3ccb58078e7754"
+  },
+  {
+    "original": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020.json",
+    "compressed": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020.json.gz",
+    "bytes": 149669,
+    "compressedBytes": 22662,
+    "sha256": "68877c33c542e7a4a33c3228e15d8d44a30ede83d6664206f7561b2c3ea42c51"
+  },
+  {
+    "original": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020.ndjson",
+    "compressed": "docs/verification/entrepreneur-US-completed-from-interrupted-serial-20261020.ndjson.gz",
+    "bytes": 516332,
+    "compressedBytes": 32098,
+    "sha256": "ad59c49af4933e678b6edcbaf73d7cc5e69a5b966ef54dcce4e66b2d34ddc474"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/AU-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/AU-commands.ndjson.gz",
+    "bytes": 462112,
+    "compressedBytes": 29403,
+    "sha256": "c080220a087dff068ea24faa4edbcdfdf9bfb9c7f0527bc68202141c9260cb5f"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/AU-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/AU-final-checkpoint.json.gz",
+    "bytes": 1184524,
+    "compressedBytes": 879390,
+    "sha256": "9cdcd27fd06acc29233d9e725e9a6a725d5d327b2fc9111ca29703c3a51cad81"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/AU-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/AU-result.json.gz",
+    "bytes": 143692,
+    "compressedBytes": 23145,
+    "sha256": "7fb9431351bd2bc4d24efef7edfc16a47d30988a8d4929f1a04085fbce36957f"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/BR-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/BR-commands.ndjson.gz",
+    "bytes": 356710,
+    "compressedBytes": 22650,
+    "sha256": "7613c18f0b8a98487dae0f4d6ad7f4e1cf677146e476f79eab6779e06f1fa130"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/BR-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/BR-final-checkpoint.json.gz",
+    "bytes": 598269,
+    "compressedBytes": 442085,
+    "sha256": "1b5542e13f51c166816a357c6b6513f7b580e69359bca1182553cb74f6da94e2"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/BR-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/BR-result.json.gz",
+    "bytes": 115711,
+    "compressedBytes": 19408,
+    "sha256": "17665039f3fe189289ab59cc4fb304aab21f78ceac3d6c4d3eb7e9e6b9419ac3"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/CA-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/CA-commands.ndjson.gz",
+    "bytes": 508361,
+    "compressedBytes": 31420,
+    "sha256": "2533752ba9159c34ee0a3cf918d83885a10b1cad990924b4f5a6f1ffc08c88a7"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/CA-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/CA-final-checkpoint.json.gz",
+    "bytes": 791247,
+    "compressedBytes": 584131,
+    "sha256": "2f540dc73b479e1682a521ebd714c8cb9d2cd83c5277dabb5ef41d6f899b2719"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/CA-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/CA-result.json.gz",
+    "bytes": 152377,
+    "compressedBytes": 23540,
+    "sha256": "f3cf41c3e268f2dfdf8be69999a50b040c01c6770361b34c9316abe6b3542cfe"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/DE-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/DE-commands.ndjson.gz",
+    "bytes": 406356,
+    "compressedBytes": 25611,
+    "sha256": "be2ae3c5ef10a2cbae67a0a86569178a9eca517bf5f1d536b51e6594c10088d5"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/DE-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/DE-final-checkpoint.json.gz",
+    "bytes": 1118163,
+    "compressedBytes": 829183,
+    "sha256": "093d8447fa4f0e88a55c87fad1deec36c441faae97d4cfebf17ed2d26cc2ee1c"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/DE-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/DE-result.json.gz",
+    "bytes": 131747,
+    "compressedBytes": 21306,
+    "sha256": "1bc7281b91f63e4ccb7e386abc6a78434cdad41c9234b1022de47f0cd2fc23f8"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ES-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ES-commands.ndjson.gz",
+    "bytes": 364338,
+    "compressedBytes": 23277,
+    "sha256": "08fb00700091c5b1ead45dbff4447d270a92f3e2916de487a589b3d0f6da6d0c"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ES-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ES-final-checkpoint.json.gz",
+    "bytes": 710598,
+    "compressedBytes": 526223,
+    "sha256": "276e2fa105d75b6e1c5d6d666eb7ba7975435c7a7eddc3cdd4f984ec4aac583d"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ES-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ES-result.json.gz",
+    "bytes": 122650,
+    "compressedBytes": 20611,
+    "sha256": "ae7fa20757bb044da9760603484cfec7ecb549ab56d58662ea3037bfe0c73f32"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/FR-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/FR-commands.ndjson.gz",
+    "bytes": 256692,
+    "compressedBytes": 17018,
+    "sha256": "a03103a98ae08b1864fa9f5a2220dfd195ed4de5f79ceabf3dd6de7fdec4dea8"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/FR-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/FR-final-checkpoint.json.gz",
+    "bytes": 782086,
+    "compressedBytes": 580861,
+    "sha256": "32d73b77f6244bbee11327dacf385e44634524beff3c1914eea4a876de2ffe43"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/FR-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/FR-result.json.gz",
+    "bytes": 97018,
+    "compressedBytes": 17619,
+    "sha256": "f35e51efeb2735e0167c4f80e720b1c47a1f77fffe25ea79f2d6ca9c7db923c5"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/GB-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/GB-commands.ndjson.gz",
+    "bytes": 313943,
+    "compressedBytes": 20506,
+    "sha256": "94d59dbd24044571c248117bc99375c4febec4abbabf2c4107d075348be1e2b0"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/GB-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/GB-final-checkpoint.json.gz",
+    "bytes": 706762,
+    "compressedBytes": 524344,
+    "sha256": "9fabb8e1d43b6326a303a148140079b8782aa426145a7ad535af36a6b12d6e33"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/GB-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/GB-result.json.gz",
+    "bytes": 113886,
+    "compressedBytes": 19773,
+    "sha256": "61a743753e54a73f4a63212cf634dcb178a32c7f4514eb499bf70432ed3325b8"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IN-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IN-commands.ndjson.gz",
+    "bytes": 533108,
+    "compressedBytes": 33030,
+    "sha256": "62eb029029ee8367254a75627c09f599f4fd62c5614fa97ea131e50075f4a962"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IN-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IN-final-checkpoint.json.gz",
+    "bytes": 1263736,
+    "compressedBytes": 930701,
+    "sha256": "bb1eeccb6001f2ac0e128f9127001bf2bc84e59078835b8ae36d1f9e507b4b31"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IN-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IN-result.json.gz",
+    "bytes": 160771,
+    "compressedBytes": 24976,
+    "sha256": "bd9bdfa5ef87e6b9edaf99db106f3e3f762a8983fe052e5705596a9b57f20a64"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IT-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IT-commands.ndjson.gz",
+    "bytes": 478625,
+    "compressedBytes": 30211,
+    "sha256": "4f8a5f166ab8e52dfd4d3d1587497d693dba1d6bad6faebd28bdc49f72a9ebe6"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IT-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IT-final-checkpoint.json.gz",
+    "bytes": 1246883,
+    "compressedBytes": 927743,
+    "sha256": "2c134915c583a45a9bdb2f9a959418b45d547dd5af59ab6d79ad76b71c1f0db5"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/IT-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/IT-result.json.gz",
+    "bytes": 148610,
+    "compressedBytes": 24003,
+    "sha256": "6db3d2f0951f1a9f14bb1f3599275d2564d0c97495fc167eedb013bd3ae3bce4"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/JP-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/JP-commands.ndjson.gz",
+    "bytes": 453611,
+    "compressedBytes": 28952,
+    "sha256": "3558320adbafa3c28ebea1f5516a5acfac5f3c26e481103fb791b5ad6b025e1d"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/JP-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/JP-final-checkpoint.json.gz",
+    "bytes": 1050392,
+    "compressedBytes": 778655,
+    "sha256": "a5b6d34c75432bfb4ecc3ee55fffd23ee02cf7da0058e1a6a3ea4406d090c0aa"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/JP-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/JP-result.json.gz",
+    "bytes": 147038,
+    "compressedBytes": 23021,
+    "sha256": "e609fead9609e0945ed9da7655ca0a0c760803de9a075acac83e38fd91f4f824"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ZA-commands.ndjson",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ZA-commands.ndjson.gz",
+    "bytes": 542267,
+    "compressedBytes": 33733,
+    "sha256": "8357cc71ebef0b0d0967174e1651b4bfd03cc73202a31f609878422c2658a862"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ZA-final-checkpoint.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ZA-final-checkpoint.json.gz",
+    "bytes": 1223112,
+    "compressedBytes": 903162,
+    "sha256": "e643684f1ab4ea837db6088da83aab32b07782235c47d9950b4eac0217fad297"
+  },
+  {
+    "original": "docs/verification/entrepreneur-country-pool-20261020/ZA-result.json",
+    "compressed": "docs/verification/entrepreneur-country-pool-20261020/ZA-result.json.gz",
+    "bytes": 163844,
+    "compressedBytes": 24868,
+    "sha256": "bbcf867e10a5367e5d686a9dd63a5757f94ff9afaab3a796222d8cd5cf92438b"
+  },
+  {
+    "original": "docs/verification/entrepreneur-natural-journeys-20261020.json",
+    "compressed": "docs/verification/entrepreneur-natural-journeys-20261020.json.gz",
+    "bytes": 1652459,
+    "compressedBytes": 259159,
+    "sha256": "bd46bd6f762a5a7c946291e8f2e327a67a5f54980891853f7f3266024c01d252"
+  },
+  {
+    "original": "docs/verification/final-regression-20261021/003-source-tree.bin",
+    "compressed": "docs/verification/final-regression-20261021/003-source-tree.bin.gz",
+    "bytes": 207286,
+    "compressedBytes": 64826,
+    "sha256": "e7f52b1e3ff5f493af48873f9b294ac569d7ed288ca33b35a673ee52e6594284"
+  },
+  {
+    "original": "docs/verification/final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json",
+    "compressed": "docs/verification/final-regression-20261021/012-dreams-c39-professional-v3-country-outcomes-20261021.json.gz",
+    "bytes": 160548,
+    "compressedBytes": 23124,
+    "sha256": "45ce111f0ca8e75c796aeff568998ce77ec7d608d8f80abb27902848701e055e"
+  },
+  {
+    "original": "docs/verification/final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json",
+    "compressed": "docs/verification/final-regression-20261021/013-dreams-production-finish-final-publication-inputs-v2-20261021.json.gz",
+    "bytes": 154012,
+    "compressedBytes": 26919,
+    "sha256": "1273d038c501899c0e8bf76bf012b5f9d5178f3de8ff734efffad891859b45f7"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020.json",
+    "compressed": "docs/verification/friends-editorial-20261020.json.gz",
+    "bytes": 65721,
+    "compressedBytes": 14958,
+    "sha256": "8332100a276a45af2285d35ef2a25fc80c36ad4734a3e27208569f3ee64e48d7"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/checks/exports-provenance.json",
+    "compressed": "docs/verification/friends-editorial-20261020/checks/exports-provenance.json.gz",
+    "bytes": 67693,
+    "compressedBytes": 29817,
+    "sha256": "f28393a1755c264ebe5f6325db1ab469709fd7fdeefc7f53526a77187566a48c"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/native/core-source-pins.json",
+    "compressed": "docs/verification/friends-editorial-20261020/native/core-source-pins.json.gz",
+    "bytes": 66541,
+    "compressedBytes": 29827,
+    "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/accepted-tree.bin",
+    "compressed": "docs/verification/friends-editorial-20261020/source/accepted-tree.bin.gz",
+    "bytes": 175277,
+    "compressedBytes": 55644,
+    "sha256": "a1ce32cf381405047fb23a21e08789951c5723259efdeb05adb7637be3a1139f"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/accepted.json",
+    "compressed": "docs/verification/friends-editorial-20261020/source/accepted.json.gz",
+    "bytes": 67034,
+    "compressedBytes": 30025,
+    "sha256": "9d1da19f56a283846287d197bc314620eb7e279baedc605a945839869e8746f5"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/first-full-tree.bin",
+    "compressed": "docs/verification/friends-editorial-20261020/source/first-full-tree.bin.gz",
+    "bytes": 174705,
+    "compressedBytes": 55430,
+    "sha256": "0ee142307f72cb0c1e97ef2ce9c763b0ad082a8fcad51b5f561ddcee88f95f90"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/first-full.json",
+    "compressed": "docs/verification/friends-editorial-20261020/source/first-full.json.gz",
+    "bytes": 66657,
+    "compressedBytes": 29870,
+    "sha256": "036f55549d4bfb161ef13d662df524e7b2602b3f4ae803d241b68e1023199ac7"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/initial-tree.bin",
+    "compressed": "docs/verification/friends-editorial-20261020/source/initial-tree.bin.gz",
+    "bytes": 174436,
+    "compressedBytes": 55316,
+    "sha256": "1bb8e29d806c72a8b37aeeba9b468c13bc581d1a75c1ab7fc7df6282c6bf3e51"
+  },
+  {
+    "original": "docs/verification/friends-editorial-20261020/source/initial.json",
+    "compressed": "docs/verification/friends-editorial-20261020/source/initial.json.gz",
+    "bytes": 66541,
+    "compressedBytes": 29827,
+    "sha256": "d0da17974e50980fae802dcea554fedc57546b250bcb5f2feca6f8ea63e0dd55"
+  },
+  {
+    "original": "docs/verification/hourly-natural-journeys-20261020.json",
+    "compressed": "docs/verification/hourly-natural-journeys-20261020.json.gz",
+    "bytes": 180704,
+    "compressedBytes": 13810,
+    "sha256": "bd11ccf79c077b75cf0f299e44eb2e804f2eb12db13c644cf74e793c6547efc2"
+  },
+  {
+    "original": "docs/verification/life-sweep-v28-1000-20261020.ndjson",
+    "compressed": "docs/verification/life-sweep-v28-1000-20261020.ndjson.gz",
+    "bytes": 310559,
+    "compressedBytes": 68792,
+    "sha256": "3038b1d32f339196dff4394060881b6a2343fa77b3a8eb2c601e8e16695204df"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020.json",
+    "compressed": "docs/verification/opening-completion-20261020.json.gz",
+    "bytes": 73609,
+    "compressedBytes": 18562,
+    "sha256": "74a31bbf0b2fabad982699a81f13743f5a34fc1c90d94c98ed5ea1a64ea24507"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020/editorial/analysis/catalogue-observations.ndjson",
+    "compressed": "docs/verification/opening-completion-20261020/editorial/analysis/catalogue-observations.ndjson.gz",
+    "bytes": 269005,
+    "compressedBytes": 22141,
+    "sha256": "39f074712b1c9308e4ab45882ffdc87f3e6dfcb96f85752965d96e67bd683f5e"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020/editorial/analysis/medical-context-evidence.json",
+    "compressed": "docs/verification/opening-completion-20261020/editorial/analysis/medical-context-evidence.json.gz",
+    "bytes": 98625,
+    "compressedBytes": 3770,
+    "sha256": "c92cd7fa3f593a00180ba3a50c2619a49eb068451397bdeeda3372f02d7ca022"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020/editorial/stdout.json",
+    "compressed": "docs/verification/opening-completion-20261020/editorial/stdout.json.gz",
+    "bytes": 742870,
+    "compressedBytes": 89707,
+    "sha256": "f2b3be4c7d4805324b8bc2153c961a9d29cbc57b6887c8c067d1d45253169e96"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020/source/final-tree.bin",
+    "compressed": "docs/verification/opening-completion-20261020/source/final-tree.bin.gz",
+    "bytes": 154349,
+    "compressedBytes": 49926,
+    "sha256": "1ff2eed1274bd2a0ed16a24c13a68537b27fbb9b0f956cc371f6ed15ebd4b948"
+  },
+  {
+    "original": "docs/verification/opening-completion-20261020/source/initial-tree.bin",
+    "compressed": "docs/verification/opening-completion-20261020/source/initial-tree.bin.gz",
+    "bytes": 154349,
+    "compressedBytes": 49926,
+    "sha256": "756b24a3b543a371009907fad3e1140ccc7e13fb1244a345b989a5596d55e9d6"
+  },
+  {
+    "original": "docs/verification/ordinary-hobby-action-inputs-v28-20261019.json",
+    "compressed": "docs/verification/ordinary-hobby-action-inputs-v28-20261019.json.gz",
+    "bytes": 1097972,
+    "compressedBytes": 806299,
+    "sha256": "4b9d19fd15f7bb54081758868abae7186751ea6dd69cfb31df900bb65b328ffb"
+  },
+  {
+    "original": "docs/verification/population-model-copy-after-20261020.json",
+    "compressed": "docs/verification/population-model-copy-after-20261020.json.gz",
+    "bytes": 170999,
+    "compressedBytes": 16391,
+    "sha256": "769b064d79c82eadec44822dd40089793f9f64b9566b39ec07df1624e3c99b33"
+  },
+  {
+    "original": "docs/verification/population-model-copy-before-20261020.json",
+    "compressed": "docs/verification/population-model-copy-before-20261020.json.gz",
+    "bytes": 171039,
+    "compressedBytes": 16273,
+    "sha256": "bd08fe92d2d33a191414928bca749c9eb9be9ae07bd42c10e93b61ddef83bd0a"
+  },
+  {
+    "original": "docs/verification/population-people-blocks-after-20261020.json",
+    "compressed": "docs/verification/population-people-blocks-after-20261020.json.gz",
+    "bytes": 172012,
+    "compressedBytes": 16206,
+    "sha256": "aa20c8a978ef6b2476ae509bce44d74239fcb6e2d0b3494be3546b077a989f38"
+  },
+  {
+    "original": "docs/verification/population-people-blocks-before-20261020.json",
+    "compressed": "docs/verification/population-people-blocks-before-20261020.json.gz",
+    "bytes": 173709,
+    "compressedBytes": 16571,
+    "sha256": "4063540159ea7d22fe6dd8c6cae31a6da462a82eebc26626bf96d1daa5777a84"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/029-dreams-retirement-accessibility-final-export-proof.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/029-dreams-retirement-accessibility-final-export-proof.json.gz",
+    "bytes": 73253,
+    "compressedBytes": 32056,
+    "sha256": "df0cc4a21f2d50c285c58406da051aa2b2ca2daadf4fd8b409735a76967c5fe0"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/040-dreams-retirement-accessibility-final-source.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/040-dreams-retirement-accessibility-final-source.json.gz",
+    "bytes": 73358,
+    "compressedBytes": 32659,
+    "sha256": "4c1c72cfea3d338984c5112523209c900950d53f76ccf4c6dd0a30615d92fcf7"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/042-dreams-retirement-accessibility-final-tree.bin",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/042-dreams-retirement-accessibility-final-tree.bin.gz",
+    "bytes": 203015,
+    "compressedBytes": 63226,
+    "sha256": "3d4eee45a3e665abfc7e7495b4354316cb21e6514db063ef22c74ecb970a4ed6"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/050-dreams-retirement-accessibility-initial-source.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/050-dreams-retirement-accessibility-initial-source.json.gz",
+    "bytes": 73358,
+    "compressedBytes": 32654,
+    "sha256": "0fd4cf109716d1c3013e2c3440942611f2aa3d1b727578d9271b385bd5b681ab"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/052-dreams-retirement-accessibility-initial-tree.bin",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/052-dreams-retirement-accessibility-initial-tree.bin.gz",
+    "bytes": 200420,
+    "compressedBytes": 62560,
+    "sha256": "407dedeec07f0e12005eaa551483a0a7384dbda6de7571286259ea0564540f4e"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/066-dreams-c38-actions.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/066-dreams-c38-actions.json.gz",
+    "bytes": 307313,
+    "compressedBytes": 27920,
+    "sha256": "e49287ec44da7fda6ef26c9cba10577ada2fd8a8f198c06ff509cf61f4ef7919"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/071-dreams-c39-actions.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/071-dreams-c39-actions.json.gz",
+    "bytes": 307226,
+    "compressedBytes": 28074,
+    "sha256": "4486f87ddc10d1abf76517b17c5e4c3bc9f69a4ee75a9c2176749a958a4e8bbc"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/074-dreams-production-finish-accepted-source.json.gz",
+    "bytes": 75993,
+    "compressedBytes": 33779,
+    "sha256": "2e08fd925c673437ff7de7c76c0fd79d02832617d0014efc1c3e471782fe9b56"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/079-dreams-production-finish-final-source.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/079-dreams-production-finish-final-source.json.gz",
+    "bytes": 75985,
+    "compressedBytes": 33785,
+    "sha256": "d8a7095285c2711f0dc14b8bca823d9f21436526fc29dcb079631b30cc9a8c8a"
+  },
+  {
+    "original": "docs/verification/production-finish-source-checkpoint-20261021/090-dreams-production-finish-corrected-ready-export-proof.json",
+    "compressed": "docs/verification/production-finish-source-checkpoint-20261021/090-dreams-production-finish-corrected-ready-export-proof.json.gz",
+    "bytes": 74454,
+    "compressedBytes": 32577,
+    "sha256": "bc6fb9d59d6d18b1c36424ec9cf71e799f3a1cefffb0eab085cb4b55060f7358"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021.json",
+    "compressed": "docs/verification/production-gaps-20261021.json.gz",
+    "bytes": 236086,
+    "compressedBytes": 48660,
+    "sha256": "8067b89e987936adf0de9277e8253ac97c187282ec94fec71b96f157c4297acd"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/048-dreams-c37-native-08-appearance-loaded.xml",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/048-dreams-c37-native-08-appearance-loaded.xml.gz",
+    "bytes": 65726,
+    "compressedBytes": 2397,
+    "sha256": "4ce8f10e5e8f0e29810a1f7e6b5fe759903f59f73ebd96e262201c07cbcf6c54"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/227-dreams-production-gaps-accepted-export-provenance.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/227-dreams-production-gaps-accepted-export-provenance.json.gz",
+    "bytes": 72333,
+    "compressedBytes": 31688,
+    "sha256": "64802cc55bc31258e1bf2284460bda49bab1f823cbdc86a9e4d68f831761ef0c"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/236-dreams-production-gaps-accepted-regression.out",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/236-dreams-production-gaps-accepted-regression.out.gz",
+    "bytes": 245900,
+    "compressedBytes": 19762,
+    "sha256": "c14a9f2e3ac07a3fddf4225a27de02af4432f8c6a66f54ac2b99013c44065b2d"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/237-dreams-production-gaps-accepted-source.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/237-dreams-production-gaps-accepted-source.json.gz",
+    "bytes": 72349,
+    "compressedBytes": 32224,
+    "sha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/239-dreams-production-gaps-accepted-tree.bin",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/239-dreams-production-gaps-accepted-tree.bin.gz",
+    "bytes": 199219,
+    "compressedBytes": 62064,
+    "sha256": "08b917959bcc5a75a651285a8498d8c7e787f493febcc02a6b868d4014660680"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/243-dreams-production-gaps-export-provenance.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/243-dreams-production-gaps-export-provenance.json.gz",
+    "bytes": 72288,
+    "compressedBytes": 31668,
+    "sha256": "e3424f4f7e7742e4cd574844d1119bfc8688ddb95b726861f23b547769a054cc"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/248-dreams-production-gaps-final-source.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/248-dreams-production-gaps-final-source.json.gz",
+    "bytes": 72346,
+    "compressedBytes": 32233,
+    "sha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/250-dreams-production-gaps-final-tree.bin",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/250-dreams-production-gaps-final-tree.bin.gz",
+    "bytes": 199486,
+    "compressedBytes": 62195,
+    "sha256": "cf28f28db361f77616296d4fe5d4d3d2ba1412e7bb7a75f9c29cb23c52952bf3"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/256-dreams-production-gaps-initial-source.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/256-dreams-production-gaps-initial-source.json.gz",
+    "bytes": 71406,
+    "compressedBytes": 31819,
+    "sha256": "3b42538d9284ec3ae8acc310303d24dfb081a1d51616b8534b5583c7265937d8"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/258-dreams-production-gaps-initial-tree.bin",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/258-dreams-production-gaps-initial-tree.bin.gz",
+    "bytes": 198108,
+    "compressedBytes": 61638,
+    "sha256": "6cca7979a3353676002735ac005a017eadbff7f1dbd1a8e727c83d7e12b884cc"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/264-dreams-production-gaps-native-source.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/264-dreams-production-gaps-native-source.json.gz",
+    "bytes": 72136,
+    "compressedBytes": 31982,
+    "sha256": "b8b478a3254a63daf2a2a2cfa8f8b91a8ef5e412f64921d0e513a4af2fe0bd90"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/268-dreams-production-gaps-publication-inputs-v2.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/268-dreams-production-gaps-publication-inputs-v2.json.gz",
+    "bytes": 69141,
+    "compressedBytes": 18359,
+    "sha256": "e962100a21d1de9a6883c6361734b2cb2d22ed2423151b39d3c12c9afedddfd5"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/273-dreams-production-gaps-runtime-source.json",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/273-dreams-production-gaps-runtime-source.json.gz",
+    "bytes": 72346,
+    "compressedBytes": 32220,
+    "sha256": "414aff8b4cdb7fac863e2251015cbd38ca59833d2ee0b802e9b608eb5221c6c4"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/275-dreams-production-gaps-runtime-tree.bin",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/275-dreams-production-gaps-runtime-tree.bin.gz",
+    "bytes": 199138,
+    "compressedBytes": 62028,
+    "sha256": "f7fdd98f64e2f34c56f3596e6b5f0477c5f61889eadde3f33de69e7e6ac7475c"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/inputs/310-dreams-university-admissions-ui-first.out",
+    "compressed": "docs/verification/production-gaps-20261021/inputs/310-dreams-university-admissions-ui-first.out.gz",
+    "bytes": 138798,
+    "compressedBytes": 99134,
+    "sha256": "0467b8d741c488becdbf7d19402d4f8060737d8f7ef2c842ff2f8f9ebc32f218"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/performance/0370-dreams-c37-actions.json",
+    "compressed": "docs/verification/production-gaps-20261021/performance/0370-dreams-c37-actions.json.gz",
+    "bytes": 298573,
+    "compressedBytes": 27234,
+    "sha256": "d359be01a39c6547126487a1382af518bfa6c83f6421311bf2a9125f2e185615"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/performance/0373-v27-leisure-archive.json",
+    "compressed": "docs/verification/production-gaps-20261021/performance/0373-v27-leisure-archive.json.gz",
+    "bytes": 140456,
+    "compressedBytes": 100456,
+    "sha256": "5027d51240dfcae2b5b17b0040282cf627943f4c4323d130e8667c2fc870335a"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/performance/0374-v28-native-teen-archive.json",
+    "compressed": "docs/verification/production-gaps-20261021/performance/0374-v28-native-teen-archive.json.gz",
+    "bytes": 575472,
+    "compressedBytes": 397663,
+    "sha256": "396a5c3526b4e6d845e917e4b27caa4048e295b47f4952c05268c65013948d82"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/performance/0375-action-latency-inputs-v25-20261019.json",
+    "compressed": "docs/verification/production-gaps-20261021/performance/0375-action-latency-inputs-v25-20261019.json.gz",
+    "bytes": 794714,
+    "compressedBytes": 565474,
+    "sha256": "8a2d5c4cb1782fa27b495e80dc34b409a636956aba35de3850762403aea2a6a9"
+  },
+  {
+    "original": "docs/verification/production-gaps-20261021/publication/0337-dreams-production-gaps-publication-inputs-v3.json",
+    "compressed": "docs/verification/production-gaps-20261021/publication/0337-dreams-production-gaps-publication-inputs-v3.json.gz",
+    "bytes": 303888,
+    "compressedBytes": 55011,
+    "sha256": "2a4398bb79d2544db8326e582b2c7363da0a0fd5aba146078f4d81608e33c802"
+  },
+  {
+    "original": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-export-provenance.json",
+    "compressed": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-export-provenance.json.gz",
+    "bytes": 72333,
+    "compressedBytes": 31688,
+    "sha256": "64802cc55bc31258e1bf2284460bda49bab1f823cbdc86a9e4d68f831761ef0c"
+  },
+  {
+    "original": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-regression.out.txt",
+    "compressed": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-regression.out.txt.gz",
+    "bytes": 245900,
+    "compressedBytes": 19762,
+    "sha256": "c14a9f2e3ac07a3fddf4225a27de02af4432f8c6a66f54ac2b99013c44065b2d"
+  },
+  {
+    "original": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-source.json",
+    "compressed": "docs/verification/production-gaps-source-checkpoint-20261021/accepted-source.json.gz",
+    "bytes": 72349,
+    "compressedBytes": 32224,
+    "sha256": "29871b35ebbcb371c1b44036a8c338955e5020f6d7a1fbb783f81e7cdf4c2652"
+  },
+  {
+    "original": "docs/verification/production-gaps-source-checkpoint-20261021/final-source.json",
+    "compressed": "docs/verification/production-gaps-source-checkpoint-20261021/final-source.json.gz",
+    "bytes": 72346,
+    "compressedBytes": 32233,
+    "sha256": "5d786211e717e1f9ff049018ded4f3f4195c93f2528f6fa37cd6da8a95c1022d"
+  },
+  {
+    "original": "docs/verification/professional-natural-journeys-20261020.json",
+    "compressed": "docs/verification/professional-natural-journeys-20261020.json.gz",
+    "bytes": 6780897,
+    "compressedBytes": 345768,
+    "sha256": "6a32420ef11401b8ed776dfcbc06dcfb1909f0c54bc1449c1fd1b9328fb1c91d"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021.json",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021.json.gz",
+    "bytes": 91175,
+    "compressedBytes": 18783,
+    "sha256": "6f5f7f2e765bbddebb04f9bbcf31327b9d1610bbee04888b897a136f17e04e32"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021/001-dreams-production-ui-complete-source.json.gz",
+    "bytes": 77733,
+    "compressedBytes": 34469,
+    "sha256": "85b203f84cc1e4f06b931794adaabfebee400b142155b6ea7443bb4b8e066e7d"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021/002-dreams-native-cohort-c39-ui-complete-source-complete.json",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021/002-dreams-native-cohort-c39-ui-complete-source-complete.json.gz",
+    "bytes": 77900,
+    "compressedBytes": 34488,
+    "sha256": "6120129b91b7a8a199e4c9306ada0aeba3ec70309613dd32f3b4b411c90099a4"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021/007-dreams-production-ui-complete-tree.bin",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021/007-dreams-production-ui-complete-tree.bin.gz",
+    "bytes": 281281,
+    "compressedBytes": 81785,
+    "sha256": "b1ca930c9627f194b9a83989b9a760c78d035e6420de4b8e41804c7faec1e283"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021/018-dreams-production-ui-complete-export-map-proof.json",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021/018-dreams-production-ui-complete-export-map-proof.json.gz",
+    "bytes": 75699,
+    "compressedBytes": 33028,
+    "sha256": "cfb3e11e1af5435ebf0c408afb4962f13838fc6376f31cfa28653c909954fbf1"
+  },
+  {
+    "original": "docs/verification/ui-save-checkpoint-20261021/024-dreams-native-cohort-c38-source-complete.json",
+    "compressed": "docs/verification/ui-save-checkpoint-20261021/024-dreams-native-cohort-c38-source-complete.json.gz",
+    "bytes": 73541,
+    "compressedBytes": 32678,
+    "sha256": "c84777ef8061dd8543d92b927c450b1b7cd6031bfb9d34b297ecc09191eb3335"
+  }
+]
