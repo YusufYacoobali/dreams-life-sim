@@ -67,12 +67,16 @@ test('a real spouse can also be a friend; filters keep overlapping roles and the
   view.unmount(); sqlite.close();
 });
 
-test('childhood Family shows actual family links and the local adult age without presenting adult planning controls', async () => {
+test('childhood Family keeps actual family and household navigation without adult planning controls', async () => {
   const initial = ack(decodeSave(JSON.stringify(childArchive)).world), { sqlite, rows, before, encoded } = await setup(initial), view = render(frame(<Family />));
+  expect(screen.getByText(initial.people[initial.activePersonId].lastName + ' Family')).toBeOnTheScreen();
   expect(screen.getByRole('button', { name: /^Family Tree\./ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'My Household' })).toBeOnTheScreen();
-  expect(screen.getByText(/Family planning is available from age 18/)).toBeOnTheScreen();
-  expect(screen.queryByRole('button', { name: 'Try for a Child' })).toBeNull(); expect(screen.queryByRole('button', { name: 'Review Adoption' })).toBeNull();
+  const will = screen.getByRole('button', { name: /^My Will\./ }), navigationCount = jest.mocked(router.push).mock.calls.length;
+  expect(will).toBeDisabled(); fireEvent.press(will); expect(router.push).toHaveBeenCalledTimes(navigationCount);
+  for (const name of ['Try for a Child', 'Try for a Baby', 'Discuss Having a Baby', 'Review Adoption']) expect(screen.queryByRole('button', { name })).toBeNull();
   expect(screen.queryByText('Your children')).toBeNull();
+  fireEvent.press(screen.getByRole('button', { name: /^Family Tree\./ })); expect(router.push).toHaveBeenLastCalledWith('/family-tree');
+  fireEvent.press(screen.getByRole('button', { name: 'My Household' })); expect(router.push).toHaveBeenLastCalledWith('/household');
   expect(encodeWorld(mockStore.getState().world!)).toBe(encoded); expect(rows()).toEqual(before);
   view.unmount(); sqlite.close();
 });
