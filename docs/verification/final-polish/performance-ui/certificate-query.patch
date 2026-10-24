@@ -1,0 +1,15 @@
+diff --git a/src/game/model.ts b/src/game/model.ts
+index 4538857..7bb4ba1 100644
+--- a/src/game/model.ts
++++ b/src/game/model.ts
+@@ -454,6 +454,10 @@ export function copyWorld(world: World): World {
+ export function immutableWorld(world: World): World {
+   return immutableWorlds.has(world) ? world : validateWorld(world, true);
+ }
++/** Read-only certificate query; a shallow Object.freeze never grants it. */
++export function isImmutableWorld(value: unknown): value is World {
++  return !!value && typeof value === 'object' && immutableWorlds.has(value);
++}
+ export function worldForEncoding(world: World): World {
+   return immutableWorlds.has(world) ? world : validateWorld(world);
+ }

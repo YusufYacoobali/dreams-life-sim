@@ -1,0 +1,280 @@
+{
+  "phase": "after",
+  "environment": "Cloud Node/Jest React test renderer at 390×844. This is JS projection and component render/commit work, not native Android/iOS frame timing, touch latency, SQLite or engine simulation time.",
+  "scope": "Real command progression with explicit walking/restful/mindfulness, eligible work, two monthly social accounts, affordable adoption and a possession. Birth acknowledgement mirrors the production birth transition. No funds, dates, outcomes or RNG are patched.",
+  "inputsSha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+  "baselinePin": {
+    "commit": "3c797e2",
+    "file": "app/(game)/(tabs)/life.tsx",
+    "sha256": "61d65431abde969ad5aa52dd44f2c170845ba3c020fa97aa817c7594df8b8f6a",
+    "projectionBodySha256": "6017e642d2d327e62bc6e2a38de43783d76d4bca9012851e2c78bf7c837a700b"
+  },
+  "sourceHashes": {
+    "app/(game)/(tabs)/life.tsx": "ac7539ff6a3a1e1958e1a72f365306014793ec014d2126aef29612a59835550e",
+    "src/ui/journalProjection.ts": "f8a2578b2386f8222b6610983fe0d99b98336441805d4f515ed82a17d23567e8",
+    "src/game/model.ts": "131ed97577387f729cef51e090d16115a62c169bf401d06325993a87151e07b4",
+    "tests/performance/life-journal-render.bench.tsx": "f0c1f2e1e0ad294949863c0d13c7e1275ddbe770b7b6e4c92988eccef3262a63"
+  },
+  "results": [
+    {
+      "age": 10,
+      "command": "routine",
+      "revision": 32,
+      "beforeJournalRows": 94,
+      "afterJournalRows": 94,
+      "inputCheckpointSha256": "1280b15f20fcf9dc85da7441d278a0a9b0672b5034d6141862e4e60ef3ac51f1",
+      "inputWorldHashRecorded": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea",
+      "projection": {
+        "medianMs": 0.010588999997708015,
+        "p95Ms": 0.043430999998236075,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 22,
+      "reactRenderAndCommit": {
+        "medianMs": 3.1026200000014796,
+        "p95Ms": 21.87668400000257,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 3,
+        "p95Ms": 22,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 10,
+      "command": "age-up-first-step",
+      "revision": 32,
+      "beforeJournalRows": 94,
+      "afterJournalRows": 104,
+      "inputCheckpointSha256": "1280b15f20fcf9dc85da7441d278a0a9b0672b5034d6141862e4e60ef3ac51f1",
+      "inputWorldHashRecorded": "8d95bb86ca1b6d3a932891d21cb37bdcb8d8c3175accfa57135691573944f3ea",
+      "projection": {
+        "medianMs": 0.011597000000620028,
+        "p95Ms": 0.020336999998107785,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 22,
+      "reactRenderAndCommit": {
+        "medianMs": 15.970076999998128,
+        "p95Ms": 36.55388899999889,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 14,
+        "p95Ms": 33,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 25,
+      "command": "routine",
+      "revision": 98,
+      "beforeJournalRows": 293,
+      "afterJournalRows": 293,
+      "inputCheckpointSha256": "5ac3667682f0c11a2fa379bba322fa1b0b01723318c5ba39319f3f4d6a9aa445",
+      "inputWorldHashRecorded": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0",
+      "projection": {
+        "medianMs": 0.015255999998771586,
+        "p95Ms": 0.0610339999984717,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 81,
+      "reactRenderAndCommit": {
+        "medianMs": 2.337619000001723,
+        "p95Ms": 4.097516000001633,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 2,
+        "p95Ms": 3,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 25,
+      "command": "age-up-first-step",
+      "revision": 98,
+      "beforeJournalRows": 293,
+      "afterJournalRows": 295,
+      "inputCheckpointSha256": "5ac3667682f0c11a2fa379bba322fa1b0b01723318c5ba39319f3f4d6a9aa445",
+      "inputWorldHashRecorded": "dffea59e89367a8a901a80d0f23c20f827785858d74ff18fa2bd83be724b05a0",
+      "projection": {
+        "medianMs": 0.018120999997336185,
+        "p95Ms": 0.051816999999573454,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 81,
+      "reactRenderAndCommit": {
+        "medianMs": 12.160239000000729,
+        "p95Ms": 42.9501479999999,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 12,
+        "p95Ms": 41,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 50,
+      "command": "routine",
+      "revision": 187,
+      "beforeJournalRows": 669,
+      "afterJournalRows": 669,
+      "inputCheckpointSha256": "2e4d54ea3d7497d6c5cf05421b4c4a8dc5b4babfaa2ff7fd6f785c28ead8d025",
+      "inputWorldHashRecorded": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1",
+      "projection": {
+        "medianMs": 0.021547000000282424,
+        "p95Ms": 0.032634999999572756,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 168,
+      "reactRenderAndCommit": {
+        "medianMs": 2.296931000000768,
+        "p95Ms": 20.84100600000238,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 2,
+        "p95Ms": 21,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 50,
+      "command": "age-up-first-step",
+      "revision": 187,
+      "beforeJournalRows": 669,
+      "afterJournalRows": 692,
+      "inputCheckpointSha256": "2e4d54ea3d7497d6c5cf05421b4c4a8dc5b4babfaa2ff7fd6f785c28ead8d025",
+      "inputWorldHashRecorded": "dde6af767d0e6997f603d135480a50341f6e7ca25a0d58ab7f74df283c84bbf1",
+      "projection": {
+        "medianMs": 0.04091300000072806,
+        "p95Ms": 0.3140549999989162,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 168,
+      "reactRenderAndCommit": {
+        "medianMs": 16.523911000000226,
+        "p95Ms": 36.8559290000012,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 15,
+        "p95Ms": 36,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 70,
+      "command": "routine",
+      "revision": 260,
+      "beforeJournalRows": 984,
+      "afterJournalRows": 984,
+      "inputCheckpointSha256": "73592fe69490cbd48e9e1e10af58f70b38bd64531c3f657a7e59c873b22cfd1f",
+      "inputWorldHashRecorded": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b",
+      "projection": {
+        "medianMs": 0.030262000000220723,
+        "p95Ms": 0.12085799999840674,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 231,
+      "reactRenderAndCommit": {
+        "medianMs": 2.4821289999999863,
+        "p95Ms": 23.249156999998377,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 2,
+        "p95Ms": 10,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 70,
+      "command": "age-up-first-step",
+      "revision": 260,
+      "beforeJournalRows": 984,
+      "afterJournalRows": 990,
+      "inputCheckpointSha256": "73592fe69490cbd48e9e1e10af58f70b38bd64531c3f657a7e59c873b22cfd1f",
+      "inputWorldHashRecorded": "1add15b0e579a0c2c1e26a212fa6b8959c27486cfb98771be41f4456f340284b",
+      "projection": {
+        "medianMs": 0.060953000000154134,
+        "p95Ms": 0.1929999999993015,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 231,
+      "reactRenderAndCommit": {
+        "medianMs": 37.804409999997006,
+        "p95Ms": 81.25429900000017,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 33,
+        "p95Ms": 81,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 90,
+      "command": "routine",
+      "revision": 342,
+      "beforeJournalRows": 1241,
+      "afterJournalRows": 1241,
+      "inputCheckpointSha256": "40844775118773d40b2b7b2da8ef297a889aaa4e8bf5bc7393ec22bf74c36afe",
+      "inputWorldHashRecorded": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897",
+      "projection": {
+        "medianMs": 0.0447649999987334,
+        "p95Ms": 0.2094569999972009,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 316,
+      "reactRenderAndCommit": {
+        "medianMs": 2.929902999996557,
+        "p95Ms": 7.088666999996349,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 2,
+        "p95Ms": 7,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    },
+    {
+      "age": 90,
+      "command": "age-up-first-step",
+      "revision": 342,
+      "beforeJournalRows": 1241,
+      "afterJournalRows": 1242,
+      "inputCheckpointSha256": "40844775118773d40b2b7b2da8ef297a889aaa4e8bf5bc7393ec22bf74c36afe",
+      "inputWorldHashRecorded": "8b6090ed2836d9578a16be55a3214c8c056364a31cccb705c4a3f891b6d4b897",
+      "projection": {
+        "medianMs": 0.06287999999767635,
+        "p95Ms": 0.09932800000387942,
+        "samples": 31
+      },
+      "reusedHistoricalRows": 316,
+      "reactRenderAndCommit": {
+        "medianMs": 30.507253999996465,
+        "p95Ms": 53.3075319999989,
+        "samples": 31
+      },
+      "reactProfilerActualDuration": {
+        "medianMs": 30,
+        "p95Ms": 51,
+        "samples": 31
+      },
+      "bodyRendersPerCommit": 0
+    }
+  ]
+}

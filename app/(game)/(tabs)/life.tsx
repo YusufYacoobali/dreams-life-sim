@@ -31,6 +31,7 @@ import { Illustration } from '../../../src/assets/Illustration';
 import { HealthLegalArt } from '../../../src/assets/HealthLegalArt';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { DisplayText as Text, displayText } from '../../../src/ui/DisplayText';
+import { createJournalProjection, type JournalRow } from '../../../src/ui/journalProjection';
 
 // Derive only displayed facts and the identity/date scope, never a cached World.
 function identityPresentation(world: World) {
@@ -78,23 +79,31 @@ const LifeIdentity = React.memo(function LifeIdentity({ data }: { data: Identity
   </>;
 });
 
-type JournalRow = { entry: World['journal'][number]; age: number; startsYear: boolean };
+const journalKey = (row: JournalRow) => row.entry.id;
+const JournalFact = React.memo(function JournalFact({ row, followJournal }: { row: JournalRow; followJournal: () => void }) {
+  const c = useColors();
+  return <View onLayout={followJournal} style={{ paddingHorizontal: 16, paddingTop: row.startsYear ? 18 : 7, gap: 7 }}>{row.startsYear && <Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {row.age}</Text>}<Body muted>{row.entry.text}</Body></View>;
+});
+function EmptyJournal() {
+  return <View style={{ padding: 16 }}><Body muted>Your journal is ready for your first year.</Body></View>;
+}
 
 // Keep FlatList's render props stable while only save status changes.
 const LifeJournal = React.memo(function LifeJournal({ rows, listRef, followJournal, stopFollowing, firstYearHint }: {
-  rows: JournalRow[]; listRef: React.RefObject<FlatList<JournalRow> | null>;
+  rows: readonly JournalRow[]; listRef: React.RefObject<FlatList<JournalRow> | null>;
   followJournal: () => void; stopFollowing: () => void; firstYearHint: string | null;
 }) {
   const c = useColors();
-  return <FlatList ref={listRef} data={rows} keyExtractor={item => item.entry.id} style={{ flex: 1, marginHorizontal: 16, borderRadius: 16, backgroundColor: c.surface }} contentContainerStyle={{ paddingBottom: 16 }} initialNumToRender={12} maxToRenderPerBatch={12} windowSize={7} removeClippedSubviews={false}
+  const renderFact = useCallback(({ item }: { item: JournalRow }) => <JournalFact row={item} followJournal={followJournal} />, [followJournal]);
+  return <FlatList ref={listRef} data={rows} keyExtractor={journalKey} style={{ flex: 1, marginHorizontal: 16, borderRadius: 16, backgroundColor: c.surface }} contentContainerStyle={{ paddingBottom: 16 }} initialNumToRender={12} maxToRenderPerBatch={12} windowSize={7} removeClippedSubviews={false}
       // Keep native row views attached while a frozen tab acquires new facts.
       // Android 24 can crash its RenderThread when clipped rows are reattached.
       // Keep following while virtualised rows acquire their real heights. The
       // first content event can precede layout and cannot settle the position.
       onLayout={followJournal} onContentSizeChange={followJournal}
       onScrollBeginDrag={stopFollowing}
-      renderItem={({ item }) => <View onLayout={followJournal} style={{ paddingHorizontal: 16, paddingTop: item.startsYear ? 18 : 7, gap: 7 }}>{item.startsYear && <Text style={{ color: c.blue, fontSize: 19, fontWeight: '700' }}>Age: {item.age}</Text>}<Body muted>{item.entry.text}</Body></View>}
-      ListEmptyComponent={<View style={{ padding: 16 }}><Body muted>Your journal is ready for your first year.</Body></View>}
+      renderItem={renderFact}
+      ListEmptyComponent={EmptyJournal}
       ListFooterComponent={firstYearHint ? <View style={{ paddingHorizontal: 16, paddingTop: 20 }}><Body muted>{firstYearHint}</Body></View> : null}
     />;
 });
@@ -127,26 +136,13 @@ export default function Life() {
     if (identityCache.current?.key === key) return identityCache.current.data;
     identityCache.current = { key, data }; return data;
   }, [world]);
-  const entries = useMemo(() => world.journal.filter(entry => entry.personId === player.id), [world.journal, player.id]);
-  const journalScope = JSON.stringify([world.id, player.id, world.date.year, world.date.month, world.date.day, player.born.year, player.born.month, player.born.day]);
-  const rowCache = useRef<{ scope: string; rows: JournalRow[] } | null>(null);
-  const journalRows = useMemo(() => {
-    const previous = rowCache.current;
-    if (previous?.scope === journalScope && previous.rows.length === entries.length && entries.every((entry, index) => {
-      const prior = previous.rows[index].entry;
-      return entry.id === prior.id && entry.text === prior.text && entry.date.year === prior.date.year && entry.date.month === prior.date.month && entry.date.day === prior.date.day;
-    })) return previous.rows;
-    const person = { ...player, died: null }; let previousAge: number | undefined;
-    const rows = entries.map(entry => {
-      const age = ageOn(person, entry.date), startsYear = age !== previousAge; previousAge = age;
-      return { entry, age, startsYear };
-    });
-    rowCache.current = { scope: journalScope, rows }; return rows;
-  }, [entries, journalScope]);
+  const [projectJournal] = useState(createJournalProjection);
+  const projection = useMemo(() => projectJournal(world.journal, { lifeId: world.id, personId: player.id, born: player.born }, world), [projectJournal, world]);
+  const journalRows = projection.rows;
   // New openings begin at their first fact; retained saves and later entries
   // keep the existing follow-to-end behavior without changing the journal UI.
   const showingBirthIntroduction = world.date.year === player.born.year && world.date.month === player.born.month && world.date.day === player.born.day
-    && entries.some(entry => entry.id === 'journal_birth_identity') && entries.every(entry => entry.category === 'birth');
+    && projection.birthIntroduction;
   const journal = useRef<FlatList<JournalRow>>(null), shouldScroll = useRef(true), scrollFrame = useRef<number | null>(null);
   const openingJournal = useRef(showingBirthIntroduction); openingJournal.current = showingBirthIntroduction;
   const cancelJournalScroll = useCallback(() => {
@@ -171,7 +167,7 @@ export default function Life() {
     shouldScroll.current = true;
     followJournal();
     return cancelJournalScroll;
-  }, [world.id, player.id, entries.length, showingBirthIntroduction, followJournal, cancelJournalScroll]);
+  }, [world.id, player.id, journalRows.length, showingBirthIntroduction, followJournal, cancelJournalScroll]);
   const pendingKind = world.pending?.kind, previousPendingKind = useRef(pendingKind);
   useEffect(() => {
     // A new entry may have laid out behind its result modal. Retry once it

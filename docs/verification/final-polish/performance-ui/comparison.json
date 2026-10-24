@@ -1,0 +1,341 @@
+{
+  "scope": "Exact real saved worlds and engine continuations. Separate JS-only cloud runs,31 measured samples after3 warmups per case; same driver/model/input hashes. No native release timing or frame-rate claim.",
+  "inputSha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+  "results": [
+    {
+      "age": 10,
+      "command": "routine",
+      "worldJournalRows": 94,
+      "displayedRows": 22,
+      "projectionBefore": {
+        "medianMs": 0.011800000000221189,
+        "p95Ms": 0.04135300000052666,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.010588999997708015,
+        "p95Ms": 0.043430999998236075,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 3.85645199999999,
+        "p95Ms": 26.199306000000433,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 3.1026200000014796,
+        "p95Ms": 21.87668400000257,
+        "samples": 31
+      },
+      "bodyRendersBefore": 0,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 10,
+      "command": "age-up-first-step",
+      "worldJournalRows": 94,
+      "displayedRows": 22,
+      "projectionBefore": {
+        "medianMs": 0.021387000000686385,
+        "p95Ms": 0.15524399999958405,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.011597000000620028,
+        "p95Ms": 0.020336999998107785,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 48.120412000000215,
+        "p95Ms": 152.18283399999927,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 15.970076999998128,
+        "p95Ms": 36.55388899999889,
+        "samples": 31
+      },
+      "bodyRendersBefore": 12,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 25,
+      "command": "routine",
+      "worldJournalRows": 293,
+      "displayedRows": 81,
+      "projectionBefore": {
+        "medianMs": 0.028335999999399064,
+        "p95Ms": 0.33410900000308175,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.015255999998771586,
+        "p95Ms": 0.0610339999984717,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 2.3934750000007625,
+        "p95Ms": 7.448628000001918,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 2.337619000001723,
+        "p95Ms": 4.097516000001633,
+        "samples": 31
+      },
+      "bodyRendersBefore": 0,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 25,
+      "command": "age-up-first-step",
+      "worldJournalRows": 293,
+      "displayedRows": 81,
+      "projectionBefore": {
+        "medianMs": 0.05244200000015553,
+        "p95Ms": 0.18575499999860767,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.018120999997336185,
+        "p95Ms": 0.051816999999573454,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 57.19586699999854,
+        "p95Ms": 95.19660699999804,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 12.160239000000729,
+        "p95Ms": 42.9501479999999,
+        "samples": 31
+      },
+      "bodyRendersBefore": 12,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 50,
+      "command": "routine",
+      "worldJournalRows": 669,
+      "displayedRows": 168,
+      "projectionBefore": {
+        "medianMs": 0.061439000000973465,
+        "p95Ms": 0.1921230000007199,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.021547000000282424,
+        "p95Ms": 0.032634999999572756,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 6.5340739999992365,
+        "p95Ms": 55.13451500000156,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 2.296931000000768,
+        "p95Ms": 20.84100600000238,
+        "samples": 31
+      },
+      "bodyRendersBefore": 0,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 50,
+      "command": "age-up-first-step",
+      "worldJournalRows": 669,
+      "displayedRows": 168,
+      "projectionBefore": {
+        "medianMs": 0.10931799999889336,
+        "p95Ms": 8.17211899999893,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.04091300000072806,
+        "p95Ms": 0.3140549999989162,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 66.53591899999446,
+        "p95Ms": 107.75441899999714,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 16.523911000000226,
+        "p95Ms": 36.8559290000012,
+        "samples": 31
+      },
+      "bodyRendersBefore": 12,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 70,
+      "command": "routine",
+      "worldJournalRows": 984,
+      "displayedRows": 231,
+      "projectionBefore": {
+        "medianMs": 0.08631099999911385,
+        "p95Ms": 0.741345000002184,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.030262000000220723,
+        "p95Ms": 0.12085799999840674,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 6.979853999997431,
+        "p95Ms": 34.01198299999669,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 2.4821289999999863,
+        "p95Ms": 23.249156999998377,
+        "samples": 31
+      },
+      "bodyRendersBefore": 0,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 70,
+      "command": "age-up-first-step",
+      "worldJournalRows": 984,
+      "displayedRows": 231,
+      "projectionBefore": {
+        "medianMs": 0.16297400000621565,
+        "p95Ms": 0.3505910000021686,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.060953000000154134,
+        "p95Ms": 0.1929999999993015,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 63.15238299999328,
+        "p95Ms": 100.84861100000126,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 37.804409999997006,
+        "p95Ms": 81.25429900000017,
+        "samples": 31
+      },
+      "bodyRendersBefore": 12,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 90,
+      "command": "routine",
+      "worldJournalRows": 1241,
+      "displayedRows": 316,
+      "projectionBefore": {
+        "medianMs": 0.05844000000070082,
+        "p95Ms": 0.15795600000274135,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.0447649999987334,
+        "p95Ms": 0.2094569999972009,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 1.3834609999976237,
+        "p95Ms": 13.490687000004982,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 2.929902999996557,
+        "p95Ms": 7.088666999996349,
+        "samples": 31
+      },
+      "bodyRendersBefore": 0,
+      "bodyRendersAfter": 0
+    },
+    {
+      "age": 90,
+      "command": "age-up-first-step",
+      "worldJournalRows": 1241,
+      "displayedRows": 316,
+      "projectionBefore": {
+        "medianMs": 0.14385600000241539,
+        "p95Ms": 0.41425799999706214,
+        "samples": 31
+      },
+      "projectionAfter": {
+        "medianMs": 0.06287999999767635,
+        "p95Ms": 0.09932800000387942,
+        "samples": 31
+      },
+      "reactBefore": {
+        "medianMs": 28.078647000002093,
+        "p95Ms": 116.88199999999779,
+        "samples": 31
+      },
+      "reactAfter": {
+        "medianMs": 30.507253999996465,
+        "p95Ms": 53.3075319999989,
+        "samples": 31
+      },
+      "bodyRendersBefore": 12,
+      "bodyRendersAfter": 0
+    }
+  ],
+  "verification": {
+    "suites": 5,
+    "tests": 49,
+    "typecheckPassed": true,
+    "sourceFiles": {
+      "app/(game)/(tabs)/life.tsx": "ac7539ff6a3a1e1958e1a72f365306014793ec014d2126aef29612a59835550e",
+      "src/ui/journalProjection.ts": "f8a2578b2386f8222b6610983fe0d99b98336441805d4f515ed82a17d23567e8",
+      "src/game/model.ts": "131ed97577387f729cef51e090d16115a62c169bf401d06325993a87151e07b4",
+      "tests/performance/life-journal-render.bench.tsx": "f0c1f2e1e0ad294949863c0d13c7e1275ddbe770b7b6e4c92988eccef3262a63"
+    },
+    "suiteResults": [
+      {
+        "file": "tests/ui/onboarding-flow.test.tsx",
+        "passed": 6
+      },
+      {
+        "file": "tests/ui/life-context.test.tsx",
+        "passed": 33
+      },
+      {
+        "file": "tests/ui/life-journal-reuse.test.tsx",
+        "passed": 1
+      },
+      {
+        "file": "tests/ui/birth-journal-flow.test.tsx",
+        "passed": 3
+      },
+      {
+        "file": "tests/ui/journal-projection.test.ts",
+        "passed": 6
+      }
+    ],
+    "logs": {
+      "/tmp/dreams-journal-focused-final.json": {
+        "sha256": "904013a1d7908f2884d40121b55508e146a8cc915e78003f2f977399be746d77"
+      },
+      "/tmp/dreams-journal-baseline-final.log": {
+        "sha256": "fcf54121436c9bb06ea151ae7de7a9e710a2205c85530e88dc48c2c20658e59e"
+      },
+      "/tmp/dreams-journal-after-final.log": {
+        "sha256": "b938f73fc7e8170c3f18627db78063be34167eab7e73a1f35734d784f56adba3"
+      },
+      "/tmp/dreams-journal-types-final.log": {
+        "sha256": "543932f7a867cac23b25fe5912a2a0b0ab563539fbb8a121f7fb83b608c95309"
+      },
+      "/tmp/dreams-journal-imports-final.log": {
+        "sha256": "f1c0afad2b238ade397a564191c3bf36ed1e39dcd7bf5ba00f06c82def08ef4f"
+      }
+    },
+    "imports": {
+      "passed": true,
+      "modules": 506,
+      "cycles": 0
+    }
+  }
+}

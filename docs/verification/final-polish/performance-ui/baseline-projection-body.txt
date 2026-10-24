@@ -1,0 +1,13 @@
+{
+    const previous = rowCache.current;
+    if (previous?.scope === journalScope && previous.rows.length === entries.length && entries.every((entry, index) => {
+      const prior = previous.rows[index].entry;
+      return entry.id === prior.id && entry.text === prior.text && entry.date.year === prior.date.year && entry.date.month === prior.date.month && entry.date.day === prior.date.day;
+    })) return previous.rows;
+    const person = { ...player, died: null }; let previousAge: number | undefined;
+    const rows = entries.map(entry => {
+      const age = ageOn(person, entry.date), startsYear = age !== previousAge; previousAge = age;
+      return { entry, age, startsYear };
+    });
+    rowCache.current = { scope: journalScope, rows }; return rows;
+  }
