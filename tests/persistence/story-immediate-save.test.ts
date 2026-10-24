@@ -35,7 +35,7 @@ test('reader25 upgrades only its marker and Age Up archives the exact packed47/c
   sqlite.prepare('UPDATE lives SET payload=? WHERE id=?').run(prior.finishedCheckpoint, world.id); sqlite.prepare('UPDATE backups SET payload=? WHERE life_id=?').run(prior.finishedCheckpoint, world.id); sqlite.exec('PRAGMA user_version=25');
   const rows = () => Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row => [row.name, sqlite.prepare('SELECT * FROM ' + row.name + ' ORDER BY 1,2').all()]));
   const beforeRows = rows(); await new SaveRepository(driver).initialise();
-  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(28); expect(rows()).toEqual(beforeRows);
+  expect(sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29); expect(rows()).toEqual(beforeRows);
   const store = createGameStore({ repository: async () => new SaveRepository(driver), date: () => world.date, id: () => 'unused' }); await store.getState().bootstrap();
   expect(encodeWorld(store.getState().world!)).toBe(encodeWorld(world)); expect(rows()).toEqual(beforeRows);
   expect(await store.getState().dispatch({ type: 'advance' })).toBe(true);

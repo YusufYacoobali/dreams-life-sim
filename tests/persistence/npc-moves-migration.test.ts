@@ -131,26 +131,26 @@ async function fixtureDatabase(reader: number) {
   };
 }
 
-test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('complete reader%s→28 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
+test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('complete reader%s→29 rolls back a failed marker, cold-retries without any row rewrite and cold-loads genuine prior friendship/current/backup/history', async reader => {
   const context = await fixtureDatabase(reader);
   try {
     const before = context.rows(); expect(Object.keys(before)).toEqual(tables);
     for (const table of tables) expect(before[table].length).toBeGreaterThan(0);
     context.originalPayloads(); context.forbidWrites();
     const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint'), driver = context.driver;
-    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 28') throw new Error('controlled C39 marker failure'); } })) };
+    const failing: SqlDatabase = { ...driver, transaction: action => driver.transaction(tx => action({ ...tx, run: async (sql, values) => { await tx.run(sql, values); if (sql === 'PRAGMA user_version = 29') throw new Error('controlled C39 marker failure'); } })) };
     await expect(new SaveRepository(failing).initialise()).rejects.toThrow('controlled C39 marker failure');
     expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(reader); expect(context.rows()).toEqual(before); expect(unpack).not.toHaveBeenCalled();
     // Both retry and final reopen close the real file connection and cache.
     const retry = context.reopen(); await retry.initialise(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(28); expect(context.rows()).toEqual(before);
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29); expect(context.rows()).toEqual(before);
     const current = (await retry.active())!, backup = await retry.recoveryPreview(native.current.lifeId), prior = await retry.previewLife(context.archivedId);
     expect(sha(originalNativeCanonical(current))).toBe(observations[0].canonicalSha); expect(sha(originalNativeCanonical(backup))).toBe(observations[1].canonicalSha);
     expect(encodeWorld(prior)).toBe(encodeWorld(unpackCheckpoint(archive.checkpoint, true))); expect(context.rows()).toEqual(before); context.originalPayloads();
-    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader28 must not open a migration transaction'); } };
+    const cold = context.reopen(), noTransaction: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('current reader29 must not open a migration transaction'); } };
     await new SaveRepository(noTransaction).initialise(); await cold.initialise();
     expect(encodeWorld((await cold.active())!)).toBe(encodeWorld(current)); expect(encodeWorld(await cold.recoveryPreview(native.current.lifeId))).toBe(encodeWorld(backup)); expect(encodeWorld(await cold.previewLife(context.archivedId))).toBe(encodeWorld(prior));
-    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(28); expect(context.rows()).toEqual(before); context.originalPayloads();
+    expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29); expect(context.rows()).toEqual(before); context.originalPayloads();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
 
@@ -160,6 +160,6 @@ test('future reader29 is refused without decode, transaction or changes to any o
     const before = context.rows(); context.forbidWrites(); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const forbidden: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('future reader must refuse before a transaction'); } };
     await expect(new SaveRepository(forbidden).initialise()).rejects.toThrow('newer version');
-    expect(unpack).not.toHaveBeenCalled(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(29); expect(context.rows()).toEqual(before); context.originalPayloads();
+    expect(unpack).not.toHaveBeenCalled(); expect(context.sqlite.prepare('PRAGMA user_version').get()?.user_version).toBe(30); expect(context.rows()).toEqual(before); context.originalPayloads();
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
