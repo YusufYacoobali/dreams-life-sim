@@ -27,6 +27,8 @@ import { JobArt, jobArtIds } from '../assets/JobArt';
 import { EmploymentArt } from '../assets/EmploymentArt';
 import { PersonActionArt, personActionArtIds } from '../assets/PersonActionArt';
 import { FinanceArt } from '../assets/FinanceArt';
+import { PlatformMark } from '../assets/PlatformMark';
+import { platforms, platformArtId } from '../game/content/social';
 
 export type EventCategory = 'romance' | 'family' | 'friendship' | 'childhood' | 'school' | 'surprise' | 'everyday'
   | 'health' | 'legal' | 'travel' | 'pets' | 'hobby' | 'career' | 'business' | 'assets' | 'money' | 'milestone';
@@ -66,6 +68,7 @@ const artwork = new Map<string, EventArtwork>();
 function register(id: string, illustration: React.ReactNode, category: EventCategory) {
   if (!artwork.has(id)) artwork.set(id,{ illustration,category });
 }
+for (const platform of platforms) register(platformArtId(platform),<PlatformMark platform={platform} size={64} />,'career');
 for (const id of Object.keys(polishImages) as PolishArtId[]) register(id,<PolishArt id={id} size={64} />,polishCategories[id]);
 for (const id of Object.keys(illustrationCells) as IllustrationId[]) register(id,<Illustration id={id} size={64} />,mainCategories[id]);
 for (const id of Object.keys(familyCells) as FamilyArtId[]) register(id,<FamilyArt id={id} size={64} />,romanticArt.has(id) ? 'romance' : 'family');
@@ -163,7 +166,7 @@ export function presentationArtwork(illustration: React.ReactNode, category?: Ev
     else if (illustration.type === FamilyArt) inferred = romanticArt.has(id ?? '') ? 'romance' : 'family';
     else if (illustration.type === HealthLegalArt) inferred = legalArt.has(id ?? '') ? 'legal' : 'health';
     else if (illustration.type === FameBusinessArt) inferred = businessArt.has(id ?? '') ? 'business' : 'career';
-    else if (illustration.type === CareerArt || illustration.type === JobArt || illustration.type === EmploymentArt) inferred = 'career';
+    else if (illustration.type === CareerArt || illustration.type === JobArt || illustration.type === EmploymentArt || illustration.type === PlatformMark) inferred = 'career';
     else if (illustration.type === PersonActionArt) inferred = actionCategory(id ?? '');
     else if (illustration.type === FinanceArt) inferred = id === 'net-worth' ? 'assets' : 'money';
     else if (illustration.type === TravelArt) inferred = 'travel';

@@ -1,5 +1,7 @@
 # Original game artwork
 
+On 24 October 2026, selected cluttered action illustrations were replaced with single-subject variants. [The audit](../../docs/ICON_AUDIT.md) records retained and changed entries; [source sheets and registration](../../design/action-icons/README.md) preserve original generation metadata. Existing artwork IDs remain stable. Clear family/health/category symbols, portraits, product/destination previews and gameplay scenes retain their original art.
+
 Runtime PNGs received lossless encoding optimization on 23 October 2026. Decoded pixels, alpha, dimensions and colour profiles are preserved; current manifests describe the new encoding. The original generated-file hashes below describe provenance, with original encoded bytes retained in Git revision `9101307`. Obsolete V1 portraits and prototypes have been retired; the current V2 source inputs remain in `design/avatar-v2`. See [the size and archive policy](../../docs/PROJECT_SIZE.md).
 
 ## Cult Leader career — 23 October 2026

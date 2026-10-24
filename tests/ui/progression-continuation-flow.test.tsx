@@ -97,8 +97,8 @@ test('optional milestone navigation stays disabled while busy and leaves existin
 });
 
 test.each([
-  ['Twelve Originals', 'youtuber', 'YouTuber', 'VideoWave', 'videowave'],
-  ['Live from Here', 'streamer', 'Streamer', 'Streamline', 'streamline'],
+  ['Twelve Originals', 'youtuber', 'YouTuber', 'YouTube', 'videowave'],
+  ['Live from Here', 'streamer', 'Streamer', 'Twitch', 'streamline'],
 ] as const)('unfinished %s leads to actual %s studio and profile setup, without requiring a nonexistent account', async (title, kind, name, platform, platformId) => {
   const { sqlite, driver, rows } = await setup(decodeWorld(JSON.stringify(graduate)));
   const before = rows(), payload = encodeWorld(mockStore.getState().world!);
@@ -110,7 +110,7 @@ test.each([
   mockParams = { kind }; view.rerender(frame(<CreatorStudio />));
   expect(screen.getByText(name + ' Studio')).toBeOnTheScreen();
   expect(screen.queryByText('Choose one of your profiles first.')).toBeNull();
-  fireEvent.press(screen.getByRole('button', { name: new RegExp('^Create a ' + platform + ' Profile\\.') }));
+  fireEvent.press(screen.getByRole('button', { name: new RegExp('^Create your ' + platform + ' channel\\.') }));
   expect(router.push).toHaveBeenLastCalledWith({ pathname: '/social-media', params: { platform: platformId } });
   mockParams = { platform: platformId }; view.rerender(frame(<SocialMedia />));
   expect(screen.getByLabelText('Social handle')).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Review New Profile' })).toBeDisabled();

@@ -11,6 +11,7 @@ import { Currency, Money, roundRatio } from '../money';
 import { IneligibleAction } from '../errors';
 import { creatorKinds, creatorRoles, fullTimeCreator, studioForAccount } from './creatorSchemas';
 import { creatorCatalog } from '../content/creators';
+import { platformAccountLabel } from '../content/social';
 import { active, accountFor, availableCash, bounded, charge, fact, post, result, draw } from './common';
 import { isConfined } from './legalSchemas';
 import { hospitalized } from './healthSchemas';
@@ -50,7 +51,7 @@ export function creatorFocusReason(world:World,studio:Studio):string|undefined {
 export function creatorStartReason(world:World,kind:typeof creatorKinds[number]):string|undefined {
   const person=active(world);if(ageOn(person,world.date)<13)return 'Channels are available from age thirteen';if(isConfined(world)||person.legal.wanted)return 'Resolve custody or pursuit first';
   if(world.creatorStudios.some(item=>item.personId===person.id&&item.kind===kind&&item.status==='active'))return 'Your studio is already active';
-  if(!world.socialAccounts.some(item=>item.ownerId===person.id&&item.platform===creatorCatalog[kind].platform&&item.status==='active'))return 'Create or reopen your '+creatorCatalog[kind].platform+' profile first';
+  if(!world.socialAccounts.some(item=>item.ownerId===person.id&&item.platform===creatorCatalog[kind].platform&&item.status==='active'))return 'Create or reopen your '+platformAccountLabel(creatorCatalog[kind].platform)+' first';
 }
 export const creatorCrewQuote=(studio:Studio,role:typeof creatorRoles[number])=>({fee:roundRatio(rules[studio.country].baseWage,BigInt(role==='editor'?5000:8000))||1n,agency:roundRatio(rules[studio.country].baseWage,400n),currency:studio.currency});
 function myStudio(world:World,id:string){const studio=world.creatorStudios.find(item=>item.id===id&&item.personId===world.activePersonId&&item.status==='active');if(!studio)throw new IneligibleAction('Choose your active studio');return studio;}
@@ -62,7 +63,7 @@ export function resolveCreator(world:World,command:CreatorCommand){const person=
     const reason=creatorStartReason(world,command.kind);if(reason)throw new IneligibleAction(reason);const account=world.socialAccounts.find(item=>item.id===command.accountId&&item.ownerId===person.id&&item.platform===creatorCatalog[command.kind].platform&&item.status==='active');if(!account)throw new IneligibleAction('Choose your matching active channel');
     const previous=world.creatorStudios.find(item=>item.personId===person.id&&item.kind===command.kind);if(previous){previous.status='active';previous.ended=null;previous.focus='part-time';previous.useCrew=false;previous.lastWorkMonth=absolute(world);previous.warningReason=null;}
     else{const gear=(id:string)=>world.assets.filter(item=>item.ownerId===person.id&&item.catalogId===id&&item.condition>0).sort((a,b)=>b.condition-a.condition)[0]?.id??null;world.creatorStudios.push({id:'studio_'+person.id+'_'+command.kind,personId:person.id,accountId:account.id,kind:command.kind,country:person.country,city:person.city,currency:countries[person.country].currency,started:{...world.date},ended:null,status:'active',focus:'part-time',laptopId:gear('laptop'),cameraId:gear('camera'),useCrew:false,lastWorkMonth:absolute(world),lastNoticeMonth:null,warningReason:null,crew:[]});}
-    fact(world,'I began working on my '+creatorCatalog[command.kind].title+' channel.','career');result(world,'Your studio is ready','Choose equipment, build your production skill and set a posting routine. Earnings follow actual delivered views and brand work.','video');return;
+    fact(world,'I set up a studio for my '+platformAccountLabel(creatorCatalog[command.kind].platform)+'.','career');result(world,'Your studio is ready','Choose equipment, build your production skill and set a posting routine. Earnings follow actual delivered views and brand work.','video');return;
   }
   const studio=myStudio(world,command.studioId),account=world.socialAccounts.find(item=>item.id===studio.accountId)!;
   if(command.type==='creator-focus'){

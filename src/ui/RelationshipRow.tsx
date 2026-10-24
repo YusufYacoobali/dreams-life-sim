@@ -17,7 +17,8 @@ export function RelationshipRow({ person, name, role, age, strength, onPress, fi
 }) {
   const c = useColors(), press = useFeedbackPress(onPress);
   const detail = role + (person.died ? ' · Deceased' : ' · Age ' + age);
-  return <Pressable accessibilityRole="button" accessibilityLabel={displayText(`${name}. ${detail}. Bond ${strength}%`)}
+  const memorial = person.died ? person.causeOfDeath : null;
+  return <Pressable accessibilityRole="button" accessibilityLabel={displayText(`${name}. ${detail}.${memorial ? ' ' + memorial + '.' : ''} Bond ${strength}%`)}
     onPress={press} style={({pressed})=>({minHeight:100,padding:14,flexDirection:'row',alignItems:'center',gap:14,
       backgroundColor:pressed?c.selected:c.surface,borderBottomWidth:last?0:1,borderBottomColor:c.line,
       borderTopLeftRadius:first?18:0,borderTopRightRadius:first?18:0,borderBottomLeftRadius:last?18:0,borderBottomRightRadius:last?18:0})}>
@@ -25,6 +26,7 @@ export function RelationshipRow({ person, name, role, age, strength, onPress, fi
     <View style={{flex:1,minWidth:0,gap:6}}>
       <Text style={{color:c.ink,fontWeight:'600',fontSize:16}}>{name}</Text>
       <Text style={{color:c.muted,fontSize:13,lineHeight:18}}>{detail}</Text>
+      {!!memorial && <Text style={{color:c.muted,fontSize:13,lineHeight:18}}>{memorial}</Text>}
       <StatTrack value={strength} color={affectionColor(strength,c)} decorative />
     </View>
     <Text allowFontScaling={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{color:c.muted,fontSize:24}}>›</Text>

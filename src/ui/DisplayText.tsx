@@ -8,7 +8,17 @@ export type DisplayText = NativeText;
 function displayChildren(children: React.ReactNode): React.ReactNode {
   if (typeof children === 'string') return displayText(children);
   if (typeof children === 'number') return displayNumber(children);
-  if (Array.isArray(children)) return children.map(displayChildren);
+  if (Array.isArray(children)) {
+    // JSX often splits "@" and a handle, or a URL and its value, into adjacent
+    // strings. Preserve that literal context before formatting visible prose.
+    const runs: React.ReactNode[] = [];
+    for (const child of children) {
+      const previous = runs.at(-1);
+      if (typeof child === 'string' && typeof previous === 'string') runs[runs.length - 1] = previous + child;
+      else runs.push(child);
+    }
+    return runs.map(displayChildren);
+  }
   if (
     React.isValidElement<React.PropsWithChildren>(children) &&
     children.type === React.Fragment

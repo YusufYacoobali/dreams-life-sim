@@ -39,6 +39,8 @@ New lives begin with a short [birth journal](docs/BIRTH_JOURNAL.md): actual fami
 
 See [project size and asset optimization](docs/PROJECT_SIZE.md) for bundle measurements, cloud build exclusions and archived-review recovery.
 
+Social profiles use Instagram, YouTube, Twitch and X branding while retaining saved IDs. Relationships separates deceased contacts into **Dead**. [The current UI polish guide](docs/SOCIAL_AND_RELATIONSHIP_POLISH.md) includes the targeted icon audit and light/dark art gallery.
+
 Generated illustrations and layered age-based portraits are bundled offline; provenance and review status are in [assets/generated](assets/generated/README.md). The full artwork family and native visual acceptance remain pending.
 
 The [reference polish review](docs/verification/product-polish/README.md) covers contextual event/pet artwork, relationship rows and profiles, thicker stat bars, saved school milestones, twenty homes and twenty vehicles, household rental leases, and shorter travel/care/business flows. Before/after browser captures, offline bundle checks and compatibility evidence are included; native device visual acceptance remains open.

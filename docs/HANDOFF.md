@@ -1,5 +1,11 @@
 # Continue Dreams: Life Simulator
 
+## Real platforms, clear action icons and Dead relationships — 24 October 2026
+
+Visible social branding is now Instagram, YouTube, Twitch and X, retaining the four original saved IDs and all platform mechanics. Existing saved prose is adapted only for display. SVG marks have consistent theme contrast and attribution in Help. The icon audit covers 339 IDs: 274 keep, 61 targeted simplifications, four platform replacements. Selected art uses single focal subjects; 59 registered PNGs preserve asset IDs and slightly reduce the active artwork payload. Relationships adds Work / School and Dead; active views exclude deceased people, and Dead retains portraits/roles/bonds/causes sorted newest first. No history or save payload is rewritten.
+
+Focused coverage verifies 244 cases / 16 suites across the initial run and passing reruns, including the final legacy grammar checks. Final strict types, the 511-module import graph, notices, light/dark browser art checks and Android/iOS production exports pass. Both maps match all 27 changed runtime sources; all 59 registered PNGs match each export. See [the feature and verification guide](SOCIAL_AND_RELATIONSHIP_POLISH.md), [the icon audit](ICON_AUDIT.md) and [the compact art gallery](verification/action-icons/index.html). Native-device acceptance remains distinct from these checks.
+
 ## Popup reliability and Age Up notices — 23 October 2026
 
 Job interview popups display the employer's question and answers, including

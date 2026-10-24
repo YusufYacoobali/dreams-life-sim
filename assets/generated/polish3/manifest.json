@@ -1179,6 +1179,51 @@
           ]
         }
       ]
+    },
+    {
+      "file": "design/action-icons/actions-1.png",
+      "generated_path": "/workspace/generated_images/exec-54bc737f-81a7-456e-860d-523082012601.png",
+      "sha256": "1553b935e396827a1cb931d9109a5617ee77ad357155ee01610c77ec174d1798",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/actions-2.png",
+      "generated_path": "/workspace/generated_images/exec-d9d2099e-a053-478d-96de-5ea1c98d7638.png",
+      "sha256": "8223dccc0b46eb9d4e260622ef76272f1a3244aeee78497449b3b31e37f6bcc9",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/jobs.png",
+      "generated_path": "/workspace/generated_images/exec-96765238-fed1-4c2f-a1bc-0e6defc09214.png",
+      "sha256": "12267c50aa0b42201ff47a5a93928e60babab7c3cbe81162830ec4d65f878629",
+      "size": [
+        1448,
+        1086
+      ]
+    },
+    {
+      "file": "design/action-icons/symbols.png",
+      "generated_path": "/workspace/generated_images/exec-e94b5fb4-96a3-4124-87b4-b77ed0405301.png",
+      "sha256": "fffe3bc4bc23761505264d801895aab22c74c7914001b63d66c4deb7844b30db",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "file": "design/action-icons/jobs-extra.png",
+      "generated_path": "/workspace/generated_images/exec-9b94ac5d-3c2f-453e-a35f-c67fa3b40369.png",
+      "sha256": "cb8b2dd79776184d018c8683e7282f365d0575c9cacd987ce3c0353ca7ea6023",
+      "size": [
+        1536,
+        1024
+      ]
     }
   ],
   "icons": {
@@ -1206,181 +1251,235 @@
       "id": "compliment",
       "kind": "actions",
       "file": "actions/compliment.png",
-      "source": "actions-a.png",
-      "cell": 1,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 0,
       "source_rect": [
-        322,
-        17,
-        609,
-        283
+        48,
+        61,
+        369,
+        342
       ],
-      "subject": "compliment",
+      "subject": "A blue speech bubble with one pink heart inset in it.",
       "size": [
         256,
         256
       ],
-      "bytes": 62532,
-      "sha256": "dca6d626096b1beaac22a643c9ddf690090291c723d92371db628e4edfcadbf6"
+      "bytes": 61589,
+      "sha256": "9dae5c09038d9ccbcbe6561986711154db251227762f4a1f0913b382123f790e",
+      "alphaBounds": [
+        13,
+        27,
+        244,
+        228
+      ]
     },
     "actions:spend-time": {
       "id": "spend-time",
       "kind": "actions",
       "file": "actions/spend-time.png",
-      "source": "actions-a.png",
-      "cell": 2,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 1,
       "source_rect": [
-        608,
-        29,
-        943,
-        326
+        387,
+        92,
+        789,
+        316
       ],
-      "subject": "spend time",
+      "subject": "A friendly handshake, two hands with simple blue and teal cuffs, no other objects.",
       "size": [
         256,
         256
       ],
-      "bytes": 96916,
-      "sha256": "6deddd242136257a407e19a141c57ad82fe044562d92efa25589bbf41cfb7110"
+      "bytes": 47140,
+      "sha256": "227557835d73b83524c1791300fcc40ec2e6ff3cf5f6ae57c3323ccd44d75b99",
+      "alphaBounds": [
+        12,
+        63,
+        243,
+        192
+      ]
     },
     "actions:argue": {
       "id": "argue",
       "kind": "actions",
       "file": "actions/argue.png",
-      "source": "actions-a.png",
-      "cell": 3,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 2,
       "source_rect": [
-        929,
+        806,
         46,
-        1242,
-        295
+        1115,
+        338
       ],
-      "subject": "argue",
+      "subject": "One red angular speech bubble with a simple angry expression, no person or second bubble.",
       "size": [
         256,
         256
       ],
-      "bytes": 64244,
-      "sha256": "894d420c1fa8cfbf226f7735065972177039ba6e91d1dd599bf0d97eb0e0c367"
+      "bytes": 60445,
+      "sha256": "4d72b3c13b41a39ddf949ef8588848fc16553725c9a23df6aacc62a775f1e931",
+      "alphaBounds": [
+        12,
+        19,
+        242,
+        236
+      ]
     },
     "actions:apologise": {
       "id": "apologise",
       "kind": "actions",
       "file": "actions/apologise.png",
-      "source": "actions-a.png",
-      "cell": 4,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 3,
       "source_rect": [
-        0,
-        321,
-        311,
-        647
+        1122,
+        36,
+        1427,
+        345
       ],
-      "subject": "apologise",
+      "subject": "One soft white surrender flag on a short blue pole, cloth large and clearly readable.",
       "size": [
         256,
         256
       ],
-      "bytes": 58602,
-      "sha256": "26e5bb818e16f195ae72559241e03ed34a446f144f88e5a34f819af0499ced74"
+      "bytes": 56141,
+      "sha256": "3397da3a6300cbfd16832ad80e1838c083a73e739b2103a8db180a1e810b87bd",
+      "alphaBounds": [
+        14,
+        12,
+        242,
+        242
+      ]
     },
     "actions:insult": {
       "id": "insult",
       "kind": "actions",
       "file": "actions/insult.png",
-      "source": "actions-a.png",
-      "cell": 5,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 11,
       "source_rect": [
-        303,
-        314,
-        629,
-        601
+        1104,
+        731,
+        1432,
+        1028
       ],
-      "subject": "insult",
+      "subject": "One purple jagged speech bubble with a small storm cloud inset, no person or separate objects.",
       "size": [
         256,
         256
       ],
-      "bytes": 65391,
-      "sha256": "9e135dc5fbf8e8c7708f7b8d398bd46dbe81f1ef46fa45bb1a4e29621f9847ea"
+      "bytes": 67404,
+      "sha256": "2cec8fdd30781fe3b40e9c036a1627732e82d851e9fe77f47f8ba89bc8a875f8",
+      "alphaBounds": [
+        13,
+        24,
+        243,
+        232
+      ]
     },
     "actions:distance": {
       "id": "distance",
       "kind": "actions",
       "file": "actions/distance.png",
-      "source": "actions-a.png",
-      "cell": 6,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 4,
       "source_rect": [
-        606,
-        335,
-        951,
-        656
+        41,
+        416,
+        402,
+        676
       ],
-      "subject": "distance",
+      "subject": "One short blue chain link broken cleanly in the centre, its two halves forming one unified symbol.",
       "size": [
         256,
         256
       ],
-      "bytes": 66093,
-      "sha256": "1bd3e078dc3995b2575acf16a52714fd62202bd31c5f36f1b06d34836bcea19a"
+      "bytes": 49195,
+      "sha256": "6cfc1d7cc0897e08b93a7468d7d23581bec130e9cb36775b587c9905a004eece",
+      "alphaBounds": [
+        13,
+        45,
+        243,
+        211
+      ]
     },
     "actions:ask-advice": {
       "id": "ask-advice",
       "kind": "actions",
       "file": "actions/ask-advice.png",
-      "source": "actions-a.png",
-      "cell": 7,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 5,
       "source_rect": [
-        958,
-        318,
-        1240,
-        649
+        458,
+        366,
+        698,
+        697
       ],
-      "subject": "ask advice",
+      "subject": "One warm gold lightbulb, a clean simple silhouette without extra rays or props.",
       "size": [
         256,
         256
       ],
-      "bytes": 79999,
-      "sha256": "4f886112c7bcd64d0fc7c1f43df847993eb4b9cefbb6abfaafc581a50cccacf1"
+      "bytes": 51672,
+      "sha256": "065f67c0b5358512792ebcaf7c7b794c67df6233eaaa2a7ae753a6da3490a100",
+      "alphaBounds": [
+        44,
+        13,
+        212,
+        244
+      ]
     },
     "actions:ask-permission": {
       "id": "ask-permission",
       "kind": "actions",
       "file": "actions/ask-permission.png",
-      "source": "actions-a.png",
-      "cell": 8,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 6,
       "source_rect": [
-        0,
-        582,
-        337,
-        952
+        781,
+        404,
+        1094,
+        684
       ],
-      "subject": "ask permission",
+      "subject": "One teal speech bubble with a large simple white check inset in it.",
       "size": [
         256,
         256
       ],
-      "bytes": 68574,
-      "sha256": "eb8a0c80021dc745f96a2f32b339ed33716f9cc9efbdd909ffd4aa5bb0c17e74"
+      "bytes": 63275,
+      "sha256": "ba1e0e5219e0ef46802e51bd946f62ac2b2eedcd776762b3c227b24a4110e528",
+      "alphaBounds": [
+        12,
+        24,
+        244,
+        231
+      ]
     },
     "actions:ask-activity": {
       "id": "ask-activity",
       "kind": "actions",
       "file": "actions/ask-activity.png",
-      "source": "actions-a.png",
-      "cell": 9,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 7,
       "source_rect": [
-        305,
-        572,
-        647,
-        942
+        1119,
+        369,
+        1418,
+        702
       ],
-      "subject": "ask activity",
+      "subject": "One cheerful blue and gold diamond kite with a short curved tail.",
       "size": [
         256,
         256
       ],
-      "bytes": 77524,
-      "sha256": "ad566a002617c5b39470edf16992c41d09ad88e4ce370f33d6d00b695de01e73"
+      "bytes": 55859,
+      "sha256": "f757af4246c82d254fa3afb2f6266dc8be68e6ed82cdad91afef4ab62d2ac26f",
+      "alphaBounds": [
+        24,
+        13,
+        231,
+        243
+      ]
     },
     "actions:request-gift": {
       "id": "request-gift",
@@ -1406,61 +1505,79 @@
       "id": "praise",
       "kind": "actions",
       "file": "actions/praise.png",
-      "source": "actions-a.png",
-      "cell": 11,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 8,
       "source_rect": [
-        925,
-        618,
-        1254,
-        961
+        33,
+        729,
+        348,
+        1029
       ],
-      "subject": "praise",
+      "subject": "One dimensional gold five-pointed star, no secondary sparkles.",
       "size": [
         256,
         256
       ],
-      "bytes": 77063,
-      "sha256": "b92eb4ee477e5195c6c82c7adea72d0db229b9883d92153f4d134825cbc12711"
+      "bytes": 59916,
+      "sha256": "f92b72de3ec1a0922d50c125c300e40bc1e99736efb76c22071df79c103dac2d",
+      "alphaBounds": [
+        13,
+        17,
+        244,
+        238
+      ]
     },
     "actions:scold": {
       "id": "scold",
       "kind": "actions",
       "file": "actions/scold.png",
-      "source": "actions-a.png",
-      "cell": 12,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 9,
       "source_rect": [
-        11,
-        914,
-        328,
-        1226
+        414,
+        728,
+        728,
+        1015
       ],
-      "subject": "scold",
+      "subject": "One gold speech bubble with a large dark exclamation mark inset in it.",
       "size": [
         256,
         256
       ],
-      "bytes": 87626,
-      "sha256": "3d656c98bdc39b4a90cedb0dc7d29cb7fa6a5c52cc35d9987543431aca6bc923"
+      "bytes": 62669,
+      "sha256": "77c24a39f0f47cc3352535294d9d753fc4bccd9ba51800abf9163baf71c0e923",
+      "alphaBounds": [
+        13,
+        22,
+        243,
+        234
+      ]
     },
     "actions:ask-help": {
       "id": "ask-help",
       "kind": "actions",
       "file": "actions/ask-help.png",
-      "source": "actions-a.png",
-      "cell": 13,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 10,
       "source_rect": [
-        326,
-        909,
-        643,
-        1230
+        762,
+        718,
+        1099,
+        1040
       ],
-      "subject": "ask help",
+      "subject": "One blue and white lifebuoy, without scenery or extra items.",
       "size": [
         256,
         256
       ],
-      "bytes": 84486,
-      "sha256": "afa8a0984229e10c0c4d18485b9b7e7f66899ca5047eba8e0b83dd2279b28b71"
+      "bytes": 69847,
+      "sha256": "3483ed3a82b770294a7c98f83c6c83cb4ad9d7aeb0e2c617b0d03b715342eff7",
+      "alphaBounds": [
+        12,
+        17,
+        243,
+        238
+      ]
     },
     "actions:give-money": {
       "id": "give-money",
@@ -1506,21 +1623,27 @@
       "id": "ask-loan",
       "kind": "actions",
       "file": "actions/ask-loan.png",
-      "source": "actions-b.png",
-      "cell": 0,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 5,
       "source_rect": [
-        25,
-        66,
-        316,
-        335
+        385,
+        399,
+        699,
+        722
       ],
-      "subject": "ask loan",
+      "subject": "One folded blue financial agreement page with a gold coin emblem printed on it, no text or loose coins.",
       "size": [
         256,
         256
       ],
-      "bytes": 97613,
-      "sha256": "87dc098f3e3f41218def795974177333324fd19a022a3dd75eca1c660f045373"
+      "bytes": 70735,
+      "sha256": "5074c55dcf9a3ba45a8584fbea9ddc490553d9b6d5472cf4c3f9ac0de18c6d2a",
+      "alphaBounds": [
+        16,
+        13,
+        240,
+        243
+      ]
     },
     "actions:accept-loan": {
       "id": "accept-loan",
@@ -1586,121 +1709,157 @@
       "id": "academic-help",
       "kind": "actions",
       "file": "actions/academic-help.png",
-      "source": "actions-b.png",
-      "cell": 4,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 3,
       "source_rect": [
-        0,
-        323,
-        324,
-        605
+        1082,
+        104,
+        1422,
+        335
       ],
-      "subject": "academic help",
+      "subject": "One open blue book with cream pages, no text, bulb or pencil.",
       "size": [
         256,
         256
       ],
-      "bytes": 82712,
-      "sha256": "ff61bfb3991e6eddd5ebc8d75b21017820b0cc9cc13eae44261b271bbbc482f7"
+      "bytes": 54524,
+      "sha256": "a91d0102ee77391abadb5780d2218876d45ba693d3300d421c6d3438ae260327",
+      "alphaBounds": [
+        12,
+        50,
+        243,
+        207
+      ]
     },
     "actions:work-feedback": {
       "id": "work-feedback",
       "kind": "actions",
       "file": "actions/work-feedback.png",
-      "source": "actions-b.png",
-      "cell": 5,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 4,
       "source_rect": [
-        328,
-        349,
-        635,
-        659
+        38,
+        374,
+        335,
+        718
       ],
-      "subject": "work feedback",
+      "subject": "One blue clipboard with a simple green check on its page, no magnifier or briefcase.",
       "size": [
         256,
         256
       ],
-      "bytes": 71666,
-      "sha256": "8cce53931fa0b3a0865c74e45c1cfb424696c5ebe816e1e80208ad63ca29b7ea"
+      "bytes": 64814,
+      "sha256": "54d71b8ac4c49c142efcf710fa04c6d16e7d3fc00bcedd8d502541a808dc40b2",
+      "alphaBounds": [
+        28,
+        12,
+        228,
+        243
+      ]
     },
     "actions:request-raise": {
       "id": "request-raise",
       "kind": "actions",
       "file": "actions/request-raise.png",
-      "source": "actions-b.png",
+      "source": "design/action-icons/actions-2.png",
       "cell": 6,
       "source_rect": [
-        622,
-        306,
-        929,
-        652
+        764,
+        425,
+        1032,
+        711
       ],
-      "subject": "request raise",
+      "subject": "One neatly stacked group of large gold coins, a single unified coin stack without hands or briefcase.",
       "size": [
         256,
         256
       ],
-      "bytes": 55881,
-      "sha256": "9f13331f765a22edc9c887d4c9f4069ea740d691bf5b2f4c8cd09391e4c23794"
+      "bytes": 75610,
+      "sha256": "2b87f6da2e06a045f650483af3be55bade7cee6ed0a7a21d1dc70d84da26849b",
+      "alphaBounds": [
+        19,
+        12,
+        235,
+        244
+      ]
     },
     "actions:review-custody": {
       "id": "review-custody",
       "kind": "actions",
       "file": "actions/review-custody.png",
-      "source": "actions-b.png",
-      "cell": 7,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 0,
       "source_rect": [
-        925,
-        328,
-        1254,
-        633
+        48,
+        54,
+        337,
+        360
       ],
-      "subject": "review custody",
+      "subject": "One protective blue shield with a pink heart inset in its centre.",
       "size": [
         256,
         256
       ],
-      "bytes": 84238,
-      "sha256": "bca55fef39143c369f20dca9766ff1be3496cb2285593424cd68e65542bd4e32"
+      "bytes": 74118,
+      "sha256": "9d39aa7d907ece64398f7e9370fbec5401f58b051ce87f49442a937dd9291856",
+      "alphaBounds": [
+        18,
+        13,
+        237,
+        243
+      ]
     },
     "actions:move-in": {
       "id": "move-in",
       "kind": "actions",
       "file": "actions/move-in.png",
-      "source": "actions-b.png",
-      "cell": 8,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 1,
       "source_rect": [
-        0,
-        631,
-        326,
-        918
+        398,
+        42,
+        695,
+        360
       ],
-      "subject": "move in",
+      "subject": "One substantial gold house key, no house or luggage.",
       "size": [
         256,
         256
       ],
-      "bytes": 86100,
-      "sha256": "1b93d510ef62c5e64aebcbd5c2a40c44daad0e55400bbfa00e379c333bafb3de"
+      "bytes": 57875,
+      "sha256": "af648da3871c5e1a47db3cedecc1eff90f8a32abd3ee35b8b41d3224d06ba5f1",
+      "alphaBounds": [
+        20,
+        13,
+        235,
+        243
+      ]
     },
     "actions:ask-date": {
       "id": "ask-date",
       "kind": "actions",
       "file": "actions/ask-date.png",
-      "source": "actions-b.png",
-      "cell": 9,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 7,
       "source_rect": [
-        317,
-        639,
-        647,
-        906
+        1063,
+        414,
+        1439,
+        686
       ],
-      "subject": "ask date",
+      "subject": "One unified pair of clinking blue mugs with a small heart inset in each mug, no flowers or other items.",
       "size": [
         256,
         256
       ],
-      "bytes": 76601,
-      "sha256": "1373915d4988b84a488ff96659e5dcf8ab3471c5e9ff4d10849a2727dc43f1d5"
+      "bytes": 55801,
+      "sha256": "87b52820e80fb6e562c83fb2d85d44bb38bb728934014445c5ef2982f0b78e1b",
+      "alphaBounds": [
+        13,
+        45,
+        244,
+        212
+      ]
     },
     "actions:propose": {
       "id": "propose",
@@ -1726,61 +1885,79 @@
       "id": "plan-wedding",
       "kind": "actions",
       "file": "actions/plan-wedding.png",
-      "source": "actions-b.png",
-      "cell": 11,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 2,
       "source_rect": [
-        923,
-        624,
-        1246,
-        947
+        730,
+        99,
+        1065,
+        330
       ],
-      "subject": "plan wedding",
+      "subject": "One unified pair of gently overlapping gold wedding rings, no people or flowers.",
       "size": [
         256,
         256
       ],
-      "bytes": 115996,
-      "sha256": "5fa3c8d0bc7235f0833ea2c22eaec287abb4497b159e881ad855b36277c04179"
+      "bytes": 61345,
+      "sha256": "dafae630ce568078aec0325c304a392ff2da28f389fd57dd25ed02f8f264e1f0",
+      "alphaBounds": [
+        12,
+        48,
+        243,
+        207
+      ]
     },
     "actions:family-planning": {
       "id": "family-planning",
       "kind": "actions",
       "file": "actions/family-planning.png",
-      "source": "actions-b.png",
-      "cell": 12,
+      "source": "design/action-icons/actions-1.png",
+      "cell": 11,
       "source_rect": [
-        11,
-        934,
-        325,
-        1226
+        1129,
+        718,
+        1420,
+        1041
       ],
-      "subject": "family planning",
+      "subject": "One blue and gold baby rattle, large rounded handle and simple form.",
       "size": [
         256,
         256
       ],
-      "bytes": 98502,
-      "sha256": "b0958e2c9155b0d08cd51e97183df9a1d3e43a15d1f54d7ea46057ec93ba2e8f"
+      "bytes": 51456,
+      "sha256": "76a8b2cca082b05eea601dd9dff47d0cd0ee6c685bdc5b90a910ba068f79ae99",
+      "alphaBounds": [
+        23,
+        13,
+        231,
+        243
+      ]
     },
     "actions:divorce": {
       "id": "divorce",
       "kind": "actions",
       "file": "actions/divorce.png",
-      "source": "actions-b.png",
-      "cell": 13,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 8,
       "source_rect": [
-        320,
-        934,
-        635,
-        1254
+        29,
+        747,
+        342,
+        1030
       ],
-      "subject": "divorce",
+      "subject": "One cream certificate page neatly torn down the middle, its halves still close together, without rings, pen or writing.",
       "size": [
         256,
         256
       ],
-      "bytes": 78584,
-      "sha256": "9f90bf6c768927a08b03af67e62be28498cce0d65a1f89f3919474d6e2396405"
+      "bytes": 70999,
+      "sha256": "7d695edf4d9dc9cc4fb9f47f60913740f5b3aadcddb0d0a1179872beaed25e6b",
+      "alphaBounds": [
+        13,
+        25,
+        243,
+        232
+      ]
     },
     "actions:breakup": {
       "id": "breakup",
@@ -1866,41 +2043,53 @@
       "id": "ask-teen-date",
       "kind": "actions",
       "file": "actions/ask-teen-date.png",
-      "source": "mixed.png",
-      "cell": 2,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 9,
       "source_rect": [
-        686,
-        19,
-        1005,
-        326
+        392,
+        760,
+        715,
+        1018
       ],
-      "subject": "Two friendly fully clothed teen students taking a shy afternoon walk together with ice cream cones and backpacks, a little park shrub; innocent first date.",
+      "subject": "One warm coral envelope with a simple heart seal, no people or scenery.",
       "size": [
         256,
         256
       ],
-      "bytes": 103160,
-      "sha256": "53756149e268819967764ce8781cbff0010ee44cc74f36e6a6e8f3508542dbb6"
+      "bytes": 62237,
+      "sha256": "70f5e6f9d6c0b79fadcdad1d8d11dd1180739d85260d944dd83141952fee16d9",
+      "alphaBounds": [
+        12,
+        36,
+        243,
+        220
+      ]
     },
     "actions:end-teen-relationship": {
       "id": "end-teen-relationship",
       "kind": "actions",
       "file": "actions/end-teen-relationship.png",
-      "source": "mixed.png",
-      "cell": 3,
+      "source": "design/action-icons/actions-2.png",
+      "cell": 10,
       "source_rect": [
-        1007,
-        46,
-        1347,
-        350
+        756,
+        763,
+        1069,
+        1021
       ],
-      "subject": "Two fully clothed teen students gently going separate ways on a tiny forked park path, contrasting backpacks, no threat or violence.",
+      "subject": "One pink heart-shaped paper note with a clean central tear, without words, scenery or other items.",
       "size": [
         256,
         256
       ],
-      "bytes": 80760,
-      "sha256": "ce92bb1d37c709f32fe39115705a28b513bd470d7590f1b50210cf1d0056b372"
+      "bytes": 64582,
+      "sha256": "3d3c4e8535eb5b7a02f720e82244c5f25d3f51a640d94f61d5ebdd5552a4e517",
+      "alphaBounds": [
+        13,
+        33,
+        243,
+        222
+      ]
     },
     "finance:net-worth": {
       "id": "net-worth",
@@ -2006,21 +2195,27 @@
       "id": "retail",
       "kind": "jobs",
       "file": "jobs/retail.png",
-      "source": "mixed.png",
-      "cell": 9,
+      "source": "design/action-icons/jobs.png",
+      "cell": 11,
       "source_rect": [
-        348,
-        620,
-        679,
-        874
+        1100,
+        731,
+        1426,
+        1038
       ],
-      "subject": "A friendly shop checkout with cash register, receipt and colourful clothes on a rack.",
+      "subject": "One simple blue shop cash register with a gold drawer, no clothing rack or stock.",
       "size": [
         256,
         256
       ],
-      "bytes": 81193,
-      "sha256": "40db5d21e300943a83678b3f105d6a7a6b1543c55fd22527ac5f47b056d2b0e9"
+      "bytes": 74214,
+      "sha256": "2d62475aafc5e07db201ecee85d6f363ce7a2774935932040e5193114c5a8b19",
+      "alphaBounds": [
+        12,
+        20,
+        244,
+        236
+      ]
     },
     "jobs:barista": {
       "id": "barista",
@@ -2106,21 +2301,27 @@
       "id": "plumber",
       "kind": "jobs",
       "file": "jobs/plumber.png",
-      "source": "mixed.png",
-      "cell": 14,
+      "source": "design/action-icons/jobs.png",
+      "cell": 0,
       "source_rect": [
-        693,
-        876,
-        1016,
-        1143
+        52,
+        49,
+        358,
+        379
       ],
-      "subject": "A red pipe wrench beside a curved water pipe, valve and plumber tool bag.",
+      "subject": "One large red pipe wrench, no pipes or toolbox.",
       "size": [
         256,
         256
       ],
-      "bytes": 85883,
-      "sha256": "61f6c232f9d0596ddb86597f519ac49d2eee7244ba91b533100d1d8c4c905e9e"
+      "bytes": 56991,
+      "sha256": "4cd0ec55197c3d67bf770d1f28c9fdbe0de5a78c48a9ad1b06f3bb902cd20f31",
+      "alphaBounds": [
+        20,
+        13,
+        234,
+        243
+      ]
     },
     "jobs:technician": {
       "id": "technician",
@@ -2226,21 +2427,27 @@
       "id": "researcher",
       "kind": "jobs",
       "file": "jobs/researcher.png",
-      "source": "jobs-1.png",
-      "cell": 4,
+      "source": "design/action-icons/jobs.png",
+      "cell": 1,
       "source_rect": [
-        25,
-        304,
-        310,
-        589
+        451,
+        54,
+        692,
+        375
       ],
-      "subject": "A molecular model, conical flask and research notebook under a magnifying glass.",
+      "subject": "One rounded laboratory flask filled with blue liquid, no notebook, molecule or tools.",
       "size": [
         256,
         256
       ],
-      "bytes": 102992,
-      "sha256": "120d302ff29817d7f9a06c6182b54ae13a6c32fe3886fab07b89ff76524ca4a2"
+      "bytes": 56860,
+      "sha256": "0030a7d3f5559a592b9487818560631c376ed41a6b57432e25190948f730e4aa",
+      "alphaBounds": [
+        41,
+        13,
+        215,
+        243
+      ]
     },
     "jobs:journalist": {
       "id": "journalist",
@@ -2266,21 +2473,27 @@
       "id": "lawyer",
       "kind": "jobs",
       "file": "jobs/lawyer.png",
-      "source": "jobs-1.png",
-      "cell": 6,
+      "source": "design/action-icons/jobs.png",
+      "cell": 8,
       "source_rect": [
-        694,
-        304,
-        1017,
-        588
+        27,
+        712,
+        373,
+        1032
       ],
-      "subject": "A brass balance scale, bound legal volumes and a closed document folder.",
+      "subject": "One unified gold balance scale of justice, no books, case or paperwork.",
       "size": [
         256,
         256
       ],
-      "bytes": 80698,
-      "sha256": "8498a3d6186c1dcd3bead2a9758bfeef7402ba5d2aef008eca6e5456897703c4"
+      "bytes": 64503,
+      "sha256": "00011c7040c7690dc3bc2271a8de63853caa5a0e1aa7ac97cd4061a5ca65e7bd",
+      "alphaBounds": [
+        13,
+        21,
+        243,
+        235
+      ]
     },
     "jobs:doctor": {
       "id": "doctor",
@@ -2326,21 +2539,27 @@
       "id": "postal-worker",
       "kind": "jobs",
       "file": "jobs/postal-worker.png",
-      "source": "jobs-1.png",
-      "cell": 9,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 3,
       "source_rect": [
-        348,
-        580,
-        666,
-        867
+        42,
+        525,
+        476,
+        956
       ],
-      "subject": "A blue postal satchel with colourful envelopes and a small mailbox.",
+      "subject": "One cheerful red rounded roadside mailbox with its little flag integrated; no mailbag, loose envelopes or scene.",
       "size": [
         256,
         256
       ],
-      "bytes": 86518,
-      "sha256": "16a3aaec9db316f22c5d58839088253e16e19a1027b85c79bc8ed9224a3c221d"
+      "bytes": 63024,
+      "sha256": "88d87c07f843cf2d954958069518ddd08a1f6ea80537533b3e3684f6c414f185",
+      "alphaBounds": [
+        12,
+        13,
+        244,
+        243
+      ]
     },
     "jobs:delivery-driver": {
       "id": "delivery-driver",
@@ -2386,41 +2605,53 @@
       "id": "gardener",
       "kind": "jobs",
       "file": "jobs/gardener.png",
-      "source": "jobs-1.png",
-      "cell": 12,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 4,
       "source_rect": [
-        0,
-        857,
-        341,
-        1151
+        509,
+        532,
+        1029,
+        949
       ],
-      "subject": "A watering can, hand trowel, pruning shears and pot of colourful flowering plants.",
+      "subject": "One green watering can with a short gold spout, no plant, trowel, flower or landscape.",
       "size": [
         256,
         256
       ],
-      "bytes": 90342,
-      "sha256": "4839ac1759f2a70faa09e95a9c72e9b5e9500b7a3aac6b9c768baac7918c1944"
+      "bytes": 59730,
+      "sha256": "7010f8d98d7cafa72059e51659ba8902da28c9e5d2b81237aa4d8f7680318488",
+      "alphaBounds": [
+        12,
+        35,
+        244,
+        221
+      ]
     },
     "jobs:kitchen-assistant": {
       "id": "kitchen-assistant",
       "kind": "jobs",
       "file": "jobs/kitchen-assistant.png",
-      "source": "jobs-1.png",
-      "cell": 13,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 5,
       "source_rect": [
-        350,
-        887,
-        692,
-        1137
+        1060,
+        533,
+        1494,
+        955
       ],
-      "subject": "A dish rack, washing-up gloves, pot and neatly stacked clean dinner plates.",
+      "subject": "One clean white dinner plate with a blue rim, gentle dimensional shading; no gloves, rack or utensils.",
       "size": [
         256,
         256
       ],
-      "bytes": 76285,
-      "sha256": "ab5108dc68a228d0b0d2d33311a5bdfd952c379b6ce5dda5a10af4c33d87c6aa"
+      "bytes": 72209,
+      "sha256": "26ec981bb986426d6e0bb8c4d55c48ac8966bb6e1aabb37959f979829724016d",
+      "alphaBounds": [
+        12,
+        15,
+        244,
+        241
+      ]
     },
     "jobs:cook": {
       "id": "cook",
@@ -2486,21 +2717,27 @@
       "id": "electrician",
       "kind": "jobs",
       "file": "jobs/electrician.png",
-      "source": "jobs-2.png",
-      "cell": 1,
+      "source": "design/action-icons/jobs.png",
+      "cell": 2,
       "source_rect": [
-        349,
-        29,
-        649,
-        294
+        766,
+        61,
+        1046,
+        379
       ],
-      "subject": "An electrician multimeter, insulated pliers, neatly coiled wire and safety gloves.",
+      "subject": "One yellow handheld electrical multimeter with its leads neatly stowed against the case.",
       "size": [
         256,
         256
       ],
-      "bytes": 101306,
-      "sha256": "5f4a749c13e1f8bf39f1b8183c6bd16b0bc1041bb6afab7cc0b8f78708b0873e"
+      "bytes": 84055,
+      "sha256": "381b39b14743935c7713680818d526f683a7ac53e8d16ab957c032184ac53594",
+      "alphaBounds": [
+        27,
+        13,
+        230,
+        243
+      ]
     },
     "jobs:carpenter": {
       "id": "carpenter",
@@ -2526,21 +2763,27 @@
       "id": "mechanic",
       "kind": "jobs",
       "file": "jobs/mechanic.png",
-      "source": "jobs-2.png",
+      "source": "design/action-icons/jobs.png",
       "cell": 3,
       "source_rect": [
-        990,
-        25,
-        1292,
-        293
+        1101,
+        74,
+        1416,
+        370
       ],
-      "subject": "An open car engine block with socket wrench, oil can and mechanic work gloves.",
+      "subject": "One simple silver engine block, no tools or oil can, broad uncluttered shapes.",
       "size": [
         256,
         256
       ],
-      "bytes": 110742,
-      "sha256": "be3dba471d1cc8839653f0116ba6c9b99f70b750a625edfe3cb0b93a29d5ba5d"
+      "bytes": 89206,
+      "sha256": "8a92af1ed7c03131151e06109e326ef2ab875d44ce3b8249e7ded8dfc490447a",
+      "alphaBounds": [
+        13,
+        20,
+        243,
+        236
+      ]
     },
     "jobs:welder": {
       "id": "welder",
@@ -2626,21 +2869,27 @@
       "id": "engineer",
       "kind": "jobs",
       "file": "jobs/engineer.png",
-      "source": "jobs-2.png",
-      "cell": 8,
+      "source": "design/action-icons/jobs.png",
+      "cell": 10,
       "source_rect": [
-        11,
-        605,
-        331,
-        884
+        736,
+        768,
+        1082,
+        1025
       ],
-      "subject": "A yellow hard hat, rolled bridge blueprint and model steel bridge support.",
+      "subject": "One blue engineering hard hat with a small gold gear emblem inset, no plans or tools.",
       "size": [
         256,
         256
       ],
-      "bytes": 90834,
-      "sha256": "8669d0edd15459780b4d147ac4d698524145c0d87f5d1d21de68c66af3cbcf4f"
+      "bytes": 56340,
+      "sha256": "7b0c0df26d2f57dd4fba2096559d68cd4fbf0f2cb9c7c8193863e2c416d69089",
+      "alphaBounds": [
+        13,
+        43,
+        243,
+        213
+      ]
     },
     "jobs:architect": {
       "id": "architect",
@@ -2746,21 +2995,27 @@
       "id": "marketing-executive",
       "kind": "jobs",
       "file": "jobs/marketing-executive.png",
-      "source": "jobs-2.png",
-      "cell": 14,
+      "source": "design/action-icons/jobs.png",
+      "cell": 4,
       "source_rect": [
-        657,
-        877,
-        984,
-        1185
+        36,
+        399,
+        380,
+        704
       ],
-      "subject": "A campaign planning board with colourful audience cards, small megaphone and idea bulb.",
+      "subject": "One blue megaphone with a gold rim, without boards or lightbulbs.",
       "size": [
         256,
         256
       ],
-      "bytes": 87967,
-      "sha256": "7da5e09ad59640c0dd76ed21d597161e7c5d339105a4065b47ad8568849c4df4"
+      "bytes": 61808,
+      "sha256": "196f58f1b6343281e8c9b898a9e8338ca98834d5594f07943f8b17cc8ff0c87c",
+      "alphaBounds": [
+        12,
+        26,
+        244,
+        230
+      ]
     },
     "jobs:human-resources": {
       "id": "human-resources",
@@ -2806,21 +3061,27 @@
       "id": "operations-manager",
       "kind": "jobs",
       "file": "jobs/operations-manager.png",
-      "source": "jobs-3.png",
-      "cell": 1,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 0,
       "source_rect": [
-        312,
-        36,
-        633,
-        316
+        49,
+        53,
+        503,
+        492
       ],
-      "subject": "A distribution floor plan clipboard, warehouse gear symbol and stock-flow arrows with small boxes.",
+      "subject": "One substantial blue gear with a gold central hub; no clipboard, truck or separate symbols.",
       "size": [
         256,
         256
       ],
-      "bytes": 75949,
-      "sha256": "614ee19cf3955ceda61b7d85f55b4eb766d1f9b1dd3e30dad9c5f11fd97a19b0"
+      "bytes": 68730,
+      "sha256": "57096413df6e827d0800c8ad5bf1cb153223ce8202b6723b6640acc92b385614",
+      "alphaBounds": [
+        12,
+        16,
+        244,
+        240
+      ]
     },
     "jobs:sales-representative": {
       "id": "sales-representative",
@@ -2866,21 +3127,27 @@
       "id": "insurance-adviser",
       "kind": "jobs",
       "file": "jobs/insurance-adviser.png",
-      "source": "jobs-3.png",
-      "cell": 4,
+      "source": "design/action-icons/jobs.png",
+      "cell": 5,
       "source_rect": [
-        0,
-        337,
-        321,
-        617
+        435,
+        395,
+        708,
+        697
       ],
-      "subject": "A shield protecting a miniature house and car beside policy documents and reading glasses.",
+      "subject": "One substantial blue and gold shield with a white check inset, no car, house or paperwork.",
       "size": [
         256,
         256
       ],
-      "bytes": 77510,
-      "sha256": "4a47e3c79f9e4e136ea7b9ecbbe17958a69da9a673404670b2c822f9b55fcc1f"
+      "bytes": 72021,
+      "sha256": "7244fa0ca579c5a7198f82a1d6d1f0d1a38275a8cf1ccd6f552c3221e7af90bb",
+      "alphaBounds": [
+        23,
+        14,
+        233,
+        244
+      ]
     },
     "jobs:bank-clerk": {
       "id": "bank-clerk",
@@ -2906,41 +3173,53 @@
       "id": "procurement-officer",
       "kind": "jobs",
       "file": "jobs/procurement-officer.png",
-      "source": "jobs-3.png",
-      "cell": 6,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 1,
       "source_rect": [
-        618,
-        320,
-        937,
-        622
+        554,
+        73,
+        996,
+        498
       ],
-      "subject": "A supplier catalogue with three sample boxes, purchase order clipboard and comparison tags without writing.",
+      "subject": "One closed golden cardboard parcel with a broad blue tape band; no bags, checklist or extra boxes.",
       "size": [
         256,
         256
       ],
-      "bytes": 76325,
-      "sha256": "5c6201f71329fa64aaf52d93cc7135e7b4e784ddb0835a42d5919bfb3d05f968"
+      "bytes": 67805,
+      "sha256": "f031e08856959713dc30a23468acb65b221be3ef990c740fe3d0ccb8d77e2e7c",
+      "alphaBounds": [
+        12,
+        16,
+        244,
+        239
+      ]
     },
     "jobs:logistics-coordinator": {
       "id": "logistics-coordinator",
       "kind": "jobs",
       "file": "jobs/logistics-coordinator.png",
-      "source": "jobs-3.png",
-      "cell": 7,
+      "source": "design/action-icons/jobs-extra.png",
+      "cell": 2,
       "source_rect": [
-        945,
-        314,
-        1254,
-        613
+        1109,
+        55,
+        1446,
+        477
       ],
-      "subject": "A colourful route map, parcel tracking scanner and delivery schedule clipboard.",
+      "subject": "One bold blue location pin with a gold inset, no map, scanner or parcel.",
       "size": [
         256,
         256
       ],
-      "bytes": 87442,
-      "sha256": "e3bf28540f4700ab0a596095f528cf02df9b9340b7b1da592bfc7abdb7a2f8be"
+      "bytes": 55534,
+      "sha256": "5975eefdf690838b59b2729162404c7d99e47364dcc2b6bb6e95d0404a9de44f",
+      "alphaBounds": [
+        35,
+        12,
+        219,
+        244
+      ]
     },
     "jobs:software-tester": {
       "id": "software-tester",
@@ -3046,21 +3325,27 @@
       "id": "pet-care-part",
       "kind": "jobs",
       "file": "jobs/pet-care-part.png",
-      "source": "jobs-3.png",
-      "cell": 13,
+      "source": "design/action-icons/jobs.png",
+      "cell": 7,
       "source_rect": [
-        318,
-        992,
-        633,
-        1226
+        1116,
+        446,
+        1425,
+        704
       ],
-      "subject": "A pet lead, feeding bowl, brush and folded towel with a small friendly paw motif.",
+      "subject": "One purple pet leash neatly coiled, no bowl, brush, ball or animal.",
       "size": [
         256,
         256
       ],
-      "bytes": 85994,
-      "sha256": "806e79ea1b76c32d0fd3e989fedd9bedf1a273dd1c448a8c87697b0e9530d06f"
+      "bytes": 82257,
+      "sha256": "2c4b5b653b6c55e4ae4bcca08848b62de509545c121e604807745af8f22a8728",
+      "alphaBounds": [
+        12,
+        32,
+        243,
+        225
+      ]
     },
     "jobs:tutor-part": {
       "id": "tutor-part",
@@ -3126,21 +3411,27 @@
       "id": "paramedic",
       "kind": "jobs",
       "file": "jobs/paramedic.png",
-      "source": "jobs-emergency.png",
-      "cell": 1,
+      "source": "design/action-icons/jobs.png",
+      "cell": 9,
       "source_rect": [
-        664,
-        30,
-        1294,
-        603
+        393,
+        736,
+        722,
+        1029
       ],
-      "subject": "An open green emergency response bag with defibrillator, bandages and medical shears.",
+      "subject": "One closed green medical bag with a large white cross, no exposed tools or other supplies.",
       "size": [
         256,
         256
       ],
-      "bytes": 103732,
-      "sha256": "fdf4c369782f86037c12eaf9e074d0b63f7304e7a8e14bd33465059baa1f2d6f"
+      "bytes": 65381,
+      "sha256": "dacf9742ad93c216d3a79c51fb66d336d0ac52ee11d0880b646e5146f66de11d",
+      "alphaBounds": [
+        12,
+        25,
+        244,
+        231
+      ]
     },
     "jobs:police-officer": {
       "id": "police-officer",
@@ -3166,21 +3457,27 @@
       "id": "construction-worker",
       "kind": "jobs",
       "file": "jobs/construction-worker.png",
-      "source": "jobs-emergency.png",
-      "cell": 3,
+      "source": "design/action-icons/jobs.png",
+      "cell": 6,
       "source_rect": [
-        673,
-        620,
-        1302,
-        1187
+        729,
+        423,
+        1081,
+        696
       ],
-      "subject": "A yellow hardhat, orange reflective safety vest, red bricks and bricklaying trowel with mortar.",
+      "subject": "One yellow construction hard hat, no vest, bricks or trowel.",
       "size": [
         256,
         256
       ],
-      "bytes": 97876,
-      "sha256": "c76bf6afa00144b849d8908d987d85d86b98dbaa5185f866369cf9f8ef5c9e7d"
+      "bytes": 57467,
+      "sha256": "6887eeb4213f9f9acbf3ae929804d09d5bd4fde4c43f97ab335758708c1b49f7",
+      "alphaBounds": [
+        12,
+        38,
+        243,
+        218
+      ]
     }
   }
 }

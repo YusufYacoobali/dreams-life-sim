@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SocialMediaCommand } from '../game/systems/social';
 import { useGame } from '../state/useGame';
 import { FameBusinessArt, FameBusinessArtId } from '../assets/FameBusinessArt';
+import { PlatformMark } from '../assets/PlatformMark';
+import { platformForArt, type PlatformArtId } from '../game/content/social';
 import { EffectRow, EventModal, EventPresentation } from './EventModal';
 type Review = { identity: string; command: SocialMediaCommand; event: EventPresentation; onSaved?: () => void };
 
@@ -17,9 +19,11 @@ export function useSocialReview(context = '') {
   const isCurrent = (value: Review) => mounted.current && identityRef.current === value.identity && reviewRef.current === value;
   return {
     reviewing: !!current,
-    confirm(command: SocialMediaCommand, title: string, body: string, terms: EffectRow[] = [], art: FameBusinessArtId = 'social', label = 'Confirm', onSaved?: () => void) {
+    confirm(command: SocialMediaCommand, title: string, body: string, terms: EffectRow[] = [], art: FameBusinessArtId | PlatformArtId = 'social', label = 'Confirm', onSaved?: () => void) {
       if (!mounted.current || busy || submitting.current || identityRef.current !== identity) return;
-      const next: Review = { identity, command, onSaved, event: { kind: 'confirmation', id: command.type, title, body, terms, confirmLabel: label, illustration: <FameBusinessArt id={art} size={64} /> } };
+      const platform = platformForArt(art);
+      const illustration = platform ? <PlatformMark platform={platform} size={64} /> : <FameBusinessArt id={art as FameBusinessArtId} size={64} />;
+      const next: Review = { identity, command, onSaved, event: { kind: 'confirmation', id: command.type, title, body, terms, confirmLabel: label, illustration } };
       reviewRef.current = next; setReview(next);
     },
     modal: <EventModal event={current?.event ?? null} busy={busy} error={error} onCancel={() => {

@@ -8,6 +8,7 @@ import { creatorCatalog } from '../../src/game/content/creators';
 import { creatorKinds } from '../../src/game/systems/creatorSchemas';
 import { careerKinds, careerCatalog } from '../../src/game/content/careers';
 import { ActionRow, Body, Card, Header, Heading, Page } from '../../src/ui/components';
+import { PlatformMark } from '../../src/assets/PlatformMark';
 import { CareerArt } from '../../src/assets/CareerArt';
 import { FameBusinessArt } from '../../src/assets/FameBusinessArt';
 import { Illustration } from '../../src/assets/Illustration';
@@ -26,7 +27,7 @@ export default function SpecialCareers() {
       <ActionRow title="Royalty" subtitle="Your family, public duties and the line of succession" icon={<CareerArt id="royalty" />} onPress={() => router.push('/royalty')} />
     </Card>
     <Card><Heading size={18}>Independent Careers</Heading>
-      {creatorKinds.map(kind => <ActionRow key={kind} title={creatorCatalog[kind].title} subtitle={creatorCatalog[kind].description} icon={<CareerArt id={creatorCatalog[kind].art} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind } })} />)}
+      {creatorKinds.map(kind => <ActionRow key={kind} title={creatorCatalog[kind].title} subtitle={creatorCatalog[kind].description} icon={<PlatformMark platform={creatorCatalog[kind].platform} />} onPress={() => router.push({ pathname: '/creator-studio/[kind]', params: { kind } })} />)}
       <ActionRow title="Business Owner" subtitle="Your real companies, employees and operating history" icon={<FameBusinessArt id="business" />} onPress={() => router.push('/business')} />
       <ActionRow title="Cult Leader" subtitle={activeCult(world)?.name ?? 'Found a movement, keep your promises and face the consequences'} icon={<CultArt />} onPress={() => router.push('/cult')} />
     </Card>

@@ -105,4 +105,8 @@ for kind, name in [('jobs', 'job'), ('actions', 'personAction'), ('finance', 'fi
         lines.append(f"  '{key}': require('../../{target.relative_to(ROOT)}'),")
     lines += ['} as const;', '']
     (ROOT / 'src/assets' / (variable + '.ts')).write_text('\n'.join(lines))
+if (ROOT / 'design/action-icons/brief.json').exists():
+    import runpy
+    runpy.run_path(str(ROOT / 'tools/register-simple-icons.py'), run_name='__main__')
+    manifest = json.loads((OUT / 'manifest.json').read_text())
 print(json.dumps({'icons': len(manifest['icons']), 'jobs': len(registries['jobs']), 'actions': len(registries['actions']), 'finance': 2, 'runtime_bytes': sum(icon['bytes'] for icon in manifest['icons'].values())}))

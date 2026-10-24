@@ -23,7 +23,7 @@ test('three arranged criticism posts seven years apart vary only stored words, p
     const next = resolveCommand(before, command, true), incident = next.controversies.at(-1)!;
     expect(legacyTextOnly(next, incident.id)).toEqual(old); expect(encodeWorld(before)).toBe(payload); expect(next.random).toEqual(old.random);
     expect(next.pending?.kind === 'decision' && next.pending.templateId).toBe('public-controversy'); expect(next.pending!.id).toBe(incident.id); expect(next.pending!.body).toBe(incident.body);
-    expect(incident.body).toContain('photo'); expect(incident.body).toContain('Photogram'); expect(incident.body).toContain(index ? 'How will you respond?' : 'What will you do?'); expect(incident.body).not.toMatch(/laughed|asking what you meant/);
+    expect(incident.body).toContain('photo'); expect(incident.body).toContain('Instagram'); expect(incident.body).toContain(index ? 'How will you respond?' : 'What will you do?'); expect(incident.body).not.toMatch(/laughed|asking what you meant/);
     const choice = { type: 'choose' as const, eventId: incident.id, choiceId: 'apologise' };
     const resolved = resolveCommand(next, choice, true), oldResolved = resolveCommand(old, choice, true);
     expect(legacyTextOnly(resolved, incident.id)).toEqual(oldResolved); expect(resolved.pending).toEqual(oldResolved.pending); expect(resolved.random).toEqual(next.random);
@@ -37,6 +37,7 @@ test.each([
 ] as const)('a new adult %s criticism uses the actual %s context without inventing media feedback', (platform, kind, subject) => {
   const before = arrangedCriticismRoll(criticismProfile(platform, true)), next = resolveCommand(before, criticismPost(before, kind), true), incident = next.controversies.at(-1)!;
   expect(incident.body).toContain(subject); expect(incident.body).toContain(platformContent[platform].name); expect(incident.body).toContain('How will you respond?'); expect(incident.body).not.toMatch(/laughed|watched|heard|read your caption/);
+  expect(next.pending!.illustration).toBe('platform:' + platform);
   expect(next.socialAccounts[0].posts[0]).toMatchObject({ kind, response: 'controversial', intent: 'authentic' });
 });
 
@@ -49,10 +50,10 @@ test('the three observed US14 source post identities deterministically get disti
 
 test.each(['photo', 'message', 'video', 'travel', 'food', 'fitness', 'gaming', 'humour'] as const)('%s copy labels the stored kind without assuming its content', kind => {
   const post = Object.freeze({ id: 'context_post_1', kind, liveMinutes: 0 }); const words = copy.publicCriticismCopy('lifelink', post, 16);
-  expect(words.body).toContain(kind); expect(words.body).toContain('LifeLink'); expect(post).toEqual({ id: 'context_post_1', kind, liveMinutes: 0 });
+  expect(words.body).toContain(kind); expect(words.body).toContain('on X'); expect(post).toEqual({ id: 'context_post_1', kind, liveMinutes: 0 });
 });
 
 test('recorded live minutes identify an actual stream rather than invented video detail', () => {
   const words = copy.publicCriticismCopy('streamline', { id: 'stream_post_2', kind: 'gaming', liveMinutes: 60 }, 22);
-  expect(words.body).toContain('live stream'); expect(words.body).toContain('Streamline'); expect(words.body).not.toContain('laughed');
+  expect(words.body).toContain('live stream'); expect(words.body).toContain('Twitch'); expect(words.body).not.toContain('laughed');
 });

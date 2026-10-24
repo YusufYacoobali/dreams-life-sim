@@ -1,5 +1,6 @@
 // Presentation only. Money, quantities, rates and saved prose retain their
 // original precision; never feed these labels back into a game command.
+import { displayPlatformNames } from './platformText';
 const currency =
   '(?:[A-Z]{0,3}\\$|[£€₹¥￥]|R(?![A-Za-z])|(?:USD|CAD|GBP|AUD|EUR|BRL|INR|JPY|ZAR)(?![A-Za-z]))';
 const amount = '[+−-]?\\d(?:[\\d.,\\u00a0\\u202f]*\\d)?';
@@ -65,6 +66,7 @@ export function displayQuantity(value: string): string {
 export function displayText(value: string): string;
 export function displayText(value: string | undefined): string | undefined;
 export function displayText(value: string | undefined): string | undefined {
+  if (value) value = displayPlatformNames(value);
   if (!value || !/[.,]/.test(value)) return value;
   return value.replace(
     displayedNumber,

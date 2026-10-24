@@ -3,11 +3,27 @@ export type PlatformId = typeof platforms[number];
 export const postKinds = ['photo', 'message', 'video', 'travel', 'food', 'fitness', 'gaming', 'humour'] as const;
 export type PostKind = typeof postKinds[number];
 export const platformContent = {
-  photogram: { name: 'Photogram', description: 'Photos, everyday moments and visual stories', art: 'camera', preferred: ['photo', 'travel', 'food'] },
-  videowave: { name: 'VideoWave', description: 'Video, entertainment and longer stories', art: 'video', preferred: ['video', 'gaming', 'humour'] },
-  streamline: { name: 'Streamline', description: 'Live clips, gaming and conversation', art: 'microphone', preferred: ['gaming', 'video', 'message'] },
-  lifelink: { name: 'LifeLink', description: 'Messages, ideas and community', art: 'social', preferred: ['message', 'humour', 'photo'] },
+  photogram: { name: 'Instagram', accountType: 'account', description: 'Photos, everyday moments and visual stories', art: 'camera', preferred: ['photo', 'travel', 'food'] },
+  videowave: { name: 'YouTube', accountType: 'channel', description: 'Videos, entertainment and longer stories', art: 'video', preferred: ['video', 'gaming', 'humour'] },
+  streamline: { name: 'Twitch', accountType: 'channel', description: 'Live streams, gaming and conversation', art: 'microphone', preferred: ['gaming', 'video', 'message'] },
+  lifelink: { name: 'X', accountType: 'account', description: 'Messages, ideas and community', art: 'social', preferred: ['message', 'humour', 'photo'] },
 } as const;
+/** Saved platform IDs remain stable; these labels and illustration IDs are presentation. */
+export type PlatformArtId = `platform:${PlatformId}`;
+export const platformArtId = (platform: PlatformId): PlatformArtId => `platform:${platform}`;
+export const platformForArt = (art: string) => platforms.find(platform => platformArtId(platform) === art);
+export const platformAccountLabel = (platform: PlatformId) => platformContent[platform].name + ' ' + platformContent[platform].accountType;
+
+const postNouns: Record<PostKind, string> = {
+  photo: 'a photo', message: 'an update', video: 'a video', travel: 'a travel post',
+  food: 'a food post', fitness: 'a fitness post', gaming: 'a gaming post', humour: 'a joke',
+};
+export function socialPostJournal(platform: PlatformId, kind: PostKind, liveMinutes: number) {
+  if (liveMinutes > 0) return 'I streamed live on ' + platformContent[platform].name + '.';
+  if (platform === 'videowave') return 'I ' + (kind === 'video' ? 'uploaded ' : 'shared ') + postNouns[kind] + (kind === 'video' ? ' to' : ' on') + ' my YouTube channel.';
+  if (platform === 'lifelink') return 'I posted ' + postNouns[kind] + ' on my X account.';
+  return 'I posted ' + postNouns[kind] + ' on ' + platformContent[platform].name + '.';
+}
 export const postContent: Record<PostKind, { title: string; description: string; captions: readonly string[] }> = {
   photo: { title: 'Share a Photo', description: 'A moment from your life', captions: ['An ordinary day worth remembering.', 'A little light in an unexpected place.', 'I nearly walked past this. Glad I stopped.'] },
   message: { title: 'Write a Message', description: 'A short update or an idea', captions: ['A small thing I learned this week.', 'Plans changed. I am finding the good in it.', 'A reminder to make time for the people who matter.'] },

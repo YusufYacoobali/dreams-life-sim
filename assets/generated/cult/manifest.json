@@ -3,7 +3,7 @@
   "generator": "Image Gen",
   "source": "exec-0986981b-c4a9-4617-b16a-3e6ace2d6e3c.png",
   "sourceSha256": "27e716fa2a8709d94982476d980c4e940d19a9756927f10f7f2e2f4d14d70a53",
-  "runtimeBytes": 838247,
+  "runtimeBytes": 826836,
   "files": [
     {
       "file": "cult.png",
@@ -44,8 +44,15 @@
     {
       "file": "ceremony.png",
       "crop": "360x354+733+359",
-      "bytes": 73405,
-      "sha256": "51e593ee139998f2fef54f6f8173b15ea6c8e2d0c9f63cabb962ae8796bf16a9"
+      "bytes": 50033,
+      "sha256": "6af6b526c8bbac6521d457b681ba8010cd26bd767bfef281375c08047206a18c",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        340,
+        920,
+        612,
+        1226
+      ]
     },
     {
       "file": "treasury.png",
@@ -62,14 +69,28 @@
     {
       "file": "rivalry.png",
       "crop": "365x325+364+718",
-      "bytes": 72110,
-      "sha256": "5a10bc90bb33376ca8c9f5ec6f80fd2a889e67c6c22e54a13196c030df2aa61e"
+      "bytes": 75560,
+      "sha256": "97dd2d1bbf94e29b669a1ea6ca707c27336df15ba66fd0433381bacbad9d9c16",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        647,
+        921,
+        921,
+        1226
+      ]
     },
     {
       "file": "scandal.png",
       "crop": "365x340+729+715",
-      "bytes": 69701,
-      "sha256": "dda4703215f38e80e1c40261f29e8888eb3e50109d7791cbdbd0d0c55850c80c"
+      "bytes": 78212,
+      "sha256": "96a090e7fed9cc0fd7d7cf7458cddbf6475e508f324a2dbae9541e815ad151b1",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        952,
+        951,
+        1244,
+        1219
+      ]
     },
     {
       "file": "claim.png",

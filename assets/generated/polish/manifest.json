@@ -238,8 +238,15 @@
         256,
         256
       ],
-      "bytes": 77871,
-      "sha256": "3f6aad7cca98d7ec731b5fb94ee9a4b82687c97956d1a4ce0f940f01a0aa81fe"
+      "bytes": 82483,
+      "sha256": "31157b43692e25e135ecbd3a5c07156401e3892a6c40b3dda831d89b3b81e81b",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        661,
+        14,
+        922,
+        322
+      ]
     },
     "mischief": {
       "file": "mischief.png",
@@ -292,8 +299,15 @@
         256,
         256
       ],
-      "bytes": 72775,
-      "sha256": "3829f4123dae98eafff197c8502adbe3ac0bc33e4e877246c435888106cc0a09"
+      "bytes": 58439,
+      "sha256": "f684292a9784e7c9999bcb0644b5d66d24983d8c6ee377242ef168a903a58a08",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        37,
+        60,
+        323,
+        297
+      ]
     },
     "health-check": {
       "file": "health-check.png",
@@ -409,8 +423,15 @@
         256,
         256
       ],
-      "bytes": 66513,
-      "sha256": "2b00a23087659ed9fd011f19df9b8db567da5ba162abf965e511359381d1ed22"
+      "bytes": 65747,
+      "sha256": "1c831577875379780a29ea82cf2185123c54b88c1413221df7149154c2fa59b0",
+      "sourceSheet": "design/action-icons/symbols.png",
+      "sourceRect": [
+        336,
+        61,
+        612,
+        299
+      ]
     },
     "pet-memorial": {
       "file": "pet-memorial.png",
