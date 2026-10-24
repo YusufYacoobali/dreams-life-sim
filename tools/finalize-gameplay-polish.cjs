@@ -3,9 +3,10 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto'),zlib=require('zlib');
 const out='docs/verification/final-polish',sha=value=>crypto.createHash('sha256').update(value).digest('hex'),read=file=>JSON.parse(fs.readFileSync(file,'utf8'));
 const full=read('/tmp/dreams-final-polish-full.json');
-const rerunFiles=process.argv.length>2?process.argv.slice(2):['/tmp/dreams-final-affected-rerun.json','/tmp/dreams-final-last-rerun.json'];
+assert.equal(full.wasInterrupted,false);assert.equal(full.testResults.length,full.numTotalTestSuites);
+const rerunFiles=process.argv.length>2?process.argv.slice(2):['/tmp/dreams-final-affected-rerun.json','/tmp/dreams-final-last-rerun.json','/tmp/dreams-final-arcade-rerun.json','/tmp/dreams-final-teen-rerun.json'];
 const overrides=new Map();for(const file of rerunFiles){const r=read(file);assert(r.success,file);assert.equal(r.numFailedTests,0);for(const suite of r.testResults)overrides.set(suite.name,suite);}
-const initialFailures=full.testResults.filter(s=>s.status==='failed');for(const failed of initialFailures)assert(overrides.has(failed.name),'Missing passing rerun: '+failed.name);
+const initialFailures=full.testResults.filter(s=>s.status==='failed');assert.equal(initialFailures.length,full.numFailedTestSuites);for(const failed of initialFailures)assert(overrides.has(failed.name),'Missing passing rerun: '+failed.name);
 const suites=full.testResults.map(s=>overrides.get(s.name)||s);for(const suite of suites){assert.equal(suite.status,'passed');assert(suite.assertionResults.every(t=>t.status==='passed'||t.status==='pending'||t.status==='todo'));}
 const passedTests=suites.reduce((n,s)=>n+s.assertionResults.filter(t=>t.status==='passed').length,0),pendingTests=suites.reduce((n,s)=>n+s.assertionResults.filter(t=>t.status!=='passed').length,0);
 const soakText=fs.readFileSync('/tmp/dreams-final-polish-soak.log','utf8'),events=soakText.split('\n').filter(line=>line.startsWith('{')).map(line=>{try{return JSON.parse(line)}catch{return null}}).filter(Boolean);

@@ -4,10 +4,11 @@ import { resolveCommand, type GameCommand } from '../../src/game/engine';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import terminal from '../fixtures/v34-natural-editorial-us-checkpoint.json';
 import scenes from '../fixtures/story-name-collision-cohort.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 function originalC35(world: World) {
-  const old = JSON.parse(encodeWorld(world));
+  const old = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   expect(old).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] });
   // Only these newly defaulted empty fields were absent from both C35 inputs.
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(old[key]).toEqual([]); delete old[key]; }
