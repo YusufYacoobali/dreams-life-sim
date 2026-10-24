@@ -75,7 +75,7 @@ async function setup(initial: World) {
     await repository.commit(next, before.revision, 'explicit-mortality:' + personId);
     expect(await mockStore.getState().bootstrap()).toBe(true);
   };
-  return { sqlite, rows, cold, original, pauseNextSave, publishDeath };
+  return { sqlite, repository, rows, cold, original, pauseNextSave, publishDeath };
 }
 
 test('the actual married household keeps a failed move-out review, blocks obsolete confirmations and reloads one committed move', async () => {
@@ -128,21 +128,63 @@ test.each(['adopt', 'try-child'] as const)('%s retains the reviewed family plan 
       await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Age 6' })); });
       expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked(); expect(screen.getByRole('radio', { name: 'Infant' })).not.toBeChecked();
     }
-    await press(launch); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen(); await press('Never mind'); expect(rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
+    await press(launch); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen();
+    const obsolete = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    await press('Never mind'); await act(async () => { await obsolete.onChoose('confirm'); }); expect(rows()).toEqual(beforeRows); expect(world()).toEqual(initial);
     if (action === 'adopt') expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked();
-    await press(launch); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
+    await press(launch); const currentReview = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    await act(async () => { obsolete.onCancel(); await obsolete.onChoose('confirm'); });
+    expect(screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props.event).toEqual(currentReview.event);
+    const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     sqlite.exec("CREATE TRIGGER fail_family BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END"); await confirm(submit); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expect(within(screen.UNSAFE_getByType(Modal)).getByRole('button', { name: submit })).toBeEnabled(); if (action === 'adopt') expect(screen.getByText('6 years')).toBeOnTheScreen(); expect(world()).toEqual(initial); expect(rows()).toEqual(beforeRows);
     sqlite.exec('DROP TRIGGER fail_family'); const release = pauseNextSave(); await confirm(submit); expect(mockStore.getState().busy).toBe(true);
+    await act(async () => { await currentReview.onChoose('confirm'); });
     if (action === 'adopt') {
       for (const name of ['Age 6', 'Age 2']) expect(screen.getByRole('radio', { name })).toBeDisabled();
       expect(screen.getByRole('radio', { name: 'Age 6' })).toBeChecked(); expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeDisabled();
     }
-    expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(rows()).toEqual(beforeRows);
+    expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled(); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(screen.queryByRole('button', { name: 'Never mind' })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = rows(); view.unmount(); await cold(); view = render(frame(page())); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(predicted.accounts); expect(world().pregnancies).toEqual(predicted.pregnancies);
     const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
+});
+
+test('adoption callbacks cannot follow a life switch, revision change, or unmounted Family screen', async () => {
+  const initial = couple(), alternate = copyWorld(initial); alternate.id = initial.id + '_other';
+  const { sqlite, repository, rows, original } = await setup(initial);
+  try {
+    await repository.create(alternate);
+    await act(async () => { expect(await mockStore.getState().selectLife(initial.id)).toBe(true); });
+    const dispatch = jest.spyOn(mockStore.getState(), 'dispatch');
+    let view = render(frame(<Family />));
+    await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Age 6' })); });
+    await press('Review Adoption');
+    const originalReview = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    await act(async () => { expect(await mockStore.getState().selectLife(alternate.id)).toBe(true); });
+    expect(screen.queryByRole('button', { name: 'Adopt a Child' })).toBeNull();
+    expect(screen.getByRole('radio', { name: 'Infant' })).toBeChecked();
+    const afterSwitch = world(), switchRows = rows(); dispatch.mockClear();
+    await act(async () => { await originalReview.onChoose('confirm'); });
+    expect(dispatch).not.toHaveBeenCalled(); expect(world()).toEqual(afterSwitch); expect(rows()).toEqual(switchRows);
+
+    await press('Review Adoption');
+    const olderRevision = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'health-routine', routine: { ...world().people[world().activePersonId].health.routine, mindfulness: true } })).toBe(true); });
+    const advanced = world(), advancedRows = rows(); dispatch.mockClear();
+    await act(async () => { await olderRevision.onChoose('confirm'); });
+    expect(dispatch).not.toHaveBeenCalled(); expect(world()).toEqual(advanced); expect(rows()).toEqual(advancedRows);
+    if (world().pending) await press('Continue');
+
+    await press('Review Adoption');
+    const unmountedReview = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    view.unmount(); const beforeUnmountedCallback = world(), beforeUnmountedRows = rows(); dispatch.mockClear();
+    await act(async () => { await unmountedReview.onChoose('confirm'); });
+    expect(dispatch).not.toHaveBeenCalled(); expect(world()).toEqual(beforeUnmountedCallback); expect(rows()).toEqual(beforeUnmountedRows);
+    view = render(frame(<Family />)); expect(screen.queryByRole('button', { name: 'Adopt a Child' })).toBeNull();
+    original(); view.unmount(); dispatch.mockRestore();
+  } finally { sqlite.close(); }
 });
 
 test('partner discussion preserves a refusal through failed saving, commits one genuine agreement, and cold-restores the preference without pregnancy', async () => {
