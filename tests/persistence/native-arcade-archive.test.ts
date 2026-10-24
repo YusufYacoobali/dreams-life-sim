@@ -6,12 +6,13 @@ import { SaveRepository } from '../../src/persistence/repository';
 import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v28-native-arcade-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('workplace migration preserves the genuine native paid outing and all twelve original worlds', () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const save = decodeSave(JSON.stringify(archive)), originals = [archive.checkpoint, ...archive.snapshots.map(point => point.payload)].map(raw), worlds = [save.world, ...save.snapshots.map(point => unpackCheckpoint(point.payload))];
-  worlds.forEach((world, index) => { const current = JSON.parse(encodeWorld(world)); expect(originals[index]).toMatchObject({ schemaVersion: 28, engineVersion: 27, contentVersion: 4 }); expect(current).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], hourlyContracts: [], hobbyEvents: [], workplaces: [], workRaises: [] }); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(originals[index][key]); });
+  worlds.forEach((world, index) => { const current = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); expect(originals[index]).toMatchObject({ schemaVersion: 28, engineVersion: 27, contentVersion: 4 }); expect(current).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], hourlyContracts: [], hobbyEvents: [], workplaces: [], workRaises: [] }); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(originals[index][key]); });
   expect(save.snapshots).toEqual(archive.snapshots); expect(save.snapshots).toHaveLength(12);
   expect(save.world).toMatchObject({ revision: 34, pending: { title: 'High score, low dignity' }, annual: { monthsProcessed: 1 } });
   expect(save.world.storyThreads[0]).toMatchObject({ resolution: 'attend', permission: { accepted: true, chance: 89, roll: 70 }, quote: { amount: 7500n, currency: 'ZAR', payerId: 'person_parent1' }, paidTransactionId: 'txn_33_2182' });
