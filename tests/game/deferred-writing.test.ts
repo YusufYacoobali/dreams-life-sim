@@ -9,6 +9,7 @@ import { offerPending } from '../../src/game/pendingQueue';
 import type { Pending } from '../../src/game/runtime';
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import fixture from '../fixtures/v47-deferred-writing-before.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 type Decision = Extract<Pending, { kind: 'decision' }>;
 type Record = { id: string; template: EventTemplate; worldKey: string; pending: Decision; inputSha256: string; outcomes: { choiceId: string; sha256: string }[] };
@@ -16,8 +17,9 @@ const raw = gunzipSync(Buffer.from(fixture.data, 'base64')).toString('utf8');
 const baseline = JSON.parse(raw) as { worlds: { [key: string]: string }; records: Record[] };
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 const original47Sha = (world: World) => {
-  const original = JSON.parse(encodeWorld(world));
-  // Preserve every saved fact; only restore this fixture's producer markers.
+  const original = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
+  // Preserve every original saved fact. Compare using the producer's markers
+  // and exclude only episode metadata introduced after this frozen fixture.
   Object.assign(original, { schemaVersion: 47, engineVersion: 49, contentVersion: 26 });
   return sha(JSON.stringify(original));
 };
