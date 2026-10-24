@@ -20,7 +20,7 @@ const payloadHashes: Record<string, string> = {
  * Do not rebind a decision, recompute an outcome or strip recorded histories. */
 const projected = (payload: string) => {
   const value = JSON.parse(payload);
-  return { ...value, schemaVersion: 48, engineVersion: 50, contentVersion: 27, ...(Object.hasOwn(value, 'cults') ? {} : { cults: [] }) };
+  return { ...value, schemaVersion: 49, engineVersion: 51, contentVersion: 28, ...(Object.hasOwn(value, 'cults') ? {} : { cults: [] }) };
 };
 
 test('both46 fixtures come from their unmodified independent producers and retain literal payload/quote/outcome byte pins', () => {
@@ -62,7 +62,7 @@ test.each(['null', 'object', 'string', 'corrupt'] as const)('present %s cult his
 });
 
 test('only the exact registered46 tuple may gain absent cults; current48 still requires an explicit valid history', () => {
-  const raw = JSON.parse(writing.records[0].payload), incomplete = { ...raw, schemaVersion: 48, engineVersion: 50, contentVersion: 27 };
+  const raw = JSON.parse(writing.records[0].payload), incomplete = { ...raw, schemaVersion: 49, engineVersion: 51, contentVersion: 28 };
   expect(() => decodeWorld(JSON.stringify(incomplete))).toThrow(); expect(() => validateWorld(incomplete)).toThrow();
   expect(() => decodeWorld(JSON.stringify({ ...raw, engineVersion: 47 }))).toThrow();
   expect(() => decodeWorld(JSON.stringify({ ...raw, contentVersion: 24 }))).toThrow();

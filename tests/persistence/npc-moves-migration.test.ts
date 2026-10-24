@@ -28,7 +28,7 @@ function freshLife() {
  * Only root tags and absence of future npcMoves are arranged for World36 compatibility. */
 function arrangedWorld36() {
   const original = JSON.parse(encodeWorld(unpackCheckpoint(native.current.checkpoint, true)));
-  expect(original).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [], npcMoves: [] });
+  expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], npcMoves: [] });
   for (const key of histories) expect(original[key]).toEqual([]);
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases; delete original.npcMoves; original.schemaVersion = 36; original.engineVersion = 37; original.contentVersion = 12;
   return original;
@@ -37,7 +37,7 @@ function arrangedWorld36() {
  * All nonempty friendship facts and all older source fields stay in the hash. */
 function originalNativeCanonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [], npcMoves: [] });
+  expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], npcMoves: [] });
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases; delete original.npcMoves;
   expect(original.campusCommunities).toEqual([]); delete original.campusCommunities;
   for (const key of histories) { expect(original[key]).toEqual([]); delete original[key]; }
@@ -52,7 +52,7 @@ function originalNativeCanonical(world: World) {
 
 test('arranged legacy World36 adds only empty npcMoves and the three current root tags; every prior field remains exact', () => {
   const legacy = arrangedWorld36(), before = JSON.stringify(legacy), migrated = decodeWorld(before, true);
-  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [], miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [], npcMoves: [] });
+  expect(JSON.parse(encodeWorld(migrated))).toEqual({ ...legacy, schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [], npcMoves: [] });
   expect(JSON.stringify(legacy)).toBe(before); expect(migrated.bestFriendships).toHaveLength(1);
   for (const key of histories) expect(migrated[key]).toEqual(legacy[key]);
   expect(unpackCheckpoint(packCheckpoint(migrated), true)).toEqual(migrated);
@@ -68,7 +68,7 @@ test.each(histories)('legacy World36 cannot erase or repair omitted or corrupt n
 
 test('actual new-life construction requires npcMoves in the current world; decoding cannot silently default a missing current array', () => {
   const newborn = freshLife(), current = JSON.parse(encodeWorld(newborn));
-  expect(current).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [], npcMoves: [], revision: 0, birthAcknowledged: false });
+  expect(current).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], npcMoves: [], revision: 0, birthAcknowledged: false });
   const missingRuntime: Record<string, unknown> = { ...newborn }; delete missingRuntime.npcMoves;
   const missing = { ...current }; delete missing.npcMoves;
   expect(() => validateWorld(missingRuntime)).toThrow(); expect(() => decodeWorld(JSON.stringify(missing))).toThrow();

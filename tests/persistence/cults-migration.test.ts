@@ -83,9 +83,9 @@ test.each([
     const migrated = decodeWorld(input, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 48,
-      engineVersion: 50,
-      contentVersion: 27,
+      schemaVersion: 49,
+      engineVersion: 51,
+      contentVersion: 28,
       cults: [],
     });
     expect(migrated).toEqual(prior);
@@ -140,9 +140,9 @@ test.each([
     const migrated = decodeWorld(original, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 48,
-      engineVersion: 50,
-      contentVersion: 27,
+      schemaVersion: 49,
+      engineVersion: 51,
+      contentVersion: 28,
       cults: [],
     });
     expect(migrated.people).toEqual(decodeWorld(original).people);
@@ -210,9 +210,9 @@ test.each([
     const migrated = decodeWorld(original, true);
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 48,
-      engineVersion: 50,
-      contentVersion: 27,
+      schemaVersion: 49,
+      engineVersion: 51,
+      contentVersion: 28,
     });
     expect(sha(cult46Canonical(migrated))).toBe(expectedSha);
     expect(migrated.pending).toEqual(raw.pending);
@@ -417,9 +417,9 @@ test.each([
     });
     expect(JSON.parse(encodeWorld(migrated))).toEqual({
       ...raw,
-      schemaVersion: 48,
-      engineVersion: 50,
-      contentVersion: 27,
+      schemaVersion: 49,
+      engineVersion: 51,
+      contentVersion: 28,
     });
     expect(JSON.parse(encodeWorld(migrated)).pending).toEqual(raw.pending);
     expect(migrated.random).toEqual(raw.random);

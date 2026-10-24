@@ -65,7 +65,7 @@ test('genuine v23 low-grade graduation and both earlier moments migrate without 
   const migrated = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];
   for (let index = 0; index < migrated.length; index++) {
     const encoded = JSON.parse(encodeWorld(migrated[index]));
-    expect(originals[index].schemaVersion).toBe(23); expect(encoded.schemaVersion).toBe(48); expect(encoded.engineVersion).toBe(50);
+    expect(originals[index].schemaVersion).toBe(23); expect(encoded.schemaVersion).toBe(49); expect(encoded.engineVersion).toBe(51);
     for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(originals[index][key]);
     expect(migrated[index].schoolCompletions).toEqual([]); expect(migrated[index].recoveryCourses).toEqual([]);
   }

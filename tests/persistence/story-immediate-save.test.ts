@@ -16,7 +16,7 @@ const raw = (checkpoint: string) => { const frame = JSON.parse(checkpoint); retu
 test('genuine 45/47/content24 pending decision and every old result gain only empty cult history and markers and keep the literal prior resolver outcome', () => {
   expect(prior.sourceCommit).toBe('da0b0e5'); const original = raw(prior.checkpoint), migrated = unpackCheckpoint(prior.checkpoint, true), restored = unpackCheckpoint(packCheckpoint(migrated), true);
   expect(original).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
-  const expected = { ...original, schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [] };
+  const expected = { ...original, schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] };
   expect(JSON.parse(encodeWorld(restored))).toEqual(expected); expect(JSON.parse(encodeWorld(decodeWorld(JSON.stringify(original))))).toEqual(expected);
   expect(restored.pending).toEqual(migrated.pending); expect(restored.random).toEqual(migrated.random);
   if (restored.pending?.kind !== 'decision') throw new Error('Missing old decision');
@@ -25,7 +25,7 @@ test('genuine 45/47/content24 pending decision and every old result gain only em
   for (const outcome of prior.results) {
     const saved = unpackCheckpoint(outcome.checkpoint, true), selected = resolveCommand(restored, { type: 'choose', eventId: restored.pending.id, choiceId: outcome.choiceId }, true);
     expect(encodeWorld(selected)).toBe(encodeWorld(saved)); expect(saved.pending).toEqual(selected.pending); expect(saved.journal).toEqual(selected.journal); expect(saved.random).toEqual(selected.random);
-    expect(JSON.parse(encodeWorld(saved))).toEqual({ ...raw(outcome.checkpoint), schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [] });
+    expect(JSON.parse(encodeWorld(saved))).toEqual({ ...raw(outcome.checkpoint), schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] });
   }
 });
 
@@ -42,7 +42,7 @@ test('reader25 upgrades only its marker and Age Up archives the exact packed47/c
   const archive = JSON.parse(await repository.export(world.id)), snapshot = archive.snapshots[0];
   expect(snapshot.payload).toBe(prior.finishedCheckpoint); expect(raw(snapshot.payload)).toMatchObject({ schemaVersion: 45, engineVersion: 47, contentVersion: 24 });
   expect(decodeSave(JSON.stringify(archive)).snapshots[0]).toEqual(snapshot);
-  expect(store.getState().world).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27 });
+  expect(store.getState().world).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28 });
   sqlite.close();
 });
 

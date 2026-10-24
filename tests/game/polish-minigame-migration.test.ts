@@ -11,7 +11,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import { athleteFixture, miniGameFixture, nextMatchPeriod, startMiniGame } from '../support/miniGames';
 import graduate from '../fixtures/v3-employed-graduate.json';
 
-const markers = { schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [] };
+const markers = { schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] };
 const rawWorld = (world:World):Record<string,any> => JSON.parse(encodeWorld(world));
 const acknowledge = (world:World) => world.pending?.kind==='result'
   ? resolveCommand(world,{type:'acknowledge',resultId:world.pending.id}) : world;

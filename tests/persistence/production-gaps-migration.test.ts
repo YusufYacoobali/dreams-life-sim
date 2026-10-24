@@ -21,7 +21,7 @@ const observations = [
  * The actual nonempty best-friend agreement and every older field stay in the hash. */
 function originalCanonical(world: World) {
   const original = JSON.parse(encodeWorld(world));
-  expect(original).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27, cults: [] });
+  expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] });
   expect(original.rentalLeases).toEqual([]); for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases;
   expect(original.campusCommunities).toEqual([]); delete original.campusCommunities;
   for (const key of newHistories) { expect(original[key]).toEqual([]); delete original[key]; }
@@ -137,7 +137,7 @@ test('unsupported reader29 is refused before any mutation of the retained native
 
 test.each(newHistories)('a current-format save cannot omit required %s history', key => {
   const current: Partial<World> = structuredClone(unpackCheckpoint(native.current.checkpoint));
-  expect(validateWorld(current).schemaVersion).toBe(48);
+  expect(validateWorld(current).schemaVersion).toBe(49);
   delete current[key];
   expect(() => validateWorld(current)).toThrow();
 });
