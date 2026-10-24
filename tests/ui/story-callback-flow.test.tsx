@@ -55,7 +55,7 @@ test('permission and actual Age Up→party→remaining year survive independent 
   expect(completed.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1); expect(completed.storyThreads[0].paidTransactionId).toBe(paid.storyThreads[0].paidTransactionId); expect(await repository.load(initial.id)).toEqual(completed); view.unmount(); sqlite.close();
 }, 30000);
 
-test('month-twelve urgent care cancels both saved callbacks atomically across SQLite failure, retry and cold resume', async () => {
+test('month-twelve critical admission cancels both saved callbacks atomically across SQLite failure, retry and cold resume', async () => {
   let initial = pupil('US', 8);
   const project = bindEvent(initial, eventTemplates.find(item => item.id === 'school-project-promise')!); offerPending(initial, project);
   initial = resolveCommand(initial, { type: 'choose', eventId: project.id, choiceId: 'promise' });
@@ -68,32 +68,38 @@ test('month-twelve urgent care cancels both saved callbacks atomically across SQ
   initial = resolveCommand(initial, { type: 'choose', eventId: arcade.id, choiceId: 'ask' });
   if (initial.pending?.kind !== 'result') throw new Error('Missing permission result');
   initial = resolveCommand(initial, { type: 'acknowledge', resultId: initial.pending.id });
-  addCondition(initial, initial.people[initial.activePersonId], 'asthma', 75);
+  // Critical untreated asthma now causes admission during the actual monthly
+  // simulation. Severity 75 offers symptoms, not an annual hospital decision.
+  addCondition(initial, initial.people[initial.activePersonId], 'asthma', 95);
   const startDate = monthFrom(initial.date, -11);
   initial.annual = { id: 'year_twelve_storage', startDate, targetDate: monthFrom(startDate, 12), monthsProcessed: 11, stage: 'months', pausedForPlanning: true };
-  initial = resolveCommand(initial, { type: 'resume' }); expect(initial.annual?.monthsProcessed).toBe(12);
-  expect(initial.storyThreads.map(item => item.status)).toEqual(['offered', 'offered']); expect(initial.deferred).toHaveLength(2);
+  const targetDate = { ...initial.annual.targetDate }, expected = resolveCommand(initial, { type: 'resume' }, true);
+  expect(initial.storyThreads.map(item => item.status)).toEqual(['scheduled', 'scheduled']);
+  expect(initial.pending).toBeNull(); expect(initial.deferred).toEqual([]);
+  expect(expected.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  expect(expected.annual?.monthsProcessed).toBe(12);
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(initial);
   const cold = async () => { mockStore = createGameStore({ repository: async () => repository, date: () => initial.date, id: () => 'life_unused' }); await mockStore.getState().bootstrap(); };
   await cold(); let view = render(frame());
   sqlite.exec("CREATE TRIGGER fail_callback_cancellation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Accept hospital assessment' })));
+  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
   await waitFor(() => expect(screen.getAllByRole('alert').length).toBeGreaterThan(0));
   expect(mockStore.getState().world).toEqual(initial); expect(await repository.load(initial.id)).toEqual(initial);
   sqlite.exec('DROP TRIGGER fail_callback_cancellation');
-  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Accept hospital assessment' })));
-  await waitFor(() => expect(screen.getByText('Medical care arranged')).toBeOnTheScreen());
+  await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Continue This Year' })));
+  await waitFor(() => expect(screen.getByText('Rushed to Hospital')).toBeOnTheScreen());
   const cancelled = mockStore.getState().world!;
+  expect(cancelled).toEqual(expected); expect(await repository.load(initial.id)).toEqual(expected);
   expect(cancelled.storyThreads.map(item => item.status)).toEqual(['cancelled', 'cancelled']); expect(cancelled.deferred).toEqual([]);
   expect(cancelled.ledger.some(item => item.category === 'story-outing')).toBe(false); expect(cancelled.annual?.monthsProcessed).toBe(12);
   view.unmount(); await cold(); view = render(frame()); expect(mockStore.getState().world).toEqual(cancelled);
-  expect(screen.getByText('Medical care arranged')).toBeOnTheScreen();
+  expect(screen.getByText('Rushed to Hospital')).toBeOnTheScreen();
   for (let guard = 0; mockStore.getState().world!.pending && guard < 10; guard++) {
     const world = mockStore.getState().world!, event = world.pending!;
     await act(async () => fireEvent.press(screen.getByRole('button', { name: event.kind === 'result' ? 'Continue' : event.choices.find(item => !choiceUnavailable(world, item))!.label })));
   }
   const completed = mockStore.getState().world!;
-  expect(completed.annual).toBeNull(); expect(completed.date).toEqual(initial.date);
+  expect(completed.annual).toBeNull(); expect(completed.date).toEqual(targetDate);
   expect(completed.storyThreads).toEqual(cancelled.storyThreads);
   expect(completed.ledger.slice(0, cancelled.ledger.length)).toEqual(cancelled.ledger);
   expect(completed.people[completed.activePersonId].health.records).toEqual(cancelled.people[cancelled.activePersonId].health.records);
