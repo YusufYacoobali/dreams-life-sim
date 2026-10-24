@@ -94,6 +94,26 @@ not hidden behind a universal speed claim.
 - [Integrated checks and source boundaries](verification/final-polish/verification.json)
 - [Before/after browser layout evidence](verification/final-polish/visuals/browser-checks.json)
 - [Capture provenance and original tree comparison](verification/final-polish/visuals/capture-provenance.json)
+- [Visual review index](verification/final-polish/visuals/README.md)
+
+Final verification covers **329 suites / 5,288 passing tests**, with no pending
+tests, plus the **120-life soak** across 120 distinct seeds. Application and test
+TypeScript checks pass; the import check reports 506 modules and zero cycles.
+Android and iOS production Hermes exports pass, and their source maps contain
+all 23 changed runtime files with the verified source hashes.
+
+The first full regression completed with 10 failing suites / 53 assertions that
+still expected old medical prompts, removed Family text, mutable appearance
+copies or pre-episode comparison envelopes. After correcting those expectations,
+all ten affected suites pass their 171 tests on the same application runtime.
+The combined count above replaces those suites rather than counting them twice;
+it includes three new cases. The original full-run output and all passing reruns
+are retained, compressed, alongside the [verification record](verification/final-polish/verification.json).
+No frozen fixture bytes or historical canonical hashes were restamped.
+
+The soak completed every seed from 0 through 119, with factual deaths at ages
+22–95 and up to 61,470 retained ledger rows. All application runtime files were
+unchanged throughout the final full regression, soak and focused reruns.
 
 Browser pictures render production React Native trees through a CSS/SVG
 adapter. Connected component tests use real SQLite with mocked navigation;
