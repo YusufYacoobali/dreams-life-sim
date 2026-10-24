@@ -1,7 +1,7 @@
 import { gzipSync, strToU8 } from 'fflate';
 import { resolveCommand } from '../../src/game/engine';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
-import { immutableWorld, validateWorld } from '../../src/game/model';
+import { copyWorld, immutableWorld, validateWorld } from '../../src/game/model';
 import { decodeSave } from '../../src/persistence/archive';
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { encodeBase64 } from '../../src/persistence/base64';
@@ -22,7 +22,13 @@ test('immutable actions preserve exact outcomes and reuse certified old transact
   const { original, world, command, next } = scenario();
   expect(next).toEqual(resolveCommand(original, command));
   expect(Object.isFrozen(next.people[next.activePersonId].stats)).toBe(true);
-  expect(next.ledger).not.toBe(world.ledger);
+  // An unchanged, fully certified branch may now share its frozen array too.
+  // Working copies remain appendable and never mutate the prior committed save.
+  expect(next.ledger).toBe(world.ledger);
+  expect(Object.isFrozen(next.ledger)).toBe(true);
+  const working = copyWorld(next);
+  expect(working.ledger).not.toBe(next.ledger);
+  expect(Object.isFrozen(working.ledger)).toBe(false);
   expect(next.ledger.every((row, index) => row === world.ledger[index])).toBe(true);
   const before = JSON.parse(checkpoints.packCheckpoint(world)), after = JSON.parse(checkpoints.packCheckpoint(next));
   expect(before.format).toBe('dreams-checkpoint-v4');

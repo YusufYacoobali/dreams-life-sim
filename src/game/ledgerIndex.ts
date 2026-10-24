@@ -5,7 +5,7 @@ const reusable = new WeakMap<Row, { rows: World['ledger']; index: LedgerIndex }>
 /** Mutable callers build a fresh index. Certified frozen rows can reuse exact reference matches. */
 export function indexLedger(rows: World['ledger'], certified = false) {
   const cached = rows.length && certified ? reusable.get(rows[0]) : undefined;
-  if (cached && cached.rows.length === rows.length && rows.every((row, index) => row === cached.rows[index])) return cached.index;
+  if (cached && (cached.rows === rows || cached.rows.length === rows.length && rows.every((row, index) => row === cached.rows[index]))) return cached.index;
   const transactions = new Map<string, Row>(), byCategory = new Map<string, Row[]>();
   const cashChanges = new Map<string, bigint>(), debtChanges = new Map<string, bigint>();
   const accountReferences = new Map<string, { ownerId: string; currency: Row['currency'] }>(), debtCurrencies = new Map<string, Row['currency']>();

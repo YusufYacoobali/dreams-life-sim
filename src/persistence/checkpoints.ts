@@ -24,6 +24,27 @@ type Part = z.infer<typeof partSchema>;
 const chunkSize = 512;
 const peopleChunkSize = 32;
 const ledgerCache = new WeakMap<object, { rows: World['ledger']; part: Part; columns?: string }>();
+// Weak keys retain no old save by themselves. Limit each retained fragment so
+// one unusually large branch cannot leave a second enormous string in memory.
+const encodedBranches = new WeakMap<object, string>();
+const maxEncodedBranchCharacters = 512 * 1024;
+function encodedValue(value: unknown): string | undefined {
+  if (!value || typeof value !== 'object' || !Object.isFrozen(value)) return JSON.stringify(value, moneyJSON);
+  const cached = encodedBranches.get(value);
+  if (cached !== undefined) return cached;
+  const text = JSON.stringify(value, moneyJSON);
+  if (text.length <= maxEncodedBranchCharacters) encodedBranches.set(value, text);
+  return text;
+}
+/** Same JSON field order, omissions and bigint encoding as JSON.stringify. */
+function encodedRecord(record: object): string {
+  const fields: string[] = [];
+  for (const [key, value] of Object.entries(record)) {
+    const text = encodedValue(value);
+    if (text !== undefined) fields.push(JSON.stringify(key) + ':' + text);
+  }
+  return '{' + fields.join(',') + '}';
+}
 const ledgerMoney = new Set(['cashDelta', 'debtDelta']);
 const integerText = /^-?(?:0|[1-9]\d*)$/;
 const moneyWrapperBytes = JSON.stringify({ $dreamsBigInt: '' }).length - 2;
@@ -68,19 +89,19 @@ function unpackText(checkpoint: Part): string {
 export function packCheckpoint(world: World): string {
   const checked = worldForEncoding(world), entries = Object.entries(checked.people);
   if (checked.ledger.length < chunkSize && entries.length <= peopleChunkSize) {
-    const text = JSON.stringify(checked, moneyJSON);
+    const text = encodedRecord(checked);
     if (text.length <= maxBytes / 3 || strToU8(text).length <= maxBytes) return JSON.stringify({ format: 'dreams-checkpoint-v1', ...packText(text) });
   }
   const columns = Object.keys(checked.ledger[0] ?? {}) as (keyof World['ledger'][number])[], signature = JSON.stringify(columns), expansion = rowExpansion(columns);
   if (columns.length > 32 || columns.some(key => !key.length || key.length > 64 || ['__proto__', 'constructor', 'prototype'].includes(key))) throw new Error('Unsupported checkpoint transaction fields');
   const ledger: Part[] = [], people: Part[] = [];
   const { ledger: _ledger, people: _people, ...body } = checked;
-  const main = packText(JSON.stringify(body, moneyJSON), maxTupleBytes);
+  const main = packText(encodedRecord(body), maxTupleBytes);
   let bytes = main.bytes;
   for (let offset = 0; offset < entries.length; offset += peopleChunkSize) {
     const group: World['people'] = Object.create(null);
     for (const [id, person] of entries.slice(offset, offset + peopleChunkSize)) group[id] = person;
-    const part = packPeopleText(JSON.stringify(group, moneyJSON), Object.isFrozen(checked.people));
+    const part = packPeopleText(encodedRecord(group), Object.isFrozen(checked.people));
     people.push(part); bytes += part.bytes;
     if (bytes + 32 > maxTupleBytes || people.length > 512) throw new Error('This checkpoint exceeds the supported world size');
   }

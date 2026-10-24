@@ -122,6 +122,10 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 // transaction for an unrelated button press.
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
+// Shape certificates belong to one named field and are granted only after all
+// cross-world checks and recursive freezing. Object.freeze alone grants none.
+const certifiedBranches = new WeakMap<object, Set<string>>();
+const copiedBranches = new WeakMap<object, { key: string; original: object }>();
 export const worldSchema = z.object({
   schemaVersion: z.literal(49), engineVersion: z.literal(51), contentVersion: z.literal(28),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
@@ -170,7 +174,58 @@ export const worldSchema = z.object({
 export type World = z.infer<typeof worldSchema>;
 
 
-function parseWorldShape(value: unknown): World {
+function equalCertifiedTree(value: unknown, original: unknown): boolean {
+  if (Object.is(value, original)) return true;
+  if (!value || !original || typeof value !== 'object' || typeof original !== 'object') return false;
+  if (Array.isArray(original)) {
+    if (!Array.isArray(value) || value.length !== original.length) return false;
+    for (let index = 0; index < original.length; index++) if (Object.prototype.hasOwnProperty.call(value, index) !== Object.prototype.hasOwnProperty.call(original, index) || !equalCertifiedTree(value[index], original[index])) return false;
+    return true;
+  }
+  if (Array.isArray(value)) return false;
+  const keys = Object.keys(original), actual = Object.keys(value);
+  if (actual.length !== keys.length) return false;
+  // Record order is gameplay data: people enumeration consumes seeded draws.
+  return keys.every((key, index) => actual[index] === key && equalCertifiedTree((value as Record<string, unknown>)[key], (original as Record<string, unknown>)[key]));
+}
+function sharedCertifiedBranch(key: string, value: unknown): object | undefined {
+  if (!value || typeof value !== 'object') return;
+  if (certifiedBranches.get(value)?.has(key)) return value;
+  const copy = copiedBranches.get(value);
+  if (copy?.key === key && certifiedBranches.get(copy.original)?.has(key) && equalCertifiedTree(value, copy.original)) return copy.original;
+}
+function parseWorldShape(value: unknown, immutable = false): World {
+  // Cold JSON/imports have no private certificates: retain the original compiled
+  // whole-schema parser rather than paying per-row public parse overhead.
+  const hasCertifiedInput = immutable && value && typeof value === 'object' && Object.entries(value).some(([key, branch]) =>
+    branch && typeof branch === 'object' && (certifiedBranches.get(branch)?.has(key) || copiedBranches.get(branch)?.key === key));
+  if (hasCertifiedInput && value && typeof value === 'object' && !Array.isArray(value)) {
+    const input = value as Record<string, unknown>, parsed: Record<string, unknown> = {};
+    const issues: z.core.$ZodIssue[] = [];
+    for (const [key, schema] of Object.entries(worldSchema.shape)) {
+      const shared = sharedCertifiedBranch(key, input[key]);
+      if (shared) { parsed[key] = shared; continue; }
+      try {
+        // Reuse individually certified transaction shapes after appending rows.
+        // Every monetary/reference/history check below still runs on the world.
+        if (key === 'people' && input[key] && typeof input[key] === 'object' && !Array.isArray(input[key])) {
+          const people: Record<string, Person> = {};
+          for (const [id, person] of Object.entries(input[key])) {
+            personId.parse(id);
+            people[id] = sharedCertifiedBranch('person', person) as Person | undefined ?? personSchema.parse(person);
+          }
+          parsed[key] = people;
+        } else parsed[key] = key === 'ledger' && Array.isArray(input[key])
+          ? input[key].map(row => immutableTransactions.has(row) ? row : transactionSchema.parse(row))
+          : schema.parse(input[key]);
+      } catch (error) {
+        if (!(error instanceof z.ZodError)) throw error;
+        issues.push(...error.issues.map(issue => ({ ...issue, path: [key, ...issue.path] })));
+      }
+    }
+    if (issues.length) throw new z.ZodError(issues);
+    return parsed as World;
+  }
   if (value && typeof value === 'object' && 'ledger' in value && Array.isArray(value.ledger)) {
     const rows = value.ledger;
     if (!rows.some(row => immutableTransactions.has(row))) return worldSchema.parse(value);
@@ -182,7 +237,7 @@ function parseWorldShape(value: unknown): World {
 }
 /** Reject contradictory imports/checkpoints rather than repairing them silently. */
 export function validateWorld(value: unknown, immutable = false): World {
-  const world = parseWorldShape(value);
+  const world = parseWorldShape(value, immutable);
   const ledger = indexLedger(world.ledger, world.ledger.every(row => immutableTransactions.has(row)));
   if (!world.people[world.activePersonId]) throw new Error('Missing active person');
   const accountIds = new Set<string>();
@@ -430,6 +485,14 @@ export function validateWorld(value: unknown, immutable = false): World {
     for (const row of world.ledger) if (!immutableTransactions.has(row)) immutableTransactions.add(Object.freeze(row));
     freezeTree(world);
     rememberLedgerIndex(world.ledger, ledger);
+    for (const [key, branch] of Object.entries(world)) if (branch && typeof branch === 'object') {
+      const kinds = certifiedBranches.get(branch) ?? new Set<string>();
+      kinds.add(key); certifiedBranches.set(branch, kinds);
+    }
+    for (const person of Object.values(world.people)) {
+      const kinds = certifiedBranches.get(person) ?? new Set<string>();
+      kinds.add('person'); certifiedBranches.set(person, kinds);
+    }
     immutableWorlds.add(world);
   }
   return world;
@@ -460,7 +523,16 @@ export function copyWorld(world: World): World {
   // The command's result still receives full shape and integrity validation.
   const copy = copyCertifiedTree({ ...world, ledger: [] }) as World;
   copy.ledger = [...world.ledger];
+  for (const [key, branch] of Object.entries(copy)) if (branch && typeof branch === 'object') {
+    const original = world[key as keyof World];
+    if (original && typeof original === 'object') copiedBranches.set(branch, { key, original });
+  }
+  for (const [id, person] of Object.entries(copy.people)) copiedBranches.set(person, { key: 'person', original: world.people[id] });
   return copy;
+}
+/** Read-only identity query; an externally frozen lookalike never passes. */
+export function isImmutableWorld(value: unknown): value is World {
+  return !!value && typeof value === 'object' && immutableWorlds.has(value);
 }
 /** Storage and the UI share only fully validated, recursively frozen worlds. */
 export function immutableWorld(world: World): World {
