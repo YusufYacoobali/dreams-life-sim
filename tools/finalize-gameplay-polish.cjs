@@ -12,6 +12,10 @@ const soakText=fs.readFileSync('/tmp/dreams-final-polish-soak.log','utf8'),event
 const terminal=events.find(row=>row.sweep==='complete');assert(terminal?.passed);assert.equal(terminal.lives,120);assert.equal(terminal.workers,4);
 const lives=events.filter(row=>row.sweep==='core-life');assert.equal(lives.length,120);assert.deepEqual(lives.map(row=>row.seed).sort((a,b)=>a-b),Array.from({length:120},(_,i)=>i));
 const sourceHashes=read(out+'/runtime-source-hashes.json');for(const [file,hash]of Object.entries(sourceHashes))assert.equal(sha(fs.readFileSync(file)),hash,'Changed runtime '+file);
+const {execFileSync}=require('node:child_process');
+const changedRuntime=execFileSync('git',['diff','--name-only','3c797e2253c98714c79d73191a09889774afccd5','--','app','src'],{encoding:'utf8'}).trim().split('\n').sort();
+assert.deepEqual(changedRuntime,Object.keys(sourceHashes).sort());
+for(const [file,hash]of Object.entries(sourceHashes))assert.equal(sha(execFileSync('git',['show','867c0305e588551ed9e9f9704ed52982153bad6b:'+file])),hash,'Full-run source differs: '+file);
 const platforms=read(out+'/platform-checks.json');assert.equal(platforms.platforms.length,2);for(const p of platforms.platforms){assert.equal(p.missing.length+p.mismatches.length+p.changedSinceManifest.length,0);assert.equal(p.bundledCultImages,12);}
 const browser=read(out+'/visuals/browser-checks.json');assert.equal(browser.errors.length+browser.externalRequests.length+browser.phoneOverflow.length,0);assert(browser.allImagesDecoded&&browser.uniqueClipIds&&browser.fontLoaded);assert(browser.actionChecks.every(row=>row.located));assert(browser.modalChecks.every(row=>row.lastActionVisible));
 const provenance=read(out+'/visuals/capture-provenance.json');assert.equal(provenance.trees.length,50);assert.equal(provenance.images.length,browser.captures.length);
@@ -33,8 +37,10 @@ const report={
   performance:{fiveAgeInputs:'performance-core/workloads.json.gz',isolatedFiveAgeCoreReport:'performance-core/README.md',isolatedFiveAgeUiReport:'performance-ui/README.md',integratedWorld49Comparison:'integrated-performance.json',integratedReferenceCommit:'9253a1b1a1453f465bbd7ae7c2d8bad469c535d3',criticalAgeCases:9,pairsPerCase:11,worldsAndRandomIdentical:true,limits:'Cloud Node/React-test-renderer and real on-disk SQLite measurements are scoped separately. Shared-host timing is noisy; firstAgeUp and age90UI results are mixed. No native tap latency, GPU/frame rate or physical-device universal speed claim.'},
   sourceBoundary:'All runtime changes were complete before full regression/soak. Exact23 changed runtime file hashes verified in both production source maps. Follow-up changes are test expectations and documentation/evidence only; affected suites rerun against the exact same runtime, and original full-run failures remain in this report. Full current source/gameplay isWorld49; paired integrated benchmarks compare sameWorld49 gameplay with and without performance changes.',
   unverified:['Physical Android/iOS release-build tap-to-response and frame/GPU/memory behaviour','Native navigation-stack dismissTo behaviour and native text shaping/pixels','Physical-device scroll and Android clipping regression; existing guard and component coverage retained'],
-  logs:Object.fromEntries(logs.map(file=>[file,{sha256:sha(fs.readFileSync(file))}]))
+  logs:Object.fromEntries(logs.map(file=>[file,{sha256:sha(fs.readFileSync(file)),archive:'logs/'+path.basename(file)+'.gz'}]))
 };
+fs.mkdirSync(out+'/logs',{recursive:true});
+for(const [file,evidence]of Object.entries(report.logs))fs.writeFileSync(out+'/'+evidence.archive,zlib.gzipSync(fs.readFileSync(file),{level:9}));
 fs.writeFileSync(out+'/verification.json',JSON.stringify(report,null,2)+'\n');
 fs.writeFileSync(out+'/soak-results.json',JSON.stringify(report.soak,null,2)+'\n');
 fs.writeFileSync(out+'/full-test-results.json.gz',zlib.gzipSync(fs.readFileSync('/tmp/dreams-final-polish-full.json'),{level:9}));

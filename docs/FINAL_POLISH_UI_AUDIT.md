@@ -35,6 +35,8 @@ These are interaction or gameplay states rather than informational callouts:
   buttons are navigation actions.
 - Chart bars and stat/progress tracks convey values. Result tones, real errors,
   primary buttons, opening/death scenes and modal backdrops retain their roles.
+- The next court hearing's border and owned-inventory badges identify recorded
+  gameplay status; neither is an ordinary eligibility explanation.
 
 The audit checked both theme references and hard-coded background colours.
 No remaining ordinary decorative blue explanation was identified in the audit.
