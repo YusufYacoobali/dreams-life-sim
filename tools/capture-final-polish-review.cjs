@@ -20,10 +20,13 @@ async function main() {
       if (id.startsWith('partner-')) {
         const located = await section.locator('.phone').evaluateAll(phones => phones.map(phone => {
           const buttons = [...phone.querySelectorAll('[role="button"]')];
-          const action = buttons.find(node => /^(Try for a Baby|Discuss Having a Baby)/.test(node.getAttribute('aria-label') || node.textContent)) || buttons.find(node => /Go on a Date/.test(node.getAttribute('aria-label') || node.textContent));
+          const baby = buttons.find(node => /^(Try for a Baby|Discuss Having a Baby)/.test(node.getAttribute('aria-label') || node.textContent));
+          // Anchor both versions at their shared Date action, so the new
+          // Date/Spend Time/Baby grouping remains visible together.
+          const action = buttons.find(node => /Go on a Date/.test(node.getAttribute('aria-label') || node.textContent)) || baby;
           const scroll = action?.closest('.rn-scroll');
           if (scroll) { const row = action.getBoundingClientRect(), frame = scroll.getBoundingClientRect(); scroll.scrollTop += row.top - frame.top - 90; }
-          return { tree: phone.dataset.tree, located: !!action, action: action?.getAttribute('aria-label') || action?.textContent };
+          return { tree: phone.dataset.tree, located: !!action, babyActionPresent: !!baby, action: action?.getAttribute('aria-label') || action?.textContent };
         }));
         actionChecks.push(...located);
         await section.screenshot({ path: path.join(out, id + '-baby-actions.png'), animations: 'disabled' }); captures.push(id + '-baby-actions.png');
