@@ -30,7 +30,7 @@ test('a new profile begins with no manufactured audience or post history, and ca
   world = drain(resolveCommand(world, { type: 'reopen-social', accountId: account.id })); expect(world.socialAccounts[0].id).toBe(account.id); expect(world.socialAccounts[0].followers).toBe(0); validateWorld(world);
 });
 test('closing and reopening cannot erase a suspension, and the same profile becomes usable after its actual end date', () => {
-  let world = accountWorld(); for (let index = 0; index < 3; index++) world = drain(post(world, 'controversial')); const id = world.socialAccounts[0].id, until = world.socialAccounts[0].suspendedUntil;
+  let world = accountWorld(); for (let index = 0; index < 3; index++) { if (index) world.date.year += 7; world = drain(post(world, 'controversial')); } const id = world.socialAccounts[0].id, until = world.socialAccounts[0].suspendedUntil;
   expect(world.socialAccounts[0].status).toBe('suspended'); world = drain(resolveCommand(world, { type: 'delete-social', accountId: id })); world = drain(resolveCommand(world, { type: 'reopen-social', accountId: id })); expect(world.socialAccounts[0].status).toBe('suspended'); expect(world.socialAccounts[0].suspendedUntil).toBe(until);
   world = drain(resolveCommand(world, { type: 'delete-social', accountId: id })); world.date = monthFrom(world.date, 3, world.date.day); socialMonth(world); world = drain(resolveCommand(world, { type: 'reopen-social', accountId: id })); expect(world.socialAccounts[0].status).toBe('active'); expect(world.socialAccounts[0].suspendedUntil).toBeNull(); expect(world.socialAccounts[0].totalPosts).toBe(3); expect(world.socialAccounts[0].strikes).toBe(3); validateWorld(world);
 });

@@ -13,16 +13,17 @@ function legacyTextOnly(input: World, incidentId: string) {
   return world;
 }
 
-test('three actual consecutive arranged teenage criticism posts vary only stored words, preserving every roll, fee, consequence, choice and result', () => {
+test('three arranged criticism posts seven years apart vary only stored words, preserving every roll, fee, consequence, choice and result', () => {
   let world = criticismProfile(); const bodies: string[] = [], titles: string[] = [];
   expect(ageOn(world.people[world.activePersonId], world.date)).toBe(16);
   for (let index = 0; index < 3; index++) {
+    if (index) { world = copyWorld(world); world.date.year += 7; }
     const before = arrangedCriticismRoll(world), command = criticismPost(before), payload = encodeWorld(before);
     const legacy = jest.spyOn(copy, 'publicCriticismCopy').mockReturnValue(legacyCriticism), old = resolveCommand(before, command, true); legacy.mockRestore();
     const next = resolveCommand(before, command, true), incident = next.controversies.at(-1)!;
     expect(legacyTextOnly(next, incident.id)).toEqual(old); expect(encodeWorld(before)).toBe(payload); expect(next.random).toEqual(old.random);
     expect(next.pending?.kind === 'decision' && next.pending.templateId).toBe('public-controversy'); expect(next.pending!.id).toBe(incident.id); expect(next.pending!.body).toBe(incident.body);
-    expect(incident.body).toContain('photo'); expect(incident.body).toContain('Photogram'); expect(incident.body).toContain('What will you do?'); expect(incident.body).not.toMatch(/laughed|asking what you meant/);
+    expect(incident.body).toContain('photo'); expect(incident.body).toContain('Photogram'); expect(incident.body).toContain(index ? 'How will you respond?' : 'What will you do?'); expect(incident.body).not.toMatch(/laughed|asking what you meant/);
     const choice = { type: 'choose' as const, eventId: incident.id, choiceId: 'apologise' };
     const resolved = resolveCommand(next, choice, true), oldResolved = resolveCommand(old, choice, true);
     expect(legacyTextOnly(resolved, incident.id)).toEqual(oldResolved); expect(resolved.pending).toEqual(oldResolved.pending); expect(resolved.random).toEqual(next.random);

@@ -14,7 +14,7 @@ import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/per
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { ThemeProvider } from '../../src/ui/theme';
 import { PendingEvent } from '../../src/ui/PendingEvent';
-import { arrangedCriticismRoll, criticismPost, criticismProfile, legacyCriticism } from '../support/criticismFixture';
+import { arrangedCriticismRoll, criticismPost, criticismProfile, finishCriticismScene, legacyCriticism } from '../support/criticismFixture';
 import history from '../fixtures/v7-history-archive.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
@@ -106,5 +106,30 @@ test('a new criticism binds the same actual post and copy after failed publicati
     context.sqlite.exec('DROP TRIGGER fail_criticism'); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(true); }); expect(world()).toEqual(expected); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen(); expect(world().socialAccounts[0].totalPosts).toBe(1); expect(world().controversies).toHaveLength(1); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const savedRows = context.rows(); view.unmount(); await context.cold(); view = render(frame()); expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows); expect(screen.getByText(expected.pending!.body)).toBeOnTheScreen();
     const choice = { type: 'choose' as const, eventId: expected.pending!.id, choiceId: 'ignore' }; await press('Give the comments absolutely nothing'); expect(world()).toEqual(resolveCommand(expected, choice, true)); context.original(); view.unmount();
+  } finally { context.close(); }
+});
+
+test('a stored audience cooldown suppresses every penalty through a failed ordinary post, retry and cold reload', async () => {
+  const first = arrangedCriticismRoll(criticismProfile('photogram', true));
+  const resolved = finishCriticismScene(resolveCommand(first, criticismPost(first), true));
+  const arranged = copyWorld(resolved); arranged.date.year += 6;
+  arranged.people[arranged.activePersonId].stats.energy = 100;
+  const initial = arrangedCriticismRoll(arranged), command = criticismPost(initial), expected = resolveCommand(initial, command, true), context = await setup(initial);
+  try {
+    const beforeRows = context.rows(), account = initial.socialAccounts[0];
+    expect(expected.controversies).toEqual(initial.controversies);
+    expect(expected.socialAccounts[0].posts.at(-1)!.response).not.toBe('controversial');
+    expect(expected.socialAccounts[0].posts.at(-1)!.followerDelta).toBeGreaterThanOrEqual(0);
+    expect(expected.socialAccounts[0].strikes).toBe(account.strikes);
+    expect(expected.people[expected.activePersonId].publicLife.image).toBe(initial.people[initial.activePersonId].publicLife.image);
+    expect(expected.relationships).toEqual(initial.relationships);
+    context.sqlite.exec("CREATE TRIGGER fail_criticism BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    expect(await mockStore.getState().dispatch(command)).toBe(false);
+    expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
+    context.sqlite.exec('DROP TRIGGER fail_criticism');
+    expect(await mockStore.getState().dispatch(command)).toBe(true); expect(world()).toEqual(expected);
+    const savedRows = context.rows(); await context.cold();
+    expect(world()).toEqual(expected); expect(context.rows()).toEqual(savedRows);
+    expect(world().controversies).toHaveLength(1); context.original();
   } finally { context.close(); }
 });

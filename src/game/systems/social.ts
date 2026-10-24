@@ -105,6 +105,20 @@ function archivePosts(account: Account) {
     if (item.response === 'viral') archive.virals++;
   }
 }
+function audienceCriticismAvailable(world: World, personId: string): boolean {
+  // Audience criticism follows the person across profiles. Other public-life
+  // incidents have no source post and must not start this particular cooldown.
+  let lastYear: number | undefined;
+  for (const item of world.controversies) if (item.personId === personId && item.accountId !== null && item.postId !== null) lastYear = Math.max(lastYear ?? item.date.year, item.date.year);
+  if (lastYear !== undefined && world.date.year < lastYear + 7) return false;
+  // Reuse complete delivered-post history for one chance per eligible calendar
+  // year. Posting more often or moving platforms cannot repeatedly reroll it;
+  // archived posts still count, and failed publication commits consume nothing.
+  return !world.socialAccounts.some(account => account.ownerId === personId && (
+    account.posts.some(post => post.date.year === world.date.year) ||
+    account.archived.some(year => year.year === world.date.year && year.posts > 0)
+  ));
+}
 function controversy(world: World, account: Account, post: Post) {
   const person = world.people[account.ownerId], impact = draw(world, person.id === world.activePersonId ? 'outcomes' : 'npcs', 5, 15);
   const copy = publicCriticismCopy(account.platform, post, ageOn(person, world.date));
@@ -135,7 +149,9 @@ function publish(world: World, account: Account, kind: PostKind, intent: 'authen
   const production = creatorBeforePublish(world,account,account.totalPosts);
   const preferred = (platformContent[account.platform].preferred as readonly string[]).includes(kind);
   const quality = production.bonus + Math.round((person.stats.smarts + person.stats.discipline) / 2) + (person.traits.includes('creative') ? 12 : 0) + (intent === 'polished' ? 15 : 0) + (preferred ? 10 : 0), reach = draw(world, stream, 20, 120), responseRoll = draw(world, stream, 1, 1000);
-  const controversial = responseRoll <= Math.floor((intent === 'provocative' ? 120 : 8)/(production.moderated?2:1)), viral = !controversial && responseRoll > 975;
+  // The existing response draw is also this person's annual criticism chance:
+  // 8% for ordinary posts, 25% for provocative ones, halved by moderation.
+  const controversial = audienceCriticismAvailable(world, person.id) && responseRoll <= Math.floor((intent === 'provocative' ? 250 : 80)/(production.moderated?2:1)), viral = !controversial && responseRoll > 975;
   let views = Math.max(1, Math.round((50 + draw(world, stream, 0, 250) + account.followers * reach / 200 + reachBonus) * (0.5 + quality / 100) * (viral ? draw(world, stream, 20, 80) : intent === 'provocative' ? 2 : 1) * (sponsored ? 0.75 : 1) * (liveMinutes?0.8+liveMinutes/120:1)));
   views = Math.min(10000000000, views); const likes = Math.floor(views * draw(world, stream, 2, 12) / 100), comments = Math.floor(likes / (controversial ? 3 : 12));
   const wantedDelta = controversial ? -Math.max(1, Math.round(account.followers * 0.03)) : Math.max(0, Math.round(views * (quality >= 70 ? 0.018 : 0.008)));
