@@ -157,7 +157,9 @@ test('a failed preference save retains the reviewed form, freezes all inputs whi
     const layers = () => screen.UNSAFE_getByType(CharacterPortrait).findAllByType(Image).map(image => image.props), beforeAcknowledgement = layers(), savedAppearance = world().people[player.id].appearance;
     expect(beforeAcknowledgement.length).toBeGreaterThan(0);
     await press('Continue'); expect(world()).toEqual(resolveCommand(predicted, { type: 'acknowledge', resultId: predicted.pending!.id }, true)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(initial.accounts); expect(world().random).toEqual(initial.random);
-    expect(world().people[player.id].appearance).not.toBe(savedAppearance);
+    // An acknowledgement changes no appearance. Reusing this certified frozen
+    // branch avoids pointless portrait work while retaining immutable safety.
+    expect(world().people[player.id].appearance).toBe(savedAppearance); expect(Object.isFrozen(savedAppearance)).toBe(true);
     expect(layers()).toHaveLength(beforeAcknowledgement.length); layers().forEach((props, index) => { expect(props).toEqual(beforeAcknowledgement[index]); expect(props).toBe(beforeAcknowledgement[index]); });
     const doneRows = context.rows(); await press('Save Preferences'); expect(context.rows()).toEqual(doneRows); context.original(); view.unmount();
   } finally { context.close(); }

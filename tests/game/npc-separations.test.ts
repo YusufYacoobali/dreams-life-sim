@@ -1,3 +1,4 @@
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { createHash } from 'node:crypto';
 import { copyWorld, decodeWorld, encodeWorld, fullName, validateWorld } from '../../src/game/model';
 import { monthFrom } from '../../src/game/calendar';
@@ -168,7 +169,7 @@ test('the original fixed three-pair annual context honestly continues all six at
 test('genuine old complete checkpoint and original pending/result bytes gain only empty new history', () => {
   const sha = (value: string) => createHash('sha256').update(value).digest('hex'); expect(sha(terminal.checkpoint)).toBe('afbd3a1a85bc05cbc046917fd61195545fa9e0704bd2aced19c0be1981809901');
   const world = unpackCheckpoint(terminal.checkpoint, true); expect(world.npcSeparations).toEqual([]); expect(world.bestFriendships).toEqual([]);
-  const historical = JSON.parse(encodeWorld(world));
+  const historical = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(historical[key]).toEqual([]); delete historical[key]; }
   historical.schemaVersion = 34; historical.engineVersion = 35; historical.contentVersion = 10;
   expect(sha(JSON.stringify(historical))).toBe('03cced796c1fb4a0b1f24e63ef0b3cd1673b5fec0412b4dcd4ca8b6b667a92fd'); expect(unpackCheckpoint(packCheckpoint(world), true)).toEqual(world);

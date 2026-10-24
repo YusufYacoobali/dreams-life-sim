@@ -12,7 +12,7 @@ test('the historical policy registration refuses current versions at its actual 
   const initial = createLife('life_entrepreneur_policy_unit', 900, randomCreation(900), { year: 2000, month: 1, day: 1 });
   const versions = { world: initial.schemaVersion, engine: initial.engineVersion, content: initial.contentVersion };
   expect(expectedVersions).toEqual({ world: 34, engine: 35, content: 10 });
-  expect(versions).toEqual({ world: 48, engine: 50, content: 27 });
+  expect(versions).toEqual({ world: 49, engine: 51, content: 28 });
   const driverSource = readFileSync(join(__dirname, '../../tools/run-entrepreneur-sweep.cjs'), 'utf8');
   expect(createHash('sha256').update(driverSource).digest('hex')).toBe('21cb42091ac828b797cccb27d11b712d517dac18d4cbcfdbe74fb620af17c89a');
   // Execute only the actual frozen guard statement, not the CLI or a new birth.

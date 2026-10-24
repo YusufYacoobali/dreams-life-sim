@@ -209,23 +209,39 @@ function lastMonth(world: World) {
   world.annual = { id: 'year_callback_boundary', startDate, targetDate: monthFrom(startDate, 12), monthsProcessed: 11, stage: 'months', pausedForPlanning: true };
   return validateWorld(world);
 }
-test.each(['decline', 'care'] as const)('two genuine callbacks due in month twelve retain medical priority and %s resolves the queue once', care => {
+test.each(['ignore', 'doctor'] as const)('two genuine callbacks due in month twelve retain symptom priority and %s leaves noncritical school plans available', care => {
   let world = planned('project'); world.date = monthFrom(world.date, 1); schoolMonth(world); world = promise(world, 'arcade');
   const dueMonth = world.storyThreads[0].dueMonth; expect(world.storyThreads[1].dueMonth).toBe(dueMonth);
   addCondition(world, world.people[world.activePersonId], 'asthma', 75);
   world = resolveCommand(lastMonth(world), { type: 'resume' });
   expect(world.annual?.monthsProcessed).toBe(12); expect(storyMonthNumber(world.date)).toBe(dueMonth);
-  expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');
+  expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-symptoms');
   expect(world.deferred.filter(item => item.event.kind === 'decision' && item.event.templateId.startsWith('story-'))).toHaveLength(2);
   const target = { ...world.annual!.targetDate }; world = choose(decodeWorld(encodeWorld(world)), care);
-  if (care === 'care') { expect(world.storyThreads.every(item => item.status === 'cancelled')).toBe(true); expect(world.deferred).toEqual([]); }
   world = drain(world);
   if (world.annual) world = drain(resolveCommand(world, { type: 'resume' }));
   expect(world.date).toEqual(target); expect(world.annual).toBeNull(); expect(world.pending).toBeNull();
-  expect(world.storyThreads.every(item => item.status === (care === 'care' ? 'cancelled' : 'resolved'))).toBe(true);
-  expect(world.ledger.filter(item => item.category === 'story-outing')).toHaveLength(care === 'care' ? 0 : 1);
-  for (const thread of world.storyThreads) expect(world.journal.filter(item => item.id === thread.offeredEventId + '_choice')).toHaveLength(care === 'care' ? 0 : 1);
+  expect(world.people[world.activePersonId].health.hospitalizedUntil).toBeNull();
+  expect(world.storyThreads.every(item => item.status === 'resolved')).toBe(true);
+  expect(world.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1);
+  for (const thread of world.storyThreads) expect(world.journal.filter(item => item.id === thread.offeredEventId + '_choice')).toHaveLength(1);
+  const records = world.people[world.activePersonId].health.records;
+  expect(records.some(record => record.kind === (care === 'doctor' ? 'symptoms' : 'symptoms-ignored'))).toBe(true);
   validateWorld(world);
+});
+
+test('a genuine critical admission in month twelve cancels unavailable in-person callbacks without billing a fictional outing', () => {
+  let world = planned('project'); world.date = monthFrom(world.date, 1); schoolMonth(world); world = promise(world, 'arcade');
+  addCondition(world, world.people[world.activePersonId], 'asthma', 95);
+  world = resolveCommand(lastMonth(world), { type: 'resume' });
+  expect(world.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  expect(world.pendingPriority).toBe(140);
+  expect(world.people[world.activePersonId].health.hospitalizedUntil).not.toBeNull();
+  expect(world.storyThreads.every(thread => thread.status === 'cancelled')).toBe(true);
+  expect(world.ledger.filter(item => item.category === 'story-outing')).toHaveLength(0);
+  const target = { ...world.annual!.targetDate }; world = drain(world);
+  if (world.annual) world = drain(resolveCommand(world, { type: 'resume' }));
+  expect(world.date).toEqual(target); expect(world.pending).toBeNull(); expect(world.annual).toBeNull(); validateWorld(world);
 });
 
 test.each(['not-guilty', 'guilty'] as const)('a real month-twelve hearing precedes the project and a %s verdict keeps or cancels its exact decision', plea => {
@@ -243,21 +259,29 @@ test.each(['not-guilty', 'guilty'] as const)('a real month-twelve hearing preced
   validateWorld(world);
 });
 
-test.each(['decline', 'care'] as const)('simultaneous actual medical and legal events in month twelve preserve priority, cancellation and the annual cursor after %s', care => {
+test.each(['noncritical', 'critical'] as const)('simultaneous %s medical and legal events in month twelve preserve actual priority, cancellation and the annual cursor', severity => {
   let world = planned('project', 16); world.date = monthFrom(world.date, 1); world = arrest(world, world.activePersonId); funds(world, world.activePersonId);
   world.cases[0].trialRoll = 100; world = drain(choose(world, 'bail'));
-  addCondition(world, world.people[world.activePersonId], 'asthma', 75);
+  addCondition(world, world.people[world.activePersonId], 'asthma', severity === 'critical' ? 95 : 75);
   world = resolveCommand(lastMonth(world), { type: 'resume' }); const target = { ...world.annual!.targetDate };
-  expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency');
-  expect(world.deferred.map(item => item.event.kind === 'decision' && item.event.templateId)).toEqual(['court-hearing', 'story-project-promise']);
-  world = ack(choose(decodeWorld(encodeWorld(world)), care));
+  if (severity === 'critical') {
+    expect(world.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+    expect(world.deferred.map(item => item.event.kind === 'decision' && item.event.templateId)).toEqual(['court-hearing']);
+    world = ack(decodeWorld(encodeWorld(world)));
+  } else {
+    expect(world.deferred.map(item => item.event.kind === 'decision' && item.event.templateId)).toEqual(['medical-symptoms', 'story-project-promise']);
+  }
   expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('court-hearing');
-  expect(world.storyThreads[0].status).toBe(care === 'care' ? 'cancelled' : 'offered');
+  expect(world.storyThreads[0].status).toBe(severity === 'critical' ? 'cancelled' : 'offered');
   world = ack(choose(decodeWorld(encodeWorld(world)), 'not-guilty'));
-  if (care === 'decline') { expect(world.pending?.id).toBe(world.storyThreads[0].offeredEventId); world = ack(choose(world, 'ask-help')); }
+  if (severity === 'noncritical') {
+    expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-symptoms');
+    world = ack(choose(world, 'ignore'));
+    expect(world.pending?.id).toBe(world.storyThreads[0].offeredEventId); world = ack(choose(world, 'ask-help'));
+  }
   world = drain(world); if (world.annual) world = drain(resolveCommand(world, { type: 'resume' }));
   expect(world.date).toEqual(target); expect(world.annual).toBeNull(); expect(world.cases[0].status).toBe('acquitted');
-  expect(world.storyThreads[0].status).toBe(care === 'care' ? 'cancelled' : 'resolved'); validateWorld(world);
+  expect(world.storyThreads[0].status).toBe(severity === 'critical' ? 'cancelled' : 'resolved'); validateWorld(world);
 });
 
 test('arcade attendance reports capped happiness, energy and both bonds while still charging the exact quote once', () => {
