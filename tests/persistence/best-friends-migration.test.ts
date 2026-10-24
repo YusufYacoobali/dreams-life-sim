@@ -5,6 +5,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import * as checkpoints from '../../src/persistence/checkpoints';
 import { database } from '../support/sqlite';
 import terminal from '../fixtures/v34-natural-editorial-us-checkpoint.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 
@@ -13,7 +14,7 @@ test('the genuine completed C35 US checkpoint keeps its immutable canonical proo
   expect(terminal.versions).toEqual({ world: 34, engine: 35, content: 10 }); expect(Buffer.byteLength(terminal.checkpoint)).toBe(526545); expect(sha(terminal.checkpoint)).toBe('afbd3a1a85bc05cbc046917fd61195545fa9e0704bd2aced19c0be1981809901');
   expect(terminal.provenance.source.game).toBe('84625d5208d1a6815dccc2802ff75c83393eeb143c382e83d60ed0dafaf94f33'); expect(terminal.provenance.commandsAfterAcknowledgedBirth).toBe(225); expect(terminal.observation.naturallyDied).toBe(true);
   const world = unpackCheckpoint(terminal.checkpoint, true); expect(world).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], revision: 226, bestFriendships: [] });
-  const old = JSON.parse(encodeWorld(world));
+  const old = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(old[key]).toEqual([]); delete old[key]; }
   old.schemaVersion = 34; old.engineVersion = 35; old.contentVersion = 10;
   // Do not remove old school withdrawals or any bound story/result/history data.

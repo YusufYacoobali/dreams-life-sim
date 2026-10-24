@@ -7,13 +7,14 @@ import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v30-native-workplace-story-archive.json';
 import earlier from '../fixtures/v30-native-raise-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine named native result retains all twenty original moments, twenty-one worlds and earlier raise history', () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const contents = decodeSave(JSON.stringify(archive)), originals = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [contents.world, ...contents.snapshots.map(item => unpackCheckpoint(item.payload))];
   expect(originals[0]).toMatchObject({ schemaVersion: 30, engineVersion: 29, contentVersion: 6, revision: 76 });
-  worlds.forEach((world, i) => { const value = JSON.parse(encodeWorld(world)); for (const key of Object.keys(originals[i]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(value[key]).toEqual(originals[i][key]); });
+  worlds.forEach((world, i) => { const value = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); for (const key of Object.keys(originals[i]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(value[key]).toEqual(originals[i][key]); });
   expect(contents.snapshots).toEqual(archive.snapshots); expect(contents.snapshots).toHaveLength(20);
   for (const point of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === point.summary.id)).toEqual(point);
   expect(contents.world.pending).toMatchObject({ kind: 'result', title: 'The complete version', body: 'Thando Naidoo thanks you both. Sipho Naidoo does not have to interrupt to become visible.' });

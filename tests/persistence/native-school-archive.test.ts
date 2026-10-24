@@ -8,12 +8,13 @@ import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v28-native-school-archive.json';
 import reading from '../fixtures/v28-ordinary-hobby-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine native school archive keeps every current/prior field, original reading moment and both checkpoint formats', () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const decoded = decodeSave(JSON.stringify(archive)), payloads = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)], worlds = [decoded.world, ...decoded.snapshots.map(item => unpackCheckpoint(item.payload))];
-  payloads.forEach((payload, index) => { const original = raw(payload), current = JSON.parse(encodeWorld(worlds[index])); for (const key of Object.keys(original).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[key]); });
+  payloads.forEach((payload, index) => { const original = raw(payload), current = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(worlds[index]))); for (const key of Object.keys(original).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[key]); });
   expect(raw(archive.checkpoint)).toMatchObject({ schemaVersion: 28, engineVersion: 27, contentVersion: 4, revision: 53 });
   expect(archive.snapshots.map(item => JSON.parse(item.payload).format)).toEqual([...Array(4).fill('dreams-checkpoint-v1'), ...Array(6).fill('dreams-checkpoint-v2')]);
   for (const moment of reading.snapshots) expect(archive.snapshots.find(item => item.summary.id === moment.summary.id)).toEqual(moment);

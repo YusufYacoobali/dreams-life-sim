@@ -6,13 +6,14 @@ import { SaveRepository } from '../../src/persistence/repository';
 import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v28-native-teen-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine native teen result preserves every current/prior field and all sixteen original mixed-format moments', () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const save = decodeSave(JSON.stringify(archive)), original = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];
   expect(original[0]).toMatchObject({ schemaVersion: 28, engineVersion: 27, contentVersion: 5, revision: 46 });
-  worlds.forEach((world, index) => { const current = JSON.parse(encodeWorld(world)); expect(current).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], hourlyContracts: [], hobbyEvents: [], workplaces: [], workRaises: [] }); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
+  worlds.forEach((world, index) => { const current = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); expect(current).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], hourlyContracts: [], hobbyEvents: [], workplaces: [], workRaises: [] }); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
   expect(save.snapshots).toEqual(archive.snapshots); expect(save.snapshots).toHaveLength(16);
   expect(save.world.pending).toMatchObject({ kind: 'result', title: 'A mutual arrangement', effects: [{ label: 'Respect', value: '+3%' }, { label: 'Happiness', value: '+0%' }, { label: 'Relationship', value: '+0%' }] });
   expect(save.world.people[save.world.activePersonId].stats.respect).toBe(59); expect(save.world.ledger.filter(item => item.category === 'story-outing')).toHaveLength(1);

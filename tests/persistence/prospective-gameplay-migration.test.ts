@@ -7,6 +7,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import native from '../fixtures/v32-native-hourly-checkpoints.json';
 import project from '../fixtures/v27-leisure-archive.json';
 import c15 from '../fixtures/v39-content15-native-choice.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const histories = ['teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities'] as const;
@@ -30,7 +31,7 @@ test('the actual Android C15 pending choice migrates only its root versions and 
   expect(raw).toMatchObject({ schemaVersion: 39, engineVersion: 40, contentVersion: 15, revision: 83, date: { year: 2044, month: 10, day: 21 }, pending: { kind: 'decision', id: 'event_2044_adult-unwanted-speech', templateId: 'adult-unwanted-speech' } });
   expect(raw.pending.choices.map((choice: { id: string }) => choice.id)).toEqual(['brief', 'pass', 'ramble']);
   const migrated = unpackCheckpoint(payload, true), encoded = encodeWorld(migrated);
-  expect(JSON.parse(encoded)).toEqual({ ...raw, schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [] });
+  expect(JSON.parse(withoutMedicalEpisodeMetadata(encoded))).toEqual({ ...raw, schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], miniGames: [], personSupportRequests: [], personActionHistory: [], rentalLeases: [], campusCommunities: [] });
   expect(migrated.pending).toEqual(raw.pending); expect(migrated.random).toEqual(raw.random);
   expect(encodeWorld(unpackCheckpoint(packCheckpoint(migrated), true))).toBe(encoded);
   expect(readFileSync(join(__dirname, '../fixtures/v39-content15-native-choice.json'))).toEqual(originalBytes);

@@ -7,13 +7,14 @@ import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v29-native-workplace-archive.json';
 import earlier from '../fixtures/v28-native-teen-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine native workplace result preserves all eighteen worlds, seventeen original moments and actual paid staff history', () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const save = decodeSave(JSON.stringify(archive)), original = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];
   expect(original[0]).toMatchObject({ schemaVersion: 29, engineVersion: 28, contentVersion: 5, revision: 54 });
-  worlds.forEach((world, index) => { const current = JSON.parse(encodeWorld(world)); expect(current.workRaises).toEqual([]); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
+  worlds.forEach((world, index) => { const current = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); expect(current.workRaises).toEqual([]); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
   expect(save.snapshots).toEqual(archive.snapshots); expect(save.snapshots).toHaveLength(17);
   for (const point of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === point.summary.id)).toEqual(point);
   const world = save.world, prior = unpackCheckpoint(save.snapshots.find(item => item.summary.id === 'snapshot_r_51')!.payload);

@@ -8,6 +8,7 @@ import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/per
 import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoints';
 import * as checkpoints from '../../src/persistence/checkpoints';
 import native from '../fixtures/v35-native-best-friend-checkpoints.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const newHistories = ['teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves'] as const;
@@ -17,10 +18,10 @@ const observations = [
   { key: 'backup', revision: 139, bytes: 142288, payloadSha: 'a9b8f03be86f03d7e406cbbfa73d6ddbfb45767e75902917f94157ea43b1263e', canonicalSha: 'e7b41dc5e35af033dae7945d8ce2c09eaa9e585e2bc8b26a3ee978240eaccc22' },
 ] as const;
 
-/** Normalize only the C37/C38 empty histories and three current root tags.
+/** Normalize new episode metadata, C37/C38 empty histories and current root tags.
  * The actual nonempty best-friend agreement and every older field stay in the hash. */
 function originalCanonical(world: World) {
-  const original = JSON.parse(encodeWorld(world));
+  const original = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] });
   expect(original.rentalLeases).toEqual([]); for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases;
   expect(original.campusCommunities).toEqual([]); delete original.campusCommunities;

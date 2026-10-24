@@ -1,5 +1,6 @@
 import { gunzipSync, strFromU8 } from 'fflate';
 import { encodeWorld } from '../../src/game/model';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { decodeSave } from '../../src/persistence/archive';
 import { unpackCheckpoint } from '../../src/persistence/checkpoints';
 import { SaveRepository } from '../../src/persistence/repository';
@@ -13,7 +14,7 @@ test('the genuine accepted raise preserves all nineteen worlds, eighteen origina
   const raw = (payload: string) => { const part = JSON.parse(payload); return part.format === 'dreams-checkpoint-v1' ? inflate(part) : { ...inflate(part.main), ledger: part.ledger.flatMap(inflate) }; };
   const save = decodeSave(JSON.stringify(archive)), original = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [save.world, ...save.snapshots.map(item => unpackCheckpoint(item.payload))];
   expect(original[0]).toMatchObject({ schemaVersion: 30, engineVersion: 29, contentVersion: 5, revision: 62 });
-  worlds.forEach((world, index) => { const current = JSON.parse(encodeWorld(world)); expect(current.contentVersion).toBe(28); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
+  worlds.forEach((world, index) => { const current = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); expect(current.contentVersion).toBe(28); for (const key of Object.keys(original[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(current[key]).toEqual(original[index][key]); });
   expect(save.snapshots).toEqual(archive.snapshots); expect(save.snapshots).toHaveLength(18);
   for (const point of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === point.summary.id)).toEqual(point);
   const world = save.world, person = world.people[world.activePersonId];

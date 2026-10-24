@@ -9,6 +9,7 @@ import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v28-ordinary-hobby-archive.json';
 import earlier from '../fixtures/v27-responsive-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine eight-hobby archive preserves both codecs, nine original moments and earned reading progress through cold continuation', async () => {
   const inflate = (part: { data: string }) => JSON.parse(strFromU8(gunzipSync(Buffer.from(part.data, 'base64'))));
@@ -18,7 +19,7 @@ test('the genuine eight-hobby archive preserves both codecs, nine original momen
   };
   const decoded = decodeSave(JSON.stringify(archive)), originalWorlds = [raw(archive.checkpoint), ...archive.snapshots.map(item => raw(item.payload))];
   [decoded.world, ...decoded.snapshots.map(item => unpackCheckpoint(item.payload))].forEach((world, index) => {
-    const encoded = JSON.parse(encodeWorld(world));
+    const encoded = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
     for (const key of Object.keys(originalWorlds[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(originalWorlds[index][key]);
   });
   expect(originalWorlds[0]).toMatchObject({ schemaVersion: 28, engineVersion: 27, contentVersion: 4 });

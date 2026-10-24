@@ -11,6 +11,7 @@ import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import archive from '../fixtures/v30-native-people-block-archive.json';
 import earlier from '../fixtures/v30-native-workplace-story-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 test('the genuine native v3 result migrates only its content tag and retains all twenty original mixed-format moments', () => {
   const bytes = readFileSync(join(__dirname, '../fixtures/v30-native-people-block-archive.json'));
@@ -20,7 +21,7 @@ test('the genuine native v3 result migrates only its content tag and retains all
   expect(JSON.parse(archive.checkpoint).format).toBe('dreams-checkpoint-v3');
   const contents = decodeSave(JSON.stringify(archive)), originals = [archive.checkpoint, ...archive.snapshots.map(item => item.payload)].map(raw), worlds = [contents.world, ...contents.snapshots.map(item => unpackCheckpoint(item.payload))];
   expect(originals[0]).toMatchObject({ schemaVersion: 30, engineVersion: 29, contentVersion: 6, revision: 82 }); expect(worlds[0].contentVersion).toBe(28);
-  worlds.forEach((world, index) => { const value = JSON.parse(encodeWorld(world)); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(value[key]).toEqual(originals[index][key]); });
+  worlds.forEach((world, index) => { const value = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world))); for (const key of Object.keys(originals[index]).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(value[key]).toEqual(originals[index][key]); });
   expect(contents.snapshots).toEqual(archive.snapshots); expect(contents.snapshots).toHaveLength(20); for (const point of earlier.snapshots) expect(archive.snapshots.find(item => item.summary.id === point.summary.id)).toEqual(point);
   expect(contents.world.pending).toMatchObject({ kind: 'result', title: 'Routine saved' }); expect(contents.world.people[contents.world.activePersonId].health.routine.exercise).toBe('none');
 }, 30000);

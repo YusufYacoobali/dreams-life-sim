@@ -11,6 +11,7 @@ import { packCheckpoint, unpackCheckpoint } from '../../src/persistence/checkpoi
 import * as checkpoints from '../../src/persistence/checkpoints';
 import native from '../fixtures/v35-native-best-friend-checkpoints.json';
 import archive from '../fixtures/v30-native-workplace-story-archive.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 // C39 current-version assertions wait for the coordinated future runtime union.
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
@@ -33,10 +34,10 @@ function arrangedWorld36() {
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases; delete original.npcMoves; original.schemaVersion = 36; original.engineVersion = 37; original.contentVersion = 12;
   return original;
 }
-/** Remove only fields demonstrably absent from this immutable World35 input.
+/** Remove only new episode metadata and fields absent from this World35 input.
  * All nonempty friendship facts and all older source fields stay in the hash. */
 function originalNativeCanonical(world: World) {
-  const original = JSON.parse(encodeWorld(world));
+  const original = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [], npcMoves: [] });
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory']) { expect(original[key]).toEqual([]); delete original[key]; } delete original.rentalLeases; delete original.npcMoves;
   expect(original.campusCommunities).toEqual([]); delete original.campusCommunities;
@@ -154,8 +155,8 @@ test.each([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26])('complete re
   } finally { jest.restoreAllMocks(); context.close(); }
 }, 60000);
 
-test('future reader29 is refused without decode, transaction or changes to any of the eight populated tables', async () => {
-  const context = await fixtureDatabase(29);
+test('future reader30 is refused without decode, transaction or changes to any of the eight populated tables', async () => {
+  const context = await fixtureDatabase(30);
   try {
     const before = context.rows(); context.forbidWrites(); const unpack = jest.spyOn(checkpoints, 'unpackCheckpoint');
     const forbidden: SqlDatabase = { ...context.driver, transaction: async () => { throw new Error('future reader must refuse before a transaction'); } };
