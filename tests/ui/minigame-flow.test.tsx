@@ -398,11 +398,11 @@ test('fixed playground controls, forfeit and replay never dispatch a live comman
   expect(encodeWorld(await repository.load(initial.id))).toBe(before);
 });
 
-test('ordinary builds and switched-off God Mode cannot open the playground', async () => {
+test('switched-off God Mode cannot open the playground', async () => {
   await setup();
   mockAllowed = false;
   await show(<MiniGamePlayground />);
-  expect(screen.getByText(/internal\/developer builds/)).toBeOnTheScreen();
+  expect(screen.getByText('Enable God Mode in Settings to use the playground.')).toBeOnTheScreen();
   expect(screen.queryByRole('button', { name: 'Play' })).toBeNull();
 });
 

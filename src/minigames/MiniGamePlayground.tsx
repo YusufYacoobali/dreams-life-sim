@@ -34,10 +34,7 @@ export function MiniGamePlayground() {
     return (
       <Page bottomSafeArea>
         <Header title="Mini-Game Playground" onBack={() => router.back()} />
-        <Body>
-          The playground is available in internal/developer builds with God Mode
-          enabled.
-        </Body>
+        <Body>Enable God Mode in Settings to use the playground.</Body>
       </Page>
     );
   const start = async (assisted: boolean) => {

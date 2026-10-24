@@ -4,13 +4,11 @@ Open a living, acknowledged life, then **Settings → God Mode → Open God Mode
 
 ## Build access
 
-- Local Metro/Expo Go development runs use React Native's `__DEV__` flag.
-- `eas build --profile internal` and `eas build --profile preview` use the supplied internal-distribution profiles. `app.config.cjs` requires the profile, `EAS_BUILD_DISTRIBUTION=internal` and `DREAMS_GOD_MODE_TESTING=1` together before embedding `extra.godModeTesting=true`.
-- Production and unknown profiles always overwrite that extra flag to `false`, even if stale static configuration or an environment variable requests testing access. A saved toggle alone never authorizes the editor or the store command.
+As of 24 October 2026, God Mode is temporarily available in **all builds**, including production/store builds, at the owner's request for testing. `app.config.cjs` embeds `extra.godModeTesting=true` for every profile, without requiring internal-distribution environment switches. Metro/Expo Go development access also remains available.
 
-Keep internal and public binaries/configuration separate. If OTA updates are added later, their runtime/channel configuration must preserve this separation. The present app does not configure OTA updates.
+The Settings toggle remains off until enabled, and the loaded preference still gates the editor, shortcuts, playground and save commands. Switching off preserves prior edits. An already installed APK needs rebuilding and reinstalling to receive the updated configuration; the present app does not configure OTA updates.
 
-`src/access/godMode.ts` contains the access policy; `buildAccess.ts` supplies trusted build configuration. `createGameStore` denies editing unless its access dependency allows it, and the native store combines build access with the loaded testing preference. Editing commands have no knowledge of purchases. Future verified Pro access can be added to this boundary; no purchase SDK, entitlement, subscription or paywall is implemented.
+`src/access/godMode.ts` contains the access policy; `buildAccess.ts` supplies trusted build configuration. `createGameStore` denies editing unless its access dependency allows it, and the native store combines build access with the loaded testing preference. Missing/invalid capability metadata still fails closed outside development. Editing commands have no knowledge of purchases. No purchase SDK, entitlement, subscription or paywall is implemented.
 
 ## Editor
 
@@ -32,6 +30,8 @@ Money goes through `post()` with category `god-mode-adjustment`, zero debt delta
 `gameStore.editGodMode()` authorizes, validates and commits through the normal repository. A unique retry identifier prevents separate editor sessions from sharing receipts. Failed writes publish no new world. The automatic **Before God Mode** checkpoint, backup, receipt and changed life commit in the same SQLite transaction. Existing Time Machine, export/import and recovery support the resulting saves without a World/schema-version migration.
 
 ## Verification
+
+On 24 October 2026, the all-build testing override passed **109 tests across six focused suites**, app/test TypeScript checks, runtime import-cycle checks and a production Android Metro/Hermes export. The actual Expo public production configuration resolves `godModeTesting=true` with store distribution and no testing environment switch. Editor UI/save journeys use the real build gate with `__DEV__=false`, including enable, edit, save/reload, failed writes, conflicts and disabling. Access cases cover production, development, internal, preview and unknown profiles. This verifies configuration, UI/store integration and bundling; it does not establish installation on a physical device.
 
 The dedicated suites are `tests/game/god-mode.test.ts`, `tests/state/god-mode-save.test.ts`, `tests/state/god-mode-access.test.ts` and `tests/ui/god-mode-flow.test.tsx`. They exercise all stat/skill boundaries, all nine currencies, protected cash, relationship and study invariants, atomic failure/retry, conflicts, checkpoint branches, archives, cold-store reload, ordinary gameplay consequences, access gating and actual editor interaction.
 

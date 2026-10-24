@@ -9,14 +9,15 @@ import { createLife, randomCreation } from '../../src/game/createLife';
 import { encodeWorld, fullName } from '../../src/game/model';
 import { formatMoney } from '../../src/game/money';
 import { countries } from '../../src/game/countries';
+import Constants from 'expo-constants';
+import { isGodModeBuild } from '../../src/access/buildAccess';
 import { SaveRepository } from '../../src/persistence/repository';
 import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
-let mockStore: ReturnType<typeof createGameStore>, mockPreferences: ReturnType<typeof createPreferencesStore>, mockAllowed = true;
+let mockStore: ReturnType<typeof createGameStore>, mockPreferences: ReturnType<typeof createPreferencesStore>;
 jest.mock('expo-router', () => ({ router: { back: jest.fn(), push: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 jest.mock('../../src/state/usePreferences', () => ({ usePreferences: (selector: unknown) => require('zustand').useStore(mockPreferences, selector) }));
-jest.mock('../../src/access/buildAccess', () => ({ isGodModeBuild: () => mockAllowed }));
 import GodMode from '../../app/god-mode';
 import Settings from '../../app/settings';
 import Assets from '../../app/(game)/(tabs)/assets';
@@ -26,17 +27,22 @@ const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ fr
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const tab = (name: string) => fireEvent.press(screen.getByRole('tab', { name }));
 async function fixture() {
-  mockAllowed = true;
+  Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
   const db = database(), repository = new SaveRepository(db.driver); await repository.initialise();
   const before = { ...createLife('life_god_ui', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }), birthAcknowledged: true }; await repository.create(before);
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
   let sequence = 0;
-  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_ui_' + sequence++, godModeAccess: () => mockAllowed && mockPreferences.getState().settings.godModeEnabled };
+  const deps = { repository: async () => repository, date: () => before.date, id: () => 'life_ui_' + sequence++, godModeAccess: () => isGodModeBuild() && mockPreferences.getState().settings.godModeEnabled };
   mockStore = createGameStore(deps); await mockStore.getState().bootstrap();
   return { ...db, repository, before, deps };
 }
 
-test('Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async () => {
+const buildGlobals = globalThis as unknown as { __DEV__: boolean };
+let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig>['extra'];
+beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; buildGlobals.__DEV__ = false; });
+afterEach(() => { buildGlobals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
+
+test('release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async () => {
   const { sqlite, repository, before, deps } = await fixture(), view = render(frame(<Settings />));
   expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   await act(async () => { fireEvent(screen.getByRole('switch', { name: 'God Mode' }), 'valueChange', true); });
@@ -71,8 +77,8 @@ test('invalid edits, reset, destructive confirmation, cancel and failed-save ret
   view.unmount(); sqlite.close();
 });
 
-test('public builds hide Settings and shortcuts and deny direct editor saves even with a persisted toggle', async () => {
-  const { sqlite, before, repository } = await fixture(); await mockPreferences.getState().setGodModeEnabled(true); mockAllowed = false;
+test('missing testing capability still denies direct editor saves even with a persisted toggle', async () => {
+  const { sqlite, before, repository } = await fixture(); await mockPreferences.getState().setGodModeEnabled(true); Constants.expoConfig!.extra = { godModeTesting: false };
   const view = render(frame(<Settings />)); expect(screen.queryByRole('switch', { name: 'God Mode' })).toBeNull(); expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   view.rerender(frame(<GodModeShortcut />)); expect(screen.queryByRole('button', { name: /God Mode/ })).toBeNull();
   view.rerender(frame(<GodMode />)); expect(screen.getByText('God Mode is unavailable or switched off.')).toBeTruthy(); expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
