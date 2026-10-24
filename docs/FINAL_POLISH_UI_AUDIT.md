@@ -37,9 +37,10 @@ These are interaction or gameplay states rather than informational callouts:
   primary buttons, opening/death scenes and modal backdrops retain their roles.
 
 The audit checked both theme references and hard-coded background colours.
-No remaining ordinary decorative blue explanation was identified in the owned
-screens. The integrated medical, partner and Life changes require root review
-after merging; this document is not a physical-device inspection claim.
+No remaining ordinary decorative blue explanation was identified in the audit.
+The integrated medical, partner and Life changes were reviewed with production
+component captures in light and dark themes. These are browser layout captures,
+not a physical-device inspection claim.
 
 ## Durable purchase navigation
 
@@ -61,7 +62,7 @@ warm retry, cold load, duplicate confirmation, cancellation, stale callbacks,
 insufficient funds and leaving during a save. Property, vehicle and possession
 cases render the real Assets component after a mocked router handoff and verify
 the new inventory plus one saved result. Router/native-stack behaviour and
-physical-device pixels are separate integration checks owned by the root task.
+physical-device pixels remain unverified without an attached device or simulator.
 
 ## Focused checks
 

@@ -1,0 +1,213 @@
+{
+  "renderer": "Browser CSS/SVG adapter of production RN trees, NOT native screenshots or native navigation proof",
+  "browser": "154.0.8037.57",
+  "captures": [
+    "astronaut-requirement-dark-large.png",
+    "astronaut-requirement-dark-large-bottom.png",
+    "astronaut-requirement-light.png",
+    "astronaut-requirement-light-bottom.png",
+    "condition-undiagnosed-dark-large.png",
+    "condition-undiagnosed-dark-large-bottom.png",
+    "condition-undiagnosed-light.png",
+    "condition-undiagnosed-light-bottom.png",
+    "doctor-dark-large.png",
+    "doctor-dark-large-bottom.png",
+    "doctor-light.png",
+    "doctor-light-bottom.png",
+    "family-dark-large.png",
+    "family-dark-large-bottom.png",
+    "family-light.png",
+    "family-light-bottom.png",
+    "family-unavailable-dark-large.png",
+    "family-unavailable-dark-large-bottom.png",
+    "family-unavailable-light.png",
+    "family-unavailable-light-bottom.png",
+    "medical-diagnosis-dark-large.png",
+    "medical-diagnosis-dark-large-bottom.png",
+    "medical-diagnosis-light.png",
+    "medical-diagnosis-light-bottom.png",
+    "medical-legacy-dark-large.png",
+    "medical-legacy-dark-large-bottom.png",
+    "medical-legacy-light.png",
+    "medical-legacy-light-bottom.png",
+    "medical-symptoms-dark-large.png",
+    "medical-symptoms-dark-large-bottom.png",
+    "medical-symptoms-light.png",
+    "medical-symptoms-light-bottom.png",
+    "medical-treatment-dark-large.png",
+    "medical-treatment-dark-large-bottom.png",
+    "medical-treatment-light.png",
+    "medical-treatment-light-bottom.png",
+    "medical-urgent-dark-large.png",
+    "medical-urgent-dark-large-bottom.png",
+    "medical-urgent-light.png",
+    "medical-urgent-light-bottom.png",
+    "partner-discuss-dark-large.png",
+    "partner-discuss-dark-large-baby-actions.png",
+    "partner-discuss-dark-large-bottom.png",
+    "partner-discuss-light.png",
+    "partner-discuss-light-baby-actions.png",
+    "partner-discuss-light-bottom.png",
+    "partner-ready-dark-large.png",
+    "partner-ready-dark-large-baby-actions.png",
+    "partner-ready-dark-large-bottom.png",
+    "partner-ready-light.png",
+    "partner-ready-light-baby-actions.png",
+    "partner-ready-light-bottom.png",
+    "purchase-confirm-dark-large.png",
+    "purchase-confirm-dark-large-bottom.png",
+    "purchase-confirm-light.png",
+    "purchase-confirm-light-bottom.png",
+    "purchase-saved-context-dark-large.png",
+    "purchase-saved-context-dark-large-bottom.png",
+    "purchase-saved-context-light.png",
+    "purchase-saved-context-light-bottom.png"
+  ],
+  "actionChecks": [
+    {
+      "tree": "partner-discuss-dark-large-before",
+      "located": true,
+      "babyActionPresent": false,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-discuss-dark-large-after",
+      "located": true,
+      "babyActionPresent": true,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-discuss-light-before",
+      "located": true,
+      "babyActionPresent": false,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-discuss-light-after",
+      "located": true,
+      "babyActionPresent": true,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-ready-dark-large-before",
+      "located": true,
+      "babyActionPresent": false,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-ready-dark-large-after",
+      "located": true,
+      "babyActionPresent": true,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-ready-light-before",
+      "located": true,
+      "babyActionPresent": false,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    },
+    {
+      "tree": "partner-ready-light-after",
+      "located": true,
+      "babyActionPresent": true,
+      "action": "Go on a Date. Choose an activity and see its cost"
+    }
+  ],
+  "modalChecks": [
+    {
+      "tree": "medical-diagnosis-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-diagnosis-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-legacy-dark-large-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-legacy-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-legacy-light-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-legacy-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-symptoms-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-symptoms-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-treatment-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-treatment-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-urgent-dark-large-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-urgent-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-urgent-light-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "medical-urgent-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-confirm-dark-large-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-confirm-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-confirm-light-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-confirm-light-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-saved-context-dark-large-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-saved-context-dark-large-after",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-saved-context-light-before",
+      "lastActionVisible": true
+    },
+    {
+      "tree": "purchase-saved-context-light-after",
+      "lastActionVisible": true
+    }
+  ],
+  "allImagesDecoded": true,
+  "fontLoaded": true,
+  "uniqueClipIds": true,
+  "phoneOverflow": [],
+  "images": 464,
+  "errors": [],
+  "externalRequests": []
+}

@@ -1,0 +1,1025 @@
+{
+  "scope": "Interleaved same-process fixed-save Node simulation/checkpoint pairs; no SQLite, React or native-device/frame claim. Order alternates each sample; one warm-up each side; optional forced GC is outside timed spans.",
+  "baselineCommit": "9253a1b1a1453f465bbd7ae7c2d8bad469c535d3",
+  "candidateRuntimeCommit": "2f872bf",
+  "sourceHashes": {
+    "baseline": "4b69173698204d71eeebcc81a0f1da8708223f5b89e4730429306be53d3c5675",
+    "candidate": "1d408713c5a7aa01a7124eaafb789fea23829888057340f088eb8b3c5ef6f0d9"
+  },
+  "inputFileSha256": "25b4f30388f0a90147c20bf7246c5cd4e77f4b9413c2ce05cdd691a57ab850eb",
+  "driverHash": "6ac2224cda364190f3b20a3317430de3560b51a56f42f7580204f00f7d603cd8",
+  "rawSha256": "6187759d9746b0fe66a689db084fc9af63fcf0b949df780056e87d1aafcd9671",
+  "pairsPerCase": 11,
+  "cases": [
+    {
+      "age": 50,
+      "kind": "routine",
+      "commands": 1,
+      "medianPairedRatio": 0.747883479361157,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 52.82849499999975,
+            "p95": 63.51217199999883
+          },
+          "candidate": {
+            "median": 38.5398550000009,
+            "p95": 44.81864999999925
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 31.815150000000358,
+            "p95": 41.17297000000144
+          },
+          "candidate": {
+            "median": 23.7331379999996,
+            "p95": 28.805261999999857
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 20.659858999999415,
+            "p95": 22.861283999998705
+          },
+          "candidate": {
+            "median": 14.78139199999896,
+            "p95": 16.121392000000924
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 82.776,
+            "p95": 128.498
+          },
+          "candidate": {
+            "median": 58.855,
+            "p95": 104.666
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 16069632,
+            "p95": 17985056
+          },
+          "candidate": {
+            "median": 13204328,
+            "p95": 14859872
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 2.6801809999997204,
+            "p95": 7.146139000000403
+          },
+          "candidate": {
+            "median": 3.0270349999991595,
+            "p95": 4.006063000000722
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 12.530251000000135,
+            "p95": 15.128117000000202
+          },
+          "candidate": {
+            "median": 5.349905999999464,
+            "p95": 7.496274000000994
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 2.808101999999053,
+            "p95": 6.560165999999299
+          },
+          "candidate": {
+            "median": 0.06211100000109582,
+            "p95": 0.15633800000068732
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 28.122271000000183,
+            "p95": 37.439148000001296
+          },
+          "candidate": {
+            "median": 20.296508999999787,
+            "p95": 24.98882599999888
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 50,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "medianPairedRatio": 0.952762835978563,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 96.42987500000163,
+            "p95": 154.38600199999928
+          },
+          "candidate": {
+            "median": 91.27585200000067,
+            "p95": 114.17621400000098
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 65.90778599999976,
+            "p95": 116.29935399999886
+          },
+          "candidate": {
+            "median": 63.197801000000254,
+            "p95": 85.66136499999993
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 30.475878999999622,
+            "p95": 38.07937099999981
+          },
+          "candidate": {
+            "median": 27.684171000000788,
+            "p95": 30.033440000001065
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 140.255,
+            "p95": 201.512
+          },
+          "candidate": {
+            "median": 145.177,
+            "p95": 180.094
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 31761520,
+            "p95": 32832944
+          },
+          "candidate": {
+            "median": 32807480,
+            "p95": 33881912
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 2.9466560000000754,
+            "p95": 3.8244340000001102
+          },
+          "candidate": {
+            "median": 3.229773999999452,
+            "p95": 7.077413000002707
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 12.232961000001524,
+            "p95": 18.56580600000234
+          },
+          "candidate": {
+            "median": 12.819578999995429,
+            "p95": 17.76891599999726
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 2.1721230000002834,
+            "p95": 2.7529109999995853
+          },
+          "candidate": {
+            "median": 2.3270190000002913,
+            "p95": 3.049472999999125
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 12.719804000000295,
+            "p95": 55.63970500000141
+          },
+          "candidate": {
+            "median": 11.829239000002417,
+            "p95": 24.79800299999988
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 3.28573200000028,
+            "p95": 5.8273969999991095
+          },
+          "candidate": {
+            "median": 2.5454549999994924,
+            "p95": 4.961310000000594
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 46.86782999999923,
+            "p95": 99.37947399999939
+          },
+          "candidate": {
+            "median": 42.21303899999839,
+            "p95": 63.275682999999844
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 50,
+      "kind": "fullYear",
+      "commands": 2,
+      "medianPairedRatio": 0.9155138526035295,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 119.76233000000138,
+            "p95": 143.72145900000032
+          },
+          "candidate": {
+            "median": 111.52717799999664,
+            "p95": 125.89328300000125
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 74.6657320000013,
+            "p95": 98.41803500000242
+          },
+          "candidate": {
+            "median": 71.93412199999875,
+            "p95": 87.09812399999646
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 44.72584499999721,
+            "p95": 48.19508700000006
+          },
+          "candidate": {
+            "median": 37.45195900000181,
+            "p95": 45.454310000004625
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 179.832,
+            "p95": 232.496
+          },
+          "candidate": {
+            "median": 156.816,
+            "p95": 230.74
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 44975328,
+            "p95": 47128248
+          },
+          "candidate": {
+            "median": -42236696,
+            "p95": 44771648
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 5.752894000001106,
+            "p95": 7.142696000002616
+          },
+          "candidate": {
+            "median": 5.863472000000911,
+            "p95": 9.995038000000932
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 8.62829999999667,
+            "p95": 10.147107999997388
+          },
+          "candidate": {
+            "median": 8.012853999996878,
+            "p95": 10.735390999998344
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 1.7954570000001695,
+            "p95": 2.657858999999007
+          },
+          "candidate": {
+            "median": 1.4851659999985714,
+            "p95": 2.171409999999014
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 18.37025900000299,
+            "p95": 28.974640000000363
+          },
+          "candidate": {
+            "median": 18.02856900000188,
+            "p95": 23.752133999998478
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 5.173793000001751,
+            "p95": 7.59425199999896
+          },
+          "candidate": {
+            "median": 2.358574999998382,
+            "p95": 3.784779999998136
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 59.117801000003965,
+            "p95": 83.67204200000197
+          },
+          "candidate": {
+            "median": 57.561480999997,
+            "p95": 70.95575000000099
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 70,
+      "kind": "routine",
+      "commands": 1,
+      "medianPairedRatio": 0.8422444219900748,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 63.431494000000384,
+            "p95": 82.29262200000085
+          },
+          "candidate": {
+            "median": 53.42482199999722,
+            "p95": 61.61865100000068
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 39.2299380000004,
+            "p95": 55.23555699999997
+          },
+          "candidate": {
+            "median": 34.17782200000147,
+            "p95": 38.75165999999808
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 24.122779000001174,
+            "p95": 29.73351399999956
+          },
+          "candidate": {
+            "median": 19.659701000000496,
+            "p95": 24.185512000000017
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 99.203,
+            "p95": 169.851
+          },
+          "candidate": {
+            "median": 69.382,
+            "p95": 129.674
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 21686792,
+            "p95": 21921960
+          },
+          "candidate": {
+            "median": 18283400,
+            "p95": 18506184
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 3.9891090000019176,
+            "p95": 14.669558999998117
+          },
+          "candidate": {
+            "median": 4.447166999998444,
+            "p95": 7.624955999999656
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 13.421409999999014,
+            "p95": 17.312769000000117
+          },
+          "candidate": {
+            "median": 7.850757000000158,
+            "p95": 9.137700999999652
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 4.0038819999972475,
+            "p95": 6.459084999998595
+          },
+          "candidate": {
+            "median": 0.06282400000054622,
+            "p95": 0.07013200000073994
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 33.49898899999971,
+            "p95": 42.22004499999821
+          },
+          "candidate": {
+            "median": 29.623540000000503,
+            "p95": 34.49912100000074
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 70,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "medianPairedRatio": 1.043682510382113,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 107.08964299999934,
+            "p95": 218.24617999999464
+          },
+          "candidate": {
+            "median": 106.38583400000061,
+            "p95": 284.31957500000135
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 75.84924600000159,
+            "p95": 186.99460700000054
+          },
+          "candidate": {
+            "median": 79.84949599999891,
+            "p95": 226.0856419999982
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 31.242636000002676,
+            "p95": 77.7531089999975
+          },
+          "candidate": {
+            "median": 26.370694000004733,
+            "p95": 58.21362599999702
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 169.921,
+            "p95": 325.854
+          },
+          "candidate": {
+            "median": 163.064,
+            "p95": 406.904
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 42382232,
+            "p95": 42625048
+          },
+          "candidate": {
+            "median": 40965312,
+            "p95": 41672896
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 4.58327300000019,
+            "p95": 6.994861999999557
+          },
+          "candidate": {
+            "median": 4.912350000005972,
+            "p95": 21.11186699999962
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 6.726391999982297,
+            "p95": 20.6304719999971
+          },
+          "candidate": {
+            "median": 8.27974900000845,
+            "p95": 17.527102000000014
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 13.126943000002939,
+            "p95": 26.688889999997627
+          },
+          "candidate": {
+            "median": 16.45461400000204,
+            "p95": 23.63687000000209
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 4.782024000000092,
+            "p95": 5.456854999996722
+          },
+          "candidate": {
+            "median": 3.5569519999990007,
+            "p95": 9.346631000000343
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 63.097171000001254,
+            "p95": 176.94691700000112
+          },
+          "candidate": {
+            "median": 66.6120379999993,
+            "p95": 209.3518780000013
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 70,
+      "kind": "fullYear",
+      "commands": 4,
+      "medianPairedRatio": 0.8957668120613609,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 330.2463310000021,
+            "p95": 438.8259890000045
+          },
+          "candidate": {
+            "median": 283.4596010000023,
+            "p95": 461.4742400000032
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 225.39403300000413,
+            "p95": 312.51938399999926
+          },
+          "candidate": {
+            "median": 192.76491100000567,
+            "p95": 337.9717690000034
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 103.94385700000566,
+            "p95": 131.30403099999967
+          },
+          "candidate": {
+            "median": 84.48328799999581,
+            "p95": 123.35273399999278
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 430.578,
+            "p95": 566.696
+          },
+          "candidate": {
+            "median": 374.948,
+            "p95": 607.616
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 50600408,
+            "p95": 57924992
+          },
+          "candidate": {
+            "median": 22999528,
+            "p95": 42356200
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 17.156941999986884,
+            "p95": 23.335620999998355
+          },
+          "candidate": {
+            "median": 16.447010999996564,
+            "p95": 51.62326300000859
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 7.753569000000425,
+            "p95": 10.57511599999998
+          },
+          "candidate": {
+            "median": 8.542140999998082,
+            "p95": 16.79921199999808
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 60.66529499999888,
+            "p95": 75.62045599999692
+          },
+          "candidate": {
+            "median": 41.89198200000101,
+            "p95": 67.36499899999762
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 17.521967000000586,
+            "p95": 24.39491000000271
+          },
+          "candidate": {
+            "median": 6.425583000003826,
+            "p95": 13.672194999991916
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 194.70454900000186,
+            "p95": 277.4093480000083
+          },
+          "candidate": {
+            "median": 170.590323000004,
+            "p95": 266.0375600000116
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 2.273719999997411,
+            "p95": 3.430685999999696
+          },
+          "candidate": {
+            "median": 2.4274750000040513,
+            "p95": 3.1216439999989234
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 90,
+      "kind": "routine",
+      "commands": 1,
+      "medianPairedRatio": 0.7910111901541343,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 80.51244999999471,
+            "p95": 87.90556199999992
+          },
+          "candidate": {
+            "median": 63.490608000000066,
+            "p95": 67.8018729999967
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 50.54185000000143,
+            "p95": 57.638388999999734
+          },
+          "candidate": {
+            "median": 42.16885699999693,
+            "p95": 47.43612899999425
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 29.136507999995956,
+            "p95": 33.394304000001284
+          },
+          "candidate": {
+            "median": 20.440230000000156,
+            "p95": 22.08156400000007
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 99.57,
+            "p95": 160.775
+          },
+          "candidate": {
+            "median": 101.708,
+            "p95": 136.873
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 29187832,
+            "p95": 33486192
+          },
+          "candidate": {
+            "median": 24320072,
+            "p95": 24394496
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 5.070926000000327,
+            "p95": 7.092144999995071
+          },
+          "candidate": {
+            "median": 6.197066000000632,
+            "p95": 8.606614000003901
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 17.465671000005386,
+            "p95": 25.270324999997683
+          },
+          "candidate": {
+            "median": 9.563303000002634,
+            "p95": 11.527233000000706
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 5.865348999999696,
+            "p95": 6.264901000002283
+          },
+          "candidate": {
+            "median": 0.0827659999995376,
+            "p95": 0.18911900000239257
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 46.21621199999936,
+            "p95": 51.374081999994814
+          },
+          "candidate": {
+            "median": 34.296056999999564,
+            "p95": 42.42497900000308
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 90,
+      "kind": "firstAgeUp",
+      "commands": 1,
+      "medianPairedRatio": 1.0364911360179967,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 119.2422430000006,
+            "p95": 129.14438599999994
+          },
+          "candidate": {
+            "median": 112.87099399999715,
+            "p95": 152.12554900000396
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 81.60519100000965,
+            "p95": 93.06474099999468
+          },
+          "candidate": {
+            "median": 86.72569999999541,
+            "p95": 120.69589000000269
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 35.05371000000014,
+            "p95": 44.760809999999765
+          },
+          "candidate": {
+            "median": 25.2889809999906,
+            "p95": 75.82781200000318
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 169.432,
+            "p95": 199.208
+          },
+          "candidate": {
+            "median": 169.63,
+            "p95": 197.887
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 48602712,
+            "p95": 49283144
+          },
+          "candidate": {
+            "median": -58979704,
+            "p95": 45571280
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 5.999878000002354,
+            "p95": 7.595796000001428
+          },
+          "candidate": {
+            "median": 5.7712830000018585,
+            "p95": 14.015680999989854
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 2.402518000002601,
+            "p95": 3.9568270000090706
+          },
+          "candidate": {
+            "median": 2.5010719999991124,
+            "p95": 3.204866000000038
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 15.018803999999363,
+            "p95": 18.848782000000938
+          },
+          "candidate": {
+            "median": 15.247080000001006,
+            "p95": 17.662133999998332
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 5.42241500000091,
+            "p95": 7.685720000008587
+          },
+          "candidate": {
+            "median": 3.8022280000004685,
+            "p95": 38.778754999999364
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 74.07892400000128,
+            "p95": 82.89979199999652
+          },
+          "candidate": {
+            "median": 76.38191500000539,
+            "p95": 114.02576399999816
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    },
+    {
+      "age": 90,
+      "kind": "fullYear",
+      "commands": 6,
+      "medianPairedRatio": 0.9201030606663961,
+      "timings": {
+        "totalMs": {
+          "baseline": {
+            "median": 747.3691220000037,
+            "p95": 798.3770919999952
+          },
+          "candidate": {
+            "median": 693.9818309999973,
+            "p95": 774.4545999999973
+          }
+        },
+        "resolveMs": {
+          "baseline": {
+            "median": 401.75088700000197,
+            "p95": 441.61823300000106
+          },
+          "candidate": {
+            "median": 388.399065999969,
+            "p95": 398.739316999985
+          }
+        },
+        "packMs": {
+          "baseline": {
+            "median": 347.40366200001154,
+            "p95": 374.6157489999896
+          },
+          "candidate": {
+            "median": 307.4465659999987,
+            "p95": 409.4881210000167
+          }
+        },
+        "cpuMs": {
+          "baseline": {
+            "median": 827.679,
+            "p95": 935.909
+          },
+          "candidate": {
+            "median": 788.233,
+            "p95": 847.265
+          }
+        },
+        "heapDeltaBytes": {
+          "baseline": {
+            "median": 52387000,
+            "p95": 66609256
+          },
+          "candidate": {
+            "median": 67679040,
+            "p95": 88627960
+          }
+        }
+      },
+      "phases": {
+        "copyWorld": {
+          "baseline": {
+            "median": 30.02758699998958,
+            "p95": 42.297976000001654
+          },
+          "candidate": {
+            "median": 30.55762700001651,
+            "p95": 44.27226400001382
+          }
+        },
+        "monthlySimulation": {
+          "baseline": {
+            "median": 7.44450000001234,
+            "p95": 9.356460999973933
+          },
+          "candidate": {
+            "median": 7.385719999947469,
+            "p95": 13.230541999990237
+          }
+        },
+        "shapeParse": {
+          "baseline": {
+            "median": 99.34821400001238,
+            "p95": 118.7919089999923
+          },
+          "candidate": {
+            "median": 71.27805399998033,
+            "p95": 87.11052600000403
+          }
+        },
+        "freezing": {
+          "baseline": {
+            "median": 29.673609000004944,
+            "p95": 36.05286600001273
+          },
+          "candidate": {
+            "median": 14.211962000001222,
+            "p95": 15.690270999984932
+          }
+        },
+        "validateWorld": {
+          "baseline": {
+            "median": 364.49902900001325,
+            "p95": 391.3970600000175
+          },
+          "candidate": {
+            "median": 343.141741000014,
+            "p95": 353.0780170000071
+          }
+        },
+        "annualSimulation": {
+          "baseline": {
+            "median": 1.8438179999939166,
+            "p95": 2.3357190000097034
+          },
+          "candidate": {
+            "median": 2.1436410000023898,
+            "p95": 8.111516000004485
+          }
+        }
+      },
+      "worldAndRandomIdentical": true
+    }
+  ],
+  "limits": "Controlled cloud Node simulation/checkpoint measurements. No SQLite, React, native frame or physical-device claim. Existing15-case core and5-ageUI measurements retained separately. Same World49 gameplay on both sides; no runtime edits after paired check."
+}
