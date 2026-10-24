@@ -1,3 +1,4 @@
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { gunzipSync, strFromU8 } from 'fflate';
 import { childhoodTemplates } from '../../src/game/content/childhood';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
@@ -82,7 +83,7 @@ test('story grades and actual skills report bounded changes and can create a fri
   expect(currentSchool(world)!.stage).toBe('secondary'); expect(currentSchool(world)!.classmateIds).toContain(peerId); expect(relationFor(world, player.id, peerId)?.roles).toContain('friend'); expect(world.schoolCommunities[0].endReason).toBe('changed-school'); validateWorld(world);
 });
 test('the real world-21 school archive preserves attendance, exact grades, people, help draw, paid earnings and the earlier planning checkpoint', () => {
-  const save = decodeSave(JSON.stringify(schoolArchive)), original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(schoolArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(encodeWorld(save.world));
+  const save = decodeSave(JSON.stringify(schoolArchive)), original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(schoolArchive.checkpoint).data, 'base64')))), encoded = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(save.world)));
   expect(original.schemaVersion).toBe(21); expect(save.world.schemaVersion).toBe(49); expect(save.world.engineVersion).toBe(51);
   for (const key of Object.keys(original).filter(key => key !== 'schemaVersion' && key !== 'engineVersion' && key !== 'contentVersion')) expect(encoded[key]).toEqual(original[key]);
   const school = currentSchool(save.world)!; expect(school.periods).toHaveLength(13); expect(school.exams).toEqual([{ month: 24083, term: 1, grade: 76 }]); expect(school.help[0]).toMatchObject({ chance: 80, roll: 68, accepted: true, gradeBefore: 71, gradeGain: 3 }); expect(save.world.people[save.world.activePersonId].skills.science).toBe(12);

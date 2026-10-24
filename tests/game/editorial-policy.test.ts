@@ -101,7 +101,10 @@ test('the historical C35 registration stays exact and rejects newer source befor
   // gameplay feedback (5e25344). These are
   // current-source observations; the historical C35 registration above stays exact.
   expect(pins.store).toBe('64dc5ac1daef59c9859e08f467cb4cec26a6d20f0e6cb683ff2b8b5e49dd17cd');
-  expect(pins.state).toBe('a9e1a9f02bd549c621c4a14c7234cc93d010477f573c0dcc94fc2324207b50d5');
+  // Incoming c9d2d0e changes fresh feedback preferences. This observed pin
+  // already matches the untouched 3c797e2 baseline; the C35 registration above
+  // remains its original value and still refuses this newer source.
+  expect(pins.state).toBe('50e3529152907e33b97d774371dc42f50b4e731a38c4d403e512cad6507de596');
   // The SDK57 native review dependency changes the current lockfile only.
   expect(pins.lockfile).toBe('763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb');
   expect(pins.tool).toBe('e0eb16fb73962b9632b4949a5ed1d729d8aca97be1607490a964c5a10abe1706');

@@ -105,10 +105,15 @@ test('travel posts require an actual experienced month rather than a booking or 
   let world = act(fixture(), { type: 'create-social', platform: 'photogram', handle: 'real_journey', bio: '' }); world = book(world); const account = world.socialAccounts.find(item => item.ownerId === world.activePersonId)!;
   expect(postReason(world, account, 'travel')).toMatch(/Take a trip/); world = act(world, { type: 'advance' }); expect(postReason(world, world.socialAccounts.find(item => item.id === account.id)!, 'travel')).toBeUndefined();
 });
-test('a real urgent-care decision during a longer trip admits the patient and returns the same party without an invented completed journey or refund', () => {
-  const initial = fixture(); endEmployment(initial); let world = book(initial, 3); addCondition(world, world.people[world.activePersonId], 'fracture', 90); world = resolveCommand(world, { type: 'advance' });
-  expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency'); if (world.pending?.kind !== 'decision') throw new Error('Expected urgent care'); const option = world.pending.choices.find(item => item.effects.some(effect => effect.kind === 'emergency-care' && effect.accepted))!;
-  world = resolveCommand(world, { type: 'choose', eventId: world.pending.id, choiceId: option.id }); expect(world.trips[0].status).toBe('interrupted'); expect(world.trips[0].refund).toBe(0n); expect(world.people[world.activePersonId].health.hospitalizedUntil).not.toBeNull(); expect(world.trips[0].periods).toHaveLength(1); expect(physicalLocation(world).country).toBe('US'); expect(world.people[world.activePersonId].health.records.some(item => item.kind === 'hospital')).toBe(true); validateWorld(world);
+test('a critical injury interrupts a longer trip before an invented completed month or refund', () => {
+  const initial = fixture(); endEmployment(initial); let world = book(initial, 3); addCondition(world, world.people[world.activePersonId], 'fracture', 95); world = resolveCommand(world, { type: 'advance' });
+  expect(world.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  expect(world.trips[0].status).toBe('interrupted'); expect(world.trips[0].refund).toBe(0n); expect(world.people[world.activePersonId].health.hospitalizedUntil).not.toBeNull();
+  // Admission is now part of this actual monthly simulation, before travelMonth
+  // can grant a completed period. The earlier assessment decision ran afterwards.
+  expect(world.trips[0].periods).toHaveLength(0); expect(physicalLocation(world).country).toBe('US');
+  expect(world.people[world.activePersonId].health.records.some(item => item.kind === 'hospital')).toBe(true);
+  expect(world.deferred.some(row => row.event.kind === 'result' && row.event.title === 'Your trip ended early')).toBe(true); validateWorld(world);
 });
 test('visiting London permits an actual local royal reception and existing-person introduction without changing home identity or requiring a fictional local bank balance', () => {
   let world = fixture(); world.people[world.activePersonId].stats.respect = 80; world = act(world, { type: 'book-trip', destinationId: 'london', duration: 1, companionIds: [], focus: 'sightseeing', quotedTotal: tripQuote(world, 'london', 1).total });

@@ -8,7 +8,7 @@ import { cultStories } from '../../src/game/content/cultStories';
 import { cultClaims, cultClaimRemedies } from '../../src/game/content/cultClaims';
 import { cultClaimAdmissions, cultClaimFailureJournals } from '../../src/game/content/cultClaimWriting';
 import { cultCapacity, cultChangeFollowers } from '../../src/game/systems/cultCore';
-import { arrangeCultWritingCase, cultWritingMechanics, refreshCultWritingOffer, type CultWritingCase } from '../support/cultWriting';
+import { arrangeCultWritingCase, cultWritingMechanics, preEpisodeCultProof, refreshCultWritingOffer, type CultWritingCase } from '../support/cultWriting';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const raw = inflateSync(Buffer.from(fixture.data, 'base64')).toString();
@@ -29,6 +29,8 @@ function mechanicalCatalogue(value: unknown): unknown {
 
 test('genuine pre-rewrite fixtures cover all 56 stories, 18 failed promises and 296 old bound choices', () => {
   expect(sha(raw)).toBe(fixture.sha256); expect(before.producer).toBe('512d3ac');
+  expect(before.baseWorld).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27 });
+  for (const context of before.contexts) expect(context.world).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27 });
   expect(before.contexts).toHaveLength(74); expect(before.outcomes).toHaveLength(296);
   expect(new Set(before.contexts.map(row => row.id))).toEqual(new Set([...cultStories, ...cultClaims].map(row => row.id)));
   const catalogue = { beliefs: Object.fromEntries(Object.entries(beliefs).filter(([key]) => !['cultLeaderTitles', 'cultRandomNames'].includes(key))), stories: cultStories, claims: cultClaims, remedies: cultClaimRemedies };
@@ -42,7 +44,7 @@ test.each(before.contexts)('$id keeps its literal saved offer, histories and eve
   if (event?.kind !== 'decision') throw Error('Expected saved cult decision');
   for (const choice of event.choices) {
     const result = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: choice.id });
-    expect(sha(encodeWorld(result))).toBe(before.outcomes.find(row => row.id === context.id && row.choiceId === choice.id)!.sha256);
+    expect(sha(preEpisodeCultProof(result))).toBe(before.outcomes.find(row => row.id === context.id && row.choiceId === choice.id)!.sha256);
     expect(result.journal.slice(0, world.journal.length)).toEqual(world.journal);
     expect(resultFor(result, event.id + '_result')?.body).toBe(choice.resultBody);
   }
@@ -70,7 +72,7 @@ test.each(before.contexts)('$id binds new prose prospectively with identical eff
 
 test.each(before.runtimeCases)('routine writing $item stays prose-only for its original deterministic command', ({ item, sha256 }) => {
   const world = load(before.baseWorld), command = arrangeCultWritingCase(world, item), result = resolveCommand(world, command);
-  expect(sha(JSON.stringify(mechanicalWorld(result)))).toBe(sha256);
+  expect(sha(JSON.stringify(cultWritingMechanics(JSON.parse(preEpisodeCultProof(result)))))).toBe(sha256);
   expect(result.pending?.kind).toBe('result');
   if (result.pending?.kind === 'result') {
     expect(result.pending.body).not.toMatch(/\{\w+\}/);

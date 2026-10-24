@@ -1,3 +1,4 @@
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -61,8 +62,8 @@ test('the genuine natural AU world beyond the plain20M limit retains its origina
   // Remove only the new, proven-empty histories absent from this actual World33
   // producer, then restore its three original root version tags.
   // The historical SHA is never replaced by a newly generated terminal world.
-  expect(encoded.startsWith('{"schemaVersion":48,"engineVersion":50,')).toBe(true);
-  const originalObject = JSON.parse(encoded);
+  expect(encoded.startsWith('{"schemaVersion":49,"engineVersion":51,')).toBe(true);
+  const originalObject = JSON.parse(withoutMedicalEpisodeMetadata(encoded));
   for (const key of ['cults', 'miniGames', 'personSupportRequests', 'personActionHistory', 'rentalLeases', 'bestFriendships', 'schoolWithdrawals', 'teenRelationships', 'universityApplications', 'studyCourses', 'npcSeparations', 'npcMoves', 'campusCommunities']) { expect(originalObject[key]).toEqual([]); delete originalObject[key]; }
   originalObject.schemaVersion = 33; originalObject.engineVersion = 34; originalObject.contentVersion = 9;
   const originalCanonical = JSON.stringify(originalObject); expect(originalCanonical.length).toBe(22124524);

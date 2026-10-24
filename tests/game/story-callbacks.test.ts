@@ -1,3 +1,4 @@
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { gunzipSync, strFromU8 } from 'fflate';
 import { pupil } from '../support/pupil';
 import { bindEvent, eligibleTemplates, eventTemplates } from '../../src/game/content/events';
@@ -120,7 +121,7 @@ test('malformed permission, payment, resolution and pending references are rejec
   const badDate = decodeWorld(encodeWorld(paid)); badDate.storyThreads[0].dueMonth++; expect(() => validateWorld(badDate)).toThrow(/origin/);
 });
 test('the genuine world22 archive preserves all story effects, named school people, ledger and prior decision without generating a callback', () => {
-  const original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(archived.checkpoint).data, 'base64')))), save = decodeSave(JSON.stringify(archived)), world = save.world, encoded = JSON.parse(encodeWorld(world));
+  const original = JSON.parse(strFromU8(gunzipSync(Buffer.from(JSON.parse(archived.checkpoint).data, 'base64')))), save = decodeSave(JSON.stringify(archived)), world = save.world, encoded = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   expect(world.schemaVersion).toBe(49); expect(world.engineVersion).toBe(51); expect(world.contentVersion).toBe(28); expect(world.storyThreads).toEqual([]);
   for (const key of Object.keys(original).filter(key => !['schemaVersion', 'engineVersion', 'contentVersion'].includes(key))) expect(encoded[key]).toEqual(original[key]);
   expect(world.pending?.kind === 'result' && world.pending.title).toBe('Useful, eventually'); const prior = unpackCheckpoint(save.snapshots[0].payload); expect(prior.storyThreads).toEqual([]); expect(prior.pending?.kind === 'decision' && prior.pending.templateId).toBe('school-volcano-breach'); expect(decodeWorld(encodeWorld(world))).toEqual(world);

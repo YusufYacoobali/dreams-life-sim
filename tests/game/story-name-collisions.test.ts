@@ -1,3 +1,4 @@
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 import { createHash } from 'node:crypto';
 import { bindEvent, eventTemplates } from '../../src/game/content/events';
 import { resolveCommand, type GameCommand } from '../../src/game/engine';
@@ -13,7 +14,7 @@ const sha = (value: string) => createHash('sha256').update(value).digest('hex');
 // Recover only the original C35 root framing; every captured gameplay field
 // and bound choice/result remains part of its immutable canonical proof.
 function originalC35Canonical(world: World) {
-  const original = JSON.parse(encodeWorld(world));
+  const original = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
   expect(original).toMatchObject({ schemaVersion: 49, engineVersion: 51, contentVersion: 28, cults: [] });
   // These captured World34 scenes predate best-friend and World36 histories.
   // Assert emptiness before removing only those new defaults, never old data.

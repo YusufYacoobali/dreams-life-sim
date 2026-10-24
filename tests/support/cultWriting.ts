@@ -3,10 +3,21 @@ import { cultMonthNumber } from '../../src/game/systems/cultSchemas';
 import { cultCeremonies, cultPhilosophies, cultRecruitment } from '../../src/game/content/cults';
 import { cultCeremonyQuote, cultRecruitQuote, cultRewardQuote } from '../../src/game/systems/cultCore';
 import type { GameCommand } from '../../src/game/engine';
-import { fullName } from '../../src/game/model';
+import { encodeWorld, fullName } from '../../src/game/model';
+import { withoutMedicalEpisodeMetadata } from './medicalLegacyProof';
 import { cultStories } from '../../src/game/content/cultStories';
 import { cultClaims } from '../../src/game/content/cultClaims';
 import { offerCultThread } from '../../src/game/systems/cultEvents';
+
+/** Comparison only for the pinned World48 cult fixtures. Preserve every old
+ * gameplay field and byte of prose, restoring just their original tuple and
+ * omitting the new condition metadata. Never use this as a replay/validation
+ * input, or for comparisons between two current worlds. */
+export function preEpisodeCultProof(world: World): string {
+  const proof = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
+  proof.schemaVersion = 48; proof.engineVersion = 50; proof.contentVersion = 27;
+  return JSON.stringify(proof);
+}
 
 /** Reuse a declared pre-rewrite context, but generate its offer today. */
 export function refreshCultWritingOffer(world: World, id: string) {

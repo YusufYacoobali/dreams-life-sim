@@ -7,7 +7,7 @@ import { resolveCommand } from '../../src/game/engine';
 import { cultClaimAdmissions } from '../../src/game/content/cultClaimWriting';
 import { cultLocalMembers } from '../../src/game/systems/cultActivities';
 import { cultMoney } from '../../src/game/systems/cultCore';
-import { arrangeCultWritingCase, cultWritingMechanics, type CultWritingCase } from '../support/cultWriting';
+import { arrangeCultWritingCase, cultWritingMechanics, preEpisodeCultProof, type CultWritingCase } from '../support/cultWriting';
 
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const raw = inflateSync(Buffer.from(previous.data, 'base64')).toString();
@@ -27,6 +27,7 @@ test('the released voice fixture retains 18 bound offers, 72 choices and three s
   expect(saved.contexts.flatMap(row => row.outcomes)).toHaveLength(72);
   expect(saved.savedRoutines).toHaveLength(3);
   expect(saved.ordinaryCases).toHaveLength(19);
+  for (const context of [...saved.contexts, ...saved.savedRoutines]) expect(context.world).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27 });
 });
 
 test.each(saved.contexts)('$id retains every released bound payoff and whole-world outcome', context => {
@@ -34,7 +35,7 @@ test.each(saved.contexts)('$id retains every released bound payoff and whole-wor
   if (event?.kind !== 'decision') throw Error('Expected a saved decision');
   for (const expected of context.outcomes) {
     const result = resolveCommand(world, { type: 'choose', eventId: event.id, choiceId: expected.choiceId });
-    expect(sha(encodeWorld(result))).toBe(expected.sha256);
+    expect(sha(preEpisodeCultProof(result))).toBe(expected.sha256);
   }
   expect(encodeWorld(world)).toBe(encoded);
 });
@@ -43,7 +44,7 @@ test.each(saved.savedRoutines)('$kind preserves its already saved routine scene 
   const world = load(context.world), encoded = encodeWorld(world), event = world.pending;
   expect(encodeWorld(decodeWorld(encoded))).toBe(encoded);
   if (event?.kind !== 'result') throw Error('Expected a saved result');
-  expect(sha(encodeWorld(resolveCommand(world, { type: 'acknowledge', resultId: event.id })))).toBe(context.acknowledgedSha256);
+  expect(sha(preEpisodeCultProof(resolveCommand(world, { type: 'acknowledge', resultId: event.id })))).toBe(context.acknowledgedSha256);
 });
 
 test('claim admissions vary their openings while keeping the player in the scene', () => {
