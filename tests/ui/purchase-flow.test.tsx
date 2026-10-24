@@ -10,7 +10,7 @@ import { ThemeProvider } from '../../src/ui/theme';
 import graduateFixture from '../fixtures/v3-employed-graduate.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
-jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: 'studio' }), router: { back: jest.fn(), navigate: jest.fn() } }));
+jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: 'studio' }), router: { back: jest.fn(), navigate: jest.fn(), dismissTo: jest.fn() } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Offer from '../../app/(game)/offer/[id]';
 import { PendingEvent } from '../../src/ui/PendingEvent';

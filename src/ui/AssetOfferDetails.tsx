@@ -21,6 +21,7 @@ import { useColors } from './theme';
 import { DisplayText as Text, displayText } from './DisplayText';
 
 type Review = { identity: string; kind: 'deposit' | 'term' | 'transaction'; event: EventPresentation; command?: GameCommand };
+type CompletedPurchase = { lifeId: string; personId: string; revision: number };
 const deposits = [2000, 4000, 6000, 8000], terms = [120, 240, 360] as const;
 
 /** Both old rental links and offer links render this same detail and quote flow. */
@@ -38,8 +39,21 @@ function OfferDetails({ id, initialMethod, propertyOnly }: { id: string; initial
   identityRef.current = identity;
   if (reviewRef.current && reviewRef.current.identity !== identity) reviewRef.current = null;
   const [review, setReview] = useState<Review | null>(null), current = review?.identity === identity && reviewRef.current === review ? review : null;
+  const [completed, setCompleted] = useState<CompletedPurchase | null>(null);
+  const navigated = useRef<string | null>(null);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; reviewRef.current = null; }; }, []);
   useEffect(() => { setReview(saved => saved && saved.identity !== identity ? null : saved); }, [identity]);
+  useEffect(() => {
+    if (!completed) return;
+    setCompleted(null);
+    // The dispatch has committed, and this render has closed its confirmation.
+    // A switched life or later command must never redirect the new context.
+    if (world.id !== completed.lifeId || world.activePersonId !== completed.personId || world.revision !== completed.revision) return;
+    const token = completed.lifeId + ':' + completed.personId + ':' + completed.revision;
+    if (navigated.current === token) return;
+    navigated.current = token;
+    router.dismissTo('/assets');
+  }, [completed, world]);
   if (!offer || propertyOnly && offer.kind !== 'property') return <Page><Header title="Offer unavailable" onBack={() => router.back()} /><Body>This item could not be found.</Body></Page>;
   const financing = method === 'mortgage' ? 'mortgage' : 'cash', quote = purchaseQuote(world, offer, financing, deposit, term), rentQuote = rentalQuote(world, offer);
   const currency = method === 'rent' && lease ? lease.currency : accountFor(world).currency, money = (minor: bigint) => formatMoney({ minor, currency });
@@ -71,7 +85,7 @@ function OfferDetails({ id, initialMethod, propertyOnly }: { id: string; initial
     {method === 'rent' && lease ? <Card><Heading size={20}>Your Rented Home</Heading><Body>Leaseholder: {fullName(world.people[lease.tenantId])}</Body><Facts items={[{ label: 'Monthly rent', value: money(rent) }, { label: 'Lease term', value: 'Month to month' }]} /><Body muted>Rent is paid once a month by the leaseholder. Adults share the other household bills.</Body>{lease.tenantId === player.id ? <Button label="Review Move Out" tone="secondary" disabled={busy || !!current} onPress={reviewMoveOut} /> : <Body muted>Only the leaseholder can end this lease.</Body>}</Card> : <Card><Heading size={20}>{method === 'rent' ? 'Review your lease' : 'Review your costs'}</Heading><Facts items={method === 'rent' ? [{ label: 'Monthly rent', value: money(rentQuote.monthlyRent) }, { label: 'Due today', value: money(rentQuote.monthlyRent), note: 'First month · no deposit or signing fee' }, { label: 'Lease term', value: 'Month to month' }, { label: 'Account balance', value: money(accountFor(world).cash) }] : [{ label: 'Purchase fees', value: money(quote.fee) }, { label: 'Cash paid upfront', value: money(quote.cashRequired), note: method === 'mortgage' ? 'Deposit plus purchase fees' : 'Price plus purchase fees' }, { label: 'Account balance', value: money(accountFor(world).cash) }]} />
       {method === 'rent' && <Body muted>Rent replaces your usual housing costs. You still pay your share of other bills.</Body>}
       {method !== 'rent' && residence && <Body muted>Your current rental continues until you move out.</Body>}
-      {reason && <Body>{reason}</Body>}
+      {reason && <Body muted>{reason}</Body>}
       {method === 'rent' && residence && <ActionRow title="Manage Your Rental" value={residence.name} onPress={() => router.push({ pathname: '/offer/[id]', params: { id: residence.catalogId, method: 'rent' } })} />}
       <Button label={method === 'rent' ? 'Review Lease' : 'Review Purchase'} disabled={busy || !!current || !!reason} accessibilityLabel={displayText([method === 'rent' ? 'Review Lease' : 'Review Purchase', reason].filter(Boolean).join('. '))} onPress={reviewTransaction} />
     </Card>}
@@ -82,7 +96,13 @@ function OfferDetails({ id, initialMethod, propertyOnly }: { id: string; initial
       if (current.kind === 'term') { const next = Number(value); if (next === 120 || next === 240 || next === 360) { close(); setTerm(next); } return; }
       if (!current.command || value !== 'confirm') return;
       submitting.current = true;
-      try { if (await dispatch(current.command) && mounted.current && identityRef.current === current.identity && reviewRef.current === current) close(); }
+      try {
+        if (!await dispatch(current.command) || !mounted.current) return;
+        close();
+        if (current.command.type === 'buy-asset' || current.command.type === 'sign-home-lease') {
+          setCompleted({ lifeId: world.id, personId: player.id, revision: world.revision + 1 });
+        }
+      }
       finally { submitting.current = false; }
     }} />
   </Page>;

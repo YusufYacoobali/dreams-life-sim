@@ -22,18 +22,20 @@ import graduateFixture from '../fixtures/v3-employed-graduate.json';
 
 let mockStore: ReturnType<typeof createGameStore>;
 let mockRouteId = 'studio';
-jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: mockRouteId }), router: { back: jest.fn(), navigate: jest.fn() } }));
+const mockDismissTo = jest.fn();
+jest.mock('expo-router', () => ({ useLocalSearchParams: () => ({ id: mockRouteId }), router: { back: jest.fn(), navigate: jest.fn(), dismissTo: (...args: unknown[]) => mockDismissTo(...args) } }));
 jest.mock('../../src/state/useGame', () => ({ useGame: (selector: unknown) => require('zustand').useStore(mockStore, selector) }));
 import Offer from '../../app/(game)/offer/[id]';
+import Assets from '../../app/(game)/(tabs)/assets';
 
-const frame = () => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider><Offer /><PendingEvent /></ThemeProvider></SafeAreaProvider>;
+const frame = (content: React.ReactNode = <Offer />) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{content}<PendingEvent /></ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const modal = () => within(screen.UNSAFE_getByType(Modal));
 const choose = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('radio', { name })); }); };
 const world = () => mockStore.getState().world!;
 
-async function setup() {
-  mockRouteId = 'studio';
+async function setup(fund = true) {
+  mockRouteId = 'studio'; mockDismissTo.mockReset();
   const directory = mkdtempSync(join(tmpdir(), 'dreams-purchase-confirmation-')), path = join(directory, 'dreams.db');
   let sqlite: DatabaseSync;
   function connect(): SqlDatabase {
@@ -53,7 +55,7 @@ async function setup() {
   const repository = new SaveRepository(connect()); await repository.initialise();
   const initial = decodeWorld(JSON.stringify(graduateFixture));
   // An explicitly funded test scenario; the immutable fixture remains unchanged.
-  const account = accountFor(initial); account.cash += 100000000n; account.openingCash += 100000000n;
+  const account = accountFor(initial); if (fund) { account.cash += 100000000n; account.openingCash += 100000000n; }
   await repository.create(initial);
   let nextYield: Promise<void> | undefined;
   const pauseNextSave = () => { let release!: () => void; nextYield = new Promise<void>(resolve => { release = resolve; }); return release; };
@@ -99,7 +101,7 @@ test('local financing, deposit and term choices close immediately; review and ca
     await press('Review Purchase'); expectReviewedTerms(); await press('Never mind');
     expect(screen.queryByText('Buy City Studio?')).toBeNull(); await choose('Buy Outright'); await choose('Mortgage');
     expect(screen.getByRole('button', { name: /^Deposit\. 40%/ })).toBeOnTheScreen(); expect(screen.getByRole('button', { name: 'Term. 20 years' })).toBeOnTheScreen();
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(unpack).not.toHaveBeenCalled(); view.unmount();
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(mockDismissTo).not.toHaveBeenCalled(); expect(unpack).not.toHaveBeenCalled(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
 
@@ -146,10 +148,10 @@ test('a failed real mortgage purchase preserves reviewed terms and all rows, ret
     context.sqlite.exec("CREATE TRIGGER fail_purchase_confirmation BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
     await press('Confirm Purchase'); await waitFor(() => expect(modal().getByRole('alert')).toHaveTextContent(/couldn't be saved/));
     expectReviewedTerms(); expect(modal().getByRole('button', { name: 'Confirm Purchase' })).toBeEnabled();
-    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows);
+    expect(encodeWorld(world())).toBe(before); expect(context.rows()).toEqual(beforeRows); expect(mockDismissTo).not.toHaveBeenCalled();
     context.sqlite.exec('DROP TRIGGER fail_purchase_confirmation'); await press('Confirm Purchase');
     expect(screen.queryByText('Buy City Studio?')).toBeNull(); expect(screen.getByText('It’s yours')).toBeOnTheScreen();
-    expect(world()).toEqual(expected); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
+    expect(world()).toEqual(expected); expect(mockDismissTo).toHaveBeenCalledTimes(1); expect(mockDismissTo).toHaveBeenCalledWith('/assets'); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
     const owned = world().assets.filter(asset => asset.ownerId === initial.activePersonId); expect(owned).toHaveLength(1);
     expect(world().liabilities.find(debt => debt.id === owned[0].mortgageId)).toMatchObject({ principal: quote.principal, remainingMonths: 240, monthlyPayment: quote.payment });
     expect(accountFor(world()).cash).toBe(accountFor(initial).cash - quote.cashRequired);
@@ -168,7 +170,7 @@ test('a pending purchase disables financing changes and duplicate confirmations,
   try {
     const initial = world(), beforeRows = context.rows(), view = render(frame()); await reviewMortgage(); const quote = expectReviewedTerms();
     const expected = resolveCommand(initial, { type: 'buy-asset', catalogId: 'studio', financing: 'mortgage', depositBps: 4000, termMonths: 240, quotedPrice: quote.price }, true);
-    const release = context.pauseNextSave(); await press('Confirm Purchase'); expect(mockStore.getState().busy).toBe(true);
+    const release = context.pauseNextSave(); await press('Confirm Purchase'); expect(mockStore.getState().busy).toBe(true); expect(mockDismissTo).not.toHaveBeenCalled();
     for (const name of ['Buy Outright', 'Mortgage', 'Rent']) expect(screen.getByRole('radio', { name })).toBeDisabled();
     for (const name of ['Review Purchase', 'Confirm Purchase', 'Never mind']) expect(screen.getByRole('button', { name })).toBeDisabled();
     expect(screen.getByRole('button', { name: /^Deposit\./ })).toBeDisabled(); expect(screen.getByRole('button', { name: /^Term\./ })).toBeDisabled();
@@ -176,6 +178,59 @@ test('a pending purchase disables financing changes and duplicate confirmations,
     await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); });
     expectReviewedTerms(); expect(world()).toEqual(initial); expect(context.rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
-    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(screen.queryByText('Buy City Studio?')).toBeNull(); view.unmount();
+    expect(world()).toEqual(expected); expect(world().revision).toBe(initial.revision + 1); expect(mockDismissTo).toHaveBeenCalledTimes(1); expect(screen.queryByText('Buy City Studio?')).toBeNull(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
+});
+
+test.each(['studio', 'used-compact', 'watch'])('%s returns to the existing Assets destination after saving, with its inventory and one durable result', async id => {
+  const context = await setup();
+  mockRouteId = id;
+  const offer = assetCatalog.find(item => item.id === id)!;
+  function Destination() {
+    const [assets, setAssets] = React.useState(false);
+    mockDismissTo.mockImplementation((path: string) => { expect(path).toBe('/assets'); setAssets(true); });
+    return assets ? <Assets /> : <Offer />;
+  }
+  const view = render(frame(<Destination />));
+  try {
+    await press('Review Purchase'); await press('Confirm Purchase');
+    expect(mockDismissTo).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('header', { name: 'Assets' })).toBeOnTheScreen();
+    expect(screen.getByText(offer.name)).toBeOnTheScreen();
+    expect(screen.getByText('It’s yours')).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: 'Confirm Purchase' })).toBeNull();
+    const saved = world(), resultId = saved.pending!.id;
+    expect(await context.repository.load(saved.id)).toEqual(saved);
+    await press('Continue');
+    expect(world().pending).toBeNull();
+    expect(world().assets).toEqual(saved.assets); expect(world().ledger).toEqual(saved.ledger);
+    await act(async () => { expect(await mockStore.getState().dispatch({ type: 'acknowledge', resultId })).toBe(false); });
+    expect(mockDismissTo).toHaveBeenCalledTimes(1);
+  } finally { view.unmount(); context.close(); }
+});
+
+test('leaving a pending purchase lets the commit finish without redirecting a different screen', async () => {
+  const context = await setup(), view = render(frame());
+  try {
+    await press('Review Purchase');
+    const release = context.pauseNextSave(); await press('Confirm Purchase');
+    expect(mockStore.getState().busy).toBe(true); expect(mockDismissTo).not.toHaveBeenCalled();
+    view.unmount(); await act(async () => { release(); });
+    expect(world().assets.filter(asset => asset.ownerId === world().activePersonId)).toHaveLength(1);
+    expect(await context.repository.load(world().id)).toEqual(world());
+    expect(mockDismissTo).not.toHaveBeenCalled();
+  } finally { context.close(); }
+});
+
+test('an unaffordable purchase cannot open a confirmation, write rows or navigate', async () => {
+  const context = await setup(false), view = render(frame());
+  try {
+    const initial = world(), rows = context.rows();
+    const button = screen.getByRole('button', { name: /^Review Purchase\./ });
+    expect(button).toBeDisabled();
+    await act(async () => { fireEvent.press(button); });
+    expect(screen.queryByRole('button', { name: 'Confirm Purchase' })).toBeNull();
+    expect(world()).toEqual(initial); expect(context.rows()).toEqual(rows);
+    expect(mockDismissTo).not.toHaveBeenCalled();
+  } finally { view.unmount(); context.close(); }
 });

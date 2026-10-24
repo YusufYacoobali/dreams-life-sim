@@ -25,8 +25,8 @@ import { AssetListing } from '../../src/ui/AssetFeatures';
 import { CatalogArt } from '../../src/assets/CatalogArt';
 import graduate from '../fixtures/v3-employed-graduate.json';
 let mockStore:ReturnType<typeof createGameStore>,mockRoute:{id:string;kind:string;method?:string}={id:'studio',kind:'property'};
-const mockPush=jest.fn();
-jest.mock('expo-router',()=>({useLocalSearchParams:()=>mockRoute,router:{back:jest.fn(),push:(...args:unknown[])=>mockPush(...args),navigate:jest.fn()}}));
+const mockPush=jest.fn(),mockDismissTo=jest.fn();
+jest.mock('expo-router',()=>({useLocalSearchParams:()=>mockRoute,router:{back:jest.fn(),push:(...args:unknown[])=>mockPush(...args),navigate:jest.fn(),dismissTo:(...args:unknown[])=>mockDismissTo(...args)}}));
 jest.mock('../../src/state/useGame',()=>({useGame:(selector:unknown)=>require('zustand').useStore(mockStore,selector)}));
 import Shopping from '../../app/(game)/shopping/[kind]';
 import Offer from '../../app/(game)/offer/[id]';
@@ -47,7 +47,7 @@ async function setup() {
   };
   const repository=new SaveRepository(connect());await repository.initialise();await repository.create(initial);let pause:Promise<void>|undefined;
   const bootstrap=async(repo:SaveRepository)=>{mockStore=createGameStore({repository:async()=>repo,date:()=>initial.date,id:()=> 'life_property_next',yieldToUI:async()=>{const waiting=pause;pause=undefined;if(waiting)await waiting;}});expect(await mockStore.getState().bootstrap()).toBe(true);};
-  await bootstrap(repository);mockRoute={id:'studio',kind:'property'};mockPush.mockClear();
+  await bootstrap(repository);mockRoute={id:'studio',kind:'property'};mockPush.mockClear();mockDismissTo.mockClear();
   const rows=()=>Object.fromEntries(sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all().map(row=>[row.name,sqlite.prepare('SELECT * FROM '+row.name+' ORDER BY 1,2').all()]));
   return {get sqlite(){return sqlite;},initial,rows,pauseNext:()=>{let release!:()=>void;pause=new Promise<void>(resolve=>{release=resolve;});return release;},cold:async()=>{sqlite.close();await bootstrap(new SaveRepository(connect()));},close:()=>{sqlite.close();rmSync(directory,{recursive:true,force:true});}};
 }
@@ -85,7 +85,7 @@ test.each(['cash','mortgage','rent'] as const)('%s is reviewed and committed fro
 test('switching methods only updates the quote, and a busy/stale confirmation cannot buy twice or act after a life switch',async()=>{
   const context=await setup(),view=render(frame());try{
     const original=encodeWorld(world()),quote=purchaseQuote(world(),studio,'cash');await method('Mortgage');await method('Rent');await method('Buy Outright');expect(screen.getByLabelText(displayText('Cash paid upfront: '+money(quote.cashRequired)+'. Price plus purchase fees'))).toBeOnTheScreen();expect(encodeWorld(world())).toBe(original);
-    await press('Review Purchase');const stale=screen.UNSAFE_getAllByType(EventModal).find(item=>item.props.event?.kind==='confirmation')!.props.onChoose,release=context.pauseNext();await act(async()=>{fireEvent.press(screen.getByRole('button',{name:'Confirm Purchase'}));stale('confirm');fireEvent.press(screen.getByRole('button',{name:'Never mind'}));});expect(mockStore.getState().busy).toBe(true);expect(world().assets).toHaveLength(0);await act(async()=>{release();});expect(world().assets).toHaveLength(1);
+    await press('Review Purchase');const stale=screen.UNSAFE_getAllByType(EventModal).find(item=>item.props.event?.kind==='confirmation')!.props.onChoose,release=context.pauseNext();await act(async()=>{fireEvent.press(screen.getByRole('button',{name:'Confirm Purchase'}));stale('confirm');fireEvent.press(screen.getByRole('button',{name:'Never mind'}));});expect(mockStore.getState().busy).toBe(true);expect(mockDismissTo).not.toHaveBeenCalled();expect(world().assets).toHaveLength(0);await act(async()=>{release();});expect(world().assets).toHaveLength(1);
     await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});const before=encodeWorld(world());await act(async()=>{await stale('confirm');});expect(encodeWorld(world())).toBe(before);expect(world().assets).toHaveLength(0);
   }finally{view.unmount();context.close();}
 });
