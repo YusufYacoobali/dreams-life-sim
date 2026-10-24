@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
 import { monthFrom } from '../../src/game/calendar';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { createLife, randomCreation } from '../../src/game/createLife';
@@ -16,6 +18,8 @@ import { pupil } from '../support/pupil';
 import medicalArchive from '../fixtures/v8-medical-archive.json';
 import projectArchive from '../fixtures/v27-leisure-archive.json';
 import graduate from '../fixtures/v3-employed-graduate.json';
+import zeroMedicalBefore from '../fixtures/v48-natural-zero-medical.json';
+import { withoutMedicalEpisodeMetadata } from '../support/medicalLegacyProof';
 
 type Decision = Extract<Pending, { kind: 'decision' }>;
 function decision(world: World): Decision {
@@ -27,6 +31,34 @@ const cold = (world: World) => {
   expect(encodeWorld(restored)).toBe(encodeWorld(world)); return restored;
 };
 const choose = (world: World, choiceId: string) => resolveCommand(world, { type: 'choose', eventId: decision(world).id, choiceId }, true);
+const sha = (text: string) => createHash('sha256').update(text).digest('hex');
+const zeroQuotePins = {
+  2: { payload: '116594c2e0f81f185da2151506e920879fdb2e41f6fcde809a31205cd62a4feb', trace: '5e3753196fb752ff1c67d6bfb6e659db50f422fd08e01d22c4f6474072c289c5' },
+  10: { payload: 'a9eb32309805fa657752bc9385781d9ac0ded7c1441b6689743e6ebaa472e6fc', trace: '9ba329b3f675f1580eacad6c903c8f52f9d1e2ddcf6ad31d90ef703098f448d5' },
+} as const;
+function capturedZeroQuote(seed: 2 | 10) {
+  expect(zeroMedicalBefore.sourceCommit).toBe('3c797e2253c98714c79d73191a09889774afccd5');
+  expect(zeroMedicalBefore.sourceVersions).toEqual({ world: 48, engine: 50, content: 27 });
+  expect(zeroMedicalBefore.gameSourceSha256).toBe('2ceaf4f63a706ae9c88638c288db0316fbf95926e2b12b1f8427376250a89609');
+  expect(zeroMedicalBefore.records).toHaveLength(2);
+  const record = zeroMedicalBefore.records.find(row => row.seed === seed)!;
+  const payload = gunzipSync(Buffer.from(record.data, 'base64')).toString('utf8'), raw = JSON.parse(payload), pins = zeroQuotePins[seed];
+  expect(sha(payload)).toBe(pins.payload); expect(record.payloadSha256).toBe(pins.payload); expect(Buffer.byteLength(payload)).toBe(record.bytes);
+  expect(sha(JSON.stringify(record.trace))).toBe(pins.trace); expect(record.traceSha256).toBe(pins.trace);
+  expect(record.commands).toBe(55); expect(record.trace).toHaveLength(55);
+  expect(record.trace.every(row => ['advance', 'resume', 'choose', 'acknowledge'].includes(row.command.type))).toBe(true);
+  expect(raw).toMatchObject({ schemaVersion: 48, engineVersion: 50, contentVersion: 27 });
+  const world = decodeWorld(payload, true);
+  expect(ageOn(world.people[world.activePersonId], world.date)).toBe(18);
+  expect(JSON.parse(encodeWorld(world)).pending).toEqual(raw.pending);
+  return { world, record };
+}
+/** Frozen World48 outcome view, never an input to migration/replay. */
+function oldMedicalOutcomeHash(world: World) {
+  const proof = JSON.parse(withoutMedicalEpisodeMetadata(encodeWorld(world)));
+  proof.schemaVersion = 48; proof.engineVersion = 50; proof.contentVersion = 27;
+  return sha(JSON.stringify(proof));
+}
 
 /** Same natural first-available strategy and birth setup as engine.test.ts.
  * Stop at the observed boundary; do not configure a job, diagnosis, money,
@@ -124,8 +156,8 @@ test('new noncolliding project names keep the original first-name wording', () =
   expect(event.choices[1].label).toBe('Ask Jordan for help'); expect(event.choices[1].journal).toBe('I asked Jordan for help and completed a shorter project section.');
 });
 
-test.each([[2, 'BR', 'R$0.00'], [10, 'ES', '€0.00']] as const)('natural seed%i %s age18 quotes %s without inventing a patient bill or debt', (seed, country, amount) => {
-  const world = naturalDecision(seed, 'medical-emergency', 18), event = decision(world), care = event.choices.find(row => row.id === 'care')!, effect = care.effects[0];
+test.each([[2, 'BR', 'R$0.00'], [10, 'ES', '€0.00']] as const)('captured World48 natural seed%i %s age18 quotes %s without inventing a patient bill or debt', (seed, country, amount) => {
+  const { world, record } = capturedZeroQuote(seed), event = decision(world), care = event.choices.find(row => row.id === 'care')!, effect = care.effects[0];
   expect(world.people[world.activePersonId].country).toBe(country); expect(effect).toMatchObject({ kind: 'emergency-care', accepted: true, quotedCost: 0n });
   expect(event.body).toContain('The quoted care costs ' + amount + '. There is no patient charge for this care.');
   expect(event.body).not.toMatch(/unpaid|obligation|debt/); expect(care.resultBody).not.toMatch(/bill|unpaid|obligation|debt/);
@@ -143,27 +175,48 @@ test.each([[2, 'BR', 'R$0.00'], [10, 'ES', '€0.00']] as const)('natural seed%i
   expect(cold(legacy).pending).toEqual(old);
   for (const choice of event.choices) {
     const freshResult = choose(cold(world), choice.id), oldResult = choose(cold(legacy), choice.id), normalized = copyWorld(freshResult);
+    expect(oldMedicalOutcomeHash(freshResult)).toBe(record.outcomes.find(row => row.choiceId === choice.id)!.payloadSha256);
     expect(oldResult.pending!.body).toBe(old.choices.find(row => row.id === choice.id)!.resultBody);
     normalized.pending!.body = oldResult.pending!.body;
     expect(encodeWorld(normalized)).toBe(encodeWorld(oldResult)); expect(cold(oldResult).pending).toEqual(oldResult.pending);
   }
 }, 120000);
 
-test('a fresh nonzero emergency keeps the bill warning and creates the actual unpaid obligation when the patient cannot pay', () => {
+test('a fresh nonzero critical admission creates its real hospital bill and unpaid obligation when the patient cannot pay', () => {
   let world = decodeWorld(JSON.stringify(graduate));
-  const personId = world.activePersonId; addCondition(world, world.people[personId], 'asthma', 80);
-  world = copyWorld(resolveCommand(world, { type: 'advance' }, true));
-  // Explicit unit budget at the bound quote, after the ordinary month's pay.
+  const personId = world.activePersonId, condition = addCondition(world, world.people[personId], 'asthma', 95);
+  // Declared current unit budget before the real monthly admission and pay.
   post(world, -accountFor(world).cash, 0n, 'fixture-spending', 'Unit empty care budget');
-  world = validateWorld(world);
-  const event = decision(world), care = event.choices.find(row => row.id === 'care')!, effect = care.effects[0];
-  expect(event.templateId).toBe('medical-emergency'); if (effect.kind !== 'emergency-care' || effect.quotedCost === undefined) throw new Error('Missing actual medical quote');
-  expect(effect.quotedCost).toBe(36000n); expect(event.body).toContain('The quoted care costs $360.00; an unpaid emergency bill remains a real obligation.');
-  expect(care.resultBody).toBe('The assessment, treatment outcome and bill are recorded. A hospital stay affects study and paid work as time passes.');
-  const prior = world.liabilities.filter(row => row.ownerId === personId && row.kind === 'living').reduce((sum, row) => sum + row.principal, 0n), selected = choose(cold(world), 'care');
-  expect(accountFor(selected).cash).toBe(0n);
-  expect(selected.liabilities.filter(row => row.ownerId === personId && row.kind === 'living').reduce((sum, row) => sum + row.principal, 0n) - prior).toBe(effect.quotedCost);
-  expect(selected.people[personId].health.conditions.find(row => row.id === effect.conditionId)!.treatment?.paid).toBe(effect.quotedCost);
+  const ledgerOffset = world.ledger.length;
+  world = resolveCommand(validateWorld(world), { type: 'advance' }, true);
+  expect(world.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  if (world.pending?.kind !== 'result') throw new Error('Expected actual admission');
+  expect(world.pending.effects).toContainEqual({ id: 'bill', label: 'Patient bill', value: '$360.00', tone: 'neutral' });
+  expect(world.pending.body).not.toMatch(/no patient charge/);
+  const hospital = world.people[personId].health.records.find(row => row.kind === 'hospital' && row.conditionId === condition.id)!;
+  expect(hospital).toMatchObject({ cost: 36000n, currency: 'USD', payerId: personId, paidCurrency: 'USD' });
+  const charges = world.ledger.slice(ledgerOffset).filter(row => row.personId === personId && row.category === 'healthcare' && row.description.startsWith('Emergency care: '));
+  expect(charges).toHaveLength(1);
+  // paidMinor retains the historical payer-currency quote contract; the ledger
+  // establishes actual cash paid and debt. Other monthly arrears are separate.
+  expect(charges[0]).toMatchObject({ cashDelta: 0n, debtDelta: 36000n, currency: 'USD' });
+  expect(world.liabilities.some(row => row.id === charges[0].liabilityId && row.ownerId === personId && row.kind === 'living')).toBe(true);
+  expect(world.people[personId].health.conditions.find(row => row.id === condition.id)!.treatment?.paid).toBe(36000n);
+  expect(cold(world).pending).toEqual(world.pending);
+});
+
+test.each(['BR', 'ES'] as const)('current %s critical admission records zero patient cost without a phantom healthcare bill or debt', country => {
+  // Configured current public-care case, separate from the genuine old prefixes.
+  const world = pupil(country, 18), personId = world.activePersonId;
+  const condition = addCondition(world, world.people[personId], 'asthma', 95), offset = world.ledger.length;
+  const admitted = resolveCommand(world, { type: 'advance' }, true);
+  expect(admitted.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  const hospital = admitted.people[personId].health.records.find(row => row.kind === 'hospital' && row.conditionId === condition.id)!;
+  expect(hospital).toMatchObject({ cost: 0n, paidMinor: 0n, payerId: personId });
+  expect(admitted.ledger.slice(offset).filter(row => row.personId === personId && row.category === 'healthcare')).toEqual([]);
+  expect(admitted.people[personId].health.conditions.find(row => row.id === condition.id)!.treatment?.paid).toBe(0n);
+  expect(admitted.pending!.body).not.toMatch(/unpaid|obligation|debt/);
+  expect(cold(admitted).pending).toEqual(admitted.pending);
 });
 
 test.each([
