@@ -48,7 +48,7 @@ import { npcCourtshipsYear } from './systems/npcCourtships';
 import { npcSeparationsYear } from './systems/npcSeparations';
 import { careAfterDeath, familyCommandSchema, FamilyCommand, familyFinanceMonth, familyMonth, familyYear, resolveFamily } from './systems/family';
 import { estateCommandSchema, EstateCommand, resolveEstate, settleEstate } from './systems/estates';
-import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth } from './systems/health';
+import { emergencyCare, healthCommandSchema, HealthCommand, healthFinanceMonth, healthMonth, illnessMortality, resolveHealth, resolveMedicalEpisode } from './systems/health';
 import { conditions } from './content/health';
 import { nextPending, offerPending, priorityOf } from './pendingQueue';
 import { resolveReservedBurglary, custodyReason, hearCase, legalCommandSchema, LegalCommand, legalDeath, legalMonth, payBail, resolveLegal } from './systems/legal';
@@ -256,6 +256,7 @@ function applyEffects(world: World, effects: Effect[], relationshipLabels?: Boun
     if (effect.kind === 'story-immediate') return resolveStoryImmediate(world, effect);
     if (effect.kind === 'cult-choice') return resolveCultChoice(world, effect, boundChoice);
     if (effect.kind === 'dramatic-choice') throw new IneligibleAction('A dramatic decision must have one bound action');
+    if (effect.kind === 'medical-episode') throw new IneligibleAction('A medical decision must have one bound action');
     if (effect.kind === 'job-interview') return resolveJobInterview(world, effect).effects;
     if (effect.kind === 'schedule-story') return scheduleStory(world, effect);
     if (effect.kind === 'resolve-story') return resolveStory(world, effect.threadId, effect.resolution);
@@ -365,12 +366,20 @@ export function resolveCommand(previous: World, command: GameCommand, immutable 
     const priority = world.pendingPriority || priorityOf(event); world.pending = null; world.pendingPriority = 0;
     const interviewEffect = choice.effects.length === 1 && choice.effects[0].kind === 'job-interview' ? choice.effects[0] : null;
     const dramaticEffect = choice.effects.length === 1 && choice.effects[0].kind === 'dramatic-choice' ? choice.effects[0] : null;
-    const outcome = interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null;
+    const medicalEffect = choice.effects.length === 1 && choice.effects[0].kind === 'medical-episode' ? choice.effects[0] : null;
+    const medicalOutcome = medicalEffect ? resolveMedicalEpisode(world, medicalEffect) : null;
+    const outcome = medicalOutcome ?? (interviewEffect ? resolveJobInterview(world, interviewEffect) : dramaticEffect ? resolveDramaticChoice(world, dramaticEffect, recordDeath) : null);
     const effects = outcome ? outcome.effects : applyEffects(world, choice.effects, choice.relationshipLabels, choice);
     journal(world, event.id + '_choice', outcome?.journal ?? choice.journal, interviewEffect ? 'work' : 'event');
     noteImportantDecision(decisionFrame, event, world.journal.at(-1)!, world.journal.length - 1);
     if (player.stats.health === 0 && !player.died) recordDeath(world, player.id, 'critical health decline');
-    if (!player.died) offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects, ...(event.participants ? {participants:event.participants} : {}) }, priority + 1);
+    if (!player.died) {
+      if (medicalOutcome?.decision) {
+        offerPending(world, medicalOutcome.decision, priority);
+        for (const decision of medicalOutcome.additionalDecisions ?? []) offerPending(world, decision, priority);
+      }
+      else offerPending(world, { kind: 'result', id: event.id + '_result', title: outcome?.title ?? choice.resultTitle, body: outcome?.body ?? choice.resultBody, illustration: event.illustration, effects, ...(event.participants ? {participants:event.participants} : {}) }, priority + 1);
+    }
   } else if (command.type === 'acknowledge') {
     if (world.pending?.kind !== 'result' || world.pending.id !== command.resultId) throw new IneligibleAction('That result is no longer open');
     world.pending = null; world.pendingPriority = 0;

@@ -665,17 +665,19 @@ function EventCard({
               )}
               {event.kind === 'decision' &&
                 event.choices.map((choice) => (
-                  <Button
-                    key={choice.id}
-                    label={choice.label}
-                    disabled={busy || !!choice.disabledReason}
-                    accessibilityLabel={displayText(
-                      [choice.label, choice.disabledReason]
-                        .filter(Boolean)
-                        .join('. '),
-                    )}
-                    onPress={() => choose(choice.id)}
-                  />
+                  <View key={choice.id} style={{ gap: 6 }}>
+                    <Button
+                      label={choice.label}
+                      disabled={busy || !!choice.disabledReason}
+                      accessibilityLabel={displayText(
+                        [choice.label, choice.disabledReason]
+                          .filter(Boolean)
+                          .join('. '),
+                      )}
+                      onPress={() => choose(choice.id)}
+                    />
+                    {choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}
+                  </View>
                 ))}
               {event.kind === 'selection' && (
                 <>

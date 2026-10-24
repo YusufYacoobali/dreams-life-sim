@@ -2,7 +2,7 @@ import type { World } from './model';
 import type { Pending } from './runtime';
 import { storyParticipants } from './storyNames';
 export function priorityOf(event: Pending): number {
-  if (event.kind === 'decision') return event.templateId === 'medical-emergency' ? 120 : event.templateId === 'court-hearing' ? 110 : event.templateId === 'arrest' ? 100 : event.templateId === 'property-sale-offer' ? 40 : 20;
+  if (event.kind === 'decision') return event.templateId === 'medical-emergency' ? 120 : event.templateId === 'medical-symptoms' || event.templateId === 'medical-diagnosis' ? 80 : event.templateId === 'court-hearing' ? 110 : event.templateId === 'arrest' ? 100 : event.templateId === 'property-sale-offer' ? 40 : 20;
   return 30;
 }
 export function offerPending(world: World, event: Pending, priority = priorityOf(event)) {

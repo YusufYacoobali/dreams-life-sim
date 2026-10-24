@@ -27,7 +27,7 @@ import { assetCatalog } from './content/assets';
 import { biologySchema, custodySchema, genders, householdSchema, marriageSchema, newFamilyPerson, pregnancySchema, relationshipSchema } from './systems/familySchemas';
 import { netWorth } from './valuation';
 import { annualSchema, estateSchema, willSchema } from './systems/estateSchemas';
-import { healthSchema, newHealth } from './systems/healthSchemas';
+import { healthSchema, newHealth, newMedicalEpisode } from './systems/healthSchemas';
 import { caseSchema, contrabandSchema, gangSchema, incidentSchema, newLegal, personLegalSchema, remandSchema, sentenceSchema } from './systems/legalSchemas';
 import { priorityOf } from './pendingQueue';
 import { validateLegal } from './systems/legalValidation';
@@ -123,7 +123,7 @@ export const journalSchema = z.object({ id: z.string(), date: dateSchema, person
 const immutableTransactions = new WeakSet<object>();
 const immutableWorlds = new WeakSet<object>();
 export const worldSchema = z.object({
-  schemaVersion: z.literal(48), engineVersion: z.literal(50), contentVersion: z.literal(27),
+  schemaVersion: z.literal(49), engineVersion: z.literal(51), contentVersion: z.literal(28),
   id: z.string().regex(/^life_[a-zA-Z0-9_-]+$/), revision: z.number().int().nonnegative(),
   date: dateSchema, activePersonId: personId,
   random: z.object({ events: z.number().int().min(0).max(0xFFFFFFFF), npcs: z.number().int().min(0).max(0xFFFFFFFF), economy: z.number().int().min(0).max(0xFFFFFFFF), outcomes: z.number().int().min(0).max(0xFFFFFFFF) }),
@@ -213,6 +213,8 @@ export function validateWorld(value: unknown, immutable = false): World {
     for (const condition of person.health.conditions) {
       if (conditionIds.has(condition.id) || compareDates(condition.onset, person.born) < 0 || compareDates(condition.onset, world.date) > 0 || (!!condition.resolved !== (condition.status === 'recovered')) || (condition.status === 'recovered' && (condition.severity !== 0 || condition.treatment)) || condition.status === 'controlled' && !condition.treatment || (condition.resolved && (compareDates(condition.resolved, condition.onset) < 0 || compareDates(condition.resolved, world.date) > 0)) || (condition.diagnosed && (compareDates(condition.diagnosed, condition.onset) < 0 || compareDates(condition.diagnosed, world.date) > 0)) || (condition.treatment && (!condition.diagnosed || compareDates(condition.treatment.started, condition.onset) < 0 || compareDates(condition.treatment.started, world.date) > 0 || condition.treatment.lastPaymentMonth > world.date.year * 12 + world.date.month - 1)) || condition.lastEmergencyYear !== null && condition.lastEmergencyYear > world.date.year) throw new Error('Invalid condition history');
       conditionIds.add(condition.id);
+      if (condition.episode.admissionAt && (compareDates(condition.episode.admissionAt, condition.onset) < 0 || compareDates(condition.episode.admissionAt, world.date) > 0) || condition.episode.stabilized && !condition.episode.admissionAt) throw new Error('Invalid medical episode');
+      if (condition.episode.admissionAt && (!condition.episode.notified || !condition.episode.assessed || !person.health.records.some(record => record.kind === 'hospital' && record.conditionId === condition.id && compareDates(record.date, condition.episode.admissionAt!) === 0))) throw new Error('Medical episode has no matching admission record');
     }
     for (const record of person.health.records) {
       if (medicalIds.has(record.id) || compareDates(record.date, person.born) < 0 || compareDates(record.date, world.date) > 0 || !world.people[record.payerId] || record.providerId && !world.people[record.providerId] || record.conditionId && !conditionIds.has(record.conditionId)) throw new Error('Invalid medical record'); medicalIds.add(record.id);
@@ -389,6 +391,11 @@ export function validateWorld(value: unknown, immutable = false): World {
     validateStoryImmediate(world, pending);
     if (pending.personIds.some(id => !world.people[id] || world.people[id].died)) throw new Error('Invalid bound event person');
     if (new Set(pending.choices.map(choice => choice.id)).size !== pending.choices.length) throw new Error('Duplicate decision choices');
+    if (pending.templateId === 'medical-symptoms' || pending.templateId === 'medical-diagnosis') {
+      const required = pending.templateId === 'medical-symptoms' ? ['assess', 'ignore'] : ['treat', 'leave'];
+      const effects = pending.choices.map(choice => choice.effects[0]);
+      if (pending.choices.length !== 2 || pending.choices.some(choice => choice.effects.length !== 1) || effects.some(effect => effect.kind !== 'medical-episode') || new Set(effects.map(effect => effect.kind === 'medical-episode' ? effect.conditionId : '')).size !== 1 || effects.some((effect, index) => effect.kind !== 'medical-episode' || effect.action !== required[index])) throw new Error('Invalid medical episode binding');
+    }
     for (const choice of pending.choices) for (const effect of choice.effects) {
       if (effect.kind === 'school-grade' && (!pending.personIds.includes(effect.personId) || !world.schoolCommunities.some(item => item.id === effect.communityId && item.personId === effect.personId && !item.ended))) throw new Error('Invalid bound school grade');
       if (effect.kind === 'skill' && (!world.people[effect.personId] || !pending.personIds.includes(effect.personId))) throw new Error('Invalid bound skill target');
@@ -397,6 +404,11 @@ export function validateWorld(value: unknown, immutable = false): World {
       if (effect.kind === 'pet-bond' && (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !world.pets.some(pet => pet.id === effect.petId && pet.status === 'active'))) throw new Error('Invalid bound pet bond');
       if (effect.kind === 'connect-person' && (!world.people[effect.personId] || world.people[effect.personId].died || effect.personId === world.activePersonId || !pending.personIds.includes(effect.personId))) throw new Error('Invalid introduction target');
       if (effect.kind === 'emergency-care' && (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !world.people[effect.personId].health.conditions.some(item => item.id === effect.conditionId && item.status !== 'recovered'))) throw new Error('Invalid medical emergency target');
+      if (effect.kind === 'medical-episode') {
+        const condition = world.people[effect.personId]?.health.conditions.find(item => item.id === effect.conditionId && item.status !== 'recovered');
+        const expected = effect.action === 'assess' || effect.action === 'ignore' ? 'medical-symptoms' : 'medical-diagnosis';
+        if (effect.personId !== world.activePersonId || !pending.personIds.includes(effect.personId) || !condition || pending.templateId !== expected || !condition.episode.notified || expected === 'medical-diagnosis' && !condition.diagnosed || (effect.action === 'ignore' || effect.action === 'leave') && effect.quotedCost !== 0n) throw new Error('Invalid medical episode action');
+      }
       if (effect.kind === 'legal-bail' || effect.kind === 'legal-remand' || effect.kind === 'legal-plea') {
         const item = world.cases.find(candidate => candidate.id === effect.caseId && candidate.personId === world.activePersonId && candidate.status === 'awaiting-trial');
         if (!item || !pending.personIds.includes(item.personId)) throw new Error('Invalid bound court action');
@@ -700,6 +712,15 @@ export function decodeWorld(text: string, immutable = false, maxCharacters: 20_0
   // Cult gameplay polish preserves published integrated writing/cult offers.
   if (parsed && parsed.schemaVersion === 47 && parsed.engineVersion === 49 && parsed.contentVersion === 26) {
     parsed.schemaVersion = 48; parsed.engineVersion = 50; parsed.contentVersion = 27;
+  }
+  // Episode state is prospective. Saved decisions/results, diagnosis dates,
+  // bills and records stay literal; only factual old admissions seed the latch.
+  if (parsed && parsed.schemaVersion === 48 && parsed.engineVersion === 50 && parsed.contentVersion === 27) {
+    for (const person of Object.values(parsed.people) as Person[]) for (const condition of person.health.conditions) {
+      const hospital = person.health.records.filter(record => record.conditionId === condition.id && record.kind === 'hospital').at(-1);
+      condition.episode = { ...newMedicalEpisode(), notified: !!condition.diagnosed || condition.lastEmergencyYear !== null, assessed: !!condition.diagnosed, admissionAt: hospital ? { ...hospital.date } : null, stabilized: !!hospital && condition.status === 'controlled' };
+    }
+    parsed.schemaVersion = 49; parsed.engineVersion = 51; parsed.contentVersion = 28;
   }
   return validateWorld(parsed, immutable);
 }

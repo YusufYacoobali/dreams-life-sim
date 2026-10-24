@@ -1,6 +1,7 @@
 import { monthFrom } from '../../src/game/calendar';
 import { createLife, randomCreation } from '../../src/game/createLife';
 import { copyWorld, type World } from '../../src/game/model';
+import { newMedicalEpisode } from '../../src/game/systems/healthSchemas';
 import { answerReview, decodeReviewTracker, negativeReviewMoment, newReviewTracker, observeReviewCommit, offerReview, reviewCandidateEligible, type ReviewTracker } from '../../src/reviews/tracker';
 const date={year:2026,month:10,day:22};
 function clean(id='life_review_unit') {
@@ -69,7 +70,7 @@ test('routine passive stat drift no longer disqualifies an otherwise healthy com
 test.each(['death','illness','prison','breakup','bankruptcy','pet-death','negative-result'] as const)('structured %s blocks an otherwise eligible moment',kind=>{
   const {world,tracker}=eligible(),player=world.people[world.activePersonId];
   if(kind==='death')Object.values(world.people).find(person=>person.id!==player.id)!.died={...world.date};
-  if(kind==='illness')player.health.conditions.push({id:'cold_test',type:'cold',onset:{...world.date},severity:10,status:'recovered',diagnosed:{...world.date},resolved:{...world.date},months:1,lastEmergencyYear:null,treatment:null});
+  if(kind==='illness')player.health.conditions.push({id:'cold_test',type:'cold',onset:{...world.date},severity:10,status:'recovered',diagnosed:{...world.date},resolved:{...world.date},months:1,lastEmergencyYear:null,treatment:null,episode:newMedicalEpisode()});
   if(kind==='prison')world.sentences.push({id:'sentence_review',personId:player.id,caseIds:['case_review'],country:player.country,city:player.city,facility:'Test prison',started:{...world.date},totalMonths:12,servedMonths:1,creditedMonths:0,lastServedMonth:world.date.year*12+world.date.month-1,state:'active',ended:null,behavior:50,routine:{work:false,study:false,exercise:false,conduct:'quiet'},studyMonths:0,appealRoll:50,appealed:false,releaseReason:null});
   if(kind==='breakup')world.relationships[0].memories.push('breakup:'+world.date.year);
   if(kind==='bankruptcy')world.liabilities.push({id:'debt_review',ownerId:player.id,creditorId:null,currency:'USD',kind:'living',principal:10000n,missedPayments:0,interestBps:300,assetId:null,monthlyPayment:0n,remainingMonths:0});

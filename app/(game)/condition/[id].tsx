@@ -36,7 +36,7 @@ export default function ConditionDetail() {
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 14 }}>
         <HealthLegalArt id={method === 'therapy' || method === 'rehab' ? 'meditation' : 'medicine'} size={76} />
         <View style={{ flexGrow: 1, flexBasis: 170, minWidth: 0, gap: 5 }}>
-          <Body muted>{condition.diagnosed ? 'Recorded diagnosis' : condition.status === 'recovered' ? 'Past symptoms' : 'Assessment not recorded'}</Body>
+          <Body muted>{condition.diagnosed ? 'Recorded diagnosis' : condition.status === 'recovered' ? 'Past symptoms' : condition.episode.assessed ? 'Assessed; cause unconfirmed' : 'Assessment not recorded'}</Body>
           <Heading>{condition.diagnosed ? conditions[condition.type].name : condition.status === 'recovered' ? 'Resolved symptoms' : 'Undiagnosed symptoms'}</Heading>
         </View>
       </View>
@@ -45,6 +45,7 @@ export default function ConditionDetail() {
         <Text style={{ color: c.ink, fontSize: 16, fontWeight: '600' }}>{condition.status === 'recovered' ? 'Resolved' : condition.status === 'controlled' ? 'Controlled with ongoing care' : 'Active'}</Text>
         <Body muted>First noticed: {dateLabel(condition.onset)}</Body>
         {condition.diagnosed && <Body muted>First diagnosis: {dateLabel(condition.diagnosed)}</Body>}
+        {condition.episode.admissionAt && <Body muted>Hospital admission: {dateLabel(condition.episode.admissionAt)}</Body>}
         {condition.resolved && <Body muted>Resolution recorded: {dateLabel(condition.resolved)}</Body>}
         <Body muted>{condition.months} recorded months</Body>
       </View>

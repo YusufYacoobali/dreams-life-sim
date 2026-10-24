@@ -11,6 +11,7 @@ import { monthlyAmount } from '../../src/game/rules';
 import { monthFrom } from '../../src/game/calendar';
 import graduateFixture from '../fixtures/v3-employed-graduate.json';
 import historyFixture from '../fixtures/v7-history-archive.json';
+import medicalArchive from '../fixtures/v8-medical-archive.json';
 import { decodeSave } from '../../src/persistence/archive';
 import { addChild } from '../../src/game/systems/family';
 import { createContact } from '../../src/game/systems/npcs';
@@ -19,7 +20,7 @@ function ack(world: World) { if (world.pending?.kind !== 'result') throw new Err
 function rollState(min: number, max = 100) { for (let state = 0; state < 10000; state++) { const value = randomInteger(state, 1, 100).value; if (value >= min && value <= max) return state; } throw new Error('No test state'); }
 test('a genuine v7 branch archive migrates its live checkpoint and compressed history without inventing prior illnesses', () => {
   const archive = decodeSave(JSON.stringify(historyFixture)), world = archive.world;
-  expect(world.schemaVersion).toBe(48); expect(world.annual?.monthsProcessed).toBe(9); expect(world.pending?.kind === 'result' && world.pending.title).toBe('Welcome, little one');
+  expect(world.schemaVersion).toBe(49); expect(world.annual?.monthsProcessed).toBe(9); expect(world.pending?.kind === 'result' && world.pending.title).toBe('Welcome, little one');
   expect(archive.branch?.snapshotId).toBe(archive.snapshots[0].summary.id);
   for (const person of Object.values(world.people)) expect(person.health.conditions).toEqual([]);
   expect(decodeWorld(encodeWorld(world))).toEqual(world);
@@ -58,9 +59,9 @@ test('a child consultation is paid by a real caregiver, with the receipt bound t
   expect(quote.payer.id).not.toBe(child.id); world = ack(resolveCommand(world, { type: 'consult', service: 'symptoms' }));
   expect(accountFor(world).cash).toBe(0n); expect(accountFor(world, world.people[quote.payer.id]).cash).toBe(before - quote.amount); expect(world.people[child.id].health.records.at(-1)!.payerId).toBe(quote.payer.id); validateWorld(world);
 });
-test('an emergency interrupts a real year, and a fatal care outcome has priority over its result popup', () => {
-  let world = fixture(); const patient = world.people[world.activePersonId]; patient.stats.health = 2; addCondition(world, patient, 'asthma', 95);
-  world = resolveCommand(world, { type: 'advance' }); expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency'); expect(world.annual?.monthsProcessed).toBe(1);
+test('a legacy emergency still interrupts its real year, and a fatal care outcome has priority over its original result popup', () => {
+  let world = decodeSave(JSON.stringify(medicalArchive)).world; const patient = world.people[world.activePersonId]; patient.stats.health = 2;
+  expect(world.pending?.kind === 'decision' && world.pending.templateId).toBe('medical-emergency'); expect(world.annual?.monthsProcessed).toBe(1);
   if (world.pending?.kind !== 'decision') throw new Error('Expected emergency'); world.random.outcomes = rollState(99);
   const restored = decodeWorld(encodeWorld(world)); world = resolveCommand(restored, { type: 'choose', eventId: restored.pending!.id, choiceId: 'care' });
   expect(world.people[world.activePersonId].died).not.toBeNull(); expect(world.pending).toBeNull(); expect(world.annual).toBeNull(); expect(world.estates).toHaveLength(1); validateWorld(world);
@@ -91,7 +92,7 @@ test('biological family history changes inherited risk without inventing an illn
   expect(biological.health.familyRisks).toContain('asthma'); expect(biological.health.conditions).toEqual([]); expect(adopted.health.familyRisks).toEqual([]); validateWorld(world);
 });
 test('a saved emergency honours its stored quoted bill when it differs from the current programme price', () => {
-  let world = fixture(); addCondition(world, world.people[world.activePersonId], 'asthma', 80); world = resolveCommand(world, { type: 'advance' });
+  let world = decodeSave(JSON.stringify(medicalArchive)).world;
   if (world.pending?.kind !== 'decision' || world.pending.templateId !== 'medical-emergency') throw new Error('Expected emergency');
   const effect = world.pending.choices[0].effects[0]; if (effect.kind !== 'emergency-care') throw new Error('Expected medical terms');
   effect.quotedCost = 41000n; world.pending.body = 'The saved hospital assessment quote is $410.'; const balance = accountFor(world).cash; world.random.outcomes = rollState(1, 50);

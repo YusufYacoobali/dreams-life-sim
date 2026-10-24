@@ -158,22 +158,22 @@ test('ordinary prison periods keep their actual work and study with no change to
   expect(result.ledger.filter(item => item.personId === initial.activePersonId && item.category === 'prison-pay')).toHaveLength(3);
 });
 
-test('a real saved medical decision retains the already-worked period and resumes through both later hospital periods on acknowledgement', () => {
-  const initial = imprisoned(); addCondition(initial, initial.people[initial.activePersonId], 'asthma', 80);
+test('a newly critical illness interrupts prison activity immediately and resumes the saved sentence through both later hospital periods', () => {
+  const initial = imprisoned(); addCondition(initial, initial.people[initial.activePersonId], 'asthma', 95);
   const interrupted = resolveCommand(initial, { type: 'resume' });
   expect(interrupted.date).toEqual({ year: 2023, month: 3, day: 1 });
-  expect(interrupted.pending).toMatchObject({ kind: 'decision', templateId: 'medical-emergency' });
-  expect(activeSentence(interrupted)!.studyMonths).toBe(1);
+  expect(interrupted.pending).toMatchObject({ kind: 'result', title: 'Rushed to Hospital' });
+  expect(activeSentence(interrupted)!.studyMonths).toBe(0);
   const alreadyPaid = interrupted.ledger.filter(item => item.personId === initial.activePersonId && item.category === 'prison-pay');
-  expect(alreadyPaid).toHaveLength(1); expect(alreadyPaid[0].month).toBe(3);
-  const care = choose(interrupted, 'care');
+  expect(alreadyPaid).toHaveLength(0);
+  const care = interrupted;
   expect(hospitalized(care, care.people[care.activePersonId])).toBe(true);
   expect(care.people[care.activePersonId].health.records.at(-1)).toMatchObject({ kind: 'hospital', cost: 0n });
   const restored = decodeWorld(encodeWorld(care)); expect(restored.pending).toEqual(care.pending); expect(restored.random).toEqual(care.random);
   const result = acknowledge(restored);
   expect(result.date).toEqual({ year: 2023, month: 5, day: 1 });
   expect(result.pending).toMatchObject({ kind: 'result', title: 'Released from custody' });
-  expect(result.sentences.find(item => item.personId === initial.activePersonId)).toMatchObject({ servedMonths: 3, creditedMonths: 1, studyMonths: 1 });
+  expect(result.sentences.find(item => item.personId === initial.activePersonId)).toMatchObject({ servedMonths: 3, creditedMonths: 1, studyMonths: 0 });
   expect(result.ledger.filter(item => item.personId === initial.activePersonId && item.category === 'prison-pay')).toEqual(alreadyPaid);
   expect(() => resolveCommand(result, { type: 'acknowledge', resultId: care.pending!.id })).toThrow();
 });

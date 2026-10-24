@@ -40,7 +40,7 @@ function condition(world: World, conditionId: string) {
   if (!found) throw new Error('Missing original condition');
   return found;
 }
-const emergency = (world: World) => world.pending?.kind === 'decision' && world.pending.templateId === 'medical-emergency';
+const admission = (world: World) => world.pending?.kind === 'result' && world.pending.title === 'Rushed to Hospital';
 
 test('the genuine v8 saved emergency retains its exact old copy, choices, quote and history through current cold care', () => {
   const archive = decodeSave(JSON.stringify(medicalArchive)), oldPending = structuredClone(archive.world.pending);
@@ -60,7 +60,7 @@ test('the genuine v8 saved emergency retains its exact old copy, choices, quote 
   expect(archive.world.pending).toEqual(oldPending);
 });
 
-test('later actual emergency care names an already diagnosed condition without replacing its first diagnosis date', () => {
+test('a genuine later crisis after stabilization is admitted without replacing the old first diagnosis or prior care history', () => {
   let world = decodeSave(JSON.stringify(medicalArchive)).world;
   const conditionId = world.people[world.activePersonId].health.conditions[0].id, firstDate = { ...world.date };
   world = choose(world, 'care');
@@ -68,16 +68,15 @@ test('later actual emergency care names an already diagnosed condition without r
   world = until(world, candidate => !candidate.pending && !candidate.annual);
   expect(condition(world, conditionId).treatment).not.toBeNull();
   world = resolveCommand(world, { type: 'stop-treatment', conditionId });
-  world = until(world, emergency);
-  expect(world.pending?.body).toContain('Your symptoms have become serious: recurring wheezing and shortness of breath.');
-  expect(world.pending?.body).toContain('You have been diagnosed with Asthma.');
+  expect(condition(world, conditionId).episode.stabilized).toBe(true);
+  world = until(world, admission, 500);
+  expect(world.pending?.body).toContain('Your asthma has become critical.');
   const nextDate = { ...world.date };
   expect(nextDate.year).toBeGreaterThan(firstDate.year);
   expect(condition(world, conditionId).diagnosed).toEqual(firstDate);
   const bound = structuredClone(world.pending);
   world = cold(world);
   expect(world.pending).toEqual(bound);
-  world = cold(choose(world, 'care'));
   expect(condition(world, conditionId).diagnosed).toEqual(firstDate);
   expect(condition(world, conditionId).treatment?.started).toEqual(nextDate);
   expect(world.people[world.activePersonId].health.records.at(-1)).toMatchObject({ kind: 'hospital', date: nextDate, conditionId });
@@ -85,40 +84,39 @@ test('later actual emergency care names an already diagnosed condition without r
   expect(world.journal.slice(0, firstJournal.length)).toEqual(firstJournal);
 });
 
-test('declining the original saved assessment leaves the next new emergency descriptive without disclosing an unknown diagnosis', () => {
+test('declining a saved assessment can lead to a real urgent admission and its actual first diagnosis, rather than another yearly assessment', () => {
   let world = decodeSave(JSON.stringify(medicalArchive)).world;
   const conditionId = world.people[world.activePersonId].health.conditions[0].id;
-  world = until(choose(world, 'decline'), emergency);
-  expect(condition(world, conditionId).diagnosed).toBeNull();
-  expect(world.pending?.body).toContain('recurring wheezing and shortness of breath');
-  expect(world.pending?.body).not.toMatch(/asthma|diagnosed/i);
+  world = until(choose(world, 'decline'), admission);
+  expect(condition(world, conditionId).diagnosed).toEqual(world.date);
+  expect(world.pending?.body).toMatch(/Dr .+ diagnoses asthma/);
   const bound = structuredClone(world.pending);
   world = cold(world);
   expect(world.pending).toEqual(bound);
-  const diagnosisDate = { ...world.date };
-  world = cold(choose(world, 'care'));
-  expect(condition(world, conditionId).diagnosed).toEqual(diagnosisDate);
+  expect(condition(world, conditionId).episode.admissionAt).toEqual(world.date);
+  expect(world.people[world.activePersonId].health.records.filter(row => row.kind === 'hospital' && row.conditionId === conditionId)).toHaveLength(1);
 });
 
-test('known versus unknown emergency disclosure consumes identical randomness and preserves all bound medical terms and effects', () => {
+test('known versus unknown critical admission uses identical treatment, fees and random draws; only actual diagnosis facts differ', () => {
   // Paired unit knowledge states, not a claim of a naturally earned diagnosis.
   const unknown = decodeWorld(JSON.stringify(graduate)), patient = unknown.people[unknown.activePersonId];
-  const added = addCondition(unknown, patient, 'asthma', 80), known = decodeWorld(encodeWorld(unknown));
+  const added = addCondition(unknown, patient, 'asthma', 95), known = decodeWorld(encodeWorld(unknown));
   condition(known, added.id).diagnosed = { ...known.date };
   const unknownDecision = resolveCommand(unknown, { type: 'advance' }), knownDecision = resolveCommand(known, { type: 'advance' });
-  expect(emergency(unknownDecision)).toBe(true); expect(emergency(knownDecision)).toBe(true);
+  expect(admission(unknownDecision)).toBe(true); expect(admission(knownDecision)).toBe(true);
   expect(unknownDecision.random).toEqual(knownDecision.random);
-  expect(unknownDecision.pending?.body).not.toContain('Asthma');
-  expect(knownDecision.pending?.body).toContain('You have been diagnosed with Asthma.');
-  const normalized = decodeWorld(encodeWorld(knownDecision));
-  condition(normalized, added.id).diagnosed = null;
-  normalized.pending!.body = unknownDecision.pending!.body;
-  expect(encodeWorld(validateWorld(normalized))).toBe(encodeWorld(unknownDecision));
-  const unknownCare = choose(unknownDecision, 'care'), knownCare = choose(knownDecision, 'care');
-  expect(knownCare.random).toEqual(unknownCare.random);
-  expect(knownCare.pending).toEqual(unknownCare.pending);
-  expect(condition(knownCare, added.id).treatment).toEqual(condition(unknownCare, added.id).treatment);
-  expect(accountFor(knownCare).cash).toBe(accountFor(unknownCare).cash);
+  expect(unknownDecision.pending?.body).toMatch(/Dr .+ diagnoses asthma/);
+  expect(knownDecision.pending?.body).toContain('Your asthma has become critical.');
+  expect(condition(knownDecision, added.id).diagnosed).toEqual(known.date);
+  expect(condition(unknownDecision, added.id).diagnosed).toEqual(unknownDecision.date);
+  expect(condition(knownDecision, added.id).treatment).toEqual(condition(unknownDecision, added.id).treatment);
+  expect(knownDecision.accounts).toEqual(unknownDecision.accounts);
+  expect(knownDecision.ledger).toEqual(unknownDecision.ledger);
+  expect(knownDecision.journal).toEqual(unknownDecision.journal);
+  if (knownDecision.pending?.kind !== 'result' || unknownDecision.pending?.kind !== 'result') throw new Error('Expected admissions');
+  expect(knownDecision.pending.effects).toEqual(unknownDecision.pending.effects);
+  const unknownRecords = unknownDecision.people[unknownDecision.activePersonId].health.records;
+  expect(unknownRecords.filter(row => row.kind === 'diagnosis' && row.conditionId === added.id)).toHaveLength(1);
 });
 
 test('background NPC care preserves the known first diagnosis and gives an unknown condition its actual first care date without extra draws', () => {

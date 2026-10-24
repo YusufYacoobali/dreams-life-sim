@@ -21,6 +21,7 @@ export const effectSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('decline-sale'), assetId: z.string() }),
   z.object({ kind: z.literal('connect-person'), personId: z.string() }),
   z.object({ kind: z.literal('emergency-care'), personId: z.string(), conditionId: z.string(), accepted: z.boolean(), quotedCost: z.bigint().nonnegative() }),
+  z.object({ kind: z.literal('medical-episode'), personId: z.string(), conditionId: z.string(), action: z.enum(['assess', 'ignore', 'treat', 'leave']), quotedCost: z.bigint().nonnegative() }),
   z.object({ kind: z.literal('legal-bail'), caseId: z.string() }),
   z.object({ kind: z.literal('legal-remand'), caseId: z.string() }),
   z.object({ kind: z.literal('legal-plea'), caseId: z.string(), plea: z.enum(['guilty', 'not-guilty', 'leniency']) }),
