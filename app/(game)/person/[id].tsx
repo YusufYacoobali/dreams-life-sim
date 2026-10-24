@@ -15,7 +15,7 @@ import { Illustration } from '../../../src/assets/Illustration';
 import { PolishArt } from '../../../src/assets/PolishArt';
 import { affectionColor } from '../../../src/ui/RelationshipRow';
 import { rules } from '../../../src/game/rules';
-import { FamilyCommand } from '../../../src/game/systems/family';
+import { babyDiscussionReason, FamilyCommand, tryForBabyReason } from '../../../src/game/systems/family';
 import { TeenRelationshipCard } from '../../../src/ui/TeenRelationship';
 import { currentSchool } from '../../../src/game/systems/schoolSchemas';
 import { schoolHelpReason } from '../../../src/game/systems/school';
@@ -53,6 +53,9 @@ function PersonDetails({ id }: { id: string }) {
   useEffect(() => () => { conversationOpenRef.current = false; dateOpenRef.current = false; }, []);
   const [panel, setPanel] = useState<'gift' | 'wedding' | null>(null), [amount, setAmount] = useState(''), [message, setMessage] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<{ command: SocialCommand | FamilyCommand; event: EventPresentation } | null>(null), [childName, setChildName] = useState('');
+  const confirmationRef = useRef(confirmation), confirmationSubmitting = useRef(false);
+  confirmationRef.current = confirmation;
+  useEffect(() => () => { confirmationRef.current = null; }, []);
   const interactions = usePersonInteractions(world, id, conversationOpen || dateOpen || !!confirmation || friendshipReviewOpen || teenReviewOpen);
   const player = world.people[world.activePersonId], relation = person && relationFor(world, player.id, person.id), age = ageOn(player, world.date);
   const money = (minor: bigint) => formatMoney({ minor, currency: accountFor(world).currency });
@@ -74,17 +77,20 @@ function PersonDetails({ id }: { id: string }) {
     body: 'Pick a plan. They can decline; you pay only if they accept.',
     confirmLabel: 'Invite ' + person.firstName, choices: activities.map(activity => ({ id: activity.id, label: activity.label + ' · ' + formatMoney({ minor: activity.cost, currency: activity.currency }) + '\n' + activity.body, disabledReason: activity.disabledReason })),
   } : null;
-  const reviewArt:Partial<Record<SocialCommand['type']|FamilyCommand['type'],PersonActionArtId>>={'gift-money':'give-money','propose':'propose','marry':'plan-wedding','breakup':'breakup','ask-to-move-in':'move-in','review-custody':'review-custody'};
+  const reviewArt:Partial<Record<SocialCommand['type']|FamilyCommand['type'],PersonActionArtId>>={'gift-money':'give-money','propose':'propose','marry':'plan-wedding','breakup':'breakup','ask-to-move-in':'move-in','review-custody':'review-custody','try-child':'family-planning','discuss-child':'family-planning'};
   const confirm = (command: SocialCommand | FamilyCommand, title: string, body: string, confirmLabel: string) => {
     const art=command.type==='interact'?command.action:reviewArt[command.type];
-    setConfirmation({ command, event: { id: command.type + ':' + id, kind: 'confirmation', illustration:art?'person-action:'+art:undefined, title, body, terms: [], confirmLabel } });
+    const review = { command, event: { id: command.type + ':' + id, kind: 'confirmation' as const, illustration:art?'person-action:'+art:undefined, title, body, terms: [], confirmLabel } };
+    confirmationRef.current = review; setConfirmation(review);
   };
   const used = (action: string) => socialActionUsed(world, id, action) ? 'Already tried this year' : undefined;
   const familyRelation = relation?.roles.some(role=>role==='parent'||role==='guardian'||role==='sibling');
+  const romanticPartner = !!relation && ['dating', 'engaged', 'married'].includes(relation.romance) && !familyRelation;
+  const babyReason = romanticPartner ? person.wantsChildren ? tryForBabyReason(world, id) : babyDiscussionReason(world, id) : undefined;
   const bondIcon = familyRelation ? 'family-life' : 'friends';
   const parentFigure = relation?.roles.some(role => role === 'parent' || role === 'guardian') && relation.to === player.id;
   const display = person && personProfileDisplay(world,person.id);
-  return <Page><Header title="Person Profile" backDisabled={(!!conversation || !!date || interactions.reviewing) && busy} onBack={() => { if (!conversationSubmitting.current && !dateSubmitting.current && interactions.canLeave()) router.back(); }} />
+  return <Page><Header title="Person Profile" backDisabled={(!!confirmation || !!conversation || !!date || interactions.reviewing) && busy} onBack={() => { if (!confirmationSubmitting.current && !conversationSubmitting.current && !dateSubmitting.current && interactions.canLeave()) router.back(); }} />
     {person ? <>
       <Card><View style={{flexDirection:stackedIdentity?'column':'row',alignItems:stackedIdentity?'flex-start':'center',gap:16}}>
         <Portrait name={fullName(person)} personId={person.id} appearance={person.appearance} age={ageOn(person,world.date)} size={88} />
@@ -117,7 +123,26 @@ function PersonDetails({ id }: { id: string }) {
       {school?.currentTeacherId === id && <Card><Heading size={18}>School Support</Heading><ActionRow title="Ask for Academic Help" subtitle="An extra session once each school year" icon={<PersonActionArt id="academic-help" size={40} />} disabled={busy} disabledReason={schoolHelpReason(world, school, id)} onPress={() => void dispatch({ type: 'school-help', communityId: school.id, teacherId: id })} /></Card>}
       {colleague && <Card><Heading size={18}>{colleague.role === 'supervisor' ? 'Your Supervisor' : 'Your Coworker'}</Heading><Body muted>{workplace!.employer}</Body>{colleague.role === 'supervisor' && <><ActionRow title="Ask for Work Feedback" icon={<PersonActionArt id="work-feedback" size={40} />} subtitle="Once a year · Uses 4 energy" disabled={busy} disabledReason={workFeedbackReason(world, workplace, id)} onPress={() => void dispatch({ type: 'work-feedback', workplaceId: workplace!.id, supervisorId: id })} /><ActionRow title="Ask for a Raise" icon={<PersonActionArt id="request-raise" size={40} />} subtitle="5% higher pay · Uses 6 energy" disabled={busy} disabledReason={workRaiseReason(world, workplace, id)} onPress={() => void dispatch({ type: 'request-raise', workplaceId: workplace!.id, supervisorId: id })} /></>}</Card>}
       {relation.roles.includes('parent') && relation.from === player.id && ageOn(person, world.date) < rules[person.country].adultAge && <Card><Heading size={18}>Care & identity</Heading><Body>Lives in {person.city}{person.householdId === player.householdId ? ' with you' : ' in another household'}.</Body>{person.householdId === player.householdId && <><TextInput accessibilityLabel="Child first name" editable={!busy} value={childName} onChangeText={setChildName} maxLength={40} placeholder={person.firstName} placeholderTextColor={c.muted} style={{ color: c.ink, backgroundColor: c.inset, padding: 12, borderRadius: 10 }} /><Button label="Save Child’s Name" accessibilityLabel={displayText(currentName ? "Save Child’s Name. This is their current name" : undefined)} busy={busy} disabled={!childName.trim() || currentName} onPress={async () => { if (!person || childName.trim() === person.firstName) return; setMessage(null); if (await dispatch({ type: 'name-child', childId: id, firstName: childName })) setChildName(''); }} />{currentName && <Body muted>This is their current name.</Body>}</>}{custody && <><Body>{custody.arrangement === 'shared' ? 'Shared care' : 'Primary care'} · Primary home with {world.people[custody.primaryId].firstName}</Body>{(['shared', 'me', 'them'] as const).map(preference => <ActionRow disabled={busy} key={preference} title={preference === 'shared' ? 'Request Shared Care' : preference === 'me' ? 'Request Primary Care' : 'Request Other Parent’s Care'} icon={<PersonActionArt id="review-custody" size={40} />} disabledReason={custody.lastReviewYear === world.date.year ? 'Reviewed this year' : undefined} onPress={() => confirm({ type: 'review-custody', childId: id, preference }, 'Review custody?', 'Ask for a care arrangement that works for your child and both parents.', 'Review Custody')} />)}</>}</Card>}
-      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time'] as const).map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together' }[action]} icon={<PersonActionArt id={action} size={40} />} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={player.died ? 'This life has ended' : action === 'talk' ? conversationReason : age < 3 ? 'Available from age three' : used(action)} onPress={() => {
+      {age >= rules[player.country].adultAge && ageOn(person, world.date) >= rules[person.country].adultAge && !familyRelation && <Card><Heading size={18}>Your relationship</Heading>
+        <ActionRow disabled={busy} title={relation.romance === 'none' || relation.romance === 'ex' ? 'Ask on a Date' : 'Go on a Date'} subtitle="Choose an activity and see its cost" icon={<PersonActionArt id="ask-date" size={40} />} disabledReason={dateReason} onPress={() => {
+          if (busy || dateSubmitting.current || conversationOpenRef.current || dateReason || confirmation || friendshipReviewOpen || teenReviewOpen || interactions.reviewing) return;
+          setMessage(null); dateOpenRef.current = true; setDateOpen(true);
+        }} />
+        {romanticPartner && <>
+          <ActionRow title="Spend Time Together" subtitle={'Budget ' + money(dateBudget(world) / 2n)} icon={<PersonActionArt id="spend-time" size={40} />} disabled={busy} disabledReason={player.died ? 'This life has ended' : used('spend-time')} onPress={() => void dispatch({ type: 'interact', action: 'spend-time', personId: id })} />
+          <ActionRow title={person.wantsChildren ? 'Try for a Baby' : 'Discuss Having a Baby'} icon={<PersonActionArt id="family-planning" size={40} />} disabled={busy} disabledReason={babyReason} onPress={() => {
+            if (busy || babyReason || confirmation || conversationOpen || dateOpen || friendshipReviewOpen || teenReviewOpen || interactions.reviewing) return;
+            setMessage(null);
+            if (person.wantsChildren) confirm({ type: 'try-child', personId: id }, 'Try for a baby with ' + person.firstName + '?', 'You both want a child. Conception depends on age, health and fertility; you can try once each year.', 'Try for a Baby');
+            else confirm({ type: 'discuss-child', personId: id }, 'Talk about having a baby?', 'You tell ' + person.firstName + ' you would love to have a baby. They are not so sure; hear them out and give them time if they say no.', 'Discuss Having a Baby');
+          }} />
+        </>}
+        {relation.romance === 'dating' && <ActionRow disabled={busy} title="Propose" subtitle="Give a ring and ask about your future" icon={<PersonActionArt id="propose" size={40} />} disabledReason={relation.strength < 75 || relation.trust < 60 ? 'Build a stronger bond and trust first' : used('propose')} onPress={() => {const ring=world.assets.some(item=>item.ownerId===player.id&&item.catalogId==='engagement-ring'),offer=assetCatalog.find(item=>item.id==='engagement-ring')!;confirm({ type: 'propose', personId: id }, 'Ask them to marry you?', ring?'Offer your ring; it becomes theirs if they accept. If they decline, you keep it.':'Buy a ring for '+money(assetPrice(world,offer))+' and offer it. If they decline, you keep the ring.', 'Propose');}} />}
+        {relation.romance === 'engaged' && <><ActionRow disabled={busy} title="Plan Your Wedding" icon={<PersonActionArt id="plan-wedding" size={40} />} onPress={() => setPanel(panel === 'wedding' ? null : 'wedding')} />{panel === 'wedding' && weddingBudgets(world).map(budget => <ActionRow disabled={busy} key={budget.id} title={budget.label} icon={<PersonActionArt id="plan-wedding" size={40} />} value={money(budget.amount)} onPress={() => confirm({ type: 'marry', personId: id, budget: budget.amount }, 'Celebrate your wedding?', 'The ceremony costs ' + money(budget.amount) + '. You will share a household and keep your own accounts and property.', 'Get Married')} />)}</>}
+        {relation.romance === 'married' && <><ActionRow title="Family" icon={<FamilyArt id="family-tree" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="Divorce & Settlement" icon={<PersonActionArt id="divorce" size={40} />} onPress={() => router.push('/divorce')} /></>}
+        {(relation.romance === 'dating' || relation.romance === 'engaged') && <ActionRow disabled={busy} title="End Relationship" icon={<PersonActionArt id="breakup" size={40} />} onPress={() => confirm({ type: 'breakup', personId: id }, 'Go separate ways?', 'End the relationship; gifts already given stay with them.', 'End Relationship')} />}
+      </Card>}
+      <Card><Heading size={18}>Time together</Heading>{(['talk', 'compliment', 'spend-time'] as const).filter(action => !romanticPartner || action !== 'spend-time').map(action => <ActionRow disabled={busy} key={action} title={{ talk: 'Have a Conversation', compliment: 'Give a Compliment', 'spend-time': 'Spend Time Together' }[action]} icon={<PersonActionArt id={action} size={40} />} subtitle={action === 'spend-time' && age >= 18 ? 'Budget ' + money(dateBudget(world) / 2n) : undefined} disabledReason={player.died ? 'This life has ended' : action === 'talk' ? conversationReason : age < 3 ? 'Available from age three' : used(action)} onPress={() => {
         if (action === 'talk') {
           if (busy || conversationSubmitting.current || dateOpenRef.current || conversationReason || confirmation || friendshipReviewOpen || teenReviewOpen || interactions.reviewing) return;
           setMessage(null); conversationOpenRef.current = true; setConversationOpen(true);
@@ -137,21 +162,20 @@ function PersonDetails({ id }: { id: string }) {
         {interactions.conflictRows}
         <ActionRow title="Apologise" icon={<PersonActionArt id="apologise" size={40} />} disabled={busy} disabledReason={player.died ? 'This life has ended' : age < 3 ? 'Available from age three' : !relation.memories.some(memory => memory.startsWith('argument:')) ? 'No unresolved argument' : used('apologise')} onPress={() => void dispatch({ type: 'interact', action: 'apologise', personId: id })} />
       </Card>
-      {age >= rules[player.country].adultAge && ageOn(person, world.date) >= 18 && !familyRelation && <Card><Heading size={18}>Your relationship</Heading>
-        <ActionRow disabled={busy} title={relation.romance === 'none' || relation.romance === 'ex' ? 'Ask on a Date' : 'Go on a Date'} subtitle="Choose an activity and see its cost" icon={<PersonActionArt id="ask-date" size={40} />} disabledReason={dateReason} onPress={() => {
-          if (busy || dateSubmitting.current || conversationOpenRef.current || dateReason || confirmation || friendshipReviewOpen || teenReviewOpen || interactions.reviewing) return;
-          setMessage(null); dateOpenRef.current = true; setDateOpen(true);
-        }} />
-        {relation.romance === 'dating' && <ActionRow disabled={busy} title="Propose" subtitle="Give a ring and ask about your future" icon={<PersonActionArt id="propose" size={40} />} disabledReason={relation.strength < 75 || relation.trust < 60 ? 'Build a stronger bond and trust first' : used('propose')} onPress={() => {const ring=world.assets.some(item=>item.ownerId===player.id&&item.catalogId==='engagement-ring'),offer=assetCatalog.find(item=>item.id==='engagement-ring')!;confirm({ type: 'propose', personId: id }, 'Ask them to marry you?', ring?'Offer your ring; it becomes theirs if they accept. If they decline, you keep it.':'Buy a ring for '+money(assetPrice(world,offer))+' and offer it. If they decline, you keep the ring.', 'Propose');}} />}
-        {relation.romance === 'engaged' && <><ActionRow disabled={busy} title="Plan Your Wedding" icon={<PersonActionArt id="plan-wedding" size={40} />} onPress={() => setPanel(panel === 'wedding' ? null : 'wedding')} />{panel === 'wedding' && weddingBudgets(world).map(budget => <ActionRow disabled={busy} key={budget.id} title={budget.label} icon={<PersonActionArt id="plan-wedding" size={40} />} value={money(budget.amount)} onPress={() => confirm({ type: 'marry', personId: id, budget: budget.amount }, 'Celebrate your wedding?', 'The ceremony costs ' + money(budget.amount) + '. You will share a household and keep your own accounts and property.', 'Get Married')} />)}</>}
-        {relation.romance === 'married' && <><ActionRow title="Family Planning" icon={<PersonActionArt id="family-planning" size={40} />} onPress={() => router.push('/family')} /><ActionRow title="Divorce & Settlement" icon={<PersonActionArt id="divorce" size={40} />} onPress={() => router.push('/divorce')} /></>}
-        {(relation.romance === 'dating' || relation.romance === 'engaged') && <ActionRow disabled={busy} title="End Relationship" icon={<PersonActionArt id="breakup" size={40} />} onPress={() => confirm({ type: 'breakup', personId: id }, 'Go separate ways?', 'End the relationship; gifts already given stay with them.', 'End Relationship')} />}
-      </Card>}
+
     </>}
     {person && relation && <TeenRelationshipCard key={'teen:' + world.id + ':' + player.id + ':' + person.id} world={world} personId={person.id} onReviewChange={setTeenReviewOpen} />}
     {person && relation && <BestFriendshipCard key={world.id + ':' + player.id + ':' + person.id + ':' + player.country + ':' + player.city + ':' + person.country + ':' + person.city} world={world} personId={person.id} onReviewChange={setFriendshipReviewOpen} />}
     {interactions.modal}
-    <EventModal event={person && !person.died && relation ? confirmation?.event ?? null : null} busy={busy} error={error} onCancel={() => setConfirmation(null)} onChoose={async () => { if (person && !person.died && relation && confirmation && await dispatch(confirmation.command)) { setConfirmation(null); setPanel(null); } }} />
+    <EventModal event={person && !person.died && relation ? confirmation?.event ?? null : null} busy={busy} error={error} onCancel={() => {
+      if (!busy && !confirmationSubmitting.current && confirmationRef.current === confirmation) { confirmationRef.current = null; setConfirmation(null); }
+    }} onChoose={async () => {
+      if (!person || person.died || !relation || !confirmation || confirmationRef.current !== confirmation || busy || confirmationSubmitting.current) return;
+      confirmationSubmitting.current = true;
+      try {
+        if (await dispatch(confirmation.command) && confirmationRef.current === confirmation) { confirmationRef.current = null; setConfirmation(null); setPanel(null); }
+      } finally { confirmationSubmitting.current = false; }
+    }} />
     <EventModal event={conversation} busy={busy} error={error} onCancel={() => {
       if (!busy && !conversationSubmitting.current) { conversationOpenRef.current = false; setConversationOpen(false); }
     }} onChoose={async selected => {

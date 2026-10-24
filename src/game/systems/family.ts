@@ -13,13 +13,16 @@ import { fxMoney, netWorth } from '../valuation';
 import { accountFor, active, availableCash, bounded, charge, draw, fact, post, result } from './common';
 import { createContact } from './npcs';
 import { moveHousehold, ownHousehold } from './households';
-import { otherPerson, partnerRelation, relationFor, romanceReason } from './relationships';
+import { closeFamily, otherPerson, partnerRelation, relationFor, romanceReason } from './relationships';
 import { hospitalized } from './healthSchemas';
 import { offerPending } from '../pendingQueue';
 import { isConfined } from './legalSchemas';
 
 export const familyCommandSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('try-child') }),
+  // The optional target keeps old recorded commands readable while binding new
+  // profile confirmations to the person the player actually reviewed.
+  z.object({ type: z.literal('try-child'), personId: z.string().optional() }),
+  z.object({ type: z.literal('discuss-child'), personId: z.string() }),
   z.object({ type: z.literal('adopt'), age: z.number().int().min(0).max(6) }),
   z.object({ type: z.literal('name-child'), childId: z.string(), firstName: z.string().trim().min(1).max(40).refine(name => !/[\u0000-\u001F]/.test(name)) }),
   z.object({ type: z.literal('divorce'), personId: z.string(), custody: z.enum(['shared', 'me', 'them']), quotedPayment: z.bigint() }),
@@ -47,6 +50,32 @@ export function conceptionReason(world: World, first: Person, second?: Person): 
   if (!carrier || !contributor) return 'Your reproductive capacities do not allow conception together; adoption is available';
   if (ageOn(carrier, world.date) >= 50 || ageOn(contributor, world.date) >= 80 || !carrier.biology.fertility || !contributor.biology.fertility) return 'Conception is unavailable with your current fertility';
   if (world.pregnancies.some(item => item.status === 'pregnant' && (item.carrierId === first.id || item.carrierId === second.id))) return 'A pregnancy is already in progress';
+}
+function currentPartnerReason(world: World, personId: string): string | undefined {
+  const player = active(world), partner = world.people[personId], relation = partnerRelation(world);
+  if (player.died) return 'This life has ended';
+  if (!partner || partner.died) return 'A living partner is required';
+  if (!relation || otherPerson(world, relation).id !== personId || !['dating', 'engaged', 'married'].includes(relation.romance)) return 'Choose your current adult romantic partner';
+  if (closeFamily(world, player.id, personId)) return 'This is unavailable with a close relative or guardian';
+  if (ageOn(player, world.date) < rules[player.country].adultAge || ageOn(partner, world.date) < rules[partner.country].adultAge) return 'Both partners must be adults';
+}
+export function tryForBabyReason(world: World, personId: string): string | undefined {
+  return currentPartnerReason(world, personId) ?? conceptionReason(world, active(world), world.people[personId]) ??
+    (world.actionCounts[world.activePersonId + ':try-child:' + world.date.year] ? 'You already tried for a baby this year' : undefined);
+}
+/** A separate conversation changes a genuine preference, never conception. */
+export function babyDiscussionReason(world: World, personId: string): string | undefined {
+  const unavailable = currentPartnerReason(world, personId); if (unavailable) return unavailable;
+  const player = active(world), partner = world.people[personId];
+  if (activeTrip(world, player.id) || activeTrip(world, partner.id)) return 'Wait until both partners return from their trip';
+  if (serviceAway(world, player.id) || serviceAway(world, partner.id)) return 'Wait until both partners return from their assignments';
+  if (isConfined(world, player) || isConfined(world, partner)) return 'Both partners need to be outside custody';
+  if (hospitalized(world, player) || hospitalized(world, partner)) return 'Wait until both partners have left hospital';
+  if (player.country !== partner.country || player.city !== partner.city) return 'Meet in the same city to talk about having a baby';
+  if (world.pregnancies.some(item => item.status === 'pregnant' && ([player.id, partner.id].includes(item.carrierId) || [player.id, partner.id].includes(item.otherParentId)))) return 'A pregnancy is already in progress';
+  if (!player.wantsChildren) return 'You do not currently want children';
+  if (partner.wantsChildren) return 'Your partner already wants children';
+  if (world.actionCounts[player.id + ':discuss-child:' + personId + ':' + world.date.year]) return 'Give them time. You already had this conversation this year';
 }
 function startPregnancy(world: World, first: Person, second: Person) {
   const carrier = first.biology.role === 'carry' ? first : second, other = carrier.id === first.id ? second : first;
@@ -131,7 +160,34 @@ export function resolveFamily(world: World, command: FamilyCommand) {
     child.firstName = command.firstName; fact(world, 'I named my child ' + fullName(child) + '.', 'family'); result(world, 'Name saved', 'Their identity and history remain the same.', 'blanket'); return;
   }
   if (age < rules[player.country].adultAge) throw new IneligibleAction('Family planning is available to adults');
+  if (command.type === 'discuss-child') {
+    const reason = babyDiscussionReason(world, command.personId); if (reason) throw new IneligibleAction(reason);
+    const target = world.people[command.personId], bond = relationFor(world, player.id, target.id)!;
+    world.actionCounts[player.id + ':discuss-child:' + target.id + ':' + world.date.year] = 1;
+    // One outcome draw. Even a perfect relationship cannot guarantee agreement.
+    const chance = Math.max(5, Math.min(65, Math.round((bond.strength + bond.trust) / 4 - 15 +
+      (target.traits.includes('kind') ? 8 : 0) + (target.traits.includes('reserved') ? -8 : 0) +
+      (target.stats.discipline >= 60 ? 4 : 0) - Math.max(0, target.stats.stress - 40) / 5)));
+    const roll = draw(world, 'outcomes', 1, 100);
+    let title: string, text: string;
+    if (roll <= chance) {
+      target.wantsChildren = true; bond.strength = bounded(bond.strength + 2); bond.trust = bounded(bond.trust + 2);
+      title = 'On the same page'; text = target.firstName + ' says they would like a child with you. Suddenly, the future looks a little noisier.';
+    } else if (roll <= chance + Math.floor((100 - chance) / 3)) {
+      title = 'Not yet'; text = target.firstName + ' needs more time to think about having a baby. You agree to leave it there for now.';
+    } else if (roll <= chance + Math.floor((100 - chance) * 2 / 3)) {
+      bond.strength = bounded(bond.strength - 2); bond.trust = bounded(bond.trust - 2);
+      title = 'Still a no'; text = target.firstName + ' still does not want children. A heartfelt speech has not changed their answer.';
+    } else {
+      bond.strength = bounded(bond.strength - 5); bond.trust = bounded(bond.trust - 4); target.stats.stress = bounded(target.stats.stress + 3);
+      title = 'A sore subject'; text = target.firstName + ' is annoyed that you pushed the subject. You both need some space from this conversation.';
+    }
+    bond.lastInteractionYear = world.date.year;
+    fact(world, 'I talked to ' + fullName(target) + ' about having a baby. ' + text, 'family');
+    result(world, title, text, 'person-action:family-planning'); return;
+  }
   if (command.type === 'try-child') {
+    if (command.personId) { const targetReason = tryForBabyReason(world, command.personId); if (targetReason) throw new IneligibleAction(targetReason); }
     const reason = conceptionReason(world, player, partner); if (reason) throw new IneligibleAction(reason);
     yearLimit(world, 'try-child');
     const carrier = player.biology.role === 'carry' ? player : partner!; const carrierAge = ageOn(carrier, world.date);

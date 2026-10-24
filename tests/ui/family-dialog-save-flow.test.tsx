@@ -6,6 +6,7 @@ import { router } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
 import { copyWorld, decodeWorld, encodeWorld, fullName, validateWorld, type World } from '../../src/game/model';
 import { recordDeath, resolveCommand, type GameCommand } from '../../src/game/engine';
+import { randomInteger } from '../../src/game/random';
 import { choiceUnavailable } from '../../src/game/choiceAvailability';
 import { childrenOf } from '../../src/game/systems/family';
 import { legacyNPCDefaultGender } from '../../src/game/appearance';
@@ -115,9 +116,13 @@ test('the actual married household keeps a failed move-out review, blocks obsole
 test.each(['adopt', 'try-child'] as const)('%s retains the reviewed family plan after rollback, retries warm, and cold-resumes one actual outcome', async action => {
   const { sqlite, rows, cold, original, pauseNextSave } = await setup(action === 'try-child' ? family() : couple());
   try {
-    const initial = world(), beforeRows = rows(), command: GameCommand = action === 'adopt' ? { type: 'adopt', age: 6 } : { type: 'try-child' }, predicted = resolveCommand(initial, command, true);
-    let view = render(frame(<Family />));
-    const launch = action === 'adopt' ? 'Review Adoption' : 'Try for a Child', submit = action === 'adopt' ? 'Adopt a Child' : 'Try for a Child';
+    const initial = world(), beforeRows = rows();
+    const couple = initial.relationships.find(row => row.romance === 'married' && [row.from, row.to].includes(initial.activePersonId))!;
+    mockPersonId = couple.from === initial.activePersonId ? couple.to : couple.from;
+    const command: GameCommand = action === 'adopt' ? { type: 'adopt', age: 6 } : { type: 'try-child', personId: mockPersonId }, predicted = resolveCommand(initial, command, true);
+    const page = () => action === 'adopt' ? <Family /> : <Person />;
+    let view = render(frame(page()));
+    const launch = action === 'adopt' ? 'Review Adoption' : 'Try for a Baby', submit = action === 'adopt' ? 'Adopt a Child' : 'Try for a Baby';
     if (action === 'adopt') {
       expect(screen.getByRole('radio', { name: 'Infant' })).toBeChecked();
       await act(async () => { fireEvent.press(screen.getByRole('radio', { name: 'Age 6' })); });
@@ -135,9 +140,60 @@ test.each(['adopt', 'try-child'] as const)('%s retains the reviewed family plan 
     }
     expect(screen.getByRole('button', { name: 'Never mind' })).toBeDisabled(); await act(async () => { screen.UNSAFE_getByType(Modal).props.onRequestClose(); }); expect(rows()).toEqual(beforeRows);
     await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false)); expect(world()).toEqual(predicted); expect(screen.queryByRole('button', { name: 'Never mind' })).toBeNull(); expect(unpack).not.toHaveBeenCalled(); unpack.mockRestore();
-    const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Family />)); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(predicted.accounts); expect(world().pregnancies).toEqual(predicted.pregnancies);
+    const savedRows = rows(); view.unmount(); await cold(); view = render(frame(page())); expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows); await press('Continue'); expect(world()).toEqual(acknowledge(predicted)); expect(world().people).toEqual(predicted.people); expect(world().accounts).toEqual(predicted.accounts); expect(world().pregnancies).toEqual(predicted.pregnancies);
     const done = world(), doneRows = rows(); await act(async () => { expect(await mockStore.getState().dispatch(command)).toBe(false); }); expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); view.unmount();
   } finally { jest.restoreAllMocks(); sqlite.close(); }
+});
+
+test('partner discussion preserves a refusal through failed saving, commits one genuine agreement, and cold-restores the preference without pregnancy', async () => {
+  const initial = copyWorld(couple()), partner = otherPerson(initial, partnerRelation(initial)!);
+  initial.people[initial.activePersonId].wantsChildren = true; partner.wantsChildren = false;
+  initial.people[initial.activePersonId].biology.role = 'contribute'; partner.biology.role = 'carry';
+  initial.random.outcomes = Array.from({ length: 1000 }, (_, seed) => seed).find(seed => randomInteger(seed, 1, 100).value <= 5)!; partner.traits = ['kind'];
+  Object.assign(partnerRelation(initial)!, { strength: 95, trust: 95 });
+  mockPersonId = partner.id;
+  const { sqlite, rows, cold, original, pauseNextSave } = await setup(initial);
+  try {
+    const before = world(), beforeRows = rows(), command: GameCommand = { type: 'discuss-child', personId: partner.id }, predicted = resolveCommand(before, command, true);
+    expect(predicted.people[partner.id].wantsChildren).toBe(true);
+    let view = render(frame(<Person />));
+    expect(screen.queryByRole('button', { name: 'Try for a Baby' })).toBeNull();
+    await press('Discuss Having a Baby');
+    const stale = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    await press('Never mind'); await act(async () => { await stale.onChoose('confirm'); });
+    expect(world()).toEqual(before); expect(rows()).toEqual(beforeRows);
+    await press('Discuss Having a Baby');
+    const current = screen.UNSAFE_getAllByType(EventModal).find(row => row.props.event?.kind === 'confirmation')!.props;
+    sqlite.exec("CREATE TRIGGER fail_partner_discussion BEFORE INSERT ON receipts BEGIN SELECT RAISE(ABORT,'storage failure'); END");
+    await confirm('Discuss Having a Baby'); await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/couldn't be saved/));
+    expect(world()).toEqual(before); expect(rows()).toEqual(beforeRows); expect(world().people[partner.id].wantsChildren).toBe(false);
+    sqlite.exec('DROP TRIGGER fail_partner_discussion');
+    const release = pauseNextSave(); await confirm('Discuss Having a Baby');
+    expect(screen.getByRole('button', { name: 'Discuss Having a Baby', busy: true })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Back' })).toBeDisabled();
+    await act(async () => { await stale.onChoose('confirm'); await current.onChoose('confirm'); });
+    expect(rows()).toEqual(beforeRows);
+    await act(async () => { release(); }); await waitFor(() => expect(mockStore.getState().busy).toBe(false));
+    expect(world()).toEqual(predicted); expect(world().pregnancies).toEqual(before.pregnancies);
+    const savedRows = rows(); view.unmount(); await cold(); view = render(frame(<Person />));
+    expect(world()).toEqual(predicted); expect(rows()).toEqual(savedRows);
+    await press('Continue'); expect(world().people[partner.id].wantsChildren).toBe(true);
+    expect(screen.getByRole('button', { name: 'Try for a Baby' })).toBeEnabled();
+    const done = world(), doneRows = rows(); await act(async () => { await current.onChoose('confirm'); });
+    expect(world()).toEqual(done); expect(rows()).toEqual(doneRows); original(); view.unmount();
+  } finally { sqlite.close(); }
+});
+
+test('Family links to the partner and contains no duplicate conception confirmation or decorative eligibility callout', async () => {
+  const { sqlite } = await setup(couple());
+  try {
+    const partner = otherPerson(world(), partnerRelation(world())!);
+    const view = render(frame(<Family />));
+    expect(screen.queryByRole('button', { name: 'Try for a Child' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Try for a Baby' })).toBeNull();
+    await press('Your Partner'); expect(router.push).toHaveBeenCalledWith({ pathname: '/person/[id]', params: { id: partner.id } });
+    expect(screen.getByRole('button', { name: 'Review Adoption' })).toBeOnTheScreen(); view.unmount();
+  } finally { sqlite.close(); }
 });
 
 test('blank, current trimmed child name and profile navigation save nothing and reset the previous person’s drafts/review/error', async () => {
