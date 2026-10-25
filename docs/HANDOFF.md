@@ -1,5 +1,20 @@
 # Continue Dreams: Life Simulator
 
+## Notification permission at app open — 25 October 2026
+
+The initial notification permission check now runs when the app opens after
+enabled, readable preferences load and the app is foregrounded. It no longer
+depends on a loaded or birth-acknowledged life. A fresh install can receive the
+native OS prompt before creating a character. Granted/denied permission, saved
+opt-outs and unreadable settings remain respected; returning from the permission
+dialog does not prompt again. Existing scheduling, time and tap behavior remain.
+
+All 58 focused notification UI/service/preferences cases, strict app/test types,
+the 513-module import graph and notice checks pass. Coverage includes an empty
+SQLite install, held settings/permission reads, background deferral, explicit
+opt-out races and unchanged saved life/settings bytes. Installed OS display
+remains platform-controlled and is not claimed from the component checks.
+
 ## Android icon crop correction — 25 October 2026
 
 Android now uses `assets/android-app-icon.png` for both its legacy icon and

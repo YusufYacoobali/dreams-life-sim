@@ -14,7 +14,7 @@ import { database } from '../support/sqlite';
 import { ThemeProvider } from '../../src/ui/theme';
 import { AppReminders } from '../../src/ui/AppReminders';
 
-let mockPreferences: ReturnType<typeof createPreferencesStore>, mockContinue: () => void, mockBegunLife = false;
+let mockPreferences: ReturnType<typeof createPreferencesStore>, mockContinue: () => void;
 let mockLife: StoreApi<{ world: { birthAcknowledged: boolean } | null }>;
 const mockGetPermission = jest.fn(), mockPermission = jest.fn(), mockReconcile = jest.fn(), mockRemoveResponse = jest.fn();
 jest.mock('../../src/state/usePreferences', () => ({ usePreferences: (selector: unknown) => require('zustand').useStore(mockPreferences, selector), preferencesStore: { getState: () => mockPreferences.getState() } }));
@@ -31,7 +31,7 @@ import Settings from '../../app/settings';
 let foreground: (state: AppStateStatus) => void, previousAppState: AppStateStatus;
 const removeForeground = jest.fn();
 beforeEach(() => {
-  mockBegunLife = false; previousAppState = AppState.currentState; AppState.currentState = 'active';
+  previousAppState = AppState.currentState; AppState.currentState = 'active';
   mockGetPermission.mockResolvedValue({ status: 'granted', canAskAgain: true });
   reminderStatusStore.setState({ status: 'idle', message: undefined });
   mockPermission.mockResolvedValue({ status: 'granted', canAskAgain: true });
@@ -44,18 +44,27 @@ async function fixture(raw?: string) {
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
   const world = createLife('life_reminder_ui', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }); await repository.create(world);
   if (raw) await repository.saveAppSettings(raw);
-  mockLife = createStore<{ world: { birthAcknowledged: boolean } | null }>(() => ({ world: mockBegunLife ? { birthAcknowledged: true } : null }));
+  mockLife = createStore<{ world: { birthAcknowledged: boolean } | null }>(() => ({ world: null }));
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
   const archive = await repository.export(world.id);
   const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 24, bottom: 48, left: 0, right: 0 } }}><ThemeProvider><Settings /><AppReminders /></ThemeProvider></SafeAreaProvider>);
   await act(async () => {});
   return { sqlite, repository, archive, world, view };
 }
+async function startupFixture(raw: string | null = null, bootstrap = true) {
+  const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise();
+  if (raw !== null) await repository.saveAppSettings(raw);
+  mockLife = createStore<{ world: { birthAcknowledged: boolean } | null }>(() => ({ world: null }));
+  mockPreferences = createPreferencesStore({ repository: async () => repository });
+  if (bootstrap) await mockPreferences.getState().bootstrap();
+  const view = render(<AppReminders />); await act(async () => {});
+  return { sqlite, repository, view };
+}
 const toggle = async (enabled: boolean) => { await act(async () => { fireEvent(screen.getByRole('switch', { name: 'Daily Reminders' }), 'valueChange', enabled); }); };
 const press = async (name: string) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const time = (hour: string, minute: string) => { fireEvent.changeText(screen.getByLabelText('Reminder hour, 24-hour clock'), hour); fireEvent.changeText(screen.getByLabelText('Reminder minute'), minute); };
 
-test('startup never requests permission and an explicitly denied reminder preserves all settings and the actual saved life', async () => {
+test('legacy disabled startup never requests permission and an explicitly denied reminder preserves all settings and the actual saved life', async () => {
   const context = await fixture('{"version":1,"appearance":"dark"}');
   try {
     expect(mockPermission).not.toHaveBeenCalled(); expect(screen.getByRole('switch', { name: 'Daily Reminders' })).not.toBeChecked();
@@ -114,22 +123,92 @@ test('returning to foreground refreshes reminders and tapping one only opens the
 });
 
 
-test('fresh reminders are on but permission is requested only once after a life begins', async () => {
+test('fresh enabled startup requests permission once without a loaded life and preserves the existing saved life', async () => {
   mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
   const context = await fixture();
   try {
     expect(screen.getByRole('switch', { name: 'Daily Reminders' })).toBeChecked();
-    expect(mockGetPermission).not.toHaveBeenCalled(); expect(mockPermission).not.toHaveBeenCalled();
-    await act(async () => { mockLife.setState({ world: { birthAcknowledged: true } }); });
+    expect(mockLife.getState().world).toBeNull(); expect(mockGetPermission).toHaveBeenCalledTimes(1);
     expect(mockPermission).toHaveBeenCalledTimes(1);
     expect(mockReconcile).toHaveBeenLastCalledWith({ enabled: true, hour: 19, minute: 0 });
     await act(async () => { foreground('active'); foreground('active'); });
     expect(mockPermission).toHaveBeenCalledTimes(1);
+    expect(await context.repository.loadAppSettings()).toBeNull();
+    expect(await context.repository.export(context.world.id)).toBe(context.archive);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
+test('a fresh install asks at app open before any life exists, without creating settings or game data', async () => {
+  mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
+  const context = await startupFixture();
+  try {
+    expect(mockLife.getState().world).toBeNull(); expect(await context.repository.active()).toBeNull();
+    expect(mockGetPermission).toHaveBeenCalledTimes(1); expect(mockPermission).toHaveBeenCalledTimes(1);
+    expect(mockReconcile).toHaveBeenLastCalledWith({ enabled: true, hour: 19, minute: 0 });
+    await act(async () => { foreground('active'); foreground('active'); });
+    expect(mockGetPermission).toHaveBeenCalledTimes(1); expect(mockPermission).toHaveBeenCalledTimes(1);
+    expect(await context.repository.loadAppSettings()).toBeNull(); expect(await context.repository.list()).toEqual([]);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
+test.each([
+  ['granted', true], ['denied', true], ['denied', false], ['undetermined', false], ['unavailable', false], ['error', false],
+] as const)('%s startup permission (canAskAgain=%s) never opens an automatic prompt', async (status, canAskAgain) => {
+  mockGetPermission.mockResolvedValue({ status, canAskAgain });
+  const context = await startupFixture();
+  try {
+    await act(async () => { foreground('active'); foreground('active'); });
+    expect(mockGetPermission).toHaveBeenCalledTimes(1); expect(mockPermission).not.toHaveBeenCalled();
+    expect(await context.repository.loadAppSettings()).toBeNull(); expect(await context.repository.list()).toEqual([]);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
+test.each([
+  '{"version":1,"appearance":"light","dailyReminder":false}',
+  '{"version":1,"appearance":"dark"}',
+  'unreadable preferences',
+])('startup preserves saved opt-outs or unreadable settings without prompting: %s', async raw => {
+  mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
+  const context = await startupFixture(raw);
+  try {
+    if (!mockPreferences.getState().loadFailed) await act(async () => { foreground('active'); });
+    expect(mockGetPermission).not.toHaveBeenCalled(); expect(mockPermission).not.toHaveBeenCalled();
+    expect(mockReconcile).not.toHaveBeenCalledWith(expect.objectContaining({ enabled: true }));
+    expect(await context.repository.loadAppSettings()).toBe(raw); expect(await context.repository.list()).toEqual([]);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
+test('background startup defers its first permission attempt until the app is active', async () => {
+  AppState.currentState = 'background'; mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
+  const context = await startupFixture();
+  try {
+    expect(mockGetPermission).not.toHaveBeenCalled(); expect(mockPermission).not.toHaveBeenCalled();
+    AppState.currentState = 'active'; await act(async () => { foreground('active'); });
+    expect(mockGetPermission).toHaveBeenCalledTimes(1); expect(mockPermission).toHaveBeenCalledTimes(1);
+    expect(await context.repository.loadAppSettings()).toBeNull(); expect(await context.repository.list()).toEqual([]);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
+test.each([null, '{"version":1,"appearance":"light","dailyReminder":false}'])('a held preference read must resolve before deciding startup permission: %s', async raw => {
+  mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
+  const context = await startupFixture(raw, false);
+  let resolveRead!: (value: string | null) => void;
+  const reading = new Promise<string | null>(resolve => { resolveRead = resolve; });
+  const load = jest.spyOn(context.repository, 'loadAppSettings').mockImplementationOnce(() => reading);
+  let bootstrapping!: Promise<boolean>;
+  try {
+    expect(mockPreferences.getState().ready).toBe(false);
+    await act(async () => { bootstrapping = mockPreferences.getState().bootstrap(); });
+    expect(load).toHaveBeenCalledTimes(1); expect(mockGetPermission).not.toHaveBeenCalled(); expect(mockPermission).not.toHaveBeenCalled(); expect(mockReconcile).not.toHaveBeenCalled();
+    await act(async () => { resolveRead(raw); await bootstrapping; });
+    expect(mockPreferences.getState().ready).toBe(true);
+    expect(mockPermission).toHaveBeenCalledTimes(raw === null ? 1 : 0);
+    expect(await context.repository.loadAppSettings()).toBe(raw); expect(await context.repository.list()).toEqual([]);
   } finally { context.view.unmount(); context.sqlite.close(); }
 });
 
 test('an existing denial never prompts automatically and an already-on default can explicitly obtain permission and schedule', async () => {
-  mockBegunLife = true; mockGetPermission.mockResolvedValue({ status: 'denied', canAskAgain: true });
+  mockGetPermission.mockResolvedValue({ status: 'denied', canAskAgain: true });
   mockReconcile.mockResolvedValue({ status: 'denied', message: 'Enable notifications in device settings.' });
   const context = await fixture();
   try {
@@ -143,7 +222,7 @@ test('an existing denial never prompts automatically and an already-on default c
 });
 
 test('switching reminders off while the initial permission prompt is pending keeps the final schedule off', async () => {
-  mockBegunLife = true; mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
+  mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
   let allow!: (value: unknown) => void; mockPermission.mockImplementationOnce(() => new Promise(resolve => { allow = resolve; }));
   const context = await fixture();
   try {
@@ -154,8 +233,23 @@ test('switching reminders off while the initial permission prompt is pending kee
   } finally { context.view.unmount(); context.sqlite.close(); }
 });
 
+test('opting out while the startup permission read is pending prevents a prompt and leaves saved game data untouched', async () => {
+  let resolvePermission!: (value: unknown) => void;
+  mockGetPermission.mockImplementationOnce(() => new Promise(resolve => { resolvePermission = resolve; }));
+  const context = await fixture();
+  try {
+    expect(mockGetPermission).toHaveBeenCalledTimes(1); expect(mockPermission).not.toHaveBeenCalled();
+    await toggle(false);
+    const before = await context.repository.loadAppSettings(), calls = mockReconcile.mock.calls.length;
+    await act(async () => { resolvePermission({ status: 'undetermined', canAskAgain: true }); });
+    expect(mockPermission).not.toHaveBeenCalled(); expect(mockReconcile).toHaveBeenCalledTimes(calls);
+    expect(mockReconcile).toHaveBeenLastCalledWith({ enabled: false, hour: 19, minute: 0 });
+    expect(JSON.parse(before!).dailyReminder).toBe(false); expect(await context.repository.loadAppSettings()).toBe(before);
+    expect(await context.repository.export(context.world.id)).toBe(context.archive);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});
+
 test('backgrounding during a permission query defers the prompt until the app becomes active', async () => {
-  mockBegunLife = true;
   mockGetPermission.mockResolvedValue({ status: 'undetermined', canAskAgain: true });
   let resolveQuery!: (value: unknown) => void;
   mockGetPermission.mockImplementationOnce(() => new Promise(resolve => { resolveQuery = resolve; }));
@@ -170,7 +264,7 @@ test('backgrounding during a permission query defers the prompt until the app be
 });
 
 test('granting notification permission in device settings clears a previous denial after foreground refresh without writing preferences or the life', async () => {
-  mockBegunLife = true; mockGetPermission.mockResolvedValue({ status: 'denied', canAskAgain: false });
+  mockGetPermission.mockResolvedValue({ status: 'denied', canAskAgain: false });
   mockReconcile.mockResolvedValue({ status: 'denied', message: 'Allow Daily game reminders in your device’s notification settings.' });
   const context = await fixture('{"version":1,"appearance":"light","dailyReminder":true}');
   try {

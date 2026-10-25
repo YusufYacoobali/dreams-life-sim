@@ -48,6 +48,7 @@ record the dependency inspection.
 | Area | Result |
 | --- | --- |
 | Reminder permission | A disabled Android reminder channel and iOS authorization with no visible destinations are reported accurately. Existing channel choices are preserved. Settings clears stale denial after actual recovery. |
+| Startup permission timing | The initial native permission request runs at app open after enabled, readable preferences load, including with no life created. Granted/denied permission and saved reminder opt-outs are respected. |
 | Clock/timezone changes | A private native receiver re-arms only already-scheduled Dreams reminders when Android's clock or timezone changes while the app is closed. |
 | Notification glyph | A dedicated white heart on transparency replaces Android's opaque-launcher fallback. The source SVG and 96px PNG are local assets; the launcher icon is retained. |
 | Testing tools | God Mode remains available in all builds, including production/store, at the user's request for ongoing testing. The saved Settings toggle still controls editor access. |
