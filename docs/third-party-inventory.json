@@ -4,7 +4,7 @@
   "inputs": {
     "package.json": "0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673",
     "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb",
-    "app.json": "4954190da05c1b9223b51ac27601f7ded907bf91bc9f1a5ec49f43b7c4cd5420"
+    "app.json": "ed8812a451b11abd0befd22d0b6b89f31d96c02d18f0adee83347d7ebfe4a024"
   },
   "installationPlatform": {
     "os": "linux",
@@ -23,7 +23,7 @@
     "readableNoticeFiles": 735,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1197
+    "projectArtFiles": 1198
   },
   "directDependencies": [
     {
@@ -17959,6 +17959,15 @@
     }
   ],
   "projectArt": [
+    {
+      "path": "assets/android-app-icon.png",
+      "status": "present",
+      "bytes": 1641686,
+      "sha256": "4dc470a6fd80d0314e471bb0c60d9ec9ee25ecfb8b47c2af82c2b4b13b164e7f",
+      "referencedBy": [
+        "app.json"
+      ]
+    },
     {
       "path": "assets/app_icon.png",
       "status": "present",

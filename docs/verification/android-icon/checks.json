@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-25",
+  "sourceAsset": "assets/android-app-icon.png",
+  "sourceSha256": "4dc470a6fd80d0314e471bb0c60d9ec9ee25ecfb8b47c2af82c2b4b13b164e7f",
+  "sourceBytes": 1641686,
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceMode": "RGB",
+  "generatedPath": "/workspace/generated_images/exec-fcf07135-0748-4f46-9353-ad201f8f61cf.png",
+  "styleReference": "assets/app_icon.png",
+  "firstComposition": "/workspace/generated_images/exec-48241367-cb91-4387-bea0-c2e79000151c.png",
+  "iosOriginalSha256": "f133cbad41330af856a5e854568005ebcde5707f53a9b58b572278c3bccbfbb8",
+  "subjectBoundsMethod": "Conservative manually reviewed boxes, wider than visible subject edges; all four corners checked against the adaptive safe circle.",
+  "reviewedSubjectBounds": {
+    "cap": [
+      425,
+      480,
+      577,
+      611
+    ],
+    "heart": [
+      553,
+      438,
+      700,
+      565
+    ],
+    "cash": [
+      669,
+      479,
+      828,
+      615
+    ],
+    "child": [
+      496,
+      603,
+      753,
+      891
+    ]
+  },
+  "maxReviewedRadiusFraction": 0.23502,
+  "safeRadiusFraction": 0.3055555555555556,
+  "nativeWebps": [
+    {
+      "density": "mdpi",
+      "file": "ic_launcher.webp",
+      "size": 48,
+      "bytes": 5910
+    },
+    {
+      "density": "mdpi",
+      "file": "ic_launcher_round.webp",
+      "size": 48,
+      "bytes": 6138
+    },
+    {
+      "density": "mdpi",
+      "file": "ic_launcher_foreground.webp",
+      "size": 108,
+      "bytes": 23819
+    },
+    {
+      "density": "hdpi",
+      "file": "ic_launcher.webp",
+      "size": 72,
+      "bytes": 11992
+    },
+    {
+      "density": "hdpi",
+      "file": "ic_launcher_round.webp",
+      "size": 72,
+      "bytes": 12384
+    },
+    {
+      "density": "hdpi",
+      "file": "ic_launcher_foreground.webp",
+      "size": 162,
+      "bytes": 47313
+    },
+    {
+      "density": "xhdpi",
+      "file": "ic_launcher.webp",
+      "size": 96,
+      "bytes": 19539
+    },
+    {
+      "density": "xhdpi",
+      "file": "ic_launcher_round.webp",
+      "size": 96,
+      "bytes": 20143
+    },
+    {
+      "density": "xhdpi",
+      "file": "ic_launcher_foreground.webp",
+      "size": 216,
+      "bytes": 76693
+    },
+    {
+      "density": "xxhdpi",
+      "file": "ic_launcher.webp",
+      "size": 144,
+      "bytes": 38875
+    },
+    {
+      "density": "xxhdpi",
+      "file": "ic_launcher_round.webp",
+      "size": 144,
+      "bytes": 39845
+    },
+    {
+      "density": "xxhdpi",
+      "file": "ic_launcher_foreground.webp",
+      "size": 324,
+      "bytes": 152403
+    },
+    {
+      "density": "xxxhdpi",
+      "file": "ic_launcher.webp",
+      "size": 192,
+      "bytes": 63129
+    },
+    {
+      "density": "xxxhdpi",
+      "file": "ic_launcher_round.webp",
+      "size": 192,
+      "bytes": 64595
+    },
+    {
+      "density": "xxxhdpi",
+      "file": "ic_launcher_foreground.webp",
+      "size": 432,
+      "bytes": 249366
+    }
+  ],
+  "nativeDeviceCapture": false,
+  "browser": {
+    "images": 8,
+    "broken": [],
+    "nativeImages": 4,
+    "samples": [
+      {
+        "viewport": 48,
+        "source": 72
+      },
+      {
+        "viewport": 72,
+        "source": 108
+      },
+      {
+        "viewport": 96,
+        "source": 144
+      }
+    ],
+    "javascriptErrors": [],
+    "nativeDeviceCapture": false
+  }
+}

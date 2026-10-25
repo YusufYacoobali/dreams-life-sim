@@ -17,9 +17,10 @@
       "buildNumber": "1"
     },
     "android": {
+      "icon": "./assets/android-app-icon.png",
       "adaptiveIcon": {
         "backgroundColor": "#071D49",
-        "foregroundImage": "./assets/app_icon.png"
+        "foregroundImage": "./assets/android-app-icon.png"
       },
       "predictiveBackGestureEnabled": false,
       "blockedPermissions": [

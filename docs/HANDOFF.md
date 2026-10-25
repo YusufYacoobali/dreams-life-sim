@@ -1,5 +1,19 @@
 # Continue Dreams: Life Simulator
 
+## Android icon crop correction — 25 October 2026
+
+Android now uses `assets/android-app-icon.png` for both its legacy icon and
+adaptive foreground. The child and three symbols are gathered into the safe
+centre of the regenerated artwork; full-bleed scenery absorbs the crop. The
+original `assets/app_icon.png` and iOS configuration remain byte-identical.
+Production God Mode remains enabled for testing as requested.
+
+Resolved config, isolated Android prebuild, all 15 native WebP sizes and both
+adaptive XMLs pass. Proper 108→72dp previews pass circle/squircle/teardrop masks
+at 48/72/96px, including a peer visual review. Notices and diff checks pass.
+This needs a new Android build/install; no installed launcher capture is claimed.
+See [the Android icon review](verification/android-icon/README.md).
+
 ## God Mode remains enabled for release testing — 25 October 2026
 
 The user explicitly reaffirmed that release builds still need God Mode for
