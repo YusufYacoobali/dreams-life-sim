@@ -4,7 +4,7 @@
   "inputs": {
     "package.json": "0ed227781f57f6b64878f2841a544451ffe65f1ac0bd6481241445345976e673",
     "package-lock.json": "763a61aeed652d3d25f00090aa187ea86ac9e968ef926c750ffb58d4b7fb6adb",
-    "app.json": "d40adea0b6dc8524efe3a9ea276a26f99eb387d3829dfefec45003a8400ac34c"
+    "app.json": "4954190da05c1b9223b51ac27601f7ded907bf91bc9f1a5ec49f43b7c4cd5420"
   },
   "installationPlatform": {
     "os": "linux",

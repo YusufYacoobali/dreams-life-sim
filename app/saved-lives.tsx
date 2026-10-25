@@ -78,7 +78,8 @@ export default function SavedLives() {
         if (!await Sharing.isAvailableAsync()) throw new SaveFileError('File sharing is unavailable on this device. Save a copy to a folder instead.');
         const file = new File(Paths.cache, exportFileName());
         writeNewArchive(file, text);
-        await Sharing.shareAsync(file.uri, { mimeType: 'application/json', UTI: 'public.json', dialogTitle: 'Export Dreams life' });
+        try { await Sharing.shareAsync(file.uri, { mimeType: 'application/json', UTI: 'public.json', dialogTitle: 'Export Dreams life' }); }
+        finally { try { file.delete(); } catch { /* Cache cleanup must not turn a completed share into an error. */ } }
       }, 'Could not share this life. Please try again.'); }} />
       <ActionRow title="Previous checkpoint" subtitle="Preview before restoring" disabled={busy || working} disabledReason={undefined} onPress={() => { void run(async () => {
         const world = await (await openRepository()).recoveryPreview(life.id);

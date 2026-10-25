@@ -2,26 +2,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import { useGame } from '../state/useGame';
 import { reviewCandidateEligible, type ReviewOffer, type ReviewResponse } from '../reviews/tracker';
-import { nativeReviewAvailable, requestNativeReview } from '../reviews/nativeReview';
+import { openStoreReview, requestNativeReview, reviewPromptSupported } from '../reviews/nativeReview';
 import { EventModal } from './EventModal';
 import { hasAppModal, modalPresenceStore, useHasAppModal } from './modalPresence';
+
+const offerContext = (offer: ReviewOffer | null) => offer ? JSON.stringify([offer.id, offer.lifeId, offer.personId, offer.revision]) : null;
 
 /** Mounted once outside frozen screens. The review's own modal never blocks itself. */
 export function ReviewPromptHost({visible}:{visible:boolean}) {
   const world=useGame(s=>s.world), tracker=useGame(s=>s.reviewTracker), offer=useGame(s=>s.reviewOffer);
   const busy=useGame(s=>s.busy), reviewBusy=useGame(s=>s.reviewBusy), error=useGame(s=>s.reviewError);
   const claim=useGame(s=>s.claimReview), respond=useGame(s=>s.respondReview), appModal=useHasAppModal();
-  const [available,setAvailable]=useState(false), [active,setActive]=useState(!AppState.currentState||AppState.currentState==='active');
+  const [active,setActive]=useState(!AppState.currentState||AppState.currentState==='active');
   const [nativeRequest,setNativeRequest]=useState<ReviewOffer|null>(null);
   const anyModal=modalPresenceStore(state=>state.owners.size>0);
-  const attempted=useRef<string|null>(null), submitting=useRef(false), mounted=useRef(true), liveOffer=useRef(offer?.id);
+  const attempted=useRef<string|null>(null), submitting=useRef(false), mounted=useRef(true), liveOffer=useRef(offerContext(offer));
   const nativeInFlight=useRef(false);
-  liveOffer.current=offer?.id;
+  liveOffer.current=offerContext(offer);
   useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
-  useEffect(()=>{let live=true;setAvailable(false);if(active)void nativeReviewAvailable().then(value=>{if(live)setAvailable(value);});return()=>{live=false;};},[active]);
   useEffect(()=>{const subscription=AppState.addEventListener('change',state=>{if(state==='active')attempted.current=null;setActive(state==='active');});return()=>subscription.remove();},[]);
   const scoped=!!offer&&world?.id===offer.lifeId&&world.activePersonId===offer.personId&&world.revision===offer.revision;
-  const clean=visible&&active&&available&&!appModal;
+  const clean=visible&&active&&reviewPromptSupported()&&!appModal;
   const latest=useRef({world,clean,busy,reviewBusy,offer});
   latest.current={world,clean,busy,reviewBusy,offer};
   const canPresent=(request:ReviewOffer)=>{
@@ -40,8 +41,12 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
     const first=requestAnimationFrame(()=>{second=requestAnimationFrame(()=>{
       if(nativeInFlight.current||!canPresent(nativeRequest))return;
       nativeInFlight.current=true;
-      void requestNativeReview(()=>canPresent(nativeRequest)).then(requested=>{
-        if(requested&&mounted.current)setNativeRequest(current=>current?.id===nativeRequest.id?null:current);
+      void requestNativeReview(()=>canPresent(nativeRequest)).then(async requested=>{
+        // Sure is explicit permission to visit the store if the native API is
+        // missing or fails. Play may silently suppress a successful request;
+        // Settings also offers a direct store action for that case.
+        if(!requested&&canPresent(nativeRequest))await openStoreReview(()=>canPresent(nativeRequest));
+        if(mounted.current)setNativeRequest(current=>current?.id===nativeRequest.id?null:current);
       }).finally(()=>{nativeInFlight.current=false;});
     });});
     return()=>{cancelAnimationFrame(first);if(second!==undefined)cancelAnimationFrame(second);};
@@ -54,7 +59,7 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
     void claim();
   },[clean,busy,reviewBusy,offer,world,tracker,claim]);
   const answer=async(response:ReviewResponse)=>{
-    if(!mounted.current||!scoped||!offer||liveOffer.current!==offer.id||!clean||busy||reviewBusy||submitting.current||hasAppModal())return;
+    if(!mounted.current||!scoped||!offer||liveOffer.current!==offerContext(offer)||!clean||busy||reviewBusy||submitting.current||hasAppModal())return;
     submitting.current=true;
     try {if(await respond(response)&&response==='sure'&&mounted.current)setNativeRequest(offer);}
     finally{submitting.current=false;}

@@ -1,5 +1,33 @@
 # Continue Dreams: Life Simulator
 
+## Release audit and reliable reviews — 25 October 2026
+
+Reviews are due on a clean Life opening from age five, then every 10–20
+committed completed Age Ups app-wide. Bad-year facts/native availability no
+longer hide the app reminder, and unanswered offers resume after cold startup.
+Android declares specific Play Store visibility; Sure can fall back on an
+explicit store action, and Settings adds Rate Dreams. Store sheet visibility
+and submitted ratings cannot be inferred or guaranteed.
+
+Notification fixes cover blocked channels, iOS visible destinations, stale
+status, a transparent small icon and closed-app clock/timezone re-arming without
+restoring cancelled requests. Production disables testing God Mode and blocks
+four unused Android permissions. Welcome reaches recovery/import, temporary
+share files are cleaned, archive limits align and Cult selects Activities.
+
+The full regression plus affected passing rerun verifies **337 suites / 5,391
+cases** with no unresolved failures or skipped cases. Three named plugin cases,
+strict types, the 513-module graph, notices, fresh Android/iOS native generation
+and production Hermes exports pass. All 13 changed runtime sources match both
+maps. The final clock receiver also compiles against Android API 36 and the
+actual Expo Notifications AAR. No game/fixture/package files changed.
+
+This is **not installed-release sign-off**: no final signed APK/AAB/IPA, connected
+device or store-linked review/delivery test was available. Signing/store
+registration, build history, privacy/support URLs, iOS listing and publisher
+asset records still need verification. See [the release audit](verification/release-20261025/README.md)
+and [scoped check results](verification/release-20261025/checks.json).
+
 ## Final UI polish — 25 October 2026
 
 Platform marks now use Instagram's colour gradient, YouTube red, Twitch purple

@@ -20,4 +20,7 @@ jest.mock('../../assets/audio/universfield-error-notification-08-206492.mp3', ()
 jest.mock('../../src/reviews/nativeReview', () => ({
   nativeReviewAvailable: jest.fn(async () => false),
   requestNativeReview: jest.fn(async () => {}),
+  reviewPromptSupported: jest.fn(() => false),
+  reviewStoreUrl: jest.fn(() => null),
+  openStoreReview: jest.fn(async () => false),
 }));

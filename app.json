@@ -22,6 +22,12 @@
         "foregroundImage": "./assets/app_icon.png"
       },
       "predictiveBackGestureEnabled": false,
+      "blockedPermissions": [
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
       "package": "com.yacoobali.lifesim",
       "versionCode": 1
     },
@@ -30,7 +36,8 @@
       "expo-router",
       "expo-sqlite",
       "./plugins/withReleaseShrinking.cjs",
-      ["./plugins/withLocalNotifications.cjs", { "color": "#1478F8" }],
+      "./plugins/withStoreReviewVisibility.cjs",
+      ["./plugins/withLocalNotifications.cjs", { "color": "#1478F8", "icon": "./assets/notification-icon.png" }],
       ["expo-audio", { "microphonePermission": false, "recordAudioAndroid": false, "enableBackgroundPlayback": false, "enableBackgroundRecording": false }]
     ],
     "scheme": "dreams-life"

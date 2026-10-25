@@ -99,9 +99,36 @@ test('an unwritable destination reports the failure before creating a file, and 
   const before = tables(); folder.createFile.mockImplementationOnce(() => { throw new Error('Folder is read-only'); }); render(frame());
   await press(exportButton); await waitFor(() => expect(screen.getByText('Could not save a copy to that folder. Choose another folder and try again.')).toBeOnTheScreen()); expect(mockFiles.size).toBe(0);
   mockShareAvailable.mockResolvedValueOnce(false); await press(shareButton); await waitFor(() => expect(screen.getByText('File sharing is unavailable on this device. Save a copy to a folder instead.')).toBeOnTheScreen()); expect(mockShare).not.toHaveBeenCalled(); expect(mockFiles.size).toBe(0);
+  let sharedText: string | undefined;
+  mockShare.mockImplementationOnce(async (uri: string) => { sharedText = mockFiles.get(uri); });
   await press(shareButton); await waitFor(() => expect(mockShare).toHaveBeenCalledTimes(1));
   const [uri, options] = mockShare.mock.calls[0]; expect(uri).toMatch(/^file:\/\/\/cache\/Dreams-save-/); expect(options).toMatchObject({ mimeType: 'application/json', UTI: 'public.json' });
-  const copied = decodeSave(mockFiles.get(uri)!); expect(copied.world).toEqual(mockStore.getState().world); expect(copied.snapshots).toEqual(archive.snapshots); expect(tables()).toEqual(before);
+  const copied = decodeSave(sharedText!); expect(copied.world).toEqual(mockStore.getState().world); expect(copied.snapshots).toEqual(archive.snapshots); expect(tables()).toEqual(before);
+  expect(mockFiles.has(uri)).toBe(false); expect(mockDeleted).toContain(uri);
+});
+
+test('sharing keeps its archive until the native sheet settles, cleans up success or failure, and retains folder exports and saves', async () => {
+  const before = tables(); render(frame());
+  await press(exportButton);
+  const folderCopy = [...mockFiles.entries()][0];
+  let finish!: () => void;
+  mockShare.mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; }));
+  act(() => { fireEvent.press(screen.getByRole('button', { name: shareButton })); });
+  await waitFor(() => expect(mockShare).toHaveBeenCalledTimes(1));
+  const sharedUri = mockShare.mock.calls[0][0] as string;
+  expect(decodeSave(mockFiles.get(sharedUri)!).world).toEqual(mockStore.getState().world);
+  expect(mockDeleted).not.toContain(sharedUri);
+  expect(screen.getByRole('button', { name: shareButton })).toBeDisabled();
+  await act(async () => { finish(); });
+  await waitFor(() => expect(screen.getByRole('button', { name: shareButton })).toBeEnabled());
+  expect(mockFiles.has(sharedUri)).toBe(false); expect(mockDeleted).toContain(sharedUri);
+  mockShare.mockRejectedValueOnce(new Error('Native share failed'));
+  await press(shareButton);
+  await waitFor(() => expect(screen.getByText('Could not share this life. Please try again.')).toBeOnTheScreen());
+  const failedUri = mockShare.mock.calls[1][0] as string;
+  expect(failedUri).not.toBe(sharedUri); expect(mockFiles.has(failedUri)).toBe(false); expect(mockDeleted).toContain(failedUri);
+  expect([...mockFiles.entries()]).toEqual([folderCopy]); expect(mockFiles.get(folderCopy[0])).toBe(folderCopy[1]);
+  expect(tables()).toEqual(before);
 });
 
 test('native file import can cancel or reject invalid content, then previews and imports the genuine native birthday result while retaining the original reading life', async () => {

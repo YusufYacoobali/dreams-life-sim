@@ -15,10 +15,20 @@ export async function createExpoReminderAdapter(environment: {
     throw Object.assign(new Error('Native local notifications are unavailable.'), { code: 'REMINDERS_UNAVAILABLE' });
   }
   const notifications = await (environment.loadNotifications ?? (() => import('expo-notifications')))();
-  const permission = (value: Awaited<ReturnType<typeof notifications.getPermissionsAsync>>): DailyReminderPermission => {
+  const permission = async (value: Awaited<ReturnType<typeof notifications.getPermissionsAsync>>): Promise<DailyReminderPermission> => {
     const ios = value.ios?.status;
     const granted = value.granted || ios === notifications.IosAuthorizationStatus.AUTHORIZED
       || ios === notifications.IosAuthorizationStatus.PROVISIONAL || ios === notifications.IosAuthorizationStatus.EPHEMERAL;
+    if (granted && platform === 'android') {
+      const channel = await notifications.getNotificationChannelAsync(CHANNEL);
+      if (channel && channel.importance === notifications.AndroidImportance.NONE) {
+        return { status: 'denied', canAskAgain: false, message: 'Allow Daily game reminders in your device’s notification settings.' };
+      }
+    }
+    if (granted && platform === 'ios' && value.ios
+      && [value.ios.allowsAlert, value.ios.allowsDisplayInNotificationCenter, value.ios.allowsDisplayOnLockScreen].every(allowed => allowed === false)) {
+      return { status: 'denied', canAskAgain: false, message: 'Allow a notification display option in your device’s notification settings.' };
+    }
     return { status: granted ? 'granted' : value.status === 'undetermined' ? 'undetermined' : 'denied', canAskAgain: value.canAskAgain };
   };
   const ensureChannel = async () => {
@@ -56,7 +66,7 @@ export async function createExpoReminderAdapter(environment: {
   return {
     getPermission: async () => permission(await notifications.getPermissionsAsync()),
     requestPermission: async () => {
-      const current = permission(await notifications.getPermissionsAsync());
+      const current = await permission(await notifications.getPermissionsAsync());
       if (current.status === 'granted' || !current.canAskAgain) return current;
       await ensureChannel(); // Android 13 requires a channel before its first notification permission request.
       return permission(await notifications.requestPermissionsAsync({ ios: { allowAlert: true, allowBadge: false, allowSound: false } }));

@@ -46,7 +46,7 @@ export function createDailyReminderService(dependencies: {
           if (allowed.status !== 'granted') {
             await removeOwned();
             if (allowed.status === 'unavailable' || allowed.status === 'error') return { status: allowed.status, message: allowed.message };
-            return { status: 'denied', message: 'Allow notifications to receive daily reminders.' };
+            return { status: 'denied', message: allowed.message ?? 'Allow notifications to receive daily reminders.' };
           }
           // iOS supports 64 pending notifications in total. Never evict another feature's requests.
           if (scheduled.length - owned.length + wanted.length > 64) {

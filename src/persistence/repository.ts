@@ -51,7 +51,7 @@ export class SaveRepository {
       if (!life || life.revision !== revision) return null;
       const world = this.current?.world.id === lifeId && this.current.world.revision === revision && this.current.payload === life.payload ? this.current.world : unpackCheckpoint(life.payload, true);
       if (world.activePersonId !== personId || world.miniGames.some(session => session.personId === personId && session.status === 'active') || !reviewCandidateEligible(tracker, world)) return null;
-      const offered = offerReview(tracker);
+      const offered = offerReview(tracker, world);
       await tx.run("INSERT INTO preferences(key,value) VALUES('app_review',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", [JSON.stringify(offered.tracker)]);
       return offered;
     });

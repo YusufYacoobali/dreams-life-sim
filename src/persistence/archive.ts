@@ -8,9 +8,12 @@ export const snapshotSummarySchema = z.object({
 export type SnapshotSummary = z.infer<typeof snapshotSummarySchema>;
 export const branchInfoSchema = z.object({ sourceLifeId: z.string(), snapshotId: z.string(), personId: z.string(), name: z.string().max(100), date: dateSchema, age: z.number().int().nonnegative() });
 export type BranchInfo = z.infer<typeof branchInfoSchema>;
-const recordSchema = z.object({ summary: snapshotSummarySchema, payload: z.string().max(28_000_000) });
+// Match the v4 codec's supported checkpoint text size. The complete archive
+// remains capped separately at 64M characters on both input and output.
+const maxCheckpointCharacters = 44_000_000;
+const recordSchema = z.object({ summary: snapshotSummarySchema, payload: z.string().max(maxCheckpointCharacters) });
 export type SnapshotRecord = z.infer<typeof recordSchema>;
-const archiveSchema = z.object({ format: z.literal('dreams-save-archive'), version: z.literal(1), checkpoint: z.string().max(28_000_000), snapshots: z.array(recordSchema).max(5000), branch: branchInfoSchema.nullable() });
+const archiveSchema = z.object({ format: z.literal('dreams-save-archive'), version: z.literal(1), checkpoint: z.string().max(maxCheckpointCharacters), snapshots: z.array(recordSchema).max(5000), branch: branchInfoSchema.nullable() });
 export type SaveContents = { world: World; snapshots: SnapshotRecord[]; branch: BranchInfo | null };
 export function snapshotRecord(world: World, createdAt: string, label: string, payload = packCheckpoint(world)): SnapshotRecord {
   const person = world.people[world.activePersonId];

@@ -33,5 +33,7 @@ jobs:
         run: npm ci
       - name: Check app and test types
         run: npm run typecheck
+      - name: Check local notification native configuration
+        run: node tools/tests/local-notifications-plugin.test.cjs
       - name: Run regression tests
         run: npm test -- --ci --testTimeout=30000

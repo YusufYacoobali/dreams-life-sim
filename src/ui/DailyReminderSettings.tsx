@@ -16,9 +16,14 @@ export function DailyReminderSettings({ stacked }: { stacked: boolean }) {
   const status = useReminderStatus(), c = useColors();
   const [hour, setHour] = useState(pad(settings.reminderHour)), [minute, setMinute] = useState(pad(settings.reminderMinute));
   const [working, setWorking] = useState<'permission' | 'time' | null>(null), [notice, setNotice] = useState<string | null>(null);
-  const [denied, setDenied] = useState(false), acting = useRef(false), mounted = useRef(true);
+  const [denied, setDenied] = useState(false), acting = useRef(false), mounted = useRef(true), previousStatus = useRef(status.status);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   useEffect(() => { setHour(pad(settings.reminderHour)); setMinute(pad(settings.reminderMinute)); }, [settings.reminderHour, settings.reminderMinute]);
+  useEffect(() => {
+    const recovered = previousStatus.current !== 'scheduled' && status.status === 'scheduled';
+    previousStatus.current = status.status;
+    if (recovered && denied) { setDenied(false); setNotice(null); }
+  }, [status.status, denied]);
 
   const supported = Platform.OS === 'android' || Platform.OS === 'ios';
   const unavailable = !ready || failed || busy || working !== null || !supported;

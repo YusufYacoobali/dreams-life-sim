@@ -9,6 +9,7 @@ import { useColors } from '../src/ui/theme';
 import { useFeedback } from '../src/ui/feedback';
 import { DailyReminderSettings } from '../src/ui/DailyReminderSettings';
 import { GodModeSettings } from '../src/ui/GodModeAccess';
+import { StoreReviewAction } from '../src/ui/StoreReviewAction';
 import { DisplayText as Text, displayText } from '../src/ui/DisplayText';
 
 const choices = [{ id: 'light', label: 'Light' }, { id: 'dark', label: 'Dark' }, { id: 'system', label: 'Use Device Appearance' }] as const;
@@ -35,6 +36,7 @@ export default function Settings() {
     </Card>
     <DailyReminderSettings stacked={stacked} />
     <GodModeSettings />
+    <StoreReviewAction />
     <Card><Heading size={19}>Your saved lives</Heading><Body>Your progress stays on this device. Export a file to keep a copy somewhere you choose.</Body><ActionRow title="Saved Lives" subtitle="Open, import, export or recover a life" onPress={() => router.push('/saved-lives')} /></Card>
     <Card><Heading size={19}>Help</Heading><ActionRow title="How to Play" subtitle="Years, routines, milestones and local progress" onPress={() => router.push('/help')} /></Card>
     <EventModal event={confirm ? { id: 'reset-appearance', kind: 'confirmation', title: 'Restore the default appearance?', body: loadFailed ? 'The unreadable app settings will be replaced with Light appearance, device motion settings, and haptics, sounds and daily reminders off. Your lives and historical moments are kept.' : 'The app will use Light appearance. Your motion, haptic, sound and reminder choices, lives and historical moments are kept.', terms: [], confirmLabel: 'Restore Appearance' } : null} busy={busy} error={error} onCancel={() => setConfirm(false)} onChoose={() => { void reset().then(saved => { if (saved) setConfirm(false); }); }} />

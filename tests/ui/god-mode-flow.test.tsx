@@ -26,8 +26,14 @@ import { GodModeShortcut } from '../../src/ui/GodModeAccess';
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const tab = (name: string) => fireEvent.press(screen.getByRole('tab', { name }));
-async function fixture() {
-  Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
+async function fixture(profile: 'internal' | 'production' = 'internal') {
+  const previousBuildEnv = { ...process.env };
+  try {
+    process.env.EAS_BUILD_PROFILE = profile;
+    process.env.EAS_BUILD_DISTRIBUTION = profile === 'production' ? 'store' : 'internal';
+    process.env.DREAMS_GOD_MODE_TESTING = '1';
+    Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
+  } finally { process.env = previousBuildEnv; }
   const db = database(), repository = new SaveRepository(db.driver); await repository.initialise();
   const before = { ...createLife('life_god_ui', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }), birthAcknowledged: true }; await repository.create(before);
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
@@ -42,7 +48,7 @@ let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig
 beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; buildGlobals.__DEV__ = false; });
 afterEach(() => { buildGlobals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
 
-test('release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async () => {
+test('internal release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async () => {
   const { sqlite, repository, before, deps } = await fixture(), view = render(frame(<Settings />));
   expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   await act(async () => { fireEvent(screen.getByRole('switch', { name: 'God Mode' }), 'valueChange', true); });
@@ -77,8 +83,8 @@ test('invalid edits, reset, destructive confirmation, cancel and failed-save ret
   view.unmount(); sqlite.close();
 });
 
-test('missing testing capability still denies direct editor saves even with a persisted toggle', async () => {
-  const { sqlite, before, repository } = await fixture(); await mockPreferences.getState().setGodModeEnabled(true); Constants.expoConfig!.extra = { godModeTesting: false };
+test('production config denies direct editor saves even with a testing environment flag and persisted toggle', async () => {
+  const { sqlite, before, repository } = await fixture('production'); await mockPreferences.getState().setGodModeEnabled(true);
   const view = render(frame(<Settings />)); expect(screen.queryByRole('switch', { name: 'God Mode' })).toBeNull(); expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   view.rerender(frame(<GodModeShortcut />)); expect(screen.queryByRole('button', { name: /God Mode/ })).toBeNull();
   view.rerender(frame(<GodMode />)); expect(screen.getByText('God Mode is unavailable or switched off.')).toBeTruthy(); expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();

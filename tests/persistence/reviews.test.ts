@@ -11,6 +11,7 @@ import { SaveRepository, type SqlDatabase, type SqlSession } from '../../src/per
 import { miniGameFixture } from '../support/miniGames';
 import { burglaryContext } from '../../src/minigames/core/eligibility';
 import { reviewCandidateEligible, newReviewTracker, type ReviewTracker } from '../../src/reviews/tracker';
+import { ageOn } from '../../src/game/personHelpers';
 const date={year:2026,month:10,day:22};
 async function context() {
   const directory=mkdtempSync(join(tmpdir(),'dreams-reviews-')),path=join(directory,'save.db');let sqlite!:DatabaseSync,repository!:SaveRepository,store!:ReturnType<typeof createGameStore>,sequence=0;
@@ -76,7 +77,54 @@ test('claim, response retry and cold kill persist scheduling without inventing a
     c.sqlite.exec("CREATE TRIGGER fail_review_answer BEFORE INSERT ON preferences WHEN NEW.key='app_review' BEGIN SELECT RAISE(ABORT,'answer storage failed'); END");expect(await c.store.getState().respondReview('sure')).toBe(false);expect(c.store.getState().reviewOffer?.id).toBe(offer.id);expect((await c.repository.loadReviewTracker())!.reviewCompletedOrDismissedCount).toBe(0);
     c.sqlite.exec('DROP TRIGGER fail_review_answer');expect(await c.store.getState().respondReview('sure')).toBe(true);expect((await c.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(22);expect((await c.repository.respondToReview(offer.id,'sure',10)).accepted).toBe(false);
     await c.repository.saveAppSettings('{}');await c.cold();expect(c.store.getState().reviewOffer).toBeNull();expect(await c.store.getState().claimReview()).toBe(false);expect(c.store.getState().reviewTracker!.reviewCompletedOrDismissedCount).toBe(1);
-    const tracker=timingBoundary(c.store.getState().world!);tracker.offerSequence=1;tracker.globalYearsPlayed=22;tracker.candidate!.globalYear=22;tracker.reviewCompletedOrDismissedCount=1;c.sqlite.prepare("UPDATE preferences SET value=? WHERE key='app_review'").run(JSON.stringify(tracker));await c.cold();expect(await c.store.getState().claimReview()).toBe(true);await c.cold();expect(await c.store.getState().claimReview()).toBe(false);expect(c.store.getState().reviewTracker!.nextReviewPromptAtGlobalYear).toBe(32);
+    const tracker=timingBoundary(c.store.getState().world!);tracker.offerSequence=1;tracker.globalYearsPlayed=22;tracker.candidate!.globalYear=22;tracker.reviewCompletedOrDismissedCount=1;c.sqlite.prepare("UPDATE preferences SET value=? WHERE key='app_review'").run(JSON.stringify(tracker));await c.cold();expect(await c.store.getState().claimReview()).toBe(true);
+    const unanswered=c.store.getState().reviewOffer!;
+    await c.cold();expect(await c.store.getState().claimReview()).toBe(true);
+    expect(c.store.getState().reviewOffer?.id).toBe(unanswered.id);expect(c.store.getState().reviewTracker!.offerSequence).toBe(2);
+    expect(c.store.getState().reviewTracker!.nextReviewPromptAtGlobalYear).toBe(32);
+    expect(await c.store.getState().respondReview('later')).toBe(true);
+    await c.cold();expect(await c.store.getState().claimReview()).toBe(false);
+  }finally{c.close();}
+});
+
+test('five real persisted Age Ups make the first prompt due without a synthetic candidate or healthy-year filter',async()=>{
+  const c=await context();try{
+    await c.store.getState().startLife({...randomCreation(42),country:'US',city:'New York',background:'ordinary'},42);
+    await c.store.getState().acknowledgeBirth();
+    for(let age=1;age<=5;age++){
+      await finishYear(c.store);
+      const world=c.store.getState().world!;
+      expect(ageOn(world.people[world.activePersonId],world.date)).toBe(age);
+      expect((await c.repository.loadReviewTracker())?.globalYearsPlayed).toBe(age);
+      expect(reviewCandidateEligible(c.store.getState().reviewTracker!,world)).toBe(age===5);
+      if(age<5)expect(await c.store.getState().claimReview()).toBe(false);
+    }
+    const world=c.store.getState().world!,encoded=encodeWorld(world),payload=c.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload;
+    await c.cold();expect(await c.store.getState().claimReview()).toBe(true);
+    expect(c.store.getState().reviewOffer?.globalYear).toBe(5);
+    expect(c.store.getState().reviewTracker?.candidate).toBeNull();
+    expect(encodeWorld(c.store.getState().world!)).toBe(encoded);
+    expect(c.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload).toBe(payload);
+  }finally{c.close();}
+},60000);
+
+test('an existing age-five-or-older save with no review metadata gets its first offer without rewriting its payload',async()=>{
+  const c=await context();try{
+    const world=createLife('life_existing_review',42,{...randomCreation(42),country:'US',city:'New York',background:'ordinary'},date);
+    world.birthAcknowledged=true;world.date={...date,year:date.year+25};
+    Object.assign(world.people[world.activePersonId].stats,{health:25,happiness:10,stress:95});
+    await c.repository.create(world);
+    const payload=c.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload;
+    expect(c.sqlite.prepare("SELECT value FROM preferences WHERE key='app_review'").get()).toBeUndefined();
+    await c.cold();expect(await c.store.getState().claimReview()).toBe(true);
+    expect(c.store.getState().reviewOffer).toMatchObject({lifeId:world.id,personId:world.activePersonId,revision:world.revision,globalYear:0});
+    expect(c.store.getState().reviewTracker?.globalYearsPlayed).toBe(0);
+    expect(c.sqlite.prepare('SELECT payload FROM lives WHERE id=?').get(world.id)!.payload).toBe(payload);
+    expect(c.sqlite.prepare('SELECT command_id FROM receipts WHERE life_id=?').all(world.id)).toEqual([]);
+    const first=c.store.getState().reviewOffer!;
+    await c.cold();expect(await c.store.getState().claimReview()).toBe(true);expect(c.store.getState().reviewOffer?.id).toBe(first.id);
+    expect(await c.repository.claimReview(world.id,world.activePersonId,world.revision+1)).toBeNull();
+    expect(await c.repository.claimReview(world.id,'stale_person',world.revision)).toBeNull();
   }finally{c.close();}
 });
 

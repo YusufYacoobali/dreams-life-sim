@@ -168,3 +168,20 @@ test('backgrounding during a permission query defers the prompt until the app be
     expect(mockPermission).toHaveBeenCalledTimes(1);
   } finally { context.view.unmount(); context.sqlite.close(); }
 });
+
+test('granting notification permission in device settings clears a previous denial after foreground refresh without writing preferences or the life', async () => {
+  mockBegunLife = true; mockGetPermission.mockResolvedValue({ status: 'denied', canAskAgain: false });
+  mockReconcile.mockResolvedValue({ status: 'denied', message: 'Allow Daily game reminders in your device’s notification settings.' });
+  const context = await fixture('{"version":1,"appearance":"light","dailyReminder":true}');
+  try {
+    const before = await context.repository.loadAppSettings();
+    mockPermission.mockResolvedValue({ status: 'denied', canAskAgain: false, message: 'Allow Daily game reminders in your device’s notification settings.' });
+    await press('Allow Notifications'); expect(screen.getByRole('alert')).toHaveTextContent(/Allow Daily game reminders/);
+    mockReconcile.mockResolvedValue({ status: 'scheduled' });
+    await act(async () => { foreground('active'); });
+    await waitFor(() => expect(screen.queryByRole('alert')).toBeNull());
+    expect(screen.queryByRole('button', { name: 'Open Notification Settings' })).toBeNull();
+    expect(screen.getByRole('switch', { name: 'Daily Reminders' })).toBeChecked();
+    expect(await context.repository.loadAppSettings()).toBe(before); expect(await context.repository.export(context.world.id)).toBe(context.archive);
+  } finally { context.view.unmount(); context.sqlite.close(); }
+});

@@ -37,17 +37,17 @@ async function setup(saved: 'none' | 'birth' | 'alive' | 'dead' = 'none', bootst
 }
 beforeEach(() => { jest.clearAllMocks(); jest.mocked(useWindowDimensions).mockReturnValue({ width: 390, height: 844, scale: 1, fontScale: 1 }); });
 
-test.each(['light', 'dark'] as const)('%s welcome shows the brand and creation actions without scenery, tagline, footer or Saved Lives', async appearance => {
+test.each(['light', 'dark'] as const)('%s welcome shows the brand, creation actions and direct saved-life access without scenery or tagline', async appearance => {
   const context = await setup();
   try {
     const view = render(frame(<Welcome />, appearance));
     expect(screen.getByRole('header', { name: 'Dreams' })).toBeOnTheScreen();
     expect(screen.getByText('Life Simulator')).toBeOnTheScreen();
     expect(screen.queryByText(/Make choices|Free to play|Your story stays with you/)).toBeNull();
-    expect(screen.queryByRole('button', { name: 'Saved Lives' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Saved Lives' })).toBeEnabled();
     expect(screen.queryByRole('button', { name: /^Continue Life/ })).toBeNull();
     expect(screen.queryByText(/^Continue as /)).toBeNull();
-    expect(screen.getAllByRole('button')).toHaveLength(3);
+    expect(screen.getAllByRole('button')).toHaveLength(4);
     expect(screen.getByRole('button', { name: 'Start New Life' })).toHaveStyle({ backgroundColor: lightColors.actionBlue });
     expect(screen.UNSAFE_queryAllByType(Image)).toHaveLength(0);
     expect(screen.UNSAFE_getByType(Svg).props.width).toBe(184);
@@ -56,6 +56,7 @@ test.each(['light', 'dark'] as const)('%s welcome shows the brand and creation a
     expect(screen.queryByText('Help')).toBeNull();
     await press('Start New Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'custom' } });
     await press('Random Life'); expect(router.push).toHaveBeenLastCalledWith({ pathname: '/new-life', params: { seed: '42', mode: 'random' } });
+    await press('Saved Lives'); expect(router.push).toHaveBeenLastCalledWith('/saved-lives');
     await press('Help'); expect(router.push).toHaveBeenLastCalledWith('/help');
     view.rerender(frame(<Help />, appearance)); expect(screen.getByText('A year at a time')).toBeOnTheScreen();
     expect(await context.repository.list()).toEqual([]);
@@ -93,6 +94,7 @@ test('startup retains the loading announcement and keeps Help disabled until rea
     expect(screen.getByLabelText('Opening your saved lives')).toBeOnTheScreen();
     expect(screen.getByRole('button', { name: 'Help' })).toBeDisabled();
     expect(screen.queryByRole('button', { name: 'Start New Life' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Saved Lives' })).toBeNull();
     await press('Help'); expect(router.push).not.toHaveBeenCalled();
     await act(async () => { await mockStore.getState().bootstrap(); });
     expect(screen.queryByLabelText('Opening your saved lives')).toBeNull();
@@ -101,13 +103,13 @@ test('startup retains the loading announcement and keeps Help disabled until rea
   } finally { context.sqlite.close(); }
 });
 
-test('busy save state disables the three life actions without replacing the decorative motif', async () => {
+test('busy save state disables life and saved-file navigation without replacing the decorative motif', async () => {
   const context = await setup('alive');
   try {
     const view = render(frame(<Welcome />)), motif = screen.UNSAFE_getByType(Svg);
     const before = encodeWorld(mockStore.getState().world!);
     await act(async () => { mockStore.setState({ busy: true }); });
-    for (const name of [/^Continue Life/, 'Start New Life', 'Random Life']) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
+    for (const name of [/^Continue Life/, 'Start New Life', 'Random Life', 'Saved Lives']) { expect(screen.getByRole('button', { name })).toBeDisabled(); await press(name); }
     expect(router.push).not.toHaveBeenCalled(); expect(encodeWorld(mockStore.getState().world!)).toBe(before);
     expect(screen.UNSAFE_getByType(Svg)).toBe(motif);
     view.unmount();
@@ -123,6 +125,8 @@ test.each([{ width: 320, height: 568, fontScale: 1 }, { width: 320, height: 568,
     expect(scroll.props.contentContainerStyle).toEqual(expect.arrayContaining([expect.objectContaining({ flexGrow: 1, paddingHorizontal: 24 })]));
     expect(screen.getByText('Start New Life').props.allowFontScaling).not.toBe(false);
     expect(screen.getByText('Random Life').props.numberOfLines).toBeUndefined();
+    expect(screen.getByText('Saved Lives').props.numberOfLines).toBeUndefined();
+    expect(screen.getByRole('button', { name: 'Saved Lives' })).toHaveStyle({ minHeight: 48 });
     expect(screen.getByText('Continue Life').props.numberOfLines).toBeUndefined();
     const caption = screen.getByText(/^Continue as /);
     expect(caption.props.numberOfLines).toBeUndefined();

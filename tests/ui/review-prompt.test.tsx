@@ -12,12 +12,12 @@ import { ThemeProvider } from '../../src/ui/theme';
 import { database } from '../support/sqlite';
 let mockStore:ReturnType<typeof createGameStore>;
 jest.mock('../../src/state/useGame',()=>({useGame:(selector:unknown)=>require('zustand').useStore(mockStore,selector)}));
-jest.mock('../../src/reviews/nativeReview',()=>({nativeReviewAvailable:jest.fn(async()=>true),requestNativeReview:jest.fn(async()=>true)}));
-import { nativeReviewAvailable, requestNativeReview } from '../../src/reviews/nativeReview';
+jest.mock('../../src/reviews/nativeReview',()=>({nativeReviewAvailable:jest.fn(async()=>false),requestNativeReview:jest.fn(async()=>true),reviewPromptSupported:jest.fn(()=>true),openStoreReview:jest.fn(async()=>true)}));
+import { requestNativeReview, reviewPromptSupported, openStoreReview } from '../../src/reviews/nativeReview';
 import { ReviewPromptHost } from '../../src/ui/ReviewPromptHost';
 import { EventModal } from '../../src/ui/EventModal';
 import { hasAppModal, modalPresenceStore } from '../../src/ui/modalPresence';
-const available=jest.mocked(nativeReviewAvailable),request=jest.mocked(requestNativeReview);
+const supported=jest.mocked(reviewPromptSupported),request=jest.mocked(requestNativeReview),openStore=jest.mocked(openStoreReview);
 let initialAppState:typeof Native.AppState.currentState;
 beforeEach(()=>{initialAppState=Native.AppState.currentState;Native.AppState.currentState='active';});
 async function setup() {
@@ -38,7 +38,7 @@ function capture(name:string,tree:unknown) {
   mkdirSync(directory,{recursive:true});writeFileSync(join(directory,name+'.json'),JSON.stringify(clean(tree)));
 }
 const press=async(name:string)=>{await act(async()=>{fireEvent.press(screen.getByRole('button',{name}));});};
-afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks();request.mockClear();request.mockResolvedValue(true);available.mockResolvedValue(true);expect(modalPresenceStore.getState().owners.size).toBe(0);});
+afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks();request.mockClear();request.mockResolvedValue(true);supported.mockReturnValue(true);openStore.mockClear();openStore.mockResolvedValue(true);expect(modalPresenceStore.getState().owners.size).toBe(0);});
 
 test.each([false,true])('warm pre-prompt stays visible through its own registration; Sure persists before native request (dark=%s)',async dark=>{
   const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame({dark}));
@@ -57,18 +57,16 @@ test('another EventModal blocks claiming; closing it permits one offer without a
   const context=await setup(),claim=jest.spyOn(context.repository,'claimReview'),view=render(frame({local:true}));try{await act(async()=>{});expect(hasAppModal()).toBe(true);expect(claim).not.toHaveBeenCalled();expect(screen.queryByText('Enjoying Dreams?')).toBeNull();view.rerender(frame());await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());await act(async()=>{});expect(claim).toHaveBeenCalledTimes(1);expect(hasAppModal()).toBe(false);expect(screen.getByRole('button',{name:'Sure'})).toBeOnTheScreen();}finally{view.unmount();context.sqlite.close();}
 });
 
-test('hidden Life, unavailable native APIs and a changed life never show or act on a stale offer',async()=>{
-  const context=await setup(),claim=jest.spyOn(context.repository,'claimReview');available.mockResolvedValue(false);let view=render(frame());try{await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.unmount();available.mockResolvedValue(true);view=render(frame({visible:false}));await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.rerender(frame());await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});expect(mockStore.getState().reviewOffer).toBeNull();await act(async()=>{stale('sure');});expect(request).not.toHaveBeenCalled();expect((await context.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(15);}finally{view.unmount();context.sqlite.close();}
+test('unsupported hosts, hidden Life and a changed life never show or act on a stale offer',async()=>{
+  const context=await setup(),claim=jest.spyOn(context.repository,'claimReview');supported.mockReturnValue(false);let view=render(frame());try{await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.unmount();supported.mockReturnValue(true);view=render(frame({visible:false}));await act(async()=>{});expect(claim).not.toHaveBeenCalled();view.rerender(frame());await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;await act(async()=>{await mockStore.getState().startLife({...randomCreation(44),country:'US',city:'New York',background:'ordinary'},44);});expect(mockStore.getState().reviewOffer).toBeNull();await act(async()=>{stale('sure');});expect(request).not.toHaveBeenCalled();expect((await context.repository.loadReviewTracker())!.nextReviewPromptAtGlobalYear).toBe(15);}finally{view.unmount();context.sqlite.close();}
 });
 
-test('returning to the foreground rechecks native availability instead of caching one unavailable result forever',async()=>{
+test('an overdue reminder waits for foreground without depending on native store availability',async()=>{
   let change!:(state:Native.AppStateStatus)=>void;
   jest.spyOn(Native.AppState,'addEventListener').mockImplementation((_type,listener)=>{change=listener as typeof change;return {remove:jest.fn()};});
-  const context=await setup();available.mockResolvedValue(false);const view=render(frame());
+  const context=await setup();Native.AppState.currentState='background';const view=render(frame());
   try {
-    await waitFor(()=>expect(available).toHaveBeenCalled());expect(screen.queryByText('Enjoying Dreams?')).toBeNull();
-    await act(async()=>{Native.AppState.currentState='background';change('background');});
-    available.mockResolvedValue(true);
+    await act(async()=>{});expect(screen.queryByText('Enjoying Dreams?')).toBeNull();
     await act(async()=>{Native.AppState.currentState='active';change('active');});
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
     expect(request).not.toHaveBeenCalled();
@@ -108,4 +106,43 @@ test('a temporary claim write failure retries on the next foreground without a r
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
     expect(claim).toHaveBeenCalledTimes(2);expect(request).not.toHaveBeenCalled();
   }finally{view.unmount();context.sqlite.close();}
+});
+
+test('an age-five release save without review metadata gets a reminder even when native review is unavailable',async()=>{
+  const context=await setup();context.sqlite.exec("DELETE FROM preferences WHERE key='app_review'");
+  await mockStore.getState().bootstrap();request.mockResolvedValue(false);
+  const view=render(frame());
+  try {
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    expect(openStore).not.toHaveBeenCalled();
+    openStore.mockImplementation(async canPresent=>{expect(canPresent?.()).toBe(true);expect(modalPresenceStore.getState().owners.size).toBe(0);return true;});
+    await press('Sure');await waitFor(()=>expect(openStore).toHaveBeenCalledTimes(1));
+    expect(request).toHaveBeenCalledTimes(1);
+    expect((await context.repository.loadReviewTracker())?.reviewCompletedOrDismissedCount).toBe(1);
+  } finally { view.unmount();context.sqlite.close(); }
+});
+
+test('a persisted unanswered reminder returns after a cold bootstrap without a second offer sequence',async()=>{
+  const context=await setup();let view=render(frame());
+  try {
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    const id=mockStore.getState().reviewOffer!.id;
+    view.unmount();await mockStore.getState().bootstrap();view=render(frame());
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    expect(mockStore.getState().reviewOffer!.id).toBe(id);
+    expect((await context.repository.loadReviewTracker())?.offerSequence).toBe(1);
+    await press('Maybe later');expect(request).not.toHaveBeenCalled();expect(openStore).not.toHaveBeenCalled();
+  } finally { view.unmount();context.sqlite.close(); }
+});
+
+test('a stale handler cannot answer a resumed offer with the same ID in a new revision',async()=>{
+  const context=await setup(),respond=jest.spyOn(mockStore.getState(),'respondReview');const view=render(frame());
+  try {
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+    const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;
+    const state=mockStore.getState(),revision=state.world!.revision+1;
+    await act(async()=>{mockStore.setState({world:{...state.world!,revision},reviewOffer:{...state.reviewOffer!,revision}});});
+    await act(async()=>{stale('sure');});
+    expect(respond).not.toHaveBeenCalled();expect(request).not.toHaveBeenCalled();expect(openStore).not.toHaveBeenCalled();
+  } finally { view.unmount();context.sqlite.close(); }
 });

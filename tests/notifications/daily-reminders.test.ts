@@ -172,7 +172,7 @@ test('Expo Go and unsupported platforms are rejected before importing the native
 test('the native adapter creates a quiet Android channel before an explicit first permission prompt and normalizes weekly schedules', async () => {
   const order: string[] = [], row = planDailyReminders(enabled, sunday(), 'Test/Local|0')[0];
   const native = {
-    IosAuthorizationStatus: { AUTHORIZED: 2, PROVISIONAL: 3, EPHEMERAL: 4 }, AndroidImportance: { DEFAULT: 3 },
+    IosAuthorizationStatus: { AUTHORIZED: 2, PROVISIONAL: 3, EPHEMERAL: 4 }, AndroidImportance: { NONE: 0, DEFAULT: 3 },
     SchedulableTriggerInputTypes: { WEEKLY: 'weekly' }, DEFAULT_ACTION_IDENTIFIER: 'default',
     getPermissionsAsync: jest.fn(async () => ({ granted: false, status: 'undetermined', canAskAgain: true })),
     getNotificationChannelAsync: jest.fn(async () => null),
@@ -197,4 +197,37 @@ test('the native adapter creates a quiet Android channel before an explicit firs
   // Preserve user channel settings instead of resetting an existing channel.
   native.getNotificationChannelAsync.mockResolvedValueOnce({} as never); native.setNotificationChannelAsync.mockClear();
   await adapter.schedule(row); expect(native.setNotificationChannelAsync).not.toHaveBeenCalled();
+});
+
+test('a disabled Android reminder channel cancels owned slots without prompting or resetting the channel, then recovers after OS settings change', async () => {
+  const native = {
+    IosAuthorizationStatus: { AUTHORIZED: 2, PROVISIONAL: 3, EPHEMERAL: 4 }, AndroidImportance: { NONE: 0, DEFAULT: 3 },
+    getPermissionsAsync: jest.fn(async () => ({ granted: true, status: 'granted', canAskAgain: true })),
+    getNotificationChannelAsync: jest.fn(async () => ({ importance: 0 })),
+    requestPermissionsAsync: jest.fn(), setNotificationChannelAsync: jest.fn(),
+  };
+  const adapter = await createExpoReminderAdapter({ platform: 'android', isExpoGo: () => false, loadNotifications: async () => native as unknown as typeof import('expo-notifications') });
+  const h = harness(), other = foreign(); h.pending.push(other, ...planDailyReminders(enabled, sunday(), 'Test/Local|0'));
+  h.adapter.getPermission = adapter.getPermission;
+  expect(await adapter.requestPermission()).toMatchObject({ status: 'denied', canAskAgain: false });
+  expect(await h.service.reconcileDailyReminders(enabled)).toEqual({ status: 'denied', message: 'Allow Daily game reminders in your device’s notification settings.' });
+  expect(h.pending).toEqual([other]); expect(h.schedule).not.toHaveBeenCalled();
+  expect(native.requestPermissionsAsync).not.toHaveBeenCalled(); expect(native.setNotificationChannelAsync).not.toHaveBeenCalled();
+  native.getNotificationChannelAsync.mockResolvedValue({ importance: 3 });
+  expect((await h.service.reconcileDailyReminders(enabled)).status).toBe('scheduled');
+  expect(h.pending).toHaveLength(8); expect(h.pending[0]).toBe(other); expect(h.schedule).toHaveBeenCalledTimes(7);
+});
+
+test.each([2, 3, 4])('iOS authorization %s needs a visible destination; quiet Notification Centre delivery remains sufficient', async status => {
+  const destinations = { allowsAlert: false, allowsDisplayInNotificationCenter: false, allowsDisplayOnLockScreen: false };
+  const native = {
+    IosAuthorizationStatus: { AUTHORIZED: 2, PROVISIONAL: 3, EPHEMERAL: 4 },
+    getPermissionsAsync: jest.fn(async () => ({ granted: status === 2, status: 'granted', canAskAgain: true, ios: { status, ...destinations } })),
+    getNotificationChannelAsync: jest.fn(), requestPermissionsAsync: jest.fn(),
+  };
+  const adapter = await createExpoReminderAdapter({ platform: 'ios', isExpoGo: () => false, loadNotifications: async () => native as unknown as typeof import('expo-notifications') });
+  expect(await adapter.getPermission()).toMatchObject({ status: 'denied', canAskAgain: false, message: expect.stringContaining('display option') });
+  expect((await adapter.requestPermission()).status).toBe('denied'); expect(native.requestPermissionsAsync).not.toHaveBeenCalled();
+  destinations.allowsDisplayInNotificationCenter = true;
+  expect((await adapter.getPermission()).status).toBe('granted'); expect(native.getNotificationChannelAsync).not.toHaveBeenCalled();
 });

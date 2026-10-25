@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-25",
+  "method": "Read actual AndroidManifest.xml entries from downloaded Google Maven AARs and installed Expo prebuilt AARs. POMs identified review dependencies and newer Play Services requested by Firebase Messaging25.0.1. No AARs are added to Git.",
+  "scope": "Review-specific AARs and relevant Google dependency versions; not a Gradle-resolved or final merged application manifest.",
+  "finding": "None of the inspected AAR manifests declares a com.android.vending query. Explicit app query makes Android30+ sideloaded availability deterministic; Play-installed apps can already see their installer automatically.",
+  "fix": "plugins/withStoreReviewVisibility.cjs",
+  "artifacts": [
+    {
+      "coordinate": "com.google.android.play:core-common:2.0.2",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/play/core-common/2.0.2/core-common-2.0.2.aar",
+      "bytes": 101563,
+      "sha256": "6d80ec364cabf24c0d0b00be2b17ca557fddb14c189d58bdbe24a811c4877b14",
+      "manifestSha256": "1555728a30190a0a60285e8ad688ba4f9bfcc6e73a4fb47eceba7289c1faf4f2",
+      "manifestPackage": "com.google.android.play.corecommon",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.firebase:firebase-messaging:25.0.1",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-messaging/25.0.1/firebase-messaging-25.0.1.aar",
+      "bytes": 146656,
+      "sha256": "86bab0a8b27da7ff4542deba3f97017680f7964f62aca2d22b1f0b80d7e69f53",
+      "manifestSha256": "61a5826816c1c0940a2796e46a34571a089746f0230335e3efb21fb24e5554cc",
+      "manifestPackage": "com.google.firebase.messaging",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-base:17.3.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-base/17.3.0/play-services-base-17.3.0.aar",
+      "bytes": 524235,
+      "sha256": "7415634790a2bde2349368a8cbbf2af1c6c4e5939100dcf0260e34c6308baf44",
+      "manifestSha256": "0ac369e7cefe4be3de91ca34a5f31ae65057fc9db1bd03edc01c1c1f4ef2c9d8",
+      "manifestPackage": "com.google.android.gms.base",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-base:18.1.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-base/18.1.0/play-services-base-18.1.0.aar",
+      "bytes": 582829,
+      "sha256": "4eca56ceecd4325a376cd843af56377e2376ce284d0c6f05a5d0a82f4c1bf8cd",
+      "manifestSha256": "2a54927efbe3b778dbaff314e77ee6852c3913a7a0c195fd2cba05a788b51a43",
+      "manifestPackage": "com.google.android.gms.base",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-basement:18.1.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-basement/18.1.0/play-services-basement-18.1.0.aar",
+      "bytes": 379617,
+      "sha256": "03ba15f386cf260bde72fc4010fb89a820c47d51ce63bc09297eabe6cce09bdd",
+      "manifestSha256": "560b38942f915c4ebc63c2bf8ac88a4695e0eaef67669bcd0af3a6bebcf31ca6",
+      "manifestPackage": "com.google.android.gms.common",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-basement:18.3.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-basement/18.3.0/play-services-basement-18.3.0.aar",
+      "bytes": 403997,
+      "sha256": "6c11ae3eb2dd7f17373f919c4c557a70e4cf891bc0c9b66926a0a6445d654352",
+      "manifestSha256": "560b38942f915c4ebc63c2bf8ac88a4695e0eaef67669bcd0af3a6bebcf31ca6",
+      "manifestPackage": "com.google.android.gms.common",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-cloud-messaging:17.2.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-cloud-messaging/17.2.0/play-services-cloud-messaging-17.2.0.aar",
+      "bytes": 103747,
+      "sha256": "27255e7fe9706483816b158db25cf319f6a26a0566feff41597ce8807a350e37",
+      "manifestSha256": "93768a3e4c1a3b229d7a35a962aa4cf419a2cace148c8cdb4a21a40d3b4e8a1f",
+      "manifestPackage": "com.google.android.gms.cloudmessaging",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-stats:17.0.2",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-stats/17.0.2/play-services-stats-17.0.2.aar",
+      "bytes": 14753,
+      "sha256": "dd4314a53f49a378ec146103d36232b96c75454d29526336ccbdf132941764d3",
+      "manifestSha256": "741302e6052ac27e855e282686159913de610be11a91eebd107d0c9606d3e0e3",
+      "manifestPackage": "com.google.android.gms.stats",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-tasks:18.0.2",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-tasks/18.0.2/play-services-tasks-18.0.2.aar",
+      "bytes": 73978,
+      "sha256": "03465cf53680da23d3d4a3995c0329b7f73b211d38791ecb36e591febb896664",
+      "manifestSha256": "a722b1ec26c254b282ca383ec53e0c5ce47e1f56d98d4081d96dbbc308b05084",
+      "manifestPackage": "com.google.android.gms.tasks",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.gms:play-services-tasks:18.1.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/gms/play-services-tasks/18.1.0/play-services-tasks-18.1.0.aar",
+      "bytes": 96788,
+      "sha256": "d60575eae39350e6234858bc9d7d775375707ae82a684e6caf7f3e41a12e25a2",
+      "manifestSha256": "a722b1ec26c254b282ca383ec53e0c5ce47e1f56d98d4081d96dbbc308b05084",
+      "manifestPackage": "com.google.android.gms.tasks",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.play:review:2.0.1",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/play/review/2.0.1/review-2.0.1.aar",
+      "bytes": 127609,
+      "sha256": "269c6241658756edeee5993db4577199d806ab1252fe74e20d0241878a483603",
+      "manifestSha256": "aef171d0e682bf15dfc4b4ccfd160532310390a02650b800598b9b44ff46a553",
+      "manifestPackage": "com.google.android.play.review",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "com.google.android.play:review-ktx:2.0.0",
+      "source": "https://dl.google.com/dl/android/maven2/com/google/android/play/review-ktx/2.0.0/review-ktx-2.0.0.aar",
+      "bytes": 107628,
+      "sha256": "63c1b303ddd05774fd1987bc6b1d067b276ed05d7e869c384925627a8e62284c",
+      "manifestSha256": "0ff440472cb4f117e5b89f2ba7935f3a35542c65a9d6b687119a7e6cb467775b",
+      "manifestPackage": "com.google.android.play.core.ktx",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "host.exp.exponent:expo.modules.storereview:57.0.3",
+      "source": "node_modules/expo-store-review/local-maven-repo/host/exp/exponent/expo.modules.storereview/57.0.3/expo.modules.storereview-57.0.3.aar",
+      "bytes": 12651,
+      "sha256": "36421d6cd45a4a0e5cbc0b6076a7b88a08560c75732e09a739f11f98109e9eb4",
+      "manifestSha256": "1ae9fe040695bda912982e571daa0371dead1565bb125f9272812c1533b2b702",
+      "manifestPackage": "expo.modules.storereview",
+      "queryPackages": [],
+      "queryIntentActions": []
+    },
+    {
+      "coordinate": "host.exp.exponent:expo.modules.notifications:57.0.23",
+      "source": "node_modules/expo-notifications/local-maven-repo/host/exp/exponent/expo.modules.notifications/57.0.23/expo.modules.notifications-57.0.23.aar",
+      "bytes": 425993,
+      "sha256": "e6d92a1bc2481a0676636c715cd467c96d2ec2816ae0edec9fef02421f8febbe",
+      "manifestSha256": "61589c62a0c60ad9ea2a800ed2dba02fc05da3577493c58438a892a6f3ddfbe5",
+      "manifestPackage": "expo.modules.notifications",
+      "queryPackages": [],
+      "queryIntentActions": []
+    }
+  ]
+}

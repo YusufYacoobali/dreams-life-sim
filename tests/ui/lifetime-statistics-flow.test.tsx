@@ -78,6 +78,11 @@ test('the actual nested Activities context returns to its root on reselect, keep
     // The observed Education issue also uses the actual pathname fallback,
     // without a tab query or a visible/scrolled-in Back header.
     mockPath = '/education'; view.rerender(frame(<GameLayout />)); fireEvent.press(screen.getByRole('tab', { name: 'Activities', selected: true })); expect(router.navigate).toHaveBeenCalledTimes(3); expect(router.navigate).toHaveBeenLastCalledWith('/activities');
+    for (const path of ['/cult', '/cult/headquarters']) {
+      mockPath = path; view.rerender(frame(<GameLayout />));
+      expect(screen.getByRole('tab', { name: 'Activities', selected: true })).toBeOnTheScreen();
+      expect(screen.getByRole('tab', { name: 'Life', selected: false })).toBeOnTheScreen();
+    }
     expect(dispatch).not.toHaveBeenCalled(); expect(world()).toBe(original); expect(encodeWorld(world())).toBe(encoded); expect(context.rows()).toEqual(rows); expect(unpack).not.toHaveBeenCalled(); expect(world().pending).toEqual(original.pending); expect(world().annual).toEqual(original.annual); context.oldMoments(); view.unmount();
   } finally { jest.restoreAllMocks(); context.close(); }
 });
