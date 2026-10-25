@@ -1,5 +1,11 @@
 # Release audit — 25 October 2026
 
+**Testing policy update:** the user requested God Mode remain available in
+release builds. Its testing capability is restored for all build profiles,
+including production/store, and the saved Settings toggle controls editor
+access. The earlier audit's production-off check records its original candidate;
+it is superseded by this explicit testing requirement. Other audit fixes remain.
+
 Candidate starts at `dc097168`. This audit fixes release defects and runs the
 whole application regression. It does not certify an installed store build.
 
@@ -44,7 +50,7 @@ record the dependency inspection.
 | Reminder permission | A disabled Android reminder channel and iOS authorization with no visible destinations are reported accurately. Existing channel choices are preserved. Settings clears stale denial after actual recovery. |
 | Clock/timezone changes | A private native receiver re-arms only already-scheduled Dreams reminders when Android's clock or timezone changes while the app is closed. |
 | Notification glyph | A dedicated white heart on transparency replaces Android's opaque-launcher fallback. The source SVG and 96px PNG are local assets; the launcher icon is retained. |
-| Production testing tools | Production/store builds force God Mode testing access off, including conflicting test flags and saved toggles. Development/internal/preview testing remains available. |
+| Testing tools | God Mode remains available in all builds, including production/store, at the user's request for ongoing testing. The saved Settings toggle still controls editor access. |
 | Permissions | Unused overlay, broad legacy storage and audio-recording permissions are blocked. File backup/sharing uses existing system pickers and app cache. |
 | Startup/recovery | Welcome exposes Saved Lives, allowing a corrupt active save to reach explicit recovery and a fresh install to import without a disposable life. |
 | Share cache | Each native-share operation removes only its own temporary cache file after sharing settles, including failure. User-selected exported files remain. |

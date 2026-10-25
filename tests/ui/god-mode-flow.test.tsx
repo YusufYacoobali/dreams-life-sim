@@ -26,7 +26,7 @@ import { GodModeShortcut } from '../../src/ui/GodModeAccess';
 const frame = (child: React.ReactNode) => <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 47, bottom: 34, left: 0, right: 0 } }}><ThemeProvider>{child}</ThemeProvider></SafeAreaProvider>;
 const press = async (name: string | RegExp) => { await act(async () => { fireEvent.press(screen.getByRole('button', { name })); }); };
 const tab = (name: string) => fireEvent.press(screen.getByRole('tab', { name }));
-async function fixture(profile: 'internal' | 'production' = 'internal') {
+async function fixture(profile: 'internal' | 'production' = 'internal', capability?: boolean) {
   const previousBuildEnv = { ...process.env };
   try {
     process.env.EAS_BUILD_PROFILE = profile;
@@ -34,6 +34,7 @@ async function fixture(profile: 'internal' | 'production' = 'internal') {
     process.env.DREAMS_GOD_MODE_TESTING = '1';
     Constants.expoConfig!.extra = require('../../app.config.cjs')({ config: {} }).extra;
   } finally { process.env = previousBuildEnv; }
+  if (capability !== undefined) Constants.expoConfig!.extra = { ...Constants.expoConfig!.extra, godModeTesting: capability };
   const db = database(), repository = new SaveRepository(db.driver); await repository.initialise();
   const before = { ...createLife('life_god_ui', 42, randomCreation(42), { year: 2026, month: 10, day: 22 }), birthAcknowledged: true }; await repository.create(before);
   mockPreferences = createPreferencesStore({ repository: async () => repository }); await mockPreferences.getState().bootstrap();
@@ -48,8 +49,10 @@ let previousDev: boolean, previousExtra: NonNullable<typeof Constants.expoConfig
 beforeEach(() => { previousDev = __DEV__; previousExtra = Constants.expoConfig!.extra; buildGlobals.__DEV__ = false; });
 afterEach(() => { buildGlobals.__DEV__ = previousDev; Constants.expoConfig!.extra = previousExtra; });
 
-test('internal release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async () => {
-  const { sqlite, repository, before, deps } = await fixture(), view = render(frame(<Settings />));
+test.each(['internal', 'production'] as const)('%s release Settings enable opens the editor; bulk edits update Assets immediately and survive cold store load', async profile => {
+  const { sqlite, repository, before, deps } = await fixture(profile), view = render(frame(<Settings />));
+  expect(isGodModeBuild()).toBe(true);
+  expect(mockPreferences.getState().settings.godModeEnabled).toBe(false);
   expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   await act(async () => { fireEvent(screen.getByRole('switch', { name: 'God Mode' }), 'valueChange', true); });
   await press('Open God Mode Editor'); expect(router.push).toHaveBeenCalledWith('/god-mode');
@@ -83,8 +86,10 @@ test('invalid edits, reset, destructive confirmation, cancel and failed-save ret
   view.unmount(); sqlite.close();
 });
 
-test('production config denies direct editor saves even with a testing environment flag and persisted toggle', async () => {
-  const { sqlite, before, repository } = await fixture('production'); await mockPreferences.getState().setGodModeEnabled(true);
+test('an explicitly absent testing capability denies direct editor saves even with a persisted enabled toggle', async () => {
+  const { sqlite, before, repository } = await fixture('production', false); await mockPreferences.getState().setGodModeEnabled(true);
+  expect(isGodModeBuild()).toBe(false);
+  expect(mockPreferences.getState().settings.godModeEnabled).toBe(true);
   const view = render(frame(<Settings />)); expect(screen.queryByRole('switch', { name: 'God Mode' })).toBeNull(); expect(screen.queryByRole('button', { name: 'Open God Mode Editor' })).toBeNull();
   view.rerender(frame(<GodModeShortcut />)); expect(screen.queryByRole('button', { name: /God Mode/ })).toBeNull();
   view.rerender(frame(<GodMode />)); expect(screen.getByText('God Mode is unavailable or switched off.')).toBeTruthy(); expect(screen.queryByRole('button', { name: 'Save Changes' })).toBeNull();
@@ -92,12 +97,16 @@ test('production config denies direct editor saves even with a testing environme
   view.unmount(); sqlite.close();
 });
 
-test('stale drafts require reload and disabling God Mode keeps saved values', async () => {
-  const { sqlite, repository, before } = await fixture(); await mockPreferences.getState().setGodModeEnabled(true); const view = render(frame(<GodMode />));
+test('stale drafts require reload and disabling God Mode in production prevents further edits while keeping saved values', async () => {
+  const { sqlite, repository, before } = await fixture('production'); await mockPreferences.getState().setGodModeEnabled(true); const view = render(frame(<GodMode />));
   tab('Stats'); fireEvent.changeText(screen.getByLabelText('Smarts value'), '99');
   await act(async () => { await mockStore.getState().editGodMode({ lifeId: before.id, personId: before.activePersonId, expectedRevision: before.revision, commands: [{ type: 'stat', stat: 'smarts', value: 47 }] }); });
   expect(screen.getByRole('button', { name: 'Save Changes' })).toBeDisabled(); await press('Reload Values'); expect(screen.getByLabelText('Smarts value').props.value).toBe('47');
-  await act(async () => { await mockPreferences.getState().setGodModeEnabled(false); }); expect(screen.getByText('God Mode is unavailable or switched off.')).toBeTruthy(); expect((await repository.load(before.id)).people[before.activePersonId].stats.smarts).toBe(47);
+  await act(async () => { await mockPreferences.getState().setGodModeEnabled(false); }); expect(screen.getByText('God Mode is unavailable or switched off.')).toBeTruthy();
+  const disabled = mockStore.getState().world!;
+  await act(async () => { expect(await mockStore.getState().editGodMode({ lifeId: disabled.id, personId: disabled.activePersonId, expectedRevision: disabled.revision, commands: [{ type: 'stat', stat: 'smarts', value: 100 }] })).toBe(false); });
+  expect(await repository.load(before.id)).toEqual(disabled);
+  expect(disabled.people[before.activePersonId].stats.smarts).toBe(47);
   view.unmount(); sqlite.close();
 });
 

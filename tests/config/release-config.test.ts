@@ -5,21 +5,25 @@ import { resolve } from 'node:path';
 const { expo } = require('../../app.json');
 
 test.each([
-  ['production', 'store', '1', false],
-  ['production', 'internal', '1', false],
-  ['internal', 'store', '1', false],
-  ['internal', 'internal', '1', true],
-  ['preview', '', '', true],
-  ['', '', '', false],
-  ['', '', '1', true],
-] as const)('resolved Expo config keeps testing capability scoped for profile=%s distribution=%s flag=%s', (profile, distribution, flag, expected) => {
+  ['production', 'store', '1'],
+  ['production', 'store', '0'],
+  ['production', 'internal', '1'],
+  ['internal', 'store', '0'],
+  ['internal', 'internal', '1'],
+  ['preview', '', ''],
+  ['unknown', '', '0'],
+  ['', '', ''],
+  ['', '', '0'],
+  ['', '', '1'],
+] as const)('resolved Expo config retains God Mode testing for profile=%s distribution=%s flag=%s', (profile, distribution, flag) => {
   const previous = { ...process.env };
   try {
     process.env.EAS_BUILD_PROFILE = profile;
     process.env.EAS_BUILD_DISTRIBUTION = distribution;
     process.env.DREAMS_GOD_MODE_TESTING = flag;
     const { exp } = getConfig(resolve(__dirname, '../..'), { skipPlugins: true });
-    expect(exp.extra?.godModeTesting).toBe(expected);
+    expect(exp.extra?.godModeTesting).toBe(true);
+    expect(require('../../eas.json').build.production.env.DREAMS_GOD_MODE_TESTING).toBe('1');
     expect(exp.android?.package).toBe('com.yacoobali.lifesim');
     expect(exp.ios?.bundleIdentifier).toBe('com.yacoobali.lifesim');
     expect(exp.android?.blockedPermissions).toEqual(expo.android.blockedPermissions);

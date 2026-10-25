@@ -1,5 +1,10 @@
 # Native release audit — 25 October 2026
 
+**Superseded testing policy:** the user subsequently requested God Mode remain
+available in production/release builds. That capability is restored for all
+profiles and remains controlled by the saved Settings toggle. Production-off
+results below describe the original audit candidate, not the current policy.
+
 This audit inspected current source and installed package metadata at base revision `dc097168be9636cf7ffcf8cd6f5d7d58787320ab`, with the coordinated release fixes applied afterward. It is not an APK/AAB/IPA, signing, store-submission or installed-device acceptance report. Root coordinates execution results separately; this audit agent ran no test, type, export, prebuild or native build runner.
 
 ## Concrete release defects corrected

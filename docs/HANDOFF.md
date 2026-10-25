@@ -1,5 +1,19 @@
 # Continue Dreams: Life Simulator
 
+## God Mode remains enabled for release testing — 25 October 2026
+
+The user explicitly reaffirmed that release builds still need God Mode for
+testing. The audit's production-off restriction is reverted: all build profiles
+embed `godModeTesting=true`, including production/store, and the EAS production
+testing flag is enabled. The saved Settings toggle still gates the editor and
+playground; switching it off retains previous edits. Other release fixes remain.
+The earlier audit's production-off results below describe its historical candidate.
+
+The restoration passes all 23 cases in the three affected access/config/editor
+suites and strict app/test types. Real SQLite editor flows cover production and
+internal builds, saved-toggle enforcement, edits and cold reload. Resolved Expo
+production/store configuration returns testing access true even with env flag 0.
+
 ## Release audit and reliable reviews — 25 October 2026
 
 Reviews are due on a clean Life opening from age five, then every 10–20

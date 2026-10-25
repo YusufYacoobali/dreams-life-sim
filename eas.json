@@ -2,6 +2,6 @@
   "build": {
     "internal": { "distribution": "internal", "env": { "EAS_BUILD_DISTRIBUTION": "internal", "DREAMS_GOD_MODE_TESTING": "1" } },
     "preview": { "distribution": "internal", "env": { "EAS_BUILD_DISTRIBUTION": "internal", "DREAMS_GOD_MODE_TESTING": "1" } },
-    "production": { "distribution": "store", "env": { "EAS_BUILD_DISTRIBUTION": "store", "DREAMS_GOD_MODE_TESTING": "0" } }
+    "production": { "distribution": "store", "env": { "EAS_BUILD_DISTRIBUTION": "store", "DREAMS_GOD_MODE_TESTING": "1" } }
   }
 }
