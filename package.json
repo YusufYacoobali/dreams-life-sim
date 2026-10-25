@@ -47,8 +47,8 @@
   },
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tests/tsconfig.json",
     "check:imports": "node tools/check-runtime-imports.cjs",
     "test": "jest --runInBand",
