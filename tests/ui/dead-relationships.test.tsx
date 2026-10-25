@@ -61,7 +61,7 @@ const visible = () => screen.UNSAFE_getByType(Native.FlatList).props.data as Edg
 const select = (name: string) => fireEvent.press(screen.getByRole('tab', { name }));
 afterEach(() => { jest.restoreAllMocks(); });
 
-test.each([false, true])('active tabs exclude deaths; Dead keeps sorted memorials, search, navigation and saved bytes (dark=%s)', async dark => {
+test.each([false, true])('active tabs exclude deaths; Deceased keeps sorted memorials, search, navigation and saved bytes (dark=%s)', async dark => {
   const fixture = contactsFixture(), { world, friend, coworker, classmate, teacher, partner, older, recentTeacher, recentPartner, parent } = fixture;
   const { sqlite, driver } = database(), repository = new SaveRepository(driver); await repository.initialise(); await repository.create(world);
   mockWorld = await repository.load(world.id);
@@ -70,7 +70,10 @@ test.each([false, true])('active tabs exclude deaths; Dead keeps sorted memorial
   const scroll = jest.spyOn(Native.FlatList.prototype, 'scrollToOffset').mockImplementation(() => {});
   const view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: dark ? 320 : 390, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider appearance={dark ? 'dark' : 'light'}><Relationships /></ThemeProvider></SafeAreaProvider>);
   try {
-    const activeTabs = ['All', 'Family', 'Friends', 'Romance', 'Work / School'];
+    expect(screen.getAllByRole('tab').map(tab => tab.props.accessibilityLabel)).toEqual(['All', 'Family', 'Friends', 'Romance', 'Deceased']);
+    expect(screen.queryByRole('tab', { name: 'Work / School' })).toBeNull();
+    expect(visible().map(edge => edge.id)).toEqual(expect.arrayContaining([coworker.edge.id, classmate.edge.id, teacher.edge.id]));
+    const activeTabs = ['All', 'Family', 'Friends', 'Romance'];
     for (const tab of activeTabs) {
       select(tab);
       expect(visible().every(edge => !mockWorld.people[edge.from === world.activePersonId ? edge.to : edge.from].died)).toBe(true);
@@ -79,8 +82,7 @@ test.each([false, true])('active tabs exclude deaths; Dead keeps sorted memorial
     }
     select('Friends'); expect(visible().map(edge => edge.id)).toContain(friend.edge.id);
     select('Romance'); expect(visible().map(edge => edge.id)).toContain(partner.edge.id);
-    select('Work / School'); expect(visible().map(edge => edge.id)).toEqual(expect.arrayContaining([coworker.edge.id, classmate.edge.id, teacher.edge.id]));
-    select('Dead');
+    select('Deceased');
     const deceased = visible(), ids = deceased.map(edge => edge.id);
     expect(ids).toEqual(expect.arrayContaining([older.edge.id, recentTeacher.edge.id, recentPartner.edge.id, parent.id]));
     expect(deceased.every(edge => !!mockWorld.people[edge.from === world.activePersonId ? edge.to : edge.from].died)).toBe(true);
@@ -98,8 +100,16 @@ test.each([false, true])('active tabs exclude deaths; Dead keeps sorted memorial
     expect(screen.getByLabelText('Search relationships')).toHaveProp('value', '');
     expect(visible().some(edge => edge.id === friend.edge.id)).toBe(true);
     expect(scroll).toHaveBeenCalledWith({ offset: 0, animated: false });
-    expect(screen.UNSAFE_getByType(FilterTabs).props.values).toEqual(relationshipFilters);
-    for (const tab of screen.getAllByRole('tab')) expect(Native.StyleSheet.flatten(tab.props.style).minHeight).toBeGreaterThanOrEqual(48);
+    const filters = screen.UNSAFE_getByType(FilterTabs);
+    expect(filters.props.values).toEqual(relationshipFilters); expect(filters.props.scrollable).toBe(true);
+    const horizontalScroll = filters.findByType(Native.ScrollView);
+    expect(horizontalScroll.props.horizontal).toBe(true); expect(horizontalScroll.props.keyboardShouldPersistTaps).toBe('handled');
+    expect(Native.StyleSheet.flatten(screen.UNSAFE_getByProps({ accessibilityRole: 'tablist' }).props.style).flexWrap).toBe('nowrap');
+    for (const tab of screen.getAllByRole('tab')) {
+      const style = Native.StyleSheet.flatten(tab.props.style), label = within(tab).getByText(tab.props.accessibilityLabel);
+      expect(style.minHeight).toBeGreaterThanOrEqual(48); expect(style.flexGrow).toBe(0); expect(style.flexShrink).toBe(0); expect(style.maxWidth).toBeUndefined();
+      expect(label).toHaveProp('numberOfLines', 1); expect(Native.StyleSheet.flatten(label.props.style).flexShrink).toBe(0);
+    }
     fireEvent.press(screen.getByRole('button', { name: 'Household Pets' })); expect(router.push).toHaveBeenCalledWith('/pets');
     fireEvent.press(screen.getByRole('button', { name: 'Family Tree' })); expect(router.push).toHaveBeenCalledWith('/family-tree');
     expect(mockDispatch).not.toHaveBeenCalled(); expect(encodeWorld(mockWorld)).toBe(encoded);
@@ -115,10 +125,10 @@ test('the selector preserves original edge identities and keeps the saved graph 
   expect(world.relationships.map(edge => edge.id)).toEqual(order); expect(encodeWorld(world)).toBe(before);
 });
 
-test('an empty Dead view has a clear return to living connections', () => {
+test('an empty Deceased view has a clear return to living connections', () => {
   mockWorld = immutableWorld(createLife('life_no_memorials', 0, { ...randomCreation(0), background: 'ordinary' }, { year: 2026, month: 10, day: 24 }));
   const encoded = encodeWorld(mockWorld), view = render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 320, height: 568 }, insets: { top: 20, bottom: 0, left: 0, right: 0 } }}><ThemeProvider><Relationships /></ThemeProvider></SafeAreaProvider>);
-  select('Dead'); expect(visible()).toHaveLength(0); expect(screen.getByText('People you have lost will appear here.')).toBeOnTheScreen();
+  select('Deceased'); expect(visible()).toHaveLength(0); expect(screen.getByText('People you have lost will appear here.')).toBeOnTheScreen();
   fireEvent.press(screen.getByRole('button', { name: 'Show All Connections' }));
   expect(screen.getByRole('tab', { name: 'All' })).toHaveProp('accessibilityState', expect.objectContaining({ selected: true }));
   expect(visible().length).toBeGreaterThan(0); expect(encodeWorld(mockWorld)).toBe(encoded); view.unmount();

@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking, TextInput } from 'react-native';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { LinearGradient, Path, Stop } from 'react-native-svg';
 import { platforms, platformContent, platformAccountLabel, socialPostJournal } from '../../src/game/content/social';
 import { decodeSave } from '../../src/persistence/archive';
 import { copyWorld, encodeWorld } from '../../src/game/model';
@@ -10,6 +10,7 @@ import { SaveRepository } from '../../src/persistence/repository';
 import { createGameStore } from '../../src/state/gameStore';
 import { database } from '../support/sqlite';
 import { PlatformMark } from '../../src/assets/PlatformMark';
+import { platformMarks } from '../../src/assets/platformMarks';
 import { ThemeProvider } from '../../src/ui/theme';
 import { DisplayText, displayText } from '../../src/ui/DisplayText';
 import { PendingEvent } from '../../src/ui/PendingEvent';
@@ -107,14 +108,45 @@ test.each(platforms)('a real profile keeps the literal handle @%s', handle => {
   view.unmount();
 });
 
-test.each(['light', 'dark'] as const)('%s platform marks share clean frames and independently named accessible images', appearance => {
+test.each([
+  ['light', 24], ['light', 36], ['dark', 24], ['dark', 36],
+] as const)('%s platform marks at %spx retain brand colour, contrast and consistent framing', (appearance, size) => {
+  const luminance = (hex: string) => {
+    const [r, g, b] = [1, 3, 5].map(start => {
+      const channel = parseInt(hex.slice(start, start + 2), 16) / 255;
+      return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
+    });
+    return .2126 * r + .7152 * g + .0722 * b;
+  };
   for (const platform of platforms) {
-    const view = render(<ThemeProvider appearance={appearance}><PlatformMark platform={platform} size={36} decorative={false} /></ThemeProvider>);
-    expect(screen.getByRole('image', { name: platformContent[platform].name })).toHaveStyle({ width: 36, height: 36 });
-    expect(screen.UNSAFE_getByType(Svg).props.preserveAspectRatio).toBe('xMidYMid meet');
-    expect(screen.UNSAFE_getByType(Path).props.d.length).toBeGreaterThan(100);
+    const view = render(<ThemeProvider appearance={appearance}><PlatformMark platform={platform} size={size} decorative={false} /></ThemeProvider>);
+    expect(screen.getByRole('image', { name: platformContent[platform].name })).toHaveStyle({ width: size, height: size, backgroundColor: '#FFFFFF', borderRadius: size * .24 });
+    expect(screen.UNSAFE_getByType(Svg).props).toEqual(expect.objectContaining({ width: size * .7, height: size * .7, viewBox: platformMarks[platform].viewBox, preserveAspectRatio: 'xMidYMid meet' }));
+    const path = screen.UNSAFE_getByType(Path);
+    expect(path.props.d).toBe(platformMarks[platform].path);
+    let colours: string[];
+    if (platform === 'photogram') {
+      const gradient = screen.UNSAFE_getByType(LinearGradient);
+      expect(gradient.props).toEqual(expect.objectContaining({ x1: '0%', y1: '100%', x2: '100%', y2: '0%' }));
+      expect(path.props.fill).toBe('url(#' + gradient.props.id + ')');
+      colours = screen.UNSAFE_getAllByType(Stop).map(stop => stop.props.stopColor);
+      expect(colours).toEqual(['#D95721', '#E1306C', '#C13584', '#833AB4', '#405DE6']);
+    } else {
+      expect(path.props.fill).toBe({ videowave: '#FF0033', streamline: '#9146FF', lifelink: '#000000' }[platform]);
+      expect(screen.UNSAFE_queryByType(LinearGradient)).toBeNull();
+      colours = [path.props.fill];
+    }
+    for (const colour of colours) expect(1.05 / (luminance(colour) + .05)).toBeGreaterThanOrEqual(3);
     view.unmount();
   }
+});
+
+test('multiple decorative Instagram marks have independent gradient references', () => {
+  render(<><PlatformMark platform="photogram" /><PlatformMark platform="photogram" /></>);
+  const gradients = screen.UNSAFE_getAllByType(LinearGradient), paths = screen.UNSAFE_getAllByType(Path);
+  expect(gradients[0].props.id).not.toBe(gradients[1].props.id);
+  paths.forEach((path, index) => expect(path.props.fill).toBe('url(#' + gradients[index].props.id + ')'));
+  expect(screen.queryByRole('image')).toBeNull();
 });
 
 test('the existing Help credits ship readable attribution and a working licence link', () => {

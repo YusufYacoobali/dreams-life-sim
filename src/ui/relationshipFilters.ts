@@ -6,8 +6,7 @@ export const relationshipFilters = [
   { id: 'family', label: 'Family' },
   { id: 'friends', label: 'Friends' },
   { id: 'romance', label: 'Romance' },
-  { id: 'work-school', label: 'Work / School' },
-  { id: 'dead', label: 'Dead' },
+  { id: 'dead', label: 'Deceased' },
 ] as const;
 export type RelationshipFilter = typeof relationshipFilters[number]['id'];
 
@@ -25,7 +24,6 @@ export function relationshipContacts(
     if (filter === 'family' && !edge.roles.some(role => role === 'parent' || role === 'guardian' || role === 'sibling') && edge.romance !== 'married' && edge.romance !== 'widowed') return false;
     if (filter === 'friends' && !edge.roles.includes('friend')) return false;
     if (filter === 'romance' && edge.romance === 'none') return false;
-    if (filter === 'work-school' && !edge.roles.some(role => role === 'coworker' || role === 'classmate' || role === 'teacher')) return false;
     return !search || fullName(person).toLocaleLowerCase().includes(search);
   });
   // This array is new. Stable sorting retains the existing order for deaths on

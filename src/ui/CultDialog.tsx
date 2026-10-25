@@ -92,6 +92,7 @@ export function useCultDialog(cultId?: string) {
         id: string;
         label: string;
         disabledReason?: string;
+        illustration?: React.ReactNode;
       }[],
       onSelect: (id: string) => void,
       id: CultArtId = 'cult',

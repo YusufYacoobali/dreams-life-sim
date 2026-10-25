@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-25",
+  "file": "cult-options.png",
+  "generator": "Built-in Image Gen",
+  "generatedPath": "/workspace/generated_images/exec-bcdd076f-5863-4e4f-a1a2-28efc40d7a78.png",
+  "sourceSha256": "8d746f9c1e1c1327a3d18043becc34abc19bb6ac68f93ec613a7a50a48e5120f",
+  "styleReference": "design/action-icons/jobs-extra.png",
+  "style": "Soft dimensional Dreams icons, navy outlines, bright blue/gold accents, front three-quarter view, one large subject per cell, transparent gaps and no scenery.",
+  "columns": 3,
+  "rows": 2,
+  "entries": [
+    {
+      "id": "meeting-chair",
+      "subject": "Blue folding meeting chair"
+    },
+    {
+      "id": "cabin",
+      "subject": "Timber cabin with blue pitched roof"
+    },
+    {
+      "id": "farmhouse",
+      "subject": "Cream farmhouse with terracotta roof"
+    },
+    {
+      "id": "warehouse",
+      "subject": "Blue grey warehouse with roller door"
+    },
+    {
+      "id": "bed",
+      "subject": "Human single bed with blue blanket"
+    },
+    {
+      "id": "monument",
+      "subject": "Stone obelisk on a gold-trimmed plinth"
+    }
+  ]
+}

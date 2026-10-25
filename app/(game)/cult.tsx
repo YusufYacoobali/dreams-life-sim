@@ -15,7 +15,11 @@ import {
 } from '../../src/ui/components';
 import { useColors } from '../../src/ui/theme';
 import { useCultDialog } from '../../src/ui/CultDialog';
-import { CultArt, type CultArtId } from '../../src/assets/CultArt';
+import {
+  CultArt, type CultArtId, cultHeadquartersArt, cultRecruitmentArt,
+  cultCeremonyArt, cultMemberActionArt, cultRoleArt, cultTreasuryArt,
+  cultRivalActionArt, cultRecoveryArt, cultFoundingStrategyArt,
+} from '../../src/assets/CultArt';
 import {
   SocialBusinessFacts,
   SocialBusinessIntro,
@@ -208,7 +212,7 @@ function CultDashboard() {
           ...value,
           title: cultLeaderTitles[Number(id)],
         })),
-      'cult',
+      'rivalry',
     );
   }
   function fees(onDone?: (joining: bigint, recurring: bigint) => void) {
@@ -233,7 +237,7 @@ function CultDashboard() {
           setRecurring(value.recurring);
         }
       },
-      'treasury',
+      'coins',
     );
   }
   function review(
@@ -258,6 +262,7 @@ function CultDashboard() {
       "Give people a reason to join. Your fees and reputation may give them reasons not to.",
       cultRecruitment.map((row) => ({
         id: row.id,
+        illustration: <CultArt id={cultRecruitmentArt[row.id]} size={36} />,
         label:
           row.title + ' · ' + cultMoney(cult, cultRecruitQuote(cult, row.id)),
         disabledReason:
@@ -277,7 +282,7 @@ function CultDashboard() {
           },
           method.title + '?',
           method.description,
-          'recruitment',
+          cultRecruitmentArt[method.id],
           [costRow(cult, cost)],
         );
       },
@@ -291,6 +296,7 @@ function CultDashboard() {
       "Choose a gathering. The treasury covers the cost.",
       cultCeremonies.map((row) => ({
         id: row.id,
+        illustration: <CultArt id={cultCeremonyArt[row.id]} size={36} />,
         label:
           row.title + ' · ' + cultMoney(cult, cultCeremonyQuote(cult, row.id)),
         disabledReason:
@@ -310,7 +316,7 @@ function CultDashboard() {
           },
           chosen.title + '?',
           chosen.description,
-          'ceremony',
+          cultCeremonyArt[chosen.id],
           [costRow(cult, cost)],
         );
       },
@@ -411,6 +417,7 @@ function CultDashboard() {
         ] as const
       ).map((id) => ({
         id,
+        illustration: <CultArt id={cultMemberActionArt[id]} size={36} />,
         label: {
           talk: 'Talk',
           praise: 'Praise',
@@ -440,6 +447,7 @@ function CultDashboard() {
             Object.entries(cultRoleTitles).map(([id, label]) => ({
               id,
               label,
+              illustration: <CultArt id={cultRoleArt[id as typeof member.role]} size={36} />,
               disabledReason: cultRoleChangeReason(
                 cult,
                 personId,
@@ -458,7 +466,7 @@ function CultDashboard() {
                 'Assign ' + fullName(person) + '?',
                 cultRoleTitles[role as typeof member.role] +
                   ' becomes their actual responsibility.',
-                'followers',
+                cultRoleArt[role as typeof member.role],
               ),
             'followers',
             portrait,
@@ -491,7 +499,7 @@ function CultDashboard() {
             : action === 'confront'
               ? 'Public humiliation can damage your relationship and return as an accusation.'
               : "They will remember how you treat them.",
-          'followers',
+          cultMemberActionArt[action],
           action === 'reward' ? [costRow(cult, cultRewardQuote(cult))] : [],
         );
       },
@@ -568,7 +576,7 @@ function CultDashboard() {
     dialog.select(
       'Fill an inner-circle vacancy',
       "Invite someone you know locally. You can make two invitations a year.",
-      roles.map((role) => ({ id: role, label: cultRoleTitles[role] })),
+      roles.map((role) => ({ id: role, label: cultRoleTitles[role], illustration: <CultArt id={cultRoleArt[role]} size={36} /> })),
       (id) => {
         const role = id as Cult['members'][number]['role'],
           candidates = cultReplacementCandidates(world, cult);
@@ -606,11 +614,11 @@ function CultDashboard() {
               'Invite ' + fullName(person) + '?',
               cultRoleTitles[role] +
                 ' will become their actual responsibility. Invitation and induction costs come from the communal treasury.',
-              'followers',
+              cultRoleArt[role],
               [costRow(cult, quote)],
             );
           },
-          'followers',
+          cultRoleArt[role],
           undefined,
           candidates.length > 6
             ? { label: 'Search local contacts' }
@@ -629,18 +637,19 @@ function CultDashboard() {
         cultMoney(cult, cult.arrears) +
         ' unpaid bills. These funds belong to the organisation.',
       [
-        { id: 'records', label: 'Financial records' },
-        { id: 'fees', label: 'Change membership fees' },
-        { id: 'contribute', label: 'Contribute personal funds' },
+        { id: 'records', label: 'Financial records', illustration: <CultArt id={cultTreasuryArt.records} size={36} /> },
+        { id: 'fees', label: 'Change membership fees', illustration: <CultArt id={cultTreasuryArt.fees} size={36} /> },
+        { id: 'contribute', label: 'Contribute personal funds', illustration: <CultArt id={cultTreasuryArt.contribute} size={36} /> },
         {
           id: 'payout',
           label: 'Take a permitted leader payout',
+          illustration: <CultArt id={cultTreasuryArt.payout} size={36} />,
           disabledReason:
             cultPayoutAvailable(cult) <= 0n
               ? 'Requires earned profit, three operating months and two months of reserves'
               : undefined,
         },
-        { id: 'annual', label: 'Annual reports' },
+        { id: 'annual', label: 'Annual reports', illustration: <CultArt id={cultTreasuryArt.annual} size={36} /> },
       ],
       (id) => {
         if (id === 'fees') {
@@ -649,7 +658,7 @@ function CultDashboard() {
               { type: 'cult-fees', cultId: cult.id, joiningFee, recurringFee },
               'Change membership fees?',
               'New rates apply to future joins and monthly dues. Higher fees can reduce satisfaction.',
-              'treasury',
+              cultTreasuryArt.fees,
             ),
           );
           return;
@@ -681,7 +690,7 @@ function CultDashboard() {
                 },
                 'Contribute these funds?',
                 'This is a personal payment into the communal treasury.',
-                'treasury',
+                cultTreasuryArt.contribute,
                 [
                   {
                     id: 'amount',
@@ -691,7 +700,7 @@ function CultDashboard() {
                   },
                 ],
               ),
-            'treasury',
+            cultTreasuryArt.contribute,
           );
           return;
         }
@@ -701,7 +710,7 @@ function CultDashboard() {
             { type: 'cult-payout', cultId: cult.id, amount },
             'Take a leader payout?',
             'Only recorded earned profit above reserves is available. This is taxable personal income; large payments can damage trust.',
-            'treasury',
+            cultTreasuryArt.payout,
             [
               {
                 id: 'amount',
@@ -746,7 +755,7 @@ function CultDashboard() {
                   .join('\n\n')
               : 'Your first report arrives when the calendar year closes.',
             [],
-            'treasury',
+            cultTreasuryArt.annual,
           );
           return;
         }
@@ -784,7 +793,7 @@ function CultDashboard() {
               tone: 'neutral',
             },
           ],
-          'treasury',
+          cultTreasuryArt.records,
         );
       },
       'treasury',
@@ -832,6 +841,7 @@ function CultDashboard() {
             ] as const
           ).map((action) => ({
             id: action,
+            illustration: <CultArt id={cultRivalActionArt[action]} size={36} />,
             label:
               {
                 challenge: 'Challenge rival',
@@ -859,7 +869,7 @@ function CultDashboard() {
               },
               'Respond to ' + rival.name + '?',
               'Competition can draw attention. Reconciliation takes time.',
-              'rivalry',
+              cultRivalActionArt[action as keyof typeof cultRivalActionArt],
               [costRow(cult, cultRivalQuote(cult, action as 'challenge'))],
             ),
           'rivalry',
@@ -886,6 +896,7 @@ function CultDashboard() {
         ] as const
       ).map((id) => ({
         id,
+        illustration: <CultArt id={cultRecoveryArt[id]} size={36} />,
         label:
           {
             apologise: 'Apologise publicly',
@@ -919,7 +930,7 @@ function CultDashboard() {
           },
           'Respond to the criticism?',
           'Recovery is gradual over six months. Existing scandals and legal consequences remain.',
-          'scandal',
+          cultRecoveryArt[action],
           [costRow(cult, cultRecoveryQuote(cult, action))],
         );
       },
@@ -968,6 +979,7 @@ function CultDashboard() {
       <ActionRow
         title="Choose Leader Title"
         value={config.title}
+        icon={<CultArt id="rivalry" size={36} />}
         onPress={titleOptions}
         disabled={busy}
       />
@@ -1154,7 +1166,7 @@ function CultDashboard() {
               value={
                 cultHeadquarters.find((row) => row.id === headquarters)!.title
               }
-              icon={<CultArt id="headquarters" size={36} />}
+              icon={<CultArt id={cultHeadquartersArt[headquarters]} size={36} />}
               disabled={busy}
               onPress={() =>
                 dialog.select(
@@ -1162,6 +1174,7 @@ function CultDashboard() {
                   'Choose a place you can afford. Running costs are paid from the communal treasury.',
                   cultHeadquarters.map((row) => ({
                     id: row.id,
+                    illustration: <CultArt id={cultHeadquartersArt[row.id]} size={36} />,
                     label:
                       row.title +
                       ' · personal payment ' +
@@ -1171,12 +1184,13 @@ function CultDashboard() {
                     disabledReason: cultFoundingReason(world, row.id),
                   })),
                   (id) => setHeadquarters(id as Cult['headquarters']),
-                  'headquarters',
+                  cultHeadquartersArt[headquarters],
                 )
               }
             />
             <ActionRow
               title="Founding Strategy"
+              icon={<CultArt id={cultFoundingStrategyArt[method]} size={36} />}
               value={
                 {
                   announcement: 'Mysterious announcement',
@@ -1190,17 +1204,18 @@ function CultDashboard() {
                   'Founding strategy',
                   'Each begins with different follower numbers, loyalty and public attention.',
                   [
-                    { id: 'announcement', label: 'A mysterious announcement' },
-                    { id: 'social', label: 'Recruit through social media' },
-                    { id: 'gathering', label: 'Hold an opening gathering' },
+                    { id: 'announcement', label: 'A mysterious announcement', illustration: <CultArt id={cultFoundingStrategyArt.announcement} size={36} /> },
+                    { id: 'social', label: 'Recruit through social media', illustration: <CultArt id={cultFoundingStrategyArt.social} size={36} /> },
+                    { id: 'gathering', label: 'Hold an opening gathering', illustration: <CultArt id={cultFoundingStrategyArt.gathering} size={36} /> },
                   ],
                   (id) => setMethod(id as typeof method),
-                  'recruitment',
+                  cultFoundingStrategyArt[method],
                 )
               }
             />
             <ActionRow
               title="Membership Fees"
+              icon={<CultArt id="coins" size={36} />}
               value={
                 money(joining) + ' joining · ' + money(recurring) + ' monthly'
               }
@@ -1333,7 +1348,7 @@ function CultDashboard() {
             <ActionRow
               title="Manage Headquarters"
               subtitle="Capacity, upgrades and residents"
-              icon={<CultArt id="headquarters" />}
+              icon={<CultArt id={cultHeadquartersArt[cult.headquarters]} />}
               disabled={busy}
               onPress={() => router.push('/cult/headquarters')}
             />
@@ -1388,7 +1403,7 @@ function CultDashboard() {
                     },
                     'Change the name?',
                     'Claims, follower memories, scandals and legal cases keep their original identity.',
-                    'scandal',
+                    cultRecoveryArt.rebrand,
                     [costRow(cult, cultRecoveryQuote(cult, 'rebrand'))],
                   )
                 }
@@ -1404,13 +1419,14 @@ function CultDashboard() {
             <ActionRow
               title="Disband Cult"
               subtitle="Close the doors and settle the treasury"
+              icon={<CultArt id="separation" />}
               disabled={busy}
               onPress={() =>
                 review(
                   { type: 'cult-disband', cultId: cult.id },
                   'Disband ' + cult.name + '?',
                   'Communal funds settle bills and go to the community. You do not receive them as a personal payout. Followers and history remain.',
-                  'cult',
+                  'separation',
                 )
               }
             />
@@ -1424,6 +1440,7 @@ function CultDashboard() {
             <ActionRow
               key={row.id}
               title={row.name}
+              icon={<CultArt id="archive" size={36} />}
               subtitle={
                 row.status +
                 ' · ' +
@@ -1455,7 +1472,7 @@ function CultDashboard() {
                       tone: 'neutral',
                     },
                   ],
-                  'cult',
+                  'archive',
                 )
               }
             />

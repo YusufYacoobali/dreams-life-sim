@@ -2,6 +2,10 @@
 
 Implemented on 24 October 2026 over `79bcaa4c`.
 
+The [25 October final polish](FINAL_UI_POLISH.md) adds coloured platform marks,
+distinct cult option art, a scrolling Deceased filter row and career ordering.
+The descriptions and verification below record the original 24 October scope.
+
 ## Social platforms
 
 | Stored ID | Visible platform | Account wording |

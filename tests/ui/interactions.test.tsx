@@ -3,7 +3,7 @@ import React from 'react';
 jest.mock('../../src/persistence/native', () => ({ openRepository: async () => { throw new Error('Unexpected device database access in UI fixture'); } }));
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Modal } from 'react-native';
+import { Modal, StyleSheet } from 'react-native';
 import { EventModal, EventPresentation } from '../../src/ui/EventModal';
 import { ActionRow, Button, StatBar } from '../../src/ui/components';
 import { ThemeProvider } from '../../src/ui/theme';
@@ -135,6 +135,8 @@ test('a selected filter does not repeat its list reset while changing filters st
     return <FilterTabs values={[{ id: 'all', label: 'All' }, { id: 'family', label: 'Family' }]} selected={selected} onSelect={id => { select(id); setSelected(id); }} />;
   }
   frame(<Filters />);
+  expect(StyleSheet.flatten(screen.UNSAFE_getByProps({ accessibilityRole: 'tablist' }).props.style).flexWrap).toBe('wrap');
+  expect(StyleSheet.flatten(screen.getByRole('tab', { name: 'All' }).props.style).flexGrow).toBe(1);
   fireEvent.press(screen.getByRole('tab', { name: 'All', selected: true })); expect(select).not.toHaveBeenCalled();
   fireEvent.press(screen.getByRole('tab', { name: 'Family' })); expect(select).toHaveBeenCalledTimes(1); expect(select).toHaveBeenLastCalledWith('family');
   fireEvent.press(screen.getByRole('tab', { name: 'Family', selected: true })); expect(select).toHaveBeenCalledTimes(1);

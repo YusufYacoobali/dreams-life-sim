@@ -45,7 +45,7 @@ export type EffectRow = {
   value: string;
   tone: 'positive' | 'negative' | 'neutral';
 };
-type Choice = { id: string; label: string; disabledReason?: string };
+type Choice = { id: string; label: string; disabledReason?: string; illustration?: React.ReactNode };
 export type SelectionSearch = {
   label: string;
   placeholder?: string;
@@ -773,10 +773,21 @@ function EventCard({
                         },
                       ]}
                     >
-                      <Body>{choice.label}</Body>
-                      {choice.disabledReason && (
-                        <Body muted>{choice.disabledReason}</Body>
-                      )}
+                      {choice.illustration ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                          <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"
+                            style={{ width: 36, height: 36, flexShrink: 0, alignItems: 'center', justifyContent: 'center' }}>
+                            {choice.illustration}
+                          </View>
+                          <View style={{ flex: 1, minWidth: 0 }}>
+                            <Body>{choice.label}</Body>
+                            {choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}
+                          </View>
+                        </View>
+                      ) : <>
+                        <Body>{choice.label}</Body>
+                        {choice.disabledReason && <Body muted>{choice.disabledReason}</Body>}
+                      </>}
                     </Pressable>
                   ))}
                 </>

@@ -14,7 +14,7 @@ import {
 } from '../../../src/ui/components';
 import { useColors } from '../../../src/ui/theme';
 import { useCultDialog } from '../../../src/ui/CultDialog';
-import { CultArt } from '../../../src/assets/CultArt';
+import { CultArt, cultHeadquartersArt, cultUpgradeArt } from '../../../src/assets/CultArt';
 import { ageOn, fullName } from '../../../src/game/personHelpers';
 import {
   cultHeadquarters,
@@ -73,6 +73,7 @@ export default function CultHeadquarters() {
         </Text>
       )}
       <Card>
+        <CultArt id={cultHeadquartersArt[cult.headquarters]} size={64} />
         <Heading size={22}>{cultHeadquarters[current].title}</Heading>
         <Body>
           {cult.city} · {cult.name}
@@ -106,7 +107,7 @@ export default function CultHeadquarters() {
                     ? cultMoney(cult, quote)
                     : 'Earlier size'
               }
-              icon={<CultArt id="headquarters" size={40} />}
+              icon={<CultArt id={cultHeadquartersArt[row.id]} size={40} />}
               disabled={busy}
               disabledReason={
                 unavailable ??
@@ -134,7 +135,7 @@ export default function CultHeadquarters() {
                       tone: 'negative',
                     },
                   ],
-                  'headquarters',
+                  cultHeadquartersArt[row.id],
                 )
               }
             />
@@ -152,7 +153,7 @@ export default function CultHeadquarters() {
               title={row.title}
               subtitle={row.description}
               value={installed ? 'Installed' : cultMoney(cult, quote)}
-              icon={<CultArt id="headquarters" size={36} />}
+              icon={<CultArt id={cultUpgradeArt[row.id]} size={36} />}
               disabled={busy}
               disabledReason={
                 unavailable ??
@@ -181,7 +182,7 @@ export default function CultHeadquarters() {
                       tone: 'negative',
                     },
                   ],
-                  'headquarters',
+                  cultUpgradeArt[row.id],
                 )
               }
             />

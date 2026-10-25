@@ -1,5 +1,25 @@
 # Continue Dreams: Life Simulator
 
+## Final UI polish — 25 October 2026
+
+Platform marks now use Instagram's colour gradient, YouTube red, Twitch purple
+and X black on consistent white tiles in both themes. Cult options use eleven
+distinct subjects for five headquarters and six upgrades, with matching choice
+and confirmation art; related actions use typed presentation maps. Six new
+single-subject PNGs add 364,717 runtime bytes; existing assets are reused.
+Relationships has one scrolling row: All, Family, Friends, Romance, Deceased.
+Work / School is removed; search/reset, living-only views and deceased history
+remain. Special Careers follows the requested four-section order, with Business
+Owner and Cult Leader before the existing creator map. Game/save files are unchanged.
+
+Focused coverage verifies 157 cases / 10 suites across the initial run and
+passing affected test-only rerun. Strict types, the 512-module import graph,
+notices and browser artwork checks pass. Production Android/iOS exports match
+all 11 changed runtime sources and all 40 cult source assets; the original design
+sheet is excluded. See [the final guide](FINAL_UI_POLISH.md), [cult mapping audit](CULT_ICON_AUDIT.md)
+and [live art gallery](verification/action-icons/index.html). These checks do not
+claim physical-device acceptance.
+
 ## Real platforms, clear action icons and Dead relationships — 24 October 2026
 
 Visible social branding is now Instagram, YouTube, Twitch and X, retaining the four original saved IDs and all platform mechanics. Existing saved prose is adapted only for display. SVG marks have consistent theme contrast and attribution in Help. The icon audit covers 339 IDs: 274 keep, 61 targeted simplifications, four platform replacements. Selected art uses single focal subjects; 59 registered PNGs preserve asset IDs and slightly reduce the active artwork payload. Relationships adds Work / School and Dead; active views exclude deceased people, and Dead retains portraits/roles/bonds/causes sorted newest first. No history or save payload is rewritten.

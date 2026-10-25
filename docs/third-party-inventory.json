@@ -23,7 +23,7 @@
     "readableNoticeFiles": 735,
     "uniqueExactNoticeTexts": 280,
     "detectedFontFamilies": 1,
-    "projectArtFiles": 1191
+    "projectArtFiles": 1197
   },
   "directDependencies": [
     {
@@ -18064,6 +18064,7 @@
       "bytes": 66476,
       "sha256": "34fc94eea0c39caab4f837e38bf831893f652031d45e9df82512575520a18f54",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/SimpleSymbolArt.tsx"
       ]
     },
@@ -27266,6 +27267,60 @@
       ]
     },
     {
+      "path": "assets/generated/cult-options/bed.png",
+      "status": "present",
+      "bytes": 55336,
+      "sha256": "1aafac00937d738ac9a56304c19a5381ca7ebada7fe367d4c36370ab3b5dc308",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult-options/cabin.png",
+      "status": "present",
+      "bytes": 71628,
+      "sha256": "88e759222179d3c577b3ed1643b5837a5e9ebf772b0ed1876672c8ea3b12216c",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult-options/farmhouse.png",
+      "status": "present",
+      "bytes": 80118,
+      "sha256": "1609075194d54a26aea0230963407156654d256d9381f4b9bdcc863eada375bf",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult-options/meeting-chair.png",
+      "status": "present",
+      "bytes": 62157,
+      "sha256": "4d3a88ff789fa15cdacac94446de1fc3330e76be739fd6848483fb85e808b523",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult-options/monument.png",
+      "status": "present",
+      "bytes": 41783,
+      "sha256": "037fcd7f7dc9e22abb55c4e524f648e53c8fd18da6a2a0096995673e0aa69e4a",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
+      "path": "assets/generated/cult-options/warehouse.png",
+      "status": "present",
+      "bytes": 53695,
+      "sha256": "d41e3011832fc536a458497e4b81472f660270964d8449e37d4c929e1a3167fe",
+      "referencedBy": [
+        "src/assets/CultArt.tsx"
+      ]
+    },
+    {
       "path": "assets/generated/cult/ceremony.png",
       "status": "present",
       "bytes": 50033,
@@ -27388,6 +27443,7 @@
       "bytes": 1414804,
       "sha256": "2ce91a9e69526bc3a7ffac959fb4192c52bc8a04e7e244eabd1206f25dea2ac3",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/FameBusinessArt.tsx"
       ]
     },
@@ -27406,6 +27462,7 @@
       "bytes": 1592017,
       "sha256": "5b18b1ba4e13ea99c945c003c5ae93daafbc35c7bca154a75ee1161d2a74cc15",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/HealthLegalArt.tsx"
       ]
     },
@@ -27415,6 +27472,7 @@
       "bytes": 1162350,
       "sha256": "36f1ec765625e2a3a02df59506aa3062ccc87f8a114acb2385277d022a5e90ec",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/HobbyArt.tsx"
       ]
     },
@@ -27433,6 +27491,7 @@
       "bytes": 1865698,
       "sha256": "ca25fb38d6aad6fc78a865050315f3add7003dc43e977ada1660927c15aecc1c",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/PetsLeisureArt.tsx"
       ]
     },
@@ -27442,6 +27501,7 @@
       "bytes": 77195,
       "sha256": "0f67adfb9350cfa5d43eddd486bd4225574c68dfed29c62ab9a4dec711cd2936",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/polishImages.ts"
       ]
     },
@@ -27451,6 +27511,7 @@
       "bytes": 58439,
       "sha256": "f684292a9784e7c9999bcb0644b5d66d24983d8c6ee377242ef168a903a58a08",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/polishImages.ts"
       ]
     },
@@ -27487,6 +27548,7 @@
       "bytes": 67202,
       "sha256": "68e2c38b10fc990b60fb98bb77034579317be4324210584a780f625a9a5ce402",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/polishImages.ts"
       ]
     },
@@ -27658,6 +27720,7 @@
       "bytes": 54524,
       "sha256": "a91d0102ee77391abadb5780d2218876d45ba693d3300d421c6d3438ae260327",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/SimpleSymbolArt.tsx",
         "src/assets/personActionImages.ts"
       ]
@@ -27677,6 +27740,7 @@
       "bytes": 56141,
       "sha256": "3397da3a6300cbfd16832ad80e1838c083a73e739b2103a8db180a1e810b87bd",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27740,6 +27804,7 @@
       "bytes": 63823,
       "sha256": "a7d37627f1997c15171bc25d8227c6912df94134b9e28b09991b66fcefb6b7f4",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27803,6 +27868,7 @@
       "bytes": 49195,
       "sha256": "6cfc1d7cc0897e08b93a7468d7d23581bec130e9cb36775b587c9905a004eece",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27848,6 +27914,7 @@
       "bytes": 66542,
       "sha256": "99028a56246fd73ac262d7cddde9f536c4bb20080a866f3104abb91d5be0de54",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27866,6 +27933,7 @@
       "bytes": 57875,
       "sha256": "af648da3871c5e1a47db3cedecc1eff90f8a32abd3ee35b8b41d3224d06ba5f1",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27884,6 +27952,7 @@
       "bytes": 59916,
       "sha256": "f92b72de3ec1a0922d50c125c300e40bc1e99736efb76c22071df79c103dac2d",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27920,6 +27989,7 @@
       "bytes": 75610,
       "sha256": "2b87f6da2e06a045f650483af3be55bade7cee6ed0a7a21d1dc70d84da26849b",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27938,6 +28008,7 @@
       "bytes": 62669,
       "sha256": "77c24a39f0f47cc3352535294d9d753fc4bccd9ba51800abf9163baf71c0e923",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27956,6 +28027,7 @@
       "bytes": 47140,
       "sha256": "227557835d73b83524c1791300fcc40ec2e6ff3cf5f6ae57c3323ccd44d75b99",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -27965,6 +28037,7 @@
       "bytes": 47717,
       "sha256": "a3e0b3b5fac3fe7fbdf890c1d56baf72ca9b60d1da6ef056ff043843eaf919c4",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/personActionImages.ts"
       ]
     },
@@ -28253,6 +28326,7 @@
       "bytes": 72021,
       "sha256": "7244fa0ca579c5a7198f82a1d6d1f0d1a38275a8cf1ccd6f552c3221e7af90bb",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/jobImages.ts"
       ]
     },
@@ -28334,6 +28408,7 @@
       "bytes": 61808,
       "sha256": "196f58f1b6343281e8c9b898a9e8338ca98834d5594f07943f8b17cc8ff0c87c",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/jobImages.ts"
       ]
     },
@@ -28397,6 +28472,7 @@
       "bytes": 56991,
       "sha256": "4cd0ec55197c3d67bf770d1f28c9fdbe0de5a78c48a9ad1b06f3bb902cd20f31",
       "referencedBy": [
+        "src/assets/CultArt.tsx",
         "src/assets/jobImages.ts"
       ]
     },

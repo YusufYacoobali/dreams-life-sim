@@ -33,7 +33,8 @@ import {
   cultStartupQuote,
   cultUpgradeQuote,
 } from '../../src/game/systems/cultCore';
-import { cultLeaderTitles, cultRoleTitles } from '../../src/game/content/cults';
+import { cultHeadquarters, cultLeaderTitles, cultRoleTitles, cultUpgrades } from '../../src/game/content/cults';
+import { CultArt, cultArtCatalog, cultHeadquartersArt, cultUpgradeArt } from '../../src/assets/CultArt';
 import {
   cultReplacementCandidates,
   cultReplacementQuote,
@@ -894,6 +895,54 @@ test('stored annual reports show recorded loyalty and reputation changes with le
   } finally {
     context.close();
   }
+});
+
+test('headquarters choices, navigation and upgrade reviews use their own feature art without changing the save', async () => {
+  const context = await setup(cultFixture());
+  try {
+    let view = render(frame());
+    const beforeFounding = encodeWorld(world()), rows = context.rows();
+    await press(/^Starting Headquarters\./);
+    for (const row of cultHeadquarters) {
+      const option = screen.getByRole('radio', { name: new RegExp('^' + row.title) });
+      expect(within(option).UNSAFE_getByType(CultArt).props.id).toBe(cultHeadquartersArt[row.id]);
+    }
+    await select(/^Woodland Retreat/);
+    expect(within(screen.getByRole('button', { name: /^Starting Headquarters\./ })).UNSAFE_getByType(CultArt).props.id).toBe('cabin');
+    expect(encodeWorld(world())).toBe(beforeFounding);
+    expect(context.rows()).toEqual(rows);
+
+    let funded = foundCult();
+    funded = cultCommand(funded, { type: 'cult-contribute', cultId: funded.cults[0].id, amount: 5000000000n });
+    await act(async () => { mockStore.setState({ world: funded, error: null }); });
+    const beforeManagement = encodeWorld(world());
+    await press(/^Manage Headquarters\./);
+    expect(mockPush).toHaveBeenCalledWith('/cult/headquarters');
+    view.unmount();
+    view = render(frame(true));
+    for (const row of cultHeadquarters) {
+      const button = screen.getByRole('button', { name: new RegExp('^' + row.title + '\\.') }),
+        expected = cultHeadquartersArt[row.id];
+      expect(within(button).UNSAFE_getByType(CultArt).props.id).toBe(expected);
+      if (row.id === 'meeting-room') continue;
+      await press(new RegExp('^' + row.title + '\\.'));
+      expect(modal().getByText('Move to ' + row.title + '?')).toBeOnTheScreen();
+      expect(String(modal().UNSAFE_getByType(Native.Image).props.source.testUri)).toContain('/' + cultArtCatalog[expected].file);
+      await press('Never mind');
+    }
+    for (const row of cultUpgrades) {
+      const button = screen.getByRole('button', { name: new RegExp('^' + row.title + '\\.') }),
+        expected = cultUpgradeArt[row.id];
+      expect(within(button).UNSAFE_getByType(CultArt).props.id).toBe(expected);
+      await press(new RegExp('^' + row.title + '\\.'));
+      expect(modal().getByText('Add ' + row.title + '?')).toBeOnTheScreen();
+      expect(String(modal().UNSAFE_getByType(Native.Image).props.source.testUri)).toContain('/' + cultArtCatalog[expected].file);
+      await press('Never mind');
+    }
+    expect(encodeWorld(world())).toBe(beforeManagement);
+    expect(context.rows()).toEqual(rows);
+    view.unmount();
+  } finally { context.close(); }
 });
 
 test.each([
