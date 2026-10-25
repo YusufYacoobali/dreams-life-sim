@@ -20,6 +20,15 @@ receipts, monthly pauses and result acknowledgements add no completed years.
 Sure schedules 10–20 completed age-ups, clamped to that interval; Maybe later
 uses ten. No game RNG is consumed.
 
+The invitation now uses the existing single red-heart illustration and eight
+rotating body messages. The durable `offerSequence` selects the copy, so a new
+offer changes it while an unanswered offer, retry or cold reopening keeps the
+same wording. The message bank wraps after eight. This is presentation only:
+no new saved fields, scheduling changes, assets or randomness are introduced.
+The integrated SQLite UI test checks rotation, wraparound and identical life
+exports; the existing light/dark UI cases verify decorative heart artwork and
+stable wording after a failed answer save.
+
 Unanswered persisted offers resume using the same offer ID/sequence and fresh
 active life/person/revision rather than disappearing on restart. Answered
 records remain idempotent. The v1 app-review preference remains readable; its

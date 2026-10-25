@@ -1,5 +1,19 @@
 # Continue Dreams: Life Simulator
 
+## Review popup heart and rotating messages — 25 October 2026
+
+The app review invitation uses the existing single red-heart illustration and
+eight varied messages. New offers advance through the message bank using the
+already-persisted review offer sequence, wrapping after eight. The same pending
+offer keeps its wording across rerenders, failed-save retries and cold reopening.
+Title/buttons, age-up cadence, native store handling and save formats are unchanged;
+no new artwork, package or game RNG is used.
+
+All 80 cases across four focused review UI/tracker/persistence/artwork suites,
+strict app/test types and the 514-module acyclic import graph pass. The integrated
+SQLite presentation journey checks all eight messages, wraparound, pending-offer
+stability and unchanged life exports.
+
 ## Notification permission at app open — 25 October 2026
 
 The initial notification permission check now runs when the app opens after

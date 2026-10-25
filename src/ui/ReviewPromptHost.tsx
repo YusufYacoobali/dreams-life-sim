@@ -3,6 +3,8 @@ import { AppState } from 'react-native';
 import { useGame } from '../state/useGame';
 import { reviewCandidateEligible, type ReviewOffer, type ReviewResponse } from '../reviews/tracker';
 import { openStoreReview, requestNativeReview, reviewPromptSupported } from '../reviews/nativeReview';
+import { reviewPromptMessage } from '../reviews/promptCopy';
+import { Illustration } from '../assets/Illustration';
 import { EventModal } from './EventModal';
 import { hasAppModal, modalPresenceStore, useHasAppModal } from './modalPresence';
 
@@ -65,5 +67,5 @@ export function ReviewPromptHost({visible}:{visible:boolean}) {
     finally{submitting.current=false;}
   };
   const show=scoped&&!!offer&&clean&&!busy&&!!world&&!world.pending&&!world.annual&&!world.deferred.length;
-  return <EventModal scope="stack" modalOwner="review" event={show?{id:offer.id,kind:'decision',title:'Enjoying Dreams?',body:'I’m building this game solo, and a quick store review would really help. Thanks for being part of Dreams! ❤️',choices:[{id:'sure',label:'Sure'},{id:'later',label:'Maybe later'}]}:null} busy={reviewBusy} error={error} onChoose={id=>{if(id==='sure'||id==='later')void answer(id);}} onClose={()=>{void answer('later');}} />;
+  return <EventModal scope="stack" modalOwner="review" event={show?{id:offer.id,kind:'decision',title:'Enjoying Dreams?',body:reviewPromptMessage(tracker?.offerSequence??1),illustration:<Illustration id="relationship" size={64}/>,category:'romance',choices:[{id:'sure',label:'Sure'},{id:'later',label:'Maybe later'}]}:null} busy={reviewBusy} error={error} onChoose={id=>{if(id==='sure'||id==='later')void answer(id);}} onClose={()=>{void answer('later');}} />;
 }

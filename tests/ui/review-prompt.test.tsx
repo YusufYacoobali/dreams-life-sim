@@ -8,6 +8,8 @@ import { createLife, randomCreation } from '../../src/game/createLife';
 import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
 import { newReviewTracker } from '../../src/reviews/tracker';
+import { reviewPromptMessages } from '../../src/reviews/promptCopy';
+import { Illustration } from '../../src/assets/Illustration';
 import { ThemeProvider } from '../../src/ui/theme';
 import { database } from '../support/sqlite';
 let mockStore:ReturnType<typeof createGameStore>;
@@ -43,8 +45,14 @@ afterEach(()=>{Native.AppState.currentState=initialAppState;jest.restoreAllMocks
 test.each([false,true])('warm pre-prompt stays visible through its own registration; Sure persists before native request (dark=%s)',async dark=>{
   const context=await setup(),width=dark?320:390;jest.spyOn(require('react-native'),'useWindowDimensions').mockReturnValue({width,height:844,scale:2,fontScale:dark?1.4:1});const view=render(frame({dark}));
   try {
-    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());expect(screen.getByRole('button',{name:'Maybe later'})).toBeOnTheScreen();expect(hasAppModal()).toBe(false);expect(modalPresenceStore.getState().owners.size).toBe(1);capture('review-preprompt-'+(dark?'dark-large':'light'),view.toJSON());
+    await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());expect(screen.getByRole('button',{name:'Maybe later'})).toBeOnTheScreen();expect(hasAppModal()).toBe(false);expect(modalPresenceStore.getState().owners.size).toBe(1);
+    const message=screen.UNSAFE_getByType(EventModal).props.event.body;
+    expect(screen.getByText(reviewPromptMessages[0])).toBeOnTheScreen();
+    expect(screen.UNSAFE_getByType(Illustration).props).toMatchObject({id:'relationship',size:64});
+    expect(screen.queryAllByRole('image')).toHaveLength(0);
+    capture('review-preprompt-'+(dark?'dark-large':'light'),view.toJSON());
     const stale=screen.UNSAFE_getByType(EventModal).props.onChoose;context.sqlite.exec("CREATE TRIGGER fail_ui_review BEFORE INSERT ON preferences WHEN NEW.key='app_review' BEGIN SELECT RAISE(ABORT,'review save failure'); END");await press('Sure');expect(request).not.toHaveBeenCalled();expect(screen.getByRole('button',{name:'Sure'})).toBeOnTheScreen();expect(screen.getByText('Could not save that. Please try again.')).toBeOnTheScreen();
+    expect(screen.UNSAFE_getByType(EventModal).props.event.body).toBe(message);
     context.sqlite.exec('DROP TRIGGER fail_ui_review');request.mockImplementation(async canPresent=>{expect(modalPresenceStore.getState().owners.size).toBe(0);expect(screen.queryByText('Enjoying Dreams?')).toBeNull();expect(canPresent?.()).toBe(true);return true;});await press('Sure');await waitFor(()=>expect(request).toHaveBeenCalledTimes(1));expect(screen.queryByText('Enjoying Dreams?')).toBeNull();const tracker=await context.repository.loadReviewTracker();expect(tracker?.reviewCompletedOrDismissedCount).toBe(1);expect(tracker?.nextReviewPromptAtGlobalYear).toBe(22);await act(async()=>{stale('sure');});expect(request).toHaveBeenCalledTimes(1);
   }finally{view.unmount();context.sqlite.close();}
 });
@@ -127,12 +135,41 @@ test('a persisted unanswered reminder returns after a cold bootstrap without a s
   try {
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
     const id=mockStore.getState().reviewOffer!.id;
+    const message=screen.UNSAFE_getByType(EventModal).props.event.body;
     view.unmount();await mockStore.getState().bootstrap();view=render(frame());
     await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
     expect(mockStore.getState().reviewOffer!.id).toBe(id);
+    expect(screen.UNSAFE_getByType(EventModal).props.event.body).toBe(message);
     expect((await context.repository.loadReviewTracker())?.offerSequence).toBe(1);
     await press('Maybe later');expect(request).not.toHaveBeenCalled();expect(openStore).not.toHaveBeenCalled();
   } finally { view.unmount();context.sqlite.close(); }
+});
+
+test('new durable review offers rotate through distinct messages, wrap, and leave the life unchanged',async()=>{
+  const context=await setup(),lifeId=mockStore.getState().world!.id;
+  const savedLife=await context.repository.export(lifeId),messages:string[]=[];
+  let view:ReturnType<typeof render>|undefined;
+  try {
+    for(let index=0;index<=reviewPromptMessages.length;index++) {
+      view=render(frame());
+      await waitFor(()=>expect(screen.getByText('Enjoying Dreams?')).toBeOnTheScreen());
+      const message=screen.UNSAFE_getByType(EventModal).props.event.body as string;
+      messages.push(message);expect(screen.getByText(message)).toBeOnTheScreen();
+      expect(mockStore.getState().reviewTracker!.offerSequence).toBe(index+1);
+      await press('Maybe later');view.unmount();view=undefined;
+      const tracker=(await context.repository.loadReviewTracker())!;
+      expect(tracker.nextReviewPromptAtGlobalYear-tracker.globalYearsPlayed).toBe(10);
+      // Declare the next due boundary to isolate presentation from annual play;
+      // the existing SQLite cadence tests exercise the actual Age Up accounting.
+      tracker.globalYearsPlayed=tracker.nextReviewPromptAtGlobalYear;
+      context.sqlite.prepare("UPDATE preferences SET value=? WHERE key='app_review'").run(JSON.stringify(tracker));
+      await mockStore.getState().bootstrap();
+    }
+    expect(new Set(messages.slice(0,reviewPromptMessages.length)).size).toBe(reviewPromptMessages.length);
+    expect(messages[reviewPromptMessages.length]).toBe(messages[0]);
+    expect(request).not.toHaveBeenCalled();expect(openStore).not.toHaveBeenCalled();
+    expect(await context.repository.export(lifeId)).toBe(savedLife);
+  } finally {view?.unmount();context.sqlite.close();}
 });
 
 test('a stale handler cannot answer a resumed offer with the same ID in a new revision',async()=>{
