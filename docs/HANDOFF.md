@@ -1,5 +1,20 @@
 # Continue Dreams: Life Simulator
 
+## EAS upload archive reduced below 200 MB — 25 October 2026
+
+Changed the `.easignore` Git exclusion from `/.git/` to `/.git`. EAS checks
+the bare `.git` path before removing its temporary shallow clone's Git data;
+the old trailing slash left about 435 MB of Git objects in the upload.
+
+EAS CLI 25.3.0's actual Git/archive pipeline produces 585,443,417 bytes before
+and 150,533,522 bytes after (558.32 → 143.56 MiB, 74.29% smaller). The new
+archive contains no Git data. All 1,749 app/source/plugin/asset files,
+including 1,230 asset files, remain byte-identical by SHA-256; only
+`.easignore` changes outside the removed Git directory. This is local source
+archive verification, not a cloud or native build. No app code, artwork,
+dependencies or build profile changed. See [project size](PROJECT_SIZE.md)
+for the measurements and the supported archive-inspection command.
+
 ## God Mode hidden behind Settings triple tap — 25 October 2026
 
 God Mode is hidden by default in all builds. Three quick taps (at most 800ms

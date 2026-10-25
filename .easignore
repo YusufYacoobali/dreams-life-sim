@@ -33,5 +33,7 @@ __pycache__/
 /tools/
 /assets/prototypes/
 /.github/
-/.git/
+# EAS checks the bare ".git" path when removing its shallow clone's Git data.
+# Keep this rule without a trailing slash; "/.git/" misses that check.
+/.git
 coverage/

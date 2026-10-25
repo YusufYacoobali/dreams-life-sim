@@ -1,5 +1,44 @@
 # Project and app size
 
+## EAS archive correction — 25 October 2026
+
+The EAS upload was still about 559 MB because `/.git/` did not remove the
+temporary shallow clone's Git data. EAS checks the bare `.git` path before
+removing that directory; a directory-only rule with a trailing slash misses
+the check. The Git objects retain copies of tracked documentation, review
+media and design inputs even when those files are excluded from the build.
+Use `/.git` without a trailing slash in `.easignore`.
+
+Actual archives created with EAS CLI 25.3.0's `makeProjectTarballAsync` and its
+normal Git client (`requireCommit: false`) measured:
+
+| Compressed EAS archive | Bytes | MiB |
+| --- | ---: | ---: |
+| Before | 585,443,417 | 558.32 |
+| After | 150,533,522 | 143.56 |
+
+This is a **74.29% reduction**, below 200 MB even in decimal units. The old
+archive contained 434,820,866 bytes of Git metadata; the new archive has no
+`.git` directory. SHA-256 comparisons confirm that all 1,749 files under
+`app/`, `src/`, `plugins/` and `assets/` are still included and byte-identical,
+including all 1,230 asset files. The only changed non-Git archive file is
+`.easignore`. Excluded development files remain excluded. This verification
+packs and inspects the source upload locally; it does not run a cloud build
+or measure an installed app.
+
+To inspect future uploads without starting a cloud build, use the archive
+stage from a configured Expo/EAS checkout:
+
+```sh
+npx eas-cli@latest build:inspect --platform android --profile production --stage archive --output ../dreams-eas-archive
+```
+
+Keep the output outside the project so it cannot enter the next upload.
+The resulting directory should contain the runtime files and native plugins,
+with no `.git` directory. It is the extracted source archive, not a native build.
+
+## Size cleanup — 23 October 2026
+
 Size cleanup on 23 October 2026, compared with `73e9f48`, including Cult Leader and the event-writing update. Decimal MB; checkout/context values are rounded logical file sizes, not compressed downloads.
 
 | Scope | Before | After | Reduction |
