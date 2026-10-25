@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import { Image } from 'react-native';
 import { useGodModeAccess } from '../ui/GodModeAccess';
 import {
@@ -30,13 +30,7 @@ export function MiniGamePlayground() {
     sequence = useRef(0),
     ref = useRef(session);
   ref.current = session;
-  if (!allowed)
-    return (
-      <Page bottomSafeArea>
-        <Header title="Mini-Game Playground" onBack={() => router.back()} />
-        <Body>Enable God Mode in Settings to use the playground.</Body>
-      </Page>
-    );
+  if (!allowed) return <Redirect href="/settings" />;
   const start = async (assisted: boolean) => {
     const id = 'practice_' + ++sequence.current;
     setSession({

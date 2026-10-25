@@ -1,5 +1,21 @@
 # Continue Dreams: Life Simulator
 
+## God Mode hidden behind Settings triple tap — 25 October 2026
+
+God Mode is hidden by default in all builds. Three quick taps (at most 800ms
+apart) anywhere on the App Preferences card in Settings reveal its saved toggle
+for the current app session. Editor/playground access and actual runtime edit
+commands require both that session reveal and the enabled preference. Restart
+hides the controls again without deleting saved edits or the toggle choice.
+Profile/Assets shortcuts are removed; blocked testing routes redirect to Settings
+without naming the hidden feature. Build testing capability remains enabled.
+
+All 172 cases across ten focused suites pass after the affected reruns, alongside
+strict app/test types, the 515-module acyclic import graph and notice checks.
+SQLite journeys cover the hidden saved-enabled state, triple-tap reveal,
+editor/playground redirects, runtime edit enforcement, saved edits and session
+reset. No package, build configuration or save schema changed.
+
 ## Review popup heart and rotating messages — 25 October 2026
 
 The app review invitation uses the existing single red-heart illustration and

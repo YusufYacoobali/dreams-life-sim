@@ -1,14 +1,32 @@
 # God Mode testing
 
-Open a living, acknowledged life, then **Settings → God Mode → Open God Mode Editor**. Enabling the toggle also shows a shortcut in Profile and Assets. Switching it off leaves saved changes intact.
+Open **Settings**, then tap the **App Preferences card three times quickly**
+(no more than 800ms between taps). This reveals the God Mode enable/disable
+toggle and, when enabled, the editor and playground buttons. Profile and Assets
+have no God Mode shortcuts. Use a living, acknowledged life for the editor.
+Switching off leaves saved changes intact.
 
 ## Build access
 
 As reaffirmed on 25 October 2026, God Mode is temporarily available in **all builds**, including production/store builds, at the owner's request for testing. The release audit's production-off change was reverted. `app.config.cjs` embeds `extra.godModeTesting=true` for every profile, without requiring internal-distribution environment switches. Metro/Expo Go development access also remains available.
 
-The Settings toggle remains off until enabled, and the loaded preference still gates the editor, shortcuts, playground and save commands. Switching off preserves prior edits. An already installed APK needs rebuilding and reinstalling to receive the updated configuration; the present app does not configure OTA updates.
+The reveal is held only in memory and resets on app restart. The saved toggle
+and prior edits persist, but a saved enabled toggle alone cannot open testing
+tools in a fresh session. Reveal it again through the Settings gesture. The
+editor, playground and actual runtime save commands require both the session
+reveal and loaded enabled preference. Unrevealed/disabled direct editor and
+playground routes return to Settings without displaying testing UI.
 
-`src/access/godMode.ts` contains the access policy; `buildAccess.ts` supplies trusted build configuration. `createGameStore` denies editing unless its access dependency allows it, and the native store combines build access with the loaded testing preference. Missing/invalid capability metadata still fails closed outside development. Editing commands have no knowledge of purchases. No purchase SDK, entitlement, subscription or paywall is implemented.
+An already installed release APK needs rebuilding and updating to receive the
+change; the present app does not configure OTA updates.
+
+`src/access/godMode.ts` contains the build capability policy; `buildAccess.ts`
+supplies trusted build configuration. `src/state/godModeSession.ts` holds the
+nonpersistent reveal. `createGameStore` denies editing unless its access
+dependency allows it, and the native store combines build access, session reveal
+and the loaded testing preference. Missing/invalid capability metadata still
+fails closed outside development. Editing commands have no knowledge of
+purchases. No purchase SDK, entitlement, subscription or paywall is implemented.
 
 ## Editor
 
@@ -30,6 +48,14 @@ Money goes through `post()` with category `god-mode-adjustment`, zero debt delta
 `gameStore.editGodMode()` authorizes, validates and commits through the normal repository. A unique retry identifier prevents separate editor sessions from sharing receipts. Failed writes publish no new world. The automatic **Before God Mode** checkpoint, backup, receipt and changed life commit in the same SQLite transaction. Existing Time Machine, export/import and recovery support the resulting saves without a World/schema-version migration.
 
 ## Verification
+
+On 25 October 2026, hiding God Mode behind the Settings triple tap passed
+**172 cases across ten focused suites** after affected reruns, strict app/test
+types, the 515-module acyclic import graph and notices. Real SQLite journeys
+verify reveal timing, saved-enabled preferences remaining hidden after session
+reset, direct-route redirects, actual runtime save enforcement, failed writes
+and retained edits. The new runtime test uses the real game singleton and real
+preferences store with injected SQLite storage at the native boundary.
 
 On 25 October 2026, restoring the owner's all-build testing requirement passed
 **23 cases across three affected access/config/editor suites**, strict app/test
@@ -54,7 +80,7 @@ Run `npm run typecheck` and the focused Jest suites. Device slider gestures, spo
 | Access and build configuration | `src/access/godMode.ts`, `src/access/buildAccess.ts`, `app.config.cjs`, `eas.json` |
 | Editor and navigation | `app/god-mode.tsx`, `src/ui/GodModeEditor.tsx`, `src/ui/GodModeAccess.tsx`, `app/settings.tsx`, `app/_layout.tsx`, `app/(game)/profile.tsx`, `app/(game)/(tabs)/assets.tsx` |
 | Validated commands and draft | `src/game/godMode.ts`, `src/game/godModeDraft.ts`, `src/game/systems/social.ts` |
-| Save integration and preferences | `src/state/gameStore.ts`, `src/state/useGame.ts`, `src/state/preferencesStore.ts`, `src/state/usePreferences.ts`, `src/persistence/repository.ts` |
+| Save integration and preferences | `src/state/gameStore.ts`, `src/state/useGame.ts`, `src/state/godModeSession.ts`, `src/state/preferencesStore.ts`, `src/state/usePreferences.ts`, `src/persistence/repository.ts` |
 | Finance presentation | `src/ui/annualFinances.ts` |
-| Tests and native test setup | `tests/game/god-mode.test.ts`, `tests/state/god-mode-save.test.ts`, `tests/state/god-mode-access.test.ts`, `tests/ui/god-mode-flow.test.tsx`, `tests/state/preferencesStore.test.ts`, `tests/ui/feedback-settings-flow.test.tsx`, `tests/support/native-ui.cjs` |
+| Tests and native test setup | `tests/game/god-mode.test.ts`, `tests/state/god-mode-save.test.ts`, `tests/state/god-mode-access.test.ts`, `tests/state/god-mode-hidden-runtime.test.ts`, `tests/ui/god-mode-flow.test.tsx`, `tests/state/preferencesStore.test.ts`, `tests/ui/feedback-settings-flow.test.tsx`, `tests/support/native-ui.cjs` |
 | Dependency and documentation | `package.json`, `package-lock.json`, `THIRD_PARTY_NOTICES.md`, `docs/third-party-inventory.json`, `README.md`, `docs/GOD_MODE.md` |

@@ -15,7 +15,6 @@ import { Illustration } from '../../../src/assets/Illustration';
 import { FameBusinessArt } from '../../../src/assets/FameBusinessArt';
 import { businessValue } from '../../../src/game/businessValuation';
 import { useColors } from '../../../src/ui/theme';
-import { GodModeShortcut } from '../../../src/ui/GodModeAccess';
 import { PolishArt } from '../../../src/assets/PolishArt';
 import { rentalResidence } from '../../../src/game/systems/rentalSchemas';
 import { FinanceArt } from '../../../src/assets/FinanceArt';
@@ -32,7 +31,6 @@ export default function Assets() {
   const residence = rentalResidence(world);
   return <Page>
     <Header title="Assets" />
-    <GodModeShortcut />
     <Card>
       <View style={{ flexDirection: stacked ? 'column' : 'row', alignItems: stacked ? 'flex-start' : 'center', gap: 14 }}>
         <View style={{ padding: 10, borderRadius: 16, backgroundColor: c.inset }}><FinanceArt id="net-worth" size={48} /></View>

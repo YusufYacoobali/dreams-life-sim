@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import { fullName, type World } from '../game/model';
 import { countries } from '../game/countries';
 import { currencyDigits, formatMoney, parseMoney } from '../game/money';
@@ -19,7 +19,8 @@ const title = (key: string) => key === 'publicImage' ? 'Public image' : key.char
 
 export function GodModeEditor() {
   const allowed = useGodModeAccess(), world = useGame(s => s.world);
-  if (!allowed || !world || world.people[world.activePersonId].died || !world.birthAcknowledged) return <Page bottomSafeArea><Header title="God Mode" onBack={() => router.back()} /><Card><Body>{!allowed ? 'God Mode is unavailable or switched off.' : 'Open a living character before using God Mode.'}</Body><Button label="Back" onPress={() => router.back()} /></Card></Page>;
+  if (!allowed) return <Redirect href="/settings" />;
+  if (!world || world.people[world.activePersonId].died || !world.birthAcknowledged) return <Page bottomSafeArea><Header title="God Mode" onBack={() => router.back()} /><Card><Body>Open a living character before using God Mode.</Body><Button label="Back" onPress={() => router.back()} /></Card></Page>;
   return <Editor key={world.id + ':' + world.activePersonId} world={world} />;
 }
 

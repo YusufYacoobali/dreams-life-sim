@@ -31,7 +31,7 @@ Full-screen welcome, birth and death ink transitions use local SVG/Reanimated ch
 
 Interactive **Clutch Shot**, **Safe Cracker** and **Orbital Docking** challenges connect to athlete seasons, burglary and astronaut assignments. God Mode includes a practice playground with difficulty selection. See [mini-game controls, save rules and verification](docs/MINIGAMES.md).
 
-All builds, including production/store, currently include **Settings → God Mode** for ongoing testing of money, stats, skills and relationships. The saved Settings toggle controls editor access. See [God Mode setup and save behavior](docs/GOD_MODE.md).
+All builds retain God Mode for ongoing testing, hidden behind **three quick taps on the App Preferences area in Settings**. Reveal it each app session, then use the saved toggle to enable the editor. See [God Mode setup and save behavior](docs/GOD_MODE.md).
 
 **Activities → Your Life → End This Life** finishes the current character’s story after confirmation, using the normal death, estate and child-continuation flow. A **Before End This Life** checkpoint is saved atomically so the earlier life can be restored as a separate branch through Time Machine.
 

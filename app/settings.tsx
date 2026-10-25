@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, Switch, View, useWindowDimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { usePreferences } from '../src/state/usePreferences';
+import { godModeSessionStore } from '../src/state/godModeSession';
+import { isGodModeBuild } from '../src/access/buildAccess';
 import { ActionRow, Body, Button, Card, Header, Heading, Page } from '../src/ui/components';
 import { EventModal } from '../src/ui/EventModal';
 import { useColors } from '../src/ui/theme';
@@ -20,9 +22,21 @@ export default function Settings() {
   const { deviceReducedMotion, hapticsSupported, soundSupported } = useFeedback();
   const { width, fontScale } = useWindowDimensions(), stacked = width < 360 || fontScale >= 1.2;
   const unavailable = busy || !ready || loadFailed;
+  const preferenceTaps = useRef({ count: 0, lastAt: 0 });
+  const tapAllowed = useRef(!unavailable), mounted = useRef(false);
+  tapAllowed.current = !unavailable;
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; preferenceTaps.current = { count: 0, lastAt: 0 }; }; }, []);
+  useEffect(() => { if (unavailable) preferenceTaps.current = { count: 0, lastAt: 0 }; }, [unavailable]);
+  const tapPreferences = () => {
+    if (!mounted.current || !tapAllowed.current || !isGodModeBuild()) { preferenceTaps.current = { count: 0, lastAt: 0 }; return; }
+    const now = Date.now(), previous = preferenceTaps.current;
+    const count = now >= previous.lastAt && now - previous.lastAt <= 800 ? previous.count + 1 : 1;
+    preferenceTaps.current = count >= 3 ? { count: 0, lastAt: 0 } : { count, lastAt: now };
+    if (count >= 3) godModeSessionStore.getState().reveal();
+  };
   // Keep this footer present so a failure does not remount the scroll content.
   return <Page bottomSafeArea footer={error && !confirm ? <><Text accessibilityRole="alert" accessibilityLiveRegion="polite" style={{ color: c.red, fontSize: 15, lineHeight: 23 }}>{error}</Text><Button label="Try Again" disabled={busy} onPress={() => { void retry(); }} /></> : <Body muted>These settings apply to all your lives on this device.</Body>}><Header title="Settings" onBack={() => router.back()} />
-    <Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ padding: 12, borderRadius: 16, backgroundColor: c.inset }}><Ionicons name="settings-outline" size={32} color={c.link} /></View><View style={{ flex: 1, minWidth: 0 }}><Heading size={21}>App Preferences</Heading><Body muted>Choose your appearance, feedback and daily reminders.</Body></View></View></Card>
+    <Pressable accessibilityRole="button" accessibilityLabel="App Preferences" accessibilityState={{ disabled: unavailable }} disabled={unavailable} onPress={tapPreferences} style={{ minHeight: 48 }}><Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={{ padding: 12, borderRadius: 16, backgroundColor: c.inset }}><Ionicons name="settings-outline" size={32} color={c.link} /></View><View style={{ flex: 1, minWidth: 0 }}><Heading size={21}>App Preferences</Heading><Body muted>Choose your appearance, feedback and daily reminders.</Body></View></View></Card></Pressable>
     <Card><Heading size={19}>Appearance</Heading><Body muted>Choose a look, or follow your device’s light and dark appearance.</Body>
       {!ready ? <ActivityIndicator accessibilityLabel="Opening display settings" /> : <View accessibilityRole="radiogroup" accessibilityLabel="Appearance">{choices.map(choice => <Pressable key={choice.id} accessibilityRole="radio" accessibilityLabel={displayText(choice.label)} accessibilityState={{ checked: settings.appearance === choice.id, disabled: busy || loadFailed }} disabled={busy || loadFailed} onPress={() => { void change(choice.id); }} style={({ pressed }) => ({ minHeight: 56, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 12, marginTop: 8, backgroundColor: pressed || settings.appearance === choice.id ? c.selected : c.surface, borderWidth: 1, borderColor: settings.appearance === choice.id ? c.link : c.line, flexDirection: 'row', alignItems: 'center', gap: 12, opacity: busy || loadFailed ? 0.5 : 1 })}><Text style={{ flex: 1, minWidth: 0, color: c.ink, fontSize: 16, lineHeight: 23, fontWeight: settings.appearance === choice.id ? '700' : '400' }}>{choice.label}</Text><View accessibilityElementsHidden importantForAccessibility="no-hide-descendants"><Ionicons name={settings.appearance === choice.id ? 'checkmark-circle' : 'ellipse-outline'} size={24} color={settings.appearance === choice.id ? c.link : c.muted} /></View></Pressable>)}</View>}
       <Button label="Restore Default Appearance" tone="secondary" disabled={busy || !ready} onPress={() => setConfirm(true)} />

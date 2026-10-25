@@ -2,8 +2,9 @@
 
 **Testing policy update:** the user requested God Mode remain available in
 release builds. Its testing capability is restored for all build profiles,
-including production/store, and the saved Settings toggle controls editor
-access. The earlier audit's production-off check records its original candidate;
+including production/store. God Mode is hidden until three quick taps on the
+App Preferences card in Settings reveal it for the current app session; the
+saved toggle then controls editor access. The earlier audit's production-off check records its original candidate;
 it is superseded by this explicit testing requirement. Other audit fixes remain.
 
 Candidate starts at `dc097168`. This audit fixes release defects and runs the
@@ -51,7 +52,7 @@ record the dependency inspection.
 | Startup permission timing | The initial native permission request runs at app open after enabled, readable preferences load, including with no life created. Granted/denied permission and saved reminder opt-outs are respected. |
 | Clock/timezone changes | A private native receiver re-arms only already-scheduled Dreams reminders when Android's clock or timezone changes while the app is closed. |
 | Notification glyph | A dedicated white heart on transparency replaces Android's opaque-launcher fallback. The source SVG and 96px PNG are local assets; the launcher icon is retained. |
-| Testing tools | God Mode remains available in all builds, including production/store, at the user's request for ongoing testing. The saved Settings toggle still controls editor access. |
+| Testing tools | God Mode remains available in all builds for testing, hidden behind a triple tap on Settings' App Preferences card. Session reveal plus the saved toggle gate access; Profile and Assets have no shortcuts. |
 | Permissions | Unused overlay, broad legacy storage and audio-recording permissions are blocked. File backup/sharing uses existing system pickers and app cache. |
 | Startup/recovery | Welcome exposes Saved Lives, allowing a corrupt active save to reach explicit recovery and a fresh install to import without a disposable life. |
 | Share cache | Each native-share operation removes only its own temporary cache file after sharing settles, including failure. User-selected exported files remain. |

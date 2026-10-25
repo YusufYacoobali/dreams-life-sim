@@ -10,6 +10,7 @@ import { AccessibilityInfo, AppState } from 'react-native';
 import * as Native from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useStore } from 'zustand';
+import { Redirect } from 'expo-router';
 import { createGameStore } from '../../src/state/gameStore';
 import { SaveRepository } from '../../src/persistence/repository';
 import { ThemeProvider } from '../../src/ui/theme';
@@ -402,7 +403,9 @@ test('switched-off God Mode cannot open the playground', async () => {
   await setup();
   mockAllowed = false;
   await show(<MiniGamePlayground />);
-  expect(screen.getByText('Enable God Mode in Settings to use the playground.')).toBeOnTheScreen();
+  expect(screen.UNSAFE_getByType(Redirect).props.href).toBe('/settings');
+  expect(screen.queryByRole('header', { name: 'Mini-Game Playground' })).toBeNull();
+  expect(screen.queryByText(/Enable God Mode/)).toBeNull();
   expect(screen.queryByRole('button', { name: 'Play' })).toBeNull();
 });
 
